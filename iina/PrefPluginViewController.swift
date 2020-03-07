@@ -42,15 +42,26 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
   @IBOutlet weak var pluginNameLabel: NSTextField!
   @IBOutlet weak var pluginVersionLabel: NSTextField!
   @IBOutlet weak var pluginAuthorLabel: NSTextField!
+  @IBOutlet weak var pluginIdentifierLabel: NSTextField!
   @IBOutlet weak var pluginDescLabel: NSTextField!
+  @IBOutlet weak var pluginSourceLabel: NSTextField!
+  @IBOutlet weak var pluginCheckUpdatesBtn: NSButton!
   @IBOutlet weak var pluginPermissionsView: NSStackView!
   @IBOutlet weak var pluginWebsiteEmailStackView: NSStackView!
   @IBOutlet weak var pluginWebsiteBtn: NSButton!
   @IBOutlet weak var pluginEmailBtn: NSButton!
   @IBOutlet weak var pluginSupportStackView: NSStackView!
-  @IBOutlet weak var pluginBinaryHelpTextView: NSView!
+  @IBOutlet weak var pluginSourceView: NSView!
+  @IBOutlet weak var pluginHelpView: NSView!
+  @IBOutlet weak var pluginHelpContainerView: NSView!
+  @IBOutlet weak var pluginHelpWebViewLoadingIndicator: NSProgressIndicator!
+  @IBOutlet weak var pluginHelpLoadingFailedView: NSView!
   @IBOutlet weak var pluginPreferencesContentView: NSView!
-  var pluginPreferencesWebView: WKWebView!
+
+  var pluginHelpWebView: NonscrollableWebview!
+  var pluginHelpWebViewHeight: NSLayoutConstraint!
+
+  var pluginPreferencesWebView: NonscrollableWebview!
   var pluginPreferencesWebViewHeight: NSLayoutConstraint!
   var pluginPreferencesViewController: PrefPluginPreferencesViewController!
 
@@ -142,7 +153,7 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
 
     config.userContentController.add(self, name: "iina")
     
-    pluginPreferencesWebView = WKWebView(frame: .zero, configuration: config)
+    pluginPreferencesWebView = NonscrollableWebview(frame: .zero, configuration: config)
     pluginPreferencesViewController = PrefPluginPreferencesViewController()
     pluginPreferencesViewController.view = pluginPreferencesWebView
 
@@ -156,14 +167,50 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
     pluginPreferencesWebView.addConstraint(pluginPreferencesWebViewHeight)
   }
 
+  private func createHelpView() {
+    pluginHelpWebView = NonscrollableWebview(frame: .zero)
+
+    pluginHelpWebView.navigationDelegate = self
+    pluginHelpWebView.translatesAutoresizingMaskIntoConstraints = false
+    pluginHelpContainerView.addSubview(pluginHelpWebView, positioned: .below, relativeTo: nil)
+    Utility.quickConstraints(["H:|[v]|", "V:|[v]-(0@40)-|"], ["v": pluginHelpWebView])
+    pluginHelpWebViewHeight = NSLayoutConstraint(item: pluginHelpWebView!, attribute: .height,
+                                                        relatedBy: .equal, toItem: nil, attribute: .notAnAttribute,
+                                                        multiplier: 1, constant: 32)
+    pluginHelpWebView.addConstraint(pluginHelpWebViewHeight)
+  }
+
   @IBAction func tabSwitched(_ sender: NSSegmentedControl) {
     tabView.selectTabViewItem(at: sender.selectedSegment)
-    if sender.selectedSegment == 2, let currentPlugin = currentPlugin, let prefURL = currentPlugin.preferencesPageURL {
+    guard let currentPlugin = currentPlugin else { return }
+    if sender.selectedSegment == 2 {
+      // Preferences
+      guard let prefURL = currentPlugin.preferencesPageURL else { return }
       if pluginPreferencesWebView == nil {
         createPreferenceView()
       }
-      pluginPreferencesWebView.loadFileURL(prefURL, allowingReadAccessTo: Utility.pluginsURL)
+      pluginPreferencesWebView.loadFileURL(prefURL, allowingReadAccessTo: currentPlugin.root)
       pluginPreferencesViewController.plugin = currentPlugin
+    } else if sender.selectedSegment == 1 {
+      // About
+      if let _ = currentPlugin.helpPageURL {
+        pluginSupportStackView.setVisibilityPriority(.mustHold, for: pluginHelpView)
+        if pluginHelpWebView == nil {
+          createHelpView()
+        }
+        loadHelpPage()
+      } else {
+        pluginSupportStackView.setVisibilityPriority(.notVisible, for: pluginHelpView)
+      }
+    }
+  }
+
+  private func loadHelpPage() {
+    guard let currentPlugin = currentPlugin, let helpURL = currentPlugin.helpPageURL else { return }
+    if helpURL.isFileURL {
+      pluginHelpWebView.loadFileURL(helpURL, allowingReadAccessTo: currentPlugin.root)
+    } else {
+      pluginHelpWebView.load(URLRequest(url: helpURL))
     }
   }
 
@@ -177,6 +224,11 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
     if let email = currentPlugin?.authorEmail, let url = URL(string: "mailto:\(email)") {
       NSWorkspace.shared.open(url)
     }
+  }
+
+  @IBAction func helpViewReloadBtnAction(_ sender: Any) {
+    guard let _ = pluginHelpWebView else { return }
+    loadHelpPage()
   }
 
   @IBAction func openBinaryDirBtnAction(_ sender: Any) {
@@ -195,9 +247,9 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
     pluginAuthorLabel.stringValue = plugin.authorName
     pluginVersionLabel.stringValue = plugin.version
     pluginDescLabel.stringValue = plugin.desc ?? "No Description"
+    pluginIdentifierLabel.stringValue = plugin.identifier
     pluginWebsiteEmailStackView.setVisibilityPriority(plugin.authorEmail == nil ? .notVisible : .mustHold, for: pluginEmailBtn)
     pluginWebsiteEmailStackView.setVisibilityPriority(plugin.authorURL == nil ? .notVisible : .mustHold, for: pluginWebsiteBtn)
-    pluginSupportStackView.setVisibilityPriority(.notVisible, for: pluginBinaryHelpTextView)
 
     pluginPermissionsView.views.forEach { pluginPermissionsView.removeView($0) }
 
@@ -213,8 +265,6 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
           desc += "\n- "
           desc += plugin.domainList.joined(separator: "\n- ")
         }
-      } else if case .callProcess = permission {
-        pluginSupportStackView.setVisibilityPriority(.mustHold, for: pluginBinaryHelpTextView)
       }
       let vc = PrefPluginPermissionView(name: l10n("name"), desc: desc, isDangerous: permission.isDangerous)
       pluginPermissionsView.addView(vc.view, in: .top)
@@ -223,7 +273,6 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
 
     currentPlugin = plugin
   }
-
 }
 
 extension PrefPluginViewController: NSTableViewDelegate, NSTableViewDataSource {
@@ -283,23 +332,52 @@ extension PrefPluginViewController: NSTableViewDelegate, NSTableViewDataSource {
 
 extension PrefPluginViewController: WKNavigationDelegate {
   func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-    guard let url = navigationAction.request.url,
-      let currentPluginPrefPageURL = currentPlugin?.preferencesPageURL,
-      url.absoluteString.starts(with: currentPluginPrefPageURL.absoluteString) else {
-        decisionHandler(.cancel)
-        return
+    if webView == pluginPreferencesWebView {
+      guard
+        let url = navigationAction.request.url,
+        let currentPluginPrefPageURL = currentPlugin?.preferencesPageURL,
+        url.absoluteString.starts(with: currentPluginPrefPageURL.absoluteString)
+      else {
+        Logger.log("Loading page from \(navigationAction.request.url?.absoluteString ?? "?") is not allowed", level: .error)
+          decisionHandler(.cancel)
+          return
+      }
     }
     decisionHandler(.allow)
   }
 
+  func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+    if webView == pluginHelpWebView {
+      pluginHelpLoadingFailedView.isHidden = true
+      pluginHelpWebViewLoadingIndicator.startAnimation(self)
+    }
+  }
+
   func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-    self.pluginPreferencesWebView.evaluateJavaScript("document.readyState", completionHandler: { (complete, error) in
-      if complete != nil {
-        self.pluginPreferencesWebView.evaluateJavaScript("document.body.scrollHeight", completionHandler: { (height, error) in
-          self.pluginPreferencesWebViewHeight.constant = height as! CGFloat
-        })
-      }
+    pluginHelpWebViewLoadingIndicator.stopAnimation(self)
+
+    let currentConstraint = webView == pluginPreferencesWebView ?
+      pluginPreferencesWebViewHeight : pluginHelpWebViewHeight
+    webView.evaluateJavaScript("document.readyState", completionHandler: { (complete, error) in
+      if complete == nil { return }
+      webView.evaluateJavaScript("document.body.scrollHeight", completionHandler: { (height, error) in
+        currentConstraint?.constant = height as! CGFloat
+      })
     })
+  }
+
+  func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+    failedLoadingHelpPage()
+  }
+
+  func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+    failedLoadingHelpPage()
+  }
+
+  private func failedLoadingHelpPage() {
+    pluginHelpLoadingFailedView.isHidden = false
+    pluginHelpWebViewLoadingIndicator.stopAnimation(self)
+    pluginHelpWebViewHeight.constant = 0
   }
 }
 
@@ -339,6 +417,7 @@ extension PrefPluginViewController: WKScriptMessageHandler {
   }
 }
 
+
 class PrefPluginPreferencesViewController: NSViewController {
   var plugin: JavascriptPlugin?
 
@@ -346,5 +425,12 @@ class PrefPluginPreferencesViewController: NSViewController {
     if let plugin = plugin {
       plugin.syncPreferences()
     }
+  }
+}
+
+
+class NonscrollableWebview: WKWebView {
+  override func scrollWheel(with event: NSEvent) {
+    nextResponder?.scrollWheel(with: event)
   }
 }

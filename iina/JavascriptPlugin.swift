@@ -50,21 +50,14 @@ class JavascriptPlugin: NSObject {
   let entryPath: String
   let scriptPaths: [String]
   let preferencesPage: String?
+  let helpPage: String?
 
   let permissions: Set<Permission>
   let domainList: [String]
 
-  var entryURL: URL {
-    return root.appendingPathComponent(entryPath)
-  }
-
-  var preferencesPageURL: URL? {
-    if let preferencePage = preferencesPage {
-      return root.appendingPathComponent(preferencePage)
-    } else {
-      return nil
-    }
-  }
+  var entryURL: URL
+  var preferencesPageURL: URL?
+  var helpPageURL: URL?
 
   lazy var preferences: [String: Any] = {
     NSDictionary(contentsOfFile: preferencesFileURL.path) as? [String: Any] ?? [:]
@@ -118,6 +111,7 @@ class JavascriptPlugin: NSObject {
       return nil
     }
     self.root = url
+
     // read package
     guard
       let data = try? Data(contentsOf: root.appendingPathComponent("Info.json"), options: .mappedIfSafe),
@@ -127,6 +121,7 @@ class JavascriptPlugin: NSObject {
       Logger.log("Cannot read plugin package content.", level: .error)
       return nil
     }
+
     // read json
     guard
       let name = jsonDict["name"] as? String,
@@ -139,6 +134,7 @@ class JavascriptPlugin: NSObject {
       Logger.log("Info.json must contain these keys: name, author, identifier, version and entry.", level: .error)
       return nil
     }
+
     self.name = name
     self.version = version
     self.entryPath = entry
@@ -149,6 +145,8 @@ class JavascriptPlugin: NSObject {
     self.desc = jsonDict["description"] as? String
     self.scriptPaths = (jsonDict["scripts"] as? [String]) ?? []
     self.preferencesPage = jsonDict["preferencesPage"] as? String
+    self.helpPage = jsonDict["helpPage"] as? String
+
     var permissions = Set<Permission>()
     if let permList = jsonDict["permissions"] as? [String] {
       permList.forEach {
@@ -159,9 +157,16 @@ class JavascriptPlugin: NSObject {
         }
       }
     }
-    enabled = UserDefaults.standard.bool(forKey: "PluginEnabled." + identifier)
     self.permissions = permissions
     self.domainList = (jsonDict["domainList"] as? [String]) ?? []
+
+    self.enabled = UserDefaults.standard.bool(forKey: "PluginEnabled." + identifier)
+
+    guard let entryURL = resolvePath(entryPath, root: root) else { return nil }
+    self.entryURL = entryURL
+    self.preferencesPageURL = resolvePath(preferencesPage, root: root)
+    self.helpPageURL = resolvePath(helpPage, root: root, allowNetwork: true)
+
     if let defaultPrefernces = jsonDict["preferenceDefaults"] as? [String: Any] {
       self.defaultPrefernces = defaultPrefernces
     } else {
@@ -203,4 +208,25 @@ class JavascriptPlugin: NSObject {
     Utility.createDirIfNotExist(url: url)
     return url
   }()
+}
+
+
+fileprivate func resolvePath(_ path: String?, root: URL, allowNetwork: Bool = false) -> URL? {
+  guard let path = path else { return nil }
+  if path.hasPrefix("http://") || path.hasPrefix("https://") {
+    if allowNetwork { return URL(string: path) }
+    else { return nil }
+  } else {
+    let url = root.appendingPathComponent(path).standardized
+    if url.absoluteString.hasPrefix(root.absoluteString) {
+      guard FileManager.default.fileExists(atPath: url.path) else {
+        Logger.log("The file \(path) doesn't exist", level: .error)
+        return nil
+      }
+      return url
+    } else {
+      Logger.log("The file path \(path) is invalid", level: .error)
+      return nil
+    }
+  }
 }

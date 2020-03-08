@@ -24,13 +24,13 @@ extension PlayerCore {
 
 // MARK: Scripting Properties
 
-extension PlayerCore {
+private extension FourCharCode {
+  static let playing = FourCharCode("kPSP")
+  static let paused = FourCharCode("kPSp")
+  static let seeking = FourCharCode("kPSS")
+}
 
-  enum AECode {
-    static let playing: FourCharCode = "kPSP"
-    static let paused: FourCharCode = "kPSp"
-    static let seeking: FourCharCode = "kPSS"
-  }
+extension PlayerCore {
 
   @objc var uniqueID: String {
     return label
@@ -42,8 +42,8 @@ extension PlayerCore {
 
   @objc var scriptingState: FourCharCode {
     return info.isPaused ?
-      (info.isSeeking ? AECode.seeking : AECode.paused) :
-      AECode.playing
+      (info.isSeeking ? .seeking : .paused) :
+      .playing
   }
 
   @objc var scriptingPlaySpeed: Double {

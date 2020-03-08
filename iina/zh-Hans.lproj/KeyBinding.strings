@@ -7,8 +7,8 @@
 */
 
 "cmd.ignore" = "忽略";
-"cmd.seek" = "查找/跳转";
-"cmd.revert-seek" = "撤销查找";
+"cmd.seek" = "查找";
+"cmd.revert-seek" = "重新查找";
 "cmd.set" = "设置";
 "cmd.cycle" = "切换";
 "cmd.cycle-values" = "指定值中循环";

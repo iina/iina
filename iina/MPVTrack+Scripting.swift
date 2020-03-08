@@ -13,11 +13,11 @@ extension MPVTrack {
   @objc override var classCode: FourCharCode {
     switch type {
       case .video:
-        return NSHFSTypeCodeFromFileType("'cTrV'")
+        return "cTrV"
       case .audio:
-        return NSHFSTypeCodeFromFileType("'cTrA'")
+        return "cTrA"
       case .sub, .secondSub:
-        return NSHFSTypeCodeFromFileType("'cTrS'")
+        return "cTrS"
     }
   }
 
@@ -49,11 +49,11 @@ extension MPVTrack {
   @objc var scriptingType: FourCharCode {
     switch type {
       case .video:
-        return NSHFSTypeCodeFromFileType("'kTTV'")
+        return "kTTV"
       case .audio:
-        return NSHFSTypeCodeFromFileType("'kTTA'")
+        return "kTTA"
       case .sub, .secondSub:
-        return NSHFSTypeCodeFromFileType("'kTTS'")
+        return "kTTS"
     }
   }
 

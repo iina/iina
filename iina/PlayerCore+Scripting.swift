@@ -11,7 +11,7 @@ import AppKit
 extension PlayerCore {
 
   @objc override var classCode: FourCharCode {
-    return NSHFSTypeCodeFromFileType("'cPla'")
+    return "cPla"
   }
 
   override var objectSpecifier: NSScriptObjectSpecifier? {
@@ -26,6 +26,12 @@ extension PlayerCore {
 
 extension PlayerCore {
 
+  enum AECode {
+    static let playing: FourCharCode = "kPSP"
+    static let paused: FourCharCode = "kPSp"
+    static let seeking: FourCharCode = "kPSS"
+  }
+
   @objc var uniqueID: String {
     return label
   }
@@ -36,8 +42,8 @@ extension PlayerCore {
 
   @objc var scriptingState: FourCharCode {
     return info.isPaused ?
-      (info.isSeeking ? NSHFSTypeCodeFromFileType("'kPSS'") : NSHFSTypeCodeFromFileType("'kPSp'")) :
-      NSHFSTypeCodeFromFileType("'kPSP'")
+      (info.isSeeking ? AECode.seeking : AECode.paused) :
+      AECode.playing
   }
 
   @objc var scriptingPlaySpeed: Double {

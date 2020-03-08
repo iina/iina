@@ -28,7 +28,7 @@
 "cmd.stop" = "Zastaviť";
 "cmd.quit" = "Ukončiť";
 "cmd.quit-watch-later" = "Ukončiť (uložiť prehrávanie)";
-"cmd.screenshot" = "Screenshot";
+"cmd.screenshot" = "Snímka obrazovky";
 "cmd.screenshot-to-file" = "Screenshot do súboru";
 "cmd.loadfile" = "Otvoriť súbor";
 "cmd.loadlist" = "Otvoriť playlist";
@@ -41,7 +41,7 @@
 "iina.toggle-music-mode" = "Prepnúť Hudobný Mód";
 "iina.open-file" = "Otvoriť súbor";
 "iina.open-url" = "Otvoriť URL";
-"iina.video-panel" = "Video panel";
+"iina.video-panel" = "Panel videa";
 "iina.audio-panel" = "Zvukový panel";
 "iina.sub-panel" = "Panel s titulkami";
 "iina.playlist-panel" = "Panel s playlistami";
@@ -86,7 +86,7 @@
 "opt.video-aspect" = "Video pomer";
 "opt.contrast" = "Kontrast";
 "opt.brightness" = "Jas";
-"opt.gamma" = "Gamma";
+"opt.gamma" = "Gama";
 "opt.saturation" = "Saturácia";
 "opt.deinterlace" = "Deinterlace";
 

@@ -24,11 +24,14 @@ class MPVPlaylistItem: NSObject {
 
   var title: String?
 
-  init(filename: String, isCurrent: Bool, isPlaying: Bool, title: String?) {
+  unowned var player: PlayerCore?
+
+  init(filename: String, isCurrent: Bool, isPlaying: Bool, title: String?, player: PlayerCore?) {
     self.filename = filename
     self.isCurrent = isCurrent
     self.isPlaying = isPlaying
     self.title = title
     self.isNetworkResource = Regex.url.matches(filename)
+    self.player = player
   }
 }

@@ -13,7 +13,13 @@ extension FourCharCode: ExpressibleByStringLiteral {
   public typealias StringLiteralType = String
 
   public init(stringLiteral: String) {
-    self = NSHFSTypeCodeFromFileType("'\(stringLiteral)'")
+    // Match NSHFSTypeCodeFromFileType() behavior: Return 0 for invalid codes.
+    guard stringLiteral.count == 4, let data = stringLiteral.data(using: .macOSRoman) else {
+      self = 0
+      return
+    }
+
+    self = FourCharCode(data[0]) << 24 | FourCharCode(data[1]) << 16 | FourCharCode(data[2]) << 8 | FourCharCode(data[3])
   }
-  
+
 }

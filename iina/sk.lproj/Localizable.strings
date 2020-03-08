@@ -29,7 +29,7 @@
 "osd.resume" = "Spustiť";
 "osd.volume" = "Hlasitosť: %i";
 "osd.speed" = "Rýchlosť: %.2fx";
-"osd.aspect" = "Pomer Strán: %@";
+"osd.aspect" = "Pomer strán: %@";
 "osd.crop" = "Orezať: %@";
 "osd.rotate" = "Otočiť: %i°";
 "osd.deinterlace" = "Deinterlace: %@";
@@ -58,7 +58,7 @@
 "osd.video_eq.brightness" = "Jas: %i";
 "osd.find_online_sub" = "Titulky sa vyhľadávajú online…";
 "osd.find_online_sub.source" = "z";
-"osd.sub_not_found" = "No subtitles found";
+"osd.sub_not_found" = "Nenašli sa žiadne titulky";
 "osd.sub_found" = "%d titulky nájdené. Sťahujú sa…";
 "osd.sub_downloaded" = "Titulky stiahnuté";
 "osd.sub_saved" = "Titulky uložené";

@@ -106,8 +106,8 @@ class InitialWindowController: NSWindowController {
     }
   }
 
-  lazy var recentDocuments: [URL] = {
-    NSDocumentController.shared.recentDocumentURLs.filter { $0 != lastPlaybackURL }
+  lazy var playbackHistory: [PlaybackHistory] = {
+    HistoryController.shared.history.filter { $0.url != lastPlaybackURL }
   }()
   private var lastPlaybackURL: URL?
 
@@ -161,31 +161,50 @@ class InitialWindowController: NSWindowController {
   }
 
   func loadLastPlaybackInfo() {
-    if Preference.bool(for: .recordRecentFiles),
-      Preference.bool(for: .resumeLastPosition),
-      let lastFile = Preference.url(for: .iinaLastPlayedFilePath),
-      FileManager.default.fileExists(atPath: lastFile.path) {
-      // if last file exists
+    lastPlaybackURL = nil
+    lastFileContainerView.isHidden = true
+    recentFilesTableTopConstraint.constant = 24
+
+    if let lastFile = Preference.url(for: .iinaLastPlayedFilePath),
+      Preference.bool(for: .recordPlaybackHistory) {
       lastPlaybackURL = lastFile
-      lastFileContainerView.isHidden = false
+
       lastFileContainerView.normalBackground = NSColor.initialWindowLastFileBackground
       lastFileContainerView.hoverBackground = NSColor.initialWindowLastFileBackgroundHover
       lastFileContainerView.pressedBackground = NSColor.initialWindowLastFileBackgroundPressed
       lastFileIcon.image = #imageLiteral(resourceName: "history")
-      lastFileNameLabel.stringValue = lastFile.lastPathComponent
-      let lastPosition = Preference.double(for: .iinaLastPlayedFilePosition)
-      lastPositionLabel.stringValue = VideoTime(lastPosition).stringRepresentation
-      recentFilesTableTopConstraint.constant = 42
-    } else {
-      lastPlaybackURL = nil
-      lastFileContainerView.isHidden = true
-      recentFilesTableTopConstraint.constant = 24
+
+      let isNetworkResource = !lastFile.isFileURL
+      let fileExists = !isNetworkResource && FileManager.default.fileExists(atPath: lastFile.path)
+      let hasPlayableExtension = Utility.playableFileExt.contains(lastFile.pathExtension.lowercased())
+
+      // show resume button if the file exists locally or the last played file was a network resource
+      if isNetworkResource || fileExists {
+        recentFilesTableTopConstraint.constant = 42
+        lastFileContainerView.isHidden = false
+      }
+
+      if (isNetworkResource && hasPlayableExtension) || fileExists {
+        // show the file name without the base URL if it's a known local file
+        // or a network resource with a playable file extension
+        lastFileNameLabel.stringValue = lastFile.lastPathComponent
+
+        // show last played position
+        let lastPosition = Preference.double(for: .iinaLastPlayedFilePosition)
+        lastPositionLabel.stringValue = VideoTime(lastPosition).stringRepresentation
+        lastPositionLabel.isHidden = false
+      } else if isNetworkResource {
+        // if this is a URL without a playable extension (like a live stream URL),
+        // show the full URL and hide the last played position
+        lastFileNameLabel.stringValue = lastFile.absoluteString
+        lastPositionLabel.isHidden = true
+      }
     }
   }
 
   func reloadData() {
     loadLastPlaybackInfo()
-    recentDocuments = NSDocumentController.shared.recentDocumentURLs.filter { $0 != lastPlaybackURL }
+    playbackHistory = HistoryController.shared.history.filter { $0.url != lastPlaybackURL }
     recentFilesTableView.reloadData()
   }
 }
@@ -194,20 +213,22 @@ class InitialWindowController: NSWindowController {
 extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
 
   func numberOfRows(in tableView: NSTableView) -> Int {
-    return recentDocuments.count
+    return playbackHistory.count
   }
 
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-    let url = recentDocuments[row]
+    let entry = playbackHistory[row]
+    let isNetworkResource = !entry.url.isFileURL
+    let hasPlayableExtension = Utility.playableFileExt.contains(entry.url.pathExtension.lowercased())
     return [
-      "filename": url.lastPathComponent,
-      "docIcon": NSWorkspace.shared.icon(forFile: url.path)
+      "filename": isNetworkResource && !hasPlayableExtension ? entry.url.absoluteString : entry.url.lastPathComponent,
+      "docIcon": NSWorkspace.shared.icon(forFileType: entry.url.pathExtension)
     ]
   }
 
   func tableViewSelectionDidChange(_ notification: Notification) {
-    guard let url = recentDocuments[at: recentFilesTableView.selectedRow] else { return }
-    player.openURL(url)
+    guard let entry = playbackHistory[at: recentFilesTableView.selectedRow] else { return }
+    player.openURL(entry.url)
     recentFilesTableView.deselectAll(nil)
   }
 

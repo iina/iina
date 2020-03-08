@@ -67,6 +67,8 @@ class MPVTrack: NSObject {
   var demuxSamplerate: Int?
   var demuxFps: Double?
 
+  unowned var player: PlayerCore?
+
 
   var readableTitle: String {
     get {

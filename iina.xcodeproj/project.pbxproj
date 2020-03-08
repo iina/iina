@@ -154,6 +154,11 @@
 		84FBF23E1EF06A90003EA491 /* ThumbnailCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBF23D1EF06A90003EA491 /* ThumbnailCache.swift */; };
 		8F49C36E213EFB7E0076C4F9 /* MiniPlayerWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F49C370213EFB7E0076C4F9 /* MiniPlayerWindowController.xib */; };
 		9E47DAC01E3CFA6D00457420 /* DurationDisplayTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */; };
+		B2133D6A240D8FDA001B6095 /* IINA.sdef in Resources */ = {isa = PBXBuildFile; fileRef = B2133D69240D8FDA001B6095 /* IINA.sdef */; };
+		B2133D6D240E07AC001B6095 /* AppDelegate+Scripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2133D6C240E07AC001B6095 /* AppDelegate+Scripting.swift */; };
+		B297185824145B31005A0B61 /* MPVPlaylistItem+Scripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B297185724145B31005A0B61 /* MPVPlaylistItem+Scripting.swift */; };
+		B2D76FDF241012140011F8BF /* PlayerCore+Scripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D76FDE241012140011F8BF /* PlayerCore+Scripting.swift */; };
+		B2D76FE1241039120011F8BF /* MPVTrack+Scripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D76FE0241039120011F8BF /* MPVTrack+Scripting.swift */; };
 		B4E446E825CB53920069F06E /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = B4E446E725CB53920069F06E /* PromiseKit */; };
 		B4E446F225CB53FF0069F06E /* Gzip in Frameworks */ = {isa = PBXBuildFile; productRef = B4E446F125CB53FF0069F06E /* Gzip */; };
 		B4E446F725CB54EF0069F06E /* Mustache in Frameworks */ = {isa = PBXBuildFile; productRef = B4E446F625CB54EF0069F06E /* Mustache */; };
@@ -1179,6 +1184,11 @@
 		9DB9ED5C20889D66006B1492 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SubChooseViewController.strings; sourceTree = "<group>"; };
 		9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationDisplayTextField.swift; sourceTree = "<group>"; };
 		9E63CAB61E3F7D0E00EA66C9 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		B2133D69240D8FDA001B6095 /* IINA.sdef */ = {isa = PBXFileReference; lastKnownFileType = text; path = IINA.sdef; sourceTree = "<group>"; };
+		B2133D6C240E07AC001B6095 /* AppDelegate+Scripting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Scripting.swift"; sourceTree = "<group>"; };
+		B297185724145B31005A0B61 /* MPVPlaylistItem+Scripting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MPVPlaylistItem+Scripting.swift"; sourceTree = "<group>"; };
+		B2D76FDE241012140011F8BF /* PlayerCore+Scripting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerCore+Scripting.swift"; sourceTree = "<group>"; };
+		B2D76FE0241039120011F8BF /* MPVTrack+Scripting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MPVTrack+Scripting.swift"; sourceTree = "<group>"; };
 		B305513A2190B0C600D3F70E /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/MiniPlayerWindowController.strings; sourceTree = "<group>"; };
 		B3066F5F1F161538004D7559 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
 		B35E0A072107C0E500453AA7 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/PrefUtilsViewController.strings; sourceTree = "<group>"; };
@@ -1772,6 +1782,7 @@
 				8483FAFF1EDFF325000F55D6 /* Credits.rtf */,
 				E3DBD238218B057A00B3AFBF /* Translators.json */,
 				E3DBD23A218B199700B3AFBF /* Translators.swift */,
+				B2133D69240D8FDA001B6095 /* IINA.sdef */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
@@ -2175,6 +2186,7 @@
 				84A0BAA31D2FAEA000BC8DA1 /* Views */,
 				8452DD7F1D3A1F2A008A543A /* Preference */,
 				84A0BAA61D2FAF8400BC8DA1 /* Utils */,
+				B2133D6B240DFF23001B6095 /* Scripting */,
 			);
 			indentWidth = 2;
 			path = iina;
@@ -2215,6 +2227,17 @@
 				84FF84701D2FF698001B318A /* client.h */,
 			);
 			path = mpv;
+			sourceTree = "<group>";
+		};
+		B2133D6B240DFF23001B6095 /* Scripting */ = {
+			isa = PBXGroup;
+			children = (
+				B2133D6C240E07AC001B6095 /* AppDelegate+Scripting.swift */,
+				B2D76FDE241012140011F8BF /* PlayerCore+Scripting.swift */,
+				B2D76FE0241039120011F8BF /* MPVTrack+Scripting.swift */,
+				B297185724145B31005A0B61 /* MPVPlaylistItem+Scripting.swift */,
+			);
+			name = Scripting;
 			sourceTree = "<group>";
 		};
 		E3DE8DCB1FD8166A0021921C /* iina-cli */ = {
@@ -2400,6 +2423,7 @@
 				8400D5E41E1AB333006785F5 /* PrefControlViewController.xib in Resources */,
 				8492C2861E771FB200CE5825 /* ISO639.strings in Resources */,
 				8F49C36E213EFB7E0076C4F9 /* MiniPlayerWindowController.xib in Resources */,
+				B2133D6A240D8FDA001B6095 /* IINA.sdef in Resources */,
 				84A0BA951D2F9E9600BC8DA1 /* MainMenu.xib in Resources */,
 				8400D5D81E1AB31B006785F5 /* AboutWindowController.xib in Resources */,
 				8400D5F31E1AB348006785F5 /* PrefSubViewController.xib in Resources */,
@@ -2490,6 +2514,7 @@
 				E322A4F820A8442E00C67D32 /* PlaylistPlaybackProgressView.swift in Sources */,
 				84D123B41ECAA405004E0D53 /* TouchBarSupport.swift in Sources */,
 				E36E8D7C24F6052F00B8C097 /* GuideWindowController.swift in Sources */,
+				B2D76FE1241039120011F8BF /* MPVTrack+Scripting.swift in Sources */,
 				84817C981DBDCE4300CC2279 /* RoundedColorWell.swift in Sources */,
 				E38372922443634500F57718 /* LanguageTokenField.swift in Sources */,
 				8461C5301D462488006E91FF /* VideoTime.swift in Sources */,
@@ -2527,6 +2552,7 @@
 				E374160C20F138A900B4F7F9 /* CollapseView.swift in Sources */,
 				84A0BA901D2F8D4100BC8DA1 /* IINAError.swift in Sources */,
 				84C6D3621EAF8D63009BF721 /* HistoryController.swift in Sources */,
+				B2D76FDF241012140011F8BF /* PlayerCore+Scripting.swift in Sources */,
 				847644081D48B413004F6DF5 /* MPVOption.swift in Sources */,
 				84817C961DBDCA5F00CC2279 /* SettingsListCellView.swift in Sources */,
 				84A886F31E26CA24008755BB /* Regex.swift in Sources */,
@@ -2539,6 +2565,7 @@
 				841A599D1E1FF5800079E177 /* SleepPreventer.swift in Sources */,
 				84ED99FF1E009C8100A5159B /* PrefAdvancedViewController.swift in Sources */,
 				840AF5841E73CE3900F4AF92 /* OpenSubSubtitle.swift in Sources */,
+				B2133D6D240E07AC001B6095 /* AppDelegate+Scripting.swift in Sources */,
 				84AABE8B1DBF634600D138FD /* CharEncoding.swift in Sources */,
 				8488D6DC1E1167EF00D5B952 /* FloatingPointByteCountFormatter.swift in Sources */,
 				8488D6E71E11ABE900D5B952 /* PrefNetworkViewController.swift in Sources */,
@@ -2547,6 +2574,7 @@
 				E32712B024EAA14500359DAB /* ScreenshootOSDView.swift in Sources */,
 				E3BA79EE2131443A00529D99 /* OpenURLWindowController.swift in Sources */,
 				84FBCB381EEACDDD0076C77C /* FFmpegController.m in Sources */,
+				B297185824145B31005A0B61 /* MPVPlaylistItem+Scripting.swift in Sources */,
 				84879A981E0FFC7E0004F894 /* PrefUIViewController.swift in Sources */,
 				84C6D3641EB276E9009BF721 /* PlaybackHistory.swift in Sources */,
 				E3CB258F222799B800A62C47 /* MPVHook.swift in Sources */,

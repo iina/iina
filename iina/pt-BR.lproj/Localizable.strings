@@ -43,8 +43,8 @@
 "osd.mute" = "Sem Audio";
 "osd.unmute" = "Audio Ligado";
 "osd.screenshot" = "Imagem Capturada";
-"osd.abloop.a" = "AB-Loop: A";
-"osd.abloop.b" = "AB-Loop: B";
+"osd.abloop.a" = "Loop-AB: A";
+"osd.abloop.b" = "Loop-AB: B";
 "osd.abloop.clear" = "AB-Loop: Desfeito";
 "osd.stop" = "Parado";
 "osd.chapter" = "Capítulo: %@";
@@ -53,7 +53,7 @@
 "osd.clear_playlist" = "Playlist Esvaziada";
 "osd.video_eq.contrast" = "Contraste: %i";
 "osd.video_eq.gamma" = "Gamma: %i";
-"osd.video_eq.hue" = "Hue: %i";
+"osd.video_eq.hue" = "Tom: %i";
 "osd.video_eq.saturation" = "Cor: %i";
 "osd.video_eq.brightness" = "Brilho: %i";
 "osd.find_online_sub" = "Buscando legendas online…";
@@ -176,7 +176,7 @@
 "alert.jump_to.title" = "Pular para";
 "alert.jump_to.message" = "Entre com o tempo para o qual deseja pular. Exemplo: 20:35";
 
-"alert.opensub.login.title" = "OpenSubtitles Login";
+"alert.opensub.login.title" = "Login OpenSubtitles";
 "alert.opensub.login.message" = "Por favor entre com usuario e senha";
 
 "alert.open_url.title" = "Abrir URL";

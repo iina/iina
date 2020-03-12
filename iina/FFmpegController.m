@@ -12,6 +12,7 @@
 #import <libavcodec/avcodec.h>
 #import <libavformat/avformat.h>
 #import <libswscale/swscale.h>
+#import <libavutil/display.h>
 #import <libavutil/imgutils.h>
 
 #define THUMB_COUNT_DEFAULT 100
@@ -46,7 +47,7 @@ return -1;\
 }
 
 - (int)getPeeksForFile:(NSString *)file;
-- (void)saveThumbnail:(AVFrame *)pFrame width:(int)width height:(int)height index:(int)index realTime:(int)second forFile:(NSString *)file;
+- (void)saveThumbnail:(AVFrame *)pFrame width:(int)width height:(int)height rotation:(int)rotation index:(int)index realTime:(int)second forFile:(NSString *)file;
 
 @end
 
@@ -125,6 +126,17 @@ return -1;\
   // Get the codec context for the video stream
   AVStream *pVideoStream = pFormatCtx->streams[videoStream];
   AVRational videoAvgFrameRate = pVideoStream->avg_frame_rate;
+  
+  // Extract the rotation angle from side data
+  // TODO: Extract all packet side data
+  int rotation_angle = 0;
+  for (i = 0; i < pVideoStream->nb_side_data; i++) {
+    if (pVideoStream->side_data[i].type == AV_PKT_DATA_DISPLAYMATRIX) {
+      rotation_angle = round(av_display_rotation_get((int32_t *) pVideoStream->side_data[i].data));
+    }
+  }
+  // Only support multiples of 90 degrees for now. Maybe allow more options if anyone demands it.
+  CHECK(rotation_angle % 90 == 0, @"Wrong rotation angle. Only support multiples of 90 degrees.")
 
   // Check whether the denominator (AVRational.den) is zero to prevent division-by-zero
   if (videoAvgFrameRate.den == 0 || av_q2d(videoAvgFrameRate) == 0) {
@@ -160,7 +172,8 @@ return -1;\
   // Allocate the output frame
   // We need to convert the video frame to RGBA to satisfy CGImage's data format
   int thumbWidth = THUMB_WIDTH;
-  int thumbHeight = THUMB_WIDTH / ((float)pCodecCtx->width / pCodecCtx->height);
+  // Use coded width and height in case of cropping
+  int thumbHeight = THUMB_WIDTH / ((float)pCodecCtx->coded_width / pCodecCtx->coded_height);
 
   AVFrame *pFrameRGB = av_frame_alloc();
   CHECK_NOTNULL(pFrameRGB, @"Cannot alloc RGBA frame")
@@ -255,6 +268,7 @@ return -1;\
         [self saveThumbnail:pFrameRGB
                       width:pFrameRGB->width
                      height:pFrameRGB->height
+                   rotation:rotation_angle
                       index:i
                    realTime:(pFrame->best_effort_timestamp * timebaseDouble)
                     forFile:file];
@@ -281,11 +295,11 @@ return -1;\
   return 0;
 }
 
-- (void)saveThumbnail:(AVFrame *)pFrame width:(int)width height:(int)height index:(int)index realTime:(int)second forFile: (NSString *)file
+- (void)saveThumbnail:(AVFrame *)pFrame width:(int)width height:(int)height rotation:(int)rotation index:(int)index realTime:(int)second forFile: (NSString *)file
 {
   // Create CGImage
   CGColorSpaceRef rgb = CGColorSpaceCreateDeviceRGB();
-  
+
   CGContextRef cgContext = CGBitmapContextCreate(pFrame->data[0],  // it's converted to RGBA so could be used directly
                                                  width, height,
                                                  8,  // 8 bit per component
@@ -296,6 +310,27 @@ return -1;\
 
   // Create NSImage
   NSImage *image = [[NSImage alloc] initWithCGImage:cgImage size: NSZeroSize];
+  if (rotation != 0) {
+    NSSize newSize = image.size;
+    if (rotation % 180 != 0) {
+      newSize = NSMakeSize(newSize.height, newSize.width);
+    }
+    NSAffineTransform *rotate = [NSAffineTransform transform];
+    [rotate rotateByDegrees:rotation];
+    NSAffineTransform *center = [NSAffineTransform transform];
+    [center translateXBy:newSize.width / 2.0 yBy:newSize.height / 2.0];
+    [rotate appendTransform:center];
+    
+    NSImage *newImage = [[NSImage alloc] initWithSize:newSize];
+    [newImage lockFocus];
+    [rotate concat];
+    NSRect rect = NSMakeRect(0, 0, image.size.width, image.size.height);
+    NSPoint corner = NSMakePoint(-image.size.width / 2.0, -image.size.height / 2.0);
+    [image drawAtPoint:corner fromRect:rect operation:NSCompositeCopy fraction:1.0];
+    [newImage unlockFocus];
+    
+    image = newImage;
+  }
   
   // Free resources
   CFRelease(rgb);

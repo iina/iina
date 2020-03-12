@@ -151,35 +151,50 @@ extension PlayerCore {
   @objc var scriptingAudioTracks: [MPVTrack] { info.audioTracks }
   @objc var scriptingSubtitleTracks: [MPVTrack] { info.subTracks }
 
+  func setCurentTrack(_ track: MPVTrack?, for type: MPVTrack.TrackType) {
+    guard let track = track else { return }
+
+    guard track.player === self else {
+      NSScriptCommand.current()?.scriptErrorNumber = 1000
+      NSScriptCommand.current()?.scriptErrorString = "Track doesn’t belong to player."
+      return
+    }
+
+    guard track.type == (type == .secondSub ? .sub : type) else {
+      NSScriptCommand.current()?.scriptErrorNumber = 1001
+      NSScriptCommand.current()?.scriptErrorString = "Track should be of type “\(type.rawValue)” but is of type “\(track.type.rawValue)”."
+
+      return
+    }
+
+    setTrack(track.id, forType: type)
+  }
+
   @objc var scriptingCurrentVideoTrack: MPVTrack? {
     get { info.currentTrack(.video) }
     set {
-      guard let track = newValue, track.player === self else { return }
-      setTrack(track.id, forType: .video)
+      setCurentTrack(newValue, for: .video)
     }
   }
 
   @objc var scriptingCurrentAudioTrack: MPVTrack? {
     get { info.currentTrack(.audio) }
     set {
-      guard let track = newValue, track.player === self else { return }
-      setTrack(track.id, forType: .audio)
+      setCurentTrack(newValue, for: .audio)
     }
   }
 
   @objc var scriptingCurrentSubtitleTrack: MPVTrack? {
     get { info.currentTrack(.sub) }
     set {
-      guard let track = newValue, track.player === self else { return }
-      setTrack(track.id, forType: .sub)
+      setCurentTrack(newValue, for: .sub)
     }
   }
 
   @objc var scriptingSecondSubtitleTrack: MPVTrack? {
     get { info.currentTrack(.secondSub) }
     set {
-      guard let track = newValue, track.player === self else { return }
-      setTrack(track.id, forType: .secondSub)
+      setCurentTrack(newValue, for: .secondSub)
     }
   }
 

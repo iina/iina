@@ -8,7 +8,7 @@
     <enumeration name="player state" code="ePSt">
       <enumerator name="playing" code="kPSP" description="Playback is playing."/>
       <enumerator name="paused" code="kPSp" description="Playback is paused."/>
-      <enumerator name="seeking" code="kPSS" description="Player is fast forwarding or rewinding."/>
+      <enumerator name="seeking" code="kPSS" description="The player is seeking."/>
     </enumeration>
 
     <command name="play" code="IINAPlay" description="Begin or resume playback.">
@@ -104,7 +104,7 @@
         <cocoa key="scriptingAspectRatio"/>
       </property>
 
-      <property name="pip" code="pPIP" description="Is the player in picture-in-picture mode?" type="boolean" access="rw">
+      <property name="pip" code="pPIP" description="Is the player in picture-in-picture mode? (macOS 10.12+)" type="boolean" access="rw">
         <cocoa key="scriptingIsPIP"/>
       </property>
 

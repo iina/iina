@@ -154,7 +154,7 @@ extension PlayerCore {
   @objc var scriptingCurrentVideoTrack: MPVTrack? {
     get { info.currentTrack(.video) }
     set {
-      guard let track = newValue else { return }
+      guard let track = newValue, track.player === self else { return }
       setTrack(track.id, forType: .video)
     }
   }
@@ -162,7 +162,7 @@ extension PlayerCore {
   @objc var scriptingCurrentAudioTrack: MPVTrack? {
     get { info.currentTrack(.audio) }
     set {
-      guard let track = newValue else { return }
+      guard let track = newValue, track.player === self else { return }
       setTrack(track.id, forType: .audio)
     }
   }
@@ -170,7 +170,7 @@ extension PlayerCore {
   @objc var scriptingCurrentSubtitleTrack: MPVTrack? {
     get { info.currentTrack(.sub) }
     set {
-      guard let track = newValue else { return }
+      guard let track = newValue, track.player === self else { return }
       setTrack(track.id, forType: .sub)
     }
   }
@@ -178,7 +178,7 @@ extension PlayerCore {
   @objc var scriptingSecondSubtitleTrack: MPVTrack? {
     get { info.currentTrack(.secondSub) }
     set {
-      guard let track = newValue else { return }
+      guard let track = newValue, track.player === self else { return }
       setTrack(track.id, forType: .secondSub)
     }
   }

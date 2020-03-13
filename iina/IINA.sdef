@@ -12,8 +12,8 @@
     </enumeration>
 
     <command name="play" code="IINAPlay" description="Begin or resume playback.">
-      <direct-parameter description="The file to play." optional="yes">
-        <type type="file"/>
+      <direct-parameter description="The file to play." optional="yes" hidden="yes">
+        <type type="player"/>
       </direct-parameter>
     </command>
 
@@ -24,6 +24,19 @@
     </command>
 
     <command name="playpause" code="IINAPlPs" description="Toggle the playing/paused state of the player.">
+      <direct-parameter description="The player." optional="yes" hidden="yes">
+        <type type="player"/>
+      </direct-parameter>
+    </command>
+
+    <command name="next item" code="IINANext" description="Advance to the next playlist item.">
+      <direct-parameter description="The player." optional="yes" hidden="yes">
+        <type type="player"/>
+      </direct-parameter>
+    </command>
+
+    <command name="previous item" code="IINAPrev" description="Return to the previous playlist item.">
+      <synonym name="prev item"/>
       <direct-parameter description="The player." optional="yes" hidden="yes">
         <type type="player"/>
       </direct-parameter>
@@ -144,6 +157,15 @@
       <responds-to command="playpause">
         <cocoa method="handlePlayPauseCommand:"/>
       </responds-to>
+
+      <responds-to command="next">
+        <cocoa method="handleNextCommand:"/>
+      </responds-to>
+
+      <responds-to command="previous">
+        <cocoa method="handlePreviousCommand:"/>
+      </responds-to>
+
     </class>
 
     <enumeration name="track type" code="eTrT">

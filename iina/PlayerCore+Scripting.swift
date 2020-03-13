@@ -232,4 +232,12 @@ extension PlayerCore {
     info.isPaused ? resume() : pause()
   }
 
+  @objc func handleNextCommand(_ command: NSScriptCommand) {
+    navigateInPlaylist(nextMedia: true)
+  }
+
+  @objc func handlePreviousCommand(_ command: NSScriptCommand) {
+    navigateInPlaylist(nextMedia: false)
+  }
+
 }

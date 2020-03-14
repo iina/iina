@@ -249,6 +249,7 @@ class JavascriptPlugin: NSObject {
   }
 
   func remove() {
+    JavascriptPlugin.plugins.removeAll { $0 == self }
     try? FileManager.default.removeItem(at: root)
   }
 

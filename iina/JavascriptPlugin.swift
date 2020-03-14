@@ -55,7 +55,6 @@ class JavascriptPlugin: NSObject {
 
   var root: URL
   let entryPath: String
-  let scriptPaths: [String]
   let preferencesPage: String?
   let helpPage: String?
 
@@ -200,7 +199,6 @@ class JavascriptPlugin: NSObject {
     self.authorEmail = author["email"]
     self.identifier = identifier
     self.desc = jsonDict["description"] as? String
-    self.scriptPaths = (jsonDict["scripts"] as? [String]) ?? []
     self.preferencesPage = jsonDict["preferencesPage"] as? String
     self.helpPage = jsonDict["helpPage"] as? String
 
@@ -244,8 +242,15 @@ class JavascriptPlugin: NSObject {
       }
     }
 
-    try? fileManager.moveItem(at: self.root, to: dest)
-    self.root = dest
+    do {
+      try fileManager.moveItem(at: self.root, to: dest)
+      self.root = dest
+      self.entryURL = resolvePath(entryPath, root: root)!
+      self.preferencesPageURL = resolvePath(preferencesPage, root: root)
+      self.helpPageURL = resolvePath(helpPage, root: root, allowNetwork: true)
+    } catch let error {
+      Utility.showAlert(error.localizedDescription)
+    }
   }
 
   func remove() {

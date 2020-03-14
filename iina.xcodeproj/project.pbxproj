@@ -168,6 +168,7 @@
 		E32B157F21BE219700CDBCEA /* JavascriptPluginMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32B157E21BE219700CDBCEA /* JavascriptPluginMenuItem.swift */; };
 		E3366AFA224A039500EF3C32 /* JavascriptAPIPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3366AF9224A039500EF3C32 /* JavascriptAPIPreferences.swift */; };
 		E337D5E22411B64A00B5729A /* JavascriptPolyfill.swift in Sources */ = {isa = PBXBuildFile; fileRef = E337D5E12411B64900B5729A /* JavascriptPolyfill.swift */; };
+		E337D5E4241C12BE00B5729A /* PrefPluginPermissionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E337D5E3241C12BE00B5729A /* PrefPluginPermissionListView.swift */; };
 		E33836852026223800ABC812 /* PrefOSCToolbarSettingsSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33836832026223800ABC812 /* PrefOSCToolbarSettingsSheetController.swift */; };
 		E3383689202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3383687202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.swift */; };
 		E338368A202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3383688202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.xib */; };
@@ -1285,6 +1286,7 @@
 		E32B157E21BE219700CDBCEA /* JavascriptPluginMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptPluginMenuItem.swift; sourceTree = "<group>"; };
 		E3366AF9224A039500EF3C32 /* JavascriptAPIPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIPreferences.swift; sourceTree = "<group>"; };
 		E337D5E12411B64900B5729A /* JavascriptPolyfill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptPolyfill.swift; sourceTree = "<group>"; };
+		E337D5E3241C12BE00B5729A /* PrefPluginPermissionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefPluginPermissionListView.swift; sourceTree = "<group>"; };
 		E33836832026223800ABC812 /* PrefOSCToolbarSettingsSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefOSCToolbarSettingsSheetController.swift; sourceTree = "<group>"; };
 		E3383687202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefOSCToolbarDraggingItemViewController.swift; sourceTree = "<group>"; };
 		E3383688202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrefOSCToolbarDraggingItemViewController.xib; sourceTree = "<group>"; };
@@ -1605,6 +1607,7 @@
 				8400D5F81E1AB34D006785F5 /* PrefNetworkViewController.xib */,
 				E353070321496CE4008FE492 /* PrefPluginViewController.swift */,
 				E353070421496CE4008FE492 /* PrefPluginViewController.xib */,
+				E337D5E3241C12BE00B5729A /* PrefPluginPermissionListView.swift */,
 				E38B3211214FB9EA000F6D27 /* PrefPluginPermissionView.swift */,
 				E38B3212214FB9EA000F6D27 /* PrefPluginPermissionView.xib */,
 				E374160D20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift */,
@@ -2535,6 +2538,7 @@
 				84AE59491E0FD65800771B7E /* MainMenuActions.swift in Sources */,
 				E38B3216214FF700000F6D27 /* EventController.swift in Sources */,
 				E3CB75BD1FDACB82004DB10A /* SavedFilter.swift in Sources */,
+				E337D5E4241C12BE00B5729A /* PrefPluginPermissionListView.swift in Sources */,
 				E342832F20B7149800139865 /* Logger.swift in Sources */,
 				E3DBD23B218B199700B3AFBF /* Translators.swift in Sources */,
 				84F725561D4783EE000DEF1B /* VolumeSliderCell.swift in Sources */,

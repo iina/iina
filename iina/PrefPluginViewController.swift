@@ -9,7 +9,16 @@
 import Cocoa
 import WebKit
 
-fileprivate let cellViewIndentifier = NSUserInterfaceItemIdentifier("PluginCell")
+fileprivate let defaultPlugins = [
+  ["url": "iina/plugin-demo", "id": "io.iina.demo"],
+  ["url": "iina/plugin-online-media", "id": "io.iina.ytdl"],
+]
+
+fileprivate extension NSUserInterfaceItemIdentifier {
+  static let cellView = NSUserInterfaceItemIdentifier("PluginCell")
+  static let installed = NSUserInterfaceItemIdentifier("InstalledCell")
+  static let url = NSUserInterfaceItemIdentifier("URLCell")
+}
 
 fileprivate extension NSPasteboard.PasteboardType {
   static let iinaPluginID = NSPasteboard.PasteboardType(rawValue: "com.colliderli.iina.pluginID")
@@ -46,7 +55,7 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
   @IBOutlet weak var pluginDescLabel: NSTextField!
   @IBOutlet weak var pluginSourceLabel: NSTextField!
   @IBOutlet weak var pluginCheckUpdatesBtn: NSButton!
-  @IBOutlet weak var pluginPermissionsView: NSStackView!
+  @IBOutlet weak var pluginPermissionsView: PrefPluginPermissionListView!
   @IBOutlet weak var pluginWebsiteEmailStackView: NSStackView!
   @IBOutlet weak var pluginWebsiteBtn: NSButton!
   @IBOutlet weak var pluginEmailBtn: NSButton!
@@ -58,6 +67,12 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
   @IBOutlet weak var pluginHelpLoadingFailedView: NSView!
   @IBOutlet weak var pluginPreferencesContentView: NSView!
 
+  @IBOutlet var newPluginSheet: NSWindow!
+  @IBOutlet weak var newPluginSourceTextField: NSTextField!
+  @IBOutlet weak var newPluginInstallBtn: NSButton!
+  @IBOutlet weak var pluginInstallationProgressIndicator: NSProgressIndicator!
+  @IBOutlet weak var defaultPluginsTableView: NSTableView!
+
   var pluginHelpWebView: NonscrollableWebview!
   var pluginHelpWebViewHeight: NSLayoutConstraint!
 
@@ -65,12 +80,18 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
   var pluginPreferencesWebViewHeight: NSLayoutConstraint!
   var pluginPreferencesViewController: PrefPluginPreferencesViewController!
 
+  private var defaultPluginsData: [[String: Any]] = []
+  private var queue = DispatchQueue(label: "com.collider.iina.plugin-install", qos: .userInteractive)
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
     tableView.delegate = self
     tableView.dataSource = self
     tableView.registerForDraggedTypes([.iinaPluginID])
+
+    defaultPluginsTableView.dataSource = self
+    defaultPluginsTableView.delegate = self
 
     clearPluginPage()
   }
@@ -231,8 +252,89 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
     loadHelpPage()
   }
 
-  @IBAction func openBinaryDirBtnAction(_ sender: Any) {
-    NSWorkspace.shared.open(Utility.binariesURL)
+  @IBAction func promptToInstallFromGitHub(_ sender: Any) {
+    defaultPluginsData = defaultPlugins.map { d in
+      let installed = JavascriptPlugin.plugins.contains { $0.identifier == d["id"] }
+      return [
+        "url": d["url"]!,
+        "notInstalledRaw": !installed,
+        "installed": NSLocalizedString(installed ? "plugin.installed" : "plugin.not-installed", comment: "")
+      ]
+    }
+    defaultPluginsTableView.reloadData()
+    newPluginSourceTextField.stringValue = ""
+    view.window!.beginSheet(newPluginSheet)
+  }
+
+  @IBAction func installPluginFromGitHub(_ sender: Any) {
+    pluginInstallationProgressIndicator.startAnimation(self)
+    defaultPluginsTableView.isEnabled = false
+    newPluginSourceTextField.isEnabled = false
+    newPluginInstallBtn.isEnabled = false
+
+    let source = self.newPluginSourceTextField.stringValue
+    queue.async {
+      defer {
+        DispatchQueue.main.async {
+          self.pluginInstallationProgressIndicator.stopAnimation(self)
+          self.defaultPluginsTableView.isEnabled = true
+          self.newPluginSourceTextField.isEnabled = true
+          self.newPluginInstallBtn.isEnabled = true
+          self.view.window!.endSheet(self.newPluginSheet)
+        }
+      }
+      do {
+        let plugin = try JavascriptPlugin.create(fromGitURL: source)
+        DispatchQueue.main.sync {
+          let alert = NSAlert()
+          let permissionListView = PrefPluginPermissionListView()
+          let scrollView = NSScrollView(frame: NSRect(x: 0, y: 0, width: 280, height: 300))
+          permissionListView.translatesAutoresizingMaskIntoConstraints = false
+          alert.messageText = NSLocalizedString("alert.title_warning", comment: "Warning")
+          alert.informativeText = "This plugin requires the following permissions. Please review them before proceeding."
+          alert.alertStyle = .warning
+          alert.accessoryView = scrollView
+          scrollView.drawsBackground = false
+          scrollView.documentView = permissionListView
+          Utility.quickConstraints(["H:|-0-[v]-0-|", "V:|-0-[v]"], ["v": permissionListView])
+          alert.addButton(withTitle: NSLocalizedString("plugin.install", comment: "Install"))
+          alert.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
+          alert.layout()
+          permissionListView.setPlugin(plugin)
+          alert.beginSheetModal(for: self.view.window!) { result in
+            if result == .alertFirstButtonReturn {
+              plugin.normalizePath()
+              JavascriptPlugin.plugins.append(plugin)
+              self.tableView.reloadData()
+            } else {
+              plugin.remove()
+            }
+          }
+        }
+      } catch let error {
+        let message: String
+        if let pluginError = error as? JavascriptPlugin.PluginError {
+          switch pluginError {
+          case .invalidURL:
+            message = NSLocalizedString("plugin.install-error.invalid-url", comment: "")
+          case .cannotDownload(_, let err):
+            let str = NSLocalizedString("plugin.install-error.cannot-download", comment: "")
+            message = String(format: str, err)
+          case .cannotLoadPlugin:
+            message = NSLocalizedString("plugin.install-error.cannot-load", comment: "")
+          }
+        } else {
+          message = error.localizedDescription
+        }
+        DispatchQueue.main.sync {
+          Utility.showAlert("plugin.install-error", comment: nil, arguments: [message], style: .critical, sheetWindow: self.view.window!)
+        }
+      }
+    }
+  }
+
+  @IBAction func endSheet(_ sender: NSButton) {
+    view.window!.endSheet(sender.window!)
   }
 
   private func clearPluginPage() {
@@ -250,26 +352,7 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
     pluginIdentifierLabel.stringValue = plugin.identifier
     pluginWebsiteEmailStackView.setVisibilityPriority(plugin.authorEmail == nil ? .notVisible : .mustHold, for: pluginEmailBtn)
     pluginWebsiteEmailStackView.setVisibilityPriority(plugin.authorURL == nil ? .notVisible : .mustHold, for: pluginWebsiteBtn)
-
-    pluginPermissionsView.views.forEach { pluginPermissionsView.removeView($0) }
-
-    for permission in plugin.permissions {
-      func l10n(_ key: String) -> String {
-        return NSLocalizedString("permissions.\(permission.rawValue).\(key)", comment: "")
-      }
-      var desc = l10n("desc")
-      if case .networkRequest = permission {
-        if plugin.domainList.contains("*") {
-          desc += "\n- \(l10n("any_site"))"
-        } else {
-          desc += "\n- "
-          desc += plugin.domainList.joined(separator: "\n- ")
-        }
-      }
-      let vc = PrefPluginPermissionView(name: l10n("name"), desc: desc, isDangerous: permission.isDangerous)
-      pluginPermissionsView.addView(vc.view, in: .top)
-      Utility.quickConstraints(["H:|-0-[v]-0-|"], ["v": vc.view])
-    }
+    pluginPermissionsView.setPlugin(plugin)
 
     currentPlugin = plugin
   }
@@ -277,19 +360,28 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
 
 extension PrefPluginViewController: NSTableViewDelegate, NSTableViewDataSource {
   func numberOfRows(in tableView: NSTableView) -> Int {
-    return JavascriptPlugin.plugins.count
+    if tableView == self.tableView {
+      return JavascriptPlugin.plugins.count
+    } else {
+      return defaultPlugins.count
+    }
   }
 
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-    return JavascriptPlugin.plugins[at: row]
+    if tableView == self.tableView {
+      return JavascriptPlugin.plugins[at: row]
+    } else {
+      return defaultPluginsData[at: row]
+    }
   }
 
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-    guard
-      let view = tableView.makeView(withIdentifier: cellViewIndentifier, owner: self) as? NSTableCellView,
-      let plugin = JavascriptPlugin.plugins[at: row]
-      else { return nil }
-    view.textField?.stringValue = plugin.name
+    let identifier: NSUserInterfaceItemIdentifier = tableView == self.tableView ? .cellView :
+      tableColumn?.identifier.rawValue == "URL" ? .url : .installed
+    let view = tableView.makeView(withIdentifier: identifier, owner: self)
+    if tableView == self.tableView {
+      (view as! NSTableCellView).textField?.stringValue = JavascriptPlugin.plugins[at: row]?.name ?? ""
+    }
     return view
   }
 
@@ -321,12 +413,25 @@ extension PrefPluginViewController: NSTableViewDelegate, NSTableViewDataSource {
     return true
   }
 
-  func tableViewSelectionDidChange(_ notification: Notification) {
-    guard let plugin = JavascriptPlugin.plugins[at: tableView.selectedRow] else {
-      clearPluginPage()
-      return
+  func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
+    if tableView == defaultPluginsTableView {
+      return defaultPluginsData[at: row]?["notInstalledRaw"] as? Bool ?? true
     }
-    loadPluginPage(plugin)
+    return true
+  }
+
+  func tableViewSelectionDidChange(_ notification: Notification) {
+    guard let tv = notification.object as? NSTableView else { return }
+    if tv == tableView {
+      guard let plugin = JavascriptPlugin.plugins[at: tableView.selectedRow] else {
+        clearPluginPage()
+        return
+      }
+      loadPluginPage(plugin)
+    } else if tv == defaultPluginsTableView {
+      guard tv.selectedRow >= 0 else { return }
+      newPluginSourceTextField.stringValue = defaultPlugins[tv.selectedRow]["url"]!
+    }
   }
 }
 

@@ -30,7 +30,7 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
   }
 
   var preferenceTabTitle: String {
-    return NSLocalizedString("preference.plugins", comment: "Plug-ins")
+    return NSLocalizedString("preference.plugins", comment: "Plugins")
   }
 
   var preferenceTabImage: NSImage {

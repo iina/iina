@@ -499,14 +499,14 @@
                     <rect key="frame" x="6" y="490" width="713" height="14"/>
                     <textFieldCell key="cell" controlSize="small" id="fnl-uA-X7r">
                         <font key="font" metaFont="menu" size="11"/>
-                        <string key="title">You can install a new plug-in from GitHub or a local .iinaplgz package. Plug-ins installed from GitHub can be updated automatically.</string>
+                        <string key="title">You can install a new plugin from GitHub or a local .iinaplgz package. Pllugins installed from GitHub can be updated automatically.</string>
                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XzQ-9h-Ysp">
-                    <rect key="frame" x="6" y="416" width="113" height="16"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" title="Installed plug-ins:" id="Ztn-MG-D7D">
+                    <rect key="frame" x="6" y="416" width="107" height="16"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Installed plugins:" id="Ztn-MG-D7D">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -523,8 +523,8 @@
                     </connections>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EIM-00-eRR">
-                    <rect key="frame" x="6" y="508" width="55" height="16"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" title="Plug-ins" id="tfn-0I-n6p">
+                    <rect key="frame" x="6" y="508" width="49" height="16"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Plugins" id="tfn-0I-n6p">
                         <font key="font" usesAppearanceFont="YES"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -587,8 +587,8 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6O5-Hg-m2n">
-                        <rect key="frame" x="18" y="261" width="217" height="16"/>
-                        <textFieldCell key="cell" lineBreakMode="clipping" title="Install a new plug-in from GitHub" id="zvu-Up-fQJ">
+                        <rect key="frame" x="18" y="261" width="211" height="16"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="Install a new plugin from GitHub" id="zvu-Up-fQJ">
                             <font key="font" metaFont="systemBold"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -598,7 +598,7 @@
                         <rect key="frame" x="18" y="225" width="444" height="28"/>
                         <textFieldCell key="cell" selectable="YES" id="Nmf-79-hFX">
                             <font key="font" metaFont="menu" size="11"/>
-                            <string key="title">Please enter the full URL of the GitHub repository or a string in the "user/repo" format. You can also choose one from the default plug-ins list.</string>
+                            <string key="title">Please enter the full URL of the GitHub repository or a string in the "user/repo" format. You can also choose one from the default plugins list.</string>
                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>

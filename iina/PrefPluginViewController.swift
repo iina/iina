@@ -327,7 +327,7 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
           message = error.localizedDescription
         }
         DispatchQueue.main.sync {
-          Utility.showAlert("plugin.install-error", comment: nil, arguments: [message], style: .critical, sheetWindow: self.view.window!)
+          Utility.showAlert("plugin.install-error", arguments: [message], sheetWindow: self.view.window!)
         }
       }
     }
@@ -335,6 +335,22 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
 
   @IBAction func endSheet(_ sender: NSButton) {
     view.window!.endSheet(sender.window!)
+  }
+
+  @IBAction func uninstallPlugin(_ sender: Any) {
+    guard let currentPlugin = currentPlugin else { return }
+    Utility.quickAskPanel("plugin_uninstall", titleArgs: [currentPlugin.name], sheetWindow: view.window!) { response in
+      if response == .alertFirstButtonReturn {
+        currentPlugin.remove()
+        self.clearPluginPage()
+        self.tableView.reloadData()
+      }
+    }
+  }
+
+  @IBAction func revealPlugin(_ sender: Any) {
+    guard let currentPlugin = currentPlugin else { return }
+    NSWorkspace.shared.activateFileViewerSelecting([currentPlugin.root])
   }
 
   private func clearPluginPage() {

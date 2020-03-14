@@ -658,3 +658,31 @@ extension NSWindow {
     return NSScreen.screens[0]
   }
 }
+
+extension Process {
+  @discardableResult
+  static func run(_ cmd: [String], at currentDir: URL? = nil) -> (process: Process, stdout: Pipe, stderr: Pipe) {
+    guard cmd.count > 0 else {
+      fatalError("Process.launch: the command should not be empty")
+    }
+
+    let (stdout, stderr) = (Pipe(), Pipe())
+    let process = Process()
+    if #available(macOS 10.13, *) {
+      process.executableURL = URL(fileURLWithPath: cmd[0])
+      process.currentDirectoryURL = currentDir
+    } else {
+      process.launchPath = cmd[0]
+      if let path = currentDir?.path {
+        process.currentDirectoryPath = path
+      }
+    }
+    process.arguments = [String](cmd.dropFirst())
+    process.standardOutput = stdout
+    process.standardError = stderr
+    process.launch()
+    process.waitUntilExit()
+
+    return (process, stdout, stderr)
+  }
+}

@@ -315,10 +315,20 @@
 "permissions.show-osd.name" = "Show OSD";
 "permissions.show-osd.desc" = "This plug-in can show OSD (On Screen Display) messages.";
 "permissions.show-alert.name" = "Show Alerts";
-"permissions.show-alert.desc" = "This plug-in can show alerts";
+"permissions.show-alert.desc" = "This plug-in can show pop-up alerts.";
 "permissions.call-process.name" = "Call Subprocess";
-"permissions.call-process.desc" = "This plug-in can call a subprocess, which can perform dangerous operations including modifying or uploading your local files. Please make sure that the source of this plug-in is trustable.";
+"permissions.call-process.desc" = "This plug-in can run a custom program, which can perform dangerous operations, including modifying or uploading your local files. Please make sure that the source of this plug-in is trustable.";
 "permissions.menu-items.name" = "Add menu items";
 "permissions.menu-items.desc" = "This plug-in can add items to the Plugin menu.";
 "permissions.video-overlay.name" = "Add overlay on videos";
 "permissions.video-overlay.desc" = "This plug-in can display some additional information on the top of the video.";
+"permissions.file-system.name" = "File system access";
+"permissions.file-system.desc" = "This plug-in can read files on your disk.";
+
+"plugin.install" = "Install";
+"plugin.installed" = "Installed";
+"plugin.not-installed" = "Not Installed";
+"plugin.install-error" = "Error occured during the installation: %@";
+"plugin.install-error.invalid-url" = "The URL is invalid.";
+"plugin.install-error.cannot-download" = "Failed to download the plugin.\n\nOutput:%@\n";
+"plugin.install-error.cannot-load" = "IINA cannot load this plugin. It might be in the wrong format.";

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
         <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PrefPluginPermissionView" customModule="IINA" customModuleProvider="target">
             <connections>
+                <outlet property="box" destination="gO8-UH-oZQ" id="65a-gg-x7T"/>
                 <outlet property="cautionImage" destination="GPl-L5-E91" id="XuF-fk-1UJ"/>
                 <outlet property="descLabel" destination="USY-dY-n0h" id="8ar-tk-cqz"/>
                 <outlet property="nameLabel" destination="168-A3-KXB" id="fRF-6E-UPz"/>
@@ -17,9 +18,8 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView id="Hz6-mo-xeY">
+        <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY">
             <rect key="frame" x="0.0" y="0.0" width="251" height="46"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <box boxType="custom" cornerRadius="4" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="gO8-UH-oZQ">
                     <rect key="frame" x="0.0" y="0.0" width="251" height="46"/>
@@ -30,7 +30,7 @@
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="168-A3-KXB">
                                 <rect key="frame" x="6" y="24" width="35" height="14"/>
                                 <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="Label" id="6VY-KR-elb">
-                                    <font key="font" metaFont="systemBold" size="11"/>
+                                    <font key="font" metaFont="smallSystemBold"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -38,7 +38,7 @@
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="USY-dY-n0h">
                                 <rect key="frame" x="6" y="6" width="237" height="14"/>
                                 <textFieldCell key="cell" controlSize="small" selectable="YES" title="Multiline Label" id="r9C-rP-J14">
-                                    <font key="font" metaFont="smallSystem"/>
+                                    <font key="font" metaFont="menu" size="11"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -78,6 +78,6 @@
         </customView>
     </objects>
     <resources>
-        <image name="NSCaution" width="128" height="128"/>
+        <image name="NSCaution" width="32" height="32"/>
     </resources>
 </document>

@@ -9,7 +9,6 @@
 import Cocoa
 
 class PrefPluginPermissionView: NSViewController {
-
   override var nibName: NSNib.Name {
     return NSNib.Name("PrefPluginPermissionView")
   }
@@ -18,6 +17,7 @@ class PrefPluginPermissionView: NSViewController {
   var desc: String
   var isDangerous: Bool
 
+  @IBOutlet weak var box: NSBox!
   @IBOutlet weak var nameLabel: NSTextField!
   @IBOutlet weak var descLabel: NSTextField!
   @IBOutlet weak var cautionImage: NSImageView!
@@ -38,6 +38,8 @@ class PrefPluginPermissionView: NSViewController {
     nameLabel.stringValue = name
     descLabel.stringValue = desc
     cautionImage.isHidden = !isDangerous
+    if isDangerous {
+      box.fillColor = NSColor.systemRed.withAlphaComponent(0.3)
+    }
   }
-
 }

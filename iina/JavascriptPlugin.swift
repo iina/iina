@@ -8,6 +8,7 @@
 
 import Foundation
 import JavaScriptCore
+import Just
 
 class JavascriptPlugin: NSObject {
   enum Permission: String {
@@ -29,6 +30,12 @@ class JavascriptPlugin: NSObject {
     }
   }
 
+  enum PluginError: Error {
+    case invalidURL
+    case cannotDownload(String, String)
+    case cannotLoadPlugin
+  }
+
   static var plugins = loadPlugins()
 
   @objc var enabled: Bool {
@@ -46,7 +53,7 @@ class JavascriptPlugin: NSObject {
   let version: String
   let desc: String?
 
-  let root: URL
+  var root: URL
   let entryPath: String
   let scriptPaths: [String]
   let preferencesPage: String?
@@ -82,7 +89,7 @@ class JavascriptPlugin: NSObject {
     let result = contents
       .filter { $0.pathExtension == "iinaplugin" && $0.isExistingDirectory }
       .compactMap { path -> JavascriptPlugin? in
-        if let plugin = JavascriptPlugin(filename: path.deletingPathExtension().lastPathComponent) {
+        if let plugin = JavascriptPlugin(filename: path.lastPathComponent) {
           if identifiers.contains(plugin.identifier) {
             Utility.showAlert("duplicated_plugin_id", comment: nil, arguments: [plugin.identifier])
             plugin.identifier += ".\(UUID().uuidString)"
@@ -102,19 +109,68 @@ class JavascriptPlugin: NSObject {
     UserDefaults.standard.set((values ?? plugins).map({ $0.identifier }), forKey: "PluginOrder")
   }
 
+  @discardableResult
+  static func create(fromGitURL urlString: String) throws -> JavascriptPlugin {
+    var formatted: String
+    if Regex("^[\\w-_]+/[\\w-_]+$").matches(urlString) {
+      formatted = "https://github.com/\(urlString)"
+    } else {
+      guard Regex("^https://github.com/[\\w-_]/[\\w-_]/?$").matches(urlString) else {
+        throw PluginError.invalidURL
+      }
+      formatted = urlString
+    }
+
+    guard let url = NSURL(string: formatted)?.standardized else {
+      throw PluginError.invalidURL
+    }
+
+    let pluginsRoot = Utility.pluginsURL
+    let tempFolder = ".temp.\(UUID().uuidString)"
+    let tempZipFile = "\(tempFolder).zip"
+    let tempDecompressDir = "\(tempFolder)-1"
+    let tempURL = pluginsRoot.appendingPathComponent(tempFolder)
+    let githubMasterURL = url.appendingPathComponent("archive/master.zip").absoluteString
+
+    defer {
+      [tempZipFile, tempDecompressDir].forEach { item in
+        try? FileManager.default.removeItem(at: pluginsRoot.appendingPathComponent(item))
+      }
+    }
+
+    let cmd = [
+      "curl -fsSL '\(githubMasterURL)' > '\(tempZipFile)'",
+      "mkdir '\(tempFolder)' '\(tempDecompressDir)'",
+      "unzip '\(tempZipFile)' -d '\(tempDecompressDir)'",
+      "mv '\(tempDecompressDir)'/*/* '\(tempFolder)'/"
+    ].joined(separator: " && ")
+    let (process, stdout, stderr) = Process.run(["/bin/bash", "-c", cmd], at: pluginsRoot)
+
+    guard process.terminationStatus == 0 else {
+      let outText = String(data: stdout.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) ?? "None"
+      let errText = String(data: stderr.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) ?? "None"
+      throw PluginError.cannotDownload(outText, errText)
+    }
+
+    guard let plugin = JavascriptPlugin(filename: tempFolder) else {
+      throw PluginError.cannotLoadPlugin
+    }
+
+    return plugin
+  }
+
   init?(filename: String) {
     // find package
-    let url = Utility.pluginsURL.appendingPathComponent("\(filename).iinaplugin")
+    let url = Utility.pluginsURL.appendingPathComponent(filename)
     Logger.log("Loading JS plugin from \(url.path)")
     guard url.isFileURL && url.isExistingDirectory else {
       Logger.log("The plugin package doesn't exist.")
       return nil
     }
-    self.root = url
 
     // read package
     guard
-      let data = try? Data(contentsOf: root.appendingPathComponent("Info.json"), options: .mappedIfSafe),
+      let data = try? Data(contentsOf: url.appendingPathComponent("Info.json"), options: .mappedIfSafe),
       let jsonResult = try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves),
       let jsonDict = jsonResult as? [String: Any]
       else {
@@ -135,6 +191,7 @@ class JavascriptPlugin: NSObject {
       return nil
     }
 
+    self.root = url
     self.name = name
     self.version = version
     self.entryPath = entry
@@ -173,6 +230,26 @@ class JavascriptPlugin: NSObject {
       Logger.log("Unable to read preferenceDefaults", level: .warning)
       self.defaultPrefernces = [:]
     }
+  }
+
+  func normalizePath() {
+    let pluginsURL = Utility.pluginsURL
+    let fileManager = FileManager.default
+
+    var dest = pluginsURL.appendingPathComponent("\(identifier).iinaplugin")
+    if fileManager.fileExists(atPath: dest.path) {
+      for i in 2..<Int.max {
+        dest = pluginsURL.appendingPathComponent("\(identifier)-\(i).iinaplugin")
+        if !fileManager.fileExists(atPath: dest.path) { break }
+      }
+    }
+
+    try? fileManager.moveItem(at: self.root, to: dest)
+    self.root = dest
+  }
+
+  func remove() {
+    try? FileManager.default.removeItem(at: root)
   }
 
   func syncPreferences() {

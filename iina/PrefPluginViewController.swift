@@ -304,7 +304,9 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
           alert.beginSheetModal(for: self.view.window!) { result in
             if result == .alertFirstButtonReturn {
               plugin.normalizePath()
+              plugin.enabled = true
               JavascriptPlugin.plugins.append(plugin)
+              PlayerCore.playerCores.forEach { $0.reloadPlugin(plugin) }
               self.tableView.reloadData()
             } else {
               plugin.remove()

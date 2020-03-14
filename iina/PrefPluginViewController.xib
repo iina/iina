@@ -163,6 +163,9 @@
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="menu" size="11"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="uninstallPlugin:" target="-2" id="49D-wk-Htc"/>
+                                        </connections>
                                     </button>
                                     <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="Cly-9N-1cz">
                                         <rect key="frame" x="0.0" y="0.0" width="539" height="316"/>
@@ -325,7 +328,7 @@
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uPX-dW-Wcu">
                                                                             <rect key="frame" x="10" y="110" width="29" height="14"/>
                                                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Help" id="Ka5-V3-g5E">
-                                                                                <font key="font" metaFont="controlContent" size="11"/>
+                                                                                <font key="font" metaFont="menu" size="11"/>
                                                                                 <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
@@ -434,11 +437,22 @@
                                             <action selector="tabSwitched:" target="-2" id="kXO-mk-C1a"/>
                                         </connections>
                                     </segmentedControl>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sl8-zI-7f5">
+                                        <rect key="frame" x="361" y="368" width="98" height="17"/>
+                                        <buttonCell key="cell" type="roundRect" title="Reveal in Finder" bezelStyle="roundedRect" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="drh-6w-3z1">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="menu" size="11"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="revealPlugin:" target="-2" id="qhh-x5-Xcs"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="XdS-aQ-bSd" firstAttribute="leading" secondItem="RQj-8e-E8x" secondAttribute="trailing" constant="8" id="0xI-bW-5pv"/>
                                     <constraint firstItem="304-WM-rM6" firstAttribute="centerX" secondItem="dBW-JH-AvA" secondAttribute="centerX" id="2UO-q1-qSN"/>
                                     <constraint firstItem="XdS-aQ-bSd" firstAttribute="firstBaseline" secondItem="RQj-8e-E8x" secondAttribute="firstBaseline" id="3hj-zc-HFP"/>
+                                    <constraint firstItem="sl8-zI-7f5" firstAttribute="firstBaseline" secondItem="kmI-AD-0GL" secondAttribute="firstBaseline" id="5AW-rI-lN4"/>
                                     <constraint firstItem="8U3-yT-6HJ" firstAttribute="top" secondItem="RQj-8e-E8x" secondAttribute="bottom" constant="4" id="8wC-vh-EFn"/>
                                     <constraint firstItem="8U3-yT-6HJ" firstAttribute="leading" secondItem="dBW-JH-AvA" secondAttribute="leading" constant="12" id="CZq-gN-OVO"/>
                                     <constraint firstAttribute="trailing" secondItem="Cly-9N-1cz" secondAttribute="trailing" id="DNg-ch-ZAL"/>
@@ -447,13 +461,15 @@
                                     <constraint firstItem="RQj-8e-E8x" firstAttribute="top" secondItem="dBW-JH-AvA" secondAttribute="top" constant="12" id="Jar-IH-wWd"/>
                                     <constraint firstItem="O3h-Pq-T36" firstAttribute="leading" secondItem="dBW-JH-AvA" secondAttribute="leading" id="KLG-jn-Xia"/>
                                     <constraint firstItem="Cly-9N-1cz" firstAttribute="leading" secondItem="dBW-JH-AvA" secondAttribute="leading" id="NOH-nT-C8U"/>
-                                    <constraint firstItem="kmI-AD-0GL" firstAttribute="firstBaseline" secondItem="XdS-aQ-bSd" secondAttribute="firstBaseline" id="Olc-2v-4Yy"/>
+                                    <constraint firstItem="sl8-zI-7f5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XdS-aQ-bSd" secondAttribute="trailing" constant="8" id="Rmd-wb-HN8"/>
+                                    <constraint firstItem="sl8-zI-7f5" firstAttribute="firstBaseline" secondItem="XdS-aQ-bSd" secondAttribute="firstBaseline" id="Tl2-GZ-nho"/>
                                     <constraint firstAttribute="trailing" secondItem="O3h-Pq-T36" secondAttribute="trailing" id="Wps-be-0tz"/>
                                     <constraint firstAttribute="bottom" secondItem="Cly-9N-1cz" secondAttribute="bottom" id="Z32-Gf-2AU"/>
                                     <constraint firstItem="Cly-9N-1cz" firstAttribute="top" secondItem="O3h-Pq-T36" secondAttribute="bottom" constant="12" id="Znr-F9-cAE"/>
                                     <constraint firstItem="Cly-9N-1cz" firstAttribute="top" secondItem="304-WM-rM6" secondAttribute="bottom" constant="4" id="kkL-mx-xXX"/>
                                     <constraint firstAttribute="trailing" secondItem="8U3-yT-6HJ" secondAttribute="trailing" constant="12" id="qkn-3v-k2e"/>
                                     <constraint firstItem="RQj-8e-E8x" firstAttribute="leading" secondItem="dBW-JH-AvA" secondAttribute="leading" constant="12" id="rKW-Qy-53M"/>
+                                    <constraint firstItem="kmI-AD-0GL" firstAttribute="leading" secondItem="sl8-zI-7f5" secondAttribute="trailing" constant="8" id="yc9-vk-Vt8"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -581,7 +597,7 @@
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="sOM-Pv-QX2">
                         <rect key="frame" x="18" y="225" width="444" height="28"/>
                         <textFieldCell key="cell" selectable="YES" id="Nmf-79-hFX">
-                            <font key="font" metaFont="controlContent" size="11"/>
+                            <font key="font" metaFont="menu" size="11"/>
                             <string key="title">Please enter the full URL of the GitHub repository or a string in the "user/repo" format. You can also choose one from the default plug-ins list.</string>
                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -639,7 +655,7 @@ DQ
                                     <tableColumns>
                                         <tableColumn identifier="URL" width="331" minWidth="40" maxWidth="1000" id="V2A-RK-hOY">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                <font key="font" metaFont="controlContent" size="11"/>
+                                                <font key="font" metaFont="menu" size="11"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                             </tableHeaderCell>
@@ -676,7 +692,7 @@ DQ
                                         </tableColumn>
                                         <tableColumn identifier="Installed" width="99" minWidth="40" maxWidth="1000" id="94B-li-kN0">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                <font key="font" metaFont="controlContent" size="11"/>
+                                                <font key="font" metaFont="menu" size="11"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                             </tableHeaderCell>

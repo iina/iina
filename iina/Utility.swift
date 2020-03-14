@@ -91,12 +91,22 @@ class Utility {
    - Returns: Whether user dismissed the panel by clicking OK, discardable when using sheet.
    */
   @discardableResult
-  static func quickAskPanel(_ key: String, titleComment: String? = nil, messageComment: String? = nil, sheetWindow: NSWindow? = nil, callback: ((NSApplication.ModalResponse) -> Void)? = nil) -> Bool {
+  static func quickAskPanel(_ key: String, titleComment: String? = nil, messageComment: String? = nil, titleArgs: [CVarArg]? = nil, messageArgs: [CVarArg]? = nil, sheetWindow: NSWindow? = nil, callback: ((NSApplication.ModalResponse) -> Void)? = nil) -> Bool {
     let panel = NSAlert()
     let titleKey = "alert." + key + ".title"
     let messageKey = "alert." + key + ".message"
-    panel.messageText = NSLocalizedString(titleKey, comment: titleComment ?? titleKey)
-    panel.informativeText = NSLocalizedString(messageKey, comment: messageComment ?? messageKey)
+    let titleFormat = NSLocalizedString(titleKey, comment: titleComment ?? titleKey)
+    let messageFormat = NSLocalizedString(messageKey, comment: messageComment ?? messageKey)
+    if let args = titleArgs {
+      panel.messageText = String(format: titleFormat, arguments: args)
+    } else {
+      panel.messageText = titleFormat
+    }
+    if let args = messageArgs {
+      panel.informativeText = String(format: messageFormat, arguments: args)
+    } else {
+      panel.informativeText = messageFormat
+    }
     panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
     panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
 

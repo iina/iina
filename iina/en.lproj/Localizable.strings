@@ -334,11 +334,11 @@
 
 "plugin.install" = "Install";
 "plugin.installed" = "Installed";
-"plugin.not-installed" = "Not Installed";
+"plugin.not_installed" = "Not Installed";
 "plugin.local" = "Installed locally";
-"alert.plugin.install-error" = "Error occured during the installation: %@";
-"plugin.install-error.invalid-url" = "The URL is invalid.";
-"plugin.install-error.cannot-download" = "Failed to download the plugin.\n\nOutput:\n%@";
-"plugin.install-error.cannot-load" = "IINA cannot load this plugin. It might be in the wrong format.";
+"alert.plugin.install_error" = "Error occured during the installation: %@";
+"plugin.install_error.invalid_url" = "The URL is invalid.";
+"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:\n%@";
+"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
 "plugin.check_for_updates" = "Check for Updates";
 "plugin.updating" = "Downloading update…";

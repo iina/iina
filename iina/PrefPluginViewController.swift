@@ -264,21 +264,21 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
     if let pluginError = error as? JavascriptPlugin.PluginError {
       switch pluginError {
       case .invalidURL:
-        message = NSLocalizedString("plugin.install-error.invalid-url", comment: "")
+        message = NSLocalizedString("plugin.install_error.invalid_url", comment: "")
       case .cannotDownload(_, let err):
-        let str = NSLocalizedString("plugin.install-error.cannot-download", comment: "")
+        let str = NSLocalizedString("plugin.install_error.cannot_download", comment: "")
         message = String(format: str, err)
       case .cannotLoadPlugin:
-        message = NSLocalizedString("plugin.install-error.cannot-load", comment: "")
+        message = NSLocalizedString("plugin.install_error.cannot_load", comment: "")
       }
     } else {
       message = error.localizedDescription
     }
     if Thread.isMainThread {
-      Utility.showAlert("plugin.install-error", arguments: [message], sheetWindow: self.view.window!)
+      Utility.showAlert("plugin.install_error", arguments: [message], sheetWindow: self.view.window!)
     } else {
       DispatchQueue.main.sync {
-        Utility.showAlert("plugin.install-error", arguments: [message], sheetWindow: self.view.window!)
+        Utility.showAlert("plugin.install_error", arguments: [message], sheetWindow: self.view.window!)
       }
     }
   }
@@ -341,7 +341,7 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
       return [
         "url": d["url"]!,
         "notInstalledRaw": !installed,
-        "installed": NSLocalizedString(installed ? "plugin.installed" : "plugin.not-installed", comment: "")
+        "installed": NSLocalizedString(installed ? "plugin.installed" : "plugin.not_installed", comment: "")
       ]
     }
     defaultPluginsTableView.reloadData()
@@ -408,10 +408,14 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
   @IBAction func checkForPluginUpdate(_ sender: Any) {
     guard let currentPlugin = currentPlugin else { return }
     pluginCheckUpdatesProgressIndicator.startAnimation(self)
+    pluginCheckUpdatesBtn.isEnabled = false
 
     currentPlugin.checkForUpdates() { [unowned self] version in
       DispatchQueue.main.async {
-        defer { self.pluginCheckUpdatesProgressIndicator.stopAnimation(self) }
+        defer {
+          self.pluginCheckUpdatesProgressIndicator.stopAnimation(self)
+          self.pluginCheckUpdatesBtn.isEnabled = true
+        }
 
         guard let version = version else {
           Utility.showAlert("plugin_no_update", style: .informational, sheetWindow: self.view.window!)

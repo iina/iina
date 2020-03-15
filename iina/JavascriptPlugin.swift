@@ -10,6 +10,8 @@ import Foundation
 import JavaScriptCore
 import Just
 
+fileprivate let githubRepoRegex = Regex("^[\\w-]+/[\\w-]+$")
+
 class JavascriptPlugin: NSObject {
   enum Permission: String {
     case networkRequest = "network-request"
@@ -41,7 +43,7 @@ class JavascriptPlugin: NSObject {
   @objc var enabled: Bool {
     didSet {
       UserDefaults.standard.set(enabled, forKey: "PluginEnabled." + identifier)
-      PlayerCore.playerCores.forEach { $0.reloadPlugin(self) }
+      PlayerCore.reloadPluginForAll(self)
     }
   }
 
@@ -58,12 +60,19 @@ class JavascriptPlugin: NSObject {
   let preferencesPage: String?
   let helpPage: String?
 
+  let githubRepo: String?
+  let githubVersion: Int?
+
   let permissions: Set<Permission>
   let domainList: [String]
 
   var entryURL: URL
   var preferencesPageURL: URL?
   var helpPageURL: URL?
+  var githubURLString: String? {
+    guard let githubRepo = githubRepo else { return nil }
+    return "https://github.com/\(githubRepo)"
+  }
 
   lazy var preferences: [String: Any] = {
     NSDictionary(contentsOfFile: preferencesFileURL.path) as? [String: Any] ?? [:]
@@ -111,10 +120,10 @@ class JavascriptPlugin: NSObject {
   @discardableResult
   static func create(fromGitURL urlString: String) throws -> JavascriptPlugin {
     var formatted: String
-    if Regex("^[\\w-_]+/[\\w-_]+$").matches(urlString) {
+    if githubRepoRegex.matches(urlString) {
       formatted = "https://github.com/\(urlString)"
     } else {
-      guard Regex("^https://github.com/[\\w-_]/[\\w-_]/?$").matches(urlString) else {
+      guard Regex("^https://github.com/[\\w-]+/[\\w-]+/?$").matches(urlString) else {
         throw PluginError.invalidURL
       }
       formatted = urlString
@@ -155,6 +164,10 @@ class JavascriptPlugin: NSObject {
       throw PluginError.cannotLoadPlugin
     }
 
+    guard plugin.githubVersion != nil, formatted == plugin.githubURLString else {
+      Logger.log("The plugin \(plugin.name) doesn't contain a ghVersion field or its ghRepo doesn't match the current requested URL \(formatted).")
+      throw PluginError.cannotLoadPlugin
+    }
     return plugin
   }
 
@@ -201,6 +214,19 @@ class JavascriptPlugin: NSObject {
     self.desc = jsonDict["description"] as? String
     self.preferencesPage = jsonDict["preferencesPage"] as? String
     self.helpPage = jsonDict["helpPage"] as? String
+    self.domainList = (jsonDict["allowedDomains"] as? [String]) ?? []
+
+    if let ghRepo = jsonDict["ghRepo"] as? String {
+      if githubRepoRegex.matches(ghRepo) {
+        self.githubRepo = ghRepo
+      } else {
+        Logger.log("Invalid ghRepo format", level: .error)
+        return nil
+      }
+    } else {
+      self.githubRepo = nil
+    }
+    self.githubVersion = jsonDict["ghVersion"] as? Int
 
     var permissions = Set<Permission>()
     if let permList = jsonDict["permissions"] as? [String] {
@@ -213,7 +239,6 @@ class JavascriptPlugin: NSObject {
       }
     }
     self.permissions = permissions
-    self.domainList = (jsonDict["domainList"] as? [String]) ?? []
 
     self.enabled = UserDefaults.standard.bool(forKey: "PluginEnabled." + identifier)
 
@@ -253,9 +278,43 @@ class JavascriptPlugin: NSObject {
     }
   }
 
-  func remove() {
-    JavascriptPlugin.plugins.removeAll { $0 == self }
+  @discardableResult
+  func remove() -> Int? {
+    let pos = JavascriptPlugin.plugins.firstIndex(of: self)
+    if let pos = pos {
+      JavascriptPlugin.plugins.remove(at: pos)
+    }
     try? FileManager.default.removeItem(at: root)
+    return pos
+  }
+
+  func checkForUpdates(_ handler: @escaping (String?) -> Void) {
+    if let ghVersion = githubVersion, let ghRepo = githubRepo {
+      Just.get("https://raw.githubusercontent.com/\(ghRepo)/master/Info.json") { result in
+        if let json = result.json as? [String: Any],
+          let newGHVersion = json["ghVersion"] as? Int,
+          let newVersion = json["version"] as? String,
+          newGHVersion > ghVersion {
+          handler(newVersion)
+        } else {
+          handler(nil)
+        }
+      }
+    } else {
+      handler(nil)
+    }
+  }
+
+  func updated() throws -> JavascriptPlugin? {
+    if let ghURL = githubURLString {
+      let plugin = try JavascriptPlugin.create(fromGitURL: ghURL)
+      guard plugin.identifier == identifier else {
+        Logger.log("The updated plugin has an identifier \(plugin.identifier), which doesn't match the current one (\(identifier))", level: .error)
+        throw PluginError.cannotLoadPlugin
+      }
+      return plugin
+    }
+    return nil
   }
 
   func syncPreferences() {

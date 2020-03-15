@@ -18,10 +18,17 @@ class PrefPluginPermissionListView: NSStackView {
     super.init(coder: coder)
   }
 
-  func setPlugin(_ plugin: JavascriptPlugin) {
+  func setPlugin(_ plugin: JavascriptPlugin, onlyShowAddedFrom previousPlugin: JavascriptPlugin? = nil) {
     views.forEach { removeView($0) }
 
-    let sorted = plugin.permissions.sorted { (a, b) in
+    let permissions: Set<JavascriptPlugin.Permission>
+    if let previous = previousPlugin {
+      permissions = plugin.permissions.subtracting(previous.permissions)
+    } else {
+      permissions = plugin.permissions
+    }
+
+    let sorted = permissions.sorted { (a, b) in
       let da = a.isDangerous, db = b.isDangerous
       if da == db { return a.rawValue < b.rawValue }
       return da

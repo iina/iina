@@ -158,6 +158,10 @@ class PlayerCore: NSObject {
 
   // MARK: - Plugins
 
+  static func reloadPluginForAll(_ plugin: JavascriptPlugin) {
+    playerCores.forEach { $0.reloadPlugin(plugin) }
+  }
+
   func loadPlugins() {
     pluginMap.removeAll()
     plugins = JavascriptPlugin.plugins.compactMap { plugin in

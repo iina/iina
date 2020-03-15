@@ -71,6 +71,7 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
   @IBOutlet weak var newPluginSourceTextField: NSTextField!
   @IBOutlet weak var newPluginInstallBtn: NSButton!
   @IBOutlet weak var pluginInstallationProgressIndicator: NSProgressIndicator!
+  @IBOutlet weak var pluginCheckUpdatesProgressIndicator: NSProgressIndicator!
   @IBOutlet weak var defaultPluginsTableView: NSTableView!
 
   var pluginHelpWebView: NonscrollableWebview!
@@ -226,12 +227,94 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
     }
   }
 
+  private func clearPluginPage() {
+    pluginInfoContentView.isHidden = true
+  }
+
+  private func loadPluginPage(_ plugin: JavascriptPlugin) {
+    tabView.selectTabViewItem(at: 0)
+    segmentControl.selectedSegment = 0
+    pluginHelpWebViewLoadingIndicator.stopAnimation(self)
+    pluginInfoContentView.isHidden = false
+    pluginNameLabel.stringValue = plugin.name
+    pluginAuthorLabel.stringValue = plugin.authorName
+    pluginVersionLabel.stringValue = plugin.version
+    pluginDescLabel.stringValue = plugin.desc ?? "No Description"
+    pluginIdentifierLabel.stringValue = plugin.identifier
+    pluginWebsiteEmailStackView.setVisibilityPriority(plugin.authorEmail == nil ? .notVisible : .mustHold, for: pluginEmailBtn)
+    pluginWebsiteEmailStackView.setVisibilityPriority(plugin.authorURL == nil ? .notVisible : .mustHold, for: pluginWebsiteBtn)
+    pluginPermissionsView.setPlugin(plugin)
+    pluginSourceLabel.stringValue = plugin.githubURLString ?? NSLocalizedString("plugin.local", comment: "")
+    pluginCheckUpdatesBtn.isHidden = plugin.githubRepo == nil || plugin.githubVersion == nil
+
+    currentPlugin = plugin
+  }
+
   private func loadHelpPage() {
     guard let currentPlugin = currentPlugin, let helpURL = currentPlugin.helpPageURL else { return }
     if helpURL.isFileURL {
       pluginHelpWebView.loadFileURL(helpURL, allowingReadAccessTo: currentPlugin.root)
     } else {
       pluginHelpWebView.load(URLRequest(url: helpURL))
+    }
+  }
+
+  private func handleInstallationError(_ error: Error) {
+    let message: String
+    if let pluginError = error as? JavascriptPlugin.PluginError {
+      switch pluginError {
+      case .invalidURL:
+        message = NSLocalizedString("plugin.install-error.invalid-url", comment: "")
+      case .cannotDownload(_, let err):
+        let str = NSLocalizedString("plugin.install-error.cannot-download", comment: "")
+        message = String(format: str, err)
+      case .cannotLoadPlugin:
+        message = NSLocalizedString("plugin.install-error.cannot-load", comment: "")
+      }
+    } else {
+      message = error.localizedDescription
+    }
+    if Thread.isMainThread {
+      Utility.showAlert("plugin.install-error", arguments: [message], sheetWindow: self.view.window!)
+    } else {
+      DispatchQueue.main.sync {
+        Utility.showAlert("plugin.install-error", arguments: [message], sheetWindow: self.view.window!)
+      }
+    }
+  }
+
+  private func showPermissionsSheet(forPlugin plugin: JavascriptPlugin, previousPlugin: JavascriptPlugin?, handler: @escaping (Bool) -> Void) {
+    let block = {
+      let alert = NSAlert()
+      let permissionListView = PrefPluginPermissionListView()
+      let scrollView = NSScrollView(frame: NSRect(x: 0, y: 0, width: 280, height: 300))
+      permissionListView.translatesAutoresizingMaskIntoConstraints = false
+      alert.messageText = NSLocalizedString("alert.title_warning", comment: "Warning")
+      alert.informativeText = NSLocalizedString(previousPlugin == nil ? "alert.plugin_permission" : "alert.plugin_permission_added", comment: "")
+      alert.alertStyle = .warning
+      alert.accessoryView = scrollView
+      scrollView.drawsBackground = false
+      scrollView.documentView = permissionListView
+      Utility.quickConstraints(["H:|-0-[v]-0-|", "V:|-0-[v]"], ["v": permissionListView])
+      alert.addButton(withTitle: NSLocalizedString("plugin.install", comment: "Install"))
+      alert.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
+      permissionListView.setPlugin(plugin, onlyShowAddedFrom: previousPlugin)
+      alert.layout()
+      let height = permissionListView.frame.height
+      if height < 300 {
+        scrollView.frame.size.height = height
+        alert.layout()
+      }
+      alert.beginSheetModal(for: self.view.window!) { result in
+        handler(result == .alertFirstButtonReturn)
+      }
+    }
+    if Thread.isMainThread {
+      block()
+    } else {
+      DispatchQueue.main.sync {
+        block()
+      }
     }
   }
 
@@ -285,52 +368,19 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
       }
       do {
         let plugin = try JavascriptPlugin.create(fromGitURL: source)
-        DispatchQueue.main.sync {
-          let alert = NSAlert()
-          let permissionListView = PrefPluginPermissionListView()
-          let scrollView = NSScrollView(frame: NSRect(x: 0, y: 0, width: 280, height: 300))
-          permissionListView.translatesAutoresizingMaskIntoConstraints = false
-          alert.messageText = NSLocalizedString("alert.title_warning", comment: "Warning")
-          alert.informativeText = "This plugin requires the following permissions. Please review them before proceeding."
-          alert.alertStyle = .warning
-          alert.accessoryView = scrollView
-          scrollView.drawsBackground = false
-          scrollView.documentView = permissionListView
-          Utility.quickConstraints(["H:|-0-[v]-0-|", "V:|-0-[v]"], ["v": permissionListView])
-          alert.addButton(withTitle: NSLocalizedString("plugin.install", comment: "Install"))
-          alert.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
-          alert.layout()
-          permissionListView.setPlugin(plugin)
-          alert.beginSheetModal(for: self.view.window!) { result in
-            if result == .alertFirstButtonReturn {
-              plugin.normalizePath()
-              plugin.enabled = true
-              JavascriptPlugin.plugins.append(plugin)
-              PlayerCore.playerCores.forEach { $0.reloadPlugin(plugin) }
-              self.tableView.reloadData()
-            } else {
-              plugin.remove()
-            }
+        self.showPermissionsSheet(forPlugin: plugin, previousPlugin: nil) { ok in
+          if ok {
+            plugin.normalizePath()
+            plugin.enabled = true
+            JavascriptPlugin.plugins.append(plugin)
+            PlayerCore.reloadPluginForAll(plugin)
+            self.tableView.reloadData()
+          } else {
+            plugin.remove()
           }
         }
       } catch let error {
-        let message: String
-        if let pluginError = error as? JavascriptPlugin.PluginError {
-          switch pluginError {
-          case .invalidURL:
-            message = NSLocalizedString("plugin.install-error.invalid-url", comment: "")
-          case .cannotDownload(_, let err):
-            let str = NSLocalizedString("plugin.install-error.cannot-download", comment: "")
-            message = String(format: str, err)
-          case .cannotLoadPlugin:
-            message = NSLocalizedString("plugin.install-error.cannot-load", comment: "")
-          }
-        } else {
-          message = error.localizedDescription
-        }
-        DispatchQueue.main.sync {
-          Utility.showAlert("plugin.install-error", arguments: [message], sheetWindow: self.view.window!)
-        }
+        self.handleInstallationError(error)
       }
     }
   }
@@ -355,24 +405,62 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
     NSWorkspace.shared.activateFileViewerSelecting([currentPlugin.root])
   }
 
-  private func clearPluginPage() {
-    pluginInfoContentView.isHidden = true
+  @IBAction func checkForPluginUpdate(_ sender: Any) {
+    guard let currentPlugin = currentPlugin else { return }
+    pluginCheckUpdatesProgressIndicator.startAnimation(self)
+
+    currentPlugin.checkForUpdates() { [unowned self] version in
+      DispatchQueue.main.async {
+        defer { self.pluginCheckUpdatesProgressIndicator.stopAnimation(self) }
+
+        guard let version = version else {
+          Utility.showAlert("plugin_no_update", style: .informational, sheetWindow: self.view.window!)
+          return
+        }
+        Utility.quickAskPanel("plugin_update_found", titleArgs: [currentPlugin.name], messageArgs: [version, currentPlugin.version], sheetWindow: self.view.window!) { response in
+          guard response == .alertFirstButtonReturn else { return }
+          DispatchQueue.main.async {
+            self.updatePlugin()
+          }
+        }
+      }
+    }
   }
 
-  private func loadPluginPage(_ plugin: JavascriptPlugin) {
-    tabView.selectTabViewItem(at: 0)
-    segmentControl.selectedSegment = 0
-    pluginInfoContentView.isHidden = false
-    pluginNameLabel.stringValue = plugin.name
-    pluginAuthorLabel.stringValue = plugin.authorName
-    pluginVersionLabel.stringValue = plugin.version
-    pluginDescLabel.stringValue = plugin.desc ?? "No Description"
-    pluginIdentifierLabel.stringValue = plugin.identifier
-    pluginWebsiteEmailStackView.setVisibilityPriority(plugin.authorEmail == nil ? .notVisible : .mustHold, for: pluginEmailBtn)
-    pluginWebsiteEmailStackView.setVisibilityPriority(plugin.authorURL == nil ? .notVisible : .mustHold, for: pluginWebsiteBtn)
-    pluginPermissionsView.setPlugin(plugin)
+  private func updatePlugin() {
+    guard let currentPlugin = currentPlugin else { return }
+    pluginCheckUpdatesProgressIndicator.startAnimation(self)
+    pluginCheckUpdatesBtn.isEnabled = false
+    pluginCheckUpdatesBtn.title = NSLocalizedString("plugin.updating", comment: "")
+    
+    defer {
+      self.pluginCheckUpdatesProgressIndicator.stopAnimation(self)
+      pluginCheckUpdatesBtn.title = NSLocalizedString("plugin.check_for_updates", comment: "")
+      pluginCheckUpdatesBtn.isEnabled = true
+    }
 
-    currentPlugin = plugin
+    do {
+      guard let newPlugin = try currentPlugin.updated() else { return }
+      let install = {
+        if let pos = currentPlugin.remove() {
+          JavascriptPlugin.plugins.insert(newPlugin, at: pos)
+        }
+        newPlugin.normalizePath()
+        PlayerCore.reloadPluginForAll(newPlugin)
+        self.currentPlugin = newPlugin
+        self.tableView.reloadData()
+        self.loadPluginPage(newPlugin)
+      }
+      if newPlugin.permissions.subtracting(currentPlugin.permissions).isEmpty {
+        install()
+      } else {
+        showPermissionsSheet(forPlugin: newPlugin, previousPlugin: currentPlugin) { ok in
+          if ok { install() }
+        }
+      }
+    } catch let error {
+      handleInstallationError(error)
+    }
   }
 }
 

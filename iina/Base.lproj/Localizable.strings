@@ -239,6 +239,11 @@
 "alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
 "alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
 "alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+"alert.plugin_no_update" = "No update found.";
+"alert.plugin_update_found.title" = "Update found for %@";
+"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
+"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
+"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
 
 "playlist.total_length" = "%@ in total";
 "playlist.total_length_with_selected" = "%@ of %@ selected";
@@ -330,7 +335,10 @@
 "plugin.install" = "Install";
 "plugin.installed" = "Installed";
 "plugin.not-installed" = "Not Installed";
+"plugin.local" = "Installed locally";
 "plugin.install-error" = "Error occured during the installation: %@";
 "plugin.install-error.invalid-url" = "The URL is invalid.";
 "plugin.install-error.cannot-download" = "Failed to download the plugin.\n\nOutput:%@\n";
 "plugin.install-error.cannot-load" = "IINA cannot load this plugin. It might be in the wrong format.";
+"plugin.check_for_updates" = "Check for Updates";
+"plugin.updating" = "Downloading update…";

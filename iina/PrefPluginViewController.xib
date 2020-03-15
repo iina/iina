@@ -14,6 +14,7 @@
                 <outlet property="newPluginSourceTextField" destination="rlH-wZ-RZG" id="6K9-kC-ddm"/>
                 <outlet property="pluginAuthorLabel" destination="O3b-AR-B6u" id="Xjq-Oh-UKv"/>
                 <outlet property="pluginCheckUpdatesBtn" destination="NMr-Wb-Q2z" id="yBq-W8-xUK"/>
+                <outlet property="pluginCheckUpdatesProgressIndicator" destination="uxT-B5-933" id="HTy-6x-alE"/>
                 <outlet property="pluginDescLabel" destination="8U3-yT-6HJ" id="Oz3-0r-aLr"/>
                 <outlet property="pluginEmailBtn" destination="xpC-Zo-zZZ" id="3Eb-GX-v8O"/>
                 <outlet property="pluginHelpContainerView" destination="buF-t6-osp" id="421-BI-nMf"/>
@@ -294,7 +295,7 @@
                                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
                                                                         </textField>
-                                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Czm-NJ-aCG">
+                                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="Czm-NJ-aCG">
                                                                             <rect key="frame" x="10" y="4" width="37" height="16"/>
                                                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="9vb-2Y-s7Q">
                                                                                 <font key="font" metaFont="system"/>
@@ -303,21 +304,29 @@
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NMr-Wb-Q2z">
-                                                                            <rect key="frame" x="389" y="1" width="111" height="19"/>
-                                                                            <buttonCell key="cell" type="roundRect" title="Check for updates" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MyY-5s-tIm">
+                                                                            <rect key="frame" x="391" y="1" width="113" height="19"/>
+                                                                            <buttonCell key="cell" type="roundRect" title="Check for Updates" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MyY-5s-tIm">
                                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                 <font key="font" metaFont="menu" size="11"/>
                                                                             </buttonCell>
+                                                                            <connections>
+                                                                                <action selector="checkForPluginUpdate:" target="-2" id="qwk-pw-uxk"/>
+                                                                            </connections>
                                                                         </button>
+                                                                        <progressIndicator wantsLayer="YES" maxValue="100" displayedWhenStopped="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="uxT-B5-933">
+                                                                            <rect key="frame" x="367" y="3" width="16" height="16"/>
+                                                                        </progressIndicator>
                                                                     </subviews>
                                                                     <constraints>
                                                                         <constraint firstItem="Pnd-pE-Bkr" firstAttribute="leading" secondItem="4MR-2X-Tp6" secondAttribute="leading" constant="12" id="5fZ-BM-7Dy"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="NMr-Wb-Q2z" secondAttribute="trailing" constant="12" id="9hq-sP-wva"/>
+                                                                        <constraint firstItem="uxT-B5-933" firstAttribute="centerY" secondItem="NMr-Wb-Q2z" secondAttribute="centerY" id="6aR-Ns-Xpr"/>
                                                                         <constraint firstAttribute="bottom" secondItem="Czm-NJ-aCG" secondAttribute="bottom" constant="4" id="FxZ-id-R1u"/>
                                                                         <constraint firstItem="Czm-NJ-aCG" firstAttribute="top" secondItem="Pnd-pE-Bkr" secondAttribute="bottom" constant="2" id="Huy-y3-Ofm"/>
                                                                         <constraint firstItem="Czm-NJ-aCG" firstAttribute="baseline" secondItem="NMr-Wb-Q2z" secondAttribute="firstBaseline" id="Qi9-8Q-S1Q"/>
-                                                                        <constraint firstItem="NMr-Wb-Q2z" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Czm-NJ-aCG" secondAttribute="trailing" constant="8" id="Yam-pF-M4S"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="NMr-Wb-Q2z" secondAttribute="trailing" constant="8" id="Ufu-DZ-hde"/>
                                                                         <constraint firstItem="Czm-NJ-aCG" firstAttribute="leading" secondItem="4MR-2X-Tp6" secondAttribute="leading" constant="12" id="bYP-Zr-wBw"/>
+                                                                        <constraint firstItem="uxT-B5-933" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Czm-NJ-aCG" secondAttribute="trailing" constant="8" id="oel-53-Xol"/>
+                                                                        <constraint firstItem="NMr-Wb-Q2z" firstAttribute="leading" secondItem="uxT-B5-933" secondAttribute="trailing" constant="8" id="q73-rW-IaS"/>
                                                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Pnd-pE-Bkr" secondAttribute="trailing" constant="12" id="x8G-Ml-fQa"/>
                                                                         <constraint firstItem="Pnd-pE-Bkr" firstAttribute="top" secondItem="4MR-2X-Tp6" secondAttribute="top" constant="4" id="zd2-LH-Ex5"/>
                                                                     </constraints>
@@ -328,7 +337,7 @@
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uPX-dW-Wcu">
                                                                             <rect key="frame" x="10" y="110" width="29" height="14"/>
                                                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Help" id="Ka5-V3-g5E">
-                                                                                <font key="font" metaFont="menu" size="11"/>
+                                                                                <font key="font" metaFont="controlContent" size="11"/>
                                                                                 <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
@@ -441,7 +450,7 @@
                                         <rect key="frame" x="361" y="368" width="98" height="17"/>
                                         <buttonCell key="cell" type="roundRect" title="Reveal in Finder" bezelStyle="roundedRect" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="drh-6w-3z1">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="menu" size="11"/>
+                                            <font key="font" metaFont="controlContent" size="11"/>
                                         </buttonCell>
                                         <connections>
                                             <action selector="revealPlugin:" target="-2" id="qhh-x5-Xcs"/>
@@ -597,7 +606,7 @@
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="sOM-Pv-QX2">
                         <rect key="frame" x="18" y="225" width="444" height="28"/>
                         <textFieldCell key="cell" selectable="YES" id="Nmf-79-hFX">
-                            <font key="font" metaFont="menu" size="11"/>
+                            <font key="font" metaFont="controlContent" size="11"/>
                             <string key="title">Please enter the full URL of the GitHub repository or a string in the "user/repo" format. You can also choose one from the default plugins list.</string>
                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -655,7 +664,7 @@ DQ
                                     <tableColumns>
                                         <tableColumn identifier="URL" width="331" minWidth="40" maxWidth="1000" id="V2A-RK-hOY">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                <font key="font" metaFont="menu" size="11"/>
+                                                <font key="font" metaFont="controlContent" size="11"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                             </tableHeaderCell>
@@ -692,7 +701,7 @@ DQ
                                         </tableColumn>
                                         <tableColumn identifier="Installed" width="99" minWidth="40" maxWidth="1000" id="94B-li-kN0">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                <font key="font" metaFont="menu" size="11"/>
+                                                <font key="font" metaFont="controlContent" size="11"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                             </tableHeaderCell>

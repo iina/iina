@@ -28,6 +28,7 @@ class JavascriptPluginInstance {
       "menu": JavascriptAPIMenu(context: ctx, pluginInstance: self),
       "overlay": JavascriptAPIOverlay(context: ctx, pluginInstance: self),
       "playlist": JavascriptAPIPlaylist(context: ctx, pluginInstance: self),
+      "subtitle": JavascriptAPISubtitle(context: ctx, pluginInstance: self),
       "utils": JavascriptAPIUtils(context: ctx, pluginInstance: self),
       "preferences": JavascriptAPIPreferences(context: ctx, pluginInstance: self)
     ]

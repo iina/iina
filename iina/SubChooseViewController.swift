@@ -24,11 +24,11 @@ class SubChooseViewController: NSViewController {
 
   private var cellIdentifier: NSUserInterfaceItemIdentifier
 
-  init(source: OnlineSubtitle.Source) {
+  init(source: String) {
     switch source {
-    case .assrt:
+    case OnlineSubtitle.Providers.assrt.id:
       self.cellIdentifier = NSUserInterfaceItemIdentifier(rawValue: "AssrtCell")
-    case .openSub:
+    case OnlineSubtitle.Providers.openSub.id:
       self.cellIdentifier = NSUserInterfaceItemIdentifier(rawValue: "OpenSubCell")
     default:
       fatalError("Unsupported subtitle source.")

@@ -11,32 +11,26 @@ import PromiseKit
 
 fileprivate let subsystem = Logger.Subsystem(rawValue: "onlinesub")
 
+fileprivate protocol ProviderProtocol {
+  associatedtype F: OnlineSubtitleFetcher
+  var id: String { get }
+  var name: String { get }
+  var origin: OnlineSubtitle.Origin { get }
+  func getFetcher() -> F
+  func fetchSubtitles(url: URL, player: PlayerCore) -> Promise<[URL]>
+}
+
+protocol OnlineSubtitleFetcher {
+  associatedtype Subtitle: OnlineSubtitle
+  func fetch(from url: URL) -> Promise<[Subtitle]>
+}
+
 class OnlineSubtitle: NSObject {
-
-  typealias SubCallback = ([OnlineSubtitle]) -> Void
-
-  enum DownloadResult {
-    case ok([URL])
-    case failed
-  }
-
-  typealias DownloadCallback = (DownloadResult) -> Void
-
-  enum Source: Int {
-    case shooter = 0
-    case openSub
-    case assrt
-
-    var name: String {
-      switch self {
-      case .shooter:
-        return "shooter.cn"
-      case .openSub:
-        return "opensubtitles.org"
-      case .assrt:
-        return "assrt.net"
-      }
-    }
+  enum CommonError: Error {
+    case noResult
+    case canceled
+    case networkError
+    case fsError
   }
 
   /** Prepend a number before file name to avoid overwriting. */
@@ -46,124 +40,106 @@ class OnlineSubtitle: NSObject {
     self.index = index
   }
 
-  static func getSubtitle(forFile url: URL, from userSource: Source? = nil, playerCore: PlayerCore, callback: @escaping SubCallback) {
+  func download() -> Promise<[URL]> { return .value([]) }
 
-    var source: Source
+  class DefaultFetcher {
+    required init() {}
+  }
 
-    if userSource == nil {
-      source = Source(rawValue: Preference.integer(for: .onlineSubSource)) ?? .openSub
-    } else {
-      source = userSource!
+  class Providers {
+    static let shooter = Provider<Shooter.Fetcher>(id: ":shooter", name: "shooter.cn")
+    static let openSub = Provider<OpenSub.Fetcher>(id: ":opensubtitles", name: "opensubtitles.org")
+    static let assrt = Provider<Assrt.Fetcher>(id: ":assrt", name: "assrt.net")
+
+    static var fromPlugin: [String: Provider<JSPluginSub.Fetcher>] = [:]
+    static func registerFromPlugin(_ pluginID: String, id: String, name: String) {
+      fromPlugin["plugin:\(pluginID):\(id)"] = Provider(id: id, name: name, origin: .plugin(id: pluginID))
+    }
+  }
+
+  enum Origin {
+    case legacy
+    case plugin(id: String)
+  }
+
+  class Provider<F: OnlineSubtitleFetcher>: ProviderProtocol where F: DefaultFetcher {
+    let id: String
+    let name: String
+    let origin: Origin
+
+    init(id: String, name: String, origin: Origin = .legacy) {
+      self.id = id
+      self.name = name
+      self.origin = origin
     }
 
-    Logger.log("Search subtitle from \(source.name)...", subsystem: subsystem)
+    func getFetcher() -> F {
+      return F()
+    }
 
-    playerCore.sendOSD(.startFindingSub(source.name), autoHide: false)
-
-    switch source {
-    case .shooter:
-      // shooter
-      let subSupport = ShooterSupport()
-      subSupport.hash(url)
-      .then { info in
-        subSupport.request(info)
-      }.done { subs in
-        callback(subs)
-      }.ensure {
-        playerCore.hideOSD()
-      }.catch { error in
-        let osdMessage: OSDMessage
-        switch error {
-        case ShooterSupport.ShooterError.cannotReadFile,
-             ShooterSupport.ShooterError.fileTooSmall:
-          osdMessage = .fileError
-        case ShooterSupport.ShooterError.networkError:
-          osdMessage = .networkError
-        default:
-          osdMessage = .networkError
-          playerCore.sendOSD(osdMessage)
-          playerCore.isSearchingOnlineSubtitle = false
-        }
-      }
-    case .openSub:
-      // opensubtitles
-      let subSupport = OpenSubSupport.shared
-      // - language
-      let userLang = Preference.string(for: .subLang) ?? ""
-      if userLang.isEmpty {
-        Utility.showAlert("sub_lang_not_set")
-        subSupport.language = "eng"
-      } else {
-        subSupport.language = userLang
-      }
-      // - request
-      subSupport.login()
-      .then { _ in
-        subSupport.hash(url)
-      }.then { info in
-        subSupport.request(info.dictionary)
-      }.recover { error -> Promise<[OpenSubSubtitle]> in
-        if case OpenSubSupport.OpenSubError.noResult = error {
-          return subSupport.requestByName(url)
+    func fetchSubtitles(url: URL, player: PlayerCore) -> Promise<[URL]> {
+      return getFetcher().fetch(from: url)
+      .get { subtitles in
+        if subtitles.isEmpty {
+          throw OnlineSubtitle.CommonError.noResult
         } else {
-          throw error
+          player.sendOSD(.foundSub(subtitles.count))
         }
-      }.then { subs in
-        subSupport.showSubSelectWindow(with: subs)
-      }.done { selectedSubs in
-        callback(selectedSubs)
-      }.catch { err in
-        let osdMessage: OSDMessage
-        switch err {
-        case OpenSubSupport.OpenSubError.cannotReadFile,
-             OpenSubSupport.OpenSubError.fileTooSmall:
-          osdMessage = .fileError
-        case OpenSubSupport.OpenSubError.loginFailed:
-          osdMessage = .cannotLogin
-        case OpenSubSupport.OpenSubError.userCanceled:
-          osdMessage = .canceled
-        case OpenSubSupport.OpenSubError.xmlRpcError:
-          osdMessage = .networkError
-        case OpenSubSupport.OpenSubError.noResult:
-          callback([])
-          return
-        default:
-          osdMessage = .networkError
-        }
-        playerCore.sendOSD(osdMessage)
-        playerCore.isSearchingOnlineSubtitle = false
-      }
-    case .assrt:
-      let subSupport = AssrtSupport.shared
-      firstly { () -> Promise<[AssrtSubtitle]> in
-        if !subSupport.checkToken() {
-          throw AssrtSupport.AssrtError.userCanceled
-        }
-        return subSupport.search(url.deletingPathExtension().lastPathComponent)
-      }.then { subs in
-        subSupport.showSubSelectWindow(with: subs)
-      }.then { selectedSubs -> Promise<[AssrtSubtitle]> in
-        return when(fulfilled: selectedSubs.map({ subSupport.loadDetails(forSub: $0) }))
-      }.done { loadedSubs in
-        callback(loadedSubs as [OnlineSubtitle])
-      }.ensure {
-        playerCore.hideOSD()
-      }.catch { err in
-        let osdMessage: OSDMessage
-        switch err {
-        case AssrtSupport.AssrtError.userCanceled:
-          osdMessage = .canceled
-        default:
-          Logger.log(err.localizedDescription, level: .error)
-          osdMessage = .networkError
-        }
-        playerCore.sendOSD(osdMessage)
-        playerCore.isSearchingOnlineSubtitle = false
+      }.thenFlatMap { subtitle in
+        subtitle.download()
       }
     }
   }
 
-  func download(callback: @escaping DownloadCallback) { }
+  static func search(forFile url: URL, player: PlayerCore, callback: @escaping ([URL]) -> Void) {
+    let val = Preference.string(for: .onlineSubProvider) ?? ""
+    switch val {
+    case Providers.openSub.id:
+      _search(using: Providers.openSub, forFile: url, player, callback)
+    case Providers.shooter.id:
+      _search(using: Providers.shooter, forFile: url, player, callback)
+    case Providers.assrt.id:
+      _search(using: Providers.assrt, forFile: url, player, callback)
+    default:
+      if let provider = Providers.fromPlugin[val] {
+        _search(using: provider, forFile: url, player, callback)
+      }
+      break
+    }
+  }
 
+  fileprivate static func _search<P: ProviderProtocol>(using provider: P, forFile url: URL, _ player: PlayerCore, _ callback: @escaping ([URL]) -> Void) {
+    Logger.log("Search subtitle from \(provider.name)...", subsystem: subsystem)
+    player.sendOSD(.startFindingSub(provider.name), autoHide: false)
+
+    provider.fetchSubtitles(url: url, player: player).done {
+      callback($0)
+    }.ensure {
+      player.hideOSD()
+    }.catch { err in
+      let osdMessage: OSDMessage
+      switch err {
+      case CommonError.noResult:
+        callback([])
+        return
+      case CommonError.networkError,
+           OpenSub.Error.xmlRpcError:
+        osdMessage = .networkError
+      case Shooter.Error.cannotReadFile,
+           Shooter.Error.fileTooSmall,
+           OpenSub.Error.cannotReadFile,
+           OpenSub.Error.fileTooSmall:
+        osdMessage = .fileError
+      case OpenSub.Error.loginFailed:
+        osdMessage = .cannotLogin
+      case CommonError.canceled:
+        osdMessage = .canceled
+      default:
+        Logger.log(err.localizedDescription, level: .error, subsystem: subsystem)
+        osdMessage = .networkError
+      }
+      player.sendOSD(osdMessage)
+      player.isSearchingOnlineSubtitle = false
+    }
+  }
 }
-

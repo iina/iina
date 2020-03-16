@@ -78,7 +78,7 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
         self.loginIndicator.isHidden = false
         self.loginIndicator.startAnimation(nil)
         firstly {
-          OpenSubSupport().login(testUser: username, password: password)
+          OpenSub.Fetcher.shared.login(testUser: username, password: password)
         }.map { _ in
           do {
             try KeychainAccess.write(username: username, password: password, forService: .openSubAccount)
@@ -96,9 +96,9 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
         }.catch { err in
           let message: String
           switch err {
-          case OpenSubSupport.OpenSubError.loginFailed(let reason):
+          case OpenSub.Error.loginFailed(let reason):
             message = reason
-          case OpenSubSupport.OpenSubError.xmlRpcError(let e):
+          case OpenSub.Error.xmlRpcError(let e):
             message = e.readableDescription
           default:
             message = "Unknown error"

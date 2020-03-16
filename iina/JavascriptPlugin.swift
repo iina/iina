@@ -137,7 +137,6 @@ class JavascriptPlugin: NSObject {
     let tempFolder = ".temp.\(UUID().uuidString)"
     let tempZipFile = "\(tempFolder).zip"
     let tempDecompressDir = "\(tempFolder)-1"
-    let tempURL = pluginsRoot.appendingPathComponent(tempFolder)
     let githubMasterURL = url.appendingPathComponent("archive/master.zip").absoluteString
 
     defer {
@@ -215,6 +214,16 @@ class JavascriptPlugin: NSObject {
     self.preferencesPage = jsonDict["preferencesPage"] as? String
     self.helpPage = jsonDict["helpPage"] as? String
     self.domainList = (jsonDict["allowedDomains"] as? [String]) ?? []
+
+    if let subProviders = jsonDict["subtitleProviders"] as? [[String: String]] {
+      for provider in subProviders {
+        guard let spID = provider["id"], let spName = provider["name"] else {
+          Logger.log("A subtitle provider declaration should have an id and a name.", level: .error)
+          return nil
+        }
+        OnlineSubtitle.Providers.registerFromPlugin(identifier, id: spID, name: spName)
+      }
+    }
 
     if let ghRepo = jsonDict["ghRepo"] as? String {
       if githubRepoRegex.matches(ghRepo) {

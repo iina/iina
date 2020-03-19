@@ -31,7 +31,7 @@
 "cmd.screenshot" = "截图";
 "cmd.screenshot-to-file" = "截图至文件";
 "cmd.loadfile" = "打开文件";
-"cmd.loadlist" = "加载播放列表";
+"cmd.loadlist" = "载入播放列表";
 "cmd.run" = "运行";
 
 "iina.flip" = "翻转";
@@ -46,8 +46,8 @@
 "iina.sub-panel" = "字幕设置面板";
 "iina.playlist-panel" = "播放列表面板";
 "iina.chapter-panel" = "章节面板";
-"iina.bigger-window" = "大一点";
-"iina.smaller-window" = "小一点";
+"iina.bigger-window" = "增大窗口";
+"iina.smaller-window" = "缩小窗口";
 "iina.fit-to-screen" = "适应屏幕";
 "iina.toggle-flip" = "切换 翻转";
 "iina.toggle-mirror" = "切换 镜像";

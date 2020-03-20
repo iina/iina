@@ -56,7 +56,7 @@ struct AppData {
   static let firefoxExtensionLink = "https://addons.mozilla.org/addon/open-in-iina-x"
 
   static let widthWhenNoVideo = 640
-  static let heightWhenNoVideo = 400
+  static let heightWhenNoVideo = 360
   static let sizeWhenNoVideo = NSSize(width: widthWhenNoVideo, height: heightWhenNoVideo)
 }
 

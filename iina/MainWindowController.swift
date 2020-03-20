@@ -104,7 +104,8 @@ class MainWindowController: PlayerWindowController {
   var pipStatus = PIPStatus.notInPIP
   var isInInteractiveMode: Bool = false
   var isVideoLoaded: Bool = false
-  
+
+  var shouldApplyInitialWindowSize = true
   var isWindowHidden: Bool = false
   var isWindowMiniaturizedDueToPip = false
 
@@ -958,17 +959,22 @@ class MainWindowController: PlayerWindowController {
   // MARK: - Window delegate: Open / Close
 
   func windowWillOpen() {
-    if loaded {
-      var screen = window!.screen!
-      if let rectString = UserDefaults.standard.value(forKey: "MainWindowLastPosition") as? String {
-        let rect = NSRectFromString(rectString)
-        if let lastScreen = NSScreen.screens.first(where: { NSPointInRect(rect.origin, $0.visibleFrame) }) {
-          screen = lastScreen
-        }
+    var screen = window!.screen!
+
+    if let rectString = UserDefaults.standard.value(forKey: "MainWindowLastPosition") as? String {
+      let rect = NSRectFromString(rectString)
+      if let lastScreen = NSScreen.screens.first(where: { NSPointInRect(rect.origin, $0.visibleFrame) }) {
+        screen = lastScreen
       }
-      window!.setFrame(AppData.sizeWhenNoVideo.centeredRect(in: screen.visibleFrame), display: true)
-      videoView.videoLayer.draw(forced: true)
     }
+
+    if shouldApplyInitialWindowSize, let wfg = windowFrameFromGeometry(newSize: AppData.sizeWhenNoVideo, screen: screen) {
+      window!.setFrame(wfg, display: true)
+    } else {
+      window!.setFrame(AppData.sizeWhenNoVideo.centeredRect(in: screen.visibleFrame), display: true)
+    }
+
+    videoView.videoLayer.draw(forced: true)
   }
 
   /** A method being called when window open. Pretend to be a window delegate. */
@@ -1004,6 +1010,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   func windowWillClose(_ notification: Notification) {
+    shouldApplyInitialWindowSize = true
     // Close PIP
     if pipStatus == .inPIP {
       if #available(macOS 10.12, *) {
@@ -1905,78 +1912,79 @@ class MainWindowController: PlayerWindowController {
   // MARK: - UI: Window size / aspect
 
   /** Calculate the window frame from a parsed struct of mpv's `geometry` option. */
-  func windowFrameFromGeometry(newSize: NSSize? = nil) -> NSRect? {
-    // set geometry. using `!` should be safe since it passed the regex.
-    if let geometry = cachedGeometry ?? player.getGeometry(), let screenFrame = window?.screen?.visibleFrame {
-      cachedGeometry = geometry
-      var winFrame = window!.frame
-      if let ns = newSize {
-        winFrame.size.width = ns.width
-        winFrame.size.height = ns.height
-      }
-      let winAspect = winFrame.size.aspect
-      var widthOrHeightIsSet = false
-      // w and h can't take effect at same time
-      if let strw = geometry.w, strw != "0" {
-        var w: CGFloat
-        if strw.hasSuffix("%") {
-          w = CGFloat(Double(String(strw.dropLast()))! * 0.01 * Double(screenFrame.width))
-        } else {
-          w = CGFloat(Int(strw)!)
-        }
-        w = max(minSize.width, w)
-        winFrame.size.width = w
-        winFrame.size.height = w / winAspect
-        widthOrHeightIsSet = true
-      } else if let strh = geometry.h, strh != "0" {
-        var h: CGFloat
-        if strh.hasSuffix("%") {
-          h = CGFloat(Double(String(strh.dropLast()))! * 0.01 * Double(screenFrame.height))
-        } else {
-          h = CGFloat(Int(strh)!)
-        }
-        h = max(minSize.height, h)
-        winFrame.size.height = h
-        winFrame.size.width = h * winAspect
-        widthOrHeightIsSet = true
-      }
-      // x, origin is window center
-      if let strx = geometry.x, let xSign = geometry.xSign {
-        let x: CGFloat
-        if strx.hasSuffix("%") {
-          x = CGFloat(Double(String(strx.dropLast()))! * 0.01 * Double(screenFrame.width)) - winFrame.width / 2
-        } else {
-          x = CGFloat(Int(strx)!)
-        }
-        winFrame.origin.x = (xSign == "+" ? x : screenFrame.width - x) + screenFrame.origin.x
-        // if xSign equals "-", need set right border as origin
-        if (xSign == "-") {
-          winFrame.origin.x -= winFrame.width
-        }
-      }
-      // y
-      if let stry = geometry.y, let ySign = geometry.ySign {
-        let y: CGFloat
-        if stry.hasSuffix("%") {
-          y = CGFloat(Double(String(stry.dropLast()))! * 0.01 * Double(screenFrame.height)) - winFrame.height / 2
-        } else {
-          y = CGFloat(Int(stry)!)
-        }
-        winFrame.origin.y = (ySign == "+" ? y : screenFrame.height - y) + screenFrame.origin.y
-        if (ySign == "-") {
-          winFrame.origin.y -= winFrame.height
-        }
-      }
-      // if x and y not specified
-      if geometry.x == nil && geometry.y == nil && widthOrHeightIsSet {
-        winFrame.origin.x = (screenFrame.width - winFrame.width) / 2
-        winFrame.origin.y = (screenFrame.height - winFrame.height) / 2
-      }
-      // return
-      return winFrame
-    } else {
-      return nil
+  func windowFrameFromGeometry(newSize: NSSize? = nil, screen: NSScreen? = nil) -> NSRect? {
+    guard let geometry = cachedGeometry ?? player.getGeometry(),
+      let screenFrame = (screen ?? window?.screen)?.visibleFrame else { return nil }
+
+    cachedGeometry = geometry
+    var winFrame = window!.frame
+    if let ns = newSize {
+      winFrame.size.width = ns.width
+      winFrame.size.height = ns.height
     }
+    let winAspect = winFrame.size.aspect
+    var widthOrHeightIsSet = false
+    // w and h can't take effect at same time
+    if let strw = geometry.w, strw != "0" {
+      var w: CGFloat
+      if strw.hasSuffix("%") {
+        w = CGFloat(Double(String(strw.dropLast()))! * 0.01 * Double(screenFrame.width))
+      } else {
+        w = CGFloat(Int(strw)!)
+      }
+      w = max(minSize.width, w)
+      winFrame.size.width = w
+      winFrame.size.height = w / winAspect
+      widthOrHeightIsSet = true
+    } else if let strh = geometry.h, strh != "0" {
+      var h: CGFloat
+      if strh.hasSuffix("%") {
+        h = CGFloat(Double(String(strh.dropLast()))! * 0.01 * Double(screenFrame.height))
+      } else {
+        h = CGFloat(Int(strh)!)
+      }
+      h = max(minSize.height, h)
+      winFrame.size.height = h
+      winFrame.size.width = h * winAspect
+      widthOrHeightIsSet = true
+    }
+    // x, origin is window center
+    if let strx = geometry.x, let xSign = geometry.xSign {
+      let x: CGFloat
+      if strx.hasSuffix("%") {
+        x = CGFloat(Double(String(strx.dropLast()))! * 0.01 * Double(screenFrame.width)) - winFrame.width / 2
+      } else {
+        x = CGFloat(Int(strx)!)
+      }
+      winFrame.origin.x = (xSign == "+" ? x : screenFrame.width - x) + screenFrame.origin.x
+      // if xSign equals "-", need set right border as origin
+      if (xSign == "-") {
+        winFrame.origin.x -= winFrame.width
+      }
+    }
+    // y
+    if let stry = geometry.y, let ySign = geometry.ySign {
+      let y: CGFloat
+      if stry.hasSuffix("%") {
+        y = CGFloat(Double(String(stry.dropLast()))! * 0.01 * Double(screenFrame.height)) - winFrame.height / 2
+      } else {
+        y = CGFloat(Int(stry)!)
+      }
+      winFrame.origin.y = (ySign == "+" ? y : screenFrame.height - y) + screenFrame.origin.y
+      if (ySign == "-") {
+        winFrame.origin.y -= winFrame.height
+      }
+    }
+    // if x and y not specified
+    if geometry.x == nil && geometry.y == nil && widthOrHeightIsSet {
+      winFrame.origin.x = (screenFrame.width - winFrame.width) / 2
+      winFrame.origin.y = (screenFrame.height - winFrame.height) / 2
+    }
+    // if the screen has offset
+    winFrame.origin.x += screenFrame.origin.x
+    winFrame.origin.y += screenFrame.origin.y
+
+    return winFrame
   }
 
   /** Set window size when info available, or video size changed. */
@@ -2041,8 +2049,8 @@ class MainWindowController: PlayerWindowController {
       // guard min size
       // must be slightly larger than the min size, or it will crash when the min size is auto saved as window frame size.
       videoSize = videoSize.satisfyMinSizeWithSameAspectRatio(minSize)
-      // check if have geometry set
-      if let wfg = windowFrameFromGeometry(newSize: videoSize) {
+      // check if have geometry set (initial window position/size)
+      if shouldApplyInitialWindowSize, let wfg = windowFrameFromGeometry(newSize: videoSize) {
         rect = wfg
       } else {
         if player.info.justStartedFile, resizeRatio < 0, let screenRect = screenRect {
@@ -2062,6 +2070,7 @@ class MainWindowController: PlayerWindowController {
     // maybe not a good position, consider putting these at playback-restart
     player.info.justOpenedFile = false
     player.info.justStartedFile = false
+    shouldApplyInitialWindowSize = false
 
     if fsState.isFullscreen {
       fsState.priorWindowedFrame = rect

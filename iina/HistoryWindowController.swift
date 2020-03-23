@@ -99,7 +99,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   override func keyDown(with event: NSEvent) {
     let commandKey = NSEvent.ModifierFlags.command
-    if [event.modifierFlags, NSEvent.ModifierFlags.deviceIndependentFlagsMask] == commandKey  {
+    if event.modifierFlags.intersection(.deviceIndependentFlagsMask) == commandKey  {
       switch event.charactersIgnoringModifiers! {
       case "f":
         window!.makeFirstResponder(historySearchField)

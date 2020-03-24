@@ -55,7 +55,15 @@ class CropSettingsViewController: CropBoxViewController {
 
   @IBAction func predefinedAspectValueAction(_ sender: NSSegmentedControl) {
     guard let str = sender.label(forSegment: sender.selectedSegment) else { return }
-    guard let aspect = Aspect(string: str) else { return }
+    adjustCropBoxView(ratio: str)
+  }
+
+  @IBAction func customCropEditFinishedAction(_ sender: NSTextField) {
+    adjustCropBoxView(ratio: sender.stringValue)
+  }
+
+  private func adjustCropBoxView(ratio: String) {
+    guard let aspect = Aspect(string: ratio) else { return }
 
     let actualSize = cropBoxView.actualSize
     let croppedSize = actualSize.crop(withAspect: aspect)

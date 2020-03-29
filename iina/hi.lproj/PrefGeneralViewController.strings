@@ -80,10 +80,10 @@
 "YLo-6E-tT7.title" = "सभी विंडो बंद होने के बाद छोड़ें";
 
 /* Class = "NSTextFieldCell"; title = "/path/to/screenshot/folder"; ObjectID = "YeH-hk-7NN"; */
-"YeH-hk-7NN.title" = "/path/to/screenshot/folder";
+"YeH-hk-7NN.title" = "/स्क्रीनशॉट/फोल्डर/का/पाथ";
 
 /* Class = "NSButtonCell"; title = "Receive beta updates"; ObjectID = "f0j-Dn-cxt"; */
-"f0j-Dn-cxt.title" = "बीटा अद्यतन प्राप्त करें";
+"f0j-Dn-cxt.title" = "बीटा अपडेट प्राप्त करें";
 
 /* Class = "NSButtonCell"; title = "Pause when left full screen"; ObjectID = "g2A-Kf-vct"; */
 "g2A-Kf-vct.title" = "पूर्ण स्क्रीन छोड़ जाने पर रोकें";
@@ -95,7 +95,7 @@
 "hWC-KJ-FuC.title" = "अद्यतन के लिए जाँच";
 
 /* Class = "NSButtonCell"; title = "Pause when machine goes to sleep"; ObjectID = "i4A-86-dGC"; */
-"i4A-86-dGC.title" = "जब मशीन सो जाए तो रुकें";
+"i4A-86-dGC.title" = "मशीन के सोने पर रुकें";
 
 /* Class = "NSButtonCell"; title = "Enable playback history"; ObjectID = "iGS-qN-f5q"; */
 "iGS-qN-f5q.title" = "प्लेबैक इतिहास सक्षम करें";
@@ -107,7 +107,7 @@
 "jeK-46-2BG.title" = "इतिहास:";
 
 /* Class = "NSButtonCell"; title = "Play when entered full screen"; ObjectID = "lOw-pu-Llm"; */
-"lOw-pu-Llm.title" = "जब पूर्ण स्क्रीन में प्रवेश किया है तब खेलें";
+"lOw-pu-Llm.title" = "फुल स्क्रीन करने पर शुरू करें";
 
 /* Class = "NSButtonCell"; title = "Include subtitles"; ObjectID = "lvA-Rc-Sh6"; */
 "lvA-Rc-Sh6.title" = "उपशीर्षक शामिल करें";

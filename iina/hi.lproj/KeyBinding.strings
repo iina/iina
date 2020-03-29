@@ -32,7 +32,7 @@
 "cmd.screenshot-to-file" = "फाइल करने के लिए स्क्रीनशॉट";
 "cmd.loadfile" = "फाइल लोड करो";
 "cmd.loadlist" = "प्लेलिस्ट लोड करें";
-"cmd.run" = "Run";
+"cmd.run" = "चलाएं";
 
 "iina.flip" = "फ्लिप";
 "iina.mirror" = "आईना";
@@ -68,14 +68,14 @@
 "backward" = "पिछड़ा";
 "seek-to" = "से";
 
-"relative" = "s";
-"absolute" = "s";
+"relative" = "सै.";
+"absolute" = "सै.";
 "absolute-percent" = "%";
 "relative-percent" = "%";
-"relative+exact" = "s (exact)";
-"relative-percent+exact" = "% (exact)";
-"absolute+keyframe" = "s (keyframe)";
-"absolute-percent+keyframe" = "% (keyframe)";
+"relative+exact" = "से. (सटीक)";
+"relative-percent+exact" = "% (सटीक)";
+"absolute+keyframe" = "से. (मुख्य-फ़्रेम)";
+"absolute-percent+keyframe" = "% (मुख्य-फ़्रेम)";
 
 "opt.pause" = "ठहरें";
 "opt.speed" = "गति";

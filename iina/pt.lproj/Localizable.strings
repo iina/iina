@@ -7,77 +7,77 @@
 */
 // Common
 
-"general.on" = "On";
-"general.off" = "Off";
-"general.login" = "Login";
-"general.logout" = "Logout";
+"general.on" = "Ligado";
+"general.off" = "Desligado";
+"general.login" = "Iniciar sessão";
+"general.logout" = "Terminar sessão";
 "general.ok" = "OK";
-"general.cancel" = "Cancel";
+"general.cancel" = "Cancelar";
 "general.username" = "Username";
-"general.password" = "Password";
+"general.password" = "Senha";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Buffering… %d%%";
+"main.buffering_indicator" = "Buffer de dados… %d%%";
 "main.opening_stream" = "Opening stream…";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Default";
-"quicksetting.item_none" = "None";
+"quicksetting.item_none" = "Nenhum";
 
 // OSDMessage.swift
-"osd.pause" = "Pause";
-"osd.resume" = "Resume";
+"osd.pause" = "Pausa";
+"osd.resume" = "Retomar";
 "osd.volume" = "Volume: %i";
 "osd.speed" = "Speed: %.2fx";
-"osd.aspect" = "Aspect Ratio: %@";
-"osd.crop" = "Crop: %@";
+"osd.aspect" = "Proporção: %@";
+"osd.crop" = "Cortar: %@";
 "osd.rotate" = "Rotate: %i°";
-"osd.deinterlace" = "Deinterlace: %@";
-"osd.audio_delay.nodelay" = "Audio Delay: No Delay";
-"osd.audio_delay.later" = "Audio Delay: %.2fs Later";
-"osd.audio_delay.earlier" = "Audio Delay: %.2fs Earlier";
+"osd.deinterlace" = "Desentrelaçar: %@";
+"osd.audio_delay.nodelay" = "Atraso de Áudio: Sem Atraso";
+"osd.audio_delay.later" = "Atraso de Áudio: %.2fs Depois";
+"osd.audio_delay.earlier" = "Atraso de Áudio: %.2fs Antes";
 "osd.sub_delay.nodelay" = "Subtitle Delay: No Delay";
 "osd.sub_delay.later" = "Subtitle Delay: %.2fs Later";
-"osd.sub_delay.earlier" = "Subtitle Delay: %.2fs Earlier";
-"osd.subtitle_pos" = "Subtitle Position: %.1f";
-"osd.mute" = "Mute";
-"osd.unmute" = "Unmute";
-"osd.screenshot" = "Screenshot Captured";
-"osd.abloop.a" = "AB-Loop: A";
-"osd.abloop.b" = "AB-Loop: B";
-"osd.abloop.clear" = "AB-Loop: Cleared";
-"osd.stop" = "Stop";
-"osd.chapter" = "Chapter: %@";
+"osd.sub_delay.earlier" = "Atraso da Legenda: %.2fs Antes";
+"osd.subtitle_pos" = "Posição da Legenda: %.1f";
+"osd.mute" = "Desativar Som";
+"osd.unmute" = "Ligar som";
+"osd.screenshot" = "Captura de ecrã efetuada";
+"osd.abloop.a" = "Loop-AB: A";
+"osd.abloop.b" = "Loop-AB: B";
+"osd.abloop.clear" = "Loop-AB: Limpo";
+"osd.stop" = "Parar";
+"osd.chapter" = "Capítulo: %@";
 "osd.subtitle_scale" = "Subtitle Scale: %.2fx";
-"osd.add_to_playlist" = "Added %i Files to Playlist";
+"osd.add_to_playlist" = "%i Ficheiros Adicionados à Playlist";
 "osd.clear_playlist" = "Cleared Playlist";
-"osd.video_eq.contrast" = "Contrast: %i";
+"osd.video_eq.contrast" = "Contraste: %i";
 "osd.video_eq.gamma" = "Gamma: %i";
-"osd.video_eq.hue" = "Hue: %i";
+"osd.video_eq.hue" = "Matiz: %i";
 "osd.video_eq.saturation" = "Saturation: %i";
-"osd.video_eq.brightness" = "Brightness: %i";
+"osd.video_eq.brightness" = "Luminosidade: %i";
 "osd.find_online_sub" = "Finding online subtitles…";
 "osd.find_online_sub.source" = "from";
 "osd.sub_not_found" = "No subtitles found";
-"osd.sub_found" = "%d subtitles found. Downloading…";
+"osd.sub_found" = "%d legendas encontradas. Transferindo…";
 "osd.sub_downloaded" = "Subtitle downloaded";
 "osd.sub_saved" = "Subtitle saved";
-"osd.network_error" = "Network error";
+"osd.network_error" = "Erro de Rede";
 "osd.file_error" = "Error reading file";
-"osd.cannot_login" = "Cannot login";
-"osd.canceled" = "Canceled";
-"osd.filter_added" = "Added Filter: %@";
+"osd.cannot_login" = "Impossível iniciar sessão";
+"osd.canceled" = "Cancelado";
+"osd.filter_added" = "Filtro Adicionado: %@";
 "osd.filter_removed" = "Removed Filter";
 
-"preference.title" = "Preferences";
+"preference.title" = "Preferências";
 "preference.general" = "General";
 "preference.ui" = "UI";
 "preference.video_audio" = "Video/Audio";
 "preference.subtitle" = "Subtitle";
-"preference.network" = "Network";
-"preference.control" = "Control";
+"preference.network" = "Rede";
+"preference.control" = "Controlo";
 "preference.keybindings" = "Key Bindings";
-"preference.advanced" = "Advanced";
+"preference.advanced" = "Avançado";
 "preference.utilities" = "Utilities";
 "preference.scripts" = "Scripts";
 "preference.not_logged_in" = "Not logged in";
@@ -88,14 +88,14 @@
 "preference.key_binding_hint_2" = "Double click a row at the right side to edit the corresponding key binding.";
 
 "menu.volume" = "Volume: %d";
-"menu.audio_delay" = "Audio Delay: %.2fs";
+"menu.audio_delay" = "Atraso de Áudio: %.2fs";
 "menu.sub_delay" = "Subtitle Delay: %.2fs";
 "menu.fullscreen" = "Enter Full Screen";
 "menu.exit_fullscreen" = "Exit Full Screen";
 "menu.pip" = "Enter Picture-in-Picture";
 "menu.exit_pip" = "Exit Picture-in-Picture";
-"menu.pause" = "Pause";
-"menu.resume" = "Resume";
+"menu.pause" = "Pausa";
+"menu.resume" = "Retomar";
 "menu.speed" = "Speed: %.2fx";
 
 "menu.seek_forward" = "Step Forward %.0fs";
@@ -104,7 +104,7 @@
 "menu.speed_down" = "Speed Down by %.1fx";
 "menu.volume_up" = "Volume + %.0f%%";
 "menu.volume_down" = "Volume - %.0f%%";
-"menu.audio_delay_up" = "Audio Delay + %.1fs";
+"menu.audio_delay_up" = "Atraso do áudio + %.1fs";
 "menu.audio_delay_down" = "Audio Delay - %.1fs";
 "menu.sub_delay_up" = "Subtitle Delay + %.1fs";
 "menu.sub_delay_down" = "Subtitle Delay - %.1fs";
@@ -116,14 +116,14 @@
 
 // Alerts
 "alert.beta_channel.title" = "Receive Updates for Beta Versions";
-"alert.beta_channel.message" = "IINA v1.0 is coming! Would you like to help us to test out beta versions? \n\nYou can change this behavior at anytime in Preferences - General.";
+"alert.beta_channel.message" = "O IINA v1.0 está a chegar! Gostaria de nos ajudar a testar as versões beta? \n\nPode mudar este comportamento a qualquer momento em Preferências - Geral.";
 
-"alert.title_error" = "Error";
+"alert.title_error" = "Erro";
 "alert.title_warning" = "Warning";
-"alert.title_info" = "Information";
+"alert.title_info" = "Informação";
 
 "alert.fatal_error" = "Fatal error: %@ \nThe application will exit now.";
-"alert.mpv_error" = "Internal error %@ (%@) when setting option %@.";
+"alert.mpv_error" = "Erro interno %@ (%@) ao definir a opção %@.";
 "alert.sleep" = "Cannot prevent display sleep!";
 
 "alert.unsupported_audio" = "Unsupported external audio file.";
@@ -135,7 +135,7 @@
 "alert.error_finding_file" = "Cannot find %@ file!";
 "alert.error_loading_script" = "Cannot load script %@!";
 "alert.error_saving_file" = "Error occured when saving %@: %@";
-"alert.error_deleting_file" = "Cannot delete the file.";
+"alert.error_deleting_file" = "Não foi possível apagar o ficheiro.";
 
 "alert.config.new.title" = "New Input Configuration";
 "alert.config.new.message" = "Please enter a name for the new configuration.";
@@ -149,7 +149,7 @@
 "alert.config.cannot_write" = "Cannot write to config file!";
 
 "alert.filter.incorrect" = "Error occured when setting filters. Please check your parameter format.";
-"alert.add_filter.title" = "New Filter";
+"alert.add_filter.title" = "Novo Filtro";
 "alert.add_filter.message" = "Please enter a filter string in format of mpv's vf or af command.";
 
 "alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
@@ -164,33 +164,33 @@
 "alert.sub.no_selected" = "Please select a downloaded subtitle first.";
 "alert.sub_lang_not_set" = "Please set preferred subtitle languages in preferences before using OpenSubtitles. English(eng) will be used this time.";
 "alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
-"alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
+"alert.sub.cannot_login" = "Impossível iniciar sessão. Por favor verifique o seu nome de utilizador, palavra-passe e estado da rede.\n\n%@";
 
 "alert.set_default.title" = "Setting IINA as Default App";
 "alert.set_default.message" = "IINA will be set as the default app for all file types it supports.";
 "alert.set_default.success" = "Finished with %d success and %d failed.";
 
-"alert.add_watch.title" = "Add Watch Property";
+"alert.add_watch.title" = "Adicionar Propriedade de Relógio";
 "alert.add_watch.message" = "Please enter a valid mpv property name.";
 
-"alert.jump_to.title" = "Jump to";
+"alert.jump_to.title" = "Saltar para";
 "alert.jump_to.message" = "Please enter the time you want to jump to. Example: 20:35";
 
 "alert.opensub.login.title" = "OpenSubtitles Login";
 "alert.opensub.login.message" = "Please enter your username and password";
 
-"alert.open_url.title" = "Open URL";
+"alert.open_url.title" = "Abrir URL";
 "alert.open_url.message" = "Please enter the URL:";
 "alert.choose_media_file.title" = "Choose Media Files";
 
-"alert.add_url.title" = "Add URL";
+"alert.add_url.title" = "Adicionar URL";
 "alert.add_url.message" = "Please enter the URL:";
 
 "alert.delete_history.title" = "Delete Playback History";
 "alert.delete_history.message" = "Are you sure to delete selected entries?";
 
 "alert.filter_hwdec.message" = "You are about to apply a video fliter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
-"alert.filter_hwdec.abort" = "Abort";
+"alert.filter_hwdec.abort" = "Abortar";
 "alert.filter_hwdec.turn_off" = "Turn off hardware decoding";
 "alert.filter_hwdec.use_copy" = "Switch to Auto(Copy)";
 
@@ -216,42 +216,42 @@
 "alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
 "alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
 
-"playlist.total_length" = "%@ in total";
-"playlist.total_length_with_selected" = "%@ of %@ selected";
-"pl_menu.title_multi" = "%d Items";
-"pl_menu.play_next" = "Play Next";
+"playlist.total_length" = "%@ no total";
+"playlist.total_length_with_selected" = "%@ de %@ selecionado";
+"pl_menu.title_multi" = "%d itens";
+"pl_menu.play_next" = "Reproduzir Seguinte";
 "pl_menu.play_in_new_window" = "Play in New Window";
 "pl_menu.remove" = "Remove";
 "pl_menu.remove_multi" = "Remove Selected";
-"pl_menu.delete" = "Move to Trash";
-"pl_menu.delete_multi" = "Move Selected Files to Trash";
-"pl_menu.delete_after_play" = "Move to Trash After Playback";
-"pl_menu.delete_after_play_multi" = "Move Selected Files to Trash After Playback";
+"pl_menu.delete" = "Mover para o Lixo";
+"pl_menu.delete_multi" = "Mover Ficheiros Selecionados para o Lixo";
+"pl_menu.delete_after_play" = "Mover para o Lixo depois da Reprodução";
+"pl_menu.delete_after_play_multi" = "Mover Ficheiros Selecionados para o Lixo depois da Reprodução";
 "pl_menu.reveal_in_finder" = "Reveal in Finder";
-"pl_menu.add_file" = "Add File…";
-"pl_menu.add_url" = "Add URL…";
+"pl_menu.add_file" = "Adicionar Ficheiro…";
+"pl_menu.add_url" = "Adicionar URL…";
 "pl_menu.clear_playlist" = "Clear Playlist";
-"pl_menu.matched_sub" = "Matched %d Subtitle(s)";
-"pl_menu.add_sub" = "Add Subtitle…";
+"pl_menu.matched_sub" = "%d Legenda(s) correspondentes";
+"pl_menu.add_sub" = "Adicionar Legenda…";
 "pl_menu.wrong_sub" = "Wrong Subtitle!";
-"pl_menu.browser" = "Open in Browser";
-"pl_menu.copy_url" = "Copy URL";
-"pl_menu.copy_url_multi" = "Copy URLs";
+"pl_menu.browser" = "Abrir no Navegador";
+"pl_menu.copy_url" = "Copiar URL";
+"pl_menu.copy_url_multi" = "Copiar URLs";
 
 "keymapping.title" = "Key Mapping";
 "keymapping.message" = "Press any key to record.";
 
 "filter.video_filters" = "Video Filters";
-"filter.audio_filters" = "Audio Filters";
+"filter.audio_filters" = "Filtros de Áudio";
 
 "hwdec.no" = "Disable hardware decoding.";
 "hwdec.auto" = "Enable hardware decoding. However, most of the video filters won't work properly.";
 "hwdec.auto-copy" = "Enable hardware decoding. It will consume double the memory but work with video filters.";
 
-"subencoding.auto" = "Auto detect";
+"subencoding.auto" = "Detectar automaticamente";
 
 "osc_toolbar.settings" = "Quick Settings";
-"osc_toolbar.playlist" = "Playlist and chapters";
+"osc_toolbar.playlist" = "Lista de reprodução e capítulos";
 "osc_toolbar.pip" = "Toggle Picture-in-Picture";
 "osc_toolbar.full_screen" = "Toggle full screen";
 "osc_toolbar.music_mode" = "Enter music mode";
@@ -259,17 +259,17 @@
 
 // Touch bar
 
-"touchbar.ahead_15" = "15sec Ahead";
-"touchbar.ahead_30" = "30sec Ahead";
-"touchbar.back_15" = "15sec Back";
-"touchbar.back_30" = "30sec Back";
+"touchbar.ahead_15" = "15s Depois";
+"touchbar.ahead_30" = "30s Depois";
+"touchbar.back_15" = "15s Antes";
+"touchbar.back_30" = "30s Antes";
 "touchbar.next_video" = "Next Video";
 "touchbar.prev_video" = "Previous Video";
 "touchbar.increase_volume" = "Volume +";
 "touchbar.decrease_volume" = "Volume -";
 "touchbar.rewind" = "Rewind";
 "touchbar.fast_forward" = "Fast Forward";
-"touchbar.play_pause" = "Play / Pause";
+"touchbar.play_pause" = "Reproduzir / Pausa";
 "touchbar.seek" = "Seek";
 "touchbar.time" = "Time Position";
 "touchbar.remainingTime" = "Remaining Time";

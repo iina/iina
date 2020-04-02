@@ -6,21 +6,21 @@
   Copyright © 2017 lhc. All rights reserved.
 */
 
-"cmd.ignore" = "Ignore";
+"cmd.ignore" = "Ignorar";
 "cmd.seek" = "Seek";
 "cmd.revert-seek" = "Revert seek";
 "cmd.set" = "Set";
 "cmd.cycle" = "Cycle";
 "cmd.cycle-values" = "Cycle in";
-"cmd.add" = "Change";
-"cmd.multiply" = "Multiply";
+"cmd.add" = "Alterar";
+"cmd.multiply" = "Multiplicar";
 "cmd.frame-step" = "Next frame";
 "cmd.frame-back-step" = "Previous frame";
-"cmd.ab-loop" = "A-B loop";
+"cmd.ab-loop" = "Loop A-B";
 "cmd.sub-seek" = "Subtitle seek";
 "cmd.playlist-next" = "Next media";
 "cmd.playlist-prev" = "Previous media";
-"cmd.playlist-move" = "Move playlist item";
+"cmd.playlist-move" = "Mover item da playlist";
 "cmd.playlist-clear" = "Clear playlist";
 "cmd.playlist-remove" = "Remove current";
 "cmd.playlist-shuffle" = "Shuffle";
@@ -32,84 +32,84 @@
 "cmd.screenshot-to-file" = "Screenshot to file";
 "cmd.loadfile" = "Load file";
 "cmd.loadlist" = "Load playlist";
-"cmd.run" = "Run";
+"cmd.run" = "Executar";
 
-"iina.flip" = "Flip";
-"iina.mirror" = "Mirror";
+"iina.flip" = "Virar";
+"iina.mirror" = "Espelho";
 
-"iina.toggle-pip" = "Toggle Picture-in-Picture";
-"iina.toggle-music-mode" = "Toggle Music Mode";
-"iina.open-file" = "Open file";
-"iina.open-url" = "Open URL";
-"iina.video-panel" = "Video panel";
-"iina.audio-panel" = "Audio panel";
-"iina.sub-panel" = "Subtitle panel";
-"iina.playlist-panel" = "Playlist panel";
-"iina.chapter-panel" = "Chapter panel";
-"iina.bigger-window" = "Bigger Window";
-"iina.smaller-window" = "Smaller Window";
-"iina.fit-to-screen" = "Fit to Screen";
-"iina.toggle-flip" = "Toggle flip";
-"iina.toggle-mirror" = "Toggle mirror";
-"iina.save-playlist" = "Save current playlist";
-"iina.delete-current-file" = "Delete current file";
+"iina.toggle-pip" = "Ativar Picture in Picture";
+"iina.toggle-music-mode" = "Ativar Modo Música";
+"iina.open-file" = "Abrir ficheiro";
+"iina.open-url" = "Abrir URL";
+"iina.video-panel" = "Painel de vídeo";
+"iina.audio-panel" = "Painel de áudio";
+"iina.sub-panel" = "Painel de legendas";
+"iina.playlist-panel" = "Painel da Lista de Reprodução";
+"iina.chapter-panel" = "Painel de capítulos";
+"iina.bigger-window" = "Janela maior";
+"iina.smaller-window" = "Janela menor";
+"iina.fit-to-screen" = "Ajustar ao ecrã";
+"iina.toggle-flip" = "Ativar virar";
+"iina.toggle-mirror" = "Ativar espelho";
+"iina.save-playlist" = "Guardar playlist atual";
+"iina.delete-current-file" = "Apagar ficheiro atual";
 "iina.delete-current-file-hard" = "Delete current file directly without moving to trash";
-"iina.find-online-subs" = "Find online subtitles";
-"iina.save-downloaded-sub" = "Save downloaded subtitle";
+"iina.find-online-subs" = "Encontrar legendas online";
+"iina.save-downloaded-sub" = "Guardar legenda descarregada";
 
-"yes" = "Yes";
-"no" = "No";
-"to" = "to";
-"by" = "by";
-"in" = "in";
-"add" = "increase";
-"minus" = "decrease";
-"forward" = "forward";
-"backward" = "backward";
-"seek-to" = "to";
+"yes" = "Sim";
+"no" = "Não";
+"to" = "para";
+"by" = "por";
+"in" = "em";
+"add" = "aumentar";
+"minus" = "diminuir";
+"forward" = "avançar";
+"backward" = "recuar";
+"seek-to" = "para";
 
 "relative" = "s";
 "absolute" = "s";
 "absolute-percent" = "%";
 "relative-percent" = "%";
-"relative+exact" = "s (exact)";
-"relative-percent+exact" = "% (exact)";
+"relative+exact" = "s (exato)";
+"relative-percent+exact" = "% (exato)";
 "absolute+keyframe" = "s (keyframe)";
 "absolute-percent+keyframe" = "% (keyframe)";
 
-"opt.pause" = "Pause";
-"opt.speed" = "Speed";
+"opt.pause" = "Pausa";
+"opt.speed" = "Velocidade";
 
-"opt.window-scale" = "Window scale";
+"opt.window-scale" = "Escala da janela";
 
-"opt.video" = "Video track";
-"opt.video-aspect" = "Video aspect";
-"opt.contrast" = "Contrast";
-"opt.brightness" = "Brightness";
+"opt.video" = "Faixa de vídeo";
+"opt.video-aspect" = "Proporção do vídeo";
+"opt.contrast" = "Contraste";
+"opt.brightness" = "Luminosidade";
 "opt.gamma" = "Gamma";
-"opt.saturation" = "Saturation";
-"opt.deinterlace" = "Deinterlace";
+"opt.saturation" = "Saturação";
+"opt.deinterlace" = "Desentrelaçar";
 
-"opt.audio" = "Audio track";
+"opt.audio" = "Faixa de áudio";
 "opt.volume" = "Volume";
-"opt.mute" = "Mute";
-"opt.audio-delay" = "Audio delay";
+"opt.mute" = "Desativar Som";
+"opt.audio-delay" = "Atraso do áudio";
 
 "opt.sub" = "Subtitle track";
 "opt.sub-delay" = "Subtitle delay";
 "opt.sub-pos" = "Subtitle position";
 "opt.sub-scale" = "Subtitle scale";
 "opt.sub-visibility" = "Subtitle visibility";
-"opt.sub-ass-style-override" = "ASS style override";
+"opt.sub-ass-style-override" = "Substituição de estilo ASS";
 
 "opt.fullscreen" = "Fullscreen";
 "opt.ontop" = "Float on top";
 
-"opt.chapter" = "Chapter";
+"opt.chapter" = "Capítulo";
 
 "read.set" = "Set {{property}} to {{value}}";
 "read.add" = "{{property}} {{value}}";
-"read.multiply" = "Multiply {{property}} by {{factor}}x";
+"read.multiply" = "Multiplicar {{property}} por {{factor}}x";
 "read.cycle" = "Cycle {{property}}{{#dir_down}} Downwards{{/dir_down}}";
 "read.cycle-values" = "Cycle {{property}} in ({{{values}}})";
 "read.seek" = "Seek {{#fwd}}forward{{/fwd}}{{#bwd}}backward{{/bwd}}{{#abs}}to{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";

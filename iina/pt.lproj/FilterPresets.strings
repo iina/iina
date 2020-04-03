@@ -10,18 +10,18 @@
 
 
 "crop" = "Cortar";
-"crop.w" = "Width (default: video width)";
-"crop.h" = "Height (default: video height)";
+"crop.w" = "Largura (padrão: largura do vídeo)";
+"crop.h" = "Altura (padrão: altura do vídeo)";
 "crop.x" = "Origem X (padrão: centro)";
 "crop.y" = "Origem Y (padrão: centro)";
 
 "expand" = "Expandir";
-"expand.w" = "Width (default: video width)";
-"expand.h" = "Height (default: video height)";
+"expand.w" = "Largura (padrão: largura do vídeo)";
+"expand.h" = "Altura (padrão: altura do vídeo)";
 "expand.x" = "Origem X (padrão: centro)";
 "expand.y" = "Origem Y (padrão: centro)";
-"expand.aspect" = "Expands to fit an aspect (e.g: 4/3)";
-"expand.round" = "Rounds up to make divisible by this value";
+"expand.aspect" = "Expandir para adaptar a um aspeto (ex.: 4/3)";
+"expand.round" = "Arredonda para se tornar divisível por este valor";
 
 "sharpen" = "Nitidez";
 "sharpen.msize" = "Tamanho da Matriz";

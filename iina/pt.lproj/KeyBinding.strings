@@ -10,8 +10,8 @@
 "cmd.seek" = "Seek";
 "cmd.revert-seek" = "Revert seek";
 "cmd.set" = "Set";
-"cmd.cycle" = "Cycle";
-"cmd.cycle-values" = "Cycle in";
+"cmd.cycle" = "Ciclo";
+"cmd.cycle-values" = "Ciclo em";
 "cmd.add" = "Alterar";
 "cmd.multiply" = "Multiplicar";
 "cmd.frame-step" = "Next frame";
@@ -21,17 +21,17 @@
 "cmd.playlist-next" = "Next media";
 "cmd.playlist-prev" = "Previous media";
 "cmd.playlist-move" = "Mover item da playlist";
-"cmd.playlist-clear" = "Clear playlist";
-"cmd.playlist-remove" = "Remove current";
+"cmd.playlist-clear" = "Limpar Lista de Reprodução";
+"cmd.playlist-remove" = "Remover atual";
 "cmd.playlist-shuffle" = "Shuffle";
 "cmd.write-watch-later-config" = "Record play history";
 "cmd.stop" = "Stop";
-"cmd.quit" = "Quit";
-"cmd.quit-watch-later" = "Quit (save progress)";
+"cmd.quit" = "Sair";
+"cmd.quit-watch-later" = "Sair (guardar progresso)";
 "cmd.screenshot" = "Screenshot";
 "cmd.screenshot-to-file" = "Screenshot to file";
-"cmd.loadfile" = "Load file";
-"cmd.loadlist" = "Load playlist";
+"cmd.loadfile" = "Carregar ficheiro";
+"cmd.loadlist" = "Carregar lista de reprodução";
 "cmd.run" = "Executar";
 
 "iina.flip" = "Virar";
@@ -102,8 +102,8 @@
 "opt.sub-visibility" = "Subtitle visibility";
 "opt.sub-ass-style-override" = "Substituição de estilo ASS";
 
-"opt.fullscreen" = "Fullscreen";
-"opt.ontop" = "Float on top";
+"opt.fullscreen" = "Ecrã completo";
+"opt.ontop" = "Flutuar no topo";
 
 "opt.chapter" = "Capítulo";
 

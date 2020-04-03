@@ -14,7 +14,7 @@
 "4Qe-7S-8xK.title" = "Opções:";
 
 /* Class = "NSButtonCell"; title = "Enable \"Open Recent\" menu"; ObjectID = "55O-ik-ql6"; */
-"55O-ik-ql6.title" = "Enable \"Open Recent\" menu";
+"55O-ik-ql6.title" = "Ativar menu \"Abrir Recente\"";
 
 /* Class = "NSButtonCell"; title = "Minimized/un-minimized"; ObjectID = "5Y9-bX-K0f"; */
 "5Y9-bX-K0f.title" = "Minimizar/Não-minimizar";
@@ -23,13 +23,13 @@
 "6TV-DG-503.title" = "Lista de Reprodução:";
 
 /* Class = "NSTextFieldCell"; title = "Requires restarting IINA to take effect."; ObjectID = "8kU-8g-VgX"; */
-"8kU-8g-VgX.title" = "Requires restarting IINA to take effect.";
+"8kU-8g-VgX.title" = "Requer reinício do IINA para ter efeito.";
 
 /* Class = "NSButtonCell"; title = "Track all played files in \"Open Recent\" menu"; ObjectID = "Ci8-j2-QS3"; */
 "Ci8-j2-QS3.title" = "Track all played files in \"Open Recent\" menu";
 
 /* Class = "NSMenuItem"; title = "Daily"; ObjectID = "Ez8-qY-WAZ"; */
-"Ez8-qY-WAZ.title" = "Daily";
+"Ez8-qY-WAZ.title" = "Diariamente";
 
 /* Class = "NSButtonCell"; title = "Pause"; ObjectID = "FbF-jJ-W5b"; */
 "FbF-jJ-W5b.title" = "Pausa";
@@ -44,7 +44,7 @@
 "J8g-aS-W6e.title" = "Window became inactive/active";
 
 /* Class = "NSMenuItem"; title = "Do nothing"; ObjectID = "JfZ-D8-aF2"; */
-"JfZ-D8-aF2.title" = "Do nothing";
+"JfZ-D8-aF2.title" = "Não fazer nada";
 
 /* Class = "NSButtonCell"; title = "Black out other monitors while in full screen"; ObjectID = "KYi-0W-zOr"; */
 "KYi-0W-zOr.title" = "Black out other monitors while in full screen";
@@ -59,10 +59,10 @@
 "M0z-bI-88d.title" = "Abrir sempre os ficheiros numa nova janela";
 
 /* Class = "NSButtonCell"; title = "Enter fullscreen"; ObjectID = "MlG-hl-goB"; */
-"MlG-hl-goB.title" = "Enter fullscreen";
+"MlG-hl-goB.title" = "Entrar em Ecrã Completo";
 
 /* Class = "NSTextFieldCell"; title = "Destination:"; ObjectID = "PhL-vP-i7L"; */
-"PhL-vP-i7L.title" = "Destination:";
+"PhL-vP-i7L.title" = "Destino:";
 
 /* Class = "NSButtonCell"; title = "Add files in the same folder automatically"; ObjectID = "QJq-fO-hhK"; */
 "QJq-fO-hhK.title" = "Adicionar ficheiros na mesma pasta automaticamente";
@@ -77,13 +77,13 @@
 "XFC-Lr-LmP.title" = "Otherwise only files that opened manually will show up in this menu.";
 
 /* Class = "NSButtonCell"; title = "Quit after all windows are closed"; ObjectID = "YLo-6E-tT7"; */
-"YLo-6E-tT7.title" = "Quit after all windows are closed";
+"YLo-6E-tT7.title" = "Sair quando todas as janelas estiverem fechadas";
 
 /* Class = "NSTextFieldCell"; title = "/path/to/screenshot/folder"; ObjectID = "YeH-hk-7NN"; */
 "YeH-hk-7NN.title" = "/caminho/para/captura de ecrã/pasta";
 
 /* Class = "NSButtonCell"; title = "Receive beta updates"; ObjectID = "f0j-Dn-cxt"; */
-"f0j-Dn-cxt.title" = "Receive beta updates";
+"f0j-Dn-cxt.title" = "Receber atualizações beta";
 
 /* Class = "NSButtonCell"; title = "Pause when left full screen"; ObjectID = "g2A-Kf-vct"; */
 "g2A-Kf-vct.title" = "Pausar quando sair de ecrã inteiro";
@@ -98,7 +98,7 @@
 "i4A-86-dGC.title" = "Pausar quando o computador entra em suspensão";
 
 /* Class = "NSButtonCell"; title = "Enable playback history"; ObjectID = "iGS-qN-f5q"; */
-"iGS-qN-f5q.title" = "Enable playback history";
+"iGS-qN-f5q.title" = "Ativar histórico de reprodução";
 
 /* Class = "NSButtonCell"; title = "Resume last playback position"; ObjectID = "jOB-D3-WT3"; */
 "jOB-D3-WT3.title" = "Resume last playback position";
@@ -113,7 +113,7 @@
 "lvA-Rc-Sh6.title" = "Incluir legendas";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "oJY-Iz-3sO"; */
-"oJY-Iz-3sO.title" = "Format:";
+"oJY-Iz-3sO.title" = "Formato:";
 
 /* Class = "NSTextFieldCell"; title = "Screenshots:"; ObjectID = "pdx-zt-kf2"; */
 "pdx-zt-kf2.title" = "Screenshots:";

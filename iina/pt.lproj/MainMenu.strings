@@ -11,7 +11,7 @@
 "16p-PA-x34.title" = "Subtitle";
 
 /* Class = "NSMenuItem"; title = "Normal Size"; ObjectID = "1UK-8n-QPP"; */
-"1UK-8n-QPP.title" = "Normal Size";
+"1UK-8n-QPP.title" = "Tamanho Normal";
 
 /* Class = "NSMenu"; title = "Audio Device"; ObjectID = "2Dp-Ol-Zcf"; */
 "2Dp-Ol-Zcf.title" = "Dispositivo de Áudio";
@@ -20,7 +20,7 @@
 "2Ya-3g-1hy.title" = "Saltar para Ínicio";
 
 /* Class = "NSMenuItem"; title = "Cut"; ObjectID = "2aU-bk-bmu"; */
-"2aU-bk-bmu.title" = "Cut";
+"2aU-bk-bmu.title" = "Cortar";
 
 /* Class = "NSMenuItem"; title = "Jump to…"; ObjectID = "2id-wn-xsC"; */
 "2id-wn-xsC.title" = "Saltar para…";
@@ -35,10 +35,10 @@
 "43n-Ed-5kT.title" = "Show Quick Settings Panel";
 
 /* Class = "NSMenuItem"; title = "Audio Delay + 0.5s"; ObjectID = "4ae-MT-2L1"; */
-"4ae-MT-2L1.title" = "Audio Delay + 0.5s";
+"4ae-MT-2L1.title" = "Atraso de Áudio + 0.5s";
 
 /* Class = "NSMenuItem"; title = "Quit IINA"; ObjectID = "4sb-4s-VLi"; */
-"4sb-4s-VLi.title" = "Quit IINA";
+"4sb-4s-VLi.title" = "Sair do IINA";
 
 /* Class = "NSMenuItem"; title = "Reset Speed"; ObjectID = "5Gn-90-oDu"; */
 "5Gn-90-oDu.title" = "Reset Speed";
@@ -50,7 +50,7 @@
 "5xN-ZB-VLI.title" = "Rotation";
 
 /* Class = "NSMenuItem"; title = "Enter Full Screen"; ObjectID = "6Eq-ni-6hG"; */
-"6Eq-ni-6hG.title" = "Enter Full Screen";
+"6Eq-ni-6hG.title" = "Entrar em Ecrã Completo";
 
 /* Class = "NSMenuItem"; title = "Step Forward 5s"; ObjectID = "6yE-op-DTS"; */
 "6yE-op-DTS.title" = "Step Forward 5s";
@@ -77,7 +77,7 @@
 "91n-xW-L37.title" = "Speed Up to 1.1x";
 
 /* Class = "NSMenuItem"; title = "Audio Delay - 0.1s"; ObjectID = "9ee-7i-xs7"; */
-"9ee-7i-xs7.title" = "Audio Delay - 0.1s";
+"9ee-7i-xs7.title" = "Atraso de Áudio - 0.1s";
 
 /* Class = "NSMenuItem"; title = "<None>"; ObjectID = "9pa-9C-ueQ"; */
 "9pa-9C-ueQ.title" = "<None>";
@@ -116,7 +116,7 @@
 "DUP-nm-BJt.title" = "Speed Down to 0.9x";
 
 /* Class = "NSMenuItem"; title = "Close"; ObjectID = "DVo-aG-piG"; */
-"DVo-aG-piG.title" = "Close";
+"DVo-aG-piG.title" = "Fechar";
 
 /* Class = "NSMenuItem"; title = "Show Chapters Panel"; ObjectID = "DwM-3d-Eb9"; */
 "DwM-3d-Eb9.title" = "Show Chapters Panel";
@@ -125,7 +125,7 @@
 "EKp-Qx-4Mn.title" = "Subtitles";
 
 /* Class = "NSMenu"; title = "Help"; ObjectID = "F2S-fz-NVQ"; */
-"F2S-fz-NVQ.title" = "Help";
+"F2S-fz-NVQ.title" = "Ajuda";
 
 /* Class = "NSMenuItem"; title = "Next Chapter"; ObjectID = "F6G-Ln-fqI"; */
 "F6G-Ln-fqI.title" = "Next Chapter";
@@ -161,7 +161,7 @@
 "H8h-7b-M4v.title" = "Video";
 
 /* Class = "NSMenuItem"; title = "Double Size"; ObjectID = "Hal-18-Tnf"; */
-"Hal-18-Tnf.title" = "Double Size";
+"Hal-18-Tnf.title" = "Tamanho Duplo";
 
 /* Class = "NSMenuItem"; title = "Speed Down to 0.5x"; ObjectID = "HsE-LN-Nd6"; */
 "HsE-LN-Nd6.title" = "Speed Down to 0.5x";
@@ -191,7 +191,7 @@
 "LND-1n-DU2.title" = "Histórico de Reprodução";
 
 /* Class = "NSMenuItem"; title = "Audio Delay - 0.5s"; ObjectID = "Lc4-4W-thE"; */
-"Lc4-4W-thE.title" = "Audio Delay - 0.5s";
+"Lc4-4W-thE.title" = "Atraso de Áudio - 0.5s";
 
 /* Class = "NSMenuItem"; title = "Speed Up to 2x"; ObjectID = "Lqa-OG-EEg"; */
 "Lqa-OG-EEg.title" = "Speed Up to 2x";
@@ -200,7 +200,7 @@
 "LsU-Qz-dax.title" = "Subtitle Delay - 0.5s";
 
 /* Class = "NSMenuItem"; title = "Find Online Subtitles…"; ObjectID = "Mg3-WB-gjZ"; */
-"Mg3-WB-gjZ.title" = "Find Online Subtitles…";
+"Mg3-WB-gjZ.title" = "Encontrar Legendas Online…";
 
 /* Class = "NSMenuItem"; title = "Save Current Playlist…"; ObjectID = "Mjr-lL-oEt"; */
 "Mjr-lL-oEt.title" = "Save Current Playlist…";
@@ -209,7 +209,7 @@
 "NMo-om-nkz.title" = "Services";
 
 /* Class = "NSMenuItem"; title = "Paste"; ObjectID = "NdF-0z-k5s"; */
-"NdF-0z-k5s.title" = "Paste";
+"NdF-0z-k5s.title" = "Colar";
 
 /* Class = "NSMenuItem"; title = "Vertical (Flip)"; ObjectID = "OIu-H0-Mht"; */
 "OIu-H0-Mht.title" = "Vertical (Flip)";
@@ -233,7 +233,7 @@
 "PyY-pR-jz7.title" = "Video Filters…";
 
 /* Class = "NSMenuItem"; title = "New Window"; ObjectID = "Qv1-xd-wj5"; */
-"Qv1-xd-wj5.title" = "New Window";
+"Qv1-xd-wj5.title" = "Nova Janela";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "R4o-n2-Eq4"; */
 "R4o-n2-Eq4.title" = "Zoom";
@@ -242,7 +242,7 @@
 "Rqg-VS-aIj.title" = "Website";
 
 /* Class = "NSMenuItem"; title = "Fit to Screen"; ObjectID = "SHd-63-Xoh"; */
-"SHd-63-Xoh.title" = "Fit to Screen";
+"SHd-63-Xoh.title" = "Ajustar ao Ecrã";
 
 /* Class = "NSMenuItem"; title = "Reset Subtitle Delay"; ObjectID = "SLr-6g-Mgh"; */
 "SLr-6g-Mgh.title" = "Reset Subtitle Delay";
@@ -266,7 +266,7 @@
 "UwY-P2-Xdb.title" = "Second Subtitle";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "VDZ-ro-z5z"; */
-"VDZ-ro-z5z.title" = "Redo";
+"VDZ-ro-z5z.title" = "Desfazer";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "Vdr-fp-XzO"; */
 "Vdr-fp-XzO.title" = "Ocultar Outros";
@@ -293,7 +293,7 @@
 "Zhv-Bz-I5V.title" = "Volume - 1%";
 
 /* Class = "NSMenuItem"; title = "Custom Touch Bar…"; ObjectID = "ZnF-yX-7jP"; */
-"ZnF-yX-7jP.title" = "Custom Touch Bar…";
+"ZnF-yX-7jP.title" = "Personalizar TouchBar…";
 
 /* Class = "NSMenuItem"; title = "Playlist Loop"; ObjectID = "aSc-P6-fiZ"; */
 "aSc-P6-fiZ.title" = "Loop Lista de Reprodução";
@@ -314,13 +314,13 @@
 "bfB-bn-KeM.title" = "Abrir URL numa Nova Janela…";
 
 /* Class = "NSMenu"; title = "File"; ObjectID = "bib-Uj-vzu"; */
-"bib-Uj-vzu.title" = "File";
+"bib-Uj-vzu.title" = "Ficheiro";
 
 /* Class = "NSMenuItem"; title = "Inspector"; ObjectID = "bwz-r0-peR"; */
 "bwz-r0-peR.title" = "Ispector";
 
 /* Class = "NSMenuItem"; title = "Normal Size (Retina)"; ObjectID = "c1x-bx-69F"; */
-"c1x-bx-69F.title" = "Normal Size (Retina)";
+"c1x-bx-69F.title" = "Tamanho Normal (Retina)";
 
 /* Class = "NSMenuItem"; title = "Volume + 1%"; ObjectID = "c6Y-0e-vgf"; */
 "c6Y-0e-vgf.title" = "Volume + 1%";
@@ -335,7 +335,7 @@
 "dBM-BU-5xS.title" = "Transformations";
 
 /* Class = "NSMenuItem"; title = "File"; ObjectID = "dMs-cI-mzQ"; */
-"dMs-cI-mzQ.title" = "File";
+"dMs-cI-mzQ.title" = "Ficheiro";
 
 /* Class = "NSMenuItem"; title = "Stop and Clear Playlists"; ObjectID = "deS-xK-iBb"; */
 "deS-xK-iBb.title" = "Stop and Clear Playlists";
@@ -353,7 +353,7 @@
 "gMo-qL-m08.title" = "Procurar atualizações…";
 
 /* Class = "NSMenuItem"; title = "Delete"; ObjectID = "h9w-Rj-Hm1"; */
-"h9w-Rj-Hm1.title" = "Delete";
+"h9w-Rj-Hm1.title" = "Apagar";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "hz9-B4-Xy5"; */
 "hz9-B4-Xy5.title" = "Services";
@@ -380,10 +380,10 @@
 "lYN-0x-lzT.title" = "Áudio";
 
 /* Class = "NSMenuItem"; title = "Audio Delay + 0.1s"; ObjectID = "lew-3S-oGY"; */
-"lew-3S-oGY.title" = "Audio Delay + 0.1s";
+"lew-3S-oGY.title" = "Atraso de Áudio + 0.1s";
 
 /* Class = "NSMenuItem"; title = "Go to Screenshot Folder"; ObjectID = "lj0-Oo-7nB"; */
-"lj0-Oo-7nB.title" = "Go to Screenshot Folder";
+"lj0-Oo-7nB.title" = "Ir para Pasta de Capturas de Ecrã";
 
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "m7w-hc-Y2F"; */
 "m7w-hc-Y2F.title" = "Tornar Letras Maiúsculas";
@@ -392,19 +392,19 @@
 "mGw-jm-5x2.title" = "Second Subtitle";
 
 /* Class = "NSMenuItem"; title = "Enter Picture in Picture"; ObjectID = "mND-N8-z6o"; */
-"mND-N8-z6o.title" = "Enter Picture in Picture";
+"mND-N8-z6o.title" = "Usar Picture in Picture";
 
 /* Class = "NSMenuItem"; title = "Flip"; ObjectID = "mT1-1m-HwN"; */
-"mT1-1m-HwN.title" = "Flip";
+"mT1-1m-HwN.title" = "Virar";
 
 /* Class = "NSMenuItem"; title = "Cycle Audio Tracks"; ObjectID = "n8f-ub-Udb"; */
-"n8f-ub-Udb.title" = "Cycle Audio Tracks";
+"n8f-ub-Udb.title" = "Ciclo de Faixas de Áudio";
 
 /* Class = "NSMenu"; title = "Flip"; ObjectID = "n90-to-nRT"; */
-"n90-to-nRT.title" = "Flip";
+"n90-to-nRT.title" = "Virar";
 
 /* Class = "NSMenuItem"; title = "Delete Current File"; ObjectID = "npH-8B-XA4"; */
-"npH-8B-XA4.title" = "Delete Current File";
+"npH-8B-XA4.title" = "Apagar Ficheiro Atual";
 
 /* Class = "NSMenu"; title = "Open Recent"; ObjectID = "oas-Oc-fiZ"; */
 "oas-Oc-fiZ.title" = "Abrir Recente";
@@ -419,16 +419,16 @@
 "pAo-L5-qTO.title" = "Subtitle Delay + 0.5s";
 
 /* Class = "NSMenuItem"; title = "Edit"; ObjectID = "pWh-nh-0pN"; */
-"pWh-nh-0pN.title" = "Edit";
+"pWh-nh-0pN.title" = "Editar";
 
 /* Class = "NSMenuItem"; title = "Volume - 5%"; ObjectID = "pdj-9C-Fn1"; */
 "pdj-9C-Fn1.title" = "Volume - 5%";
 
 /* Class = "NSMenuItem"; title = "Previous Chapter"; ObjectID = "pqF-SZ-Ifz"; */
-"pqF-SZ-Ifz.title" = "Previous Chapter";
+"pqF-SZ-Ifz.title" = "Capítulo Anterior";
 
 /* Class = "NSMenuItem"; title = "Font…"; ObjectID = "rme-fr-5rr"; */
-"rme-fr-5rr.title" = "Font…";
+"rme-fr-5rr.title" = "Tipo de letra…";
 
 /* Class = "NSMenu"; title = "Audio"; ObjectID = "sW8-ri-eA5"; */
 "sW8-ri-eA5.title" = "Áudio";
@@ -437,7 +437,7 @@
 "sgu-dK-IGE.title" = "Cycle Subtitles";
 
 /* Class = "NSMenuItem"; title = "Half Size"; ObjectID = "snW-S8-Cw5"; */
-"snW-S8-Cw5.title" = "Half Size";
+"snW-S8-Cw5.title" = "Metade do Tamanho";
 
 /* Class = "NSMenuItem"; title = "Copy"; ObjectID = "tH0-KL-c9V"; */
 "tH0-KL-c9V.title" = "Copiar";
@@ -455,22 +455,22 @@
 "uO1-9S-6Yy.title" = "Speech";
 
 /* Class = "NSMenuItem"; title = "Clear Menu"; ObjectID = "vNY-rz-j42"; */
-"vNY-rz-j42.title" = "Clear Menu";
+"vNY-rz-j42.title" = "Limpar Menu";
 
 /* Class = "NSMenu"; title = "Saved Audio Filters"; ObjectID = "vuV-uP-CAD"; */
 "vuV-uP-CAD.title" = "Saved Audio Filters";
 
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "w8n-XJ-Pgi"; */
-"w8n-XJ-Pgi.title" = "Edit";
+"w8n-XJ-Pgi.title" = "Editar";
 
 /* Class = "NSMenuItem"; title = "Float on Top"; ObjectID = "wex-rX-PcY"; */
-"wex-rX-PcY.title" = "Float on Top";
+"wex-rX-PcY.title" = "Flutuar no Topo";
 
 /* Class = "NSMenuItem"; title = "Saved Audio Filters"; ObjectID = "wgZ-DO-nn3"; */
 "wgZ-DO-nn3.title" = "Saved Audio Filters";
 
 /* Class = "NSMenuItem"; title = "Help"; ObjectID = "wpr-3q-Mcd"; */
-"wpr-3q-Mcd.title" = "Help";
+"wpr-3q-Mcd.title" = "Ajuda";
 
 /* Class = "NSMenuItem"; title = "<None>"; ObjectID = "wrS-JG-jF6"; */
 "wrS-JG-jF6.title" = "<None>";

@@ -13,7 +13,7 @@
 "general.logout" = "Terminar sessão";
 "general.ok" = "OK";
 "general.cancel" = "Cancelar";
-"general.username" = "Username";
+"general.username" = "Nome de Utilizador";
 "general.password" = "Senha";
 
 // MainWindowController.swift
@@ -31,7 +31,7 @@
 "osd.speed" = "Speed: %.2fx";
 "osd.aspect" = "Proporção: %@";
 "osd.crop" = "Cortar: %@";
-"osd.rotate" = "Rotate: %i°";
+"osd.rotate" = "Rodar: %i°";
 "osd.deinterlace" = "Desentrelaçar: %@";
 "osd.audio_delay.nodelay" = "Atraso de Áudio: Sem Atraso";
 "osd.audio_delay.later" = "Atraso de Áudio: %.2fs Depois";
@@ -71,14 +71,14 @@
 
 "preference.title" = "Preferências";
 "preference.general" = "Geral";
-"preference.ui" = "UI";
-"preference.video_audio" = "Video/Audio";
+"preference.ui" = "Interface do Utilizador";
+"preference.video_audio" = "Vídeo/Áudio";
 "preference.subtitle" = "Subtitle";
 "preference.network" = "Rede";
 "preference.control" = "Controlo";
 "preference.keybindings" = "Key Bindings";
 "preference.advanced" = "Avançado";
-"preference.utilities" = "Utilities";
+"preference.utilities" = "Utilidades";
 "preference.scripts" = "Scripts";
 "preference.not_logged_in" = "Sem sessão iniciada";
 "preference.logged_in_as" = "Sessão iniciada como %@";
@@ -119,17 +119,17 @@
 "alert.beta_channel.message" = "O IINA v1.0 está a chegar! Gostaria de nos ajudar a testar as versões beta? \n\nPode mudar este comportamento a qualquer momento em Preferências - Geral.";
 
 "alert.title_error" = "Erro";
-"alert.title_warning" = "Warning";
+"alert.title_warning" = "Aviso";
 "alert.title_info" = "Informação";
 
-"alert.fatal_error" = "Fatal error: %@ \nThe application will exit now.";
+"alert.fatal_error" = "Erro fatal: %@ \nA aplicação vai ser encerrada agora.";
 "alert.mpv_error" = "Erro interno %@ (%@) ao definir a opção %@.";
-"alert.sleep" = "Cannot prevent display sleep!";
+"alert.sleep" = "Impossível prevenir a pausa do ecrã!";
 
 "alert.unsupported_audio" = "Unsupported external audio file.";
 "alert.unsupported_sub" = "Unsupported external subtitle.";
 "alert.unsupported_url" = "Unsupported URL.";
-"alert.wrong_url_format" = "Wrong URL format.";
+"alert.wrong_url_format" = "Formato do URL errado.";
 
 "alert.error_open" = "Impossível abrir ficheiro ou stream!";
 "alert.error_finding_file" = "Impossível encontrar o ficheiro %@!";
@@ -144,8 +144,8 @@
 "alert.config.empty_name" = "The name cannot be empty.";
 "alert.config.name_existing" = "The name already exists.";
 "alert.config.file_existing.title" = "Ficheiro já existe";
-"alert.config.file_existing.message" = "This should not happen. Choose OK to overwrite, Cancel to reveal the file in Finder.";
-"alert.config.cannot_create" = "Cannot create config file!\n%@";
+"alert.config.file_existing.message" = "Isto não deveria acontecer. Escolha OK para substituir, Cancelar para mostrar o ficheiro no Finder.";
+"alert.config.cannot_create" = "Não foi possível criar um ficheiro de configuração!\n%@";
 "alert.config.cannot_write" = "Cannot write to config file!";
 
 "alert.filter.incorrect" = "Error occured when setting filters. Please check your parameter format.";
@@ -166,7 +166,7 @@
 "alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
 "alert.sub.cannot_login" = "Impossível iniciar sessão. Por favor verifique o seu nome de utilizador, palavra-passe e estado da rede.\n\n%@";
 
-"alert.set_default.title" = "Setting IINA as Default App";
+"alert.set_default.title" = "Definir IINA como Aplicação Predefinida";
 "alert.set_default.message" = "IINA will be set as the default app for all file types it supports.";
 "alert.set_default.success" = "Finished with %d success and %d failed.";
 
@@ -205,13 +205,13 @@
 
 "alert.nothing_to_open" = "Nada para abrir.";
 
-"alert.no_video_track" = "There is no video track.";
+"alert.no_video_track" = "Não existe faixa de vídeo.";
 
 "alert.duplicate_config" = "You cannot edit default configurations directly. Please duplicate one before editing.";
 
 "alert.assrt_register" = "Due to limited API quota, you are strongly recommended to use your own API token. The default token is only for demo usage, and you may encounter network error.";
 "alert.assrt_register.register" = "Registe-se Agora";
-"alert.assrt_register.try" = "Try First";
+"alert.assrt_register.try" = "Tentar primeiro";
 "alert.assrt_token_prompt.title" = "Enter your API token";
 "alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
 "alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
@@ -227,21 +227,21 @@
 "pl_menu.delete_multi" = "Mover Ficheiros Selecionados para o Lixo";
 "pl_menu.delete_after_play" = "Mover para o Lixo depois da Reprodução";
 "pl_menu.delete_after_play_multi" = "Mover Ficheiros Selecionados para o Lixo depois da Reprodução";
-"pl_menu.reveal_in_finder" = "Reveal in Finder";
+"pl_menu.reveal_in_finder" = "Mostrar no Finder";
 "pl_menu.add_file" = "Adicionar Ficheiro…";
 "pl_menu.add_url" = "Adicionar URL…";
 "pl_menu.clear_playlist" = "Limpar Lista de Reprodução";
 "pl_menu.matched_sub" = "%d Legenda(s) correspondentes";
 "pl_menu.add_sub" = "Adicionar Legenda…";
-"pl_menu.wrong_sub" = "Wrong Subtitle!";
+"pl_menu.wrong_sub" = "Legenda Errada!";
 "pl_menu.browser" = "Abrir no Navegador";
 "pl_menu.copy_url" = "Copiar URL";
 "pl_menu.copy_url_multi" = "Copiar URLs";
 
 "keymapping.title" = "Key Mapping";
-"keymapping.message" = "Press any key to record.";
+"keymapping.message" = "Pressione qualquer tecla para gravar.";
 
-"filter.video_filters" = "Video Filters";
+"filter.video_filters" = "Filtros de Vídeo";
 "filter.audio_filters" = "Filtros de Áudio";
 
 "hwdec.no" = "Desativar decodificador de hardware.";
@@ -252,8 +252,8 @@
 
 "osc_toolbar.settings" = "Definições Rápidas";
 "osc_toolbar.playlist" = "Lista de reprodução e capítulos";
-"osc_toolbar.pip" = "Toggle Picture-in-Picture";
-"osc_toolbar.full_screen" = "Toggle full screen";
+"osc_toolbar.pip" = "Alternar Picture-in-Picture";
+"osc_toolbar.full_screen" = "Alternar ecrã completo";
 "osc_toolbar.music_mode" = "Entrar no modo música";
 "osc_toolbar.sub_track" = "Selecionar faixa de legenda";
 
@@ -264,13 +264,13 @@
 "touchbar.back_15" = "15s Antes";
 "touchbar.back_30" = "30s Antes";
 "touchbar.next_video" = "Próximo Vídeo";
-"touchbar.prev_video" = "Previous Video";
+"touchbar.prev_video" = "Vídeo Anterior";
 "touchbar.increase_volume" = "Volume +";
 "touchbar.decrease_volume" = "Volume -";
-"touchbar.rewind" = "Rewind";
+"touchbar.rewind" = "Recuar";
 "touchbar.fast_forward" = "Fast Forward";
 "touchbar.play_pause" = "Reproduzir / Pausa";
-"touchbar.seek" = "Seek";
+"touchbar.seek" = "Procurar";
 "touchbar.time" = "Time Position";
 "touchbar.remainingTime" = "Tempo restante";
-"touchbar.toggle_pip" = "Toggle Picture-in-Picture";
+"touchbar.toggle_pip" = "Alternar Picture-in-Picture";

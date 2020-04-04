@@ -11,7 +11,7 @@
 "2YJ-bg-OdR.title" = "% do ecrã";
 
 /* Class = "NSTextFieldCell"; title = "Use left/right button for:"; ObjectID = "3CY-YS-rG6"; */
-"3CY-YS-rG6.title" = "Use left/right button for:";
+"3CY-YS-rG6.title" = "Usar botão esquerdo/direito para:";
 
 /* Class = "NSTextFieldCell"; title = "MB"; ObjectID = "3jK-z5-NDH"; */
 "3jK-z5-NDH.title" = "MB";
@@ -32,10 +32,10 @@
 "AE4-BD-wZi.title" = "% do ecrã";
 
 /* Class = "NSTextFieldCell"; title = "Window:"; ObjectID = "AmS-Sl-b2h"; */
-"AmS-Sl-b2h.title" = "Window:";
+"AmS-Sl-b2h.title" = "Janela:";
 
 /* Class = "NSMenuItem"; title = "Width:"; ObjectID = "B1c-oO-fIs"; */
-"B1c-oO-fIs.title" = "Width:";
+"B1c-oO-fIs.title" = "Largura:";
 
 /* Class = "NSButtonCell"; title = "Show chapter position in progress bar"; ObjectID = "BVV-Z3-LHR"; */
 "BVV-Z3-LHR.title" = "Show chapter position in progress bar";
@@ -56,10 +56,10 @@
 "G8w-J7-1q1.title" = "Picture in Picture:";
 
 /* Class = "NSTextFieldCell"; title = "Window:"; ObjectID = "GKy-3g-4MB"; */
-"GKy-3g-4MB.title" = "Window:";
+"GKy-3g-4MB.title" = "Janela:";
 
 /* Class = "NSTextFieldCell"; title = "side of the screen"; ObjectID = "GXO-iT-BIr"; */
-"GXO-iT-BIr.title" = "side of the screen";
+"GXO-iT-BIr.title" = "lado do ecrã";
 
 /* Class = "NSTextFieldCell"; title = "Maximum cache size:"; ObjectID = "GYe-Y3-bOR"; */
 "GYe-Y3-bOR.title" = "Tamanho máximo do cache:";
@@ -74,7 +74,7 @@
 "I8t-ey-016.title" = "pt";
 
 /* Class = "NSTextFieldCell"; title = "Y offset:"; ObjectID = "KCL-Ki-A0p"; */
-"KCL-Ki-A0p.title" = "Y offset:";
+"KCL-Ki-A0p.title" = "Deslocamento Y:";
 
 /* Class = "NSMenuItem"; title = "Fast Forward / Rewind"; ObjectID = "KJT-iG-2xc"; */
 "KJT-iG-2xc.title" = "Fast Forward / Rewind";
@@ -86,7 +86,7 @@
 "NUr-hY-gfo.title" = "Ocultar automaticamente depois de:";
 
 /* Class = "NSMenuItem"; title = "right"; ObjectID = "NYG-e9-DV0"; */
-"NYG-e9-DV0.title" = "right";
+"NYG-e9-DV0.title" = "direita";
 
 /* Class = "NSButtonCell"; title = "Automatically pause playback"; ObjectID = "O8C-Vi-rSp"; */
 "O8C-Vi-rSp.title" = "Pausar automaticamente a reprodução";
@@ -104,10 +104,10 @@
 "SFX-ct-8MB.title" = "Flutuar sempre no topo durante a reprodução";
 
 /* Class = "NSMenuItem"; title = "Speed"; ObjectID = "TWq-Xb-8Ee"; */
-"TWq-Xb-8Ee.title" = "Speed";
+"TWq-Xb-8Ee.title" = "Velocidade";
 
 /* Class = "NSMenuItem"; title = "Medium Light"; ObjectID = "TdN-pM-HHk"; */
-"TdN-pM-HHk.title" = "Medium Light";
+"TdN-pM-HHk.title" = "Luz Média";
 
 /* Class = "NSMenuItem"; title = "Height:"; ObjectID = "Uc9-An-930"; */
 "Uc9-An-930.title" = "Altura:";
@@ -128,7 +128,7 @@
 "Ydi-yB-FMe.title" = "to the";
 
 /* Class = "NSTextFieldCell"; title = "X offset:"; ObjectID = "Ymw-tr-6rw"; */
-"Ymw-tr-6rw.title" = "X offset:";
+"Ymw-tr-6rw.title" = "Deslocamento X:";
 
 /* Class = "NSButtonCell"; title = "Do nothing"; ObjectID = "Zc7-sP-Rdp"; */
 "Zc7-sP-Rdp.title" = "Não fazer nada";
@@ -137,7 +137,7 @@
 "Zjr-q7-WsD.title" = "Resize the window to fit video size:";
 
 /* Class = "NSButtonCell"; title = "Toggle Picture-in-Picture by minimizing/un-minimizing the window"; ObjectID = "baY-O6-fcB"; */
-"baY-O6-fcB.title" = "Toggle Picture-in-Picture by minimizing/un-minimizing the window";
+"baY-O6-fcB.title" = "Alternar Picture-in-Picture minimizando/maximizando a janela";
 
 /* Class = "NSMenuItem"; title = "2x video size"; ObjectID = "dUG-QD-CXL"; */
 "dUG-QD-CXL.title" = "2x tamanho do vídeo";
@@ -158,7 +158,7 @@
 "kOT-8q-E57.title" = "Display time and battery info when in full screen";
 
 /* Class = "NSTextFieldCell"; title = "Thumbnail Preview:"; ObjectID = "kYu-0l-jQQ"; */
-"kYu-0l-jQQ.title" = "Thumbnail Preview:";
+"kYu-0l-jQQ.title" = "Pré-visualização da miniatura:";
 
 /* Class = "NSTextFieldCell"; title = "Layout:"; ObjectID = "l54-63-V6n"; */
 "l54-63-V6n.title" = "Esquema:";
@@ -176,10 +176,10 @@
 "oJ8-74-L3z.title" = "Previous / Next Media";
 
 /* Class = "NSMenuItem"; title = "top"; ObjectID = "oYc-L7-qQd"; */
-"oYc-L7-qQd.title" = "top";
+"oYc-L7-qQd.title" = "topo";
 
 /* Class = "NSMenuItem"; title = "Ultra Dark"; ObjectID = "pV2-12-PmM"; */
-"pV2-12-PmM.title" = "Ultra Dark";
+"pV2-12-PmM.title" = "Ultra Escuro";
 
 /* Class = "NSTextFieldCell"; title = "to the"; ObjectID = "qbc-CY-bdK"; */
 "qbc-CY-bdK.title" = "to the";
@@ -194,10 +194,10 @@
 "sJe-bK-eHi.title" = "esquerda";
 
 /* Class = "NSMenuItem"; title = "Top"; ObjectID = "se2-DE-pJk"; */
-"se2-DE-pJk.title" = "Top";
+"se2-DE-pJk.title" = "Topo";
 
 /* Class = "NSTextFieldCell"; title = "Text size:"; ObjectID = "suy-e8-j4i"; */
-"suy-e8-j4i.title" = "Text size:";
+"suy-e8-j4i.title" = "Tamanho do texto:";
 
 /* Class = "NSMenuItem"; title = "fit the screen"; ObjectID = "vdi-lO-q6e"; */
 "vdi-lO-q6e.title" = "ajustar ao ecrã";
@@ -206,7 +206,7 @@
 "xMh-SP-nkc.title" = "Ativar OSD";
 
 /* Class = "NSTextFieldCell"; title = "Toolbar:"; ObjectID = "xP1-Vh-27X"; */
-"xP1-Vh-27X.title" = "Toolbar:";
+"xP1-Vh-27X.title" = "Barra de ferramentas:";
 
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "xrJ-Um-BrJ"; */
 "xrJ-Um-BrJ.title" = "% do ecrã";
@@ -218,7 +218,7 @@
 "yIN-jg-MxS.title" = "Sempre";
 
 /* Class = "NSTextFieldCell"; title = "Theme:"; ObjectID = "yLF-vu-1Gl"; */
-"yLF-vu-1Gl.title" = "Theme:";
+"yLF-vu-1Gl.title" = "Tema:";
 
 /* Class = "NSButtonCell"; title = "Initial window size:"; ObjectID = "zOq-Em-wUe"; */
 "zOq-Em-wUe.title" = "Tamanho inicial da janela:";

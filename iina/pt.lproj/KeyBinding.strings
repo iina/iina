@@ -7,7 +7,7 @@
 */
 
 "cmd.ignore" = "Ignorar";
-"cmd.seek" = "Seek";
+"cmd.seek" = "Procurar";
 "cmd.revert-seek" = "Revert seek";
 "cmd.set" = "Set";
 "cmd.cycle" = "Ciclo";
@@ -15,7 +15,7 @@
 "cmd.add" = "Alterar";
 "cmd.multiply" = "Multiplicar";
 "cmd.frame-step" = "Next frame";
-"cmd.frame-back-step" = "Previous frame";
+"cmd.frame-back-step" = "Frame anterior";
 "cmd.ab-loop" = "Loop A-B";
 "cmd.sub-seek" = "Subtitle seek";
 "cmd.playlist-next" = "Next media";
@@ -23,7 +23,7 @@
 "cmd.playlist-move" = "Mover item da playlist";
 "cmd.playlist-clear" = "Limpar Lista de Reprodução";
 "cmd.playlist-remove" = "Remover atual";
-"cmd.playlist-shuffle" = "Shuffle";
+"cmd.playlist-shuffle" = "Aleatório";
 "cmd.write-watch-later-config" = "Record play history";
 "cmd.stop" = "Stop";
 "cmd.quit" = "Sair";

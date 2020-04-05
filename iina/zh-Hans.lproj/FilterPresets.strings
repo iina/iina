@@ -12,28 +12,28 @@
 "crop" = "裁剪";
 "crop.w" = "宽 (默认: 视频宽度)";
 "crop.h" = "高 (默认: 视频高度)";
-"crop.x" = "起始横坐标 (默认: 从中心剪切)";
-"crop.y" = "起始纵坐标 (默认: 从中心剪切)";
+"crop.x" = "起始 X (默认: 从中心剪切)";
+"crop.y" = "起始 Y (默认: 从中心剪切)";
 
-"expand" = "扩展";
-"expand.w" = "宽 (默认: 视频宽度)";
-"expand.h" = "高 (默认: 视频高度)";
+"expand" = "展开";
+"expand.w" = "宽度 (默认: 视频宽度)";
+"expand.h" = "高度 (默认: 视频高度)";
 "expand.x" = "起始横坐标 (默认: 从中心扩展)";
 "expand.y" = "起始纵坐标 (默认: 从中心扩展)";
 "expand.aspect" = "扩展以适应长宽比 (例: 4/3)";
-"expand.round" = "取整使其能被此值整除";
+"expand.round" = "向上取整使得能被此值整除";
 
 "sharpen" = "锐化";
 "sharpen.msize" = "矩阵大小";
-"sharpen.amount" = "锐化程度";
+"sharpen.amount" = "锐化量";
 
 "blur" = "模糊";
 "blur.msize" = "矩阵大小";
 "blur.amount" = "模糊量";
 
 "delogo" = "去台标";
-"delogo.w" = "宽度";
-"delogo.h" = "高度";
+"delogo.w" = "宽";
+"delogo.h" = "高";
 "delogo.x" = "起始横坐标";
 "delogo.y" = "起始纵坐标";
 

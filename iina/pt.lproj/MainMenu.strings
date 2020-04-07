@@ -83,7 +83,7 @@
 "9pa-9C-ueQ.title" = "<None>";
 
 /* Class = "NSMenuItem"; title = "Save Downloaded Subtitle"; ObjectID = "9zk-co-roT"; */
-"9zk-co-roT.title" = "Save Downloaded Subtitle";
+"9zk-co-roT.title" = "Guardar legenda transferida";
 
 /* Class = "NSMenuItem"; title = "Take a Screenshot"; ObjectID = "AoP-K6-Kb5"; */
 "AoP-K6-Kb5.title" = "Tirar Captura de Ecrã";
@@ -107,7 +107,7 @@
 "CKi-JE-yLT.title" = "Captura de Ecrã Avançada…";
 
 /* Class = "NSMenuItem"; title = "File Loop"; ObjectID = "D1y-kv-85s"; */
-"D1y-kv-85s.title" = "File Loop";
+"D1y-kv-85s.title" = "Repetir ficheiro";
 
 /* Class = "NSMenu"; title = "Audio Track"; ObjectID = "DRb-Y8-xir"; */
 "DRb-Y8-xir.title" = "Faixa de áudio";
@@ -203,7 +203,7 @@
 "Mg3-WB-gjZ.title" = "Encontrar Legendas Online…";
 
 /* Class = "NSMenuItem"; title = "Save Current Playlist…"; ObjectID = "Mjr-lL-oEt"; */
-"Mjr-lL-oEt.title" = "Save Current Playlist…";
+"Mjr-lL-oEt.title" = "Guardar lista de reprodução atual…";
 
 /* Class = "NSMenuItem"; title = "Services"; ObjectID = "NMo-om-nkz"; */
 "NMo-om-nkz.title" = "Services";
@@ -263,7 +263,7 @@
 "UOE-MJ-8ku.title" = "Pausa";
 
 /* Class = "NSMenu"; title = "Second Subtitle"; ObjectID = "UwY-P2-Xdb"; */
-"UwY-P2-Xdb.title" = "Second Subtitle";
+"UwY-P2-Xdb.title" = "Segunda legenda";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "VDZ-ro-z5z"; */
 "VDZ-ro-z5z.title" = "Desfazer";
@@ -338,7 +338,7 @@
 "dMs-cI-mzQ.title" = "Ficheiro";
 
 /* Class = "NSMenuItem"; title = "Stop and Clear Playlists"; ObjectID = "deS-xK-iBb"; */
-"deS-xK-iBb.title" = "Stop and Clear Playlists";
+"deS-xK-iBb.title" = "Para e limpar listas de reprodução";
 
 /* Class = "NSMenu"; title = "Crop"; ObjectID = "eo2-Tt-SLx"; */
 "eo2-Tt-SLx.title" = "Cortar";
@@ -371,7 +371,7 @@
 "jxT-CU-nIS.title" = "Reprodução";
 
 /* Class = "NSMenuItem"; title = "Load External Subtitle…"; ObjectID = "k6x-hf-ATi"; */
-"k6x-hf-ATi.title" = "Load External Subtitle…";
+"k6x-hf-ATi.title" = "Carregar legenda externa…";
 
 /* Class = "NSMenuItem"; title = "Bigger Size"; ObjectID = "lDC-IC-peP"; */
 "lDC-IC-peP.title" = "Tamanho Maior";
@@ -389,7 +389,7 @@
 "m7w-hc-Y2F.title" = "Tornar Letras Maiúsculas";
 
 /* Class = "NSMenuItem"; title = "Second Subtitle"; ObjectID = "mGw-jm-5x2"; */
-"mGw-jm-5x2.title" = "Second Subtitle";
+"mGw-jm-5x2.title" = "Segunda legenda";
 
 /* Class = "NSMenuItem"; title = "Enter Picture in Picture"; ObjectID = "mND-N8-z6o"; */
 "mND-N8-z6o.title" = "Usar Picture in Picture";
@@ -410,7 +410,7 @@
 "oas-Oc-fiZ.title" = "Abrir Recente";
 
 /* Class = "NSMenuItem"; title = "Previous Media"; ObjectID = "oqG-7L-NLD"; */
-"oqG-7L-NLD.title" = "Previous Media";
+"oqG-7L-NLD.title" = "Ficheiro anterior";
 
 /* Class = "NSMenuItem"; title = "Previous Frame"; ObjectID = "oxF-BB-lBy"; */
 "oxF-BB-lBy.title" = "Frame Anterior";

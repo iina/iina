@@ -126,8 +126,8 @@
 "alert.mpv_error" = "Erro interno %@ (%@) ao definir a opção %@.";
 "alert.sleep" = "Impossível prevenir a pausa do ecrã!";
 
-"alert.unsupported_audio" = "Unsupported external audio file.";
-"alert.unsupported_sub" = "Unsupported external subtitle.";
+"alert.unsupported_audio" = "Ficheiro de áudio externo não suportado.";
+"alert.unsupported_sub" = "Legenda externa não suportada.";
 "alert.unsupported_url" = "URL não suportado.";
 "alert.wrong_url_format" = "Formato do URL errado.";
 
@@ -137,7 +137,7 @@
 "alert.error_saving_file" = "Error occured when saving %@: %@";
 "alert.error_deleting_file" = "Não foi possível apagar o ficheiro.";
 
-"alert.config.new.title" = "New Input Configuration";
+"alert.config.new.title" = "Nova configuração";
 "alert.config.new.message" = "Please enter a name for the new configuration.";
 "alert.config.duplicate.title" = "Duplicar Configuração";
 "alert.config.duplicate.message" = "Please enter name for the duplicated configuration file.";
@@ -163,12 +163,12 @@
 
 "alert.sub.no_selected" = "Por favor, seleccione uma legenda transferida primeiro.";
 "alert.sub_lang_not_set" = "Please set preferred subtitle languages in preferences before using OpenSubtitles. English(eng) will be used this time.";
-"alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
+"alert.sub.cannot_save_passwd" = "Não é possível guardar a palavra-passe no Porta-chaves: %@";
 "alert.sub.cannot_login" = "Impossível iniciar sessão. Por favor verifique o seu nome de utilizador, palavra-passe e estado da rede.\n\n%@";
 
 "alert.set_default.title" = "Definir IINA como Aplicação Predefinida";
 "alert.set_default.message" = "IINA will be set as the default app for all file types it supports.";
-"alert.set_default.success" = "Finished with %d success and %d failed.";
+"alert.set_default.success" = "Terminado com %d de sucesso e %d de falhas.";
 
 "alert.add_watch.title" = "Adicionar Propriedade de Relógio";
 "alert.add_watch.message" = "Please enter a valid mpv property name.";
@@ -214,7 +214,7 @@
 "alert.assrt_register.try" = "Tentar primeiro";
 "alert.assrt_token_prompt.title" = "Enter your API token";
 "alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
-"alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
+"alert.assrt_token_invalid" = "O seu token Assrt API parece ser inválido.";
 
 "playlist.total_length" = "%@ no total";
 "playlist.total_length_with_selected" = "%@ de %@ selecionado";
@@ -238,7 +238,7 @@
 "pl_menu.copy_url" = "Copiar URL";
 "pl_menu.copy_url_multi" = "Copiar URLs";
 
-"keymapping.title" = "Key Mapping";
+"keymapping.title" = "Mapeamento de teclas";
 "keymapping.message" = "Pressione qualquer tecla para gravar.";
 
 "filter.video_filters" = "Filtros de Vídeo";
@@ -268,7 +268,7 @@
 "touchbar.increase_volume" = "Volume +";
 "touchbar.decrease_volume" = "Volume -";
 "touchbar.rewind" = "Recuar";
-"touchbar.fast_forward" = "Fast Forward";
+"touchbar.fast_forward" = "Avançar rápido";
 "touchbar.play_pause" = "Reproduzir / Pausa";
 "touchbar.seek" = "Procurar";
 "touchbar.time" = "Time Position";

@@ -9,16 +9,16 @@
 "cmd.ignore" = "Ignorar";
 "cmd.seek" = "Procurar";
 "cmd.revert-seek" = "Revert seek";
-"cmd.set" = "Set";
+"cmd.set" = "Estabelecer";
 "cmd.cycle" = "Ciclo";
 "cmd.cycle-values" = "Ciclo em";
 "cmd.add" = "Alterar";
 "cmd.multiply" = "Multiplicar";
-"cmd.frame-step" = "Next frame";
+"cmd.frame-step" = "Próximo frame";
 "cmd.frame-back-step" = "Frame anterior";
 "cmd.ab-loop" = "Loop A-B";
 "cmd.sub-seek" = "Subtitle seek";
-"cmd.playlist-next" = "Next media";
+"cmd.playlist-next" = "Ficheiro seguinte";
 "cmd.playlist-prev" = "Ficheiro anterior";
 "cmd.playlist-move" = "Mover item da playlist";
 "cmd.playlist-clear" = "Limpar Lista de Reprodução";
@@ -95,11 +95,11 @@
 "opt.mute" = "Desativar Som";
 "opt.audio-delay" = "Atraso do áudio";
 
-"opt.sub" = "Subtitle track";
-"opt.sub-delay" = "Subtitle delay";
-"opt.sub-pos" = "Subtitle position";
-"opt.sub-scale" = "Subtitle scale";
-"opt.sub-visibility" = "Subtitle visibility";
+"opt.sub" = "Faixa da legenda";
+"opt.sub-delay" = "Atraso da legenda";
+"opt.sub-pos" = "Posição da legenda";
+"opt.sub-scale" = "Tamanho legenda";
+"opt.sub-visibility" = "Visibilidade da legenda";
 "opt.sub-ass-style-override" = "Substituição de estilo ASS";
 
 "opt.fullscreen" = "Ecrã completo";
@@ -107,7 +107,7 @@
 
 "opt.chapter" = "Capítulo";
 
-"read.set" = "Set {{property}} to {{value}}";
+"read.set" = "Estabelecer {{property}} para {{value}}";
 "read.add" = "{{property}} {{value}}";
 "read.multiply" = "Multiplicar {{property}} por {{factor}}x";
 "read.cycle" = "Cycle {{property}}{{#dir_down}} Downwards{{/dir_down}}";

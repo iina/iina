@@ -28,7 +28,7 @@
 "osd.pause" = "Pausa";
 "osd.resume" = "Retomar";
 "osd.volume" = "Volume: %i";
-"osd.speed" = "Speed: %.2fx";
+"osd.speed" = "Velocidade: %.2fx";
 "osd.aspect" = "Proporção: %@";
 "osd.crop" = "Cortar: %@";
 "osd.rotate" = "Rodar: %i°";
@@ -36,8 +36,8 @@
 "osd.audio_delay.nodelay" = "Atraso de Áudio: Sem Atraso";
 "osd.audio_delay.later" = "Atraso de Áudio: %.2fs Depois";
 "osd.audio_delay.earlier" = "Atraso de Áudio: %.2fs Antes";
-"osd.sub_delay.nodelay" = "Subtitle Delay: No Delay";
-"osd.sub_delay.later" = "Subtitle Delay: %.2fs Later";
+"osd.sub_delay.nodelay" = "Atraso da legenda: Sem atraso";
+"osd.sub_delay.later" = "Atraso da legenda: %.2fs depois";
 "osd.sub_delay.earlier" = "Atraso da Legenda: %.2fs Antes";
 "osd.subtitle_pos" = "Posição da Legenda: %.1f";
 "osd.mute" = "Desativar Som";
@@ -48,7 +48,7 @@
 "osd.abloop.clear" = "Loop-AB: Limpo";
 "osd.stop" = "Parar";
 "osd.chapter" = "Capítulo: %@";
-"osd.subtitle_scale" = "Subtitle Scale: %.2fx";
+"osd.subtitle_scale" = "Tamanho da legenda: %.2fx";
 "osd.add_to_playlist" = "%i Ficheiros Adicionados à Playlist";
 "osd.clear_playlist" = "Lista de Reprodução Limpa";
 "osd.video_eq.contrast" = "Contraste: %i";
@@ -60,8 +60,8 @@
 "osd.find_online_sub.source" = "de";
 "osd.sub_not_found" = "Não foram encontradas legendas";
 "osd.sub_found" = "%d legendas encontradas. Transferindo…";
-"osd.sub_downloaded" = "Subtitle downloaded";
-"osd.sub_saved" = "Subtitle saved";
+"osd.sub_downloaded" = "Legenda transferida";
+"osd.sub_saved" = "Legenda guardada";
 "osd.network_error" = "Erro de Rede";
 "osd.file_error" = "Erro ao ler o ficheiro";
 "osd.cannot_login" = "Impossível iniciar sessão";
@@ -73,7 +73,7 @@
 "preference.general" = "Geral";
 "preference.ui" = "Interface do Utilizador";
 "preference.video_audio" = "Vídeo/Áudio";
-"preference.subtitle" = "Subtitle";
+"preference.subtitle" = "Legenda";
 "preference.network" = "Rede";
 "preference.control" = "Controlo";
 "preference.keybindings" = "Key Bindings";
@@ -89,25 +89,25 @@
 
 "menu.volume" = "Volume: %d";
 "menu.audio_delay" = "Atraso de Áudio: %.2fs";
-"menu.sub_delay" = "Subtitle Delay: %.2fs";
+"menu.sub_delay" = "Atraso da legenda: %.2fs";
 "menu.fullscreen" = "Entrar em Ecrã Completo";
 "menu.exit_fullscreen" = "Sair do Ecrã Completo";
 "menu.pip" = "Usar Picture in Picture";
 "menu.exit_pip" = "Sair do Picture in Picture";
 "menu.pause" = "Pausa";
 "menu.resume" = "Retomar";
-"menu.speed" = "Speed: %.2fx";
+"menu.speed" = "Velocidade: %.2fx";
 
 "menu.seek_forward" = "Step Forward %.0fs";
 "menu.seek_backward" = "Step Backward %.0fs";
-"menu.speed_up" = "Speed Up by %.1fx";
-"menu.speed_down" = "Speed Down by %.1fx";
+"menu.speed_up" = "Aumentar velocidade em %.1fx";
+"menu.speed_down" = "Reduzir velocidade em %.1fx";
 "menu.volume_up" = "Volume + %.0f%%";
 "menu.volume_down" = "Volume - %.0f%%";
 "menu.audio_delay_up" = "Atraso do áudio + %.1fs";
 "menu.audio_delay_down" = "Atraso de Áudio - %.1fs";
-"menu.sub_delay_up" = "Subtitle Delay + %.1fs";
-"menu.sub_delay_down" = "Subtitle Delay - %.1fs";
+"menu.sub_delay_up" = "Atraso da legenda + %.1fs";
+"menu.sub_delay_down" = "Atraso da legenda - %.1fs";
 
 "track.none" = "<None>";
 
@@ -128,7 +128,7 @@
 
 "alert.unsupported_audio" = "Unsupported external audio file.";
 "alert.unsupported_sub" = "Unsupported external subtitle.";
-"alert.unsupported_url" = "Unsupported URL.";
+"alert.unsupported_url" = "URL não suportado.";
 "alert.wrong_url_format" = "Formato do URL errado.";
 
 "alert.error_open" = "Impossível abrir ficheiro ou stream!";
@@ -141,8 +141,8 @@
 "alert.config.new.message" = "Please enter a name for the new configuration.";
 "alert.config.duplicate.title" = "Duplicar Configuração";
 "alert.config.duplicate.message" = "Please enter name for the duplicated configuration file.";
-"alert.config.empty_name" = "The name cannot be empty.";
-"alert.config.name_existing" = "The name already exists.";
+"alert.config.empty_name" = "Este nome não pode estar vazio.";
+"alert.config.name_existing" = "Este nome já existe.";
 "alert.config.file_existing.title" = "Ficheiro já existe";
 "alert.config.file_existing.message" = "Isto não deveria acontecer. Escolha OK para substituir, Cancelar para mostrar o ficheiro no Finder.";
 "alert.config.cannot_create" = "Não foi possível criar um ficheiro de configuração!\n%@";
@@ -161,7 +161,7 @@
 
 "alert.playlist.error_deleting" = "Erro ao apagar: %@";
 
-"alert.sub.no_selected" = "Please select a downloaded subtitle first.";
+"alert.sub.no_selected" = "Por favor, seleccione uma legenda transferida primeiro.";
 "alert.sub_lang_not_set" = "Please set preferred subtitle languages in preferences before using OpenSubtitles. English(eng) will be used this time.";
 "alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
 "alert.sub.cannot_login" = "Impossível iniciar sessão. Por favor verifique o seu nome de utilizador, palavra-passe e estado da rede.\n\n%@";
@@ -174,7 +174,7 @@
 "alert.add_watch.message" = "Please enter a valid mpv property name.";
 
 "alert.jump_to.title" = "Saltar para";
-"alert.jump_to.message" = "Please enter the time you want to jump to. Example: 20:35";
+"alert.jump_to.message" = "Por favor, introduza o tempo para qual quer saltar. Exemplo: 20:35";
 
 "alert.opensub.login.title" = "Login OpenSubtitles";
 "alert.opensub.login.message" = "Por favor, introduza um nome de utilizador e palavra-passe";

@@ -53,13 +53,13 @@
 "6Eq-ni-6hG.title" = "Entrar em Ecrã Completo";
 
 /* Class = "NSMenuItem"; title = "Step Forward 5s"; ObjectID = "6yE-op-DTS"; */
-"6yE-op-DTS.title" = "Step Forward 5s";
+"6yE-op-DTS.title" = "Avançar 5s";
 
 /* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "7Bn-Mp-EvJ"; */
 "7Bn-Mp-EvJ.title" = "Transformações";
 
 /* Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "7rG-Yq-EYG"; */
-"7rG-Yq-EYG.title" = "Stop Speaking";
+"7rG-Yq-EYG.title" = "Parar de falar";
 
 /* Class = "NSMenuItem"; title = "Speech"; ObjectID = "8Oy-tP-udW"; */
 "8Oy-tP-udW.title" = "Fala";
@@ -128,7 +128,7 @@
 "F2S-fz-NVQ.title" = "Ajuda";
 
 /* Class = "NSMenuItem"; title = "Next Chapter"; ObjectID = "F6G-Ln-fqI"; */
-"F6G-Ln-fqI.title" = "Next Chapter";
+"F6G-Ln-fqI.title" = "Próximo capítulo";
 
 /* Class = "NSMenuItem"; title = "IINA Help"; ObjectID = "FKE-Sm-Kum"; */
 "FKE-Sm-Kum.title" = "Ajuda IINA";
@@ -224,10 +224,10 @@
 "P1a-ot-P31.title" = "Repor Tamanho da Legenda";
 
 /* Class = "NSMenuItem"; title = "Encoding"; ObjectID = "Pci-OQ-Vni"; */
-"Pci-OQ-Vni.title" = "Encoding";
+"Pci-OQ-Vni.title" = "Codificação";
 
 /* Class = "NSMenu"; title = "Encoding"; ObjectID = "Pf6-5i-B1E"; */
-"Pf6-5i-B1E.title" = "Encoding";
+"Pf6-5i-B1E.title" = "Codificação";
 
 /* Class = "NSMenuItem"; title = "Video Filters…"; ObjectID = "PyY-pR-jz7"; */
 "PyY-pR-jz7.title" = "Filtros de Vídeo…";
@@ -248,7 +248,7 @@
 "SLr-6g-Mgh.title" = "Repor Atraso da Legenda";
 
 /* Class = "NSMenuItem"; title = "Step Backward 5s"; ObjectID = "Sif-85-FF1"; */
-"Sif-85-FF1.title" = "Step Backward 5s";
+"Sif-85-FF1.title" = "Recuar 5s";
 
 /* Class = "NSMenuItem"; title = "Subtitle Delay: "; ObjectID = "THG-4o-U6A"; */
 "THG-4o-U6A.title" = "Atraso da legenda: ";
@@ -434,7 +434,7 @@
 "sW8-ri-eA5.title" = "Áudio";
 
 /* Class = "NSMenuItem"; title = "Cycle Subtitles"; ObjectID = "sgu-dK-IGE"; */
-"sgu-dK-IGE.title" = "Cycle Subtitles";
+"sgu-dK-IGE.title" = "Ciclo de legendas";
 
 /* Class = "NSMenuItem"; title = "Half Size"; ObjectID = "snW-S8-Cw5"; */
 "snW-S8-Cw5.title" = "Metade do Tamanho";
@@ -446,7 +446,7 @@
 "tXI-mr-wws.title" = "Abrir Recente";
 
 /* Class = "NSMenuItem"; title = "Cycle Video Tracks"; ObjectID = "taT-mP-2Kv"; */
-"taT-mP-2Kv.title" = "Cycle Video Tracks";
+"taT-mP-2Kv.title" = "Ciclo de ficheiros de vídeo";
 
 /* Class = "NSMenuItem"; title = "Subtitle"; ObjectID = "uGZ-lo-pJJ"; */
 "uGZ-lo-pJJ.title" = "Legenda";

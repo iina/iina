@@ -8,7 +8,7 @@
 "1Tq-5k-o6R.title" = "Topo";
 
 /* Class = "NSButtonCell"; title = "Display subtitles in letterboxes while in full screen"; ObjectID = "2XY-Un-0Fg"; */
-"2XY-Un-0Fg.title" = "Display subtitles in letterboxes while in full screen";
+"2XY-Un-0Fg.title" = "Mostrar legendas em caixas de texto quando em ecrã completo";
 
 /* Class = "NSTextFieldCell"; title = "strip"; ObjectID = "3H8-Ei-cTm"; */
 "3H8-Ei-cTm.title" = "strip";
@@ -20,10 +20,10 @@
 "6i0-Sx-V7F.title" = "Inferior";
 
 /* Class = "NSTextFieldCell"; title = "Subtitles have priority when filename containing:"; ObjectID = "7pf-Kb-TNr"; */
-"7pf-Kb-TNr.title" = "Subtitles have priority when filename containing:";
+"7pf-Kb-TNr.title" = "Legendas com prioridade se o nome do ficheiro contiver:";
 
 /* Class = "NSButtonCell"; title = "Scale subtitles with window size"; ObjectID = "8hj-ki-R0h"; */
-"8hj-ki-R0h.title" = "Scale subtitles with window size";
+"8hj-ki-R0h.title" = "Dimensionar legendas de acordo com o tamanho da janela";
 
 /* Class = "NSTextFieldCell"; title = "Font spacing:"; ObjectID = "9EP-XB-lyO"; */
 "9EP-XB-lyO.title" = "Espaçamento do tipo de letra:";
@@ -164,7 +164,7 @@
 "vDc-dw-liI.title" = "Cor:";
 
 /* Class = "NSTextFieldCell"; title = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues."; ObjectID = "vYb-qH-XkH"; */
-"vYb-qH-XkH.title" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues.";
+"vYb-qH-XkH.title" = "Se activado, o IINA procurará automaticamente legendas online apenas vídeos sem legendas carregadas e com mais de 20 minutos de duração.";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "xGf-fF-4Hx"; */
 "xGf-fF-4Hx.title" = "Y:";

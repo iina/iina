@@ -33,7 +33,7 @@ extension MPVPlaylistItem {
 
 extension MPVPlaylistItem {
 
-  @objc var scriptingURL: String { isNetworkResource ? filename : URL(fileURLWithPath: filename).absoluteString }
+  @objc var scriptingURLString: String { isNetworkResource ? filename : URL(fileURLWithPath: filename).absoluteString }
 
   @objc var scriptingFile: URL? { isNetworkResource ? nil : URL(fileURLWithPath: filename) }
 

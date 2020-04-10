@@ -269,7 +269,7 @@
       </property>
 
       <property name="URL" code="pURL" type="text" access="r">
-        <cocoa key="scriptingURL"/>
+        <cocoa key="scriptingURLString"/>
       </property>
 
       <property name="name" code="pnam" type="text" access="r">

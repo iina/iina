@@ -18,7 +18,7 @@ extension AppDelegate {
     return NSApp.orderedWindows.lazy.filter(\.isVisible).compactMap { ($0.delegate as? PlayerWindowController)?.player }
   }
 
-  @objc(handlePlayCommand:) func handlePlayCommand(_ command: NSScriptCommand) {
+  @objc func handlePlayCommand(_ command: NSScriptCommand) {
     
   }
 

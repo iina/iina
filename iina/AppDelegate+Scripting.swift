@@ -11,7 +11,7 @@ import AppKit
 extension AppDelegate {
 
   func application(_ sender: NSApplication, delegateHandlesKey key: String) -> Bool {
-    return Set(["orderedPlayerWindows", "orderedPlayers"]).contains(key)
+    return key == "orderedPlayers"
   }
 
   @objc var orderedPlayers: [PlayerCore] {

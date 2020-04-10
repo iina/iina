@@ -15,16 +15,7 @@ extension AppDelegate {
   }
 
   @objc var orderedPlayers: [PlayerCore] {
-    let windows = NSApp.orderedWindows
-    var players = [PlayerCore]()
-
-    for window in windows {
-      if window.isVisible, let controller = window.delegate as? PlayerWindowController {
-        players.append(controller.player)
-      }
-    }
-
-    return players
+    return NSApp.orderedWindows.lazy.filter(\.isVisible).compactMap { ($0.delegate as? PlayerWindowController)?.player }
   }
 
   @objc(handlePlayCommand:) func handlePlayCommand(_ command: NSScriptCommand) {

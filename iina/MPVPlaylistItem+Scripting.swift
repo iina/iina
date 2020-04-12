@@ -11,7 +11,7 @@ import Foundation
 extension MPVPlaylistItem {
 
   @objc override var classCode: FourCharCode {
-    return "cPlL"
+    return "cPLI"
   }
 
   var scriptingIndex: Int? {

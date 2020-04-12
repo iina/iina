@@ -2,7 +2,7 @@
 "0vG-Pg-DIl.title" = "Wymuszony";
 
 /* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "1dz-Vt-0MO"; */
-"1dz-Vt-0MO.title" = "FPS:";
+"1dz-Vt-0MO.title" = "FPS (klatki na sekundę):";
 
 /* Class = "NSTextFieldCell"; title = "File path:"; ObjectID = "4jf-w4-kkv"; */
 "4jf-w4-kkv.title" = "Ścieżka pliku:";
@@ -17,7 +17,7 @@
 "9eq-rd-zGy.title" = "Tytuł:";
 
 /* Class = "NSTextFieldCell"; title = "Bit Rate:"; ObjectID = "A4y-LL-x0z"; */
-"A4y-LL-x0z.title" = "Bit Rate:";
+"A4y-LL-x0z.title" = "Szybkość:";
 
 /* Class = "NSTextFieldCell"; title = "Mistimed Frames:"; ObjectID = "AYt-pH-UCi"; */
 "AYt-pH-UCi.title" = "Spóźnionych klatek:";
@@ -131,7 +131,7 @@
 "jCY-og-BAa.title" = "ID źródła:";
 
 /* Class = "NSTextFieldCell"; title = "Bit Rate:"; ObjectID = "jyV-Pd-UvH"; */
-"jyV-Pd-UvH.title" = "Bit Rate:";
+"jyV-Pd-UvH.title" = "Szybkość:";
 
 /* Class = "NSTextFieldCell"; title = "Sample Rate:"; ObjectID = "llF-4b-Z8b"; */
 "llF-4b-Z8b.title" = "Częstotliwość próbkowania:";

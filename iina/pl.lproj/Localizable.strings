@@ -46,7 +46,7 @@
 "osd.abloop.a" = "Pętla-AB: A";
 "osd.abloop.b" = "Pętla-AB: B";
 "osd.abloop.clear" = "Pętla-AB: wyzeruj";
-"osd.stop" = "Stop";
+"osd.stop" = "Zatrzymaj";
 "osd.chapter" = "Rozdział: %@";
 "osd.subtitle_scale" = "Rozmiar: %.2fx";
 "osd.add_to_playlist" = "Dodano %i plików do playlisty";
@@ -203,7 +203,7 @@
 "alert.clear_watch_later.title" = "Wyczyść zapisane postępy odtwarzania";
 "alert.clear_watch_later.message" = "Czy na pewno chcesz usunąć wszystkie postępy odtwarzania (dane \"obejrzyj później\") ?";
 
-"alert.nothing_to_open" = "Nothing to open.";
+"alert.nothing_to_open" = "Nic do otwarcia.";
 
 "alert.no_video_track" = "Ten plik nie posiada żadnej ścieżki video.";
 

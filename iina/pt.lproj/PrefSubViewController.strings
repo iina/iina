@@ -11,7 +11,7 @@
 "2XY-Un-0Fg.title" = "Mostrar legendas em caixas de texto quando em ecrã completo";
 
 /* Class = "NSTextFieldCell"; title = "strip"; ObjectID = "3H8-Ei-cTm"; */
-"3H8-Ei-cTm.title" = "strip";
+"3H8-Ei-cTm.title" = "faixa";
 
 /* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "4Tb-Yh-PdP"; */
 "4Tb-Yh-PdP.title" = "Posição:";
@@ -62,13 +62,13 @@
 "LiG-iV-AQK.title" = "Outros:";
 
 /* Class = "NSTextFieldCell"; title = "Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed."; ObjectID = "Luv-2B-9v8"; */
-"Luv-2B-9v8.title" = "Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed.";
+"Luv-2B-9v8.title" = "Diretórios são separados por dois pontos (:). Caminhos relativos e curingas (*) no final são permitidos.";
 
 /* Class = "NSTextFieldCell"; title = "Please enter a comma-separated list of strings."; ObjectID = "Mk1-sv-QB8"; */
-"Mk1-sv-QB8.title" = "Please enter a comma-separated list of strings.";
+"Mk1-sv-QB8.title" = "Por favor, insira uma lista de strings separadas por vírgulas.";
 
 /* Class = "NSTextFieldCell"; title = "If enabled, all ASS subtitles will be drawn using the styles below."; ObjectID = "OcF-0z-7qe"; */
-"OcF-0z-7qe.title" = "If enabled, all ASS subtitles will be drawn using the styles below.";
+"OcF-0z-7qe.title" = "Se ativado, todas as legendas ASS serão desenhadas usando os estilos abaixo.";
 
 /* Class = "NSTextFieldCell"; title = "Text subtitles:"; ObjectID = "Qda-dp-nhg"; */
 "Qda-dp-nhg.title" = "Legendas de texto:";
@@ -98,7 +98,7 @@
 "Y75-4k-2Du.title" = "Codificação predefinida:";
 
 /* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will works for both mpv and opensubtitles."; ObjectID = "Z2M-dh-eq1"; */
-"Z2M-dh-eq1.title" = "This option will be stored as ISO 639-2 language code and will works for both mpv and opensubtitles.";
+"Z2M-dh-eq1.title" = "Esta opção será armazenada como código de idioma ISO 639-2 e funcionará para mpv e opensubtitles.";
 
 /* Class = "NSTextFieldCell"; title = "Blur:"; ObjectID = "aO9-D6-KG8"; */
 "aO9-D6-KG8.title" = "Desfoque:";

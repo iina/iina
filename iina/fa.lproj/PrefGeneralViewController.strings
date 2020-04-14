@@ -34,14 +34,14 @@
 /* Class = "NSButtonCell"; title = "Pause"; ObjectID = "FbF-jJ-W5b"; */
 "FbF-jJ-W5b.title" = "Pause";
 
-/* Class = "NSTextFieldCell"; title = "When media opened:"; ObjectID = "GNV-VA-NBW"; */
-"GNV-VA-NBW.title" = "When media opened:";
+/* Class = "NSTextFieldCell"; title = "When media is opened:"; ObjectID = "GNV-VA-NBW"; */
+"GNV-VA-NBW.title" = "When media is opened:";
 
 /* Class = "NSMenuItem"; title = "Weekly"; ObjectID = "Imf-6g-2Cd"; */
 "Imf-6g-2Cd.title" = "Weekly";
 
-/* Class = "NSButtonCell"; title = "Window became inactive/active"; ObjectID = "J8g-aS-W6e"; */
-"J8g-aS-W6e.title" = "Window became inactive/active";
+/* Class = "NSButtonCell"; title = "Window becomes inactive/active"; ObjectID = "J8g-aS-W6e"; */
+"J8g-aS-W6e.title" = "Window becomes inactive/active";
 
 /* Class = "NSMenuItem"; title = "Do nothing"; ObjectID = "JfZ-D8-aF2"; */
 "JfZ-D8-aF2.title" = "Do nothing";
@@ -85,11 +85,11 @@
 /* Class = "NSButtonCell"; title = "Receive beta updates"; ObjectID = "f0j-Dn-cxt"; */
 "f0j-Dn-cxt.title" = "Receive beta updates";
 
-/* Class = "NSButtonCell"; title = "Pause when left full screen"; ObjectID = "g2A-Kf-vct"; */
-"g2A-Kf-vct.title" = "Pause when left full screen";
+/* Class = "NSButtonCell"; title = "Pause upon leaving full screen"; ObjectID = "g2A-Kf-vct"; */
+"g2A-Kf-vct.title" = "Pause upon leaving full screen";
 
-/* Class = "NSTextFieldCell"; title = "When launched:"; ObjectID = "gqT-CB-Puw"; */
-"gqT-CB-Puw.title" = "When launched:";
+/* Class = "NSTextFieldCell"; title = "At launch:"; ObjectID = "gqT-CB-Puw"; */
+"gqT-CB-Puw.title" = "At launch:";
 
 /* Class = "NSButtonCell"; title = "Check for updates"; ObjectID = "hWC-KJ-FuC"; */
 "hWC-KJ-FuC.title" = "Check for updates";
@@ -106,8 +106,8 @@
 /* Class = "NSTextFieldCell"; title = "History:"; ObjectID = "jeK-46-2BG"; */
 "jeK-46-2BG.title" = "History:";
 
-/* Class = "NSButtonCell"; title = "Play when entered full screen"; ObjectID = "lOw-pu-Llm"; */
-"lOw-pu-Llm.title" = "Play when entered full screen";
+/* Class = "NSButtonCell"; title = "Play upon entering full screen"; ObjectID = "lOw-pu-Llm"; */
+"lOw-pu-Llm.title" = "Play upon entering full screen";
 
 /* Class = "NSButtonCell"; title = "Include subtitles"; ObjectID = "lvA-Rc-Sh6"; */
 "lvA-Rc-Sh6.title" = "Include subtitles";

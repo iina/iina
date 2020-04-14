@@ -141,6 +141,7 @@ class MenuController: NSObject, NSMenuDelegate {
   // Subtitle
   @IBOutlet weak var subMenu: NSMenu!
   @IBOutlet weak var quickSettingsSub: NSMenuItem!
+  @IBOutlet weak var toggleSubtitles: NSMenuItem!
   @IBOutlet weak var cycleSubtitles: NSMenuItem!
   @IBOutlet weak var subTrackMenu: NSMenu!
   @IBOutlet weak var secondSubTrackMenu: NSMenu!

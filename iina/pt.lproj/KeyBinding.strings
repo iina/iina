@@ -8,7 +8,7 @@
 
 "cmd.ignore" = "Ignorar";
 "cmd.seek" = "Procurar";
-"cmd.revert-seek" = "Revert seek";
+"cmd.revert-seek" = "Reverter busca";
 "cmd.set" = "Estabelecer";
 "cmd.cycle" = "Ciclo";
 "cmd.cycle-values" = "Ciclo em";
@@ -17,14 +17,14 @@
 "cmd.frame-step" = "Próximo frame";
 "cmd.frame-back-step" = "Frame anterior";
 "cmd.ab-loop" = "Loop A-B";
-"cmd.sub-seek" = "Subtitle seek";
+"cmd.sub-seek" = "Busca de legenda";
 "cmd.playlist-next" = "Ficheiro seguinte";
 "cmd.playlist-prev" = "Ficheiro anterior";
 "cmd.playlist-move" = "Mover item da playlist";
 "cmd.playlist-clear" = "Limpar Lista de Reprodução";
 "cmd.playlist-remove" = "Remover atual";
 "cmd.playlist-shuffle" = "Aleatório";
-"cmd.write-watch-later-config" = "Record play history";
+"cmd.write-watch-later-config" = "Gravar histórico de reprodução";
 "cmd.stop" = "Parar";
 "cmd.quit" = "Sair";
 "cmd.quit-watch-later" = "Sair (guardar progresso)";
@@ -53,7 +53,7 @@
 "iina.toggle-mirror" = "Ativar espelho";
 "iina.save-playlist" = "Guardar playlist atual";
 "iina.delete-current-file" = "Apagar ficheiro atual";
-"iina.delete-current-file-hard" = "Delete current file directly without moving to trash";
+"iina.delete-current-file-hard" = "Excluir o arquivo atual diretamente sem mover para a lixeira";
 "iina.find-online-subs" = "Encontrar legendas online";
 "iina.save-downloaded-sub" = "Guardar legenda descarregada";
 
@@ -110,7 +110,7 @@
 "read.set" = "Estabelecer {{property}} para {{value}}";
 "read.add" = "{{property}} {{value}}";
 "read.multiply" = "Multiplicar {{property}} por {{factor}}x";
-"read.cycle" = "Cycle {{property}}{{#dir_down}} Downwards{{/dir_down}}";
-"read.cycle-values" = "Cycle {{property}} in ({{{values}}})";
-"read.seek" = "Seek {{#fwd}}forward{{/fwd}}{{#bwd}}backward{{/bwd}}{{#abs}}to{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";
-"read.sub-seek" = "Seek to {{#skip_1}}next{{/skip_1}}{{#skip_-1}}previous{{/skip_-1}} subtitle";
+"read.cycle" = "Percorrer {{property}}{{#dir_down}} para baixo{{/dir_down}}";
+"read.cycle-values" = "Percorrer {{property}} em ({{{values}}})";
+"read.seek" = "Buscar {{#fwd}}adiante{{/fwd}}{{#bwd}}atrás{{/bwd}}{{#abs}}para{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exacto){{/exact}}{{#kf}}(keyframe){{/kf}}";
+"read.sub-seek" = "Buscar legenda {{#skip_1}}seguinte{{/skip_1}}{{#skip_-1}}anterior{{/skip_-1}}";

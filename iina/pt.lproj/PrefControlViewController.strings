@@ -1,14 +1,14 @@
 /* Class = "NSTextFieldCell"; title = "Seek type:"; ObjectID = "1yb-m4-1sK"; */
-"1yb-m4-1sK.title" = "Seek type:";
+"1yb-m4-1sK.title" = "Tipo de busca:";
 
 /* Class = "NSMenuItem"; title = "Toggle fullscreen"; ObjectID = "6F4-gm-oBg"; */
 "6F4-gm-oBg.title" = "Alternar ecrã completo";
 
 /* Class = "NSTextFieldCell"; title = "Exact seek is more precise but can cause lag and higher CPU usage."; ObjectID = "6FZ-Qm-0k0"; */
-"6FZ-Qm-0k0.title" = "Exact seek is more precise but can cause lag and higher CPU usage.";
+"6FZ-Qm-0k0.title" = "A busca exata é mais precisa, mas pode causar lag e maior uso de CPU.";
 
 /* Class = "NSMenuItem"; title = "Exact seek"; ObjectID = "70P-6t-4jC"; */
-"70P-6t-4jC.title" = "Exact seek";
+"70P-6t-4jC.title" = "Busca exata";
 
 /* Class = "NSMenuItem"; title = "Toggle fullscreen"; ObjectID = "7wy-xt-c8Z"; */
 "7wy-xt-c8Z.title" = "Alternar ecrã completo";
@@ -26,7 +26,7 @@
 "Dm7-JG-fLd.title" = "Pausa / Retomar";
 
 /* Class = "NSTextFieldCell"; title = "Pinch to:"; ObjectID = "E8H-pO-MLc"; */
-"E8H-pO-MLc.title" = "Pinch to:";
+"E8H-pO-MLc.title" = "Pinçar para:";
 
 /* Class = "NSTextFieldCell"; title = "Double click to:"; ObjectID = "GPH-fM-XHN"; */
 "GPH-fM-XHN.title" = "Duplo clique para:";
@@ -104,7 +104,7 @@
 "oOk-y6-lek.title" = "Nenhum";
 
 /* Class = "NSTextFieldCell"; title = "Sensitivity for normal seek:"; ObjectID = "of2-ec-OkC"; */
-"of2-ec-OkC.title" = "Sensitivity for normal seek:";
+"of2-ec-OkC.title" = "Sensibilidade para busca normal:";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "unj-zt-RyU"; */
 "unj-zt-RyU.title" = "Nenhum";
@@ -119,7 +119,7 @@
 "w54-7I-QfW.title" = "Nenhum";
 
 /* Class = "NSMenuItem"; title = "Keyframe seek"; ObjectID = "wBB-fx-Mao"; */
-"wBB-fx-Mao.title" = "Keyframe seek";
+"wBB-fx-Mao.title" = "Busca keyframe";
 
 /* Class = "NSMenuItem"; title = "Seek"; ObjectID = "wcS-tP-wav"; */
 "wcS-tP-wav.title" = "Procurar";

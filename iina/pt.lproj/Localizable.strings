@@ -76,16 +76,16 @@
 "preference.subtitle" = "Legenda";
 "preference.network" = "Rede";
 "preference.control" = "Controlo";
-"preference.keybindings" = "Key Bindings";
+"preference.keybindings" = "Mapeamento de teclas";
 "preference.advanced" = "Avançado";
 "preference.utilities" = "Utilidades";
 "preference.scripts" = "Scripts";
 "preference.not_logged_in" = "Sem sessão iniciada";
 "preference.logged_in_as" = "Sessão iniciada como %@";
-"preference.system_media_control" = "Use system media control";
+"preference.system_media_control" = "Usar controle de mídia do sistema";
 
-"preference.key_binding_hint_1" = "To edit key bindings in current configuration file, click \"Duplicate…\" button first to create a copy.";
-"preference.key_binding_hint_2" = "Double click a row at the right side to edit the corresponding key binding.";
+"preference.key_binding_hint_1" = "Para editar mapeamento de teclas no arquivo de configuração atual, clique no botão \"Duplicar…\" primeiro para criar uma cópia.";
+"preference.key_binding_hint_2" = "Clique duas vezes em uma linha no lado direito para editar o mapeamento de tecla correspondente.";
 
 "menu.volume" = "Volume: %d";
 "menu.audio_delay" = "Atraso de Áudio: %.2fs";
@@ -98,8 +98,8 @@
 "menu.resume" = "Retomar";
 "menu.speed" = "Velocidade: %.2fx";
 
-"menu.seek_forward" = "Step Forward %.0fs";
-"menu.seek_backward" = "Step Backward %.0fs";
+"menu.seek_forward" = "Avançar %.0fs";
+"menu.seek_backward" = "Recuar %.0fs";
 "menu.speed_up" = "Aumentar velocidade em %.1fx";
 "menu.speed_down" = "Reduzir velocidade em %.1fx";
 "menu.volume_up" = "Volume + %.0f%%";
@@ -134,44 +134,44 @@
 "alert.error_open" = "Impossível abrir ficheiro ou stream!";
 "alert.error_finding_file" = "Impossível encontrar o ficheiro %@!";
 "alert.error_loading_script" = "Impossível carregar o script %@!";
-"alert.error_saving_file" = "Error occured when saving %@: %@";
+"alert.error_saving_file" = "Ocorreu um erro ao salvar %@: %@";
 "alert.error_deleting_file" = "Não foi possível apagar o ficheiro.";
 
 "alert.config.new.title" = "Nova configuração";
-"alert.config.new.message" = "Please enter a name for the new configuration.";
+"alert.config.new.message" = "Por favor digite um nome para a nova configuração.";
 "alert.config.duplicate.title" = "Duplicar Configuração";
-"alert.config.duplicate.message" = "Please enter name for the duplicated configuration file.";
+"alert.config.duplicate.message" = "Por favor digite o nome para o arquivo de configuração duplicado.";
 "alert.config.empty_name" = "Este nome não pode estar vazio.";
 "alert.config.name_existing" = "Este nome já existe.";
 "alert.config.file_existing.title" = "Ficheiro já existe";
 "alert.config.file_existing.message" = "Isto não deveria acontecer. Escolha OK para substituir, Cancelar para mostrar o ficheiro no Finder.";
 "alert.config.cannot_create" = "Não foi possível criar um ficheiro de configuração!\n%@";
-"alert.config.cannot_write" = "Cannot write to config file!";
+"alert.config.cannot_write" = "Não foi possível escrever no arquivo de configuração!";
 
-"alert.filter.incorrect" = "Error occured when setting filters. Please check your parameter format.";
+"alert.filter.incorrect" = "Ocorreu um erro ao configurar os filtros. Por favor, verifique o formato de seu parâmetro.";
 "alert.add_filter.title" = "Novo Filtro";
-"alert.add_filter.message" = "Please enter a filter string in format of mpv's vf or af command.";
+"alert.add_filter.message" = "Por favor, digite uma string de filtro no formato de comando vf ou af de mpv.";
 
-"alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
+"alert.keybinding_config.error" = "Erro ao analisar o arquivo de configuração de mapeamento de teclas \"%@\"! Volte para a configuração do padrão mapeamento de teclas do IINA. Por favor, verifique sua configuração.";
 
-"alert.extra_option.cannot_read" = "Cannot read user defined extra mpv options.";
-"alert.extra_option.empty" = "Key or value cannot be empty!";
-"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
+"alert.extra_option.cannot_read" = "Não é possível ler opções mpv definidas pelo usuário.";
+"alert.extra_option.empty" = "Chave ou valor não pode estar vazio!";
+"alert.extra_option.error" = "Erro ao definir opção --%@=%@ com valor de retorno %d. Por favor, verifique as suas opções extra em Preferência > Avançado.";
 "alert.extra_option.config_folder" = "Erro na configuração da pasta \"%@\".";
 
 "alert.playlist.error_deleting" = "Erro ao apagar: %@";
 
 "alert.sub.no_selected" = "Por favor, seleccione uma legenda transferida primeiro.";
-"alert.sub_lang_not_set" = "Please set preferred subtitle languages in preferences before using OpenSubtitles. English(eng) will be used this time.";
+"alert.sub_lang_not_set" = "Por favor, defina os idiomas de legenda preferidos nas preferências antes de usar o OpenSubtitles. Inglês (eng) será usado desta vez.";
 "alert.sub.cannot_save_passwd" = "Não é possível guardar a palavra-passe no Porta-chaves: %@";
 "alert.sub.cannot_login" = "Impossível iniciar sessão. Por favor verifique o seu nome de utilizador, palavra-passe e estado da rede.\n\n%@";
 
 "alert.set_default.title" = "Definir IINA como Aplicação Predefinida";
-"alert.set_default.message" = "IINA will be set as the default app for all file types it supports.";
+"alert.set_default.message" = "O IINA será definido como o aplicativo padrão para todos os tipos de arquivo que ele suporta.";
 "alert.set_default.success" = "Terminado com %d de sucesso e %d de falhas.";
 
 "alert.add_watch.title" = "Adicionar Propriedade de Relógio";
-"alert.add_watch.message" = "Please enter a valid mpv property name.";
+"alert.add_watch.message" = "Por favor, insira um nome de propriedade mpv válido.";
 
 "alert.jump_to.title" = "Saltar para";
 "alert.jump_to.message" = "Por favor, introduza o tempo para qual quer saltar. Exemplo: 20:35";
@@ -189,10 +189,10 @@
 "alert.delete_history.title" = "Apagar Histórico de Reprodução";
 "alert.delete_history.message" = "Tem a certeza que quer apagar as entradas selecionadas?";
 
-"alert.filter_hwdec.message" = "You are about to apply a video fliter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
+"alert.filter_hwdec.message" = "Você está prestes a aplicar um filtro de vídeo. No entanto, o seu descodificador de hardware atual pode não suportar bem filtros de vídeo. Você pode ou desativar a decodificação de hardware ou alternar para Auto(Copiar), que consumirá duas vezes a memória.\nVocê pode precisar repetir a operação anterior (como definir o corte) para fazê-la funcionar.";
 "alert.filter_hwdec.abort" = "Abortar";
-"alert.filter_hwdec.turn_off" = "Turn off hardware decoding";
-"alert.filter_hwdec.use_copy" = "Switch to Auto(Copy)";
+"alert.filter_hwdec.turn_off" = "Desativar decodificação de hardware";
+"alert.filter_hwdec.use_copy" = "Mudar para Auto(Copiar)";
 
 "alert.clear_cache.title" = "Limpar Cache de Miniaturas";
 "alert.clear_cache.message" = "Tem a certeza que pretende limpar toda a cache de thumbnails?";
@@ -200,20 +200,20 @@
 "alert.clear_history.title" = "Limpar Histórico de Reprodução";
 "alert.clear_history.message" = "Tem a certeza que quer apagar todo o histórico de reprodução?";
 
-"alert.clear_watch_later.title" = "Clear Saved Playback Progress";
+"alert.clear_watch_later.title" = "Limpar progresso de reprodução guardado";
 "alert.clear_watch_later.message" = "Tem a certeza que quer apagar todo o progresso de reprodução gravado (dados do \"ver mais tarde\")?";
 
 "alert.nothing_to_open" = "Nada para abrir.";
 
 "alert.no_video_track" = "Não existe faixa de vídeo.";
 
-"alert.duplicate_config" = "You cannot edit default configurations directly. Please duplicate one before editing.";
+"alert.duplicate_config" = "Não é possível editar configurações padrão diretamente. Por favor, duplique uma antes de editar.";
 
-"alert.assrt_register" = "Due to limited API quota, you are strongly recommended to use your own API token. The default token is only for demo usage, and you may encounter network error.";
+"alert.assrt_register" = "Devido a uma cota limitada da API, é altamente recomendável usar seu próprio token de API. O token padrão é apenas para uso de demonstração, e você pode encontrar um erro de rede.";
 "alert.assrt_register.register" = "Registe-se Agora";
 "alert.assrt_register.try" = "Tentar primeiro";
-"alert.assrt_token_prompt.title" = "Enter your API token";
-"alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
+"alert.assrt_token_prompt.title" = "Digite o seu token de API";
+"alert.assrt_token_prompt.message" = "Por favor registe-se na página aberta. Pegue no seu token na sua página inicial de usuário e insira-o abaixo:";
 "alert.assrt_token_invalid" = "O seu token Assrt API parece ser inválido.";
 
 "playlist.total_length" = "%@ no total";
@@ -245,8 +245,8 @@
 "filter.audio_filters" = "Filtros de Áudio";
 
 "hwdec.no" = "Desativar decodificador de hardware.";
-"hwdec.auto" = "Enable hardware decoding. However, most of the video filters won't work properly.";
-"hwdec.auto-copy" = "Enable hardware decoding. It will consume double the memory but work with video filters.";
+"hwdec.auto" = "Activar descodificação por hardware. No entanto, a maioria dos filtros de vídeo não funcionarão corretamente.";
+"hwdec.auto-copy" = "Ativar descodificação por hardware. Consumirá o dobro da memória mas trabalhará com filtros de vídeo.";
 
 "subencoding.auto" = "Detectar automaticamente";
 
@@ -271,6 +271,6 @@
 "touchbar.fast_forward" = "Avançar rápido";
 "touchbar.play_pause" = "Reproduzir / Pausa";
 "touchbar.seek" = "Procurar";
-"touchbar.time" = "Time Position";
+"touchbar.time" = "Posição Temporal";
 "touchbar.remainingTime" = "Tempo restante";
 "touchbar.toggle_pip" = "Alternar Picture-in-Picture";

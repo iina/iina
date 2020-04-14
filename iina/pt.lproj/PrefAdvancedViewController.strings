@@ -8,13 +8,13 @@
 "E3I-Q7-9t1.headerCell.title" = "Nome";
 
 /* Class = "NSTextFieldCell"; title = "The following settings will require restarting IINA to take effect."; ObjectID = "HMa-Vz-EUk"; */
-"HMa-Vz-EUk.title" = "The following settings will require restarting IINA to take effect.";
+"HMa-Vz-EUk.title" = "As configurações seguintes requerem a reinicialização do IINA para surtir efeito.";
 
 /* Class = "NSButtonCell"; title = "Open log directory"; ObjectID = "JDA-g3-RNX"; */
 "JDA-g3-RNX.title" = "Abrir pasta de registo";
 
 /* Class = "NSButtonCell"; title = "Enable logging"; ObjectID = "LCd-uY-Yze"; */
-"LCd-uY-Yze.title" = "Enable logging";
+"LCd-uY-Yze.title" = "Ativar registro de logs";
 
 /* Class = "NSButtonCell"; title = "Choose directory…"; ObjectID = "MRT-u8-xTX"; */
 "MRT-u8-xTX.title" = "Escolher pasta…";
@@ -29,4 +29,4 @@
 "ehL-8Y-G8h.title" = "Usar pasta de configurações:";
 
 /* Class = "NSButtonCell"; title = "Use mpv's OSD"; ObjectID = "phK-g9-Vbg"; */
-"phK-g9-Vbg.title" = "Use mpv's OSD";
+"phK-g9-Vbg.title" = "Usar OSD do mpv";

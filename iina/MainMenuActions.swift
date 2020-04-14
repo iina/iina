@@ -263,6 +263,10 @@ extension MainMenuActionHandler {
 // MARK: - Subtitles
 
 extension MainMenuActionHandler {
+  @objc func menuToggleSubtitle(_ sender: NSMenuItem) {
+    
+  }
+  
   @objc func menuLoadExternalSub(_ sender: NSMenuItem) {
     Utility.quickOpenPanel(title: "Load external subtitle file", chooseDir: false) { url in
       self.player.loadExternalSubFile(url, delay: true)

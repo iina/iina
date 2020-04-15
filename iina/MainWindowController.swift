@@ -93,6 +93,12 @@ class MainWindowController: PlayerWindowController {
 
   // MARK: - Status
 
+  override var isOntop: Bool {
+    didSet {
+      updateOnTopIcon()
+    }
+  }
+
   /** For mpv's `geometry` option. We cache the parsed structure
    so never need to parse it every time. */
   var cachedGeometry: GeometryDef?
@@ -363,6 +369,8 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
+  @IBOutlet var titlebarAccessoryView: NSView!
+
   /** Current OSC view. */
   var currentControlBar: NSView?
 
@@ -378,6 +386,7 @@ class MainWindowController: PlayerWindowController {
 
   @IBOutlet weak var titleBarView: NSVisualEffectView!
   @IBOutlet weak var titleBarBottomBorder: NSBox!
+  @IBOutlet weak var titlebarOnTopButton: NSButton!
 
   @IBOutlet weak var controlBarFloating: ControlBarView!
   @IBOutlet weak var controlBarBottom: NSVisualEffectView!
@@ -454,6 +463,12 @@ class MainWindowController: PlayerWindowController {
 
     titleBarView.layerContentsRedrawPolicy = .onSetNeedsDisplay
 
+    let titlebarAccesoryViewController = NSTitlebarAccessoryViewController()
+    titlebarAccesoryViewController.view = titlebarAccessoryView
+    titlebarAccesoryViewController.layoutAttribute = .right
+    window.addTitlebarAccessoryViewController(titlebarAccesoryViewController)
+    updateOnTopIcon()
+
     // size
     window.minSize = minSize
     if let wf = windowFrameFromGeometry() {
@@ -478,6 +493,7 @@ class MainWindowController: PlayerWindowController {
     // fade-able views
     fadeableViews.append(contentsOf: standardWindowButtons as [NSView])
     fadeableViews.append(titleBarView)
+    fadeableViews.append(titlebarAccessoryView)
 
     // video view
     guard let cv = window.contentView else { return }
@@ -1078,7 +1094,7 @@ class MainWindowController: PlayerWindowController {
     standardWindowButtons.forEach { $0.alphaValue = 0 }
     titleTextField?.alphaValue = 0
 
-    setWindowFloatingOnTop(false)
+    setWindowFloatingOnTop(false, updateOnTopStatus: false)
 
     thumbnailPeekView.isHidden = true
     timePreviewWhenSeek.isHidden = true
@@ -1184,7 +1200,7 @@ class MainWindowController: PlayerWindowController {
 
     // restore ontop status
     if player.info.isPlaying {
-      setWindowFloatingOnTop(isOntop)
+      setWindowFloatingOnTop(isOntop, updateOnTopStatus: false)
     }
 
     resetCollectionBehavior()
@@ -1518,6 +1534,11 @@ class MainWindowController: PlayerWindowController {
       window?.setTitleWithRepresentedFilename(player.info.currentURL?.path ?? "")
     }
     addDocIconToFadeableViews()
+  }
+
+  func updateOnTopIcon() {
+    titlebarOnTopButton.isHidden = Preference.bool(for: .alwaysShowOnTopIcon) ? false : !isOntop
+    titlebarOnTopButton.state = isOntop ? .on : .off
   }
 
   // MARK: - UI: OSD
@@ -2137,12 +2158,11 @@ class MainWindowController: PlayerWindowController {
     blackWindows = []
   }
 
-  override func setWindowFloatingOnTop(_ onTop: Bool) {
+  override func setWindowFloatingOnTop(_ onTop: Bool, updateOnTopStatus: Bool = true) {
     guard !fsState.isFullscreen else { return }
-    super.setWindowFloatingOnTop(onTop)
+    super.setWindowFloatingOnTop(onTop, updateOnTopStatus: updateOnTopStatus)
 
     resetCollectionBehavior()
-
     // don't know why they will be disabled
     standardWindowButtons.forEach { $0.isEnabled = true }
   }
@@ -2309,6 +2329,10 @@ class MainWindowController: PlayerWindowController {
       player.seek(relativeSecond: left ? -10 : 10, option: .relative)
 
     }
+  }
+
+  @IBAction func ontopButtonnAction(_ sender: NSButton) {
+    setWindowFloatingOnTop(!isOntop)
   }
 
   /// Legacy IBAction, but still in use.

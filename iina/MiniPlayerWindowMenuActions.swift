@@ -11,8 +11,7 @@ import Foundation
 extension MiniPlayerWindowController {
 
   @objc func menuAlwaysOnTop(_ sender: AnyObject) {
-    isOntop = !isOntop
-    setWindowFloatingOnTop(isOntop)
+    setWindowFloatingOnTop(!isOntop)
   }
 
 

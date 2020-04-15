@@ -758,15 +758,15 @@ class MPVController: NSObject {
       player.postNotification(.iinaSIDChanged)
 
     case MPVOption.PlaybackControl.pause:
-      if let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
-        if player.info.isPaused != data {
-          player.sendOSD(data ? .pause : .resume)
-          player.info.isPaused = data
+      if let paused = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
+        if player.info.isPaused != paused {
+          player.sendOSD(paused ? .pause : .resume)
+          player.info.isPaused = paused
         }
         if player.mainWindow.loaded {
           if Preference.bool(for: .alwaysFloatOnTop) {
             DispatchQueue.main.async {
-              self.player.mainWindow.setWindowFloatingOnTop(!data)
+              self.player.mainWindow.setWindowFloatingOnTop(!paused)
             }
           }
         }
@@ -910,7 +910,6 @@ class MPVController: NSObject {
       let ontop = getFlag(MPVOption.Window.ontop)
       if ontop != player.mainWindow.isOntop {
         DispatchQueue.main.async {
-          self.player.mainWindow.isOntop = ontop
           self.player.mainWindow.setWindowFloatingOnTop(ontop)
         }
       }

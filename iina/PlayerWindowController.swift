@@ -73,7 +73,6 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     case PK.alwaysFloatOnTop.rawValue:
       if let newValue = change[.newKey] as? Bool {
         if player.info.isPlaying {
-          self.isOntop = newValue
           setWindowFloatingOnTop(newValue)
         }
       }
@@ -382,7 +381,6 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   
   func windowDidOpen() {
     if Preference.bool(for: .alwaysFloatOnTop) {
-      isOntop = true
       setWindowFloatingOnTop(true)
     }
     videoView.startDisplayLink()
@@ -441,9 +439,12 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   /** This method will not set `isOntop`! */
-  func setWindowFloatingOnTop(_ onTop: Bool) {
+  func setWindowFloatingOnTop(_ onTop: Bool, updateOnTopStatus: Bool = true) {
     guard let window = window else { return }
     window.level = onTop ? .iinaFloating : .normal
+    if (updateOnTopStatus) {
+      self.isOntop = onTop
+    }
   }
 
   // MARK: - IBActions

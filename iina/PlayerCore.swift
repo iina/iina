@@ -1174,8 +1174,7 @@ class PlayerCore: NSObject {
     let ontop = mpv.getFlag(MPVOption.Window.ontop)
     if ontop != mainWindow.isOntop {
       DispatchQueue.main.async {
-        self.mainWindow.isOntop = ontop
-        self.mainWindow.setWindowFloatingOnTop(ontop)
+        self.mainWindow.setWindowFloatingOnTop(ontop, updateOnTopStatus: false)
       }
     }
   }

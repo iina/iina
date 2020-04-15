@@ -74,6 +74,7 @@ struct Preference {
     static let resumeLastPosition = Key("resumeLastPosition")
 
     static let alwaysFloatOnTop = Key("alwaysFloatOnTop")
+    static let alwaysShowOnTopIcon = Key("alwaysShowOnTopIcon")
 
     static let pauseWhenMinimized = Key("pauseWhenMinimized")
     static let pauseWhenInactive = Key("pauseWhenInactive")
@@ -678,6 +679,7 @@ struct Preference {
     .useMediaKeys: true,
     .useAppleRemote: false,
     .alwaysFloatOnTop: false,
+    .alwaysShowOnTopIcon: false,
     .blackOutMonitor: false,
     .pauseWhenMinimized: false,
     .pauseWhenInactive: false,

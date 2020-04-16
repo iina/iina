@@ -8,7 +8,7 @@
 "2rJ-mg-OuU.title" = "Сохранить в";
 
 /* Class = "NSButtonCell"; title = "Copy to clipboard"; ObjectID = "3gs-3w-rg6"; */
-"3gs-3w-rg6.title" = "Копировать в буфер обмена";
+"3gs-3w-rg6.title" = "Скопировать в буфер обмена";
 
 /* Class = "NSTextFieldCell"; title = "Options:"; ObjectID = "4Qe-7S-8xK"; */
 "4Qe-7S-8xK.title" = "Опции:";
@@ -17,7 +17,7 @@
 "55O-ik-ql6.title" = "Включить меню «Открыть недавние»";
 
 /* Class = "NSButtonCell"; title = "Minimized/un-minimized"; ObjectID = "5Y9-bX-K0f"; */
-"5Y9-bX-K0f.title" = "Свернут/Развернут";
+"5Y9-bX-K0f.title" = "Окно свернуто/развернуто";
 
 /* Class = "NSTextFieldCell"; title = "Playlist:"; ObjectID = "6TV-DG-503"; */
 "6TV-DG-503.title" = "Плейлист:";
@@ -56,7 +56,7 @@
 "Lac-Ol-g6E.title" = "Автоматически воспроизводить следующий файл";
 
 /* Class = "NSButtonCell"; title = "Always open media in new window"; ObjectID = "M0z-bI-88d"; */
-"M0z-bI-88d.title" = "Всегда открывать медиа в новом окне";
+"M0z-bI-88d.title" = "Всегда открывать файлы в новом окне";
 
 /* Class = "NSButtonCell"; title = "Enter fullscreen"; ObjectID = "MlG-hl-goB"; */
 "MlG-hl-goB.title" = "Войти в полноэкранный режим";
@@ -119,13 +119,13 @@
 "pdx-zt-kf2.title" = "Скриншоты:";
 
 /* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "slG-Jb-54B"; */
-"slG-Jb-54B.title" = "Почасовой";
+"slG-Jb-54B.title" = "Каждый час";
 
 /* Class = "NSTextFieldCell"; title = "Behavior:"; ObjectID = "uQR-Fx-oEm"; */
 "uQR-Fx-oEm.title" = "Поведение:";
 
 /* Class = "NSTextFieldCell"; title = "Pause/resume when:"; ObjectID = "xr2-rB-O0x"; */
-"xr2-rB-O0x.title" = "Пауза/Воспроизведение, когда:";
+"xr2-rB-O0x.title" = "Остановить/продолжить воспроизведение, когда:";
 
 /* Class = "NSMenuItem"; title = "Show welcome window"; ObjectID = "z9T-8h-1T0"; */
 "z9T-8h-1T0.title" = "Показать окно приветствия";

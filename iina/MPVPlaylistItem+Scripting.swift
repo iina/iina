@@ -8,17 +8,17 @@
 
 import Foundation
 
-extension MPVPlaylistItem {
+@objc extension MPVPlaylistItem {
 
-  @objc override var classCode: FourCharCode {
+  override var classCode: FourCharCode {
     return "cPLI"
   }
 
-  var scriptingIndex: Int? {
+  @nonobjc var scriptingIndex: Int? {
     return player?.info.playlist.firstIndex { $0 === self }
   }
 
-  @objc override var objectSpecifier: NSScriptObjectSpecifier? {
+  override var objectSpecifier: NSScriptObjectSpecifier? {
     guard let player = player else { return nil }
 
     let containerClass = NSScriptClassDescription(for: PlayerCore.self);
@@ -31,18 +31,18 @@ extension MPVPlaylistItem {
 
 }
 
-extension MPVPlaylistItem {
+@objc extension MPVPlaylistItem {
 
-  @objc var scriptingURLString: String { isNetworkResource ? filename : URL(fileURLWithPath: filename).absoluteString }
+  var scriptingURLString: String { isNetworkResource ? filename : URL(fileURLWithPath: filename).absoluteString }
 
-  @objc var scriptingFile: URL? { isNetworkResource ? nil : URL(fileURLWithPath: filename) }
+  var scriptingFile: URL? { isNetworkResource ? nil : URL(fileURLWithPath: filename) }
 
-  @objc var scriptingName: String? { title }
+  var scriptingName: String? { title }
 
-  @objc var scriptingIsCurrent: Bool { isCurrent }
+  var scriptingIsCurrent: Bool { isCurrent }
 
-  @objc var scriptingIsPlaying: Bool { isPlaying }
+  var scriptingIsPlaying: Bool { isPlaying }
 
-  @objc var scriptingIsNetworkResource: Bool { isNetworkResource }
+  var scriptingIsNetworkResource: Bool { isNetworkResource }
 
 }

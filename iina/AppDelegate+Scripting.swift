@@ -8,17 +8,17 @@
 
 import AppKit
 
-extension AppDelegate {
+@objc extension AppDelegate {
 
   func application(_ sender: NSApplication, delegateHandlesKey key: String) -> Bool {
     return key == "orderedPlayers"
   }
 
-  @objc var orderedPlayers: [PlayerCore] {
+  var orderedPlayers: [PlayerCore] {
     return NSApp.orderedWindows.lazy.filter(\.isVisible).compactMap { ($0.delegate as? PlayerWindowController)?.player }
   }
 
-  @objc func handlePlayCommand(_ command: NSScriptCommand) {
+  func handlePlayCommand(_ command: NSScriptCommand) {
     
   }
 

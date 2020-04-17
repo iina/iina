@@ -8,9 +8,9 @@
 
 import AppKit
 
-extension PlayerCore {
+@objc extension PlayerCore {
 
-  @objc override var classCode: FourCharCode {
+  override var classCode: FourCharCode {
     return "cPla"
   }
 
@@ -30,23 +30,23 @@ private extension FourCharCode {
   static let seeking = FourCharCode("kPSS")
 }
 
-extension PlayerCore {
+@objc extension PlayerCore {
 
-  @objc var uniqueID: String {
+  var uniqueID: String {
     return label
   }
 
-  @objc var scriptingName: String? {
+  var scriptingName: String? {
     return info.currentURL?.lastPathComponent
   }
 
-  @objc var scriptingState: FourCharCode {
+  var scriptingState: FourCharCode {
     return info.isPaused ?
       (info.isSeeking ? .seeking : .paused) :
       .playing
   }
 
-  @objc var scriptingPlaySpeed: Double {
+  var scriptingPlaySpeed: Double {
     get {
       return info.playSpeed
     }
@@ -55,7 +55,7 @@ extension PlayerCore {
     }
   }
 
-  @objc var scriptingFileLoop: Bool {
+  var scriptingFileLoop: Bool {
     get {
       return mpv.getFlag(MPVOption.PlaybackControl.loopFile)
     }
@@ -64,7 +64,7 @@ extension PlayerCore {
     }
   }
 
-  @objc var scriptingVolume: Double {
+  var scriptingVolume: Double {
     get {
       return info.volume
     }
@@ -73,7 +73,7 @@ extension PlayerCore {
     }
   }
 
-  @objc var scriptingIsMuted: Bool {
+  var scriptingIsMuted: Bool {
     get {
       return info.isMuted
     }
@@ -82,7 +82,7 @@ extension PlayerCore {
     }
   }
 
-  @objc var scriptingPosition: Double {
+  var scriptingPosition: Double {
     get {
       return info.videoPosition?.second ?? 0
     }
@@ -91,7 +91,7 @@ extension PlayerCore {
     }
   }
 
-  @objc var scriptingFile: URL? {
+  var scriptingFile: URL? {
     get {
       if let file = info.currentURL {
         return file.isFileURL ? file : nil
@@ -100,13 +100,13 @@ extension PlayerCore {
     }
   }
 
-  @objc var scriptingUrlString: String? {
+  var scriptingUrlString: String? {
     get {
       return info.currentURL?.absoluteString
     }
   }
 
-  @objc var scriptingIsInMiniPlayer: Bool {
+  var scriptingIsInMiniPlayer: Bool {
     get {
       return isInMiniPlayer
     }
@@ -116,7 +116,7 @@ extension PlayerCore {
     }
   }
 
-  @objc var scriptingIsFullscreen: Bool {
+  var scriptingIsFullscreen: Bool {
     get { mainWindow.fsState.isFullscreen }
     set {
       guard newValue != mainWindow.fsState.isFullscreen else { return }
@@ -125,7 +125,7 @@ extension PlayerCore {
     }
   }
 
-  @objc var scriptingIsPIP: Bool {
+  var scriptingIsPIP: Bool {
     get { mainWindow.pipStatus == .inPIP }
     set {
       if #available(macOS 10.12, *) {
@@ -139,19 +139,19 @@ extension PlayerCore {
     }
   }
 
-  @objc var scriptingWindow: NSWindow? {
+  var scriptingWindow: NSWindow? {
     return isInMiniPlayer ?
       (miniPlayer.isWindowLoaded ? miniPlayer.window : nil) :
       (mainWindow.isWindowLoaded ? mainWindow.window : nil)
   }
 
-  @objc var scriptingTracks: [MPVTrack] { info.videoTracks + info.audioTracks + info.subTracks }
+  var scriptingTracks: [MPVTrack] { info.videoTracks + info.audioTracks + info.subTracks }
 
-  @objc var scriptingVideoTracks: [MPVTrack] { info.videoTracks }
-  @objc var scriptingAudioTracks: [MPVTrack] { info.audioTracks }
-  @objc var scriptingSubtitleTracks: [MPVTrack] { info.subTracks }
+  var scriptingVideoTracks: [MPVTrack] { info.videoTracks }
+  var scriptingAudioTracks: [MPVTrack] { info.audioTracks }
+  var scriptingSubtitleTracks: [MPVTrack] { info.subTracks }
 
-  func setCurentTrack(_ track: MPVTrack?, for type: MPVTrack.TrackType) {
+  @nonobjc func setCurentTrack(_ track: MPVTrack?, for type: MPVTrack.TrackType) {
     guard let track = track else { return }
 
     guard track.player === self else {
@@ -170,42 +170,42 @@ extension PlayerCore {
     setTrack(track.id, forType: type)
   }
 
-  @objc var scriptingCurrentVideoTrack: MPVTrack? {
+  var scriptingCurrentVideoTrack: MPVTrack? {
     get { info.currentTrack(.video) }
     set {
       setCurentTrack(newValue, for: .video)
     }
   }
 
-  @objc var scriptingCurrentAudioTrack: MPVTrack? {
+  var scriptingCurrentAudioTrack: MPVTrack? {
     get { info.currentTrack(.audio) }
     set {
       setCurentTrack(newValue, for: .audio)
     }
   }
 
-  @objc var scriptingCurrentSubtitleTrack: MPVTrack? {
+  var scriptingCurrentSubtitleTrack: MPVTrack? {
     get { info.currentTrack(.sub) }
     set {
       setCurentTrack(newValue, for: .sub)
     }
   }
 
-  @objc var scriptingSecondSubtitleTrack: MPVTrack? {
+  var scriptingSecondSubtitleTrack: MPVTrack? {
     get { info.currentTrack(.secondSub) }
     set {
       setCurentTrack(newValue, for: .secondSub)
     }
   }
 
-  @objc var scriptingAspectRatio: String {
+  var scriptingAspectRatio: String {
     get { info.unsureAspect }
     set { setVideoAspect(newValue) }
   }
 
-  @objc var scriptingPlaylistItems: [MPVPlaylistItem] { info.playlist }
+  var scriptingPlaylistItems: [MPVPlaylistItem] { info.playlist }
 
-  @objc var scriptingCurrentPlaylistItem: MPVPlaylistItem? {
+  var scriptingCurrentPlaylistItem: MPVPlaylistItem? {
     get { info.playlist.first { $0.isCurrent } }
     set {
       guard newValue?.player === self else { return }
@@ -218,25 +218,25 @@ extension PlayerCore {
 
 // MARK: Command Handlers
 
-extension PlayerCore {
+@objc extension PlayerCore {
 
-  @objc func handlePlayCommand(_ command: NSScriptCommand) {
+  func handlePlayCommand(_ command: NSScriptCommand) {
     resume()
   }
 
-  @objc func handlePauseCommand(_ command: NSScriptCommand) {
+  func handlePauseCommand(_ command: NSScriptCommand) {
     pause()
   }
 
-  @objc func handlePlayPauseCommand(_ command: NSScriptCommand) {
+  func handlePlayPauseCommand(_ command: NSScriptCommand) {
     info.isPaused ? resume() : pause()
   }
 
-  @objc func handleNextCommand(_ command: NSScriptCommand) {
+  func handleNextCommand(_ command: NSScriptCommand) {
     navigateInPlaylist(nextMedia: true)
   }
 
-  @objc func handlePreviousCommand(_ command: NSScriptCommand) {
+  func handlePreviousCommand(_ command: NSScriptCommand) {
     navigateInPlaylist(nextMedia: false)
   }
 

@@ -8,9 +8,9 @@
 
 import Foundation
 
-extension MPVTrack {
+@objc extension MPVTrack {
 
-  @objc override var classCode: FourCharCode {
+  override var classCode: FourCharCode {
     switch type {
       case .video:
         return "cTrV"
@@ -21,7 +21,7 @@ extension MPVTrack {
     }
   }
 
-  private var scriptingContainerProperty: String {
+  @nonobjc private var scriptingContainerProperty: String {
     let scriptingType: String
 
     switch type {
@@ -37,16 +37,16 @@ extension MPVTrack {
 
   }
 
-  @objc override var objectSpecifier: NSScriptObjectSpecifier? {
+  override var objectSpecifier: NSScriptObjectSpecifier? {
     let containerClass = NSScriptClassDescription(for: PlayerCore.self);
     let containerSpecifier = self.player?.objectSpecifier
 
     return NSIndexSpecifier(containerClassDescription: containerClass!, containerSpecifier: containerSpecifier, key: scriptingContainerProperty, index: self.id - 1)
   }
 
-  @objc var scriptingIndex: Int { id }
+  var scriptingIndex: Int { id }
 
-  @objc var scriptingType: FourCharCode {
+  var scriptingType: FourCharCode {
     switch type {
       case .video:
         return "kTTV"
@@ -57,34 +57,34 @@ extension MPVTrack {
     }
   }
 
-  @objc var scriptingCodec: String? { codec }
+  var scriptingCodec: String? { codec }
 
-  @objc var scriptingLanguage: String? { lang }
+  var scriptingLanguage: String? { lang }
 
-  @objc var scriptingTitle: String? { title }
+  var scriptingTitle: String? { title }
 
-  @objc var scriptingInfoString: String? { infoString }
+  var scriptingInfoString: String? { infoString }
 
-  @objc var scriptingIsDefault: Bool { isDefault }
+  var scriptingIsDefault: Bool { isDefault }
 
 }
 
 // MARK: Video track properties
-extension MPVTrack {
+@objc extension MPVTrack {
 
-  @objc var scriptingFPS: Double { demuxFps ?? 0.0 }
+  var scriptingFPS: Double { demuxFps ?? 0.0 }
 
-  @objc var scriptingWidth: Int { demuxW ?? 0 }
+  var scriptingWidth: Int { demuxW ?? 0 }
 
-  @objc var scriptingHeight: Int { demuxH ?? 0 }
+  var scriptingHeight: Int { demuxH ?? 0 }
 
 }
 
 // MARK: Audio track properties
-extension MPVTrack {
+@objc extension MPVTrack {
 
-  @objc var scriptingSampleRate: Int { demuxSamplerate ?? 0 }
+  var scriptingSampleRate: Int { demuxSamplerate ?? 0 }
 
-  @objc var scriptingChannelCount: Int { demuxChannelCount ?? 0 }
+  var scriptingChannelCount: Int { demuxChannelCount ?? 0 }
 
 }

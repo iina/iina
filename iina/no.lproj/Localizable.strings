@@ -84,30 +84,30 @@
 "preference.logged_in_as" = "Logget inn som %@";
 "preference.system_media_control" = "Bruk systemmediakontroller";
 
-"preference.key_binding_hint_1" = "To edit key bindings in current configuration file, click \"Duplicate…\" button first to create a copy.";
-"preference.key_binding_hint_2" = "Double click a row at the right side to edit the corresponding key binding.";
+"preference.key_binding_hint_1" = "Trykk på \"Dupliser…\" for å endre hurtigtastene med gjeldende konfigurasjonsfil.";
+"preference.key_binding_hint_2" = "Dobbelklikk på raden til høyre for å endre den korresponderende hurtigtasten.";
 
-"menu.volume" = "Volume: %d";
-"menu.audio_delay" = "Audio Delay: %.2fs";
-"menu.sub_delay" = "Subtitle Delay: %.2fs";
-"menu.fullscreen" = "Enter Full Screen";
-"menu.exit_fullscreen" = "Exit Full Screen";
-"menu.pip" = "Enter Picture-in-Picture";
-"menu.exit_pip" = "Exit Picture-in-Picture";
+"menu.volume" = "Volum: %d";
+"menu.audio_delay" = "Lydforsinkelse: %.2fs";
+"menu.sub_delay" = "Undertekstforsinkelse: %.2fs";
+"menu.fullscreen" = "Gå til fullskjerm";
+"menu.exit_fullscreen" = "Avslutt fullskjerm";
+"menu.pip" = "Bilde-i-bilde";
+"menu.exit_pip" = "Avslutt bilde-i-bilde";
 "menu.pause" = "Pause";
-"menu.resume" = "Resume";
-"menu.speed" = "Speed: %.2fx";
+"menu.resume" = "Gjenoppta";
+"menu.speed" = "Hastighet: %.2fx";
 
-"menu.seek_forward" = "Step Forward %.0fs";
-"menu.seek_backward" = "Step Backward %.0fs";
-"menu.speed_up" = "Speed Up by %.1fx";
-"menu.speed_down" = "Speed Down by %.1fx";
-"menu.volume_up" = "Volume + %.0f%%";
-"menu.volume_down" = "Volume - %.0f%%";
-"menu.audio_delay_up" = "Audio Delay + %.1fs";
-"menu.audio_delay_down" = "Audio Delay - %.1fs";
-"menu.sub_delay_up" = "Subtitle Delay + %.1fs";
-"menu.sub_delay_down" = "Subtitle Delay - %.1fs";
+"menu.seek_forward" = "Steg fremover: %.0fs";
+"menu.seek_backward" = "Steg bakover: %.0fs";
+"menu.speed_up" = "Øk hastigheten med %.1fx";
+"menu.speed_down" = "Senk hastigheten med %.1fx";
+"menu.volume_up" = "Volum + %.0f%%";
+"menu.volume_down" = "Volum - %.0f%%";
+"menu.audio_delay_up" = "Lydforsinkelse + %.1fs";
+"menu.audio_delay_down" = "Lydforsinkelse - %.1fs";
+"menu.sub_delay_up" = "Undertekstforsinkelse + %.1fs";
+"menu.sub_delay_down" = "Undertekstforsinkelse - %.1fs";
 
 "track.none" = "<None>";
 
@@ -176,69 +176,69 @@
 "alert.jump_to.title" = "Jump to";
 "alert.jump_to.message" = "Please enter the time you want to jump to. Example: 20:35";
 
-"alert.opensub.login.title" = "OpenSubtitles Login";
-"alert.opensub.login.message" = "Please enter your username and password";
+"alert.opensub.login.title" = "OpenSubtitles innlogging";
+"alert.opensub.login.message" = "Vennligst fyll inn brukernavn og passord";
 
-"alert.open_url.title" = "Open URL";
-"alert.open_url.message" = "Please enter the URL:";
-"alert.choose_media_file.title" = "Choose Media Files";
+"alert.open_url.title" = "Åpne URL";
+"alert.open_url.message" = "Angi en URL:";
+"alert.choose_media_file.title" = "Velg mediafiler";
 
-"alert.add_url.title" = "Add URL";
-"alert.add_url.message" = "Please enter the URL:";
+"alert.add_url.title" = "Legg til URL";
+"alert.add_url.message" = "Angi en URL:";
 
-"alert.delete_history.title" = "Delete Playback History";
-"alert.delete_history.message" = "Are you sure to delete selected entries?";
+"alert.delete_history.title" = "Slett avspillingshistorikk";
+"alert.delete_history.message" = "Er du sikker på at vil slette valgte oppføringer?";
 
-"alert.filter_hwdec.message" = "You are about to apply a video fliter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
-"alert.filter_hwdec.abort" = "Abort";
-"alert.filter_hwdec.turn_off" = "Turn off hardware decoding";
-"alert.filter_hwdec.use_copy" = "Switch to Auto(Copy)";
+"alert.filter_hwdec.message" = "Du er i ferd med å bruke et videofilter. Men, gjeldende maskinvarekodekser støtter ikke videofiltere så godt. Du kan enten skru av maskinvarekoding eller bytte til Auto(Copy), som vil bruke dobbelt så mye minne. \nDet kan hende du må legge inn operasjonene på nytt (som beskjæring) for at det skal virke.";
+"alert.filter_hwdec.abort" = "Avbryt";
+"alert.filter_hwdec.turn_off" = "Skru av maskinvarekoding";
+"alert.filter_hwdec.use_copy" = "Bytt til Auto(Copy)";
 
-"alert.clear_cache.title" = "Clear Thumbnail Cache";
-"alert.clear_cache.message" = "Are you sure to clear all thumbnail Cache?";
+"alert.clear_cache.title" = "Slett miniatyrbildebuffer";
+"alert.clear_cache.message" = "Er du sikker på at du vil fjerne miniatyrbildebufferen?";
 
-"alert.clear_history.title" = "Clear Playback History";
-"alert.clear_history.message" = "Are you sure to delete all playback history?";
+"alert.clear_history.title" = "Slett avspillingshistorikk";
+"alert.clear_history.message" = "Er du sikker på at du vil slette avspillingshistorikk?";
 
-"alert.clear_watch_later.title" = "Clear Saved Playback Progress";
-"alert.clear_watch_later.message" = "Are you sure to delete all saved playback progress (\"watch later\" data)?";
+"alert.clear_watch_later.title" = "Slett lagret avspillingsfremgang";
+"alert.clear_watch_later.message" = "Er du sikker på at du vil slette avspillingsfremgang (\"Se senere\")?";
 
-"alert.nothing_to_open" = "Nothing to open.";
+"alert.nothing_to_open" = "Ingenting å åpne.";
 
-"alert.no_video_track" = "There is no video track.";
+"alert.no_video_track" = "Finnes ingen videospor.";
 
-"alert.duplicate_config" = "You cannot edit default configurations directly. Please duplicate one before editing.";
+"alert.duplicate_config" = "Du kan ikke redigere standardkonfigurasjoner direkte. Dupliser én før redigering.";
 
-"alert.assrt_register" = "Due to limited API quota, you are strongly recommended to use your own API token. The default token is only for demo usage, and you may encounter network error.";
-"alert.assrt_register.register" = "Register Now";
-"alert.assrt_register.try" = "Try First";
-"alert.assrt_token_prompt.title" = "Enter your API token";
-"alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
-"alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
+"alert.assrt_register" = "På grunn av begrenset API-kvote anbefaler vi sterkt å bruke din egen API-nøkkel. Standardnøkkelen er kun for demonstrasjon og du kan møte på nettverksfeil.";
+"alert.assrt_register.register" = "Registrer deg nå";
+"alert.assrt_register.try" = "Prøv først";
+"alert.assrt_token_prompt.title" = "Skriv inn API-nøkkelen";
+"alert.assrt_token_prompt.message" = "Registrer deg på den åpnede nettsiden. Du finner nøkkelen din på profilsiden og skriver den inn under:";
+"alert.assrt_token_invalid" = "Din Assrt API-nøkkel ser ut til å være ugyldig.";
 
-"playlist.total_length" = "%@ in total";
-"playlist.total_length_with_selected" = "%@ of %@ selected";
-"pl_menu.title_multi" = "%d Items";
-"pl_menu.play_next" = "Play Next";
-"pl_menu.play_in_new_window" = "Play in New Window";
-"pl_menu.remove" = "Remove";
-"pl_menu.remove_multi" = "Remove Selected";
-"pl_menu.delete" = "Move to Trash";
-"pl_menu.delete_multi" = "Move Selected Files to Trash";
-"pl_menu.delete_after_play" = "Move to Trash After Playback";
-"pl_menu.delete_after_play_multi" = "Move Selected Files to Trash After Playback";
-"pl_menu.reveal_in_finder" = "Reveal in Finder";
-"pl_menu.add_file" = "Add File…";
-"pl_menu.add_url" = "Add URL…";
-"pl_menu.clear_playlist" = "Clear Playlist";
-"pl_menu.matched_sub" = "Matched %d Subtitle(s)";
-"pl_menu.add_sub" = "Add Subtitle…";
-"pl_menu.wrong_sub" = "Wrong Subtitle!";
-"pl_menu.browser" = "Open in Browser";
-"pl_menu.copy_url" = "Copy URL";
-"pl_menu.copy_url_multi" = "Copy URLs";
+"playlist.total_length" = "%@ totalt";
+"playlist.total_length_with_selected" = "%@ av %@ valgt";
+"pl_menu.title_multi" = "%d objekter";
+"pl_menu.play_next" = "Spill neste";
+"pl_menu.play_in_new_window" = "Spill i nytt vindu";
+"pl_menu.remove" = "Fjern";
+"pl_menu.remove_multi" = "Fjern valgte";
+"pl_menu.delete" = "Flytt til papirkurv";
+"pl_menu.delete_multi" = "Flytt valgte til papirkurv";
+"pl_menu.delete_after_play" = "Flytt til papirkurv etter avspilling";
+"pl_menu.delete_after_play_multi" = "Flytt valgte til papirkurv etter avspilling";
+"pl_menu.reveal_in_finder" = "Vis i Finder";
+"pl_menu.add_file" = "Legg til fil…";
+"pl_menu.add_url" = "Legg til URL…";
+"pl_menu.clear_playlist" = "Tøm spilleliste";
+"pl_menu.matched_sub" = "Matchet %d undertekst(er)";
+"pl_menu.add_sub" = "Legg til undertekster…";
+"pl_menu.wrong_sub" = "Feil undertekst!";
+"pl_menu.browser" = "Åpne i nettleser";
+"pl_menu.copy_url" = "Kopier URL";
+"pl_menu.copy_url_multi" = "Kopier URLer";
 
-"keymapping.title" = "Key Mapping";
+"keymapping.title" = "Tilordne taster";
 "keymapping.message" = "Press any key to record.";
 
 "filter.video_filters" = "Video Filters";

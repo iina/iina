@@ -35,13 +35,13 @@
 "FbF-jJ-W5b.title" = "暂停";
 
 /* Class = "NSTextFieldCell"; title = "When media is opened:"; ObjectID = "GNV-VA-NBW"; */
-"GNV-VA-NBW.title" = "When media is opened:";
+"GNV-VA-NBW.title" = "当媒体开启时:";
 
 /* Class = "NSMenuItem"; title = "Weekly"; ObjectID = "Imf-6g-2Cd"; */
 "Imf-6g-2Cd.title" = "每周";
 
 /* Class = "NSButtonCell"; title = "Window becomes inactive/active"; ObjectID = "J8g-aS-W6e"; */
-"J8g-aS-W6e.title" = "Window becomes inactive/active";
+"J8g-aS-W6e.title" = "当窗口不活跃时";
 
 /* Class = "NSMenuItem"; title = "Do nothing"; ObjectID = "JfZ-D8-aF2"; */
 "JfZ-D8-aF2.title" = "无";
@@ -86,7 +86,7 @@
 "f0j-Dn-cxt.title" = "接收 beta 版本更新";
 
 /* Class = "NSButtonCell"; title = "Pause upon leaving full screen"; ObjectID = "g2A-Kf-vct"; */
-"g2A-Kf-vct.title" = "Pause upon leaving full screen";
+"g2A-Kf-vct.title" = "退出全屏后暂停播放";
 
 /* Class = "NSTextFieldCell"; title = "At launch:"; ObjectID = "gqT-CB-Puw"; */
 "gqT-CB-Puw.title" = "At launch:";

@@ -77,8 +77,8 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
 
   @objc
   func reloadTableInMainThread() {
-    DispatchQueue.main.sync {
-      reloadTable()
+    DispatchQueue.main.async {
+      self.reloadTable()
     }
   }
 

@@ -7,29 +7,29 @@
 */
 // Common
 
-"general.on" = "On";
-"general.off" = "Off";
-"general.login" = "Login";
-"general.logout" = "Logout";
-"general.ok" = "OK";
-"general.cancel" = "Cancel";
-"general.username" = "Username";
-"general.password" = "Password";
+"general.on" = "روشن";
+"general.off" = "خاموش";
+"general.login" = "ورود";
+"general.logout" = "خروج";
+"general.ok" = "باشه";
+"general.cancel" = "لغو";
+"general.username" = "نام کاربری";
+"general.password" = "رمز عبور";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Buffering… %d%%";
-"main.opening_stream" = "Opening stream…";
+"main.buffering_indicator" = "در حال بارگذاری... %d%%";
+"main.opening_stream" = "در حال بازکردن استریم…";
 
 // QuickSettingViewController.swift
-"quicksetting.item_default" = "Default";
-"quicksetting.item_none" = "None";
+"quicksetting.item_default" = "پیش‌فرض";
+"quicksetting.item_none" = "هیچ کدام";
 
 // OSDMessage.swift
-"osd.pause" = "Pause";
-"osd.resume" = "Resume";
-"osd.volume" = "Volume: %i";
-"osd.speed" = "Speed: %.2fx";
-"osd.aspect" = "Aspect Ratio: %@";
+"osd.pause" = "مکث";
+"osd.resume" = "ادامه";
+"osd.volume" = "بلندی صدا: %i";
+"osd.speed" = "سرعت: %.2f برابر";
+"osd.aspect" = "نسبت تصویر: %@";
 "osd.crop" = "Crop: %@";
 "osd.rotate" = "Rotate: %i°";
 "osd.deinterlace" = "Deinterlace: %@";
@@ -57,12 +57,12 @@
 "osd.video_eq.saturation" = "Saturation: %i";
 "osd.video_eq.brightness" = "Brightness: %i";
 "osd.find_online_sub" = "Finding online subtitles…";
-"osd.find_online_sub.source" = "from";
-"osd.sub_not_found" = "No subtitles found";
+"osd.find_online_sub.source" = "از:";
+"osd.sub_not_found" = "هیچ زیرنویسی یافت نشد.";
 "osd.sub_found" = "%d subtitles found. Downloading…";
 "osd.sub_downloaded" = "Subtitle downloaded";
-"osd.sub_saved" = "Subtitle saved";
-"osd.network_error" = "Network error";
+"osd.sub_saved" = "زیرنویس ذخیره شد";
+"osd.network_error" = "خطای شبکه";
 "osd.file_error" = "Error reading file";
 "osd.cannot_login" = "Cannot login";
 "osd.canceled" = "Canceled";

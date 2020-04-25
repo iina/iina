@@ -8,10 +8,10 @@
 "2rJ-mg-OuU.title" = "Save to";
 
 /* Class = "NSButtonCell"; title = "Copy to clipboard"; ObjectID = "3gs-3w-rg6"; */
-"3gs-3w-rg6.title" = "Copy to clipboard";
+"3gs-3w-rg6.title" = "کپی در حافطه موقت";
 
 /* Class = "NSTextFieldCell"; title = "Options:"; ObjectID = "4Qe-7S-8xK"; */
-"4Qe-7S-8xK.title" = "Options:";
+"4Qe-7S-8xK.title" = "گزینه ها:";
 
 /* Class = "NSButtonCell"; title = "Enable \"Open Recent\" menu"; ObjectID = "55O-ik-ql6"; */
 "55O-ik-ql6.title" = "Enable \"Open Recent\" menu";
@@ -29,22 +29,22 @@
 "Ci8-j2-QS3.title" = "Track all played files in \"Open Recent\" menu";
 
 /* Class = "NSMenuItem"; title = "Daily"; ObjectID = "Ez8-qY-WAZ"; */
-"Ez8-qY-WAZ.title" = "Daily";
+"Ez8-qY-WAZ.title" = "روزانه";
 
 /* Class = "NSButtonCell"; title = "Pause"; ObjectID = "FbF-jJ-W5b"; */
-"FbF-jJ-W5b.title" = "Pause";
+"FbF-jJ-W5b.title" = "مکث";
 
 /* Class = "NSTextFieldCell"; title = "When media is opened:"; ObjectID = "GNV-VA-NBW"; */
 "GNV-VA-NBW.title" = "When media is opened:";
 
 /* Class = "NSMenuItem"; title = "Weekly"; ObjectID = "Imf-6g-2Cd"; */
-"Imf-6g-2Cd.title" = "Weekly";
+"Imf-6g-2Cd.title" = "هفتگی";
 
 /* Class = "NSButtonCell"; title = "Window becomes inactive/active"; ObjectID = "J8g-aS-W6e"; */
 "J8g-aS-W6e.title" = "Window becomes inactive/active";
 
 /* Class = "NSMenuItem"; title = "Do nothing"; ObjectID = "JfZ-D8-aF2"; */
-"JfZ-D8-aF2.title" = "Do nothing";
+"JfZ-D8-aF2.title" = "کاری نکن";
 
 /* Class = "NSButtonCell"; title = "Black out other monitors while in full screen"; ObjectID = "KYi-0W-zOr"; */
 "KYi-0W-zOr.title" = "Black out other monitors while in full screen";
@@ -68,7 +68,7 @@
 "QJq-fO-hhK.title" = "Add files in the same folder automatically";
 
 /* Class = "NSMenuItem"; title = "Monthly"; ObjectID = "REP-70-XOi"; */
-"REP-70-XOi.title" = "Monthly";
+"REP-70-XOi.title" = "ماهانه";
 
 /* Class = "NSButtonCell"; title = "Use legacy full screen"; ObjectID = "TvB-UM-FrS"; */
 "TvB-UM-FrS.title" = "Use legacy full screen";
@@ -119,7 +119,7 @@
 "pdx-zt-kf2.title" = "Screenshots:";
 
 /* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "slG-Jb-54B"; */
-"slG-Jb-54B.title" = "Hourly";
+"slG-Jb-54B.title" = "ساعتی";
 
 /* Class = "NSTextFieldCell"; title = "Behavior:"; ObjectID = "uQR-Fx-oEm"; */
 "uQR-Fx-oEm.title" = "Behavior:";

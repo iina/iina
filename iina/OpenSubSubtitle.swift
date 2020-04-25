@@ -294,12 +294,26 @@ class OpenSubSupport {
 
   func showSubSelectWindow(with subs: [OpenSubSubtitle]) -> Promise<[OpenSubSubtitle]> {
     return Promise { resolver in
+      var allSubs = subs
+      
       // return when found 0 or 1 sub
-      if subs.count <= 1 {
-        resolver.fulfill(subs)
+      if allSubs.count <= 1 {
+        resolver.fulfill(allSubs)
         return
       }
-      subChooseViewController.subtitles = subs
+      
+      // returning my preferred language results in first of the collection along with other languages subtitles
+      if let preferredLanguages = Preference.string(for: .subLang), !preferredLanguages.isEmpty  {
+        let allLangs = preferredLanguages.components(separatedBy: ",")
+        // getting only preferred languages
+        let result = allSubs.filter({ allLangs.contains($0.langID) })
+        // popping preferred languages to be inserted on top of the stack
+        allSubs = allSubs.filter({ !allLangs.contains($0.langID) })
+        // adding the prefered languages at index 0
+        allSubs.insert(contentsOf: result, at: 0)
+      }
+      
+      subChooseViewController.subtitles = allSubs
 
       subChooseViewController.userDoneAction = { subs in
         resolver.fulfill(subs as! [OpenSubSubtitle])
@@ -307,7 +321,7 @@ class OpenSubSupport {
       subChooseViewController.userCanceledAction = {
         resolver.reject(OpenSubError.userCanceled)
       }
-      PlayerCore.active.sendOSD(.foundSub(subs.count), autoHide: false, accessoryView: subChooseViewController.view)
+      PlayerCore.active.sendOSD(.foundSub(allSubs.count), autoHide: false, accessoryView: subChooseViewController.view)
       subChooseViewController.tableView.reloadData()
     }
   }

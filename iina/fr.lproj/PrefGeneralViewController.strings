@@ -35,13 +35,13 @@
 "FbF-jJ-W5b.title" = "Mettre en pause";
 
 /* Class = "NSTextFieldCell"; title = "When media is opened:"; ObjectID = "GNV-VA-NBW"; */
-"GNV-VA-NBW.title" = "When media is opened:";
+"GNV-VA-NBW.title" = "Quand un fichier est ouvert :";
 
 /* Class = "NSMenuItem"; title = "Weekly"; ObjectID = "Imf-6g-2Cd"; */
 "Imf-6g-2Cd.title" = "semaines";
 
 /* Class = "NSButtonCell"; title = "Window becomes inactive/active"; ObjectID = "J8g-aS-W6e"; */
-"J8g-aS-W6e.title" = "Window becomes inactive/active";
+"J8g-aS-W6e.title" = "La fenêtre devient active/inactive";
 
 /* Class = "NSMenuItem"; title = "Do nothing"; ObjectID = "JfZ-D8-aF2"; */
 "JfZ-D8-aF2.title" = "Ne rien faire";
@@ -86,10 +86,10 @@
 "f0j-Dn-cxt.title" = "Recevoir les mises à jour beta";
 
 /* Class = "NSButtonCell"; title = "Pause upon leaving full screen"; ObjectID = "g2A-Kf-vct"; */
-"g2A-Kf-vct.title" = "Pause upon leaving full screen";
+"g2A-Kf-vct.title" = "Mettre en pause quand le mode plein écran est désactivé";
 
 /* Class = "NSTextFieldCell"; title = "At launch:"; ObjectID = "gqT-CB-Puw"; */
-"gqT-CB-Puw.title" = "At launch:";
+"gqT-CB-Puw.title" = "Au lancement:";
 
 /* Class = "NSButtonCell"; title = "Check for updates"; ObjectID = "hWC-KJ-FuC"; */
 "hWC-KJ-FuC.title" = "Vérifier les mises à jour tou(te)s les";
@@ -107,7 +107,7 @@
 "jeK-46-2BG.title" = "Historique :";
 
 /* Class = "NSButtonCell"; title = "Play upon entering full screen"; ObjectID = "lOw-pu-Llm"; */
-"lOw-pu-Llm.title" = "Play upon entering full screen";
+"lOw-pu-Llm.title" = "Lancer la lecture quand le mode plein écran est activé";
 
 /* Class = "NSButtonCell"; title = "Include subtitles"; ObjectID = "lvA-Rc-Sh6"; */
 "lvA-Rc-Sh6.title" = "Inclure les sous-titres";

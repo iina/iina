@@ -43,9 +43,9 @@
 "osd.mute" = "Ztlumeno";
 "osd.unmute" = "Zesíleno";
 "osd.screenshot" = "Snímek obrazovky pořízen";
-"osd.abloop.a" = "AB-Smyčka: A";
-"osd.abloop.b" = "AB-Smyčka: B";
-"osd.abloop.clear" = "AB-Smyčka zrušena";
+"osd.abloop.a" = "Smyčka: A";
+"osd.abloop.b" = "Smyčka: B";
+"osd.abloop.clear" = "Smyčka zrušena";
 "osd.stop" = "Zastaveno";
 "osd.chapter" = "Kapitola: %@";
 "osd.subtitle_scale" = "Velikost titulků: %.2fx";
@@ -59,7 +59,7 @@
 "osd.find_online_sub" = "Vyhledávám titulky online…";
 "osd.find_online_sub.source" = "z";
 "osd.sub_not_found" = "Titulky nenalezeny";
-"osd.sub_found" = "Nalezeno titulků: %d. Stahuji…";
+"osd.sub_found" = "Nalezeno titulků: %d Stahuji…";
 "osd.sub_downloaded" = "Titulky staženy";
 "osd.sub_saved" = "Titulky uloženy";
 "osd.network_error" = "Chyba sítě";
@@ -123,7 +123,7 @@
 "alert.title_info" = "Informace";
 
 "alert.fatal_error" = "Závažná chyba: %@ \nAplikace se teď ukončí.";
-"alert.mpv_error" = "Interní chyba %@ (%@) při nastavení možnosti %@.";
+"alert.mpv_error" = "Vnitřní chyba %@ (%@) při nastavení možnosti %@.";
 "alert.sleep" = "Nelze zakázat automatické uspání monitoru!";
 
 "alert.unsupported_audio" = "Nepodporovaný externí zvukový soubor.";

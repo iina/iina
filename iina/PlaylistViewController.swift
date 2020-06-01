@@ -476,10 +476,10 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         let cellView = v as! PlaylistTrackCellView
         // file name
         let filename = item.filenameForDisplay
-        let filenameWithoutExt: String = NSString(string: filename).deletingPathExtension
-        if let prefix = player.info.currentVideosInfo.first(where: { $0.path == item.filename })?.prefix,
+        let displayStr: String = NSString(string: filename).deletingPathExtension
+        if !player.isInMiniPlayer, let prefix = player.info.currentVideosInfo.first(where: { $0.path == item.filename })?.prefix,
           !prefix.isEmpty,
-          prefix.count <= filenameWithoutExt.count,  // check whether prefix length > filename length
+          prefix.count <= displayStr.count,  // check whether prefix length > filename length
           prefix.count >= PrefixMinLength,
           filename.count > FilenameMinLength {
           cellView.prefixBtn.hasPrefix = true
@@ -487,7 +487,11 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
           cellView.textField?.stringValue = String(filename[filename.index(filename.startIndex, offsetBy: prefix.count)...])
         } else {
           cellView.prefixBtn.hasPrefix = false
-          cellView.textField?.stringValue = filename
+          if player.isInMiniPlayer, let title = info.cachedMetadata[item.filename]?.title, let artist = info.cachedMetadata[item.filename]?.artist {
+            cellView.textField?.stringValue = "\(title) - \(artist)"
+          } else {
+            cellView.textField?.stringValue = filename
+          }
         }
         // playback progress and duration
         cellView.durationLabel.font = NSFont.monospacedDigitSystemFont(ofSize: NSFont.smallSystemFontSize, weight: .regular)
@@ -510,7 +514,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
           } else {
             // get related data and schedule a reload
             if Preference.bool(for: .prefetchPlaylistVideoDuration) {
-              self.player.refreshCachedVideoProgress(forVideoPath: item.filename)
+              self.player.refreshCachedVideoInfo(forVideoPath: item.filename)
               self.refreshTotalLength()
               DispatchQueue.main.async {
                 self.playlistTableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(integersIn: 0...1))

@@ -1581,15 +1581,20 @@ class PlayerCore: NSObject {
   }
 
   /**
-   Get video duration and playback progress, then save it to info.
+   Get video duration, playback progress, and metadata, then save it to info.
    It may take some time to run this method, so it should be used in background.
    */
-  func refreshCachedVideoProgress(forVideoPath path: String) {
-    let duration = FFmpegController.probeVideoDuration(forFile: path)
+  func refreshCachedVideoInfo(forVideoPath path: String) {
+    let dict = FFmpegController.probeVideoInfo(forFile: path)
     let progress = Utility.playbackProgressFromWatchLater(path.md5)
-    info.cachedVideoDurationAndProgress[path] = (
-      duration: duration,
+    self.info.cachedVideoDurationAndProgress[path] = (
+      duration: dict?["duration"] as? Double,
       progress: progress?.second
+    )
+    self.info.cachedMetadata[path] = (
+      title: dict?["title"] as? String,
+      album: dict?["album"] as? String,
+      artist: dict?["artist"] as? String
     )
   }
 

@@ -1588,7 +1588,7 @@ class PlayerCore: NSObject {
     let dict = FFmpegController.probeVideoInfo(forFile: path)
     let progress = Utility.playbackProgressFromWatchLater(path.md5)
     self.info.cachedVideoDurationAndProgress[path] = (
-      duration: dict?["duration"] as? Double,
+      duration: dict?["iina_duration"] as? Double,
       progress: progress?.second
     )
     self.info.cachedMetadata[path] = (

@@ -343,7 +343,7 @@ return -1;\
   }
 
   NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
-  info[@"duration"] = duration == -1 ? [NSNumber numberWithInt:-1] : [NSNumber numberWithDouble:(double)duration / AV_TIME_BASE];
+  info[@"@iina_duration"] = duration == -1 ? [NSNumber numberWithInt:-1] : [NSNumber numberWithDouble:(double)duration / AV_TIME_BASE];
   AVDictionaryEntry *tag = NULL;
   while ((tag = av_dict_get(pFormatCtx->metadata, "", tag, AV_DICT_IGNORE_SUFFIX)))
     info[[NSString stringWithCString:tag->key encoding:NSUTF8StringEncoding]] = [NSString stringWithCString:tag->value encoding:NSUTF8StringEncoding];

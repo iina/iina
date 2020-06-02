@@ -1585,16 +1585,16 @@ class PlayerCore: NSObject {
    It may take some time to run this method, so it should be used in background.
    */
   func refreshCachedVideoInfo(forVideoPath path: String) {
-    let dict = FFmpegController.probeVideoInfo(forFile: path)
+    guard let dict = FFmpegController.probeVideoInfo(forFile: path) else { return }
     let progress = Utility.playbackProgressFromWatchLater(path.md5)
     self.info.cachedVideoDurationAndProgress[path] = (
-      duration: dict?["iina_duration"] as? Double,
+      duration: dict["iina_duration"] as? Double,
       progress: progress?.second
     )
     self.info.cachedMetadata[path] = (
-      title: dict?["title"] as? String,
-      album: dict?["album"] as? String,
-      artist: dict?["artist"] as? String
+      title: dict["title"] as? String,
+      album: dict["album"] as? String,
+      artist: dict["artist"] as? String
     )
   }
 

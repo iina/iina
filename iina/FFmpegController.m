@@ -333,13 +333,15 @@ return -1;\
   AVFormatContext *pFormatCtx = NULL;
   ret = avformat_open_input(&pFormatCtx, cFilename, NULL, NULL);
   free(cFilename);
-  if (ret < 0) duration = -1;
+  if (ret < 0) return NULL;
 
   duration = pFormatCtx->duration;
   if (duration <= 0) {
     ret = avformat_find_stream_info(pFormatCtx, NULL);
-    if (ret < 0) duration = -1;
-    duration = pFormatCtx->duration;
+    if (ret < 0)
+      duration = -1;
+    else
+      duration = pFormatCtx->duration;
   }
 
   NSMutableDictionary *info = [[NSMutableDictionary alloc] init];

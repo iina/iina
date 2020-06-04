@@ -487,8 +487,18 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
           cellView.textField?.stringValue = String(filename[filename.index(filename.startIndex, offsetBy: prefix.count)...])
         } else {
           cellView.prefixBtn.hasPrefix = false
-          if player.isInMiniPlayer, let title = info.cachedMetadata[item.filename]?.title, let artist = info.cachedMetadata[item.filename]?.artist {
-            cellView.textField?.stringValue = "\(title) - \(artist)"
+
+          func shouldShowMetadata() -> String? {
+            if !Preference.bool(for: .playlistShowMetadata) { return nil }
+            guard let title = info.cachedMetadata[item.filename]?.title, let artist = info.cachedMetadata[item.filename]?.artist else { return nil }
+            if Preference.bool(for: .playlistShowMetadataInMusicMode) && !player.isInMiniPlayer {
+              return nil
+            }
+            return "\(title) - \(artist)"
+          }
+
+          if let metadata = shouldShowMetadata() {
+            cellView.textField?.stringValue = metadata
           } else {
             cellView.textField?.stringValue = filename
           }

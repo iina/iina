@@ -462,14 +462,14 @@ class MPVController: NSObject {
     return str
   }
 
-  func getScreenshot(_ arg: String) -> NSImage {
+  func getScreenshot(_ arg: String) -> NSImage? {
     var args = try! MPVNode.create(["screenshot-raw", arg])
     defer {
       MPVNode.free(args)
     }
     var result = mpv_node()
     mpv_command_node(self.mpv, &args, &result)
-    let rawImage = try! MPVNode.parse(result) as! [String: Any]
+    guard let rawImage = try? MPVNode.parse(result) as? [String: Any] else { return nil }
     mpv_free_node_contents(&result)
     var pixelArray = rawImage["data"] as! [UInt8]
     // According to mpv's client.h, the pixel array mpv returns arrange

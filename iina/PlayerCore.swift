@@ -248,7 +248,7 @@ class PlayerCore: NSObject {
     initialWindow.close()
     if isInMiniPlayer {
       miniPlayer.showWindow(nil)
-    } else {
+    } else if !mainWindow.window!.isVisible {
       mainWindow.windowWillOpen()
       mainWindow.showWindow(nil)
       mainWindow.windowDidOpen()

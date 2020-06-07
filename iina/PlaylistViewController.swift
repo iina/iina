@@ -511,7 +511,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
           }
         }
         // sub button
-        if let matchedSubs = player.info.matchedSubs[item.filename], !matchedSubs.isEmpty {
+        if !info.isMatchingSubtitles,
+          let matchedSubs = player.info.matchedSubs[item.filename], !matchedSubs.isEmpty {
           cellView.subBtn.isHidden = false
           cellView.subBtnWidthConstraint.constant = 12
         } else {

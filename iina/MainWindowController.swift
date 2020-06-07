@@ -122,6 +122,7 @@ class MainWindowController: PlayerWindowController {
 
   var isPausedDueToInactive: Bool = false
   var isPausedDueToMiniaturization: Bool = false
+  var isPausedPriorToInteractiveMode: Bool = false
 
   var lastMagnification: CGFloat = 0.0
 
@@ -1758,6 +1759,7 @@ class MainWindowController: PlayerWindowController {
       return
     }
 
+    isPausedPriorToInteractiveMode = player.info.isPaused
     player.pause()
     isInInteractiveMode = true
     hideUI()
@@ -1838,7 +1840,9 @@ class MainWindowController: PlayerWindowController {
   func exitInteractiveMode(immediately: Bool = false, then: @escaping () -> Void = {}) {
     window?.backgroundColor = .black
 
-    player.resume()
+    if !isPausedPriorToInteractiveMode {
+      player.resume()
+    }
     isInInteractiveMode = false
     cropSettingsView?.cropBoxView.isHidden = true
 

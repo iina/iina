@@ -1,5 +1,5 @@
 /* Class = "NSMenuItem"; title = "Clear Recents"; ObjectID = "07n-bk-3ma"; */
-"07n-bk-3ma.title" = "清除最近播放";
+"07n-bk-3ma.title" = "清除最近搜索";
 
 /* Class = "NSMenuItem"; title = "Full path"; ObjectID = "AZL-gY-Tob"; */
 "AZL-gY-Tob.title" = "完整路径";
@@ -14,10 +14,10 @@
 "F0z-JX-Cv5.title" = "播放历史";
 
 /* Class = "NSMenuItem"; title = "Reveal in Finder"; ObjectID = "FPK-nx-hvF"; */
-"FPK-nx-hvF.title" = "在“访达”中查看";
+"FPK-nx-hvF.title" = "在“访达”中显示";
 
 /* Class = "NSMenuItem"; title = "Search in"; ObjectID = "Gx5-gP-rzr"; */
-"Gx5-gP-rzr.title" = "在…内搜索";
+"Gx5-gP-rzr.title" = "搜索";
 
 /* Class = "NSTableColumn"; headerCell.title = "Played at"; ObjectID = "M7K-6H-OPw"; */
 "M7K-6H-OPw.headerCell.title" = "播放时间";
@@ -41,7 +41,7 @@
 "mXt-wb-fgT.title" = "在新窗口中播放";
 
 /* Class = "NSMenuItem"; title = "No Recent Searches"; ObjectID = "ndC-eb-4GZ"; */
-"ndC-eb-4GZ.title" = "无近期搜索记录";
+"ndC-eb-4GZ.title" = "无最近搜索";
 
 /* Class = "NSMenuItem"; title = "Play"; ObjectID = "oMR-4K-aR2"; */
 "oMR-4K-aR2.title" = "播放";
@@ -50,4 +50,4 @@
 "z6c-c4-dgd.title" = "分组:";
 
 /* Class = "NSMenuItem"; title = "Recent Searches"; ObjectID = "zhe-yr-CTO"; */
-"zhe-yr-CTO.title" = "近期搜索";
+"zhe-yr-CTO.title" = "最近搜索";

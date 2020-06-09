@@ -7,8 +7,8 @@
 */
 
 "cmd.ignore" = "忽略";
-"cmd.seek" = "查找";
-"cmd.revert-seek" = "撤回查找";
+"cmd.seek" = "跳转";
+"cmd.revert-seek" = "撤销上次跳转";
 "cmd.set" = "设置";
 "cmd.cycle" = "切换";
 "cmd.cycle-values" = "指定值中循环";
@@ -17,7 +17,7 @@
 "cmd.frame-step" = "下一帧";
 "cmd.frame-back-step" = "上一帧";
 "cmd.ab-loop" = "A-B 循环";
-"cmd.sub-seek" = "查找字幕";
+"cmd.sub-seek" = "按字幕跳转";
 "cmd.playlist-next" = "下一个媒体";
 "cmd.playlist-prev" = "上一个媒体";
 "cmd.playlist-move" = "移动播放列表项目";
@@ -30,7 +30,7 @@
 "cmd.quit-watch-later" = "退出（保存进度）";
 "cmd.screenshot" = "截图";
 "cmd.screenshot-to-file" = "截图至文件";
-"cmd.loadfile" = "载入文件";
+"cmd.loadfile" = "打开文件";
 "cmd.loadlist" = "载入播放列表";
 "cmd.run" = "运行";
 
@@ -46,7 +46,7 @@
 "iina.sub-panel" = "字幕设置面板";
 "iina.playlist-panel" = "播放列表面板";
 "iina.chapter-panel" = "章节面板";
-"iina.bigger-window" = "增大窗口";
+"iina.bigger-window" = "放大窗口";
 "iina.smaller-window" = "缩小窗口";
 "iina.fit-to-screen" = "适应屏幕";
 "iina.toggle-flip" = "切换翻转";
@@ -55,7 +55,7 @@
 "iina.delete-current-file" = "删除当前文件";
 "iina.delete-current-file-hard" = "直接删除当前文件（不放入废纸篓）";
 "iina.find-online-subs" = "查找在线字幕";
-"iina.save-downloaded-sub" = "保存已下载字幕";
+"iina.save-downloaded-sub" = "保存已下载的字幕";
 
 "yes" = "是";
 "no" = "否";

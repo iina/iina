@@ -200,34 +200,34 @@
 "alert.clear_history.title" = "清除播放历史";
 "alert.clear_history.message" = "确定删除所有播放历史吗？";
 
-"alert.clear_watch_later.title" = "清除保存的播放进度";
-"alert.clear_watch_later.message" = "确定清除所有保存的播放进度，即「watch later」数据吗？";
+"alert.clear_watch_later.title" = "清除已保存播放进度";
+"alert.clear_watch_later.message" = "确定清除所有已播放进度（“稍后观看”数据）？";
 
-"alert.nothing_to_open" = "没有可打开的文件。";
+"alert.nothing_to_open" = "无文件可打开。";
 
-"alert.no_video_track" = "没有可用的视频轨道。";
+"alert.no_video_track" = "无视频轨道。";
 
-"alert.duplicate_config" = "默认配置不能被编辑。请先复制后再编辑。";
+"alert.duplicate_config" = "您无法直接编辑默认配置。请先复制后再编辑。";
 
-"alert.assrt_register" = "由于射手网(伪)的 API 请求数量限制，请务必在射手网(伪)注册账户后使用自己的 API token。自带 API token 仅用于测试用途，并且可能由于 API 使用超出限额而请求失败。";
-"alert.assrt_register.register" = "去射手网(伪)注册";
-"alert.assrt_register.try" = "先试用一下";
-"alert.assrt_token_prompt.title" = "输入你在射手网(伪)的 API token";
-"alert.assrt_token_prompt.message" = "请在弹出的网页中注册帐号，然后进入用户首页查看 API token 并在下方输入:";
-"alert.assrt_token_invalid" = "你的射手网(伪) API token 格式错误。";
+"alert.assrt_register" = "由于 API 配额限制，我们强烈建议您使用自己的 API token。默认 API token 仅做测试用途，且您有可能遇到网络错误。";
+"alert.assrt_register.register" = "立即注册";
+"alert.assrt_register.try" = "试用一下";
+"alert.assrt_token_prompt.title" = "输入您的 API token";
+"alert.assrt_token_prompt.message" = "请在弹出网页中注册帐号。在您个人首页中获得 token 并在下方输入:";
+"alert.assrt_token_invalid" = "您的 Assrt API token 疑似无效。";
 
 "playlist.total_length" = "总计 %@";
 "playlist.total_length_with_selected" = "选中 %@ / %@";
 "pl_menu.title_multi" = "%d 个项目";
 "pl_menu.play_next" = "接下来播放";
-"pl_menu.play_in_new_window" = "在新窗口中打开";
+"pl_menu.play_in_new_window" = "在新窗口中播放";
 "pl_menu.remove" = "移除";
 "pl_menu.remove_multi" = "移除选中项";
-"pl_menu.delete" = "移到垃圾桶";
-"pl_menu.delete_multi" = "将选中项移到垃圾桶";
-"pl_menu.delete_after_play" = "播放后移到垃圾桶";
-"pl_menu.delete_after_play_multi" = "播放后将选中项移到垃圾桶";
-"pl_menu.reveal_in_finder" = "在 Finder 中显示";
+"pl_menu.delete" = "移到废纸篓";
+"pl_menu.delete_multi" = "将选中项移到废纸篓";
+"pl_menu.delete_after_play" = "播放后移到废纸篓";
+"pl_menu.delete_after_play_multi" = "播放后将选中项移到废纸篓";
+"pl_menu.reveal_in_finder" = "在“访达”中显示";
 "pl_menu.add_file" = "添加文件…";
 "pl_menu.add_url" = "添加 URL…";
 "pl_menu.clear_playlist" = "清除播放列表";
@@ -245,8 +245,8 @@
 "filter.audio_filters" = "音频滤镜";
 
 "hwdec.no" = "不启用硬件解码。";
-"hwdec.auto" = "启用硬件解码。但是，大多数视频滤镜不会正常工作。";
-"hwdec.auto-copy" = "启用硬件解码。它会占用两倍左右的内存，但支持视频滤镜。";
+"hwdec.auto" = "启用硬件解码。但大多数视频滤镜不会正常工作。";
+"hwdec.auto-copy" = "启用硬件解码。这将占用约两倍内存，但支持视频滤镜。";
 
 "subencoding.auto" = "自动识别";
 
@@ -270,7 +270,7 @@
 "touchbar.rewind" = "快退";
 "touchbar.fast_forward" = "快进";
 "touchbar.play_pause" = "播放 / 暂停";
-"touchbar.seek" = "进度条";
-"touchbar.time" = "播放进度";
+"touchbar.seek" = "查找进度";
+"touchbar.time" = "进度位置";
 "touchbar.remainingTime" = "剩余时间";
 "touchbar.toggle_pip" = "切换「画中画」模式";

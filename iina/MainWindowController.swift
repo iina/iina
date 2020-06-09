@@ -2518,7 +2518,7 @@ extension MainWindowController: PIPViewControllerDelegate {
     if isWindowHidden {
       window?.makeKeyAndOrderFront(self)
     }
-    
+
     pipStatus = .notInPIP
 
     addVideoViewToWindow()
@@ -2530,15 +2530,16 @@ extension MainWindowController: PIPViewControllerDelegate {
     if player.info.isPaused {
       videoView.videoLayer.draw(forced: true)
     }
-    
+
     updateTimer()
-    
+
     isWindowMiniaturizedDueToPip = false
     isWindowHidden = false
   }
 
   func prepareForPIPClosure(_ pip: PIPViewController) {
     guard pipStatus == .inPIP else { return }
+    guard let window = window else { return }
     // This is called right before we're about to close the PIP
     pipStatus = .intermediate
     
@@ -2549,16 +2550,16 @@ extension MainWindowController: PIPViewControllerDelegate {
 
     // Set frame to animate back to
     if fsState.isFullscreen {
-      let newVideoSize = videoView.videoSize!.satisfyMaxSizeWithSameAspectRatio(window!.frame.size)
-      pip.replacementRect = newVideoSize.centeredRect(in: window!.frame)
+      let newVideoSize = videoView.frame.size.shrink(toSize: window.frame.size)
+      pip.replacementRect = newVideoSize.centeredRect(in: .init(origin: .zero, size: window.frame.size))
     } else {
-      pip.replacementRect = window?.contentView?.frame ?? .zero
+      pip.replacementRect = window.contentView?.frame ?? .zero
     }
     pip.replacementWindow = window
 
     // Bring the window to the front and deminiaturize it
     NSApp.activate(ignoringOtherApps: true)
-    window?.deminiaturize(pip)
+    window.deminiaturize(pip)
   }
 
   func pipWillClose(_ pip: PIPViewController) {

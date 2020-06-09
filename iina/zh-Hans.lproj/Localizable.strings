@@ -18,7 +18,7 @@
 
 // MainWindowController.swift
 "main.buffering_indicator" = "缓冲中… %d%%";
-"main.opening_stream" = "正在打开流媒体……";
+"main.opening_stream" = "正在打开流……";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "默认";
@@ -52,13 +52,13 @@
 "osd.add_to_playlist" = "已添加 %i 个文件至播放列表";
 "osd.clear_playlist" = "清除播放列表";
 "osd.video_eq.contrast" = "对比度：%i";
-"osd.video_eq.gamma" = "反差：%i";
+"osd.video_eq.gamma" = "伽玛: %i";
 "osd.video_eq.hue" = "色调：%i";
 "osd.video_eq.saturation" = "饱和度：%i";
 "osd.video_eq.brightness" = "亮度：%i";
 "osd.find_online_sub" = "正在查找在线字幕…";
 "osd.find_online_sub.source" = "从";
-"osd.sub_not_found" = "查无字幕";
+"osd.sub_not_found" = "未找到字幕";
 "osd.sub_found" = "已找到 %d 个字幕。下载中…";
 "osd.sub_downloaded" = "字幕已下载";
 "osd.sub_saved" = "字幕已保存";
@@ -126,33 +126,33 @@
 "alert.mpv_error" = "出现内部错误 %@ (%@) (设定选项 %@ 时)。";
 "alert.sleep" = "无法阻止显示休眠！";
 
-"alert.unsupported_audio" = "不支持的外部音频文件。";
-"alert.unsupported_sub" = "不支持的外部字幕。";
+"alert.unsupported_audio" = "不支持的外置音频文件。";
+"alert.unsupported_sub" = "不支持的外挂字幕。";
 "alert.unsupported_url" = "不支持的 URL。";
 "alert.wrong_url_format" = "URL 格式错误。";
 
-"alert.error_open" = "无法打开文件或流媒体！";
+"alert.error_open" = "无法打开文件或流！";
 "alert.error_finding_file" = "无法找到文件 %@！";
 "alert.error_loading_script" = "无法加载脚本 %@！";
 "alert.error_saving_file" = "保存文件 %@ 时出现错误： %@";
 "alert.error_deleting_file" = "无法删除该文件。";
 
-"alert.config.new.title" = "新建输入配置";
-"alert.config.new.message" = "请为此新配置输入名称。";
-"alert.config.duplicate.title" = "复制配置";
-"alert.config.duplicate.message" = "请为此复制配置文件输入名称。";
+"alert.config.new.title" = "新建快捷键配置";
+"alert.config.new.message" = "请输入配置名。";
+"alert.config.duplicate.title" = "复制快捷键配置";
+"alert.config.duplicate.message" = "请输入复制后的配置文件名。";
 "alert.config.empty_name" = "名称不能为空。";
-"alert.config.name_existing" = "此名称已存在。";
+"alert.config.name_existing" = "此配置名称已存在。";
 "alert.config.file_existing.title" = "同名文件已存在";
-"alert.config.file_existing.message" = "当前状况异常。选择「好」以覆盖文件，选择「取消」以在“访达”中显示该文件。";
+"alert.config.file_existing.message" = "选择「好」来覆盖，选择「取消」来在 Finder 中查看该文件。";
 "alert.config.cannot_create" = "无法创建配置文件！\n%@";
 "alert.config.cannot_write" = "无法写入配置文件！";
 
 "alert.filter.incorrect" = "设置滤镜时出现错误。请检查您的参数格式。";
 "alert.add_filter.title" = "添加新滤镜";
-"alert.add_filter.message" = "请输入符合 mpv 的 vf 或 af 格式的滤镜字符串。";
+"alert.add_filter.message" = "请输入符合 mpv 的 vf 或 af 选项格式的滤镜字符串。";
 
-"alert.keybinding_config.error" = "解析键位设置文件「%@」时出错！已恢复至 IINA 默认键位设置。请检查您的配置。";
+"alert.keybinding_config.error" = "无法读取快捷键配置文件”%@“！已回退至 IINA 默认的键位设置。请检查你的快捷键配置。";
 
 "alert.extra_option.cannot_read" = "无法读取用户定义的 mpv 额外选项。";
 "alert.extra_option.empty" = "键或值不能为空！";
@@ -195,7 +195,7 @@
 "alert.filter_hwdec.use_copy" = "转为「自动（拷贝）」";
 
 "alert.clear_cache.title" = "清除缩略图缓存";
-"alert.clear_cache.message" = "确定清除所有缩略图缓存?";
+"alert.clear_cache.message" = "确定清除所有缩略图缓存吗?";
 
 "alert.clear_history.title" = "清除播放历史";
 "alert.clear_history.message" = "确定删除所有播放历史吗？";

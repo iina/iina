@@ -26,7 +26,7 @@
 "8kU-8g-VgX.title" = "重启 IINA 后生效。";
 
 /* Class = "NSButtonCell"; title = "Track all played files in \"Open Recent\" menu"; ObjectID = "Ci8-j2-QS3"; */
-"Ci8-j2-QS3.title" = "将所有播放过的文件加入「最近打开」菜单";
+"Ci8-j2-QS3.title" = "将所有播放过的文件加入“最近打开”菜单";
 
 /* Class = "NSMenuItem"; title = "Daily"; ObjectID = "Ez8-qY-WAZ"; */
 "Ez8-qY-WAZ.title" = "每天";
@@ -50,7 +50,7 @@
 "KYi-0W-zOr.title" = "全屏播放时使其他屏幕黑屏";
 
 /* Class = "NSButtonCell"; title = "Switch to \"music mode\" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
-"KfL-r7-Uav.title" = "播放音频文件时自动切换到「音乐模式」";
+"KfL-r7-Uav.title" = "播放音频文件时自动切换到“音乐模式”";
 
 /* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
 "Lac-Ol-g6E.title" = "自动播放播放列表中下一个项目";
@@ -89,7 +89,7 @@
 "g2A-Kf-vct.title" = "退出全屏后暂停播放";
 
 /* Class = "NSTextFieldCell"; title = "At launch:"; ObjectID = "gqT-CB-Puw"; */
-"gqT-CB-Puw.title" = "启动时";
+"gqT-CB-Puw.title" = "启动时：";
 
 /* Class = "NSButtonCell"; title = "Check for updates"; ObjectID = "hWC-KJ-FuC"; */
 "hWC-KJ-FuC.title" = "自动检查更新";

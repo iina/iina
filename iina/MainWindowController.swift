@@ -1956,7 +1956,7 @@ class MainWindowController: PlayerWindowController {
       } else {
         x = CGFloat(Int(strx)!)
       }
-      winFrame.origin.x = (xSign == "+" ? x : screenFrame.width - x) + screenFrame.origin.x
+      winFrame.origin.x = xSign == "+" ? x : screenFrame.width - x
       // if xSign equals "-", need set right border as origin
       if (xSign == "-") {
         winFrame.origin.x -= winFrame.width
@@ -1970,12 +1970,12 @@ class MainWindowController: PlayerWindowController {
       } else {
         y = CGFloat(Int(stry)!)
       }
-      winFrame.origin.y = (ySign == "+" ? y : screenFrame.height - y) + screenFrame.origin.y
+      winFrame.origin.y = ySign == "+" ? y : screenFrame.height - y
       if (ySign == "-") {
         winFrame.origin.y -= winFrame.height
       }
     }
-    // if x and y not specified
+    // if x and y are not specified
     if geometry.x == nil && geometry.y == nil && widthOrHeightIsSet {
       winFrame.origin.x = (screenFrame.width - winFrame.width) / 2
       winFrame.origin.y = (screenFrame.height - winFrame.height) / 2

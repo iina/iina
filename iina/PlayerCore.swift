@@ -574,6 +574,9 @@ class PlayerCore: NSObject {
     let loopStatus = mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
     let isLoop = (loopStatus == "inf" || loopStatus == "force")
     mpv.setString(MPVOption.PlaybackControl.loopPlaylist, isLoop ? "no" : "inf")
+    if self.mainWindow.playlistView.isViewLoaded {
+      self.mainWindow.playlistView.updateBtnStatus()
+    }
   }
 
   func toggleShuffle() {

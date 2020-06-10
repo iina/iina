@@ -203,7 +203,12 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       }
     }
   }
-
+    
+  func updateBtnStatus() {
+    let loopStatus = player.mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
+    loopBtn.state = (loopStatus == "inf" || loopStatus == "force") ? .on : .off
+  }
+    
   // MARK: - Tab switching
 
   /** Switch tab (call from other objects) */

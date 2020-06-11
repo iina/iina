@@ -12,7 +12,7 @@ import Sparkle
 
 /** Max time interval for repeated `application(_:openFile:)` calls. */
 fileprivate let OpenFileRepeatTime = TimeInterval(0.2)
-/** Tags for "Open File/URL" menu item when "ALways open file in new windows" is off. Vice versa. */
+/** Tags for "Open File/URL" menu item when "Always open file in new windows" is off. Vice versa. */
 fileprivate let NormalMenuItemTag = 0
 /** Tags for "Open File/URL in New Window" when "Always open URL" when "Open file in new windows" is off. Vice versa. */
 fileprivate let AlternativeMenuItemTag = 1

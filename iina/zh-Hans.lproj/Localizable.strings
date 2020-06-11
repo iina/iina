@@ -189,7 +189,7 @@
 "alert.delete_history.title" = "删除播放历史记录";
 "alert.delete_history.message" = "确定要删除所选的历史记录吗？";
 
-"alert.filter_hwdec.message" = "你正在添加视频滤镜，但当前的硬件解码器不能很好地支持视频滤镜。你可以禁用硬件解码，或使用“自动（拷贝）”解码器，这将占用两倍内存。\n你可能需要再操作一次（例如裁切）才能看到效果。";
+"alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
 "alert.filter_hwdec.abort" = "放弃";
 "alert.filter_hwdec.turn_off" = "关闭硬件解码";
 "alert.filter_hwdec.use_copy" = "使用”自动（拷贝）“解码器";

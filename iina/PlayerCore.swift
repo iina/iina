@@ -1595,11 +1595,21 @@ class PlayerCore: NSObject {
       duration: dict["iina_duration"] as? Double,
       progress: progress?.second
     )
-    self.info.cachedMetadata[path] = (
-      title: dict["title"] as? String,
-      album: dict["album"] as? String,
-      artist: dict["artist"] as? String
-    )
+    var result: (title: String?, album: String?, artist: String?)
+    dict.forEach { (k, v) in
+      guard let key = k as? String else { return }
+      switch key.lowercased() {
+      case "title":
+        result.title = v as? String
+      case "album":
+        result.album = v as? String
+      case "artist":
+        result.artist = v as? String
+      default:
+        break
+      }
+    }
+    self.info.cachedMetadata[path] = result
   }
 
   enum CurrentMediaIsAudioStatus {

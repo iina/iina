@@ -477,7 +477,20 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         // file name
         let filename = item.filenameForDisplay
         let displayStr: String = NSString(string: filename).deletingPathExtension
-        if !player.isInMiniPlayer, let prefix = player.info.currentVideosInfo.first(where: { $0.path == item.filename })?.prefix,
+        cellView.prefixBtn.hasPrefix = false
+
+        func shouldShowMetadata() -> String? {
+          if !Preference.bool(for: .playlistShowMetadata) { return nil }
+          guard let title = info.cachedMetadata[item.filename]?.title, let artist = info.cachedMetadata[item.filename]?.artist else { return nil }
+          if Preference.bool(for: .playlistShowMetadataInMusicMode) && !player.isInMiniPlayer {
+            return nil
+          }
+          return "\(artist) - \(title)"
+        }
+
+        if let metadata = shouldShowMetadata() {
+          cellView.textField?.stringValue = metadata
+        } else if let prefix = player.info.currentVideosInfo.first(where: { $0.path == item.filename })?.prefix,
           !prefix.isEmpty,
           prefix.count <= displayStr.count,  // check whether prefix length > filename length
           prefix.count >= PrefixMinLength,
@@ -486,22 +499,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
           cellView.prefixBtn.text = prefix
           cellView.textField?.stringValue = String(filename[filename.index(filename.startIndex, offsetBy: prefix.count)...])
         } else {
-          cellView.prefixBtn.hasPrefix = false
-
-          func shouldShowMetadata() -> String? {
-            if !Preference.bool(for: .playlistShowMetadata) { return nil }
-            guard let title = info.cachedMetadata[item.filename]?.title, let artist = info.cachedMetadata[item.filename]?.artist else { return nil }
-            if Preference.bool(for: .playlistShowMetadataInMusicMode) && !player.isInMiniPlayer {
-              return nil
-            }
-            return "\(title) - \(artist)"
-          }
-
-          if let metadata = shouldShowMetadata() {
-            cellView.textField?.stringValue = metadata
-          } else {
-            cellView.textField?.stringValue = filename
-          }
+          cellView.textField?.stringValue = filename
         }
         // playback progress and duration
         cellView.durationLabel.font = NSFont.monospacedDigitSystemFont(ofSize: NSFont.smallSystemFontSize, weight: .regular)

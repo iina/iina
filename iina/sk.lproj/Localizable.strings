@@ -189,7 +189,7 @@
 "alert.delete_history.title" = "Vymazať históriu prehrávania";
 "alert.delete_history.message" = "Naozaj chcete vymazať vybrané položky?";
 
-"alert.filter_hwdec.message" = "Práve idete použiť video filter. Váš súčasný hardvérový dekodér však nemusí podporovať video filtre. Môžete vypnúť hardvérové dekódovanie alebo prepnúť na Auto(Copy), ktoré spotrebuje dvakrát viac pamäte.\nPre správne fungovanie môže byť nutné zopakovať predchádzajúci krok (napríklad nastavenie orezania).";
+"alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
 "alert.filter_hwdec.abort" = "Prerušiť";
 "alert.filter_hwdec.turn_off" = "Vypnúť hardvérové dekódovanie";
 "alert.filter_hwdec.use_copy" = "Prepnúť na Auto(Copy)";

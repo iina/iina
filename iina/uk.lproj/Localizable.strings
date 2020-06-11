@@ -189,7 +189,7 @@
 "alert.delete_history.title" = "Видалити історію перегляду";
 "alert.delete_history.message" = "Впевнені, що хочете видалити вибрані елементи?";
 
-"alert.filter_hwdec.message" = "Ви зараз застосуєте відеофільтр. Хоча ваш апаратний декодер, можливо, нормально не підтримує відеофільтри. Ви можете вимкнути апаратне декодування або перемкнутися в режим Авто (Копія), що використовує вдвічі більше пам'яті.\n\nВам треба буде повторити попередню операцію (наприклад, встановлення обрізування), щоб воно запрацювало.";
+"alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
 "alert.filter_hwdec.abort" = "Скасувати";
 "alert.filter_hwdec.turn_off" = "Вимкнути апаратне декодування";
 "alert.filter_hwdec.use_copy" = "Перемкнутися в автоматичний режим (копіювання)";

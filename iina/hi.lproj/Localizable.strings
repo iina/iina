@@ -189,7 +189,7 @@
 "alert.delete_history.title" = "प्लेबैक इतिहास हटाएं";
 "alert.delete_history.message" = "क्या आप चयनित प्रविष्टियों को हटाना सुनिश्चित करते हैं?";
 
-"alert.filter_hwdec.message" = "आप एक वीडियो फ़्लिटर लागू करने वाले हैं। हालाँकि, आपका वर्तमान हार्डवेयर डिकोडर अच्छी तरह से वीडियो फिल्टर का समर्थन नहीं कर सकता है। आप या तो हार्डवेयर डिकोडिंग को अक्षम कर सकते हैं या ऑटो (कॉपी) पर स्विच कर सकते हैं, जो मेमोरी का दोगुना उपभोग करेगा।\nआपको इसे काम करने के लिए पिछला ऑपरेशन (जैसे फसल सेट करना) दोहराना पड़ सकता है।";
+"alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
 "alert.filter_hwdec.abort" = "निरस्त करें";
 "alert.filter_hwdec.turn_off" = "हार्डवेयर डिकोडिंग को बंद करें";
 "alert.filter_hwdec.use_copy" = "ऑटो पर स्विच करें (कॉपी करें)";

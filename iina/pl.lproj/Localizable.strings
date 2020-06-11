@@ -189,7 +189,7 @@
 "alert.delete_history.title" = "Usuń historię odtwarzania";
 "alert.delete_history.message" = "Czy na pewno chcesz usunąć zaznaczone pozycje?";
 
-"alert.filter_hwdec.message" = "Brak komentarza dostarczonego przez inżyniera.";
+"alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
 "alert.filter_hwdec.abort" = "Przerwij";
 "alert.filter_hwdec.turn_off" = "Wyłącz dekodowanie sprzętu";
 "alert.filter_hwdec.use_copy" = "Przełącz na automatyczne (Kopiowanie)";

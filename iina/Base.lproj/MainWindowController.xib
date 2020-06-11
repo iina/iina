@@ -29,7 +29,7 @@
                 <outlet property="fragVolumeView" destination="N3B-DL-XOA" id="4VW-Wa-AD7"/>
                 <outlet property="leftArrowButton" destination="10x-bg-xlj" id="HOT-Yl-7aO"/>
                 <outlet property="leftArrowLabel" destination="Yg9-Sd-sWy" id="fps-VD-ZgC"/>
-                <outlet property="leftLabel" destination="NBD-MV-OuG" id="0tU-eK-sbp"/>
+                <outlet property="leftLabel" destination="NBD-MV-OuG" id="7xb-a1-6NR"/>
                 <outlet property="muteButton" destination="2py-h1-0km" id="baB-6t-gO7"/>
                 <outlet property="oscBottomMainView" destination="Qmi-hb-0aM" id="PM5-Ic-nvt"/>
                 <outlet property="oscFloatingBottomView" destination="hb6-oe-rHm" id="ZKe-zm-evE"/>
@@ -94,8 +94,12 @@
                     <visualEffectView hidden="YES" blendingMode="behindWindow" material="underWindowBackground" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="Nrz-jZ-Luf">
                         <rect key="frame" x="0.0" y="0.0" width="640" height="400"/>
                         <subviews>
+                            <imageView translatesAutoresizingMaskIntoConstraints="NO" id="YkI-ii-zaW">
+                                <rect key="frame" x="277" y="166" width="87" height="68"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="playing-in-pip" id="0QW-Vy-zmW"/>
+                            </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pxV-jX-kfL">
-                                <rect key="frame" x="196" y="192" width="248" height="16"/>
+                                <rect key="frame" x="196" y="142" width="248" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="This video is playing in picture in picture" id="gdE-b5-kod">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -105,7 +109,9 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="pxV-jX-kfL" firstAttribute="centerX" secondItem="Nrz-jZ-Luf" secondAttribute="centerX" id="1zk-hi-hE0"/>
-                            <constraint firstItem="pxV-jX-kfL" firstAttribute="centerY" secondItem="Nrz-jZ-Luf" secondAttribute="centerY" id="GGt-bx-91X"/>
+                            <constraint firstItem="YkI-ii-zaW" firstAttribute="centerX" secondItem="Nrz-jZ-Luf" secondAttribute="centerX" id="JAE-TE-I2W"/>
+                            <constraint firstItem="pxV-jX-kfL" firstAttribute="top" secondItem="YkI-ii-zaW" secondAttribute="bottom" constant="8" id="VX9-W1-IMy"/>
+                            <constraint firstItem="YkI-ii-zaW" firstAttribute="centerY" secondItem="Nrz-jZ-Luf" secondAttribute="centerY" id="hhc-1u-xpc"/>
                         </constraints>
                     </visualEffectView>
                     <visualEffectView hidden="YES" wantsLayer="YES" blendingMode="withinWindow" material="popover" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="oX4-0N-but">
@@ -599,6 +605,7 @@
         <image name="ontop_off" width="16" height="14"/>
         <image name="pause" width="24" height="24"/>
         <image name="play" width="24" height="24"/>
+        <image name="playing-in-pip" width="87" height="68"/>
         <image name="speed" width="24" height="24"/>
         <image name="speedl" width="24" height="24"/>
         <image name="volume" width="17" height="14"/>

@@ -189,7 +189,7 @@
 "alert.delete_history.title" = "Slett avspillingshistorikk";
 "alert.delete_history.message" = "Er du sikker på at vil slette valgte oppføringer?";
 
-"alert.filter_hwdec.message" = "Du er i ferd med å bruke et videofilter. Men, gjeldende maskinvarekodekser støtter ikke videofiltere så godt. Du kan enten skru av maskinvarekoding eller bytte til Auto(Copy), som vil bruke dobbelt så mye minne. \nDet kan hende du må legge inn operasjonene på nytt (som beskjæring) for at det skal virke.";
+"alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
 "alert.filter_hwdec.abort" = "Avbryt";
 "alert.filter_hwdec.turn_off" = "Skru av maskinvarekoding";
 "alert.filter_hwdec.use_copy" = "Bytt til Auto(Copy)";

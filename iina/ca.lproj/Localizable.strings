@@ -189,7 +189,7 @@
 "alert.delete_history.title" = "Suprimeix l'historial de reproducció";
 "alert.delete_history.message" = "Estàs segur que vols surpirmir les entrades seleccionades?";
 
-"alert.filter_hwdec.message" = "Estàs a punt d'aplicat un filtre de vídeo. Malgrat això, és possible que el teu maquinari no suporti filtres de vídeo correctament. Pots desactivat la decodificació per maquinari o canviar a Automàtic(còpia), el qual consumeix el doble de memòria.\nPot ser que hagis de repetir la operació anterior (com establir l'espapçament) per a que funcioni.";
+"alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
 "alert.filter_hwdec.abort" = "Interromp";
 "alert.filter_hwdec.turn_off" = "Desactiva decodificació per maquinari";
 "alert.filter_hwdec.use_copy" = "Canvia a Automàtic(còpia)";

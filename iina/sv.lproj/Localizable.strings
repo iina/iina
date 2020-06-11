@@ -189,7 +189,7 @@
 "alert.delete_history.title" = "Radera uppspelningshistorik";
 "alert.delete_history.message" = "Är du säker på att du vill radera valda objekt?";
 
-"alert.filter_hwdec.message" = "Du är i färd med att aktivera ett videofilter, men det kan hända att din nuvarade hårdvaruavkodare inte har ett ordentligt stöd för videofilter. Du kan antingen stänga av hårdvaruavkodning eller växla till Auto(Kopiera), vilket kommer att uppta dubbel minnesmängd.\nDu kan behöva upprepa föregående åtgärd (t.ex. att ange beskärning) för att få det att fungera.";
+"alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
 "alert.filter_hwdec.abort" = "Avbryt";
 "alert.filter_hwdec.turn_off" = "Stäng av hårdvaruavkodning";
 "alert.filter_hwdec.use_copy" = "Växla till Auto(Kopiera)";

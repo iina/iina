@@ -703,6 +703,8 @@ struct MPVOption {
     static let forceSeekable = "force-seekable"
     /** --demuxer-cache-wait=<yes|no> */
     static let demuxerCacheWait = "demuxer-cache-wait"
+    /** --rar-list-all-volumes=<yes|no> */
+    static let rarListAllVolumes = "rar-list-all-volumes"
   }
 
   struct Input {

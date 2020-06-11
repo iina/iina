@@ -117,19 +117,21 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     volumePopover.delegate = self
   }
 
-  override internal func setMaterial(_ theme: Preference.Theme) {
-    guard let window = window else { return }
-
-    if #available(macOS 10.14, *) {} else {
-      let (appearance, material) = Utility.getAppearanceAndMaterial(from: theme)
-
-      [backgroundView, closeButtonBackgroundViewVE, playlistWrapperView].forEach {
-        $0?.appearance = appearance
-        $0?.material = material
-      }
-
-      window.appearance = appearance
+  override internal func setMaterial(_ theme: Preference.Theme?) {
+    if #available(macOS 10.14, *) {
+      super.setMaterial(theme)
+      return
     }
+    guard let window = window, let theme = theme else { return }
+
+    let (appearance, material) = Utility.getAppearanceAndMaterial(from: theme)
+
+    [backgroundView, closeButtonBackgroundViewVE, playlistWrapperView].forEach {
+      $0?.appearance = appearance
+      $0?.material = material
+    }
+
+    window.appearance = appearance
   }
 
   // MARK: - Mouse / Trackpad events
@@ -168,7 +170,10 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   func windowWillClose(_ notification: Notification) {
     player.switchedToMiniPlayerManually = false
     player.switchedBackFromMiniPlayerManually = false
-    player.switchBackFromMiniPlayer(automatically: true, showMainWindow: false)
+    if !player.isMpvTerminated {
+      // not needed if called when terminating the whole app
+      player.switchBackFromMiniPlayer(automatically: true, showMainWindow: false)
+    }
     player.mainWindow.close()
   }
 

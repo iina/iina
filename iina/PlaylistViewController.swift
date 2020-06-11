@@ -153,10 +153,13 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     totalLengthLabel.isHidden = false
     if playlistTableView.numberOfSelectedRows > 0 {
       let info = player.info
-      let selectedDuration = playlistTableView.selectedRowIndexes
-        .compactMap { info.cachedVideoDurationAndProgress[info.playlist[$0].filename]?.duration }
-        .compactMap { $0 > 0 ? $0 : 0 }
-        .reduce(0, +)
+      var selectedDuration = 0.0
+      player.playlistQueue.sync {
+        selectedDuration = playlistTableView.selectedRowIndexes
+          .compactMap { info.cachedVideoDurationAndProgress[info.playlist[$0].filename]?.duration }
+          .compactMap { $0 > 0 ? $0 : 0 }
+          .reduce(0, +)
+      }
       totalLengthLabel.stringValue = String(format: NSLocalizedString("playlist.total_length_with_selected", comment: "%@ of %@ selected"),
                                             VideoTime(selectedDuration).stringRepresentation,
                                             VideoTime(playlistTotalLength).stringRepresentation)
@@ -172,14 +175,12 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
   private func refreshTotalLength() {
     var totalDuration: Double? = 0
-    player.info.infoQueue.async {
-      for p in self.player.info.playlist {
-        if let duration = self.player.info.cachedVideoDurationAndProgress[p.filename]?.duration {
-          totalDuration! += duration > 0 ? duration : 0
-        } else {
-          totalDuration = nil
-          break
-        }
+    for p in player.info.playlist {
+      if let duration = player.info.cachedVideoDurationAndProgress[p.filename]?.duration {
+        totalDuration! += duration > 0 ? duration : 0
+      } else {
+        totalDuration = nil
+        break
       }
     }
     if let duration = totalDuration {
@@ -483,34 +484,35 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         // playback progress and duration
         cellView.durationLabel.font = NSFont.monospacedDigitSystemFont(ofSize: NSFont.smallSystemFontSize, weight: .regular)
         cellView.durationLabel.stringValue = ""
-        player.info.infoQueue.sync {
-          if let cached = player.info.cachedVideoDurationAndProgress[item.filename],
+        player.playlistQueue.async {
+          if let cached = self.player.info.cachedVideoDurationAndProgress[item.filename],
             let duration = cached.duration {
             // if it's cached
             if duration > 0 {
               // if FFmpeg got the duration succcessfully
-              cellView.durationLabel.stringValue = VideoTime(duration).stringRepresentation
-              if let progress = cached.progress {
-                cellView.playbackProgressView.percentage = progress / duration
-                cellView.playbackProgressView.needsDisplay = true
+              DispatchQueue.main.async {
+                cellView.durationLabel.stringValue = VideoTime(duration).stringRepresentation
+                if let progress = cached.progress {
+                  cellView.playbackProgressView.percentage = progress / duration
+                  cellView.playbackProgressView.needsDisplay = true
+                }
               }
               self.refreshTotalLength()
             }
           } else {
             // get related data and schedule a reload
             if Preference.bool(for: .prefetchPlaylistVideoDuration) {
-              player.playlistQueue.async {
-                self.player.refreshCachedVideoProgress(forVideoPath: item.filename)
-                self.refreshTotalLength()
-                DispatchQueue.main.async {
-                  self.playlistTableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(integersIn: 0...1))
-                }
+              self.player.refreshCachedVideoProgress(forVideoPath: item.filename)
+              self.refreshTotalLength()
+              DispatchQueue.main.async {
+                self.playlistTableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(integersIn: 0...1))
               }
             }
           }
         }
         // sub button
-        if let matchedSubs = player.info.matchedSubs[item.filename], !matchedSubs.isEmpty {
+        if !info.isMatchingSubtitles,
+          let matchedSubs = player.info.matchedSubs[item.filename], !matchedSubs.isEmpty {
           cellView.subBtn.isHidden = false
           cellView.subBtnWidthConstraint.constant = 12
         } else {

@@ -38,6 +38,8 @@ class VideoView: NSView {
   // cached indicator to prevent unnecessary updates of DisplayLink
   var currentDisplay: UInt32?
 
+  var pendingRedrawAfterEnteringPIP = false;
+
   // MARK: - Attributes
 
   override var mouseDownCanMoveWindow: Bool {
@@ -90,6 +92,14 @@ class VideoView: NSView {
 
   deinit {
     uninit()
+  }
+
+  override func layout() {
+    super.layout()
+    if pendingRedrawAfterEnteringPIP && superview != nil {
+      videoLayer.draw(forced: true)
+      pendingRedrawAfterEnteringPIP = false
+    }
   }
 
   override func draw(_ dirtyRect: NSRect) {

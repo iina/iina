@@ -110,7 +110,8 @@ class MainWindowController: PlayerWindowController {
   var pipStatus = PIPStatus.notInPIP
   var isInInteractiveMode: Bool = false
   var isVideoLoaded: Bool = false
-  
+
+  var shouldApplyInitialWindowSize = true
   var isWindowHidden: Bool = false
   var isWindowMiniaturizedDueToPip = false
 
@@ -569,24 +570,26 @@ class MainWindowController: PlayerWindowController {
   }
 
   /** Set material for OSC and title bar */
-  override internal func setMaterial(_ theme: Preference.Theme) {
-    guard let window = window else { return }
-
-    if #available(macOS 10.14, *) {} else {
-      let (appearance, material) = Utility.getAppearanceAndMaterial(from: theme)
-      let isDarkTheme = appearance?.isDark ?? true
-      (playSlider.cell as? PlaySliderCell)?.isInDarkTheme = isDarkTheme
-
-      [titleBarView, controlBarFloating, controlBarBottom, osdVisualEffectView, pipOverlayView, additionalInfoView, bufferIndicatorView].forEach {
-        $0?.material = material
-        $0?.appearance = appearance
-      }
-
-      sideBarView.material = .dark
-      sideBarView.appearance = NSAppearance(named: .vibrantDark)
-
-      window.appearance = appearance
+  override internal func setMaterial(_ theme: Preference.Theme?) {
+    if #available(macOS 10.14, *) {
+      super.setMaterial(theme)
+      return
     }
+    guard let window = window, let theme = theme else { return }
+
+    let (appearance, material) = Utility.getAppearanceAndMaterial(from: theme)
+    let isDarkTheme = appearance?.isDark ?? true
+    (playSlider.cell as? PlaySliderCell)?.isInDarkTheme = isDarkTheme
+
+    [titleBarView, controlBarFloating, controlBarBottom, osdVisualEffectView, pipOverlayView, additionalInfoView, bufferIndicatorView].forEach {
+      $0?.material = material
+      $0?.appearance = appearance
+    }
+
+    sideBarView.material = .dark
+    sideBarView.appearance = NSAppearance(named: .vibrantDark)
+
+    window.appearance = appearance
   }
 
 
@@ -966,10 +969,22 @@ class MainWindowController: PlayerWindowController {
   // MARK: - Window delegate: Open / Close
 
   func windowWillOpen() {
-    if loaded {
-      window?.setFrame(AppData.sizeWhenNoVideo.centeredRect(in: NSScreen.main!.frame), display: true)
-      videoView.videoLayer.draw(forced: true)
+    var screen = window!.screen!
+
+    if let rectString = UserDefaults.standard.value(forKey: "MainWindowLastPosition") as? String {
+      let rect = NSRectFromString(rectString)
+      if let lastScreen = NSScreen.screens.first(where: { NSPointInRect(rect.origin, $0.visibleFrame) }) {
+        screen = lastScreen
+      }
     }
+
+    if shouldApplyInitialWindowSize, let wfg = windowFrameFromGeometry(newSize: AppData.sizeWhenNoVideo, screen: screen) {
+      window!.setFrame(wfg, display: true)
+    } else {
+      window!.setFrame(AppData.sizeWhenNoVideo.centeredRect(in: screen.visibleFrame), display: true)
+    }
+
+    videoView.videoLayer.draw(forced: true)
   }
 
   /** A method being called when window open. Pretend to be a window delegate. */
@@ -1005,6 +1020,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   func windowWillClose(_ notification: Notification) {
+    shouldApplyInitialWindowSize = true
     // Close PIP
     if pipStatus == .inPIP {
       if #available(macOS 10.12, *) {
@@ -1026,6 +1042,7 @@ class MainWindowController: PlayerWindowController {
     guard let w = self.window, let cv = w.contentView else { return }
     cv.trackingAreas.forEach(cv.removeTrackingArea)
     playSlider.trackingAreas.forEach(playSlider.removeTrackingArea)
+    UserDefaults.standard.set(NSStringFromRect(window!.frame), forKey: "MainWindowLastPosition")
   }
 
   // MARK: - Window delegate: Full screen
@@ -1295,10 +1312,10 @@ class MainWindowController: PlayerWindowController {
       let targetFrame: NSRect
       if toFullScreen {
         aspect = window.aspectRatio == .zero ? window.frame.size : window.aspectRatio
-        targetFrame = aspect.shrink(toSize: window.frame.size).centeredRect(in: window.frame)
+        targetFrame = aspect.shrink(toSize: window.frame.size).centeredRect(in: window.contentView!.frame)
       } else {
         aspect = window.screen?.frame.size ?? NSScreen.main!.frame.size
-        targetFrame = aspect.grow(toSize: window.frame.size).centeredRect(in: window.frame)
+        targetFrame = aspect.grow(toSize: window.frame.size).centeredRect(in: window.contentView!.frame)
       }
 
       setConstraintsForVideoView([
@@ -1913,78 +1930,79 @@ class MainWindowController: PlayerWindowController {
   // MARK: - UI: Window size / aspect
 
   /** Calculate the window frame from a parsed struct of mpv's `geometry` option. */
-  func windowFrameFromGeometry(newSize: NSSize? = nil) -> NSRect? {
-    // set geometry. using `!` should be safe since it passed the regex.
-    if let geometry = cachedGeometry ?? player.getGeometry(), let screenFrame = window?.screen?.visibleFrame {
-      cachedGeometry = geometry
-      var winFrame = window!.frame
-      if let ns = newSize {
-        winFrame.size.width = ns.width
-        winFrame.size.height = ns.height
-      }
-      let winAspect = winFrame.size.aspect
-      var widthOrHeightIsSet = false
-      // w and h can't take effect at same time
-      if let strw = geometry.w, strw != "0" {
-        var w: CGFloat
-        if strw.hasSuffix("%") {
-          w = CGFloat(Double(String(strw.dropLast()))! * 0.01 * Double(screenFrame.width))
-        } else {
-          w = CGFloat(Int(strw)!)
-        }
-        w = max(minSize.width, w)
-        winFrame.size.width = w
-        winFrame.size.height = w / winAspect
-        widthOrHeightIsSet = true
-      } else if let strh = geometry.h, strh != "0" {
-        var h: CGFloat
-        if strh.hasSuffix("%") {
-          h = CGFloat(Double(String(strh.dropLast()))! * 0.01 * Double(screenFrame.height))
-        } else {
-          h = CGFloat(Int(strh)!)
-        }
-        h = max(minSize.height, h)
-        winFrame.size.height = h
-        winFrame.size.width = h * winAspect
-        widthOrHeightIsSet = true
-      }
-      // x, origin is window center
-      if let strx = geometry.x, let xSign = geometry.xSign {
-        let x: CGFloat
-        if strx.hasSuffix("%") {
-          x = CGFloat(Double(String(strx.dropLast()))! * 0.01 * Double(screenFrame.width)) - winFrame.width / 2
-        } else {
-          x = CGFloat(Int(strx)!)
-        }
-        winFrame.origin.x = (xSign == "+" ? x : screenFrame.width - x) + screenFrame.origin.x
-        // if xSign equals "-", need set right border as origin
-        if (xSign == "-") {
-          winFrame.origin.x -= winFrame.width
-        }
-      }
-      // y
-      if let stry = geometry.y, let ySign = geometry.ySign {
-        let y: CGFloat
-        if stry.hasSuffix("%") {
-          y = CGFloat(Double(String(stry.dropLast()))! * 0.01 * Double(screenFrame.height)) - winFrame.height / 2
-        } else {
-          y = CGFloat(Int(stry)!)
-        }
-        winFrame.origin.y = (ySign == "+" ? y : screenFrame.height - y) + screenFrame.origin.y
-        if (ySign == "-") {
-          winFrame.origin.y -= winFrame.height
-        }
-      }
-      // if x and y not specified
-      if geometry.x == nil && geometry.y == nil && widthOrHeightIsSet {
-        winFrame.origin.x = (screenFrame.width - winFrame.width) / 2
-        winFrame.origin.y = (screenFrame.height - winFrame.height) / 2
-      }
-      // return
-      return winFrame
-    } else {
-      return nil
+  func windowFrameFromGeometry(newSize: NSSize? = nil, screen: NSScreen? = nil) -> NSRect? {
+    guard let geometry = cachedGeometry ?? player.getGeometry(),
+      let screenFrame = (screen ?? window?.screen)?.visibleFrame else { return nil }
+
+    cachedGeometry = geometry
+    var winFrame = window!.frame
+    if let ns = newSize {
+      winFrame.size.width = ns.width
+      winFrame.size.height = ns.height
     }
+    let winAspect = winFrame.size.aspect
+    var widthOrHeightIsSet = false
+    // w and h can't take effect at same time
+    if let strw = geometry.w, strw != "0" {
+      var w: CGFloat
+      if strw.hasSuffix("%") {
+        w = CGFloat(Double(String(strw.dropLast()))! * 0.01 * Double(screenFrame.width))
+      } else {
+        w = CGFloat(Int(strw)!)
+      }
+      w = max(minSize.width, w)
+      winFrame.size.width = w
+      winFrame.size.height = w / winAspect
+      widthOrHeightIsSet = true
+    } else if let strh = geometry.h, strh != "0" {
+      var h: CGFloat
+      if strh.hasSuffix("%") {
+        h = CGFloat(Double(String(strh.dropLast()))! * 0.01 * Double(screenFrame.height))
+      } else {
+        h = CGFloat(Int(strh)!)
+      }
+      h = max(minSize.height, h)
+      winFrame.size.height = h
+      winFrame.size.width = h * winAspect
+      widthOrHeightIsSet = true
+    }
+    // x, origin is window center
+    if let strx = geometry.x, let xSign = geometry.xSign {
+      let x: CGFloat
+      if strx.hasSuffix("%") {
+        x = CGFloat(Double(String(strx.dropLast()))! * 0.01 * Double(screenFrame.width)) - winFrame.width / 2
+      } else {
+        x = CGFloat(Int(strx)!)
+      }
+      winFrame.origin.x = xSign == "+" ? x : screenFrame.width - x
+      // if xSign equals "-", need set right border as origin
+      if (xSign == "-") {
+        winFrame.origin.x -= winFrame.width
+      }
+    }
+    // y
+    if let stry = geometry.y, let ySign = geometry.ySign {
+      let y: CGFloat
+      if stry.hasSuffix("%") {
+        y = CGFloat(Double(String(stry.dropLast()))! * 0.01 * Double(screenFrame.height)) - winFrame.height / 2
+      } else {
+        y = CGFloat(Int(stry)!)
+      }
+      winFrame.origin.y = ySign == "+" ? y : screenFrame.height - y
+      if (ySign == "-") {
+        winFrame.origin.y -= winFrame.height
+      }
+    }
+    // if x and y are not specified
+    if geometry.x == nil && geometry.y == nil && widthOrHeightIsSet {
+      winFrame.origin.x = (screenFrame.width - winFrame.width) / 2
+      winFrame.origin.y = (screenFrame.height - winFrame.height) / 2
+    }
+    // if the screen has offset
+    winFrame.origin.x += screenFrame.origin.x
+    winFrame.origin.y += screenFrame.origin.y
+
+    return winFrame
   }
 
   /** Set window size when info available, or video size changed. */
@@ -2049,8 +2067,8 @@ class MainWindowController: PlayerWindowController {
       // guard min size
       // must be slightly larger than the min size, or it will crash when the min size is auto saved as window frame size.
       videoSize = videoSize.satisfyMinSizeWithSameAspectRatio(minSize)
-      // check if have geometry set
-      if let wfg = windowFrameFromGeometry(newSize: videoSize) {
+      // check if have geometry set (initial window position/size)
+      if shouldApplyInitialWindowSize, let wfg = windowFrameFromGeometry(newSize: videoSize) {
         rect = wfg
       } else {
         if player.info.justStartedFile, resizeRatio < 0, let screenRect = screenRect {
@@ -2070,6 +2088,7 @@ class MainWindowController: PlayerWindowController {
     // maybe not a good position, consider putting these at playback-restart
     player.info.justOpenedFile = false
     player.info.justStartedFile = false
+    shouldApplyInitialWindowSize = false
 
     if fsState.isFullscreen {
       fsState.priorWindowedFrame = rect
@@ -2478,8 +2497,10 @@ extension MainWindowController: PIPViewControllerDelegate {
 
     // If the video is paused, it will end up in a weird state due to the
     // animation. By forcing a redraw it will keep its paused image throughout.
+    // (At least) in 10.15, presentAsPictureInPicture: behaves asynchronously.
+    // Therefore we should wait until the view is moved to the PIP superview.
     if player.info.isPaused {
-      videoView.videoLayer.draw(forced: true)
+      videoView.pendingRedrawAfterEnteringPIP = true
     }
 
     if let window = self.window {
@@ -2518,7 +2539,7 @@ extension MainWindowController: PIPViewControllerDelegate {
     if isWindowHidden {
       window?.makeKeyAndOrderFront(self)
     }
-    
+
     pipStatus = .notInPIP
 
     addVideoViewToWindow()
@@ -2530,14 +2551,16 @@ extension MainWindowController: PIPViewControllerDelegate {
     if player.info.isPaused {
       videoView.videoLayer.draw(forced: true)
     }
-    
+
     updateTimer()
-    
+
     isWindowMiniaturizedDueToPip = false
     isWindowHidden = false
   }
 
-  func pipShouldClose(_ pip: PIPViewController) -> Bool {
+  func prepareForPIPClosure(_ pip: PIPViewController) {
+    guard pipStatus == .inPIP else { return }
+    guard let window = window else { return }
     // This is called right before we're about to close the PIP
     pipStatus = .intermediate
     
@@ -2548,17 +2571,24 @@ extension MainWindowController: PIPViewControllerDelegate {
 
     // Set frame to animate back to
     if fsState.isFullscreen {
-      let newVideoSize = videoView.videoSize!.satisfyMaxSizeWithSameAspectRatio(window!.frame.size)
-      pip.replacementRect = newVideoSize.centeredRect(in: window!.frame)
+      let newVideoSize = videoView.frame.size.shrink(toSize: window.frame.size)
+      pip.replacementRect = newVideoSize.centeredRect(in: .init(origin: .zero, size: window.frame.size))
     } else {
-      pip.replacementRect = window?.contentView?.frame ?? .zero
+      pip.replacementRect = window.contentView?.frame ?? .zero
     }
     pip.replacementWindow = window
 
     // Bring the window to the front and deminiaturize it
     NSApp.activate(ignoringOtherApps: true)
-    window?.deminiaturize(pip)
+    window.deminiaturize(pip)
+  }
 
+  func pipWillClose(_ pip: PIPViewController) {
+    prepareForPIPClosure(pip)
+  }
+
+  func pipShouldClose(_ pip: PIPViewController) -> Bool {
+    prepareForPIPClosure(pip)
     return true
   }
 

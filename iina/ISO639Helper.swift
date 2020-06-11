@@ -10,7 +10,6 @@ import Foundation
 
 
 class ISO639Helper {
-
   struct Language {
     var code: String
     var name: [String]
@@ -19,6 +18,8 @@ class ISO639Helper {
       return "\(name[0]) (\(code))"
     }
   }
+
+  static let descriptionRegex = Regex("^.+?\\(([a-z]{2,3})\\)$")
 
   static let languages: [Language] = {
     var result: [Language] = []
@@ -33,5 +34,4 @@ class ISO639Helper {
     let filePath = Bundle.main.path(forResource: "ISO639", ofType: "strings")!
     return NSDictionary(contentsOfFile: filePath) as! [String : String]
   }()
-
 }

@@ -138,8 +138,8 @@ extension NSSize {
   }
 
   func centeredRect(in rect: NSRect) -> NSRect {
-    return NSRect(x: (rect.width - width) / 2,
-                  y: (rect.height - height) / 2,
+    return NSRect(x: rect.origin.x + (rect.width - width) / 2,
+                  y: rect.origin.y + (rect.height - height) / 2,
                   width: width,
                   height: height)
   }

@@ -64,7 +64,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     switch keyPath {
     case PK.themeMaterial.rawValue:
       if let newValue = change[.newKey] as? Int {
-        setMaterial(Preference.Theme(rawValue: newValue) ?? .system)
+        setMaterial(Preference.Theme(rawValue: newValue))
       }
     case PK.showRemainingTime.rawValue:
       if let newValue = change[.newKey] as? Bool {
@@ -197,8 +197,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     notificationCenter.addObserver(forName: name, object: object, queue: .main, using: block)
   }
 
-  internal func setMaterial(_ theme: Preference.Theme) {
-    guard let window = window else { return }
+  internal func setMaterial(_ theme: Preference.Theme?) {
+    guard let window = window, let theme = theme else { return }
 
     if #available(macOS 10.14, *) {
       window.appearance = NSAppearance(iinaTheme: theme)

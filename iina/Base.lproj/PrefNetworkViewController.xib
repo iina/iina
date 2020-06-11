@@ -53,7 +53,7 @@
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jlx-wF-OsB">
                     <rect key="frame" x="118" y="8" width="150" height="16"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Seconds to prefech:" id="J96-32-M9A">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Seconds to prefetch:" id="J96-32-M9A">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -95,12 +95,12 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
+                        <binding destination="KNf-nq-d77" name="enabled" keyPath="values.enableCache" id="l6l-ff-nHb"/>
                         <binding destination="KNf-nq-d77" name="value" keyPath="values.secPrefech" id="sml-CA-piQ">
                             <dictionary key="options">
                                 <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                             </dictionary>
                         </binding>
-                        <binding destination="KNf-nq-d77" name="enabled" keyPath="values.enableCache" id="l6l-ff-nHb"/>
                     </connections>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VFl-PR-eId">
@@ -299,12 +299,12 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
+                        <binding destination="KNf-nq-d77" name="enabled" keyPath="values.ytdlEnabled" id="RM3-Tc-D6I"/>
                         <binding destination="KNf-nq-d77" name="value" keyPath="values.ytdlRawOptions" id="bQV-W1-oMf">
                             <dictionary key="options">
                                 <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                             </dictionary>
                         </binding>
-                        <binding destination="KNf-nq-d77" name="enabled" keyPath="values.ytdlEnabled" id="RM3-Tc-D6I"/>
                     </connections>
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="iwI-aJ-5PQ">
@@ -353,12 +353,12 @@
                     </textFieldCell>
                     <accessibility help="/usr/local/bin"/>
                     <connections>
+                        <binding destination="KNf-nq-d77" name="enabled" keyPath="values.ytdlEnabled" id="Tum-wY-bCg"/>
                         <binding destination="KNf-nq-d77" name="value" keyPath="values.ytdlSearchPath" id="k2w-ov-mMJ">
                             <dictionary key="options">
                                 <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                             </dictionary>
                         </binding>
-                        <binding destination="KNf-nq-d77" name="enabled" keyPath="values.ytdlEnabled" id="Tum-wY-bCg"/>
                     </connections>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YLm-l6-HXj">

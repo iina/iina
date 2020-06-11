@@ -189,7 +189,7 @@
 "alert.delete_history.title" = "Șterge istoricul de redare";
 "alert.delete_history.message" = "Ești sigur că vrei să ștergi intrările selectate?";
 
-"alert.filter_hwdec.message" = "Ești pe cale să aplici un filtru video. Cu toate acestea, decodorul hardware curent poate să nu suporte filtre video. Poți dezactiva decodarea hardware sau să schimbi la Auto(Copy), ceea ce va consuma de două ori mai multă memorie.\nPosibil să trebuiască să repeți ultima operațiune (ex: setarea decupării) pentru a funcționa.";
+"alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
 "alert.filter_hwdec.abort" = "Abandonează";
 "alert.filter_hwdec.turn_off" = "Dezactivează decodarea hardware";
 "alert.filter_hwdec.use_copy" = "Schimbă la Auto(Copy)";

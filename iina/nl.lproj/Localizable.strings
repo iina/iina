@@ -189,7 +189,7 @@
 "alert.delete_history.title" = "Verwijder afspeelgeschiedenis";
 "alert.delete_history.message" = "Weet je zeker dat je de geselecteerde onderdelen wilt verwijderen?";
 
-"alert.filter_hwdec.message" = "Energiebesparing via hardware-acceleratie, je huidige instelling, is niet mogelijk met de gekozen videofilter. Wil je van afspeelmethode wisselen? Mogelijk moet je de filter daarna opnieuw toepassen.";
+"alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
 "alert.filter_hwdec.abort" = "Annuleer";
 "alert.filter_hwdec.turn_off" = "Ja, schakel hardware-acceleratie uit";
 "alert.filter_hwdec.use_copy" = "Ja, gebruik een gefilterde kopie wanneer nodig";

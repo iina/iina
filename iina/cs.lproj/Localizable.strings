@@ -35,10 +35,10 @@
 "osd.deinterlace" = "Odebrání prokládání: %@";
 "osd.audio_delay.nodelay" = "Zpoždění zvuku: Žádné";
 "osd.audio_delay.later" = "Zpoždění zvuku: %.2f s";
-"osd.audio_delay.earlier" = "Zpoždění zvuku: -%.2f s";
+"osd.audio_delay.earlier" = "Zpoždění zvuku: −%.2f s";
 "osd.sub_delay.nodelay" = "Zpoždění titulků: Žádné";
 "osd.sub_delay.later" = "Zpoždění titulků: %.2f s";
-"osd.sub_delay.earlier" = "Zpoždění titulků: -%.2f s";
+"osd.sub_delay.earlier" = "Zpoždění titulků: −%.2f s";
 "osd.subtitle_pos" = "Umístění titulků: %.1f";
 "osd.mute" = "Ztlumeno";
 "osd.unmute" = "Zesíleno";
@@ -102,12 +102,12 @@
 "menu.seek_backward" = "Posunout vzad o %.0f s";
 "menu.speed_up" = "Zrychlit na %.1fx";
 "menu.speed_down" = "Zpomalit na %.1fx";
-"menu.volume_up" = "Hlasitost + %.0f%%";
-"menu.volume_down" = "Hlasitost − %.0f%%";
-"menu.audio_delay_up" = "Zpoždění zvuku + %.1f s";
-"menu.audio_delay_down" = "Zpoždění zvuku − %.1f s";
-"menu.sub_delay_up" = "Zpoždění titulků + %.1f s";
-"menu.sub_delay_down" = "Zpoždění titulků − %.1f s";
+"menu.volume_up" = "Hlasitost +%.0f%%";
+"menu.volume_down" = "Hlasitost −%.0f%%";
+"menu.audio_delay_up" = "Zpoždění zvuku +%.1f s";
+"menu.audio_delay_down" = "Zpoždění zvuku −%.1f s";
+"menu.sub_delay_up" = "Zpoždění titulků +%.1f s";
+"menu.sub_delay_down" = "Zpoždění titulků −%.1f s";
 
 "track.none" = "Prázdné";
 
@@ -236,7 +236,7 @@
 "pl_menu.wrong_sub" = "Nesprávné titulky!";
 "pl_menu.browser" = "Otevřít v prohlížeči";
 "pl_menu.copy_url" = "Kopírovat URL";
-"pl_menu.copy_url_multi" = "Kopírovat URLs";
+"pl_menu.copy_url_multi" = "Kopírovat URL";
 
 "keymapping.title" = "Klávesové zkratky";
 "keymapping.message" = "Pro záznam stiskněte jakoukoliv klávesu.";

@@ -7,15 +7,15 @@
 */
 
 "cmd.ignore" = "忽略";
-"cmd.seek" = "尋找/跳轉";
-"cmd.revert-seek" = "回復尋找";
+"cmd.seek" = "跳轉";
+"cmd.revert-seek" = "還原跳轉";
 "cmd.set" = "設定";
 "cmd.cycle" = "循環";
 "cmd.cycle-values" = "指定值中循環";
 "cmd.add" = "增減";
 "cmd.multiply" = "乘以";
-"cmd.frame-step" = "下一個關鍵影格";
-"cmd.frame-back-step" = "上一個關鍵影格";
+"cmd.frame-step" = "下一個影格";
+"cmd.frame-back-step" = "上一個影格";
 "cmd.ab-loop" = "A-B 循環";
 "cmd.sub-seek" = "字幕尋找";
 "cmd.playlist-next" = "下一個媒體";
@@ -23,7 +23,7 @@
 "cmd.playlist-move" = "移動列表項目";
 "cmd.playlist-clear" = "清除播放列表";
 "cmd.playlist-remove" = "移除目前媒體";
-"cmd.playlist-shuffle" = "隨機播放列表排序";
+"cmd.playlist-shuffle" = "隨機播放列表項目";
 "cmd.write-watch-later-config" = "記錄播放進度";
 "cmd.stop" = "停止";
 "cmd.quit" = "結束";
@@ -70,6 +70,8 @@
 
 "relative" = "秒";
 "absolute" = "秒";
+"absolute-percent" = "%";
+"relative-percent" = "%";
 "relative+exact" = "秒（精確）";
 "relative-percent+exact" = "%（精確）";
 "absolute+keyframe" = "秒（關鍵影格）";

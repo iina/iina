@@ -34,6 +34,9 @@
 /* Class = "NSTextFieldCell"; title = "Middle click to:"; ObjectID = "Gyd-Qt-FEo"; */
 "Gyd-Qt-FEo.title" = "Mittenklicka för att:";
 
+/* Class = "NSButtonCell"; title = "Acccepts first mouse"; ObjectID = "gZK-ry-lQs"; */
+"gZK-ry-lQs.title" = "Accepterar klick även när fönstret inte är aktivt";
+
 /* Class = "NSMenuItem"; title = "Fullscreen"; ObjectID = "Hm3-dh-jgb"; */
 "Hm3-dh-jgb.title" = "Fullskärm";
 
@@ -41,7 +44,7 @@
 "I6k-ab-IwJ.title" = "Styrplatta";
 
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "K9H-w9-wmT"; */
-"K9H-w9-wmT.title" = "Auto";
+"K9H-w9-wmT.title" = "Automatisk";
 
 /* Class = "NSMenuItem"; title = "Hide OSC"; ObjectID = "M6K-ME-cve"; */
 "M6K-ME-cve.title" = "Gömma skärmkontroller";

@@ -219,6 +219,7 @@ struct Preference {
     static let verticalScrollAction = Key("verticalScrollAction")
     static let horizontalScrollAction = Key("horizontalScrollAction")
 
+    static let videoViewAcceptsFirstMouse = Key("videoViewAcceptsFirstMouse")
     static let singleClickAction = Key("singleClickAction")
     static let doubleClickAction = Key("doubleClickAction")
     static let rightClickAction = Key("rightClickAction")
@@ -740,7 +741,7 @@ struct Preference {
     .subMarginY: Float(22),
     .subPos: Float(100),
     .subLang: "",
-    .onlineSubSource: OnlineSubtitle.Source.shooter.rawValue,
+    .onlineSubSource: OnlineSubtitle.Source.openSub.rawValue,
     .displayInLetterBox: true,
     .subScaleWithWindow: true,
     .openSubUsername: "",
@@ -780,6 +781,7 @@ struct Preference {
     .volumeScrollAmount: 3,
     .verticalScrollAction: ScrollAction.volume.rawValue,
     .horizontalScrollAction: ScrollAction.seek.rawValue,
+    .videoViewAcceptsFirstMouse: false,
     .singleClickAction: MouseClickAction.hideOSC.rawValue,
     .doubleClickAction: MouseClickAction.fullscreen.rawValue,
     .rightClickAction: MouseClickAction.pause.rawValue,

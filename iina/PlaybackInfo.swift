@@ -56,6 +56,7 @@ class PlaybackInfo {
   }
 
   var isSeeking: Bool = false
+
   var isPaused: Bool = false {
     didSet {
       PlayerCore.checkStatusForSleep()
@@ -64,9 +65,17 @@ class PlaybackInfo {
           NowPlayingInfoManager.updateState(isPaused ? .paused : .playing)
         }
         if #available(macOS 10.12, *), player.mainWindow.pipStatus == .inPIP {
-          player.mainWindow.pip.playing = !isPaused
+          player.mainWindow.pip.playing = isPlaying
         }
       }
+    }
+  }
+  var isPlaying: Bool {
+    get {
+      return !isPaused
+    }
+    set {
+      isPaused = !newValue
     }
   }
 
@@ -74,6 +83,7 @@ class PlaybackInfo {
   var justStartedFile: Bool = false
   var justOpenedFile: Bool = false
   var shouldAutoLoadFiles: Bool = false
+  var isMatchingSubtitles = false
   var disableOSDForFileLoading: Bool = false
 
   /** The current applied aspect, used for find current aspect in menu, etc. Maybe not a good approach. */

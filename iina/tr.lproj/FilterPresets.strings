@@ -31,7 +31,7 @@
 "blur.msize" = "Matrix boyutu";
 "blur.amount" = "Miktar";
 
-"delogo" = "Delogo";
+"delogo" = "Logo kaldır";
 "delogo.w" = "Genişlik";
 "delogo.h" = "Yükseklik";
 "delogo.x" = "X Ekseni";
@@ -44,9 +44,9 @@
 
 "lut3d" = "3D LUT";
 "lut3d.file" = "Dosya";
-"lut3d.interp" = "Interpolasyon modu";
+"lut3d.interp" = "İnterpolasyon modu";
 
-"custom_mpv" = "Özel (MPV)";
+"custom_mpv" = "Özel (mpv)";
 "custom_mpv.name" = "Filtre İsmi";
 "custom_mpv.string" = "Filtre Değeri";
 

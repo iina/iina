@@ -111,6 +111,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     let action = #selector(performDoubleAction(sender:))
     playlistTableView.doubleAction = action
     playlistTableView.target = self
+    chapterTableView.doubleAction = action
+    chapterTableView.target = self
 
     // register for drag and drop
     playlistTableView.registerForDraggedTypes([.iinaPlaylistItem, .nsFilenames, .nsURL, .string])
@@ -151,10 +153,13 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     totalLengthLabel.isHidden = false
     if playlistTableView.numberOfSelectedRows > 0 {
       let info = player.info
-      let selectedDuration = playlistTableView.selectedRowIndexes
-        .compactMap { info.cachedVideoDurationAndProgress[info.playlist[$0].filename]?.duration }
-        .compactMap { $0 > 0 ? $0 : 0 }
-        .reduce(0, +)
+      var selectedDuration = 0.0
+      player.playlistQueue.sync {
+        selectedDuration = playlistTableView.selectedRowIndexes
+          .compactMap { info.cachedVideoDurationAndProgress[info.playlist[$0].filename]?.duration }
+          .compactMap { $0 > 0 ? $0 : 0 }
+          .reduce(0, +)
+      }
       totalLengthLabel.stringValue = String(format: NSLocalizedString("playlist.total_length_with_selected", comment: "%@ of %@ selected"),
                                             VideoTime(selectedDuration).stringRepresentation,
                                             VideoTime(playlistTotalLength).stringRepresentation)
@@ -350,6 +355,10 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     addFileMenu.popUp(positioning: nil, at: .zero, in: sender)
   }
 
+  @IBAction func removeBtnAction(_ sender: NSButton) {
+    player.playlistRemove(playlistTableView.selectedRowIndexes)
+  }
+
   @IBAction func addFileAction(_ sender: AnyObject) {
     Utility.quickMultipleOpenPanel(title: "Add to playlist", canChooseDir: true) { urls in
       let playableFiles = self.player.getPlayableFiles(in: urls)
@@ -399,12 +408,15 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
 
   @objc func performDoubleAction(sender: AnyObject) {
-    let tv = sender as! NSTableView
-    if tv.numberOfSelectedRows > 0 {
+    guard let tv = sender as? NSTableView, tv.numberOfSelectedRows > 0 else { return }
+    if tv == playlistTableView {
       player.playFileInPlaylist(tv.selectedRow)
-      tv.deselectAll(self)
-      tv.reloadData()
+    } else {
+      let index = tv.selectedRow
+      player.playChapter(index)
     }
+    tv.deselectAll(self)
+    tv.reloadData()
   }
 
   @IBAction func prefixBtnAction(_ sender: PlaylistPrefixButton) {
@@ -438,13 +450,6 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       showTotalLength()
       return
     }
-    guard tv.numberOfSelectedRows > 0 else { return }
-    let index = tv.selectedRow
-    player.playChapter(index)
-    let chapter = player.info.chapters[index]
-    tv.deselectAll(self)
-    tv.reloadData()
-    player.sendOSD(.chapter(chapter.title))
   }
 
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -479,22 +484,24 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         // playback progress and duration
         cellView.durationLabel.font = NSFont.monospacedDigitSystemFont(ofSize: NSFont.smallSystemFontSize, weight: .regular)
         cellView.durationLabel.stringValue = ""
-        if let cached = player.info.cachedVideoDurationAndProgress[item.filename],
-          let duration = cached.duration {
-          // if it's cached
-          if duration > 0 {
-            // if FFmpeg got the duration succcessfully
-            cellView.durationLabel.stringValue = VideoTime(duration).stringRepresentation
-            if let progress = cached.progress {
-              cellView.playbackProgressView.percentage = progress / duration
-              cellView.playbackProgressView.needsDisplay = true
+        player.playlistQueue.async {
+          if let cached = self.player.info.cachedVideoDurationAndProgress[item.filename],
+            let duration = cached.duration {
+            // if it's cached
+            if duration > 0 {
+              // if FFmpeg got the duration succcessfully
+              DispatchQueue.main.async {
+                cellView.durationLabel.stringValue = VideoTime(duration).stringRepresentation
+                if let progress = cached.progress {
+                  cellView.playbackProgressView.percentage = progress / duration
+                  cellView.playbackProgressView.needsDisplay = true
+                }
+              }
+              self.refreshTotalLength()
             }
-            self.refreshTotalLength()
-          }
-        } else {
-          // get related data and schedule a reload
-          if Preference.bool(for: .prefetchPlaylistVideoDuration) {
-            player.playlistQueue.async {
+          } else {
+            // get related data and schedule a reload
+            if Preference.bool(for: .prefetchPlaylistVideoDuration) {
               self.player.refreshCachedVideoProgress(forVideoPath: item.filename)
               self.refreshTotalLength()
               DispatchQueue.main.async {
@@ -504,7 +511,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
           }
         }
         // sub button
-        if let matchedSubs = player.info.matchedSubs[item.filename], !matchedSubs.isEmpty {
+        if !info.isMatchingSubtitles,
+          let matchedSubs = player.info.matchedSubs[item.filename], !matchedSubs.isEmpty {
           cellView.subBtn.isHidden = false
           cellView.subBtnWidthConstraint.constant = 12
         } else {

@@ -48,6 +48,8 @@ struct MPVCommand: RawRepresentable {
   static let playlistMove = MPVCommand("playlist-move")
   /** playlist-shuffle */
   static let playlistShuffle = MPVCommand("playlist-shuffle")
+  /** playlist-unshuffle */
+  static let playlistUnshuffle = MPVCommand("playlist-unshuffle")
   /** run <command> [<arg1> [<arg2> [...]]] */
   static let run = MPVCommand("run")
   /** subprocess */

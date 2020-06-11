@@ -38,6 +38,8 @@ class VideoView: NSView {
   // cached indicator to prevent unnecessary updates of DisplayLink
   var currentDisplay: UInt32?
 
+  var pendingRedrawAfterEnteringPIP = false;
+
   // MARK: - Attributes
 
   override var mouseDownCanMoveWindow: Bool {
@@ -51,7 +53,6 @@ class VideoView: NSView {
   // MARK: - Init
 
   override init(frame: CGRect) {
-
     super.init(frame: frame)
 
     // set up layer
@@ -65,6 +66,11 @@ class VideoView: NSView {
 
     // dragging init
     registerForDraggedTypes([.nsFilenames, .nsURL, .string])
+  }
+  
+  convenience init(frame: CGRect, player: PlayerCore) {
+    self.init(frame: frame)
+    self.player = player
   }
 
   required init?(coder: NSCoder) {
@@ -88,12 +94,20 @@ class VideoView: NSView {
     uninit()
   }
 
+  override func layout() {
+    super.layout()
+    if pendingRedrawAfterEnteringPIP && superview != nil {
+      videoLayer.draw(forced: true)
+      pendingRedrawAfterEnteringPIP = false
+    }
+  }
+
   override func draw(_ dirtyRect: NSRect) {
     // do nothing
   }
 
   override func acceptsFirstMouse(for event: NSEvent?) -> Bool {
-    return true
+    return Preference.bool(for: .videoViewAcceptsFirstMouse)
   }
 
   // MARK: Drag and drop

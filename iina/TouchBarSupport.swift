@@ -173,7 +173,7 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
   }
 
   @objc func touchBarPlayBtnAction(_ sender: NSButton) {
-    player.togglePause(nil)
+    player.togglePause()
   }
 
   @objc func touchBarVolumeAction(_ sender: NSButton) {
@@ -266,6 +266,7 @@ extension MiniPlayerWindowController {
 class TouchBarPlaySlider: NSSlider {
 
   var isTouching = false
+  var wasPlayingBeforeTouching = false
 
   var playerCore: PlayerCore {
     return (self.window?.windowController as? MainWindowController)?.player ?? .active
@@ -273,13 +274,16 @@ class TouchBarPlaySlider: NSSlider {
 
   override func touchesBegan(with event: NSEvent) {
     isTouching = true
-    playerCore.togglePause(true)
+    wasPlayingBeforeTouching = playerCore.info.isPlaying
+    playerCore.pause()
     super.touchesBegan(with: event)
   }
 
   override func touchesEnded(with event: NSEvent) {
     isTouching = false
-    playerCore.togglePause(false)
+    if (wasPlayingBeforeTouching) {
+      playerCore.resume()
+    }
     super.touchesEnded(with: event)
   }
 

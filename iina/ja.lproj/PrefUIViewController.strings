@@ -8,7 +8,7 @@
 "1nM-AX-Ozm.title" = "カスタマイズ…";
 
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "2YJ-bg-OdR"; */
-"2YJ-bg-OdR.title" = "% 画面";
+"2YJ-bg-OdR.title" = "% (画面の割合)";
 
 /* Class = "NSTextFieldCell"; title = "Use left/right button for:"; ObjectID = "3CY-YS-rG6"; */
 "3CY-YS-rG6.title" = "左/右ボタンの役割:";
@@ -29,13 +29,13 @@
 "92n-Uq-o4G.title" = "下";
 
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "AE4-BD-wZi"; */
-"AE4-BD-wZi.title" = "% 画面";
+"AE4-BD-wZi.title" = "% (画面の割合)";
 
 /* Class = "NSTextFieldCell"; title = "Window:"; ObjectID = "AmS-Sl-b2h"; */
 "AmS-Sl-b2h.title" = "ウィンドウ:";
 
 /* Class = "NSMenuItem"; title = "Width:"; ObjectID = "B1c-oO-fIs"; */
-"B1c-oO-fIs.title" = "幅:";
+"B1c-oO-fIs.title" = "横幅:";
 
 /* Class = "NSButtonCell"; title = "Show chapter position in progress bar"; ObjectID = "BVV-Z3-LHR"; */
 "BVV-Z3-LHR.title" = "チャプタの位置をプログレスバーに表示";
@@ -44,7 +44,7 @@
 "CJE-ap-IH8.title" = "メディアが手動で開かれた時";
 
 /* Class = "NSButtonCell"; title = "Show remaining time instead of total duration"; ObjectID = "EAa-gN-8dL"; */
-"EAa-gN-8dL.title" = "残り時間を表示";
+"EAa-gN-8dL.title" = "合計時間の代わりに残り時間を表示";
 
 /* Class = "NSTextFieldCell"; title = "When entering Picture-in-Picture:"; ObjectID = "EUd-RD-g0T"; */
 "EUd-RD-g0T.title" = "ピクチャ・イン・ピクチャの使用時:";
@@ -59,7 +59,7 @@
 "GKy-3g-4MB.title" = "ウィンドウ:";
 
 /* Class = "NSTextFieldCell"; title = "side of the screen"; ObjectID = "GXO-iT-BIr"; */
-"GXO-iT-BIr.title" = "側の画面へ";
+"GXO-iT-BIr.title" = "端から";
 
 /* Class = "NSTextFieldCell"; title = "Maximum cache size:"; ObjectID = "GYe-Y3-bOR"; */
 "GYe-Y3-bOR.title" = "最大キャッシュ容量:";
@@ -107,7 +107,7 @@
 "TWq-Xb-8Ee.title" = "再生速度";
 
 /* Class = "NSMenuItem"; title = "Medium Light"; ObjectID = "TdN-pM-HHk"; */
-"TdN-pM-HHk.title" = "Medium Light";
+"TdN-pM-HHk.title" = "ミディアムライト";
 
 /* Class = "NSMenuItem"; title = "Height:"; ObjectID = "Uc9-An-930"; */
 "Uc9-An-930.title" = "高さ:";
@@ -122,10 +122,10 @@
 "X5B-TZ-ISz.title" = "ポイント";
 
 /* Class = "NSButtonCell"; title = "Enable thumbnail preview"; ObjectID = "Xey-3m-f6G"; */
-"Xey-3m-f6G.title" = "サムネイルプレビューを使用";
+"Xey-3m-f6G.title" = "サムネイルプレビューを有効化";
 
 /* Class = "NSTextFieldCell"; title = "to the"; ObjectID = "Ydi-yB-FMe"; */
-"Ydi-yB-FMe.title" = "to the";
+"Ydi-yB-FMe.title" = "画面の";
 
 /* Class = "NSTextFieldCell"; title = "X offset:"; ObjectID = "Ymw-tr-6rw"; */
 "Ymw-tr-6rw.title" = "X座標:";
@@ -152,10 +152,10 @@
 "g06-Ja-Ot8.title" = "オンスクリーン\nコントローラ (OSC):";
 
 /* Class = "NSTextFieldCell"; title = "of the screen"; ObjectID = "iRn-3s-oQH"; */
-"iRn-3s-oQH.title" = "側の画面へ";
+"iRn-3s-oQH.title" = "端から";
 
 /* Class = "NSButtonCell"; title = "Display time and battery info when in full screen"; ObjectID = "kOT-8q-E57"; */
-"kOT-8q-E57.title" = "フルスクリーン時に時間とバッテリーを表示する";
+"kOT-8q-E57.title" = "フルスクリーン時に現在時刻とバッテリー残量を表示する";
 
 /* Class = "NSTextFieldCell"; title = "Thumbnail Preview:"; ObjectID = "kYu-0l-jQQ"; */
 "kYu-0l-jQQ.title" = "サムネイルプレビュー:";
@@ -179,10 +179,10 @@
 "oYc-L7-qQd.title" = "上";
 
 /* Class = "NSMenuItem"; title = "Ultra Dark"; ObjectID = "pV2-12-PmM"; */
-"pV2-12-PmM.title" = "Ultra Dark";
+"pV2-12-PmM.title" = "ウルトラダーク";
 
 /* Class = "NSTextFieldCell"; title = "to the"; ObjectID = "qbc-CY-bdK"; */
-"qbc-CY-bdK.title" = "to the";
+"qbc-CY-bdK.title" = "画面の";
 
 /* Class = "NSMenuItem"; title = "Match System Appearance"; ObjectID = "qn6-Bp-Mqp"; */
 "qn6-Bp-Mqp.title" = "システム設定に合わせる";

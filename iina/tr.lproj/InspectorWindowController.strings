@@ -1,5 +1,5 @@
 /* Class = "NSTextFieldCell"; title = "Forced"; ObjectID = "0vG-Pg-DIl"; */
-"0vG-Pg-DIl.title" = "Zorunlu";
+"0vG-Pg-DIl.title" = "Zorlanmış";
 
 /* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "1dz-Vt-0MO"; */
 "1dz-Vt-0MO.title" = "FPS:";
@@ -17,7 +17,7 @@
 "9eq-rd-zGy.title" = "Başlık:";
 
 /* Class = "NSTextFieldCell"; title = "Bit Rate:"; ObjectID = "A4y-LL-x0z"; */
-"A4y-LL-x0z.title" = "Bit Oranı:";
+"A4y-LL-x0z.title" = "Bit Hızı:";
 
 /* Class = "NSTextFieldCell"; title = "Mistimed Frames:"; ObjectID = "AYt-pH-UCi"; */
 "AYt-pH-UCi.title" = "Zamanlama hatası olan kareler:";
@@ -89,7 +89,7 @@
 "S3X-Df-UMB.title" = "Varsayılan";
 
 /* Class = "NSTabViewItem"; label = "Tracks"; ObjectID = "UuR-M1-YLj"; */
-"UuR-M1-YLj.label" = "Parçalar";
+"UuR-M1-YLj.label" = "İzler";
 
 /* Class = "NSTabViewItem"; label = "Status"; ObjectID = "VGm-BL-xOI"; */
 "VGm-BL-xOI.label" = "Durum";
@@ -98,10 +98,10 @@
 "WrI-Sr-O2S.label" = "Dosya";
 
 /* Class = "NSTextFieldCell"; title = "Codec:"; ObjectID = "bki-sE-xCA"; */
-"bki-sE-xCA.title" = "Çözücü";
+"bki-sE-xCA.title" = "Kodlayıcı:";
 
 /* Class = "NSTextFieldCell"; title = "Codec:"; ObjectID = "daB-hU-mku"; */
-"daB-hU-mku.title" = "Çözücü:";
+"daB-hU-mku.title" = "Kodlayıcı:";
 
 /* Class = "NSTextFieldCell"; title = "Properties:"; ObjectID = "dtn-wS-j6U"; */
 "dtn-wS-j6U.title" = "Özellikler:";
@@ -113,16 +113,16 @@
 "f7a-XG-NCc.label" = "Genel";
 
 /* Class = "NSTextFieldCell"; title = "Track:"; ObjectID = "f7i-wX-uxQ"; */
-"f7i-wX-uxQ.title" = "Parça:";
+"f7i-wX-uxQ.title" = "İz:";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Output FPS:"; ObjectID = "g8p-Ec-awO"; */
-"g8p-Ec-awO.title" = "Tahmini Çıkış FPS'si:";
+"g8p-Ec-awO.title" = "Tahmini Çıktı FPS'si:";
 
 /* Class = "NSTextFieldCell"; title = "VIDEO"; ObjectID = "gDG-Eq-1Bc"; */
 "gDG-Eq-1Bc.title" = "VIDEO";
 
 /* Class = "NSTextFieldCell"; title = "A/V Sync Diff:"; ObjectID = "iVK-Ck-Lyq"; */
-"iVK-Ck-Lyq.title" = "A/V senk. farkı:";
+"iVK-Ck-Lyq.title" = "A/V Senk. Farkı:";
 
 /* Class = "NSTextFieldCell"; title = "Channels:"; ObjectID = "it3-05-Pwu"; */
 "it3-05-Pwu.title" = "Kanallar:";
@@ -143,7 +143,7 @@
 "mgl-Et-20K.title" = "Biçim:";
 
 /* Class = "NSTextFieldCell"; title = "Codec:"; ObjectID = "n0s-eM-42w"; */
-"n0s-eM-42w.title" = "Kodek:";
+"n0s-eM-42w.title" = "Kodlayıcı:";
 
 /* Class = "NSTextFieldCell"; title = "AUDIO"; ObjectID = "nrG-IH-kFg"; */
 "nrG-IH-kFg.title" = "SES";

@@ -2,13 +2,13 @@
 "02L-0u-zae.title" = "儲存";
 
 /* Class = "NSTableColumn"; headerCell.title = "Filter String"; ObjectID = "4g6-LW-373"; */
-"4g6-LW-373.headerCell.title" = "濾鏡（指令串）";
+"4g6-LW-373.headerCell.title" = "濾鏡字串";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "6fq-yx-3dE"; */
 "6fq-yx-3dE.title" = "取消";
 
 /* Class = "NSTextFieldCell"; title = "By saving a filter, you can enable or disable it conveniently and even assign a shortcut key to it."; ObjectID = "8JN-kb-kGF"; */
-"8JN-kb-kGF.title" = "儲存濾鏡後，您可以快速啟用/停用它，或為其新增快速鍵。";
+"8JN-kb-kGF.title" = "儲存濾鏡，方便您隨時啟用或停用它，您亦可為濾鏡指定快捷鍵。";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "9Au-ZV-KXN"; */
 "9Au-ZV-KXN.title" = "取消";
@@ -38,16 +38,16 @@
 "Xqd-Ft-hTS.title" = "取消";
 
 /* Class = "NSTextFieldCell"; title = "Press any button to record"; ObjectID = "dL4-so-Qss"; */
-"dL4-so-Qss.title" = "按任一鍵開始錄製";
+"dL4-so-Qss.title" = "按任意鍵開始錄製";
 
 /* Class = "NSTextFieldCell"; title = "Press any button to record"; ObjectID = "jJk-0R-KQo"; */
-"jJk-0R-KQo.title" = "按任一鍵開始錄製";
+"jJk-0R-KQo.title" = "按任意鍵開始錄製";
 
 /* Class = "NSButtonCell"; title = "Add"; ObjectID = "ljR-R1-mo7"; */
 "ljR-R1-mo7.title" = "加入";
 
 /* Class = "NSTextFieldCell"; title = "Saved filters"; ObjectID = "m5X-Zl-aOj"; */
-"m5X-Zl-aOj.title" = "已儲存的濾鏡";
+"m5X-Zl-aOj.title" = "已儲存濾鏡";
 
 /* Class = "NSTextFieldCell"; title = "Filter string:"; ObjectID = "t9F-EU-fKj"; */
 "t9F-EU-fKj.title" = "濾鏡字串：";

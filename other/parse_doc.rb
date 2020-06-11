@@ -15,35 +15,56 @@ doc = Nokogiri::HTML open(DOC_URL)
 
 # property
 
-property_list = doc.css '#property-list .docutils > dt > tt'
+nodes = doc.css '#property-list > .docutils > dt, #property-list > .docutils > dd'
+$prop_set = Hash.new(0)
+
+def write_prop(file, node)
+  name = node.content
+  camel_name = name.to_camel
+  if (count = $prop_set[camel_name]) > 0
+    name = "#{camel_name}#{count}"
+  end
+  $prop_set[camel_name] += 1
+
+  if name.include? '/'
+    if name.include? 'N'
+      func_name = name.to_camel
+      return_str = name.gsub('N', '\(n)')
+      file.write "  /** #{name} */\n"
+      file.write "  static func #{func_name}(_ n: Int) -> String {\n"
+      file.write "    return \"#{return_str}\"\n"
+      file.write "  }\n"
+    elsif name.include? '<name>'
+      func_name = name.gsub('/<name>', '').to_camel
+      return_str = name.gsub('<name>', '\(name)')
+      file.write "  /** #{name} */\n"
+      file.write "  static func #{func_name}(_ name: String) -> String {\n"
+      file.write "    return \"#{return_str}\"\n"
+      file.write "  }\n"
+    elsif not name.match(/<.+?>/)
+      file.write "  /** #{name} */\n"
+      file.write "  static let #{name.to_camel} = \"#{name}\"\n"
+    end
+  else
+    file.write "  /** #{name} */\n"
+    file.write "  static let #{name.to_camel} = \"#{name}\"\n"
+  end
+end
 
 File.open(File.join(__dir__, 'MPVProperty.swift'), 'w') do |file|
   file.write "import Foundation\n\n"
   file.write "struct MPVProperty {\n"
-  property_list.each do |property|
-    name = property.content
-    if name.include? '/'
-      if name.include? 'N'
-        func_name = name.to_camel
-        return_str = name.gsub('N', '\(n)')
-        file.write "  /** #{name} */\n"
-        file.write "  static func #{func_name}(_ n: Int) -> String {\n"
-        file.write "    return \"#{return_str}\"\n"
-        file.write "  }\n"
-      elsif name.include? '<name>'
-        func_name = name.gsub('/<name>', '').to_camel
-        return_str = name.gsub('<name>', '\(name)')
-        file.write "  /** #{name} */\n"
-        file.write "  static func #{func_name}(_ name: String) -> String {\n"
-        file.write "    return \"#{return_str}\"\n"
-        file.write "  }\n"
-      elsif not name.match(/<.+?>/)
-        file.write "  /** #{name} */\n"
-        file.write "  static let #{name.to_camel} = \"#{name}\"\n"
+  nodes.each do |node|
+    if node.name == 'dt'
+      props = node.css('tt')
+      props.each do |prop|
+        write_prop(file, prop)
       end
     else
-      file.write "  /** #{name} */\n"
-      file.write "  static let #{name.to_camel} = \"#{name}\"\n"
+      sub_props = node.css '.docutils > dt > tt'
+      sub_props.each do |prop|
+        write_prop(file, prop) if prop.content.include? '/'
+      end
     end
   end
   file.write "}\n"

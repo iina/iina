@@ -16,8 +16,8 @@
 /* Class = "NSTextFieldCell"; title = "Format: <key>=<value>[,<key>=<value>[,…]]"; ObjectID = "GBe-wd-tne"; */
 "GBe-wd-tne.title" = "Formato: <key>=<value>[,<key>=<value>[,…]]";
 
-/* Class = "NSTextFieldCell"; title = "Seconds to prefech:"; ObjectID = "J96-32-M9A"; */
-"J96-32-M9A.title" = "Secondi di prefech:";
+/* Class = "NSTextFieldCell"; title = "Seconds to prefetch:"; ObjectID = "J96-32-M9A"; */
+"J96-32-M9A.title" = "Secondi di prefetch:";
 
 /* Class = "NSTextFieldCell"; title = "Cache:"; ObjectID = "LNk-io-MM7"; */
 "LNk-io-MM7.title" = "Cache:";
@@ -29,7 +29,7 @@
 "YqE-yV-BvQ.title" = "IINA cercherà youtube-dl in questa cartella. Richiede il riavvio.";
 
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "aNr-lv-K0r"; */
-"aNr-lv-K0r.title" = "Auto";
+"aNr-lv-K0r.title" = "Automatico";
 
 /* Class = "NSButtonCell"; title = "Enable youtube-dl"; ObjectID = "cyH-Md-FAD"; */
 "cyH-Md-FAD.title" = "Abilita youtube-dl";

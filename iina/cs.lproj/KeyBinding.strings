@@ -11,7 +11,7 @@
 "cmd.revert-seek" = "Odvolat posunutí";
 "cmd.set" = "Nastavit";
 "cmd.cycle" = "Opakovat";
-"cmd.cycle-values" = "Opakovat u";
+"cmd.cycle-values" = "Opakovat";
 "cmd.add" = "Změnit";
 "cmd.multiply" = "Znásobit";
 "cmd.frame-step" = "Další snímek";
@@ -62,14 +62,16 @@
 "to" = "na";
 "by" = "pomocí";
 "in" = "v";
-"add" = "zvýšit";
-"minus" = "snížit";
-"forward" = "vpřed";
-"backward" = "zpět";
+"add" = "zvýšit o";
+"minus" = "snížit o";
+"forward" = "vpřed o";
+"backward" = "vzad o";
 "seek-to" = "na";
 
 "relative" = "s";
 "absolute" = "s";
+"absolute-percent" = "%";
+"relative-percent" = "%";
 "relative+exact" = "s (přesně)";
 "relative-percent+exact" = "% (přesně)";
 "absolute+keyframe" = "s (snímek)";

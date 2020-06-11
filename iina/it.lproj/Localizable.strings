@@ -9,8 +9,8 @@
 
 "general.on" = "On";
 "general.off" = "Off";
-"general.login" = "Login";
-"general.logout" = "Logout";
+"general.login" = "Accedi";
+"general.logout" = "Disconnetti";
 "general.ok" = "OK";
 "general.cancel" = "Annulla";
 "general.username" = "Nome utente";
@@ -21,7 +21,7 @@
 "main.opening_stream" = "Apertura stream…";
 
 // QuickSettingViewController.swift
-"quicksetting.item_default" = "Default";
+"quicksetting.item_default" = "Predefinito";
 "quicksetting.item_none" = "Nessuno";
 
 // OSDMessage.swift
@@ -46,7 +46,7 @@
 "osd.abloop.a" = "Ripeti A-B: A";
 "osd.abloop.b" = "Ripeti A-B: B";
 "osd.abloop.clear" = "Ripeti A-B: azzerato";
-"osd.stop" = "Stop";
+"osd.stop" = "Ferma";
 "osd.chapter" = "Capitolo: %@";
 "osd.subtitle_scale" = "Scala sottotitoli: %.2fx";
 "osd.add_to_playlist" = "Aggiungi %i file alla playlist";

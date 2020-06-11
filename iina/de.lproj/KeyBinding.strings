@@ -70,6 +70,8 @@
 
 "relative" = "Sekunden";
 "absolute" = "Sekunden";
+"absolute-percent" = "%";
+"relative-percent" = "%";
 "relative+exact" = "s (genau)";
 "relative-percent+exact" = "% (genau)";
 "absolute+keyframe" = "s (Keyframe)";

@@ -1,8 +1,8 @@
 /* Class = "NSTextFieldCell"; title = "Speed:"; ObjectID = "1KQ-oZ-A2x"; */
-"1KQ-oZ-A2x.title" = "速さ:";
+"1KQ-oZ-A2x.title" = "速度:";
 
 /* Class = "NSTextFieldCell"; title = "Width:"; ObjectID = "22j-ra-GAY"; */
-"22j-ra-GAY.title" = "幅:";
+"22j-ra-GAY.title" = "横幅:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "3kI-6i-ujt"; */
 "3kI-6i-ujt.title" = "色:";
@@ -14,7 +14,7 @@
 "8Ax-5X-osl.title" = "外部のオーディオトラックを読み込む…";
 
 /* Class = "NSSegmentedCell"; AB5-UZ-euc.ibShadowedLabels[0] = "Load Subtitle…"; ObjectID = "AB5-UZ-euc"; */
-"AB5-UZ-euc.ibShadowedLabels[0]" = "読み込む…";
+"AB5-UZ-euc.ibShadowedLabels[0]" = "字幕を読み込む…";
 
 /* Class = "NSTextFieldCell"; title = "Audio delay:"; ObjectID = "AKs-VQ-fKF"; */
 "AKs-VQ-fKF.title" = "オーディオディレイ:";
@@ -35,10 +35,10 @@
 "DdO-VX-HCz.title" = "0.25";
 
 /* Class = "NSTextFieldCell"; title = "0.25x"; ObjectID = "Ew1-N1-0Pi"; */
-"Ew1-N1-0Pi.title" = "0.25x";
+"Ew1-N1-0Pi.title" = "0.25";
 
 /* Class = "NSTextFieldCell"; title = "BORDER"; ObjectID = "GlZ-YU-dNm"; */
-"GlZ-YU-dNm.title" = "枠";
+"GlZ-YU-dNm.title" = "枠線";
 
 /* Class = "NSTextFieldCell"; title = "31.25"; ObjectID = "HBF-J7-Tie"; */
 "HBF-J7-Tie.title" = "31.25";
@@ -65,7 +65,7 @@
 "RA1-fF-OrB.title" = "外部の字幕:";
 
 /* Class = "NSSegmentedCell"; Rbb-wh-cLc.ibShadowedLabels[0] = "Search Online…"; ObjectID = "Rbb-wh-cLc"; */
-"Rbb-wh-cLc.ibShadowedLabels[0]" = "オンラインでを探す…";
+"Rbb-wh-cLc.ibShadowedLabels[0]" = "オンラインで探す…";
 
 /* Class = "NSTextFieldCell"; title = "Saturation:"; ObjectID = "Rky-lo-Buu"; */
 "Rky-lo-Buu.title" = "彩度:";
@@ -179,7 +179,7 @@
 "vFD-HU-RVz.title" = "カスタム…";
 
 /* Class = "NSTextFieldCell"; title = "Subtitle style options may break ASS rendering, and some of them will be disabled depending on subtitle type."; ObjectID = "wBD-pZ-Bvu"; */
-"wBD-pZ-Bvu.title" = "字幕のスタイルを使用するとASS字幕がうまく表示されない場合があり、いくつかの設定は字幕の種類に応じて使用することができない時もあります。";
+"wBD-pZ-Bvu.title" = "字幕のスタイルを使用するとASS字幕の表示が崩れたり、字幕の種類によっては一部のスタイル設定が適用されない場合があります。";
 
 /* Class = "NSTextFieldCell"; title = "Audio track:"; ObjectID = "x39-62-7KC"; */
 "x39-62-7KC.title" = "オーディオトラック:";

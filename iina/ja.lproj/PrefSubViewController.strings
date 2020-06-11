@@ -5,7 +5,7 @@
 "0fB-es-DmV.title" = "オンライン字幕:";
 
 /* Class = "NSMenuItem"; title = "Top"; ObjectID = "1Tq-5k-o6R"; */
-"1Tq-5k-o6R.title" = "上";
+"1Tq-5k-o6R.title" = "上端";
 
 /* Class = "NSButtonCell"; title = "Display subtitles in letterboxes while in full screen"; ObjectID = "2XY-Un-0Fg"; */
 "2XY-Un-0Fg.title" = "フルスクリーン時はレターボックス内に字幕を表示";
@@ -17,7 +17,7 @@
 "4Tb-Yh-PdP.title" = "配置:";
 
 /* Class = "NSMenuItem"; title = "Bottom"; ObjectID = "6i0-Sx-V7F"; */
-"6i0-Sx-V7F.title" = "下";
+"6i0-Sx-V7F.title" = "下端";
 
 /* Class = "NSTextFieldCell"; title = "Subtitles have priority when filename containing:"; ObjectID = "7pf-Kb-TNr"; */
 "7pf-Kb-TNr.title" = "以下の文字列を含む字幕ファイルを優先:";
@@ -26,10 +26,10 @@
 "8hj-ki-R0h.title" = "字幕の大きさをウィンドウの大きさに合わせる";
 
 /* Class = "NSTextFieldCell"; title = "Font spacing:"; ObjectID = "9EP-XB-lyO"; */
-"9EP-XB-lyO.title" = "文字間:";
+"9EP-XB-lyO.title" = "文字間隔:";
 
 /* Class = "NSTextFieldCell"; title = "Vertical position:"; ObjectID = "9N4-Zg-M7m"; */
-"9N4-Zg-M7m.title" = "縦の位置:";
+"9N4-Zg-M7m.title" = "垂直位置:";
 
 /* Class = "NSBox"; title = "Font"; ObjectID = "9pv-1r-nuH"; */
 "9pv-1r-nuH.title" = "フォント";
@@ -53,7 +53,7 @@
 "DUA-7H-Yje.title" = "詳細設定";
 
 /* Class = "NSMenuItem"; title = "Right"; ObjectID = "Gie-38-Kk4"; */
-"Gie-38-Kk4.title" = "右";
+"Gie-38-Kk4.title" = "右端";
 
 /* Class = "NSTextFieldCell"; title = "OpenSubtitles account:"; ObjectID = "Iax-cc-YIO"; */
 "Iax-cc-YIO.title" = "OpenSubtitlesアカウント:";
@@ -140,7 +140,7 @@
 "nH7-kO-S15.title" = "選択…";
 
 /* Class = "NSButtonCell"; title = "Italic"; ObjectID = "pNF-Fw-QtW"; */
-"pNF-Fw-QtW.title" = "斜字";
+"pNF-Fw-QtW.title" = "斜体字";
 
 /* Class = "NSBox"; title = "Margin"; ObjectID = "pRe-wv-VVi"; */
 "pRe-wv-VVi.title" = "マージン";
@@ -155,7 +155,7 @@
 "slU-Ox-aeF.title" = "中央";
 
 /* Class = "NSBox"; title = "Border"; ObjectID = "t5n-mc-dss"; */
-"t5n-mc-dss.title" = "枠";
+"t5n-mc-dss.title" = "枠線";
 
 /* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "u31-eV-Arr"; */
 "u31-eV-Arr.title" = "無効";
@@ -164,7 +164,7 @@
 "vDc-dw-liI.title" = "色:";
 
 /* Class = "NSTextFieldCell"; title = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues."; ObjectID = "vYb-qH-XkH"; */
-"vYb-qH-XkH.title" = "有効にすると字幕が読み込まれていない20分以上の動画の再生時に、IINAが自動でオンライン字幕を検索します。";
+"vYb-qH-XkH.title" = "有効にすると、字幕が読み込まれていない20分以上のビデオを再生する時に、IINAが自動でオンライン字幕を検索します。";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "xGf-fF-4Hx"; */
 "xGf-fF-4Hx.title" = "Y:";
@@ -173,10 +173,10 @@
 "xid-E9-FC9.title" = "色:";
 
 /* Class = "NSMenuItem"; title = "Subtitles containing media filename"; ObjectID = "y1E-JR-KRI"; */
-"y1E-JR-KRI.title" = "メディアファイル名の字幕を含む";
+"y1E-JR-KRI.title" = "メディアのファイル名を含む字幕";
 
 /* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "zaE-bH-XfT"; */
 "zaE-bH-XfT.title" = "優先言語:";
 
 /* Class = "NSMenuItem"; title = "Left"; ObjectID = "zml-kt-LN8"; */
-"zml-kt-LN8.title" = "左";
+"zml-kt-LN8.title" = "左端";

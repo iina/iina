@@ -34,15 +34,14 @@ class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbedda
   @IBOutlet weak var spdifDTSBtn: NSButton!
   @IBOutlet weak var spdifDTSHDBtn: NSButton!
   @IBOutlet weak var hwdecDescriptionTextField: NSTextField!
-  @IBOutlet weak var audioLangTokenField: NSTokenField!
+  @IBOutlet weak var audioLangTokenField: LanguageTokenField!
 
   @IBOutlet weak var audioDevicePopUp: NSPopUpButton!
 
-  private let tokenFieldDelegate = ISO639TokenFieldDelegate()
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    audioLangTokenField.delegate = tokenFieldDelegate
+    audioLangTokenField.stringValue = Preference.string(for: .audioLanguage) ?? ""
     updateHwdecDescription()
   }
 
@@ -88,9 +87,12 @@ class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbedda
     updateHwdecDescription()
   }
 
+  @IBAction func preferredLanguageAction(_ sender: LanguageTokenField) {
+    Preference.set(sender.stringValue, for: .audioLanguage)
+  }
+
   private func updateHwdecDescription() {
     let hwdec: Preference.HardwareDecoderOption = Preference.enum(for: .hardwareDecoder)
     hwdecDescriptionTextField.stringValue = hwdec.localizedDescription
   }
-
 }

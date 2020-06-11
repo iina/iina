@@ -25,14 +25,14 @@
 "cmd.playlist-remove" = "Rimuovi";
 "cmd.playlist-shuffle" = "Mescola";
 "cmd.write-watch-later-config" = "Salva momento di riproduzione";
-"cmd.stop" = "Stop";
+"cmd.stop" = "Ferma";
 "cmd.quit" = "Esci";
 "cmd.quit-watch-later" = "Esci (salva stato attuale)";
 "cmd.screenshot" = "Schermata";
 "cmd.screenshot-to-file" = "Schermata al file";
 "cmd.loadfile" = "Carica file";
 "cmd.loadlist" = "Carica playlist";
-"cmd.run" = "Run";
+"cmd.run" = "Avvia";
 
 "iina.flip" = "Capovolgi";
 "iina.mirror" = "Specchia";
@@ -48,7 +48,7 @@
 "iina.chapter-panel" = "Pannello capitoli";
 "iina.bigger-window" = "Aumenta dimensione";
 "iina.smaller-window" = "Riduci dimensione";
-"iina.fit-to-screen" = "Adatta lo schermo";
+"iina.fit-to-screen" = "Adatta allo schermo";
 "iina.toggle-flip" = "Inverti capovolgi";
 "iina.toggle-mirror" = "Inverti specchia";
 "iina.save-playlist" = "Salva playlist corrente";
@@ -70,6 +70,8 @@
 
 "relative" = "i";
 "absolute" = "i";
+"absolute-percent" = "%";
+"relative-percent" = "%";
 "relative+exact" = "i (esatti)";
 "relative-percent+exact" = "% (esatto)";
 "absolute+keyframe" = "i (fotogrammi)";

@@ -12,8 +12,8 @@
 "cmd.set" = "値の設定";
 "cmd.cycle" = "循環";
 "cmd.cycle-values" = "循環(指定値内)";
-"cmd.add" = "追加";
-"cmd.multiply" = "倍";
+"cmd.add" = "加算";
+"cmd.multiply" = "乗算";
 "cmd.frame-step" = "次のフレームへ";
 "cmd.frame-back-step" = "前のフレームへ";
 "cmd.ab-loop" = "A-Bリピート";
@@ -25,7 +25,7 @@
 "cmd.playlist-remove" = "プレイリストを削除";
 "cmd.playlist-shuffle" = "シャッフル";
 "cmd.write-watch-later-config" = "再生履歴を残す";
-"cmd.stop" = "一時停止";
+"cmd.stop" = "停止";
 "cmd.quit" = "終了";
 "cmd.quit-watch-later" = "保存して終了";
 "cmd.screenshot" = "スクリーンショット";
@@ -57,11 +57,11 @@
 "iina.find-online-subs" = "オンラインで字幕を探す";
 "iina.save-downloaded-sub" = "ダウンロードした字幕を保存";
 
-"yes" = "オン";
-"no" = "オフ";
+"yes" = "はい";
+"no" = "いいえ";
 "to" = "を";
 "by" = "x";
-"in" = "次の値のうち";
+"in" = "を次の値で";
 "add" = "増加";
 "minus" = "減少";
 "forward" = "進める";
@@ -70,6 +70,8 @@
 
 "relative" = "秒";
 "absolute" = "秒";
+"absolute-percent" = "%";
+"relative-percent" = "%";
 "relative+exact" = "秒 (精密)";
 "relative-percent+exact" = "% (精密)";
 "absolute+keyframe" = "s (キーフレーム)";
@@ -83,7 +85,7 @@
 "opt.video" = "ビデオトラック";
 "opt.video-aspect" = "ビデオアスペクト";
 "opt.contrast" = "コントラスト";
-"opt.brightness" = "明るさ";
+"opt.brightness" = "輝度";
 "opt.gamma" = "ガンマ値";
 "opt.saturation" = "彩度";
 "opt.deinterlace" = "インターレース解除";
@@ -105,10 +107,10 @@
 
 "opt.chapter" = "チャプタ";
 
-"read.set" = "{{property}}に{{value}}を設定";
+"read.set" = "{{property}}を{{value}}に設定";
 "read.add" = "{{property}} {{value}}";
 "read.multiply" = "{{property}}を{{factor}}倍";
-"read.cycle" = "{{property}}の値を{{#dir_down}}順番に{{/dir_down}}繰り返す";
-"read.cycle-values" = "{{property}}の値を({{{values}}})の中で繰り返す";
+"read.cycle" = "{{property}}の値を{{#dir_down}}逆方向に{{/dir_down}}循環させる";
+"read.cycle-values" = "{{property}}の値を({{{values}}})の範囲で循環させる";
 "read.seek" = "{{#fwd}}先へ{{/fwd}}{{#bwd}}前へ{{/bwd}}{{#abs}}{{/abs}} {{value}}{{#sec}}秒{{/sec}}{{#per}}%{{/per}} {{#exact}}(精細){{/exact}}{{#kf}}(キーフレーム){{/kf}} シーク";
 "read.sub-seek" = "{{#skip_1}}次{{/skip_1}}{{#skip_-1}}前{{/skip_-1}} の字幕へシーク";

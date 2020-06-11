@@ -189,7 +189,7 @@
 "alert.delete_history.title" = "Slet Playback Historik";
 "alert.delete_history.message" = "Er du sikker på du ønsker at slette det valgte?";
 
-"alert.filter_hwdec.message" = "Du er ved at aktivere et videofilter. Men din nuværende hardware encoder supportere mulighvis ikke videofiltre. Du kan enten deaktivere hardware decoding eller skifte til auto(kopi), hvilket optager dobbelt hukommelse.";
+"alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
 "alert.filter_hwdec.abort" = "Afbryd";
 "alert.filter_hwdec.turn_off" = "Sluk for hardware decoding";
 "alert.filter_hwdec.use_copy" = "Skift til auto(kopi)";

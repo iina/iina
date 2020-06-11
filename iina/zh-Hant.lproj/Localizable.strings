@@ -189,7 +189,7 @@
 "alert.delete_history.title" = "刪除播放記錄";
 "alert.delete_history.message" = "確定要刪除所選的播放記錄嗎？";
 
-"alert.filter_hwdec.message" = "您正在新增視訊濾鏡。然而，目前的硬體解碼器無法完整支援視訊濾鏡。您可以停用硬體解碼，或使用支援「拷貝」的解碼器（將會佔用兩倍記憶體）。\n您可能需要重複上一個操作（例如裁切）才能看到效果。";
+"alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
 "alert.filter_hwdec.abort" = "中止";
 "alert.filter_hwdec.turn_off" = "關閉硬體解碼";
 "alert.filter_hwdec.use_copy" = "使用支援「拷貝」的解碼器";

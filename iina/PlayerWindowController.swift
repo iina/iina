@@ -141,6 +141,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   internal var seekOverride = false
   internal var volumeOverride = false
 
+  internal var mouseActionDisabledViews: [NSView?] {[]}
+
   // MARK: - Initiaization
 
   override func windowDidLoad() {
@@ -248,6 +250,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   override func mouseUp(with event: NSEvent) {
+    guard !isMouseEvent(event, inAnyOf: mouseActionDisabledViews) else { return }
     if event.clickCount == 1 {
       if doubleClickAction == .none {
         performMouseAction(singleClickAction)
@@ -265,10 +268,12 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
   
   override func rightMouseUp(with event: NSEvent) {
+    guard !isMouseEvent(event, inAnyOf: mouseActionDisabledViews) else { return }
     performMouseAction(Preference.enum(for: .rightClickAction))
   }
   
   override func otherMouseUp(with event: NSEvent) {
+    guard !isMouseEvent(event, inAnyOf: mouseActionDisabledViews) else { return }
     if event.type == .otherMouseUp {
       performMouseAction(Preference.enum(for: .middleClickAction))
     } else {

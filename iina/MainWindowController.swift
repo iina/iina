@@ -439,6 +439,8 @@ class MainWindowController: PlayerWindowController {
   var videoViewConstraints: [NSLayoutConstraint.Attribute: NSLayoutConstraint] = [:]
   private var oscFloatingLeadingTrailingConstraint: [NSLayoutConstraint]?
 
+  override var mouseActionDisabledViews: [NSView?] {[sideBarView, currentControlBar, titleBarView, subPopoverView]}
+
   // MARK: - PIP
 
   @available(macOS 10.12, *)
@@ -820,20 +822,8 @@ class MainWindowController: PlayerWindowController {
         return
       }
 
-      guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView, subPopoverView]) else { return }
-      
       super.mouseUp(with: event)
     }
-  }
-
-  override func rightMouseUp(with event: NSEvent) {
-    guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView, subPopoverView]) else { return }
-    super.rightMouseUp(with: event)
-  }
-
-  override func otherMouseUp(with event: NSEvent) {
-    guard !isMouseEvent(event, inAnyOf: [sideBarView, currentControlBar, titleBarView, subPopoverView]) else { return }
-    super.otherMouseUp(with: event)
   }
 
   override internal func performMouseAction(_ action: Preference.MouseClickAction) {

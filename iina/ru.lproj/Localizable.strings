@@ -189,7 +189,7 @@
 "alert.delete_history.title" = "Удалить историю воспроизведения";
 "alert.delete_history.message" = "Вы уверены, что хотите удалить выбранное?";
 
-"alert.filter_hwdec.message" = "Вы собираетесь применить видеофильтр, но текущий режим аппаратного декодирования плохо поддерживает видеофильтры. Вы можете либо отключить аппаратное декодирование, что повысит нагрузку на ЦП, либо переключиться на режим «Автоматически (с копированием)», который будет потреблять вдвое больше памяти.\nВозможно, вам придется повторить предыдущую операцию (например, настройку обрезки), чтобы она сработала.";
+"alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
 "alert.filter_hwdec.abort" = "Отмена";
 "alert.filter_hwdec.turn_off" = "Отключить аппаратное декодирование";
 "alert.filter_hwdec.use_copy" = "Переключиться на «Автоматически (с копированием)»";

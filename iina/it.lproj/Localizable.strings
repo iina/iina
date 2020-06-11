@@ -189,7 +189,7 @@
 "alert.delete_history.title" = "Cancella cronologia riproduzioni";
 "alert.delete_history.message" = "Sei sicuro di cancellare le voci selezionate?";
 
-"alert.filter_hwdec.message" = "Stai per applicare un filtro video. Tuttavia, il decoder hardware attuale potrebbe non supportare in modo corretto i filtri video. Puoi disabilitare la decodifica hardware o passare a Auto(Copia), che consumerà il doppio della memoria.\nPotresti dover ripetere le operazioni precedenti (ad es. reimpostare il ritaglio) per applicarle in modo corretto.";
+"alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
 "alert.filter_hwdec.abort" = "Interrompi";
 "alert.filter_hwdec.turn_off" = "Disattiva la decodifica hardware";
 "alert.filter_hwdec.use_copy" = "Passa a Auto(Copy)";

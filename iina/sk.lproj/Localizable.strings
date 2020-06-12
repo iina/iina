@@ -23,6 +23,8 @@
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Predvolené";
 "quicksetting.item_none" = "Žiadne";
+"quicksetting.hwdec" = "Hardware Decoding";
+"quicksetting.deinterlace" = "Deinterlace";
 
 // OSDMessage.swift
 "osd.pause" = "Pozastaviť";
@@ -33,6 +35,7 @@
 "osd.crop" = "Orezať: %@";
 "osd.rotate" = "Otočiť: %i°";
 "osd.deinterlace" = "Deinterlace: %@";
+"osd.hwdec" = "Hardware Decoding: %@";
 "osd.audio_delay.nodelay" = "Posunutie zvuku: Žiadne";
 "osd.audio_delay.later" = "Posunutie zvuku: +%.2f s";
 "osd.audio_delay.earlier" = "Posunutie zvuku: -%.2f s";
@@ -272,5 +275,5 @@
 "touchbar.play_pause" = "Spustiť / Zastaviť";
 "touchbar.seek" = "Vyhľadať";
 "touchbar.time" = "Pozícia";
-"touchbar.remainingTime" = "Zostávajúci Čas";
+"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
 "touchbar.toggle_pip" = "Zapnúť/Vypnúť Picture-in-Picture";

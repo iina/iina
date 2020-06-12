@@ -23,6 +23,8 @@
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "기본값";
 "quicksetting.item_none" = "없음";
+"quicksetting.hwdec" = "Hardware Decoding";
+"quicksetting.deinterlace" = "Deinterlace";
 
 // OSDMessage.swift
 "osd.pause" = "일시 정지됨";
@@ -33,6 +35,7 @@
 "osd.crop" = "화면 자르기: %@";
 "osd.rotate" = "회전: %i°";
 "osd.deinterlace" = "디인터레이스: %@";
+"osd.hwdec" = "Hardware Decoding: %@";
 "osd.audio_delay.nodelay" = "오디오 지연: 없음";
 "osd.audio_delay.later" = "오디오 지연: %.2f초 늦게";
 "osd.audio_delay.earlier" = "오디오 지연: %.2f초 빠르게";
@@ -272,5 +275,5 @@
 "touchbar.play_pause" = "재생 / 일시 정지";
 "touchbar.seek" = "탐색";
 "touchbar.time" = "재생 위치";
-"touchbar.remainingTime" = "남은 시간";
+"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
 "touchbar.toggle_pip" = "화면 속 화면 전환/복귀";

@@ -113,7 +113,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var playButton: NSButton!
   @IBOutlet weak var playSlider: NSSlider!
   @IBOutlet weak var rightLabel: DurationDisplayTextField!
-  @IBOutlet weak var leftLabel: NSTextField!
+  @IBOutlet weak var leftLabel: DurationDisplayTextField!
 
   /** Differentiate between single clicks and double clicks. */
   internal var singleClickTimer: Timer?
@@ -165,7 +165,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     addObserver(to: .default, forName: .iinaMediaTitleChanged, object: player) { [unowned self] _ in
         self.updateTitle()
     }
-    
+
+    leftLabel.mode = .current
     rightLabel.mode = Preference.bool(for: .showRemainingTime) ? .remaining : .duration
     
     updateVolume()
@@ -426,14 +427,15 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     guard let duration = player.info.videoDuration, let pos = player.info.videoPosition else {
       Logger.fatal("video info not available")
     }
-    let percentage = (pos.second / duration.second) * 100
-    leftLabel.stringValue = pos.stringRepresentation
-    rightLabel.updateText(with: duration, given: pos)
+    [leftLabel, rightLabel].forEach { $0.updateText(with: duration, given: pos) }
+    if #available(macOS 10.12.2, *) {
+      player.touchBarSupport.touchBarPosLabels.forEach { $0.updateText(with: duration, given: pos) }
+    }
     if andProgressBar {
+      let percentage = (pos.second / duration.second) * 100
       playSlider.doubleValue = percentage
       if #available(macOS 10.12.2, *) {
         player.touchBarSupport.touchBarPlaySlider?.setDoubleValueSafely(percentage)
-        player.touchBarSupport.touchBarPosLabels.forEach { $0.updateText(with: duration, given: pos) }
       }
     }
   }

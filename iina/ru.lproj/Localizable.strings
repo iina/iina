@@ -23,6 +23,8 @@
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "По умолчанию";
 "quicksetting.item_none" = "Нет";
+"quicksetting.hwdec" = "Hardware Decoding";
+"quicksetting.deinterlace" = "Deinterlace";
 
 // OSDMessage.swift
 "osd.pause" = "Пауза";
@@ -33,6 +35,7 @@
 "osd.crop" = "Кадрирование: %@";
 "osd.rotate" = "Поворот: %i°";
 "osd.deinterlace" = "Деинтерлейсинг: %@";
+"osd.hwdec" = "Hardware Decoding: %@";
 "osd.audio_delay.nodelay" = "Задержка аудио: нет задержки";
 "osd.audio_delay.later" = "Задержка аудио: на %.2f с позже";
 "osd.audio_delay.earlier" = "Задержка аудио: на %.2f с раньше";
@@ -272,5 +275,5 @@
 "touchbar.play_pause" = "Воспроизведение / Пауза";
 "touchbar.seek" = "Перемотка";
 "touchbar.time" = "Временная позиция";
-"touchbar.remainingTime" = "Оставшееся Время";
+"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
 "touchbar.toggle_pip" = "Переключить в \"Картинка в картинке\"";

@@ -27,7 +27,7 @@ fileprivate extension NSTouchBarItem.Identifier {
   static let rewind = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.rewind")
   static let fastForward = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.forward")
   static let time = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.time")
-  static let remainingOrTotalTime = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.remainingOrTotalTime")
+  static let remainingTimeOrTotalDuration = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.remainingTimeOrTotalDuration")
   static let ahead15Sec = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.ahead15Sec")
   static let back15Sec = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.back15Sec")
   static let ahead30Sec = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.ahead30Sec")
@@ -62,8 +62,8 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
     let touchBar = NSTouchBar()
     touchBar.delegate = self
     touchBar.customizationIdentifier = .windowBar
-    touchBar.defaultItemIdentifiers = [.playPause, .time, .slider, .remainingOrTotalTime]
-    touchBar.customizationAllowedItemIdentifiers = [.playPause, .slider, .volumeUp, .volumeDown, .rewind, .fastForward, .time, .remainingOrTotalTime, .ahead15Sec, .ahead30Sec, .back15Sec, .back30Sec, .next, .prev, .togglePIP, .fixedSpaceLarge]
+    touchBar.defaultItemIdentifiers = [.playPause, .time, .slider, .remainingTimeOrTotalDuration]
+    touchBar.customizationAllowedItemIdentifiers = [.playPause, .slider, .volumeUp, .volumeDown, .rewind, .fastForward, .time, .remainingTimeOrTotalDuration, .ahead15Sec, .ahead30Sec, .back15Sec, .back30Sec, .next, .prev, .togglePIP, .fixedSpaceLarge]
     return touchBar
   }()
 
@@ -124,7 +124,7 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
       item.customizationLabel = NSLocalizedString("touchbar.time", comment: "Time Position")
       return item
 
-    case .remainingOrTotalTime:
+    case .remainingTimeOrTotalDuration:
       let item = NSCustomTouchBarItem(identifier: identifier)
       let label = DurationDisplayTextField(labelWithString: "00:00")
       label.alignment = .center
@@ -132,7 +132,7 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
       label.mode = Preference.bool(for: .touchbarShowRemainingTime) ? .remaining : .duration
       self.touchBarPosLabels.append(label)
       item.view = label
-      item.customizationLabel = NSLocalizedString("touchbar.remainingOrTotalTime", comment: "Show Remaining Time or Total Time")
+      item.customizationLabel = NSLocalizedString("touchbar.remainingTimeOrTotalDuration", comment: "Show Remaining Time or Total Duration")
       return item
 
     case .ahead15Sec,

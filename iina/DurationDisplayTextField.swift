@@ -18,8 +18,9 @@ class DurationDisplayTextField: NSTextField {
 
   var mode: DisplayMode = .duration
 
-  /** Switches the display mode for the right label */
+  /** Switches the display mode between duration and remaining time */
   func switchMode() {
+    guard mode != .current else { return }
     switch mode {
     case .duration:
       mode = .remaining
@@ -30,7 +31,6 @@ class DurationDisplayTextField: NSTextField {
 
 
   func updateText(with duration: VideoTime, given current: VideoTime) {
-
     let stringValue: String
     switch mode {
     case .current:

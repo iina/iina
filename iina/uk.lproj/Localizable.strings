@@ -23,6 +23,8 @@
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Типово";
 "quicksetting.item_none" = "—";
+"quicksetting.hwdec" = "Апаратне декодування";
+"quicksetting.deinterlace" = "Черезрядкова розгортка";
 
 // OSDMessage.swift
 "osd.pause" = "Пауза";
@@ -33,6 +35,7 @@
 "osd.crop" = "Обрізання: %@";
 "osd.rotate" = "Обертання: %i°";
 "osd.deinterlace" = "Черезрядкова розгортка: %@";
+"osd.hwdec" = "Апаратне декодування: %@";
 "osd.audio_delay.nodelay" = "Затримка звуку: без затримки";
 "osd.audio_delay.later" = "Затримка звуку: +%.2f с";
 "osd.audio_delay.earlier" = "Затримка звуку: –%.2f с";
@@ -189,7 +192,7 @@
 "alert.delete_history.title" = "Видалити історію перегляду";
 "alert.delete_history.message" = "Впевнені, що хочете видалити вибрані елементи?";
 
-"alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
+"alert.filter_hwdec.message" = "Зараз ви застосуєте відеофільтр. Проте ваш поточний апаратний декодер може нормально не підтримувати відеофільтри. Можна вимкнути апаратне декодування або ввімкнути режим «Авто (Копія)», що потребує вдічі більше пам'яті.\nДля коректної роботи може знадобитися повторити попередню операцію (напр., налаштування обрізання).";
 "alert.filter_hwdec.abort" = "Скасувати";
 "alert.filter_hwdec.turn_off" = "Вимкнути апаратне декодування";
 "alert.filter_hwdec.use_copy" = "Перемкнутися в автоматичний режим (копіювання)";
@@ -272,5 +275,5 @@
 "touchbar.play_pause" = "Відтворити / Зупинити";
 "touchbar.seek" = "Перемотати";
 "touchbar.time" = "Часова позиція";
-"touchbar.remainingTime" = "Залишок часу";
+"touchbar.remainingTimeOrTotalDuration" = "Залишок часу / Загальна тривалість";
 "touchbar.toggle_pip" = "Перемкнути «Кадр у кадрі»";

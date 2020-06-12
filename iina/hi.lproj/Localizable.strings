@@ -23,6 +23,8 @@
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "डिफ़ॉल्ट";
 "quicksetting.item_none" = "कोई नहीं";
+"quicksetting.hwdec" = "Hardware Decoding";
+"quicksetting.deinterlace" = "Deinterlace";
 
 // OSDMessage.swift
 "osd.pause" = "रोकें";
@@ -33,6 +35,7 @@
 "osd.crop" = "क्रॉप: %@";
 "osd.rotate" = "घुमाएँ: %i°";
 "osd.deinterlace" = "डीइंटरलेस: %@";
+"osd.hwdec" = "Hardware Decoding: %@";
 "osd.audio_delay.nodelay" = "ऑडियो विलंब: विलंब न करें";
 "osd.audio_delay.later" = "ऑडियो विलंब: %.2fs बाद में";
 "osd.audio_delay.earlier" = "ऑडियो विलंब: %.2fs पूर्व";
@@ -272,5 +275,5 @@
 "touchbar.play_pause" = "चलाएं / ठहरें";
 "touchbar.seek" = "खोजना";
 "touchbar.time" = "समय की स्थिति";
-"touchbar.remainingTime" = "बचा हुआ समय";
+"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
 "touchbar.toggle_pip" = "टॉगल पिक्चर-इन-पिक्चर";

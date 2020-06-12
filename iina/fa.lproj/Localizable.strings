@@ -23,6 +23,8 @@
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "پیش‌فرض";
 "quicksetting.item_none" = "هیچ کدام";
+"quicksetting.hwdec" = "Hardware Decoding";
+"quicksetting.deinterlace" = "Deinterlace";
 
 // OSDMessage.swift
 "osd.pause" = "مکث";
@@ -33,6 +35,7 @@
 "osd.crop" = "برش: %@";
 "osd.rotate" = "چرخش: %i";
 "osd.deinterlace" = "Deinterlace: %@";
+"osd.hwdec" = "Hardware Decoding: %@";
 "osd.audio_delay.nodelay" = "تاخیر صدا: بدون تاخیر";
 "osd.audio_delay.later" = "Audio Delay: %.2fs Later";
 "osd.audio_delay.earlier" = "Audio Delay: %.2fs Earlier";
@@ -272,5 +275,5 @@
 "touchbar.play_pause" = "Play / Pause";
 "touchbar.seek" = "Seek";
 "touchbar.time" = "Time Position";
-"touchbar.remainingTime" = "Remaining Time";
+"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
 "touchbar.toggle_pip" = "Toggle Picture-in-Picture";

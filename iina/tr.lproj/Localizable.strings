@@ -23,6 +23,8 @@
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Varsayılan";
 "quicksetting.item_none" = "Hiçbiri";
+"quicksetting.hwdec" = "Hardware Decoding";
+"quicksetting.deinterlace" = "Deinterlace";
 
 // OSDMessage.swift
 "osd.pause" = "Duraklat";
@@ -33,6 +35,7 @@
 "osd.crop" = "Kırp: %@";
 "osd.rotate" = "Döndür: %i°";
 "osd.deinterlace" = "Taramasızlık: %@";
+"osd.hwdec" = "Hardware Decoding: %@";
 "osd.audio_delay.nodelay" = "Ses Gecikmesi: Gecikme Yok";
 "osd.audio_delay.later" = "Ses Gecikmesi: %.2f sn Geç";
 "osd.audio_delay.earlier" = "Ses Gecikmesi: %.2f sn Erken";
@@ -272,5 +275,5 @@
 "touchbar.play_pause" = "Oynat / Duraklat";
 "touchbar.seek" = "Sar";
 "touchbar.time" = "Zaman Pozisyonu";
-"touchbar.remainingTime" = "Kalan Zaman";
+"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
 "touchbar.toggle_pip" = "Resim İçinde Resim'i Aç/Kapa";

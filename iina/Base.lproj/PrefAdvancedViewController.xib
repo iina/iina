@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -79,11 +79,10 @@
                                 <tableColumns>
                                     <tableColumn identifier="Key" width="118" minWidth="40" maxWidth="1000" id="E3I-Q7-9t1">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Name">
-                                            <font key="font" metaFont="message" size="11"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                         </tableHeaderCell>
-                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="A9b-rU-8Ku">
+                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" usesSingleLineMode="YES" id="A9b-rU-8Ku">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -92,11 +91,10 @@
                                     </tableColumn>
                                     <tableColumn identifier="Value" width="358" minWidth="40" maxWidth="1000" id="SX9-fy-bss">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Value">
-                                            <font key="font" metaFont="message" size="11"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                         </tableHeaderCell>
-                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="1nQ-mn-luW">
+                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" usesSingleLineMode="YES" id="1nQ-mn-luW">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -224,11 +222,6 @@
                     </textFieldCell>
                     <accessibility description="~/.config/mpv/"/>
                     <connections>
-                        <binding destination="nyg-fH-Pug" name="value" keyPath="values.userDefinedConfDir" id="Oxo-tN-gsj">
-                            <dictionary key="options">
-                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                            </dictionary>
-                        </binding>
                         <binding destination="nyg-fH-Pug" name="enabled2" keyPath="values.enableAdvancedSettings" previousBinding="aM7-j1-TIV" id="NQW-AQ-cOO">
                             <dictionary key="options">
                                 <integer key="NSMultipleValuesPlaceholder" value="-1"/>
@@ -238,6 +231,11 @@
                             </dictionary>
                         </binding>
                         <binding destination="nyg-fH-Pug" name="enabled" keyPath="values.useUserDefinedConfDir" id="aM7-j1-TIV"/>
+                        <binding destination="nyg-fH-Pug" name="value" keyPath="values.userDefinedConfDir" id="Oxo-tN-gsj">
+                            <dictionary key="options">
+                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                            </dictionary>
+                        </binding>
                     </connections>
                 </textField>
                 <textField identifier="SectionTitleSettings" hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HmN-IK-rGn">

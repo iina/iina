@@ -71,7 +71,7 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
   weak var touchBarPlayPauseBtn: NSButton?
   var touchBarPosLabels: [DurationDisplayTextField] = []
   var touchBarPosLabelWidthLayout: NSLayoutConstraint?
-  /** The current / remaining time/totol time label in Touch Bar. */
+  /** The current / remaining time/total time label in Touch Bar. */
   lazy var sizingTouchBarTextField: NSTextField = {
     return NSTextField()
   }()

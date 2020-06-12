@@ -54,4 +54,12 @@ class DurationDisplayTextField: NSTextField {
     Preference.set(mode == .remaining, for: .showRemainingTime)
   }
 
+  override func touchesBegan(with event: NSEvent) {
+    // handles the remaining time text field in the touch bar
+    super.touchesBegan(with: event)
+
+    self.switchMode()
+    Preference.set(mode == .remaining, for: .touchbarShowRemainingTime)
+  }
+
 }

@@ -129,7 +129,7 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
       let label = DurationDisplayTextField(labelWithString: "00:00")
       label.alignment = .center
       label.font = .monospacedDigitSystemFont(ofSize: 0, weight: .regular)
-      label.mode = .remaining
+      label.mode = Preference.bool(for: .touchbarShowRemainingTime) ? .remaining : .duration
       self.touchBarPosLabels.append(label)
       item.view = label
       item.customizationLabel = NSLocalizedString("touchbar.remainingTime", comment: "Remaining Time Position")

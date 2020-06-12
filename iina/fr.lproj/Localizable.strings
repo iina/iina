@@ -23,6 +23,8 @@
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Défaut";
 "quicksetting.item_none" = "Aucun";
+"quicksetting.hwdec" = "Décodage Matériel";
+"quicksetting.deinterlace" = "Désentrelacer";
 
 // OSDMessage.swift
 "osd.pause" = "En pause";
@@ -33,6 +35,7 @@
 "osd.crop" = "Rognage : %@";
 "osd.rotate" = "Rotation : %i°";
 "osd.deinterlace" = "Désentrelacer : %@";
+"osd.hwdec" = "Décodage Matériel: %@";
 "osd.audio_delay.nodelay" = "Délai audio : aucun";
 "osd.audio_delay.later" = "Délai audio : %.2fs en avance";
 "osd.audio_delay.earlier" = "Délai audio : %.2fs en retard";
@@ -189,7 +192,7 @@
 "alert.delete_history.title" = "Supprimer l'historique de lecture";
 "alert.delete_history.message" = "Souhaitez-vous vraiment supprimer les entrées sélectionnées ?";
 
-"alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
+"alert.filter_hwdec.message" = "Vous êtes sur le point d'appliquer un filtre vidéo. Cependant, votre décodeur matériel actuel peut ne pas bien supporter les filtres vidéo. Vous pouvez désactiver le décodage matériel ou passer sur Auto(Copy), qui consommera deux fois plus de mémoire.\nVous devrez peut-être répéter l'opération précédente (par exemple, activer le rognage) pour que tout fonctionne.";
 "alert.filter_hwdec.abort" = "Abandonner";
 "alert.filter_hwdec.turn_off" = "Désactiver le décodage hardware";
 "alert.filter_hwdec.use_copy" = "Passer sur Auto(Copy)";
@@ -272,5 +275,5 @@
 "touchbar.play_pause" = "Lecture/Pause";
 "touchbar.seek" = "Chercher";
 "touchbar.time" = "Position horaire";
-"touchbar.remainingTime" = "Temps restant";
+"touchbar.remainingTimeOrTotalDuration" = "Durée restante / Durée totale";
 "touchbar.toggle_pip" = "Activer le mode Image dans l'image";

@@ -23,6 +23,8 @@
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Standaard";
 "quicksetting.item_none" = "Geen";
+"quicksetting.hwdec" = "Hardware Decoding";
+"quicksetting.deinterlace" = "Deinterlace";
 
 // OSDMessage.swift
 "osd.pause" = "Pauzeer";
@@ -33,6 +35,7 @@
 "osd.crop" = "Bijsnijden: %@";
 "osd.rotate" = "Roteer: %i°";
 "osd.deinterlace" = "Deinterlace: %@";
+"osd.hwdec" = "Hardware Decoding: %@";
 "osd.audio_delay.nodelay" = "Geen audiovertraging";
 "osd.audio_delay.later" = "Audio vertraagd met %.2fs";
 "osd.audio_delay.earlier" = "Audio versneld met %.2fs";
@@ -272,5 +275,5 @@
 "touchbar.play_pause" = "Afspelen / Pauzeren";
 "touchbar.seek" = "Spoel terug/vooruit";
 "touchbar.time" = "Verstreken tijd";
-"touchbar.remainingTime" = "Resterende tijd";
+"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
 "touchbar.toggle_pip" = "Schakel Beeld-in-beeld in/uit";

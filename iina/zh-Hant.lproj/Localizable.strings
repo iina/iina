@@ -23,6 +23,8 @@
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "預設";
 "quicksetting.item_none" = "無";
+"quicksetting.hwdec" = "Hardware Decoding";
+"quicksetting.deinterlace" = "Deinterlace";
 
 // OSDMessage.swift
 "osd.pause" = "暫停";
@@ -33,6 +35,7 @@
 "osd.crop" = "裁切：%@";
 "osd.rotate" = "旋轉：%i°";
 "osd.deinterlace" = "去交錯：%@";
+"osd.hwdec" = "Hardware Decoding: %@";
 "osd.audio_delay.nodelay" = "音訊延遲：無延遲";
 "osd.audio_delay.later" = "音訊延遲：延遲 %.2f 秒";
 "osd.audio_delay.earlier" = "音訊延遲：提前 %.2f 秒";
@@ -272,5 +275,5 @@
 "touchbar.play_pause" = "播放 / 暫停";
 "touchbar.seek" = "進度列";
 "touchbar.time" = "播放進度";
-"touchbar.remainingTime" = "剩餘時間";
+"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
 "touchbar.toggle_pip" = "切換「子母畫面」模式";

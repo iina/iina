@@ -23,6 +23,8 @@
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Implicit";
 "quicksetting.item_none" = "Fără";
+"quicksetting.hwdec" = "Hardware Decoding";
+"quicksetting.deinterlace" = "Deinterlace";
 
 // OSDMessage.swift
 "osd.pause" = "Pauză";
@@ -33,6 +35,7 @@
 "osd.crop" = "Decupare: %@";
 "osd.rotate" = "Rotește: %i°";
 "osd.deinterlace" = "Deîntrețesere: %@";
+"osd.hwdec" = "Hardware Decoding: %@";
 "osd.audio_delay.nodelay" = "Întârziere audio: Fără întârziere";
 "osd.audio_delay.later" = "Întârziere audio: %.2fs mai târziu";
 "osd.audio_delay.earlier" = "Întârziere audio: %.2fs mai devreme";
@@ -272,5 +275,5 @@
 "touchbar.play_pause" = "Redă/Pauză";
 "touchbar.seek" = "Căutare";
 "touchbar.time" = "Timp curent";
-"touchbar.remainingTime" = "Timp rămas";
+"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
 "touchbar.toggle_pip" = "Activează Picture-in-Picture";

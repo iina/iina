@@ -663,6 +663,11 @@ class PlayerCore: NSObject {
     mpv.setFlag(MPVOption.Video.deinterlace, enable)
   }
 
+  func toggleHardwareDecoding(_ enable: Bool) {
+    let value = Preference.HardwareDecoderOption(rawValue: Preference.integer(for: .hardwareDecoder))?.mpvString ?? "auto"
+    mpv.setString(MPVOption.Video.hwdec, enable ? value : "no")
+  }
+
   enum VideoEqualizerType {
     case brightness, contrast, saturation, gamma, hue
   }

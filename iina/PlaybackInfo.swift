@@ -96,6 +96,10 @@ class PlaybackInfo {
   var delogoFilter: MPVFilter?
 
   var deinterlace: Bool = false
+  var hwdec: String = "no"
+  var hwdecEnabled: Bool {
+    hwdec != "no"
+  }
 
   // video equalizer
   var brightness: Int = 0

@@ -69,7 +69,9 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var speedSliderIndicator: NSTextField!
   @IBOutlet weak var speedSliderConstraint: NSLayoutConstraint!
   @IBOutlet weak var customSpeedTextField: NSTextField!
-  @IBOutlet weak var deinterlaceCheckBtn: NSButton!
+  @IBOutlet weak var switchHorizontalLine: NSBox!
+  @IBOutlet weak var hardwareDecodingSwitch: Switch!
+  @IBOutlet weak var deinterlaceSwitch: Switch!
 
   @IBOutlet weak var brightnessSlider: NSSlider!
   @IBOutlet weak var contrastSlider: NSSlider!
@@ -136,6 +138,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
 
     subLoadSementedControl.image(forSegment: 1)?.isTemplate = true
+    switchHorizontalLine.wantsLayer = true
+    switchHorizontalLine.layer?.opacity = 0.5
 
     func observe(_ name: Notification.Name, block: @escaping (Notification) -> Void) {
       observers.append(NotificationCenter.default.addObserver(forName: name, object: player, queue: .main, using: block))
@@ -188,7 +192,16 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       cropSegment.selectedSegment = -1
     }
     rotateSegment.selectSegment(withTag: AppData.rotations.firstIndex(of: player.info.rotation) ?? -1)
-    deinterlaceCheckBtn.state = player.info.deinterlace ? .on : .off
+
+    deinterlaceSwitch.checked = player.info.deinterlace
+    deinterlaceSwitch.action = {
+      self.player.toggleDeinterlace($0)
+    }
+    hardwareDecodingSwitch.checked = player.info.hwdecEnabled
+    hardwareDecodingSwitch.action = {
+      self.player.toggleHardwareDecoding($0)
+    }
+
     let speed = player.mpv.getDouble(MPVOption.PlaybackControl.speed)
     customSpeedTextField.doubleValue = speed
     let sliderValue = log(speed / AppData.minSpeed) / log(AppData.maxSpeed / AppData.minSpeed) * sliderSteps
@@ -455,10 +468,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     if let window = sender.window {
       window.makeFirstResponder(window.contentView)
     }
-  }
-
-  @IBAction func deinterlaceBtnAction(_ sender: AnyObject) {
-    player.toggleDeinterlace(deinterlaceCheckBtn.state == .on)
   }
 
   @IBAction func equalizerSliderAction(_ sender: NSSlider) {

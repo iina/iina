@@ -23,8 +23,8 @@
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Predefinido";
 "quicksetting.item_none" = "Nenhum";
-"quicksetting.hwdec" = "Hardware Decoding";
-"quicksetting.deinterlace" = "Deinterlace";
+"quicksetting.hwdec" = "Descodificação de hardware";
+"quicksetting.deinterlace" = "Desentrelaçar";
 
 // OSDMessage.swift
 "osd.pause" = "Pausa";
@@ -35,7 +35,7 @@
 "osd.crop" = "Cortar: %@";
 "osd.rotate" = "Rodar: %i°";
 "osd.deinterlace" = "Desentrelaçar: %@";
-"osd.hwdec" = "Hardware Decoding: %@";
+"osd.hwdec" = "Descodificação de Hardware: %@";
 "osd.audio_delay.nodelay" = "Atraso de Áudio: Sem Atraso";
 "osd.audio_delay.later" = "Atraso de Áudio: %.2fs Depois";
 "osd.audio_delay.earlier" = "Atraso de Áudio: %.2fs Antes";
@@ -275,5 +275,5 @@
 "touchbar.play_pause" = "Reproduzir / Pausa";
 "touchbar.seek" = "Procurar";
 "touchbar.time" = "Posição Temporal";
-"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
+"touchbar.remainingTimeOrTotalDuration" = "Tempo Restante / Duração Total";
 "touchbar.toggle_pip" = "Alternar Picture-in-Picture";

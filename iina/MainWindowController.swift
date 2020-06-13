@@ -2499,7 +2499,8 @@ extension MainWindowController: PIPViewControllerDelegate {
     // animation. By forcing a redraw it will keep its paused image throughout.
     // (At least) in 10.15, presentAsPictureInPicture: behaves asynchronously.
     // Therefore we should wait until the view is moved to the PIP superview.
-    if player.info.isPaused {
+    let currentTrackIsAlbumArt = player.info.currentTrack(.video)?.isAlbumart ?? false
+    if player.info.isPaused || currentTrackIsAlbumArt {
       videoView.pendingRedrawAfterEnteringPIP = true
     }
 
@@ -2548,7 +2549,8 @@ extension MainWindowController: PIPViewControllerDelegate {
     // are paused, because this causes a janky animation in either case but as
     // it's not necessary while the video is playing and significantly more
     // noticeable, we only redraw if we are paused.
-    if player.info.isPaused {
+    let currentTrackIsAlbumArt = player.info.currentTrack(.video)?.isAlbumart ?? false
+    if player.info.isPaused || currentTrackIsAlbumArt {
       videoView.videoLayer.draw(forced: true)
     }
 

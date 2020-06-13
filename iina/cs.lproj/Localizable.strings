@@ -23,8 +23,8 @@
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Výchozí";
 "quicksetting.item_none" = "Žádný";
-"quicksetting.hwdec" = "Hardware Decoding";
-"quicksetting.deinterlace" = "Deinterlace";
+"quicksetting.hwdec" = "Hardwarově dekódovat";
+"quicksetting.deinterlace" = "Odebrat prokládání";
 
 // OSDMessage.swift
 "osd.pause" = "Pozastaveno";
@@ -35,7 +35,7 @@
 "osd.crop" = "Ořez: %@";
 "osd.rotate" = "Otočení: %i°";
 "osd.deinterlace" = "Odebrání prokládání: %@";
-"osd.hwdec" = "Hardware Decoding: %@";
+"osd.hwdec" = "Hardwarové dekódování: %@";
 "osd.audio_delay.nodelay" = "Zpoždění zvuku: Žádné";
 "osd.audio_delay.later" = "Zpoždění zvuku: %.2f s";
 "osd.audio_delay.earlier" = "Zpoždění zvuku: −%.2f s";
@@ -192,7 +192,7 @@
 "alert.delete_history.title" = "Smazat historii přehrávání";
 "alert.delete_history.message" = "Opravdu chcete smazat zvolené záznamy?";
 
-"alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
+"alert.filter_hwdec.message" = "Chystáte se použít video filtr, avšak váš současný hardware nemusí optimálně video filtry podporovat. Můžete buď vypnout hardwarové dekódování, nebo přepnout na automatické nastavení, které spotřebuje dvojnásobek paměti.\nMůže být nutné zopakovat předchozí krok (například, nastavení ořezu).";
 "alert.filter_hwdec.abort" = "Přerušit";
 "alert.filter_hwdec.turn_off" = "Vypnout hardwarové dekódování";
 "alert.filter_hwdec.use_copy" = "Přepnout na Automaticky (Kopie)";
@@ -275,5 +275,5 @@
 "touchbar.play_pause" = "Přehrát/Pozastavit";
 "touchbar.seek" = "Vyhledat";
 "touchbar.time" = "Pozice";
-"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
+"touchbar.remainingTimeOrTotalDuration" = "Zbývající čas / Celková délka";
 "touchbar.toggle_pip" = "Přepnout obraz v obrazu";

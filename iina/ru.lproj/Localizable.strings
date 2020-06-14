@@ -23,8 +23,8 @@
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "По умолчанию";
 "quicksetting.item_none" = "Нет";
-"quicksetting.hwdec" = "Hardware Decoding";
-"quicksetting.deinterlace" = "Deinterlace";
+"quicksetting.hwdec" = "Аппаратное декодирование";
+"quicksetting.deinterlace" = "Деинтерлейсинг";
 
 // OSDMessage.swift
 "osd.pause" = "Пауза";
@@ -35,7 +35,7 @@
 "osd.crop" = "Кадрирование: %@";
 "osd.rotate" = "Поворот: %i°";
 "osd.deinterlace" = "Деинтерлейсинг: %@";
-"osd.hwdec" = "Hardware Decoding: %@";
+"osd.hwdec" = "Аппаратное декодирование: %@";
 "osd.audio_delay.nodelay" = "Задержка аудио: нет задержки";
 "osd.audio_delay.later" = "Задержка аудио: на %.2f с позже";
 "osd.audio_delay.earlier" = "Задержка аудио: на %.2f с раньше";

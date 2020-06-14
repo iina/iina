@@ -192,7 +192,7 @@
 "alert.delete_history.title" = "Apagar Histórico de Reprodução";
 "alert.delete_history.message" = "Tem a certeza que quer apagar as entradas selecionadas?";
 
-"alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
+"alert.filter_hwdec.message" = "Está prestes a aplicar um filtro de vídeo. No entanto, o seu descodificador de hardware atual pode não suportar bem filtros de vídeo. Pode desativar a descodificação de hardware ou alternar para Auto(Copiar), que irá consumir o dobro da memória.\nPoderá precisar de repetir a operação anterior (como definir o corte) para que funcione.";
 "alert.filter_hwdec.abort" = "Abortar";
 "alert.filter_hwdec.turn_off" = "Desativar decodificação de hardware";
 "alert.filter_hwdec.use_copy" = "Mudar para Auto(Copiar)";

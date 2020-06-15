@@ -49,7 +49,9 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   @IBOutlet weak var artistAlbumLabel: ScrollingTextField!
   @IBOutlet weak var volumeLabel: NSTextField!
   @IBOutlet weak var defaultAlbumArt: NSView!
-
+  @IBOutlet weak var togglePlaylistButton: NSButton!
+  @IBOutlet weak var toggleAlbumArtButton: NSButton!
+  
   var isPlaylistVisible = false
   var isVideoVisible = true
 
@@ -109,6 +111,13 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
 
     // switching UI
     controlView.alphaValue = 0
+    
+    // tool tips
+    togglePlaylistButton.toolTip = Preference.ToolBarButton.playlist.description()
+    toggleAlbumArtButton.toolTip = NSLocalizedString("mini_player.album_art", comment: "album_art")
+    volumeButton.toolTip = NSLocalizedString("mini_player.volume", comment: "volume")
+    closeButtonVE.toolTip = NSLocalizedString("mini_player.close", comment: "close")
+    backButtonVE.toolTip = NSLocalizedString("mini_player.back", comment: "back")
 
     if Preference.bool(for: .alwaysFloatOnTop) {
       setWindowFloatingOnTop(true)

@@ -5,7 +5,7 @@
 "0eK-kv-btH.title" = "0.5x video size";
 
 /* Class = "NSButtonCell"; title = "Customize…"; ObjectID = "1nM-AX-Ozm"; */
-"1nM-AX-Ozm.title" = "Customize…";
+"1nM-AX-Ozm.title" = "தனிமையாக்கு…";
 
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "2YJ-bg-OdR"; */
 "2YJ-bg-OdR.title" = "% of screen";
@@ -35,7 +35,7 @@
 "AmS-Sl-b2h.title" = "Window:";
 
 /* Class = "NSMenuItem"; title = "Width:"; ObjectID = "B1c-oO-fIs"; */
-"B1c-oO-fIs.title" = "Width:";
+"B1c-oO-fIs.title" = "அகலம்:";
 
 /* Class = "NSButtonCell"; title = "Show chapter position in progress bar"; ObjectID = "BVV-Z3-LHR"; */
 "BVV-Z3-LHR.title" = "Show chapter position in progress bar";
@@ -56,7 +56,7 @@
 "G8w-J7-1q1.title" = "Picture-in-\nPicture:";
 
 /* Class = "NSTextFieldCell"; title = "Window:"; ObjectID = "GKy-3g-4MB"; */
-"GKy-3g-4MB.title" = "Window:";
+"GKy-3g-4MB.title" = "சாளரம்:";
 
 /* Class = "NSTextFieldCell"; title = "side of the screen"; ObjectID = "GXO-iT-BIr"; */
 "GXO-iT-BIr.title" = "side of the screen";
@@ -86,7 +86,7 @@
 "NUr-hY-gfo.title" = "Auto hide after:";
 
 /* Class = "NSMenuItem"; title = "right"; ObjectID = "NYG-e9-DV0"; */
-"NYG-e9-DV0.title" = "right";
+"NYG-e9-DV0.title" = "வலது";
 
 /* Class = "NSButtonCell"; title = "Automatically pause playback"; ObjectID = "O8C-Vi-rSp"; */
 "O8C-Vi-rSp.title" = "Automatically pause playback";
@@ -104,7 +104,7 @@
 "SFX-ct-8MB.title" = "Always float on top while playing";
 
 /* Class = "NSMenuItem"; title = "Speed"; ObjectID = "TWq-Xb-8Ee"; */
-"TWq-Xb-8Ee.title" = "Speed";
+"TWq-Xb-8Ee.title" = "வேகம்";
 
 /* Class = "NSMenuItem"; title = "Medium Light"; ObjectID = "TdN-pM-HHk"; */
 "TdN-pM-HHk.title" = "Medium Light";
@@ -116,7 +116,7 @@
 "UhG-bZ-2zY.title" = "point";
 
 /* Class = "NSMenuItem"; title = "Dark"; ObjectID = "VvZ-mQ-wQB"; */
-"VvZ-mQ-wQB.title" = "Dark";
+"VvZ-mQ-wQB.title" = "இருள்";
 
 /* Class = "NSMenuItem"; title = "point"; ObjectID = "X5B-TZ-ISz"; */
 "X5B-TZ-ISz.title" = "point";
@@ -131,7 +131,7 @@
 "Ymw-tr-6rw.title" = "X offset:";
 
 /* Class = "NSButtonCell"; title = "Do nothing"; ObjectID = "Zc7-sP-Rdp"; */
-"Zc7-sP-Rdp.title" = "Do nothing";
+"Zc7-sP-Rdp.title" = "எதுவும் செய்யாதே";
 
 /* Class = "NSTextFieldCell"; title = "Resize the window to fit video size:"; ObjectID = "Zjr-q7-WsD"; */
 "Zjr-q7-WsD.title" = "Resize the window to fit video size:";
@@ -143,7 +143,7 @@
 "dUG-QD-CXL.title" = "2x video size";
 
 /* Class = "NSButtonCell"; title = "Disabled"; ObjectID = "duf-3s-3bL"; */
-"duf-3s-3bL.title" = "Disabled";
+"duf-3s-3bL.title" = "முடக்கப்பட்டுள்ளது";
 
 /* Class = "NSButtonCell"; title = "Use physical resolution on Retina displays"; ObjectID = "fsj-YE-OB7"; */
 "fsj-YE-OB7.title" = "Use physical resolution on Retina displays";
@@ -161,13 +161,13 @@
 "kYu-0l-jQQ.title" = "Thumbnail Preview:";
 
 /* Class = "NSTextFieldCell"; title = "Layout:"; ObjectID = "l54-63-V6n"; */
-"l54-63-V6n.title" = "Layout:";
+"l54-63-V6n.title" = "தளவமைப்பு:";
 
 /* Class = "NSMenuItem"; title = "Light"; ObjectID = "lZc-Dl-3cQ"; */
-"lZc-Dl-3cQ.title" = "Light";
+"lZc-Dl-3cQ.title" = "வெளிச்சம்";
 
 /* Class = "NSTextFieldCell"; title = "Appearance:"; ObjectID = "mM7-1Q-FyL"; */
-"mM7-1Q-FyL.title" = "Appearance:";
+"mM7-1Q-FyL.title" = "தோற்றம்:";
 
 /* Class = "NSButtonCell"; title = "Snap to center when dragging"; ObjectID = "mdD-if-Wqw"; */
 "mdD-if-Wqw.title" = "Snap to center when dragging";
@@ -176,7 +176,7 @@
 "oJ8-74-L3z.title" = "Previous / Next Media";
 
 /* Class = "NSMenuItem"; title = "top"; ObjectID = "oYc-L7-qQd"; */
-"oYc-L7-qQd.title" = "top";
+"oYc-L7-qQd.title" = "மேல்";
 
 /* Class = "NSMenuItem"; title = "Ultra Dark"; ObjectID = "pV2-12-PmM"; */
 "pV2-12-PmM.title" = "Ultra Dark";
@@ -191,19 +191,19 @@
 "s2E-9N-K86.title" = "point";
 
 /* Class = "NSMenuItem"; title = "left"; ObjectID = "sJe-bK-eHi"; */
-"sJe-bK-eHi.title" = "left";
+"sJe-bK-eHi.title" = "இடது";
 
 /* Class = "NSMenuItem"; title = "Top"; ObjectID = "se2-DE-pJk"; */
-"se2-DE-pJk.title" = "Top";
+"se2-DE-pJk.title" = "மேல்";
 
 /* Class = "NSTextFieldCell"; title = "Text size:"; ObjectID = "suy-e8-j4i"; */
-"suy-e8-j4i.title" = "Text size:";
+"suy-e8-j4i.title" = "உரை அளவு:";
 
 /* Class = "NSMenuItem"; title = "fit the screen"; ObjectID = "vdi-lO-q6e"; */
 "vdi-lO-q6e.title" = "fit the screen";
 
 /* Class = "NSButtonCell"; title = "Enable OSD"; ObjectID = "xMh-SP-nkc"; */
-"xMh-SP-nkc.title" = "Enable OSD";
+"xMh-SP-nkc.title" = "OSDஐ இயக்கு";
 
 /* Class = "NSTextFieldCell"; title = "Toolbar:"; ObjectID = "xP1-Vh-27X"; */
 "xP1-Vh-27X.title" = "Toolbar:";
@@ -212,13 +212,13 @@
 "xrJ-Um-BrJ.title" = "% of screen";
 
 /* Class = "NSButtonCell"; title = "Hide"; ObjectID = "xtL-XT-xzb"; */
-"xtL-XT-xzb.title" = "Hide";
+"xtL-XT-xzb.title" = "மறை";
 
 /* Class = "NSButtonCell"; title = "Always"; ObjectID = "yIN-jg-MxS"; */
-"yIN-jg-MxS.title" = "Always";
+"yIN-jg-MxS.title" = "எப்பொழுதும்";
 
 /* Class = "NSTextFieldCell"; title = "Theme:"; ObjectID = "yLF-vu-1Gl"; */
-"yLF-vu-1Gl.title" = "Theme:";
+"yLF-vu-1Gl.title" = "கருப்பொருள்:";
 
 /* Class = "NSButtonCell"; title = "Initial window size:"; ObjectID = "zOq-Em-wUe"; */
 "zOq-Em-wUe.title" = "Initial window size:";

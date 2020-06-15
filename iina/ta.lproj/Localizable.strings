@@ -7,30 +7,30 @@
 */
 // Common
 
-"general.on" = "On";
-"general.off" = "Off";
-"general.login" = "Login";
-"general.logout" = "Logout";
-"general.ok" = "OK";
+"general.on" = "இயக்கு";
+"general.off" = "அணை";
+"general.login" = "உள்நுழை";
+"general.logout" = "வெளியேறு";
+"general.ok" = "சரி";
 "general.cancel" = "Cancel";
-"general.username" = "Username";
-"general.password" = "Password";
+"general.username" = "பயனர்பெயர்";
+"general.password" = "கடவுச்சொல்";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffering… %d%%";
 "main.opening_stream" = "Opening stream…";
 
 // QuickSettingViewController.swift
-"quicksetting.item_default" = "Default";
-"quicksetting.item_none" = "None";
+"quicksetting.item_default" = "இயல்புநிலை";
+"quicksetting.item_none" = "எதுவுமில்லை";
 "quicksetting.hwdec" = "Hardware Decoding";
 "quicksetting.deinterlace" = "Deinterlace";
 
 // OSDMessage.swift
-"osd.pause" = "Pause";
+"osd.pause" = "இடைநிறுத்து";
 "osd.resume" = "Resume";
-"osd.volume" = "Volume: %i";
-"osd.speed" = "Speed: %.2fx";
+"osd.volume" = "ஒலியளவு: %i";
+"osd.speed" = "வேகம்: %.2fx";
 "osd.aspect" = "Aspect Ratio: %@";
 "osd.crop" = "Crop: %@";
 "osd.rotate" = "Rotate: %i°";
@@ -65,19 +65,19 @@
 "osd.sub_found" = "%d subtitles found. Downloading…";
 "osd.sub_downloaded" = "Subtitle downloaded";
 "osd.sub_saved" = "Subtitle saved";
-"osd.network_error" = "Network error";
+"osd.network_error" = "பிணைய பிழை";
 "osd.file_error" = "Error reading file";
-"osd.cannot_login" = "Cannot login";
+"osd.cannot_login" = "உள்நுழைய முடியவில்லை";
 "osd.canceled" = "Canceled";
 "osd.filter_added" = "Added Filter: %@";
 "osd.filter_removed" = "Removed Filter";
 
 "preference.title" = "Preferences";
-"preference.general" = "General";
+"preference.general" = "பொது";
 "preference.ui" = "UI";
-"preference.video_audio" = "Video/Audio";
-"preference.subtitle" = "Subtitle";
-"preference.network" = "Network";
+"preference.video_audio" = "காணொளி/கேட்பொலி";
+"preference.subtitle" = "வசனவரி";
+"preference.network" = "பிணையம்";
 "preference.control" = "Control";
 "preference.keybindings" = "Key Bindings";
 "preference.advanced" = "Advanced";
@@ -85,7 +85,7 @@
 "preference.scripts" = "Scripts";
 "preference.not_logged_in" = "Not logged in";
 "preference.logged_in_as" = "Logged in as %@";
-"preference.system_media_control" = "Use system media control";
+"preference.system_media_control" = "முறைமை ஊடக கட்டுப்பாட்டை பயன்படுத்து";
 
 "preference.key_binding_hint_1" = "To edit key bindings in current configuration file, click \"Duplicate…\" button first to create a copy.";
 "preference.key_binding_hint_2" = "Double click a row at the right side to edit the corresponding key binding.";
@@ -114,16 +114,16 @@
 
 "track.none" = "<None>";
 
-"subtrack.no_loaded" = "No Subtitles Loaded";
+"subtrack.no_loaded" = "வசனவரிகள் எதுவும் ஏற்றப்படவில்லை";
 "subtrack.no_external" = "No External Subtitles Found";
 
 // Alerts
 "alert.beta_channel.title" = "Receive Updates for Beta Versions";
 "alert.beta_channel.message" = "IINA v1.0 is coming! Would you like to help us to test out beta versions? \n\nYou can change this behavior at anytime in Preferences - General.";
 
-"alert.title_error" = "Error";
-"alert.title_warning" = "Warning";
-"alert.title_info" = "Information";
+"alert.title_error" = "பிழை";
+"alert.title_warning" = "எச்சரிக்கை";
+"alert.title_info" = "தகவல்";
 
 "alert.fatal_error" = "Fatal error: %@ \nThe application will exit now.";
 "alert.mpv_error" = "Internal error %@ (%@) when setting option %@.";
@@ -131,14 +131,14 @@
 
 "alert.unsupported_audio" = "Unsupported external audio file.";
 "alert.unsupported_sub" = "Unsupported external subtitle.";
-"alert.unsupported_url" = "Unsupported URL.";
-"alert.wrong_url_format" = "Wrong URL format.";
+"alert.unsupported_url" = "ஆதரவளிக்கப்படாத URL.";
+"alert.wrong_url_format" = "தவறான URL வடிவமைப்பு.";
 
 "alert.error_open" = "Cannot open file or stream!";
 "alert.error_finding_file" = "Cannot find %@ file!";
 "alert.error_loading_script" = "Cannot load script %@!";
 "alert.error_saving_file" = "Error occured when saving %@: %@";
-"alert.error_deleting_file" = "Cannot delete the file.";
+"alert.error_deleting_file" = "கோப்பை நீக்க முடியவில்லை.";
 
 "alert.config.new.title" = "New Input Configuration";
 "alert.config.new.message" = "Please enter a name for the new configuration.";
@@ -146,7 +146,7 @@
 "alert.config.duplicate.message" = "Please enter name for the duplicated configuration file.";
 "alert.config.empty_name" = "The name cannot be empty.";
 "alert.config.name_existing" = "The name already exists.";
-"alert.config.file_existing.title" = "File Already Exists";
+"alert.config.file_existing.title" = "கோப்பு ஏற்கனவே உள்ளது";
 "alert.config.file_existing.message" = "This should not happen. Choose OK to overwrite, Cancel to reveal the file in Finder.";
 "alert.config.cannot_create" = "Cannot create config file!\n%@";
 "alert.config.cannot_write" = "Cannot write to config file!";
@@ -182,11 +182,11 @@
 "alert.opensub.login.title" = "OpenSubtitles Login";
 "alert.opensub.login.message" = "Please enter your username and password";
 
-"alert.open_url.title" = "Open URL";
+"alert.open_url.title" = "URLஐ திற";
 "alert.open_url.message" = "Please enter the URL:";
 "alert.choose_media_file.title" = "Choose Media Files";
 
-"alert.add_url.title" = "Add URL";
+"alert.add_url.title" = "URLஐ சேர்";
 "alert.add_url.message" = "Please enter the URL:";
 
 "alert.delete_history.title" = "Delete Playback History";
@@ -206,15 +206,15 @@
 "alert.clear_watch_later.title" = "Clear Saved Playback Progress";
 "alert.clear_watch_later.message" = "Are you sure to delete all saved playback progress (\"watch later\" data)?";
 
-"alert.nothing_to_open" = "Nothing to open.";
+"alert.nothing_to_open" = "திறக்க எதுவும் இல்லை.";
 
 "alert.no_video_track" = "There is no video track.";
 
 "alert.duplicate_config" = "You cannot edit default configurations directly. Please duplicate one before editing.";
 
 "alert.assrt_register" = "Due to limited API quota, you are strongly recommended to use your own API token. The default token is only for demo usage, and you may encounter network error.";
-"alert.assrt_register.register" = "Register Now";
-"alert.assrt_register.try" = "Try First";
+"alert.assrt_register.register" = "இப்போது பதிவுசெய்";
+"alert.assrt_register.try" = "முதலில் முயற்சி";
 "alert.assrt_token_prompt.title" = "Enter your API token";
 "alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
 "alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
@@ -222,24 +222,24 @@
 "playlist.total_length" = "%@ in total";
 "playlist.total_length_with_selected" = "%@ of %@ selected";
 "pl_menu.title_multi" = "%d Items";
-"pl_menu.play_next" = "Play Next";
-"pl_menu.play_in_new_window" = "Play in New Window";
-"pl_menu.remove" = "Remove";
+"pl_menu.play_next" = "அடுத்ததை இயக்கு";
+"pl_menu.play_in_new_window" = "புதிய சாளரத்தில் இயக்கு";
+"pl_menu.remove" = "அகற்று";
 "pl_menu.remove_multi" = "Remove Selected";
 "pl_menu.delete" = "Move to Trash";
 "pl_menu.delete_multi" = "Move Selected Files to Trash";
 "pl_menu.delete_after_play" = "Move to Trash After Playback";
 "pl_menu.delete_after_play_multi" = "Move Selected Files to Trash After Playback";
 "pl_menu.reveal_in_finder" = "Reveal in Finder";
-"pl_menu.add_file" = "Add File…";
-"pl_menu.add_url" = "Add URL…";
+"pl_menu.add_file" = "கோப்பைச் சேர்…";
+"pl_menu.add_url" = "URLஐ சேர்…";
 "pl_menu.clear_playlist" = "Clear Playlist";
 "pl_menu.matched_sub" = "Matched %d Subtitle(s)";
 "pl_menu.add_sub" = "Add Subtitle…";
 "pl_menu.wrong_sub" = "Wrong Subtitle!";
 "pl_menu.browser" = "Open in Browser";
-"pl_menu.copy_url" = "Copy URL";
-"pl_menu.copy_url_multi" = "Copy URLs";
+"pl_menu.copy_url" = "URLஐ நகலெடு";
+"pl_menu.copy_url_multi" = "URLகளை நகலெடு";
 
 "keymapping.title" = "Key Mapping";
 "keymapping.message" = "Press any key to record.";
@@ -251,9 +251,9 @@
 "hwdec.auto" = "Enable hardware decoding. However, most of the video filters won't work properly.";
 "hwdec.auto-copy" = "Enable hardware decoding. It will consume double the memory but work with video filters.";
 
-"subencoding.auto" = "Auto detect";
+"subencoding.auto" = "தானாக கண்டறி";
 
-"osc_toolbar.settings" = "Quick Settings";
+"osc_toolbar.settings" = "விரைவு அமைப்புகள்";
 "osc_toolbar.playlist" = "Playlist and chapters";
 "osc_toolbar.pip" = "Toggle Picture-in-Picture";
 "osc_toolbar.full_screen" = "Toggle full screen";
@@ -266,10 +266,10 @@
 "touchbar.ahead_30" = "30sec Ahead";
 "touchbar.back_15" = "15sec Back";
 "touchbar.back_30" = "30sec Back";
-"touchbar.next_video" = "Next Video";
-"touchbar.prev_video" = "Previous Video";
-"touchbar.increase_volume" = "Volume +";
-"touchbar.decrease_volume" = "Volume -";
+"touchbar.next_video" = "அடுத்த காணொளி";
+"touchbar.prev_video" = "முந்தைய காணொளி";
+"touchbar.increase_volume" = "ஒலியளவு +";
+"touchbar.decrease_volume" = "ஒலியளவு -";
 "touchbar.rewind" = "Rewind";
 "touchbar.fast_forward" = "Fast Forward";
 "touchbar.play_pause" = "Play / Pause";

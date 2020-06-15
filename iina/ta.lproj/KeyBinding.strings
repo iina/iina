@@ -57,12 +57,12 @@
 "iina.find-online-subs" = "Find online subtitles";
 "iina.save-downloaded-sub" = "Save downloaded subtitle";
 
-"yes" = "Yes";
-"no" = "No";
+"yes" = "ஆம்";
+"no" = "இல்லை";
 "to" = "to";
 "by" = "by";
 "in" = "in";
-"add" = "increase";
+"add" = "அதிகரி";
 "minus" = "decrease";
 "forward" = "forward";
 "backward" = "backward";
@@ -77,8 +77,8 @@
 "absolute+keyframe" = "s (keyframe)";
 "absolute-percent+keyframe" = "% (keyframe)";
 
-"opt.pause" = "Pause";
-"opt.speed" = "Speed";
+"opt.pause" = "இடைநிறுத்து";
+"opt.speed" = "வேகம்";
 
 "opt.window-scale" = "Window scale";
 
@@ -91,7 +91,7 @@
 "opt.deinterlace" = "Deinterlace";
 
 "opt.audio" = "Audio track";
-"opt.volume" = "Volume";
+"opt.volume" = "ஒலியளவு";
 "opt.mute" = "Mute";
 "opt.audio-delay" = "Audio delay";
 
@@ -102,7 +102,7 @@
 "opt.sub-visibility" = "Subtitle visibility";
 "opt.sub-ass-style-override" = "ASS style override";
 
-"opt.fullscreen" = "Fullscreen";
+"opt.fullscreen" = "முழுத்திரை";
 "opt.ontop" = "Float on top";
 
 "opt.chapter" = "Chapter";

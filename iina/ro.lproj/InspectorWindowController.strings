@@ -2,7 +2,7 @@
 "0vG-Pg-DIl.title" = "Forțat";
 
 /* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "1dz-Vt-0MO"; */
-"1dz-Vt-0MO.title" = "FPS:";
+"1dz-Vt-0MO.title" = "Cadre Pe Secunda:";
 
 /* Class = "NSTextFieldCell"; title = "File path:"; ObjectID = "4jf-w4-kkv"; */
 "4jf-w4-kkv.title" = "Cale fișier:";
@@ -11,13 +11,13 @@
 "5H6-qJ-RDS.title" = "Format:";
 
 /* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "7QX-tu-rvs"; */
-"7QX-tu-rvs.title" = "FPS:";
+"7QX-tu-rvs.title" = "Cadre Pe Secunda:";
 
 /* Class = "NSTextFieldCell"; title = "Title:"; ObjectID = "9eq-rd-zGy"; */
 "9eq-rd-zGy.title" = "Titlu:";
 
 /* Class = "NSTextFieldCell"; title = "Bit Rate:"; ObjectID = "A4y-LL-x0z"; */
-"A4y-LL-x0z.title" = "Bit Rate:";
+"A4y-LL-x0z.title" = "Rată de biți:";
 
 /* Class = "NSTextFieldCell"; title = "Mistimed Frames:"; ObjectID = "AYt-pH-UCi"; */
 "AYt-pH-UCi.title" = "Cadre Nepotrivite";
@@ -77,10 +77,10 @@
 "PBk-VC-4gu.title" = "Capitole:";
 
 /* Class = "NSTextFieldCell"; title = "External"; ObjectID = "PLL-fC-blc"; */
-"PLL-fC-blc.title" = "External";
+"PLL-fC-blc.title" = "Extern";
 
 /* Class = "NSTextFieldCell"; title = "Editions:"; ObjectID = "POj-mQ-zP9"; */
-"POj-mQ-zP9.title" = "Editions:";
+"POj-mQ-zP9.title" = "Ediții:";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "PQD-yB-mm6"; */
 "PQD-yB-mm6.title" = "Format:";
@@ -128,13 +128,13 @@
 "it3-05-Pwu.title" = "Canale:";
 
 /* Class = "NSTextFieldCell"; title = "Source ID:"; ObjectID = "jCY-og-BAa"; */
-"jCY-og-BAa.title" = "Source ID:";
+"jCY-og-BAa.title" = "ID Sursă:";
 
 /* Class = "NSTextFieldCell"; title = "Bit Rate:"; ObjectID = "jyV-Pd-UvH"; */
-"jyV-Pd-UvH.title" = "Bit Rate:";
+"jyV-Pd-UvH.title" = "Rată de biți:";
 
 /* Class = "NSTextFieldCell"; title = "Sample Rate:"; ObjectID = "llF-4b-Z8b"; */
-"llF-4b-Z8b.title" = "Sample Rate:";
+"llF-4b-Z8b.title" = "Frecvenţă de eșantionare:";
 
 /* Class = "NSTextFieldCell"; title = "ID:"; ObjectID = "mZG-ik-Led"; */
 "mZG-ik-Led.title" = "ID:";
@@ -146,16 +146,16 @@
 "n0s-eM-42w.title" = "Codec:";
 
 /* Class = "NSTextFieldCell"; title = "AUDIO"; ObjectID = "nrG-IH-kFg"; */
-"nrG-IH-kFg.title" = "AUDIO";
+"nrG-IH-kFg.title" = "SUNET";
 
 /* Class = "NSTextFieldCell"; title = "Total A/V Sync:"; ObjectID = "sbO-Cn-gpI"; */
-"sbO-Cn-gpI.title" = "Total A/V Sync:";
+"sbO-Cn-gpI.title" = "Sincronizare A/V totală:";
 
 /* Class = "NSTextFieldCell"; title = "Watch"; ObjectID = "tNS-gW-PcC"; */
 "tNS-gW-PcC.title" = "Urmărește";
 
 /* Class = "NSTextFieldCell"; title = "Sample Rate:"; ObjectID = "vrP-XL-Weg"; */
-"vrP-XL-Weg.title" = "Sample Rate:";
+"vrP-XL-Weg.title" = "Frecvenţă de eșantionare:";
 
 /* Class = "NSTextFieldCell"; title = "Decoder:"; ObjectID = "xix-0S-ehE"; */
 "xix-0S-ehE.title" = "Decodor:";

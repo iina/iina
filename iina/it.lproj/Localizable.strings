@@ -23,8 +23,8 @@
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Predefinito";
 "quicksetting.item_none" = "Nessuno";
-"quicksetting.hwdec" = "Hardware Decoding";
-"quicksetting.deinterlace" = "Deinterlace";
+"quicksetting.hwdec" = "Decodifica dell'Hardware";
+"quicksetting.deinterlace" = "Deinterlacciamento";
 
 // OSDMessage.swift
 "osd.pause" = "Pausa";
@@ -35,7 +35,7 @@
 "osd.crop" = "Ritaglio: %@";
 "osd.rotate" = "Rotazione: %i°";
 "osd.deinterlace" = "Deinterlacciamento: %@";
-"osd.hwdec" = "Hardware Decoding: %@";
+"osd.hwdec" = "Decodifica dell'Hardware: %@";
 "osd.audio_delay.nodelay" = "Differenza audio: 0.00s";
 "osd.audio_delay.later" = "Differenza audio: %.2fs dopo";
 "osd.audio_delay.earlier" = "Differenza audio: %.2fs prima";
@@ -192,7 +192,7 @@
 "alert.delete_history.title" = "Cancella cronologia riproduzioni";
 "alert.delete_history.message" = "Sei sicuro di cancellare le voci selezionate?";
 
-"alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
+"alert.filter_hwdec.message" = "Stai per applicare un filtro video. Tuttavia, il tuo decoder hardware corrente potrebbe non supportare bene i filtri video. Puoi disabilitare la decodifica hardware o passare a Auto(Copia), che consumerà il doppio della memoria.\nPotresti dover ripetere l'operazione precedente (come impostare il taglio) per farlo funzionare.";
 "alert.filter_hwdec.abort" = "Interrompi";
 "alert.filter_hwdec.turn_off" = "Disattiva la decodifica hardware";
 "alert.filter_hwdec.use_copy" = "Passa a Auto(Copy)";
@@ -275,5 +275,5 @@
 "touchbar.play_pause" = "Riproduci / Pausa";
 "touchbar.seek" = "Ricerca";
 "touchbar.time" = "Tempo";
-"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
+"touchbar.remainingTimeOrTotalDuration" = "Tempo Rimanente / Durata Totale";
 "touchbar.toggle_pip" = "Attiva / disattiva Picture-in-Picture";

@@ -5,7 +5,7 @@
 "0fB-es-DmV.title" = "Online Subtitles:";
 
 /* Class = "NSMenuItem"; title = "Top"; ObjectID = "1Tq-5k-o6R"; */
-"1Tq-5k-o6R.title" = "Top";
+"1Tq-5k-o6R.title" = "மேல்";
 
 /* Class = "NSButtonCell"; title = "Display subtitles in letterboxes while in full screen"; ObjectID = "2XY-Un-0Fg"; */
 "2XY-Un-0Fg.title" = "Display subtitles in letterboxes while in full screen";
@@ -17,7 +17,7 @@
 "4Tb-Yh-PdP.title" = "Position:";
 
 /* Class = "NSMenuItem"; title = "Bottom"; ObjectID = "6i0-Sx-V7F"; */
-"6i0-Sx-V7F.title" = "Bottom";
+"6i0-Sx-V7F.title" = "கீழ்";
 
 /* Class = "NSTextFieldCell"; title = "Subtitles have priority when filename containing:"; ObjectID = "7pf-Kb-TNr"; */
 "7pf-Kb-TNr.title" = "Subtitles have priority when filename containing:";
@@ -32,7 +32,7 @@
 "9N4-Zg-M7m.title" = "Vertical position:";
 
 /* Class = "NSBox"; title = "Font"; ObjectID = "9pv-1r-nuH"; */
-"9pv-1r-nuH.title" = "Font";
+"9pv-1r-nuH.title" = "எழுத்துரு";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "ALz-LB-8sf"; */
 "ALz-LB-8sf.title" = "Y:";
@@ -44,19 +44,19 @@
 "C3p-uP-8u8.title" = "Search online subtitles automatically";
 
 /* Class = "NSTextFieldCell"; title = "Font:"; ObjectID = "C4C-XP-i2S"; */
-"C4C-XP-i2S.title" = "Font:";
+"C4C-XP-i2S.title" = "எழுத்துரு:";
 
 /* Class = "NSTextFieldCell"; title = " X:"; ObjectID = "CdS-9J-f2h"; */
 "CdS-9J-f2h.title" = " X:";
 
 /* Class = "NSTextFieldCell"; title = "Advanced"; ObjectID = "DUA-7H-Yje"; */
-"DUA-7H-Yje.title" = "Advanced";
+"DUA-7H-Yje.title" = "மேம்பட்டவை";
 
 /* Class = "NSMenuItem"; title = "Right"; ObjectID = "Gie-38-Kk4"; */
-"Gie-38-Kk4.title" = "Right";
+"Gie-38-Kk4.title" = "வலது";
 
 /* Class = "NSTextFieldCell"; title = "OpenSubtitles account:"; ObjectID = "Iax-cc-YIO"; */
-"Iax-cc-YIO.title" = "OpenSubtitles account:";
+"Iax-cc-YIO.title" = "OpenSubtitles கணக்கு:";
 
 /* Class = "NSTextFieldCell"; title = "Other:"; ObjectID = "LiG-iV-AQK"; */
 "LiG-iV-AQK.title" = "Other:";
@@ -71,22 +71,22 @@
 "OcF-0z-7qe.title" = "If enabled, all ASS subtitles will be drawn using the styles below.";
 
 /* Class = "NSTextFieldCell"; title = "Text subtitles:"; ObjectID = "Qda-dp-nhg"; */
-"Qda-dp-nhg.title" = "Text subtitles:";
+"Qda-dp-nhg.title" = "உரை வசனவரிகள்:";
 
 /* Class = "NSTextFieldCell"; title = "Also search subtitles in following directories:"; ObjectID = "QsS-wD-2hY"; */
 "QsS-wD-2hY.title" = "Also search subtitles in following directories:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "SIh-Sv-6XI"; */
-"SIh-Sv-6XI.title" = "Color:";
+"SIh-Sv-6XI.title" = "நிறம்:";
 
 /* Class = "NSTextFieldCell"; title = "Download subtitles from:"; ObjectID = "TPK-CJ-HX7"; */
 "TPK-CJ-HX7.title" = "Download subtitles from:";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "Vbl-Im-3UI"; */
-"Vbl-Im-3UI.title" = "Size:";
+"Vbl-Im-3UI.title" = "அளவு:";
 
 /* Class = "NSButtonCell"; title = "Login"; ObjectID = "WHk-sk-gmK"; */
-"WHk-sk-gmK.title" = "Login";
+"WHk-sk-gmK.title" = "உள்நுழை";
 
 /* Class = "NSTextFieldCell"; title = "Advanced"; ObjectID = "X7X-18-FJg"; */
 "X7X-18-FJg.title" = "Advanced";
@@ -137,7 +137,7 @@
 "mFm-Q6-aja.title" = "ASS subtitles:";
 
 /* Class = "NSButtonCell"; title = "Choose…"; ObjectID = "nH7-kO-S15"; */
-"nH7-kO-S15.title" = "Choose…";
+"nH7-kO-S15.title" = "தேர்ந்தெடு…";
 
 /* Class = "NSButtonCell"; title = "Italic"; ObjectID = "pNF-Fw-QtW"; */
 "pNF-Fw-QtW.title" = "Italic";
@@ -161,7 +161,7 @@
 "u31-eV-Arr.title" = "Disabled";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "vDc-dw-liI"; */
-"vDc-dw-liI.title" = "Color:";
+"vDc-dw-liI.title" = "நிறம்:";
 
 /* Class = "NSTextFieldCell"; title = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues."; ObjectID = "vYb-qH-XkH"; */
 "vYb-qH-XkH.title" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues.";
@@ -170,7 +170,7 @@
 "xGf-fF-4Hx.title" = "Y:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "xid-E9-FC9"; */
-"xid-E9-FC9.title" = "Color:";
+"xid-E9-FC9.title" = "நிறம்:";
 
 /* Class = "NSMenuItem"; title = "Subtitles containing media filename"; ObjectID = "y1E-JR-KRI"; */
 "y1E-JR-KRI.title" = "Subtitles containing media filename";
@@ -179,4 +179,4 @@
 "zaE-bH-XfT.title" = "Preferred language:";
 
 /* Class = "NSMenuItem"; title = "Left"; ObjectID = "zml-kt-LN8"; */
-"zml-kt-LN8.title" = "Left";
+"zml-kt-LN8.title" = "இடது";

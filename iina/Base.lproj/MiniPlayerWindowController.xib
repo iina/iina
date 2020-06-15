@@ -29,6 +29,8 @@
                 <outlet property="rightLabel" destination="xAK-xc-Njn" id="2II-PQ-Hu8"/>
                 <outlet property="titleLabel" destination="h25-bp-EvL" id="HbE-Ji-c4o"/>
                 <outlet property="titleLabelTopConstraint" destination="Qaf-SS-SCV" id="NcC-8F-DTU"/>
+                <outlet property="toggleAlbumArtButton" destination="KFz-Kp-RxC" id="xjO-1X-eUP"/>
+                <outlet property="togglePlaylistButton" destination="a5L-QK-yog" id="yMA-2P-SHU"/>
                 <outlet property="videoWrapperView" destination="WD9-DD-LNj" id="Hfa-UA-t9H"/>
                 <outlet property="videoWrapperViewBottomConstraint" destination="m9y-eT-GRX" id="adV-UC-yzq"/>
                 <outlet property="volumeButton" destination="fUy-ap-8fj" id="VKB-Zt-Jdx"/>
@@ -46,7 +48,7 @@
             <windowCollectionBehavior key="collectionBehavior" fullScreenNone="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="300" height="72"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="3440" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
             <value key="minSize" type="size" width="300" height="72"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="300" height="72"/>
@@ -121,7 +123,7 @@
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kcj-EY-i9R" customClass="ScrollingTextField" customModule="IINA" customModuleProvider="target">
                                         <rect key="frame" x="109" y="8" width="82" height="14"/>
                                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Artist - Album" id="Nle-gv-CWY">
-                                            <font key="font" metaFont="message" size="11"/>
+                                            <font key="font" metaFont="menu" size="11"/>
                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>

@@ -1,14 +1,14 @@
 /* Class = "NSTextFieldCell"; title = "Speed:"; ObjectID = "1KQ-oZ-A2x"; */
-"1KQ-oZ-A2x.title" = "Speed:";
+"1KQ-oZ-A2x.title" = "வேகம்:";
 
 /* Class = "NSTextFieldCell"; title = "Width:"; ObjectID = "22j-ra-GAY"; */
-"22j-ra-GAY.title" = "Width:";
+"22j-ra-GAY.title" = "அகலம்:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "3kI-6i-ujt"; */
-"3kI-6i-ujt.title" = "Color:";
+"3kI-6i-ujt.title" = "நிறம்:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "6LO-6y-IsA"; */
-"6LO-6y-IsA.title" = "Color:";
+"6LO-6y-IsA.title" = "நிறம்:";
 
 /* Class = "NSButtonCell"; title = "Load External Audio Track…"; ObjectID = "8Ax-5X-osl"; */
 "8Ax-5X-osl.title" = "Load External Audio Track…";
@@ -20,7 +20,7 @@
 "AKs-VQ-fKF.title" = "Audio delay:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "ANn-CR-JOV"; */
-"ANn-CR-JOV.title" = "Color:";
+"ANn-CR-JOV.title" = "நிறம்:";
 
 /* Class = "NSTextFieldCell"; title = "1x"; ObjectID = "B0I-bX-HZS"; */
 "B0I-bX-HZS.title" = "1x";
@@ -56,7 +56,7 @@
 "Lpw-ws-Ezh.title" = "-12 dB";
 
 /* Class = "NSButtonCell"; title = "SUBTITLES"; ObjectID = "NxO-to-jcI"; */
-"NxO-to-jcI.title" = "SUBTITLES";
+"NxO-to-jcI.title" = "வசனவரிகள்";
 
 /* Class = "NSTextFieldCell"; title = "4x"; ObjectID = "PLX-gY-e0h"; */
 "PLX-gY-e0h.title" = "4x";
@@ -101,16 +101,16 @@
 "bKb-pW-HnS.title" = "Secondary subtitle:";
 
 /* Class = "NSTabViewItem"; label = "Audio"; ObjectID = "bzk-c2-LH5"; */
-"bzk-c2-LH5.label" = "Audio";
+"bzk-c2-LH5.label" = "கேட்பொலி";
 
 /* Class = "NSSegmentedCell"; cMu-YF-riv.ibShadowedLabels[0] = "Default"; ObjectID = "cMu-YF-riv"; */
-"cMu-YF-riv.ibShadowedLabels[0]" = "Default";
+"cMu-YF-riv.ibShadowedLabels[0]" = "இயல்புநிலை";
 
 /* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "cdR-uY-riN"; */
 "cdR-uY-riN.title" = "Brightness:";
 
 /* Class = "NSButtonCell"; title = "AUDIO"; ObjectID = "cpm-5o-a2c"; */
-"cpm-5o-a2c.title" = "AUDIO";
+"cpm-5o-a2c.title" = "கேட்பொலி";
 
 /* Class = "NSTextFieldCell"; title = "Contrast:"; ObjectID = "eDl-Si-LSa"; */
 "eDl-Si-LSa.title" = "Contrast:";
@@ -119,22 +119,22 @@
 "eLh-fu-pMj.title" = "Hue:";
 
 /* Class = "NSTextFieldCell"; title = "Subtitle:"; ObjectID = "eXZ-HN-qL4"; */
-"eXZ-HN-qL4.title" = "Subtitle:";
+"eXZ-HN-qL4.title" = "வசனவரி:";
 
 /* Class = "NSTextFieldCell"; title = "FONT"; ObjectID = "g6B-DC-lJ0"; */
-"g6B-DC-lJ0.title" = "FONT";
+"g6B-DC-lJ0.title" = "எழுத்துரு";
 
 /* Class = "NSButtonCell"; title = "Font…"; ObjectID = "ghy-e7-7Of"; */
-"ghy-e7-7Of.title" = "Font…";
+"ghy-e7-7Of.title" = "எழுத்துரு…";
 
 /* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "iS4-Zr-9Ig"; */
-"iS4-Zr-9Ig.title" = "Equalizer";
+"iS4-Zr-9Ig.title" = "சமமாக்கி";
 
 /* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[0] = "None"; ObjectID = "iuN-rN-jT7"; */
-"iuN-rN-jT7.ibShadowedLabels[0]" = "None";
+"iuN-rN-jT7.ibShadowedLabels[0]" = "எதுவுமில்லை";
 
 /* Class = "NSTabViewItem"; label = "Subtitle"; ObjectID = "jND-MZ-sKB"; */
-"jND-MZ-sKB.label" = "Subtitle";
+"jND-MZ-sKB.label" = "வசனவரி";
 
 /* Class = "NSTextFieldCell"; title = "0 dB"; ObjectID = "lBn-YS-jL7"; */
 "lBn-YS-jL7.title" = "0 dB";
@@ -173,7 +173,7 @@
 "uqb-mz-A22.title" = "BACKGROUND";
 
 /* Class = "NSButtonCell"; title = "Custom…"; ObjectID = "vFD-HU-RVz"; */
-"vFD-HU-RVz.title" = "Custom…";
+"vFD-HU-RVz.title" = "தனிப்பயன்…";
 
 /* Class = "NSTextFieldCell"; title = "Subtitle style options may break ASS rendering, and some of them will be disabled depending on subtitle type."; ObjectID = "wBD-pZ-Bvu"; */
 "wBD-pZ-Bvu.title" = "Subtitle style options may break ASS rendering, and some of them will be disabled depending on subtitle type.";

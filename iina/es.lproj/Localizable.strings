@@ -23,8 +23,8 @@
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Predeterminado";
 "quicksetting.item_none" = "Ninguno";
-"quicksetting.hwdec" = "Hardware Decoding";
-"quicksetting.deinterlace" = "Deinterlace";
+"quicksetting.hwdec" = "Decodificación de hardware";
+"quicksetting.deinterlace" = "Desentrelazar";
 
 // OSDMessage.swift
 "osd.pause" = "Pausa";
@@ -35,7 +35,7 @@
 "osd.crop" = "Recortar: %@";
 "osd.rotate" = "Rotar: %i°";
 "osd.deinterlace" = "Desentrelazar: %@";
-"osd.hwdec" = "Hardware Decoding: %@";
+"osd.hwdec" = "Decodificación de hardware: %@";
 "osd.audio_delay.nodelay" = "Retraso de audio: Sin Retraso";
 "osd.audio_delay.later" = "Retraso de audio: %.2fs Después";
 "osd.audio_delay.earlier" = "Retraso de audio: %.2fs Antes";
@@ -192,7 +192,7 @@
 "alert.delete_history.title" = "Eliminar el historial de reproducción";
 "alert.delete_history.message" = "¿Está seguro de borrar las entradas seleccionadas?";
 
-"alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
+"alert.filter_hwdec.message" = "Está a punto de aplicar un filtro de vídeo. Sin embargo, su decodificador de hardware actual puede no ser compatible con filtros de vídeo bien. Puede desactivar la decodificación de hardware o cambiar a Auto(Copia), que consumirá el doble de memoria.\nPuede que necesite repetir la operación anterior (como ajustar el recorte) para que funcione.";
 "alert.filter_hwdec.abort" = "Abortar";
 "alert.filter_hwdec.turn_off" = "Desactivar la descodificación por hardware";
 "alert.filter_hwdec.use_copy" = "Cambiar a Auto(Copiar)";
@@ -275,5 +275,5 @@
 "touchbar.play_pause" = "Reproducir / Pausar";
 "touchbar.seek" = "Buscar";
 "touchbar.time" = "Posición en el tiempo";
-"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
+"touchbar.remainingTimeOrTotalDuration" = "Tiempo restante / Duración total";
 "touchbar.toggle_pip" = "Alternar Imagen dentro de imagen";

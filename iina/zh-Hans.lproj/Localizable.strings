@@ -23,8 +23,8 @@
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "默认";
 "quicksetting.item_none" = "无";
-"quicksetting.hwdec" = "Hardware Decoding";
-"quicksetting.deinterlace" = "Deinterlace";
+"quicksetting.hwdec" = "硬件解码";
+"quicksetting.deinterlace" = "反交错";
 
 // OSDMessage.swift
 "osd.pause" = "暂停";
@@ -35,7 +35,7 @@
 "osd.crop" = "裁切：%@";
 "osd.rotate" = "旋转：%i°";
 "osd.deinterlace" = "反交错：%@";
-"osd.hwdec" = "Hardware Decoding: %@";
+"osd.hwdec" = "正在硬件解码: %@";
 "osd.audio_delay.nodelay" = "音频延迟：无延迟";
 "osd.audio_delay.later" = "音频延迟：延迟 %.2f 秒";
 "osd.audio_delay.earlier" = "音频延迟：提前 %.2f 秒";
@@ -275,5 +275,5 @@
 "touchbar.play_pause" = "播放 / 暂停";
 "touchbar.seek" = "进度条";
 "touchbar.time" = "播放进度";
-"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
+"touchbar.remainingTimeOrTotalDuration" = "剩余时间/总持续时间";
 "touchbar.toggle_pip" = "切换“画中画”模式";

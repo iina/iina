@@ -192,7 +192,7 @@
 "alert.delete_history.title" = "Wiedergabeverlauf löschen";
 "alert.delete_history.message" = "Möchtest du die ausgewählten Einträge wirklich löschen?";
 
-"alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
+"alert.filter_hwdec.message" = "Du bist dabei einen Videofilter anzuwenden. Es könnte sein, dass Dein aktueller Hardwaredecoder diese nicht richtig unterstützt. Du kannst entweder das Hardwaredecoding abschalten oder auf Auto(Copy) umschalten. Auto(Copy) benötigt doppelt soviel Arbeitsspeicher. \nUnter Umständen musst Du die zuvor gemachten Einstellungen (wie zum Beispiel die Crop-Einstellungen) erneut vornehmen, damit es funktioniert.";
 "alert.filter_hwdec.abort" = "Abbrechen";
 "alert.filter_hwdec.turn_off" = "Hardwaredecoding deaktivieren";
 "alert.filter_hwdec.use_copy" = "Zu Autom. (Kopieren) wechseln";
@@ -275,5 +275,5 @@
 "touchbar.play_pause" = "Wiedergabe / Pause";
 "touchbar.seek" = "Verlauf";
 "touchbar.time" = "Position";
-"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
+"touchbar.remainingTimeOrTotalDuration" = "verbleibende Zeit / gespielt";
 "touchbar.toggle_pip" = "Bild-in-Bild ein-/ausschalten";

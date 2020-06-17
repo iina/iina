@@ -315,6 +315,10 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       scrollAction = .volume
     } else {
       scrollAction = scrollDirection == .horizontal ? horizontalScrollAction : verticalScrollAction
+      // show volume popover when volume seek begins and hide on end
+      if let miniPlayer = self as? MiniPlayerWindowController, scrollAction == .volume {
+        miniPlayer.handleVolumePopover(isTrackpadBegan, isTrackpadEnd, isMouse)
+      }
     }
 
     // pause video when seek begins

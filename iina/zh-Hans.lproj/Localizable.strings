@@ -206,18 +206,18 @@
 "alert.clear_watch_later.title" = "清除已保存的播放进度";
 "alert.clear_watch_later.message" = "确定清除所有保存的播放进度（即“watch later”）数据吗？";
 
-"alert.nothing_to_open" = "无文件可打开。";
+"alert.nothing_to_open" = "没有可打开的文件。";
 
-"alert.no_video_track" = "无视频轨道。";
+"alert.no_video_track" = "没有可用的视频轨道。";
 
-"alert.duplicate_config" = "您无法直接编辑默认配置。请先复制后再编辑。";
+"alert.duplicate_config" = "默认配置不能被编辑。请先复制后再编辑。";
 
-"alert.assrt_register" = "由于 API 配额限制，我们强烈建议您使用自己的 API token。默认 API token 仅做测试用途，且您有可能遇到网络错误。";
-"alert.assrt_register.register" = "立即注册";
-"alert.assrt_register.try" = "试用一下";
-"alert.assrt_token_prompt.title" = "输入您的 API token";
-"alert.assrt_token_prompt.message" = "请在弹出网页中注册帐号。在您个人首页中获得 token 并在下方输入:";
-"alert.assrt_token_invalid" = "您的 Assrt API token 疑似无效。";
+"alert.assrt_register" = "由于射手网(伪)的 API 请求数量限制，请务必在射手网(伪)注册账户后使用自己的 API token。自带 API token 仅用于测试用途，并且可能由于 API 使用超出限额而请求失败。";
+"alert.assrt_register.register" = "去射手网(伪)注册";
+"alert.assrt_register.try" = "先试用一下";
+"alert.assrt_token_prompt.title" = "输入你在射手网(伪)的 API token";
+"alert.assrt_token_prompt.message" = "请在弹出的网页中注册帐号，然后进入用户首页查看 API token 并在下方输入:";
+"alert.assrt_token_invalid" = "你的射手网(伪) API token 格式错误。";
 
 "playlist.total_length" = "总计 %@";
 "playlist.total_length_with_selected" = "选中 %@ / %@";
@@ -247,7 +247,7 @@
 "filter.video_filters" = "视频滤镜";
 "filter.audio_filters" = "音频滤镜";
 
-"hwdec.no" = "禁用硬件解码。";
+"hwdec.no" = "不启用硬件解码。";
 "hwdec.auto" = "启用硬件解码。但大多数视频滤镜不会正常工作。";
 "hwdec.auto-copy" = "启用硬件解码。这将占用约两倍内存，但支持视频滤镜。";
 
@@ -255,7 +255,7 @@
 
 "osc_toolbar.settings" = "快速设置";
 "osc_toolbar.playlist" = "播放列表和章节";
-"osc_toolbar.pip" = "切换「画中画」模式";
+"osc_toolbar.pip" = "切换“画中画”模式";
 "osc_toolbar.full_screen" = "切换全屏";
 "osc_toolbar.music_mode" = "进入音乐模式";
 "osc_toolbar.sub_track" = "选择字幕轨道";
@@ -275,5 +275,5 @@
 "touchbar.play_pause" = "播放 / 暂停";
 "touchbar.seek" = "进度条";
 "touchbar.time" = "播放进度";
-"touchbar.remainingTimeOrTotalDuration" = "剩余时间/总持续时间";
+"touchbar.remainingTimeOrTotalDuration" = "剩余时间/总时间";
 "touchbar.toggle_pip" = "切换“画中画”模式";

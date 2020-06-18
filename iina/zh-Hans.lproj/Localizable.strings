@@ -247,7 +247,7 @@
 "filter.video_filters" = "视频滤镜";
 "filter.audio_filters" = "音频滤镜";
 
-"hwdec.no" = "不启用硬件解码。";
+"hwdec.no" = "禁用硬件解码。";
 "hwdec.auto" = "启用硬件解码。但大多数视频滤镜不会正常工作。";
 "hwdec.auto-copy" = "启用硬件解码。这将占用约两倍内存，但支持视频滤镜。";
 

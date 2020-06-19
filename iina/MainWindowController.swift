@@ -387,8 +387,6 @@ class MainWindowController: PlayerWindowController {
   @IBOutlet weak var fragControlViewMiddleButtons1Constraint: NSLayoutConstraint!
   @IBOutlet weak var fragControlViewMiddleButtons2Constraint: NSLayoutConstraint!
 
-  var osdProgressBarWidthConstraint: NSLayoutConstraint!
-
   @IBOutlet weak var titleBarView: NSVisualEffectView!
   @IBOutlet weak var titleBarBottomBorder: NSBox!
   @IBOutlet weak var titlebarOnTopButton: NSButton!
@@ -429,7 +427,6 @@ class MainWindowController: PlayerWindowController {
   @IBOutlet weak var osdVisualEffectView: NSVisualEffectView!
   @IBOutlet weak var osdStackView: NSStackView!
   @IBOutlet weak var osdLabel: NSTextField!
-  @IBOutlet weak var osdAccessoryView: NSView!
   @IBOutlet weak var osdAccessoryText: NSTextField!
   @IBOutlet weak var osdAccessoryProgress: NSProgressIndicator!
 
@@ -541,8 +538,6 @@ class MainWindowController: PlayerWindowController {
     timePreviewWhenSeek.isHidden = true
     bottomView.isHidden = true
     pipOverlayView.isHidden = true
-
-    osdProgressBarWidthConstraint = NSLayoutConstraint(item: osdAccessoryProgress as Any, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 150)
 
     // add user default observers
     observedPrefKeys.append(contentsOf: localObservedPrefKeys)
@@ -1568,25 +1563,23 @@ class MainWindowController: PlayerWindowController {
       hideOSDTimer = nil
     }
     osdAnimationState = .shown
-    [osdAccessoryText, osdAccessoryProgress].forEach { $0.isHidden = true }
 
     let (osdString, osdType) = message.message()
 
     let osdTextSize = Preference.float(for: .osdTextSize)
     osdLabel.font = NSFont.monospacedDigitSystemFont(ofSize: CGFloat(osdTextSize), weight: .regular)
+    osdAccessoryText.font = NSFont.monospacedDigitSystemFont(ofSize: CGFloat(osdTextSize * 0.5).clamped(to: 11...25), weight: .regular)
     osdLabel.stringValue = osdString
 
     switch osdType {
     case .normal:
-      osdStackView.setVisibilityPriority(.notVisible, for: osdAccessoryView)
+      osdStackView.setVisibilityPriority(.notVisible, for: osdAccessoryText)
+      osdStackView.setVisibilityPriority(.notVisible, for: osdAccessoryProgress)
     case .withProgress(let value):
-      NSLayoutConstraint.activate([osdProgressBarWidthConstraint])
-      osdStackView.setVisibilityPriority(.mustHold, for: osdAccessoryView)
-      osdAccessoryProgress.isHidden = false
+      osdStackView.setVisibilityPriority(.notVisible, for: osdAccessoryText)
+      osdStackView.setVisibilityPriority(.mustHold, for: osdAccessoryProgress)
       osdAccessoryProgress.doubleValue = value
     case .withText(let text):
-      NSLayoutConstraint.deactivate([osdProgressBarWidthConstraint])
-
       // data for mustache redering
       let osdData: [String: String] = [
         "duration": player.info.videoDuration?.stringRepresentation ?? Constants.String.videoTimePlaceholder,
@@ -1595,8 +1588,8 @@ class MainWindowController: PlayerWindowController {
         "chapterCount": player.info.chapters.count.description
       ]
 
-      osdStackView.setVisibilityPriority(.mustHold, for: osdAccessoryView)
-      osdAccessoryText.isHidden = false
+      osdStackView.setVisibilityPriority(.mustHold, for: osdAccessoryText)
+      osdStackView.setVisibilityPriority(.notVisible, for: osdAccessoryProgress)
       osdAccessoryText.stringValue = try! (try! Template(string: text)).render(osdData)
     }
 

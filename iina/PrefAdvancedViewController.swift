@@ -37,7 +37,7 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
   @IBOutlet var headerView: NSView!
   @IBOutlet var settingsView: NSView!
 
-  @IBOutlet weak var enableSettingsBtn: NSButton!
+  @IBOutlet weak var enableAdvancedSettingsBtn: Switch!
   @IBOutlet weak var optionsTableView: NSTableView!
   @IBOutlet weak var useAnotherConfigDirBtn: NSButton!
   @IBOutlet weak var chooseConfigDirBtn: NSButton!
@@ -55,6 +55,8 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
     optionsTableView.dataSource = self
     optionsTableView.delegate = self
     removeButton.isEnabled = false
+
+    enableAdvancedSettingsBtn.action = enableAdvancedSettingsBtnAction
   }
 
   func saveToUserDefaults() {
@@ -92,6 +94,10 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
 
   @IBAction func helpBtnAction(_ sender: AnyObject) {
     NSWorkspace.shared.open(URL(string: AppData.wikiLink)!.appendingPathComponent("MPV-Options-and-Properties"))
+  }
+
+  func enableAdvancedSettingsBtnAction(_ newValue: Bool) {
+    Preference.set(newValue, for: .enableAdvancedSettings)
   }
 }
 

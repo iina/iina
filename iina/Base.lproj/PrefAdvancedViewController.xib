@@ -9,6 +9,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="PrefAdvancedViewController" customModule="IINA" customModuleProvider="target">
             <connections>
                 <outlet property="chooseConfigDirBtn" destination="hbF-n4-jl3" id="QYy-Do-vje"/>
+                <outlet property="enableAdvancedSettingsBtn" destination="PCZ-06-pn4" id="4ft-4M-2kP"/>
                 <outlet property="headerView" destination="vDK-ld-vAF" id="cRU-Jb-NlK"/>
                 <outlet property="optionsTableView" destination="LPs-2B-Pt0" id="jFp-3K-Ub8"/>
                 <outlet property="removeButton" destination="EU2-5a-Lpj" id="If1-8o-8PG"/>
@@ -306,7 +307,7 @@
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="switchOnLeft" value="YES"/>
                         <userDefinedRuntimeAttribute type="string" keyPath="title" value="Enable advanced settings"/>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="checkboxSpace" value="NO"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="checkboxSpace" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </customView>
             </subviews>

@@ -306,7 +306,7 @@
                     <rect key="frame" x="8" y="26" width="463" height="26"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="switchOnLeft" value="YES"/>
-                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="Enable advanced settings"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="preference.enable_adv_settings"/>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="checkboxSpace" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </customView>

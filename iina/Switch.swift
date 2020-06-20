@@ -20,7 +20,7 @@ class Switch: NSView {
       return _title
     }
     set {
-      _title = newValue
+      _title = NSLocalizedString(newValue, comment: newValue)
       if #available(macOS 10.15, *) {
         label?.stringValue = _title
       } else {

@@ -56,7 +56,10 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
     optionsTableView.delegate = self
     removeButton.isEnabled = false
 
-    enableAdvancedSettingsBtn.action = enableAdvancedSettingsBtnAction
+    enableAdvancedSettingsBtn.checked = Preference.bool(for: .enableAdvancedSettings)
+    enableAdvancedSettingsBtn.action = {
+      Preference.set($0, for: .enableAdvancedSettings)
+    }
   }
 
   func saveToUserDefaults() {
@@ -94,10 +97,6 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
 
   @IBAction func helpBtnAction(_ sender: AnyObject) {
     NSWorkspace.shared.open(URL(string: AppData.wikiLink)!.appendingPathComponent("MPV-Options-and-Properties"))
-  }
-
-  func enableAdvancedSettingsBtnAction(_ newValue: Bool) {
-    Preference.set(newValue, for: .enableAdvancedSettings)
   }
 }
 

@@ -1269,11 +1269,9 @@ class PlayerCore: NSObject {
       }
 
     case .playButton:
-      let pause = mpv.getFlag(MPVOption.PlaybackControl.pause)
       DispatchQueue.main.async {
-        self.info.isPaused = pause
-        self.mainWindow.updatePlayButtonState(pause ? .off : .on)
-        self.miniPlayer.updatePlayButtonState(pause ? .off : .on)
+        self.mainWindow.updatePlayButtonState(self.info.isPaused ? .off : .on)
+        self.miniPlayer.updatePlayButtonState(self.info.isPaused ? .off : .on)
         if #available(macOS 10.12.2, *) {
           self.touchBarSupport.updateTouchBarPlayBtn()
         }

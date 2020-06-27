@@ -274,7 +274,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
         case 34...67:
           volumeButton.image = NSImage(named: "volume-1")
         case 68...100:
-          volumeButton.image = NSImage(named: "volume-2")
+          volumeButton.image = NSImage(named: "volume")
         default:
           break
       }

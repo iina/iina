@@ -278,11 +278,13 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
       volumeButton.image = NSImage(named: "mute")
     } else {
       switch volumeLabel.intValue {
-        case 0...33:
+        case 0:
           volumeButton.image = NSImage(named: "volume-0")
-        case 34...67:
+        case 1...33:
           volumeButton.image = NSImage(named: "volume-1")
-        case 68...100:
+        case 34...66:
+          volumeButton.image = NSImage(named: "volume-2")
+        case 67...1000:
           volumeButton.image = NSImage(named: "volume")
         default:
           break

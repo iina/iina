@@ -67,7 +67,7 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" tabbingMode="disallowed" id="F0z-JX-Cv5" customClass="MainWindow" customModule="IINA" customModuleProvider="target">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <rect key="contentRect" x="196" y="240" width="640" height="400"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="3440" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="640" height="400"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -343,7 +343,7 @@
             <point key="canvasLocation" x="207" y="109.5"/>
         </window>
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="N3B-DL-XOA">
-            <rect key="frame" x="0.0" y="0.0" width="106" height="24"/>
+            <rect key="frame" x="0.0" y="0.0" width="104" height="24"/>
             <subviews>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="2py-h1-0km">
                     <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
@@ -360,7 +360,7 @@
                     </connections>
                 </button>
                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SAG-kc-FAt" userLabel="Volume Slider">
-                    <rect key="frame" x="30" y="5" width="70" height="15"/>
+                    <rect key="frame" x="28" y="5" width="70" height="15"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="70" id="P2L-LI-jT7"/>
                     </constraints>
@@ -371,7 +371,7 @@
                 </slider>
             </subviews>
             <constraints>
-                <constraint firstItem="SAG-kc-FAt" firstAttribute="leading" secondItem="2py-h1-0km" secondAttribute="trailing" constant="6" id="Wxb-Os-BRF"/>
+                <constraint firstItem="SAG-kc-FAt" firstAttribute="leading" secondItem="2py-h1-0km" secondAttribute="trailing" constant="4" id="Wxb-Os-BRF"/>
                 <constraint firstAttribute="trailing" secondItem="SAG-kc-FAt" secondAttribute="trailing" constant="6" id="X07-5M-FbM"/>
                 <constraint firstItem="SAG-kc-FAt" firstAttribute="centerY" secondItem="2py-h1-0km" secondAttribute="centerY" id="snd-ST-z3J"/>
                 <constraint firstItem="2py-h1-0km" firstAttribute="leading" secondItem="N3B-DL-XOA" secondAttribute="leading" id="vCy-sT-v1s"/>
@@ -600,7 +600,7 @@
         </customView>
     </objects>
     <resources>
-        <image name="mute" width="17" height="14"/>
+        <image name="mute" width="16" height="14"/>
         <image name="ontop" width="16" height="14"/>
         <image name="ontop_off" width="16" height="14"/>
         <image name="pause" width="24" height="24"/>
@@ -608,6 +608,6 @@
         <image name="playing-in-pip" width="87" height="68"/>
         <image name="speed" width="24" height="24"/>
         <image name="speedl" width="24" height="24"/>
-        <image name="volume" width="17" height="14"/>
+        <image name="volume" width="16" height="14"/>
     </resources>
 </document>

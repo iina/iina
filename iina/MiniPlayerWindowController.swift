@@ -265,7 +265,20 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     guard loaded else { return }
     super.updateVolume()
     volumeLabel.intValue = Int32(player.info.volume)
-    volumeButton.image = player.info.isMuted ? NSImage(named: "mute") : NSImage(named: "volume")
+    if player.info.isMuted {
+      volumeButton.image = NSImage(named: "mute")
+    } else {
+      switch volumeLabel.intValue {
+        case 0...33:
+          volumeButton.image = NSImage(named: "volume-0")
+        case 34...67:
+          volumeButton.image = NSImage(named: "volume-1")
+        case 68...100:
+          volumeButton.image = NSImage(named: "volume")
+        default:
+          break
+      }
+    }
   }
 
   func updateVideoSize() {

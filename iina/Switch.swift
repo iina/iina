@@ -11,7 +11,7 @@ import Cocoa
 @IBDesignable
 class Switch: NSView {
   private var _title = ""
-  private var _checkboxSpace = true
+  private var _checkboxMargin = true
   private var _checked = false
   private var _switchOnLeft = false
 
@@ -24,17 +24,17 @@ class Switch: NSView {
       if #available(macOS 10.15, *) {
         label?.stringValue = _title
       } else {
-        checkbox?.title = (checkboxSpace ? " " : "") + _title
+        checkbox?.title = (checkboxMargin ? " " : "") + _title
       }
     }
   }
 
-  @IBInspectable var checkboxSpace: Bool {
+  @IBInspectable var checkboxMargin: Bool {
     get {
-      return _checkboxSpace
+      return _checkboxMargin
     }
     set {
-      _checkboxSpace = newValue
+      _checkboxMargin = newValue
       guard let checkbox = checkbox else { return }
       if newValue {
         checkbox.title = " " + checkbox.title

@@ -68,7 +68,7 @@
                     <rect key="frame" x="8" y="103" width="484" height="134"/>
                     <clipView key="contentView" id="aL1-v5-nLY">
                         <rect key="frame" x="1" y="0.0" width="482" height="133"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="wiq-g9-ouS" id="LPs-2B-Pt0">
                                 <rect key="frame" x="0.0" y="0.0" width="482" height="110"/>
@@ -307,7 +307,7 @@
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="switchOnLeft" value="YES"/>
                         <userDefinedRuntimeAttribute type="string" keyPath="title" value="preference.enable_adv_settings"/>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="checkboxSpace" value="YES"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="checkboxMargin" value="NO"/>
                     </userDefinedRuntimeAttributes>
                 </customView>
             </subviews>

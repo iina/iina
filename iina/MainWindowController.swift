@@ -837,6 +837,10 @@ class MainWindowController: PlayerWindowController {
       toggleWindowFullScreen()
     case .hideOSC:
       hideUI()
+    case .togglePIP:
+      if #available(macOS 10.12, *) {
+        menuTogglePIP(.dummy)
+      }
     default:
       break
     }

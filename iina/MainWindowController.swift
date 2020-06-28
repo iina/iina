@@ -619,6 +619,7 @@ class MainWindowController: PlayerWindowController {
       button.tag = buttonType.rawValue
       button.translatesAutoresizingMaskIntoConstraints = false
       button.refusesFirstResponder = true
+      button.toolTip = buttonType.description()
       let buttonWidth = buttons.count == 5 ? "20" : "24"
       Utility.quickConstraints(["H:[btn(\(buttonWidth))]", "V:[btn(24)]"], ["btn": button])
       fragToolbarView.addView(button, in: .trailing)

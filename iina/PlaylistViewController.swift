@@ -60,7 +60,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   @IBOutlet weak var totalLengthLabel: NSTextField!
   @IBOutlet var subPopover: NSPopover!
   @IBOutlet var addFileMenu: NSMenu!
-
+  @IBOutlet weak var addBtn: NSButton!
+  @IBOutlet weak var removeBtn: NSButton!
+  
   private var playlistTotalLengthIsReady = false
   private var playlistTotalLength: Double? = nil
 
@@ -87,6 +89,12 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       $0?.image?.isTemplate = true
       $0?.alternateImage?.isTemplate = true
     }
+    
+    deleteBtn.toolTip = NSLocalizedString("mini_player.delete", comment: "delete")
+    loopBtn.toolTip = NSLocalizedString("mini_player.loop", comment: "loop")
+    shuffleBtn.toolTip = NSLocalizedString("mini_player.shuffle", comment: "shuffle")
+    addBtn.toolTip = NSLocalizedString("mini_player.add", comment: "add")
+    removeBtn.toolTip = NSLocalizedString("mini_player.remove", comment: "remove")
 
     hideTotalLength()
 

@@ -11,23 +11,40 @@ import Cocoa
 @IBDesignable
 class Switch: NSView {
   private var _title = ""
+  private var _checkboxMargin = true
   private var _checked = false
+  private var _switchOnLeft = false
 
   @IBInspectable var title: String {
     get {
       return _title
     }
     set {
-      _title = newValue
+      _title = NSLocalizedString(newValue, comment: newValue)
       if #available(macOS 10.15, *) {
         label?.stringValue = _title
       } else {
-        checkbox?.title = " " + _title
+        checkbox?.title = (checkboxMargin ? " " : "") + _title
       }
     }
   }
 
-  @IBInspectable var checked: Bool {
+  @IBInspectable var checkboxMargin: Bool {
+    get {
+      return _checkboxMargin
+    }
+    set {
+      _checkboxMargin = newValue
+      guard let checkbox = checkbox else { return }
+      if newValue {
+        checkbox.title = " " + checkbox.title
+      } else {
+        checkbox.title = String(checkbox.title.dropFirst())
+      }
+    }
+  }
+
+  var checked: Bool {
     get {
       return _checked
     }
@@ -38,6 +55,42 @@ class Switch: NSView {
       } else {
         checkbox?.state = _checked ? .on : .off
       }
+    }
+  }
+
+  private lazy var viewMap: [String: Any] = {
+    ["l": label!, "s": nsSwitch!]
+  }()
+  private lazy var switchOnLeftConstraint = {
+    NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[s]-8-[l]-(>=0)-|", options: [], metrics: nil, views: viewMap)
+  }()
+  private lazy var switchOnRightConstraint = {
+    NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[l]-(>=8)-[s]-0-|", options: [], metrics: nil, views: viewMap)
+  }()
+
+  @IBInspectable var switchOnLeft: Bool {
+    get {
+      return _switchOnLeft
+    }
+    set {
+      if #available(macOS 10.15, *) {
+        if newValue {
+          NSLayoutConstraint.deactivate(switchOnRightConstraint)
+          NSLayoutConstraint.activate(switchOnLeftConstraint)
+        } else {
+          NSLayoutConstraint.deactivate(switchOnLeftConstraint)
+          NSLayoutConstraint.activate(switchOnRightConstraint)
+        }
+      }
+      _switchOnLeft = newValue
+    }
+  }
+
+  override var intrinsicContentSize: NSSize {
+    if #available(macOS 10.15, *) {
+      return NSSize(width: 0, height: 22)
+    } else {
+      return NSSize(width: 0, height: 14)
     }
   }
 
@@ -59,7 +112,11 @@ class Switch: NSView {
       addSubview(nsSwitch)
       self.nsSwitch = nsSwitch
       self.label = label
-      Utility.quickConstraints(["H:|-0-[l]-(>=8)-[s]-0-|"], ["l": label, "s": nsSwitch])
+      if switchOnLeft {
+        NSLayoutConstraint.activate(switchOnLeftConstraint)
+      } else {
+        NSLayoutConstraint.activate(switchOnRightConstraint)
+      }
       label.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
       nsSwitch.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
     } else {

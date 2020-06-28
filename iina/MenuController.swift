@@ -271,9 +271,14 @@ class MenuController: NSObject, NSMenuDelegate {
     var cropListForObject = AppData.aspects
     cropList.insert(Constants.String.none, at: 0)
     cropListForObject.insert("None", at: 0)
+    // Allow custom crop size.
+    cropList.append(Constants.String.custom)
+    cropListForObject.append("Custom")
     bind(menu: cropMenu, withOptions: cropList, objects: cropListForObject, objectMap: nil, action: #selector(MainMenuActionHandler.menuChangeCrop(_:))) {
       return PlayerCore.active.info.unsureCrop == $0.representedObject as? String
     }
+    // Separate "Custom..." from other crop sizes.
+    cropMenu.insertItem(NSMenuItem.separator(), at: 1 + AppData.aspects.count)
 
     // -- rotation
     let rotationTitles = AppData.rotations.map { "\($0)\(Constants.String.degree)" }

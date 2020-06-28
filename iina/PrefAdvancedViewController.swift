@@ -91,7 +91,7 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
   }
 
   @IBAction func helpBtnAction(_ sender: AnyObject) {
-    NSWorkspace.shared.open(URL(string: AppData.websiteLink)!.appendingPathComponent("documentation"))
+    NSWorkspace.shared.open(URL(string: AppData.wikiLink)!.appendingPathComponent("MPV-Options-and-Properties"))
   }
 }
 

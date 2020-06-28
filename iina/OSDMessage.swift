@@ -39,6 +39,7 @@ enum OSDMessage {
   case crop(String)
   case rotate(Int)
   case deinterlace(Bool)
+  case hwdec(Bool)
   case audioDelay(Double)
   case subDelay(Double)
   case subScale(Double)
@@ -122,9 +123,15 @@ enum OSDMessage {
         .normal
       )
 
-    case .deinterlace(let enable):
+    case .deinterlace(let enabled):
       return (
-        String(format: NSLocalizedString("osd.deinterlace", comment: "Deinterlace: %@"), enable ? NSLocalizedString("general.on", comment: "On") : NSLocalizedString("general.off", comment: "Off")),
+        String(format: NSLocalizedString("osd.deinterlace", comment: "Deinterlace: %@"), enabled ? NSLocalizedString("general.on", comment: "On") : NSLocalizedString("general.off", comment: "Off")),
+        .normal
+      )
+
+    case .hwdec(let enabled):
+      return (
+        String(format: NSLocalizedString("osd.hwdec", comment: "Hardware Decoding: %@"), enabled ? NSLocalizedString("general.on", comment: "On") : NSLocalizedString("general.off", comment: "Off")),
         .normal
       )
 

@@ -46,7 +46,7 @@ struct Logger {
 
   static let logDirectory: URL = {
     let formatter = DateFormatter()
-    formatter.dateFormat = "YYYY-MM-dd-HH-mm-ss"
+    formatter.dateFormat = "yyyy-MM-dd-HH-mm-ss"
     let timeString  = formatter.string(from: Date())
     let token = Utility.ShortCodeGenerator.getCode(length: 6)
     let sessionDirName = "\(timeString)_\(token)"
@@ -72,7 +72,6 @@ struct Logger {
     logFileHandle.closeFile()
   }
 
-  @inline(__always)
   static func log(_ message: String, level: Level = .debug, subsystem: Subsystem = .general, appendNewlineAtTheEnd: Bool = true) {
     #if !DEBUG
     guard enabled else { return }

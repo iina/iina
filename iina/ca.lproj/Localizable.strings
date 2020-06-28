@@ -1,0 +1,276 @@
+/*
+  String_ui.strings
+  iina
+
+  Created by lhc on 3/1/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+// Common
+
+"general.on" = "Activat";
+"general.off" = "Desactivat";
+"general.login" = "Inicia la sessió";
+"general.logout" = "Tanca la sessió";
+"general.ok" = "D'acord";
+"general.cancel" = "Cancel·la";
+"general.username" = "Nom d'usuari";
+"general.password" = "Contrasenya";
+
+// MainWindowController.swift
+"main.buffering_indicator" = "Carregant… %d%%";
+"main.opening_stream" = "Obrint fluxe de dades…";
+
+// QuickSettingViewController.swift
+"quicksetting.item_default" = "Per defecte";
+"quicksetting.item_none" = "Cap";
+
+// OSDMessage.swift
+"osd.pause" = "Pausa";
+"osd.resume" = "Reprèn";
+"osd.volume" = "Volum: %i";
+"osd.speed" = "Velocitat: %.2fx";
+"osd.aspect" = "Relació d'aspecte: %@";
+"osd.crop" = "Escapça: %@";
+"osd.rotate" = "Gira: %i°";
+"osd.deinterlace" = "Desentrellaça: %@";
+"osd.audio_delay.nodelay" = "Retard de l'àudio: sense retard";
+"osd.audio_delay.later" = "Retard de l'àudio: %.2fs després";
+"osd.audio_delay.earlier" = "Retard de l'àudio: %.2fs abans";
+"osd.sub_delay.nodelay" = "Retard dels subtítols: sense retard";
+"osd.sub_delay.later" = "Retard dels subtítols: %.2fs després";
+"osd.sub_delay.earlier" = "Retard dels subtítols: %.2fs abans";
+"osd.subtitle_pos" = "Posició dels subtítols: %.1f";
+"osd.mute" = "Silencia";
+"osd.unmute" = "Amb so";
+"osd.screenshot" = "Captura de pantalla feta";
+"osd.abloop.a" = "Bucle-AB: A";
+"osd.abloop.b" = "Bucle-AB: B";
+"osd.abloop.clear" = "Bucle-AB: suprimit";
+"osd.stop" = "Atura";
+"osd.chapter" = "Capítol: %@";
+"osd.subtitle_scale" = "Escala dels subtítols: %.2fx";
+"osd.add_to_playlist" = "%i fitxer afegits a la llista de reproducció";
+"osd.clear_playlist" = "Llista de reproducció suprimida";
+"osd.video_eq.contrast" = "Contrast: %i";
+"osd.video_eq.gamma" = "Gamma: %i";
+"osd.video_eq.hue" = "To: %i";
+"osd.video_eq.saturation" = "Saturació: %i";
+"osd.video_eq.brightness" = "Brillantor: %i";
+"osd.find_online_sub" = "Cercant subtítols en línia…";
+"osd.find_online_sub.source" = "desd de";
+"osd.sub_not_found" = "No s'han trobat subtítols";
+"osd.sub_found" = "%d subtítols trobats. Baixant…";
+"osd.sub_downloaded" = "Subtítols baixats";
+"osd.sub_saved" = "Subtítols desats";
+"osd.network_error" = "Error de xarxa";
+"osd.file_error" = "Error llegint el fitxer";
+"osd.cannot_login" = "No és possible iniciar sessió";
+"osd.canceled" = "Cancel·lat";
+"osd.filter_added" = "Filtre afegit: %@";
+"osd.filter_removed" = "Filtre suprimit";
+
+"preference.title" = "Preferències";
+"preference.general" = "General";
+"preference.ui" = "Interfície";
+"preference.video_audio" = "Vídeo/Àudio";
+"preference.subtitle" = "Subtítols";
+"preference.network" = "Xarxa";
+"preference.control" = "Controls";
+"preference.keybindings" = "Dreceres de teclar";
+"preference.advanced" = "Avançat";
+"preference.utilities" = "Utilitats";
+"preference.scripts" = "Scripts";
+"preference.not_logged_in" = "Sense sessió";
+"preference.logged_in_as" = "Amb sessió com a %@";
+"preference.system_media_control" = "Utilitza els controls multimèdia del sistema";
+
+"preference.key_binding_hint_1" = "Per editar les dreces de teclat en el fitxer actual, prem el bóto \"Duplica…\" per crear una còpia.";
+"preference.key_binding_hint_2" = "Doble clic a la dreta de la fila per editar la drecera de teclat corresponent.";
+
+"menu.volume" = "Volum: %d";
+"menu.audio_delay" = "Retard d'àudio: %.2fs";
+"menu.sub_delay" = "Retard en els subtítols: %.2fs";
+"menu.fullscreen" = "Pantalla completa";
+"menu.exit_fullscreen" = "Surt de la pantalla completa";
+"menu.pip" = "Picture-in-Picture";
+"menu.exit_pip" = "Surt del Picture-in-Picture";
+"menu.pause" = "Pausa";
+"menu.resume" = "Reprèn";
+"menu.speed" = "Velocitat: %.2fx";
+
+"menu.seek_forward" = "Avança %.0fs";
+"menu.seek_backward" = "Retrocedeix %.0fs";
+"menu.speed_up" = "Incrementa velocitat en %.1fx";
+"menu.speed_down" = "Redueix velocitat en %.1fx";
+"menu.volume_up" = "Volum + %.0f%%";
+"menu.volume_down" = "Volum - %.0f%%";
+"menu.audio_delay_up" = "Retarda d'àudio + %.1fs";
+"menu.audio_delay_down" = "Retarda d'àudio - %.1fs";
+"menu.sub_delay_up" = "Retarda en els subtítols + %.1fs";
+"menu.sub_delay_down" = "Retarda en els subtítols - %.1fs";
+
+"track.none" = "<Cap>";
+
+"subtrack.no_loaded" = "No s'han carregat subtítols";
+"subtrack.no_external" = "No s'han trobat subtítols externs";
+
+// Alerts
+"alert.beta_channel.title" = "Rebre actualitzacions de versions Beta";
+"alert.beta_channel.message" = "IINA v1.0 està de camí! T'agradaria ajudar-nos a provar les versions beta? \n\nPots canviar aquest comportament qualsevol moment a Preferències - General.";
+
+"alert.title_error" = "Error";
+"alert.title_warning" = "Avís";
+"alert.title_info" = "Informació";
+
+"alert.fatal_error" = "Error: fatal %@ \nL'aplicació es tancarà ara.";
+"alert.mpv_error" = "Error intern %@ (%@) establint la opció %@.";
+"alert.sleep" = "No es pot prevenir que la pantalla se'n vagi a dormir!";
+
+"alert.unsupported_audio" = "Fitxer d'àudio extern no compatible.";
+"alert.unsupported_sub" = "Subtítols no compatibles.";
+"alert.unsupported_url" = "Enllaç no compatible.";
+"alert.wrong_url_format" = "Format d'enllaç erroni.";
+
+"alert.error_open" = "No es pot obrir el fitxer!";
+"alert.error_finding_file" = "No es pot trobar el fitxer %@!";
+"alert.error_loading_script" = "No es pot carregar l'script %@!";
+"alert.error_saving_file" = "S'ha produït un error al desar %@: %@";
+"alert.error_deleting_file" = "No es pot suprimir el fitxer.";
+
+"alert.config.new.title" = "Nova configuració d'entrada";
+"alert.config.new.message" = "Si us plau introdueix un nom per a la nova configuració.";
+"alert.config.duplicate.title" = "Duplica configuració";
+"alert.config.duplicate.message" = "Si us plau introdueix un nom per el fixer de configuració duplicat.";
+"alert.config.empty_name" = "El nom no pot estar buit.";
+"alert.config.name_existing" = "El nom ja existeix.";
+"alert.config.file_existing.title" = "El fitxer ja existeix";
+"alert.config.file_existing.message" = "Això no hauria de passar. Selecciona D'acord per sobreescriure, Cancel·la per mostrar el fitxer al Finder.";
+"alert.config.cannot_create" = "No es pot crear el fitxer de configuració!\n%@";
+"alert.config.cannot_write" = "No es pot escriure en el fitxer de configuració!";
+
+"alert.filter.incorrect" = "Error establint filtres. Si us plau verifica el format dels paràmetres.";
+"alert.add_filter.title" = "Crea filtre";
+"alert.add_filter.message" = "Si us plau introdueix un filtre de text en format mpv's o format af.";
+
+"alert.keybinding_config.error" = "Error analitzant el fitxer \"%@\" de configuració de les dreceres de teclat! S'ha reestablert la configuració de defecte de IINA. Si us plau, verifica la configuració.";
+
+"alert.extra_option.cannot_read" = "No es poden llegir les opciones de mpv extra definides per l'usuari.";
+"alert.extra_option.empty" = "La clau o el valor no poden estar buits!";
+"alert.extra_option.error" = "Error establint la opció --%@=%@ amb el valor de retorn %d. Si us plau, verifica les opcions extres a Preferències > Avançat.";
+"alert.extra_option.config_folder" = "Error establing el directori de configuració \"%@\".";
+
+"alert.playlist.error_deleting" = "Error suprimint: %@";
+
+"alert.sub.no_selected" = "Si us plau, selecciona primer un dels subtítols baixats.";
+"alert.sub_lang_not_set" = "Si us plau, estableix un idioma per defecte a les preferències abans d'utilitzar OpenSubtitles. Anglès(eng) serà utilitzat aquesta vegada.";
+"alert.sub.cannot_save_passwd" = "No s'ha pogut desar la teva contrasenya en el Clauer: %@";
+"alert.sub.cannot_login" = "No s'ha pogut iniciar sessió. Si us play, verifica el teu nom d'usuari, la contrasenya i l'estat de la xarxa.\n\n%@";
+
+"alert.set_default.title" = "Establir IINA com aplicació per defecte";
+"alert.set_default.message" = "IINA serà establerta com a aplicació per defecte per a tots els tipus de fitxer que suporta.";
+"alert.set_default.success" = "S'ha acabat amb un %d d'èxit i un %d d'error.";
+
+"alert.add_watch.title" = "Afegeix una propietat de monitoreig";
+"alert.add_watch.message" = "Si us plau, introdueix un nom vàlid de propietat mpv.";
+
+"alert.jump_to.title" = "Salta a";
+"alert.jump_to.message" = "Si us plau, introdueix el moment de temps en el que vols saltar. Exemple: 20:35";
+
+"alert.opensub.login.title" = "Inicia sessió a OpenSubtitles";
+"alert.opensub.login.message" = "Si us plau, introdueix el nom d'usuari i contrasenya";
+
+"alert.open_url.title" = "Obre enllaç";
+"alert.open_url.message" = "Si us plau, introdueix l'enllaç:";
+"alert.choose_media_file.title" = "Selecciona el fitxers multimèdia";
+
+"alert.add_url.title" = "Afegeix enllaç";
+"alert.add_url.message" = "Si us plau, introdueix l'enllaç:";
+
+"alert.delete_history.title" = "Suprimeix l'historial de reproducció";
+"alert.delete_history.message" = "Estàs segur que vols surpirmir les entrades seleccionades?";
+
+"alert.filter_hwdec.message" = "Estàs a punt d'aplicat un filtre de vídeo. Malgrat això, és possible que el teu maquinari no suporti filtres de vídeo correctament. Pots desactivat la decodificació per maquinari o canviar a Automàtic(còpia), el qual consumeix el doble de memòria.\nPot ser que hagis de repetir la operació anterior (com establir l'espapçament) per a que funcioni.";
+"alert.filter_hwdec.abort" = "Interromp";
+"alert.filter_hwdec.turn_off" = "Desactiva decodificació per maquinari";
+"alert.filter_hwdec.use_copy" = "Canvia a Automàtic(còpia)";
+
+"alert.clear_cache.title" = "Neteja la memòria cau de les miniatures";
+"alert.clear_cache.message" = "Estàs segur que vols netejar tota la memòria cau de les miniatures?";
+
+"alert.clear_history.title" = "Suprimeix l'historial de reproducció";
+"alert.clear_history.message" = "Estàs segur que vols eliminar tot l'historial de reproducció?";
+
+"alert.clear_watch_later.title" = "Suprimeix el progrés de reproducció desat";
+"alert.clear_watch_later.message" = "Estàs segur que vols suprimir tot el progrés de reproducció desat? (dades de \"watch later\")?";
+
+"alert.nothing_to_open" = "Res per obrir.";
+
+"alert.no_video_track" = "No hi ha pista de vídeo.";
+
+"alert.duplicate_config" = "No es pot editar el fixer de configuració per defecte directament. Si us plau, crea un duplicat abans d'editar.";
+
+"alert.assrt_register" = "Degut a la quota limitada de la API, es recomanada l'ús del teu propi token de la API. El token per defecte és només per un ús de demostració, i pot provocar errors de connexió.";
+"alert.assrt_register.register" = "Registra ara";
+"alert.assrt_register.try" = "Prova-ho primer";
+"alert.assrt_token_prompt.title" = "Introdueix el teu token de la API";
+"alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
+"alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
+
+"playlist.total_length" = "%@ en total";
+"playlist.total_length_with_selected" = "%@ de %@ seleccionats";
+"pl_menu.title_multi" = "%d elements";
+"pl_menu.play_next" = "Reprodueix el següent";
+"pl_menu.play_in_new_window" = "Reprodueix en una finestra nova";
+"pl_menu.remove" = "Suprimeix";
+"pl_menu.remove_multi" = "Suprimeix els seleccionats";
+"pl_menu.delete" = "Mou a la papepera";
+"pl_menu.delete_multi" = "Mou els fitxer seleccionats a la papepera";
+"pl_menu.delete_after_play" = "Mou a la paperera després de la seva reproducció";
+"pl_menu.delete_after_play_multi" = "Mou els fitxer seleccionats a la paperera després de la seva reproducció";
+"pl_menu.reveal_in_finder" = "Mostra al Finder";
+"pl_menu.add_file" = "Afegeix fitxer…";
+"pl_menu.add_url" = "Afegeix enllaç…";
+"pl_menu.clear_playlist" = "Neteja llista de reproducció";
+"pl_menu.matched_sub" = "%d subtítol(s) trobats";
+"pl_menu.add_sub" = "Afegeix subtítol…";
+"pl_menu.wrong_sub" = "Wrong Subtitle!";
+"pl_menu.browser" = "Obre al navegador";
+"pl_menu.copy_url" = "Copia l'enllaç";
+"pl_menu.copy_url_multi" = "Copia els enllaços";
+
+"keymapping.title" = "Assignació de tecles";
+"keymapping.message" = "Prem qualsevol tecla per començar a gravar.";
+
+"filter.video_filters" = "Filtres de vídeo";
+"filter.audio_filters" = "Filtres d'àudio";
+
+"hwdec.no" = "Desactiva decodificació per maquinari.";
+"hwdec.auto" = "Activa decodificació per maquinari. Malgrat això, molts dels filtres de vídeo no funcionaràn correctament.";
+"hwdec.auto-copy" = "Activa decodificació per maquinari.  Consumeix el doble de memòria però funciona amb els filtres de vídeo.";
+
+"subencoding.auto" = "Detecta automàticament";
+
+"osc_toolbar.settings" = "Preferències ràpides";
+"osc_toolbar.playlist" = "Llistes de reproducció i capítols";
+"osc_toolbar.pip" = "Commuta Picture-in-Picture";
+"osc_toolbar.full_screen" = "Commuta pantalla completa";
+"osc_toolbar.music_mode" = "Canvia a mode de música";
+"osc_toolbar.sub_track" = "Selecciona la pista dels subtítols";
+
+// Touch bar
+
+"touchbar.ahead_15" = "Avança 15sec";
+"touchbar.ahead_30" = "Avança 30sec";
+"touchbar.back_15" = "Retrocedeix 15sec";
+"touchbar.back_30" = "Retrocedeix 30sec";
+"touchbar.next_video" = "Vídeo següent";
+"touchbar.prev_video" = "Vídeo anterior";
+"touchbar.increase_volume" = "Volum +";
+"touchbar.decrease_volume" = "Volum -";
+"touchbar.rewind" = "Rebobina";
+"touchbar.fast_forward" = "Avança ràpid";
+"touchbar.play_pause" = "Reprodueix / Pausa";
+"touchbar.seek" = "Cerca";
+"touchbar.time" = "Posició en el temps";
+"touchbar.remainingTime" = "Temps restant";
+"touchbar.toggle_pip" = "Commuta Picture-in-Picture";

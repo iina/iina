@@ -74,6 +74,7 @@ struct Preference {
     static let resumeLastPosition = Key("resumeLastPosition")
 
     static let alwaysFloatOnTop = Key("alwaysFloatOnTop")
+    static let alwaysShowOnTopIcon = Key("alwaysShowOnTopIcon")
 
     static let pauseWhenMinimized = Key("pauseWhenMinimized")
     static let pauseWhenInactive = Key("pauseWhenInactive")
@@ -219,6 +220,7 @@ struct Preference {
     static let verticalScrollAction = Key("verticalScrollAction")
     static let horizontalScrollAction = Key("horizontalScrollAction")
 
+    static let videoViewAcceptsFirstMouse = Key("videoViewAcceptsFirstMouse")
     static let singleClickAction = Key("singleClickAction")
     static let doubleClickAction = Key("doubleClickAction")
     static let rightClickAction = Key("rightClickAction")
@@ -227,6 +229,7 @@ struct Preference {
     static let forceTouchAction = Key("forceTouchAction")
 
     static let showRemainingTime = Key("showRemainingTime")
+    static let touchbarShowRemainingTime = Key("touchbarShowRemainingTime")
 
     static let followGlobalSeekTypeWhenAdjustSlider = Key("followGlobalSeekTypeWhenAdjustSlider")
 
@@ -253,6 +256,8 @@ struct Preference {
     /** Log to log folder (bool) */
     static let enableLogging = Key("enableLogging")
     static let logLevel = Key("logLevel")
+
+    static let displayKeyBindingRawValues = Key("displayKeyBindingRawValues")
 
     /** unused */
     // static let resizeFrameBuffer = Key("resizeFrameBuffer")
@@ -676,6 +681,7 @@ struct Preference {
     .useMediaKeys: true,
     .useAppleRemote: false,
     .alwaysFloatOnTop: false,
+    .alwaysShowOnTopIcon: false,
     .blackOutMonitor: false,
     .pauseWhenMinimized: false,
     .pauseWhenInactive: false,
@@ -691,6 +697,7 @@ struct Preference {
     .resizeWindowTiming: ResizeWindowTiming.onlyWhenOpen.rawValue,
     .resizeWindowOption: ResizeWindowOption.videoSize10.rawValue,
     .showRemainingTime: false,
+    .touchbarShowRemainingTime: true,
     .enableThumbnailPreview: true,
     .maxThumbnailPreviewCacheSize: 500,
     .enableThumbnailForRemoteFiles: false,
@@ -739,7 +746,7 @@ struct Preference {
     .subMarginY: Float(22),
     .subPos: Float(100),
     .subLang: "",
-    .onlineSubSource: OnlineSubtitle.Source.shooter.rawValue,
+    .onlineSubSource: OnlineSubtitle.Source.openSub.rawValue,
     .displayInLetterBox: true,
     .subScaleWithWindow: true,
     .openSubUsername: "",
@@ -751,7 +758,7 @@ struct Preference {
     .enableCache: true,
     .defaultCacheSize: 153600,
     .cacheBufferSize: 153600,
-    .secPrefech: 100,
+    .secPrefech: 36000,
     .userAgent: "",
     .transportRTSPThrough: RTSPTransportation.tcp.rawValue,
     .ytdlEnabled: true,
@@ -766,6 +773,7 @@ struct Preference {
     .useMpvOsd: false,
     .enableLogging: false,
     .logLevel: Logger.Level.debug.rawValue,
+    .displayKeyBindingRawValues: false,
     .userOptions: [],
     .useUserDefinedConfDir: false,
     .userDefinedConfDir: "~/.config/mpv/",
@@ -778,6 +786,7 @@ struct Preference {
     .volumeScrollAmount: 3,
     .verticalScrollAction: ScrollAction.volume.rawValue,
     .horizontalScrollAction: ScrollAction.seek.rawValue,
+    .videoViewAcceptsFirstMouse: false,
     .singleClickAction: MouseClickAction.hideOSC.rawValue,
     .doubleClickAction: MouseClickAction.fullscreen.rawValue,
     .rightClickAction: MouseClickAction.pause.rawValue,

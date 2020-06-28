@@ -8,6 +8,12 @@
 
 import Cocoa
 
+fileprivate extension QuickSettingViewController.TabViewType {
+  init(buttonTag: Int) {
+    self = [.video, .audio, .sub][at: buttonTag] ?? .video
+  }
+}
+
 class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, SidebarViewController {
 
   override var nibName: NSNib.Name {
@@ -63,7 +69,9 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var speedSliderIndicator: NSTextField!
   @IBOutlet weak var speedSliderConstraint: NSLayoutConstraint!
   @IBOutlet weak var customSpeedTextField: NSTextField!
-  @IBOutlet weak var deinterlaceCheckBtn: NSButton!
+  @IBOutlet weak var switchHorizontalLine: NSBox!
+  @IBOutlet weak var hardwareDecodingSwitch: Switch!
+  @IBOutlet weak var deinterlaceSwitch: Switch!
 
   @IBOutlet weak var brightnessSlider: NSSlider!
   @IBOutlet weak var contrastSlider: NSSlider!
@@ -130,6 +138,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
 
     subLoadSementedControl.image(forSegment: 1)?.isTemplate = true
+    switchHorizontalLine.wantsLayer = true
+    switchHorizontalLine.layer?.opacity = 0.5
 
     func observe(_ name: Notification.Name, block: @escaping (Notification) -> Void) {
       observers.append(NotificationCenter.default.addObserver(forName: name, object: player, queue: .main, using: block))
@@ -171,18 +181,27 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   private func updateVideoTabControl() {
-    if let index = AppData.aspectsInPanel.index(of: player.info.unsureAspect) {
+    if let index = AppData.aspectsInPanel.firstIndex(of: player.info.unsureAspect) {
       aspectSegment.selectedSegment = index
     } else {
       aspectSegment.selectedSegment = -1
     }
-    if let index = AppData.cropsInPanel.index(of: player.info.unsureCrop) {
+    if let index = AppData.cropsInPanel.firstIndex(of: player.info.unsureCrop) {
       cropSegment.selectedSegment = index
     } else {
       cropSegment.selectedSegment = -1
     }
-    rotateSegment.selectSegment(withTag: AppData.rotations.index(of: player.info.rotation) ?? -1)
-    deinterlaceCheckBtn.state = player.info.deinterlace ? .on : .off
+    rotateSegment.selectSegment(withTag: AppData.rotations.firstIndex(of: player.info.rotation) ?? -1)
+
+    deinterlaceSwitch.checked = player.info.deinterlace
+    deinterlaceSwitch.action = {
+      self.player.toggleDeinterlace($0)
+    }
+    hardwareDecodingSwitch.checked = player.info.hwdecEnabled
+    hardwareDecodingSwitch.action = {
+      self.player.toggleHardwareDecoding($0)
+    }
+
     let speed = player.mpv.getDouble(MPVOption.PlaybackControl.speed)
     customSpeedTextField.doubleValue = speed
     let sliderValue = log(speed / AppData.minSpeed) / log(AppData.maxSpeed / AppData.minSpeed) * sliderSteps
@@ -375,8 +394,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   @IBAction func tabBtnAction(_ sender: NSButton) {
     tabView.selectTabViewItem(at: sender.tag)
-    [videoTabBtn, audioTabBtn, subTabBtn].forEach { Utility.setActive($0, false) }
-    Utility.setActive(sender, true)
+    [videoTabBtn, audioTabBtn, subTabBtn].forEach { Utility.setBoldTitle(for: $0, $0 == sender) }
+    currentTab = .init(buttonTag: sender.tag)
     reload()
   }
 
@@ -385,19 +404,19 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBAction func aspectChangedAction(_ sender: NSSegmentedControl) {
     let aspect = AppData.aspectsInPanel[sender.selectedSegment]
     player.setVideoAspect(aspect)
-    mainWindow.displayOSD(.aspect(aspect))
+    player.sendOSD(.aspect(aspect))
   }
 
   @IBAction func cropChangedAction(_ sender: NSSegmentedControl) {
     let cropStr = AppData.cropsInPanel[sender.selectedSegment]
     player.setCrop(fromString: cropStr)
-    mainWindow.displayOSD(.crop(cropStr))
+    player.sendOSD(.crop(cropStr))
   }
 
   @IBAction func rotationChangedAction(_ sender: NSSegmentedControl) {
     let value = AppData.rotations[sender.selectedSegment]
     player.setVideoRotate(value)
-    mainWindow.displayOSD(.rotate(value))
+    player.sendOSD(.rotate(value))
   }
 
   @IBAction func customAspectEditFinishedAction(_ sender: AnyObject?) {
@@ -405,7 +424,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     if value != "" {
       aspectSegment.setSelected(false, forSegment: aspectSegment.selectedSegment)
       player.setVideoAspect(value)
-      mainWindow.displayOSD(.aspect(value))
+      player.sendOSD(.aspect(value))
     }
   }
 
@@ -449,10 +468,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     if let window = sender.window {
       window.makeFirstResponder(window.contentView)
     }
-  }
-
-  @IBAction func deinterlaceBtnAction(_ sender: AnyObject) {
-    player.toggleDeinterlace(deinterlaceCheckBtn.state == .on)
   }
 
   @IBAction func equalizerSliderAction(_ sender: NSSlider) {
@@ -701,10 +716,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   @IBAction func subTextSizeAction(_ sender: AnyObject) {
-    if let selectedItem = subTextSizePopUp.selectedItem {
-      if let value = Double(selectedItem.title) {
-        player.setSubTextSize(value)
-      }
+    if let selectedItem = subTextSizePopUp.selectedItem, let value = Double(selectedItem.title) {
+      player.setSubTextSize(value)
     }
   }
 
@@ -713,7 +726,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   @IBAction func subTextBorderWidthAction(_ sender: AnyObject) {
-    if let value = Double(subTextBorderWidthPopUp.stringValue) {
+    if let selectedItem = subTextBorderWidthPopUp.selectedItem, let value = Double(selectedItem.title) {
       player.setSubTextBorderSize(value)
     }
   }

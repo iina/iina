@@ -1,12 +1,11 @@
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "I8a-rb-zex"; */
 "I8a-rb-zex.title" = "취소";
 
-/* Class = "NSTextFieldCell"; title = "Select Region"; ObjectID = "mCM-Di-cvS"; */
-"mCM-Di-cvS.title" = "영역 선택";
-
 /* Class = "NSButtonCell"; title = "Done"; ObjectID = "SFp-iy-h4f"; */
 "SFp-iy-h4f.title" = "완료";
 
 /* Class = "NSTextFieldCell"; title = "Drag to select the desired region."; ObjectID = "XyF-Qa-CSn"; */
 "XyF-Qa-CSn.title" = "마우스로 끌어 영역을 선택하십시오.";
 
+/* Class = "NSTextFieldCell"; title = "Select Region"; ObjectID = "mCM-Di-cvS"; */
+"mCM-Di-cvS.title" = "영역 선택";

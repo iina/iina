@@ -156,7 +156,7 @@ class PrefOSCToolbarCurrentItemsView: NSStackView, NSDraggingSource {
   func draggingSession(_ session: NSDraggingSession, willBeginAt screenPoint: NSPoint) {
     if let itemBeingDragged = itemBeingDragged {
       // remove the dragged view and insert a placeholder at its position.
-      let index = views.index(of: itemBeingDragged)!
+      let index = views.firstIndex(of: itemBeingDragged)!
       removeView(itemBeingDragged)
       Utility.quickConstraints(["H:[v(24)]", "V:[v(24)]"], ["v": placeholderView])
       insertView(placeholderView, at: index, in: .trailing)

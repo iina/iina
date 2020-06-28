@@ -11,7 +11,7 @@ import Foundation
 fileprivate typealias PM = FilterParameter
 
 /**
- A fliter preset or tamplate, which contains the filter name and definitions of all parameters.
+ A filter preset or tamplate, which contains the filter name and definitions of all parameters.
  */
 class FilterPreset {
   typealias Transformer = (FilterPresetInstance) -> MPVFilter

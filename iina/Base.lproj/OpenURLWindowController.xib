@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -25,19 +25,19 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <windowCollectionBehavior key="collectionBehavior" fullScreenNone="YES"/>
             <rect key="contentRect" x="1062" y="556" width="576" height="270"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="3840" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <view key="contentView" wantsLayer="YES" misplaced="YES" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="576" height="270"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <visualEffectView appearanceType="inheritedVibrantLight" blendingMode="behindWindow" material="underWindowBackground" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="X1z-XY-que">
-                        <rect key="frame" x="0.0" y="0.0" width="579" height="256"/>
+                        <rect key="frame" x="0.0" y="0.0" width="576" height="256"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cWl-pb-Ohf">
-                                <rect key="frame" x="16" y="216" width="547" height="24"/>
+                                <rect key="frame" x="16" y="216" width="544" height="24"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eo6-z2-yqh">
-                                        <rect key="frame" x="-2" y="0.0" width="59" height="24"/>
+                                        <rect key="frame" x="-2" y="0.0" width="56" height="24"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="http://" id="kqT-tD-Wzp">
                                             <font key="font" metaFont="system" size="20"/>
                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -45,8 +45,8 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H7k-7S-pad">
-                                        <rect key="frame" x="57" y="0.0" width="492" height="24"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" focusRingType="none" placeholderString="Please enter the URL here……" id="XV7-VP-Ua2">
+                                        <rect key="frame" x="54" y="0.0" width="492" height="24"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" focusRingType="none" placeholderString="Please enter the URL here……" usesSingleLineMode="YES" id="XV7-VP-Ua2">
                                             <font key="font" metaFont="system" size="20"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -69,7 +69,7 @@
                                 </customSpacing>
                             </stackView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bUw-Ua-E9U">
-                                <rect key="frame" x="496" y="9" width="73" height="32"/>
+                                <rect key="frame" x="493" y="9" width="73" height="32"/>
                                 <buttonCell key="cell" type="push" title="Open" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8sC-lH-DOd">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -82,7 +82,7 @@ DQ
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="B9e-iq-atc">
-                                <rect key="frame" x="418" y="9" width="82" height="32"/>
+                                <rect key="frame" x="415" y="9" width="82" height="32"/>
                                 <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="iNG-ee-EW6">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -111,9 +111,9 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <box title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="qud-MM-CKm">
-                                <rect key="frame" x="21" y="57" width="537" height="112"/>
+                                <rect key="frame" x="21" y="57" width="534" height="112"/>
                                 <view key="contentView" id="UGp-0p-kT0">
-                                    <rect key="frame" x="3" y="3" width="531" height="106"/>
+                                    <rect key="frame" x="3" y="3" width="528" height="106"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EO0-B1-NEj">
@@ -125,7 +125,7 @@ Gw
                                             </textFieldCell>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="11C-SC-jkc">
-                                            <rect key="frame" x="270" y="76" width="55" height="14"/>
+                                            <rect key="frame" x="268" y="76" width="55" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="Password" id="uM6-Bp-Wdk">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -133,7 +133,7 @@ Gw
                                             </textFieldCell>
                                         </textField>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AAr-OR-upR">
-                                            <rect key="frame" x="16" y="46" width="240" height="22"/>
+                                            <rect key="frame" x="16" y="46" width="238" height="22"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="i6U-Vn-OMz">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -141,7 +141,7 @@ Gw
                                             </textFieldCell>
                                         </textField>
                                         <secureTextField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="P8y-xt-YCV">
-                                            <rect key="frame" x="272" y="46" width="239" height="22"/>
+                                            <rect key="frame" x="270" y="46" width="238" height="22"/>
                                             <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="ub0-4i-uZc">
                                                 <font key="font" usesAppearanceFont="YES"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>

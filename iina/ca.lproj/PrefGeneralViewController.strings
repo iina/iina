@@ -1,0 +1,131 @@
+/* Class = "NSMenuItem"; title = "Show open file panel"; ObjectID = "1ce-4b-kgG"; */
+"1ce-4b-kgG.title" = "Obre un fitxer";
+
+/* Class = "NSButtonCell"; title = "Keep window open after playback finishes"; ObjectID = "2iM-j7-AzQ"; */
+"2iM-j7-AzQ.title" = "Manté la finstra activa una vegada acabada la reproducció";
+
+/* Class = "NSButtonCell"; title = "Save to"; ObjectID = "2rJ-mg-OuU"; */
+"2rJ-mg-OuU.title" = "Desa a";
+
+/* Class = "NSButtonCell"; title = "Copy to clipboard"; ObjectID = "3gs-3w-rg6"; */
+"3gs-3w-rg6.title" = "Copia al porta-retalls";
+
+/* Class = "NSTextFieldCell"; title = "Options:"; ObjectID = "4Qe-7S-8xK"; */
+"4Qe-7S-8xK.title" = "Opcions:";
+
+/* Class = "NSButtonCell"; title = "Enable \"Open Recent\" menu"; ObjectID = "55O-ik-ql6"; */
+"55O-ik-ql6.title" = "Habilita el menú \"Obre un fitxer recent\"";
+
+/* Class = "NSButtonCell"; title = "Minimized/un-minimized"; ObjectID = "5Y9-bX-K0f"; */
+"5Y9-bX-K0f.title" = "Minimitza/desminitmitza";
+
+/* Class = "NSTextFieldCell"; title = "Playlist:"; ObjectID = "6TV-DG-503"; */
+"6TV-DG-503.title" = "Llista de reproducció:";
+
+/* Class = "NSTextFieldCell"; title = "Requires restarting IINA to take effect."; ObjectID = "8kU-8g-VgX"; */
+"8kU-8g-VgX.title" = "És necessari reiniciar IINA per tenir efecte";
+
+/* Class = "NSButtonCell"; title = "Track all played files in \"Open Recent\" menu"; ObjectID = "Ci8-j2-QS3"; */
+"Ci8-j2-QS3.title" = "Registra tots els fitxers reproduits en el menú \"Obre un fitxer recent\"";
+
+/* Class = "NSMenuItem"; title = "Daily"; ObjectID = "Ez8-qY-WAZ"; */
+"Ez8-qY-WAZ.title" = "Diariàment";
+
+/* Class = "NSButtonCell"; title = "Pause"; ObjectID = "FbF-jJ-W5b"; */
+"FbF-jJ-W5b.title" = "Pausa";
+
+/* Class = "NSTextFieldCell"; title = "When media opened:"; ObjectID = "GNV-VA-NBW"; */
+"GNV-VA-NBW.title" = "Al obrir un fitxer multimèdia:";
+
+/* Class = "NSMenuItem"; title = "Weekly"; ObjectID = "Imf-6g-2Cd"; */
+"Imf-6g-2Cd.title" = "Setmanalment";
+
+/* Class = "NSButtonCell"; title = "Window became inactive/active"; ObjectID = "J8g-aS-W6e"; */
+"J8g-aS-W6e.title" = "La finestra esdevé activa/inactiva";
+
+/* Class = "NSMenuItem"; title = "Do nothing"; ObjectID = "JfZ-D8-aF2"; */
+"JfZ-D8-aF2.title" = "No fer res";
+
+/* Class = "NSButtonCell"; title = "Black out other monitors while in full screen"; ObjectID = "KYi-0W-zOr"; */
+"KYi-0W-zOr.title" = "Apagar els altres monitors en pantalla completa";
+
+/* Class = "NSButtonCell"; title = "Switch to \"music mode\" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
+"KfL-r7-Uav.title" = "Canvia a \"mode música\" automàticament quan es reprodueixi un fitxer d'àudio";
+
+/* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
+"Lac-Ol-g6E.title" = "Reprodueix següent element automàticament";
+
+/* Class = "NSButtonCell"; title = "Always open media in new window"; ObjectID = "M0z-bI-88d"; */
+"M0z-bI-88d.title" = "Sempre obrir en una nova finestra";
+
+/* Class = "NSButtonCell"; title = "Enter fullscreen"; ObjectID = "MlG-hl-goB"; */
+"MlG-hl-goB.title" = "Pantalla completa";
+
+/* Class = "NSTextFieldCell"; title = "Destination:"; ObjectID = "PhL-vP-i7L"; */
+"PhL-vP-i7L.title" = "Destí:";
+
+/* Class = "NSButtonCell"; title = "Add files in the same folder automatically"; ObjectID = "QJq-fO-hhK"; */
+"QJq-fO-hhK.title" = "Afegeix fitxers en la mateixa carpeta automàticament";
+
+/* Class = "NSMenuItem"; title = "Monthly"; ObjectID = "REP-70-XOi"; */
+"REP-70-XOi.title" = "Mensualment";
+
+/* Class = "NSButtonCell"; title = "Use legacy full screen"; ObjectID = "TvB-UM-FrS"; */
+"TvB-UM-FrS.title" = "Utilitza pantalla completa antic";
+
+/* Class = "NSTextFieldCell"; title = "Otherwise only files that opened manually will show up in this menu."; ObjectID = "XFC-Lr-LmP"; */
+"XFC-Lr-LmP.title" = "D'altra manera només els fitxers oberts manualment es mostraràn en aquest menú.";
+
+/* Class = "NSButtonCell"; title = "Quit after all windows are closed"; ObjectID = "YLo-6E-tT7"; */
+"YLo-6E-tT7.title" = "Surt quan totes les finestres es tanquin";
+
+/* Class = "NSTextFieldCell"; title = "/path/to/screenshot/folder"; ObjectID = "YeH-hk-7NN"; */
+"YeH-hk-7NN.title" = "/camí/a/la/carpeta/captures/de/pantalla";
+
+/* Class = "NSButtonCell"; title = "Receive beta updates"; ObjectID = "f0j-Dn-cxt"; */
+"f0j-Dn-cxt.title" = "Rebre actualitzacions beta";
+
+/* Class = "NSButtonCell"; title = "Pause when left full screen"; ObjectID = "g2A-Kf-vct"; */
+"g2A-Kf-vct.title" = "Pausa quan surt de la pantalla completa";
+
+/* Class = "NSTextFieldCell"; title = "When launched:"; ObjectID = "gqT-CB-Puw"; */
+"gqT-CB-Puw.title" = "Al executar-se:";
+
+/* Class = "NSButtonCell"; title = "Check for updates"; ObjectID = "hWC-KJ-FuC"; */
+"hWC-KJ-FuC.title" = "Cerca actualitzacions";
+
+/* Class = "NSButtonCell"; title = "Pause when machine goes to sleep"; ObjectID = "i4A-86-dGC"; */
+"i4A-86-dGC.title" = "Pausa quan la màquina se'n vagi a dormir";
+
+/* Class = "NSButtonCell"; title = "Enable playback history"; ObjectID = "iGS-qN-f5q"; */
+"iGS-qN-f5q.title" = "Activa historial de reproducció";
+
+/* Class = "NSButtonCell"; title = "Resume last playback position"; ObjectID = "jOB-D3-WT3"; */
+"jOB-D3-WT3.title" = "Reprèn la reproducció en la última posició";
+
+/* Class = "NSTextFieldCell"; title = "History:"; ObjectID = "jeK-46-2BG"; */
+"jeK-46-2BG.title" = "Historial:";
+
+/* Class = "NSButtonCell"; title = "Play when entered full screen"; ObjectID = "lOw-pu-Llm"; */
+"lOw-pu-Llm.title" = "Reprodueix quan canvia a pantalla completa";
+
+/* Class = "NSButtonCell"; title = "Include subtitles"; ObjectID = "lvA-Rc-Sh6"; */
+"lvA-Rc-Sh6.title" = "Inclou subtítols";
+
+/* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "oJY-Iz-3sO"; */
+"oJY-Iz-3sO.title" = "Format:";
+
+/* Class = "NSTextFieldCell"; title = "Screenshots:"; ObjectID = "pdx-zt-kf2"; */
+"pdx-zt-kf2.title" = "Captures de pantalla:";
+
+/* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "slG-Jb-54B"; */
+"slG-Jb-54B.title" = "Cada hora";
+
+/* Class = "NSTextFieldCell"; title = "Behavior:"; ObjectID = "uQR-Fx-oEm"; */
+"uQR-Fx-oEm.title" = "Comportament:";
+
+/* Class = "NSTextFieldCell"; title = "Pause/resume when:"; ObjectID = "xr2-rB-O0x"; */
+"xr2-rB-O0x.title" = "Pausa/reprèn quan:";
+
+/* Class = "NSMenuItem"; title = "Show welcome window"; ObjectID = "z9T-8h-1T0"; */
+"z9T-8h-1T0.title" = "Mostra la finestra de benvinguda";

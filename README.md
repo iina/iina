@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://github.com/iina/iina/raw/master/iina/Assets.xcassets/AppIcon.appiconset/256-1.png" />
+<img height="256" src="https://github.com/iina/iina/raw/master/iina/Assets.xcassets/AppIcon.appiconset/1024-1.png" />
 </p>
 
 <h1 align="center">IINA</h1>
@@ -33,41 +33,74 @@
 
 ## Building
 
-IINA ships with pre-compiled dynamic libraries for convenience reasons. If you aren't planning on modifying these libraries, you can follow the instructions below to build IINA; otherwise, skip down to [Building mpv manually](#building-mpv-manually) and then run the steps here:
-
-### Using the pre-compiled libraries
-
 1. IINA uses [CocoaPods](https://cocoapods.org) for managing the installation of third-party libraries. If you don't already have it installed, here's how you can do so:
 
-#### Using RubyGems
-```console
-$ sudo gem install cocoapods
-```
+	#### Using RubyGems
+	```console
+	$ sudo gem install cocoapods
+	```
 
-#### Using Homebrew
-```console
-$ brew install cocoapods
-```
+	#### Using Homebrew
+	```console
+	$ brew install cocoapods
+	```
 
 2. Run `pod install` in project's root directory.
 
-3. Open iina.xcworkspace in the [latest public version of Xcode](https://itunes.apple.com/us/app/xcode/id497799835). *IINA may not build if you use any other version.*
+IINA ships with pre-compiled dynamic libraries for convenience reasons. If you aren't planning on modifying these libraries, you can follow the instructions below to build IINA; otherwise, skip down to [Building mpv manually](#building-mpv-manually):
+
+### Using the pre-compiled libraries
+
+1. Open iina.xcworkspace in the [latest public version of Xcode](https://itunes.apple.com/us/app/xcode/id497799835). *IINA may not build if you use any other version.*
+
+2. Build the project.
 
 ### Building mpv manually
 
-1. Install mpv:
+1. Build your own copy of mpv. If you're using a package manager to manage dependencies, the steps below outline the process.
 
-```console
-$ brew install mpv --with-uchardet
-```
-Feel free to include your own copies of the other libraries if you'd like.
+	#### Homebrew
 
-2. Copy latest [header files](https://github.com/mpv-player/mpv/tree/master/libmpv) into `libmpv/include/mpv/`.
+	Use our tap as it passes in the correct flags to mpv's configure script:
+
+	```console
+	$ brew tap iina/homebrew-mpv-iina
+	$ brew install mpv-iina
+	```
+
+	#### MacPorts
+
+	Pass in these flags when installing:
+
+	```console
+	# port install mpv +uchardet -bundle -rubberband configure.args="--enable-libmpv-shared --enable-lua --enable-libarchive --enable-libbluray --disable-swift --disable-rubberband"
+	```
+
+2. Copy the latest [header files from mpv](https://github.com/mpv-player/mpv/tree/master/libmpv) (\*.h) into `deps/include/mpv/`.
 
 3. Run `other/parse_doc.rb`. This script will fetch the latest mpv documentation and generate `MPVOption.swift`, `MPVCommand.swift` and `MPVProperty.swift`. This is only needed when updating libmpv. Note that if the API changes, the player source code may also need to be changed.
 
-4. Run `other/change_lib_dependencies.rb`. This script will deploy the depended libraries into `libmpv/libs`.
-  Make sure you have a phase copying of all these dylibs in Xcode's build settings.
+4. Run `other/change_lib_dependencies.rb`. This script will deploy the dependent libraries into `deps/lib`. If you're using a package manager to manage dependencies, invoke it like so:
+
+    #### Homebrew
+
+    ```console
+    $ other/change_lib_dependencies.rb "$(brew --prefix)" "$(brew --prefix mpv-iina)/lib/libmpv.dylib"
+    ```
+
+    #### MacPorts
+
+    ```console
+    $ port contents mpv | grep '\.dylib$' | xargs other/change_lib_dependencies.rb /opt/local
+    ```
+
+5. Open iina.xcworkspace in the [latest public version of Xcode](https://itunes.apple.com/us/app/xcode/id497799835). *IINA may not build if you use any other version.*
+
+6. Remove all of references to .dylib files from the Frameworks group in the sidebar and drag all the .dylib files in `deps/lib` to that group.
+
+7. Drag all the .dylib files in `deps/lib` into the "Embedded Binaries" section of the iina target.
+
+8. Build the project.
 
 ## Contributing
 
@@ -76,4 +109,5 @@ IINA is always looking for contributions, whether it's through bug reports, code
 * If you find a bug in IINA, or would like to suggest a new feature or enhancement, it'd be nice if you could [search your problem first](https://github.com/iina/iina/issues); while we don't mind duplicates, keeping issues unique helps us save time and considates effort. If you can't find your issue, feel free to [file a new one](https://github.com/iina/iina/issues/new).
 
 * If you're looking to contribute code, please read [CONTRIBUTING.md](CONTRIBUTING.md)–it has information on IINA's process for handling contributions, and tips on how the code is structured to make your work easier.
-* If you'd like to translate IINA to your language, please check the [Translation Status](https://github.com/iina/iina/wiki/Translation-Status) page first: if a language is labeled as "Need help", then feel free to [update the translation](https://github.com/iina/iina/wiki/Translation#update-translations). If it doesn't contain your language at all, you can [submit a new translation](https://github.com/iina/iina/wiki/Translation). If you need help working on a translation, you can contact [@lhc70000](https://github.com/lhc70000) or file an issue and one of the maintainers will try to help you out.
+
+* If you'd like to translate IINA to your language, please visit [IINA's instance of Crowdin](https://translate.iina.io). You can create an account for free and start translating and/or approving. Please do not send pull request to this repo directly, Crowdin will automatically sync new translations with our repo. If you want to translate IINA into a new language that is currently not in the list, feel free to open an issue.

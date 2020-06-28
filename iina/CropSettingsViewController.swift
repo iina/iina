@@ -27,25 +27,25 @@ class CropSettingsViewController: CropBoxViewController {
   }
 
   @IBAction func doneBtnAction(_ sender: AnyObject) {
-    let playerCore = mainWindow.player
+    let player = mainWindow.player
 
     mainWindow.exitInteractiveMode {
       if self.cropx == 0 && self.cropy == 0 &&
-        self.cropw == playerCore.info.videoWidth &&
-        self.croph == playerCore.info.videoHeight {
+        self.cropw == player.info.videoWidth &&
+        self.croph == player.info.videoHeight {
         // if no crop, remove the crop filter
-        if let vf = playerCore.info.cropFilter {
-          let _ = playerCore.removeVideoFilter(vf)
-          playerCore.info.unsureCrop = "None"
+        if let vf = player.info.cropFilter {
+          let _ = player.removeVideoFilter(vf)
+          player.info.unsureCrop = "None"
           return
         }
       }
       // else, set the filter
       let filter = MPVFilter.crop(w: self.cropw, h: self.croph, x: self.cropx, y: self.cropy)
-      playerCore.setCrop(fromFilter: filter)
+      player.setCrop(fromFilter: filter)
       // custom crop has no corresponding menu entry
-      playerCore.info.unsureCrop = ""
-      self.mainWindow.displayOSD(.crop(self.readableCropString))
+      player.info.unsureCrop = ""
+      player.sendOSD(.crop(self.readableCropString))
     }
   }
 

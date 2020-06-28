@@ -1,46 +1,46 @@
-/* 
+/*
   FilterPresets.strings
   iina
 
   Created by lhc on 25/8/2017.
   Copyright © 2017 lhc. All rights reserved.
 */
-
-
 /* It's optional to localize descriptions for each parameter! */
+
+
 
 "crop" = "Cortar";
 "crop.w" = "Ancho (por defecto: ancho del vídeo)";
-"crop.h" = "Altura (por defecto: altura del vídeo)";
+"crop.h" = "Alto (por defecto: alto del vídeo)";
 "crop.x" = "Origen X (por defecto: centro)";
 "crop.y" = "Origen Y (por defecto: centro)";
 
 "expand" = "Expandir";
 "expand.w" = "Ancho (por defecto: ancho del vídeo)";
-"expand.h" = "Altura (por defecto: altura del vídeo)";
+"expand.h" = "Alto (por defecto: alto del vídeo)";
 "expand.x" = "Origen X (por defecto: centro)";
 "expand.y" = "Origen Y (por defecto: centro)";
-"expand.aspect" = "Expandir para ajustar a un aspecto (ej: 4/3)";
+"expand.aspect" = "Expandir para ajustarse a una relación de aspecto (ej.: 4/3)";
 "expand.round" = "Redondear para hacer divisible por este valor";
 
 "sharpen" = "Enfocar";
-"sharpen.msize" = "Tamaño de la matriz";
+"sharpen.msize" = "Tamaño de la matriz de puntos";
 "sharpen.amount" = "Cantidad";
 
 "blur" = "Desenfocar";
-"blur.msize" = "Tamaño de la matriz";
+"blur.msize" = "Tamaño de la matriz de puntos";
 "blur.amount" = "Cantidad";
 
-"delogo" = "Delogo";
+"delogo" = "Delogo es un filtro de video que remueve los logos en el video";
 "delogo.w" = "Ancho";
-"delogo.h" = "Altura";
+"delogo.h" = "Alto";
 "delogo.x" = "Origen X";
 "delogo.y" = "Origen Y";
 
 "negative" = "Negativo";
 
-"vflip" = "Voltear";
-"hflip" = "Espejo";
+"vflip" = "Girar";
+"hflip" = "Reflejar";
 
 "lut3d" = "3D LUT";
 "lut3d.file" = "Archivo";

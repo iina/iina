@@ -74,7 +74,8 @@ class OpenURLWindowController: NSWindowController, NSTextFieldDelegate, NSContro
     guard !urlField.stringValue.isEmpty else { return (nil, false) }
     let username = usernameField.stringValue
     let password = passwordField.stringValue
-    guard var urlValue = urlField.stringValue.addingPercentEncoding(withAllowedCharacters: .urlAllowed) else {
+    let trimmedUrlString = urlField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
+    guard var urlValue = trimmedUrlString.addingPercentEncoding(withAllowedCharacters: .urlAllowed) else {
       return (nil, false)
     }
     var hasScheme = true

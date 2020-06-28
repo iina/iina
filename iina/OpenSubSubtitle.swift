@@ -228,7 +228,7 @@ class OpenSubSupport {
   func requestIMDB(_ fileURL: URL) -> Promise<String> {
     return Promise { resolver in
       let filename = fileURL.lastPathComponent
-      xmlRpc.call("GuessMovieFromString", [token, [filename]]) { status in
+      xmlRpc.call("GuessMovieFromString", [token as Any, [filename]]) { status in
         switch status {
         case .ok(let response):
           do {
@@ -254,7 +254,7 @@ class OpenSubSupport {
       let limit = 100
       var requestInfo = info
       requestInfo["sublanguageid"] = self.language
-      xmlRpc.call("SearchSubtitles", [token, [requestInfo], ["limit": limit]]) { status in
+      xmlRpc.call("SearchSubtitles", [token as Any, [requestInfo], ["limit": limit]]) { status in
         switch status {
         case .ok(let response):
           guard self.checkStatus(response) else { resolver.reject(OpenSubError.wrongResponseFormat); return }
@@ -263,7 +263,7 @@ class OpenSubSupport {
             return
           }
           var result: [OpenSubSubtitle] = []
-          for (index, subData) in pData!.enumerated() {
+          for (index, subData) in pData.enumerated() {
             let sub = OpenSubSubtitle(index: index,
                                       filename: subData["SubFileName"] as! String,
                                       langID: subData["SubLanguageID"] as! String,
@@ -317,7 +317,7 @@ class OpenSubSupport {
   }
 
   @objc private func sendHeartbeat() {
-    xmlRpc.call("NoOperation", [token]) { result in
+    xmlRpc.call("NoOperation", [token as Any]) { result in
       switch result {
       case .ok(let value):
         // 406 No session

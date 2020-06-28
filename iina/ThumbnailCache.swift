@@ -11,14 +11,13 @@ import Cocoa
 fileprivate let subsystem = Logger.Subsystem(rawValue: "thumbcache")
 
 class ThumbnailCache {
-  static private var version = 2
+  private typealias CacheVersion = UInt8
+  private typealias FileSize = UInt64
+  private typealias FileTimestamp = Int64
 
-  static private let sizeofDouble = MemoryLayout<Double>.size
-  static private let sizeofInt64 = MemoryLayout<Int64>.size
-  static private let sizeofUInt64 = MemoryLayout<UInt64>.size
-  static private let sizeofUInt8 = MemoryLayout<UInt8>.size
-
-  static private let sizeofMetadata = sizeofUInt8 + sizeofUInt64 + sizeofInt64
+  static private let version: CacheVersion = 2
+  
+  static private let sizeofMetadata = MemoryLayout<CacheVersion>.size + MemoryLayout<FileSize>.size + MemoryLayout<FileTimestamp>.size
 
 
   static private let imageProperties: [NSBitmapImageRep.PropertyKey: Any] = [
@@ -36,7 +35,7 @@ class ThumbnailCache {
     }
 
     // file size
-    guard let fileSize = fileAttr[.size] as? UInt64 else {
+    guard let fileSize = fileAttr[.size] as? FileSize else {
       Logger.log("Cannot get video file size", level: .error, subsystem: subsystem)
       return false
     }
@@ -46,7 +45,7 @@ class ThumbnailCache {
       Logger.log("Cannot get video file modification date", level: .error, subsystem: subsystem)
       return false
     }
-    let fileTimestamp = Int64(fileModifiedDate.timeIntervalSince1970)
+    let fileTimestamp = FileTimestamp(fileModifiedDate.timeIntervalSince1970)
 
     // Check metadate in the cache
     if self.fileExists(forName: name) {
@@ -55,11 +54,11 @@ class ThumbnailCache {
         return false
       }
 
-      let cacheVersion: Int = file.readData(ofLength: sizeofUInt8).withUnsafeBytes { $0.pointee }
+      let cacheVersion = file.read(type: CacheVersion.self)
       if cacheVersion != version { return false }
 
-      return file.readData(ofLength: sizeofUInt64).withUnsafeBytes { $0.pointee } == fileSize &&
-             file.readData(ofLength: sizeofInt64).withUnsafeBytes { $0.pointee } == fileTimestamp
+      return file.read(type: FileSize.self) == fileSize &&
+        file.read(type: FileTimestamp.self) == fileTimestamp
     }
 
     return false
@@ -88,7 +87,7 @@ class ThumbnailCache {
     }
 
     // version
-    let versionData = Data(bytes: &version, count: sizeofUInt8)
+    let versionData = Data(bytesOf: version)
     file.write(versionData)
 
     guard let fileAttr = try? FileManager.default.attributesOfItem(atPath: videoPath!.path) else {
@@ -97,11 +96,11 @@ class ThumbnailCache {
     }
 
     // file size
-    guard var fileSize = fileAttr[.size] as? UInt64 else {
+    guard let fileSize = fileAttr[.size] as? FileSize else {
       Logger.log("Cannot get video file size", level: .error, subsystem: subsystem)
       return
     }
-    let fileSizeData = Data(bytes: &fileSize, count: sizeofUInt64)
+    let fileSizeData = Data(bytesOf: fileSize)
     file.write(fileSizeData)
 
     // modified date
@@ -109,13 +108,13 @@ class ThumbnailCache {
       Logger.log("Cannot get video file modification date", level: .error, subsystem: subsystem)
       return
     }
-    var fileTimestamp = Int64(fileModifiedDate.timeIntervalSince1970)
-    let fileModificationDateData = Data(bytes: &fileTimestamp, count: sizeofInt64)
+    let fileTimestamp = FileTimestamp(fileModifiedDate.timeIntervalSince1970)
+    let fileModificationDateData = Data(bytesOf: fileTimestamp)
     file.write(fileModificationDateData)
 
     // data blocks
     for tb in thumbnails {
-      let timestampData = Data(bytes: &tb.realTime, count: sizeofDouble)
+      let timestampData = Data(bytesOf: tb.realTime)
       guard let tiffData = tb.image?.tiffRepresentation else {
         Logger.log("Cannot generate tiff data.", level: .error, subsystem: subsystem)
         return
@@ -124,8 +123,8 @@ class ThumbnailCache {
         Logger.log("Cannot generate jpeg data.", level: .error, subsystem: subsystem)
         return
       }
-      var blockLength = Int64(timestampData.count + jpegData.count)
-      let blockLengthData = Data(bytes: &blockLength, count: sizeofInt64)
+      let blockLength = Int64(timestampData.count + jpegData.count)
+      let blockLengthData = Data(bytesOf: blockLength)
       file.write(blockLengthData)
       file.write(timestampData)
       file.write(jpegData)
@@ -159,13 +158,11 @@ class ThumbnailCache {
     // data blocks
     while file.offsetInFile != eof {
       // length
-      let lengthData = file.readData(ofLength: sizeofInt64)
-      let blockLength: Int64 = lengthData.withUnsafeBytes { $0.pointee }
+      let blockLength: Int64 = file.read(type: Int64.self)
       // timestamp
-      let timestampData = file.readData(ofLength: sizeofDouble)
-      let timestamp: Double = timestampData.withUnsafeBytes { $0.pointee }
+      let timestamp: Double = file.read(type: Double.self)
       // jpeg
-      let jpegData = file.readData(ofLength: Int(blockLength) - sizeofDouble)
+      let jpegData = file.readData(ofLength: Int(blockLength) - MemoryLayout.size(ofValue: timestamp))
       guard let image = NSImage(data: jpegData) else {
         Logger.log("Cannot read image. Cache file will be deleted.", level: .warning, subsystem: subsystem)
         file.closeFile()

@@ -75,7 +75,12 @@ class MainMenuActionHandler: NSResponder {
 
 extension MainMenuActionHandler {
   @objc func menuTogglePause(_ sender: NSMenuItem) {
-    player.togglePause(!player.info.isPaused)
+    player.togglePause()
+    // set speed to 0 if is fastforwarding
+    if player.mainWindow.isFastforwarding {
+      player.setSpeed(1)
+      player.mainWindow.isFastforwarding = false
+    }
   }
 
   @objc func menuStop(_ sender: NSMenuItem) {
@@ -93,8 +98,8 @@ extension MainMenuActionHandler {
   }
 
   @objc func menuStepFrame(_ sender: NSMenuItem) {
-    if !player.info.isPaused {
-      player.togglePause(true)
+    if player.info.isPlaying {
+      player.pause()
     }
     if sender.tag == 0 { // -> 1f
       player.frameStep(backwards: false)

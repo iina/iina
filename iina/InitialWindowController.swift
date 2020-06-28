@@ -75,6 +75,7 @@ class InitialWindowController: NSWindowController {
 
   weak var player: PlayerCore!
 
+  var loaded = false
 
   @IBOutlet weak var recentFilesTableView: NSTableView!
   @IBOutlet weak var appIcon: NSImageView!
@@ -121,6 +122,7 @@ class InitialWindowController: NSWindowController {
 
   override func windowDidLoad() {
     super.windowDidLoad()
+    loaded = true
 
     window?.titlebarAppearsTransparent = true
     window?.titleVisibility = .hidden

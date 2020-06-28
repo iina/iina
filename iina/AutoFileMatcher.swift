@@ -227,7 +227,7 @@ class AutoFileMatcher {
       if subAutoLoadOption.shouldLoadSubsContainingVideoName() {
         Logger.log("Matching subtitles containing video name...", level: .verbose, subsystem: subsystem)
         try subtitles.filter {
-          return $0.filename.contains(video.filename)
+          $0.filename.contains(video.filename) && !$0.isMatched
         }.forEach { sub in
           try checkTicket()
           Logger.log("Matched \(sub.filename) and \(video.filename)", level: .verbose, subsystem: subsystem)
@@ -263,7 +263,7 @@ class AutoFileMatcher {
         }
         try matchedSubs
           .filter { $0.priorityStringOccurances > minOccurances }  // eliminate false positives in filenames
-          .compactMap { player.info.matchedSubs[video.path]!.index(of: $0.url) }  // get index
+          .compactMap { player.info.matchedSubs[video.path]!.firstIndex(of: $0.url) }  // get index
           .forEach {  // move the sub with index to first
             try checkTicket()
             Logger.log("Move \(player.info.matchedSubs[video.path]![$0]) to front", level: .verbose, subsystem: subsystem)
@@ -281,7 +281,7 @@ class AutoFileMatcher {
 
   private func forceMatchUnmatchedVideos() throws {
     let unmatchedSubs = subtitles.filter { !$0.isMatched }
-    guard unmatchedVideos.count * unmatchedSubs.count < 200 * 200 else {
+    guard unmatchedVideos.count * unmatchedSubs.count < 100 * 100 else {
       Logger.log("Stopped force matching subs - too many files", level: .warning, subsystem: subsystem)
       return
     }
@@ -327,6 +327,7 @@ class AutoFileMatcher {
       guard let folder = player.info.currentURL?.deletingLastPathComponent(), folder.isFileURL else { return }
       currentFolder = folder
 
+      player.info.isMatchingSubtitles = true
       getAllMediaFiles()
 
       // get all possible subtitles
@@ -353,15 +354,16 @@ class AutoFileMatcher {
 
       // match sub stage 1
       try matchSubs(withMatchedSeries: matchedPrefixes)
-      player.postNotification(.iinaPlaylistChanged)
-
       // match sub stage 2
       if shouldAutoLoad {
         try forceMatchUnmatchedVideos()
-        player.postNotification(.iinaPlaylistChanged)
       }
+
+      player.info.isMatchingSubtitles = false
+      player.postNotification(.iinaPlaylistChanged)
       Logger.log("**Finished matching", subsystem: subsystem)
     } catch let err {
+      player.info.isMatchingSubtitles = false
       Logger.log(err.localizedDescription, level: .error, subsystem: subsystem)
       return
     }

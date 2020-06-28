@@ -100,6 +100,8 @@ class AboutWindowController: NSWindowController {
       contributorsFooterImage.isHidden = false
     }
 
+    contributorsCollectionView.enclosingScrollView?.contentInsets.bottom = contributorsFooterView.frame.height * loc[colors.firstIndex(of: 0)! - 1]
+
     translatorsTableView.dataSource = self
     translatorsTableView.delegate = self
   }
@@ -133,7 +135,7 @@ extension AboutWindowController: NSCollectionViewDataSource {
   private func getContributors() -> [Contributor] {
     // This method will be called only once when `self.contributors` is needed,
     // i.e. when `contributorsCollectionView` is being initialized.
-    loadContributors(from: "https://api.github.com/repos/lhc70000/iina/contributors")
+    loadContributors(from: "https://api.github.com/repos/iina/iina/contributors")
     return []
   }
 

@@ -15,6 +15,7 @@ class ViewLayer: CAOpenGLLayer {
   weak var videoView: VideoView!
 
   lazy var mpvGLQueue = DispatchQueue(label: "com.colliderli.iina.mpvgl", qos: .userInteractive)
+  var blocked = false
 
   private var fbo: GLint = 1
 
@@ -88,7 +89,6 @@ class ViewLayer: CAOpenGLLayer {
     return pix!
   }
 
-
   override func copyCGLContext(forPixelFormat pf: CGLPixelFormatObj) -> CGLContextObj {
     let ctx = super.copyCGLContext(forPixelFormat: pf)
 
@@ -160,6 +160,17 @@ class ViewLayer: CAOpenGLLayer {
     videoView.uninitLock.unlock()
   }
 
+  func suspend() {
+    blocked = true
+    mpvGLQueue.suspend()
+  }
+  
+  func resume() {
+    blocked = false
+    draw(forced: true)
+    mpvGLQueue.resume()
+  }
+
   func draw(forced: Bool = false) {
     needsMPVRender = true
     if forced { forceRender = true }
@@ -194,30 +205,30 @@ class ViewLayer: CAOpenGLLayer {
   /** Check OpenGL error (for debug only). */
   func gle() {
     let e = glGetError()
-    Swift.print(arc4random())
+    print(arc4random())
     switch e {
     case GLenum(GL_NO_ERROR):
       break
     case GLenum(GL_OUT_OF_MEMORY):
-      Swift.print("GL_OUT_OF_MEMORY")
+      print("GL_OUT_OF_MEMORY")
       break
     case GLenum(GL_INVALID_ENUM):
-      Swift.print("GL_INVALID_ENUM")
+      print("GL_INVALID_ENUM")
       break
     case GLenum(GL_INVALID_VALUE):
-      Swift.print("GL_INVALID_VALUE")
+      print("GL_INVALID_VALUE")
       break
     case GLenum(GL_INVALID_OPERATION):
-      Swift.print("GL_INVALID_OPERATION")
+      print("GL_INVALID_OPERATION")
       break
     case GLenum(GL_INVALID_FRAMEBUFFER_OPERATION):
-      Swift.print("GL_INVALID_FRAMEBUFFER_OPERATION")
+      print("GL_INVALID_FRAMEBUFFER_OPERATION")
       break
     case GLenum(GL_STACK_UNDERFLOW):
-      Swift.print("GL_STACK_UNDERFLOW")
+      print("GL_STACK_UNDERFLOW")
       break
     case GLenum(GL_STACK_OVERFLOW):
-      Swift.print("GL_STACK_OVERFLOW")
+      print("GL_STACK_OVERFLOW")
       break
     default:
       break

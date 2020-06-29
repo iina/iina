@@ -511,6 +511,9 @@ CA
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="EvW-J9-wqJ"/>
+                            <menuItem title="Disable Subtitles" id="7kN-KF-Pba">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
                             <menuItem title="Cycle Subtitles" tag="2" id="sgu-dK-IGE">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
@@ -689,6 +692,7 @@ CA
                 <outlet property="deinterlace" destination="yHI-7D-OaI" id="Z8n-z4-52B"/>
                 <outlet property="deleteCurrentFile" destination="npH-8B-XA4" id="23t-fO-TbK"/>
                 <outlet property="delogo" destination="ArE-2s-JIV" id="zzg-gr-TsG"/>
+                <outlet property="disableSubtitles" destination="7kN-KF-Pba" id="RT2-kv-iV5"/>
                 <outlet property="doubleSize" destination="Hal-18-Tnf" id="vnl-Rb-Y3o"/>
                 <outlet property="encodingMenu" destination="Pf6-5i-B1E" id="Gat-gG-pkT"/>
                 <outlet property="fileLoop" destination="D1y-kv-85s" id="xSv-oo-UJa"/>

@@ -63,6 +63,8 @@ enum OSDMessage {
   case addFilter(String)
   case removeFilter
 
+  case disableSubtitles
+  case enableSubtitles
   case startFindingSub(String)  // sub source
   case foundSub(Int)
   case downloadedSub(String)  // filename
@@ -162,6 +164,12 @@ enum OSDMessage {
         String(format: NSLocalizedString("osd.subtitle_pos", comment: "Subtitle Position: %f"), value),
         .withProgress(value / 100)
       )
+
+    case .disableSubtitles:
+      return (NSLocalizedString("osd.subtitles_disabled", comment: "Subtitles Disabled"), .normal)
+
+    case .enableSubtitles:
+      return (NSLocalizedString("osd.subtitles_enabled", comment: "Subtitles Enabled"), .normal)
 
     case .mute:
       return (NSLocalizedString("osd.mute", comment: "Mute"), .normal)

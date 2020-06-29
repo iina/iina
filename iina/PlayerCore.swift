@@ -663,6 +663,28 @@ class PlayerCore: NSObject {
     mpv.setFlag(MPVOption.Video.deinterlace, enable)
   }
 
+// Add a "Disable Subtitles" toggle.
+  func toggleDisableSubtitles(_ enable: Bool) {
+    // FIXME sendOSD doesn't work here because as soon as a sub track changes,
+    // the property listeners in MPVController will fire their own OSD message
+    // effectively making the ones here unseen
+    if enable {
+      if !info.subDisabled {
+        info.savedSid = info.sid
+        info.savedSecondSid = info.secondSid
+        mpv.setInt(MPVOption.TrackSelection.sid, 0)
+        mpv.setInt(MPVOption.Subtitles.secondarySid, 0)
+        info.subDisabled = true
+        // sendOSD(.disableSubtitles)
+      }
+    } else {
+      mpv.setInt(MPVOption.TrackSelection.sid, info.savedSid ?? 1)
+      mpv.setInt(MPVOption.Subtitles.secondarySid, info.savedSecondSid ?? 0)
+      info.subDisabled = false
+      // sendOSD(.enableSubtitles)
+    }
+  }
+
   func toggleHardwareDecoding(_ enable: Bool) {
     let value = Preference.HardwareDecoderOption(rawValue: Preference.integer(for: .hardwareDecoder))?.mpvString ?? "auto"
     mpv.setString(MPVOption.Video.hwdec, enable ? value : "no")

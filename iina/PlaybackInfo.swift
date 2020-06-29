@@ -135,6 +135,9 @@ class PlaybackInfo {
   var sid: Int?
   var vid: Int?
   var secondSid: Int?
+  var savedSid: Int?
+  var savedSecondSid: Int?
+  var subDisabled: Bool = false
 
   var subEncoding: String?
 

@@ -82,7 +82,8 @@ class MPVController: NSObject {
     MPVOption.Window.fullscreen: MPV_FORMAT_FLAG,
     MPVOption.Window.ontop: MPV_FORMAT_FLAG,
     MPVOption.Window.windowScale: MPV_FORMAT_DOUBLE,
-    MPVProperty.mediaTitle: MPV_FORMAT_STRING
+    MPVProperty.mediaTitle: MPV_FORMAT_STRING,
+    MPVProperty.idleActive: MPV_FORMAT_FLAG
   ]
 
   init(playerCore: PlayerCore) {
@@ -593,12 +594,10 @@ class MPVController: NSObject {
         handlePropertyChange(propertyName, property)
       }
 
-    case MPV_EVENT_AUDIO_RECONFIG:
-      break
+    case MPV_EVENT_AUDIO_RECONFIG: break
 
     case MPV_EVENT_VIDEO_RECONFIG:
       onVideoReconfig()
-      break
 
     case MPV_EVENT_START_FILE:
       player.info.isIdle = false
@@ -643,27 +642,10 @@ class MPVController: NSObject {
       } else {
         player.info.shouldAutoLoadFiles = false
       }
-      break
 
-    case MPV_EVENT_IDLE:
-      if receivedEndFileWhileLoading && player.info.fileLoading {
-        player.errorOpeningFileAndCloseMainWindow()
-        player.info.fileLoading = false
-        player.info.currentURL = nil
-        player.info.isNetworkResource = false
-      }
-      player.info.isIdle = true
-      if fileLoaded {
-        fileLoaded = false
-        player.closeMainWindow()
-      }
-      receivedEndFileWhileLoading = false
-      break
-
-    default:
+    default: break
       // let eventName = String(cString: mpv_event_name(eventId))
       // Utility.log("mpv event (unhandled): \(eventName)")
-      break
     }
   }
 
@@ -930,6 +912,22 @@ class MPVController: NSObject {
 
     case MPVProperty.mediaTitle:
       player.postNotification(.iinaMediaTitleChanged)
+
+    case MPVProperty.idleActive:
+      if getFlag(MPVProperty.idleActive) {
+        if receivedEndFileWhileLoading && player.info.fileLoading {
+          player.errorOpeningFileAndCloseMainWindow()
+          player.info.fileLoading = false
+          player.info.currentURL = nil
+          player.info.isNetworkResource = false
+        }
+        player.info.isIdle = true
+        if fileLoaded {
+          fileLoaded = false
+          player.closeMainWindow()
+        }
+        receivedEndFileWhileLoading = false
+      }
 
     default:
       // Utility.log("MPV property changed (unhandled): \(name)")

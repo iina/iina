@@ -136,23 +136,27 @@ class ViewLayer: CAOpenGLLayer {
 
     var flip: CInt = 1
 
-    if let context = mpv.mpvRenderContext {
-      fbo = i != 0 ? i : fbo
+    withUnsafeMutablePointer(to: &flip) { flip in
+      if let context = mpv.mpvRenderContext {
+        fbo = i != 0 ? i : fbo
 
-      var data = mpv_opengl_fbo(fbo: Int32(fbo),
-                                w: Int32(dims[2]),
-                                h: Int32(dims[3]),
-                                internal_format: 0)
-      var params: [mpv_render_param] = [
-        mpv_render_param(type: MPV_RENDER_PARAM_OPENGL_FBO, data: &data),
-        mpv_render_param(type: MPV_RENDER_PARAM_FLIP_Y, data: &flip),
-        mpv_render_param()
-      ]
-      mpv_render_context_render(context, &params);
-      ignoreGLError()
-    } else {
-      glClearColor(0, 0, 0, 1)
-      glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
+        var data = mpv_opengl_fbo(fbo: Int32(fbo),
+                                  w: Int32(dims[2]),
+                                  h: Int32(dims[3]),
+                                  internal_format: 0)
+        withUnsafeMutablePointer(to: &data) { data in
+          var params: [mpv_render_param] = [
+            mpv_render_param(type: MPV_RENDER_PARAM_OPENGL_FBO, data: .init(data)),
+            mpv_render_param(type: MPV_RENDER_PARAM_FLIP_Y, data: .init(flip)),
+            mpv_render_param()
+          ]
+          mpv_render_context_render(context, &params);
+          ignoreGLError()
+        }
+      } else {
+        glClearColor(0, 0, 0, 1)
+        glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
+      }
     }
     glFlush()
 
@@ -184,11 +188,13 @@ class ViewLayer: CAOpenGLLayer {
       // draw(inCGLContext:) is not called, needs a skip render
       if !videoView.isUninited, let context = videoView.player.mpv?.mpvRenderContext {
         var skip: CInt = 1
-        var params: [mpv_render_param] = [
-          mpv_render_param(type: MPV_RENDER_PARAM_SKIP_RENDERING, data: &skip),
-          mpv_render_param()
-        ]
-        mpv_render_context_render(context, &params);
+        withUnsafeMutablePointer(to: &skip) { skip in
+          var params: [mpv_render_param] = [
+            mpv_render_param(type: MPV_RENDER_PARAM_SKIP_RENDERING, data: .init(skip)),
+            mpv_render_param()
+          ]
+          mpv_render_context_render(context, &params);
+        }
       }
       videoView.uninitLock.unlock()
       needsMPVRender = false

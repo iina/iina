@@ -574,9 +574,6 @@ class PlayerCore: NSObject {
     let loopStatus = mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
     let isLoop = (loopStatus == "inf" || loopStatus == "force")
     mpv.setString(MPVOption.PlaybackControl.loopPlaylist, isLoop ? "no" : "inf")
-    if self.mainWindow.playlistView.isViewLoaded {
-      self.mainWindow.playlistView.updateBtnStatus()
-    }
   }
 
   func toggleShuffle() {
@@ -1215,6 +1212,7 @@ class PlayerCore: NSObject {
     case muteButton
     case chapterList
     case playlist
+    case playlistLoop
     case additionalInfo
   }
 
@@ -1303,6 +1301,11 @@ class PlayerCore: NSObject {
         if self.isPlaylistVisible {
           self.mainWindow.playlistView.playlistTableView.reloadData()
         }
+      }
+
+    case .playlistLoop:
+      DispatchQueue.main.async {
+        self.mainWindow.playlistView.updateLoopBtnStatus()
       }
 
     case .additionalInfo:

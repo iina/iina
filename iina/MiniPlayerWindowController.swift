@@ -346,8 +346,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
        volumePopover.animates = false
        volumePopover.show(relativeTo: volumeButton.bounds, of: volumeButton, preferredEdge: .minY)
      } else if isTrackpadEnd {
-       let timeout = Preference.double(for: .osdAutoHideTimeout)
-       DispatchQueue.main.asyncAfter(deadline: .now() + timeout, execute: hideVolumePopover)
+       DispatchQueue.main.asyncAfter(deadline: .now(), execute: hideVolumePopover)
      } else if isMouse {
        // if it's a mouse, simply show popover then hide after a while when user stops scrolling
        if !volumePopover.isShown {

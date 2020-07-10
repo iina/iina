@@ -1212,6 +1212,7 @@ class PlayerCore: NSObject {
     case muteButton
     case chapterList
     case playlist
+    case playlistLoop
     case additionalInfo
   }
 
@@ -1300,6 +1301,11 @@ class PlayerCore: NSObject {
         if self.isPlaylistVisible {
           self.mainWindow.playlistView.playlistTableView.reloadData()
         }
+      }
+
+    case .playlistLoop:
+      DispatchQueue.main.async {
+        self.mainWindow.playlistView.updateLoopBtnStatus()
       }
 
     case .additionalInfo:

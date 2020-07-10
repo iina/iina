@@ -33,10 +33,10 @@ class JavascriptPluginMenuItem: NSObject, JavascriptPluginMenuItemExportable {
     self.isSeparator = false
   }
 
-  convenience init(title: String, action: JSValue, selected: Bool, enabled: Bool) {
+  convenience init(title: String, action: JSValue, selected: Bool, enabled: Bool, owner: JavascriptAPIMenu) {
     self.init(title: title, selected: selected, enabled: enabled)
     self.action = JSManagedValue(value: action)
-    JSContext.current()?.virtualMachine.addManagedReference(action, withOwner: self)
+    JSContext.current()!.virtualMachine.addManagedReference(self.action, withOwner: owner)
   }
 
   func addSubMenuItem(_ item: JavascriptPluginMenuItem) -> Self {

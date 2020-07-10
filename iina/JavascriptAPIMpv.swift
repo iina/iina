@@ -26,10 +26,6 @@ class JavascriptAPIMpv: JavascriptAPI, JavascriptAPIMpvExportable {
     identifier = pluginInstance.plugin.identifier
   }
 
-  deinit {
-    player.mpv.removeHooks(withIdentifier: identifier)
-  }
-
   @objc func getFlag(_ property: String) -> Bool {
     return player.mpv.getFlag(property)
   }
@@ -67,7 +63,7 @@ class JavascriptAPIMpv: JavascriptAPI, JavascriptAPIMpvExportable {
   }
 
   @objc func addHook(_ name: String, _ priority: Int, _ callback: JSValue) {
-    let hook = MPVHookValue(withIdentifier: identifier, jsContext: context, jsBlock: callback)
+    let hook = MPVHookValue(withIdentifier: identifier, jsContext: context, jsBlock: callback, owner: self)
     player.mpv.addHook(MPVHook(name), priority: Int32(priority), hook: hook)
   }
 }

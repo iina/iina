@@ -68,6 +68,11 @@ class JavascriptPluginInstance {
     _ = evaluateFile(plugin.entryURL)
   }
 
+  deinit {
+    Logger.log("Unload \(self.plugin.name)", level: .debug, subsystem: subsystem)
+    player.mpv.removeHooks(withIdentifier: plugin.identifier)
+  }
+
   @objc func menuItemAction(_ sender: NSMenuItem) {
     guard let item = sender.representedObject as? JavascriptPluginMenuItem else { return }
     if !item.callAction() {

@@ -479,7 +479,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         let displayStr: String = NSString(string: filename).deletingPathExtension
         cellView.prefixBtn.hasPrefix = false
 
-        func shouldShowMetadata() -> String? {
+        func getCachedMetadata() -> String? {
           if !Preference.bool(for: .playlistShowMetadata) { return nil }
           guard let title = info.cachedMetadata[item.filename]?.title, let artist = info.cachedMetadata[item.filename]?.artist else { return nil }
           if Preference.bool(for: .playlistShowMetadataInMusicMode) && !player.isInMiniPlayer {
@@ -488,7 +488,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
           return "\(artist) - \(title)"
         }
 
-        if let metadata = shouldShowMetadata() {
+        if let metadata = getCachedMetadata() {
           cellView.textField?.stringValue = metadata
         } else if let prefix = player.info.currentVideosInfo.first(where: { $0.path == item.filename })?.prefix,
           !prefix.isEmpty,

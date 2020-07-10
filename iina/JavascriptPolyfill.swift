@@ -16,6 +16,12 @@ class JavascriptPolyfill {
     self.plugin = pluginInstance
   }
 
+  deinit {
+    for timer in timers.values {
+      timer.invalidate()
+    }
+  }
+
   func removeTimer(identifier: String) {
     let timer = self.timers.removeValue(forKey: identifier)
     timer?.invalidate()

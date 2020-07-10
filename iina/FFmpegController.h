@@ -40,6 +40,6 @@
 
 - (void)generateThumbnailForFile:(nonnull NSString *)file;
 
-+ (double)probeVideoDurationForFile:(nonnull NSString *)file;
++ (NSDictionary *)probeVideoInfoForFile:(nonnull NSString *)file;
 
 @end

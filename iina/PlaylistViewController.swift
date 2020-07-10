@@ -476,18 +476,29 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         let cellView = v as! PlaylistTrackCellView
         // file name
         let filename = item.filenameForDisplay
-        let filenameWithoutExt: String = NSString(string: filename).deletingPathExtension
-        if let prefix = player.info.currentVideosInfo.first(where: { $0.path == item.filename })?.prefix,
+        let displayStr: String = NSString(string: filename).deletingPathExtension
+
+        func getCachedMetadata() -> (artist: String, title: String)? {
+          if !Preference.bool(for: .playlistShowMetadata) { return nil }
+          guard let title = info.cachedMetadata[item.filename]?.title, let artist = info.cachedMetadata[item.filename]?.artist else { return nil }
+          if Preference.bool(for: .playlistShowMetadataInMusicMode) && !player.isInMiniPlayer {
+            return nil
+          }
+          return (artist, title)
+        }
+
+        if let (artist, title) = getCachedMetadata() {
+          cellView.setTitle(title)
+          cellView.setAdditionalInfo(artist)
+        } else if let prefix = player.info.currentVideosInfo.first(where: { $0.path == item.filename })?.prefix,
           !prefix.isEmpty,
-          prefix.count <= filenameWithoutExt.count,  // check whether prefix length > filename length
+          prefix.count <= displayStr.count,  // check whether prefix length > filename length
           prefix.count >= PrefixMinLength,
           filename.count > FilenameMinLength {
-          cellView.prefixBtn.hasPrefix = true
-          cellView.prefixBtn.text = prefix
-          cellView.textField?.stringValue = String(filename[filename.index(filename.startIndex, offsetBy: prefix.count)...])
+          cellView.setPrefix(prefix)
+          cellView.setTitle(String(filename[filename.index(filename.startIndex, offsetBy: prefix.count)...]))
         } else {
-          cellView.prefixBtn.hasPrefix = false
-          cellView.textField?.stringValue = filename
+          cellView.setTitle(filename)
         }
         // playback progress and duration
         cellView.durationLabel.font = NSFont.monospacedDigitSystemFont(ofSize: NSFont.smallSystemFontSize, weight: .regular)
@@ -510,7 +521,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
           } else {
             // get related data and schedule a reload
             if Preference.bool(for: .prefetchPlaylistVideoDuration) {
-              self.player.refreshCachedVideoProgress(forVideoPath: item.filename)
+              self.player.refreshCachedVideoInfo(forVideoPath: item.filename)
               self.refreshTotalLength()
               DispatchQueue.main.async {
                 self.playlistTableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(integersIn: 0...1))
@@ -521,12 +532,11 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         // sub button
         if !info.isMatchingSubtitles,
           let matchedSubs = player.info.matchedSubs[item.filename], !matchedSubs.isEmpty {
-          cellView.subBtn.isHidden = false
-          cellView.subBtnWidthConstraint.constant = 12
+          cellView.setDisplaySubButton(true)
         } else {
-          cellView.subBtn.isHidden = true
-          cellView.subBtnWidthConstraint.constant = 0
+          cellView.setDisplaySubButton(false)
         }
+        // not sure why this line exists, but let's keep it for now
         cellView.subBtn.image?.isTemplate = true
       }
       return v
@@ -750,18 +760,60 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
 
 class PlaylistTrackCellView: NSTableCellView {
-
   @IBOutlet weak var subBtn: NSButton!
   @IBOutlet weak var subBtnWidthConstraint: NSLayoutConstraint!
+  @IBOutlet weak var subBtnTrailingConstraint: NSLayoutConstraint!
   @IBOutlet weak var prefixBtn: PlaylistPrefixButton!
+  @IBOutlet weak var infoLabel: NSTextField!
+  @IBOutlet weak var infoLabelTrailingConstraint: NSLayoutConstraint!
   @IBOutlet weak var durationLabel: NSTextField!
   @IBOutlet weak var playbackProgressView: PlaylistPlaybackProgressView!
 
-  override func prepareForReuse() {
-     playbackProgressView.percentage = 0
-     playbackProgressView.needsDisplay = true
+  func setPrefix(_ prefix: String?) {
+    if let prefix = prefix {
+      prefixBtn.hasPrefix = true
+      prefixBtn.text = prefix
+    } else {
+      prefixBtn.hasPrefix = false
+    }
   }
 
+  func setDisplaySubButton(_ show: Bool) {
+    if show {
+      subBtn.isHidden = false
+      subBtnWidthConstraint.constant = 12
+      subBtnTrailingConstraint.constant = 4
+    } else {
+      subBtn.isHidden = true
+      subBtnWidthConstraint.constant = 0
+      subBtnTrailingConstraint.constant = 0
+    }
+  }
+
+  func setAdditionalInfo(_ string: String?) {
+    if let string = string {
+      infoLabel.isHidden = false
+      infoLabelTrailingConstraint.constant = 4
+      infoLabel.stringValue = string
+      infoLabel.toolTip = string
+    } else {
+      infoLabel.isHidden = true
+      infoLabelTrailingConstraint.constant = 0
+      infoLabel.stringValue = ""
+    }
+  }
+
+  func setTitle(_ title: String) {
+    textField?.stringValue = title
+    textField?.toolTip = title
+  }
+
+  override func prepareForReuse() {
+    playbackProgressView.percentage = 0
+    playbackProgressView.needsDisplay = true
+    setPrefix(nil)
+    setAdditionalInfo(nil)
+  }
 }
 
 

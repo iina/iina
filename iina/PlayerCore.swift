@@ -134,6 +134,10 @@ class PlayerCore: NSObject {
   // test seeking
   var triedUsingExactSeekForCurrentFile: Bool = false
   var useExactSeekForCurrentFile: Bool = true
+  
+  var isPlaylistVisible: Bool {
+    isInMiniPlayer ? miniPlayer.isPlaylistVisible : mainWindow.sideBarStatus == .playlist
+  }
 
   static var keyBindings: [String: KeyMapping] = [:]
 
@@ -1293,7 +1297,7 @@ class PlayerCore: NSObject {
 
     case .playlist:
       DispatchQueue.main.async {
-        if self.isInMiniPlayer ? self.miniPlayer.isPlaylistVisible : self.mainWindow.sideBarStatus == .playlist {
+        if self.isPlaylistVisible {
           self.mainWindow.playlistView.playlistTableView.reloadData()
         }
       }
@@ -1581,16 +1585,31 @@ class PlayerCore: NSObject {
   }
 
   /**
-   Get video duration and playback progress, then save it to info.
+   Get video duration, playback progress, and metadata, then save it to info.
    It may take some time to run this method, so it should be used in background.
    */
-  func refreshCachedVideoProgress(forVideoPath path: String) {
-    let duration = FFmpegController.probeVideoDuration(forFile: path)
+  func refreshCachedVideoInfo(forVideoPath path: String) {
+    guard let dict = FFmpegController.probeVideoInfo(forFile: path) else { return }
     let progress = Utility.playbackProgressFromWatchLater(path.md5)
-    info.cachedVideoDurationAndProgress[path] = (
-      duration: duration,
+    self.info.cachedVideoDurationAndProgress[path] = (
+      duration: dict["@iina_duration"] as? Double,
       progress: progress?.second
     )
+    var result: (title: String?, album: String?, artist: String?)
+    dict.forEach { (k, v) in
+      guard let key = k as? String else { return }
+      switch key.lowercased() {
+      case "title":
+        result.title = v as? String
+      case "album":
+        result.album = v as? String
+      case "artist":
+        result.artist = v as? String
+      default:
+        break
+      }
+    }
+    self.info.cachedMetadata[path] = result
   }
 
   enum CurrentMediaIsAudioStatus {

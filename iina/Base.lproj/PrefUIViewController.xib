@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16096" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16096"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -799,7 +799,7 @@
                 <constraint firstItem="4XH-GU-VhV" firstAttribute="top" secondItem="gjB-It-iFS" secondAttribute="top" constant="8" id="stm-U9-kuB"/>
                 <constraint firstItem="SyB-0R-TLF" firstAttribute="leading" secondItem="HgG-px-UUt" secondAttribute="trailing" constant="8" id="z4E-Tj-yG1"/>
             </constraints>
-            <point key="canvasLocation" x="19" y="368.5"/>
+            <point key="canvasLocation" x="15" y="368"/>
         </customView>
         <customView id="c8m-G4-or8">
             <rect key="frame" x="0.0" y="0.0" width="515" height="116"/>
@@ -1072,7 +1072,7 @@
                 <constraint firstItem="FNR-0h-DtW" firstAttribute="baseline" secondItem="BMi-Ax-7wP" secondAttribute="baseline" id="n4H-Th-LRJ"/>
                 <constraint firstAttribute="bottom" secondItem="BMi-Ax-7wP" secondAttribute="bottom" constant="8" id="wlh-tx-VdQ"/>
             </constraints>
-            <point key="canvasLocation" x="19" y="-265"/>
+            <point key="canvasLocation" x="15" y="-266"/>
         </customView>
         <customView id="1fz-oP-RhZ">
             <rect key="frame" x="0.0" y="0.0" width="588" height="118"/>

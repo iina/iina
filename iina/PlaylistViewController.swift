@@ -556,7 +556,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       } else if identifier == .trackName {
         // right column
         let cellView = v as! ChapterTableCellView
-        cellView.textField?.stringValue = chapter.title.isEmpty ? "Chapter \(row)" : chapter.title
+        cellView.setTitle(chapter.title.isEmpty ? "Chapter \(row)" : chapter.title)
         cellView.durationTextField.stringValue = "\(chapter.time.stringRepresentation) → \(nextChapterTime.stringRepresentation)"
         return cellView
       } else {
@@ -809,6 +809,7 @@ class PlaylistTrackCellView: NSTableCellView {
   }
 
   override func prepareForReuse() {
+    super.prepareForReuse()
     playbackProgressView.percentage = 0
     playbackProgressView.needsDisplay = true
     setPrefix(nil)
@@ -892,8 +893,11 @@ class SubPopoverViewController: NSViewController, NSTableViewDelegate, NSTableVi
 }
 
 class ChapterTableCellView: NSTableCellView {
-
   @IBOutlet weak var durationTextField: NSTextField!
 
+  func setTitle(_ title: String) {
+    textField?.stringValue = title
+    textField?.toolTip = title
+  }
 }
 

@@ -26,6 +26,7 @@ fileprivate let no_str = "no"
 fileprivate let MPVLogLevel = "warn"
 
 
+// FIXME: should be moved to a separated file
 struct MPVHookValue {
   typealias Block = (@escaping () -> Void) -> Void
 
@@ -35,12 +36,12 @@ struct MPVHookValue {
   var jsBlock: JSManagedValue!
   var context: JSContext!
 
-  init(withIdentifier id: String, jsContext context: JSContext, jsBlock block: JSValue) {
+  init(withIdentifier id: String, jsContext context: JSContext, jsBlock block: JSValue, owner: JavascriptAPIMpv) {
     self.id = id
     self.isJavascript = true
     self.jsBlock = JSManagedValue(value: block)
     self.context = context
-    context.virtualMachine.addManagedReference(block, withOwner: self)
+    context.virtualMachine.addManagedReference(self.jsBlock, withOwner: owner)
   }
 
   init(withBlock block: @escaping Block) {
@@ -51,7 +52,10 @@ struct MPVHookValue {
   func call(withNextBlock next: @escaping () -> Void) {
     if isJavascript {
       let block: @convention(block) () -> Void = { next() }
-      guard let callback = jsBlock.value else { return }
+      guard let callback = jsBlock.value else {
+        next()
+        return
+      }
       callback.call(withArguments: [JSValue(object: block, in: context)!])
       if callback.forProperty("constructor")?.forProperty("name")?.toString() != "AsyncFunction" {
         next()

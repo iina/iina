@@ -18,7 +18,7 @@ import JavaScriptCore
 
 class JavascriptAPIMenu: JavascriptAPI, JavascriptAPIMenuExportable {
   @objc func item(_ title: String, _ action: JSValue, _ selected: Bool = false, _ enabled: Bool = true) -> JavascriptPluginMenuItem {
-    let item = JavascriptPluginMenuItem(title: title, action: action, selected: selected, enabled: enabled)
+    let item = JavascriptPluginMenuItem(title: title, action: action, selected: selected, enabled: enabled, owner: self)
     return item
   }
 
@@ -34,6 +34,11 @@ class JavascriptAPIMenu: JavascriptAPI, JavascriptAPIMenuExportable {
   }
 
   @objc func removeAllItems() {
+    for item in self.pluginInstance.menuItems {
+      if let action = item.action {
+        JSContext.current()!.virtualMachine.removeManagedReference(action, withOwner: self)
+      }
+    }
     self.pluginInstance.menuItems.removeAll()
   }
 }

@@ -15,16 +15,15 @@ fileprivate let subsystem = Logger.Subsystem(rawValue: "opensub")
 
 class OpenSub {
   final class Subtitle: OnlineSubtitle {
-
-    @objc var filename: String = ""
-    @objc var langID: String
-    @objc var authorComment: String
-    @objc var addDate: String
-    @objc var rating: String
-    @objc var dlCount: String
-    @objc var movieFPS: String
-    @objc var subDlLink: String
-    @objc var zipDlLink: String
+    var filename: String = ""
+    var langID: String
+    var authorComment: String
+    var addDate: String
+    var rating: String
+    var dlCount: String
+    var movieFPS: String
+    var subDlLink: String
+    var zipDlLink: String
 
     init(index: Int, filename: String, langID: String, authorComment: String, addDate: String, rating: String, dlCount: String, movieFPS: String, subDlLink: String, zipDlLink: String) {
       self.filename = filename
@@ -56,6 +55,13 @@ class OpenSub {
       }
     }
 
+    override func getDescription() -> (name: String, left: String, right: String) {
+      (
+        filename,
+        "\(langID) \u{2b07}\(dlCount) \u{2605}\(rating)",
+        addDate
+      )
+    }
   }
 
   enum Error: Swift.Error {
@@ -96,7 +102,7 @@ class OpenSub {
     private static let serviceName: NSString = "IINA OpenSubtitles Account"
     private let xmlRpc: JustXMLRPC
 
-    private let subChooseViewController = SubChooseViewController(source: OnlineSubtitle.Providers.openSub.id)
+    private let subChooseViewController = SubChooseViewController()
 
     var language: String
     var username: String = ""
@@ -123,7 +129,7 @@ class OpenSub {
       self.xmlRpc = JustXMLRPC(apiPath)
     }
 
-    func fetch(from url: URL) -> Promise<[Subtitle]> {
+    func fetch(from url: URL, withProviderID id: String, playerCore player: PlayerCore) -> Promise<[Subtitle]> {
       return login()
       .then { _ in
         self.hash(url)
@@ -324,6 +330,7 @@ class OpenSub {
           return
         }
         subChooseViewController.subtitles = subs
+        subChooseViewController.context = self
 
         subChooseViewController.userDoneAction = { subs in
           resolver.fulfill(subs as! [Subtitle])

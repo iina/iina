@@ -75,7 +75,7 @@ class Shooter {
 
     private var language: String?
 
-    func fetch(from url: URL) -> Promise<[Subtitle]> {
+    func fetch(from url: URL, withProviderID id: String, playerCore player: PlayerCore) -> Promise<[Subtitle]> {
       return hash(url).then { self.request($0) }
     }
 

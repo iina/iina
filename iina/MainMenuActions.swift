@@ -197,6 +197,12 @@ extension MainMenuActionHandler {
 
   @objc func menuChangeCrop(_ sender: NSMenuItem) {
     if let cropStr = sender.representedObject as? String {
+      if cropStr == "Custom" {
+        player.mainWindow.hideSideBar {
+          self.player.mainWindow.enterInteractiveMode(.crop, selectWholeVideoByDefault: true)
+        }
+        return
+      }
       player.setCrop(fromString: cropStr)
     } else {
       Logger.log("sender.representedObject is not a string in menuChangeCrop()", level: .error)

@@ -79,6 +79,7 @@ struct Constants {
     static let subDelay = "Subtitle Delay"
     static let pip = NSLocalizedString("menu.pip", comment: "Enter Picture-in-Picture")
     static let exitPIP = NSLocalizedString("menu.exit_pip", comment: "Exit Picture-in-Picture")
+    static let custom = NSLocalizedString("menu.crop_custom", comment: "Custom crop size")
   }
   struct Time {
     static let infinite = VideoTime(999, 0, 0)

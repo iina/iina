@@ -22,7 +22,7 @@ fileprivate protocol ProviderProtocol {
 
 protocol OnlineSubtitleFetcher {
   associatedtype Subtitle: OnlineSubtitle
-  func fetch(from url: URL) -> Promise<[Subtitle]>
+  func fetch(from url: URL, withProviderID id: String, playerCore player: PlayerCore) -> Promise<[Subtitle]>
 }
 
 class OnlineSubtitle: NSObject {
@@ -41,6 +41,7 @@ class OnlineSubtitle: NSObject {
   }
 
   func download() -> Promise<[URL]> { return .value([]) }
+  func getDescription() -> (name: String, left: String, right: String) { return("", "", "") }
 
   class DefaultFetcher {
     required init() {}
@@ -52,23 +53,29 @@ class OnlineSubtitle: NSObject {
     static let assrt = Provider<Assrt.Fetcher>(id: ":assrt", name: "assrt.net")
 
     static var fromPlugin: [String: Provider<JSPluginSub.Fetcher>] = [:]
-    static func registerFromPlugin(_ pluginID: String, id: String, name: String) {
-      fromPlugin["plugin:\(pluginID):\(id)"] = Provider(id: id, name: name, origin: .plugin(id: pluginID))
+    static func registerFromPlugin(_ pluginID: String, _ pluginName: String, id: String, name: String) {
+      let providerID = "plugin:\(pluginID):\(id)"
+      fromPlugin[providerID] = Provider(id: id,
+                                        name: name,
+                                        providerID: providerID,
+                                        origin: .plugin(id: pluginID, name: pluginName))
     }
   }
 
   enum Origin {
     case legacy
-    case plugin(id: String)
+    case plugin(id: String, name: String)
   }
 
   class Provider<F: OnlineSubtitleFetcher>: ProviderProtocol where F: DefaultFetcher {
     let id: String
+    let providerID: String
     let name: String
     let origin: Origin
 
-    init(id: String, name: String, origin: Origin = .legacy) {
+    init(id: String, name: String, providerID: String? = nil, origin: Origin = .legacy) {
       self.id = id
+      self.providerID = providerID ?? id
       self.name = name
       self.origin = origin
     }
@@ -78,7 +85,7 @@ class OnlineSubtitle: NSObject {
     }
 
     func fetchSubtitles(url: URL, player: PlayerCore) -> Promise<[URL]> {
-      return getFetcher().fetch(from: url)
+      return getFetcher().fetch(from: url, withProviderID: providerID, playerCore: player)
       .get { subtitles in
         if subtitles.isEmpty {
           throw OnlineSubtitle.CommonError.noResult
@@ -91,9 +98,9 @@ class OnlineSubtitle: NSObject {
     }
   }
 
-  static func search(forFile url: URL, player: PlayerCore, callback: @escaping ([URL]) -> Void) {
-    let val = Preference.string(for: .onlineSubProvider) ?? ""
-    switch val {
+  static func search(forFile url: URL, player: PlayerCore, providerID: String? = nil, callback: @escaping ([URL]) -> Void) {
+    let id = providerID ?? Preference.string(for: .onlineSubProvider) ?? ""
+    switch id {
     case Providers.openSub.id:
       _search(using: Providers.openSub, forFile: url, player, callback)
     case Providers.shooter.id:
@@ -101,10 +108,9 @@ class OnlineSubtitle: NSObject {
     case Providers.assrt.id:
       _search(using: Providers.assrt, forFile: url, player, callback)
     default:
-      if let provider = Providers.fromPlugin[val] {
+      if let provider = Providers.fromPlugin[id] {
         _search(using: provider, forFile: url, player, callback)
       }
-      break
     }
   }
 
@@ -132,6 +138,8 @@ class OnlineSubtitle: NSObject {
         osdMessage = .fileError
       case OpenSub.Error.loginFailed:
         osdMessage = .cannotLogin
+      case JSPluginSub.Error.pluginError(let message):
+        osdMessage = .customWithDetail(message, provider.name)
       case CommonError.canceled:
         osdMessage = .canceled
       default:

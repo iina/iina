@@ -164,6 +164,7 @@
 		E322A4F820A8442E00C67D32 /* PlaylistPlaybackProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E322A4F720A8442E00C67D32 /* PlaylistPlaybackProgressView.swift */; };
 		E32712B024EAA14500359DAB /* ScreenshootOSDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32712AE24EAA14500359DAB /* ScreenshootOSDView.swift */; };
 		E32712B224F2B8CA00359DAB /* ScreenshootOSDView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E32712B424F2B8CA00359DAB /* ScreenshootOSDView.xib */; };
+		E32693F924BA138000BF7ADC /* JavascriptPluginSubtitleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32693F824BA138000BF7ADC /* JavascriptPluginSubtitleItem.swift */; };
 		E32B157D21BC27B100CDBCEA /* JavascriptAPIMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32B157C21BC27B100CDBCEA /* JavascriptAPIMenu.swift */; };
 		E32B157F21BE219700CDBCEA /* JavascriptPluginMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32B157E21BE219700CDBCEA /* JavascriptPluginMenuItem.swift */; };
 		E3366AFA224A039500EF3C32 /* JavascriptAPIPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3366AF9224A039500EF3C32 /* JavascriptAPIPreferences.swift */; };
@@ -262,11 +263,9 @@
 		E374160F20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E374160D20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift */; };
 		E374161120F3C0AB00B4F7F9 /* PrefUtilsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E374161320F3C0AB00B4F7F9 /* PrefUtilsViewController.xib */; };
 		E38372922443634500F57718 /* LanguageTokenField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38372912443634500F57718 /* LanguageTokenField.swift */; };
-		E38B32192157DC18000F6D27 /* ISO639TokenFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38B32172157DC18000F6D27 /* ISO639TokenFieldDelegate.swift */; };
 		E38B3213214FB9EA000F6D27 /* PrefPluginPermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38B3211214FB9EA000F6D27 /* PrefPluginPermissionView.swift */; };
 		E38B3214214FB9EA000F6D27 /* PrefPluginPermissionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E38B3212214FB9EA000F6D27 /* PrefPluginPermissionView.xib */; };
 		E38B3216214FF700000F6D27 /* EventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38B3215214FF700000F6D27 /* EventController.swift */; };
-		E38B32192157DC18000F6D27 /* ISO639TokenFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38B32172157DC18000F6D27 /* ISO639TokenFieldDelegate.swift */; };
 		E38BD4AF20054BD9007635FC /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38BD4AE20054BD9007635FC /* MainWindow.swift */; };
 		E3965E1A2487C99900607EB4 /* JavascriptPluginSubtitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3965E192487C99900607EB4 /* JavascriptPluginSubtitle.swift */; };
 		E39A11FD240F176E00A67F9F /* StringEncodingName.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39A11FC240F176E00A67F9F /* StringEncodingName.swift */; };
@@ -1285,6 +1284,7 @@
 		E32712AE24EAA14500359DAB /* ScreenshootOSDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshootOSDView.swift; sourceTree = "<group>"; };
 		E32712B324F2B8CA00359DAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ScreenshootOSDView.xib; sourceTree = "<group>"; };
 		E32712B624F2B8D200359DAB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
+		E32693F824BA138000BF7ADC /* JavascriptPluginSubtitleItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptPluginSubtitleItem.swift; sourceTree = "<group>"; };
 		E32B157C21BC27B100CDBCEA /* JavascriptAPIMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIMenu.swift; sourceTree = "<group>"; };
 		E32B157E21BE219700CDBCEA /* JavascriptPluginMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptPluginMenuItem.swift; sourceTree = "<group>"; };
 		E3366AF9224A039500EF3C32 /* JavascriptAPIPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIPreferences.swift; sourceTree = "<group>"; };
@@ -1406,11 +1406,9 @@
 		E374161220F3C0AB00B4F7F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PrefUtilsViewController.xib; sourceTree = "<group>"; };
 		E374161520F3C0AD00B4F7F9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PrefUtilsViewController.strings"; sourceTree = "<group>"; };
 		E38372912443634500F57718 /* LanguageTokenField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageTokenField.swift; sourceTree = "<group>"; };
-		E38B32172157DC18000F6D27 /* ISO639TokenFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISO639TokenFieldDelegate.swift; sourceTree = "<group>"; };
 		E38B3211214FB9EA000F6D27 /* PrefPluginPermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefPluginPermissionView.swift; sourceTree = "<group>"; };
 		E38B3212214FB9EA000F6D27 /* PrefPluginPermissionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrefPluginPermissionView.xib; sourceTree = "<group>"; };
 		E38B3215214FF700000F6D27 /* EventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventController.swift; sourceTree = "<group>"; };
-		E38B32172157DC18000F6D27 /* ISO639TokenFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISO639TokenFieldDelegate.swift; sourceTree = "<group>"; };
 		E38BD4AE20054BD9007635FC /* MainWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindow.swift; sourceTree = "<group>"; };
 		E393669923BDD1850070D626 /* IINA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IINA.entitlements; sourceTree = "<group>"; };
 		E3965E192487C99900607EB4 /* JavascriptPluginSubtitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptPluginSubtitle.swift; sourceTree = "<group>"; };
@@ -2238,6 +2236,7 @@
 				E337D5E12411B64900B5729A /* JavascriptPolyfill.swift */,
 				E30D2EBC21F5FD2600E1FF0D /* PluginOverlayView.swift */,
 				E3965E192487C99900607EB4 /* JavascriptPluginSubtitle.swift */,
+				E32693F824BA138000BF7ADC /* JavascriptPluginSubtitleItem.swift */,
 			);
 			name = Javascript;
 			sourceTree = "<group>";
@@ -2605,6 +2604,7 @@
 				845404AA1E4396F500B02B12 /* ScriptLoader.swift in Sources */,
 				84A0BAA11D2FAE7600BC8DA1 /* VideoView.swift in Sources */,
 				E33BA5C4204315740069A0F6 /* AssrtSubtitle.swift in Sources */,
+				E32693F924BA138000BF7ADC /* JavascriptPluginSubtitleItem.swift in Sources */,
 				844DE1BF1D3E2B9900272589 /* MPVEvent.swift in Sources */,
 				845040471E0B0F500079C194 /* CropSettingsViewController.swift in Sources */,
 				E33836852026223800ABC812 /* PrefOSCToolbarSettingsSheetController.swift in Sources */,

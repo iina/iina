@@ -323,7 +323,7 @@ extension MainMenuActionHandler {
     guard let url = player.info.currentURL, !player.isSearchingOnlineSubtitle else { return }
 
     player.isSearchingOnlineSubtitle = true
-    OnlineSubtitle.search(forFile: url, player: player) { urls in
+    OnlineSubtitle.search(forFile: url, player: player, providerID: sender.representedObject as? String) { urls in
       if urls.isEmpty {
         self.player.sendOSD(.foundSub(0))
       } else {

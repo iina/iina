@@ -221,7 +221,7 @@ class JavascriptPlugin: NSObject {
           Logger.log("A subtitle provider declaration should have an id and a name.", level: .error)
           return nil
         }
-        OnlineSubtitle.Providers.registerFromPlugin(identifier, id: spID, name: spName)
+        OnlineSubtitle.Providers.registerFromPlugin(identifier, name, id: spID, name: spName)
       }
     }
 

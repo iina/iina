@@ -157,6 +157,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var encodingMenu: NSMenu!
   @IBOutlet weak var subFont: NSMenuItem!
   @IBOutlet weak var findOnlineSub: NSMenuItem!
+  @IBOutlet weak var onlineSubSourceMenu: NSMenu!
   @IBOutlet weak var saveDownloadedSub: NSMenuItem!
   // Plugin
   @IBOutlet weak var pluginMenu: NSMenu!
@@ -353,6 +354,8 @@ class MenuController: NSObject, NSMenuDelegate {
     findOnlineSub.action = #selector(MainMenuActionHandler.menuFindOnlineSub(_:))
     saveDownloadedSub.action = #selector(MainMenuActionHandler.saveDownloadedSub(_:))
 
+    onlineSubSourceMenu.delegate = self
+
     // - text size
     [increaseTextSize, decreaseTextSize, resetTextSize].forEach {
       $0.action = #selector(MainMenuActionHandler.menuChangeSubScale(_:))
@@ -494,6 +497,27 @@ class MenuController: NSObject, NSMenuDelegate {
       if encoding.code == encodingCode {
         encodingMenu.item(withTitle: encoding.title)?.state = .on
       }
+    }
+  }
+
+  private func updateOnlineSubSourceMenu() {
+    let defaultProviders = [
+      (OnlineSubtitle.Providers.openSub.name, OnlineSubtitle.Providers.openSub.id),
+      (OnlineSubtitle.Providers.assrt.name, OnlineSubtitle.Providers.assrt.id),
+      (OnlineSubtitle.Providers.shooter.name, OnlineSubtitle.Providers.shooter.id)
+    ]
+    onlineSubSourceMenu.removeAllItems()
+    for (name, id) in defaultProviders {
+      onlineSubSourceMenu.addItem(withTitle: name,
+      action: #selector(MainMenuActionHandler.menuFindOnlineSub(_:)),
+      tag: nil, obj: id)
+    }
+    onlineSubSourceMenu.addItem(.separator())
+    for (id, provider) in OnlineSubtitle.Providers.fromPlugin {
+      guard case .plugin(_, let pluginName) = provider.origin else { break }
+      onlineSubSourceMenu.addItem(withTitle: provider.name + " — " + pluginName,
+                                  action: #selector(MainMenuActionHandler.menuFindOnlineSub(_:)),
+                                  tag: nil, obj: id)
     }
   }
 
@@ -662,6 +686,8 @@ class MenuController: NSObject, NSMenuDelegate {
       updateTracks(forMenu: menu, type: .sub)
     case secondSubTrackMenu:
       updateTracks(forMenu: menu, type: .secondSub)
+    case onlineSubSourceMenu:
+      updateOnlineSubSourceMenu()
     case savedVideoFiltersMenu:
       updateSavedFiltersMenu(type: MPVProperty.vf)
     case savedAudioFiltersMenu:

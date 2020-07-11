@@ -19,16 +19,16 @@ class Assrt {
       var filename: String
     }
 
-    @objc var id: Int
-    @objc var nativeName: String
-    @objc var uploadTime: String
-    @objc var subType: String
+    var id: Int
+    var nativeName: String
+    var uploadTime: String
+    var subType: String
 
-    @objc var subLang: String?
-    @objc var title: String?
-    @objc var filename: String?
-    @objc var size: String?
-    @objc var url: URL?
+    var subLang: String?
+    var title: String?
+    var filename: String?
+    var size: String?
+    var url: URL?
     var fileList: [File]?
 
     init(index: Int, id: Int, nativeName: String, uploadTime: String, subType: String?, subLang: String?) {
@@ -84,6 +84,14 @@ class Assrt {
         return Promise(error: OnlineSubtitle.CommonError.networkError)
       }
     }
+
+    override func getDescription() -> (name: String, left: String, right: String) {
+      (
+        nativeName,
+        subType + " " + (subLang ?? ""),
+        uploadTime
+      )
+    }
   }
 
   enum Error: Int, Swift.Error {
@@ -114,9 +122,7 @@ class Assrt {
     var token: String
     var usesUserToken = false
 
-    private let subChooseViewController = SubChooseViewController(source: OnlineSubtitle.Providers.assrt.id)
-
-    static let shared = Fetcher()
+    private let subChooseViewController = SubChooseViewController()
 
     required init() {
       let userToken = Preference.string(for: .assrtToken)
@@ -128,7 +134,7 @@ class Assrt {
       }
     }
 
-    func fetch(from url: URL) -> Promise<[Subtitle]> {
+    func fetch(from url: URL, withProviderID id: String, playerCore player: PlayerCore) -> Promise<[Subtitle]> {
       firstly { () -> Promise<[Subtitle]> in
         if !self.checkToken() {
           throw OnlineSubtitle.CommonError.canceled
@@ -228,12 +234,13 @@ class Assrt {
           return
         }
         subChooseViewController.subtitles = subs
+        subChooseViewController.context = self
 
         subChooseViewController.userDoneAction = { subs in
           resolver.fulfill(subs as! [Subtitle])
         }
         subChooseViewController.userCanceledAction = {
-          resolver.reject(Error.userCanceled)
+          resolver.reject(OnlineSubtitle.CommonError.canceled)
         }
         PlayerCore.active.sendOSD(.foundSub(subs.count), autoHide: false, accessoryView: subChooseViewController.view)
         subChooseViewController.tableView.reloadData()

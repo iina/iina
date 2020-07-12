@@ -11,15 +11,21 @@ import JavaScriptCore
 
 @objc protocol JavascriptPluginSubtitleItemExportable: JSExport {
   var data: JSValue { get set }
-  var __iinsSubItem: Bool { get }
+  var desc: JSValue? { get set }
+  func __setDownlaodCallback(_ callback: JSValue)
 }
 
 class JavascriptPluginSubtitleItem: NSObject, JavascriptPluginSubtitleItemExportable {
   var data: JSValue
-  var __iinsSubItem: Bool
+  var desc: JSValue?
+  var download: JSValue?
 
-  init(data: JSValue) {
+  init(data: JSValue, desc: JSValue?) {
     self.data = data
-    self.__iinsSubItem = true
+    self.desc = desc
+  }
+
+  func __setDownlaodCallback(_ callback: JSValue) {
+    download = callback;
   }
 }

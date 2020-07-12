@@ -10,7 +10,7 @@ import Foundation
 import JavaScriptCore
 
 @objc protocol JavascriptAPISubtitleExportable: JSExport {
-  func item(_ data: JSValue) -> JavascriptPluginSubtitleItem
+  func item(_ data: JSValue, _ desc: JSValue?) -> JavascriptPluginSubtitleItem
 }
 
 class JavascriptAPISubtitle: JavascriptAPI, JavascriptAPISubtitleExportable {
@@ -27,8 +27,8 @@ class JavascriptAPISubtitle: JavascriptAPI, JavascriptAPISubtitleExportable {
     searchFunc.call(withArguments: [id, c, f])
   }
 
-  func item(_ data: JSValue) -> JavascriptPluginSubtitleItem {
-    return JavascriptPluginSubtitleItem(data: data)
+  func item(_ data: JSValue, _ desc: JSValue?) -> JavascriptPluginSubtitleItem {
+    return JavascriptPluginSubtitleItem(data: data, desc: desc)
   }
 }
 
@@ -48,23 +48,45 @@ iina.subtitle.__invokeSearch = (id, complete, fail) => {
   for (name of ["search", "download"]) {
     if (!checkAsync(name)) return;
   }
-  provider.search().then((subs) => {
-    const valid = Array.isArray(subs) && subs.every(s => s.__iinsSubItem);
-    if (!valid) {
-      fail(`provider.search should return an array of subtitle items.`);
-      return;
+  function createDownloadCallback(sub) {
+    return (complete, fail) => {
+      provider.download(sub).then(
+        (urls) => {
+          if (!Array.isArray(urls)) {
+            fail(`provider.download should return an array of strings.`);
+            return;
+          }
+          complete(urls);
+        },
+        (err) => {
+          fail(err.toString());
+        }
+      );
+    };
+  }
+  provider.search().then(
+    (subs) => {
+      if (!Array.isArray(subs)) {
+        fail(`provider.search should return an array of subtitle items.`);
+        return;
+      }
+      const hasDescFunction = typeof provider.description === "function";
+      for (const sub of subs) {
+        if (hasDescFunction && !sub.desc) sub.desc = provider.description(sub);
+        sub.__setDownlaodCallback(createDownloadCallback(sub));
+      }
+      complete(subs);
+    },
+    (err) => {
+      fail(err.toString());
     }
-    complete(subs);
-  }, (err) => {
-    fail(err.toString());
-  });
+  );
 };
 
 iina.subtitle.__providers = {};
 
 iina.subtitle.registerProvider = (id, provider) => {
-  if (typeof id !== "string")
-    throw new Error("A subtitle provider should have an id.");
+  if (typeof id !== "string") throw new Error("A subtitle provider should have an id.");
   iina.subtitle.__providers[id] = provider;
 };
 """

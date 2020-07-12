@@ -11,6 +11,7 @@ import JavaScriptCore
 import Just
 
 fileprivate let githubRepoRegex = Regex("^[\\w-]+/[\\w-]+$")
+fileprivate let idRegex = Regex("^([\\w-_]+\\.)+[\\w-_]+$")
 
 class JavascriptPlugin: NSObject {
   enum Permission: String {
@@ -38,12 +39,22 @@ class JavascriptPlugin: NSObject {
     case cannotLoadPlugin
   }
 
-  static var plugins = loadPlugins()
+  static var plugins = loadPlugins() {
+    didSet {
+      NotificationCenter.default.post(Notification(name: .iinaPluginChanged))
+    }
+  }
 
   @objc var enabled: Bool {
     didSet {
       UserDefaults.standard.set(enabled, forKey: "PluginEnabled." + identifier)
+      if enabled {
+        registerSubProviders()
+      } else {
+        removeSubProviders()
+      }
       PlayerCore.reloadPluginForAll(self)
+      NotificationCenter.default.post(Notification(name: .iinaPluginChanged))
     }
   }
 
@@ -65,6 +76,8 @@ class JavascriptPlugin: NSObject {
 
   let permissions: Set<Permission>
   let domainList: [String]
+
+  var subProviders: [[String: String]]?
 
   var entryURL: URL
   var preferencesPageURL: URL?
@@ -202,6 +215,11 @@ class JavascriptPlugin: NSObject {
       return nil
     }
 
+    guard idRegex.matches(identifier) else {
+      Logger.log("Plugin ID \"\(identifier)\"should comply with the Reverse domain name notation", level: .error)
+      return nil
+    }
+
     self.root = url
     self.name = name
     self.version = version
@@ -214,16 +232,9 @@ class JavascriptPlugin: NSObject {
     self.preferencesPage = jsonDict["preferencesPage"] as? String
     self.helpPage = jsonDict["helpPage"] as? String
     self.domainList = (jsonDict["allowedDomains"] as? [String]) ?? []
+    self.subProviders = jsonDict["subtitleProviders"] as? [[String: String]]
 
-    if let subProviders = jsonDict["subtitleProviders"] as? [[String: String]] {
-      for provider in subProviders {
-        guard let spID = provider["id"], let spName = provider["name"] else {
-          Logger.log("A subtitle provider declaration should have an id and a name.", level: .error)
-          return nil
-        }
-        OnlineSubtitle.Providers.registerFromPlugin(identifier, name, id: spID, name: spName)
-      }
-    }
+    self.enabled = UserDefaults.standard.bool(forKey: "PluginEnabled." + identifier)
 
     if let ghRepo = jsonDict["ghRepo"] as? String {
       if githubRepoRegex.matches(ghRepo) {
@@ -249,8 +260,6 @@ class JavascriptPlugin: NSObject {
     }
     self.permissions = permissions
 
-    self.enabled = UserDefaults.standard.bool(forKey: "PluginEnabled." + identifier)
-
     guard let entryURL = resolvePath(entryPath, root: root) else { return nil }
     self.entryURL = entryURL
     self.preferencesPageURL = resolvePath(preferencesPage, root: root)
@@ -262,6 +271,27 @@ class JavascriptPlugin: NSObject {
       Logger.log("Unable to read preferenceDefaults", level: .warning)
       self.defaultPrefernces = [:]
     }
+
+    super.init()
+
+    if (enabled) {
+      registerSubProviders()
+    }
+  }
+
+  func registerSubProviders() {
+    guard let subProviders = subProviders else { return }
+    for provider in subProviders {
+      guard let spID = provider["id"], let spName = provider["name"] else {
+        Logger.log("A subtitle provider declaration should have an id and a name.", level: .error)
+        continue
+      }
+      OnlineSubtitle.Providers.registerFromPlugin(identifier, name, id: spID, name: spName)
+    }
+  }
+
+  func removeSubProviders() {
+    OnlineSubtitle.Providers.removeAllFromPlugin(identifier)
   }
 
   func normalizePath() {

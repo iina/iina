@@ -60,7 +60,12 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
 
     subLangTokenView.stringValue = Preference.string(for: .subLang) ?? ""
 
-    refreshOnlineSubSource()
+    refreshSubSources()
+    refreshSubSourceAccessoryView()
+
+    NotificationCenter.default.addObserver(forName: .iinaPluginChanged, object: nil, queue: .main) { _ in
+      self.refreshSubSources()
+    }
   }
 
   @IBAction func chooseSubFontAction(_ sender: AnyObject) {
@@ -127,18 +132,26 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
   }
 
   @IBAction func onlineSubSourceAction(_ sender: NSPopUpButton) {
-    refreshOnlineSubSource()
+    refreshSubSourceAccessoryView()
   }
 
   @IBAction func preferredLanguageAction(_ sender: LanguageTokenField) {
     Preference.set(sender.stringValue, for: .subLang)
   }
 
-  private func refreshOnlineSubSource() {
-    let tag = subSourcePopUpButton.selectedTag()
+  private func refreshSubSources() {
+    OnlineSubtitle.populateMenu(subSourcePopUpButton.menu!)
+    let provider = Preference.string(for: .onlineSubProvider)
+    let index = subSourcePopUpButton.menu!.items.firstIndex { $0.representedObject as? String == provider }
+    subSourcePopUpButton.selectItem(at: index ?? 0)
+  }
+
+  private func refreshSubSourceAccessoryView() {
+    let map = [OnlineSubtitle.Providers.openSub.id: 1, OnlineSubtitle.Providers.assrt.id: 2]
+    let id = subSourcePopUpButton.selectedItem?.representedObject as? String ?? ""
     for (index, view) in subSourceStackView.views.enumerated() {
       if index == 0 { continue }
-      subSourceStackView.setVisibilityPriority(index == tag ? .mustHold : .notVisible, for: view)
+      subSourceStackView.setVisibilityPriority(index == map[id] ? .mustHold : .notVisible, for: view)
     }
   }
 }

@@ -315,7 +315,7 @@
                             <rect key="frame" x="0.0" y="60" width="426" height="21"/>
                             <subviews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="p4E-J3-eff">
-                                    <rect key="frame" x="-2" y="3" width="155" height="16"/>
+                                    <rect key="frame" x="-2" y="4" width="155" height="16"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Download subtitles from:" id="TPK-CJ-HX7">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -328,20 +328,14 @@
                                         <constraint firstAttribute="height" constant="21" id="6er-PT-s9c"/>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="jeq-2f-ivK"/>
                                     </constraints>
-                                    <popUpButtonCell key="cell" type="push" title="Shooter.cn" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="7YD-rw-eCZ" id="XkP-fD-qDc">
+                                    <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="XkP-fD-qDc">
                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="menu"/>
-                                        <menu key="menu" id="fNm-dm-q55">
-                                            <items>
-                                                <menuItem title="Shooter.cn" state="on" id="7YD-rw-eCZ"/>
-                                                <menuItem title="OpenSubtitles.org" tag="1" id="39k-VH-tOz"/>
-                                                <menuItem title="Assrt.net" tag="2" id="lQt-Cg-6Zd"/>
-                                            </items>
-                                        </menu>
+                                        <menu key="menu" id="fNm-dm-q55"/>
                                     </popUpButtonCell>
                                     <connections>
                                         <action selector="onlineSubSourceAction:" target="-2" id="MCn-TQ-TEj"/>
-                                        <binding destination="5Up-Ab-aAm" name="selectedTag" keyPath="values.onlineSubSource" id="4Lq-8P-qhN"/>
+                                        <binding destination="5Up-Ab-aAm" name="selectedObject" keyPath="values.onlineSubProvider" id="UPw-5l-t21"/>
                                     </connections>
                                 </popUpButton>
                             </subviews>
@@ -1013,11 +1007,11 @@
             <point key="canvasLocation" x="-722" y="145"/>
         </customView>
         <customView id="ZpT-fB-Daq">
-            <rect key="frame" x="0.0" y="0.0" width="546" height="197"/>
+            <rect key="frame" x="0.0" y="0.0" width="546" height="196"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField identifier="SectionTitlePosition" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WeJ-3X-tJy">
-                    <rect key="frame" x="-2" y="173" width="61" height="16"/>
+                    <rect key="frame" x="-2" y="172" width="61" height="16"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Position:" id="4Tb-Yh-PdP">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1025,7 +1019,7 @@
                     </textFieldCell>
                 </textField>
                 <box title="Align" translatesAutoresizingMaskIntoConstraints="NO" id="kvJ-Tj-KMb">
-                    <rect key="frame" x="117" y="137" width="432" height="52"/>
+                    <rect key="frame" x="117" y="136" width="432" height="52"/>
                     <view key="contentView" id="cX3-et-J5U">
                         <rect key="frame" x="3" y="3" width="426" height="34"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1102,7 +1096,7 @@
                     </view>
                 </box>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eAH-hV-xRg">
-                    <rect key="frame" x="118" y="61" width="106" height="16"/>
+                    <rect key="frame" x="118" y="60" width="106" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Vertical position:" id="9N4-Zg-M7m">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1110,7 +1104,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HKD-K0-lsV">
-                    <rect key="frame" x="230" y="58" width="80" height="21"/>
+                    <rect key="frame" x="230" y="57" width="80" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="80" id="4Sv-7x-c6d"/>
                     </constraints>
@@ -1132,14 +1126,14 @@
                     </connections>
                 </textField>
                 <textField identifier="AccessoryLabelVerticalPos" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9sd-YV-QMQ">
-                    <rect key="frame" x="316" y="61" width="15" height="16"/>
+                    <rect key="frame" x="316" y="60" width="15" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="%" id="JZo-4H-owW">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pyx-K4-cgm">
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="pyx-K4-cgm">
                     <rect key="frame" x="118" y="28" width="323" height="18"/>
                     <buttonCell key="cell" type="check" title="Display subtitles in letterboxes while in full screen" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="2XY-Un-0Fg">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1149,7 +1143,7 @@
                         <binding destination="5Up-Ab-aAm" name="value" keyPath="values.displayInLetterBox" id="qdR-6S-F0v"/>
                     </connections>
                 </button>
-                <button ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YBq-kz-Xxb">
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="YBq-kz-Xxb">
                     <rect key="frame" x="118" y="6" width="217" height="18"/>
                     <buttonCell key="cell" type="check" title="Scale subtitles with window size" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="8hj-ki-R0h">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1160,7 +1154,7 @@
                     </connections>
                 </button>
                 <box title="Margin" translatesAutoresizingMaskIntoConstraints="NO" id="pRe-wv-VVi">
-                    <rect key="frame" x="117" y="81" width="432" height="52"/>
+                    <rect key="frame" x="117" y="80" width="432" height="52"/>
                     <view key="contentView" id="UPu-fp-QvO">
                         <rect key="frame" x="3" y="3" width="426" height="34"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1259,7 +1253,7 @@
                 <constraint firstItem="pRe-wv-VVi" firstAttribute="leading" secondItem="kvJ-Tj-KMb" secondAttribute="leading" id="sZg-mz-LOl"/>
                 <constraint firstItem="HKD-K0-lsV" firstAttribute="baseline" secondItem="eAH-hV-xRg" secondAttribute="baseline" id="vFi-8B-moM"/>
             </constraints>
-            <point key="canvasLocation" x="-722" y="448.5"/>
+            <point key="canvasLocation" x="-722" y="444.5"/>
         </customView>
         <customView id="ATO-g6-mEy">
             <rect key="frame" x="0.0" y="0.0" width="546" height="70"/>

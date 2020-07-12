@@ -53,12 +53,33 @@ class OnlineSubtitle: NSObject {
     static let assrt = Provider<Assrt.Fetcher>(id: ":assrt", name: "assrt.net")
 
     static var fromPlugin: [String: Provider<JSPluginSub.Fetcher>] = [:]
+
     static func registerFromPlugin(_ pluginID: String, _ pluginName: String, id: String, name: String) {
       let providerID = "plugin:\(pluginID):\(id)"
       fromPlugin[providerID] = Provider(id: id,
                                         name: name,
                                         providerID: providerID,
                                         origin: .plugin(id: pluginID, name: pluginName))
+    }
+
+    static func removeAllFromPlugin(_ pluginID: String) {
+      let prefix = "plugin:\(pluginID):"
+      for key in fromPlugin.keys.filter({ $0.hasPrefix(prefix) }) {
+        fromPlugin.removeValue(forKey: key)
+      }
+    }
+
+    static func nameForID(_ id: String) -> String {
+      switch id {
+      case Providers.openSub.id:
+        return Providers.openSub.name
+      case Providers.shooter.id:
+        return Providers.shooter.name
+      case Providers.assrt.id:
+        return Providers.assrt.name
+      default:
+        return Providers.fromPlugin[id]?.name ?? Providers.openSub.name
+      }
     }
   }
 
@@ -99,7 +120,7 @@ class OnlineSubtitle: NSObject {
   }
 
   static func search(forFile url: URL, player: PlayerCore, providerID: String? = nil, callback: @escaping ([URL]) -> Void) {
-    let id = providerID ?? Preference.string(for: .onlineSubProvider) ?? ""
+    let id = providerID ?? Preference.string(for: .onlineSubProvider) ?? Providers.openSub.id
     switch id {
     case Providers.openSub.id:
       _search(using: Providers.openSub, forFile: url, player, callback)
@@ -110,6 +131,8 @@ class OnlineSubtitle: NSObject {
     default:
       if let provider = Providers.fromPlugin[id] {
         _search(using: provider, forFile: url, player, callback)
+      } else {
+        _search(using: Providers.openSub, forFile: url, player, callback)
       }
     }
   }
@@ -148,6 +171,25 @@ class OnlineSubtitle: NSObject {
       }
       player.sendOSD(osdMessage)
       player.isSearchingOnlineSubtitle = false
+    }
+  }
+
+  static func populateMenu(_ menu: NSMenu, action: Selector? = nil, insertSeparator: Bool = true) {
+    let defaultProviders = [
+      (Providers.openSub.name, Providers.openSub.id),
+      (Providers.assrt.name, Providers.assrt.id),
+      (Providers.shooter.name, Providers.shooter.id)
+    ]
+    menu.removeAllItems()
+    for (name, id) in defaultProviders {
+      menu.addItem(withTitle: name, action: action, tag: nil, obj: id)
+    }
+    if insertSeparator {
+      menu.addItem(.separator())
+    }
+    for (id, provider) in OnlineSubtitle.Providers.fromPlugin {
+      guard case .plugin(_, let pluginName) = provider.origin else { break }
+      menu.addItem(withTitle: provider.name + " — " + pluginName, action: action, tag: nil, obj: id)
     }
   }
 }

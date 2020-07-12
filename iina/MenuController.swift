@@ -498,27 +498,15 @@ class MenuController: NSObject, NSMenuDelegate {
         encodingMenu.item(withTitle: encoding.title)?.state = .on
       }
     }
+
+    let providerID = Preference.string(for: .onlineSubProvider) ?? OnlineSubtitle.Providers.openSub.id
+    let providerName = OnlineSubtitle.Providers.nameForID(providerID)
+    findOnlineSub.title = String(format: Constants.String.findOnlineSubtitles, providerName)
   }
 
   private func updateOnlineSubSourceMenu() {
-    let defaultProviders = [
-      (OnlineSubtitle.Providers.openSub.name, OnlineSubtitle.Providers.openSub.id),
-      (OnlineSubtitle.Providers.assrt.name, OnlineSubtitle.Providers.assrt.id),
-      (OnlineSubtitle.Providers.shooter.name, OnlineSubtitle.Providers.shooter.id)
-    ]
-    onlineSubSourceMenu.removeAllItems()
-    for (name, id) in defaultProviders {
-      onlineSubSourceMenu.addItem(withTitle: name,
-      action: #selector(MainMenuActionHandler.menuFindOnlineSub(_:)),
-      tag: nil, obj: id)
-    }
-    onlineSubSourceMenu.addItem(.separator())
-    for (id, provider) in OnlineSubtitle.Providers.fromPlugin {
-      guard case .plugin(_, let pluginName) = provider.origin else { break }
-      onlineSubSourceMenu.addItem(withTitle: provider.name + " — " + pluginName,
-                                  action: #selector(MainMenuActionHandler.menuFindOnlineSub(_:)),
-                                  tag: nil, obj: id)
-    }
+    OnlineSubtitle.populateMenu(onlineSubSourceMenu,
+                                action: #selector(MainMenuActionHandler.menuFindOnlineSub(_:)))
   }
 
   func updateSavedFiltersMenu(type: String) {

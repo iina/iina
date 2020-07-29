@@ -1,0 +1,292 @@
+/*
+  String_ui.strings
+  iina
+
+  Created by lhc on 3/1/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+// Common
+
+"general.on" = "Uključeno";
+"general.off" = "Isključeno";
+"general.login" = "Prijavi me";
+"general.logout" = "Odjavi me";
+"general.ok" = "U redu";
+"general.cancel" = "Otkaži";
+"general.username" = "Korisničko Ime";
+"general.password" = "Lozinka";
+
+// MainWindowController.swift
+"main.buffering_indicator" = "Smeštanje u bafer… %d%%";
+"main.opening_stream" = "Otvaram strim…";
+
+// QuickSettingViewController.swift
+"quicksetting.item_default" = "Podrazumevano";
+"quicksetting.item_none" = "Nijеdan";
+"quicksetting.hwdec" = "Hardversko dekodiranje";
+"quicksetting.deinterlace" = "Rasplitanje";
+
+// OSDMessage.swift
+"osd.pause" = "Pauziraj";
+"osd.resume" = "Nastavi";
+"osd.volume" = "Jačina zvuka: %i";
+"osd.speed" = "Brzina: %.2fx";
+"osd.aspect" = "Odnos širina/visina: %@";
+"osd.crop" = "Iseci: %@";
+"osd.rotate" = "Rotiraj: %i°";
+"osd.deinterlace" = "Rasplitanje: %@";
+"osd.hwdec" = "Hardversko dekodiranje: %@";
+"osd.audio_delay.nodelay" = "Kašnjenje zvuka: bez kašnjenja";
+"osd.audio_delay.later" = "Kašnjenje zvuka: %.2fs kasnije";
+"osd.audio_delay.earlier" = "Kašnjenje zvuka: %.2fs ranije";
+"osd.sub_delay.nodelay" = "Kašnjenje titla: bez kašnjenja";
+"osd.sub_delay.later" = "Kašnjenje titla: %.2fs kasnije";
+"osd.sub_delay.earlier" = "Kašnjenje titla: %.2fs ranije";
+"osd.subtitle_pos" = "Položaj titla: %.1f";
+"osd.mute" = "Isključi zvuk";
+"osd.unmute" = "Ponovo uključi zvuk";
+"osd.screenshot" = "Snimak ekrana je napravljen";
+"osd.abloop.a" = "A-B petlja: A";
+"osd.abloop.b" = "A-B petlja: B";
+"osd.abloop.clear" = "A-B petlja: očišćena";
+"osd.stop" = "Zaustavi";
+"osd.chapter" = "Poglavlje: %@";
+"osd.subtitle_scale" = "Razmera titla: %.2fx";
+"osd.add_to_playlist" = "Datoteka dodato u plejlistu: %i";
+"osd.clear_playlist" = "Očišćena plejlista";
+"osd.video_eq.contrast" = "Kontrast: %i";
+"osd.video_eq.gamma" = "Gama: %i";
+"osd.video_eq.hue" = "Nijansa: %i";
+"osd.video_eq.saturation" = "Zasićenje: %i";
+"osd.video_eq.brightness" = "Svetlina: %i";
+"osd.find_online_sub" = "Pronalaženje titlova na mreži…";
+"osd.find_online_sub.source" = "sa lokacije";
+"osd.sub_not_found" = "Nije pronađen nijedan titl";
+"osd.sub_found" = "Pronađeno titlova: %d. Preuzimam…";
+"osd.sub_downloaded" = "Titl je preuzet";
+"osd.sub_saved" = "Titl je sačuvan";
+"osd.network_error" = "Greška na mreži";
+"osd.file_error" = "Greška pri čitanju datoteke";
+"osd.cannot_login" = "Prijava nije moguća";
+"osd.canceled" = "Otkazano";
+"osd.filter_added" = "Dodati filter: %@";
+"osd.filter_removed" = "Uklonjeni filter";
+
+"preference.title" = "Željene postavke";
+"preference.general" = "Opšte postavke";
+"preference.ui" = "Interfejs";
+"preference.video_audio" = "Video/Audio";
+"preference.subtitle" = "Titl";
+"preference.network" = "Mreža";
+"preference.control" = "Kontrole";
+"preference.keybindings" = "Prečice na tastaturi";
+"preference.advanced" = "Napredno";
+"preference.utilities" = "Uslužni programi";
+"preference.scripts" = "Skripte";
+"preference.not_logged_in" = "Niste prijavljeni";
+"preference.logged_in_as" = "Prijavljeni ste kao %@";
+"preference.system_media_control" = "Koristi sistemske kontrole medija";
+
+"preference.key_binding_hint_1" = "Da biste izmenili prečice na tastaturi u trenutnoj konfiguracionoj datoteci, najpre kliknite na dugme „Dupliraj…“ da biste napravili kopiju.";
+"preference.key_binding_hint_2" = "Dvaput kliknite na red na desnoj strani da biste izmenili odgovarajuću prečicu na tastaturi.";
+
+"preference.enable_adv_settings" = "Omogući napredne postavke";
+
+"menu.volume" = "Jačina zvuka: %d";
+"menu.audio_delay" = "Kašnjenje zvuka: %.2fs";
+"menu.sub_delay" = "Kašnjenje titla: %.2fs";
+"menu.fullscreen" = "Uđi u režim celog ekrana";
+"menu.exit_fullscreen" = "Izađi iz rеžima cеlog еkrana";
+"menu.pip" = "Uđi u režim slike u slici";
+"menu.exit_pip" = "Izađi iz režima slike u slici";
+"menu.pause" = "Pauziraj";
+"menu.resume" = "Nastavi";
+"menu.speed" = "Brzina: %.2fx";
+
+"menu.seek_forward" = "Korak unapred: %.0fs";
+"menu.seek_backward" = "Korak unazad: %.0fs";
+"menu.speed_up" = "Ubrzaj za %.1fx";
+"menu.speed_down" = "Uspori za %.1fx";
+"menu.volume_up" = "Jačina zvuka + %.0f%%";
+"menu.volume_down" = "Jačina zvuka - %.0f%%";
+"menu.audio_delay_up" = "Kašnjenje zvuka + %.1fs";
+"menu.audio_delay_down" = "Kašnjenje zvuka - %.1fs";
+"menu.sub_delay_up" = "Kašnjenje titla + %.1fs";
+"menu.sub_delay_down" = "Kašnjenje titla - %.1fs";
+
+"menu.crop_custom" = "Prilagođeno...";
+
+"track.none" = "<None>";
+
+"subtrack.no_loaded" = "Nije učitan nijedan titl";
+"subtrack.no_external" = "Nije pronađen nijedan spoljni titl";
+
+// Alerts
+"alert.beta_channel.title" = "Primaj ažuriranja za beta verzije";
+
+"alert.title_error" = "Grеška";
+"alert.title_warning" = "Upozorenje";
+"alert.title_info" = "Informacije";
+
+"alert.fatal_error" = "Neotklonjiva greška: %@\nAplikacija će prestati sa radom.";
+"alert.mpv_error" = "Unutrašnja greška %@ (%@) prilikom postavljanja opcije %@.";
+"alert.sleep" = "Ne mogu da sprečim stanje spavanja ekrana!";
+
+"alert.unsupported_audio" = "Nepodržana spoljna zvučna datoteka.";
+"alert.unsupported_sub" = "Nepodržani spoljni titl.";
+"alert.unsupported_url" = "Nepodržana URL adresa.";
+"alert.wrong_url_format" = "Pogrešan format URL adrese.";
+
+"alert.error_open" = "Nije moguće otvoriti datoteku ili strim!";
+"alert.error_finding_file" = "Nije moguće pronaći datoteku %@!";
+"alert.error_loading_script" = "Nije moguće učitati skriptu %@!";
+"alert.error_saving_file" = "Došlo je do greške prilikom čuvanja %@: %@";
+"alert.error_deleting_file" = "Nije moguće izbrisati datoteku.";
+
+"alert.config.new.title" = "Nova ulazna konfiguracija";
+"alert.config.new.message" = "Unеsitе naziv za novu konfiguraciju.";
+"alert.config.duplicate.title" = "Duplirana konfiguracija";
+"alert.config.duplicate.message" = "Unеsitе naziv za dupliranu konfiguracionu datoteku.";
+"alert.config.empty_name" = "Naziv ne može biti prazan.";
+"alert.config.name_existing" = "Naziv već postoji.";
+"alert.config.file_existing.title" = "Datoteka već postoji";
+"alert.config.file_existing.message" = "To ne bi smelo da se dešava. Odaberite U redu da biste datoteku zamenili, Otkaži da biste je prikazali u Finderu.";
+"alert.config.cannot_create" = "Nije moguće kreirati konfiguracionu datoteku!\n%@";
+"alert.config.cannot_write" = "Nije moguće upisivati u konfiguracionu datoteku!";
+
+"alert.filter.incorrect" = "Došlo je do greške prilikom postavljanja filtera. Proverite format parametra.";
+"alert.add_filter.title" = "Novi filter";
+"alert.add_filter.message" = "Unеsitе nisku filtera u formatu naredbi vf ili af programa mpv.";
+
+"alert.keybinding_config.error" = "Greška prilikom raščlanjivanja konfiguracione datoteke prečica na tastaturi „%@“! Vraćanje na podrazumevane IINA postavke prečica na tastaturi. Proverite konfiguraciju.";
+
+"alert.extra_option.cannot_read" = "Cannot read user defined extra mpv options.";
+"alert.extra_option.empty" = "Key or value cannot be empty!";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
+"alert.extra_option.config_folder" = "Error setting config directory \"%@\".";
+
+"alert.playlist.error_deleting" = "Error deleting: %@";
+
+"alert.sub.no_selected" = "Please select a downloaded subtitle first.";
+"alert.sub_lang_not_set" = "Please set preferred subtitle languages in preferences before using OpenSubtitles. English(eng) will be used this time.";
+"alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
+"alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
+
+"alert.set_default.title" = "Setting IINA as Default App";
+"alert.set_default.message" = "IINA will be set as the default app for all file types it supports.";
+"alert.set_default.success" = "Finished with %d success and %d failed.";
+
+"alert.add_watch.title" = "Add Watch Property";
+"alert.add_watch.message" = "Please enter a valid mpv property name.";
+
+"alert.jump_to.title" = "Jump to";
+"alert.jump_to.message" = "Please enter the time you want to jump to. Example: 20:35";
+
+"alert.opensub.login.title" = "OpenSubtitles Login";
+"alert.opensub.login.message" = "Please enter your username and password";
+
+"alert.open_url.title" = "Open URL";
+"alert.open_url.message" = "Please enter the URL:";
+"alert.choose_media_file.title" = "Choose Media Files";
+
+"alert.add_url.title" = "Add URL";
+"alert.add_url.message" = "Please enter the URL:";
+
+"alert.delete_history.title" = "Delete Playback History";
+"alert.delete_history.message" = "Are you sure to delete selected entries?";
+
+"alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
+"alert.filter_hwdec.abort" = "Abort";
+"alert.filter_hwdec.turn_off" = "Turn off hardware decoding";
+"alert.filter_hwdec.use_copy" = "Switch to Auto(Copy)";
+
+"alert.clear_cache.title" = "Clear Thumbnail Cache";
+"alert.clear_cache.message" = "Are you sure to clear all thumbnail Cache?";
+
+"alert.clear_history.title" = "Clear Playback History";
+"alert.clear_history.message" = "Are you sure to delete all playback history?";
+
+"alert.clear_watch_later.title" = "Clear Saved Playback Progress";
+"alert.clear_watch_later.message" = "Are you sure to delete all saved playback progress (\"watch later\" data)?";
+
+"alert.nothing_to_open" = "Nothing to open.";
+
+"alert.no_video_track" = "There is no video track.";
+
+"alert.duplicate_config" = "You cannot edit default configurations directly. Please duplicate one before editing.";
+
+"alert.assrt_register" = "Due to limited API quota, you are strongly recommended to use your own API token. The default token is only for demo usage, and you may encounter network error.";
+"alert.assrt_register.register" = "Register Now";
+"alert.assrt_register.try" = "Try First";
+"alert.assrt_token_prompt.title" = "Enter your API token";
+"alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
+"alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
+
+"playlist.total_length" = "%@ in total";
+"playlist.total_length_with_selected" = "%@ of %@ selected";
+"pl_menu.title_multi" = "%d Items";
+"pl_menu.play_next" = "Play Next";
+"pl_menu.play_in_new_window" = "Play in New Window";
+"pl_menu.remove" = "Remove";
+"pl_menu.remove_multi" = "Remove Selected";
+"pl_menu.delete" = "Move to Trash";
+"pl_menu.delete_multi" = "Move Selected Files to Trash";
+"pl_menu.delete_after_play" = "Move to Trash After Playback";
+"pl_menu.delete_after_play_multi" = "Move Selected Files to Trash After Playback";
+"pl_menu.reveal_in_finder" = "Reveal in Finder";
+"pl_menu.add_file" = "Add File…";
+"pl_menu.add_url" = "Add URL…";
+"pl_menu.clear_playlist" = "Clear Playlist";
+"pl_menu.matched_sub" = "Matched %d Subtitle(s)";
+"pl_menu.add_sub" = "Add Subtitle…";
+"pl_menu.wrong_sub" = "Wrong Subtitle!";
+"pl_menu.browser" = "Open in Browser";
+"pl_menu.copy_url" = "Copy URL";
+"pl_menu.copy_url_multi" = "Copy URLs";
+
+"keymapping.title" = "Key Mapping";
+"keymapping.message" = "Press any key to record.";
+
+"filter.video_filters" = "Video Filters";
+"filter.audio_filters" = "Audio Filters";
+
+"hwdec.no" = "Disable hardware decoding.";
+"hwdec.auto" = "Enable hardware decoding. However, most of the video filters won't work properly.";
+"hwdec.auto-copy" = "Enable hardware decoding. It will consume double the memory but work with video filters.";
+
+"subencoding.auto" = "Auto detect";
+
+"osc_toolbar.settings" = "Quick Settings";
+"osc_toolbar.playlist" = "Playlist and chapters";
+"osc_toolbar.pip" = "Toggle Picture-in-Picture";
+"osc_toolbar.full_screen" = "Toggle full screen";
+"osc_toolbar.music_mode" = "Enter music mode";
+"osc_toolbar.sub_track" = "Choose subtitle track";
+
+"mini_player.album_art" = "Toggle album art";
+"mini_player.loop" = "Repeat";
+"mini_player.shuffle" = "Shuffle";
+"mini_player.remove" = "Remove from playlist";
+"mini_player.add" = "Add to playlist";
+"mini_player.delete" = "Delete all tracks from playlist";
+"mini_player.volume" = "Volume";
+"mini_player.close" = "Close music mode";
+"mini_player.back" = "Return to video mode";
+
+// Touch bar
+
+"touchbar.ahead_15" = "15sec Ahead";
+"touchbar.ahead_30" = "30sec Ahead";
+"touchbar.back_15" = "15sec Back";
+"touchbar.back_30" = "30sec Back";
+"touchbar.next_video" = "Next Video";
+"touchbar.prev_video" = "Previous Video";
+"touchbar.increase_volume" = "Volume +";
+"touchbar.decrease_volume" = "Volume -";
+"touchbar.rewind" = "Rewind";
+"touchbar.fast_forward" = "Fast Forward";
+"touchbar.play_pause" = "Play / Pause";
+"touchbar.seek" = "Seek";
+"touchbar.time" = "Time Position";
+"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
+"touchbar.toggle_pip" = "Toggle Picture-in-Picture";

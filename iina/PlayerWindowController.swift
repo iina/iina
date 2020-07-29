@@ -498,7 +498,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     case .saveDownloadedSub:
       menuActionHandler.saveDownloadedSub(.dummy)
     case .disableSubtitles:
-      menuActionHandler.menuToggleDisableSubtitles(.dummy)
+      menuActionHandler.menuToggleSubtitlesState(.dummy)
     default:
       break
     }

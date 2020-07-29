@@ -753,21 +753,11 @@ class MPVController: NSObject {
 
     case MPVOption.TrackSelection.sid:
       player.info.sid = Int(getInt(MPVOption.TrackSelection.sid))
-      if player.info.sid != 0 && player.info.subDisabled == true {
-        player.info.subDisabled = false
-      } else if player.info.sid == 0 && player.info.secondSid == 0 {
-        player.info.subDisabled = true
-      }
       player.postNotification(.iinaSIDChanged)
       player.sendOSD(.track(player.info.currentTrack(.sub) ?? .noneSubTrack))
 
     case MPVOption.Subtitles.secondarySid:
       player.info.secondSid = Int(getInt(MPVOption.Subtitles.secondarySid))
-      if player.info.secondSid != 0 && player.info.subDisabled == true {
-        player.info.subDisabled = false
-      } else if player.info.sid == 0 && player.info.secondSid == 0 {
-        player.info.subDisabled = true
-      }
       player.postNotification(.iinaSIDChanged)
 
     case MPVOption.PlaybackControl.pause:

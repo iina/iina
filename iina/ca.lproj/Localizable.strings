@@ -23,6 +23,8 @@
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Per defecte";
 "quicksetting.item_none" = "Cap";
+"quicksetting.hwdec" = "Hardware Decoding";
+"quicksetting.deinterlace" = "Deinterlace";
 
 // OSDMessage.swift
 "osd.pause" = "Pausa";
@@ -33,6 +35,7 @@
 "osd.crop" = "Escapça: %@";
 "osd.rotate" = "Gira: %i°";
 "osd.deinterlace" = "Desentrellaça: %@";
+"osd.hwdec" = "Hardware Decoding: %@";
 "osd.audio_delay.nodelay" = "Retard de l'àudio: sense retard";
 "osd.audio_delay.later" = "Retard de l'àudio: %.2fs després";
 "osd.audio_delay.earlier" = "Retard de l'àudio: %.2fs abans";
@@ -87,6 +90,8 @@
 "preference.key_binding_hint_1" = "Per editar les dreces de teclat en el fitxer actual, prem el bóto \"Duplica…\" per crear una còpia.";
 "preference.key_binding_hint_2" = "Doble clic a la dreta de la fila per editar la drecera de teclat corresponent.";
 
+"preference.enable_adv_settings" = "Enable advanced settings";
+
 "menu.volume" = "Volum: %d";
 "menu.audio_delay" = "Retard d'àudio: %.2fs";
 "menu.sub_delay" = "Retard en els subtítols: %.2fs";
@@ -109,6 +114,8 @@
 "menu.sub_delay_up" = "Retarda en els subtítols + %.1fs";
 "menu.sub_delay_down" = "Retarda en els subtítols - %.1fs";
 
+"menu.crop_custom" = "Custom...";
+
 "track.none" = "<Cap>";
 
 "subtrack.no_loaded" = "No s'han carregat subtítols";
@@ -116,7 +123,6 @@
 
 // Alerts
 "alert.beta_channel.title" = "Rebre actualitzacions de versions Beta";
-"alert.beta_channel.message" = "IINA v1.0 està de camí! T'agradaria ajudar-nos a provar les versions beta? \n\nPots canviar aquest comportament qualsevol moment a Preferències - General.";
 
 "alert.title_error" = "Error";
 "alert.title_warning" = "Avís";
@@ -257,6 +263,16 @@
 "osc_toolbar.music_mode" = "Canvia a mode de música";
 "osc_toolbar.sub_track" = "Selecciona la pista dels subtítols";
 
+"mini_player.album_art" = "Toggle album art";
+"mini_player.loop" = "Repeat";
+"mini_player.shuffle" = "Shuffle";
+"mini_player.remove" = "Remove from playlist";
+"mini_player.add" = "Add to playlist";
+"mini_player.delete" = "Delete all tracks from playlist";
+"mini_player.volume" = "Volume";
+"mini_player.close" = "Close music mode";
+"mini_player.back" = "Return to video mode";
+
 // Touch bar
 
 "touchbar.ahead_15" = "Avança 15sec";
@@ -272,5 +288,5 @@
 "touchbar.play_pause" = "Reprodueix / Pausa";
 "touchbar.seek" = "Cerca";
 "touchbar.time" = "Posició en el temps";
-"touchbar.remainingTime" = "Temps restant";
+"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
 "touchbar.toggle_pip" = "Commuta Picture-in-Picture";

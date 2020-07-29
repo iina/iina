@@ -5,7 +5,7 @@
 "1dz-Vt-0MO.title" = "FPS:";
 
 /* Class = "NSTextFieldCell"; title = "File path:"; ObjectID = "4jf-w4-kkv"; */
-"4jf-w4-kkv.title" = "Umiestnenie Súboru:";
+"4jf-w4-kkv.title" = "Umiestnenie súboru:";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "5H6-qJ-RDS"; */
 "5H6-qJ-RDS.title" = "Formát:";
@@ -17,22 +17,22 @@
 "9eq-rd-zGy.title" = "Názov:";
 
 /* Class = "NSTextFieldCell"; title = "Bit Rate:"; ObjectID = "A4y-LL-x0z"; */
-"A4y-LL-x0z.title" = "Bit Rate:";
+"A4y-LL-x0z.title" = "Dátový tok:";
 
 /* Class = "NSTextFieldCell"; title = "Mistimed Frames:"; ObjectID = "AYt-pH-UCi"; */
-"AYt-pH-UCi.title" = "Zle Načasované Snímky:";
+"AYt-pH-UCi.title" = "Zle načasované snímky:";
 
 /* Class = "NSTextFieldCell"; title = "Display FPS:"; ObjectID = "AjU-1T-aGR"; */
-"AjU-1T-aGR.title" = "Zobrazené FPS:";
+"AjU-1T-aGR.title" = "Zobraziť FPS:";
 
 /* Class = "NSTextFieldCell"; title = "Dropped Frames:"; ObjectID = "CrF-UR-udW"; */
-"CrF-UR-udW.title" = "Vynechané Snímky:";
+"CrF-UR-udW.title" = "Vynechané snímky:";
 
 /* Class = "NSTextFieldCell"; title = "Hw Decoder:"; ObjectID = "DHh-ne-10f"; */
-"DHh-ne-10f.title" = "Hw Dekodér:";
+"DHh-ne-10f.title" = "HW dekodér:";
 
 /* Class = "NSWindow"; title = "Inspector"; ObjectID = "F0z-JX-Cv5"; */
-"F0z-JX-Cv5.title" = "Inšpektor";
+"F0z-JX-Cv5.title" = "Informácie";
 
 /* Class = "NSTextFieldCell"; title = "Language:"; ObjectID = "FIw-CH-b05"; */
 "FIw-CH-b05.title" = "Jazyk:";
@@ -53,10 +53,10 @@
 "I2E-6Z-Gnn.title" = "Ovládač:";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Disp FPS"; ObjectID = "JN9-3E-OJp"; */
-"JN9-3E-OJp.title" = "Odhad Zobrazovaného FPS";
+"JN9-3E-OJp.title" = "Odhadované zobrazené FPS";
 
 /* Class = "NSTextFieldCell"; title = "File Path:"; ObjectID = "Jxp-Wf-BhU"; */
-"Jxp-Wf-BhU.title" = "Umiestnenie Súboru:";
+"Jxp-Wf-BhU.title" = "Umiestnenie súboru:";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "KqD-NM-WiK"; */
 "KqD-NM-WiK.title" = "Veľkosť:";
@@ -113,28 +113,28 @@
 "f7a-XG-NCc.label" = "Všeobecné";
 
 /* Class = "NSTextFieldCell"; title = "Track:"; ObjectID = "f7i-wX-uxQ"; */
-"f7i-wX-uxQ.title" = "Skladba:";
+"f7i-wX-uxQ.title" = "Stopa:";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Output FPS:"; ObjectID = "g8p-Ec-awO"; */
-"g8p-Ec-awO.title" = "Odhad Výstupu FPS:";
+"g8p-Ec-awO.title" = "Odhadované výstupné FPS:";
 
 /* Class = "NSTextFieldCell"; title = "VIDEO"; ObjectID = "gDG-Eq-1Bc"; */
 "gDG-Eq-1Bc.title" = "VIDEO";
 
 /* Class = "NSTextFieldCell"; title = "A/V Sync Diff:"; ObjectID = "iVK-Ck-Lyq"; */
-"iVK-Ck-Lyq.title" = "A/V Sync Rozdiel:";
+"iVK-Ck-Lyq.title" = "Rozdiel v A/V synchronizácii:";
 
 /* Class = "NSTextFieldCell"; title = "Channels:"; ObjectID = "it3-05-Pwu"; */
 "it3-05-Pwu.title" = "Kanály:";
 
 /* Class = "NSTextFieldCell"; title = "Source ID:"; ObjectID = "jCY-og-BAa"; */
-"jCY-og-BAa.title" = "ID Zdroja:";
+"jCY-og-BAa.title" = "ID zdroja:";
 
 /* Class = "NSTextFieldCell"; title = "Bit Rate:"; ObjectID = "jyV-Pd-UvH"; */
-"jyV-Pd-UvH.title" = "Bit Rate:";
+"jyV-Pd-UvH.title" = "Dátový tok:";
 
 /* Class = "NSTextFieldCell"; title = "Sample Rate:"; ObjectID = "llF-4b-Z8b"; */
-"llF-4b-Z8b.title" = "Vzorkovacia Frekvencia:";
+"llF-4b-Z8b.title" = "Vzorkovacia frekvencia:";
 
 /* Class = "NSTextFieldCell"; title = "ID:"; ObjectID = "mZG-ik-Led"; */
 "mZG-ik-Led.title" = "ID:";
@@ -149,13 +149,13 @@
 "nrG-IH-kFg.title" = "ZVUK";
 
 /* Class = "NSTextFieldCell"; title = "Total A/V Sync:"; ObjectID = "sbO-Cn-gpI"; */
-"sbO-Cn-gpI.title" = "Úplný A/V Sync:";
+"sbO-Cn-gpI.title" = "Úplná A/V synchronizácia:";
 
 /* Class = "NSTextFieldCell"; title = "Watch"; ObjectID = "tNS-gW-PcC"; */
-"tNS-gW-PcC.title" = "Pozrieť";
+"tNS-gW-PcC.title" = "Pozerať";
 
 /* Class = "NSTextFieldCell"; title = "Sample Rate:"; ObjectID = "vrP-XL-Weg"; */
-"vrP-XL-Weg.title" = "Vzorkovacia Frekvencia:";
+"vrP-XL-Weg.title" = "Vzorkovacia frekvencia:";
 
 /* Class = "NSTextFieldCell"; title = "Decoder:"; ObjectID = "xix-0S-ehE"; */
 "xix-0S-ehE.title" = "Dekodér:";

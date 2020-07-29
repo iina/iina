@@ -62,7 +62,8 @@ enum OSDMessage {
 
   case addFilter(String)
   case removeFilter
-
+  
+  //  FIXME: Use swifty case names for `disableSubtitles` and `enableSubtitles`.
   case disableSubtitles
   case enableSubtitles
   case startFindingSub(String)  // sub source

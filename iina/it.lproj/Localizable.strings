@@ -23,6 +23,8 @@
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Predefinito";
 "quicksetting.item_none" = "Nessuno";
+"quicksetting.hwdec" = "Decodifica dell'Hardware";
+"quicksetting.deinterlace" = "Deinterlacciamento";
 
 // OSDMessage.swift
 "osd.pause" = "Pausa";
@@ -33,6 +35,7 @@
 "osd.crop" = "Ritaglio: %@";
 "osd.rotate" = "Rotazione: %i°";
 "osd.deinterlace" = "Deinterlacciamento: %@";
+"osd.hwdec" = "Decodifica dell'Hardware: %@";
 "osd.audio_delay.nodelay" = "Differenza audio: 0.00s";
 "osd.audio_delay.later" = "Differenza audio: %.2fs dopo";
 "osd.audio_delay.earlier" = "Differenza audio: %.2fs prima";
@@ -87,6 +90,8 @@
 "preference.key_binding_hint_1" = "Per modificare le scorciatoie di tastiera nel file di configurazione corrente, fai prima click su \"Duplica…\" per crearne una copia.";
 "preference.key_binding_hint_2" = "Fai doppio click nella riga sulla destra per modificare la scorciatoia di tastiera corrispondente.";
 
+"preference.enable_adv_settings" = "Enable advanced settings";
+
 "menu.volume" = "Volume: %d";
 "menu.audio_delay" = "Differenza audio: %.2fs";
 "menu.sub_delay" = "Differenza sottotitoli: %.2fs";
@@ -109,6 +114,8 @@
 "menu.sub_delay_up" = "Ritarda sottotitoli + %.1fs";
 "menu.sub_delay_down" = "Anticipa sottotitoli - %.1fs";
 
+"menu.crop_custom" = "Custom...";
+
 "track.none" = "<Nessuno>";
 
 "subtrack.no_loaded" = "Nessun sottotitolo caricato";
@@ -116,7 +123,6 @@
 
 // Alerts
 "alert.beta_channel.title" = "Ricevi gli aggiornamenti per la versione beta";
-"alert.beta_channel.message" = "IINA v1.0 sta arrivando! Vorresti aiutarci a testare le versioni beta?\n\nPuoi modificare questa impostazione in qualsiasi momento in Preferenze - Generali.";
 
 "alert.title_error" = "Errore";
 "alert.title_warning" = "Attenzione";
@@ -257,6 +263,16 @@
 "osc_toolbar.music_mode" = "Attiva la modalità musicale";
 "osc_toolbar.sub_track" = "Scegli la traccia dei sottotitoli";
 
+"mini_player.album_art" = "Toggle album art";
+"mini_player.loop" = "Repeat";
+"mini_player.shuffle" = "Shuffle";
+"mini_player.remove" = "Remove from playlist";
+"mini_player.add" = "Add to playlist";
+"mini_player.delete" = "Delete all tracks from playlist";
+"mini_player.volume" = "Volume";
+"mini_player.close" = "Close music mode";
+"mini_player.back" = "Return to video mode";
+
 // Touch bar
 
 "touchbar.ahead_15" = "15sec avanti";
@@ -272,5 +288,5 @@
 "touchbar.play_pause" = "Riproduci / Pausa";
 "touchbar.seek" = "Ricerca";
 "touchbar.time" = "Tempo";
-"touchbar.remainingTime" = "Tempo rimanente";
+"touchbar.remainingTimeOrTotalDuration" = "Tempo Rimanente / Durata Totale";
 "touchbar.toggle_pip" = "Attiva / disattiva Picture-in-Picture";

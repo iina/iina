@@ -23,6 +23,8 @@
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Défaut";
 "quicksetting.item_none" = "Aucun";
+"quicksetting.hwdec" = "Décodage Matériel";
+"quicksetting.deinterlace" = "Désentrelacer";
 
 // OSDMessage.swift
 "osd.pause" = "En pause";
@@ -33,6 +35,7 @@
 "osd.crop" = "Rognage : %@";
 "osd.rotate" = "Rotation : %i°";
 "osd.deinterlace" = "Désentrelacer : %@";
+"osd.hwdec" = "Décodage Matériel: %@";
 "osd.audio_delay.nodelay" = "Délai audio : aucun";
 "osd.audio_delay.later" = "Délai audio : %.2fs en avance";
 "osd.audio_delay.earlier" = "Délai audio : %.2fs en retard";
@@ -87,6 +90,8 @@
 "preference.key_binding_hint_1" = "Pour modifier les raccourcis clavier de cette configuration, cliquez sur le bouton \"Dupliquer…\" pour en créer une copie.";
 "preference.key_binding_hint_2" = "Double-cliquez sur une ligne pour modifier le raccourci clavier correspondant.";
 
+"preference.enable_adv_settings" = "Activer les paramètres avancés";
+
 "menu.volume" = "Volume : %d";
 "menu.audio_delay" = "Délai audio : %.2fs";
 "menu.sub_delay" = "Délai des sous-titres : %.2fs";
@@ -109,6 +114,8 @@
 "menu.sub_delay_up" = "Délai des sous-titres +%.1fs";
 "menu.sub_delay_down" = "Délai des sous-titres -%.1fs";
 
+"menu.crop_custom" = "Personnalisé…";
+
 "track.none" = "<Aucun>";
 
 "subtrack.no_loaded" = "Aucun sous-titre chargé";
@@ -116,7 +123,6 @@
 
 // Alerts
 "alert.beta_channel.title" = "Recevoir des mises à jour pour les versions beta";
-"alert.beta_channel.message" = "IINA v1.0 arrive bientôt ! Souhaitez-vous nous aider à tester les versions beta ?\n\nVous pouvez changer cette option à n'importe quel moment dans les Préférences (Général).";
 
 "alert.title_error" = "Erreur";
 "alert.title_warning" = "Attention";
@@ -257,6 +263,16 @@
 "osc_toolbar.music_mode" = "Activer le mode musique";
 "osc_toolbar.sub_track" = "Choisir une piste de sous-titres";
 
+"mini_player.album_art" = "Activer/désactiver la pochette d'album";
+"mini_player.loop" = "Répéter";
+"mini_player.shuffle" = "Ordre aléatoire";
+"mini_player.remove" = "Retirer de la liste de lecture";
+"mini_player.add" = "Ajouter à la liste de lecture";
+"mini_player.delete" = "Supprimer toutes les pistes de la liste de lecture";
+"mini_player.volume" = "Volume";
+"mini_player.close" = "Fermer le mode musique";
+"mini_player.back" = "Revenir en mode vidéo";
+
 // Touch bar
 
 "touchbar.ahead_15" = "15sec en avant";
@@ -272,5 +288,5 @@
 "touchbar.play_pause" = "Lecture/Pause";
 "touchbar.seek" = "Chercher";
 "touchbar.time" = "Position horaire";
-"touchbar.remainingTime" = "Temps restant";
+"touchbar.remainingTimeOrTotalDuration" = "Durée restante / Durée totale";
 "touchbar.toggle_pip" = "Activer le mode Image dans l'image";

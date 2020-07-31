@@ -42,6 +42,8 @@
 "osd.subtitle_pos" = "字幕位置：%.1f";
 "osd.mute" = "靜音";
 "osd.unmute" = "解除靜音";
+"osd.disable_subtitles" = "已啟用字幕";
+"osd.enable_subtitles" = "已停用字幕";
 "osd.screenshot" = "螢幕快照已擷取";
 "osd.abloop.a" = "AB循環：A";
 "osd.abloop.b" = "AB循環：B";

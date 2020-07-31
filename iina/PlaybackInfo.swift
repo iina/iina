@@ -129,12 +129,63 @@ class PlaybackInfo {
   var subTracks: [MPVTrack] = []
 
   var abLoopStatus: Int = 0 // 0: none, 1: A set, 2: B set (looping)
-
+  
+  //  FIXME: Make track indices concrete, non-optional.
   /** Selected track IDs. Use these (instead of `isSelected` of a track) to check if selected */
   var aid: Int?
-  var sid: Int?
   var vid: Int?
-  var secondSid: Int?
+  //  FIXME: Use a tupple for the 2 subtitle track indices.
+  /// The first subtitle track index.
+  var sid: Int? = 0 {
+    didSet(previousFirstSubtitleTrackIndex) {
+      //  In order to prevent a didSet loop between the first subtitle track index's and the subtitles state's observers, we need to ensure that the subtitle track index did change before everything.
+      guard sid != previousFirstSubtitleTrackIndex else { return }
+      recoveredFirstSubtitleTrackIndex = previousFirstSubtitleTrackIndex
+      guard let firstSubtitleTrackIndex = sid, let secondSubtitleTrackIndex = secondSid else { return }
+      subtitlesAreEnabled = firstSubtitleTrackIndex > 0 || secondSubtitleTrackIndex > 0
+    }
+  }
+  
+  /// The second subtitle track index.
+  var secondSid: Int? = 0 {
+    didSet(previousSecondSubtitleTrackIndex) {
+      //  In order to prevent a didSet loop between the second subtitle track index's and the subtitles state's observers, we need to ensure that the subtitle track index did change before everything.
+      guard secondSid != previousSecondSubtitleTrackIndex else { return }
+      recoveredSecondSubtitleTrackIndex = previousSecondSubtitleTrackIndex
+      guard let firstSubtitleTrackIndex = sid, let secondSubtitleTrackIndex = secondSid else { return }
+      subtitlesAreEnabled = firstSubtitleTrackIndex > 0 || secondSubtitleTrackIndex > 0
+    }
+  }
+  
+  /// The first subtitle track index to revert to when subtitles are (re-)enabled.
+  ///
+  /// The default value is `1`. A video starts with no subtitles, with subtitles in the off state (disabled). When the user enables subtitles for the first time, the first subtitle switches to the 1st track.
+  var recoveredFirstSubtitleTrackIndex: Int? = 1
+  
+  /// The second subtitle track index to revert to when subtitles are (re-)enabled.
+  ///
+  /// The default value is `0`. A video starts with no subtitles, with subtitles in the off state (disabled). When the user enables subtitles for the first time, the second subtitle stays off.
+  var recoveredSecondSubtitleTrackIndex: Int? = 0
+  
+  //  FIXME: Remove `subtitlesAreDisabled`.
+  var subtitlesAreDisabled: Bool {
+    get { !subtitlesAreEnabled }
+    set(newSubtitleState) { subtitlesAreEnabled = !newSubtitleState }
+  }
+  
+  /// The Boolean value indicating whether the subtitles are on (enabled).
+  var subtitlesAreEnabled: Bool = false {
+    //  FIXME: Fix the property observer logic.
+    //  Everything before `sendOSD` should be in a `willSet` observer, but it will lead to `sendOSD` being called twise, so everything is in `didSet` for now.
+    didSet(previousSubtitlesState) {
+      //  In order to prevent a didSet loop between the subtitle tracks indices's and the subtitles state's observers, we need to ensure that the subtitles state did change before everything.
+      guard previousSubtitlesState != subtitlesAreEnabled else { return }
+      player.mpv.setInt(MPVOption.TrackSelection.sid, subtitlesAreEnabled ? recoveredFirstSubtitleTrackIndex! : 0)
+      player.mpv.setInt(MPVOption.Subtitles.secondarySid, subtitlesAreEnabled ? recoveredSecondSubtitleTrackIndex! : 0)
+      //  FIXME: sendOSD doesn't work here because as soon as a sub track changes, the property listeners in MPVController will fire their own OSD message effectively making the ones here unseen
+      player.sendOSD(subtitlesAreEnabled ? .enableSubtitles : .disableSubtitles)
+    }
+  }
 
   var subEncoding: String?
 

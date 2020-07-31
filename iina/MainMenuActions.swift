@@ -266,9 +266,20 @@ extension MainMenuActionHandler {
   }
 }
 
-// MARK: - Sub
+// MARK: - Subtitles
 
 extension MainMenuActionHandler {
+  
+  /// Enables/disables subtitles by changing the active subtitle tracks.
+  ///
+  /// This method delegates al actuall functionalities to `player.toggleSubtitlesState()`.
+  ///
+  /// - Parameter sender: The menu item that calls this method.
+  @objc @inlinable
+  func menuToggleSubtitlesState(_ sender: NSMenuItem) {
+    player.toggleSubtitlesState()
+  }
+
   @objc func menuLoadExternalSub(_ sender: NSMenuItem) {
     Utility.quickOpenPanel(title: "Load external subtitle file", chooseDir: false) { url in
       self.player.loadExternalSubFile(url, delay: true)

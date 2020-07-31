@@ -140,6 +140,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var savedAudioFiltersMenu: NSMenu!
   // Subtitle
   @IBOutlet weak var subMenu: NSMenu!
+  @IBOutlet weak var toggleSubtitlesState: NSMenuItem!
   @IBOutlet weak var quickSettingsSub: NSMenuItem!
   @IBOutlet weak var cycleSubtitles: NSMenuItem!
   @IBOutlet weak var subTrackMenu: NSMenu!
@@ -347,6 +348,7 @@ class MenuController: NSObject, NSMenuDelegate {
     loadExternalSub.action = #selector(MainMenuActionHandler.menuLoadExternalSub(_:))
     subTrackMenu.delegate = self
     secondSubTrackMenu.delegate = self
+    toggleSubtitlesState.action = #selector(MainMenuActionHandler.menuToggleSubtitlesState(_:))
 
     findOnlineSub.action = #selector(MainMenuActionHandler.menuFindOnlineSub(_:))
     saveDownloadedSub.action = #selector(MainMenuActionHandler.saveDownloadedSub(_:))
@@ -481,6 +483,7 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updateSubMenu() {
     let player = PlayerCore.active
+    toggleSubtitlesState.state = player.info.subtitlesAreDisabled ? .on : .off
     subDelayIndicator.title = String(format: NSLocalizedString("menu.sub_delay", comment: "Subtitle Delay:"), player.info.subDelay)
 
     let encodingCode = player.info.subEncoding ?? "auto"
@@ -684,6 +687,7 @@ class MenuController: NSObject, NSMenuDelegate {
       (resetSubDelay, false, ["set", "sub-delay", "0"], true, nil, nil),
       (increaseTextSize, false, ["multiply", "sub-scale", "1.1"], true, 1.01...1.49, nil),
       (decreaseTextSize, false, ["multiply", "sub-scale", "0.9"], true, 0.71...0.99, nil),
+      (toggleSubtitlesState, true, ["disable-subtitles"], false, nil, nil),
       (resetTextSize, false, ["set", "sub-scale", "1"], true, nil, nil),
       (alwaysOnTop, false, ["cycle", "ontop"], false, nil, nil),
       (fullScreen, false, ["cycle", "fullscreen"], false, nil, nil)

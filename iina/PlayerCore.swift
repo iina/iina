@@ -667,6 +667,11 @@ class PlayerCore: NSObject {
     mpv.setFlag(MPVOption.Video.deinterlace, enable)
   }
 
+  @inlinable
+  func toggleSubtitlesState() {
+    info.subtitlesAreEnabled.toggle()
+  }
+
   func toggleHardwareDecoding(_ enable: Bool) {
     let value = Preference.HardwareDecoderOption(rawValue: Preference.integer(for: .hardwareDecoder))?.mpvString ?? "auto"
     mpv.setString(MPVOption.Video.hwdec, enable ? value : "no")

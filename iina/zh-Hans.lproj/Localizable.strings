@@ -87,6 +87,8 @@
 "preference.key_binding_hint_1" = "若要编辑此配置文件，请先点击「复制…」按钮来创建一个副本。";
 "preference.key_binding_hint_2" = "双击右边的任意一行来编辑相应的快捷键。";
 
+"preference.enable_adv_settings" = "启用高级设置";
+
 "menu.volume" = "音量: %d";
 "menu.audio_delay" = "音频延迟: %.2f秒";
 "menu.sub_delay" = "字幕延迟: %.2f秒";

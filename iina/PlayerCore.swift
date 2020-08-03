@@ -1099,6 +1099,38 @@ class PlayerCore: NSObject {
         NSDocumentController.shared.noteNewRecentDocumentURL(url)
       }
     }
+    
+    // automatically load internal subtitles if no subtitles are loaded currently.
+    let currentSub = PlayerCore.active.info.currentTrack(.sub)
+    if (currentSub == nil) {
+      let internalSubs = self.info.trackList(.sub)
+
+      /**
+       * ISO 639-1 locale code from Cocoa NSLocale
+       * ISO 639-2 locale code from MPVTrack
+       * we need convert them both to same language presentation by ISO639Helper
+       */
+      
+      // System preferred languages
+      let preferredLanguages = NSLocale.preferredLanguages
+        .map({ lang in Locale(identifier: lang).languageCode ?? "" })
+        .map({ i in ISO639Helper.dictionary[i] })
+        .filter({ i in i != nil })
+    
+      for lang in preferredLanguages {
+        if let sub = internalSubs.first(where: { sub in
+          // Internal sub language
+          guard let subCode = sub.lang else { return false }
+          guard let subLang = ISO639Helper.dictionary[subCode] else { return false }
+          return subLang == lang
+        }) {
+          self.setTrack(sub.id, forType: .sub)
+          break
+        }
+      }
+    }
+    
+    
     postNotification(.iinaFileLoaded)
   }
 

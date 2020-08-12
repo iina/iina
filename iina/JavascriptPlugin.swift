@@ -34,6 +34,8 @@ class JavascriptPlugin: NSObject {
   }
 
   enum PluginError: Error {
+    case fileNotFound
+    case cannotUnpackage(String, String)
     case invalidURL
     case cannotDownload(String, String)
     case cannotLoadPlugin
@@ -131,6 +133,49 @@ class JavascriptPlugin: NSObject {
   }
 
   @discardableResult
+  static func create(fromPackageURL url: URL) throws -> JavascriptPlugin {
+    guard FileManager.default.fileExists(atPath: url.path) else {
+      throw PluginError.fileNotFound
+    }
+
+    let pluginsRoot = Utility.pluginsURL
+    let tempFolder = ".temp.\(UUID().uuidString)"
+    let tempZipFile = "\(tempFolder).zip"
+    let tempDecompressDir = "\(tempFolder)-1"
+
+    defer {
+      [tempZipFile, tempDecompressDir].forEach { item in
+        try? FileManager.default.removeItem(at: pluginsRoot.appendingPathComponent(item))
+      }
+    }
+
+    func removeTempPluginFolder() {
+      try? FileManager.default.removeItem(at: pluginsRoot.appendingPathComponent(tempFolder))
+    }
+
+    let cmd = [
+      "cp '\(url.path)' '\(tempZipFile)'",
+      "mkdir '\(tempFolder)' '\(tempDecompressDir)'",
+      "unzip '\(tempZipFile)' -d '\(tempDecompressDir)'",
+      "mv '\(tempDecompressDir)'/* '\(tempFolder)'/"
+    ].joined(separator: " && ")
+    let (process, stdout, stderr) = Process.run(["/bin/bash", "-c", cmd], at: pluginsRoot)
+
+    guard process.terminationStatus == 0 else {
+      let outText = String(data: stdout.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) ?? "None"
+      let errText = String(data: stderr.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) ?? "None"
+      removeTempPluginFolder()
+      throw PluginError.cannotUnpackage(outText, errText)
+    }
+
+    guard let plugin = JavascriptPlugin(filename: tempFolder) else {
+      removeTempPluginFolder()
+      throw PluginError.cannotLoadPlugin
+    }
+    return plugin
+  }
+
+  @discardableResult
   static func create(fromGitURL urlString: String) throws -> JavascriptPlugin {
     var formatted: String
     if githubRepoRegex.matches(urlString) {
@@ -158,6 +203,10 @@ class JavascriptPlugin: NSObject {
       }
     }
 
+    func removeTempPluginFolder() {
+      try? FileManager.default.removeItem(at: pluginsRoot.appendingPathComponent(tempFolder))
+    }
+
     let cmd = [
       "curl -fsSL '\(githubMasterURL)' > '\(tempZipFile)'",
       "mkdir '\(tempFolder)' '\(tempDecompressDir)'",
@@ -169,15 +218,18 @@ class JavascriptPlugin: NSObject {
     guard process.terminationStatus == 0 else {
       let outText = String(data: stdout.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) ?? "None"
       let errText = String(data: stderr.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) ?? "None"
+      removeTempPluginFolder()
       throw PluginError.cannotDownload(outText, errText)
     }
 
     guard let plugin = JavascriptPlugin(filename: tempFolder) else {
+      removeTempPluginFolder()
       throw PluginError.cannotLoadPlugin
     }
 
     guard plugin.githubVersion != nil, formatted == plugin.githubURLString else {
       Logger.log("The plugin \(plugin.name) doesn't contain a ghVersion field or its ghRepo doesn't match the current requested URL \(formatted).")
+      removeTempPluginFolder()
       throw PluginError.cannotLoadPlugin
     }
     return plugin

@@ -9,7 +9,7 @@
 import Cocoa
 import WebKit
 
-class PluginOverlayView: WKWebView {
+class PluginOverlayView: WKWebView, WKNavigationDelegate {
   override func hitTest(_ point: NSPoint) -> NSView? {
     return nil
   }
@@ -26,11 +26,18 @@ class PluginOverlayView: WKWebView {
     config.userContentController.add(pluginInstance.apis!["overlay"] as! WKScriptMessageHandler, name: "iina")
 
     let webView = PluginOverlayView(frame: .zero, configuration: config)
+    webView.navigationDelegate = webView
     webView.translatesAutoresizingMaskIntoConstraints = false
     webView.setValue(false, forKey: "drawsBackground")
     webView.isHidden = true
 
     return webView
+  }
+
+  func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){
+    if let wc = window?.windowController as? PlayerWindowController {
+      wc.player.events.emit(.pluginOverlayLoaded)
+    }
   }
 }
 

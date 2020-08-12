@@ -49,7 +49,7 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
 
   func loadFile(_ path: String) {
     guard player.mainWindow.isWindowLoaded && permitted(to: .displayVideoOverlay) else {
-      throwError(withMessage: "overlay.loadFile called when window is not available. Please call it after receiving event \"iina.window-loaded\".")
+      throwError(withMessage: "overlay.loadFile called when window is not available. Please call it after receiving the \"iina.window-loaded\" event.")
       return
     }
     let rootURL = pluginInstance.plugin.root
@@ -60,12 +60,18 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
   }
 
   func simpleMode() {
+    guard player.mainWindow.isWindowLoaded && permitted(to: .displayVideoOverlay) else {
+      throwError(withMessage: "overlay.simpleMode called when window is not available. Please call it after receiving the \"iina.window-loaded\" event.")
+      return
+    }
+    if (inSimpleMode) { return }
     pluginInstance.overlayView.loadHTMLString(simpleModeHTMLString, baseURL: nil)
     pluginInstance.overlayViewLoaded = true
     inSimpleMode = true
   }
 
   func setStyle(_ style: String) {
+    guard pluginInstance.overlayViewLoaded && permitted(to: .displayVideoOverlay) else { return }
     guard inSimpleMode else {
       log("overlay.setStyle is only available in simple mode.", level: .error)
       return
@@ -78,6 +84,7 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
   }
 
   func setContent(_ content: String) {
+    guard pluginInstance.overlayViewLoaded && permitted(to: .displayVideoOverlay) else { return }
     guard inSimpleMode else {
       log("overlay.setContent is only available in simple mode.", level: .error)
       return
@@ -97,6 +104,7 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
   }
 
   func onMessage(_ name: String, _ callback: JSValue) {
+    guard pluginInstance.overlayViewLoaded && permitted(to: .displayVideoOverlay) else { return }
     listeners[name] = callback
   }
 

@@ -59,6 +59,7 @@ class EventController {
     // Others
     static let mpvInitialized = Name("iina.mpv-inititalized")
     static let thumbnailsReady = Name("iina.thumbnails-ready")
+    static let pluginOverlayLoaded = Name("iina.plugin-overlay-loaded")
   }
 
   var listeners: [Name: [String: EventCallable]] = [:]

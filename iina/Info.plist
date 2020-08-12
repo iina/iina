@@ -443,6 +443,22 @@
 			<key>LSTypeIsPackage</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>iinaplgz</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>doc_plugin.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>IINA Plugin Package</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>io.iina.iinaplgz</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
@@ -522,6 +538,25 @@ Released under GPLv3.</string>
 	<string>UpwCRYfYOg0OGgQHY6RUdrV29yPcdkvxGlEfq46r6a0=</string>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
+		<dict>
+			<key>UTTypeIconFile</key>
+			<string>doc_plugin.icns</string>
+			<key>UTTypeDescription</key>
+			<string>IINA Plugin Package</string>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>com.pkware.zip-archive</string>
+			</array>
+			<key>UTTypeIdentifier</key>
+			<string>io.iina.iinaplgz</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>iinaplgz</string>
+				</array>
+			</dict>
+		</dict>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>

@@ -263,10 +263,15 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
     let message: String
     if let pluginError = error as? JavascriptPlugin.PluginError {
       switch pluginError {
+      case .fileNotFound:
+        message = NSLocalizedString("plugin.install_error.file_not_found", comment: "")
       case .invalidURL:
         message = NSLocalizedString("plugin.install_error.invalid_url", comment: "")
       case .cannotDownload(_, let err):
         let str = NSLocalizedString("plugin.install_error.cannot_download", comment: "")
+        message = String(format: str, err)
+      case .cannotUnpackage(_, let err):
+        let str = NSLocalizedString("plugin.install_error.cannot_unpackage", comment: "")
         message = String(format: str, err)
       case .cannotLoadPlugin:
         message = NSLocalizedString("plugin.install_error.cannot_load", comment: "")
@@ -366,21 +371,15 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
           self.view.window!.endSheet(self.newPluginSheet)
         }
       }
-      do {
-        let plugin = try JavascriptPlugin.create(fromGitURL: source)
-        self.showPermissionsSheet(forPlugin: plugin, previousPlugin: nil) { ok in
-          if ok {
-            plugin.normalizePath()
-            plugin.enabled = true
-            JavascriptPlugin.plugins.append(plugin)
-            PlayerCore.reloadPluginForAll(plugin)
-            self.tableView.reloadData()
-          } else {
-            plugin.remove()
-          }
-        }
-      } catch let error {
-        self.handleInstallationError(error)
+      self.installPlugin(fromGitHubString: source)
+    }
+  }
+
+  @IBAction func installPluginFromLocalPackage(_ sender: Any) {
+    Utility.quickOpenPanel(title: "Install from local package",
+                           chooseDir: false, sheetWindow: view.window, allowedFileTypes: ["iinaplgz"]) { url in
+      self.queue.async {
+        self.installPlugin(fromLocalPackageURL: url)
       }
     }
   }
@@ -428,6 +427,38 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
           }
         }
       }
+    }
+  }
+
+  private func showNewPluginPermissions(_ plugin: JavascriptPlugin) {
+    showPermissionsSheet(forPlugin: plugin, previousPlugin: nil) { ok in
+      if ok {
+        plugin.normalizePath()
+        plugin.enabled = true
+        JavascriptPlugin.plugins.append(plugin)
+        PlayerCore.reloadPluginForAll(plugin)
+        self.tableView.reloadData()
+      } else {
+        plugin.remove()
+      }
+    }
+  }
+
+  private func installPlugin(fromGitHubString string: String) {
+    do {
+      let plugin = try JavascriptPlugin.create(fromGitURL: string)
+      showNewPluginPermissions(plugin)
+    } catch let error {
+      self.handleInstallationError(error)
+    }
+  }
+
+  private func installPlugin(fromLocalPackageURL url: URL) {
+    do {
+      let plugin = try JavascriptPlugin.create(fromPackageURL: url)
+      showNewPluginPermissions(plugin)
+    } catch let error {
+      self.handleInstallationError(error)
     }
   }
 

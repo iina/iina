@@ -10,15 +10,24 @@ import Foundation
 import JavaScriptCore
 
 @objc protocol JavascriptAPIMenuExportable: JSExport {
-  func item(_ title: String, _ action: JSValue, _ selected: Bool, _ enabled: Bool) -> JavascriptPluginMenuItem
+  func item(_ title: String, _ action: JSValue, _ options: JSValue) -> JavascriptPluginMenuItem
   func separator() -> JavascriptPluginMenuItem
   func addItem(_ item: JavascriptPluginMenuItem)
   func removeAllItems()
 }
 
 class JavascriptAPIMenu: JavascriptAPI, JavascriptAPIMenuExportable {
-  @objc func item(_ title: String, _ action: JSValue, _ selected: Bool = false, _ enabled: Bool = true) -> JavascriptPluginMenuItem {
-    let item = JavascriptPluginMenuItem(title: title, action: action, selected: selected, enabled: enabled, owner: self)
+  @objc func item(_ title: String, _ action: JSValue,  _ options: JSValue) -> JavascriptPluginMenuItem {
+    let action_ = action.isNull ? nil : action
+    let enabled = getKeyedValue(options, "enabled")?.toBool() ?? true
+    let selected = getKeyedValue(options, "selected")?.toBool() ?? false
+    let key: String? = getKeyedValue(options, "keyBinding")?.toString()
+    let item = JavascriptPluginMenuItem(title: title,
+                                        action: action_,
+                                        selected: selected,
+                                        enabled: enabled,
+                                        key: key,
+                                        owner: self)
     return item
   }
 
@@ -41,4 +50,12 @@ class JavascriptAPIMenu: JavascriptAPI, JavascriptAPIMenuExportable {
     }
     self.pluginInstance.menuItems.removeAll()
   }
+}
+
+fileprivate func getKeyedValue(_ object: JSValue, _ key: String) -> JSValue? {
+  guard object.isObject else { return nil }
+  guard let value = object.objectForKeyedSubscript(key), !value.isUndefined else {
+    return nil
+  }
+  return value
 }

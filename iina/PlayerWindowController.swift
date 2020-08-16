@@ -415,11 +415,11 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     if #available(macOS 10.13, *), RemoteCommandController.useSystemMediaControl {
       NowPlayingInfoManager.updateInfo(withTitle: true)
     }
-    NotificationCenter.default.post(name: .iinaMainWindowChanged, object: nil)
+    NotificationCenter.default.post(name: .iinaMainWindowChanged, object: true)
   }
   
   func windowDidResignMain(_ notification: Notification) {
-    NotificationCenter.default.post(name: .iinaMainWindowChanged, object: nil)
+    NotificationCenter.default.post(name: .iinaMainWindowChanged, object: false)
   }
 
   func windowDidChangeScreen(_ notification: Notification) {

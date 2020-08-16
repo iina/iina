@@ -384,6 +384,11 @@ class MenuController: NSObject, NSMenuDelegate {
     // Plugin
 
     pluginMenu.delegate = self
+    NotificationCenter.default.addObserver(forName: .iinaMainWindowChanged, object: nil, queue: .main) {
+      if ($0.object as? Bool == true) {
+        self.updatePluginMenu()
+      }
+    }
 
     // Window
 
@@ -525,6 +530,8 @@ class MenuController: NSObject, NSMenuDelegate {
     pluginMenu.removeAllItems()
     pluginMenu.addItem(withTitle: "Manage Plugins…")
     pluginMenu.addItem(.separator())
+
+    var errorList: [(String, String)] = []
     for (index, plugin) in PlayerCore.active.plugins.enumerated() {
       var counter = 0
       var rootMenu: NSMenu! = pluginMenu
@@ -543,14 +550,22 @@ class MenuController: NSObject, NSMenuDelegate {
           moreItem.submenu = rootMenu
           pluginMenu.addItem(moreItem)
         }
-        add(menuItemDef: item, to: rootMenu, for: plugin)
+        add(menuItemDef: item, to: rootMenu, for: plugin, errorList: &errorList)
         counter += 1
       }
+    }
+    if errorList.count > 0 {
+      pluginMenu.insertItem(
+        NSMenuItem(title: "⚠︎ Conflicting key shortcuts…", action: nil, keyEquivalent: ""),
+        at: 0)
     }
   }
 
   @discardableResult
-  private func add(menuItemDef item: JavascriptPluginMenuItem, to menu: NSMenu, for plugin: JavascriptPluginInstance) -> NSMenuItem {
+  private func add(menuItemDef item: JavascriptPluginMenuItem,
+                   to menu: NSMenu,
+                   for plugin: JavascriptPluginInstance,
+                   errorList: inout [(String, String)]) -> NSMenuItem {
     if (item.isSeparator) {
       let item = NSMenuItem.separator()
       menu.addItem(item)
@@ -569,12 +584,21 @@ class MenuController: NSObject, NSMenuDelegate {
 
     menuItem.isEnabled = item.enabled
     menuItem.state = item.selected ? .on : .off
+    if let key = item.keyBinding {
+      if PlayerCore.keyBindings[key] != nil {
+        errorList.append((plugin.plugin.name, key))
+      } else if let (kEqv, kMdf) = KeyCodeHelper.macOSKeyEquivalent(from: key) {
+        menuItem.keyEquivalent = kEqv
+        menuItem.keyEquivalentModifierMask = kMdf
+      }
+    }
     if !item.items.isEmpty {
       menuItem.submenu = NSMenu()
       for submenuItem in item.items {
-        add(menuItemDef: submenuItem, to: menuItem.submenu!, for: plugin)
+        add(menuItemDef: submenuItem, to: menuItem.submenu!, for: plugin, errorList: &errorList)
       }
     }
+    item.nsMenuItem = menuItem
     return menuItem
   }
 
@@ -680,8 +704,6 @@ class MenuController: NSObject, NSMenuDelegate {
       updateSavedFiltersMenu(type: MPVProperty.vf)
     case savedAudioFiltersMenu:
       updateSavedFiltersMenu(type: MPVProperty.af)
-    case pluginMenu:
-      updatePluginMenu()
     default: break
     }
     // check conveniently bound menus

@@ -12,5 +12,6 @@
 + (BOOL)silenced:(void(^)(void))tryBlock;
 
 + (NSUInteger)levDistance:(NSString *)str0 and:(NSString *)str1;
++ (NSImage *)getImageFrom:(mpv_node *)image;
 
 @end

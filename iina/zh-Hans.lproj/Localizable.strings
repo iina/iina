@@ -116,7 +116,7 @@
 
 // Alerts
 "alert.beta_channel.title" = "接受 beta 版本的更新";
-"alert.beta_channel.message" = "在发布 IINA 1.0 之前，你愿意帮助我们测试 beta 版本吗？\n\n你可以在「偏好设置-通用」中随时修改此行为。";
+"alert.beta_channel.message" = "你愿意帮助我们测试 beta 版本吗？\n\n你可以在「偏好设置-通用」中随时修改此行为。";
 
 "alert.title_error" = "错误";
 "alert.title_warning" = "警告";

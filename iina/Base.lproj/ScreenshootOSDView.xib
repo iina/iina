@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="ScreenshootOSDView" customModule="IINA" customModuleProvider="target">
+            <connections>
+                <outlet property="bottomConstraint" destination="pSo-2Q-ukD" id="L1N-qN-Qgx"/>
+                <outlet property="deleteBtn" destination="u7L-iO-hp4" id="LLc-TB-Lty"/>
+                <outlet property="editBtn" destination="8sY-3E-IFw" id="mKR-i1-u5n"/>
+                <outlet property="heightConstraint" destination="HOi-dD-oTJ" id="EDN-Hf-vfT"/>
+                <outlet property="imageView" destination="q1D-Q2-PWP" id="4Nz-wB-1iH"/>
+                <outlet property="revealBtn" destination="sfo-Mh-tkL" id="Qhl-ZM-jMw"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+                <outlet property="widthConstraint" destination="2cw-Ka-K2Y" id="TTS-N2-rgb"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="287" height="184"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="q1D-Q2-PWP">
+                    <rect key="frame" x="0.0" y="36" width="287" height="140"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="287" id="2cw-Ka-K2Y"/>
+                        <constraint firstAttribute="height" constant="140" id="HOi-dD-oTJ"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="N0F-Vf-d6b"/>
+                </imageView>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="u7L-iO-hp4">
+                    <rect key="frame" x="0.0" y="8" width="54" height="16"/>
+                    <buttonCell key="cell" type="square" title="DELETE" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="JGi-s6-8NZ">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="systemBold"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="deleteBtnAction:" target="-2" id="3ZK-R3-UME"/>
+                    </connections>
+                </button>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8sY-3E-IFw">
+                    <rect key="frame" x="66" y="8" width="35" height="16"/>
+                    <buttonCell key="cell" type="square" title="EDIT" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="H12-rV-dHF">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="systemBold"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="editBtnAction:" target="-2" id="Pah-Sy-xUs"/>
+                    </connections>
+                </button>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sfo-Mh-tkL">
+                    <rect key="frame" x="113" y="8" width="56" height="16"/>
+                    <buttonCell key="cell" type="square" title="REVEAL" bezelStyle="shadowlessSquare" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="5fX-iV-Qu2">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="systemBold"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="revealBtnAction:" target="-2" id="jCt-zo-trV"/>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="q1D-Q2-PWP" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="1Ys-JJ-HpL"/>
+                <constraint firstItem="sfo-Mh-tkL" firstAttribute="leading" secondItem="8sY-3E-IFw" secondAttribute="trailing" constant="12" id="OSW-b3-t7Z"/>
+                <constraint firstItem="q1D-Q2-PWP" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="8" id="QG1-H1-haW"/>
+                <constraint firstItem="sfo-Mh-tkL" firstAttribute="firstBaseline" secondItem="8sY-3E-IFw" secondAttribute="firstBaseline" id="SsV-YW-pkz"/>
+                <constraint firstItem="8sY-3E-IFw" firstAttribute="leading" secondItem="u7L-iO-hp4" secondAttribute="trailing" constant="12" id="Y5m-yN-VRf"/>
+                <constraint firstAttribute="bottom" secondItem="u7L-iO-hp4" secondAttribute="bottom" constant="8" id="a8f-KO-ruP"/>
+                <constraint firstItem="8sY-3E-IFw" firstAttribute="firstBaseline" secondItem="u7L-iO-hp4" secondAttribute="firstBaseline" id="fWM-BN-pPf"/>
+                <constraint firstAttribute="bottom" secondItem="q1D-Q2-PWP" secondAttribute="bottom" constant="36" id="pSo-2Q-ukD"/>
+                <constraint firstAttribute="trailing" secondItem="q1D-Q2-PWP" secondAttribute="trailing" id="xcJ-B0-QKa"/>
+                <constraint firstItem="u7L-iO-hp4" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="zE3-oo-Mtt"/>
+            </constraints>
+            <point key="canvasLocation" x="43.5" y="129.5"/>
+        </customView>
+    </objects>
+</document>

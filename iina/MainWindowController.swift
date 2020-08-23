@@ -155,6 +155,7 @@ class MainWindowController: PlayerWindowController {
 
   /** Whether current osd needs user interaction to be dismissed */
   var isShowingPersistentOSD = false
+  var osdContext: Any?
 
   // MARK: - Enums
 
@@ -1555,7 +1556,7 @@ class MainWindowController: PlayerWindowController {
   // MARK: - UI: OSD
 
   // Do not call displayOSD directly, call PlayerCore.sendOSD instead.
-  func displayOSD(_ message: OSDMessage, autoHide: Bool = true, accessoryView: NSView? = nil) {
+  func displayOSD(_ message: OSDMessage, autoHide: Bool = true, forcedTimeout: Float? = nil, accessoryView: NSView? = nil, context: Any? = nil) {
     guard player.displayOSD && !isShowingPersistentOSD else { return }
 
     if hideOSDTimer != nil {
@@ -1602,6 +1603,9 @@ class MainWindowController: PlayerWindowController {
     }
     if let accessoryView = accessoryView {
       isShowingPersistentOSD = true
+      if context != nil {
+        osdContext = context
+      }
 
       if #available(macOS 10.14, *) {} else {
         accessoryView.appearance = NSAppearance(named: .vibrantDark)
@@ -1634,7 +1638,7 @@ class MainWindowController: PlayerWindowController {
     }
 
     if autoHide {
-      let timeout = Preference.float(for: .osdAutoHideTimeout)
+      let timeout = forcedTimeout ?? Preference.float(for: .osdAutoHideTimeout)
       hideOSDTimer = Timer.scheduledTimer(timeInterval: TimeInterval(timeout), target: self, selector: #selector(self.hideOSD), userInfo: nil, repeats: false)
     }
   }
@@ -1648,9 +1652,11 @@ class MainWindowController: PlayerWindowController {
     }) {
       if self.osdAnimationState == .willHide {
         self.osdAnimationState = .hidden
+        self.osdStackView.views(in: .bottom).forEach { self.osdStackView.removeView($0) }
       }
     }
     isShowingPersistentOSD = false
+    osdContext = nil
   }
 
   // MARK: - UI: Side bar

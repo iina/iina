@@ -16,33 +16,36 @@ class VideoTime {
   var second: Double
 
   var h: Int {
-    get {
-      return (Int(second) / 3600)
-    }
+    Int(second) / 3600
   }
 
   var m: Int {
-    get {
-      return (Int(second) % 3600) / 60
-    }
+    (Int(second) % 3600) / 60
   }
 
   var s: Int {
-    get {
-      return (Int(second) % 3600) % 60
-    }
+    (Int(second) % 3600) % 60
   }
 
   var stringRepresentation: String {
-    get {
-      if self == Constants.Time.infinite {
-        return "End"
-      }
-      let ms = (m < 10 ? "0\(m)" : "\(m)")
-      let ss = (s < 10 ? "0\(s)" : "\(s)")
-      let hs = (h > 0 ? "\(h):" : "")
-      return "\(hs)\(ms):\(ss)"
+    stringRepresentationWithPrecision(0)
+  }
+
+  func stringRepresentationWithPrecision(_ precision: UInt) -> String {
+    if self == Constants.Time.infinite {
+      return "End"
     }
+    let h_ = h > 0 ? "\(h):" : ""
+    let m_ = m < 10 ? "0\(m)" : "\(m)"
+    let s_: String
+
+    if precision >= 1 && precision <= 3 {
+      s_ = String(format: "%0\(precision + 3).\(precision)f", fmod(second, 60))
+    } else {
+      s_ = s < 10 ? "0\(s)" : "\(s)"
+    }
+
+    return h_ + m_ + ":" + s_
   }
 
   convenience init?(_ format: String) {

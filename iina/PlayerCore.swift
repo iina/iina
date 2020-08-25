@@ -1079,8 +1079,7 @@ class PlayerCore: NSObject {
       getPlaylist()
       getChapters()
       clearAbLoop()
-      syncPlayTimeTimer = Timer.scheduledTimer(timeInterval: TimeInterval(AppData.getTimeInterval),
-                                               target: self, selector: #selector(self.syncUITime), userInfo: nil, repeats: true)
+      createSyncUITimer()
       if #available(macOS 10.12.2, *) {
         touchBarSupport.setupTouchBarUI()
       }
@@ -1209,6 +1208,17 @@ class PlayerCore: NSObject {
   }
 
   // MARK: - Sync with UI in MainWindow
+
+  func createSyncUITimer() {
+    invalidateTimer()
+    syncPlayTimeTimer = Timer.scheduledTimer(
+      timeInterval: TimeInterval(DurationDisplayTextField.precision >= 2 ? AppData.syncTimePreciseInterval : AppData.syncTimeInterval),
+      target: self,
+      selector: #selector(self.syncUITime),
+      userInfo: nil,
+      repeats: true
+    )
+  }
 
   func notifyMainWindowVideoSizeChanged() {
     mainWindow.adjustFrameByVideoSize()

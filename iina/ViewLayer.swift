@@ -49,44 +49,32 @@ class ViewLayer: CAOpenGLLayer {
   }
 
   override func copyCGLPixelFormat(forDisplayMask mask: UInt32) -> CGLPixelFormatObj {
-
-    let attributes0: [CGLPixelFormatAttribute] = [
+    var attributeList: [CGLPixelFormatAttribute] = [
       kCGLPFADoubleBuffer,
+      kCGLPFAAllowOfflineRenderers,
       kCGLPFAOpenGLProfile, CGLPixelFormatAttribute(kCGLOGLPVersion_3_2_Core.rawValue),
       kCGLPFAAccelerated,
-      kCGLPFAAllowOfflineRenderers,
-      _CGLPixelFormatAttribute(rawValue: 0)
     ]
 
-    let attributes1: [CGLPixelFormatAttribute] = [
-      kCGLPFADoubleBuffer,
-      kCGLPFAOpenGLProfile, CGLPixelFormatAttribute(kCGLOGLPVersion_3_2_Core.rawValue),
-      kCGLPFAAllowOfflineRenderers,
-      _CGLPixelFormatAttribute(rawValue: 0)
-    ]
-
-    let attributes2: [CGLPixelFormatAttribute] = [
-      kCGLPFADoubleBuffer,
-      kCGLPFAAllowOfflineRenderers,
-      _CGLPixelFormatAttribute(rawValue: 0)
-    ]
+    if (!Preference.bool(for: .forceDedicatedGPU)) {
+      attributeList.append(kCGLPFASupportsAutomaticGraphicsSwitching)
+    }
 
     var pix: CGLPixelFormatObj?
     var npix: GLint = 0
 
-    CGLChoosePixelFormat(attributes0, &pix, &npix)
-
-    if pix == nil {
-      CGLChoosePixelFormat(attributes1, &pix, &npix)
+    for index in (0..<attributeList.count).reversed() {
+      let attributes = Array(
+        attributeList[0...index] + [_CGLPixelFormatAttribute(rawValue: 0)]
+      )
+      CGLChoosePixelFormat(attributes, &pix, &npix)
+      if let pix = pix {
+        Logger.log("Created OpenGL pixel format with \(attributes)", level: .debug)
+        return pix
+      }
     }
 
-    if pix == nil {
-      CGLChoosePixelFormat(attributes2, &pix, &npix)
-    }
-
-    Logger.ensure(pix != nil, "Cannot create OpenGL pixel format!")
-
-    return pix!
+    Logger.fatal("Cannot create OpenGL pixel format!")
   }
 
   override func copyCGLContext(forPixelFormat pf: CGLPixelFormatObj) -> CGLContextObj {

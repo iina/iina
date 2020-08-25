@@ -146,6 +146,7 @@ struct Preference {
 
     static let videoThreads = Key("videoThreads")
     static let hardwareDecoder = Key("hardwareDecoder")
+    static let forceDedicatedGPU = Key("forceDedicatedGPU")
 
     static let audioThreads = Key("audioThreads")
     static let audioLanguage = Key("audioLanguage")
@@ -718,6 +719,7 @@ struct Preference {
 
     .videoThreads: 0,
     .hardwareDecoder: HardwareDecoderOption.auto.rawValue,
+    .forceDedicatedGPU: false,
     .audioThreads: 0,
     .audioLanguage: "",
     .maxVolume: 100,

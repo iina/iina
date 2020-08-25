@@ -83,7 +83,8 @@ class MPVController: NSObject {
     MPVOption.Window.fullscreen: MPV_FORMAT_FLAG,
     MPVOption.Window.ontop: MPV_FORMAT_FLAG,
     MPVOption.Window.windowScale: MPV_FORMAT_DOUBLE,
-    MPVProperty.mediaTitle: MPV_FORMAT_STRING
+    MPVProperty.mediaTitle: MPV_FORMAT_STRING,
+    MPVProperty.videoParamsRotate: MPV_FORMAT_INT64,
   ]
 
   init(playerCore: PlayerCore) {
@@ -657,7 +658,7 @@ class MPVController: NSObject {
     }
   }
 
-  private func onVideoParamsChange (_ data: UnsafePointer<mpv_node_list>) {
+  private func onVideoParamsChange(_ data: UnsafePointer<mpv_node_list>) {
     //let params = data.pointee
     //params.keys.
   }
@@ -723,6 +724,11 @@ class MPVController: NSObject {
     case MPVProperty.videoParams:
       needReloadQuickSettingsView = true
       onVideoParamsChange(UnsafePointer<mpv_node_list>(OpaquePointer(property.data)))
+
+    case MPVProperty.videoParamsRotate:
+      if let rotation = UnsafePointer<Int>(OpaquePointer(property.data))?.pointee {
+        player.mainWindow.rotation = rotation
+      }
 
     case MPVOption.TrackSelection.vid:
       player.info.vid = Int(getInt(MPVOption.TrackSelection.vid))
@@ -929,7 +935,7 @@ class MPVController: NSObject {
       break
     }
 
-    if (needReloadQuickSettingsView) {
+    if needReloadQuickSettingsView {
       DispatchQueue.main.async {
         self.player.mainWindow.quickSettingView.reload()
       }

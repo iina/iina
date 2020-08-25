@@ -408,6 +408,10 @@ class MainWindowController: PlayerWindowController {
   @IBOutlet var thumbnailPeekView: ThumbnailPeekView!
   @IBOutlet weak var additionalInfoView: NSVisualEffectView!
   @IBOutlet weak var additionalInfoLabel: NSTextField!
+  @IBOutlet weak var additionalInfoStackView: NSStackView!
+  @IBOutlet weak var additionalInfoTitle: NSTextField!
+  @IBOutlet weak var additionalInfoBatteryView: NSView!
+  @IBOutlet weak var additionalInfoBattery: NSTextField!
 
   @IBOutlet weak var oscFloatingTopView: NSStackView!
   @IBOutlet weak var oscFloatingBottomView: NSView!
@@ -1657,6 +1661,17 @@ class MainWindowController: PlayerWindowController {
     }
     isShowingPersistentOSD = false
     osdContext = nil
+  }
+
+  func updateAdditionalInfo() {
+    additionalInfoLabel.stringValue = DateFormatter.localizedString(from: Date(), dateStyle: .none, timeStyle: .short)
+    additionalInfoTitle.stringValue = window?.representedURL?.lastPathComponent ?? window?.title ?? ""
+    if let capacity = PowerSource.getList().filter({ $0.type == "InternalBattery" }).first?.currentCapacity {
+      additionalInfoBattery.stringValue = "\(capacity)%"
+      additionalInfoStackView.setVisibilityPriority(.mustHold, for: additionalInfoBatteryView)
+    } else {
+      additionalInfoStackView.setVisibilityPriority(.notVisible, for: additionalInfoBatteryView)
+    }
   }
 
   // MARK: - UI: Side bar

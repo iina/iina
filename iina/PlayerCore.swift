@@ -1334,12 +1334,7 @@ class PlayerCore: NSObject {
 
     case .additionalInfo:
       DispatchQueue.main.async {
-        let timeString = DateFormatter.localizedString(from: Date(), dateStyle: .none, timeStyle: .short)
-        if let capacity = PowerSource.getList().filter({ $0.type == "InternalBattery" }).first?.currentCapacity {
-          self.mainWindow.additionalInfoLabel.stringValue = "\(timeString) | \(capacity)%"
-        } else {
-          self.mainWindow.additionalInfoLabel.stringValue = "\(timeString)"
-        }
+        self.mainWindow.updateAdditionalInfo()
       }
     }
   }

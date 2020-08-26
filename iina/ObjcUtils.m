@@ -83,8 +83,9 @@ static inline int min(int a, int b, int c) {
   uint64_t height = list[1].u.int64;
   uint64_t pixels = width * height;
   uint8_t *pixel_array = list[4].u.ba->data;
-  uint8_t buffer[pixels * 4];
-  memcpy(buffer, pixel_array, pixels * 4);
+  size_t size = pixels * 4 * sizeof(uint8_t);
+  uint8_t *buffer = malloc(size);
+  memcpy(buffer, pixel_array, size);
   int i;
   // The pixel array mpv returns arrange color data as "B8G8R8X8",
   // whereas CGImages's data provider needs RGBA, so swap each
@@ -101,7 +102,10 @@ static inline int min(int a, int b, int c) {
                                      CGColorSpaceCreateDeviceRGB(),
                                      (CGBitmapInfo)kCGImageAlphaPremultipliedLast,
                                      ref, nil, true, kCGRenderingIntentDefault);
-  return [[NSImage alloc] initWithCGImage:cgImage size:NSZeroSize];
+
+  NSImage *nsImage = [[NSImage alloc] initWithCGImage:cgImage size:NSZeroSize];
+  free(buffer);
+  return nsImage;
 }
 
 @end

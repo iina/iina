@@ -46,6 +46,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   lazy var fontPicker: FontPickerWindowController = FontPickerWindowController()
   lazy var inspector: InspectorWindowController = InspectorWindowController()
   lazy var historyWindow: HistoryWindowController = HistoryWindowController()
+  lazy var guideWindow: GuideWindowController = GuideWindowController()
 
   lazy var vfWindow: FilterWindowController = {
     let w = FilterWindowController()
@@ -89,14 +90,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     registerUserDefaultValues()
     Logger.log("App will launch")
 
+    let (version, build) = Utility.iinaVersion()
+
     // register for url event
     NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(self.handleURLEvent(event:withReplyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
 
-    // beta channel
-    if FirstRunManager.isFirstRun(for: .joinBetaChannel) {
-      let result = Utility.quickAskPanel("beta_channel")
-      Preference.set(result, for: .receiveBetaUpdate)
+    // guide window
+    if FirstRunManager.isFirstRun(for: .init("firstLaunchAfter\(version)")) {
+      guideWindow.show(pages: [.highlights])
     }
+
     SUUpdater.shared().feedURL = URL(string: Preference.bool(for: .receiveBetaUpdate) ? AppData.appcastBetaLink : AppData.appcastLink)!
 
     // handle arguments
@@ -131,7 +134,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     Logger.log("Filenames from arguments: \(iinaArgFilenames)")
     commandLineStatus.parseArguments(iinaArgs)
 
-    let (version, build) = Utility.iinaVersion()
     print("IINA \(version) Build \(build)")
 
     guard !iinaArgFilenames.isEmpty || commandLineStatus.isStdin else {
@@ -476,6 +478,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @IBAction func showHistoryWindow(_ sender: AnyObject) {
     historyWindow.showWindow(self)
+  }
+
+  @IBAction func showHighlights(_ sender: AnyObject) {
+    guideWindow.show(pages: [.highlights])
   }
 
   @IBAction func helpAction(_ sender: AnyObject) {

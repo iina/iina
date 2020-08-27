@@ -64,14 +64,28 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
       process.arguments = args
       process.standardOutput = stdout
       process.standardError = stderr
+
+      var stdoutContent = ""
+      var stderrContent = ""
+
+      stdout.fileHandleForReading.readabilityHandler = { file in
+        guard let output = String(data: file.availableData, encoding: .utf8) else { return }
+        stdoutContent += output
+      }
+      stderr.fileHandleForReading.readabilityHandler = { file in
+        guard let output = String(data: file.availableData, encoding: .utf8) else { return }
+        stderrContent += output
+      }
       process.launch()
 
       self.pluginInstance.queue.async {
         process.waitUntilExit()
+        stderr.fileHandleForReading.readabilityHandler = nil
+        stdout.fileHandleForReading.readabilityHandler = nil
         resolve.call(withArguments: [[
           "status": process.terminationStatus,
-          "stdout": String(data: stdout.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) ?? JSValue(nullIn: self.context)!,
-          "stderr": String(data: stderr.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) ?? JSValue(nullIn: self.context)!
+          "stdout": stdoutContent,
+          "stderr": stderrContent
         ] as [String: Any]])
       }
     }

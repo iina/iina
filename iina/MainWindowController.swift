@@ -9,8 +9,14 @@
 import Cocoa
 import Mustache
 
-fileprivate let TitleBarHeightNormal: CGFloat = 22
-fileprivate let TitleBarHeightWithOSC: CGFloat = 22 + 24 + 10
+fileprivate let TitleBarHeightNormal: CGFloat = {
+  if #available(macOS 10.16, *) {
+    return 28
+  } else {
+    return 22
+  }
+}()
+fileprivate let TitleBarHeightWithOSC: CGFloat = TitleBarHeightNormal + 24 + 10
 fileprivate let TitleBarHeightWithOSCInFullScreen: CGFloat = 24 + 10
 fileprivate let OSCTopMainViewMarginTop: CGFloat = 26
 fileprivate let OSCTopMainViewMarginTopInFullScreen: CGFloat = 6

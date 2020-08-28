@@ -32,7 +32,21 @@ class PrefGeneralViewController: PreferenceViewController, PreferenceWindowEmbed
   @IBOutlet var historyView: NSView!
   @IBOutlet var playlistView: NSView!
   @IBOutlet var screenshotsView: NSView!
-
+  @IBOutlet weak var afterOpenActionBox: NSBox!
+  @IBOutlet weak var pauseActionBox: NSBox!
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    if #available(macOS 10.16, *) {
+      afterOpenActionBox.heightAnchor.constraint(equalToConstant: 36).isActive = true
+      pauseActionBox.heightAnchor.constraint(equalToConstant: 136).isActive = true
+    } else {
+      afterOpenActionBox.heightAnchor.constraint(equalToConstant: 34).isActive = true
+      pauseActionBox.heightAnchor.constraint(equalToConstant: 126).isActive = true
+    }
+  }
+  
   // MARK: - IBAction
 
   @IBAction func chooseScreenshotPathAction(_ sender: AnyObject) {

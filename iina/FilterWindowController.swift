@@ -354,17 +354,22 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
     scrollContentView.subviews.forEach { $0.removeFromSuperview() }
     addButton.isEnabled = true
 
-    var maxY: CGFloat = 0
+    let stackView = NSStackView()
+    stackView.orientation = .vertical
+    stackView.alignment = .leading
+    stackView.translatesAutoresizingMaskIntoConstraints = false
+    scrollContentView.addSubview(stackView)
+    Utility.quickConstraints(["H:|-4-[v]-4-|", "V:|-4-[v]-4-|"], ["v": stackView])
+
     let generateInputs: (String, FilterParameter) -> Void = { (name, param) in
-      self.scrollContentView.addSubview(self.quickLabel(yPos: maxY, title: preset.localizedParamName(name)))
-      maxY += 21
-      let input = self.quickInput(yPos: &maxY, param: param)
+      stackView.addArrangedSubview(self.quickLabel(title: preset.localizedParamName(name)))
+      let input = self.quickInput(param: param)
       // For preventing crash due to adding a filter with no name:
       if name == "name", preset.name.starts(with: "custom_"), let textField = input as? NSTextField {
         textField.delegate = self
         self.addButton.isEnabled = !textField.stringValue.isEmpty
       }
-      self.scrollContentView.addSubview(input)
+      stackView.addArrangedSubview(input)
       self.currentBindings[name] = input
     }
     if let paramOrder = preset.paramOrder {
@@ -376,11 +381,10 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
         generateInputs(name, param)
       }
     }
-    scrollContentView.frame.size.height = maxY
   }
 
-  private func quickLabel(yPos: CGFloat, title: String) -> NSTextField {
-    let label = NSTextField(frame: NSRect(x: 0, y: yPos,
+  private func quickLabel(title: String) -> NSTextField {
+    let label = NSTextField(frame: NSRect(x: 0, y: 0,
                                           width: scrollContentView.frame.width,
                                           height: 17))
     label.font = NSFont.systemFont(ofSize: NSFont.systemFontSize)
@@ -389,15 +393,18 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
     label.isBezeled = false
     label.isSelectable = false
     label.isEditable = false
+    label.usesSingleLineMode = false
+    label.lineBreakMode = .byWordWrapping
+    label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     return label
   }
 
   /** Create the control from a `FilterParameter` definition. */
-  private func quickInput(yPos: inout CGFloat, param: FilterParameter) -> NSControl {
+  private func quickInput(param: FilterParameter) -> NSControl {
     switch param.type {
     case .text:
       // Text field
-      let label = NSTextField(frame: NSRect(x: 4, y: yPos,
+      let label = NSTextField(frame: NSRect(x: 0, y: 0,
                               width: scrollContentView.frame.width - 8,
                               height: 22))
       label.stringValue = param.defaultValue.stringValue
@@ -406,41 +413,36 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
       label.lineBreakMode = .byClipping
       label.usesSingleLineMode = true
       label.cell?.isScrollable = true
-      yPos += 22 + 8
       return label
     case .int:
       // Slider
-      let slider = NSSlider(frame: NSRect(x: 4, y: yPos,
+      let slider = NSSlider(frame: NSRect(x: 0, y: 0,
                                           width: scrollContentView.frame.width - 8,
                                           height: 19))
       slider.minValue = Double(param.minInt!)
       slider.maxValue = Double(param.maxInt!)
-      yPos += 19 + 8
       if let step = param.step {
         slider.numberOfTickMarks = (param.maxInt! - param.minInt!) / step + 1
         slider.allowsTickMarkValuesOnly = true
         slider.frame.size.height = 24
-        yPos += 5
       }
       slider.intValue = Int32(param.defaultValue.intValue)
       return slider
     case .float:
       // Slider
-      let slider = NSSlider(frame: NSRect(x: 4, y: yPos,
+      let slider = NSSlider(frame: NSRect(x: 0, y: 0,
                                           width: scrollContentView.frame.width - 8,
                                           height: 19))
       slider.minValue = Double(param.min!)
       slider.maxValue = Double(param.max!)
       slider.floatValue = param.defaultValue.floatValue
-      yPos += 19 + 8
       return slider
     case .choose:
       // Choose
-      let popupBtn = NSPopUpButton(frame: NSRect(x: 4, y: yPos,
+      let popupBtn = NSPopUpButton(frame: NSRect(x: 0, y: 0,
                                                  width: scrollContentView.frame.width - 8,
                                                  height: 26))
       popupBtn.addItems(withTitles: param.choices)
-      yPos += 26 + 8
       return popupBtn
     }
   }

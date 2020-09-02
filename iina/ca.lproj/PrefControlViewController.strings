@@ -41,7 +41,7 @@
 "Hm3-dh-jgb.title" = "Pantalla completa";
 
 /* Class = "NSTextFieldCell"; title = "Trackpad"; ObjectID = "I6k-ab-IwJ"; */
-"I6k-ab-IwJ.title" = "Trackpad";
+"I6k-ab-IwJ.title" = "Ratolí tàctil";
 
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "K9H-w9-wmT"; */
 "K9H-w9-wmT.title" = "Automàtic";
@@ -71,7 +71,7 @@
 "SYg-hW-b6r.title" = "Ajusta volum";
 
 /* Class = "NSTextFieldCell"; title = "Sensitivity for volume:"; ObjectID = "YQH-1a-WcM"; */
-"YQH-1a-WcM.title" = "Sensititivtat del volum:";
+"YQH-1a-WcM.title" = "Sensibilitat del volum:";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "chS-d2-TG1"; */
 "chS-d2-TG1.title" = "Cap";
@@ -126,3 +126,12 @@
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "wkV-Gq-B0T"; */
 "wkV-Gq-B0T.title" = "Cap";
+
+/* Class = "NSMenuItem"; title = "Toggle Picture-in-Picture"; ObjectID = "rvS-xA-7bv"; */
+"rvS-xA-7bv.title" = "Commuta Picture-in-Picture";
+
+/* Class = "NSMenuItem"; title = "Toggle Picture-in-Picture"; ObjectID = "ibM-4r-SQA"; */
+"ibM-4r-SQA.title" = "Commuta Picture-in-Picture";
+
+/* Class = "NSMenuItem"; title = "Toggle Picture-in-Picture"; ObjectID = "3Pm-nn-HpB"; */
+"3Pm-nn-HpB.title" = "Commuta Picture-in-Picture";

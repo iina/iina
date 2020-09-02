@@ -12,26 +12,26 @@
 "crop" = "Cortar";
 "crop.w" = "Largura (padrão: largura do vídeo)";
 "crop.h" = "Altura (padrão: altura do vídeo)";
-"crop.x" = "Origem X (padrão: center)";
-"crop.y" = "Origem Y (padrão: center)";
+"crop.x" = "Origem X (padrão: centro)";
+"crop.y" = "Origem Y (padrão: centro)";
 
 "expand" = "Expandir";
-"expand.w" = "Width (padrão: largura do video)";
-"expand.h" = "Height (padrão: altura do video)";
-"expand.x" = "Origin X (padrão: centro)";
-"expand.y" = "Origin Y (padrão: centro)";
-"expand.aspect" = "Expande até adequar no aspecto (ex: 4/3)";
-"expand.round" = "Arredonda pra ser divisível por este valor";
+"expand.w" = "Largura (padrão: largura do vídeo)";
+"expand.h" = "Altura (padrão: altura do vídeo)";
+"expand.x" = "Origem X (padrão: centro)";
+"expand.y" = "Origem Y (padrão: centro)";
+"expand.aspect" = "Expande para adequar a um padrão (ex: 4/3)";
+"expand.round" = "Arredonda para ser divisível por este valor";
 
-"sharpen" = "+Nitidez";
-"sharpen.msize" = "tamanho da matriz";
+"sharpen" = "Aumentar nitidez";
+"sharpen.msize" = "Tamanho da matriz";
 "sharpen.amount" = "Quantidade";
 
-"blur" = "Borrado";
+"blur" = "Desfocar";
 "blur.msize" = "Tamanho da Matriz";
 "blur.amount" = "Quantidade";
 
-"delogo" = "RemoverLogo";
+"delogo" = "Remover Logo";
 "delogo.w" = "Largura";
 "delogo.h" = "Altura";
 "delogo.x" = "Origem X";

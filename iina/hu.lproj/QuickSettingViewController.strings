@@ -1,0 +1,185 @@
+/* Class = "NSTextFieldCell"; title = "Speed:"; ObjectID = "1KQ-oZ-A2x"; */
+"1KQ-oZ-A2x.title" = "Sebesség:";
+
+/* Class = "NSTextFieldCell"; title = "Width:"; ObjectID = "22j-ra-GAY"; */
+"22j-ra-GAY.title" = "Szélesség:";
+
+/* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "3kI-6i-ujt"; */
+"3kI-6i-ujt.title" = "Szín:";
+
+/* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "6LO-6y-IsA"; */
+"6LO-6y-IsA.title" = "Szín:";
+
+/* Class = "NSButtonCell"; title = "Load External Audio Track…"; ObjectID = "8Ax-5X-osl"; */
+"8Ax-5X-osl.title" = "Külső hangfájl betöltése…";
+
+/* Class = "NSSegmentedCell"; AB5-UZ-euc.ibShadowedLabels[0] = "Load Subtitle…"; ObjectID = "AB5-UZ-euc"; */
+"AB5-UZ-euc.ibShadowedLabels[0]" = "Feliratok betöltése…";
+
+/* Class = "NSTextFieldCell"; title = "Audio delay:"; ObjectID = "AKs-VQ-fKF"; */
+"AKs-VQ-fKF.title" = "Hangkésleltetés:";
+
+/* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "ANn-CR-JOV"; */
+"ANn-CR-JOV.title" = "Szín:";
+
+/* Class = "NSTextFieldCell"; title = "1x"; ObjectID = "B0I-bX-HZS"; */
+"B0I-bX-HZS.title" = "1x";
+
+/* Class = "NSTextFieldCell"; title = "5s"; ObjectID = "C0t-gm-Tim"; */
+"C0t-gm-Tim.title" = "5 mp";
+
+/* Class = "NSTabViewItem"; label = "Video"; ObjectID = "CYP-el-A6A"; */
+"CYP-el-A6A.label" = "Videó";
+
+/* Class = "NSMenuItem"; title = "0.25"; ObjectID = "DdO-VX-HCz"; */
+"DdO-VX-HCz.title" = "0.25";
+
+/* Class = "NSTextFieldCell"; title = "0.25x"; ObjectID = "Ew1-N1-0Pi"; */
+"Ew1-N1-0Pi.title" = "0.25x";
+
+/* Class = "NSTextFieldCell"; title = "BORDER"; ObjectID = "GlZ-YU-dNm"; */
+"GlZ-YU-dNm.title" = "BORDER";
+
+/* Class = "NSTextFieldCell"; title = "31.25"; ObjectID = "HBF-J7-Tie"; */
+"HBF-J7-Tie.title" = "31.25";
+
+/* Class = "NSMenuItem"; title = "1.5"; ObjectID = "JbG-Ur-b55"; */
+"JbG-Ur-b55.title" = "1.5";
+
+/* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "LEZ-fv-buL"; */
+"LEZ-fv-buL.title" = "0 mp";
+
+/* Class = "NSTextFieldCell"; title = "External audio:"; ObjectID = "Lnu-kz-cql"; */
+"Lnu-kz-cql.title" = "Külső hang:";
+
+/* Class = "NSTextFieldCell"; title = "-12 dB"; ObjectID = "Lpw-ws-Ezh"; */
+"Lpw-ws-Ezh.title" = "-12 dB";
+
+/* Class = "NSButtonCell"; title = "SUBTITLES"; ObjectID = "NxO-to-jcI"; */
+"NxO-to-jcI.title" = "FELIRATOK";
+
+/* Class = "NSTextFieldCell"; title = "4x"; ObjectID = "PLX-gY-e0h"; */
+"PLX-gY-e0h.title" = "4x";
+
+/* Class = "NSTextFieldCell"; title = "External subtitles:"; ObjectID = "RA1-fF-OrB"; */
+"RA1-fF-OrB.title" = "Külső feliratok:";
+
+/* Class = "NSSegmentedCell"; Rbb-wh-cLc.ibShadowedLabels[0] = "Search Online…"; ObjectID = "Rbb-wh-cLc"; */
+"Rbb-wh-cLc.ibShadowedLabels[0]" = "Online keresés…";
+
+/* Class = "NSTextFieldCell"; title = "Saturation:"; ObjectID = "Rky-lo-Buu"; */
+"Rky-lo-Buu.title" = "Telítettség:";
+
+/* Class = "NSTextFieldCell"; title = "Video track:"; ObjectID = "VzC-tM-KT7"; */
+"VzC-tM-KT7.title" = "Videosáv:";
+
+/* Class = "NSTextFieldCell"; title = "x"; ObjectID = "W7H-mU-v3D"; */
+"W7H-mU-v3D.title" = "x";
+
+/* Class = "NSTextFieldCell"; title = "Scale:"; ObjectID = "Wbx-Ti-qiS"; */
+"Wbx-Ti-qiS.title" = "Nagyítás:";
+
+/* Class = "NSTextFieldCell"; title = "Subtitle delay:"; ObjectID = "Wkz-wW-sOM"; */
+"Wkz-wW-sOM.title" = "Felirat késleltetés:";
+
+/* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "Xez-sb-mfB"; */
+"Xez-sb-mfB.title" = "Hangszínszabályzó";
+
+/* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "YCG-xK-eAs"; */
+"YCG-xK-eAs.title" = "-5 mp";
+
+/* Class = "NSTextFieldCell"; title = "Aspect Ratio:"; ObjectID = "YgL-iV-bca"; */
+"YgL-iV-bca.title" = "Képarány:";
+
+/* Class = "NSTextFieldCell"; title = "Text Style:"; ObjectID = "ZBd-13-lA1"; */
+"ZBd-13-lA1.title" = "Szöveg Stílus:";
+
+/* Class = "NSMenuItem"; title = "0.5"; ObjectID = "avJ-cW-Iws"; */
+"avJ-cW-Iws.title" = "0.5";
+
+/* Class = "NSTextFieldCell"; title = "Secondary subtitle:"; ObjectID = "bKb-pW-HnS"; */
+"bKb-pW-HnS.title" = "Másodlagos felirat:";
+
+/* Class = "NSTabViewItem"; label = "Audio"; ObjectID = "bzk-c2-LH5"; */
+"bzk-c2-LH5.label" = "Hang";
+
+/* Class = "NSSegmentedCell"; cMu-YF-riv.ibShadowedLabels[0] = "Default"; ObjectID = "cMu-YF-riv"; */
+"cMu-YF-riv.ibShadowedLabels[0]" = "Alapértelmezett";
+
+/* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "cdR-uY-riN"; */
+"cdR-uY-riN.title" = "Fényerő:";
+
+/* Class = "NSButtonCell"; title = "AUDIO"; ObjectID = "cpm-5o-a2c"; */
+"cpm-5o-a2c.title" = "HANG";
+
+/* Class = "NSTextFieldCell"; title = "Contrast:"; ObjectID = "eDl-Si-LSa"; */
+"eDl-Si-LSa.title" = "Kontraszt:";
+
+/* Class = "NSTextFieldCell"; title = "Hue:"; ObjectID = "eLh-fu-pMj"; */
+"eLh-fu-pMj.title" = "Színárnyalat:";
+
+/* Class = "NSTextFieldCell"; title = "Subtitle:"; ObjectID = "eXZ-HN-qL4"; */
+"eXZ-HN-qL4.title" = "Felirat:";
+
+/* Class = "NSTextFieldCell"; title = "FONT"; ObjectID = "g6B-DC-lJ0"; */
+"g6B-DC-lJ0.title" = "BETŰTÍPUS";
+
+/* Class = "NSButtonCell"; title = "Font…"; ObjectID = "ghy-e7-7Of"; */
+"ghy-e7-7Of.title" = "Betütípus…";
+
+/* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "iS4-Zr-9Ig"; */
+"iS4-Zr-9Ig.title" = "Hangszínszabályzó";
+
+/* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[0] = "None"; ObjectID = "iuN-rN-jT7"; */
+"iuN-rN-jT7.ibShadowedLabels[0]" = "None";
+
+/* Class = "NSTabViewItem"; label = "Subtitle"; ObjectID = "jND-MZ-sKB"; */
+"jND-MZ-sKB.label" = "Felirat";
+
+/* Class = "NSTextFieldCell"; title = "0 dB"; ObjectID = "lBn-YS-jL7"; */
+"lBn-YS-jL7.title" = "0 dB";
+
+/* Class = "NSButtonCell"; title = "VIDEO"; ObjectID = "lQt-I0-jHO"; */
+"lQt-I0-jHO.title" = "VIDEÓ";
+
+/* Class = "NSTextFieldCell"; title = "1x"; ObjectID = "ldQ-YL-IEp"; */
+"ldQ-YL-IEp.title" = "1x";
+
+/* Class = "NSTextFieldCell"; title = "Crop:"; ObjectID = "m9e-IB-IDJ"; */
+"m9e-IB-IDJ.title" = "Körbevágás:";
+
+/* Class = "NSMenuItem"; title = "2.5"; ObjectID = "nPr-QJ-Ty3"; */
+"nPr-QJ-Ty3.title" = "2.5";
+
+/* Class = "NSTextFieldCell"; title = "16x"; ObjectID = "p63-Nx-yJZ"; */
+"p63-Nx-yJZ.title" = "16x";
+
+/* Class = "NSTextFieldCell"; title = "Gamma:"; ObjectID = "r6x-z0-oFC"; */
+"r6x-z0-oFC.title" = "Gamma:";
+
+/* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "s9l-Hb-SCk"; */
+"s9l-Hb-SCk.title" = "Méret:";
+
+/* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "t03-36-Zge"; */
+"t03-36-Zge.title" = "Pozíció:";
+
+/* Class = "NSTextFieldCell"; title = "Rotation:"; ObjectID = "to3-rc-Agv"; */
+"to3-rc-Agv.title" = "Elforgatás:";
+
+/* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "uCX-EC-jXM"; */
+"uCX-EC-jXM.title" = "-5 mp";
+
+/* Class = "NSTextFieldCell"; title = "BACKGROUND"; ObjectID = "uqb-mz-A22"; */
+"uqb-mz-A22.title" = "HÁTTÉR";
+
+/* Class = "NSButtonCell"; title = "Custom…"; ObjectID = "vFD-HU-RVz"; */
+"vFD-HU-RVz.title" = "Egyéni…";
+
+/* Class = "NSTextFieldCell"; title = "Subtitle style options may break ASS rendering, and some of them will be disabled depending on subtitle type."; ObjectID = "wBD-pZ-Bvu"; */
+"wBD-pZ-Bvu.title" = "Subtitle style options may break ASS rendering, and some of them will be disabled depending on subtitle type.";
+
+/* Class = "NSTextFieldCell"; title = "Audio track:"; ObjectID = "x39-62-7KC"; */
+"x39-62-7KC.title" = "Hangsáv:";
+
+/* Class = "NSTextFieldCell"; title = "+5s"; ObjectID = "xfX-wr-DTJ"; */
+"xfX-wr-DTJ.title" = "+5 mp";

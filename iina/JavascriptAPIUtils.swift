@@ -29,6 +29,8 @@ fileprivate extension Process {
   func readFile(_ path: String, _ options: [String: Any]) -> Any?
   func trashFile(_ path: String)
   func deleteFile(_ path: String)
+  func ask(_ title: String) -> Bool
+  func prompt(_ title: String) -> String?
 }
 
 class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
@@ -163,5 +165,29 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
     } catch let error {
       throwError(withMessage: "Cannot delete file: \(error.localizedDescription)")
     }
+  }
+
+  func ask(_ title: String) -> Bool {
+    let panel = NSAlert()
+    panel.messageText = title
+    panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
+    panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
+    return panel.runModal() == .alertFirstButtonReturn
+  }
+
+  func prompt(_ title: String) -> String? {
+    let panel = NSAlert()
+    panel.messageText = title
+    let input = NSTextField(frame: NSRect(x: 0, y: 0, width: 240, height: 60))
+    input.lineBreakMode = .byWordWrapping
+    input.usesSingleLineMode = false
+    panel.accessoryView = input
+    panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
+    panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
+    panel.window.initialFirstResponder = input
+    if panel.runModal() == .alertFirstButtonReturn {
+      return input.stringValue
+    }
+    return nil
   }
 }

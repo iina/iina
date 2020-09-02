@@ -16,13 +16,25 @@
 "general.username" = "उपयोगकर्ता नाम";
 "general.password" = "पारण शब्द";
 
+// Guide Window
+"guide.highlights" = "Highlights";
+"guide.basic_settings" = "Basic Settings";
+"guide.faq" = "Frequently Asked Questions";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "बफरिंग… %d%%";
 "main.opening_stream" = "खुलने की धारा…";
+"osc.precision" = "Precision";
+"osc.1s" = "1 second";
+"osc.100ms" = "100 milliseconds";
+"osc.10ms" = "10 milliseconds";
+"osc.1ms" = "1 millisecond";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "डिफ़ॉल्ट";
 "quicksetting.item_none" = "कोई नहीं";
+"quicksetting.hwdec" = "Hardware Decoding";
+"quicksetting.deinterlace" = "Deinterlace";
 
 // OSDMessage.swift
 "osd.pause" = "रोकें";
@@ -33,6 +45,7 @@
 "osd.crop" = "क्रॉप: %@";
 "osd.rotate" = "घुमाएँ: %i°";
 "osd.deinterlace" = "डीइंटरलेस: %@";
+"osd.hwdec" = "Hardware Decoding: %@";
 "osd.audio_delay.nodelay" = "ऑडियो विलंब: विलंब न करें";
 "osd.audio_delay.later" = "ऑडियो विलंब: %.2fs बाद में";
 "osd.audio_delay.earlier" = "ऑडियो विलंब: %.2fs पूर्व";
@@ -87,6 +100,8 @@
 "preference.key_binding_hint_1" = "वर्तमान कॉन्फ़िगरेशन फ़ाइल में मुख्य बाइंडिंग को संपादित करने के लिए, प्रतिलिपि बनाने के लिए सबसे पहले \"डुप्लीकेट…\" बटन पर क्लिक करें।";
 "preference.key_binding_hint_2" = "संबंधित कुंजी बंधन को संपादित करने के लिए दाईं ओर एक पंक्ति पर डबल क्लिक करें।";
 
+"preference.enable_adv_settings" = "Enable advanced settings";
+
 "menu.volume" = "ध्वनि: %d";
 "menu.audio_delay" = "ऑडियो विलंब: %.2fs";
 "menu.sub_delay" = "उपशीर्षक देरी: %.2fs";
@@ -109,6 +124,8 @@
 "menu.sub_delay_up" = "उपशीर्षक देरी + %.1fs";
 "menu.sub_delay_down" = "उपशीर्षक देरी - %.1fs";
 
+"menu.crop_custom" = "Custom...";
+
 "track.none" = "<कोई नहीं>";
 
 "subtrack.no_loaded" = "कोई उपशीर्षक लोड नहीं हुआ";
@@ -116,7 +133,6 @@
 
 // Alerts
 "alert.beta_channel.title" = "बीटा संस्करणों के लिए अपडेट प्राप्त करें";
-"alert.beta_channel.message" = "IINA v1.0 आ रहा है! क्या आप बीटा संस्करणों का परीक्षण करने में हमारी सहायता करना चाहेंगे? \\ n \\ n आप इस व्यवहार को कभी भी प्राथमिकता - सामान्य में बदल सकते हैं।";
 
 "alert.title_error" = "त्रुटि";
 "alert.title_warning" = "चेतावनी";
@@ -257,6 +273,16 @@
 "osc_toolbar.music_mode" = "संगीत मोड दर्ज करें";
 "osc_toolbar.sub_track" = "उपशीर्षक ट्रैक चुनें";
 
+"mini_player.album_art" = "Toggle album art";
+"mini_player.loop" = "Repeat";
+"mini_player.shuffle" = "Shuffle";
+"mini_player.remove" = "Remove from playlist";
+"mini_player.add" = "Add to playlist";
+"mini_player.delete" = "Delete all tracks from playlist";
+"mini_player.volume" = "Volume";
+"mini_player.close" = "Close music mode";
+"mini_player.back" = "Return to video mode";
+
 // Touch bar
 
 "touchbar.ahead_15" = "15 सेकेंड आगे";
@@ -272,5 +298,5 @@
 "touchbar.play_pause" = "चलाएं / ठहरें";
 "touchbar.seek" = "खोजना";
 "touchbar.time" = "समय की स्थिति";
-"touchbar.remainingTime" = "बचा हुआ समय";
+"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
 "touchbar.toggle_pip" = "टॉगल पिक्चर-इन-पिक्चर";

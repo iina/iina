@@ -16,13 +16,25 @@
 "general.username" = "사용자";
 "general.password" = "암호";
 
+// Guide Window
+"guide.highlights" = "Highlights";
+"guide.basic_settings" = "Basic Settings";
+"guide.faq" = "Frequently Asked Questions";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "준비중… %d%%";
 "main.opening_stream" = "스트림 여는 중…";
+"osc.precision" = "Precision";
+"osc.1s" = "1 second";
+"osc.100ms" = "100 milliseconds";
+"osc.10ms" = "10 milliseconds";
+"osc.1ms" = "1 millisecond";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "기본값";
 "quicksetting.item_none" = "없음";
+"quicksetting.hwdec" = "하드웨어 디코딩";
+"quicksetting.deinterlace" = "디인터레이스";
 
 // OSDMessage.swift
 "osd.pause" = "일시 정지됨";
@@ -33,6 +45,7 @@
 "osd.crop" = "화면 자르기: %@";
 "osd.rotate" = "회전: %i°";
 "osd.deinterlace" = "디인터레이스: %@";
+"osd.hwdec" = "하드웨어 디코딩: %@";
 "osd.audio_delay.nodelay" = "오디오 지연: 없음";
 "osd.audio_delay.later" = "오디오 지연: %.2f초 늦게";
 "osd.audio_delay.earlier" = "오디오 지연: %.2f초 빠르게";
@@ -41,7 +54,7 @@
 "osd.sub_delay.earlier" = "자막 지연: %.2f초 빠르게";
 "osd.subtitle_pos" = "자막 위치: %.1f";
 "osd.mute" = "소리 끔";
-"osd.unmute" = "소리 켜짐";
+"osd.unmute" = "음소거 해제";
 "osd.screenshot" = "스크린샷 저장됨";
 "osd.abloop.a" = "구간 반복: 시작 위치";
 "osd.abloop.b" = "구간 반복: 마침 위치";
@@ -87,6 +100,8 @@
 "preference.key_binding_hint_1" = "현재 설정 파일의 단축키 설정을 편집하려면, 먼저 \"복제…\" 버튼을 눌러 복사본을 만든 후 변경하십시오.";
 "preference.key_binding_hint_2" = "해당 단축키를 편집하려면 오른쪽 단축키 내용을 더블클릭 하십시오.";
 
+"preference.enable_adv_settings" = "고급 설정 사용";
+
 "menu.volume" = "음량: %d";
 "menu.audio_delay" = "오디오 지연: %.2f초";
 "menu.sub_delay" = "자막 지연: %.2f초";
@@ -109,6 +124,8 @@
 "menu.sub_delay_up" = "자막 지연 + %.1f초";
 "menu.sub_delay_down" = "자막 지연 - %.1f초";
 
+"menu.crop_custom" = "사용자 설정…";
+
 "track.none" = "<없음>";
 
 "subtrack.no_loaded" = "자막을 불러올 수 없습니다";
@@ -116,7 +133,6 @@
 
 // Alerts
 "alert.beta_channel.title" = "베타 버전 받기";
-"alert.beta_channel.message" = "IINA v1.0이 곧 나옵니다! 베타 버전을 시험하여 도움을 주시겠습니까? \n\n이 설정은 언제든지 환경설정 - 일반 탭에서 변경할 수 있습니다.";
 
 "alert.title_error" = "오류";
 "alert.title_warning" = "주의";
@@ -257,6 +273,16 @@
 "osc_toolbar.music_mode" = "음악 모드 전환";
 "osc_toolbar.sub_track" = "자막 선택";
 
+"mini_player.album_art" = "앨범 아트 켜기/끄기";
+"mini_player.loop" = "반복";
+"mini_player.shuffle" = "무작위 재생";
+"mini_player.remove" = "재생 목록에서 제거";
+"mini_player.add" = "재생 목록에 추가";
+"mini_player.delete" = "재생 목록에서 모든 트랙 제거";
+"mini_player.volume" = "음량";
+"mini_player.close" = "음악 모드 닫기";
+"mini_player.back" = "비디오 모드로 복귀";
+
 // Touch bar
 
 "touchbar.ahead_15" = "15초 후";
@@ -272,5 +298,5 @@
 "touchbar.play_pause" = "재생 / 일시 정지";
 "touchbar.seek" = "탐색";
 "touchbar.time" = "재생 위치";
-"touchbar.remainingTime" = "남은 시간";
+"touchbar.remainingTimeOrTotalDuration" = "남은 시간 / 총 지속시간";
 "touchbar.toggle_pip" = "화면 속 화면 전환/복귀";

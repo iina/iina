@@ -1,0 +1,55 @@
+/*
+  FilterPresets.strings
+  iina
+
+  Created by lhc on 25/8/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+/* It's optional to localize descriptions for each parameter! */
+
+
+
+"crop" = "Crop";
+"crop.w" = "Width (default: video width)";
+"crop.h" = "Height (default: video height)";
+"crop.x" = "Origin X (default: center)";
+"crop.y" = "Origin Y (default: center)";
+
+"expand" = "Expand";
+"expand.w" = "Width (default: video width)";
+"expand.h" = "Height (default: video height)";
+"expand.x" = "Origin X (default: center)";
+"expand.y" = "Origin Y (default: center)";
+"expand.aspect" = "Expands to fit an aspect (e.g: 4/3)";
+"expand.round" = "Rounds up to make divisible by this value";
+
+"sharpen" = "Sharpen";
+"sharpen.msize" = "Matrix size";
+"sharpen.amount" = "Amount";
+
+"blur" = "Blur";
+"blur.msize" = "Matrix size";
+"blur.amount" = "Amount";
+
+"delogo" = "Delogo";
+"delogo.w" = "Width";
+"delogo.h" = "Height";
+"delogo.x" = "Origin X";
+"delogo.y" = "Origin Y";
+
+"negative" = "Negative";
+
+"vflip" = "Flip";
+"hflip" = "Tükrözés";
+
+"lut3d" = "3D LUT";
+"lut3d.file" = "File path (you can also drag & drop the file into the input box)";
+"lut3d.interp" = "Interpolation mode";
+
+"custom_mpv" = "Custom (mpv)";
+"custom_mpv.name" = "Szűrő neve";
+"custom_mpv.string" = "Szűrési érték";
+
+"custom_ffmpeg" = "Custom (FFmpeg)";
+"custom_ffmpeg.name" = "Szűrő neve";
+"custom_ffmpeg.string" = "Szűrési érték";

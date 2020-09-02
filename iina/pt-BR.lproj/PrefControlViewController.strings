@@ -35,10 +35,10 @@
 "Gyd-Qt-FEo.title" = "Clique do meio faz:";
 
 /* Class = "NSButtonCell"; title = "Acccepts first mouse"; ObjectID = "gZK-ry-lQs"; */
-"gZK-ry-lQs.title" = "Accepts first mouse click when not focused";
+"gZK-ry-lQs.title" = "Aceita o primeiro clique quando não em foco";
 
 /* Class = "NSMenuItem"; title = "Fullscreen"; ObjectID = "Hm3-dh-jgb"; */
-"Hm3-dh-jgb.title" = "Fullscreen";
+"Hm3-dh-jgb.title" = "Ecrã inteiro";
 
 /* Class = "NSTextFieldCell"; title = "Trackpad"; ObjectID = "I6k-ab-IwJ"; */
 "I6k-ab-IwJ.title" = "Trackpad";
@@ -80,7 +80,7 @@
 "dpH-PO-WKt.title" = "Force Touch faz:";
 
 /* Class = "NSTextFieldCell"; title = "Mouse"; ObjectID = "eA4-AD-oUu"; */
-"eA4-AD-oUu.title" = "Mouse";
+"eA4-AD-oUu.title" = "Rato";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "guu-dK-YfL"; */
 "guu-dK-YfL.title" = "Nada";
@@ -126,3 +126,12 @@
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "wkV-Gq-B0T"; */
 "wkV-Gq-B0T.title" = "Nada";
+
+/* Class = "NSMenuItem"; title = "Toggle Picture-in-Picture"; ObjectID = "rvS-xA-7bv"; */
+"rvS-xA-7bv.title" = "Acionar Picture-in-Picture";
+
+/* Class = "NSMenuItem"; title = "Toggle Picture-in-Picture"; ObjectID = "ibM-4r-SQA"; */
+"ibM-4r-SQA.title" = "Acionar Picture-in-Picture";
+
+/* Class = "NSMenuItem"; title = "Toggle Picture-in-Picture"; ObjectID = "3Pm-nn-HpB"; */
+"3Pm-nn-HpB.title" = "Acionar Picture-in-Picture";

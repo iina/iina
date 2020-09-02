@@ -23,7 +23,7 @@
 "AYt-pH-UCi.title" = "Feltimade bildrutor:";
 
 /* Class = "NSTextFieldCell"; title = "Display FPS:"; ObjectID = "AjU-1T-aGR"; */
-"AjU-1T-aGR.title" = "Visa Bilder/s:";
+"AjU-1T-aGR.title" = "Bilder/s (bildskärm):";
 
 /* Class = "NSTextFieldCell"; title = "Dropped Frames:"; ObjectID = "CrF-UR-udW"; */
 "CrF-UR-udW.title" = "Kastade bildrutor:";
@@ -116,7 +116,7 @@
 "f7i-wX-uxQ.title" = "Spår:";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Output FPS:"; ObjectID = "g8p-Ec-awO"; */
-"g8p-Ec-awO.title" = "Estimated Output FPS:";
+"g8p-Ec-awO.title" = "Uppskattat antal bilder/s:";
 
 /* Class = "NSTextFieldCell"; title = "VIDEO"; ObjectID = "gDG-Eq-1Bc"; */
 "gDG-Eq-1Bc.title" = "VIDEO";

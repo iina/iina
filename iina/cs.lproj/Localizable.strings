@@ -16,13 +16,25 @@
 "general.username" = "Uživatel";
 "general.password" = "Heslo";
 
+// Guide Window
+"guide.highlights" = "Highlights";
+"guide.basic_settings" = "Basic Settings";
+"guide.faq" = "Frequently Asked Questions";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Načítá se… %d%%";
 "main.opening_stream" = "Otevírám stream…";
+"osc.precision" = "Precision";
+"osc.1s" = "1 second";
+"osc.100ms" = "100 milliseconds";
+"osc.10ms" = "10 milliseconds";
+"osc.1ms" = "1 millisecond";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Výchozí";
 "quicksetting.item_none" = "Žádný";
+"quicksetting.hwdec" = "Hardwarově dekódovat";
+"quicksetting.deinterlace" = "Odebrat prokládání";
 
 // OSDMessage.swift
 "osd.pause" = "Pozastaveno";
@@ -33,6 +45,7 @@
 "osd.crop" = "Ořez: %@";
 "osd.rotate" = "Otočení: %i°";
 "osd.deinterlace" = "Odebrání prokládání: %@";
+"osd.hwdec" = "Hardwarové dekódování: %@";
 "osd.audio_delay.nodelay" = "Zpoždění zvuku: Žádné";
 "osd.audio_delay.later" = "Zpoždění zvuku: %.2f s";
 "osd.audio_delay.earlier" = "Zpoždění zvuku: −%.2f s";
@@ -43,9 +56,9 @@
 "osd.mute" = "Ztlumeno";
 "osd.unmute" = "Zesíleno";
 "osd.screenshot" = "Snímek obrazovky pořízen";
-"osd.abloop.a" = "AB-Smyčka: A";
-"osd.abloop.b" = "AB-Smyčka: B";
-"osd.abloop.clear" = "AB-Smyčka zrušena";
+"osd.abloop.a" = "Smyčka: A";
+"osd.abloop.b" = "Smyčka: B";
+"osd.abloop.clear" = "Smyčka zrušena";
 "osd.stop" = "Zastaveno";
 "osd.chapter" = "Kapitola: %@";
 "osd.subtitle_scale" = "Velikost titulků: %.2fx";
@@ -59,7 +72,7 @@
 "osd.find_online_sub" = "Vyhledávám titulky online…";
 "osd.find_online_sub.source" = "z";
 "osd.sub_not_found" = "Titulky nenalezeny";
-"osd.sub_found" = "Nalezeno titulků: %d. Stahuji…";
+"osd.sub_found" = "Nalezeno titulků: %d Stahuji…";
 "osd.sub_downloaded" = "Titulky staženy";
 "osd.sub_saved" = "Titulky uloženy";
 "osd.network_error" = "Chyba sítě";
@@ -87,6 +100,8 @@
 "preference.key_binding_hint_1" = "Pro úpravy konfiguračního souboru klávesových zkratek, vytvořte jejich kopii stisknutím \"Duplikovat…\".";
 "preference.key_binding_hint_2" = "Pro změnu klávesové zkratky, klikněte dvakrát na odpovídající řádek po pravé straně.";
 
+"preference.enable_adv_settings" = "Povolit rozšířené nastavení";
+
 "menu.volume" = "Hlasitost: %d";
 "menu.audio_delay" = "Zpoždění zvuku: %.2f s";
 "menu.sub_delay" = "Zpoždění titulků: %.2f s";
@@ -109,6 +124,8 @@
 "menu.sub_delay_up" = "Zpoždění titulků +%.1f s";
 "menu.sub_delay_down" = "Zpoždění titulků −%.1f s";
 
+"menu.crop_custom" = "Vlastní...";
+
 "track.none" = "Prázdné";
 
 "subtrack.no_loaded" = "Nejsou načteny žádné titulky";
@@ -116,14 +133,13 @@
 
 // Alerts
 "alert.beta_channel.title" = "Dostávat beta aktualizace";
-"alert.beta_channel.message" = "Rádi byste nám pomohli otestovat beta verze? \n\nTuto možnost můžete změnit kdykoli v Předvolby > Obecné.";
 
 "alert.title_error" = "Chyba";
 "alert.title_warning" = "Varování";
 "alert.title_info" = "Informace";
 
 "alert.fatal_error" = "Závažná chyba: %@ \nAplikace se teď ukončí.";
-"alert.mpv_error" = "Interní chyba %@ (%@) při nastavení možnosti %@.";
+"alert.mpv_error" = "Vnitřní chyba %@ (%@) při nastavení možnosti %@.";
 "alert.sleep" = "Nelze zakázat automatické uspání monitoru!";
 
 "alert.unsupported_audio" = "Nepodporovaný externí zvukový soubor.";
@@ -231,7 +247,7 @@
 "pl_menu.add_file" = "Přidat soubor…";
 "pl_menu.add_url" = "Přidat URL…";
 "pl_menu.clear_playlist" = "Smazat Playlist";
-"pl_menu.matched_sub" = "Vyhovujících titulků %d";
+"pl_menu.matched_sub" = "Vyhovujících titulků: %d";
 "pl_menu.add_sub" = "Přidat titulky…";
 "pl_menu.wrong_sub" = "Nesprávné titulky!";
 "pl_menu.browser" = "Otevřít v prohlížeči";
@@ -257,6 +273,16 @@
 "osc_toolbar.music_mode" = "Spustit hudební režim";
 "osc_toolbar.sub_track" = "Vybrat stopu titulků";
 
+"mini_player.album_art" = "Přepnout obal alba";
+"mini_player.loop" = "Opakovat";
+"mini_player.shuffle" = "Náhodně";
+"mini_player.remove" = "Odstranit ze seznamu přehrávání";
+"mini_player.add" = "Přidat do seznamu přehrávání";
+"mini_player.delete" = "Odstranit všechny položky ze seznamu přehrávání";
+"mini_player.volume" = "Hlasitost";
+"mini_player.close" = "Zavřít hudební režim";
+"mini_player.back" = "Zpět do režimu videa";
+
 // Touch bar
 
 "touchbar.ahead_15" = "15 s vpřed";
@@ -272,5 +298,5 @@
 "touchbar.play_pause" = "Přehrát/Pozastavit";
 "touchbar.seek" = "Vyhledat";
 "touchbar.time" = "Pozice";
-"touchbar.remainingTime" = "Zbývající čas";
+"touchbar.remainingTimeOrTotalDuration" = "Zbývající čas / Celková délka";
 "touchbar.toggle_pip" = "Přepnout obraz v obrazu";

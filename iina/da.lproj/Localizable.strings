@@ -7,8 +7,8 @@
 */
 // Common
 
-"general.on" = "On";
-"general.off" = "Off";
+"general.on" = "Til";
+"general.off" = "Fra";
 "general.login" = "Log ind";
 "general.logout" = "Log ud";
 "general.ok" = "OK";
@@ -16,23 +16,36 @@
 "general.username" = "Brugernavn";
 "general.password" = "Kodeord";
 
+// Guide Window
+"guide.highlights" = "Highlights";
+"guide.basic_settings" = "Basic Settings";
+"guide.faq" = "Frequently Asked Questions";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffering... %d%%";
-"main.opening_stream" = "Opening stream…";
+"main.opening_stream" = "Åbn stream…";
+"osc.precision" = "Precision";
+"osc.1s" = "1 second";
+"osc.100ms" = "100 milliseconds";
+"osc.10ms" = "10 milliseconds";
+"osc.1ms" = "1 millisecond";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Standart";
 "quicksetting.item_none" = "Ingen";
+"quicksetting.hwdec" = "Hardware Decoding";
+"quicksetting.deinterlace" = "Deinterlace";
 
 // OSDMessage.swift
 "osd.pause" = "Pause";
 "osd.resume" = "Genoptag";
 "osd.volume" = "Volumen: %i";
 "osd.speed" = "Hastighed: %.2fx";
-"osd.aspect" = "Aspect Ratio: %@";
+"osd.aspect" = "Aspekt Ratio: %@";
 "osd.crop" = "Beskær: %@";
 "osd.rotate" = "Roter: %i°";
 "osd.deinterlace" = "Deinterlace: %@";
+"osd.hwdec" = "Hardware Decoding: %@";
 "osd.audio_delay.nodelay" = "Lydforsinkelse: Ingen forsinkelsen";
 "osd.audio_delay.later" = "Lydforsinkelse: %.2fs Senere";
 "osd.audio_delay.earlier" = "Lydforsinkelse: %.2fs tidligere";
@@ -40,8 +53,8 @@
 "osd.sub_delay.later" = "Undertekstforsinkelse: %.2fs Senere";
 "osd.sub_delay.earlier" = "Undertekstforsinkelse: %.2fs Tidligere";
 "osd.subtitle_pos" = "Undertekstposition: %.1f";
-"osd.mute" = "Mute";
-"osd.unmute" = "Unmute";
+"osd.mute" = "Lydløs";
+"osd.unmute" = "Lydløs fra";
 "osd.screenshot" = "Screenshot taget";
 "osd.abloop.a" = "AB-Løkke: A";
 "osd.abloop.b" = "AB-Løkke: B";
@@ -51,13 +64,13 @@
 "osd.subtitle_scale" = "Undertekstskale: %.2fx";
 "osd.add_to_playlist" = "Tilføj %i filer til Playlist";
 "osd.clear_playlist" = "Playliste tømt";
-"osd.video_eq.contrast" = "Contrast: %i";
+"osd.video_eq.contrast" = "Kontrast: %i";
 "osd.video_eq.gamma" = "Gamma: %i";
 "osd.video_eq.hue" = "Hue: %i";
 "osd.video_eq.saturation" = "Saturation: %i";
-"osd.video_eq.brightness" = "Brightness: %i";
+"osd.video_eq.brightness" = "Lysstyrke: %i";
 "osd.find_online_sub" = "Leder efter undertekster online...";
-"osd.find_online_sub.source" = "from";
+"osd.find_online_sub.source" = "fra";
 "osd.sub_not_found" = "Ingen undertekster fundet";
 "osd.sub_found" = "%d Undertekster fundet. Downloader...";
 "osd.sub_downloaded" = "Undertekster downloadet";
@@ -78,7 +91,7 @@
 "preference.control" = "Kontrol";
 "preference.keybindings" = "Tastegenveje";
 "preference.advanced" = "Avanceret";
-"preference.utilities" = "Utilities";
+"preference.utilities" = "Værktøjer";
 "preference.scripts" = "Scripts";
 "preference.not_logged_in" = "Ikke logget ind";
 "preference.logged_in_as" = "Logget ind som %@";
@@ -86,6 +99,8 @@
 
 "preference.key_binding_hint_1" = "To edit key bindings in current configuration file, click \"Duplicate…\" button first to create a copy.";
 "preference.key_binding_hint_2" = "Double click a row at the right side to edit the corresponding key binding.";
+
+"preference.enable_adv_settings" = "Enable advanced settings";
 
 "menu.volume" = "Volumen: %d";
 "menu.audio_delay" = "Lydforsinkelse: %.2fs";
@@ -109,14 +124,15 @@
 "menu.sub_delay_up" = "Undertekstforsinkelse + %.1fs";
 "menu.sub_delay_down" = "Undertekstforsinkelse - %.1fs";
 
-"track.none" = "<None>";
+"menu.crop_custom" = "Custom...";
 
-"subtrack.no_loaded" = "No Subtitles Loaded";
-"subtrack.no_external" = "No External Subtitles Found";
+"track.none" = "<Intet>";
+
+"subtrack.no_loaded" = "Ingen undertekster indlæst";
+"subtrack.no_external" = "Ingen eksterne undertekster fundet";
 
 // Alerts
-"alert.beta_channel.title" = "Receive Updates for Beta Versions";
-"alert.beta_channel.message" = "IINA v1.0 is coming! Would you like to help us to test out beta versions? \n\nYou can change this behavior at anytime in Preferences - General.";
+"alert.beta_channel.title" = "Modtag opdateringer for Beta Versioner";
 
 "alert.title_error" = "Fejl";
 "alert.title_warning" = "Advarsel";
@@ -183,8 +199,8 @@
 "alert.open_url.message" = "Venligst indtast URL:";
 "alert.choose_media_file.title" = "Vælge mediefil";
 
-"alert.add_url.title" = "Add URL";
-"alert.add_url.message" = "Please enter the URL:";
+"alert.add_url.title" = "Tilføj URL";
+"alert.add_url.message" = "Indtast URL:";
 
 "alert.delete_history.title" = "Slet Playback Historik";
 "alert.delete_history.message" = "Er du sikker på du ønsker at slette det valgte?";
@@ -197,8 +213,8 @@
 "alert.clear_cache.title" = "Tøm Thumbnail Cache";
 "alert.clear_cache.message" = "Er du sikker på du vil tømme alle thumbnail Cache?";
 
-"alert.clear_history.title" = "Clear Playback History";
-"alert.clear_history.message" = "Are you sure to delete all playback history?";
+"alert.clear_history.title" = "Ryd afspilnings Historik";
+"alert.clear_history.message" = "Er du sikker du vil slette al afspilnings historik?";
 
 "alert.clear_watch_later.title" = "Clear Saved Playback Progress";
 "alert.clear_watch_later.message" = "Are you sure to delete all saved playback progress (\"watch later\" data)?";
@@ -210,9 +226,9 @@
 "alert.duplicate_config" = "Du kan ikke ændre i standart konfigurationen direkte. Venligst dupliker først.";
 
 "alert.assrt_register" = "Due to limited API quota, you are strongly recommended to use your own API token. The default token is only for demo usage, and you may encounter network error.";
-"alert.assrt_register.register" = "Register Now";
-"alert.assrt_register.try" = "Try First";
-"alert.assrt_token_prompt.title" = "Enter your API token";
+"alert.assrt_register.register" = "Registrer Nu";
+"alert.assrt_register.try" = "Prøv Først";
+"alert.assrt_token_prompt.title" = "Indtast dit API token";
 "alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
 "alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
 
@@ -228,15 +244,15 @@
 "pl_menu.delete_after_play" = "Flyt til papirkurven efter afspilning";
 "pl_menu.delete_after_play_multi" = "Flyt valgte filer til papirkurven efter afspilning";
 "pl_menu.reveal_in_finder" = "Vis i finder";
-"pl_menu.add_file" = "Add File…";
-"pl_menu.add_url" = "Add URL…";
+"pl_menu.add_file" = "Tilføj Arkiv…";
+"pl_menu.add_url" = "Tilføj URL…";
 "pl_menu.clear_playlist" = "Tøm Playlist";
 "pl_menu.matched_sub" = "Matchede %d Undertekster";
 "pl_menu.add_sub" = "Tilføj underteskter…";
 "pl_menu.wrong_sub" = "Forkert undertekst!";
-"pl_menu.browser" = "Open in Browser";
-"pl_menu.copy_url" = "Copy URL";
-"pl_menu.copy_url_multi" = "Copy URLs";
+"pl_menu.browser" = "Åbn i Browser";
+"pl_menu.copy_url" = "Kopier URL";
+"pl_menu.copy_url_multi" = "Kopier URLer";
 
 "keymapping.title" = "Taste kortlægning";
 "keymapping.message" = "Tryk på en vilkårlig tast for at optage.";
@@ -250,12 +266,22 @@
 
 "subencoding.auto" = "Find pr. automatik";
 
-"osc_toolbar.settings" = "Quick Settings";
-"osc_toolbar.playlist" = "Playlist and chapters";
+"osc_toolbar.settings" = "Hurtig Indstillinger";
+"osc_toolbar.playlist" = "Afspilningsliste og kapitler";
 "osc_toolbar.pip" = "Toggle Picture-in-Picture";
-"osc_toolbar.full_screen" = "Toggle full screen";
+"osc_toolbar.full_screen" = "Skift fuld skærm";
 "osc_toolbar.music_mode" = "Enter music mode";
-"osc_toolbar.sub_track" = "Choose subtitle track";
+"osc_toolbar.sub_track" = "Vælg undertekstspor";
+
+"mini_player.album_art" = "Toggle album art";
+"mini_player.loop" = "Repeat";
+"mini_player.shuffle" = "Shuffle";
+"mini_player.remove" = "Remove from playlist";
+"mini_player.add" = "Add to playlist";
+"mini_player.delete" = "Delete all tracks from playlist";
+"mini_player.volume" = "Volume";
+"mini_player.close" = "Close music mode";
+"mini_player.back" = "Return to video mode";
 
 // Touch bar
 
@@ -272,5 +298,5 @@
 "touchbar.play_pause" = "Play / Pause";
 "touchbar.seek" = "Spol";
 "touchbar.time" = "Tids Position";
-"touchbar.remainingTime" = "Remaining Time";
+"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
 "touchbar.toggle_pip" = "Toggle Picture-in-Picture";

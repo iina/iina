@@ -119,10 +119,19 @@
 "w54-7I-QfW.title" = "无";
 
 /* Class = "NSMenuItem"; title = "Keyframe seek"; ObjectID = "wBB-fx-Mao"; */
-"wBB-fx-Mao.title" = "关键帧查找";
+"wBB-fx-Mao.title" = "关键帧跳转";
 
 /* Class = "NSMenuItem"; title = "Seek"; ObjectID = "wcS-tP-wav"; */
-"wcS-tP-wav.title" = "查找";
+"wcS-tP-wav.title" = "跳转";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "wkV-Gq-B0T"; */
 "wkV-Gq-B0T.title" = "无";
+
+/* Class = "NSMenuItem"; title = "Toggle Picture-in-Picture"; ObjectID = "rvS-xA-7bv"; */
+"rvS-xA-7bv.title" = "切换“画中画”模式";
+
+/* Class = "NSMenuItem"; title = "Toggle Picture-in-Picture"; ObjectID = "ibM-4r-SQA"; */
+"ibM-4r-SQA.title" = "切换“画中画”模式";
+
+/* Class = "NSMenuItem"; title = "Toggle Picture-in-Picture"; ObjectID = "3Pm-nn-HpB"; */
+"3Pm-nn-HpB.title" = "切换“画中画”模式";

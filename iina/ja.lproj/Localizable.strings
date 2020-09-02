@@ -13,16 +13,28 @@
 "general.logout" = "ログアウト";
 "general.ok" = "OK";
 "general.cancel" = "キャンセル";
-"general.username" = "ユーザ名";
+"general.username" = "ユーザー名";
 "general.password" = "パスワード";
+
+// Guide Window
+"guide.highlights" = "Highlights";
+"guide.basic_settings" = "Basic Settings";
+"guide.faq" = "Frequently Asked Questions";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "バッファ中… %d%%";
 "main.opening_stream" = "ストリームを展開中…";
+"osc.precision" = "Precision";
+"osc.1s" = "1 second";
+"osc.100ms" = "100 milliseconds";
+"osc.10ms" = "10 milliseconds";
+"osc.1ms" = "1 millisecond";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "デフォルト";
 "quicksetting.item_none" = "なし";
+"quicksetting.hwdec" = "ハードウェアデコード";
+"quicksetting.deinterlace" = "インターレース解除";
 
 // OSDMessage.swift
 "osd.pause" = "一時停止";
@@ -33,6 +45,7 @@
 "osd.crop" = "クロップ: %@";
 "osd.rotate" = "回転: %i°";
 "osd.deinterlace" = "インターレース解除: %@";
+"osd.hwdec" = "ハードウェアデコード中: %@";
 "osd.audio_delay.nodelay" = "オーディオディレイ: ディレイなし";
 "osd.audio_delay.later" = "オーディオディレイ: %.2f秒 遅く";
 "osd.audio_delay.earlier" = "オーディオディレイ: %.2f秒 早く";
@@ -47,7 +60,7 @@
 "osd.abloop.b" = "AB-リピート: B";
 "osd.abloop.clear" = "AB-リピート: リセット";
 "osd.stop" = "一時停止";
-"osd.chapter" = "チャプタ: %@";
+"osd.chapter" = "チャプター: %@";
 "osd.subtitle_scale" = "字幕の大きさ: %.2fx";
 "osd.add_to_playlist" = "%i個のファイルをプレイリストに追加しました";
 "osd.clear_playlist" = "プレイリストをクリアしました";
@@ -66,8 +79,8 @@
 "osd.file_error" = "ファイルの読み込みエラー";
 "osd.cannot_login" = "ログインできません";
 "osd.canceled" = "キャンセルされました";
-"osd.filter_added" = "追加したフィルタ: %@";
-"osd.filter_removed" = "削除したフィルタ";
+"osd.filter_added" = "追加したフィルター: %@";
+"osd.filter_removed" = "削除したフィルター";
 
 "preference.title" = "環境設定";
 "preference.general" = "一般";
@@ -87,12 +100,14 @@
 "preference.key_binding_hint_1" = "この設定を編集するには、先に\"複製…\"ボタンをクリックしてコピーを作成してください。";
 "preference.key_binding_hint_2" = "右側の行をダブルクリックすることで対応するキー割り当て設定を編集できます。";
 
+"preference.enable_adv_settings" = "高度な設定を有効化";
+
 "menu.volume" = "音量: %d";
 "menu.audio_delay" = "オーディオディレイ: %.2fs";
 "menu.sub_delay" = "字幕ディレイ: %.2fs";
 "menu.fullscreen" = "フルスクリーンにする";
 "menu.exit_fullscreen" = "フルスクリーンを解除";
-"menu.pip" = "ピクチャ・イン・ピクチャを使用";
+"menu.pip" = "ピクチャー・イン・ピクチャーを使用";
 "menu.exit_pip" = "ピクチャ・イン・ピクチャを終了";
 "menu.pause" = "一時停止";
 "menu.resume" = "再生";
@@ -109,6 +124,8 @@
 "menu.sub_delay_up" = "字幕ディレイ + %.1f秒";
 "menu.sub_delay_down" = "字幕ディレイ - %.1f秒";
 
+"menu.crop_custom" = "カスタム...";
+
 "track.none" = "<なし>";
 
 "subtrack.no_loaded" = "字幕が読み込まれていません";
@@ -116,7 +133,6 @@
 
 // Alerts
 "alert.beta_channel.title" = "ベータ版のアップデート通知を受け取る";
-"alert.beta_channel.message" = "まもなくIINA v1.0がリリースされます！ ベータ版のテストを手伝っていただけますか？\n\nこの設定は 環境設定 > 一般 からいつでも変更することができます。";
 
 "alert.title_error" = "エラー";
 "alert.title_warning" = "警告";
@@ -124,7 +140,7 @@
 
 "alert.fatal_error" = "致命的なエラー: %@ \nアプリケーションを終了します。";
 "alert.mpv_error" = "内部エラー %@ (%@) がユーザーオプション %@ の設定中に発生しました。";
-"alert.sleep" = "ディスプレイのスリープを解除できません!";
+"alert.sleep" = "ディスプレイのスリープを解除できません！";
 
 "alert.unsupported_audio" = "対応していない外部のオーディオファイルです。";
 "alert.unsupported_sub" = "対応していない外部の字幕ファイルです。";
@@ -141,23 +157,23 @@
 "alert.config.new.message" = "新しい設定ファイルの名前を入力を入力してください。";
 "alert.config.duplicate.title" = "設定の複製";
 "alert.config.duplicate.message" = "複製する設定ファイルの名前を入力してください。";
-"alert.config.empty_name" = "名前を入力してください。";
-"alert.config.name_existing" = "すでに同名のファイルが存在しています。";
+"alert.config.empty_name" = "名前は空欄にできません。";
+"alert.config.name_existing" = "この名前はすでに存在しています。";
 "alert.config.file_existing.title" = "ファイルが既に存在しています";
 "alert.config.file_existing.message" = "既にファイルが存在しています。上書きするにはOKを選択、Finderで表示するにはキャンセルを選択してください。";
 "alert.config.cannot_create" = "設定ファイルが作成できません！\n%@";
 "alert.config.cannot_write" = "設定ファイルに書き込めません！";
 
 "alert.filter.incorrect" = "フィルタの設定時にエラーが発生しました。パラメータの形式を確認してください。";
-"alert.add_filter.title" = "フィルタの新規作成";
-"alert.add_filter.message" = "mpvの vf または af オプションの形式でフィルタ名を入力してください。";
+"alert.add_filter.title" = "フィルターの新規作成";
+"alert.add_filter.message" = "mpvの vf または af オプションの形式でフィルター名を入力してください。";
 
 "alert.keybinding_config.error" = "キーバインディングの設定ファイル\"%@\"の読み込み時にエラーが発生しました！IINAのデフォルト設定に戻します。設定を確認してください。";
 
 "alert.extra_option.cannot_read" = "mpvの追加オプションが読み込めません。";
 "alert.extra_option.empty" = "キーもしくは値を空欄にはできません！";
-"alert.extra_option.error" = "オプションの設定 --%@=%@ で返り値 %d のエラーが発生しました。設定 > 拡張 より追加オプションの設定を確認してください。";
-"alert.extra_option.config_folder" = "設定ディレクトリ\"%@\"の設定エラーが発生しました";
+"alert.extra_option.error" = "オプションの設定 --%@=%@ で返り値 %d のエラーが発生しました。設定 > 高度な設定 より追加オプションの設定を確認してください。";
+"alert.extra_option.config_folder" = "設定ディレクトリー\"%@\"の設定エラーが発生しました";
 
 "alert.playlist.error_deleting" = "削除エラー: %@";
 
@@ -177,7 +193,7 @@
 "alert.jump_to.message" = "ジャンプしたい位置の時間を入力してください。例: 20:35";
 
 "alert.opensub.login.title" = "OpenSubtitlesにログイン";
-"alert.opensub.login.message" = "ユーザ名とパスワードを入力してください";
+"alert.opensub.login.message" = "ユーザー名とパスワードを入力してください";
 
 "alert.open_url.title" = "URLを開く";
 "alert.open_url.message" = "URLを入力してください:";
@@ -189,18 +205,18 @@
 "alert.delete_history.title" = "再生履歴の削除";
 "alert.delete_history.message" = "本当に選択した項目を削除しますか？";
 
-"alert.filter_hwdec.message" = "あなたは今ビデオフィルタを適用しようとしていますが、お使いのハードウェアデコーダはビデオフィルタリングに対応していない可能性があります。ハードウェアデコーディングをオフにするか、2倍のメモリを消費する\"自動(コピー)\"をご使用ください。\n設定後、正常に動作させるには操作をやり直す(クロップ範囲の再設定など)必要がある場合があります。";
+"alert.filter_hwdec.message" = "あなたは今ビデオフィルターを適用しようとしていますが、お使いのハードウェアデコーダーはビデオフィルタリングに対応していない可能性があります。ハードウェアデコーディングをオフにするか、2倍のメモリを消費する\"自動(コピー)\"をご使用ください。\n設定後、正常に動作させるには操作をやり直す(クロップ範囲の再設定など)必要がある場合があります。";
 "alert.filter_hwdec.abort" = "破棄";
 "alert.filter_hwdec.turn_off" = "ハードウェアデコーディングをオフにする";
 "alert.filter_hwdec.use_copy" = "自動 (コピー) 方式に切り替え";
 
-"alert.clear_cache.title" = "サムネイルキャッシュをクリア";
+"alert.clear_cache.title" = "サムネイルキャッシュを消去する";
 "alert.clear_cache.message" = "本当にすべてのサムネイルキャッシュを消去しますか？";
 
-"alert.clear_history.title" = "再生履歴をクリア";
+"alert.clear_history.title" = "再生履歴を消去する";
 "alert.clear_history.message" = "本当にすべての再生履歴を消去しますか？";
 
-"alert.clear_watch_later.title" = "保存済み再生位置をクリア";
+"alert.clear_watch_later.title" = "保存済み再生位置を消去する";
 "alert.clear_watch_later.message" = "本当にすべての保存済み再生位置(\"あとで見る\"情報)を消去しますか？";
 
 "alert.nothing_to_open" = "開くファイルがありません。";
@@ -214,11 +230,11 @@
 "alert.assrt_register.try" = "使ってみる";
 "alert.assrt_token_prompt.title" = "APIトークンを入力";
 "alert.assrt_token_prompt.message" = "開かれたWebページで登録してください。ホーム画面でトークンを取得し、以下に入力してください:";
-"alert.assrt_token_invalid" = "Assrt APIトークンが有効でないようです。";
+"alert.assrt_token_invalid" = "Assrt APIトークンが有効ではないようです。";
 
 "playlist.total_length" = "合計 %@";
 "playlist.total_length_with_selected" = "%@ / %@を選択中";
-"pl_menu.title_multi" = "%d個のアイテム";
+"pl_menu.title_multi" = "%d個の項目";
 "pl_menu.play_next" = "次に再生";
 "pl_menu.play_in_new_window" = "新しいウィンドウで再生";
 "pl_menu.remove" = "削除";
@@ -230,7 +246,7 @@
 "pl_menu.reveal_in_finder" = "Finderで表示";
 "pl_menu.add_file" = "ファイルの追加…";
 "pl_menu.add_url" = "URLの追加…";
-"pl_menu.clear_playlist" = "プレイリストをクリア";
+"pl_menu.clear_playlist" = "プレイリストを消去する";
 "pl_menu.matched_sub" = "該当する字幕 %d 件";
 "pl_menu.add_sub" = "字幕の追加…";
 "pl_menu.wrong_sub" = "誤った字幕です！";
@@ -241,21 +257,31 @@
 "keymapping.title" = "キーマッピング";
 "keymapping.message" = "保存するには何かキーを押してください。";
 
-"filter.video_filters" = "ビデオフィルタ一覧";
-"filter.audio_filters" = "オーディオフィルタ一覧";
+"filter.video_filters" = "ビデオフィルター一覧";
+"filter.audio_filters" = "オーディオフィルター一覧";
 
 "hwdec.no" = "ハードウェアデコーディングを使用しません。";
-"hwdec.auto" = "ハードウェアデコーディングを使用します。多くのビデオフィルタは正常に動作しません。";
-"hwdec.auto-copy" = "ハードウェアデコーディングを使用します。二倍のメモリを使用しますが、ビデオフィルタを適用できます。";
+"hwdec.auto" = "ハードウェアデコーディングを使用します。多くのビデオフィルターは正常に動作しません。";
+"hwdec.auto-copy" = "ハードウェアデコーディングを使用します。二倍のメモリを使用しますが、ビデオフィルターを適用できます。";
 
 "subencoding.auto" = "自動検出";
 
 "osc_toolbar.settings" = "クイック設定";
 "osc_toolbar.playlist" = "プレイリストとチャプタ";
-"osc_toolbar.pip" = "ピクチャ・イン・ピクチャ切り替え";
+"osc_toolbar.pip" = "ピクチャー・イン・ピクチャーの切り替え";
 "osc_toolbar.full_screen" = "フルスクリーン切り替え";
 "osc_toolbar.music_mode" = "ミュージックモード切り替え";
 "osc_toolbar.sub_track" = "字幕トラックを選択";
+
+"mini_player.album_art" = "アルバムアートの切り替え";
+"mini_player.loop" = "リピート";
+"mini_player.shuffle" = "シャッフル";
+"mini_player.remove" = "プレイリストから削除";
+"mini_player.add" = "プレイリストに追加";
+"mini_player.delete" = "プレイリストから全てのトラックを削除";
+"mini_player.volume" = "音量";
+"mini_player.close" = "ミュージックモードの終了";
+"mini_player.back" = "ビデオモードに戻る";
 
 // Touch bar
 
@@ -272,5 +298,5 @@
 "touchbar.play_pause" = "再生 / 一時停止";
 "touchbar.seek" = "シーク";
 "touchbar.time" = "再生位置";
-"touchbar.remainingTime" = "残り時間";
-"touchbar.toggle_pip" = "ピクチャ・イン・ピクチャの切り替え";
+"touchbar.remainingTimeOrTotalDuration" = "残り時間/合計時間";
+"touchbar.toggle_pip" = "ピクチャー・イン・ピクチャーの切り替え";

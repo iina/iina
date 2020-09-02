@@ -7,47 +7,60 @@
 */
 // Common
 
-"general.on" = "On";
-"general.off" = "Off";
-"general.login" = "Login";
-"general.logout" = "Logout";
-"general.ok" = "OK";
-"general.cancel" = "Cancel";
-"general.username" = "Username";
-"general.password" = "Password";
+"general.on" = "روشن";
+"general.off" = "خاموش";
+"general.login" = "ورود";
+"general.logout" = "خروج";
+"general.ok" = "باشه";
+"general.cancel" = "لغو";
+"general.username" = "نام کاربری";
+"general.password" = "رمز عبور";
+
+// Guide Window
+"guide.highlights" = "Highlights";
+"guide.basic_settings" = "Basic Settings";
+"guide.faq" = "Frequently Asked Questions";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Buffering… %d%%";
-"main.opening_stream" = "Opening stream…";
+"main.buffering_indicator" = "در حال بارگذاری... %d%%";
+"main.opening_stream" = "در حال بازکردن استریم…";
+"osc.precision" = "Precision";
+"osc.1s" = "1 second";
+"osc.100ms" = "100 milliseconds";
+"osc.10ms" = "10 milliseconds";
+"osc.1ms" = "1 millisecond";
 
 // QuickSettingViewController.swift
-"quicksetting.item_default" = "Default";
-"quicksetting.item_none" = "None";
+"quicksetting.item_default" = "پیش‌فرض";
+"quicksetting.item_none" = "هیچ کدام";
+"quicksetting.hwdec" = "Hardware Decoding";
+"quicksetting.deinterlace" = "Deinterlace";
 
 // OSDMessage.swift
-"osd.pause" = "Pause";
-"osd.resume" = "Resume";
-"osd.volume" = "Volume: %i";
-"osd.speed" = "Speed: %.2fx";
-"osd.aspect" = "Aspect Ratio: %@";
-"osd.crop" = "Crop: %@";
-"osd.rotate" = "Rotate: %i°";
+"osd.pause" = "مکث";
+"osd.resume" = "ادامه";
+"osd.volume" = "بلندی صدا: %i";
+"osd.speed" = "سرعت: %.2f برابر";
+"osd.aspect" = "نسبت تصویر: %@";
+"osd.crop" = "برش: %@";
+"osd.rotate" = "چرخش: %i";
 "osd.deinterlace" = "Deinterlace: %@";
-"osd.audio_delay.nodelay" = "Audio Delay: No Delay";
+"osd.hwdec" = "Hardware Decoding: %@";
+"osd.audio_delay.nodelay" = "تاخیر صدا: بدون تاخیر";
 "osd.audio_delay.later" = "Audio Delay: %.2fs Later";
 "osd.audio_delay.earlier" = "Audio Delay: %.2fs Earlier";
 "osd.sub_delay.nodelay" = "Subtitle Delay: No Delay";
 "osd.sub_delay.later" = "Subtitle Delay: %.2fs Later";
 "osd.sub_delay.earlier" = "Subtitle Delay: %.2fs Earlier";
 "osd.subtitle_pos" = "Subtitle Position: %.1f";
-"osd.mute" = "Mute";
-"osd.unmute" = "Unmute";
-"osd.screenshot" = "Screenshot Captured";
+"osd.mute" = "بی صدا";
+"osd.unmute" = "با صدا";
+"osd.screenshot" = "عکس از صفحه گرفته شد";
 "osd.abloop.a" = "AB-Loop: A";
 "osd.abloop.b" = "AB-Loop: B";
 "osd.abloop.clear" = "AB-Loop: Cleared";
-"osd.stop" = "Stop";
-"osd.chapter" = "Chapter: %@";
+"osd.stop" = "توقف";
+"osd.chapter" = "قسمت: %@";
 "osd.subtitle_scale" = "Subtitle Scale: %.2fx";
 "osd.add_to_playlist" = "Added %i Files to Playlist";
 "osd.clear_playlist" = "Cleared Playlist";
@@ -55,30 +68,30 @@
 "osd.video_eq.gamma" = "Gamma: %i";
 "osd.video_eq.hue" = "Hue: %i";
 "osd.video_eq.saturation" = "Saturation: %i";
-"osd.video_eq.brightness" = "Brightness: %i";
+"osd.video_eq.brightness" = "روشنایی: %i";
 "osd.find_online_sub" = "Finding online subtitles…";
-"osd.find_online_sub.source" = "from";
-"osd.sub_not_found" = "No subtitles found";
+"osd.find_online_sub.source" = "از:";
+"osd.sub_not_found" = "هیچ زیرنویسی یافت نشد.";
 "osd.sub_found" = "%d subtitles found. Downloading…";
 "osd.sub_downloaded" = "Subtitle downloaded";
-"osd.sub_saved" = "Subtitle saved";
-"osd.network_error" = "Network error";
-"osd.file_error" = "Error reading file";
-"osd.cannot_login" = "Cannot login";
-"osd.canceled" = "Canceled";
+"osd.sub_saved" = "زیرنویس ذخیره شد";
+"osd.network_error" = "خطای شبکه";
+"osd.file_error" = "خطا در خواندن فایل";
+"osd.cannot_login" = "عدم توانایی ورود";
+"osd.canceled" = "لغو شده";
 "osd.filter_added" = "Added Filter: %@";
 "osd.filter_removed" = "Removed Filter";
 
-"preference.title" = "Preferences";
-"preference.general" = "General";
-"preference.ui" = "UI";
+"preference.title" = "تنظیمات";
+"preference.general" = "عمومی";
+"preference.ui" = "رابط کاربری";
 "preference.video_audio" = "Video/Audio";
-"preference.subtitle" = "Subtitle";
-"preference.network" = "Network";
-"preference.control" = "Control";
+"preference.subtitle" = "زیرنویس";
+"preference.network" = "شبکه";
+"preference.control" = "مدیریت";
 "preference.keybindings" = "Key Bindings";
-"preference.advanced" = "Advanced";
-"preference.utilities" = "Utilities";
+"preference.advanced" = "پیشرفته";
+"preference.utilities" = "ابزارها";
 "preference.scripts" = "Scripts";
 "preference.not_logged_in" = "Not logged in";
 "preference.logged_in_as" = "Logged in as %@";
@@ -87,16 +100,18 @@
 "preference.key_binding_hint_1" = "To edit key bindings in current configuration file, click \"Duplicate…\" button first to create a copy.";
 "preference.key_binding_hint_2" = "Double click a row at the right side to edit the corresponding key binding.";
 
-"menu.volume" = "Volume: %d";
-"menu.audio_delay" = "Audio Delay: %.2fs";
-"menu.sub_delay" = "Subtitle Delay: %.2fs";
-"menu.fullscreen" = "Enter Full Screen";
-"menu.exit_fullscreen" = "Exit Full Screen";
+"preference.enable_adv_settings" = "Enable advanced settings";
+
+"menu.volume" = "بلندی صدا: %d";
+"menu.audio_delay" = "تاخیر صوت: %.2f ثانيه";
+"menu.sub_delay" = "تاخیر زیرنویس: %.2f ثانیه";
+"menu.fullscreen" = "حالت تمام صفحه";
+"menu.exit_fullscreen" = "خروج از تمام صفحه";
 "menu.pip" = "Enter Picture-in-Picture";
 "menu.exit_pip" = "Exit Picture-in-Picture";
-"menu.pause" = "Pause";
-"menu.resume" = "Resume";
-"menu.speed" = "Speed: %.2fx";
+"menu.pause" = "مکث";
+"menu.resume" = "ادامه";
+"menu.speed" = "سرعت: %.2f برابر";
 
 "menu.seek_forward" = "Step Forward %.0fs";
 "menu.seek_backward" = "Step Backward %.0fs";
@@ -109,6 +124,8 @@
 "menu.sub_delay_up" = "Subtitle Delay + %.1fs";
 "menu.sub_delay_down" = "Subtitle Delay - %.1fs";
 
+"menu.crop_custom" = "Custom...";
+
 "track.none" = "<None>";
 
 "subtrack.no_loaded" = "No Subtitles Loaded";
@@ -116,9 +133,8 @@
 
 // Alerts
 "alert.beta_channel.title" = "Receive Updates for Beta Versions";
-"alert.beta_channel.message" = "IINA v1.0 is coming! Would you like to help us to test out beta versions? \n\nYou can change this behavior at anytime in Preferences - General.";
 
-"alert.title_error" = "Error";
+"alert.title_error" = "خطا";
 "alert.title_warning" = "Warning";
 "alert.title_info" = "Information";
 
@@ -257,6 +273,16 @@
 "osc_toolbar.music_mode" = "Enter music mode";
 "osc_toolbar.sub_track" = "Choose subtitle track";
 
+"mini_player.album_art" = "Toggle album art";
+"mini_player.loop" = "Repeat";
+"mini_player.shuffle" = "Shuffle";
+"mini_player.remove" = "Remove from playlist";
+"mini_player.add" = "Add to playlist";
+"mini_player.delete" = "Delete all tracks from playlist";
+"mini_player.volume" = "Volume";
+"mini_player.close" = "Close music mode";
+"mini_player.back" = "Return to video mode";
+
 // Touch bar
 
 "touchbar.ahead_15" = "15sec Ahead";
@@ -272,5 +298,5 @@
 "touchbar.play_pause" = "Play / Pause";
 "touchbar.seek" = "Seek";
 "touchbar.time" = "Time Position";
-"touchbar.remainingTime" = "Remaining Time";
+"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
 "touchbar.toggle_pip" = "Toggle Picture-in-Picture";

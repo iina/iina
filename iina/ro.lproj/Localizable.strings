@@ -16,13 +16,25 @@
 "general.username" = "Nume de utilizator";
 "general.password" = "Parolă";
 
+// Guide Window
+"guide.highlights" = "Highlights";
+"guide.basic_settings" = "Basic Settings";
+"guide.faq" = "Frequently Asked Questions";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffering… %d%%";
 "main.opening_stream" = "Se deschide streamul…";
+"osc.precision" = "Precision";
+"osc.1s" = "1 second";
+"osc.100ms" = "100 milliseconds";
+"osc.10ms" = "10 milliseconds";
+"osc.1ms" = "1 millisecond";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Implicit";
 "quicksetting.item_none" = "Fără";
+"quicksetting.hwdec" = "Hardware Decoding";
+"quicksetting.deinterlace" = "Deinterlace";
 
 // OSDMessage.swift
 "osd.pause" = "Pauză";
@@ -33,6 +45,7 @@
 "osd.crop" = "Decupare: %@";
 "osd.rotate" = "Rotește: %i°";
 "osd.deinterlace" = "Deîntrețesere: %@";
+"osd.hwdec" = "Hardware Decoding: %@";
 "osd.audio_delay.nodelay" = "Întârziere audio: Fără întârziere";
 "osd.audio_delay.later" = "Întârziere audio: %.2fs mai târziu";
 "osd.audio_delay.earlier" = "Întârziere audio: %.2fs mai devreme";
@@ -87,6 +100,8 @@
 "preference.key_binding_hint_1" = "Pentru a edita o atribuire de taste in configurația curentă, click pe butonul „Duplicare…” pentru a crea o copie.";
 "preference.key_binding_hint_2" = "Dublu click pe un rând din dreapta pentru a edita tasta atribuită.";
 
+"preference.enable_adv_settings" = "Enable advanced settings";
+
 "menu.volume" = "Volum: %d";
 "menu.audio_delay" = "Întârziere audio: %.2fs";
 "menu.sub_delay" = "Întârziere subtitrare: %.2fs";
@@ -109,6 +124,8 @@
 "menu.sub_delay_up" = "Întârziere subitrare +%.1fs";
 "menu.sub_delay_down" = "Întârziere subitrare -%.1fs";
 
+"menu.crop_custom" = "Custom...";
+
 "track.none" = "<None>";
 
 "subtrack.no_loaded" = "Nu s-a încărcat nicio subtitrare";
@@ -116,7 +133,6 @@
 
 // Alerts
 "alert.beta_channel.title" = "Primește versiuni beta";
-"alert.beta_channel.message" = "IINA v1.0 is coming! Would you like to help us to test out beta versions? \n\nYou can change this behavior at anytime in Preferences - General.";
 
 "alert.title_error" = "Eroare";
 "alert.title_warning" = "Avertizare";
@@ -257,6 +273,16 @@
 "osc_toolbar.music_mode" = "Intră în modul Muzică";
 "osc_toolbar.sub_track" = "Alege pista de subtitrare";
 
+"mini_player.album_art" = "Toggle album art";
+"mini_player.loop" = "Repeat";
+"mini_player.shuffle" = "Shuffle";
+"mini_player.remove" = "Remove from playlist";
+"mini_player.add" = "Add to playlist";
+"mini_player.delete" = "Delete all tracks from playlist";
+"mini_player.volume" = "Volume";
+"mini_player.close" = "Close music mode";
+"mini_player.back" = "Return to video mode";
+
 // Touch bar
 
 "touchbar.ahead_15" = "15sec înainte";
@@ -272,5 +298,5 @@
 "touchbar.play_pause" = "Redă/Pauză";
 "touchbar.seek" = "Căutare";
 "touchbar.time" = "Timp curent";
-"touchbar.remainingTime" = "Timp rămas";
+"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
 "touchbar.toggle_pip" = "Activează Picture-in-Picture";

@@ -16,13 +16,25 @@
 "general.username" = "Benutzername";
 "general.password" = "Passwort";
 
+// Guide Window
+"guide.highlights" = "Highlights";
+"guide.basic_settings" = "Basic Settings";
+"guide.faq" = "Frequently Asked Questions";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Puffern … %d%%";
 "main.opening_stream" = "Stream öffnen …";
+"osc.precision" = "Precision";
+"osc.1s" = "1 second";
+"osc.100ms" = "100 milliseconds";
+"osc.10ms" = "10 milliseconds";
+"osc.1ms" = "1 millisecond";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Standard";
 "quicksetting.item_none" = "Nein";
+"quicksetting.hwdec" = "Hardware Dekodierung";
+"quicksetting.deinterlace" = "Deinterlacing";
 
 // OSDMessage.swift
 "osd.pause" = "Pause";
@@ -33,6 +45,7 @@
 "osd.crop" = "Zuschneiden: %@";
 "osd.rotate" = "Drehung: %i°";
 "osd.deinterlace" = "Deinterlacing: %@";
+"osd.hwdec" = "Hardware Dekodierung %@";
 "osd.audio_delay.nodelay" = "Audioverzögerung: Keine";
 "osd.audio_delay.later" = "Audioverzögerung: %.2f s später";
 "osd.audio_delay.earlier" = "Audioverzögerung: %.2f s früher";
@@ -87,6 +100,8 @@
 "preference.key_binding_hint_1" = "Um Kurzbefehle der ausgewählten Konfiguration zu bearbeiten, klicke vorher auf „Duplizieren …“, um eine Kopie zu erstellen.";
 "preference.key_binding_hint_2" = "Klicke doppelt auf eine Reihe, um den entsprechenden Kurzbefehl zu bearbeiten.";
 
+"preference.enable_adv_settings" = "Erweiterte Einstellungen";
+
 "menu.volume" = "Lautstärke: %d";
 "menu.audio_delay" = "Audioverzögerung: %.2f s";
 "menu.sub_delay" = "Untertitelverzögerung: %.2f s";
@@ -109,6 +124,8 @@
 "menu.sub_delay_up" = "Untertitelverzögerung + %.1f s";
 "menu.sub_delay_down" = "Untertitelverzögerung − %.1f s";
 
+"menu.crop_custom" = "Benutzerdefiniert...";
+
 "track.none" = "Keine";
 
 "subtrack.no_loaded" = "Keine Untertitel geladen";
@@ -116,7 +133,6 @@
 
 // Alerts
 "alert.beta_channel.title" = "Updates für Beta-Versionen erhalten";
-"alert.beta_channel.message" = "IINA Version 1.0 kommt! Willst Du uns helfen die Beta Versionen zu testen? Du kannst diese Einstellungen jederzeit unter \"Einstellungen - Allgemein\" wieder ändern.";
 
 "alert.title_error" = "Fehler";
 "alert.title_warning" = "Warnung";
@@ -248,7 +264,7 @@
 "hwdec.auto" = "Hardwaredecoding aktiviert. Die meisten Videofilter werden nicht richtig funktionieren.";
 "hwdec.auto-copy" = "Hardwaredecoding aktiviert. Benötigt doppelten Speicher, funktioniert aber mit Videofiltern.";
 
-"subencoding.auto" = "Automatisch bestimmen";
+"subencoding.auto" = "Automatisch erkennen";
 
 "osc_toolbar.settings" = "Einstellungspanel";
 "osc_toolbar.playlist" = "Wiedergabeliste und Kapitel";
@@ -256,6 +272,16 @@
 "osc_toolbar.full_screen" = "Vollbild ein-/ausschalten";
 "osc_toolbar.music_mode" = "Musikmodus";
 "osc_toolbar.sub_track" = "Untertitelspur auswählen";
+
+"mini_player.album_art" = "Albumcover";
+"mini_player.loop" = "Wiederholen";
+"mini_player.shuffle" = "Zufallswiedergabe";
+"mini_player.remove" = "Aus Playlist entfernen";
+"mini_player.add" = "Zur Playlist hinzufügen";
+"mini_player.delete" = "Playlist leeren";
+"mini_player.volume" = "Laufwerk";
+"mini_player.close" = "Musikmodus schließen";
+"mini_player.back" = "Zurück zum Video Modus";
 
 // Touch bar
 
@@ -272,5 +298,5 @@
 "touchbar.play_pause" = "Wiedergabe / Pause";
 "touchbar.seek" = "Verlauf";
 "touchbar.time" = "Position";
-"touchbar.remainingTime" = "Verbleibende Zeit";
+"touchbar.remainingTimeOrTotalDuration" = "verbleibende Zeit / gespielt";
 "touchbar.toggle_pip" = "Bild-in-Bild ein-/ausschalten";

@@ -1,5 +1,5 @@
 /* Class = "NSButtonCell"; title = "Clear Saved Playback Progress…"; ObjectID = "4nM-C4-9oM"; */
-"4nM-C4-9oM.title" = "保存済み再生位置をクリアする…";
+"4nM-C4-9oM.title" = "保存済み再生位置を消去する…";
 
 /* Class = "NSButtonCell"; title = "Video"; ObjectID = "8wH-Gi-mRV"; */
 "8wH-Gi-mRV.title" = "ビデオ";
@@ -26,13 +26,13 @@
 "MGo-J8-zWE.title" = "プレイリスト";
 
 /* Class = "NSButtonCell"; title = "Clear Playback History…"; ObjectID = "MP6-Em-Lp4"; */
-"MP6-Em-Lp4.title" = "再生履歴をクリアする…";
+"MP6-Em-Lp4.title" = "再生履歴を消去する…";
 
 /* Class = "NSTextFieldCell"; title = "Default Application"; ObjectID = "ORO-lK-yK5"; */
 "ORO-lK-yK5.title" = "デフォルトのアプリケーション";
 
 /* Class = "NSTextFieldCell"; title = "Clear Cache"; ObjectID = "QHA-tO-oSn"; */
-"QHA-tO-oSn.title" = "キャッシュのクリア";
+"QHA-tO-oSn.title" = "キャッシュを消去する";
 
 /* Class = "NSButtonCell"; title = "Set IINA as the Default Application…"; ObjectID = "e1p-Aa-WFG"; */
 "e1p-Aa-WFG.title" = "IINAをデフォルトのアプリケーションに設定する…";
@@ -41,7 +41,7 @@
 "f9i-sS-MJN.title" = "Firefox";
 
 /* Class = "NSButtonCell"; title = "Clear Thumbnail Cache…"; ObjectID = "hsG-JB-TT9"; */
-"hsG-JB-TT9.title" = "サムネイルキャッシュをクリアする…";
+"hsG-JB-TT9.title" = "サムネイルキャッシュを消去する…";
 
 /* Class = "NSButtonCell"; title = "Audio"; ObjectID = "jFt-2a-nmc"; */
 "jFt-2a-nmc.title" = "オーディオ";
@@ -50,7 +50,7 @@
 "kbP-VI-dmT.title" = "キャンセル";
 
 /* Class = "NSTextFieldCell"; title = "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."; ObjectID = "pPC-q2-9Gh"; */
-"pPC-q2-9Gh.title" = "このボタンをクリックすると「あとで見る」フォルダにある全てのファイルが消去されます。これらのファイルには再生位置や再生中に適用された設定が含まれています。";
+"pPC-q2-9Gh.title" = "このボタンをクリックすると「あとで見る」フォルダーにある全てのファイルが消去されます。これらのファイルには再生位置や再生中に適用された設定が含まれています。";
 
 /* Class = "NSTextFieldCell"; title = "Calculating…"; ObjectID = "tRq-eU-AV3"; */
 "tRq-eU-AV3.title" = "計算中…";

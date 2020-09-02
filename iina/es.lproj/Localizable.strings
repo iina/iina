@@ -16,13 +16,25 @@
 "general.username" = "Nombre de usuario";
 "general.password" = "Contraseña";
 
+// Guide Window
+"guide.highlights" = "Highlights";
+"guide.basic_settings" = "Basic Settings";
+"guide.faq" = "Frequently Asked Questions";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Cargando… %d%%";
 "main.opening_stream" = "Abrir flujo de datos";
+"osc.precision" = "Precision";
+"osc.1s" = "1 second";
+"osc.100ms" = "100 milliseconds";
+"osc.10ms" = "10 milliseconds";
+"osc.1ms" = "1 millisecond";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Predeterminado";
 "quicksetting.item_none" = "Ninguno";
+"quicksetting.hwdec" = "Decodificación de hardware";
+"quicksetting.deinterlace" = "Desentrelazar";
 
 // OSDMessage.swift
 "osd.pause" = "Pausa";
@@ -33,6 +45,7 @@
 "osd.crop" = "Recortar: %@";
 "osd.rotate" = "Rotar: %i°";
 "osd.deinterlace" = "Desentrelazar: %@";
+"osd.hwdec" = "Decodificación de hardware: %@";
 "osd.audio_delay.nodelay" = "Retraso de audio: Sin Retraso";
 "osd.audio_delay.later" = "Retraso de audio: %.2fs Después";
 "osd.audio_delay.earlier" = "Retraso de audio: %.2fs Antes";
@@ -87,6 +100,8 @@
 "preference.key_binding_hint_1" = "Para editar los atajos en el archivo de configuración actual, haga primero clic en el botón \"Duplicar …\" para crear una copia.";
 "preference.key_binding_hint_2" = "Haga doble clic en una fila del lado derecho para editar el atajo correspondiente.";
 
+"preference.enable_adv_settings" = "Habilitar configuración avanzada";
+
 "menu.volume" = "Volumen: %d";
 "menu.audio_delay" = "Retraso de audio: %.2fs";
 "menu.sub_delay" = "Retraso de subtítulos: %.2fs";
@@ -109,6 +124,8 @@
 "menu.sub_delay_up" = "Retrasar subtítulos + %.1fs";
 "menu.sub_delay_down" = "Retrasar subtítulos - %.1fs";
 
+"menu.crop_custom" = "Personalizado...";
+
 "track.none" = "<Ninguno>";
 
 "subtrack.no_loaded" = "No se cargaron subtítulos";
@@ -116,7 +133,6 @@
 
 // Alerts
 "alert.beta_channel.title" = "Recibir actualizaciones para las versiones Beta";
-"alert.beta_channel.message" = "IINA v1.0 está cerca! ¿Le gustaría ayudarnos a probar las versiones beta?\nPuede cambiar este comportamiento en cualquier momento desde Preferencias - General.";
 
 "alert.title_error" = "Error";
 "alert.title_warning" = "Advertencia";
@@ -257,6 +273,16 @@
 "osc_toolbar.music_mode" = "Entrar en modo música";
 "osc_toolbar.sub_track" = "Elegir la pista de subtítulos";
 
+"mini_player.album_art" = "Alternar imagen de álbum";
+"mini_player.loop" = "Repetir";
+"mini_player.shuffle" = "Aleatorio";
+"mini_player.remove" = "Eliminar de la lista";
+"mini_player.add" = "Añadir a la lista";
+"mini_player.delete" = "Borrar todas las pistas de la lista";
+"mini_player.volume" = "Volumen";
+"mini_player.close" = "Cerrar modo de música";
+"mini_player.back" = "Volver al modo de vídeo";
+
 // Touch bar
 
 "touchbar.ahead_15" = "Adelantar 15s";
@@ -272,5 +298,5 @@
 "touchbar.play_pause" = "Reproducir / Pausar";
 "touchbar.seek" = "Buscar";
 "touchbar.time" = "Posición en el tiempo";
-"touchbar.remainingTime" = "Tiempo restante";
+"touchbar.remainingTimeOrTotalDuration" = "Tiempo restante / Duración total";
 "touchbar.toggle_pip" = "Alternar Imagen dentro de imagen";

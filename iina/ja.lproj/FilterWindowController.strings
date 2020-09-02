@@ -2,13 +2,13 @@
 "02L-0u-zae.title" = "保存";
 
 /* Class = "NSTableColumn"; headerCell.title = "Filter String"; ObjectID = "4g6-LW-373"; */
-"4g6-LW-373.headerCell.title" = "フィルタ名";
+"4g6-LW-373.headerCell.title" = "フィルター名";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "6fq-yx-3dE"; */
 "6fq-yx-3dE.title" = "キャンセル";
 
 /* Class = "NSTextFieldCell"; title = "By saving a filter, you can enable or disable it conveniently and even assign a shortcut key to it."; ObjectID = "8JN-kb-kGF"; */
-"8JN-kb-kGF.title" = "フィルタを保存すると、有効・無効の切り替えをショートカットキーに割り当てることができます。";
+"8JN-kb-kGF.title" = "フィルターを保存すると、有効・無効の切り替えをショートカットキーに割り当てることができます。";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "9Au-ZV-KXN"; */
 "9Au-ZV-KXN.title" = "キャンセル";
@@ -17,16 +17,16 @@
 "9k2-lm-YGD.title" = "名前:";
 
 /* Class = "NSTextFieldCell"; title = "Edit Filter"; ObjectID = "Dab-w9-6TY"; */
-"Dab-w9-6TY.title" = "フィルタを編集";
+"Dab-w9-6TY.title" = "フィルターを編集";
 
 /* Class = "NSWindow"; title = "Filters"; ObjectID = "F0z-JX-Cv5"; */
-"F0z-JX-Cv5.title" = "フィルタ一覧";
+"F0z-JX-Cv5.title" = "フィルター一覧";
 
 /* Class = "NSTextFieldCell"; title = "Name:"; ObjectID = "IYf-IE-5cL"; */
 "IYf-IE-5cL.title" = "名前:";
 
 /* Class = "NSTextFieldCell"; title = "Save Filter"; ObjectID = "KGV-G1-A2l"; */
-"KGV-G1-A2l.title" = "フィルタを保存";
+"KGV-G1-A2l.title" = "フィルターを保存";
 
 /* Class = "NSTextFieldCell"; title = "Shortcut key:"; ObjectID = "M9z-ss-1Ma"; */
 "M9z-ss-1Ma.title" = "ショートカットキー:";
@@ -38,19 +38,19 @@
 "Xqd-Ft-hTS.title" = "キャンセル";
 
 /* Class = "NSTextFieldCell"; title = "Press any button to record"; ObjectID = "dL4-so-Qss"; */
-"dL4-so-Qss.title" = "ボタンを押して録画開始";
+"dL4-so-Qss.title" = "任意のキーを押して録画開始";
 
 /* Class = "NSTextFieldCell"; title = "Press any button to record"; ObjectID = "jJk-0R-KQo"; */
-"jJk-0R-KQo.title" = "ボタンを押して録画開始";
+"jJk-0R-KQo.title" = "任意のキーを押して録画開始";
 
 /* Class = "NSButtonCell"; title = "Add"; ObjectID = "ljR-R1-mo7"; */
 "ljR-R1-mo7.title" = "追加";
 
 /* Class = "NSTextFieldCell"; title = "Saved filters"; ObjectID = "m5X-Zl-aOj"; */
-"m5X-Zl-aOj.title" = "保存したフィルタ";
+"m5X-Zl-aOj.title" = "保存したフィルター";
 
 /* Class = "NSTextFieldCell"; title = "Filter string:"; ObjectID = "t9F-EU-fKj"; */
-"t9F-EU-fKj.title" = "フィルタ文字列:";
+"t9F-EU-fKj.title" = "フィルター文字列:";
 
 /* Class = "NSButtonCell"; title = "Save"; ObjectID = "tPs-K2-ZPz"; */
 "tPs-K2-ZPz.title" = "保存";

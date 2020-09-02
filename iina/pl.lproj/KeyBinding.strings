@@ -108,7 +108,7 @@
 "opt.chapter" = "Rozdział";
 
 "read.set" = "Ustaw {{property}} na {{value}}";
-"read.add" = "{{property}} {{value}}";
+"read.add" = "Ustaw {{property}} na {{value}}";
 "read.multiply" = "Pomnóż {{property}} {{factor}}x";
 "read.cycle" = "Cykl {{property}}{{#dir_down}} od końca{{/dir_down}}";
 "read.cycle-values" = "Wybieranie kolejnej wartości {{property}} w ({{{values}}})";

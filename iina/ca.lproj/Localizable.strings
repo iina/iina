@@ -16,15 +16,25 @@
 "general.username" = "Nom d'usuari";
 "general.password" = "Contrasenya";
 
+// Guide Window
+"guide.highlights" = "Highlights";
+"guide.basic_settings" = "Basic Settings";
+"guide.faq" = "Frequently Asked Questions";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Carregant… %d%%";
 "main.opening_stream" = "Obrint fluxe de dades…";
+"osc.precision" = "Precision";
+"osc.1s" = "1 second";
+"osc.100ms" = "100 milliseconds";
+"osc.10ms" = "10 milliseconds";
+"osc.1ms" = "1 millisecond";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Per defecte";
 "quicksetting.item_none" = "Cap";
-"quicksetting.hwdec" = "Hardware Decoding";
-"quicksetting.deinterlace" = "Deinterlace";
+"quicksetting.hwdec" = "Decodificació per maquinari";
+"quicksetting.deinterlace" = "Desentrellaçament";
 
 // OSDMessage.swift
 "osd.pause" = "Pausa";
@@ -35,7 +45,7 @@
 "osd.crop" = "Escapça: %@";
 "osd.rotate" = "Gira: %i°";
 "osd.deinterlace" = "Desentrellaça: %@";
-"osd.hwdec" = "Hardware Decoding: %@";
+"osd.hwdec" = "Decodificació per maquinari: %@";
 "osd.audio_delay.nodelay" = "Retard de l'àudio: sense retard";
 "osd.audio_delay.later" = "Retard de l'àudio: %.2fs després";
 "osd.audio_delay.earlier" = "Retard de l'àudio: %.2fs abans";
@@ -90,7 +100,7 @@
 "preference.key_binding_hint_1" = "Per editar les dreces de teclat en el fitxer actual, prem el bóto \"Duplica…\" per crear una còpia.";
 "preference.key_binding_hint_2" = "Doble clic a la dreta de la fila per editar la drecera de teclat corresponent.";
 
-"preference.enable_adv_settings" = "Enable advanced settings";
+"preference.enable_adv_settings" = "Habilita les opcions avançades";
 
 "menu.volume" = "Volum: %d";
 "menu.audio_delay" = "Retard d'àudio: %.2fs";
@@ -114,7 +124,7 @@
 "menu.sub_delay_up" = "Retarda en els subtítols + %.1fs";
 "menu.sub_delay_down" = "Retarda en els subtítols - %.1fs";
 
-"menu.crop_custom" = "Custom...";
+"menu.crop_custom" = "Personalitza...";
 
 "track.none" = "<Cap>";
 
@@ -263,15 +273,15 @@
 "osc_toolbar.music_mode" = "Canvia a mode de música";
 "osc_toolbar.sub_track" = "Selecciona la pista dels subtítols";
 
-"mini_player.album_art" = "Toggle album art";
-"mini_player.loop" = "Repeat";
-"mini_player.shuffle" = "Shuffle";
-"mini_player.remove" = "Remove from playlist";
-"mini_player.add" = "Add to playlist";
-"mini_player.delete" = "Delete all tracks from playlist";
-"mini_player.volume" = "Volume";
-"mini_player.close" = "Close music mode";
-"mini_player.back" = "Return to video mode";
+"mini_player.album_art" = "Mescla la caràtula";
+"mini_player.loop" = "Repeteix";
+"mini_player.shuffle" = "Mescla";
+"mini_player.remove" = "Elimina de la llista de reproducció";
+"mini_player.add" = "Afageix a la llista de reproducció";
+"mini_player.delete" = "Elimina totes les pistes de la llista de reproducció";
+"mini_player.volume" = "Volum";
+"mini_player.close" = "Tanca el mode de música";
+"mini_player.back" = "Torna al mode de vídeo";
 
 // Touch bar
 
@@ -288,5 +298,5 @@
 "touchbar.play_pause" = "Reprodueix / Pausa";
 "touchbar.seek" = "Cerca";
 "touchbar.time" = "Posició en el temps";
-"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
+"touchbar.remainingTimeOrTotalDuration" = "Temps restant / Duració total";
 "touchbar.toggle_pip" = "Commuta Picture-in-Picture";

@@ -367,16 +367,25 @@ class Utility {
     createDirIfNotExist(url: url)
     return url
   }()
-
-  static let thumbnailCacheURL: URL = {
-    // get path
+  
+  static let cacheURL: URL = {
     let cachesPath = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)
     Logger.ensure(cachesPath.count >= 1, "Cannot get path to Caches directory")
     let bundleID = Bundle.main.bundleIdentifier!
     let appCachesUrl = cachesPath.first!.appendingPathComponent(bundleID, isDirectory: true)
-    let appThumbnailCacheUrl = appCachesUrl.appendingPathComponent(AppData.thumbnailCacheFolder, isDirectory: true)
+    return appCachesUrl
+  }()
+
+  static let thumbnailCacheURL: URL = {
+    let appThumbnailCacheUrl = cacheURL.appendingPathComponent(AppData.thumbnailCacheFolder, isDirectory: true)
     createDirIfNotExist(url: appThumbnailCacheUrl)
     return appThumbnailCacheUrl
+  }()
+  
+  static let screenshotCacheURL: URL = {
+    let url = cacheURL.appendingPathComponent(AppData.screenshotCacheFolder, isDirectory: true)
+    createDirIfNotExist(url: url)
+    return url
   }()
 
   static let playbackHistoryURL: URL = {
@@ -447,8 +456,7 @@ class Utility {
     }
   }
 
-  static func getLatestScreenshot() -> URL? {
-    guard let path = Preference.string(for: .screenshotFolder) else { return nil }
+  static func getLatestScreenshot(from path: String) -> URL? {
     let folder = URL(fileURLWithPath: NSString(string: path).expandingTildeInPath)
     guard let contents = try? FileManager.default.contentsOfDirectory(
       at: folder,

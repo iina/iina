@@ -43,6 +43,7 @@ struct AppData {
   static let watchLaterFolder = "watch_later"
   static let historyFile = "history.plist"
   static let thumbnailCacheFolder = "thumb_cache"
+  static let screenshotCacheFolder = "screenshot_cache"
 
   static let githubLink = "https://github.com/iina/iina"
   static let contributorsLink = "https://github.com/iina/iina/graphs/contributors"

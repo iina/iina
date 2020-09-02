@@ -9,205 +9,221 @@
 
 "general.on" = "Zapnuté";
 "general.off" = "Vypnuté";
-"general.login" = "Prihlásiť sa";
-"general.logout" = "Odhlásiť sa";
+"general.login" = "Prihlásenie";
+"general.logout" = "Odhlásenie";
 "general.ok" = "OK";
 "general.cancel" = "Zrušiť";
-"general.username" = "Meno";
+"general.username" = "Meno používateľa";
 "general.password" = "Heslo";
+
+// Guide Window
+"guide.highlights" = "Highlights";
+"guide.basic_settings" = "Basic Settings";
+"guide.faq" = "Frequently Asked Questions";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Načítava sa… %d%%";
-"main.opening_stream" = "Otvára sa stream…";
+"main.opening_stream" = "Otváram stream…";
+"osc.precision" = "Precision";
+"osc.1s" = "1 second";
+"osc.100ms" = "100 milliseconds";
+"osc.10ms" = "10 milliseconds";
+"osc.1ms" = "1 millisecond";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Predvolené";
 "quicksetting.item_none" = "Žiadne";
+"quicksetting.hwdec" = "Hardvérové dekódovanie";
+"quicksetting.deinterlace" = "Deinterlace";
 
 // OSDMessage.swift
 "osd.pause" = "Pozastaviť";
-"osd.resume" = "Spustiť";
+"osd.resume" = "Pokračovať";
 "osd.volume" = "Hlasitosť: %i";
-"osd.speed" = "Rýchlosť: %.2fx";
-"osd.aspect" = "Pomer Strán: %@";
+"osd.speed" = "Rýchlosť: %.2f x";
+"osd.aspect" = "Pomer strán: %@";
 "osd.crop" = "Orezať: %@";
 "osd.rotate" = "Otočiť: %i°";
 "osd.deinterlace" = "Deinterlace: %@";
-"osd.audio_delay.nodelay" = "Oneskorenie Zvuku: Žiadne Oneskorenie";
-"osd.audio_delay.later" = "Oneskorenie Zvuku: %.2fs Neskôr";
-"osd.audio_delay.earlier" = "Oneskorenie Zvuku: %.2fs Skôr";
-"osd.sub_delay.nodelay" = "Oneskorenie Titulkov: Žiadne Oneskorenie";
-"osd.sub_delay.later" = "Oneskorenie Titulkov: %.2fs Neskôr";
-"osd.sub_delay.earlier" = "Oneskorenie Titulkov: %.2fs Skôr";
-"osd.subtitle_pos" = "Oneskorenie Titulkov: %.1f";
+"osd.hwdec" = "Hardvérové dekódovanie: %@";
+"osd.audio_delay.nodelay" = "Posunutie zvuku: Žiadne";
+"osd.audio_delay.later" = "Posunutie zvuku: +%.2f s";
+"osd.audio_delay.earlier" = "Posunutie zvuku: -%.2f s";
+"osd.sub_delay.nodelay" = "Posunutie titulkov: Žiadne";
+"osd.sub_delay.later" = "Posunutie titulkov: +%.2f s";
+"osd.sub_delay.earlier" = "Posunutie titulkov: -%.2f s";
+"osd.subtitle_pos" = "Umiestnenie titulkov: %.1f";
 "osd.mute" = "Stlmiť";
 "osd.unmute" = "Zosilniť";
-"osd.screenshot" = "Screenshot Urobený";
-"osd.abloop.a" = "AB-Opakovanie: A";
-"osd.abloop.b" = "AB-Opakovanie: B";
-"osd.abloop.clear" = "AB-Opakovanie: Vyčistená";
+"osd.screenshot" = "Snímka obrazovky vyhotovená";
+"osd.abloop.a" = "AB-slučka: A";
+"osd.abloop.b" = "AB-slučka: B";
+"osd.abloop.clear" = "AB-slučka: Vymazaná";
 "osd.stop" = "Zastaviť";
 "osd.chapter" = "Kapitola: %@";
-"osd.subtitle_scale" = "Veľkosť Titulkov: %.2fx";
-"osd.add_to_playlist" = "Pridané %i Súbory do Playlistu";
-"osd.clear_playlist" = "Playlist Vyčistený";
+"osd.subtitle_scale" = "Veľkosť titulkov: %.2fx";
+"osd.add_to_playlist" = "Súbory pridané do playlistu: %i";
+"osd.clear_playlist" = "Playlist vymazaný";
 "osd.video_eq.contrast" = "Kontrast: %i";
-"osd.video_eq.gamma" = "Gamma: %i";
-"osd.video_eq.hue" = "Farba: %i";
+"osd.video_eq.gamma" = "Gama: %i";
+"osd.video_eq.hue" = "Odtieň: %i";
 "osd.video_eq.saturation" = "Saturácia: %i";
 "osd.video_eq.brightness" = "Jas: %i";
-"osd.find_online_sub" = "Titulky sa vyhľadávajú online…";
-"osd.find_online_sub.source" = "z";
-"osd.sub_not_found" = "No subtitles found";
-"osd.sub_found" = "%d titulky nájdené. Sťahujú sa…";
+"osd.find_online_sub" = "Hľadám titulky na internete…";
+"osd.find_online_sub.source" = "na";
+"osd.sub_not_found" = "Titulky nenájdené";
+"osd.sub_found" = "Nájdené titulky: %d. Sťahujem…";
 "osd.sub_downloaded" = "Titulky stiahnuté";
 "osd.sub_saved" = "Titulky uložené";
 "osd.network_error" = "Problém so sieťou";
-"osd.file_error" = "Chyba pri otváraní súboru";
-"osd.cannot_login" = "Nemôže sa prihlásiť";
+"osd.file_error" = "Chyba pri čítaní súboru";
+"osd.cannot_login" = "Nie je možné prihlásiť";
 "osd.canceled" = "Zrušené";
-"osd.filter_added" = "Pridaný Filter: %@";
-"osd.filter_removed" = "Filter Odstránený";
+"osd.filter_added" = "Pridaný filter: %@";
+"osd.filter_removed" = "Odstránený filter";
 
 "preference.title" = "Nastavenia";
 "preference.general" = "Všeobecné";
 "preference.ui" = "UI";
-"preference.video_audio" = "Kodek";
-"preference.subtitle" = "Titulky";
+"preference.video_audio" = "Video/Audio";
+"preference.subtitle" = "Titulok";
 "preference.network" = "Sieť";
 "preference.control" = "Ovládanie";
-"preference.keybindings" = "Klávesové Skratky";
+"preference.keybindings" = "Klávesové skratky";
 "preference.advanced" = "Pokročilé";
-"preference.utilities" = "Utility";
+"preference.utilities" = "Pomocné programy";
 "preference.scripts" = "Skripty";
 "preference.not_logged_in" = "Neprihlásený";
 "preference.logged_in_as" = "Prihlásený ako %@";
 "preference.system_media_control" = "Používať systémové multimediálne klávesy";
 
-"preference.key_binding_hint_1" = "Na upravenie priradených kláves v aktuálnom konfiguračnom súbore, kliknite \"Duplikovať…\" na vytvorenie kópie.";
-"preference.key_binding_hint_2" = "Dvakrát kliknite na riadok na pravú stranu, aby ste upravili priradené klávesy.";
+"preference.key_binding_hint_1" = "Na upravenie priradených kláves v aktuálnom konfiguračnom súbore najprv vytvorte kópiu kliknutím na \"Duplikovať…\".";
+"preference.key_binding_hint_2" = "Dvakrát kliknite na riadok na pravej strane, aby ste upravili priradené klávesy.";
+
+"preference.enable_adv_settings" = "Povoliť pokročilé nastavenia";
 
 "menu.volume" = "Hlasitosť: %d";
-"menu.audio_delay" = "Oneskorenie Zvuku: %.2fs";
-"menu.sub_delay" = "Oneskorenie Titulkov: %.2fs";
-"menu.fullscreen" = "Zobraziť Na Celej Obrazovke";
-"menu.exit_fullscreen" = "Zrušiť Zobrazenie Na Celej Obrazovke";
+"menu.audio_delay" = "Posunutie zvuku: %.2f s";
+"menu.sub_delay" = "Posunutie titulkov: %.2f s";
+"menu.fullscreen" = "Spustiť režim celej obrazovky";
+"menu.exit_fullscreen" = "Ukončiť režim celej obrazovky";
 "menu.pip" = "Zapnúť Picture-in-Picture";
 "menu.exit_pip" = "Vypnúť Picture-in-Picture";
 "menu.pause" = "Pozastaviť";
-"menu.resume" = "Spustiť";
+"menu.resume" = "Pokračovať";
 "menu.speed" = "Rýchlosť: %.2fx";
 
-"menu.seek_forward" = "Posunúť Dopredu %.0fs";
-"menu.seek_backward" = "Posunúť Dozadu %.0fs";
+"menu.seek_forward" = "Posunúť dopredu %.0f s";
+"menu.seek_backward" = "Posunúť dozadu %.0f s";
 "menu.speed_up" = "Zrýchliť na %.1fx";
 "menu.speed_down" = "Spomaliť na %.1fx";
-"menu.volume_up" = "Hlasitosť + %.0f%%";
-"menu.volume_down" = "Hlasitosť - %.0f%%";
-"menu.audio_delay_up" = "Oneskorenie Zvuku + %.1fs";
-"menu.audio_delay_down" = "Oneskorenie Zvuku - %.1fs";
-"menu.sub_delay_up" = "Oneskorenie Titulkov + %.1fs";
-"menu.sub_delay_down" = "Oneskorenie Titulkov - %.1fs";
+"menu.volume_up" = "Hlasitosť +%.0f%%";
+"menu.volume_down" = "Hlasitosť -%.0f%%";
+"menu.audio_delay_up" = "Posunutie zvuku +%.1f s";
+"menu.audio_delay_down" = "Posunutie zvuku -%.1f s";
+"menu.sub_delay_up" = "Posunutie titulkov +%.1f s";
+"menu.sub_delay_down" = "Posunutie titulkov -%.1f s";
+
+"menu.crop_custom" = "Vlastné...";
 
 "track.none" = "<Prázdne>";
 
-"subtrack.no_loaded" = "Žiadne Načítané Titulky";
-"subtrack.no_external" = "Externé Titulky Nenájdené";
+"subtrack.no_loaded" = "Titulky nenačítané";
+"subtrack.no_external" = "Externé titulky nenájdené";
 
 // Alerts
-"alert.beta_channel.title" = "Sťahovať Aktualizácie Beta Verzií";
-"alert.beta_channel.message" = "IINA v1.0 prichádza! Chcete nám pomôcť s testovaním?\n\nToto rozhodnutie môžete neskôr zmeniť v Nastaveniach - Všeobecné.";
+"alert.beta_channel.title" = "Sťahovať aktualizácie pre beta verzie";
 
 "alert.title_error" = "Chyba";
 "alert.title_warning" = "Upozornenie";
-"alert.title_info" = "Správa";
+"alert.title_info" = "Informácia";
 
-"alert.fatal_error" = "Fatálna chyba: %@ Aplikácia sa teraz ukončí.";
-"alert.mpv_error" = "Interná chyba %@ (%@) pri nastavení %@.";
-"alert.sleep" = "Nedá sa zabrániť spánku displeja!";
+"alert.fatal_error" = "Závažná chyba: %@ \nAplikácia sa teraz ukončí.";
+"alert.mpv_error" = "Interná chyba %@ (%@) pri nastavení možnosti %@.";
+"alert.sleep" = "Nedá sa zabrániť uspaniu displeja!";
 
-"alert.unsupported_audio" = "Nepodporovaný zvukový súbor.";
-"alert.unsupported_sub" = "Nepodporované titulky.";
-"alert.unsupported_url" = "Nepodporovaná URL.";
+"alert.unsupported_audio" = "Nepodporovaný externý zvukový súbor.";
+"alert.unsupported_sub" = "Nepodporované externé titulky.";
+"alert.unsupported_url" = "Nepodporované URL.";
 "alert.wrong_url_format" = "Zlý formát URL.";
 
-"alert.error_open" = "Súbor alebo stream sa nedá otvoriť!";
-"alert.error_finding_file" = "%@ súbor sa nedá nájsť!";
-"alert.error_loading_script" = "Script sa nedá načítať %@!";
-"alert.error_saving_file" = "Chyba pri ukladaní %@: %@";
-"alert.error_deleting_file" = "Súbor sa nedá vymazať.";
+"alert.error_open" = "Nemožno otvoriť súbor alebo stream!";
+"alert.error_finding_file" = "Nemožno nájst súbor %@!";
+"alert.error_loading_script" = "Nemožno načítať skript %@!";
+"alert.error_saving_file" = "Nastala chyba pri ukladaní %@: %@";
+"alert.error_deleting_file" = "Súbor nemožno vymazať.";
 
-"alert.config.new.title" = "Nová Vstupná Konfigurácia";
-"alert.config.new.message" = "Zadajte meno pre novú konfiguráciu.";
-"alert.config.duplicate.title" = "Duplicitná Konfigurácia";
-"alert.config.duplicate.message" = "Zadajte meno pre duplikovaný konfiguračný súbor.";
-"alert.config.empty_name" = "Meno nemôže byť prázdne.";
-"alert.config.name_existing" = "Meno už existuje.";
-"alert.config.file_existing.title" = "Súbor Už Existuje";
-"alert.config.file_existing.message" = "Nemalo by sa to stať. Zvoľte OK na prepísanie, Zrušiť na ukázanie vo Finderi.";
+"alert.config.new.title" = "Nová konfigurácia vstupu";
+"alert.config.new.message" = "Zadajte názov pre novú konfiguráciu.";
+"alert.config.duplicate.title" = "Duplikovať konfiguráciu";
+"alert.config.duplicate.message" = "Zadajte názov pre duplikovaný konfiguračný súbor.";
+"alert.config.empty_name" = "Názov nemôže byť prázdny.";
+"alert.config.name_existing" = "Názov už existuje.";
+"alert.config.file_existing.title" = "Súbor už existuje";
+"alert.config.file_existing.message" = "Toto sa nemalo stať. Zvoľte OK na prepísanie alebo Zrušiť na zobrazenie súboru vo Finderi.";
 "alert.config.cannot_create" = "Nedá sa vytvoriť konfiguračný súbor!\n%@";
 "alert.config.cannot_write" = "Nedá sa zapisovať do konfiguračného súboru!";
 
-"alert.filter.incorrect" = "Vyskytla sa chyba pri aplikovaní filtra. Skontrolujte parametre.";
-"alert.add_filter.title" = "Nový Filter";
-"alert.add_filter.message" = "Vyhľadávajte vo formáte mpv vf alebo af príkazov.";
+"alert.filter.incorrect" = "Vyskytla sa chyba pri nastavovaní filtra. Skontrolujte formát parametra.";
+"alert.add_filter.title" = "Nový filter";
+"alert.add_filter.message" = "Zadajte reťazec filtru vo formáte mpv príkazu vf alebo af.";
 
-"alert.keybinding_config.error" = "Chyba pri čítaní konfiguračného súboru s klávesovými skratkami \"%@\"! Budú použité štandardné klávesové skratky. Skontrolujte vašu konfiguráciu.";
+"alert.keybinding_config.error" = "Chyba pri spracovaní konfiguračného súboru s klávesovými skratkami \"%@\"! Budú použité predvolené klávesové skratky. Skontrolujte vašu konfiguráciu.";
 
-"alert.extra_option.cannot_read" = "Užívateľské mpv nastavenia sa nedajú prečítať.";
+"alert.extra_option.cannot_read" = "Nemožno načítať mpv možnosti definované používateľom.";
 "alert.extra_option.empty" = "Názov alebo hodnota nemôžu byť prázdne!";
-"alert.extra_option.error" = "Chyba pri nastavovaní --%@=%@ so vrátenou hodnotou %d. Skontrolujte vaše nastavenia v Nastavenia > Pokročilé.";
-"alert.extra_option.config_folder" = "Chyba pri nastavovaní konfiguračného adresára \"%@\".";
+"alert.extra_option.error" = "Chyba pri nastavovaní možnosti --%@=%@, číslo chyby %d. Skontrolujte vaše nastavenia v Nastavenia > Pokročilé.";
+"alert.extra_option.config_folder" = "Chyba pri nastavovaní konfiguračného priečinka \"%@\".";
 
 "alert.playlist.error_deleting" = "Chyba pri odstraňovaní: %@";
 
-"alert.sub.no_selected" = "Najprv zvoľte stiahnuté titulky.";
-"alert.sub_lang_not_set" = "Nastavte preferovaný jazyk tituliek v nastaveniach pred vyhľadávaním na opensubtitles. Teraz bude ako jazyk použitá English(eng).";
+"alert.sub.no_selected" = "Najprv vyberte stiahnuté titulky.";
+"alert.sub_lang_not_set" = "Pred vyhľadávaním na OpenSubtitles nastavte v nastaveniach preferovaný jazyk titulkov. Teraz bude použitý jazyk English(eng).";
 "alert.sub.cannot_save_passwd" = "Heslo sa nedá uložiť do Kľúčenky: %@";
-"alert.sub.cannot_login" = "Nedá sa prihlásiť. Skontrolujte vaše meno, heslo a stav siete. %@";
+"alert.sub.cannot_login" = "Nedá sa prihlásiť. Skontrolujte používateľské meno, heslo a stav siete. \n\n%@";
 
-"alert.set_default.title" = "Nastaviť IINA Ako Predvolenú Aplikáciu";
-"alert.set_default.message" = "IINA bude nastavená ako predvolená aplikácia pre všetky formáty, ktoré podporuje.";
+"alert.set_default.title" = "Nastaviť IINA ako predvolenú aplikáciu";
+"alert.set_default.message" = "IINA bude nastavená ako predvolená aplikácia pre všetky typy súborov, ktoré podporuje.";
 "alert.set_default.success" = "Dokončené s %d úspechom a %d chybami.";
 
-"alert.add_watch.title" = "Pridať Sledovanú Vlastnosť";
-"alert.add_watch.message" = "Zadať platnú mpv vlastnosť.";
+"alert.add_watch.title" = "Pridať položku pozerať";
+"alert.add_watch.message" = "Zadajte platný názov vlastnosti mpv.";
 
-"alert.jump_to.title" = "Preskočiť na";
-"alert.jump_to.message" = "Zadajte čas, na ktorý chcete preskočiť. Napr.: 20:35";
+"alert.jump_to.title" = "Prejsť na";
+"alert.jump_to.message" = "Zadajte čas, na ktorý chcete prejsť. Napríklad: 20:35";
 
-"alert.opensub.login.title" = "OpenSubtitles Prihlásenie";
-"alert.opensub.login.message" = "Zadajte Vaše meno a heslo";
+"alert.opensub.login.title" = "Prihlásenie na OpenSubtitles";
+"alert.opensub.login.message" = "Zadajte prihlasovacie meno a heslo";
 
-"alert.open_url.title" = "Otvor URL";
-"alert.open_url.message" = "Zadaj URL:";
-"alert.choose_media_file.title" = "Vyber Multimediálny Súbor";
+"alert.open_url.title" = "Otvoriť URL";
+"alert.open_url.message" = "Zadajte URL:";
+"alert.choose_media_file.title" = "Vyberte súbory";
 
 "alert.add_url.title" = "Pridať URL";
-"alert.add_url.message" = "Zadaj URL:";
+"alert.add_url.message" = "Zadajte URL:";
 
-"alert.delete_history.title" = "Vymazať Históriu Prehrávania";
-"alert.delete_history.message" = "Naozaj ju chcete vymazať?";
+"alert.delete_history.title" = "Vymazať históriu prehrávania";
+"alert.delete_history.message" = "Naozaj chcete vymazať vybrané položky?";
 
 "alert.filter_hwdec.message" = "Práve chcete použiť video filter. Avšak, aktuálny hardvéroví dekodér nemusí podporovať video filtre. Môžete vypnúť hardvéroví dekodér alebo ho prepnúť na Auto(Kópia), ktoré dvojnásobne zaťaží pamäť. Môžete zopakovať predchádzajúcu úpravu (napr. orezanie), aby všetko fungovalo.";
-"alert.filter_hwdec.abort" = "Zrušiť";
+"alert.filter_hwdec.abort" = "Prerušiť";
 "alert.filter_hwdec.turn_off" = "Vypnúť hardvérové dekódovanie";
-"alert.filter_hwdec.use_copy" = "Zmeniť na Auto(Kópia)";
+"alert.filter_hwdec.use_copy" = "Prepnúť na Auto(Copy)";
 
-"alert.clear_cache.title" = "Vyčistiť Cache s Náhľadmi";
-"alert.clear_cache.message" = "Naozaj Chceš Vyčistiť Cache s Náhľadmi?";
+"alert.clear_cache.title" = "Vyčistiť vyrovnávaciu pamäť s náhľadmi";
+"alert.clear_cache.message" = "Naozaj chcete vyčistiť vyrovnávaciu pamäť s náhľadmi?";
 
-"alert.clear_history.title" = "Vyčistiť Históriu Prehrávania";
-"alert.clear_history.message" = "Naozaj chcete vymazať históriu prehrávania?";
+"alert.clear_history.title" = "Vymazať históriu prehrávania";
+"alert.clear_history.message" = "Naozaj chcete vymazať celú históriu prehrávania?";
 
-"alert.clear_watch_later.title" = "Vymazať Pozície Prehrávaní";
-"alert.clear_watch_later.message" = "Naozaj chcete vymazať pozície prehrávaní (dáta v \"pozrieť neskôr\")?";
+"alert.clear_watch_later.title" = "Vymazať uložené priebehy prehrávania";
+"alert.clear_watch_later.message" = "Naozaj chcete vymazať všetky uložené priebehy prehrávania (dáta \"pozrieť neskôr\")?";
 
-"alert.nothing_to_open" = "Nič na otvorenie.";
+"alert.nothing_to_open" = "Žiaden súbor.";
 
 "alert.no_video_track" = "Neobsahuje video stopu.";
 
-"alert.duplicate_config" = "Predvolená konfigurácia sa nedá priamo upraviť. Zduplikujte ju pred úpravami.";
+"alert.duplicate_config" = "Predvolené konfigurácie nemožno priamo upraviť. Pred úpravami jednu konfiguráciu zduplikujte.";
 
 "alert.assrt_register" = "Kvôli API limitom vám odporúčame použiť váš vlastný API token. Prednastavený token slúži iba na demo účeli a nemusí fungovať správne.";
 "alert.assrt_register.register" = "Zaregistrovať sa";
@@ -257,6 +273,16 @@
 "osc_toolbar.music_mode" = "Zapnúť režim pre hudbu";
 "osc_toolbar.sub_track" = "Vyber titulky";
 
+"mini_player.album_art" = "Prepnúť obal albumu";
+"mini_player.loop" = "Opakovať";
+"mini_player.shuffle" = "Shuffle";
+"mini_player.remove" = "Odstrániť z playlistu";
+"mini_player.add" = "Pridať do playlistu";
+"mini_player.delete" = "Odstrániť všetky skladby z playlistu";
+"mini_player.volume" = "Hlasitosť";
+"mini_player.close" = "Zavrieť mód pre hudbu";
+"mini_player.back" = "Späť do video zobrazenia";
+
 // Touch bar
 
 "touchbar.ahead_15" = "15sec Dopredu";
@@ -272,5 +298,5 @@
 "touchbar.play_pause" = "Spustiť / Zastaviť";
 "touchbar.seek" = "Vyhľadať";
 "touchbar.time" = "Pozícia";
-"touchbar.remainingTime" = "Zostávajúci Čas";
+"touchbar.remainingTimeOrTotalDuration" = "Ostávajúci Čas / Celková Dĺžka";
 "touchbar.toggle_pip" = "Zapnúť/Vypnúť Picture-in-Picture";

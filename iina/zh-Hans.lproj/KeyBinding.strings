@@ -7,8 +7,8 @@
 */
 
 "cmd.ignore" = "忽略";
-"cmd.seek" = "查找/跳转";
-"cmd.revert-seek" = "撤销查找";
+"cmd.seek" = "跳转";
+"cmd.revert-seek" = "撤销上次跳转";
 "cmd.set" = "设置";
 "cmd.cycle" = "切换";
 "cmd.cycle-values" = "指定值中循环";
@@ -17,13 +17,13 @@
 "cmd.frame-step" = "下一帧";
 "cmd.frame-back-step" = "上一帧";
 "cmd.ab-loop" = "A-B 循环";
-"cmd.sub-seek" = "字幕跳转";
+"cmd.sub-seek" = "按字幕跳转";
 "cmd.playlist-next" = "下一个媒体";
 "cmd.playlist-prev" = "上一个媒体";
-"cmd.playlist-move" = "移动列表项目";
+"cmd.playlist-move" = "移动播放列表项目";
 "cmd.playlist-clear" = "清空播放列表";
 "cmd.playlist-remove" = "移除当前媒体";
-"cmd.playlist-shuffle" = "打乱列表顺序";
+"cmd.playlist-shuffle" = "随机排序";
 "cmd.write-watch-later-config" = "记录播放进度";
 "cmd.stop" = "停止";
 "cmd.quit" = "退出";
@@ -31,7 +31,7 @@
 "cmd.screenshot" = "截图";
 "cmd.screenshot-to-file" = "截图至文件";
 "cmd.loadfile" = "打开文件";
-"cmd.loadlist" = "加载播放列表";
+"cmd.loadlist" = "载入播放列表";
 "cmd.run" = "运行";
 
 "iina.flip" = "翻转";
@@ -46,14 +46,14 @@
 "iina.sub-panel" = "字幕设置面板";
 "iina.playlist-panel" = "播放列表面板";
 "iina.chapter-panel" = "章节面板";
-"iina.bigger-window" = "大一点";
-"iina.smaller-window" = "小一点";
+"iina.bigger-window" = "放大窗口";
+"iina.smaller-window" = "缩小窗口";
 "iina.fit-to-screen" = "适应屏幕";
-"iina.toggle-flip" = "切换 翻转";
-"iina.toggle-mirror" = "切换 镜像";
+"iina.toggle-flip" = "切换翻转";
+"iina.toggle-mirror" = "切换镜像";
 "iina.save-playlist" = "保存当前播放列表";
 "iina.delete-current-file" = "删除当前文件";
-"iina.delete-current-file-hard" = "直接删除当前文件（不经过垃圾桶）";
+"iina.delete-current-file-hard" = "直接删除当前文件（不放入废纸篓）";
 "iina.find-online-subs" = "查找在线字幕";
 "iina.save-downloaded-sub" = "保存已下载的字幕";
 
@@ -64,8 +64,8 @@
 "in" = "值";
 "add" = "增加";
 "minus" = "减少";
-"forward" = "向前";
-"backward" = "向后";
+"forward" = "前进";
+"backward" = "后退";
 "seek-to" = "跳转到";
 
 "relative" = "秒";
@@ -83,11 +83,11 @@
 "opt.window-scale" = "窗口缩放";
 
 "opt.video" = "视频轨道";
-"opt.video-aspect" = "长宽比";
+"opt.video-aspect" = "视频长宽比";
 "opt.contrast" = "对比度";
 "opt.brightness" = "亮度";
 "opt.gamma" = "伽马";
-"opt.saturation" = "明度";
+"opt.saturation" = "饱和度";
 "opt.deinterlace" = "反交错";
 
 "opt.audio" = "音频轨道";

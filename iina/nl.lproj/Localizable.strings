@@ -16,13 +16,25 @@
 "general.username" = "Gebruikersnaam";
 "general.password" = "Wachtwoord";
 
+// Guide Window
+"guide.highlights" = "Highlights";
+"guide.basic_settings" = "Basic Settings";
+"guide.faq" = "Frequently Asked Questions";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Bufferen… %d%%";
 "main.opening_stream" = "Stream openen…";
+"osc.precision" = "Precision";
+"osc.1s" = "1 second";
+"osc.100ms" = "100 milliseconds";
+"osc.10ms" = "10 milliseconds";
+"osc.1ms" = "1 millisecond";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Standaard";
 "quicksetting.item_none" = "Geen";
+"quicksetting.hwdec" = "Hardware acceleratie";
+"quicksetting.deinterlace" = "Deinterlace";
 
 // OSDMessage.swift
 "osd.pause" = "Pauzeer";
@@ -33,6 +45,7 @@
 "osd.crop" = "Bijsnijden: %@";
 "osd.rotate" = "Roteer: %i°";
 "osd.deinterlace" = "Deinterlace: %@";
+"osd.hwdec" = "Hardware acceleratie: %@";
 "osd.audio_delay.nodelay" = "Geen audiovertraging";
 "osd.audio_delay.later" = "Audio vertraagd met %.2fs";
 "osd.audio_delay.earlier" = "Audio versneld met %.2fs";
@@ -87,6 +100,8 @@
 "preference.key_binding_hint_1" = "Kies \"Dupliceer…\" om een bewerkbare kopie te maken van de geselecteerde sneltoetsenconfiguratie.";
 "preference.key_binding_hint_2" = "Dubbelklik op een rij om de bijbehorende sneltoets te bewerken.";
 
+"preference.enable_adv_settings" = "Geavanceerde instellingen inschakelen";
+
 "menu.volume" = "Volume: %d";
 "menu.audio_delay" = "Audiovertraging: %.2fs";
 "menu.sub_delay" = "Ondertitelingvertraging: %.2fs";
@@ -109,6 +124,8 @@
 "menu.sub_delay_up" = "Ondertitelingvertraging + %.1fs";
 "menu.sub_delay_down" = "Ondertitelingingvertraging - %.1fs";
 
+"menu.crop_custom" = "Pas aan...";
+
 "track.none" = "<Geen>";
 
 "subtrack.no_loaded" = "Geen ondertiteling geladen";
@@ -116,7 +133,6 @@
 
 // Alerts
 "alert.beta_channel.title" = "Ontvang updates voor bètaversies";
-"alert.beta_channel.message" = "IINA v1.0 komt eraan! Wil je ons helpen bij het testen van bètaversies?\n\nJe kunt deze instelling later wijzigen in Voorkeuren - Algemeen.";
 
 "alert.title_error" = "Fout";
 "alert.title_warning" = "Waarschuwing";
@@ -257,6 +273,16 @@
 "osc_toolbar.music_mode" = "Schakel over naar muziekmodus";
 "osc_toolbar.sub_track" = "Kies ondertiteling";
 
+"mini_player.album_art" = "Wijzig albumhoes";
+"mini_player.loop" = "Herhaal";
+"mini_player.shuffle" = "Shuffle";
+"mini_player.remove" = "Verwijderen uit afspeellijst";
+"mini_player.add" = "Toevoegen aan afspeellijst";
+"mini_player.delete" = "Verwijder alle tracks uit de afspeellijst";
+"mini_player.volume" = "Volume";
+"mini_player.close" = "Sluit muziek modus";
+"mini_player.back" = "Schakel terug naar videomodus";
+
 // Touch bar
 
 "touchbar.ahead_15" = "15 seconden vooruit";
@@ -272,5 +298,5 @@
 "touchbar.play_pause" = "Afspelen / Pauzeren";
 "touchbar.seek" = "Spoel terug/vooruit";
 "touchbar.time" = "Verstreken tijd";
-"touchbar.remainingTime" = "Resterende tijd";
+"touchbar.remainingTimeOrTotalDuration" = "Resterende Tijd / Totale duur";
 "touchbar.toggle_pip" = "Schakel Beeld-in-beeld in/uit";

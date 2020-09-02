@@ -11,7 +11,7 @@
 "2XY-Un-0Fg.title" = "Wyświetlaj napisy na czarnym tle w trybie pełnoekranowym";
 
 /* Class = "NSTextFieldCell"; title = "strip"; ObjectID = "3H8-Ei-cTm"; */
-"3H8-Ei-cTm.title" = "strip";
+"3H8-Ei-cTm.title" = "pasek";
 
 /* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "4Tb-Yh-PdP"; */
 "4Tb-Yh-PdP.title" = "Pozycja:";
@@ -86,7 +86,7 @@
 "Vbl-Im-3UI.title" = "Rozmiar:";
 
 /* Class = "NSButtonCell"; title = "Login"; ObjectID = "WHk-sk-gmK"; */
-"WHk-sk-gmK.title" = "Login";
+"WHk-sk-gmK.title" = "Zaloguj się";
 
 /* Class = "NSTextFieldCell"; title = "Advanced"; ObjectID = "X7X-18-FJg"; */
 "X7X-18-FJg.title" = "Zaawansowane";
@@ -97,17 +97,17 @@
 /* Class = "NSTextFieldCell"; title = "Default encoding:"; ObjectID = "Y75-4k-2Du"; */
 "Y75-4k-2Du.title" = "Domyślne kodowanie:";
 
-/* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will works for both mpv and opensubtitles."; ObjectID = "Z2M-dh-eq1"; */
+/* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will work for both mpv and opensubtitles."; ObjectID = "Z2M-dh-eq1"; */
 "Z2M-dh-eq1.title" = "Opcja zostanie przechowywana jako kod języka ISO 639-2 oraz będzie działać zarówno z mpv jak i OpenSubtitles.";
 
 /* Class = "NSTextFieldCell"; title = "Blur:"; ObjectID = "aO9-D6-KG8"; */
-"aO9-D6-KG8.title" = "Blur:";
+"aO9-D6-KG8.title" = "Rozmycie:";
 
 /* Class = "NSTextFieldCell"; title = "Not logged in"; ObjectID = "cov-Uy-wnc"; */
 "cov-Uy-wnc.title" = "Nie zalogowano";
 
 /* Class = "NSTextFieldCell"; title = "Offset:"; ObjectID = "dtP-9o-yhy"; */
-"dtP-9o-yhy.title" = "Offset:";
+"dtP-9o-yhy.title" = "Przesunięcie:";
 
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "e0e-dB-Ir6"; */
 "e0e-dB-Ir6.title" = "Środek";

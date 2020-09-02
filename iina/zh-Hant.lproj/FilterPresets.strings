@@ -10,17 +10,17 @@
 
 
 "crop" = "裁切";
-"crop.w" = "寬度（預設：影片寬度）";
-"crop.h" = "高度（預設：影片高度）";
-"crop.x" = "原點 X（預設：中央）";
-"crop.y" = "原點 Y（預設：中央）";
+"crop.w" = "寬度（預設值：影片寬度）";
+"crop.h" = "高度（預設值：影片高度）";
+"crop.x" = "原點 X（預設值：中央）";
+"crop.y" = "原點 Y（預設值：中央）";
 
-"expand" = "擴展";
-"expand.w" = "寬度（預設：影片寬度）";
-"expand.h" = "高度（預設：影片高度）";
-"expand.x" = "原點 X（預設：中央）";
-"expand.y" = "原點 Y（預設：中央）";
-"expand.aspect" = "擴展以符合比例（例如：4/3）";
+"expand" = "展開";
+"expand.w" = "寬度（預設值：影片寬度）";
+"expand.h" = "高度（預設值：影片高度）";
+"expand.x" = "原點 X（預設值：中央）";
+"expand.y" = "原點 Y（預設值：中央）";
+"expand.aspect" = "展開以符合比例（例如：4/3）";
 "expand.round" = "四捨五入整除此值";
 
 "sharpen" = "銳利化";
@@ -46,10 +46,10 @@
 "lut3d.file" = "檔案";
 "lut3d.interp" = "補幀模式";
 
-"custom_mpv" = "自定（mpv）";
+"custom_mpv" = "自訂（mpv）";
 "custom_mpv.name" = "濾鏡名稱";
 "custom_mpv.string" = "濾鏡字串";
 
-"custom_ffmpeg" = "自定（FFmpeg）";
+"custom_ffmpeg" = "自訂（FFmpeg）";
 "custom_ffmpeg.name" = "濾鏡名稱";
 "custom_ffmpeg.string" = "濾鏡字串";

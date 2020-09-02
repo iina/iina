@@ -11,7 +11,7 @@
 "cmd.revert-seek" = "シークの中止";
 "cmd.set" = "値の設定";
 "cmd.cycle" = "循環";
-"cmd.cycle-values" = "循環(指定値内)";
+"cmd.cycle-values" = "指定値内を循環";
 "cmd.add" = "加算";
 "cmd.multiply" = "乗算";
 "cmd.frame-step" = "次のフレームへ";
@@ -20,8 +20,8 @@
 "cmd.sub-seek" = "字幕のシーク";
 "cmd.playlist-next" = "次のメディアへ";
 "cmd.playlist-prev" = "前のメディアへ";
-"cmd.playlist-move" = "プレイリストのアイテムを移動";
-"cmd.playlist-clear" = "プレイリストのクリア";
+"cmd.playlist-move" = "プレイリストの項目を移動";
+"cmd.playlist-clear" = "プレイリストを消去する";
 "cmd.playlist-remove" = "プレイリストを削除";
 "cmd.playlist-shuffle" = "シャッフル";
 "cmd.write-watch-later-config" = "再生履歴を残す";
@@ -34,22 +34,22 @@
 "cmd.loadlist" = "プレイリストの読み込み";
 "cmd.run" = "実行";
 
-"iina.flip" = "フリップ(垂直)";
+"iina.flip" = "反転";
 "iina.mirror" = "ミラー(水平)";
 
-"iina.toggle-pip" = "ピクチャ・イン・ピクチャ切り替え";
+"iina.toggle-pip" = "ピクチャー・イン・ピクチャーの切り替え";
 "iina.toggle-music-mode" = "ミュージュックモード切り替え";
 "iina.open-file" = "ファイルを開く";
-"iina.open-url" = "URLから開く";
+"iina.open-url" = "URLを開く";
 "iina.video-panel" = "ビデオ パネル";
 "iina.audio-panel" = "オーディオ パネル";
 "iina.sub-panel" = "字幕 パネル";
 "iina.playlist-panel" = "プレイリスト パネル";
-"iina.chapter-panel" = "チャプタ パネル";
+"iina.chapter-panel" = "チャプター パネル";
 "iina.bigger-window" = "ウィンドウを拡大";
 "iina.smaller-window" = "ウィンドウを縮小";
 "iina.fit-to-screen" = "画面に合わせる";
-"iina.toggle-flip" = "フリップ (垂直)";
+"iina.toggle-flip" = "反転切り替え";
 "iina.toggle-mirror" = "ミラー (水平)";
 "iina.save-playlist" = "現在のプレイリストを保存";
 "iina.delete-current-file" = "現在のファイルをゴミ箱に移動";
@@ -105,7 +105,7 @@
 "opt.fullscreen" = "フルスクリーン";
 "opt.ontop" = "最前面に固定";
 
-"opt.chapter" = "チャプタ";
+"opt.chapter" = "チャプター";
 
 "read.set" = "{{property}}を{{value}}に設定";
 "read.add" = "{{property}} {{value}}";

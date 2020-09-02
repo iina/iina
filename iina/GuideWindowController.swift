@@ -47,7 +47,7 @@ class GuideWindowController: NSWindowController {
     Utility.quickConstraints(["H:|-0-[v]-0-|", "V:|-0-[v]-0-|"], ["v": webView])
 
     let (version, _) = Utility.iinaVersion()
-    webView.load(URLRequest(url: URL(string: "\(highlightsLink)/\(version.split(separator: "-").first!)")!))
+    webView.load(URLRequest(url: URL(string: "\(highlightsLink)/\(version.split(separator: "-").first!)/")!))
     highlightsLoadingIndicator.startAnimation(nil)
   }
 

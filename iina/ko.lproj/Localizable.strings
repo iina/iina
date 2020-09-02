@@ -16,9 +16,19 @@
 "general.username" = "사용자";
 "general.password" = "암호";
 
+// Guide Window
+"guide.highlights" = "Highlights";
+"guide.basic_settings" = "Basic Settings";
+"guide.faq" = "Frequently Asked Questions";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "준비중… %d%%";
 "main.opening_stream" = "스트림 여는 중…";
+"osc.precision" = "Precision";
+"osc.1s" = "1 second";
+"osc.100ms" = "100 milliseconds";
+"osc.10ms" = "10 milliseconds";
+"osc.1ms" = "1 millisecond";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "기본값";
@@ -44,7 +54,7 @@
 "osd.sub_delay.earlier" = "자막 지연: %.2f초 빠르게";
 "osd.subtitle_pos" = "자막 위치: %.1f";
 "osd.mute" = "소리 끔";
-"osd.unmute" = "소리 켜짐";
+"osd.unmute" = "음소거 해제";
 "osd.screenshot" = "스크린샷 저장됨";
 "osd.abloop.a" = "구간 반복: 시작 위치";
 "osd.abloop.b" = "구간 반복: 마침 위치";
@@ -90,7 +100,7 @@
 "preference.key_binding_hint_1" = "현재 설정 파일의 단축키 설정을 편집하려면, 먼저 \"복제…\" 버튼을 눌러 복사본을 만든 후 변경하십시오.";
 "preference.key_binding_hint_2" = "해당 단축키를 편집하려면 오른쪽 단축키 내용을 더블클릭 하십시오.";
 
-"preference.enable_adv_settings" = "Enable advanced settings";
+"preference.enable_adv_settings" = "고급 설정 사용";
 
 "menu.volume" = "음량: %d";
 "menu.audio_delay" = "오디오 지연: %.2f초";
@@ -114,7 +124,7 @@
 "menu.sub_delay_up" = "자막 지연 + %.1f초";
 "menu.sub_delay_down" = "자막 지연 - %.1f초";
 
-"menu.crop_custom" = "Custom...";
+"menu.crop_custom" = "사용자 설정…";
 
 "track.none" = "<없음>";
 
@@ -263,15 +273,15 @@
 "osc_toolbar.music_mode" = "음악 모드 전환";
 "osc_toolbar.sub_track" = "자막 선택";
 
-"mini_player.album_art" = "Toggle album art";
-"mini_player.loop" = "Repeat";
-"mini_player.shuffle" = "Shuffle";
-"mini_player.remove" = "Remove from playlist";
-"mini_player.add" = "Add to playlist";
-"mini_player.delete" = "Delete all tracks from playlist";
-"mini_player.volume" = "Volume";
-"mini_player.close" = "Close music mode";
-"mini_player.back" = "Return to video mode";
+"mini_player.album_art" = "앨범 아트 켜기/끄기";
+"mini_player.loop" = "반복";
+"mini_player.shuffle" = "무작위 재생";
+"mini_player.remove" = "재생 목록에서 제거";
+"mini_player.add" = "재생 목록에 추가";
+"mini_player.delete" = "재생 목록에서 모든 트랙 제거";
+"mini_player.volume" = "음량";
+"mini_player.close" = "음악 모드 닫기";
+"mini_player.back" = "비디오 모드로 복귀";
 
 // Touch bar
 

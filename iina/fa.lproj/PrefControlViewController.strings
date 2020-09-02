@@ -1,5 +1,5 @@
 /* Class = "NSTextFieldCell"; title = "Seek type:"; ObjectID = "1yb-m4-1sK"; */
-"1yb-m4-1sK.title" = "Seek type:";
+"1yb-m4-1sK.title" = "نوع جستجو:";
 
 /* Class = "NSMenuItem"; title = "Toggle fullscreen"; ObjectID = "6F4-gm-oBg"; */
 "6F4-gm-oBg.title" = "Toggle fullscreen";
@@ -17,13 +17,13 @@
 "9qx-ao-oxE.title" = "Hide OSC";
 
 /* Class = "NSMenuItem"; title = "Pause / Resume"; ObjectID = "A8c-wa-IFR"; */
-"A8c-wa-IFR.title" = "Pause / Resume";
+"A8c-wa-IFR.title" = "مکث/ادامه";
 
 /* Class = "NSMenuItem"; title = "Pause / Resume"; ObjectID = "Ba4-eT-rTv"; */
-"Ba4-eT-rTv.title" = "Pause / Resume";
+"Ba4-eT-rTv.title" = "مکث/ادامه";
 
 /* Class = "NSMenuItem"; title = "Pause / Resume"; ObjectID = "Dm7-JG-fLd"; */
-"Dm7-JG-fLd.title" = "Pause / Resume";
+"Dm7-JG-fLd.title" = "مکث/ادامه";
 
 /* Class = "NSTextFieldCell"; title = "Pinch to:"; ObjectID = "E8H-pO-MLc"; */
 "E8H-pO-MLc.title" = "Pinch to:";
@@ -38,19 +38,19 @@
 "gZK-ry-lQs.title" = "Accepts first mouse click when not focused";
 
 /* Class = "NSMenuItem"; title = "Fullscreen"; ObjectID = "Hm3-dh-jgb"; */
-"Hm3-dh-jgb.title" = "Fullscreen";
+"Hm3-dh-jgb.title" = "تمام صفحه";
 
 /* Class = "NSTextFieldCell"; title = "Trackpad"; ObjectID = "I6k-ab-IwJ"; */
 "I6k-ab-IwJ.title" = "Trackpad";
 
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "K9H-w9-wmT"; */
-"K9H-w9-wmT.title" = "Auto";
+"K9H-w9-wmT.title" = "خودکار";
 
 /* Class = "NSMenuItem"; title = "Hide OSC"; ObjectID = "M6K-ME-cve"; */
 "M6K-ME-cve.title" = "Hide OSC";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "NjV-fH-YgN"; */
-"NjV-fH-YgN.title" = "None";
+"NjV-fH-YgN.title" = "هیچکدام";
 
 /* Class = "NSMenuItem"; title = "Hide OSC"; ObjectID = "OOM-jo-N4V"; */
 "OOM-jo-N4V.title" = "Hide OSC";
@@ -62,7 +62,7 @@
 "QhO-As-ZLL.title" = "Single click to:";
 
 /* Class = "NSMenuItem"; title = "Seek"; ObjectID = "RCe-3m-q9N"; */
-"RCe-3m-q9N.title" = "Seek";
+"RCe-3m-q9N.title" = "جستجو";
 
 /* Class = "NSTextFieldCell"; title = "Right click to:"; ObjectID = "Rqy-g2-AP2"; */
 "Rqy-g2-AP2.title" = "Right click to:";
@@ -74,16 +74,16 @@
 "YQH-1a-WcM.title" = "Sensitivity for volume:";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "chS-d2-TG1"; */
-"chS-d2-TG1.title" = "None";
+"chS-d2-TG1.title" = "هیچکدام";
 
 /* Class = "NSTextFieldCell"; title = "Force Touch to:"; ObjectID = "dpH-PO-WKt"; */
 "dpH-PO-WKt.title" = "Force Touch to:";
 
 /* Class = "NSTextFieldCell"; title = "Mouse"; ObjectID = "eA4-AD-oUu"; */
-"eA4-AD-oUu.title" = "Mouse";
+"eA4-AD-oUu.title" = "ماوس";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "guu-dK-YfL"; */
-"guu-dK-YfL.title" = "None";
+"guu-dK-YfL.title" = "هیچکدام";
 
 /* Class = "NSMenuItem"; title = "Toggle fullscreen"; ObjectID = "hDh-Lk-FJe"; */
 "hDh-Lk-FJe.title" = "Toggle fullscreen";
@@ -95,34 +95,43 @@
 "iFF-Gq-tVx.title" = "Hide OSC";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "jnR-2I-4x4"; */
-"jnR-2I-4x4.title" = "None";
+"jnR-2I-4x4.title" = "هیچکدام";
 
 /* Class = "NSMenuItem"; title = "Pause / Resume"; ObjectID = "mOX-Fi-oTv"; */
-"mOX-Fi-oTv.title" = "Pause / Resume";
+"mOX-Fi-oTv.title" = "مکث/ادامه";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "oOk-y6-lek"; */
-"oOk-y6-lek.title" = "None";
+"oOk-y6-lek.title" = "هیچکدام";
 
 /* Class = "NSTextFieldCell"; title = "Sensitivity for normal seek:"; ObjectID = "of2-ec-OkC"; */
 "of2-ec-OkC.title" = "Sensitivity for normal seek:";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "unj-zt-RyU"; */
-"unj-zt-RyU.title" = "None";
+"unj-zt-RyU.title" = "هیچکدام";
 
 /* Class = "NSMenuItem"; title = "Pause / Resume"; ObjectID = "uqM-UM-Xvb"; */
-"uqM-UM-Xvb.title" = "Pause / Resume";
+"uqM-UM-Xvb.title" = "مکث/ادامه";
 
 /* Class = "NSTextFieldCell"; title = "Scroll horizontally to:"; ObjectID = "w1Y-jy-vNc"; */
 "w1Y-jy-vNc.title" = "Scroll horizontally to:";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "w54-7I-QfW"; */
-"w54-7I-QfW.title" = "None";
+"w54-7I-QfW.title" = "هیچکدام";
 
 /* Class = "NSMenuItem"; title = "Keyframe seek"; ObjectID = "wBB-fx-Mao"; */
 "wBB-fx-Mao.title" = "Keyframe seek";
 
 /* Class = "NSMenuItem"; title = "Seek"; ObjectID = "wcS-tP-wav"; */
-"wcS-tP-wav.title" = "Seek";
+"wcS-tP-wav.title" = "جستجو";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "wkV-Gq-B0T"; */
-"wkV-Gq-B0T.title" = "None";
+"wkV-Gq-B0T.title" = "هیچکدام";
+
+/* Class = "NSMenuItem"; title = "Toggle Picture-in-Picture"; ObjectID = "rvS-xA-7bv"; */
+"rvS-xA-7bv.title" = "Toggle Picture-in-Picture";
+
+/* Class = "NSMenuItem"; title = "Toggle Picture-in-Picture"; ObjectID = "ibM-4r-SQA"; */
+"ibM-4r-SQA.title" = "Toggle Picture-in-Picture";
+
+/* Class = "NSMenuItem"; title = "Toggle Picture-in-Picture"; ObjectID = "3Pm-nn-HpB"; */
+"3Pm-nn-HpB.title" = "Toggle Picture-in-Picture";

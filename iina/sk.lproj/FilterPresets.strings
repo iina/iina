@@ -10,26 +10,26 @@
 
 
 "crop" = "Orezanie";
-"crop.w" = "Šírka (štandardné: šírka videa)";
-"crop.h" = "Výška (štandardné: výška videa)";
-"crop.x" = "Začiatok X (štandardné: stred)";
-"crop.y" = "Začiatok Y (štandardné: stred)";
+"crop.w" = "Šírka (predvolené: šírka videa)";
+"crop.h" = "Výška (predvolené: výška videa)";
+"crop.x" = "Začiatok X (predvolené: stred)";
+"crop.y" = "Začiatok Y (predvolené: stred)";
 
-"expand" = "Zväčšenie";
-"expand.w" = "Šírka (štandardné: šírka videa)";
-"expand.h" = "Výška (štandardné: výška videa)";
-"expand.x" = "Začiatok X (štandardné: stred)";
-"expand.y" = "Začiatok Y (štandardné: stred)";
-"expand.aspect" = "Zväčšíť v pomere (napr.: 4/3)";
-"expand.round" = "Zaokrúhľuje, aby sa hodnota mohla rozdeliť";
+"expand" = "Zväčšiť";
+"expand.w" = "Šírka (predvolené: šírka videa)";
+"expand.h" = "Výška (predvolené: výška videa)";
+"expand.x" = "Začiatok X (predvolené: stred)";
+"expand.y" = "Začiatok Y (predvolené: stred)";
+"expand.aspect" = "Zväčší v pomere (napr.: 4/3)";
+"expand.round" = "Zaokrúhli, aby bolo deliteľné hodnotou";
 
 "sharpen" = "Zaostriť";
 "sharpen.msize" = "Veľkosť matice";
-"sharpen.amount" = "Hodnota";
+"sharpen.amount" = "Množstvo";
 
-"blur" = "Rozmazať";
+"blur" = "Rozostrieť";
 "blur.msize" = "Veľkosť matice";
-"blur.amount" = "Hodnota";
+"blur.amount" = "Množstvo";
 
 "delogo" = "Delogo";
 "delogo.w" = "Šírka";
@@ -37,19 +37,19 @@
 "delogo.x" = "Začiatok X";
 "delogo.y" = "Začiatok Y";
 
-"negative" = "Negatív";
+"negative" = "Negatívne";
 
-"vflip" = "Zrkadliť Vertikálne";
-"hflip" = "Zrkadliť Horizontálne";
+"vflip" = "Preklopiť";
+"hflip" = "Zrkadliť";
 
 "lut3d" = "3D LUT";
 "lut3d.file" = "Súbor";
-"lut3d.interp" = "Interpolácia";
+"lut3d.interp" = "Režim interpolácie";
 
 "custom_mpv" = "Vlastné (mpv)";
-"custom_mpv.name" = "Názov Filtra";
-"custom_mpv.string" = "Hodnota Filtra";
+"custom_mpv.name" = "Názov filtra";
+"custom_mpv.string" = "Hodnota filtra";
 
 "custom_ffmpeg" = "Vlastné (FFmpeg)";
-"custom_ffmpeg.name" = "Názov Filtra";
-"custom_ffmpeg.string" = "Hodnota Filtra";
+"custom_ffmpeg.name" = "Názov filtra";
+"custom_ffmpeg.string" = "Hodnota filtra";

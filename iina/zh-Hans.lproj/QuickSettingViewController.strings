@@ -26,7 +26,7 @@
 "B0I-bX-HZS.title" = "1x";
 
 /* Class = "NSTextFieldCell"; title = "5s"; ObjectID = "C0t-gm-Tim"; */
-"C0t-gm-Tim.title" = "5s";
+"C0t-gm-Tim.title" = "5 秒";
 
 /* Class = "NSTabViewItem"; label = "Video"; ObjectID = "CYP-el-A6A"; */
 "CYP-el-A6A.label" = "视频";
@@ -47,7 +47,7 @@
 "JbG-Ur-b55.title" = "1.5";
 
 /* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "LEZ-fv-buL"; */
-"LEZ-fv-buL.title" = "0s";
+"LEZ-fv-buL.title" = "0 秒";
 
 /* Class = "NSTextFieldCell"; title = "External audio:"; ObjectID = "Lnu-kz-cql"; */
 "Lnu-kz-cql.title" = "外置音频:";
@@ -62,16 +62,13 @@
 "PLX-gY-e0h.title" = "4x";
 
 /* Class = "NSTextFieldCell"; title = "External subtitles:"; ObjectID = "RA1-fF-OrB"; */
-"RA1-fF-OrB.title" = "外置字幕:";
+"RA1-fF-OrB.title" = "外挂字幕:";
 
 /* Class = "NSSegmentedCell"; Rbb-wh-cLc.ibShadowedLabels[0] = "Search Online…"; ObjectID = "Rbb-wh-cLc"; */
 "Rbb-wh-cLc.ibShadowedLabels[0]" = "在线查找…";
 
 /* Class = "NSTextFieldCell"; title = "Saturation:"; ObjectID = "Rky-lo-Buu"; */
 "Rky-lo-Buu.title" = "饱和度:";
-
-/* Class = "NSButtonCell"; title = "Deinterlace"; ObjectID = "TXm-bA-7y3"; */
-"TXm-bA-7y3.title" = "反交错";
 
 /* Class = "NSTextFieldCell"; title = "Video track:"; ObjectID = "VzC-tM-KT7"; */
 "VzC-tM-KT7.title" = "视频轨道:";
@@ -89,7 +86,7 @@
 "Xez-sb-mfB.title" = "均衡器";
 
 /* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "YCG-xK-eAs"; */
-"YCG-xK-eAs.title" = "-5s";
+"YCG-xK-eAs.title" = "-5 秒";
 
 /* Class = "NSTextFieldCell"; title = "Aspect Ratio:"; ObjectID = "YgL-iV-bca"; */
 "YgL-iV-bca.title" = "长宽比:";
@@ -158,7 +155,7 @@
 "p63-Nx-yJZ.title" = "16x";
 
 /* Class = "NSTextFieldCell"; title = "Gamma:"; ObjectID = "r6x-z0-oFC"; */
-"r6x-z0-oFC.title" = "反差:";
+"r6x-z0-oFC.title" = "伽马:";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "s9l-Hb-SCk"; */
 "s9l-Hb-SCk.title" = "字号:";
@@ -170,7 +167,7 @@
 "to3-rc-Agv.title" = "旋转:";
 
 /* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "uCX-EC-jXM"; */
-"uCX-EC-jXM.title" = "-5s";
+"uCX-EC-jXM.title" = "-5 秒";
 
 /* Class = "NSTextFieldCell"; title = "BACKGROUND"; ObjectID = "uqb-mz-A22"; */
 "uqb-mz-A22.title" = "背景";

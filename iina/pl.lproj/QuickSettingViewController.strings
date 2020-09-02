@@ -26,16 +26,16 @@
 "B0I-bX-HZS.title" = "1x";
 
 /* Class = "NSTextFieldCell"; title = "5s"; ObjectID = "C0t-gm-Tim"; */
-"C0t-gm-Tim.title" = "5s";
+"C0t-gm-Tim.title" = "5 sekund";
 
 /* Class = "NSTabViewItem"; label = "Video"; ObjectID = "CYP-el-A6A"; */
-"CYP-el-A6A.label" = "Video";
+"CYP-el-A6A.label" = "Wideo";
 
 /* Class = "NSMenuItem"; title = "0.25"; ObjectID = "DdO-VX-HCz"; */
-"DdO-VX-HCz.title" = "0.25";
+"DdO-VX-HCz.title" = "0,25";
 
 /* Class = "NSTextFieldCell"; title = "0.25x"; ObjectID = "Ew1-N1-0Pi"; */
-"Ew1-N1-0Pi.title" = "0.25x";
+"Ew1-N1-0Pi.title" = "0,25 x";
 
 /* Class = "NSTextFieldCell"; title = "BORDER"; ObjectID = "GlZ-YU-dNm"; */
 "GlZ-YU-dNm.title" = "RAMKA";
@@ -44,10 +44,10 @@
 "HBF-J7-Tie.title" = "31.25";
 
 /* Class = "NSMenuItem"; title = "1.5"; ObjectID = "JbG-Ur-b55"; */
-"JbG-Ur-b55.title" = "1.5";
+"JbG-Ur-b55.title" = "1,5";
 
 /* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "LEZ-fv-buL"; */
-"LEZ-fv-buL.title" = "0s";
+"LEZ-fv-buL.title" = "0 sekund";
 
 /* Class = "NSTextFieldCell"; title = "External audio:"; ObjectID = "Lnu-kz-cql"; */
 "Lnu-kz-cql.title" = "Zewnętrzna ścieżka audio:";
@@ -70,9 +70,6 @@
 /* Class = "NSTextFieldCell"; title = "Saturation:"; ObjectID = "Rky-lo-Buu"; */
 "Rky-lo-Buu.title" = "Nasycenie:";
 
-/* Class = "NSButtonCell"; title = "Deinterlace"; ObjectID = "TXm-bA-7y3"; */
-"TXm-bA-7y3.title" = "Usuwanie przeplotu";
-
 /* Class = "NSTextFieldCell"; title = "Video track:"; ObjectID = "VzC-tM-KT7"; */
 "VzC-tM-KT7.title" = "Ścieżka video:";
 
@@ -86,10 +83,10 @@
 "Wkz-wW-sOM.title" = "Opóźnienie napisów:";
 
 /* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "Xez-sb-mfB"; */
-"Xez-sb-mfB.title" = "Equalizer";
+"Xez-sb-mfB.title" = "Korektor dźwięku";
 
 /* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "YCG-xK-eAs"; */
-"YCG-xK-eAs.title" = "-5s";
+"YCG-xK-eAs.title" = "-5 sekund";
 
 /* Class = "NSTextFieldCell"; title = "Aspect Ratio:"; ObjectID = "YgL-iV-bca"; */
 "YgL-iV-bca.title" = "Proporcje obrazu:";
@@ -104,7 +101,7 @@
 "bKb-pW-HnS.title" = "Dodatkowe napisy:";
 
 /* Class = "NSTabViewItem"; label = "Audio"; ObjectID = "bzk-c2-LH5"; */
-"bzk-c2-LH5.label" = "Audio";
+"bzk-c2-LH5.label" = "Dźwięk";
 
 /* Class = "NSSegmentedCell"; cMu-YF-riv.ibShadowedLabels[0] = "Default"; ObjectID = "cMu-YF-riv"; */
 "cMu-YF-riv.ibShadowedLabels[0]" = "Domyślne";
@@ -113,7 +110,7 @@
 "cdR-uY-riN.title" = "Jasność:";
 
 /* Class = "NSButtonCell"; title = "AUDIO"; ObjectID = "cpm-5o-a2c"; */
-"cpm-5o-a2c.title" = "AUDIO";
+"cpm-5o-a2c.title" = "DŹWIĘK";
 
 /* Class = "NSTextFieldCell"; title = "Contrast:"; ObjectID = "eDl-Si-LSa"; */
 "eDl-Si-LSa.title" = "Kontrast:";
@@ -131,7 +128,7 @@
 "ghy-e7-7Of.title" = "Czcionka…";
 
 /* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "iS4-Zr-9Ig"; */
-"iS4-Zr-9Ig.title" = "Equalizer";
+"iS4-Zr-9Ig.title" = "Korektor dźwięku";
 
 /* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[0] = "None"; ObjectID = "iuN-rN-jT7"; */
 "iuN-rN-jT7.ibShadowedLabels[0]" = "Brak";
@@ -143,7 +140,7 @@
 "lBn-YS-jL7.title" = "0 dB";
 
 /* Class = "NSButtonCell"; title = "VIDEO"; ObjectID = "lQt-I0-jHO"; */
-"lQt-I0-jHO.title" = "VIDEO";
+"lQt-I0-jHO.title" = "OBRAZ";
 
 /* Class = "NSTextFieldCell"; title = "1x"; ObjectID = "ldQ-YL-IEp"; */
 "ldQ-YL-IEp.title" = "1x";
@@ -155,7 +152,7 @@
 "nPr-QJ-Ty3.title" = "2.5";
 
 /* Class = "NSTextFieldCell"; title = "16x"; ObjectID = "p63-Nx-yJZ"; */
-"p63-Nx-yJZ.title" = "16x";
+"p63-Nx-yJZ.title" = "16 x";
 
 /* Class = "NSTextFieldCell"; title = "Gamma:"; ObjectID = "r6x-z0-oFC"; */
 "r6x-z0-oFC.title" = "Gamma:";
@@ -170,7 +167,7 @@
 "to3-rc-Agv.title" = "Obrót:";
 
 /* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "uCX-EC-jXM"; */
-"uCX-EC-jXM.title" = "-5s";
+"uCX-EC-jXM.title" = "-5 sekund";
 
 /* Class = "NSTextFieldCell"; title = "BACKGROUND"; ObjectID = "uqb-mz-A22"; */
 "uqb-mz-A22.title" = "TŁO";
@@ -185,4 +182,4 @@
 "x39-62-7KC.title" = "Ścieżka audio:";
 
 /* Class = "NSTextFieldCell"; title = "+5s"; ObjectID = "xfX-wr-DTJ"; */
-"xfX-wr-DTJ.title" = "+5s";
+"xfX-wr-DTJ.title" = "+5 sekund";

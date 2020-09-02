@@ -160,6 +160,7 @@ class PlayerCore: NSObject {
 
   static func reloadPluginForAll(_ plugin: JavascriptPlugin) {
     playerCores.forEach { $0.reloadPlugin(plugin) }
+    (NSApp.delegate as? AppDelegate)?.menuController?.updatePluginMenu()
   }
 
   func loadPlugins() {

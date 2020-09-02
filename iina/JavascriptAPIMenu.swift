@@ -44,8 +44,10 @@ class JavascriptAPIMenu: JavascriptAPI, JavascriptAPIMenuExportable {
 
   @objc func removeAllItems() {
     for item in self.pluginInstance.menuItems {
-      if let action = item.action {
-        JSContext.current()!.virtualMachine.removeManagedReference(action, withOwner: self)
+      item.forAllSubItems {
+        if let action = $0.action {
+          JSContext.current()!.virtualMachine.removeManagedReference(action, withOwner: self)
+        }
       }
     }
     self.pluginInstance.menuItems.removeAll()

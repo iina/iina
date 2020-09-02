@@ -14,6 +14,10 @@ class PluginOverlayView: WKWebView, WKNavigationDelegate {
     return nil
   }
 
+  deinit {
+    configuration.userContentController.removeScriptMessageHandler(forName: "iina")
+  }
+
   func attachTo(windowController: MainWindowController) {
     windowController.pluginOverlayViewContainer.addSubview(self)
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": self])

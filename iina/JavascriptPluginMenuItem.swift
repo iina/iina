@@ -83,4 +83,12 @@ class JavascriptPluginMenuItem: NSObject, JavascriptPluginMenuItemExportable {
     }
     return false
   }
+
+  func forAllSubItems(_ callback: (JavascriptPluginMenuItem) -> Void) {
+    for item in items {
+      item.forAllSubItems(callback)
+      callback(item)
+    }
+    callback(self)
+  }
 }

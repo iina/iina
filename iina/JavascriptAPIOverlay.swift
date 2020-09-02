@@ -26,6 +26,11 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
   private var listeners: [String: JSValue] = [:]
   private var inSimpleMode = false
 
+  override func cleanUp(_ instance: JavascriptPluginInstance) {
+    guard instance.overlayViewLoaded else { return }
+    instance.overlayView.removeFromSuperview()
+  }
+
   func show() {
     guard pluginInstance.overlayViewLoaded && permitted(to: .displayVideoOverlay) else { return }
     DispatchQueue.main.async {
@@ -105,6 +110,7 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
 
   func onMessage(_ name: String, _ callback: JSValue) {
     guard pluginInstance.overlayViewLoaded && permitted(to: .displayVideoOverlay) else { return }
+    JSContext.current()!.virtualMachine.addManagedReference(callback, withOwner: self)
     listeners[name] = callback
   }
 

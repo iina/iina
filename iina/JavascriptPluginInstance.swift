@@ -53,6 +53,7 @@ class JavascriptPluginInstance {
   var overlayViewLoaded = false
 
   var menuItems: [JavascriptPluginMenuItem] = []
+  var playlistMenuItemBuilder: JSValue?
 
   lazy var queue: DispatchQueue = {
     DispatchQueue(label: "com.colliderli.iina.plugin.\(plugin.identifier)", qos: .background)
@@ -74,6 +75,13 @@ class JavascriptPluginInstance {
   }
 
   @objc func menuItemAction(_ sender: NSMenuItem) {
+    guard let item = sender.representedObject as? JavascriptPluginMenuItem else { return }
+    if !item.callAction() {
+      Logger.log("Action of the menu item \"\(item.title)\" is not a function", level: .error, subsystem: subsystem)
+    }
+  }
+
+  @objc func playlistMenuItemAction(_ sender: NSMenuItem) {
     guard let item = sender.representedObject as? JavascriptPluginMenuItem else { return }
     if !item.callAction() {
       Logger.log("Action of the menu item \"\(item.title)\" is not a function", level: .error, subsystem: subsystem)

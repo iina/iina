@@ -749,12 +749,66 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         result.addItem(NSMenuItem.separator())
       }
     }
+
+    // menu items from plugins
+    var hasPluginMenuItems = false
+    let filenames = Array(rows)
+    let pluginMenuItems = player.plugins.map {
+      plugin -> (JavascriptPluginInstance, [JavascriptPluginMenuItem]) in
+      if let value = plugin.playlistMenuItemBuilder?.call(withArguments: [filenames]),
+        value.isObject,
+        let items = value.toObject() as? [JavascriptPluginMenuItem] {
+        hasPluginMenuItems = true
+        return (plugin, items)
+      }
+      return (plugin, [])
+    }
+    if hasPluginMenuItems {
+      result.addItem(withTitle: NSLocalizedString("preference.plugins", comment: "Plugins"))
+      for (plugin, items) in pluginMenuItems {
+        for item in items {
+          add(menuItemDef: item, to: result, for: plugin)
+        }
+      }
+      result.addItem(NSMenuItem.separator())
+    }
+
     result.addItem(withTitle: NSLocalizedString("pl_menu.add_file", comment: "Add File"), action: #selector(self.addFileAction(_:)))
     result.addItem(withTitle: NSLocalizedString("pl_menu.add_url", comment: "Add URL"), action: #selector(self.addURLAction(_:)))
     result.addItem(withTitle: NSLocalizedString("pl_menu.clear_playlist", comment: "Clear Playlist"), action: #selector(self.clearPlaylistBtnAction(_:)))
     return result
   }
 
+  @discardableResult
+  private func add(menuItemDef item: JavascriptPluginMenuItem,
+                   to menu: NSMenu,
+                   for plugin: JavascriptPluginInstance) -> NSMenuItem {
+    if (item.isSeparator) {
+      let item = NSMenuItem.separator()
+      menu.addItem(item)
+      return item
+    }
+
+    let menuItem: NSMenuItem
+    if item.action == nil {
+      menuItem = menu.addItem(withTitle: item.title, action: nil, target: plugin, obj: item)
+    } else {
+      menuItem = menu.addItem(withTitle: item.title,
+                              action: #selector(plugin.playlistMenuItemAction(_:)),
+                              target: plugin,
+                              obj: item)
+    }
+
+    menuItem.isEnabled = item.enabled
+    menuItem.state = item.selected ? .on : .off
+    if !item.items.isEmpty {
+      menuItem.submenu = NSMenu()
+      for submenuItem in item.items {
+        add(menuItemDef: submenuItem, to: menuItem.submenu!, for: plugin)
+      }
+    }
+    return menuItem
+  }
 }
 
 

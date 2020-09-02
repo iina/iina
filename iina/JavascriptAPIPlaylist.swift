@@ -18,6 +18,7 @@ import JavaScriptCore
   func play(_ index: Int)
   func playNext()
   func playPrevious()
+  func registerMenuItemBuilder(_ builder: JSValue)
 }
 
 class JavascriptAPIPlaylist: JavascriptAPI, JavascriptAPIPlaylistExportable {
@@ -124,5 +125,13 @@ class JavascriptAPIPlaylist: JavascriptAPI, JavascriptAPIPlaylistExportable {
     guard isPlaying() else { return }
 
     player.navigateInPlaylist(nextMedia: false)
+  }
+
+  func registerMenuItemBuilder(_ builder: JSValue) {
+    if let previousBuilder = pluginInstance.playlistMenuItemBuilder {
+      JSContext.current()!.virtualMachine.removeManagedReference(previousBuilder, withOwner: pluginInstance)
+    }
+    pluginInstance.playlistMenuItemBuilder = builder
+    JSContext.current()!.virtualMachine.addManagedReference(builder, withOwner: pluginInstance)
   }
 }

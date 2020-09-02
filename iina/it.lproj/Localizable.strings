@@ -16,9 +16,19 @@
 "general.username" = "Nome utente";
 "general.password" = "Password";
 
+// Guide Window
+"guide.highlights" = "Highlights";
+"guide.basic_settings" = "Basic Settings";
+"guide.faq" = "Frequently Asked Questions";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffer… %d%%";
 "main.opening_stream" = "Apertura stream…";
+"osc.precision" = "Precision";
+"osc.1s" = "1 second";
+"osc.100ms" = "100 milliseconds";
+"osc.10ms" = "10 milliseconds";
+"osc.1ms" = "1 millisecond";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Predefinito";
@@ -90,7 +100,7 @@
 "preference.key_binding_hint_1" = "Per modificare le scorciatoie di tastiera nel file di configurazione corrente, fai prima click su \"Duplica…\" per crearne una copia.";
 "preference.key_binding_hint_2" = "Fai doppio click nella riga sulla destra per modificare la scorciatoia di tastiera corrispondente.";
 
-"preference.enable_adv_settings" = "Enable advanced settings";
+"preference.enable_adv_settings" = "Abilita impostazioni avanzate";
 
 "menu.volume" = "Volume: %d";
 "menu.audio_delay" = "Differenza audio: %.2fs";
@@ -114,7 +124,7 @@
 "menu.sub_delay_up" = "Ritarda sottotitoli + %.1fs";
 "menu.sub_delay_down" = "Anticipa sottotitoli - %.1fs";
 
-"menu.crop_custom" = "Custom...";
+"menu.crop_custom" = "Personalizzato...";
 
 "track.none" = "<Nessuno>";
 
@@ -263,15 +273,15 @@
 "osc_toolbar.music_mode" = "Attiva la modalità musicale";
 "osc_toolbar.sub_track" = "Scegli la traccia dei sottotitoli";
 
-"mini_player.album_art" = "Toggle album art";
-"mini_player.loop" = "Repeat";
-"mini_player.shuffle" = "Shuffle";
-"mini_player.remove" = "Remove from playlist";
-"mini_player.add" = "Add to playlist";
-"mini_player.delete" = "Delete all tracks from playlist";
+"mini_player.album_art" = "Attiva/Disattiva copertina album";
+"mini_player.loop" = "Ripeti";
+"mini_player.shuffle" = "Casuale";
+"mini_player.remove" = "Rimuovi da playlist";
+"mini_player.add" = "Aggiungi alla playlist";
+"mini_player.delete" = "Elimina tutte le tracce dalla playlist";
 "mini_player.volume" = "Volume";
-"mini_player.close" = "Close music mode";
-"mini_player.back" = "Return to video mode";
+"mini_player.close" = "Chiudi la modalità musica";
+"mini_player.back" = "Torna alla modalità video";
 
 // Touch bar
 

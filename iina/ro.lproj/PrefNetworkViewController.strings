@@ -11,7 +11,7 @@
 "3os-7u-lv8.title" = "Implicit: 153600";
 
 /* Class = "NSTextFieldCell"; title = "HTTP proxy:"; ObjectID = "9ut-ID-ffZ"; */
-"9ut-ID-ffZ.title" = "HTTP proxy:";
+"9ut-ID-ffZ.title" = "Proxy HTTP:";
 
 /* Class = "NSTextFieldCell"; title = "Format: <key>=<value>[,<key>=<value>[,…]]"; ObjectID = "GBe-wd-tne"; */
 "GBe-wd-tne.title" = "Format: <key>=<value>[,<key>=<value>[,…]]";
@@ -29,7 +29,7 @@
 "YqE-yV-BvQ.title" = "IINA va căuta youtube-dl în acest dosar. Este necesar restart.";
 
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "aNr-lv-K0r"; */
-"aNr-lv-K0r.title" = "Auto";
+"aNr-lv-K0r.title" = "Automat";
 
 /* Class = "NSButtonCell"; title = "Enable youtube-dl"; ObjectID = "cyH-Md-FAD"; */
 "cyH-Md-FAD.title" = "Activează youtube-dl";
@@ -38,7 +38,7 @@
 "dDD-g3-54w.title" = "Dimensiunea buffer-ului cache (KB):";
 
 /* Class = "NSTextFieldCell"; title = "User agent:"; ObjectID = "eN6-Sk-kUa"; */
-"eN6-Sk-kUa.title" = "User agent:";
+"eN6-Sk-kUa.title" = "Agent utilizator:";
 
 /* Class = "NSTextFieldCell"; title = "Default: 100"; ObjectID = "fab-7d-mMQ"; */
 "fab-7d-mMQ.title" = "Implicit: 100";

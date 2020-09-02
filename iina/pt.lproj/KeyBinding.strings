@@ -1,0 +1,116 @@
+/*
+  KeyBinding.strings
+  iina
+
+  Created by lhc on 4/2/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+"cmd.ignore" = "Ignorar";
+"cmd.seek" = "Procurar";
+"cmd.revert-seek" = "Reverter busca";
+"cmd.set" = "Estabelecer";
+"cmd.cycle" = "Ciclo";
+"cmd.cycle-values" = "Ciclo em";
+"cmd.add" = "Alterar";
+"cmd.multiply" = "Multiplicar";
+"cmd.frame-step" = "Próximo frame";
+"cmd.frame-back-step" = "Frame anterior";
+"cmd.ab-loop" = "Loop A-B";
+"cmd.sub-seek" = "Busca de legenda";
+"cmd.playlist-next" = "Ficheiro seguinte";
+"cmd.playlist-prev" = "Ficheiro anterior";
+"cmd.playlist-move" = "Mover item da playlist";
+"cmd.playlist-clear" = "Limpar Lista de Reprodução";
+"cmd.playlist-remove" = "Remover atual";
+"cmd.playlist-shuffle" = "Aleatório";
+"cmd.write-watch-later-config" = "Gravar histórico de reprodução";
+"cmd.stop" = "Parar";
+"cmd.quit" = "Sair";
+"cmd.quit-watch-later" = "Sair (guardar progresso)";
+"cmd.screenshot" = "Captura de ecrã";
+"cmd.screenshot-to-file" = "Captura de ecrã para ficheiro";
+"cmd.loadfile" = "Carregar ficheiro";
+"cmd.loadlist" = "Carregar lista de reprodução";
+"cmd.run" = "Executar";
+
+"iina.flip" = "Virar";
+"iina.mirror" = "Espelho";
+
+"iina.toggle-pip" = "Ativar Picture in Picture";
+"iina.toggle-music-mode" = "Ativar Modo Música";
+"iina.open-file" = "Abrir ficheiro";
+"iina.open-url" = "Abrir URL";
+"iina.video-panel" = "Painel de vídeo";
+"iina.audio-panel" = "Painel de áudio";
+"iina.sub-panel" = "Painel de legendas";
+"iina.playlist-panel" = "Painel da Lista de Reprodução";
+"iina.chapter-panel" = "Painel de capítulos";
+"iina.bigger-window" = "Janela maior";
+"iina.smaller-window" = "Janela menor";
+"iina.fit-to-screen" = "Ajustar ao ecrã";
+"iina.toggle-flip" = "Ativar virar";
+"iina.toggle-mirror" = "Ativar espelho";
+"iina.save-playlist" = "Guardar playlist atual";
+"iina.delete-current-file" = "Apagar ficheiro atual";
+"iina.delete-current-file-hard" = "Excluir o arquivo atual diretamente sem mover para a lixeira";
+"iina.find-online-subs" = "Encontrar legendas online";
+"iina.save-downloaded-sub" = "Guardar legenda descarregada";
+
+"yes" = "Sim";
+"no" = "Não";
+"to" = "para";
+"by" = "por";
+"in" = "em";
+"add" = "aumentar";
+"minus" = "diminuir";
+"forward" = "avançar";
+"backward" = "recuar";
+"seek-to" = "para";
+
+"relative" = "s";
+"absolute" = "s";
+"absolute-percent" = "%";
+"relative-percent" = "%";
+"relative+exact" = "s (exato)";
+"relative-percent+exact" = "% (exato)";
+"absolute+keyframe" = "s (keyframe)";
+"absolute-percent+keyframe" = "% (keyframe)";
+
+"opt.pause" = "Pausa";
+"opt.speed" = "Velocidade";
+
+"opt.window-scale" = "Escala da janela";
+
+"opt.video" = "Faixa de vídeo";
+"opt.video-aspect" = "Proporção do vídeo";
+"opt.contrast" = "Contraste";
+"opt.brightness" = "Luminosidade";
+"opt.gamma" = "Gamma";
+"opt.saturation" = "Saturação";
+"opt.deinterlace" = "Desentrelaçar";
+
+"opt.audio" = "Faixa de áudio";
+"opt.volume" = "Volume";
+"opt.mute" = "Desativar Som";
+"opt.audio-delay" = "Atraso do áudio";
+
+"opt.sub" = "Faixa da legenda";
+"opt.sub-delay" = "Atraso da legenda";
+"opt.sub-pos" = "Posição da legenda";
+"opt.sub-scale" = "Tamanho legenda";
+"opt.sub-visibility" = "Visibilidade da legenda";
+"opt.sub-ass-style-override" = "Substituição de estilo ASS";
+
+"opt.fullscreen" = "Ecrã completo";
+"opt.ontop" = "Flutuar no topo";
+
+"opt.chapter" = "Capítulo";
+
+"read.set" = "Estabelecer {{property}} para {{value}}";
+"read.add" = "{{property}} {{value}}";
+"read.multiply" = "Multiplicar {{property}} por {{factor}}x";
+"read.cycle" = "Percorrer {{property}}{{#dir_down}} para baixo{{/dir_down}}";
+"read.cycle-values" = "Percorrer {{property}} em ({{{values}}})";
+"read.seek" = "Buscar {{#fwd}}adiante{{/fwd}}{{#bwd}}atrás{{/bwd}}{{#abs}}para{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exacto){{/exact}}{{#kf}}(keyframe){{/kf}}";
+"read.sub-seek" = "Buscar legenda {{#skip_1}}seguinte{{/skip_1}}{{#skip_-1}}anterior{{/skip_-1}}";

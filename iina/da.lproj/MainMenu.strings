@@ -353,7 +353,7 @@
 "gMo-qL-m08.title" = "Tjek for opdateringer...";
 
 /* Class = "NSMenuItem"; title = "Delete"; ObjectID = "h9w-Rj-Hm1"; */
-"h9w-Rj-Hm1.title" = "Delete";
+"h9w-Rj-Hm1.title" = "Slet";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "hz9-B4-Xy5"; */
 "hz9-B4-Xy5.title" = "Services";
@@ -365,7 +365,7 @@
 "iQF-1S-9EK.title" = "Volumen:";
 
 /* Class = "NSMenuItem"; title = "Video Track"; ObjectID = "j8P-Gb-HR7"; */
-"j8P-Gb-HR7.title" = "Video Track";
+"j8P-Gb-HR7.title" = "Video Spor";
 
 /* Class = "NSMenuItem"; title = "Playback"; ObjectID = "jxT-CU-nIS"; */
 "jxT-CU-nIS.title" = "Afspilning";
@@ -377,7 +377,7 @@
 "lDC-IC-peP.title" = "Større størelse";
 
 /* Class = "NSMenuItem"; title = "Audio"; ObjectID = "lYN-0x-lzT"; */
-"lYN-0x-lzT.title" = "Audio";
+"lYN-0x-lzT.title" = "Lyd";
 
 /* Class = "NSMenuItem"; title = "Audio Delay + 0.1s"; ObjectID = "lew-3S-oGY"; */
 "lew-3S-oGY.title" = "Lydforsinkelse + 0.1s";
@@ -419,7 +419,7 @@
 "pAo-L5-qTO.title" = "Undertekstforsinkelse + 0.5s";
 
 /* Class = "NSMenuItem"; title = "Edit"; ObjectID = "pWh-nh-0pN"; */
-"pWh-nh-0pN.title" = "Edit";
+"pWh-nh-0pN.title" = "Rediger";
 
 /* Class = "NSMenuItem"; title = "Volume - 5%"; ObjectID = "pdj-9C-Fn1"; */
 "pdj-9C-Fn1.title" = "Volumen - 5%";
@@ -440,7 +440,7 @@
 "snW-S8-Cw5.title" = "Halv størelse";
 
 /* Class = "NSMenuItem"; title = "Copy"; ObjectID = "tH0-KL-c9V"; */
-"tH0-KL-c9V.title" = "Copy";
+"tH0-KL-c9V.title" = "Kopier";
 
 /* Class = "NSMenuItem"; title = "Open Recent"; ObjectID = "tXI-mr-wws"; */
 "tXI-mr-wws.title" = "Åben seneste";
@@ -452,7 +452,7 @@
 "uGZ-lo-pJJ.title" = "Undertekster";
 
 /* Class = "NSMenu"; title = "Speech"; ObjectID = "uO1-9S-6Yy"; */
-"uO1-9S-6Yy.title" = "Speech";
+"uO1-9S-6Yy.title" = "Tale";
 
 /* Class = "NSMenuItem"; title = "Clear Menu"; ObjectID = "vNY-rz-j42"; */
 "vNY-rz-j42.title" = "Tøm Menu";
@@ -461,7 +461,7 @@
 "vuV-uP-CAD.title" = "Gemte lyd filtre";
 
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "w8n-XJ-Pgi"; */
-"w8n-XJ-Pgi.title" = "Edit";
+"w8n-XJ-Pgi.title" = "Rediger";
 
 /* Class = "NSMenuItem"; title = "Float on Top"; ObjectID = "wex-rX-PcY"; */
 "wex-rX-PcY.title" = "Flyd oven på";
@@ -491,4 +491,4 @@
 "zez-g5-2Pt.title" = "Make Lower Case";
 
 /* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "zpw-Ac-F3M"; */
-"zpw-Ac-F3M.title" = "Start Speaking";
+"zpw-Ac-F3M.title" = "Start tale";

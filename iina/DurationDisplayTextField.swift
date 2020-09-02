@@ -54,6 +54,10 @@ class DurationDisplayTextField: NSTextField {
     Preference.set(mode == .remaining, for: .showRemainingTime)
   }
 
+  override func scrollWheel(with event: NSEvent) {
+    return
+  }
+
   override func rightMouseDown(with event: NSEvent) {
     let precision = DurationDisplayTextField.precision
     let menu = NSMenu(title: "Time label settings")

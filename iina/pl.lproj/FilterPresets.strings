@@ -21,7 +21,7 @@
 "expand.x" = "Początkowe X (domyślnie: środek)";
 "expand.y" = "Początkowe Y (domyślnie: środek)";
 "expand.aspect" = "Rozciągnij do proporcji (np.: 4/3)";
-"expand.round" = "Rounds up to make divisible by this value";
+"expand.round" = "Rundy w górę, aby podzielić przez tę wartość";
 
 "sharpen" = "Wyostrzanie";
 "sharpen.msize" = "Rozmiar matrycy";
@@ -34,8 +34,8 @@
 "delogo" = "Delogo";
 "delogo.w" = "Szerokość";
 "delogo.h" = "Wysokość";
-"delogo.x" = "Origin X";
-"delogo.y" = "Origin Y";
+"delogo.x" = "Początek współrzędnej X";
+"delogo.y" = "Początek współrzędnej Y";
 
 "negative" = "Negatyw";
 
@@ -46,10 +46,10 @@
 "lut3d.file" = "Plik";
 "lut3d.interp" = "Tryb interpolacji";
 
-"custom_mpv" = "Custom (mpv)";
+"custom_mpv" = "Własny (mpv)";
 "custom_mpv.name" = "Nazwa filtra";
 "custom_mpv.string" = "Wartość filtra";
 
-"custom_ffmpeg" = "Custom (FFmpeg)";
+"custom_ffmpeg" = "Własny (Fmpeg)";
 "custom_ffmpeg.name" = "Nazwa filtra";
 "custom_ffmpeg.string" = "Wartość filtra";

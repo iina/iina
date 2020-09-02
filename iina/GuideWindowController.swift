@@ -61,6 +61,18 @@ class GuideWindowController: NSWindowController {
 }
 
 extension GuideWindowController: WKNavigationDelegate {
+  func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    if let url = navigationAction.request.url {
+      if url.absoluteString.starts(with: "https://iina.io/highlights/") {
+        decisionHandler(.allow)
+        return
+      } else {
+        NSWorkspace.shared.open(url)
+      }
+    }
+    decisionHandler(.cancel)
+  }
+
   func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
     highlightsLoadingIndicator.stopAnimation(nil)
     highlightsLoadingIndicator.isHidden = true

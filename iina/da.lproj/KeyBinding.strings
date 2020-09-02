@@ -10,8 +10,8 @@
 "cmd.seek" = "Spol";
 "cmd.revert-seek" = "Spol tilbage";
 "cmd.set" = "Indstil";
-"cmd.cycle" = "Cycle";
-"cmd.cycle-values" = "Cycle in";
+"cmd.cycle" = "Cyklus";
+"cmd.cycle-values" = "Cyklus ind";
 "cmd.add" = "Ændre";
 "cmd.multiply" = "Gange";
 "cmd.frame-step" = "Næste billede";
@@ -28,7 +28,7 @@
 "cmd.stop" = "Stop";
 "cmd.quit" = "Afslut";
 "cmd.quit-watch-later" = "Afslut (gem fremskridt)";
-"cmd.screenshot" = "Screenshot";
+"cmd.screenshot" = "Skærmbillede";
 "cmd.screenshot-to-file" = "Screenshot til fil";
 "cmd.loadfile" = "Åben fil";
 "cmd.loadlist" = "Åben playlist";
@@ -37,14 +37,14 @@
 "iina.flip" = "Vend";
 "iina.mirror" = "Spejlvend";
 
-"iina.toggle-pip" = "Toggle Picture-in-Picture";
+"iina.toggle-pip" = "Skift Billede-i-Billede";
 "iina.toggle-music-mode" = "Toggle Musik tilstand";
 "iina.open-file" = "Åben fil";
 "iina.open-url" = "Åben URL";
 "iina.video-panel" = "Video panel";
 "iina.audio-panel" = "Lyd panel";
 "iina.sub-panel" = "Undertekst panel";
-"iina.playlist-panel" = "Playlist panel";
+"iina.playlist-panel" = "Afspilningsliste panel";
 "iina.chapter-panel" = "Kapittel panel";
 "iina.bigger-window" = "Større vindue";
 "iina.smaller-window" = "Mindre vindue";
@@ -53,7 +53,7 @@
 "iina.toggle-mirror" = "Toggle spejlvend";
 "iina.save-playlist" = "Save nuværende playlist";
 "iina.delete-current-file" = "Slet nuværende fil";
-"iina.delete-current-file-hard" = "Delete current file directly without moving to trash";
+"iina.delete-current-file-hard" = "Slet nuværende arkiv direkte uden at flytte den til papirkurv";
 "iina.find-online-subs" = "Find undertekster online";
 "iina.save-downloaded-sub" = "Gem downloadede undertekster";
 
@@ -72,27 +72,27 @@
 "absolute" = "s";
 "absolute-percent" = "%";
 "relative-percent" = "%";
-"relative+exact" = "s (exact)";
-"relative-percent+exact" = "% (exact)";
-"absolute+keyframe" = "s (keyframe)";
-"absolute-percent+keyframe" = "% (keyframe)";
+"relative+exact" = "s (præcis)";
+"relative-percent+exact" = "% (præcis)";
+"absolute+keyframe" = "s (billederamme)";
+"absolute-percent+keyframe" = "s (billederamme)";
 
 "opt.pause" = "Pause";
-"opt.speed" = "Speed";
+"opt.speed" = "Hastighed";
 
 "opt.window-scale" = "Vindue skalering";
 
 "opt.video" = "Video";
-"opt.video-aspect" = "Video aspect";
-"opt.contrast" = "Contrast";
-"opt.brightness" = "Brightness";
+"opt.video-aspect" = "Video format";
+"opt.contrast" = "Kontrast";
+"opt.brightness" = "Lysstyrke";
 "opt.gamma" = "Gamma";
 "opt.saturation" = "Saturation";
 "opt.deinterlace" = "Deinterlace";
 
 "opt.audio" = "Lyd";
 "opt.volume" = "Volumen";
-"opt.mute" = "Mute";
+"opt.mute" = "Lydløs";
 "opt.audio-delay" = "Lyd forsinkelse";
 
 "opt.sub" = "Sub track";
@@ -100,7 +100,7 @@
 "opt.sub-pos" = "Sub pos";
 "opt.sub-scale" = "Sub scale";
 "opt.sub-visibility" = "Sub visibility";
-"opt.sub-ass-style-override" = "ASS style override";
+"opt.sub-ass-style-override" = "ASS stil overskriv";
 
 "opt.fullscreen" = "Fuldskærm";
 "opt.ontop" = "Flyd oven på";

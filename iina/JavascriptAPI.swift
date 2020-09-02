@@ -42,6 +42,7 @@ class JavascriptAPI: NSObject {
   }
 
   func extraSetup() { }
+  func cleanUp(_ instance: JavascriptPluginInstance) { }
 
   func createPromise(_ block: @escaping @convention(block) (JSValue, JSValue) -> Void) -> JSValue {
     return context.objectForKeyedSubscript("Promise")!.construct(withArguments: [JSValue(object: block, in: context)!])

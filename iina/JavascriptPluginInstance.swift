@@ -70,7 +70,7 @@ class JavascriptPluginInstance {
 
   deinit {
     Logger.log("Unload \(self.plugin.name)", level: .debug, subsystem: subsystem)
-    player.mpv.removeHooks(withIdentifier: plugin.identifier)
+    apis.values.forEach { $0.cleanUp(self) }
   }
 
   @objc func menuItemAction(_ sender: NSMenuItem) {

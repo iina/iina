@@ -34,13 +34,13 @@
 /* Class = "NSButtonCell"; title = "Pause"; ObjectID = "FbF-jJ-W5b"; */
 "FbF-jJ-W5b.title" = "일시 정지";
 
-/* Class = "NSTextFieldCell"; title = "When media opened:"; ObjectID = "GNV-VA-NBW"; */
+/* Class = "NSTextFieldCell"; title = "When media is opened:"; ObjectID = "GNV-VA-NBW"; */
 "GNV-VA-NBW.title" = "미디어를 열때:";
 
 /* Class = "NSMenuItem"; title = "Weekly"; ObjectID = "Imf-6g-2Cd"; */
 "Imf-6g-2Cd.title" = "매주";
 
-/* Class = "NSButtonCell"; title = "Window became inactive/active"; ObjectID = "J8g-aS-W6e"; */
+/* Class = "NSButtonCell"; title = "Window becomes inactive/active"; ObjectID = "J8g-aS-W6e"; */
 "J8g-aS-W6e.title" = "윈도우 비활성화/활성화";
 
 /* Class = "NSMenuItem"; title = "Do nothing"; ObjectID = "JfZ-D8-aF2"; */
@@ -85,10 +85,10 @@
 /* Class = "NSButtonCell"; title = "Receive beta updates"; ObjectID = "f0j-Dn-cxt"; */
 "f0j-Dn-cxt.title" = "베타 업데이트 받음";
 
-/* Class = "NSButtonCell"; title = "Pause when left full screen"; ObjectID = "g2A-Kf-vct"; */
+/* Class = "NSButtonCell"; title = "Pause upon leaving full screen"; ObjectID = "g2A-Kf-vct"; */
 "g2A-Kf-vct.title" = "전체 화면 중단시 일시 정지";
 
-/* Class = "NSTextFieldCell"; title = "When launched:"; ObjectID = "gqT-CB-Puw"; */
+/* Class = "NSTextFieldCell"; title = "At launch:"; ObjectID = "gqT-CB-Puw"; */
 "gqT-CB-Puw.title" = "앱 실행시:";
 
 /* Class = "NSButtonCell"; title = "Check for updates"; ObjectID = "hWC-KJ-FuC"; */
@@ -106,7 +106,7 @@
 /* Class = "NSTextFieldCell"; title = "History:"; ObjectID = "jeK-46-2BG"; */
 "jeK-46-2BG.title" = "재생 기록:";
 
-/* Class = "NSButtonCell"; title = "Play when entered full screen"; ObjectID = "lOw-pu-Llm"; */
+/* Class = "NSButtonCell"; title = "Play upon entering full screen"; ObjectID = "lOw-pu-Llm"; */
 "lOw-pu-Llm.title" = "전체 화면 전환시 재생 시작";
 
 /* Class = "NSButtonCell"; title = "Include subtitles"; ObjectID = "lvA-Rc-Sh6"; */

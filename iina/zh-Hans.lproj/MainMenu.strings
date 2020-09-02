@@ -2,7 +2,7 @@
 "0Cz-OE-85L.title" = "字幕延迟 + 0.1s";
 
 /* Class = "NSMenuItem"; title = "Show Playlist Panel"; ObjectID = "0T7-Nu-SL7"; */
-"0T7-Nu-SL7.title" = "播放列表面板";
+"0T7-Nu-SL7.title" = "显示播放列表面板";
 
 /* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "0m7-3r-twH"; */
 "0m7-3r-twH.title" = "打开 URL…";
@@ -17,7 +17,7 @@
 "2Dp-Ol-Zcf.title" = "音频设备";
 
 /* Class = "NSMenuItem"; title = "Jump to Beginning"; ObjectID = "2Ya-3g-1hy"; */
-"2Ya-3g-1hy.title" = "回到开头";
+"2Ya-3g-1hy.title" = "跳转到开始";
 
 /* Class = "NSMenuItem"; title = "Cut"; ObjectID = "2aU-bk-bmu"; */
 "2aU-bk-bmu.title" = "剪切";
@@ -26,13 +26,13 @@
 "2id-wn-xsC.title" = "跳转至…";
 
 /* Class = "NSMenuItem"; title = "Show Quick Settings Panel"; ObjectID = "2t8-Ot-yoO"; */
-"2t8-Ot-yoO.title" = "快速设置";
+"2t8-Ot-yoO.title" = "显示快速设置面板";
 
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "3Ax-P3-QQu"; */
 "3Ax-P3-QQu.title" = "全选";
 
 /* Class = "NSMenuItem"; title = "Show Quick Settings Panel"; ObjectID = "43n-Ed-5kT"; */
-"43n-Ed-5kT.title" = "快速设置";
+"43n-Ed-5kT.title" = "显示快速设置面板";
 
 /* Class = "NSMenuItem"; title = "Audio Delay + 0.5s"; ObjectID = "4ae-MT-2L1"; */
 "4ae-MT-2L1.title" = "音频延迟 + 0.5秒";
@@ -50,7 +50,7 @@
 "5xN-ZB-VLI.title" = "旋转";
 
 /* Class = "NSMenuItem"; title = "Enter Full Screen"; ObjectID = "6Eq-ni-6hG"; */
-"6Eq-ni-6hG.title" = "全屏";
+"6Eq-ni-6hG.title" = "进入全屏幕";
 
 /* Class = "NSMenuItem"; title = "Step Forward 5s"; ObjectID = "6yE-op-DTS"; */
 "6yE-op-DTS.title" = "前进5秒";
@@ -71,7 +71,7 @@
 "8pV-XQ-AvB.title" = "速度:";
 
 /* Class = "NSMenuItem"; title = "Show Quick Settings Panel"; ObjectID = "8y7-Cy-lKT"; */
-"8y7-Cy-lKT.title" = "快速设置";
+"8y7-Cy-lKT.title" = "显示快速设置面板";
 
 /* Class = "NSMenuItem"; title = "Speed Up to 1.1x"; ObjectID = "91n-xW-L37"; */
 "91n-xW-L37.title" = "加速至 1.1x";
@@ -89,7 +89,7 @@
 "AoP-K6-Kb5.title" = "截屏";
 
 /* Class = "NSMenuItem"; title = "Delogo"; ObjectID = "ArE-2s-JIV"; */
-"ArE-2s-JIV.title" = "去台标";
+"ArE-2s-JIV.title" = "去台标/遮挡字幕";
 
 /* Class = "NSMenuItem"; title = "Saved Video Filters"; ObjectID = "BDr-G9-IRx"; */
 "BDr-G9-IRx.title" = "保存的视频滤镜";
@@ -119,7 +119,7 @@
 "DVo-aG-piG.title" = "关闭";
 
 /* Class = "NSMenuItem"; title = "Show Chapters Panel"; ObjectID = "DwM-3d-Eb9"; */
-"DwM-3d-Eb9.title" = "章节面板";
+"DwM-3d-Eb9.title" = "显示章节面板";
 
 /* Class = "NSMenu"; title = "Subtitles"; ObjectID = "EKp-Qx-4Mn"; */
 "EKp-Qx-4Mn.title" = "字幕";
@@ -152,7 +152,7 @@
 "Gi5-1S-RQB.title" = "播放列表";
 
 /* Class = "NSMenuItem"; title = "Crop"; ObjectID = "Gqg-wU-RRo"; */
-"Gqg-wU-RRo.title" = "剪切";
+"Gqg-wU-RRo.title" = "裁切";
 
 /* Class = "NSMenuItem"; title = "Reset Audio Delay"; ObjectID = "H3d-jR-YCr"; */
 "H3d-jR-YCr.title" = "重置音频延迟";
@@ -182,7 +182,7 @@
 "Kby-lQ-HCW.title" = "打开…";
 
 /* Class = "NSMenuItem"; title = "Show All"; ObjectID = "Kd2-mp-pUS"; */
-"Kd2-mp-pUS.title" = "显示所有";
+"Kd2-mp-pUS.title" = "全部显示";
 
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "LE2-aR-0XJ"; */
 "LE2-aR-0XJ.title" = "前置所有窗口";
@@ -287,7 +287,7 @@
 "XPz-ml-OQ3.title" = "撤销";
 
 /* Class = "NSMenuItem"; title = "Smaller Size"; ObjectID = "ZOF-MG-6II"; */
-"ZOF-MG-6II.title" = "小一点";
+"ZOF-MG-6II.title" = "缩小窗口";
 
 /* Class = "NSMenuItem"; title = "Volume - 1%"; ObjectID = "Zhv-Bz-I5V"; */
 "Zhv-Bz-I5V.title" = "音量 - 1%";
@@ -374,7 +374,7 @@
 "k6x-hf-ATi.title" = "加载外置字幕…";
 
 /* Class = "NSMenuItem"; title = "Bigger Size"; ObjectID = "lDC-IC-peP"; */
-"lDC-IC-peP.title" = "大一点";
+"lDC-IC-peP.title" = "更大大小";
 
 /* Class = "NSMenuItem"; title = "Audio"; ObjectID = "lYN-0x-lzT"; */
 "lYN-0x-lzT.title" = "音频";
@@ -392,7 +392,7 @@
 "mGw-jm-5x2.title" = "副字幕";
 
 /* Class = "NSMenuItem"; title = "Enter Picture in Picture"; ObjectID = "mND-N8-z6o"; */
-"mND-N8-z6o.title" = "进入「画中画」";
+"mND-N8-z6o.title" = "进入“画中画”";
 
 /* Class = "NSMenuItem"; title = "Flip"; ObjectID = "mT1-1m-HwN"; */
 "mT1-1m-HwN.title" = "翻转";

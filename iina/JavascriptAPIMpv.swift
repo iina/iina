@@ -26,6 +26,10 @@ class JavascriptAPIMpv: JavascriptAPI, JavascriptAPIMpvExportable {
     identifier = pluginInstance.plugin.identifier
   }
 
+  override func cleanUp(_ instance: JavascriptPluginInstance) {
+    player.mpv.removeHooks(withIdentifier: identifier)
+  }
+
   @objc func getFlag(_ property: String) -> Bool {
     return player.mpv.getFlag(property)
   }

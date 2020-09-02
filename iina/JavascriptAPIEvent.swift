@@ -49,10 +49,11 @@ class JavascriptAPIEvent: JavascriptAPI, JavascriptAPIEventExportable {
     }
   }
 
-  deinit {
+  override func cleanUp(_ instance: JavascriptPluginInstance) {
     addedListeners.forEach { (id, name) in
       player.events.removeListener(id, for: name)
     }
+    addedListeners.removeAll()
   }
 }
 
@@ -61,6 +62,7 @@ class JavascriptAPIEventCallback: EventCallable {
 
   init(_ callback: JSValue) {
     self.callback = callback
+    JSContext.current()!.virtualMachine.addManagedReference(callback, withOwner: self)
   }
 
   func call(withArguments args: [Any]) {

@@ -162,9 +162,9 @@
 		E301EFDA21312AB300BC8588 /* KeychainAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = E301EFD921312AB300BC8588 /* KeychainAccess.swift */; };
 		E30D2EBD21F5FD2600E1FF0D /* PluginOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30D2EBC21F5FD2600E1FF0D /* PluginOverlayView.swift */; };
 		E322A4F820A8442E00C67D32 /* PlaylistPlaybackProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E322A4F720A8442E00C67D32 /* PlaylistPlaybackProgressView.swift */; };
+		E32693F924BA138000BF7ADC /* JavascriptPluginSubtitleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32693F824BA138000BF7ADC /* JavascriptPluginSubtitleItem.swift */; };
 		E32712B024EAA14500359DAB /* ScreenshootOSDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32712AE24EAA14500359DAB /* ScreenshootOSDView.swift */; };
 		E32712B224F2B8CA00359DAB /* ScreenshootOSDView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E32712B424F2B8CA00359DAB /* ScreenshootOSDView.xib */; };
-		E32693F924BA138000BF7ADC /* JavascriptPluginSubtitleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32693F824BA138000BF7ADC /* JavascriptPluginSubtitleItem.swift */; };
 		E32B157D21BC27B100CDBCEA /* JavascriptAPIMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32B157C21BC27B100CDBCEA /* JavascriptAPIMenu.swift */; };
 		E32B157F21BE219700CDBCEA /* JavascriptPluginMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32B157E21BE219700CDBCEA /* JavascriptPluginMenuItem.swift */; };
 		E3366AFA224A039500EF3C32 /* JavascriptAPIPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3366AF9224A039500EF3C32 /* JavascriptAPIPreferences.swift */; };
@@ -263,6 +263,8 @@
 		E374160F20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E374160D20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift */; };
 		E374161120F3C0AB00B4F7F9 /* PrefUtilsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E374161320F3C0AB00B4F7F9 /* PrefUtilsViewController.xib */; };
 		E38372922443634500F57718 /* LanguageTokenField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38372912443634500F57718 /* LanguageTokenField.swift */; };
+		E3839C5724FFF201007D0AB4 /* PluginStandaloneWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3839C5624FFF201007D0AB4 /* PluginStandaloneWindow.swift */; };
+		E3839C5924FFF817007D0AB4 /* JavascriptAPIStandaloneWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3839C5824FFF817007D0AB4 /* JavascriptAPIStandaloneWindow.swift */; };
 		E38B3213214FB9EA000F6D27 /* PrefPluginPermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38B3211214FB9EA000F6D27 /* PrefPluginPermissionView.swift */; };
 		E38B3214214FB9EA000F6D27 /* PrefPluginPermissionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E38B3212214FB9EA000F6D27 /* PrefPluginPermissionView.xib */; };
 		E38B3216214FF700000F6D27 /* EventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38B3215214FF700000F6D27 /* EventController.swift */; };
@@ -1281,10 +1283,10 @@
 		E301EFD921312AB300BC8588 /* KeychainAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainAccess.swift; sourceTree = "<group>"; };
 		E30D2EBC21F5FD2600E1FF0D /* PluginOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginOverlayView.swift; sourceTree = "<group>"; };
 		E322A4F720A8442E00C67D32 /* PlaylistPlaybackProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistPlaybackProgressView.swift; sourceTree = "<group>"; };
+		E32693F824BA138000BF7ADC /* JavascriptPluginSubtitleItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptPluginSubtitleItem.swift; sourceTree = "<group>"; };
 		E32712AE24EAA14500359DAB /* ScreenshootOSDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshootOSDView.swift; sourceTree = "<group>"; };
 		E32712B324F2B8CA00359DAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ScreenshootOSDView.xib; sourceTree = "<group>"; };
 		E32712B624F2B8D200359DAB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
-		E32693F824BA138000BF7ADC /* JavascriptPluginSubtitleItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptPluginSubtitleItem.swift; sourceTree = "<group>"; };
 		E32B157C21BC27B100CDBCEA /* JavascriptAPIMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIMenu.swift; sourceTree = "<group>"; };
 		E32B157E21BE219700CDBCEA /* JavascriptPluginMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptPluginMenuItem.swift; sourceTree = "<group>"; };
 		E3366AF9224A039500EF3C32 /* JavascriptAPIPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIPreferences.swift; sourceTree = "<group>"; };
@@ -1406,6 +1408,8 @@
 		E374161220F3C0AB00B4F7F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PrefUtilsViewController.xib; sourceTree = "<group>"; };
 		E374161520F3C0AD00B4F7F9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PrefUtilsViewController.strings"; sourceTree = "<group>"; };
 		E38372912443634500F57718 /* LanguageTokenField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageTokenField.swift; sourceTree = "<group>"; };
+		E3839C5624FFF201007D0AB4 /* PluginStandaloneWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginStandaloneWindow.swift; sourceTree = "<group>"; };
+		E3839C5824FFF817007D0AB4 /* JavascriptAPIStandaloneWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIStandaloneWindow.swift; sourceTree = "<group>"; };
 		E38B3211214FB9EA000F6D27 /* PrefPluginPermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefPluginPermissionView.swift; sourceTree = "<group>"; };
 		E38B3212214FB9EA000F6D27 /* PrefPluginPermissionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrefPluginPermissionView.xib; sourceTree = "<group>"; };
 		E38B3215214FF700000F6D27 /* EventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventController.swift; sourceTree = "<group>"; };
@@ -2222,6 +2226,7 @@
 				E33FEEB42229A44F00B59711 /* JavascriptAPIUtils.swift */,
 				E3366AF9224A039500EF3C32 /* JavascriptAPIPreferences.swift */,
 				E337D5E5241EF60400B5729A /* JavascriptAPISubtitle.swift */,
+				E3839C5824FFF817007D0AB4 /* JavascriptAPIStandaloneWindow.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -2235,6 +2240,7 @@
 				E32B157E21BE219700CDBCEA /* JavascriptPluginMenuItem.swift */,
 				E337D5E12411B64900B5729A /* JavascriptPolyfill.swift */,
 				E30D2EBC21F5FD2600E1FF0D /* PluginOverlayView.swift */,
+				E3839C5624FFF201007D0AB4 /* PluginStandaloneWindow.swift */,
 				E3965E192487C99900607EB4 /* JavascriptPluginSubtitle.swift */,
 				E32693F824BA138000BF7ADC /* JavascriptPluginSubtitleItem.swift */,
 			);
@@ -2526,6 +2532,7 @@
 				84817C981DBDCE4300CC2279 /* RoundedColorWell.swift in Sources */,
 				E38372922443634500F57718 /* LanguageTokenField.swift in Sources */,
 				8461C5301D462488006E91FF /* VideoTime.swift in Sources */,
+				E3839C5724FFF201007D0AB4 /* PluginStandaloneWindow.swift in Sources */,
 				8492C2881E7721A600CE5825 /* ISO639Helper.swift in Sources */,
 				84F5D4991E44E8AC0060A838 /* KeyBindingDataLoader.swift in Sources */,
 				E34C0C3124934D7B0065A0C6 /* Switch.swift in Sources */,
@@ -2541,6 +2548,7 @@
 				84A0BA9E1D2FAD4000BC8DA1 /* MainWindowController.swift in Sources */,
 				84E48D4E1E0F1090002C7A3F /* FilterWindowController.swift in Sources */,
 				E3F698872120D878005792C9 /* ExtendedColors.swift in Sources */,
+				E3839C5924FFF817007D0AB4 /* JavascriptAPIStandaloneWindow.swift in Sources */,
 				E3366AFA224A039500EF3C32 /* JavascriptAPIPreferences.swift in Sources */,
 				E32B157F21BE219700CDBCEA /* JavascriptPluginMenuItem.swift in Sources */,
 				8476440C1D48F63D004F6DF5 /* OSDMessage.swift in Sources */,

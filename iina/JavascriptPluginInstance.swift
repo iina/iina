@@ -27,6 +27,7 @@ class JavascriptPluginInstance {
       "console": JavascriptAPIConsole(context: ctx, pluginInstance: self),
       "menu": JavascriptAPIMenu(context: ctx, pluginInstance: self),
       "overlay": JavascriptAPIOverlay(context: ctx, pluginInstance: self),
+      "standaloneWindow": JavascriptAPIStandaloneWindow(context: ctx, pluginInstance: self),
       "playlist": JavascriptAPIPlaylist(context: ctx, pluginInstance: self),
       "subtitle": JavascriptAPISubtitle(context: ctx, pluginInstance: self),
       "utils": JavascriptAPIUtils(context: ctx, pluginInstance: self),
@@ -51,6 +52,13 @@ class JavascriptPluginInstance {
     return view
   }()
   var overlayViewLoaded = false
+
+  lazy var standaloneWindow: PluginStandaloneWindow = {
+    let window = PluginStandaloneWindow.create(pluginInstance: self)
+    standaloneWindowCreated = true
+    return window
+  }()
+  var standaloneWindowCreated = false
 
   var menuItems: [JavascriptPluginMenuItem] = []
   var playlistMenuItemBuilder: JSValue?

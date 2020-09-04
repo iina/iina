@@ -61,7 +61,6 @@ class JavascriptPluginInstance {
   var standaloneWindowCreated = false
 
   var menuItems: [JavascriptPluginMenuItem] = []
-  var playlistMenuItemBuilder: JSValue?
 
   lazy var queue: DispatchQueue = {
     DispatchQueue(label: "com.colliderli.iina.plugin.\(plugin.identifier)", qos: .background)

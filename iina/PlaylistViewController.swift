@@ -755,7 +755,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     let filenames = Array(rows)
     let pluginMenuItems = player.plugins.map {
       plugin -> (JavascriptPluginInstance, [JavascriptPluginMenuItem]) in
-      if let value = plugin.playlistMenuItemBuilder?.call(withArguments: [filenames]),
+      if let builder = (plugin.apis["playlist"] as! JavascriptAPIPlaylist).menuItemBuilder?.value,
+        let value = builder.call(withArguments: [filenames]),
         value.isObject,
         let items = value.toObject() as? [JavascriptPluginMenuItem] {
         hasPluginMenuItems = true

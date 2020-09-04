@@ -28,7 +28,7 @@ class JavascriptAPISubtitle: JavascriptAPI, JavascriptAPISubtitleExportable {
   }
 
   func item(_ data: JSValue, _ desc: JSValue?) -> JavascriptPluginSubtitleItem {
-    return JavascriptPluginSubtitleItem(data: data, desc: desc)
+    return JavascriptPluginSubtitleItem(data: data, desc: desc, withOwner: self)
   }
 }
 

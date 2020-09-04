@@ -31,7 +31,7 @@ class JSPluginSub {
     }
 
     override func download() -> Promise<[URL]> {
-      guard let download = item.download else { return .value([]) }
+      guard let download = item.download?.value else { return .value([]) }
       return Promise { resolver in
         let completed: @convention(block) (Any) -> Void = { urls in
           guard let urls = urls as? [String] else {

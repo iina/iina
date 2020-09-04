@@ -20,7 +20,7 @@ import WebKit
 }
 
 class JavascriptAPIStandaloneWindow: JavascriptAPI, JavascriptAPIStandaloneWindowExportable, WKScriptMessageHandler {
-  private var listeners: [String: JSValue] = [:]
+  private var listeners: [String: JSManagedValue] = [:]
 
   override func cleanUp(_ instance: JavascriptPluginInstance) {
     listeners.removeAll()
@@ -60,8 +60,10 @@ class JavascriptAPIStandaloneWindow: JavascriptAPI, JavascriptAPIStandaloneWindo
     if let previousCallback = listeners[name] {
       JSContext.current()!.virtualMachine.removeManagedReference(previousCallback, withOwner: self)
     }
-    JSContext.current()!.virtualMachine.addManagedReference(callback, withOwner: self)
-    listeners[name] = callback
+    let managed = JSManagedValue(value: callback)
+    listeners[name] = managed
+    JSContext.current()!.virtualMachine.addManagedReference(managed, withOwner: self)
+
   }
 
   func setProperty(_ properties: JSValue) {
@@ -101,10 +103,10 @@ class JavascriptAPIStandaloneWindow: JavascriptAPI, JavascriptAPIStandaloneWindo
     guard let dataString = dict[1] as? String,
       let data = dataString.data(using: .utf8),
       let decoded = try? JSONSerialization.jsonObject(with: data) else {
-        callback.call(withArguments: [])
+        callback.value.call(withArguments: [])
       return
     }
 
-    callback.call(withArguments: [JSValue(object: decoded, in: pluginInstance.js) ?? NSNull()])
+    callback.value.call(withArguments: [JSValue(object: decoded, in: pluginInstance.js) ?? NSNull()])
   }
 }

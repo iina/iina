@@ -22,6 +22,8 @@ import JavaScriptCore
 }
 
 class JavascriptAPIPlaylist: JavascriptAPI, JavascriptAPIPlaylistExportable {
+  var menuItemBuilder: JSManagedValue?
+
   private func isPlaying() -> Bool {
     if player.info.isIdle {
       log("Playlist API is only available when playing files.", level: .error)
@@ -128,10 +130,10 @@ class JavascriptAPIPlaylist: JavascriptAPI, JavascriptAPIPlaylistExportable {
   }
 
   func registerMenuItemBuilder(_ builder: JSValue) {
-    if let previousBuilder = pluginInstance.playlistMenuItemBuilder {
-      JSContext.current()!.virtualMachine.removeManagedReference(previousBuilder, withOwner: pluginInstance)
+    if let previousBuilder = menuItemBuilder {
+      JSContext.current()!.virtualMachine.removeManagedReference(previousBuilder, withOwner: self)
     }
-    pluginInstance.playlistMenuItemBuilder = builder
-    JSContext.current()!.virtualMachine.addManagedReference(builder, withOwner: pluginInstance)
+    menuItemBuilder = JSManagedValue(value: builder)
+    JSContext.current()!.virtualMachine.addManagedReference(menuItemBuilder, withOwner: self)
   }
 }

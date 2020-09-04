@@ -23,11 +23,10 @@ import WebKit
 }
 
 class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScriptMessageHandler {
-  private var listeners: [String: JSValue] = [:]
+  private var listeners: [String: JSManagedValue] = [:]
   private var inSimpleMode = false
 
   override func cleanUp(_ instance: JavascriptPluginInstance) {
-    listeners.removeAll()
     guard instance.overlayViewLoaded else { return }
     instance.overlayView.removeFromSuperview()
   }
@@ -121,8 +120,9 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
     if let previousCallback = listeners[name] {
       JSContext.current()!.virtualMachine.removeManagedReference(previousCallback, withOwner: self)
     }
-    JSContext.current()!.virtualMachine.addManagedReference(callback, withOwner: self)
-    listeners[name] = callback
+    let managed = JSManagedValue(value: callback)
+    listeners[name] = managed
+    JSContext.current()!.virtualMachine.addManagedReference(managed, withOwner: self)
   }
 
   func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
@@ -133,11 +133,11 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
     guard let dataString = dict[1] as? String,
       let data = dataString.data(using: .utf8),
       let decoded = try? JSONSerialization.jsonObject(with: data) else {
-        callback.call(withArguments: [])
+        callback.value.call(withArguments: [])
       return
     }
 
-    callback.call(withArguments: [JSValue(object: decoded, in: pluginInstance.js) ?? NSNull()])
+    callback.value.call(withArguments: [JSValue(object: decoded, in: pluginInstance.js) ?? NSNull()])
   }
 }
 

@@ -27,6 +27,7 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
   private var inSimpleMode = false
 
   override func cleanUp(_ instance: JavascriptPluginInstance) {
+    listeners.removeAll()
     guard instance.overlayViewLoaded else { return }
     instance.overlayView.removeFromSuperview()
   }
@@ -104,22 +105,39 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
   func sendMessage(_ name: String, _ data: JSValue) {
     guard pluginInstance.overlayViewLoaded && permitted(to: .displayVideoOverlay) else { return }
     DispatchQueue.main.async {
-      self.pluginInstance.overlayView.evaluateJavaScript("window.iina._emit(`\(name)`, \(data))")
+      let webView = self.pluginInstance.overlayView
+      guard let object = data.toObject(),
+         let data = try? JSONSerialization.data(withJSONObject: object),
+         let dataString = String(data: data, encoding: .utf8) else {
+          webView.evaluateJavaScript("window.iina._emit(`\(name)`)")
+          return
+      }
+      webView.evaluateJavaScript("window.iina._emit(`\(name)`, `\(dataString)`)")
     }
   }
 
   func onMessage(_ name: String, _ callback: JSValue) {
     guard pluginInstance.overlayViewLoaded && permitted(to: .displayVideoOverlay) else { return }
+    if let previousCallback = listeners[name] {
+      JSContext.current()!.virtualMachine.removeManagedReference(previousCallback, withOwner: self)
+    }
     JSContext.current()!.virtualMachine.addManagedReference(callback, withOwner: self)
     listeners[name] = callback
   }
 
   func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-    guard let dict = message.body as? [Any], dict.count == 2 else { return }
-    guard let name = dict[0] as? String else { return }
-    let data = dict[1]
-    guard let callback = listeners[name] else { return }
-    callback.call(withArguments: [JSValue(object: data, in: pluginInstance.js)!])
+    guard let dict = message.body as? [Any], dict.count == 2,
+      let name = dict[0] as? String,
+      let callback = listeners[name] else { return }
+
+    guard let dataString = dict[1] as? String,
+      let data = dataString.data(using: .utf8),
+      let decoded = try? JSONSerialization.jsonObject(with: data) else {
+        callback.call(withArguments: [])
+      return
+    }
+
+    callback.call(withArguments: [JSValue(object: decoded, in: pluginInstance.js) ?? NSNull()])
   }
 }
 

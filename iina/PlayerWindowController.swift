@@ -153,7 +153,6 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
 
   override func windowDidLoad() {
     super.windowDidLoad()
-    loaded = true
     
     guard let window = window else { return }
     
@@ -190,6 +189,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         self.player.pause()
       }
     })
+    
+    loaded = true
   }
 
   deinit {

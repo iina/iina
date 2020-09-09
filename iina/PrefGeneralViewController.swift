@@ -39,8 +39,8 @@ class PrefGeneralViewController: PreferenceViewController, PreferenceWindowEmbed
     super.viewDidLoad()
     
     if #available(macOS 10.16, *) {
-      afterOpenActionBox.heightAnchor.constraint(equalToConstant: 36).isActive = true
-      pauseActionBox.heightAnchor.constraint(equalToConstant: 136).isActive = true
+      afterOpenActionBox.heightAnchor.constraint(equalToConstant: 42).isActive = true
+      pauseActionBox.heightAnchor.constraint(equalToConstant: 146).isActive = true
     } else {
       afterOpenActionBox.heightAnchor.constraint(equalToConstant: 34).isActive = true
       pauseActionBox.heightAnchor.constraint(equalToConstant: 126).isActive = true

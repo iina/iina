@@ -366,7 +366,7 @@ extension MainMenuActionHandler {
       return
     }
     let subURL = URL(fileURLWithPath: path)
-    let subFileName = subURL.lastPathComponent
+    let subFileName = subURL.lastPathComponent.replacingOccurrences(of: #"^\[\d+\]"#, with: "", options: .regularExpression)
     let destURL = currURL.deletingLastPathComponent().appendingPathComponent(subFileName, isDirectory: false)
     do {
       try FileManager.default.copyItem(at: subURL, to: destURL)

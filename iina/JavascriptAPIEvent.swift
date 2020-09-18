@@ -58,7 +58,7 @@ class JavascriptAPIEvent: JavascriptAPI, JavascriptAPIEventExportable {
 }
 
 class JavascriptAPIEventCallback: EventCallable {
-  private var callback: JSManagedValue!  // should we use `weak` here?
+  private var callback: JSManagedValue!
 
   init(_ callback: JSValue) {
     self.callback = JSManagedValue(value: callback)
@@ -66,7 +66,7 @@ class JavascriptAPIEventCallback: EventCallable {
   }
 
   func call(withArguments args: [Any]) {
-    callback.value.call(withArguments: args.map { arg in
+    callback?.value.call(withArguments: args.map { arg in
       if let rect = arg as? CGRect {
         return JSValue(rect: rect, in: callback.value.context)!
       } else {

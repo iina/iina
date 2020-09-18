@@ -152,7 +152,7 @@ fileprivate let simpleModeHTMLString = """
     <style>
     body {
         font-size: 13px;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
         color: white;
         text-shadow: 0 1px 0 black, 0 -1px 0 black, -1px 0 0 black, 1px 0 0 black;
     }

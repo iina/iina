@@ -15,8 +15,15 @@ class JavascriptPluginInstance {
 
   lazy var js: JSContext = {
     let ctx = JSContext()!
+    ctx.name = "Main — \(self.plugin.name)"
     ctx.exceptionHandler = { [unowned self] context, exception in
-      Logger.log(exception?.toString() ?? "Unknown exception", level: .error, subsystem: self.subsystem)
+      let message = exception?.toString() ?? "Unknown exception"
+      let stack = exception?.objectForKeyedSubscript("stack")?.toString() ?? "???"
+      Logger.log(
+        "\(message)\n---Stack Trace---\n\(stack)\n-----------------",
+        level: .error,
+        subsystem: self.subsystem
+      )
     }
 
     apis = [
@@ -68,7 +75,10 @@ class JavascriptPluginInstance {
 
   lazy var subsystem: Logger.Subsystem = .init(rawValue: "JS:\(plugin.name)")
 
-  var currentFile: URL?
+  var currentFile: URL? {
+    currentFileStack.last
+  }
+  private var currentFileStack: [URL] = []
 
   init?(player: PlayerCore, plugin: JavascriptPlugin) {
     self.player = player
@@ -96,7 +106,7 @@ class JavascriptPluginInstance {
   }
 
   func evaluateFile(_ url: URL, asModule: Bool = false) -> JSValue! {
-    currentFile = url
+    currentFileStack.append(url)
     guard let content = try? String(contentsOf: url) else {
       Logger.log("Cannot read script \(url.path)", level: .error, subsystem: subsystem)
       return JSValue(nullIn: js)
@@ -117,7 +127,9 @@ class JavascriptPluginInstance {
       \(content)
       """
     }
-    return js.evaluateScript(script, withSourceURL: url)
+    let result = js.evaluateScript(script, withSourceURL: url)
+    currentFileStack.removeLast()
+    return result
   }
 
   private func exceptionHandler(_ context: JSContext?, _ exception: JSValue?) {

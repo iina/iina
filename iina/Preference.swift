@@ -91,6 +91,7 @@ struct Preference {
     static let screenshotIncludeSubtitle = Key("screenShotIncludeSubtitle")
     static let screenshotFormat = Key("screenShotFormat")
     static let screenshotTemplate = Key("screenShotTemplate")
+    static let screenshotShowPreview = Key("screenshotShowPreview")
 
     static let playlistAutoAdd = Key("playlistAutoAdd")
     static let playlistAutoPlayNext = Key("playlistAutoPlayNext")
@@ -808,6 +809,7 @@ struct Preference {
     .screenshotIncludeSubtitle: true,
     .screenshotFormat: ScreenshotFormat.png.rawValue,
     .screenshotTemplate: "%F-%n",
+    .screenshotShowPreview: true,
 
     .watchProperties: [],
     .savedVideoFilters: [],

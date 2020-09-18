@@ -546,6 +546,11 @@ class PlayerCore: NSObject {
       NSPasteboard.general.clearContents()
       NSPasteboard.general.writeObjects([image])
     }
+    guard Preference.bool(for: .screenshotShowPreview) else {
+      self.sendOSD(.screenshot)
+      return
+    }
+
     DispatchQueue.main.async {
       let osdView = ScreenshootOSDView()
       osdView.setImage(image,

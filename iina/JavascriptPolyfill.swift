@@ -49,19 +49,19 @@ class JavascriptPolyfill {
 
   func register(inContext context: JSContext) {
     let setInterval: @convention(block) (JSValue, Double) -> String = { [unowned self] (callback, ms) in
-        return self.createTimer(callback: callback, ms: ms, repeats: true)
+      return self.createTimer(callback: callback, ms: ms, repeats: true)
     }
 
     let setTimeout: @convention(block) (JSValue, Double) -> String = { [unowned self] (callback, ms) in
-        return self.createTimer(callback: callback, ms: ms, repeats: false)
+      return self.createTimer(callback: callback, ms: ms, repeats: false)
     }
 
     let clearInterval: @convention(block) (String) -> () = { [unowned self] identifier in
-        self.removeTimer(identifier: identifier)
+      self.removeTimer(identifier: identifier)
     }
 
     let clearTimeout: @convention(block) (String) -> () = { [unowned self] identifier in
-        self.removeTimer(identifier: identifier)
+      self.removeTimer(identifier: identifier)
     }
 
     let require: @convention(block) (String) -> Any? = { [unowned self] path in
@@ -71,13 +71,34 @@ class JavascriptPolyfill {
       guard requiredURL.absoluteString.hasPrefix(instance.plugin.root.absoluteString) else {
         return nil
       }
-      return instance.evaluateFile(requiredURL, asModule: true)
+      return [
+        "path": requiredURL.path,
+        "module": instance.evaluateFile(requiredURL, asModule: true)
+      ] as [String: Any?]
     }
 
     context.setObject(clearInterval, forKeyedSubscript: "clearInterval" as NSString)
     context.setObject(clearTimeout, forKeyedSubscript: "clearTimeout" as NSString)
     context.setObject(setInterval, forKeyedSubscript: "setInterval" as NSString)
     context.setObject(setTimeout, forKeyedSubscript: "setTimeout" as NSString)
-    context.setObject(require, forKeyedSubscript: "require" as NSString)
+    context.setObject(require, forKeyedSubscript: "__require__" as NSString)
+    context.evaluateScript(requirePolyfill)
   }
 }
+
+fileprivate let requirePolyfill = """
+require = (() => {
+  const cache = {};
+  return function (file) {
+    if (cache[file]) {
+      return cache[file];
+    }
+    const result = __require__(file);
+    if (result) {
+      cache[result.path] = result.module;
+      return result.module;
+    }
+    return undefined;
+  };
+})();
+"""

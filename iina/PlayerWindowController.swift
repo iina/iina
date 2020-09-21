@@ -407,7 +407,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   func windowDidBecomeMain(_ notification: Notification) {
     PlayerCore.lastActive = player
     if #available(macOS 10.13, *), RemoteCommandController.useSystemMediaControl {
-      NowPlayingInfoManager.updateState(player.info.isPaused ? .paused : .playing)
+      NowPlayingInfoManager.updateInfo(withTitle: true)
     }
     NotificationCenter.default.post(name: .iinaMainWindowChanged, object: nil)
   }

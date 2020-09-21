@@ -1046,6 +1046,11 @@ class PlayerCore: NSObject {
       URL(string: path.addingPercentEncoding(withAllowedCharacters: .urlAllowed) ?? path) :
       URL(fileURLWithPath: path)
     info.isNetworkResource = !info.currentURL!.isFileURL
+
+    if #available(OSX 10.13, *), RemoteCommandController.useSystemMediaControl {
+      NowPlayingInfoManager.updateInfo(withTitle: true)
+    }
+
     // Auto load
     backgroundQueueTicket += 1
     let shouldAutoLoadFiles = info.shouldAutoLoadFiles
@@ -1130,6 +1135,11 @@ class PlayerCore: NSObject {
     Logger.log("Playback restarted", subsystem: subsystem)
     reloadSavedIINAfilters()
     mainWindow.videoView.videoLayer.draw(forced: true)
+
+    if #available(OSX 10.13, *), RemoteCommandController.useSystemMediaControl {
+      NowPlayingInfoManager.updateInfo()
+    }
+
 
     DispatchQueue.main.async {
       Timer.scheduledTimer(timeInterval: TimeInterval(0.2), target: self, selector: #selector(self.reEnableOSDAfterFileLoading), userInfo: nil, repeats: false)
@@ -1252,11 +1262,6 @@ class PlayerCore: NSObject {
   }
 
   @objc func syncUITime() {
-    if #available(macOS 10.13, *) {
-      if RemoteCommandController.useSystemMediaControl {
-        NowPlayingInfoManager.updateInfo()
-      }
-    }
     if info.isNetworkResource {
       syncUI(.timeAndCache)
     } else {
@@ -1715,39 +1720,41 @@ extension PlayerCore: FFmpegControllerDelegate {
 
 @available (macOS 10.13, *)
 class NowPlayingInfoManager {
-  static let info = MPNowPlayingInfoCenter.default()
+  static let center = MPNowPlayingInfoCenter.default()
+  static private var info = [String: Any]()
 
-  static func updateInfo() {
-    var nowPlayingInfo = [String: Any]()
+  static func updateInfo(withTitle: Bool = false) {
     let activePlayer = PlayerCore.lastActive
 
-    if activePlayer.currentMediaIsAudio == .isAudio {
-      nowPlayingInfo[MPMediaItemPropertyMediaType] = MPNowPlayingInfoMediaType.audio.rawValue
-      let (title, album, artist) = activePlayer.getMusicMetadata()
-      nowPlayingInfo[MPMediaItemPropertyTitle] = title
-      nowPlayingInfo[MPMediaItemPropertyAlbumTitle] = album
-      nowPlayingInfo[MPMediaItemPropertyArtist] = artist
-    } else {
-      nowPlayingInfo[MPMediaItemPropertyMediaType] = MPNowPlayingInfoMediaType.video.rawValue
-      nowPlayingInfo[MPMediaItemPropertyTitle] = activePlayer.getMediaTitle(withExtension: false)
+    if withTitle {
+      if activePlayer.currentMediaIsAudio == .isAudio {
+        info[MPMediaItemPropertyMediaType] = MPNowPlayingInfoMediaType.audio.rawValue
+        let (title, album, artist) = activePlayer.getMusicMetadata()
+        info[MPMediaItemPropertyTitle] = title
+        info[MPMediaItemPropertyAlbumTitle] = album
+        info[MPMediaItemPropertyArtist] = artist
+      } else {
+        info[MPMediaItemPropertyMediaType] = MPNowPlayingInfoMediaType.video.rawValue
+        info[MPMediaItemPropertyTitle] = activePlayer.getMediaTitle(withExtension: false)
+      }
+      print("### write title")
     }
 
     let duration = PlayerCore.lastActive.info.videoDuration?.second ?? 0
-    nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = duration
-    nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = activePlayer.info.videoPosition?.second ?? 0
-    nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = activePlayer.info.playSpeed
-    nowPlayingInfo[MPNowPlayingInfoPropertyDefaultPlaybackRate] = 1
-    /*
-    nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackQueueCount] = activePlayer.mpv.getInt(MPVProperty.playlistCount)
-    nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackQueueIndex] = activePlayer.mpv.getInt(MPVProperty.playlistPos)
-    nowPlayingInfo[MPNowPlayingInfoPropertyChapterCount] = activePlayer.mpv.getInt(MPVProperty.chapterListCount)
-    nowPlayingInfo[MPNowPlayingInfoPropertyChapterNumber] = activePlayer.mpv.getInt(MPVProperty.chapter)
-    */
-    info.nowPlayingInfo = nowPlayingInfo
+    let time = activePlayer.info.videoPosition?.second ?? 0
+    let speed = activePlayer.info.playSpeed
+
+    info[MPMediaItemPropertyPlaybackDuration] = duration
+    info[MPNowPlayingInfoPropertyElapsedPlaybackTime] = time
+    info[MPNowPlayingInfoPropertyPlaybackRate] = speed
+    info[MPNowPlayingInfoPropertyDefaultPlaybackRate] = 1
+
+    center.nowPlayingInfo = info
+    NSLog("%@", "### update")
   }
 
   static func updateState(_ state: MPNowPlayingPlaybackState) {
-    info.playbackState = state
+    center.playbackState = state
+    updateInfo()
   }
-
 }

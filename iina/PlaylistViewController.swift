@@ -484,18 +484,16 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         let displayStr: String = NSString(string: filename).deletingPathExtension
 
         func getCachedMetadata() -> (artist: String, title: String)? {
-          if !Preference.bool(for: .playlistShowMetadata) { return nil }
-          guard let title = info.cachedMetadata[item.filename]?.title, let artist = info.cachedMetadata[item.filename]?.artist else { return nil }
+          guard Preference.bool(for: .playlistShowMetadata) else { return nil }
           if Preference.bool(for: .playlistShowMetadataInMusicMode) && !player.isInMiniPlayer {
             return nil
           }
+          guard let metadata = info.cachedMetadata[item.filename] else { return nil }
+          guard let artist = metadata.artist, let title = metadata.title else { return nil }
           return (artist, title)
         }
 
-        if let (artist, title) = getCachedMetadata() {
-          cellView.setTitle(title)
-          cellView.setAdditionalInfo(artist)
-        } else if let prefix = player.info.currentVideosInfo.first(where: { $0.path == item.filename })?.prefix,
+        if let prefix = player.info.currentVideosInfo.first(where: { $0.path == item.filename })?.prefix,
           !prefix.isEmpty,
           prefix.count <= displayStr.count,  // check whether prefix length > filename length
           prefix.count >= PrefixMinLength,
@@ -509,6 +507,12 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         cellView.durationLabel.font = NSFont.monospacedDigitSystemFont(ofSize: NSFont.smallSystemFontSize, weight: .regular)
         cellView.durationLabel.stringValue = ""
         player.playlistQueue.async {
+          if let (artist, title) = getCachedMetadata() {
+            DispatchQueue.main.async {
+              cellView.setTitle(title)
+              cellView.setAdditionalInfo(artist)
+            }
+          }
           if let cached = self.player.info.cachedVideoDurationAndProgress[item.filename],
             let duration = cached.duration {
             // if it's cached

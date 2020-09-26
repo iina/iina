@@ -55,6 +55,18 @@ class JavascriptAPI: NSObject {
       return (expandPath(path, byReplacing: "data", with: pluginInstance.plugin.dataURL), true)
     }
 
+    let trackType: MPVTrack.TrackType? =
+      path.hasPrefix("@video/") ? .video :
+      path.hasPrefix("@audio/") ? .audio :
+      path.hasPrefix("@sub") ? .sub : nil
+    if let trackType = trackType {
+      if let path = trackPath(path, type: trackType) {
+        return (path, false)
+      } else {
+        return (nil, false)
+      }
+    }
+
     return whenPermitted(to: .accessFileSystem) {
       var absPath = path
       if path.hasPrefix("@current/") {
@@ -70,6 +82,20 @@ class JavascriptAPI: NSObject {
       }
       return (absPath, false)
     }!
+  }
+
+  private func trackPath(_ path: String, type: MPVTrack.TrackType) -> String? {
+    guard let strId = path.split(separator: "/", maxSplits: 2).last, let id = Int(strId) else {
+      throwError(withMessage: "The path \(path) is invalid")
+      return nil
+    }
+
+    let tracks = player.info.trackList(type)
+    if let track = tracks.first(where: { $0.id == id }), let fname = track.externalFilename {
+      return fname
+    }
+    throwError(withMessage: "Cannot find the file path of track \(path). Perhaps it's an internal stream?")
+    return nil
   }
 
   private func expandPath(_ path: String, byReplacing symbol: String, with url: URL, validate: Bool = true) -> String? {

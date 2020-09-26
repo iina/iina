@@ -38,6 +38,7 @@ class JavascriptPluginInstance {
       "playlist": JavascriptAPIPlaylist(context: ctx, pluginInstance: self),
       "subtitle": JavascriptAPISubtitle(context: ctx, pluginInstance: self),
       "utils": JavascriptAPIUtils(context: ctx, pluginInstance: self),
+      "file": JavascriptAPIFile(context: ctx, pluginInstance: self),
       "preferences": JavascriptAPIPreferences(context: ctx, pluginInstance: self)
     ]
 

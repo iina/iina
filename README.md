@@ -20,10 +20,10 @@
 * Designed with modern versions of macOS (10.11+) in mind
 * All the features you need for video and music: subtitles, playlists, chapters…and much, much more!
 * Force Touch, picture-in-picture and advanced Touch Bar support
-* Customizable user interface including multiple color schemes and on screen controller (OSC) layout positioning
+* Customizable user-interface including multiple color schemes and on screen controller (OSC) layout positioning
 * Standalone Music Mode designed for audio files
 * Video thumbnails
-* Online subtitle searching and intelligent local subtitle matching
+* Online subtitles searching and intelligent local subtitles matching
 * Unlimited playback history
 * Convenient and interactive settings for video/audio filters
 * Fully customizable keyboard, mouse, trackpad, and gesture controls

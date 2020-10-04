@@ -700,7 +700,7 @@ class MPVController: NSObject {
     player.fileLoaded()
     fileLoaded = true
     // mpvResume()
-    if !Preference.bool(for: .pauseWhenOpen) {
+    if !(player.info.justOpenedFile && Preference.bool(for: .pauseWhenOpen)) {
       setFlag(MPVOption.PlaybackControl.pause, false)
     }
     player.syncUI(.playlist)

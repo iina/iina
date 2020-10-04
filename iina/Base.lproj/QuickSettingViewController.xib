@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -25,7 +25,7 @@
                 <outlet property="audioTabBtn" destination="3Fk-ey-FhK" id="I1P-Dg-gtv"/>
                 <outlet property="audioTableView" destination="FLg-2m-Zaq" id="rId-Io-Y2B"/>
                 <outlet property="brightnessSlider" destination="sBU-NZ-sp3" id="IWR-1I-CcR"/>
-                <outlet property="buttonTopConstraint" destination="Hr5-xV-fyi" id="3td-5M-6bs"/>
+                <outlet property="buttonTopConstraint" destination="fh9-0T-pEX" id="Jx2-9m-OZQ"/>
                 <outlet property="contrastSlider" destination="0Ww-YT-a8e" id="wNQ-VI-uMd"/>
                 <outlet property="cropSegment" destination="kUi-hW-BR6" id="fsg-We-n2K"/>
                 <outlet property="customAspectTextField" destination="XAI-y0-tcy" id="j96-rd-E5w"/>
@@ -69,39 +69,72 @@
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY" customClass="QuickSettingView" customModule="IINA" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="360" height="871"/>
             <subviews>
-                <button verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="3Fk-ey-FhK">
-                    <rect key="frame" x="120" y="823" width="120" height="48"/>
+                <stackView distribution="equalSpacing" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="250" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dNi-Ib-2vd">
+                    <rect key="frame" x="0.0" y="823" width="360" height="48"/>
+                    <subviews>
+                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="129-cv-qAR">
+                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="48"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="48" id="EkR-fq-Y2z"/>
+                                <constraint firstAttribute="width" id="e8p-hm-lf2"/>
+                            </constraints>
+                        </customView>
+                        <button verticalHuggingPriority="750" ambiguous="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ma8-6g-tVw">
+                            <rect key="frame" x="34" y="15" width="64" height="18"/>
+                            <buttonCell key="cell" type="square" title="VIDEO" bezelStyle="shadowlessSquare" image="tab_video" imagePosition="leading" alignment="center" imageScaling="proportionallyDown" inset="2" id="lQt-I0-jHO">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="systemBold"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="tabBtnAction:" target="-2" id="T17-c3-4hp"/>
+                            </connections>
+                        </button>
+                        <button verticalHuggingPriority="750" ambiguous="YES" tag="1" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Fk-ey-FhK">
+                            <rect key="frame" x="132" y="15" width="65" height="18"/>
+                            <buttonCell key="cell" type="square" title="AUDIO" bezelStyle="shadowlessSquare" image="tab_audio" imagePosition="leading" alignment="center" imageScaling="proportionallyDown" inset="2" id="cpm-5o-a2c">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="systemBold"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="tabBtnAction:" target="-2" id="mLi-M9-gbN"/>
+                            </connections>
+                        </button>
+                        <button verticalHuggingPriority="750" ambiguous="YES" tag="2" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rH3-pU-mFc">
+                            <rect key="frame" x="231" y="15" width="95" height="18"/>
+                            <buttonCell key="cell" type="square" title="SUBTITLES" bezelStyle="shadowlessSquare" image="tab_sub" imagePosition="leading" alignment="center" imageScaling="proportionallyDown" inset="2" id="NxO-to-jcI">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="systemBold"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="tabBtnAction:" target="-2" id="IEz-WA-p4g"/>
+                            </connections>
+                        </button>
+                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="Bls-kU-Nau">
+                            <rect key="frame" x="360" y="0.0" width="0.0" height="48"/>
+                            <constraints>
+                                <constraint firstAttribute="width" id="9yd-MS-Ols"/>
+                                <constraint firstAttribute="height" constant="48" id="EA3-kz-2Pz"/>
+                            </constraints>
+                        </customView>
+                    </subviews>
                     <constraints>
-                        <constraint firstAttribute="height" constant="48" id="KiG-NF-Lc1"/>
+                        <constraint firstAttribute="height" constant="48" id="Ogo-ym-5Mm"/>
                     </constraints>
-                    <buttonCell key="cell" type="square" title="AUDIO" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="cpm-5o-a2c">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="tabBtnAction:" target="-2" id="mLi-M9-gbN"/>
-                    </connections>
-                </button>
-                <button verticalHuggingPriority="750" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="rH3-pU-mFc">
-                    <rect key="frame" x="240" y="823" width="120" height="48"/>
-                    <buttonCell key="cell" type="square" title="SUBTITLES" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="NxO-to-jcI">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="tabBtnAction:" target="-2" id="IEz-WA-p4g"/>
-                    </connections>
-                </button>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ma8-6g-tVw">
-                    <rect key="frame" x="0.0" y="823" width="120" height="48"/>
-                    <buttonCell key="cell" type="square" title="VIDEO" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="lQt-I0-jHO">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="systemBold"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="tabBtnAction:" target="-2" id="T17-c3-4hp"/>
-                    </connections>
-                </button>
+                    <visibilityPriorities>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                    </visibilityPriorities>
+                    <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                    </customSpacing>
+                </stackView>
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="L78-cf-BxB">
                     <rect key="frame" x="0.0" y="820" width="360" height="5"/>
                 </box>
@@ -891,7 +924,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="360" height="823"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="oVx-Sp-Lhl">
                                             <rect key="frame" x="0.0" y="0.0" width="360" height="823"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="NZU-RD-Dm3" customClass="FlippedView" customModule="IINA" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="315" width="360" height="508"/>
@@ -911,7 +944,7 @@
                                                                     <rect key="frame" x="0.0" y="388" width="360" height="76"/>
                                                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="vgF-KN-yHf">
                                                                         <rect key="frame" x="0.0" y="0.0" width="360" height="76"/>
-                                                                        <autoresizingMask key="autoresizingMask"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="FLg-2m-Zaq">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="360" height="76"/>
@@ -2230,25 +2263,17 @@
                 </tabView>
             </subviews>
             <constraints>
-                <constraint firstItem="Ma8-6g-tVw" firstAttribute="bottom" secondItem="3Fk-ey-FhK" secondAttribute="bottom" id="1tK-Qi-N8k"/>
+                <constraint firstItem="dNi-Ib-2vd" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="DJ3-t6-bea"/>
                 <constraint firstAttribute="trailing" secondItem="udA-m2-eJb" secondAttribute="trailing" id="De7-9o-KKe"/>
-                <constraint firstItem="3Fk-ey-FhK" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="Hr5-xV-fyi"/>
-                <constraint firstItem="3Fk-ey-FhK" firstAttribute="leading" secondItem="Ma8-6g-tVw" secondAttribute="trailing" id="J1s-kg-vUK"/>
-                <constraint firstAttribute="trailing" secondItem="rH3-pU-mFc" secondAttribute="trailing" id="Juy-hk-cWO"/>
                 <constraint firstAttribute="width" constant="360" id="L4m-6z-09b"/>
                 <constraint firstAttribute="bottom" secondItem="udA-m2-eJb" secondAttribute="bottom" id="SOP-Fn-kKf"/>
-                <constraint firstItem="Ma8-6g-tVw" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="UKz-ZN-1l5"/>
-                <constraint firstItem="rH3-pU-mFc" firstAttribute="top" secondItem="3Fk-ey-FhK" secondAttribute="top" id="Y1q-en-gXQ"/>
-                <constraint firstItem="rH3-pU-mFc" firstAttribute="bottom" secondItem="3Fk-ey-FhK" secondAttribute="bottom" id="bKp-XE-ASG"/>
-                <constraint firstItem="Ma8-6g-tVw" firstAttribute="top" secondItem="3Fk-ey-FhK" secondAttribute="top" id="eu1-hr-eBl"/>
+                <constraint firstAttribute="trailing" secondItem="dNi-Ib-2vd" secondAttribute="trailing" id="ahR-QL-lPo"/>
+                <constraint firstItem="dNi-Ib-2vd" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="fh9-0T-pEX"/>
                 <constraint firstAttribute="trailing" secondItem="L78-cf-BxB" secondAttribute="trailing" id="kAA-wl-rsA"/>
                 <constraint firstItem="L78-cf-BxB" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="kgD-50-iI3"/>
-                <constraint firstItem="3Fk-ey-FhK" firstAttribute="width" secondItem="rH3-pU-mFc" secondAttribute="width" id="nmD-Bt-xSi"/>
-                <constraint firstItem="rH3-pU-mFc" firstAttribute="leading" secondItem="3Fk-ey-FhK" secondAttribute="trailing" id="oCf-g8-LFu"/>
+                <constraint firstItem="L78-cf-BxB" firstAttribute="top" secondItem="dNi-Ib-2vd" secondAttribute="bottom" id="rjI-Pa-q5L"/>
                 <constraint firstItem="udA-m2-eJb" firstAttribute="top" secondItem="L78-cf-BxB" secondAttribute="bottom" constant="-1" id="t0K-N5-1t2"/>
                 <constraint firstItem="udA-m2-eJb" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="tyn-5q-xAw"/>
-                <constraint firstItem="Ma8-6g-tVw" firstAttribute="width" secondItem="3Fk-ey-FhK" secondAttribute="width" id="umh-gV-DAx"/>
-                <constraint firstItem="udA-m2-eJb" firstAttribute="top" secondItem="3Fk-ey-FhK" secondAttribute="bottom" id="x5L-61-Rnm"/>
             </constraints>
             <point key="canvasLocation" x="102" y="465.5"/>
         </customView>
@@ -2261,8 +2286,19 @@
         </popover>
         <userDefaultsController representsSharedInstance="YES" id="CE5-Ex-Oo6"/>
     </objects>
+    <designables>
+        <designable name="0pq-Hh-3hb">
+            <size key="intrinsicContentSize" width="0.0" height="22"/>
+        </designable>
+        <designable name="2FQ-VQ-dTd">
+            <size key="intrinsicContentSize" width="0.0" height="22"/>
+        </designable>
+    </designables>
     <resources>
         <image name="NSRefreshFreestandingTemplate" width="14" height="14"/>
+        <image name="tab_audio" width="18" height="18"/>
+        <image name="tab_sub" width="18" height="18"/>
+        <image name="tab_video" width="18" height="18"/>
         <image name="triangle-down" width="10" height="14"/>
     </resources>
 </document>

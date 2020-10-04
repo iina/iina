@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -70,22 +70,22 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" tabbingMode="disallowed" id="F0z-JX-Cv5" customClass="MainWindow" customModule="IINA" customModuleProvider="target">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <rect key="contentRect" x="196" y="240" width="640" height="400"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="640" height="400"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <visualEffectView hidden="YES" wantsLayer="YES" blendingMode="withinWindow" material="popover" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="Qbi-jx-9pO">
-                        <rect key="frame" x="441" y="303" width="191" height="67"/>
+                    <visualEffectView hidden="YES" wantsLayer="YES" horizontalCompressionResistancePriority="250" blendingMode="withinWindow" material="popover" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="Qbi-jx-9pO">
+                        <rect key="frame" x="477" y="303" width="155" height="67"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HJv-RK-JT8">
-                                <rect key="frame" x="16" y="4" width="159" height="30"/>
+                                <rect key="frame" x="16" y="4" width="123" height="30"/>
                                 <subviews>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="P1S-9b-Nzw">
-                                        <rect key="frame" x="0.0" y="0.0" width="92" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="56" height="30"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4mb-jy-Y1w">
-                                                <rect key="frame" x="40" y="6" width="54" height="21"/>
+                                                <rect key="frame" x="4" y="6" width="54" height="21"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="99:99" id="IyU-0H-hyV">
                                                     <font key="font" metaFont="system" size="18"/>
                                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -95,18 +95,19 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="5DG-K5-hY5"/>
+                                            <constraint firstItem="4mb-jy-Y1w" firstAttribute="leading" secondItem="P1S-9b-Nzw" secondAttribute="leading" constant="6" id="uIG-HT-ytR"/>
                                             <constraint firstItem="4mb-jy-Y1w" firstAttribute="centerY" secondItem="P1S-9b-Nzw" secondAttribute="centerY" constant="-1" id="upo-MA-6Us"/>
                                             <constraint firstAttribute="trailing" secondItem="4mb-jy-Y1w" secondAttribute="trailing" id="zV1-95-4CW"/>
                                         </constraints>
                                     </customView>
                                     <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="2BS-K2-xJO">
-                                        <rect key="frame" x="98" y="9" width="5" height="12"/>
+                                        <rect key="frame" x="62" y="9" width="5" height="12"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="12" id="2HL-LZ-uj7"/>
                                         </constraints>
                                     </box>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Ybl-06-ksj">
-                                        <rect key="frame" x="109" y="0.0" width="50" height="30"/>
+                                        <rect key="frame" x="73" y="0.0" width="50" height="30"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1XY-X2-FcE">
                                                 <rect key="frame" x="0.0" y="8" width="42" height="16"/>
@@ -147,8 +148,8 @@
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3uh-OF-zy6">
-                                <rect key="frame" x="14" y="38" width="163" height="21"/>
+                            <textField horizontalHuggingPriority="200" verticalHuggingPriority="750" horizontalCompressionResistancePriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3uh-OF-zy6">
+                                <rect key="frame" x="14" y="38" width="127" height="21"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Label" id="DVg-p3-w5Q">
                                     <font key="font" metaFont="system" size="18"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -160,7 +161,7 @@
                             </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="HJv-RK-JT8" firstAttribute="leading" secondItem="Qbi-jx-9pO" secondAttribute="leading" constant="16" id="4JZ-kz-GjJ"/>
+                            <constraint firstItem="HJv-RK-JT8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Qbi-jx-9pO" secondAttribute="leading" constant="16" id="4JZ-kz-GjJ"/>
                             <constraint firstItem="3uh-OF-zy6" firstAttribute="top" secondItem="Qbi-jx-9pO" secondAttribute="top" constant="8" id="8rt-mu-Log"/>
                             <constraint firstAttribute="trailing" secondItem="3uh-OF-zy6" secondAttribute="trailing" constant="16" id="LfP-Gv-tbK"/>
                             <constraint firstItem="3uh-OF-zy6" firstAttribute="leading" secondItem="Qbi-jx-9pO" secondAttribute="leading" constant="16" id="Nip-Zi-DhD"/>

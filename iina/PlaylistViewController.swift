@@ -262,8 +262,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   @discardableResult
   func pasteFromPasteboard(_ tableView: NSTableView, row: Int, from pboard: NSPasteboard) -> Bool {
     if let paths = pboard.propertyList(forType: .nsFilenames) as? [String] {
-      let playableFiles = Utility.resolveURLs(player.getPlayableFiles(in: paths.map{
-        URL(string: $0) ?? URL(fileURLWithPath: $0)
+      let playableFiles = Utility.resolveURLs(player.getPlayableFiles(in: paths.map {
+        $0.hasPrefix("/") ? URL(fileURLWithPath: $0) : URL(string: $0)!
       }))
       if playableFiles.count == 0 {
         return false

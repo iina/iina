@@ -19,6 +19,8 @@ fileprivate class Token: NSObject {
 }
 
 class LanguageTokenField: NSTokenField {
+  private var layoutManager: NSLayoutManager?
+
   override func awakeFromNib() {
     super.awakeFromNib()
     self.delegate = self
@@ -39,6 +41,22 @@ class LanguageTokenField: NSTokenField {
         return ""
       }).joined(separator: ",") ?? ""
     }
+  }
+
+  func controlTextDidChange(_ obj: Notification) {
+    guard let layoutManager = layoutManager else { return }
+    let attachmentChar = Character(UnicodeScalar(NSTextAttachment.character)!)
+    let finished = layoutManager.attributedString().string.split(separator: attachmentChar).count == 0
+    if finished, let target = target, let action = action {
+      target.performSelector(onMainThread: action, with: self, waitUntilDone: false)
+    }
+  }
+
+  override func textShouldBeginEditing(_ textObject: NSText) -> Bool {
+    if let view = textObject as? NSTextView {
+      layoutManager = view.layoutManager
+    }
+    return true
   }
 }
 

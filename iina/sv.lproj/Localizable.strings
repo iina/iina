@@ -25,10 +25,10 @@
 "main.buffering_indicator" = "Buffrar… %d%%";
 "main.opening_stream" = "Öppnar ström…";
 "osc.precision" = "Precision";
-"osc.1s" = "1 second";
-"osc.100ms" = "100 milliseconds";
-"osc.10ms" = "10 milliseconds";
-"osc.1ms" = "1 millisecond";
+"osc.1s" = "1 sekund";
+"osc.100ms" = "100 millisekunder";
+"osc.10ms" = "10 millisekunder";
+"osc.1ms" = "1 millisekund";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Förval";

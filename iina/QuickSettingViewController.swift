@@ -14,6 +14,12 @@ fileprivate extension QuickSettingViewController.TabViewType {
   }
 }
 
+@available(OSX 10.14, *)
+fileprivate extension NSColor {
+  static let sidebarTabTint: NSColor = NSColor(named: .sidebarTabTint)!
+  static let sidebarTabTintActive: NSColor = NSColor(named: .sidebarTabTintActive)!
+}
+
 class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, SidebarViewController {
 
   override var nibName: NSNib.Name {
@@ -379,7 +385,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   private func updateTabActiveStatus(withCurrentButton sender: NSButton) {
     [videoTabBtn, audioTabBtn, subTabBtn].forEach { btn in
       if #available(OSX 10.14, *) {
-        btn!.contentTintColor = btn == sender ? .white : NSColor.white.withAlphaComponent(0.5)
+        btn!.contentTintColor = btn == sender ? .sidebarTabTintActive : .sidebarTabTint
       } else {
         Utility.setBoldTitle(for: btn!, btn == sender)
       }

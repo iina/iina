@@ -17,18 +17,18 @@
 "general.password" = "Пароль";
 
 // Guide Window
-"guide.highlights" = "Highlights";
-"guide.basic_settings" = "Basic Settings";
-"guide.faq" = "Frequently Asked Questions";
+"guide.highlights" = "Найважливіше";
+"guide.basic_settings" = "Основні параметри";
+"guide.faq" = "Часті запитання";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Буферизація… %d%%";
 "main.opening_stream" = "Відкриття потоку…";
-"osc.precision" = "Precision";
-"osc.1s" = "1 second";
-"osc.100ms" = "100 milliseconds";
-"osc.10ms" = "10 milliseconds";
-"osc.1ms" = "1 millisecond";
+"osc.precision" = "Точність";
+"osc.1s" = "1 секунда";
+"osc.100ms" = "100 мілісекунд";
+"osc.10ms" = "10 мілісекунд";
+"osc.1ms" = "1 мілісекунда";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Типово";

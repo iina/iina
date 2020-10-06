@@ -19,16 +19,16 @@
 // Guide Window
 "guide.highlights" = "Highlights";
 "guide.basic_settings" = "Basic Settings";
-"guide.faq" = "Frequently Asked Questions";
+"guide.faq" = "Häufig gestellte Fragen (FAQ)";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Puffern … %d%%";
 "main.opening_stream" = "Stream öffnen …";
 "osc.precision" = "Precision";
-"osc.1s" = "1 second";
-"osc.100ms" = "100 milliseconds";
-"osc.10ms" = "10 milliseconds";
-"osc.1ms" = "1 millisecond";
+"osc.1s" = "1 Sekunde";
+"osc.100ms" = "100 Millisekunden";
+"osc.10ms" = "10 Millisekunden";
+"osc.1ms" = "1 Millisekunde";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Standard";

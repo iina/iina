@@ -17,24 +17,24 @@
 "general.password" = "Hasło";
 
 // Guide Window
-"guide.highlights" = "Highlights";
-"guide.basic_settings" = "Basic Settings";
-"guide.faq" = "Frequently Asked Questions";
+"guide.highlights" = "Najważniejsze";
+"guide.basic_settings" = "Ustawienia podstawowe";
+"guide.faq" = "Najczęściej zadawane pytania (FAQ)";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Buforowanie… %d%%";
 "main.opening_stream" = "Otwieram strumień…";
-"osc.precision" = "Precision";
-"osc.1s" = "1 second";
-"osc.100ms" = "100 milliseconds";
-"osc.10ms" = "10 milliseconds";
-"osc.1ms" = "1 millisecond";
+"osc.precision" = "Dokładność";
+"osc.1s" = "1 sekunda";
+"osc.100ms" = "100 milisekund";
+"osc.10ms" = "10 milisekund";
+"osc.1ms" = "1 milisekund";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Domyślne";
 "quicksetting.item_none" = "Brak";
 "quicksetting.hwdec" = "Sprzętowe dekodowanie";
-"quicksetting.deinterlace" = "Deinterlace";
+"quicksetting.deinterlace" = "Usuwanie przeplotu";
 
 // OSDMessage.swift
 "osd.pause" = "Pauza";
@@ -45,7 +45,7 @@
 "osd.crop" = "Kadrowanie obrazu: %@";
 "osd.rotate" = "Obrót: %i°";
 "osd.deinterlace" = "Usuwanie przeplotu: %@";
-"osd.hwdec" = "Hardware Decoding: %@";
+"osd.hwdec" = "Dekodowanie sprzętowe: %@";
 "osd.audio_delay.nodelay" = "Brak opóźnienia dźwięku";
 "osd.audio_delay.later" = "Opóźnienie dźwięku: %.2fs";
 "osd.audio_delay.earlier" = "Opóźnienie dźwięku: -%.2fs";
@@ -100,7 +100,7 @@
 "preference.key_binding_hint_1" = "Aby zmienić skróty klawiszowe klinij \"Zduplikuj konfiguracje\", aby móc ją edytować";
 "preference.key_binding_hint_2" = "Kliknij dwukrotnie na rząd po prawej stronie, aby zmienić przypisany skrót klawiszowy";
 
-"preference.enable_adv_settings" = "Enable advanced settings";
+"preference.enable_adv_settings" = "Włącz ustawienia zaawansowane";
 
 "menu.volume" = "Głośność: %d";
 "menu.audio_delay" = "Opóźnienie audio: %.2fs";
@@ -124,7 +124,7 @@
 "menu.sub_delay_up" = "Opóźnienie napisów +%.1fs";
 "menu.sub_delay_down" = "Opóźnienie napisów -%.1fs";
 
-"menu.crop_custom" = "Custom...";
+"menu.crop_custom" = "Niestandardowe...";
 
 "track.none" = "<Brak>";
 
@@ -273,15 +273,15 @@
 "osc_toolbar.music_mode" = "Przejdź w tryb muzyczny";
 "osc_toolbar.sub_track" = "Wybierz ścieżkę napisów";
 
-"mini_player.album_art" = "Toggle album art";
-"mini_player.loop" = "Repeat";
-"mini_player.shuffle" = "Shuffle";
-"mini_player.remove" = "Remove from playlist";
-"mini_player.add" = "Add to playlist";
-"mini_player.delete" = "Delete all tracks from playlist";
-"mini_player.volume" = "Volume";
-"mini_player.close" = "Close music mode";
-"mini_player.back" = "Return to video mode";
+"mini_player.album_art" = "Przełącz okładkę albumu";
+"mini_player.loop" = "Powtarzaj";
+"mini_player.shuffle" = "Przemieszaj playlistę";
+"mini_player.remove" = "Usuń z listy odtwarzania";
+"mini_player.add" = "Dodaj do listy odtwarzania";
+"mini_player.delete" = "Usuń wszystkie pozycje z listy odtwarzania";
+"mini_player.volume" = "Głośność";
+"mini_player.close" = "Zamknij tryb muzyczny";
+"mini_player.back" = "Wróć do trybu wideo";
 
 // Touch bar
 
@@ -298,5 +298,5 @@
 "touchbar.play_pause" = "Odtwarzanie / Pauza";
 "touchbar.seek" = "Szukaj";
 "touchbar.time" = "Pozycja czasowa";
-"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
+"touchbar.remainingTimeOrTotalDuration" = "Pozostały czas / Całkowity czas trwania";
 "touchbar.toggle_pip" = "Przełącz tryb Picture-in-Picture";

@@ -17,18 +17,18 @@
 "general.password" = "Password";
 
 // Guide Window
-"guide.highlights" = "Highlights";
-"guide.basic_settings" = "Basic Settings";
-"guide.faq" = "Frequently Asked Questions";
+"guide.highlights" = "In evidenza";
+"guide.basic_settings" = "Impostazioni di base";
+"guide.faq" = "Domande frequenti (FAQ)";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffer… %d%%";
 "main.opening_stream" = "Apertura stream…";
-"osc.precision" = "Precision";
-"osc.1s" = "1 second";
-"osc.100ms" = "100 milliseconds";
-"osc.10ms" = "10 milliseconds";
-"osc.1ms" = "1 millisecond";
+"osc.precision" = "Precisione";
+"osc.1s" = "1 secondo";
+"osc.100ms" = "100 millisecondi";
+"osc.10ms" = "10 millisecondi";
+"osc.1ms" = "1 millisecondo";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Predefinito";

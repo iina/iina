@@ -9,7 +9,7 @@
 
 "general.on" = "Ligar";
 "general.off" = "Desligar";
-"general.login" = "Logar";
+"general.login" = "Login";
 "general.logout" = "Encerrar sessão";
 "general.ok" = "OK";
 "general.cancel" = "Cancelar";
@@ -17,18 +17,18 @@
 "general.password" = "Senha";
 
 // Guide Window
-"guide.highlights" = "Highlights";
-"guide.basic_settings" = "Basic Settings";
-"guide.faq" = "Frequently Asked Questions";
+"guide.highlights" = "Destaques";
+"guide.basic_settings" = "Configurações Básicas";
+"guide.faq" = "Dúvidas frequentes";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Carregando… %d%%";
 "main.opening_stream" = "Abrindo stream…";
-"osc.precision" = "Precision";
-"osc.1s" = "1 second";
-"osc.100ms" = "100 milliseconds";
-"osc.10ms" = "10 milliseconds";
-"osc.1ms" = "1 millisecond";
+"osc.precision" = "Precisão";
+"osc.1s" = "1 segundo";
+"osc.100ms" = "100 milissegundos";
+"osc.10ms" = "10 milissegundos";
+"osc.1ms" = "1 milissegundo";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Padrão";

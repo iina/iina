@@ -17,18 +17,18 @@
 "general.password" = "암호";
 
 // Guide Window
-"guide.highlights" = "Highlights";
-"guide.basic_settings" = "Basic Settings";
-"guide.faq" = "Frequently Asked Questions";
+"guide.highlights" = "새로 추가된 기능";
+"guide.basic_settings" = "일반 설정";
+"guide.faq" = "자주 묻는 질문";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "준비중… %d%%";
 "main.opening_stream" = "스트림 여는 중…";
-"osc.precision" = "Precision";
-"osc.1s" = "1 second";
-"osc.100ms" = "100 milliseconds";
-"osc.10ms" = "10 milliseconds";
-"osc.1ms" = "1 millisecond";
+"osc.precision" = "정밀도";
+"osc.1s" = "1초";
+"osc.100ms" = "100밀리초";
+"osc.10ms" = "10밀리초";
+"osc.1ms" = "1밀리초";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "기본값";

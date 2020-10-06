@@ -17,18 +17,18 @@
 "general.password" = "パスワード";
 
 // Guide Window
-"guide.highlights" = "Highlights";
-"guide.basic_settings" = "Basic Settings";
-"guide.faq" = "Frequently Asked Questions";
+"guide.highlights" = "ハイライト";
+"guide.basic_settings" = "基本設定";
+"guide.faq" = "よくある質問";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "バッファ中… %d%%";
 "main.opening_stream" = "ストリームを展開中…";
-"osc.precision" = "Precision";
-"osc.1s" = "1 second";
-"osc.100ms" = "100 milliseconds";
-"osc.10ms" = "10 milliseconds";
-"osc.1ms" = "1 millisecond";
+"osc.precision" = "精度";
+"osc.1s" = "1 秒";
+"osc.100ms" = "100 ミリ秒";
+"osc.10ms" = "10 ミリ秒";
+"osc.1ms" = "1 ミリ秒";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "デフォルト";
@@ -108,7 +108,7 @@
 "menu.fullscreen" = "フルスクリーンにする";
 "menu.exit_fullscreen" = "フルスクリーンを解除";
 "menu.pip" = "ピクチャー・イン・ピクチャーを使用";
-"menu.exit_pip" = "ピクチャ・イン・ピクチャを終了";
+"menu.exit_pip" = "ピクチャー・イン・ピクチャーを終了";
 "menu.pause" = "一時停止";
 "menu.resume" = "再生";
 "menu.speed" = "再生速度: %.2f倍";

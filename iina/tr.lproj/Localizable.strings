@@ -18,17 +18,17 @@
 
 // Guide Window
 "guide.highlights" = "Highlights";
-"guide.basic_settings" = "Basic Settings";
-"guide.faq" = "Frequently Asked Questions";
+"guide.basic_settings" = "Temel Ayarlar";
+"guide.faq" = "Sık Sorulan Sorular";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Ara belleğe alınıyor... %d%%";
 "main.opening_stream" = "Akış açılıyor...";
-"osc.precision" = "Precision";
-"osc.1s" = "1 second";
-"osc.100ms" = "100 milliseconds";
-"osc.10ms" = "10 milliseconds";
-"osc.1ms" = "1 millisecond";
+"osc.precision" = "Hassasiyet";
+"osc.1s" = "1 saniye";
+"osc.100ms" = "100 milisaniye";
+"osc.10ms" = "10 milisaniye";
+"osc.1ms" = "1 milisaniye";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Varsayılan";

@@ -1267,8 +1267,14 @@ class MainWindowController: PlayerWindowController {
     windowWillExitFullScreen(Notification(name: .iinaLegacyFullScreen))
     // stylemask
     window.styleMask.remove(.borderless)
-    window.styleMask.remove(.fullScreen)
-
+    if #available(macOS 10.16, *) {
+      window.styleMask.insert(.titled)
+      (window as! MainWindow).forceKeyAndMain = false
+      window.level = .normal
+    } else {
+      window.styleMask.remove(.fullScreen)
+    }
+ 
     restoreDockSettings()
     // restore window frame ans aspect ratio
     let videoSize = player.videoSizeForDisplay
@@ -1292,7 +1298,13 @@ class MainWindowController: PlayerWindowController {
     windowWillEnterFullScreen(Notification(name: .iinaLegacyFullScreen))
     // stylemask
     window.styleMask.insert(.borderless)
-    window.styleMask.insert(.fullScreen)
+    if #available(macOS 10.16, *) {
+      window.styleMask.remove(.titled)
+      (window as! MainWindow).forceKeyAndMain = true
+      window.level = .floating
+    } else {
+      window.styleMask.insert(.fullScreen)
+    }
     // cancel aspect ratio
     window.resizeIncrements = NSSize(width: 1, height: 1)
     // auto hide menubar and dock
@@ -1300,7 +1312,7 @@ class MainWindowController: PlayerWindowController {
     NSApp.presentationOptions.insert(.autoHideDock)
     // set frame
     let screen = window.screen ?? NSScreen.main!
-    window.setFrame(NSRect(origin: .zero, size: screen.frame.size), display: true, animate: true)
+    window.setFrame(screen.frame, display: true, animate: true)
     // call delegate
     windowDidEnterFullScreen(Notification(name: .iinaLegacyFullScreen))
   }

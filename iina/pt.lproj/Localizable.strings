@@ -17,18 +17,18 @@
 "general.password" = "Senha";
 
 // Guide Window
-"guide.highlights" = "Highlights";
-"guide.basic_settings" = "Basic Settings";
-"guide.faq" = "Frequently Asked Questions";
+"guide.highlights" = "Destaques";
+"guide.basic_settings" = "Configurações Básicas";
+"guide.faq" = "Perguntas Frequentes";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffer de dados… %d%%";
 "main.opening_stream" = "A abrir stream…";
-"osc.precision" = "Precision";
-"osc.1s" = "1 second";
-"osc.100ms" = "100 milliseconds";
-"osc.10ms" = "10 milliseconds";
-"osc.1ms" = "1 millisecond";
+"osc.precision" = "Precisão";
+"osc.1s" = "1 segundo";
+"osc.100ms" = "100 milissegundos";
+"osc.10ms" = "10 milissegundos";
+"osc.1ms" = "1 milissegundo";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Predefinido";
@@ -100,7 +100,7 @@
 "preference.key_binding_hint_1" = "Para editar mapeamento de teclas no arquivo de configuração atual, clique no botão \"Duplicar…\" primeiro para criar uma cópia.";
 "preference.key_binding_hint_2" = "Clique duas vezes em uma linha no lado direito para editar o mapeamento de tecla correspondente.";
 
-"preference.enable_adv_settings" = "Enable advanced settings";
+"preference.enable_adv_settings" = "Ativar configurações avançadas";
 
 "menu.volume" = "Volume: %d";
 "menu.audio_delay" = "Atraso de Áudio: %.2fs";
@@ -124,7 +124,7 @@
 "menu.sub_delay_up" = "Atraso da legenda + %.1fs";
 "menu.sub_delay_down" = "Atraso da legenda - %.1fs";
 
-"menu.crop_custom" = "Custom...";
+"menu.crop_custom" = "Personalizar...";
 
 "track.none" = "<None>";
 
@@ -273,15 +273,15 @@
 "osc_toolbar.music_mode" = "Entrar no modo música";
 "osc_toolbar.sub_track" = "Selecionar faixa de legenda";
 
-"mini_player.album_art" = "Toggle album art";
-"mini_player.loop" = "Repeat";
-"mini_player.shuffle" = "Shuffle";
-"mini_player.remove" = "Remove from playlist";
-"mini_player.add" = "Add to playlist";
-"mini_player.delete" = "Delete all tracks from playlist";
+"mini_player.album_art" = "Alternar arte do álbum";
+"mini_player.loop" = "Repetir";
+"mini_player.shuffle" = "Aleatório";
+"mini_player.remove" = "Remover da playlist";
+"mini_player.add" = "Adicionar à playlist";
+"mini_player.delete" = "Excluir todas as faixas da playlist";
 "mini_player.volume" = "Volume";
-"mini_player.close" = "Close music mode";
-"mini_player.back" = "Return to video mode";
+"mini_player.close" = "Fechar modo de música";
+"mini_player.back" = "Retornar ao modo vídeo";
 
 // Touch bar
 

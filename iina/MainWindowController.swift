@@ -385,6 +385,7 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
+  var titlebarAccesoryViewController: NSTitlebarAccessoryViewController!
   @IBOutlet var titlebarAccessoryView: NSView!
 
   /** Current OSC view. */
@@ -482,7 +483,7 @@ class MainWindowController: PlayerWindowController {
 
     titleBarView.layerContentsRedrawPolicy = .onSetNeedsDisplay
 
-    let titlebarAccesoryViewController = NSTitlebarAccessoryViewController()
+    titlebarAccesoryViewController = NSTitlebarAccessoryViewController()
     titlebarAccesoryViewController.view = titlebarAccessoryView
     titlebarAccesoryViewController.layoutAttribute = .right
     window.addTitlebarAccessoryViewController(titlebarAccesoryViewController)
@@ -1119,7 +1120,8 @@ class MainWindowController: PlayerWindowController {
     }
     standardWindowButtons.forEach { $0.alphaValue = 0 }
     titleTextField?.alphaValue = 0
-
+    
+    window!.removeTitlebarAccessoryViewController(at: 0)
     setWindowFloatingOnTop(false, updateOnTopStatus: false)
 
     thumbnailPeekView.isHidden = true
@@ -1228,6 +1230,7 @@ class MainWindowController: PlayerWindowController {
     if player.info.isPlaying {
       setWindowFloatingOnTop(isOntop, updateOnTopStatus: false)
     }
+    window!.addTitlebarAccessoryViewController(titlebarAccesoryViewController)
 
     resetCollectionBehavior()
     updateWindowParametersForMPV()

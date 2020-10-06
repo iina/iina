@@ -355,7 +355,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       Logger.log("Cannot parse URL using URLComponents", level: .warning)
       return
     }
-
+    
+    if parsed.scheme != "iina" {
+      // try to open the URL directly
+      PlayerCore.activeOrNewForMenuAction(isAlternative: false).openURLString(url)
+      return
+    }
+    
     // handle url scheme
     guard let host = parsed.host else { return }
 

@@ -156,7 +156,7 @@ class InitialWindowController: NSWindowController {
       window.appearance = NSAppearance(iinaTheme: theme)
       if #available(macOS 10.16, *) {
         let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = window.appearance!.isDark ?
+        gradientLayer.colors = window.effectiveAppearance.isDark ?
           [NSColor.black.withAlphaComponent(0.4).cgColor, NSColor.black.withAlphaComponent(0).cgColor] :
           [NSColor.black.withAlphaComponent(0.1).cgColor, NSColor.black.withAlphaComponent(0).cgColor]
         leftOverlayView.wantsLayer = true

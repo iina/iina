@@ -20,6 +20,8 @@ import JavaScriptCore
   func setSpeed(_ speed: Double)
   func getChapters() -> [[String: Any]]
   func playChapter(index: Int)
+  func getHistory() -> Any
+  func getRecentDocuments() -> Any
 }
 
 class JavascriptAPICore: JavascriptAPI, JavascriptAPICoreExportable {
@@ -80,6 +82,27 @@ class JavascriptAPICore: JavascriptAPI, JavascriptAPICoreExportable {
 
   @objc func playChapter(index: Int) {
     player.playChapter(index)
+  }
+
+  func getHistory() -> Any {
+    return HistoryController.shared.history.map {
+      [
+        "name": $0.name,
+        "url": $0.url.absoluteString,
+        "date": $0.addedDate,
+        "progress": $0.mpvProgress?.second ?? NSNull(),
+        "duration": $0.duration.second
+      ]
+    }
+  }
+
+  func getRecentDocuments() -> Any {
+    return NSDocumentController.shared.recentDocumentURLs.map {
+      [
+        "name": $0.lastPathComponent,
+        "url": $0.absoluteString
+      ]
+    }
   }
 }
 

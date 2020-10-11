@@ -35,6 +35,7 @@ class JavascriptPluginInstance {
       "menu": JavascriptAPIMenu(context: ctx, pluginInstance: self),
       "overlay": JavascriptAPIOverlay(context: ctx, pluginInstance: self),
       "standaloneWindow": JavascriptAPIStandaloneWindow(context: ctx, pluginInstance: self),
+      "sidebar": JavascriptAPISidebarView(context: ctx, pluginInstance: self),
       "playlist": JavascriptAPIPlaylist(context: ctx, pluginInstance: self),
       "subtitle": JavascriptAPISubtitle(context: ctx, pluginInstance: self),
       "utils": JavascriptAPIUtils(context: ctx, pluginInstance: self),
@@ -67,6 +68,11 @@ class JavascriptPluginInstance {
     return window
   }()
   var standaloneWindowCreated = false
+
+  lazy var sidebarTabView: PluginSidebarView = {
+    let view = PluginSidebarView.create(pluginInstance: self)
+    return view
+  }()
 
   var menuItems: [JavascriptPluginMenuItem] = []
 

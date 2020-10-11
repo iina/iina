@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -37,6 +38,10 @@
                 <outlet property="hardwareDecodingSwitch" destination="0pq-Hh-3hb" id="53n-xc-rxs"/>
                 <outlet property="hdrSwitch" destination="0RB-r2-J8C" id="Yov-nL-YFt"/>
                 <outlet property="hueSlider" destination="ntv-89-1iw" id="dQo-yf-zVI"/>
+                <outlet property="pluginContentContainerView" destination="GeS-T1-vtB" id="a96-Mh-BMb"/>
+                <outlet property="pluginTabsScrollView" destination="dfw-cq-GHm" id="3z0-CB-HKn"/>
+                <outlet property="pluginTabsView" destination="iNg-R1-bXw" id="2HU-DJ-gyX"/>
+                <outlet property="pluginTabsViewHeightConstraint" destination="RHG-Ug-zyI" id="dxy-7A-57c"/>
                 <outlet property="rotateSegment" destination="bza-SA-tXE" id="Sdw-vn-MUV"/>
                 <outlet property="saturationSlider" destination="qeO-tk-I0D" id="uDF-fx-afd"/>
                 <outlet property="secSubTableView" destination="Jve-qX-Agy" id="0ia-bh-sbu"/>
@@ -81,7 +86,7 @@
                                 <constraint firstAttribute="width" id="e8p-hm-lf2"/>
                             </constraints>
                         </customView>
-                        <button verticalHuggingPriority="750" ambiguous="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ma8-6g-tVw">
+                        <button horizontalHuggingPriority="252" verticalHuggingPriority="750" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ma8-6g-tVw">
                             <rect key="frame" x="34" y="15" width="64" height="18"/>
                             <buttonCell key="cell" type="square" title="VIDEO" bezelStyle="shadowlessSquare" image="tab_video" imagePosition="leading" alignment="center" imageScaling="proportionallyDown" inset="2" id="lQt-I0-jHO">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -91,7 +96,7 @@
                                 <action selector="tabBtnAction:" target="-2" id="T17-c3-4hp"/>
                             </connections>
                         </button>
-                        <button verticalHuggingPriority="750" ambiguous="YES" tag="1" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Fk-ey-FhK">
+                        <button horizontalHuggingPriority="251" verticalHuggingPriority="750" tag="1" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Fk-ey-FhK">
                             <rect key="frame" x="132" y="15" width="65" height="18"/>
                             <buttonCell key="cell" type="square" title="AUDIO" bezelStyle="shadowlessSquare" image="tab_audio" imagePosition="leading" alignment="center" imageScaling="proportionallyDown" inset="2" id="cpm-5o-a2c">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -101,7 +106,7 @@
                                 <action selector="tabBtnAction:" target="-2" id="mLi-M9-gbN"/>
                             </connections>
                         </button>
-                        <button verticalHuggingPriority="750" ambiguous="YES" tag="2" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rH3-pU-mFc">
+                        <button horizontalHuggingPriority="253" verticalHuggingPriority="750" tag="2" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rH3-pU-mFc">
                             <rect key="frame" x="231" y="15" width="95" height="18"/>
                             <buttonCell key="cell" type="square" title="SUBTITLES" bezelStyle="shadowlessSquare" image="tab_sub" imagePosition="leading" alignment="center" imageScaling="proportionallyDown" inset="2" id="NxO-to-jcI">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -140,23 +145,63 @@
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="L78-cf-BxB">
                     <rect key="frame" x="0.0" y="772" width="360" height="5"/>
                 </box>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="iNg-R1-bXw">
+                    <rect key="frame" x="0.0" y="739" width="360" height="36"/>
+                    <subviews>
+                        <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="dfw-cq-GHm">
+                            <rect key="frame" x="0.0" y="0.0" width="360" height="36"/>
+                            <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="Q9c-dH-CRI">
+                                <rect key="frame" x="0.0" y="0.0" width="360" height="36"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <view id="PF8-CN-LtV">
+                                        <rect key="frame" x="0.0" y="0.0" width="345" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" name="SidebarTableBackground"/>
+                            </clipView>
+                            <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="S2H-7J-hUJ">
+                                <rect key="frame" x="-100" y="-100" width="360" height="15"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </scroller>
+                            <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="hTR-jv-yCh">
+                                <rect key="frame" x="-100" y="-100" width="15" height="21"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </scroller>
+                        </scrollView>
+                        <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Uvg-kn-ZiM">
+                            <rect key="frame" x="0.0" y="-2" width="360" height="5"/>
+                        </box>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="Uvg-kn-ZiM" firstAttribute="leading" secondItem="iNg-R1-bXw" secondAttribute="leading" id="5Bo-pQ-8wF"/>
+                        <constraint firstItem="dfw-cq-GHm" firstAttribute="top" secondItem="iNg-R1-bXw" secondAttribute="top" id="7ps-Be-eEG"/>
+                        <constraint firstItem="dfw-cq-GHm" firstAttribute="leading" secondItem="iNg-R1-bXw" secondAttribute="leading" id="F2h-TK-LUs"/>
+                        <constraint firstAttribute="bottom" secondItem="Uvg-kn-ZiM" secondAttribute="bottom" id="F8Z-Qr-FvK"/>
+                        <constraint firstAttribute="height" constant="36" id="RHG-Ug-zyI"/>
+                        <constraint firstAttribute="trailing" secondItem="Uvg-kn-ZiM" secondAttribute="trailing" id="ftU-01-8Uk"/>
+                        <constraint firstAttribute="trailing" secondItem="dfw-cq-GHm" secondAttribute="trailing" id="gkT-b0-syJ"/>
+                        <constraint firstAttribute="bottom" secondItem="dfw-cq-GHm" secondAttribute="bottom" id="tBp-Il-qYT"/>
+                    </constraints>
+                </customView>
                 <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="udA-m2-eJb">
-                    <rect key="frame" x="0.0" y="0.0" width="360" height="775"/>
+                    <rect key="frame" x="0.0" y="0.0" width="360" height="739"/>
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="Video" identifier="1" id="CYP-el-A6A">
                             <view key="view" id="NRI-ba-KMd">
-                                <rect key="frame" x="0.0" y="0.0" width="360" height="775"/>
+                                <rect key="frame" x="0.0" y="0.0" width="360" height="739"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="SHU-hX-9MT">
-                                        <rect key="frame" x="0.0" y="0.0" width="360" height="775"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="360" height="739"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="8Es-YX-dNf">
-                                            <rect key="frame" x="0.0" y="0.0" width="360" height="775"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="360" height="739"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <view translatesAutoresizingMaskIntoConstraints="NO" id="ZGz-La-n9c" customClass="FlippedView" customModule="IINA" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="-8" width="360" height="783"/>
+                                                    <rect key="frame" x="0.0" y="-44" width="360" height="783"/>
                                                     <subviews>
                                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="5v4-Te-950">
                                                             <rect key="frame" x="0.0" y="0.0" width="360" height="783"/>
@@ -943,7 +988,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                         <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="Vtu-Wx-ydk">
-                                            <rect key="frame" x="344" y="0.0" width="16" height="775"/>
+                                            <rect key="frame" x="344" y="0.0" width="16" height="739"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
@@ -958,11 +1003,11 @@
                         </tabViewItem>
                         <tabViewItem label="Audio" identifier="2" id="bzk-c2-LH5">
                             <view key="view" id="Dxl-wa-zgc">
-                                <rect key="frame" x="0.0" y="0.0" width="360" height="823"/>
+                                <rect key="frame" x="0.0" y="0.0" width="360" height="787"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wXn-sV-AmG">
-                                        <rect key="frame" x="0.0" y="0.0" width="360" height="823"/>
+                                        <rect key="frame" x="0.0" y="-36" width="360" height="823"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="oVx-Sp-Lhl">
                                             <rect key="frame" x="0.0" y="0.0" width="360" height="823"/>
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1535,17 +1580,17 @@
                         </tabViewItem>
                         <tabViewItem label="Subtitle" identifier="" id="jND-MZ-sKB">
                             <view key="view" id="MrM-2b-7ob">
-                                <rect key="frame" x="0.0" y="0.0" width="360" height="823"/>
+                                <rect key="frame" x="0.0" y="0.0" width="360" height="787"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3kA-IY-poi">
-                                        <rect key="frame" x="0.0" y="0.0" width="360" height="823"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="360" height="787"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="epy-wp-Ja5">
-                                            <rect key="frame" x="0.0" y="0.0" width="360" height="823"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="360" height="787"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="pm4-x9-WJ5" customClass="FlippedView" customModule="IINA" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="-9" width="360" height="832"/>
+                                                    <rect key="frame" x="0.0" y="-81" width="360" height="832"/>
                                                     <subviews>
                                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="Wuf-PX-OYd" userLabel="Sub Basic">
                                                             <rect key="frame" x="0.0" y="418" width="360" height="414"/>
@@ -2267,7 +2312,7 @@
                                                                     </constraints>
                                                                 </customView>
                                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="8ZC-Wx-nt7">
-                                                                    <rect key="frame" x="324" y="334.5" width="16" height="21"/>
+                                                                    <rect key="frame" x="324" y="334" width="16" height="21"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="16" id="GIz-PJ-9SR"/>
                                                                         <constraint firstAttribute="width" constant="16" id="HE1-PU-O12"/>
@@ -2349,8 +2394,8 @@
                                             <rect key="frame" x="-100" y="-100" width="360" height="16"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
-                                        <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.22222222222222221" horizontal="NO" id="3ZS-ug-kkq">
-                                            <rect key="frame" x="344" y="0.0" width="16" height="823"/>
+                                        <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.19999999999999996" horizontal="NO" id="3ZS-ug-kkq">
+                                            <rect key="frame" x="344" y="0.0" width="16" height="787"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
@@ -2363,20 +2408,40 @@
                                 </constraints>
                             </view>
                         </tabViewItem>
+                        <tabViewItem label="Plugin" identifier="" id="eE3-9i-hpU">
+                            <view key="view" id="rcL-IN-kt1">
+                                <rect key="frame" x="0.0" y="0.0" width="360" height="787"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="GeS-T1-vtB">
+                                        <rect key="frame" x="0.0" y="0.0" width="360" height="787"/>
+                                    </customView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="GeS-T1-vtB" firstAttribute="top" secondItem="rcL-IN-kt1" secondAttribute="top" id="BKv-7d-4r7"/>
+                                    <constraint firstAttribute="bottom" secondItem="GeS-T1-vtB" secondAttribute="bottom" id="JpX-mz-IBf"/>
+                                    <constraint firstItem="GeS-T1-vtB" firstAttribute="leading" secondItem="rcL-IN-kt1" secondAttribute="leading" id="UtE-9a-d46"/>
+                                    <constraint firstAttribute="trailing" secondItem="GeS-T1-vtB" secondAttribute="trailing" id="zQk-WC-GMV"/>
+                                </constraints>
+                            </view>
+                        </tabViewItem>
                     </tabViewItems>
                 </tabView>
             </subviews>
             <constraints>
                 <constraint firstItem="dNi-Ib-2vd" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="DJ3-t6-bea"/>
                 <constraint firstAttribute="trailing" secondItem="udA-m2-eJb" secondAttribute="trailing" id="De7-9o-KKe"/>
+                <constraint firstAttribute="trailing" secondItem="iNg-R1-bXw" secondAttribute="trailing" id="Dhv-PU-QtB"/>
+                <constraint firstItem="iNg-R1-bXw" firstAttribute="top" secondItem="dNi-Ib-2vd" secondAttribute="bottom" id="KoD-6G-Glt"/>
                 <constraint firstAttribute="width" constant="360" id="L4m-6z-09b"/>
                 <constraint firstAttribute="bottom" secondItem="udA-m2-eJb" secondAttribute="bottom" id="SOP-Fn-kKf"/>
+                <constraint firstItem="udA-m2-eJb" firstAttribute="top" secondItem="iNg-R1-bXw" secondAttribute="bottom" id="WKF-bw-yv1"/>
                 <constraint firstAttribute="trailing" secondItem="dNi-Ib-2vd" secondAttribute="trailing" id="ahR-QL-lPo"/>
                 <constraint firstItem="dNi-Ib-2vd" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="fh9-0T-pEX"/>
                 <constraint firstAttribute="trailing" secondItem="L78-cf-BxB" secondAttribute="trailing" id="kAA-wl-rsA"/>
                 <constraint firstItem="L78-cf-BxB" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="kgD-50-iI3"/>
+                <constraint firstItem="iNg-R1-bXw" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="o95-KY-Xuz"/>
                 <constraint firstItem="L78-cf-BxB" firstAttribute="top" secondItem="dNi-Ib-2vd" secondAttribute="bottom" id="rjI-Pa-q5L"/>
-                <constraint firstItem="udA-m2-eJb" firstAttribute="top" secondItem="L78-cf-BxB" secondAttribute="bottom" constant="-1" id="t0K-N5-1t2"/>
                 <constraint firstItem="udA-m2-eJb" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="tyn-5q-xAw"/>
             </constraints>
             <point key="canvasLocation" x="102" y="441.5"/>
@@ -2389,6 +2454,11 @@
             </connections>
         </popover>
         <userDefaultsController representsSharedInstance="YES" id="CE5-Ex-Oo6"/>
+        <box verticalHuggingPriority="750" boxType="separator" id="acz-Vd-7LD">
+            <rect key="frame" x="0.0" y="0.0" width="96" height="5"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <point key="canvasLocation" x="-33" y="-38"/>
+        </box>
     </objects>
     <resources>
         <image name="NSRefreshFreestandingTemplate" width="15" height="15"/>
@@ -2396,5 +2466,8 @@
         <image name="tab_sub" width="18" height="18"/>
         <image name="tab_video" width="18" height="18"/>
         <image name="triangle-down" width="10" height="14"/>
+        <namedColor name="SidebarTableBackground">
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.019999999552965164" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

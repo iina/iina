@@ -8,12 +8,6 @@
 
 import Cocoa
 
-fileprivate extension QuickSettingViewController.TabViewType {
-  init(buttonTag: Int) {
-    self = [.video, .audio, .sub][at: buttonTag] ?? .video
-  }
-}
-
 @available(OSX 10.14, *)
 fileprivate extension NSColor {
   static let sidebarTabTint: NSColor = NSColor(named: .sidebarTabTint)!
@@ -21,12 +15,61 @@ fileprivate extension NSColor {
 }
 
 class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, SidebarViewController {
-
   override var nibName: NSNib.Name {
     return NSNib.Name("QuickSettingViewController")
   }
 
   let sliderSteps = 24.0
+
+  enum TabViewType: Equatable {
+    case video
+    case audio
+    case sub
+    case plugin(id: String)
+
+    init(buttonTag: Int) {
+      self = [.video, .audio, .sub][at: buttonTag] ?? .video
+    }
+
+    init?(name: String) {
+      switch name {
+      case "video":
+        self = .video
+      case "audio":
+        self = .audio
+      case "sub":
+        self = .sub
+      default:
+        if name.hasPrefix("plugin:") {
+          self = .plugin(id: String(name.dropFirst(7)))
+        } else {
+          return nil
+        }
+      }
+    }
+
+    var buttonTag: Int {
+      switch self {
+      case .video: return 0
+      case .audio: return 1
+      case .sub: return 2
+      default: return 3
+      }
+    }
+
+    var name: String {
+      switch self {
+      case .video: return "video"
+      case .audio: return "audio"
+      case .sub: return "sub"
+      case .plugin(let id): return "plugin:\(id)"
+      }
+    }
+
+    static func == (lhs: TabViewType, rhs: TabViewType) -> Bool {
+      return lhs.name == rhs.name
+    }
+  }
 
   /**
    Similar to the one in `PlaylistViewController`.
@@ -35,9 +78,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
    view is ready. The value will be handled after loaded.
    */
   private var pendingSwitchRequest: TabViewType?
-
-  /** Tab type. Use TrackType for now. Probably not a good choice. */
-  typealias TabViewType = MPVTrack.TrackType
 
   weak var player: PlayerCore!
 
@@ -121,6 +161,13 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var subTextBgColorWell: NSColorWell!
   @IBOutlet weak var subTextFontBtn: NSButton!
 
+  @IBOutlet weak var pluginTabsView: NSView!
+  @IBOutlet weak var pluginTabsViewHeightConstraint: NSLayoutConstraint!
+  @IBOutlet weak var pluginTabsScrollView: NSScrollView!
+  @IBOutlet weak var pluginContentContainerView: NSView!
+  private var pluginTabsStackView: NSStackView!
+  private var pluginTabs: [String: SidebarTabView] = [:]
+
   var downShift: CGFloat = 0 {
     didSet {
       buttonTopConstraint.constant = downShift
@@ -140,8 +187,9 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       withAllTableViews { tableView, _ in tableView.backgroundColor = NSColor(named: .sidebarTableBackground)! }
     }
 
+    setupPluginTabs()
     if pendingSwitchRequest == nil {
-      updateTabActiveStatus(withCurrentButton: videoTabBtn)
+      updateTabActiveStatus()
     } else {
       switchToTab(pendingSwitchRequest!)
       pendingSwitchRequest = nil
@@ -289,20 +337,85 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
   }
 
+  func setupPluginTabs() {
+    let container = NSView()
+    container.translatesAutoresizingMaskIntoConstraints = false
+    pluginTabsStackView = NSStackView()
+    pluginTabsStackView.translatesAutoresizingMaskIntoConstraints = false
+    pluginTabsStackView.alignment = .centerY
+    container.addSubview(pluginTabsStackView)
+    pluginTabsScrollView.documentView = container
+    Utility.quickConstraints(["H:|-8-[v]-8-|", "V:|-0-[v(==36)]-0-|"], ["v": pluginTabsStackView])
+    updatePluginTabs()
+  }
+
+  func updatePluginTabs() {
+    var added = false
+    player.plugins.forEach {
+      guard let name = $0.plugin.sidebarTabName else { return }
+      let tab = SidebarTabView()
+      tab.name = name
+      tab.pluginID = $0.plugin.identifier
+      tab.quickSettingsView = self
+      pluginTabsStackView.addArrangedSubview(tab.view)
+      pluginTabs[$0.plugin.identifier] = tab
+      added = true
+    }
+    if !added {
+      pluginTabsView.isHidden = true
+      pluginTabsViewHeightConstraint.constant = 0
+    }
+  }
+
+  private func switchToTab(_ tab: TabViewType) {
+    currentTab = tab
+    tabView.selectTabViewItem(at: tab.buttonTag)
+    if case .plugin(let id) = tab,
+       let plugin = player.plugins.first(where: { $0.plugin.identifier == id }) {
+      pluginContentContainerView.subviews.forEach { $0.removeFromSuperview() }
+      pluginContentContainerView.addSubview(plugin.sidebarTabView)
+      Utility.quickConstraints(["H:|-0-[v]-0-|", "V:|-0-[v]-0-|"], ["v": plugin.sidebarTabView])
+    }
+    updateTabActiveStatus()
+    reload()
+  }
+
+  private func updateTabActiveStatus() {
+    let currentTag = currentTab.buttonTag
+    [videoTabBtn, audioTabBtn, subTabBtn].forEach { btn in
+      let isActive = currentTag == btn!.tag
+      if #available(OSX 10.14, *) {
+        btn!.contentTintColor = isActive ? .sidebarTabTintActive : .sidebarTabTint
+      } else {
+        Utility.setBoldTitle(for: btn!, isActive)
+      }
+    }
+    pluginTabs.values.forEach { tab in
+      if case .plugin(let id) = currentTab {
+        tab.isActive = tab.pluginID == id
+      } else {
+        tab.isActive = false
+      }
+    }
+  }
+
   func reload() {
     guard isViewLoaded else { return }
-    if currentTab == .audio {
+    switch currentTab {
+    case .audio:
       audioTableView.reloadData()
       updateAudioTabControl()
       updateAudioEqState()
-    } else if currentTab == .video {
+    case .video:
       videoTableView.reloadData()
       updateVideoTabControl()
       updateVideoEqState()
-    } else if currentTab == .sub {
+    case .sub:
       subTableView.reloadData()
       secSubTableView.reloadData()
       updateSubTabControl()
+    case .plugin(let id):
+      break
     }
   }
 
@@ -324,22 +437,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       // cache the request
       pendingSwitchRequest = tab
     }
-  }
-
-  /** Switch tab (for internal call) */
-  private func switchToTab(_ tab: TabViewType) {
-    let button: NSButton
-    switch tab {
-    case .video:
-      button = videoTabBtn
-    case .audio:
-      button = audioTabBtn
-    case .sub:
-      button = subTabBtn
-    default:
-      return
-    }
-    tabBtnAction(button)
   }
 
   // MARK: - NSTableView delegate
@@ -402,16 +499,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     updateControlsState()
   }
 
-  private func updateTabActiveStatus(withCurrentButton sender: NSButton) {
-    [videoTabBtn, audioTabBtn, subTabBtn].forEach { btn in
-      if #available(OSX 10.14, *) {
-        btn!.contentTintColor = btn == sender ? .sidebarTabTintActive : .sidebarTabTint
-      } else {
-        Utility.setBoldTitle(for: btn!, btn == sender)
-      }
-    }
-  }
-
   private func withAllTableViews(_ block: (NSTableView, MPVTrack.TrackType) -> Void) {
     block(audioTableView, .audio)
     block(subTableView, .sub)
@@ -431,10 +518,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   // MARK: Tab buttons
 
   @IBAction func tabBtnAction(_ sender: NSButton) {
-    tabView.selectTabViewItem(at: sender.tag)
-    updateTabActiveStatus(withCurrentButton: sender)
-    currentTab = .init(buttonTag: sender.tag)
-    reload()
+    switchToTab(.init(buttonTag: sender.tag))
   }
 
   // MARK: Video tab

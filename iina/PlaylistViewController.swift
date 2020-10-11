@@ -43,6 +43,17 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   enum TabViewType: Int {
     case playlist = 0
     case chapters
+
+    init?(name: String) {
+      switch name {
+      case "playlist":
+        self = .playlist
+      case "chapters":
+        self = .chapters
+      default:
+        return nil
+      }
+    }
   }
 
   var currentTab: TabViewType = .playlist

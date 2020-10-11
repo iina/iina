@@ -2423,38 +2423,60 @@ class MainWindowController: PlayerWindowController {
     setWindowFloatingOnTop(!isOntop)
   }
 
-  /// Legacy IBAction, but still in use.
-  func settingsButtonAction(_ sender: AnyObject) {
-    if sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
+  func showSettingsSidebar(tab: QuickSettingViewController.TabViewType? = nil, force: Bool = false, hideIfAlreadyShown: Bool = true) {
+    if !force && sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
       return  // do not interrput other actions while it is animating
     }
     let view = quickSettingView
     switch sideBarStatus {
     case .hidden:
+      if let tab = tab {
+        view.pleaseSwitchToTab(tab)
+      }
       showSideBar(viewController: view, type: .settings)
     case .playlist:
+      if let tab = tab {
+        view.pleaseSwitchToTab(tab)
+      }
       hideSideBar {
         self.showSideBar(viewController: view, type: .settings)
       }
     case .settings:
-      hideSideBar()
+      if view.currentTab == tab {
+        if hideIfAlreadyShown {
+          hideSideBar()
+        }
+      } else if let tab = tab {
+        view.pleaseSwitchToTab(tab)
+      }
     }
   }
 
-  /// Legacy IBAction, but still in use.
-  func playlistButtonAction(_ sender: AnyObject) {
-    if sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
+  func showPlaylistSidebar(tab: PlaylistViewController.TabViewType? = nil, force: Bool = false, hideIfAlreadyShown: Bool = true) {
+    if !force && sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
       return  // do not interrput other actions while it is animating
     }
     let view = playlistView
     switch sideBarStatus {
     case .hidden:
-      showSideBar(viewController: view, type: .playlist)
+      if let tab = tab {
+        view.pleaseSwitchToTab(tab)
+      }
+      showSideBar(viewController: view, type: .settings)
     case .playlist:
-      hideSideBar()
-    case .settings:
+      if let tab = tab {
+        view.pleaseSwitchToTab(tab)
+      }
       hideSideBar {
-        self.showSideBar(viewController: view, type: .playlist)
+        self.showSideBar(viewController: view, type: .settings)
+      }
+    case .settings:
+      if view.currentTab == tab {
+        if hideIfAlreadyShown {
+          hideSideBar()
+        }
+      } else if let tab = tab {
+        view.pleaseSwitchToTab(tab)
       }
     }
   }
@@ -2490,9 +2512,9 @@ class MainWindowController: PlayerWindowController {
         }
       }
     case .playlist:
-      playlistButtonAction(sender)
+      showPlaylistSidebar()
     case .settings:
-      settingsButtonAction(sender)
+      showSettingsSidebar()
     case .subTrack:
       quickSettingView.showSubChooseMenu(forView: sender, showLoadedSubs: true)
     }

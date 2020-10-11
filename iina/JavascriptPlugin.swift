@@ -80,6 +80,7 @@ class JavascriptPlugin: NSObject {
   let domainList: [String]
 
   var subProviders: [[String: String]]?
+  let sidebarTabName: String?
 
   var entryURL: URL
   var preferencesPageURL: URL?
@@ -285,6 +286,12 @@ class JavascriptPlugin: NSObject {
     self.helpPage = jsonDict["helpPage"] as? String
     self.domainList = (jsonDict["allowedDomains"] as? [String]) ?? []
     self.subProviders = jsonDict["subtitleProviders"] as? [[String: String]]
+
+    if let sidebarTabDef = jsonDict["sidebarTab"] as? [String: String] {
+      self.sidebarTabName = sidebarTabDef["name"]
+    } else {
+      self.sidebarTabName = nil
+    }
 
     self.enabled = UserDefaults.standard.bool(forKey: "PluginEnabled." + identifier)
 

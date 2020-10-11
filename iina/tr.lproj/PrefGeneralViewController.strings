@@ -20,7 +20,7 @@
 "55O-ik-ql6.title" = "\"Son Kullanılanı Aç\" menüsünü etkinleştir";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "5RN-PV-pOZ"; */
-"5RN-PV-pOZ.title" = "Box";
+"5RN-PV-pOZ.title" = "Kutu";
 
 /* Class = "NSButtonCell"; title = "Minimized/un-minimized"; ObjectID = "5Y9-bX-K0f"; */
 "5Y9-bX-K0f.title" = "IINA küçüldüğünde/eski haline geldiğinde";
@@ -32,13 +32,13 @@
 "8kU-8g-VgX.title" = "Etkili olabilmesi için IINA'nın yeniden başlatılması gerekli.";
 
 /* Class = "NSButtonCell"; title = "Only in \"music mode\""; ObjectID = "AVe-9Z-RgQ"; */
-"AVe-9Z-RgQ.title" = "Only in \"music mode\"";
+"AVe-9Z-RgQ.title" = "Sadece \"müzik kipi\" içerisinde";
 
 /* Class = "NSButtonCell"; title = "Track all played files in \"Open Recent\" menu"; ObjectID = "Ci8-j2-QS3"; */
 "Ci8-j2-QS3.title" = "Oynatılan her dosyayı Son Kullanılanı Aç'a ekle";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "DZT-7n-S4M"; */
-"DZT-7n-S4M.title" = "Box";
+"DZT-7n-S4M.title" = "Kutu";
 
 /* Class = "NSMenuItem"; title = "Daily"; ObjectID = "Ez8-qY-WAZ"; */
 "Ez8-qY-WAZ.title" = "Her Gün";
@@ -122,7 +122,7 @@
 "jeK-46-2BG.title" = "Geçmiş:";
 
 /* Class = "NSButtonCell"; title = "Show artist and track name for audio files when avaliable"; ObjectID = "kBI-Th-bBV"; */
-"kBI-Th-bBV.title" = "Show artist and track name for audio files when avaliable";
+"kBI-Th-bBV.title" = "Mümkün olduğunda ses dosyaları için sanatçı ve iz adlarını göster";
 
 /* Class = "NSButtonCell"; title = "Play upon entering full screen"; ObjectID = "lOw-pu-Llm"; */
 "lOw-pu-Llm.title" = "Tam ekrana geçince oynat";
@@ -146,7 +146,7 @@
 "uQR-Fx-oEm.title" = "Davranış:";
 
 /* Class = "NSButtonCell"; title = "Show previews after taking screenshots"; ObjectID = "xE7-Uu-19f"; */
-"xE7-Uu-19f.title" = "Show previews after taking screenshots";
+"xE7-Uu-19f.title" = "Ekran görüntüsü alındıktan sonra önizleme göster";
 
 /* Class = "NSTextFieldCell"; title = "Pause/resume when:"; ObjectID = "xr2-rB-O0x"; */
 "xr2-rB-O0x.title" = "Şunlar olduğunda Duraklat/Sürdür:";

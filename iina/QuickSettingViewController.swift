@@ -350,7 +350,12 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   func updatePluginTabs() {
+    guard isViewLoaded else { return }
     var added = false
+    pluginTabsStackView.arrangedSubviews.forEach {
+      pluginTabsStackView.removeArrangedSubview($0)
+    }
+    pluginTabs.removeAll()
     player.plugins.forEach {
       guard let name = $0.plugin.sidebarTabName else { return }
       let tab = SidebarTabView()
@@ -361,9 +366,19 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       pluginTabs[$0.plugin.identifier] = tab
       added = true
     }
-    if !added {
-      pluginTabsView.isHidden = true
-      pluginTabsViewHeightConstraint.constant = 0
+    pluginTabsView.isHidden = !added
+    pluginTabsViewHeightConstraint.constant = added ? 36 : 0
+    updateTabActiveStatus()
+  }
+
+  func removePluginTab(withIdentifier identifier: String) {
+    if case .plugin(let id) = currentTab {
+      if id == identifier {
+        switchToTab(.video)
+        pluginContentContainerView.subviews.forEach { $0.removeFromSuperview() }
+      }
+    } else {
+      pluginContentContainerView.subviews.forEach { $0.removeFromSuperview() }
     }
   }
 

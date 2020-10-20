@@ -24,6 +24,7 @@ class JavascriptAPISidebarView: JavascriptAPI, JavascriptAPISidebarViewExportabl
 
   override func cleanUp(_ instance: JavascriptPluginInstance) {
     listeners.removeAll()
+    player.mainWindow.quickSettingView.removePluginTab(withIdentifier: instance.plugin.identifier)
   }
 
   func loadFile(_ path: String) {

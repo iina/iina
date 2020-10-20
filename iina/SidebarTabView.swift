@@ -14,6 +14,10 @@ class SidebarTabView: NSViewController {
   weak var quickSettingsView: QuickSettingViewController!
   @IBOutlet weak var label: NSTextField!
 
+  override var acceptsFirstResponder: Bool {
+    true
+  }
+
   var isActive: Bool = false {
     didSet {
       updateStyle()
@@ -41,5 +45,16 @@ class SidebarTabView: NSViewController {
       view.layer?.backgroundColor = NSColor.white.withAlphaComponent(0.1).cgColor
       label.textColor = NSColor.white.withAlphaComponent(0.5)
     }
+  }
+}
+
+
+class SidebarTabActiveView: NSView {
+  override var acceptsFirstResponder: Bool {
+    true
+  }
+
+  override func mouseDown(with event: NSEvent) {
+    self.nextResponder?.mouseDown(with: event)
   }
 }

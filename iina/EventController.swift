@@ -29,6 +29,7 @@ class EventController {
     
     // Window related
     static let windowLoaded = Name("iina.window-loaded")
+    static let windowSizeAdjusted = Name("iina.window-size-adjusted")
     static let windowMoved = Name("iina.window-moved")
     static let windowResized = Name("iina.window-resized")
     static let windowFullscreenChanged = Name("iina.window.fs-changed")

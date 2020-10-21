@@ -15,7 +15,7 @@ class PlayerCore: NSObject {
 
   static let first: PlayerCore = createPlayerCore()
 
-  static private var _lastActive: PlayerCore?
+  static private weak var _lastActive: PlayerCore?
 
   static var lastActive: PlayerCore {
     get {
@@ -80,6 +80,8 @@ class PlayerCore: NSObject {
   lazy var subsystem = Logger.Subsystem(rawValue: "player\(label!)")
 
   var label: String!
+  var isManagedByPlugin = false
+  var disableWindowAnimation = false
 
   @available(macOS 10.12.2, *)
   var touchBarSupport: TouchBarSupport {
@@ -1333,10 +1335,13 @@ class PlayerCore: NSObject {
     // add to history
     if let url = info.currentURL {
       let duration = info.videoDuration ?? .zero
-      HistoryController.shared.add(url, duration: duration.second)
+      HistoryController.shared.queue.async {
+        HistoryController.shared.add(url, duration: duration.second)
+      }
       if Preference.bool(for: .recordRecentFiles) && Preference.bool(for: .trackAllFilesInRecentOpenMenu) {
         NSDocumentController.shared.noteNewRecentDocumentURL(url)
       }
+
     }
     postNotification(.iinaFileLoaded)
     events.emit(.fileLoaded, data: info.currentURL ?? "")

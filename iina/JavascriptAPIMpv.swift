@@ -27,35 +27,35 @@ class JavascriptAPIMpv: JavascriptAPI, JavascriptAPIMpvExportable {
   }
 
   override func cleanUp(_ instance: JavascriptPluginInstance) {
-    player.mpv.removeHooks(withIdentifier: identifier)
+    player!.mpv.removeHooks(withIdentifier: identifier)
   }
 
   @objc func getFlag(_ property: String) -> Bool {
-    return player.mpv.getFlag(property)
+    return player!.mpv.getFlag(property)
   }
 
   @objc func getNumber(_ property: String) -> Double {
-    return player.mpv.getDouble(property)
+    return player!.mpv.getDouble(property)
   }
 
   @objc func getString(_ property: String) -> String? {
-    return player.mpv.getString(property)
+    return player!.mpv.getString(property)
   }
 
   @objc func getNative(_ property: String) -> Any? {
-    return player.mpv.getNode(property)
+    return player!.mpv.getNode(property)
   }
 
   @objc func set(_ property: String, _ value: JSValue) {
     if value.isNumber {
-      player.mpv.setDouble(property, value.toDouble())
+      player!.mpv.setDouble(property, value.toDouble())
     } else if value.isString {
-      player.mpv.setString(property, value.toString())
+      player!.mpv.setString(property, value.toString())
     } else if value.isBoolean {
-      player.mpv.setFlag(property, value.toBool())
+      player!.mpv.setFlag(property, value.toBool())
     } else if value.isObject {
       if let object = value.toObject() {
-        player.mpv.setNode(property, object)
+        player!.mpv.setNode(property, object)
       }
     } else {
       throwError(withMessage: "mpv.set only supports numbers, strings, booleans and objects.")
@@ -63,11 +63,11 @@ class JavascriptAPIMpv: JavascriptAPI, JavascriptAPIMpvExportable {
   }
 
   @objc func command(_ commandName: String, _ args: [String]) {
-    player.mpv.command(MPVCommand(commandName), args: args, checkError: false)
+    player!.mpv.command(MPVCommand(commandName), args: args, checkError: false)
   }
 
   @objc func addHook(_ name: String, _ priority: Int, _ callback: JSValue) {
     let hook = MPVHookValue(withIdentifier: identifier, jsContext: context, jsBlock: callback, owner: self)
-    player.mpv.addHook(MPVHook(name), priority: Int32(priority), hook: hook)
+    player!.mpv.addHook(MPVHook(name), priority: Int32(priority), hook: hook)
   }
 }

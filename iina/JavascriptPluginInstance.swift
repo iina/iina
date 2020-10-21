@@ -13,47 +13,11 @@ class JavascriptPluginInstance {
   var apis: [String: JavascriptAPI]!
   private var polyfill: JavascriptPolyfill!
 
-  lazy var js: JSContext = {
-    let ctx = JSContext()!
-    ctx.name = "Main — \(self.plugin.name)"
-    ctx.exceptionHandler = { [unowned self] context, exception in
-      let message = exception?.toString() ?? "Unknown exception"
-      let stack = exception?.objectForKeyedSubscript("stack")?.toString() ?? "???"
-      Logger.log(
-        "\(message)\n---Stack Trace---\n\(stack)\n-----------------",
-        level: .error,
-        subsystem: self.subsystem
-      )
-    }
-
-    apis = [
-      "core": JavascriptAPICore(context: ctx, pluginInstance: self),
-      "mpv": JavascriptAPIMpv(context: ctx, pluginInstance: self),
-      "event": JavascriptAPIEvent(context: ctx, pluginInstance: self),
-      "http": JavascriptAPIHttp(context: ctx, pluginInstance: self),
-      "console": JavascriptAPIConsole(context: ctx, pluginInstance: self),
-      "menu": JavascriptAPIMenu(context: ctx, pluginInstance: self),
-      "overlay": JavascriptAPIOverlay(context: ctx, pluginInstance: self),
-      "standaloneWindow": JavascriptAPIStandaloneWindow(context: ctx, pluginInstance: self),
-      "sidebar": JavascriptAPISidebarView(context: ctx, pluginInstance: self),
-      "playlist": JavascriptAPIPlaylist(context: ctx, pluginInstance: self),
-      "subtitle": JavascriptAPISubtitle(context: ctx, pluginInstance: self),
-      "utils": JavascriptAPIUtils(context: ctx, pluginInstance: self),
-      "file": JavascriptAPIFile(context: ctx, pluginInstance: self),
-      "preferences": JavascriptAPIPreferences(context: ctx, pluginInstance: self)
-    ]
-
-    ctx.setObject(apis, forKeyedSubscript: "iina" as NSString)
-    apis.values.forEach { $0.extraSetup() }
-
-    polyfill = JavascriptPolyfill(pluginInstance: self)
-    polyfill.register(inContext: ctx)
-
-    return ctx
-  }()
+  lazy var js: JSContext = createJSContext()
 
   weak var player: PlayerCore!
   weak var plugin: JavascriptPlugin!
+  let isGlobal: Bool
 
   lazy var overlayView: PluginOverlayView = {
     let view = PluginOverlayView.create(pluginInstance: self)
@@ -87,10 +51,19 @@ class JavascriptPluginInstance {
   }
   private var currentFileStack: [URL] = []
 
-  init?(player: PlayerCore, plugin: JavascriptPlugin) {
-    self.player = player
+  init(player: PlayerCore?, plugin: JavascriptPlugin) {
     self.plugin = plugin
-    _ = evaluateFile(plugin.entryURL)
+
+    if let player = player {
+      // normal plugin instance
+      self.player = player
+      isGlobal = false
+      evaluateFile(plugin.entryURL)
+    } else {
+      // if player is nil, the plugin instance is a global controller
+      isGlobal = true
+      evaluateFile(plugin.globalEntryURL!)
+    }
   }
 
   deinit {
@@ -112,6 +85,7 @@ class JavascriptPluginInstance {
     }
   }
 
+  @discardableResult
   func evaluateFile(_ url: URL, asModule: Bool = false) -> JSValue! {
     currentFileStack.append(url)
     guard let content = try? String(contentsOf: url) else {
@@ -139,7 +113,51 @@ class JavascriptPluginInstance {
     return result
   }
 
-  private func exceptionHandler(_ context: JSContext?, _ exception: JSValue?) {
-    Logger.log(exception?.toString() ?? "Unknown exception", level: .error, subsystem: subsystem)
+  private func createJSContext() -> JSContext {
+    let ctx = JSContext()!
+    ctx.name = "\(isGlobal ? "Global" : "Main") — \(plugin.name)"
+    ctx.exceptionHandler = { [unowned self] context, exception in
+      let message = exception?.toString() ?? "Unknown exception"
+      let stack = exception?.objectForKeyedSubscript("stack")?.toString() ?? "???"
+      Logger.log(
+        "\(message)\n---Stack Trace---\n\(stack)\n-----------------",
+        level: .error,
+        subsystem: self.subsystem
+      )
+    }
+
+    apis = [
+      "menu": JavascriptAPIMenu(context: ctx, pluginInstance: self),
+      "standaloneWindow": JavascriptAPIStandaloneWindow(context: ctx, pluginInstance: self),
+      "utils": JavascriptAPIUtils(context: ctx, pluginInstance: self),
+      "file": JavascriptAPIFile(context: ctx, pluginInstance: self),
+      "preferences": JavascriptAPIPreferences(context: ctx, pluginInstance: self),
+      "console": JavascriptAPIConsole(context: ctx, pluginInstance: self)
+    ]
+
+    if !isGlobal {
+      apis["core"] = JavascriptAPICore(context: ctx, pluginInstance: self)
+      apis["mpv"] = JavascriptAPIMpv(context: ctx, pluginInstance: self)
+      apis["event"] = JavascriptAPIEvent(context: ctx, pluginInstance: self)
+      apis["http"] = JavascriptAPIHttp(context: ctx, pluginInstance: self)
+      apis["overlay"] = JavascriptAPIOverlay(context: ctx, pluginInstance: self)
+      apis["sidebar"] = JavascriptAPISidebarView(context: ctx, pluginInstance: self)
+      apis["playlist"] = JavascriptAPIPlaylist(context: ctx, pluginInstance: self)
+      apis["subtitle"] = JavascriptAPISubtitle(context: ctx, pluginInstance: self)
+    }
+
+    if player == nil {
+      apis["global"] = JavascriptAPIGlobalController(context: ctx, pluginInstance: self)
+    } else if player.isManagedByPlugin {
+      apis["global"] = JavascriptAPIGlobalChild(context: ctx, pluginInstance: self)
+    }
+
+    ctx.setObject(apis, forKeyedSubscript: "iina" as NSString)
+    apis.values.forEach { $0.extraSetup() }
+
+    polyfill = JavascriptPolyfill(pluginInstance: self)
+    polyfill.register(inContext: ctx)
+
+    return ctx
   }
 }

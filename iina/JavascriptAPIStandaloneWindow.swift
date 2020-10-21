@@ -14,16 +14,15 @@ import WebKit
   func open()
   func close()
   func loadFile(_ path: String)
-  func sendMessage(_ name: String, _ data: JSValue)
+  func postMessage(_ name: String, _ data: JSValue)
   func onMessage(_ name: String, _ callback: JSValue)
   func setProperty(_ properties: JSValue)
 }
 
 class JavascriptAPIStandaloneWindow: JavascriptAPI, JavascriptAPIStandaloneWindowExportable, WKScriptMessageHandler {
-  private var listeners: [String: JSManagedValue] = [:]
+  private lazy var messageHub = JavascriptMessageHub(reference: self)
 
   override func cleanUp(_ instance: JavascriptPluginInstance) {
-    listeners.removeAll()
     guard instance.standaloneWindowCreated else { return }
     instance.standaloneWindow.close()
   }
@@ -42,28 +41,13 @@ class JavascriptAPIStandaloneWindow: JavascriptAPI, JavascriptAPIStandaloneWindo
     pluginInstance.standaloneWindow.webView.loadFileURL(url, allowingReadAccessTo: rootURL)
   }
 
-  func sendMessage(_ name: String, _ data: JSValue) {
+  func postMessage(_ name: String, _ data: JSValue) {
     guard pluginInstance.standaloneWindowCreated else { return }
-    DispatchQueue.main.async {
-      guard let webView = self.pluginInstance.standaloneWindow.webView else { return }
-      guard let object = data.toObject(),
-         let data = try? JSONSerialization.data(withJSONObject: object),
-         let dataString = String(data: data, encoding: .utf8) else {
-          webView.evaluateJavaScript("window.iina._emit(`\(name)`)")
-          return
-      }
-      webView.evaluateJavaScript("window.iina._emit(`\(name)`, `\(dataString)`)")
-    }
+    messageHub.postMessage(to: pluginInstance.standaloneWindow.webView, name: name, data: data)
   }
 
   func onMessage(_ name: String, _ callback: JSValue) {
-    if let previousCallback = listeners[name] {
-      JSContext.current()!.virtualMachine.removeManagedReference(previousCallback, withOwner: self)
-    }
-    let managed = JSManagedValue(value: callback)
-    listeners[name] = managed
-    JSContext.current()!.virtualMachine.addManagedReference(managed, withOwner: self)
-
+    messageHub.addListener(forEvent: name, callback: callback)
   }
 
   func setProperty(_ properties: JSValue) {
@@ -96,17 +80,6 @@ class JavascriptAPIStandaloneWindow: JavascriptAPI, JavascriptAPIStandaloneWindo
   }
 
   func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-    guard let dict = message.body as? [Any], dict.count == 2,
-      let name = dict[0] as? String,
-      let callback = listeners[name] else { return }
-
-    guard let dataString = dict[1] as? String,
-      let data = dataString.data(using: .utf8),
-      let decoded = try? JSONSerialization.jsonObject(with: data) else {
-        callback.value.call(withArguments: [])
-      return
-    }
-
-    callback.value.call(withArguments: [JSValue(object: decoded, in: pluginInstance.js) ?? NSNull()])
+    messageHub.receiveMessageFromUserContentController(message)
   }
 }

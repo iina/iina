@@ -26,7 +26,7 @@ class PluginOverlayView: WKWebView, WKNavigationDelegate {
   static func create(pluginInstance: JavascriptPluginInstance) -> PluginOverlayView {
     let config = WKWebViewConfiguration()
     config.userContentController.addUserScript(
-      WKUserScript(source: IINAJavascriptPluginBridgeScript, injectionTime: .atDocumentStart, forMainFrameOnly: true)
+      WKUserScript(source: JavascriptMessageHub.bridgeScript, injectionTime: .atDocumentStart, forMainFrameOnly: true)
     )
 
     config.userContentController.add(pluginInstance.apis!["overlay"] as! WKScriptMessageHandler, name: "iina")
@@ -46,28 +46,3 @@ class PluginOverlayView: WKWebView, WKNavigationDelegate {
     }
   }
 }
-
-
-let IINAJavascriptPluginBridgeScript = """
-window.iina = {
-  listeners: {},
-  _emit(name, data) {
-    const callback = this.listeners[name];
-    if (typeof callback === "function") {
-      callback.call(null, data ? JSON.parse(data) : undefined);
-    }
-  },
-  _simpleModeSetStyle(string) {
-    document.getElementById("style").innerHTML = string;
-  },
-  _simpleModeSetContent(string) {
-    document.getElementById("content").innerHTML = string;
-  },
-  onMessage(name, callback) {
-    this.listeners[name] = callback;
-  },
-  postMessage(name, data) {
-    webkit.messageHandlers.iina.postMessage([name, JSON.stringify(data)]);
-  },
-};
-"""

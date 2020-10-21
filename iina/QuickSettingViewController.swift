@@ -372,6 +372,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   func removePluginTab(withIdentifier identifier: String) {
+    guard isViewLoaded else { return }
     if case .plugin(let id) = currentTab {
       if id == identifier {
         switchToTab(.video)
@@ -383,6 +384,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   private func switchToTab(_ tab: TabViewType) {
+    guard isViewLoaded else { return }
     currentTab = tab
     tabView.selectTabViewItem(at: tab.buttonTag)
     if case .plugin(let id) = tab,

@@ -15,16 +15,15 @@ import WebKit
   func loadFile(_ path: String)
   func show()
   func hide()
-  func sendMessage(_ name: String, _ data: JSValue)
+  func postMessage(_ name: String, _ data: JSValue)
   func onMessage(_ name: String, _ callback: JSValue)
 }
 
 class JavascriptAPISidebarView: JavascriptAPI, JavascriptAPISidebarViewExportable, WKScriptMessageHandler {
-  private var listeners: [String: JSManagedValue] = [:]
+  private lazy var messageHub = JavascriptMessageHub(reference: self)
 
   override func cleanUp(_ instance: JavascriptPluginInstance) {
-    listeners.removeAll()
-    player.mainWindow.quickSettingView.removePluginTab(withIdentifier: instance.plugin.identifier)
+    player!.mainWindow.quickSettingView.removePluginTab(withIdentifier: instance.plugin.identifier)
   }
 
   func loadFile(_ path: String) {
@@ -35,48 +34,22 @@ class JavascriptAPISidebarView: JavascriptAPI, JavascriptAPISidebarViewExportabl
 
   func show() {
     let id = pluginInstance.plugin.identifier
-    player.mainWindow.showSettingsSidebar(tab: .plugin(id: id), force: true, hideIfAlreadyShown: false)
+    player!.mainWindow.showSettingsSidebar(tab: .plugin(id: id), force: true, hideIfAlreadyShown: false)
   }
 
   func hide() {
-    player.mainWindow.hideSideBar()
+    player!.mainWindow.hideSideBar()
   }
 
-  func sendMessage(_ name: String, _ data: JSValue) {
-    DispatchQueue.main.async {
-      let webView = self.pluginInstance.sidebarTabView
-      guard let object = data.toObject(),
-         let data = try? JSONSerialization.data(withJSONObject: object),
-         let dataString = String(data: data, encoding: .utf8) else {
-          webView.evaluateJavaScript("window.iina._emit(`\(name)`)")
-          return
-      }
-      webView.evaluateJavaScript("window.iina._emit(`\(name)`, `\(dataString)`)")
-    }
+  func postMessage(_ name: String, _ data: JSValue) {
+    messageHub.postMessage(to: pluginInstance.sidebarTabView, name: name, data: data)
   }
 
   func onMessage(_ name: String, _ callback: JSValue) {
-    if let previousCallback = listeners[name] {
-      JSContext.current()!.virtualMachine.removeManagedReference(previousCallback, withOwner: self)
-    }
-    let managed = JSManagedValue(value: callback)
-    listeners[name] = managed
-    JSContext.current()!.virtualMachine.addManagedReference(managed, withOwner: self)
-
+    messageHub.addListener(forEvent: name, callback: callback)
   }
 
   func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-    guard let dict = message.body as? [Any], dict.count == 2,
-      let name = dict[0] as? String,
-      let callback = listeners[name] else { return }
-
-    guard let dataString = dict[1] as? String,
-      let data = dataString.data(using: .utf8),
-      let decoded = try? JSONSerialization.jsonObject(with: data) else {
-        callback.value.call(withArguments: [])
-      return
-    }
-
-    callback.value.call(withArguments: [JSValue(object: decoded, in: pluginInstance.js) ?? NSNull()])
+    messageHub.receiveMessageFromUserContentController(message)
   }
 }

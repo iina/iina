@@ -11,7 +11,7 @@ import JavaScriptCore
 
 class JavascriptAPI: NSObject {
   weak var context: JSContext!
-  weak var player: PlayerCore!
+  weak var player: PlayerCore?
 
   weak var pluginInstance: JavascriptPluginInstance!
 
@@ -59,7 +59,7 @@ class JavascriptAPI: NSObject {
       path.hasPrefix("@video/") ? .video :
       path.hasPrefix("@audio/") ? .audio :
       path.hasPrefix("@sub") ? .sub : nil
-    if let trackType = trackType {
+    if player != nil, let trackType = trackType {
       if let path = trackPath(path, type: trackType) {
         return (path, false)
       } else {
@@ -69,7 +69,7 @@ class JavascriptAPI: NSObject {
 
     return whenPermitted(to: .accessFileSystem) {
       var absPath = path
-      if path.hasPrefix("@current/") {
+      if let player = player, path.hasPrefix("@current/") {
         guard let currentURL = player.info.currentURL else {
           log("@current is unavailable when no file playing", level: .error)
           return (nil, false)
@@ -85,6 +85,8 @@ class JavascriptAPI: NSObject {
   }
 
   private func trackPath(_ path: String, type: MPVTrack.TrackType) -> String? {
+    guard let player = player else { return nil }
+
     guard let strId = path.split(separator: "/", maxSplits: 2).last, let id = Int(strId) else {
       throwError(withMessage: "The path \(path) is invalid")
       return nil

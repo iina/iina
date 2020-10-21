@@ -17,7 +17,7 @@ class PluginSidebarView: WKWebView, WKNavigationDelegate {
   static func create(pluginInstance: JavascriptPluginInstance) -> PluginSidebarView {
     let config = WKWebViewConfiguration()
     config.userContentController.addUserScript(
-      WKUserScript(source: IINAJavascriptPluginBridgeScript, injectionTime: .atDocumentStart, forMainFrameOnly: true)
+      WKUserScript(source: JavascriptMessageHub.bridgeScript, injectionTime: .atDocumentStart, forMainFrameOnly: true)
     )
 
     config.userContentController.add(pluginInstance.apis!["sidebar"] as! WKScriptMessageHandler, name: "iina")

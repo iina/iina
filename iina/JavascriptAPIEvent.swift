@@ -34,24 +34,24 @@ class JavascriptAPIEvent: JavascriptAPI, JavascriptAPIEventExportable {
       return nil
     }
     let eventName = String(splitted[1])
-    if isMpv && isPropertyChangedListener && player.mpv.observeProperties[eventName] == nil {
-      player.mpv.observe(property: eventName)
+    if isMpv && isPropertyChangedListener && player!.mpv.observeProperties[eventName] == nil {
+      player!.mpv.observe(property: eventName)
     }
     let name = EventController.Name(event)
-    let id = player.events.addListener(JavascriptAPIEventCallback(callback), for: name)
+    let id = player!.events.addListener(JavascriptAPIEventCallback(callback), for: name)
     addedListeners.append((id, name))
     return id
   }
 
   @objc func off(_ event: String,_ id: String) {
-    if !player.events.removeListener(id, for: .init(event)) {
+    if !player!.events.removeListener(id, for: .init(event)) {
       log("Event listener not found for id \(id)", level: .warning)
     }
   }
 
   override func cleanUp(_ instance: JavascriptPluginInstance) {
     addedListeners.forEach { (id, name) in
-      player.events.removeListener(id, for: name)
+      player!.events.removeListener(id, for: name)
     }
     addedListeners.removeAll()
   }

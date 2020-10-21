@@ -32,7 +32,7 @@ class PluginStandaloneWindow: NSWindow {
   func initializeWebView(pluginInstance: JavascriptPluginInstance) {
     let config = WKWebViewConfiguration()
     config.userContentController.addUserScript(
-      WKUserScript(source: IINAJavascriptPluginBridgeScript, injectionTime: .atDocumentStart, forMainFrameOnly: true)
+      WKUserScript(source: JavascriptMessageHub.bridgeScript, injectionTime: .atDocumentStart, forMainFrameOnly: true)
     )
 
     config.userContentController.add(pluginInstance.apis!["standaloneWindow"] as! WKScriptMessageHandler, name: "iina")

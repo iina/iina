@@ -25,7 +25,7 @@ class JavascriptAPIPlaylist: JavascriptAPI, JavascriptAPIPlaylistExportable {
   var menuItemBuilder: JSManagedValue?
 
   private func isPlaying() -> Bool {
-    if player.info.isIdle {
+    if player!.info.isIdle {
       log("Playlist API is only available when playing files.", level: .error)
       return false
     }
@@ -35,7 +35,7 @@ class JavascriptAPIPlaylist: JavascriptAPI, JavascriptAPIPlaylistExportable {
   func list() -> [[String: Any]] {
     guard isPlaying() else { return [] }
 
-    return player.info.playlist.map {
+    return player!.info.playlist.map {
       [
         "filename": $0.filename,
         "title": $0.title ?? NSNull(),
@@ -46,24 +46,24 @@ class JavascriptAPIPlaylist: JavascriptAPI, JavascriptAPIPlaylistExportable {
   }
 
   func count() -> Int {
-    return player.info.playlist.count
+    return player!.info.playlist.count
   }
 
   func add(_ url: JSValue, _ at: Int = -1) -> Any {
     guard isPlaying() else { return false }
 
-    let count = player.info.playlist.count
+    let count = player!.info.playlist.count
     guard at < count else {
       log("playlist.add: Invalid index.", level: .error)
       return false
     }
     if url.isArray {
       if let paths = url.toArray() as? [String] {
-        player.addToPlaylist(paths: paths, at: at)
+        player!.addToPlaylist(paths: paths, at: at)
         return true
       }
     } else if url.isString {
-      player.addToPlaylist(paths: [url.toString()], at: at)
+      player!.addToPlaylist(paths: [url.toString()], at: at)
       return true
     }
     log("playlist.add: The first argument should be a string or an array of strings.", level: .error)
@@ -72,14 +72,14 @@ class JavascriptAPIPlaylist: JavascriptAPI, JavascriptAPIPlaylistExportable {
 
   func remove(_ index: JSValue) -> Any {
     guard isPlaying() else { return false }
-    let count = player.info.playlist.count
+    let count = player!.info.playlist.count
 
     if index.isArray, let indices = index.toArray() as? [Int] {
       guard indices.allSatisfy({ $0 >= 0 && $0 < count }) else {
         log("playlist.remove: Invalid index.", level: .error)
         return false
       }
-      player.playlistRemove(IndexSet(indices))
+      player!.playlistRemove(IndexSet(indices))
       return true
     } else if index.isNumber {
       let index = Int(index.toInt32())
@@ -87,7 +87,7 @@ class JavascriptAPIPlaylist: JavascriptAPI, JavascriptAPIPlaylistExportable {
         log("playlist.remove: Invalid index.", level: .error)
         return false
       }
-      player.playlistRemove(index)
+      player!.playlistRemove(index)
       return true
     }
     log("playlist.remove: The argument should be a number or an array of numbers.", level: .error)
@@ -96,37 +96,37 @@ class JavascriptAPIPlaylist: JavascriptAPI, JavascriptAPIPlaylistExportable {
 
   func move(_ index: Int, _ to: Int) -> Any {
     guard isPlaying() else { return false }
-    let count = player.info.playlist.count
+    let count = player!.info.playlist.count
 
     guard index >= 0 && index < count && to >= 0 && to < count && index != to else {
       log("playlist.move: Invalid index.", level: .error)
       return false
     }
-    player.playlistMove(index, to: to)
+    player!.playlistMove(index, to: to)
     return true
   }
 
   func play(_ index: Int) {
     guard isPlaying() else { return }
-    let count = player.info.playlist.count
+    let count = player!.info.playlist.count
 
     guard index >= 0 && index < count else {
       log("playlist.play: Invalid index.", level: .error)
       return
     }
-    player.playFileInPlaylist(index)
+    player!.playFileInPlaylist(index)
   }
 
   func playNext() {
     guard isPlaying() else { return }
 
-    player.navigateInPlaylist(nextMedia: true)
+    player!.navigateInPlaylist(nextMedia: true)
   }
 
   func playPrevious() {
     guard isPlaying() else { return }
 
-    player.navigateInPlaylist(nextMedia: false)
+    player!.navigateInPlaylist(nextMedia: false)
   }
 
   func registerMenuItemBuilder(_ builder: JSValue) {

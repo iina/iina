@@ -47,42 +47,42 @@ class JavascriptAPICore: JavascriptAPI, JavascriptAPICoreExportable {
     }
   }
 
-  @objc func open(_ url: String) {
-    self.player.openURLString(url)
+  func open(_ url: String) {
+    player!.openURLString(url)
   }
 
-  @objc func osd(_ message: String) {
+  func osd(_ message: String) {
     whenPermitted(to: .showOSD) {
-      self.player.sendOSD(.customWithDetail(message, "From plugin \(pluginInstance.plugin.name)"),
-                          autoHide: true, accessoryView: nil, external: true)
+      player!.sendOSD(.customWithDetail(message, "From plugin \(pluginInstance.plugin.name)"),
+                      autoHide: true, accessoryView: nil, external: true)
     }
   }
 
-  @objc func pause() {
-    player.pause()
+  func pause() {
+    player!.pause()
   }
 
-  @objc func resume() {
-    player.resume()
+  func resume() {
+    player!.resume()
   }
 
-  @objc func stop() {
-    player.stop()
+  func stop() {
+    player!.stop()
   }
 
-  @objc func setSpeed(_ speed: Double) {
-    player.setSpeed(speed)
+  func setSpeed(_ speed: Double) {
+    player!.setSpeed(speed)
   }
 
-  @objc func getChapters() -> [[String: Any]] {
-    player.getChapters()
-    return player.info.chapters.map{
+  func getChapters() -> [[String: Any]] {
+    player!.getChapters()
+    return player!.info.chapters.map{
       ["title": $0.title, "start": $0.time.second]
     }
   }
 
-  @objc func playChapter(index: Int) {
-    player.playChapter(index)
+  func playChapter(index: Int) {
+    player!.playChapter(index)
   }
 
   func getHistory() -> Any {
@@ -152,12 +152,12 @@ fileprivate class TrackAPI: JavascriptAPI, TrackAPIExportable {
   var type: MPVTrack.TrackType { .video }
 
   func getCurrentTrack(forType type: MPVTrack.TrackType? = nil) -> Any {
-    guard let track = player.info.currentTrack(type ?? self.type) else { return NSNull() }
+    guard let track = player!.info.currentTrack(type ?? self.type) else { return NSNull() }
     return serialize(track: track)
   }
 
   func getTracks() -> Any {
-    return player.info.trackList(type).map(serialize(track:))
+    return player!.info.trackList(type).map(serialize(track:))
   }
 
   func setTrack(_ value: Any, forType type: MPVTrack.TrackType? = nil) {
@@ -165,7 +165,7 @@ fileprivate class TrackAPI: JavascriptAPI, TrackAPIExportable {
       log("\(tag).id: Should be a number", level: .error)
       return
     }
-    player.setTrack(val, forType: type ?? self.type)
+    player!.setTrack(val, forType: type ?? self.type)
   }
 
   func setDelay(_ value: Any) {
@@ -174,8 +174,8 @@ fileprivate class TrackAPI: JavascriptAPI, TrackAPIExportable {
       return
     }
     switch type {
-    case .audio: player.setAudioDelay(val)
-    case .sub, .secondSub: player.setSubDelay(val)
+    case .audio: player!.setAudioDelay(val)
+    case .sub, .secondSub: player!.setSubDelay(val)
     default: return
     }
   }
@@ -187,9 +187,9 @@ fileprivate class TrackAPI: JavascriptAPI, TrackAPIExportable {
     }
     let url = URL(fileURLWithPath: urlString)
     switch type {
-    case .audio: player.loadExternalAudioFile(url)
-    case .sub, .secondSub: player.loadExternalSubFile(url)
-    case .video: player.loadExternalVideoFile(url)
+    case .audio: player!.loadExternalAudioFile(url)
+    case .sub, .secondSub: player!.loadExternalSubFile(url)
+    case .video: player!.loadExternalVideoFile(url)
     }
   }
 }
@@ -199,10 +199,10 @@ fileprivate class TrackAPI: JavascriptAPI, TrackAPIExportable {
 fileprivate class WindowAPI: JavascriptAPI, CoreSubAPIExportable {
   func __proxyGet(_ prop: String) -> Any? {
     if prop == "loaded" {
-      return player.mainWindow.loaded
+      return player!.mainWindow.loaded
     }
 
-    guard let window = player.mainWindow, window.loaded else { return NSNull() }
+    guard let window = player!.mainWindow, window.loaded else { return NSNull() }
 
     // props that requires a loaded window
     switch prop {
@@ -231,7 +231,7 @@ fileprivate class WindowAPI: JavascriptAPI, CoreSubAPIExportable {
   }
 
   func __proxySet(_ prop: String, _ value: Any) {
-    guard let window = player.mainWindow, window.loaded else { return }
+    guard let window = player!.mainWindow, window.loaded else { return }
 
     switch prop {
     case "frame":
@@ -282,25 +282,25 @@ fileprivate class StatusAPI: JavascriptAPI, CoreSubAPIExportable {
   func __proxyGet(_ prop: String) -> Any? {
     switch prop {
     case "paused":
-      return !player.info.isPlaying
+      return !player!.info.isPlaying
     case "idle":
-      return player.info.isIdle
+      return player!.info.isIdle
     case "position":
-      return player.info.videoPosition?.second ?? NSNull()
+      return player!.info.videoPosition?.second ?? NSNull()
     case "duration":
-      return player.info.videoDuration?.second ?? NSNull()
+      return player!.info.videoDuration?.second ?? NSNull()
     case "speed":
-      return player.info.playSpeed
+      return player!.info.playSpeed
     case "videoWidth":
-      guard let vw = player.info.videoWidth else { return NSNull() }
+      guard let vw = player!.info.videoWidth else { return NSNull() }
       return Int32(vw)
     case "videoHeight":
-      guard let vh = player.info.videoHeight else { return NSNull() }
+      guard let vh = player!.info.videoHeight else { return NSNull() }
       return Int32(vh)
     case "isNetworkResource":
-      return player.info.isNetworkResource
+      return player!.info.isNetworkResource
     case "url":
-      return player.info.currentURL?.absoluteString.removingPercentEncoding ?? NSNull()
+      return player!.info.currentURL?.absoluteString.removingPercentEncoding ?? NSNull()
     default:
       return nil
     }
@@ -320,17 +320,17 @@ fileprivate class AudioAPI: TrackAPI, CoreSubAPIExportable {
   func __proxyGet(_ prop: String) -> Any? {
     switch prop {
     case "id":
-      return player.info.aid ?? NSNull()
+      return player!.info.aid ?? NSNull()
     case "delay":
-      return player.info.audioDelay
+      return player!.info.audioDelay
     case "tracks":
       return getTracks()
     case "currentTrack":
       return getCurrentTrack()
     case "volume":
-      return player.info.volume
+      return player!.info.volume
     case "muted":
-      return player.info.isMuted
+      return player!.info.isMuted
     default:
       return nil
     }
@@ -347,13 +347,13 @@ fileprivate class AudioAPI: TrackAPI, CoreSubAPIExportable {
         log("core.audio.volume: Should be a number", level: .error)
         return
       }
-      player.setVolume(val)
+      player!.setVolume(val)
     case "muted":
       guard let val = value as? Bool else {
         log("core.audio.muted: Should be a boolean value", level: .error)
         return
       }
-      return player.toggleMute(val)
+      return player!.toggleMute(val)
     default:
       return
     }
@@ -372,11 +372,11 @@ fileprivate class SubtitleAPI: TrackAPI, CoreSubAPIExportable {
   func __proxyGet(_ prop: String) -> Any? {
     switch prop {
     case "id":
-      return player.info.sid ?? NSNull()
+      return player!.info.sid ?? NSNull()
     case "secondID":
-      return player.info.secondSid ?? NSNull()
+      return player!.info.secondSid ?? NSNull()
     case "delay":
-      return player.info.subDelay
+      return player!.info.subDelay
     case "tracks":
       return getTracks()
     case "currentTrack":
@@ -407,7 +407,7 @@ fileprivate class VideoAPI: TrackAPI, CoreSubAPIExportable {
   func __proxyGet(_ prop: String) -> Any? {
     switch prop {
     case "id":
-      return player.info.vid ?? NSNull()
+      return player!.info.vid ?? NSNull()
     case "tracks":
       return getTracks()
     case "currentTrack":

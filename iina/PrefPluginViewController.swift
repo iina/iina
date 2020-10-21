@@ -482,6 +482,7 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
         }
         newPlugin.normalizePath()
         PlayerCore.reloadPluginForAll(newPlugin)
+        newPlugin.reloadGlobalInstance()
         self.currentPlugin = newPlugin
         self.tableView.reloadData()
         self.loadPluginPage(newPlugin)

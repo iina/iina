@@ -14,6 +14,7 @@ class HistoryController: NSObject {
 
   var plistURL: URL
   var history: [PlaybackHistory]
+  var queue = DispatchQueue(label: "IINAHistoryController", qos: .background)
 
   init(plistFileURL: URL) {
     self.plistURL = plistFileURL

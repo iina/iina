@@ -248,6 +248,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     NSRunningApplication.current.activate(options: [.activateIgnoringOtherApps, .activateAllWindows])
 
     NSApplication.shared.servicesProvider = self
+
+    JavascriptPlugin.loadGlobalInstances()
   }
 
   /** Show welcome window if `application(_:openFile:)` wasn't called, i.e. launched normally. */

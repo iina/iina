@@ -18,12 +18,12 @@ import WebKit
   func simpleMode()
   func setStyle(_ style: String)
   func setContent(_ content: String)
-  func sendMessage(_ name: String, _ data: JSValue)
+  func postMessage(_ name: String, _ data: JSValue)
   func onMessage(_ name: String, _ callback: JSValue)
 }
 
 class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScriptMessageHandler {
-  private var listeners: [String: JSManagedValue] = [:]
+  private lazy var messageHub = JavascriptMessageHub(reference: self)
   private var inSimpleMode = false
 
   override func cleanUp(_ instance: JavascriptPluginInstance) {
@@ -53,7 +53,7 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
   }
 
   func loadFile(_ path: String) {
-    guard player.mainWindow.isWindowLoaded && permitted(to: .displayVideoOverlay) else {
+    guard player!.mainWindow.isWindowLoaded && permitted(to: .displayVideoOverlay) else {
       throwError(withMessage: "overlay.loadFile called when window is not available. Please call it after receiving the \"iina.window-loaded\" event.")
       return
     }
@@ -65,7 +65,7 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
   }
 
   func simpleMode() {
-    guard player.mainWindow.isWindowLoaded && permitted(to: .displayVideoOverlay) else {
+    guard player!.mainWindow.isWindowLoaded && permitted(to: .displayVideoOverlay) else {
       throwError(withMessage: "overlay.simpleMode called when window is not available. Please call it after receiving the \"iina.window-loaded\" event.")
       return
     }
@@ -101,43 +101,18 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
     }
   }
 
-  func sendMessage(_ name: String, _ data: JSValue) {
+  func postMessage(_ name: String, _ data: JSValue) {
     guard pluginInstance.overlayViewLoaded && permitted(to: .displayVideoOverlay) else { return }
-    DispatchQueue.main.async {
-      let webView = self.pluginInstance.overlayView
-      guard let object = data.toObject(),
-         let data = try? JSONSerialization.data(withJSONObject: object),
-         let dataString = String(data: data, encoding: .utf8) else {
-          webView.evaluateJavaScript("window.iina._emit(`\(name)`)")
-          return
-      }
-      webView.evaluateJavaScript("window.iina._emit(`\(name)`, `\(dataString)`)")
-    }
+    messageHub.postMessage(to: pluginInstance.overlayView, name: name, data: data)
   }
 
   func onMessage(_ name: String, _ callback: JSValue) {
     guard pluginInstance.overlayViewLoaded && permitted(to: .displayVideoOverlay) else { return }
-    if let previousCallback = listeners[name] {
-      JSContext.current()!.virtualMachine.removeManagedReference(previousCallback, withOwner: self)
-    }
-    let managed = JSManagedValue(value: callback)
-    listeners[name] = managed
-    JSContext.current()!.virtualMachine.addManagedReference(managed, withOwner: self)
+    messageHub.addListener(forEvent: name, callback: callback)
   }
 
   func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-    guard let dict = message.body as? [Any], dict.count == 2,
-      let name = dict[0] as? String,
-      let callback = listeners[name] else { return }
-
-    guard let dataString = dict[1] as? String,
-      let data = dataString.data(using: .utf8),
-      let decoded = try? JSONSerialization.jsonObject(with: data) else {
-        callback.value.call(withArguments: [])
-      return
-    }
-
-    callback.value.call(withArguments: [JSValue(object: decoded, in: pluginInstance.js) ?? NSNull()])
+    messageHub.receiveMessageFromUserContentController(message)
   }
 }
 

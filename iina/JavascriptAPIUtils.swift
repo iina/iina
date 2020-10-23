@@ -26,6 +26,7 @@ fileprivate extension Process {
   func exec(_ file: String, _ args: [String]) -> JSValue?
   func ask(_ title: String) -> Bool
   func prompt(_ title: String) -> String?
+  func chooseFile(_ title: String, _ options: [String: Any]) -> Any
 }
 
 class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
@@ -110,5 +111,15 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
       return input.stringValue
     }
     return nil
+  }
+
+  func chooseFile(_ title: String, _ options: [String: Any]) -> Any {
+    let chooseDir = options["chooseDir"] as? Bool ?? false
+    let allowedFileTypes = options["allowedFileTypes"] as? [String]
+    return createPromise { resolve, reject in
+      Utility.quickOpenPanel(title: title, chooseDir: chooseDir, allowedFileTypes: allowedFileTypes) { result in
+        resolve.call(withArguments: [result.path])
+      }
+    }
   }
 }

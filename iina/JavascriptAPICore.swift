@@ -17,6 +17,8 @@ import JavaScriptCore
   func pause()
   func resume()
   func stop()
+  func seek(_ seconds: Double, _ exact: Bool)
+  func seekTo(_ seconds: Double)
   func setSpeed(_ speed: Double)
   func getChapters() -> [[String: Any]]
   func playChapter(index: Int)
@@ -68,6 +70,14 @@ class JavascriptAPICore: JavascriptAPI, JavascriptAPICoreExportable {
 
   func stop() {
     player!.stop()
+  }
+
+  func seek(_ seconds: Double, _ exact: Bool) {
+    player!.seek(relativeSecond: seconds, option: exact ? .exact : .relative)
+  }
+
+  func seekTo(_ seconds: Double) {
+    player!.seek(absoluteSecond: seconds)
   }
 
   func setSpeed(_ speed: Double) {
@@ -221,8 +231,14 @@ fileprivate class WindowAPI: JavascriptAPI, CoreSubAPIExportable {
     case "screens":
       let current = window.window!.screen!
       let main = NSScreen.main
-      let screens = NSScreen.screens.map { screen in
-        [ "frame": screen.frame, "main": screen == main, "current": screen == current ]
+      let screens = NSScreen.screens.map { screen -> [String: Any] in
+        let frame = [
+          "x": screen.frame.origin.x,
+          "y": screen.frame.origin.y,
+          "width": screen.frame.width,
+          "height": screen.frame.height
+        ]
+        return ["frame": frame, "main": screen == main, "current": screen == current]
       }
       return screens
     default:

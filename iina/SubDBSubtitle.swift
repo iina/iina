@@ -7,9 +7,6 @@
 //
 
 import Foundation
-import Just
-import PromiseKit
-import Gzip
 
 fileprivate let subsystem = Logger.Subsystem(rawValue: "subdb")
 

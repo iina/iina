@@ -127,7 +127,9 @@ class SubDBSupport {
     var hashData = Data(capacity: hashSize)
     let tailOffset = fileSize - UInt64(chunkSize)
 
-    if #available(OSX 10.15, *) {
+    #if swift(>=5.3) // Xcode 12 and above
+
+    if #available(OSX 10.15.4, *) {
       try file.seek(toOffset: 0)
       guard let beginChunk = try file.read(upToCount: chunkSize) else {
         throw SubDBError.cannotComputeHash
@@ -141,7 +143,11 @@ class SubDBSupport {
       }
 
       hashData.append(endChunk)
-    } else {
+    }
+
+    #endif
+
+    if #available(OSX 10.15.4, *) {} else {
       file.seek(toFileOffset: 0)
       hashData.append(file.readData(ofLength: chunkSize))
 

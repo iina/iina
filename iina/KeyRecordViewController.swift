@@ -69,7 +69,7 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
       pendingAction = nil
     }
 
-    NotificationCenter.default.addObserver(forName: .iinaKeyBindingInputChanged, object: nil, queue: .main) { _ in
+    NotificationCenter.default.addObserver(forName: .iinaKeyBindingInputChanged, object: nil, queue: .main) { [unowned self] _ in
       self.updateCommandField()
     }
   }

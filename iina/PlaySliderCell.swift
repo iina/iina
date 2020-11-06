@@ -22,14 +22,18 @@ fileprivate extension NSColor {
 }
 
 class PlaySliderCell: NSSliderCell {
+  weak var _playerCore: PlayerCore!
+  var playerCore: PlayerCore {
+    if let player = _playerCore { return player }
 
-  lazy var playerCore: PlayerCore = {
     let windowController = self.controlView!.window!.windowController
     if let mainWindowController = windowController as? MainWindowController {
       return mainWindowController.player
     }
-    return (windowController as! MiniPlayerWindowController).player
-  }()
+    let player = (windowController as! MiniPlayerWindowController).player
+    _playerCore = player
+    return player
+  }
 
   override var knobThickness: CGFloat {
     return knobWidth

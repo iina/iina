@@ -384,7 +384,7 @@ class MenuController: NSObject, NSMenuDelegate {
     // Plugin
 
     pluginMenu.delegate = self
-    NotificationCenter.default.addObserver(forName: .iinaMainWindowChanged, object: nil, queue: .main) {
+    NotificationCenter.default.addObserver(forName: .iinaMainWindowChanged, object: nil, queue: .main) { [unowned self] in
       if ($0.object as? Bool == true) {
         self.updatePluginMenu()
       }

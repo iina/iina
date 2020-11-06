@@ -121,7 +121,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     }
 
     // nofitications
-    playlistChangeObserver = NotificationCenter.default.addObserver(forName: .iinaPlaylistChanged, object: player, queue: OperationQueue.main) { _ in
+    playlistChangeObserver = NotificationCenter.default.addObserver(forName: .iinaPlaylistChanged, object: player, queue: OperationQueue.main) { [unowned self] _ in
       self.playlistTotalLengthIsReady = false
       self.reloadData(playlist: true, chapters: false)
     }

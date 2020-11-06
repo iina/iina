@@ -185,11 +185,11 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       self.updateTitle()
     }
 
-    NSWorkspace.shared.notificationCenter.addObserver(forName: NSWorkspace.willSleepNotification, object: nil, queue: nil, using: { [unowned self] _ in
+    NSWorkspace.shared.notificationCenter.addObserver(forName: NSWorkspace.willSleepNotification, object: nil, queue: nil) { [unowned self] _ in
       if Preference.bool(for: .pauseWhenGoesToSleep) {
         self.player.pause()
       }
-    })
+    }
   }
 
   deinit {

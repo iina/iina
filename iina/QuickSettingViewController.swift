@@ -206,12 +206,12 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
 
     // notifications
-    observe(.iinaTracklistChanged) { _ in
+    observe(.iinaTracklistChanged) { [unowned self] _ in
       self.withAllTableViews { view, _ in view.reloadData() }
     }
-    observe(.iinaVIDChanged) { _ in self.videoTableView.reloadData() }
-    observe(.iinaAIDChanged) { _ in self.audioTableView.reloadData() }
-    observe(.iinaSIDChanged) { _ in
+    observe(.iinaVIDChanged) { [unowned self] _ in self.videoTableView.reloadData() }
+    observe(.iinaAIDChanged) { [unowned self] _ in self.audioTableView.reloadData() }
+    observe(.iinaSIDChanged) { [unowned self] _ in
       self.subTableView.reloadData()
       self.secSubTableView.reloadData()
     }

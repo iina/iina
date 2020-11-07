@@ -205,6 +205,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   }
     
   func updateLoopBtnStatus() {
+    guard isViewLoaded else { return }
     let loopStatus = player.mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
     loopBtn.state = (loopStatus == "inf" || loopStatus == "force") ? .on : .off
   }

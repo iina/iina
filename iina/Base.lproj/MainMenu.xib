@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -384,9 +384,6 @@ CA
                             <menuItem title="Enter Full Screen" id="6Eq-ni-6hG">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Float on Top" id="wex-rX-PcY">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="xpM-h7-A4R"/>
                             <menuItem title="Music Mode" id="bGN-E4-V5A">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -628,6 +625,9 @@ CA
                                     <action selector="arrangeInFront:" target="-1" id="DRN-fu-gQh"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Stay On Top" id="jyx-Ak-osV">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>
@@ -670,7 +670,7 @@ CA
             <connections>
                 <outlet property="abLoop" destination="i3P-Xw-8D7" id="cBJ-XW-MJ0"/>
                 <outlet property="advancedScreenshot" destination="CKi-JE-yLT" id="pRb-CI-7g9"/>
-                <outlet property="alwaysOnTop" destination="wex-rX-PcY" id="3UN-lm-CVf"/>
+                <outlet property="alwaysOnTop" destination="jyx-Ak-osV" id="yJS-vi-kRA"/>
                 <outlet property="aspectMenu" destination="KIb-Ix-D8J" id="hQ4-Bb-Rdu"/>
                 <outlet property="audioDelayIndicator" destination="foC-r3-8mp" id="FhX-cJ-FaB"/>
                 <outlet property="audioDeviceMenu" destination="2Dp-Ol-Zcf" id="TOK-Ua-AHa"/>

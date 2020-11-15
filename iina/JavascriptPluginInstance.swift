@@ -71,6 +71,24 @@ class JavascriptPluginInstance {
     apis.values.forEach { $0.cleanUp(self) }
   }
 
+  func canAccess(url: URL) -> Bool {
+    guard let host = url.host else {
+      return false
+    }
+    guard plugin.domainList.contains(where: { domain -> Bool in
+      if domain == "*" {
+        return true
+      } else if domain.hasPrefix("*.") {
+        return host.hasSuffix(domain.dropFirst())
+      } else {
+        return domain == host
+      }
+    }) else {
+      return false
+    }
+    return true
+  }
+
   @objc func menuItemAction(_ sender: NSMenuItem) {
     guard let item = sender.representedObject as? JavascriptPluginMenuItem else { return }
     if !item.callAction() {

@@ -38,7 +38,7 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
   }
 
   func exec(_ file: String, _ args: [String]) -> JSValue? {
-    guard permitted(to: .callProcess) else {
+    guard permitted(to: .accessFileSystem) else {
       return nil
     }
     return createPromise { resolve, reject in

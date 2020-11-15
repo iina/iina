@@ -61,28 +61,24 @@ class JavascriptAPIHttp: JavascriptAPI, JavascriptAPIHttpExportable {
       let headers = options?["headers"] as? [String: String]
       let data = options?["data"] as? [String: Any]
       return createPromise { resolve, reject in
-        Just.request(method, url: url, params: params ?? [:], data: data ?? [:], headers: headers ?? [:]) { response in
+        Just.request(method, url: url,
+                     params: params ?? [:],
+                     data: data ?? [:],
+                     headers: headers ?? [:],
+                     asyncCompletionHandler:  { response in
           (response.ok ? resolve : reject).call(withArguments: [response.toDict()])
-        }
+        })
       }
     }
   }
 
   private func hostIsValid(_ url: String) -> Bool {
-    guard let host = NSURLComponents(string: url.addingPercentEncoding(withAllowedCharacters: .urlAllowed) ?? url)?.host else {
+    guard let urlComponents = URLComponents(string: url.addingPercentEncoding(withAllowedCharacters: .urlAllowed) ?? url) else {
       throwError(withMessage: "URL \(url) is invalid.")
       return false
     }
-    guard pluginInstance.plugin.domainList.contains(where: { domain -> Bool in
-      if domain == "*" {
-        return true
-      } else if domain.hasPrefix("*.") {
-        return host.hasSuffix(domain.dropFirst())
-      } else {
-        return domain == host
-      }
-    }) else {
-      throwError(withMessage: "URL \(url) is not whitelisted.")
+    guard pluginInstance.canAccess(url: urlComponents.url!) else {
+      throwError(withMessage: "URL \(url) is not allowed.")
       return false
     }
     return true

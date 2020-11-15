@@ -16,16 +16,14 @@ fileprivate let idRegex = Regex("^([\\w-_]+\\.)+[\\w-_]+$")
 class JavascriptPlugin: NSObject {
   enum Permission: String {
     case networkRequest = "network-request"
-    case callProcess = "call-process"
     case showOSD = "show-osd"
     case showAlert = "show-alert"
-    case addMenuItems = "menu-items"
     case displayVideoOverlay = "video-overlay"
     case accessFileSystem = "file-system"
 
     var isDangerous: Bool {
       switch self {
-      case .networkRequest, .callProcess:
+      case .networkRequest, .accessFileSystem:
         return true
       default:
         return false

@@ -641,7 +641,6 @@ class PlayerCore: NSObject {
     let isLoop = mpv.getString(MPVOption.PlaybackControl.loopFile) == "inf"
     mpv.setString(MPVOption.PlaybackControl.loopFile, isLoop ? "no" : "inf")
     sendOSD(.fileLoop(!isLoop))
-    events.emit(.playlistLoopChanged, data: !isLoop)
   }
 
   func togglePlaylistLoop() {
@@ -649,7 +648,6 @@ class PlayerCore: NSObject {
     let isLoop = (loopStatus == "inf" || loopStatus == "force")
     mpv.setString(MPVOption.PlaybackControl.loopPlaylist, isLoop ? "no" : "inf")
     sendOSD(.playlistLoop(!isLoop))
-    events.emit(.playlistLoopChanged, data: !isLoop)
   }
 
   func toggleShuffle() {

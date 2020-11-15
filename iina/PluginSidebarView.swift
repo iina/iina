@@ -10,6 +10,8 @@ import Cocoa
 import WebKit
 
 class PluginSidebarView: WKWebView, WKNavigationDelegate {
+  weak private var pluginInstance: JavascriptPluginInstance!
+
   deinit {
     configuration.userContentController.removeScriptMessageHandler(forName: "iina")
   }
@@ -23,11 +25,20 @@ class PluginSidebarView: WKWebView, WKNavigationDelegate {
     config.userContentController.add(pluginInstance.apis!["sidebar"] as! WKScriptMessageHandler, name: "iina")
 
     let webView = PluginSidebarView(frame: .zero, configuration: config)
+    webView.pluginInstance = pluginInstance
     webView.navigationDelegate = webView
     webView.translatesAutoresizingMaskIntoConstraints = false
     webView.setValue(false, forKey: "drawsBackground")
 
     return webView
+  }
+
+  func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    if let url = navigationAction.request.url, pluginInstance.canAccess(url: url) {
+      decisionHandler(.cancel)
+    } else {
+      decisionHandler(.allow)
+    }
   }
 
   func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){

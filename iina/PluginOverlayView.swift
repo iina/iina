@@ -10,6 +10,8 @@ import Cocoa
 import WebKit
 
 class PluginOverlayView: WKWebView, WKNavigationDelegate {
+  weak private var pluginInstance: JavascriptPluginInstance!
+
   override func hitTest(_ point: NSPoint) -> NSView? {
     return nil
   }
@@ -32,12 +34,21 @@ class PluginOverlayView: WKWebView, WKNavigationDelegate {
     config.userContentController.add(pluginInstance.apis!["overlay"] as! WKScriptMessageHandler, name: "iina")
 
     let webView = PluginOverlayView(frame: .zero, configuration: config)
+    webView.pluginInstance = pluginInstance
     webView.navigationDelegate = webView
     webView.translatesAutoresizingMaskIntoConstraints = false
     webView.setValue(false, forKey: "drawsBackground")
     webView.isHidden = true
 
     return webView
+  }
+
+  func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    if let url = navigationAction.request.url, pluginInstance.canAccess(url: url) {
+      decisionHandler(.cancel)
+    } else {
+      decisionHandler(.allow)
+    }
   }
 
   func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){

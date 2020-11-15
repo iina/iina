@@ -32,32 +32,20 @@ class EventController {
     static let windowSizeAdjusted = Name("iina.window-size-adjusted")
     static let windowMoved = Name("iina.window-moved")
     static let windowResized = Name("iina.window-resized")
-    static let windowFullscreenChanged = Name("iina.window.fs-changed")
-    static let windowChangedScreen = Name("iina.window-changed-screen")
+    static let windowFullscreenChanged = Name("iina.window-fs.changed")
+    static let windowScreenChanged = Name("iina.window-screen.changed")
     static let windowMiniaturized = Name("iina.window-miniaturized")
     static let windowDeminiaturized = Name("iina.window-deminiaturized")
     
-    static let windowBecameMain = Name("iina.window-became-main")
-    static let windowResignedMain = Name("iina.window-resigned-main")
+    static let windowMainStatusChanged = Name("iina.window-main.changed")
     static let windowWillClose = Name("iina.window-will-close")
-    static let windowDidClose = Name("iina.window-did-close") // might shut down the whole app
 
-    static let musicModeChanged = Name("iina.music-mode-changed")
+    static let musicModeChanged = Name("iina.music-mode.changed")
     static let pipChanged = Name("iina.pip.changed")
 
-    // File related
     static let fileLoaded = Name("iina.file-loaded")
     static let fileStarted = Name("iina.file-started")
     
-    // Playlist related
-    static let fileLoopChanged = Name("iina.file-loop-changed")
-    static let playlistLoopChanged = Name("iina.playlist-loop-changed")
-    
-    // Playback related
-    static let playbackPaused = Name("iina.playback.paused")
-    static let playbackResumed = Name("iina.playback.resumed")
-    
-    // Others
     static let mpvInitialized = Name("iina.mpv-inititalized")
     static let thumbnailsReady = Name("iina.thumbnails-ready")
     static let pluginOverlayLoaded = Name("iina.plugin-overlay-loaded")

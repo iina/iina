@@ -9,7 +9,8 @@
 import Cocoa
 import WebKit
 
-class PluginStandaloneWindow: NSWindow {
+class PluginStandaloneWindow: NSWindow, WKNavigationDelegate {
+  weak private var pluginInstance: JavascriptPluginInstance!
   var webView: WKWebView!
 
   static func create(pluginInstance: JavascriptPluginInstance) -> PluginStandaloneWindow {
@@ -30,6 +31,8 @@ class PluginStandaloneWindow: NSWindow {
   }
 
   func initializeWebView(pluginInstance: JavascriptPluginInstance) {
+    self.pluginInstance = pluginInstance
+
     let config = WKWebViewConfiguration()
     config.userContentController.addUserScript(
       WKUserScript(source: JavascriptMessageHub.bridgeScript, injectionTime: .atDocumentStart, forMainFrameOnly: true)
@@ -38,9 +41,19 @@ class PluginStandaloneWindow: NSWindow {
     config.userContentController.add(pluginInstance.apis!["standaloneWindow"] as! WKScriptMessageHandler, name: "iina")
 
     webView = WKWebView(frame: .zero, configuration: config)
+    webView.navigationDelegate = self
     webView.translatesAutoresizingMaskIntoConstraints = false
     contentView?.addSubview(webView)
+
     Utility.quickConstraints(["H:|-0-[v]-0-|", "V:|-0-[v]-0-|"], ["v": webView])
+  }
+
+  func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    if let url = navigationAction.request.url, pluginInstance.canAccess(url: url) {
+      decisionHandler(.cancel)
+    } else {
+      decisionHandler(.allow)
+    }
   }
 }
 

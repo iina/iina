@@ -38,14 +38,20 @@ class JavascriptAPIFile: JavascriptAPI, JavascriptAPIFileExportable {
       ])
     }
 
+    let dirURL = URL(fileURLWithPath: dirPath)
     let urls = try? FileManager.default.contentsOfDirectory(
-      at: URL(fileURLWithPath: dirPath),
+      at: dirURL,
       includingPropertiesForKeys: [.isDirectoryKey],
       options:fmOptions
     )
 
+    let pathPrefixCount = dirURL.path.count
     return urls?.map {
-      ["filename": $0.lastPathComponent, "isDir": $0.isExistingDirectory]
+      [
+        "filename": $0.lastPathComponent,
+        "path": $0.path.dropFirst(pathPrefixCount),
+        "isDir": $0.isExistingDirectory
+      ]
     }
   }
 

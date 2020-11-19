@@ -1737,7 +1737,6 @@ class NowPlayingInfoManager {
         info[MPMediaItemPropertyMediaType] = MPNowPlayingInfoMediaType.video.rawValue
         info[MPMediaItemPropertyTitle] = activePlayer.getMediaTitle(withExtension: false)
       }
-      print("### write title")
     }
 
     let duration = PlayerCore.lastActive.info.videoDuration?.second ?? 0
@@ -1750,7 +1749,6 @@ class NowPlayingInfoManager {
     info[MPNowPlayingInfoPropertyDefaultPlaybackRate] = 1
 
     center.nowPlayingInfo = info
-    NSLog("%@", "### update")
   }
 
   static func updateState(_ state: MPNowPlayingPlaybackState) {

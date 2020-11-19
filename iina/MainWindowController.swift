@@ -1513,6 +1513,7 @@ class MainWindowController: PlayerWindowController {
         self.fadeableViews.forEach { (v) in
           v.isHidden = true
         }
+        self.standardWindowButtons.forEach { $0.alphaValue = 1e-100 }
         self.animationState = .hidden
       }
     }

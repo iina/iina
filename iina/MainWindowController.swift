@@ -1511,9 +1511,12 @@ class MainWindowController: PlayerWindowController {
       // if no interrupt then hide animation
       if self.animationState == .willHide {
         self.fadeableViews.forEach { (v) in
-          v.isHidden = true
+          if let btn = v as? NSButton, self.standardWindowButtons.contains(btn) {
+            v.alphaValue = 1e-100
+          } else {
+            v.isHidden = true
+          }
         }
-        self.standardWindowButtons.forEach { $0.alphaValue = 1e-100 }
         self.animationState = .hidden
       }
     }

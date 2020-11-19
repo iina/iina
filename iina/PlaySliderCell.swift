@@ -128,12 +128,19 @@ class PlaySliderCell: NSSliderCell {
 
   override func knobRect(flipped: Bool) -> NSRect {
     let slider = self.controlView as! NSSlider
-    let bounds = super.barRect(flipped: flipped)
+    let barRect = super.barRect(flipped: flipped)
     let percentage = slider.doubleValue / (slider.maxValue - slider.minValue)
-    let pos = min(CGFloat(percentage) * bounds.width, bounds.width - 1);
+    let pos = min(CGFloat(percentage) * barRect.width, barRect.width - 1);
     let rect = super.knobRect(flipped: flipped)
     let flippedMultiplier = flipped ? CGFloat(-1) : CGFloat(1)
-    return NSMakeRect(pos - flippedMultiplier * 0.5 * knobWidth, rect.origin.y, knobWidth, rect.height)
+
+    let height: CGFloat
+    if #available(macOS 10.16, *) {
+      height = (barRect.origin.y - rect.origin.y) * 2 + barRect.height
+    } else {
+      height = rect.height
+    }
+    return NSMakeRect(pos - flippedMultiplier * 0.5 * knobWidth, rect.origin.y, knobWidth, height)
   }
 
   override func drawBar(inside rect: NSRect, flipped: Bool) {
@@ -157,6 +164,7 @@ class PlaySliderCell: NSSliderCell {
       progress = knobPos;
     }
 
+    NSGraphicsContext.saveGraphicsState()
     let barRect: NSRect
     if #available(macOS 10.16, *) {
       barRect = rect

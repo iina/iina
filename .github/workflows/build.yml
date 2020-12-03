@@ -1,0 +1,19 @@
+name: IINA CI
+
+# Triggers the workflow on push or pull request events
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    env: 
+      DEVELOPER_DIR: /Applications/Xcode_11.3.app/Contents/Developer
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Force Xcode 11
+        run: sudo xcode-select -switch /Applications/Xcode_11.3.app  
+      - name: Install Dependencies
+        run: pod update
+      - name: Build
+        run: xcodebuild -workspace iina.xcworkspace -scheme iina CODE_SIGNING_ALLOWED=NO

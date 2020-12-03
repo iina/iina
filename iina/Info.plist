@@ -1121,6 +1121,11 @@
 				<array>
 					<string>webm</string>
 				</array>
+        <key>public.mime-type</key>
+				<array>
+					<string>audio/webm</string>
+					<string>video/webm</string>
+				</array>
 			</dict>
 		</dict>
 		<dict>

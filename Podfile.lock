@@ -9,7 +9,7 @@ PODS:
   - PromiseKit/CorePromise (6.8.4)
   - PromiseKit/Foundation (6.8.4):
     - PromiseKit/CorePromise
-  - Sparkle (1.22.0)
+  - Sparkle (1.24.0)
 
 DEPENDENCIES:
   - GRMustache.swift (from `https://github.com/iina/GRMustache.swift`)
@@ -42,10 +42,10 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   GRMustache.swift: 53405b02c374520f9193cf41bfa677f03a6d70aa
   GzipSwift: 5592f4d62b641e04d06443ba471f8ed76b1363e4
-  Just: 60c0995e04718eb621a07abef45ce6883c562f2b
+  Just: 3c64f42cd75ad819a4d42a1052006f7c44054d9e
   PromiseKit: 51794a832647e7b819336dc2279039ce9f1cc49b
-  Sparkle: 593ac2e677c07bcb6c3b22d621240e7cbedaab57
+  Sparkle: 270cd27377bf04e9c128af06e3a22d0f572d6ee3
 
 PODFILE CHECKSUM: 4969f0d73fe5d871a1a1853ad7807a345443e71a
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.10.1

@@ -45,6 +45,8 @@
 		8418A2F5213F5791003166AC /* OpenURLWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8418A2F7213F5791003166AC /* OpenURLWindowController.xib */; };
 		841A599D1E1FF5800079E177 /* SleepPreventer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841A599C1E1FF5800079E177 /* SleepPreventer.swift */; };
 		841B14281E941DFF00744AB8 /* TimeLabelOverflowedStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B14271E941DFF00744AB8 /* TimeLabelOverflowedStackView.swift */; };
+		84279D7525B6DF59003B008B /* libdav1d.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84279D7425B6DF59003B008B /* libdav1d.5.dylib */; };
+		84279D7725B6DF77003B008B /* libmujs.so in Frameworks */ = {isa = PBXBuildFile; fileRef = 84279D7625B6DF77003B008B /* libmujs.so */; };
 		842904E21F0EC01600478376 /* AutoFileMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842904E11F0EC01600478376 /* AutoFileMatcher.swift */; };
 		842F55A51EA17E7E0081D475 /* IINACommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842F55A41EA17E7E0081D475 /* IINACommand.swift */; };
 		8434BAA71D5DF2DA003BECF2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434BAA61D5DF2DA003BECF2 /* Extensions.swift */; };
@@ -209,7 +211,6 @@
 		E3B25F5F24FF505D0068B9B0 /* librubberband.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F2824FF505B0068B9B0 /* librubberband.2.dylib */; };
 		E3B25F6024FF505D0068B9B0 /* liblz4.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F2924FF505B0068B9B0 /* liblz4.1.dylib */; };
 		E3B25F6124FF505D0068B9B0 /* libpostproc.55.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F2A24FF505B0068B9B0 /* libpostproc.55.dylib */; };
-		E3B25F6224FF505D0068B9B0 /* libdav1d.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F2B24FF505B0068B9B0 /* libdav1d.4.dylib */; };
 		E3B25F6324FF505D0068B9B0 /* libcrypto.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F2C24FF505B0068B9B0 /* libcrypto.1.1.dylib */; };
 		E3B25F6424FF505D0068B9B0 /* libgif.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F2D24FF505B0068B9B0 /* libgif.dylib */; };
 		E3B25F6524FF505D0068B9B0 /* libwebp.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F2E24FF505B0068B9B0 /* libwebp.7.dylib */; };
@@ -240,7 +241,6 @@
 		E3B25F7E24FF50710068B9B0 /* libb2.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F0D24FF50590068B9B0 /* libb2.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		E3B25F7F24FF50710068B9B0 /* libbluray.2.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F2F24FF505B0068B9B0 /* libbluray.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		E3B25F8024FF50710068B9B0 /* libcrypto.1.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F2C24FF505B0068B9B0 /* libcrypto.1.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		E3B25F8124FF50710068B9B0 /* libdav1d.4.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F2B24FF505B0068B9B0 /* libdav1d.4.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		E3B25F8224FF50710068B9B0 /* libffi.7.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F3B24FF505C0068B9B0 /* libffi.7.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		E3B25F8324FF50710068B9B0 /* libfontconfig.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F3524FF505C0068B9B0 /* libfontconfig.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		E3B25F8424FF50710068B9B0 /* libfreetype.6.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F1324FF50590068B9B0 /* libfreetype.6.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -359,7 +359,6 @@
 				E3B25F7E24FF50710068B9B0 /* libb2.1.dylib in Copy Dylibs */,
 				E3B25F7F24FF50710068B9B0 /* libbluray.2.dylib in Copy Dylibs */,
 				E3B25F8024FF50710068B9B0 /* libcrypto.1.1.dylib in Copy Dylibs */,
-				E3B25F8124FF50710068B9B0 /* libdav1d.4.dylib in Copy Dylibs */,
 				E3B25F8224FF50710068B9B0 /* libffi.7.dylib in Copy Dylibs */,
 				E3B25F8324FF50710068B9B0 /* libfontconfig.1.dylib in Copy Dylibs */,
 				E3B25F8424FF50710068B9B0 /* libfreetype.6.dylib in Copy Dylibs */,
@@ -793,6 +792,8 @@
 		8418A2F8213F5794003166AC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/OpenURLWindowController.strings"; sourceTree = "<group>"; };
 		841A599C1E1FF5800079E177 /* SleepPreventer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SleepPreventer.swift; sourceTree = "<group>"; };
 		841B14271E941DFF00744AB8 /* TimeLabelOverflowedStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLabelOverflowedStackView.swift; sourceTree = "<group>"; };
+		84279D7425B6DF59003B008B /* libdav1d.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libdav1d.5.dylib; path = deps/lib/libdav1d.5.dylib; sourceTree = "<group>"; };
+		84279D7625B6DF77003B008B /* libmujs.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmujs.so; path = deps/lib/libmujs.so; sourceTree = "<group>"; };
 		842904E11F0EC01600478376 /* AutoFileMatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoFileMatcher.swift; sourceTree = "<group>"; };
 		842F55A41EA17E7E0081D475 /* IINACommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IINACommand.swift; sourceTree = "<group>"; };
 		8434BAA61D5DF2DA003BECF2 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -1372,7 +1373,6 @@
 		E3B25F2824FF505B0068B9B0 /* librubberband.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = librubberband.2.dylib; path = deps/lib/librubberband.2.dylib; sourceTree = "<group>"; };
 		E3B25F2924FF505B0068B9B0 /* liblz4.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblz4.1.dylib; path = deps/lib/liblz4.1.dylib; sourceTree = "<group>"; };
 		E3B25F2A24FF505B0068B9B0 /* libpostproc.55.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpostproc.55.dylib; path = deps/lib/libpostproc.55.dylib; sourceTree = "<group>"; };
-		E3B25F2B24FF505B0068B9B0 /* libdav1d.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libdav1d.4.dylib; path = deps/lib/libdav1d.4.dylib; sourceTree = "<group>"; };
 		E3B25F2C24FF505B0068B9B0 /* libcrypto.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.1.1.dylib; path = deps/lib/libcrypto.1.1.dylib; sourceTree = "<group>"; };
 		E3B25F2D24FF505B0068B9B0 /* libgif.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgif.dylib; path = deps/lib/libgif.dylib; sourceTree = "<group>"; };
 		E3B25F2E24FF505B0068B9B0 /* libwebp.7.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libwebp.7.dylib; path = deps/lib/libwebp.7.dylib; sourceTree = "<group>"; };
@@ -1518,6 +1518,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84279D7525B6DF59003B008B /* libdav1d.5.dylib in Frameworks */,
 				E3B25F5724FF505D0068B9B0 /* libp11-kit.0.dylib in Frameworks */,
 				E3B25F6124FF505D0068B9B0 /* libpostproc.55.dylib in Frameworks */,
 				E3B25F4024FF505D0068B9B0 /* libgnutls.30.dylib in Frameworks */,
@@ -1531,12 +1532,12 @@
 				E3B25F5024FF505D0068B9B0 /* libnettle.8.dylib in Frameworks */,
 				E3B25F5524FF505D0068B9B0 /* libswresample.3.dylib in Frameworks */,
 				E3B25F5624FF505D0068B9B0 /* libavresample.4.dylib in Frameworks */,
+				84279D7725B6DF77003B008B /* libmujs.so in Frameworks */,
 				E3B25F3F24FF505D0068B9B0 /* libswscale.5.dylib in Frameworks */,
 				E3B25F6624FF505D0068B9B0 /* libbluray.2.dylib in Frameworks */,
 				E3B25F4124FF505D0068B9B0 /* librtmp.1.dylib in Frameworks */,
 				E3B25F4524FF505D0068B9B0 /* libpcre.1.dylib in Frameworks */,
 				E3B25F5124FF505D0068B9B0 /* libidn2.0.dylib in Frameworks */,
-				E3B25F6224FF505D0068B9B0 /* libdav1d.4.dylib in Frameworks */,
 				496B19921E2968530035AF10 /* PIP.framework in Frameworks */,
 				8403CEA72007CBD400645516 /* MediaPlayer.framework in Frameworks */,
 				E3B25F4424FF505D0068B9B0 /* libb2.1.dylib in Frameworks */,
@@ -1694,8 +1695,8 @@
 				E3B25F3924FF505C0068B9B0 /* libavutil.56.dylib */,
 				E3B25F0D24FF50590068B9B0 /* libb2.1.dylib */,
 				E3B25F2F24FF505B0068B9B0 /* libbluray.2.dylib */,
+				84279D7425B6DF59003B008B /* libdav1d.5.dylib */,
 				E3B25F2C24FF505B0068B9B0 /* libcrypto.1.1.dylib */,
-				E3B25F2B24FF505B0068B9B0 /* libdav1d.4.dylib */,
 				E3B25F3B24FF505C0068B9B0 /* libffi.7.dylib */,
 				E3B25F3524FF505C0068B9B0 /* libfontconfig.1.dylib */,
 				E3B25F1324FF50590068B9B0 /* libfreetype.6.dylib */,
@@ -1739,6 +1740,7 @@
 				E3B25F2E24FF505B0068B9B0 /* libwebp.7.dylib */,
 				E3B25F2224FF505A0068B9B0 /* libwebpmux.3.dylib */,
 				E3B25F3A24FF505C0068B9B0 /* libzstd.1.dylib */,
+				84279D7625B6DF77003B008B /* libmujs.so */,
 				8403CEA62007CBD300645516 /* MediaPlayer.framework */,
 				845E2F491E76CFC2002C6588 /* libz.tbd */,
 				496B19911E2968530035AF10 /* PIP.framework */,
@@ -2464,7 +2466,6 @@
 				"${BUILT_PRODUCTS_DIR}/Just/Just.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${PODS_ROOT}/Sparkle/Sparkle.framework",
-				"${PODS_ROOT}/Sparkle/Sparkle.framework.dSYM",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -2473,7 +2474,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Just.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sparkle.framework",
-				"${DWARF_DSYM_FOLDER_PATH}/Sparkle.framework.dSYM",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

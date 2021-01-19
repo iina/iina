@@ -51,9 +51,14 @@ IINA ships with pre-compiled dynamic libraries for convenience reasons. If you a
 
 ### Using the pre-compiled libraries
 
-1. Open iina.xcworkspace in the [latest public version of Xcode](https://itunes.apple.com/us/app/xcode/id497799835). *IINA may not build if you use any other version.*
+1. Download pre-compiled libraries by running
+```console
+./other/download_libs.sh
+```
 
-2. Build the project.
+2. Open iina.xcworkspace in the [latest public version of Xcode](https://itunes.apple.com/us/app/xcode/id497799835). *IINA may not build if you use any other version.*
+
+3. Build the project.
 
 ### Building mpv manually
 

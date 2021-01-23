@@ -166,6 +166,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     
     if #available(OSX 10.13, *) {
       subTableView.registerForDraggedTypes([NSPasteboard.PasteboardType.fileURL])
+      secSubTableView.registerForDraggedTypes([NSPasteboard.PasteboardType.fileURL])
     }
   }
 
@@ -375,7 +376,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   
   func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation
   {
-    if tableView == subTableView {
+    if (tableView == subTableView || tableView == secSubTableView) {
       
       let pb = info.draggingPasteboard
       if pb.pasteboardItems?.count != 1 { // multiple items are not supported
@@ -395,12 +396,22 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
         }
         return false
       })) {
-        tableView.setDropRow(player.info.subTracks.firstIndex(of: existingTrack!)! + 1, dropOperation: NSTableView.DropOperation.on)
-        print("setDropRow: ", player.info.subTracks.firstIndex(of: existingTrack!)! + 1)
-        return NSDragOperation.every
+        
+        let existingRow = player.info.subTracks.firstIndex(of: existingTrack!)! + 1
+        tableView.setDropRow(existingRow, dropOperation: NSTableView.DropOperation.on)
+        return NSDragOperation.generic
       }
       
-    } else if tableView == secSubTableView {
+      // only subTableView may load new files
+      guard tableView == subTableView else {
+        return []
+      }
+      
+      if (Utility.supportedFileExt[.sub]!.contains(filePathURL.pathExtension))
+      {
+        tableView.setDropRow(player.info.subTracks.count + 1, dropOperation: NSTableView.DropOperation.above)
+        return NSDragOperation.generic
+      }
       
     }
     
@@ -409,7 +420,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   
   func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool
   {
-    if tableView == subTableView {
+    if (tableView == subTableView || tableView == secSubTableView) {
       
       let pb = info.draggingPasteboard
       let classes = [ NSURL.self ]
@@ -421,25 +432,31 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
         return track.externalFilename == filePathURL.path
       })
       {
-        if (track.id == player.info.sid)
-        {
-          // simulate UITableView.reloadSections
-          tableView.beginUpdates()
-          print("beginUpdates: ", row)
-          tableView.removeRows(at: IndexSet(integer: row), withAnimation: NSTableView.AnimationOptions.effectFade)
-          tableView.insertRows(at: IndexSet(integer: row), withAnimation: NSTableView.AnimationOptions.effectGap)
-          tableView.endUpdates()
+        tableView.scrollRowToVisible(row)
+        if (tableView == subTableView) {
+          if (track.id == player.info.secondSid) {
+            self.player.setTrack(0, forType: .secondSub)
+          }
+          self.player.setTrack(track.id, forType: .sub)
+        } else if (tableView == secSubTableView) {
+          if (track.id == player.info.sid) {
+            self.player.setTrack(0, forType: .sub)
+          }
+          self.player.setTrack(track.id, forType: .secondSub)
         }
-        
-        self.player.setTrack(track.id, forType: .sub)
         
         return true
       }
       
+      self.player.loadExternalSubFile(filePathURL, delay: true)
+      self.subTableView.reloadData()
+      self.secSubTableView.reloadData()
+      
+      DispatchQueue.main.async {
+        tableView.scrollRowToVisible(row)
+      }
+      
       return true
-      
-    } else if tableView == secSubTableView {
-      
     }
     
     return false

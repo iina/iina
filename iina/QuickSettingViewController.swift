@@ -167,6 +167,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     if #available(OSX 10.13, *) {
       subTableView.registerForDraggedTypes([NSPasteboard.PasteboardType.fileURL])
       secSubTableView.registerForDraggedTypes([NSPasteboard.PasteboardType.fileURL])
+      audioTableView.registerForDraggedTypes([NSPasteboard.PasteboardType.fileURL])
     }
   }
 
@@ -413,6 +414,36 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
         return NSDragOperation.generic
       }
       
+    } else if (tableView == audioTableView) {
+      
+      let pb = info.draggingPasteboard
+      if pb.pasteboardItems?.count != 1 { // multiple items are not supported
+        return []
+      }
+      
+      let classes = [ NSURL.self ]
+      guard let filePathURL = (pb.readObjects(forClasses: classes, options: nil)?.first as? NSURL)?.filePathURL else {
+        return []
+      }
+      
+      var existingTrack: MPVTrack? = nil
+      if (player.info.audioTracks.contains(where: { (track) -> Bool in
+        if (track.externalFilename == filePathURL.path) {
+          existingTrack = track
+          return true
+        }
+        return false
+      })) {
+        let existingRow = player.info.audioTracks.firstIndex(of: existingTrack!)! + 1
+        tableView.setDropRow(existingRow, dropOperation: NSTableView.DropOperation.on)
+        return NSDragOperation.generic
+      }
+      
+      if (Utility.supportedFileExt[.audio]!.contains(filePathURL.pathExtension))
+      {
+        tableView.setDropRow(player.info.audioTracks.count + 1, dropOperation: NSTableView.DropOperation.above)
+        return NSDragOperation.generic
+      }
     }
     
     return [] // NSDragOperationNone
@@ -429,7 +460,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       }
       
       if let track = player.info.subTracks.first(where: { (track) -> Bool in
-        return track.externalFilename == filePathURL.path
+        track.externalFilename == filePathURL.path
       })
       {
         tableView.scrollRowToVisible(row)
@@ -451,6 +482,31 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       self.player.loadExternalSubFile(filePathURL, delay: true)
       self.subTableView.reloadData()
       self.secSubTableView.reloadData()
+      
+      DispatchQueue.main.async {
+        tableView.scrollRowToVisible(row)
+      }
+      
+      return true
+    } else if (tableView == audioTableView) {
+      
+      let pb = info.draggingPasteboard
+      let classes = [ NSURL.self ]
+      guard let filePathURL = (pb.readObjects(forClasses: classes, options: nil)?.first as? NSURL)?.filePathURL else {
+        return false
+      }
+      
+      if let track = player.info.audioTracks.first(where: { (track) -> Bool in
+        track.externalFilename == filePathURL.path
+      })
+      {
+        tableView.scrollRowToVisible(row)
+        self.player.setTrack(track.id, forType: .audio)
+        return true
+      }
+      
+      self.player.loadExternalAudioFile(filePathURL)
+      self.audioTableView.reloadData()
       
       DispatchQueue.main.async {
         tableView.scrollRowToVisible(row)

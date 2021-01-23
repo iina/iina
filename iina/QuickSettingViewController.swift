@@ -163,6 +163,10 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       self.subTableView.reloadData()
       self.secSubTableView.reloadData()
     }
+    
+    if #available(OSX 10.13, *) {
+      subTableView.registerForDraggedTypes([NSPasteboard.PasteboardType.fileURL])
+    }
   }
 
   // MARK: - Validate UI
@@ -367,6 +371,78 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       return track?.idString
     }
     return nil
+  }
+  
+  func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation
+  {
+    if tableView == subTableView {
+      
+      let pb = info.draggingPasteboard
+      if pb.pasteboardItems?.count != 1 { // multiple items are not supported
+        return []
+      }
+      
+      let classes = [ NSURL.self ]
+      guard let filePathURL = (pb.readObjects(forClasses: classes, options: nil)?.first as? NSURL)?.filePathURL else {
+        return []
+      }
+      
+      var existingTrack: MPVTrack? = nil
+      if (player.info.subTracks.contains(where: { (track) -> Bool in
+        if (track.externalFilename == filePathURL.path) {
+          existingTrack = track
+          return true
+        }
+        return false
+      })) {
+        tableView.setDropRow(player.info.subTracks.firstIndex(of: existingTrack!)! + 1, dropOperation: NSTableView.DropOperation.on)
+        print("setDropRow: ", player.info.subTracks.firstIndex(of: existingTrack!)! + 1)
+        return NSDragOperation.every
+      }
+      
+    } else if tableView == secSubTableView {
+      
+    }
+    
+    return [] // NSDragOperationNone
+  }
+  
+  func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool
+  {
+    if tableView == subTableView {
+      
+      let pb = info.draggingPasteboard
+      let classes = [ NSURL.self ]
+      guard let filePathURL = (pb.readObjects(forClasses: classes, options: nil)?.first as? NSURL)?.filePathURL else {
+        return false
+      }
+      
+      if let track = player.info.subTracks.first(where: { (track) -> Bool in
+        return track.externalFilename == filePathURL.path
+      })
+      {
+        if (track.id == player.info.sid)
+        {
+          // simulate UITableView.reloadSections
+          tableView.beginUpdates()
+          print("beginUpdates: ", row)
+          tableView.removeRows(at: IndexSet(integer: row), withAnimation: NSTableView.AnimationOptions.effectFade)
+          tableView.insertRows(at: IndexSet(integer: row), withAnimation: NSTableView.AnimationOptions.effectGap)
+          tableView.endUpdates()
+        }
+        
+        self.player.setTrack(track.id, forType: .sub)
+        
+        return true
+      }
+      
+      return true
+      
+    } else if tableView == secSubTableView {
+      
+    }
+    
+    return false
   }
 
   func tableViewSelectionDidChange(_ notification: Notification) {

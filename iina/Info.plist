@@ -470,6 +470,13 @@
 				<key>NSIncludesSubdomains</key>
 				<true/>
 			</dict>
+      <key>thesubdb.com</key>
+      <dict>
+        <key>NSExceptionAllowsInsecureHTTPLoads</key>
+        <true/>
+        <key>NSIncludesSubdomains</key>
+        <true/>
+      </dict>
 		</dict>
 	</dict>
 	<key>NSHumanReadableCopyright</key>

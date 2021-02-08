@@ -26,6 +26,7 @@ class OnlineSubtitle: NSObject {
     case shooter = 0
     case openSub
     case assrt
+    case subDB
 
     var name: String {
       switch self {
@@ -35,6 +36,8 @@ class OnlineSubtitle: NSObject {
         return "opensubtitles.org"
       case .assrt:
         return "assrt.net"
+      case .subDB:
+        return "thesubdb.com"
       }
     }
   }
@@ -159,6 +162,49 @@ class OnlineSubtitle: NSObject {
         }
         playerCore.sendOSD(osdMessage)
         playerCore.isSearchingOnlineSubtitle = false
+      }
+    case .subDB:
+      // subdb
+      let subSupport = SubDBSupport.shared
+      // - language
+      let userLang = Preference.string(for: .subLang) ?? ""
+      if userLang.isEmpty {
+        Utility.showAlert("sub_lang_not_set")
+        subSupport.language = "eng"
+      } else {
+        subSupport.language = userLang
+      }
+
+      // - request
+      subSupport.search(fileUrl: url) { (error, subtitles) in
+        if let error = error {
+          let osdMessage: OSDMessage
+          switch error {
+          case SubDBSupport.SubDBError.cannotReadFile,
+               SubDBSupport.SubDBError.fileTooSmall:
+            osdMessage = .fileError
+          case SubDBSupport.SubDBError.userCanceled:
+            osdMessage = .canceled
+          case SubDBSupport.SubDBError.networkError:
+            osdMessage = .networkError
+          case SubDBSupport.SubDBError.noResult:
+            callback([])
+            return
+          default:
+            osdMessage = .networkError
+          }
+
+          playerCore.sendOSD(osdMessage)
+          playerCore.isSearchingOnlineSubtitle = false
+
+          return
+        }
+
+        if let subtitles = subtitles {
+          callback(subtitles)
+        } else {
+          callback([])
+        }
       }
     }
   }

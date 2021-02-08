@@ -336,6 +336,9 @@
                                                 <menuItem title="Shooter.cn" state="on" id="7YD-rw-eCZ"/>
                                                 <menuItem title="OpenSubtitles.org" tag="1" id="39k-VH-tOz"/>
                                                 <menuItem title="Assrt.net" tag="2" id="lQt-Cg-6Zd"/>
+                                                <menuItem title="TheSubDB.com" tag="3" id="D7c-fQ-zRh">
+                                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                                </menuItem>
                                             </items>
                                         </menu>
                                     </popUpButtonCell>

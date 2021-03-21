@@ -54,9 +54,10 @@
 	### Using the pre-compiled libraries
 
 	1. Download pre-compiled libraries by running
-	```console
-	./other/download_libs.sh
-	```
+
+		```console
+		$ ./other/download_libs.sh
+		```
 
 	2. Open iina.xcworkspace in the [latest public version of Xcode](https://itunes.apple.com/us/app/xcode/id497799835). *IINA may not build if you use any other version.*
 

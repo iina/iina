@@ -49,19 +49,18 @@ class VideoTime {
   }
 
   convenience init?(_ format: String) {
-    let split = format.split(separator: ":").map { (seq) -> Int? in
-      return Int(String(seq))
+    let split = format.split(separator: ":").map { Int($0) }
+    if split.contains(nil) {
+      return nil
     }
-    if !(split.contains {$0 == nil}) {
-      // if no nil in array
-      if split.count == 2 {
-        self.init(0, split[0]!, split[1]!)
-      } else if split.count == 3 {
-        self.init(split[0]!, split[1]!, split[2]!)
-      } else {
-        return nil
-      }
-    } else {
+    switch split.count {
+    case 1:
+      self.init(0, 0, split[0]!)
+    case 2:
+      self.init(0, split[0]!, split[1]!)
+    case 3:
+      self.init(split[0]!, split[1]!, split[2]!)
+    default:
       return nil
     }
   }

@@ -702,9 +702,14 @@ class MainWindowController: PlayerWindowController {
       oscFloatingTopView.addView(fragVolumeView, in: .leading)
       oscFloatingTopView.addView(fragToolbarView, in: .trailing)
       oscFloatingTopView.addView(fragControlView, in: .center)
-      oscFloatingTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragVolumeView)
-      oscFloatingTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragToolbarView)
-      oscFloatingTopView.setClippingResistancePriority(.defaultLow, for: .horizontal)
+      
+      if #available(macOS 11.0, *) {
+        // update oscFloatingTopView detach
+      } else {
+        oscFloatingTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragVolumeView)
+        oscFloatingTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragToolbarView)
+        oscFloatingTopView.setClippingResistancePriority(.defaultLow, for: .horizontal)
+      }
       oscFloatingBottomView.addSubview(fragSliderView)
       Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": fragSliderView])
       Utility.quickConstraints(["H:|-(>=0)-[v]-(>=0)-|"], ["v": fragControlView])
@@ -1398,6 +1403,37 @@ class MainWindowController: PlayerWindowController {
 
       controlBarFloating.xConstraint.constant = xPos
       controlBarFloating.yConstraint.constant = yPos
+    }
+    
+    // update oscFloatingTopView detach
+    if #available(macOS 11.0, *), oscPosition == .floating {
+      
+      guard let maxWidth = [fragVolumeView, fragToolbarView].compactMap({ $0?.frame.width }).max() else {
+        return
+      }
+      
+      // window - 10 - controlBarFloating
+      // controlBarFloating - 12 - oscFloatingTopView
+      let margin: CGFloat = (10 + 12) * 2
+      let hide = (window.frame.width
+                    - fragControlView.frame.width
+                    - maxWidth*2
+                    - margin) < 0
+      
+      let views = oscFloatingTopView.views
+      if hide {
+        if views.contains(fragVolumeView)
+            && views.contains(fragToolbarView) {
+          oscFloatingTopView.removeView(fragVolumeView)
+          oscFloatingTopView.removeView(fragToolbarView)
+        }
+      } else {
+        if !views.contains(fragVolumeView)
+            && !views.contains(fragToolbarView) {
+          oscFloatingTopView.addView(fragVolumeView, in: .leading)
+          oscFloatingTopView.addView(fragToolbarView, in: .trailing)
+        }
+      }
     }
   }
 

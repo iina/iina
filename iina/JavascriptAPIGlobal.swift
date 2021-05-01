@@ -45,6 +45,9 @@ class JavascriptAPIGlobalController: JavascriptAPI, JavascriptAPIGlobalControlle
     if (options["disableWindowAnimation"] as? Bool == true) {
       pc.disableWindowAnimation = true
     }
+    if (options["disableUI"] as? Bool == true) {
+      pc.disableUI = true
+    }
     if (options["enablePlugins"] as? Bool == true) {
       pc.loadPlugins()
     } else {

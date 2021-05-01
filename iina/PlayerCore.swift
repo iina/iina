@@ -81,6 +81,7 @@ class PlayerCore: NSObject {
 
   var label: String!
   var isManagedByPlugin = false
+  var disableUI = false
   var disableWindowAnimation = false
 
   @available(macOS 10.12.2, *)

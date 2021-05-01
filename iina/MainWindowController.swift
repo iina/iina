@@ -564,6 +564,8 @@ class MainWindowController: PlayerWindowController {
     timePreviewWhenSeek.isHidden = true
     bottomView.isHidden = true
     pipOverlayView.isHidden = true
+    
+    if player.disableUI { hideUI() }
 
     // add user default observers
     observedPrefKeys.append(contentsOf: localObservedPrefKeys)
@@ -1554,6 +1556,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   private func showUI() {
+    if player.disableUI { return }
     animationState = .willShow
     fadeableViews.forEach { (v) in
       v.isHidden = false

@@ -22,6 +22,7 @@ import JavaScriptCore
   func setSpeed(_ speed: Double)
   func getChapters() -> [[String: Any]]
   func playChapter(index: Int)
+  func setUIVisibility(_ visible: Bool)
   func getHistory() -> Any
   func getRecentDocuments() -> Any
   func getVersion() -> Any
@@ -93,6 +94,10 @@ class JavascriptAPICore: JavascriptAPI, JavascriptAPICoreExportable {
 
   func playChapter(index: Int) {
     player!.playChapter(index)
+  }
+  
+  func setUIVisibility(_ visible: Bool) {
+    player!.disableUI = visible
   }
 
   func getHistory() -> Any {

@@ -161,6 +161,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var saveDownloadedSub: NSMenuItem!
   // Plugin
   @IBOutlet weak var pluginMenu: NSMenu!
+  var pluginMenuNeedsUpdate = false
   // Window
   @IBOutlet weak var customTouchBar: NSMenuItem!
   @IBOutlet weak var inspector: NSMenuItem!
@@ -384,11 +385,6 @@ class MenuController: NSObject, NSMenuDelegate {
     // Plugin
 
     pluginMenu.delegate = self
-    NotificationCenter.default.addObserver(forName: .iinaMainWindowChanged, object: nil, queue: .main) { [unowned self] in
-      if ($0.object as? Bool == true) {
-        self.updatePluginMenu()
-      }
-    }
 
     // Window
 
@@ -526,7 +522,7 @@ class MenuController: NSObject, NSMenuDelegate {
     }
   }
 
-  func updatePluginMenu() {
+  private func updatePluginMenu() {
     pluginMenu.removeAllItems()
     pluginMenu.addItem(withTitle: "Manage Plugins…")
     pluginMenu.addItem(.separator())
@@ -535,12 +531,15 @@ class MenuController: NSObject, NSMenuDelegate {
     for (index, plugin) in PlayerCore.active.plugins.enumerated() {
       var counter = 0
       var rootMenu: NSMenu! = pluginMenu
-      if plugin.menuItems.isEmpty { continue }
+      let menuItems = (plugin.plugin.globalInstance?.menuItems ?? []) + plugin.menuItems
+      if menuItems.isEmpty { continue }
+      
       if index != 0 {
         pluginMenu.addItem(.separator())
       }
       pluginMenu.addItem(withTitle: plugin.plugin.name, enabled: false)
-      for item in plugin.menuItems {
+      
+      for item in menuItems {
         if counter == 5 {
           Logger.log("Please avoid adding too much first-level menu items. IINA will only display the first 5 of them.",
                      level: .warning, subsystem: plugin.subsystem)
@@ -559,6 +558,8 @@ class MenuController: NSObject, NSMenuDelegate {
         NSMenuItem(title: "⚠︎ Conflicting key shortcuts…", action: nil, keyEquivalent: ""),
         at: 0)
     }
+
+    pluginMenuNeedsUpdate = false
   }
 
   @discardableResult
@@ -704,6 +705,8 @@ class MenuController: NSObject, NSMenuDelegate {
       updateSavedFiltersMenu(type: MPVProperty.vf)
     case savedAudioFiltersMenu:
       updateSavedFiltersMenu(type: MPVProperty.af)
+    case pluginMenu:
+      updatePluginMenu()
     default: break
     }
     // check conveniently bound menus

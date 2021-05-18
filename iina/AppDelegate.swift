@@ -250,6 +250,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     NSApplication.shared.servicesProvider = self
 
     JavascriptPlugin.loadGlobalInstances()
+    menuController?.pluginMenuNeedsUpdate = true
   }
 
   /** Show welcome window if `application(_:openFile:)` wasn't called, i.e. launched normally. */

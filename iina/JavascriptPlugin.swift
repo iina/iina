@@ -68,6 +68,7 @@ class JavascriptPlugin: NSObject {
   var identifier: String
   let version: String
   let desc: String?
+  var isExternal: Bool = false
 
   var root: URL
   let entryPath: String
@@ -114,9 +115,14 @@ class JavascriptPlugin: NSObject {
     var identifiers = Set<String>()
 
     let result = contents
-      .filter { $0.pathExtension == "iinaplugin" && $0.isExistingDirectory }
-      .compactMap { path -> JavascriptPlugin? in
-        if let plugin = JavascriptPlugin(filename: path.lastPathComponent) {
+      .filter {
+        ($0.pathExtension == "iinaplugin" && $0.isExistingDirectory) ||
+          ($0.pathExtension == "iinaplugin-dev")
+      }
+      .compactMap { path_ -> JavascriptPlugin? in
+        let isDev = path_.pathExtension == "iinaplugin-dev"
+        let path = isDev ? path_.resolvingSymlinksInPath() : path_
+        if let plugin = JavascriptPlugin(filename: path.lastPathComponent, externalURL: isDev ? path : nil) {
           if identifiers.contains(plugin.identifier) {
             Utility.showAlert("duplicated_plugin_id", comment: nil, arguments: [plugin.identifier])
             plugin.identifier += ".\(UUID().uuidString)"
@@ -265,9 +271,9 @@ class JavascriptPlugin: NSObject {
     return plugin
   }
 
-  init?(filename: String) {
+  init?(filename: String, externalURL: URL? = nil) {
     // find package
-    let url = Utility.pluginsURL.appendingPathComponent(filename)
+    let url = externalURL ?? Utility.pluginsURL.appendingPathComponent(filename)
     Logger.log("Loading JS plugin from \(url.path)")
     guard url.isFileURL && url.isExistingDirectory else {
       Logger.log("The plugin package doesn't exist.")
@@ -316,6 +322,10 @@ class JavascriptPlugin: NSObject {
     self.helpPage = jsonDict["helpPage"] as? String
     self.domainList = (jsonDict["allowedDomains"] as? [String]) ?? []
     self.subProviders = jsonDict["subtitleProviders"] as? [[String: String]]
+    
+    if externalURL != nil {
+      self.isExternal = true
+    }
 
     if let sidebarTabDef = jsonDict["sidebarTab"] as? [String: String] {
       self.sidebarTabName = sidebarTabDef["name"]
@@ -349,9 +359,20 @@ class JavascriptPlugin: NSObject {
     }
     self.permissions = permissions
 
-    guard let entryURL = resolvePath(entryPath, root: root) else { return nil }
+    guard let entryURL = resolvePath(entryPath, root: root) else {
+      Logger.log("The entry file \(entryPath) doesn't exist", level: .error)
+      return nil
+    }
     self.entryURL = entryURL
-    self.globalEntryURL = resolvePath(globalEntryPath, root: root)
+    
+    if let globalEntryPath = globalEntryPath {
+      guard let globalEntryURL = resolvePath(globalEntryPath, root: root) else {
+        Logger.log("The entry file \(globalEntryPath) doesn't exist", level: .error)
+        return nil
+      }
+      self.globalEntryURL = globalEntryURL
+    }
+    
     self.preferencesPageURL = resolvePath(preferencesPage, root: root)
     self.helpPageURL = resolvePath(helpPage, root: root, allowNetwork: true)
 

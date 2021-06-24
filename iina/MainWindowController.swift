@@ -985,6 +985,13 @@ class MainWindowController: PlayerWindowController {
   // MARK: - Window delegate: Open / Close
 
   func windowWillOpen() {
+    // The titles of open windows shown in the "Window" menu are automatically managed by the AppKit
+    // framework. To improve performance PlayerCore caches and reuses player instances along with
+    // their windows. If a window is reused the framework will display the title first used for the
+    // window in the "Window" menu even after IINA has updated the title of the window unless the
+    // window's title is reset to the default title "Window" before it is reusued.
+    window!.title = "Window"
+
     var screen = window!.screen!
 
     if let rectString = UserDefaults.standard.value(forKey: "MainWindowLastPosition") as? String {

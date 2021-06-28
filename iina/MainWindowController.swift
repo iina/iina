@@ -995,9 +995,9 @@ class MainWindowController: PlayerWindowController {
     }
 
     if shouldApplyInitialWindowSize, let wfg = windowFrameFromGeometry(newSize: AppData.sizeWhenNoVideo, screen: screen) {
-      window!.setFrame(wfg, display: true)
+      window!.setFrame(wfg, display: true, animate: !AccessibilityPreference.reduceMotion())
     } else {
-      window!.setFrame(AppData.sizeWhenNoVideo.centeredRect(in: screen.visibleFrame), display: true)
+      window!.setFrame(AppData.sizeWhenNoVideo.centeredRect(in: screen.visibleFrame), display: true, animate: !AccessibilityPreference.reduceMotion())
     }
 
     videoView.videoLayer.draw(forced: true)
@@ -1074,7 +1074,7 @@ class MainWindowController: PlayerWindowController {
   func window(_ window: NSWindow, startCustomAnimationToEnterFullScreenOn screen: NSScreen, withDuration duration: TimeInterval) {
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = duration
-      window.animator().setFrame(screen.frame, display: true)
+      window.animator().setFrame(screen.frame, display: true, animate: !AccessibilityPreference.reduceMotion())
     }, completionHandler: nil)
 
   }
@@ -1087,7 +1087,7 @@ class MainWindowController: PlayerWindowController {
 
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = duration
-      window.animator().setFrame(priorWindowedFrame, display: true)
+      window.animator().setFrame(priorWindowedFrame, display: true, animate: !AccessibilityPreference.reduceMotion())
     }, completionHandler: nil)
 
     NSMenu.setMenuBarVisible(true)
@@ -1199,6 +1199,11 @@ class MainWindowController: PlayerWindowController {
   }
 
   func windowDidExitFullScreen(_ notification: Notification) {
+    if AccessibilityPreference.reduceMotion() {
+      // When animation is not used exiting full screen does not restore the previous size of the
+      // window. Restore it now.
+      window!.setFrame(fsState.priorWindowedFrame!, display: true, animate: false)
+    }
     if oscPosition != .top {
       addBackTitlebarViewToFadeableViews()
     }
@@ -1727,7 +1732,7 @@ class MainWindowController: PlayerWindowController {
     viewController.downShift = titleBarView.frame.height
     // show sidebar
     NSAnimationContext.runAnimationGroup({ (context) in
-      context.duration = SideBarAnimationDuration
+      context.duration = AccessibilityPreference.adjustDuration(SideBarAnimationDuration)
       context.timingFunction = CAMediaTimingFunction(name: .easeIn)
       sideBarRightConstraint.animator().constant = 0
     }) {
@@ -1740,7 +1745,7 @@ class MainWindowController: PlayerWindowController {
     sidebarAnimationState = .willHide
     let currWidth = sideBarWidthConstraint.constant
     NSAnimationContext.runAnimationGroup({ (context) in
-      context.duration = animate ? SideBarAnimationDuration : 0
+      context.duration = animate ? AccessibilityPreference.adjustDuration(SideBarAnimationDuration) : 0
       context.timingFunction = CAMediaTimingFunction(name: .easeIn)
       sideBarRightConstraint.animator().constant = -currWidth
     }) {

@@ -18,3 +18,9 @@ jobs:
 
       - name: Build
         run: xcodebuild -project iina.xcodeproj -scheme iina CODE_SIGNING_ALLOWED=NO
+        
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          name: app_xcode_build
+          path: /Users/runner/Library/Developer/Xcode/DerivedData/

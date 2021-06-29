@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dictionary SYSTEM "file://localhost/System/Library/DTDs/sdef.dtd">
+<dictionary xmlns:xi="http://www.w3.org/2003/XInclude" title="IINA Terminonoly">
+  <xi:include href="file:///System/Library/ScriptingDefinitions/CocoaStandard.sdef" xpointer="xpointer(/dictionary/suite)"/>
+
+  <suite name="IINA Suite" code="IINA" description="Classes and commands specific to IINA.">
+
+    <enumeration name="player state" code="ePSt">
+      <enumerator name="playing" code="kPSP" description="Playback is playing."/>
+      <enumerator name="paused" code="kPSp" description="Playback is paused."/>
+      <enumerator name="seeking" code="kPSS" description="The player is seeking."/>
+    </enumeration>
+
+    <command name="play" code="IINAPlay" description="Begin or resume playback.">
+      <direct-parameter description="The file to play." optional="yes" hidden="yes">
+        <type type="player"/>
+      </direct-parameter>
+    </command>
+
+    <command name="pause" code="IINAPaus" description="Pause playback.">
+    <direct-parameter description="The player." optional="yes" hidden="yes">
+      <type type="player"/>
+    </direct-parameter>
+    </command>
+
+    <command name="playpause" code="IINAPlPs" description="Toggle the playing/paused state of the player.">
+      <direct-parameter description="The player." optional="yes" hidden="yes">
+        <type type="player"/>
+      </direct-parameter>
+    </command>
+
+    <command name="next item" code="IINANext" description="Advance to the next playlist item.">
+      <direct-parameter description="The player." optional="yes" hidden="yes">
+        <type type="player"/>
+      </direct-parameter>
+    </command>
+
+    <command name="previous item" code="IINAPrev" description="Return to the previous playlist item.">
+      <synonym name="prev item"/>
+      <direct-parameter description="The player." optional="yes" hidden="yes">
+        <type type="player"/>
+      </direct-parameter>
+    </command>
+
+    <class name="player" code="cPla">
+      <cocoa class="IINA.PlayerCore"/>
+
+      <property name="id" code="ID  " description="The unique ID of the player." type="text" access="r">
+        <cocoa key="uniqueID"/>
+      </property>
+
+      <property name="name" code="pnam" description="The name of the player." type="text" access="r">
+        <cocoa key="scriptingName"/>
+      </property>
+
+      <property name="state" code="pSta" description="The playback state." type="player state" access="r">
+        <cocoa key="scriptingState"/>
+      </property>
+
+      <property name="playback speed" code="pSpe" description="The playback speed." type="real" access="rw">
+        <cocoa key="scriptingPlaySpeed"/>
+      </property>
+
+      <property name="file loop" code="pFLp" description="The file loop setting." type="boolean" access="rw">
+        <cocoa key="scriptingFileLoop"/>
+      </property>
+
+      <property name="sound volume" code="pVol" description="The sound output volume." type="integer" access="rw">
+        <cocoa key="scriptingVolume"/>
+      </property>
+
+      <property name="mute" code="pMut" description="Has the sound output been muted?" type="boolean" access="rw">
+        <cocoa key="scriptingIsMuted"/>
+      </property>
+
+      <property name="position" code="pPos" description="The playback position in seconds." type="real" access="rw">
+        <cocoa key="scriptingPosition"/>
+      </property>
+
+      <property name="file" code="pFil" description="The currently playing file." type="file" access="r">
+        <cocoa key="scriptingFile"/>
+      </property>
+
+      <property name="URL" code="pURL" description="The playing url." type="text" access="r">
+        <cocoa key="scriptingUrlString"/>
+      </property>
+
+      <property name="music mode" code="pMin" description="Is the player in music mode?" type="boolean" access="rw">
+        <cocoa key="scriptingIsInMiniPlayer"/>
+      </property>
+
+      <property name="fullscreen" code="pFSc" description="Is the player in fullscreen?" type="boolean" access="rw">
+        <cocoa key="scriptingIsFullscreen"/>
+      </property>
+
+      <property name="window" code="pWin" description="The player’s currently visible window." type="window" access="r">
+        <cocoa key="scriptingWindow"/>
+      </property>
+
+      <property name="current video track" code="pCVT" description="The index of the current video track." type="video track" access="rw">
+        <cocoa key="scriptingCurrentVideoTrack"/>
+      </property>
+
+      <property name="current audio track" code="pCAT" description="The index of the current audio track." type="audio track" access="rw">
+        <cocoa key="scriptingCurrentAudioTrack"/>
+      </property>
+
+      <property name="current subtitle track" code="pCST" description="The index of the current subtitle track." type="subtitle track" access="rw">
+        <cocoa key="scriptingCurrentSubtitleTrack"/>
+      </property>
+
+      <property name="second subtitle track" code="pCsT" description="The index of the second subtitle track." type="subtitle track" access="rw">
+        <cocoa key="scriptingSecondSubtitleTrack"/>
+      </property>
+
+      <property name="aspect ratio" code="pAsR" description="The curent aspect ratio." type="text" access="rw">
+        <cocoa key="scriptingAspectRatio"/>
+      </property>
+
+      <property name="pip" code="pPIP" description="Is the player in picture-in-picture mode? (macOS 10.12+)" type="boolean" access="rw">
+        <cocoa key="scriptingIsPIP"/>
+      </property>
+
+      <property name="current playlist item" code="pPLI" description="The current playlist item." type="playlist item" access="rw">
+        <cocoa key="scriptingCurrentPlaylistItem"/>
+      </property>
+
+      <element type="track" description="The media tracks of the current media resource." access="r">
+        <cocoa key="scriptingTracks"/>
+      </element>
+
+      <element type="video track" description="The video tracks of the current media resource." access="r">
+        <cocoa key="scriptingVideoTracks"/>
+      </element>
+
+      <element type="audio track" description="The audio tracks of the current media resource." access="r">
+        <cocoa key="scriptingAudioTracks"/>
+      </element>
+
+      <element type="subtitle track" description="The subtitle tracks of the current media resource." access="r">
+        <cocoa key="scriptingSubtitleTracks"/>
+      </element>
+
+      <element type="playlist item" description="The items in the player’s playlist." access="r">
+        <cocoa key="scriptingPlaylistItems"/>
+      </element>
+
+
+      <responds-to command="play">
+        <cocoa method="handlePlayCommand:"/>
+      </responds-to>
+
+      <responds-to command="pause">
+        <cocoa method="handlePauseCommand:"/>
+      </responds-to>
+
+      <responds-to command="playpause">
+        <cocoa method="handlePlayPauseCommand:"/>
+      </responds-to>
+
+      <responds-to command="next">
+        <cocoa method="handleNextCommand:"/>
+      </responds-to>
+
+      <responds-to command="previous">
+        <cocoa method="handlePreviousCommand:"/>
+      </responds-to>
+
+    </class>
+
+    <enumeration name="track type" code="eTrT">
+      <enumerator name="video" code="kTTV" description="Video track."/>
+      <enumerator name="audio" code="kTTA" description="Audio track."/>
+      <enumerator name="subtitle" code="kTTS" description="Subtitle track."/>
+    </enumeration>
+
+    <class name="track" description="A media track." code="cTra">
+      <cocoa class="IINA.MPVTrack"/>
+
+      <property name="type" code="pTyp" type="track type" access="r">
+        <cocoa key="scriptingType"/>
+      </property>
+
+      <property name="codec" code="pCdc" type="text" access="r">
+        <cocoa key="scriptingCodec"/>
+      </property>
+
+      <property name="language" code="pLng" type="text" access="r">
+        <synonym name="lang"/>
+        <cocoa key="scriptingLanguage"/>
+      </property>
+
+      <property name="name" code="pnam" type="text" access="r">
+        <cocoa key="scriptingTitle"/>
+      </property>
+
+      <property name="info string" code="pISt" type="text" access="r">
+        <cocoa key="scriptingInfoString"/>
+      </property>
+
+      <property name="default" code="pDef" type="boolean" access="r">
+        <cocoa key="scriptingIsDefault"/>
+      </property>
+
+      <!-- Properties only exposed by subtypes. Included here so they resolve properly. -->
+
+      <property name="fps" code="pFPS" type="real" access="r" hidden="yes">
+        <cocoa key="scriptingFPS"/>
+      </property>
+
+      <property name="width" code="pWid" type="integer" access="r" hidden="yes">
+        <cocoa key="scriptingWidth"/>
+      </property>
+
+      <property name="height" code="pHei" type="integer" access="r" hidden="yes">
+        <cocoa key="scriptingHeight"/>
+      </property>
+
+      <property name="sample rate" code="pSam" type="integer" access="r" hidden="yes">
+        <cocoa key="scriptingSampleRate"/>
+      </property>
+
+      <property name="channel count" code="pCha" type="integer" access="r" hidden="yes">
+        <cocoa key="scriptingChannelCount"/>
+      </property>
+
+    </class>
+
+    <class name="video track" description="An video media track."  code="cTrV" inherits="track">
+      <cocoa class="IINA.MPVTrack"/>
+
+      <property name="fps" code="pFPS" type="real" access="r">
+        <cocoa key="scriptingFPS"/>
+      </property>
+
+      <property name="width" code="pWid" type="integer" access="r">
+        <cocoa key="scriptingWidth"/>
+      </property>
+
+      <property name="height" code="pHei" type="integer" access="r">
+        <cocoa key="scriptingHeight"/>
+      </property>
+
+    </class>
+
+    <class name="audio track" description="An audio media track." code="cTrA" inherits="track">
+      <cocoa class="IINA.MPVTrack"/>
+
+      <property name="sample rate" code="pSam" type="integer" access="r">
+        <cocoa key="scriptingSampleRate"/>
+      </property>
+
+      <property name="channel count" code="pCha" type="integer" access="r">
+        <cocoa key="scriptingChannelCount"/>
+      </property>
+
+    </class>
+
+    <class name="subtitle track" description="An subtitle media track." code="cTrS" inherits="track">
+      <cocoa class="IINA.MPVTrack"/>
+      <synonym name="sub track"/>
+    </class>
+
+    <class name="playlist item" description="An item in a playlist." code="cPLI">
+      <cocoa class="IINA.MPVPlaylistItem"/>
+
+      <property name="file" code="pFil" type="file" access="r">
+        <cocoa key="scriptingFile"/>
+      </property>
+
+      <property name="URL" code="pURL" type="text" access="r">
+        <cocoa key="scriptingURLString"/>
+      </property>
+
+      <property name="name" code="pnam" type="text" access="r">
+        <cocoa key="scriptingName"/>
+      </property>
+
+      <property name="current" code="pCur" type="boolean" access="r">
+        <cocoa key="scriptingIsCurrent"/>
+      </property>
+
+      <property name="playing" code="pPly" type="boolean" access="r">
+        <cocoa key="scriptingIsPlaying"/>
+      </property>
+
+      <property name="network" code="pNet" type="boolean" access="r">
+        <cocoa key="scriptingIsNetworkResource"/>
+      </property>
+
+    </class>
+
+    <class-extension description="The IINA Application" extends="application">
+      <cocoa class="NSApplication"/>
+      <element type="player" access="r">
+        <cocoa key="orderedPlayers"/>
+      </element>
+    </class-extension>
+  </suite>
+</dictionary>

@@ -210,70 +210,74 @@ return -1;\
 
     // Read and decode frame
     while(av_read_frame(pFormatCtx, &packet) >= 0) {
+      @try {
+        // Make sure it's video stream
+        if (packet.stream_index == videoStream) {
 
-      // Make sure it's video stream
-      if (packet.stream_index == videoStream) {
-
-        // Decode video frame
-        if (avcodec_send_packet(pCodecCtx, &packet) < 0)
-          break;
-
-        ret = avcodec_receive_frame(pCodecCtx, pFrame);
-        if (ret < 0) {  // something happened
-          if (ret == AVERROR(EAGAIN))  // input not ready, retry
-            continue;
-          else
+          // Decode video frame
+          if (avcodec_send_packet(pCodecCtx, &packet) < 0)
             break;
-        }
 
-        // Check if duplicated
-        NSNumber *currentTimeStamp = @(pFrame->best_effort_timestamp);
-        if ([_addedTimestamps containsObject:currentTimeStamp]) {
-          double currentTime = CACurrentMediaTime();
-          if (currentTime - _timestamp > 1) {
-            if (self.delegate) {
-              [self.delegate didUpdateThumbnails:NULL forFile: file withProgress: i];
-              _timestamp = currentTime;
-            }
+          ret = avcodec_receive_frame(pCodecCtx, pFrame);
+          if (ret < 0) {  // something happened
+            if (ret == AVERROR(EAGAIN))  // input not ready, retry
+              continue;
+            else
+              break;
           }
+
+          // Check if duplicated
+          NSNumber *currentTimeStamp = @(pFrame->best_effort_timestamp);
+          if ([_addedTimestamps containsObject:currentTimeStamp]) {
+            double currentTime = CACurrentMediaTime();
+            if (currentTime - _timestamp > 1) {
+              if (self.delegate) {
+                [self.delegate didUpdateThumbnails:NULL forFile: file withProgress: i];
+                _timestamp = currentTime;
+              }
+            }
+            break;
+          } else {
+            [_addedTimestamps addObject:currentTimeStamp];
+          }
+
+          // Convert the frame to RGBA
+          ret = sws_scale(sws_ctx,
+                          (const uint8_t* const *)pFrame->data,
+                          pFrame->linesize,
+                          0,
+                          pCodecCtx->height,
+                          pFrameRGB->data,
+                          pFrameRGB->linesize);
+          CHECK_SUCCESS(ret, @"Cannot convert frame")
+
+          // Save the frame to disk
+          [self saveThumbnail:pFrameRGB
+                        width:pFrameRGB->width
+                       height:pFrameRGB->height
+                        index:i
+                     realTime:(pFrame->best_effort_timestamp * timebaseDouble)
+                      forFile:file];
           break;
-        } else {
-          [_addedTimestamps addObject:currentTimeStamp];
         }
-
-        // Convert the frame to RGBA
-        ret = sws_scale(sws_ctx,
-                        (const uint8_t* const *)pFrame->data,
-                        pFrame->linesize,
-                        0,
-                        pCodecCtx->height,
-                        pFrameRGB->data,
-                        pFrameRGB->linesize);
-        CHECK_SUCCESS(ret, @"Cannot convert frame")
-
-        // Save the frame to disk
-        [self saveThumbnail:pFrameRGB
-                      width:pFrameRGB->width
-                     height:pFrameRGB->height
-                      index:i
-                   realTime:(pFrame->best_effort_timestamp * timebaseDouble)
-                    forFile:file];
-        break;
+      } @finally {
+        // Free the packet
+        av_packet_unref(&packet);
       }
-
-      // Free the packet
-      av_packet_unref(&packet);
     }
   }
 
+  // Free the scaler
+  sws_freeContext(sws_ctx);
+
   // Free the RGB image
   av_free(pFrameRGBBuffer);
-  av_free(pFrameRGB);
+  av_frame_free(&pFrameRGB);
   // Free the YUV frame
-  av_free(pFrame);
+  av_frame_free(&pFrame);
 
-  // Close the codec
-  avcodec_close(pCodecCtx);
+  // Free the codec
+  avcodec_free_context(&pCodecCtx);
   // Close the video file
   avformat_close_input(&pFormatCtx);
 

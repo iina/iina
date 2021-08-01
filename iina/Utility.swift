@@ -502,7 +502,7 @@ class Utility {
     guard let contents = try? FileManager.default.contentsOfDirectory(
       at: folder,
       includingPropertiesForKeys: [.creationDateKey],
-      options: .skipsSubdirectoryDescendants) else { return nil }
+      options: .skipsSubdirectoryDescendants), !contents.isEmpty else { return nil }
 
     var latestDate = Date.distantPast
     var latestFile: URL = contents[0]

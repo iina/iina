@@ -112,6 +112,9 @@
 "menu.pause" = "Pause";
 "menu.resume" = "Lire";
 "menu.speed" = "Vitesse : %.2fx";
+"menu.chapters" = "Afficher les chapitres";
+"menu.playlist" = "Afficher la playlist";
+"menu.quicksettings" = "Afficher les réglages rapides";
 
 "menu.seek_forward" = "Reculer de %.0fs";
 "menu.seek_backward" = "Avancer de %.0fs";

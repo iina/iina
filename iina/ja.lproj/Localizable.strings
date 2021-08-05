@@ -112,6 +112,9 @@
 "menu.pause" = "一時停止";
 "menu.resume" = "再生";
 "menu.speed" = "再生速度: %.2f倍";
+"menu.chapters" = "チャプタパネルを表示";
+"menu.playlist" = "プレイリストパネルを開く";
+"menu.quicksettings" = "クイック設定パネルを表示";
 
 "menu.seek_forward" = "%.0f秒進む";
 "menu.seek_backward" = "%.0f秒戻る";

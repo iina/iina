@@ -81,6 +81,13 @@ struct Constants {
     static let subDelay = "Subtitle Delay"
     static let pip = NSLocalizedString("menu.pip", comment: "Enter Picture-in-Picture")
     static let exitPIP = NSLocalizedString("menu.exit_pip", comment: "Exit Picture-in-Picture")
+    static let chaptersPanel = NSLocalizedString("menu.chapters", comment: "Show Chapters Panel")
+    static let hideChaptersPanel = NSLocalizedString("menu.hide_chapters", comment: "Hide Chapters Panel")
+    static let playlistPanel = NSLocalizedString("menu.playlist", comment: "Show Playlist Panel")
+    static let hidePlaylistPanel = NSLocalizedString("menu.hide_playlist", comment: "Hide Playlist Panel")
+    static let quickSettingsPanel = NSLocalizedString("menu.quicksettings", comment: "Show Quick Settings Panel")
+    static let hideQuickSettingsPanel = NSLocalizedString("menu.hide_quicksettings", comment: "Hide Quick Settings Panel")
+
     static let custom = NSLocalizedString("menu.crop_custom", comment: "Custom crop size")
   }
   struct Time {

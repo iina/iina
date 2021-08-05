@@ -112,6 +112,9 @@
 "menu.pause" = "Pausa";
 "menu.resume" = "Reprèn";
 "menu.speed" = "Velocitat: %.2fx";
+"menu.chapters" = "Mostra panell de capítols";
+"menu.playlist" = "Mostra panell de la llista de reproducció";
+"menu.quicksettings" = "Mostra panell de configuració ràpida";
 
 "menu.seek_forward" = "Avança %.0fs";
 "menu.seek_backward" = "Retrocedeix %.0fs";

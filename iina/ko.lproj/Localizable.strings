@@ -112,6 +112,9 @@
 "menu.pause" = "일시 정지";
 "menu.resume" = "재생";
 "menu.speed" = "재생속도: %.2fx";
+"menu.chapters" = "챕터 목록 보기";
+"menu.playlist" = "재생목록 보기";
+"menu.quicksettings" = "빠른 설정";
 
 "menu.seek_forward" = "앞으로 탐색 %.0f초";
 "menu.seek_backward" = "뒤로 탐색 %.0f초";

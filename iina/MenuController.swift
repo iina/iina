@@ -442,6 +442,10 @@ class MenuController: NSObject, NSMenuDelegate {
     let isPlaylistLoop = player.mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
     playlistLoop.state = (isPlaylistLoop == "inf" || isPlaylistLoop == "force") ? .on : .off
     speedIndicator.title = String(format: NSLocalizedString("menu.speed", comment: "Speed:"), player.info.playSpeed)
+    let isDisplayingPlaylist = player.mainWindow.sideBarStatus == .playlist && player.mainWindow.playlistView.currentTab == .playlist
+    playlistPanel?.title = isDisplayingPlaylist ? Constants.String.hidePlaylistPanel : Constants.String.playlistPanel
+    let isDisplayingChapters = player.mainWindow.sideBarStatus == .playlist && player.mainWindow.playlistView.currentTab == .chapters
+    chapterPanel?.title = isDisplayingChapters ? Constants.String.hideChaptersPanel : Constants.String.chaptersPanel
   }
 
   private func updateVideoMenu() {
@@ -454,12 +458,16 @@ class MenuController: NSObject, NSMenuDelegate {
     fullScreen.title = isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen
     pictureInPicture?.title = isInPIP ? Constants.String.exitPIP : Constants.String.pip
     delogo.state = isDelogo ? .on : .off
+    let isDisplayingSettings = PlayerCore.active.mainWindow.sideBarStatus == .settings && PlayerCore.active.mainWindow.quickSettingView.currentTab == .video
+    quickSettingsVideo?.title = isDisplayingSettings ? Constants.String.hideQuickSettingsPanel : Constants.String.quickSettingsPanel
   }
 
   private func updateAudioMenu() {
     let player = PlayerCore.active
     volumeIndicator.title = String(format: NSLocalizedString("menu.volume", comment: "Volume:"), Int(player.info.volume))
     audioDelayIndicator.title = String(format: NSLocalizedString("menu.audio_delay", comment: "Audio Delay:"), player.info.audioDelay)
+    let isDisplayingSettings = player.mainWindow.sideBarStatus == .settings && player.mainWindow.quickSettingView.currentTab == .audio
+    quickSettingsAudio?.title = isDisplayingSettings ? Constants.String.hideQuickSettingsPanel : Constants.String.quickSettingsPanel
   }
 
   private func updateAudioDevice() {
@@ -489,6 +497,8 @@ class MenuController: NSObject, NSMenuDelegate {
         encodingMenu.item(withTitle: encoding.title)?.state = .on
       }
     }
+    let isDisplayingSettings = player.mainWindow.sideBarStatus == .settings && player.mainWindow.quickSettingView.currentTab == .sub
+    quickSettingsSub?.title = isDisplayingSettings ? Constants.String.hideQuickSettingsPanel : Constants.String.quickSettingsPanel
   }
 
   func updateSavedFiltersMenu(type: String) {

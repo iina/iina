@@ -112,6 +112,9 @@
 "menu.pause" = "Pausar";
 "menu.resume" = "Reanudar";
 "menu.speed" = "Velocidad: %.2fx";
+"menu.chapters" = "Mostrar panel de capítulos";
+"menu.playlist" = "Mostrar panel de lista de reproducción";
+"menu.quicksettings" = "Mostrar panel de configuración rápida";
 
 "menu.seek_forward" = "Adelantar %.0fs";
 "menu.seek_backward" = "Retroceder %.0fs";

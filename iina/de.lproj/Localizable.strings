@@ -112,6 +112,12 @@
 "menu.pause" = "Pause";
 "menu.resume" = "Wiedergabe";
 "menu.speed" = "Geschwindigkeit: %.2fx";
+"menu.chapters" = "Kapitel anzeigen";
+"menu.hide_chapters" = "Kapitel ausblenden";
+"menu.playlist" = "Wiedergabeliste anzeigen";
+"menu.hide_playlist" = "Wiedergabeliste ausblenden";
+"menu.quicksettings" = "Schnelleinstellungen anzeigen";
+"menu.hide_quicksettings" = "Schnelleinstellungen ausblenden";
 
 "menu.seek_forward" = "%.0f s vorspulen";
 "menu.seek_backward" = "%.0f s zurückspulen";

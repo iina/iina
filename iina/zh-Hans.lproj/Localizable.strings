@@ -112,6 +112,9 @@
 "menu.pause" = "暂停";
 "menu.resume" = "继续";
 "menu.speed" = "速度: %.2fx";
+"menu.chapters" = "显示章节面板";
+"menu.playlist" = "显示播放列表面板";
+"menu.quicksettings" = "显示快速设置面板";
 
 "menu.seek_forward" = "渐进 %.0f秒";
 "menu.seek_backward" = "渐退 %.0f秒";

@@ -112,6 +112,9 @@
 "menu.pause" = "Пауза";
 "menu.resume" = "Возобновить";
 "menu.speed" = "Скорость: %.2fx";
+"menu.chapters" = "Панель глав";
+"menu.playlist" = "Панель плейлистов";
+"menu.quicksettings" = "Панель быстрых настроек";
 
 "menu.seek_forward" = "Шаг вперед %.0f с";
 "menu.seek_backward" = "Шаг назад %.0f с";

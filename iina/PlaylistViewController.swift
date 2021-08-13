@@ -532,9 +532,16 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
             // get related data and schedule a reload
             if Preference.bool(for: .prefetchPlaylistVideoDuration) {
               self.player.refreshCachedVideoInfo(forVideoPath: item.filename)
-              self.refreshTotalLength()
-              DispatchQueue.main.async {
-                self.playlistTableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(integersIn: 0...1))
+              // Only schedule a reload if data was obtained and cached to avoid looping
+              if let cached = self.player.info.cachedVideoDurationAndProgress[item.filename],
+                 let duration = cached.duration {
+                if duration > 0 {
+                  // if FFmpeg got the duration succcessfully
+                  self.refreshTotalLength()
+                  DispatchQueue.main.async {
+                    self.playlistTableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(integersIn: 0...1))
+                  }
+                }
               }
             }
           }

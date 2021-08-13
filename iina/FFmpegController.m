@@ -333,14 +333,18 @@ return -1;\
   AVFormatContext *pFormatCtx = NULL;
   ret = avformat_open_input(&pFormatCtx, cFilename, NULL, NULL);
   free(cFilename);
-  if (ret < 0) return NULL;
+  if (ret < 0) {
+    NSLog(@"Error when opening file %@ to obtain info: %s (%d)", file, av_err2str(ret), ret);
+    return NULL;
+  }
 
   duration = pFormatCtx->duration;
   if (duration <= 0) {
     ret = avformat_find_stream_info(pFormatCtx, NULL);
-    if (ret < 0)
+    if (ret < 0) {
+      NSLog(@"Error when probing %@ to obtain info: %s (%d)", file, av_err2str(ret), ret);
       duration = -1;
-    else
+    } else
       duration = pFormatCtx->duration;
   }
 

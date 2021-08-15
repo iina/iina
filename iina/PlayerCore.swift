@@ -1017,11 +1017,9 @@ class PlayerCore: NSObject {
     mpv.command(.writeWatchLaterConfig)
     if let url = info.currentURL {
       Preference.set(url, for: .iinaLastPlayedFilePath)
-      playlistQueue.async {
-        // Write to cache directly (rather than calling `refreshCachedVideoProgress`).
-        // If user only closed the window but didn't quit the app, this can make sure playlist displays the correct progress.
-        self.info.cachedVideoDurationAndProgress[url.path] = (duration: self.info.videoDuration?.second, progress: self.info.videoPosition?.second)
-      }
+      // Write to cache directly (rather than calling `refreshCachedVideoProgress`).
+      // If user only closed the window but didn't quit the app, this can make sure playlist displays the correct progress.
+      info.setCachedVideoDurationAndProgress(url.path, (duration: info.videoDuration?.second, progress: info.videoPosition?.second))
     }
     if let position = info.videoPosition?.second {
       Preference.set(position, for: .iinaLastPlayedFilePosition)
@@ -1636,10 +1634,10 @@ class PlayerCore: NSObject {
   func refreshCachedVideoInfo(forVideoPath path: String) {
     guard let dict = FFmpegController.probeVideoInfo(forFile: path) else { return }
     let progress = Utility.playbackProgressFromWatchLater(path.md5)
-    self.info.cachedVideoDurationAndProgress[path] = (
+    self.info.setCachedVideoDurationAndProgress(path, (
       duration: dict["@iina_duration"] as? Double,
       progress: progress?.second
-    )
+    ))
     var result: (title: String?, album: String?, artist: String?)
     dict.forEach { (k, v) in
       guard let key = k as? String else { return }
@@ -1654,7 +1652,7 @@ class PlayerCore: NSObject {
         break
       }
     }
-    self.info.cachedMetadata[path] = result
+    self.info.setCachedMetadata(path, result)
   }
 
   enum CurrentMediaIsAudioStatus {

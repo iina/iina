@@ -187,8 +187,70 @@ class PlaybackInfo {
   var matchedSubs: [String: [URL]] = [:]
   var currentSubsInfo: [FileInfo] = []
   var currentVideosInfo: [FileInfo] = []
-  var cachedVideoDurationAndProgress: [String: (duration: Double?, progress: Double?)] = [:]
-  var cachedMetadata: [String: (title: String?, album: String?, artist: String?)] = [:]
+
+  // The cache is read by the main thread and updated by a background thread therefore all use
+  // must be through the class methods that properly coordinate thread access.
+  private var cachedVideoDurationAndProgress: [String: (duration: Double?, progress: Double?)] = [:]
+  private var cachedMetadata: [String: (title: String?, album: String?, artist: String?)] = [:]
+
+  // Queue dedicated to providing serialized access to class data shared between threads.
+  // Data is accessed by the main thread, therefore the QOS for the queue must not be too low
+  // to avoid blocking the main thread for an extended period of time.
+  private let lockQueue = DispatchQueue(label: "IINAPlaybackInfoLock", qos: .userInitiated)
+
+  func calculateTotalDuration() -> Double? {
+    lockQueue.sync {
+      var totalDuration: Double? = 0
+      for p in playlist {
+        if let duration = cachedVideoDurationAndProgress[p.filename]?.duration {
+          totalDuration! += duration > 0 ? duration : 0
+        } else {
+          // Cache is missing an entry, can't provide a total.
+          return nil
+        }
+      }
+      return totalDuration
+    }
+  }
+
+  func calculateTotalDuration(_ indexes: IndexSet) -> Double {
+    lockQueue.sync {
+      indexes
+        .compactMap { cachedVideoDurationAndProgress[playlist[$0].filename]?.duration }
+        .compactMap { $0 > 0 ? $0 : 0 }
+        .reduce(0, +)
+    }
+  }
+
+  func getCachedVideoDurationAndProgress(_ file: String) -> (duration: Double?, progress: Double?)? {
+    lockQueue.sync {
+      cachedVideoDurationAndProgress[file]
+    }
+  }
+
+  func setCachedVideoDuration(_ file: String, _ duration: Double) {
+    lockQueue.sync {
+      cachedVideoDurationAndProgress[file]?.duration = duration
+    }
+  }
+
+  func setCachedVideoDurationAndProgress(_ file: String, _ value: (duration: Double?, progress: Double?)) {
+    lockQueue.sync {
+      cachedVideoDurationAndProgress[file] = value
+    }
+  }
+
+  func getCachedMetadata(_ file: String) -> (title: String?, album: String?, artist: String?)? {
+    lockQueue.sync {
+      cachedMetadata[file]
+    }
+  }
+
+  func setCachedMetadata(_ file: String, _ value: (title: String?, album: String?, artist: String?)) {
+    lockQueue.sync {
+      cachedMetadata[file] = value
+    }
+  }
 
   var thumbnailsReady = false
   var thumbnailsProgress: Double = 0

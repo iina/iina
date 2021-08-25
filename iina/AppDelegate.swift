@@ -87,10 +87,31 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   // MARK: - App Delegate
 
   func applicationWillFinishLaunching(_ notification: Notification) {
+    // Must setup preferences before logging so log level is set correctly.
     registerUserDefaultValues()
-    Logger.log("App will launch")
 
+    // Start the log file by logging the version of IINA producing the log file.
     let (version, build) = Utility.iinaVersion()
+    Logger.log("IINA \(version) Build \(build) Copyright © 2017-2021 Collider LI, et al.")
+
+    // Useful to know the versions of significant dependencies that are being used so log that
+    // information as well when it can be obtained.
+
+    // The version of mpv is not logged at this point because mpv does not provide a static
+    // method that returns the version. To obtain version related information you must
+    // construct a mpv object, which has side effects. So the mpv version is logged in
+    // applicationDidFinishLaunching to preserve the existing order of initialization.
+
+    Logger.log("FFmpeg \(String(cString: av_version_info()))")
+    // FFmpeg libraries and their versions in alphabetical order.
+    let libraries: [(name: String, version: UInt32)] = [("libavcodec", avcodec_version()), ("libavformat", avformat_version()), ("libavutil", avutil_version()), ("libswscale", swscale_version())]
+    for library in libraries {
+      // The version of FFmpeg libraries is encoded into an unsigned integer in a proprietary
+      // format which needs to be decoded into a string for display.
+      Logger.log("  \(library.name) \(AppDelegate.versionAsString(library.version))")
+    }
+
+    Logger.log("App will launch")
 
     // register for url event
     NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(self.handleURLEvent(event:withReplyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
@@ -149,6 +170,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     Logger.log("App launched")
+
+    Logger.log("Using \(PlayerCore.active.mpv.mpvVersion!)")
 
     if !isReady {
       getReady()
@@ -506,6 +529,48 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     UserDefaults.standard.register(defaults: [String: Any](uniqueKeysWithValues: Preference.defaultPreference.map { ($0.0.rawValue, $0.1) }))
   }
 
+  // MARK: - FFmpeg version parsing
+
+  /// Extracts the major version number from the given FFmpeg encoded version number.
+  ///
+  /// This is a Swift implementation of the FFmpeg macro `AV_VERSION_MAJOR`.
+  /// - Parameter version: Encoded version number in FFmpeg proprietary format.
+  /// - Returns: The major version number
+  private static func avVersionMajor(_ version: UInt32) -> UInt32 {
+    version >> 16
+  }
+
+  /// Extracts the minor version number from the given FFmpeg encoded version number.
+  ///
+  /// This is a Swift implementation of the FFmpeg macro `AV_VERSION_MINOR`.
+  /// - Parameter version: Encoded version number in FFmpeg proprietary format.
+  /// - Returns: The minor version number
+  private static func avVersionMinor(_ version: UInt32) -> UInt32 {
+    (version & 0x00FF00) >> 8
+  }
+
+  /// Extracts the micro version number from the given FFmpeg encoded version number.
+  ///
+  /// This is a Swift implementation of the FFmpeg macro `AV_VERSION_MICRO`.
+  /// - Parameter version: Encoded version number in FFmpeg proprietary format.
+  /// - Returns: The micro version number
+  private static func avVersionMicro(_ version: UInt32) -> UInt32 {
+    version & 0xFF
+  }
+
+  /// Forms a string representation from the given FFmpeg encoded version number.
+  ///
+  /// FFmpeg returns the version number of its libraries encoded into an unsigned integer. The FFmpeg source
+  /// `libavutil/version.h` describes FFmpeg's versioning scheme and provides C macros for operating on encoded
+  /// version numbers. Since the macros can't be used in Swift code we've had to code equivalent functions in Swift.
+  /// - Parameter version: Encoded version number in FFmpeg proprietary format.
+  /// - Returns: A string containing the version number.
+  private static func versionAsString(_ version: UInt32) -> String {
+    let major = AppDelegate.avVersionMajor(version)
+    let minor = AppDelegate.avVersionMinor(version)
+    let micro = AppDelegate.avVersionMicro(version)
+    return "\(major).\(minor).\(micro)"
+  }
 }
 
 

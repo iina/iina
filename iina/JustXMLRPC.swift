@@ -21,6 +21,7 @@ class JustXMLRPC {
     var readableDescription: String {
       return "\(method): [\(httpCode)] \(reason)"
     }
+    var underlyingError: Error?
   }
 
   enum Result {
@@ -74,7 +75,7 @@ class JustXMLRPC {
         }
       } else {
         // http error
-        callback(.error(XMLRPCError(method: method, httpCode: response.statusCode ?? 0, reason: response.reason)))
+        callback(.error(XMLRPCError(method: method, httpCode: response.statusCode ?? 0, reason: response.reason, underlyingError: response.error)))
       }
     }
   }

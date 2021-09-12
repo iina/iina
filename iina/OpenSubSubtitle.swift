@@ -63,7 +63,7 @@ class OpenSubSupport {
     // login failed (reason)
     case loginFailed(String)
     // file error
-    case cannotReadFile
+    case cannotReadFile(Error)
     case fileTooSmall
     // search failed (reason)
     case searchFailed(String)
@@ -186,13 +186,21 @@ class OpenSubSupport {
     }
   }
 
-  func hash(_ url: URL) -> Promise<FileInfo> {
+  func hash(_ url: URL, _ playerCore: PlayerCore) -> Promise<FileInfo> {
     return Promise { resolver in
-      guard let file = try? FileHandle(forReadingFrom: url) else {
-        Logger.log("OpenSub: cannot get file handle", level: .error, subsystem: subsystem)
-        resolver.reject(OpenSubError.cannotReadFile)
+      if playerCore.info.isNetworkResource {
+        // Cannot create a hash when streaming. Force caller to use title instead.
+        resolver.reject(OpenSubError.noResult)
         return
       }
+      var file: FileHandle
+      do {
+        file = try FileHandle(forReadingFrom: url)
+      } catch {
+        resolver.reject(OpenSubError.cannotReadFile(error))
+        return
+      }
+      defer { file.closeFile() }
 
       file.seekToEndOfFile()
       let fileSize = file.offsetInFile
@@ -212,28 +220,29 @@ class OpenSubSupport {
 
       hash += fileSize
 
-      file.closeFile()
-
       resolver.fulfill(FileInfo(hashValue: String(format: "%016qx", hash), fileSize: fileSize))
     }
   }
 
-  func requestByName(_ fileURL: URL) -> Promise<[OpenSubSubtitle]> {
-    return requestIMDB(fileURL).then { imdb -> Promise<[OpenSubSubtitle]> in
+  func requestByName(_ fileURL: URL, _ playerCore: PlayerCore) -> Promise<[OpenSubSubtitle]> {
+    return requestIMDB(fileURL, playerCore).then { imdb -> Promise<[OpenSubSubtitle]> in
       let info = ["imdbid": imdb]
       return self.request(info)
     }
   }
 
-  func requestIMDB(_ fileURL: URL) -> Promise<String> {
+  func requestIMDB(_ fileURL: URL, _ playerCore: PlayerCore) -> Promise<String> {
     return Promise { resolver in
-      let filename = fileURL.lastPathComponent
-      xmlRpc.call("GuessMovieFromString", [token as Any, [filename]]) { status in
+      // When streaming use the media title as frequently the URL does not reflect the title
+      // of the video.
+      let searchString = playerCore.info.isNetworkResource ? playerCore.getMediaTitle() : fileURL.lastPathComponent
+      Logger.log("Searching for subtitles of movies matching '\(searchString)'", subsystem: subsystem)
+      xmlRpc.call("GuessMovieFromString", [token as Any, [searchString]]) { status in
         switch status {
         case .ok(let response):
           do {
             guard self.checkStatus(response) else { throw OpenSubError.wrongResponseFormat }
-            let bestGuess = try self.findPath(["data", filename, "BestGuess"], in: response) as? [String: Any]
+            let bestGuess = try self.findPath(["data", searchString, "BestGuess"], in: response) as? [String: Any]
             let IMDB = (bestGuess?["IDMovieIMDB"] as? String) ?? ""
             resolver.fulfill(IMDB)
           } catch let (error) {

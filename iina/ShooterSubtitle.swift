@@ -10,6 +10,8 @@ import Foundation
 import Just
 import PromiseKit
 
+fileprivate let subsystem = Logger.Subsystem(rawValue: "shooter")
+
 final class ShooterSubtitle: OnlineSubtitle {
 
   var desc: String
@@ -63,9 +65,10 @@ class ShooterSupport {
 
   enum ShooterError: Error {
     // file error
-    case cannotReadFile
+    case cannotReadFile(Error)
     case fileTooSmall
-    case networkError
+    case networkError(Error?)
+    case noResult
   }
 
   typealias ResponseData = [[String: Any]]
@@ -82,10 +85,14 @@ class ShooterSupport {
 
   func hash(_ url: URL) -> Promise<FileInfo> {
     return Promise { resolver in
-      guard let file = try? FileHandle(forReadingFrom: url) else {
-        resolver.reject(ShooterError.cannotReadFile)
+      var file: FileHandle
+      do {
+        file = try FileHandle(forReadingFrom: url)
+      } catch {
+        resolver.reject(ShooterError.cannotReadFile(error))
         return
       }
+      defer { file.closeFile() }
 
       file.seekToEndOfFile()
       let fileSize: UInt64 = file.offsetInFile
@@ -107,8 +114,6 @@ class ShooterSupport {
         return file.readData(ofLength: chunkSize).md5
         }.joined(separator: ";")
 
-      file.closeFile()
-
       resolver.fulfill(FileInfo(hashValue: hash, path: url.path))
     }
   }
@@ -117,11 +122,11 @@ class ShooterSupport {
     return Promise { resolver in
       Just.post(apiPath, params: info.dictionary, timeout: 10) { response in
         guard response.ok else {
-          resolver.reject(ShooterError.networkError)
+          resolver.reject(ShooterError.networkError(response.error))
           return
         }
         guard let json = response.json as? ResponseData else {
-          resolver.fulfill([])
+          resolver.reject(ShooterError.noResult)
           return
         }
 

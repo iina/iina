@@ -367,9 +367,15 @@ extension MainMenuActionHandler {
     }
     let subURL = URL(fileURLWithPath: path)
     let subFileName = subURL.lastPathComponent
-    let destURL = currURL.deletingLastPathComponent().appendingPathComponent(subFileName, isDirectory: false)
     do {
+      // When streaming save the subtitles file to the user's ~/Movies directory, otherwise
+      // save the file to the same directory the video is in.
+      let destDirURL = player.info.isNetworkResource ? try FileManager.default.url(
+          for: .moviesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+        : currURL.deletingLastPathComponent()
+      let destURL = destDirURL.appendingPathComponent(subFileName, isDirectory: false)
       try FileManager.default.copyItem(at: subURL, to: destURL)
+      Logger.log("Saved downloaded subtitles to \(destURL.path)")
       player.sendOSD(.savedSub)
     } catch let error as NSError {
       Utility.showAlert("error_saving_file", arguments: ["subtitle",

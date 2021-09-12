@@ -46,6 +46,14 @@ class OnlineSubtitle: NSObject {
     self.index = index
   }
 
+  /// Check if the given error indicates IINA was unable to connect to the subtitle server.
+  /// - Parameter error: the error object to inspect
+  /// - Returns: `true` if the error represents a connection failure; otherwise `false`.
+  private static func isConnectFailure(_ error: Error?) -> Bool {
+    guard let nsError = (error as NSError?) else {return false }
+    return nsError.domain == NSURLErrorDomain && nsError.code == NSURLErrorCannotConnectToHost
+  }
+
   static func getSubtitle(forFile url: URL, from userSource: Source? = nil, playerCore: PlayerCore, callback: @escaping SubCallback) {
 
     var source: Source
@@ -65,13 +73,31 @@ class OnlineSubtitle: NSObject {
       // shooter
       let subSupport = ShooterSupport()
       subSupport.hash(url)
-      .then { info in
-        subSupport.request(info)
+      .then { info -> Promise<[ShooterSubtitle]> in
+        Logger.log("Searching for subtitles of movie with hash \(info.hashValue)", subsystem: subsystem)
+        return subSupport.request(info)
       }.done { subs in
         callback(subs)
       }.ensure {
         playerCore.hideOSD()
       }.catch { error in
+        // Log the failure.
+        let prefix = "Failed to obtain subtitles for \(url) from \(source.name). "
+        switch error {
+        case ShooterSupport.ShooterError.cannotReadFile(let cause):
+          Logger.log("\(prefix)Cannot get file handle. \(cause)", level: .error, subsystem: subsystem)
+        case ShooterSupport.ShooterError.networkError(let cause):
+          if isConnectFailure(cause) {
+            Logger.log("\(prefix)Could not connect to the server.", level: .error, subsystem: subsystem)
+          } else {
+            Logger.log("\(prefix)\(error) \(String(describing: cause))", level: .error, subsystem: subsystem)
+          }
+        case ShooterSupport.ShooterError.noResult:
+          // Not an error.
+          Logger.log("No subtitles found", subsystem: subsystem)
+        default:
+          Logger.log("\(prefix)\(error)", level: .error, subsystem: subsystem)
+        }
         let osdMessage: OSDMessage
         switch error {
         case ShooterSupport.ShooterError.cannotReadFile,
@@ -79,11 +105,14 @@ class OnlineSubtitle: NSObject {
           osdMessage = .fileError
         case ShooterSupport.ShooterError.networkError:
           osdMessage = .networkError
+        case ShooterSupport.ShooterError.noResult:
+          callback([])
+          return
         default:
           osdMessage = .networkError
-          playerCore.sendOSD(osdMessage)
-          playerCore.isSearchingOnlineSubtitle = false
         }
+        playerCore.sendOSD(osdMessage)
+        playerCore.isSearchingOnlineSubtitle = false
       }
     case .openSub:
       // opensubtitles
@@ -99,12 +128,13 @@ class OnlineSubtitle: NSObject {
       // - request
       subSupport.login()
       .then { _ in
-        subSupport.hash(url)
-      }.then { info in
-        subSupport.request(info.dictionary)
+        subSupport.hash(url, playerCore)
+      }.then { info -> Promise<[OpenSubSubtitle]> in
+        Logger.log("Searching for subtitles of movie with hash \(info.hashValue)", subsystem: subsystem)
+        return subSupport.request(info.dictionary)
       }.recover { error -> Promise<[OpenSubSubtitle]> in
         if case OpenSubSupport.OpenSubError.noResult = error {
-          return subSupport.requestByName(url)
+          return subSupport.requestByName(url, playerCore)
         } else {
           throw error
         }
@@ -113,6 +143,32 @@ class OnlineSubtitle: NSObject {
       }.done { selectedSubs in
         callback(selectedSubs)
       }.catch { err in
+        // Log the failure.
+        let prefix = "Failed to obtain subtitles for \(url) from \(source.name). "
+        switch err {
+        case OpenSubSupport.OpenSubError.cannotReadFile(let cause):
+          Logger.log("\(prefix)Cannot get file handle. \(cause)", level: .error, subsystem: subsystem)
+        case OpenSubSupport.OpenSubError.loginFailed(let status):
+          Logger.log("\(prefix)\(err) Status: \(status)", level: .error, subsystem: subsystem)
+        case OpenSubSupport.OpenSubError.noResult:
+          // Not an error.
+          Logger.log("No subtitles found", subsystem: subsystem)
+        case OpenSubSupport.OpenSubError.userCanceled:
+          // Not an error.
+          Logger.log("User canceled download of subtitles", subsystem: subsystem)
+        case OpenSubSupport.OpenSubError.xmlRpcError(let rpcError):
+          if let cause = rpcError.underlyingError {
+            if isConnectFailure(cause) {
+              Logger.log("\(prefix)Could not connect to the server.", level: .error, subsystem: subsystem)
+            } else {
+              Logger.log("\(prefix)\(err) \(cause)", level: .error, subsystem: subsystem)
+            }
+          } else {
+            Logger.log("\(prefix)\(err)", level: .error, subsystem: subsystem)
+          }
+        default:
+          Logger.log("\(prefix)\(err)", level: .error, subsystem: subsystem)
+        }
         let osdMessage: OSDMessage
         switch err {
         case OpenSubSupport.OpenSubError.cannotReadFile,
@@ -149,12 +205,16 @@ class OnlineSubtitle: NSObject {
       }.ensure {
         playerCore.hideOSD()
       }.catch { err in
+        // Log the failure.
+        let prefix = "Failed to obtain subtitles for \(url) from \(source.name). "
         let osdMessage: OSDMessage
         switch err {
         case AssrtSupport.AssrtError.userCanceled:
+          // Not an error.
+          Logger.log("User canceled download of subtitles", subsystem: subsystem)
           osdMessage = .canceled
         default:
-          Logger.log(err.localizedDescription, level: .error)
+          Logger.log("\(prefix)\(err)", level: .error, subsystem: subsystem)
           osdMessage = .networkError
         }
         playerCore.sendOSD(osdMessage)

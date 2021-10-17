@@ -33,19 +33,9 @@
 
 ## Building
 
-1. IINA uses [CocoaPods](https://cocoapods.org) for managing the installation of third-party libraries. If you don't already have it installed, here's how you can do so:
+1. In the current develop branch, IINA uses Swift Package instead of [CocoaPods](https://cocoapods.org) for managing the installation of third-party libraries. 
 
-	#### Using RubyGems
-	```console
-	$ sudo gem install cocoapods
-	```
-
-	#### Using Homebrew
-	```console
-	$ brew install cocoapods
-	```
-
-2. Run `pod install` in project's root directory.
+2. After cloning the repository, make sure you are in the develop branch. Open XCode and File->SwiftPackages->Reset Package Caches, and Update to Latest Package Versions. You don't need to use `pod install` anymore, but the mpv libraries are still required.
 
 3. Obtain the mpv libraries.
 

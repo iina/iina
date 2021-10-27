@@ -27,7 +27,7 @@
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="pxc-7C-SGP"/>
         <customView id="gZf-gF-XoY">
-            <rect key="frame" x="0.0" y="0.0" width="444" height="202"/>
+            <rect key="frame" x="0.0" y="0.0" width="444" height="278"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField identifier="SectionTitleVideo" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2BH-mP-kfr">
@@ -148,20 +148,43 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ota-uw-6BI">
+                    <rect key="frame" x="118" y="53" width="215" height="18"/>
+                    <buttonCell key="cell" type="check" title="Match refresh rate in fullscreen" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="OvP-TR-cOd">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="pxc-7C-SGP" name="value" keyPath="values.matchRefreshRate" id="I7K-w8-zNh"/>
+                    </connections>
+                </button>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="TSW-aG-h9J">
+                    <rect key="frame" x="118" y="8" width="328" height="42"/>
+                    <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" id="Lfo-JP-9et">
+                        <font key="font" metaFont="label" size="11"/>
+                        <string key="title">Switch to a matching refresh rate (if there is any) when the player goes fullscreen. This can eliminate stuttering, and, on some external displays, enable frame interpolation.</string>
+                        <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
             <constraints>
                 <constraint firstItem="4rB-d2-drE" firstAttribute="baseline" secondItem="EWs-Ib-pVZ" secondAttribute="baseline" id="0Wl-YU-BME"/>
                 <constraint firstItem="2BH-mP-kfr" firstAttribute="top" secondItem="gZf-gF-XoY" secondAttribute="top" constant="8" id="0jh-iZ-prT"/>
                 <constraint firstItem="40Z-9R-jw0" firstAttribute="leading" secondItem="xXS-nP-Chk" secondAttribute="leading" id="1of-sZ-BN6"/>
                 <constraint firstItem="0Re-PY-hmC" firstAttribute="top" secondItem="4rB-d2-drE" secondAttribute="bottom" constant="4" id="5Mm-wm-VFG"/>
-                <constraint firstAttribute="bottom" secondItem="IQ8-K4-5CX" secondAttribute="bottom" constant="12" id="6dx-e8-7Ck"/>
+                <constraint firstItem="Ota-uw-6BI" firstAttribute="leading" secondItem="IQ8-K4-5CX" secondAttribute="leading" id="6XV-jm-sBT"/>
                 <constraint firstItem="40Z-9R-jw0" firstAttribute="top" secondItem="xXS-nP-Chk" secondAttribute="bottom" constant="4" id="87O-GK-HSl"/>
                 <constraint firstAttribute="trailing" secondItem="IQ8-K4-5CX" secondAttribute="trailing" id="ASv-Wn-ieW"/>
                 <constraint firstItem="4rB-d2-drE" firstAttribute="leading" secondItem="paR-ax-h5M" secondAttribute="leading" id="Can-oM-yLm"/>
+                <constraint firstItem="H9a-N4-xDt" firstAttribute="top" secondItem="40Z-9R-jw0" secondAttribute="bottom" constant="12" id="EeP-q5-sCA"/>
                 <constraint firstItem="EWs-Ib-pVZ" firstAttribute="leading" secondItem="4rB-d2-drE" secondAttribute="trailing" constant="8" id="Fj7-lr-KGg"/>
                 <constraint firstAttribute="trailing" secondItem="0Re-PY-hmC" secondAttribute="trailing" id="HJH-5L-Dd4"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ota-uw-6BI" secondAttribute="trailing" constant="12" id="Ije-hx-B8b"/>
                 <constraint firstItem="2BH-mP-kfr" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="gZf-gF-XoY" secondAttribute="leading" constant="120" id="KBf-6v-pL9"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xXS-nP-Chk" secondAttribute="trailing" constant="12" id="QNu-hr-TdO"/>
+                <constraint firstItem="TSW-aG-h9J" firstAttribute="leading" secondItem="Ota-uw-6BI" secondAttribute="leading" id="TQY-eJ-m7f"/>
+                <constraint firstAttribute="trailing" secondItem="TSW-aG-h9J" secondAttribute="trailing" id="TkD-AY-QZP"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="H9a-N4-xDt" secondAttribute="trailing" constant="12" id="TxZ-c7-rVn"/>
                 <constraint firstItem="IQ8-K4-5CX" firstAttribute="top" secondItem="H9a-N4-xDt" secondAttribute="bottom" constant="4" id="W29-Gj-v7X"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kas-7q-TbK" secondAttribute="trailing" constant="20" symbolic="YES" id="XnT-jM-uWw"/>
@@ -174,13 +197,15 @@
                 <constraint firstItem="NZA-64-tXh" firstAttribute="baseline" secondItem="paR-ax-h5M" secondAttribute="baseline" id="hly-ga-NBA"/>
                 <constraint firstItem="EWs-Ib-pVZ" firstAttribute="leading" secondItem="NZA-64-tXh" secondAttribute="leading" id="k0a-vZ-1e2"/>
                 <constraint firstItem="NZA-64-tXh" firstAttribute="leading" secondItem="paR-ax-h5M" secondAttribute="trailing" constant="8" id="mRg-ce-YRy"/>
+                <constraint firstItem="Ota-uw-6BI" firstAttribute="top" secondItem="IQ8-K4-5CX" secondAttribute="bottom" constant="12" id="o64-sw-FsN"/>
                 <constraint firstItem="2BH-mP-kfr" firstAttribute="leading" secondItem="gZf-gF-XoY" secondAttribute="leading" id="pDP-Rm-tDg"/>
                 <constraint firstItem="0Re-PY-hmC" firstAttribute="leading" secondItem="4rB-d2-drE" secondAttribute="leading" id="q9a-bj-3IP"/>
+                <constraint firstItem="TSW-aG-h9J" firstAttribute="top" secondItem="Ota-uw-6BI" secondAttribute="bottom" constant="4" id="qAU-0r-e5f"/>
                 <constraint firstItem="4rB-d2-drE" firstAttribute="top" secondItem="paR-ax-h5M" secondAttribute="bottom" constant="16" id="rCv-37-pHD"/>
                 <constraint firstItem="kas-7q-TbK" firstAttribute="baseline" secondItem="paR-ax-h5M" secondAttribute="baseline" id="rWF-ZF-Tlb"/>
                 <constraint firstAttribute="trailing" secondItem="40Z-9R-jw0" secondAttribute="trailing" id="u8t-cI-LR5"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="EWs-Ib-pVZ" secondAttribute="trailing" constant="20" symbolic="YES" id="uSA-lp-egl"/>
-                <constraint firstItem="H9a-N4-xDt" firstAttribute="top" secondItem="40Z-9R-jw0" secondAttribute="bottom" constant="8" id="w3M-iD-Ho3"/>
+                <constraint firstAttribute="bottom" secondItem="TSW-aG-h9J" secondAttribute="bottom" constant="8" id="w87-4D-FL9"/>
                 <constraint firstItem="H9a-N4-xDt" firstAttribute="leading" secondItem="40Z-9R-jw0" secondAttribute="leading" id="ybt-SY-BgR"/>
             </constraints>
             <point key="canvasLocation" x="783" y="394.5"/>

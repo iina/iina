@@ -11,6 +11,14 @@ import MediaPlayer
 
 class PlayerCore: NSObject {
 
+  /// Minimum value to set a mpv loop point to.
+  ///
+  /// Setting a loop point to zero disables looping, so when loop points are being adjusted IINA must insure the mpv property is not
+  /// set to zero. However using `Double.leastNonzeroMagnitude` as the minimum value did not work because mpv truncates
+  /// the value when storing the A-B loop points in the watch later file. As a result the state of the A-B loop feature is not properly
+  /// restored when the movies is played again. Using the following value as the minimum for loop points avoids this issue.
+  static private let minLoopPointTime = 0.000001
+
   // MARK: - Multiple instances
 
   static let first: PlayerCore = createPlayerCore()
@@ -163,6 +171,46 @@ class PlayerCore: NSObject {
 
   var isPlaylistVisible: Bool {
     isInMiniPlayer ? miniPlayer.isPlaylistVisible : mainWindow.sideBarStatus == .playlist
+  }
+
+  /// The A loop point established by the [mpv](https://mpv.io/manual/stable/) A-B loop command.
+  var abLoopA: Double {
+    /// Returns the value of the A loop point, a timestamp in seconds if set, otherwise returns zero.
+    /// - Note: The value of the A loop point is not required by mpv to be before the B loop point.
+    /// - Returns:value of the mpv option `ab-loop-a`
+    get { mpv.getDouble(MPVOption.PlaybackControl.abLoopA) }
+    /// Sets the value of the A loop point as an absolute timestamp in seconds.
+    ///
+    /// The loop points of the mpv A-B loop command can be adjusted at runtime. This method updates the A loop point. Setting a
+    /// loop point to zero disables looping, so this method will adjust the value so it is not equal to zero in order to require use of the
+    /// A-B command to disable looping.
+    /// - Precondition: The A loop point must have already been established using the A-B loop command otherwise the attempt
+    ///     to change the loop point will be ignored.
+    /// - Note: The value of the A loop point is not required by mpv to be before the B loop point.
+    set {
+      guard info.abLoopStatus == .aSet || info.abLoopStatus == .bSet else { return }
+      mpv.setDouble(MPVOption.PlaybackControl.abLoopA, max(PlayerCore.minLoopPointTime, newValue))
+    }
+  }
+
+  /// The B loop point established by the [mpv](https://mpv.io/manual/stable/) A-B loop command.
+  var abLoopB: Double {
+    /// Returns the value of the B loop point, a timestamp in seconds if set, otherwise returns zero.
+    /// - Note: The value of the B loop point is not required by mpv to be after the A loop point.
+    /// - Returns:value of the mpv option `ab-loop-b`
+    get { mpv.getDouble(MPVOption.PlaybackControl.abLoopB) }
+    /// Sets the value of the B loop point as an absolute timestamp in seconds.
+    ///
+    /// The loop points of the mpv A-B loop command can be adjusted at runtime. This method updates the B loop point. Setting a
+    /// loop point to zero disables looping, so this method will adjust the value so it is not equal to zero in order to require use of the
+    /// A-B command to disable looping.
+    /// - Precondition: The B loop point must have already been established using the A-B loop command otherwise the attempt
+    ///     to change the loop point will be ignored.
+    /// - Note: The value of the B loop point is not required by mpv to be after the A loop point.
+    set {
+      guard info.abLoopStatus == .bSet else { return }
+      mpv.setDouble(MPVOption.PlaybackControl.abLoopB, max(PlayerCore.minLoopPointTime, newValue))
+    }
   }
 
   static var keyBindings: [String: KeyMapping] = [:]
@@ -723,31 +771,46 @@ class PlayerCore: NSObject {
     }
   }
 
+  /// Invoke the [mpv](https://mpv.io/manual/stable/) A-B loop command.
+  ///
+  /// The A-B loop command cycles mpv through these states:
+  /// - Cleared (looping disabled)
+  /// - A loop point set
+  /// - B loop point set (looping enabled)
+  ///
+  /// When the command is first invoked it sets the A loop point to the timestamp of the current frame. When the command is invoked
+  /// a second time it sets the B loop point to the timestamp of the current frame, activating looping and causing mpv to seek back to
+  /// the A loop point. When the command is invoked again both loop points are cleared (set to zero) and looping stops.
   func abLoop() {
     // may subject to change
     mpv.command(.abLoop)
-    let a = mpv.getDouble(MPVOption.PlaybackControl.abLoopA)
-    let b = mpv.getDouble(MPVOption.PlaybackControl.abLoopB)
-    if a == 0 && b == 0 {
-      info.abLoopStatus = 0
-    } else if b != 0 {
-      info.abLoopStatus = 2
-    } else {
-      info.abLoopStatus = 1
-    }
+    syncAbLoop()
     sendOSD(.abLoop(info.abLoopStatus))
   }
 
-  func clearAbLoop() {
-    if mpv.getFlag(MPVOption.PlaybackControl.abLoopA) {
-      if mpv.getFlag(MPVOption.PlaybackControl.abLoopB) {
-        info.abLoopStatus = 2
+  /// Synchronize IINA with the state of the [mpv](https://mpv.io/manual/stable/) A-B loop command.
+  func syncAbLoop() {
+    // Obtain the values of the ab-loop-a and ab-loop-b options representing the A & B loop points.
+    let a = abLoopA
+    let b = abLoopB
+    if a == 0 {
+      if b == 0 {
+        // Neither point is set, the feature is disabled.
+        info.abLoopStatus = .cleared
       } else {
-        info.abLoopStatus = 1
+        // The B loop point is set without the A loop point having been set. This is allowed by mpv
+        // but IINA is not supposed to allow mpv to get into this state, so something has gone
+        // wrong. This is an internal error. Log it and pretend that just the A loop point is set.
+        Logger.log("Unexpected A-B loop state, ab-loop-a is \(a) ab-loop-b is \(b)", level: .error, subsystem: subsystem)
+        info.abLoopStatus = .aSet
       }
     } else {
-      info.abLoopStatus = 0
+      // A loop point has been set. B loop point must be set as well to activate looping.
+      info.abLoopStatus = b == 0 ? .aSet : .bSet
     }
+    // The play slider has knobs representing the loop points, make insure the slider is in sync.
+    mainWindow?.syncSlider()
+    Logger.log("Synchronized info.abLoopStatus \(info.abLoopStatus)")
   }
 
   func toggleFileLoop() {
@@ -1425,7 +1488,7 @@ class PlayerCore: NSObject {
     DispatchQueue.main.sync {
       getPlaylist()
       getChapters()
-      clearAbLoop()
+      syncAbLoop()
       createSyncUITimer()
       if #available(macOS 10.12.2, *) {
         touchBarSupport.setupTouchBarUI()

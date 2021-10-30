@@ -158,11 +158,11 @@
         <cocoa method="handlePlayPauseCommand:"/>
       </responds-to>
 
-      <responds-to command="next">
+      <responds-to command="next item">
         <cocoa method="handleNextCommand:"/>
       </responds-to>
 
-      <responds-to command="previous">
+      <responds-to command="previous item">
         <cocoa method="handlePreviousCommand:"/>
       </responds-to>
 

@@ -12,30 +12,35 @@
     </enumeration>
 
     <command name="play" code="IINAPlay" description="Begin or resume playback.">
+      <cocoa class="IINA.PlayCommand"/>
       <direct-parameter description="The file to play." optional="yes" hidden="yes">
         <type type="player"/>
       </direct-parameter>
     </command>
 
     <command name="pause" code="IINAPaus" description="Pause playback.">
-    <direct-parameter description="The player." optional="yes" hidden="yes">
-      <type type="player"/>
-    </direct-parameter>
+      <cocoa class="IINA.PauseCommand"/>
+      <direct-parameter description="The player." optional="yes" hidden="yes">
+        <type type="player"/>
+      </direct-parameter>
     </command>
 
     <command name="playpause" code="IINAPlPs" description="Toggle the playing/paused state of the player.">
+      <cocoa class="IINA.PlayPauseCommand"/>
       <direct-parameter description="The player." optional="yes" hidden="yes">
         <type type="player"/>
       </direct-parameter>
     </command>
 
     <command name="next item" code="IINANext" description="Advance to the next playlist item.">
+      <cocoa class="IINA.NextCommand"/>
       <direct-parameter description="The player." optional="yes" hidden="yes">
         <type type="player"/>
       </direct-parameter>
     </command>
 
     <command name="previous item" code="IINAPrev" description="Return to the previous playlist item.">
+      <cocoa class="IINA.PreviousCommand"/>
       <synonym name="prev item"/>
       <direct-parameter description="The player." optional="yes" hidden="yes">
         <type type="player"/>
@@ -291,10 +296,12 @@
     </class>
 
     <class-extension description="The IINA Application" extends="application">
+
       <cocoa class="NSApplication"/>
       <element type="player" access="r">
         <cocoa key="orderedPlayers"/>
       </element>
+
     </class-extension>
   </suite>
 </dictionary>

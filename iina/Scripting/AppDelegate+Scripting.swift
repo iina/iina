@@ -18,8 +18,4 @@ import AppKit
     return NSApp.orderedWindows.lazy.filter(\.isVisible).compactMap { ($0.delegate as? PlayerWindowController)?.player }
   }
 
-  func handlePlayCommand(_ command: NSScriptCommand) {
-    
-  }
-
 }

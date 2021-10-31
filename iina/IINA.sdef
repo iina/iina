@@ -285,7 +285,7 @@
         <cocoa key="scriptingIsCurrent"/>
       </property>
 
-      <property name="playing" code="pPly" type="boolean" access="r">
+      <property name="currently playing" code="pPly" type="boolean" access="r">
         <cocoa key="scriptingIsPlaying"/>
       </property>
 

@@ -13,7 +13,7 @@
 
     <command name="play" code="IINAPlay" description="Begin or resume playback.">
       <cocoa class="IINA.PlayCommand"/>
-      <direct-parameter description="The file to play." optional="yes" hidden="yes">
+      <direct-parameter description="The player." optional="yes" hidden="yes">
         <type type="player"/>
       </direct-parameter>
     </command>

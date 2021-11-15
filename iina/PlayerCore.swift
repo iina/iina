@@ -449,6 +449,10 @@ class PlayerCore: NSObject {
   
   func pause() {
     mpv.setFlag(MPVOption.PlaybackControl.pause, true)
+    // Follow energy efficiency best practices and ensure IINA is absolutely idle when the video is
+    // paused to avoid wasting energy with needless processing.
+    invalidateTimer()
+    mainWindow.videoView.stopDisplayLink()
   }
   
   func resume() {
@@ -457,6 +461,8 @@ class PlayerCore: NSObject {
       seek(absoluteSecond: 0)
     }
     mpv.setFlag(MPVOption.PlaybackControl.pause, false)
+    createSyncUITimer()
+    mainWindow.videoView.startDisplayLink()
   }
 
   func stop() {

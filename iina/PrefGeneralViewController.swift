@@ -66,4 +66,16 @@ class PrefGeneralViewController: PreferenceViewController, PreferenceWindowEmbed
     SUUpdater.shared().feedURL = URL(string: sender.state == .on ? AppData.appcastBetaLink : AppData.appcastLink)!
   }
 
+  // MARK: - Forwarders for SUUpdater
+
+  @objc var automaticallyChecksForUpdates: Bool {
+    get { SUUpdater.shared().automaticallyChecksForUpdates }
+    set { SUUpdater.shared().automaticallyChecksForUpdates = newValue }
+  }
+
+  @objc var updateCheckInterval: TimeInterval {
+    get { SUUpdater.shared().updateCheckInterval }
+    set { SUUpdater.shared().updateCheckInterval = newValue }
+  }
+
 }

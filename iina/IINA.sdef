@@ -192,11 +192,11 @@
         <cocoa key="scriptingFileLoop"/>
       </property>
 
-      <property name="audio volume" code="pVol" description="The sound output volume." type="integer" access="rw">
+      <property name="audio volume" code="pVol" description="The audio output volume (0 = minimum, 150 = maximum, 100 = normal)." type="integer" access="rw">
         <cocoa key="scriptingVolume"/>
       </property>
 
-      <property name="muted" code="pMut" description="Has the sound output been muted?" type="boolean" access="rw">
+      <property name="muted" code="pMut" description="Has the audio output been muted?" type="boolean" access="rw">
         <cocoa key="scriptingIsMuted"/>
       </property>
 

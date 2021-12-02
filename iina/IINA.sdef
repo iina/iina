@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE dictionary SYSTEM "file://localhost/System/Library/DTDs/sdef.dtd">
-<dictionary xmlns:xi="http://www.w3.org/2003/XInclude" title="IINA Terminonoly">
+<dictionary xmlns:xi="http://www.w3.org/2003/XInclude" title="IINA Terminonogy">
   <xi:include href="file:///System/Library/ScriptingDefinitions/CocoaStandard.sdef" xpointer="xpointer(/dictionary/suite)"/>
 
   <suite name="IINA Suite" code="IINA" description="Classes and commands specific to IINA.">

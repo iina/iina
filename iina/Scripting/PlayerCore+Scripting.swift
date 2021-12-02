@@ -263,4 +263,8 @@ private extension FourCharCode {
     frameStep(backwards: true)
   }
 
+  func handleCloseCommand(_ command: NSScriptCommand) {
+    closeMainWindow()
+  }
+
 }

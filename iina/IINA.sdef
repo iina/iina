@@ -314,6 +314,10 @@
         <cocoa method="handlePreviousFrameCommand:"/>
       </responds-to>
 
+      <responds-to command="close">
+        <cocoa method="handleCloseCommand:"/>
+      </responds-to>
+
     </class>
 
     <enumeration name="track type" code="eTrT">

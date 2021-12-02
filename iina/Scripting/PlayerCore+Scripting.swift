@@ -219,6 +219,16 @@ private extension FourCharCode {
     set { self.setVideoRotate(newValue)}
   }
 
+  var scriptingMirror: Bool {
+    get { self.info.mirrorFilter != nil }
+    set { self.setMirror(newValue) }
+  }
+
+  var scriptingFlip: Bool {
+    get { self.info.flipFilter != nil }
+    set { self.setFlip(newValue) }
+  }
+
 }
 
 // MARK: Command Handlers
@@ -243,6 +253,14 @@ private extension FourCharCode {
 
   func handlePreviousCommand(_ command: NSScriptCommand) {
     navigateInPlaylist(nextMedia: false)
+  }
+
+  func handleNextFrameCommand(_ command: NSScriptCommand) {
+    frameStep(backwards: false)
+  }
+
+  func handlePreviousFrameCommand(_ command: NSScriptCommand) {
+    frameStep(backwards: true)
   }
 
 }

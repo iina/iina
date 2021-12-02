@@ -165,6 +165,8 @@
 		B297185824145B31005A0B61 /* MPVPlaylistItem+Scripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B297185724145B31005A0B61 /* MPVPlaylistItem+Scripting.swift */; };
 		B2D76FDF241012140011F8BF /* PlayerCore+Scripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D76FDE241012140011F8BF /* PlayerCore+Scripting.swift */; };
 		B2D76FE1241039120011F8BF /* MPVTrack+Scripting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D76FE0241039120011F8BF /* MPVTrack+Scripting.swift */; };
+		B2FBBA5227586BEF0079D948 /* NextFrameCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FBBA5127586BEF0079D948 /* NextFrameCommand.swift */; };
+		B2FBBA5427586C160079D948 /* PreviousFrameCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FBBA5327586C160079D948 /* PreviousFrameCommand.swift */; };
 		B4E446E825CB53920069F06E /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = B4E446E725CB53920069F06E /* PromiseKit */; };
 		B4E446F225CB53FF0069F06E /* Gzip in Frameworks */ = {isa = PBXBuildFile; productRef = B4E446F125CB53FF0069F06E /* Gzip */; };
 		B4E446F725CB54EF0069F06E /* Mustache in Frameworks */ = {isa = PBXBuildFile; productRef = B4E446F625CB54EF0069F06E /* Mustache */; };
@@ -1201,6 +1203,8 @@
 		B297185724145B31005A0B61 /* MPVPlaylistItem+Scripting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MPVPlaylistItem+Scripting.swift"; sourceTree = "<group>"; };
 		B2D76FDE241012140011F8BF /* PlayerCore+Scripting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerCore+Scripting.swift"; sourceTree = "<group>"; };
 		B2D76FE0241039120011F8BF /* MPVTrack+Scripting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MPVTrack+Scripting.swift"; sourceTree = "<group>"; };
+		B2FBBA5127586BEF0079D948 /* NextFrameCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextFrameCommand.swift; sourceTree = "<group>"; };
+		B2FBBA5327586C160079D948 /* PreviousFrameCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousFrameCommand.swift; sourceTree = "<group>"; };
 		B305513A2190B0C600D3F70E /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/MiniPlayerWindowController.strings; sourceTree = "<group>"; };
 		B3066F5F1F161538004D7559 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
 		B35E0A072107C0E500453AA7 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/PrefUtilsViewController.strings; sourceTree = "<group>"; };
@@ -2257,11 +2261,13 @@
 		B267B80D272E0544000425EF /* Commands */ = {
 			isa = PBXGroup;
 			children = (
+				B267B817272E0621000425EF /* NextCommand.swift */,
+				B2FBBA5127586BEF0079D948 /* NextFrameCommand.swift */,
 				B267B812272E059F000425EF /* PauseCommand.swift */,
 				B267B804272DFAB2000425EF /* PlayCommand.swift */,
-				B267B817272E0621000425EF /* NextCommand.swift */,
 				B267B816272E0621000425EF /* PlayPauseCommand.swift */,
 				B267B818272E0621000425EF /* PreviousCommand.swift */,
+				B2FBBA5327586C160079D948 /* PreviousFrameCommand.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -2611,9 +2617,11 @@
 				84C6D3641EB276E9009BF721 /* PlaybackHistory.swift in Sources */,
 				E3CB258F222799B800A62C47 /* MPVHook.swift in Sources */,
 				843FFD4D1D5DAA01001F3A44 /* RoundedTextFieldCell.swift in Sources */,
+				B2FBBA5427586C160079D948 /* PreviousFrameCommand.swift in Sources */,
 				8407D1401E3A684C0043895D /* ViewLayer.swift in Sources */,
 				84A0BA9B1D2FAB4100BC8DA1 /* Parameter.swift in Sources */,
 				84EB1F051D2F5C5B004FA5A1 /* AppData.swift in Sources */,
+				B2FBBA5227586BEF0079D948 /* NextFrameCommand.swift in Sources */,
 				84C8D58F1D794CE600D98A0E /* MPVFilter.swift in Sources */,
 				845404AA1E4396F500B02B12 /* ScriptLoader.swift in Sources */,
 				84A0BAA11D2FAE7600BC8DA1 /* VideoView.swift in Sources */,

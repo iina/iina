@@ -47,6 +47,21 @@
       </direct-parameter>
     </command>
 
+    <command name="next frame" code="IINANxFr" description="Advance to the next frame.">
+      <cocoa class="IINA.NextFrameCommand"/>
+      <direct-parameter description="The player." optional="yes" hidden="yes">
+        <type type="player"/>
+      </direct-parameter>
+    </command>
+
+    <command name="previous frame" code="IINAPrFr" description="Return to the previous frame.">
+      <cocoa class="IINA.PreviousFrameCommand"/>
+      <synonym name="prev frame"/>
+      <direct-parameter description="The player." optional="yes" hidden="yes">
+        <type type="player"/>
+      </direct-parameter>
+    </command>
+
     <class name="player" code="cPla">
       <cocoa class="IINA.PlayerCore"/>
 
@@ -70,11 +85,11 @@
         <cocoa key="scriptingFileLoop"/>
       </property>
 
-      <property name="sound volume" code="pVol" description="The sound output volume." type="integer" access="rw">
+      <property name="audio volume" code="pVol" description="The sound output volume." type="integer" access="rw">
         <cocoa key="scriptingVolume"/>
       </property>
 
-      <property name="mute" code="pMut" description="Has the sound output been muted?" type="boolean" access="rw">
+      <property name="muted" code="pMut" description="Has the sound output been muted?" type="boolean" access="rw">
         <cocoa key="scriptingIsMuted"/>
       </property>
 
@@ -126,6 +141,14 @@
         <cocoa key="scriptingRotation"/>
       </property>
 
+      <property name="mirrored" code="pMir" description="Whether the video is mirrored (horizontally)." type="boolean" access="rw">
+        <cocoa key="scriptingMirror"/>
+      </property>
+
+      <property name="flipped" code="pFli" description="Whether the video is flipped (vertically)." type="boolean" access="rw">
+        <cocoa key="scriptingFlip"/>
+      </property>
+
       <property name="pip" code="pPIP" description="Is the player in picture-in-picture mode? (macOS 10.12+)" type="boolean" access="rw">
         <cocoa key="scriptingIsPIP"/>
       </property>
@@ -133,6 +156,7 @@
       <property name="current playlist item" code="pPLI" description="The current playlist item." type="playlist item" access="rw">
         <cocoa key="scriptingCurrentPlaylistItem"/>
       </property>
+
 
       <element type="track" description="The media tracks of the current media resource." access="r">
         <cocoa key="scriptingTracks"/>
@@ -173,6 +197,14 @@
 
       <responds-to command="previous item">
         <cocoa method="handlePreviousCommand:"/>
+      </responds-to>
+
+      <responds-to command="next frame">
+        <cocoa method="handleNextFrameCommand:"/>
+      </responds-to>
+
+      <responds-to command="previous frame">
+        <cocoa method="handlePreviousFrameCommand:"/>
       </responds-to>
 
     </class>

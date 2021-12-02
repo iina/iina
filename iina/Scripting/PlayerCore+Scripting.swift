@@ -214,6 +214,11 @@ private extension FourCharCode {
     }
   }
 
+  var scriptingRotation: Int {
+    get { self.info.rotation }
+    set { self.setVideoRotate(newValue)}
+  }
+
 }
 
 // MARK: Command Handlers

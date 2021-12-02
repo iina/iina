@@ -122,6 +122,10 @@
         <cocoa key="scriptingAspectRatio"/>
       </property>
 
+      <property name="rotation" code="pRot" description="The current video rotation in degrees." type="integer" access="rw">
+        <cocoa key="scriptingRotation"/>
+      </property>
+
       <property name="pip" code="pPIP" description="Is the player in picture-in-picture mode? (macOS 10.12+)" type="boolean" access="rw">
         <cocoa key="scriptingIsPIP"/>
       </property>

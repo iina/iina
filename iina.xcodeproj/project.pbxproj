@@ -15,6 +15,7 @@
 		49542986216C34950058F680 /* OpenInIINA.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 49542973216C34950058F680 /* OpenInIINA.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		496B19921E2968530035AF10 /* PIP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496B19911E2968530035AF10 /* PIP.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		519872FF26879B9B00F84BCC /* AccessibilityPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519872FE26879B9B00F84BCC /* AccessibilityPreferences.swift */; };
+		516C4F85275D6975009BD51D /* CameraAreaMaskWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516C4F84275D6975009BD51D /* CameraAreaMaskWindow.swift */; };
 		6100FF2B1EDF9806002CF0FB /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 6100FF2A1EDF9806002CF0FB /* dsa_pub.pem */; };
 		8400D5C41E17C6D2006785F5 /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8400D5C21E17C6D2006785F5 /* AboutWindowController.swift */; };
 		8400D5C61E1AB2F1006785F5 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8400D5C81E1AB2F1006785F5 /* MainWindowController.xib */; };
@@ -536,6 +537,7 @@
 		49542983216C34950058F680 /* OpenInIINA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OpenInIINA.entitlements; sourceTree = "<group>"; };
 		496B19911E2968530035AF10 /* PIP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PIP.framework; path = ../../../../System/Library/PrivateFrameworks/PIP.framework; sourceTree = "<group>"; };
 		519872FE26879B9B00F84BCC /* AccessibilityPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityPreferences.swift; sourceTree = "<group>"; };
+		516C4F84275D6975009BD51D /* CameraAreaMaskWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraAreaMaskWindow.swift; sourceTree = "<group>"; };
 		5879479521A87DD700757A6F /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/MiniPlayerWindowController.strings; sourceTree = "<group>"; };
 		5879479621A87E6100757A6F /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/PreferenceWindowController.strings; sourceTree = "<group>"; };
 		5EF9F7E521FB42E900748374 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/MainMenu.strings"; sourceTree = "<group>"; };
@@ -1782,6 +1784,7 @@
 		84A0BAA31D2FAEA000BC8DA1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				516C4F84275D6975009BD51D /* CameraAreaMaskWindow.swift */,
 				84A0BA931D2F9E9600BC8DA1 /* MainMenu.xib */,
 				E38BD4AE20054BD9007635FC /* MainWindow.swift */,
 				84CFC92523F8DDE000381E5B /* PlayerWindowController.swift */,
@@ -2510,6 +2513,7 @@
 				8466BE181D5CDD0300039D03 /* QuickSettingViewController.swift in Sources */,
 				84A0BA9E1D2FAD4000BC8DA1 /* MainWindowController.swift in Sources */,
 				84E48D4E1E0F1090002C7A3F /* FilterWindowController.swift in Sources */,
+				516C4F85275D6975009BD51D /* CameraAreaMaskWindow.swift in Sources */,
 				E3F698872120D878005792C9 /* ExtendedColors.swift in Sources */,
 				8476440C1D48F63D004F6DF5 /* OSDMessage.swift in Sources */,
 				84AE59491E0FD65800771B7E /* MainMenuActions.swift in Sources */,

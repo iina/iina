@@ -595,3 +595,14 @@ extension NSAppearance {
     }
   }
 }
+
+extension NSScreen {
+  /// Height of the camera housing on this screen if this screen has an embedded camera.
+  var cameraHousingHeight: CGFloat? {
+    if #available(macOS 12.0, *) {
+      return safeAreaInsets.top == 0.0 ? nil : safeAreaInsets.top
+    } else {
+      return nil
+    }
+  }
+}

@@ -101,6 +101,8 @@ class MainWindowController: PlayerWindowController {
     return player.mpv.getInt(MPVProperty.videoParamsRotate)
   }()
 
+  private var maskWindow: CameraAreaMaskWindow?
+
   // MARK: - Status
 
   override var isOntop: Bool {
@@ -1036,6 +1038,13 @@ class MainWindowController: PlayerWindowController {
   }
 
   func windowWillClose(_ notification: Notification) {
+    // If legacy full screen is enabled, the window is in full-screen mode and this Mac has a
+    // camera that intrudes into the screen then there is a black mask window behind the main window
+    // that blacks out the screen to the left and right of the camera that must be closed.
+    if maskWindow != nil {
+      maskWindow!.close()
+      maskWindow = nil
+    }
     shouldApplyInitialWindowSize = true
     // Close PIP
     if pipStatus == .inPIP {
@@ -1271,6 +1280,13 @@ class MainWindowController: PlayerWindowController {
   private func legacyAnimateToWindowed(framePriorToBeingInFullscreen: NSRect) {
     guard let window = self.window else { fatalError("make sure the window exists before animating") }
 
+    // Close and release the window that blacks out the screen to the left and right of the camera
+    // housing if this Mac has a camera that intrudes into the screen.
+    if maskWindow != nil {
+      maskWindow!.close()
+      maskWindow = nil
+    }
+
     // call delegate
     windowWillExitFullScreen(Notification(name: .iinaLegacyFullScreen))
     // stylemask
@@ -1320,7 +1336,19 @@ class MainWindowController: PlayerWindowController {
     NSApp.presentationOptions.insert(.autoHideDock)
     // set frame
     let screen = window.screen ?? NSScreen.main!
-    window.setFrame(screen.frame, display: true, animate: true)
+    if let unusable = screen.cameraHousingHeight {
+      // This screen contains an embedded camera. Display a black background window in order to hide
+      // the wallpaper to the left and right of the camera housing, since the video window will not
+      // take up the full screen so that area of the screen would still be visible.
+      maskWindow = CameraAreaMaskWindow(screen)
+      // Shorten the height of the window's frame to avoid having part of the window obscured by the
+      // camera housing.
+      let frame = screen.frame
+      let rect = NSMakeRect(frame.origin.x, frame.origin.y, frame.width, frame.height - unusable)
+      window.setFrame(rect, display: true, animate: true)
+    } else {
+      window.setFrame(screen.frame, display: true, animate: true)
+    }
     // call delegate
     windowDidEnterFullScreen(Notification(name: .iinaLegacyFullScreen))
   }

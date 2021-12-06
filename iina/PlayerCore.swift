@@ -648,7 +648,7 @@ class PlayerCore: NSObject {
   }
 
   func setVideoRotate(_ degree: Int) {
-    if AppData.rotations.firstIndex(of: degree)! >= 0 {
+    if AppData.rotations.contains(degree) {
       mpv.setInt(MPVOption.Video.videoRotate, degree)
       info.rotation = degree
     }
@@ -1468,6 +1468,8 @@ class PlayerCore: NSObject {
       track.demuxChannels = mpv.getString(MPVProperty.trackListNDemuxChannels(index))
       track.demuxSamplerate = mpv.getInt(MPVProperty.trackListNDemuxSamplerate(index))
 
+      track.player = self
+
       // add to lists
       switch track.type {
       case .audio:
@@ -1496,7 +1498,8 @@ class PlayerCore: NSObject {
       let playlistItem = MPVPlaylistItem(filename: mpv.getString(MPVProperty.playlistNFilename(index))!,
                                          isCurrent: mpv.getFlag(MPVProperty.playlistNCurrent(index)),
                                          isPlaying: mpv.getFlag(MPVProperty.playlistNPlaying(index)),
-                                         title: mpv.getString(MPVProperty.playlistNTitle(index)))
+                                         title: mpv.getString(MPVProperty.playlistNTitle(index)),
+                                         player: self)
       info.playlist.append(playlistItem)
     }
   }

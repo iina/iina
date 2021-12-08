@@ -67,3 +67,23 @@ class PrefGeneralViewController: PreferenceViewController, PreferenceWindowEmbed
   }
 
 }
+
+
+class SUUpdaterProxy: NSObject {
+  @objc dynamic var automaticallyChecksForUpdates: Bool {
+    get {
+      return SUUpdater.shared().automaticallyChecksForUpdates
+    }
+    set {
+      SUUpdater.shared().automaticallyChecksForUpdates = newValue
+    }
+  }
+  @objc dynamic var updateCheckInterval: Double {
+    get {
+      return SUUpdater.shared().updateCheckInterval
+    }
+    set {
+      SUUpdater.shared().updateCheckInterval = newValue
+    }
+  }
+}

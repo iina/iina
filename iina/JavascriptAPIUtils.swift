@@ -42,14 +42,24 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
       return nil
     }
     return createPromise { resolve, reject in
-      guard let url = searchBinary(file, in: Utility.binariesURL) ?? searchBinary(file, in: Utility.exeDirURL) else {
-        reject.call(withArguments: [-1, "Cannot find the binary \(file)"])
-        return
+      var path = ""
+      if file.first == "/" {
+        if !FileManager.default.fileExists(atPath: file) {
+          reject.call(withArguments: [-1, "Cannot fine the binary \(file)"])
+          return
+        }
+        path = file
+      } else {
+        guard let url = searchBinary(file, in: Utility.binariesURL) ?? searchBinary(file, in: Utility.exeDirURL) else {
+          reject.call(withArguments: [-1, "Cannot find the binary \(file)"])
+          return
+        }
+        path = url.path
       }
 
-      if !FileManager.default.isExecutableFile(atPath: url.path) {
+      if !FileManager.default.isExecutableFile(atPath: path) {
         do {
-          try FileManager.default.setAttributes([.posixPermissions: NSNumber(integerLiteral: 0o755)], ofItemAtPath: url.path)
+          try FileManager.default.setAttributes([.posixPermissions: NSNumber(integerLiteral: 0o755)], ofItemAtPath: path)
         } catch {
           reject.call(withArguments: [-2, "The binary is not executable, and execute permission cannot be added"])
           return
@@ -58,7 +68,7 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
 
       let (stdout, stderr) = (Pipe(), Pipe())
       let process = Process()
-      process.launchPath = url.path
+      process.launchPath = path
       process.arguments = args
       process.standardOutput = stdout
       process.standardError = stderr

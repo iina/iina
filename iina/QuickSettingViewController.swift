@@ -78,6 +78,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var switchHorizontalLine: NSBox!
   @IBOutlet weak var hardwareDecodingSwitch: Switch!
   @IBOutlet weak var deinterlaceSwitch: Switch!
+  @IBOutlet weak var hdrSwitch: Switch!
 
   @IBOutlet weak var brightnessSlider: NSSlider!
   @IBOutlet weak var contrastSlider: NSSlider!
@@ -209,6 +210,14 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     hardwareDecodingSwitch.action = {
       self.player.toggleHardwareDecoding($0)
     }
+    hdrSwitch.isEnabled = player.info.hdrAvailable
+    hdrSwitch.checked = player.info.hdrAvailable && player.info.hdrEnabled
+    if #available(macOS 10.15, *) {
+      hdrSwitch.action = {
+        self.player.info.hdrEnabled = $0
+        self.player.mainWindow.videoView.refreshEdrMode()
+      }
+    }
 
     let speed = player.mpv.getDouble(MPVOption.PlaybackControl.speed)
     customSpeedTextField.doubleValue = speed
@@ -291,6 +300,14 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       subTableView.reloadData()
       secSubTableView.reloadData()
       updateSubTabControl()
+    }
+  }
+
+  func pleaseChangeHdrAvailable(available: Bool) {
+    player.info.hdrAvailable = available
+    if isViewLoaded {
+      hdrSwitch.isEnabled = available
+      hdrSwitch.checked = available && player.info.hdrEnabled
     }
   }
 
@@ -758,7 +775,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       self.player.setSubFont($0 ?? "")
     }
   }
-
 
 }
 

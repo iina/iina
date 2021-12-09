@@ -24,7 +24,7 @@
  */
 - (void)didUpdateThumbnails:(nullable NSArray<FFThumbnail *> *)thumbnails forFile:(nonnull NSString *)filename withProgress:(NSInteger)progress;
 
-/** 
+/**
  Did generated thumbnails for the video.
  */
 - (void)didGenerateThumbnails:(nonnull NSArray<FFThumbnail *> *)thumbnails forFile:(nonnull NSString *)filename succeeded:(BOOL)succeeded;
@@ -38,8 +38,9 @@
 
 @property(nonatomic) NSInteger thumbnailCount;
 
-- (void)generateThumbnailForFile:(nonnull NSString *)file;
+- (void)generateThumbnailForFile:(nonnull NSString *)file
+                      thumbWidth:(int)thumbWidth;
 
-+ (NSDictionary *)probeVideoInfoForFile:(nonnull NSString *)file;
++ (nullable NSDictionary *)probeVideoInfoForFile:(nonnull NSString *)file;
 
 @end

@@ -100,6 +100,8 @@ class PlaybackInfo {
   var hwdecEnabled: Bool {
     hwdec != "no"
   }
+  var hdrAvailable: Bool = false
+  var hdrEnabled: Bool = true
 
   // video equalizer
   var brightness: Int = 0

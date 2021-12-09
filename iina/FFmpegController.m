@@ -13,9 +13,9 @@
 #import <libavformat/avformat.h>
 #import <libswscale/swscale.h>
 #import <libavutil/imgutils.h>
+#import <libavutil/mastering_display_metadata.h>
 
 #define THUMB_COUNT_DEFAULT 100
-#define THUMB_WIDTH 240
 
 #define CHECK_NOTNULL(ptr,msg) if (ptr == NULL) {\
 NSLog(@"Error when getting thumbnails: %@", msg);\
@@ -45,7 +45,7 @@ return -1;\
   double _timestamp;
 }
 
-- (int)getPeeksForFile:(NSString *)file;
+- (int)getPeeksForFile:(NSString *)file thumbnailsWidth:(int)thumbnailsWidth;
 - (void)saveThumbnail:(AVFrame *)pFrame width:(int)width height:(int)height index:(int)index realTime:(int)second forFile:(NSString *)file;
 
 @end
@@ -69,6 +69,7 @@ return -1;\
 
 
 - (void)generateThumbnailForFile:(NSString *)file
+                      thumbWidth:(int)thumbWidth
 {
   [_queue cancelAllOperations];
   NSBlockOperation *op = [[NSBlockOperation alloc] init];
@@ -78,7 +79,7 @@ return -1;\
       return;
     }
     self->_timestamp = CACurrentMediaTime();
-    int success = [self getPeeksForFile:file];
+    int success = [self getPeeksForFile:file thumbnailsWidth:thumbWidth];
     if (self.delegate) {
       [self.delegate didGenerateThumbnails:[NSArray arrayWithArray:self->_thumbnails]
                                    forFile: file
@@ -88,8 +89,8 @@ return -1;\
   [_queue addOperation:op];
 }
 
-
 - (int)getPeeksForFile:(NSString *)file
+       thumbnailsWidth:(int)thumbnailsWidth
 {
   int i, ret;
 
@@ -97,8 +98,6 @@ return -1;\
   [_thumbnails removeAllObjects];
   [_thumbnailPartialResult removeAllObjects];
   [_addedTimestamps removeAllObjects];
-
-  // NSLog(@"Getting thumbnails for video...");
 
   // Register all formats and codecs. mpv should have already called it.
   // av_register_all();
@@ -124,6 +123,7 @@ return -1;\
 
   // Get the codec context for the video stream
   AVStream *pVideoStream = pFormatCtx->streams[videoStream];
+
   AVRational videoAvgFrameRate = pVideoStream->avg_frame_rate;
 
   // Check whether the denominator (AVRational.den) is zero to prevent division-by-zero
@@ -149,7 +149,7 @@ return -1;\
     NSLog(@"Error when getting thumbnails: Pixel format is null");
     return -1;
   }
-  
+
   ret = avcodec_open2(pCodecCtx, pCodec, &optionsDict);
   CHECK_SUCCESS(ret, @"Cannot open codec")
 
@@ -159,8 +159,8 @@ return -1;\
 
   // Allocate the output frame
   // We need to convert the video frame to RGBA to satisfy CGImage's data format
-  int thumbWidth = THUMB_WIDTH;
-  int thumbHeight = THUMB_WIDTH / ((float)pCodecCtx->width / pCodecCtx->height);
+  int thumbWidth = thumbnailsWidth;
+  int thumbHeight = (float)thumbWidth / ((float)pCodecCtx->width / pCodecCtx->height);
 
   AVFrame *pFrameRGB = av_frame_alloc();
   CHECK_NOTNULL(pFrameRGB, @"Cannot alloc RGBA frame")
@@ -265,15 +265,17 @@ return -1;\
       av_packet_unref(&packet);
     }
   }
+  // Free the scaler
+  sws_freeContext(sws_ctx);
 
   // Free the RGB image
   av_free(pFrameRGBBuffer);
-  av_free(pFrameRGB);
+  av_frame_free(&pFrameRGB);
   // Free the YUV frame
-  av_free(pFrame);
+  av_frame_free(&pFrame);
 
-  // Close the codec
-  avcodec_close(pCodecCtx);
+  // Free the codec
+  avcodec_free_context(&pCodecCtx);
   // Close the video file
   avformat_close_input(&pFormatCtx);
 
@@ -281,11 +283,16 @@ return -1;\
   return 0;
 }
 
-- (void)saveThumbnail:(AVFrame *)pFrame width:(int)width height:(int)height index:(int)index realTime:(int)second forFile: (NSString *)file
+- (void)saveThumbnail:(AVFrame *)pFrame width
+                     :(int)width height
+                     :(int)height index
+                     :(int)index realTime
+                     :(int)second forFile
+                     :(NSString *)file
 {
   // Create CGImage
   CGColorSpaceRef rgb = CGColorSpaceCreateDeviceRGB();
-  
+
   CGContextRef cgContext = CGBitmapContextCreate(pFrame->data[0],  // it's converted to RGBA so could be used directly
                                                  width, height,
                                                  8,  // 8 bit per component
@@ -296,12 +303,12 @@ return -1;\
 
   // Create NSImage
   NSImage *image = [[NSImage alloc] initWithCGImage:cgImage size: NSZeroSize];
-  
+
   // Free resources
   CFRelease(rgb);
   CFRelease(cgContext);
   CFRelease(cgImage);
-  
+
   // Add to list
   FFThumbnail *tb = [[FFThumbnail alloc] init];
   tb.image = image;

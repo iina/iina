@@ -627,8 +627,8 @@ class MPVController: NSObject {
 
     case MPV_EVENT_START_FILE:
       player.info.isIdle = false
-      guard getString(MPVProperty.path) != nil else { break }
-      player.fileStarted()
+      guard let path = getString(MPVProperty.path) else { break }
+      player.fileStarted(path: path)
       let url = player.info.currentURL
       let message = player.info.isNetworkResource ? url?.absoluteString : url?.lastPathComponent
       player.sendOSD(.fileStart(message ?? "-"))
@@ -757,6 +757,10 @@ class MPVController: NSObject {
       player.info.vid = Int(getInt(MPVOption.TrackSelection.vid))
       player.postNotification(.iinaVIDChanged)
       player.sendOSD(.track(player.info.currentTrack(.video) ?? .noneVideoTrack))
+
+      if #available(macOS 10.15, *) {
+        player.refreshEdrMode()
+      }
 
     case MPVOption.TrackSelection.aid:
       player.info.aid = Int(getInt(MPVOption.TrackSelection.aid))

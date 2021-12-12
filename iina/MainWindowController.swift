@@ -995,9 +995,9 @@ class MainWindowController: PlayerWindowController {
     }
 
     if shouldApplyInitialWindowSize, let wfg = windowFrameFromGeometry(newSize: AppData.sizeWhenNoVideo, screen: screen) {
-      window!.setFrame(wfg, display: true, animate: !AccessibilityPreferences.motionReductionEnabled())
+      window!.setFrame(wfg, display: true, animate: !AccessibilityPreferences.motionReductionEnabled)
     } else {
-      window!.setFrame(AppData.sizeWhenNoVideo.centeredRect(in: screen.visibleFrame), display: true, animate: !AccessibilityPreferences.motionReductionEnabled())
+      window!.setFrame(AppData.sizeWhenNoVideo.centeredRect(in: screen.visibleFrame), display: true, animate: !AccessibilityPreferences.motionReductionEnabled)
     }
 
     videoView.videoLayer.draw(forced: true)
@@ -1074,7 +1074,7 @@ class MainWindowController: PlayerWindowController {
   func window(_ window: NSWindow, startCustomAnimationToEnterFullScreenOn screen: NSScreen, withDuration duration: TimeInterval) {
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = duration
-      window.animator().setFrame(screen.frame, display: true, animate: !AccessibilityPreferences.motionReductionEnabled())
+      window.animator().setFrame(screen.frame, display: true, animate: !AccessibilityPreferences.motionReductionEnabled)
     }, completionHandler: nil)
 
   }
@@ -1087,7 +1087,7 @@ class MainWindowController: PlayerWindowController {
 
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = duration
-      window.animator().setFrame(priorWindowedFrame, display: true, animate: !AccessibilityPreferences.motionReductionEnabled())
+      window.animator().setFrame(priorWindowedFrame, display: true, animate: !AccessibilityPreferences.motionReductionEnabled)
     }, completionHandler: nil)
 
     NSMenu.setMenuBarVisible(true)
@@ -1199,7 +1199,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   func windowDidExitFullScreen(_ notification: Notification) {
-    if AccessibilityPreferences.motionReductionEnabled() {
+    if AccessibilityPreferences.motionReductionEnabled {
       // When animation is not used exiting full screen does not restore the previous size of the
       // window. Restore it now.
       window!.setFrame(fsState.priorWindowedFrame!, display: true, animate: false)

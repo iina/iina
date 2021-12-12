@@ -14,12 +14,12 @@ struct AccessibilityPreferences {
   /// - Parameter duration: Desired animation duration.
   /// - Returns: `0` if reduce motion is enabled; otherwise the given duration.
   static func adjustedDuration(_ duration: TimeInterval) -> TimeInterval {
-    return motionReductionEnabled() ? 0 : duration
+    return motionReductionEnabled ? 0 : duration
   }
 
-  /// Checks whether the macOS System Preference accessibility option to retuce motion is in an enabled state.
+  /// Reflects whether the macOS System Preference accessibility option to retuce motion is in an enabled state.
   ///
-  /// This method provides a wrapper around the `NSWorkspace` property so that code that needs to check this preference setting
+  /// This property provides a wrapper around the `NSWorkspace` property so that code that needs to check this preference setting
   /// does not need to concern itself with this preference not being available until macOS Sierra.
   ///
   /// Proper handling of the Reduce motion preference setting is covered in the
@@ -29,7 +29,7 @@ struct AccessibilityPreferences {
   /// check or uncheck Reduce motion.
   ///
   /// - Returns: `true` if reduce motion is enabled; otherwise `false`.
-  static func motionReductionEnabled() -> Bool {
+  static var motionReductionEnabled: Bool {
     if #available(macOS 10.12, *) {
       return NSWorkspace.shared.accessibilityDisplayShouldReduceMotion
     } else {

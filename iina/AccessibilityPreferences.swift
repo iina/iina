@@ -8,13 +8,13 @@
 
 import Foundation
 
-struct AccessibilityPreference {
+struct AccessibilityPreferences {
 
   /// Adjusts an animation to be instantaneous if the macOS System Preference Reduce motion is enabled.
   /// - Parameter duration: Desired animation duration.
   /// - Returns: `0` if reduce motion is enabled; otherwise the given duration.
-  static func adjustDuration(_ duration: TimeInterval) -> TimeInterval {
-    return reduceMotion() ? 0 : duration
+  static func adjustedDuration(_ duration: TimeInterval) -> TimeInterval {
+    return motionReductionEnabled() ? 0 : duration
   }
 
   /// Checks whether the macOS System Preference accessibility option to retuce motion is in an enabled state.
@@ -29,7 +29,7 @@ struct AccessibilityPreference {
   /// check or uncheck Reduce motion.
   ///
   /// - Returns: `true` if reduce motion is enabled; otherwise `false`.
-  static func reduceMotion() -> Bool {
+  static func motionReductionEnabled() -> Bool {
     if #available(macOS 10.12, *) {
       return NSWorkspace.shared.accessibilityDisplayShouldReduceMotion
     } else {

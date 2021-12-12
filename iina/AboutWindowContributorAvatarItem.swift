@@ -32,14 +32,14 @@ class AboutWindowContributorAvatarItem: NSCollectionViewItem {
       if let data = AboutWindowContributorAvatarItem.imageCache.object(forKey: url as NSString) {
         self.imageView!.image = data
       } else {
-        Just.get(url) { respond in
+        Just.get(url, asyncCompletionHandler: { respond in
           guard let data = respond.content, var image = NSImage(data: data) else { return }
           image = image.rounded()
           DispatchQueue.main.async {
             self.imageView!.image = image
           }
           AboutWindowContributorAvatarItem.imageCache.setObject(image, forKey: url as NSString)
-        }
+        })
       }
     }
   }

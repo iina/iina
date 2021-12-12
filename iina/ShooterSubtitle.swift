@@ -31,7 +31,7 @@ final class ShooterSubtitle: OnlineSubtitle {
   }
 
   override func download(callback: @escaping DownloadCallback) {
-    Just.get(files[0].path) { response in
+    Just.get(files[0].path, asyncCompletionHandler: { response in
       guard response.ok, let data = response.content else {
         callback(.failed)
         return
@@ -40,7 +40,7 @@ final class ShooterSubtitle: OnlineSubtitle {
       if let url = data.saveToFolder(Utility.tempDirURL, filename: fileName) {
         callback(.ok([url]))
       }
-    }
+    })
   }
 
 }
@@ -120,7 +120,7 @@ class ShooterSupport {
 
   func request(_ info: FileInfo) -> Promise<[ShooterSubtitle]> {
     return Promise { resolver in
-      Just.post(apiPath, params: info.dictionary, timeout: 10) { response in
+      Just.post(apiPath, params: info.dictionary, timeout: 10, asyncCompletionHandler: { response in
         guard response.ok else {
           resolver.reject(ShooterError.networkError(response.error))
           return
@@ -145,7 +145,7 @@ class ShooterSupport {
           index += 1
         }
         resolver.fulfill(subtitles)
-      }
+      })
     }
   }
 

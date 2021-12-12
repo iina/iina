@@ -39,7 +39,7 @@ final class OpenSubSubtitle: OnlineSubtitle {
   }
 
   override func download(callback: @escaping DownloadCallback) {
-    Just.get(subDlLink) { response in
+    Just.get(subDlLink, asyncCompletionHandler: { response in
       guard response.ok, let data = response.content, let unzipped = try? data.gunzipped() else {
         callback(.failed)
         return
@@ -48,7 +48,7 @@ final class OpenSubSubtitle: OnlineSubtitle {
       if let url = unzipped.saveToFolder(Utility.tempDirURL, filename: subFilename) {
         callback(.ok([url]))
       }
-    }
+    })
   }
 
 }

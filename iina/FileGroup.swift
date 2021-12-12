@@ -157,8 +157,7 @@ class FileGroup {
 
   func flatten() -> [String: [FileInfo]] {
     var result: [String: [FileInfo]] = [:]
-    var search: ((FileGroup) -> Void)!
-    search = { group in
+    func search(_ group: FileGroup) {
       if group.groups.count > 0 {
         for g in group.groups {
           search(g)

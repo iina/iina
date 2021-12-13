@@ -9,8 +9,6 @@
 import Foundation
 import PromiseKit
 
-fileprivate let subsystem = Logger.Subsystem(rawValue: "onlinesub")
-
 class OnlineSubtitle: NSObject {
 
   typealias SubCallback = ([OnlineSubtitle]) -> Void
@@ -64,7 +62,7 @@ class OnlineSubtitle: NSObject {
       source = userSource!
     }
 
-    Logger.log("Search subtitle from \(source.name)...", subsystem: subsystem)
+    Logger.log("Search subtitle from \(source.name)...", subsystem: Logger.Sub.onlinesub)
 
     playerCore.sendOSD(.startFindingSub(source.name), autoHide: false)
 
@@ -74,7 +72,7 @@ class OnlineSubtitle: NSObject {
       let subSupport = ShooterSupport()
       subSupport.hash(url)
       .then { info -> Promise<[ShooterSubtitle]> in
-        Logger.log("Searching for subtitles of movie with hash \(info.hashValue)", subsystem: subsystem)
+        Logger.log("Searching for subtitles of movie with hash \(info.hashValue)", subsystem: Logger.Sub.onlinesub)
         return subSupport.request(info)
       }.done { subs in
         callback(subs)
@@ -85,18 +83,18 @@ class OnlineSubtitle: NSObject {
         let prefix = "Failed to obtain subtitles for \(url) from \(source.name). "
         switch error {
         case ShooterSupport.ShooterError.cannotReadFile(let cause):
-          Logger.log("\(prefix)Cannot get file handle. \(cause)", level: .error, subsystem: subsystem)
+          Logger.log("\(prefix)Cannot get file handle. \(cause)", level: .error, subsystem: Logger.Sub.onlinesub)
         case ShooterSupport.ShooterError.networkError(let cause):
           if isConnectFailure(cause) {
-            Logger.log("\(prefix)Could not connect to the server.", level: .error, subsystem: subsystem)
+            Logger.log("\(prefix)Could not connect to the server.", level: .error, subsystem: Logger.Sub.onlinesub)
           } else {
-            Logger.log("\(prefix)\(error) \(String(describing: cause))", level: .error, subsystem: subsystem)
+            Logger.log("\(prefix)\(error) \(String(describing: cause))", level: .error, subsystem: Logger.Sub.onlinesub)
           }
         case ShooterSupport.ShooterError.noResult:
           // Not an error.
-          Logger.log("No subtitles found", subsystem: subsystem)
+          Logger.log("No subtitles found", subsystem: Logger.Sub.onlinesub)
         default:
-          Logger.log("\(prefix)\(error)", level: .error, subsystem: subsystem)
+          Logger.log("\(prefix)\(error)", level: .error, subsystem: Logger.Sub.onlinesub)
         }
         let osdMessage: OSDMessage
         switch error {
@@ -128,13 +126,13 @@ class OnlineSubtitle: NSObject {
       // - request
       subSupport.login()
       .then { _ in
-        subSupport.hash(url, playerCore)
+        subSupport.hash(url, playerCore.info.isNetworkResource)
       }.then { info -> Promise<[OpenSubSubtitle]> in
-        Logger.log("Searching for subtitles of movie with hash \(info.hashValue)", subsystem: subsystem)
+        Logger.log("Searching for subtitles of movie with hash \(info.hashValue)", subsystem: Logger.Sub.onlinesub)
         return subSupport.request(info.dictionary)
       }.recover { error -> Promise<[OpenSubSubtitle]> in
         if case OpenSubSupport.OpenSubError.noResult = error {
-          return subSupport.requestByName(url, playerCore)
+          return subSupport.requestByName(url, playerCore.info.isNetworkResource, playerCore.getMediaTitle())
         } else {
           throw error
         }
@@ -147,27 +145,27 @@ class OnlineSubtitle: NSObject {
         let prefix = "Failed to obtain subtitles for \(url) from \(source.name). "
         switch err {
         case OpenSubSupport.OpenSubError.cannotReadFile(let cause):
-          Logger.log("\(prefix)Cannot get file handle. \(cause)", level: .error, subsystem: subsystem)
+          Logger.log("\(prefix)Cannot get file handle. \(cause)", level: .error, subsystem: Logger.Sub.onlinesub)
         case OpenSubSupport.OpenSubError.loginFailed(let status):
-          Logger.log("\(prefix)\(err) Status: \(status)", level: .error, subsystem: subsystem)
+          Logger.log("\(prefix)\(err) Status: \(status)", level: .error, subsystem: Logger.Sub.onlinesub)
         case OpenSubSupport.OpenSubError.noResult:
           // Not an error.
-          Logger.log("No subtitles found", subsystem: subsystem)
+          Logger.log("No subtitles found", subsystem: Logger.Sub.onlinesub)
         case OpenSubSupport.OpenSubError.userCanceled:
           // Not an error.
-          Logger.log("User canceled download of subtitles", subsystem: subsystem)
+          Logger.log("User canceled download of subtitles", subsystem: Logger.Sub.onlinesub)
         case OpenSubSupport.OpenSubError.xmlRpcError(let rpcError):
           if let cause = rpcError.underlyingError {
             if isConnectFailure(cause) {
-              Logger.log("\(prefix)Could not connect to the server.", level: .error, subsystem: subsystem)
+              Logger.log("\(prefix)Could not connect to the server.", level: .error, subsystem: Logger.Sub.onlinesub)
             } else {
-              Logger.log("\(prefix)\(err) \(cause)", level: .error, subsystem: subsystem)
+              Logger.log("\(prefix)\(err) \(cause)", level: .error, subsystem: Logger.Sub.onlinesub)
             }
           } else {
-            Logger.log("\(prefix)\(err)", level: .error, subsystem: subsystem)
+            Logger.log("\(prefix)\(err)", level: .error, subsystem: Logger.Sub.onlinesub)
           }
         default:
-          Logger.log("\(prefix)\(err)", level: .error, subsystem: subsystem)
+          Logger.log("\(prefix)\(err)", level: .error, subsystem: Logger.Sub.onlinesub)
         }
         let osdMessage: OSDMessage
         switch err {
@@ -211,10 +209,10 @@ class OnlineSubtitle: NSObject {
         switch err {
         case AssrtSupport.AssrtError.userCanceled:
           // Not an error.
-          Logger.log("User canceled download of subtitles", subsystem: subsystem)
+          Logger.log("User canceled download of subtitles", subsystem: Logger.Sub.onlinesub)
           osdMessage = .canceled
         default:
-          Logger.log("\(prefix)\(err)", level: .error, subsystem: subsystem)
+          Logger.log("\(prefix)\(err)", level: .error, subsystem: Logger.Sub.onlinesub)
           osdMessage = .networkError
         }
         playerCore.sendOSD(osdMessage)
@@ -227,3 +225,8 @@ class OnlineSubtitle: NSObject {
 
 }
 
+extension Logger {
+  struct Sub {
+    static let onlinesub = Logger.Subsystem(rawValue: "onlinesub")
+  }
+}

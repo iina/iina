@@ -181,6 +181,7 @@
 "alert.sub_lang_not_set" = "Si us plau, estableix un idioma per defecte a les preferències abans d'utilitzar OpenSubtitles. Anglès(eng) serà utilitzat aquesta vegada.";
 "alert.sub.cannot_save_passwd" = "No s'ha pogut desar la teva contrasenya en el Clauer: %@";
 "alert.sub.cannot_login" = "No s'ha pogut iniciar sessió. Si us play, verifica el teu nom d'usuari, la contrasenya i l'estat de la xarxa.\n\n%@";
+"alert.sub.save_downloaded.title" = "Desa els subtítols baixats";
 
 "alert.set_default.title" = "Establir IINA com aplicació per defecte";
 "alert.set_default.message" = "IINA serà establerta com a aplicació per defecte per a tots els tipus de fitxer que suporta.";

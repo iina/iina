@@ -181,6 +181,7 @@
 "alert.sub_lang_not_set" = "OpenSubtitlesを利用する前に、環境設定で字幕の優先言語を設定してください。今回は英語(eng)が使用されます。";
 "alert.sub.cannot_save_passwd" = "パスワードをキーチェーンに保存できません: %@";
 "alert.sub.cannot_login" = "ログインできません。ユーザー名とパスワード、ネットワーク環境をご確認ください。\n\n%@";
+"alert.sub.save_downloaded.title" = "ダウンロードした字幕を保存";
 
 "alert.set_default.title" = "IINAをデフォルトのアプリケーションに設定";
 "alert.set_default.message" = "対応する全てのファイル形式にIINAをデフォルトアプリケーションとして設定します。";

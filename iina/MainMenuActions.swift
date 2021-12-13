@@ -353,7 +353,6 @@ extension MainMenuActionHandler {
 
   @objc func saveDownloadedSub(_ sender: NSMenuItem) {
     let selected = player.info.subTracks.filter { $0.id == player.info.sid }
-    guard let currURL = player.info.currentURL else { return }
     guard selected.count > 0 else {
       Utility.showAlert("sub.no_selected")
 
@@ -367,19 +366,27 @@ extension MainMenuActionHandler {
     }
     let subURL = URL(fileURLWithPath: path)
     let subFileName = subURL.lastPathComponent
-    do {
-      // When streaming save the subtitles file to the user's ~/Movies directory, otherwise
-      // save the file to the same directory the video is in.
-      let destDirURL = player.info.isNetworkResource ? try FileManager.default.url(
-          for: .moviesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-        : currURL.deletingLastPathComponent()
-      let destURL = destDirURL.appendingPathComponent(subFileName, isDirectory: false)
-      try FileManager.default.copyItem(at: subURL, to: destURL)
-      Logger.log("Saved downloaded subtitles to \(destURL.path)")
-      player.sendOSD(.savedSub)
-    } catch let error as NSError {
-      Utility.showAlert("error_saving_file", arguments: ["subtitle",
-                                                         error.localizedDescription])
+    Utility.quickSavePanel(title: NSLocalizedString("alert.sub.save_downloaded.title",
+        comment: "Save Downloaded Subtitle"), filename: subFileName) { (destURL) in
+      do {
+        // The Save panel checks to see if a file already exists and if so asks if it should be
+        // replaced. The quickSavePanel would not have called this code if the user canceled, so if
+        // the destination file already exists move it to the trash.
+        do {
+          try FileManager.default.trashItem(at: destURL, resultingItemURL: nil)
+          Logger.log("Trashed existing subtitle file \(destURL)")
+        } catch CocoaError.fileNoSuchFile {
+          // Expected, ignore error. The Apple Secure Coding Guide in the section Race Conditions
+          // and Secure File Operations recommends attempting an operation and handling errors
+          // gracefully instead of trying to figure out ahead of time whether the operation will
+          // succeed.
+        }
+        try FileManager.default.copyItem(at: subURL, to: destURL)
+        Logger.log("Saved downloaded subtitle to \(destURL.path)")
+        self.player.sendOSD(.savedSub)
+      } catch let error as NSError {
+        Utility.showAlert("error_saving_file", arguments: ["subtitle", error.localizedDescription])
+      }
     }
   }
 

@@ -181,6 +181,7 @@
 "alert.sub_lang_not_set" = "Te rog să specifici limba subtitrării preferată înainte de a utiliza OpenSubtitles. Engleză(eng) va fi utilizată de această dată.";
 "alert.sub.cannot_save_passwd" = "Nu se poate salva parola în Portchei: %@";
 "alert.sub.cannot_login" = "Nu se poate efectua login. Te rog verifică numele de utilizator, parola și starea rețelei.\n\n%@";
+"alert.sub.save_downloaded.title" = "Salvează subtitrările descărcate";
 
 "alert.set_default.title" = "Setează IINA ca aplicație implicită";
 "alert.set_default.message" = "IINA va fi aplicația implictă pentru toate fișierele pe care le suportă.";

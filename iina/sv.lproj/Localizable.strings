@@ -181,6 +181,7 @@
 "alert.sub_lang_not_set" = "Vänligen välj föredraget undertextspråk i inställningar innan du använder OpenSubtitles. Engelska(eng) används denna gång.";
 "alert.sub.cannot_save_passwd" = "Kan ej spara ditt lösenord till nyckelring: %@";
 "alert.sub.cannot_login" = "Kan ej logga in. Vänligen kontrollera ditt användarnamn, lösenord och nätverksstatus.\n\n%@";
+"alert.sub.save_downloaded.title" = "Spara nedladdad undertext";
 
 "alert.set_default.title" = "Ställer in IINA som förvald app";
 "alert.set_default.message" = "IINA kommer att ställas in som den förvalda appen för alla filtyper som stöds.";

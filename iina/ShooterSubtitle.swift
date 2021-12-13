@@ -10,8 +10,6 @@ import Foundation
 import Just
 import PromiseKit
 
-fileprivate let subsystem = Logger.Subsystem(rawValue: "shooter")
-
 final class ShooterSubtitle: OnlineSubtitle {
 
   var desc: String
@@ -149,4 +147,8 @@ class ShooterSupport {
     }
   }
 
+}
+
+extension Logger.Sub {
+  static let shooter = Logger.Subsystem(rawValue: "sub.shooter")
 }

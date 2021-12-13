@@ -1,0 +1,23 @@
+/* Class = "NSButtonCell"; title = "Open"; ObjectID = "8sC-lH-DOd"; */
+"8sC-lH-DOd.title" = "Obre";
+
+/* Class = "NSTextFieldCell"; title = "Username"; ObjectID = "Q1z-9O-n4X"; */
+"Q1z-9O-n4X.title" = "Nom d'usuari";
+
+/* Class = "NSTextFieldCell"; placeholderString = "Please enter the URL here……"; ObjectID = "XV7-VP-Ua2"; */
+"XV7-VP-Ua2.placeholderString" = "Si us plau introdueix l'enllaç aquí…";
+
+/* Class = "NSTextFieldCell"; title = "URL is invalid."; ObjectID = "gaI-DT-l2c"; */
+"gaI-DT-l2c.title" = "L'enllaç és invàlid.";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "iNG-ee-EW6"; */
+"iNG-ee-EW6.title" = "Cancel·la";
+
+/* Class = "NSButtonCell"; title = "Remember username and password for this host in keychain"; ObjectID = "m0D-hR-3pr"; */
+"m0D-hR-3pr.title" = "Recorda el nom d'usuari i contrasenya per aquest dispositiu al Clauer";
+
+/* Class = "NSTextFieldCell"; title = "Password"; ObjectID = "uM6-Bp-Wdk"; */
+"uM6-Bp-Wdk.title" = "Contrasenya";
+
+/* Class = "NSTextFieldCell"; title = "HTTP Authentication"; ObjectID = "wxH-ic-Uug"; */
+"wxH-ic-Uug.title" = "Autentificació HTTP";

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.30.1" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.30.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -641,6 +641,13 @@ CA
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="ZO8-wH-FBe"/>
+                            <menuItem title="Release Highlights" id="kOx-hc-aQG">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="showHighlights:" target="Voe-Tx-rLC" id="VXT-LI-ofl"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="Cxg-P0-6hm"/>
                             <menuItem title="GitHub" id="A9w-iE-gVg">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
@@ -657,6 +664,7 @@ CA
                     </menu>
                 </menuItem>
             </items>
+            <point key="canvasLocation" x="140" y="154"/>
         </menu>
         <customObject id="cyK-tE-xgA" customClass="MenuController" customModule="IINA" customModuleProvider="target">
             <connections>

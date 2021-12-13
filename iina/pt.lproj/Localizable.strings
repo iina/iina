@@ -1,0 +1,302 @@
+/*
+  String_ui.strings
+  iina
+
+  Created by lhc on 3/1/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+// Common
+
+"general.on" = "Ligado";
+"general.off" = "Desligado";
+"general.login" = "Iniciar sessão";
+"general.logout" = "Terminar sessão";
+"general.ok" = "OK";
+"general.cancel" = "Cancelar";
+"general.username" = "Nome de Utilizador";
+"general.password" = "Senha";
+
+// Guide Window
+"guide.highlights" = "Destaques";
+"guide.basic_settings" = "Configurações Básicas";
+"guide.faq" = "Perguntas Frequentes";
+
+// MainWindowController.swift
+"main.buffering_indicator" = "Buffer de dados… %d%%";
+"main.opening_stream" = "A abrir stream…";
+"osc.precision" = "Precisão";
+"osc.1s" = "1 segundo";
+"osc.100ms" = "100 milissegundos";
+"osc.10ms" = "10 milissegundos";
+"osc.1ms" = "1 milissegundo";
+
+// QuickSettingViewController.swift
+"quicksetting.item_default" = "Predefinido";
+"quicksetting.item_none" = "Nenhum";
+"quicksetting.hwdec" = "Descodificação de hardware";
+"quicksetting.deinterlace" = "Desentrelaçar";
+
+// OSDMessage.swift
+"osd.pause" = "Pausa";
+"osd.resume" = "Retomar";
+"osd.volume" = "Volume: %i";
+"osd.speed" = "Velocidade: %.2fx";
+"osd.aspect" = "Proporção: %@";
+"osd.crop" = "Cortar: %@";
+"osd.rotate" = "Rodar: %i°";
+"osd.deinterlace" = "Desentrelaçar: %@";
+"osd.hwdec" = "Descodificação de Hardware: %@";
+"osd.audio_delay.nodelay" = "Atraso de Áudio: Sem Atraso";
+"osd.audio_delay.later" = "Atraso de Áudio: %.2fs Depois";
+"osd.audio_delay.earlier" = "Atraso de Áudio: %.2fs Antes";
+"osd.sub_delay.nodelay" = "Atraso da legenda: Sem atraso";
+"osd.sub_delay.later" = "Atraso da legenda: %.2fs depois";
+"osd.sub_delay.earlier" = "Atraso da Legenda: %.2fs Antes";
+"osd.subtitle_pos" = "Posição da Legenda: %.1f";
+"osd.mute" = "Desativar Som";
+"osd.unmute" = "Ligar som";
+"osd.screenshot" = "Captura de ecrã efetuada";
+"osd.abloop.a" = "Loop-AB: A";
+"osd.abloop.b" = "Loop-AB: B";
+"osd.abloop.clear" = "Loop-AB: Limpo";
+"osd.stop" = "Parar";
+"osd.chapter" = "Capítulo: %@";
+"osd.subtitle_scale" = "Tamanho da legenda: %.2fx";
+"osd.add_to_playlist" = "%i Ficheiros Adicionados à Playlist";
+"osd.clear_playlist" = "Lista de Reprodução Limpa";
+"osd.video_eq.contrast" = "Contraste: %i";
+"osd.video_eq.gamma" = "Gamma: %i";
+"osd.video_eq.hue" = "Matiz: %i";
+"osd.video_eq.saturation" = "Saturação: %i";
+"osd.video_eq.brightness" = "Luminosidade: %i";
+"osd.find_online_sub" = "A encontrar legendas online…";
+"osd.find_online_sub.source" = "de";
+"osd.sub_not_found" = "Não foram encontradas legendas";
+"osd.sub_found" = "%d legendas encontradas. Transferindo…";
+"osd.sub_downloaded" = "Legenda transferida";
+"osd.sub_saved" = "Legenda guardada";
+"osd.network_error" = "Erro de Rede";
+"osd.file_error" = "Erro ao ler o ficheiro";
+"osd.cannot_login" = "Impossível iniciar sessão";
+"osd.canceled" = "Cancelado";
+"osd.filter_added" = "Filtro Adicionado: %@";
+"osd.filter_removed" = "Filtro Removido";
+
+"preference.title" = "Preferências";
+"preference.general" = "Geral";
+"preference.ui" = "Interface do Utilizador";
+"preference.video_audio" = "Vídeo/Áudio";
+"preference.subtitle" = "Legenda";
+"preference.network" = "Rede";
+"preference.control" = "Controlo";
+"preference.keybindings" = "Mapeamento de teclas";
+"preference.advanced" = "Avançado";
+"preference.utilities" = "Utilidades";
+"preference.scripts" = "Scripts";
+"preference.not_logged_in" = "Sem sessão iniciada";
+"preference.logged_in_as" = "Sessão iniciada como %@";
+"preference.system_media_control" = "Usar controle de mídia do sistema";
+
+"preference.key_binding_hint_1" = "Para editar mapeamento de teclas no arquivo de configuração atual, clique no botão \"Duplicar…\" primeiro para criar uma cópia.";
+"preference.key_binding_hint_2" = "Clique duas vezes em uma linha no lado direito para editar o mapeamento de tecla correspondente.";
+
+"preference.enable_adv_settings" = "Ativar configurações avançadas";
+
+"menu.volume" = "Volume: %d";
+"menu.audio_delay" = "Atraso de Áudio: %.2fs";
+"menu.sub_delay" = "Atraso da legenda: %.2fs";
+"menu.fullscreen" = "Entrar em Ecrã Completo";
+"menu.exit_fullscreen" = "Sair do Ecrã Completo";
+"menu.pip" = "Usar Picture in Picture";
+"menu.exit_pip" = "Sair do Picture in Picture";
+"menu.pause" = "Pausa";
+"menu.resume" = "Retomar";
+"menu.speed" = "Velocidade: %.2fx";
+
+"menu.seek_forward" = "Avançar %.0fs";
+"menu.seek_backward" = "Recuar %.0fs";
+"menu.speed_up" = "Aumentar velocidade em %.1fx";
+"menu.speed_down" = "Reduzir velocidade em %.1fx";
+"menu.volume_up" = "Volume + %.0f%%";
+"menu.volume_down" = "Volume - %.0f%%";
+"menu.audio_delay_up" = "Atraso do áudio + %.1fs";
+"menu.audio_delay_down" = "Atraso de Áudio - %.1fs";
+"menu.sub_delay_up" = "Atraso da legenda + %.1fs";
+"menu.sub_delay_down" = "Atraso da legenda - %.1fs";
+
+"menu.crop_custom" = "Personalizar...";
+
+"track.none" = "<None>";
+
+"subtrack.no_loaded" = "Nenhuma Legenda Carregada";
+"subtrack.no_external" = "Nenhuma Legenda Externa Encontrada";
+
+// Alerts
+"alert.beta_channel.title" = "Receber Atualizações para Versões Beta";
+
+"alert.title_error" = "Erro";
+"alert.title_warning" = "Aviso";
+"alert.title_info" = "Informação";
+
+"alert.fatal_error" = "Erro fatal: %@ \nA aplicação vai ser encerrada agora.";
+"alert.mpv_error" = "Erro interno %@ (%@) ao definir a opção %@.";
+"alert.sleep" = "Impossível prevenir a pausa do ecrã!";
+
+"alert.unsupported_audio" = "Ficheiro de áudio externo não suportado.";
+"alert.unsupported_sub" = "Legenda externa não suportada.";
+"alert.unsupported_url" = "URL não suportado.";
+"alert.wrong_url_format" = "Formato do URL errado.";
+
+"alert.error_open" = "Impossível abrir ficheiro ou stream!";
+"alert.error_finding_file" = "Impossível encontrar o ficheiro %@!";
+"alert.error_loading_script" = "Impossível carregar o script %@!";
+"alert.error_saving_file" = "Ocorreu um erro ao salvar %@: %@";
+"alert.error_deleting_file" = "Não foi possível apagar o ficheiro.";
+
+"alert.config.new.title" = "Nova configuração";
+"alert.config.new.message" = "Por favor digite um nome para a nova configuração.";
+"alert.config.duplicate.title" = "Duplicar Configuração";
+"alert.config.duplicate.message" = "Por favor digite o nome para o arquivo de configuração duplicado.";
+"alert.config.empty_name" = "Este nome não pode estar vazio.";
+"alert.config.name_existing" = "Este nome já existe.";
+"alert.config.file_existing.title" = "Ficheiro já existe";
+"alert.config.file_existing.message" = "Isto não deveria acontecer. Escolha OK para substituir, Cancelar para mostrar o ficheiro no Finder.";
+"alert.config.cannot_create" = "Não foi possível criar um ficheiro de configuração!\n%@";
+"alert.config.cannot_write" = "Não foi possível escrever no arquivo de configuração!";
+
+"alert.filter.incorrect" = "Ocorreu um erro ao configurar os filtros. Por favor, verifique o formato de seu parâmetro.";
+"alert.add_filter.title" = "Novo Filtro";
+"alert.add_filter.message" = "Por favor, digite uma string de filtro no formato de comando vf ou af de mpv.";
+
+"alert.keybinding_config.error" = "Erro ao analisar o arquivo de configuração de mapeamento de teclas \"%@\"! Volte para a configuração do padrão mapeamento de teclas do IINA. Por favor, verifique sua configuração.";
+
+"alert.extra_option.cannot_read" = "Não é possível ler opções mpv definidas pelo usuário.";
+"alert.extra_option.empty" = "Chave ou valor não pode estar vazio!";
+"alert.extra_option.error" = "Erro ao definir opção --%@=%@ com valor de retorno %d. Por favor, verifique as suas opções extra em Preferência > Avançado.";
+"alert.extra_option.config_folder" = "Erro na configuração da pasta \"%@\".";
+
+"alert.playlist.error_deleting" = "Erro ao apagar: %@";
+
+"alert.sub.no_selected" = "Por favor, seleccione uma legenda transferida primeiro.";
+"alert.sub_lang_not_set" = "Por favor, defina os idiomas de legenda preferidos nas preferências antes de usar o OpenSubtitles. Inglês (eng) será usado desta vez.";
+"alert.sub.cannot_save_passwd" = "Não é possível guardar a palavra-passe no Porta-chaves: %@";
+"alert.sub.cannot_login" = "Impossível iniciar sessão. Por favor verifique o seu nome de utilizador, palavra-passe e estado da rede.\n\n%@";
+
+"alert.set_default.title" = "Definir IINA como Aplicação Predefinida";
+"alert.set_default.message" = "O IINA será definido como o aplicativo padrão para todos os tipos de arquivo que ele suporta.";
+"alert.set_default.success" = "Terminado com %d de sucesso e %d de falhas.";
+
+"alert.add_watch.title" = "Adicionar Propriedade de Relógio";
+"alert.add_watch.message" = "Por favor, insira um nome de propriedade mpv válido.";
+
+"alert.jump_to.title" = "Saltar para";
+"alert.jump_to.message" = "Por favor, introduza o tempo para qual quer saltar. Exemplo: 20:35";
+
+"alert.opensub.login.title" = "Login OpenSubtitles";
+"alert.opensub.login.message" = "Por favor, introduza um nome de utilizador e palavra-passe";
+
+"alert.open_url.title" = "Abrir URL";
+"alert.open_url.message" = "Por favor, introduza um URL:";
+"alert.choose_media_file.title" = "Escolher Arquivos de Media";
+
+"alert.add_url.title" = "Adicionar URL";
+"alert.add_url.message" = "Por favor, insira um URL:";
+
+"alert.delete_history.title" = "Apagar Histórico de Reprodução";
+"alert.delete_history.message" = "Tem a certeza que quer apagar as entradas selecionadas?";
+
+"alert.filter_hwdec.message" = "Está prestes a aplicar um filtro de vídeo. No entanto, o seu descodificador de hardware atual pode não suportar bem filtros de vídeo. Pode desativar a descodificação de hardware ou alternar para Auto(Copiar), que irá consumir o dobro da memória.\nPoderá precisar de repetir a operação anterior (como definir o corte) para que funcione.";
+"alert.filter_hwdec.abort" = "Abortar";
+"alert.filter_hwdec.turn_off" = "Desativar decodificação de hardware";
+"alert.filter_hwdec.use_copy" = "Mudar para Auto(Copiar)";
+
+"alert.clear_cache.title" = "Limpar Cache de Miniaturas";
+"alert.clear_cache.message" = "Tem a certeza que pretende limpar toda a cache de thumbnails?";
+
+"alert.clear_history.title" = "Limpar Histórico de Reprodução";
+"alert.clear_history.message" = "Tem a certeza que quer apagar todo o histórico de reprodução?";
+
+"alert.clear_watch_later.title" = "Limpar progresso de reprodução guardado";
+"alert.clear_watch_later.message" = "Tem a certeza que quer apagar todo o progresso de reprodução gravado (dados do \"ver mais tarde\")?";
+
+"alert.nothing_to_open" = "Nada para abrir.";
+
+"alert.no_video_track" = "Não existe faixa de vídeo.";
+
+"alert.duplicate_config" = "Não é possível editar configurações padrão diretamente. Por favor, duplique uma antes de editar.";
+
+"alert.assrt_register" = "Devido a uma cota limitada da API, é altamente recomendável usar seu próprio token de API. O token padrão é apenas para uso de demonstração, e você pode encontrar um erro de rede.";
+"alert.assrt_register.register" = "Registe-se Agora";
+"alert.assrt_register.try" = "Tentar primeiro";
+"alert.assrt_token_prompt.title" = "Digite o seu token de API";
+"alert.assrt_token_prompt.message" = "Por favor registe-se na página aberta. Pegue no seu token na sua página inicial de usuário e insira-o abaixo:";
+"alert.assrt_token_invalid" = "O seu token Assrt API parece ser inválido.";
+
+"playlist.total_length" = "%@ no total";
+"playlist.total_length_with_selected" = "%@ de %@ selecionado";
+"pl_menu.title_multi" = "%d itens";
+"pl_menu.play_next" = "Reproduzir Seguinte";
+"pl_menu.play_in_new_window" = "Reproduzir numa Nova Janela";
+"pl_menu.remove" = "Remover";
+"pl_menu.remove_multi" = "Remover selecionado";
+"pl_menu.delete" = "Mover para o Lixo";
+"pl_menu.delete_multi" = "Mover Ficheiros Selecionados para o Lixo";
+"pl_menu.delete_after_play" = "Mover para o Lixo depois da Reprodução";
+"pl_menu.delete_after_play_multi" = "Mover Ficheiros Selecionados para o Lixo depois da Reprodução";
+"pl_menu.reveal_in_finder" = "Mostrar no Finder";
+"pl_menu.add_file" = "Adicionar Ficheiro…";
+"pl_menu.add_url" = "Adicionar URL…";
+"pl_menu.clear_playlist" = "Limpar Lista de Reprodução";
+"pl_menu.matched_sub" = "%d Legenda(s) correspondentes";
+"pl_menu.add_sub" = "Adicionar Legenda…";
+"pl_menu.wrong_sub" = "Legenda Errada!";
+"pl_menu.browser" = "Abrir no Navegador";
+"pl_menu.copy_url" = "Copiar URL";
+"pl_menu.copy_url_multi" = "Copiar URLs";
+
+"keymapping.title" = "Mapeamento de teclas";
+"keymapping.message" = "Pressione qualquer tecla para gravar.";
+
+"filter.video_filters" = "Filtros de Vídeo";
+"filter.audio_filters" = "Filtros de Áudio";
+
+"hwdec.no" = "Desativar decodificador de hardware.";
+"hwdec.auto" = "Activar descodificação por hardware. No entanto, a maioria dos filtros de vídeo não funcionarão corretamente.";
+"hwdec.auto-copy" = "Ativar descodificação por hardware. Consumirá o dobro da memória mas trabalhará com filtros de vídeo.";
+
+"subencoding.auto" = "Detectar automaticamente";
+
+"osc_toolbar.settings" = "Definições Rápidas";
+"osc_toolbar.playlist" = "Lista de reprodução e capítulos";
+"osc_toolbar.pip" = "Alternar Picture-in-Picture";
+"osc_toolbar.full_screen" = "Alternar ecrã completo";
+"osc_toolbar.music_mode" = "Entrar no modo música";
+"osc_toolbar.sub_track" = "Selecionar faixa de legenda";
+
+"mini_player.album_art" = "Alternar arte do álbum";
+"mini_player.loop" = "Repetir";
+"mini_player.shuffle" = "Aleatório";
+"mini_player.remove" = "Remover da playlist";
+"mini_player.add" = "Adicionar à playlist";
+"mini_player.delete" = "Excluir todas as faixas da playlist";
+"mini_player.volume" = "Volume";
+"mini_player.close" = "Fechar modo de música";
+"mini_player.back" = "Retornar ao modo vídeo";
+
+// Touch bar
+
+"touchbar.ahead_15" = "15s Depois";
+"touchbar.ahead_30" = "30s Depois";
+"touchbar.back_15" = "15s Antes";
+"touchbar.back_30" = "30s Antes";
+"touchbar.next_video" = "Próximo Vídeo";
+"touchbar.prev_video" = "Vídeo Anterior";
+"touchbar.increase_volume" = "Volume +";
+"touchbar.decrease_volume" = "Volume -";
+"touchbar.rewind" = "Recuar";
+"touchbar.fast_forward" = "Avançar rápido";
+"touchbar.play_pause" = "Reproduzir / Pausa";
+"touchbar.seek" = "Procurar";
+"touchbar.time" = "Posição Temporal";
+"touchbar.remainingTimeOrTotalDuration" = "Tempo Restante / Duração Total";
+"touchbar.toggle_pip" = "Alternar Picture-in-Picture";

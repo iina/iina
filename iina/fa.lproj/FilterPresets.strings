@@ -1,0 +1,55 @@
+/*
+  FilterPresets.strings
+  iina
+
+  Created by lhc on 25/8/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+/* It's optional to localize descriptions for each parameter! */
+
+
+
+"crop" = "برش دادن";
+"crop.w" = "طول (پیشفرض:‌ طول ویدیو)";
+"crop.h" = "عرض (پیشفرض:‌ عرض ویدیو)";
+"crop.x" = "X مبدا (پیش‌فرض: وسط)";
+"crop.y" = "Y مبدا (پیش‌فرض: وسط)";
+
+"expand" = "بیشتر";
+"expand.w" = "طول (پیشفرض:‌ طول ویدیو)";
+"expand.h" = "عرض (پیشفرض:‌ عرض ویدیو)";
+"expand.x" = "X مبدا (پیش‌فرض: وسط)";
+"expand.y" = "Y مبدا (پیش‌فرض: وسط)";
+"expand.aspect" = "بزرگ میشود تا به یک نسبت برسد (مانند ۴/۳)";
+"expand.round" = "به بالا گرد میشود تا بر این مقدار بخش‌پذیر شود";
+
+"sharpen" = "تیزکردن";
+"sharpen.msize" = "اندازه‌ی ماتریکس";
+"sharpen.amount" = "مقدار";
+
+"blur" = "محو سازی";
+"blur.msize" = "اندازه‌ی ماتریکس";
+"blur.amount" = "مقدار";
+
+"delogo" = "حذف لوگو";
+"delogo.w" = "طول";
+"delogo.h" = "عرض";
+"delogo.x" = "X مبدا";
+"delogo.y" = "Y مبدا";
+
+"negative" = "نگاتیو";
+
+"vflip" = "برگرداندن";
+"hflip" = "آینه";
+
+"lut3d" = "LUT سه‌بعدی";
+"lut3d.file" = "فایل";
+"lut3d.interp" = "حالت درون‌یابی";
+
+"custom_mpv" = "دلخواه (mpv)";
+"custom_mpv.name" = "نام فیلتر";
+"custom_mpv.string" = "مقدار فیلتر";
+
+"custom_ffmpeg" = "دلخواه (FFmpeg)";
+"custom_ffmpeg.name" = "نام فیلتر";
+"custom_ffmpeg.string" = "مقدار فیلتر";

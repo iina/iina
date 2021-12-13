@@ -41,7 +41,7 @@ class MPVFilter: NSObject {
 
   // FIXME: use lavfi vflip
   static func flip() -> MPVFilter {
-    return MPVFilter(name: "flip", label: nil, params: nil)
+    return MPVFilter(name: "vflip", label: nil, params: nil)
   }
 
   // FIXME: use lavfi hflip

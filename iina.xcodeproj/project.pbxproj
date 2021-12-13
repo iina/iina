@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,7 +14,7 @@
 		49542982216C34950058F680 /* ToolbarItemIcon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 49542981216C34950058F680 /* ToolbarItemIcon.pdf */; };
 		49542986216C34950058F680 /* OpenInIINA.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 49542973216C34950058F680 /* OpenInIINA.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		496B19921E2968530035AF10 /* PIP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496B19911E2968530035AF10 /* PIP.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		5FE59D56E0B71860AC1EDCA8 /* Pods_iina.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 867483705008F086E07B0A6B /* Pods_iina.framework */; };
+		519872FF26879B9B00F84BCC /* AccessibilityPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519872FE26879B9B00F84BCC /* AccessibilityPreferences.swift */; };
 		6100FF2B1EDF9806002CF0FB /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 6100FF2A1EDF9806002CF0FB /* dsa_pub.pem */; };
 		8400D5C41E17C6D2006785F5 /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8400D5C21E17C6D2006785F5 /* AboutWindowController.swift */; };
 		8400D5C61E1AB2F1006785F5 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8400D5C81E1AB2F1006785F5 /* MainWindowController.xib */; };
@@ -45,6 +45,8 @@
 		8418A2F5213F5791003166AC /* OpenURLWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8418A2F7213F5791003166AC /* OpenURLWindowController.xib */; };
 		841A599D1E1FF5800079E177 /* SleepPreventer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841A599C1E1FF5800079E177 /* SleepPreventer.swift */; };
 		841B14281E941DFF00744AB8 /* TimeLabelOverflowedStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B14271E941DFF00744AB8 /* TimeLabelOverflowedStackView.swift */; };
+		84279D7525B6DF59003B008B /* libdav1d.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84279D7425B6DF59003B008B /* libdav1d.5.dylib */; };
+		84279D7725B6DF77003B008B /* libmujs.so in Frameworks */ = {isa = PBXBuildFile; fileRef = 84279D7625B6DF77003B008B /* libmujs.so */; };
 		842904E21F0EC01600478376 /* AutoFileMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842904E11F0EC01600478376 /* AutoFileMatcher.swift */; };
 		842F55A51EA17E7E0081D475 /* IINACommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842F55A41EA17E7E0081D475 /* IINACommand.swift */; };
 		8434BAA71D5DF2DA003BECF2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434BAA61D5DF2DA003BECF2 /* Extensions.swift */; };
@@ -57,6 +59,7 @@
 		845040401E0ACADD0079C194 /* MPVNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8450403F1E0ACADD0079C194 /* MPVNode.swift */; };
 		845040471E0B0F500079C194 /* CropSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845040451E0B0F500079C194 /* CropSettingsViewController.swift */; };
 		8450404A1E0B13230079C194 /* CropBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845040491E0B13230079C194 /* CropBoxView.swift */; };
+		8451E6D92604AEFC009A15D7 /* Just in Frameworks */ = {isa = PBXBuildFile; productRef = 8451E6D82604AEFC009A15D7 /* Just */; };
 		8452DD851D3B956D008A543A /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8452DD841D3B956D008A543A /* Preference.swift */; };
 		845404AA1E4396F500B02B12 /* ScriptLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845404A91E4396F500B02B12 /* ScriptLoader.swift */; };
 		845404AC1E43980900B02B12 /* LuaScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845404AB1E43980900B02B12 /* LuaScript.swift */; };
@@ -82,102 +85,6 @@
 		84795C371E0825AD0059A648 /* GifGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84795C361E0825AD0059A648 /* GifGenerator.swift */; };
 		84795C3A1E083EE30059A648 /* PrefControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84795C381E083EE30059A648 /* PrefControlViewController.swift */; };
 		847C62CA1DC13CDA00E1EF16 /* PrefGeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C62C81DC13CDA00E1EF16 /* PrefGeneralViewController.swift */; };
-		847DAAE62293EEF400351AD7 /* libavresample.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAB62293EEF000351AD7 /* libavresample.4.dylib */; };
-		847DAAE72293EEF400351AD7 /* librubberband.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAB72293EEF000351AD7 /* librubberband.2.dylib */; };
-		847DAAE82293EEF400351AD7 /* libfreetype.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAB82293EEF100351AD7 /* libfreetype.6.dylib */; };
-		847DAAE92293EEF400351AD7 /* libsoxr.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAB92293EEF100351AD7 /* libsoxr.0.dylib */; };
-		847DAAEA2293EEF400351AD7 /* libmpv.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAABA2293EEF100351AD7 /* libmpv.1.dylib */; };
-		847DAAEB2293EEF400351AD7 /* libspeex.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAABB2293EEF100351AD7 /* libspeex.1.dylib */; };
-		847DAAEC2293EEF400351AD7 /* libharfbuzz.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAABC2293EEF100351AD7 /* libharfbuzz.0.dylib */; };
-		847DAAED2293EEF400351AD7 /* libwebp.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAABD2293EEF100351AD7 /* libwebp.7.dylib */; };
-		847DAAEE2293EEF400351AD7 /* libnettle.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAABE2293EEF100351AD7 /* libnettle.6.dylib */; };
-		847DAAEF2293EEF400351AD7 /* libffi.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAABF2293EEF100351AD7 /* libffi.6.dylib */; };
-		847DAAF02293EEF400351AD7 /* libsnappy.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAC02293EEF100351AD7 /* libsnappy.1.dylib */; };
-		847DAAF12293EEF400351AD7 /* libbluray.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAC12293EEF100351AD7 /* libbluray.2.dylib */; };
-		847DAAF22293EEF400351AD7 /* libass.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAC22293EEF100351AD7 /* libass.9.dylib */; };
-		847DAAF32293EEF400351AD7 /* libavfilter.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAC32293EEF100351AD7 /* libavfilter.7.dylib */; };
-		847DAAF42293EEF400351AD7 /* libpostproc.55.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAC42293EEF100351AD7 /* libpostproc.55.dylib */; };
-		847DAAF52293EEF400351AD7 /* libp11-kit.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAC52293EEF100351AD7 /* libp11-kit.0.dylib */; };
-		847DAAF62293EEF400351AD7 /* libopenjp2.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAC62293EEF100351AD7 /* libopenjp2.7.dylib */; };
-		847DAAF72293EEF400351AD7 /* libtesseract.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAC72293EEF100351AD7 /* libtesseract.4.dylib */; };
-		847DAAF82293EEF400351AD7 /* libavformat.58.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAC82293EEF200351AD7 /* libavformat.58.dylib */; };
-		847DAAF92293EEF400351AD7 /* libglib-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAC92293EEF200351AD7 /* libglib-2.0.0.dylib */; };
-		847DAAFA2293EEF400351AD7 /* libpcre.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAACA2293EEF200351AD7 /* libpcre.1.dylib */; };
-		847DAAFB2293EEF400351AD7 /* libfribidi.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAACB2293EEF200351AD7 /* libfribidi.0.dylib */; };
-		847DAAFC2293EEF400351AD7 /* liblept.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAACC2293EEF200351AD7 /* liblept.5.dylib */; };
-		847DAAFD2293EEF400351AD7 /* libgif.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAACD2293EEF200351AD7 /* libgif.7.dylib */; };
-		847DAAFE2293EEF400351AD7 /* librtmp.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAACE2293EEF200351AD7 /* librtmp.1.dylib */; };
-		847DAAFF2293EEF400351AD7 /* liblua.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAACF2293EEF200351AD7 /* liblua.5.1.dylib */; };
-		847DAB002293EEF400351AD7 /* libgnutls.30.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAD02293EEF200351AD7 /* libgnutls.30.dylib */; };
-		847DAB012293EEF400351AD7 /* libgmp.10.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAD12293EEF200351AD7 /* libgmp.10.dylib */; };
-		847DAB022293EEF400351AD7 /* libpng16.16.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAD22293EEF200351AD7 /* libpng16.16.dylib */; };
-		847DAB032293EEF400351AD7 /* libavcodec.58.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAD32293EEF300351AD7 /* libavcodec.58.dylib */; };
-		847DAB042293EEF400351AD7 /* libintl.8.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAD42293EEF300351AD7 /* libintl.8.dylib */; };
-		847DAB052293EEF400351AD7 /* libavutil.56.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAD52293EEF300351AD7 /* libavutil.56.dylib */; };
-		847DAB062293EEF400351AD7 /* libgraphite2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAD62293EEF300351AD7 /* libgraphite2.3.dylib */; };
-		847DAB072293EEF400351AD7 /* libjpeg.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAD72293EEF300351AD7 /* libjpeg.9.dylib */; };
-		847DAB082293EEF400351AD7 /* libhogweed.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAD82293EEF300351AD7 /* libhogweed.4.dylib */; };
-		847DAB092293EEF400351AD7 /* libssl.1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAD92293EEF300351AD7 /* libssl.1.0.0.dylib */; };
-		847DAB0A2293EEF400351AD7 /* liblcms2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAADA2293EEF300351AD7 /* liblcms2.2.dylib */; };
-		847DAB0B2293EEF400351AD7 /* liblzma.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAADB2293EEF300351AD7 /* liblzma.5.dylib */; };
-		847DAB0C2293EEF400351AD7 /* libarchive.13.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAADC2293EEF300351AD7 /* libarchive.13.dylib */; };
-		847DAB0D2293EEF400351AD7 /* libswresample.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAADD2293EEF400351AD7 /* libswresample.3.dylib */; };
-		847DAB0E2293EEF400351AD7 /* libfontconfig.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAADE2293EEF400351AD7 /* libfontconfig.1.dylib */; };
-		847DAB0F2293EEF400351AD7 /* libswscale.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAADF2293EEF400351AD7 /* libswscale.5.dylib */; };
-		847DAB102293EEF400351AD7 /* libtasn1.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAE02293EEF400351AD7 /* libtasn1.6.dylib */; };
-		847DAB112293EEF400351AD7 /* libuchardet.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAE12293EEF400351AD7 /* libuchardet.0.dylib */; };
-		847DAB122293EEF400351AD7 /* libunistring.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAE22293EEF400351AD7 /* libunistring.2.dylib */; };
-		847DAB132293EEF400351AD7 /* libcrypto.1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAE32293EEF400351AD7 /* libcrypto.1.0.0.dylib */; };
-		847DAB142293EEF400351AD7 /* libtiff.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAE42293EEF400351AD7 /* libtiff.5.dylib */; };
-		847DAB152293EEF400351AD7 /* libavdevice.58.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAAE52293EEF400351AD7 /* libavdevice.58.dylib */; };
-		847DAB162293EEFD00351AD7 /* libarchive.13.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAADC2293EEF300351AD7 /* libarchive.13.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB172293EEFD00351AD7 /* libass.9.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAC22293EEF100351AD7 /* libass.9.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB182293EEFD00351AD7 /* libavcodec.58.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAD32293EEF300351AD7 /* libavcodec.58.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB192293EEFD00351AD7 /* libavdevice.58.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAE52293EEF400351AD7 /* libavdevice.58.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB1A2293EEFD00351AD7 /* libavfilter.7.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAC32293EEF100351AD7 /* libavfilter.7.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB1B2293EEFD00351AD7 /* libavformat.58.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAC82293EEF200351AD7 /* libavformat.58.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB1C2293EEFD00351AD7 /* libavresample.4.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAB62293EEF000351AD7 /* libavresample.4.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB1D2293EEFD00351AD7 /* libavutil.56.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAD52293EEF300351AD7 /* libavutil.56.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB1E2293EEFD00351AD7 /* libbluray.2.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAC12293EEF100351AD7 /* libbluray.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB1F2293EEFD00351AD7 /* libcrypto.1.0.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAE32293EEF400351AD7 /* libcrypto.1.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB202293EEFD00351AD7 /* libffi.6.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAABF2293EEF100351AD7 /* libffi.6.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB212293EEFD00351AD7 /* libfontconfig.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAADE2293EEF400351AD7 /* libfontconfig.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB222293EEFD00351AD7 /* libfreetype.6.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAB82293EEF100351AD7 /* libfreetype.6.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB232293EEFD00351AD7 /* libfribidi.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAACB2293EEF200351AD7 /* libfribidi.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB242293EEFD00351AD7 /* libgif.7.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAACD2293EEF200351AD7 /* libgif.7.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB252293EEFD00351AD7 /* libglib-2.0.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAC92293EEF200351AD7 /* libglib-2.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB262293EEFD00351AD7 /* libgmp.10.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAD12293EEF200351AD7 /* libgmp.10.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB272293EEFD00351AD7 /* libgnutls.30.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAD02293EEF200351AD7 /* libgnutls.30.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB282293EEFD00351AD7 /* libgraphite2.3.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAD62293EEF300351AD7 /* libgraphite2.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB292293EEFD00351AD7 /* libharfbuzz.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAABC2293EEF100351AD7 /* libharfbuzz.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB2A2293EEFD00351AD7 /* libhogweed.4.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAD82293EEF300351AD7 /* libhogweed.4.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB2B2293EEFD00351AD7 /* libintl.8.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAD42293EEF300351AD7 /* libintl.8.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB2C2293EEFD00351AD7 /* libjpeg.9.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAD72293EEF300351AD7 /* libjpeg.9.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB2D2293EEFD00351AD7 /* liblcms2.2.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAADA2293EEF300351AD7 /* liblcms2.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB2E2293EEFD00351AD7 /* liblept.5.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAACC2293EEF200351AD7 /* liblept.5.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB2F2293EEFD00351AD7 /* liblua.5.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAACF2293EEF200351AD7 /* liblua.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB302293EEFD00351AD7 /* liblzma.5.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAADB2293EEF300351AD7 /* liblzma.5.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB312293EEFD00351AD7 /* libmpv.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAABA2293EEF100351AD7 /* libmpv.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB322293EEFD00351AD7 /* libnettle.6.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAABE2293EEF100351AD7 /* libnettle.6.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB332293EEFD00351AD7 /* libopenjp2.7.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAC62293EEF100351AD7 /* libopenjp2.7.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB342293EEFD00351AD7 /* libp11-kit.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAC52293EEF100351AD7 /* libp11-kit.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB352293EEFD00351AD7 /* libpcre.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAACA2293EEF200351AD7 /* libpcre.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB362293EEFD00351AD7 /* libpng16.16.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAD22293EEF200351AD7 /* libpng16.16.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB372293EEFD00351AD7 /* libpostproc.55.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAC42293EEF100351AD7 /* libpostproc.55.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB382293EEFD00351AD7 /* librtmp.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAACE2293EEF200351AD7 /* librtmp.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB392293EEFD00351AD7 /* librubberband.2.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAB72293EEF000351AD7 /* librubberband.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB3A2293EEFD00351AD7 /* libsnappy.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAC02293EEF100351AD7 /* libsnappy.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB3B2293EEFD00351AD7 /* libsoxr.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAB92293EEF100351AD7 /* libsoxr.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB3C2293EEFD00351AD7 /* libspeex.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAABB2293EEF100351AD7 /* libspeex.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB3D2293EEFD00351AD7 /* libssl.1.0.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAD92293EEF300351AD7 /* libssl.1.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB3E2293EEFD00351AD7 /* libswresample.3.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAADD2293EEF400351AD7 /* libswresample.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB3F2293EEFD00351AD7 /* libswscale.5.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAADF2293EEF400351AD7 /* libswscale.5.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB402293EEFD00351AD7 /* libtasn1.6.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAE02293EEF400351AD7 /* libtasn1.6.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB412293EEFD00351AD7 /* libtesseract.4.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAC72293EEF100351AD7 /* libtesseract.4.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB422293EEFD00351AD7 /* libtiff.5.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAE42293EEF400351AD7 /* libtiff.5.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB432293EEFD00351AD7 /* libuchardet.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAE12293EEF400351AD7 /* libuchardet.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB442293EEFE00351AD7 /* libunistring.2.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAAE22293EEF400351AD7 /* libunistring.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		847DAB452293EEFE00351AD7 /* libwebp.7.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 847DAABD2293EEF100351AD7 /* libwebp.7.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		84817C961DBDCA5F00CC2279 /* SettingsListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84817C951DBDCA5F00CC2279 /* SettingsListCellView.swift */; };
 		84817C981DBDCE4300CC2279 /* RoundedColorWell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84817C971DBDCE4300CC2279 /* RoundedColorWell.swift */; };
 		8483FB001EDFF325000F55D6 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 8483FAFF1EDFF325000F55D6 /* Credits.rtf */; };
@@ -220,6 +127,7 @@
 		84C6D3671EB2A427009BF721 /* HistoryWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6D3651EB2A427009BF721 /* HistoryWindowController.swift */; };
 		84C8D58F1D794CE600D98A0E /* MPVFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C8D58E1D794CE600D98A0E /* MPVFilter.swift */; };
 		84C8D5911D796F9700D98A0E /* Aspect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C8D5901D796F9700D98A0E /* Aspect.swift */; };
+		84CFC92623F8DDE000381E5B /* PlayerWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CFC92523F8DDE000381E5B /* PlayerWindowController.swift */; };
 		84D0FB7E1F5E519300C6A6A7 /* FreeSelectingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D0FB7C1F5E519300C6A6A7 /* FreeSelectingViewController.swift */; };
 		84D0FB811F5E5A4000C6A6A7 /* CropBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D0FB801F5E5A4000C6A6A7 /* CropBoxViewController.swift */; };
 		84D0FB821F5E6A3800C6A6A7 /* FreeSelectingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84D0FB841F5E6A3800C6A6A7 /* FreeSelectingViewController.xib */; };
@@ -247,9 +155,15 @@
 		84FBF23E1EF06A90003EA491 /* ThumbnailCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBF23D1EF06A90003EA491 /* ThumbnailCache.swift */; };
 		8F49C36E213EFB7E0076C4F9 /* MiniPlayerWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F49C370213EFB7E0076C4F9 /* MiniPlayerWindowController.xib */; };
 		9E47DAC01E3CFA6D00457420 /* DurationDisplayTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */; };
+		B4E446E825CB53920069F06E /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = B4E446E725CB53920069F06E /* PromiseKit */; };
+		B4E446F225CB53FF0069F06E /* Gzip in Frameworks */ = {isa = PBXBuildFile; productRef = B4E446F125CB53FF0069F06E /* Gzip */; };
+		B4E446F725CB54EF0069F06E /* Mustache in Frameworks */ = {isa = PBXBuildFile; productRef = B4E446F625CB54EF0069F06E /* Mustache */; };
+		B4E4470125CE3F930069F06E /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = B4E4470025CE3F930069F06E /* Sparkle */; };
 		C789872F1E34EF170005769F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C78987311E34EF170005769F /* InfoPlist.strings */; };
 		E301EFDA21312AB300BC8588 /* KeychainAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = E301EFD921312AB300BC8588 /* KeychainAccess.swift */; };
 		E322A4F820A8442E00C67D32 /* PlaylistPlaybackProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E322A4F720A8442E00C67D32 /* PlaylistPlaybackProgressView.swift */; };
+		E32712B024EAA14500359DAB /* ScreenshootOSDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32712AE24EAA14500359DAB /* ScreenshootOSDView.swift */; };
+		E32712B224F2B8CA00359DAB /* ScreenshootOSDView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E32712B424F2B8CA00359DAB /* ScreenshootOSDView.xib */; };
 		E33836852026223800ABC812 /* PrefOSCToolbarSettingsSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33836832026223800ABC812 /* PrefOSCToolbarSettingsSheetController.swift */; };
 		E3383689202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3383687202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.swift */; };
 		E338368A202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3383688202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.xib */; };
@@ -257,13 +171,126 @@
 		E33BA5C7204BD9FE0069A0F6 /* SubChooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33BA5C5204BD9FE0069A0F6 /* SubChooseViewController.swift */; };
 		E342832F20B7149800139865 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E342832E20B7149800139865 /* Logger.swift */; };
 		E34A0E012053F93A00B50097 /* PrefOSCToolbarSettingsSheetController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E34A0E032053F93A00B50097 /* PrefOSCToolbarSettingsSheetController.xib */; };
+		E34C0C3124934D7B0065A0C6 /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34C0C3024934D7B0065A0C6 /* Switch.swift */; };
+		E34C638F25B9220800DE53D2 /* libarchive.13.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F2524FF505A0068B9B0 /* libarchive.13.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C639025B9220800DE53D2 /* libass.9.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F3C24FF505D0068B9B0 /* libass.9.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C639125B9220800DE53D2 /* libavcodec.58.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F3D24FF505D0068B9B0 /* libavcodec.58.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C639225B9220800DE53D2 /* libavdevice.58.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F2324FF505A0068B9B0 /* libavdevice.58.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C639325B9220800DE53D2 /* libavfilter.7.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F3E24FF505D0068B9B0 /* libavfilter.7.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C639425B9220800DE53D2 /* libavformat.58.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F3224FF505C0068B9B0 /* libavformat.58.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C639525B9220800DE53D2 /* libavresample.4.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F1F24FF505A0068B9B0 /* libavresample.4.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C639625B9220800DE53D2 /* libavutil.56.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F3924FF505C0068B9B0 /* libavutil.56.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C639725B9220800DE53D2 /* libb2.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F0D24FF50590068B9B0 /* libb2.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C639825B9220800DE53D2 /* libbluray.2.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F2F24FF505B0068B9B0 /* libbluray.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C639925B9220800DE53D2 /* libdav1d.5.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84279D7425B6DF59003B008B /* libdav1d.5.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C639A25B9220800DE53D2 /* libcrypto.1.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F2C24FF505B0068B9B0 /* libcrypto.1.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C639B25B9220800DE53D2 /* libffi.7.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F3B24FF505C0068B9B0 /* libffi.7.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C639C25B9220800DE53D2 /* libfontconfig.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F3524FF505C0068B9B0 /* libfontconfig.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C639D25B9220800DE53D2 /* libfreetype.6.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F1324FF50590068B9B0 /* libfreetype.6.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C639E25B9220800DE53D2 /* libfribidi.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F0B24FF50590068B9B0 /* libfribidi.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C639F25B9220800DE53D2 /* libgif.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F2D24FF505B0068B9B0 /* libgif.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63A025B9220800DE53D2 /* libglib-2.0.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F2724FF505A0068B9B0 /* libglib-2.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63A125B9220800DE53D2 /* libgmp.10.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F1824FF50590068B9B0 /* libgmp.10.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63A225B9220800DE53D2 /* libgnutls.30.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F0924FF50580068B9B0 /* libgnutls.30.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63A325B9220800DE53D2 /* libgraphite2.3.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F1D24FF505A0068B9B0 /* libgraphite2.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63A425B9220800DE53D2 /* libharfbuzz.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F2424FF505A0068B9B0 /* libharfbuzz.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63A525B9220800DE53D2 /* libhogweed.6.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F0F24FF50590068B9B0 /* libhogweed.6.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63A625B9220800DE53D2 /* libidn2.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F1A24FF50590068B9B0 /* libidn2.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63A725B9220800DE53D2 /* libintl.8.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F3024FF505B0068B9B0 /* libintl.8.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63A825B9220800DE53D2 /* libjpeg.9.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F3824FF505C0068B9B0 /* libjpeg.9.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63A925B9220800DE53D2 /* liblcms2.2.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F1724FF50590068B9B0 /* liblcms2.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63AA25B9220800DE53D2 /* liblept.5.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F1024FF50590068B9B0 /* liblept.5.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63AB25B9220800DE53D2 /* liblua.5.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F3624FF505C0068B9B0 /* liblua.5.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63AC25B9220800DE53D2 /* liblz4.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F2924FF505B0068B9B0 /* liblz4.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63AD25B9220800DE53D2 /* liblzma.5.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F3724FF505C0068B9B0 /* liblzma.5.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63AE25B9220800DE53D2 /* libmpv.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F2624FF505A0068B9B0 /* libmpv.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63AF25B9220800DE53D2 /* libnettle.8.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F1924FF50590068B9B0 /* libnettle.8.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63B025B9220800DE53D2 /* libopenjp2.7.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F1C24FF505A0068B9B0 /* libopenjp2.7.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63B125B9220800DE53D2 /* libp11-kit.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F2024FF505A0068B9B0 /* libp11-kit.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63B225B9220800DE53D2 /* libpcre.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F0E24FF50590068B9B0 /* libpcre.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63B325B9220800DE53D2 /* libpng16.16.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F3424FF505C0068B9B0 /* libpng16.16.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63B425B9220800DE53D2 /* libpostproc.55.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F2A24FF505B0068B9B0 /* libpostproc.55.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63B525B9220800DE53D2 /* librtmp.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F0A24FF50590068B9B0 /* librtmp.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63B625B9220800DE53D2 /* librubberband.2.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F2824FF505B0068B9B0 /* librubberband.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63B725B9220800DE53D2 /* libsnappy.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F2124FF505A0068B9B0 /* libsnappy.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63B825B9220800DE53D2 /* libsoxr.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F1624FF50590068B9B0 /* libsoxr.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63B925B9220800DE53D2 /* libspeex.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F0C24FF50590068B9B0 /* libspeex.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63BA25B9220800DE53D2 /* libssl.1.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F1B24FF505A0068B9B0 /* libssl.1.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63BB25B9220900DE53D2 /* libswresample.3.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F1E24FF505A0068B9B0 /* libswresample.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63BC25B9220900DE53D2 /* libswscale.5.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F0824FF50580068B9B0 /* libswscale.5.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63BD25B9220900DE53D2 /* libtasn1.6.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F1224FF50590068B9B0 /* libtasn1.6.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63BE25B9220900DE53D2 /* libtesseract.4.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F3324FF505C0068B9B0 /* libtesseract.4.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63BF25B9220900DE53D2 /* libtiff.5.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F3124FF505B0068B9B0 /* libtiff.5.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63C025B9220900DE53D2 /* libuchardet.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F1424FF50590068B9B0 /* libuchardet.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63C125B9220900DE53D2 /* libunistring.2.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F1124FF50590068B9B0 /* libunistring.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63C225B9220900DE53D2 /* libvidstab.1.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F1524FF50590068B9B0 /* libvidstab.1.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63C325B9220900DE53D2 /* libwebp.7.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F2E24FF505B0068B9B0 /* libwebp.7.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63C425B9220900DE53D2 /* libwebpmux.3.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F2224FF505A0068B9B0 /* libwebpmux.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63C525B9220900DE53D2 /* libzstd.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3B25F3A24FF505C0068B9B0 /* libzstd.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34C63C625B9220900DE53D2 /* libmujs.so in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 84279D7625B6DF77003B008B /* libmujs.so */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E34E909A24F821280073BF04 /* GuideWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E34E909C24F821280073BF04 /* GuideWindowController.xib */; };
 		E3513AF820EF79C500F8C347 /* PreferenceWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3513AF620EF79C500F8C347 /* PreferenceWindowController.swift */; };
 		E3513AFB20F120F600F8C347 /* PreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3513AFA20F120F600F8C347 /* PreferenceViewController.swift */; };
+		E36E8D7C24F6052F00B8C097 /* GuideWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36E8D7A24F6052F00B8C097 /* GuideWindowController.swift */; };
 		E374160C20F138A900B4F7F9 /* CollapseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E374160B20F138A900B4F7F9 /* CollapseView.swift */; };
 		E374160F20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E374160D20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift */; };
 		E374161120F3C0AB00B4F7F9 /* PrefUtilsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E374161320F3C0AB00B4F7F9 /* PrefUtilsViewController.xib */; };
-		E38B32192157DC18000F6D27 /* ISO639TokenFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38B32172157DC18000F6D27 /* ISO639TokenFieldDelegate.swift */; };
+		E38372922443634500F57718 /* LanguageTokenField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38372912443634500F57718 /* LanguageTokenField.swift */; };
 		E38BD4AF20054BD9007635FC /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38BD4AE20054BD9007635FC /* MainWindow.swift */; };
+		E3B25F3F24FF505D0068B9B0 /* libswscale.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F0824FF50580068B9B0 /* libswscale.5.dylib */; };
+		E3B25F4024FF505D0068B9B0 /* libgnutls.30.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F0924FF50580068B9B0 /* libgnutls.30.dylib */; };
+		E3B25F4124FF505D0068B9B0 /* librtmp.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F0A24FF50590068B9B0 /* librtmp.1.dylib */; };
+		E3B25F4224FF505D0068B9B0 /* libfribidi.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F0B24FF50590068B9B0 /* libfribidi.0.dylib */; };
+		E3B25F4324FF505D0068B9B0 /* libspeex.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F0C24FF50590068B9B0 /* libspeex.1.dylib */; };
+		E3B25F4424FF505D0068B9B0 /* libb2.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F0D24FF50590068B9B0 /* libb2.1.dylib */; };
+		E3B25F4524FF505D0068B9B0 /* libpcre.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F0E24FF50590068B9B0 /* libpcre.1.dylib */; };
+		E3B25F4624FF505D0068B9B0 /* libhogweed.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F0F24FF50590068B9B0 /* libhogweed.6.dylib */; };
+		E3B25F4724FF505D0068B9B0 /* liblept.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F1024FF50590068B9B0 /* liblept.5.dylib */; };
+		E3B25F4824FF505D0068B9B0 /* libunistring.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F1124FF50590068B9B0 /* libunistring.2.dylib */; };
+		E3B25F4924FF505D0068B9B0 /* libtasn1.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F1224FF50590068B9B0 /* libtasn1.6.dylib */; };
+		E3B25F4A24FF505D0068B9B0 /* libfreetype.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F1324FF50590068B9B0 /* libfreetype.6.dylib */; };
+		E3B25F4B24FF505D0068B9B0 /* libuchardet.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F1424FF50590068B9B0 /* libuchardet.0.dylib */; };
+		E3B25F4C24FF505D0068B9B0 /* libvidstab.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F1524FF50590068B9B0 /* libvidstab.1.1.dylib */; };
+		E3B25F4D24FF505D0068B9B0 /* libsoxr.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F1624FF50590068B9B0 /* libsoxr.0.dylib */; };
+		E3B25F4E24FF505D0068B9B0 /* liblcms2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F1724FF50590068B9B0 /* liblcms2.2.dylib */; };
+		E3B25F4F24FF505D0068B9B0 /* libgmp.10.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F1824FF50590068B9B0 /* libgmp.10.dylib */; };
+		E3B25F5024FF505D0068B9B0 /* libnettle.8.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F1924FF50590068B9B0 /* libnettle.8.dylib */; };
+		E3B25F5124FF505D0068B9B0 /* libidn2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F1A24FF50590068B9B0 /* libidn2.0.dylib */; };
+		E3B25F5224FF505D0068B9B0 /* libssl.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F1B24FF505A0068B9B0 /* libssl.1.1.dylib */; };
+		E3B25F5324FF505D0068B9B0 /* libopenjp2.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F1C24FF505A0068B9B0 /* libopenjp2.7.dylib */; };
+		E3B25F5424FF505D0068B9B0 /* libgraphite2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F1D24FF505A0068B9B0 /* libgraphite2.3.dylib */; };
+		E3B25F5524FF505D0068B9B0 /* libswresample.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F1E24FF505A0068B9B0 /* libswresample.3.dylib */; };
+		E3B25F5624FF505D0068B9B0 /* libavresample.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F1F24FF505A0068B9B0 /* libavresample.4.dylib */; };
+		E3B25F5724FF505D0068B9B0 /* libp11-kit.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F2024FF505A0068B9B0 /* libp11-kit.0.dylib */; };
+		E3B25F5824FF505D0068B9B0 /* libsnappy.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F2124FF505A0068B9B0 /* libsnappy.1.dylib */; };
+		E3B25F5924FF505D0068B9B0 /* libwebpmux.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F2224FF505A0068B9B0 /* libwebpmux.3.dylib */; };
+		E3B25F5A24FF505D0068B9B0 /* libavdevice.58.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F2324FF505A0068B9B0 /* libavdevice.58.dylib */; };
+		E3B25F5B24FF505D0068B9B0 /* libharfbuzz.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F2424FF505A0068B9B0 /* libharfbuzz.0.dylib */; };
+		E3B25F5C24FF505D0068B9B0 /* libarchive.13.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F2524FF505A0068B9B0 /* libarchive.13.dylib */; };
+		E3B25F5D24FF505D0068B9B0 /* libmpv.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F2624FF505A0068B9B0 /* libmpv.1.dylib */; };
+		E3B25F5E24FF505D0068B9B0 /* libglib-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F2724FF505A0068B9B0 /* libglib-2.0.0.dylib */; };
+		E3B25F5F24FF505D0068B9B0 /* librubberband.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F2824FF505B0068B9B0 /* librubberband.2.dylib */; };
+		E3B25F6024FF505D0068B9B0 /* liblz4.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F2924FF505B0068B9B0 /* liblz4.1.dylib */; };
+		E3B25F6124FF505D0068B9B0 /* libpostproc.55.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F2A24FF505B0068B9B0 /* libpostproc.55.dylib */; };
+		E3B25F6324FF505D0068B9B0 /* libcrypto.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F2C24FF505B0068B9B0 /* libcrypto.1.1.dylib */; };
+		E3B25F6424FF505D0068B9B0 /* libgif.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F2D24FF505B0068B9B0 /* libgif.dylib */; };
+		E3B25F6524FF505D0068B9B0 /* libwebp.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F2E24FF505B0068B9B0 /* libwebp.7.dylib */; };
+		E3B25F6624FF505D0068B9B0 /* libbluray.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F2F24FF505B0068B9B0 /* libbluray.2.dylib */; };
+		E3B25F6724FF505D0068B9B0 /* libintl.8.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F3024FF505B0068B9B0 /* libintl.8.dylib */; };
+		E3B25F6824FF505D0068B9B0 /* libtiff.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F3124FF505B0068B9B0 /* libtiff.5.dylib */; };
+		E3B25F6924FF505D0068B9B0 /* libavformat.58.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F3224FF505C0068B9B0 /* libavformat.58.dylib */; };
+		E3B25F6A24FF505D0068B9B0 /* libtesseract.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F3324FF505C0068B9B0 /* libtesseract.4.dylib */; };
+		E3B25F6B24FF505D0068B9B0 /* libpng16.16.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F3424FF505C0068B9B0 /* libpng16.16.dylib */; };
+		E3B25F6C24FF505D0068B9B0 /* libfontconfig.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F3524FF505C0068B9B0 /* libfontconfig.1.dylib */; };
+		E3B25F6D24FF505D0068B9B0 /* liblua.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F3624FF505C0068B9B0 /* liblua.5.1.dylib */; };
+		E3B25F6E24FF505D0068B9B0 /* liblzma.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F3724FF505C0068B9B0 /* liblzma.5.dylib */; };
+		E3B25F6F24FF505E0068B9B0 /* libjpeg.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F3824FF505C0068B9B0 /* libjpeg.9.dylib */; };
+		E3B25F7024FF505E0068B9B0 /* libavutil.56.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F3924FF505C0068B9B0 /* libavutil.56.dylib */; };
+		E3B25F7124FF505E0068B9B0 /* libzstd.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F3A24FF505C0068B9B0 /* libzstd.1.dylib */; };
+		E3B25F7224FF505E0068B9B0 /* libffi.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F3B24FF505C0068B9B0 /* libffi.7.dylib */; };
+		E3B25F7324FF505E0068B9B0 /* libass.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F3C24FF505D0068B9B0 /* libass.9.dylib */; };
+		E3B25F7424FF505E0068B9B0 /* libavcodec.58.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F3D24FF505D0068B9B0 /* libavcodec.58.dylib */; };
+		E3B25F7524FF505E0068B9B0 /* libavfilter.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3B25F3E24FF505D0068B9B0 /* libavfilter.7.dylib */; };
 		E3B3DD5720FDB8A600325184 /* PreferenceWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3B3DD5920FDB8A600325184 /* PreferenceWindowController.xib */; };
 		E3BA79EE2131443A00529D99 /* OpenURLWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BA79EC2131443A00529D99 /* OpenURLWindowController.swift */; };
 		E3C12F6B201F281F00297964 /* FirstRunManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C12F6A201F281F00297964 /* FirstRunManager.swift */; };
@@ -328,54 +355,62 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				847DAB3D2293EEFD00351AD7 /* libssl.1.0.0.dylib in Copy Dylibs */,
-				847DAB1E2293EEFD00351AD7 /* libbluray.2.dylib in Copy Dylibs */,
-				847DAB322293EEFD00351AD7 /* libnettle.6.dylib in Copy Dylibs */,
-				847DAB312293EEFD00351AD7 /* libmpv.1.dylib in Copy Dylibs */,
-				847DAB1B2293EEFD00351AD7 /* libavformat.58.dylib in Copy Dylibs */,
-				847DAB212293EEFD00351AD7 /* libfontconfig.1.dylib in Copy Dylibs */,
-				847DAB242293EEFD00351AD7 /* libgif.7.dylib in Copy Dylibs */,
-				847DAB382293EEFD00351AD7 /* librtmp.1.dylib in Copy Dylibs */,
-				847DAB362293EEFD00351AD7 /* libpng16.16.dylib in Copy Dylibs */,
-				847DAB262293EEFD00351AD7 /* libgmp.10.dylib in Copy Dylibs */,
-				847DAB1D2293EEFD00351AD7 /* libavutil.56.dylib in Copy Dylibs */,
-				847DAB3B2293EEFD00351AD7 /* libsoxr.0.dylib in Copy Dylibs */,
-				847DAB2E2293EEFD00351AD7 /* liblept.5.dylib in Copy Dylibs */,
-				847DAB252293EEFD00351AD7 /* libglib-2.0.0.dylib in Copy Dylibs */,
-				847DAB432293EEFD00351AD7 /* libuchardet.0.dylib in Copy Dylibs */,
-				847DAB2B2293EEFD00351AD7 /* libintl.8.dylib in Copy Dylibs */,
-				847DAB272293EEFD00351AD7 /* libgnutls.30.dylib in Copy Dylibs */,
-				847DAB1A2293EEFD00351AD7 /* libavfilter.7.dylib in Copy Dylibs */,
-				847DAB342293EEFD00351AD7 /* libp11-kit.0.dylib in Copy Dylibs */,
-				847DAB2A2293EEFD00351AD7 /* libhogweed.4.dylib in Copy Dylibs */,
-				847DAB392293EEFD00351AD7 /* librubberband.2.dylib in Copy Dylibs */,
-				847DAB202293EEFD00351AD7 /* libffi.6.dylib in Copy Dylibs */,
-				847DAB182293EEFD00351AD7 /* libavcodec.58.dylib in Copy Dylibs */,
-				847DAB352293EEFD00351AD7 /* libpcre.1.dylib in Copy Dylibs */,
-				847DAB282293EEFD00351AD7 /* libgraphite2.3.dylib in Copy Dylibs */,
-				847DAB1C2293EEFD00351AD7 /* libavresample.4.dylib in Copy Dylibs */,
-				847DAB3E2293EEFD00351AD7 /* libswresample.3.dylib in Copy Dylibs */,
-				847DAB3F2293EEFD00351AD7 /* libswscale.5.dylib in Copy Dylibs */,
-				847DAB2C2293EEFD00351AD7 /* libjpeg.9.dylib in Copy Dylibs */,
-				847DAB302293EEFD00351AD7 /* liblzma.5.dylib in Copy Dylibs */,
-				847DAB412293EEFD00351AD7 /* libtesseract.4.dylib in Copy Dylibs */,
-				847DAB222293EEFD00351AD7 /* libfreetype.6.dylib in Copy Dylibs */,
-				847DAB442293EEFE00351AD7 /* libunistring.2.dylib in Copy Dylibs */,
-				847DAB292293EEFD00351AD7 /* libharfbuzz.0.dylib in Copy Dylibs */,
-				847DAB3C2293EEFD00351AD7 /* libspeex.1.dylib in Copy Dylibs */,
-				847DAB332293EEFD00351AD7 /* libopenjp2.7.dylib in Copy Dylibs */,
-				847DAB402293EEFD00351AD7 /* libtasn1.6.dylib in Copy Dylibs */,
-				847DAB2D2293EEFD00351AD7 /* liblcms2.2.dylib in Copy Dylibs */,
-				847DAB3A2293EEFD00351AD7 /* libsnappy.1.dylib in Copy Dylibs */,
-				847DAB422293EEFD00351AD7 /* libtiff.5.dylib in Copy Dylibs */,
-				847DAB162293EEFD00351AD7 /* libarchive.13.dylib in Copy Dylibs */,
-				847DAB172293EEFD00351AD7 /* libass.9.dylib in Copy Dylibs */,
-				847DAB1F2293EEFD00351AD7 /* libcrypto.1.0.0.dylib in Copy Dylibs */,
-				847DAB452293EEFE00351AD7 /* libwebp.7.dylib in Copy Dylibs */,
-				847DAB2F2293EEFD00351AD7 /* liblua.5.1.dylib in Copy Dylibs */,
-				847DAB372293EEFD00351AD7 /* libpostproc.55.dylib in Copy Dylibs */,
-				847DAB232293EEFD00351AD7 /* libfribidi.0.dylib in Copy Dylibs */,
-				847DAB192293EEFD00351AD7 /* libavdevice.58.dylib in Copy Dylibs */,
+				E34C638F25B9220800DE53D2 /* libarchive.13.dylib in Copy Dylibs */,
+				E34C639025B9220800DE53D2 /* libass.9.dylib in Copy Dylibs */,
+				E34C639125B9220800DE53D2 /* libavcodec.58.dylib in Copy Dylibs */,
+				E34C639225B9220800DE53D2 /* libavdevice.58.dylib in Copy Dylibs */,
+				E34C639325B9220800DE53D2 /* libavfilter.7.dylib in Copy Dylibs */,
+				E34C639425B9220800DE53D2 /* libavformat.58.dylib in Copy Dylibs */,
+				E34C639525B9220800DE53D2 /* libavresample.4.dylib in Copy Dylibs */,
+				E34C639625B9220800DE53D2 /* libavutil.56.dylib in Copy Dylibs */,
+				E34C639725B9220800DE53D2 /* libb2.1.dylib in Copy Dylibs */,
+				E34C639825B9220800DE53D2 /* libbluray.2.dylib in Copy Dylibs */,
+				E34C639925B9220800DE53D2 /* libdav1d.5.dylib in Copy Dylibs */,
+				E34C639A25B9220800DE53D2 /* libcrypto.1.1.dylib in Copy Dylibs */,
+				E34C639B25B9220800DE53D2 /* libffi.7.dylib in Copy Dylibs */,
+				E34C639C25B9220800DE53D2 /* libfontconfig.1.dylib in Copy Dylibs */,
+				E34C639D25B9220800DE53D2 /* libfreetype.6.dylib in Copy Dylibs */,
+				E34C639E25B9220800DE53D2 /* libfribidi.0.dylib in Copy Dylibs */,
+				E34C639F25B9220800DE53D2 /* libgif.dylib in Copy Dylibs */,
+				E34C63A025B9220800DE53D2 /* libglib-2.0.0.dylib in Copy Dylibs */,
+				E34C63A125B9220800DE53D2 /* libgmp.10.dylib in Copy Dylibs */,
+				E34C63A225B9220800DE53D2 /* libgnutls.30.dylib in Copy Dylibs */,
+				E34C63A325B9220800DE53D2 /* libgraphite2.3.dylib in Copy Dylibs */,
+				E34C63A425B9220800DE53D2 /* libharfbuzz.0.dylib in Copy Dylibs */,
+				E34C63A525B9220800DE53D2 /* libhogweed.6.dylib in Copy Dylibs */,
+				E34C63A625B9220800DE53D2 /* libidn2.0.dylib in Copy Dylibs */,
+				E34C63A725B9220800DE53D2 /* libintl.8.dylib in Copy Dylibs */,
+				E34C63A825B9220800DE53D2 /* libjpeg.9.dylib in Copy Dylibs */,
+				E34C63A925B9220800DE53D2 /* liblcms2.2.dylib in Copy Dylibs */,
+				E34C63AA25B9220800DE53D2 /* liblept.5.dylib in Copy Dylibs */,
+				E34C63AB25B9220800DE53D2 /* liblua.5.1.dylib in Copy Dylibs */,
+				E34C63AC25B9220800DE53D2 /* liblz4.1.dylib in Copy Dylibs */,
+				E34C63AD25B9220800DE53D2 /* liblzma.5.dylib in Copy Dylibs */,
+				E34C63AE25B9220800DE53D2 /* libmpv.1.dylib in Copy Dylibs */,
+				E34C63AF25B9220800DE53D2 /* libnettle.8.dylib in Copy Dylibs */,
+				E34C63B025B9220800DE53D2 /* libopenjp2.7.dylib in Copy Dylibs */,
+				E34C63B125B9220800DE53D2 /* libp11-kit.0.dylib in Copy Dylibs */,
+				E34C63B225B9220800DE53D2 /* libpcre.1.dylib in Copy Dylibs */,
+				E34C63B325B9220800DE53D2 /* libpng16.16.dylib in Copy Dylibs */,
+				E34C63B425B9220800DE53D2 /* libpostproc.55.dylib in Copy Dylibs */,
+				E34C63B525B9220800DE53D2 /* librtmp.1.dylib in Copy Dylibs */,
+				E34C63B625B9220800DE53D2 /* librubberband.2.dylib in Copy Dylibs */,
+				E34C63B725B9220800DE53D2 /* libsnappy.1.dylib in Copy Dylibs */,
+				E34C63B825B9220800DE53D2 /* libsoxr.0.dylib in Copy Dylibs */,
+				E34C63B925B9220800DE53D2 /* libspeex.1.dylib in Copy Dylibs */,
+				E34C63BA25B9220800DE53D2 /* libssl.1.1.dylib in Copy Dylibs */,
+				E34C63BB25B9220900DE53D2 /* libswresample.3.dylib in Copy Dylibs */,
+				E34C63BC25B9220900DE53D2 /* libswscale.5.dylib in Copy Dylibs */,
+				E34C63BD25B9220900DE53D2 /* libtasn1.6.dylib in Copy Dylibs */,
+				E34C63BE25B9220900DE53D2 /* libtesseract.4.dylib in Copy Dylibs */,
+				E34C63BF25B9220900DE53D2 /* libtiff.5.dylib in Copy Dylibs */,
+				E34C63C025B9220900DE53D2 /* libuchardet.0.dylib in Copy Dylibs */,
+				E34C63C125B9220900DE53D2 /* libunistring.2.dylib in Copy Dylibs */,
+				E34C63C225B9220900DE53D2 /* libvidstab.1.1.dylib in Copy Dylibs */,
+				E34C63C325B9220900DE53D2 /* libwebp.7.dylib in Copy Dylibs */,
+				E34C63C425B9220900DE53D2 /* libwebpmux.3.dylib in Copy Dylibs */,
+				E34C63C525B9220900DE53D2 /* libzstd.1.dylib in Copy Dylibs */,
+				E34C63C625B9220900DE53D2 /* libmujs.so in Copy Dylibs */,
 			);
 			name = "Copy Dylibs";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -500,6 +535,7 @@
 		49542981216C34950058F680 /* ToolbarItemIcon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = ToolbarItemIcon.pdf; sourceTree = "<group>"; };
 		49542983216C34950058F680 /* OpenInIINA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OpenInIINA.entitlements; sourceTree = "<group>"; };
 		496B19911E2968530035AF10 /* PIP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PIP.framework; path = ../../../../System/Library/PrivateFrameworks/PIP.framework; sourceTree = "<group>"; };
+		519872FE26879B9B00F84BCC /* AccessibilityPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityPreferences.swift; sourceTree = "<group>"; };
 		5879479521A87DD700757A6F /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/MiniPlayerWindowController.strings; sourceTree = "<group>"; };
 		5879479621A87E6100757A6F /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/PreferenceWindowController.strings; sourceTree = "<group>"; };
 		5EF9F7E521FB42E900748374 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/MainMenu.strings"; sourceTree = "<group>"; };
@@ -535,7 +571,6 @@
 		5EF9F80321FB43EA00748374 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/FilterPresets.strings"; sourceTree = "<group>"; };
 		5EF9F80421FB448700748374 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/KeyBinding.strings"; sourceTree = "<group>"; };
 		6100FF2A1EDF9806002CF0FB /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
-		61C6D8870FEB96F250D1448D /* Pods-iina.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iina.release.xcconfig"; path = "Pods/Target Support Files/Pods-iina/Pods-iina.release.xcconfig"; sourceTree = "<group>"; };
 		649AD3111F11B06D00244738 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		649AD3121F11B06D00244738 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/MainWindowController.strings; sourceTree = "<group>"; };
 		649AD3131F11B06D00244738 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/QuickSettingViewController.strings; sourceTree = "<group>"; };
@@ -766,6 +801,8 @@
 		8418A2F8213F5794003166AC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/OpenURLWindowController.strings"; sourceTree = "<group>"; };
 		841A599C1E1FF5800079E177 /* SleepPreventer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SleepPreventer.swift; sourceTree = "<group>"; };
 		841B14271E941DFF00744AB8 /* TimeLabelOverflowedStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLabelOverflowedStackView.swift; sourceTree = "<group>"; };
+		84279D7425B6DF59003B008B /* libdav1d.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libdav1d.5.dylib; path = deps/lib/libdav1d.5.dylib; sourceTree = "<group>"; };
+		84279D7625B6DF77003B008B /* libmujs.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmujs.so; path = deps/lib/libmujs.so; sourceTree = "<group>"; };
 		842904E11F0EC01600478376 /* AutoFileMatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoFileMatcher.swift; sourceTree = "<group>"; };
 		842F55A41EA17E7E0081D475 /* IINACommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IINACommand.swift; sourceTree = "<group>"; };
 		8434BAA61D5DF2DA003BECF2 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -823,7 +860,7 @@
 		845FB0C61D39462E00C011E0 /* ControlBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlBarView.swift; sourceTree = "<group>"; };
 		8460FBA71D6497490081841B /* PlaylistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
 		846121BC1F35FCA500ABB39C /* DraggingDetect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggingDetect.swift; sourceTree = "<group>"; };
-		8461BA671E4237C2008BB852 /* youtube-dl */ = {isa = PBXFileReference; lastKnownFileType = file; name = "youtube-dl"; path = "deps/executable/youtube-dl"; sourceTree = SOURCE_ROOT; };
+		8461BA671E4237C2008BB852 /* youtube-dl */ = {isa = PBXFileReference; lastKnownFileType = text; name = "youtube-dl"; path = "deps/executable/youtube-dl"; sourceTree = SOURCE_ROOT; };
 		8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySliderCell.swift; sourceTree = "<group>"; };
 		8461C52F1D462488006E91FF /* VideoTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTime.swift; sourceTree = "<group>"; };
 		846352571EEEE11A0043F0CC /* ThumbnailPeekView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailPeekView.swift; sourceTree = "<group>"; };
@@ -845,56 +882,40 @@
 		84795C361E0825AD0059A648 /* GifGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifGenerator.swift; sourceTree = "<group>"; };
 		84795C381E083EE30059A648 /* PrefControlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefControlViewController.swift; sourceTree = "<group>"; };
 		847C62C81DC13CDA00E1EF16 /* PrefGeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefGeneralViewController.swift; sourceTree = "<group>"; };
-		847DAAB62293EEF000351AD7 /* libavresample.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavresample.4.dylib; path = deps/lib/libavresample.4.dylib; sourceTree = "<group>"; };
-		847DAAB72293EEF000351AD7 /* librubberband.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = librubberband.2.dylib; path = deps/lib/librubberband.2.dylib; sourceTree = "<group>"; };
-		847DAAB82293EEF100351AD7 /* libfreetype.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreetype.6.dylib; path = deps/lib/libfreetype.6.dylib; sourceTree = "<group>"; };
-		847DAAB92293EEF100351AD7 /* libsoxr.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsoxr.0.dylib; path = deps/lib/libsoxr.0.dylib; sourceTree = "<group>"; };
-		847DAABA2293EEF100351AD7 /* libmpv.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpv.1.dylib; path = deps/lib/libmpv.1.dylib; sourceTree = "<group>"; };
-		847DAABB2293EEF100351AD7 /* libspeex.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libspeex.1.dylib; path = deps/lib/libspeex.1.dylib; sourceTree = "<group>"; };
-		847DAABC2293EEF100351AD7 /* libharfbuzz.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libharfbuzz.0.dylib; path = deps/lib/libharfbuzz.0.dylib; sourceTree = "<group>"; };
-		847DAABD2293EEF100351AD7 /* libwebp.7.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libwebp.7.dylib; path = deps/lib/libwebp.7.dylib; sourceTree = "<group>"; };
-		847DAABE2293EEF100351AD7 /* libnettle.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libnettle.6.dylib; path = deps/lib/libnettle.6.dylib; sourceTree = "<group>"; };
-		847DAABF2293EEF100351AD7 /* libffi.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libffi.6.dylib; path = deps/lib/libffi.6.dylib; sourceTree = "<group>"; };
-		847DAAC02293EEF100351AD7 /* libsnappy.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsnappy.1.dylib; path = deps/lib/libsnappy.1.dylib; sourceTree = "<group>"; };
-		847DAAC12293EEF100351AD7 /* libbluray.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbluray.2.dylib; path = deps/lib/libbluray.2.dylib; sourceTree = "<group>"; };
-		847DAAC22293EEF100351AD7 /* libass.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libass.9.dylib; path = deps/lib/libass.9.dylib; sourceTree = "<group>"; };
-		847DAAC32293EEF100351AD7 /* libavfilter.7.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavfilter.7.dylib; path = deps/lib/libavfilter.7.dylib; sourceTree = "<group>"; };
-		847DAAC42293EEF100351AD7 /* libpostproc.55.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpostproc.55.dylib; path = deps/lib/libpostproc.55.dylib; sourceTree = "<group>"; };
-		847DAAC52293EEF100351AD7 /* libp11-kit.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libp11-kit.0.dylib"; path = "deps/lib/libp11-kit.0.dylib"; sourceTree = "<group>"; };
-		847DAAC62293EEF100351AD7 /* libopenjp2.7.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopenjp2.7.dylib; path = deps/lib/libopenjp2.7.dylib; sourceTree = "<group>"; };
-		847DAAC72293EEF100351AD7 /* libtesseract.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtesseract.4.dylib; path = deps/lib/libtesseract.4.dylib; sourceTree = "<group>"; };
-		847DAAC82293EEF200351AD7 /* libavformat.58.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavformat.58.dylib; path = deps/lib/libavformat.58.dylib; sourceTree = "<group>"; };
-		847DAAC92293EEF200351AD7 /* libglib-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libglib-2.0.0.dylib"; path = "deps/lib/libglib-2.0.0.dylib"; sourceTree = "<group>"; };
-		847DAACA2293EEF200351AD7 /* libpcre.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpcre.1.dylib; path = deps/lib/libpcre.1.dylib; sourceTree = "<group>"; };
-		847DAACB2293EEF200351AD7 /* libfribidi.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfribidi.0.dylib; path = deps/lib/libfribidi.0.dylib; sourceTree = "<group>"; };
-		847DAACC2293EEF200351AD7 /* liblept.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblept.5.dylib; path = deps/lib/liblept.5.dylib; sourceTree = "<group>"; };
-		847DAACD2293EEF200351AD7 /* libgif.7.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgif.7.dylib; path = deps/lib/libgif.7.dylib; sourceTree = "<group>"; };
-		847DAACE2293EEF200351AD7 /* librtmp.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = librtmp.1.dylib; path = deps/lib/librtmp.1.dylib; sourceTree = "<group>"; };
-		847DAACF2293EEF200351AD7 /* liblua.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblua.5.1.dylib; path = deps/lib/liblua.5.1.dylib; sourceTree = "<group>"; };
-		847DAAD02293EEF200351AD7 /* libgnutls.30.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgnutls.30.dylib; path = deps/lib/libgnutls.30.dylib; sourceTree = "<group>"; };
-		847DAAD12293EEF200351AD7 /* libgmp.10.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgmp.10.dylib; path = deps/lib/libgmp.10.dylib; sourceTree = "<group>"; };
-		847DAAD22293EEF200351AD7 /* libpng16.16.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpng16.16.dylib; path = deps/lib/libpng16.16.dylib; sourceTree = "<group>"; };
-		847DAAD32293EEF300351AD7 /* libavcodec.58.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavcodec.58.dylib; path = deps/lib/libavcodec.58.dylib; sourceTree = "<group>"; };
-		847DAAD42293EEF300351AD7 /* libintl.8.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libintl.8.dylib; path = deps/lib/libintl.8.dylib; sourceTree = "<group>"; };
-		847DAAD52293EEF300351AD7 /* libavutil.56.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavutil.56.dylib; path = deps/lib/libavutil.56.dylib; sourceTree = "<group>"; };
-		847DAAD62293EEF300351AD7 /* libgraphite2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgraphite2.3.dylib; path = deps/lib/libgraphite2.3.dylib; sourceTree = "<group>"; };
-		847DAAD72293EEF300351AD7 /* libjpeg.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libjpeg.9.dylib; path = deps/lib/libjpeg.9.dylib; sourceTree = "<group>"; };
-		847DAAD82293EEF300351AD7 /* libhogweed.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libhogweed.4.dylib; path = deps/lib/libhogweed.4.dylib; sourceTree = "<group>"; };
-		847DAAD92293EEF300351AD7 /* libssl.1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.1.0.0.dylib; path = deps/lib/libssl.1.0.0.dylib; sourceTree = "<group>"; };
-		847DAADA2293EEF300351AD7 /* liblcms2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblcms2.2.dylib; path = deps/lib/liblcms2.2.dylib; sourceTree = "<group>"; };
-		847DAADB2293EEF300351AD7 /* liblzma.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblzma.5.dylib; path = deps/lib/liblzma.5.dylib; sourceTree = "<group>"; };
-		847DAADC2293EEF300351AD7 /* libarchive.13.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libarchive.13.dylib; path = deps/lib/libarchive.13.dylib; sourceTree = "<group>"; };
-		847DAADD2293EEF400351AD7 /* libswresample.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswresample.3.dylib; path = deps/lib/libswresample.3.dylib; sourceTree = "<group>"; };
-		847DAADE2293EEF400351AD7 /* libfontconfig.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfontconfig.1.dylib; path = deps/lib/libfontconfig.1.dylib; sourceTree = "<group>"; };
-		847DAADF2293EEF400351AD7 /* libswscale.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswscale.5.dylib; path = deps/lib/libswscale.5.dylib; sourceTree = "<group>"; };
-		847DAAE02293EEF400351AD7 /* libtasn1.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtasn1.6.dylib; path = deps/lib/libtasn1.6.dylib; sourceTree = "<group>"; };
-		847DAAE12293EEF400351AD7 /* libuchardet.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libuchardet.0.dylib; path = deps/lib/libuchardet.0.dylib; sourceTree = "<group>"; };
-		847DAAE22293EEF400351AD7 /* libunistring.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libunistring.2.dylib; path = deps/lib/libunistring.2.dylib; sourceTree = "<group>"; };
-		847DAAE32293EEF400351AD7 /* libcrypto.1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.1.0.0.dylib; path = deps/lib/libcrypto.1.0.0.dylib; sourceTree = "<group>"; };
-		847DAAE42293EEF400351AD7 /* libtiff.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtiff.5.dylib; path = deps/lib/libtiff.5.dylib; sourceTree = "<group>"; };
-		847DAAE52293EEF400351AD7 /* libavdevice.58.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavdevice.58.dylib; path = deps/lib/libavdevice.58.dylib; sourceTree = "<group>"; };
 		84817C951DBDCA5F00CC2279 /* SettingsListCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsListCellView.swift; sourceTree = "<group>"; };
 		84817C971DBDCE4300CC2279 /* RoundedColorWell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedColorWell.swift; sourceTree = "<group>"; };
+		8482982123C3843C0088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		8482982323C384400088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainWindowController.strings; sourceTree = "<group>"; };
+		8482982523C3844C0088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/QuickSettingViewController.strings; sourceTree = "<group>"; };
+		8482982723C384500088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PlaylistViewController.strings; sourceTree = "<group>"; };
+		8482982923C384540088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InspectorWindowController.strings; sourceTree = "<group>"; };
+		8482982B23C384580088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/FilterWindowController.strings; sourceTree = "<group>"; };
+		8482982D23C3845B0088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AboutWindowController.strings; sourceTree = "<group>"; };
+		8482982F23C3845F0088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/OpenURLWindowController.strings; sourceTree = "<group>"; };
+		8482983123C384620088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/HistoryWindowController.strings; sourceTree = "<group>"; };
+		8482983323C384660088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
+		8482983523C3846A0088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MiniPlayerWindowController.strings; sourceTree = "<group>"; };
+		8482983723C3846E0088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CropSettingsViewController.strings; sourceTree = "<group>"; };
+		8482983923C384710088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/FreeSelectingViewController.strings; sourceTree = "<group>"; };
+		8482983B23C384770088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/FontPickerWindowController.strings; sourceTree = "<group>"; };
+		8482983D23C3847B0088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PrefGeneralViewController.strings; sourceTree = "<group>"; };
+		8482983F23C3847F0088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PrefUIViewController.strings; sourceTree = "<group>"; };
+		8482984123C384820088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
+		8482984323C384870088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PrefControlViewController.strings; sourceTree = "<group>"; };
+		8482984523C3848B0088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PrefKeyBindingViewController.strings; sourceTree = "<group>"; };
+		8482984723C3848F0088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/KeyRecordViewController.strings; sourceTree = "<group>"; };
+		8482984923C384930088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PrefAdvancedViewController.strings; sourceTree = "<group>"; };
+		8482984B23C384960088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PrefCodecViewController.strings; sourceTree = "<group>"; };
+		8482984D23C3849A0088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PrefSubViewController.strings; sourceTree = "<group>"; };
+		8482984F23C3849D0088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PrefNetworkViewController.strings; sourceTree = "<group>"; };
+		8482985123C384A10088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PrefUtilsViewController.strings; sourceTree = "<group>"; };
+		8482985323C384A40088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PreferenceWindowController.strings; sourceTree = "<group>"; };
+		8482985523C384A80088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SubChooseViewController.strings; sourceTree = "<group>"; };
+		8482985623C384B00088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8482985723C384B70088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8482985823C384BA0088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Contribution.rtf; sourceTree = "<group>"; };
+		8482985923C384CE0088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/FilterPresets.strings; sourceTree = "<group>"; };
+		8482985A23C384F10088E223 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/KeyBinding.strings; sourceTree = "<group>"; };
 		8483FAFF1EDFF325000F55D6 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		84879A961E0FFC7E0004F894 /* PrefUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefUIViewController.swift; sourceTree = "<group>"; };
 		8487BEC01D744FA800FD17B0 /* FlippedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FlippedView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -941,6 +962,38 @@
 		84AB8BCE2122235900E478BB /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/PrefUtilsViewController.strings; sourceTree = "<group>"; };
 		84AE59481E0FD65800771B7E /* MainMenuActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuActions.swift; sourceTree = "<group>"; };
 		84AF03D51E674930003E3753 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "zh-Hans"; path = "zh-Hans.lproj/Contribution.rtf"; sourceTree = "<group>"; };
+		84B3B1EB23C0CE7100340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		84B3B1EC23C0CE7100340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/MainWindowController.strings; sourceTree = "<group>"; };
+		84B3B1ED23C0CE7100340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/QuickSettingViewController.strings; sourceTree = "<group>"; };
+		84B3B1EE23C0CE7100340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/PlaylistViewController.strings; sourceTree = "<group>"; };
+		84B3B1EF23C0CE7100340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/InspectorWindowController.strings; sourceTree = "<group>"; };
+		84B3B1F023C0CE7100340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/FilterWindowController.strings; sourceTree = "<group>"; };
+		84B3B1F123C0CE7100340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/AboutWindowController.strings; sourceTree = "<group>"; };
+		84B3B1F223C0CE7200340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/OpenURLWindowController.strings; sourceTree = "<group>"; };
+		84B3B1F323C0CE7200340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/HistoryWindowController.strings; sourceTree = "<group>"; };
+		84B3B1F423C0CE7200340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
+		84B3B1F523C0CE7200340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/MiniPlayerWindowController.strings; sourceTree = "<group>"; };
+		84B3B1F623C0CE7200340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/CropSettingsViewController.strings; sourceTree = "<group>"; };
+		84B3B1F723C0CE7200340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/FreeSelectingViewController.strings; sourceTree = "<group>"; };
+		84B3B1F823C0CE7200340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/FontPickerWindowController.strings; sourceTree = "<group>"; };
+		84B3B1F923C0CE7200340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/PrefGeneralViewController.strings; sourceTree = "<group>"; };
+		84B3B1FA23C0CE7200340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/PrefUIViewController.strings; sourceTree = "<group>"; };
+		84B3B1FB23C0CE7200340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
+		84B3B1FC23C0CE7200340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/PrefControlViewController.strings; sourceTree = "<group>"; };
+		84B3B1FD23C0CE7200340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/PrefKeyBindingViewController.strings; sourceTree = "<group>"; };
+		84B3B1FE23C0CE7200340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/KeyRecordViewController.strings; sourceTree = "<group>"; };
+		84B3B1FF23C0CE7200340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/PrefAdvancedViewController.strings; sourceTree = "<group>"; };
+		84B3B20023C0CE7200340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/PrefCodecViewController.strings; sourceTree = "<group>"; };
+		84B3B20123C0CE7200340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/PrefSubViewController.strings; sourceTree = "<group>"; };
+		84B3B20223C0CE7300340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/PrefNetworkViewController.strings; sourceTree = "<group>"; };
+		84B3B20323C0CE7300340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/PrefUtilsViewController.strings; sourceTree = "<group>"; };
+		84B3B20423C0CE7300340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/PreferenceWindowController.strings; sourceTree = "<group>"; };
+		84B3B20523C0CE7300340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/SubChooseViewController.strings; sourceTree = "<group>"; };
+		84B3B20623C0CE9900340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = tr; path = tr.lproj/Contribution.rtf; sourceTree = "<group>"; };
+		84B3B20723C0CEA200340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		84B3B20823C0CEAB00340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		84B3B20923C0CF0900340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/KeyBinding.strings; sourceTree = "<group>"; };
+		84B3B20A23C0D02200340754 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/FilterPresets.strings; sourceTree = "<group>"; };
 		84BAFD3A21404572006B3CC1 /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/OpenURLWindowController.strings; sourceTree = "<group>"; };
 		84BAFD3B2142FE25006B3CC1 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/MiniPlayerWindowController.strings; sourceTree = "<group>"; };
 		84BAFD3C2142FE2E006B3CC1 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/OpenURLWindowController.strings; sourceTree = "<group>"; };
@@ -1035,6 +1088,7 @@
 		84CE10BA22E6EAA1008ED3AC /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = pl; path = pl.lproj/Contribution.rtf; sourceTree = "<group>"; };
 		84CE10BB22E6EAA1008ED3AC /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/FilterPresets.strings; sourceTree = "<group>"; };
 		84CE10BC22E6EAA1008ED3AC /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/KeyBinding.strings; sourceTree = "<group>"; };
+		84CFC92523F8DDE000381E5B /* PlayerWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerWindowController.swift; sourceTree = "<group>"; };
 		84D0FB7C1F5E519300C6A6A7 /* FreeSelectingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FreeSelectingViewController.swift; sourceTree = "<group>"; };
 		84D0FB801F5E5A4000C6A6A7 /* CropBoxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropBoxViewController.swift; sourceTree = "<group>"; };
 		84D0FB831F5E6A3800C6A6A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FreeSelectingViewController.xib; sourceTree = "<group>"; };
@@ -1049,6 +1103,38 @@
 		84E48D4C1E0F1090002C7A3F /* FilterWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterWindowController.swift; sourceTree = "<group>"; };
 		84E745D51DFDD4FD00588DED /* KeyCodeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyCodeHelper.swift; sourceTree = "<group>"; };
 		84E745D81DFDE8C100588DED /* input.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.conf; sourceTree = "<group>"; };
+		84EA52C32404E83900F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		84EA52C42404E83900F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/MainWindowController.strings; sourceTree = "<group>"; };
+		84EA52C52404E83A00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/QuickSettingViewController.strings; sourceTree = "<group>"; };
+		84EA52C62404E83A00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/PlaylistViewController.strings; sourceTree = "<group>"; };
+		84EA52C72404E83A00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/InspectorWindowController.strings; sourceTree = "<group>"; };
+		84EA52C82404E83A00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/FilterWindowController.strings; sourceTree = "<group>"; };
+		84EA52C92404E83A00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/AboutWindowController.strings; sourceTree = "<group>"; };
+		84EA52CA2404E83A00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/OpenURLWindowController.strings; sourceTree = "<group>"; };
+		84EA52CB2404E83A00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/HistoryWindowController.strings; sourceTree = "<group>"; };
+		84EA52CC2404E83A00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
+		84EA52CD2404E83A00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/MiniPlayerWindowController.strings; sourceTree = "<group>"; };
+		84EA52CE2404E83A00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/CropSettingsViewController.strings; sourceTree = "<group>"; };
+		84EA52CF2404E83A00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/FreeSelectingViewController.strings; sourceTree = "<group>"; };
+		84EA52D02404E83A00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/FontPickerWindowController.strings; sourceTree = "<group>"; };
+		84EA52D12404E83B00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/PrefGeneralViewController.strings; sourceTree = "<group>"; };
+		84EA52D22404E83B00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/PrefUIViewController.strings; sourceTree = "<group>"; };
+		84EA52D32404E83B00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
+		84EA52D42404E83B00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/PrefControlViewController.strings; sourceTree = "<group>"; };
+		84EA52D52404E83B00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/PrefKeyBindingViewController.strings; sourceTree = "<group>"; };
+		84EA52D62404E83B00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/KeyRecordViewController.strings; sourceTree = "<group>"; };
+		84EA52D72404E83B00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/PrefAdvancedViewController.strings; sourceTree = "<group>"; };
+		84EA52D82404E83B00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/PrefCodecViewController.strings; sourceTree = "<group>"; };
+		84EA52D92404E83B00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/PrefSubViewController.strings; sourceTree = "<group>"; };
+		84EA52DA2404E83C00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/PrefNetworkViewController.strings; sourceTree = "<group>"; };
+		84EA52DB2404E83C00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/PrefUtilsViewController.strings; sourceTree = "<group>"; };
+		84EA52DC2404E83C00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/PreferenceWindowController.strings; sourceTree = "<group>"; };
+		84EA52DD2404E83C00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/SubChooseViewController.strings; sourceTree = "<group>"; };
+		84EA52DE2404E83C00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		84EA52DF2404E83C00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/Localizable.strings; sourceTree = "<group>"; };
+		84EA52E12404E83C00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/FilterPresets.strings; sourceTree = "<group>"; };
+		84EA52E22404E83C00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/KeyBinding.strings; sourceTree = "<group>"; };
+		84EA52E32404E88900F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = ca; path = ca.lproj/Contribution.rtf; sourceTree = "<group>"; };
 		84EB1ED61D2F51D3004FA5A1 /* IINA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IINA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84EB1ED91D2F51D3004FA5A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84EB1EDB1D2F51D3004FA5A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -1071,7 +1157,6 @@
 		84FBCB371EEACDDD0076C77C /* FFmpegController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFmpegController.m; sourceTree = "<group>"; };
 		84FBF23D1EF06A90003EA491 /* ThumbnailCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailCache.swift; sourceTree = "<group>"; };
 		84FF84701D2FF698001B318A /* client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = client.h; sourceTree = "<group>"; };
-		867483705008F086E07B0A6B /* Pods_iina.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iina.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		875FDF9E2157873300F7F7FD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/PrefUtilsViewController.strings; sourceTree = "<group>"; };
 		875FDFA02157874B00F7F7FD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
 		875FDFA22157876200F7F7FD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/OpenURLWindowController.strings; sourceTree = "<group>"; };
@@ -1096,7 +1181,6 @@
 		9DB9ED5C20889D66006B1492 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SubChooseViewController.strings; sourceTree = "<group>"; };
 		9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationDisplayTextField.swift; sourceTree = "<group>"; };
 		9E63CAB61E3F7D0E00EA66C9 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
-		A1F8439D2926257DC5434942 /* Pods-iina.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iina.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iina/Pods-iina.debug.xcconfig"; sourceTree = "<group>"; };
 		B305513A2190B0C600D3F70E /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/MiniPlayerWindowController.strings; sourceTree = "<group>"; };
 		B3066F5F1F161538004D7559 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
 		B35E0A072107C0E500453AA7 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/PrefUtilsViewController.strings; sourceTree = "<group>"; };
@@ -1212,6 +1296,9 @@
 		E1298BD021A517CA00B646AD /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/KeyBinding.strings; sourceTree = "<group>"; };
 		E301EFD921312AB300BC8588 /* KeychainAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainAccess.swift; sourceTree = "<group>"; };
 		E322A4F720A8442E00C67D32 /* PlaylistPlaybackProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistPlaybackProgressView.swift; sourceTree = "<group>"; };
+		E32712AE24EAA14500359DAB /* ScreenshootOSDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshootOSDView.swift; sourceTree = "<group>"; };
+		E32712B324F2B8CA00359DAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ScreenshootOSDView.xib; sourceTree = "<group>"; };
+		E32712B624F2B8D200359DAB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
 		E33836832026223800ABC812 /* PrefOSCToolbarSettingsSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefOSCToolbarSettingsSheetController.swift; sourceTree = "<group>"; };
 		E3383687202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefOSCToolbarDraggingItemViewController.swift; sourceTree = "<group>"; };
 		E3383688202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrefOSCToolbarDraggingItemViewController.xib; sourceTree = "<group>"; };
@@ -1224,15 +1311,94 @@
 		E342832E20B7149800139865 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		E34A0E022053F93A00B50097 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PrefOSCToolbarSettingsSheetController.xib; sourceTree = "<group>"; };
 		E34A0E052053F93E00B50097 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PrefOSCToolbarSettingsSheetController.strings"; sourceTree = "<group>"; };
+		E34C0C3024934D7B0065A0C6 /* Switch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Switch.swift; sourceTree = "<group>"; };
 		E34E0ADF2007E23600BDC8BA /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/FreeSelectingViewController.strings"; sourceTree = "<group>"; };
+		E34E909B24F821280073BF04 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/GuideWindowController.xib; sourceTree = "<group>"; };
+		E34E909E24F821300073BF04 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
+		E34E90C824F821B00073BF04 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
+		E34E90CA24F821B10073BF04 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/GuideWindowController.strings"; sourceTree = "<group>"; };
+		E34E90CC24F821B20073BF04 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/GuideWindowController.strings"; sourceTree = "<group>"; };
+		E34E90CE24F821B20073BF04 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
+		E34E90D024F821B40073BF04 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
+		E34E90D224F821B50073BF04 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
+		E34E90D424F821B60073BF04 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
+		E34E90D624F821B60073BF04 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
+		E34E90D824F821B70073BF04 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
+		E34E90DA24F821B80073BF04 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
+		E34E90DC24F821B90073BF04 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
+		E34E90DE24F821B90073BF04 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
+		E34E90E024F821BA0073BF04 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/GuideWindowController.strings"; sourceTree = "<group>"; };
+		E34E90E224F821BB0073BF04 /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
+		E34E90E424F821BC0073BF04 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
+		E34E90E624F821BD0073BF04 /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
+		E34E90E824F821BD0073BF04 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
+		E34E90EA24F821BE0073BF04 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
+		E34E90EC24F821BF0073BF04 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
+		E34E90EE24F821C00073BF04 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
 		E3513AF620EF79C500F8C347 /* PreferenceWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceWindowController.swift; sourceTree = "<group>"; };
 		E3513AFA20F120F600F8C347 /* PreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceViewController.swift; sourceTree = "<group>"; };
+		E36E8D7A24F6052F00B8C097 /* GuideWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideWindowController.swift; sourceTree = "<group>"; };
 		E374160B20F138A900B4F7F9 /* CollapseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapseView.swift; sourceTree = "<group>"; };
 		E374160D20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefUtilsViewController.swift; sourceTree = "<group>"; };
 		E374161220F3C0AB00B4F7F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PrefUtilsViewController.xib; sourceTree = "<group>"; };
 		E374161520F3C0AD00B4F7F9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PrefUtilsViewController.strings"; sourceTree = "<group>"; };
-		E38B32172157DC18000F6D27 /* ISO639TokenFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISO639TokenFieldDelegate.swift; sourceTree = "<group>"; };
+		E38372912443634500F57718 /* LanguageTokenField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageTokenField.swift; sourceTree = "<group>"; };
 		E38BD4AE20054BD9007635FC /* MainWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindow.swift; sourceTree = "<group>"; };
+		E393669923BDD1850070D626 /* IINA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IINA.entitlements; sourceTree = "<group>"; };
+		E3B25F0824FF50580068B9B0 /* libswscale.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswscale.5.dylib; path = deps/lib/libswscale.5.dylib; sourceTree = "<group>"; };
+		E3B25F0924FF50580068B9B0 /* libgnutls.30.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgnutls.30.dylib; path = deps/lib/libgnutls.30.dylib; sourceTree = "<group>"; };
+		E3B25F0A24FF50590068B9B0 /* librtmp.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = librtmp.1.dylib; path = deps/lib/librtmp.1.dylib; sourceTree = "<group>"; };
+		E3B25F0B24FF50590068B9B0 /* libfribidi.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfribidi.0.dylib; path = deps/lib/libfribidi.0.dylib; sourceTree = "<group>"; };
+		E3B25F0C24FF50590068B9B0 /* libspeex.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libspeex.1.dylib; path = deps/lib/libspeex.1.dylib; sourceTree = "<group>"; };
+		E3B25F0D24FF50590068B9B0 /* libb2.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libb2.1.dylib; path = deps/lib/libb2.1.dylib; sourceTree = "<group>"; };
+		E3B25F0E24FF50590068B9B0 /* libpcre.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpcre.1.dylib; path = deps/lib/libpcre.1.dylib; sourceTree = "<group>"; };
+		E3B25F0F24FF50590068B9B0 /* libhogweed.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libhogweed.6.dylib; path = deps/lib/libhogweed.6.dylib; sourceTree = "<group>"; };
+		E3B25F1024FF50590068B9B0 /* liblept.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblept.5.dylib; path = deps/lib/liblept.5.dylib; sourceTree = "<group>"; };
+		E3B25F1124FF50590068B9B0 /* libunistring.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libunistring.2.dylib; path = deps/lib/libunistring.2.dylib; sourceTree = "<group>"; };
+		E3B25F1224FF50590068B9B0 /* libtasn1.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtasn1.6.dylib; path = deps/lib/libtasn1.6.dylib; sourceTree = "<group>"; };
+		E3B25F1324FF50590068B9B0 /* libfreetype.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreetype.6.dylib; path = deps/lib/libfreetype.6.dylib; sourceTree = "<group>"; };
+		E3B25F1424FF50590068B9B0 /* libuchardet.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libuchardet.0.dylib; path = deps/lib/libuchardet.0.dylib; sourceTree = "<group>"; };
+		E3B25F1524FF50590068B9B0 /* libvidstab.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libvidstab.1.1.dylib; path = deps/lib/libvidstab.1.1.dylib; sourceTree = "<group>"; };
+		E3B25F1624FF50590068B9B0 /* libsoxr.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsoxr.0.dylib; path = deps/lib/libsoxr.0.dylib; sourceTree = "<group>"; };
+		E3B25F1724FF50590068B9B0 /* liblcms2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblcms2.2.dylib; path = deps/lib/liblcms2.2.dylib; sourceTree = "<group>"; };
+		E3B25F1824FF50590068B9B0 /* libgmp.10.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgmp.10.dylib; path = deps/lib/libgmp.10.dylib; sourceTree = "<group>"; };
+		E3B25F1924FF50590068B9B0 /* libnettle.8.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libnettle.8.dylib; path = deps/lib/libnettle.8.dylib; sourceTree = "<group>"; };
+		E3B25F1A24FF50590068B9B0 /* libidn2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libidn2.0.dylib; path = deps/lib/libidn2.0.dylib; sourceTree = "<group>"; };
+		E3B25F1B24FF505A0068B9B0 /* libssl.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.1.1.dylib; path = deps/lib/libssl.1.1.dylib; sourceTree = "<group>"; };
+		E3B25F1C24FF505A0068B9B0 /* libopenjp2.7.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopenjp2.7.dylib; path = deps/lib/libopenjp2.7.dylib; sourceTree = "<group>"; };
+		E3B25F1D24FF505A0068B9B0 /* libgraphite2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgraphite2.3.dylib; path = deps/lib/libgraphite2.3.dylib; sourceTree = "<group>"; };
+		E3B25F1E24FF505A0068B9B0 /* libswresample.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswresample.3.dylib; path = deps/lib/libswresample.3.dylib; sourceTree = "<group>"; };
+		E3B25F1F24FF505A0068B9B0 /* libavresample.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavresample.4.dylib; path = deps/lib/libavresample.4.dylib; sourceTree = "<group>"; };
+		E3B25F2024FF505A0068B9B0 /* libp11-kit.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libp11-kit.0.dylib"; path = "deps/lib/libp11-kit.0.dylib"; sourceTree = "<group>"; };
+		E3B25F2124FF505A0068B9B0 /* libsnappy.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsnappy.1.dylib; path = deps/lib/libsnappy.1.dylib; sourceTree = "<group>"; };
+		E3B25F2224FF505A0068B9B0 /* libwebpmux.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libwebpmux.3.dylib; path = deps/lib/libwebpmux.3.dylib; sourceTree = "<group>"; };
+		E3B25F2324FF505A0068B9B0 /* libavdevice.58.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavdevice.58.dylib; path = deps/lib/libavdevice.58.dylib; sourceTree = "<group>"; };
+		E3B25F2424FF505A0068B9B0 /* libharfbuzz.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libharfbuzz.0.dylib; path = deps/lib/libharfbuzz.0.dylib; sourceTree = "<group>"; };
+		E3B25F2524FF505A0068B9B0 /* libarchive.13.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libarchive.13.dylib; path = deps/lib/libarchive.13.dylib; sourceTree = "<group>"; };
+		E3B25F2624FF505A0068B9B0 /* libmpv.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpv.1.dylib; path = deps/lib/libmpv.1.dylib; sourceTree = "<group>"; };
+		E3B25F2724FF505A0068B9B0 /* libglib-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libglib-2.0.0.dylib"; path = "deps/lib/libglib-2.0.0.dylib"; sourceTree = "<group>"; };
+		E3B25F2824FF505B0068B9B0 /* librubberband.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = librubberband.2.dylib; path = deps/lib/librubberband.2.dylib; sourceTree = "<group>"; };
+		E3B25F2924FF505B0068B9B0 /* liblz4.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblz4.1.dylib; path = deps/lib/liblz4.1.dylib; sourceTree = "<group>"; };
+		E3B25F2A24FF505B0068B9B0 /* libpostproc.55.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpostproc.55.dylib; path = deps/lib/libpostproc.55.dylib; sourceTree = "<group>"; };
+		E3B25F2C24FF505B0068B9B0 /* libcrypto.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.1.1.dylib; path = deps/lib/libcrypto.1.1.dylib; sourceTree = "<group>"; };
+		E3B25F2D24FF505B0068B9B0 /* libgif.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgif.dylib; path = deps/lib/libgif.dylib; sourceTree = "<group>"; };
+		E3B25F2E24FF505B0068B9B0 /* libwebp.7.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libwebp.7.dylib; path = deps/lib/libwebp.7.dylib; sourceTree = "<group>"; };
+		E3B25F2F24FF505B0068B9B0 /* libbluray.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbluray.2.dylib; path = deps/lib/libbluray.2.dylib; sourceTree = "<group>"; };
+		E3B25F3024FF505B0068B9B0 /* libintl.8.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libintl.8.dylib; path = deps/lib/libintl.8.dylib; sourceTree = "<group>"; };
+		E3B25F3124FF505B0068B9B0 /* libtiff.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtiff.5.dylib; path = deps/lib/libtiff.5.dylib; sourceTree = "<group>"; };
+		E3B25F3224FF505C0068B9B0 /* libavformat.58.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavformat.58.dylib; path = deps/lib/libavformat.58.dylib; sourceTree = "<group>"; };
+		E3B25F3324FF505C0068B9B0 /* libtesseract.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtesseract.4.dylib; path = deps/lib/libtesseract.4.dylib; sourceTree = "<group>"; };
+		E3B25F3424FF505C0068B9B0 /* libpng16.16.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpng16.16.dylib; path = deps/lib/libpng16.16.dylib; sourceTree = "<group>"; };
+		E3B25F3524FF505C0068B9B0 /* libfontconfig.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfontconfig.1.dylib; path = deps/lib/libfontconfig.1.dylib; sourceTree = "<group>"; };
+		E3B25F3624FF505C0068B9B0 /* liblua.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblua.5.1.dylib; path = deps/lib/liblua.5.1.dylib; sourceTree = "<group>"; };
+		E3B25F3724FF505C0068B9B0 /* liblzma.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblzma.5.dylib; path = deps/lib/liblzma.5.dylib; sourceTree = "<group>"; };
+		E3B25F3824FF505C0068B9B0 /* libjpeg.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libjpeg.9.dylib; path = deps/lib/libjpeg.9.dylib; sourceTree = "<group>"; };
+		E3B25F3924FF505C0068B9B0 /* libavutil.56.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavutil.56.dylib; path = deps/lib/libavutil.56.dylib; sourceTree = "<group>"; };
+		E3B25F3A24FF505C0068B9B0 /* libzstd.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libzstd.1.dylib; path = deps/lib/libzstd.1.dylib; sourceTree = "<group>"; };
+		E3B25F3B24FF505C0068B9B0 /* libffi.7.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libffi.7.dylib; path = deps/lib/libffi.7.dylib; sourceTree = "<group>"; };
+		E3B25F3C24FF505D0068B9B0 /* libass.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libass.9.dylib; path = deps/lib/libass.9.dylib; sourceTree = "<group>"; };
+		E3B25F3D24FF505D0068B9B0 /* libavcodec.58.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavcodec.58.dylib; path = deps/lib/libavcodec.58.dylib; sourceTree = "<group>"; };
+		E3B25F3E24FF505D0068B9B0 /* libavfilter.7.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavfilter.7.dylib; path = deps/lib/libavfilter.7.dylib; sourceTree = "<group>"; };
 		E3B3DD5820FDB8A600325184 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PreferenceWindowController.xib; sourceTree = "<group>"; };
 		E3B3DD5B20FDB8A900325184 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PreferenceWindowController.strings"; sourceTree = "<group>"; };
 		E3BA79EC2131443A00529D99 /* OpenURLWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenURLWindowController.swift; sourceTree = "<group>"; };
@@ -1359,57 +1525,69 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				847DAAF72293EEF400351AD7 /* libtesseract.4.dylib in Frameworks */,
-				847DAAF32293EEF400351AD7 /* libavfilter.7.dylib in Frameworks */,
-				847DAB082293EEF400351AD7 /* libhogweed.4.dylib in Frameworks */,
-				847DAAF12293EEF400351AD7 /* libbluray.2.dylib in Frameworks */,
-				847DAB032293EEF400351AD7 /* libavcodec.58.dylib in Frameworks */,
-				847DAAFD2293EEF400351AD7 /* libgif.7.dylib in Frameworks */,
-				847DAB0D2293EEF400351AD7 /* libswresample.3.dylib in Frameworks */,
-				847DAAFB2293EEF400351AD7 /* libfribidi.0.dylib in Frameworks */,
-				847DAAFC2293EEF400351AD7 /* liblept.5.dylib in Frameworks */,
-				847DAAFE2293EEF400351AD7 /* librtmp.1.dylib in Frameworks */,
-				847DAAF62293EEF400351AD7 /* libopenjp2.7.dylib in Frameworks */,
-				847DAAF52293EEF400351AD7 /* libp11-kit.0.dylib in Frameworks */,
-				847DAAE82293EEF400351AD7 /* libfreetype.6.dylib in Frameworks */,
-				847DAAF42293EEF400351AD7 /* libpostproc.55.dylib in Frameworks */,
-				847DAB022293EEF400351AD7 /* libpng16.16.dylib in Frameworks */,
-				847DAAEA2293EEF400351AD7 /* libmpv.1.dylib in Frameworks */,
-				847DAB122293EEF400351AD7 /* libunistring.2.dylib in Frameworks */,
-				847DAAED2293EEF400351AD7 /* libwebp.7.dylib in Frameworks */,
-				847DAB052293EEF400351AD7 /* libavutil.56.dylib in Frameworks */,
-				847DAAE62293EEF400351AD7 /* libavresample.4.dylib in Frameworks */,
-				847DAB012293EEF400351AD7 /* libgmp.10.dylib in Frameworks */,
-				847DAAF22293EEF400351AD7 /* libass.9.dylib in Frameworks */,
-				847DAAF02293EEF400351AD7 /* libsnappy.1.dylib in Frameworks */,
-				847DAAF82293EEF400351AD7 /* libavformat.58.dylib in Frameworks */,
-				847DAB072293EEF400351AD7 /* libjpeg.9.dylib in Frameworks */,
+				B4E4470125CE3F930069F06E /* Sparkle in Frameworks */,
+				84279D7525B6DF59003B008B /* libdav1d.5.dylib in Frameworks */,
+				E3B25F5724FF505D0068B9B0 /* libp11-kit.0.dylib in Frameworks */,
+				E3B25F6124FF505D0068B9B0 /* libpostproc.55.dylib in Frameworks */,
+				8451E6D92604AEFC009A15D7 /* Just in Frameworks */,
+				E3B25F4024FF505D0068B9B0 /* libgnutls.30.dylib in Frameworks */,
+				E3B25F6324FF505D0068B9B0 /* libcrypto.1.1.dylib in Frameworks */,
+				E3B25F6924FF505D0068B9B0 /* libavformat.58.dylib in Frameworks */,
+				E3B25F4C24FF505D0068B9B0 /* libvidstab.1.1.dylib in Frameworks */,
+				E3B25F7524FF505E0068B9B0 /* libavfilter.7.dylib in Frameworks */,
+				E3B25F5E24FF505D0068B9B0 /* libglib-2.0.0.dylib in Frameworks */,
+				E3B25F7224FF505E0068B9B0 /* libffi.7.dylib in Frameworks */,
+				E3B25F4D24FF505D0068B9B0 /* libsoxr.0.dylib in Frameworks */,
+				E3B25F5024FF505D0068B9B0 /* libnettle.8.dylib in Frameworks */,
+				E3B25F5524FF505D0068B9B0 /* libswresample.3.dylib in Frameworks */,
+				E3B25F5624FF505D0068B9B0 /* libavresample.4.dylib in Frameworks */,
+				84279D7725B6DF77003B008B /* libmujs.so in Frameworks */,
+				E3B25F3F24FF505D0068B9B0 /* libswscale.5.dylib in Frameworks */,
+				E3B25F6624FF505D0068B9B0 /* libbluray.2.dylib in Frameworks */,
+				E3B25F4124FF505D0068B9B0 /* librtmp.1.dylib in Frameworks */,
+				E3B25F4524FF505D0068B9B0 /* libpcre.1.dylib in Frameworks */,
+				E3B25F5124FF505D0068B9B0 /* libidn2.0.dylib in Frameworks */,
 				496B19921E2968530035AF10 /* PIP.framework in Frameworks */,
-				847DAAEC2293EEF400351AD7 /* libharfbuzz.0.dylib in Frameworks */,
-				847DAB0E2293EEF400351AD7 /* libfontconfig.1.dylib in Frameworks */,
-				847DAB152293EEF400351AD7 /* libavdevice.58.dylib in Frameworks */,
-				847DAAEE2293EEF400351AD7 /* libnettle.6.dylib in Frameworks */,
-				847DAB0A2293EEF400351AD7 /* liblcms2.2.dylib in Frameworks */,
-				847DAB0F2293EEF400351AD7 /* libswscale.5.dylib in Frameworks */,
-				847DAAF92293EEF400351AD7 /* libglib-2.0.0.dylib in Frameworks */,
-				847DAB142293EEF400351AD7 /* libtiff.5.dylib in Frameworks */,
-				847DAB0C2293EEF400351AD7 /* libarchive.13.dylib in Frameworks */,
-				847DAAFA2293EEF400351AD7 /* libpcre.1.dylib in Frameworks */,
-				847DAAEB2293EEF400351AD7 /* libspeex.1.dylib in Frameworks */,
-				847DAB102293EEF400351AD7 /* libtasn1.6.dylib in Frameworks */,
-				847DAAE92293EEF400351AD7 /* libsoxr.0.dylib in Frameworks */,
-				847DAB112293EEF400351AD7 /* libuchardet.0.dylib in Frameworks */,
-				847DAB062293EEF400351AD7 /* libgraphite2.3.dylib in Frameworks */,
-				847DAAEF2293EEF400351AD7 /* libffi.6.dylib in Frameworks */,
-				847DAB092293EEF400351AD7 /* libssl.1.0.0.dylib in Frameworks */,
-				847DAB002293EEF400351AD7 /* libgnutls.30.dylib in Frameworks */,
-				847DAB0B2293EEF400351AD7 /* liblzma.5.dylib in Frameworks */,
-				847DAB132293EEF400351AD7 /* libcrypto.1.0.0.dylib in Frameworks */,
-				847DAB042293EEF400351AD7 /* libintl.8.dylib in Frameworks */,
 				8403CEA72007CBD400645516 /* MediaPlayer.framework in Frameworks */,
-				5FE59D56E0B71860AC1EDCA8 /* Pods_iina.framework in Frameworks */,
-				847DAAE72293EEF400351AD7 /* librubberband.2.dylib in Frameworks */,
-				847DAAFF2293EEF400351AD7 /* liblua.5.1.dylib in Frameworks */,
+				B4E446F225CB53FF0069F06E /* Gzip in Frameworks */,
+				E3B25F4424FF505D0068B9B0 /* libb2.1.dylib in Frameworks */,
+				E3B25F4624FF505D0068B9B0 /* libhogweed.6.dylib in Frameworks */,
+				E3B25F6A24FF505D0068B9B0 /* libtesseract.4.dylib in Frameworks */,
+				E3B25F7024FF505E0068B9B0 /* libavutil.56.dylib in Frameworks */,
+				E3B25F6524FF505D0068B9B0 /* libwebp.7.dylib in Frameworks */,
+				E3B25F6E24FF505D0068B9B0 /* liblzma.5.dylib in Frameworks */,
+				E3B25F4E24FF505D0068B9B0 /* liblcms2.2.dylib in Frameworks */,
+				E3B25F6F24FF505E0068B9B0 /* libjpeg.9.dylib in Frameworks */,
+				B4E446E825CB53920069F06E /* PromiseKit in Frameworks */,
+				E3B25F5F24FF505D0068B9B0 /* librubberband.2.dylib in Frameworks */,
+				E3B25F7124FF505E0068B9B0 /* libzstd.1.dylib in Frameworks */,
+				E3B25F6C24FF505D0068B9B0 /* libfontconfig.1.dylib in Frameworks */,
+				E3B25F5A24FF505D0068B9B0 /* libavdevice.58.dylib in Frameworks */,
+				E3B25F5924FF505D0068B9B0 /* libwebpmux.3.dylib in Frameworks */,
+				E3B25F6B24FF505D0068B9B0 /* libpng16.16.dylib in Frameworks */,
+				E3B25F5224FF505D0068B9B0 /* libssl.1.1.dylib in Frameworks */,
+				E3B25F4924FF505D0068B9B0 /* libtasn1.6.dylib in Frameworks */,
+				E3B25F6D24FF505D0068B9B0 /* liblua.5.1.dylib in Frameworks */,
+				E3B25F4824FF505D0068B9B0 /* libunistring.2.dylib in Frameworks */,
+				E3B25F4B24FF505D0068B9B0 /* libuchardet.0.dylib in Frameworks */,
+				B4E446F725CB54EF0069F06E /* Mustache in Frameworks */,
+				E3B25F6724FF505D0068B9B0 /* libintl.8.dylib in Frameworks */,
+				E3B25F5B24FF505D0068B9B0 /* libharfbuzz.0.dylib in Frameworks */,
+				E3B25F4724FF505D0068B9B0 /* liblept.5.dylib in Frameworks */,
+				E3B25F7424FF505E0068B9B0 /* libavcodec.58.dylib in Frameworks */,
+				E3B25F6024FF505D0068B9B0 /* liblz4.1.dylib in Frameworks */,
+				E3B25F4F24FF505D0068B9B0 /* libgmp.10.dylib in Frameworks */,
+				E3B25F5824FF505D0068B9B0 /* libsnappy.1.dylib in Frameworks */,
+				E3B25F7324FF505E0068B9B0 /* libass.9.dylib in Frameworks */,
+				E3B25F4324FF505D0068B9B0 /* libspeex.1.dylib in Frameworks */,
+				E3B25F4A24FF505D0068B9B0 /* libfreetype.6.dylib in Frameworks */,
+				E3B25F6824FF505D0068B9B0 /* libtiff.5.dylib in Frameworks */,
+				E3B25F5424FF505D0068B9B0 /* libgraphite2.3.dylib in Frameworks */,
+				E3B25F4224FF505D0068B9B0 /* libfribidi.0.dylib in Frameworks */,
+				E3B25F6424FF505D0068B9B0 /* libgif.dylib in Frameworks */,
+				E3B25F5324FF505D0068B9B0 /* libopenjp2.7.dylib in Frameworks */,
+				E3B25F5D24FF505D0068B9B0 /* libmpv.1.dylib in Frameworks */,
+				E3B25F5C24FF505D0068B9B0 /* libarchive.13.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1473,6 +1651,7 @@
 				E3B3DD5920FDB8A600325184 /* PreferenceWindowController.xib */,
 				E3513AFA20F120F600F8C347 /* PreferenceViewController.swift */,
 				E374160B20F138A900B4F7F9 /* CollapseView.swift */,
+				519872FE26879B9B00F84BCC /* AccessibilityPreferences.swift */,
 			);
 			name = Preference;
 			sourceTree = "<group>";
@@ -1518,58 +1697,65 @@
 		848290731D95978100C3C76C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				847DAADC2293EEF300351AD7 /* libarchive.13.dylib */,
-				847DAAC22293EEF100351AD7 /* libass.9.dylib */,
-				847DAAD32293EEF300351AD7 /* libavcodec.58.dylib */,
-				847DAAE52293EEF400351AD7 /* libavdevice.58.dylib */,
-				847DAAC32293EEF100351AD7 /* libavfilter.7.dylib */,
-				847DAAC82293EEF200351AD7 /* libavformat.58.dylib */,
-				847DAAB62293EEF000351AD7 /* libavresample.4.dylib */,
-				847DAAD52293EEF300351AD7 /* libavutil.56.dylib */,
-				847DAAC12293EEF100351AD7 /* libbluray.2.dylib */,
-				847DAAE32293EEF400351AD7 /* libcrypto.1.0.0.dylib */,
-				847DAABF2293EEF100351AD7 /* libffi.6.dylib */,
-				847DAADE2293EEF400351AD7 /* libfontconfig.1.dylib */,
-				847DAAB82293EEF100351AD7 /* libfreetype.6.dylib */,
-				847DAACB2293EEF200351AD7 /* libfribidi.0.dylib */,
-				847DAACD2293EEF200351AD7 /* libgif.7.dylib */,
-				847DAAC92293EEF200351AD7 /* libglib-2.0.0.dylib */,
-				847DAAD12293EEF200351AD7 /* libgmp.10.dylib */,
-				847DAAD02293EEF200351AD7 /* libgnutls.30.dylib */,
-				847DAAD62293EEF300351AD7 /* libgraphite2.3.dylib */,
-				847DAABC2293EEF100351AD7 /* libharfbuzz.0.dylib */,
-				847DAAD82293EEF300351AD7 /* libhogweed.4.dylib */,
-				847DAAD42293EEF300351AD7 /* libintl.8.dylib */,
-				847DAAD72293EEF300351AD7 /* libjpeg.9.dylib */,
-				847DAADA2293EEF300351AD7 /* liblcms2.2.dylib */,
-				847DAACC2293EEF200351AD7 /* liblept.5.dylib */,
-				847DAACF2293EEF200351AD7 /* liblua.5.1.dylib */,
-				847DAADB2293EEF300351AD7 /* liblzma.5.dylib */,
-				847DAABA2293EEF100351AD7 /* libmpv.1.dylib */,
-				847DAABE2293EEF100351AD7 /* libnettle.6.dylib */,
-				847DAAC62293EEF100351AD7 /* libopenjp2.7.dylib */,
-				847DAAC52293EEF100351AD7 /* libp11-kit.0.dylib */,
-				847DAACA2293EEF200351AD7 /* libpcre.1.dylib */,
-				847DAAD22293EEF200351AD7 /* libpng16.16.dylib */,
-				847DAAC42293EEF100351AD7 /* libpostproc.55.dylib */,
-				847DAACE2293EEF200351AD7 /* librtmp.1.dylib */,
-				847DAAB72293EEF000351AD7 /* librubberband.2.dylib */,
-				847DAAC02293EEF100351AD7 /* libsnappy.1.dylib */,
-				847DAAB92293EEF100351AD7 /* libsoxr.0.dylib */,
-				847DAABB2293EEF100351AD7 /* libspeex.1.dylib */,
-				847DAAD92293EEF300351AD7 /* libssl.1.0.0.dylib */,
-				847DAADD2293EEF400351AD7 /* libswresample.3.dylib */,
-				847DAADF2293EEF400351AD7 /* libswscale.5.dylib */,
-				847DAAE02293EEF400351AD7 /* libtasn1.6.dylib */,
-				847DAAC72293EEF100351AD7 /* libtesseract.4.dylib */,
-				847DAAE42293EEF400351AD7 /* libtiff.5.dylib */,
-				847DAAE12293EEF400351AD7 /* libuchardet.0.dylib */,
-				847DAAE22293EEF400351AD7 /* libunistring.2.dylib */,
-				847DAABD2293EEF100351AD7 /* libwebp.7.dylib */,
+				E3B25F2524FF505A0068B9B0 /* libarchive.13.dylib */,
+				E3B25F3C24FF505D0068B9B0 /* libass.9.dylib */,
+				E3B25F3D24FF505D0068B9B0 /* libavcodec.58.dylib */,
+				E3B25F2324FF505A0068B9B0 /* libavdevice.58.dylib */,
+				E3B25F3E24FF505D0068B9B0 /* libavfilter.7.dylib */,
+				E3B25F3224FF505C0068B9B0 /* libavformat.58.dylib */,
+				E3B25F1F24FF505A0068B9B0 /* libavresample.4.dylib */,
+				E3B25F3924FF505C0068B9B0 /* libavutil.56.dylib */,
+				E3B25F0D24FF50590068B9B0 /* libb2.1.dylib */,
+				E3B25F2F24FF505B0068B9B0 /* libbluray.2.dylib */,
+				84279D7425B6DF59003B008B /* libdav1d.5.dylib */,
+				E3B25F2C24FF505B0068B9B0 /* libcrypto.1.1.dylib */,
+				E3B25F3B24FF505C0068B9B0 /* libffi.7.dylib */,
+				E3B25F3524FF505C0068B9B0 /* libfontconfig.1.dylib */,
+				E3B25F1324FF50590068B9B0 /* libfreetype.6.dylib */,
+				E3B25F0B24FF50590068B9B0 /* libfribidi.0.dylib */,
+				E3B25F2D24FF505B0068B9B0 /* libgif.dylib */,
+				E3B25F2724FF505A0068B9B0 /* libglib-2.0.0.dylib */,
+				E3B25F1824FF50590068B9B0 /* libgmp.10.dylib */,
+				E3B25F0924FF50580068B9B0 /* libgnutls.30.dylib */,
+				E3B25F1D24FF505A0068B9B0 /* libgraphite2.3.dylib */,
+				E3B25F2424FF505A0068B9B0 /* libharfbuzz.0.dylib */,
+				E3B25F0F24FF50590068B9B0 /* libhogweed.6.dylib */,
+				E3B25F1A24FF50590068B9B0 /* libidn2.0.dylib */,
+				E3B25F3024FF505B0068B9B0 /* libintl.8.dylib */,
+				E3B25F3824FF505C0068B9B0 /* libjpeg.9.dylib */,
+				E3B25F1724FF50590068B9B0 /* liblcms2.2.dylib */,
+				E3B25F1024FF50590068B9B0 /* liblept.5.dylib */,
+				E3B25F3624FF505C0068B9B0 /* liblua.5.1.dylib */,
+				E3B25F2924FF505B0068B9B0 /* liblz4.1.dylib */,
+				E3B25F3724FF505C0068B9B0 /* liblzma.5.dylib */,
+				E3B25F2624FF505A0068B9B0 /* libmpv.1.dylib */,
+				E3B25F1924FF50590068B9B0 /* libnettle.8.dylib */,
+				E3B25F1C24FF505A0068B9B0 /* libopenjp2.7.dylib */,
+				E3B25F2024FF505A0068B9B0 /* libp11-kit.0.dylib */,
+				E3B25F0E24FF50590068B9B0 /* libpcre.1.dylib */,
+				E3B25F3424FF505C0068B9B0 /* libpng16.16.dylib */,
+				E3B25F2A24FF505B0068B9B0 /* libpostproc.55.dylib */,
+				E3B25F0A24FF50590068B9B0 /* librtmp.1.dylib */,
+				E3B25F2824FF505B0068B9B0 /* librubberband.2.dylib */,
+				E3B25F2124FF505A0068B9B0 /* libsnappy.1.dylib */,
+				E3B25F1624FF50590068B9B0 /* libsoxr.0.dylib */,
+				E3B25F0C24FF50590068B9B0 /* libspeex.1.dylib */,
+				E3B25F1B24FF505A0068B9B0 /* libssl.1.1.dylib */,
+				E3B25F1E24FF505A0068B9B0 /* libswresample.3.dylib */,
+				E3B25F0824FF50580068B9B0 /* libswscale.5.dylib */,
+				E3B25F1224FF50590068B9B0 /* libtasn1.6.dylib */,
+				E3B25F3324FF505C0068B9B0 /* libtesseract.4.dylib */,
+				E3B25F3124FF505B0068B9B0 /* libtiff.5.dylib */,
+				E3B25F1424FF50590068B9B0 /* libuchardet.0.dylib */,
+				E3B25F1124FF50590068B9B0 /* libunistring.2.dylib */,
+				E3B25F1524FF50590068B9B0 /* libvidstab.1.1.dylib */,
+				E3B25F2E24FF505B0068B9B0 /* libwebp.7.dylib */,
+				E3B25F2224FF505A0068B9B0 /* libwebpmux.3.dylib */,
+				E3B25F3A24FF505C0068B9B0 /* libzstd.1.dylib */,
+				84279D7625B6DF77003B008B /* libmujs.so */,
 				8403CEA62007CBD300645516 /* MediaPlayer.framework */,
 				845E2F491E76CFC2002C6588 /* libz.tbd */,
 				496B19911E2968530035AF10 /* PIP.framework */,
-				867483705008F086E07B0A6B /* Pods_iina.framework */,
 				49542974216C34950058F680 /* Cocoa.framework */,
 			);
 			name = Frameworks;
@@ -1578,6 +1764,7 @@
 		84A0BAA21D2FAE8200BC8DA1 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				E393669923BDD1850070D626 /* IINA.entitlements */,
 				6100FF2A1EDF9806002CF0FB /* dsa_pub.pem */,
 				C78987311E34EF170005769F /* InfoPlist.strings */,
 				84E745D71DFDE8C100588DED /* config */,
@@ -1597,6 +1784,7 @@
 			children = (
 				84A0BA931D2F9E9600BC8DA1 /* MainMenu.xib */,
 				E38BD4AE20054BD9007635FC /* MainWindow.swift */,
+				84CFC92523F8DDE000381E5B /* PlayerWindowController.swift */,
 				84A0BA9C1D2FAD4000BC8DA1 /* MainWindowController.swift */,
 				84D123B31ECAA405004E0D53 /* TouchBarSupport.swift */,
 				8400D5C81E1AB2F1006785F5 /* MainWindowController.xib */,
@@ -1620,6 +1808,8 @@
 				849581F51F03D55A00D3B359 /* InitialWindowController.xib */,
 				84A09A0C1F2DF596000FF343 /* MiniPlayerWindowController.swift */,
 				8F49C370213EFB7E0076C4F9 /* MiniPlayerWindowController.xib */,
+				E36E8D7A24F6052F00B8C097 /* GuideWindowController.swift */,
+				E34E909C24F821280073BF04 /* GuideWindowController.xib */,
 				84D0FB7B1F5E510C00C6A6A7 /* Interactive Mode */,
 				84D377691D74163B007F7396 /* Video */,
 				84D377681D7413D8007F7396 /* Accessories */,
@@ -1922,7 +2112,10 @@
 				840D479F1DFEFC49000D9A64 /* KeyRecordView.swift */,
 				E322A4F720A8442E00C67D32 /* PlaylistPlaybackProgressView.swift */,
 				845E70B1210CB59D00D06C42 /* ScrollingTextField.swift */,
-				E38B32172157DC18000F6D27 /* ISO639TokenFieldDelegate.swift */,
+				E38372912443634500F57718 /* LanguageTokenField.swift */,
+				E34C0C3024934D7B0065A0C6 /* Switch.swift */,
+				E32712AE24EAA14500359DAB /* ScreenshootOSDView.swift */,
+				E32712B424F2B8CA00359DAB /* ScreenshootOSDView.xib */,
 			);
 			name = Accessories;
 			sourceTree = "<group>";
@@ -1957,7 +2150,6 @@
 				84EB1ED71D2F51D3004FA5A1 /* Products */,
 				8461BA641E42344D008BB852 /* Executables */,
 				848290731D95978100C3C76C /* Frameworks */,
-				AF119E67C2E61E10DC27039C /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -2028,15 +2220,6 @@
 			path = mpv;
 			sourceTree = "<group>";
 		};
-		AF119E67C2E61E10DC27039C /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				A1F8439D2926257DC5434942 /* Pods-iina.debug.xcconfig */,
-				61C6D8870FEB96F250D1448D /* Pods-iina.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		E3DE8DCB1FD8166A0021921C /* iina-cli */ = {
 			isa = PBXGroup;
 			children = (
@@ -2069,8 +2252,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84EB1EF91D2F51D3004FA5A1 /* Build configuration list for PBXNativeTarget "iina" */;
 			buildPhases = (
-				36C8205F8EFBC756D3D0BD69 /* [CP] Check Pods Manifest.lock */,
-				E364D521203F339A0066215D /* Check Localizable.strings */,
 				84EB1ED21D2F51D3004FA5A1 /* Sources */,
 				84EB1ED31D2F51D3004FA5A1 /* Frameworks */,
 				84EB1ED41D2F51D3004FA5A1 /* Resources */,
@@ -2079,7 +2260,6 @@
 				84817CE81DBE2E3200CC2279 /* Copy Lua Scripts */,
 				84E745DA1DFDE9C600588DED /* Copy Configs */,
 				8461BA631E423423008BB852 /* Copy Executables */,
-				DFB4E0114268BBFB043A6097 /* [CP] Embed Pods Frameworks */,
 				4954298A216C34960058F680 /* Embed App Extensions */,
 			);
 			buildRules = (
@@ -2089,6 +2269,13 @@
 				49542985216C34950058F680 /* PBXTargetDependency */,
 			);
 			name = iina;
+			packageProductDependencies = (
+				B4E446E725CB53920069F06E /* PromiseKit */,
+				B4E446F125CB53FF0069F06E /* Gzip */,
+				B4E446F625CB54EF0069F06E /* Mustache */,
+				B4E4470025CE3F930069F06E /* Sparkle */,
+				8451E6D82604AEFC009A15D7 /* Just */,
+			);
 			productName = mpvx;
 			productReference = 84EB1ED61D2F51D3004FA5A1 /* IINA.app */;
 			productType = "com.apple.product-type.application";
@@ -2129,6 +2316,7 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 67CQ77V27R;
 						LastSwiftMigration = 1020;
+						ProvisioningStyle = Automatic;
 					};
 					E3DE8DC91FD8166A0021921C = {
 						CreatedOnToolsVersion = 9.1;
@@ -2163,8 +2351,17 @@
 				"pt-BR",
 				cs,
 				pl,
+				tr,
+				ca,
 			);
 			mainGroup = 84EB1ECD1D2F51D3004FA5A1;
+			packageReferences = (
+				B4E446E625CB53920069F06E /* XCRemoteSwiftPackageReference "PromiseKit" */,
+				B4E446F025CB53FF0069F06E /* XCRemoteSwiftPackageReference "GzipSwift" */,
+				B4E446F525CB54EF0069F06E /* XCRemoteSwiftPackageReference "GRMustache" */,
+				B4E446FF25CE3F930069F06E /* XCRemoteSwiftPackageReference "Sparkle" */,
+				8451E6D72604AEFC009A15D7 /* XCRemoteSwiftPackageReference "Just" */,
+			);
 			productRefGroup = 84EB1ED71D2F51D3004FA5A1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -2193,6 +2390,7 @@
 				8400D5E71E1AB337006785F5 /* PrefKeyBindingViewController.xib in Resources */,
 				E3DBD23F218EF4F100B3AFBF /* AboutWindowContributorAvatarItem.xib in Resources */,
 				C789872F1E34EF170005769F /* InfoPlist.strings in Resources */,
+				E32712B224F2B8CA00359DAB /* ScreenshootOSDView.xib in Resources */,
 				8400D5DB1E1AB326006785F5 /* FontPickerWindowController.xib in Resources */,
 				8400D5EA1E1AB33B006785F5 /* KeyRecordViewController.xib in Resources */,
 				84EC12861F504D2500137C1E /* FilterPresets.strings in Resources */,
@@ -2215,6 +2413,7 @@
 				8483FB001EDFF325000F55D6 /* Credits.rtf in Resources */,
 				84F5D49A1E44E9A50060A838 /* KeyBinding.strings in Resources */,
 				E34A0E012053F93A00B50097 /* PrefOSCToolbarSettingsSheetController.xib in Resources */,
+				E34E909A24F821280073BF04 /* GuideWindowController.xib in Resources */,
 				84AF03D21E67492C003E3753 /* Contribution.rtf in Resources */,
 				8400D5D21E1AB312006785F5 /* InspectorWindowController.xib in Resources */,
 				8400D5CC1E1AB2FF006785F5 /* PlaylistViewController.xib in Resources */,
@@ -2236,24 +2435,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		36C8205F8EFBC756D3D0BD69 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-iina-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		84B1CE561F98CAE300994D63 /* Copy Dylib Symlinks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2267,49 +2448,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
 			shellScript = "echo \"Copy symlinks:\"\n\nfor file in \"${SRCROOT}/deps/lib/\"*.dylib; do\n    if [[ -h \"$file\" ]]; then\n        cp -R $file \"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/$(basename $file)\"\n    fi\ndone\n";
-		};
-		DFB4E0114268BBFB043A6097 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iina/Pods-iina-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/GRMustache.swift/Mustache.framework",
-				"${BUILT_PRODUCTS_DIR}/GzipSwift/Gzip.framework",
-				"${BUILT_PRODUCTS_DIR}/Just/Just.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
-				"${PODS_ROOT}/Sparkle/Sparkle.framework",
-				"${PODS_ROOT}/Sparkle/Sparkle.framework.dSYM",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mustache.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gzip.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Just.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sparkle.framework",
-				"${DWARF_DSYM_FOLDER_PATH}/Sparkle.framework.dSYM",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iina/Pods-iina-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E364D521203F339A0066215D /* Check Localizable.strings */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Localizable.strings";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"$CONFIGURATION\" == \"Release\" ]; then\n $PROJECT_DIR/other/check_localizable.swift\nfi\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2328,7 +2466,6 @@
 			files = (
 				849581F11F02728700D3B359 /* InitialWindowController.swift in Sources */,
 				8461C52E1D45FFF6006E91FF /* PlaySliderCell.swift in Sources */,
-				E38B32192157DC18000F6D27 /* ISO639TokenFieldDelegate.swift in Sources */,
 				84F5D4A21E4796F50060A838 /* KeyBindingTranslator.swift in Sources */,
 				E3DBD23E218EF4F100B3AFBF /* AboutWindowContributorAvatarItem.swift in Sources */,
 				8452DD851D3B956D008A543A /* Preference.swift in Sources */,
@@ -2355,16 +2492,20 @@
 				84791C8B1D405E9D0069E28A /* PlaybackInfo.swift in Sources */,
 				E322A4F820A8442E00C67D32 /* PlaylistPlaybackProgressView.swift in Sources */,
 				84D123B41ECAA405004E0D53 /* TouchBarSupport.swift in Sources */,
+				E36E8D7C24F6052F00B8C097 /* GuideWindowController.swift in Sources */,
 				84817C981DBDCE4300CC2279 /* RoundedColorWell.swift in Sources */,
+				E38372922443634500F57718 /* LanguageTokenField.swift in Sources */,
 				8461C5301D462488006E91FF /* VideoTime.swift in Sources */,
 				8492C2881E7721A600CE5825 /* ISO639Helper.swift in Sources */,
 				84F5D4991E44E8AC0060A838 /* KeyBindingDataLoader.swift in Sources */,
+				E34C0C3124934D7B0065A0C6 /* Switch.swift in Sources */,
 				84EC12831F4F939000137C1E /* FilterPresets.swift in Sources */,
 				E374160F20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift in Sources */,
 				E3FC31461FE1501E00B9B86F /* PowerSource.swift in Sources */,
 				8476440A1D48CC3D004F6DF5 /* MPVCommand.swift in Sources */,
 				84C8D5911D796F9700D98A0E /* Aspect.swift in Sources */,
 				E3383689202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.swift in Sources */,
+				519872FF26879B9B00F84BCC /* AccessibilityPreferences.swift in Sources */,
 				842904E21F0EC01600478376 /* AutoFileMatcher.swift in Sources */,
 				8466BE181D5CDD0300039D03 /* QuickSettingViewController.swift in Sources */,
 				84A0BA9E1D2FAD4000BC8DA1 /* MainWindowController.swift in Sources */,
@@ -2385,6 +2526,7 @@
 				845ABEAC1D4D19C000BFB15B /* MPVTrack.swift in Sources */,
 				84AABE981DBFB62F00D138FD /* FixedFontManager.m in Sources */,
 				84EB1EDA1D2F51D3004FA5A1 /* AppDelegate.swift in Sources */,
+				84CFC92623F8DDE000381E5B /* PlayerWindowController.swift in Sources */,
 				840820111ECF6C1800361416 /* FileGroup.swift in Sources */,
 				E374160C20F138A900B4F7F9 /* CollapseView.swift in Sources */,
 				84A0BA901D2F8D4100BC8DA1 /* IINAError.swift in Sources */,
@@ -2406,6 +2548,7 @@
 				8488D6E71E11ABE900D5B952 /* PrefNetworkViewController.swift in Sources */,
 				84AABE941DBFAF1A00D138FD /* FontPickerWindowController.swift in Sources */,
 				844C59E71F7C143D008D1B00 /* CacheManager.swift in Sources */,
+				E32712B024EAA14500359DAB /* ScreenshootOSDView.swift in Sources */,
 				E3BA79EE2131443A00529D99 /* OpenURLWindowController.swift in Sources */,
 				84FBCB381EEACDDD0076C77C /* FFmpegController.m in Sources */,
 				84879A981E0FFC7E0004F894 /* PrefUIViewController.swift in Sources */,
@@ -2496,6 +2639,9 @@
 				5EF9F7FF21FB42EC00748374 /* pt-BR */,
 				845900DB220E134400B4A7C4 /* cs */,
 				84CE10B722E6EAA1008ED3AC /* pl */,
+				8482985523C384A80088E223 /* en */,
+				84B3B20523C0CE7300340754 /* tr */,
+				84EA52DD2404E83C00F7617A /* ca */,
 			);
 			name = SubChooseViewController.xib;
 			sourceTree = "<group>";
@@ -2522,6 +2668,9 @@
 				5EF9F7E621FB42E900748374 /* pt-BR */,
 				845900C2220E134200B4A7C4 /* cs */,
 				84CE109E22E6EAA0008ED3AC /* pl */,
+				8482982323C384400088E223 /* en */,
+				84B3B1EC23C0CE7100340754 /* tr */,
+				84EA52C42404E83900F7617A /* ca */,
 			);
 			name = MainWindowController.xib;
 			sourceTree = "<group>";
@@ -2548,6 +2697,9 @@
 				5EF9F7E721FB42E900748374 /* pt-BR */,
 				845900C3220E134200B4A7C4 /* cs */,
 				84CE109F22E6EAA0008ED3AC /* pl */,
+				8482982523C3844C0088E223 /* en */,
+				84B3B1ED23C0CE7100340754 /* tr */,
+				84EA52C52404E83A00F7617A /* ca */,
 			);
 			name = QuickSettingViewController.xib;
 			sourceTree = "<group>";
@@ -2574,6 +2726,9 @@
 				5EF9F7E821FB42E900748374 /* pt-BR */,
 				845900C4220E134200B4A7C4 /* cs */,
 				84CE10A022E6EAA0008ED3AC /* pl */,
+				8482982723C384500088E223 /* en */,
+				84B3B1EE23C0CE7100340754 /* tr */,
+				84EA52C62404E83A00F7617A /* ca */,
 			);
 			name = PlaylistViewController.xib;
 			sourceTree = "<group>";
@@ -2600,6 +2755,9 @@
 				5EF9F7F021FB42EA00748374 /* pt-BR */,
 				845900CC220E134300B4A7C4 /* cs */,
 				84CE10A822E6EAA0008ED3AC /* pl */,
+				8482983723C3846E0088E223 /* en */,
+				84B3B1F623C0CE7200340754 /* tr */,
+				84EA52CE2404E83A00F7617A /* ca */,
 			);
 			name = CropSettingsViewController.xib;
 			sourceTree = "<group>";
@@ -2626,6 +2784,9 @@
 				5EF9F7E921FB42E900748374 /* pt-BR */,
 				845900C5220E134200B4A7C4 /* cs */,
 				84CE10A122E6EAA0008ED3AC /* pl */,
+				8482982923C384540088E223 /* en */,
+				84B3B1EF23C0CE7100340754 /* tr */,
+				84EA52C72404E83A00F7617A /* ca */,
 			);
 			name = InspectorWindowController.xib;
 			sourceTree = "<group>";
@@ -2652,6 +2813,9 @@
 				5EF9F7EA21FB42EA00748374 /* pt-BR */,
 				845900C6220E134200B4A7C4 /* cs */,
 				84CE10A222E6EAA0008ED3AC /* pl */,
+				8482982B23C384580088E223 /* en */,
+				84B3B1F023C0CE7100340754 /* tr */,
+				84EA52C82404E83A00F7617A /* ca */,
 			);
 			name = FilterWindowController.xib;
 			sourceTree = "<group>";
@@ -2678,6 +2842,9 @@
 				5EF9F7EB21FB42EA00748374 /* pt-BR */,
 				845900C7220E134200B4A7C4 /* cs */,
 				84CE10A322E6EAA0008ED3AC /* pl */,
+				8482982D23C3845B0088E223 /* en */,
+				84B3B1F123C0CE7100340754 /* tr */,
+				84EA52C92404E83A00F7617A /* ca */,
 			);
 			name = AboutWindowController.xib;
 			sourceTree = "<group>";
@@ -2704,6 +2871,9 @@
 				5EF9F7F221FB42EA00748374 /* pt-BR */,
 				845900CE220E134300B4A7C4 /* cs */,
 				84CE10AA22E6EAA0008ED3AC /* pl */,
+				8482983B23C384770088E223 /* en */,
+				84B3B1F823C0CE7200340754 /* tr */,
+				84EA52D02404E83A00F7617A /* ca */,
 			);
 			name = FontPickerWindowController.xib;
 			sourceTree = "<group>";
@@ -2730,6 +2900,9 @@
 				5EF9F7F321FB42EA00748374 /* pt-BR */,
 				845900CF220E134300B4A7C4 /* cs */,
 				84CE10AB22E6EAA0008ED3AC /* pl */,
+				8482983D23C3847B0088E223 /* en */,
+				84B3B1F923C0CE7200340754 /* tr */,
+				84EA52D12404E83B00F7617A /* ca */,
 			);
 			name = PrefGeneralViewController.xib;
 			sourceTree = "<group>";
@@ -2756,6 +2929,9 @@
 				5EF9F7F421FB42EB00748374 /* pt-BR */,
 				845900D0220E134300B4A7C4 /* cs */,
 				84CE10AC22E6EAA0008ED3AC /* pl */,
+				8482983F23C3847F0088E223 /* en */,
+				84B3B1FA23C0CE7200340754 /* tr */,
+				84EA52D22404E83B00F7617A /* ca */,
 			);
 			name = PrefUIViewController.xib;
 			sourceTree = "<group>";
@@ -2782,6 +2958,9 @@
 				5EF9F7F621FB42EB00748374 /* pt-BR */,
 				845900D2220E134300B4A7C4 /* cs */,
 				84CE10AE22E6EAA0008ED3AC /* pl */,
+				8482984323C384870088E223 /* en */,
+				84B3B1FC23C0CE7200340754 /* tr */,
+				84EA52D42404E83B00F7617A /* ca */,
 			);
 			name = PrefControlViewController.xib;
 			sourceTree = "<group>";
@@ -2808,6 +2987,9 @@
 				5EF9F7F721FB42EB00748374 /* pt-BR */,
 				845900D3220E134300B4A7C4 /* cs */,
 				84CE10AF22E6EAA0008ED3AC /* pl */,
+				8482984523C3848B0088E223 /* en */,
+				84B3B1FD23C0CE7200340754 /* tr */,
+				84EA52D52404E83B00F7617A /* ca */,
 			);
 			name = PrefKeyBindingViewController.xib;
 			sourceTree = "<group>";
@@ -2834,6 +3016,9 @@
 				5EF9F7F821FB42EB00748374 /* pt-BR */,
 				845900D4220E134300B4A7C4 /* cs */,
 				84CE10B022E6EAA1008ED3AC /* pl */,
+				8482984723C3848F0088E223 /* en */,
+				84B3B1FE23C0CE7200340754 /* tr */,
+				84EA52D62404E83B00F7617A /* ca */,
 			);
 			name = KeyRecordViewController.xib;
 			sourceTree = "<group>";
@@ -2860,6 +3045,9 @@
 				5EF9F7F921FB42EB00748374 /* pt-BR */,
 				845900D5220E134400B4A7C4 /* cs */,
 				84CE10B122E6EAA1008ED3AC /* pl */,
+				8482984923C384930088E223 /* en */,
+				84B3B1FF23C0CE7200340754 /* tr */,
+				84EA52D72404E83B00F7617A /* ca */,
 			);
 			name = PrefAdvancedViewController.xib;
 			sourceTree = "<group>";
@@ -2886,6 +3074,9 @@
 				5EF9F7FA21FB42EB00748374 /* pt-BR */,
 				845900D6220E134400B4A7C4 /* cs */,
 				84CE10B222E6EAA1008ED3AC /* pl */,
+				8482984B23C384960088E223 /* en */,
+				84B3B20023C0CE7200340754 /* tr */,
+				84EA52D82404E83B00F7617A /* ca */,
 			);
 			name = PrefCodecViewController.xib;
 			sourceTree = "<group>";
@@ -2912,6 +3103,9 @@
 				5EF9F7FB21FB42EB00748374 /* pt-BR */,
 				845900D7220E134400B4A7C4 /* cs */,
 				84CE10B322E6EAA1008ED3AC /* pl */,
+				8482984D23C3849A0088E223 /* en */,
+				84B3B20123C0CE7200340754 /* tr */,
+				84EA52D92404E83B00F7617A /* ca */,
 			);
 			name = PrefSubViewController.xib;
 			sourceTree = "<group>";
@@ -2938,6 +3132,9 @@
 				5EF9F7FC21FB42EB00748374 /* pt-BR */,
 				845900D8220E134400B4A7C4 /* cs */,
 				84CE10B422E6EAA1008ED3AC /* pl */,
+				8482984F23C3849D0088E223 /* en */,
+				84B3B20223C0CE7300340754 /* tr */,
+				84EA52DA2404E83C00F7617A /* ca */,
 			);
 			name = PrefNetworkViewController.xib;
 			sourceTree = "<group>";
@@ -2964,6 +3161,9 @@
 				5EF9F7EC21FB42EA00748374 /* pt-BR */,
 				845900C8220E134300B4A7C4 /* cs */,
 				84CE10A422E6EAA0008ED3AC /* pl */,
+				8482982F23C3845F0088E223 /* en */,
+				84B3B1F223C0CE7200340754 /* tr */,
+				84EA52CA2404E83A00F7617A /* ca */,
 			);
 			name = OpenURLWindowController.xib;
 			sourceTree = "<group>";
@@ -2990,6 +3190,9 @@
 				5EF9F80121FB438200748374 /* pt-BR */,
 				845900DD220E134400B4A7C4 /* cs */,
 				84CE10B922E6EAA1008ED3AC /* pl */,
+				8482985723C384B70088E223 /* en */,
+				84B3B20723C0CEA200340754 /* tr */,
+				84EA52DF2404E83C00F7617A /* ca */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -3016,6 +3219,9 @@
 				5EF9F7EE21FB42EA00748374 /* pt-BR */,
 				845900CA220E134300B4A7C4 /* cs */,
 				84CE10A622E6EAA0008ED3AC /* pl */,
+				8482983323C384660088E223 /* en */,
+				84B3B1F423C0CE7200340754 /* tr */,
+				84EA52CC2404E83A00F7617A /* ca */,
 			);
 			name = InitialWindowController.xib;
 			sourceTree = "<group>";
@@ -3042,6 +3248,9 @@
 				5EF9F7ED21FB42EA00748374 /* pt-BR */,
 				845900C9220E134300B4A7C4 /* cs */,
 				84CE10A522E6EAA0008ED3AC /* pl */,
+				8482983123C384620088E223 /* en */,
+				84B3B1F323C0CE7200340754 /* tr */,
+				84EA52CB2404E83A00F7617A /* ca */,
 			);
 			name = HistoryWindowController.xib;
 			sourceTree = "<group>";
@@ -3068,6 +3277,9 @@
 				5EF9F7E521FB42E900748374 /* pt-BR */,
 				845900C1220E134200B4A7C4 /* cs */,
 				84CE109D22E6EAA0008ED3AC /* pl */,
+				8482982123C3843C0088E223 /* en */,
+				84B3B1EB23C0CE7100340754 /* tr */,
+				84EA52C32404E83900F7617A /* ca */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -3094,6 +3306,9 @@
 				5EF9F80221FB439200748374 /* pt-BR */,
 				845900DE220E134400B4A7C4 /* cs */,
 				84CE10BA22E6EAA1008ED3AC /* pl */,
+				8482985823C384BA0088E223 /* en */,
+				84B3B20623C0CE9900340754 /* tr */,
+				84EA52E32404E88900F7617A /* ca */,
 			);
 			name = Contribution.rtf;
 			sourceTree = "<group>";
@@ -3120,6 +3335,9 @@
 				5EF9F7F121FB42EA00748374 /* pt-BR */,
 				845900CD220E134300B4A7C4 /* cs */,
 				84CE10A922E6EAA0008ED3AC /* pl */,
+				8482983923C384710088E223 /* en */,
+				84B3B1F723C0CE7200340754 /* tr */,
+				84EA52CF2404E83A00F7617A /* ca */,
 			);
 			name = FreeSelectingViewController.xib;
 			sourceTree = "<group>";
@@ -3146,6 +3364,9 @@
 				5EF9F80321FB43EA00748374 /* pt-BR */,
 				845900DF220E134400B4A7C4 /* cs */,
 				84CE10BB22E6EAA1008ED3AC /* pl */,
+				8482985923C384CE0088E223 /* en */,
+				84B3B20A23C0D02200340754 /* tr */,
+				84EA52E12404E83C00F7617A /* ca */,
 			);
 			name = FilterPresets.strings;
 			sourceTree = "<group>";
@@ -3172,6 +3393,9 @@
 				5EF9F80421FB448700748374 /* pt-BR */,
 				845900E0220E134400B4A7C4 /* cs */,
 				84CE10BC22E6EAA1008ED3AC /* pl */,
+				8482985A23C384F10088E223 /* en */,
+				84B3B20923C0CF0900340754 /* tr */,
+				84EA52E22404E83C00F7617A /* ca */,
 			);
 			name = KeyBinding.strings;
 			sourceTree = "<group>";
@@ -3198,6 +3422,9 @@
 				5EF9F7EF21FB42EA00748374 /* pt-BR */,
 				845900CB220E134300B4A7C4 /* cs */,
 				84CE10A722E6EAA0008ED3AC /* pl */,
+				8482983523C3846A0088E223 /* en */,
+				84B3B1F523C0CE7200340754 /* tr */,
+				84EA52CD2404E83A00F7617A /* ca */,
 			);
 			name = MiniPlayerWindowController.xib;
 			sourceTree = "<group>";
@@ -3224,8 +3451,20 @@
 				5EF9F80021FB436700748374 /* pt-BR */,
 				845900DC220E134400B4A7C4 /* cs */,
 				84CE10B822E6EAA1008ED3AC /* pl */,
+				8482985623C384B00088E223 /* en */,
+				84B3B20823C0CEAB00340754 /* tr */,
+				84EA52DE2404E83C00F7617A /* ca */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		E32712B424F2B8CA00359DAB /* ScreenshootOSDView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E32712B324F2B8CA00359DAB /* Base */,
+				E32712B624F2B8D200359DAB /* en */,
+			);
+			name = ScreenshootOSDView.xib;
 			sourceTree = "<group>";
 		};
 		E34A0E032053F93A00B50097 /* PrefOSCToolbarSettingsSheetController.xib */ = {
@@ -3250,8 +3489,40 @@
 				5EF9F7F521FB42EB00748374 /* pt-BR */,
 				845900D1220E134300B4A7C4 /* cs */,
 				84CE10AD22E6EAA0008ED3AC /* pl */,
+				8482984123C384820088E223 /* en */,
+				84B3B1FB23C0CE7200340754 /* tr */,
+				84EA52D32404E83B00F7617A /* ca */,
 			);
 			name = PrefOSCToolbarSettingsSheetController.xib;
+			sourceTree = "<group>";
+		};
+		E34E909C24F821280073BF04 /* GuideWindowController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E34E909B24F821280073BF04 /* Base */,
+				E34E909E24F821300073BF04 /* en */,
+				E34E90C824F821B00073BF04 /* ca */,
+				E34E90CA24F821B10073BF04 /* zh-Hans */,
+				E34E90CC24F821B20073BF04 /* zh-Hant */,
+				E34E90CE24F821B20073BF04 /* cs */,
+				E34E90D024F821B40073BF04 /* nl */,
+				E34E90D224F821B50073BF04 /* fr */,
+				E34E90D424F821B60073BF04 /* de */,
+				E34E90D624F821B60073BF04 /* hi */,
+				E34E90D824F821B70073BF04 /* it */,
+				E34E90DA24F821B80073BF04 /* ja */,
+				E34E90DC24F821B90073BF04 /* ko */,
+				E34E90DE24F821B90073BF04 /* pl */,
+				E34E90E024F821BA0073BF04 /* pt-BR */,
+				E34E90E224F821BB0073BF04 /* ro */,
+				E34E90E424F821BC0073BF04 /* ru */,
+				E34E90E624F821BD0073BF04 /* sk */,
+				E34E90E824F821BD0073BF04 /* es */,
+				E34E90EA24F821BE0073BF04 /* sv */,
+				E34E90EC24F821BF0073BF04 /* tr */,
+				E34E90EE24F821C00073BF04 /* uk */,
+			);
+			name = GuideWindowController.xib;
 			sourceTree = "<group>";
 		};
 		E374161320F3C0AB00B4F7F9 /* PrefUtilsViewController.xib */ = {
@@ -3276,6 +3547,9 @@
 				5EF9F7FD21FB42EC00748374 /* pt-BR */,
 				845900D9220E134400B4A7C4 /* cs */,
 				84CE10B522E6EAA1008ED3AC /* pl */,
+				8482985123C384A10088E223 /* en */,
+				84B3B20323C0CE7300340754 /* tr */,
+				84EA52DB2404E83C00F7617A /* ca */,
 			);
 			name = PrefUtilsViewController.xib;
 			sourceTree = "<group>";
@@ -3302,6 +3576,9 @@
 				5EF9F7FE21FB42EC00748374 /* pt-BR */,
 				845900DA220E134400B4A7C4 /* cs */,
 				84CE10B622E6EAA1008ED3AC /* pl */,
+				8482985323C384A40088E223 /* en */,
+				84B3B20423C0CE7300340754 /* tr */,
+				84EA52DC2404E83C00F7617A /* ca */,
 			);
 			name = PreferenceWindowController.xib;
 			sourceTree = "<group>";
@@ -3320,9 +3597,14 @@
 				CODE_SIGN_ENTITLEMENTS = OpenInIINA/OpenInIINA.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = OpenInIINA/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -3346,16 +3628,22 @@
 				CODE_SIGN_ENTITLEMENTS = OpenInIINA/OpenInIINA.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = OpenInIINA/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.iina.OpenInIINA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -3473,14 +3761,17 @@
 		};
 		84EB1EFA1D2F51D3004FA5A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A1F8439D2926257DC5434942 /* Pods-iina.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_ENTITLEMENTS = iina/IINA.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 129;
 				DEVELOPMENT_TEAM = 67CQ77V27R;
+				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
@@ -3491,12 +3782,16 @@
 				);
 				INFOPLIST_FILE = iina/Info.plist;
 				INSTALL_PATH = /Applications;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/deps/lib",
 					"$(PROJECT_DIR)/deps/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MARKETING_VERSION = 1.2.0;
 				MODULEMAP_FILE = module.modulemap;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DDEBUG";
@@ -3511,14 +3806,17 @@
 		};
 		84EB1EFB1D2F51D3004FA5A1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 61C6D8870FEB96F250D1448D /* Pods-iina.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_ENTITLEMENTS = iina/IINA.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 129;
 				DEVELOPMENT_TEAM = 67CQ77V27R;
+				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
@@ -3529,20 +3827,25 @@
 				);
 				INFOPLIST_FILE = iina/Info.plist;
 				INSTALL_PATH = /Applications;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/deps/lib",
 					"$(PROJECT_DIR)/deps/lib",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MARKETING_VERSION = 1.2.0;
 				MODULEMAP_FILE = module.modulemap;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DRELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.iina;
 				PRODUCT_NAME = IINA;
 				SKIP_INSTALL = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OBJC_BRIDGING_HEADER = "iina/iina-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -3557,6 +3860,7 @@
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 67CQ77V27R;
+				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
@@ -3579,14 +3883,16 @@
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 67CQ77V27R;
+				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_FORCE_DYNAMIC_LINK_STDLIB = YES;
 				SWIFT_FORCE_STATIC_LINK_STDLIB = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -3631,6 +3937,77 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8451E6D72604AEFC009A15D7 /* XCRemoteSwiftPackageReference "Just" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dduan/Just";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.8.0;
+			};
+		};
+		B4E446E625CB53920069F06E /* XCRemoteSwiftPackageReference "PromiseKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mxcl/PromiseKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.13.3;
+			};
+		};
+		B4E446F025CB53FF0069F06E /* XCRemoteSwiftPackageReference "GzipSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/1024jp/GzipSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.1;
+			};
+		};
+		B4E446F525CB54EF0069F06E /* XCRemoteSwiftPackageReference "GRMustache" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/groue/GRMustache.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.1;
+			};
+		};
+		B4E446FF25CE3F930069F06E /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle/";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = "1.25.0-rc2";
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8451E6D82604AEFC009A15D7 /* Just */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8451E6D72604AEFC009A15D7 /* XCRemoteSwiftPackageReference "Just" */;
+			productName = Just;
+		};
+		B4E446E725CB53920069F06E /* PromiseKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4E446E625CB53920069F06E /* XCRemoteSwiftPackageReference "PromiseKit" */;
+			productName = PromiseKit;
+		};
+		B4E446F125CB53FF0069F06E /* Gzip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4E446F025CB53FF0069F06E /* XCRemoteSwiftPackageReference "GzipSwift" */;
+			productName = Gzip;
+		};
+		B4E446F625CB54EF0069F06E /* Mustache */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4E446F525CB54EF0069F06E /* XCRemoteSwiftPackageReference "GRMustache" */;
+			productName = Mustache;
+		};
+		B4E4470025CE3F930069F06E /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4E446FF25CE3F930069F06E /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 84EB1ECE1D2F51D3004FA5A1 /* Project object */;
 }

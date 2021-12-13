@@ -52,7 +52,7 @@ final class AssrtSubtitle: OnlineSubtitle {
       // download from file list
       when(fulfilled: fileList.map { file -> Promise<URL> in
         Promise { resolver in
-          Just.get(file.url) { response in
+          Just.get(file.url, asyncCompletionHandler: { response in
             guard response.ok, let data = response.content else {
               resolver.reject(AssrtSupport.AssrtError.networkError)
               return
@@ -61,7 +61,7 @@ final class AssrtSubtitle: OnlineSubtitle {
             if let url = data.saveToFolder(Utility.tempDirURL, filename: subFilename) {
               resolver.fulfill(url)
             }
-          }
+          })
         }
       }).map { urls in
         callback(.ok(urls))
@@ -70,7 +70,7 @@ final class AssrtSubtitle: OnlineSubtitle {
       }
     } else if let url = url, let filename = filename {
       // download from url
-      Just.get(url) { response in
+      Just.get(url, asyncCompletionHandler: { response in
         guard response.ok, let data = response.content else {
           callback(.failed)
           return
@@ -79,7 +79,7 @@ final class AssrtSubtitle: OnlineSubtitle {
         if let url = data.saveToFolder(Utility.tempDirURL, filename: subFilename) {
           callback(.ok([url]))
         }
-      }
+      })
     } else {
       callback(.failed)
       return
@@ -164,7 +164,7 @@ class AssrtSupport {
 
   func search(_ query: String) -> Promise<[AssrtSubtitle]> {
     return Promise { resolver in
-      Just.post(searchApi, params: ["q": query], headers: header) { result in
+      Just.post(searchApi, params: ["q": query], headers: header, asyncCompletionHandler: { result in
         guard let json = result.json as? [String: Any] else {
           resolver.reject(AssrtError.networkError)
           return
@@ -207,7 +207,7 @@ class AssrtSupport {
           index += 1
         }
         resolver.fulfill(subtitles)
-      }
+      })
     }
   }
 
@@ -233,7 +233,7 @@ class AssrtSupport {
 
   func loadDetails(forSub sub: AssrtSubtitle) -> Promise<AssrtSubtitle> {
     return Promise { resolver in
-      Just.post(detailApi, params: ["id": sub.id], headers: header) { result in
+      Just.post(detailApi, params: ["id": sub.id], headers: header, asyncCompletionHandler:  { result in
         guard let json = result.jsonIgnoringError as? [String: Any] else {
           resolver.reject(AssrtError.networkError)
           return
@@ -266,7 +266,7 @@ class AssrtSupport {
         }
 
         resolver.fulfill(sub)
-      }
+      })
     }
   }
 

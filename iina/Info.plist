@@ -439,7 +439,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.4</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -454,7 +454,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>107</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.video</string>
 	<key>LSMinimumSystemVersion</key>
@@ -473,7 +473,9 @@
 		</dict>
 	</dict>
 	<key>NSHumanReadableCopyright</key>
-	<string>Released under GPLv3.</string>
+        <string>Copyright © 2017-2021
+Collider LI, et al.
+Released under GPLv3.</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
@@ -494,12 +496,12 @@
 			</array>
 		</dict>
 	</array>
-	<key>NSSupportsAutomaticGraphicsSwitching</key>
-	<true/>
 	<key>SUFeedURL</key>
 	<string>https://www.iina.io/appcast.xml</string>
 	<key>SUPublicDSAKeyFile</key>
 	<string>dsa_pub.pem</string>
+	<key>SUPublicEDKey</key>
+	<string>UpwCRYfYOg0OGgQHY6RUdrV29yPcdkvxGlEfq46r6a0=</string>
 	<key>UTImportedTypeDeclarations</key>
 	<array>
 		<dict>

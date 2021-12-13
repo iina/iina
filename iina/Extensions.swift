@@ -138,8 +138,8 @@ extension NSSize {
   }
 
   func centeredRect(in rect: NSRect) -> NSRect {
-    return NSRect(x: (rect.width - width) / 2,
-                  y: (rect.height - height) / 2,
+    return NSRect(x: rect.origin.x + (rect.width - width) / 2,
+                  y: rect.origin.y + (rect.height - height) / 2,
                   width: width,
                   height: height)
   }
@@ -507,6 +507,26 @@ extension NSImage {
     }
     image.capInsets = NSEdgeInsets(top: cornerRadius, left: cornerRadius, bottom: cornerRadius, right: cornerRadius)
     return image
+  }
+
+  func rotate(_ degree: Int) -> NSImage {
+    var degree = ((degree % 360) + 360) % 360
+    guard degree % 90 == 0 && degree != 0 else { return self }
+    // mpv's rotation is clockwise, NSAffineTransform's rotation is counterclockwise
+    degree = 360 - degree
+    let newSize = (degree == 180 ? self.size : NSMakeSize(self.size.height, self.size.width))
+    let rotation = NSAffineTransform.init()
+    rotation.rotate(byDegrees: CGFloat(degree))
+    rotation.append(.init(translationByX: newSize.width / 2, byY: newSize.height / 2))
+
+    let newImage = NSImage(size: newSize)
+    newImage.lockFocus()
+    rotation.concat()
+    let rect = NSMakeRect(0, 0, self.size.width, self.size.height)
+    let corner = NSMakePoint(-self.size.width / 2, -self.size.height / 2)
+    self.draw(at: corner, from: rect, operation: .copy, fraction: 1)
+    newImage.unlockFocus()
+    return newImage
   }
 }
 

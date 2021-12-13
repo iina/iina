@@ -38,6 +38,8 @@ class VideoView: NSView {
   // cached indicator to prevent unnecessary updates of DisplayLink
   var currentDisplay: UInt32?
 
+  var pendingRedrawAfterEnteringPIP = false;
+
   // MARK: - Attributes
 
   override var mouseDownCanMoveWindow: Bool {
@@ -51,7 +53,6 @@ class VideoView: NSView {
   // MARK: - Init
 
   override init(frame: CGRect) {
-
     super.init(frame: frame)
 
     // set up layer
@@ -65,6 +66,11 @@ class VideoView: NSView {
 
     // dragging init
     registerForDraggedTypes([.nsFilenames, .nsURL, .string])
+  }
+  
+  convenience init(frame: CGRect, player: PlayerCore) {
+    self.init(frame: frame)
+    self.player = player
   }
 
   required init?(coder: NSCoder) {
@@ -88,12 +94,20 @@ class VideoView: NSView {
     uninit()
   }
 
+  override func layout() {
+    super.layout()
+    if pendingRedrawAfterEnteringPIP && superview != nil {
+      videoLayer.draw(forced: true)
+      pendingRedrawAfterEnteringPIP = false
+    }
+  }
+
   override func draw(_ dirtyRect: NSRect) {
     // do nothing
   }
 
   override func acceptsFirstMouse(for event: NSEvent?) -> Bool {
-    return true
+    return Preference.bool(for: .videoViewAcceptsFirstMouse)
   }
 
   // MARK: Drag and drop
@@ -206,7 +220,7 @@ class VideoView: NSView {
       Logger.log("Falling back to standard display refresh rate: 60 from \(actualFps)")
       actualFps = 60;
     }
-    player.mpv.setDouble(MPVOption.Video.displayFps, actualFps)
+    player.mpv.setDouble(MPVOption.Video.overrideDisplayFps, actualFps)
     
     setICCProfile(displayId)
     currentDisplay = displayId
@@ -214,25 +228,25 @@ class VideoView: NSView {
 
   func setICCProfile(_ displayId: UInt32) {
     typealias ProfileData = (uuid: CFUUID, profileUrl: URL?)
-
     guard let uuid = CGDisplayCreateUUIDFromDisplayID(displayId)?.takeRetainedValue() else { return }
+
     var argResult: ProfileData = (uuid, nil)
-    let dataPointer = UnsafeMutablePointer(&argResult)
+    withUnsafeMutablePointer(to: &argResult) { data in
+      ColorSyncIterateDeviceProfiles({ (dict: CFDictionary?, ptr: UnsafeMutableRawPointer?) -> Bool in
+        if let info = dict as? [String: Any], let current = info["DeviceProfileIsCurrent"] as? Int {
+          let deviceID = info["DeviceID"] as! CFUUID
+          let ptr = ptr!.bindMemory(to: ProfileData.self, capacity: 1)
+          let uuid = ptr.pointee.uuid
 
-    ColorSyncIterateDeviceProfiles({ (dict: CFDictionary?, ptr: UnsafeMutableRawPointer?) -> Bool in
-      if let info = dict as? [String: Any], let current = info["DeviceProfileIsCurrent"] as? Int {
-        let deviceID = info["DeviceID"] as! CFUUID
-        let ptr = ptr!.bindMemory(to: ProfileData.self, capacity: 1)
-        let uuid = ptr.pointee.uuid
-
-        if current == 1, deviceID == uuid {
-          let profileURL = info["DeviceProfileURL"] as! URL
-          ptr.pointee.profileUrl = profileURL
-          return false
+          if current == 1, deviceID == uuid {
+            let profileURL = info["DeviceProfileURL"] as! URL
+            ptr.pointee.profileUrl = profileURL
+            return false
+          }
         }
-      }
-      return true
-    }, dataPointer)
+        return true
+      }, data)
+    }
 
     if let iccProfilePath = argResult.profileUrl?.path, FileManager.default.fileExists(atPath: iccProfilePath) {
       player.mpv.setString(MPVOption.GPURendererOptions.iccProfile, iccProfilePath)

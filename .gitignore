@@ -34,6 +34,9 @@ Temporary Items
 build/
 DerivedData/
 
+## Xcode generated
+*/project.xcworkspace/xcshareddata/
+
 ## Various settings
 *.pbxuser
 !default.pbxuser
@@ -101,4 +104,7 @@ temp/
 
 browser/Firefox_Open_In_IINA/*
 !browser/Firefox_Open_In_IINA/manifest.json
+
+*.dylib
+*.so
 

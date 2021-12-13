@@ -37,7 +37,7 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
   @IBOutlet var headerView: NSView!
   @IBOutlet var settingsView: NSView!
 
-  @IBOutlet weak var enableSettingsBtn: NSButton!
+  @IBOutlet weak var enableAdvancedSettingsBtn: Switch!
   @IBOutlet weak var optionsTableView: NSTableView!
   @IBOutlet weak var useAnotherConfigDirBtn: NSButton!
   @IBOutlet weak var chooseConfigDirBtn: NSButton!
@@ -55,6 +55,11 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
     optionsTableView.dataSource = self
     optionsTableView.delegate = self
     removeButton.isEnabled = false
+
+    enableAdvancedSettingsBtn.checked = Preference.bool(for: .enableAdvancedSettings)
+    enableAdvancedSettingsBtn.action = {
+      Preference.set($0, for: .enableAdvancedSettings)
+    }
   }
 
   func saveToUserDefaults() {

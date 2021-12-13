@@ -32,7 +32,21 @@ class PrefGeneralViewController: PreferenceViewController, PreferenceWindowEmbed
   @IBOutlet var historyView: NSView!
   @IBOutlet var playlistView: NSView!
   @IBOutlet var screenshotsView: NSView!
-
+  @IBOutlet weak var afterOpenActionBox: NSBox!
+  @IBOutlet weak var pauseActionBox: NSBox!
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    if #available(macOS 10.16, *) {
+      afterOpenActionBox.heightAnchor.constraint(equalToConstant: 42).isActive = true
+      pauseActionBox.heightAnchor.constraint(equalToConstant: 146).isActive = true
+    } else {
+      afterOpenActionBox.heightAnchor.constraint(equalToConstant: 34).isActive = true
+      pauseActionBox.heightAnchor.constraint(equalToConstant: 126).isActive = true
+    }
+  }
+  
   // MARK: - IBAction
 
   @IBAction func chooseScreenshotPathAction(_ sender: AnyObject) {
@@ -52,4 +66,24 @@ class PrefGeneralViewController: PreferenceViewController, PreferenceWindowEmbed
     SUUpdater.shared().feedURL = URL(string: sender.state == .on ? AppData.appcastBetaLink : AppData.appcastLink)!
   }
 
+}
+
+
+class SUUpdaterProxy: NSObject {
+  @objc dynamic var automaticallyChecksForUpdates: Bool {
+    get {
+      return SUUpdater.shared().automaticallyChecksForUpdates
+    }
+    set {
+      SUUpdater.shared().automaticallyChecksForUpdates = newValue
+    }
+  }
+  @objc dynamic var updateCheckInterval: Double {
+    get {
+      return SUUpdater.shared().updateCheckInterval
+    }
+    set {
+      SUUpdater.shared().updateCheckInterval = newValue
+    }
+  }
 }

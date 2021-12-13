@@ -140,7 +140,7 @@ extension AboutWindowController: NSCollectionViewDataSource {
   }
 
   private func loadContributors(from url: String) {
-    Just.get(url) { response in
+    Just.get(url, asyncCompletionHandler: { response in
       let prevCount = self.contributors.count
       guard let data = response.content,
         let contributors = try? JSONDecoder().decode([Contributor].self, from: data) else {
@@ -161,7 +161,7 @@ extension AboutWindowController: NSCollectionViewDataSource {
       if let nextURL = response.links["next"]?["url"] {
         self.loadContributors(from: nextURL)
       }
-    }
+    })
   }
 }
 

@@ -81,6 +81,7 @@ class InitialWindowController: NSWindowController {
   @IBOutlet weak var appIcon: NSImageView!
   @IBOutlet weak var versionLabel: NSTextField!
   @IBOutlet weak var visualEffectView: NSVisualEffectView!
+  @IBOutlet weak var leftOverlayView: NSView!
   @IBOutlet weak var mainView: NSView!
   @IBOutlet weak var betaIndicatorView: BetaIndicatorView!
   @IBOutlet weak var lastFileContainerView: InitialWindowViewActionButton!
@@ -153,6 +154,14 @@ class InitialWindowController: NSWindowController {
     guard let window = window, let theme = theme else { return }
     if #available(macOS 10.14, *) {
       window.appearance = NSAppearance(iinaTheme: theme)
+      if #available(macOS 10.16, *) {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = window.effectiveAppearance.isDark ?
+          [NSColor.black.withAlphaComponent(0.4).cgColor, NSColor.black.withAlphaComponent(0).cgColor] :
+          [NSColor.black.withAlphaComponent(0.1).cgColor, NSColor.black.withAlphaComponent(0).cgColor]
+        leftOverlayView.wantsLayer = true
+        leftOverlayView.layer = gradientLayer
+      }
     } else {
       window.appearance = NSAppearance(named: .vibrantDark)
       mainView.layer?.backgroundColor = CGColor(gray: 0.1, alpha: 1)
@@ -245,7 +254,7 @@ class InitialWindowViewActionButton: NSView {
 
   override func awakeFromNib() {
     self.wantsLayer = true
-    self.layer?.cornerRadius = 4
+    self.layer?.cornerRadius = 6
     self.layer?.backgroundColor = normalBackground.cgColor
     self.addTrackingArea(NSTrackingArea(rect: self.bounds, options: [.activeInKeyWindow, .mouseEnteredAndExited], owner: self, userInfo: nil))
   }

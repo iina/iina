@@ -99,7 +99,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   override func keyDown(with event: NSEvent) {
     let commandKey = NSEvent.ModifierFlags.command
-    if [event.modifierFlags, NSEvent.ModifierFlags.deviceIndependentFlagsMask] == commandKey  {
+    if event.modifierFlags.intersection(.deviceIndependentFlagsMask) == commandKey  {
       switch event.charactersIgnoringModifiers! {
       case "f":
         window!.makeFirstResponder(historySearchField)
@@ -109,9 +109,8 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
         break
       }
     } else if event.charactersIgnoringModifiers == "\u{7f}" {
-      outlineView.selectedRowIndexes
-        .compactMap { outlineView.item(atRow: $0) as? PlaybackHistory }
-        .forEach { HistoryController.shared.remove($0) }
+      let entries = outlineView.selectedRowIndexes.compactMap { outlineView.item(atRow: $0) as? PlaybackHistory }
+      HistoryController.shared.remove(entries)
     }
   }
 
@@ -270,9 +269,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   @IBAction func deleteAction(_ sender: AnyObject) {
     Utility.quickAskPanel("delete_history", sheetWindow: window) { respond in
       guard respond == .alertFirstButtonReturn else { return }
-      for entry in self.selectedEntries {
-        HistoryController.shared.remove(entry)
-      }
+      HistoryController.shared.remove(self.selectedEntries)
     }
   }
 

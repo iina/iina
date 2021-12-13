@@ -113,8 +113,7 @@ extension MainWindowController {
   }
 
   @objc func menuAlwaysOnTop(_ sender: AnyObject) {
-    isOntop = !isOntop
-    setWindowFloatingOnTop(isOntop)
+    setWindowFloatingOnTop(!isOntop)
   }
 
   @available(macOS 10.12, *)

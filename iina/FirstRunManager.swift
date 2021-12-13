@@ -9,11 +9,17 @@
 import Foundation
 
 class FirstRunManager {
-
   struct Key: RawRepresentable {
-
     typealias RawValue = String
     var rawValue: String
+
+    init(_ value: String) {
+      self.rawValue = value
+    }
+
+    init(rawValue: String) {
+      self.rawValue = rawValue
+    }
 
     static let joinBetaChannel = Key(rawValue: "joinBetaChannel")
   }

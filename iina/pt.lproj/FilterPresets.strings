@@ -1,0 +1,55 @@
+/*
+  FilterPresets.strings
+  iina
+
+  Created by lhc on 25/8/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+/* It's optional to localize descriptions for each parameter! */
+
+
+
+"crop" = "Cortar";
+"crop.w" = "Largura (padrão: largura do vídeo)";
+"crop.h" = "Altura (padrão: altura do vídeo)";
+"crop.x" = "Origem X (padrão: centro)";
+"crop.y" = "Origem Y (padrão: centro)";
+
+"expand" = "Expandir";
+"expand.w" = "Largura (padrão: largura do vídeo)";
+"expand.h" = "Altura (padrão: altura do vídeo)";
+"expand.x" = "Origem X (padrão: centro)";
+"expand.y" = "Origem Y (padrão: centro)";
+"expand.aspect" = "Expandir para adaptar a um aspeto (ex.: 4/3)";
+"expand.round" = "Arredonda para se tornar divisível por este valor";
+
+"sharpen" = "Nitidez";
+"sharpen.msize" = "Tamanho da Matriz";
+"sharpen.amount" = "Quantidade";
+
+"blur" = "Desfoque";
+"blur.msize" = "Tamanho da Matriz";
+"blur.amount" = "Quantidade";
+
+"delogo" = "Remoção de Logótipos";
+"delogo.w" = "Largura";
+"delogo.h" = "Altura";
+"delogo.x" = "Origem X";
+"delogo.y" = "Origem Y";
+
+"negative" = "Negativo";
+
+"vflip" = "Virar";
+"hflip" = "Espelho";
+
+"lut3d" = "3D LUT";
+"lut3d.file" = "Caminho do arquivo (também pode-se arrastar e soltar o arquivo na caixa de entrada)";
+"lut3d.interp" = "Modo de interpolação";
+
+"custom_mpv" = "Personalizado (mpv)";
+"custom_mpv.name" = "Nome do filtro";
+"custom_mpv.string" = "Valor do filtro";
+
+"custom_ffmpeg" = "Personalizado (FFmpeg)";
+"custom_ffmpeg.name" = "Nome do filtro";
+"custom_ffmpeg.string" = "Valor do filtro";

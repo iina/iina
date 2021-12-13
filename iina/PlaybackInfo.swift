@@ -56,6 +56,7 @@ class PlaybackInfo {
   }
 
   var isSeeking: Bool = false
+
   var isPaused: Bool = false {
     didSet {
       PlayerCore.checkStatusForSleep()
@@ -64,9 +65,17 @@ class PlaybackInfo {
           NowPlayingInfoManager.updateState(isPaused ? .paused : .playing)
         }
         if #available(macOS 10.12, *), player.mainWindow.pipStatus == .inPIP {
-          player.mainWindow.pip.playing = !isPaused
+          player.mainWindow.pip.playing = isPlaying
         }
       }
+    }
+  }
+  var isPlaying: Bool {
+    get {
+      return !isPaused
+    }
+    set {
+      isPaused = !newValue
     }
   }
 
@@ -74,6 +83,7 @@ class PlaybackInfo {
   var justStartedFile: Bool = false
   var justOpenedFile: Bool = false
   var shouldAutoLoadFiles: Bool = false
+  var isMatchingSubtitles = false
   var disableOSDForFileLoading: Bool = false
 
   /** The current applied aspect, used for find current aspect in menu, etc. Maybe not a good approach. */
@@ -86,6 +96,10 @@ class PlaybackInfo {
   var delogoFilter: MPVFilter?
 
   var deinterlace: Bool = false
+  var hwdec: String = "no"
+  var hwdecEnabled: Bool {
+    hwdec != "no"
+  }
 
   // video equalizer
   var brightness: Int = 0
@@ -105,7 +119,6 @@ class PlaybackInfo {
 
   // cache related
   var pausedForCache: Bool = false
-  var cacheSize: Int = 0
   var cacheUsed: Int = 0
   var cacheSpeed: Int = 0
   var cacheTime: Int = 0
@@ -175,6 +188,7 @@ class PlaybackInfo {
   var currentSubsInfo: [FileInfo] = []
   var currentVideosInfo: [FileInfo] = []
   var cachedVideoDurationAndProgress: [String: (duration: Double?, progress: Double?)] = [:]
+  var cachedMetadata: [String: (title: String?, album: String?, artist: String?)] = [:]
 
   var thumbnailsReady = false
   var thumbnailsProgress: Double = 0

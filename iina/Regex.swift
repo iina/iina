@@ -14,7 +14,6 @@ class Regex {
   static let httpFileName = Regex("attachment; filename=(.+?)\\Z")
   static let url = Regex("^(([^:\\/?#]+):)(\\/\\/([^/?#]*))?([^?#]*)(\\?([^#]*))?(#(.*))?")
   static let filePath = Regex("^(/[^/]+)+$")
-  static let iso639_2Desc = Regex("^.+?\\(([a-z]{2,3})\\)$")
   static let geometry = Regex("^((\\d+%?)?(x(\\d+%?))?)?((\\+|\\-)(\\d+%?)(\\+|\\-)(\\d+%?))?$")
 
   var regex: NSRegularExpression?

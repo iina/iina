@@ -45,7 +45,7 @@ class OpenURLWindowController: NSWindowController, NSTextFieldDelegate, NSContro
     urlField.stringValue = ""
     usernameField.stringValue = ""
     passwordField.stringValue = ""
-    rememberPasswordCheckBox.state = .on
+    rememberPasswordCheckBox.state = .off
     urlStackView.setVisibilityPriority(.notVisible, for: httpPrefixTextField)
     window?.makeFirstResponder(urlField)
   }
@@ -56,7 +56,9 @@ class OpenURLWindowController: NSWindowController, NSTextFieldDelegate, NSContro
 
   @IBAction func openBtnAction(_ sender: Any) {
     if let url = getURL().url {
-      if rememberPasswordCheckBox.state == .on, let host = url.host {
+      if rememberPasswordCheckBox.state == .on,
+         let host = url.host,
+         !usernameField.stringValue.isEmpty {
         try? KeychainAccess.write(username: usernameField.stringValue,
                                   password: passwordField.stringValue,
                                   forService: .httpAuth,

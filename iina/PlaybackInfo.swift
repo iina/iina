@@ -62,7 +62,7 @@ class PlaybackInfo {
       PlayerCore.checkStatusForSleep()
       if player == PlayerCore.lastActive {
         if #available(macOS 10.13, *), RemoteCommandController.useSystemMediaControl {
-          NowPlayingInfoManager.updateState(isPaused ? .paused : .playing)
+          NowPlayingInfoManager.updateInfo(state: isPaused ? .paused : .playing)
         }
         if #available(macOS 10.12, *), player.mainWindow.pipStatus == .inPIP {
           player.mainWindow.pip.playing = isPlaying

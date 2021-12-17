@@ -58,17 +58,16 @@ class JavascriptAPIEvent: JavascriptAPI, JavascriptAPIEventExportable {
 }
 
 class JavascriptAPIEventCallback: EventCallable {
-  private var callback: JSManagedValue!
+  private var callback: JSValue?
 
   init(_ callback: JSValue) {
-    self.callback = JSManagedValue(value: callback)
-    JSContext.current()!.virtualMachine.addManagedReference(self.callback, withOwner: self)
+    self.callback = callback
   }
 
   func call(withArguments args: [Any]) {
-    callback?.value?.call(withArguments: args.map { arg in
+    callback?.call(withArguments: args.map { arg in
       if let rect = arg as? CGRect {
-        return JSValue(rect: rect, in: callback.value.context)!
+        return JSValue(rect: rect, in: callback!.context)!
       } else {
         return arg
       }

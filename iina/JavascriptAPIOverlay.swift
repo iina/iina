@@ -32,6 +32,7 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
   }
 
   func show() {
+    guard pluginInstance != nil else { return }
     guard pluginInstance.overlayViewLoaded && permitted(to: .displayVideoOverlay) else { return }
     DispatchQueue.main.async {
       self.pluginInstance.overlayView.isHidden = false
@@ -39,6 +40,7 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
   }
 
   func hide() {
+    guard pluginInstance != nil else { return }
     guard pluginInstance.overlayViewLoaded && permitted(to: .displayVideoOverlay) else { return }
     DispatchQueue.main.async {
       self.pluginInstance.overlayView.isHidden = true
@@ -46,6 +48,7 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
   }
 
   func setOpacity(_ opacity: Float) {
+    guard pluginInstance != nil else { return }
     guard pluginInstance.overlayViewLoaded && permitted(to: .displayVideoOverlay) else { return }
     DispatchQueue.main.async {
       self.pluginInstance.overlayView.alphaValue = CGFloat(opacity)
@@ -76,6 +79,7 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
   }
 
   func setStyle(_ style: String) {
+    guard pluginInstance != nil else { return }
     guard pluginInstance.overlayViewLoaded && permitted(to: .displayVideoOverlay) else { return }
     guard inSimpleMode else {
       log("overlay.setStyle is only available in simple mode.", level: .error)
@@ -89,6 +93,7 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
   }
 
   func setContent(_ content: String) {
+    guard pluginInstance != nil else { return }
     guard pluginInstance.overlayViewLoaded && permitted(to: .displayVideoOverlay) else { return }
     guard inSimpleMode else {
       log("overlay.setContent is only available in simple mode.", level: .error)
@@ -102,11 +107,13 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
   }
 
   func postMessage(_ name: String, _ data: JSValue) {
+    guard pluginInstance != nil else { return }
     guard pluginInstance.overlayViewLoaded && permitted(to: .displayVideoOverlay) else { return }
     messageHub.postMessage(to: pluginInstance.overlayView, name: name, data: data)
   }
 
   func onMessage(_ name: String, _ callback: JSValue) {
+    guard pluginInstance != nil else { return }
     guard pluginInstance.overlayViewLoaded && permitted(to: .displayVideoOverlay) else { return }
     messageHub.addListener(forEvent: name, callback: callback)
   }

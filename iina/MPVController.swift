@@ -510,8 +510,8 @@ class MPVController: NSObject {
     }
   }
 
-  func observe(property: String) {
-    mpv_observe_property(mpv, 0, property, MPV_FORMAT_NONE)
+  func observe(property: String, format: mpv_format = MPV_FORMAT_DOUBLE) {
+    mpv_observe_property(mpv, 0, property, format)
   }
 
   // Set property

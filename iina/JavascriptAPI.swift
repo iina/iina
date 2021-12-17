@@ -26,6 +26,7 @@ class JavascriptAPI: NSObject {
   }
 
   func log(_ message: String, level: Logger.Level = .debug) {
+    guard pluginInstance != nil else { return }
     Logger.log(message, level: level, subsystem: pluginInstance.subsystem)
   }
 

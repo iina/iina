@@ -366,7 +366,9 @@ class MPVController: NSObject {
         mpv_render_param()
       ]
       mpv_render_context_create(&mpvRenderContext, mpv, &params)
-      mpv_render_context_set_update_callback(mpvRenderContext!, mpvUpdateCallback, mutableRawPointerOf(obj: player.mainWindow.videoView.videoLayer))
+      let layer = player.mainWindow.videoView.videoLayer
+      layer.context = CGLGetCurrentContext()
+      mpv_render_context_set_update_callback(mpvRenderContext!, mpvUpdateCallback, mutableRawPointerOf(obj: layer))
     }
   }
 

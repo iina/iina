@@ -12,6 +12,8 @@ import OpenGL.GL3
 
 class ViewLayer: CAOpenGLLayer {
 
+  var context: CGLContextObj! = nil
+
   weak var videoView: VideoView!
 
   lazy var mpvGLQueue = DispatchQueue(label: "com.colliderli.iina.mpvgl", qos: .userInteractive)
@@ -174,15 +176,18 @@ class ViewLayer: CAOpenGLLayer {
     if needsMPVRender {
       videoView.uninitLock.lock()
       // draw(inCGLContext:) is not called, needs a skip render
-      if !videoView.isUninited, let context = videoView.player.mpv?.mpvRenderContext {
+      if !videoView.isUninited, let renderContext = videoView.player.mpv?.mpvRenderContext {
+        CGLLockContext(context)
+        CGLSetCurrentContext(context)
         var skip: CInt = 1
         withUnsafeMutablePointer(to: &skip) { skip in
           var params: [mpv_render_param] = [
             mpv_render_param(type: MPV_RENDER_PARAM_SKIP_RENDERING, data: .init(skip)),
             mpv_render_param()
           ]
-          mpv_render_context_render(context, &params);
+          mpv_render_context_render(renderContext, &params);
         }
+        CGLUnlockContext(context)
       }
       videoView.uninitLock.unlock()
       needsMPVRender = false

@@ -62,9 +62,11 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
     }
     let rootURL = pluginInstance.plugin.root
     let url = rootURL.appendingPathComponent(path)
-    pluginInstance.overlayView.loadFileURL(url, allowingReadAccessTo: rootURL)
-    pluginInstance.overlayViewLoaded = true
-    inSimpleMode = false
+    executeOnMainThread {
+      pluginInstance.overlayView.loadFileURL(url, allowingReadAccessTo: rootURL)
+      pluginInstance.overlayViewLoaded = true
+      inSimpleMode = false
+    }
   }
 
   func simpleMode() {

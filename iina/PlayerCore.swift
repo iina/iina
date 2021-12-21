@@ -1723,10 +1723,17 @@ extension PlayerCore: FFmpegControllerDelegate {
 
 @available (macOS 10.13, *)
 class NowPlayingInfoManager {
-  static let center = MPNowPlayingInfoCenter.default()
-  static private var info = [String: Any]()
+  static private let lock = NSLock()
 
   static func updateInfo(state: MPNowPlayingPlaybackState? = nil, withTitle: Bool = false) {
+    // This method is called from the main thread and from background threads. Must single thread access.
+    lock.lock()
+    defer {
+      lock.unlock()
+    }
+    let center = MPNowPlayingInfoCenter.default()
+    var info = center.nowPlayingInfo ?? [String: Any]()
+
     let activePlayer = PlayerCore.lastActive
 
     if withTitle {

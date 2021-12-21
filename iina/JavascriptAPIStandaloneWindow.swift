@@ -24,21 +24,29 @@ class JavascriptAPIStandaloneWindow: JavascriptAPI, JavascriptAPIStandaloneWindo
 
   override func cleanUp(_ instance: JavascriptPluginInstance) {
     guard instance.standaloneWindowCreated else { return }
-    instance.standaloneWindow.close()
+    executeOnMainThread {
+      instance.standaloneWindow.close()
+    }
   }
 
   func close() {
-    pluginInstance.standaloneWindow.close()
+    executeOnMainThread {
+      pluginInstance.standaloneWindow.close()
+    }
   }
 
   func open() {
-    pluginInstance.standaloneWindow.makeKeyAndOrderFront(nil)
+    executeOnMainThread {
+      pluginInstance.standaloneWindow.makeKeyAndOrderFront(nil)
+    }
   }
 
   func loadFile(_ path: String) {
     let rootURL = pluginInstance.plugin.root
     let url = rootURL.appendingPathComponent(path)
-    pluginInstance.standaloneWindow.webView.loadFileURL(url, allowingReadAccessTo: rootURL)
+    executeOnMainThread {
+      pluginInstance.standaloneWindow.webView.loadFileURL(url, allowingReadAccessTo: rootURL)
+    }
   }
 
   func postMessage(_ name: String, _ data: JSValue) {
@@ -67,12 +75,18 @@ class JavascriptAPIStandaloneWindow: JavascriptAPI, JavascriptAPIStandaloneWindo
       switch key {
       case "title":
         if let title = value as? String {
-          window.title = title + " — \(pluginInstance.plugin.name)"
+          executeOnMainThread {
+            window.title = title + " — \(pluginInstance.plugin.name)"
+          }
         }
       case "resizable":
-        setStyleMask(.resizable, value)
+        executeOnMainThread {
+          setStyleMask(.resizable, value)
+        }
       case "fullSizeContentView":
-        setStyleMask(.fullSizeContentView, value)
+        executeOnMainThread {
+          setStyleMask(.fullSizeContentView, value)
+        }
       default:
         break
       }

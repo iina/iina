@@ -48,6 +48,16 @@ class JavascriptAPI: NSObject {
   func createPromise(_ block: @escaping @convention(block) (JSValue, JSValue) -> Void) -> JSValue {
     return context.objectForKeyedSubscript("Promise")!.construct(withArguments: [JSValue(object: block, in: context)!])
   }
+  
+  func executeOnMainThread(block: () -> Void) {
+    if Thread.isMainThread {
+      block()
+    } else {
+      DispatchQueue.main.sync {
+        block()
+      }
+    }
+  }
 
   func parsePath(_ path: String) -> (path: String?, local: Bool) {
     if path.hasPrefix("@tmp/") {

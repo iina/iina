@@ -339,6 +339,16 @@ class PlayerCore: NSObject {
     isMpvTerminated = true
   }
 
+  /// Wait until this player core has been terminated.
+  ///
+  /// The method `terminateMPV` **must** be called before calling this method. That method calls `mpvQuit` which
+  /// executes asynchronously. This method waits until mpv has been destroyed.
+  /// - parameter timeout: The latest time to wait for this player core to terminate
+  /// - returns: Whether this player core has terminated or waiting timed out
+  func waitForTermination(timeout: DispatchTime) -> DispatchTimeoutResult {
+    mpv.waitForDestruction(timeout: timeout)
+  }
+
   // invalidate timer
   func invalidateTimer() {
     self.syncPlayTimeTimer?.invalidate()

@@ -92,6 +92,8 @@ class MPVController: NSObject {
     MPVProperty.idleActive: MPV_FORMAT_FLAG
   ]
 
+  private let isDestroyed = DispatchSemaphore(value: 0)
+
   init(playerCore: PlayerCore) {
     self.player = playerCore
     super.init()
@@ -580,6 +582,17 @@ class MPVController: NSObject {
     }
   }
 
+  /// Wait until the mpv context has been destroyed.
+  ///
+  /// The method `mpvQuit` **must** be called before calling this method. That method sends a quit command to mpv which will
+  /// execute asynchronously. This method waits until mpv emits the event `MPV_EVENT_SHUTDOWN` and the `handleEvent`
+  /// method destroys the mpv context.
+  /// - parameter timeout: The latest time to wait for the mpv context to be destroyed
+  /// - returns: Whether the mpv context has been destroyed or waiting timed out
+  func waitForDestruction(timeout: DispatchTime) -> DispatchTimeoutResult {
+    isDestroyed.wait(timeout: timeout)
+  }
+
   // Handle the event
   private func handleEvent(_ event: UnsafePointer<mpv_event>!) {
     let eventId = event.pointee.event_id
@@ -594,6 +607,7 @@ class MPVController: NSObject {
       } else {
         mpv_destroy(mpv)
         mpv = nil
+        isDestroyed.signal()
       }
 
     case MPV_EVENT_LOG_MESSAGE:

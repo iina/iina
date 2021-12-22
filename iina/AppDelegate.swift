@@ -39,6 +39,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   private var commandLineStatus = CommandLineStatus()
 
+  private lazy var terminateQueue = DispatchQueue(label: "com.colliderli.iina.terminate", qos: .userInitiated)
+
   // Windows
 
   lazy var openURLWindow: OpenURLWindowController = OpenURLWindowController()
@@ -256,7 +258,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     for pc in PlayerCore.playerCores {
      pc.terminateMPV()
     }
-    return .terminateNow
+    // The call to terminateMPV instructed mpv to quit, but that is happening asynchronously in the
+    // background. Must wait for mpv to finish terminating before allowing Cocoa to terminate the
+    // application. This must be done in another thread to avoid blocking the main thread.
+    terminateQueue.async {
+      // Normally mpv will quickly terminate, but we will impose a time limit to insure termination
+      // of the application is not blocked.
+      Logger.log("Waiting for mpv termination")
+      let timeout = DispatchTime.now() + DispatchTimeInterval.milliseconds(500)
+      for pc in PlayerCore.playerCores {
+        let result = pc.waitForTermination(timeout: timeout)
+        if result == .timedOut {
+          Logger.log("Timeout waiting for termination of player core", level: .warning)
+        }
+      }
+      // Tell Cocoa to proceed with termination. This has to be done on the main thread.
+      DispatchQueue.main.async {
+        Logger.log("Proceeding with termination")
+        NSApp.reply(toApplicationShouldTerminate: true)
+      }
+    }
+    // Tell Cocoa that it is ok to proceed with termination, but wait for our reply.
+    return .terminateLater
   }
 
   func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {

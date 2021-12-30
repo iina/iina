@@ -387,8 +387,27 @@ class MPVController: NSObject {
     return flags & UInt64(MPV_RENDER_UPDATE_FRAME.rawValue) > 0
   }
 
+  /// Remove registered observers for mpv properties and IINA preferences.
+  ///
+  /// This method is used when terminating mpv. Once the controller has initiated the shutdown of the mpv context we don't want to
+  /// continue using the context while mpv is asynchronously shutting it down.
+  private func removeObservers() {
+    // Remove observers for mpv properties. Because 0 was passed for reply_userdata when registering
+    // mpv property observers all observers can be removed in one call.
+    mpv_unobserve_property(mpv, 0)
+    // Remove observers for IINA preferences.
+    ObjcUtils.silenced {
+      self.optionObservers.forEach { (k, _) in
+        UserDefaults.standard.removeObserver(self, forKeyPath: k)
+      }
+    }
+  }
+
   // Basically send quit to mpv
   func mpvQuit() {
+    removeObservers()
+    // The quit command executes asynchronously. A MPV_EVENT_SHUTDOWN event is emitted when the quit
+    // command finishes.
     command(.quit)
   }
 
@@ -445,36 +464,43 @@ class MPVController: NSObject {
 
   // Set property
   func setFlag(_ name: String, _ flag: Bool) {
+    guard !player.isMpvTerminating else { return }
     var data: Int = flag ? 1 : 0
     mpv_set_property(mpv, name, MPV_FORMAT_FLAG, &data)
   }
 
   func setInt(_ name: String, _ value: Int) {
+    guard !player.isMpvTerminating else { return }
     var data = Int64(value)
     mpv_set_property(mpv, name, MPV_FORMAT_INT64, &data)
   }
 
   func setDouble(_ name: String, _ value: Double) {
+    guard !player.isMpvTerminating else { return }
     var data = value
     mpv_set_property(mpv, name, MPV_FORMAT_DOUBLE, &data)
   }
 
   func setFlagAsync(_ name: String, _ flag: Bool) {
+    guard !player.isMpvTerminating else { return }
     var data: Int = flag ? 1 : 0
     mpv_set_property_async(mpv, 0, name, MPV_FORMAT_FLAG, &data)
   }
 
   func setIntAsync(_ name: String, _ value: Int) {
+    guard !player.isMpvTerminating else { return }
     var data = Int64(value)
     mpv_set_property_async(mpv, 0, name, MPV_FORMAT_INT64, &data)
   }
 
   func setDoubleAsync(_ name: String, _ value: Double) {
+    guard !player.isMpvTerminating else { return }
     var data = value
     mpv_set_property_async(mpv, 0, name, MPV_FORMAT_DOUBLE, &data)
   }
 
   func setString(_ name: String, _ value: String) {
+    guard !player.isMpvTerminating else { return }
     mpv_set_property_string(mpv, name, value)
   }
 
@@ -586,7 +612,7 @@ class MPVController: NSObject {
 
     switch eventId {
     case MPV_EVENT_SHUTDOWN:
-      let quitByMPV = !player.isMpvTerminated
+      let quitByMPV = !player.isMpvTerminating
       if quitByMPV {
         DispatchQueue.main.sync {
           NSApp.terminate(nil)
@@ -716,7 +742,7 @@ class MPVController: NSObject {
 
   private func onVideoReconfig() {
     // If loading file, video reconfig can return 0 width and height
-    if player.info.fileLoading {
+    if player.info.fileLoading, player.isMpvTerminating {
       return
     }
     var dwidth = getInt(MPVProperty.dwidth)
@@ -739,6 +765,10 @@ class MPVController: NSObject {
   // MARK: - Property listeners
 
   private func handlePropertyChange(_ name: String, _ property: mpv_event_property) {
+    // Once mpv starts terminating we no longer care about property changes and especially do not
+    // want to process changes that could trigger calls to mpv. Observers are being deregistered so
+    // there is only a brief window where this might trigger.
+    guard !player.isMpvTerminating else { return }
 
     var needReloadQuickSettingsView = false
 

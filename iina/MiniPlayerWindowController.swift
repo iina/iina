@@ -186,7 +186,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   func windowWillClose(_ notification: Notification) {
     player.switchedToMiniPlayerManually = false
     player.switchedBackFromMiniPlayerManually = false
-    if !player.isMpvTerminated {
+    if !player.isMpvTerminating {
       // not needed if called when terminating the whole app
       player.switchBackFromMiniPlayer(automatically: true, showMainWindow: false)
     }

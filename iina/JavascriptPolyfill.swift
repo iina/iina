@@ -21,10 +21,25 @@ class JavascriptPolyfill {
       timer.invalidate()
     }
   }
+  
+  func cleanTimers() {
+    for timer in timers {
+      if (!timer.value.isValid) {
+        self.timers.removeValue(forKey: timer.key)
+      }
+    }
+    print("cleanTimers", self.timers.count)
+  }
 
   func removeTimer(identifier: String) {
-    let timer = self.timers.removeValue(forKey: identifier)
+    weak var timer = self.timers.removeValue(forKey: identifier)
     timer?.invalidate()
+    timer = nil
+    if (self.timers.isEmpty) {
+      plugin.queue.async(execute: {
+        CFRunLoopStop(CFRunLoopGetCurrent())
+      })
+    }
   }
 
   func createTimer(callback: JSValue, ms: Double, repeats : Bool) -> String {
@@ -37,7 +52,10 @@ class JavascriptPolyfill {
                                        selector: #selector(self.callJSCallback),
                                        userInfo: callback,
                                        repeats: repeats)
+      RunLoop.current.add(timer, forMode: RunLoop.Mode.common)
       self.timers[uuid] = timer
+      self.cleanTimers()
+      CFRunLoopRun()
     })
     return uuid
   }

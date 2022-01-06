@@ -1731,6 +1731,7 @@ class NowPlayingInfoManager {
 
   static func updateInfo(withTitle: Bool = false) {
     let activePlayer = PlayerCore.lastActive
+    guard !activePlayer.isMpvTerminated else { return }
 
     if withTitle {
       if activePlayer.currentMediaIsAudio == .isAudio {

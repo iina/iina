@@ -434,9 +434,19 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   
   func updatePlayTime(withDuration: Bool, andProgressBar: Bool) {
     // IINA listens for changes to mpv properties such as chapter that can occur during file loading
-    // resulting in this function being called before mpv has set its poistion and duration
-    // properties. If position or duration are unknown assume the file is still being loaded.
-    guard loaded, let duration = player.info.videoDuration, let pos = player.info.videoPosition else { return }
+    // resulting in this function being called before mpv has set its position and duration
+    // properties. Confirm the window and file have been loaded.
+    guard loaded, player.mpv.fileLoaded else { return }
+    // The mpv documentation for the duration property indicates mpv is not always able to determine
+    // the video duration in which case the property is not available.
+    guard let duration = player.info.videoDuration else {
+      Logger.log("Video duration not available")
+      return
+    }
+    guard let pos = player.info.videoPosition else {
+      Logger.log("Video position not available")
+      return
+    }
     [leftLabel, rightLabel].forEach { $0.updateText(with: duration, given: pos) }
     if #available(macOS 10.12.2, *) {
       player.touchBarSupport.touchBarPosLabels.forEach { $0.updateText(with: duration, given: pos) }

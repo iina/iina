@@ -15,12 +15,11 @@ class ThumbnailCache {
   private typealias FileSize = UInt64
   private typealias FileTimestamp = Int64
 
-  static private let version: CacheVersion = 2
+  private static let version: CacheVersion = 2
   
-  static private let sizeofMetadata = MemoryLayout<CacheVersion>.size + MemoryLayout<FileSize>.size + MemoryLayout<FileTimestamp>.size
+  private static let sizeofMetadata = MemoryLayout<CacheVersion>.size + MemoryLayout<FileSize>.size + MemoryLayout<FileTimestamp>.size
 
-
-  static private let imageProperties: [NSBitmapImageRep.PropertyKey: Any] = [
+  private static let imageProperties: [NSBitmapImageRep.PropertyKey: Any] = [
     .compressionFactor: 0.75
   ]
 
@@ -157,18 +156,12 @@ class ThumbnailCache {
 
     // data blocks
     while file.offsetInFile != eof {
-      // length
-      guard let blockLength: Int64 = file.read(type: Int64.self) else {
-        Logger.log("Cannot read image length. Cache file will be deleted.", level: .warning, subsystem: subsystem)
+      // length and timestamp
+      guard let blockLength = file.read(type: Int64.self),
+            let timestamp = file.read(type: Double.self) else {
+        Logger.log("Cannot read image header. Cache file will be deleted.", level: .warning, subsystem: subsystem)
         file.closeFile()
-        delete(pathURL)
-        return nil
-      }
-      // timestamp
-      guard let timestamp: Double = file.read(type: Double.self) else {
-        Logger.log("Cannot read image timestamp. Cache file will be deleted.", level: .warning, subsystem: subsystem)
-        file.closeFile()
-        delete(pathURL)
+        deleteCacheFile(at: pathURL)
         return nil
       }
       // jpeg
@@ -176,7 +169,7 @@ class ThumbnailCache {
       guard let image = NSImage(data: jpegData) else {
         Logger.log("Cannot read image. Cache file will be deleted.", level: .warning, subsystem: subsystem)
         file.closeFile()
-        delete(pathURL)
+        deleteCacheFile(at: pathURL)
         return nil
       }
       // construct
@@ -191,7 +184,7 @@ class ThumbnailCache {
     return result
   }
 
-  static private func delete(_ pathURL: URL) {
+  private static func deleteCacheFile(at pathURL: URL) {
     // try deleting corrupted cache
     do {
       try FileManager.default.removeItem(at: pathURL)
@@ -200,7 +193,7 @@ class ThumbnailCache {
     }
   }
 
-  static private func urlFor(_ name: String) -> URL {
+  private static func urlFor(_ name: String) -> URL {
     return Utility.thumbnailCacheURL.appendingPathComponent(name)
   }
 

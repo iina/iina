@@ -17,14 +17,6 @@ class SleepPreventer: NSObject {
 
   static private var preventedSleep = false
 
-  private static func errorToString(_ code: IOReturn) -> String {
-    if let error = mach_error_string(code) {
-      return String(cString: error)
-    } else {
-      return ""
-    }
-  }
-
   static func preventSleep() {
     if preventedSleep {
       return
@@ -37,7 +29,7 @@ class SleepPreventer: NSObject {
     if success == kIOReturnSuccess {
       preventedSleep = true
     } else {
-      Logger.log("Cannot prevent display sleep: \(errorToString(success)) (\(success))", level: .error)
+      Logger.log("Cannot prevent display sleep: \(String(cString: mach_error_string(success))) (\(success))", level: .error)
       DispatchQueue.main.async {
         Utility.showAlert("sleep")
       }

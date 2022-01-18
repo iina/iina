@@ -910,8 +910,8 @@ class MPVController: NSObject {
       let reply = event.pointee.reply_userdata
       if reply == MPVController.UserData.screenshot {
         let code = event.pointee.error
-        guard 0 <= code else {
-          let error = String.init(cString: mpv_error_string(code))
+        guard code >= 0 else {
+          let error = String(cString: mpv_error_string(code))
           Logger.log("Cannot take a screenshot, mpv API error: \(error), Return value: \(code)", level: .error)
           // Unfortunately the mpv API does not provide any details on the failure. The error
           // code returned maps to "error running command", so all the alert can report is

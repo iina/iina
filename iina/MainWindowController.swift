@@ -1589,9 +1589,12 @@ class MainWindowController: PlayerWindowController {
       // isolated to the setTitleWithRepresentedFilename method, possibly only when running on an
       // Apple Silicon based Mac. Based on the Apple documentation setTitleWithRepresentedFilename
       // appears to be a convenience method. As a workaround for the issue directly set the window
-      // properties we think that method is setting.
-      if Preference.bool(for: .useLegacyFullScreen), #available(macOS 11.0, *) {
-        window?.representedFilename = player.info.currentURL?.path ?? ""
+      // title.
+      //
+      // This problem has been reported to Apple as:
+      // "setTitleWithRepresentedFilename throws NSInvalidArgumentException: NSNextStepFrame _displayName"
+      // Feedback number FB9789129
+      if Preference.bool(for: .useLegacyFullScreen), #available(macOS 11, *) {
         window?.title = player.info.currentURL?.lastPathComponent ?? ""
       } else {
         window?.setTitleWithRepresentedFilename(player.info.currentURL?.path ?? "")

@@ -503,17 +503,8 @@ class Utility {
       at: folder,
       includingPropertiesForKeys: [.creationDateKey],
       options: .skipsSubdirectoryDescendants),
-      var latestFile = contents.first else { return nil }
-
-    var latestDate = Date.distantPast
-
-    for file in contents {
-      if let date = try? file.resourceValues(forKeys: [.creationDateKey]).creationDate, date > latestDate {
-        latestDate = date
-        latestFile = file
-      }
-    }
-    return latestFile
+          !contents.isEmpty else { return nil }
+    return contents.max { a, b in a.creationDate! < b.creationDate! }
   }
 
   /// Make sure the block is executed on the main thread. Be careful since it uses `sync`. Keep the block mininal.

@@ -29,7 +29,10 @@ class SleepPreventer: NSObject {
     if success == kIOReturnSuccess {
       preventedSleep = true
     } else {
-      Utility.showAlert("sleep")
+      Logger.log("Cannot prevent display sleep: \(String(cString: mach_error_string(success))) (\(success))", level: .error)
+      DispatchQueue.main.async {
+        Utility.showAlert("sleep")
+      }
     }
   }
 

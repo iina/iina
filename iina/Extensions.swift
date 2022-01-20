@@ -381,8 +381,13 @@ extension Data {
 }
 
 extension FileHandle {
-  func read<T>(type: T.Type /* To prevent unintended specializations */) -> T {
-    return readData(ofLength: MemoryLayout<T>.size).withUnsafeBytes {
+  func read<T>(type: T.Type /* To prevent unintended specializations */) -> T? {
+    let size = MemoryLayout<T>.size
+    let data = readData(ofLength: size)
+    guard data.count == size else {
+      return nil
+    }
+    return data.withUnsafeBytes {
       $0.bindMemory(to: T.self).first!
     }
   }

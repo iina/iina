@@ -92,7 +92,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     // Start the log file by logging the version of IINA producing the log file.
     let (version, build) = Utility.iinaVersion()
-    Logger.log("IINA \(version) Build \(build) Copyright © 2017-2021 Collider LI, et al.")
+    Logger.log("IINA \(version) Build \(build)")
+
+    // The copyright is used in the Finder "Get Info" window which is a narrow window so the
+    // copyright consists of multiple lines.
+    let copyright = Utility.iinaCopyright()
+    copyright.enumerateLines { line, _ in
+      Logger.log(line)
+    }
 
     // Useful to know the versions of significant dependencies that are being used so log that
     // information as well when it can be obtained.

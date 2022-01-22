@@ -306,7 +306,8 @@
 "osc_toolbar.sub_track" = "Choose subtitle track";
 
 "mini_player.album_art" = "Toggle album art";
-"mini_player.loop" = "Repeat";
+"mini_player.loop" = "Repeat playlist";
+"mini_player.loop_file" = "Repeat single file";
 "mini_player.shuffle" = "Shuffle";
 "mini_player.remove" = "Remove from playlist";
 "mini_player.add" = "Add to playlist";

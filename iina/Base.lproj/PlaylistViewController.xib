@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,7 +14,8 @@
                 <outlet property="chapterTableView" destination="BvG-MR-6LX" id="WoF-Wg-fqX"/>
                 <outlet property="chaptersBtn" destination="SOR-3l-PFj" id="W2q-tm-TA0"/>
                 <outlet property="deleteBtn" destination="7my-AM-8Ts" id="wTg-jz-wRa"/>
-                <outlet property="loopBtn" destination="IHI-5g-OMg" id="Sev-F9-8Dg"/>
+                <outlet property="loopFileBtn" destination="xWD-ub-60l" id="uQQ-hQ-gmB"/>
+                <outlet property="loopPlaylistBtn" destination="IHI-5g-OMg" id="Sev-F9-8Dg"/>
                 <outlet property="playlistBtn" destination="5Zq-JQ-XO4" id="iAS-Co-wFQ"/>
                 <outlet property="playlistTableView" destination="xIa-sI-0Xn" id="JVO-9u-NdG"/>
                 <outlet property="removeBtn" destination="xKm-J1-NZs" id="cgl-XX-dEK"/>
@@ -32,22 +33,22 @@
             <rect key="frame" x="0.0" y="0.0" width="241" height="334"/>
             <subviews>
                 <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="Yym-Zw-Hd8">
-                    <rect key="frame" x="0.0" y="0.0" width="241" height="294"/>
+                    <rect key="frame" x="0.0" y="0.0" width="241" height="237"/>
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="Playlist" identifier="1" id="rjs-Qf-mT6">
-                            <view key="view" ambiguous="YES" id="BXH-zz-cse">
-                                <rect key="frame" x="0.0" y="0.0" width="241" height="282"/>
+                            <view key="view" id="BXH-zz-cse">
+                                <rect key="frame" x="0.0" y="0.0" width="241" height="237"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <scrollView ambiguous="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="28" horizontalPageScroll="10" verticalLineScroll="28" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n5h-uy-hbd">
-                                        <rect key="frame" x="0.0" y="24" width="236" height="258"/>
-                                        <clipView key="contentView" ambiguous="YES" drawsBackground="NO" copiesOnScroll="NO" id="2M9-8L-veI">
-                                            <rect key="frame" x="0.0" y="0.0" width="236" height="258"/>
+                                    <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="28" horizontalPageScroll="10" verticalLineScroll="28" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n5h-uy-hbd">
+                                        <rect key="frame" x="0.0" y="24" width="236" height="213"/>
+                                        <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="2M9-8L-veI">
+                                            <rect key="frame" x="0.0" y="0.0" width="236" height="213"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <tableView focusRingType="none" verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" tableStyle="fullWidth" columnResizing="NO" autosaveColumns="NO" rowHeight="26" viewBased="YES" id="xIa-sI-0Xn">
-                                                    <rect key="frame" x="0.0" y="0.0" width="236" height="258"/>
+                                                <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" tableStyle="fullWidth" columnResizing="NO" autosaveColumns="NO" rowHeight="26" viewBased="YES" id="xIa-sI-0Xn">
+                                                    <rect key="frame" x="0.0" y="0.0" width="236" height="213"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.080000000000000002" colorSpace="calibratedRGB"/>
@@ -216,10 +217,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
-                                    <customView ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X2W-MY-vYB" userLabel="ToolBar">
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="X2W-MY-vYB" userLabel="ToolBar">
                                         <rect key="frame" x="0.0" y="0.0" width="236" height="24"/>
                                         <subviews>
-                                            <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xKm-J1-NZs" userLabel="Remove Button">
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xKm-J1-NZs" userLabel="Remove Button">
                                                 <rect key="frame" x="186" y="0.0" width="24" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="24" id="V4F-VM-w6F"/>
@@ -232,7 +233,7 @@
                                                     <action selector="removeBtnAction:" target="-2" id="Ihy-Ga-m0c"/>
                                                 </connections>
                                             </button>
-                                            <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7my-AM-8Ts">
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7my-AM-8Ts">
                                                 <rect key="frame" x="210" y="0.0" width="24" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="24" id="6gk-wr-fJW"/>
@@ -245,7 +246,7 @@
                                                     <action selector="clearPlaylistBtnAction:" target="-2" id="7IC-nt-T1t"/>
                                                 </connections>
                                             </button>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IHI-5g-OMg">
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IHI-5g-OMg" userLabel="LoopPlaylist Button">
                                                 <rect key="frame" x="2" y="0.0" width="24" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="24" id="CPL-cJ-9R5"/>
@@ -255,11 +256,11 @@
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <connections>
-                                                    <action selector="loopBtnAction:" target="-2" id="nF4-D4-7dC"/>
+                                                    <action selector="loopPlaylistBtnAction:" target="-2" id="Dk4-Pc-ctZ"/>
                                                 </connections>
                                             </button>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xhU-qn-3aa">
-                                                <rect key="frame" x="26" y="0.0" width="24" height="24"/>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xhU-qn-3aa" userLabel="Shuffle Button">
+                                                <rect key="frame" x="50" y="0.0" width="24" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="24" id="rpj-hJ-3Y9"/>
                                                 </constraints>
@@ -271,7 +272,7 @@
                                                     <action selector="shuffleBtnAction:" target="-2" id="ZiC-jw-zzz"/>
                                                 </connections>
                                             </button>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="icQ-T6-fV9">
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="icQ-T6-fV9">
                                                 <rect key="frame" x="102" y="5" width="33" height="14"/>
                                                 <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="Label" id="6J7-iM-V5h">
                                                     <font key="font" metaFont="controlContent" size="11"/>
@@ -279,7 +280,7 @@
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W9C-Z7-hiI" userLabel="Add Button">
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="W9C-Z7-hiI" userLabel="Add Button">
                                                 <rect key="frame" x="162" y="0.0" width="24" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="24" id="Wbf-h5-7Gb"/>
@@ -290,6 +291,19 @@
                                                 </buttonCell>
                                                 <connections>
                                                     <action selector="addToPlaylistBtnAction:" target="-2" id="glx-Rv-Iri"/>
+                                                </connections>
+                                            </button>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xWD-ub-60l" userLabel="LoopFile Button">
+                                                <rect key="frame" x="24" y="0.0" width="24" height="24"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="24" id="uCJ-1a-dkC"/>
+                                                </constraints>
+                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="loop-file" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" imageScaling="proportionallyDown" inset="2" id="6Se-H0-I3W">
+                                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="loopFileBtnAction:" target="-2" id="Lgi-hV-7P1"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -303,14 +317,17 @@
                                             <constraint firstAttribute="bottom" secondItem="xKm-J1-NZs" secondAttribute="bottom" id="L7x-2J-yyG"/>
                                             <constraint firstItem="7my-AM-8Ts" firstAttribute="top" secondItem="X2W-MY-vYB" secondAttribute="top" id="LE8-YD-ghx"/>
                                             <constraint firstItem="icQ-T6-fV9" firstAttribute="centerX" secondItem="X2W-MY-vYB" secondAttribute="centerX" id="LSa-Bd-2wQ"/>
+                                            <constraint firstItem="xWD-ub-60l" firstAttribute="top" secondItem="X2W-MY-vYB" secondAttribute="top" id="NJU-tt-mlG"/>
                                             <constraint firstItem="IHI-5g-OMg" firstAttribute="top" secondItem="X2W-MY-vYB" secondAttribute="top" id="VVG-ZO-opa"/>
-                                            <constraint firstItem="xhU-qn-3aa" firstAttribute="leading" secondItem="IHI-5g-OMg" secondAttribute="trailing" id="beQ-YD-Oxf"/>
+                                            <constraint firstItem="IHI-5g-OMg" firstAttribute="trailing" secondItem="xWD-ub-60l" secondAttribute="leading" constant="2" id="beQ-YD-Oxf"/>
                                             <constraint firstItem="xKm-J1-NZs" firstAttribute="leading" secondItem="W9C-Z7-hiI" secondAttribute="trailing" id="lwV-Uv-v1i"/>
                                             <constraint firstAttribute="bottom" secondItem="xhU-qn-3aa" secondAttribute="bottom" id="mPm-LR-ZkL"/>
+                                            <constraint firstItem="xhU-qn-3aa" firstAttribute="leading" secondItem="xWD-ub-60l" secondAttribute="trailing" constant="2" id="nl0-ZJ-Jl6"/>
                                             <constraint firstItem="7my-AM-8Ts" firstAttribute="leading" secondItem="xKm-J1-NZs" secondAttribute="trailing" id="pEm-Ne-DNg"/>
                                             <constraint firstItem="xKm-J1-NZs" firstAttribute="top" secondItem="X2W-MY-vYB" secondAttribute="top" id="q0k-4V-oj8"/>
                                             <constraint firstItem="icQ-T6-fV9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xhU-qn-3aa" secondAttribute="trailing" constant="4" id="qGM-Ip-dO0"/>
                                             <constraint firstItem="W9C-Z7-hiI" firstAttribute="top" secondItem="X2W-MY-vYB" secondAttribute="top" id="qUl-cf-d3q"/>
+                                            <constraint firstAttribute="bottom" secondItem="xWD-ub-60l" secondAttribute="bottom" id="s2A-UN-tRq"/>
                                             <constraint firstItem="IHI-5g-OMg" firstAttribute="leading" secondItem="X2W-MY-vYB" secondAttribute="leading" constant="2" id="shV-bB-ELD"/>
                                             <constraint firstAttribute="bottom" secondItem="IHI-5g-OMg" secondAttribute="bottom" id="uNy-QA-naW"/>
                                             <constraint firstAttribute="height" constant="24" id="vRf-T5-e5u"/>
@@ -337,7 +354,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="241" height="294"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="6tr-hz-bdD">
                                             <rect key="frame" x="0.0" y="0.0" width="241" height="294"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" tableStyle="fullWidth" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="31" rowSizeStyle="automatic" viewBased="YES" id="BvG-MR-6LX">
                                                     <rect key="frame" x="0.0" y="0.0" width="241" height="294"/>
@@ -459,7 +476,7 @@
                     </tabViewItems>
                 </tabView>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SOR-3l-PFj">
-                    <rect key="frame" x="121" y="294" width="120" height="48"/>
+                    <rect key="frame" x="121" y="237" width="120" height="48"/>
                     <buttonCell key="cell" type="square" title="CHAPTERS" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="jUF-xa-uRI">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -469,7 +486,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5Zq-JQ-XO4">
-                    <rect key="frame" x="0.0" y="294" width="121" height="48"/>
+                    <rect key="frame" x="0.0" y="237" width="121" height="48"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="48" id="aPN-VC-eZR"/>
                     </constraints>
@@ -482,7 +499,7 @@
                     </connections>
                 </button>
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="glW-5x-LJr">
-                    <rect key="frame" x="0.0" y="291" width="241" height="5"/>
+                    <rect key="frame" x="0.0" y="234" width="241" height="5"/>
                 </box>
             </subviews>
             <constraints>
@@ -503,7 +520,7 @@
                 <constraint firstItem="SOR-3l-PFj" firstAttribute="height" secondItem="5Zq-JQ-XO4" secondAttribute="height" id="sRW-ep-6n7"/>
                 <constraint firstItem="SOR-3l-PFj" firstAttribute="leading" secondItem="5Zq-JQ-XO4" secondAttribute="trailing" id="u9W-D2-kD5"/>
             </constraints>
-            <point key="canvasLocation" x="149.5" y="217.5"/>
+            <point key="canvasLocation" x="149.5" y="217"/>
         </customView>
         <menu id="DE5-wv-zGL">
             <point key="canvasLocation" x="558" y="284"/>
@@ -624,6 +641,7 @@
     <resources>
         <image name="loop" width="15" height="15"/>
         <image name="loop-dark" width="15" height="15"/>
+        <image name="loop-file" width="76" height="76"/>
         <image name="minus" width="14" height="14"/>
         <image name="plus" width="14" height="14"/>
         <image name="shuffle" width="15" height="15"/>

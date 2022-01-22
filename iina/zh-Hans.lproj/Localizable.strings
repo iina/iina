@@ -301,7 +301,8 @@
 "osc_toolbar.sub_track" = "选择字幕轨道";
 
 "mini_player.album_art" = "切换专辑封面";
-"mini_player.loop" = "重复";
+"mini_player.loop" = "重复播放列表";
+"mini_player.loop_file" = "重复单个文件";
 "mini_player.shuffle" = "随机";
 "mini_player.remove" = "从播放列表中移除";
 "mini_player.add" = "添加到播放列表";

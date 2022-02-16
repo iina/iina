@@ -331,12 +331,12 @@ class MPVController: NSObject {
       mpvController.readEvents()
       }, mutableRawPointerOf(obj: self))
 
-    // Observe propoties.
+    // Observe properties.
     observeProperties.forEach { (k, v) in
       mpv_observe_property(mpv, 0, k, v)
     }
 
-    // Initialize an uninitialized mpv instance. If the mpv instance is already running, an error is retuned.
+    // Initialize an uninitialized mpv instance. If the mpv instance is already running, an error is returned.
     chkErr(mpv_initialize(mpv))
 
     // Set options that can be override by user's config. mpv will log user config when initialize,

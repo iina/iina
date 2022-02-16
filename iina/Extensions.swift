@@ -9,7 +9,7 @@
 import Cocoa
 
 extension NSSlider {
-  /** Returns the positon of knob center by point */
+  /** Returns the position of knob center by point */
   func knobPointPosition() -> CGFloat {
     let sliderOrigin = frame.origin.x + knobThickness / 2
     let sliderWidth = frame.width - knobThickness
@@ -420,10 +420,10 @@ extension String {
     removeLast(Swift.min(num, count))
   }
 
-  func countOccurances(of str: String, in range: Range<Index>?) -> Int {
+  func countOccurrences(of str: String, in range: Range<Index>?) -> Int {
     if let firstRange = self.range(of: str, options: [], range: range, locale: nil) {
       let nextRange = firstRange.upperBound..<self.endIndex
-      return 1 + countOccurances(of: str, in: nextRange)
+      return 1 + countOccurrences(of: str, in: nextRange)
     } else {
       return 0
     }

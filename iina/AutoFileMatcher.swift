@@ -253,16 +253,16 @@ class AutoFileMatcher {
           .components(separatedBy: ",")
           .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
           .filter { !$0.isEmpty }
-        // find the min occurance count first
-        var minOccurances = Int.max
+        // find the min occurrence count first
+        var minOccurrences = Int.max
         matchedSubs.forEach { sub in
-          sub.priorityStringOccurances = stringList.reduce(0, { $0 + sub.filename.countOccurances(of: $1, in: nil) })
-          if sub.priorityStringOccurances < minOccurances {
-            minOccurances = sub.priorityStringOccurances
+          sub.priorityStringOccurrences = stringList.reduce(0, { $0 + sub.filename.countOccurrences(of: $1, in: nil) })
+          if sub.priorityStringOccurrences < minOccurrences {
+            minOccurrences = sub.priorityStringOccurrences
           }
         }
         try matchedSubs
-          .filter { $0.priorityStringOccurances > minOccurances }  // eliminate false positives in filenames
+          .filter { $0.priorityStringOccurrences > minOccurrences }  // eliminate false positives in filenames
           .compactMap { player.info.matchedSubs[video.path]!.firstIndex(of: $0.url) }  // get index
           .forEach {  // move the sub with index to first
             try checkTicket()

@@ -34,8 +34,8 @@ class CollapseView: NSStackView {
     }
 
     // try to get the state of the control
-    if let buttton = trigger as? NSButton {
-      folded = buttton.state != .on
+    if let button = trigger as? NSButton {
+      folded = button.state != .on
     }
     updateContentView(animated: false)
 

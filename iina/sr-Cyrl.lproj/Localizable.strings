@@ -134,7 +134,7 @@
 "alert.error_open" = "Cannot open file or stream!";
 "alert.error_finding_file" = "Cannot find %@ file!";
 "alert.error_loading_script" = "Cannot load script %@!";
-"alert.error_saving_file" = "Error occured when saving %@: %@";
+"alert.error_saving_file" = "Error occurred when saving %@: %@";
 "alert.error_deleting_file" = "Cannot delete the file.";
 
 "alert.config.new.title" = "New Input Configuration";
@@ -148,7 +148,7 @@
 "alert.config.cannot_create" = "Cannot create config file!\n%@";
 "alert.config.cannot_write" = "Cannot write to config file!";
 
-"alert.filter.incorrect" = "Error occured when setting filters. Please check your parameter format.";
+"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "New Filter";
 "alert.add_filter.message" = "Please enter a filter string in format of mpv's vf or af command.";
 

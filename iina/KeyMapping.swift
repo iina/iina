@@ -120,7 +120,7 @@ class KeyMapping: NSObject {
         isIINACommand = true
         line = String(line[line.index(line.startIndex, offsetBy: "#@iina".count)...])
       } else if line.hasPrefix("#") {
-        // igore comment
+        // ignore comment
         continue
       }
       // remove inline comment

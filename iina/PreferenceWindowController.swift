@@ -251,7 +251,7 @@ class PreferenceWindowController: NSWindowController {
     let isScrollable = vc.preferenceContentIsScrollable
     contentViewBottomConstraint?.isActive = !isScrollable
     scrollView.verticalScrollElasticity = isScrollable ? .allowed : .none
-    // scoll to top
+    // scroll to top
     scrollView.documentView?.scroll(.zero)
 
     // find label

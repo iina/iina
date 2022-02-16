@@ -29,14 +29,14 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   let sliderSteps = 24.0
 
   /**
-   Similiar to the one in `PlaylistViewController`.
+   Similar to the one in `PlaylistViewController`.
    Since IBOutlet is `nil` when the view is not loaded at first time,
    use this variable to cache which tab it need to switch to when the
    view is ready. The value will be handled after loaded.
    */
   private var pendingSwitchRequest: TabViewType?
 
-  /** Tab type. Use TrackType for now. Propobably not a good choice. */
+  /** Tab type. Use TrackType for now. Probably not a good choice. */
   typealias TabViewType = MPVTrack.TrackType
 
   weak var player: PlayerCore!
@@ -167,7 +167,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   // MARK: - Validate UI
 
-  /** Do syncronization*/
+  /** Do synchronization*/
   override func viewDidAppear() {
     // image sub
     super.viewDidAppear()

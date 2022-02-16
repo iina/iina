@@ -100,10 +100,10 @@ struct Preference {
 
     // UI
 
-    /** Horizontal positon of control bar. (float, 0 - 1) */
+    /** Horizontal position of control bar. (float, 0 - 1) */
     static let controlBarPositionHorizontal = Key("controlBarPositionHorizontal")
 
-    /** Horizontal positon of control bar. In percentage from bottom. (float, 0 - 1) */
+    /** Horizontal position of control bar. In percentage from bottom. (float, 0 - 1) */
     static let controlBarPositionVertical = Key("controlBarPositionVertical")
 
     /** Whether control bar stick to center when dragging. (bool) */

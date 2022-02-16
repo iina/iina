@@ -42,7 +42,7 @@ fileprivate func sameKeyAction(_ lhs: [String], _ rhs: [String], _ normalizeLast
 
 class MenuController: NSObject, NSMenuDelegate {
 
-  /** For convinent bindings. see `bind(...)` below. [menu: check state block] */
+  /** For convenient bindings. see `bind(...)` below. [menu: check state block] */
   private var menuBindingList: [NSMenu: (NSMenuItem) -> Bool] = [:]
 
   private var stringForOpen: String!
@@ -601,7 +601,7 @@ class MenuController: NSObject, NSMenuDelegate {
     } else if menu == savedAudioFiltersMenu {
       updateSavedFiltersMenu(type: MPVProperty.af)
     }
-    // check convinently binded menus
+    // check conveniently bound menus
     if let checkEnableBlock = menuBindingList[menu] {
       for item in menu.items {
         item.state = checkEnableBlock(item) ? .on : .off

@@ -985,12 +985,26 @@ class MainWindowController: PlayerWindowController {
   // MARK: - Window delegate: Open / Close
 
   func windowWillOpen() {
-    // The titles of open windows shown in the "Window" menu are automatically managed by the AppKit
-    // framework. To improve performance PlayerCore caches and reuses player instances along with
-    // their windows. If a window is reused the framework will display the title first used for the
-    // window in the "Window" menu even after IINA has updated the title of the window unless the
-    // window's title is reset to the default title "Window" before it is reusued.
-    window!.title = "Window"
+    if #available(macOS 12, *) {
+      // Apparently Apple fixed AppKit for Monterey so the workaround below is only needed for
+      // previous versions of macOS. Support for #unavailable is coming in Swift 5.6. The version of
+      // Xcode being used at the time of this writing supports Swift 5.5.
+    } else {
+      // Must workaround an AppKit defect in earlier versions of macOS. This defect is known to
+      // exist in Catalina and Big Sur. The problem was not reproducible in Monterey. The status of
+      // other versions of macOS is unknown, however the workaround should be safe to apply in any
+      // version of macOS. The problem was reported in issues #3159, #3097 and #3253. The titles of
+      // open windows shown in the "Window" menu are automatically managed by the AppKit framework.
+      // To improve performance PlayerCore caches and reuses player instances along with their
+      // windows. This technique is valid and recommended by Apple. But in older versions of macOS,
+      // if a window is reused the framework will display the title first used for the window in the
+      // "Window" menu even after IINA has updated the title of the window. This problem can also be
+      // seen when right-clicking or control-clicking the IINA icon in the dock. As a workaround
+      // reset the window's title to "Window" before it is reused. This is the default title AppKit
+      // assigns to a window when it is first created. Surprising and rather disturbing this works
+      // as a workaround, but it does.
+      window!.title = "Window"
+    }
 
     var screen = window!.screen!
 

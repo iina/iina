@@ -73,17 +73,17 @@ IINA uses mpv for media playback. To build IINA, you can either fetch copies of 
 
 4. Run `other/change_lib_dependencies.rb`. This script will deploy the dependent libraries into `deps/lib`. If you're using a package manager to manage dependencies, invoke it like so:
 
-		#### With Homebrew
-
-		```console
-		$ other/change_lib_dependencies.rb "$(brew --prefix)" "$(brew --prefix mpv-iina)/lib/libmpv.dylib"
-		```
-
-		#### With MacPorts
-
-		```console
-		$ port contents mpv | grep '\.dylib$' | xargs other/change_lib_dependencies.rb /opt/local
-		```
+	#### With Homebrew
+	
+	```console
+	$ other/change_lib_dependencies.rb "$(brew --prefix)" "$(brew --prefix mpv-iina)/lib/libmpv.dylib"
+	```
+	
+	#### With MacPorts
+	
+	```console
+	$ port contents mpv | grep '\.dylib$' | xargs other/change_lib_dependencies.rb /opt/local
+	```
 
 5. Open iina.xcworkspace in the [latest public version of Xcode](https://itunes.apple.com/us/app/xcode/id497799835). *IINA may not build if you use any other version.*
 

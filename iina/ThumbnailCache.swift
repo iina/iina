@@ -15,12 +15,11 @@ class ThumbnailCache {
   private typealias FileSize = UInt64
   private typealias FileTimestamp = Int64
 
-  static private let version: CacheVersion = 2
+  private static let version: CacheVersion = 2
   
-  static private let sizeofMetadata = MemoryLayout<CacheVersion>.size + MemoryLayout<FileSize>.size + MemoryLayout<FileTimestamp>.size
+  private static let sizeofMetadata = MemoryLayout<CacheVersion>.size + MemoryLayout<FileSize>.size + MemoryLayout<FileTimestamp>.size
 
-
-  static private let imageProperties: [NSBitmapImageRep.PropertyKey: Any] = [
+  private static let imageProperties: [NSBitmapImageRep.PropertyKey: Any] = [
     .compressionFactor: 0.75
   ]
 
@@ -157,21 +156,20 @@ class ThumbnailCache {
 
     // data blocks
     while file.offsetInFile != eof {
-      // length
-      let blockLength: Int64 = file.read(type: Int64.self)
-      // timestamp
-      let timestamp: Double = file.read(type: Double.self)
+      // length and timestamp
+      guard let blockLength = file.read(type: Int64.self),
+            let timestamp = file.read(type: Double.self) else {
+        Logger.log("Cannot read image header. Cache file will be deleted.", level: .warning, subsystem: subsystem)
+        file.closeFile()
+        deleteCacheFile(at: pathURL)
+        return nil
+      }
       // jpeg
       let jpegData = file.readData(ofLength: Int(blockLength) - MemoryLayout.size(ofValue: timestamp))
       guard let image = NSImage(data: jpegData) else {
         Logger.log("Cannot read image. Cache file will be deleted.", level: .warning, subsystem: subsystem)
         file.closeFile()
-        // try deleting corrupted cache
-        do {
-          try FileManager.default.removeItem(at: pathURL)
-        } catch {
-          Logger.log("Cannot delete corrupted cache.", level: .error, subsystem: subsystem)
-        }
+        deleteCacheFile(at: pathURL)
         return nil
       }
       // construct
@@ -186,7 +184,16 @@ class ThumbnailCache {
     return result
   }
 
-  static private func urlFor(_ name: String) -> URL {
+  private static func deleteCacheFile(at pathURL: URL) {
+    // try deleting corrupted cache
+    do {
+      try FileManager.default.removeItem(at: pathURL)
+    } catch {
+      Logger.log("Cannot delete corrupted cache.", level: .error, subsystem: subsystem)
+    }
+  }
+
+  private static func urlFor(_ name: String) -> URL {
     return Utility.thumbnailCacheURL.appendingPathComponent(name)
   }
 

@@ -8,6 +8,7 @@
 
 import SafariServices
 
+@available(macOSApplicationExtension 10.12, *)
 class SafariExtensionHandler: SFSafariExtensionHandler {
 
   override func toolbarItemClicked(in window: SFSafariWindow) {

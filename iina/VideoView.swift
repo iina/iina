@@ -220,7 +220,7 @@ class VideoView: NSView {
       Logger.log("Falling back to standard display refresh rate: 60 from \(actualFps)")
       actualFps = 60;
     }
-    player.mpv.setDouble(MPVOption.Video.displayFps, actualFps)
+    player.mpv.setDouble(MPVOption.Video.overrideDisplayFps, actualFps)
     
     setICCProfile(displayId)
     currentDisplay = displayId

@@ -26,7 +26,12 @@ def write_prop(file, node)
   end
   $prop_set[camel_name] += 1
 
-  if name.include? '/'
+  if name.include? 'current-tracks'
+    # According to the mpv documentation this property is not supposed to be
+    # used programmatically. We still output a comment for the property so
+    # people can figure out why the Swift constant is missing.
+    file.write "  /** #{name}  As per mpv docs, scripts etc. should not use this. */\n"
+  elsif name.include? '/'
     if name.include? 'N'
       func_name = name.to_camel
       return_str = name.gsub('N', '\(n)')

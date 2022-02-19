@@ -60,7 +60,7 @@ class JustXMLRPC {
     methodCall.addChild(params)
     let reqXML = XMLDocument(rootElement: methodCall)
     // Request
-    Just.post(location, requestBody: reqXML.xmlData) { response in
+    Just.post(location, requestBody: reqXML.xmlData, asyncCompletionHandler: { response in
       if response.ok, let content = response.content, let responseDoc = try? XMLDocument(data: content) {
         let rootElement = responseDoc.rootElement()
         if let _ = rootElement?.child("fault") {
@@ -76,7 +76,7 @@ class JustXMLRPC {
         // http error
         callback(.error(XMLRPCError(method: method, httpCode: response.statusCode ?? 0, reason: response.reason)))
       }
-    }
+    })
   }
 
   private static func toValueElement(_ value: Any) -> XMLElement {

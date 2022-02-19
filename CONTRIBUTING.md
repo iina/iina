@@ -10,7 +10,7 @@ IINA follows the standard fork/commit/pull request process for integrating chang
 
 1. Fork and clone the repository
 2. Follow [the guide to build with pre-compiled dylibs in README.md](README.md#using-the-pre-compiled-libraries), unless you're modifying those.
-3. Open `iina.xcworkspace` in Xcode. Again, make sure you are using the [latest public version of Xcode](https://itunes.apple.com/us/app/xcode/id497799835); IINA may build with another version but this is not guaranteed. Generally, around June, a new branch will pop up with support for the new version of macOS and associated developer tools; however, main development will still occur on `develop`.
+3. Open `iina.xcodeproj` in Xcode. Again, make sure you are using the [latest public version of Xcode](https://itunes.apple.com/us/app/xcode/id497799835); IINA may build with another version but this is not guaranteed. Generally, around June, a new branch will pop up with support for the new version of macOS and associated developer tools; however, main development will still occur on `develop`.
 4. Commit your changes, test them, push to your repository, and submit a pull request against iina/iina's `develop` branch.
 
 Some tips for your pull request:

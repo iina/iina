@@ -42,7 +42,7 @@ IINA uses mpv for media playback. To build IINA, you can either fetch copies of 
 ./other/download_libs.sh
 ```
 
-2. Open iina.xcworkspace in the [latest public version of Xcode](https://itunes.apple.com/us/app/xcode/id497799835). *IINA may not build if you use any other version.*
+2. Open iina.xcodeproj in the [latest public version of Xcode](https://itunes.apple.com/us/app/xcode/id497799835). *IINA may not build if you use any other version.*
 
 3. Build the project.
 
@@ -85,7 +85,7 @@ IINA uses mpv for media playback. To build IINA, you can either fetch copies of 
 	$ port contents mpv | grep '\.dylib$' | xargs other/change_lib_dependencies.rb /opt/local
 	```
 
-5. Open iina.xcworkspace in the [latest public version of Xcode](https://itunes.apple.com/us/app/xcode/id497799835). *IINA may not build if you use any other version.*
+5. Open iina.xcodeproj in the [latest public version of Xcode](https://itunes.apple.com/us/app/xcode/id497799835). *IINA may not build if you use any other version.*
 
 6. Remove all of references to .dylib files from the Frameworks group in the sidebar and drag all the .dylib files in `deps/lib` to that group.
 

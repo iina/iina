@@ -21,7 +21,7 @@ class FileInfo: Hashable {
   var dist: [FileInfo: UInt] = [:]
   var minDist: [FileInfo] = []
   var relatedSubs: [FileInfo] = []
-  var priorityStringOccurances = 0
+  var priorityStringOccurrences = 0
   var isMatched = false
 
   var prefix: String {  // prefix detected by FileGroup

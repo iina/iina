@@ -54,7 +54,7 @@ class MPVFilter: NSObject {
    Args: l(uma)x, ly, la, c(hroma)x, xy, ca; default 5:5:0:5:5:0.
    We only change la and ca here.
    - parameter msize: Value for lx, ly, cx and cy. Should be an odd integer in [3, 23].
-   - parameter amount: Anount for la and ca. Should be in [-1.5, 1.5].
+   - parameter amount: Amount for la and ca. Should be in [-1.5, 1.5].
    */
   static func unsharp(amount: Float, msize: Int = 5) -> MPVFilter {
     let amoutStr = amount.description

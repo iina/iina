@@ -176,7 +176,7 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
     let savedFilter = savedFilters[row]
     let pc = PlayerCore.active
 
-    // choose approriate add/remove functions for .af/.vf
+    // choose appropriate add/remove functions for .af/.vf
     var addFilterFunction: (MPVFilter) -> Bool
     var removeFilterFunction: (MPVFilter) -> Bool
     if filterType == MPVProperty.vf {

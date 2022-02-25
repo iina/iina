@@ -172,7 +172,7 @@ class PlayerCore: NSObject {
    Open a list of urls. If there are more than one urls, add the remaining ones to
    playlist and disable auto loading.
 
-   - Returns: `nil` if no futher action is needed, like opened a BD Folder; otherwise the
+   - Returns: `nil` if no further action is needed, like opened a BD Folder; otherwise the
    count of playable files.
    */
   @discardableResult
@@ -1212,7 +1212,7 @@ class PlayerCore: NSObject {
   }
 
   /**
-   Checkes unsynchronized window options, such as those set via mpv before window loaded.
+   Checks unsynchronized window options, such as those set via mpv before window loaded.
 
    These options currently include fullscreen and ontop.
    */

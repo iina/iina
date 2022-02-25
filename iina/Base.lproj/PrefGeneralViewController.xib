@@ -484,7 +484,7 @@
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YDQ-cu-7vE">
                     <rect key="frame" x="118" y="31" width="370" height="18"/>
-                    <buttonCell key="cell" type="check" title="Show artist and track name for audio files when avaliable" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="kBI-Th-bBV">
+                    <buttonCell key="cell" type="check" title="Show artist and track name for audio files when available" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="kBI-Th-bBV">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>

@@ -94,7 +94,7 @@ extension PlayerCore {
   }
 
   /**
-   Checks whether a URL is BD folder by checking the existance of "MovieObject.bdmv" and "index.bdmv".
+   Checks whether a URL is BD folder by checking the existence of "MovieObject.bdmv" and "index.bdmv".
 
    - Parameters:
      - url: The URL.

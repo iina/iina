@@ -39,7 +39,7 @@ class OnlineSubtitle: NSObject {
     }
   }
 
-  /** Prepend a number before file name to avoid overwritting. */
+  /** Prepend a number before file name to avoid overwriting. */
   var index: Int
 
   init(index: Int) {

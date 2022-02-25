@@ -30,7 +30,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
   weak var player: PlayerCore!
 
-  /** Similiar to the one in `QuickSettingViewController`.
+  /** Similar to the one in `QuickSettingViewController`.
    Since IBOutlet is `nil` when the view is not loaded at first time,
    use this variable to cache which tab it need to switch to when the
    view is ready. The value will be handled after loaded.
@@ -518,7 +518,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
             let duration = cached.duration {
             // if it's cached
             if duration > 0 {
-              // if FFmpeg got the duration succcessfully
+              // if FFmpeg got the duration successfully
               DispatchQueue.main.async {
                 cellView.durationLabel.stringValue = VideoTime(duration).stringRepresentation
                 if let progress = cached.progress {
@@ -535,7 +535,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
               // Only schedule a reload if data was obtained and cached to avoid looping
               if let cached = self.player.info.cachedVideoDurationAndProgress[item.filename],
                   let duration = cached.duration, duration > 0 {
-                // if FFmpeg got the duration succcessfully
+                // if FFmpeg got the duration successfully
                 self.refreshTotalLength()
                 DispatchQueue.main.async {
                   self.playlistTableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(integersIn: 0...1))

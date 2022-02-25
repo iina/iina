@@ -1284,7 +1284,7 @@ class MainWindowController: PlayerWindowController {
     }
  
     restoreDockSettings()
-    // restore window frame ans aspect ratio
+    // restore window frame and aspect ratio
     let videoSize = player.videoSizeForDisplay
     let aspectRatio = NSSize(width: videoSize.0, height: videoSize.1)
     let useAnimation = Preference.bool(for: .legacyFullScreenAnimation)
@@ -1816,7 +1816,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   // Sometimes the doc icon may not be available, eg. when opened an online video.
-  // We should try to add it everytime when window title changed.
+  // We should try to add it every time when window title changed.
   private func addDocIconToFadeableViews() {
     if let docIcon = window?.standardWindowButton(.documentIconButton), !fadeableViews.contains(docIcon) {
       fadeableViews.append(docIcon)
@@ -2429,7 +2429,7 @@ class MainWindowController: PlayerWindowController {
   /// Legacy IBAction, but still in use.
   func settingsButtonAction(_ sender: AnyObject) {
     if sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
-      return  // do not interrput other actions while it is animating
+      return  // do not interrupt other actions while it is animating
     }
     let view = quickSettingView
     switch sideBarStatus {
@@ -2447,7 +2447,7 @@ class MainWindowController: PlayerWindowController {
   /// Legacy IBAction, but still in use.
   func playlistButtonAction(_ sender: AnyObject) {
     if sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
-      return  // do not interrput other actions while it is animating
+      return  // do not interrupt other actions while it is animating
     }
     let view = playlistView
     switch sideBarStatus {

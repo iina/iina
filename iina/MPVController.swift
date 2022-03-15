@@ -533,6 +533,102 @@ class MPVController: NSObject {
     return result
   }
 
+  /// Remove the audio or video filter at the given index in the list of filters.
+  ///
+  /// Previously IINA removed filters using the mpv `af remove` and `vf remove` commands described in the
+  /// [Input Commands that are Possibly Subject to Change](https://mpv.io/manual/stable/#input-commands-that-are-possibly-subject-to-change)
+  /// section of the mpv manual. The behavior of the remove command is described in the [video-filters](https://mpv.io/manual/stable/#video-filters)
+  /// section of the manual under the entry for `--vf-remove-filter`.
+  ///
+  /// When searching for the filter to be deleted the remove command takes into consideration the order of filter parameters. The
+  /// expectation is that the application using the mpv client will provide the filter to the remove command in the same way it was
+  /// added. However IINA doe not always know how a filter was added. Filters can be added to mpv outside of IINA therefore it is not
+  /// possible for IINA to know how filters were added. IINA obtains the filter list from mpv using `mpv_get_property`. The
+  /// `mpv_node` tree returned for a filter list stores the filter parameters in a `MPV_FORMAT_NODE_MAP`. The key value pairs in a
+  /// `MPV_FORMAT_NODE_MAP` are in **random** order. As a result sometimes the order of filter parameters in the filter string
+  /// representation given by IINA to the mpv remove command would not match the order of parameters given when the filter was
+  /// added to mpv and the remove command would fail to remove the filter. This was reported in
+  /// [IINA issue #3620 Audio filters with same name cannot be removed](https://github.com/iina/iina/issues/3620).
+  ///
+  /// The issue of `mpv_get_property` returning filter parameters in random order even though the remove command is sensitive to
+  /// filter parameter order was raised with the mpv project in
+  /// [mpv issue #9841 mpv_get_property returns filter params in unordered map breaking remove](https://github.com/mpv-player/mpv/issues/9841)
+  /// The response from the mpv project confirmed that the parameters in a `MPV_FORMAT_NODE_MAP` **must** be considered to
+  /// be in random order even if they appear to be ordered. The recommended methods for removing filters is to use labels, which
+  /// IINA does for filters it creates or removing based on position in the filter list. This method supports removal based on the
+  /// position within the list of filters.
+  ///
+  /// The recommended implementation is to get the entire list of filters using `mpv_get_property`, remove the filter from the
+  /// `mpv_node` tree returned by that method and then set the list of filters using `mpv_set_property`. This is the approach
+  /// used by this method.
+  /// - Parameter name: The kind of filter identified by the mpv property name, `MPVProperty.af` or `MPVProperty.vf`.
+  /// - Parameter index: Index of the filter to be removed.
+  /// - Returns: `true` if the filter was successfully removed, `false` if the filter was not removed.
+  func removeFilter(_ name: String, _ index: Int) -> Bool {
+    Logger.ensure(name == MPVProperty.vf || name == MPVProperty.af, "removeFilter() does not support \(name)!")
+
+    // Get the current list of filters from mpv as a mpv_node tree.
+    var oldNode = mpv_node()
+    defer { mpv_free_node_contents(&oldNode) }
+    mpv_get_property(mpv, name, MPV_FORMAT_NODE, &oldNode)
+
+    let oldList = oldNode.u.list!.pointee
+
+    // If the user uses mpv's JSON-based IPC protocol to make changes to mpv's filters behind IINA's
+    // back then there is a very small window of vulnerability where the list of filters displayed
+    // by IINA may be stale and therefore the index to remove may be invalid. IINA listens for
+    // changes to mpv's filter properties and updates the filters displayed when changes occur, so
+    // it is unlikely in practice that this method will be called with an invalid index, but we will
+    // validate the index nonetheless to insure this code does not trigger a crash.
+    guard index < oldList.num else {
+      Logger.log("Found \(oldList.num) \(name) filters, index of filter to remove (\(index)) is invalid",
+                 level: .error)
+      return false
+    }
+
+    // The documentation for mpv_node states:
+    // "If mpv writes this struct (e.g. via mpv_get_property()), you must not change the data."
+    // So the approach taken is to create new top level node objects as those need to be modified in
+    // order to remove the filter, and reuse the lower level node objects representing the filters.
+    // First we create a new node list that is one entry smaller than the current list of filters.
+    let newNum = oldList.num - 1
+    let newValues = UnsafeMutablePointer<mpv_node>.allocate(capacity: Int(newNum))
+    defer {
+      newValues.deinitialize(count: Int(newNum))
+      newValues.deallocate()
+    }
+    var newList = mpv_node_list()
+    newList.num = newNum
+    newList.values = newValues
+
+    // Make the new list of values point to the same values in the old list, skipping the entry to
+    // be removed.
+    var newValuesPtr = newValues
+    var oldValuesPtr = oldList.values!
+    for i in 0 ..< oldList.num {
+      if i != index {
+        newValuesPtr.pointee = oldValuesPtr.pointee
+        newValuesPtr = newValuesPtr.successor()
+      }
+      oldValuesPtr = oldValuesPtr.successor()
+    }
+
+    // Add the new list to a new node.
+    let newListPtr = UnsafeMutablePointer<mpv_node_list>.allocate(capacity: 1)
+    defer {
+      newListPtr.deinitialize(count: 1)
+      newListPtr.deallocate()
+    }
+    newListPtr.pointee = newList
+    var newNode = mpv_node()
+    newNode.format = MPV_FORMAT_NODE_ARRAY
+    newNode.u.list = newListPtr
+
+    // Set the list of filters using the new node that leaves out the filter to be removed.
+    mpv_set_property(mpv, name, MPV_FORMAT_NODE, &newNode)
+    return true
+  }
+
   /** Set filter. only "af" or "vf" is supported for name */
   func setFilters(_ name: String, filters: [MPVFilter]) {
     Logger.ensure(name == MPVProperty.vf || name == MPVProperty.af, "setFilters() do not support \(name)!")

@@ -8,7 +8,7 @@
 
 import Cocoa
 
-// See https://github.com/mpv-player/mpv/blob/master/options/m_option.c#L2955
+// See https://github.com/mpv-player/mpv/blob/master/options/m_option.c#L3161
 // #define NAMECH "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-"
 fileprivate let mpvAllowedCharacters = Set<Character>("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-")
 
@@ -103,6 +103,10 @@ class MPVFilter: NSObject {
     }
   }
 
+  override var debugDescription: String {
+    Mirror(reflecting: self).children.map({"\($0.label!)=\($0.value)"}).joined(separator: ", ")
+  }
+
   // MARK: - Initializers
 
   init(name: String, label: String?, params: [String: String]?) {
@@ -128,7 +132,16 @@ class MPVFilter: NSObject {
     let splitted = rawString.split(separator: "=", maxSplits: 1, omittingEmptySubsequences: true).map { String($0) }
     guard splitted.count == 1 || splitted.count == 2 else { return nil }
     self.name = splitted[0]
+    if name.hasPrefix("@") {
+      // The name starts with a label. Separate them into the respected properties.
+      name.removeFirst()
+      let nameSplitted = name.split(separator: ":", maxSplits: 1).map { String($0) }
+      guard nameSplitted.count == 2 else { return nil }
+      self.label = nameSplitted[0]
+      self.name = nameSplitted[1]
+    }
     self.rawParamString = splitted[at: 1]
+    self.params = MPVFilter.parseRawParamString(name, rawParamString)
   }
 
   init(name: String, label: String?, paramString: String) {
@@ -176,6 +189,46 @@ class MPVFilter: NSObject {
     .expand: "w:h:x:y:aspect:round"
   ]
 
+  /// Names of filters without parameters or whose parameters do not need to be parsed.
+  private static let doNotParse = ["crop", "flip", "hflip", "lavfi"]
+
+  /// Parse the given string containing filter parameters.
+  ///
+  /// Filters that support multiple parameters have more than one valid string representation due to there being no requirement on the
+  /// order in which those parameters are given in a filter. For such filters the string representation of the parameters needs to be parsed
+  /// to form a `Dictionary` containing individual parameter-value pairs. This allows the parameters of two `MPVFilter` objects
+  /// to be compared using a `Dictionary` to `Dictionary` comparison rather than a string comparison that might fail due to the
+  /// parameters being in a different order in the string. This method will return `nil` if it determines this kind of filter can be compared
+  /// using the string representation, or if parsing failed.
+  /// - Note:
+  /// Related issues:
+  /// * [Audio filters with same name cannot be removed. #3620](https://github.com/iina/iina/issues/3620)
+  /// * [mpv_get_property returns filter params in unordered map breaking remove #9841](https://github.com/mpv-player/mpv/issues/9841)
+  /// - Parameter name: Name of the filter.
+  /// - Parameter rawParamString: String to be parsed.
+  /// - Returns: A `Dictionary` containing the filter parameters or `nil` if the parameters were not parsed.
+  private static func parseRawParamString(_ name: String, _ rawParamString: String?) -> [String: String]? {
+    guard let rawParamString = rawParamString, !doNotParse.contains(name) else { return nil }
+    let pairs = rawParamString.split(separator: ":")
+    // If there is only one parameter then parameter order is not an issue.
+    guard pairs.count > 1 else { return nil }
+    var dict: [String: String] = [:]
+    for pair in pairs {
+      let split = pair.split(separator: "=", maxSplits: 1).map { String($0) }
+      guard split.count == 2 else {
+        // This indicates either this kind of filter needs to be added to the doNotParse list, or
+        // this parser needs to be enhanced to be able to parse the string representation of this
+        // kind of filter.
+        Logger.log("Unable to parse filter \(name) params: \(rawParamString)", level: .warning)
+        return nil
+      }
+      // Add the pair to the dictionary stripping any %n% style quoting from the front of the value.
+      dict[split[0]] = split[1].replacingOccurrences(of: "^%\\d+%", with: "",
+                                                     options: .regularExpression)
+    }
+    return dict
+  }
+
   // MARK: - Param getter
 
   func cropParams(videoSize: NSSize) -> [String: Double] {
@@ -201,5 +254,26 @@ class MPVFilter: NSObject {
     return ["x": x, "y": y, "w": w, "h": h]
   }
 
+  /// Returns `true` if this filter is equal to the given filter `false` otherwise.
+  ///
+  /// Filters that support multiple parameters have more than one valid string representation due to there being no requirement on the
+  /// order in which those parameters are given in a filter. In the `mpv_node` tree returned for the mpv property representing the audio
+  /// filter list or the video filter list, filter parameters are contained in random order in a `MPV_FORMAT_NODE_MAP`. When IINA
+  /// converts the `mpv_node` tree into `MPVFilter` objects parameters are stored in a `Dictionary` which also does not
+  /// provide a predictable order. This is all correct behavior as per discussions with the mpv project in mpv issue #9841. Due to this
+  /// issue with the string representation of some types of filters this method gives preference to comparing the dictionaries in the
+  /// `params` property if available over comparing string representations.
+  /// - Note:
+  /// Related issues:
+  /// * [Audio filters with same name cannot be removed. #3620](https://github.com/iina/iina/issues/3620)
+  /// * [mpv_get_property returns filter params in unordered map breaking remove #9841](https://github.com/mpv-player/mpv/issues/9841)
+  /// - Parameter object: The object to compare to this filter.
+  /// - Returns: `true` if this filter is equal to the given object, otherwise `false`.
+  override func isEqual(_ object: Any?) -> Bool {
+    guard let object = object as? MPVFilter, label == object.label, name == object.name else { return false }
+    if let lhs = params, let rhs = object.params {
+      return lhs == rhs
+    }
+    return stringFormat == object.stringFormat
+  }
 }
-

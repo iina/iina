@@ -72,6 +72,7 @@ class MPVController: NSObject {
     MPVProperty.chapter: MPV_FORMAT_INT64,
     MPVOption.Video.deinterlace: MPV_FORMAT_FLAG,
     MPVOption.Video.hwdec: MPV_FORMAT_STRING,
+    MPVOption.Video.videoRotate: MPV_FORMAT_INT64,
     MPVOption.Audio.mute: MPV_FORMAT_FLAG,
     MPVOption.Audio.volume: MPV_FORMAT_DOUBLE,
     MPVOption.Audio.audioDelay: MPV_FORMAT_DOUBLE,
@@ -826,6 +827,9 @@ class MPVController: NSObject {
         player.info.hwdec = data
         player.sendOSD(.hwdec(player.info.hwdecEnabled))
       }
+
+    case MPVOption.Video.videoRotate:
+      player.info.rotation = Int(getInt(MPVOption.Video.videoRotate))
 
     case MPVOption.Audio.mute:
       player.syncUI(.muteButton)

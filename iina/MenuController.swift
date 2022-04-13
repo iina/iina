@@ -6,6 +6,7 @@
 //  Copyright © 2016 lhc. All rights reserved.
 //
 
+import Algorithms
 import Cocoa
 
 fileprivate func sameKeyAction(_ lhs: [String], _ rhs: [String], _ normalizeLastNum: Bool, _ numRange: ClosedRange<Double>?) -> (Bool, Double?) {
@@ -693,9 +694,26 @@ class MenuController: NSObject, NSMenuDelegate {
       settings.append((pictureInPicture, true, ["toggle-pip"], false, nil, nil))
     }
 
+    // The key bindings in the keyBindings array represent all of the bindings contained in the
+    // binding set. Neither mpv nor IINA require the set to contain unique key to input command
+    // mappings. Multiple entries for a particular key are allowed. If the binding set contains
+    // more than one binding for a specific key then mpv uses the last binding and ignores all
+    // others. Searching keyBindings to find a key that is bound to the same action as a menu item
+    // might match a binding that has been overridden by another binding and should be ignored. If
+    // the overridden binding is matched and then assigned as the shortcut for a menu item, then
+    // when that key is pressed the menu item will be invoked, preventing the input commands in the
+    // overriding binding from being run. This defect was reported in issue #3692.
+    //
+    // Form an array of only the active bindings, eliminating any duplicates. The uniqued method
+    // preserves the entries encountered first. As the bindings at the end of the set override
+    // earlier, bindings reverse the array so that uniqued finds them first. After uniqued
+    // eliminates duplicates reverse the list again to not change the key selected as the shortcut
+    // when the the binding set maps multiple keys to the same input command associated with the
+    // menu item.
+    let activeBindings = keyBindings.reversed().uniqued(on: \.key).reversed()
     settings.forEach { (menuItem, isIINACmd, actions, normalizeLastNum, numRange, l10nKey) in
       var bound = false
-      for kb in keyBindings {
+      for kb in activeBindings {
         guard kb.isIINACommand == isIINACmd else { continue }
         let (sameAction, value) = sameKeyAction(kb.action, actions, normalizeLastNum, numRange)
         if sameAction, let (kEqv, kMdf) = KeyCodeHelper.macOSKeyEquivalent(from: kb.key) {

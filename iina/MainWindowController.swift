@@ -999,6 +999,47 @@ class MainWindowController: PlayerWindowController {
 
   // MARK: - Window delegate: Open / Close
 
+  /// Log the given `NSScreen` object.
+  ///
+  /// Due to issues with multiple monitors and how the screen to use for a window is selected detailed logging has been added in this
+  /// area in case additional problems are encountered in the future.
+  /// - parameter label: Label to include in the log message.
+  /// - parameter screen: The `NSScreen` object to log.
+  private func logScreen(_ label: String, _ screen: NSScreen?) {
+    guard let screen = screen else {
+      Logger.log("\(label): nil")
+      return
+    }
+    // Unfortunately localizedName is not available until macOS Catalina.
+    if #available(macOS 10.15, *) {
+      Logger.log("\(label): \(screen.localizedName) visible frame \(screen.visibleFrame)")
+    } else {
+      Logger.log("\(label): visible frame \(screen.visibleFrame)")
+    }
+  }
+
+  /// Return the screen to use by default for this window.
+  ///
+  /// This method searches for a screen to use in this order:
+  /// - `window!.screen` The screen where most of the window is on; it is `nil` when the window is offscreen.
+  /// - `NSScreen.main` The screen containing the window that is currently receiving keyboard events.
+  /// - `NSScreeen.screens[0]` The primary screen of the user’s system.
+  ///
+  /// `PlayerCore` caches players along with their windows. This window may have been previously used on an external monitor
+  /// that is no longer attached. In that case the `screen` property of the window will be `nil`.  Apple documentation is silent
+  /// concerning when `NSScreen.main` is `nil`.  If that is encountered the primary screen will be used.
+  ///
+  /// - returns: The default `NSScreen` for this window
+  private func selectDefaultScreen() -> NSScreen {
+    if window!.screen != nil {
+      return window!.screen!
+    }
+    if NSScreen.main != nil {
+      return NSScreen.main!
+    }
+    return NSScreen.screens[0]
+  }
+
   func windowWillOpen() {
     if #available(macOS 12, *) {
       // Apparently Apple fixed AppKit for Monterey so the workaround below is only needed for
@@ -1021,12 +1062,20 @@ class MainWindowController: PlayerWindowController {
       window!.title = "Window"
     }
 
-    var screen = window!.screen!
+    // As there have been issues in this area, log details about the screen selection process.
+    logScreen("window!.screen", window!.screen)
+    logScreen("NSScreen.main", NSScreen.main)
+    NSScreen.screens.enumerated().forEach { screen in
+      logScreen("NSScreen.screens[\(screen.offset)]" , screen.element)
+    }
+
+    var screen = selectDefaultScreen()
 
     if let rectString = UserDefaults.standard.value(forKey: "MainWindowLastPosition") as? String {
       let rect = NSRectFromString(rectString)
       if let lastScreen = NSScreen.screens.first(where: { NSPointInRect(rect.origin, $0.visibleFrame) }) {
         screen = lastScreen
+        logScreen("MainWindowLastPosition \(rect.origin) matched", screen)
       }
     }
 

@@ -71,7 +71,8 @@ enum OSDMessage {
   case fileError
   case networkError
   case canceled
-
+  case fileLoop(Bool)
+  case playlistLoop(Bool)
 
   func message() -> (String, OSDType) {
     switch self {
@@ -302,6 +303,20 @@ enum OSDMessage {
     case .canceled:
       return (
         NSLocalizedString("osd.canceled", comment: "Canceled"),
+        .normal
+      )
+
+    case .fileLoop(let enabled):
+      return (
+        String(format: NSLocalizedString("osd.file_loop", comment: "File Loop: %@"),
+               enabled ? NSLocalizedString("general.on", comment: "On") : NSLocalizedString("general.off", comment: "Off")),
+        .normal
+      )
+
+    case .playlistLoop(let enabled):
+      return (
+        String(format: NSLocalizedString("osd.playlist_loop", comment: "Playlist Loop: %@"),
+               enabled ? NSLocalizedString("general.on", comment: "On") : NSLocalizedString("general.off", comment: "Off")),
         .normal
       )
     }

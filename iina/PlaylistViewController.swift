@@ -519,7 +519,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
             if Preference.bool(for: .prefetchPlaylistVideoDuration) {
               self.player.refreshCachedVideoInfo(forVideoPath: item.filename)
               // Only schedule a reload if data was obtained and cached to avoid looping
-              if let cached = self.player.info.cachedVideoDurationAndProgress[item.filename],
+              if let cached = self.player.info.getCachedVideoDurationAndProgress(item.filename),
                   let duration = cached.duration, duration > 0 {
                 // if FFmpeg got the duration successfully
                 self.refreshTotalLength()

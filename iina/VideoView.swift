@@ -23,7 +23,6 @@ class VideoView: NSView {
   var videoSize: NSSize?
 
   var isUninited = false
-  var uninitLock = NSLock()
 
   var draggingTimer: Timer?
 
@@ -78,16 +77,13 @@ class VideoView: NSView {
   }
 
   func uninit() {
-    uninitLock.lock()
+    player.mpv.lockAndSetOpenGLContext()
+    defer { player.mpv.unlockOpenGLContext() }
 
-    guard !isUninited else {
-      uninitLock.unlock()
-      return
-    }
+    guard !isUninited else { return }
 
     player.mpv.mpvUninitRendering()
     isUninited = true
-    uninitLock.unlock()
   }
 
   deinit {

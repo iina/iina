@@ -106,6 +106,27 @@ class VideoView: NSView {
     return Preference.bool(for: .videoViewAcceptsFirstMouse)
   }
 
+  /// Workaround for issue #3211, Legacy fullscreen is broken (11.0.1)
+  ///
+  /// Changes in Big Sur broke the legacy full screen feature. The `MainWindowController` method `legacyAnimateToWindowed`
+  /// had to be changed to get this feature working again. Under Big Sur that method now calls the AppKit method
+  /// `window.styleMask.insert(.titled)`. This is a part of restoring the window's style mask to the way it was before entering
+  /// full screen mode. A side effect of restoring the window's title is that AppKit stops calling `MainWindowController.mouseUp`.
+  /// This appears to be a defect in the Cocoa framework. See the issue for details. As a workaround the mouse up event is caught in
+  /// the view which then calls the window controller's method.
+  override func mouseUp(with event: NSEvent) {
+    // Only check for Big Sur or greater, not if the preference use legacy full screen is enabled as
+    // that can be changed while running and once the window title has been removed and added back
+    // AppKit malfunctions from then on. The check for running under Big Sur or later isn't really
+    // needed as it would be fine to always call the controller. The check merely makes it clear
+    // that this is only needed due to macOS changes starting with Big Sur.
+    if #available(macOS 11, *) {
+      player.mainWindow.mouseUp(with: event)
+    } else {
+      super.mouseUp(with: event)
+    }
+  }
+
   // MARK: Drag and drop
 
   override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {

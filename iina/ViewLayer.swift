@@ -31,17 +31,12 @@ class ViewLayer: CAOpenGLLayer {
     autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
   }
 
-  override init(layer: Any) {
+  override convenience init(layer: Any) {
+    self.init()
+
     let previousLayer = layer as! ViewLayer
 
     videoView = previousLayer.videoView
-
-    super.init()
-    isOpaque = true
-    isAsynchronous = false
-
-    autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
-
   }
 
   required init?(coder aDecoder: NSCoder) {
@@ -140,7 +135,7 @@ class ViewLayer: CAOpenGLLayer {
     blocked = true
     mpvGLQueue.suspend()
   }
-  
+
   func resume() {
     blocked = false
     draw(forced: true)

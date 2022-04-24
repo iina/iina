@@ -86,6 +86,23 @@ class Switch: NSView {
     }
   }
 
+  @IBInspectable var isEnabled: Bool {
+    get {
+      if #available(macOS 10.15, *) {
+        return (nsSwitch as? NSSwitch)?.isEnabled ?? false
+      } else {
+        return checkbox?.isEnabled ?? false
+      }
+    }
+    set {
+      if #available(macOS 10.15, *) {
+        (nsSwitch as? NSSwitch)?.isEnabled = newValue
+      } else {
+        checkbox?.isEnabled = newValue
+      }
+    }
+  }
+
   override var intrinsicContentSize: NSSize {
     if #available(macOS 10.15, *) {
       return NSSize(width: 0, height: 22)

@@ -132,13 +132,14 @@ struct Preference {
     static let enableThumbnailPreview = Key("enableThumbnailPreview")
     static let maxThumbnailPreviewCacheSize = Key("maxThumbnailPreviewCacheSize")
     static let enableThumbnailForRemoteFiles = Key("enableThumbnailForRemoteFiles")
+    static let thumbnailWidth = Key("thumbnailWidth")
 
     static let autoSwitchToMusicMode = Key("autoSwitchToMusicMode")
     static let musicModeShowPlaylist = Key("musicModeShowPlaylist")
     static let musicModeShowAlbumArt = Key("musicModeShowAlbumArt")
 
     static let displayTimeAndBatteryInFullScreen = Key("displayTimeAndBatteryInFullScreen")
-    
+
     static let windowBehaviorWhenPip = Key("windowBehaviorWhenPip")
     static let pauseWhenPip = Key("pauseWhenPip")
     static let togglePipByMinimizingWindow = Key("togglePipByMinimizingWindow")
@@ -148,6 +149,7 @@ struct Preference {
     static let videoThreads = Key("videoThreads")
     static let hardwareDecoder = Key("hardwareDecoder")
     static let forceDedicatedGPU = Key("forceDedicatedGPU")
+    static let loadIccProfile = Key("loadIccProfile")
 
     static let audioThreads = Key("audioThreads")
     static let audioLanguage = Key("audioLanguage")
@@ -607,14 +609,14 @@ struct Preference {
       }
     }
   }
-  
+
   enum WindowBehaviorWhenPip: Int, InitializingFromKey {
     case doNothing = 0
     case hide
     case minimize
-    
+
     static var defaultValue = WindowBehaviorWhenPip.doNothing
-    
+
     init?(key: Key) {
       self.init(rawValue: Preference.integer(for: key))
     }
@@ -709,11 +711,12 @@ struct Preference {
     .enableThumbnailPreview: true,
     .maxThumbnailPreviewCacheSize: 500,
     .enableThumbnailForRemoteFiles: false,
+    .thumbnailWidth: 240,
     .autoSwitchToMusicMode: true,
     .musicModeShowPlaylist: false,
     .musicModeShowAlbumArt: true,
     .displayTimeAndBatteryInFullScreen: false,
-    
+
     .windowBehaviorWhenPip: WindowBehaviorWhenPip.doNothing.rawValue,
     .pauseWhenPip: false,
     .togglePipByMinimizingWindow: false,
@@ -721,6 +724,7 @@ struct Preference {
     .videoThreads: 0,
     .hardwareDecoder: HardwareDecoderOption.auto.rawValue,
     .forceDedicatedGPU: false,
+    .loadIccProfile: true,
     .audioThreads: 0,
     .audioLanguage: "",
     .maxVolume: 100,

@@ -9,6 +9,16 @@
 import Cocoa
 import Mustache
 
+fileprivate let isMacOS11: Bool = {
+  var res = false
+  if #available(macOS 11.0, *) {
+    if #available(macOS 12.0, *) {} else {
+      res = true
+    }
+  }
+  return res
+}()
+
 fileprivate let TitleBarHeightNormal: CGFloat = {
   if #available(macOS 10.16, *) {
     return 28
@@ -702,9 +712,14 @@ class MainWindowController: PlayerWindowController {
       oscFloatingTopView.addView(fragVolumeView, in: .leading)
       oscFloatingTopView.addView(fragToolbarView, in: .trailing)
       oscFloatingTopView.addView(fragControlView, in: .center)
-      oscFloatingTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragVolumeView)
-      oscFloatingTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragToolbarView)
-      oscFloatingTopView.setClippingResistancePriority(.defaultLow, for: .horizontal)
+      
+      // Setting the visibility priority to detach only will cause freeze when resizing the window
+      // (and triggering the detach) in macOS 11.
+      if !isMacOS11 {
+        oscFloatingTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragVolumeView)
+        oscFloatingTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragToolbarView)
+        oscFloatingTopView.setClippingResistancePriority(.defaultLow, for: .horizontal)
+      }
       oscFloatingBottomView.addSubview(fragSliderView)
       Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": fragSliderView])
       Utility.quickConstraints(["H:|-(>=0)-[v]-(>=0)-|"], ["v": fragControlView])
@@ -1424,6 +1439,36 @@ class MainWindowController: PlayerWindowController {
 
       controlBarFloating.xConstraint.constant = xPos
       controlBarFloating.yConstraint.constant = yPos
+    }
+    
+    // Detach the views in oscFloatingTopView manually on macOS 11 only; as it will cause freeze
+    if isMacOS11 && oscPosition == .floating {
+      guard let maxWidth = [fragVolumeView, fragToolbarView].compactMap({ $0?.frame.width }).max() else {
+        return
+      }
+      
+      // window - 10 - controlBarFloating
+      // controlBarFloating - 12 - oscFloatingTopView
+      let margin: CGFloat = (10 + 12) * 2
+      let hide = (window.frame.width
+                    - fragControlView.frame.width
+                    - maxWidth*2
+                    - margin) < 0
+      
+      let views = oscFloatingTopView.views
+      if hide {
+        if views.contains(fragVolumeView)
+            && views.contains(fragToolbarView) {
+          oscFloatingTopView.removeView(fragVolumeView)
+          oscFloatingTopView.removeView(fragToolbarView)
+        }
+      } else {
+        if !views.contains(fragVolumeView)
+            && !views.contains(fragToolbarView) {
+          oscFloatingTopView.addView(fragVolumeView, in: .leading)
+          oscFloatingTopView.addView(fragToolbarView, in: .trailing)
+        }
+      }
     }
   }
 

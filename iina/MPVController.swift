@@ -851,7 +851,10 @@ class MPVController: NSObject {
       }
 
     case MPVOption.Video.videoRotate:
-      player.info.rotation = Int(getInt(MPVOption.Video.videoRotate))
+      if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
+      let intData = Int(data)
+        player.info.rotation = intData
+      }
 
     case MPVOption.Audio.mute:
       player.syncUI(.muteButton)

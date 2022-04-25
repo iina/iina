@@ -220,9 +220,11 @@ return -1;\
 
         ret = avcodec_receive_frame(pCodecCtx, pFrame);
         if (ret < 0) {  // something happened
-          if (ret == AVERROR(EAGAIN))  // input not ready, retry
+          if (ret == AVERROR(EAGAIN)) { // input not ready, free packet and frame and retry
+            av_frame_unref(pFrame);
+            av_packet_unref(&packet);
             continue;
-          else
+          } else
             break;
         }
 
@@ -260,22 +262,26 @@ return -1;\
                     forFile:file];
         break;
       }
-
-      // Free the packet
+      // Free non-video packets
       av_packet_unref(&packet);
     }
+    // Free packet and frame when done
+    av_frame_unref(pFrame);
+    av_packet_unref(&packet);
   }
 
   // Free the RGB image
   av_free(pFrameRGBBuffer);
-  av_free(pFrameRGB);
+  av_frame_free(&pFrameRGB);
   // Free the YUV frame
-  av_free(pFrame);
+  av_frame_free(&pFrame);
 
   // Close the codec
-  avcodec_close(pCodecCtx);
+  avcodec_free_context(&pCodecCtx);
   // Close the video file
   avformat_close_input(&pFormatCtx);
+  // Free the sws context
+  sws_freeContext(sws_ctx);
 
   // NSLog(@"Thumbnails generated.");
   return 0;

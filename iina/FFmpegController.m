@@ -45,7 +45,7 @@ return -1;\
   double _timestamp;
 }
 
-- (int)getPeeksForFile:(NSString *)file;
+- (int)getPeeksForFile:(NSString *)file thumbnailsWidth:(int)thumbnailsWidth;
 - (void)saveThumbnail:(AVFrame *)pFrame width:(int)width height:(int)height index:(int)index realTime:(int)second forFile:(NSString *)file;
 
 @end
@@ -69,6 +69,7 @@ return -1;\
 
 
 - (void)generateThumbnailForFile:(NSString *)file
+                      thumbWidth:(int)thumbWidth
 {
   [_queue cancelAllOperations];
   NSBlockOperation *op = [[NSBlockOperation alloc] init];
@@ -78,7 +79,7 @@ return -1;\
       return;
     }
     self->_timestamp = CACurrentMediaTime();
-    int success = [self getPeeksForFile:file];
+    int success = [self getPeeksForFile:file thumbnailsWidth:thumbWidth];
     if (self.delegate) {
       [self.delegate didGenerateThumbnails:[NSArray arrayWithArray:self->_thumbnails]
                                    forFile: file
@@ -90,6 +91,7 @@ return -1;\
 
 
 - (int)getPeeksForFile:(NSString *)file
+      thumbnailsWidth:(int)thumbnailsWidth
 {
   int i, ret;
 
@@ -159,8 +161,9 @@ return -1;\
 
   // Allocate the output frame
   // We need to convert the video frame to RGBA to satisfy CGImage's data format
-  int thumbWidth = THUMB_WIDTH;
-  int thumbHeight = THUMB_WIDTH / ((float)pCodecCtx->width / pCodecCtx->height);
+
+  int thumbWidth = thumbnailsWidth;
+  int thumbHeight = thumbWidth / ((float)pCodecCtx->width / pCodecCtx->height);
 
   AVFrame *pFrameRGB = av_frame_alloc();
   CHECK_NOTNULL(pFrameRGB, @"Cannot alloc RGBA frame")

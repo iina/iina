@@ -132,6 +132,7 @@ struct Preference {
     static let enableThumbnailPreview = Key("enableThumbnailPreview")
     static let maxThumbnailPreviewCacheSize = Key("maxThumbnailPreviewCacheSize")
     static let enableThumbnailForRemoteFiles = Key("enableThumbnailForRemoteFiles")
+    static let thumbnailWidth = Key("thumbnailWidth")
 
     static let autoSwitchToMusicMode = Key("autoSwitchToMusicMode")
     static let musicModeShowPlaylist = Key("musicModeShowPlaylist")
@@ -670,6 +671,7 @@ struct Preference {
     .controlBarToolbarButtons: [ToolBarButton.pip.rawValue, ToolBarButton.playlist.rawValue, ToolBarButton.settings.rawValue],
     .oscPosition: OSCPosition.floating.rawValue,
     .playlistWidth: 270,
+    .thumbnailWidth: 120,
     .prefetchPlaylistVideoDuration: true,
     .themeMaterial: Theme.dark.rawValue,
     .enableOSD: true,

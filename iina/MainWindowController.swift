@@ -1357,6 +1357,12 @@ class MainWindowController: PlayerWindowController {
     // set frame
     let screen = window.screen ?? NSScreen.main!
     window.setFrame(screen.frame, display: true, animate: true)
+    if let unusable = screen.cameraHousingHeight {
+      // This screen contains an embedded camera. Shorten the height of the window's view's frame to
+      // avoid having part of the video obscured by the camera housing.
+      let view = window.contentView!
+      view.setFrameSize(NSMakeSize(view.frame.width, view.frame.height - unusable))
+    }
     // call delegate
     windowDidEnterFullScreen(Notification(name: .iinaLegacyFullScreen))
   }

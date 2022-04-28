@@ -76,8 +76,10 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var speedSliderConstraint: NSLayoutConstraint!
   @IBOutlet weak var customSpeedTextField: NSTextField!
   @IBOutlet weak var switchHorizontalLine: NSBox!
+  @IBOutlet weak var switchHorizontalLine2: NSBox!
   @IBOutlet weak var hardwareDecodingSwitch: Switch!
   @IBOutlet weak var deinterlaceSwitch: Switch!
+  @IBOutlet weak var hdrSwitch: Switch!
 
   @IBOutlet weak var brightnessSlider: NSSlider!
   @IBOutlet weak var contrastSlider: NSSlider!
@@ -148,6 +150,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     subLoadSementedControl.image(forSegment: 1)?.isTemplate = true
     switchHorizontalLine.wantsLayer = true
     switchHorizontalLine.layer?.opacity = 0.5
+    switchHorizontalLine2.wantsLayer = true
+    switchHorizontalLine2.layer?.opacity = 0.5
 
     func observe(_ name: Notification.Name, block: @escaping (Notification) -> Void) {
       observers.append(NotificationCenter.default.addObserver(forName: name, object: player, queue: .main, using: block))
@@ -208,6 +212,14 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     hardwareDecodingSwitch.checked = player.info.hwdecEnabled
     hardwareDecodingSwitch.action = {
       self.player.toggleHardwareDecoding($0)
+    }
+    hdrSwitch.isEnabled = player.info.hdrAvailable
+    hdrSwitch.checked = player.info.hdrAvailable && player.info.hdrEnabled
+    if #available(macOS 10.15, *) {
+      hdrSwitch.action = {
+        self.player.info.hdrEnabled = $0
+        self.player.refreshEdrMode()
+      }
     }
 
     let speed = player.mpv.getDouble(MPVOption.PlaybackControl.speed)
@@ -291,6 +303,14 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       subTableView.reloadData()
       secSubTableView.reloadData()
       updateSubTabControl()
+    }
+  }
+
+  func setHdrAvailability(to available: Bool) {
+    player.info.hdrAvailable = available
+    if isViewLoaded {
+      hdrSwitch.isEnabled = available
+      hdrSwitch.checked = available && player.info.hdrEnabled
     }
   }
 
@@ -758,7 +778,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       self.player.setSubFont($0 ?? "")
     }
   }
-
 
 }
 

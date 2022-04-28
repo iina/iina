@@ -31,6 +31,9 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
   @IBOutlet weak var vformatField: NSTextField!
   @IBOutlet weak var vcodecField: NSTextField!
   @IBOutlet weak var vdecoderField: NSTextField!
+  @IBOutlet weak var vcolorspaceField: NSTextField!
+  @IBOutlet weak var vprimariesField: NSTextField!
+
   @IBOutlet weak var voField: NSTextField!
   @IBOutlet weak var vsizeField: NSTextField!
   @IBOutlet weak var vbitrateField: NSTextField!
@@ -124,7 +127,8 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
         ]
 
         for (k, v) in strProperties {
-          let value = controller.getString(k)
+          var value = controller.getString(k)
+          if value == "" { value = nil }
           v.stringValue = value ?? "N/A"
           self.setLabelColor(v, by: value != nil)
         }
@@ -167,7 +171,6 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
         }
         self.trackPopup.selectItem(at: 0)
         self.updateTrack()
-
       }
 
       let vbitrate = controller.getInt(MPVProperty.videoBitrate)
@@ -191,6 +194,20 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
         v.stringValue = value ?? "N/A"
         self.setLabelColor(v, by: value != nil)
       }
+
+      let sigPeak = controller.getDouble(MPVProperty.videoParamsSigPeak);
+      self.vprimariesField.stringValue = sigPeak > 0
+        ? "\(controller.getString(MPVProperty.videoParamsPrimaries) ?? "?") / \(controller.getString(MPVProperty.videoParamsGamma) ?? "?") (\(sigPeak > 1 ? "H" : "S")DR)"
+        : "N/A";
+      self.setLabelColor(self.vprimariesField, by: sigPeak > 0)
+
+      if PlayerCore.lastActive.mainWindow.loaded && controller.fileLoaded {
+        let colorspace = PlayerCore.lastActive.mainWindow.videoView.videoLayer.colorspace?.name;
+        self.vcolorspaceField.stringValue = colorspace == nil ? "Unspecified (SDR)" : String(colorspace!) + " (HDR)"
+      } else {
+        self.vcolorspaceField.stringValue = "N/A"
+      }
+      self.setLabelColor(self.vcolorspaceField, by: controller.fileLoaded)
     }
   }
 

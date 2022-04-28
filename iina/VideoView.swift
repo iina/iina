@@ -1,4 +1,4 @@
- //
+//
 //  VideoView.swift
 //  iina
 //
@@ -39,6 +39,8 @@ class VideoView: NSView {
 
   var pendingRedrawAfterEnteringPIP = false;
 
+  lazy var hdrSubsystem = Logger.Subsystem(rawValue: "hdr")
+
   // MARK: - Attributes
 
   override var mouseDownCanMoveWindow: Bool {
@@ -62,11 +64,12 @@ class VideoView: NSView {
     // other settings
     autoresizingMask = [.width, .height]
     wantsBestResolutionOpenGLSurface = true
+    wantsExtendedDynamicRangeOpenGLSurface = true
 
     // dragging init
     registerForDraggedTypes([.nsFilenames, .nsURL, .string])
   }
-  
+
   convenience init(frame: CGRect, player: PlayerCore) {
     self.init(frame: frame)
     self.player = player
@@ -213,9 +216,8 @@ class VideoView: NSView {
   func updateDisplayLink() {
     guard let window = window, let link = link, let screen = window.screen else { return }
     let displayId = screen.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as! UInt32
-    if (currentDisplay == displayId) {
-      return
-    }
+    if (currentDisplay == displayId) { return }
+    currentDisplay = displayId
 
     CVDisplayLinkSetCurrentCGDisplay(link, displayId)
     let actualData = CVDisplayLinkGetActualOutputVideoRefreshPeriod(link)
@@ -224,11 +226,11 @@ class VideoView: NSView {
 
     if (nominalData.flags & Int32(CVTimeFlags.isIndefinite.rawValue)) < 1 {
       let nominalFps = Double(nominalData.timeScale) / Double(nominalData.timeValue)
-      
+
       if actualData > 0 {
         actualFps = 1/actualData
       }
-      
+
       if abs(actualFps - nominalFps) > 1 {
         Logger.log("Falling back to nominal display refresh rate: \(nominalFps) from \(actualFps)")
         actualFps = nominalFps;
@@ -238,36 +240,135 @@ class VideoView: NSView {
       actualFps = 60;
     }
     player.mpv.setDouble(MPVOption.Video.overrideDisplayFps, actualFps)
-    
-    setICCProfile(displayId)
-    currentDisplay = displayId
+
+    if #available(macOS 10.15, *) {
+      refreshEdrMode()
+    } else {
+      setICCProfile(displayId)
+    }
   }
 
   func setICCProfile(_ displayId: UInt32) {
-    typealias ProfileData = (uuid: CFUUID, profileUrl: URL?)
-    guard let uuid = CGDisplayCreateUUIDFromDisplayID(displayId)?.takeRetainedValue() else { return }
+    if !Preference.bool(for: .loadIccProfile) {
+      player.mpv.setString(MPVOption.GPURendererOptions.iccProfile, "")
+    } else {
+      typealias ProfileData = (uuid: CFUUID, profileUrl: URL?)
+      guard let uuid = CGDisplayCreateUUIDFromDisplayID(displayId)?.takeRetainedValue() else { return }
 
-    var argResult: ProfileData = (uuid, nil)
-    withUnsafeMutablePointer(to: &argResult) { data in
-      ColorSyncIterateDeviceProfiles({ (dict: CFDictionary?, ptr: UnsafeMutableRawPointer?) -> Bool in
-        if let info = dict as? [String: Any], let current = info["DeviceProfileIsCurrent"] as? Int {
-          let deviceID = info["DeviceID"] as! CFUUID
-          let ptr = ptr!.bindMemory(to: ProfileData.self, capacity: 1)
-          let uuid = ptr.pointee.uuid
+      var argResult: ProfileData = (uuid, nil)
+      withUnsafeMutablePointer(to: &argResult) { data in
+        ColorSyncIterateDeviceProfiles({ (dict: CFDictionary?, ptr: UnsafeMutableRawPointer?) -> Bool in
+          if let info = dict as? [String: Any], let current = info["DeviceProfileIsCurrent"] as? Int {
+            let deviceID = info["DeviceID"] as! CFUUID
+            let ptr = ptr!.bindMemory(to: ProfileData.self, capacity: 1)
+            let uuid = ptr.pointee.uuid
 
-          if current == 1, deviceID == uuid {
-            let profileURL = info["DeviceProfileURL"] as! URL
-            ptr.pointee.profileUrl = profileURL
-            return false
+            if current == 1, deviceID == uuid {
+              let profileURL = info["DeviceProfileURL"] as! URL
+              ptr.pointee.profileUrl = profileURL
+              return false
+            }
           }
-        }
-        return true
-      }, data)
+          return true
+        }, data)
+      }
+
+      if let iccProfilePath = argResult.profileUrl?.path, FileManager.default.fileExists(atPath: iccProfilePath) {
+        player.mpv.setString(MPVOption.GPURendererOptions.iccProfile, iccProfilePath)
+      }
     }
 
-    if let iccProfilePath = argResult.profileUrl?.path, FileManager.default.fileExists(atPath: iccProfilePath) {
-      player.mpv.setString(MPVOption.GPURendererOptions.iccProfile, iccProfilePath)
+    if videoLayer.colorspace != nil {
+      videoLayer.colorspace = nil;
+      videoLayer.wantsExtendedDynamicRangeContent = false
+      player.mpv.setString(MPVOption.GPURendererOptions.targetTrc, "auto")
+      player.mpv.setString(MPVOption.GPURendererOptions.targetPrim, "auto")
     }
+  }
+}
+
+// MARK: - HDR
+
+@available(macOS 10.15, *)
+extension VideoView {
+  func refreshEdrMode() {
+    guard player.mainWindow.loaded else { return }
+    guard player.mpv.fileLoaded else { return }
+    guard let displayId = currentDisplay else { return };
+    let edrEnabled = requestEdrMode()
+    let edrAvailable = edrEnabled != false
+    if player.info.hdrAvailable != edrAvailable {
+      player.mainWindow.quickSettingView.setHdrAvailability(to: edrAvailable)
+    }
+    if edrEnabled != true { setICCProfile(displayId) }
+  }
+
+  func requestEdrMode() -> Bool? {
+    guard let mpv = player.mpv else { return false }
+
+    guard let primaries = mpv.getString(MPVProperty.videoParamsPrimaries), let gamma = mpv.getString(MPVProperty.videoParamsGamma) else { return false }
+
+    var name: CFString? = nil;
+    switch primaries {
+    case "display-p3":
+      switch gamma {
+      case "pq":
+        if #available(macOS 10.15.4, *) {
+          name = CGColorSpace.displayP3_PQ
+        } else {
+          name = CGColorSpace.displayP3_PQ_EOTF
+        }
+      case "hlg":
+        name = CGColorSpace.displayP3_HLG
+      default:
+        name = CGColorSpace.displayP3
+      }
+
+    case "bt.2020":
+      switch gamma {
+      case "pq":
+        if #available(macOS 11.0, *) {
+          name = CGColorSpace.itur_2100_PQ
+        } else if #available(macOS 10.15.4, *) {
+          name = CGColorSpace.itur_2020_PQ
+        } else {
+          name = CGColorSpace.itur_2020_PQ_EOTF
+        }
+      case "hlg":
+        if #available(macOS 11.0, *) {
+          name = CGColorSpace.itur_2100_HLG
+        } else if #available(macOS 10.15.6, *) {
+          name = CGColorSpace.itur_2020_HLG
+        } else {
+          fallthrough
+        }
+      default:
+        name = CGColorSpace.itur_2020
+      }
+
+    case "bt.709":
+      return false; // SDR
+
+    default:
+      Logger.log("Unknown HDR color space information gamma=\(gamma) primaries=\(primaries)", level: .debug, subsystem: hdrSubsystem);
+      return false;
+    }
+
+    guard (window?.screen?.maximumPotentialExtendedDynamicRangeColorComponentValue ?? 1.0) > 1.0 else {
+      Logger.log("HDR video was found but the display does not support EDR mode", level: .debug, subsystem: hdrSubsystem);
+      return false;
+    }
+
+    guard player.info.hdrEnabled else { return nil }
+
+    Logger.log("Will activate HDR color space instead of using ICC profile", level: .debug, subsystem: hdrSubsystem);
+
+    videoLayer.wantsExtendedDynamicRangeContent = true
+    videoLayer.colorspace = CGColorSpace(name: name!)
+    mpv.setString(MPVOption.GPURendererOptions.iccProfile, "")
+    mpv.setString(MPVOption.GPURendererOptions.targetTrc, gamma)
+    mpv.setString(MPVOption.GPURendererOptions.targetPrim, primaries)
+    return true;
   }
 }
 
@@ -281,4 +382,3 @@ fileprivate func displayLinkCallback(
   mpv.mpvReportSwap()
   return kCVReturnSuccess
 }
-

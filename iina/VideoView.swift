@@ -298,7 +298,7 @@ extension VideoView {
     let edrEnabled = requestEdrMode()
     let edrAvailable = edrEnabled != false
     if player.info.hdrAvailable != edrAvailable {
-      player.mainWindow.quickSettingView.pleaseChangeHdrAvailable(to: edrAvailable)
+      player.mainWindow.quickSettingView.setHdrAvailability(to: edrAvailable)
     }
     if edrEnabled != true { setICCProfile(displayId) }
   }

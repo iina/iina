@@ -76,6 +76,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var speedSliderConstraint: NSLayoutConstraint!
   @IBOutlet weak var customSpeedTextField: NSTextField!
   @IBOutlet weak var switchHorizontalLine: NSBox!
+  @IBOutlet weak var switchHorizontalLine2: NSBox!
   @IBOutlet weak var hardwareDecodingSwitch: Switch!
   @IBOutlet weak var deinterlaceSwitch: Switch!
   @IBOutlet weak var hdrSwitch: Switch!
@@ -149,6 +150,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     subLoadSementedControl.image(forSegment: 1)?.isTemplate = true
     switchHorizontalLine.wantsLayer = true
     switchHorizontalLine.layer?.opacity = 0.5
+    switchHorizontalLine2.wantsLayer = true
+    switchHorizontalLine2.layer?.opacity = 0.5
 
     func observe(_ name: Notification.Name, block: @escaping (Notification) -> Void) {
       observers.append(NotificationCenter.default.addObserver(forName: name, object: player, queue: .main, using: block))
@@ -303,7 +306,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
   }
 
-  func pleaseChangeHdrAvailable(to available: Bool) {
+  func setHdrAvailability(to available: Bool) {
     player.info.hdrAvailable = available
     if isViewLoaded {
       hdrSwitch.isEnabled = available

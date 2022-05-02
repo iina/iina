@@ -431,6 +431,10 @@ class MPVController: NSObject {
     return strArgs
   }
 
+  private func formatArgs(_ args: [String?]) -> String {
+    return args.map { $0 == nil ? "NULL" : "\"\($0!)\""}.joined(separator: ", ")
+  }
+
   // Send arbitrary mpv command.
   func command(_ command: MPVCommand, args: [String?] = [], checkError: Bool = true, returnValueCallback: ((Int32) -> Void)? = nil) {
     guard mpv != nil else { return }
@@ -442,6 +446,7 @@ class MPVController: NSObject {
         }
       }
     }
+    Logger.log("Sending MPV cmd: \"\(command.rawValue)\", args=[\(formatArgs(args))]")
     let returnValue = mpv_command(self.mpv, &cargs)
     if checkError {
       chkErr(returnValue)
@@ -451,6 +456,7 @@ class MPVController: NSObject {
   }
 
   func command(rawString: String) -> Int32 {
+    Logger.log("Sending MPV cmd str: \"\(rawString)\"")
     return mpv_command_string(mpv, rawString)
   }
 
@@ -464,6 +470,7 @@ class MPVController: NSObject {
         }
       }
     }
+    Logger.log("Sending MPV cmd async: \"\(command.rawValue)\" args=[\(formatArgs(args))]")
     let returnValue = mpv_command_async(self.mpv, replyUserdata, &cargs)
     if checkError {
       chkErr(returnValue)

@@ -13,7 +13,7 @@ jobs:
         xcode: ["13.4.1", "14.1"]
     runs-on:  macos-12
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Install dependencies
         run: ./other/download_libs.sh

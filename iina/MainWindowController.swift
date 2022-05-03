@@ -548,6 +548,7 @@ class MainWindowController: PlayerWindowController {
     thumbnailPeekView.isHidden = true
 
     // other initialization
+    osdAccessoryProgress.usesThreadedAnimation = false
     if #available(macOS 10.14, *) {
       titleBarBottomBorder.fillColor = NSColor(named: .titleBarBorder)!
     }

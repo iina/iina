@@ -14,6 +14,7 @@ struct Logger {
     var rawValue: String
 
     static let general = Subsystem(rawValue: "iina")
+    static let inputConf = Subsystem(rawValue: "inputconf")
 
     init(rawValue: String) {
       self.rawValue = rawValue

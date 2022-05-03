@@ -602,6 +602,7 @@ extension NSAppearance {
 }
 
 extension NSScreen {
+
   /// Height of the camera housing on this screen if this screen has an embedded camera.
   var cameraHousingHeight: CGFloat? {
     if #available(macOS 12.0, *) {
@@ -609,5 +610,49 @@ extension NSScreen {
     } else {
       return nil
     }
+  }
+
+  /// Log the given `NSScreen` object.
+  ///
+  /// Due to issues with multiple monitors and how the screen to use for a window is selected detailed logging has been added in this
+  /// area in case additional problems are encountered in the future.
+  /// - parameter label: Label to include in the log message.
+  /// - parameter screen: The `NSScreen` object to log.
+  static func log(_ label: String, _ screen: NSScreen?) {
+    guard let screen = screen else {
+      Logger.log("\(label): nil")
+      return
+    }
+    // Unfortunately localizedName is not available until macOS Catalina.
+    if #available(macOS 10.15, *) {
+      Logger.log("\(label): \(screen.localizedName) visible frame \(screen.visibleFrame)")
+    } else {
+      Logger.log("\(label): visible frame \(screen.visibleFrame)")
+    }
+  }
+}
+
+extension NSWindow {
+
+  /// Return the screen to use by default for this window.
+  ///
+  /// This method searches for a screen to use in this order:
+  /// - `window!.screen` The screen where most of the window is on; it is `nil` when the window is offscreen.
+  /// - `NSScreen.main` The screen containing the window that is currently receiving keyboard events.
+  /// - `NSScreeen.screens[0]` The primary screen of the user’s system.
+  ///
+  /// `PlayerCore` caches players along with their windows. This window may have been previously used on an external monitor
+  /// that is no longer attached. In that case the `screen` property of the window will be `nil`.  Apple documentation is silent
+  /// concerning when `NSScreen.main` is `nil`.  If that is encountered the primary screen will be used.
+  ///
+  /// - returns: The default `NSScreen` for this window
+  func selectDefaultScreen() -> NSScreen {
+    if screen != nil {
+      return screen!
+    }
+    if NSScreen.main != nil {
+      return NSScreen.main!
+    }
+    return NSScreen.screens[0]
   }
 }

@@ -1299,6 +1299,14 @@ class PlayerCore: NSObject {
       if info.isNetworkResource {
         info.videoDuration?.second = mpv.getDouble(MPVProperty.duration)
       }
+      // When the end of a video file is reached mpv does not update the value of the property
+      // time-pos, leaving it reflecting the position of the last frame of the video. This is
+      // especially noticeable if the onscreen controller time labels are configured to show
+      // milliseconds. Adjust the position if the end of the file has been reached.
+      let eofReached = mpv.getFlag(MPVProperty.eofReached)
+      if eofReached, let duration = info.videoDuration?.second {
+        info.videoPosition?.second = duration
+      }
       info.constrainVideoPosition()
       DispatchQueue.main.async {
         if self.isInMiniPlayer {
@@ -1311,6 +1319,14 @@ class PlayerCore: NSObject {
     case .timeAndCache:
       info.videoPosition?.second = mpv.getDouble(MPVProperty.timePos)
       info.videoDuration?.second = mpv.getDouble(MPVProperty.duration)
+      // When the end of a video file is reached mpv does not update the value of the property
+      // time-pos, leaving it reflecting the position of the last frame of the video. This is
+      // especially noticeable if the onscreen controller time labels are configured to show
+      // milliseconds. Adjust the position if the end of the file has been reached.
+      let eofReached = mpv.getFlag(MPVProperty.eofReached)
+      if eofReached, let duration = info.videoDuration?.second {
+        info.videoPosition?.second = duration
+      }
       info.constrainVideoPosition()
       info.pausedForCache = mpv.getFlag(MPVProperty.pausedForCache)
       info.cacheUsed = ((mpv.getNode(MPVProperty.demuxerCacheState) as? [String: Any])?["fw-bytes"] as? Int) ?? 0

@@ -140,7 +140,7 @@ class ThumbnailCache {
 
     let pathURL = urlFor(name)
     guard let file = try? FileHandle(forReadingFrom: pathURL) else {
-      Logger.log("Cannot open file.", level: .error, subsystem: subsystem)
+      Logger.log("Cannot open file: \(pathURL.path)", level: .error, subsystem: subsystem)
       return nil
     }
     Logger.log("Reading from \(pathURL.path)", subsystem: subsystem)
@@ -159,7 +159,7 @@ class ThumbnailCache {
       // length and timestamp
       guard let blockLength = file.read(type: Int64.self),
             let timestamp = file.read(type: Double.self) else {
-        Logger.log("Cannot read image header. Cache file will be deleted.", level: .warning, subsystem: subsystem)
+        Logger.log("Cannot read image header. Cache file will be deleted: \(pathURL.path)", level: .warning, subsystem: subsystem)
         file.closeFile()
         deleteCacheFile(at: pathURL)
         return nil
@@ -167,7 +167,7 @@ class ThumbnailCache {
       // jpeg
       let jpegData = file.readData(ofLength: Int(blockLength) - MemoryLayout.size(ofValue: timestamp))
       guard let image = NSImage(data: jpegData) else {
-        Logger.log("Cannot read image. Cache file will be deleted.", level: .warning, subsystem: subsystem)
+        Logger.log("Cannot read image. Cache file will be deleted: \(pathURL.path)", level: .warning, subsystem: subsystem)
         file.closeFile()
         deleteCacheFile(at: pathURL)
         return nil
@@ -189,7 +189,7 @@ class ThumbnailCache {
     do {
       try FileManager.default.removeItem(at: pathURL)
     } catch {
-      Logger.log("Cannot delete corrupted cache.", level: .error, subsystem: subsystem)
+      Logger.log("Cannot delete corrupted cache: \(pathURL.path)", level: .error, subsystem: subsystem)
     }
   }
 

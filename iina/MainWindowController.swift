@@ -588,6 +588,14 @@ class MainWindowController: PlayerWindowController {
       // Update the cached value
       self.cachedScreenCount = screenCount
       self.videoView.updateDisplayLink()
+      // In normal full screen mode AppKit will automatically adjust the window frame if the window
+      // is moved to a new screen such as when the window is on an external display and that display
+      // is discounnected. In legacy full screen mode IINA is responsible for adjusting the window's
+      // frame.
+      guard self.fsState.isFullscreen, Preference.bool(for: .useLegacyFullScreen),
+            let window = self.window else { return }
+      let screen = window.screen ?? NSScreen.main!
+      screen.setFrame(window, display: true, animate: !AccessibilityPreferences.motionReductionEnabled)
     }
   }
 
@@ -1365,13 +1373,7 @@ class MainWindowController: PlayerWindowController {
     NSApp.presentationOptions.insert(.autoHideDock)
     // set frame
     let screen = window.screen ?? NSScreen.main!
-    window.setFrame(screen.frame, display: true, animate: true)
-    if let unusable = screen.cameraHousingHeight {
-      // This screen contains an embedded camera. Shorten the height of the window's view's frame to
-      // avoid having part of the video obscured by the camera housing.
-      let view = window.contentView!
-      view.setFrameSize(NSMakeSize(view.frame.width, view.frame.height - unusable))
-    }
+    screen.setFrame(window, display: true, animate: !AccessibilityPreferences.motionReductionEnabled)
     // call delegate
     windowDidEnterFullScreen(Notification(name: .iinaLegacyFullScreen))
   }

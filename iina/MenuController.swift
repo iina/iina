@@ -8,38 +8,6 @@
 
 import Cocoa
 
-fileprivate func sameKeyAction(_ lhs: [String], _ rhs: [String], _ normalizeLastNum: Bool, _ numRange: ClosedRange<Double>?) -> (Bool, Double?) {
-  var lhs = lhs
-  if lhs.first == "seek" && (lhs.last == "exact" || lhs.last == "keyframe") {
-    lhs = [String](lhs.dropLast())
-  }
-  guard lhs.count > 0 && lhs.count == rhs.count else {
-    return (false, nil)
-  }
-  if normalizeLastNum {
-    for i in 0..<lhs.count-1 {
-      if lhs[i] != rhs[i] {
-        return (false, nil)
-      }
-    }
-    guard let ld = Double(lhs.last!), let rd = Double(rhs.last!) else {
-      return (false, nil)
-    }
-    if let range = numRange {
-      return (range.contains(ld), ld)
-    } else {
-      return (ld == rd, ld)
-    }
-  } else {
-    for i in 0..<lhs.count {
-      if lhs[i] != rhs[i] {
-        return (false, nil)
-      }
-    }
-  }
-  return (true, nil)
-}
-
 class MenuController: NSObject, NSMenuDelegate {
 
   /** For convenient bindings. see `bind(...)` below. [menu: check state block] */
@@ -627,7 +595,7 @@ class MenuController: NSObject, NSMenuDelegate {
   }
 
   func updateKeyEquivalentsFrom(_ keyBindings: [KeyMapping]) {
-    var settings: [(NSMenuItem, Bool, [String], Bool, ClosedRange<Double>?, String?)] = [
+    var uiActions: [(NSMenuItem, Bool, [String], Bool, ClosedRange<Double>?, String?)] = [
       (deleteCurrentFile, true, ["delete-current-file"], false, nil, nil),
       (savePlaylist, true, ["save-playlist"], false, nil, nil),
       (quickSettingsVideo, true, ["video-panel"], false, nil, nil),
@@ -690,29 +658,118 @@ class MenuController: NSObject, NSMenuDelegate {
     ]
 
     if #available(macOS 10.12, *) {
-      settings.append((pictureInPicture, true, ["toggle-pip"], false, nil, nil))
+      uiActions.append((pictureInPicture, true, ["toggle-pip"], false, nil, nil))
     }
 
-    settings.forEach { (menuItem, isIINACmd, actions, normalizeLastNum, numRange, l10nKey) in
-      var bound = false
-      for kb in keyBindings {
-        guard kb.isIINACommand == isIINACmd else { continue }
-        let (sameAction, value) = sameKeyAction(kb.action, actions, normalizeLastNum, numRange)
-        if sameAction, let (kEqv, kMdf) = KeyCodeHelper.macOSKeyEquivalent(from: kb.key) {
-          menuItem.keyEquivalent = kEqv
-          menuItem.keyEquivalentModifierMask = kMdf
-          if let value = value, let l10nKey = l10nKey {
-            menuItem.title = String(format: NSLocalizedString("menu." + l10nKey, comment: ""), abs(value))
-            menuItem.representedObject = value
-          }
-          bound = true
-          break
-        }
+    uiActions.forEach { (menuItem, isIINACmd, cmdTokens, normalizeLastNum, numRange, l10nKey) in
+      Logger.log("Setting bindings for uiAction=\(cmdTokens)", level: .verbose, subsystem: .inputConf)
+      attachBindings(keyBindings, menuItem, isIINACmd, cmdTokens, normalizeLastNum, numRange, l10nKey)
+    }
+  }
+
+  /*
+   Attempts to match the given "UI action" (keybinding & menu item) with one of the user-defined bindings using the matching rules.
+   All of the user bindings wil be evaluated for each UI action, in order given. Thus if a given UI action matches to multiple user bindings,
+   only the last matching user binding will be used because it will overwrite the previous.
+   */
+  private func attachBindings(_ userBindings: [KeyMapping], _ menuItem: NSMenuItem, _ isIINACmd: Bool, _ cmdTokens: [String], _ normalizeLastNum: Bool, _ numRange: ClosedRange<Double>?, _ l10nKey: String?) {
+
+    var matchCount: Int = 0
+    for userBinding in userBindings {
+      if attachMatchingKeyBinding(userBinding, menuItem, isIINACmd, cmdTokens, normalizeLastNum, numRange, l10nKey) {
+        Logger.log("MatchFound: userBinding=\(userBinding.action) uiAction=\(cmdTokens)", level: .verbose, subsystem: .inputConf)
+        matchCount += 1
       }
-      if !bound {
+    }
+    if matchCount == 0 {
         menuItem.keyEquivalent = ""
         menuItem.keyEquivalentModifierMask = []
+    } else if matchCount > 1 {
+      Logger.log("Multiple matches (\(matchCount)) found for cmd (\(cmdTokens)); only the last will be bound", subsystem: .inputConf)
+    }
+  }
+
+  /*
+   Attempts to match a single user-defined key binding to a single iina UI action using the matching rules.
+   If match is successful, the UI action's menu & key bindings are updated, and true is returned.
+   If no match, nothing is updated and false is returned.
+   */
+  private func attachMatchingKeyBinding(_ userBinding: KeyMapping, _ menuItem: NSMenuItem, _ isIINACmd: Bool, _ cmdTokens: [String], _ normalizeLastNum: Bool, _ numRange: ClosedRange<Double>?, _ l10nKey: String?) -> Bool {
+
+    guard userBinding.isIINACommand == isIINACmd else {
+      return false
+    }
+
+    var lhs = userBinding.action
+    let rhs = cmdTokens
+    var extraData: Any? = nil
+
+    // Special handling for "seek" command
+    if lhs.first == "seek" {
+      if lhs.last == "exact" {
+        extraData = Preference.SeekOption.exact
+        lhs = [String](lhs.dropLast())
+      } else if lhs.last == "keyframes" {
+        extraData = Preference.SeekOption.relative
+        lhs = [String](lhs.dropLast())
+      }
+    }
+
+    // All tokens in
+    guard allValuesMatch(lhs, rhs, skipLast: normalizeLastNum) else {
+      return false
+    }
+
+    var val: Double? = nil
+
+    if normalizeLastNum {  // last entry in rhs is a Double
+      guard let ld = Double(lhs.last!), let rd = Double(rhs.last!) else {
+        return false
+      }
+      if let range = numRange {
+        guard range.contains(ld) else {
+          return false
+        }
+      } else if ld != rd {
+        return false
+      }
+      val = ld
+    }
+
+    updateMenuItem(menuItem, userBinding, l10nKey, val, extraData)
+    return true
+ }
+
+  fileprivate func updateMenuItem(_ menuItem: NSMenuItem, _ userBinding: KeyMapping, _ l10nKey: String?, _ value: Double?, _ extraData: Any?) {
+    guard let (kEqv, kMdf) = KeyCodeHelper.macOSKeyEquivalent(from: userBinding.key) else {
+      return
+    }
+
+    menuItem.keyEquivalent = kEqv
+    menuItem.keyEquivalentModifierMask = kMdf
+
+    if let value = value, let l10nKey = l10nKey {
+      menuItem.title = String(format: NSLocalizedString("menu." + l10nKey, comment: ""), abs(value))
+      if let extraData = extraData {
+        menuItem.representedObject = (value, extraData)
+      } else {
+        menuItem.representedObject = value
       }
     }
   }
+
+  fileprivate func allValuesMatch(_ lhs: [String], _ rhs: [String], skipLast: Bool) -> Bool {
+    let end = lhs.count - (skipLast ? 1 : 0)
+    guard lhs.count > 0 && lhs.count == rhs.count && end > 0 else {
+      return false
+    }
+
+    for i in 0..<end {
+      if lhs[i] != rhs[i] {
+        return false
+      }
+    }
+    return true
+  }
+
 }

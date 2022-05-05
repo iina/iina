@@ -1022,12 +1022,20 @@ class MainWindowController: PlayerWindowController {
       window!.title = "Window"
     }
 
-    var screen = window!.screen!
+    // As there have been issues in this area, log details about the screen selection process.
+    NSScreen.log("window!.screen", window!.screen)
+    NSScreen.log("NSScreen.main", NSScreen.main)
+    NSScreen.screens.enumerated().forEach { screen in
+      NSScreen.log("NSScreen.screens[\(screen.offset)]" , screen.element)
+    }
+
+    var screen = window!.selectDefaultScreen()
 
     if let rectString = UserDefaults.standard.value(forKey: "MainWindowLastPosition") as? String {
       let rect = NSRectFromString(rectString)
       if let lastScreen = NSScreen.screens.first(where: { NSPointInRect(rect.origin, $0.visibleFrame) }) {
         screen = lastScreen
+        NSScreen.log("MainWindowLastPosition \(rect.origin) matched", screen)
       }
     }
 

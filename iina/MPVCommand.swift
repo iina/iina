@@ -36,6 +36,8 @@ struct MPVCommand: RawRepresentable {
   static let playlistNext = MPVCommand("playlist-next")
   /** playlist-prev <flags> */
   static let playlistPrev = MPVCommand("playlist-prev")
+  /** playlist-play-index <index> */
+  static let playlistPlayIndex = MPVCommand("playlist-play-index")
   /** loadfile <url> [<flags> [<options>]] */
   static let loadfile = MPVCommand("loadfile")
   /** loadlist <url> [<flags>] */
@@ -80,6 +82,8 @@ struct MPVCommand: RawRepresentable {
   static let showProgress = MPVCommand("show-progress")
   /** write-watch-later-config */
   static let writeWatchLaterConfig = MPVCommand("write-watch-later-config")
+  /** delete-watch-later-config <filename> */
+  static let deleteWatchLaterConfig = MPVCommand("delete-watch-later-config")
   /** stop */
   static let stop = MPVCommand("stop")
   /** mouse <x> <y> [<button> [<mode>]] */
@@ -140,6 +144,8 @@ struct MPVCommand: RawRepresentable {
   static let vfCommand = MPVCommand("vf-command")
   /** af-command <label> <command> <argument> */
   static let afCommand = MPVCommand("af-command")
+  /** ao-reload */
+  static let aoReload = MPVCommand("ao-reload")
   /** apply-profile <name> */
   static let applyProfile = MPVCommand("apply-profile")
   /** load-script <filename> */

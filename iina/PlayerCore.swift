@@ -1070,7 +1070,9 @@ class PlayerCore: NSObject {
     }
 
     if #available(OSX 10.13, *), RemoteCommandController.useSystemMediaControl {
-      NowPlayingInfoManager.updateInfo(state: .playing, withTitle: true)
+      DispatchQueue.main.async {
+        NowPlayingInfoManager.updateInfo(state: .playing, withTitle: true)
+      }
     }
 
     // Auto load

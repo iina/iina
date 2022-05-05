@@ -11,6 +11,9 @@ import Cocoa
 class PlayerWindowController: NSWindowController, NSWindowDelegate {
 
   unowned var player: PlayerCore
+
+  internal var lastKeysPressed = ["", "", "", ""]
+  internal var lastKeyPressedIndex = 0
   
   var videoView: VideoView {
     fatalError("Subclass must implement")
@@ -255,11 +258,51 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
 
   override func keyDown(with event: NSEvent) {
     let keyCode = KeyCodeHelper.mpvKeyCode(from: event)
-    if let kb = PlayerCore.keyBindings[keyCode] {
-      handleKeyBinding(kb)
-    } else {
-      super.keyDown(with: event)
+    if keyCode != "" {
+      #if DEBUG
+      Logger.log("KeyDown: \(keyCode)", level: .verbose)
+      #endif
+      if matchAndHandle(keyCode) {
+        return
+      }
+
+      // try to match key sequences, up to 4 values. shortest match wins
+      var keyCodeSequence = keyCode
+      for i in 0..<3 {
+        let prevKeyCode = lastKeysPressed[(lastKeyPressedIndex+4-i)%4]
+        if prevKeyCode == "" {
+          // no prev keyCode
+          break
+        }
+
+        keyCodeSequence = "\(prevKeyCode)-\(keyCodeSequence)"
+        #if DEBUG
+        Logger.log("KeyDown: trying match for seq\(i+1): \(keyCodeSequence)", level: .verbose)
+        #endif
+
+        if matchAndHandle(keyCodeSequence) {
+          return
+        }
+      }
     }
+    // no match, but may be part of a key sequence.
+    // store prev key in circular buffer for later key sequence matching
+    lastKeyPressedIndex = (lastKeyPressedIndex+1)%4
+    lastKeysPressed[lastKeyPressedIndex] = keyCode
+
+    #if DEBUG
+    Logger.log("KeyDown: no action for: \(keyCode)", level: .verbose)
+    #endif
+    super.keyDown(with: event)
+  }
+
+  private func matchAndHandle(_ keyCode: String) -> Bool {
+    if let kb = PlayerCore.keyBindings[keyCode], kb.rawAction != MPVCommand.ignore.rawValue {
+      lastKeysPressed[lastKeyPressedIndex] = ""  // clear sequence on match
+      handleKeyBinding(kb)
+      return true
+    }
+    return false
   }
 
   override func mouseUp(with event: NSEvent) {

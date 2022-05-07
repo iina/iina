@@ -630,22 +630,6 @@ extension NSScreen {
       Logger.log("\(label): visible frame \(screen.visibleFrame)")
     }
   }
-
-  /// Set the frame of the given window and its content view to use all the usable area of this screen.
-  /// - parameter window: The window to set the frame of.
-  /// - parameter displayFlag: Specifies whether the window redraws the views that need to be displayed. When true the
-  ///   window sends a [displayIfNeeded()](https://developer.apple.com/documentation/appkit/nswindow/1419096-displayifneeded)
-  ///   message down its view hierarchy, thus redrawing all views.
-  /// - parameter animateFlag: Specifies whether the window performs a smooth resize. true to perform the animation, whose
-  ///   duration is specified by [animationResizeTime(_:)](https://developer.apple.com/documentation/appkit/nswindow/1419655-animationresizetime)
-  func setFrame(_ window: NSWindow, display displayFlag: Bool, animate animateFlag: Bool) {
-    window.setFrame(frame, display: displayFlag, animate: animateFlag)
-    guard let unusable = cameraHousingHeight  else { return }
-    // This screen contains an embedded camera. Shorten the height of the window's content view's
-    // frame to avoid having part of the window obscured by the camera housing.
-    let view = window.contentView!
-    view.setFrameSize(NSMakeSize(view.frame.width, frame.height - unusable))
-  }
 }
 
 extension NSWindow {

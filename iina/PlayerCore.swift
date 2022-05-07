@@ -286,7 +286,7 @@ class PlayerCore: NSObject {
     var keyBindings: [String: KeyMapping] = [:]
     keyMappings.forEach { keyBindings[$0.key] = $0 }
     PlayerCore.keyBindings = keyBindings
-    (NSApp.delegate as? AppDelegate)?.menuController.updateKeyEquivalentsFrom(keyMappings)
+    (NSApp.delegate as? AppDelegate)?.menuController.updateKeyEquivalentsFrom(Array(keyBindings.values))
   }
 
   func startMPV() {

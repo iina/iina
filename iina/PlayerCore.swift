@@ -134,7 +134,7 @@ class PlayerCore: NSObject {
   // test seeking
   var triedUsingExactSeekForCurrentFile: Bool = false
   var useExactSeekForCurrentFile: Bool = true
-  
+
   var isPlaylistVisible: Bool {
     isInMiniPlayer ? miniPlayer.isPlaylistVisible : mainWindow.sideBarStatus == .playlist
   }
@@ -261,7 +261,7 @@ class PlayerCore: NSObject {
       mainWindow.showWindow(nil)
       mainWindow.windowDidOpen()
     }
-    
+
     // Send load file command
     info.fileLoading = true
     info.justOpenedFile = true
@@ -446,7 +446,7 @@ class PlayerCore: NSObject {
   func togglePause(_ set: Bool? = nil) {
     info.isPaused ? resume() : pause()
   }
-  
+
   func pause() {
     mpv.setFlag(MPVOption.PlaybackControl.pause, true)
     // Follow energy efficiency best practices and ensure IINA is absolutely idle when the video is
@@ -454,7 +454,7 @@ class PlayerCore: NSObject {
     invalidateTimer()
     mainWindow.videoView.stopDisplayLink()
   }
-  
+
   func resume() {
     // Restart playback when reached EOF
     if mpv.getFlag(MPVProperty.eofReached) {
@@ -597,8 +597,8 @@ class PlayerCore: NSObject {
   }
 
   func toggleFileLoop() {
-    let isLoop = mpv.getFlag(MPVOption.PlaybackControl.loopFile)
-    mpv.setFlag(MPVOption.PlaybackControl.loopFile, !isLoop)
+    let isLoop = mpv.getString(MPVOption.PlaybackControl.loopFile) == "inf"
+    mpv.setString(MPVOption.PlaybackControl.loopFile, isLoop ? "no" : "inf")
     sendOSD(.fileLoop(!isLoop))
   }
 
@@ -1290,6 +1290,7 @@ class PlayerCore: NSObject {
     case chapterList
     case playlist
     case playlistLoop
+    case fileLoop
     case additionalInfo
   }
 

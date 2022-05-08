@@ -437,7 +437,7 @@ class MenuController: NSObject, NSMenuDelegate {
   private func updatePlaybackMenu() {
     let player = PlayerCore.active
     pause.title = player.info.isPaused ? Constants.String.resume : Constants.String.pause
-    let isLoop = player.mpv.getFlag(MPVOption.PlaybackControl.loopFile)
+    let isLoop = player.mpv.getString(MPVOption.PlaybackControl.loopFile) == "inf"
     fileLoop.state = isLoop ? .on : .off
     let isPlaylistLoop = player.mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
     playlistLoop.state = (isPlaylistLoop == "inf" || isPlaylistLoop == "force") ? .on : .off

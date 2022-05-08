@@ -70,7 +70,7 @@ class MPVController: NSObject {
     MPVOption.TrackSelection.sid: MPV_FORMAT_INT64,
     MPVOption.Subtitles.secondarySid: MPV_FORMAT_INT64,
     MPVOption.PlaybackControl.pause: MPV_FORMAT_FLAG,
-    MPVOption.PlaybackControl.loopPlaylist: MPV_FORMAT_FLAG,
+    MPVOption.PlaybackControl.loopPlaylist: MPV_FORMAT_STRING,
     MPVProperty.chapter: MPV_FORMAT_INT64,
     MPVOption.Video.deinterlace: MPV_FORMAT_FLAG,
     MPVOption.Video.hwdec: MPV_FORMAT_STRING,
@@ -420,7 +420,7 @@ class MPVController: NSObject {
   }
 
   // MARK: - Command & property
-  
+
   private func makeCArgs(_ command: MPVCommand, _ args: [String?]) -> [String?] {
     if args.count > 0 && args.last == nil {
       Logger.fatal("Command do not need a nil suffix")
@@ -695,7 +695,7 @@ class MPVController: NSObject {
       } else {
         player.info.shouldAutoLoadFiles = false
       }
-      
+
     case MPV_EVENT_COMMAND_REPLY:
       let reply = event.pointee.reply_userdata
       if reply == MPVController.UserData.screenshot {

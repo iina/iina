@@ -1290,7 +1290,7 @@ class PlayerCore: NSObject {
     case chapterList
     case playlist
     case playlistLoop
-    case fileLoop
+//    case fileLoop
     case additionalInfo
   }
 

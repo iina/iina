@@ -707,11 +707,13 @@ class MenuController: NSObject, NSMenuDelegate {
     // Special handling for "seek" command
     if lhs.first == "seek" {
       if lhs.last == "exact" {
+        lhs = [String](lhs.dropLast())
         extraData = Preference.SeekOption.exact
-        lhs = [String](lhs.dropLast())
       } else if lhs.last == "keyframes" {
-        extraData = Preference.SeekOption.relative
         lhs = [String](lhs.dropLast())
+        extraData = Preference.SeekOption.relative
+      } else {
+        extraData = Preference.SeekOption.defaultValue
       }
     }
 

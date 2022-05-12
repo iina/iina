@@ -171,7 +171,6 @@ class InitialWindowController: NSWindowController {
   }
 
   @objc func onTableClicked() {
-    Logger.log("Clicked!")
     openRecentItemFromTable(recentFilesTableView.clickedRow)
   }
 
@@ -211,6 +210,7 @@ class InitialWindowController: NSWindowController {
   }
 }
 
+
 extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
 
   func numberOfRows(in tableView: NSTableView) -> Int {
@@ -226,8 +226,6 @@ extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
   }
 
   override func keyDown(with event: NSEvent) {
-    // Enable key events
-    Logger.log("Key pressed: \(event)")
     switch event.keyCode {
       case 36, 76:  // RETURN or (keypad ENTER)
         // If user selected a row in the table using the keyboard, use that. Otherwise default to most recent file
@@ -245,6 +243,7 @@ extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
         break
     }
   }
+
 }
 
 

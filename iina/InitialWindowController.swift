@@ -142,6 +142,7 @@ class InitialWindowController: NSWindowController {
 
     recentFilesTableView.delegate = self
     recentFilesTableView.dataSource = self
+    recentFilesTableView.action = #selector(self.onTableClicked)
 
     setMaterial(Preference.enum(for: .themeMaterial))
 
@@ -166,6 +167,17 @@ class InitialWindowController: NSWindowController {
       window.appearance = NSAppearance(named: .vibrantDark)
       mainView.layer?.backgroundColor = CGColor(gray: 0.1, alpha: 1)
       visualEffectView.material = .ultraDark
+    }
+  }
+
+  @objc func onTableClicked() {
+    Logger.log("Clicked!")
+    openRecentItemFromTable(recentFilesTableView.clickedRow)
+  }
+
+  private func openRecentItemFromTable(_ rowIndex: Int) {
+    if let url = recentDocuments[at: rowIndex] {
+      player.openURL(url)
     }
   }
 
@@ -199,7 +211,6 @@ class InitialWindowController: NSWindowController {
   }
 }
 
-
 extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
 
   func numberOfRows(in tableView: NSTableView) -> Int {
@@ -214,12 +225,26 @@ extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
     ]
   }
 
-  func tableViewSelectionDidChange(_ notification: Notification) {
-    guard let url = recentDocuments[at: recentFilesTableView.selectedRow] else { return }
-    player.openURL(url)
-    recentFilesTableView.deselectAll(nil)
+  override func keyDown(with event: NSEvent) {
+    // Enable key events
+    Logger.log("Key pressed: \(event)")
+    switch event.keyCode {
+      case 36, 76:  // RETURN or (keypad ENTER)
+        // If user selected a row in the table using the keyboard, use that. Otherwise default to most recent file
+        if recentFilesTableView.selectedRow >= 0 {
+          openRecentItemFromTable(recentFilesTableView.selectedRow)
+        } else if let lastURL = lastPlaybackURL {
+          player.openURL(lastURL)
+        } else if recentFilesTableView.numberOfRows > 0 {
+          // Most recent file no longer exists? Try to load next one
+          openRecentItemFromTable(recentFilesTableView.selectedRow)
+        }
+        return
+      default:
+        super.keyDown(with: event)
+        break
+    }
   }
-
 }
 
 

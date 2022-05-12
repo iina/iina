@@ -228,10 +228,11 @@ extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
   override func keyDown(with event: NSEvent) {
     switch event.keyCode {
       case 36, 76:  // RETURN or (keypad ENTER)
-        // If user selected a row in the table using the keyboard, use that. Otherwise default to most recent file
         if recentFilesTableView.selectedRow >= 0 {
+          // If user selected a row in the table using the keyboard, use that
           openRecentItemFromTable(recentFilesTableView.selectedRow)
         } else if let lastURL = lastPlaybackURL {
+          // If no row selected in table, most recent file button is selected. Use that if it exists
           player.openURL(lastURL)
         } else if recentFilesTableView.numberOfRows > 0 {
           // Most recent file no longer exists? Try to load next one

@@ -42,6 +42,7 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
   @IBOutlet weak var useAnotherConfigDirBtn: NSButton!
   @IBOutlet weak var chooseConfigDirBtn: NSButton!
   @IBOutlet weak var removeButton: NSButton!
+  @IBOutlet weak var logLevelButton: NSPopUpButton!
 
   override func viewDidLoad() {
     super.viewDidLoad()

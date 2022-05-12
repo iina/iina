@@ -8,7 +8,48 @@
 
 import Foundation
 
+enum LogLevel: Int, Comparable, CustomStringConvertible, InitializingFromKey {
+
+  case verbose = 0
+  case debug
+  case warning
+  case error
+
+  static func < (lhs: LogLevel, rhs: LogLevel) -> Bool {
+    return lhs.rawValue < rhs.rawValue
+  }
+
+  init?(key: Preference.Key) {
+    self.init(rawValue: Preference.integer(for: key))
+  }
+
+  static var defaultValue: LogLevel = LogLevel.debug
+
+  var description: String {
+    switch self {
+    case .verbose: return "v"
+    case .debug: return "d"
+    case .warning: return "w"
+    case .error: return "e"
+    }
+  }
+
+  var longDescription: String {
+    switch self {
+    case .verbose: return "Verbose"
+    case .debug: return "Debug"
+    case .warning: return "Warning"
+    case .error: return "Error"
+    }
+  }
+
+  var localizedDescription: String {
+    return NSLocalizedString("logLevel", comment: "LogLevel")
+  }
+}
+
 struct Logger {
+  typealias Level = LogLevel  // DEPRECATED: kept for backwards compatibilty with old branches onlys
 
   struct Subsystem: RawRepresentable {
     var rawValue: String
@@ -20,29 +61,8 @@ struct Logger {
     }
   }
 
-  enum Level: Int, Comparable, CustomStringConvertible {
-    static func < (lhs: Level, rhs: Level) -> Bool {
-      return lhs.rawValue < rhs.rawValue
-    }
-
-    case verbose
-    case debug
-    case warning
-    case error
-
-    static var preferred: Level = Level(rawValue: Preference.integer(for: .logLevel).clamped(to: 0...3))!
-
-    var description: String {
-      switch self {
-      case .verbose: return "v"
-      case .debug: return "d"
-      case .warning: return "w"
-      case .error: return "e"
-      }
-    }
-  }
-
   static let enabled = Preference.bool(for: .enableAdvancedSettings) && Preference.bool(for: .enableLogging)
+  static var preferred: LogLevel = LogLevel(rawValue: Preference.integer(for: .logLevel).clamped(to: 0...3))!
 
   static let logDirectory: URL = {
     let formatter = DateFormatter()
@@ -72,12 +92,12 @@ struct Logger {
     logFileHandle.closeFile()
   }
 
-  static func log(_ message: String, level: Level = .debug, subsystem: Subsystem = .general, appendNewlineAtTheEnd: Bool = true) {
+  static func log(_ message: String, level: LogLevel = .debug, subsystem: Subsystem = .general, appendNewlineAtTheEnd: Bool = true) {
     #if !DEBUG
     guard enabled else { return }
     #endif
 
-    guard level >= .preferred else { return }
+    guard level >= Logger.preferred else { return }
     let time = dateFormatter.string(from: Date())
     let string = "\(time) [\(subsystem.rawValue)][\(level.description)] \(message)\(appendNewlineAtTheEnd ? "\n" : "")"
     print(string, terminator: "")

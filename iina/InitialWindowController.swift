@@ -210,17 +210,16 @@ class InitialWindowController: NSWindowController {
   }
 }
 
-
 extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
 
   private class GrayHighlightRowView: NSTableRowView {
     override func drawSelection(in dirtyRect: NSRect) {
-        if self.selectionHighlightStyle != .none {
-          let selectionRect = NSInsetRect(self.bounds, 2.5, 2.5)
-          NSColor.initialWindowLastFileBackground.setFill()
-          let selectionPath = NSBezierPath.init(roundedRect: selectionRect, xRadius: 4, yRadius: 4)
-          selectionPath.fill()
-        }
+      if self.selectionHighlightStyle != .none {
+        let selectionRect = NSInsetRect(self.bounds, 2.5, 2.5)
+        NSColor.initialWindowLastFileBackground.setFill()
+        let selectionPath = NSBezierPath.init(roundedRect: selectionRect, xRadius: 4, yRadius: 4)
+        selectionPath.fill()
+      }
     }
   }
 
@@ -230,13 +229,7 @@ extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
   }
 
   func tableViewSelectionDidChange(_ notification: Notification) {
-    if recentFilesTableView.selectedRow >= 0 {
-      // remove "LastFle" button highlight
-      lastFileContainerView.layer?.backgroundColor = NSColor.initialWindowActionButtonBackground.cgColor
-    } else {
-      // re-highlight "LastFle" button
-      lastFileContainerView.layer?.backgroundColor = NSColor.initialWindowLastFileBackground.cgColor
-    }
+    updateHighlights()
   }
 
   func numberOfRows(in tableView: NSTableView) -> Int {
@@ -268,6 +261,16 @@ extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
       default:
         super.keyDown(with: event)
         break
+    }
+  }
+
+  func updateHighlights() {
+    if recentFilesTableView.selectedRow >= 0 {
+      // remove "LastFle" button highlight
+      lastFileContainerView.layer?.backgroundColor = NSColor.initialWindowActionButtonBackground.cgColor
+    } else {
+      // re-highlight "LastFle" button
+      lastFileContainerView.layer?.backgroundColor = NSColor.initialWindowLastFileBackground.cgColor
     }
   }
 
@@ -316,6 +319,9 @@ class InitialWindowViewActionButton: NSView {
 
   override func mouseExited(with event: NSEvent) {
     self.layer?.backgroundColor = normalBackground.cgColor
+    if let windowController = window?.windowController as? InitialWindowController {
+      windowController.updateHighlights()
+    }
   }
 
   override func mouseDown(with event: NSEvent) {

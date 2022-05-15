@@ -213,6 +213,32 @@ class InitialWindowController: NSWindowController {
 
 extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
 
+  private class GrayHighlightRowView: NSTableRowView {
+    override func drawSelection(in dirtyRect: NSRect) {
+        if self.selectionHighlightStyle != .none {
+          let selectionRect = NSInsetRect(self.bounds, 2.5, 2.5)
+          NSColor.initialWindowLastFileBackground.setFill()
+          let selectionPath = NSBezierPath.init(roundedRect: selectionRect, xRadius: 4, yRadius: 4)
+          selectionPath.fill()
+        }
+    }
+  }
+
+  func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
+    // uses custom highlight for table row
+    return GrayHighlightRowView()
+  }
+
+  func tableViewSelectionDidChange(_ notification: Notification) {
+    if recentFilesTableView.selectedRow >= 0 {
+      // remove "LastFle" button highlight
+      lastFileContainerView.layer?.backgroundColor = NSColor.initialWindowActionButtonBackground.cgColor
+    } else {
+      // re-highlight "LastFle" button
+      lastFileContainerView.layer?.backgroundColor = NSColor.initialWindowLastFileBackground.cgColor
+    }
+  }
+
   func numberOfRows(in tableView: NSTableView) -> Int {
     return recentDocuments.count
   }

@@ -66,6 +66,35 @@ fileprivate extension NSColor {
   }()
 }
 
+fileprivate class GrayHighlightRowView: NSTableRowView {
+  private func fillWithColor(_ color: NSColor) {
+    let selectionRect = NSInsetRect(self.bounds, 2.5, 2.5)
+    color.setFill()
+    let selectionPath = NSBezierPath.init(roundedRect: selectionRect, xRadius: 4, yRadius: 4)
+    selectionPath.fill()
+  }
+  
+  override func drawSelection(in dirtyRect: NSRect) {
+    if self.selectionHighlightStyle != .none {
+      let selectionRect = NSInsetRect(self.bounds, 0, 0)
+      NSColor.initialWindowLastFileBackground.setFill()
+      let selectionPath = NSBezierPath.init(roundedRect: selectionRect, xRadius: 4, yRadius: 4)
+      selectionPath.fill()
+    }
+  }
+
+  func setHoverHighlight() {
+    self.wantsLayer = true
+    self.layer?.cornerRadius = 6
+    self.layer?.backgroundColor = NSColor.initialWindowActionButtonBackgroundHover.cgColor
+  }
+
+  func unsetHoverHighlight() {
+    self.wantsLayer = true
+    self.layer?.cornerRadius = 6
+    self.layer?.backgroundColor = NSColor.initialWindowActionButtonBackground.cgColor
+  }
+}
 
 class InitialWindowController: NSWindowController {
 
@@ -91,6 +120,7 @@ class InitialWindowController: NSWindowController {
   @IBOutlet weak var recentFilesTableTopConstraint: NSLayoutConstraint!
 
   private let observedPrefKeys: [Preference.Key] = [.themeMaterial]
+  private var currentlyHoveredRow: GrayHighlightRowView?
 
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
     guard let keyPath = keyPath, let change = change else { return }
@@ -143,6 +173,10 @@ class InitialWindowController: NSWindowController {
     recentFilesTableView.delegate = self
     recentFilesTableView.dataSource = self
     recentFilesTableView.action = #selector(self.onTableClicked)
+    recentFilesTableView.addTrackingArea(NSTrackingArea(rect: recentFilesTableView.bounds,
+                                        options: [.activeInKeyWindow, .mouseMoved], owner: self, userInfo: nil))
+    recentFilesTableView.addTrackingArea(NSTrackingArea(rect: recentFilesTableView.bounds,
+                                                        options: [.activeInKeyWindow, .mouseEnteredAndExited], owner: self, userInfo: nil))
 
     setMaterial(Preference.enum(for: .themeMaterial))
 
@@ -212,17 +246,6 @@ class InitialWindowController: NSWindowController {
 
 extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
 
-  private class GrayHighlightRowView: NSTableRowView {
-    override func drawSelection(in dirtyRect: NSRect) {
-      if self.selectionHighlightStyle != .none {
-        let selectionRect = NSInsetRect(self.bounds, 2.5, 2.5)
-        NSColor.initialWindowLastFileBackground.setFill()
-        let selectionPath = NSBezierPath.init(roundedRect: selectionRect, xRadius: 4, yRadius: 4)
-        selectionPath.fill()
-      }
-    }
-  }
-
   func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
     // uses custom highlight for table row
     return GrayHighlightRowView()
@@ -242,6 +265,34 @@ extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
       "filename": url.lastPathComponent,
       "docIcon": NSWorkspace.shared.icon(forFile: url.path)
     ]
+  }
+
+  override func mouseMoved(with event: NSEvent) {
+    let mouseLocation = event.locationInWindow
+    let point = recentFilesTableView.convert(mouseLocation, from: nil)
+    let rowIndex = recentFilesTableView.row(at: point)
+
+    if rowIndex >= 0 {
+      guard let rowView = recentFilesTableView.rowView(atRow: rowIndex, makeIfNecessary: false) as? GrayHighlightRowView else {
+        return
+      }
+
+      if (currentlyHoveredRow == rowView) {
+        return
+      }
+
+      rowView.setHoverHighlight()
+      currentlyHoveredRow?.unsetHoverHighlight()
+      currentlyHoveredRow = rowView
+    } else {
+      currentlyHoveredRow?.unsetHoverHighlight()
+      currentlyHoveredRow = nil
+    }
+  }
+
+  override func mouseExited(with event: NSEvent) {
+    currentlyHoveredRow?.unsetHoverHighlight()
+    currentlyHoveredRow = nil
   }
 
   override func keyDown(with event: NSEvent) {
@@ -314,7 +365,13 @@ class InitialWindowViewActionButton: NSView {
   }
 
   override func mouseEntered(with event: NSEvent) {
-    self.layer?.backgroundColor = hoverBackground.cgColor
+    if let windowController = window?.windowController as? InitialWindowController {
+      if windowController.recentFilesTableView.selectedRow >= 0 {
+        self.layer?.backgroundColor = NSColor.initialWindowActionButtonBackgroundHover.cgColor
+      } else {
+        self.layer?.backgroundColor = hoverBackground.cgColor
+      }
+    }
   }
 
   override func mouseExited(with event: NSEvent) {

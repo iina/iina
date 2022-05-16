@@ -25,6 +25,8 @@ enum IINACommand: String {
   case flip = "toggle-flip"
   case mirror = "toggle-mirror"
 
+  case toggleMatchRefreshRate = "toggle-match-refresh-rate"
+
   case biggerWindow = "bigger-window"
   case smallerWindow = "smaller-window"
   case fitToScreen = "fit-to-screen"

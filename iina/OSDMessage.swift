@@ -73,6 +73,7 @@ enum OSDMessage {
   case canceled
   case fileLoop(Bool)
   case playlistLoop(Bool)
+  case displayMode(String)
 
   func message() -> (String, OSDType) {
     switch self {
@@ -319,6 +320,9 @@ enum OSDMessage {
                enabled ? NSLocalizedString("general.on", comment: "On") : NSLocalizedString("general.off", comment: "Off")),
         .normal
       )
+
+    case .displayMode(let refreshRate):
+      return (refreshRate, .normal)
     }
   }
 }

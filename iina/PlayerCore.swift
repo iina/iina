@@ -447,20 +447,44 @@ class PlayerCore: NSObject {
     info.isPaused ? resume() : pause()
   }
 
-  func pause() {
+  /// Pause  playback.
+  ///
+  /// When changing the display refresh rate to synchronize the display with the fps of the video IINA must briefly pause playback
+  /// while the screen adjusts to avoid audio/video desynchronization. Such pauses must not display the normal pause/resume OSD
+  /// messages or perform other actions associated with user initiated playback control.
+  /// - Parameter internalPauseResume: If `true` this is an internally generated pause/resume cycle
+  func pause(internalPauseResume: Bool = false) {
+    if internalPauseResume {
+      // Suppress OSD messages until playback is resumed.
+      info.disableOSDPauseResume.store(true, ordering: .sequentiallyConsistent)
+    }
     mpv.setFlag(MPVOption.PlaybackControl.pause, true)
+    guard !internalPauseResume else {
+      // No need to shutdown threads during brief pause/resume cycles.
+      return
+    }
     // Follow energy efficiency best practices and ensure IINA is absolutely idle when the video is
     // paused to avoid wasting energy with needless processing.
     invalidateTimer()
     mainWindow.videoView.stopDisplayLink()
   }
 
-  func resume() {
-    // Restart playback when reached EOF
-    if mpv.getFlag(MPVProperty.eofReached) {
+  /// Resume playback.
+  ///
+  /// When changing the display refresh rate to synchronize the display with the FPS of the video IINA must briefly pause playback
+  /// while the screen adjusts to avoid audio/video desynchronization. Such pauses must not display the normal pause/resume OSD
+  /// messages or perform other actions associated with user initiated playback control.
+  /// - Parameter internalPauseResume: If `true` this is an internally generated pause/resume cycle
+  func resume(internalPauseResume: Bool = false) {
+    // Restart playback when reached EOF, if user initiated resume.
+    if !internalPauseResume && mpv.getFlag(MPVProperty.eofReached) {
       seek(absoluteSecond: 0)
     }
     mpv.setFlag(MPVOption.PlaybackControl.pause, false)
+    guard !internalPauseResume else {
+      // Threads are not shutdown during brief internal pause/resume cycles.
+      return
+    }
     createSyncUITimer()
     mainWindow.videoView.startDisplayLink()
   }
@@ -1520,6 +1544,16 @@ class PlayerCore: NSObject {
   }
 
   func sendOSD(_ osd: OSDMessage, autoHide: Bool = true, forcedTimeout: Float? = nil, accessoryView: NSView? = nil, context: Any? = nil) {
+    // Pause and resume OSD messages are disabled during internally generated short pause/resume cycles.
+    if info.disableOSDPauseResume.load(ordering: .sequentiallyConsistent) {
+      if case .pause = osd { return }
+      if case .resume = osd {
+        // The OSD was disabled for an internal pause/resume cycle. Automatically reenable now that
+        // playback has been resumed.
+        info.disableOSDPauseResume.store(false, ordering: .sequentiallyConsistent)
+        return
+      }
+    }
     guard mainWindow.loaded && Preference.bool(for: .enableOSD) else { return }
     if info.disableOSDForFileLoading {
       guard case .fileStart = osd else {

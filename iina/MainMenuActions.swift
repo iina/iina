@@ -235,6 +235,10 @@ extension MainMenuActionHandler {
   @objc func menuToggleDeinterlace(_ sender: NSMenuItem) {
     player.toggleDeinterlace(sender.state != .on)
   }
+
+  @objc func menuToggleMatchRefreshRate(_ sender: NSMenuItem) {
+    Preference.set(!Preference.bool(for: .matchRefreshRate), for: .matchRefreshRate)
+  }
 }
 
 // MARK: - Audio

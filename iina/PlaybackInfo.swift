@@ -6,6 +6,7 @@
 //  Copyright © 2016 lhc. All rights reserved.
 //
 
+import Atomics
 import Foundation
 
 class PlaybackInfo {
@@ -78,6 +79,8 @@ class PlaybackInfo {
       isPaused = !newValue
     }
   }
+  // Used to disable OSD pause and resume messages for short internally generated pause/resume cycles.
+  var disableOSDPauseResume = ManagedAtomic(false)
 
   var justLaunched: Bool = true
   var justStartedFile: Bool = false

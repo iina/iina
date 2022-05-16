@@ -116,6 +116,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var flip: NSMenuItem!
   @IBOutlet weak var deinterlace: NSMenuItem!
   @IBOutlet weak var delogo: NSMenuItem!
+  @IBOutlet weak var matchRefreshRate: NSMenuItem!
   @IBOutlet weak var videoFilters: NSMenuItem!
   @IBOutlet weak var savedVideoFiltersMenu: NSMenu!
   //Audio
@@ -297,6 +298,17 @@ class MenuController: NSObject, NSMenuDelegate {
     // -- delogo
     delogo.action = #selector(MainWindowController.menuSetDelogo(_:))
 
+    // -- match refresh rate
+    if #available(macOS 12, *) {
+      matchRefreshRate.action = #selector(MainMenuActionHandler.menuToggleMatchRefreshRate(_:))
+    } else {
+      // This feature searches the refresh rates the display supports for a rate that matches the
+      // frame rate of the video being played. Unfortunately before Monterey macOS was returning
+      // zero for the refreshRate property of CGDisplayMode. Without that information this feature
+      // can not function.
+      matchRefreshRate.isHidden = true
+    }
+
     // -- filter
     videoFilters.action = #selector(AppDelegate.showVideoFilterWindow(_:))
 
@@ -449,11 +461,13 @@ class MenuController: NSObject, NSMenuDelegate {
     let isInPIP = PlayerCore.active.mainWindow.pipStatus == .inPIP
     let isOntop = PlayerCore.active.isInMiniPlayer ? PlayerCore.active.miniPlayer.isOntop : PlayerCore.active.mainWindow.isOntop
     let isDelogo = PlayerCore.active.info.delogoFilter != nil
+    let isMatchRefreshRate = Preference.bool(for: .matchRefreshRate)
     alwaysOnTop.state = isOntop ? .on : .off
     deinterlace.state = PlayerCore.active.info.deinterlace ? .on : .off
     fullScreen.title = isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen
     pictureInPicture?.title = isInPIP ? Constants.String.exitPIP : Constants.String.pip
     delogo.state = isDelogo ? .on : .off
+    matchRefreshRate.state = isMatchRefreshRate ? .on : .off
   }
 
   private func updateAudioMenu() {
@@ -643,6 +657,7 @@ class MenuController: NSObject, NSMenuDelegate {
       (smallerSize, true, ["smaller-window"], false, nil, nil),
       (fitToScreen, true, ["fit-to-screen"], false, nil, nil),
       (miniPlayer, true, ["toggle-music-mode"], false, nil, nil),
+      (matchRefreshRate, true, ["toggle-match-refresh-rate"], false, nil, nil),
       (cycleVideoTracks, false, ["cycle", "video"], false, nil, nil),
       (cycleAudioTracks, false, ["cycle", "audio"], false, nil, nil),
       (cycleSubtitles, false, ["cycle", "sub"], false, nil, nil),

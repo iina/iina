@@ -111,6 +111,8 @@ class MainWindowController: PlayerWindowController {
     return player.mpv.getInt(MPVProperty.videoParamsRotate)
   }()
 
+  private lazy var refreshRateMatcher = RefreshRateMatcher(player, videoView)
+
   // MARK: - Status
 
   override var isOntop: Bool {
@@ -1153,33 +1155,8 @@ class MainWindowController: PlayerWindowController {
       exitInteractiveMode(immediately: true)
     }
 
-    // Match refresh rate
-    if Preference.bool(for: .matchRefreshRate) {
-      // [23.976, 47.952, 24, 48], [29.97, 59.94, 30, 60]
-      // [24, 48], [25, 50], [30, 60]
-      let videoFps = player.mpv.getDouble(MPVProperty.containerFps)
-      let refreshRates = [videoFps, videoFps * 2, videoFps.rounded(), videoFps.rounded() * 2]
-
-      userDisplay = videoView.currentDisplay
-      userDisplayMode = CGDisplayCopyDisplayMode(userDisplay!)
-      userRefreshRate = player.mpv.getDouble(MPVProperty.displayFps)
-
-      if (userDisplayMode != nil) {
-        let displayModes = CGDisplayCopyAllDisplayModes(userDisplay!, nil) as! [CGDisplayMode]
-        matching: for refreshRate in refreshRates {
-          for displayMode in displayModes {
-            // 24 - 23.976 = 0.024, avoid matching 23.976 to 24 when 23.976 is available
-            // or vice versa on first pass, prefer 47.952 than 24 for 23.976
-            if ((displayMode.ioFlags & UInt32(kDisplayModeNativeFlag) != 0) &&
-                displayMode.refreshRate.distance(to: refreshRate) < 0.02) {
-              CGDisplaySetDisplayMode(userDisplay!, displayMode, nil)
-              player.mpv.setDouble(MPVOption.Video.displayFps, displayMode.refreshRate)
-              break matching
-            }
-          }
-        }
-      }
-    }
+    // Change the display refresh rate to match video frame rate (if feature enabled).
+    refreshRateMatcher.windowWillEnterFullScreen()
 
     // Set the appearance to match the theme so the titlebar matches the theme
     let iinaTheme = Preference.enum(for: .themeMaterial) as Preference.Theme
@@ -1238,6 +1215,10 @@ class MainWindowController: PlayerWindowController {
       fadeableViews.append(additionalInfoView)
     }
 
+    // Inform the rate matcher so it can complete any operations that were waiting for animations to
+    // finish.
+    refreshRateMatcher.windowDidEnterFullScreen()
+
     if Preference.bool(for: .playWhenEnteringFullScreen) && player.info.isPaused {
       player.resume()
     }
@@ -1260,12 +1241,6 @@ class MainWindowController: PlayerWindowController {
       exitInteractiveMode(immediately: true)
     }
 
-    // restore refresh rate
-    if userDisplayMode != nil {
-      CGDisplaySetDisplayMode(userDisplay!, userDisplayMode!, nil)
-      player.mpv.setDouble(MPVOption.Video.displayFps, userRefreshRate!)
-    }
-
     // show titleBarView
     if oscPosition == .top {
       oscTopMainViewTopConstraint.constant = OSCTopMainViewMarginTop
@@ -1284,6 +1259,10 @@ class MainWindowController: PlayerWindowController {
     fsState.startAnimatingToWindow()
 
     videoView.videoLayer.suspend()
+
+    // Restore the display refresh rate if it was changed.
+    refreshRateMatcher.windowWillExitFullScreen()
+
     player.mpv.setFlag(MPVOption.Window.keepaspect, false)
   }
 
@@ -1307,6 +1286,10 @@ class MainWindowController: PlayerWindowController {
     videoView.videoLayer.resume()
 
     fsState.finishAnimating()
+
+    // Inform the rate matcher so it can complete any operations that were waiting for animations to
+    // finish.
+    refreshRateMatcher.windowDidExitFullScreen()
 
     if Preference.bool(for: .blackOutMonitor) {
       removeBlackWindow()

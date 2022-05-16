@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -423,6 +423,9 @@ CA
                             <menuItem title="Delogo" id="ArE-2s-JIV">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
+                            <menuItem title="Match Refresh Rate" id="cuA-ze-ZZG">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="kNp-jq-01c"/>
                             <menuItem title="Video Filters…" keyEquivalent="F" id="PyY-pR-jz7">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
@@ -720,6 +723,7 @@ CA
                 <outlet property="jumpTo" destination="2id-wn-xsC" id="wyH-9I-JHJ"/>
                 <outlet property="jumpToBegin" destination="2Ya-3g-1hy" id="atq-PX-lIt"/>
                 <outlet property="loadExternalSub" destination="k6x-hf-ATi" id="lVp-BV-A2C"/>
+                <outlet property="matchRefreshRate" destination="cuA-ze-ZZG" id="XaV-hF-MWN"/>
                 <outlet property="miniPlayer" destination="bGN-E4-V5A" id="gMc-FE-SVO"/>
                 <outlet property="mirror" destination="JJq-qH-toq" id="EWI-VS-c7Q"/>
                 <outlet property="mute" destination="WOL-Us-ByA" id="Hry-sv-WhY"/>

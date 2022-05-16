@@ -495,8 +495,10 @@ class MenuController: NSObject, NSMenuDelegate {
     let filters = PlayerCore.active.mpv.getFilters(type)
     let menu: NSMenu! = type == MPVProperty.vf ? savedVideoFiltersMenu : savedAudioFiltersMenu
     for item in menu.items {
-      if let string = (item.representedObject as? String) {
-        item.state = filters.contains { $0.stringFormat == string } ? .on : .off
+      if let string = (item.representedObject as? String), let asObject = MPVFilter(rawString: string) {
+        // Filters that support multiple parameters have more than one valid string representation.
+        // Must compare filters using their object representation.
+        item.state = filters.contains { $0 == asObject } ? .on : .off
       }
     }
   }

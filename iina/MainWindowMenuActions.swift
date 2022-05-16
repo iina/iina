@@ -166,12 +166,15 @@ extension MainWindowController {
   private func menuToggleFilterString(_ string: String, forType type: String) {
     let isVideo = type == MPVProperty.vf
     if let filter = MPVFilter(rawString: string) {
-      if player.mpv.getFilters(type).contains(where: { $0.stringFormat == string }) {
+      // Removing a filter based on its position within the filter list is the preferred way to do
+      // it as per discussion with the mpv project. Search the list of filters and find the index
+      // of the specified filter (if present).
+      if let index = player.mpv.getFilters(type).firstIndex(of: filter) {
         // remove
         if isVideo {
-          _ = player.removeVideoFilter(filter)
+          _ = player.removeVideoFilter(filter, index)
         } else {
-          _ = player.removeAudioFilter(filter)
+          _ = player.removeAudioFilter(filter, index)
         }
       } else {
         // add

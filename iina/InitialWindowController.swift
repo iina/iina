@@ -183,6 +183,7 @@ class InitialWindowController: NSWindowController {
     observedPrefKeys.forEach { key in
       UserDefaults.standard.addObserver(self, forKeyPath: key.rawValue, options: .new, context: nil)
     }
+    reloadData()
   }
 
   private func setMaterial(_ theme: Preference.Theme?) {
@@ -241,6 +242,10 @@ class InitialWindowController: NSWindowController {
     loadLastPlaybackInfo()
     recentDocuments = NSDocumentController.shared.recentDocumentURLs.filter { $0 != lastPlaybackURL }
     recentFilesTableView.reloadData()
+    
+    if lastFileContainerView.isHidden && recentFilesTableView.numberOfRows > 0 {
+      recentFilesTableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+    }
   }
 }
 
@@ -252,7 +257,7 @@ extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
   }
 
   func tableViewSelectionDidChange(_ notification: Notification) {
-    updateHighlights()
+    updateLastFileButtonHighlight()
   }
 
   func numberOfRows(in tableView: NSTableView) -> Int {
@@ -267,6 +272,7 @@ extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
     ]
   }
 
+  // facilitates highlight on hover
   override func mouseMoved(with event: NSEvent) {
     let mouseLocation = event.locationInWindow
     let point = recentFilesTableView.convert(mouseLocation, from: nil)
@@ -306,16 +312,37 @@ extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
           player.openURL(lastURL)
         } else if recentFilesTableView.numberOfRows > 0 {
           // Most recent file no longer exists? Try to load next one
-          openRecentItemFromTable(recentFilesTableView.selectedRow)
+          openRecentItemFromTable(0)
         }
-        return
+      case 125:  // DOWN arrow
+        if recentDocuments.count == 0 || (recentFilesTableView.selectedRow >= recentFilesTableView.numberOfRows - 1) {
+          super.keyDown(with: event)  // invalid command: beep at user
+        } else {
+          // default: let recentFilesTableView handle it
+          recentFilesTableView.keyDown(with: event)
+        }
+      case 126:  // UP arrow
+        if !lastFileContainerView.isHidden {   // recent file btn is displayed?
+          if recentFilesTableView.selectedRow == -1 {  // ...and recent file btn already highlighted?
+            super.keyDown(with: event)  // invalid command: beep at user
+            return
+          } else if recentFilesTableView.selectedRow == 0 {  // ... top row of table is highlighted?
+            // yes: deselect all rows of table. This will fire selectionChanged which will highlight lastFileContainerView
+            recentFilesTableView.selectRowIndexes(IndexSet(), byExtendingSelection: false)
+            return
+          }
+        } else if recentFilesTableView.selectedRow == 0 {
+            super.keyDown(with: event)  // invalid command: beep at user
+            return
+        }
+        // default: let recentFilesTableView handle it
+        recentFilesTableView.keyDown(with: event)
       default:
         super.keyDown(with: event)
-        break
     }
   }
 
-  func updateHighlights() {
+  func updateLastFileButtonHighlight() {
     if recentFilesTableView.selectedRow >= 0 {
       // remove "LastFle" button highlight
       lastFileContainerView.layer?.backgroundColor = NSColor.initialWindowActionButtonBackground.cgColor
@@ -377,7 +404,7 @@ class InitialWindowViewActionButton: NSView {
   override func mouseExited(with event: NSEvent) {
     self.layer?.backgroundColor = normalBackground.cgColor
     if let windowController = window?.windowController as? InitialWindowController {
-      windowController.updateHighlights()
+      windowController.updateLastFileButtonHighlight()
     }
   }
 

@@ -947,6 +947,9 @@ class MainWindowController: PlayerWindowController {
 
   override func mouseMoved(with event: NSEvent) {
     guard !isInInteractiveMode else { return }
+    if fsState.isFullscreen {
+      NSApplication.shared.activate(ignoringOtherApps: true)
+    }
     let mousePos = playSlider.convert(event.locationInWindow, from: nil)
     if isMouseInSlider {
       updateTimeLabel(mousePos.x, originalPos: event.locationInWindow)

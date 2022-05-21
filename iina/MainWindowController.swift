@@ -585,13 +585,20 @@ class MainWindowController: PlayerWindowController {
     addObserver(to: .default, forName: NSApplication.didChangeScreenParametersNotification) { [unowned self] _ in
       // This observer handles a situation that the user connected a new screen or removed a screen
       let screenCount = NSScreen.screens.count
-      if self.fsState.isFullscreen && Preference.bool(for: .blackOutMonitor) && self.cachedScreenCount != screenCount {
-        self.removeBlackWindow()
-        self.blackOutOtherMonitors()
+      if self.fsState.isFullscreen && self.cachedScreenCount != screenCount {
+        if Preference.bool(for: .blackOutMonitor) {
+          self.removeBlackWindow()
+          self.blackOutOtherMonitors()
+        }
+
+        restoreRefreshRate()
+        matchRefreshRate()
       }
+
       // Update the cached value
       self.cachedScreenCount = screenCount
       self.videoView.updateDisplayLink()
+
       // In normal full screen mode AppKit will automatically adjust the window frame if the window
       // is moved to a new screen such as when the window is on an external display and that display
       // is disconnected. In legacy full screen mode IINA is responsible for adjusting the window's

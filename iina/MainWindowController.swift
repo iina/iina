@@ -576,6 +576,10 @@ class MainWindowController: PlayerWindowController {
 
     addObserver(to: .default, forName: .iinaFileLoaded, object: player) { [unowned self] _ in
       self.quickSettingView.reload()
+
+      if self.fsState.isFullscreen {
+        matchRefreshRate()
+      }
     }
 
     addObserver(to: .default, forName: NSApplication.didChangeScreenParametersNotification) { [unowned self] _ in

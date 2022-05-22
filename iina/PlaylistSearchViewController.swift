@@ -134,7 +134,7 @@ class PlaylistSearchViewController: NSWindowController {
   func resizeTable() {
     let maxHeight = InputFieldHeight + MaxTableViewHeight
     
-    let neededHeight = searchResults.count * TableCellHeight
+    let neededHeight = InputFieldHeight + (searchResults.count * TableCellHeight) + 4
     
     let height = (neededHeight < maxHeight) ? neededHeight : maxHeight
     

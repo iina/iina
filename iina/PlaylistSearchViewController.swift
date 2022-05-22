@@ -9,6 +9,11 @@
 import Foundation
 import Cocoa
 
+fileprivate let WindowWidth = 500
+fileprivate let InputFieldHeight = 48
+fileprivate let TableCellHeight = 24
+fileprivate let MaxTableViewHeight = TableCellHeight * 10
+
 class PlaylistSearchViewController: NSWindowController {
   
   override var windowNibName: NSNib.Name {
@@ -23,8 +28,12 @@ class PlaylistSearchViewController: NSWindowController {
   
   weak var player: PlayerCore!
   
+  // Click Monitor for detecting if a click occured on the main window, if so, then the search window will close
   private var clickMonitor: Any?
   private var isOpen = false
+  
+  // MARK: Search Results
+  var searchResults: [String] = []
   
   // MARK: Outlets
   @IBOutlet weak var inputField: NSTextField!
@@ -44,7 +53,7 @@ class PlaylistSearchViewController: NSWindowController {
     }
   }
   
-  // MARK: Opening and Closing Window
+  // MARK: Showing and Hiding Window and Elements
   func openSearchWindow() {
     if isOpen {
       return
@@ -69,6 +78,40 @@ class PlaylistSearchViewController: NSWindowController {
     hideSearchWindow()
   }
   
+  func hideClearBtn() {
+    clearBtn.isHidden = true
+  }
+  
+  func showClearBtn() {
+    clearBtn.isHidden = false
+  }
+  
+  func hideTable() {
+    searchResultsTableView.isHidden = true
+    inputBorderBottom.isHidden = true
+  }
+  
+  func showTable() {
+    searchResultsTableView.isHidden = false
+    inputBorderBottom.isHidden = false
+  }
+  
+  func resizeTable() {
+    let maxHeight = InputFieldHeight + MaxTableViewHeight
+    
+    let neededHeight = searchResults.count * TableCellHeight
+    
+    let height = (neededHeight < maxHeight) ? neededHeight : maxHeight
+    
+    let size = NSMakeSize(CGFloat(WindowWidth), CGFloat(height))
+    window?.setContentSize(size)
+  }
+  
+  func focusInput() {
+    window?.makeFirstResponder(inputField)
+  }
+  
+  
   // MARK: Click Events
   /**
    Creates a monitor for outside clicks. If user clicks outside the search window, the window will be hidden
@@ -87,6 +130,36 @@ class PlaylistSearchViewController: NSWindowController {
     if clickMonitor != nil {
       NSEvent.removeMonitor(clickMonitor!)
       clickMonitor = nil
+    }
+  }
+  
+  // MARK: IBActions
+  @IBAction func clearBtnAction(_ sender: Any) {
+    clearInput()
+  }
+  
+  // MARK: Input and SearchResults utilities
+  
+  func clearInput() {
+    inputField.stringValue = ""
+    hideClearBtn()
+    clearSearchResults()
+    focusInput()
+  }
+  
+  func clearSearchResults() {
+    searchResults.removeAll()
+    reloadTable()
+  }
+  
+  func reloadTable() {
+    searchResultsTableView.reloadData()
+    
+    if searchResults.isEmpty {
+      hideTable()
+    } else {
+      resizeTable()
+      showTable()
     }
   }
   

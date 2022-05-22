@@ -28,7 +28,7 @@
             <value key="minSize" type="size" width="500" height="48"/>
             <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="500" height="173"/>
-                <autoresizingMask key="autoresizingMask"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <visualEffectView blendingMode="behindWindow" material="appearanceBased" state="active" id="Fx8-km-fPU">
                         <rect key="frame" x="0.0" y="0.0" width="500" height="173"/>
@@ -57,6 +57,9 @@
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="clearBtnAction:" target="-2" id="Fli-Nh-mk1"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>

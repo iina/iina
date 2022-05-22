@@ -51,6 +51,15 @@ class PlaylistSearchViewController: NSWindowController {
     ([.closeButton, .miniaturizeButton, .zoomButton] as [NSWindow.ButtonType]).forEach {
       window?.standardWindowButton($0)?.isHidden = true
     }
+    
+    // Delegates
+    inputField.delegate = self
+    
+    searchResultsTableView.delegate = self
+    searchResultsTableView.dataSource = self
+    
+    // Reset Input
+    clearInput()
   }
   
   // MARK: Showing and Hiding Window and Elements
@@ -89,11 +98,16 @@ class PlaylistSearchViewController: NSWindowController {
   func hideTable() {
     searchResultsTableView.isHidden = true
     inputBorderBottom.isHidden = true
+    
+    let size = NSMakeSize(CGFloat(WindowWidth), CGFloat(InputFieldHeight))
+    window?.setContentSize(size)
   }
   
   func showTable() {
     searchResultsTableView.isHidden = false
     inputBorderBottom.isHidden = false
+    
+    resizeTable()
   }
   
   func resizeTable() {
@@ -158,9 +172,37 @@ class PlaylistSearchViewController: NSWindowController {
     if searchResults.isEmpty {
       hideTable()
     } else {
-      resizeTable()
       showTable()
     }
+  }
+  
+}
+
+// MARK: Input Text Field Delegate
+extension PlaylistSearchViewController: NSTextFieldDelegate {
+  func controlTextDidChange(_ obj: Notification) {
+    let input = inputField.stringValue
+    
+    if input.isEmpty {
+      clearInput()
+      return
+    }
+    
+    showClearBtn()
+    
+  }
+}
+
+// MARK: Table View Delegate
+extension PlaylistSearchViewController: NSTableViewDelegate, NSTableViewDataSource {
+  
+  func numberOfRows(in tableView: NSTableView) -> Int {
+    return searchResults.count
+  }
+  
+  // Enables arrow keys to be used in tableview
+  func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
+    return true
   }
   
 }

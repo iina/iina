@@ -8,7 +8,15 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="PlaylistSearchViewController" customModule="IINA" customModuleProvider="target"/>
+        <customObject id="-2" userLabel="File's Owner" customClass="PlaylistSearchViewController" customModule="IINA" customModuleProvider="target">
+            <connections>
+                <outlet property="clearBtn" destination="GAl-oE-YmZ" id="NY9-oF-a7z"/>
+                <outlet property="inputBorderBottom" destination="935-W7-cww" id="ij2-VS-ZzN"/>
+                <outlet property="inputField" destination="irS-JS-r5D" id="qhR-lc-qYm"/>
+                <outlet property="searchResultsTableView" destination="1hl-4W-Z2Q" id="UAT-1V-f4L"/>
+                <outlet property="window" destination="QvC-M9-y7g" id="5YA-t9-Hc2"/>
+            </connections>
+        </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="QvC-M9-y7g">
@@ -151,6 +159,9 @@
                     </visualEffectView>
                 </subviews>
             </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="Daw-1I-5px"/>
+            </connections>
             <point key="canvasLocation" x="139" y="199.5"/>
         </window>
     </objects>

@@ -13,44 +13,25 @@ import Foundation
  Junegunn's code is licensed under an [MIT License](https://github.com/junegunn/fzf/blob/master/LICENSE). All credit for the algorithm goes to the original author.
  */
 
-struct SearchItem {
-  let item: MPVPlaylistItem
-  let result: Result
-  let playlistIndex: Int
-}
-
-extension SearchItem: Comparable {
-  static func < (l: SearchItem, r: SearchItem) -> Bool {
-    return l.result.score < r.result.score
-  }
-  
-  static func > (l: SearchItem, r: SearchItem) -> Bool {
-    return l.result.score > r.result.score
-  }
-  
-  static func == (l: SearchItem, r: SearchItem) -> Bool {
-    return l.result.score == r.result.score
-  }
-}
 
 /*
  Junegunn's FuzzyMatchV1 consists of two steps:
-  1. Finding the shortest fuzzy occurence of the pattern within the given string
-  2. Scoring the found match
+ 1. Finding the shortest fuzzy occurence of the pattern within the given string
+ 2. Scoring the found match
  
  Matching
  --------
  
-  FuzzyMatchV1 finds the first fuzzy occurence of the pattern within the text through a forward scan, and once the position of the last character is located, it traverses backwards to find a shorter match.
+ FuzzyMatchV1 finds the first fuzzy occurence of the pattern within the text through a forward scan, and once the position of the last character is located, it traverses backwards to find a shorter match.
  
-  i__i___iina__  Pattern: "iina"
-  *--*-----**>   1. Forward Scan
-        <****    2. Backward Scan
-  
+ i__i___iina__  Pattern: "iina"
+ *--*-----**>   1. Forward Scan
+ <****    2. Backward Scan
+ 
  Scoring
  -------
  
-  Once the pattern has been located, the algorithm will score the substring that contains the match; in the example above, it will score the substring "iina", not "i__i___iina"
+ Once the pattern has been located, the algorithm will score the substring that contains the match; in the example above, it will score the substring "iina", not "i__i___iina"
  
  Read more about the scoring criteria [here](https://github.com/junegunn/fzf/blob/master/src/algo/algo.go)
  
@@ -68,12 +49,12 @@ fileprivate let BonusFirstCharMultiplier = 2
 
 
 /**
-Holds result of the fuzzy match on a string
-`start`: The starting index of the matched substring
-`end`: The ending index of the matched substring
-`score`: the score of the matched substring
-`pos`: the position of all matched letters in the string (used for rendering the matched letters as bolded)
-*/
+ Holds result of the fuzzy match on a string
+ `start`: The starting index of the matched substring
+ `end`: The ending index of the matched substring
+ `score`: the score of the matched substring
+ `pos`: the position of all matched letters in the string (used for rendering the matched letters as bolded)
+ */
 struct Result {
   let start: Int
   let end: Int
@@ -149,7 +130,7 @@ func bonusFor(_ prevType: CharType, _ currentType: CharType) -> Int {
   else if prevType == .lower && currentType == .upper || prevType != .number && currentType == .number {
     return BonusCamel123
   }
-
+  
   else if currentType == .nonWord {
     return BonusNonWord
   }

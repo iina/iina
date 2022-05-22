@@ -125,6 +125,9 @@
                                                                         <color key="textColor" name="MainSliderKnob"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
+                                                                    <connections>
+                                                                        <binding destination="oJZ-0o-tBC" name="value" keyPath="objectValue.filename" id="M2y-9d-MVH"/>
+                                                                    </connections>
                                                                 </textField>
                                                             </subviews>
                                                             <connections>

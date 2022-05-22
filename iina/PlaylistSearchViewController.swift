@@ -13,6 +13,10 @@ fileprivate let WindowWidth = 500
 fileprivate let InputFieldHeight = 48
 fileprivate let TableCellHeight = 24
 fileprivate let MaxTableViewHeight = TableCellHeight * 10
+fileprivate let TableCellFontSize = 13
+
+fileprivate let MinScore = 5 // Minimum matching score to be rendered on search results table
+
 
 class PlaylistSearchViewController: NSWindowController {
   
@@ -33,7 +37,17 @@ class PlaylistSearchViewController: NSWindowController {
   private var isOpen = false
   
   // MARK: Search Results
-  var searchResults: [String] = []
+  var searchResults: [SearchItem] = []
+  // Run the fuzzy matching in a different thread so we don't pause the inputField
+  var searchWorkQueue: DispatchQueue = DispatchQueue(label: "IINAPlaylistSearchTask", qos: .userInitiated)
+  // Make the searching cancellable so we aren't searching for a pattern when the pattern has changed
+  var searchWorkItem: DispatchWorkItem? = nil
+  
+  // Make updating the ui cancellable so we aren't rendering old search results
+  var updateTableWorkItem: DispatchWorkItem? = nil
+  
+  // Fixes bug where table would render search results if user clears input before searchWorkItem is finished
+  var isInputEmpty = true
   
   // MARK: Outlets
   @IBOutlet weak var inputField: NSTextField!
@@ -156,6 +170,7 @@ class PlaylistSearchViewController: NSWindowController {
   
   func clearInput() {
     inputField.stringValue = ""
+    isInputEmpty = true
     hideClearBtn()
     clearSearchResults()
     focusInput()
@@ -167,13 +182,17 @@ class PlaylistSearchViewController: NSWindowController {
   }
   
   func reloadTable() {
-    searchResultsTableView.reloadData()
+    updateTableWorkItem?.cancel()
+    updateTableWorkItem = DispatchWorkItem {
+      self.searchResultsTableView.reloadData()
     
-    if searchResults.isEmpty {
-      hideTable()
-    } else {
-      showTable()
+      if self.searchResults.isEmpty {
+        self.hideTable()
+      } else {
+        self.showTable()
+      }
     }
+    DispatchQueue.main.async(execute: updateTableWorkItem!)
   }
   
 }
@@ -183,12 +202,34 @@ extension PlaylistSearchViewController: NSTextFieldDelegate {
   func controlTextDidChange(_ obj: Notification) {
     let input = inputField.stringValue
     
+    searchWorkItem?.cancel()
+    
     if input.isEmpty {
+      searchWorkItem = nil
+      
       clearInput()
       return
     }
     
     showClearBtn()
+    
+    isInputEmpty = false
+    
+    let playlist = player.info.playlist
+    
+    searchWorkItem = DispatchWorkItem {
+      let results = searchPlaylist(playlist: playlist, pattern: input)
+      
+      if self.isInputEmpty {
+        return
+      }
+      
+      self.searchResults = results
+      
+      self.reloadTable()
+    }
+    
+    searchWorkQueue.async(execute: searchWorkItem!)
     
   }
 }
@@ -200,9 +241,71 @@ extension PlaylistSearchViewController: NSTableViewDelegate, NSTableViewDataSour
     return searchResults.count
   }
   
+  func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+    
+    let searchItem = searchResults[row]
+    let render = NSMutableAttributedString(string: searchItem.item.filenameForDisplay)
+    
+    // Add bold for matching letters
+    for index in searchItem.result.pos {
+      let range = NSMakeRange(index , 1)
+      render.addAttribute(NSAttributedString.Key.font, value: NSFont.boldSystemFont(ofSize: CGFloat(TableCellFontSize)), range: range)
+      render.addAttribute(NSAttributedString.Key.foregroundColor, value: NSColor.textColor, range: range)
+    }
+    
+    return [
+      "filename": render
+    ]
+    
+  }
+  
   // Enables arrow keys to be used in tableview
   func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
     return true
   }
   
+}
+
+// MARK: Search Playlist
+
+// TODO: Move to another file
+
+struct SearchItem {
+  let item: MPVPlaylistItem
+  let result: Result
+  let playlistIndex: Int
+}
+
+extension SearchItem: Comparable {
+  static func < (l: SearchItem, r: SearchItem) -> Bool {
+    return l.result.score < r.result.score
+  }
+  
+  static func > (l: SearchItem, r: SearchItem) -> Bool {
+    return l.result.score > r.result.score
+  }
+  
+  static func == (l: SearchItem, r: SearchItem) -> Bool {
+    return l.result.score == r.result.score
+  }
+}
+
+func searchPlaylist(playlist: [MPVPlaylistItem], pattern: String) -> [SearchItem] {
+  var results: [SearchItem] = []
+  
+  for (index, item) in playlist.enumerated() {
+    let result = fuzzyMatch(text: item.filenameForDisplay, pattern: pattern)
+    
+    if result.score < MinScore {
+      continue
+    }
+    
+    let searchItem = SearchItem(item: item, result: result, playlistIndex: index)
+    
+    results.append(searchItem)
+  }
+  
+  results.sort(by: >)
+  
+  return results
 }

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="PlaylistSearchViewController" customModule="IINA" customModuleProvider="target"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="QvC-M9-y7g">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
+            <windowCollectionBehavior key="collectionBehavior" fullScreenNone="YES"/>
+            <windowPositionMask key="initialPositionMask" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="355" width="500" height="48"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="775"/>
+            <value key="minSize" type="size" width="500" height="48"/>
+            <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ">
+                <rect key="frame" x="0.0" y="0.0" width="500" height="48"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <visualEffectView blendingMode="behindWindow" material="appearanceBased" state="active" id="Fx8-km-fPU">
+                        <rect key="frame" x="0.0" y="0.0" width="500" height="48"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView focusRingType="none" distribution="fillProportionally" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1fg-cP-uQn">
+                                <rect key="frame" x="8" y="8" width="476" height="32"/>
+                                <subviews>
+                                    <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Bq4-We-5dm">
+                                        <rect key="frame" x="0.0" y="-4.5" width="19" height="42"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="jSH-et-ZBn">
+                                            <imageReference key="image" image="magnifyingglass" catalog="system" symbolScale="large"/>
+                                        </imageCell>
+                                    </imageView>
+                                    <textField wantsLayer="YES" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="irS-JS-r5D">
+                                        <rect key="frame" x="25" y="0.0" width="430" height="32"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" focusRingType="none" placeholderString="Search" usesSingleLineMode="YES" id="HQ2-9h-L2Z">
+                                            <font key="font" metaFont="systemLight" size="24"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <button wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GAl-oE-YmZ">
+                                        <rect key="frame" x="461" y="-3" width="15" height="38"/>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="xmark.circle.fill" catalog="system" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="6S1-A3-ScO">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="6bc-qg-olu"/>
+                                    <constraint firstAttribute="bottom" secondItem="irS-JS-r5D" secondAttribute="bottom" id="7GT-bn-Vfo"/>
+                                    <constraint firstItem="Bq4-We-5dm" firstAttribute="top" secondItem="1fg-cP-uQn" secondAttribute="top" id="D1Q-QF-ez8"/>
+                                    <constraint firstItem="irS-JS-r5D" firstAttribute="top" secondItem="1fg-cP-uQn" secondAttribute="top" id="O6n-D8-vzF"/>
+                                    <constraint firstAttribute="bottom" secondItem="Bq4-We-5dm" secondAttribute="bottom" id="OF0-nj-Nfg"/>
+                                    <constraint firstAttribute="bottom" secondItem="irS-JS-r5D" secondAttribute="bottom" id="Pe2-uL-sJQ"/>
+                                    <constraint firstItem="GAl-oE-YmZ" firstAttribute="top" secondItem="1fg-cP-uQn" secondAttribute="top" id="S0c-NR-5DF"/>
+                                    <constraint firstItem="Bq4-We-5dm" firstAttribute="top" secondItem="1fg-cP-uQn" secondAttribute="top" id="rfE-Ly-VZp"/>
+                                    <constraint firstAttribute="bottom" secondItem="GAl-oE-YmZ" secondAttribute="bottom" id="ywz-3o-xfF"/>
+                                    <constraint firstItem="irS-JS-r5D" firstAttribute="top" secondItem="1fg-cP-uQn" secondAttribute="top" id="z0B-G7-guO"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="1fg-cP-uQn" firstAttribute="top" secondItem="Fx8-km-fPU" secondAttribute="top" constant="8" id="5d4-Vt-gmU"/>
+                            <constraint firstItem="1fg-cP-uQn" firstAttribute="leading" secondItem="Fx8-km-fPU" secondAttribute="leading" constant="8" id="N9e-9p-6ni"/>
+                            <constraint firstAttribute="trailing" secondItem="1fg-cP-uQn" secondAttribute="trailing" constant="16" id="Sg3-0m-wPq"/>
+                        </constraints>
+                    </visualEffectView>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="139" y="137.5"/>
+        </window>
+    </objects>
+    <resources>
+        <image name="magnifyingglass" catalog="system" width="19" height="19"/>
+        <image name="xmark.circle.fill" catalog="system" width="15" height="15"/>
+    </resources>
+</document>

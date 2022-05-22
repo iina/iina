@@ -10,7 +10,7 @@ import Foundation
 import Cocoa
 
 fileprivate let WindowWidth = 500
-fileprivate let InputFieldHeight = 48
+fileprivate let InputFieldHeight = 46
 fileprivate let TableCellHeight = 24
 fileprivate let MaxTableViewHeight = TableCellHeight * 10
 fileprivate let TableCellFontSize = 13
@@ -58,6 +58,10 @@ class PlaylistSearchViewController: NSWindowController {
   override func windowDidLoad() {
     super.windowDidLoad()
     
+    // Reset Input
+    hideClearBtn()
+    hideTable()
+    
     // Remove window titlebar and buttons
     window?.isMovableByWindowBackground = true
     window?.titlebarAppearsTransparent = true
@@ -72,8 +76,8 @@ class PlaylistSearchViewController: NSWindowController {
     searchResultsTableView.delegate = self
     searchResultsTableView.dataSource = self
     
-    // Reset Input
-    clearInput()
+    searchResultsTableView.doubleAction = #selector(handleSubmit)
+    searchResultsTableView.action = #selector(handleSubmit)
   }
   
   // MARK: Showing and Hiding Window and Elements
@@ -85,6 +89,7 @@ class PlaylistSearchViewController: NSWindowController {
     
     addClickMonitor()
     showWindow(nil)
+    focusInput()
   }
   
   func hideSearchWindow() {
@@ -122,6 +127,8 @@ class PlaylistSearchViewController: NSWindowController {
     inputBorderBottom.isHidden = false
     
     resizeTable()
+    // Make the first item selected
+    changeSelection(by: 1)
   }
   
   func resizeTable() {
@@ -195,10 +202,36 @@ class PlaylistSearchViewController: NSWindowController {
     DispatchQueue.main.async(execute: updateTableWorkItem!)
   }
   
+  func changeSelection(by: Int) {
+    let length = searchResultsTableView.numberOfRows
+    
+    let selected = searchResultsTableView.selectedRow
+    
+    let updated = selected + by
+    
+    if updated >= length || updated < 0 {
+      return
+    }
+    
+    let indexSet = NSIndexSet(index: updated)
+    searchResultsTableView.selectRowIndexes(indexSet as IndexSet, byExtendingSelection: false)
+    searchResultsTableView.scrollRowToVisible(updated)
+  }
+  
+  @objc func handleSubmit() {
+    guard let item = searchResults[at: searchResultsTableView.selectedRow] ?? searchResults.first else { return }
+    
+    player.playFileInPlaylist(item.playlistIndex)
+    
+    playlistViewController.playlistTableView.scrollRowToVisible(item.playlistIndex)
+    
+    hideSearchWindow()
+  }
+  
 }
 
 // MARK: Input Text Field Delegate
-extension PlaylistSearchViewController: NSTextFieldDelegate {
+extension PlaylistSearchViewController: NSTextFieldDelegate, NSControlTextEditingDelegate {
   func controlTextDidChange(_ obj: Notification) {
     let input = inputField.stringValue
     
@@ -231,6 +264,33 @@ extension PlaylistSearchViewController: NSTextFieldDelegate {
     
     searchWorkQueue.async(execute: searchWorkItem!)
     
+  }
+  
+  func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
+    // Esc: clear input or hide window
+    if commandSelector == #selector(cancel(_:)) {
+      if inputField.stringValue == "" {
+        return false
+      }
+      clearInput()
+      return true
+    }
+    // Up or Shift+Tab: Move table selection up by 1
+    else if commandSelector == #selector(moveUp(_:)) || commandSelector == #selector(insertBacktab(_:)) {
+      changeSelection(by: -1)
+      return true
+    }
+    // Down or Tab: Move table selection down by 1
+    else if commandSelector == #selector(moveDown(_:)) || commandSelector == #selector(insertTab(_:)) {
+      changeSelection(by: 1)
+      return true
+    }
+    // Enter: play selected file
+    else if commandSelector == #selector(insertNewline(_:)) {
+      handleSubmit()
+      return false
+    }
+    return false
   }
 }
 

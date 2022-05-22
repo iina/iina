@@ -25,7 +25,7 @@
             <windowPositionMask key="initialPositionMask" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="355" width="500" height="173"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="775"/>
-            <value key="minSize" type="size" width="500" height="48"/>
+            <value key="minSize" type="size" width="500" height="46"/>
             <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="500" height="173"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -63,6 +63,7 @@
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="32" id="0Qd-0S-WoF"/>
                                     <constraint firstAttribute="height" constant="32" id="6bc-qg-olu"/>
                                     <constraint firstAttribute="bottom" secondItem="irS-JS-r5D" secondAttribute="bottom" id="7GT-bn-Vfo"/>
                                     <constraint firstItem="Bq4-We-5dm" firstAttribute="top" secondItem="1fg-cP-uQn" secondAttribute="top" id="D1Q-QF-ez8"/>
@@ -70,6 +71,7 @@
                                     <constraint firstAttribute="bottom" secondItem="Bq4-We-5dm" secondAttribute="bottom" id="OF0-nj-Nfg"/>
                                     <constraint firstAttribute="bottom" secondItem="irS-JS-r5D" secondAttribute="bottom" id="Pe2-uL-sJQ"/>
                                     <constraint firstItem="GAl-oE-YmZ" firstAttribute="top" secondItem="1fg-cP-uQn" secondAttribute="top" id="S0c-NR-5DF"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="28" id="fjG-HW-ECc"/>
                                     <constraint firstItem="Bq4-We-5dm" firstAttribute="top" secondItem="1fg-cP-uQn" secondAttribute="top" id="rfE-Ly-VZp"/>
                                     <constraint firstAttribute="bottom" secondItem="GAl-oE-YmZ" secondAttribute="bottom" id="ywz-3o-xfF"/>
                                     <constraint firstItem="irS-JS-r5D" firstAttribute="top" secondItem="1fg-cP-uQn" secondAttribute="top" id="z0B-G7-guO"/>
@@ -86,7 +88,7 @@
                                 </customSpacing>
                             </stackView>
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="935-W7-cww">
-                                <rect key="frame" x="0.0" y="122" width="500" height="5"/>
+                                <rect key="frame" x="0.0" y="123" width="500" height="6"/>
                             </box>
                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rsh-a6-Fcr">
                                 <rect key="frame" x="0.0" y="0.0" width="500" height="125"/>
@@ -117,9 +119,8 @@
                                                             <rect key="frame" x="8" y="0.0" width="483" height="24"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8C6-uH-87G">
+                                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="8C6-uH-87G">
                                                                     <rect key="frame" x="0.0" y="4" width="483" height="16"/>
-                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" usesSingleLineMode="YES" id="sQg-Vu-uM1">
                                                                         <font key="font" usesAppearanceFont="YES"/>
                                                                         <color key="textColor" name="MainSliderKnob"/>
@@ -130,6 +131,11 @@
                                                                     </connections>
                                                                 </textField>
                                                             </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="8C6-uH-87G" firstAttribute="centerX" secondItem="oJZ-0o-tBC" secondAttribute="centerX" id="49W-8U-8al"/>
+                                                                <constraint firstItem="8C6-uH-87G" firstAttribute="centerY" secondItem="oJZ-0o-tBC" secondAttribute="centerY" id="bDr-Ch-yxE"/>
+                                                                <constraint firstItem="8C6-uH-87G" firstAttribute="leading" secondItem="oJZ-0o-tBC" secondAttribute="leading" constant="2" id="ema-UT-A5Q"/>
+                                                            </constraints>
                                                             <connections>
                                                                 <outlet property="textField" destination="8C6-uH-87G" id="9ah-vT-8ha"/>
                                                             </connections>
@@ -151,10 +157,10 @@
                             </scrollView>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="rsh-a6-Fcr" firstAttribute="top" secondItem="935-W7-cww" secondAttribute="bottom" id="58u-H3-vLG"/>
                             <constraint firstAttribute="bottom" secondItem="rsh-a6-Fcr" secondAttribute="bottom" id="5BS-05-SHh"/>
                             <constraint firstItem="1fg-cP-uQn" firstAttribute="top" secondItem="Fx8-km-fPU" secondAttribute="top" constant="8" id="5d4-Vt-gmU"/>
-                            <constraint firstItem="rsh-a6-Fcr" firstAttribute="top" secondItem="1fg-cP-uQn" secondAttribute="bottom" constant="8" id="K5z-3E-Nxt"/>
-                            <constraint firstItem="935-W7-cww" firstAttribute="top" secondItem="1fg-cP-uQn" secondAttribute="bottom" constant="8" id="M0h-dN-utV"/>
+                            <constraint firstItem="935-W7-cww" firstAttribute="top" secondItem="1fg-cP-uQn" secondAttribute="bottom" constant="6" id="M0h-dN-utV"/>
                             <constraint firstItem="1fg-cP-uQn" firstAttribute="leading" secondItem="Fx8-km-fPU" secondAttribute="leading" constant="8" id="N9e-9p-6ni"/>
                             <constraint firstAttribute="trailing" secondItem="1fg-cP-uQn" secondAttribute="trailing" constant="16" id="Sg3-0m-wPq"/>
                             <constraint firstAttribute="trailing" secondItem="935-W7-cww" secondAttribute="trailing" id="TT6-nl-aut"/>

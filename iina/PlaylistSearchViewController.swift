@@ -13,6 +13,8 @@ fileprivate let WindowWidth = 500
 fileprivate let InputFieldHeight = 46
 fileprivate let TableCellHeight = 24
 fileprivate let MaxTableViewHeight = TableCellHeight * 10
+fileprivate let BottomMargin = 6
+
 fileprivate let TableCellFontSize = 13
 
 fileprivate let MinScore = 5 // Minimum matching score to be rendered on search results table
@@ -132,9 +134,9 @@ class PlaylistSearchViewController: NSWindowController {
   }
   
   func resizeTable() {
-    let maxHeight = InputFieldHeight + MaxTableViewHeight
+    let maxHeight = InputFieldHeight + MaxTableViewHeight + BottomMargin
     
-    let neededHeight = InputFieldHeight + (searchResults.count * TableCellHeight) + 4
+    let neededHeight = InputFieldHeight + (searchResults.count * TableCellHeight) + BottomMargin
     
     let height = (neededHeight < maxHeight) ? neededHeight : maxHeight
     
@@ -233,7 +235,11 @@ class PlaylistSearchViewController: NSWindowController {
 // MARK: Input Text Field Delegate
 extension PlaylistSearchViewController: NSTextFieldDelegate, NSControlTextEditingDelegate {
   func controlTextDidChange(_ obj: Notification) {
-    let input = inputField.stringValue
+    var input = inputField.stringValue
+    
+    // Removes spaces from pattern
+    // If your input was "hello world", the fuzzy match wouldn't match "helloworld" as a favorable option because of the space in between the two words
+    input = input.filter {!$0.isWhitespace}
     
     searchWorkItem?.cancel()
     

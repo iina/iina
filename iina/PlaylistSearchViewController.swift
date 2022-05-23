@@ -51,6 +51,62 @@ class PlaylistSearchViewController: NSWindowController {
   // Fixes bug where table would render search results if user clears input before searchWorkItem is finished
   var isInputEmpty = true
   
+  // MARK: Observed Values
+  internal var observedPrefKeys: [Preference.Key] = [
+    .themeMaterial
+  ]
+  
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    guard let keyPath = keyPath, let change = change else { return }
+    
+    switch keyPath {
+    case PK.themeMaterial.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        setMaterial(Preference.Theme(rawValue: newValue))
+      }
+    default:
+      return
+    }
+  }
+  
+  internal func setMaterial(_ theme: Preference.Theme?) {
+    guard let window = window, let theme = theme else { return }
+    
+    if #available(macOS 10.14, *) {
+      window.appearance = NSAppearance(iinaTheme: theme)
+    }
+  }
+  
+  // MARK: Click Events
+  /**
+   Creates a monitor for outside clicks. If user clicks outside the search window, the window will be hidden
+   */
+  func addClickMonitor() {
+    clickMonitor = NSEvent.addLocalMonitorForEvents(matching: NSEvent.EventTypeMask.leftMouseDown) {
+      (event) -> NSEvent? in
+      if !(self.window?.windowNumber == event.windowNumber) {
+        self.hideSearchWindow()
+      }
+      return event
+    }
+  }
+  
+  func removeClickMonitor() {
+    if clickMonitor != nil {
+      NSEvent.removeMonitor(clickMonitor!)
+      clickMonitor = nil
+    }
+  }
+  
+  deinit {
+    ObjcUtils.silenced {
+      for key in self.observedPrefKeys {
+        UserDefaults.standard.removeObserver(self, forKeyPath: key.rawValue)
+      }
+    }
+    removeClickMonitor()
+  }
+  
   // MARK: Outlets
   @IBOutlet weak var inputField: NSTextField!
   @IBOutlet weak var clearBtn: NSButton!
@@ -70,6 +126,13 @@ class PlaylistSearchViewController: NSWindowController {
     window?.titleVisibility = .hidden
     ([.closeButton, .miniaturizeButton, .zoomButton] as [NSWindow.ButtonType]).forEach {
       window?.standardWindowButton($0)?.isHidden = true
+    }
+    
+    // Observe theme changes
+    setMaterial(Preference.enum(for: .themeMaterial))
+    
+    observedPrefKeys.forEach { key in
+      UserDefaults.standard.addObserver(self, forKeyPath: key.rawValue, options: .new, context: nil)
     }
     
     // Delegates
@@ -146,28 +209,6 @@ class PlaylistSearchViewController: NSWindowController {
   
   func focusInput() {
     window?.makeFirstResponder(inputField)
-  }
-  
-  
-  // MARK: Click Events
-  /**
-   Creates a monitor for outside clicks. If user clicks outside the search window, the window will be hidden
-   */
-  func addClickMonitor() {
-    clickMonitor = NSEvent.addLocalMonitorForEvents(matching: NSEvent.EventTypeMask.leftMouseDown) {
-      (event) -> NSEvent? in
-      if !(self.window?.windowNumber == event.windowNumber) {
-        self.hideSearchWindow()
-      }
-      return event
-    }
-  }
-  
-  func removeClickMonitor() {
-    if clickMonitor != nil {
-      NSEvent.removeMonitor(clickMonitor!)
-      clickMonitor = nil
-    }
   }
   
   // MARK: IBActions
@@ -330,6 +371,17 @@ extension PlaylistSearchViewController: NSTableViewDelegate, NSTableViewDataSour
     return true
   }
   
+  func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
+      return FixRowView()
+  }
+  
+}
+
+// Fixes bug when system theme is different from IINA's selected theme, the search results would use the system theme's selected row view background instead of IINA's selected theme
+class FixRowView: NSTableRowView {
+    override func draw(_ dirtyRect: NSRect) {
+        super.draw(dirtyRect)
+    }
 }
 
 // MARK: Search Playlist

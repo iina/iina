@@ -56,6 +56,7 @@ class KeyBindingDataLoader {
     KBI.separator(),
     KBI("open-file", type: .iinaCmd),
     KBI("open-url", type: .iinaCmd),
+    KBI("search-playlist", type: .iinaCmd),
     KBI("save-playlist", type: .iinaCmd),
     KBI("delete-current-file", type: .iinaCmd),
     KBI("delete-current-file-hard", type: .iinaCmd),

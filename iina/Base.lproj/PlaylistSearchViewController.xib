@@ -30,7 +30,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="500" height="173"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <visualEffectView blendingMode="behindWindow" material="appearanceBased" state="active" id="Fx8-km-fPU">
+                    <visualEffectView blendingMode="behindWindow" material="underWindowBackground" state="active" id="Fx8-km-fPU">
                         <rect key="frame" x="0.0" y="0.0" width="500" height="173"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -181,7 +181,7 @@
         <image name="magnifyingglass" catalog="system" width="19" height="19"/>
         <image name="xmark.circle.fill" catalog="system" width="15" height="15"/>
         <namedColor name="SearchResult">
-            <color red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.80000001192092896" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

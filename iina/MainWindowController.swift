@@ -2618,6 +2618,8 @@ class MainWindowController: PlayerWindowController {
       menuSwitchToMiniPlayer(.dummy)
     case .deleteCurrentFileHard:
       menuActionHandler.menuDeleteCurrentFileHard(.dummy)
+    case .searchPlaylist:
+      menuSearchPlaylist(.dummy)
     case .biggerWindow:
       let item = NSMenuItem()
       item.tag = 11

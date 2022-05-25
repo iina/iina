@@ -908,6 +908,16 @@ class MPVController: NSObject {
           player.sendOSD(paused ? .pause : .resume)
           DispatchQueue.main.sync {
             player.info.isPaused = paused
+            // Follow energy efficiency best practices and ensure IINA is absolutely idle when the
+            // video is paused to avoid wasting energy with needless processing. If paused shutdown
+            // the timer that synchronizes the UI and the high priority display link thread.
+            if paused {
+              player.invalidateTimer()
+              player.mainWindow.videoView.stopDisplayLink()
+            } else {
+              player.mainWindow.videoView.startDisplayLink()
+              player.createSyncUITimer()
+            }
           }
         }
         if player.mainWindow.loaded && Preference.bool(for: .alwaysFloatOnTop) {

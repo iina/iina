@@ -350,6 +350,10 @@ extension PlaylistSearchViewController: NSTableViewDelegate, NSTableViewDataSour
   
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
     
+    if searchResults.isEmpty {
+      return nil
+    }
+    
     let searchItem = searchResults[row]
     let render = NSMutableAttributedString(string: searchItem.item.filenameForDisplay)
     

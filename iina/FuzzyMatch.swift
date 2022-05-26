@@ -41,6 +41,9 @@ fileprivate let ScoreMatch = 16
 fileprivate let ScoreGapStart = -3
 fileprivate let ScoreGapExtension = -1
 
+fileprivate let LeadingLetterPenalty = ScoreGapExtension
+fileprivate let MaxLeadingLetterPenalty = LeadingLetterPenalty * 4
+
 fileprivate let BonusBoundary = ScoreMatch / 2
 fileprivate let BonusNonWord = ScoreMatch / 2
 fileprivate let BonusCamel123 = BonusBoundary + ScoreGapExtension
@@ -180,6 +183,9 @@ func calculateScore(_ text: String,_ pattern: String,_ startIdx: Int,_ endIdx: I
       
       if patternIdx == 0 {
         score += bonus * BonusFirstCharMultiplier
+        
+        // Deduct score for every letter that comes before the first match
+        score += max(LeadingLetterPenalty * textIdx, MaxLeadingLetterPenalty)
       } else {
         score += bonus
       }

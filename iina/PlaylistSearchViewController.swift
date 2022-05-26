@@ -11,7 +11,7 @@ import Cocoa
 
 fileprivate let WindowWidth = 600
 fileprivate let InputFieldHeight = 46
-fileprivate let TableCellHeight = 30
+fileprivate let TableCellHeight = 32
 fileprivate let MaxTableViewHeight = TableCellHeight * 10
 fileprivate let BottomMargin = 6
 
@@ -353,7 +353,7 @@ extension PlaylistSearchViewController: NSTableViewDelegate, NSTableViewDataSour
     let searchItem = searchResults[row]
     let render = NSMutableAttributedString(string: searchItem.item.filenameForDisplay)
     
-    var a = "" , d = ""
+    var artistLabel = "" , durationLabel = ""
     
     let item = searchItem.item
     
@@ -368,11 +368,11 @@ extension PlaylistSearchViewController: NSTableViewDelegate, NSTableViewDataSour
     }
     
     if let (artist, title) = getCachedMetadata() {
-      a = artist
+      artistLabel = artist
     }
     if let cached = self.player.info.getCachedVideoDurationAndProgress(item.filename), let duration = cached.duration {
       if duration > 0 {
-        d = VideoTime(duration).stringRepresentation
+        durationLabel = VideoTime(duration).stringRepresentation
       }
     } else {
       
@@ -398,8 +398,9 @@ extension PlaylistSearchViewController: NSTableViewDelegate, NSTableViewDataSour
     
     return [
       "name": render,
-      "artist": a,
-      "duration": d
+      "artist": artistLabel,
+      "duration": durationLabel,
+      "image": NSWorkspace.shared.icon(forFile: item.filename)
     ]
     
   }

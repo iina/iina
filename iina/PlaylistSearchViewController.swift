@@ -9,9 +9,9 @@
 import Foundation
 import Cocoa
 
-fileprivate let WindowWidth = 500
+fileprivate let WindowWidth = 600
 fileprivate let InputFieldHeight = 46
-fileprivate let TableCellHeight = 24
+fileprivate let TableCellHeight = 30
 fileprivate let MaxTableViewHeight = TableCellHeight * 10
 fileprivate let BottomMargin = 6
 
@@ -235,7 +235,7 @@ class PlaylistSearchViewController: NSWindowController {
     updateTableWorkItem?.cancel()
     updateTableWorkItem = DispatchWorkItem {
       self.searchResultsTableView.reloadData()
-    
+      
       if self.searchResults.isEmpty {
         self.hideTable()
       } else {
@@ -353,6 +353,42 @@ extension PlaylistSearchViewController: NSTableViewDelegate, NSTableViewDataSour
     let searchItem = searchResults[row]
     let render = NSMutableAttributedString(string: searchItem.item.filenameForDisplay)
     
+    var a = "" , d = ""
+    
+    let item = searchItem.item
+    
+    func getCachedMetadata() -> (artist: String, title: String)? {
+      guard Preference.bool(for: .playlistShowMetadata) else { return nil }
+      if Preference.bool(for: .playlistShowMetadataInMusicMode) && !player.isInMiniPlayer {
+        return nil
+      }
+      guard let metadata = player.info.getCachedMetadata(item.filename) else { return nil }
+      guard let artist = metadata.artist, let title = metadata.title else { return nil }
+      return (artist, title)
+    }
+    
+    if let (artist, title) = getCachedMetadata() {
+      a = artist
+    }
+    if let cached = self.player.info.getCachedVideoDurationAndProgress(item.filename), let duration = cached.duration {
+      if duration > 0 {
+        d = VideoTime(duration).stringRepresentation
+      }
+    } else {
+      
+      searchWorkQueue.async {
+        
+        self.player.refreshCachedVideoInfo(forVideoPath: item.filename)
+        
+        if let cached = self.player.info.getCachedVideoDurationAndProgress(item.filename), let duration = cached.duration, duration > 0 {
+          DispatchQueue.main.async {
+            self.searchResultsTableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(integer: 0))
+          }
+        }
+      }
+      
+    }
+    
     // Add bold for matching letters
     for index in searchItem.result.pos {
       let range = NSMakeRange(index , 1)
@@ -361,7 +397,9 @@ extension PlaylistSearchViewController: NSTableViewDelegate, NSTableViewDataSour
     }
     
     return [
-      "filename": render
+      "name": render,
+      "artist": a,
+      "duration": d
     ]
     
   }
@@ -372,16 +410,16 @@ extension PlaylistSearchViewController: NSTableViewDelegate, NSTableViewDataSour
   }
   
   func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
-      return FixRowView()
+    return FixRowView()
   }
   
 }
 
 // Fixes bug when system theme is different from IINA's selected theme, the search results would use the system theme's selected row view background instead of IINA's selected theme
 class FixRowView: NSTableRowView {
-    override func draw(_ dirtyRect: NSRect) {
-        super.draw(dirtyRect)
-    }
+  override func draw(_ dirtyRect: NSRect) {
+    super.draw(dirtyRect)
+  }
 }
 
 // MARK: Search Playlist

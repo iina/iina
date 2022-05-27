@@ -302,8 +302,9 @@ extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
   }
 
   override func keyDown(with event: NSEvent) {
-    switch event.keyCode {
-      case 36, 76:  // RETURN or (keypad ENTER)
+    let keyChar = KeyCodeHelper.keyMap[event.keyCode]?.0
+    switch keyChar {
+      case "ENTER", "KP_ENTER":  // RETURN or (keypad ENTER)
         if recentFilesTableView.selectedRow >= 0 {
           // If user selected a row in the table using the keyboard, use that
           openRecentItemFromTable(recentFilesTableView.selectedRow)
@@ -314,14 +315,14 @@ extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
           // Most recent file no longer exists? Try to load next one
           openRecentItemFromTable(0)
         }
-      case 125:  // DOWN arrow
+      case "DOWN":  // DOWN arrow
         if recentDocuments.count == 0 || (recentFilesTableView.selectedRow >= recentFilesTableView.numberOfRows - 1) {
           super.keyDown(with: event)  // invalid command: beep at user
         } else {
           // default: let recentFilesTableView handle it
           recentFilesTableView.keyDown(with: event)
         }
-      case 126:  // UP arrow
+      case "UP":  // UP arrow
         if !lastFileContainerView.isHidden {   // recent file btn is displayed?
           if recentFilesTableView.selectedRow == -1 {  // ...and recent file btn already highlighted?
             super.keyDown(with: event)  // invalid command: beep at user

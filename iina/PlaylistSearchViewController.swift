@@ -261,12 +261,29 @@ class PlaylistSearchViewController: NSWindowController {
     searchResultsTableView.scrollRowToVisible(updated)
   }
   
+  func getPlaylistIndex(searchItem: SearchItem) -> Int? {
+    let playlist = player.info.playlist
+    guard let item = playlist[at: searchItem.playlistIndex] else { return nil }
+    
+    if item.filename == searchItem.item.filename {
+      return searchItem.playlistIndex
+    }
+    
+    else {
+      return player.info.playlist.firstIndex { i in
+        i.filename == searchItem.item.filename
+      }
+    }
+    
+  }
+  
   @objc func handleSubmit() {
     guard let item = searchResults[at: searchResultsTableView.selectedRow] ?? searchResults.first else { return }
+    guard let index = getPlaylistIndex(searchItem: item) else { return }
     
-    player.playFileInPlaylist(item.playlistIndex)
+    player.playFileInPlaylist(index)
     
-    playlistViewController.playlistTableView.scrollRowToVisible(item.playlistIndex)
+    playlistViewController.playlistTableView.scrollRowToVisible(index)
     
     hideSearchWindow()
   }

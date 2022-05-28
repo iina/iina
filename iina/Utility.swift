@@ -295,6 +295,11 @@ class Utility {
 
   // MARK: - App functions
 
+  static func iinaCopyright() -> String {
+    let infoDic = Bundle.main.infoDictionary!
+    return infoDic["NSHumanReadableCopyright"] as! String
+  }
+
   static func iinaVersion() -> (String, String) {
     let infoDic = Bundle.main.infoDictionary!
     let version = infoDic["CFBundleShortVersionString"] as! String

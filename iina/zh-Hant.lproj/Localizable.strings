@@ -182,6 +182,7 @@
 "alert.sub_lang_not_set" = "在使用 OpenSubtitles 前請先在「偏好設定」中設定字幕的偏好語言，目前將使用英文（eng）。";
 "alert.sub.cannot_save_passwd" = "無法將您這個密碼「%@」儲存到鑰匙圈";
 "alert.sub.cannot_login" = "登入失敗，請檢查您的使用者帳戶、密碼、網路連線。\n\n%@";
+"alert.sub.save_downloaded.title" = "儲存已下載的字幕";
 
 "alert.set_default.title" = "將 IINA 設為預設應用程式";
 "alert.set_default.message" = "即將把 IINA 設為所有受支援檔案格式的預設應用程式";

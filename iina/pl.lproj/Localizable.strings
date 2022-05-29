@@ -182,6 +182,7 @@
 "alert.sub_lang_not_set" = "Przed użyciem OpenSubtitles ustaw preferowany język napisów w preferencjach.";
 "alert.sub.cannot_save_passwd" = "Nie można zapisać hasła do pęku kluczy: %@";
 "alert.sub.cannot_login" = "Logowanie nie powiodło się. Sprawdź swoją nazwę użytkownika, hasło i stan sieci.\n\n%@";
+"alert.sub.save_downloaded.title" = "Zapisz pobrane napisy";
 
 "alert.set_default.title" = "Ustaw IINA jako domyślą aplikację";
 "alert.set_default.message" = "IINA zostanie ustawiona jako domyślna aplikacja dla wszystkich obsługiwanych typów plików.";

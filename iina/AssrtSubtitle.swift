@@ -10,8 +10,6 @@ import Foundation
 import Just
 import PromiseKit
 
-fileprivate let subsystem = Logger.Subsystem(rawValue: "assrt")
-
 final class AssrtSubtitle: OnlineSubtitle {
 
   struct File {
@@ -273,4 +271,8 @@ class AssrtSupport {
   private var header: [String: String] {
     return ["Authorization": "Bearer \(token)"]
   }
+}
+
+extension Logger.Sub {
+  static let assrt = Logger.Subsystem(rawValue: "assrt")
 }

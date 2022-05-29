@@ -182,6 +182,7 @@
 "alert.sub_lang_not_set" = "Por favor, selecione a linguagem preferida das legendas antes de usar o OpenSubtitles. Inglês(eng) será usado neste momento.";
 "alert.sub.cannot_save_passwd" = "Não foi possível salvar a senha nas chaves do iCloud: %@";
 "alert.sub.cannot_login" = "Impossível logar. Verifique usuário, senha ou estado da rede.\n\n%@";
+"alert.sub.save_downloaded.title" = "Salvar Legenda Baixada";
 
 "alert.set_default.title" = "Definindo IINA como App padrão";
 "alert.set_default.message" = "IINA será usado como player padrão para todos os tipos de arquivos que suporta.";

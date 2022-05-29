@@ -182,6 +182,7 @@
 "alert.sub_lang_not_set" = "Bitte lege vor der Benutzung von OpenSubtitles die bevorzugte Untertitelsprache fest. Benutzte diesmal English(eng).";
 "alert.sub.cannot_save_passwd" = "Passwort konnte nicht im Schlüsselbund gesichert werden: %@.";
 "alert.sub.cannot_login" = "Anmelden nicht möglich. Bitte überprüfe Benutzername, Passwort und Netzwerkverbindung.\n\n%@";
+"alert.sub.save_downloaded.title" = "Geladene Untertitel sichern";
 
 "alert.set_default.title" = "IINA als Standardprogramm setzten";
 "alert.set_default.message" = "IINA wird zum Standardprogramm für alle unterstützten Dateiformate.";

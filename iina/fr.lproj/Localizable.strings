@@ -182,6 +182,7 @@
 "alert.sub_lang_not_set" = "Veuillez configurer une langue de sous-titres dans les préférences avant d'utiliser OpenSubtitles. L'anglais (eng) sera utilisé cette fois-ci.";
 "alert.sub.cannot_save_passwd" = "Impossible de sauvegarder le mot de passe dans votre trousseau d'accès : %@";
 "alert.sub.cannot_login" = "Impossible de se connecter. Veuillez vérifier votre nom d'utilisateur, votre mot de passe et votre connexion Internet.\n\n%@";
+"alert.sub.save_downloaded.title" = "Sauvegarder le sous-titre téléchargé";
 
 "alert.set_default.title" = "Définir IINA comme application par défaut";
 "alert.set_default.message" = "Tous les fichiers supportés par IINA seront dorénavant ouverts par défaut avec IINA.";

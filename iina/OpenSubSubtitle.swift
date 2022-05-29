@@ -11,8 +11,6 @@ import Just
 import PromiseKit
 import Gzip
 
-fileprivate let subsystem = Logger.Subsystem(rawValue: "opensub")
-
 final class OpenSubSubtitle: OnlineSubtitle {
 
   @objc var filename: String = ""
@@ -63,7 +61,7 @@ class OpenSubSupport {
     // login failed (reason)
     case loginFailed(String)
     // file error
-    case cannotReadFile
+    case cannotReadFile(Error)
     case fileTooSmall
     // search failed (reason)
     case searchFailed(String)
@@ -168,11 +166,11 @@ class OpenSubSupport {
           let pStatus = parsed["status"] as! String
           if pStatus.hasPrefix("200") {
             self.token = parsed["token"] as? String
-            Logger.log("OpenSub: logged in as user \(finalUser)", subsystem: subsystem)
+            Logger.log("OpenSub: logged in as user \(finalUser)", subsystem: Logger.Sub.opensub)
             self.startHeartbeat()
             resolver.fulfill(())
           } else {
-            Logger.log("OpenSub: login failed, \(pStatus)", level: .error, subsystem: subsystem)
+            Logger.log("OpenSub: login failed, \(pStatus)", level: .error, subsystem: Logger.Sub.opensub)
             resolver.reject(OpenSubError.loginFailed(pStatus))
           }
         case .failure:
@@ -186,19 +184,27 @@ class OpenSubSupport {
     }
   }
 
-  func hash(_ url: URL) -> Promise<FileInfo> {
+  func hash(_ url: URL, _ isNetworkResource: Bool) -> Promise<FileInfo> {
     return Promise { resolver in
-      guard let file = try? FileHandle(forReadingFrom: url) else {
-        Logger.log("OpenSub: cannot get file handle", level: .error, subsystem: subsystem)
-        resolver.reject(OpenSubError.cannotReadFile)
+      if isNetworkResource {
+        // Cannot create a hash when streaming. Force caller to use title instead.
+        resolver.reject(OpenSubError.noResult)
         return
       }
+      var file: FileHandle
+      do {
+        file = try FileHandle(forReadingFrom: url)
+      } catch {
+        resolver.reject(OpenSubError.cannotReadFile(error))
+        return
+      }
+      defer { file.closeFile() }
 
       file.seekToEndOfFile()
       let fileSize = file.offsetInFile
 
       if fileSize < 131072 {
-        Logger.log("File length less than 131072, skipped", level: .warning, subsystem: subsystem)
+        Logger.log("File length less than 131072, skipped", level: .warning, subsystem: Logger.Sub.opensub)
         resolver.reject(OpenSubError.fileTooSmall)
         return
       }
@@ -212,28 +218,29 @@ class OpenSubSupport {
 
       hash += fileSize
 
-      file.closeFile()
-
       resolver.fulfill(FileInfo(hashValue: String(format: "%016qx", hash), fileSize: fileSize))
     }
   }
 
-  func requestByName(_ fileURL: URL) -> Promise<[OpenSubSubtitle]> {
-    return requestIMDB(fileURL).then { imdb -> Promise<[OpenSubSubtitle]> in
+  func requestByName(_ fileURL: URL, _ isNetworkResource: Bool, _ mediaTitle: String) -> Promise<[OpenSubSubtitle]> {
+    return requestIMDB(fileURL, isNetworkResource, mediaTitle).then { imdb -> Promise<[OpenSubSubtitle]> in
       let info = ["imdbid": imdb]
       return self.request(info)
     }
   }
 
-  func requestIMDB(_ fileURL: URL) -> Promise<String> {
+  func requestIMDB(_ fileURL: URL, _ isNetworkResource: Bool, _ mediaTitle: String) -> Promise<String> {
     return Promise { resolver in
-      let filename = fileURL.lastPathComponent
-      xmlRpc.call("GuessMovieFromString", [token as Any, [filename]]) { status in
+      // When streaming use the media title as frequently the URL does not reflect the title
+      // of the video.
+      let searchString = isNetworkResource ? mediaTitle : fileURL.lastPathComponent
+      Logger.log("Searching for subtitles of movies matching '\(searchString)'", subsystem: Logger.Sub.opensub)
+      xmlRpc.call("GuessMovieFromString", [token as Any, [searchString]]) { status in
         switch status {
         case .ok(let response):
           do {
             guard self.checkStatus(response) else { throw OpenSubError.wrongResponseFormat }
-            let bestGuess = try self.findPath(["data", filename, "BestGuess"], in: response) as? [String: Any]
+            let bestGuess = try self.findPath(["data", searchString, "BestGuess"], in: response) as? [String: Any]
             let IMDB = (bestGuess?["IDMovieIMDB"] as? String) ?? ""
             resolver.fulfill(IMDB)
           } catch let (error) {
@@ -322,23 +329,23 @@ class OpenSubSupport {
       case .ok(let value):
         // 406 No session
         if let pValue = value as? [String: Any], (pValue["status"] as? String ?? "").hasPrefix("406") {
-          Logger.log("heartbeat: no session", level: .warning, subsystem: subsystem)
+          Logger.log("heartbeat: no session", level: .warning, subsystem: Logger.Sub.opensub)
           self.token = nil
           self.login().catch { err in
             switch err {
             case OpenSubError.loginFailed(let reason):
-              Logger.log("(re-login) \(reason)", level: .error, subsystem: subsystem)
+              Logger.log("(re-login) \(reason)", level: .error, subsystem: Logger.Sub.opensub)
             case OpenSubError.xmlRpcError(let error):
-              Logger.log("(re-login) \(error.readableDescription)", level: .error, subsystem: subsystem)
+              Logger.log("(re-login) \(error.readableDescription)", level: .error, subsystem: Logger.Sub.opensub)
             default:
-              Logger.log("(re-login) \(err.localizedDescription)", level: .error, subsystem: subsystem)
+              Logger.log("(re-login) \(err.localizedDescription)", level: .error, subsystem: Logger.Sub.opensub)
             }
           }
         } else {
-          Logger.log("OpenSub: heartbeat ok", subsystem: subsystem)
+          Logger.log("OpenSub: heartbeat ok", subsystem: Logger.Sub.opensub)
         }
       default:
-        Logger.log("OpenSub: heartbeat failed", level: .error, subsystem: subsystem)
+        Logger.log("OpenSub: heartbeat failed", level: .error, subsystem: Logger.Sub.opensub)
         self.token = nil
       }
     }
@@ -347,5 +354,8 @@ class OpenSubSupport {
   var loggedIn: Bool {
     return token != nil
   }
+}
 
+extension Logger.Sub {
+  static let opensub = Logger.Subsystem(rawValue: "opensub")
 }

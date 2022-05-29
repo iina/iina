@@ -1276,9 +1276,15 @@ class PlayerCore: NSObject {
     let maxVolume = Preference.integer(for: .maxVolume)
     let constrainedVolume = volume.clamped(to: 0...Double(maxVolume))
     let appliedVolume = constrain ? constrainedVolume : volume
+    let shouldSendConstrainedVolumeOSD =
+      constrain && volume != constrainedVolume && info.volume == appliedVolume
     info.volume = appliedVolume
     mpv.setDouble(MPVOption.Audio.volume, appliedVolume, level: .verbose)
     Preference.set(constrainedVolume, for: .softVolume)
+    if shouldSendConstrainedVolumeOSD {
+      // mpv won't send MPV_EVENT_PROPERTY_CHANGE if the volume is unchanged.
+      sendOSD(.volume(constrainedVolume))
+    }
   }
 
   func setTrack(_ index: Int, forType: MPVTrack.TrackType) {

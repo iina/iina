@@ -17,6 +17,8 @@ struct MPVProperty {
   static let estimatedFrameCount = "estimated-frame-count"
   /** estimated-frame-number */
   static let estimatedFrameNumber = "estimated-frame-number"
+  /** pid */
+  static let pid = "pid"
   /** path */
   static let path = "path"
   /** stream-open-filename */
@@ -179,10 +181,10 @@ struct MPVProperty {
   static let videoParams = "video-params"
   /** video-params/pixelformat */
   static let videoParamsPixelformat = "video-params/pixelformat"
+  /** video-params/hw-pixelformat */
+  static let videoParamsHwPixelformat = "video-params/hw-pixelformat"
   /** video-params/average-bpp */
   static let videoParamsAverageBpp = "video-params/average-bpp"
-  /** video-params/plane-depth */
-  static let videoParamsPlaneDepth = "video-params/plane-depth"
   /** video-params/w */
   static let videoParamsW = "video-params/w"
   /** video-params/h */
@@ -213,6 +215,8 @@ struct MPVProperty {
   static let videoParamsRotate = "video-params/rotate"
   /** video-params/stereo-in */
   static let videoParamsStereoIn = "video-params/stereo-in"
+  /** video-params/alpha */
+  static let videoParamsAlpha = "video-params/alpha"
   /** dwidth */
   static let dwidth = "dwidth"
   /** dheight */
@@ -223,6 +227,14 @@ struct MPVProperty {
   static let videoOutParams = "video-out-params"
   /** video-frame-info */
   static let videoFrameInfo = "video-frame-info"
+  /** video-frame-info/picture-type */
+  static let videoFrameInfoPictureType = "video-frame-info/picture-type"
+  /** video-frame-info/interlaced */
+  static let videoFrameInfoInterlaced = "video-frame-info/interlaced"
+  /** video-frame-info/tff */
+  static let videoFrameInfoTff = "video-frame-info/tff"
+  /** video-frame-info/repeat */
+  static let videoFrameInfoRepeat = "video-frame-info/repeat"
   /** container-fps */
   static let containerFps = "container-fps"
   /** estimated-vf-fps */
@@ -231,6 +243,8 @@ struct MPVProperty {
   static let windowScale = "window-scale"
   /** current-window-scale */
   static let currentWindowScale = "current-window-scale"
+  /** focused */
+  static let focused = "focused"
   /** display-names */
   static let displayNames = "display-names"
   /** display-fps */
@@ -239,6 +253,10 @@ struct MPVProperty {
   static let estimatedDisplayFps = "estimated-display-fps"
   /** vsync-jitter */
   static let vsyncJitter = "vsync-jitter"
+  /** display-width */
+  static let displayWidth = "display-width"
+  /** display-height */
+  static let displayHeight = "display-height"
   /** display-hidpi-scale */
   static let displayHidpiScale = "display-hidpi-scale"
   /** video-aspect */
@@ -251,16 +269,52 @@ struct MPVProperty {
   static let osdPar = "osd-par"
   /** osd-dimensions */
   static let osdDimensions = "osd-dimensions"
+  /** osd-dimensions/w */
+  static let osdDimensionsW = "osd-dimensions/w"
+  /** osd-dimensions/h */
+  static let osdDimensionsH = "osd-dimensions/h"
+  /** osd-dimensions/par */
+  static let osdDimensionsPar = "osd-dimensions/par"
+  /** osd-dimensions/aspect */
+  static let osdDimensionsAspect = "osd-dimensions/aspect"
+  /** osd-dimensions/mt */
+  static let osdDimensionsMt = "osd-dimensions/mt"
+  /** osd-dimensions/mb */
+  static let osdDimensionsMb = "osd-dimensions/mb"
+  /** osd-dimensions/ml */
+  static let osdDimensionsMl = "osd-dimensions/ml"
+  /** osd-dimensions/mr */
+  static let osdDimensionsMr = "osd-dimensions/mr"
+  /** mouse-pos */
+  static let mousePos = "mouse-pos"
+  /** mouse-pos/x */
+  static let mousePosX = "mouse-pos/x"
+  /** mouse-pos/y */
+  static let mousePosY = "mouse-pos/y"
+  /** mouse-pos/hover */
+  static let mousePosHover = "mouse-pos/hover"
   /** sub-text */
   static let subText = "sub-text"
+  /** sub-text-ass */
+  static let subTextAss = "sub-text-ass"
+  /** secondary-sub-text */
+  static let secondarySubText = "secondary-sub-text"
   /** sub-start */
   static let subStart = "sub-start"
+  /** secondary-sub-start */
+  static let secondarySubStart = "secondary-sub-start"
   /** sub-end */
   static let subEnd = "sub-end"
+  /** secondary-sub-end */
+  static let secondarySubEnd = "secondary-sub-end"
   /** playlist-pos */
   static let playlistPos = "playlist-pos"
   /** playlist-pos-1 */
   static let playlistPos1 = "playlist-pos-1"
+  /** playlist-current-pos */
+  static let playlistCurrentPos = "playlist-current-pos"
+  /** playlist-playing-pos */
+  static let playlistPlayingPos = "playlist-playing-pos"
   /** playlist-count */
   static let playlistCount = "playlist-count"
   /** playlist */
@@ -271,17 +325,21 @@ struct MPVProperty {
   static func playlistNFilename(_ n: Int) -> String {
     return "playlist/\(n)/filename"
   }
-  /** playlist/N/current */
-  static func playlistNCurrent(_ n: Int) -> String {
-    return "playlist/\(n)/current"
-  }
   /** playlist/N/playing */
   static func playlistNPlaying(_ n: Int) -> String {
     return "playlist/\(n)/playing"
   }
+  /** playlist/N/current */
+  static func playlistNCurrent(_ n: Int) -> String {
+    return "playlist/\(n)/current"
+  }
   /** playlist/N/title */
   static func playlistNTitle(_ n: Int) -> String {
     return "playlist/\(n)/title"
+  }
+  /** playlist/N/id */
+  static func playlistNId(_ n: Int) -> String {
+    return "playlist/\(n)/id"
   }
   /** track-list */
   static let trackList = "track-list"
@@ -306,6 +364,10 @@ struct MPVProperty {
   /** track-list/N/lang */
   static func trackListNLang(_ n: Int) -> String {
     return "track-list/\(n)/lang"
+  }
+  /** track-list/N/image */
+  static func trackListNImage(_ n: Int) -> String {
+    return "track-list/\(n)/image"
   }
   /** track-list/N/albumart */
   static func trackListNAlbumart(_ n: Int) -> String {
@@ -334,6 +396,10 @@ struct MPVProperty {
   /** track-list/N/selected */
   static func trackListNSelected(_ n: Int) -> String {
     return "track-list/\(n)/selected"
+  }
+  /** track-list/N/main-selection */
+  static func trackListNMainSelection(_ n: Int) -> String {
+    return "track-list/\(n)/main-selection"
   }
   /** track-list/N/ff-index */
   static func trackListNFfIndex(_ n: Int) -> String {
@@ -399,6 +465,7 @@ struct MPVProperty {
   static func trackListNReplaygainAlbumGain(_ n: Int) -> String {
     return "track-list/\(n)/replaygain-album-gain"
   }
+  /** current-tracks/...  As per mpv docs, scripts etc. should not use this. */
   /** chapter-list */
   static let chapterList = "chapter-list"
   /** chapter-list/count */
@@ -457,6 +524,8 @@ struct MPVProperty {
   static func voPassesTYPENSamplesM(_ n: Int) -> String {
     return "vo-passes/TYPE/\(n)/samples/M"
   }
+  /** perf-info */
+  static let perfInfo = "perf-info"
   /** video-bitrate */
   static let videoBitrate = "video-bitrate"
   /** audio-bitrate */
@@ -489,12 +558,16 @@ struct MPVProperty {
   static let encoderList = "encoder-list"
   /** demuxer-lavf-list */
   static let demuxerLavfList = "demuxer-lavf-list"
+  /** input-key-list */
+  static let inputKeyList = "input-key-list"
   /** mpv-version */
   static let mpvVersion = "mpv-version"
   /** mpv-configuration */
   static let mpvConfiguration = "mpv-configuration"
   /** ffmpeg-version */
   static let ffmpegVersion = "ffmpeg-version"
+  /** libass-version */
+  static let libassVersion = "libass-version"
   /** options/<name> */
   static func options(_ name: String) -> String {
     return "options/\(name)"

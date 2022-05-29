@@ -49,9 +49,9 @@ typedef struct {
  * Adjust frame number for NTSC drop frame time code.
  *
  * @param framenum frame number to adjust
- * @param fps      frame per second, 30 or 60
+ * @param fps      frame per second, multiples of 30
  * @return         adjusted frame number
- * @warning        adjustment is only valid in NTSC 29.97 and 59.94
+ * @warning        adjustment is only valid for multiples of NTSC 29.97
  */
 int av_timecode_adjust_ntsc_framenum2(int framenum, int fps);
 
@@ -62,13 +62,38 @@ int av_timecode_adjust_ntsc_framenum2(int framenum, int fps);
  * @param framenum frame number
  * @return         the SMPTE binary representation
  *
+ * See SMPTE ST 314M-2005 Sec 4.4.2.2.1 "Time code pack (TC)"
+ * the format description as follows:
+ * bits 0-5:   hours, in BCD(6bits)
+ * bits 6:     BGF1
+ * bits 7:     BGF2 (NTSC) or FIELD (PAL)
+ * bits 8-14:  minutes, in BCD(7bits)
+ * bits 15:    BGF0 (NTSC) or BGF2 (PAL)
+ * bits 16-22: seconds, in BCD(7bits)
+ * bits 23:    FIELD (NTSC) or BGF0 (PAL)
+ * bits 24-29: frames, in BCD(6bits)
+ * bits 30:    drop  frame flag (0: non drop,    1: drop)
+ * bits 31:    color frame flag (0: unsync mode, 1: sync mode)
+ * @note BCD numbers (6 or 7 bits): 4 or 5 lower bits for units, 2 higher bits for tens.
  * @note Frame number adjustment is automatically done in case of drop timecode,
  *       you do NOT have to call av_timecode_adjust_ntsc_framenum2().
  * @note The frame number is relative to tc->start.
- * @note Color frame (CF), binary group flags (BGF) and biphase mark polarity
- *       correction (PC) bits are set to zero.
+ * @note Color frame (CF) and binary group flags (BGF) bits are set to zero.
  */
 uint32_t av_timecode_get_smpte_from_framenum(const AVTimecode *tc, int framenum);
+
+/**
+ * Convert sei info to SMPTE 12M binary representation.
+ *
+ * @param rate     frame rate in rational form
+ * @param drop     drop flag
+ * @param hh       hour
+ * @param mm       minute
+ * @param ss       second
+ * @param ff       frame number
+ * @return         the SMPTE binary representation
+ */
+uint32_t av_timecode_get_smpte(AVRational rate, int drop, int hh, int mm, int ss, int ff);
 
 /**
  * Load timecode string in buf.
@@ -83,6 +108,23 @@ uint32_t av_timecode_get_smpte_from_framenum(const AVTimecode *tc, int framenum)
  * @note The frame number is relative to tc->start.
  */
 char *av_timecode_make_string(const AVTimecode *tc, char *buf, int framenum);
+
+/**
+ * Get the timecode string from the SMPTE timecode format.
+ *
+ * In contrast to av_timecode_make_smpte_tc_string this function supports 50/60
+ * fps timecodes by using the field bit.
+ *
+ * @param buf        destination buffer, must be at least AV_TIMECODE_STR_SIZE long
+ * @param rate       frame rate of the timecode
+ * @param tcsmpte    the 32-bit SMPTE timecode
+ * @param prevent_df prevent the use of a drop flag when it is known the DF bit
+ *                   is arbitrary
+ * @param skip_field prevent the use of a field flag when it is known the field
+ *                   bit is arbitrary (e.g. because it is used as PC flag)
+ * @return           the buf parameter
+ */
+char *av_timecode_make_smpte_tc_string2(char *buf, AVRational rate, uint32_t tcsmpte, int prevent_df, int skip_field);
 
 /**
  * Get the timecode string from the SMPTE timecode format.
@@ -117,6 +159,23 @@ char *av_timecode_make_mpeg_tc_string(char *buf, uint32_t tc25bit);
  * @return            0 on success, AVERROR otherwise
  */
 int av_timecode_init(AVTimecode *tc, AVRational rate, int flags, int frame_start, void *log_ctx);
+
+/**
+ * Init a timecode struct from the passed timecode components.
+ *
+ * @param log_ctx     a pointer to an arbitrary struct of which the first field
+ *                    is a pointer to an AVClass struct (used for av_log)
+ * @param tc          pointer to an allocated AVTimecode
+ * @param rate        frame rate in rational form
+ * @param flags       miscellaneous flags such as drop frame, +24 hours, ...
+ *                    (see AVTimecodeFlag)
+ * @param hh          hours
+ * @param mm          minutes
+ * @param ss          seconds
+ * @param ff          frames
+ * @return            0 on success, AVERROR otherwise
+ */
+int av_timecode_init_from_components(AVTimecode *tc, AVRational rate, int flags, int hh, int mm, int ss, int ff, void *log_ctx);
 
 /**
  * Parse timecode representation (hh:mm:ss[:;.]ff).

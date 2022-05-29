@@ -16,13 +16,26 @@
 "general.username" = "Username";
 "general.password" = "Password";
 
+// Guide Window
+"guide.highlights" = "Highlights";
+"guide.basic_settings" = "Basic Settings";
+"guide.faq" = "Frequently Asked Questions";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffering… %d%%";
 "main.opening_stream" = "Opening stream…";
+"osc.precision" = "Precision";
+"osc.1s" = "1 second";
+"osc.100ms" = "100 milliseconds";
+"osc.10ms" = "10 milliseconds";
+"osc.1ms" = "1 millisecond";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Default";
 "quicksetting.item_none" = "None";
+"quicksetting.hwdec" = "Hardware Decoding";
+"quicksetting.deinterlace" = "Deinterlace";
+"quicksetting.hdr" = "HDR";
 
 // OSDMessage.swift
 "osd.pause" = "Pause";
@@ -33,6 +46,7 @@
 "osd.crop" = "Crop: %@";
 "osd.rotate" = "Rotate: %i°";
 "osd.deinterlace" = "Deinterlace: %@";
+"osd.hwdec" = "Hardware Decoding: %@";
 "osd.audio_delay.nodelay" = "Audio Delay: No Delay";
 "osd.audio_delay.later" = "Audio Delay: %.2fs Later";
 "osd.audio_delay.earlier" = "Audio Delay: %.2fs Earlier";
@@ -68,6 +82,8 @@
 "osd.canceled" = "Canceled";
 "osd.filter_added" = "Added Filter: %@";
 "osd.filter_removed" = "Removed Filter";
+"osd.file_loop" = "File Loop: %@";
+"osd.playlist_loop" = "Playlist Loop: %@";
 
 "preference.title" = "Preferences";
 "preference.general" = "General";
@@ -86,6 +102,8 @@
 
 "preference.key_binding_hint_1" = "To edit key bindings in current configuration file, click \"Duplicate…\" button first to create a copy.";
 "preference.key_binding_hint_2" = "Double click a row at the right side to edit the corresponding key binding.";
+
+"preference.enable_adv_settings" = "Enable advanced settings";
 
 "menu.volume" = "Volume: %d";
 "menu.audio_delay" = "Audio Delay: %.2fs";
@@ -109,6 +127,8 @@
 "menu.sub_delay_up" = "Subtitle Delay + %.1fs";
 "menu.sub_delay_down" = "Subtitle Delay - %.1fs";
 
+"menu.crop_custom" = "Custom...";
+
 "track.none" = "<None>";
 
 "subtrack.no_loaded" = "No Subtitles Loaded";
@@ -116,7 +136,6 @@
 
 // Alerts
 "alert.beta_channel.title" = "Receive Updates for Beta Versions";
-"alert.beta_channel.message" = "IINA v1.0 is coming! Would you like to help us to test out beta versions? \n\nYou can change this behavior at anytime in Preferences - General.";
 
 "alert.title_error" = "Error";
 "alert.title_warning" = "Warning";
@@ -257,6 +276,16 @@
 "osc_toolbar.music_mode" = "Enter music mode";
 "osc_toolbar.sub_track" = "Choose subtitle track";
 
+"mini_player.album_art" = "Toggle album art";
+"mini_player.loop" = "Repeat";
+"mini_player.shuffle" = "Shuffle";
+"mini_player.remove" = "Remove from playlist";
+"mini_player.add" = "Add to playlist";
+"mini_player.delete" = "Delete all tracks from playlist";
+"mini_player.volume" = "Volume";
+"mini_player.close" = "Close music mode";
+"mini_player.back" = "Return to video mode";
+
 // Touch bar
 
 "touchbar.ahead_15" = "15sec Ahead";
@@ -272,5 +301,5 @@
 "touchbar.play_pause" = "Play / Pause";
 "touchbar.seek" = "Seek";
 "touchbar.time" = "Time Position";
-"touchbar.remainingTime" = "Remaining Time";
+"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
 "touchbar.toggle_pip" = "Toggle Picture-in-Picture";

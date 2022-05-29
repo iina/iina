@@ -5,7 +5,7 @@
 "BIz-NQ-0qD.title" = "<a href=\"mailto:developers@iina.io\">メール</a> または <a href=\"https://github.com/iina/iina/issues\">GitHub issue</a>に報告してください。";
 
 /* Class = "NSTextFieldCell"; title = "Open URL…"; ObjectID = "FKG-Tz-TCV"; */
-"FKG-Tz-TCV.title" = "URLから開く…";
+"FKG-Tz-TCV.title" = "URLを開く…";
 
 /* Class = "NSTextFieldCell"; title = "You are using a beta version of IINA"; ObjectID = "H7D-2H-wQn"; */
 "H7D-2H-wQn.title" = "ベータ版のIINAを利用中です";
@@ -23,4 +23,4 @@
 "qsU-lZ-WQq.title" = "開く…";
 
 /* Class = "NSTextFieldCell"; title = "Want to rollback?"; ObjectID = "s3U-4u-gYp"; */
-"s3U-4u-gYp.title" = "以前のバージョンに戻したいですか？";
+"s3U-4u-gYp.title" = "安定版に戻しますか？";

@@ -10,13 +10,13 @@
 "cmd.seek" = "Posunout";
 "cmd.revert-seek" = "Odvolat posunutí";
 "cmd.set" = "Nastavit";
-"cmd.cycle" = "Opakovat";
+"cmd.cycle" = "Přepnout";
 "cmd.cycle-values" = "Opakovat";
 "cmd.add" = "Změnit";
 "cmd.multiply" = "Znásobit";
 "cmd.frame-step" = "Další snímek";
 "cmd.frame-back-step" = "Předchozí snímek";
-"cmd.ab-loop" = "A-B smyčka";
+"cmd.ab-loop" = "Smyčka";
 "cmd.sub-seek" = "Posunutí titulků";
 "cmd.playlist-next" = "Další soubor";
 "cmd.playlist-prev" = "Předchozí soubor";
@@ -58,7 +58,7 @@
 "iina.save-downloaded-sub" = "Uložit stažené titulky";
 
 "yes" = "Ano";
-"no" = "Ne";
+"no" = "vypnuto";
 "to" = "na";
 "by" = "pomocí";
 "in" = "v";
@@ -77,40 +77,40 @@
 "absolute+keyframe" = "s (snímek)";
 "absolute-percent+keyframe" = "% (snímek)";
 
-"opt.pause" = "Pozastavit";
+"opt.pause" = "pozastavit";
 "opt.speed" = "Rychlost";
 
-"opt.window-scale" = "Poměr stran okna";
+"opt.window-scale" = "poměr stran okna";
 
 "opt.video" = "Video stopa";
-"opt.video-aspect" = "Poměr stran videa";
+"opt.video-aspect" = "poměr stran videa";
 "opt.contrast" = "Kontrast";
 "opt.brightness" = "Jas";
 "opt.gamma" = "Gama";
 "opt.saturation" = "Saturace";
-"opt.deinterlace" = "Odebrat prokládání";
+"opt.deinterlace" = "odebrat prokládání";
 
 "opt.audio" = "Zvuková stopa";
 "opt.volume" = "Hlasitost";
-"opt.mute" = "Ztlumit";
+"opt.mute" = "ztlumit";
 "opt.audio-delay" = "Zpoždění zvuku";
 
-"opt.sub" = "Stopa titulků";
+"opt.sub" = "stopa titulků";
 "opt.sub-delay" = "Zpoždění titulků";
 "opt.sub-pos" = "Umístění titulků";
 "opt.sub-scale" = "Velikost titulků";
-"opt.sub-visibility" = "Zobrazení titulků";
-"opt.sub-ass-style-override" = "Přepsat ASS styl";
+"opt.sub-visibility" = "zobrazení titulků";
+"opt.sub-ass-style-override" = "přepsat ASS styl";
 
 "opt.fullscreen" = "Režim celé obrazovky";
-"opt.ontop" = "Plovoucí v popředí";
+"opt.ontop" = "plovoucí v popředí";
 
 "opt.chapter" = "Kapitola";
 
 "read.set" = "Nastavit {{property}} na {{value}}";
 "read.add" = "{{property}} {{value}}";
 "read.multiply" = "Znásobit {{property}} {{factor}}x";
-"read.cycle" = "Opakovat {{property}}{{#dir_down}}{{/dir_down}}";
+"read.cycle" = "Přepnout {{property}}{{#dir_down}}{{/dir_down}}";
 "read.cycle-values" = "Opakovat {{property}} v ({{{values}}})";
 "read.seek" = "Posunout {{#fwd}}vpřed{{/fwd}}{{#bwd}}vzad{{/bwd}}{{#abs}}na{{/abs}} {{value}}{{#sec}} s{{/sec}}{{#per}}%{{/per}} {{#exact}}(přesně){{/exact}}{{#kf}}(snímek){{/kf}}";
 "read.sub-seek" = "Posunout na {{#skip_1}}další{{/skip_1}}{{#skip_-1}}předchozí{{/skip_-1}} titulky";

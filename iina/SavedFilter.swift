@@ -32,6 +32,10 @@ class SavedFilter: NSObject {
   var shortcutKey: String
   var shortcutKeyModifiers: NSEvent.ModifierFlags
 
+  override var debugDescription: String {
+    Mirror(reflecting: self).children.map({"\($0.label!)=\($0.value)"}).joined(separator: ", ")
+  }
+
   init(name: String, filterString: String, shortcutKey: String, modifiers: NSEvent.ModifierFlags) {
     self.name = name
     self.filterString = filterString

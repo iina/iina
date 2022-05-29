@@ -162,8 +162,8 @@ enum AVFrameSideDataType {
     /**
      * Timecode which conforms to SMPTE ST 12-1. The data is an array of 4 uint32_t
      * where the first uint32_t describes how many (1-3) of the other timecodes are used.
-     * The timecode format is described in the av_timecode_get_smpte_from_framenum()
-     * function in libavutil/timecode.c.
+     * The timecode format is described in the documentation of av_timecode_get_smpte_from_framenum()
+     * function in libavutil/timecode.h.
      */
     AV_FRAME_DATA_S12M_TIMECODE,
 
@@ -179,6 +179,25 @@ enum AVFrameSideDataType {
      * array element is implied by AVFrameSideData.size / AVRegionOfInterest.self_size.
      */
     AV_FRAME_DATA_REGIONS_OF_INTEREST,
+
+    /**
+     * Encoding parameters for a video frame, as described by AVVideoEncParams.
+     */
+    AV_FRAME_DATA_VIDEO_ENC_PARAMS,
+
+    /**
+     * User data unregistered metadata associated with a video frame.
+     * This is the H.26[45] UDU SEI message, and shouldn't be used for any other purpose
+     * The data is stored as uint8_t in AVFrameSideData.data which is 16 bytes of
+     * uuid_iso_iec_11578 followed by AVFrameSideData.size - 16 bytes of user_data_payload_byte.
+     */
+    AV_FRAME_DATA_SEI_UNREGISTERED,
+
+    /**
+     * Film grain parameters for a frame, described by AVFilmGrainParams.
+     * Must be present for every frame which should have film grain applied.
+     */
+    AV_FRAME_DATA_FILM_GRAIN_PARAMS,
 };
 
 enum AVActiveFormatDescription {
@@ -201,7 +220,11 @@ enum AVActiveFormatDescription {
 typedef struct AVFrameSideData {
     enum AVFrameSideDataType type;
     uint8_t *data;
+#if FF_API_BUFFER_SIZE_T
     int      size;
+#else
+    size_t   size;
+#endif
     AVDictionary *metadata;
     AVBufferRef *buf;
 } AVFrameSideData;
@@ -894,7 +917,11 @@ AVBufferRef *av_frame_get_plane_buffer(AVFrame *frame, int plane);
  */
 AVFrameSideData *av_frame_new_side_data(AVFrame *frame,
                                         enum AVFrameSideDataType type,
+#if FF_API_BUFFER_SIZE_T
                                         int size);
+#else
+                                        size_t size);
+#endif
 
 /**
  * Add a new side data to a frame from an existing AVBufferRef
@@ -920,8 +947,7 @@ AVFrameSideData *av_frame_get_side_data(const AVFrame *frame,
                                         enum AVFrameSideDataType type);
 
 /**
- * If side data of the supplied type exists in the frame, free it and remove it
- * from the frame.
+ * Remove and free all side data instances of the given type.
  */
 void av_frame_remove_side_data(AVFrame *frame, enum AVFrameSideDataType type);
 

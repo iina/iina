@@ -90,10 +90,11 @@ extension MainMenuActionHandler {
   }
 
   @objc func menuStep(_ sender: NSMenuItem) {
+    let seconds = Double(abs((sender.representedObject as? Int) ?? 5))
     if sender.tag == 0 { // -> 5s
-      player.seek(relativeSecond: 5, option: .relative)
+      player.seek(relativeSecond: seconds, option: .relative)
     } else if sender.tag == 1 { // <- 5s
-      player.seek(relativeSecond: -5, option: .relative)
+      player.seek(relativeSecond: -seconds, option: .relative)
     }
   }
 
@@ -197,6 +198,12 @@ extension MainMenuActionHandler {
 
   @objc func menuChangeCrop(_ sender: NSMenuItem) {
     if let cropStr = sender.representedObject as? String {
+      if cropStr == "Custom" {
+        player.mainWindow.hideSideBar {
+          self.player.mainWindow.enterInteractiveMode(.crop, selectWholeVideoByDefault: true)
+        }
+        return
+      }
       player.setCrop(fromString: cropStr)
     } else {
       Logger.log("sender.representedObject is not a string in menuChangeCrop()", level: .error)

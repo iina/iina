@@ -34,8 +34,8 @@
 /* Class = "NSTextFieldCell"; title = "Middle click to:"; ObjectID = "Gyd-Qt-FEo"; */
 "Gyd-Qt-FEo.title" = "Środkowy przycisk:";
 
-/* Class = "NSButtonCell"; title = "Acccepts first mouse"; ObjectID = "gZK-ry-lQs"; */
-"gZK-ry-lQs.title" = "Accepts first mouse click when not focused";
+/* Class = "NSButtonCell"; title = "Accepts first mouse"; ObjectID = "gZK-ry-lQs"; */
+"gZK-ry-lQs.title" = "Akceptuje pierwsze kliknięcie myszki, gdy nie jest skoncentrowane";
 
 /* Class = "NSMenuItem"; title = "Fullscreen"; ObjectID = "Hm3-dh-jgb"; */
 "Hm3-dh-jgb.title" = "Pełny ekran";
@@ -126,3 +126,12 @@
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "wkV-Gq-B0T"; */
 "wkV-Gq-B0T.title" = "--";
+
+/* Class = "NSMenuItem"; title = "Toggle Picture-in-Picture"; ObjectID = "rvS-xA-7bv"; */
+"rvS-xA-7bv.title" = "Przełącz tryb Obraz-w-obrazie";
+
+/* Class = "NSMenuItem"; title = "Toggle Picture-in-Picture"; ObjectID = "ibM-4r-SQA"; */
+"ibM-4r-SQA.title" = "Przełącz tryb Obraz-w-obrazie";
+
+/* Class = "NSMenuItem"; title = "Toggle Picture-in-Picture"; ObjectID = "3Pm-nn-HpB"; */
+"3Pm-nn-HpB.title" = "Przełącz tryb Obraz-w-obrazie";

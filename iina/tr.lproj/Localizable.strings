@@ -16,13 +16,26 @@
 "general.username" = "Kullanıcı Adı";
 "general.password" = "Şifre";
 
+// Guide Window
+"guide.highlights" = "Vurgulamalar";
+"guide.basic_settings" = "Temel Ayarlar";
+"guide.faq" = "Sık Sorulan Sorular";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Ara belleğe alınıyor... %d%%";
 "main.opening_stream" = "Akış açılıyor...";
+"osc.precision" = "Hassasiyet";
+"osc.1s" = "1 saniye";
+"osc.100ms" = "100 milisaniye";
+"osc.10ms" = "10 milisaniye";
+"osc.1ms" = "1 milisaniye";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Varsayılan";
 "quicksetting.item_none" = "Hiçbiri";
+"quicksetting.hwdec" = "Donanımsal Kod Çözücü";
+"quicksetting.deinterlace" = "Taramasızlık";
+"quicksetting.hdr" = "HDR";
 
 // OSDMessage.swift
 "osd.pause" = "Duraklat";
@@ -33,6 +46,7 @@
 "osd.crop" = "Kırp: %@";
 "osd.rotate" = "Döndür: %i°";
 "osd.deinterlace" = "Taramasızlık: %@";
+"osd.hwdec" = "Donanımsal Kod Çözücü: %@";
 "osd.audio_delay.nodelay" = "Ses Gecikmesi: Gecikme Yok";
 "osd.audio_delay.later" = "Ses Gecikmesi: %.2f sn Geç";
 "osd.audio_delay.earlier" = "Ses Gecikmesi: %.2f sn Erken";
@@ -57,7 +71,7 @@
 "osd.video_eq.saturation" = "Doygunluk: %i";
 "osd.video_eq.brightness" = "Parlaklık: %i";
 "osd.find_online_sub" = "Çevrimiçi altyazılar bulunuyor...";
-"osd.find_online_sub.source" = "şu siteden";
+"osd.find_online_sub.source" = "şu siteden:";
 "osd.sub_not_found" = "Altyazı bulunamadı";
 "osd.sub_found" = "%d altyazı bulundu. İndiriliyor…";
 "osd.sub_downloaded" = "Altyazı indirildi";
@@ -87,6 +101,8 @@
 "preference.key_binding_hint_1" = "Geçerli yapılandırma dosyasındaki kestirmeleri düzenlemek için, önce \"Çoğalt ...\" düğmesine tıklayarak kopya oluşturun.";
 "preference.key_binding_hint_2" = "İlgili kestirmeyi düzenlemek için sağ taraftaki bir satırı çift tıklayın.";
 
+"preference.enable_adv_settings" = "Gelişmiş ayarları etkinleştir";
+
 "menu.volume" = "Ses Seviyesi: %d";
 "menu.audio_delay" = "Ses Gecikmesi: %.2f sn";
 "menu.sub_delay" = "Altyazı Gecikmesi: %.2f sn";
@@ -98,16 +114,18 @@
 "menu.resume" = "Sürdür";
 "menu.speed" = "Hız: %.2fx";
 
-"menu.seek_forward" = "%.0fs ileriye sar";
-"menu.seek_backward" = "%.0fs geriye sar";
-"menu.speed_up" = "Hızı %.1fx ayarına yükselt";
-"menu.speed_down" = "Hızı %.1fx ayarına düşür";
+"menu.seek_forward" = "%.0f sn İleriye Sar";
+"menu.seek_backward" = "%.0f sn Geriye Sar";
+"menu.speed_up" = "%.1fx Hızlandır";
+"menu.speed_down" = "%.1fx Yavaşlat";
 "menu.volume_up" = "Ses Seviyesi + %.0f%%";
 "menu.volume_down" = "Ses Seviyesi - %.0f%%";
 "menu.audio_delay_up" = "Ses Gecikmesi + %.1f sn";
 "menu.audio_delay_down" = "Ses Gecikmesi - %.1f sn";
 "menu.sub_delay_up" = "Altyazı Gecikmesi + %.1f sn";
 "menu.sub_delay_down" = "Altyazı Gecikmesi - %.1f sn";
+
+"menu.crop_custom" = "Özel...";
 
 "track.none" = "<Hiçbiri>";
 
@@ -116,7 +134,6 @@
 
 // Alerts
 "alert.beta_channel.title" = "Beta Sürümler için Güncellemeleri Al";
-"alert.beta_channel.message" = "IINA v1.0 geliyor! Beta sürümlerinde yardım etmek ister misiniz?\n\nBu ayarı Tercihler - Genel sekmesinden istediğiniz zaman değiştirebilirsiniz.";
 
 "alert.title_error" = "Hata";
 "alert.title_warning" = "Uyarı";
@@ -257,12 +274,22 @@
 "osc_toolbar.music_mode" = "Müzik moduna geç";
 "osc_toolbar.sub_track" = "Altyazı izini seç";
 
+"mini_player.album_art" = "Albüm kapağını göster";
+"mini_player.loop" = "Tekrarla";
+"mini_player.shuffle" = "Karıştır";
+"mini_player.remove" = "Şarkı listesinden kaldır";
+"mini_player.add" = "Oynatma listesine ekle";
+"mini_player.delete" = "Tüm izleri oynatma listesinden kaldır";
+"mini_player.volume" = "Ses Seviyesi";
+"mini_player.close" = "Müzik modunu kapat";
+"mini_player.back" = "Video moduna geri dön";
+
 // Touch bar
 
 "touchbar.ahead_15" = "15sn ileriye";
 "touchbar.ahead_30" = "30sn ileriye";
-"touchbar.back_15" = "15sn geriye";
-"touchbar.back_30" = "30sn geriye";
+"touchbar.back_15" = "15 sn Geri";
+"touchbar.back_30" = "30 sn Geri";
 "touchbar.next_video" = "Sıradaki Video";
 "touchbar.prev_video" = "Önceki Video";
 "touchbar.increase_volume" = "Ses Seviyesi +";
@@ -272,5 +299,5 @@
 "touchbar.play_pause" = "Oynat / Duraklat";
 "touchbar.seek" = "Sar";
 "touchbar.time" = "Zaman Pozisyonu";
-"touchbar.remainingTime" = "Kalan Zaman";
+"touchbar.remainingTimeOrTotalDuration" = "Kalan Zaman / Toplam Süre";
 "touchbar.toggle_pip" = "Resim İçinde Resim'i Aç/Kapa";

@@ -9,6 +9,7 @@
 import Cocoa
 
 class MainWindow: NSWindow {
+  var forceKeyAndMain = false
 
   override func cancelOperation(_ sender: Any?) {
     let controller = windowController as! MainWindowController
@@ -19,4 +20,11 @@ class MainWindow: NSWindow {
     }
   }
 
+  override var canBecomeKey: Bool {
+    forceKeyAndMain ? true : super.canBecomeKey
+  }
+  
+  override var canBecomeMain: Bool {
+    forceKeyAndMain ? true : super.canBecomeMain
+  }
 }

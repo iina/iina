@@ -1,0 +1,116 @@
+/*
+  KeyBinding.strings
+  iina
+
+  Created by lhc on 4/2/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+"cmd.ignore" = "Sivuuta";
+"cmd.seek" = "Etsi";
+"cmd.revert-seek" = "Palauta etsintä";
+"cmd.set" = "Aseta";
+"cmd.cycle" = "Sykli";
+"cmd.cycle-values" = "Kierrä";
+"cmd.add" = "Muuta";
+"cmd.multiply" = "Kerro";
+"cmd.frame-step" = "Seuraava kuva";
+"cmd.frame-back-step" = "Edellinen kuva";
+"cmd.ab-loop" = "A–B-silmukka";
+"cmd.sub-seek" = "Tekstityksen haku";
+"cmd.playlist-next" = "Seuraava media";
+"cmd.playlist-prev" = "Edellinen media";
+"cmd.playlist-move" = "Siirrä soittolista";
+"cmd.playlist-clear" = "Tyhjennä soittolista";
+"cmd.playlist-remove" = "Poista nykyinen";
+"cmd.playlist-shuffle" = "Sekoita";
+"cmd.write-watch-later-config" = "Tallenna toistohistoria";
+"cmd.stop" = "Pysäytä";
+"cmd.quit" = "Lopeta";
+"cmd.quit-watch-later" = "Lopeta (tallenna edistyminen)";
+"cmd.screenshot" = "Näyttökuva";
+"cmd.screenshot-to-file" = "Näyttökuva tiedostoon";
+"cmd.loadfile" = "Lataa tiedosto";
+"cmd.loadlist" = "Lataa soittolista";
+"cmd.run" = "Suorita";
+
+"iina.flip" = "Käännä";
+"iina.mirror" = "Peilaa";
+
+"iina.toggle-pip" = "Vaihda kuva kuvassa -tilaan";
+"iina.toggle-music-mode" = "Vaihda musiikkitilaan";
+"iina.open-file" = "Avaa tiedosto";
+"iina.open-url" = "Avaa URL";
+"iina.video-panel" = "Videopaneeli";
+"iina.audio-panel" = "Äänipaneeli";
+"iina.sub-panel" = "Tekstityspaneeli";
+"iina.playlist-panel" = "Soittolistapaneeli";
+"iina.chapter-panel" = "Kappalepaneeli";
+"iina.bigger-window" = "Suurempi ikkuna";
+"iina.smaller-window" = "Pienempi ikkuna";
+"iina.fit-to-screen" = "Sovita näytölle";
+"iina.toggle-flip" = "Vaihda kääntö";
+"iina.toggle-mirror" = "Vaihda peilaus";
+"iina.save-playlist" = "Tallenna nykyinen soittolista";
+"iina.delete-current-file" = "Poista nykyinen tiedosto";
+"iina.delete-current-file-hard" = "Poista nykyinen tiedosto suoraan siirtämättä roskakoriin";
+"iina.find-online-subs" = "Etsi tekstityksiä verkosta";
+"iina.save-downloaded-sub" = "Tallenna ladattu tekstitys";
+
+"yes" = "Kyllä";
+"no" = "Ei";
+"to" = "arvoon";
+"by" = "arvolla";
+"in" = "arvossa";
+"add" = "lisäten";
+"minus" = "vähentäen";
+"forward" = "eteenpäin";
+"backward" = "taaksepäin";
+"seek-to" = "arvoon";
+
+"relative" = "s";
+"absolute" = "s";
+"absolute-percent" = "%";
+"relative-percent" = "%";
+"relative+exact" = "s (tarkka)";
+"relative-percent+exact" = "% (tarkka)";
+"absolute+keyframe" = "s (avainkehys)";
+"absolute-percent+keyframe" = "% (avainkehys)";
+
+"opt.pause" = "Tauko";
+"opt.speed" = "Nopeus";
+
+"opt.window-scale" = "Ikkunan skaalaus";
+
+"opt.video" = "Videoraita";
+"opt.video-aspect" = "Kuvasuhde";
+"opt.contrast" = "Kontrasti";
+"opt.brightness" = "Kirkkaus";
+"opt.gamma" = "Gamma";
+"opt.saturation" = "Värikylläisyys";
+"opt.deinterlace" = "Lomituksen poisto";
+
+"opt.audio" = "Ääniraita";
+"opt.volume" = "Äänenvoimakkuus";
+"opt.mute" = "Mykistä";
+"opt.audio-delay" = "Äänen viive";
+
+"opt.sub" = "Tekstitysraita";
+"opt.sub-delay" = "Tekstityksen viive";
+"opt.sub-pos" = "Tekstityksen sijainti";
+"opt.sub-scale" = "Tekstityksen skaalaus";
+"opt.sub-visibility" = "Subtitle visibility";
+"opt.sub-ass-style-override" = "ASS style override";
+
+"opt.fullscreen" = "Fullscreen";
+"opt.ontop" = "Float on top";
+
+"opt.chapter" = "Chapter";
+
+"read.set" = "Set {{property}} to {{value}}";
+"read.add" = "{{property}} {{value}}";
+"read.multiply" = "Multiply {{property}} by {{factor}}x";
+"read.cycle" = "Cycle {{property}}{{#dir_down}} Downwards{{/dir_down}}";
+"read.cycle-values" = "Cycle {{property}} in ({{{values}}})";
+"read.seek" = "Seek {{#fwd}}forward{{/fwd}}{{#bwd}}backward{{/bwd}}{{#abs}}to{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";
+"read.sub-seek" = "Seek to {{#skip_1}}next{{/skip_1}}{{#skip_-1}}previous{{/skip_-1}} subtitle";

@@ -10,6 +10,9 @@
 /* Class = "NSTextFieldCell"; title = "Number of threads:"; ObjectID = "50C-1R-wlJ"; */
 "50C-1R-wlJ.title" = "Número de threads:";
 
+/* Class = "NSButtonCell"; title = "Force dedicated GPU"; ObjectID = "YUr-aJ-xfC"; */
+"YUr-aJ-xfC.title" = "Forçar GPU dedicada";
+
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "bxW-np-SGm"; */
 "bxW-np-SGm.title" = "Padrão: 0 (Auto)";
 
@@ -18,6 +21,9 @@
 
 /* Class = "NSButtonCell"; title = "Initial volume:"; ObjectID = "g4c-vG-URh"; */
 "g4c-vG-URh.title" = "Volume Inicial:";
+
+/* Class = "NSTextFieldCell"; title = "Always use the dedicated GPU for rendering (if exists). This can improve performance but may result in poor battery life."; ObjectID = "gCv-sJ-uQJ"; */
+"gCv-sJ-uQJ.title" = "Sempre use a GPU dedicada para a renderização (se existir). Isso pode melhorar o desempenho, mas pode reduzir a duração da bateria.";
 
 /* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
 "m5P-5f-5uo.title" = "Vídeo:";
@@ -32,7 +38,7 @@
 "sLR-vV-xn2.title" = "Dispositivo de áudio preferido:";
 
 /* Class = "NSTextFieldCell"; title = "Audio:"; ObjectID = "sV5-dL-MUt"; */
-"sV5-dL-MUt.title" = "Audio:";
+"sV5-dL-MUt.title" = "Áudio:";
 
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "tAQ-oU-1AJ"; */
 "tAQ-oU-1AJ.title" = "Auto";
@@ -44,4 +50,4 @@
 "up6-6A-4sn.title" = "saída S/PDIF:";
 
 /* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "wjt-O6-KbC"; */
-"wjt-O6-KbC.title" = "Linguagem preferida:";
+"wjt-O6-KbC.title" = "Idioma preferido:";

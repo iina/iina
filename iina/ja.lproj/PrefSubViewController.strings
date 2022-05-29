@@ -50,7 +50,7 @@
 "CdS-9J-f2h.title" = " X:";
 
 /* Class = "NSTextFieldCell"; title = "Advanced"; ObjectID = "DUA-7H-Yje"; */
-"DUA-7H-Yje.title" = "詳細設定";
+"DUA-7H-Yje.title" = "高度な設定";
 
 /* Class = "NSMenuItem"; title = "Right"; ObjectID = "Gie-38-Kk4"; */
 "Gie-38-Kk4.title" = "右端";
@@ -62,7 +62,7 @@
 "LiG-iV-AQK.title" = "その他:";
 
 /* Class = "NSTextFieldCell"; title = "Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed."; ObjectID = "Luv-2B-9v8"; */
-"Luv-2B-9v8.title" = "ディレクトリはコロン (:) で区切られます。相対パスと末尾のワイルドカード (*) が使用できます。";
+"Luv-2B-9v8.title" = "ディレクトリーはコロン (:) で区切られます。相対パスと末尾のワイルドカード (*) が使用できます。";
 
 /* Class = "NSTextFieldCell"; title = "Please enter a comma-separated list of strings."; ObjectID = "Mk1-sv-QB8"; */
 "Mk1-sv-QB8.title" = "文字列はカンマ区切りで入力してください。";
@@ -74,7 +74,7 @@
 "Qda-dp-nhg.title" = "字幕テキスト:";
 
 /* Class = "NSTextFieldCell"; title = "Also search subtitles in following directories:"; ObjectID = "QsS-wD-2hY"; */
-"QsS-wD-2hY.title" = "字幕ファイルを探索するディレクトリ:";
+"QsS-wD-2hY.title" = "字幕ファイルを探索するディレクトリー:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "SIh-Sv-6XI"; */
 "SIh-Sv-6XI.title" = "色:";
@@ -89,7 +89,7 @@
 "WHk-sk-gmK.title" = "ログイン";
 
 /* Class = "NSTextFieldCell"; title = "Advanced"; ObjectID = "X7X-18-FJg"; */
-"X7X-18-FJg.title" = "詳細設定";
+"X7X-18-FJg.title" = "高度な設定";
 
 /* Class = "NSMenuItem"; title = "Detect intelligently by IINA"; ObjectID = "XiL-eE-jah"; */
 "XiL-eE-jah.title" = "IINAによる自動選択";
@@ -97,7 +97,7 @@
 /* Class = "NSTextFieldCell"; title = "Default encoding:"; ObjectID = "Y75-4k-2Du"; */
 "Y75-4k-2Du.title" = "デフォルトのエンコーディング:";
 
-/* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will works for both mpv and opensubtitles."; ObjectID = "Z2M-dh-eq1"; */
+/* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will work for both mpv and opensubtitles."; ObjectID = "Z2M-dh-eq1"; */
 "Z2M-dh-eq1.title" = "ISO639-2の言語コードをカンマで区切って使用してください。\nこの設定はmpvとopensubtitlesの両方に適用されます。";
 
 /* Class = "NSTextFieldCell"; title = "Blur:"; ObjectID = "aO9-D6-KG8"; */
@@ -173,10 +173,10 @@
 "xid-E9-FC9.title" = "色:";
 
 /* Class = "NSMenuItem"; title = "Subtitles containing media filename"; ObjectID = "y1E-JR-KRI"; */
-"y1E-JR-KRI.title" = "メディアのファイル名を含む字幕";
+"y1E-JR-KRI.title" = "名前にメディアのファイル名を含む字幕";
 
 /* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "zaE-bH-XfT"; */
-"zaE-bH-XfT.title" = "優先言語:";
+"zaE-bH-XfT.title" = "優先する言語:";
 
 /* Class = "NSMenuItem"; title = "Left"; ObjectID = "zml-kt-LN8"; */
 "zml-kt-LN8.title" = "左端";

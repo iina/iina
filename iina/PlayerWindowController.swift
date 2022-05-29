@@ -56,6 +56,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     .doubleClickAction,
     .horizontalScrollAction,
     .verticalScrollAction,
+    .playlistShowMetadata,
+    .playlistShowMetadataInMusicMode,
   ]
   
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -73,7 +75,6 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     case PK.alwaysFloatOnTop.rawValue:
       if let newValue = change[.newKey] as? Bool {
         if player.info.isPlaying {
-          self.isOntop = newValue
           setWindowFloatingOnTop(newValue)
         }
       }
@@ -104,6 +105,10 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       if let newValue = change[.newKey] as? Int {
         doubleClickAction = Preference.MouseClickAction(rawValue: newValue)!
       }
+    case PK.playlistShowMetadata.rawValue, PK.playlistShowMetadataInMusicMode.rawValue:
+      if player.isPlaylistVisible {
+        player.mainWindow.playlistView.playlistTableView.reloadData()
+      }
     default:
       return
     }
@@ -114,7 +119,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var playButton: NSButton!
   @IBOutlet weak var playSlider: NSSlider!
   @IBOutlet weak var rightLabel: DurationDisplayTextField!
-  @IBOutlet weak var leftLabel: NSTextField!
+  @IBOutlet weak var leftLabel: DurationDisplayTextField!
 
   /** Differentiate between single clicks and double clicks. */
   internal var singleClickTimer: Timer?
@@ -142,6 +147,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   internal var seekOverride = false
   internal var volumeOverride = false
 
+  internal var mouseActionDisabledViews: [NSView?] {[]}
+
   // MARK: - Initiaization
 
   override func windowDidLoad() {
@@ -164,26 +171,33 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     addObserver(to: .default, forName: .iinaMediaTitleChanged, object: player) { [unowned self] _ in
         self.updateTitle()
     }
-    
+
+    leftLabel.mode = .current
     rightLabel.mode = Preference.bool(for: .showRemainingTime) ? .remaining : .duration
-    
+
     updateVolume()
-    
+
     observedPrefKeys.forEach { key in
       UserDefaults.standard.addObserver(self, forKeyPath: key.rawValue, options: .new, context: nil)
     }
-    
+
     addObserver(to: .default, forName: .iinaFileLoaded, object: player) { [unowned self] _ in
       self.updateTitle()
     }
-    
+
     NSWorkspace.shared.notificationCenter.addObserver(forName: NSWorkspace.willSleepNotification, object: nil, queue: nil, using: { [unowned self] _ in
       if Preference.bool(for: .pauseWhenGoesToSleep) {
         self.player.pause()
       }
     })
+
+    if #available(macOS 10.15, *) {
+      addObserver(to: .default, forName: NSScreen.colorSpaceDidChangeNotification, object: nil) { [unowned self] noti in
+        player.refreshEdrMode()
+      }
+    }
   }
-  
+
   deinit {
     ObjcUtils.silenced {
       for key in self.observedPrefKeys {
@@ -191,7 +205,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       }
     }
   }
-  
+
   internal func addObserver(to notificationCenter: NotificationCenter, forName name: Notification.Name, object: Any? = nil, using block: @escaping (Notification) -> Void) {
     notificationCenter.addObserver(forName: name, object: object, queue: .main, using: block)
   }
@@ -249,6 +263,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   override func mouseUp(with event: NSEvent) {
+    guard !isMouseEvent(event, inAnyOf: mouseActionDisabledViews) else { return }
     if event.clickCount == 1 {
       if doubleClickAction == .none {
         performMouseAction(singleClickAction)
@@ -264,19 +279,21 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       performMouseAction(doubleClickAction)
     }
   }
-  
+
   override func rightMouseUp(with event: NSEvent) {
+    guard !isMouseEvent(event, inAnyOf: mouseActionDisabledViews) else { return }
     performMouseAction(Preference.enum(for: .rightClickAction))
   }
-  
+
   override func otherMouseUp(with event: NSEvent) {
+    guard !isMouseEvent(event, inAnyOf: mouseActionDisabledViews) else { return }
     if event.type == .otherMouseUp {
       performMouseAction(Preference.enum(for: .middleClickAction))
     } else {
       super.otherMouseUp(with: event)
     }
   }
-  
+
   internal func performMouseAction(_ action: Preference.MouseClickAction) {
     switch action {
     case .pause:
@@ -310,6 +327,10 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       scrollAction = .volume
     } else {
       scrollAction = scrollDirection == .horizontal ? horizontalScrollAction : verticalScrollAction
+      // show volume popover when volume seek begins and hide on end
+      if let miniPlayer = self as? MiniPlayerWindowController, scrollAction == .volume {
+        miniPlayer.handleVolumePopover(isTrackpadBegan, isTrackpadEnd, isMouse)
+      }
     }
 
     // pause video when seek begins
@@ -382,7 +403,6 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   
   func windowDidOpen() {
     if Preference.bool(for: .alwaysFloatOnTop) {
-      isOntop = true
       setWindowFloatingOnTop(true)
     }
     videoView.startDisplayLink()
@@ -393,7 +413,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   func windowDidBecomeMain(_ notification: Notification) {
     PlayerCore.lastActive = player
     if #available(macOS 10.13, *), RemoteCommandController.useSystemMediaControl {
-      NowPlayingInfoManager.updateState(player.info.isPaused ? .paused : .playing)
+      NowPlayingInfoManager.updateInfo(withTitle: true)
     }
     NotificationCenter.default.post(name: .iinaMainWindowChanged, object: nil)
   }
@@ -419,18 +439,29 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
   
   func updatePlayTime(withDuration: Bool, andProgressBar: Bool) {
-    guard loaded else { return }
-    guard let duration = player.info.videoDuration, let pos = player.info.videoPosition else {
-      Logger.fatal("video info not available")
+    // IINA listens for changes to mpv properties such as chapter that can occur during file loading
+    // resulting in this function being called before mpv has set its position and duration
+    // properties. Confirm the window and file have been loaded.
+    guard loaded, player.mpv.fileLoaded else { return }
+    // The mpv documentation for the duration property indicates mpv is not always able to determine
+    // the video duration in which case the property is not available.
+    guard let duration = player.info.videoDuration else {
+      Logger.log("Video duration not available")
+      return
     }
-    let percentage = (pos.second / duration.second) * 100
-    leftLabel.stringValue = pos.stringRepresentation
-    rightLabel.updateText(with: duration, given: pos)
+    guard let pos = player.info.videoPosition else {
+      Logger.log("Video position not available")
+      return
+    }
+    [leftLabel, rightLabel].forEach { $0.updateText(with: duration, given: pos) }
+    if #available(macOS 10.12.2, *) {
+      player.touchBarSupport.touchBarPosLabels.forEach { $0.updateText(with: duration, given: pos) }
+    }
     if andProgressBar {
+      let percentage = (pos.second / duration.second) * 100
       playSlider.doubleValue = percentage
       if #available(macOS 10.12.2, *) {
         player.touchBarSupport.touchBarPlaySlider?.setDoubleValueSafely(percentage)
-        player.touchBarSupport.touchBarPosLabels.forEach { $0.updateText(with: duration, given: pos) }
       }
     }
   }
@@ -441,9 +472,12 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   /** This method will not set `isOntop`! */
-  func setWindowFloatingOnTop(_ onTop: Bool) {
+  func setWindowFloatingOnTop(_ onTop: Bool, updateOnTopStatus: Bool = true) {
     guard let window = window else { return }
     window.level = onTop ? .iinaFloating : .normal
+    if (updateOnTopStatus) {
+      self.isOntop = onTop
+    }
   }
 
   // MARK: - IBActions

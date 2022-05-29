@@ -49,13 +49,24 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   @IBOutlet weak var artistAlbumLabel: ScrollingTextField!
   @IBOutlet weak var volumeLabel: NSTextField!
   @IBOutlet weak var defaultAlbumArt: NSView!
-
+  @IBOutlet weak var togglePlaylistButton: NSButton!
+  @IBOutlet weak var toggleAlbumArtButton: NSButton!
+  
   var isPlaylistVisible = false
   var isVideoVisible = true
 
   var videoViewAspectConstraint: NSLayoutConstraint?
 
   private var originalWindowFrame: NSRect!
+
+  lazy var hideVolumePopover: DispatchWorkItem = {
+    DispatchWorkItem {
+      self.volumePopover.animates = true
+      self.volumePopover.performClose(self)
+    }
+  }()
+
+  override var mouseActionDisabledViews: [NSView?] {[backgroundView, playlistWrapperView] as [NSView?]}
 
   // MARK: - Initialization
 
@@ -107,6 +118,13 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
 
     // switching UI
     controlView.alphaValue = 0
+    
+    // tool tips
+    togglePlaylistButton.toolTip = Preference.ToolBarButton.playlist.description()
+    toggleAlbumArtButton.toolTip = NSLocalizedString("mini_player.album_art", comment: "album_art")
+    volumeButton.toolTip = NSLocalizedString("mini_player.volume", comment: "volume")
+    closeButtonVE.toolTip = NSLocalizedString("mini_player.close", comment: "close")
+    backButtonVE.toolTip = NSLocalizedString("mini_player.back", comment: "back")
 
     if Preference.bool(for: .alwaysFloatOnTop) {
       setWindowFloatingOnTop(true)
@@ -137,21 +155,6 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   override func mouseDown(with event: NSEvent) {
     window?.makeFirstResponder(window)
     super.mouseDown(with: event)
-  }
-
-  override func mouseUp(with event: NSEvent) {
-    guard !isMouseEvent(event, inAnyOf: [backgroundView]) else { return }
-    super.mouseUp(with: event)
-  }
-
-  override func rightMouseUp(with event: NSEvent) {
-    guard !isMouseEvent(event, inAnyOf: [backgroundView]) else { return }
-    super.rightMouseUp(with: event)
-  }
-
-  override func otherMouseUp(with event: NSEvent) {
-    guard !isMouseEvent(event, inAnyOf: [backgroundView]) else { return }
-    super.otherMouseUp(with: event)
   }
 
   override func scrollWheel(with event: NSEvent) {
@@ -278,7 +281,22 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     guard loaded else { return }
     super.updateVolume()
     volumeLabel.intValue = Int32(player.info.volume)
-    volumeButton.image = player.info.isMuted ? NSImage(named: "mute") : NSImage(named: "volume")
+    if player.info.isMuted {
+      volumeButton.image = NSImage(named: "mute")
+    } else {
+      switch volumeLabel.intValue {
+        case 0:
+          volumeButton.image = NSImage(named: "volume-0")
+        case 1...33:
+          volumeButton.image = NSImage(named: "volume-1")
+        case 34...66:
+          volumeButton.image = NSImage(named: "volume-2")
+        case 67...1000:
+          volumeButton.image = NSImage(named: "volume")
+        default:
+          break
+      }
+    }
   }
 
   func updateVideoSize() {
@@ -315,6 +333,29 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     if NSWindow.windowNumber(at: NSEvent.mouseLocation, belowWindowWithWindowNumber: 0) != window!.windowNumber {
       hideControl()
     }
+  }
+
+  func handleVolumePopover(_ isTrackpadBegan: Bool, _ isTrackpadEnd: Bool, _ isMouse: Bool) {
+    hideVolumePopover.cancel()
+    hideVolumePopover = DispatchWorkItem {
+      self.volumePopover.animates = true
+      self.volumePopover.performClose(self)
+    }
+    if isTrackpadBegan {
+       // enabling animation here causes user not seeing their volume changes during popover transition
+       volumePopover.animates = false
+       volumePopover.show(relativeTo: volumeButton.bounds, of: volumeButton, preferredEdge: .minY)
+     } else if isTrackpadEnd {
+       DispatchQueue.main.asyncAfter(deadline: .now(), execute: hideVolumePopover)
+     } else if isMouse {
+       // if it's a mouse, simply show popover then hide after a while when user stops scrolling
+       if !volumePopover.isShown {
+         volumePopover.animates = false
+         volumePopover.show(relativeTo: volumeButton.bounds, of: volumeButton, preferredEdge: .minY)
+       }
+       let timeout = Preference.double(for: .osdAutoHideTimeout)
+       DispatchQueue.main.asyncAfter(deadline: .now() + timeout, execute: hideVolumePopover)
+     }
   }
 
   // MARK: - IBActions

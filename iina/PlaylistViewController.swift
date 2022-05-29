@@ -30,7 +30,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
   weak var player: PlayerCore!
 
-  /** Similiar to the one in `QuickSettingViewController`.
+  /** Similar to the one in `QuickSettingViewController`.
    Since IBOutlet is `nil` when the view is not loaded at first time,
    use this variable to cache which tab it need to switch to when the
    view is ready. The value will be handled after loaded.
@@ -60,7 +60,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   @IBOutlet weak var totalLengthLabel: NSTextField!
   @IBOutlet var subPopover: NSPopover!
   @IBOutlet var addFileMenu: NSMenu!
-
+  @IBOutlet weak var addBtn: NSButton!
+  @IBOutlet weak var removeBtn: NSButton!
+  
   private var playlistTotalLengthIsReady = false
   private var playlistTotalLength: Double? = nil
 
@@ -87,6 +89,12 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       $0?.image?.isTemplate = true
       $0?.alternateImage?.isTemplate = true
     }
+    
+    deleteBtn.toolTip = NSLocalizedString("mini_player.delete", comment: "delete")
+    loopBtn.toolTip = NSLocalizedString("mini_player.loop", comment: "loop")
+    shuffleBtn.toolTip = NSLocalizedString("mini_player.shuffle", comment: "shuffle")
+    addBtn.toolTip = NSLocalizedString("mini_player.add", comment: "add")
+    removeBtn.toolTip = NSLocalizedString("mini_player.remove", comment: "remove")
 
     hideTotalLength()
 
@@ -153,13 +161,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     totalLengthLabel.isHidden = false
     if playlistTableView.numberOfSelectedRows > 0 {
       let info = player.info
-      var selectedDuration = 0.0
-      player.playlistQueue.sync {
-        selectedDuration = playlistTableView.selectedRowIndexes
-          .compactMap { info.cachedVideoDurationAndProgress[info.playlist[$0].filename]?.duration }
-          .compactMap { $0 > 0 ? $0 : 0 }
-          .reduce(0, +)
-      }
+      let selectedDuration = info.calculateTotalDuration(playlistTableView.selectedRowIndexes)
       totalLengthLabel.stringValue = String(format: NSLocalizedString("playlist.total_length_with_selected", comment: "%@ of %@ selected"),
                                             VideoTime(selectedDuration).stringRepresentation,
                                             VideoTime(playlistTotalLength).stringRepresentation)
@@ -174,15 +176,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   }
 
   private func refreshTotalLength() {
-    var totalDuration: Double? = 0
-    for p in player.info.playlist {
-      if let duration = player.info.cachedVideoDurationAndProgress[p.filename]?.duration {
-        totalDuration! += duration > 0 ? duration : 0
-      } else {
-        totalDuration = nil
-        break
-      }
-    }
+    let totalDuration: Double? = player.info.calculateTotalDuration()
     if let duration = totalDuration {
       playlistTotalLengthIsReady = true
       playlistTotalLength = duration
@@ -195,7 +189,13 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       }
     }
   }
-
+    
+  func updateLoopBtnStatus() {
+    guard isViewLoaded else { return }
+    let loopStatus = player.mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
+    loopBtn.state = (loopStatus == "inf" || loopStatus == "force") ? .on : .off
+  }
+    
   // MARK: - Tab switching
 
   /** Switch tab (call from other objects) */
@@ -249,8 +249,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   @discardableResult
   func pasteFromPasteboard(_ tableView: NSTableView, row: Int, from pboard: NSPasteboard) -> Bool {
     if let paths = pboard.propertyList(forType: .nsFilenames) as? [String] {
-      let playableFiles = Utility.resolveURLs(player.getPlayableFiles(in: paths.map{
-        URL(string: $0) ?? URL(fileURLWithPath: $0)
+      let playableFiles = Utility.resolveURLs(player.getPlayableFiles(in: paths.map {
+        $0.hasPrefix("/") ? URL(fileURLWithPath: $0) : URL(string: $0)!
       }))
       if playableFiles.count == 0 {
         return false
@@ -468,28 +468,43 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         let cellView = v as! PlaylistTrackCellView
         // file name
         let filename = item.filenameForDisplay
-        let filenameWithoutExt: String = NSString(string: filename).deletingPathExtension
+        let displayStr: String = NSString(string: filename).deletingPathExtension
+
+        func getCachedMetadata() -> (artist: String, title: String)? {
+          guard Preference.bool(for: .playlistShowMetadata) else { return nil }
+          if Preference.bool(for: .playlistShowMetadataInMusicMode) && !player.isInMiniPlayer {
+            return nil
+          }
+          guard let metadata = info.getCachedMetadata(item.filename) else { return nil }
+          guard let artist = metadata.artist, let title = metadata.title else { return nil }
+          return (artist, title)
+        }
+
         if let prefix = player.info.currentVideosInfo.first(where: { $0.path == item.filename })?.prefix,
           !prefix.isEmpty,
-          prefix.count <= filenameWithoutExt.count,  // check whether prefix length > filename length
+          prefix.count <= displayStr.count,  // check whether prefix length > filename length
           prefix.count >= PrefixMinLength,
           filename.count > FilenameMinLength {
-          cellView.prefixBtn.hasPrefix = true
-          cellView.prefixBtn.text = prefix
-          cellView.textField?.stringValue = String(filename[filename.index(filename.startIndex, offsetBy: prefix.count)...])
+          cellView.setPrefix(prefix)
+          cellView.setTitle(String(filename[filename.index(filename.startIndex, offsetBy: prefix.count)...]))
         } else {
-          cellView.prefixBtn.hasPrefix = false
-          cellView.textField?.stringValue = filename
+          cellView.setTitle(filename)
         }
         // playback progress and duration
         cellView.durationLabel.font = NSFont.monospacedDigitSystemFont(ofSize: NSFont.smallSystemFontSize, weight: .regular)
         cellView.durationLabel.stringValue = ""
         player.playlistQueue.async {
-          if let cached = self.player.info.cachedVideoDurationAndProgress[item.filename],
+          if let (artist, title) = getCachedMetadata() {
+            DispatchQueue.main.async {
+              cellView.setTitle(title)
+              cellView.setAdditionalInfo(artist)
+            }
+          }
+          if let cached = self.player.info.getCachedVideoDurationAndProgress(item.filename),
             let duration = cached.duration {
             // if it's cached
             if duration > 0 {
-              // if FFmpeg got the duration succcessfully
+              // if FFmpeg got the duration successfully
               DispatchQueue.main.async {
                 cellView.durationLabel.stringValue = VideoTime(duration).stringRepresentation
                 if let progress = cached.progress {
@@ -502,10 +517,15 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
           } else {
             // get related data and schedule a reload
             if Preference.bool(for: .prefetchPlaylistVideoDuration) {
-              self.player.refreshCachedVideoProgress(forVideoPath: item.filename)
-              self.refreshTotalLength()
-              DispatchQueue.main.async {
-                self.playlistTableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(integersIn: 0...1))
+              self.player.refreshCachedVideoInfo(forVideoPath: item.filename)
+              // Only schedule a reload if data was obtained and cached to avoid looping
+              if let cached = self.player.info.getCachedVideoDurationAndProgress(item.filename),
+                  let duration = cached.duration, duration > 0 {
+                // if FFmpeg got the duration successfully
+                self.refreshTotalLength()
+                DispatchQueue.main.async {
+                  self.playlistTableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(integersIn: 0...1))
+                }
               }
             }
           }
@@ -513,12 +533,11 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         // sub button
         if !info.isMatchingSubtitles,
           let matchedSubs = player.info.matchedSubs[item.filename], !matchedSubs.isEmpty {
-          cellView.subBtn.isHidden = false
-          cellView.subBtnWidthConstraint.constant = 12
+          cellView.setDisplaySubButton(true)
         } else {
-          cellView.subBtn.isHidden = true
-          cellView.subBtnWidthConstraint.constant = 0
+          cellView.setDisplaySubButton(false)
         }
+        // not sure why this line exists, but let's keep it for now
         cellView.subBtn.image?.isTemplate = true
       }
       return v
@@ -538,7 +557,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       } else if identifier == .trackName {
         // right column
         let cellView = v as! ChapterTableCellView
-        cellView.textField?.stringValue = chapter.title.isEmpty ? "Chapter \(row)" : chapter.title
+        cellView.setTitle(chapter.title.isEmpty ? "Chapter \(row)" : chapter.title)
         cellView.durationTextField.stringValue = "\(chapter.time.stringRepresentation) → \(nextChapterTime.stringRepresentation)"
         return cellView
       } else {
@@ -742,18 +761,61 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
 
 class PlaylistTrackCellView: NSTableCellView {
-
   @IBOutlet weak var subBtn: NSButton!
   @IBOutlet weak var subBtnWidthConstraint: NSLayoutConstraint!
+  @IBOutlet weak var subBtnTrailingConstraint: NSLayoutConstraint!
   @IBOutlet weak var prefixBtn: PlaylistPrefixButton!
+  @IBOutlet weak var infoLabel: NSTextField!
+  @IBOutlet weak var infoLabelTrailingConstraint: NSLayoutConstraint!
   @IBOutlet weak var durationLabel: NSTextField!
   @IBOutlet weak var playbackProgressView: PlaylistPlaybackProgressView!
 
-  override func prepareForReuse() {
-     playbackProgressView.percentage = 0
-     playbackProgressView.needsDisplay = true
+  func setPrefix(_ prefix: String?) {
+    if let prefix = prefix {
+      prefixBtn.hasPrefix = true
+      prefixBtn.text = prefix
+    } else {
+      prefixBtn.hasPrefix = false
+    }
   }
 
+  func setDisplaySubButton(_ show: Bool) {
+    if show {
+      subBtn.isHidden = false
+      subBtnWidthConstraint.constant = 12
+      subBtnTrailingConstraint.constant = 4
+    } else {
+      subBtn.isHidden = true
+      subBtnWidthConstraint.constant = 0
+      subBtnTrailingConstraint.constant = 0
+    }
+  }
+
+  func setAdditionalInfo(_ string: String?) {
+    if let string = string {
+      infoLabel.isHidden = false
+      infoLabelTrailingConstraint.constant = 4
+      infoLabel.stringValue = string
+      infoLabel.toolTip = string
+    } else {
+      infoLabel.isHidden = true
+      infoLabelTrailingConstraint.constant = 0
+      infoLabel.stringValue = ""
+    }
+  }
+
+  func setTitle(_ title: String) {
+    textField?.stringValue = title
+    textField?.toolTip = title
+  }
+
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    playbackProgressView.percentage = 0
+    playbackProgressView.needsDisplay = true
+    setPrefix(nil)
+    setAdditionalInfo(nil)
+  }
 }
 
 
@@ -832,8 +894,11 @@ class SubPopoverViewController: NSViewController, NSTableViewDelegate, NSTableVi
 }
 
 class ChapterTableCellView: NSTableCellView {
-
   @IBOutlet weak var durationTextField: NSTextField!
 
+  func setTitle(_ title: String) {
+    textField?.stringValue = title
+    textField?.toolTip = title
+  }
 }
 

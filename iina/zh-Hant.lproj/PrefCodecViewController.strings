@@ -10,6 +10,9 @@
 /* Class = "NSTextFieldCell"; title = "Number of threads:"; ObjectID = "50C-1R-wlJ"; */
 "50C-1R-wlJ.title" = "執行緒數：";
 
+/* Class = "NSButtonCell"; title = "Force dedicated GPU"; ObjectID = "YUr-aJ-xfC"; */
+"YUr-aJ-xfC.title" = "強制使用獨立 GPU";
+
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "bxW-np-SGm"; */
 "bxW-np-SGm.title" = "預設：0（自動）";
 
@@ -18,6 +21,9 @@
 
 /* Class = "NSButtonCell"; title = "Initial volume:"; ObjectID = "g4c-vG-URh"; */
 "g4c-vG-URh.title" = "初始音量：";
+
+/* Class = "NSTextFieldCell"; title = "Always use the dedicated GPU for rendering (if exists). This can improve performance but may result in poor battery life."; ObjectID = "gCv-sJ-uQJ"; */
+"gCv-sJ-uQJ.title" = "渲染時總是使用獨立 GPU (如果可用)。這將會提高效能，但可能會減少電池壽命。";
 
 /* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
 "m5P-5f-5uo.title" = "視訊：";

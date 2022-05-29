@@ -31,4 +31,7 @@ extension NSColor.Name {
 
   static let cropBoxFill = NSColor.Name("CropBoxFill")
   static let playlistProgressBar = NSColor.Name("PlaylistProgressBar")
+  
+  static let sidebarTabTint = NSColor.Name("SidebarTabTint")
+  static let sidebarTabTintActive = NSColor.Name("SidebarTabTintActive")
 }

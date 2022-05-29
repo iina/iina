@@ -33,33 +33,24 @@
 
 ## Building
 
-1. IINA uses [CocoaPods](https://cocoapods.org) for managing the installation of third-party libraries. If you don't already have it installed, here's how you can do so:
-
-	#### Using RubyGems
-	```console
-	$ sudo gem install cocoapods
-	```
-
-	#### Using Homebrew
-	```console
-	$ brew install cocoapods
-	```
-
-2. Run `pod install` in project's root directory.
-
-IINA ships with pre-compiled dynamic libraries for convenience reasons. If you aren't planning on modifying these libraries, you can follow the instructions below to build IINA; otherwise, skip down to [Building mpv manually](#building-mpv-manually):
+IINA uses mpv for media playback. To build IINA, you can either fetch copies of these libraries we have already built (using the instructions below) or build them yourself by skipping to [these instructions](#building-mpv-manually).
 
 ### Using the pre-compiled libraries
 
-1. Open iina.xcworkspace in the [latest public version of Xcode](https://itunes.apple.com/us/app/xcode/id497799835). *IINA may not build if you use any other version.*
+1. Download pre-compiled libraries by running
+```console
+./other/download_libs.sh
+```
 
-2. Build the project.
+2. Open iina.xcodeproj in the [latest public version of Xcode](https://itunes.apple.com/us/app/xcode/id497799835). *IINA may not build if you use any other version.*
+
+3. Build the project.
 
 ### Building mpv manually
 
 1. Build your own copy of mpv. If you're using a package manager to manage dependencies, the steps below outline the process.
 
-	#### Homebrew
+	#### With Homebrew
 
 	Use our tap as it passes in the correct flags to mpv's configure script:
 
@@ -68,7 +59,7 @@ IINA ships with pre-compiled dynamic libraries for convenience reasons. If you a
 	$ brew install mpv-iina
 	```
 
-	#### MacPorts
+	#### With MacPorts
 
 	Pass in these flags when installing:
 
@@ -82,19 +73,19 @@ IINA ships with pre-compiled dynamic libraries for convenience reasons. If you a
 
 4. Run `other/change_lib_dependencies.rb`. This script will deploy the dependent libraries into `deps/lib`. If you're using a package manager to manage dependencies, invoke it like so:
 
-    #### Homebrew
+	#### With Homebrew
+	
+	```console
+	$ other/change_lib_dependencies.rb "$(brew --prefix)" "$(brew --prefix mpv-iina)/lib/libmpv.dylib"
+	```
+	
+	#### With MacPorts
+	
+	```console
+	$ port contents mpv | grep '\.dylib$' | xargs other/change_lib_dependencies.rb /opt/local
+	```
 
-    ```console
-    $ other/change_lib_dependencies.rb "$(brew --prefix)" "$(brew --prefix mpv-iina)/lib/libmpv.dylib"
-    ```
-
-    #### MacPorts
-
-    ```console
-    $ port contents mpv | grep '\.dylib$' | xargs other/change_lib_dependencies.rb /opt/local
-    ```
-
-5. Open iina.xcworkspace in the [latest public version of Xcode](https://itunes.apple.com/us/app/xcode/id497799835). *IINA may not build if you use any other version.*
+5. Open iina.xcodeproj in the [latest public version of Xcode](https://itunes.apple.com/us/app/xcode/id497799835). *IINA may not build if you use any other version.*
 
 6. Remove all of references to .dylib files from the Frameworks group in the sidebar and drag all the .dylib files in `deps/lib` to that group.
 
@@ -106,7 +97,7 @@ IINA ships with pre-compiled dynamic libraries for convenience reasons. If you a
 
 IINA is always looking for contributions, whether it's through bug reports, code, or new translations.
 
-* If you find a bug in IINA, or would like to suggest a new feature or enhancement, it'd be nice if you could [search your problem first](https://github.com/iina/iina/issues); while we don't mind duplicates, keeping issues unique helps us save time and considates effort. If you can't find your issue, feel free to [file a new one](https://github.com/iina/iina/issues/new).
+* If you find a bug in IINA, or would like to suggest a new feature or enhancement, it'd be nice if you could [search your problem first](https://github.com/iina/iina/issues); while we don't mind duplicates, keeping issues unique helps us save time and consolidates effort. If you can't find your issue, feel free to [file a new one](https://github.com/iina/iina/issues/new).
 
 * If you're looking to contribute code, please read [CONTRIBUTING.md](CONTRIBUTING.md)–it has information on IINA's process for handling contributions, and tips on how the code is structured to make your work easier.
 

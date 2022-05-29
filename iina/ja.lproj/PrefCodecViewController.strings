@@ -10,6 +10,9 @@
 /* Class = "NSTextFieldCell"; title = "Number of threads:"; ObjectID = "50C-1R-wlJ"; */
 "50C-1R-wlJ.title" = "スレッド数:";
 
+/* Class = "NSButtonCell"; title = "Force dedicated GPU"; ObjectID = "YUr-aJ-xfC"; */
+"YUr-aJ-xfC.title" = "専用GPUの使用を強制する";
+
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "bxW-np-SGm"; */
 "bxW-np-SGm.title" = "デフォルト: 0 (自動)";
 
@@ -19,11 +22,14 @@
 /* Class = "NSButtonCell"; title = "Initial volume:"; ObjectID = "g4c-vG-URh"; */
 "g4c-vG-URh.title" = "デフォルトの音量";
 
+/* Class = "NSTextFieldCell"; title = "Always use the dedicated GPU for rendering (if exists). This can improve performance but may result in poor battery life."; ObjectID = "gCv-sJ-uQJ"; */
+"gCv-sJ-uQJ.title" = "レンダリングに専用GPUを常に使用します(搭載されている場合)。有効化するとパフォーマンスの向上が期待できますが、バッテリー消費が激しくなる可能性があります。";
+
 /* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
 "m5P-5f-5uo.title" = "ビデオ:";
 
 /* Class = "NSTextFieldCell"; title = "Hardware decoder:"; ObjectID = "nwg-2K-G2G"; */
-"nwg-2K-G2G.title" = "ハードウェアデコーダ:";
+"nwg-2K-G2G.title" = "ハードウェアデコーダー:";
 
 /* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "rFu-rL-EJC"; */
 "rFu-rL-EJC.title" = "使用しない";

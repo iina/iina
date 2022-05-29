@@ -42,7 +42,7 @@ struct Logger {
     }
   }
 
-  static let enabled = Preference.bool(for: .enableLogging)
+  static let enabled = Preference.bool(for: .enableAdvancedSettings) && Preference.bool(for: .enableLogging)
 
   static let logDirectory: URL = {
     let formatter = DateFormatter()

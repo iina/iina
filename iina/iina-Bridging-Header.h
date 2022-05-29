@@ -4,6 +4,11 @@
 #import <mpv/render.h>
 #import <mpv/render_gl.h>
 
+#import <libavcodec/avcodec.h>
+#import <libavformat/avformat.h>
+#import <libavutil/avutil.h>
+#import <libswscale/swscale.h>
+
 #import <stdio.h>
 #import <stdlib.h>
 #import "FixedFontManager.h"

@@ -31,17 +31,12 @@ class ViewLayer: CAOpenGLLayer {
     autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
   }
 
-  override init(layer: Any) {
+  override convenience init(layer: Any) {
+    self.init()
+
     let previousLayer = layer as! ViewLayer
 
     videoView = previousLayer.videoView
-
-    super.init()
-    isOpaque = true
-    isAsynchronous = false
-
-    autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
-
   }
 
   required init?(coder aDecoder: NSCoder) {
@@ -49,44 +44,32 @@ class ViewLayer: CAOpenGLLayer {
   }
 
   override func copyCGLPixelFormat(forDisplayMask mask: UInt32) -> CGLPixelFormatObj {
-
-    let attributes0: [CGLPixelFormatAttribute] = [
+    var attributeList: [CGLPixelFormatAttribute] = [
       kCGLPFADoubleBuffer,
+      kCGLPFAAllowOfflineRenderers,
       kCGLPFAOpenGLProfile, CGLPixelFormatAttribute(kCGLOGLPVersion_3_2_Core.rawValue),
       kCGLPFAAccelerated,
-      kCGLPFAAllowOfflineRenderers,
-      _CGLPixelFormatAttribute(rawValue: 0)
     ]
 
-    let attributes1: [CGLPixelFormatAttribute] = [
-      kCGLPFADoubleBuffer,
-      kCGLPFAOpenGLProfile, CGLPixelFormatAttribute(kCGLOGLPVersion_3_2_Core.rawValue),
-      kCGLPFAAllowOfflineRenderers,
-      _CGLPixelFormatAttribute(rawValue: 0)
-    ]
-
-    let attributes2: [CGLPixelFormatAttribute] = [
-      kCGLPFADoubleBuffer,
-      kCGLPFAAllowOfflineRenderers,
-      _CGLPixelFormatAttribute(rawValue: 0)
-    ]
+    if (!Preference.bool(for: .forceDedicatedGPU)) {
+      attributeList.append(kCGLPFASupportsAutomaticGraphicsSwitching)
+    }
 
     var pix: CGLPixelFormatObj?
     var npix: GLint = 0
 
-    CGLChoosePixelFormat(attributes0, &pix, &npix)
-
-    if pix == nil {
-      CGLChoosePixelFormat(attributes1, &pix, &npix)
+    for index in (0..<attributeList.count).reversed() {
+      let attributes = Array(
+        attributeList[0...index] + [_CGLPixelFormatAttribute(rawValue: 0)]
+      )
+      CGLChoosePixelFormat(attributes, &pix, &npix)
+      if let pix = pix {
+        Logger.log("Created OpenGL pixel format with \(attributes)", level: .debug)
+        return pix
+      }
     }
 
-    if pix == nil {
-      CGLChoosePixelFormat(attributes2, &pix, &npix)
-    }
-
-    Logger.ensure(pix != nil, "Cannot create OpenGL pixel format!")
-
-    return pix!
+    Logger.fatal("Cannot create OpenGL pixel format!")
   }
 
   override func copyCGLContext(forPixelFormat pf: CGLPixelFormatObj) -> CGLContextObj {
@@ -105,27 +88,14 @@ class ViewLayer: CAOpenGLLayer {
 
   override func canDraw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj, forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) -> Bool {
     if forceRender { return true }
-
-    videoView.uninitLock.lock()
-    let result = videoView.player.mpv!.shouldRenderUpdateFrame()
-    videoView.uninitLock.unlock()
-
-    return result
+    return videoView.player.mpv.shouldRenderUpdateFrame()
   }
 
   override func draw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj, forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) {
     let mpv = videoView.player.mpv!
     needsMPVRender = false
 
-    videoView.uninitLock.lock()
-
-    guard !videoView.isUninited else {
-      videoView.uninitLock.unlock()
-      return
-    }
-
-    CGLLockContext(ctx)
-    CGLSetCurrentContext(ctx)
+    guard !videoView.isUninited else { return }
 
     glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
 
@@ -136,35 +106,36 @@ class ViewLayer: CAOpenGLLayer {
 
     var flip: CInt = 1
 
-    if let context = mpv.mpvRenderContext {
-      fbo = i != 0 ? i : fbo
+    withUnsafeMutablePointer(to: &flip) { flip in
+      if let context = mpv.mpvRenderContext {
+        fbo = i != 0 ? i : fbo
 
-      var data = mpv_opengl_fbo(fbo: Int32(fbo),
-                                w: Int32(dims[2]),
-                                h: Int32(dims[3]),
-                                internal_format: 0)
-      var params: [mpv_render_param] = [
-        mpv_render_param(type: MPV_RENDER_PARAM_OPENGL_FBO, data: &data),
-        mpv_render_param(type: MPV_RENDER_PARAM_FLIP_Y, data: &flip),
-        mpv_render_param()
-      ]
-      mpv_render_context_render(context, &params);
-      ignoreGLError()
-    } else {
-      glClearColor(0, 0, 0, 1)
-      glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
+        var data = mpv_opengl_fbo(fbo: Int32(fbo),
+                                  w: Int32(dims[2]),
+                                  h: Int32(dims[3]),
+                                  internal_format: 0)
+        withUnsafeMutablePointer(to: &data) { data in
+          var params: [mpv_render_param] = [
+            mpv_render_param(type: MPV_RENDER_PARAM_OPENGL_FBO, data: .init(data)),
+            mpv_render_param(type: MPV_RENDER_PARAM_FLIP_Y, data: .init(flip)),
+            mpv_render_param()
+          ]
+          mpv_render_context_render(context, &params);
+          ignoreGLError()
+        }
+      } else {
+        glClearColor(0, 0, 0, 1)
+        glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
+      }
     }
     glFlush()
-
-    CGLUnlockContext(ctx)
-    videoView.uninitLock.unlock()
   }
 
   func suspend() {
     blocked = true
     mpvGLQueue.suspend()
   }
-  
+
   func resume() {
     blocked = false
     draw(forced: true)
@@ -180,17 +151,19 @@ class ViewLayer: CAOpenGLLayer {
       return
     }
     if needsMPVRender {
-      videoView.uninitLock.lock()
+      videoView.player.mpv.lockAndSetOpenGLContext()
+      defer { videoView.player.mpv.unlockOpenGLContext() }
       // draw(inCGLContext:) is not called, needs a skip render
-      if !videoView.isUninited, let context = videoView.player.mpv?.mpvRenderContext {
+      if !videoView.isUninited, let renderContext = videoView.player.mpv.mpvRenderContext {
         var skip: CInt = 1
-        var params: [mpv_render_param] = [
-          mpv_render_param(type: MPV_RENDER_PARAM_SKIP_RENDERING, data: &skip),
-          mpv_render_param()
-        ]
-        mpv_render_context_render(context, &params);
+        withUnsafeMutablePointer(to: &skip) { skip in
+          var params: [mpv_render_param] = [
+            mpv_render_param(type: MPV_RENDER_PARAM_SKIP_RENDERING, data: .init(skip)),
+            mpv_render_param()
+          ]
+          mpv_render_context_render(renderContext, &params);
+        }
       }
-      videoView.uninitLock.unlock()
       needsMPVRender = false
     }
   }

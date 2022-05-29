@@ -9,30 +9,44 @@
 
 "general.on" = "Увімкнути";
 "general.off" = "Вимкнути";
-"general.login" = "Зайти";
+"general.login" = "Увійти";
 "general.logout" = "Вийти";
 "general.ok" = "ОК";
 "general.cancel" = "Скасувати";
 "general.username" = "Ім'я користувача";
 "general.password" = "Пароль";
 
+// Guide Window
+"guide.highlights" = "Найважливіше";
+"guide.basic_settings" = "Основні параметри";
+"guide.faq" = "Часті запитання";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Буферизація… %d%%";
 "main.opening_stream" = "Відкриття потоку…";
+"osc.precision" = "Точність";
+"osc.1s" = "1 секунда";
+"osc.100ms" = "100 мілісекунд";
+"osc.10ms" = "10 мілісекунд";
+"osc.1ms" = "1 мілісекунда";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Типово";
 "quicksetting.item_none" = "—";
+"quicksetting.hwdec" = "Апаратне декодування";
+"quicksetting.deinterlace" = "Черезрядкова розгортка";
+"quicksetting.hdr" = "HDR";
 
 // OSDMessage.swift
 "osd.pause" = "Пауза";
-"osd.resume" = "Відтворення";
+"osd.resume" = "Відновити";
 "osd.volume" = "Гучність: %i";
 "osd.speed" = "Швидкість: %.2fx";
 "osd.aspect" = "Пропорції: %@";
 "osd.crop" = "Обрізання: %@";
 "osd.rotate" = "Обертання: %i°";
 "osd.deinterlace" = "Черезрядкова розгортка: %@";
+"osd.hwdec" = "Апаратне декодування: %@";
 "osd.audio_delay.nodelay" = "Затримка звуку: без затримки";
 "osd.audio_delay.later" = "Затримка звуку: +%.2f с";
 "osd.audio_delay.earlier" = "Затримка звуку: –%.2f с";
@@ -40,7 +54,7 @@
 "osd.sub_delay.later" = "Затримка субтитрів: +%.2f с";
 "osd.sub_delay.earlier" = "Затримка субтитрів: –%.2f с";
 "osd.subtitle_pos" = "Позиція субтитрів: %.1f";
-"osd.mute" = "Без звуку";
+"osd.mute" = "Заглушити";
 "osd.unmute" = "Зі звуком";
 "osd.screenshot" = "Знімок екрана зроблено";
 "osd.abloop.a" = "Цикл A—B: A";
@@ -49,8 +63,8 @@
 "osd.stop" = "Зупинити";
 "osd.chapter" = "Розділ: %@";
 "osd.subtitle_scale" = "Розмір субтитрів: %.2fx";
-"osd.add_to_playlist" = "Файли %i додано до підбірки";
-"osd.clear_playlist" = "Очищена підбірка";
+"osd.add_to_playlist" = "Додано %i файлів до плейліста";
+"osd.clear_playlist" = "Плейліст очищено";
 "osd.video_eq.contrast" = "Контрастність: %i";
 "osd.video_eq.gamma" = "Гама: %i";
 "osd.video_eq.hue" = "Відтінок: %i";
@@ -87,6 +101,8 @@
 "preference.key_binding_hint_1" = "Для призначення клавіатурних скорочень у поточному файлі налаштувань спочатку натисніть на кнопку «Дублювати…», щоб створити копію.";
 "preference.key_binding_hint_2" = "Для редагування призначеного клавіатурного скорочення подвійно клацніть на рядку з правого боку.";
 
+"preference.enable_adv_settings" = "Увімкнути розширені налаштування";
+
 "menu.volume" = "Гучність: %d";
 "menu.audio_delay" = "Затримка звуку: %.2f с";
 "menu.sub_delay" = "Затримка субтитрів: %.2f с";
@@ -109,6 +125,8 @@
 "menu.sub_delay_up" = "Затримка субтитрів на +%.1f с";
 "menu.sub_delay_down" = "Затримка субтитрів на –%.1f с";
 
+"menu.crop_custom" = "Інше...";
+
 "track.none" = "<—>";
 
 "subtrack.no_loaded" = "Субтитри не завантажено";
@@ -116,7 +134,6 @@
 
 // Alerts
 "alert.beta_channel.title" = "Отримувати оновлення бета-версій";
-"alert.beta_channel.message" = "IINA 1.0 вже блізько! Чи бажаєте допомогти нам у тестуванні бета-версій?\n\nВи можете змінити цю поведінку в будь-який час через Параметри → Загальні";
 
 "alert.title_error" = "Помилка";
 "alert.title_warning" = "Застереження";
@@ -230,7 +247,7 @@
 "pl_menu.reveal_in_finder" = "Показати у Finder";
 "pl_menu.add_file" = "Додати файл…";
 "pl_menu.add_url" = "Додати URL…";
-"pl_menu.clear_playlist" = "Очистити підбірку";
+"pl_menu.clear_playlist" = "Очистити плейліст";
 "pl_menu.matched_sub" = "Зіставлено %d субтитрів";
 "pl_menu.add_sub" = "Додати субтитри…";
 "pl_menu.wrong_sub" = "Субтитри неправильні!";
@@ -250,12 +267,22 @@
 
 "subencoding.auto" = "Автовизначення";
 
-"osc_toolbar.settings" = "Швидке налаштування";
+"osc_toolbar.settings" = "Швидкі налаштування";
 "osc_toolbar.playlist" = "Підбірка та розділи";
 "osc_toolbar.pip" = "Режим «Кадр у кадрі»";
 "osc_toolbar.full_screen" = "Повноекранний режим";
 "osc_toolbar.music_mode" = "Режим музики";
 "osc_toolbar.sub_track" = "Наявні субтитри";
+
+"mini_player.album_art" = "Показати обкладинку альбому";
+"mini_player.loop" = "Повтор";
+"mini_player.shuffle" = "Перемішати";
+"mini_player.remove" = "Видалити з плейлиста";
+"mini_player.add" = "Додати до плейлиста";
+"mini_player.delete" = "Видалити всі треки з плейлиста";
+"mini_player.volume" = "Гучність";
+"mini_player.close" = "Закрити режим музики";
+"mini_player.back" = "Повернутись у режим відео";
 
 // Touch bar
 
@@ -272,5 +299,5 @@
 "touchbar.play_pause" = "Відтворити / Зупинити";
 "touchbar.seek" = "Перемотати";
 "touchbar.time" = "Часова позиція";
-"touchbar.remainingTime" = "Залишок часу";
+"touchbar.remainingTimeOrTotalDuration" = "Залишок часу / Загальна тривалість";
 "touchbar.toggle_pip" = "Перемкнути «Кадр у кадрі»";

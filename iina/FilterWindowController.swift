@@ -77,8 +77,8 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
 
   @objc
   func reloadTableInMainThread() {
-    DispatchQueue.main.sync {
-      reloadTable()
+    DispatchQueue.main.async {
+      self.reloadTable()
     }
   }
 
@@ -87,13 +87,12 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
     filters = PlayerCore.active.mpv.getFilters(filterType)
     filterIsSaved = [Bool](repeatElement(false, count: filters.count))
     savedFilters.forEach { savedFilter in
-      savedFilter.isEnabled = false
-      for (index, filter) in filters.enumerated() {
-        if filter.stringFormat == savedFilter.filterString {
-          filterIsSaved[index] = true
-          savedFilter.isEnabled = true
-          break
-        }
+      if let asObject = MPVFilter(rawString: savedFilter.filterString),
+         let index = filters.firstIndex(of: asObject) {
+        savedFilter.isEnabled = true
+        filterIsSaved[index] = true
+      } else {
+        savedFilter.isEnabled = false
       }
     }
     currentFiltersTableView.reloadData()
@@ -136,6 +135,22 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
     UserDefaults.standard.synchronize()
   }
 
+  /// Forms and returns a string representation of the list of configured filters.
+  ///
+  /// The string returned will contain one line for each filter in the list. If there are no filters configured then the string will be empty. The
+  /// string representation returned is intended to be used for developer debugging.
+  /// - Returns: String containing the list of configured filters with a prefix indicating the array index of the filter.
+  private func filtersAsString() -> String {
+    var result = ""
+    for (index, filter) in filters.enumerated() {
+      if !result.isEmpty {
+        result += "\n"
+      }
+      result += "[\(index)] \(String(reflecting: filter))"
+    }
+    return result
+  }
+
   // MARK: - IBAction
 
   @IBAction func addFilterAction(_ sender: Any) {
@@ -146,12 +161,13 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
 
   @IBAction func removeFilterAction(_ sender: Any) {
     let pc = PlayerCore.active
-    if currentFiltersTableView.selectedRow >= 0 {
+    let selectedRow = currentFiltersTableView.selectedRow
+    if selectedRow >= 0 {
       let success: Bool
       if filterType == MPVProperty.vf {
-        success = pc.removeVideoFilter(filters[currentFiltersTableView.selectedRow])
+        success = pc.removeVideoFilter(filters[selectedRow], selectedRow)
       } else {
-        success = pc.removeAudioFilter(filters[currentFiltersTableView.selectedRow])
+        success = pc.removeAudioFilter(filters[selectedRow], selectedRow)
       }
       if success {
         reloadTable()
@@ -176,24 +192,45 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
     let savedFilter = savedFilters[row]
     let pc = PlayerCore.active
 
-    // choose approriate add/remove functions for .af/.vf
-    var addFilterFunction: (MPVFilter) -> Bool
-    var removeFilterFunction: (MPVFilter) -> Bool
+    // choose appropriate add/remove functions for .af/.vf
+    var addFilterFunction: (String) -> Bool
+    var removeFilterFunction: (String, Int) -> Bool
+    var removeFilterUsingStringFunction: (String) -> Bool
     if filterType == MPVProperty.vf {
       addFilterFunction = pc.addVideoFilter
       removeFilterFunction = pc.removeVideoFilter
+      removeFilterUsingStringFunction = pc.removeVideoFilter
     } else {
       addFilterFunction = pc.addAudioFilter
       removeFilterFunction = pc.removeAudioFilter
+      removeFilterUsingStringFunction = pc.removeAudioFilter
     }
 
     if sender.state == .on {  // user activated filter
-      if addFilterFunction(MPVFilter(rawString: savedFilter.filterString)!) {
+      if addFilterFunction(savedFilter.filterString) {
         pc.sendOSD(.addFilter(savedFilter.name))
       }
     } else {  // user deactivated filter
-      if removeFilterFunction(MPVFilter(rawString: savedFilter.filterString)!) {
-        pc.sendOSD(.removeFilter)
+      if let asObject = MPVFilter(rawString: savedFilter.filterString),
+         let index = filters.firstIndex(of: asObject) {
+        // Remove the filter based on the index within the list of configured filters. This is the
+        // preferred way to remove a filter as using the string representation is unreliable due to
+        // filters that take multiple parameters having multiple valid string representations.
+        if removeFilterFunction(savedFilter.filterString, index) {
+          pc.sendOSD(.removeFilter)
+        }
+      } else {
+        // If this occurs the MPVFilter method parseRawParamString may have not been able to parse
+        // this kind of filter. Log the issue and attempt to remove the filter using the string
+        // representation. For filters that have multiple valid string representations mpv may or
+        // may not find and remove the filter.
+        Logger.log("""
+          Failed to locate filter: \(savedFilter.filterString)\nIn the list of filters:
+          \n\(filtersAsString())
+          """, level: .warning)
+        if removeFilterUsingStringFunction(savedFilter.filterString) {
+          pc.sendOSD(.removeFilter)
+        }
       }
     }
 
@@ -354,17 +391,22 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
     scrollContentView.subviews.forEach { $0.removeFromSuperview() }
     addButton.isEnabled = true
 
-    var maxY: CGFloat = 0
+    let stackView = NSStackView()
+    stackView.orientation = .vertical
+    stackView.alignment = .leading
+    stackView.translatesAutoresizingMaskIntoConstraints = false
+    scrollContentView.addSubview(stackView)
+    Utility.quickConstraints(["H:|-4-[v]-4-|", "V:|-4-[v]-4-|"], ["v": stackView])
+
     let generateInputs: (String, FilterParameter) -> Void = { (name, param) in
-      self.scrollContentView.addSubview(self.quickLabel(yPos: maxY, title: preset.localizedParamName(name)))
-      maxY += 21
-      let input = self.quickInput(yPos: &maxY, param: param)
+      stackView.addArrangedSubview(self.quickLabel(title: preset.localizedParamName(name)))
+      let input = self.quickInput(param: param)
       // For preventing crash due to adding a filter with no name:
       if name == "name", preset.name.starts(with: "custom_"), let textField = input as? NSTextField {
         textField.delegate = self
         self.addButton.isEnabled = !textField.stringValue.isEmpty
       }
-      self.scrollContentView.addSubview(input)
+      stackView.addArrangedSubview(input)
       self.currentBindings[name] = input
     }
     if let paramOrder = preset.paramOrder {
@@ -376,11 +418,10 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
         generateInputs(name, param)
       }
     }
-    scrollContentView.frame.size.height = maxY
   }
 
-  private func quickLabel(yPos: CGFloat, title: String) -> NSTextField {
-    let label = NSTextField(frame: NSRect(x: 0, y: yPos,
+  private func quickLabel(title: String) -> NSTextField {
+    let label = NSTextField(frame: NSRect(x: 0, y: 0,
                                           width: scrollContentView.frame.width,
                                           height: 17))
     label.font = NSFont.systemFont(ofSize: NSFont.systemFontSize)
@@ -389,15 +430,18 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
     label.isBezeled = false
     label.isSelectable = false
     label.isEditable = false
+    label.usesSingleLineMode = false
+    label.lineBreakMode = .byWordWrapping
+    label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     return label
   }
 
   /** Create the control from a `FilterParameter` definition. */
-  private func quickInput(yPos: inout CGFloat, param: FilterParameter) -> NSControl {
+  private func quickInput(param: FilterParameter) -> NSControl {
     switch param.type {
     case .text:
       // Text field
-      let label = NSTextField(frame: NSRect(x: 4, y: yPos,
+      let label = NSTextField(frame: NSRect(x: 0, y: 0,
                               width: scrollContentView.frame.width - 8,
                               height: 22))
       label.stringValue = param.defaultValue.stringValue
@@ -406,41 +450,36 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
       label.lineBreakMode = .byClipping
       label.usesSingleLineMode = true
       label.cell?.isScrollable = true
-      yPos += 22 + 8
       return label
     case .int:
       // Slider
-      let slider = NSSlider(frame: NSRect(x: 4, y: yPos,
+      let slider = NSSlider(frame: NSRect(x: 0, y: 0,
                                           width: scrollContentView.frame.width - 8,
                                           height: 19))
       slider.minValue = Double(param.minInt!)
       slider.maxValue = Double(param.maxInt!)
-      yPos += 19 + 8
       if let step = param.step {
         slider.numberOfTickMarks = (param.maxInt! - param.minInt!) / step + 1
         slider.allowsTickMarkValuesOnly = true
         slider.frame.size.height = 24
-        yPos += 5
       }
       slider.intValue = Int32(param.defaultValue.intValue)
       return slider
     case .float:
       // Slider
-      let slider = NSSlider(frame: NSRect(x: 4, y: yPos,
+      let slider = NSSlider(frame: NSRect(x: 0, y: 0,
                                           width: scrollContentView.frame.width - 8,
                                           height: 19))
       slider.minValue = Double(param.min!)
       slider.maxValue = Double(param.max!)
       slider.floatValue = param.defaultValue.floatValue
-      yPos += 19 + 8
       return slider
     case .choose:
       // Choose
-      let popupBtn = NSPopUpButton(frame: NSRect(x: 4, y: yPos,
+      let popupBtn = NSPopUpButton(frame: NSRect(x: 0, y: 0,
                                                  width: scrollContentView.frame.width - 8,
                                                  height: 26))
       popupBtn.addItems(withTitles: param.choices)
-      yPos += 26 + 8
       return popupBtn
     }
   }

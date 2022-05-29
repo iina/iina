@@ -74,6 +74,7 @@ struct Preference {
     static let resumeLastPosition = Key("resumeLastPosition")
 
     static let alwaysFloatOnTop = Key("alwaysFloatOnTop")
+    static let alwaysShowOnTopIcon = Key("alwaysShowOnTopIcon")
 
     static let pauseWhenMinimized = Key("pauseWhenMinimized")
     static let pauseWhenInactive = Key("pauseWhenInactive")
@@ -90,16 +91,19 @@ struct Preference {
     static let screenshotIncludeSubtitle = Key("screenShotIncludeSubtitle")
     static let screenshotFormat = Key("screenShotFormat")
     static let screenshotTemplate = Key("screenShotTemplate")
+    static let screenshotShowPreview = Key("screenshotShowPreview")
 
     static let playlistAutoAdd = Key("playlistAutoAdd")
     static let playlistAutoPlayNext = Key("playlistAutoPlayNext")
+    static let playlistShowMetadata = Key("playlistShowMetadata")
+    static let playlistShowMetadataInMusicMode = Key("playlistShowMetadataInMusicMode")
 
     // UI
 
-    /** Horizontal positon of control bar. (float, 0 - 1) */
+    /** Horizontal position of control bar. (float, 0 - 1) */
     static let controlBarPositionHorizontal = Key("controlBarPositionHorizontal")
 
-    /** Horizontal positon of control bar. In percentage from bottom. (float, 0 - 1) */
+    /** Horizontal position of control bar. In percentage from bottom. (float, 0 - 1) */
     static let controlBarPositionVertical = Key("controlBarPositionVertical")
 
     /** Whether control bar stick to center when dragging. (bool) */
@@ -128,13 +132,14 @@ struct Preference {
     static let enableThumbnailPreview = Key("enableThumbnailPreview")
     static let maxThumbnailPreviewCacheSize = Key("maxThumbnailPreviewCacheSize")
     static let enableThumbnailForRemoteFiles = Key("enableThumbnailForRemoteFiles")
+    static let thumbnailWidth = Key("thumbnailWidth")
 
     static let autoSwitchToMusicMode = Key("autoSwitchToMusicMode")
     static let musicModeShowPlaylist = Key("musicModeShowPlaylist")
     static let musicModeShowAlbumArt = Key("musicModeShowAlbumArt")
 
     static let displayTimeAndBatteryInFullScreen = Key("displayTimeAndBatteryInFullScreen")
-    
+
     static let windowBehaviorWhenPip = Key("windowBehaviorWhenPip")
     static let pauseWhenPip = Key("pauseWhenPip")
     static let togglePipByMinimizingWindow = Key("togglePipByMinimizingWindow")
@@ -143,6 +148,8 @@ struct Preference {
 
     static let videoThreads = Key("videoThreads")
     static let hardwareDecoder = Key("hardwareDecoder")
+    static let forceDedicatedGPU = Key("forceDedicatedGPU")
+    static let loadIccProfile = Key("loadIccProfile")
 
     static let audioThreads = Key("audioThreads")
     static let audioLanguage = Key("audioLanguage")
@@ -228,6 +235,8 @@ struct Preference {
     static let forceTouchAction = Key("forceTouchAction")
 
     static let showRemainingTime = Key("showRemainingTime")
+    static let timeDisplayPrecision = Key("timeDisplayPrecision")
+    static let touchbarShowRemainingTime = Key("touchbarShowRemainingTime")
 
     static let followGlobalSeekTypeWhenAdjustSlider = Key("followGlobalSeekTypeWhenAdjustSlider")
 
@@ -355,6 +364,7 @@ struct Preference {
     case fullscreen
     case pause
     case hideOSC
+    case togglePIP
 
     static var defaultValue = MouseClickAction.none
 
@@ -599,14 +609,14 @@ struct Preference {
       }
     }
   }
-  
+
   enum WindowBehaviorWhenPip: Int, InitializingFromKey {
     case doNothing = 0
     case hide
     case minimize
-    
+
     static var defaultValue = WindowBehaviorWhenPip.doNothing
-    
+
     init?(key: Key) {
       self.init(rawValue: Preference.integer(for: key))
     }
@@ -678,6 +688,7 @@ struct Preference {
     .useMediaKeys: true,
     .useAppleRemote: false,
     .alwaysFloatOnTop: false,
+    .alwaysShowOnTopIcon: false,
     .blackOutMonitor: false,
     .pauseWhenMinimized: false,
     .pauseWhenInactive: false,
@@ -687,26 +698,33 @@ struct Preference {
 
     .playlistAutoAdd: true,
     .playlistAutoPlayNext: true,
+    .playlistShowMetadata: true,
+    .playlistShowMetadataInMusicMode: true,
 
     .usePhysicalResolution: true,
     .initialWindowSizePosition: "",
     .resizeWindowTiming: ResizeWindowTiming.onlyWhenOpen.rawValue,
     .resizeWindowOption: ResizeWindowOption.videoSize10.rawValue,
     .showRemainingTime: false,
+    .timeDisplayPrecision: 0,
+    .touchbarShowRemainingTime: true,
     .enableThumbnailPreview: true,
     .maxThumbnailPreviewCacheSize: 500,
     .enableThumbnailForRemoteFiles: false,
+    .thumbnailWidth: 240,
     .autoSwitchToMusicMode: true,
     .musicModeShowPlaylist: false,
     .musicModeShowAlbumArt: true,
     .displayTimeAndBatteryInFullScreen: false,
-    
+
     .windowBehaviorWhenPip: WindowBehaviorWhenPip.doNothing.rawValue,
     .pauseWhenPip: false,
     .togglePipByMinimizingWindow: false,
 
     .videoThreads: 0,
     .hardwareDecoder: HardwareDecoderOption.auto.rawValue,
+    .forceDedicatedGPU: false,
+    .loadIccProfile: true,
     .audioThreads: 0,
     .audioLanguage: "",
     .maxVolume: 100,
@@ -795,6 +813,7 @@ struct Preference {
     .screenshotIncludeSubtitle: true,
     .screenshotFormat: ScreenshotFormat.png.rawValue,
     .screenshotTemplate: "%F-%n",
+    .screenshotShowPreview: true,
 
     .watchProperties: [],
     .savedVideoFilters: [],

@@ -14,6 +14,12 @@ fileprivate extension QuickSettingViewController.TabViewType {
   }
 }
 
+@available(OSX 10.14, *)
+fileprivate extension NSColor {
+  static let sidebarTabTint: NSColor = NSColor(named: .sidebarTabTint)!
+  static let sidebarTabTintActive: NSColor = NSColor(named: .sidebarTabTintActive)!
+}
+
 class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, SidebarViewController {
 
   override var nibName: NSNib.Name {
@@ -23,14 +29,14 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   let sliderSteps = 24.0
 
   /**
-   Similiar to the one in `PlaylistViewController`.
+   Similar to the one in `PlaylistViewController`.
    Since IBOutlet is `nil` when the view is not loaded at first time,
    use this variable to cache which tab it need to switch to when the
    view is ready. The value will be handled after loaded.
    */
   private var pendingSwitchRequest: TabViewType?
 
-  /** Tab type. Use TrackType for now. Propobably not a good choice. */
+  /** Tab type. Use TrackType for now. Probably not a good choice. */
   typealias TabViewType = MPVTrack.TrackType
 
   weak var player: PlayerCore!
@@ -69,7 +75,11 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var speedSliderIndicator: NSTextField!
   @IBOutlet weak var speedSliderConstraint: NSLayoutConstraint!
   @IBOutlet weak var customSpeedTextField: NSTextField!
-  @IBOutlet weak var deinterlaceCheckBtn: NSButton!
+  @IBOutlet weak var switchHorizontalLine: NSBox!
+  @IBOutlet weak var switchHorizontalLine2: NSBox!
+  @IBOutlet weak var hardwareDecodingSwitch: Switch!
+  @IBOutlet weak var deinterlaceSwitch: Switch!
+  @IBOutlet weak var hdrSwitch: Switch!
 
   @IBOutlet weak var brightnessSlider: NSSlider!
   @IBOutlet weak var contrastSlider: NSSlider!
@@ -130,12 +140,18 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       withAllTableViews { tableView, _ in tableView.backgroundColor = NSColor(named: .sidebarTableBackground)! }
     }
 
-    if pendingSwitchRequest != nil {
+    if pendingSwitchRequest == nil {
+      updateTabActiveStatus(withCurrentButton: videoTabBtn)
+    } else {
       switchToTab(pendingSwitchRequest!)
       pendingSwitchRequest = nil
     }
 
     subLoadSementedControl.image(forSegment: 1)?.isTemplate = true
+    switchHorizontalLine.wantsLayer = true
+    switchHorizontalLine.layer?.opacity = 0.5
+    switchHorizontalLine2.wantsLayer = true
+    switchHorizontalLine2.layer?.opacity = 0.5
 
     func observe(_ name: Notification.Name, block: @escaping (Notification) -> Void) {
       observers.append(NotificationCenter.default.addObserver(forName: name, object: player, queue: .main, using: block))
@@ -155,7 +171,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   // MARK: - Validate UI
 
-  /** Do syncronization*/
+  /** Do synchronization*/
   override func viewDidAppear() {
     // image sub
     super.viewDidAppear()
@@ -188,7 +204,24 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       cropSegment.selectedSegment = -1
     }
     rotateSegment.selectSegment(withTag: AppData.rotations.firstIndex(of: player.info.rotation) ?? -1)
-    deinterlaceCheckBtn.state = player.info.deinterlace ? .on : .off
+
+    deinterlaceSwitch.checked = player.info.deinterlace
+    deinterlaceSwitch.action = {
+      self.player.toggleDeinterlace($0)
+    }
+    hardwareDecodingSwitch.checked = player.info.hwdecEnabled
+    hardwareDecodingSwitch.action = {
+      self.player.toggleHardwareDecoding($0)
+    }
+    hdrSwitch.isEnabled = player.info.hdrAvailable
+    hdrSwitch.checked = player.info.hdrAvailable && player.info.hdrEnabled
+    if #available(macOS 10.15, *) {
+      hdrSwitch.action = {
+        self.player.info.hdrEnabled = $0
+        self.player.refreshEdrMode()
+      }
+    }
+
     let speed = player.mpv.getDouble(MPVOption.PlaybackControl.speed)
     customSpeedTextField.doubleValue = speed
     let sliderValue = log(speed / AppData.minSpeed) / log(AppData.maxSpeed / AppData.minSpeed) * sliderSteps
@@ -270,6 +303,14 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       subTableView.reloadData()
       secSubTableView.reloadData()
       updateSubTabControl()
+    }
+  }
+
+  func setHdrAvailability(to available: Bool) {
+    player.info.hdrAvailable = available
+    if isViewLoaded {
+      hdrSwitch.isEnabled = available
+      hdrSwitch.checked = available && player.info.hdrEnabled
     }
   }
 
@@ -361,6 +402,16 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     updateControlsState()
   }
 
+  private func updateTabActiveStatus(withCurrentButton sender: NSButton) {
+    [videoTabBtn, audioTabBtn, subTabBtn].forEach { btn in
+      if #available(OSX 10.14, *) {
+        btn!.contentTintColor = btn == sender ? .sidebarTabTintActive : .sidebarTabTint
+      } else {
+        Utility.setBoldTitle(for: btn!, btn == sender)
+      }
+    }
+  }
+
   private func withAllTableViews(_ block: (NSTableView, MPVTrack.TrackType) -> Void) {
     block(audioTableView, .audio)
     block(subTableView, .sub)
@@ -381,7 +432,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   @IBAction func tabBtnAction(_ sender: NSButton) {
     tabView.selectTabViewItem(at: sender.tag)
-    [videoTabBtn, audioTabBtn, subTabBtn].forEach { Utility.setBoldTitle(for: $0, $0 == sender) }
+    updateTabActiveStatus(withCurrentButton: sender)
     currentTab = .init(buttonTag: sender.tag)
     reload()
   }
@@ -457,10 +508,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
   }
 
-  @IBAction func deinterlaceBtnAction(_ sender: AnyObject) {
-    player.toggleDeinterlace(deinterlaceCheckBtn.state == .on)
-  }
-
   @IBAction func equalizerSliderAction(_ sender: NSSlider) {
     let type: PlayerCore.VideoEqualizerType
     switch sender {
@@ -517,7 +564,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   @IBAction func loadExternalAudioAction(_ sender: NSButton) {
     let currentDir = player.info.currentURL?.deletingLastPathComponent()
-    Utility.quickOpenPanel(title: "Load external audio file", chooseDir: false, dir: currentDir) { url in
+    Utility.quickOpenPanel(title: "Load external audio file", chooseDir: false, dir: currentDir, allowedFileTypes: Utility.supportedFileExt[.audio]) { url in
       self.player.loadExternalAudioFile(url)
       self.audioTableView.reloadData()
     }
@@ -577,7 +624,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBAction func loadExternalSubAction(_ sender: NSSegmentedControl) {
     if sender.selectedSegment == 0 {
       let currentDir = player.info.currentURL?.deletingLastPathComponent()
-      Utility.quickOpenPanel(title: "Load external subtitle", chooseDir: false, dir: currentDir) { url in
+      Utility.quickOpenPanel(title: "Load external subtitle", chooseDir: false, dir: currentDir, allowedFileTypes: Utility.supportedFileExt[.sub]) { url in
         // set a delay
         self.player.loadExternalSubFile(url, delay: true)
         self.subTableView.reloadData()
@@ -731,7 +778,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       self.player.setSubFont($0 ?? "")
     }
   }
-
 
 }
 

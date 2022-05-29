@@ -42,7 +42,7 @@ fileprivate func sameKeyAction(_ lhs: [String], _ rhs: [String], _ normalizeLast
 
 class MenuController: NSObject, NSMenuDelegate {
 
-  /** For convinent bindings. see `bind(...)` below. [menu: check state block] */
+  /** For convenient bindings. see `bind(...)` below. [menu: check state block] */
   private var menuBindingList: [NSMenu: (NSMenuItem) -> Bool] = [:]
 
   private var stringForOpen: String!
@@ -271,9 +271,14 @@ class MenuController: NSObject, NSMenuDelegate {
     var cropListForObject = AppData.aspects
     cropList.insert(Constants.String.none, at: 0)
     cropListForObject.insert("None", at: 0)
+    // Allow custom crop size.
+    cropList.append(Constants.String.custom)
+    cropListForObject.append("Custom")
     bind(menu: cropMenu, withOptions: cropList, objects: cropListForObject, objectMap: nil, action: #selector(MainMenuActionHandler.menuChangeCrop(_:))) {
       return PlayerCore.active.info.unsureCrop == $0.representedObject as? String
     }
+    // Separate "Custom..." from other crop sizes.
+    cropMenu.insertItem(NSMenuItem.separator(), at: 1 + AppData.aspects.count)
 
     // -- rotation
     let rotationTitles = AppData.rotations.map { "\($0)\(Constants.String.degree)" }
@@ -432,7 +437,7 @@ class MenuController: NSObject, NSMenuDelegate {
   private func updatePlaybackMenu() {
     let player = PlayerCore.active
     pause.title = player.info.isPaused ? Constants.String.resume : Constants.String.pause
-    let isLoop = player.mpv.getFlag(MPVOption.PlaybackControl.loopFile)
+    let isLoop = player.mpv.getString(MPVOption.PlaybackControl.loopFile) == "inf"
     fileLoop.state = isLoop ? .on : .off
     let isPlaylistLoop = player.mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
     playlistLoop.state = (isPlaylistLoop == "inf" || isPlaylistLoop == "force") ? .on : .off
@@ -490,8 +495,10 @@ class MenuController: NSObject, NSMenuDelegate {
     let filters = PlayerCore.active.mpv.getFilters(type)
     let menu: NSMenu! = type == MPVProperty.vf ? savedVideoFiltersMenu : savedAudioFiltersMenu
     for item in menu.items {
-      if let string = (item.representedObject as? String) {
-        item.state = filters.contains { $0.stringFormat == string } ? .on : .off
+      if let string = (item.representedObject as? String), let asObject = MPVFilter(rawString: string) {
+        // Filters that support multiple parameters have more than one valid string representation.
+        // Must compare filters using their object representation.
+        item.state = filters.contains { $0 == asObject } ? .on : .off
       }
     }
   }
@@ -596,7 +603,7 @@ class MenuController: NSObject, NSMenuDelegate {
     } else if menu == savedAudioFiltersMenu {
       updateSavedFiltersMenu(type: MPVProperty.af)
     }
-    // check convinently binded menus
+    // check conveniently bound menus
     if let checkEnableBlock = menuBindingList[menu] {
       for item in menu.items {
         item.state = checkEnableBlock(item) ? .on : .off
@@ -643,8 +650,8 @@ class MenuController: NSObject, NSMenuDelegate {
       (previousChapter, false, ["add", "chapter", "-1"], false, nil, nil),
       (pause, false, ["cycle", "pause"], false, nil, nil),
       (stop, false, ["stop"], false, nil, nil),
-      (forward, false, ["seek", "5"], true, 5.0...10.0, "seek_forward"),
-      (backward, false, ["seek", "-5"], true, -10.0...(-5.0), "seek_backward"),
+      (forward, false, ["seek", "5"], true, 5.0...60.0, "seek_forward"),
+      (backward, false, ["seek", "-5"], true, -60.0...(-5.0), "seek_backward"),
       (nextFrame, false, ["frame-step"], false, nil, nil),
       (previousFrame, false, ["frame-back-step"], false, nil, nil),
       (nextMedia, false, ["playlist-next"], false, nil, nil),

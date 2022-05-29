@@ -1,0 +1,55 @@
+/*
+  FilterPresets.strings
+  iina
+
+  Created by lhc on 25/8/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+/* It's optional to localize descriptions for each parameter! */
+
+
+
+"crop" = "Beskjær";
+"crop.w" = "Bredde (standard: videobredde)";
+"crop.h" = "Høyde (standard: videohøyde)";
+"crop.x" = "Opprinnelse X (standard: sentrert)";
+"crop.y" = "Oprinnelse Y (standard: sentrert)";
+
+"expand" = "Utvid";
+"expand.w" = "Bredde (standard: videobredde)";
+"expand.h" = "Høyde (standard: videohøyde)";
+"expand.x" = "Opprinnelse X (standard: sentrert)";
+"expand.y" = "Opprinnelse Y (standard: sentrert)";
+"expand.aspect" = "Utvid for å passe aspektet (eks. 4/3)";
+"expand.round" = "Rund opp for å gjøre delbart på denne verdien";
+
+"sharpen" = "Gjør skarpere";
+"sharpen.msize" = "Matrisestørrelse";
+"sharpen.amount" = "Mengde";
+
+"blur" = "Uskarphet";
+"blur.msize" = "Matrisestørrelse";
+"blur.amount" = "Mengde";
+
+"delogo" = "Fjern logo";
+"delogo.w" = "Bredde";
+"delogo.h" = "Høyde";
+"delogo.x" = "Opprinnelse X";
+"delogo.y" = "Opprinnelse Y";
+
+"negative" = "Negativ";
+
+"vflip" = "Vend";
+"hflip" = "Speil";
+
+"lut3d" = "3D LUT";
+"lut3d.file" = "File path (you can also drag & drop the file into the input box)";
+"lut3d.interp" = "Interpolasjonsmodus";
+
+"custom_mpv" = "Tilpasset (mpv)";
+"custom_mpv.name" = "Filternavn";
+"custom_mpv.string" = "Filterverdi";
+
+"custom_ffmpeg" = "Tilpasset (FFmpeg)";
+"custom_ffmpeg.name" = "Filternavn";
+"custom_ffmpeg.string" = "Filterverdi";

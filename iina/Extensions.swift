@@ -9,7 +9,7 @@
 import Cocoa
 
 extension NSSlider {
-  /** Returns the positon of knob center by point */
+  /** Returns the position of knob center by point */
   func knobPointPosition() -> CGFloat {
     let sliderOrigin = frame.origin.x + knobThickness / 2
     let sliderWidth = frame.width - knobThickness
@@ -381,8 +381,13 @@ extension Data {
 }
 
 extension FileHandle {
-  func read<T>(type: T.Type /* To prevent unintended specializations */) -> T {
-    return readData(ofLength: MemoryLayout<T>.size).withUnsafeBytes {
+  func read<T>(type: T.Type /* To prevent unintended specializations */) -> T? {
+    let size = MemoryLayout<T>.size
+    let data = readData(ofLength: size)
+    guard data.count == size else {
+      return nil
+    }
+    return data.withUnsafeBytes {
       $0.bindMemory(to: T.self).first!
     }
   }
@@ -415,10 +420,10 @@ extension String {
     removeLast(Swift.min(num, count))
   }
 
-  func countOccurances(of str: String, in range: Range<Index>?) -> Int {
+  func countOccurrences(of str: String, in range: Range<Index>?) -> Int {
     if let firstRange = self.range(of: str, options: [], range: range, locale: nil) {
       let nextRange = firstRange.upperBound..<self.endIndex
-      return 1 + countOccurances(of: str, in: nextRange)
+      return 1 + countOccurrences(of: str, in: nextRange)
     } else {
       return 0
     }
@@ -508,6 +513,26 @@ extension NSImage {
     image.capInsets = NSEdgeInsets(top: cornerRadius, left: cornerRadius, bottom: cornerRadius, right: cornerRadius)
     return image
   }
+
+  func rotate(_ degree: Int) -> NSImage {
+    var degree = ((degree % 360) + 360) % 360
+    guard degree % 90 == 0 && degree != 0 else { return self }
+    // mpv's rotation is clockwise, NSAffineTransform's rotation is counterclockwise
+    degree = 360 - degree
+    let newSize = (degree == 180 ? self.size : NSMakeSize(self.size.height, self.size.width))
+    let rotation = NSAffineTransform.init()
+    rotation.rotate(byDegrees: CGFloat(degree))
+    rotation.append(.init(translationByX: newSize.width / 2, byY: newSize.height / 2))
+
+    let newImage = NSImage(size: newSize)
+    newImage.lockFocus()
+    rotation.concat()
+    let rect = NSMakeRect(0, 0, self.size.width, self.size.height)
+    let corner = NSMakePoint(-self.size.width / 2, -self.size.height / 2)
+    self.draw(at: corner, from: rect, operation: .copy, fraction: 1)
+    newImage.unlockFocus()
+    return newImage
+  }
 }
 
 
@@ -573,5 +598,61 @@ extension NSAppearance {
     } else {
       return name == .vibrantDark
     }
+  }
+}
+
+extension NSScreen {
+
+  /// Height of the camera housing on this screen if this screen has an embedded camera.
+  var cameraHousingHeight: CGFloat? {
+    if #available(macOS 12.0, *) {
+      return safeAreaInsets.top == 0.0 ? nil : safeAreaInsets.top
+    } else {
+      return nil
+    }
+  }
+
+  /// Log the given `NSScreen` object.
+  ///
+  /// Due to issues with multiple monitors and how the screen to use for a window is selected detailed logging has been added in this
+  /// area in case additional problems are encountered in the future.
+  /// - parameter label: Label to include in the log message.
+  /// - parameter screen: The `NSScreen` object to log.
+  static func log(_ label: String, _ screen: NSScreen?) {
+    guard let screen = screen else {
+      Logger.log("\(label): nil")
+      return
+    }
+    // Unfortunately localizedName is not available until macOS Catalina.
+    if #available(macOS 10.15, *) {
+      Logger.log("\(label): \(screen.localizedName) visible frame \(screen.visibleFrame)")
+    } else {
+      Logger.log("\(label): visible frame \(screen.visibleFrame)")
+    }
+  }
+}
+
+extension NSWindow {
+
+  /// Return the screen to use by default for this window.
+  ///
+  /// This method searches for a screen to use in this order:
+  /// - `window!.screen` The screen where most of the window is on; it is `nil` when the window is offscreen.
+  /// - `NSScreen.main` The screen containing the window that is currently receiving keyboard events.
+  /// - `NSScreeen.screens[0]` The primary screen of the user’s system.
+  ///
+  /// `PlayerCore` caches players along with their windows. This window may have been previously used on an external monitor
+  /// that is no longer attached. In that case the `screen` property of the window will be `nil`.  Apple documentation is silent
+  /// concerning when `NSScreen.main` is `nil`.  If that is encountered the primary screen will be used.
+  ///
+  /// - returns: The default `NSScreen` for this window
+  func selectDefaultScreen() -> NSScreen {
+    if screen != nil {
+      return screen!
+    }
+    if NSScreen.main != nil {
+      return NSScreen.main!
+    }
+    return NSScreen.screens[0]
   }
 }

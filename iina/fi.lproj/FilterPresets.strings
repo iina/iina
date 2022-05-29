@@ -1,0 +1,55 @@
+/*
+  FilterPresets.strings
+  iina
+
+  Created by lhc on 25/8/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+/* It's optional to localize descriptions for each parameter! */
+
+
+
+"crop" = "Rajaa";
+"crop.w" = "Leveys (oletus: videon leveys)";
+"crop.h" = "Korkeus (oletus: videon korkeus)";
+"crop.x" = "Origo X (oletus: keskikohta)";
+"crop.y" = "Origo Y (oletus: keskikohta)";
+
+"expand" = "Laajenna";
+"expand.w" = "Leveys (oletus: videon leveys)";
+"expand.h" = "Korkeus (oletus: videon korkeus)";
+"expand.x" = "Origo X (oletus: keskikohta)";
+"expand.y" = "Origo Y (oletus: keskikohta)";
+"expand.aspect" = "Laajenee sopimaan kuvasuhteeseen (esim. 4/3)";
+"expand.round" = "Pyöristää ylöspäin, jotta on jaollinen tällä luvulla";
+
+"sharpen" = "Terävöitä";
+"sharpen.msize" = "Matriisin koko";
+"sharpen.amount" = "Määrä";
+
+"blur" = "Sumenna";
+"blur.msize" = "Matriisin koko";
+"blur.amount" = "Määrä";
+
+"delogo" = "Piilota logo";
+"delogo.w" = "Leveys";
+"delogo.h" = "Korkeus";
+"delogo.x" = "Origo X";
+"delogo.y" = "Origo Y";
+
+"negative" = "Negatiivinen";
+
+"vflip" = "Käännä";
+"hflip" = "Peilaa";
+
+"lut3d" = "3D LUT";
+"lut3d.file" = "File path (you can also drag & drop the file into the input box)";
+"lut3d.interp" = "Interpolaatiotila";
+
+"custom_mpv" = "Mukautettu (mpv)";
+"custom_mpv.name" = "Suodattimen nimi";
+"custom_mpv.string" = "Suodattimen arvo";
+
+"custom_ffmpeg" = "Mukautettu (FFmpeg)";
+"custom_ffmpeg.name" = "Suodattimen nimi";
+"custom_ffmpeg.string" = "Suodattimen arvo";

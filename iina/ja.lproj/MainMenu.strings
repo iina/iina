@@ -5,7 +5,7 @@
 "0T7-Nu-SL7.title" = "プレイリストパネルを開く";
 
 /* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "0m7-3r-twH"; */
-"0m7-3r-twH.title" = "URLから開く…";
+"0m7-3r-twH.title" = "URLを開く…";
 
 /* Class = "NSMenu"; title = "Subtitle"; ObjectID = "16p-PA-x34"; */
 "16p-PA-x34.title" = "字幕";
@@ -65,7 +65,7 @@
 "8Oy-tP-udW.title" = "読み上げ";
 
 /* Class = "NSMenuItem"; title = "Audio Filters…"; ObjectID = "8Zh-hU-Cc4"; */
-"8Zh-hU-Cc4.title" = "オーディオフィルタ一覧…";
+"8Zh-hU-Cc4.title" = "オーディオフィルター一覧…";
 
 /* Class = "NSMenuItem"; title = "Speed:"; ObjectID = "8pV-XQ-AvB"; */
 "8pV-XQ-AvB.title" = "再生速度:";
@@ -92,7 +92,7 @@
 "ArE-2s-JIV.title" = "ウォーターマーク除去";
 
 /* Class = "NSMenuItem"; title = "Saved Video Filters"; ObjectID = "BDr-G9-IRx"; */
-"BDr-G9-IRx.title" = "保存したビデオフィルタ一覧";
+"BDr-G9-IRx.title" = "保存したビデオフィルター";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "BOF-NM-1cW"; */
 "BOF-NM-1cW.title" = "環境設定…";
@@ -128,7 +128,7 @@
 "F2S-fz-NVQ.title" = "ヘルプ";
 
 /* Class = "NSMenuItem"; title = "Next Chapter"; ObjectID = "F6G-Ln-fqI"; */
-"F6G-Ln-fqI.title" = "次のチャプタ";
+"F6G-Ln-fqI.title" = "次のチャプター";
 
 /* Class = "NSMenuItem"; title = "IINA Help"; ObjectID = "FKE-Sm-Kum"; */
 "FKE-Sm-Kum.title" = "IINA ヘルプ";
@@ -137,7 +137,7 @@
 "FTu-CF-O0R.title" = "ビデオトラック";
 
 /* Class = "NSMenuItem"; title = "Chapters"; ObjectID = "Fal-I4-PZk"; */
-"Fal-I4-PZk.title" = "チャプタ";
+"Fal-I4-PZk.title" = "チャプター";
 
 /* Class = "NSMenu"; title = "Playback"; ObjectID = "GEO-Iw-cKr"; */
 "GEO-Iw-cKr.title" = "制御";
@@ -212,7 +212,7 @@
 "NdF-0z-k5s.title" = "ペースト";
 
 /* Class = "NSMenuItem"; title = "Vertical (Flip)"; ObjectID = "OIu-H0-Mht"; */
-"OIu-H0-Mht.title" = "垂直 (フリップ)";
+"OIu-H0-Mht.title" = "垂直 (反転)";
 
 /* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "OY7-WF-poV"; */
 "OY7-WF-poV.title" = "最小化";
@@ -230,7 +230,7 @@
 "Pf6-5i-B1E.title" = "エンコード";
 
 /* Class = "NSMenuItem"; title = "Video Filters…"; ObjectID = "PyY-pR-jz7"; */
-"PyY-pR-jz7.title" = "ビデオフィルタ一覧…";
+"PyY-pR-jz7.title" = "ビデオフィルター一覧…";
 
 /* Class = "NSMenuItem"; title = "New Window"; ObjectID = "Qv1-xd-wj5"; */
 "Qv1-xd-wj5.title" = "新しいウィンドウ";
@@ -317,10 +317,10 @@
 "bib-Uj-vzu.title" = "ファイル";
 
 /* Class = "NSMenuItem"; title = "Inspector"; ObjectID = "bwz-r0-peR"; */
-"bwz-r0-peR.title" = "インスペクタ";
+"bwz-r0-peR.title" = "インスペクター";
 
 /* Class = "NSMenuItem"; title = "Normal Size (Retina)"; ObjectID = "c1x-bx-69F"; */
-"c1x-bx-69F.title" = "Retinaノーマルサイズ";
+"c1x-bx-69F.title" = "実際のサイズ (Retina)";
 
 /* Class = "NSMenuItem"; title = "Volume + 1%"; ObjectID = "c6Y-0e-vgf"; */
 "c6Y-0e-vgf.title" = "音量 + 1%";
@@ -329,7 +329,7 @@
 "d15-8v-dXA.title" = "アスペクト比";
 
 /* Class = "NSMenu"; title = "Chapters"; ObjectID = "d9c-me-L2H"; */
-"d9c-me-L2H.title" = "チャプタ";
+"d9c-me-L2H.title" = "チャプター";
 
 /* Class = "NSMenu"; title = "Transformations"; ObjectID = "dBM-BU-5xS"; */
 "dBM-BU-5xS.title" = "変換";
@@ -338,7 +338,7 @@
 "dMs-cI-mzQ.title" = "ファイル";
 
 /* Class = "NSMenuItem"; title = "Stop and Clear Playlists"; ObjectID = "deS-xK-iBb"; */
-"deS-xK-iBb.title" = "停止とプレイリストのクリア";
+"deS-xK-iBb.title" = "停止してプレイリストを消去する";
 
 /* Class = "NSMenu"; title = "Crop"; ObjectID = "eo2-Tt-SLx"; */
 "eo2-Tt-SLx.title" = "クロップ";
@@ -383,7 +383,7 @@
 "lew-3S-oGY.title" = "オーディオディレイ + 0.1s";
 
 /* Class = "NSMenuItem"; title = "Go to Screenshot Folder"; ObjectID = "lj0-Oo-7nB"; */
-"lj0-Oo-7nB.title" = "スクリーンショットフォルダを開く";
+"lj0-Oo-7nB.title" = "スクリーンショットフォルダーを開く";
 
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "m7w-hc-Y2F"; */
 "m7w-hc-Y2F.title" = "大文字にする";
@@ -392,16 +392,16 @@
 "mGw-jm-5x2.title" = "副字幕";
 
 /* Class = "NSMenuItem"; title = "Enter Picture in Picture"; ObjectID = "mND-N8-z6o"; */
-"mND-N8-z6o.title" = "ピクチャ・イン・ピクチャを使用";
+"mND-N8-z6o.title" = "ピクチャー・イン・ピクチャーを使用";
 
 /* Class = "NSMenuItem"; title = "Flip"; ObjectID = "mT1-1m-HwN"; */
-"mT1-1m-HwN.title" = "フリップ";
+"mT1-1m-HwN.title" = "反転";
 
 /* Class = "NSMenuItem"; title = "Cycle Audio Tracks"; ObjectID = "n8f-ub-Udb"; */
 "n8f-ub-Udb.title" = "オーディオトラックの切り替え";
 
 /* Class = "NSMenu"; title = "Flip"; ObjectID = "n90-to-nRT"; */
-"n90-to-nRT.title" = "フリップ";
+"n90-to-nRT.title" = "反転";
 
 /* Class = "NSMenuItem"; title = "Delete Current File"; ObjectID = "npH-8B-XA4"; */
 "npH-8B-XA4.title" = "現在のファイルを削除";
@@ -425,7 +425,7 @@
 "pdj-9C-Fn1.title" = "音量 - 5%";
 
 /* Class = "NSMenuItem"; title = "Previous Chapter"; ObjectID = "pqF-SZ-Ifz"; */
-"pqF-SZ-Ifz.title" = "前のチャプタ";
+"pqF-SZ-Ifz.title" = "前のチャプター";
 
 /* Class = "NSMenuItem"; title = "Font…"; ObjectID = "rme-fr-5rr"; */
 "rme-fr-5rr.title" = "フォント…";
@@ -479,7 +479,7 @@
 "xDJ-GA-Gjs.title" = "字幕一覧";
 
 /* Class = "NSMenu"; title = "Saved Video Filters"; ObjectID = "xhY-fF-oio"; */
-"xhY-fF-oio.title" = "保存したビデオフィルタ";
+"xhY-fF-oio.title" = "保存したビデオフィルター";
 
 /* Class = "NSMenuItem"; title = "Deinterlace"; ObjectID = "yHI-7D-OaI"; */
 "yHI-7D-OaI.title" = "インターレース解除";

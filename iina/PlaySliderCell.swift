@@ -128,12 +128,19 @@ class PlaySliderCell: NSSliderCell {
 
   override func knobRect(flipped: Bool) -> NSRect {
     let slider = self.controlView as! NSSlider
-    let bounds = super.barRect(flipped: flipped)
+    let barRect = super.barRect(flipped: flipped)
     let percentage = slider.doubleValue / (slider.maxValue - slider.minValue)
-    let pos = min(CGFloat(percentage) * bounds.width, bounds.width - 1);
+    let pos = min(CGFloat(percentage) * barRect.width, barRect.width - 1);
     let rect = super.knobRect(flipped: flipped)
     let flippedMultiplier = flipped ? CGFloat(-1) : CGFloat(1)
-    return NSMakeRect(pos - flippedMultiplier * 0.5 * knobWidth, rect.origin.y, knobWidth, rect.height)
+
+    let height: CGFloat
+    if #available(macOS 10.16, *) {
+      height = (barRect.origin.y - rect.origin.y) * 2 + barRect.height
+    } else {
+      height = rect.height
+    }
+    return NSMakeRect(pos - flippedMultiplier * 0.5 * knobWidth, rect.origin.y, knobWidth, height)
   }
 
   override func drawBar(inside rect: NSRect, flipped: Bool) {
@@ -157,18 +164,24 @@ class PlaySliderCell: NSSliderCell {
       progress = knobPos;
     }
 
-    let rect = NSMakeRect(rect.origin.x, rect.origin.y + 1, rect.width, rect.height - 2)
-    let path = NSBezierPath(roundedRect: rect, xRadius: barRadius, yRadius: barRadius)
+    NSGraphicsContext.saveGraphicsState()
+    let barRect: NSRect
+    if #available(macOS 10.16, *) {
+      barRect = rect
+    } else {
+      barRect = NSMakeRect(rect.origin.x, rect.origin.y + 1, rect.width, rect.height - 2)
+    }
+    let path = NSBezierPath(roundedRect: barRect, xRadius: barRadius, yRadius: barRadius)
 
     // draw left
-    let pathLeftRect : NSRect = NSMakeRect(rect.origin.x, rect.origin.y, progress, rect.height)
+    let pathLeftRect : NSRect = NSMakeRect(barRect.origin.x, barRect.origin.y, progress, barRect.height)
     NSBezierPath(rect: pathLeftRect).addClip();
 
     if #available(macOS 10.14, *), !controlView!.window!.effectiveAppearance.isDark {
       // Draw knob shadow in 10.14+ light theme
     } else {
       // Clip 1px around the knob
-      path.append(NSBezierPath(rect: NSRect(x: knobPos - 1, y: rect.origin.y, width: knobWidth + 2, height: rect.height)).reversed);
+      path.append(NSBezierPath(rect: NSRect(x: knobPos - 1, y: barRect.origin.y, width: knobWidth + 2, height: barRect.height)).reversed);
     }
 
     barColorLeft.setFill()
@@ -177,7 +190,7 @@ class PlaySliderCell: NSSliderCell {
 
     // draw right
     NSGraphicsContext.saveGraphicsState()
-    let pathRight = NSMakeRect(rect.origin.x + progress, rect.origin.y, rect.width - progress, rect.height)
+    let pathRight = NSMakeRect(barRect.origin.x + progress, barRect.origin.y, barRect.width - progress, barRect.height)
     NSBezierPath(rect: pathRight).setClip()
     barColorRight.setFill()
     path.fill()
@@ -192,10 +205,10 @@ class PlaySliderCell: NSSliderCell {
         if chapters.count > 0 {
           chapters.remove(at: 0)
           chapters.forEach { chapt in
-            let chapPos = CGFloat(chapt.time.second) / CGFloat(totalSec) * rect.width
+            let chapPos = CGFloat(chapt.time.second) / CGFloat(totalSec) * barRect.width
             let linePath = NSBezierPath()
-            linePath.move(to: NSPoint(x: chapPos, y: rect.origin.y))
-            linePath.line(to: NSPoint(x: chapPos, y: rect.origin.y + rect.height))
+            linePath.move(to: NSPoint(x: chapPos, y: barRect.origin.y))
+            linePath.line(to: NSPoint(x: chapPos, y: barRect.origin.y + barRect.height))
             linePath.stroke()
           }
         }

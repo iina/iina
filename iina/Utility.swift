@@ -14,7 +14,7 @@ class Utility {
 
   static let supportedFileExt: [MPVTrack.TrackType: [String]] = [
     .video: ["mkv", "mp4", "avi", "m4v", "mov", "3gp", "ts", "mts", "m2ts", "wmv", "flv", "f4v", "asf", "webm", "rm", "rmvb", "qt", "dv", "mpg", "mpeg", "mxf", "vob", "gif"],
-    .audio: ["mp3", "aac", "mka", "dts", "flac", "ogg", "oga", "mogg", "m4a", "ac3", "opus", "wav", "wv", "aiff", "ape", "tta", "tak"],
+    .audio: ["mp3", "aac", "mka", "dts", "flac", "ogg", "oga", "mogg", "m4a", "ac3", "opus", "wav", "wv", "aiff", "aif", "ape", "tta", "tak"],
     .sub: ["utf", "utf8", "utf-8", "idx", "sub", "srt", "smi", "rt", "ssa", "aqt", "jss", "js", "ass", "mks", "vtt", "sup", "scc"]
   ]
   static let playableFileExt = supportedFileExt[.video]! + supportedFileExt[.audio]!
@@ -295,6 +295,11 @@ class Utility {
 
   // MARK: - App functions
 
+  static func iinaCopyright() -> String {
+    let infoDic = Bundle.main.infoDictionary!
+    return infoDic["NSHumanReadableCopyright"] as! String
+  }
+
   static func iinaVersion() -> (String, String) {
     let infoDic = Bundle.main.infoDictionary!
     let version = infoDic["CFBundleShortVersionString"] as! String
@@ -367,16 +372,25 @@ class Utility {
     createDirIfNotExist(url: url)
     return url
   }()
-
-  static let thumbnailCacheURL: URL = {
-    // get path
+  
+  static let cacheURL: URL = {
     let cachesPath = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)
     Logger.ensure(cachesPath.count >= 1, "Cannot get path to Caches directory")
     let bundleID = Bundle.main.bundleIdentifier!
     let appCachesUrl = cachesPath.first!.appendingPathComponent(bundleID, isDirectory: true)
-    let appThumbnailCacheUrl = appCachesUrl.appendingPathComponent(AppData.thumbnailCacheFolder, isDirectory: true)
+    return appCachesUrl
+  }()
+
+  static let thumbnailCacheURL: URL = {
+    let appThumbnailCacheUrl = cacheURL.appendingPathComponent(AppData.thumbnailCacheFolder, isDirectory: true)
     createDirIfNotExist(url: appThumbnailCacheUrl)
     return appThumbnailCacheUrl
+  }()
+  
+  static let screenshotCacheURL: URL = {
+    let url = cacheURL.appendingPathComponent(AppData.screenshotCacheFolder, isDirectory: true)
+    createDirIfNotExist(url: url)
+    return url
   }()
 
   static let playbackHistoryURL: URL = {
@@ -445,6 +459,25 @@ class Utility {
     default:
       return (NSAppearance(named: .vibrantDark), .dark)
     }
+  }
+
+  static func getLatestScreenshot(from path: String) -> URL? {
+    let folder = URL(fileURLWithPath: NSString(string: path).expandingTildeInPath)
+    guard let contents = try? FileManager.default.contentsOfDirectory(
+      at: folder,
+      includingPropertiesForKeys: [.creationDateKey],
+      options: .skipsSubdirectoryDescendants) else { return nil }
+
+    var latestDate = Date.distantPast
+    var latestFile: URL = contents[0]
+
+    for file in contents {
+      if let date = try? file.resourceValues(forKeys: [.creationDateKey]).creationDate, date > latestDate {
+        latestDate = date
+        latestFile = file
+      }
+    }
+    return latestFile
   }
 
   // MARK: - Util classes

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,7 +20,7 @@
                 <outlet property="controlView" destination="cDR-8J-QI7" id="B1L-ru-Mnc"/>
                 <outlet property="controlViewTopConstraint" destination="sJO-Qa-tUh" id="iXu-0b-vwV"/>
                 <outlet property="defaultAlbumArt" destination="Psi-wJ-2SC" id="oeb-1Z-2ho"/>
-                <outlet property="leftLabel" destination="9EY-2T-Ebf" id="ICj-Tc-hjF"/>
+                <outlet property="leftLabel" destination="9EY-2T-Ebf" id="L1e-2I-Mbu"/>
                 <outlet property="mediaInfoView" destination="Zv7-H8-iOq" id="LrZ-za-HpC"/>
                 <outlet property="muteButton" destination="5Og-lg-qvH" id="9dA-7h-PGA"/>
                 <outlet property="playButton" destination="aC9-OK-a4x" id="3Ej-3P-qnY"/>
@@ -29,6 +29,8 @@
                 <outlet property="rightLabel" destination="xAK-xc-Njn" id="2II-PQ-Hu8"/>
                 <outlet property="titleLabel" destination="h25-bp-EvL" id="HbE-Ji-c4o"/>
                 <outlet property="titleLabelTopConstraint" destination="Qaf-SS-SCV" id="NcC-8F-DTU"/>
+                <outlet property="toggleAlbumArtButton" destination="KFz-Kp-RxC" id="xjO-1X-eUP"/>
+                <outlet property="togglePlaylistButton" destination="a5L-QK-yog" id="yMA-2P-SHU"/>
                 <outlet property="videoWrapperView" destination="WD9-DD-LNj" id="Hfa-UA-t9H"/>
                 <outlet property="videoWrapperViewBottomConstraint" destination="m9y-eT-GRX" id="adV-UC-yzq"/>
                 <outlet property="volumeButton" destination="fUy-ap-8fj" id="VKB-Zt-Jdx"/>
@@ -46,7 +48,7 @@
             <windowCollectionBehavior key="collectionBehavior" fullScreenNone="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="300" height="72"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <value key="minSize" type="size" width="300" height="72"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="300" height="72"/>
@@ -72,10 +74,10 @@
                     <visualEffectView wantsLayer="YES" blendingMode="behindWindow" material="underWindowBackground" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="HdA-I9-dRJ">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="72"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xAK-xc-Njn" customClass="DurationDisplayTextField" customModule="IINA" customModuleProvider="target">
+                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xAK-xc-Njn" customClass="DurationDisplayTextField" customModule="IINA" customModuleProvider="target">
                                 <rect key="frame" x="260" y="9" width="36" height="11"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="32" id="Dnz-rF-ikZ"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="32" id="Dnz-rF-ikZ"/>
                                 </constraints>
                                 <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="-:--:--" id="V74-PQ-Yfr">
                                     <font key="font" metaFont="label" size="9"/>
@@ -86,10 +88,10 @@
                                     <binding destination="-2" name="font" keyPath="monospacedFont" id="TM3-Ri-L7h"/>
                                 </connections>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9EY-2T-Ebf">
+                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9EY-2T-Ebf" customClass="DurationDisplayTextField" customModule="IINA" customModuleProvider="target">
                                 <rect key="frame" x="4" y="9" width="36" height="11"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="32" id="1iE-QR-s8H"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="32" id="1iE-QR-s8H"/>
                                 </constraints>
                                 <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="-:--:--" id="WnA-NE-3bG">
                                     <font key="font" metaFont="label" size="9"/>
@@ -248,16 +250,17 @@
                             <constraint firstItem="Zv7-H8-iOq" firstAttribute="leading" secondItem="HdA-I9-dRJ" secondAttribute="leading" id="0RG-9U-PfH"/>
                             <constraint firstItem="e3M-Ma-JJM" firstAttribute="top" secondItem="HdA-I9-dRJ" secondAttribute="top" constant="50" id="9qE-pN-912"/>
                             <constraint firstItem="9EY-2T-Ebf" firstAttribute="leading" secondItem="HdA-I9-dRJ" secondAttribute="leading" constant="6" id="CDO-gT-VfY"/>
-                            <constraint firstItem="e3M-Ma-JJM" firstAttribute="leading" secondItem="HdA-I9-dRJ" secondAttribute="leading" constant="44" id="FqJ-tE-vz0"/>
                             <constraint firstItem="9EY-2T-Ebf" firstAttribute="centerY" secondItem="e3M-Ma-JJM" secondAttribute="centerY" id="HEK-U3-nXU"/>
                             <constraint firstItem="xAK-xc-Njn" firstAttribute="centerY" secondItem="e3M-Ma-JJM" secondAttribute="centerY" id="IxN-QB-clc"/>
+                            <constraint firstItem="e3M-Ma-JJM" firstAttribute="leading" secondItem="9EY-2T-Ebf" secondAttribute="trailing" constant="6" id="Kq9-D1-FXY"/>
                             <constraint firstAttribute="trailing" secondItem="xAK-xc-Njn" secondAttribute="trailing" constant="6" id="KxC-bd-MIe"/>
                             <constraint firstAttribute="height" constant="72" id="Nfm-Ob-h4c"/>
+                            <constraint firstItem="9EY-2T-Ebf" firstAttribute="width" secondItem="xAK-xc-Njn" secondAttribute="width" id="UYG-wX-fNd"/>
                             <constraint firstItem="cDR-8J-QI7" firstAttribute="leading" secondItem="HdA-I9-dRJ" secondAttribute="leading" id="VVS-g3-XqO"/>
                             <constraint firstItem="cDR-8J-QI7" firstAttribute="top" secondItem="HdA-I9-dRJ" secondAttribute="top" id="Ypa-JG-tiE"/>
-                            <constraint firstAttribute="trailing" secondItem="e3M-Ma-JJM" secondAttribute="trailing" constant="44" id="ZEF-WM-2mj"/>
                             <constraint firstItem="Zv7-H8-iOq" firstAttribute="top" secondItem="HdA-I9-dRJ" secondAttribute="top" id="fw5-6p-eNb"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="cDR-8J-QI7" secondAttribute="bottom" constant="24" id="n2O-up-sBQ"/>
+                            <constraint firstItem="xAK-xc-Njn" firstAttribute="leading" secondItem="e3M-Ma-JJM" secondAttribute="trailing" constant="6" id="oEQ-mY-BqT"/>
                             <constraint firstAttribute="trailing" secondItem="cDR-8J-QI7" secondAttribute="trailing" id="uCr-Bo-TON"/>
                             <constraint firstAttribute="trailing" secondItem="Zv7-H8-iOq" secondAttribute="trailing" id="vmF-Ea-a1k"/>
                         </constraints>
@@ -464,13 +467,13 @@
     <resources>
         <image name="NSStopProgressFreestandingTemplate" width="14" height="14"/>
         <image name="back" width="11" height="11"/>
-        <image name="mute" width="17" height="14"/>
+        <image name="mute" width="16" height="14"/>
         <image name="nextl" width="24" height="24"/>
         <image name="nextr" width="24" height="24"/>
         <image name="pause" width="24" height="24"/>
         <image name="play" width="24" height="24"/>
         <image name="playlist" width="14" height="14"/>
         <image name="toggle-album-art" width="14" height="14"/>
-        <image name="volume" width="17" height="14"/>
+        <image name="volume" width="16" height="14"/>
     </resources>
 </document>

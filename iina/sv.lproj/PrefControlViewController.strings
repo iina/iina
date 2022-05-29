@@ -34,7 +34,7 @@
 /* Class = "NSTextFieldCell"; title = "Middle click to:"; ObjectID = "Gyd-Qt-FEo"; */
 "Gyd-Qt-FEo.title" = "Mittenklicka för att:";
 
-/* Class = "NSButtonCell"; title = "Acccepts first mouse"; ObjectID = "gZK-ry-lQs"; */
+/* Class = "NSButtonCell"; title = "Accepts first mouse"; ObjectID = "gZK-ry-lQs"; */
 "gZK-ry-lQs.title" = "Accepterar klick även när fönstret inte är aktivt";
 
 /* Class = "NSMenuItem"; title = "Fullscreen"; ObjectID = "Hm3-dh-jgb"; */
@@ -126,3 +126,12 @@
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "wkV-Gq-B0T"; */
 "wkV-Gq-B0T.title" = "Inget";
+
+/* Class = "NSMenuItem"; title = "Toggle Picture-in-Picture"; ObjectID = "rvS-xA-7bv"; */
+"rvS-xA-7bv.title" = "Växla bild-i-bild";
+
+/* Class = "NSMenuItem"; title = "Toggle Picture-in-Picture"; ObjectID = "ibM-4r-SQA"; */
+"ibM-4r-SQA.title" = "Växla bild-i-bild";
+
+/* Class = "NSMenuItem"; title = "Toggle Picture-in-Picture"; ObjectID = "3Pm-nn-HpB"; */
+"3Pm-nn-HpB.title" = "Växla bild-i-bild";

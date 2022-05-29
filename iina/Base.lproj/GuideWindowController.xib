@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="GuideWindowController" customModule="IINA" customModuleProvider="target">
+            <connections>
+                <outlet property="highlightsContainerView" destination="yEy-Df-H4W" id="wgV-b5-Ra1"/>
+                <outlet property="highlightsLoadingFailedBox" destination="vEa-x6-5Uc" id="7qs-os-VlD"/>
+                <outlet property="highlightsLoadingIndicator" destination="rBh-WX-KdK" id="h0m-oQ-EQi"/>
+                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="F0z-JX-Cv5">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+            <rect key="contentRect" x="196" y="240" width="740" height="540"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <view key="contentView" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="740" height="588"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="yEy-Df-H4W">
+                        <rect key="frame" x="0.0" y="48" width="740" height="540"/>
+                        <subviews>
+                            <progressIndicator wantsLayer="YES" maxValue="100" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="rBh-WX-KdK">
+                                <rect key="frame" x="354" y="254" width="32" height="32"/>
+                            </progressIndicator>
+                            <box hidden="YES" boxType="custom" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="vEa-x6-5Uc">
+                                <rect key="frame" x="190" y="219" width="360" height="103"/>
+                                <view key="contentView" id="wmd-Zb-vpy">
+                                    <rect key="frame" x="1" y="1" width="358" height="101"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QVK-HC-cyL">
+                                            <rect key="frame" x="14" y="53" width="330" height="32"/>
+                                            <textFieldCell key="cell" alignment="center" title="Failed to load highlights. Please visit our website https://iina.io for more information." id="oaH-Na-skD">
+                                                <font key="font" usesAppearanceFont="YES"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IXf-x5-M4T">
+                                            <rect key="frame" x="135" y="9" width="89" height="32"/>
+                                            <buttonCell key="cell" type="push" title="Website" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="FJS-b9-ATj">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="visitIINAWebsite:" target="-2" id="q4t-Nq-SPV"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="QVK-HC-cyL" firstAttribute="leading" secondItem="wmd-Zb-vpy" secondAttribute="leading" constant="16" id="6Pz-KM-ciy"/>
+                                        <constraint firstItem="IXf-x5-M4T" firstAttribute="top" secondItem="QVK-HC-cyL" secondAttribute="bottom" constant="16" id="Bqd-GA-wCM"/>
+                                        <constraint firstItem="IXf-x5-M4T" firstAttribute="centerX" secondItem="wmd-Zb-vpy" secondAttribute="centerX" id="ShJ-dc-xvA"/>
+                                        <constraint firstAttribute="bottom" secondItem="IXf-x5-M4T" secondAttribute="bottom" constant="16" id="Zlf-dl-nIL"/>
+                                        <constraint firstAttribute="trailing" secondItem="QVK-HC-cyL" secondAttribute="trailing" constant="16" id="e6a-yQ-gvV"/>
+                                        <constraint firstItem="QVK-HC-cyL" firstAttribute="top" secondItem="wmd-Zb-vpy" secondAttribute="top" constant="16" id="lYX-65-Tg8"/>
+                                    </constraints>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="360" id="lYd-gK-JUY"/>
+                                </constraints>
+                                <color key="borderColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                <color key="fillColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </box>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="540" id="Uxi-WC-V06"/>
+                            <constraint firstItem="vEa-x6-5Uc" firstAttribute="centerX" secondItem="yEy-Df-H4W" secondAttribute="centerX" id="XVx-C4-XEX"/>
+                            <constraint firstAttribute="width" constant="740" id="bW3-Oq-6e1"/>
+                            <constraint firstItem="vEa-x6-5Uc" firstAttribute="centerY" secondItem="yEy-Df-H4W" secondAttribute="centerY" id="izo-At-D5B"/>
+                            <constraint firstItem="rBh-WX-KdK" firstAttribute="centerY" secondItem="yEy-Df-H4W" secondAttribute="centerY" id="pv0-Jg-pS3"/>
+                            <constraint firstItem="rBh-WX-KdK" firstAttribute="centerX" secondItem="yEy-Df-H4W" secondAttribute="centerX" id="wBa-JD-Kf6"/>
+                        </constraints>
+                    </customView>
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="pxh-av-YlG">
+                        <rect key="frame" x="0.0" y="0.0" width="740" height="48"/>
+                        <subviews>
+                            <visualEffectView blendingMode="behindWindow" material="titlebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="AIT-ym-6Ds">
+                                <rect key="frame" x="0.0" y="0.0" width="740" height="48"/>
+                                <subviews>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Tcg-UF-mNa">
+                                        <rect key="frame" x="300" y="8" width="140" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="6XF-aJ-Jbl"/>
+                                            <constraint firstAttribute="width" constant="140" id="Fdm-rr-ixH"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="square" title="Continue" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pRW-Nk-MIQ" customClass="GuideWindowButtonCell" customModule="IINA" customModuleProvider="target">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="continueBtnAction:" target="-2" id="Cip-4l-dp3"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Tcg-UF-mNa" firstAttribute="centerX" secondItem="AIT-ym-6Ds" secondAttribute="centerX" id="C30-ER-yf3"/>
+                                    <constraint firstItem="Tcg-UF-mNa" firstAttribute="centerY" secondItem="AIT-ym-6Ds" secondAttribute="centerY" id="HP1-F5-9RP"/>
+                                </constraints>
+                            </visualEffectView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="AIT-ym-6Ds" secondAttribute="bottom" id="08n-WC-jmt"/>
+                            <constraint firstAttribute="trailing" secondItem="AIT-ym-6Ds" secondAttribute="trailing" id="HEe-xm-J5i"/>
+                            <constraint firstItem="AIT-ym-6Ds" firstAttribute="leading" secondItem="pxh-av-YlG" secondAttribute="leading" id="cfi-lT-D6G"/>
+                            <constraint firstItem="AIT-ym-6Ds" firstAttribute="top" secondItem="pxh-av-YlG" secondAttribute="top" id="gqU-rS-6yZ"/>
+                            <constraint firstAttribute="height" constant="48" id="nTV-xT-ygr"/>
+                        </constraints>
+                    </customView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="yEy-Df-H4W" secondAttribute="trailing" id="08k-1s-hRb"/>
+                    <constraint firstItem="yEy-Df-H4W" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="7XV-r4-CaR"/>
+                    <constraint firstAttribute="bottom" secondItem="pxh-av-YlG" secondAttribute="bottom" id="Ao5-nb-gKt"/>
+                    <constraint firstItem="yEy-Df-H4W" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="eyM-75-dbO"/>
+                    <constraint firstAttribute="trailing" secondItem="pxh-av-YlG" secondAttribute="trailing" id="i0o-sM-Rqx"/>
+                    <constraint firstItem="pxh-av-YlG" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="uXZ-9n-RqT"/>
+                    <constraint firstItem="pxh-av-YlG" firstAttribute="top" secondItem="yEy-Df-H4W" secondAttribute="bottom" id="w5x-7t-nLv"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+            </connections>
+            <point key="canvasLocation" x="269" y="281"/>
+        </window>
+    </objects>
+</document>

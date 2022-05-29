@@ -148,6 +148,7 @@
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
                                 <menuItem title="Pause / Resume" tag="2" id="Dm7-JG-fLd"/>
+                                <menuItem title="Toggle Picture-in-Picture" tag="4" id="rvS-xA-7bv"/>
                                 <menuItem title="None" id="wkV-Gq-B0T"/>
                             </items>
                         </menu>
@@ -177,6 +178,7 @@
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
                                 <menuItem title="Pause / Resume" tag="2" id="mOX-Fi-oTv"/>
+                                <menuItem title="Toggle Picture-in-Picture" tag="4" id="ibM-4r-SQA"/>
                                 <menuItem title="None" id="oOk-y6-lek"/>
                             </items>
                         </menu>
@@ -272,6 +274,7 @@
                                 <menuItem title="Toggle fullscreen" tag="1" id="7wy-xt-c8Z">
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
+                                <menuItem title="Toggle Picture-in-Picture" tag="4" id="3Pm-nn-HpB"/>
                                 <menuItem title="None" id="unj-zt-RyU"/>
                             </items>
                         </menu>

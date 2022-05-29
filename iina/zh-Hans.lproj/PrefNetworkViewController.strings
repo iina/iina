@@ -17,7 +17,7 @@
 "GBe-wd-tne.title" = "格式: <key>=<value>[,<key>=<value>[,…]]";
 
 /* Class = "NSTextFieldCell"; title = "Seconds to prefetch:"; ObjectID = "J96-32-M9A"; */
-"J96-32-M9A.title" = "预读取秒数:";
+"J96-32-M9A.title" = "预读秒数:";
 
 /* Class = "NSTextFieldCell"; title = "Cache:"; ObjectID = "LNk-io-MM7"; */
 "LNk-io-MM7.title" = "缓存:";
@@ -26,7 +26,7 @@
 "RwW-JS-iTv.title" = "重启 IINA 后生效。";
 
 /* Class = "NSTextFieldCell"; title = "IINA will search youtube-dl in this folder. Restart needed."; ObjectID = "YqE-yV-BvQ"; */
-"YqE-yV-BvQ.title" = "IINA 会在此文件夹中搜索 youtube-dl。需要重启。";
+"YqE-yV-BvQ.title" = "IINA 会在此文件夹中搜索 youtube-dl。需要重新启动。";
 
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "aNr-lv-K0r"; */
 "aNr-lv-K0r.title" = "自动";

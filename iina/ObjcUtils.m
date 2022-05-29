@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "iina-Bridging-Header.h"
 #import "ObjcUtils.h"
 
 #import <wchar.h>
@@ -74,6 +75,37 @@ static inline int min(int a, int b, int c) {
                          dist[i - 1][j - 1] + (cstr0[i] == cstr1[j] ? 0 : SUBSTITUTION_WEIGHT));
 
   return dist[len0][len1];
+}
+
++ (NSImage *)getImageFrom:(mpv_node *)image {
+  mpv_node *list = image->u.list->values;
+  uint64_t width = list[0].u.int64;
+  uint64_t height = list[1].u.int64;
+  uint64_t pixels = width * height;
+  uint8_t *pixel_array = list[4].u.ba->data;
+  size_t size = pixels * 4 * sizeof(uint8_t);
+  uint8_t *buffer = malloc(size);
+  memcpy(buffer, pixel_array, size);
+  int i;
+  // The pixel array mpv returns arrange color data as "B8G8R8X8",
+  // whereas CGImages's data provider needs RGBA, so swap each
+  // pixel at index 0 and 2.
+  for (i = 0; i < pixels; ++i) {
+    uint64_t x = i << 2, y = i << 2 | 2;
+    uint8_t t = buffer[x];
+    buffer[x] = buffer[y];
+    buffer[y] = t;
+  }
+  CGDataProviderRef ref = CGDataProviderCreateWithData(nil, buffer,
+                                                       list[4].u.ba->size, nil);
+  CGImageRef cgImage = CGImageCreate(width, height, 8, 4 * 8, width * 4,
+                                     CGColorSpaceCreateDeviceRGB(),
+                                     (CGBitmapInfo)kCGImageAlphaPremultipliedLast,
+                                     ref, nil, true, kCGRenderingIntentDefault);
+
+  NSImage *nsImage = [[NSImage alloc] initWithCGImage:cgImage size:NSZeroSize];
+  free(buffer);
+  return nsImage;
 }
 
 @end

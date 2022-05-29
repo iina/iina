@@ -1,0 +1,53 @@
+/* Class = "NSMenuItem"; title = "Auto (Copy)"; ObjectID = "0DK-uZ-duj"; */
+"0DK-uZ-duj.title" = "Automático (Copiar)";
+
+/* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "2yO-To-el7"; */
+"2yO-To-el7.title" = "Predefinição: 0 (Auto)";
+
+/* Class = "NSTextFieldCell"; title = "Maximum volume:"; ObjectID = "44m-ge-naq"; */
+"44m-ge-naq.title" = "Volume máximo:";
+
+/* Class = "NSTextFieldCell"; title = "Number of threads:"; ObjectID = "50C-1R-wlJ"; */
+"50C-1R-wlJ.title" = "Número de segmentos:";
+
+/* Class = "NSButtonCell"; title = "Force dedicated GPU"; ObjectID = "YUr-aJ-xfC"; */
+"YUr-aJ-xfC.title" = "Forçar GPU dedicada";
+
+/* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "bxW-np-SGm"; */
+"bxW-np-SGm.title" = "Predefinição: 0 (Auto)";
+
+/* Class = "NSTextFieldCell"; title = "(100-1000)"; ObjectID = "cJP-ep-847"; */
+"cJP-ep-847.title" = "(100-1000)";
+
+/* Class = "NSButtonCell"; title = "Initial volume:"; ObjectID = "g4c-vG-URh"; */
+"g4c-vG-URh.title" = "Volume inicial:";
+
+/* Class = "NSTextFieldCell"; title = "Always use the dedicated GPU for rendering (if exists). This can improve performance but may result in poor battery life."; ObjectID = "gCv-sJ-uQJ"; */
+"gCv-sJ-uQJ.title" = "Sempre use a GPU dedicada para a renderização (se existir). Isso pode melhorar o desempenho, mas pode reduzir a duração da bateria.";
+
+/* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
+"m5P-5f-5uo.title" = "Vídeo:";
+
+/* Class = "NSTextFieldCell"; title = "Hardware decoder:"; ObjectID = "nwg-2K-G2G"; */
+"nwg-2K-G2G.title" = "Decodificador de hardware:";
+
+/* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "rFu-rL-EJC"; */
+"rFu-rL-EJC.title" = "Desativado";
+
+/* Class = "NSTextFieldCell"; title = "Preferred audio device:"; ObjectID = "sLR-vV-xn2"; */
+"sLR-vV-xn2.title" = "Dispositivo de áudio preferencial:";
+
+/* Class = "NSTextFieldCell"; title = "Audio:"; ObjectID = "sV5-dL-MUt"; */
+"sV5-dL-MUt.title" = "Áudio:";
+
+/* Class = "NSMenuItem"; title = "Auto"; ObjectID = "tAQ-oU-1AJ"; */
+"tAQ-oU-1AJ.title" = "Automático";
+
+/* Class = "NSTextFieldCell"; title = "Number of threads:"; ObjectID = "tO4-pw-2W9"; */
+"tO4-pw-2W9.title" = "Número de segmentos:";
+
+/* Class = "NSTextFieldCell"; title = "S/PDIF output:"; ObjectID = "up6-6A-4sn"; */
+"up6-6A-4sn.title" = "Saída S/PDIF:";
+
+/* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "wjt-O6-KbC"; */
+"wjt-O6-KbC.title" = "Idioma preferencial:";

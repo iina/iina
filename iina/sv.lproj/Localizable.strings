@@ -16,13 +16,26 @@
 "general.username" = "Användarnamn";
 "general.password" = "Lösenord";
 
+// Guide Window
+"guide.highlights" = "Highlights";
+"guide.basic_settings" = "Basic Settings";
+"guide.faq" = "Frequently Asked Questions";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffrar… %d%%";
 "main.opening_stream" = "Öppnar ström…";
+"osc.precision" = "Precision";
+"osc.1s" = "1 sekund";
+"osc.100ms" = "100 millisekunder";
+"osc.10ms" = "10 millisekunder";
+"osc.1ms" = "1 millisekund";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Förval";
 "quicksetting.item_none" = "Inget";
+"quicksetting.hwdec" = "Hårdvaruavkodning";
+"quicksetting.deinterlace" = "Avfläta";
+"quicksetting.hdr" = "HDR";
 
 // OSDMessage.swift
 "osd.pause" = "Pausa";
@@ -33,6 +46,7 @@
 "osd.crop" = "Beskär: %@";
 "osd.rotate" = "Rotera: %i°";
 "osd.deinterlace" = "Avfläta: %@";
+"osd.hwdec" = "Hårdvaruavkodning: %@";
 "osd.audio_delay.nodelay" = "Ljudfördröjning: ingen fördröjning";
 "osd.audio_delay.later" = "Ljudfördröjning: %.2f s senare";
 "osd.audio_delay.earlier" = "Ljudfördröjning: %.2f s tidigare";
@@ -87,6 +101,8 @@
 "preference.key_binding_hint_1" = "För att redigera snabbtangenter i nuvarande konfigurationsfil, klicka på \"Duplicera…\" först för att skapa en kopia.";
 "preference.key_binding_hint_2" = "Dubbelklicka på en rad på höger sida för att redigera motsvarande kortkommando.";
 
+"preference.enable_adv_settings" = "Aktivera avancerade inställningar";
+
 "menu.volume" = "Volym: %d";
 "menu.audio_delay" = "Ljudfördröjning: %.2fs";
 "menu.sub_delay" = "Undertextfördröjning: %.2f s";
@@ -109,6 +125,8 @@
 "menu.sub_delay_up" = "Undertextfördröjning +%.1f s";
 "menu.sub_delay_down" = "Undertextfördröjning -%.1f s";
 
+"menu.crop_custom" = "Anpassad...";
+
 "track.none" = "<Inget>";
 
 "subtrack.no_loaded" = "Inga undertexter inlästa";
@@ -116,7 +134,6 @@
 
 // Alerts
 "alert.beta_channel.title" = "Ta emot beta-versionsuppdateringar";
-"alert.beta_channel.message" = "IINA v1.0 är på väg! Vill du hjälpa oss testa beta-versioner?";
 
 "alert.title_error" = "Fel";
 "alert.title_warning" = "Varning";
@@ -257,6 +274,16 @@
 "osc_toolbar.music_mode" = "Gå in i musikläge";
 "osc_toolbar.sub_track" = "Välj undertextspår";
 
+"mini_player.album_art" = "Växla skivomslag";
+"mini_player.loop" = "Upprepa";
+"mini_player.shuffle" = "Blanda";
+"mini_player.remove" = "Ta bort från spellista";
+"mini_player.add" = "Lägg till i spellista";
+"mini_player.delete" = "Ta bort alla spår från spellistan";
+"mini_player.volume" = "Volym";
+"mini_player.close" = "Avsluta musikläge";
+"mini_player.back" = "Återgå till videoläge";
+
 // Touch bar
 
 "touchbar.ahead_15" = "15 sek framåt";
@@ -272,5 +299,5 @@
 "touchbar.play_pause" = "Spela upp / pausa";
 "touchbar.seek" = "Spola";
 "touchbar.time" = "Tidsposition";
-"touchbar.remainingTime" = "Återstående tid";
+"touchbar.remainingTimeOrTotalDuration" = "Återstående tid / Total varaktighet";
 "touchbar.toggle_pip" = "Växla bild-i-bild";

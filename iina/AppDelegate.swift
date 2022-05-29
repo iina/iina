@@ -12,7 +12,7 @@ import Sparkle
 
 /** Max time interval for repeated `application(_:openFile:)` calls. */
 fileprivate let OpenFileRepeatTime = TimeInterval(0.2)
-/** Tags for "Open File/URL" menu item when "ALways open file in new windows" is off. Vice versa. */
+/** Tags for "Open File/URL" menu item when "Always open file in new windows" is off. Vice versa. */
 fileprivate let NormalMenuItemTag = 0
 /** Tags for "Open File/URL in New Window" when "Always open URL" when "Open file in new windows" is off. Vice versa. */
 fileprivate let AlternativeMenuItemTag = 1
@@ -46,6 +46,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   lazy var fontPicker: FontPickerWindowController = FontPickerWindowController()
   lazy var inspector: InspectorWindowController = InspectorWindowController()
   lazy var historyWindow: HistoryWindowController = HistoryWindowController()
+  lazy var guideWindow: GuideWindowController = GuideWindowController()
 
   lazy var vfWindow: FilterWindowController = {
     let w = FilterWindowController()
@@ -86,17 +87,47 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   // MARK: - App Delegate
 
   func applicationWillFinishLaunching(_ notification: Notification) {
+    // Must setup preferences before logging so log level is set correctly.
     registerUserDefaultValues()
+
+    // Start the log file by logging the version of IINA producing the log file.
+    let (version, build) = Utility.iinaVersion()
+    Logger.log("IINA \(version) Build \(build)")
+
+    // The copyright is used in the Finder "Get Info" window which is a narrow window so the
+    // copyright consists of multiple lines.
+    let copyright = Utility.iinaCopyright()
+    copyright.enumerateLines { line, _ in
+      Logger.log(line)
+    }
+
+    // Useful to know the versions of significant dependencies that are being used so log that
+    // information as well when it can be obtained.
+
+    // The version of mpv is not logged at this point because mpv does not provide a static
+    // method that returns the version. To obtain version related information you must
+    // construct a mpv object, which has side effects. So the mpv version is logged in
+    // applicationDidFinishLaunching to preserve the existing order of initialization.
+
+    Logger.log("FFmpeg \(String(cString: av_version_info()))")
+    // FFmpeg libraries and their versions in alphabetical order.
+    let libraries: [(name: String, version: UInt32)] = [("libavcodec", avcodec_version()), ("libavformat", avformat_version()), ("libavutil", avutil_version()), ("libswscale", swscale_version())]
+    for library in libraries {
+      // The version of FFmpeg libraries is encoded into an unsigned integer in a proprietary
+      // format which needs to be decoded into a string for display.
+      Logger.log("  \(library.name) \(AppDelegate.versionAsString(library.version))")
+    }
+
     Logger.log("App will launch")
 
     // register for url event
     NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(self.handleURLEvent(event:withReplyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
 
-    // beta channel
-    if FirstRunManager.isFirstRun(for: .joinBetaChannel) {
-      let result = Utility.quickAskPanel("beta_channel")
-      Preference.set(result, for: .receiveBetaUpdate)
+    // guide window
+    if FirstRunManager.isFirstRun(for: .init("firstLaunchAfter\(version)")) {
+      guideWindow.show(pages: [.highlights])
     }
+
     SUUpdater.shared().feedURL = URL(string: Preference.bool(for: .receiveBetaUpdate) ? AppData.appcastBetaLink : AppData.appcastLink)!
 
     // handle arguments
@@ -131,7 +162,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     Logger.log("Filenames from arguments: \(iinaArgFilenames)")
     commandLineStatus.parseArguments(iinaArgs)
 
-    let (version, build) = Utility.iinaVersion()
     print("IINA \(version) Build \(build)")
 
     guard !iinaArgFilenames.isEmpty || commandLineStatus.isStdin else {
@@ -147,6 +177,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     Logger.log("App launched")
+
+    Logger.log("Using \(PlayerCore.active.mpv.mpvVersion!)")
 
     if !isReady {
       getReady()
@@ -165,7 +197,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       if RemoteCommandController.useSystemMediaControl {
         Logger.log("Setting up MediaPlayer integration")
         RemoteCommandController.setup()
-        NowPlayingInfoManager.updateState(.unknown)
+        NowPlayingInfoManager.updateInfo(state: .unknown)
       }
     }
 
@@ -353,7 +385,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       Logger.log("Cannot parse URL using URLComponents", level: .warning)
       return
     }
-
+    
+    if parsed.scheme != "iina" {
+      // try to open the URL directly
+      PlayerCore.activeOrNewForMenuAction(isAlternative: false).openURLString(url)
+      return
+    }
+    
     // handle url scheme
     guard let host = parsed.host else { return }
 
@@ -478,6 +516,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     historyWindow.showWindow(self)
   }
 
+  @IBAction func showHighlights(_ sender: AnyObject) {
+    guideWindow.show(pages: [.highlights])
+  }
+
   @IBAction func helpAction(_ sender: AnyObject) {
     NSWorkspace.shared.open(URL(string: AppData.wikiLink)!)
   }
@@ -494,6 +536,48 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     UserDefaults.standard.register(defaults: [String: Any](uniqueKeysWithValues: Preference.defaultPreference.map { ($0.0.rawValue, $0.1) }))
   }
 
+  // MARK: - FFmpeg version parsing
+
+  /// Extracts the major version number from the given FFmpeg encoded version number.
+  ///
+  /// This is a Swift implementation of the FFmpeg macro `AV_VERSION_MAJOR`.
+  /// - Parameter version: Encoded version number in FFmpeg proprietary format.
+  /// - Returns: The major version number
+  private static func avVersionMajor(_ version: UInt32) -> UInt32 {
+    version >> 16
+  }
+
+  /// Extracts the minor version number from the given FFmpeg encoded version number.
+  ///
+  /// This is a Swift implementation of the FFmpeg macro `AV_VERSION_MINOR`.
+  /// - Parameter version: Encoded version number in FFmpeg proprietary format.
+  /// - Returns: The minor version number
+  private static func avVersionMinor(_ version: UInt32) -> UInt32 {
+    (version & 0x00FF00) >> 8
+  }
+
+  /// Extracts the micro version number from the given FFmpeg encoded version number.
+  ///
+  /// This is a Swift implementation of the FFmpeg macro `AV_VERSION_MICRO`.
+  /// - Parameter version: Encoded version number in FFmpeg proprietary format.
+  /// - Returns: The micro version number
+  private static func avVersionMicro(_ version: UInt32) -> UInt32 {
+    version & 0xFF
+  }
+
+  /// Forms a string representation from the given FFmpeg encoded version number.
+  ///
+  /// FFmpeg returns the version number of its libraries encoded into an unsigned integer. The FFmpeg source
+  /// `libavutil/version.h` describes FFmpeg's versioning scheme and provides C macros for operating on encoded
+  /// version numbers. Since the macros can't be used in Swift code we've had to code equivalent functions in Swift.
+  /// - Parameter version: Encoded version number in FFmpeg proprietary format.
+  /// - Returns: A string containing the version number.
+  private static func versionAsString(_ version: UInt32) -> String {
+    let major = AppDelegate.avVersionMajor(version)
+    let minor = AppDelegate.avVersionMinor(version)
+    let micro = AppDelegate.avVersionMicro(version)
+    return "\(major).\(minor).\(micro)"
+  }
 }
 
 

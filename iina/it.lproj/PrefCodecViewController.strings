@@ -10,6 +10,9 @@
 /* Class = "NSTextFieldCell"; title = "Number of threads:"; ObjectID = "50C-1R-wlJ"; */
 "50C-1R-wlJ.title" = "Numero di threads:";
 
+/* Class = "NSButtonCell"; title = "Force dedicated GPU"; ObjectID = "YUr-aJ-xfC"; */
+"YUr-aJ-xfC.title" = "Forza utilizzo GPU dedicata";
+
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "bxW-np-SGm"; */
 "bxW-np-SGm.title" = "Predefinito: 0 (Automatico)";
 
@@ -18,6 +21,9 @@
 
 /* Class = "NSButtonCell"; title = "Initial volume:"; ObjectID = "g4c-vG-URh"; */
 "g4c-vG-URh.title" = "Volume iniziale";
+
+/* Class = "NSTextFieldCell"; title = "Always use the dedicated GPU for rendering (if exists). This can improve performance but may result in poor battery life."; ObjectID = "gCv-sJ-uQJ"; */
+"gCv-sJ-uQJ.title" = "Usa sempre la GPU dedicata per il rendering (se esiste). Questo può migliorare le prestazioni, ma può ridurre la durata della batteria.";
 
 /* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
 "m5P-5f-5uo.title" = "Video:";

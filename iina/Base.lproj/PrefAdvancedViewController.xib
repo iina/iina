@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PrefAdvancedViewController" customModule="IINA" customModuleProvider="target">
             <connections>
                 <outlet property="chooseConfigDirBtn" destination="hbF-n4-jl3" id="QYy-Do-vje"/>
-                <outlet property="enableSettingsBtn" destination="ymk-Ax-TcO" id="9Lx-0u-h5t"/>
+                <outlet property="enableAdvancedSettingsBtn" destination="PCZ-06-pn4" id="4ft-4M-2kP"/>
                 <outlet property="headerView" destination="vDK-ld-vAF" id="cRU-Jb-NlK"/>
                 <outlet property="optionsTableView" destination="LPs-2B-Pt0" id="jFp-3K-Ub8"/>
                 <outlet property="removeButton" destination="EU2-5a-Lpj" id="If1-8o-8PG"/>
@@ -68,7 +68,7 @@
                     <rect key="frame" x="8" y="103" width="484" height="134"/>
                     <clipView key="contentView" id="aL1-v5-nLY">
                         <rect key="frame" x="1" y="0.0" width="482" height="133"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="wiq-g9-ouS" id="LPs-2B-Pt0">
                                 <rect key="frame" x="0.0" y="0.0" width="482" height="110"/>
@@ -79,11 +79,10 @@
                                 <tableColumns>
                                     <tableColumn identifier="Key" width="118" minWidth="40" maxWidth="1000" id="E3I-Q7-9t1">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Name">
-                                            <font key="font" metaFont="message" size="11"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                         </tableHeaderCell>
-                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="A9b-rU-8Ku">
+                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" usesSingleLineMode="YES" id="A9b-rU-8Ku">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -92,11 +91,10 @@
                                     </tableColumn>
                                     <tableColumn identifier="Value" width="358" minWidth="40" maxWidth="1000" id="SX9-fy-bss">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Value">
-                                            <font key="font" metaFont="message" size="11"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                         </tableHeaderCell>
-                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="1nQ-mn-luW">
+                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" usesSingleLineMode="YES" id="1nQ-mn-luW">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -224,11 +222,6 @@
                     </textFieldCell>
                     <accessibility description="~/.config/mpv/"/>
                     <connections>
-                        <binding destination="nyg-fH-Pug" name="value" keyPath="values.userDefinedConfDir" id="Oxo-tN-gsj">
-                            <dictionary key="options">
-                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                            </dictionary>
-                        </binding>
                         <binding destination="nyg-fH-Pug" name="enabled2" keyPath="values.enableAdvancedSettings" previousBinding="aM7-j1-TIV" id="NQW-AQ-cOO">
                             <dictionary key="options">
                                 <integer key="NSMultipleValuesPlaceholder" value="-1"/>
@@ -238,6 +231,11 @@
                             </dictionary>
                         </binding>
                         <binding destination="nyg-fH-Pug" name="enabled" keyPath="values.useUserDefinedConfDir" id="aM7-j1-TIV"/>
+                        <binding destination="nyg-fH-Pug" name="value" keyPath="values.userDefinedConfDir" id="Oxo-tN-gsj">
+                            <dictionary key="options">
+                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                            </dictionary>
+                        </binding>
                     </connections>
                 </textField>
                 <textField identifier="SectionTitleSettings" hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HmN-IK-rGn">
@@ -283,21 +281,11 @@
             <point key="canvasLocation" x="-397" y="73"/>
         </customView>
         <customView id="vDK-ld-vAF">
-            <rect key="frame" x="0.0" y="0.0" width="500" height="53"/>
+            <rect key="frame" x="0.0" y="0.0" width="500" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="ymk-Ax-TcO">
-                    <rect key="frame" x="6" y="28" width="178" height="19"/>
-                    <buttonCell key="cell" type="check" title="Enable advanced settings" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="7ml-VU-xWv">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <binding destination="nyg-fH-Pug" name="value" keyPath="values.enableAdvancedSettings" id="JrO-M2-KNJ"/>
-                    </connections>
-                </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M2l-at-Cbp">
-                    <rect key="frame" x="18" y="8" width="476" height="14"/>
+                    <rect key="frame" x="8" y="8" width="486" height="14"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="The following settings will require restarting IINA to take effect." id="HMa-Vz-EUk">
                         <font key="font" metaFont="message" size="11"/>
                         <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -305,7 +293,7 @@
                     </textFieldCell>
                 </textField>
                 <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3Gg-Io-SlS">
-                    <rect key="frame" x="469" y="20" width="25" height="25"/>
+                    <rect key="frame" x="469" y="27" width="25" height="25"/>
                     <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jZ3-bn-f9w">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -314,19 +302,27 @@
                         <action selector="helpBtnAction:" target="-2" id="G8C-1V-IMW"/>
                     </connections>
                 </button>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="PCZ-06-pn4" customClass="Switch" customModule="IINA" customModuleProvider="target">
+                    <rect key="frame" x="8" y="26" width="463" height="26"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="switchOnLeft" value="YES"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="preference.enable_adv_settings"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="checkboxMargin" value="NO"/>
+                    </userDefinedRuntimeAttributes>
+                </customView>
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="3Gg-Io-SlS" secondAttribute="trailing" constant="8" id="1yC-lU-olv"/>
-                <constraint firstItem="ymk-Ax-TcO" firstAttribute="top" secondItem="vDK-ld-vAF" secondAttribute="top" constant="8" id="Dnz-Ap-C3V"/>
-                <constraint firstItem="3Gg-Io-SlS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ymk-Ax-TcO" secondAttribute="trailing" constant="8" id="V1t-f0-QSy"/>
+                <constraint firstItem="PCZ-06-pn4" firstAttribute="top" secondItem="vDK-ld-vAF" secondAttribute="top" constant="8" id="42e-pN-GhV"/>
+                <constraint firstItem="M2l-at-Cbp" firstAttribute="top" secondItem="PCZ-06-pn4" secondAttribute="bottom" constant="4" id="I0C-I1-WT4"/>
+                <constraint firstItem="3Gg-Io-SlS" firstAttribute="leading" secondItem="PCZ-06-pn4" secondAttribute="trailing" id="Yta-lq-1XT"/>
                 <constraint firstAttribute="trailing" secondItem="M2l-at-Cbp" secondAttribute="trailing" constant="8" id="Zpp-lF-tHt"/>
                 <constraint firstAttribute="bottom" secondItem="M2l-at-Cbp" secondAttribute="bottom" constant="8" id="gcW-kn-Puf"/>
                 <constraint firstItem="3Gg-Io-SlS" firstAttribute="top" secondItem="vDK-ld-vAF" secondAttribute="top" constant="8" id="kUt-ct-UDL"/>
-                <constraint firstItem="ymk-Ax-TcO" firstAttribute="leading" secondItem="vDK-ld-vAF" secondAttribute="leading" constant="8" id="nFS-Q2-X8f"/>
-                <constraint firstItem="M2l-at-Cbp" firstAttribute="top" secondItem="ymk-Ax-TcO" secondAttribute="bottom" constant="8" id="q3n-6M-i1G"/>
-                <constraint firstItem="M2l-at-Cbp" firstAttribute="leading" secondItem="vDK-ld-vAF" secondAttribute="leading" constant="20" id="xzV-Ko-9nU"/>
+                <constraint firstItem="PCZ-06-pn4" firstAttribute="leading" secondItem="vDK-ld-vAF" secondAttribute="leading" constant="8" id="rKi-JK-3FR"/>
+                <constraint firstItem="M2l-at-Cbp" firstAttribute="leading" secondItem="PCZ-06-pn4" secondAttribute="leading" constant="2" id="yi9-qH-iho"/>
             </constraints>
-            <point key="canvasLocation" x="-397" y="-163"/>
+            <point key="canvasLocation" x="-397" y="-163.5"/>
         </customView>
     </objects>
     <resources>

@@ -21,7 +21,7 @@ class FileInfo: Hashable {
   var dist: [FileInfo: UInt] = [:]
   var minDist: [FileInfo] = []
   var relatedSubs: [FileInfo] = []
-  var priorityStringOccurances = 0
+  var priorityStringOccurrences = 0
   var isMatched = false
 
   var prefix: String {  // prefix detected by FileGroup
@@ -157,8 +157,7 @@ class FileGroup {
 
   func flatten() -> [String: [FileInfo]] {
     var result: [String: [FileInfo]] = [:]
-    var search: ((FileGroup) -> Void)!
-    search = { group in
+    func search(_ group: FileGroup) {
       if group.groups.count > 0 {
         for g in group.groups {
           search(g)

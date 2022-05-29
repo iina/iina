@@ -66,6 +66,35 @@ fileprivate extension NSColor {
   }()
 }
 
+fileprivate class GrayHighlightRowView: NSTableRowView {
+  private func fillWithColor(_ color: NSColor) {
+    let selectionRect = NSInsetRect(self.bounds, 2.5, 2.5)
+    color.setFill()
+    let selectionPath = NSBezierPath.init(roundedRect: selectionRect, xRadius: 4, yRadius: 4)
+    selectionPath.fill()
+  }
+  
+  override func drawSelection(in dirtyRect: NSRect) {
+    if self.selectionHighlightStyle != .none {
+      let selectionRect = NSInsetRect(self.bounds, 0, 0)
+      NSColor.initialWindowLastFileBackground.setFill()
+      let selectionPath = NSBezierPath.init(roundedRect: selectionRect, xRadius: 4, yRadius: 4)
+      selectionPath.fill()
+    }
+  }
+
+  func setHoverHighlight() {
+    self.wantsLayer = true
+    self.layer?.cornerRadius = 6
+    self.layer?.backgroundColor = NSColor.initialWindowActionButtonBackgroundHover.cgColor
+  }
+
+  func unsetHoverHighlight() {
+    self.wantsLayer = true
+    self.layer?.cornerRadius = 6
+    self.layer?.backgroundColor = NSColor.initialWindowActionButtonBackground.cgColor
+  }
+}
 
 class InitialWindowController: NSWindowController {
 
@@ -91,6 +120,7 @@ class InitialWindowController: NSWindowController {
   @IBOutlet weak var recentFilesTableTopConstraint: NSLayoutConstraint!
 
   private let observedPrefKeys: [Preference.Key] = [.themeMaterial]
+  private var currentlyHoveredRow: GrayHighlightRowView?
 
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
     guard let keyPath = keyPath, let change = change else { return }
@@ -142,12 +172,18 @@ class InitialWindowController: NSWindowController {
 
     recentFilesTableView.delegate = self
     recentFilesTableView.dataSource = self
+    recentFilesTableView.action = #selector(self.onTableClicked)
+    recentFilesTableView.addTrackingArea(NSTrackingArea(rect: recentFilesTableView.bounds,
+                                        options: [.activeInKeyWindow, .mouseMoved], owner: self, userInfo: nil))
+    recentFilesTableView.addTrackingArea(NSTrackingArea(rect: recentFilesTableView.bounds,
+                                                        options: [.activeInKeyWindow, .mouseEnteredAndExited], owner: self, userInfo: nil))
 
     setMaterial(Preference.enum(for: .themeMaterial))
 
     observedPrefKeys.forEach { key in
       UserDefaults.standard.addObserver(self, forKeyPath: key.rawValue, options: .new, context: nil)
     }
+    reloadData()
   }
 
   private func setMaterial(_ theme: Preference.Theme?) {
@@ -166,6 +202,16 @@ class InitialWindowController: NSWindowController {
       window.appearance = NSAppearance(named: .vibrantDark)
       mainView.layer?.backgroundColor = CGColor(gray: 0.1, alpha: 1)
       visualEffectView.material = .ultraDark
+    }
+  }
+
+  @objc func onTableClicked() {
+    openRecentItemFromTable(recentFilesTableView.clickedRow)
+  }
+
+  private func openRecentItemFromTable(_ rowIndex: Int) {
+    if let url = recentDocuments[at: rowIndex] {
+      player.openURL(url)
     }
   }
 
@@ -196,11 +242,23 @@ class InitialWindowController: NSWindowController {
     loadLastPlaybackInfo()
     recentDocuments = NSDocumentController.shared.recentDocumentURLs.filter { $0 != lastPlaybackURL }
     recentFilesTableView.reloadData()
+    
+    if lastFileContainerView.isHidden && recentFilesTableView.numberOfRows > 0 {
+      recentFilesTableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+    }
   }
 }
 
-
 extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
+
+  func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
+    // uses custom highlight for table row
+    return GrayHighlightRowView()
+  }
+
+  func tableViewSelectionDidChange(_ notification: Notification) {
+    updateLastFileButtonHighlight()
+  }
 
   func numberOfRows(in tableView: NSTableView) -> Int {
     return recentDocuments.count
@@ -214,10 +272,85 @@ extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
     ]
   }
 
-  func tableViewSelectionDidChange(_ notification: Notification) {
-    guard let url = recentDocuments[at: recentFilesTableView.selectedRow] else { return }
-    player.openURL(url)
-    recentFilesTableView.deselectAll(nil)
+  // facilitates highlight on hover
+  override func mouseMoved(with event: NSEvent) {
+    let mouseLocation = event.locationInWindow
+    let point = recentFilesTableView.convert(mouseLocation, from: nil)
+    let rowIndex = recentFilesTableView.row(at: point)
+
+    if rowIndex >= 0 {
+      guard let rowView = recentFilesTableView.rowView(atRow: rowIndex, makeIfNecessary: false) as? GrayHighlightRowView else {
+        return
+      }
+
+      if (currentlyHoveredRow == rowView) {
+        return
+      }
+
+      rowView.setHoverHighlight()
+      currentlyHoveredRow?.unsetHoverHighlight()
+      currentlyHoveredRow = rowView
+    } else {
+      currentlyHoveredRow?.unsetHoverHighlight()
+      currentlyHoveredRow = nil
+    }
+  }
+
+  override func mouseExited(with event: NSEvent) {
+    currentlyHoveredRow?.unsetHoverHighlight()
+    currentlyHoveredRow = nil
+  }
+
+  override func keyDown(with event: NSEvent) {
+    let keyChar = KeyCodeHelper.keyMap[event.keyCode]?.0
+    switch keyChar {
+      case "ENTER", "KP_ENTER":  // RETURN or (keypad ENTER)
+        if recentFilesTableView.selectedRow >= 0 {
+          // If user selected a row in the table using the keyboard, use that
+          openRecentItemFromTable(recentFilesTableView.selectedRow)
+        } else if let lastURL = lastPlaybackURL {
+          // If no row selected in table, most recent file button is selected. Use that if it exists
+          player.openURL(lastURL)
+        } else if recentFilesTableView.numberOfRows > 0 {
+          // Most recent file no longer exists? Try to load next one
+          openRecentItemFromTable(0)
+        }
+      case "DOWN":  // DOWN arrow
+        if recentDocuments.count == 0 || (recentFilesTableView.selectedRow >= recentFilesTableView.numberOfRows - 1) {
+          super.keyDown(with: event)  // invalid command: beep at user
+        } else {
+          // default: let recentFilesTableView handle it
+          recentFilesTableView.keyDown(with: event)
+        }
+      case "UP":  // UP arrow
+        if !lastFileContainerView.isHidden {   // recent file btn is displayed?
+          if recentFilesTableView.selectedRow == -1 {  // ...and recent file btn already highlighted?
+            super.keyDown(with: event)  // invalid command: beep at user
+            return
+          } else if recentFilesTableView.selectedRow == 0 {  // ... top row of table is highlighted?
+            // yes: deselect all rows of table. This will fire selectionChanged which will highlight lastFileContainerView
+            recentFilesTableView.selectRowIndexes(IndexSet(), byExtendingSelection: false)
+            return
+          }
+        } else if recentFilesTableView.selectedRow == 0 {
+            super.keyDown(with: event)  // invalid command: beep at user
+            return
+        }
+        // default: let recentFilesTableView handle it
+        recentFilesTableView.keyDown(with: event)
+      default:
+        super.keyDown(with: event)
+    }
+  }
+
+  func updateLastFileButtonHighlight() {
+    if recentFilesTableView.selectedRow >= 0 {
+      // remove "LastFle" button highlight
+      lastFileContainerView.layer?.backgroundColor = NSColor.initialWindowActionButtonBackground.cgColor
+    } else {
+      // re-highlight "LastFle" button
+      lastFileContainerView.layer?.backgroundColor = NSColor.initialWindowLastFileBackground.cgColor
+    }
   }
 
 }
@@ -260,11 +393,20 @@ class InitialWindowViewActionButton: NSView {
   }
 
   override func mouseEntered(with event: NSEvent) {
-    self.layer?.backgroundColor = hoverBackground.cgColor
+    if let windowController = window?.windowController as? InitialWindowController {
+      if windowController.recentFilesTableView.selectedRow >= 0 {
+        self.layer?.backgroundColor = NSColor.initialWindowActionButtonBackgroundHover.cgColor
+      } else {
+        self.layer?.backgroundColor = hoverBackground.cgColor
+      }
+    }
   }
 
   override func mouseExited(with event: NSEvent) {
     self.layer?.backgroundColor = normalBackground.cgColor
+    if let windowController = window?.windowController as? InitialWindowController {
+      windowController.updateLastFileButtonHighlight()
+    }
   }
 
   override func mouseDown(with event: NSEvent) {

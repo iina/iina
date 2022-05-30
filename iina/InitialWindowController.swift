@@ -337,7 +337,11 @@ extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
             return
         }
         // default: let recentFilesTableView handle it
-        recentFilesTableView.keyDown(with: event)
+        if recentDocuments.count > 0 {
+          recentFilesTableView.keyDown(with: event)
+        } else {
+          super.keyDown(with: event)
+        }
       default:
         super.keyDown(with: event)
     }

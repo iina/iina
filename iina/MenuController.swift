@@ -161,6 +161,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var saveDownloadedSub: NSMenuItem!
   // Plugin
   @IBOutlet weak var pluginMenu: NSMenu!
+  @IBOutlet weak var pluginMenuItem: NSMenuItem!
   var pluginMenuNeedsUpdate = false
   // Window
   @IBOutlet weak var customTouchBar: NSMenuItem!
@@ -384,7 +385,11 @@ class MenuController: NSObject, NSMenuDelegate {
 
     // Plugin
 
-    pluginMenu.delegate = self
+    if IINA_ENABLE_PLUGIN_SYSTEM {
+      pluginMenu.delegate = self
+    } else {
+      pluginMenuItem.isHidden = true
+    }
 
     // Window
 

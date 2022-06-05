@@ -125,6 +125,7 @@ class Utility {
     panel.canChooseDirectories = chooseDir
     panel.resolvesAliases = true
     panel.allowedFileTypes = allowedFileTypes
+    panel.allowsOtherFileTypes = true
     panel.allowsMultipleSelection = false
     panel.level = .modalPanel
     if let dir = dir {

@@ -10,12 +10,13 @@ import XCTest
 
 fileprivate let QVGA_RED = "QVGA-Red.mp4"
 fileprivate let QVGA_BLUE = "QVGA-Blue.mp4"
-fileprivate let QVGA_BLACK = "QVGA-Black.mp4"
+fileprivate let QVGA_GREEN = "QVGA-Green.mp4"
 
+// TODO: test XCUIApplication().activate()
 class InitialWinXCUIApplication: XCUIApplication {
   var initialWindow: XCUIElement {
     get {
-      self/*@START_MENU_TOKEN@*/.windows.containing(.image, identifier:"iina arrow").element/*[[".windows.containing(.button, identifier:XCUIIdentifierMinimizeWindow).element",".windows.containing(.button, identifier:XCUIIdentifierZoomWindow).element",".windows.containing(.button, identifier:XCUIIdentifierCloseWindow).element",".windows.containing(.image, identifier:\"history\").element",".windows.containing(.image, identifier:\"iina arrow\").element"],[[[-1,4],[-1,3],[-1,2],[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+      self.windows.containing(.image, identifier: "iina arrow").element
     }
   }
 
@@ -60,18 +61,36 @@ class InitialWindow_UITests: XCTestCase {
 
   private var tempDirPath: String!
 
+  // The most recent app run
+  private var app: InitialWinXCUIApplication!
+
   override func setUpWithError() throws {
     continueAfterFailure = false
 
     tempDirPath = try FileManager.default.createTempDirectory()
   }
 
+  override func tearDownWithError() throws {
+    if let failureCount = testRun?.failureCount, failureCount > 0 {
+      print("DEBUG \(app.initialWindow.debugDescription)")
+      takeScreenshotOfInitialWindow()
+    }
+  }
+
   // MARK: Various util functions
+
+  // Note: this unfortunately seems to take a screenshot of the entire screen which contains the window
+  private func takeScreenshotOfInitialWindow() {
+    let screenshot = app.initialWindow.screenshot()
+    let attachment = XCTAttachment(screenshot: screenshot)
+    attachment.lifetime = .keepAlways
+    add(attachment)
+  }
 
   // Launches a single instance of IINA (via XCUIApplication) with the given args and prefs, if any.
   // The caller is expected to handle termination.
-  func launchApp(args: [String] = [], prefs: [String: String] = [:]) -> InitialWinXCUIApplication {
-    let app = InitialWinXCUIApplication()
+  func launchApp(args: [String] = [], prefs: [String: String] = [:]) {
+    app = InitialWinXCUIApplication()
     for arg in args {
       app.launchArguments.append(arg)
     }
@@ -80,7 +99,6 @@ class InitialWindow_UITests: XCTestCase {
       app.setPrefs(prefs)
     }
     app.launch()
-    return app
   }
 
   // MARK: Reusable activities
@@ -89,11 +107,10 @@ class InitialWindow_UITests: XCTestCase {
   @discardableResult
   private func clearRecentDocuments() -> Result<Void, Error> {
     return XCTContext.runActivity(named: "ClearRecentDocuments") { activity in
-      let app = launchApp()
+      launchApp()
 
       // Open Prefs window
-      let initialWin = app.initialWindow
-      initialWin.typeKey(",", modifierFlags:.command)
+      app.initialWindow.typeKey(",", modifierFlags:.command)
       let prefsWin = app.windows["Preferences"]
 
       // Prefs > Utilities > Clear History
@@ -103,7 +120,7 @@ class InitialWindow_UITests: XCTestCase {
       prefsWin.buttons[XCUIIdentifierCloseWindow].click()
 
       // Just quit. Scripting is extremely limited and cannot click the app icon to restore Welcome window
-      initialWin.typeKey("q", modifierFlags:.command)
+      app.initialWindow.typeKey("q", modifierFlags:.command)
 
       return .success(Void())
     }
@@ -122,11 +139,11 @@ class InitialWindow_UITests: XCTestCase {
       try FileManager.default.copyItem(atPath: bundleVideoPath, toPath: runtimeVideoPath)
       NSLog("Copied '\(videoName)' to temp location: '\(runtimeVideoPath)'")
 
-      let app = launchApp(args: [runtimeVideoPath], prefs: prefs)
+      launchApp(args: [runtimeVideoPath], prefs: prefs)
 
-      let redVideoWindow = app.windows.element(matching: NSPredicate(format: "title BEGINSWITH '\(videoName)'"))
-
-      redVideoWindow.typeKey("q", modifierFlags:.command)
+      let videoWindow = app.windows.element(matching: NSPredicate(format: "title BEGINSWITH '\(videoName)'"))
+      // this has the nice side effect of failing if the window isn't found
+      videoWindow.typeKey("q", modifierFlags:.command)
 
       return .success(Void())
     }
@@ -138,7 +155,7 @@ class InitialWindow_UITests: XCTestCase {
    - If `isResumePlayEnabled==true`, then the first recent item will be a button, and the remainder will be in the table.
    - If `isResumePlayEnabled==false`, then all recent items will be in the table.
    */
-  private func verifyRecentFilesState(_ app: InitialWinXCUIApplication, _ expectedRecentItems: [String], selectionIndex: Int, isResumeLastPositionEnabled: Bool){
+  private func verifyRecentFilesState(_ expectedRecentItems: [String], selectionIndex: Int, isResumeLastPositionEnabled: Bool){
     var expectedRowCountInTable = expectedRecentItems.count
     if isResumeLastPositionEnabled && expectedRowCountInTable > 0 {
       expectedRowCountInTable -= 1
@@ -149,8 +166,6 @@ class InitialWindow_UITests: XCTestCase {
     // InitialWindow: ResumeLastPlayedItem button
     for videoName in expectedRecentItems {
       if isResumeLastPositionEnabled && videoName == expectedRecentItems[0] {
-        print("DEBUG \(app.initialWindow.debugDescription)")
-
         // This is not actually a button, and most of the hierarchy is invisible to XCUI, but we can be clever.
         // If the button exists we can find a label with value "Resume" and another label with the video name.
         // These will both be inside the InitialWindow element BUT not inside the table.
@@ -203,95 +218,93 @@ class InitialWindow_UITests: XCTestCase {
     // Part 1: Play RED video
 
     try launchVideoThenQuit(QVGA_RED, prefs: prefs)
-    var app = launchApp(prefs: prefs)
+    launchApp(prefs: prefs)
 
-    verifyRecentFilesState(app, [QVGA_RED], selectionIndex: 0, isResumeLastPositionEnabled: resumeLastPosition)
+    verifyRecentFilesState([QVGA_RED], selectionIndex: 0, isResumeLastPositionEnabled: resumeLastPosition)
 
     // verify: can't go down
     app.initialWindow.typeKey(.downArrow, modifierFlags:.function)
-    verifyRecentFilesState(app, [QVGA_RED], selectionIndex: 0, isResumeLastPositionEnabled: resumeLastPosition)
+    verifyRecentFilesState([QVGA_RED], selectionIndex: 0, isResumeLastPositionEnabled: resumeLastPosition)
 
     // verify: can't go up
     app.initialWindow.typeKey(.upArrow, modifierFlags:.function)
-    verifyRecentFilesState(app, [QVGA_RED], selectionIndex: 0, isResumeLastPositionEnabled: resumeLastPosition)
+    verifyRecentFilesState([QVGA_RED], selectionIndex: 0, isResumeLastPositionEnabled: resumeLastPosition)
 
     // ------------
     // PART 2: Play BLUE video
 
     try launchVideoThenQuit(QVGA_BLUE, prefs: prefs)
-    app = launchApp(prefs: prefs)
+    launchApp(prefs: prefs)
 
     // verify initial
-    verifyRecentFilesState(app, [QVGA_BLUE, QVGA_RED], selectionIndex: 0, isResumeLastPositionEnabled: resumeLastPosition)
+    verifyRecentFilesState([QVGA_BLUE, QVGA_RED], selectionIndex: 0, isResumeLastPositionEnabled: resumeLastPosition)
 
     // verify: can't go up
     app.initialWindow.typeKey(.upArrow, modifierFlags:.function)
-    verifyRecentFilesState(app, [QVGA_BLUE, QVGA_RED], selectionIndex: 0, isResumeLastPositionEnabled: resumeLastPosition)
+    verifyRecentFilesState([QVGA_BLUE, QVGA_RED], selectionIndex: 0, isResumeLastPositionEnabled: resumeLastPosition)
 
     // verify: down
     app.initialWindow.typeKey(.downArrow, modifierFlags:.function)
-    verifyRecentFilesState(app, [QVGA_BLUE, QVGA_RED], selectionIndex: 1, isResumeLastPositionEnabled: resumeLastPosition)
+    verifyRecentFilesState([QVGA_BLUE, QVGA_RED], selectionIndex: 1, isResumeLastPositionEnabled: resumeLastPosition)
 
     // verify: can't go down
     app.initialWindow.typeKey(.downArrow, modifierFlags:.function)
-    verifyRecentFilesState(app, [QVGA_BLUE, QVGA_RED], selectionIndex: 1, isResumeLastPositionEnabled: resumeLastPosition)
+    verifyRecentFilesState([QVGA_BLUE, QVGA_RED], selectionIndex: 1, isResumeLastPositionEnabled: resumeLastPosition)
 
     // verify: up
     app.initialWindow.typeKey(.upArrow, modifierFlags:.function)
-    verifyRecentFilesState(app, [QVGA_BLUE, QVGA_RED], selectionIndex: 0, isResumeLastPositionEnabled: resumeLastPosition)
+    verifyRecentFilesState([QVGA_BLUE, QVGA_RED], selectionIndex: 0, isResumeLastPositionEnabled: resumeLastPosition)
 
     // verify: can't go up
     app.initialWindow.typeKey(.upArrow, modifierFlags:.function)
-    verifyRecentFilesState(app, [QVGA_BLUE, QVGA_RED], selectionIndex: 0, isResumeLastPositionEnabled: resumeLastPosition)
+    verifyRecentFilesState([QVGA_BLUE, QVGA_RED], selectionIndex: 0, isResumeLastPositionEnabled: resumeLastPosition)
 
     // ------------
     // PART 3: Play BLACK video
 
-    try launchVideoThenQuit(QVGA_BLACK, prefs: prefs)
-    app = launchApp(prefs: prefs)
+    try launchVideoThenQuit(QVGA_GREEN, prefs: prefs)
+    launchApp(prefs: prefs)
 
     // verify initial
-    verifyRecentFilesState(app, [QVGA_BLACK, QVGA_BLUE, QVGA_RED], selectionIndex: 0, isResumeLastPositionEnabled: resumeLastPosition)
+    verifyRecentFilesState([QVGA_GREEN, QVGA_BLUE, QVGA_RED], selectionIndex: 0, isResumeLastPositionEnabled: resumeLastPosition)
 
     // verify: can't go UP
     app.initialWindow.typeKey(.upArrow, modifierFlags:.function)
-    verifyRecentFilesState(app, [QVGA_BLACK, QVGA_BLUE, QVGA_RED], selectionIndex: 0, isResumeLastPositionEnabled: resumeLastPosition)
+    verifyRecentFilesState([QVGA_GREEN, QVGA_BLUE, QVGA_RED], selectionIndex: 0, isResumeLastPositionEnabled: resumeLastPosition)
 
     // verify: DOWN to Blue
     app.initialWindow.typeKey(.downArrow, modifierFlags:.function)
-    verifyRecentFilesState(app, [QVGA_BLACK, QVGA_BLUE, QVGA_RED], selectionIndex: 1, isResumeLastPositionEnabled: resumeLastPosition)
+    verifyRecentFilesState([QVGA_GREEN, QVGA_BLUE, QVGA_RED], selectionIndex: 1, isResumeLastPositionEnabled: resumeLastPosition)
 
-    // verify: DOWN to Black
+    // verify: DOWN to Green
     app.initialWindow.typeKey(.downArrow, modifierFlags:.function)
-    verifyRecentFilesState(app, [QVGA_BLACK, QVGA_BLUE, QVGA_RED], selectionIndex: 2, isResumeLastPositionEnabled: resumeLastPosition)
+    verifyRecentFilesState([QVGA_GREEN, QVGA_BLUE, QVGA_RED], selectionIndex: 2, isResumeLastPositionEnabled: resumeLastPosition)
 
     // verify: can't go DOWN
     app.initialWindow.typeKey(.downArrow, modifierFlags:.function)
-    verifyRecentFilesState(app, [QVGA_BLACK, QVGA_BLUE, QVGA_RED], selectionIndex: 2, isResumeLastPositionEnabled: resumeLastPosition)
+    verifyRecentFilesState([QVGA_GREEN, QVGA_BLUE, QVGA_RED], selectionIndex: 2, isResumeLastPositionEnabled: resumeLastPosition)
 
     // verify: UP to Blue
     app.initialWindow.typeKey(.upArrow, modifierFlags:.function)
-    verifyRecentFilesState(app, [QVGA_BLACK, QVGA_BLUE, QVGA_RED], selectionIndex: 1, isResumeLastPositionEnabled: resumeLastPosition)
+    verifyRecentFilesState([QVGA_GREEN, QVGA_BLUE, QVGA_RED], selectionIndex: 1, isResumeLastPositionEnabled: resumeLastPosition)
 
     // verify: UP to Red
     app.initialWindow.typeKey(.upArrow, modifierFlags:.function)
-    verifyRecentFilesState(app, [QVGA_BLACK, QVGA_BLUE, QVGA_RED], selectionIndex: 0, isResumeLastPositionEnabled: resumeLastPosition)
+    verifyRecentFilesState([QVGA_GREEN, QVGA_BLUE, QVGA_RED], selectionIndex: 0, isResumeLastPositionEnabled: resumeLastPosition)
 
     // verify: can't go UP
     app.initialWindow.typeKey(.upArrow, modifierFlags:.function)
-    verifyRecentFilesState(app, [QVGA_BLACK, QVGA_BLUE, QVGA_RED], selectionIndex: 0, isResumeLastPositionEnabled: resumeLastPosition)
+    verifyRecentFilesState([QVGA_GREEN, QVGA_BLUE, QVGA_RED], selectionIndex: 0, isResumeLastPositionEnabled: resumeLastPosition)
 
   }
 
   // MARK: UI Tests
 
   /*
-   Recent Files Tracking = disabled
-   Resume Last Position = disabled
-
-   Verifies that when `recordRecentFiles==false`, no recent files will be tracked or displayed.
+   RecordRecentFiles:NO & ResumeLastFile:NO
+   When `recordRecentFiles==false`, all recent files lists should be empty, and stay empty.
    */
-  func test_RecentFiles_No_ResumeLastPosition_No() throws {
+  func testListDisplayAndArrowKeys_RecentFilesOff_ResumeLastPositionOff() throws {
     let prefs = [
       "recordRecentFiles": "false",
       "resumeLastPosition": "false"
@@ -303,11 +316,11 @@ class InitialWindow_UITests: XCTestCase {
       XCTAssertEqual(app.fileMenu_openRecent_itemCount, 0)
       XCTAssertFalse(app.initialWindow.buttons[QVGA_RED].exists)
       XCTAssertFalse(app.initialWindow.buttons[QVGA_BLUE].exists)
-      XCTAssertFalse(app.initialWindow.buttons[QVGA_BLACK].exists)
+      XCTAssertFalse(app.initialWindow.buttons[QVGA_GREEN].exists)
       XCTAssertEqual(app.initialWindow_recentItemsTable_count, 0)
     }
 
-    var app = launchApp(prefs: prefs)
+    launchApp(prefs: prefs)
 
     // no recent files, no last position
     verifyInitialWindowIsEmpty(app)
@@ -322,33 +335,15 @@ class InitialWindow_UITests: XCTestCase {
     // Play Blue video, which should add a new menu item to File > Recent Items
     try launchVideoThenQuit(QVGA_BLUE, prefs: prefs)
 
-    app = launchApp(prefs: prefs)
+    launchApp(prefs: prefs)
     verifyInitialWindowIsEmpty(app)
   }
 
   /*
-   Recent Files Tracking = enabled
-   Resume Last Position = enabled
-   */
-  func test_RecentFiles_Yes_ResumeLastPosition_Yes() throws {
-    try runLongTestAndVerify_RecentFiles_Yes(resumeLastPosition: true)
-  }
-
-  /*
-   Recent Files Tracking = enabled
-   Resume Last Position = disabled
-   */
-  func test_RecentFiles_Yes_ResumeLastPosition_No() throws {
-    try runLongTestAndVerify_RecentFiles_Yes(resumeLastPosition: false)
-  }
-
-  /*
-   Recent Files Tracking = disabled
-   Resume Last Position = disabled
-
+   RecordRecentFiles:NO & ResumeLastFile:YES
    Verifies that when `recordRecentFiles==false`, even if `resumeLastPosition==true`, no recent files will be tracked or displayed.
    */
-  func test_RecentFiles_No_ResumeLastPosition_Yes() throws {
+  func testListDisplayAndArrowKeys_RecentFilesOff_ResumeLastPositionOn() throws {
     let prefs = [
       "recordRecentFiles" : "false",
       "resumeLastPosition" : "true",
@@ -356,18 +351,18 @@ class InitialWindow_UITests: XCTestCase {
 
     clearRecentDocuments()
 
-    func verifyInitialWindowIsEmpty(_ app: InitialWinXCUIApplication) {
+    func verifyInitialWindowIsEmpty() {
       XCTAssertEqual(app.fileMenu_openRecent_itemCount, 0)
       XCTAssertFalse(app.initialWindow.buttons[QVGA_RED].exists)
       XCTAssertFalse(app.initialWindow.buttons[QVGA_BLUE].exists)
-      XCTAssertFalse(app.initialWindow.buttons[QVGA_BLACK].exists)
+      XCTAssertFalse(app.initialWindow.buttons[QVGA_GREEN].exists)
       XCTAssertEqual(app.initialWindow_recentItemsTable_count, 0)
     }
 
-    var app = launchApp(prefs: prefs)
+    launchApp(prefs: prefs)
 
     // no recent files, no last position
-    verifyInitialWindowIsEmpty(app)
+    verifyInitialWindowIsEmpty()
 
     app.initialWindow.typeKey(.downArrow, modifierFlags:.function)
     app.initialWindow.typeKey(.upArrow, modifierFlags:.function)
@@ -379,8 +374,37 @@ class InitialWindow_UITests: XCTestCase {
     // Play Blue video, which should add a new menu item to File > Recent Items
     try launchVideoThenQuit(QVGA_RED, prefs: prefs)
 
-    app = launchApp(prefs: prefs)
-    verifyInitialWindowIsEmpty(app)
+    launchApp(prefs: prefs)
+    verifyInitialWindowIsEmpty()
   }
+
+  /*
+   RecordRecentFiles:YES & ResumeLastFile:YES
+   */
+  func testListDisplayAndArrowKeys_RecentFilesOn_ResumeLastPositionOn() throws {
+    try runLongTestAndVerify_RecentFiles_Yes(resumeLastPosition: true)
+  }
+
+  /*
+   RecordRecentFiles:YES & ResumeLastFile:NO
+   */
+  func testListDisplayAndArrowKeys_RecentFilesOn_ResumeLastPositionOff() throws {
+    try runLongTestAndVerify_RecentFiles_Yes(resumeLastPosition: false)
+  }
+
+//  /*
+//  RecordRecentFiles:YES & ResumeLastFile:YES
+//   */
+//  func testListDisplayAndArrowKeys_RecentFilesOn_ResumeLastPositionOn() throws {
+//    try runLongTestAndVerify_RecentFiles_Yes(resumeLastPosition: true)
+//  }
+//
+//  /*
+//   Recent Files Tracking = enabled
+//   Resume Last Position = disabled
+//   */
+//  func testListDisplayAndArrowKeys_RecentFilesOn_ResumeLastPositionOff() throws {
+//    try runLongTestAndVerify_RecentFiles_Yes(resumeLastPosition: false)
+//  }
 
 }

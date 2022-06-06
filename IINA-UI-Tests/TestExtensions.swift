@@ -7,10 +7,6 @@
 //
 
 import XCTest
-import Foundation
-
-// in seconds
-let DEFAULT_XCUI_TIMEOUT = TimeInterval(10)
 
 extension XCUIApplication {
   func setPref(_ prefName: String, _ prefValue: String) {
@@ -36,6 +32,20 @@ extension XCTestCase {
     let path = testBundle.path(forResource: fileBaseName, ofType: fileExtension)
     XCTAssertNotNil(path)
     return path!
+  }
+
+  public func resolveRuntimeVideoPath(tempDirPath: String, videoFilename: String) throws -> String {
+    let runtimeVideoPath: String
+    if let testVideoDirPath = TEST_VIDEO_DIR_PATH {
+      runtimeVideoPath = URL(fileURLWithPath: testVideoDirPath).appendingPathComponent(videoFilename).path
+      NSLog("Using supplied override for video path: '\(runtimeVideoPath)'")
+    } else {
+      let bundleVideoPath = resolveBundleFilePath(videoFilename)
+      runtimeVideoPath = URL(fileURLWithPath: tempDirPath).appendingPathComponent(videoFilename).path
+      try FileManager.default.copyItem(atPath: bundleVideoPath, toPath: runtimeVideoPath)
+      NSLog("Copied '\(videoFilename)' to temp location: '\(runtimeVideoPath)'")
+    }
+    return runtimeVideoPath
   }
 }
 

@@ -160,6 +160,8 @@
 		C789872F1E34EF170005769F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C78987311E34EF170005769F /* InfoPlist.strings */; };
 		D162CAB1284CA14800EB9437 /* QVGA-White.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D162CAB0284CA14800EB9437 /* QVGA-White.mp4 */; };
 		D1832F11284C231100D687BC /* QVGA-Green.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D1832F10284C231000D687BC /* QVGA-Green.mp4 */; };
+		D18657DE284DEE7C00FD1C59 /* KeySequences_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18657DD284DEE7C00FD1C59 /* KeySequences_UITests.swift */; };
+		D18657E0284DFF5500FD1C59 /* TestConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18657DF284DFF5500FD1C59 /* TestConstants.swift */; };
 		D1A7A0ED28462D62007D5D37 /* InitialWindow_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7A0EC28462D62007D5D37 /* InitialWindow_UITests.swift */; };
 		D1A7A10228472F41007D5D37 /* TestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A7A10128472F41007D5D37 /* TestExtensions.swift */; };
 		D1BBF8DC284880DC00FAA989 /* QVGA-Black.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D1BBF8DA284880DC00FAA989 /* QVGA-Black.mp4 */; };
@@ -1221,6 +1223,8 @@
 		D10425E12840B54300C3C9AF /* IINA-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "IINA-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D162CAB0284CA14800EB9437 /* QVGA-White.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "QVGA-White.mp4"; sourceTree = "<group>"; };
 		D1832F10284C231000D687BC /* QVGA-Green.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "QVGA-Green.mp4"; sourceTree = "<group>"; };
+		D18657DD284DEE7C00FD1C59 /* KeySequences_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeySequences_UITests.swift; sourceTree = "<group>"; };
+		D18657DF284DFF5500FD1C59 /* TestConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestConstants.swift; sourceTree = "<group>"; };
 		D1A7A0EA28462D62007D5D37 /* IINA-UI-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "IINA-UI-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1A7A0EC28462D62007D5D37 /* InitialWindow_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialWindow_UITests.swift; sourceTree = "<group>"; };
 		D1A7A10128472F41007D5D37 /* TestExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestExtensions.swift; sourceTree = "<group>"; };
@@ -2207,6 +2211,8 @@
 			children = (
 				D1A7A0EC28462D62007D5D37 /* InitialWindow_UITests.swift */,
 				D1A7A10128472F41007D5D37 /* TestExtensions.swift */,
+				D18657DD284DEE7C00FD1C59 /* KeySequences_UITests.swift */,
+				D18657DF284DFF5500FD1C59 /* TestConstants.swift */,
 			);
 			path = "IINA-UI-Tests";
 			sourceTree = "<group>";
@@ -2674,8 +2680,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D18657DE284DEE7C00FD1C59 /* KeySequences_UITests.swift in Sources */,
 				D1A7A0ED28462D62007D5D37 /* InitialWindow_UITests.swift in Sources */,
 				D1A7A10228472F41007D5D37 /* TestExtensions.swift in Sources */,
+				D18657E0284DFF5500FD1C59 /* TestConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

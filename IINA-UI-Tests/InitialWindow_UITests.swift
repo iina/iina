@@ -8,15 +8,6 @@
 
 import XCTest
 
-fileprivate let QVGA_RED = "QVGA-Red.mp4"
-fileprivate let QVGA_BLUE = "QVGA-Blue.mp4"
-fileprivate let QVGA_GREEN = "QVGA-Green.mp4"
-fileprivate let QVGA_BLACK = "QVGA-Black.mp4"
-
-// Supply a path to local videos directory here if you want to use a custom path to the test videos,
-// instead of copying videos stored in the bundle to a temp directory, which can introduce complications
-let TEST_VIDEO_DIR_PATH: String? = nil
-
 class InitialWinXCUIApplication: XCUIApplication {
   var initialWindow: XCUIElement {
     get {
@@ -74,7 +65,6 @@ class InitialWindow_UITests: XCTestCase {
 
   override func setUpWithError() throws {
     continueAfterFailure = false
-
     tempDirPath = try FileManager.default.createTempDirectory()
   }
 
@@ -140,22 +130,12 @@ class InitialWindow_UITests: XCTestCase {
    Param `videoName` must be a video whhich is part of the project's bundle resources
    */
   @discardableResult
-  private func launchVideoThenQuit(_ videoName: String, prefs: [String: String]) throws -> Result<Void, Error> {
+  private func launchVideoThenQuit(_ videoFilename: String, prefs: [String: String]) throws -> Result<Void, Error> {
     return try XCTContext.runActivity(named: "LaunchVideoThenQuit") { activity in
-      let runtimeVideoPath: String
-      if let testVideoDirPath = TEST_VIDEO_DIR_PATH {
-        runtimeVideoPath = URL(fileURLWithPath: testVideoDirPath).appendingPathComponent(videoName).path
-        NSLog("Using supplied override for video path: '\(runtimeVideoPath)'")
-      } else {
-        let bundleVideoPath = resolveBundleFilePath(videoName)
-        runtimeVideoPath = URL(fileURLWithPath: tempDirPath).appendingPathComponent(videoName).path
-        try FileManager.default.copyItem(atPath: bundleVideoPath, toPath: runtimeVideoPath)
-        NSLog("Copied '\(videoName)' to temp location: '\(runtimeVideoPath)'")
-      }
-
+      let runtimeVideoPath: String = try resolveRuntimeVideoPath(tempDirPath: tempDirPath, videoFilename: videoFilename)
       launchApp(args: [runtimeVideoPath], prefs: prefs)
 
-      let videoWindow = app.windowWithTitleStartingWith(videoName)
+      let videoWindow = app.windowWithTitleStartingWith(videoFilename)
       XCTAssertTrue(videoWindow.exists)
       videoWindow.typeKey("q", modifierFlags:.command)
 
@@ -218,12 +198,12 @@ class InitialWindow_UITests: XCTestCase {
     }
   }
 
-  private func runLongTestAndVerify_RecentFiles_Yes(resumeLastPosition: Bool) throws {
+  private func runAndVerify_testDisplayAndArrowKeys_RecentFilesOn(resumeLastPosition: Bool) throws {
     let resumeLastPosition = resumeLastPosition
     let prefs = [
       "actionAfterLaunch": "0",  // "Show welcome window"
       "recordRecentFiles" : "true",
-      "trackAllFilesInRecentOpenMenu" : "true",
+      "trackAllFilesInRecentOpenMenu" : "false",
       "recordPlaybackHistory" : "true",
       "resumeLastPosition" : String(resumeLastPosition),
     ]
@@ -409,7 +389,7 @@ class InitialWindow_UITests: XCTestCase {
    - UP & DOWN arrow navigation works correctly
    */
   func testListDisplayAndArrowKeys_RecentFilesOn_ResumeLastPositionOff() throws {
-    try runLongTestAndVerify_RecentFiles_Yes(resumeLastPosition: false)
+    try runAndVerify_testDisplayAndArrowKeys_RecentFilesOn(resumeLastPosition: false)
   }
 
   /*
@@ -421,7 +401,7 @@ class InitialWindow_UITests: XCTestCase {
    - The most recent video displayed is special "resume playback" type.
    */
   func testListDisplayAndArrowKeys_RecentFilesOn_ResumeLastPositionOn() throws {
-    try runLongTestAndVerify_RecentFiles_Yes(resumeLastPosition: true)
+    try runAndVerify_testDisplayAndArrowKeys_RecentFilesOn(resumeLastPosition: true)
   }
 
   /*

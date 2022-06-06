@@ -17,7 +17,6 @@ fileprivate let QVGA_BLACK = "QVGA-Black.mp4"
 // instead of copying videos stored in the bundle to a temp directory, which can introduce complications
 let TEST_VIDEO_DIR_PATH: String? = nil
 
-// TODO: test XCUIApplication().activate()
 class InitialWinXCUIApplication: XCUIApplication {
   var initialWindow: XCUIElement {
     get {
@@ -222,7 +221,10 @@ class InitialWindow_UITests: XCTestCase {
   private func runLongTestAndVerify_RecentFiles_Yes(resumeLastPosition: Bool) throws {
     let resumeLastPosition = resumeLastPosition
     let prefs = [
+      "actionAfterLaunch": "0",  // "Show welcome window"
       "recordRecentFiles" : "true",
+      "trackAllFilesInRecentOpenMenu" : "true",
+      "recordPlaybackHistory" : "true",
       "resumeLastPosition" : String(resumeLastPosition),
     ]
 
@@ -321,7 +323,10 @@ class InitialWindow_UITests: XCTestCase {
    */
   func testListDisplayAndArrowKeys_RecentFilesOff_ResumeLastPositionOff() throws {
     let prefs = [
+      "actionAfterLaunch": "0",  // "Show welcome window"
       "recordRecentFiles": "false",
+      "trackAllFilesInRecentOpenMenu" : "false",
+      "recordPlaybackHistory" : "false",
       "resumeLastPosition": "false"
     ]
 
@@ -360,7 +365,10 @@ class InitialWindow_UITests: XCTestCase {
    */
   func testListDisplayAndArrowKeys_RecentFilesOff_ResumeLastPositionOn() throws {
     let prefs = [
+      "actionAfterLaunch": "0",  // "Show welcome window"
       "recordRecentFiles" : "false",
+      "trackAllFilesInRecentOpenMenu" : "true",
+      "recordPlaybackHistory" : "true",
       "resumeLastPosition" : "true",
     ]
 
@@ -423,8 +431,11 @@ class InitialWindow_UITests: XCTestCase {
    */
   func testItemActivation_RecentFilesOn_ResumeLastPositionOn() throws {
     let prefs = [
+      "actionAfterLaunch": "0",  // "Show welcome window"
       "recordRecentFiles" : "true",
-      "resumeLastPosition" : "true"
+      "trackAllFilesInRecentOpenMenu" : "true",
+      "recordPlaybackHistory" : "true",
+      "resumeLastPosition" : "true",
     ]
 
     // Setup: clear recent documents, then play in order: Green, Blue, Black

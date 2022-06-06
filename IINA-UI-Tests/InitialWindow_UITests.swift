@@ -13,6 +13,10 @@ fileprivate let QVGA_BLUE = "QVGA-Blue.mp4"
 fileprivate let QVGA_GREEN = "QVGA-Green.mp4"
 fileprivate let QVGA_BLACK = "QVGA-Black.mp4"
 
+// Supply a path to local videos directory here if you want to use a custom path to the test videos,
+// instead of copying videos stored in the bundle to a temp directory, which can introduce complications
+let TEST_VIDEO_DIR_PATH: String? = nil
+
 // TODO: test XCUIApplication().activate()
 class InitialWinXCUIApplication: XCUIApplication {
   var initialWindow: XCUIElement {
@@ -139,10 +143,16 @@ class InitialWindow_UITests: XCTestCase {
   @discardableResult
   private func launchVideoThenQuit(_ videoName: String, prefs: [String: String]) throws -> Result<Void, Error> {
     return try XCTContext.runActivity(named: "LaunchVideoThenQuit") { activity in
-      let bundleVideoPath = resolveBundleFilePath(videoName)
-      let runtimeVideoPath = URL(fileURLWithPath: tempDirPath).appendingPathComponent(videoName).path
-      try FileManager.default.copyItem(atPath: bundleVideoPath, toPath: runtimeVideoPath)
-      NSLog("Copied '\(videoName)' to temp location: '\(runtimeVideoPath)'")
+      let runtimeVideoPath: String
+      if let testVideoDirPath = TEST_VIDEO_DIR_PATH {
+        runtimeVideoPath = URL(fileURLWithPath: testVideoDirPath).appendingPathComponent(videoName).path
+        NSLog("Using supplied override for video path: '\(runtimeVideoPath)'")
+      } else {
+        let bundleVideoPath = resolveBundleFilePath(videoName)
+        runtimeVideoPath = URL(fileURLWithPath: tempDirPath).appendingPathComponent(videoName).path
+        try FileManager.default.copyItem(atPath: bundleVideoPath, toPath: runtimeVideoPath)
+        NSLog("Copied '\(videoName)' to temp location: '\(runtimeVideoPath)'")
+      }
 
       launchApp(args: [runtimeVideoPath], prefs: prefs)
 

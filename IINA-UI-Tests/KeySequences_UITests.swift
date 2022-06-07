@@ -21,15 +21,22 @@ d ignore
 e ignore
 f ignore
 d-e-f set window-scale 1.8
-d-d-e set-window-scale 2.1
-d-d-d-e set-window-scale 2.2
-d-d-d-d-e set-window-scale 1.7
+d-d-e set window-scale 2.1
+d-d-d-e set window-scale 2.2
+d-d-d-d-e set window-scale 1.7
 
 g ignore
 h ignore
 i ignore
 g-h-i set window-scale 1.2
 j seek -5
+
+k-l-m-n set window-scale 1.6
+
+m-n-o-p set window-scale 1.8
+
+q-r-s-t-w set window-scale 1.9
+
 """
 
 let VIDEO = QVGA_RED
@@ -163,7 +170,7 @@ class KeySequences_UITests: XCTestCase {
 
   /*
    Tests that the buffer wraps around. Should match this:
-   `d-d-e set-window-scale 2.1`
+   `d-d-e set window-scale 2.1`
    */
   func testSequenceWrap() throws {
     videoWindow.typeText("d")
@@ -179,15 +186,16 @@ class KeySequences_UITests: XCTestCase {
     confirmNoScaling()
 
     videoWindow.typeText("e")
-    confirmWindowScale(1.8)
+    confirmWindowScale(2.1)
   }
 
   /*
-   Tests for these:
-   d-d-e set-window-scale 2.1
-   d-d-d-e set-window-scale 2.2
+   Tests that d-d-d-e is never hit becuase d-d-e always covers it up:
    */
-  func testLongSequences() {
+  func testSequenceCoversSupersequence() {
+    videoWindow.typeText("d")
+    confirmNoScaling()
+
     videoWindow.typeText("d")
     confirmNoScaling()
 
@@ -196,40 +204,64 @@ class KeySequences_UITests: XCTestCase {
 
     videoWindow.typeText("e")
     confirmWindowScale(2.1)  // new match
-
-    videoWindow.typeText("d")
-    confirmWindowScale(2.1)
-
-    videoWindow.typeText("d")
-    confirmWindowScale(2.1)
-
-    videoWindow.typeText("d")
-    confirmWindowScale(2.1)
-
-    videoWindow.typeText("e")
-    confirmWindowScale(2.2)  // new match
   }
 
   /*
-   Should match the first, not the second (sequence of 5 or more is invalid):
-   d-d-d-e set-window-scale 2.2
-   d-d-d-d-e set-window-scale 1.7
+   Tests one long one, then makes sure the sequence is reset so that the overlapping one isn't hit
+   k-l-m-n set window-scale 1.6
+   m-n-o-p set window-scale 1.8
+   */
+  func testLongOverlappingSequences() {
+    videoWindow.typeText("k")
+    confirmNoScaling()
+
+    videoWindow.typeText("l")
+    confirmNoScaling()
+
+    videoWindow.typeText("m")
+    confirmNoScaling()
+
+    videoWindow.typeText("n")
+    confirmWindowScale(1.6)  // match "k-l-m-n"
+
+    videoWindow.typeText("o")
+    confirmWindowScale(1.6)
+
+    videoWindow.typeText("p")
+    confirmWindowScale(1.6)  // NO match for "m-n-o-p"
+
+    videoWindow.typeText("m")
+    confirmWindowScale(1.6)
+
+    videoWindow.typeText("n")
+    confirmWindowScale(1.6)
+
+    videoWindow.typeText("o")
+    confirmWindowScale(1.6)
+
+    videoWindow.typeText("p")
+    confirmWindowScale(1.8)  // match "m-n-o-p"
+  }
+
+  /*
+   Tests that a sequence of 5 or more is invalid
+   q-r-s-t-w set window-scale 1.9
    */
   func testMaxBufferSize4() {
-    videoWindow.typeText("d")
+    videoWindow.typeText("q")
     confirmNoScaling()
 
-    videoWindow.typeText("d")
+    videoWindow.typeText("r")
     confirmNoScaling()
 
-    videoWindow.typeText("d")
+    videoWindow.typeText("s")
     confirmNoScaling()
 
-    videoWindow.typeText("d")
+    videoWindow.typeText("t")
     confirmNoScaling()
 
-    videoWindow.typeText("e")
-    confirmWindowScale(2.2)
+    videoWindow.typeText("w")
+    confirmNoScaling()  // no match
   }
 
   /*

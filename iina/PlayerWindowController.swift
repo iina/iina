@@ -11,7 +11,7 @@ import Cocoa
 class PlayerWindowController: NSWindowController, NSWindowDelegate {
 
   unowned var player: PlayerCore
-  
+
   var videoView: VideoView {
     fatalError("Subclass must implement")
   }
@@ -254,10 +254,15 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   override func keyDown(with event: NSEvent) {
-    let keyCode = KeyCodeHelper.mpvKeyCode(from: event)
-    if let kb = PlayerCore.keyBindings[keyCode] {
-      handleKeyBinding(kb)
+    if let keyBinding = player.keyInputController.resolveKeyEvent(event) {
+      if !keyBinding.isIgnored {  // if "ignore", do nothing. No beep, no send
+        if !handleKeyBinding(keyBinding) {
+          // beep if cmd failed
+          super.keyDown(with: event)
+        }
+      }
     } else {
+      // invalid key
       super.keyDown(with: event)
     }
   }

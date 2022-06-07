@@ -158,6 +158,9 @@
 		B4E446F725CB54EF0069F06E /* Mustache in Frameworks */ = {isa = PBXBuildFile; productRef = B4E446F625CB54EF0069F06E /* Mustache */; };
 		B4E4470125CE3F930069F06E /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = B4E4470025CE3F930069F06E /* Sparkle */; };
 		C789872F1E34EF170005769F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C78987311E34EF170005769F /* InfoPlist.strings */; };
+		D18333BC2834CDF40060A4E9 /* RingBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18333BB2834CDF40060A4E9 /* RingBuffer.swift */; };
+		D18333BE2834CE620060A4E9 /* KeyInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18333BD2834CE620060A4E9 /* KeyInputController.swift */; };
+		D19E23E9284F0A8400FD6999 /* IINAApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19E23E8284F0A8400FD6999 /* IINAApplication.swift */; };
 		E301EFDA21312AB300BC8588 /* KeychainAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = E301EFD921312AB300BC8588 /* KeychainAccess.swift */; };
 		E322A4F820A8442E00C67D32 /* PlaylistPlaybackProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E322A4F720A8442E00C67D32 /* PlaylistPlaybackProgressView.swift */; };
 		E32712B024EAA14500359DAB /* ScreenshootOSDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32712AE24EAA14500359DAB /* ScreenshootOSDView.swift */; };
@@ -1197,6 +1200,9 @@
 		C7DBA5EB1F07C5FD00C2B416 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
 		C7DC79CE1EC63821002DE23B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/HistoryWindowController.strings; sourceTree = "<group>"; };
 		C7E90B522087EC5700A58B6B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/SubChooseViewController.strings; sourceTree = "<group>"; };
+		D18333BB2834CDF40060A4E9 /* RingBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingBuffer.swift; sourceTree = "<group>"; };
+		D18333BD2834CE620060A4E9 /* KeyInputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyInputController.swift; sourceTree = "<group>"; };
+		D19E23E8284F0A8400FD6999 /* IINAApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IINAApplication.swift; sourceTree = "<group>"; };
 		D27556FC1EC6E1C300CAB2A4 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/HistoryWindowController.strings"; sourceTree = "<group>"; };
 		D27E35CE1E379B6D0064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainMenu.strings"; sourceTree = "<group>"; };
 		D27E35CF1E379B6D0064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainWindowController.strings"; sourceTree = "<group>"; };
@@ -1704,6 +1710,7 @@
 				E38BD4AE20054BD9007635FC /* MainWindow.swift */,
 				84CFC92523F8DDE000381E5B /* PlayerWindowController.swift */,
 				84A0BA9C1D2FAD4000BC8DA1 /* MainWindowController.swift */,
+				D18333BD2834CE620060A4E9 /* KeyInputController.swift */,
 				84D123B31ECAA405004E0D53 /* TouchBarSupport.swift */,
 				8400D5C81E1AB2F1006785F5 /* MainWindowController.xib */,
 				8466BE161D5CDD0300039D03 /* QuickSettingViewController.swift */,
@@ -1767,6 +1774,7 @@
 				E342832E20B7149800139865 /* Logger.swift */,
 				E3F698862120D878005792C9 /* ExtendedColors.swift */,
 				E301EFD921312AB300BC8588 /* KeychainAccess.swift */,
+				D18333BB2834CDF40060A4E9 /* RingBuffer.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -2089,6 +2097,7 @@
 			children = (
 				84FF846D1D2FF698001B318A /* deps */,
 				84A0BAA21D2FAE8200BC8DA1 /* Assets */,
+				D19E23E8284F0A8400FD6999 /* IINAApplication.swift */,
 				84A0BAA71D2FAF9700BC8DA1 /* Controllers */,
 				84A0BAA81D2FAFCD00BC8DA1 /* Data */,
 				845ABEAD1D4D19CF00BFB15B /* Models */,
@@ -2424,12 +2433,15 @@
 				84C8D5911D796F9700D98A0E /* Aspect.swift in Sources */,
 				E3383689202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.swift in Sources */,
 				519872FF26879B9B00F84BCC /* AccessibilityPreferences.swift in Sources */,
+				D19E23E9284F0A8400FD6999 /* IINAApplication.swift in Sources */,
 				842904E21F0EC01600478376 /* AutoFileMatcher.swift in Sources */,
 				8466BE181D5CDD0300039D03 /* QuickSettingViewController.swift in Sources */,
 				84A0BA9E1D2FAD4000BC8DA1 /* MainWindowController.swift in Sources */,
 				84E48D4E1E0F1090002C7A3F /* FilterWindowController.swift in Sources */,
 				E3F698872120D878005792C9 /* ExtendedColors.swift in Sources */,
+				D18333BC2834CDF40060A4E9 /* RingBuffer.swift in Sources */,
 				8476440C1D48F63D004F6DF5 /* OSDMessage.swift in Sources */,
+				D18333BE2834CE620060A4E9 /* KeyInputController.swift in Sources */,
 				84AE59491E0FD65800771B7E /* MainMenuActions.swift in Sources */,
 				E3CB75BD1FDACB82004DB10A /* SavedFilter.swift in Sources */,
 				E342832F20B7149800139865 /* Logger.swift in Sources */,

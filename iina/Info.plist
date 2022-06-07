@@ -481,7 +481,7 @@ Released under GPLv3.</string>
 	<key>NSPrefersDisplaySafeAreaCompatibilityMode</key>
 	<false/>
 	<key>NSPrincipalClass</key>
-	<string>NSApplication</string>
+	<string>IINAApplication</string>
 	<key>NSServices</key>
 	<array>
 		<dict>
@@ -533,7 +533,7 @@ Released under GPLv3.</string>
 				<string>public.audio</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Monkey's Audio Lossless Audio</string>
+			<string>Monkey&apos;s Audio Lossless Audio</string>
 			<key>UTTypeIdentifier</key>
 			<string>io.iina.ape</string>
 			<key>UTTypeTagSpecification</key>

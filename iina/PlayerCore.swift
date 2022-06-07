@@ -141,9 +141,12 @@ class PlayerCore: NSObject {
 
   static var keyBindings: [String: KeyMapping] = [:]
 
+  var keyInputController: KeyInputController!
+
   override init() {
     super.init()
     self.mpv = MPVController(playerCore: self)
+    self.keyInputController = KeyInputController(playerCore: self)
     self.mainWindow = MainWindowController(playerCore: self)
     self.miniPlayer = MiniPlayerWindowController(playerCore: self)
     self.initialWindow = InitialWindowController(playerCore: self)
@@ -268,7 +271,12 @@ class PlayerCore: NSObject {
     mpv.command(.loadfile, args: [path])
   }
 
-  static func loadKeyBindings() {
+  static func initSharedState() {
+    loadKeyBindings()
+    KeyInputController.initSharedState()
+  }
+
+  private static func loadKeyBindings() {
     Logger.log("Loading key bindings")
     let userConfigs = Preference.dictionary(for: .inputConfigs)
     let iinaDefaultConfPath = PrefKeyBindingViewController.defaultConfigs["IINA Default"]!
@@ -1419,7 +1427,7 @@ class PlayerCore: NSObject {
   func syncUI(_ option: SyncUIOption) {
     // if window not loaded, ignore
     guard mainWindow.loaded else { return }
-    Logger.log("Syncing UI \(option)", level: .verbose, subsystem: subsystem)
+//    Logger.log("Syncing UI \(option)", level: .verbose, subsystem: subsystem)
 
     switch option {
 

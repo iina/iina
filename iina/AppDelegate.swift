@@ -80,7 +80,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   private func getReady() {
     menuController.bindMenuItems()
-    PlayerCore.loadKeyBindings()
+    PlayerCore.initSharedState()
     isReady = true
   }
 

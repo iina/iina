@@ -8,6 +8,15 @@
 
 import Cocoa
 
+infix operator %%
+
+extension Int {
+  /** Modulo operator. Swift's remainder operator (%) can return negative values, which is rarely what we want. */
+  static  func %% (_ left: Int, _ right: Int) -> Int {
+    return (left % right + right) % right
+  }
+}
+
 extension NSSlider {
   /** Returns the position of knob center by point */
   func knobPointPosition() -> CGFloat {

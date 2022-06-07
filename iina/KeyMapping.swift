@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// - Tag: KeyMapping
 class KeyMapping: NSObject {
 
   static private let modifierOrder: [String: Int] = [
@@ -79,6 +80,10 @@ class KeyMapping: NSObject {
         return key
       }
     }
+  }
+
+  var isIgnored: Bool {
+    return privateRawAction == MPVCommand.ignore.rawValue
   }
 
   @objc var prettyCommand: String {

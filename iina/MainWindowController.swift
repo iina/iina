@@ -119,6 +119,10 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
+  var hasKeyboardFocus: Bool {
+    window?.isKeyWindow ?? false
+  }
+
   /** For mpv's `geometry` option. We cache the parsed structure
    so never need to parse it every time. */
   var cachedGeometry: GeometryDef?

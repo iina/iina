@@ -31,7 +31,7 @@ class JavascriptPolyfill {
     let timeInterval  = ms/1000.0
     let uuid = NSUUID().uuidString
 
-    plugin.queue.async(execute: {
+    DispatchQueue.main.async(execute: {
       let timer = Timer.scheduledTimer(timeInterval: timeInterval,
                                        target: self,
                                        selector: #selector(self.callJSCallback),

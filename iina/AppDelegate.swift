@@ -186,8 +186,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     Logger.log("App launched")
 
-    Logger.log("Using \(PlayerCore.active.mpv.mpvVersion!)")
-
     if !isReady {
       getReady()
     }
@@ -201,6 +199,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       NSWindow.allowsAutomaticWindowTabbing = false
     }
 
+    JavascriptPlugin.loadGlobalInstances()
+    let _ = PlayerCore.first
+    Logger.log("Using \(PlayerCore.active.mpv.mpvVersion!)")
+
     if #available(macOS 10.13, *) {
       if RemoteCommandController.useSystemMediaControl {
         Logger.log("Setting up MediaPlayer integration")
@@ -208,8 +210,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NowPlayingInfoManager.updateInfo(state: .unknown)
       }
     }
-
-    let _ = PlayerCore.first
 
     // if have pending open request
     if let url = pendingURL {
@@ -256,7 +256,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     NSApplication.shared.servicesProvider = self
 
-    JavascriptPlugin.loadGlobalInstances()
     menuController?.pluginMenuNeedsUpdate = true
   }
 

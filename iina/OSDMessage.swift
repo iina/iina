@@ -24,6 +24,7 @@ enum OSDType {
   case normal
   case withText(String)
   case withProgress(Double)
+//  case withButton(String)
 }
 
 enum OSDMessage {

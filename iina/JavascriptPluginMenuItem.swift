@@ -45,7 +45,7 @@ class JavascriptPluginMenuItem: NSObject, JavascriptPluginMenuItemExportable {
   var keyBinding: String? {
     didSet {
       guard let item = nsMenuItem else { return }
-      if let key = keyBinding,let (kEqv, kMdf) = KeyCodeHelper.macOSKeyEquivalent(from: key) {
+      if let key = keyBinding, let (kEqv, kMdf) = KeyCodeHelper.macOSKeyEquivalent(from: key) {
         item.keyEquivalent = kEqv
         item.keyEquivalentModifierMask = kMdf
       }

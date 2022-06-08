@@ -72,6 +72,13 @@ class JavascriptAPIGlobalController: JavascriptAPI, JavascriptAPIGlobalControlle
     } else if target.isNumber {
       let id = target.toNumber()!.intValue
       childAPIs[id]?.messageHub.callListener(forEvent: name, withDataObject: data.toObject())
+    } else if target.isString {
+      let label = target.toString()
+      if let pc = PlayerCore.playerCores.first(where: { $0.label == label }) {
+        let childPluginInstance = pc.plugins.first { $0.plugin == pluginInstance.plugin }!
+        let childAPI = childPluginInstance.apis["global"] as! JavascriptAPIGlobalChild
+        childAPI.messageHub.callListener(forEvent: name, withDataObject: data.toObject())
+      }
     }
   }
 
@@ -86,7 +93,7 @@ class JavascriptAPIGlobalChild: JavascriptAPI, JavascriptAPIGlobalChildExportabl
   lazy var messageHub = JavascriptMessageHub(reference: self)
 
   func postMessage(_ name: String, _ data: JSValue) {
-    parentAPI.messageHub.callListener(forEvent: name, withDataObject: data.toObject())
+    parentAPI.messageHub.callListener(forEvent: name, withDataObject: data.toObject(), userInfo: player?.label)
   }
 
   func onMessage(_ name: String, _ callback: JSValue) {

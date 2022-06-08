@@ -19,6 +19,7 @@ fileprivate typealias JustRequestFunc = (URLComponentsConvertible, [String : Any
   func patch(_ url: String, _ options: [String: Any]?) -> JSValue?
   func delete(_ url: String, _ options: [String: Any]?) -> JSValue?
   func xmlrpc(_ location: String) -> JavascriptAPIXmlrpc?
+  func download(_ url: String, _ dest: String, _ options: [String: Any]?) -> JSValue?
 }
 
 class JavascriptAPIHttp: JavascriptAPI, JavascriptAPIHttpExportable {
@@ -48,6 +49,44 @@ class JavascriptAPIHttp: JavascriptAPI, JavascriptAPIHttpExportable {
       return nil
     }
     return JavascriptAPIXmlrpc(context: context, pluginInstance: pluginInstance, location: location)
+  }
+
+  func download(_ url: String, _ dest: String, _ options: [String: Any]?) -> JSValue? {
+    return whenPermitted(to: .networkRequest) {
+      guard hostIsValid(url) else {
+        throwError(withMessage: "URL is not allowed.")
+        return nil
+      }
+      guard let method = HTTPMethod(rawValue: options?["method"] as? String ?? "GET") else {
+        throwError(withMessage: "method is invalid.")
+        return nil
+      }
+      guard let destPath = self.parsePath(dest).path else {
+        throwError(withMessage: "Not allowed to write to the destination.")
+        return nil
+      }
+      let params = options?["params"] as? [String: String]
+      let headers = options?["headers"] as? [String: String]
+      let data = options?["data"] as? [String: Any]
+      return createPromise { resolve, reject in
+        Just.request(method, url: url,
+                     params: params ?? [:],
+                     data: data ?? [:],
+                     headers: headers ?? [:],
+                     asyncCompletionHandler:  { [unowned self] response in
+          if (response.ok) {
+            do {
+              try response.content?.write(to: URL(fileURLWithPath: destPath))
+            } catch {
+              self.throwError(withMessage: "Unable to write to the destination.")
+            }
+            resolve.call(withArguments: [])
+          } else {
+            reject.call(withArguments: [response.toDict()])
+          }
+        })
+      }
+    }
   }
 
   private func request(_ method: HTTPMethod, url: String, options: [String: Any]?) -> JSValue? {

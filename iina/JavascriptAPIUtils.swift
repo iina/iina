@@ -23,6 +23,8 @@ fileprivate extension Process {
 }
 
 @objc protocol JavascriptAPIUtilsExportable: JSExport {
+  func fileInPath(_ file: String) -> Bool
+  func resolvePath(_ path: String) -> String?
   func exec(_ file: String, _ args: [String]) -> JSValue?
   func ask(_ title: String) -> Bool
   func prompt(_ title: String) -> String?
@@ -37,27 +39,66 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
     """)
   }
 
+  func fileInPath(_ file: String) -> Bool {
+    guard permitted(to: .accessFileSystem) else {
+      return false
+    }
+    if file.isEmpty {
+      return false
+    }
+    if let _ = searchBinary(file, in: Utility.binariesURL) ?? searchBinary(file, in: Utility.exeDirURL) {
+      return true
+    }
+    if let path = parsePath(file).path {
+      return FileManager.default.fileExists(atPath: path)
+    }
+    return false
+  }
+
+  func resolvePath(_ path: String) -> String? {
+    guard permitted(to: .accessFileSystem) else {
+      return nil
+    }
+    return parsePath(path).path
+  }
+
   func exec(_ file: String, _ args: [String]) -> JSValue? {
     guard permitted(to: .accessFileSystem) else {
       return nil
     }
-    return createPromise { resolve, reject in
+
+    return createPromise { [unowned self] resolve, reject in
       var path = ""
-      if file.first == "/" {
-        if !FileManager.default.fileExists(atPath: file) {
-          reject.call(withArguments: [-1, "Cannot fine the binary \(file)"])
-          return
+      var args = args
+      if !file.contains("/") {
+        if let url = searchBinary(file, in: Utility.binariesURL) ?? searchBinary(file, in: Utility.exeDirURL) {
+          // a binary included in IINA's bundle?
+          path = url.absoluteString
+        } else {
+          // assume it's a system command
+          path = "/bin/bash"
+          args.insert(file, at: 0)
+          args = ["-c", args.joined(separator: " ")]
         }
-        path = file
       } else {
-        guard let url = searchBinary(file, in: Utility.binariesURL) ?? searchBinary(file, in: Utility.exeDirURL) else {
+        // it should be an existing file
+        if file.first == "/" {
+          // an absolute path?
+          path = file
+        } else {
+          path = parsePath(file).path ?? ""
+        }
+        // make sure the file exists
+        guard FileManager.default.fileExists(atPath: path) else {
           reject.call(withArguments: [-1, "Cannot find the binary \(file)"])
           return
         }
-        path = url.path
       }
 
-      if !FileManager.default.isExecutableFile(atPath: path) {
+      // If this binary belongs to the plugin but doesn't have exec permission, try fix it
+      if !FileManager.default.isExecutableFile(atPath: path) && (
+        path.hasPrefix(self.pluginInstance.plugin.dataURL.path) ||
+        path.hasPrefix(self.pluginInstance.plugin.tmpURL.path)) {
         do {
           try FileManager.default.setAttributes([.posixPermissions: NSNumber(integerLiteral: 0o755)], ofItemAtPath: path)
         } catch {

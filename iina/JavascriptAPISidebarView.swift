@@ -29,7 +29,7 @@ class JavascriptAPISidebarView: JavascriptAPI, JavascriptAPISidebarViewExportabl
   func loadFile(_ path: String) {
     let rootURL = pluginInstance.plugin.root
     let url = rootURL.appendingPathComponent(path)
-    executeOnMainThread {
+    Utility.executeOnMainThread {
       pluginInstance.sidebarTabView.load(URLRequest(url: url))
     }
   }

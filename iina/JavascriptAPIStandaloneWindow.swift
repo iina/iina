@@ -14,6 +14,9 @@ import WebKit
   func open()
   func close()
   func loadFile(_ path: String)
+  func simpleMode()
+  func setStyle(_ style: String)
+  func setContent(_ content: String)
   func postMessage(_ name: String, _ data: JSValue)
   func onMessage(_ name: String, _ callback: JSValue)
   func setProperty(_ properties: JSValue)
@@ -21,30 +24,40 @@ import WebKit
 
 class JavascriptAPIStandaloneWindow: JavascriptAPI, JavascriptAPIStandaloneWindowExportable, WKScriptMessageHandler {
   private lazy var messageHub = JavascriptMessageHub(reference: self)
+  private var inSimpleMode = false
 
   override func cleanUp(_ instance: JavascriptPluginInstance) {
     guard instance.standaloneWindowCreated else { return }
-    executeOnMainThread {
+    Utility.executeOnMainThread {
       instance.standaloneWindow.close()
     }
   }
 
   func close() {
-    executeOnMainThread {
+    Utility.executeOnMainThread {
       pluginInstance.standaloneWindow.close()
     }
   }
 
   func open() {
-    executeOnMainThread {
+    Utility.executeOnMainThread {
       pluginInstance.standaloneWindow.makeKeyAndOrderFront(nil)
     }
+  }
+
+  func simpleMode() {
+    Utility.executeOnMainThread {
+      pluginInstance.standaloneWindow.isEnteringSimpleMode = true
+      pluginInstance.standaloneWindow.webView.loadHTMLString(simpleModeHTMLString, baseURL: nil)
+    }
+    inSimpleMode = true
   }
 
   func loadFile(_ path: String) {
     let rootURL = pluginInstance.plugin.root
     let url = rootURL.appendingPathComponent(path)
-    executeOnMainThread {
+    inSimpleMode = false
+    Utility.executeOnMainThread {
       pluginInstance.standaloneWindow.webView.loadFileURL(url, allowingReadAccessTo: rootURL)
     }
   }
@@ -56,6 +69,24 @@ class JavascriptAPIStandaloneWindow: JavascriptAPI, JavascriptAPIStandaloneWindo
 
   func onMessage(_ name: String, _ callback: JSValue) {
     messageHub.addListener(forEvent: name, callback: callback)
+  }
+
+  func setStyle(_ style: String) {
+    guard pluginInstance != nil else { return }
+    guard inSimpleMode else {
+      log("standaloneWindow.setStyle is only available in simple mode.", level: .error)
+      return
+    }
+    pluginInstance.standaloneWindow.setSimpleModeStyle(style)
+  }
+
+  func setContent(_ content: String) {
+    guard pluginInstance != nil else { return }
+    guard inSimpleMode else {
+      log("standaloneWindow.setContent is only available in simple mode.", level: .error)
+      return
+    }
+    pluginInstance.standaloneWindow.setSimpleModeContent(content)
   }
 
   func setProperty(_ properties: JSValue) {
@@ -75,17 +106,31 @@ class JavascriptAPIStandaloneWindow: JavascriptAPI, JavascriptAPIStandaloneWindo
       switch key {
       case "title":
         if let title = value as? String {
-          executeOnMainThread {
+          Utility.executeOnMainThread {
             window.title = title + " — \(pluginInstance.plugin.name)"
           }
         }
       case "resizable":
-        executeOnMainThread {
+        Utility.executeOnMainThread {
           setStyleMask(.resizable, value)
         }
       case "fullSizeContentView":
-        executeOnMainThread {
+        Utility.executeOnMainThread {
           setStyleMask(.fullSizeContentView, value)
+        }
+      case "hideTitleBar":
+        let boolVal = (value as? Bool == true)
+        Utility.executeOnMainThread {
+          window.titlebarAppearsTransparent = boolVal
+          window.titleVisibility = boolVal ? .hidden : .visible
+          window.isMovableByWindowBackground = boolVal
+        }
+      case "size":
+        if let sizeVal = (value as? [Int]), sizeVal.count >= 2 {
+          let w = CGFloat(sizeVal[0])
+          let h = CGFloat(sizeVal[1])
+          let rect = NSRect(x: window.frame.origin.x, y: window.frame.origin.y, width: w, height: h)
+          window.setFrame(rect, display: true)
         }
       default:
         break
@@ -97,3 +142,37 @@ class JavascriptAPIStandaloneWindow: JavascriptAPI, JavascriptAPIStandaloneWindo
     messageHub.receiveMessageFromUserContentController(message)
   }
 }
+
+
+fileprivate let simpleModeHTMLString = """
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Overlay</title>
+  <style>
+    body {
+      font-size: 13px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        color: #eee;
+      }
+      body a {
+        color: #809fff;
+      }
+    }
+  </style>
+  <style id="style"></style>
+</head>
+
+<body>
+  <div id="content"></div>
+</body>
+
+</html>
+"""

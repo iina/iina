@@ -25,7 +25,7 @@ fileprivate extension Process {
 @objc protocol JavascriptAPIUtilsExportable: JSExport {
   func fileInPath(_ file: String) -> Bool
   func resolvePath(_ path: String) -> String?
-  func exec(_ file: String, _ args: [String]) -> JSValue?
+  func exec(_ file: String, _ args: [String], _ cwd: JSValue?, _ stdoutHook_: JSValue?, _ stderrHook_: JSValue?) -> JSValue?
   func ask(_ title: String) -> Bool
   func prompt(_ title: String) -> String?
   func chooseFile(_ title: String, _ options: [String: Any]) -> Any
@@ -62,7 +62,7 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
     return parsePath(path).path
   }
 
-  func exec(_ file: String, _ args: [String]) -> JSValue? {
+  func exec(_ file: String, _ args: [String], _ cwd: JSValue?, _ stdoutHook_: JSValue?, _ stderrHook_: JSValue?) -> JSValue? {
     guard permitted(to: .accessFileSystem) else {
       return nil
     }
@@ -109,21 +109,35 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
 
       let (stdout, stderr) = (Pipe(), Pipe())
       let process = Process()
+      process.environment = ["LC_ALL": "en_US.UTF-8"]
       process.launchPath = path
       process.arguments = args
+      if let cwd = cwd, cwd.isString, let cwdPath = parsePath(cwd.toString()).path {
+        process.currentDirectoryPath = cwdPath
+      }
       process.standardOutput = stdout
       process.standardError = stderr
 
       var stdoutContent = ""
       var stderrContent = ""
+      var stdoutHook: JSValue?
+      var stderrHook: JSValue?
+      if let hookVal = stdoutHook_, hookVal.isObject {
+        stdoutHook = hookVal
+      }
+      if let hookVal = stderrHook_, hookVal.isObject {
+        stderrHook = hookVal
+      }
 
       stdout.fileHandleForReading.readabilityHandler = { file in
         guard let output = String(data: file.availableData, encoding: .utf8) else { return }
         stdoutContent += output
+        stdoutHook?.call(withArguments: [output])
       }
       stderr.fileHandleForReading.readabilityHandler = { file in
         guard let output = String(data: file.availableData, encoding: .utf8) else { return }
         stderrContent += output
+        stderrHook?.call(withArguments: [output])
       }
       process.launch()
 

@@ -78,9 +78,9 @@ class PluginStandaloneWindow: NSWindow, WKNavigationDelegate {
   }
 
   func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-    if isEnteringSimpleMode {
-      isEnteringSimpleMode = false
-    }
+    guard isEnteringSimpleMode else { return }
+    isEnteringSimpleMode = false
+    
     if let style = pendingStyle {
       _simpleModeSetStyle(style)
     }

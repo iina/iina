@@ -52,9 +52,11 @@ class JavascriptMessageHub {
     callback.value.call(withArguments: [JSValue(object: decoded, in: callback.value.context) ?? NSNull()])
   }
 
-  func callListener(forEvent name: String, withDataObject dataObject: Any?) {
+  func callListener(forEvent name: String, withDataObject dataObject: Any?, userInfo: Any? = nil) {
     guard let callback = listeners[name] else { return }
-    callback.value.call(withArguments: [JSValue(object: dataObject, in: callback.value.context) ?? NSNull()])
+    let data = JSValue(object: dataObject, in: callback.value.context) ?? NSNull()
+    let userInfo = userInfo ?? NSNull()
+    callback.value.call(withArguments: [data, userInfo])
   }
 
   func receiveMessageFromUserContentController(_ message: WKScriptMessage) {

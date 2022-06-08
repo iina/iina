@@ -10,7 +10,7 @@ import Cocoa
 import MediaPlayer
 import Sparkle
 
-let IINA_ENABLE_PLUGIN_SYSTEM = false
+let IINA_ENABLE_PLUGIN_SYSTEM = Preference.bool(for: .iinaEnablePluginSystem)
 
 /** Max time interval for repeated `application(_:openFile:)` calls. */
 fileprivate let OpenFileRepeatTime = TimeInterval(0.2)

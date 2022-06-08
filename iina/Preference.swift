@@ -284,6 +284,8 @@ struct Preference {
 
     static let iinaLastPlayedFilePath = Key("iinaLastPlayedFilePath")
     static let iinaLastPlayedFilePosition = Key("iinaLastPlayedFilePosition")
+
+    static let iinaEnablePluginSystem = Key("iinaEnablePluginSystem")
   }
 
   // MARK: - Enums
@@ -792,6 +794,7 @@ struct Preference {
     .userOptions: [],
     .useUserDefinedConfDir: false,
     .userDefinedConfDir: "~/.config/mpv/",
+    .iinaEnablePluginSystem: false,
 
     .keepOpenOnFileEnd: true,
     .quitWhenNoOpenedWindow: false,

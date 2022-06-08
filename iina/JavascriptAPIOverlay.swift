@@ -62,7 +62,7 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
     }
     let rootURL = pluginInstance.plugin.root
     let url = rootURL.appendingPathComponent(path)
-    executeOnMainThread {
+    Utility.executeOnMainThread {
       pluginInstance.overlayView.loadFileURL(url, allowingReadAccessTo: rootURL)
       pluginInstance.overlayViewLoaded = true
       inSimpleMode = false

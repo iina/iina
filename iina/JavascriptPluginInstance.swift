@@ -150,14 +150,14 @@ class JavascriptPluginInstance {
       "utils": JavascriptAPIUtils(context: ctx, pluginInstance: self),
       "file": JavascriptAPIFile(context: ctx, pluginInstance: self),
       "preferences": JavascriptAPIPreferences(context: ctx, pluginInstance: self),
-      "console": JavascriptAPIConsole(context: ctx, pluginInstance: self)
+      "console": JavascriptAPIConsole(context: ctx, pluginInstance: self),
+      "http": JavascriptAPIHttp(context: ctx, pluginInstance: self)
     ]
 
     if !isGlobal {
       apis["core"] = JavascriptAPICore(context: ctx, pluginInstance: self)
       apis["mpv"] = JavascriptAPIMpv(context: ctx, pluginInstance: self)
       apis["event"] = JavascriptAPIEvent(context: ctx, pluginInstance: self)
-      apis["http"] = JavascriptAPIHttp(context: ctx, pluginInstance: self)
       apis["overlay"] = JavascriptAPIOverlay(context: ctx, pluginInstance: self)
       apis["sidebar"] = JavascriptAPISidebarView(context: ctx, pluginInstance: self)
       apis["playlist"] = JavascriptAPIPlaylist(context: ctx, pluginInstance: self)
@@ -165,9 +165,13 @@ class JavascriptPluginInstance {
     }
 
     if player == nil {
+      // it's a global instance
       apis["global"] = JavascriptAPIGlobalController(context: ctx, pluginInstance: self)
-    } else if player.isManagedByPlugin {
-      apis["global"] = JavascriptAPIGlobalChild(context: ctx, pluginInstance: self)
+    } else if let globalAPI = plugin.globalInstance?.apis["global"] as? JavascriptAPIGlobalController {
+      // it's a normal instance
+      let childAPI = JavascriptAPIGlobalChild(context: ctx, pluginInstance: self)
+      childAPI.parentAPI = globalAPI
+      apis["global"] = childAPI
     }
 
     ctx.setObject(apis, forKeyedSubscript: "iina" as NSString)

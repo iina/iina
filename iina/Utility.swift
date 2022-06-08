@@ -510,6 +510,16 @@ class Utility {
     return latestFile
   }
 
+  static func executeOnMainThread(block: () -> Void) {
+    if Thread.isMainThread {
+      block()
+    } else {
+      DispatchQueue.main.sync {
+        block()
+      }
+    }
+  }
+
   // MARK: - Util classes
 
   class FontAttributes {

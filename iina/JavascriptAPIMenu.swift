@@ -13,11 +13,13 @@ import JavaScriptCore
   func item(_ title: String, _ action: JSValue, _ options: JSValue) -> JavascriptPluginMenuItem
   func separator() -> JavascriptPluginMenuItem
   func addItem(_ item: JavascriptPluginMenuItem)
+  func items() -> [JavascriptPluginMenuItem]
+  func removeAt(_ index: Int) -> Bool
   func removeAllItems()
 }
 
 class JavascriptAPIMenu: JavascriptAPI, JavascriptAPIMenuExportable {
-  @objc func item(_ title: String, _ action: JSValue,  _ options: JSValue) -> JavascriptPluginMenuItem {
+  func item(_ title: String, _ action: JSValue,  _ options: JSValue) -> JavascriptPluginMenuItem {
     let action_ = action.isNull ? nil : action
     let enabled = getKeyedValue(options, "enabled")?.toBool() ?? true
     let selected = getKeyedValue(options, "selected")?.toBool() ?? false
@@ -31,17 +33,32 @@ class JavascriptAPIMenu: JavascriptAPI, JavascriptAPIMenuExportable {
     return item
   }
 
-  @objc func separator() -> JavascriptPluginMenuItem {
+  func separator() -> JavascriptPluginMenuItem {
     let item = JavascriptPluginMenuItem(title: "", selected: false, enabled: false)
     item.isSeparator = true
     return item
   }
 
-  @objc func addItem(_ item: JavascriptPluginMenuItem) {
+  func addItem(_ item: JavascriptPluginMenuItem) {
     self.pluginInstance.menuItems.append(item)
   }
 
-  @objc func removeAllItems() {
+  func items() -> [JavascriptPluginMenuItem] {
+    return self.pluginInstance.menuItems
+  }
+
+  func removeAt(_ index: Int) -> Bool {
+    guard let item = self.pluginInstance.menuItems[at: index] else {
+      return false
+    }
+    if let action = item.action {
+      JSContext.current()!.virtualMachine.removeManagedReference(action, withOwner: self)
+    }
+    self.pluginInstance.menuItems.remove(at: index)
+    return true
+  }
+
+  func removeAllItems() {
     for item in self.pluginInstance.menuItems {
       item.forAllSubItems {
         if let action = $0.action {

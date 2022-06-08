@@ -13,6 +13,10 @@ class PluginStandaloneWindow: NSWindow, WKNavigationDelegate {
   weak private var pluginInstance: JavascriptPluginInstance!
   var webView: WKWebView!
 
+  var isEnteringSimpleMode = false
+  private var pendingStyle: String?
+  private var pendingContent: String?
+
   static func create(pluginInstance: JavascriptPluginInstance) -> PluginStandaloneWindow {
     let rect = NSRect(x: 0, y: 0, width: 600, height: 400)
     let window = PluginStandaloneWindow(contentRect: rect,
@@ -43,9 +47,26 @@ class PluginStandaloneWindow: NSWindow, WKNavigationDelegate {
     webView = WKWebView(frame: .zero, configuration: config)
     webView.navigationDelegate = self
     webView.translatesAutoresizingMaskIntoConstraints = false
+    webView.setValue(false, forKey: "drawsBackground")
     contentView?.addSubview(webView)
 
     Utility.quickConstraints(["H:|-0-[v]-0-|", "V:|-0-[v]-0-|"], ["v": webView])
+  }
+
+  func setSimpleModeStyle(_ style: String) {
+    if isEnteringSimpleMode {
+      pendingStyle = style
+    } else {
+      _simpleModeSetStyle(style)
+    }
+  }
+
+  func setSimpleModeContent(_ content: String) {
+    if isEnteringSimpleMode {
+      pendingContent = content
+    } else {
+      _simpleModeSetContent(content)
+    }
   }
 
   func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
@@ -53,6 +74,38 @@ class PluginStandaloneWindow: NSWindow, WKNavigationDelegate {
       decisionHandler(.cancel)
     } else {
       decisionHandler(.allow)
+    }
+  }
+
+  func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    if isEnteringSimpleMode {
+      isEnteringSimpleMode = false
+    }
+    if let style = pendingStyle {
+      _simpleModeSetStyle(style)
+    }
+    if let content = pendingContent {
+      _simpleModeSetContent(content)
+    }
+  }
+
+  private func _simpleModeSetStyle(_ style: String) {
+    Utility.executeOnMainThread {
+      webView.evaluateJavaScript("window.iina._simpleModeSetStyle(`\(style)`)") { (_, error) in
+        if let error = error {
+          Logger.log(error.localizedDescription, level: .error, subsystem: self.pluginInstance.subsystem)
+        }
+      }
+    }
+  }
+
+  private func _simpleModeSetContent(_ content: String) {
+    Utility.executeOnMainThread {
+      webView.evaluateJavaScript("window.iina._simpleModeSetContent(`\(content)`)") { (_, error) in
+        if let error = error {
+          Logger.log(error.localizedDescription, level: .error, subsystem: self.pluginInstance.subsystem)
+        }
+      }
     }
   }
 }

@@ -13,6 +13,7 @@ import WebKit
 @objc protocol JavascriptAPIStandaloneWindowExportable: JSExport {
   func open()
   func close()
+  func isOpen() -> Bool
   func loadFile(_ path: String)
   func simpleMode()
   func setStyle(_ style: String)
@@ -20,6 +21,7 @@ import WebKit
   func postMessage(_ name: String, _ data: JSValue)
   func onMessage(_ name: String, _ callback: JSValue)
   func setProperty(_ properties: JSValue)
+  func setFrame(_ w: JSValue, _ h: JSValue, _ x: JSValue, _ y: JSValue)
 }
 
 class JavascriptAPIStandaloneWindow: JavascriptAPI, JavascriptAPIStandaloneWindowExportable, WKScriptMessageHandler {
@@ -42,6 +44,12 @@ class JavascriptAPIStandaloneWindow: JavascriptAPI, JavascriptAPIStandaloneWindo
   func open() {
     Utility.executeOnMainThread {
       pluginInstance.standaloneWindow.makeKeyAndOrderFront(nil)
+    }
+  }
+
+  func isOpen() -> Bool {
+    return pluginInstance.standaloneWindowCreated && Utility.executeOnMainThread {
+       pluginInstance.standaloneWindow.isVisible
     }
   }
 
@@ -125,16 +133,25 @@ class JavascriptAPIStandaloneWindow: JavascriptAPI, JavascriptAPIStandaloneWindo
           window.titleVisibility = boolVal ? .hidden : .visible
           window.isMovableByWindowBackground = boolVal
         }
-      case "size":
-        if let sizeVal = (value as? [Int]), sizeVal.count >= 2 {
-          let w = CGFloat(sizeVal[0])
-          let h = CGFloat(sizeVal[1])
-          let rect = NSRect(x: window.frame.origin.x, y: window.frame.origin.y, width: w, height: h)
-          window.setFrame(rect, display: true)
-        }
       default:
         break
       }
+    }
+  }
+
+  func setFrame(_ w: JSValue, _ h: JSValue, _ x: JSValue, _ y: JSValue) {
+    // we need to get the values on current thread
+    let w = w.isNumber ? CGFloat(w.toDouble()) : nil
+    let h = h.isNumber ? CGFloat(h.toDouble()) : nil
+    let x = x.isNumber ? CGFloat(x.toDouble()) : nil
+    let y = y.isNumber ? CGFloat(y.toDouble()) : nil
+    Utility.executeOnMainThread {
+      let window = pluginInstance.standaloneWindow;
+      let rect = NSRect(x: x ?? window.frame.origin.x,
+                        y: y ?? window.frame.origin.y,
+                        width: w ?? window.frame.width,
+                        height: h ?? window.frame.height)
+      window.setFrame(rect, display: true)
     }
   }
 
@@ -163,7 +180,7 @@ fileprivate let simpleModeHTMLString = """
         color: #eee;
       }
       body a {
-        color: #809fff;
+        color: #007aff;
       }
     }
   </style>

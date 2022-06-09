@@ -510,11 +510,13 @@ class Utility {
     return latestFile
   }
 
-  static func executeOnMainThread(block: () -> Void) {
+  /// Make sure the block is executed on the main thread. Be careful since it uses `sync`. Keep the block mininal.
+  @discardableResult
+  static func executeOnMainThread<T>(block: () -> T) -> T {
     if Thread.isMainThread {
-      block()
+      return block()
     } else {
-      DispatchQueue.main.sync {
+      return DispatchQueue.main.sync {
         block()
       }
     }

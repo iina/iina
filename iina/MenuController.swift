@@ -527,7 +527,7 @@ class MenuController: NSObject, NSMenuDelegate {
     }
   }
 
-  private func updatePluginMenu() {
+  func updatePluginMenu() {
     pluginMenu.removeAllItems()
     pluginMenu.addItem(withTitle: "Manage Plugins…")
     pluginMenu.addItem(.separator())

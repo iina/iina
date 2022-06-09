@@ -16,6 +16,7 @@ import JavaScriptCore
   func items() -> [JavascriptPluginMenuItem]
   func removeAt(_ index: Int) -> Bool
   func removeAllItems()
+  func forceUpdate()
 }
 
 class JavascriptAPIMenu: JavascriptAPI, JavascriptAPIMenuExportable {
@@ -67,6 +68,12 @@ class JavascriptAPIMenu: JavascriptAPI, JavascriptAPIMenuExportable {
       }
     }
     self.pluginInstance.menuItems.removeAll()
+  }
+
+  func forceUpdate() {
+    Utility.executeOnMainThread {
+      (NSApp.delegate as? AppDelegate)?.menuController?.updatePluginMenu()
+    }
   }
 }
 

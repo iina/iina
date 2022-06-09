@@ -49,7 +49,12 @@ class JavascriptAPI: NSObject {
     return context.objectForKeyedSubscript("Promise")!.construct(withArguments: [JSValue(object: block, in: context)!])
   }
 
-  func parsePath(_ path: String) -> (path: String?, local: Bool) {
+  /// Expand the magic strings such as `@tmp` and `@data` in the path.
+  /// - Parameters:
+  ///   - path: the path to be expanded
+  ///   - forceLocalPath: whether the path must be a file system path
+  /// - Returns: `local`: whether the path is inside the plugin's private folder
+  func parsePath(_ path: String, forceLocalPath: Bool = true) -> (path: String?, local: Bool) {
     if path.hasPrefix("@tmp/") {
       return (expandPath(path, byReplacing: "tmp", with: pluginInstance.plugin.tmpURL), true)
     } else if path.hasPrefix("@data/") {
@@ -77,7 +82,10 @@ class JavascriptAPI: NSObject {
         }
         absPath = expandPath(path, byReplacing: "current", with: currentURL.deletingLastPathComponent(), validate: false)!
       }
-      guard absPath.hasPrefix("/") else {
+      if path.hasPrefix("~/") {
+        absPath = NSString(string: path).expandingTildeInPath
+      }
+      guard !forceLocalPath || absPath.hasPrefix("/") else {
         throwError(withMessage: "The path should be an absolute path: \(path)")
         return (nil, false)
       }

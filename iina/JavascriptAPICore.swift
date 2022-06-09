@@ -51,7 +51,9 @@ class JavascriptAPICore: JavascriptAPI, JavascriptAPICoreExportable {
   }
 
   func open(_ url: String) {
-    player!.openURLString(url)
+    if let url = parsePath(url, forceLocalPath: false).path {
+      player!.openURLString(url)
+    }
   }
 
   func osd(_ message: String) {

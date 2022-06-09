@@ -42,25 +42,32 @@ class JavascriptAPIGlobalController: JavascriptAPI, JavascriptAPIGlobalControlle
     pc.label = "\(instanceCounter)-\(pluginInstance.plugin.identifier)"
     pc.isManagedByPlugin = true
     pc.startMPV()
-    if (options["disableWindowAnimation"] as? Bool == true) {
+    if options["disableWindowAnimation"] as? Bool == true {
       pc.disableWindowAnimation = true
     }
-    if (options["disableUI"] as? Bool == true) {
+    if options["disableUI"] as? Bool == true {
       pc.disableUI = true
     }
-    if (options["enablePlugins"] as? Bool == true) {
+    if options["enablePlugins"] as? Bool == true {
       pc.loadPlugins()
     } else {
       // load the current plugin only.
       // `reloadPlugin` will create a plugin instance if it's not loaded.
       pc.reloadPlugin(pluginInstance.plugin)
     }
+
     // accociate child plugin
     let childPluginInstance = pc.plugins.first { $0.plugin == pluginInstance.plugin }!
     let childAPI = childPluginInstance.apis["global"] as! JavascriptAPIGlobalChild
     childAPI.parentAPI = self
     instances[instanceCounter] = pc
     childAPIs[instanceCounter] = childAPI
+
+    // open file
+    if let url = options["url"] as? String, let url = parsePath(url, forceLocalPath: false).path  {
+      pc.openURLString(url)
+    }
+
     return instanceCounter
   }
 

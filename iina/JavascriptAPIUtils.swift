@@ -78,7 +78,11 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
           // assume it's a system command
           path = "/bin/bash"
           args.insert(file, at: 0)
-          args = ["-c", args.joined(separator: " ")]
+          args = ["-c", args.map {
+            $0.replacingOccurrences(of: " ", with: "\\ ")
+              .replacingOccurrences(of: "'", with: "\\'")
+              .replacingOccurrences(of: "\"", with: "\\\"")
+          }.joined(separator: " ")]
         }
       } else {
         // it should be an existing file

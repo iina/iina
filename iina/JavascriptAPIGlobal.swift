@@ -16,6 +16,7 @@ import JavaScriptCore
 }
 
 @objc protocol JavascriptAPIGlobalChildExportable: JSExport {
+  func getLabel() -> Any
   func postMessage(_ name: String, _ data: JSValue)
   func onMessage(_ name: String, _ callback: JSValue)
 }
@@ -47,6 +48,9 @@ class JavascriptAPIGlobalController: JavascriptAPI, JavascriptAPIGlobalControlle
     }
     if options["disableUI"] as? Bool == true {
       pc.disableUI = true
+    }
+    if let label = options["label"] as? String {
+      pc.userLabel = label
     }
     if options["enablePlugins"] as? Bool == true {
       pc.loadPlugins()
@@ -98,6 +102,10 @@ class JavascriptAPIGlobalController: JavascriptAPI, JavascriptAPIGlobalControlle
 class JavascriptAPIGlobalChild: JavascriptAPI, JavascriptAPIGlobalChildExportable {
   var parentAPI: JavascriptAPIGlobalController!
   lazy var messageHub = JavascriptMessageHub(reference: self)
+
+  func getLabel() -> Any {
+    return player?.userLabel ?? NSNull()
+  }
 
   func postMessage(_ name: String, _ data: JSValue) {
     parentAPI.messageHub.callListener(forEvent: name, withDataObject: data.toObject(), userInfo: player?.label)

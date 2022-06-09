@@ -333,7 +333,7 @@
 "plugin.installed" = "Installed";
 "plugin.not_installed" = "Not Installed";
 "plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occured during the installation: %@";
+"alert.plugin.install_error" = "Error occurred during the installation: %@";
 "plugin.install_error.invalid_url" = "The URL is invalid.";
 "plugin.install_error.file_not_found" = "Cannot find the package file.";
 "plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";

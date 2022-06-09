@@ -55,8 +55,8 @@ class JavascriptPlugin: NSObject {
       } else {
         removeSubProviders()
       }
-      PlayerCore.reloadPluginForAll(self)
       reloadGlobalInstance()
+      PlayerCore.reloadPluginForAll(self)
       NotificationCenter.default.post(Notification(name: .iinaPluginChanged))
     }
   }
@@ -233,7 +233,7 @@ class JavascriptPlugin: NSObject {
     let tempFolder = ".temp.\(UUID().uuidString)"
     let tempZipFile = "\(tempFolder).zip"
     let tempDecompressDir = "\(tempFolder)-1"
-    let githubMasterURL = url.appendingPathComponent("archive/master.zip").absoluteString
+    let githubMasterURL = url.appendingPathComponent("archive/main.zip").absoluteString
 
     defer {
       [tempZipFile, tempDecompressDir].forEach { item in
@@ -423,6 +423,7 @@ class JavascriptPlugin: NSObject {
       try fileManager.moveItem(at: self.root, to: dest)
       self.root = dest
       self.entryURL = resolvePath(entryPath, root: root)!
+      self.globalEntryURL = resolvePath(globalEntryPath, root: root)!
       self.preferencesPageURL = resolvePath(preferencesPage, root: root)
       self.helpPageURL = resolvePath(helpPage, root: root, allowNetwork: true)
     } catch let error {

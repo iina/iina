@@ -392,6 +392,7 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
     guard let currentPlugin = currentPlugin else { return }
     Utility.quickAskPanel("plugin_uninstall", titleArgs: [currentPlugin.name], sheetWindow: view.window!) { response in
       if response == .alertFirstButtonReturn {
+        currentPlugin.enabled = false
         currentPlugin.remove()
         self.clearPluginPage()
         self.tableView.reloadData()
@@ -434,9 +435,8 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
     showPermissionsSheet(forPlugin: plugin, previousPlugin: nil) { ok in
       if ok {
         plugin.normalizePath()
-        plugin.enabled = true
         JavascriptPlugin.plugins.append(plugin)
-        PlayerCore.reloadPluginForAll(plugin)
+        plugin.enabled = true
         self.tableView.reloadData()
       } else {
         plugin.remove()
@@ -481,8 +481,8 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
           JavascriptPlugin.plugins.insert(newPlugin, at: pos)
         }
         newPlugin.normalizePath()
-        PlayerCore.reloadPluginForAll(newPlugin)
         newPlugin.reloadGlobalInstance()
+        PlayerCore.reloadPluginForAll(newPlugin)
         self.currentPlugin = newPlugin
         self.tableView.reloadData()
         self.loadPluginPage(newPlugin)

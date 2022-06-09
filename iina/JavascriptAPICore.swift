@@ -52,7 +52,9 @@ class JavascriptAPICore: JavascriptAPI, JavascriptAPICoreExportable {
 
   func open(_ url: String) {
     if let url = parsePath(url, forceLocalPath: false).path {
-      player!.openURLString(url)
+      Utility.executeOnMainThread {
+        player!.openURLString(url)
+      }
     }
   }
 

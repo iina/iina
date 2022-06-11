@@ -148,49 +148,4 @@ extension MainWindowController {
       }
     }
   }
-
-  @objc
-  func menuToggleVideoFilterString(_ sender: NSMenuItem) {
-    if let string = (sender.representedObject as? String) {
-      menuToggleFilterString(string, forType: MPVProperty.vf)
-    }
-  }
-
-  @objc
-  func menuToggleAudioFilterString(_ sender: NSMenuItem) {
-    if let string = (sender.representedObject as? String) {
-      menuToggleFilterString(string, forType: MPVProperty.af)
-    }
-  }
-
-  private func menuToggleFilterString(_ string: String, forType type: String) {
-    let isVideo = type == MPVProperty.vf
-    if let filter = MPVFilter(rawString: string) {
-      // Removing a filter based on its position within the filter list is the preferred way to do
-      // it as per discussion with the mpv project. Search the list of filters and find the index
-      // of the specified filter (if present).
-      if let index = player.mpv.getFilters(type).firstIndex(of: filter) {
-        // remove
-        if isVideo {
-          _ = player.removeVideoFilter(filter, index)
-        } else {
-          _ = player.removeAudioFilter(filter, index)
-        }
-      } else {
-        // add
-        if isVideo {
-          if !player.addVideoFilter(filter) {
-            Utility.showAlert("filter.incorrect")
-          }
-        } else {
-          if !player.addAudioFilter(filter) {
-            Utility.showAlert("filter.incorrect")
-          }
-        }
-      }
-    }
-    if let vfWindow = (NSApp.delegate as? AppDelegate)?.vfWindow, vfWindow.loaded {
-      vfWindow.reloadTable()
-    }
-  }
 }

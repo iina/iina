@@ -32,9 +32,9 @@ class JavascriptPlugin: NSObject {
   }
 
   enum PluginError: Error {
-    case fileNotFound
+    case fileNotFound(String)
     case cannotUnpackage(String, String)
-    case invalidURL
+    case invalidURL(String)
     case cannotDownload(String, String)
     case cannotLoadPlugin
   }
@@ -173,8 +173,10 @@ class JavascriptPlugin: NSObject {
   @discardableResult
   static func create(fromPackageURL url: URL) throws -> JavascriptPlugin {
     guard FileManager.default.fileExists(atPath: url.path) else {
-      throw PluginError.fileNotFound
+      throw PluginError.fileNotFound(url.path)
     }
+
+    Logger.log("Installing plugin from file: \(url.path)", level: .debug)
 
     let pluginsRoot = Utility.pluginsURL
     let tempFolder = ".temp.\(UUID().uuidString)"
@@ -214,20 +216,28 @@ class JavascriptPlugin: NSObject {
   }
 
   @discardableResult
-  static func create(fromGitURL urlString: String) throws -> JavascriptPlugin {
+  static func standardizeGithubURL(_ urlString: String) throws -> URL {
     var formatted: String
     if githubRepoRegex.matches(urlString) {
       formatted = "https://github.com/\(urlString)"
     } else {
       guard Regex("^https://github.com/[\\w-]+/[\\w-]+/?$").matches(urlString) else {
-        throw PluginError.invalidURL
+        throw PluginError.invalidURL(urlString)
       }
       formatted = urlString
     }
 
     guard let url = NSURL(string: formatted)?.standardized else {
-      throw PluginError.invalidURL
+      throw PluginError.invalidURL(formatted)
     }
+    return url
+  }
+
+  @discardableResult
+  static func create(fromGitURL urlString: String) throws -> JavascriptPlugin {
+    let url = try standardizeGithubURL(urlString)
+
+    Logger.log("Installing plugin from GitHub URL: \(url)", level: .debug)
 
     let pluginsRoot = Utility.pluginsURL
     let tempFolder = ".temp.\(UUID().uuidString)"
@@ -265,8 +275,8 @@ class JavascriptPlugin: NSObject {
       throw PluginError.cannotLoadPlugin
     }
 
-    guard plugin.githubVersion != nil, formatted == plugin.githubURLString else {
-      Logger.log("The plugin \(plugin.name) doesn't contain a ghVersion field or its ghRepo doesn't match the current requested URL \(formatted).")
+    guard plugin.githubVersion != nil, url.absoluteString == plugin.githubURLString else {
+      Logger.log("The plugin \(plugin.name) doesn't contain a ghVersion field or its ghRepo doesn't match the current requested URL \(url.absoluteString).")
       removeTempPluginFolder()
       throw PluginError.cannotLoadPlugin
     }
@@ -443,16 +453,16 @@ class JavascriptPlugin: NSObject {
 
   func checkForUpdates(_ handler: @escaping (String?) -> Void) {
     if let ghVersion = githubVersion, let ghRepo = githubRepo {
-      Just.get("https://raw.githubusercontent.com/\(ghRepo)/master/Info.json") { result in
+      Just.get("https://raw.githubusercontent.com/\(ghRepo)/master/Info.json", asyncCompletionHandler:  { result in
         if let json = result.json as? [String: Any],
-          let newGHVersion = json["ghVersion"] as? Int,
-          let newVersion = json["version"] as? String,
-          newGHVersion > ghVersion {
+           let newGHVersion = json["ghVersion"] as? Int,
+           let newVersion = json["version"] as? String,
+           newGHVersion > ghVersion {
           handler(newVersion)
         } else {
           handler(nil)
         }
-      }
+      })
     } else {
       handler(nil)
     }

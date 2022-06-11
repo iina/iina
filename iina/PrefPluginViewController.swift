@@ -94,6 +94,8 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
     defaultPluginsTableView.dataSource = self
     defaultPluginsTableView.delegate = self
 
+    newPluginSourceTextField.delegate = self
+
     clearPluginPage()
   }
 
@@ -263,11 +265,16 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
     let message: String
     if let pluginError = error as? JavascriptPlugin.PluginError {
       switch pluginError {
-      case .fileNotFound:
+      case .fileNotFound(let url):
+        Logger.log("Plugin install error: file not found: \"\(url)\"", level: .error)
         message = NSLocalizedString("plugin.install_error.file_not_found", comment: "")
-      case .invalidURL:
+      case .invalidURL(let url):
+        Logger.log("Plugin install error: URL is invalid: \"\(url)\"", level: .error)
         message = NSLocalizedString("plugin.install_error.invalid_url", comment: "")
-      case .cannotDownload(_, let err):
+      case .cannotDownload(let out, let err):
+        Logger.log("Plugin install error: cannot download", level: .error)
+        Logger.log("\nSTDOUT_BEGIN\(out)\nSTDOUT_END", level: .debug)
+        Logger.log("\nSTDERR_BEGIN\(err)\nSTDERR_END", level: .error)
         let str = NSLocalizedString("plugin.install_error.cannot_download", comment: "")
         message = String(format: str, err)
       case .cannotUnpackage(_, let err):
@@ -351,16 +358,30 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
     }
     defaultPluginsTableView.reloadData()
     newPluginSourceTextField.stringValue = ""
+    updateNewPluginInstallBtnEnablement()
     view.window!.beginSheet(newPluginSheet)
   }
 
   @IBAction func installPluginFromGitHub(_ sender: Any) {
+    let source = self.newPluginSourceTextField.stringValue
+
+    // Validate URL before starting install, so typos don't close the window
+    do {
+      try JavascriptPlugin.standardizeGithubURL(source)
+    } catch JavascriptPlugin.PluginError.invalidURL {
+      let key = NSLocalizedString("invalid_url", comment: "")
+      Utility.showAlert(key, arguments: [], sheetWindow: self.view.window!)
+      return
+    } catch let error {
+      handleInstallationError(error)
+      return
+    }
+
     pluginInstallationProgressIndicator.startAnimation(self)
     defaultPluginsTableView.isEnabled = false
     newPluginSourceTextField.isEnabled = false
     newPluginInstallBtn.isEnabled = false
 
-    let source = self.newPluginSourceTextField.stringValue
     queue.async {
       defer {
         DispatchQueue.main.async {
@@ -431,6 +452,11 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
     }
   }
 
+  // Enable/disable the Install btn as the user types: disabled if text entry is empty or only whitespace
+  private func updateNewPluginInstallBtnEnablement() {
+    newPluginInstallBtn.isEnabled = !newPluginSourceTextField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+  }
+
   private func showNewPluginPermissions(_ plugin: JavascriptPlugin) {
     showPermissionsSheet(forPlugin: plugin, previousPlugin: nil) { ok in
       if ok {
@@ -497,6 +523,12 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
     } catch let error {
       handleInstallationError(error)
     }
+  }
+}
+
+extension PrefPluginViewController: NSTextFieldDelegate {
+  func controlTextDidChange(_ obj: Notification) {
+    updateNewPluginInstallBtnEnablement()
   }
 }
 

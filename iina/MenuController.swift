@@ -754,7 +754,7 @@ class MenuController: NSObject, NSMenuDelegate {
     for filter in filters {
       let menuItem = NSMenuItem()
       menuItem.title = filter.name
-      menuItem.action = isVideo ? #selector(MainWindowController.menuToggleVideoFilterString(_:)) : #selector(MainWindowController.menuToggleAudioFilterString(_:))
+      menuItem.action = isVideo ? #selector(MainMenuActionHandler.menuToggleVideoFilterString(_:)) : #selector(MainMenuActionHandler.menuToggleAudioFilterString(_:))
       menuItem.keyEquivalent = filter.shortcutKey
       menuItem.keyEquivalentModifierMask = filter.shortcutKeyModifiers
       menuItem.representedObject = filter.filterString

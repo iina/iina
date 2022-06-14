@@ -612,6 +612,7 @@ extension PrefPluginViewController: NSTableViewDelegate, NSTableViewDataSource {
     } else if tv == defaultPluginsTableView {
       guard tv.selectedRow >= 0 else { return }
       newPluginSourceTextField.stringValue = defaultPlugins[tv.selectedRow]["url"]!
+      updateNewPluginInstallBtnEnablement()
     }
   }
 }

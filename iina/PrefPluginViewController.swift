@@ -175,6 +175,12 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
       }
     """, injectionTime: .atDocumentEnd, forMainFrameOnly: true))
 
+    config.userContentController.addUserScript(WKUserScript(source: """
+    const styleSheet = document.createElement("style");
+    styleSheet.innerHTML = `\(PreferenceViewCSS)`;
+    document.head.appendChild(styleSheet);
+    """, injectionTime: .atDocumentEnd, forMainFrameOnly: true))
+
     config.userContentController.add(self, name: "iina")
     
     pluginPreferencesWebView = NonscrollableWebview(frame: .zero, configuration: config)
@@ -183,6 +189,7 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
 
     pluginPreferencesWebView.navigationDelegate = self
     pluginPreferencesWebView.translatesAutoresizingMaskIntoConstraints = false
+    pluginPreferencesWebView.setValue(false, forKey: "drawsBackground")
     pluginPreferencesContentView.addSubview(pluginPreferencesWebView)
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": pluginPreferencesWebView])
     pluginPreferencesWebViewHeight = NSLayoutConstraint(item: pluginPreferencesWebView!, attribute: .height,
@@ -713,3 +720,54 @@ class NonscrollableWebview: WKWebView {
     nextResponder?.scrollWheel(with: event)
   }
 }
+
+
+fileprivate let PreferenceViewCSS = """
+* {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding: 16px;
+  margin: 0;
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
+}
+
+p {
+  margin: 0;
+}
+
+small, .small {
+  font-size: 11px;
+}
+
+.secondary {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.pref-section {
+  margin-bottom: 12px;
+}
+
+.pref-help {
+  margin-top: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    color-scheme: dark;
+    color: #fff;
+  }
+
+  .secondary {
+    color: rgba(255, 255, 255, .5);
+  }
+}
+
+"""

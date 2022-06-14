@@ -283,10 +283,17 @@ class PlayerCore: NSObject {
 
   static func setKeyBindings(_ keyMappings: [KeyMapping]) {
     Logger.log("Set key bindings")
-    var keyBindings: [String: KeyMapping] = [:]
-    keyMappings.forEach { keyBindings[$0.key] = $0 }
-    PlayerCore.keyBindings = keyBindings
-    (NSApp.delegate as? AppDelegate)?.menuController.updateKeyEquivalentsFrom(Array(keyBindings.values))
+    // If multiple bindings map to the same key, choose the last one
+    var keyBindingsDict: [String: KeyMapping] = [:]
+    keyMappings.forEach { keyBindingsDict[$0.key] = $0 }
+    PlayerCore.keyBindings = keyBindingsDict
+
+    // For menu item bindings, filter duplicate keys as above, but preserve order
+    var kbUniqueOrderedList: [KeyMapping] = []
+    for kb in keyMappings {
+      kbUniqueOrderedList.append(keyBindingsDict[kb.key]!)
+    }
+    (NSApp.delegate as? AppDelegate)?.menuController.updateKeyEquivalentsFrom(kbUniqueOrderedList)
   }
 
   func startMPV() {

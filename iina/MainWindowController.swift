@@ -2617,7 +2617,7 @@ class MainWindowController: PlayerWindowController {
     case .toggleMusicMode:
       menuSwitchToMiniPlayer(.dummy)
     case .deleteCurrentFileHard:
-      menuActionHandler.menuDeleteCurrentFileHard(.dummy)
+      menuDeleteCurrentFileHard(.dummy)
     case .biggerWindow:
       let item = NSMenuItem()
       item.tag = 11

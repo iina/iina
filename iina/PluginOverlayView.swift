@@ -12,7 +12,31 @@ import WebKit
 class PluginOverlayView: WKWebView, WKNavigationDelegate {
   weak private var pluginInstance: JavascriptPluginInstance!
 
+  var isClickable = false
+
   override func hitTest(_ point: NSPoint) -> NSView? {
+    guard isClickable else {
+      return super.hitTest(point)
+    }
+
+    var clickable = false
+    var finished = false
+    let x = point.x
+    let y = self.frame.height - point.y
+    
+    evaluateJavaScript("window.iina._hitTest(\(x),\(y))") { (result, error) in
+      if let result = result as? Bool {
+        clickable = result
+      }
+      finished = true
+    }
+
+    while !finished {
+      RunLoop.current.run(mode: .default, before: NSDate.distantFuture)
+    }
+    if clickable {
+      return super.hitTest(point)
+    }
     return nil
   }
 
@@ -29,6 +53,9 @@ class PluginOverlayView: WKWebView, WKNavigationDelegate {
     let config = WKWebViewConfiguration()
     config.userContentController.addUserScript(
       WKUserScript(source: JavascriptMessageHub.bridgeScript, injectionTime: .atDocumentStart, forMainFrameOnly: true)
+    )
+    config.userContentController.addUserScript(
+      WKUserScript(source: hitTestScript, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
     )
 
     config.userContentController.add(pluginInstance.apis!["overlay"] as! WKScriptMessageHandler, name: "iina")
@@ -57,3 +84,10 @@ class PluginOverlayView: WKWebView, WKNavigationDelegate {
     }
   }
 }
+
+
+fileprivate let hitTestScript = """
+window.iina._hitTest = function(x, y) {
+  return !!document.elementFromPoint(x, y).dataset.hasOwnProperty("clickable")
+}
+"""

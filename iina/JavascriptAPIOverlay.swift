@@ -18,6 +18,7 @@ import WebKit
   func simpleMode()
   func setStyle(_ style: String)
   func setContent(_ content: String)
+  func setClickable(_ clickable: Bool)
   func postMessage(_ name: String, _ data: JSValue)
   func onMessage(_ name: String, _ callback: JSValue)
 }
@@ -106,6 +107,11 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
         self.log(error.localizedDescription, level: .error)
       }
     }
+  }
+
+
+  func setClickable(_ clickable: Bool) {
+    pluginInstance.overlayView.isClickable = clickable
   }
 
   func postMessage(_ name: String, _ data: JSValue) {

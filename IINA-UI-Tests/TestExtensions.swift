@@ -2,7 +2,7 @@
 //  UITestUtil.swift
 //  IINA-UI-Tests
 //
-//  Created by Matthew Svoboda on 2022.05.31.
+//  Created by Matt Svoboda on 2022.05.31.
 //  Copyright © 2022 lhc. All rights reserved.
 //
 

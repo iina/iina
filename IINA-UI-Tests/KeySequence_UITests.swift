@@ -1,8 +1,8 @@
 //
-//  KeySequences_UITests.swift
+//  KeySequence_UITests.swift
 //  IINA-UI-Tests
 //
-//  Created by Matthew Svoboda on 2022.06.06.
+//  Created by Matt Svoboda on 2022.06.06.
 //  Copyright © 2022 lhc. All rights reserved.
 //
 
@@ -12,7 +12,6 @@ fileprivate let INPUT_CONFIG_NAME = "KeySeq-TestConfig"
 
 // Make sure each window scale factor results in integers when multiplied by 320 and 240
 fileprivate let CONFIG_FILE_CONTENT = """
-default-bindings start
 a set window-scale 1.0
 b set window-scale 1.5
 c set window-scale 2.0
@@ -39,9 +38,9 @@ q-r-s-t-w set window-scale 1.9
 
 """
 
-let VIDEO = QVGA_RED
+fileprivate let VIDEO = QVGA_RED
 
-class KeySequencesApplication: XCUIApplication {
+class KeySequenceApplication: XCUIApplication {
   var windowFrame: CGRect {
     get {
       XCUIApplication().windows.element(boundBy: 0).frame
@@ -53,13 +52,13 @@ class KeySequencesApplication: XCUIApplication {
   }
 }
 
-class KeySequences_UITests: XCTestCase {
+class KeySequence_UITests: XCTestCase {
   private var tempDirPath: String!
 
   private var inputConfigURL: URL!
 
   // The most recent app run
-  private var app: KeySequencesApplication!
+  private var app: KeySequenceApplication!
 
   // The runtime video window
   private var videoWindow: XCUIElement!
@@ -76,6 +75,7 @@ class KeySequences_UITests: XCTestCase {
 
     let prefs = [
       "actionAfterLaunch": "2",  // "Do nothing"
+      "resumeLastPosition": "false",
       "currentInputConfigName" : INPUT_CONFIG_NAME,
       "inputConfigs": "{\(INPUT_CONFIG_NAME)=\(inputConfigURL.path);}"  // dictionary
     ]
@@ -111,7 +111,7 @@ class KeySequences_UITests: XCTestCase {
   // Launches a single instance of IINA (via XCUIApplication) with the given args and prefs, if any.
   // The caller is expected to handle termination.
   func launchApp(args: [String] = [], prefs: [String: String] = [:]) {
-    app = KeySequencesApplication()
+    app = KeySequenceApplication()
     for arg in args {
       app.launchArguments.append(arg)
     }

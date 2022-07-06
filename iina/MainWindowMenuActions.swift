@@ -148,6 +148,10 @@ extension MainWindowController {
       }
     }
   }
+  
+  @objc func menuSearchPlaylist(_ sender: NSMenuItem) {
+    player.mainWindow.playlistView.playlistSearchViewController.openSearchWindow()
+  }
 
   @objc
   func menuToggleVideoFilterString(_ sender: NSMenuItem) {

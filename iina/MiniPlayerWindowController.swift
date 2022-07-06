@@ -430,6 +430,8 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     switch cmd {
     case .toggleMusicMode:
       menuSwitchToMiniPlayer(.dummy)
+    case .searchPlaylist:
+      menuSearchPlaylist(.dummy)
     default:
       break
     }

@@ -386,4 +386,8 @@ extension MainMenuActionHandler {
     default: break
     }
   }
+  
+  @objc func menuSearchPlaylist(_ sender: NSMenuItem) {
+    player.mainWindow.playlistView.playlistSearchViewController.openSearchWindow()
+  }
 }

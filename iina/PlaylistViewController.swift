@@ -29,6 +29,12 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   }
 
   weak var player: PlayerCore!
+  
+  lazy var playlistSearchViewController: PlaylistSearchViewController! = {
+    let playlistSearchViewController = PlaylistSearchViewController()
+    playlistSearchViewController.playlistViewController = self
+    return playlistSearchViewController
+  }()
 
   /** Similar to the one in `QuickSettingViewController`.
    Since IBOutlet is `nil` when the view is not loaded at first time,
@@ -62,6 +68,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   @IBOutlet var addFileMenu: NSMenu!
   @IBOutlet weak var addBtn: NSButton!
   @IBOutlet weak var removeBtn: NSButton!
+  @IBOutlet weak var searchBtn: NSButton!
   
   private var playlistTotalLengthIsReady = false
   private var playlistTotalLength: Double? = nil
@@ -95,6 +102,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     shuffleBtn.toolTip = NSLocalizedString("mini_player.shuffle", comment: "shuffle")
     addBtn.toolTip = NSLocalizedString("mini_player.add", comment: "add")
     removeBtn.toolTip = NSLocalizedString("mini_player.remove", comment: "remove")
+    searchBtn.toolTip = NSLocalizedString("mini_player.search", comment: "search")
 
     hideTotalLength()
 
@@ -404,6 +412,10 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
   @IBAction func shuffleBtnAction(_ sender: AnyObject) {
     player.toggleShuffle()
+  }
+  
+  @IBAction func searchBtnAction(_ sender: Any) {
+    playlistSearchViewController.openSearchWindow()
   }
 
 

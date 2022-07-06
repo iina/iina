@@ -18,5 +18,9 @@ extension MiniPlayerWindowController {
   @objc func menuSwitchToMiniPlayer(_ sender: NSMenuItem) {
     player.switchBackFromMiniPlayer(automatically: false)
   }
+  
+  @objc func menuSearchPlaylist(_ sender: NSMenuItem) {
+    player.mainWindow.playlistView.playlistSearchViewController.openSearchWindow()
+  }
 
 }

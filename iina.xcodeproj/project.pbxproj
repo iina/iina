@@ -153,6 +153,9 @@
 		84FBF23E1EF06A90003EA491 /* ThumbnailCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBF23D1EF06A90003EA491 /* ThumbnailCache.swift */; };
 		8F49C36E213EFB7E0076C4F9 /* MiniPlayerWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F49C370213EFB7E0076C4F9 /* MiniPlayerWindowController.xib */; };
 		9E47DAC01E3CFA6D00457420 /* DurationDisplayTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */; };
+		A82B2D15283A2106008AF5E3 /* PlaylistSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A82B2D17283A2106008AF5E3 /* PlaylistSearchViewController.xib */; };
+		A82B2D19283A2238008AF5E3 /* PlaylistSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82B2D18283A2238008AF5E3 /* PlaylistSearchViewController.swift */; };
+		A82B2D1B283A4102008AF5E3 /* FuzzyMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82B2D1A283A4102008AF5E3 /* FuzzyMatch.swift */; };
 		B4E446E825CB53920069F06E /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = B4E446E725CB53920069F06E /* PromiseKit */; };
 		B4E446F225CB53FF0069F06E /* Gzip in Frameworks */ = {isa = PBXBuildFile; productRef = B4E446F125CB53FF0069F06E /* Gzip */; };
 		B4E446F725CB54EF0069F06E /* Mustache in Frameworks */ = {isa = PBXBuildFile; productRef = B4E446F625CB54EF0069F06E /* Mustache */; };
@@ -1138,6 +1141,9 @@
 		9DB9ED5C20889D66006B1492 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/SubChooseViewController.strings; sourceTree = "<group>"; };
 		9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationDisplayTextField.swift; sourceTree = "<group>"; };
 		9E63CAB61E3F7D0E00EA66C9 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		A82B2D16283A2106008AF5E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PlaylistSearchViewController.xib; sourceTree = "<group>"; };
+		A82B2D18283A2238008AF5E3 /* PlaylistSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistSearchViewController.swift; sourceTree = "<group>"; };
+		A82B2D1A283A4102008AF5E3 /* FuzzyMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuzzyMatch.swift; sourceTree = "<group>"; };
 		B305513A2190B0C600D3F70E /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/MiniPlayerWindowController.strings; sourceTree = "<group>"; };
 		B3066F5F1F161538004D7559 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
 		B35E0A072107C0E500453AA7 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/PrefUtilsViewController.strings; sourceTree = "<group>"; };
@@ -1710,6 +1716,8 @@
 				8400D5CB1E1AB2F9006785F5 /* QuickSettingViewController.xib */,
 				8460FBA71D6497490081841B /* PlaylistViewController.swift */,
 				8400D5CE1E1AB2FF006785F5 /* PlaylistViewController.xib */,
+				A82B2D18283A2238008AF5E3 /* PlaylistSearchViewController.swift */,
+				A82B2D17283A2106008AF5E3 /* PlaylistSearchViewController.xib */,
 				845FB0C61D39462E00C011E0 /* ControlBarView.swift */,
 				8450403B1E0A9EE20079C194 /* InspectorWindowController.swift */,
 				8400D5D41E1AB312006785F5 /* InspectorWindowController.xib */,
@@ -1767,6 +1775,7 @@
 				E342832E20B7149800139865 /* Logger.swift */,
 				E3F698862120D878005792C9 /* ExtendedColors.swift */,
 				E301EFD921312AB300BC8588 /* KeychainAccess.swift */,
+				A82B2D1A283A4102008AF5E3 /* FuzzyMatch.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -2317,6 +2326,7 @@
 				84C3AB8B1E7BF22300FEFB7A /* MPVCommandFormat.strings in Resources */,
 				8400D5C91E1AB2F9006785F5 /* QuickSettingViewController.xib in Resources */,
 				84EB1EDC1D2F51D3004FA5A1 /* Assets.xcassets in Resources */,
+				A82B2D15283A2106008AF5E3 /* PlaylistSearchViewController.xib in Resources */,
 				E374161120F3C0AB00B4F7F9 /* PrefUtilsViewController.xib in Resources */,
 				8400D5E41E1AB333006785F5 /* PrefControlViewController.xib in Resources */,
 				8492C2861E771FB200CE5825 /* ISO639.strings in Resources */,
@@ -2406,6 +2416,7 @@
 				E3C12F6B201F281F00297964 /* FirstRunManager.swift in Sources */,
 				84EB1F071D2F5E76004FA5A1 /* Utility.swift in Sources */,
 				84D0FB7E1F5E519300C6A6A7 /* FreeSelectingViewController.swift in Sources */,
+				A82B2D19283A2238008AF5E3 /* PlaylistSearchViewController.swift in Sources */,
 				840D47A01DFEFC49000D9A64 /* KeyRecordView.swift in Sources */,
 				84791C8B1D405E9D0069E28A /* PlaybackInfo.swift in Sources */,
 				E322A4F820A8442E00C67D32 /* PlaylistPlaybackProgressView.swift in Sources */,
@@ -2418,6 +2429,7 @@
 				84F5D4991E44E8AC0060A838 /* KeyBindingDataLoader.swift in Sources */,
 				E34C0C3124934D7B0065A0C6 /* Switch.swift in Sources */,
 				84EC12831F4F939000137C1E /* FilterPresets.swift in Sources */,
+				A82B2D1B283A4102008AF5E3 /* FuzzyMatch.swift in Sources */,
 				E374160F20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift in Sources */,
 				E3FC31461FE1501E00B9B86F /* PowerSource.swift in Sources */,
 				8476440A1D48CC3D004F6DF5 /* MPVCommand.swift in Sources */,
@@ -3345,6 +3357,14 @@
 				84EA52CD2404E83A00F7617A /* ca */,
 			);
 			name = MiniPlayerWindowController.xib;
+			sourceTree = "<group>";
+		};
+		A82B2D17283A2106008AF5E3 /* PlaylistSearchViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A82B2D16283A2106008AF5E3 /* Base */,
+			);
+			name = PlaylistSearchViewController.xib;
 			sourceTree = "<group>";
 		};
 		C78987311E34EF170005769F /* InfoPlist.strings */ = {

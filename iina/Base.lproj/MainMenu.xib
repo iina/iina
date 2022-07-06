@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -305,6 +305,9 @@ CA
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="EZg-oY-9Ip"/>
                             <menuItem title="Show Playlist Panel" id="0T7-Nu-SL7">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="Playlist Search" id="aYI-vw-NxD">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem title="Playlist Loop" id="aSc-P6-fiZ">
@@ -741,6 +744,7 @@ CA
                 <outlet property="playlistLoop" destination="aSc-P6-fiZ" id="V5V-Wv-Pxk"/>
                 <outlet property="playlistMenu" destination="aXa-aM-Jaq" id="Nkw-YD-NAi"/>
                 <outlet property="playlistPanel" destination="0T7-Nu-SL7" id="kIo-HV-YPh"/>
+                <outlet property="playlistSearch" destination="aYI-vw-NxD" id="1yM-Xz-yp9"/>
                 <outlet property="previousChapter" destination="pqF-SZ-Ifz" id="91k-3h-xnp"/>
                 <outlet property="previousFrame" destination="oxF-BB-lBy" id="Kx8-vs-jMi"/>
                 <outlet property="previousMedia" destination="oqG-7L-NLD" id="8th-d4-X6L"/>

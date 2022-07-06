@@ -83,6 +83,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var fileLoop: NSMenuItem!
   @IBOutlet weak var playlistPanel: NSMenuItem!
   @IBOutlet weak var playlist: NSMenuItem!
+  @IBOutlet weak var playlistSearch: NSMenuItem!
   @IBOutlet weak var playlistLoop: NSMenuItem!
   @IBOutlet weak var playlistMenu: NSMenu!
   @IBOutlet weak var nextMedia: NSMenuItem!
@@ -223,6 +224,7 @@ class MenuController: NSObject, NSMenuDelegate {
     fileLoop.action = #selector(MainMenuActionHandler.menuFileLoop(_:))
     playlistMenu.delegate = self
     chapterMenu.delegate = self
+    playlistSearch.action = #selector(MainMenuActionHandler.menuSearchPlaylist(_:))
     playlistLoop.action = #selector(MainMenuActionHandler.menuPlaylistLoop(_:))
     playlistPanel.action = #selector(MainWindowController.menuShowPlaylistPanel(_:))
     chapterPanel.action = #selector(MainWindowController.menuShowChaptersPanel(_:))
@@ -636,6 +638,7 @@ class MenuController: NSObject, NSMenuDelegate {
       (quickSettingsAudio, true, ["audio-panel"], false, nil, nil),
       (quickSettingsSub, true, ["sub-panel"], false, nil, nil),
       (playlistPanel, true, ["playlist-panel"], false, nil, nil),
+      (playlistSearch, true, ["search-playlist"], false, nil, nil),
       (chapterPanel, true, ["chapter-panel"], false, nil, nil),
       (findOnlineSub, true, ["find-online-subs"], false, nil, nil),
       (saveDownloadedSub, true, ["save-downloaded-sub"], false, nil, nil),

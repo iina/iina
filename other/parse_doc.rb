@@ -11,7 +11,7 @@ class String
   end
 end
 
-doc = Nokogiri::HTML open(DOC_URL)
+doc = Nokogiri::HTML URI.open(DOC_URL)
 
 # property
 

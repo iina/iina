@@ -467,12 +467,18 @@ class MainWindowController: PlayerWindowController {
 
   // MARK: - PIP
 
-  @available(macOS 10.12, *)
-  lazy var pip: PIPViewController = {
+  lazy var _pip: PIPViewController = {
     let pip = PIPViewController()
-    pip.delegate = self
+    if #available(macOS 10.12, *) {
+      pip.delegate = self
+    }
     return pip
   }()
+  
+  @available(macOS 10.12, *)
+  var pip: PIPViewController {
+    _pip
+  }
 
   var pipVideo: NSViewController!
 

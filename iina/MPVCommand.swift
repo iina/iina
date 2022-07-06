@@ -36,6 +36,8 @@ struct MPVCommand: RawRepresentable {
   static let playlistNext = MPVCommand("playlist-next")
   /** playlist-prev <flags> */
   static let playlistPrev = MPVCommand("playlist-prev")
+  /** playlist-play-index <integer|current|none> */
+  static let playlistPlayIndex = MPVCommand("playlist-play-index")
   /** loadfile <url> [<flags> [<options>]] */
   static let loadfile = MPVCommand("loadfile")
   /** loadlist <url> [<flags>] */
@@ -64,9 +66,9 @@ struct MPVCommand: RawRepresentable {
   static let subRemove = MPVCommand("sub-remove")
   /** sub-reload [<id>] */
   static let subReload = MPVCommand("sub-reload")
-  /** sub-step <skip> */
+  /** sub-step <skip> <flags> */
   static let subStep = MPVCommand("sub-step")
-  /** sub-seek <skip> */
+  /** sub-seek <skip> <flags> */
   static let subSeek = MPVCommand("sub-seek")
   /** print-text <text> */
   static let printText = MPVCommand("print-text")
@@ -80,7 +82,9 @@ struct MPVCommand: RawRepresentable {
   static let showProgress = MPVCommand("show-progress")
   /** write-watch-later-config */
   static let writeWatchLaterConfig = MPVCommand("write-watch-later-config")
-  /** stop */
+  /** delete-watch-later-config [<filename>] */
+  static let deleteWatchLaterConfig = MPVCommand("delete-watch-later-config")
+  /** stop [<flags>] */
   static let stop = MPVCommand("stop")
   /** mouse <x> <y> [<button> [<mode>]] */
   static let mouse = MPVCommand("mouse")
@@ -98,7 +102,7 @@ struct MPVCommand: RawRepresentable {
   static let audioRemove = MPVCommand("audio-remove")
   /** audio-reload [<id>] */
   static let audioReload = MPVCommand("audio-reload")
-  /** video-add <url> [<flags> [<title> [<lang>]]] */
+  /** video-add <url> [<flags> [<title> [<lang> [<albumart>]]]] */
   static let videoAdd = MPVCommand("video-add")
   /** video-remove [<id>] */
   static let videoRemove = MPVCommand("video-remove")
@@ -140,7 +144,7 @@ struct MPVCommand: RawRepresentable {
   static let vfCommand = MPVCommand("vf-command")
   /** af-command <label> <command> <argument> */
   static let afCommand = MPVCommand("af-command")
-  /** apply-profile <name> */
+  /** apply-profile <name> [<mode>] */
   static let applyProfile = MPVCommand("apply-profile")
   /** load-script <filename> */
   static let loadScript = MPVCommand("load-script")

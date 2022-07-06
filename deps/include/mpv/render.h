@@ -50,6 +50,7 @@ extern "C" {
  * ------------------
  *
  * OpenGL: via MPV_RENDER_API_TYPE_OPENGL, see render_gl.h header.
+ * Software: via MPV_RENDER_API_TYPE_SW, see section "Software renderer"
  *
  * Threading
  * ---------
@@ -120,6 +121,40 @@ extern "C" {
  *
  * You must free the context with mpv_render_context_free() before the mpv core
  * is destroyed. If this doesn't happen, undefined behavior will result.
+ *
+ * Software renderer
+ * -----------------
+ *
+ * MPV_RENDER_API_TYPE_SW provides an extremely simple (but slow) renderer to
+ * memory surfaces. You probably don't want to use this. Use other render API
+ * types, or other methods of video embedding.
+ *
+ * Use mpv_render_context_create() with MPV_RENDER_PARAM_API_TYPE set to
+ * MPV_RENDER_API_TYPE_SW.
+ *
+ * Call mpv_render_context_render() with various MPV_RENDER_PARAM_SW_* fields
+ * to render the video frame to an in-memory surface. The following fields are
+ * required: MPV_RENDER_PARAM_SW_SIZE, MPV_RENDER_PARAM_SW_FORMAT,
+ * MPV_RENDER_PARAM_SW_STRIDE, MPV_RENDER_PARAM_SW_POINTER.
+ *
+ * This method of rendering is very slow, because everything, including color
+ * conversion, scaling, and OSD rendering, is done on the CPU, single-threaded.
+ * In particular, large video or display sizes, as well as presence of OSD or
+ * subtitles can make it too slow for realtime. As with other software rendering
+ * VOs, setting "sw-fast" may help. Enabling or disabling zimg may help,
+ * depending on the platform.
+ *
+ * In addition, certain multimedia job creation measures like HDR may not work
+ * properly, and will have to be manually handled by for example inserting
+ * filters.
+ *
+ * This API is not really suitable to extract individual frames from video etc.
+ * (basically non-playback uses) - there are better libraries for this. It can
+ * be used this way, but it may be clunky and tricky.
+ *
+ * Further notes:
+ * - MPV_RENDER_PARAM_FLIP_Y is currently ignored (unsupported)
+ * - MPV_RENDER_PARAM_DEPTH is ignored (meaningless)
  */
 
 /**
@@ -312,6 +347,80 @@ typedef enum mpv_render_param_type {
      * Type : struct mpv_opengl_drm_params_v2*
     */
     MPV_RENDER_PARAM_DRM_DISPLAY_V2 = 16,
+    /**
+     * MPV_RENDER_API_TYPE_SW only: rendering target surface size, mandatory.
+     * Valid for MPV_RENDER_API_TYPE_SW & mpv_render_context_render().
+     * Type: int[2] (e.g.: int s[2] = {w, h}; param.data = &s[0];)
+     *
+     * The video frame is transformed as with other VOs. Typically, this means
+     * the video gets scaled and black bars are added if the video size or
+     * aspect ratio mismatches with the target size.
+     */
+    MPV_RENDER_PARAM_SW_SIZE = 17,
+    /**
+     * MPV_RENDER_API_TYPE_SW only: rendering target surface pixel format,
+     * mandatory.
+     * Valid for MPV_RENDER_API_TYPE_SW & mpv_render_context_render().
+     * Type: char* (e.g.: char *f = "rgb0"; param.data = f;)
+     *
+     * Valid values are:
+     *  "rgb0", "bgr0", "0bgr", "0rgb"
+     *      4 bytes per pixel RGB, 1 byte (8 bit) per component, component bytes
+     *      with increasing address from left to right (e.g. "rgb0" has r at
+     *      address 0), the "0" component contains uninitialized garbage (often
+     *      the value 0, but not necessarily; the bad naming is inherited from
+     *      FFmpeg)
+     *      Pixel alignment size: 4 bytes
+     *  "rgb24"
+     *      3 bytes per pixel RGB. This is strongly discouraged because it is
+     *      very slow.
+     *      Pixel alignment size: 1 bytes
+     *  other
+     *      The API may accept other pixel formats, using mpv internal format
+     *      names, as long as it's internally marked as RGB, has exactly 1
+     *      plane, and is supported as conversion output. It is not a good idea
+     *      to rely on any of these. Their semantics and handling could change.
+     */
+    MPV_RENDER_PARAM_SW_FORMAT = 18,
+    /**
+     * MPV_RENDER_API_TYPE_SW only: rendering target surface bytes per line,
+     * mandatory.
+     * Valid for MPV_RENDER_API_TYPE_SW & mpv_render_context_render().
+     * Type: size_t*
+     *
+     * This is the number of bytes between a pixel (x, y) and (x, y + 1) on the
+     * target surface. It must be a multiple of the pixel size, and have space
+     * for the surface width as specified by MPV_RENDER_PARAM_SW_SIZE.
+     *
+     * Both stride and pointer value should be a multiple of 64 to facilitate
+     * fast SIMD operation. Lower alignment might trigger slower code paths,
+     * and in the worst case, will copy the entire target frame. If mpv is built
+     * with zimg (and zimg is not disabled), the performance impact might be
+     * less.
+     * In either cases, the pointer and stride must be aligned at least to the
+     * pixel alignment size. Otherwise, crashes and undefined behavior is
+     * possible on platforms which do not support unaligned accesses (either
+     * through normal memory access or aligned SIMD memory access instructions).
+     */
+    MPV_RENDER_PARAM_SW_STRIDE = 19,
+    /*
+     * MPV_RENDER_API_TYPE_SW only: rendering target surface pixel data pointer,
+     * mandatory.
+     * Valid for MPV_RENDER_API_TYPE_SW & mpv_render_context_render().
+     * Type: void*
+     *
+     * This points to the first pixel at the left/top corner (0, 0). In
+     * particular, each line y starts at (pointer + stride * y). Upon rendering,
+     * all data between pointer and (pointer + stride * h) is overwritten.
+     * Whether the padding between (w, y) and (0, y + 1) is overwritten is left
+     * unspecified (it should not be, but unfortunately some scaler backends
+     * will do it anyway). It is assumed that even the padding after the last
+     * line (starting at bytepos(w, h) until (pointer + stride * h)) is
+     * writable.
+     *
+     * See MPV_RENDER_PARAM_SW_STRIDE for alignment requirements.
+     */
+    MPV_RENDER_PARAM_SW_POINTER = 20,
 } mpv_render_param_type;
 
 /**
@@ -354,7 +463,10 @@ typedef struct mpv_render_param {
 /**
  * Predefined values for MPV_RENDER_PARAM_API_TYPE.
  */
+// See render_gl.h
 #define MPV_RENDER_API_TYPE_OPENGL "opengl"
+// See section "Software renderer"
+#define MPV_RENDER_API_TYPE_SW "sw"
 
 /**
  * Flags used in mpv_render_frame_info.flags. Each value represents a bit in it.

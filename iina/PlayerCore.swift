@@ -742,8 +742,14 @@ class PlayerCore: NSObject {
     sendOSD(.playlistLoop(!isLoop))
   }
 
-  func toggleShuffle() {
-    mpv.command(.playlistShuffle)
+  func toggleShuffle() {  // TODO add OSD message
+    let isShuffled = mpv.getFlag(MPVOption.PlaybackControl.shuffle)
+    if isShuffled {
+      mpv.command(.playlistUnshuffle)
+    } else {
+      mpv.command(.playlistShuffle)
+    }
+    mpv.setFlag(MPVOption.PlaybackControl.shuffle, !isShuffled)
     postNotification(.iinaPlaylistChanged)
   }
 
@@ -1584,6 +1590,7 @@ class PlayerCore: NSObject {
     case playlist
     case playlistLoop
 //    case fileLoop
+    case shuffle
     case additionalInfo
   }
 
@@ -1688,6 +1695,11 @@ class PlayerCore: NSObject {
     case .playlistLoop:
       DispatchQueue.main.async {
         self.mainWindow.playlistView.updateLoopBtnStatus()
+      }
+    
+    case .shuffle:
+      DispatchQueue.main.async {
+        self.mainWindow.playlistView.updateShuffleBtnStatus()
       }
 
     case .additionalInfo:

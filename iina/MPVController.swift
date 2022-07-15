@@ -111,6 +111,7 @@ class MPVController: NSObject {
     MPVOption.Subtitles.secondarySid: MPV_FORMAT_INT64,
     MPVOption.PlaybackControl.pause: MPV_FORMAT_FLAG,
     MPVOption.PlaybackControl.loopPlaylist: MPV_FORMAT_STRING,
+    MPVOption.PlaybackControl.shuffle: MPV_FORMAT_FLAG,
     MPVProperty.chapter: MPV_FORMAT_INT64,
     MPVOption.Video.deinterlace: MPV_FORMAT_FLAG,
     MPVOption.Video.hwdec: MPV_FORMAT_STRING,
@@ -1081,6 +1082,9 @@ class MPVController: NSObject {
 
     case MPVOption.PlaybackControl.loopPlaylist:
       player.syncUI(.playlistLoop)
+    
+    case MPVOption.PlaybackControl.shuffle:
+      player.syncUI(.shuffle)
 
     case MPVOption.Video.deinterlace:
       needReloadQuickSettingsView = true

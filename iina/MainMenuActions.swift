@@ -146,6 +146,10 @@ extension MainMenuActionHandler {
   @objc func menuPlaylistLoop(_ sender: NSMenuItem) {
     player.togglePlaylistLoop()
   }
+  
+  @objc func menuShufflePlaylist(_ sender: NSMenuItem) {
+    player.toggleShuffle()
+  }
 
   @objc func menuPlaylistItem(_ sender: NSMenuItem) {
     let index = sender.tag

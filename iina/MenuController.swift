@@ -84,6 +84,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var playlistPanel: NSMenuItem!
   @IBOutlet weak var playlist: NSMenuItem!
   @IBOutlet weak var playlistLoop: NSMenuItem!
+  @IBOutlet weak var shufflePlaylist: NSMenuItem!
   @IBOutlet weak var playlistMenu: NSMenu!
   @IBOutlet weak var nextMedia: NSMenuItem!
   @IBOutlet weak var previousMedia: NSMenuItem!
@@ -230,6 +231,7 @@ class MenuController: NSObject, NSMenuDelegate {
     playlistMenu.delegate = self
     chapterMenu.delegate = self
     playlistLoop.action = #selector(MainMenuActionHandler.menuPlaylistLoop(_:))
+    shufflePlaylist.action = #selector(MainMenuActionHandler.menuShufflePlaylist(_:))
     playlistPanel.action = #selector(MainWindowController.menuShowPlaylistPanel(_:))
     chapterPanel.action = #selector(MainWindowController.menuShowChaptersPanel(_:))
 
@@ -463,6 +465,8 @@ class MenuController: NSObject, NSMenuDelegate {
     fileLoop.state = isLoop ? .on : .off
     let isPlaylistLoop = player.mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
     playlistLoop.state = (isPlaylistLoop == "inf" || isPlaylistLoop == "force") ? .on : .off
+    let isShuffled = player.mpv.getFlag(MPVOption.PlaybackControl.shuffle)
+    shufflePlaylist.state = isShuffled ? .on : .off
     speedIndicator.title = String(format: NSLocalizedString("menu.speed", comment: "Speed:"), player.info.playSpeed)
   }
 

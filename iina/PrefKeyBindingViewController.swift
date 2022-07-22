@@ -139,11 +139,11 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
       guard !key.isEmpty && !action.isEmpty else { return }
       if action.hasPrefix("@iina") {
         let trimmedAction = action[action.index(action.startIndex, offsetBy: "@iina".count)...].trimmingCharacters(in: .whitespaces)
-        self.mappingController.addObject(KeyMapping(key: key,
+        self.mappingController.addObject(KeyMapping(rawKey: key,
                                         rawAction: trimmedAction,
                                         isIINACommand: true))
       } else {
-        self.mappingController.addObject(KeyMapping(key: key, rawAction: action))
+        self.mappingController.addObject(KeyMapping(rawKey: key, rawAction: action))
       }
 
       self.kbTableView.scrollRowToVisible((self.mappingController.arrangedObjects as! [AnyObject]).count - 1)
@@ -329,7 +329,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     setKeybindingsForPlayerCore()
     mappingController.filterPredicate = predicate
     do {
-      try KeyMapping.generateConfData(from: keyMapping).write(toFile: currentConfFilePath, atomically: true, encoding: .utf8)
+      try KeyMapping.generateInputConf(from: keyMapping).write(toFile: currentConfFilePath, atomically: true, encoding: .utf8)
     } catch {
       Utility.showAlert("config.cannot_write", sheetWindow: view.window)
     }
@@ -421,9 +421,9 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
     }
     guard kbTableView.selectedRow != -1 else { return }
     let selectedData = mappingController.selectedObjects[0] as! KeyMapping
-    showKeyBindingPanel(key: selectedData.key, action: selectedData.readableAction) { key, action in
+    showKeyBindingPanel(key: selectedData.rawKey, action: selectedData.readableAction) { key, action in
       guard !key.isEmpty && !action.isEmpty else { return }
-      selectedData.key = key
+      selectedData.rawKey = key
       selectedData.rawAction = action
       self.kbTableView.reloadData()
       NotificationCenter.default.post(Notification(name: .iinaKeyBindingChanged))

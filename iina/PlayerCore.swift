@@ -61,11 +61,10 @@ class PlayerCore: NSObject {
   }
 
   static private func createPlayerCore() -> PlayerCore {
-    let pc = PlayerCore()
-    pc.label = "\(playerCoreCounter)"
+    let pc = PlayerCore("\(playerCoreCounter)")
+    playerCoreCounter += 1
     playerCores.append(pc)
     pc.startMPV()
-    playerCoreCounter += 1
     return pc
   }
 
@@ -76,9 +75,9 @@ class PlayerCore: NSObject {
 
   // MARK: - Fields
 
-  lazy var subsystem = Logger.Subsystem(rawValue: "player\(label!)")
+  let subsystem: Logger.Subsystem
 
-  var label: String!
+  let label: String
 
   @available(macOS 10.12.2, *)
   var touchBarSupport: TouchBarSupport {
@@ -141,9 +140,14 @@ class PlayerCore: NSObject {
 
   static var keyBindings: [String: KeyMapping] = [:]
 
-  override init() {
+  var keyInputController: KeyInputController!
+
+  init(_ label: String) {
+    self.label = label
+    self.subsystem = Logger.Subsystem(rawValue: "player\(label)")
     super.init()
     self.mpv = MPVController(playerCore: self)
+    self.keyInputController = KeyInputController(playerCore: self, Array(PlayerCore.keyBindings.values))
     self.mainWindow = MainWindowController(playerCore: self)
     self.miniPlayer = MiniPlayerWindowController(playerCore: self)
     self.initialWindow = InitialWindowController(playerCore: self)
@@ -282,11 +286,49 @@ class PlayerCore: NSObject {
   }
 
   static func setKeyBindings(_ keyMappings: [KeyMapping]) {
-    Logger.log("Set key bindings")
-    var keyBindings: [String: KeyMapping] = [:]
-    keyMappings.forEach { keyBindings[$0.key] = $0 }
-    PlayerCore.keyBindings = keyBindings
-    (NSApp.delegate as? AppDelegate)?.menuController.updateKeyEquivalentsFrom(Array(keyBindings.values))
+    Logger.log("Set key bindings (\(keyMappings.count) mappings)")
+    // If multiple bindings map to the same key, choose the last one
+    var keyBindingsDict: [String: KeyMapping] = [:]
+    var orderedKeyList: [String] = []
+    keyMappings.forEach {
+      if $0.rawKey == "default-bindings" && $0.action.count == 1 && $0.action[0] == "start" {
+        Logger.log("Skipping line: \"default-bindings start\"", level: .verbose)
+      } else {
+        if let kb = filterSectionBindings($0) {
+          let key = kb.normalizedMpvKey
+          if keyBindingsDict[key] == nil {
+            orderedKeyList.append(key)
+          }
+          keyBindingsDict[key] = kb
+        }
+      }
+    }
+    PlayerCore.keyBindings = keyBindingsDict
+
+    // For menu item bindings, filter duplicate keys as above, but preserve order
+    var kbUniqueOrderedList: [KeyMapping] = []
+    for key in orderedKeyList {
+      kbUniqueOrderedList.append(keyBindingsDict[key]!)
+    }
+
+    (NSApp.delegate as? AppDelegate)?.menuController.updateKeyEquivalentsFrom(kbUniqueOrderedList)
+
+    NotificationCenter.default.post(Notification(name: .iinaGlobalKeyBindingsChanged, object: kbUniqueOrderedList))
+  }
+
+  static private func filterSectionBindings(_ kb: KeyMapping) -> KeyMapping? {
+    guard let section = kb.section else {
+      return kb
+    }
+
+    if section == "default" {
+      // Drop "{default}" because it is unnecessary and will get in the way of libmpv command execution
+      let newRawAction = Array(kb.action.dropFirst()).joined(separator: " ")
+      return KeyMapping(rawKey: kb.rawKey, rawAction: newRawAction, isIINACommand: kb.isIINACommand, comment: kb.comment)
+    } else {
+      Logger.log("Skipping binding from section \"\(section)\": \(kb.rawKey)", level: .verbose)
+      return nil
+    }
   }
 
   func startMPV() {
@@ -1325,7 +1367,7 @@ class PlayerCore: NSObject {
       !info.isNetworkResource && info.subTracks.isEmpty &&
       (info.videoDuration?.second ?? 0.0) >= Preference.double(for: .autoSearchThreshold) * 60 {
       DispatchQueue.main.async {
-        self.mainWindow.menuActionHandler.menuFindOnlineSub(.dummy)
+        self.mainWindow.menuFindOnlineSub(.dummy)
       }
     }
   }
@@ -1419,7 +1461,7 @@ class PlayerCore: NSObject {
   func syncUI(_ option: SyncUIOption) {
     // if window not loaded, ignore
     guard mainWindow.loaded else { return }
-    Logger.log("Syncing UI \(option)", level: .verbose, subsystem: subsystem)
+//    Logger.log("Syncing UI \(option)", level: .verbose, subsystem: subsystem)
 
     switch option {
 

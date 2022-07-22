@@ -264,6 +264,9 @@ struct Preference {
     static let enableLogging = Key("enableLogging")
     static let logLevel = Key("logLevel")
 
+    /* The highest mpv log level which IINA will include mpv log events in its own logfile (mutually exclusive of mpv's logfile) */
+    static let iinaMpvLogLevel = Key("iinaMpvLogLevel")
+
     static let displayKeyBindingRawValues = Key("displayKeyBindingRawValues")
 
     /** unused */
@@ -786,6 +789,7 @@ struct Preference {
     .useMpvOsd: false,
     .enableLogging: false,
     .logLevel: Logger.Level.debug.rawValue,
+    .iinaMpvLogLevel: MPVLogLevel.warn.rawValue,
     .displayKeyBindingRawValues: false,
     .userOptions: [],
     .useUserDefinedConfDir: false,

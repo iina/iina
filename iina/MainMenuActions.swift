@@ -8,19 +8,7 @@
 
 import Cocoa
 
-
-class MainMenuActionHandler: NSResponder {
-
-  unowned var player: PlayerCore
-
-  init(playerCore: PlayerCore) {
-    self.player = playerCore
-    super.init()
-  }
-
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
+extension PlayerWindowController {
 
   @objc func menuShowInspector(_ sender: AnyObject) {
     let inspector = (NSApp.delegate as! AppDelegate).inspector
@@ -69,11 +57,8 @@ class MainMenuActionHandler: NSResponder {
     }
   }
 
-}
-
 // MARK: - Control
 
-extension MainMenuActionHandler {
   @objc func menuTogglePause(_ sender: NSMenuItem) {
     player.togglePause()
     // set speed to 0 if is fastforwarding
@@ -182,11 +167,9 @@ extension MainMenuActionHandler {
   @objc func menuPreviousChapter(_ sender: NSMenuItem) {
     player.mpv.command(.add, args: ["chapter", "-1"], checkError: false)
   }
-}
 
 // MARK: - Video
 
-extension MainMenuActionHandler {
   @objc func menuChangeAspect(_ sender: NSMenuItem) {
     if let aspectStr = sender.representedObject as? String {
       player.setVideoAspect(aspectStr)
@@ -235,11 +218,9 @@ extension MainMenuActionHandler {
   @objc func menuToggleDeinterlace(_ sender: NSMenuItem) {
     player.toggleDeinterlace(sender.state != .on)
   }
-}
 
 // MARK: - Audio
 
-extension MainMenuActionHandler {
   @objc func menuChangeVolume(_ sender: NSMenuItem) {
     if let volumeDelta = sender.representedObject as? Int {
       let newVolume = Double(volumeDelta) + player.info.volume
@@ -265,11 +246,9 @@ extension MainMenuActionHandler {
   @objc func menuResetAudioDelay(_ sender: NSMenuItem) {
     player.setAudioDelay(0)
   }
-}
 
 // MARK: - Sub
 
-extension MainMenuActionHandler {
   @objc func menuLoadExternalSub(_ sender: NSMenuItem) {
     Utility.quickOpenPanel(title: "Load external subtitle file", chooseDir: false) { url in
       self.player.loadExternalSubFile(url, delay: true)

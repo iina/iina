@@ -179,6 +179,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     Logger.log("App launched")
 
     Logger.log("Using \(PlayerCore.active.mpv.mpvVersion!)")
+    Logger.log("Log level of mpv pass-through: \(MPVLogHandler.iinaMpvLogLevel)")
 
     if !isReady {
       getReady()

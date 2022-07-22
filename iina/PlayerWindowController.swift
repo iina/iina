@@ -11,13 +11,11 @@ import Cocoa
 class PlayerWindowController: NSWindowController, NSWindowDelegate {
 
   unowned var player: PlayerCore
-  
+
   var videoView: VideoView {
     fatalError("Subclass must implement")
   }
 
-  var menuActionHandler: MainMenuActionHandler!
-  
   var isOntop = false {
     didSet {
       player.mpv.setFlag(MPVOption.Window.ontop, isOntop)
@@ -157,12 +155,6 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     
     guard let window = window else { return }
     
-    // Insert `menuActionHandler` into the responder chain
-    menuActionHandler = MainMenuActionHandler(playerCore: player)
-    let responder = window.nextResponder
-    window.nextResponder = menuActionHandler
-    menuActionHandler.nextResponder = responder
-    
     window.initialFirstResponder = nil
     window.titlebarAppearsTransparent = true
     
@@ -254,10 +246,15 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   override func keyDown(with event: NSEvent) {
-    let keyCode = KeyCodeHelper.mpvKeyCode(from: event)
-    if let kb = PlayerCore.keyBindings[keyCode] {
-      handleKeyBinding(kb)
+    if let keyBinding = player.keyInputController.resolveKeyEvent(event) {
+      if !keyBinding.isIgnored {  // if "ignore", do nothing. No beep, no send
+        if !handleKeyBinding(keyBinding) {
+          // beep if cmd failed
+          super.keyDown(with: event)
+        }
+      }
     } else {
+      // invalid key
       super.keyDown(with: event)
     }
   }
@@ -512,17 +509,17 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     case .openURL:
       appDelegate.openURL(self)
     case .flip:
-      menuActionHandler.menuToggleFlip(.dummy)
+      menuToggleFlip(.dummy)
     case .mirror:
-      menuActionHandler.menuToggleMirror(.dummy)
+      menuToggleMirror(.dummy)
     case .saveCurrentPlaylist:
-      menuActionHandler.menuSavePlaylist(.dummy)
+      menuSavePlaylist(.dummy)
     case .deleteCurrentFile:
-      menuActionHandler.menuDeleteCurrentFile(.dummy)
+      menuDeleteCurrentFile(.dummy)
     case .findOnlineSubs:
-      menuActionHandler.menuFindOnlineSub(.dummy)
+      menuFindOnlineSub(.dummy)
     case .saveDownloadedSub:
-      menuActionHandler.saveDownloadedSub(.dummy)
+      saveDownloadedSub(.dummy)
     default:
       break
     }

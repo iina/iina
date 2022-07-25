@@ -138,7 +138,7 @@ class InitialWindowController: NSWindowController {
   }
 
   lazy var recentDocuments: [URL] = {
-    NSDocumentController.shared.recentDocumentURLs.filter { $0 != lastPlaybackURL }
+    makeRecentDocumentsList()
   }()
   private var lastPlaybackURL: URL?
 
@@ -149,6 +149,13 @@ class InitialWindowController: NSWindowController {
 
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+
+  private func makeRecentDocumentsList() -> [URL] {
+    // Need to call resolvingSymlinksInPath() on both sides, because it changes "/private/var" to "/var" as a special case,
+    // even though "/var" points to "/private/var" (i.e. it changes it the opposite direction from what is expected).
+    // This is probably a kludge on Apple's part to avoid breaking legacy FreeBSD code.
+    NSDocumentController.shared.recentDocumentURLs.filter { $0.resolvingSymlinksInPath() != lastPlaybackURL?.resolvingSymlinksInPath() }
   }
 
   override func windowDidLoad() {
@@ -240,8 +247,21 @@ class InitialWindowController: NSWindowController {
 
   func reloadData() {
     loadLastPlaybackInfo()
-    recentDocuments = NSDocumentController.shared.recentDocumentURLs.filter { $0 != lastPlaybackURL }
+    recentDocuments = makeRecentDocumentsList()
     recentFilesTableView.reloadData()
+
+    if Logger.enabled && Logger.Level.preferred >= .verbose {
+      let last = lastPlaybackURL == nil ? "<none>" : lastPlaybackURL!.resolvingSymlinksInPath().path
+      Logger.log("InitialWindow.reloadData(): LastPlaybackURL: \(last)", level: .verbose)
+
+      for (index, url) in NSDocumentController.shared.recentDocumentURLs.enumerated() {
+        Logger.log("InitialWindow.reloadData(): RecentDocuments_Unfiltered[\(index)]: \(url.resolvingSymlinksInPath().path)", level: .verbose)
+      }
+
+      for (index, url) in recentDocuments.enumerated() {
+        Logger.log("InitialWindow.reloadData(): Loaded RecentDocuments[\(index)]: \(url.resolvingSymlinksInPath().path)", level: .verbose)
+      }
+    }
     
     if lastFileContainerView.isHidden && recentFilesTableView.numberOfRows > 0 {
       recentFilesTableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)

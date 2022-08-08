@@ -1658,6 +1658,20 @@ class PlayerCore: NSObject {
       info.playlist.append(playlistItem)
     }
   }
+  
+  func getPlaylist(_ searchString: String) {
+    info.playlist.removeAll()
+    let playlistCount = mpv.getInt(MPVProperty.playlistCount)
+    for index in 0..<playlistCount {
+      let playlistItem = MPVPlaylistItem(filename: mpv.getString(MPVProperty.playlistNFilename(index))!,
+                                         isCurrent: mpv.getFlag(MPVProperty.playlistNCurrent(index)),
+                                         isPlaying: mpv.getFlag(MPVProperty.playlistNPlaying(index)),
+                                         title: mpv.getString(MPVProperty.playlistNTitle(index)))
+      if playlistItem.title?.lowercased().contains(searchString) ?? false {
+        info.playlist.append(playlistItem)
+      }
+    }
+  }
 
   func getChapters() {
     info.chapters.removeAll()

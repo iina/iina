@@ -155,6 +155,17 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       chapterTableView.reloadData()
     }
   }
+  
+  func reloadData(playlist: Bool, chapters: Bool, searchString: String) {
+    if playlist {
+      player.getPlaylist(searchString)
+      playlistTableView.reloadData()
+    }
+    if chapters {
+      player.getChapters()
+      chapterTableView.reloadData()
+    }
+  }
 
   private func showTotalLength() {
     guard let playlistTotalLength = playlistTotalLength, playlistTotalLengthIsReady else { return }
@@ -386,6 +397,17 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     player.clearPlaylist()
     reloadData(playlist: true, chapters: false)
     player.sendOSD(.clearPlaylist)
+  }
+  
+  // MARK: - Searching
+
+  @IBAction func searchFieldAction(_ sender: NSSearchField) {
+    let searchString = sender.stringValue
+    guard !searchString.isEmpty else {
+      reloadData(playlist: true, chapters: false)
+      return
+    }
+    reloadData(playlist: true, chapters: false, searchString: searchString)
   }
 
   @IBAction func playlistBtnAction(_ sender: AnyObject) {

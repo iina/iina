@@ -16,7 +16,9 @@ class DurationDisplayTextField: NSTextField {
   }
 
   static var precision : UInt = UInt(Preference.integer(for: .timeDisplayPrecision))
-  var mode: DisplayMode = .duration
+  var mode: DisplayMode = .duration { didSet { updateText() } }
+  var duration: VideoTime = .zero
+  var current: VideoTime = .zero
 
   /** Switches the display mode between duration and remaining time */
   func switchMode() {
@@ -30,6 +32,12 @@ class DurationDisplayTextField: NSTextField {
   }
 
   func updateText(with duration: VideoTime, given current: VideoTime) {
+    self.duration = duration
+    self.current = current
+    updateText()
+  }
+  
+  private func updateText() {
     let precision = DurationDisplayTextField.precision
     let stringValue: String
     switch mode {

@@ -95,6 +95,13 @@ class PlaySliderCell: NSSliderCell {
   override func awakeFromNib() {
     minValue = 0
     maxValue = 100
+    if #available(macOS 11, *) {
+      let slider = self.controlView as! NSSlider
+      // Apple increased the height of sliders in Big Sur. Until we have time to restructure the
+      // on screen controller to accommodate a larger slider reduce the size of the slider from
+      // regular to small. This makes the slider match the behavior seen under Catalina.
+      slider.controlSize = .small
+    }
   }
 
   override func drawKnob(_ knobRect: NSRect) {

@@ -884,6 +884,10 @@ class MPVController: NSObject {
       }
       player.playbackRestarted()
       player.syncUI(.time)
+      let osdText = (player.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder) + " / " +
+        (player.info.videoDuration?.stringRepresentation ?? Constants.String.videoTimePlaceholder)
+      let percentage = (player.info.videoPosition / player.info.videoDuration) ?? 1
+      player.sendOSD(.seek(osdText, percentage))
 
     case MPV_EVENT_END_FILE:
       // if receive end-file when loading file, might be error

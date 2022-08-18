@@ -2089,11 +2089,35 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
+  /// Determine if the thumbnail preview can be shown above the progress bar in the on screen controller..
+  ///
+  /// Normally the OSC's thumbnail preview is shown above the time preview. This is the preferred location. However the
+  /// thumbnail preview extends beyond the frame of the OSC. If the OSC is near the top of the window this could result
+  /// in the thumbnail extending outside of the window resulting in clipping. This method checks if there is room for the
+  /// thumbnail to fully fit in the window. Otherwise the thumbnail must be displayed below the OSC's progress bar.
+  /// - Parameters:
+  ///   - timnePreviewYPos: The y-coordinate of the time preview `TextField`.
+  ///   - thumbnailHeight: The height of the thumbnail.
+  /// - Returns: `true` if the thumbnail can be shown above the slider, `false` otherwise.
+  private func canShowThumbnailAbove(timnePreviewYPos: Double, thumbnailHeight: Double) -> Bool {
+    guard oscPosition != .bottom else { return true }
+    guard oscPosition != .top else { return false }
+    // The layout preference for the on screen controller is set to the default floating layout.
+    // Must insure the top of the thumbnail would be below the top of the window.
+    let topOfThumbnail = timnePreviewYPos + timePreviewWhenSeek.frame.height + thumbnailHeight
+    // Normally the height of the usable area of the window can be obtained from the content
+    // layout. But when the legacy full screen preference is enabled the layout height may be
+    // larger than the content view if the display contains a camera housing. Use the lower of
+    // the two heights.
+    let windowContentHeight = min(window!.contentLayoutRect.height, window!.contentView!.frame.height)
+    return topOfThumbnail <= windowContentHeight
+  }
+
   /** Display time label when mouse over slider */
   private func updateTimeLabel(_ mouseXPos: CGFloat, originalPos: NSPoint) {
-    let timeLabelXPos = playSlider.frame.origin.y + 15
-    timePreviewWhenSeek.frame.origin = NSPoint(x: round(mouseXPos + playSlider.frame.origin.x - timePreviewWhenSeek.frame.width / 2),
-                                               y: timeLabelXPos + 1)
+    let timeLabelXPos = round(mouseXPos + playSlider.frame.origin.x - timePreviewWhenSeek.frame.width / 2)
+    let timeLabelYPos = playSlider.frame.origin.y + playSlider.frame.height
+    timePreviewWhenSeek.frame.origin = NSPoint(x: timeLabelXPos, y: timeLabelYPos)
     let sliderFrame = playSlider.bounds
     let sliderFrameInWindow = playSlider.superview!.convert(playSlider.frame.origin, to: nil)
     var percentage = Double((mouseXPos - 3) / (sliderFrame.width - 6))
@@ -2109,8 +2133,9 @@ class MainWindowController: PlayerWindowController {
         thumbnailPeekView.imageView.image = image.rotate(rotation)
         thumbnailPeekView.isHidden = false
         let height = round(120 / thumbnailPeekView.imageView.image!.size.aspect)
-        let yPos = (oscPosition == .top || (oscPosition == .floating && sliderFrameInWindow.y + 52 + height >= window!.frame.height)) ?
-          sliderFrameInWindow.y - height : sliderFrameInWindow.y + 32
+        let timePreviewFrameInWindow = timePreviewWhenSeek.superview!.convert(timePreviewWhenSeek.frame.origin, to: nil)
+        let showAbove = canShowThumbnailAbove(timnePreviewYPos: timePreviewFrameInWindow.y, thumbnailHeight: height)
+        let yPos = showAbove ? timePreviewFrameInWindow.y + timePreviewWhenSeek.frame.height : sliderFrameInWindow.y - height
         thumbnailPeekView.frame.size = NSSize(width: 120, height: height)
         thumbnailPeekView.frame.origin = NSPoint(x: round(originalPos.x - thumbnailPeekView.frame.width / 2), y: yPos)
       } else {
@@ -2630,7 +2655,7 @@ class MainWindowController: PlayerWindowController {
     // label
     timePreviewWhenSeek.frame.origin = CGPoint(
       x: round(sender.knobPointPosition() - timePreviewWhenSeek.frame.width / 2),
-      y: playSlider.frame.origin.y + 16)
+      y: playSlider.frame.origin.y + playSlider.frame.height)
     timePreviewWhenSeek.stringValue = (player.info.videoDuration! * percentage * 0.01).stringRepresentation
   }
 

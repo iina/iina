@@ -283,6 +283,9 @@ struct Preference {
 
     static let iinaLastPlayedFilePath = Key("iinaLastPlayedFilePath")
     static let iinaLastPlayedFilePosition = Key("iinaLastPlayedFilePosition")
+
+    /** Alerts */
+    static let suppressCannotPreventDisplaySleep = Key("suppressCannotPreventDisplaySleep")
   }
 
   // MARK: - Enums
@@ -817,7 +820,9 @@ struct Preference {
 
     .watchProperties: [],
     .savedVideoFilters: [],
-    .savedAudioFilters: []
+    .savedAudioFilters: [],
+
+    .suppressCannotPreventDisplaySleep: false
   ]
 
 

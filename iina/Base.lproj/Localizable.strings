@@ -143,7 +143,7 @@
 
 "alert.fatal_error" = "Fatal error: %@ \nThe application will exit now.";
 "alert.mpv_error" = "Internal error %@ (%@) when setting option %@.";
-"alert.sleep" = "Cannot prevent display sleep!";
+"alert.sleep" = "Cannot prevent display sleep!\nmacOS error 0x%0X8";
 
 "alert.unsupported_audio" = "Unsupported external audio file.";
 "alert.unsupported_sub" = "Unsupported external subtitle.";

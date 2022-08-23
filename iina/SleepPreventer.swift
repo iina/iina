@@ -48,7 +48,7 @@ class SleepPreventer: NSObject {
                                               IOPMAssertionLevel(kIOPMAssertionLevelOn),
                                               reason,
                                               &assertionID)
-    if success == kIOReturnSuccess {
+    guard success != kIOReturnSuccess else {
       preventedSleep = true
       return
     }

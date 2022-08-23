@@ -38,21 +38,7 @@ class SleepPreventer: NSObject {
   /// ```
   /// Hopefully the quality of macOS will improve and there will not be a need to provide a UI to control this preference.
   ///
-  /// In issue [#3478](https://github.com/iina/iina/issues/3478) `IOPMAssertionCreateWithName` was
-  /// returning returning the error code `kIOReturnNoMemory`. At that time a`IOPMAssertionCreateWithName` failure resulted
-  /// in IINA crashing due to IINA not using the main thread to display a `NSAlert`. That was fixed in IINA 1.3.0.
-  ///
-  /// The reason why `powerd` had run out of memory was traced to the macOS `coreaudiod` daemon creating thousands of
-  /// assertions. The `coreaudiod` daemon was also frequently crashing and restarting. This was traced to audio related software
-  /// from [Rogue Amoeba](https://rogueamoeba.com/) which includes the [Audio Capture Engine (ACE)](https://www.rogueamoeba.com/licensing/ace/)
-  /// driver that is installed into the macOS daemon `coreaudiod`. The user upgraded to the latest version of ACE and the
-  /// problem no longer reproduced.
-  ///
-  /// In issue [#3842](https://github.com/iina/iina/issues/3842) the same error code, `kIOReturnNoMemory`,
-  /// was being returned, but a new root cause was seen. It appears at this time that Apple has introduced a regression into the
-  /// `powerd` daemon such that it internally generates thousands of assertions running itself out of memory. Another
-  /// symptom of this is the `powerd` daemon consuming 100% CPU causing the Mac's fans to run at full speed. Some of
-  /// the other reports from users in that issue appear to be due to the ACE driver.
+  /// See issues [#3842](https://github.com/iina/iina/issues/3842) and [#3478](https://github.com/iina/iina/issues/3478) for details on the macOS failure.
   static func preventSleep() {
     if preventedSleep {
       return

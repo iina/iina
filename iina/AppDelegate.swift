@@ -315,9 +315,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
         }
       }
 
-      // enter PIP
-      if #available(macOS 10.12, *), let pc = lastPlayerCore, commandLineStatus.enterPIP {
-        pc.mainWindow.enterPIP()
+      if let pc = lastPlayerCore {
+        // PiP is not supported in music mode. Ignore the PiP option if music mode was specified.
+        if commandLineStatus.enterMusicMode {
+          pc.switchToMiniPlayer()
+        } else if #available(macOS 10.12, *), commandLineStatus.enterPIP {
+          pc.mainWindow.enterPIP()
+        }
       }
     }
 
@@ -846,6 +850,7 @@ struct CommandLineStatus {
   var isCommandLine = false
   var isStdin = false
   var openSeparateWindows = false
+  var enterMusicMode = false
   var enterPIP = false
   var mpvArguments: [(String, String)] = []
   var iinaArguments: [(String, String)] = []
@@ -879,6 +884,9 @@ struct CommandLineStatus {
         }
         if name == "separate-windows" {
           openSeparateWindows = true
+        }
+        if name == "music-mode" {
+          enterMusicMode = true
         }
         if name == "pip" {
           enterPIP = true

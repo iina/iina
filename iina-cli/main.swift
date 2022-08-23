@@ -54,6 +54,8 @@ if userArgs.contains(where: { $0 == "--help" || $0 == "-h" }) {
     --keep-running:
             Normally iina-cli launches IINA and quits immediately. Supply this option
             if you would like to keep it running until the main application exits.
+    --music-mode:
+            Enter music mode after opening the media.
     --pip:
             Enter Picture-in-Picture after opening the media.
     --help | -h:

@@ -31,12 +31,7 @@ class SleepPreventer: NSObject {
   ///
   /// As this alert can be irritating to users the alert is only displayed once per IINA invocation. In addition
   /// the alert supports a [suppression button](https://developer.apple.com/documentation/appkit/nsalert/1535196-showssuppressionbutton)
-  /// to allow the user to permanently suppress this alert. To restore the alert the following preference must
-  /// be reset using [Terminal](https://support.apple.com/guide/terminal/welcome/mac):
-  /// ```bash
-  /// defaults write com.colliderli.iina suppressCannotPreventDisplaySleep 0
-  /// ```
-  /// Hopefully the quality of macOS will improve and there will not be a need to provide a UI to control this preference.
+  /// to allow the user to permanently suppress this alert. 
   ///
   /// See issues [#3842](https://github.com/iina/iina/issues/3842) and [#3478](https://github.com/iina/iina/issues/3478) for details on the macOS failure.
   static func preventSleep() {

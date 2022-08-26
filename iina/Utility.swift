@@ -47,6 +47,13 @@ class Utility {
 
   static func showAlert(_ key: String, comment: String? = nil, arguments: [CVarArg]? = nil, style: NSAlert.Style = .critical, sheetWindow: NSWindow? = nil, suppressionKey: PK? = nil) {
     let alert = NSAlert()
+    if let suppressionKey = suppressionKey {
+      // This alert includes a suppression button that allows the user to suppress the alert.
+      // Do not show the alert if it has been suppressed.
+      guard !Preference.bool(for: suppressionKey) else { return }
+      alert.showsSuppressionButton = true
+    }
+
     switch style {
     case .critical:
       alert.messageText = NSLocalizedString("alert.title_error", comment: "Error")
@@ -69,13 +76,6 @@ class Utility {
       alert.informativeText = String(format: format, arguments: stringArguments)
     } else {
       alert.informativeText = String(format: format)
-    }
-
-    if let suppressionKey = suppressionKey {
-      // This alert includes a suppression button that allows the user to suppress the alert.
-      // Do not show the alert if it has been suppressed.
-      guard !Preference.bool(for: suppressionKey) else { return }
-      alert.showsSuppressionButton = true
     }
 
     alert.alertStyle = style

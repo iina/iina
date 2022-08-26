@@ -222,6 +222,9 @@
 "alert.clear_watch_later.title" = "Clear Saved Playback Progress";
 "alert.clear_watch_later.message" = "Are you sure to delete all saved playback progress (\"watch later\" data)?";
 
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
+
 "alert.nothing_to_open" = "Nothing to open.";
 
 "alert.no_video_track" = "There is no video track.";

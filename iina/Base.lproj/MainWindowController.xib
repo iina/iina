@@ -155,9 +155,6 @@
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
-                                <connections>
-                                    <action selector="additionalInfoTitle:" target="-2" id="wG0-5O-SnW"/>
-                                </connections>
                             </textField>
                         </subviews>
                         <constraints>

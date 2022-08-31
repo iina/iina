@@ -1345,7 +1345,7 @@ class PlayerCore: NSObject {
 
     }
     postNotification(.iinaFileLoaded)
-    events.emit(.fileLoaded, data: info.currentURL ?? "")
+    events.emit(.fileLoaded, data: info.currentURL?.absoluteString ?? "")
   }
 
   func playbackRestarted() {

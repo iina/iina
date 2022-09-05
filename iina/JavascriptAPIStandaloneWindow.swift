@@ -59,6 +59,7 @@ class JavascriptAPIStandaloneWindow: JavascriptAPI, JavascriptAPIStandaloneWindo
       pluginInstance.standaloneWindow.webView.loadHTMLString(simpleModeHTMLString, baseURL: nil)
     }
     inSimpleMode = true
+    messageHub.clearListeners()
   }
 
   func loadFile(_ path: String) {
@@ -68,6 +69,7 @@ class JavascriptAPIStandaloneWindow: JavascriptAPI, JavascriptAPIStandaloneWindo
     Utility.executeOnMainThread {
       pluginInstance.standaloneWindow.webView.loadFileURL(url, allowingReadAccessTo: rootURL)
     }
+    messageHub.clearListeners()
   }
 
   func postMessage(_ name: String, _ data: JSValue) {

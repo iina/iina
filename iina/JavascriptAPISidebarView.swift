@@ -32,6 +32,7 @@ class JavascriptAPISidebarView: JavascriptAPI, JavascriptAPISidebarViewExportabl
     Utility.executeOnMainThread {
       pluginInstance.sidebarTabView.load(URLRequest(url: url))
     }
+    messageHub.clearListeners()
   }
 
   func show() {

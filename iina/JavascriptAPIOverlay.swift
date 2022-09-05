@@ -68,6 +68,7 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
       pluginInstance.overlayViewLoaded = true
       inSimpleMode = false
     }
+    messageHub.clearListeners()
   }
 
   func simpleMode() {
@@ -79,6 +80,7 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
     pluginInstance.overlayView.loadHTMLString(simpleModeHTMLString, baseURL: nil)
     pluginInstance.overlayViewLoaded = true
     inSimpleMode = true
+    messageHub.clearListeners()
   }
 
   func setStyle(_ style: String) {

@@ -30,6 +30,10 @@ class JavascriptMessageHub {
     }
   }
 
+  func clearListeners() {
+    listeners.removeAll()
+  }
+
   func addListener(forEvent name: String, callback: JSValue) {
     if let previousCallback = listeners[name] {
       JSContext.current()!.virtualMachine.removeManagedReference(previousCallback, withOwner: reference)

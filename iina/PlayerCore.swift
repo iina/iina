@@ -842,9 +842,11 @@ class PlayerCore: NSObject {
     mpv.command(.loadfile, args: [path, "append"])
   }
 
-  func addToPlaylist(_ path: String) {
+  func addToPlaylist(_ path: String, silent: Bool = false) {
     _addToPlaylist(path)
-    postNotification(.iinaPlaylistChanged)
+    if !silent {
+      postNotification(.iinaPlaylistChanged)
+    }
   }
 
   private func _playlistMove(_ from: Int, to: Int) {

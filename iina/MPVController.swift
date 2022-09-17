@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-import Foundation
+import JavaScriptCore
 
 fileprivate let yes_str = "yes"
 fileprivate let no_str = "no"
@@ -25,6 +25,46 @@ fileprivate let no_str = "no"
  */
 fileprivate let MPVLogLevel = "warn"
 
+
+// FIXME: should be moved to a separated file
+struct MPVHookValue {
+  typealias Block = (@escaping () -> Void) -> Void
+
+  var id: String?
+  var isJavascript: Bool
+  var block: Block?
+  var jsBlock: JSManagedValue!
+  var context: JSContext!
+
+  init(withIdentifier id: String, jsContext context: JSContext, jsBlock block: JSValue, owner: JavascriptAPIMpv) {
+    self.id = id
+    self.isJavascript = true
+    self.jsBlock = JSManagedValue(value: block)
+    self.context = context
+    context.virtualMachine.addManagedReference(self.jsBlock, withOwner: owner)
+  }
+
+  init(withBlock block: @escaping Block) {
+    self.isJavascript = false
+    self.block = block
+  }
+
+  func call(withNextBlock next: @escaping () -> Void) {
+    if isJavascript {
+      let block: @convention(block) () -> Void = { next() }
+      guard let callback = jsBlock.value else {
+        next()
+        return
+      }
+      callback.call(withArguments: [JSValue(object: block, in: context)!])
+      if callback.forProperty("constructor")?.forProperty("name")?.toString() != "AsyncFunction" {
+        next()
+      }
+    } else {
+      block!(next)
+    }
+  }
+}
 
 // Global functions
 
@@ -58,7 +98,7 @@ class MPVController: NSObject {
 
   var fileLoaded: Bool = false
 
-  private var hooks: [UInt64: () -> Void] = [:]
+  private var hooks: [UInt64: MPVHookValue] = [:]
   private var hookCounter: UInt64 = 1
 
   let observeProperties: [String: mpv_format] = [
@@ -470,6 +510,10 @@ class MPVController: NSObject {
     }
   }
 
+  func observe(property: String, format: mpv_format = MPV_FORMAT_DOUBLE) {
+    mpv_observe_property(mpv, 0, property, format)
+  }
+
   // Set property
   func setFlag(_ name: String, _ flag: Bool) {
     var data: Int = flag ? 1 : 0
@@ -679,12 +723,25 @@ class MPVController: NSObject {
     return parsed
   }
 
+  func setNode(_ name: String, _ value: Any) {
+    guard var node = try? MPVNode.create(value) else {
+      Logger.log("setNode: cannot encode value for \(name)", level: .error)
+      return
+    }
+    mpv_set_property(mpv, name, MPV_FORMAT_NODE, &node)
+    MPVNode.free(node)
+  }
+
   // MARK: - Hooks
 
-  func addHook(_ name: MPVHook, priority: Int32 = 0, hook: @escaping () -> Void) {
+  func addHook(_ name: MPVHook, priority: Int32 = 0, hook: MPVHookValue) {
     mpv_hook_add(mpv, hookCounter, name.rawValue, priority)
     hooks[hookCounter] = hook
     hookCounter += 1
+  }
+
+  func removeHooks(withIdentifier id: String) {
+    hooks.filter { (k, v) in v.isJavascript && v.id == id }.keys.forEach { hooks.removeValue(forKey: $0) }
   }
 
   // MARK: - Events
@@ -732,9 +789,10 @@ class MPVController: NSObject {
       let hookEvent = event.pointee.data.bindMemory(to: mpv_event_hook.self, capacity: 1).pointee
       let hookID = hookEvent.id
       if let hook = hooks[userData] {
-        hook()
+        hook.call {
+          mpv_hook_continue(self.mpv, hookID)
+        }
       }
-      mpv_hook_continue(mpv, hookID)
 
     case MPV_EVENT_PROPERTY_CHANGE:
       let dataOpaquePtr = OpaquePointer(event.pointee.data)
@@ -802,6 +860,9 @@ class MPVController: NSObject {
       // let eventName = String(cString: mpv_event_name(eventId))
       // Utility.log("mpv event (unhandled): \(eventName)")
     }
+
+    let eventName = "mpv.\(String(cString: mpv_event_name(eventId)))"
+    player.events.emit(.init(eventName))
   }
 
   private func onVideoParamsChange(_ data: UnsafePointer<mpv_node_list>) {
@@ -1119,6 +1180,25 @@ class MPVController: NSObject {
       DispatchQueue.main.async {
         self.player.mainWindow.quickSettingView.reload()
       }
+    }
+
+    let eventName = EventController.Name("mpv.\(name).changed")
+    if player.events.hasListener(for: eventName) {
+      // FIXME: better convert to JSValue before passing to call()
+      let data: Any
+      switch property.format {
+      case MPV_FORMAT_FLAG:
+        data = property.data.bindMemory(to: Bool.self, capacity: 1).pointee
+      case MPV_FORMAT_INT64:
+        data = property.data.bindMemory(to: Int64.self, capacity: 1).pointee
+      case MPV_FORMAT_DOUBLE:
+        data = property.data.bindMemory(to: Double.self, capacity: 1).pointee
+      case MPV_FORMAT_STRING:
+        data = property.data.bindMemory(to: String.self, capacity: 1).pointee
+      default:
+        data = 0
+      }
+      player.events.emit(eventName, data: data)
     }
   }
 

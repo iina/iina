@@ -157,7 +157,12 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var encodingMenu: NSMenu!
   @IBOutlet weak var subFont: NSMenuItem!
   @IBOutlet weak var findOnlineSub: NSMenuItem!
+  @IBOutlet weak var onlineSubSourceMenu: NSMenu!
   @IBOutlet weak var saveDownloadedSub: NSMenuItem!
+  // Plugin
+  @IBOutlet weak var pluginMenu: NSMenu!
+  @IBOutlet weak var pluginMenuItem: NSMenuItem!
+  var pluginMenuNeedsUpdate = false
   // Window
   @IBOutlet weak var customTouchBar: NSMenuItem!
   @IBOutlet weak var inspector: NSMenuItem!
@@ -351,6 +356,8 @@ class MenuController: NSObject, NSMenuDelegate {
     findOnlineSub.action = #selector(MainMenuActionHandler.menuFindOnlineSub(_:))
     saveDownloadedSub.action = #selector(MainMenuActionHandler.saveDownloadedSub(_:))
 
+    onlineSubSourceMenu.delegate = self
+
     // - text size
     [increaseTextSize, decreaseTextSize, resetTextSize].forEach {
       $0.action = #selector(MainMenuActionHandler.menuChangeSubScale(_:))
@@ -375,6 +382,14 @@ class MenuController: NSObject, NSMenuDelegate {
     subFont.action = #selector(MainMenuActionHandler.menuSubFont(_:))
     // Separate Auto from other encoding types
     encodingMenu.insertItem(NSMenuItem.separator(), at: 1)
+
+    // Plugin
+
+    if IINA_ENABLE_PLUGIN_SYSTEM {
+      pluginMenu.delegate = self
+    } else {
+      pluginMenuItem.isHidden = true
+    }
 
     // Window
 
@@ -489,6 +504,15 @@ class MenuController: NSObject, NSMenuDelegate {
         encodingMenu.item(withTitle: encoding.title)?.state = .on
       }
     }
+
+    let providerID = Preference.string(for: .onlineSubProvider) ?? OnlineSubtitle.Providers.openSub.id
+    let providerName = OnlineSubtitle.Providers.nameForID(providerID)
+    findOnlineSub.title = String(format: Constants.String.findOnlineSubtitles, providerName)
+  }
+
+  private func updateOnlineSubSourceMenu() {
+    OnlineSubtitle.populateMenu(onlineSubSourceMenu,
+                                action: #selector(MainMenuActionHandler.menuFindOnlineSub(_:)))
   }
 
   func updateSavedFiltersMenu(type: String) {
@@ -501,6 +525,87 @@ class MenuController: NSObject, NSMenuDelegate {
         item.state = filters.contains { $0 == asObject } ? .on : .off
       }
     }
+  }
+
+  func updatePluginMenu() {
+    pluginMenu.removeAllItems()
+    pluginMenu.addItem(withTitle: "Manage Plugins…")
+    pluginMenu.addItem(.separator())
+
+    var errorList: [(String, String)] = []
+    for (index, plugin) in PlayerCore.active.plugins.enumerated() {
+      var counter = 0
+      var rootMenu: NSMenu! = pluginMenu
+      let menuItems = (plugin.plugin.globalInstance?.menuItems ?? []) + plugin.menuItems
+      if menuItems.isEmpty { continue }
+      
+      if index != 0 {
+        pluginMenu.addItem(.separator())
+      }
+      pluginMenu.addItem(withTitle: plugin.plugin.name, enabled: false)
+      
+      for item in menuItems {
+        if counter == 5 {
+          Logger.log("Please avoid adding too much first-level menu items. IINA will only display the first 5 of them.",
+                     level: .warning, subsystem: plugin.subsystem)
+          let moreItem = NSMenuItem()
+          moreItem.title = "More…"
+          rootMenu = NSMenu()
+          moreItem.submenu = rootMenu
+          pluginMenu.addItem(moreItem)
+        }
+        add(menuItemDef: item, to: rootMenu, for: plugin, errorList: &errorList)
+        counter += 1
+      }
+    }
+    if errorList.count > 0 {
+      pluginMenu.insertItem(
+        NSMenuItem(title: "⚠︎ Conflicting key shortcuts…", action: nil, keyEquivalent: ""),
+        at: 0)
+    }
+
+    pluginMenuNeedsUpdate = false
+  }
+
+  @discardableResult
+  private func add(menuItemDef item: JavascriptPluginMenuItem,
+                   to menu: NSMenu,
+                   for plugin: JavascriptPluginInstance,
+                   errorList: inout [(String, String)]) -> NSMenuItem {
+    if (item.isSeparator) {
+      let item = NSMenuItem.separator()
+      menu.addItem(item)
+      return item
+    }
+
+    let menuItem: NSMenuItem
+    if item.action == nil {
+      menuItem = menu.addItem(withTitle: item.title, action: nil, target: plugin, obj: item)
+    } else {
+      menuItem = menu.addItem(withTitle: item.title,
+                              action: #selector(plugin.menuItemAction(_:)),
+                              target: plugin,
+                              obj: item)
+    }
+
+    menuItem.isEnabled = item.enabled
+    menuItem.state = item.selected ? .on : .off
+    if let key = item.keyBinding {
+      if PlayerCore.keyBindings[key] != nil {
+        errorList.append((plugin.plugin.name, key))
+      } else if let (kEqv, kMdf) = KeyCodeHelper.macOSKeyEquivalent(from: key) {
+        menuItem.keyEquivalent = kEqv
+        menuItem.keyEquivalentModifierMask = kMdf
+      }
+    }
+    if !item.items.isEmpty {
+      menuItem.submenu = NSMenu()
+      for submenuItem in item.items {
+        add(menuItemDef: submenuItem, to: menuItem.submenu!, for: plugin, errorList: &errorList)
+      }
+    }
+    item.nsMenuItem = menuItem
+    return menuItem
   }
 
   /**
@@ -572,36 +677,42 @@ class MenuController: NSObject, NSMenuDelegate {
   // MARK: - Menu delegate
 
   func menuWillOpen(_ menu: NSMenu) {
-    if menu == fileMenu {
+    switch menu {
+    case fileMenu:
       updateOpenMenuItems()
-    } else if menu == playlistMenu {
+    case playlistMenu:
       updatePlaylist()
-    } else if menu == chapterMenu {
+    case chapterMenu:
       updateChapterList()
-    } else if menu == playbackMenu {
+    case playbackMenu:
       updatePlaybackMenu()
-    } else if menu == videoMenu {
+    case videoMenu:
       updateVideoMenu()
-    } else if menu == videoTrackMenu {
+    case videoTrackMenu:
       updateTracks(forMenu: menu, type: .video)
-    } else if menu == flipMenu {
+    case flipMenu:
       updateFlipAndMirror()
-    } else if menu == audioMenu {
+    case audioMenu:
       updateAudioMenu()
-    } else if menu == audioTrackMenu {
+    case audioTrackMenu:
       updateTracks(forMenu: menu, type: .audio)
-    } else if menu == audioDeviceMenu {
+    case audioDeviceMenu:
       updateAudioDevice()
-    } else if menu == subMenu {
+    case subMenu:
       updateSubMenu()
-    } else if menu == subTrackMenu {
+    case subTrackMenu:
       updateTracks(forMenu: menu, type: .sub)
-    } else if menu == secondSubTrackMenu {
+    case secondSubTrackMenu:
       updateTracks(forMenu: menu, type: .secondSub)
-    } else if menu == savedVideoFiltersMenu {
+    case onlineSubSourceMenu:
+      updateOnlineSubSourceMenu()
+    case savedVideoFiltersMenu:
       updateSavedFiltersMenu(type: MPVProperty.vf)
-    } else if menu == savedAudioFiltersMenu {
+    case savedAudioFiltersMenu:
       updateSavedFiltersMenu(type: MPVProperty.af)
+    case pluginMenu:
+      updatePluginMenu()
+    default: break
     }
     // check conveniently bound menus
     if let checkEnableBlock = menuBindingList[menu] {

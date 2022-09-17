@@ -10,6 +10,8 @@ import Cocoa
 import MediaPlayer
 import Sparkle
 
+let IINA_ENABLE_PLUGIN_SYSTEM = Preference.bool(for: .iinaEnablePluginSystem)
+
 /** Max time interval for repeated `application(_:openFile:)` calls. */
 fileprivate let OpenFileRepeatTime = TimeInterval(0.2)
 /** Tags for "Open File/URL" menu item when "Always open file in new windows" is off. Vice versa. */
@@ -61,7 +63,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }()
 
   lazy var preferenceWindowController: NSWindowController = {
-    return PreferenceWindowController(viewControllers: [
+    var list: [NSViewController & PreferenceWindowEmbeddable] = [
       PrefGeneralViewController(),
       PrefUIViewController(),
       PrefCodecViewController(),
@@ -70,8 +72,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       PrefControlViewController(),
       PrefKeyBindingViewController(),
       PrefAdvancedViewController(),
+      // PrefPluginViewController(),
       PrefUtilsViewController(),
-    ])
+    ]
+
+    if IINA_ENABLE_PLUGIN_SYSTEM {
+      list.insert(PrefPluginViewController(), at: 8)
+    }
+    return PreferenceWindowController(viewControllers: list)
   }()
 
   @IBOutlet weak var menuController: MenuController!
@@ -178,8 +186,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     Logger.log("App launched")
 
-    Logger.log("Using \(PlayerCore.active.mpv.mpvVersion!)")
-
     if !isReady {
       getReady()
     }
@@ -193,6 +199,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       NSWindow.allowsAutomaticWindowTabbing = false
     }
 
+    JavascriptPlugin.loadGlobalInstances()
+    let _ = PlayerCore.first
+    Logger.log("Using \(PlayerCore.active.mpv.mpvVersion!)")
+
     if #available(macOS 10.13, *) {
       if RemoteCommandController.useSystemMediaControl {
         Logger.log("Setting up MediaPlayer integration")
@@ -200,8 +210,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NowPlayingInfoManager.updateInfo(state: .unknown)
       }
     }
-
-    let _ = PlayerCore.first
 
     // if have pending open request
     if let url = pendingURL {
@@ -247,6 +255,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     NSRunningApplication.current.activate(options: [.activateIgnoringOtherApps, .activateAllWindows])
 
     NSApplication.shared.servicesProvider = self
+
+    menuController?.pluginMenuNeedsUpdate = true
   }
 
   /** Show welcome window if `application(_:openFile:)` wasn't called, i.e. launched normally. */

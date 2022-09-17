@@ -190,7 +190,8 @@ struct Preference {
     static let subMarginY = Key("subMarginY")
     static let subPos = Key("subPos")
     static let subLang = Key("subLang")
-    static let onlineSubSource = Key("onlineSubSource")
+    static let legacyOnlineSubSource = Key("onlineSubSource")
+    static let onlineSubProvider = Key("onlineSubProvider")
     static let displayInLetterBox = Key("displayInLetterBox")
     static let subScaleWithWindow = Key("subScaleWithWindow")
     static let openSubUsername = Key("openSubUsername")
@@ -283,6 +284,8 @@ struct Preference {
 
     static let iinaLastPlayedFilePath = Key("iinaLastPlayedFilePath")
     static let iinaLastPlayedFilePosition = Key("iinaLastPlayedFilePosition")
+
+    static let iinaEnablePluginSystem = Key("iinaEnablePluginSystem")
   }
 
   // MARK: - Enums
@@ -759,7 +762,8 @@ struct Preference {
     .subMarginY: Float(22),
     .subPos: Float(100),
     .subLang: "",
-    .onlineSubSource: OnlineSubtitle.Source.openSub.rawValue,
+    .legacyOnlineSubSource: 1, /* openSub */
+    .onlineSubProvider: OnlineSubtitle.Providers.openSub.id,
     .displayInLetterBox: true,
     .subScaleWithWindow: true,
     .openSubUsername: "",
@@ -790,6 +794,7 @@ struct Preference {
     .userOptions: [],
     .useUserDefinedConfDir: false,
     .userDefinedConfDir: "~/.config/mpv/",
+    .iinaEnablePluginSystem: false,
 
     .keepOpenOnFileEnd: true,
     .quitWhenNoOpenedWindow: false,

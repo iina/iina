@@ -52,7 +52,7 @@ private protocol LockImpl {
 @available(macOS 10.12, *)
 private class OSUnfairLockImpl: LockImpl {
 
-  // Use a pointer to insure the lock, which is a struct, is not copied.
+  // Use a pointer to ensure the lock, which is a struct, is not copied.
   private let lock = os_unfair_lock_t.allocate(capacity: 1)
 
   init() {
@@ -71,7 +71,7 @@ private class OSUnfairLockImpl: LockImpl {
   }
 }
 
-private class NSLockImpl: LockImpl {
+private struct NSLockImpl: LockImpl {
 
   private let lock = NSLock()
 

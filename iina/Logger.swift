@@ -57,11 +57,11 @@ struct Logger {
 
   static let logDirectory: URL = {
     // get path
-    let libraryPath = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)
-    guard libraryPath.count >= 1 else {
-      fatalDuringInit("Cannot get path to Logs directory: \(libraryPath)")
+    let libraryPaths = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)
+    guard let libraryPath = libraryPaths.first else {
+      fatalDuringInit("Cannot get path to Logs directory: \(libraryPaths)")
     }
-    let logsUrl = libraryPath.first!.appendingPathComponent("Logs", isDirectory: true)
+    let logsUrl = libraryPath.appendingPathComponent("Logs", isDirectory: true)
     let bundleID = Bundle.main.bundleIdentifier!
     let appLogsUrl = logsUrl.appendingPathComponent(bundleID, isDirectory: true)
 

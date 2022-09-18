@@ -194,11 +194,15 @@ class Utility {
   /**
    Pop up a save panel.
    */
-  static func quickSavePanel(title: String, types: [String], sheetWindow: NSWindow? = nil, callback: @escaping (URL) -> Void) {
+  static func quickSavePanel(title: String, filename: String? = nil, types: [String]? = nil,
+                             sheetWindow: NSWindow? = nil, callback: @escaping (URL) -> Void) {
     let panel = NSSavePanel()
     panel.title = title
     panel.canCreateDirectories = true
     panel.allowedFileTypes = types
+    if filename != nil {
+      panel.nameFieldStringValue = filename!
+    }
     let handler: (NSApplication.ModalResponse) -> Void = { result in
       if result == .OK, let url = panel.url {
         callback(url)

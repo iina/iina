@@ -186,6 +186,7 @@
 "alert.sub_lang_not_set" = "Kies uw voorkeurstaal in Voorkeuren voordat u OpenSubtitles gebruikt. Standaard wordt enkel naar engels ('eng') gezocht.";
 "alert.sub.cannot_save_passwd" = "Kan je wachtwoord niet opslaan in Sleutelhanger: %@";
 "alert.sub.cannot_login" = "Kan niet inloggen. Controleer je gebruikersnaam, wachtwoord en netwerkverbinding.\n\n%@";
+"alert.sub.save_downloaded.title" = "Sla gedownloade ondertiteling op";
 
 "alert.set_default.title" = "Stel IINA in als standaardprogramma";
 "alert.set_default.message" = "IINA wordt ingesteld als standaardprogramma voor alle ondersteunde bestandstypes.";

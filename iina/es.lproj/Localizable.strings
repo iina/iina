@@ -186,6 +186,7 @@
 "alert.sub_lang_not_set" = "Por favor, configure el idioma predeterminado de los subtítulos en las preferencias antes de usar OpenSubtitles. Inglés(eng) se utilizará esta vez.";
 "alert.sub.cannot_save_passwd" = "No se puede guardar la contraseña en el Llavero: %@";
 "alert.sub.cannot_login" = "No se puede iniciar sesión. Compruebe su nombre de usuario, contraseña, y el estado de la red.\n\n%@";
+"alert.sub.save_downloaded.title" = "Guardar los subtítulos descargados";
 
 "alert.set_default.title" = "Establecer IINA como aplicación predeterminada";
 "alert.set_default.message" = "IINA se establecerá como la aplicación predeterminada para todos los tipos de archivo que soporta.";

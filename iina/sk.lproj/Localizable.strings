@@ -186,6 +186,7 @@
 "alert.sub_lang_not_set" = "Pred vyhľadávaním na OpenSubtitles nastavte v nastaveniach preferovaný jazyk titulkov. Teraz bude použitý jazyk English(eng).";
 "alert.sub.cannot_save_passwd" = "Heslo sa nedá uložiť do Kľúčenky: %@";
 "alert.sub.cannot_login" = "Nedá sa prihlásiť. Skontrolujte používateľské meno, heslo a stav siete. \n\n%@";
+"alert.sub.save_downloaded.title" = "Uložiť stiahnuté titulky";
 
 "alert.set_default.title" = "Nastaviť IINA ako predvolenú aplikáciu";
 "alert.set_default.message" = "IINA bude nastavená ako predvolená aplikácia pre všetky typy súborov, ktoré podporuje.";

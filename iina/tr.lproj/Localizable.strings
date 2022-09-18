@@ -186,6 +186,7 @@
 "alert.sub_lang_not_set" = "Lütfen OpenSubtitles'ı kullanmadan önce tercih ettiğiniz altyazı dilini tercihlerinize ekleyiniz. Bu sefer İngilizce (eng) kullanılacaktır.";
 "alert.sub.cannot_save_passwd" = "Anahtar zincirinize şifrenizi kaydedemiyoruz: %@";
 "alert.sub.cannot_login" = "Giriş yapılamıyor. Lütfen kullanıcı adınızı, şifrenizi ve ağ durumunuzu kontrol edin.\n\n%@ ";
+"alert.sub.save_downloaded.title" = "İndirilmiş Altyazıyı Kaydet";
 
 "alert.set_default.title" = "IINA'yı Varsayılan Uygulama Olarak Ayarla";
 "alert.set_default.message" = "Desteklenen tüm dosya türleri için IINA varsayılan uygulama olarak ayarlanacaktır.";

@@ -15,7 +15,7 @@ class PlayerCore: NSObject {
 
   static let first: PlayerCore = createPlayerCore()
 
-  static private var _lastActive: PlayerCore?
+  static private weak var _lastActive: PlayerCore?
 
   static var lastActive: PlayerCore {
     get {
@@ -65,6 +65,7 @@ class PlayerCore: NSObject {
     pc.label = "\(playerCoreCounter)"
     playerCores.append(pc)
     pc.startMPV()
+    pc.loadPlugins()
     playerCoreCounter += 1
     return pc
   }
@@ -79,6 +80,10 @@ class PlayerCore: NSObject {
   lazy var subsystem = Logger.Subsystem(rawValue: "player\(label!)")
 
   var label: String!
+  var isManagedByPlugin = false
+  var userLabel: String?
+  var disableUI = false
+  var disableWindowAnimation = false
 
   @available(macOS 10.12.2, *)
   var touchBarSupport: TouchBarSupport {
@@ -110,6 +115,10 @@ class PlayerCore: NSObject {
   var miniPlayer: MiniPlayerWindowController!
 
   var mpv: MPVController!
+  var plugins: [JavascriptPluginInstance] = []
+  private var pluginMap: [String: JavascriptPluginInstance] = [:]
+  var pluginMenuNeedsUpdate = false
+  var events = EventController()
 
   lazy var ffmpegController: FFmpegController = {
     let controller = FFmpegController()
@@ -150,6 +159,42 @@ class PlayerCore: NSObject {
     if #available(macOS 10.12.2, *) {
       self._touchBarSupport = TouchBarSupport(playerCore: self)
     }
+  }
+
+  // MARK: - Plugins
+
+  static func reloadPluginForAll(_ plugin: JavascriptPlugin) {
+    playerCores.forEach { $0.reloadPlugin(plugin) }
+    (NSApp.delegate as? AppDelegate)?.menuController?.pluginMenuNeedsUpdate = true
+  }
+
+  func loadPlugins() {
+    pluginMap.removeAll()
+    plugins = JavascriptPlugin.plugins.compactMap { plugin in
+      guard plugin.enabled else { return nil }
+      let instance = JavascriptPluginInstance(player: self, plugin: plugin)
+      pluginMap[plugin.identifier] = instance
+      return instance
+    }
+  }
+
+  func reloadPlugin(_ plugin: JavascriptPlugin, forced: Bool = false) {
+    let id = plugin.identifier
+    if let _ = pluginMap[id] {
+      if plugin.enabled {
+        // no need to reload, unless forced
+        guard forced else { return }
+        pluginMap[id] = JavascriptPluginInstance(player: self, plugin: plugin)
+      } else {
+        pluginMap.removeValue(forKey: id)
+      }
+    } else {
+      guard plugin.enabled else { return }
+      pluginMap[id] = JavascriptPluginInstance(player: self, plugin: plugin)
+    }
+
+    plugins = JavascriptPlugin.plugins.compactMap { pluginMap[$0.identifier] }
+    mainWindow.quickSettingView.updatePluginTabs()
   }
 
   // MARK: - Control
@@ -306,6 +351,7 @@ class PlayerCore: NSObject {
     }
 
     mpv.mpvInit()
+    events.emit(.mpvInitialized)
 
     if !getAudioDevices().contains(where: { $0["name"] == Preference.string(for: .audioDevice)! }) {
       setAudioDevice("auto")
@@ -402,6 +448,8 @@ class PlayerCore: NSObject {
         miniPlayer.togglePlaylist(self)
       }
     }
+    
+    events.emit(.musicModeChanged, data: true)
   }
 
   func switchBackFromMiniPlayer(automatically: Bool, showMainWindow: Bool = true) {
@@ -439,6 +487,8 @@ class PlayerCore: NSObject {
     mainWindow.videoView.videoLayer.draw(forced: true)
 
     mainWindow.updateTitle()
+    
+    events.emit(.musicModeChanged, data: false)
   }
 
   // MARK: - MPV commands
@@ -718,6 +768,17 @@ class PlayerCore: NSObject {
     }
     mpv.command(.set, args: [optionName, value.description])
   }
+  
+  func loadExternalVideoFile(_ url: URL) {
+    mpv.command(.videoAdd, args: [url.path], checkError: false) { code in
+      if code < 0 {
+        Logger.log("Unsupported video: \(url.path)", level: .error, subsystem: self.subsystem)
+        DispatchQueue.main.async {
+          Utility.showAlert("unsupported_audio")
+        }
+      }
+    }
+  }
 
   func loadExternalAudioFile(_ url: URL) {
     mpv.command(.audioAdd, args: [url.path], checkError: false) { code in
@@ -777,34 +838,53 @@ class PlayerCore: NSObject {
     mpv.setDouble(MPVOption.Subtitles.subDelay, delay)
   }
 
-  func addToPlaylist(_ path: String) {
+  private func _addToPlaylist(_ path: String) {
     mpv.command(.loadfile, args: [path, "append"])
   }
 
-  func playlistMove(_ from: Int, to: Int) {
+  func addToPlaylist(_ path: String, silent: Bool = false) {
+    _addToPlaylist(path)
+    if !silent {
+      postNotification(.iinaPlaylistChanged)
+    }
+  }
+
+  private func _playlistMove(_ from: Int, to: Int) {
     mpv.command(.playlistMove, args: ["\(from)", "\(to)"])
   }
 
-  func addToPlaylist(paths: [String], at index: Int) {
+  func playlistMove(_ from: Int, to: Int) {
+    _playlistMove(from, to: to)
+    postNotification(.iinaPlaylistChanged)
+  }
+
+  func addToPlaylist(paths: [String], at index: Int = -1) {
     getPlaylist()
-    guard index <= info.playlist.count && index >= 0 else { return }
-    let previousCount = info.playlist.count
     for path in paths {
-      addToPlaylist(path)
+      _addToPlaylist(path)
     }
-    for i in 0..<paths.count {
-      playlistMove(previousCount + i, to: index + i)
+    if index <= info.playlist.count && index >= 0 {
+      let previousCount = info.playlist.count
+      for i in 0..<paths.count {
+        playlistMove(previousCount + i, to: index + i)
+      }
     }
+    postNotification(.iinaPlaylistChanged)
+  }
+
+  private func _playlistRemove(_ index: Int) {
+    mpv.command(.playlistRemove, args: [index.description])
   }
 
   func playlistRemove(_ index: Int) {
-    mpv.command(.playlistRemove, args: [index.description])
+    _playlistRemove(index)
+    postNotification(.iinaPlaylistChanged)
   }
 
   func playlistRemove(_ indexSet: IndexSet) {
     var count = 0
     for i in indexSet {
-      playlistRemove(i - count)
+      _playlistRemove(i - count)
       count += 1
     }
     postNotification(.iinaPlaylistChanged)
@@ -812,6 +892,7 @@ class PlayerCore: NSObject {
 
   func clearPlaylist() {
     mpv.command(.playlistClear)
+    postNotification(.iinaPlaylistChanged)
   }
 
   func playFile(_ path: String) {
@@ -1207,6 +1288,7 @@ class PlayerCore: NSObject {
       }
       self.autoSearchOnlineSub()
     }
+    events.emit(.fileStarted)
   }
 
   /** This function is called right after file loaded. Should load all meta info here. */
@@ -1256,12 +1338,16 @@ class PlayerCore: NSObject {
     // add to history
     if let url = info.currentURL {
       let duration = info.videoDuration ?? .zero
-      HistoryController.shared.add(url, duration: duration.second)
+      HistoryController.shared.queue.async {
+        HistoryController.shared.add(url, duration: duration.second)
+      }
       if Preference.bool(for: .recordRecentFiles) && Preference.bool(for: .trackAllFilesInRecentOpenMenu) {
         NSDocumentController.shared.noteNewRecentDocumentURL(url)
       }
+
     }
     postNotification(.iinaFileLoaded)
+    events.emit(.fileLoaded, data: info.currentURL?.absoluteString ?? "")
   }
 
   func playbackRestarted() {
@@ -1513,9 +1599,10 @@ class PlayerCore: NSObject {
     }
   }
 
-  func sendOSD(_ osd: OSDMessage, autoHide: Bool = true, forcedTimeout: Float? = nil, accessoryView: NSView? = nil, context: Any? = nil) {
+  func sendOSD(_ osd: OSDMessage, autoHide: Bool = true, forcedTimeout: Float? = nil, accessoryView: NSView? = nil, context: Any? = nil, external: Bool = false) {
+    // querying `mainWindow.isWindowLoaded` will initialize mainWindow unexpectly
     guard mainWindow.loaded && Preference.bool(for: .enableOSD) else { return }
-    if info.disableOSDForFileLoading {
+    if info.disableOSDForFileLoading && !external {
       guard case .fileStart = osd else {
         return
       }
@@ -1871,6 +1958,7 @@ extension PlayerCore: FFmpegControllerDelegate {
           ThumbnailCache.write(self.info.thumbnails, forName: cacheName, forVideo: self.info.currentURL)
         }
       }
+      events.emit(.thumbnailsReady)
     }
   }
 }

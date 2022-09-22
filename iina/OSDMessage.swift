@@ -24,6 +24,7 @@ enum OSDType {
   case normal
   case withText(String)
   case withProgress(Double)
+//  case withButton(String)
 }
 
 enum OSDMessage {
@@ -73,6 +74,9 @@ enum OSDMessage {
   case canceled
   case fileLoop(Bool)
   case playlistLoop(Bool)
+
+  case custom(String)
+  case customWithDetail(String, String)
 
   func message() -> (String, OSDType) {
     switch self {
@@ -319,6 +323,11 @@ enum OSDMessage {
                enabled ? NSLocalizedString("general.on", comment: "On") : NSLocalizedString("general.off", comment: "Off")),
         .normal
       )
+    case .custom(let message):
+      return (message, .normal)
+
+    case .customWithDetail(let message, let detail):
+      return (message, .withText(detail))
     }
   }
 }

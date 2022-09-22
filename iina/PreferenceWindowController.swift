@@ -162,7 +162,7 @@ class PreferenceWindowController: NSWindowController {
 
     contentViewBottomConstraint = contentView.bottomAnchor.constraint(equalTo: contentView.superview!.bottomAnchor)
 
-    let labelDict = [String: [String: [String]]](uniqueKeysWithValues:  [
+    var viewMap = [
       ["general", "PrefGeneralViewController"],
       ["ui", "PrefUIViewController"],
       ["subtitle", "PrefSubViewController"],
@@ -170,9 +170,15 @@ class PreferenceWindowController: NSWindowController {
       ["control", "PrefControlViewController"],
       ["keybindings", "PrefKeyBindingViewController"],
       ["video_audio", "PrefCodecViewController"],
+      // ["plugin", "PrefPluginViewController"],
       ["advanced", "PrefAdvancedViewController"],
       ["utilities", "PrefUtilsViewController"],
-    ].map { (NSLocalizedString("preference.\($0[0])", comment: ""), self.getLabelDict(inNibNamed: $0[1])) })
+    ]
+    if IINA_ENABLE_PLUGIN_SYSTEM {
+      viewMap.insert(["plugin", "PrefPluginViewController"], at: 8)
+    }
+    let labelDict = [String: [String: [String]]](
+      uniqueKeysWithValues: viewMap.map { (NSLocalizedString("preference.\($0[0])", comment: ""), self.getLabelDict(inNibNamed: $0[1])) })
 
     indexingQueue.async{
       self.isIndexing = true

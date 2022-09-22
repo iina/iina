@@ -8,6 +8,7 @@
 
 import Cocoa
 import Mustache
+import WebKit
 
 fileprivate let isMacOS11: Bool = {
   var res = false
@@ -74,7 +75,7 @@ class MainWindowController: PlayerWindowController {
   override var videoView: VideoView {
     return _videoView
   }
-  
+
   lazy private var _videoView: VideoView = VideoView(frame: window!.contentView!.bounds, player: player)
 
   /** The quick setting sidebar (video, audio, subtitles). */
@@ -458,6 +459,15 @@ class MainWindowController: PlayerWindowController {
 
   @IBOutlet weak var pipOverlayView: NSVisualEffectView!
 
+  lazy var pluginOverlayViewContainer: NSView! = {
+    guard let window = window, let cv = window.contentView else { return nil }
+    let view = NSView(frame: .zero)
+    view.translatesAutoresizingMaskIntoConstraints = false
+    cv.addSubview(view, positioned: .below, relativeTo: bufferIndicatorView)
+    Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": view])
+    return view
+  }()
+
   lazy var subPopoverView = playlistView.subPopover?.contentViewController?.view
 
   var videoViewConstraints: [NSLayoutConstraint.Attribute: NSLayoutConstraint] = [:]
@@ -571,10 +581,12 @@ class MainWindowController: PlayerWindowController {
     timePreviewWhenSeek.isHidden = true
     bottomView.isHidden = true
     pipOverlayView.isHidden = true
+    
+    if player.disableUI { hideUI() }
 
     // add user default observers
     observedPrefKeys.append(contentsOf: localObservedPrefKeys)
-    observedPrefKeys.forEach { key in
+    localObservedPrefKeys.forEach { key in
       UserDefaults.standard.addObserver(self, forKeyPath: key.rawValue, options: .new, context: nil)
     }
 
@@ -601,6 +613,8 @@ class MainWindowController: PlayerWindowController {
       guard self.fsState.isFullscreen, Preference.bool(for: .useLegacyFullScreen) else { return }
       setWindowFrameForLegacyFullScreen()
     }
+
+    player.events.emit(.windowLoaded)
   }
 
   /** Set material for OSC and title bar */
@@ -1116,6 +1130,8 @@ class MainWindowController: PlayerWindowController {
     cv.trackingAreas.forEach(cv.removeTrackingArea)
     playSlider.trackingAreas.forEach(playSlider.removeTrackingArea)
     UserDefaults.standard.set(NSStringFromRect(window!.frame), forKey: "MainWindowLastPosition")
+    
+    player.events.emit(.windowWillClose)
   }
 
   // MARK: - Window delegate: Full screen
@@ -1221,12 +1237,14 @@ class MainWindowController: PlayerWindowController {
     }
 
     updateWindowParametersForMPV()
-    
+
     // Exit PIP if necessary
     if pipStatus == .inPIP,
       #available(macOS 10.12, *) {
       exitPIP()
     }
+    
+    player.events.emit(.windowFullscreenChanged, data: true)
   }
 
   func windowWillExitFullScreen(_ notification: Notification) {
@@ -1296,6 +1314,8 @@ class MainWindowController: PlayerWindowController {
 
     resetCollectionBehavior()
     updateWindowParametersForMPV()
+    
+    player.events.emit(.windowFullscreenChanged, data: false)
   }
 
   func toggleWindowFullScreen() {
@@ -1319,7 +1339,7 @@ class MainWindowController: PlayerWindowController {
       return
     }
   }
-  
+
   private func restoreDockSettings() {
     NSApp.presentationOptions.remove(.autoHideMenuBar)
     NSApp.presentationOptions.remove(.autoHideDock)
@@ -1504,6 +1524,8 @@ class MainWindowController: PlayerWindowController {
         }
       }
     }
+
+    player.events.emit(.windowResized, data: window.frame)
   }
 
   // resize framebuffer in videoView after resizing.
@@ -1517,10 +1539,17 @@ class MainWindowController: PlayerWindowController {
       oldScale != Double(window!.backingScaleFactor) {
       videoView.videoLayer.contentsScale = window!.backingScaleFactor
     }
-
+  }
+  
+  override func windowDidChangeScreen(_ notification: Notification) {
+    player.events.emit(.windowScreenChanged)
   }
 
   // MARK: - Window delegate: Activeness status
+  func windowDidMove(_ notification: Notification) {
+    guard let window = window else { return }
+    player.events.emit(.windowMoved, data: window.frame)
+  }
 
   func windowDidBecomeKey(_ notification: Notification) {
     window!.makeFirstResponder(window!)
@@ -1549,6 +1578,7 @@ class MainWindowController: PlayerWindowController {
     if fsState.isFullscreen && Preference.bool(for: .blackOutMonitor) {
       blackOutOtherMonitors()
     }
+    player.events.emit(.windowMainStatusChanged, data: true)
   }
 
   override func windowDidResignMain(_ notification: Notification) {
@@ -1556,6 +1586,7 @@ class MainWindowController: PlayerWindowController {
     if Preference.bool(for: .blackOutMonitor) {
       removeBlackWindow()
     }
+    player.events.emit(.windowMainStatusChanged, data: false)
   }
 
   func windowWillMiniaturize(_ notification: Notification) {
@@ -1564,13 +1595,14 @@ class MainWindowController: PlayerWindowController {
       player.pause()
     }
   }
-  
+
   func windowDidMiniaturize(_ notification: Notification) {
     if Preference.bool(for: .togglePipByMinimizingWindow) && !isWindowMiniaturizedDueToPip {
       if #available(macOS 10.12, *) {
         enterPIP()
       }
     }
+    player.events.emit(.windowMiniaturized)
   }
 
   func windowDidDeminiaturize(_ notification: Notification) {
@@ -1583,6 +1615,7 @@ class MainWindowController: PlayerWindowController {
         exitPIP()
       }
     }
+    player.events.emit(.windowDeminiaturized)
   }
 
   // MARK: - UI: Show / Hide
@@ -1628,6 +1661,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   private func showUI() {
+    if player.disableUI { return }
     animationState = .willShow
     fadeableViews.forEach { (v) in
       v.isHidden = false
@@ -2271,9 +2305,13 @@ class MainWindowController: PlayerWindowController {
       if let screenFrame = window.screen?.frame {
         rect = rect.constrain(in: screenFrame)
       }
-      // animated `setFrame` can be inaccurate!
-      window.setFrame(rect, display: true, animate: true)
-      window.setFrame(rect, display: true)
+      if player.disableWindowAnimation {
+        window.setFrame(rect, display: true, animate: false)
+      } else {
+        // animated `setFrame` can be inaccurate!
+        window.setFrame(rect, display: true, animate: true)
+        window.setFrame(rect, display: true)
+      }
       updateWindowParametersForMPV(withFrame: rect)
     }
 
@@ -2285,6 +2323,7 @@ class MainWindowController: PlayerWindowController {
 
     // UI and slider
     updatePlayTime(withDuration: true, andProgressBar: true)
+    player.events.emit(.windowSizeAdjusted, data: rect)
   }
 
   func updateWindowParametersForMPV(withFrame frame: NSRect? = nil) {
@@ -2526,38 +2565,60 @@ class MainWindowController: PlayerWindowController {
     setWindowFloatingOnTop(!isOntop)
   }
 
-  /// Legacy IBAction, but still in use.
-  func settingsButtonAction(_ sender: AnyObject) {
-    if sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
-      return  // do not interrupt other actions while it is animating
+  func showSettingsSidebar(tab: QuickSettingViewController.TabViewType? = nil, force: Bool = false, hideIfAlreadyShown: Bool = true) {
+    if !force && sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
+      return  // do not interrput other actions while it is animating
     }
     let view = quickSettingView
     switch sideBarStatus {
     case .hidden:
+      if let tab = tab {
+        view.pleaseSwitchToTab(tab)
+      }
       showSideBar(viewController: view, type: .settings)
     case .playlist:
+      if let tab = tab {
+        view.pleaseSwitchToTab(tab)
+      }
       hideSideBar {
         self.showSideBar(viewController: view, type: .settings)
       }
     case .settings:
-      hideSideBar()
+      if view.currentTab == tab {
+        if hideIfAlreadyShown {
+          hideSideBar()
+        }
+      } else if let tab = tab {
+        view.pleaseSwitchToTab(tab)
+      }
     }
   }
 
-  /// Legacy IBAction, but still in use.
-  func playlistButtonAction(_ sender: AnyObject) {
-    if sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
-      return  // do not interrupt other actions while it is animating
+  func showPlaylistSidebar(tab: PlaylistViewController.TabViewType? = nil, force: Bool = false, hideIfAlreadyShown: Bool = true) {
+    if !force && sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
+      return  // do not interrput other actions while it is animating
     }
     let view = playlistView
     switch sideBarStatus {
     case .hidden:
-      showSideBar(viewController: view, type: .playlist)
+      if let tab = tab {
+        view.pleaseSwitchToTab(tab)
+      }
+      showSideBar(viewController: view, type: .settings)
     case .playlist:
-      hideSideBar()
-    case .settings:
+      if let tab = tab {
+        view.pleaseSwitchToTab(tab)
+      }
       hideSideBar {
-        self.showSideBar(viewController: view, type: .playlist)
+        self.showSideBar(viewController: view, type: .settings)
+      }
+    case .settings:
+      if view.currentTab == tab {
+        if hideIfAlreadyShown {
+          hideSideBar()
+        }
+      } else if let tab = tab {
+        view.pleaseSwitchToTab(tab)
       }
     }
   }
@@ -2593,9 +2654,9 @@ class MainWindowController: PlayerWindowController {
         }
       }
     case .playlist:
-      playlistButtonAction(sender)
+      showPlaylistSidebar()
     case .settings:
-      settingsButtonAction(sender)
+      showSettingsSidebar()
     case .subTrack:
       quickSettingView.showSubChooseMenu(forView: sender, showLoadedSubs: true)
     }
@@ -2698,6 +2759,8 @@ extension MainWindowController: PIPViewControllerDelegate {
         player.pause()
       }
     }
+
+    player.events.emit(.pipChanged, data: true)
   }
 
   func exitPIP() {
@@ -2709,6 +2772,7 @@ extension MainWindowController: PIPViewControllerDelegate {
       // is chosen in this case. See https://bugs.swift.org/browse/SR-8956.
       pip.dismiss(pipVideo!)
     }
+    player.events.emit(.pipChanged, data: false)
   }
 
   func doneExitingPIP() {
@@ -2740,7 +2804,7 @@ extension MainWindowController: PIPViewControllerDelegate {
     guard let window = window else { return }
     // This is called right before we're about to close the PIP
     pipStatus = .intermediate
-    
+
     // Hide the overlay view preemptively, to prevent any issues where it does
     // not hide in time and ends up covering the video view (which will be added
     // to the window under everything else, including the overlay).

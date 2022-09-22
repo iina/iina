@@ -185,11 +185,11 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       self.updateTitle()
     }
 
-    NSWorkspace.shared.notificationCenter.addObserver(forName: NSWorkspace.willSleepNotification, object: nil, queue: nil, using: { [unowned self] _ in
+    NSWorkspace.shared.notificationCenter.addObserver(forName: NSWorkspace.willSleepNotification, object: nil, queue: nil) { [unowned self] _ in
       if Preference.bool(for: .pauseWhenGoesToSleep) {
         self.player.pause()
       }
-    })
+    }
 
     if #available(macOS 10.15, *) {
       addObserver(to: .default, forName: NSScreen.colorSpaceDidChangeNotification, object: nil) { [unowned self] noti in
@@ -415,11 +415,11 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     if #available(macOS 10.13, *), RemoteCommandController.useSystemMediaControl {
       NowPlayingInfoManager.updateInfo(withTitle: true)
     }
-    NotificationCenter.default.post(name: .iinaMainWindowChanged, object: nil)
+    NotificationCenter.default.post(name: .iinaMainWindowChanged, object: true)
   }
   
   func windowDidResignMain(_ notification: Notification) {
-    NotificationCenter.default.post(name: .iinaMainWindowChanged, object: nil)
+    NotificationCenter.default.post(name: .iinaMainWindowChanged, object: false)
   }
 
   func windowDidChangeScreen(_ notification: Notification) {

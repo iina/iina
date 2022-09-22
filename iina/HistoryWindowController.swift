@@ -200,7 +200,8 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     }
     let newObjects = HistoryController.shared.history.filter { entry in
       let string = searchOption == .filename ? entry.name : entry.url.path
-      return string.lowercased().contains(searchString)
+      // Do a locale-aware, case and diacritic insensitive search:
+      return string.localizedStandardContains(searchString)
     }
     prepareData(fromHistory: newObjects)
     outlineView.reloadData()

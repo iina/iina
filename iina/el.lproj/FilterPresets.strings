@@ -1,0 +1,55 @@
+/*
+  FilterPresets.strings
+  iina
+
+  Created by lhc on 25/8/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+/* It's optional to localize descriptions for each parameter! */
+
+
+
+"crop" = "Περικοπή";
+"crop.w" = "Πλάτος (προεπιλογή: πλάτος βίντεο)";
+"crop.h" = "Ύψος (προεπιλογή: ύψος βίντεο)";
+"crop.x" = "Αρχική τιμή Χ (προεπιλογή: κέντρο)";
+"crop.y" = "Αρχική τιμή Υ (προεπιλογή: κέντρο)";
+
+"expand" = "Επέκταση";
+"expand.w" = "Πλάτος (προεπιλογή: πλάτος βίντεο)";
+"expand.h" = "Ύψος (προεπιλογή: ύψος βίντεο)";
+"expand.x" = "Αρχική τιμή Χ (προεπιλογή: κέντρο)";
+"expand.y" = "Αρχική τιμή Υ (προεπιλογή: κέντρο)";
+"expand.aspect" = "Επέκταση ώστε να χωράει μια αναλογία εικόνας (π.χ. 4/3)";
+"expand.round" = "Στρογγυλοποίηση ώστε να διαιρείται με αυτή την τιμή";
+
+"sharpen" = "Όξυνση";
+"sharpen.msize" = "Μέγεθος πίνακα";
+"sharpen.amount" = "Ποσό";
+
+"blur" = "Θόλωμα";
+"blur.msize" = "Μέγεθος πίνακα";
+"blur.amount" = "Ποσό";
+
+"delogo" = "Αφαίρεση λογοτύπου";
+"delogo.w" = "Πλάτος";
+"delogo.h" = "Ύψος";
+"delogo.x" = "Αρχική τιμή Χ";
+"delogo.y" = "Αρχική τιμή Υ";
+
+"negative" = "Αρνητικό";
+
+"vflip" = "Αναστροφή";
+"hflip" = "Κατοπτρισμός";
+
+"lut3d" = "3D LUT";
+"lut3d.file" = "Διαδρομή αρχείου (μπορείτε επίσης να σύρετε το αρχείο στο πλαίσιο εισαγωγής)";
+"lut3d.interp" = "Λειτουργία παρεμβολής";
+
+"custom_mpv" = "Προσαρμογή (mpv)";
+"custom_mpv.name" = "Όνομα φίλτρου";
+"custom_mpv.string" = "Τιμή φίλτρου";
+
+"custom_ffmpeg" = "Προσαρμογή (FFmpeg)";
+"custom_ffmpeg.name" = "Όνομα φίλτρου";
+"custom_ffmpeg.string" = "Τιμή φίλτρου";

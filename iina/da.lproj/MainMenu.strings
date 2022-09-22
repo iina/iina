@@ -20,7 +20,7 @@
 "2Ya-3g-1hy.title" = "Hop til begyndelsen";
 
 /* Class = "NSMenuItem"; title = "Cut"; ObjectID = "2aU-bk-bmu"; */
-"2aU-bk-bmu.title" = "Cut";
+"2aU-bk-bmu.title" = "Klip";
 
 /* Class = "NSMenuItem"; title = "Jump to…"; ObjectID = "2id-wn-xsC"; */
 "2id-wn-xsC.title" = "Hop til…";
@@ -29,7 +29,7 @@
 "2t8-Ot-yoO.title" = "Vis hurtigindstillings panelet";
 
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "3Ax-P3-QQu"; */
-"3Ax-P3-QQu.title" = "Select All";
+"3Ax-P3-QQu.title" = "Vælg Alt";
 
 /* Class = "NSMenuItem"; title = "Show Quick Settings Panel"; ObjectID = "43n-Ed-5kT"; */
 "43n-Ed-5kT.title" = "Vis hurtigindstillings panelet";
@@ -56,13 +56,13 @@
 "6yE-op-DTS.title" = "Spol 5s frem";
 
 /* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "7Bn-Mp-EvJ"; */
-"7Bn-Mp-EvJ.title" = "Transformations";
+"7Bn-Mp-EvJ.title" = "Transformationer";
 
 /* Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "7rG-Yq-EYG"; */
-"7rG-Yq-EYG.title" = "Stop Speaking";
+"7rG-Yq-EYG.title" = "Stop Tale";
 
 /* Class = "NSMenuItem"; title = "Speech"; ObjectID = "8Oy-tP-udW"; */
-"8Oy-tP-udW.title" = "Speech";
+"8Oy-tP-udW.title" = "Tale";
 
 /* Class = "NSMenuItem"; title = "Audio Filters…"; ObjectID = "8Zh-hU-Cc4"; */
 "8Zh-hU-Cc4.title" = "Lyd filtre…";
@@ -80,7 +80,7 @@
 "9ee-7i-xs7.title" = "Lydforsinkelse - 0.1s";
 
 /* Class = "NSMenuItem"; title = "<None>"; ObjectID = "9pa-9C-ueQ"; */
-"9pa-9C-ueQ.title" = "<None>";
+"9pa-9C-ueQ.title" = "<Intet>";
 
 /* Class = "NSMenuItem"; title = "Save Downloaded Subtitle"; ObjectID = "9zk-co-roT"; */
 "9zk-co-roT.title" = "Gem Downloaded undertekster";
@@ -149,7 +149,7 @@
 "GR6-4V-lRT.title" = "Næste medie";
 
 /* Class = "NSMenuItem"; title = "Playlist"; ObjectID = "Gi5-1S-RQB"; */
-"Gi5-1S-RQB.title" = "Playlist";
+"Gi5-1S-RQB.title" = "Spilleliste";
 
 /* Class = "NSMenuItem"; title = "Crop"; ObjectID = "Gqg-wU-RRo"; */
 "Gqg-wU-RRo.title" = "Beskær";
@@ -206,10 +206,10 @@
 "Mjr-lL-oEt.title" = "Gem nuværende Playlist...";
 
 /* Class = "NSMenuItem"; title = "Services"; ObjectID = "NMo-om-nkz"; */
-"NMo-om-nkz.title" = "Services";
+"NMo-om-nkz.title" = "Tjenester";
 
 /* Class = "NSMenuItem"; title = "Paste"; ObjectID = "NdF-0z-k5s"; */
-"NdF-0z-k5s.title" = "Paste";
+"NdF-0z-k5s.title" = "Indsæt";
 
 /* Class = "NSMenuItem"; title = "Vertical (Flip)"; ObjectID = "OIu-H0-Mht"; */
 "OIu-H0-Mht.title" = "Vertical (vend)";
@@ -224,10 +224,10 @@
 "P1a-ot-P31.title" = "Reset Undertekst skala";
 
 /* Class = "NSMenuItem"; title = "Encoding"; ObjectID = "Pci-OQ-Vni"; */
-"Pci-OQ-Vni.title" = "Encoding";
+"Pci-OQ-Vni.title" = "Kodning";
 
 /* Class = "NSMenu"; title = "Encoding"; ObjectID = "Pf6-5i-B1E"; */
-"Pf6-5i-B1E.title" = "Encoding";
+"Pf6-5i-B1E.title" = "Kodning";
 
 /* Class = "NSMenuItem"; title = "Video Filters…"; ObjectID = "PyY-pR-jz7"; */
 "PyY-pR-jz7.title" = "Video Filtre…";
@@ -257,7 +257,7 @@
 "Td7-aD-5lo.title" = "Vindue";
 
 /* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "Tue-O7-cei"; */
-"Tue-O7-cei.title" = "Capitalize";
+"Tue-O7-cei.title" = "Kapitalisér";
 
 /* Class = "NSMenuItem"; title = "Pause"; ObjectID = "UOE-MJ-8ku"; */
 "UOE-MJ-8ku.title" = "Pause";
@@ -266,13 +266,13 @@
 "UwY-P2-Xdb.title" = "Sekundær undertekster";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "VDZ-ro-z5z"; */
-"VDZ-ro-z5z.title" = "Redo";
+"VDZ-ro-z5z.title" = "Gendan";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "Vdr-fp-XzO"; */
 "Vdr-fp-XzO.title" = "Skjul andre";
 
 /* Class = "NSMenuItem"; title = "Mute"; ObjectID = "WOL-Us-ByA"; */
-"WOL-Us-ByA.title" = "Mute";
+"WOL-Us-ByA.title" = "Lydløs";
 
 /* Class = "NSMenuItem"; title = "Volume + 5%"; ObjectID = "Wbq-vt-hzX"; */
 "Wbq-vt-hzX.title" = "Volumen + 5%";
@@ -284,7 +284,7 @@
 "XHu-Dl-Vq2.title" = "Skaler op";
 
 /* Class = "NSMenuItem"; title = "Undo"; ObjectID = "XPz-ml-OQ3"; */
-"XPz-ml-OQ3.title" = "Undo";
+"XPz-ml-OQ3.title" = "Fortryd";
 
 /* Class = "NSMenuItem"; title = "Smaller Size"; ObjectID = "ZOF-MG-6II"; */
 "ZOF-MG-6II.title" = "Mindre størelse";
@@ -302,7 +302,7 @@
 "aUF-d1-5bR.title" = "Vindue";
 
 /* Class = "NSMenu"; title = "Playlist"; ObjectID = "aXa-aM-Jaq"; */
-"aXa-aM-Jaq.title" = "Playlist";
+"aXa-aM-Jaq.title" = "Spilleliste";
 
 /* Class = "NSMenuItem"; title = "Rotation"; ObjectID = "ar5-3T-O9h"; */
 "ar5-3T-O9h.title" = "Rotation";
@@ -326,13 +326,13 @@
 "c6Y-0e-vgf.title" = "Volumen + 1%";
 
 /* Class = "NSMenuItem"; title = "Aspect Ratio"; ObjectID = "d15-8v-dXA"; */
-"d15-8v-dXA.title" = "Aspect Ratio";
+"d15-8v-dXA.title" = "Billedformat";
 
 /* Class = "NSMenu"; title = "Chapters"; ObjectID = "d9c-me-L2H"; */
 "d9c-me-L2H.title" = "Kapitel";
 
 /* Class = "NSMenu"; title = "Transformations"; ObjectID = "dBM-BU-5xS"; */
-"dBM-BU-5xS.title" = "Transformations";
+"dBM-BU-5xS.title" = "Transformationer";
 
 /* Class = "NSMenuItem"; title = "File"; ObjectID = "dMs-cI-mzQ"; */
 "dMs-cI-mzQ.title" = "Filer";
@@ -386,7 +386,7 @@
 "lj0-Oo-7nB.title" = "Gå til Screenshot mappe";
 
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "m7w-hc-Y2F"; */
-"m7w-hc-Y2F.title" = "Make Upper Case";
+"m7w-hc-Y2F.title" = "Lav om til store bogstaver";
 
 /* Class = "NSMenuItem"; title = "Second Subtitle"; ObjectID = "mGw-jm-5x2"; */
 "mGw-jm-5x2.title" = "Sekundær undertekster";
@@ -488,7 +488,7 @@
 "z9W-ga-j3b.title" = "Åben i nyt vindue…";
 
 /* Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "zez-g5-2Pt"; */
-"zez-g5-2Pt.title" = "Make Lower Case";
+"zez-g5-2Pt.title" = "Lav om til små bogstaver";
 
 /* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "zpw-Ac-F3M"; */
 "zpw-Ac-F3M.title" = "Start tale";

@@ -17,24 +17,24 @@
 "general.password" = "Jelszó";
 
 // Guide Window
-"guide.highlights" = "Highlights";
-"guide.basic_settings" = "Basic Settings";
-"guide.faq" = "Frequently Asked Questions";
+"guide.highlights" = "Kiemelések";
+"guide.basic_settings" = "Alapvető beállítások";
+"guide.faq" = "Gyakran Ismételt Kérdések";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Buffering… %d%%";
-"main.opening_stream" = "Opening stream…";
-"osc.precision" = "Precision";
-"osc.1s" = "1 second";
-"osc.100ms" = "100 milliseconds";
-"osc.10ms" = "10 milliseconds";
-"osc.1ms" = "1 millisecond";
+"main.buffering_indicator" = "Bufferelés…%d%%";
+"main.opening_stream" = "Stream megnyitása…";
+"osc.precision" = "Pontosság";
+"osc.1s" = "1 másodperc";
+"osc.100ms" = "100 ezredmásodperc";
+"osc.10ms" = "10 ezredmásodperc";
+"osc.1ms" = "1 ezredmásodperc";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Alapértelmezett";
-"quicksetting.item_none" = "None";
+"quicksetting.item_none" = "Egyik sem";
 "quicksetting.hwdec" = "Hardveres dekódolás";
-"quicksetting.deinterlace" = "Deinterlace";
+"quicksetting.deinterlace" = "Váltottsoros képszűrő";
 "quicksetting.hdr" = "HDR";
 
 // OSDMessage.swift
@@ -43,261 +43,302 @@
 "osd.volume" = "Hangerő: %i";
 "osd.speed" = "Sebesség: %.2fx";
 "osd.aspect" = "Képarány: %@";
-"osd.crop" = "Crop: %@";
-"osd.rotate" = "Rotate: %i°";
-"osd.deinterlace" = "Deinterlace: %@";
-"osd.hwdec" = "Hardware Decoding: %@";
-"osd.audio_delay.nodelay" = "Audio Delay: No Delay";
-"osd.audio_delay.later" = "Audio Delay: %.2fs Later";
-"osd.audio_delay.earlier" = "Audio Delay: %.2fs Earlier";
-"osd.sub_delay.nodelay" = "Subtitle Delay: No Delay";
-"osd.sub_delay.later" = "Subtitle Delay: %.2fs Later";
-"osd.sub_delay.earlier" = "Subtitle Delay: %.2fs Earlier";
-"osd.subtitle_pos" = "Subtitle Position: %.1f";
+"osd.crop" = "Vágás: %@";
+"osd.rotate" = "Elforgatás: %i°";
+"osd.deinterlace" = "Váltottsoros képszűrő: %@";
+"osd.hwdec" = "Hardveres dekódolás: %@";
+"osd.audio_delay.nodelay" = "Hangkésleltetés: Nincs késleltetés";
+"osd.audio_delay.later" = "Hangkésleltetés: %.2fmp-vel később";
+"osd.audio_delay.earlier" = "Hangkésleltetés: %.2fmp-vel hamarabb";
+"osd.sub_delay.nodelay" = "Felirat késleltetés: Nincs késleltetés";
+"osd.sub_delay.later" = "Felirat késleltetés: %.2fmp-vel később";
+"osd.sub_delay.earlier" = "Felirat késleltetés: %.2fmp-vel hamarabb";
+"osd.subtitle_pos" = "Felirat pozíciója: %.1f";
 "osd.mute" = "Némítás";
 "osd.unmute" = "Némítás feloldása";
 "osd.screenshot" = "Képernyőkép rögzítve";
-"osd.abloop.a" = "AB-Loop: A";
-"osd.abloop.b" = "AB-Loop: B";
-"osd.abloop.clear" = "AB-Loop: Cleared";
+"osd.abloop.a" = "AB-Ciklus: A";
+"osd.abloop.b" = "AB-Ciklus: B";
+"osd.abloop.clear" = "AB-Ciklus: Tiszta";
 "osd.stop" = "Leállítás";
 "osd.chapter" = "Fejezet: %@";
-"osd.subtitle_scale" = "Subtitle Scale: %.2fx";
-"osd.add_to_playlist" = "Added %i Files to Playlist";
+"osd.subtitle_scale" = "Felirat méret: %.2fx";
+"osd.add_to_playlist" = "%i fájl hozzáadva a lejátszási listához";
 "osd.clear_playlist" = "Lejátszási lista ürítése";
 "osd.video_eq.contrast" = "Kontraszt: %i";
 "osd.video_eq.gamma" = "Gamma: %i";
-"osd.video_eq.hue" = "Hue: %i";
+"osd.video_eq.hue" = "Színárnyalat: %i";
 "osd.video_eq.saturation" = "Telítettség: %i";
 "osd.video_eq.brightness" = "Fényerő: %i";
-"osd.find_online_sub" = "Finding online subtitles…";
-"osd.find_online_sub.source" = "from";
+"osd.find_online_sub" = "Online feliratok keresése…";
+"osd.find_online_sub.source" = "forrás";
 "osd.sub_not_found" = "Nem található felirat";
-"osd.sub_found" = "%d subtitles found. Downloading…";
-"osd.sub_downloaded" = "Subtitle downloaded";
-"osd.sub_saved" = "Subtitle saved";
-"osd.network_error" = "Network error";
-"osd.file_error" = "Error reading file";
-"osd.cannot_login" = "Cannot login";
-"osd.canceled" = "Canceled";
-"osd.filter_added" = "Added Filter: %@";
-"osd.filter_removed" = "Removed Filter";
+"osd.sub_found" = "%d felirat található. Letöltés…";
+"osd.sub_downloaded" = "Felirat letöltve";
+"osd.sub_saved" = "Felirat mentve";
+"osd.network_error" = "Hálózati hiba";
+"osd.file_error" = "Hiba a fájl olvasásakor";
+"osd.cannot_login" = "Sikertelen belépés";
+"osd.canceled" = "Megszakítva";
+"osd.filter_added" = "Szűrő hozzáadása: %@";
+"osd.filter_removed" = "Szűrő eltávolítása";
+"osd.file_loop" = "Fájl ismétlése: %@";
+"osd.playlist_loop" = "Lejátszási lista ismétlése: %@";
 
-"preference.title" = "Preferences";
-"preference.general" = "General";
-"preference.ui" = "UI";
+"preference.title" = "Beállítások";
+"preference.general" = "Általános";
+"preference.ui" = "Felhasználói felület";
 "preference.video_audio" = "Video/Audio";
-"preference.subtitle" = "Subtitle";
-"preference.network" = "Network";
-"preference.control" = "Control";
-"preference.keybindings" = "Key Bindings";
-"preference.advanced" = "Advanced";
-"preference.utilities" = "Utilities";
-"preference.scripts" = "Scripts";
-"preference.not_logged_in" = "Not logged in";
-"preference.logged_in_as" = "Logged in as %@";
-"preference.system_media_control" = "Use system media control";
+"preference.subtitle" = "Felirat";
+"preference.network" = "Hálózat";
+"preference.control" = "Vezérlés";
+"preference.keybindings" = "Gyorsgombok";
+"preference.advanced" = "Haladó";
+"preference.plugins" = "Plugins";
+"preference.utilities" = "Eszközök";
+"preference.scripts" = "Szkriptek";
+"preference.not_logged_in" = "Nem vagy bejelentkezve";
+"preference.logged_in_as" = "Bejelentkezve, mint %@";
+"preference.system_media_control" = "Rendszer média vezérlők használata";
 
-"preference.key_binding_hint_1" = "To edit key bindings in current configuration file, click \"Duplicate…\" button first to create a copy.";
-"preference.key_binding_hint_2" = "Double click a row at the right side to edit the corresponding key binding.";
+"preference.key_binding_hint_1" = "A billentyűkiosztás módosításához a jelenlegi fájlban, először nyomja meg a \"Duplikáció...\" gombot egy másolat létrehozásához.";
+"preference.key_binding_hint_2" = "Kattintson duplán egy sorra a jobb oldalon a megfelelő billentyű kiosztás szerkesztéséhez.";
 
-"preference.enable_adv_settings" = "Enable advanced settings";
+"preference.enable_adv_settings" = "Haladó beállítások engedélyezése";
 
-"menu.volume" = "Volume: %d";
-"menu.audio_delay" = "Audio Delay: %.2fs";
-"menu.sub_delay" = "Subtitle Delay: %.2fs";
-"menu.fullscreen" = "Enter Full Screen";
-"menu.exit_fullscreen" = "Exit Full Screen";
-"menu.pip" = "Enter Picture-in-Picture";
-"menu.exit_pip" = "Exit Picture-in-Picture";
-"menu.pause" = "Pause";
-"menu.resume" = "Resume";
-"menu.speed" = "Speed: %.2fx";
+"menu.volume" = "Hangerő: %d";
+"menu.audio_delay" = "Hangkésleltetés: %.2fmp-vel később";
+"menu.sub_delay" = "Felirat késleltetés: %.2fmp-vel később";
+"menu.fullscreen" = "Váltás teljes képernyőre";
+"menu.exit_fullscreen" = "Kilépés a teljes képernyős módból";
+"menu.pip" = "Kép a képben";
+"menu.exit_pip" = "Kilépés kép a képben módból";
+"menu.pause" = "Pause (Megállít)";
+"menu.resume" = "Folytatás";
+"menu.speed" = "Sebesség: %.2fx";
 
-"menu.seek_forward" = "Step Forward %.0fs";
-"menu.seek_backward" = "Step Backward %.0fs";
-"menu.speed_up" = "Speed Up by %.1fx";
-"menu.speed_down" = "Speed Down by %.1fx";
-"menu.volume_up" = "Volume + %.0f%%";
-"menu.volume_down" = "Volume - %.0f%%";
-"menu.audio_delay_up" = "Audio Delay + %.1fs";
-"menu.audio_delay_down" = "Audio Delay - %.1fs";
-"menu.sub_delay_up" = "Subtitle Delay + %.1fs";
-"menu.sub_delay_down" = "Subtitle Delay - %.1fs";
+"menu.seek_forward" = "Előre ugrás %.0f másodpercet";
+"menu.seek_backward" = "Hátra ugrás %.0f másodpercet";
+"menu.speed_up" = "Felgyorsítás %.1fx";
+"menu.speed_down" = "Lelassítás %.1fx";
+"menu.volume_up" = "Hangerő: %.0f";
+"menu.volume_down" = "Hangerő: %.0f";
+"menu.audio_delay_up" = "Hangkésleltetés + %.1f másodperccel";
+"menu.audio_delay_down" = "Hangkésleltetés: %.1fmp-el később";
+"menu.sub_delay_up" = "Felirat késleltetés + %.1f másodperccel";
+"menu.sub_delay_down" = "Felirat késleltetés - %.1f másodperccel";
 
-"menu.crop_custom" = "Custom...";
+"menu.crop_custom" = "Egyéni...";
+"menu.find_online_sub" = "Find Online Subtitles from %@";
 
 "track.none" = "<None>";
 
-"subtrack.no_loaded" = "No Subtitles Loaded";
-"subtrack.no_external" = "No External Subtitles Found";
+"subtrack.no_loaded" = "Nincs felirat betöltve";
+"subtrack.no_external" = "Nem található külsõ forrásból felirat";
 
 // Alerts
-"alert.beta_channel.title" = "Receive Updates for Beta Versions";
+"alert.beta_channel.title" = "Frissítések bekapcsolása Beta verzióra";
 
-"alert.title_error" = "Error";
-"alert.title_warning" = "Warning";
-"alert.title_info" = "Information";
+"alert.title_error" = "Hiba";
+"alert.title_warning" = "Figyelmeztetés";
+"alert.title_info" = "Információ";
 
-"alert.fatal_error" = "Fatal error: %@ \nThe application will exit now.";
-"alert.mpv_error" = "Internal error %@ (%@) when setting option %@.";
-"alert.sleep" = "Cannot prevent display sleep!";
+"alert.fatal_error" = "Kritikus hiba: %@\nAz alkalmazás bezárul.";
+"alert.mpv_error" = "Hiba történt %@ (%@) az opció %@ beállítása közben.";
+"alert.sleep" = "A kijelző alvó állapotát nem lehet megakadályozni!";
 
-"alert.unsupported_audio" = "Unsupported external audio file.";
-"alert.unsupported_sub" = "Unsupported external subtitle.";
-"alert.unsupported_url" = "Unsupported URL.";
-"alert.wrong_url_format" = "Wrong URL format.";
+"alert.unsupported_audio" = "Nem támogatott külsõ hang fájl.";
+"alert.unsupported_sub" = "Nem támogatott külsõ felirat.";
+"alert.unsupported_url" = "Nem támogatott URL.";
+"alert.wrong_url_format" = "Hibás URL formátum.";
 
-"alert.error_open" = "Cannot open file or stream!";
-"alert.error_finding_file" = "Cannot find %@ file!";
-"alert.error_loading_script" = "Cannot load script %@!";
-"alert.error_saving_file" = "Error occurred when saving %@: %@";
-"alert.error_deleting_file" = "Cannot delete the file.";
+"alert.error_open" = "Fájl vagy közvetítés megnyitás sikertelen!";
+"alert.error_finding_file" = "A fájl %@ nem található!";
+"alert.error_loading_script" = "A szkript %@ nem tölthetõ be!";
+"alert.error_saving_file" = "Hiba történt mentéskor %@: %@";
+"alert.error_deleting_file" = "Nem sikerült törölni a fájlt.";
 
-"alert.config.new.title" = "New Input Configuration";
-"alert.config.new.message" = "Please enter a name for the new configuration.";
-"alert.config.duplicate.title" = "Duplicate Configuration";
-"alert.config.duplicate.message" = "Please enter name for the duplicated configuration file.";
-"alert.config.empty_name" = "The name cannot be empty.";
-"alert.config.name_existing" = "The name already exists.";
-"alert.config.file_existing.title" = "File Already Exists";
-"alert.config.file_existing.message" = "This should not happen. Choose OK to overwrite, Cancel to reveal the file in Finder.";
-"alert.config.cannot_create" = "Cannot create config file!\n%@";
-"alert.config.cannot_write" = "Cannot write to config file!";
+"alert.config.new.title" = "Új beviteli konfiguráció";
+"alert.config.new.message" = "Kérlek adj nevet az új konfigurációnak.";
+"alert.config.duplicate.title" = "Konfiguráció duplikálása";
+"alert.config.duplicate.message" = "Kérlek adj nevet az új duplikált konfigurációnak.";
+"alert.config.empty_name" = "A név mező nem lehet üres.";
+"alert.config.name_existing" = "A név már létezik.";
+"alert.config.file_existing.title" = "A fájl már létezik";
+"alert.config.file_existing.message" = "Ennek nem szabadna megtörténnie. Kattints az OK gombra a felülíráshoz, a Mégse gombra a fájl felfedéséhez a Finderben.";
+"alert.config.cannot_create" = "Konfigurációs fájl nem hozható létre!\n%@";
+"alert.config.cannot_write" = "Konfigurációs fájl nem irható!";
 
-"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
-"alert.add_filter.title" = "New Filter";
-"alert.add_filter.message" = "Please enter a filter string in format of mpv's vf or af command.";
+"alert.filter.incorrect" = "Hiba történt a szűrők beállításakor. Kérjük, ellenőrizd le a paraméter formátumát.";
+"alert.add_filter.title" = "Új filter";
+"alert.add_filter.message" = "Adjon meg egy szűrő karakterláncot az mpv vf vagy af parancsának formátumában.";
 
-"alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
+"alert.keybinding_config.error" = "Hiba a \"%@\" billentyűkombinációs konfigurációs fájl elemzésekor! Visszatérés az IINA alapértelmezett billentyűkombinációjához. Kérjük, ellenőrizze a konfigurációt.";
 
-"alert.extra_option.cannot_read" = "Cannot read user defined extra mpv options.";
-"alert.extra_option.empty" = "Key or value cannot be empty!";
-"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
-"alert.extra_option.config_folder" = "Error setting config directory \"%@\".";
+"alert.extra_option.cannot_read" = "A felhasználó által meghatározott extra mpv beállítások nem olvashatók.";
+"alert.extra_option.empty" = "A kulcs vagy az érték nem lehet üres!";
+"alert.extra_option.error" = "Hiba a beállítás --%@=%@ %d visszatérési értékkel. Kérjük, ellenőrizze az extra beállításokat a Beállítások > Speciális oldalon.";
+"alert.extra_option.config_folder" = "Hiba a konfigurációs könyvtár beállításánál \"%@\".";
 
-"alert.playlist.error_deleting" = "Error deleting: %@";
+"alert.playlist.error_deleting" = "Hiba törlés közben %@";
 
-"alert.sub.no_selected" = "Please select a downloaded subtitle first.";
-"alert.sub_lang_not_set" = "Please set preferred subtitle languages in preferences before using OpenSubtitles. English(eng) will be used this time.";
-"alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
-"alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
+"alert.sub.no_selected" = "Kérjük, először válassz ki egy letöltött feliratot.";
+"alert.sub_lang_not_set" = "Kérjük, az OpenSubtitles használata előtt állítsd be a kívánt feliratnyelvet a beállításokban. Ezúttal az angol (eng) nyelvet használjuk.";
+"alert.sub.cannot_save_passwd" = "Nem lehet elmenteni a jelszavat a Kulcskarikában: %@";
+"alert.sub.cannot_login" = "Nem tudsz bejelentkezni. Kérjük, ellenőrizd a felhasználónevedet, jelszavadat és a hálózat állapotát.\n\n%@";
 
-"alert.set_default.title" = "Setting IINA as Default App";
-"alert.set_default.message" = "IINA will be set as the default app for all file types it supports.";
-"alert.set_default.success" = "Finished with %d success and %d failed.";
+"alert.set_default.title" = "IINA beállítása alapértelmezettként";
+"alert.set_default.message" = "Az IINA be lesz állítva mint alapértelmezett lejátszó az összes támogatott fájltípushoz.";
+"alert.set_default.success" = "Befejezve %d sikeres és %d sikertelen.";
 
-"alert.add_watch.title" = "Add Watch Property";
-"alert.add_watch.message" = "Please enter a valid mpv property name.";
+"alert.add_watch.title" = "Nézési tulajdonság hozzáadása";
+"alert.add_watch.message" = "Adj meg egy érvényes mpv tulajdonságnevet.";
 
-"alert.jump_to.title" = "Jump to";
-"alert.jump_to.message" = "Please enter the time you want to jump to. Example: 20:35";
+"alert.jump_to.title" = "Ugrás ide";
+"alert.jump_to.message" = "Kérlek adj meg időpontot ahova ugrani szeretnél. Példa: 20:35";
 
-"alert.opensub.login.title" = "OpenSubtitles Login";
-"alert.opensub.login.message" = "Please enter your username and password";
+"alert.opensub.login.title" = "OpenSubtitles bejelentkezés";
+"alert.opensub.login.message" = "Kérlek, add meg a felhasználóneved és jelszavad";
 
-"alert.open_url.title" = "Open URL";
-"alert.open_url.message" = "Please enter the URL:";
-"alert.choose_media_file.title" = "Choose Media Files";
+"alert.open_url.title" = "URL megnyitása";
+"alert.open_url.message" = "Kérlek add meg az URL-t:";
+"alert.choose_media_file.title" = "Média fájlok kiválasztása";
 
-"alert.add_url.title" = "Add URL";
-"alert.add_url.message" = "Please enter the URL:";
+"alert.add_url.title" = "URL hozzáadása";
+"alert.add_url.message" = "Kérlek add meg az URL-t:";
 
-"alert.delete_history.title" = "Delete Playback History";
-"alert.delete_history.message" = "Are you sure to delete selected entries?";
+"alert.delete_history.title" = "Lejátszási elõzmények törlése";
+"alert.delete_history.message" = "Biztosan törlöd a kijelölt elemeket?";
 
-"alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
-"alert.filter_hwdec.abort" = "Abort";
-"alert.filter_hwdec.turn_off" = "Turn off hardware decoding";
-"alert.filter_hwdec.use_copy" = "Switch to Auto(Copy)";
+"alert.filter_hwdec.message" = "Egy videószűrő alkalmazására készülsz. Előfordulhat azonban, hogy jelenlegi hardveres dekódered nem támogatja megfelelően a videoszűrőket. Letilthatod a hardveres dekódolást, vagy átválthatsz Auto(Másolás) módra, ami kétszer annyi memóriát fogyaszt.\nElőfordulhat, hogy meg kell ismételned az előző műveletet (például a kivágás beállítását), hogy működjön.";
+"alert.filter_hwdec.abort" = "Megszakítás";
+"alert.filter_hwdec.turn_off" = "Hardver dekódolás kikapcsolása";
+"alert.filter_hwdec.use_copy" = "Váltás automatikusra (másolás)";
 
-"alert.clear_cache.title" = "Clear Thumbnail Cache";
-"alert.clear_cache.message" = "Are you sure to clear all thumbnail Cache?";
+"alert.clear_cache.title" = "Indexkép gyorsító tár törlése";
+"alert.clear_cache.message" = "Biztosan törli az indexkép gyorsítót árat?";
 
-"alert.clear_history.title" = "Clear Playback History";
-"alert.clear_history.message" = "Are you sure to delete all playback history?";
+"alert.clear_history.title" = "Lejátszási elõzmények törlése";
+"alert.clear_history.message" = "Biztosan akarod törölni az összes lejátszási előzményeket?";
 
-"alert.clear_watch_later.title" = "Clear Saved Playback Progress";
-"alert.clear_watch_later.message" = "Are you sure to delete all saved playback progress (\"watch later\" data)?";
+"alert.clear_watch_later.title" = "Mentett lejátszási folyamat törlése";
+"alert.clear_watch_later.message" = "Biztos vagy benne, hogy törlöd az összes mentett lejátszási folyamatot (\"megtekintés később\" adatok)?";
 
-"alert.nothing_to_open" = "Nothing to open.";
+"alert.nothing_to_open" = "Nincs mit megnyitni.";
 
-"alert.no_video_track" = "There is no video track.";
+"alert.no_video_track" = "Nincs videó file.";
 
-"alert.duplicate_config" = "You cannot edit default configurations directly. Please duplicate one before editing.";
+"alert.duplicate_config" = "Az alapértelmezett konfigurációk közvetlenül nem szerkeszthetők. Szerkesztés előtt kettőzz meg egyet.";
 
-"alert.assrt_register" = "Due to limited API quota, you are strongly recommended to use your own API token. The default token is only for demo usage, and you may encounter network error.";
-"alert.assrt_register.register" = "Register Now";
-"alert.assrt_register.try" = "Try First";
-"alert.assrt_token_prompt.title" = "Enter your API token";
-"alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
-"alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
+"alert.assrt_register" = "A korlátozott API-kvóta miatt erősen ajánlott saját API-token használata. Az alapértelmezett token csak demóhasználatra szolgál, és hálózati hibába ütközhet.";
+"alert.assrt_register.register" = "Regisztráció most";
+"alert.assrt_register.try" = "Próbálja ki először";
+"alert.assrt_token_prompt.title" = "Adja meg az API Token-jét";
+"alert.assrt_token_prompt.message" = "Kérlek regisztrálj a megnyitott weboldalon. Szerezd meg a tokened a felhasználó főoldalán és írd be ide:";
+"alert.assrt_token_invalid" = "Az Assrt API tokened helytelen.";
 
-"playlist.total_length" = "%@ in total";
-"playlist.total_length_with_selected" = "%@ of %@ selected";
-"pl_menu.title_multi" = "%d Items";
-"pl_menu.play_next" = "Play Next";
-"pl_menu.play_in_new_window" = "Play in New Window";
-"pl_menu.remove" = "Remove";
-"pl_menu.remove_multi" = "Remove Selected";
-"pl_menu.delete" = "Move to Trash";
-"pl_menu.delete_multi" = "Move Selected Files to Trash";
-"pl_menu.delete_after_play" = "Move to Trash After Playback";
-"pl_menu.delete_after_play_multi" = "Move Selected Files to Trash After Playback";
-"pl_menu.reveal_in_finder" = "Reveal in Finder";
-"pl_menu.add_file" = "Add File…";
-"pl_menu.add_url" = "Add URL…";
-"pl_menu.clear_playlist" = "Clear Playlist";
-"pl_menu.matched_sub" = "Matched %d Subtitle(s)";
-"pl_menu.add_sub" = "Add Subtitle…";
-"pl_menu.wrong_sub" = "Wrong Subtitle!";
-"pl_menu.browser" = "Open in Browser";
-"pl_menu.copy_url" = "Copy URL";
-"pl_menu.copy_url_multi" = "Copy URLs";
+"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
+"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
+"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+"alert.plugin_no_update" = "No update found.";
+"alert.plugin_update_found.title" = "Update found for %@";
+"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
+"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
+"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
 
-"keymapping.title" = "Key Mapping";
-"keymapping.message" = "Press any key to record.";
+"playlist.total_length" = "%@ összesen";
+"playlist.total_length_with_selected" = "%@/%@ kiválasztva";
+"pl_menu.title_multi" = "%d elem";
+"pl_menu.play_next" = "Lejátszás következőként";
+"pl_menu.play_in_new_window" = "Lejátszás új ablakban";
+"pl_menu.remove" = "Eltávolítás";
+"pl_menu.remove_multi" = "Kijelölt elemek eltávolítása";
+"pl_menu.delete" = "Áthelyezés a kukába";
+"pl_menu.delete_multi" = "A kiválasztott fájlok áthelyezése a kukába";
+"pl_menu.delete_after_play" = "Áthelyezés a kukába lejátszás után";
+"pl_menu.delete_after_play_multi" = "Kiválasztott fájlok áthelyezése a kukába lejátszás után";
+"pl_menu.reveal_in_finder" = "Megjelenítés a Finder-ben";
+"pl_menu.add_file" = "Fájl hozzáadása…";
+"pl_menu.add_url" = "URL hozzáadása…";
+"pl_menu.clear_playlist" = "Lejátszási lista ürítése";
+"pl_menu.matched_sub" = "Megfelelő %d Felirat(ok)";
+"pl_menu.add_sub" = "Felirat hozzáadása…";
+"pl_menu.wrong_sub" = "Rossz felirat!";
+"pl_menu.browser" = "Megnyitás böngészőben";
+"pl_menu.copy_url" = "Az URL másolása";
+"pl_menu.copy_url_multi" = "Linkek másolása";
 
-"filter.video_filters" = "Video Filters";
-"filter.audio_filters" = "Audio Filters";
+"keymapping.title" = "Billentyűkiosztás";
+"keymapping.message" = "Nyomj egy gombot a felvételhez.";
 
-"hwdec.no" = "Disable hardware decoding.";
-"hwdec.auto" = "Enable hardware decoding. However, most of the video filters won't work properly.";
-"hwdec.auto-copy" = "Enable hardware decoding. It will consume double the memory but work with video filters.";
+"filter.video_filters" = "Videószűrők";
+"filter.audio_filters" = "Hangszűrők";
 
-"subencoding.auto" = "Auto detect";
+"hwdec.no" = "Hardver dekódolás kikapcsolása.";
+"hwdec.auto" = "Hardver dekódolás bekapcsolása. A legtöbb videószűrő azonban nem fog megfelelően működni.";
+"hwdec.auto-copy" = "Hardver dekódolás bekapcsolása. Dupla memóriát fogyaszt, de videoszűrőkkel működik.";
 
-"osc_toolbar.settings" = "Quick Settings";
-"osc_toolbar.playlist" = "Playlist and chapters";
-"osc_toolbar.pip" = "Toggle Picture-in-Picture";
-"osc_toolbar.full_screen" = "Toggle full screen";
-"osc_toolbar.music_mode" = "Enter music mode";
-"osc_toolbar.sub_track" = "Choose subtitle track";
+"subencoding.auto" = "Automatikus felismerés";
 
-"mini_player.album_art" = "Toggle album art";
-"mini_player.loop" = "Repeat";
-"mini_player.shuffle" = "Shuffle";
-"mini_player.remove" = "Remove from playlist";
-"mini_player.add" = "Add to playlist";
-"mini_player.delete" = "Delete all tracks from playlist";
-"mini_player.volume" = "Volume";
-"mini_player.close" = "Close music mode";
-"mini_player.back" = "Return to video mode";
+"osc_toolbar.settings" = "Gyorsbeállítások";
+"osc_toolbar.playlist" = "Lejátszás listák és fejezetek";
+"osc_toolbar.pip" = "Kép a képben";
+"osc_toolbar.full_screen" = "Váltás teljes képernyõre";
+"osc_toolbar.music_mode" = "Belépés \"zene\" módba";
+"osc_toolbar.sub_track" = "Válassz felirat sávot";
+
+"mini_player.album_art" = "Album borító váltás";
+"mini_player.loop" = "Ismétlés";
+"mini_player.shuffle" = "Véletlenszerű";
+"mini_player.remove" = "Eltávolítás a lejátszási listából";
+"mini_player.add" = "Hozzáadás a lejátszási listához";
+"mini_player.delete" = "Minden szám törlése a lejátszási listáról";
+"mini_player.volume" = "Hangerő";
+"mini_player.close" = "Zene mód bezárása";
+"mini_player.back" = "Vissza videó módba";
 
 // Touch bar
 
-"touchbar.ahead_15" = "15sec Ahead";
-"touchbar.ahead_30" = "30sec Ahead";
-"touchbar.back_15" = "15sec Back";
-"touchbar.back_30" = "30sec Back";
-"touchbar.next_video" = "Next Video";
-"touchbar.prev_video" = "Previous Video";
-"touchbar.increase_volume" = "Volume +";
-"touchbar.decrease_volume" = "Volume -";
-"touchbar.rewind" = "Rewind";
-"touchbar.fast_forward" = "Fast Forward";
-"touchbar.play_pause" = "Play / Pause";
-"touchbar.seek" = "Seek";
-"touchbar.time" = "Time Position";
-"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
-"touchbar.toggle_pip" = "Toggle Picture-in-Picture";
+"touchbar.ahead_15" = "15 másodperc előre";
+"touchbar.ahead_30" = "30 másodperc előre";
+"touchbar.back_15" = "15 másodperc hátra";
+"touchbar.back_30" = "30 másodperc hátra";
+"touchbar.next_video" = "Következő videó";
+"touchbar.prev_video" = "Előző videó";
+"touchbar.increase_volume" = "Hangerő +";
+"touchbar.decrease_volume" = "Hangerő -";
+"touchbar.rewind" = "Visszapörgetés";
+"touchbar.fast_forward" = "Gyors előretekerés";
+"touchbar.play_pause" = "Lejátszás / Megállítás";
+"touchbar.seek" = "Ugrás";
+"touchbar.time" = "Idő pozició";
+"touchbar.remainingTimeOrTotalDuration" = "Hátralévõ idõ / Teljes idõ";
+"touchbar.toggle_pip" = "Kép a képben";
+
+// Plugin permissions
+
+"permissions.network-request.name" = "Network Request";
+"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
+"permissions.network-request.any_site" = "Any site";
+"permissions.show-osd.name" = "Show OSD";
+"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
+"permissions.show-alert.name" = "Show Alerts";
+"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
+"permissions.video-overlay.name" = "Add overlay on videos";
+"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
+"permissions.file-system.name" = "Access the file system";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+
+"plugin.install" = "Install";
+"plugin.installed" = "Installed";
+"plugin.not_installed" = "Not Installed";
+"plugin.local" = "Installed locally";
+"alert.plugin.install_error" = "Error occured during the installation: %@";
+"alert.invalid_url" = "The URL is invalid.";
+"plugin.install_error.invalid_url" = "The URL is invalid.";
+"plugin.install_error.file_not_found" = "Cannot find the package file.";
+"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
+"plugin.check_for_updates" = "Check for Updates";
+"plugin.updating" = "Downloading update…";

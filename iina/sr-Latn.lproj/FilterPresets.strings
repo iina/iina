@@ -20,7 +20,7 @@
 "expand.h" = "Visina (podrazumevano: visina video-zapisa)";
 "expand.x" = "Početna vrednost X (podrazumevano: centar)";
 "expand.y" = "Početna vrednost Y (podrazumevano: centar)";
-"expand.aspect" = "Širenje do uklapanja u odnos širina/visina (npr. 4:3)";
+"expand.aspect" = "Širenje do uklapanja u razmeru (npr. 4/3)";
 "expand.round" = "Zaokrugljivanje tako da se može deliti ovom vrednošću";
 
 "sharpen" = "Izoštri";
@@ -43,7 +43,7 @@
 "hflip" = "Preslikaj";
 
 "lut3d" = "3D LUT";
-"lut3d.file" = "Datoteka";
+"lut3d.file" = "Putanja datoteke (možete i povući i otpustiti datoteku u okvir)";
 "lut3d.interp" = "Režim interpolacije";
 
 "custom_mpv" = "Prilagođeno (mpv)";

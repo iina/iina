@@ -2,22 +2,22 @@
 "0Gp-vj-UzY.title" = "Dole";
 
 /* Class = "NSMenuItem"; title = "0.5x video size"; ObjectID = "0eK-kv-btH"; */
-"0eK-kv-btH.title" = "0,5x velikost videa";
+"0eK-kv-btH.title" = "0,5× velikost videa";
 
 /* Class = "NSButtonCell"; title = "Customize…"; ObjectID = "1nM-AX-Ozm"; */
 "1nM-AX-Ozm.title" = "Přizpůsobit…";
 
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "2YJ-bg-OdR"; */
-"2YJ-bg-OdR.title" = " % obrazovky";
+"2YJ-bg-OdR.title" = "% obrazovky";
 
 /* Class = "NSTextFieldCell"; title = "Use left/right button for:"; ObjectID = "3CY-YS-rG6"; */
-"3CY-YS-rG6.title" = "Použít levé/pravé tlačítko na:";
+"3CY-YS-rG6.title" = "Použít levé/pravé tlačítko pro:";
 
 /* Class = "NSTextFieldCell"; title = "MB"; ObjectID = "3jK-z5-NDH"; */
 "3jK-z5-NDH.title" = "MB";
 
 /* Class = "NSMenuItem"; title = "Floating"; ObjectID = "7Dv-q2-5TV"; */
-"7Dv-q2-5TV.title" = "Vznášející se";
+"7Dv-q2-5TV.title" = "Plovoucí";
 
 /* Class = "NSTextFieldCell"; title = "Resize window to:"; ObjectID = "7td-lH-8aK"; */
 "7td-lH-8aK.title" = "Změnit velikost okna na:";
@@ -29,7 +29,7 @@
 "92n-Uq-o4G.title" = "dolnímu";
 
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "AE4-BD-wZi"; */
-"AE4-BD-wZi.title" = " % obrazovky";
+"AE4-BD-wZi.title" = "% obrazovky";
 
 /* Class = "NSTextFieldCell"; title = "Window:"; ObjectID = "AmS-Sl-b2h"; */
 "AmS-Sl-b2h.title" = "Okno:";
@@ -65,7 +65,7 @@
 "GYe-Y3-bOR.title" = "Maximální velikost cache:";
 
 /* Class = "NSMenuItem"; title = "1.5x video size"; ObjectID = "Goh-X4-4f1"; */
-"Goh-X4-4f1.title" = "1,5x velikost videa";
+"Goh-X4-4f1.title" = "1,5× velikost videa";
 
 /* Class = "NSButtonCell"; title = "Minimize"; ObjectID = "H1F-mm-Saq"; */
 "H1F-mm-Saq.title" = "Minimalizovat";
@@ -80,7 +80,7 @@
 "KJT-iG-2xc.title" = "Vpřed/vzad";
 
 /* Class = "NSMenuItem"; title = "1x video size"; ObjectID = "MR7-Ac-SAO"; */
-"MR7-Ac-SAO.title" = "1x velikost videa";
+"MR7-Ac-SAO.title" = "1× velikost videa";
 
 /* Class = "NSTextFieldCell"; title = "Auto hide after:"; ObjectID = "NUr-hY-gfo"; */
 "NUr-hY-gfo.title" = "Automaticky skrýt po:";
@@ -101,7 +101,7 @@
 "S8H-Xr-uVa.title" = "s";
 
 /* Class = "NSButtonCell"; title = "Always float on top while playing"; ObjectID = "SFX-ct-8MB"; */
-"SFX-ct-8MB.title" = "Vždy plovoucí v popředí během přehrávání";
+"SFX-ct-8MB.title" = "Během přehrávání vždy plovoucí v popředí";
 
 /* Class = "NSMenuItem"; title = "Speed"; ObjectID = "TWq-Xb-8Ee"; */
 "TWq-Xb-8Ee.title" = "Rychlost";
@@ -140,13 +140,13 @@
 "baY-O6-fcB.title" = "Přepnout obraz v obrazu minimalizováním/maximalizováním okna";
 
 /* Class = "NSMenuItem"; title = "2x video size"; ObjectID = "dUG-QD-CXL"; */
-"dUG-QD-CXL.title" = "2x velikost videa";
+"dUG-QD-CXL.title" = "2× velikost videa";
 
 /* Class = "NSButtonCell"; title = "Disabled"; ObjectID = "duf-3s-3bL"; */
 "duf-3s-3bL.title" = "Vypnuto";
 
 /* Class = "NSButtonCell"; title = "Use physical resolution on Retina displays"; ObjectID = "fsj-YE-OB7"; */
-"fsj-YE-OB7.title" = "Použít skutečné rozlišení na Retina monitorech";
+"fsj-YE-OB7.title" = "Použít skutečné rozlišení Retina displeje";
 
 /* Class = "NSTextFieldCell"; title = "On Screen Controller:"; ObjectID = "g06-Ja-Ot8"; */
 "g06-Ja-Ot8.title" = "Ovladač na obrazovce:";
@@ -170,7 +170,7 @@
 "mM7-1Q-FyL.title" = "Vzhled:";
 
 /* Class = "NSButtonCell"; title = "Snap to center when dragging"; ObjectID = "mdD-if-Wqw"; */
-"mdD-if-Wqw.title" = "Přochytit ke středu při táhnutí";
+"mdD-if-Wqw.title" = "Přichytit ke středu při táhnutí";
 
 /* Class = "NSMenuItem"; title = "Previous / Next Media"; ObjectID = "oJ8-74-L3z"; */
 "oJ8-74-L3z.title" = "Předchozí/další soubor";
@@ -200,7 +200,7 @@
 "suy-e8-j4i.title" = "Velikost textu:";
 
 /* Class = "NSMenuItem"; title = "fit the screen"; ObjectID = "vdi-lO-q6e"; */
-"vdi-lO-q6e.title" = "vyplnit obrazovku";
+"vdi-lO-q6e.title" = "přizpůsobit obrazovce";
 
 /* Class = "NSButtonCell"; title = "Enable OSD"; ObjectID = "xMh-SP-nkc"; */
 "xMh-SP-nkc.title" = "Povolit OSD";
@@ -209,7 +209,7 @@
 "xP1-Vh-27X.title" = "Panel nástrojů:";
 
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "xrJ-Um-BrJ"; */
-"xrJ-Um-BrJ.title" = " % obrazovky";
+"xrJ-Um-BrJ.title" = "% obrazovky";
 
 /* Class = "NSButtonCell"; title = "Hide"; ObjectID = "xtL-XT-xzb"; */
 "xtL-XT-xzb.title" = "Skrýt";

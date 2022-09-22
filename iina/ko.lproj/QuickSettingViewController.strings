@@ -1,8 +1,8 @@
 /* Class = "NSTextFieldCell"; title = "Speed:"; ObjectID = "1KQ-oZ-A2x"; */
-"1KQ-oZ-A2x.title" = "재생속도:";
+"1KQ-oZ-A2x.title" = "재생 속도";
 
 /* Class = "NSTextFieldCell"; title = "Width:"; ObjectID = "22j-ra-GAY"; */
-"22j-ra-GAY.title" = "두께:";
+"22j-ra-GAY.title" = "두께";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "3kI-6i-ujt"; */
 "3kI-6i-ujt.title" = "색상:";
@@ -23,7 +23,7 @@
 "ANn-CR-JOV.title" = "색상:";
 
 /* Class = "NSTextFieldCell"; title = "1x"; ObjectID = "B0I-bX-HZS"; */
-"B0I-bX-HZS.title" = "1x";
+"B0I-bX-HZS.title" = "1배";
 
 /* Class = "NSTextFieldCell"; title = "5s"; ObjectID = "C0t-gm-Tim"; */
 "C0t-gm-Tim.title" = "5초";
@@ -35,7 +35,7 @@
 "DdO-VX-HCz.title" = "0.25";
 
 /* Class = "NSTextFieldCell"; title = "0.25x"; ObjectID = "Ew1-N1-0Pi"; */
-"Ew1-N1-0Pi.title" = "0.25x";
+"Ew1-N1-0Pi.title" = "0.25배";
 
 /* Class = "NSTextFieldCell"; title = "BORDER"; ObjectID = "GlZ-YU-dNm"; */
 "GlZ-YU-dNm.title" = "외곽선";
@@ -116,7 +116,7 @@
 "eDl-Si-LSa.title" = "대비:";
 
 /* Class = "NSTextFieldCell"; title = "Hue:"; ObjectID = "eLh-fu-pMj"; */
-"eLh-fu-pMj.title" = "색조:";
+"eLh-fu-pMj.title" = "색조";
 
 /* Class = "NSTextFieldCell"; title = "Subtitle:"; ObjectID = "eXZ-HN-qL4"; */
 "eXZ-HN-qL4.title" = "자막:";
@@ -146,7 +146,7 @@
 "ldQ-YL-IEp.title" = "1x";
 
 /* Class = "NSTextFieldCell"; title = "Crop:"; ObjectID = "m9e-IB-IDJ"; */
-"m9e-IB-IDJ.title" = "화면 자르기:";
+"m9e-IB-IDJ.title" = "화면 자르기";
 
 /* Class = "NSMenuItem"; title = "2.5"; ObjectID = "nPr-QJ-Ty3"; */
 "nPr-QJ-Ty3.title" = "2.5";
@@ -155,16 +155,16 @@
 "p63-Nx-yJZ.title" = "16배속";
 
 /* Class = "NSTextFieldCell"; title = "Gamma:"; ObjectID = "r6x-z0-oFC"; */
-"r6x-z0-oFC.title" = "감마:";
+"r6x-z0-oFC.title" = "감마";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "s9l-Hb-SCk"; */
 "s9l-Hb-SCk.title" = "크기:";
 
 /* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "t03-36-Zge"; */
-"t03-36-Zge.title" = "위치:";
+"t03-36-Zge.title" = "위치";
 
 /* Class = "NSTextFieldCell"; title = "Rotation:"; ObjectID = "to3-rc-Agv"; */
-"to3-rc-Agv.title" = "회전:";
+"to3-rc-Agv.title" = "회전";
 
 /* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "uCX-EC-jXM"; */
 "uCX-EC-jXM.title" = "-5초";

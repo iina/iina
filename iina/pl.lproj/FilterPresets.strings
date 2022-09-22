@@ -21,7 +21,7 @@
 "expand.x" = "Początkowe X (domyślnie: środek)";
 "expand.y" = "Początkowe Y (domyślnie: środek)";
 "expand.aspect" = "Rozciągnij do proporcji (np.: 4/3)";
-"expand.round" = "Rundy w górę, aby podzielić przez tę wartość";
+"expand.round" = "Zaokrąglenie w górę, aby podzielić przez tą wartość";
 
 "sharpen" = "Wyostrzanie";
 "sharpen.msize" = "Rozmiar matrycy";
@@ -31,7 +31,7 @@
 "blur.msize" = "Rozmiar matrycy";
 "blur.amount" = "Wartość";
 
-"delogo" = "Delogo";
+"delogo" = "Usunięcie Logo";
 "delogo.w" = "Szerokość";
 "delogo.h" = "Wysokość";
 "delogo.x" = "Początek współrzędnej X";
@@ -43,7 +43,7 @@
 "hflip" = "Lustrzane odbicie";
 
 "lut3d" = "3D LUT";
-"lut3d.file" = "Plik";
+"lut3d.file" = "Ścieżka do pliku (można również przeciągnąć plik w pole wprowadzania)";
 "lut3d.interp" = "Tryb interpolacji";
 
 "custom_mpv" = "Własny (mpv)";

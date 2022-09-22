@@ -11,34 +11,34 @@
 "3XO-ks-TDg.title" = "PNG";
 
 /* Class = "NSButtonCell"; title = "Copy to clipboard"; ObjectID = "3gs-3w-rg6"; */
-"3gs-3w-rg6.title" = "Copy to clipboard";
+"3gs-3w-rg6.title" = "Kopier til udklipsholder";
 
 /* Class = "NSTextFieldCell"; title = "Options:"; ObjectID = "4Qe-7S-8xK"; */
-"4Qe-7S-8xK.title" = "Options:";
+"4Qe-7S-8xK.title" = "Indstillinger:";
 
 /* Class = "NSButtonCell"; title = "Enable \"Open Recent\" menu"; ObjectID = "55O-ik-ql6"; */
 "55O-ik-ql6.title" = "Aktiver \"Åben Senest\" menu";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "5RN-PV-pOZ"; */
-"5RN-PV-pOZ.title" = "Box";
+"5RN-PV-pOZ.title" = "Boks";
 
 /* Class = "NSButtonCell"; title = "Minimized/un-minimized"; ObjectID = "5Y9-bX-K0f"; */
 "5Y9-bX-K0f.title" = "Minimer/Maksimer";
 
 /* Class = "NSTextFieldCell"; title = "Playlist:"; ObjectID = "6TV-DG-503"; */
-"6TV-DG-503.title" = "Playlist:";
+"6TV-DG-503.title" = "Spilleliste:";
 
 /* Class = "NSTextFieldCell"; title = "Requires restarting IINA to take effect."; ObjectID = "8kU-8g-VgX"; */
 "8kU-8g-VgX.title" = "Kræver genstart af IINA for ændringe at træde i kraft.";
 
 /* Class = "NSButtonCell"; title = "Only in \"music mode\""; ObjectID = "AVe-9Z-RgQ"; */
-"AVe-9Z-RgQ.title" = "Only in \"music mode\"";
+"AVe-9Z-RgQ.title" = "Kun i \"musiktilstand\"";
 
 /* Class = "NSButtonCell"; title = "Track all played files in \"Open Recent\" menu"; ObjectID = "Ci8-j2-QS3"; */
 "Ci8-j2-QS3.title" = "Gem alle afsplillede filer i \"Åben senest\" menu";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "DZT-7n-S4M"; */
-"DZT-7n-S4M.title" = "Box";
+"DZT-7n-S4M.title" = "Boks";
 
 /* Class = "NSMenuItem"; title = "Daily"; ObjectID = "Ez8-qY-WAZ"; */
 "Ez8-qY-WAZ.title" = "Daglig";
@@ -62,7 +62,7 @@
 "KYi-0W-zOr.title" = "Gør andre skærme sorte under fuldskærmsvisning";
 
 /* Class = "NSButtonCell"; title = "Switch to \"music mode\" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
-"KfL-r7-Uav.title" = "Switch to \"music mode\" automatically when playing an audio file";
+"KfL-r7-Uav.title" = "Skift automatisk til \"musiktilstand\", når et lydarkiv afspilles";
 
 /* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
 "Lac-Ol-g6E.title" = "Afspil næste emne automatisk";
@@ -98,7 +98,7 @@
 "YeH-hk-7NN.title" = "/sti/til/screenshot/mappe";
 
 /* Class = "NSButtonCell"; title = "Receive beta updates"; ObjectID = "f0j-Dn-cxt"; */
-"f0j-Dn-cxt.title" = "Receive beta updates";
+"f0j-Dn-cxt.title" = "Modtag betaopdateringer";
 
 /* Class = "NSButtonCell"; title = "Pause upon leaving full screen"; ObjectID = "g2A-Kf-vct"; */
 "g2A-Kf-vct.title" = "Pause når fuldskærnsvisning afsluttes";
@@ -110,7 +110,7 @@
 "hWC-KJ-FuC.title" = "Tjek efter opdateringer";
 
 /* Class = "NSButtonCell"; title = "Pause when machine goes to sleep"; ObjectID = "i4A-86-dGC"; */
-"i4A-86-dGC.title" = "Pause when machine goes to sleep";
+"i4A-86-dGC.title" = "Sæt på pause når maskinen går på vågeblus";
 
 /* Class = "NSButtonCell"; title = "Enable playback history"; ObjectID = "iGS-qN-f5q"; */
 "iGS-qN-f5q.title" = "Aktiver playback historik";
@@ -121,8 +121,8 @@
 /* Class = "NSTextFieldCell"; title = "History:"; ObjectID = "jeK-46-2BG"; */
 "jeK-46-2BG.title" = "Historik:";
 
-/* Class = "NSButtonCell"; title = "Show artist and track name for audio files when available"; ObjectID = "kBI-Th-bBV"; */
-"kBI-Th-bBV.title" = "Show artist and track name for audio files when available";
+/* Class = "NSButtonCell"; title = "Show artist and track name for audio files when avaliable"; ObjectID = "kBI-Th-bBV"; */
+"kBI-Th-bBV.title" = "Vis navn på kunstner og spor for lydarkiver, når de er tilgængelige";
 
 /* Class = "NSButtonCell"; title = "Play upon entering full screen"; ObjectID = "lOw-pu-Llm"; */
 "lOw-pu-Llm.title" = "Afspil når fuldskærmsvisning påbegyndes";
@@ -134,7 +134,7 @@
 "oJY-Iz-3sO.title" = "Format:";
 
 /* Class = "NSTextFieldCell"; title = "Screenshots:"; ObjectID = "pdx-zt-kf2"; */
-"pdx-zt-kf2.title" = "Screenshots:";
+"pdx-zt-kf2.title" = "Skærmbilleder:";
 
 /* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "slG-Jb-54B"; */
 "slG-Jb-54B.title" = "Hver time";
@@ -146,7 +146,7 @@
 "uQR-Fx-oEm.title" = "Opførsel:";
 
 /* Class = "NSButtonCell"; title = "Show previews after taking screenshots"; ObjectID = "xE7-Uu-19f"; */
-"xE7-Uu-19f.title" = "Show previews after taking screenshots";
+"xE7-Uu-19f.title" = "Vis forhåndsvisninger efter at have taget skærmbilleder";
 
 /* Class = "NSTextFieldCell"; title = "Pause/resume when:"; ObjectID = "xr2-rB-O0x"; */
 "xr2-rB-O0x.title" = "Pause/play når:";

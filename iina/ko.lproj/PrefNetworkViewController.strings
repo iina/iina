@@ -5,7 +5,7 @@
 "0yu-5Q-363.title" = "기본 캐시 크기 (KB):";
 
 /* Class = "NSTextFieldCell"; title = "Custom youtube-dl path:"; ObjectID = "2qf-cC-Lfi"; */
-"2qf-cC-Lfi.title" = "사용자 youtube-dl 경로";
+"2qf-cC-Lfi.title" = "사용자 지정 youtube-dl 경로:";
 
 /* Class = "NSTextFieldCell"; title = "Default: 153600"; ObjectID = "3os-7u-lv8"; */
 "3os-7u-lv8.title" = "기본값: 153600";
@@ -35,7 +35,7 @@
 "cyH-Md-FAD.title" = "youtube-dl 사용";
 
 /* Class = "NSTextFieldCell"; title = "Cache buffer size (KB):"; ObjectID = "dDD-g3-54w"; */
-"dDD-g3-54w.title" = "캐시 버퍼 크기 (KB):";
+"dDD-g3-54w.title" = "캐시 버퍼 크기 (KB)";
 
 /* Class = "NSTextFieldCell"; title = "User agent:"; ObjectID = "eN6-Sk-kUa"; */
 "eN6-Sk-kUa.title" = "사용자 에이전트:";
@@ -53,4 +53,4 @@
 "yrh-Jm-Q4e.title" = "네트워크:";
 
 /* Class = "NSTextFieldCell"; title = "Raw options:"; ObjectID = "zCD-9d-ziV"; */
-"zCD-9d-ziV.title" = "추가 옵션";
+"zCD-9d-ziV.title" = "추가 옵션:";

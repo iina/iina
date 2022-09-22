@@ -22,7 +22,7 @@
 "guide.faq" = "자주 묻는 질문";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "준비중… %d%%";
+"main.buffering_indicator" = "버퍼링… %d%%";
 "main.opening_stream" = "스트림 여는 중…";
 "osc.precision" = "정밀도";
 "osc.1s" = "1초";
@@ -48,10 +48,10 @@
 "osd.deinterlace" = "디인터레이스: %@";
 "osd.hwdec" = "하드웨어 디코딩: %@";
 "osd.audio_delay.nodelay" = "오디오 지연: 없음";
-"osd.audio_delay.later" = "오디오 지연: %.2f초 늦게";
+"osd.audio_delay.later" = "오디오 지연: %.2f초 느리게";
 "osd.audio_delay.earlier" = "오디오 지연: %.2f초 빠르게";
 "osd.sub_delay.nodelay" = "자막 지연: 없음";
-"osd.sub_delay.later" = "자막 지연: %.2f초 늦게";
+"osd.sub_delay.later" = "자막 지연: %.2f초 느리게";
 "osd.sub_delay.earlier" = "자막 지연: %.2f초 빠르게";
 "osd.subtitle_pos" = "자막 위치: %.1f";
 "osd.mute" = "소리 끔";
@@ -82,6 +82,8 @@
 "osd.canceled" = "취소됨";
 "osd.filter_added" = "필터 추가됨: %@";
 "osd.filter_removed" = "필터 제거됨";
+"osd.file_loop" = "파일 반복: %@";
+"osd.playlist_loop" = "재생목록 반복: %@";
 
 "preference.title" = "환경설정";
 "preference.general" = "일반";
@@ -92,6 +94,7 @@
 "preference.control" = "컨트롤";
 "preference.keybindings" = "단축키";
 "preference.advanced" = "고급설정";
+"preference.plugins" = "Plugins";
 "preference.utilities" = "유틸리티";
 "preference.scripts" = "스크립트";
 "preference.not_logged_in" = "로그인되지 않음";
@@ -108,7 +111,7 @@
 "menu.sub_delay" = "자막 지연: %.2f초";
 "menu.fullscreen" = "전체 화면";
 "menu.exit_fullscreen" = "전체 화면에서 나가기";
-"menu.pip" = "화면 속 화면으로 가기";
+"menu.pip" = "화면 속 화면";
 "menu.exit_pip" = "화면 속 화면에서 나가기";
 "menu.pause" = "일시 정지";
 "menu.resume" = "재생";
@@ -118,14 +121,15 @@
 "menu.seek_backward" = "뒤로 탐색 %.0f초";
 "menu.speed_up" = "빠르게 재생 %.1f배";
 "menu.speed_down" = "느리게 재생 %.1f배";
-"menu.volume_up" = "음량 증가 %.0f%%";
-"menu.volume_down" = "음량 감소 %.0f%%";
-"menu.audio_delay_up" = "오디오 지연 + %.1f초";
-"menu.audio_delay_down" = "오디오 지연 - %.1f초";
-"menu.sub_delay_up" = "자막 지연 + %.1f초";
-"menu.sub_delay_down" = "자막 지연 - %.1f초";
+"menu.volume_up" = "음량 +%.0f%%";
+"menu.volume_down" = "음량 -%.0f%%";
+"menu.audio_delay_up" = "오디오 지연 +%.1f초";
+"menu.audio_delay_down" = "오디오 지연 -%.1f초";
+"menu.sub_delay_up" = "자막 지연 +%.1f초";
+"menu.sub_delay_down" = "자막 지연 -%.1f초";
 
 "menu.crop_custom" = "사용자 설정…";
+"menu.find_online_sub" = "Find Online Subtitles from %@";
 
 "track.none" = "<없음>";
 
@@ -197,11 +201,11 @@
 "alert.opensub.login.message" = "사용자 계정과 암호를 입력하십시오.";
 
 "alert.open_url.title" = "URL 열기";
-"alert.open_url.message" = "URL을 입력하십시오:";
+"alert.open_url.message" = "URL을 입력하십시오";
 "alert.choose_media_file.title" = "재생할 파일 선택";
 
 "alert.add_url.title" = "URL 추가";
-"alert.add_url.message" = "URL을 입력하십시오:";
+"alert.add_url.message" = "URL을 입력하십시오";
 
 "alert.delete_history.title" = "최근에 재생한 기록 삭제";
 "alert.delete_history.message" = "선택한 재생 기록을 삭제하시겠습니까?";
@@ -232,6 +236,15 @@
 "alert.assrt_token_prompt.title" = "API 토큰을 입력하십시오";
 "alert.assrt_token_prompt.message" = "열린 웹페이지에서 등록해 주십시오. 홈페이지의 사용자 설정에서 토큰을 발급받아 아래에 입력하십시오:";
 "alert.assrt_token_invalid" = "Assrt API 토큰을 잘못 입력한 것 같습니다.";
+
+"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
+"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
+"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+"alert.plugin_no_update" = "No update found.";
+"alert.plugin_update_found.title" = "Update found for %@";
+"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
+"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
+"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
 
 "playlist.total_length" = "전체 %@";
 "playlist.total_length_with_selected" = "%@ 선택됨 / 전체 %@";
@@ -301,3 +314,31 @@
 "touchbar.time" = "재생 위치";
 "touchbar.remainingTimeOrTotalDuration" = "남은 시간 / 총 지속시간";
 "touchbar.toggle_pip" = "화면 속 화면 전환/복귀";
+
+// Plugin permissions
+
+"permissions.network-request.name" = "Network Request";
+"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
+"permissions.network-request.any_site" = "Any site";
+"permissions.show-osd.name" = "Show OSD";
+"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
+"permissions.show-alert.name" = "Show Alerts";
+"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
+"permissions.video-overlay.name" = "Add overlay on videos";
+"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
+"permissions.file-system.name" = "Access the file system";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+
+"plugin.install" = "Install";
+"plugin.installed" = "Installed";
+"plugin.not_installed" = "Not Installed";
+"plugin.local" = "Installed locally";
+"alert.plugin.install_error" = "Error occured during the installation: %@";
+"alert.invalid_url" = "The URL is invalid.";
+"plugin.install_error.invalid_url" = "The URL is invalid.";
+"plugin.install_error.file_not_found" = "Cannot find the package file.";
+"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
+"plugin.check_for_updates" = "Check for Updates";
+"plugin.updating" = "Downloading update…";

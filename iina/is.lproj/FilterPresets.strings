@@ -10,20 +10,20 @@
 
 
 "crop" = "Klippa";
-"crop.w" = "Width (default: video width)";
-"crop.h" = "Height (default: video height)";
-"crop.x" = "Origin X (default: center)";
-"crop.y" = "Origin Y (default: center)";
+"crop.w" = "Breidd (sjálfgefið: vídeóbreidd)";
+"crop.h" = "Hæð (sjálfgefið: myndhæð)";
+"crop.x" = "Uppruni X (sjálfgefið: miðja)";
+"crop.y" = "Uppruni Y (sjálfgefið: miðja)";
 
-"expand" = "Expand";
-"expand.w" = "Width (default: video width)";
-"expand.h" = "Height (default: video height)";
-"expand.x" = "Origin X (default: center)";
-"expand.y" = "Origin Y (default: center)";
-"expand.aspect" = "Expands to fit an aspect (e.g: 4/3)";
-"expand.round" = "Rounds up to make divisible by this value";
+"expand" = "Stækkaðu";
+"expand.w" = "Breidd (sjálfgefið: vídeóbreidd)";
+"expand.h" = "Hæð (sjálfgefið: myndhæð)";
+"expand.x" = "Uppruni X (sjálfgefið: miðja)";
+"expand.y" = "Uppruni Y (sjálfgefið: miðja)";
+"expand.aspect" = "Stækkar til að passa við þætti (td: 4/3)";
+"expand.round" = "Hringir upp til að gera deilanlegt eftir þessu gildi";
 
-"sharpen" = "Sharpen";
+"sharpen" = "Skerpa";
 "sharpen.msize" = "Fylkja stærð";
 "sharpen.amount" = "Upphæð";
 
@@ -43,13 +43,13 @@
 "hflip" = "Spegla";
 
 "lut3d" = "3D LUT";
-"lut3d.file" = "File path (you can also drag & drop the file into the input box)";
-"lut3d.interp" = "Interpolation mode";
+"lut3d.file" = "Skráarslóð (þú getur líka dregið og sleppt skránni í inntakskassann)";
+"lut3d.interp" = "Interpolation ham";
 
-"custom_mpv" = "Custom (mpv)";
+"custom_mpv" = "Sérsniðin (mpv)";
 "custom_mpv.name" = "Sía nafn";
 "custom_mpv.string" = "Sía gildi";
 
-"custom_ffmpeg" = "Custom (FFmpeg)";
-"custom_ffmpeg.name" = "Filter name";
-"custom_ffmpeg.string" = "Filter value";
+"custom_ffmpeg" = "Sérsniðin (FFmpeg)";
+"custom_ffmpeg.name" = "Sía nafn";
+"custom_ffmpeg.string" = "Sígildi";

@@ -1,0 +1,344 @@
+/*
+  String_ui.strings
+  iina
+
+  Created by lhc on 3/1/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+// Common
+
+"general.on" = "Aan";
+"general.off" = "Af";
+"general.login" = "Teken aan";
+"general.logout" = "Teken af";
+"general.ok" = "Goed";
+"general.cancel" = "Kanselleer";
+"general.username" = "Gebruikersnaam";
+"general.password" = "Wagwoord";
+
+// Guide Window
+"guide.highlights" = "Hoogtepunte";
+"guide.basic_settings" = "Basiese instellings";
+"guide.faq" = "Gereelde vrae";
+
+// MainWindowController.swift
+"main.buffering_indicator" = "Bufferwerking… %d%%";
+"main.opening_stream" = "Open tans stroom…";
+"osc.precision" = "Presisie";
+"osc.1s" = "1 sekonde";
+"osc.100ms" = "100 millisekondes";
+"osc.10ms" = "10 millisekondes";
+"osc.1ms" = "1 millisekonde";
+
+// QuickSettingViewController.swift
+"quicksetting.item_default" = "Verstek";
+"quicksetting.item_none" = "Geen";
+"quicksetting.hwdec" = "Apparatuurdekodering";
+"quicksetting.deinterlace" = "Deïnterlinieer";
+"quicksetting.hdr" = "HDR";
+
+// OSDMessage.swift
+"osd.pause" = "Wag";
+"osd.resume" = "Hervat";
+"osd.volume" = "Volume: %i";
+"osd.speed" = "Snelheid: %.2fx";
+"osd.aspect" = "Aspekverhouding: %@";
+"osd.crop" = "Snoei: %@";
+"osd.rotate" = "Roteer: %i°";
+"osd.deinterlace" = "Deïnterlinieer: %@";
+"osd.hwdec" = "Apparatuurdekodering: %@";
+"osd.audio_delay.nodelay" = "Geen oudiovertraging";
+"osd.audio_delay.later" = "Oudio vertraag met %.2fs";
+"osd.audio_delay.earlier" = "Oudio versnel met %.2fs";
+"osd.sub_delay.nodelay" = "Geen onderskrifvertraging";
+"osd.sub_delay.later" = "Onderskrif vertraag met %.2fs";
+"osd.sub_delay.earlier" = "Onderskrif versnel met %.2fs";
+"osd.subtitle_pos" = "Onderskrifposisie: %.1f";
+"osd.mute" = "Demp";
+"osd.unmute" = "Ontdemp";
+"osd.screenshot" = "Skermkiekie geneem";
+"osd.abloop.a" = "AB-lus: A";
+"osd.abloop.b" = "AB-lus: B";
+"osd.abloop.clear" = "AB-lus: opgehef";
+"osd.stop" = "Stop";
+"osd.chapter" = "Hoofstuk: %@";
+"osd.subtitle_scale" = "Onderskrifskaal: %.2fx";
+"osd.add_to_playlist" = "%i lêers tot afspeellys toegevoeg";
+"osd.clear_playlist" = "Afspeellys gewis";
+"osd.video_eq.contrast" = "Kontras: %i";
+"osd.video_eq.gamma" = "Gamma: %i";
+"osd.video_eq.hue" = "Tint: %i";
+"osd.video_eq.saturation" = "Versadiging: %i";
+"osd.video_eq.brightness" = "Helderheid: %i";
+"osd.find_online_sub" = "Soek aanlyn na onderskrifte…";
+"osd.find_online_sub.source" = "vanaf";
+"osd.sub_not_found" = "Geen onderskrifte gevind";
+"osd.sub_found" = "%d onderskrifte gevind. Laai tans af…";
+"osd.sub_downloaded" = "Onderskrif afgelaai";
+"osd.sub_saved" = "Onderskrif bewaar";
+"osd.network_error" = "Netwerkfout";
+"osd.file_error" = "Lêerleesfout";
+"osd.cannot_login" = "Kan nie aanteken nie";
+"osd.canceled" = "Gekanselleer";
+"osd.filter_added" = "Filter toegevoeg: %@";
+"osd.filter_removed" = "Filter verwyder";
+"osd.file_loop" = "Herhaal lêer: %@";
+"osd.playlist_loop" = "Herhaal afspeellys: %@";
+
+"preference.title" = "Voorkeure";
+"preference.general" = "Algemeen";
+"preference.ui" = "Koppelvlak";
+"preference.video_audio" = "Video/Oudio";
+"preference.subtitle" = "Onderskrif";
+"preference.network" = "Netwerk";
+"preference.control" = "Beheer";
+"preference.keybindings" = "Sneltoetse";
+"preference.advanced" = "Gevorderd";
+"preference.plugins" = "Plugins";
+"preference.utilities" = "Nutsmiddels";
+"preference.scripts" = "Skripte";
+"preference.not_logged_in" = "Nie aangeteken nie";
+"preference.logged_in_as" = "Aangeteken as %@";
+"preference.system_media_control" = "Gebruik stelsel se mediabeheer";
+
+"preference.key_binding_hint_1" = "Kies “Dupliceer…” om ’n bewerkbare kopie te maak van die gekose sneltoetskonfigurasie.";
+"preference.key_binding_hint_2" = "Dubbelklik op ’n ry om die bybehorende sneltoets te bewerk.";
+
+"preference.enable_adv_settings" = "Aktiveer gevorderde instellings";
+
+"menu.volume" = "Volume: %d";
+"menu.audio_delay" = "Oudiovertraging: %.2fs";
+"menu.sub_delay" = "Onderskrifvertraging: %.2fs";
+"menu.fullscreen" = "Gaan in volskerm";
+"menu.exit_fullscreen" = "Verlaat volskerm";
+"menu.pip" = "Aktiveer Beeld-in-beeld";
+"menu.exit_pip" = "Verlaat Beeld-in-beeld";
+"menu.pause" = "Wag";
+"menu.resume" = "Hervat";
+"menu.speed" = "Snelheid: %.2fx";
+
+"menu.seek_forward" = "Gaan %.0fs vorentoe";
+"menu.seek_backward" = "Gaan %.0fs terug";
+"menu.speed_up" = "Versnel met %.1fx";
+"menu.speed_down" = "Vertraag met %.1fx";
+"menu.volume_up" = "Volume + %.0f%%";
+"menu.volume_down" = "Volume - %.0f%%";
+"menu.audio_delay_up" = "Oudiovertraging + %.1fs";
+"menu.audio_delay_down" = "Oudiovertraging - %.1fs";
+"menu.sub_delay_up" = "Onderskrifvertraging + %.1fs";
+"menu.sub_delay_down" = "Onderskrifvertraging - %.1fs";
+
+"menu.crop_custom" = "Pasgemaak…";
+"menu.find_online_sub" = "Find Online Subtitles from %@";
+
+"track.none" = "<Geen>";
+
+"subtrack.no_loaded" = "Geen onderskrifte afgelaai";
+"subtrack.no_external" = "Geen eksterne onderskrifte gevind";
+
+// Alerts
+"alert.beta_channel.title" = "Ontvang bywerkings vir betaweergawes";
+
+"alert.title_error" = "Fout";
+"alert.title_warning" = "Waarskuwing";
+"alert.title_info" = "Inligting";
+
+"alert.fatal_error" = "Fatale fout: %@ \nDie toepassing sal nou afsluit.";
+"alert.mpv_error" = "Interne fout: %@ (%@) by die instel van opsie %@.";
+"alert.sleep" = "Kan nie voorkom dat skerm slaap nie!";
+
+"alert.unsupported_audio" = "Onondersteunde eksterne oudiolêer.";
+"alert.unsupported_sub" = "Onondersteunde eksterne onderskrif.";
+"alert.unsupported_url" = "Onondersteunde bronadres.";
+"alert.wrong_url_format" = "Verkeerde bronadresformaat.";
+
+"alert.error_open" = "Kan nie lêer of stroom open nie!";
+"alert.error_finding_file" = "Kan nie %@ lêer vind nie!";
+"alert.error_loading_script" = "Kan nie skrip %@ laai nie!";
+"alert.error_saving_file" = "Fout by die bewaar van %@: %@";
+"alert.error_deleting_file" = "Kan nie lêer skrap nie.";
+
+"alert.config.new.title" = "Nuwe sneltoetskonfigurasie";
+"alert.config.new.message" = "Voer ’n naam vir die nuwe konfigurasie in.";
+"alert.config.duplicate.title" = "Duplikaat konfigurasie";
+"alert.config.duplicate.message" = "Voer ’n naam vir die gedupliseerde konfigurasielêer in.";
+"alert.config.empty_name" = "Die naam mag nie leeg wees nie.";
+"alert.config.name_existing" = "Die naam bestaan reeds.";
+"alert.config.file_existing.title" = "Lêer bestaan reeds";
+"alert.config.file_existing.message" = "Dit behoort nie te gebeur nie. Kies Goed om oor te skryf, Kanselleer om die lêer in Finder te toon.";
+"alert.config.cannot_create" = "Kan nie konfigurasielêer skep nie!\n%@";
+"alert.config.cannot_write" = "Kan nie konfigurasielêer skryf nie!";
+
+"alert.filter.incorrect" = "Fout by die instel van filters. Gaan asb. u parameterformaat na.";
+"alert.add_filter.title" = "Nuwe filter";
+"alert.add_filter.message" = "Voer asb. ’n filterstring in die formaat van mpv se vf- of af-bevel in.";
+
+"alert.keybinding_config.error" = "Fout by die lees van sneltoetskonfigurasielêer “%@”! Die IINA-verstekinstellings word teruggestel. Gaan u konfigurasie na.";
+
+"alert.extra_option.cannot_read" = "Kan nie gebruikergedefinieerde mpv-opsies lees nie.";
+"alert.extra_option.empty" = "Naam en waarde kan nie leeg wees nie!";
+"alert.extra_option.error" = "Fout by die instelle van opsie --%@=%@ met retoerwaarde %d. Gaan u bykomende-opsie-instellings na in Voorkeure > Gevorderd.";
+"alert.extra_option.config_folder" = "Fout tydens instel van konfigurasiegids “%@”.";
+
+"alert.playlist.error_deleting" = "Fout tydens skrap: %@";
+
+"alert.sub.no_selected" = "Kies asb. eers ’n afgelaaide onderskrif.";
+"alert.sub_lang_not_set" = "Stel asb. eers ’n voorkeuronderskriftaal in instellings voor OpenSubtitles gebruik word. Engels (‘eng’) sal nou gebruik word.";
+"alert.sub.cannot_save_passwd" = "Kan nie wagwoord in u Sleutelhouer bewaar nie: %@";
+"alert.sub.cannot_login" = "Kan nie aanteken nie. Gaan u gebruikersnaam, wagwoord en netwerkstatus na.\n\n%@";
+
+"alert.set_default.title" = "IINA word as verstektoep ingestel";
+"alert.set_default.message" = "IINA sal ingestel word as die verstektoep vir alle ondersteunde lêertipes.";
+"alert.set_default.success" = "Klaar met %d suksesse en %d mislukkings.";
+
+"alert.add_watch.title" = "Voeg waarde toe om te volg";
+"alert.add_watch.message" = "Voer ’n geldige mpv-eienskapnaam in.";
+
+"alert.jump_to.title" = "Spring na";
+"alert.jump_to.message" = "Voer die tyd in waarheen u wil spring. Voobeeld: 20:35";
+
+"alert.opensub.login.title" = "OpenSubtitles-aantekening";
+"alert.opensub.login.message" = "Voer u gebruikersnaam en wagwoord in";
+
+"alert.open_url.title" = "Open bronadres";
+"alert.open_url.message" = "Voer die bronadres in:";
+"alert.choose_media_file.title" = "Kies medialêers";
+
+"alert.add_url.title" = "Voeg bronadres toe";
+"alert.add_url.message" = "Voer die bronadres in:";
+
+"alert.delete_history.title" = "Skrap afspeelgeskiedenis";
+"alert.delete_history.message" = "Is u seker u wil die gekose inskrywings skrap?";
+
+"alert.filter_hwdec.message" = "U is op die punt om ’n videofilter toe te pas. U huidige apparatuurdekodeerder ondersteun dit dalk nie goed nie. U kan apparatuurdekodering óf deaktiveer óf na Outomaties(Kopieer) wissel wat dubbel die geheue sal gebruik.\nU gaan dalk die vorige bewerking (soos die snoei) moet herhaal sodat dit kan werk.";
+"alert.filter_hwdec.abort" = "Staak";
+"alert.filter_hwdec.turn_off" = "Deaktiveer apparatuurdekodering";
+"alert.filter_hwdec.use_copy" = "Skakel oor na Outomaties (Kopieer)";
+
+"alert.clear_cache.title" = "Wis duimnaelkasgeheue";
+"alert.clear_cache.message" = "Is u seker u wil alle duimnaelkasgeheue wis?";
+
+"alert.clear_history.title" = "Wis afspeelgeskiedenis";
+"alert.clear_history.message" = "Is u seker u wil alle afspeelgeskiedenis wis?";
+
+"alert.clear_watch_later.title" = "Wis bewaarde afspeelposisies";
+"alert.clear_watch_later.message" = "Is u seker u wil alle bewaarde afspeelposisie wis (“kyk-later”-data)?";
+
+"alert.nothing_to_open" = "Niks om te open nie.";
+
+"alert.no_video_track" = "Daar is geen videosnit nie.";
+
+"alert.duplicate_config" = "U kan nie verstekkonfigurasies direk wysig nie. Dupliseer een alvorens u dit wysig.";
+
+"alert.assrt_register" = "Weens beperkte API-kwota word u ten sterkste aanbeveel om u eie API-teken te gebruik. Die verstekteken is slegs vir demonstrasiegebruik en u kan ’n netwerkfout teëkom.";
+"alert.assrt_register.register" = "Registreer nou";
+"alert.assrt_register.try" = "Probeer eers";
+"alert.assrt_token_prompt.title" = "Voer u API-teken in";
+"alert.assrt_token_prompt.message" = "Registreer asb. in die geopende webblad. Kry u teken in u gebruikerstuisblad en voer dit hier onder in:";
+"alert.assrt_token_invalid" = "U Assrt API-teken blyk ongeldig te wees.";
+
+"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
+"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
+"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+"alert.plugin_no_update" = "No update found.";
+"alert.plugin_update_found.title" = "Update found for %@";
+"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
+"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
+"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+
+"playlist.total_length" = "%@ in totaal";
+"playlist.total_length_with_selected" = "%@ van %@ geselekteer";
+"pl_menu.title_multi" = "%d items";
+"pl_menu.play_next" = "Speel volgende af";
+"pl_menu.play_in_new_window" = "Speel af in nuwe venster";
+"pl_menu.remove" = "Verwyder";
+"pl_menu.remove_multi" = "Verwyder gekose";
+"pl_menu.delete" = "Skuif na asblik";
+"pl_menu.delete_multi" = "Skuif gekose lêers na asblik";
+"pl_menu.delete_after_play" = "Skuif na asblik na afspeel";
+"pl_menu.delete_after_play_multi" = "Skuif gekose lêers na Asblik na afspeel";
+"pl_menu.reveal_in_finder" = "Toon in Finder";
+"pl_menu.add_file" = "Voeg lêer toe…";
+"pl_menu.add_url" = "Voeg bronadres toe…";
+"pl_menu.clear_playlist" = "Wis afspeellys";
+"pl_menu.matched_sub" = "%d onderskrif(te) gevind";
+"pl_menu.add_sub" = "Voeg onderskrif toe…";
+"pl_menu.wrong_sub" = "Verkeerde onderskrif!";
+"pl_menu.browser" = "Open in blaaier";
+"pl_menu.copy_url" = "Kopieer bronadres";
+"pl_menu.copy_url_multi" = "Kopieer bronadresse";
+
+"keymapping.title" = "Sneltoetse";
+"keymapping.message" = "Druk enige toets om op te neem.";
+
+"filter.video_filters" = "Videofilters";
+"filter.audio_filters" = "Oudiofilters";
+
+"hwdec.no" = "Deaktiveer apparatuurdekodering.";
+"hwdec.auto" = "Aktiveer apparatuurdekodering. Die meeste videofilters sal egter nie na behore werk nie.";
+"hwdec.auto-copy" = "Aktiveer apparatuurdekodering. Dit sal geheueverbruik verdubbel maar met videofilters werk.";
+
+"subencoding.auto" = "Bespeur outomaties";
+
+"osc_toolbar.settings" = "Kitsinstellings";
+"osc_toolbar.playlist" = "Afspeellys en hoofstukke";
+"osc_toolbar.pip" = "Tokkel Beeld-in-beeld";
+"osc_toolbar.full_screen" = "Tokkel volskerm";
+"osc_toolbar.music_mode" = "Gaan in musiekmodus";
+"osc_toolbar.sub_track" = "Kies onderskrifsnit";
+
+"mini_player.album_art" = "Tokkel albumkuns";
+"mini_player.loop" = "Herhaal";
+"mini_player.shuffle" = "Skommel";
+"mini_player.remove" = "Verwyder uit afspeellys";
+"mini_player.add" = "Voeg toe tot afspeellys";
+"mini_player.delete" = "Skrap alle snitte uit afspeellys";
+"mini_player.volume" = "Volume";
+"mini_player.close" = "Sluit musiekmodus";
+"mini_player.back" = "Keer terug na videomodus";
+
+// Touch bar
+
+"touchbar.ahead_15" = "15sek vorentoe";
+"touchbar.ahead_30" = "30sek vorentoe";
+"touchbar.back_15" = "15sek terug";
+"touchbar.back_30" = "30sek terug";
+"touchbar.next_video" = "Volgende video";
+"touchbar.prev_video" = "Vorige video";
+"touchbar.increase_volume" = "Volume +";
+"touchbar.decrease_volume" = "Volume -";
+"touchbar.rewind" = "Spoel terug";
+"touchbar.fast_forward" = "Spoel vorentoe";
+"touchbar.play_pause" = "Speel af/wag";
+"touchbar.seek" = "Vorentoe/terugspoel";
+"touchbar.time" = "Tydposisie";
+"touchbar.remainingTimeOrTotalDuration" = "Oorblywende tyd / Totale duur";
+"touchbar.toggle_pip" = "Tokkel Beeld-in-beeld";
+
+// Plugin permissions
+
+"permissions.network-request.name" = "Network Request";
+"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
+"permissions.network-request.any_site" = "Any site";
+"permissions.show-osd.name" = "Show OSD";
+"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
+"permissions.show-alert.name" = "Show Alerts";
+"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
+"permissions.video-overlay.name" = "Add overlay on videos";
+"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
+"permissions.file-system.name" = "Access the file system";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+
+"plugin.install" = "Install";
+"plugin.installed" = "Installed";
+"plugin.not_installed" = "Not Installed";
+"plugin.local" = "Installed locally";
+"alert.plugin.install_error" = "Error occured during the installation: %@";
+"alert.invalid_url" = "The URL is invalid.";
+"plugin.install_error.invalid_url" = "The URL is invalid.";
+"plugin.install_error.file_not_found" = "Cannot find the package file.";
+"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
+"plugin.check_for_updates" = "Check for Updates";
+"plugin.updating" = "Downloading update…";

@@ -2,181 +2,181 @@
 "0aU-O1-R6G.title" = "Assrt API token:";
 
 /* Class = "NSTextFieldCell"; title = "Online Subtitles:"; ObjectID = "0fB-es-DmV"; */
-"0fB-es-DmV.title" = "Online Subtitles:";
+"0fB-es-DmV.title" = "Online feliratok:";
 
 /* Class = "NSMenuItem"; title = "Top"; ObjectID = "1Tq-5k-o6R"; */
-"1Tq-5k-o6R.title" = "Top";
+"1Tq-5k-o6R.title" = "Felül";
 
 /* Class = "NSButtonCell"; title = "Display subtitles in letterboxes while in full screen"; ObjectID = "2XY-Un-0Fg"; */
-"2XY-Un-0Fg.title" = "Display subtitles in letterboxes while in full screen";
+"2XY-Un-0Fg.title" = "Feliratok megjelenítése a letterbox stílusban teljes képernyőn";
 
 /* Class = "NSTextFieldCell"; title = "strip"; ObjectID = "3H8-Ei-cTm"; */
-"3H8-Ei-cTm.title" = "strip";
+"3H8-Ei-cTm.title" = "csík";
 
 /* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "4Tb-Yh-PdP"; */
-"4Tb-Yh-PdP.title" = "Position:";
+"4Tb-Yh-PdP.title" = "Pozíció:";
 
 /* Class = "NSMenuItem"; title = "Bottom"; ObjectID = "6i0-Sx-V7F"; */
-"6i0-Sx-V7F.title" = "Bottom";
+"6i0-Sx-V7F.title" = "Alul";
 
 /* Class = "NSTextFieldCell"; title = "Subtitles have priority when filename containing:"; ObjectID = "7pf-Kb-TNr"; */
-"7pf-Kb-TNr.title" = "Subtitles have priority when filename containing:";
+"7pf-Kb-TNr.title" = "A feliratok elsőbbséget élveznek, ha a fájlnév tartalmazza:";
 
 /* Class = "NSButtonCell"; title = "Scale subtitles with window size"; ObjectID = "8hj-ki-R0h"; */
-"8hj-ki-R0h.title" = "Scale subtitles with window size";
+"8hj-ki-R0h.title" = "Feliratok méretezése az ablakmérettel";
 
 /* Class = "NSTextFieldCell"; title = "Font spacing:"; ObjectID = "9EP-XB-lyO"; */
-"9EP-XB-lyO.title" = "Font spacing:";
+"9EP-XB-lyO.title" = "Betűtávolság:";
 
 /* Class = "NSTextFieldCell"; title = "Vertical position:"; ObjectID = "9N4-Zg-M7m"; */
-"9N4-Zg-M7m.title" = "Vertical position:";
+"9N4-Zg-M7m.title" = "Függőleges elhelyezkedés:";
 
 /* Class = "NSBox"; title = "Font"; ObjectID = "9pv-1r-nuH"; */
-"9pv-1r-nuH.title" = "Font";
+"9pv-1r-nuH.title" = "Betütípus";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "ALz-LB-8sf"; */
 "ALz-LB-8sf.title" = "Y:";
 
 /* Class = "NSBox"; title = "Shadow"; ObjectID = "BgE-Kk-MXC"; */
-"BgE-Kk-MXC.title" = "Shadow";
+"BgE-Kk-MXC.title" = "Árnyék";
 
 /* Class = "NSButtonCell"; title = "Search online subtitles automatically"; ObjectID = "C3p-uP-8u8"; */
-"C3p-uP-8u8.title" = "Search online subtitles automatically";
+"C3p-uP-8u8.title" = "Feliratok automatikus keresése online";
 
 /* Class = "NSTextFieldCell"; title = "Font:"; ObjectID = "C4C-XP-i2S"; */
-"C4C-XP-i2S.title" = "Font:";
+"C4C-XP-i2S.title" = "Betütípus:";
 
 /* Class = "NSTextFieldCell"; title = " X:"; ObjectID = "CdS-9J-f2h"; */
 "CdS-9J-f2h.title" = " X:";
 
 /* Class = "NSTextFieldCell"; title = "Advanced"; ObjectID = "DUA-7H-Yje"; */
-"DUA-7H-Yje.title" = "Advanced";
+"DUA-7H-Yje.title" = "Haladó";
 
 /* Class = "NSMenuItem"; title = "Right"; ObjectID = "Gie-38-Kk4"; */
-"Gie-38-Kk4.title" = "Right";
+"Gie-38-Kk4.title" = "Jobb";
 
 /* Class = "NSTextFieldCell"; title = "OpenSubtitles account:"; ObjectID = "Iax-cc-YIO"; */
-"Iax-cc-YIO.title" = "OpenSubtitles account:";
+"Iax-cc-YIO.title" = "OpenSubtitles fiók:";
 
 /* Class = "NSTextFieldCell"; title = "Other:"; ObjectID = "LiG-iV-AQK"; */
-"LiG-iV-AQK.title" = "Other:";
+"LiG-iV-AQK.title" = "Egyéb:";
 
 /* Class = "NSTextFieldCell"; title = "Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed."; ObjectID = "Luv-2B-9v8"; */
-"Luv-2B-9v8.title" = "Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed.";
+"Luv-2B-9v8.title" = "A könyvtárakat kettősponttal (:) választjuk el. A relatív elérési utak és a helyettesítő karakterek (*) a végén megengedettek.";
 
 /* Class = "NSTextFieldCell"; title = "Please enter a comma-separated list of strings."; ObjectID = "Mk1-sv-QB8"; */
-"Mk1-sv-QB8.title" = "Please enter a comma-separated list of strings.";
+"Mk1-sv-QB8.title" = "Kérjük, add meg a karakterláncok vesszővel elválasztott listáját.";
 
 /* Class = "NSTextFieldCell"; title = "If enabled, all ASS subtitles will be drawn using the styles below."; ObjectID = "OcF-0z-7qe"; */
-"OcF-0z-7qe.title" = "If enabled, all ASS subtitles will be drawn using the styles below.";
+"OcF-0z-7qe.title" = "Ha engedélyezve van, az összes ASS-felirat az alábbi stílusok szerint lesz megjelenítve.";
 
 /* Class = "NSTextFieldCell"; title = "Text subtitles:"; ObjectID = "Qda-dp-nhg"; */
-"Qda-dp-nhg.title" = "Text subtitles:";
+"Qda-dp-nhg.title" = "Szöveges feliratok:";
 
 /* Class = "NSTextFieldCell"; title = "Also search subtitles in following directories:"; ObjectID = "QsS-wD-2hY"; */
-"QsS-wD-2hY.title" = "Also search subtitles in following directories:";
+"QsS-wD-2hY.title" = "A következő könyvtárakban is kereshet feliratokat:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "SIh-Sv-6XI"; */
-"SIh-Sv-6XI.title" = "Color:";
+"SIh-Sv-6XI.title" = "Szín:";
 
 /* Class = "NSTextFieldCell"; title = "Download subtitles from:"; ObjectID = "TPK-CJ-HX7"; */
-"TPK-CJ-HX7.title" = "Download subtitles from:";
+"TPK-CJ-HX7.title" = "Feliratok letöltése:";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "Vbl-Im-3UI"; */
-"Vbl-Im-3UI.title" = "Size:";
+"Vbl-Im-3UI.title" = "Méret:";
 
 /* Class = "NSButtonCell"; title = "Login"; ObjectID = "WHk-sk-gmK"; */
-"WHk-sk-gmK.title" = "Login";
+"WHk-sk-gmK.title" = "Belépés";
 
 /* Class = "NSTextFieldCell"; title = "Advanced"; ObjectID = "X7X-18-FJg"; */
-"X7X-18-FJg.title" = "Advanced";
+"X7X-18-FJg.title" = "Haladó";
 
 /* Class = "NSMenuItem"; title = "Detect intelligently by IINA"; ObjectID = "XiL-eE-jah"; */
-"XiL-eE-jah.title" = "Detect intelligently by IINA";
+"XiL-eE-jah.title" = "Intelligens észlelés az IINA által";
 
 /* Class = "NSTextFieldCell"; title = "Default encoding:"; ObjectID = "Y75-4k-2Du"; */
-"Y75-4k-2Du.title" = "Default encoding:";
+"Y75-4k-2Du.title" = "Alapértelmezett karakterkódolás:";
 
 /* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will work for both mpv and opensubtitles."; ObjectID = "Z2M-dh-eq1"; */
-"Z2M-dh-eq1.title" = "This option will be stored as ISO 639-2 language code and will work for both mpv and opensubtitles.";
+"Z2M-dh-eq1.title" = "Ez az opció ISO 639-2 nyelvi kódként kerül tárolásra, és mind az mpv, mind az opensubtitles esetében működik.";
 
 /* Class = "NSTextFieldCell"; title = "Blur:"; ObjectID = "aO9-D6-KG8"; */
-"aO9-D6-KG8.title" = "Blur:";
+"aO9-D6-KG8.title" = "Elmosódás:";
 
 /* Class = "NSTextFieldCell"; title = "Not logged in"; ObjectID = "cov-Uy-wnc"; */
-"cov-Uy-wnc.title" = "Not logged in";
+"cov-Uy-wnc.title" = "Nem vagy bejelentkezve";
 
 /* Class = "NSTextFieldCell"; title = "Offset:"; ObjectID = "dtP-9o-yhy"; */
-"dtP-9o-yhy.title" = "Offset:";
+"dtP-9o-yhy.title" = "Eltolás:";
 
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "e0e-dB-Ir6"; */
-"e0e-dB-Ir6.title" = "Center";
+"e0e-dB-Ir6.title" = "Középen";
 
 /* Class = "NSTextFieldCell"; title = "Background:"; ObjectID = "eYO-c0-Rjp"; */
-"eYO-c0-Rjp.title" = "Background:";
+"eYO-c0-Rjp.title" = "Háttér:";
 
 /* Class = "NSBox"; title = "Other Styles"; ObjectID = "egf-g3-b7a"; */
-"egf-g3-b7a.title" = "Other Styles";
+"egf-g3-b7a.title" = "Egyéb stílusok";
 
 /* Class = "NSTextFieldCell"; title = "Override level:"; ObjectID = "gAq-Vr-hRY"; */
-"gAq-Vr-hRY.title" = "Override level:";
+"gAq-Vr-hRY.title" = "Felülírás szintje:";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "gkc-qt-sD9"; */
-"gkc-qt-sD9.title" = "Size:";
+"gkc-qt-sD9.title" = "Méret:";
 
 /* Class = "NSButtonCell"; title = "Bold"; ObjectID = "hEk-7E-10r"; */
-"hEk-7E-10r.title" = "Bold";
+"hEk-7E-10r.title" = "Félkövér";
 
 /* Class = "NSBox"; title = "Align"; ObjectID = "kvJ-Tj-KMb"; */
-"kvJ-Tj-KMb.title" = "Align";
+"kvJ-Tj-KMb.title" = "Igazítás";
 
 /* Class = "NSTextFieldCell"; title = " X:"; ObjectID = "l7l-ZO-W79"; */
 "l7l-ZO-W79.title" = " X:";
 
 /* Class = "NSTextFieldCell"; title = "ASS subtitles:"; ObjectID = "mFm-Q6-aja"; */
-"mFm-Q6-aja.title" = "ASS subtitles:";
+"mFm-Q6-aja.title" = "ASS feliratok:";
 
 /* Class = "NSButtonCell"; title = "Choose…"; ObjectID = "nH7-kO-S15"; */
-"nH7-kO-S15.title" = "Choose…";
+"nH7-kO-S15.title" = "Választás…";
 
 /* Class = "NSButtonCell"; title = "Italic"; ObjectID = "pNF-Fw-QtW"; */
-"pNF-Fw-QtW.title" = "Italic";
+"pNF-Fw-QtW.title" = "Dőlt";
 
 /* Class = "NSBox"; title = "Margin"; ObjectID = "pRe-wv-VVi"; */
-"pRe-wv-VVi.title" = "Margin";
+"pRe-wv-VVi.title" = "Margó";
 
 /* Class = "NSButtonCell"; title = "Ignore ASS styles"; ObjectID = "rZf-bj-qbV"; */
-"rZf-bj-qbV.title" = "Ignore ASS styles";
+"rZf-bj-qbV.title" = "Az ASS stílusok figyelmen kívül hagyása";
 
 /* Class = "NSTextFieldCell"; title = "Auto load:"; ObjectID = "raf-Yu-ck0"; */
-"raf-Yu-ck0.title" = "Auto load:";
+"raf-Yu-ck0.title" = "Automatikus betöltés:";
 
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "slU-Ox-aeF"; */
-"slU-Ox-aeF.title" = "Center";
+"slU-Ox-aeF.title" = "Középen";
 
 /* Class = "NSBox"; title = "Border"; ObjectID = "t5n-mc-dss"; */
-"t5n-mc-dss.title" = "Border";
+"t5n-mc-dss.title" = "Körvonal";
 
 /* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "u31-eV-Arr"; */
-"u31-eV-Arr.title" = "Disabled";
+"u31-eV-Arr.title" = "Kikapcsolva";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "vDc-dw-liI"; */
-"vDc-dw-liI.title" = "Color:";
+"vDc-dw-liI.title" = "Szín:";
 
 /* Class = "NSTextFieldCell"; title = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues."; ObjectID = "vYb-qH-XkH"; */
-"vYb-qH-XkH.title" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues.";
+"vYb-qH-XkH.title" = "Ha engedélyezve van, az IINA automatikusan csak a betöltött felirat nélküli és 20 percnél hosszabb videókra keres online feliratokat.";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "xGf-fF-4Hx"; */
 "xGf-fF-4Hx.title" = "Y:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "xid-E9-FC9"; */
-"xid-E9-FC9.title" = "Color:";
+"xid-E9-FC9.title" = "Szín:";
 
 /* Class = "NSMenuItem"; title = "Subtitles containing media filename"; ObjectID = "y1E-JR-KRI"; */
-"y1E-JR-KRI.title" = "Subtitles containing media filename";
+"y1E-JR-KRI.title" = "A médiafájl nevét tartalmazó feliratok";
 
 /* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "zaE-bH-XfT"; */
-"zaE-bH-XfT.title" = "Preferred language:";
+"zaE-bH-XfT.title" = "Előnyben részesített nyelv:";
 
 /* Class = "NSMenuItem"; title = "Left"; ObjectID = "zml-kt-LN8"; */
-"zml-kt-LN8.title" = "Left";
+"zml-kt-LN8.title" = "Bal";

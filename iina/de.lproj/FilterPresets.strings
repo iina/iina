@@ -25,11 +25,11 @@
 
 "sharpen" = "Schärfen";
 "sharpen.msize" = "Matrizengröße";
-"sharpen.amount" = "Intensität";
+"sharpen.amount" = "Stärke";
 
 "blur" = "Weichzeichnen";
 "blur.msize" = "Matrizengröße";
-"blur.amount" = "Intensität";
+"blur.amount" = "Stärke";
 
 "delogo" = "Logo entfernen";
 "delogo.w" = "Breite";

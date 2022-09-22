@@ -8,10 +8,10 @@
 "44m-ge-naq.title" = "Volumen máximo:";
 
 /* Class = "NSTextFieldCell"; title = "Number of threads:"; ObjectID = "50C-1R-wlJ"; */
-"50C-1R-wlJ.title" = "Número de hilos:";
+"50C-1R-wlJ.title" = "Número de subprocesos:";
 
 /* Class = "NSButtonCell"; title = "Force dedicated GPU"; ObjectID = "YUr-aJ-xfC"; */
-"YUr-aJ-xfC.title" = "Force dedicated GPU";
+"YUr-aJ-xfC.title" = "Forzar GPU dedicado";
 
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "bxW-np-SGm"; */
 "bxW-np-SGm.title" = "Predeterminado: 0 (Auto)";
@@ -23,7 +23,7 @@
 "g4c-vG-URh.title" = "Volumen inicial:";
 
 /* Class = "NSTextFieldCell"; title = "Always use the dedicated GPU for rendering (if exists). This can improve performance but may result in poor battery life."; ObjectID = "gCv-sJ-uQJ"; */
-"gCv-sJ-uQJ.title" = "Always use the dedicated GPU for rendering (if it exists). This can improve performance but may reduce battery life.";
+"gCv-sJ-uQJ.title" = "Utilice siempre la GPU dedicada para el renderizado (si existe). Esto puede mejorar el rendimiento pero puede reducir la vida útil de la batería.";
 
 /* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
 "m5P-5f-5uo.title" = "Vídeo:";
@@ -44,10 +44,10 @@
 "tAQ-oU-1AJ.title" = "Auto";
 
 /* Class = "NSTextFieldCell"; title = "Number of threads:"; ObjectID = "tO4-pw-2W9"; */
-"tO4-pw-2W9.title" = "Número de hilos:";
+"tO4-pw-2W9.title" = "Número de subprocesos:";
 
 /* Class = "NSTextFieldCell"; title = "S/PDIF output:"; ObjectID = "up6-6A-4sn"; */
 "up6-6A-4sn.title" = "Salida S/PDIF:";
 
 /* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "wjt-O6-KbC"; */
-"wjt-O6-KbC.title" = "Idioma predefinido:";
+"wjt-O6-KbC.title" = "Idioma preferido:";

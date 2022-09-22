@@ -1,0 +1,344 @@
+/*
+  String_ui.strings
+  iina
+
+  Created by lhc on 3/1/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+// Common
+
+"general.on" = "Ενεργό";
+"general.off" = "Ανενεργό";
+"general.login" = "Σύνδεση";
+"general.logout" = "Αποσύνδεση";
+"general.ok" = "ΟΚ";
+"general.cancel" = "Άκυρο";
+"general.username" = "Όνομα Χρήστη";
+"general.password" = "Κωδικός";
+
+// Guide Window
+"guide.highlights" = "Επισημάνσεις";
+"guide.basic_settings" = "Βασικές Ρυθμίσεις";
+"guide.faq" = "Συχνές Ερωτήσεις";
+
+// MainWindowController.swift
+"main.buffering_indicator" = "Προφόρτωση… %d%%";
+"main.opening_stream" = "Άνοιγμα Ροής…";
+"osc.precision" = "Ακρίβεια";
+"osc.1s" = "1 δευτερόλεπτο";
+"osc.100ms" = "100 χιλιοστά του δευτερολέπτου";
+"osc.10ms" = "10 χιλιοστά του δευτερολέπτου";
+"osc.1ms" = "1 χιλιοστό του δευτερολέπτου";
+
+// QuickSettingViewController.swift
+"quicksetting.item_default" = "Προεπιλογή";
+"quicksetting.item_none" = "Κανένα";
+"quicksetting.hwdec" = "Αποκωδικοποίηση Υλικού";
+"quicksetting.deinterlace" = "Αποπλεξία";
+"quicksetting.hdr" = "Υψηλό Δυναμικό Εύρος";
+
+// OSDMessage.swift
+"osd.pause" = "Παύση";
+"osd.resume" = "Συνέχιση";
+"osd.volume" = "Ένταση: %i";
+"osd.speed" = "Ταχύτητα: %.2fx";
+"osd.aspect" = "Αναλογία Προβολής: %@";
+"osd.crop" = "Περικοπή: %@";
+"osd.rotate" = "Περιστροφή: %i°";
+"osd.deinterlace" = "Αποπλεξία: %@";
+"osd.hwdec" = "Αποκωδικοποίηση Υλικού: %@";
+"osd.audio_delay.nodelay" = "Καθυστέρηση Ήχου: Χωρίς Καθυστέρηση";
+"osd.audio_delay.later" = "Καθυστέρηση Ήχου: %.2fs Αργότερα";
+"osd.audio_delay.earlier" = "Καθυστέρηση Ήχου: %.2fs Νωρίτερα";
+"osd.sub_delay.nodelay" = "Καθυστέρηση Υποτίτλων: Χωρίς Καθυστέρηση";
+"osd.sub_delay.later" = "Καθυστέρηση Υποτίτλων: %.2fs Αργότερα";
+"osd.sub_delay.earlier" = "Καθυστέρηση Υποτίτλων: %.2fs Νωρίτερα";
+"osd.subtitle_pos" = "Θέση Υποτίτλων: %.1f";
+"osd.mute" = "Σίγαση";
+"osd.unmute" = "Αποσίγαση";
+"osd.screenshot" = "Ελήφθη Στιγμιότυπο Οθόνης";
+"osd.abloop.a" = "Βρόχος Α-Β: Α";
+"osd.abloop.b" = "Βρόχος Α-Β: Β";
+"osd.abloop.clear" = "Βρόχος Α-Β: Εκκαθαρίστηκε";
+"osd.stop" = "Διακοπή";
+"osd.chapter" = "Κεφάλαιο: %@";
+"osd.subtitle_scale" = "Κλίμακα Υποτίτλων: %.2fx";
+"osd.add_to_playlist" = "Προστέθηκαν %i Αρχεία στη Λίστα Αναπαραγωγής";
+"osd.clear_playlist" = "Λίστα Αναπαραγωγής Εκκαθαρίστηκε";
+"osd.video_eq.contrast" = "Αντίθεση: %i";
+"osd.video_eq.gamma" = "Γάμμα: %i";
+"osd.video_eq.hue" = "Απόχρωση: %i";
+"osd.video_eq.saturation" = "Κορεσμός: %i";
+"osd.video_eq.brightness" = "Φωτεινότητα: %i";
+"osd.find_online_sub" = "Αναζήτηση Υποτίτλων στο Διαδίκτυο…";
+"osd.find_online_sub.source" = "από";
+"osd.sub_not_found" = "Δεν βρέθηκαν Υπότιτλοι";
+"osd.sub_found" = "%d Υπότιτλοι βρέθηκαν. Μεταφόρτωση…";
+"osd.sub_downloaded" = "Έγινε λήψη Υποτίτλων";
+"osd.sub_saved" = "Έγινε αποθήκευση Υποτίτλων";
+"osd.network_error" = "Σφάλμα Δικτύου";
+"osd.file_error" = "Σφάλμα Ανάγνωσης Αρχείου";
+"osd.cannot_login" = "Αδυναμία Σύνδεσης";
+"osd.canceled" = "Ακυρώθηκε";
+"osd.filter_added" = "Προστέθηκε Φίλτρο: %@";
+"osd.filter_removed" = "Φίλτρο Αφαιρέθηκε";
+"osd.file_loop" = "Επανάληψη Αρχείου: %@";
+"osd.playlist_loop" = "Επανάληψη Λίστας Αναπαραγωγής: %@";
+
+"preference.title" = "Προτιμήσεις";
+"preference.general" = "Γενικά";
+"preference.ui" = "Περιβάλλον Χρήστη";
+"preference.video_audio" = "Βίντεο/Ήχος";
+"preference.subtitle" = "Υπότιτλοι";
+"preference.network" = "Δίκτυο";
+"preference.control" = "Έλεγχος";
+"preference.keybindings" = "Συντομεύσεις Πληκτρολογίου";
+"preference.advanced" = "Προηγμένα";
+"preference.plugins" = "Plugins";
+"preference.utilities" = "Βοηθήματα";
+"preference.scripts" = "Δέσμες Ενεργειών";
+"preference.not_logged_in" = "Χωρίς Σύνδεση";
+"preference.logged_in_as" = "Σύνδεση ως: %@";
+"preference.system_media_control" = "Χρήση κουμπιών ελέγχου συστήματος";
+
+"preference.key_binding_hint_1" = "Για να επεξεργαστείτε συντομεύσεις πλήκτρων στο τρέχον Αρχείο Ρυθμίσεων, κάντε πρώτα κλικ στο \"Αντίγραφο…\" για να δημιουργήσετε ένα αντίγραφό του.";
+"preference.key_binding_hint_2" = "Κάντε διπλό κλικ σε μια σειρά στην δεξιά μεριά για να επεξεργαστείτε το αντίστοιχο πλήκτρο συντόμευσης.";
+
+"preference.enable_adv_settings" = "Ενεργοποίηση Προηγμένων Ρυθμίσεων";
+
+"menu.volume" = "Ένταση: %d";
+"menu.audio_delay" = "Καθυστέρηση Ήχου: %.2fs";
+"menu.sub_delay" = "Καθυστέρηση Υποτίτλων: %.2fs";
+"menu.fullscreen" = "Μετάβαση σε Πλήρη Οθόνη";
+"menu.exit_fullscreen" = "Έξοδος από Πλήρη Οθόνη";
+"menu.pip" = "Μετάβαση σε Εικόνα-σε-Εικόνα";
+"menu.exit_pip" = "Έξοδος από Εικόνα-σε-Εικόνα";
+"menu.pause" = "Παύση";
+"menu.resume" = "Συνέχιση";
+"menu.speed" = "Ταχύτητα: %.2fx";
+
+"menu.seek_forward" = "Βήμα Μπροστά %.0fs";
+"menu.seek_backward" = "Βήμα Πίσω %.0fs";
+"menu.speed_up" = "Επιτάχυνση κατά %.1fx";
+"menu.speed_down" = "Επιβράδυνση κατά %.1fx";
+"menu.volume_up" = "Ένταση + %.0f%%";
+"menu.volume_down" = "Ένταση - %.0f%%";
+"menu.audio_delay_up" = "Καθυστέρηση Ήχου + %.1fs";
+"menu.audio_delay_down" = "Καθυστέρηση Ήχου - %.1fs";
+"menu.sub_delay_up" = "Καθυστέρηση Υποτίτλων + %.1fs";
+"menu.sub_delay_down" = "Καθυστέρηση Υποτίτλων - %.1fs";
+
+"menu.crop_custom" = "Προσαρμογή...";
+"menu.find_online_sub" = "Find Online Subtitles from %@";
+
+"track.none" = "<Κενό>";
+
+"subtrack.no_loaded" = "Δεν Φορτώθηκαν Υπότιτλοι";
+"subtrack.no_external" = "Δεν Βρέθηκαν Εξωτερικοί Υπότιτλοι";
+
+// Alerts
+"alert.beta_channel.title" = "Λήψη Δοκιμαστικών Ενημερώσεων";
+
+"alert.title_error" = "Σφάλμα";
+"alert.title_warning" = "Προειδοποίηση";
+"alert.title_info" = "Πληροφορίες";
+
+"alert.fatal_error" = "Κρίσιμο Σφάλμα: %@ \nΗ Εφαρμογή θα τερματιστεί τώρα.";
+"alert.mpv_error" = "Εσωτερικό σφάλμα %@ (%@) κατά την ρύθμιση %@.";
+"alert.sleep" = "Αδυναμία αποφυγής της αναστολής οθόνης!";
+
+"alert.unsupported_audio" = "Μη υποστηριζόμενο εξωτερικό αρχείο ήχου.";
+"alert.unsupported_sub" = "Μη υποστηριζόμενοι εξωτερικοί υπότιτλοι.";
+"alert.unsupported_url" = "Μη υποστηριζόμενο URL.";
+"alert.wrong_url_format" = "Λάθος μορφή URL.";
+
+"alert.error_open" = "Αδυναμία ανοίγματος αρχείου ή ροής!";
+"alert.error_finding_file" = "Αδυναμία εύρεσης αρχείου %@!";
+"alert.error_loading_script" = "Αδυναμία φόρτωσης δέσμης ενεργειών %@!";
+"alert.error_saving_file" = "Προέκυψε σφάλμα κατά την αποθήκευση %@: %@";
+"alert.error_deleting_file" = "Αδυναμία διαγραφής του αρχείου.";
+
+"alert.config.new.title" = "Νέα Διαμόρφωση Εισόδων";
+"alert.config.new.message" = "Παρακαλώ εισάγετε ένα όνομα για τη νέα ρύθμιση.";
+"alert.config.duplicate.title" = "Αντιγραφή Ρυθμίσεων";
+"alert.config.duplicate.message" = "Παρακαλώ εισάγετε ένα όνομα για το αντιγραμμένο αρχείο ρυθμίσεων.";
+"alert.config.empty_name" = "Το όνομα δεν μπορεί να είναι κενό.";
+"alert.config.name_existing" = "Το όνομα αυτό υπάρχει ήδη.";
+"alert.config.file_existing.title" = "Ήδη Υπάρχον Αρχείο";
+"alert.config.file_existing.message" = "Αυτό δε θα έπρεπε να συμβεί. Επιλέξτε ΟΚ για αντικατάσταση, ή Άκυρο για εμφάνιση του αρχείου στον Finder.";
+"alert.config.cannot_create" = "Αδυναμία δημιουργίας αρχείου ρυθμίσεων!\n%@";
+"alert.config.cannot_write" = "Αδυναμία εγγραφής στο αρχείο ρυθμίσεων!";
+
+"alert.filter.incorrect" = "Σφάλμα κατά τη ρύθμιση φίλτρων. Παρακαλώ ελέγξτε τη μορφή των παραμέτρων σας.";
+"alert.add_filter.title" = "Νέο Φίλτρο";
+"alert.add_filter.message" = "Παρακαλώ εισάγετε μια συμβολοσειρά φίλτρου στην μορφή εντολής mpv, ή vf, ή af.";
+
+"alert.keybinding_config.error" = "Σφάλμα ανάλυσης του αρχείου ρυθμίσεων συντομεύσεων πληκτρολογίου \"%@\"! Επιστροφή στην προεπιλεγμένη ρύθμιση συντομεύσεων πληκτρολογίου του IINA. Παρακαλώ ελέγξτε τις ρυθμίσεις σας.";
+
+"alert.extra_option.cannot_read" = "Αδυναμία ανάγνωσης επιλογών mpv του χρήστη.";
+"alert.extra_option.empty" = "Το πεδίο δεν μπορεί να είναι κενό!";
+"alert.extra_option.error" = "Σφάλμα ρύθμισης --%@=%@ με τιμή επιστροφής %d. Παρακαλώ ελέγξτε τις επιπλέον ρυθμίσεις σας στις Προτιμήσεις > Προηγμένα.";
+"alert.extra_option.config_folder" = "Αδυναμία ορισμού φακέλου ρυθμίσεων \"%@\".";
+
+"alert.playlist.error_deleting" = "Σφάλμα κατά τη διαγραφή: %@";
+
+"alert.sub.no_selected" = "Παρακαλώ πρώτα επιλέξτε έναν από τους μεταφορτωμένους υπότιτλους.";
+"alert.sub_lang_not_set" = "Παρακαλώ ορίστε προτιμώμενη γλώσσα στις Προτιμήσεις πριν τη χρήση του OpenSubtitles. Αυτή τη φορά θα χρησιμοποιηθούν τα Αγγλικά (eng).";
+"alert.sub.cannot_save_passwd" = "Αδυναμία αποθήκευσης του κωδικού σας στο Keychain: %@";
+"alert.sub.cannot_login" = "Αδυναμία σύνδεσης. Παρακαλώ ελέγξτε το Όνομα Χρήστη, τον Κωδικό Εισόδου, και την κατάσταση δικτύου.\n\n%@";
+
+"alert.set_default.title" = "Ορισμός IINA ως προεπιλεγμένη εφαρμογή";
+"alert.set_default.message" = "Το ΙΙΝΑ θα οριστεί ως προεπιλεγμένη εφαρμογή για όλους τους τύπους αρχείων που υποστηρίζει.";
+"alert.set_default.success" = "Ολοκληρώθηκαν επιτυχώς %d και απέτυχαν %d.";
+
+"alert.add_watch.title" = "Προσθήκη Ιδιότητας Παρακολούθησης";
+"alert.add_watch.message" = "Παρακαλώ εισάγετε μια έγκυρη ονομασία ιδιότητας mpv.";
+
+"alert.jump_to.title" = "Μετάβαση σε";
+"alert.jump_to.message" = "Παρακαλώ εισάγετε τον χρόνο στον οποίο θέλετε να μεταβείτε. Παράδειγμα: 20:35";
+
+"alert.opensub.login.title" = "Σύνδεση στο OpenSubtitles";
+"alert.opensub.login.message" = "Παρακαλώ εισάγετε Όνομα Χρήστη και Κωδικό";
+
+"alert.open_url.title" = "Άνοιγμα συνδέσμου URL";
+"alert.open_url.message" = "Παρακαλώ εισάγετε σύνδεσμο URL:";
+"alert.choose_media_file.title" = "Επιλογή Αρχείων Πολυμέσων";
+
+"alert.add_url.title" = "Προσθήκη συνδέσμου URL";
+"alert.add_url.message" = "Παρακαλώ εισάγετε το σύνδεσμο URL:";
+
+"alert.delete_history.title" = "Διαγραφή Ιστορικού Αναπαραγωγής";
+"alert.delete_history.message" = "Είστε σίγουροι ότι θέλετε να διαγράψετε τις επιλεγμένες καταχωρήσεις;";
+
+"alert.filter_hwdec.message" = "Πρόκειται να εμφαρμόσετε ένα φίλτρο βίντεο. Ωστόσο, ο τρέχων αποκωδικοποιητής υλικού σας ενδέχεται να μην υποστηρίζει σωστά τα φίλτρα βίντεο. Μπορείτε είτε να απενεργοποιήσετε την αποκωδικοποίηση υλικού, ή να μεταβείτε σε λειτουργία Αυτόματο(Αντιγραφή), κάτι που καταναλώνει διπλάσιο χώρο μνήμης.\nΜπορεί να χρειαστεί να επαναλάβετε προηγούμενες βήματα (όπως ρύθμισης της περικοπής) για να το κάνετε να λειτουργήσει.";
+"alert.filter_hwdec.abort" = "Απόρριψη";
+"alert.filter_hwdec.turn_off" = "Απενεργοποίηση αποκωδικοποίησης υλικού";
+"alert.filter_hwdec.use_copy" = "Εναλλαγή σε Αυτόματο(Αντιγραφή)";
+
+"alert.clear_cache.title" = "Εκκαθάριση Μικρογραφιών";
+"alert.clear_cache.message" = "Θέλετε σίγουρα να διαγράψετε όλες τις μικρογραφίες;";
+
+"alert.clear_history.title" = "Εκκαθάριση Ιστορικού Αναπαραγωγής";
+"alert.clear_history.message" = "Θέλετε σίγουρα να διαγράψετε όλο το ιστορικό αναπαραγωγής;";
+
+"alert.clear_watch_later.title" = "Εκκαθάριση Αποθηκευμένης Προόδου Αναπαραγωγής";
+"alert.clear_watch_later.message" = "Θέλετε σίγουρα να διαγράψετε όλη την αποθηκευμένη πρόοδο αναπαραγωγής (δεδομένα \"παρακολούθηση μετά\");";
+
+"alert.nothing_to_open" = "Δεν υπάρχει κάτι για άνοιγμα.";
+
+"alert.no_video_track" = "Δεν υπάρχει κομμάτι βίντεο.";
+
+"alert.duplicate_config" = "Δεν μπορείτε να επεξεργαστείτε τις προεπιλεγμένες ρυθμίσεις. Παρακαλώ πρώτα δημιουργήστε ένα αντίγραφο για να το επεξεργαστείτε.";
+
+"alert.assrt_register" = "Λόγω περιορισμού του ποσοστού χρήσης API, συνίσταται να χρησιμοποιήσετε το δικό σας διακριτικό (API Token). Το προεπιλεγμένο διακριτικό είναι μόνο για δοκιμή της λειτουργίας, και ενδέχεται να αντιμετωπίσετε σφάλματα δικτύου.";
+"alert.assrt_register.register" = "Εγγραφή Τώρα";
+"alert.assrt_register.try" = "Δοκιμή Πρώτα";
+"alert.assrt_token_prompt.title" = "Εισάγετε το διακριτικό σας (API Token)";
+"alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
+"alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
+
+"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
+"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
+"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+"alert.plugin_no_update" = "No update found.";
+"alert.plugin_update_found.title" = "Update found for %@";
+"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
+"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
+"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+
+"playlist.total_length" = "%@ in total";
+"playlist.total_length_with_selected" = "%@ of %@ selected";
+"pl_menu.title_multi" = "%d Items";
+"pl_menu.play_next" = "Play Next";
+"pl_menu.play_in_new_window" = "Play in New Window";
+"pl_menu.remove" = "Remove";
+"pl_menu.remove_multi" = "Remove Selected";
+"pl_menu.delete" = "Move to Trash";
+"pl_menu.delete_multi" = "Move Selected Files to Trash";
+"pl_menu.delete_after_play" = "Move to Trash After Playback";
+"pl_menu.delete_after_play_multi" = "Move Selected Files to Trash After Playback";
+"pl_menu.reveal_in_finder" = "Reveal in Finder";
+"pl_menu.add_file" = "Add File…";
+"pl_menu.add_url" = "Add URL…";
+"pl_menu.clear_playlist" = "Clear Playlist";
+"pl_menu.matched_sub" = "Matched %d Subtitle(s)";
+"pl_menu.add_sub" = "Add Subtitle…";
+"pl_menu.wrong_sub" = "Wrong Subtitle!";
+"pl_menu.browser" = "Open in Browser";
+"pl_menu.copy_url" = "Copy URL";
+"pl_menu.copy_url_multi" = "Copy URLs";
+
+"keymapping.title" = "Key Mapping";
+"keymapping.message" = "Press any key to record.";
+
+"filter.video_filters" = "Video Filters";
+"filter.audio_filters" = "Audio Filters";
+
+"hwdec.no" = "Disable hardware decoding.";
+"hwdec.auto" = "Enable hardware decoding. However, most of the video filters won't work properly.";
+"hwdec.auto-copy" = "Enable hardware decoding. It will consume double the memory but work with video filters.";
+
+"subencoding.auto" = "Auto detect";
+
+"osc_toolbar.settings" = "Quick Settings";
+"osc_toolbar.playlist" = "Playlist and chapters";
+"osc_toolbar.pip" = "Toggle Picture-in-Picture";
+"osc_toolbar.full_screen" = "Toggle full screen";
+"osc_toolbar.music_mode" = "Enter music mode";
+"osc_toolbar.sub_track" = "Choose subtitle track";
+
+"mini_player.album_art" = "Toggle album art";
+"mini_player.loop" = "Repeat";
+"mini_player.shuffle" = "Shuffle";
+"mini_player.remove" = "Remove from playlist";
+"mini_player.add" = "Add to playlist";
+"mini_player.delete" = "Delete all tracks from playlist";
+"mini_player.volume" = "Volume";
+"mini_player.close" = "Close music mode";
+"mini_player.back" = "Return to video mode";
+
+// Touch bar
+
+"touchbar.ahead_15" = "15sec Ahead";
+"touchbar.ahead_30" = "30sec Ahead";
+"touchbar.back_15" = "15sec Back";
+"touchbar.back_30" = "30sec Back";
+"touchbar.next_video" = "Επόμενο Βίντεο";
+"touchbar.prev_video" = "Προηγούμενο Βίντεο";
+"touchbar.increase_volume" = "Ένταση +";
+"touchbar.decrease_volume" = "Ένταση -";
+"touchbar.rewind" = "Rewind";
+"touchbar.fast_forward" = "Fast Forward";
+"touchbar.play_pause" = "Play / Pause";
+"touchbar.seek" = "Seek";
+"touchbar.time" = "Time Position";
+"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
+"touchbar.toggle_pip" = "Toggle Picture-in-Picture";
+
+// Plugin permissions
+
+"permissions.network-request.name" = "Network Request";
+"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
+"permissions.network-request.any_site" = "Any site";
+"permissions.show-osd.name" = "Show OSD";
+"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
+"permissions.show-alert.name" = "Show Alerts";
+"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
+"permissions.video-overlay.name" = "Add overlay on videos";
+"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
+"permissions.file-system.name" = "Access the file system";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+
+"plugin.install" = "Install";
+"plugin.installed" = "Installed";
+"plugin.not_installed" = "Not Installed";
+"plugin.local" = "Installed locally";
+"alert.plugin.install_error" = "Error occured during the installation: %@";
+"alert.invalid_url" = "The URL is invalid.";
+"plugin.install_error.invalid_url" = "The URL is invalid.";
+"plugin.install_error.file_not_found" = "Cannot find the package file.";
+"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
+"plugin.check_for_updates" = "Check for Updates";
+"plugin.updating" = "Downloading update…";

@@ -9,47 +9,47 @@
 
 
 
-"crop" = "Crop";
-"crop.w" = "Width (default: video width)";
-"crop.h" = "Height (default: video height)";
-"crop.x" = "Origin X (default: center)";
-"crop.y" = "Origin Y (default: center)";
+"crop" = "Исеци";
+"crop.w" = "Ширина (подразумевано: ширина видео-записа)";
+"crop.h" = "Висина (подразумевано: висина видео-записа)";
+"crop.x" = "Почетна вредност X (подразумевано: центар)";
+"crop.y" = "Почетна вредност Y (подразумевано: центар)";
 
-"expand" = "Expand";
-"expand.w" = "Width (default: video width)";
-"expand.h" = "Height (default: video height)";
-"expand.x" = "Origin X (default: center)";
-"expand.y" = "Origin Y (default: center)";
-"expand.aspect" = "Expands to fit an aspect (e.g: 4/3)";
-"expand.round" = "Rounds up to make divisible by this value";
+"expand" = "Рашири";
+"expand.w" = "Ширина (подразумевано: ширина видео-записа)";
+"expand.h" = "Висина (подразумевано: висина видео-записа)";
+"expand.x" = "Почетна вредност X (подразумевано: центар)";
+"expand.y" = "Почетна вредност Y (подразумевано: центар)";
+"expand.aspect" = "Ширење до уклапања у размеру (нпр. 4/3)";
+"expand.round" = "Заокругљивање тако да се може делити овом вредношћу";
 
-"sharpen" = "Sharpen";
-"sharpen.msize" = "Matrix size";
-"sharpen.amount" = "Amount";
+"sharpen" = "Изоштри";
+"sharpen.msize" = "Величина матрице";
+"sharpen.amount" = "Износ";
 
-"blur" = "Blur";
-"blur.msize" = "Matrix size";
-"blur.amount" = "Amount";
+"blur" = "Замути";
+"blur.msize" = "Величина матрице";
+"blur.amount" = "Износ";
 
-"delogo" = "Delogo";
-"delogo.w" = "Width";
-"delogo.h" = "Height";
-"delogo.x" = "Origin X";
-"delogo.y" = "Origin Y";
+"delogo" = "Уклони логотип";
+"delogo.w" = "Ширина";
+"delogo.h" = "Висина";
+"delogo.x" = "Почетна вредност X";
+"delogo.y" = "Почетна вредност Y";
 
-"negative" = "Negative";
+"negative" = "Негатив";
 
-"vflip" = "Flip";
-"hflip" = "Mirror";
+"vflip" = "Преокрени";
+"hflip" = "Пресликај";
 
 "lut3d" = "3D LUT";
-"lut3d.file" = "File path (you can also drag & drop the file into the input box)";
-"lut3d.interp" = "Interpolation mode";
+"lut3d.file" = "Путања датотеке (можете и повући и отпустити датотеку у оквир)";
+"lut3d.interp" = "Режим интерполације";
 
-"custom_mpv" = "Custom (mpv)";
-"custom_mpv.name" = "Filter name";
-"custom_mpv.string" = "Filter value";
+"custom_mpv" = "Прилагођено (mpv)";
+"custom_mpv.name" = "Назив филтера";
+"custom_mpv.string" = "Вредност филтера";
 
-"custom_ffmpeg" = "Custom (FFmpeg)";
-"custom_ffmpeg.name" = "Filter name";
-"custom_ffmpeg.string" = "Filter value";
+"custom_ffmpeg" = "Прилагођено (FFmpeg)";
+"custom_ffmpeg.name" = "Назив филтера";
+"custom_ffmpeg.string" = "Вредност филтера";

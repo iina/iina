@@ -35,7 +35,7 @@
 "quicksetting.item_none" = "无";
 "quicksetting.hwdec" = "硬件解码";
 "quicksetting.deinterlace" = "反交错";
-"quicksetting.hdr" = "HDR（高动态范围）/Users/liujiayi051211/Desktop/Doctor.Strange.in.the.Multiverse.of.Madness.2022.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT";
+"quicksetting.hdr" = "HDR（高动态范围）";
 
 // OSDMessage.swift
 "osd.pause" = "暂停";
@@ -82,7 +82,7 @@
 "osd.canceled" = "已取消";
 "osd.filter_added" = "已添加滤镜: %@";
 "osd.filter_removed" = "已移除滤镜";
-"osd.file_loop" = "单文件循环: %@/Users/liujiayi051211/Desktop/Doctor.Strange.in.the.Multiverse.of.Madness.2022.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT";
+"osd.file_loop" = "单文件循环: %@";
 "osd.playlist_loop" = "播放列表循环: %@";
 
 "preference.title" = "偏好设置";

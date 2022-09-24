@@ -15,8 +15,25 @@ class SleepPreventer: NSObject {
 
   static private var assertionID = IOPMAssertionID()
 
+  static private var haveShownAlert = false
+
   static private var preventedSleep = false
 
+  /// Ask macOS to not dim or sleep the display.
+  ///
+  /// This method uses the macOS function [IOPMAssertionCreateWithName](https://developer.apple.com/documentation/iokit/1557134-iopmassertioncreatewithname)
+  /// to create a [kIOPMAssertionTypeNoDisplaySleep](https://developer.apple.com/documentation/iokit/kiopmassertiontypenodisplaysleep)
+  /// assertion with the macOS power management system.
+  /// - Attention: This portion of macOS has proven to be **unreliable**.
+  ///
+  /// It is important to inform the user that macOS power management is malfunctioning as this can explain
+  /// why there is trouble with audio/video playback. For this reason IINA posts an alert if  `IOPMAssertionCreateWithName` fails.
+  ///
+  /// As this alert can be irritating to users the alert is only displayed once per IINA invocation. In addition
+  /// the alert supports a [suppression button](https://developer.apple.com/documentation/appkit/nsalert/1535196-showssuppressionbutton)
+  /// to allow the user to permanently suppress this alert. 
+  ///
+  /// See issues [#3842](https://github.com/iina/iina/issues/3842) and [#3478](https://github.com/iina/iina/issues/3478) for details on the macOS failure.
   static func preventSleep() {
     if preventedSleep {
       return
@@ -26,13 +43,23 @@ class SleepPreventer: NSObject {
                                               IOPMAssertionLevel(kIOPMAssertionLevelOn),
                                               reason,
                                               &assertionID)
-    if success == kIOReturnSuccess {
+    guard success != kIOReturnSuccess else {
       preventedSleep = true
-    } else {
-      Logger.log("Cannot prevent display sleep: \(String(cString: mach_error_string(success))) (\(success))", level: .error)
-      DispatchQueue.main.async {
-        Utility.showAlert("sleep")
-      }
+      return
+    }
+    // Something has gone wrong with power management on this Mac.
+    Logger.log(String(format: "IOPMAssertionCreateWithName returned 0x%0X8, \(String(cString: mach_error_string(success)))",
+                      success), level: .error)
+    Logger.log(
+      "Cannot prevent display sleep because macOS power management is broken on this machine",
+      level: .error)
+    // To avoid irritating users only display this alert once per IINA invocation and support a
+    // button to allow the alert to be permanently suppressed.
+    guard !haveShownAlert else { return }
+    haveShownAlert = true
+    DispatchQueue.main.async {
+      Utility.showAlert("sleep", arguments: [success],
+                        suppressionKey: .suppressCannotPreventDisplaySleep)
     }
   }
 

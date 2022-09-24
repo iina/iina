@@ -285,6 +285,9 @@ struct Preference {
     static let iinaLastPlayedFilePath = Key("iinaLastPlayedFilePath")
     static let iinaLastPlayedFilePosition = Key("iinaLastPlayedFilePosition")
 
+    /** Alerts */
+    static let suppressCannotPreventDisplaySleep = Key("suppressCannotPreventDisplaySleep")
+
     static let iinaEnablePluginSystem = Key("iinaEnablePluginSystem")
   }
 
@@ -822,7 +825,9 @@ struct Preference {
 
     .watchProperties: [],
     .savedVideoFilters: [],
-    .savedAudioFilters: []
+    .savedAudioFilters: [],
+
+    .suppressCannotPreventDisplaySleep: false
   ]
 
 

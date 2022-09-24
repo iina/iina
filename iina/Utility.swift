@@ -10,6 +10,7 @@ import Cocoa
 
 typealias PK = Preference.Key
 
+
 class Utility {
 
   static let supportedFileExt: [MPVTrack.TrackType: [String]] = [
@@ -44,8 +45,15 @@ class Utility {
     alert.runModal()
   }
 
-  static func showAlert(_ key: String, comment: String? = nil, arguments: [CVarArg]? = nil, style: NSAlert.Style = .critical, sheetWindow: NSWindow? = nil) {
+  static func showAlert(_ key: String, comment: String? = nil, arguments: [CVarArg]? = nil, style: NSAlert.Style = .critical, sheetWindow: NSWindow? = nil, suppressionKey: PK? = nil) {
     let alert = NSAlert()
+    if let suppressionKey = suppressionKey {
+      // This alert includes a suppression button that allows the user to suppress the alert.
+      // Do not show the alert if it has been suppressed.
+      guard !Preference.bool(for: suppressionKey) else { return }
+      alert.showsSuppressionButton = true
+    }
+
     switch style {
     case .critical:
       alert.messageText = NSLocalizedString("alert.title_error", comment: "Error")
@@ -75,6 +83,11 @@ class Utility {
       alert.beginSheetModal(for: sheetWindow)
     } else {
       alert.runModal()
+    }
+
+    // If the user asked for this alert to be suppressed set the associated preference.
+    if let suppressionButton = alert.suppressionButton, suppressionButton.state == .on {
+      Preference.set(true, for: suppressionKey!)
     }
   }
 

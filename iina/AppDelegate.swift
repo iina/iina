@@ -41,6 +41,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   private var commandLineStatus = CommandLineStatus()
 
+  private var isTerminating = false
+
+  private lazy var terminateQueue = DispatchQueue(label: "com.colliderli.iina.terminate",
+                                                  qos: .userInitiated)
+
   // Windows
 
   lazy var openURLWindow: OpenURLWindowController = OpenURLWindowController()
@@ -294,15 +299,98 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     return Preference.bool(for: .quitWhenNoOpenedWindow)
   }
 
+  /// Tell Cocoa to proceed with termination.
+  ///
+  /// The method `applicationShouldTerminate` returned `terminateLater` which instructed Cocoa to
+  /// wait for our reply before proceeding with termination. This allows IINA time to save state before shutting down.
+  /// This method instructs Cocoa to proceed with termination.
+  ///
+  /// - Note: This code must be in a method that can be a target of a selector in order to support macOS 10.11.
+  /// The `perform` method in `RunLoop` that accepts a closure was introduced in macOS 10.12. If IINA drops
+  /// support for 10.11 then the code in this method can be moved to the closure in `applicationShouldTerminate
+  /// and this method can then be removed.`
+  @objc
+  internal func proceedWithTermination() {
+    Logger.log("Proceeding with application termination")
+    NSApp.reply(toApplicationShouldTerminate: true)
+  }
+
   func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
     Logger.log("App should terminate")
-    for pc in PlayerCore.playerCores {
-     pc.terminateMPV()
+    isTerminating = true
+
+    // Normally termination happens fast enough that the user does not have time to initiate
+    // additional actions, however to be sure shutdown further input from the user.
+    Logger.log("Disabling all menus")
+    menuController.disableAllMenus()
+    // Remove custom menu items added by IINA to the dock menu. AppKit does not allow the dock
+    // supplied items to be changed by an application so there is no danger of removing them.
+    // The menu items are being removed because setting the isEnabled property to false had no
+    // effect under macOS 12.6.
+    removeAllMenuItems(dockMenu)
+    // If supported and enabled disable all remote media commands. This also removes IINA from
+    // the Now Playing widget.
+    if #available(macOS 10.13, *) {
+      if RemoteCommandController.useSystemMediaControl {
+        Logger.log("Disabling remote commands")
+        RemoteCommandController.disableAllCommands()
+      }
     }
-    return .terminateNow
+
+    // Close all windows.
+    Logger.log("Closing all windows")
+    for window in NSApp.windows {
+      window.close()
+    }
+
+    // The remaining shutdown sequence requires waiting for asynchronous actions to complete.
+    // To avoid blocking the main thread a dedicated background thread is used. To ensure
+    // termination completes and the user is not required to force quit IINA an arbitary timeout
+    // is imposed. The expectation is that this timeout does not trigger. If a timeout warning is
+    // logged during termination then that needs to be investigated.
+    let timeout = DispatchTime.now() + DispatchTimeInterval.seconds(10)
+    terminateQueue.async {
+      // When a window is closed it stops playback. That involves sending a stop command to mpv.
+      // That command executes asynchronously. MUST wait for that command to complete. If the quit
+      // command is sent to mpv while the stop command is still executing the commands can
+      // interfere and cause the playback position to not be saved in the watch later file. See
+      // issue #3939 for details.
+      for pc in PlayerCore.playerCores {
+        pc.waitForStopToFinish(timeout: timeout)
+      }
+      // Now that playback has been stopped terminate the players.
+      for pc in PlayerCore.playerCores {
+        pc.terminateMPV()
+      }
+      // Player termination involves sending a quit command to mpv. That command executes
+      // asynchronously. Wait for all the players to finish terminating before proceeding.
+      for pc in PlayerCore.playerCores {
+        pc.waitForTermination(timeout: timeout)
+      }
+      // Tell Cocoa to proceed with termination. This has to be done on the main thread.
+      // The main dispatch queue MUST NOT be used to avoid a deadlock when quitting is
+      // initiated by mpv in response to the user pressing "q". When that happens
+      // MPVController submits a task to the main queue that calls terminate. That call
+      // blocks the main dispatch queue.
+      if #available(macOS 10.12, *) {
+        RunLoop.main.perform(inModes: [.common, .eventTracking, .modalPanel]) {
+          self.proceedWithTermination()
+        }
+      } else {
+        RunLoop.main.perform(#selector(self.proceedWithTermination), target: self,
+                             argument: nil, order: Int.min, modes: [.common])
+      }
+    }
+
+    // Tell Cocoa that it is ok to proceed with termination, but wait for our reply.
+    return .terminateLater
   }
 
   func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+    // Once termination starts subsystems such as mpv are being shutdown. Accessing mpv
+    // once it has been instructed to shutdown can trigger a crash. MUST NOT permit
+    // reopening once termination has started.
+    guard !isTerminating else { return false }
     guard !flag else { return true }
     Logger.log("Handle reopen")
     showWelcomeWindow(checkingForUpdatedData: true)
@@ -362,6 +450,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     return dockMenu
   }
 
+  /// Remove all menu items in the given menu and any submenus.
+  ///
+  /// This method recursively descends through the entire tree of menu items removing all items.
+  /// - Parameter menu: Menu to remove items from
+  private func removeAllMenuItems(_ menu: NSMenu) {
+    for item in menu.items {
+      if item.hasSubmenu {
+        removeAllMenuItems(item.submenu!)
+      }
+      menu.removeItem(item)
+    }
+  }
 
   // MARK: - URL Scheme
 
@@ -701,4 +801,18 @@ class RemoteCommandController {
     }
   }
 
+  static func disableAllCommands() {
+    remoteCommand.playCommand.removeTarget(nil)
+    remoteCommand.pauseCommand.removeTarget(nil)
+    remoteCommand.togglePlayPauseCommand.removeTarget(nil)
+    remoteCommand.stopCommand.removeTarget(nil)
+    remoteCommand.nextTrackCommand.removeTarget(nil)
+    remoteCommand.previousTrackCommand.removeTarget(nil)
+    remoteCommand.changeRepeatModeCommand.removeTarget(nil)
+    remoteCommand.changeShuffleModeCommand.removeTarget(nil)
+    remoteCommand.changePlaybackRateCommand.removeTarget(nil)
+    remoteCommand.skipForwardCommand.removeTarget(nil)
+    remoteCommand.skipBackwardCommand.removeTarget(nil)
+    remoteCommand.changePlaybackPositionCommand.removeTarget(nil)
+  }
 }

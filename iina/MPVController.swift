@@ -141,11 +141,7 @@ class MPVController: NSObject {
   }
 
   deinit {
-    ObjcUtils.silenced {
-      self.optionObservers.forEach { (k, _) in
-        UserDefaults.standard.removeObserver(self, forKeyPath: k)
-      }
-    }
+    removeOptionObservers()
   }
 
   /**
@@ -454,8 +450,26 @@ class MPVController: NSObject {
     return flags & UInt64(MPV_RENDER_UPDATE_FRAME.rawValue) > 0
   }
 
-  // Basically send quit to mpv
+  /// Remove registered observers for IINA preferences.
+  private func removeOptionObservers() {
+    // Remove observers for IINA preferences.
+    ObjcUtils.silenced {
+      self.optionObservers.forEach { (k, _) in
+        UserDefaults.standard.removeObserver(self, forKeyPath: k)
+      }
+    }
+  }
+
+  /// Shutdown this mpv controller.
   func mpvQuit() {
+    // Remove observers for IINA preference. Must not attempt to change a mpv setting
+    // in response to an IINA preference change while mpv is shutting down.
+    removeOptionObservers()
+    // Remove observers for mpv properties. Because 0 was passed for reply_userdata when
+    // registering mpv property observers all observers can be removed in one call.
+    mpv_unobserve_property(mpv, 0)
+    // Start mpv quitting. Even though this command is being sent using the synchronous
+    // command API the quit command is special and will be executed by mpv asynchronously.
     command(.quit)
   }
 
@@ -768,12 +782,17 @@ class MPVController: NSObject {
     case MPV_EVENT_SHUTDOWN:
       let quitByMPV = !player.isMpvTerminated
       if quitByMPV {
+        // Must not attempt to change a mpv setting in response to an IINA preference
+        // change now that mpv has shut down.
+        removeOptionObservers()
+        player.mpvHasShutdown(isMPVInitiated: true)
         DispatchQueue.main.sync {
           NSApp.terminate(nil)
         }
       } else {
         mpv_destroy(mpv)
         mpv = nil
+        player.mpvHasShutdown()
       }
 
     case MPV_EVENT_LOG_MESSAGE:
@@ -848,6 +867,9 @@ class MPVController: NSObject {
         }
       } else {
         player.info.shouldAutoLoadFiles = false
+      }
+      if reason == MPV_END_FILE_REASON_STOP {
+        player.playbackStopped()
       }
 
     case MPV_EVENT_COMMAND_REPLY:

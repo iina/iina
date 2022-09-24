@@ -15,6 +15,9 @@
 		49542986216C34950058F680 /* OpenInIINA.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 49542973216C34950058F680 /* OpenInIINA.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		496B19921E2968530035AF10 /* PIP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496B19911E2968530035AF10 /* PIP.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		519872FF26879B9B00F84BCC /* AccessibilityPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519872FE26879B9B00F84BCC /* AccessibilityPreferences.swift */; };
+		51D34D8728DD4903006C2C87 /* AtomicBool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D34D8628DD4903006C2C87 /* AtomicBool.swift */; };
+		51D34D8928DD4934006C2C87 /* AtomicBoolSemaphore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D34D8828DD4934006C2C87 /* AtomicBoolSemaphore.swift */; };
+		51D34D8C28DD49C1006C2C87 /* Atomics in Frameworks */ = {isa = PBXBuildFile; productRef = 51D34D8B28DD49C1006C2C87 /* Atomics */; };
 		6100FF2B1EDF9806002CF0FB /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 6100FF2A1EDF9806002CF0FB /* dsa_pub.pem */; };
 		8400D5C41E17C6D2006785F5 /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8400D5C21E17C6D2006785F5 /* AboutWindowController.swift */; };
 		8400D5C61E1AB2F1006785F5 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8400D5C81E1AB2F1006785F5 /* MainWindowController.xib */; };
@@ -184,6 +187,15 @@
 		E34EAA83251A36CE00057F27 /* JavascriptAPIFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34EAA82251A36CE00057F27 /* JavascriptAPIFile.swift */; };
 		E3513AF820EF79C500F8C347 /* PreferenceWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3513AF620EF79C500F8C347 /* PreferenceWindowController.swift */; };
 		E3513AFB20F120F600F8C347 /* PreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3513AFA20F120F600F8C347 /* PreferenceViewController.swift */; };
+		E35306EF2147A8CE008FE492 /* JavascriptPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306EE2147A8CE008FE492 /* JavascriptPlugin.swift */; };
+		E35306F42147F78D008FE492 /* JavascriptAPICore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306F32147F78D008FE492 /* JavascriptAPICore.swift */; };
+		E35306F62147F7AF008FE492 /* JavascriptAPIMpv.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306F52147F7AF008FE492 /* JavascriptAPIMpv.swift */; };
+		E35306FA214808AB008FE492 /* JavascriptAPIEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306F9214808AB008FE492 /* JavascriptAPIEvent.swift */; };
+		E35306FC214813B7008FE492 /* JavascriptPluginInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306FB214813B7008FE492 /* JavascriptPluginInstance.swift */; };
+		E3530700214908DD008FE492 /* JavascriptAPIHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306FF214908DC008FE492 /* JavascriptAPIHttp.swift */; };
+		E3530702214935DE008FE492 /* JavascriptAPIConsole.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3530701214935DE008FE492 /* JavascriptAPIConsole.swift */; };
+		E353070521496CE4008FE492 /* PrefPluginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E353070321496CE4008FE492 /* PrefPluginViewController.swift */; };
+		E353070621496CE4008FE492 /* PrefPluginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E353070421496CE4008FE492 /* PrefPluginViewController.xib */; };
 		E36E8D7C24F6052F00B8C097 /* GuideWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36E8D7A24F6052F00B8C097 /* GuideWindowController.swift */; };
 		E3719CEC28430FA6004E6633 /* libmpv.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3719CB428430FA4004E6633 /* libmpv.1.dylib */; };
 		E3719CF328430FA6004E6633 /* libswscale.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E3719CBB28430FA4004E6633 /* libswscale.5.dylib */; };
@@ -251,15 +263,6 @@
 		E3719D68284310AA004E6633 /* libzimg.2.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3719D5F284310A1004E6633 /* libzimg.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		E3719D69284310AA004E6633 /* libzmq.5.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3719D60284310A1004E6633 /* libzmq.5.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		E3719D6A284310AA004E6633 /* libzstd.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = E3719D5D284310A1004E6633 /* libzstd.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		E35306EF2147A8CE008FE492 /* JavascriptPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306EE2147A8CE008FE492 /* JavascriptPlugin.swift */; };
-		E35306F42147F78D008FE492 /* JavascriptAPICore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306F32147F78D008FE492 /* JavascriptAPICore.swift */; };
-		E35306F62147F7AF008FE492 /* JavascriptAPIMpv.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306F52147F7AF008FE492 /* JavascriptAPIMpv.swift */; };
-		E35306FA214808AB008FE492 /* JavascriptAPIEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306F9214808AB008FE492 /* JavascriptAPIEvent.swift */; };
-		E35306FC214813B7008FE492 /* JavascriptPluginInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306FB214813B7008FE492 /* JavascriptPluginInstance.swift */; };
-		E3530700214908DD008FE492 /* JavascriptAPIHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306FF214908DC008FE492 /* JavascriptAPIHttp.swift */; };
-		E3530702214935DE008FE492 /* JavascriptAPIConsole.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3530701214935DE008FE492 /* JavascriptAPIConsole.swift */; };
-		E353070521496CE4008FE492 /* PrefPluginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E353070321496CE4008FE492 /* PrefPluginViewController.swift */; };
-		E353070621496CE4008FE492 /* PrefPluginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E353070421496CE4008FE492 /* PrefPluginViewController.xib */; };
 		E374160C20F138A900B4F7F9 /* CollapseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E374160B20F138A900B4F7F9 /* CollapseView.swift */; };
 		E374160F20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E374160D20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift */; };
 		E374161120F3C0AB00B4F7F9 /* PrefUtilsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E374161320F3C0AB00B4F7F9 /* PrefUtilsViewController.xib */; };
@@ -530,6 +533,8 @@
 		49542983216C34950058F680 /* OpenInIINA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OpenInIINA.entitlements; sourceTree = "<group>"; };
 		496B19911E2968530035AF10 /* PIP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PIP.framework; path = ../../../../System/Library/PrivateFrameworks/PIP.framework; sourceTree = "<group>"; };
 		519872FE26879B9B00F84BCC /* AccessibilityPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityPreferences.swift; sourceTree = "<group>"; };
+		51D34D8628DD4903006C2C87 /* AtomicBool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicBool.swift; sourceTree = "<group>"; };
+		51D34D8828DD4934006C2C87 /* AtomicBoolSemaphore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicBoolSemaphore.swift; sourceTree = "<group>"; };
 		5879479521A87DD700757A6F /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/MiniPlayerWindowController.strings; sourceTree = "<group>"; };
 		5879479621A87E6100757A6F /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/PreferenceWindowController.strings; sourceTree = "<group>"; };
 		5EF9F7E521FB42E900748374 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/MainMenu.strings"; sourceTree = "<group>"; };
@@ -1340,6 +1345,15 @@
 		E34EAA82251A36CE00057F27 /* JavascriptAPIFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIFile.swift; sourceTree = "<group>"; };
 		E3513AF620EF79C500F8C347 /* PreferenceWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceWindowController.swift; sourceTree = "<group>"; };
 		E3513AFA20F120F600F8C347 /* PreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceViewController.swift; sourceTree = "<group>"; };
+		E35306EE2147A8CE008FE492 /* JavascriptPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptPlugin.swift; sourceTree = "<group>"; };
+		E35306F32147F78D008FE492 /* JavascriptAPICore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPICore.swift; sourceTree = "<group>"; };
+		E35306F52147F7AF008FE492 /* JavascriptAPIMpv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIMpv.swift; sourceTree = "<group>"; };
+		E35306F9214808AB008FE492 /* JavascriptAPIEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIEvent.swift; sourceTree = "<group>"; };
+		E35306FB214813B7008FE492 /* JavascriptPluginInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptPluginInstance.swift; sourceTree = "<group>"; };
+		E35306FF214908DC008FE492 /* JavascriptAPIHttp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIHttp.swift; sourceTree = "<group>"; };
+		E3530701214935DE008FE492 /* JavascriptAPIConsole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIConsole.swift; sourceTree = "<group>"; };
+		E353070321496CE4008FE492 /* PrefPluginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefPluginViewController.swift; sourceTree = "<group>"; };
+		E353070421496CE4008FE492 /* PrefPluginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrefPluginViewController.xib; sourceTree = "<group>"; };
 		E36E8D7A24F6052F00B8C097 /* GuideWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideWindowController.swift; sourceTree = "<group>"; };
 		E3719CB428430FA4004E6633 /* libmpv.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpv.1.dylib; path = deps/lib/libmpv.1.dylib; sourceTree = "<group>"; };
 		E3719CB528430FA4004E6633 /* liblz4.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblz4.1.dylib; path = deps/lib/liblz4.1.dylib; sourceTree = "<group>"; };
@@ -1402,15 +1416,6 @@
 		E3719D5E284310A1004E6633 /* libXdmcp.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libXdmcp.6.dylib; path = deps/lib/libXdmcp.6.dylib; sourceTree = "<group>"; };
 		E3719D5F284310A1004E6633 /* libzimg.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libzimg.2.dylib; path = deps/lib/libzimg.2.dylib; sourceTree = "<group>"; };
 		E3719D60284310A1004E6633 /* libzmq.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libzmq.5.dylib; path = deps/lib/libzmq.5.dylib; sourceTree = "<group>"; };
-		E35306EE2147A8CE008FE492 /* JavascriptPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptPlugin.swift; sourceTree = "<group>"; };
-		E35306F32147F78D008FE492 /* JavascriptAPICore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPICore.swift; sourceTree = "<group>"; };
-		E35306F52147F7AF008FE492 /* JavascriptAPIMpv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIMpv.swift; sourceTree = "<group>"; };
-		E35306F9214808AB008FE492 /* JavascriptAPIEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIEvent.swift; sourceTree = "<group>"; };
-		E35306FB214813B7008FE492 /* JavascriptPluginInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptPluginInstance.swift; sourceTree = "<group>"; };
-		E35306FF214908DC008FE492 /* JavascriptAPIHttp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIHttp.swift; sourceTree = "<group>"; };
-		E3530701214935DE008FE492 /* JavascriptAPIConsole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIConsole.swift; sourceTree = "<group>"; };
-		E353070321496CE4008FE492 /* PrefPluginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefPluginViewController.swift; sourceTree = "<group>"; };
-		E353070421496CE4008FE492 /* PrefPluginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrefPluginViewController.xib; sourceTree = "<group>"; };
 		E374160B20F138A900B4F7F9 /* CollapseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapseView.swift; sourceTree = "<group>"; };
 		E374160D20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefUtilsViewController.swift; sourceTree = "<group>"; };
 		E374161220F3C0AB00B4F7F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PrefUtilsViewController.xib; sourceTree = "<group>"; };
@@ -1561,6 +1566,7 @@
 			files = (
 				B4E4470125CE3F930069F06E /* Sparkle in Frameworks */,
 				E3719CEC28430FA6004E6633 /* libmpv.1.dylib in Frameworks */,
+				51D34D8C28DD49C1006C2C87 /* Atomics in Frameworks */,
 				8451E6D92604AEFC009A15D7 /* Just in Frameworks */,
 				496B19921E2968530035AF10 /* PIP.framework in Frameworks */,
 				8403CEA72007CBD400645516 /* MediaPlayer.framework in Frameworks */,
@@ -1815,6 +1821,8 @@
 			children = (
 				84A886E21E24F2D3008755BB /* Sub */,
 				8497A4831D2FF573005F504F /* iina-Bridging-Header.h */,
+				51D34D8628DD4903006C2C87 /* AtomicBool.swift */,
+				51D34D8828DD4934006C2C87 /* AtomicBoolSemaphore.swift */,
 				84A0BA9A1D2FAB4100BC8DA1 /* Parameter.swift */,
 				84EB1F061D2F5E76004FA5A1 /* Utility.swift */,
 				8461C52F1D462488006E91FF /* VideoTime.swift */,
@@ -2218,15 +2226,6 @@
 			path = mpv;
 			sourceTree = "<group>";
 		};
-		AF119E67C2E61E10DC27039C /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				A1F8439D2926257DC5434942 /* Pods-iina.debug.xcconfig */,
-				61C6D8870FEB96F250D1448D /* Pods-iina.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		E35306F22147F770008FE492 /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -2323,6 +2322,7 @@
 				B4E446F625CB54EF0069F06E /* Mustache */,
 				B4E4470025CE3F930069F06E /* Sparkle */,
 				8451E6D82604AEFC009A15D7 /* Just */,
+				51D34D8B28DD49C1006C2C87 /* Atomics */,
 			);
 			productName = mpvx;
 			productReference = 84EB1ED61D2F51D3004FA5A1 /* IINA.app */;
@@ -2409,6 +2409,7 @@
 				B4E446F525CB54EF0069F06E /* XCRemoteSwiftPackageReference "GRMustache" */,
 				B4E446FF25CE3F930069F06E /* XCRemoteSwiftPackageReference "Sparkle" */,
 				8451E6D72604AEFC009A15D7 /* XCRemoteSwiftPackageReference "Just" */,
+				51D34D8A28DD49C1006C2C87 /* XCRemoteSwiftPackageReference "swift-atomics" */,
 			);
 			productRefGroup = 84EB1ED71D2F51D3004FA5A1 /* Products */;
 			projectDirPath = "";
@@ -2562,6 +2563,7 @@
 				84EC12831F4F939000137C1E /* FilterPresets.swift in Sources */,
 				E374160F20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift in Sources */,
 				E3FC31461FE1501E00B9B86F /* PowerSource.swift in Sources */,
+				51D34D8928DD4934006C2C87 /* AtomicBoolSemaphore.swift in Sources */,
 				8476440A1D48CC3D004F6DF5 /* MPVCommand.swift in Sources */,
 				84C8D5911D796F9700D98A0E /* Aspect.swift in Sources */,
 				E3383689202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.swift in Sources */,
@@ -2653,6 +2655,7 @@
 				E33BA5C7204BD9FE0069A0F6 /* SubChooseViewController.swift in Sources */,
 				8460FBA91D6497490081841B /* PlaylistViewController.swift in Sources */,
 				8450404A1E0B13230079C194 /* CropBoxView.swift in Sources */,
+				51D34D8728DD4903006C2C87 /* AtomicBool.swift in Sources */,
 				84F7258F1D486185000DEF1B /* MPVProperty.swift in Sources */,
 				E35306FC214813B7008FE492 /* JavascriptPluginInstance.swift in Sources */,
 				84A0BA971D2FA1CE00BC8DA1 /* PlayerCore.swift in Sources */,
@@ -4022,6 +4025,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		51D34D8A28DD49C1006C2C87 /* XCRemoteSwiftPackageReference "swift-atomics" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-atomics.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		8451E6D72604AEFC009A15D7 /* XCRemoteSwiftPackageReference "Just" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dduan/Just";
@@ -4065,6 +4076,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		51D34D8B28DD49C1006C2C87 /* Atomics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 51D34D8A28DD49C1006C2C87 /* XCRemoteSwiftPackageReference "swift-atomics" */;
+			productName = Atomics;
+		};
 		8451E6D82604AEFC009A15D7 /* Just */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8451E6D72604AEFC009A15D7 /* XCRemoteSwiftPackageReference "Just" */;

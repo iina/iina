@@ -115,6 +115,13 @@ class PlayerCore: NSObject {
   var miniPlayer: MiniPlayerWindowController!
 
   var mpv: MPVController!
+
+  /// Whether mpv has shutdown.
+  @AtomicBoolSemaphore private var isShutdown: Bool
+
+  /// Whether mpv playback has stopped and the media has been unloaded.
+  @AtomicBoolSemaphore private var isStopped: Bool
+
   var plugins: [JavascriptPluginInstance] = []
   private var pluginMap: [String: JavascriptPluginInstance] = [:]
   var pluginMenuNeedsUpdate = false
@@ -374,15 +381,36 @@ class PlayerCore: NSObject {
   }
 
   // Terminate mpv
-  func terminateMPV(sendQuit: Bool = true) {
+  func terminateMPV() {
     guard !isMpvTerminated else { return }
+    isMpvTerminated = true
     savePlaybackPosition()
     invalidateTimer()
     uninitVideo()
-    if sendQuit {
-      mpv.mpvQuit()
-    }
-    isMpvTerminated = true
+    // If quitting was initiated by mpv in response to the user pressing "q". then
+    // mpv will already be shutdown.
+    guard !isShutdown else { return }
+    mpv.mpvQuit()
+  }
+
+  func mpvHasShutdown(isMPVInitiated: Bool = false) {
+    let suffix = isMPVInitiated ? " (initiated by mpv)" : ""
+    Logger.log("Player has terminated\(suffix)", subsystem: subsystem)
+    isStopped = true
+    isShutdown = true
+  }
+
+  /// Wait until this player core has been terminated.
+  ///
+  /// The method `terminateMPV` **must** be called before calling this method. That method calls `mpvQuit`
+  /// which sends a `quit` command to mpv. That command executes asynchronously. This method waits unti
+  /// mpv emits an event indicating the `quit` command has completed executing.
+  /// - parameter timeout: The latest time to wait for this player core to terminate
+  func waitForTermination(timeout: DispatchTime) {
+    guard !isShutdown else { return }
+    Logger.log("Waiting for player termination", subsystem: subsystem)
+    guard $isShutdown.wait(timeout: timeout) == .timedOut else { return }
+    Logger.log("Timeout waiting for player termination", level: .warning, subsystem: subsystem)
   }
 
   // invalidate timer
@@ -509,9 +537,42 @@ class PlayerCore: NSObject {
     mpv.setFlag(MPVOption.PlaybackControl.pause, false)
   }
 
+  /// Stop playback and unload the media.
   func stop() {
-    mpv.command(.stop)
+    savePlaybackPosition()
+
+    mainWindow.videoView.stopDisplayLink()
     invalidateTimer()
+
+    info.currentFolder = nil
+    info.matchedSubs.removeAll()
+
+    // Do not send a stop command to mpv if it is already stopped. This happens when
+    // quitting is initiated directly through mpv.
+    guard !isStopped else { return }
+    Logger.log("Stopping playback", subsystem: subsystem)
+    mpv.command(.stop)
+  }
+
+  /// Playback has stopped and the media has been unloaded.
+  ///
+  /// This method is called by `MPVController` when mpv emits an event indicating the asynchronous mpv
+  /// `stop` command has completed executing.
+  func playbackStopped() {
+    Logger.log("Playback has stopped", subsystem: subsystem)
+    isStopped = true
+  }
+
+  /// Wait until this player has stopped.
+  ///
+  /// The method `stop` **must** be called before calling this method. That command executes asynchronously.
+  /// This method waits until mpv emits an event indicating the `stop` command has completed executing.
+  /// - parameter timeout: The latest time to wait for this player core to terminate
+  func waitForStopToFinish(timeout: DispatchTime) {
+    guard !isStopped else { return }
+    Logger.log("Waiting for playback to stop", subsystem: subsystem)
+    guard $isStopped.wait(timeout: timeout) == .timedOut else { return }
+    Logger.log("Timeout waiting for playback to stop", level: .warning, subsystem: subsystem)
   }
 
   func toggleMute(_ set: Bool? = nil) {
@@ -1210,8 +1271,13 @@ class PlayerCore: NSObject {
 
   func savePlaybackPosition() {
     guard Preference.bool(for: .resumeLastPosition) else { return }
-    Logger.log("Write watch later config", subsystem: subsystem)
-    mpv.command(.writeWatchLaterConfig)
+
+    // If the player is stopped then the file has been unloaded and it is too late to save the
+    // watch later configuration.
+    if !isStopped {
+      Logger.log("Write watch later config", subsystem: subsystem)
+      mpv.command(.writeWatchLaterConfig)
+    }
     if let url = info.currentURL {
       Preference.set(url, for: .iinaLastPlayedFilePath)
       // Write to cache directly (rather than calling `refreshCachedVideoProgress`).
@@ -1233,6 +1299,7 @@ class PlayerCore: NSObject {
 
   func fileStarted(path: String) {
     Logger.log("File started", subsystem: subsystem)
+    isStopped = false
     info.justStartedFile = true
     info.disableOSDForFileLoading = true
     currentMediaIsAudio = .unknown
@@ -1396,6 +1463,7 @@ class PlayerCore: NSObject {
   func refreshEdrMode() {
     guard mainWindow.loaded else { return }
     DispatchQueue.main.async {
+      guard !self.isStopped else { return }
       self.mainWindow.videoView.refreshEdrMode()
     }
   }

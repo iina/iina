@@ -80,8 +80,8 @@
 "osd.file_error" = "Error reading file";
 "osd.cannot_login" = "Cannot login";
 "osd.canceled" = "Canceled";
-"osd.cannotConnect" = "Cannot connect";
-"osd.timedOut" = "Timed Out";
+"osd.cannot_connect" = "Cannot connect";
+"osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Added Filter: %@";
 "osd.filter_removed" = "Removed Filter";
 "osd.file_loop" = "File Loop: %@";

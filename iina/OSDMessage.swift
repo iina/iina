@@ -315,13 +315,13 @@ enum OSDMessage {
 
     case .cannotConnect:
       return (
-        NSLocalizedString("osd.cannotConnect", comment: "Cannot connect"),
+        NSLocalizedString("osd.cannot_connect", comment: "Cannot connect"),
         .normal
       )
 
     case .timedOut:
       return (
-        NSLocalizedString("osd.timedOut", comment: "Timed out"),
+        NSLocalizedString("osd.timed_out", comment: "Timed out"),
         .normal
       )
 

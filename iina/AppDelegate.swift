@@ -136,6 +136,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       guideWindow.show(pages: [.highlights])
     }
 
+    // Hide Window > "Enter Full Screen" menu item, because this is already present in the Video menu
+    UserDefaults.standard.set(false, forKey: "NSFullScreenMenuItemEverywhere")
+
     SUUpdater.shared().feedURL = URL(string: Preference.bool(for: .receiveBetaUpdate) ? AppData.appcastBetaLink : AppData.appcastLink)!
 
     // handle arguments

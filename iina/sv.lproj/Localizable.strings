@@ -145,7 +145,7 @@
 
 "alert.fatal_error" = "Fatal error: %@ \nProgrammet avslutas nu.";
 "alert.mpv_error" = "Internt fel %@ (%@) vid inställning av alternativ %@.";
-"alert.sleep" = "Kan inte förhindra viloläge för skärm!";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "Den externa ljudfilen stöds ej.";
 "alert.unsupported_sub" = "Den externa undertexten stöds ej.";
@@ -223,6 +223,9 @@
 
 "alert.clear_watch_later.title" = "Rensa sparade uppspelningspositioner";
 "alert.clear_watch_later.message" = "Är du säker på att du vill radera all uppspelningsinformation (\"titta senare\"-data)?";
+
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
 
 "alert.nothing_to_open" = "Inget att öppna.";
 

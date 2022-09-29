@@ -145,7 +145,7 @@
 
 "alert.fatal_error" = "Error fatal: %@ \nLa aplicación se cerrará ahora.";
 "alert.mpv_error" = "Error interno %@ (%@) al configurar la opción %@.";
-"alert.sleep" = "¡No se puede evitar que la pantalla entre en reposo!";
+"alert.sleep" = "¡No se puede evitar que la pantalla entre en reposo! (0x%0X8)";
 
 "alert.unsupported_audio" = "Archivo de audio externo no compatible.";
 "alert.unsupported_sub" = "Subtítulo externo no compatible.";
@@ -223,6 +223,9 @@
 
 "alert.clear_watch_later.title" = "Borrar el progreso de reproducción guardada";
 "alert.clear_watch_later.message" = "¿Estás seguro de borrar todo el progreso de reproducción guardado (datos de \"ver más tarde\")?";
+
+"alert.restore_alerts.title" = "Restaurar alertas reprimidas";
+"alert.restore_alerts.message" = "¿Estás seguro de que quieres restaurar las alertas suprimidas?";
 
 "alert.nothing_to_open" = "Nada para abrir.";
 

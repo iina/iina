@@ -145,7 +145,7 @@
 
 "alert.fatal_error" = "致命的なエラー: %@ \nアプリケーションを終了します。";
 "alert.mpv_error" = "内部エラー %@ (%@) がユーザーオプション %@ の設定中に発生しました。";
-"alert.sleep" = "ディスプレイのスリープを解除できません！";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "対応していない外部のオーディオファイルです。";
 "alert.unsupported_sub" = "対応していない外部の字幕ファイルです。";
@@ -223,6 +223,9 @@
 
 "alert.clear_watch_later.title" = "保存済みの再生進度を消去する";
 "alert.clear_watch_later.message" = "本当にすべての保存済み再生進度(\"あとで見る\"情報)を消去しますか？";
+
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
 
 "alert.nothing_to_open" = "開くファイルがありません。";
 

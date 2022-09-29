@@ -145,7 +145,7 @@
 
 "alert.fatal_error" = "Fatale fout: %@ \nDe applicatie zal nu afsluiten.";
 "alert.mpv_error" = "Interne fout: %@ (%@) bij het instellen van optie %@.";
-"alert.sleep" = "Kan de slaapstand van het beeldscherm niet voorkomen.";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "Het externe audiobestand wordt niet ondersteund.";
 "alert.unsupported_sub" = "De externe ondertiteling wordt niet ondersteund.";
@@ -223,6 +223,9 @@
 
 "alert.clear_watch_later.title" = "Wis opgeslagen afspeelpositie";
 "alert.clear_watch_later.message" = "Weet je zeker dat je alle opgeslagen afspeelposities wilt wissen?";
+
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
 
 "alert.nothing_to_open" = "Niets om te openen.";
 

@@ -94,7 +94,7 @@
 "preference.control" = "Kontrol";
 "preference.keybindings" = "Kestirmeler";
 "preference.advanced" = "Gelişmiş";
-"preference.plugins" = "Plugins";
+"preference.plugins" = "Eklentiler";
 "preference.utilities" = "Araçlar";
 "preference.scripts" = "Betikler";
 "preference.not_logged_in" = "Giriş yapılmadı";
@@ -129,7 +129,7 @@
 "menu.sub_delay_down" = "Altyazı Gecikmesi - %.1f sn";
 
 "menu.crop_custom" = "Özel...";
-"menu.find_online_sub" = "Find Online Subtitles from %@";
+"menu.find_online_sub" = "Çevrimiçi Altyazı Bul";
 
 "track.none" = "<Hiçbiri>";
 
@@ -145,7 +145,7 @@
 
 "alert.fatal_error" = "Ölümcül hata: %@ \nUygulamadan şimdi çıkılacak.";
 "alert.mpv_error" = "İç hata: %@ (%@) %@ seçeneği hatalı.";
-"alert.sleep" = "Ekran uykusu engellenemiyor!";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "Desteklenmeyen harici ses dosyası.";
 "alert.unsupported_sub" = "Desteklenmeyen harici altyazı.";
@@ -223,6 +223,9 @@
 
 "alert.clear_watch_later.title" = "Kayıtlı Oynatma İşlemlerini Temizle";
 "alert.clear_watch_later.message" = "Kayıtlı tüm oynatma ilerlemesi silinecek emin misiniz (\"daha sonra izleyin\" verisi)?";
+
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
 
 "alert.nothing_to_open" = "Açılacak bir şey yok.";
 
@@ -341,4 +344,4 @@
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
 "plugin.check_for_updates" = "Check for Updates";
-"plugin.updating" = "Downloading update…";
+"plugin.updating" = "Güncelleme indiriliyor…";

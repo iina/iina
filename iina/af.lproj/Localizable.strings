@@ -145,7 +145,7 @@
 
 "alert.fatal_error" = "Fatale fout: %@ \nDie toepassing sal nou afsluit.";
 "alert.mpv_error" = "Interne fout: %@ (%@) by die instel van opsie %@.";
-"alert.sleep" = "Kan nie voorkom dat skerm slaap nie!";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "Onondersteunde eksterne oudiolêer.";
 "alert.unsupported_sub" = "Onondersteunde eksterne onderskrif.";
@@ -223,6 +223,9 @@
 
 "alert.clear_watch_later.title" = "Wis bewaarde afspeelposisies";
 "alert.clear_watch_later.message" = "Is u seker u wil alle bewaarde afspeelposisie wis (“kyk-later”-data)?";
+
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
 
 "alert.nothing_to_open" = "Niks om te open nie.";
 

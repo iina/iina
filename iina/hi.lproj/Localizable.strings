@@ -145,7 +145,7 @@
 
 "alert.fatal_error" = "घातक त्रुटि: %@ \n एप्लिकेशन अब बाहर निकल जाएगा।";
 "alert.mpv_error" = "आंतरिक गलती %@ (%@) विकल्प सेट करते समय %@।";
-"alert.sleep" = "प्रदर्शन नींद को रोक नहीं सकता!";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "असमर्थित बाहरी ऑडियो फ़ाइल।";
 "alert.unsupported_sub" = "असमर्थित बाहरी उपशीर्षक।";
@@ -223,6 +223,9 @@
 
 "alert.clear_watch_later.title" = "स्पष्ट प्लेबैक प्रगति को बचाया";
 "alert.clear_watch_later.message" = "क्या आप सभी सहेजे गए प्लेबैक प्रगति (\"बाद में देखना\" डेटा) को हटाना सुनिश्चित कर रहे हैं?";
+
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
 
 "alert.nothing_to_open" = "कुछ भी नहीं खोलने के लिए।";
 

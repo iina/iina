@@ -145,7 +145,7 @@
 
 "alert.fatal_error" = "ㄧ嚴重錯誤：%@ \n，IINA 即將關閉。";
 "alert.mpv_error" = "發生內部錯誤 %@（%@）（設定 %@ 時）";
-"alert.sleep" = "無法避免顯示器進入睡眠";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "不支援載入此音訊檔";
 "alert.unsupported_sub" = "不支援載入此字幕檔";
@@ -223,6 +223,9 @@
 
 "alert.clear_watch_later.title" = "清除儲存的播放進度";
 "alert.clear_watch_later.message" = "確定要清除所有儲存的播放進度，即「watch later」資料嗎？";
+
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
 
 "alert.nothing_to_open" = "沒有可打開的檔案。";
 

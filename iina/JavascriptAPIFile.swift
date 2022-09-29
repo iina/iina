@@ -248,7 +248,7 @@ class JavascriptFileHandle: NSObject, JavascriptFileHandleExportable {
         ptr?.deallocate()
     }
     let arrayBufferRef = JSObjectMakeTypedArrayWithBytesNoCopy(context.jsGlobalContextRef,
-                                                                kJSTypedArrayTypeInt8Array,
+                                                                kJSTypedArrayTypeUint8Array,
                                                                 rawPtr.baseAddress,
                                                                 length,
                                                                 deallocator,

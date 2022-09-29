@@ -145,7 +145,7 @@
 
 "alert.fatal_error" = "Erro fatal: %@ \nA aplicação vai ser encerrada agora.";
 "alert.mpv_error" = "Erro interno %@ (%@) ao definir a opção %@.";
-"alert.sleep" = "Impossível prevenir a pausa do ecrã!";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "Ficheiro de áudio externo não suportado.";
 "alert.unsupported_sub" = "Legenda externa não suportada.";
@@ -223,6 +223,9 @@
 
 "alert.clear_watch_later.title" = "Limpar progresso de reprodução guardado";
 "alert.clear_watch_later.message" = "Tem a certeza que quer apagar todo o progresso de reprodução gravado (dados do \"ver mais tarde\")?";
+
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
 
 "alert.nothing_to_open" = "Nada para abrir.";
 

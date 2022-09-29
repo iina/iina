@@ -145,7 +145,7 @@
 
 "alert.fatal_error" = "Závažná chyba: %@ \nAplikace se teď ukončí.";
 "alert.mpv_error" = "Vnitřní chyba %@ (%@) při nastavení možnosti %@.";
-"alert.sleep" = "Nelze zakázat automatické vypnutí monitoru!";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "Nepodporovaný externí zvukový soubor.";
 "alert.unsupported_sub" = "Nepodporované externí titulky.";
@@ -223,6 +223,9 @@
 
 "alert.clear_watch_later.title" = "Smazat uložené pozice přehrávání";
 "alert.clear_watch_later.message" = "Opravdu chcete smazat všechny uložené pozice přehrávání? (Data ve složce \"Přehrát později\")";
+
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
 
 "alert.nothing_to_open" = "Žádný soubor k přehrání.";
 

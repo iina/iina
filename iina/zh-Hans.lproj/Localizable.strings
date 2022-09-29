@@ -145,7 +145,7 @@
 
 "alert.fatal_error" = "严重错误：%@ \n程序将立即终止。";
 "alert.mpv_error" = "出现内部错误 %@ (%@) (设定选项 %@ 时)。";
-"alert.sleep" = "无法阻止显示休眠！";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "不支持的外置音频文件。";
 "alert.unsupported_sub" = "不支持的外挂字幕。";
@@ -223,6 +223,9 @@
 
 "alert.clear_watch_later.title" = "清除已保存的播放进度";
 "alert.clear_watch_later.message" = "确定清除所有保存的播放进度（即“watch later”）数据吗？";
+
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
 
 "alert.nothing_to_open" = "没有可打开的文件。";
 

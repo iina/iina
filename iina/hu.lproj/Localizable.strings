@@ -94,7 +94,7 @@
 "preference.control" = "Vezérlés";
 "preference.keybindings" = "Gyorsgombok";
 "preference.advanced" = "Haladó";
-"preference.plugins" = "Plugins";
+"preference.plugins" = "Pluginok";
 "preference.utilities" = "Eszközök";
 "preference.scripts" = "Szkriptek";
 "preference.not_logged_in" = "Nem vagy bejelentkezve";
@@ -129,7 +129,7 @@
 "menu.sub_delay_down" = "Felirat késleltetés - %.1f másodperccel";
 
 "menu.crop_custom" = "Egyéni...";
-"menu.find_online_sub" = "Find Online Subtitles from %@";
+"menu.find_online_sub" = "Online feliratok keresése innen: %@";
 
 "track.none" = "<None>";
 
@@ -145,7 +145,7 @@
 
 "alert.fatal_error" = "Kritikus hiba: %@\nAz alkalmazás bezárul.";
 "alert.mpv_error" = "Hiba történt %@ (%@) az opció %@ beállítása közben.";
-"alert.sleep" = "A kijelző alvó állapotát nem lehet megakadályozni!";
+"alert.sleep" = "A kijelző alvó állapotba lépését nem lehet megakadályozni! (0x%0X8)";
 
 "alert.unsupported_audio" = "Nem támogatott külsõ hang fájl.";
 "alert.unsupported_sub" = "Nem támogatott külsõ felirat.";
@@ -224,6 +224,9 @@
 "alert.clear_watch_later.title" = "Mentett lejátszási folyamat törlése";
 "alert.clear_watch_later.message" = "Biztos vagy benne, hogy törlöd az összes mentett lejátszási folyamatot (\"megtekintés később\" adatok)?";
 
+"alert.restore_alerts.title" = "Az elnyomott figyelmeztetések visszaállítása";
+"alert.restore_alerts.message" = "Biztosan vissza szeretné állítani az elnyomott figyelmeztetéseket?";
+
 "alert.nothing_to_open" = "Nincs mit megnyitni.";
 
 "alert.no_video_track" = "Nincs videó file.";
@@ -237,14 +240,14 @@
 "alert.assrt_token_prompt.message" = "Kérlek regisztrálj a megnyitott weboldalon. Szerezd meg a tokened a felhasználó főoldalán és írd be ide:";
 "alert.assrt_token_invalid" = "Az Assrt API tokened helytelen.";
 
-"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
-"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
-"alert.plugin_no_update" = "No update found.";
-"alert.plugin_update_found.title" = "Update found for %@";
-"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
-"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
-"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+"alert.plugin_uninstall.title" = "Biztosan eltávolítja a következőt: %@?";
+"alert.plugin_uninstall.message" = "A bővítmény törlődik a lemezről.";
+"alert.duplicated_plugin_id" = "Duplikált bővítmény-azonosítók észlelése. Két vagy több bővítmény azonos \"%@\" azonosítóval rendelkezik. Ez rendellenes viselkedést okozhat. Kérjük, keresse meg őket a Beállítások - Pluginok menüpontban, és jelentse a szerzőjüknek. Ha egy bővítményt helyileg telepítettek, manuálisan is megváltoztathatja az azonosítóját a bővítmény Info.json fájljában.";
+"alert.plugin_no_update" = "Nem található frissítés.";
+"alert.plugin_update_found.title" = "Frissítés található a következőhöz: %@";
+"alert.plugin_update_found.message" = "A legújabb verzió a(z) %@. Neked a(z) %@ van telepítve. Szeretne frissíteni?";
+"alert.plugin_permission" = "Ehhez a bővítményhez a következő engedélyekre van szükség. Kérjük, tekintse át őket a folytatás előtt.";
+"alert.plugin_permission_added" = "Ez a frissítés további engedélyeket igényel. Kérjük, tekintse át őket a folytatás előtt.";
 
 "playlist.total_length" = "%@ összesen";
 "playlist.total_length_with_selected" = "%@/%@ kiválasztva";
@@ -317,28 +320,28 @@
 
 // Plugin permissions
 
-"permissions.network-request.name" = "Network Request";
-"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
-"permissions.network-request.any_site" = "Any site";
-"permissions.show-osd.name" = "Show OSD";
-"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
-"permissions.show-alert.name" = "Show Alerts";
-"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
-"permissions.video-overlay.name" = "Add overlay on videos";
-"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
-"permissions.file-system.name" = "Access the file system";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.network-request.name" = "Hálózati kérés";
+"permissions.network-request.desc" = "Ez a bővítvény a következő webhelyekre kérhet vagy tölthet fel adatokat:";
+"permissions.network-request.any_site" = "Bármely webhely";
+"permissions.show-osd.name" = "OSD megjelenítése";
+"permissions.show-osd.desc" = "Ez a bővítvény képes megjeleníteni az OSD-n (képernyőn megjelenő kijelző) üzeneteket.";
+"permissions.show-alert.name" = "Figyelmeztetések megjelenítése";
+"permissions.show-alert.desc" = "Ez a bővítmény képes felugró figyelmeztetéseket megjeleníteni.";
+"permissions.video-overlay.name" = "Overlay hozzáadása videókhoz";
+"permissions.video-overlay.desc" = "Ez a bővítmény képes további tartalmakat megjeleníteni a videó tetején.";
+"permissions.file-system.name" = "Hozzáférés a fájlrendszerhez";
+"permissions.file-system.desc" = "Ez a bővítmény képes olvasni vagy írni a lemezen lévő fájlokat, beleértve az érzékeny információkat is. Más programokat vagy alkalmazásokat is meghívhat, amelyek kárt tehetnek a számítógépében. Ezért mindenképpen ellenőrizze a forrást.";
 
-"plugin.install" = "Install";
-"plugin.installed" = "Installed";
-"plugin.not_installed" = "Not Installed";
-"plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occured during the installation: %@";
-"alert.invalid_url" = "The URL is invalid.";
-"plugin.install_error.invalid_url" = "The URL is invalid.";
-"plugin.install_error.file_not_found" = "Cannot find the package file.";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Check for Updates";
-"plugin.updating" = "Downloading update…";
+"plugin.install" = "Telepítés";
+"plugin.installed" = "Telepítve";
+"plugin.not_installed" = "Nincs telepítve";
+"plugin.local" = "Helyben telepítve";
+"alert.plugin.install_error" = "Hiba lépett fel a telepítés során: %@";
+"alert.invalid_url" = "Érvénytelen link.";
+"plugin.install_error.invalid_url" = "Érvénytelen link.";
+"plugin.install_error.file_not_found" = "A csomagfájl nem található.";
+"plugin.install_error.cannot_download" = "Nem sikerült letölteni a plugint.\n\nKimenet:%@\n";
+"plugin.install_error.cannot_unpackage" = "Nem sikerült kicsomagolni a plugint.\n\nKimenet:%@\n";
+"plugin.install_error.cannot_load" = "Az IINA nem tudja betölteni ezt a bővítményt. Lehet, hogy rossz formátumban van.";
+"plugin.check_for_updates" = "Frissítések keresése";
+"plugin.updating" = "Frissítés letöltése…";

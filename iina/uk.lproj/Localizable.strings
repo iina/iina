@@ -94,7 +94,7 @@
 "preference.control" = "Керування";
 "preference.keybindings" = "Призначення клавіш";
 "preference.advanced" = "Експертні";
-"preference.plugins" = "Plugins";
+"preference.plugins" = "Плаґіни";
 "preference.utilities" = "Службові команди";
 "preference.scripts" = "Сценарії";
 "preference.not_logged_in" = "Не зайдено";
@@ -129,7 +129,7 @@
 "menu.sub_delay_down" = "Затримка субтитрів на –%.1f с";
 
 "menu.crop_custom" = "Інше...";
-"menu.find_online_sub" = "Find Online Subtitles from %@";
+"menu.find_online_sub" = "Знайти онлайн субтитри з %@";
 
 "track.none" = "<—>";
 
@@ -145,7 +145,7 @@
 
 "alert.fatal_error" = "Критична помилка: %@ \nПрограма зараз закриється.";
 "alert.mpv_error" = "Внутрішня помилка %@ (%@) при застосуванні опції %@.";
-"alert.sleep" = "Не можу запобігти вимкненню екрана!";
+"alert.sleep" = "Не вдалося запобігти переходу в режим сну! (0x%0X8)";
 
 "alert.unsupported_audio" = "Непідтримуваний зовнішній аудіофайл.";
 "alert.unsupported_sub" = "Непідтримувані зовнішні субтитри.";
@@ -223,6 +223,9 @@
 
 "alert.clear_watch_later.title" = "Очистити збережений прогрес перегляду";
 "alert.clear_watch_later.message" = "Упевнені, що хочете видалити весь прогрес перегляду (дані «переглянути пізніше»)?";
+
+"alert.restore_alerts.title" = "Відновити приховані оповіщення";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
 
 "alert.nothing_to_open" = "Немає чого відкривати.";
 

@@ -145,7 +145,7 @@
 
 "alert.fatal_error" = "Фатальная ошибка: %@ \nПриложение будет завершено.";
 "alert.mpv_error" = "Внутренняя ошибка %@ (%@) при установке опции %@.";
-"alert.sleep" = "Не удалось предотвратить переход дисплея в режим сна!";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "Неподдерживаемая внешняя аудиодорожка.";
 "alert.unsupported_sub" = "Неподдерживаемые внешние субтитры.";
@@ -223,6 +223,9 @@
 
 "alert.clear_watch_later.title" = "Очистить сохраненный прогресс воспроизведения";
 "alert.clear_watch_later.message" = "Вы уверены, что хотите удалить весь сохраненный прогресс воспроизведения (Посмотреть позже)?";
+
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
 
 "alert.nothing_to_open" = "Нечего открывать.";
 

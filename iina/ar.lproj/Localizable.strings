@@ -145,7 +145,7 @@
 
 "alert.fatal_error" = "خطأ: %@ \nسيتم الخروج من التطبيق الآن.";
 "alert.mpv_error" = "خطأ داخلي %@ (%@) عند خيار الإعداد %@.";
-"alert.sleep" = "لا يمكن منع عرض الإسبات!";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "ملف صوت خارجي غير مدعوم.";
 "alert.unsupported_sub" = "ملف ترجمه خارجي غير مدعوم.";
@@ -223,6 +223,9 @@
 
 "alert.clear_watch_later.title" = "مسح تقدم التشغيل المحفوظ";
 "alert.clear_watch_later.message" = "هل أنت متأكد من حذف كل تقدم التشغيل المحفوظ (\"مشاهدة لاحقاً\")؟";
+
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
 
 "alert.nothing_to_open" = "لا شيء لفتحه.";
 

@@ -5,13 +5,13 @@
 "0eK-kv-btH.title" = "비디오 크기의 0.5배";
 
 /* Class = "NSButtonCell"; title = "Customize…"; ObjectID = "1nM-AX-Ozm"; */
-"1nM-AX-Ozm.title" = "사용자설정…";
+"1nM-AX-Ozm.title" = "사용자 설정…";
 
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "2YJ-bg-OdR"; */
 "2YJ-bg-OdR.title" = "% (화면크기 대비)";
 
 /* Class = "NSTextFieldCell"; title = "Use left/right button for:"; ObjectID = "3CY-YS-rG6"; */
-"3CY-YS-rG6.title" = "키 사용:";
+"3CY-YS-rG6.title" = "좌우 키를 사용하여 동작:";
 
 /* Class = "NSTextFieldCell"; title = "MB"; ObjectID = "3jK-z5-NDH"; */
 "3jK-z5-NDH.title" = "MB";
@@ -23,7 +23,7 @@
 "7td-lH-8aK.title" = "윈도우 크기:";
 
 /* Class = "NSTextFieldCell"; title = "Auto hide after:"; ObjectID = "82A-XQ-BvS"; */
-"82A-XQ-BvS.title" = "일정 시간후 자동 숨김:";
+"82A-XQ-BvS.title" = "일정 시간 후 자동으로 숨김";
 
 /* Class = "NSMenuItem"; title = "bottom"; ObjectID = "92n-Uq-o4G"; */
 "92n-Uq-o4G.title" = "아래";
@@ -32,37 +32,37 @@
 "AE4-BD-wZi.title" = "% (화면크기 대비)";
 
 /* Class = "NSTextFieldCell"; title = "Window:"; ObjectID = "AmS-Sl-b2h"; */
-"AmS-Sl-b2h.title" = "윈도우:";
+"AmS-Sl-b2h.title" = "윈도우";
 
 /* Class = "NSMenuItem"; title = "Width:"; ObjectID = "B1c-oO-fIs"; */
-"B1c-oO-fIs.title" = "가로:";
+"B1c-oO-fIs.title" = "가로";
 
 /* Class = "NSButtonCell"; title = "Show chapter position in progress bar"; ObjectID = "BVV-Z3-LHR"; */
 "BVV-Z3-LHR.title" = "재생 상태 막대에 챕터 위치 표시";
 
 /* Class = "NSButtonCell"; title = "When media is opened manually"; ObjectID = "CJE-ap-IH8"; */
-"CJE-ap-IH8.title" = "파일을 수동으로 열때";
+"CJE-ap-IH8.title" = "파일을 수동으로 열 때";
 
 /* Class = "NSButtonCell"; title = "Show remaining time instead of total duration"; ObjectID = "EAa-gN-8dL"; */
-"EAa-gN-8dL.title" = "남은 재생시간 표시";
+"EAa-gN-8dL.title" = "남은 재생 시간 표시";
 
 /* Class = "NSTextFieldCell"; title = "When entering Picture-in-Picture:"; ObjectID = "EUd-RD-g0T"; */
 "EUd-RD-g0T.title" = "화면 속 화면으로 전환할 때:";
 
 /* Class = "NSTextFieldCell"; title = "On Screen Display:"; ObjectID = "F2e-CS-KXl"; */
-"F2e-CS-KXl.title" = "정보 표시 화면 (OSD):";
+"F2e-CS-KXl.title" = "정보 표시 화면 (OSD)";
 
 /* Class = "NSTextFieldCell"; title = "Picture-in-\nPicture:"; ObjectID = "G8w-J7-1q1"; */
-"G8w-J7-1q1.title" = "화면 속 화면:";
+"G8w-J7-1q1.title" = "화면 속 화면 (PiP)";
 
 /* Class = "NSTextFieldCell"; title = "Window:"; ObjectID = "GKy-3g-4MB"; */
-"GKy-3g-4MB.title" = "윈도우:";
+"GKy-3g-4MB.title" = "윈도우";
 
 /* Class = "NSTextFieldCell"; title = "side of the screen"; ObjectID = "GXO-iT-BIr"; */
 "GXO-iT-BIr.title" = "을 기준으로";
 
 /* Class = "NSTextFieldCell"; title = "Maximum cache size:"; ObjectID = "GYe-Y3-bOR"; */
-"GYe-Y3-bOR.title" = "최대 캐시 크기:";
+"GYe-Y3-bOR.title" = "최대 캐시 크기";
 
 /* Class = "NSMenuItem"; title = "1.5x video size"; ObjectID = "Goh-X4-4f1"; */
 "Goh-X4-4f1.title" = "비디오 크기의 1.5배";
@@ -74,7 +74,7 @@
 "I8t-ey-016.title" = "pt";
 
 /* Class = "NSTextFieldCell"; title = "Y offset:"; ObjectID = "KCL-Ki-A0p"; */
-"KCL-Ki-A0p.title" = "세로 기준:";
+"KCL-Ki-A0p.title" = "세로 기준";
 
 /* Class = "NSMenuItem"; title = "Fast Forward / Rewind"; ObjectID = "KJT-iG-2xc"; */
 "KJT-iG-2xc.title" = "빨리 감기 / 되감기";
@@ -83,19 +83,19 @@
 "MR7-Ac-SAO.title" = "원래 비디오 크기";
 
 /* Class = "NSTextFieldCell"; title = "Auto hide after:"; ObjectID = "NUr-hY-gfo"; */
-"NUr-hY-gfo.title" = "일정 시간후 자동 숨김:";
+"NUr-hY-gfo.title" = "일정 시간 후 자동으로 숨김";
 
 /* Class = "NSMenuItem"; title = "right"; ObjectID = "NYG-e9-DV0"; */
 "NYG-e9-DV0.title" = "오른쪽";
 
 /* Class = "NSButtonCell"; title = "Automatically pause playback"; ObjectID = "O8C-Vi-rSp"; */
-"O8C-Vi-rSp.title" = "자동으로 재생 일시 정지";
+"O8C-Vi-rSp.title" = "자동으로 일시 정지";
 
 /* Class = "NSTextFieldCell"; title = "s"; ObjectID = "ObY-7B-NTO"; */
 "ObY-7B-NTO.title" = "초";
 
 /* Class = "NSButtonCell"; title = "Initial window position:"; ObjectID = "Ofm-qE-RgQ"; */
-"Ofm-qE-RgQ.title" = "시작시 윈도우 위치:";
+"Ofm-qE-RgQ.title" = "시작 시 윈도우 위치";
 
 /* Class = "NSTextFieldCell"; title = "s"; ObjectID = "S8H-Xr-uVa"; */
 "S8H-Xr-uVa.title" = "초";
@@ -104,19 +104,19 @@
 "SFX-ct-8MB.title" = "재생할 때 모든 윈도우 위에 두기";
 
 /* Class = "NSMenuItem"; title = "Speed"; ObjectID = "TWq-Xb-8Ee"; */
-"TWq-Xb-8Ee.title" = "재생속도";
+"TWq-Xb-8Ee.title" = "재생 속도";
 
 /* Class = "NSMenuItem"; title = "Medium Light"; ObjectID = "TdN-pM-HHk"; */
 "TdN-pM-HHk.title" = "미디엄 라이트";
 
 /* Class = "NSMenuItem"; title = "Height:"; ObjectID = "Uc9-An-930"; */
-"Uc9-An-930.title" = "세로:";
+"Uc9-An-930.title" = "세로";
 
 /* Class = "NSMenuItem"; title = "point"; ObjectID = "UhG-bZ-2zY"; */
 "UhG-bZ-2zY.title" = "포인트";
 
 /* Class = "NSMenuItem"; title = "Dark"; ObjectID = "VvZ-mQ-wQB"; */
-"VvZ-mQ-wQB.title" = "다크";
+"VvZ-mQ-wQB.title" = "다크 모드";
 
 /* Class = "NSMenuItem"; title = "point"; ObjectID = "X5B-TZ-ISz"; */
 "X5B-TZ-ISz.title" = "포인트";
@@ -128,7 +128,7 @@
 "Ydi-yB-FMe.title" = "화면";
 
 /* Class = "NSTextFieldCell"; title = "X offset:"; ObjectID = "Ymw-tr-6rw"; */
-"Ymw-tr-6rw.title" = "가로 기준:";
+"Ymw-tr-6rw.title" = "가로 기준";
 
 /* Class = "NSButtonCell"; title = "Do nothing"; ObjectID = "Zc7-sP-Rdp"; */
 "Zc7-sP-Rdp.title" = "동작 없음";
@@ -146,10 +146,10 @@
 "duf-3s-3bL.title" = "크기 조정하지 않음";
 
 /* Class = "NSButtonCell"; title = "Use physical resolution on Retina displays"; ObjectID = "fsj-YE-OB7"; */
-"fsj-YE-OB7.title" = "레티나 화면에서 실제 해상도 사용";
+"fsj-YE-OB7.title" = "Retina Display에서 실제 해상도 사용";
 
 /* Class = "NSTextFieldCell"; title = "On Screen Controller:"; ObjectID = "g06-Ja-Ot8"; */
-"g06-Ja-Ot8.title" = "재생 제어기 (OSC):";
+"g06-Ja-Ot8.title" = "재생 제어기 (OSC)";
 
 /* Class = "NSTextFieldCell"; title = "of the screen"; ObjectID = "iRn-3s-oQH"; */
 "iRn-3s-oQH.title" = "를 기준으로";
@@ -158,16 +158,16 @@
 "kOT-8q-E57.title" = "전체 화면에서 시간과 배터리 정보 보여주기";
 
 /* Class = "NSTextFieldCell"; title = "Thumbnail Preview:"; ObjectID = "kYu-0l-jQQ"; */
-"kYu-0l-jQQ.title" = "썸네일 미리보기:";
+"kYu-0l-jQQ.title" = "섬네일 미리보기";
 
 /* Class = "NSTextFieldCell"; title = "Layout:"; ObjectID = "l54-63-V6n"; */
-"l54-63-V6n.title" = "화면에서의 위치:";
+"l54-63-V6n.title" = "화면에서의 위치";
 
 /* Class = "NSMenuItem"; title = "Light"; ObjectID = "lZc-Dl-3cQ"; */
-"lZc-Dl-3cQ.title" = "라이트";
+"lZc-Dl-3cQ.title" = "라이트 모드";
 
 /* Class = "NSTextFieldCell"; title = "Appearance:"; ObjectID = "mM7-1Q-FyL"; */
-"mM7-1Q-FyL.title" = "모양새:";
+"mM7-1Q-FyL.title" = "모양새";
 
 /* Class = "NSButtonCell"; title = "Snap to center when dragging"; ObjectID = "mdD-if-Wqw"; */
 "mdD-if-Wqw.title" = "마우스로 끌때 화면 가운데 맞춤";
@@ -206,7 +206,7 @@
 "xMh-SP-nkc.title" = "OSD 사용";
 
 /* Class = "NSTextFieldCell"; title = "Toolbar:"; ObjectID = "xP1-Vh-27X"; */
-"xP1-Vh-27X.title" = "도구막대:";
+"xP1-Vh-27X.title" = "도구 막대";
 
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "xrJ-Um-BrJ"; */
 "xrJ-Um-BrJ.title" = "% (화면크기 대비)";
@@ -218,7 +218,7 @@
 "yIN-jg-MxS.title" = "항상";
 
 /* Class = "NSTextFieldCell"; title = "Theme:"; ObjectID = "yLF-vu-1Gl"; */
-"yLF-vu-1Gl.title" = "테마:";
+"yLF-vu-1Gl.title" = "화면 모드:";
 
 /* Class = "NSButtonCell"; title = "Initial window size:"; ObjectID = "zOq-Em-wUe"; */
 "zOq-Em-wUe.title" = "시작시 윈도우 크기:";

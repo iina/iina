@@ -7,7 +7,7 @@
 */
 // Common
 
-"general.on" = "On";
+"general.on" = "Pornit";
 "general.off" = "Oprit";
 "general.login" = "Logare";
 "general.logout" = "Ieșire";
@@ -17,24 +17,24 @@
 "general.password" = "Parolă";
 
 // Guide Window
-"guide.highlights" = "Highlights";
-"guide.basic_settings" = "Basic Settings";
-"guide.faq" = "Frequently Asked Questions";
+"guide.highlights" = "Evidențiator";
+"guide.basic_settings" = "Setări de bază";
+"guide.faq" = "Întrebări adresate frecvent";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Buffering… %d%%";
+"main.buffering_indicator" = "Buffering...%d%%";
 "main.opening_stream" = "Se deschide streamul…";
-"osc.precision" = "Precision";
-"osc.1s" = "1 second";
-"osc.100ms" = "100 milliseconds";
-"osc.10ms" = "10 milliseconds";
-"osc.1ms" = "1 millisecond";
+"osc.precision" = "Precizie";
+"osc.1s" = "O secundă";
+"osc.100ms" = "100 milisecunde";
+"osc.10ms" = "10 milisecunde";
+"osc.1ms" = "o milisecundă";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Implicit";
 "quicksetting.item_none" = "Fără";
-"quicksetting.hwdec" = "Hardware Decoding";
-"quicksetting.deinterlace" = "Deinterlace";
+"quicksetting.hwdec" = "Decodare hardware";
+"quicksetting.deinterlace" = "Deîntrețesere";
 "quicksetting.hdr" = "HDR";
 
 // OSDMessage.swift
@@ -46,7 +46,7 @@
 "osd.crop" = "Decupare: %@";
 "osd.rotate" = "Rotește: %i°";
 "osd.deinterlace" = "Deîntrețesere: %@";
-"osd.hwdec" = "Hardware Decoding: %@";
+"osd.hwdec" = "Decodare hardware: %@";
 "osd.audio_delay.nodelay" = "Întârziere audio: Fără întârziere";
 "osd.audio_delay.later" = "Întârziere audio: %.2fs mai târziu";
 "osd.audio_delay.earlier" = "Întârziere audio: %.2fs mai devreme";
@@ -57,10 +57,10 @@
 "osd.mute" = "Mut";
 "osd.unmute" = "Activează sunetul";
 "osd.screenshot" = "Captură de ecran realizată";
-"osd.abloop.a" = "AB-Loop: A";
-"osd.abloop.b" = "AB-Loop: B";
+"osd.abloop.a" = "Buclă-AB: A";
+"osd.abloop.b" = "Buclă-AB: B";
 "osd.abloop.clear" = "AB-Loop: Șters";
-"osd.stop" = "Stop";
+"osd.stop" = "Oprire";
 "osd.chapter" = "Capitol: %@";
 "osd.subtitle_scale" = "Scală subtitrare: %.2fx";
 "osd.add_to_playlist" = "Fișierul %i a fost adăugat la lista de redare";
@@ -82,16 +82,19 @@
 "osd.canceled" = "Anulat";
 "osd.filter_added" = "Filtru adăugat: %@";
 "osd.filter_removed" = "Filtru șters";
+"osd.file_loop" = "Redare fișier în buclă: %@";
+"osd.playlist_loop" = "Redare playlist în buclă: %@";
 
 "preference.title" = "Preferințe";
 "preference.general" = "General";
-"preference.ui" = "UI";
+"preference.ui" = "Interfață";
 "preference.video_audio" = "Video/Audio";
 "preference.subtitle" = "Subtitrare";
 "preference.network" = "Rețea";
 "preference.control" = "Control";
 "preference.keybindings" = "Atribuiri de taste";
 "preference.advanced" = "Avansat";
+"preference.plugins" = "Plugins";
 "preference.utilities" = "Utilități";
 "preference.scripts" = "Scripturi";
 "preference.not_logged_in" = "Nu te-ai logat";
@@ -101,7 +104,7 @@
 "preference.key_binding_hint_1" = "Pentru a edita o atribuire de taste in configurația curentă, click pe butonul „Duplicare…” pentru a crea o copie.";
 "preference.key_binding_hint_2" = "Dublu click pe un rând din dreapta pentru a edita tasta atribuită.";
 
-"preference.enable_adv_settings" = "Enable advanced settings";
+"preference.enable_adv_settings" = "Activează setările avansate";
 
 "menu.volume" = "Volum: %d";
 "menu.audio_delay" = "Întârziere audio: %.2fs";
@@ -125,7 +128,8 @@
 "menu.sub_delay_up" = "Întârziere subitrare +%.1fs";
 "menu.sub_delay_down" = "Întârziere subitrare -%.1fs";
 
-"menu.crop_custom" = "Custom...";
+"menu.crop_custom" = "Personalizează...";
+"menu.find_online_sub" = "Find Online Subtitles from %@";
 
 "track.none" = "<None>";
 
@@ -185,9 +189,9 @@
 
 "alert.set_default.title" = "Setează IINA ca aplicație implicită";
 "alert.set_default.message" = "IINA va fi aplicația implictă pentru toate fișierele pe care le suportă.";
-"alert.set_default.success" = "Finished with %d success and %d failed.";
+"alert.set_default.success" = "Terminat(e) %d cu succes și %d eșuat(e).";
 
-"alert.add_watch.title" = "Add Watch Property";
+"alert.add_watch.title" = "Adăugați o proprietate de ceas";
 "alert.add_watch.message" = "Te rog introdu un nume valid pentru proprietatea mpv";
 
 "alert.jump_to.title" = "Sari la";
@@ -233,6 +237,15 @@
 "alert.assrt_token_prompt.message" = "Înregistrează-te în pagina deschiă. Obține token-ul din pagina ta home și introdu-l mai jos:";
 "alert.assrt_token_invalid" = "Token-ul API Assrt pare să fie invalid.";
 
+"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
+"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
+"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+"alert.plugin_no_update" = "No update found.";
+"alert.plugin_update_found.title" = "Update found for %@";
+"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
+"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
+"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+
 "playlist.total_length" = "%@ în total";
 "playlist.total_length_with_selected" = "%@ din %@ selectat";
 "pl_menu.title_multi" = "%d elemente";
@@ -265,7 +278,7 @@
 "hwdec.auto" = "Activează decodarea hardware. Cu toate acestea, multe filtre video nu vor funcționa corect.";
 "hwdec.auto-copy" = "Activează decodarea hardware. Va consuma dublul de memorie, dar va funcționa cu filtrele video.";
 
-"subencoding.auto" = "Auto detect";
+"subencoding.auto" = "Detectează automat";
 
 "osc_toolbar.settings" = "Setări rapide";
 "osc_toolbar.playlist" = "Listă de redare și capitole";
@@ -274,15 +287,15 @@
 "osc_toolbar.music_mode" = "Intră în modul Muzică";
 "osc_toolbar.sub_track" = "Alege pista de subtitrare";
 
-"mini_player.album_art" = "Toggle album art";
-"mini_player.loop" = "Repeat";
-"mini_player.shuffle" = "Shuffle";
-"mini_player.remove" = "Remove from playlist";
-"mini_player.add" = "Add to playlist";
-"mini_player.delete" = "Delete all tracks from playlist";
-"mini_player.volume" = "Volume";
-"mini_player.close" = "Close music mode";
-"mini_player.back" = "Return to video mode";
+"mini_player.album_art" = "Comută coperta albumului";
+"mini_player.loop" = "Repetare";
+"mini_player.shuffle" = "Amestecă";
+"mini_player.remove" = "Elimină din lista de redare";
+"mini_player.add" = "Adaugă la lista de redare";
+"mini_player.delete" = "Șterge tot din lista de redare";
+"mini_player.volume" = "Volum";
+"mini_player.close" = "Închide modul muzică";
+"mini_player.back" = "Înapoi la modul video";
 
 // Touch bar
 
@@ -299,5 +312,33 @@
 "touchbar.play_pause" = "Redă/Pauză";
 "touchbar.seek" = "Căutare";
 "touchbar.time" = "Timp curent";
-"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
+"touchbar.remainingTimeOrTotalDuration" = "Timp Rămas / Total Durată";
 "touchbar.toggle_pip" = "Activează Picture-in-Picture";
+
+// Plugin permissions
+
+"permissions.network-request.name" = "Network Request";
+"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
+"permissions.network-request.any_site" = "Any site";
+"permissions.show-osd.name" = "Show OSD";
+"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
+"permissions.show-alert.name" = "Show Alerts";
+"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
+"permissions.video-overlay.name" = "Add overlay on videos";
+"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
+"permissions.file-system.name" = "Access the file system";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+
+"plugin.install" = "Install";
+"plugin.installed" = "Installed";
+"plugin.not_installed" = "Not Installed";
+"plugin.local" = "Installed locally";
+"alert.plugin.install_error" = "Error occured during the installation: %@";
+"alert.invalid_url" = "The URL is invalid.";
+"plugin.install_error.invalid_url" = "The URL is invalid.";
+"plugin.install_error.file_not_found" = "Cannot find the package file.";
+"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
+"plugin.check_for_updates" = "Check for Updates";
+"plugin.updating" = "Downloading update…";

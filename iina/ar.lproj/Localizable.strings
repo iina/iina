@@ -1,0 +1,344 @@
+/*
+  String_ui.strings
+  iina
+
+  Created by lhc on 3/1/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+// Common
+
+"general.on" = "تشغيل";
+"general.off" = "إيقاف";
+"general.login" = "تسجيل الدخول";
+"general.logout" = "تسجيل الخروج";
+"general.ok" = "حسناً";
+"general.cancel" = "إلغاء";
+"general.username" = "اسم المستخدم";
+"general.password" = "كلمة المرور";
+
+// Guide Window
+"guide.highlights" = "الأشياء الهامة";
+"guide.basic_settings" = "الإعدادات الأساسية";
+"guide.faq" = "الأسئلة المتكررة";
+
+// MainWindowController.swift
+"main.buffering_indicator" = "التخزين… %d%%";
+"main.opening_stream" = "فتح البث…";
+"osc.precision" = "الدقة";
+"osc.1s" = "1 ثانية";
+"osc.100ms" = "100 مللي ثانية";
+"osc.10ms" = "10 مللي ثانية";
+"osc.1ms" = "1 مللي ثانية";
+
+// QuickSettingViewController.swift
+"quicksetting.item_default" = "الافتراضي";
+"quicksetting.item_none" = "لا شيء";
+"quicksetting.hwdec" = "فك ترميز الجهاز";
+"quicksetting.deinterlace" = "تشابك";
+"quicksetting.hdr" = "النطاق الديناميكي العالي HDR";
+
+// OSDMessage.swift
+"osd.pause" = "إيقاف مؤقت";
+"osd.resume" = "استئناف";
+"osd.volume" = "الصوت: %i";
+"osd.speed" = "السرعة: %.2fx";
+"osd.aspect" = "نسبة العرض والارتفاع: %@";
+"osd.crop" = "قص صورة: %@";
+"osd.rotate" = "تدوير: %i°";
+"osd.deinterlace" = "تشابك: %@";
+"osd.hwdec" = "فك ترميز: %@";
+"osd.audio_delay.nodelay" = "تأخير الصوت: لا تأخير";
+"osd.audio_delay.later" = "تأخير الصوت: %.2fثانية لاحقاً";
+"osd.audio_delay.earlier" = "تأخير الصوت: %.2fثانية سابقة";
+"osd.sub_delay.nodelay" = "تأخير الترجمة: لا تأخير";
+"osd.sub_delay.later" = "تأخير الترجمة: %.2fث لاحقاً";
+"osd.sub_delay.earlier" = "تأخير الترجمة: %.2fثانية سابقة";
+"osd.subtitle_pos" = "موضع الترجمة: %.1f";
+"osd.mute" = "كتم";
+"osd.unmute" = "إلغاء الكتم";
+"osd.screenshot" = "تم التقاط لقطة الشاشة";
+"osd.abloop.a" = "AB-دورة: A";
+"osd.abloop.b" = "AB-دورة: A";
+"osd.abloop.clear" = "AB-Loop: مسح";
+"osd.stop" = "إيقاف";
+"osd.chapter" = "الفصل: %@";
+"osd.subtitle_scale" = "حجم الترجمة: %.2fx";
+"osd.add_to_playlist" = "تم إضافة %i ملفات إلى قائمة التشغيل";
+"osd.clear_playlist" = "مسح قائمة التشغيل";
+"osd.video_eq.contrast" = "التباين: %i";
+"osd.video_eq.gamma" = "Gamma: %i";
+"osd.video_eq.hue" = "Hue: %i";
+"osd.video_eq.saturation" = "التشبع: %i";
+"osd.video_eq.brightness" = "السطوع: %i";
+"osd.find_online_sub" = "العثور على الترجمة عبر الإنترنت…";
+"osd.find_online_sub.source" = "من";
+"osd.sub_not_found" = "لم يتم العثور على ترجمات";
+"osd.sub_found" = "تم العثور على ترجمات %d. تحميل…";
+"osd.sub_downloaded" = "تم تنزيل الترجمة";
+"osd.sub_saved" = "تم حفظ الترجمة";
+"osd.network_error" = "خطأ في الشبكة";
+"osd.file_error" = "خطأ في قراءة الملف";
+"osd.cannot_login" = "لا يمكن تسجيل الدخول";
+"osd.canceled" = "ملغاة";
+"osd.filter_added" = "تمت إضافة فلتر: %@";
+"osd.filter_removed" = "إزالة الفلتر";
+"osd.file_loop" = "File Loop: %@";
+"osd.playlist_loop" = "Playlist Loop: %@";
+
+"preference.title" = "التفضيلات";
+"preference.general" = "عام";
+"preference.ui" = "واجهة التشغيل";
+"preference.video_audio" = "فيديو/صوت";
+"preference.subtitle" = "الترجمة";
+"preference.network" = "الشبكة";
+"preference.control" = "التحكم";
+"preference.keybindings" = "ربط المفتاح";
+"preference.advanced" = "متقدم";
+"preference.plugins" = "Plugins";
+"preference.utilities" = "المرافق";
+"preference.scripts" = "البرامج النصية";
+"preference.not_logged_in" = "لم يتم تسجيل الدخول";
+"preference.logged_in_as" = "تم تسجيل الدخول كـ %@";
+"preference.system_media_control" = "استخدم تحكم الميديا الخاص بالنظام";
+
+"preference.key_binding_hint_1" = "لتحرير ارتباطات المفاتيح في ملف التكوين الحالي، انقر فوق زر \"تكرار…\" أولاً لإنشاء نسخة.";
+"preference.key_binding_hint_2" = "انقر نقرا مزدوجا على صف على الجانب الأيمن لتحرير ربط المفتاح المقابل.";
+
+"preference.enable_adv_settings" = "تمكين الإعدادات المتقدمة";
+
+"menu.volume" = "الصوت: %d";
+"menu.audio_delay" = "تأخير الصوت: %.2fث";
+"menu.sub_delay" = "تأخير الترجمه: %.2f ثانيه";
+"menu.fullscreen" = "الدخول إلى وضع ملء الشاشة";
+"menu.exit_fullscreen" = "إنهاء وضع ملء الشاشة";
+"menu.pip" = "الدخول إلى وضع صورة في صورة";
+"menu.exit_pip" = "الخروج من وضع صورة في صورة";
+"menu.pause" = "إيقاف مؤقت";
+"menu.resume" = "استئناف";
+"menu.speed" = "السرعة: %.2fx";
+
+"menu.seek_forward" = "خطوة إلى الأمام %.0f ثانية";
+"menu.seek_backward" = "خطوة إلى الوراء %.0f ثانية";
+"menu.speed_up" = "سرعه التشغيل: %.1fx";
+"menu.speed_down" = "سرعه التشغيل: %.1f";
+"menu.volume_up" = "الصوت: %.0f";
+"menu.volume_down" = "الصوت: %.0f";
+"menu.audio_delay_up" = "تأخير الصوت: +%.1f ثانيه";
+"menu.audio_delay_down" = "تأخير الصوت: -%.1f ثانيه";
+"menu.sub_delay_up" = "تأخير الترجمه: +%.1f ثانيه";
+"menu.sub_delay_down" = "تأخير الترجمه: -%.1f ثانيه";
+
+"menu.crop_custom" = "مخصص...";
+"menu.find_online_sub" = "Find Online Subtitles from %@";
+
+"track.none" = "<None>";
+
+"subtrack.no_loaded" = "لم يتم العثور على ترجمات محمّله";
+"subtrack.no_external" = "لم يتم العثور على ترجمات خارجيه";
+
+// Alerts
+"alert.beta_channel.title" = "تلقي التحديثات للإصدارات التجريبية";
+
+"alert.title_error" = "خطأ";
+"alert.title_warning" = "تحذير";
+"alert.title_info" = "معلومات";
+
+"alert.fatal_error" = "خطأ: %@ \nسيتم الخروج من التطبيق الآن.";
+"alert.mpv_error" = "خطأ داخلي %@ (%@) عند خيار الإعداد %@.";
+"alert.sleep" = "لا يمكن منع عرض الإسبات!";
+
+"alert.unsupported_audio" = "ملف صوت خارجي غير مدعوم.";
+"alert.unsupported_sub" = "ملف ترجمه خارجي غير مدعوم.";
+"alert.unsupported_url" = "رابط غير مدعوم.";
+"alert.wrong_url_format" = "تنسيق عنوان URL خاطئ.";
+
+"alert.error_open" = "لا يمكن فتح الملف أو عرضه!";
+"alert.error_finding_file" = "لا يمكن العثور على %@ ملف!";
+"alert.error_loading_script" = "لا يمكن تحميل النص %@!";
+"alert.error_saving_file" = "حدث خطأ في أثناء الحفظ %@: %@";
+"alert.error_deleting_file" = "لا يمكن حذف الملف.";
+
+"alert.config.new.title" = "تكوين مصدر إدخال جديد";
+"alert.config.new.message" = "الرجاء إدخال اسم للتكوين الجديد.";
+"alert.config.duplicate.title" = "تكرار الإعدادات";
+"alert.config.duplicate.message" = "الرجاء إدخال اسم لملف التكوين المكرر.";
+"alert.config.empty_name" = "الاسم لا يمكن أن يكون فارغاً.";
+"alert.config.name_existing" = "الاسم موجود مسبقا.";
+"alert.config.file_existing.title" = "الملف موجود بالفعل";
+"alert.config.file_existing.message" = "هذا لا ينبغي أن يحدث. اختر موافق للإستبدال، اختر إلغاء لعرض الملف في Finder.";
+"alert.config.cannot_create" = "لا يمكن إنشاء ملف التكوين!\n%@";
+"alert.config.cannot_write" = "لا يمكن الكتابة إلى ملف التكوين!";
+
+"alert.filter.incorrect" = "حدث خطأ أثناء إعداد عوامل التصفية. الرجاء التحقق من صيغة الوسيط الخاصة بك.";
+"alert.add_filter.title" = "عامل تصفية جديد";
+"alert.add_filter.message" = "الرجاء إدخال سلسلة فلتر في شكل أمر mpv أو af.";
+
+"alert.keybinding_config.error" = "حدث خطأ أثناء تحليل ملف تكوين الربط المفاتيح\"%@\"! العودة إلى إعدادات ربط المفتاح الافتراضي لـ IINA. الرجاء التحقق من الإعدادات الخاصة بك.";
+
+"alert.extra_option.cannot_read" = "لا يمكن قراءة خيارات mpv الإضافية المحددة للمستخدم.";
+"alert.extra_option.empty" = "المفتاح أو القيمة لا يمكن أن تكون فارغة!";
+"alert.extra_option.error" = "خطأ في خيار الإعداد --%@=%@ مع قيمة الإرجاع %d. الرجاء التحقق من إعدادات الخيار الإضافي الخاص بك في التفضيل > متقدم.";
+"alert.extra_option.config_folder" = "خطأ في إعداد دليل الإعداد\"%@\".";
+
+"alert.playlist.error_deleting" = "خطأ في الحذف: %@";
+
+"alert.sub.no_selected" = "الرجاء تحديد ترجمة تم تنزيلها أولاً.";
+"alert.sub_lang_not_set" = "الرجاء تعيين لغات الترجمة المفضلة في التفضيلات قبل استخدام الترجمات المفتوحة. سيتم استخدام اللغة الإنجليزية (eng) هذه المرة.";
+"alert.sub.cannot_save_passwd" = "لا يمكن حفظ كلمة المرور الخاصة بك في سلسلة المفاتيح: %@";
+"alert.sub.cannot_login" = "لا يمكن تسجيل الدخول. الرجاء التحقق من اسم المستخدم وكلمة المرور وحالة الشبكة.\n\n%@";
+
+"alert.set_default.title" = "تعيين IINA كتطبيق افتراضي";
+"alert.set_default.message" = "سيتم تعيين IINA كتطبيق افتراضي لجميع أنواع الملفات التي يدعمها.";
+"alert.set_default.success" = "تم الانتهاء بـ %d نجاح و %d فشل.";
+
+"alert.add_watch.title" = "إضافة خاصية مشاهدة";
+"alert.add_watch.message" = "الرجاء إدخال اسم خاصية mpv صالح.";
+
+"alert.jump_to.title" = "الانتقال إلى";
+"alert.jump_to.message" = "الرجاء إدخال الوقت الذي تريد القفز إليه. مثال: 20:35";
+
+"alert.opensub.login.title" = "تسجيل الدخول على OpenSubtitles";
+"alert.opensub.login.message" = "الرجاء إدخال اسم المستخدم وكلمة المرور الخاصة بك";
+
+"alert.open_url.title" = "فتح عنوان URL";
+"alert.open_url.message" = "الرجاء إدخال الرابط:";
+"alert.choose_media_file.title" = "اختيار ملفات الوسائط";
+
+"alert.add_url.title" = "إضافة عنوان URL";
+"alert.add_url.message" = "الرجاء إدخال الرابط:";
+
+"alert.delete_history.title" = "حذف سجل التشغيل";
+"alert.delete_history.message" = "هل أنت متأكد من حذف الإدخالات المحددة؟";
+
+"alert.filter_hwdec.message" = "أنت على وشك تطبيق فلتر فيديو. ومع ذلك، فترميز الأجهزة الحالية قد لا يدعم فلاتر الفيديو جيداً. يمكنك تعطيل فك ترميز الأجهزة أو التبديل إلى تلقائي (نسخ)، الذي سيستهلك ضعف الذاكرة.\nقد تحتاج إلى تكرار العملية السابقة (مثل إعداد حجم الفيديو) لجعلها تعمل.";
+"alert.filter_hwdec.abort" = "إيقاف";
+"alert.filter_hwdec.turn_off" = "إيقاف تشغيل فك ترميز الجهاز";
+"alert.filter_hwdec.use_copy" = "التبديل إلى تلقائي (نسخ)";
+
+"alert.clear_cache.title" = "مسح ذاكرة التخزين المؤقت للمصغرات";
+"alert.clear_cache.message" = "هل أنت متأكد من مسح كل ذاكرة التخزين المؤقت؟";
+
+"alert.clear_history.title" = "مسح سجل التشغيل";
+"alert.clear_history.message" = "هل أنت متأكد من حذف جميع سجلات التشغيل؟";
+
+"alert.clear_watch_later.title" = "مسح تقدم التشغيل المحفوظ";
+"alert.clear_watch_later.message" = "هل أنت متأكد من حذف كل تقدم التشغيل المحفوظ (\"مشاهدة لاحقاً\")؟";
+
+"alert.nothing_to_open" = "لا شيء لفتحه.";
+
+"alert.no_video_track" = "لا يوجد مسار فيديو.";
+
+"alert.duplicate_config" = "لا يمكنك تعديل الإعدادات الافتراضية مباشرة. الرجاء تكرار واحد قبل التعديل.";
+
+"alert.assrt_register" = "نظراً لحصة API المحدودة، يوصى بشدة باستخدام رمز API الخاص بك. الرمز الافتراضي هو فقط للاستخدام التجريبي، وقد تواجه خطأ في الشبكة.";
+"alert.assrt_register.register" = "تسجيل الآن";
+"alert.assrt_register.try" = "حاول أولاً";
+"alert.assrt_token_prompt.title" = "أدخل رمز API الخاص بك";
+"alert.assrt_token_prompt.message" = "الرجاء التسجيل في صفحة الويب المفتوحة. احصل على الرمز المميز الخاص بك في الصفحة الرئيسية للمستخدم الخاص بك وإدخاله أدناه:";
+"alert.assrt_token_invalid" = "يبدو أن رمز API الخاص بك غير صالح.";
+
+"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
+"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
+"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+"alert.plugin_no_update" = "No update found.";
+"alert.plugin_update_found.title" = "Update found for %@";
+"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
+"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
+"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+
+"playlist.total_length" = "%@ في المجموع";
+"playlist.total_length_with_selected" = "تم تحديد %@ من %@";
+"pl_menu.title_multi" = "%d عناصر";
+"pl_menu.play_next" = "تشغيل التالي";
+"pl_menu.play_in_new_window" = "تشغيل في نافذة جديدة";
+"pl_menu.remove" = "حذف";
+"pl_menu.remove_multi" = "حذف المحدد";
+"pl_menu.delete" = "نقل إلى سلة المهملات";
+"pl_menu.delete_multi" = "نقل الملفات المحددة إلى سلة المهملات";
+"pl_menu.delete_after_play" = "النقل إلى سلة المهملات بعد التشغيل";
+"pl_menu.delete_after_play_multi" = "نقل الملفات المحددة إلى سلة المهملات بعد تشغيلها";
+"pl_menu.reveal_in_finder" = "كشف في Finder";
+"pl_menu.add_file" = "إضافة ملف…";
+"pl_menu.add_url" = "إضافة عنوان URL…";
+"pl_menu.clear_playlist" = "مسح قائمة التشغيل";
+"pl_menu.matched_sub" = "تطابق %d الترجمه(ات)";
+"pl_menu.add_sub" = "إضافة ترجمه…";
+"pl_menu.wrong_sub" = "ملف ترجمة خاطئ!";
+"pl_menu.browser" = "فتح في المتصفح";
+"pl_menu.copy_url" = "نسخ عنوان URL";
+"pl_menu.copy_url_multi" = "نسخ عناوين URL";
+
+"keymapping.title" = "ارتباطات المفاتيح";
+"keymapping.message" = "اضغط على أي زر للتسجيل.";
+
+"filter.video_filters" = "عوامل تصيفية الفيديو";
+"filter.audio_filters" = "عوامل تصيفية الصوت";
+
+"hwdec.no" = "تعطيل فك ترميز الأجهزة.";
+"hwdec.auto" = "تمكين فك ترميز الأجهزة. مع العلم، إن معظم عوامل تصفية الفيديو لن تعمل بشكل صحيح.";
+"hwdec.auto-copy" = "تمكين فك ترميز الأجهزة. سوف يستهلك ضعف الذاكرة ولكنه يعمل مع عوامل تصفية الفيديو.";
+
+"subencoding.auto" = "اكتشاف تلقائي";
+
+"osc_toolbar.settings" = "الإعدادات السريعة";
+"osc_toolbar.playlist" = "قائمة التشغيل والفصول";
+"osc_toolbar.pip" = "تبديل إلى وضع صورة في صورة";
+"osc_toolbar.full_screen" = "التبديل لوضع ملء الشاشة";
+"osc_toolbar.music_mode" = "الدخول إلى وضع الموسيقى";
+"osc_toolbar.sub_track" = "اختيار مسار الترجمة";
+
+"mini_player.album_art" = "تبديل صورة الألبوم";
+"mini_player.loop" = "تكرار";
+"mini_player.shuffle" = "خلْط";
+"mini_player.remove" = "ازالة من قائمة التشغيل";
+"mini_player.add" = "إضافة إلى قائمة التشغيل";
+"mini_player.delete" = "حذف جميع المسارات من قائمة التشغيل";
+"mini_player.volume" = "مستوى الصوت";
+"mini_player.close" = "إغلاق وضع الموسيقى";
+"mini_player.back" = "العودة إلى وضع الفيديو";
+
+// Touch bar
+
+"touchbar.ahead_15" = "تخطي 15 ثانيه";
+"touchbar.ahead_30" = "تخطي 30 ثانيه";
+"touchbar.back_15" = "رجوع 15 ثانيه";
+"touchbar.back_30" = "رجوع 30 ثانيه";
+"touchbar.next_video" = "الفيديو التالي";
+"touchbar.prev_video" = "الفيديو السابق";
+"touchbar.increase_volume" = "مستوى الصوت +";
+"touchbar.decrease_volume" = "مستوى الصوت -";
+"touchbar.rewind" = "إرجاع";
+"touchbar.fast_forward" = "تقديم سريع";
+"touchbar.play_pause" = "تشغيل / إيقاف مؤقت";
+"touchbar.seek" = "البحث";
+"touchbar.time" = "المكان الزمني";
+"touchbar.remainingTimeOrTotalDuration" = "الوقت المتبقي / المدة الإجمالية";
+"touchbar.toggle_pip" = "تبديل إلى الصورة في الصورة";
+
+// Plugin permissions
+
+"permissions.network-request.name" = "Network Request";
+"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
+"permissions.network-request.any_site" = "Any site";
+"permissions.show-osd.name" = "Show OSD";
+"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
+"permissions.show-alert.name" = "Show Alerts";
+"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
+"permissions.video-overlay.name" = "Add overlay on videos";
+"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
+"permissions.file-system.name" = "Access the file system";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+
+"plugin.install" = "Install";
+"plugin.installed" = "Installed";
+"plugin.not_installed" = "Not Installed";
+"plugin.local" = "Installed locally";
+"alert.plugin.install_error" = "Error occured during the installation: %@";
+"alert.invalid_url" = "The URL is invalid.";
+"plugin.install_error.invalid_url" = "The URL is invalid.";
+"plugin.install_error.file_not_found" = "Cannot find the package file.";
+"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
+"plugin.check_for_updates" = "Check for Updates";
+"plugin.updating" = "Downloading update…";

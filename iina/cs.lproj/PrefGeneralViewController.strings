@@ -29,10 +29,10 @@
 "6TV-DG-503.title" = "Playlist:";
 
 /* Class = "NSTextFieldCell"; title = "Requires restarting IINA to take effect."; ObjectID = "8kU-8g-VgX"; */
-"8kU-8g-VgX.title" = "Vyžaduje restart IINA, aby se projevily změny.";
+"8kU-8g-VgX.title" = "Vyžaduje restartování IINA.";
 
 /* Class = "NSButtonCell"; title = "Only in \"music mode\""; ObjectID = "AVe-9Z-RgQ"; */
-"AVe-9Z-RgQ.title" = "Only in \"music mode\"";
+"AVe-9Z-RgQ.title" = "Pouze v \"Hudebním režimu\"";
 
 /* Class = "NSButtonCell"; title = "Track all played files in \"Open Recent\" menu"; ObjectID = "Ci8-j2-QS3"; */
 "Ci8-j2-QS3.title" = "Zaznamenat všechny přehrané soubory v nabídce \"Otevřít poslední položku\"";
@@ -59,10 +59,10 @@
 "JfZ-D8-aF2.title" = "Nedělat nic";
 
 /* Class = "NSButtonCell"; title = "Black out other monitors while in full screen"; ObjectID = "KYi-0W-zOr"; */
-"KYi-0W-zOr.title" = "Ztmavit ostatní monitory při spuštění režimu celé obrazovky";
+"KYi-0W-zOr.title" = "Ztmavit ostatní monitory během režimu celé obrazovky";
 
 /* Class = "NSButtonCell"; title = "Switch to \"music mode\" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
-"KfL-r7-Uav.title" = "Automaticky přepnout do \"Hudebního režimu\" při otevření zvukového souboru";
+"KfL-r7-Uav.title" = "Automaticky přepnout na \"Hudební režim\" při otevření zvukového souboru";
 
 /* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
 "Lac-Ol-g6E.title" = "Přehrát další položku automaticky";
@@ -121,8 +121,8 @@
 /* Class = "NSTextFieldCell"; title = "History:"; ObjectID = "jeK-46-2BG"; */
 "jeK-46-2BG.title" = "Historie:";
 
-/* Class = "NSButtonCell"; title = "Show artist and track name for audio files when available"; ObjectID = "kBI-Th-bBV"; */
-"kBI-Th-bBV.title" = "Show artist and track name for audio files when available";
+/* Class = "NSButtonCell"; title = "Show artist and track name for audio files when avaliable"; ObjectID = "kBI-Th-bBV"; */
+"kBI-Th-bBV.title" = "Zobrazit umělce a název skladby pro zvukové soubory, pokud jsou dostupné";
 
 /* Class = "NSButtonCell"; title = "Play upon entering full screen"; ObjectID = "lOw-pu-Llm"; */
 "lOw-pu-Llm.title" = "Přehrát při spuštění režimu celé obrazovky";
@@ -146,7 +146,7 @@
 "uQR-Fx-oEm.title" = "Chování:";
 
 /* Class = "NSButtonCell"; title = "Show previews after taking screenshots"; ObjectID = "xE7-Uu-19f"; */
-"xE7-Uu-19f.title" = "Show previews after taking screenshots";
+"xE7-Uu-19f.title" = "Zobrazit náhled při zachycení snímku obrazovky";
 
 /* Class = "NSTextFieldCell"; title = "Pause/resume when:"; ObjectID = "xr2-rB-O0x"; */
 "xr2-rB-O0x.title" = "Pozastavit/pokračovat, když:";

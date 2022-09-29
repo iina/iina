@@ -11,7 +11,7 @@
 "50C-1R-wlJ.title" = "Antal af tråde:";
 
 /* Class = "NSButtonCell"; title = "Force dedicated GPU"; ObjectID = "YUr-aJ-xfC"; */
-"YUr-aJ-xfC.title" = "Force dedicated GPU";
+"YUr-aJ-xfC.title" = "Gennemtving dedikeret GPU";
 
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "bxW-np-SGm"; */
 "bxW-np-SGm.title" = "Standart: 0 (Auto)";
@@ -23,7 +23,7 @@
 "g4c-vG-URh.title" = "Indledende volumen:";
 
 /* Class = "NSTextFieldCell"; title = "Always use the dedicated GPU for rendering (if exists). This can improve performance but may result in poor battery life."; ObjectID = "gCv-sJ-uQJ"; */
-"gCv-sJ-uQJ.title" = "Always use the dedicated GPU for rendering (if it exists). This can improve performance but may reduce battery life.";
+"gCv-sJ-uQJ.title" = "Brug altid den dedikerede GPU til gengivelse (hvis den findes). Dette kan forbedre ydeevnen, men kan reducere batteriets levetid.";
 
 /* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
 "m5P-5f-5uo.title" = "Video:";
@@ -38,7 +38,7 @@
 "sLR-vV-xn2.title" = "Fortrukne lyd enhed:";
 
 /* Class = "NSTextFieldCell"; title = "Audio:"; ObjectID = "sV5-dL-MUt"; */
-"sV5-dL-MUt.title" = "Audio:";
+"sV5-dL-MUt.title" = "Lyd:";
 
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "tAQ-oU-1AJ"; */
 "tAQ-oU-1AJ.title" = "Auto";

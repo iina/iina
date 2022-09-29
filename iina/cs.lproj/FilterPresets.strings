@@ -39,11 +39,11 @@
 
 "negative" = "Negativ";
 
-"vflip" = "Překlopit";
+"vflip" = "Převrátit";
 "hflip" = "Zrcadlit";
 
 "lut3d" = "3D LUT";
-"lut3d.file" = "Soubor";
+"lut3d.file" = "Cesta k souboru (můžete také přetáhnout soubor do vstupního pole)";
 "lut3d.interp" = "Režim interpolace";
 
 "custom_mpv" = "Vlastní (mpv)";

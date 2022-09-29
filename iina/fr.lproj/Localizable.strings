@@ -33,13 +33,13 @@
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Défaut";
 "quicksetting.item_none" = "Aucun";
-"quicksetting.hwdec" = "Décodage Matériel";
+"quicksetting.hwdec" = "Décodage matériel";
 "quicksetting.deinterlace" = "Désentrelacer";
 "quicksetting.hdr" = "HDR";
 
 // OSDMessage.swift
 "osd.pause" = "En pause";
-"osd.resume" = "Reprise de la lecture";
+"osd.resume" = "Reprendre";
 "osd.volume" = "Volume : %i";
 "osd.speed" = "Vitesse : %.2fx";
 "osd.aspect" = "Format d'image : %@";
@@ -61,7 +61,7 @@
 "osd.abloop.b" = "Boucle AB : B";
 "osd.abloop.clear" = "Boucle AB: vidé";
 "osd.stop" = "Arrêté";
-"osd.chapter" = "Chapitre: %@";
+"osd.chapter" = "Chapitre : %@";
 "osd.subtitle_scale" = "Échelle des sous-titres : %.2fx";
 "osd.add_to_playlist" = "Ajouté %i fichiers à la playlist";
 "osd.clear_playlist" = "Playlist vidée";
@@ -82,6 +82,8 @@
 "osd.canceled" = "Annulé";
 "osd.filter_added" = "Filtre ajouté : %@";
 "osd.filter_removed" = "Filtre supprimé";
+"osd.file_loop" = "Lire le fichier en boucle : %@";
+"osd.playlist_loop" = "Lire la liste de lecture en boucle : %@";
 
 "preference.title" = "Préférences";
 "preference.general" = "Général";
@@ -92,6 +94,7 @@
 "preference.control" = "Contrôles";
 "preference.keybindings" = "Raccourcis clavier";
 "preference.advanced" = "Avancé";
+"preference.plugins" = "Plugins";
 "preference.utilities" = "Utilitaires";
 "preference.scripts" = "Scripts";
 "preference.not_logged_in" = "Déconnecté";
@@ -126,6 +129,7 @@
 "menu.sub_delay_down" = "Délai des sous-titres -%.1fs";
 
 "menu.crop_custom" = "Personnalisé…";
+"menu.find_online_sub" = "Find Online Subtitles from %@";
 
 "track.none" = "<Aucun>";
 
@@ -233,6 +237,15 @@
 "alert.assrt_token_prompt.message" = "Veuillez vous inscrire sur la page web ouverte. Récupérez votre token sur votre espace client et saisissez-le ci-dessous :";
 "alert.assrt_token_invalid" = "Votre token d'API Assrt semble être invalide.";
 
+"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
+"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
+"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+"alert.plugin_no_update" = "No update found.";
+"alert.plugin_update_found.title" = "Update found for %@";
+"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
+"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
+"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+
 "playlist.total_length" = "%@ au total";
 "playlist.total_length_with_selected" = "%@ sur %@ sélectionnés";
 "pl_menu.title_multi" = "%d éléments";
@@ -301,3 +314,31 @@
 "touchbar.time" = "Position horaire";
 "touchbar.remainingTimeOrTotalDuration" = "Durée restante / Durée totale";
 "touchbar.toggle_pip" = "Activer le mode Image dans l'image";
+
+// Plugin permissions
+
+"permissions.network-request.name" = "Network Request";
+"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
+"permissions.network-request.any_site" = "Any site";
+"permissions.show-osd.name" = "Show OSD";
+"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
+"permissions.show-alert.name" = "Show Alerts";
+"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
+"permissions.video-overlay.name" = "Add overlay on videos";
+"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
+"permissions.file-system.name" = "Access the file system";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+
+"plugin.install" = "Install";
+"plugin.installed" = "Installed";
+"plugin.not_installed" = "Not Installed";
+"plugin.local" = "Installed locally";
+"alert.plugin.install_error" = "Error occured during the installation: %@";
+"alert.invalid_url" = "The URL is invalid.";
+"plugin.install_error.invalid_url" = "The URL is invalid.";
+"plugin.install_error.file_not_found" = "Cannot find the package file.";
+"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
+"plugin.check_for_updates" = "Check for Updates";
+"plugin.updating" = "Downloading update…";

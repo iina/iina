@@ -99,18 +99,18 @@
 "opt.sub-delay" = "Tekstityksen viive";
 "opt.sub-pos" = "Tekstityksen sijainti";
 "opt.sub-scale" = "Tekstityksen skaalaus";
-"opt.sub-visibility" = "Subtitle visibility";
-"opt.sub-ass-style-override" = "ASS style override";
+"opt.sub-visibility" = "Tekstityksen näkyvyys";
+"opt.sub-ass-style-override" = "ASS tyylin ohitus";
 
-"opt.fullscreen" = "Fullscreen";
-"opt.ontop" = "Float on top";
+"opt.fullscreen" = "Koko näyttö";
+"opt.ontop" = "Kellu päällä";
 
-"opt.chapter" = "Chapter";
+"opt.chapter" = "Kappale";
 
-"read.set" = "Set {{property}} to {{value}}";
+"read.set" = "Aseta {{property}} arvoon {{value}}";
 "read.add" = "{{property}} {{value}}";
-"read.multiply" = "Multiply {{property}} by {{factor}}x";
-"read.cycle" = "Cycle {{property}}{{#dir_down}} Downwards{{/dir_down}}";
+"read.multiply" = "Kerrotaan {{property}} arvolla {{factor}}x";
+"read.cycle" = "Siirry {{property}}{{#dir_down}} alaspäin{{/dir_down}}";
 "read.cycle-values" = "Cycle {{property}} in ({{{values}}})";
 "read.seek" = "Seek {{#fwd}}forward{{/fwd}}{{#bwd}}backward{{/bwd}}{{#abs}}to{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";
 "read.sub-seek" = "Seek to {{#skip_1}}next{{/skip_1}}{{#skip_-1}}previous{{/skip_-1}} subtitle";

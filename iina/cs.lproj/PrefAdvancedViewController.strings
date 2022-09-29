@@ -8,16 +8,16 @@
 "E3I-Q7-9t1.headerCell.title" = "Název";
 
 /* Class = "NSTextFieldCell"; title = "The following settings will require restarting IINA to take effect."; ObjectID = "HMa-Vz-EUk"; */
-"HMa-Vz-EUk.title" = "Aby se projevila následující nastavení je třeba restartovat IINA.";
+"HMa-Vz-EUk.title" = "Následující nastavení vyžadují restartování IINA.";
 
 /* Class = "NSButtonCell"; title = "Open log directory"; ObjectID = "JDA-g3-RNX"; */
-"JDA-g3-RNX.title" = "Otevřít adresář s logy";
+"JDA-g3-RNX.title" = "Otevřít složku s protokoly";
 
 /* Class = "NSButtonCell"; title = "Enable logging"; ObjectID = "LCd-uY-Yze"; */
-"LCd-uY-Yze.title" = "Povolit logování";
+"LCd-uY-Yze.title" = "Povolit protokolování";
 
 /* Class = "NSButtonCell"; title = "Choose directory…"; ObjectID = "MRT-u8-xTX"; */
-"MRT-u8-xTX.title" = "Vybrat adresář…";
+"MRT-u8-xTX.title" = "Vybrat složku…";
 
 /* Class = "NSTextFieldCell"; title = "Settings"; ObjectID = "Qmc-Tb-d7d"; */
 "Qmc-Tb-d7d.title" = "Nastavení";
@@ -26,7 +26,7 @@
 "SX9-fy-bss.headerCell.title" = "Hodnota";
 
 /* Class = "NSButtonCell"; title = "Use config directory:"; ObjectID = "ehL-8Y-G8h"; */
-"ehL-8Y-G8h.title" = "Použít adresář konfigurace:";
+"ehL-8Y-G8h.title" = "Použít konfigurační složku:";
 
 /* Class = "NSButtonCell"; title = "Use mpv's OSD"; ObjectID = "phK-g9-Vbg"; */
 "phK-g9-Vbg.title" = "Použít OSD mpv";

@@ -145,7 +145,7 @@
 
 "alert.fatal_error" = "Neotklonjiva greška: %@\nAplikacija će prestati sa radom.";
 "alert.mpv_error" = "Unutrašnja greška %@ (%@) prilikom postavljanja opcije %@.";
-"alert.sleep" = "Ne mogu da sprečim stanje spavanja ekrana!";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "Nepodržana spoljna zvučna datoteka.";
 "alert.unsupported_sub" = "Nepodržani spoljni titl.";
@@ -223,6 +223,9 @@
 
 "alert.clear_watch_later.title" = "Obriši sačuvani tok reprodukcije";
 "alert.clear_watch_later.message" = "Želite li zaista da izbrišete celokupan sačuvani tok reprodukcije (podatke opcije „Gledaj kasnije“)?";
+
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
 
 "alert.nothing_to_open" = "Nema ničega za otvaranje.";
 

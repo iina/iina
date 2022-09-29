@@ -145,7 +145,7 @@
 
 "alert.fatal_error" = "Erreur fatale : %@ \nL'application va maintenant quitter.";
 "alert.mpv_error" = "Erreur %@ (%@) lors de la configuration de l'option %@.";
-"alert.sleep" = "Impossible d'empêcher la veille de l'écran !";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "Fichier audio externe non supporté.";
 "alert.unsupported_sub" = "Fichier sous-titre externe non supporté.";
@@ -223,6 +223,9 @@
 
 "alert.clear_watch_later.title" = "Effacer les progressions de lecture";
 "alert.clear_watch_later.message" = "Souhaitez-vous vraiment effacer les progressions de lecture sauvegardées (\"à regarder plus tard\") ?";
+
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
 
 "alert.nothing_to_open" = "Aucun fichier à ouvrir.";
 

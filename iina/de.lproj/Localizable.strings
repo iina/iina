@@ -145,7 +145,7 @@
 
 "alert.fatal_error" = "Schwerwiegender Fehler: %@ \nProgramm wird beendet.";
 "alert.mpv_error" = "Interner Fehler %@ (%@) beim Setzen der Einstellung %@.";
-"alert.sleep" = "Ruhezustand des Monitors konnte nicht verhindert werden.";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "Externe Audiodatei nicht unterstützt.";
 "alert.unsupported_sub" = "Externe Untertiteldatei nicht untersützt.";
@@ -223,6 +223,9 @@
 
 "alert.clear_watch_later.title" = "Gesicherten Wiedergabefortschritt löschen";
 "alert.clear_watch_later.message" = "Möchtest du den Wiedergabefortschritt aller Videos löschen?";
+
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
 
 "alert.nothing_to_open" = "Nichts zu öffnen.";
 

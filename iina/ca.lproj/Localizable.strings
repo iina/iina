@@ -145,7 +145,7 @@
 
 "alert.fatal_error" = "Error: fatal %@ \nL'aplicació es tancarà ara.";
 "alert.mpv_error" = "Error intern %@ (%@) establint la opció %@.";
-"alert.sleep" = "No es pot prevenir que la pantalla se'n vagi a dormir!";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "Fitxer d'àudio extern no compatible.";
 "alert.unsupported_sub" = "Subtítols no compatibles.";
@@ -223,6 +223,9 @@
 
 "alert.clear_watch_later.title" = "Suprimeix el progrés de reproducció desat";
 "alert.clear_watch_later.message" = "Estàs segur que vols suprimir tot el progrés de reproducció desat? (dades de \"watch later\")?";
+
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
 
 "alert.nothing_to_open" = "Res per obrir.";
 

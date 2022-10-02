@@ -141,11 +141,7 @@ class MPVController: NSObject {
   }
 
   deinit {
-    ObjcUtils.silenced {
-      self.optionObservers.forEach { (k, _) in
-        UserDefaults.standard.removeObserver(self, forKeyPath: k)
-      }
-    }
+    removeOptionObservers()
   }
 
   /**
@@ -454,8 +450,26 @@ class MPVController: NSObject {
     return flags & UInt64(MPV_RENDER_UPDATE_FRAME.rawValue) > 0
   }
 
-  // Basically send quit to mpv
+  /// Remove registered observers for IINA preferences.
+  private func removeOptionObservers() {
+    // Remove observers for IINA preferences.
+    ObjcUtils.silenced {
+      self.optionObservers.forEach { (k, _) in
+        UserDefaults.standard.removeObserver(self, forKeyPath: k)
+      }
+    }
+  }
+
+  /// Shutdown this mpv controller.
   func mpvQuit() {
+    // Remove observers for IINA preference. Must not attempt to change a mpv setting
+    // in response to an IINA preference change while mpv is shutting down.
+    removeOptionObservers()
+    // Remove observers for mpv properties. Because 0 was passed for reply_userdata when
+    // registering mpv property observers all observers can be removed in one call.
+    mpv_unobserve_property(mpv, 0)
+    // Start mpv quitting. Even though this command is being sent using the synchronous
+    // command API the quit command is special and will be executed by mpv asynchronously.
     command(.quit)
   }
 
@@ -760,20 +774,53 @@ class MPVController: NSObject {
     }
   }
 
+  /// Tell Cocoa to terminate the application.
+  ///
+  /// - Note: This code must be in a method that can be a target of a selector in order to support macOS 10.11.
+  ///     The `perform` method in `RunLoop` that accepts a closure was introduced in macOS 10.12. If IINA drops
+  ///     support for 10.11 then the code in this method can be moved to the closure in `handleEvent and this
+  ///     method can then be removed.`
+  @objc
+  internal func terminateApplication() {
+    NSApp.terminate(nil)
+  }
+
   // Handle the event
   private func handleEvent(_ event: UnsafePointer<mpv_event>!) {
     let eventId = event.pointee.event_id
 
     switch eventId {
     case MPV_EVENT_SHUTDOWN:
-      let quitByMPV = !player.isMpvTerminated
+      let quitByMPV = !player.isShuttingDown
       if quitByMPV {
+        // This happens when the user presses "q" in a player window and the quit command is sent
+        // directly to mpv. The user could also use mpv's IPC interface to send the quit command to
+        // mpv. Must not attempt to change a mpv setting in response to an IINA preference change
+        // now that mpv has shut down. This is not needed when IINA sends the quit command to mpv
+        // as in that case the observers are removed before the quit command is sent.
+        removeOptionObservers()
+        // Submit the following task synchronously to ensure it is done before application
+        // termination is started.
         DispatchQueue.main.sync {
-          NSApp.terminate(nil)
+          self.player.mpvHasShutdown(isMPVInitiated: true)
+        }
+        // Initiate application termination. AppKit requires this be done from the main thread,
+        // however the main dispatch queue must not be used to avoid blocking the queue as per
+        // instructions from Apple.
+        if #available(macOS 10.12, *) {
+          RunLoop.main.perform(inModes: [.common]) {
+            self.terminateApplication()
+          }
+        } else {
+          RunLoop.main.perform(#selector(self.terminateApplication), target: self,
+                               argument: nil, order: Int.min, modes: [.common])
         }
       } else {
         mpv_destroy(mpv)
         mpv = nil
+        DispatchQueue.main.async {
+          self.player.mpvHasShutdown()
+        }
       }
 
     case MPV_EVENT_LOG_MESSAGE:
@@ -848,6 +895,11 @@ class MPVController: NSObject {
         }
       } else {
         player.info.shouldAutoLoadFiles = false
+      }
+      if reason == MPV_END_FILE_REASON_STOP {
+        DispatchQueue.main.async {
+          self.player.playbackStopped()
+        }
       }
 
     case MPV_EVENT_COMMAND_REPLY:

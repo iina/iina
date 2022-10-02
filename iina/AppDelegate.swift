@@ -41,6 +41,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   private var commandLineStatus = CommandLineStatus()
 
+  private var isTerminating = false
+
   // Windows
 
   lazy var openURLWindow: OpenURLWindowController = OpenURLWindowController()
@@ -296,13 +298,136 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
     Logger.log("App should terminate")
-    for pc in PlayerCore.playerCores {
-     pc.terminateMPV()
+    isTerminating = true
+
+    // Normally termination happens fast enough that the user does not have time to initiate
+    // additional actions, however to be sure shutdown further input from the user.
+    Logger.log("Disabling all menus")
+    menuController.disableAllMenus()
+    // Remove custom menu items added by IINA to the dock menu. AppKit does not allow the dock
+    // supplied items to be changed by an application so there is no danger of removing them.
+    // The menu items are being removed because setting the isEnabled property to false had no
+    // effect under macOS 12.6.
+    removeAllMenuItems(dockMenu)
+    // If supported and enabled disable all remote media commands. This also removes IINA from
+    // the Now Playing widget.
+    if #available(macOS 10.13, *) {
+      if RemoteCommandController.useSystemMediaControl {
+        Logger.log("Disabling remote commands")
+        RemoteCommandController.disableAllCommands()
+      }
     }
-    return .terminateNow
+
+    // Close all windows. When a player window is closed it will send a stop command to mpv to stop
+    // playback and unload the file.
+    Logger.log("Closing all windows")
+    for window in NSApp.windows {
+      window.close()
+    }
+
+    // Check if there are any players that are not shutdown. If all players are already shutdown
+    // then application termination can proceed immediately. This will happen if there is only one
+    // player and shutdown was initiated by typing "q" in the player window. That sends a quit
+    // command directly to mpv causing mpv and the player to shutdown before application
+    // termination is initiated.
+    var canTerminateNow = true
+    for player in PlayerCore.playerCores {
+      if !player.isShutdown {
+        canTerminateNow = false
+        break
+      }
+    }
+    if canTerminateNow {
+      Logger.log("All players have shutdown, proceeding with application termination")
+      // Tell Cocoa that it is ok to immediately proceed with termination.
+      return .terminateNow
+    }
+
+    // Shutdown of player cores involves sending the stop and quit commands to mpv. Even though
+    // these commands are sent to mpv using the synchronous API mpv executes them asynchronously.
+    // This requires IINA to wait for mpv to finish executing these commands.
+    Logger.log("Waiting for players to stop and shutdown")
+
+    // To ensure termination completes and the user is not required to force quit IINA, impose an
+    // arbitrary timeout that forces termination to complete. The expectation is that this timeout
+    // is never triggered. If a timeout warning is logged during termination then that needs to be
+    // investigated.
+    var timedOut = false
+    let timer = Timer(timeInterval: 10, repeats: false) { _ in
+      timedOut = true
+      Logger.log("Timeout during termination", level: .warning)
+      // For debugging list players that have not terminated.
+      for player in PlayerCore.playerCores {
+        let label = player.label ?? "unlabeled"
+        if !player.isStopped {
+          Logger.log("Player \(label) failed to stop", level: .warning)
+        } else if !player.isShutdown {
+          Logger.log("Player \(label) failed to shutdown", level: .warning)
+        }
+      }
+      Logger.log("Forcing application termination", level: .warning)
+      // Tell Cocoa to proceed with termination.
+      NSApp.reply(toApplicationShouldTerminate: true)
+    }
+    RunLoop.main.add(timer, forMode: .common)
+
+    // Establish an observer for a player core stopping.
+    let center = NotificationCenter.default
+    var observers: [NSObjectProtocol] = []
+    var observer = center.addObserver(forName: .iinaPlayerStopped, object: nil, queue: .main) { note in
+      guard let player = note.object as? PlayerCore else { return }
+      // Now that the player has stopped it is safe to instruct the player to terminate. IINA MUST
+      // wait for the player to stop before instructing it to terminate because sending the quit
+      // command to mpv while it is still asynchronously executing the stop command can result in a
+      // watch later file that is missing information such as the playback position. See issue #3939
+      // for details.
+      player.shutdown()
+    }
+    observers.append(observer)
+
+    // Establish an observer for a player core shutting down.
+    observer = center.addObserver(forName: .iinaPlayerShutdown, object: nil, queue: .main) { _ in
+      guard !timedOut else {
+        // Cocoa was already told to proceed with termination. This should not occur. If it does
+        // then investigate why termination is taking so long.
+        Logger.log("Player shutdown after application termination timed out", level: .warning)
+        return
+      }
+      // If any player has not shutdown then continue waiting.
+      for player in PlayerCore.playerCores {
+        guard player.isShutdown else { return }
+      }
+      // All players have shutdown. Proceed with termination.
+      Logger.log("All players have shutdown, proceeding with application termination")
+      // No longer need the timer that forces termination to proceed.
+      timer.invalidate()
+      // No longer need the observers for players stopping and shutting down.
+      ObjcUtils.silenced {
+        observers.forEach {
+          NotificationCenter.default.removeObserver($0)
+        }
+      }
+      // Tell Cocoa to proceed with termination.
+      NSApp.reply(toApplicationShouldTerminate: true)
+    }
+    observers.append(observer)
+
+    // Instruct any players that are already stopped to start shutting down.
+    for player in PlayerCore.playerCores {
+      if player.isStopped && !player.isShutdown {
+        player.shutdown()
+      }
+    }
+
+    // Tell Cocoa that it is ok to proceed with termination, but wait for our reply.
+    return .terminateLater
   }
 
   func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+    // Once termination starts subsystems such as mpv are being shutdown. Accessing mpv
+    // once it has been instructed to shutdown can trigger a crash. MUST NOT permit
+    // reopening once termination has started.
+    guard !isTerminating else { return false }
     guard !flag else { return true }
     Logger.log("Handle reopen")
     showWelcomeWindow(checkingForUpdatedData: true)
@@ -362,6 +487,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     return dockMenu
   }
 
+  /// Remove all menu items in the given menu and any submenus.
+  ///
+  /// This method recursively descends through the entire tree of menu items removing all items.
+  /// - Parameter menu: Menu to remove items from
+  private func removeAllMenuItems(_ menu: NSMenu) {
+    for item in menu.items {
+      if item.hasSubmenu {
+        removeAllMenuItems(item.submenu!)
+      }
+      menu.removeItem(item)
+    }
+  }
 
   // MARK: - URL Scheme
 
@@ -701,4 +838,18 @@ class RemoteCommandController {
     }
   }
 
+  static func disableAllCommands() {
+    remoteCommand.playCommand.removeTarget(nil)
+    remoteCommand.pauseCommand.removeTarget(nil)
+    remoteCommand.togglePlayPauseCommand.removeTarget(nil)
+    remoteCommand.stopCommand.removeTarget(nil)
+    remoteCommand.nextTrackCommand.removeTarget(nil)
+    remoteCommand.previousTrackCommand.removeTarget(nil)
+    remoteCommand.changeRepeatModeCommand.removeTarget(nil)
+    remoteCommand.changeShuffleModeCommand.removeTarget(nil)
+    remoteCommand.changePlaybackRateCommand.removeTarget(nil)
+    remoteCommand.skipForwardCommand.removeTarget(nil)
+    remoteCommand.skipBackwardCommand.removeTarget(nil)
+    remoteCommand.changePlaybackPositionCommand.removeTarget(nil)
+  }
 }

@@ -2737,7 +2737,9 @@ extension MainWindowController: PIPViewControllerDelegate {
     // Therefore we should wait until the view is moved to the PIP superview.
     let currentTrackIsAlbumArt = player.info.currentTrack(.video)?.isAlbumart ?? false
     if player.info.isPaused || currentTrackIsAlbumArt {
-      videoView.pendingRedrawAfterEnteringPIP = true
+      // It takes two `layout` before finishing entering PIP (tested on macOS 12, but
+      // could be earlier). Force redraw for the first two `layout`s.
+      videoView.pendingRedrawAfterEnteringPIPCount = 2
     }
 
     if let window = self.window {

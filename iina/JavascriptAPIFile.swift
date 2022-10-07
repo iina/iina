@@ -240,20 +240,20 @@ class JavascriptFileHandle: NSObject, JavascriptFileHandleExportable {
   private func createUInt8Array(fromData data: Data) -> JSValue? {
     let context = JSContext.current()!
     let length = data.count
-    let getter: @convention(block) (Int) -> UInt8 = { offset in
-      return data[offset]
+    let rawPtr = UnsafeMutableBufferPointer<UInt8>.allocate(capacity: length)
+    _ = data.withUnsafeBytes { (dataPtr: UnsafeRawBufferPointer) in
+      rawPtr.initialize(from: dataPtr)
     }
-    context.setObject(getter, forKeyedSubscript: "__iina_data_getter" as NSString)
-
-    let array = context.evaluateScript("""
-    Uint8Array.from(function* () {
-      for (let i = 0; i < \(length); i++) {
-        yield __iina_data_getter(i);
-      }
-    }())
-    """)
-
-    context.setObject(nil, forKeyedSubscript: "__iina_data_getter" as NSString)
-    return array
+    let deallocator: JSTypedArrayBytesDeallocator = { ptr, _ in
+        ptr?.deallocate()
+    }
+    let arrayBufferRef = JSObjectMakeTypedArrayWithBytesNoCopy(context.jsGlobalContextRef,
+                                                                kJSTypedArrayTypeUint8Array,
+                                                                rawPtr.baseAddress,
+                                                                length,
+                                                                deallocator,
+                                                                nil,
+                                                                nil)
+    return JSValue(jsValueRef: arrayBufferRef, in: context)
   }
 }

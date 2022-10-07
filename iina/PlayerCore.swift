@@ -1978,6 +1978,7 @@ class NowPlayingInfoManager {
     var info = center.nowPlayingInfo ?? [String: Any]()
 
     let activePlayer = PlayerCore.lastActive
+    guard !activePlayer.isMpvTerminated else { return }
 
     if withTitle {
       if activePlayer.currentMediaIsAudio == .isAudio {

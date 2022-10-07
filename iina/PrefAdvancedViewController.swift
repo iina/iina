@@ -70,7 +70,7 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
   // MARK: - IBAction
 
   @IBAction func revealLogDir(_ sender: AnyObject) {
-    NSWorkspace.shared.open(Utility.logDirURL)
+    NSWorkspace.shared.open(Logger.logDirectory)
   }
 
   @IBAction func addOptionBtnAction(_ sender: AnyObject) {

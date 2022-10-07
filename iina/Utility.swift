@@ -387,17 +387,6 @@ class Utility {
     return url
   }()
 
-  static let logDirURL: URL = {
-    // get path
-    let libraryPath = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)
-    Logger.ensure(libraryPath.count >= 1, "Cannot get path to Logs directory")
-    let logsUrl = libraryPath.first!.appendingPathComponent("Logs", isDirectory: true)
-    let bundleID = Bundle.main.bundleIdentifier!
-    let appLogsUrl = logsUrl.appendingPathComponent(bundleID, isDirectory: true)
-    createDirIfNotExist(url: appLogsUrl)
-    return appLogsUrl
-  }()
-
   static let watchLaterURL: URL = {
     let url = Utility.appSupportDirUrl.appendingPathComponent(AppData.watchLaterFolder, isDirectory: true)
     createDirIfNotExist(url: url)

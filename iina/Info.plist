@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>com.colliderli.iina.build.branch</key>
+	<string>IINA_BUILD_BRANCH</string>
+	<key>com.colliderli.iina.build.commit</key>
+	<string>IINA_BUILD_COMMIT</string>
+	<key>com.colliderli.iina.build.date</key>
+	<string>IINA_BUILD_DATE</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDocumentTypes</key>
@@ -611,7 +617,7 @@ Released under GPLv3.</string>
 				<string>public.audio</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Monkey's Audio Lossless Audio</string>
+			<string>Monkey&apos;s Audio Lossless Audio</string>
 			<key>UTTypeIdentifier</key>
 			<string>io.iina.ape</string>
 			<key>UTTypeTagSpecification</key>

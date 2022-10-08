@@ -2739,7 +2739,7 @@ extension MainWindowController: PIPViewControllerDelegate {
     if player.info.isPaused || currentTrackIsAlbumArt {
       // It takes two `layout` before finishing entering PIP (tested on macOS 12, but
       // could be earlier). Force redraw for the first two `layout`s.
-      videoView.pendingRedrawAfterEnteringPIPCount = 2
+      videoView.pendingRedrawsAfterEnteringPIP = 2
     }
 
     if let window = self.window {

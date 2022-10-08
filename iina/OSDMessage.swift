@@ -72,6 +72,9 @@ enum OSDMessage {
   case fileError
   case networkError
   case canceled
+  case cannotConnect
+  case timedOut
+
   case fileLoop(Bool)
   case playlistLoop(Bool)
 
@@ -307,6 +310,18 @@ enum OSDMessage {
     case .canceled:
       return (
         NSLocalizedString("osd.canceled", comment: "Canceled"),
+        .normal
+      )
+
+    case .cannotConnect:
+      return (
+        NSLocalizedString("osd.cannot_connect", comment: "Cannot connect"),
+        .normal
+      )
+
+    case .timedOut:
+      return (
+        NSLocalizedString("osd.timed_out", comment: "Timed out"),
         .normal
       )
 

@@ -9,8 +9,6 @@
 import Foundation
 import PromiseKit
 
-fileprivate let subsystem = Logger.Subsystem(rawValue: "onlinesub")
-
 fileprivate protocol ProviderProtocol {
   associatedtype F: OnlineSubtitleFetcher
   var id: String { get }
@@ -29,7 +27,9 @@ class OnlineSubtitle: NSObject {
   enum CommonError: Error {
     case noResult
     case canceled
-    case networkError
+    case cannotConnect(Error)
+    case networkError(Error?)
+    case timedOut(Error)
     case fsError
   }
 
@@ -38,6 +38,22 @@ class OnlineSubtitle: NSObject {
 
   init(index: Int) {
     self.index = index
+  }
+
+  /// Check if the given error indicates IINA was unable to connect to the subtitle server.
+  /// - Parameter error: the error object to inspect
+  /// - Returns: `true` if the error represents a connection failure; otherwise `false`.
+  static func isConnectFailure(_ error: Error?) -> Bool {
+    guard let nsError = (error as NSError?) else { return false }
+    return nsError.domain == NSURLErrorDomain && nsError.code == NSURLErrorCannotConnectToHost
+  }
+
+  /// Check if the given error indicates IINA timed out while trying to connect to the subtitle server.
+  /// - Parameter error: the error object to inspect
+  /// - Returns: `true` if the error represents a timed out failure; otherwise `false`.
+  static func isTimedOutFailure(_ error: Error?) -> Bool {
+    guard let nsError = (error as NSError?) else { return false }
+    return nsError.domain == NSURLErrorDomain && nsError.code == NSURLErrorTimedOut
   }
 
   func download() -> Promise<[URL]> { return .value([]) }
@@ -138,7 +154,7 @@ class OnlineSubtitle: NSObject {
   }
 
   fileprivate static func _search<P: ProviderProtocol>(using provider: P, forFile url: URL, _ player: PlayerCore, _ callback: @escaping ([URL]) -> Void) {
-    Logger.log("Search subtitle from \(provider.name)...", subsystem: subsystem)
+    log("Search subtitle from \(provider.name)...")
     player.sendOSD(.startFindingSub(provider.name), autoHide: false)
 
     provider.fetchSubtitles(url: url, player: player).done {
@@ -147,27 +163,48 @@ class OnlineSubtitle: NSObject {
       player.hideOSD()
     }.catch { err in
       let osdMessage: OSDMessage
+      let prefix = "Failed to obtain subtitles for \(url) from \(provider.name). "
       switch err {
       case CommonError.noResult:
+        // Not an error.
+        log("No subtitles found")
         callback([])
         return
-      case CommonError.networkError,
-           OpenSub.Error.xmlRpcError:
+      case CommonError.cannotConnect(let cause):
+        osdMessage = .cannotConnect
+        log("\(prefix)\(cause.localizedDescription)", level: .error)
+      case CommonError.networkError(let cause):
         osdMessage = .networkError
-      case Shooter.Error.cannotReadFile,
-           Shooter.Error.fileTooSmall,
-           OpenSub.Error.cannotReadFile,
-           OpenSub.Error.fileTooSmall:
+        let error = cause ?? err
+        log("\(prefix)\(error.localizedDescription)", level: .error)
+      case OpenSub.Error.xmlRpcError(let rpcError):
+        osdMessage = .networkError
+        log("\(prefix)\(rpcError.readableDescription)", level: .error)
+      case CommonError.timedOut(let cause):
+        osdMessage = .timedOut
+        log("\(prefix)\(cause.localizedDescription)", level: .error)
+      case Shooter.Error.cannotReadFile(let cause),
+           OpenSub.Error.cannotReadFile(let cause):
         osdMessage = .fileError
-      case OpenSub.Error.loginFailed:
+        log("\(prefix)Cannot get file handle. \(cause)", level: .error)
+      case Shooter.Error.fileTooSmall(let minimumFileSize),
+           OpenSub.Error.fileTooSmall(let minimumFileSize):
+        osdMessage = .fileError
+        log("\(prefix)File is too small. Minimum file size supported by the site is \(minimumFileSize)",
+            level: .error)
+      case OpenSub.Error.loginFailed(let reason):
         osdMessage = .cannotLogin
+        log("\(prefix)Login failed, \(reason)", level: .error)
       case JSPluginSub.Error.pluginError(let message):
         osdMessage = .customWithDetail(message, provider.name)
+        log("\(prefix)\(message)", level: .error)
       case CommonError.canceled:
         osdMessage = .canceled
+        // Not an error.
+        log("User canceled download of subtitles")
       default:
-        Logger.log(err.localizedDescription, level: .error, subsystem: subsystem)
         osdMessage = .networkError
+        log("\(prefix)\(err.localizedDescription)", level: .error)
       }
       player.sendOSD(osdMessage)
       player.isSearchingOnlineSubtitle = false
@@ -191,5 +228,15 @@ class OnlineSubtitle: NSObject {
       guard case .plugin(_, let pluginName) = provider.origin else { break }
       menu.addItem(withTitle: provider.name + " — " + pluginName, action: action, tag: nil, obj: id)
     }
+  }
+
+  private static func log(_ message: String, level: Logger.Level = .debug) {
+    Logger.log(message, level: level, subsystem: Logger.Sub.onlinesub)
+  }
+}
+
+extension Logger {
+  struct Sub {
+    static let onlinesub = Logger.Subsystem(rawValue: "onlinesub")
   }
 }

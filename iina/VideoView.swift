@@ -37,7 +37,7 @@ class VideoView: NSView {
   // cached indicator to prevent unnecessary updates of DisplayLink
   var currentDisplay: UInt32?
 
-  var pendingRedrawAfterEnteringPIP = false;
+  var pendingRedrawsAfterEnteringPIP = 0;
 
   lazy var hdrSubsystem = Logger.Subsystem(rawValue: "hdr")
 
@@ -95,9 +95,9 @@ class VideoView: NSView {
 
   override func layout() {
     super.layout()
-    if pendingRedrawAfterEnteringPIP && superview != nil {
+    if pendingRedrawsAfterEnteringPIP != 0 && superview != nil {
+      pendingRedrawsAfterEnteringPIP -= 1
       videoLayer.draw(forced: true)
-      pendingRedrawAfterEnteringPIP = false
     }
   }
 

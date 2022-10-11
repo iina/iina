@@ -594,18 +594,29 @@ class MainWindowController: PlayerWindowController {
 
     addObserver(to: .default, forName: .iinaFileLoaded, object: player) { [unowned self] _ in
       self.quickSettingView.reload()
+
+      if self.fsState.isFullscreen {
+        matchRefreshRate()
+      }
     }
 
     addObserver(to: .default, forName: NSApplication.didChangeScreenParametersNotification) { [unowned self] _ in
       // This observer handles a situation that the user connected a new screen or removed a screen
       let screenCount = NSScreen.screens.count
-      if self.fsState.isFullscreen && Preference.bool(for: .blackOutMonitor) && self.cachedScreenCount != screenCount {
-        self.removeBlackWindow()
-        self.blackOutOtherMonitors()
+      if self.fsState.isFullscreen && self.cachedScreenCount != screenCount {
+        if Preference.bool(for: .blackOutMonitor) {
+          self.removeBlackWindow()
+          self.blackOutOtherMonitors()
+        }
+
+        restoreRefreshRate()
+        matchRefreshRate()
       }
+
       // Update the cached value
       self.cachedScreenCount = screenCount
       self.videoView.updateDisplayLink()
+
       // In normal full screen mode AppKit will automatically adjust the window frame if the window
       // is moved to a new screen such as when the window is on an external display and that display
       // is disconnected. In legacy full screen mode IINA is responsible for adjusting the window's
@@ -1160,10 +1171,62 @@ class MainWindowController: PlayerWindowController {
     NSMenu.setMenuBarVisible(true)
   }
 
+  private var userDisplay: UInt32?
+  private var userDisplayMode: CGDisplayMode?
+
+  func matchRefreshRate() {
+    if Preference.bool(for: .matchRefreshRate) {
+      // [23.976, 47.952, 24, 48], [29.97, 59.94, 30, 60]
+      // [24, 48], [25, 50], [30, 60]
+      let videoFps = player.mpv.getDouble(MPVProperty.containerFps)
+      let refreshRates = [videoFps, videoFps * 2, videoFps.rounded(), videoFps.rounded() * 2]
+
+      if let curDisplay = videoView.currentDisplay, let curDisplayMode = CGDisplayCopyDisplayMode(curDisplay) {
+        let displayModes = CGDisplayCopyAllDisplayModes(curDisplay, [kCGDisplayShowDuplicateLowResolutionModes: true] as CFDictionary) as! [CGDisplayMode]
+        matching: for refreshRate in refreshRates {
+          for displayMode in displayModes {
+            if (displayMode.height != curDisplayMode.height
+                || displayMode.width != curDisplayMode.width
+                || displayMode.pixelHeight != curDisplayMode.pixelHeight
+                || displayMode.pixelWidth != curDisplayMode.pixelWidth) {
+              continue
+            }
+
+            // 24 - 23.976 = 0.024, avoid matching 23.976 to 24 when 23.976 is available
+            // or vice versa on first pass, prefer 47.952 than 24 for 23.976
+            if abs(displayMode.refreshRate - refreshRate) < 0.02 {
+              CGDisplaySetDisplayMode(curDisplay, displayMode, nil)
+              player.mpv.setDouble(MPVOption.Video.overrideDisplayFps, displayMode.refreshRate)
+
+              if userDisplay == nil && userDisplayMode == nil {
+                userDisplay = curDisplay
+                userDisplayMode = curDisplayMode
+              }
+
+              break matching
+            }
+          }
+        }
+      }
+    }
+  }
+
+  func restoreRefreshRate() {
+    if let userDisplay = userDisplay, let userDisplayMode = userDisplayMode {
+      CGDisplaySetDisplayMode(userDisplay, userDisplayMode, nil)
+      player.mpv.setDouble(MPVOption.Video.overrideDisplayFps, 0)
+    }
+    
+    userDisplay = nil; userDisplayMode = nil
+  }
+
   func windowWillEnterFullScreen(_ notification: Notification) {
     if isInInteractiveMode {
       exitInteractiveMode(immediately: true)
     }
+
+    // Match refresh rate
+    matchRefreshRate()
 
     // Set the appearance to match the theme so the titlebar matches the theme
     let iinaTheme = Preference.enum(for: .themeMaterial) as Preference.Theme
@@ -1245,6 +1308,9 @@ class MainWindowController: PlayerWindowController {
     if isInInteractiveMode {
       exitInteractiveMode(immediately: true)
     }
+
+    // Restore refresh rate
+    restoreRefreshRate()
 
     // show titleBarView
     if oscPosition == .top {

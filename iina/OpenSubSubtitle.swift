@@ -289,11 +289,25 @@ class OpenSub {
         xmlRpc.call("GuessMovieFromString", [token as Any, [searchString]]) { status in
           switch status {
           case .ok(let response):
+
+            func parseResponse() throws -> String {
+              let responsePath = ["data", searchString, "BestGuess"]
+              guard let bestGuess = try self.findPath(responsePath, in: response) as? [String: Any] else {
+                return ""
+              }
+
+              guard let imdbEntry = bestGuess["IMDBEpisode"] ?? bestGuess["IDMovieIMDB"] else {
+                return ""
+              }
+              if let imdbEntry = imdbEntry as? Int {
+                return String(imdbEntry)
+              }
+              return imdbEntry as? String ?? ""
+            }
+
             do {
               guard self.checkStatus(response) else { throw Error.wrongResponseFormat }
-              let bestGuess = try self.findPath(["data", searchString, "BestGuess"], in: response) as? [String: Any]
-              let IMDB = (bestGuess?["IDMovieIMDB"] as? String) ?? ""
-              resolver.fulfill(IMDB)
+              try resolver.fulfill(parseResponse())
             } catch let (error) {
               resolver.reject(error)
               return

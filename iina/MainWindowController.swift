@@ -1115,16 +1115,10 @@ class MainWindowController: PlayerWindowController {
       }
     }
     // stop playing
-    if !player.isMpvTerminated {
-      if case .fullscreen(legacy: true, priorWindowedFrame: _) = fsState {
-        restoreDockSettings()
-      }
-      player.savePlaybackPosition()
-      player.stop()
-      videoView.stopDisplayLink()
+    if case .fullscreen(legacy: true, priorWindowedFrame: _) = fsState {
+      restoreDockSettings()
     }
-    player.info.currentFolder = nil
-    player.info.matchedSubs.removeAll()
+    player.stop()
     // stop tracking mouse event
     guard let w = self.window, let cv = w.contentView else { return }
     cv.trackingAreas.forEach(cv.removeTrackingArea)

@@ -115,6 +115,7 @@ class PlayerCore: NSObject {
   var miniPlayer: MiniPlayerWindowController!
 
   var mpv: MPVController!
+
   var plugins: [JavascriptPluginInstance] = []
   private var pluginMap: [String: JavascriptPluginInstance] = [:]
   var pluginMenuNeedsUpdate = false
@@ -132,7 +133,14 @@ class PlayerCore: NSObject {
 
   var displayOSD: Bool = true
 
-  var isMpvTerminated: Bool = false
+  /// Whether shutdown of this player has been initiated.
+  var isShuttingDown = false
+
+  /// Whether shutdown of this player has completed (mpv has shutdown).
+  var isShutdown = false
+
+  /// Whether mpv playback has stopped and the media has been unloaded.
+  var isStopped = true
 
   var isInMiniPlayer = false
   var switchedToMiniPlayerManually = false
@@ -373,16 +381,38 @@ class PlayerCore: NSObject {
     mainWindow.videoView.uninit()
   }
 
-  // Terminate mpv
-  func terminateMPV(sendQuit: Bool = true) {
-    guard !isMpvTerminated else { return }
+  private func savePlayerState() {
     savePlaybackPosition()
     invalidateTimer()
     uninitVideo()
-    if sendQuit {
-      mpv.mpvQuit()
+  }
+
+  /// Initiate shutdown of this player.
+  ///
+  /// This method is intended to only be used during application termination. Once shutdown has been initiated player methods
+  /// **must not** be called.
+  /// - Important: As a part of shutting down the player this method sends a quit command to mpv. Even though the command is
+  ///     sent to mpv using the synchronous API mpv executes the quit command asynchronously. The player is not fully shutdown
+  ///     until mpv finishes executing the quit command and shuts down.
+  func shutdown() {
+    guard !isShuttingDown else { return }
+    isShuttingDown = true
+    Logger.log("Shutting down", subsystem: subsystem)
+    savePlayerState()
+    mpv.mpvQuit()
+  }
+
+  func mpvHasShutdown(isMPVInitiated: Bool = false) {
+    let suffix = isMPVInitiated ? " (initiated by mpv)" : ""
+    Logger.log("Player has shutdown\(suffix)", subsystem: subsystem)
+    isStopped = true
+    isShutdown = true
+    // If mpv shutdown was initiated by mpv then the player state has not been saved.
+    if isMPVInitiated {
+      isShuttingDown = true
+      savePlayerState()
     }
-    isMpvTerminated = true
+    postNotification(.iinaPlayerShutdown)
   }
 
   // invalidate timer
@@ -509,9 +539,31 @@ class PlayerCore: NSObject {
     mpv.setFlag(MPVOption.PlaybackControl.pause, false)
   }
 
+  /// Stop playback and unload the media.
   func stop() {
-    mpv.command(.stop)
+    savePlaybackPosition()
+
+    mainWindow.videoView.stopDisplayLink()
     invalidateTimer()
+
+    info.currentFolder = nil
+    info.matchedSubs.removeAll()
+
+    // Do not send a stop command to mpv if it is already stopped. This happens when quitting is
+    // initiated directly through mpv.
+    guard !isStopped else { return }
+    Logger.log("Stopping playback", subsystem: subsystem)
+    mpv.command(.stop)
+  }
+
+  /// Playback has stopped and the media has been unloaded.
+  ///
+  /// This method is called by `MPVController` when mpv emits an event indicating the asynchronous mpv `stop` command
+  /// has completed executing.
+  func playbackStopped() {
+    Logger.log("Playback has stopped", subsystem: subsystem)
+    isStopped = true
+    postNotification(.iinaPlayerStopped)
   }
 
   func toggleMute(_ set: Bool? = nil) {
@@ -1210,8 +1262,13 @@ class PlayerCore: NSObject {
 
   func savePlaybackPosition() {
     guard Preference.bool(for: .resumeLastPosition) else { return }
-    Logger.log("Write watch later config", subsystem: subsystem)
-    mpv.command(.writeWatchLaterConfig)
+
+    // If the player is stopped then the file has been unloaded and it is too late to save the
+    // watch later configuration.
+    if !isStopped {
+      Logger.log("Write watch later config", subsystem: subsystem)
+      mpv.command(.writeWatchLaterConfig)
+    }
     if let url = info.currentURL {
       Preference.set(url, for: .iinaLastPlayedFilePath)
       // Write to cache directly (rather than calling `refreshCachedVideoProgress`).
@@ -1233,6 +1290,7 @@ class PlayerCore: NSObject {
 
   func fileStarted(path: String) {
     Logger.log("File started", subsystem: subsystem)
+    isStopped = false
     info.justStartedFile = true
     info.disableOSDForFileLoading = true
     currentMediaIsAudio = .unknown
@@ -1366,6 +1424,8 @@ class PlayerCore: NSObject {
   }
 
   func trackListChanged() {
+    // Must not process track list changes if mpv is terminating.
+    guard !isShuttingDown else { return }
     Logger.log("Track list changed", subsystem: subsystem)
     getTrackInfo()
     getSelectedTracks()
@@ -1396,6 +1456,7 @@ class PlayerCore: NSObject {
   func refreshEdrMode() {
     guard mainWindow.loaded else { return }
     DispatchQueue.main.async {
+      guard !self.isStopped else { return }
       self.mainWindow.videoView.refreshEdrMode()
     }
   }
@@ -1978,7 +2039,7 @@ class NowPlayingInfoManager {
     var info = center.nowPlayingInfo ?? [String: Any]()
 
     let activePlayer = PlayerCore.lastActive
-    guard !activePlayer.isMpvTerminated else { return }
+    guard !activePlayer.isShuttingDown else { return }
 
     if withTitle {
       if activePlayer.currentMediaIsAudio == .isAudio {

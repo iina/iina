@@ -168,6 +168,8 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var inspector: NSMenuItem!
   @IBOutlet weak var miniPlayer: NSMenuItem!
 
+  /// If `true` then all menu items are disabled.
+  private var isDisabled = false
 
   // MARK: - Construct Menus
 
@@ -677,6 +679,8 @@ class MenuController: NSObject, NSMenuDelegate {
   // MARK: - Menu delegate
 
   func menuWillOpen(_ menu: NSMenu) {
+    // If all menu items are disabled do not update the menus.
+    guard !isDisabled else { return }
     switch menu {
     case fileMenu:
       updateOpenMenuItems()
@@ -826,6 +830,27 @@ class MenuController: NSObject, NSMenuDelegate {
         menuItem.keyEquivalent = ""
         menuItem.keyEquivalentModifierMask = []
       }
+    }
+  }
+
+  /// Disable all menu items.
+  ///
+  /// This method is used during application termination to stop any further input from the user.
+  func disableAllMenus() {
+    isDisabled = true
+    disableAllMenuItems(NSApp.mainMenu!)
+  }
+
+  /// Disable all menu items in the given menu and any submenus.
+  ///
+  /// This method recursively descends through the entire tree of menu items disabling all items.
+  /// - Parameter menu: Menu to disable
+  private func disableAllMenuItems(_ menu: NSMenu) {
+    for item in menu.items {
+      if item.hasSubmenu {
+        disableAllMenuItems(item.submenu!)
+      }
+      item.isEnabled = false
     }
   }
 }

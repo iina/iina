@@ -80,6 +80,8 @@
 "osd.file_error" = "Error reading file";
 "osd.cannot_login" = "Cannot login";
 "osd.canceled" = "Canceled";
+"osd.cannot_connect" = "Cannot connect";
+"osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Added Filter: %@";
 "osd.filter_removed" = "Removed Filter";
 "osd.file_loop" = "File Loop: %@";
@@ -186,6 +188,7 @@
 "alert.sub_lang_not_set" = "Please set preferred subtitle languages in preferences before using OpenSubtitles. English(eng) will be used this time.";
 "alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
 "alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
+"alert.sub.save_downloaded.title" = "Save Downloaded Subtitle";
 
 "alert.set_default.title" = "Setting IINA as Default App";
 "alert.set_default.message" = "IINA will be set as the default app for all file types it supports.";

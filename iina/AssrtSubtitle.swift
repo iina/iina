@@ -10,8 +10,6 @@ import Foundation
 import Just
 import PromiseKit
 
-fileprivate let subsystem = Logger.Subsystem(rawValue: "assrt")
-
 class Assrt {
   class Subtitle: OnlineSubtitle {
     struct File {
@@ -54,7 +52,7 @@ class Assrt {
           Promise { resolver in
             Just.get(file.url, asyncCompletionHandler: { response in
               guard response.ok, let data = response.content else {
-                resolver.reject(OnlineSubtitle.CommonError.networkError)
+                resolver.reject(OnlineSubtitle.CommonError.networkError(response.error))
                 return
               }
               let subFilename = "[\(self.index)]\(file.filename)"
@@ -67,9 +65,9 @@ class Assrt {
       } else if let url = url, let filename = filename {
         // download from url
         return Promise { resolver in
-          Just.get(url) { response in
+          Just.get(url, asyncCompletionHandler: { response in
             guard response.ok, let data = response.content else {
-              resolver.reject(OnlineSubtitle.CommonError.networkError)
+              resolver.reject(OnlineSubtitle.CommonError.networkError(response.error))
               return
             }
             let subFilename = "[\(self.index)]\(filename)"
@@ -78,10 +76,10 @@ class Assrt {
               return
             }
             resolver.fulfill([url])
-          }
+          })
         }
       } else {
-        return Promise(error: OnlineSubtitle.CommonError.networkError)
+        return Promise(error: OnlineSubtitle.CommonError.networkError(nil))
       }
     }
 
@@ -179,7 +177,7 @@ class Assrt {
 
     func search(_ query: String) -> Promise<[Subtitle]> {
       return Promise { resolver in
-        Just.post(searchApi, params: ["q": query], headers: header) { result in
+        Just.post(searchApi, params: ["q": query], headers: header, asyncCompletionHandler: { result in
           guard let json = result.json as? [String: Any] else {
             resolver.reject(Error.networkError)
             return
@@ -222,7 +220,7 @@ class Assrt {
             index += 1
           }
           resolver.fulfill(subtitles)
-        }
+        })
       }
     }
 
@@ -290,4 +288,8 @@ class Assrt {
       return ["Authorization": "Bearer \(token)"]
     }
   }
+}
+
+extension Logger.Sub {
+  static let assrt = Logger.Subsystem(rawValue: "assrt")
 }

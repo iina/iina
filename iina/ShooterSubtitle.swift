@@ -32,7 +32,7 @@ class Shooter {
       return Promise { resolver in
         Just.get(files[0].path, asyncCompletionHandler: { response in
           guard response.ok, let data = response.content else {
-            resolver.reject(OnlineSubtitle.CommonError.networkError)
+            resolver.reject(OnlineSubtitle.CommonError.networkError(response.error))
             return
           }
           let fileName = "[\(self.index)]\(response.fileName ?? "")"
@@ -47,8 +47,8 @@ class Shooter {
   }
 
   enum Error: Swift.Error {
-    case cannotReadFile
-    case fileTooSmall
+    case cannotReadFile(Swift.Error)
+    case fileTooSmall(Int)
   }
 
   class Fetcher: OnlineSubtitle.DefaultFetcher, OnlineSubtitleFetcher {
@@ -70,6 +70,8 @@ class Shooter {
     typealias ResponseData = [[String: Any]]
     typealias ResponseFilesData = [[String: String]]
 
+    private static let minimumFileSize = 12288
+
     private let chunkSize: Int = 4096
     private let apiPath = "https://www.shooter.cn/api/subapi.php"
 
@@ -81,16 +83,20 @@ class Shooter {
 
     private func hash(_ url: URL) -> Promise<FileInfo> {
       return Promise { resolver in
-        guard let file = try? FileHandle(forReadingFrom: url) else {
-          resolver.reject(Error.cannotReadFile)
+        let file: FileHandle
+        do {
+          file = try FileHandle(forReadingFrom: url)
+        } catch {
+          resolver.reject(Error.cannotReadFile(error))
           return
         }
+        defer { file.closeFile() }
 
         file.seekToEndOfFile()
         let fileSize: UInt64 = file.offsetInFile
 
-        guard fileSize >= 12288 else {
-          resolver.reject(Error.fileTooSmall)
+        guard fileSize >= Shooter.Fetcher.minimumFileSize else {
+          resolver.reject(Error.fileTooSmall(Shooter.Fetcher.minimumFileSize))
           return
         }
 
@@ -106,8 +112,6 @@ class Shooter {
           return file.readData(ofLength: chunkSize).md5
           }.joined(separator: ";")
 
-        file.closeFile()
-
         resolver.fulfill(FileInfo(hashValue: hash, path: url.path))
       }
     }
@@ -116,11 +120,11 @@ class Shooter {
       return Promise { resolver in
         Just.post(apiPath, params: info.dictionary, timeout: 10, asyncCompletionHandler: { response in
           guard response.ok else {
-            resolver.reject(OnlineSubtitle.CommonError.networkError)
+            resolver.reject(OnlineSubtitle.CommonError.networkError(response.error))
             return
           }
           guard let json = response.json as? ResponseData else {
-            resolver.fulfill([])
+            resolver.reject(OnlineSubtitle.CommonError.noResult)
             return
           }
 
@@ -143,4 +147,8 @@ class Shooter {
       }
     }
   }
+}
+
+extension Logger.Sub {
+  static let shooter = Logger.Subsystem(rawValue: "sub.shooter")
 }

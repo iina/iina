@@ -11,8 +11,6 @@ import Just
 import PromiseKit
 import Gzip
 
-fileprivate let subsystem = Logger.Subsystem(rawValue: "opensub")
-
 class OpenSub {
   final class Subtitle: OnlineSubtitle {
     var filename: String = ""
@@ -42,7 +40,7 @@ class OpenSub {
       return Promise { resolver in
         Just.get(subDlLink, asyncCompletionHandler: { response in
           guard response.ok, let data = response.content, let unzipped = try? data.gunzipped() else {
-            resolver.reject(OnlineSubtitle.CommonError.networkError)
+            resolver.reject(OnlineSubtitle.CommonError.networkError(response.error))
             return
           }
           let subFilename = "[\(self.index)]\(self.filename)"
@@ -68,8 +66,8 @@ class OpenSub {
     // login failed (reason)
     case loginFailed(String)
     // file error
-    case cannotReadFile
-    case fileTooSmall
+    case cannotReadFile(Swift.Error)
+    case fileTooSmall(Int)
     // search failed (reason)
     case searchFailed(String)
     // lower level error
@@ -96,6 +94,15 @@ class OpenSub {
     }
 
     typealias ResponseFilesData = [[String: Any]]
+
+    /// Minimum file size imposed by [Open Subtitles](https://www.opensubtitles.org).
+    ///
+    /// Open Subtitles limits the size of movies that it supports. This is documented on the wiki page [HashSourceCodes](https://trac.opensubtitles.org/projects/opensubtitles/wiki/HashSourceCodes):
+    ///
+    /// On opensubtitles.org is movie file size limited to **9000000000 > $moviebytesize > 131072 bytes**
+    ///
+    /// - Todo: Enforce the maximum file size.
+    private static let minimumFileSize = 131072
 
     private let chunkSize: Int = 65536
     private let apiPath = "https://api.opensubtitles.org:443/xml-rpc"
@@ -132,12 +139,12 @@ class OpenSub {
     func fetch(from url: URL, withProviderID id: String, playerCore player: PlayerCore) -> Promise<[Subtitle]> {
       return login()
       .then { _ in
-        self.hash(url)
+        self.hash(url, player.info.isNetworkResource)
       }.then { info in
-        self.request(info.dictionary)
+        self.requestByHashAndSize(info)
       }.recover { error -> Promise<[Subtitle]> in
         if case OnlineSubtitle.CommonError.noResult = error {
-          return self.requestByName(url)
+          return self.requestByName(url, player.info.isNetworkResource, player.getMediaTitle())
         } else {
           throw error
         }
@@ -198,11 +205,10 @@ class OpenSub {
             let pStatus = parsed["status"] as! String
             if pStatus.hasPrefix("200") {
               self.token = parsed["token"] as? String
-              Logger.log("OpenSub: logged in as user \(finalUser)", subsystem: subsystem)
+              log("OpenSub: logged in as user \(finalUser)")
               self.startHeartbeat()
               resolver.fulfill(())
             } else {
-              Logger.log("OpenSub: login failed, \(pStatus)", level: .error, subsystem: subsystem)
               resolver.reject(Error.loginFailed(pStatus))
             }
           case .failure:
@@ -210,26 +216,43 @@ class OpenSub {
             resolver.reject(Error.loginFailed("Failure"))
           case .error(let error):
             // Error
+            if let cause = error.underlyingError {
+              if OnlineSubtitle.isConnectFailure(cause) {
+                resolver.reject(OnlineSubtitle.CommonError.cannotConnect(cause))
+                return
+              }
+              if OnlineSubtitle.isTimedOutFailure(cause) {
+                resolver.reject(OnlineSubtitle.CommonError.timedOut(cause))
+                return
+              }
+            }
             resolver.reject(Error.xmlRpcError(error))
           }
         }
       }
     }
 
-    func hash(_ url: URL) -> Promise<FileInfo> {
+    func hash(_ url: URL, _ isNetworkResource: Bool) -> Promise<FileInfo> {
       return Promise { resolver in
-        guard let file = try? FileHandle(forReadingFrom: url) else {
-          Logger.log("OpenSub: cannot get file handle", level: .error, subsystem: subsystem)
-          resolver.reject(Error.cannotReadFile)
+        guard !isNetworkResource else {
+          // Cannot create a hash when streaming. Force caller to use title instead.
+          resolver.reject(OnlineSubtitle.CommonError.noResult)
           return
         }
+        let file: FileHandle
+        do {
+          file = try FileHandle(forReadingFrom: url)
+        } catch {
+          resolver.reject(Error.cannotReadFile(error))
+          return
+        }
+        defer { file.closeFile() }
 
         file.seekToEndOfFile()
         let fileSize = file.offsetInFile
 
-        if fileSize < 131072 {
-          Logger.log("File length less than 131072, skipped", level: .warning, subsystem: subsystem)
-          resolver.reject(Error.fileTooSmall)
+        guard fileSize > OpenSub.Fetcher.minimumFileSize else {
+          resolver.reject(Error.fileTooSmall(OpenSub.Fetcher.minimumFileSize))
           return
         }
 
@@ -242,28 +265,33 @@ class OpenSub {
 
         hash += fileSize
 
-        file.closeFile()
-
         resolver.fulfill(FileInfo(hashValue: String(format: "%016qx", hash), fileSize: fileSize))
       }
     }
 
-    func requestByName(_ fileURL: URL) -> Promise<[Subtitle]> {
-      return requestIMDB(fileURL).then { imdb -> Promise<[Subtitle]> in
-        let info = ["imdbid": imdb]
+    func requestByHashAndSize(_ info: FileInfo) -> Promise<[Subtitle]> {
+      log("Searching for subtitles of movies matching hash \(info.hashValue) and size \(info.fileSize)")
+      return self.request(info.dictionary)
+    }
+
+    func requestByName(_ fileURL: URL, _ isNetworkResource: Bool, _ mediaTitle: String) -> Promise<[Subtitle]> {
+       return requestIMDB(fileURL, isNetworkResource, mediaTitle).then { imdb -> Promise<[Subtitle]> in        let info = ["imdbid": imdb]
         return self.request(info)
       }
     }
 
-    func requestIMDB(_ fileURL: URL) -> Promise<String> {
+    func requestIMDB(_ fileURL: URL, _ isNetworkResource: Bool, _ mediaTitle: String) -> Promise<String> {
       return Promise { resolver in
-        let filename = fileURL.lastPathComponent
-        xmlRpc.call("GuessMovieFromString", [token as Any, [filename]]) { status in
+        // When streaming use the media title as frequently the URL does not reflect the title
+        // of the video.
+        let searchString = isNetworkResource ? mediaTitle : fileURL.lastPathComponent
+        log("Searching for subtitles of movies matching '\(searchString)'")
+        xmlRpc.call("GuessMovieFromString", [token as Any, [searchString]]) { status in
           switch status {
           case .ok(let response):
             do {
               guard self.checkStatus(response) else { throw Error.wrongResponseFormat }
-              let bestGuess = try self.findPath(["data", filename, "BestGuess"], in: response) as? [String: Any]
+              let bestGuess = try self.findPath(["data", searchString, "BestGuess"], in: response) as? [String: Any]
               let IMDB = (bestGuess?["IDMovieIMDB"] as? String) ?? ""
               resolver.fulfill(IMDB)
             } catch let (error) {
@@ -353,23 +381,23 @@ class OpenSub {
         case .ok(let value):
           // 406 No session
           if let pValue = value as? [String: Any], (pValue["status"] as? String ?? "").hasPrefix("406") {
-            Logger.log("heartbeat: no session", level: .warning, subsystem: subsystem)
+            log("heartbeat: no session", level: .warning)
             self.token = nil
             self.login().catch { err in
               switch err {
               case Error.loginFailed(let reason):
-                Logger.log("(re-login) \(reason)", level: .error, subsystem: subsystem)
+                log("(re-login) \(reason)", level: .error)
               case Error.xmlRpcError(let error):
-                Logger.log("(re-login) \(error.readableDescription)", level: .error, subsystem: subsystem)
+                log("(re-login) \(error.readableDescription)", level: .error)
               default:
-                Logger.log("(re-login) \(err.localizedDescription)", level: .error, subsystem: subsystem)
+                log("(re-login) \(err.localizedDescription)", level: .error)
               }
             }
           } else {
-            Logger.log("OpenSub: heartbeat ok", subsystem: subsystem)
+            log("OpenSub: heartbeat ok")
           }
         default:
-          Logger.log("OpenSub: heartbeat failed", level: .error, subsystem: subsystem)
+          log("OpenSub: heartbeat failed", level: .error)
           self.token = nil
         }
       }
@@ -379,4 +407,12 @@ class OpenSub {
       return token != nil
     }
   }
+
+  private static func log(_ message: String, level: Logger.Level = .debug) {
+    Logger.log(message, level: level, subsystem: Logger.Sub.opensub)
+  }
+}
+
+extension Logger.Sub {
+  static let opensub = Logger.Subsystem(rawValue: "opensub")
 }

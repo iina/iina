@@ -14,7 +14,7 @@ class ViewLayer: CAOpenGLLayer {
 
   weak var videoView: VideoView!
 
-  lazy var mpvGLQueue = DispatchQueue(label: "com.colliderli.iina.mpvgl", qos: .userInteractive)
+  private let mpvGLQueue = DispatchQueue(label: "com.colliderli.iina.mpvgl", qos: .userInteractive)
   var blocked = false
 
   private var fbo: GLint = 1
@@ -143,28 +143,30 @@ class ViewLayer: CAOpenGLLayer {
   }
 
   func draw(forced: Bool = false) {
-    needsMPVRender = true
-    if forced { forceRender = true }
-    display()
-    if forced {
-      forceRender = false
-      return
-    }
-    if needsMPVRender {
-      videoView.player.mpv.lockAndSetOpenGLContext()
-      defer { videoView.player.mpv.unlockOpenGLContext() }
-      // draw(inCGLContext:) is not called, needs a skip render
-      if !videoView.isUninited, let renderContext = videoView.player.mpv.mpvRenderContext {
-        var skip: CInt = 1
-        withUnsafeMutablePointer(to: &skip) { skip in
-          var params: [mpv_render_param] = [
-            mpv_render_param(type: MPV_RENDER_PARAM_SKIP_RENDERING, data: .init(skip)),
-            mpv_render_param()
-          ]
-          mpv_render_context_render(renderContext, &params);
-        }
+    mpvGLQueue.async { [self] in
+      needsMPVRender = true
+      if forced { forceRender = true }
+      display()
+      if forced {
+        forceRender = false
+        return
       }
-      needsMPVRender = false
+      if needsMPVRender {
+        videoView.player.mpv.lockAndSetOpenGLContext()
+        defer { videoView.player.mpv.unlockOpenGLContext() }
+        // draw(inCGLContext:) is not called, needs a skip render
+        if !videoView.isUninited, let renderContext = videoView.player.mpv.mpvRenderContext {
+          var skip: CInt = 1
+          withUnsafeMutablePointer(to: &skip) { skip in
+            var params: [mpv_render_param] = [
+              mpv_render_param(type: MPV_RENDER_PARAM_SKIP_RENDERING, data: .init(skip)),
+              mpv_render_param()
+            ]
+            mpv_render_context_render(renderContext, &params);
+          }
+        }
+        needsMPVRender = false
+      }
     }
   }
 

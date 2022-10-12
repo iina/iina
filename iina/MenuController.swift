@@ -453,6 +453,12 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updatePlaybackMenu() {
     let player = PlayerCore.active
+    let isDisplayingPlaylist = player.mainWindow.sideBarStatus == .playlist &&
+          player.mainWindow.playlistView.currentTab == .playlist
+    playlistPanel?.title = isDisplayingPlaylist ? Constants.String.hidePlaylistPanel : Constants.String.playlistPanel
+    let isDisplayingChapters = player.mainWindow.sideBarStatus == .playlist &&
+          player.mainWindow.playlistView.currentTab == .chapters
+    chapterPanel?.title = isDisplayingChapters ? Constants.String.hideChaptersPanel : Constants.String.chaptersPanel
     pause.title = player.info.isPaused ? Constants.String.resume : Constants.String.pause
     let isLoop = player.mpv.getString(MPVOption.PlaybackControl.loopFile) == "inf"
     fileLoop.state = isLoop ? .on : .off
@@ -462,12 +468,17 @@ class MenuController: NSObject, NSMenuDelegate {
   }
 
   private func updateVideoMenu() {
-    let isInFullScreen = PlayerCore.active.mainWindow.fsState.isFullscreen
-    let isInPIP = PlayerCore.active.mainWindow.pipStatus == .inPIP
-    let isOntop = PlayerCore.active.isInMiniPlayer ? PlayerCore.active.miniPlayer.isOntop : PlayerCore.active.mainWindow.isOntop
-    let isDelogo = PlayerCore.active.info.delogoFilter != nil
+    let player = PlayerCore.active
+    let isDisplayingSettings = player.mainWindow.sideBarStatus == .settings &&
+          player.mainWindow.quickSettingView.currentTab == .video
+    quickSettingsVideo?.title = isDisplayingSettings ? Constants.String.hideQuickSettingsPanel :
+        Constants.String.quickSettingsPanel
+    let isInFullScreen = player.mainWindow.fsState.isFullscreen
+    let isInPIP = player.mainWindow.pipStatus == .inPIP
+    let isOntop = player.isInMiniPlayer ? player.miniPlayer.isOntop : player.mainWindow.isOntop
+    let isDelogo = player.info.delogoFilter != nil
     alwaysOnTop.state = isOntop ? .on : .off
-    deinterlace.state = PlayerCore.active.info.deinterlace ? .on : .off
+    deinterlace.state = player.info.deinterlace ? .on : .off
     fullScreen.title = isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen
     pictureInPicture?.title = isInPIP ? Constants.String.exitPIP : Constants.String.pip
     delogo.state = isDelogo ? .on : .off
@@ -475,6 +486,10 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updateAudioMenu() {
     let player = PlayerCore.active
+    let isDisplayingSettings = player.mainWindow.sideBarStatus == .settings &&
+          player.mainWindow.quickSettingView.currentTab == .audio
+    quickSettingsAudio?.title = isDisplayingSettings ? Constants.String.hideQuickSettingsPanel :
+        Constants.String.quickSettingsPanel
     volumeIndicator.title = String(format: NSLocalizedString("menu.volume", comment: "Volume:"), Int(player.info.volume))
     audioDelayIndicator.title = String(format: NSLocalizedString("menu.audio_delay", comment: "Audio Delay:"), player.info.audioDelay)
   }
@@ -498,6 +513,9 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updateSubMenu() {
     let player = PlayerCore.active
+    let isDisplayingSettings = player.mainWindow.sideBarStatus == .settings &&
+          player.mainWindow.quickSettingView.currentTab == .sub
+    quickSettingsSub?.title = isDisplayingSettings ? Constants.String.hideQuickSettingsPanel : Constants.String.quickSettingsPanel
     subDelayIndicator.title = String(format: NSLocalizedString("menu.sub_delay", comment: "Subtitle Delay:"), player.info.subDelay)
 
     let encodingCode = player.info.subEncoding ?? "auto"

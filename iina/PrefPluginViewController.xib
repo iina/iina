@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21225" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21225"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -455,13 +455,13 @@
                                         </connections>
                                     </segmentedControl>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sl8-zI-7f5">
-                                        <rect key="frame" x="361" y="368" width="98" height="17"/>
-                                        <buttonCell key="cell" type="roundRect" title="Reveal in Finder" bezelStyle="roundedRect" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="drh-6w-3z1">
+                                        <rect key="frame" x="367" y="368" width="92" height="17"/>
+                                        <buttonCell key="cell" type="roundRect" title="Show in Finder" bezelStyle="roundedRect" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="drh-6w-3z1">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="controlContent" size="11"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="revealPlugin:" target="-2" id="qhh-x5-Xcs"/>
+                                            <action selector="showPlugin:" target="-2" id="idx-f9-Qaq"/>
                                         </connections>
                                     </button>
                                 </subviews>

@@ -428,7 +428,7 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
     }
   }
 
-  @IBAction func revealPlugin(_ sender: Any) {
+  @IBAction func showPlugin(_ sender: Any) {
     guard let currentPlugin = currentPlugin else { return }
     NSWorkspace.shared.activateFileViewerSelecting([currentPlugin.root])
   }

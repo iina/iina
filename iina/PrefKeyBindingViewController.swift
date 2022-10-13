@@ -49,7 +49,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
   @IBOutlet weak var configHintLabel: NSTextField!
   @IBOutlet weak var addKmBtn: NSButton!
   @IBOutlet weak var removeKmBtn: NSButton!
-  @IBOutlet weak var revealConfFileBtn: NSButton!
+  @IBOutlet weak var showConfFileBtn: NSButton!
   @IBOutlet weak var deleteConfFileBtn: NSButton!
   @IBOutlet weak var newConfigBtn: NSButton!
   @IBOutlet weak var duplicateConfigBtn: NSButton!
@@ -253,7 +253,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     }
   }
 
-  @IBAction func revealConfFileAction(_ sender: AnyObject) {
+  @IBAction func showConfFileAction(_ sender: AnyObject) {
     let url = URL(fileURLWithPath: currentConfFilePath)
     NSWorkspace.shared.activateFileViewerSelecting([url])
   }
@@ -315,7 +315,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
 
   private func changeButtonEnabledStatus() {
     shouldEnableEdit = !isDefaultConfig(currentConfName)
-    [revealConfFileBtn, deleteConfFileBtn, addKmBtn].forEach { btn in
+    [showConfFileBtn, deleteConfFileBtn, addKmBtn].forEach { btn in
       btn.isEnabled = shouldEnableEdit
     }
     kbTableView.tableColumns.forEach { $0.isEditable = shouldEnableEdit }

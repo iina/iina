@@ -657,7 +657,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     // WIP
   }
 
-  @IBAction func contextMenuRevealInFinder(_ sender: NSMenuItem) {
+  @IBAction func contextMenuShowInFinder(_ sender: NSMenuItem) {
     guard let selectedRows = selectedRows else { return }
     var urls: [URL] = []
     for index in selectedRows {
@@ -756,7 +756,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         result.addItem(withTitle: NSLocalizedString(localCount == 1 ? "pl_menu.delete" : "pl_menu.delete_multi", comment: "Delete"), action: #selector(self.contextMenuDeleteFile(_:)))
         // result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.delete_after_play" : "pl_menu.delete_after_play_multi", comment: "Delete After Playback"), action: #selector(self.contextMenuDeleteFileAfterPlayback(_:)))
 
-        result.addItem(withTitle: NSLocalizedString("pl_menu.reveal_in_finder", comment: "Reveal in Finder"), action: #selector(self.contextMenuRevealInFinder(_:)))
+        result.addItem(withTitle: NSLocalizedString("pl_menu.show_in_finder", comment: "Show in Finder"), action: #selector(self.contextMenuShowInFinder(_:)))
         result.addItem(NSMenuItem.separator())
       }
     }

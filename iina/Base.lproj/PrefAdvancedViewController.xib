@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21225" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21225"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -60,7 +60,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="revealLogDir:" target="-2" id="VoU-0Y-IN8"/>
+                        <action selector="openLogDir:" target="-2" id="dfR-Jf-uSQ"/>
                         <binding destination="nyg-fH-Pug" name="enabled" keyPath="values.enableAdvancedSettings" id="CH7-kE-1sm"/>
                     </connections>
                 </button>

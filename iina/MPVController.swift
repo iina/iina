@@ -799,21 +799,9 @@ class MPVController: NSObject {
         // now that mpv has shut down. This is not needed when IINA sends the quit command to mpv
         // as in that case the observers are removed before the quit command is sent.
         removeOptionObservers()
-        // Submit the following task synchronously to ensure it is done before application
-        // termination is started.
-        DispatchQueue.main.sync {
+        player.closeMainWindow()
+        DispatchQueue.main.async {
           self.player.mpvHasShutdown(isMPVInitiated: true)
-        }
-        // Initiate application termination. AppKit requires this be done from the main thread,
-        // however the main dispatch queue must not be used to avoid blocking the queue as per
-        // instructions from Apple.
-        if #available(macOS 10.12, *) {
-          RunLoop.main.perform(inModes: [.common]) {
-            self.terminateApplication()
-          }
-        } else {
-          RunLoop.main.perform(#selector(self.terminateApplication), target: self,
-                               argument: nil, order: Int.min, modes: [.common])
         }
       } else {
         mpv_destroy(mpv)

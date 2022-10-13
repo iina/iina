@@ -16,7 +16,7 @@ import JavaScriptCore
   func read(_ path: String, _ options: [String: Any]) -> Any?
   func trash(_ path: String)
   func delete(_ path: String)
-  func revealInFinder(_ path: String)
+  func showInFinder(_ path: String)
   func handle(_ path: String, _ mode: String) -> JavascriptFileHandle?
 }
 
@@ -126,7 +126,7 @@ class JavascriptAPIFile: JavascriptAPI, JavascriptAPIFileExportable {
     }
   }
 
-  func revealInFinder(_ path: String) {
+  func showInFinder(_ path: String) {
     guard let filePath = parsePath(path).path else { return }
 
     NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: filePath)])

@@ -28,8 +28,8 @@ $ git rebase upstream/develop
 ### Localizations
 
 We use [Crowdin](https://crowdin.com/project/iina) for localization.
-When there is a UI text change, only add/update the strings both in `Base.lproj` and `en.lproj`.
-Please do not contain any localization changes in other languages in the pull request.
+When there is a UI text change, only add/update the strings in `Base.lproj` and `en.lproj`.
+Please do not include any localization changes for other languages in the pull request.
 New strings on the develop branch from the `en.lproj` folder will be synced automatically to Crowdin, and we will fetch the latest translations from Crowdin before
 releasing the next version.
 

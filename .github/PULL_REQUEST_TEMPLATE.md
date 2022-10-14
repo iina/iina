@@ -1,5 +1,5 @@
-- [ ] This change has been discussed with the author.
-- [ ] It implements / fixes issue #.
+- [ ] I have read [CONTRIBUTING.md](https://github.com/iina/iina/blob/develop/CONTRIBUTING.md)
+- [ ] This implements/fixes issue #.
 
 ---
 

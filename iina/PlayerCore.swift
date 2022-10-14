@@ -431,6 +431,7 @@ class PlayerCore: NSObject {
     miniPlayer.showWindow(self)
 
     miniPlayer.updateTitle()
+    syncUITime()
     let playlistView = mainWindow.playlistView.view
     let videoView = mainWindow.videoView
     // reset down shift for playlistView

@@ -2600,15 +2600,15 @@ class MainWindowController: PlayerWindowController {
       if let tab = tab {
         view.pleaseSwitchToTab(tab)
       }
-      showSideBar(viewController: view, type: .settings)
-    case .playlist:
+      showSideBar(viewController: view, type: .playlist)
+    case .settings:
       if let tab = tab {
         view.pleaseSwitchToTab(tab)
       }
       hideSideBar {
-        self.showSideBar(viewController: view, type: .settings)
+        self.showSideBar(viewController: view, type: .playlist)
       }
-    case .settings:
+    case .playlist:
       if view.currentTab == tab {
         if hideIfAlreadyShown {
           hideSideBar()

@@ -471,8 +471,8 @@ class MenuController: NSObject, NSMenuDelegate {
     let player = PlayerCore.active
     let isDisplayingSettings = player.mainWindow.sideBarStatus == .settings &&
           player.mainWindow.quickSettingView.currentTab == .video
-    quickSettingsVideo?.title = isDisplayingSettings ? Constants.String.hideQuickSettingsPanel :
-        Constants.String.quickSettingsPanel
+    quickSettingsVideo?.title = isDisplayingSettings ? Constants.String.hideVideoPanel :
+        Constants.String.videoPanel
     let isInFullScreen = player.mainWindow.fsState.isFullscreen
     let isInPIP = player.mainWindow.pipStatus == .inPIP
     let isOntop = player.isInMiniPlayer ? player.miniPlayer.isOntop : player.mainWindow.isOntop
@@ -488,8 +488,8 @@ class MenuController: NSObject, NSMenuDelegate {
     let player = PlayerCore.active
     let isDisplayingSettings = player.mainWindow.sideBarStatus == .settings &&
           player.mainWindow.quickSettingView.currentTab == .audio
-    quickSettingsAudio?.title = isDisplayingSettings ? Constants.String.hideQuickSettingsPanel :
-        Constants.String.quickSettingsPanel
+    quickSettingsAudio?.title = isDisplayingSettings ? Constants.String.hideAudioPanel :
+        Constants.String.audioPanel
     volumeIndicator.title = String(format: NSLocalizedString("menu.volume", comment: "Volume:"), Int(player.info.volume))
     audioDelayIndicator.title = String(format: NSLocalizedString("menu.audio_delay", comment: "Audio Delay:"), player.info.audioDelay)
   }
@@ -515,7 +515,8 @@ class MenuController: NSObject, NSMenuDelegate {
     let player = PlayerCore.active
     let isDisplayingSettings = player.mainWindow.sideBarStatus == .settings &&
           player.mainWindow.quickSettingView.currentTab == .sub
-    quickSettingsSub?.title = isDisplayingSettings ? Constants.String.hideQuickSettingsPanel : Constants.String.quickSettingsPanel
+    quickSettingsSub?.title = isDisplayingSettings ? Constants.String.hideSubtitlesPanel :
+        Constants.String.subtitlesPanel
     subDelayIndicator.title = String(format: NSLocalizedString("menu.sub_delay", comment: "Subtitle Delay:"), player.info.subDelay)
 
     let encodingCode = player.info.subEncoding ?? "auto"

@@ -116,6 +116,16 @@
 "menu.pause" = "Pause";
 "menu.resume" = "Resume";
 "menu.speed" = "Speed: %.2fx";
+"menu.chapters" = "Show Chapters Panel";
+"menu.hide_chapters" = "Hide Chapters Panel";
+"menu.playlist" = "Show Playlist Panel";
+"menu.hide_playlist" = "Hide Playlist Panel";
+"menu.video" = "Show Video Panel";
+"menu.hide_video" = "Hide Video Panel";
+"menu.audio" = "Show Audio Panel";
+"menu.hide_audio" = "Hide Audio Panel";
+"menu.subtitles" = "Show Subtitles Panel";
+"menu.hide_subtitles" = "Hide Subtitles Panel";
 
 "menu.seek_forward" = "Step Forward %.0fs";
 "menu.seek_backward" = "Step Backward %.0fs";

@@ -50,11 +50,13 @@ class JavascriptMessageHub {
 
   func callListener(forEvent name: String, withDataString dataString: String?) {
     guard let callback = listeners[name] else { return }
-
-    guard let dataString = dataString,
-      let data = dataString.data(using: .utf8),
-      let decoded = try? JSONSerialization.jsonObject(with: data) else {
+    guard let dataString = dataString else {
       callback.value.call(withArguments: [])
+      return
+    }
+    guard let data = dataString.data(using: .utf8),
+      let decoded = try? JSONSerialization.jsonObject(with: data) else {
+      callback.value.call(withArguments: [JSValue(object: dataString, in: callback.value.context) ?? NSNull()])
       return
     }
 

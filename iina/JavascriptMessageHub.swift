@@ -24,7 +24,11 @@ class JavascriptMessageHub {
       guard JSONSerialization.isValidJSONObject(object),
         let data = try? JSONSerialization.data(withJSONObject: object),
          let dataString = String(data: data, encoding: .utf8) else {
-          webView.evaluateJavaScript("window.iina._emit(`\(name)`)")
+          if let dataString = data.toString() {
+            webView.evaluateJavaScript("window.iina._emit(`\(name)`, `\(dataString)`)")
+          } else {
+            webView.evaluateJavaScript("window.iina._emit(`\(name)`)")
+          }
           return
       }
       webView.evaluateJavaScript("window.iina._emit(`\(name)`, `\(dataString)`)")

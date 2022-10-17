@@ -343,7 +343,7 @@ CA
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Video" id="HyV-fh-RgO">
                         <items>
-                            <menuItem title="Show Quick Settings Panel" id="2t8-Ot-yoO">
+                            <menuItem title="Show Video Panel" id="2t8-Ot-yoO">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="HGF-Qh-LZk"/>
@@ -438,7 +438,7 @@ CA
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Audio" id="sW8-ri-eA5">
                         <items>
-                            <menuItem title="Show Quick Settings Panel" id="43n-Ed-5kT">
+                            <menuItem title="Show Audio Panel" id="43n-Ed-5kT">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="Fs0-R8-rnS"/>
@@ -507,7 +507,7 @@ CA
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Subtitles" id="EKp-Qx-4Mn">
                         <items>
-                            <menuItem title="Show Quick Settings Panel" id="8y7-Cy-lKT">
+                            <menuItem title="Show Subtitles Panel" id="8y7-Cy-lKT">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="EvW-J9-wqJ"/>

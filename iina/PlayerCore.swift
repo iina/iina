@@ -1521,6 +1521,7 @@ class PlayerCore: NSObject {
 
   func createSyncUITimer() {
     invalidateTimer()
+    guard !info.isPaused else { return }
     syncPlayTimeTimer = Timer.scheduledTimer(
       timeInterval: TimeInterval(DurationDisplayTextField.precision >= 2 ? AppData.syncTimePreciseInterval : AppData.syncTimeInterval),
       target: self,

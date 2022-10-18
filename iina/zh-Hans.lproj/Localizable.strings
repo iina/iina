@@ -317,28 +317,28 @@
 
 // Plugin permissions
 
-"permissions.network-request.name" = "Network Request";
-"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
-"permissions.network-request.any_site" = "Any site";
-"permissions.show-osd.name" = "Show OSD";
-"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
-"permissions.show-alert.name" = "Show Alerts";
-"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
-"permissions.video-overlay.name" = "Add overlay on videos";
-"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
-"permissions.file-system.name" = "Access the file system";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.network-request.name" = "网络请求";
+"permissions.network-request.desc" = "该插件可发起请求或上传数据到这些网站：";
+"permissions.network-request.any_site" = "任意网站";
+"permissions.show-osd.name" = "显示 OSD";
+"permissions.show-osd.desc" = "该插件可显示 OSD (On Screen Display) 信息。";
+"permissions.show-alert.name" = "显示提醒";
+"permissions.show-alert.desc" = "该插件可显示弹窗提醒。";
+"permissions.video-overlay.name" = "在视频添加覆盖";
+"permissions.video-overlay.desc" = "该插件可在视频顶部提供附加内容。";
+"permissions.file-system.name" = "访问文件系统。";
+"permissions.file-system.desc" = "该插件可读写您磁盘上的文件，包括敏感信息。它也可调起其它可能对您的计算机有害的程序或软件。所以，请确保验证源文件。";
 
-"plugin.install" = "Install";
-"plugin.installed" = "Installed";
-"plugin.not_installed" = "Not Installed";
-"plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occured during the installation: %@";
-"alert.invalid_url" = "The URL is invalid.";
-"plugin.install_error.invalid_url" = "The URL is invalid.";
-"plugin.install_error.file_not_found" = "Cannot find the package file.";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Check for Updates";
-"plugin.updating" = "Downloading update…";
+"plugin.install" = "安装";
+"plugin.installed" = "已安装";
+"plugin.not_installed" = "未安装";
+"plugin.local" = "已本地安装";
+"alert.plugin.install_error" = "安装时发生错误: %@";
+"alert.invalid_url" = "该 URL 无效。";
+"plugin.install_error.invalid_url" = "该 URL 无效。";
+"plugin.install_error.file_not_found" = "找不到包文件。";
+"plugin.install_error.cannot_download" = "下载插件失败。\n\nOutput:%@\n";
+"plugin.install_error.cannot_unpackage" = "解压插件失败。\n\nOutput:%@\n";
+"plugin.install_error.cannot_load" = "IINA 无法加载该插件。 可能因为错误格式。";
+"plugin.check_for_updates" = "检查更新";
+"plugin.updating" = "正在下载更新……";

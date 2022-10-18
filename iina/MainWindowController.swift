@@ -254,7 +254,7 @@ class MainWindowController: PlayerWindowController {
     case shown, hidden, willShow, willHide
   }
 
-  var animationState: UIAnimationState = .shown
+  var animationState: UIAnimationState = .hidden
   var osdAnimationState: UIAnimationState = .hidden
   var sidebarAnimationState: UIAnimationState = .hidden
 
@@ -1657,7 +1657,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   private func showUI() {
-    if player.disableUI { return }
+    guard !player.disableUI, ![.willShow, .shown].contains(animationState) else { return }
     animationState = .willShow
     fadeableViews.forEach { (v) in
       v.isHidden = false

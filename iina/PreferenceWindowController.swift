@@ -160,7 +160,7 @@ class PreferenceWindowController: NSWindowController {
     completionTableView.delegate = self
     completionTableView.dataSource = self
 
-    contentViewBottomConstraint = contentView.bottomAnchor.constraint(equalTo: contentView.superview!.bottomAnchor)
+    contentViewBottomConstraint = contentView.bottomAnchor.constraint(equalTo: contentView.superview!.bottomAnchor, constant: -28)
 
     var viewMap = [
       ["general", "PrefGeneralViewController"],
@@ -252,13 +252,11 @@ class PreferenceWindowController: NSWindowController {
     contentView.subviews.forEach { $0.removeFromSuperview() }
     guard let vc = viewControllers[at: index] else { return }
     contentView.addSubview(vc.view)
-    Utility.quickConstraints(["H:|-20-[v]-20-|", "V:|-28-[v]-28-|"], ["v": vc.view])
+    Utility.quickConstraints(["H:|-20-[v]-20-|", "V:|-0-[v]-20-|"], ["v": vc.view])
 
     let isScrollable = vc.preferenceContentIsScrollable
     contentViewBottomConstraint?.isActive = !isScrollable
-    scrollView.verticalScrollElasticity = isScrollable ? .allowed : .none
-    // scroll to top
-    scrollView.documentView?.scroll(.zero)
+    scrollView.verticalScrollElasticity = .none
 
     // find label
     if let title = title, let label = findLabel(titled: title, in: vc.view) {

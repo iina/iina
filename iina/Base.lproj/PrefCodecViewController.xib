@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21225" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21225"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -26,12 +26,12 @@
             <point key="canvasLocation" x="218" y="203.5"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="pxc-7C-SGP"/>
-        <customView id="gZf-gF-XoY">
-            <rect key="frame" x="0.0" y="0.0" width="444" height="202"/>
+        <customView misplaced="YES" id="gZf-gF-XoY">
+            <rect key="frame" x="0.0" y="0.0" width="444" height="234"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField identifier="SectionTitleVideo" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2BH-mP-kfr">
-                    <rect key="frame" x="-2" y="178" width="46" height="16"/>
+                    <rect key="frame" x="-2" y="220" width="46" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Video:" id="m5P-5f-5uo">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -39,7 +39,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="paR-ax-h5M">
-                    <rect key="frame" x="118" y="178" width="122" height="16"/>
+                    <rect key="frame" x="118" y="220" width="122" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Number of threads:" id="50C-1R-wlJ">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -47,7 +47,7 @@
                     </textFieldCell>
                 </textField>
                 <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NZA-64-tXh">
-                    <rect key="frame" x="246" y="175" width="58" height="21"/>
+                    <rect key="frame" x="246" y="217" width="58" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="58" id="GLI-3U-bmm"/>
                     </constraints>
@@ -68,7 +68,7 @@
                     </connections>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kas-7q-TbK">
-                    <rect key="frame" x="312" y="178" width="92" height="14"/>
+                    <rect key="frame" x="312" y="220" width="92" height="14"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Default: 0 (Auto)" id="bxW-np-SGm">
                         <font key="font" metaFont="label" size="11"/>
                         <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -76,7 +76,7 @@
                     </textFieldCell>
                 </textField>
                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EWs-Ib-pVZ">
-                    <rect key="frame" x="243" y="139" width="127" height="25"/>
+                    <rect key="frame" x="243" y="181" width="127" height="25"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="P27-F4-Ogg"/>
                     </constraints>
@@ -97,7 +97,7 @@
                     </connections>
                 </popUpButton>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="0Re-PY-hmC">
-                    <rect key="frame" x="118" y="128" width="328" height="14"/>
+                    <rect key="frame" x="118" y="170" width="328" height="14"/>
                     <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Label" id="n3r-mP-f8V">
                         <font key="font" metaFont="label" size="11"/>
                         <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -105,7 +105,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4rB-d2-drE">
-                    <rect key="frame" x="118" y="146" width="122" height="16"/>
+                    <rect key="frame" x="118" y="188" width="122" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Hardware decoder:" id="nwg-2K-G2G">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -113,7 +113,7 @@
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xXS-nP-Chk">
-                    <rect key="frame" x="118" y="99" width="156" height="18"/>
+                    <rect key="frame" x="118" y="141" width="156" height="18"/>
                     <buttonCell key="cell" type="check" title="Force dedicated GPU" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="YUr-aJ-xfC">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -123,7 +123,7 @@
                     </connections>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="40Z-9R-jw0">
-                    <rect key="frame" x="118" y="68" width="328" height="28"/>
+                    <rect key="frame" x="118" y="110" width="328" height="28"/>
                     <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Always use the dedicated GPU for rendering (if it exists). This can improve performance but may reduce battery life." id="gCv-sJ-uQJ">
                         <font key="font" metaFont="label" size="11"/>
                         <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -131,7 +131,7 @@
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H9a-N4-xDt">
-                    <rect key="frame" x="118" y="43" width="124" height="18"/>
+                    <rect key="frame" x="118" y="85" width="124" height="18"/>
                     <buttonCell key="cell" type="check" title="Load ICC profile" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="3g4-jW-uJd">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -141,11 +141,29 @@
                     </connections>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="IQ8-K4-5CX">
-                    <rect key="frame" x="118" y="12" width="328" height="28"/>
+                    <rect key="frame" x="118" y="54" width="328" height="28"/>
                     <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)" id="M2M-of-gjd">
                         <font key="font" metaFont="label" size="11"/>
                         <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9Rd-yY-b8t">
+                    <rect key="frame" x="118" y="29" width="149" height="18"/>
+                    <buttonCell key="cell" type="check" title="Enable HDR support" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="R7Z-9c-vPJ">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="pxc-7C-SGP" name="value" keyPath="values.enableHdrSupport" id="tJt-Yx-2ox"/>
+                    </connections>
+                </button>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="f1i-M6-eNG">
+                    <rect key="frame" x="118" y="12" width="294" height="14"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Enable HDR mode by default when playing HDR videos." id="ZgQ-bc-yEE">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
             </subviews>
@@ -154,8 +172,9 @@
                 <constraint firstItem="2BH-mP-kfr" firstAttribute="top" secondItem="gZf-gF-XoY" secondAttribute="top" constant="8" id="0jh-iZ-prT"/>
                 <constraint firstItem="40Z-9R-jw0" firstAttribute="leading" secondItem="xXS-nP-Chk" secondAttribute="leading" id="1of-sZ-BN6"/>
                 <constraint firstItem="0Re-PY-hmC" firstAttribute="top" secondItem="4rB-d2-drE" secondAttribute="bottom" constant="4" id="5Mm-wm-VFG"/>
-                <constraint firstAttribute="bottom" secondItem="IQ8-K4-5CX" secondAttribute="bottom" constant="12" id="6dx-e8-7Ck"/>
+                <constraint firstItem="9Rd-yY-b8t" firstAttribute="top" secondItem="IQ8-K4-5CX" secondAttribute="bottom" constant="8" id="6dx-e8-7Ck"/>
                 <constraint firstItem="40Z-9R-jw0" firstAttribute="top" secondItem="xXS-nP-Chk" secondAttribute="bottom" constant="4" id="87O-GK-HSl"/>
+                <constraint firstItem="f1i-M6-eNG" firstAttribute="top" secondItem="9Rd-yY-b8t" secondAttribute="bottom" constant="4" id="9g0-YK-9ZQ"/>
                 <constraint firstAttribute="trailing" secondItem="IQ8-K4-5CX" secondAttribute="trailing" id="ASv-Wn-ieW"/>
                 <constraint firstItem="4rB-d2-drE" firstAttribute="leading" secondItem="paR-ax-h5M" secondAttribute="leading" id="Can-oM-yLm"/>
                 <constraint firstItem="EWs-Ib-pVZ" firstAttribute="leading" secondItem="4rB-d2-drE" secondAttribute="trailing" constant="8" id="Fj7-lr-KGg"/>
@@ -169,10 +188,13 @@
                 <constraint firstItem="xXS-nP-Chk" firstAttribute="leading" secondItem="0Re-PY-hmC" secondAttribute="leading" id="aYZ-dq-yBE"/>
                 <constraint firstItem="kas-7q-TbK" firstAttribute="leading" secondItem="NZA-64-tXh" secondAttribute="trailing" constant="10" id="c73-Gh-U6L"/>
                 <constraint firstItem="IQ8-K4-5CX" firstAttribute="leading" secondItem="H9a-N4-xDt" secondAttribute="leading" id="cpx-2e-hcB"/>
+                <constraint firstItem="f1i-M6-eNG" firstAttribute="leading" secondItem="9Rd-yY-b8t" secondAttribute="leading" id="eNp-ch-ApK"/>
                 <constraint firstItem="xXS-nP-Chk" firstAttribute="top" secondItem="0Re-PY-hmC" secondAttribute="bottom" constant="12" id="fO3-5j-FCq"/>
                 <constraint firstItem="paR-ax-h5M" firstAttribute="leading" secondItem="gZf-gF-XoY" secondAttribute="leading" constant="120" id="fWo-4I-DAC"/>
+                <constraint firstAttribute="bottom" secondItem="f1i-M6-eNG" secondAttribute="bottom" constant="12" id="gbV-a3-0aM"/>
                 <constraint firstItem="NZA-64-tXh" firstAttribute="baseline" secondItem="paR-ax-h5M" secondAttribute="baseline" id="hly-ga-NBA"/>
                 <constraint firstItem="EWs-Ib-pVZ" firstAttribute="leading" secondItem="NZA-64-tXh" secondAttribute="leading" id="k0a-vZ-1e2"/>
+                <constraint firstItem="9Rd-yY-b8t" firstAttribute="leading" secondItem="IQ8-K4-5CX" secondAttribute="leading" id="l0x-ri-x8e"/>
                 <constraint firstItem="NZA-64-tXh" firstAttribute="leading" secondItem="paR-ax-h5M" secondAttribute="trailing" constant="8" id="mRg-ce-YRy"/>
                 <constraint firstItem="2BH-mP-kfr" firstAttribute="leading" secondItem="gZf-gF-XoY" secondAttribute="leading" id="pDP-Rm-tDg"/>
                 <constraint firstItem="0Re-PY-hmC" firstAttribute="leading" secondItem="4rB-d2-drE" secondAttribute="leading" id="q9a-bj-3IP"/>

@@ -261,7 +261,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     NSApplication.shared.servicesProvider = self
 
-    menuController?.pluginMenuNeedsUpdate = true
+    (NSApp.delegate as? AppDelegate)?.menuController?.updatePluginMenu()
   }
 
   /** Show welcome window if `application(_:openFile:)` wasn't called, i.e. launched normally. */

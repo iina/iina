@@ -118,7 +118,6 @@ class PlayerCore: NSObject {
 
   var plugins: [JavascriptPluginInstance] = []
   private var pluginMap: [String: JavascriptPluginInstance] = [:]
-  var pluginMenuNeedsUpdate = false
   var events = EventController()
 
   lazy var ffmpegController: FFmpegController = {
@@ -173,7 +172,7 @@ class PlayerCore: NSObject {
 
   static func reloadPluginForAll(_ plugin: JavascriptPlugin) {
     playerCores.forEach { $0.reloadPlugin(plugin) }
-    (NSApp.delegate as? AppDelegate)?.menuController?.pluginMenuNeedsUpdate = true
+    (NSApp.delegate as? AppDelegate)?.menuController?.updatePluginMenu()
   }
 
   func loadPlugins() {

@@ -294,52 +294,6 @@ class KeyCodeHelper {
     return keyString
   }
 
-  // Finds and returns the end index of the next key in the string
-  private static func getNextEndIndex(_ unparsedRemainder: Substring) -> String.Index? {
-    if let dashIndex = unparsedRemainder.firstIndex(of: "-"),
-     let indexBeyondDash = unparsedRemainder.index(dashIndex, offsetBy: 1, limitedBy: unparsedRemainder.index(before: unparsedRemainder.endIndex)) { // There is a '-' somewhere, and there is at least 1 char after it
-      if dashIndex == unparsedRemainder.startIndex {
-        guard unparsedRemainder[indexBeyondDash] == "-" else {
-          return nil
-        }
-        // Next char is '-' and should be treated like a key, but needs to be terminated
-        return indexBeyondDash
-      } else {
-        // The '-' should be treated like a separator char
-        return dashIndex
-      }
-    }
-    // No '-' in string, or it is the only char in the string: use whole string as the next key
-    return unparsedRemainder.endIndex
-  }
-
-  // See mpv/input/keycodes.c: mp_input_get_keys_from_string()
-  public static func splitKeystrokes(_ keystrokes: String) -> [String] {
-    var unparsedRemainder = Substring(keystrokes)
-    var splitKeystrokeList: [String] = []
-
-    while !unparsedRemainder.isEmpty && splitKeystrokeList.count < 4 {
-      guard let endIndex = getNextEndIndex(unparsedRemainder) else {
-        Logger.log("Could not split keystrokes; not a valid sequence: \"\(keystrokes)\"", level: .warning)
-        return [keystrokes]
-      }
-
-      let ks = String(unparsedRemainder[unparsedRemainder.startIndex..<endIndex])
-      guard !ks.isEmpty else {
-          Logger.log("While splitting keystrokes: Last keystroke is empty! Returning list: \(splitKeystrokeList)", level: .error)
-          return splitKeystrokeList
-      }
-      splitKeystrokeList.append(ks)
-
-      guard let indexBeyondEnd = unparsedRemainder.index(endIndex, offsetBy: 1, limitedBy: unparsedRemainder.endIndex) else {
-        break
-      }
-
-      unparsedRemainder = unparsedRemainder[indexBeyondEnd...]
-    }
-    return splitKeystrokeList
-  }
-
   // Normalizes a single "press" of possibly multiple keys (as joined with '+')
   private static func normalizeSingleMpvKeystroke(_ mpvKeystroke: String) -> String {
     if mpvKeystroke == "+" {
@@ -377,22 +331,8 @@ class KeyCodeHelper {
     return normalizedList.joined(separator: "+")
   }
 
-  public static func splitAndNormalizeMpvString(_ mpvKeystrokes: String) -> [String] {
-    // this is a hard-coded special case in mpv
-    if mpvKeystrokes == "default-bindings" {
-      return [mpvKeystrokes]
-    }
-    let keystrokesList = splitKeystrokes(mpvKeystrokes)
-
-    var normalizedList: [String] = []
-    for keystroke in keystrokesList {
-      normalizedList.append(normalizeSingleMpvKeystroke(keystroke))
-    }
-    return normalizedList
-  }
-
   /*
-   MPV accepts several forms for the same keystroke. This ensures that it is reduced to a single standardized form
+   Several forms for the same keystroke are accepted by mpv. This ensures that it is reduced to a single standardized form
    (such that it can be used in a set or map, and which matches what `mpvKeyCode()` returns).
 
    Definitions used here:
@@ -421,8 +361,15 @@ class KeyCodeHelper {
       (examples: SHARP, SPACE, PGDOWN)
    */
   public static func normalizeMpv(_ mpvKeystrokes: String) -> String {
-    let normalizedList = splitAndNormalizeMpvString(mpvKeystrokes)
-    return normalizedList.joined(separator: "-")
+    // this is a hard-coded special case in mpv
+    if mpvKeystrokes == "default-bindings" {
+      return mpvKeystrokes
+    }
+    // Ignore sequences until full support is added
+    if mpvKeystrokes.filter({ $0 == "-" }).count > 1 {
+      return mpvKeystrokes
+    }
+    return normalizeSingleMpvKeystroke(mpvKeystrokes)
   }
 
   // Converts an mpv-formatted key string to a (key, modifiers) pair suitable for assignment to a MacOS menu item.

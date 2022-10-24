@@ -8,6 +8,8 @@
 
 import Foundation
 
+fileprivate let IINA_PREFIX = "#@iina"
+
 class KeyMapping: NSObject {
 
   // TODO: this is UI logic. Move it out of here.
@@ -70,8 +72,9 @@ class KeyMapping: NSObject {
 
   var rawAction: String {
     set {
-      if newValue.hasPrefix("@iina") {
-        privateRawAction = newValue[newValue.index(newValue.startIndex, offsetBy: "@iina".count)...].trimmingCharacters(in: .whitespaces)
+      if newValue.hasPrefix(IINA_PREFIX) {
+        privateRawAction = newValue[newValue.index(newValue.startIndex,
+                                                   offsetBy: IINA_PREFIX.count)...].trimmingCharacters(in: .whitespaces)
         isIINACommand = true
       } else {
         privateRawAction = newValue
@@ -89,7 +92,7 @@ class KeyMapping: NSObject {
   @objc var readableAction: String {
     get {
       let joined = action.joined(separator: " ")
-      return isIINACommand ? ("@iina " + joined) : joined
+      return isIINACommand ? ("\(IINA_PREFIX) " + joined) : joined
     }
   }
 
@@ -103,7 +106,7 @@ class KeyMapping: NSObject {
 
   var confFileFormat: String {
     get {
-      let iinaCommandString = isIINACommand ? "#@iina " : ""
+      let iinaCommandString = isIINACommand ? "\(IINA_PREFIX) " : ""
       let commentString = (comment == nil || comment!.isEmpty) ? "" : "   #\(comment!)"
       return "\(iinaCommandString)\(rawKey) \(action.joined(separator: " "))\(commentString)"
     }
@@ -135,10 +138,10 @@ class KeyMapping: NSObject {
       if line.trimmingCharacters(in: .whitespaces).isEmpty {
         continue
       } else if line.hasPrefix("#") {
-        if line.hasPrefix("#@iina") {
+        if line.hasPrefix(IINA_PREFIX) {
           // extended syntax
           isIINACommand = true
-          line = String(line[line.index(line.startIndex, offsetBy: "#@iina".count)...])
+          line = String(line[line.index(line.startIndex, offsetBy: IINA_PREFIX.count)...])
         } else {
           // ignore comment line
           continue

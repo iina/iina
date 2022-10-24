@@ -289,14 +289,12 @@ class PlayerCore: NSObject {
     keyMappings.forEach {
       if $0.rawKey == "default-bindings" && $0.action.count == 1 && $0.action[0] == "start" {
         Logger.log("Skipping line: \"default-bindings start\"", level: .verbose)
-      } else {
-        if let kb = filterSectionBindings($0) {
-          let key = kb.normalizedMpvKey
-          if keyBindingsDict[key] == nil {
-            orderedKeyList.append(key)
-          }
-          keyBindingsDict[key] = kb
+      } else if let kb = filterSectionBindings($0) {
+        let key = kb.normalizedMpvKey
+        if keyBindingsDict[key] == nil {
+          orderedKeyList.append(key)
         }
+        keyBindingsDict[key] = kb
       }
     }
     PlayerCore.keyBindings = keyBindingsDict

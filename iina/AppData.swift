@@ -105,8 +105,6 @@ extension Notification.Name {
   static let iinaMediaTitleChanged = Notification.Name("IINAMediaTitleChanged")
   static let iinaVFChanged = Notification.Name("IINAVfChanged")
   static let iinaAFChanged = Notification.Name("IINAAfChanged")
-  static let iinaInputConfListChanged = Notification.Name("IINAInputConfListChanged")
-  static let iinaCurrentInputConfChanged = Notification.Name("IINACurrentInputConfChanged")
   static let iinaKeyBindingInputChanged = Notification.Name("IINAKeyBindingInputChanged")
   static let iinaFileLoaded = Notification.Name("IINAFileLoaded")
   static let iinaHistoryUpdated = Notification.Name("IINAHistoryUpdated")

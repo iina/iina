@@ -1621,8 +1621,16 @@ class MainWindowController: PlayerWindowController {
     NSCursor.setHiddenUntilMouseMoves(true)
   }
   
-  // Workaround for macOS 13 where HDR content becomes dimmed when overlaying views are fully hidden.
-  private let almostInvisibleAlpha: CGFloat = 0.01
+  // Workaround for macOS 13 where HDR content becomes dimmed when overlaying views are fully hidden. (#3844)
+  private var almostInvisibleAlpha: CGFloat {
+    if #available(macOS 13, *) {
+      if fsState.isFullscreen && player.info.hdrEnabled {
+        return 0.01
+      }
+    }
+    // This issue does not occur when running in non HDR / non full screen or a macOS version lower than 13.
+    return 0
+  }
 
   private func hideUI() {
     // Don't hide UI when in PIP

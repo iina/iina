@@ -1620,6 +1620,9 @@ class MainWindowController: PlayerWindowController {
     hideUI()
     NSCursor.setHiddenUntilMouseMoves(true)
   }
+  
+  // Fixes a bug in macOS 13 where HDR content becomes dimmed overlaying views are fully hidden.
+  private let almostInvisibleAlpha: CGFloat = 0.01
 
   private func hideUI() {
     // Don't hide UI when in PIP
@@ -1631,15 +1634,15 @@ class MainWindowController: PlayerWindowController {
     player.invalidateTimer()
     animationState = .willHide
     fadeableViews.forEach { (v) in
-      v.isHidden = false
+      v.alphaValue = almostInvisibleAlpha
     }
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = UIAnimationDuration
       fadeableViews.forEach { (v) in
-        v.animator().alphaValue = 0
+        v.animator().alphaValue = almostInvisibleAlpha
       }
       if !self.fsState.isFullscreen {
-        titleTextField?.animator().alphaValue = 0
+        titleTextField?.animator().alphaValue = almostInvisibleAlpha
       }
     }) {
       // if no interrupt then hide animation
@@ -1648,7 +1651,7 @@ class MainWindowController: PlayerWindowController {
           if let btn = v as? NSButton, self.standardWindowButtons.contains(btn) {
             v.alphaValue = 1e-100
           } else {
-            v.isHidden = true
+            v.alphaValue = self.almostInvisibleAlpha
           }
         }
         self.animationState = .hidden

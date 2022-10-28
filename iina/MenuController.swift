@@ -834,7 +834,7 @@ class MenuController: NSObject, NSMenuDelegate {
       for kb in keyBindings {
         guard kb.isIINACommand == isIINACmd else { continue }
         let (sameAction, value) = sameKeyAction(kb.action, actions, normalizeLastNum, numRange)
-        if sameAction, let (kEqv, kMdf) = KeyCodeHelper.macOSKeyEquivalent(from: kb.key) {
+        if sameAction, let (kEqv, kMdf) = KeyCodeHelper.macOSKeyEquivalent(from: kb.rawKey) {
           menuItem.keyEquivalent = kEqv
           menuItem.keyEquivalentModifierMask = kMdf
           if let value = value, let l10nKey = l10nKey {

@@ -336,11 +336,47 @@ class PlayerCore: NSObject {
   }
 
   static func setKeyBindings(_ keyMappings: [KeyMapping]) {
-    Logger.log("Set key bindings")
-    var keyBindings: [String: KeyMapping] = [:]
-    keyMappings.forEach { keyBindings[$0.key] = $0 }
-    PlayerCore.keyBindings = keyBindings
-    (NSApp.delegate as? AppDelegate)?.menuController.updateKeyEquivalentsFrom(Array(keyBindings.values))
+    Logger.log("Set key bindings (\(keyMappings.count) mappings)")
+    // If multiple bindings map to the same key, choose the last one
+    var keyBindingsDict: [String: KeyMapping] = [:]
+    var orderedKeyList: [String] = []
+    keyMappings.forEach {
+      if $0.rawKey == "default-bindings" && $0.action.count == 1 && $0.action[0] == "start" {
+        Logger.log("Skipping line: \"default-bindings start\"", level: .verbose)
+      } else if let kb = filterSectionBindings($0) {
+        let key = kb.normalizedMpvKey
+        if keyBindingsDict[key] == nil {
+          orderedKeyList.append(key)
+        }
+        keyBindingsDict[key] = kb
+      }
+    }
+    PlayerCore.keyBindings = keyBindingsDict
+
+    // For menu item bindings, filter duplicate keys as above, but preserve order
+    var kbUniqueOrderedList: [KeyMapping] = []
+    for key in orderedKeyList {
+      kbUniqueOrderedList.append(keyBindingsDict[key]!)
+    }
+
+    (NSApp.delegate as? AppDelegate)?.menuController.updateKeyEquivalentsFrom(kbUniqueOrderedList)
+
+    NotificationCenter.default.post(Notification(name: .iinaGlobalKeyBindingsChanged, object: kbUniqueOrderedList))
+  }
+
+  static private func filterSectionBindings(_ kb: KeyMapping) -> KeyMapping? {
+    guard let section = kb.section else {
+      return kb
+    }
+
+    if section == "default" {
+      // Drop "{default}" because it is unnecessary and will get in the way of libmpv command execution
+      let newRawAction = Array(kb.action.dropFirst()).joined(separator: " ")
+      return KeyMapping(rawKey: kb.rawKey, rawAction: newRawAction, isIINACommand: kb.isIINACommand, comment: kb.comment)
+    } else {
+      Logger.log("Skipping binding from section \"\(section)\": \(kb.rawKey)", level: .verbose)
+      return nil
+    }
   }
 
   func startMPV() {

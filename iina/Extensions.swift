@@ -418,6 +418,10 @@ extension String {
     return "%\(count)%\(self)"
   }
 
+  func equalsIgnoreCase(_ other: String) -> Bool {
+    return localizedCompare(other) == .orderedSame
+  }
+
   mutating func deleteLast(_ num: Int) {
     removeLast(Swift.min(num, count))
   }

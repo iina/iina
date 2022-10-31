@@ -1536,6 +1536,8 @@ class MainWindowController: PlayerWindowController {
   }
   
   override func windowDidChangeScreen(_ notification: Notification) {
+    super.windowDidChangeScreen(notification)
+
     player.events.emit(.windowScreenChanged)
   }
 

@@ -631,7 +631,9 @@ extension NSScreen {
     }
     // Unfortunately localizedName is not available until macOS Catalina.
     if #available(macOS 10.15, *) {
-      Logger.log("\(label): \(screen.localizedName) visible frame \(screen.visibleFrame)")
+      let maxPossibleEDR = screen.maximumPotentialExtendedDynamicRangeColorComponentValue
+      let canEnableEDR = maxPossibleEDR > 1.0
+      Logger.log("\(label): \"\(screen.localizedName)\" visible frame \(screen.visibleFrame) EDR: {supports=\(canEnableEDR) maxPotential=\(maxPossibleEDR) maxCurrent=\(screen.maximumExtendedDynamicRangeColorComponentValue)}")
     } else {
       Logger.log("\(label): visible frame \(screen.visibleFrame)")
     }

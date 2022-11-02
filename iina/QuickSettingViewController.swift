@@ -91,6 +91,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   var observers: [NSObjectProtocol] = []
 
+  @IBOutlet weak var videoTabScrollView: NSScrollView!
+  @IBOutlet weak var videoTabContentViewWidthConstraint: NSLayoutConstraint!
 
   @IBOutlet weak var videoTabBtn: NSButton!
   @IBOutlet weak var audioTabBtn: NSButton!
@@ -249,7 +251,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     if let index = AppData.cropsInPanel.firstIndex(of: player.info.unsureCrop) {
       cropSegment.selectedSegment = index
     } else {
-      cropSegment.selectedSegment = -1
+      // Select last segment ("Custom...")
+      cropSegment.selectedSegment = cropSegment.segmentCount - 1
     }
     rotateSegment.selectSegment(withTag: AppData.rotations.firstIndex(of: player.info.rotation) ?? -1)
 
@@ -431,7 +434,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       subTableView.reloadData()
       secSubTableView.reloadData()
       updateSubTabControl()
-    case .plugin(let id):
+    case .plugin(_):
       break
     }
   }
@@ -547,9 +550,16 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   @IBAction func cropChangedAction(_ sender: NSSegmentedControl) {
-    let cropStr = AppData.cropsInPanel[sender.selectedSegment]
-    player.setCrop(fromString: cropStr)
-    player.sendOSD(.crop(cropStr))
+    if sender.selectedSegment == sender.segmentCount - 1 {
+      // User clicked on "Custom...": show custom crop UI
+      mainWindow.hideSideBar {
+        self.mainWindow.enterInteractiveMode(.crop, selectWholeVideoByDefault: true)
+      }
+    } else {
+      let cropStr = AppData.cropsInPanel[sender.selectedSegment]
+      player.setCrop(fromString: cropStr)
+      player.sendOSD(.crop(cropStr))
+    }
   }
 
   @IBAction func rotationChangedAction(_ sender: NSSegmentedControl) {
@@ -653,12 +663,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
     player.setVideoEqualizer(forOption: type, value: 0)
     slider?.intValue = 0
-  }
-
-  @IBAction func cropBtnAction(_ sender: AnyObject) {
-    mainWindow.hideSideBar {
-      self.mainWindow.enterInteractiveMode(.crop, selectWholeVideoByDefault: true)
-    }
   }
 
   // MARK: Audio tab

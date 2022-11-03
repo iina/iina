@@ -1604,6 +1604,7 @@ class PlayerCore: NSObject {
   func syncUI(_ option: SyncUIOption) {
     // if window not loaded, ignore
     guard mainWindow.loaded else { return }
+    guard !disableUI && !isShuttingDown else { return }
     Logger.log("Syncing UI \(option)", level: .verbose, subsystem: subsystem)
 
     switch option {

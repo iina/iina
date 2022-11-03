@@ -292,6 +292,7 @@ class VideoView: NSView {
 @available(macOS 10.15, *)
 extension VideoView {
   func refreshEdrMode() {
+    guard !player.isShuttingDown else { return }
     guard player.mainWindow.loaded else { return }
     guard player.mpv.fileLoaded else { return }
     guard let displayId = currentDisplay else { return };

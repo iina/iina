@@ -1268,6 +1268,8 @@ class MainWindowController: PlayerWindowController {
   }
 
   func windowDidExitFullScreen(_ notification: Notification) {
+    guard !player.isShuttingDown else { return }
+    
     if AccessibilityPreferences.motionReductionEnabled {
       // When animation is not used exiting full screen does not restore the previous size of the
       // window. Restore it now.
@@ -1659,7 +1661,8 @@ class MainWindowController: PlayerWindowController {
   }
 
   private func showUI() {
-    if player.disableUI { return }
+    guard !player.disableUI && !player.isShuttingDown else { return }
+
     animationState = .willShow
     fadeableViews.forEach { (v) in
       v.isHidden = false

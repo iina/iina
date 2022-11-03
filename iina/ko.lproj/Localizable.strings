@@ -116,6 +116,16 @@
 "menu.pause" = "일시 정지";
 "menu.resume" = "재생";
 "menu.speed" = "재생속도: %.2fx";
+"menu.chapters" = "Show Chapters Panel";
+"menu.hide_chapters" = "Hide Chapters Panel";
+"menu.playlist" = "Show Playlist Panel";
+"menu.hide_playlist" = "Hide Playlist Panel";
+"menu.video" = "Show Video Panel";
+"menu.hide_video" = "Hide Video Panel";
+"menu.audio" = "Show Audio Panel";
+"menu.hide_audio" = "Hide Audio Panel";
+"menu.subtitles" = "Show Subtitles Panel";
+"menu.hide_subtitles" = "Hide Subtitles Panel";
 
 "menu.seek_forward" = "앞으로 탐색 %.0f초";
 "menu.seek_backward" = "뒤로 탐색 %.0f초";
@@ -145,7 +155,7 @@
 
 "alert.fatal_error" = "심각한 오류: %@ \n프로그램이 지금 종료됩니다.";
 "alert.mpv_error" = "%@ (%@)오류가 사용자 지정 옵션 %@을 설정하는 도중 발생했습니다.";
-"alert.sleep" = "화면 잠자기 설정을 끌 수 없습니다!";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "지원되지 않는 외부 오디오 파일입니다.";
 "alert.unsupported_sub" = "지원되지 않는 자막 형식입니다.";
@@ -223,6 +233,9 @@
 
 "alert.clear_watch_later.title" = "이어보기 목록 지우기";
 "alert.clear_watch_later.message" = "\"watch later\"폴더에 저장된 이어보기 목록을 지우겠습니까?";
+
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
 
 "alert.nothing_to_open" = "열 수 있는 파일이 없습니다.";
 

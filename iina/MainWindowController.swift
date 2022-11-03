@@ -550,11 +550,11 @@ class MainWindowController: PlayerWindowController {
     // gesture recognizer
     cv.addGestureRecognizer(magnificationGestureRecognizer)
 
-    // Workaround a bug in macOS Ventura where HDR content becomes dimmed when playing in full
+    // Work around a bug in macOS Ventura where HDR content becomes dimmed when playing in full
     // screen mode once overlaying views are fully hidden (issue #3844). After applying this
     // workaround another bug in Ventura where an external monitor goes black could not be
     // reproduced (issue #4015). The workaround adds a tiny subview with such a low alpha level it
-    // is invisible to the human eye.
+    // is invisible to the human eye. This workaround may not be effective in all cases.
     if #available(macOS 13, *) {
       let view = NSView(frame: NSRect(origin: .zero, size: NSSize(width: 0.1, height: 0.1)))
       view.wantsLayer = true

@@ -158,7 +158,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         continue
       }
       if arg.first == "-" {
-        if arg[arg.index(after: arg.startIndex)] == "-" {
+        let indexAfterDash = arg.index(after: arg.startIndex)
+        if indexAfterDash == arg.endIndex {
+          // single '-'
+          commandLineStatus.isStdin = true
+        } else if arg[indexAfterDash] == "-" {
           // args starting with --
           iinaArgs.append(arg)
         } else {
@@ -774,10 +778,13 @@ struct CommandLineStatus {
       let name = String(splitted[0])
       if (name.hasPrefix("mpv-")) {
         // mpv args
-        if splitted.count <= 1 {
-          mpvArguments.append((String(name.dropFirst(4)), "yes"))
+        let strippedName = String(name.dropFirst(4))
+        if strippedName == "-" {
+          isStdin = true
+        } else if splitted.count <= 1 {
+          mpvArguments.append((strippedName, "yes"))
         } else {
-          mpvArguments.append((String(name.dropFirst(4)), String(splitted[1])))
+          mpvArguments.append((strippedName, String(splitted[1])))
         }
       } else {
         // other args
@@ -800,6 +807,7 @@ struct CommandLineStatus {
   }
 
   func assignMPVArguments(to playerCore: PlayerCore) {
+    Logger.log("Setting mpv properties from arguments: \(mpvArguments)")
     for arg in mpvArguments {
       playerCore.mpv.setString(arg.0, arg.1)
     }

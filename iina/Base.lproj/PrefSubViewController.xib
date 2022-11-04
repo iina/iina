@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,7 +16,11 @@
                 <outlet property="sectionOtherView" destination="Iur-Ka-beI" id="PBO-Op-ouf"/>
                 <outlet property="sectionPositionView" destination="ZpT-fB-Daq" id="uop-Q7-Fgz"/>
                 <outlet property="sectionTextSubView" destination="ffZ-rE-7Zz" id="DJo-Jw-5nf"/>
+                <outlet property="subBackgroundColorWell" destination="6fT-hS-kdG" id="YYV-qw-ykn"/>
+                <outlet property="subBorderColorWell" destination="vyH-G4-g3c" id="vDq-Wc-kGQ"/>
+                <outlet property="subColorWell" destination="AaL-am-9qW" id="5cd-sf-HHl"/>
                 <outlet property="subLangTokenView" destination="bhV-Cx-zgK" id="ixc-wl-Y26"/>
+                <outlet property="subShadowColorWell" destination="Gtc-ii-hE0" id="hh5-ON-mLf"/>
                 <outlet property="subSourcePopUpButton" destination="UHS-ce-8t5" id="zmW-Jx-JMg"/>
                 <outlet property="subSourceStackView" destination="bSz-xd-6o2" id="UOh-XZ-MhE"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>

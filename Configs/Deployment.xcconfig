@@ -1,0 +1,13 @@
+//
+//  Deployment.xcconfig
+//  iina
+//
+//  Created by Saagar Jha on 11/5/22.
+//  Copyright © 2022 lhc. All rights reserved.
+//
+
+CODE_SIGN_IDENTITY = -
+CURRENT_PROJECT_VERSION = 133
+DEVELOPMENT_TEAM = 67CQ77V27R
+MACOSX_DEPLOYMENT_TARGET = 10.13
+MARKETING_VERSION = 1.3.1

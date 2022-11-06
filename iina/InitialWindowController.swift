@@ -251,7 +251,7 @@ class InitialWindowController: NSWindowController {
     recentFilesTableView.reloadData()
 
     if Logger.enabled && Logger.Level.preferred >= .verbose {
-      let last = lastPlaybackURL == nil ? "<none>" : lastPlaybackURL!.resolvingSymlinksInPath().path
+      let last = lastPlaybackURL.flatMap { $0.resolvingSymlinksInPath().path } ?? "<none>"
       Logger.log("InitialWindow.reloadData(): LastPlaybackURL: \(last)", level: .verbose)
 
       for (index, url) in NSDocumentController.shared.recentDocumentURLs.enumerated() {

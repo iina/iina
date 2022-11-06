@@ -1,0 +1,11 @@
+//
+//  iina-cli.xcconfig
+//  iina
+//
+//  Created by Saagar Jha on 11/5/22.
+//  Copyright © 2022 lhc. All rights reserved.
+//
+
+
+LD_RUNPATH_SEARCH_PATHS = @executable_path/../Frameworks
+PRODUCT_NAME = $(TARGET_NAME)

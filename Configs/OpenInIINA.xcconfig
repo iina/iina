@@ -1,0 +1,16 @@
+//
+//  OpenInIINA.xcconfig
+//  iina
+//
+//  Created by Saagar Jha on 11/5/22.
+//  Copyright © 2022 lhc. All rights reserved.
+//
+
+
+CODE_SIGN_ENTITLEMENTS = $(TARGET_NAME)/$(PRODUCT_NAME).entitlements
+GENERATE_INFOPLIST_FILE = YES
+INFOPLIST_FILE = $(TARGET_NAME)/Info.plist
+LD_RUNPATH_SEARCH_PATHS = @executable_path/../Frameworks
+PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.iina.$(TARGET_NAME)
+PRODUCT_NAME = $(TARGET_NAME)
+SKIP_INSTALL = YES

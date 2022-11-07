@@ -504,7 +504,7 @@ class Utility {
       includingPropertiesForKeys: [.creationDateKey],
       options: .skipsSubdirectoryDescendants),
           !contents.isEmpty else { return nil }
-    return contents.max { a, b in a.creationDate! < b.creationDate! }
+    return contents.filter { $0.creationDate != nil }.max { $0.creationDate! < $1.creationDate! }
   }
 
   /// Make sure the block is executed on the main thread. Be careful since it uses `sync`. Keep the block mininal.

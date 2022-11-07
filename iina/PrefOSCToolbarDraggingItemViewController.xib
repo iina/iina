@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14306.4" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14306.4"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -22,19 +22,19 @@
                 <box title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="URy-iX-J9X">
                     <rect key="frame" x="-3" y="-4" width="310" height="36"/>
                     <view key="contentView" id="0YW-az-h4Z">
-                        <rect key="frame" x="3" y="3" width="304" height="30"/>
+                        <rect key="frame" x="4" y="5" width="302" height="28"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="K6f-VH-I1k">
-                                <rect key="frame" x="4" y="3" width="24" height="24"/>
+                                <rect key="frame" x="4" y="2" width="24" height="24"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="8hu-73-FcW"/>
-                                    <constraint firstAttribute="width" constant="24" id="Lsz-6M-e4p"/>
+                                    <constraint firstAttribute="height" priority="900" constant="24" id="8hu-73-FcW"/>
+                                    <constraint firstAttribute="width" priority="900" constant="24" id="Lsz-6M-e4p"/>
                                 </constraints>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="24D-9A-XWQ"/>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="STZ-wb-l3E">
-                                <rect key="frame" x="34" y="6" width="37" height="18"/>
+                                <rect key="frame" x="34" y="6" width="37" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="ebp-YW-3qF">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>

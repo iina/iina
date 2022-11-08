@@ -415,6 +415,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     if #available(macOS 10.13, *), RemoteCommandController.useSystemMediaControl {
       NowPlayingInfoManager.updateInfo(withTitle: true)
     }
+    (NSApp.delegate as? AppDelegate)?.menuController?.updatePluginMenu()
+
     NotificationCenter.default.post(name: .iinaMainWindowChanged, object: true)
   }
   

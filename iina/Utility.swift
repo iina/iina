@@ -502,18 +502,9 @@ class Utility {
     guard let contents = try? FileManager.default.contentsOfDirectory(
       at: folder,
       includingPropertiesForKeys: [.creationDateKey],
-      options: .skipsSubdirectoryDescendants) else { return nil }
-
-    var latestDate = Date.distantPast
-    var latestFile: URL = contents[0]
-
-    for file in contents {
-      if let date = try? file.resourceValues(forKeys: [.creationDateKey]).creationDate, date > latestDate {
-        latestDate = date
-        latestFile = file
-      }
-    }
-    return latestFile
+      options: .skipsSubdirectoryDescendants),
+          !contents.isEmpty else { return nil }
+    return contents.filter { $0.creationDate != nil }.max { $0.creationDate! < $1.creationDate! }
   }
 
   /// Make sure the block is executed on the main thread. Be careful since it uses `sync`. Keep the block mininal.

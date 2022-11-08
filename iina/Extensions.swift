@@ -457,6 +457,10 @@ extension NSMenuItem {
 
 
 extension URL {
+  var creationDate: Date? {
+    (try? resourceValues(forKeys: [.creationDateKey]))?.creationDate
+  }
+
   var isExistingDirectory: Bool {
     return (try? self.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory ?? false
   }

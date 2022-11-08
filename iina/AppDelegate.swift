@@ -21,7 +21,7 @@ fileprivate let AlternativeMenuItemTag = 1
 
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
   /** Whether performed some basic initialization, like bind menu items. */
   var isReady = false
@@ -94,6 +94,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     isReady = true
   }
 
+  // MARK: - SPUUpdaterDelegate
+
+  func feedURLString(for updater: SPUUpdater) -> String? {
+    return Preference.bool(for: .receiveBetaUpdate) ? AppData.appcastBetaLink : AppData.appcastLink
+  }
+
   // MARK: - App Delegate
 
   func applicationWillFinishLaunching(_ notification: Notification) {
@@ -140,8 +146,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     // Hide Window > "Enter Full Screen" menu item, because this is already present in the Video menu
     UserDefaults.standard.set(false, forKey: "NSFullScreenMenuItemEverywhere")
-
-    SUUpdater.shared().feedURL = URL(string: Preference.bool(for: .receiveBetaUpdate) ? AppData.appcastBetaLink : AppData.appcastLink)!
 
     // handle arguments
     let arguments = ProcessInfo.processInfo.arguments.dropFirst()

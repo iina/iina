@@ -431,7 +431,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       subTableView.reloadData()
       secSubTableView.reloadData()
       updateSubTabControl()
-    case .plugin(let id):
+    case .plugin(_):
       break
     }
   }

@@ -194,6 +194,8 @@
 
 "alert.playlist.error_deleting" = "Error deleting: %@";
 
+"alert.screenshot.error_taking" = "Cannot take a screenshot!";
+
 "alert.sub.no_selected" = "Please select a downloaded subtitle first.";
 "alert.sub_lang_not_set" = "Please set preferred subtitle languages in preferences before using OpenSubtitles. English(eng) will be used this time.";
 "alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";

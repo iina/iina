@@ -1,53 +1,65 @@
 /* Class = "NSMenuItem"; title = "Auto (Copy)"; ObjectID = "0DK-uZ-duj"; */
-"0DK-uZ-duj.title" = "Auto (Copy)";
+"0DK-uZ-duj.title" = "Auto (Másolás)";
 
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "2yO-To-el7"; */
-"2yO-To-el7.title" = "Default: 0 (Auto)";
+"2yO-To-el7.title" = "Alapértelmezett: 0 (Auto)";
 
 /* Class = "NSTextFieldCell"; title = "Maximum volume:"; ObjectID = "44m-ge-naq"; */
-"44m-ge-naq.title" = "Maximum volume:";
+"44m-ge-naq.title" = "Maximum hang:";
 
 /* Class = "NSTextFieldCell"; title = "Number of threads:"; ObjectID = "50C-1R-wlJ"; */
-"50C-1R-wlJ.title" = "Number of threads:";
+"50C-1R-wlJ.title" = "Szálak száma:";
 
 /* Class = "NSButtonCell"; title = "Force dedicated GPU"; ObjectID = "YUr-aJ-xfC"; */
-"YUr-aJ-xfC.title" = "Force dedicated GPU";
+"YUr-aJ-xfC.title" = "Dedikált GPU kényszeritése";
 
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "bxW-np-SGm"; */
-"bxW-np-SGm.title" = "Default: 0 (Auto)";
+"bxW-np-SGm.title" = "Alapértelmezett: 0 (Auto)";
 
 /* Class = "NSTextFieldCell"; title = "(100-1000)"; ObjectID = "cJP-ep-847"; */
 "cJP-ep-847.title" = "(100-1000)";
 
 /* Class = "NSButtonCell"; title = "Initial volume:"; ObjectID = "g4c-vG-URh"; */
-"g4c-vG-URh.title" = "Initial volume:";
+"g4c-vG-URh.title" = "Kezdeti hang:";
 
 /* Class = "NSTextFieldCell"; title = "Always use the dedicated GPU for rendering (if exists). This can improve performance but may result in poor battery life."; ObjectID = "gCv-sJ-uQJ"; */
-"gCv-sJ-uQJ.title" = "Always use the dedicated GPU for rendering (if it exists). This can improve performance but may reduce battery life.";
+"gCv-sJ-uQJ.title" = "Mindig a dedikált GPU-t használja a megjelenítéshez (ha létezik). Ez javíthatja a teljesítményt, de csökkentheti az akkumulátor élettartamát.";
 
 /* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
-"m5P-5f-5uo.title" = "Video:";
+"m5P-5f-5uo.title" = "Videó:";
 
 /* Class = "NSTextFieldCell"; title = "Hardware decoder:"; ObjectID = "nwg-2K-G2G"; */
-"nwg-2K-G2G.title" = "Hardware decoder:";
+"nwg-2K-G2G.title" = "Hardveres dekóder:";
 
 /* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "rFu-rL-EJC"; */
-"rFu-rL-EJC.title" = "Disabled";
+"rFu-rL-EJC.title" = "Kikapcsolva";
 
 /* Class = "NSTextFieldCell"; title = "Preferred audio device:"; ObjectID = "sLR-vV-xn2"; */
-"sLR-vV-xn2.title" = "Preferred audio device:";
+"sLR-vV-xn2.title" = "Preferált audio eszköz:";
 
 /* Class = "NSTextFieldCell"; title = "Audio:"; ObjectID = "sV5-dL-MUt"; */
-"sV5-dL-MUt.title" = "Audio:";
+"sV5-dL-MUt.title" = "Hang:";
 
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "tAQ-oU-1AJ"; */
-"tAQ-oU-1AJ.title" = "Auto";
+"tAQ-oU-1AJ.title" = "Automatikus";
 
 /* Class = "NSTextFieldCell"; title = "Number of threads:"; ObjectID = "tO4-pw-2W9"; */
-"tO4-pw-2W9.title" = "Number of threads:";
+"tO4-pw-2W9.title" = "Szálak száma:";
 
 /* Class = "NSTextFieldCell"; title = "S/PDIF output:"; ObjectID = "up6-6A-4sn"; */
-"up6-6A-4sn.title" = "S/PDIF output:";
+"up6-6A-4sn.title" = "S/PDIF kimenet:";
 
 /* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "wjt-O6-KbC"; */
-"wjt-O6-KbC.title" = "Preferred language:";
+"wjt-O6-KbC.title" = "Előnyben részesített nyelv:";
+
+/* Class = "NSButtonCell"; title = "Load ICC profile"; ObjectID = "3g4-jW-uJd"; */
+"3g4-jW-uJd.title" = "Load ICC profile";
+
+/* Class = "NSTextFieldCell"; title = "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"; ObjectID = "M2M-of-gjd"; */
+"M2M-of-gjd.title" = "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)";
+
+/* Class = "NSButtonCell"; title = "Enable HDR support"; ObjectID = "R7Z-9c-vPJ"; */
+"R7Z-9c-vPJ.title" = "Enable HDR support";
+
+/* Class = "NSTextFieldCell"; title = "Enable HDR mode by default when playing HDR videos."; ObjectID = "ZgQ-bc-yEE"; */
+"ZgQ-bc-yEE.title" = "Enable HDR mode by default when playing HDR videos.";

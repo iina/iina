@@ -65,7 +65,7 @@
 "KfL-r7-Uav.title" = "オーディオファイルの再生時は自動で\"ミュージックモード\"に切り替える";
 
 /* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
-"Lac-Ol-g6E.title" = "次の項目を自動再生";
+"Lac-Ol-g6E.title" = "次の項目を自動で再生する";
 
 /* Class = "NSButtonCell"; title = "Always open media in new window"; ObjectID = "M0z-bI-88d"; */
 "M0z-bI-88d.title" = "常に新しいウィンドウでファイルを開く";
@@ -89,7 +89,7 @@
 "TvB-UM-FrS.title" = "古いフルスクリーン(OS X 10.6以前)を使う";
 
 /* Class = "NSTextFieldCell"; title = "Otherwise only files that opened manually will show up in this menu."; ObjectID = "XFC-Lr-LmP"; */
-"XFC-Lr-LmP.title" = "そうでない場合、このメニューには手動で開いたファイルのみが表示されます。";
+"XFC-Lr-LmP.title" = "無効にすると手動で開いたファイルのみがメニューに表示されます";
 
 /* Class = "NSButtonCell"; title = "Quit after all windows are closed"; ObjectID = "YLo-6E-tT7"; */
 "YLo-6E-tT7.title" = "ウィンドウを全て閉じた時にアプリを終了する";
@@ -121,7 +121,7 @@
 /* Class = "NSTextFieldCell"; title = "History:"; ObjectID = "jeK-46-2BG"; */
 "jeK-46-2BG.title" = "履歴:";
 
-/* Class = "NSButtonCell"; title = "Show artist and track name for audio files when available"; ObjectID = "kBI-Th-bBV"; */
+/* Class = "NSButtonCell"; title = "Show artist and track name for audio files when avaliable"; ObjectID = "kBI-Th-bBV"; */
 "kBI-Th-bBV.title" = "利用可能な場合オーディオファイルのアーティスト名とトラック名を表示する";
 
 /* Class = "NSButtonCell"; title = "Play upon entering full screen"; ObjectID = "lOw-pu-Llm"; */

@@ -17,23 +17,23 @@
 "general.password" = "Kodeord";
 
 // Guide Window
-"guide.highlights" = "Highlights";
-"guide.basic_settings" = "Basic Settings";
-"guide.faq" = "Frequently Asked Questions";
+"guide.highlights" = "Højdepunkter";
+"guide.basic_settings" = "Grundlæggende Indstillinger";
+"guide.faq" = "Ofte Stillede Spørgsmål";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffering... %d%%";
 "main.opening_stream" = "Åbn stream…";
-"osc.precision" = "Precision";
-"osc.1s" = "1 second";
-"osc.100ms" = "100 milliseconds";
-"osc.10ms" = "10 milliseconds";
-"osc.1ms" = "1 millisecond";
+"osc.precision" = "Præcision";
+"osc.1s" = "1 sekund";
+"osc.100ms" = "100 millisekunder";
+"osc.10ms" = "10 millisekunder";
+"osc.1ms" = "1 millisekund";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Standart";
 "quicksetting.item_none" = "Ingen";
-"quicksetting.hwdec" = "Hardware Decoding";
+"quicksetting.hwdec" = "Hardwareafkodning";
 "quicksetting.deinterlace" = "Deinterlace";
 "quicksetting.hdr" = "HDR";
 
@@ -46,7 +46,7 @@
 "osd.crop" = "Beskær: %@";
 "osd.rotate" = "Roter: %i°";
 "osd.deinterlace" = "Deinterlace: %@";
-"osd.hwdec" = "Hardware Decoding: %@";
+"osd.hwdec" = "Hardwareafkodning: %@";
 "osd.audio_delay.nodelay" = "Lydforsinkelse: Ingen forsinkelsen";
 "osd.audio_delay.later" = "Lydforsinkelse: %.2fs Senere";
 "osd.audio_delay.earlier" = "Lydforsinkelse: %.2fs tidligere";
@@ -82,6 +82,8 @@
 "osd.canceled" = "Annulleret";
 "osd.filter_added" = "Tilføjet filter: %@";
 "osd.filter_removed" = "Fjernet filter";
+"osd.file_loop" = "File Loop: %@";
+"osd.playlist_loop" = "Playlist Loop: %@";
 
 "preference.title" = "Preferancer";
 "preference.general" = "Generalt";
@@ -92,16 +94,17 @@
 "preference.control" = "Kontrol";
 "preference.keybindings" = "Tastegenveje";
 "preference.advanced" = "Avanceret";
+"preference.plugins" = "Plugins";
 "preference.utilities" = "Værktøjer";
 "preference.scripts" = "Scripts";
 "preference.not_logged_in" = "Ikke logget ind";
 "preference.logged_in_as" = "Logget ind som %@";
 "preference.system_media_control" = "Brug system medie kontrol";
 
-"preference.key_binding_hint_1" = "To edit key bindings in current configuration file, click \"Duplicate…\" button first to create a copy.";
-"preference.key_binding_hint_2" = "Double click a row at the right side to edit the corresponding key binding.";
+"preference.key_binding_hint_1" = "For at redigere tastebindinger i det aktuelle konfigurationsarkiv, klik først på knappen \"Dupliker…\" for at oprette en kopi.";
+"preference.key_binding_hint_2" = "Dobbeltklik på en række i højre side for at redigere den tilsvarende tastebinding.";
 
-"preference.enable_adv_settings" = "Enable advanced settings";
+"preference.enable_adv_settings" = "Aktiver avancerede indstillinger";
 
 "menu.volume" = "Volumen: %d";
 "menu.audio_delay" = "Lydforsinkelse: %.2fs";
@@ -113,6 +116,16 @@
 "menu.pause" = "Pause";
 "menu.resume" = "Genoptag";
 "menu.speed" = "Hastighed: %.2fx";
+"menu.chapters" = "Show Chapters Panel";
+"menu.hide_chapters" = "Hide Chapters Panel";
+"menu.playlist" = "Show Playlist Panel";
+"menu.hide_playlist" = "Hide Playlist Panel";
+"menu.video" = "Show Video Panel";
+"menu.hide_video" = "Hide Video Panel";
+"menu.audio" = "Show Audio Panel";
+"menu.hide_audio" = "Hide Audio Panel";
+"menu.subtitles" = "Show Subtitles Panel";
+"menu.hide_subtitles" = "Hide Subtitles Panel";
 
 "menu.seek_forward" = "Spol frem %.0fs";
 "menu.seek_backward" = "Spol tilbage %.0fs";
@@ -125,7 +138,8 @@
 "menu.sub_delay_up" = "Undertekstforsinkelse + %.1fs";
 "menu.sub_delay_down" = "Undertekstforsinkelse - %.1fs";
 
-"menu.crop_custom" = "Custom...";
+"menu.crop_custom" = "Brugerdefineret...";
+"menu.find_online_sub" = "Find Online Subtitles from %@";
 
 "track.none" = "<Intet>";
 
@@ -141,7 +155,7 @@
 
 "alert.fatal_error" = "Fatal fejl: %@ \nProgrammet afsluttes.";
 "alert.mpv_error" = "Intern fejl %@ (%@) under ændring af %@.";
-"alert.sleep" = "Kan ikke undgå skærmen går i dvale!";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "Ikke supporteret ekstern lydfil.";
 "alert.unsupported_sub" = "Ikke supporteret ekstern undertekster.";
@@ -187,7 +201,7 @@
 "alert.set_default.message" = "IINA vil være standart programmet for alle de filtyper som supporteres.";
 "alert.set_default.success" = "Færdig med %d succes og %d fejlet.";
 
-"alert.add_watch.title" = "Add Watch Property";
+"alert.add_watch.title" = "Tilføj overvågningsegenskab";
 "alert.add_watch.message" = "Venligst indrtast et gyldigt mpv egenskabsnavn.";
 
 "alert.jump_to.title" = "Gå til";
@@ -217,8 +231,11 @@
 "alert.clear_history.title" = "Ryd afspilnings Historik";
 "alert.clear_history.message" = "Er du sikker du vil slette al afspilnings historik?";
 
-"alert.clear_watch_later.title" = "Clear Saved Playback Progress";
-"alert.clear_watch_later.message" = "Are you sure to delete all saved playback progress (\"watch later\" data)?";
+"alert.clear_watch_later.title" = "Fjern gemte afspilningsfremskridt";
+"alert.clear_watch_later.message" = "Er du sikker på at du vil slette alle gemte afspilningsfremskridt (\"se senere\" data)?";
+
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
 
 "alert.nothing_to_open" = "Intet at åbne.";
 
@@ -226,15 +243,24 @@
 
 "alert.duplicate_config" = "Du kan ikke ændre i standart konfigurationen direkte. Venligst dupliker først.";
 
-"alert.assrt_register" = "Due to limited API quota, you are strongly recommended to use your own API token. The default token is only for demo usage, and you may encounter network error.";
+"alert.assrt_register" = "På grund af begrænset API-kvote, anbefales du kraftigt at bruge din egen API-token. Standard-token er kun til demo-brug, og du kan støde på netværksfejl.";
 "alert.assrt_register.register" = "Registrer Nu";
 "alert.assrt_register.try" = "Prøv Først";
 "alert.assrt_token_prompt.title" = "Indtast dit API token";
-"alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
-"alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
+"alert.assrt_token_prompt.message" = "Registrer dig på den åbnede hjemmeside. Få din token på din brugerstartside og indtast det nedenfor:";
+"alert.assrt_token_invalid" = "Din Assrt API token lader til at være ugyldig.";
 
-"playlist.total_length" = "%@ in total";
-"playlist.total_length_with_selected" = "%@ of %@ selected";
+"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
+"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
+"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+"alert.plugin_no_update" = "No update found.";
+"alert.plugin_update_found.title" = "Update found for %@";
+"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
+"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
+"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+
+"playlist.total_length" = "%@ i alt";
+"playlist.total_length_with_selected" = "%@ af %@ valgte";
 "pl_menu.title_multi" = "%d Emner";
 "pl_menu.play_next" = "Afspil næste";
 "pl_menu.play_in_new_window" = "Afspil i nyt vindue";
@@ -269,20 +295,20 @@
 
 "osc_toolbar.settings" = "Hurtig Indstillinger";
 "osc_toolbar.playlist" = "Afspilningsliste og kapitler";
-"osc_toolbar.pip" = "Toggle Picture-in-Picture";
+"osc_toolbar.pip" = "Slå Picture-in-Picture Til/Fra";
 "osc_toolbar.full_screen" = "Skift fuld skærm";
-"osc_toolbar.music_mode" = "Enter music mode";
+"osc_toolbar.music_mode" = "Gå i musik-tilstand";
 "osc_toolbar.sub_track" = "Vælg undertekstspor";
 
-"mini_player.album_art" = "Toggle album art";
-"mini_player.loop" = "Repeat";
-"mini_player.shuffle" = "Shuffle";
-"mini_player.remove" = "Remove from playlist";
-"mini_player.add" = "Add to playlist";
-"mini_player.delete" = "Delete all tracks from playlist";
-"mini_player.volume" = "Volume";
-"mini_player.close" = "Close music mode";
-"mini_player.back" = "Return to video mode";
+"mini_player.album_art" = "Slå album art Til/Fra";
+"mini_player.loop" = "Gentag";
+"mini_player.shuffle" = "Bland";
+"mini_player.remove" = "Fjern fra playliste";
+"mini_player.add" = "Føj til playliste";
+"mini_player.delete" = "Slet alle spor fra playliste";
+"mini_player.volume" = "Lydstyrke";
+"mini_player.close" = "Luk musik-tilstand";
+"mini_player.back" = "Vend tilbage til video-tilstand";
 
 // Touch bar
 
@@ -296,8 +322,36 @@
 "touchbar.decrease_volume" = "Volumen -";
 "touchbar.rewind" = "Spol tilbage";
 "touchbar.fast_forward" = "Spol frem";
-"touchbar.play_pause" = "Play / Pause";
+"touchbar.play_pause" = "Afspil / Pause";
 "touchbar.seek" = "Spol";
 "touchbar.time" = "Tids Position";
-"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
-"touchbar.toggle_pip" = "Toggle Picture-in-Picture";
+"touchbar.remainingTimeOrTotalDuration" = "Resterende Tid / Total Varighed";
+"touchbar.toggle_pip" = "Slå Picture-in-Picture Til/Fra";
+
+// Plugin permissions
+
+"permissions.network-request.name" = "Network Request";
+"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
+"permissions.network-request.any_site" = "Any site";
+"permissions.show-osd.name" = "Show OSD";
+"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
+"permissions.show-alert.name" = "Show Alerts";
+"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
+"permissions.video-overlay.name" = "Add overlay on videos";
+"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
+"permissions.file-system.name" = "Access the file system";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+
+"plugin.install" = "Install";
+"plugin.installed" = "Installed";
+"plugin.not_installed" = "Not Installed";
+"plugin.local" = "Installed locally";
+"alert.plugin.install_error" = "Error occured during the installation: %@";
+"alert.invalid_url" = "The URL is invalid.";
+"plugin.install_error.invalid_url" = "The URL is invalid.";
+"plugin.install_error.file_not_found" = "Cannot find the package file.";
+"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
+"plugin.check_for_updates" = "Check for Updates";
+"plugin.updating" = "Downloading update…";

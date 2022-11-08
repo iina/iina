@@ -17,7 +17,7 @@
 "general.password" = "密碼";
 
 // Guide Window
-"guide.highlights" = "強調";
+"guide.highlights" = "更新亮點";
 "guide.basic_settings" = "基本設定";
 "guide.faq" = "常見問題";
 
@@ -35,7 +35,7 @@
 "quicksetting.item_none" = "無";
 "quicksetting.hwdec" = "硬體解碼";
 "quicksetting.deinterlace" = "去交錯";
-"quicksetting.hdr" = "HDR";
+"quicksetting.hdr" = "高動態範圍成效";
 
 // OSDMessage.swift
 "osd.pause" = "暫停";
@@ -82,6 +82,8 @@
 "osd.canceled" = "已取消";
 "osd.filter_added" = "已加入濾鏡：%@";
 "osd.filter_removed" = "已移除濾鏡";
+"osd.file_loop" = "文件循環";
+"osd.playlist_loop" = "播放列表循環";
 
 "preference.title" = "偏好設定";
 "preference.general" = "一般";
@@ -92,6 +94,7 @@
 "preference.control" = "控制";
 "preference.keybindings" = "快速鍵";
 "preference.advanced" = "進階設定";
+"preference.plugins" = "Plugins";
 "preference.utilities" = "實用工具";
 "preference.scripts" = "工序指令";
 "preference.not_logged_in" = "尚未登入";
@@ -113,6 +116,16 @@
 "menu.pause" = "暫停";
 "menu.resume" = "繼續";
 "menu.speed" = "速度：%.2fx";
+"menu.chapters" = "顯示章節面板";
+"menu.hide_chapters" = "隱藏章節面板";
+"menu.playlist" = "顯示播放列表面板";
+"menu.hide_playlist" = "隱藏播放列表面板";
+"menu.video" = "顯示視訊面板";
+"menu.hide_video" = "隱藏視訊面板";
+"menu.audio" = "顯示音訊面板";
+"menu.hide_audio" = "隱藏音訊面板";
+"menu.subtitles" = "顯示字幕面板";
+"menu.hide_subtitles" = "隱藏字幕面板";
 
 "menu.seek_forward" = "快轉 %.0fs";
 "menu.seek_backward" = "倒轉 %.0fs";
@@ -126,6 +139,7 @@
 "menu.sub_delay_down" = "字幕延遲 - %.1f 秒";
 
 "menu.crop_custom" = "自訂...";
+"menu.find_online_sub" = "Find Online Subtitles from %@";
 
 "track.none" = "<無>";
 
@@ -141,7 +155,7 @@
 
 "alert.fatal_error" = "ㄧ嚴重錯誤：%@ \n，IINA 即將關閉。";
 "alert.mpv_error" = "發生內部錯誤 %@（%@）（設定 %@ 時）";
-"alert.sleep" = "無法避免顯示器進入睡眠";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "不支援載入此音訊檔";
 "alert.unsupported_sub" = "不支援載入此字幕檔";
@@ -220,6 +234,9 @@
 "alert.clear_watch_later.title" = "清除儲存的播放進度";
 "alert.clear_watch_later.message" = "確定要清除所有儲存的播放進度，即「watch later」資料嗎？";
 
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
+
 "alert.nothing_to_open" = "沒有可打開的檔案。";
 
 "alert.no_video_track" = "沒有影片軌。";
@@ -232,6 +249,15 @@
 "alert.assrt_token_prompt.title" = "輸入你在射手網(偽)的 API token";
 "alert.assrt_token_prompt.message" = "請在彈出的網頁中註冊帳號，然後進入使用者首頁檢視 API token 並在下方輸入：";
 "alert.assrt_token_invalid" = "你的射手網(偽) API token 格式無效。";
+
+"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
+"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
+"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+"alert.plugin_no_update" = "No update found.";
+"alert.plugin_update_found.title" = "Update found for %@";
+"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
+"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
+"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
 
 "playlist.total_length" = "總計 %@";
 "playlist.total_length_with_selected" = "%@ / %@ 已選取";
@@ -301,3 +327,31 @@
 "touchbar.time" = "播放進度";
 "touchbar.remainingTimeOrTotalDuration" = "剩餘時間 / 總時間";
 "touchbar.toggle_pip" = "切換「子母畫面」模式";
+
+// Plugin permissions
+
+"permissions.network-request.name" = "Network Request";
+"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
+"permissions.network-request.any_site" = "Any site";
+"permissions.show-osd.name" = "Show OSD";
+"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
+"permissions.show-alert.name" = "Show Alerts";
+"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
+"permissions.video-overlay.name" = "Add overlay on videos";
+"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
+"permissions.file-system.name" = "存取檔案系統";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+
+"plugin.install" = "安裝";
+"plugin.installed" = "已安裝";
+"plugin.not_installed" = "尚未安裝";
+"plugin.local" = "Installed locally";
+"alert.plugin.install_error" = "Error occured during the installation: %@";
+"alert.invalid_url" = "無效的 URL。";
+"plugin.install_error.invalid_url" = "無效的 URL。";
+"plugin.install_error.file_not_found" = "Cannot find the package file.";
+"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
+"plugin.check_for_updates" = "檢查更新";
+"plugin.updating" = "正在下載更新…";

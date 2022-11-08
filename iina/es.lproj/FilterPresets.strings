@@ -9,7 +9,7 @@
 
 
 
-"crop" = "Cortar";
+"crop" = "Recortar";
 "crop.w" = "Ancho (por defecto: ancho del vídeo)";
 "crop.h" = "Alto (por defecto: alto del vídeo)";
 "crop.x" = "Origen X (por defecto: centro)";
@@ -27,11 +27,11 @@
 "sharpen.msize" = "Tamaño de la matriz de puntos";
 "sharpen.amount" = "Cantidad";
 
-"blur" = "Desenfocar";
+"blur" = "Difuminar";
 "blur.msize" = "Tamaño de la matriz de puntos";
 "blur.amount" = "Cantidad";
 
-"delogo" = "Delogo es un filtro de video que remueve los logos en el video";
+"delogo" = "Quitar logotipo";
 "delogo.w" = "Ancho";
 "delogo.h" = "Alto";
 "delogo.x" = "Origen X";
@@ -43,7 +43,7 @@
 "hflip" = "Reflejar";
 
 "lut3d" = "3D LUT";
-"lut3d.file" = "Archivo";
+"lut3d.file" = "Ruta del archivo (también puede arrastrar y soltar el archivo en la casilla de entrada)";
 "lut3d.interp" = "Modo de interpolación";
 
 "custom_mpv" = "Personalizado (mpv)";

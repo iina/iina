@@ -1,8 +1,8 @@
 /* Class = "NSTextFieldCell"; title = "Forced"; ObjectID = "0vG-Pg-DIl"; */
-"0vG-Pg-DIl.title" = "Forciert";
+"0vG-Pg-DIl.title" = "Erzwungen";
 
 /* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "1dz-Vt-0MO"; */
-"1dz-Vt-0MO.title" = "Bildfrequenz:";
+"1dz-Vt-0MO.title" = "Bildwiederholrate:";
 
 /* Class = "NSTextFieldCell"; title = "File path:"; ObjectID = "4jf-w4-kkv"; */
 "4jf-w4-kkv.title" = "Dateipfad:";
@@ -11,7 +11,7 @@
 "5H6-qJ-RDS.title" = "Format:";
 
 /* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "7QX-tu-rvs"; */
-"7QX-tu-rvs.title" = "Bildfrequenz:";
+"7QX-tu-rvs.title" = "Bildwiederholrate:";
 
 /* Class = "NSTextFieldCell"; title = "Title:"; ObjectID = "9eq-rd-zGy"; */
 "9eq-rd-zGy.title" = "Titel:";
@@ -23,7 +23,7 @@
 "AYt-pH-UCi.title" = "Verspätete Frames:";
 
 /* Class = "NSTextFieldCell"; title = "Display FPS:"; ObjectID = "AjU-1T-aGR"; */
-"AjU-1T-aGR.title" = "Dargestellte Bilder/s:";
+"AjU-1T-aGR.title" = "Bildschirmwiederholrate:";
 
 /* Class = "NSTextFieldCell"; title = "Dropped Frames:"; ObjectID = "CrF-UR-udW"; */
 "CrF-UR-udW.title" = "Übersprungene Frames:";
@@ -53,7 +53,7 @@
 "I2E-6Z-Gnn.title" = "Treiber:";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Disp FPS"; ObjectID = "JN9-3E-OJp"; */
-"JN9-3E-OJp.title" = "Dargestellte Bilder/s, geschätzt";
+"JN9-3E-OJp.title" = "Geschätzte Bildschirmwiederholrate";
 
 /* Class = "NSTextFieldCell"; title = "File Path:"; ObjectID = "Jxp-Wf-BhU"; */
 "Jxp-Wf-BhU.title" = "Dateipfad:";
@@ -116,7 +116,7 @@
 "f7i-wX-uxQ.title" = "Spur:";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Output FPS:"; ObjectID = "g8p-Ec-awO"; */
-"g8p-Ec-awO.title" = "Bilder/s, geschätzt:";
+"g8p-Ec-awO.title" = "Geschätzte Bildwiederholrate der Ausgabe:";
 
 /* Class = "NSTextFieldCell"; title = "VIDEO"; ObjectID = "gDG-Eq-1Bc"; */
 "gDG-Eq-1Bc.title" = "VIDEO";
@@ -159,3 +159,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Decoder:"; ObjectID = "xix-0S-ehE"; */
 "xix-0S-ehE.title" = "Dekoder:";
+
+/* Class = "NSTextFieldCell"; title = "Primaries:"; ObjectID = "1kw-LO-KmJ"; */
+"1kw-LO-KmJ.title" = "Primaries:";
+
+/* Class = "NSTextFieldCell"; title = "Colorspace:"; ObjectID = "mLo-Wc-BoO"; */
+"mLo-Wc-BoO.title" = "Colorspace:";

@@ -8,6 +8,7 @@
 
 import Cocoa
 import Mustache
+import WebKit
 
 fileprivate let isMacOS11: Bool = {
   var res = false
@@ -74,7 +75,7 @@ class MainWindowController: PlayerWindowController {
   override var videoView: VideoView {
     return _videoView
   }
-  
+
   lazy private var _videoView: VideoView = VideoView(frame: window!.contentView!.bounds, player: player)
 
   /** The quick setting sidebar (video, audio, subtitles). */
@@ -458,6 +459,15 @@ class MainWindowController: PlayerWindowController {
 
   @IBOutlet weak var pipOverlayView: NSVisualEffectView!
 
+  lazy var pluginOverlayViewContainer: NSView! = {
+    guard let window = window, let cv = window.contentView else { return nil }
+    let view = NSView(frame: .zero)
+    view.translatesAutoresizingMaskIntoConstraints = false
+    cv.addSubview(view, positioned: .below, relativeTo: bufferIndicatorView)
+    Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": view])
+    return view
+  }()
+
   lazy var subPopoverView = playlistView.subPopover?.contentViewController?.view
 
   var videoViewConstraints: [NSLayoutConstraint.Attribute: NSLayoutConstraint] = [:]
@@ -467,12 +477,18 @@ class MainWindowController: PlayerWindowController {
 
   // MARK: - PIP
 
-  @available(macOS 10.12, *)
-  lazy var pip: PIPViewController = {
+  lazy var _pip: PIPViewController = {
     let pip = PIPViewController()
-    pip.delegate = self
+    if #available(macOS 10.12, *) {
+      pip.delegate = self
+    }
     return pip
   }()
+  
+  @available(macOS 10.12, *)
+  var pip: PIPViewController {
+    _pip
+  }
 
   var pipVideo: NSViewController!
 
@@ -534,6 +550,19 @@ class MainWindowController: PlayerWindowController {
     // gesture recognizer
     cv.addGestureRecognizer(magnificationGestureRecognizer)
 
+    // Work around a bug in macOS Ventura where HDR content becomes dimmed when playing in full
+    // screen mode once overlaying views are fully hidden (issue #3844). After applying this
+    // workaround another bug in Ventura where an external monitor goes black could not be
+    // reproduced (issue #4015). The workaround adds a tiny subview with such a low alpha level it
+    // is invisible to the human eye. This workaround may not be effective in all cases.
+    if #available(macOS 13, *) {
+      let view = NSView(frame: NSRect(origin: .zero, size: NSSize(width: 0.1, height: 0.1)))
+      view.wantsLayer = true
+      view.layer?.backgroundColor = NSColor.black.cgColor
+      view.layer?.opacity = 0.01
+      cv.addSubview(view)
+    }
+
     player.initVideo()
 
     // init quick setting view now
@@ -565,10 +594,12 @@ class MainWindowController: PlayerWindowController {
     timePreviewWhenSeek.isHidden = true
     bottomView.isHidden = true
     pipOverlayView.isHidden = true
+    
+    if player.disableUI { hideUI() }
 
     // add user default observers
     observedPrefKeys.append(contentsOf: localObservedPrefKeys)
-    observedPrefKeys.forEach { key in
+    localObservedPrefKeys.forEach { key in
       UserDefaults.standard.addObserver(self, forKeyPath: key.rawValue, options: .new, context: nil)
     }
 
@@ -595,6 +626,8 @@ class MainWindowController: PlayerWindowController {
       guard self.fsState.isFullscreen, Preference.bool(for: .useLegacyFullScreen) else { return }
       setWindowFrameForLegacyFullScreen()
     }
+
+    player.events.emit(.windowLoaded)
   }
 
   /** Set material for OSC and title bar */
@@ -1095,21 +1128,17 @@ class MainWindowController: PlayerWindowController {
       }
     }
     // stop playing
-    if !player.isMpvTerminated {
-      if case .fullscreen(legacy: true, priorWindowedFrame: _) = fsState {
-        restoreDockSettings()
-      }
-      player.savePlaybackPosition()
-      player.stop()
-      videoView.stopDisplayLink()
+    if case .fullscreen(legacy: true, priorWindowedFrame: _) = fsState {
+      restoreDockSettings()
     }
-    player.info.currentFolder = nil
-    player.info.matchedSubs.removeAll()
+    player.stop()
     // stop tracking mouse event
     guard let w = self.window, let cv = w.contentView else { return }
     cv.trackingAreas.forEach(cv.removeTrackingArea)
     playSlider.trackingAreas.forEach(playSlider.removeTrackingArea)
     UserDefaults.standard.set(NSStringFromRect(window!.frame), forKey: "MainWindowLastPosition")
+    
+    player.events.emit(.windowWillClose)
   }
 
   // MARK: - Window delegate: Full screen
@@ -1215,12 +1244,14 @@ class MainWindowController: PlayerWindowController {
     }
 
     updateWindowParametersForMPV()
-    
+
     // Exit PIP if necessary
     if pipStatus == .inPIP,
       #available(macOS 10.12, *) {
       exitPIP()
     }
+    
+    player.events.emit(.windowFullscreenChanged, data: true)
   }
 
   func windowWillExitFullScreen(_ notification: Notification) {
@@ -1290,6 +1321,8 @@ class MainWindowController: PlayerWindowController {
 
     resetCollectionBehavior()
     updateWindowParametersForMPV()
+    
+    player.events.emit(.windowFullscreenChanged, data: false)
   }
 
   func toggleWindowFullScreen() {
@@ -1313,7 +1346,7 @@ class MainWindowController: PlayerWindowController {
       return
     }
   }
-  
+
   private func restoreDockSettings() {
     NSApp.presentationOptions.remove(.autoHideMenuBar)
     NSApp.presentationOptions.remove(.autoHideDock)
@@ -1498,6 +1531,8 @@ class MainWindowController: PlayerWindowController {
         }
       }
     }
+
+    player.events.emit(.windowResized, data: window.frame)
   }
 
   // resize framebuffer in videoView after resizing.
@@ -1511,10 +1546,19 @@ class MainWindowController: PlayerWindowController {
       oldScale != Double(window!.backingScaleFactor) {
       videoView.videoLayer.contentsScale = window!.backingScaleFactor
     }
+  }
+  
+  override func windowDidChangeScreen(_ notification: Notification) {
+    super.windowDidChangeScreen(notification)
 
+    player.events.emit(.windowScreenChanged)
   }
 
   // MARK: - Window delegate: Activeness status
+  func windowDidMove(_ notification: Notification) {
+    guard let window = window else { return }
+    player.events.emit(.windowMoved, data: window.frame)
+  }
 
   func windowDidBecomeKey(_ notification: Notification) {
     window!.makeFirstResponder(window!)
@@ -1543,6 +1587,7 @@ class MainWindowController: PlayerWindowController {
     if fsState.isFullscreen && Preference.bool(for: .blackOutMonitor) {
       blackOutOtherMonitors()
     }
+    player.events.emit(.windowMainStatusChanged, data: true)
   }
 
   override func windowDidResignMain(_ notification: Notification) {
@@ -1550,6 +1595,7 @@ class MainWindowController: PlayerWindowController {
     if Preference.bool(for: .blackOutMonitor) {
       removeBlackWindow()
     }
+    player.events.emit(.windowMainStatusChanged, data: false)
   }
 
   func windowWillMiniaturize(_ notification: Notification) {
@@ -1558,13 +1604,14 @@ class MainWindowController: PlayerWindowController {
       player.pause()
     }
   }
-  
+
   func windowDidMiniaturize(_ notification: Notification) {
     if Preference.bool(for: .togglePipByMinimizingWindow) && !isWindowMiniaturizedDueToPip {
       if #available(macOS 10.12, *) {
         enterPIP()
       }
     }
+    player.events.emit(.windowMiniaturized)
   }
 
   func windowDidDeminiaturize(_ notification: Notification) {
@@ -1577,6 +1624,7 @@ class MainWindowController: PlayerWindowController {
         exitPIP()
       }
     }
+    player.events.emit(.windowDeminiaturized)
   }
 
   // MARK: - UI: Show / Hide
@@ -1594,6 +1642,8 @@ class MainWindowController: PlayerWindowController {
       return
     }
 
+    // Follow energy efficiency best practices and stop the timer that updates the OSC.
+    player.invalidateTimer()
     animationState = .willHide
     fadeableViews.forEach { (v) in
       v.isHidden = false
@@ -1622,13 +1672,14 @@ class MainWindowController: PlayerWindowController {
   }
 
   private func showUI() {
+    if player.disableUI { return }
     animationState = .willShow
     fadeableViews.forEach { (v) in
       v.isHidden = false
     }
-    if !player.isInMiniPlayer && fsState.isFullscreen && displayTimeAndBatteryInFullScreen {
-      player.syncUI(.additionalInfo)
-    }
+    // The OSC was not updated while it was hidden to avoid wasting energy. Update it now.
+    player.syncUITime()
+    player.createSyncUITimer()
     standardWindowButtons.forEach { $0.isEnabled = true }
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = UIAnimationDuration
@@ -1958,11 +2009,7 @@ class MainWindowController: PlayerWindowController {
       videoView.needsLayout = true
       videoView.layoutSubtreeIfNeeded()
       // force rerender a frame
-      videoView.videoLayer.mpvGLQueue.async {
-        DispatchQueue.main.sync {
-          self.videoView.videoLayer.draw()
-        }
-      }
+      videoView.videoLayer.draw(forced: true)
     }
 
     let controlView = mode.viewController()
@@ -2053,11 +2100,35 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
+  /// Determine if the thumbnail preview can be shown above the progress bar in the on screen controller..
+  ///
+  /// Normally the OSC's thumbnail preview is shown above the time preview. This is the preferred location. However the
+  /// thumbnail preview extends beyond the frame of the OSC. If the OSC is near the top of the window this could result
+  /// in the thumbnail extending outside of the window resulting in clipping. This method checks if there is room for the
+  /// thumbnail to fully fit in the window. Otherwise the thumbnail must be displayed below the OSC's progress bar.
+  /// - Parameters:
+  ///   - timnePreviewYPos: The y-coordinate of the time preview `TextField`.
+  ///   - thumbnailHeight: The height of the thumbnail.
+  /// - Returns: `true` if the thumbnail can be shown above the slider, `false` otherwise.
+  private func canShowThumbnailAbove(timnePreviewYPos: Double, thumbnailHeight: Double) -> Bool {
+    guard oscPosition != .bottom else { return true }
+    guard oscPosition != .top else { return false }
+    // The layout preference for the on screen controller is set to the default floating layout.
+    // Must insure the top of the thumbnail would be below the top of the window.
+    let topOfThumbnail = timnePreviewYPos + timePreviewWhenSeek.frame.height + thumbnailHeight
+    // Normally the height of the usable area of the window can be obtained from the content
+    // layout. But when the legacy full screen preference is enabled the layout height may be
+    // larger than the content view if the display contains a camera housing. Use the lower of
+    // the two heights.
+    let windowContentHeight = min(window!.contentLayoutRect.height, window!.contentView!.frame.height)
+    return topOfThumbnail <= windowContentHeight
+  }
+
   /** Display time label when mouse over slider */
   private func updateTimeLabel(_ mouseXPos: CGFloat, originalPos: NSPoint) {
-    let timeLabelXPos = playSlider.frame.origin.y + 15
-    timePreviewWhenSeek.frame.origin = NSPoint(x: round(mouseXPos + playSlider.frame.origin.x - timePreviewWhenSeek.frame.width / 2),
-                                               y: timeLabelXPos + 1)
+    let timeLabelXPos = round(mouseXPos + playSlider.frame.origin.x - timePreviewWhenSeek.frame.width / 2)
+    let timeLabelYPos = playSlider.frame.origin.y + playSlider.frame.height
+    timePreviewWhenSeek.frame.origin = NSPoint(x: timeLabelXPos, y: timeLabelYPos)
     let sliderFrame = playSlider.bounds
     let sliderFrameInWindow = playSlider.superview!.convert(playSlider.frame.origin, to: nil)
     var percentage = Double((mouseXPos - 3) / (sliderFrame.width - 6))
@@ -2073,8 +2144,9 @@ class MainWindowController: PlayerWindowController {
         thumbnailPeekView.imageView.image = image.rotate(rotation)
         thumbnailPeekView.isHidden = false
         let height = round(120 / thumbnailPeekView.imageView.image!.size.aspect)
-        let yPos = (oscPosition == .top || (oscPosition == .floating && sliderFrameInWindow.y + 52 + height >= window!.frame.height)) ?
-          sliderFrameInWindow.y - height : sliderFrameInWindow.y + 32
+        let timePreviewFrameInWindow = timePreviewWhenSeek.superview!.convert(timePreviewWhenSeek.frame.origin, to: nil)
+        let showAbove = canShowThumbnailAbove(timnePreviewYPos: timePreviewFrameInWindow.y, thumbnailHeight: height)
+        let yPos = showAbove ? timePreviewFrameInWindow.y + timePreviewWhenSeek.frame.height : sliderFrameInWindow.y - height
         thumbnailPeekView.frame.size = NSSize(width: 120, height: height)
         thumbnailPeekView.frame.origin = NSPoint(x: round(originalPos.x - thumbnailPeekView.frame.width / 2), y: yPos)
       } else {
@@ -2265,9 +2337,13 @@ class MainWindowController: PlayerWindowController {
       if let screenFrame = window.screen?.frame {
         rect = rect.constrain(in: screenFrame)
       }
-      // animated `setFrame` can be inaccurate!
-      window.setFrame(rect, display: true, animate: true)
-      window.setFrame(rect, display: true)
+      if player.disableWindowAnimation {
+        window.setFrame(rect, display: true, animate: false)
+      } else {
+        // animated `setFrame` can be inaccurate!
+        window.setFrame(rect, display: true, animate: true)
+        window.setFrame(rect, display: true)
+      }
       updateWindowParametersForMPV(withFrame: rect)
     }
 
@@ -2279,6 +2355,7 @@ class MainWindowController: PlayerWindowController {
 
     // UI and slider
     updatePlayTime(withDuration: true, andProgressBar: true)
+    player.events.emit(.windowSizeAdjusted, data: rect)
   }
 
   func updateWindowParametersForMPV(withFrame frame: NSRect? = nil) {
@@ -2520,38 +2597,60 @@ class MainWindowController: PlayerWindowController {
     setWindowFloatingOnTop(!isOntop)
   }
 
-  /// Legacy IBAction, but still in use.
-  func settingsButtonAction(_ sender: AnyObject) {
-    if sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
-      return  // do not interrupt other actions while it is animating
+  func showSettingsSidebar(tab: QuickSettingViewController.TabViewType? = nil, force: Bool = false, hideIfAlreadyShown: Bool = true) {
+    if !force && sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
+      return  // do not interrput other actions while it is animating
     }
     let view = quickSettingView
     switch sideBarStatus {
     case .hidden:
+      if let tab = tab {
+        view.pleaseSwitchToTab(tab)
+      }
       showSideBar(viewController: view, type: .settings)
     case .playlist:
+      if let tab = tab {
+        view.pleaseSwitchToTab(tab)
+      }
       hideSideBar {
         self.showSideBar(viewController: view, type: .settings)
       }
     case .settings:
-      hideSideBar()
+      if view.currentTab == tab {
+        if hideIfAlreadyShown {
+          hideSideBar()
+        }
+      } else if let tab = tab {
+        view.pleaseSwitchToTab(tab)
+      }
     }
   }
 
-  /// Legacy IBAction, but still in use.
-  func playlistButtonAction(_ sender: AnyObject) {
-    if sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
-      return  // do not interrupt other actions while it is animating
+  func showPlaylistSidebar(tab: PlaylistViewController.TabViewType? = nil, force: Bool = false, hideIfAlreadyShown: Bool = true) {
+    if !force && sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
+      return  // do not interrput other actions while it is animating
     }
     let view = playlistView
     switch sideBarStatus {
     case .hidden:
+      if let tab = tab {
+        view.pleaseSwitchToTab(tab)
+      }
       showSideBar(viewController: view, type: .playlist)
-    case .playlist:
-      hideSideBar()
     case .settings:
+      if let tab = tab {
+        view.pleaseSwitchToTab(tab)
+      }
       hideSideBar {
         self.showSideBar(viewController: view, type: .playlist)
+      }
+    case .playlist:
+      if view.currentTab == tab {
+        if hideIfAlreadyShown {
+          hideSideBar()
+        }
+      } else if let tab = tab {
+        view.pleaseSwitchToTab(tab)
       }
     }
   }
@@ -2567,7 +2666,7 @@ class MainWindowController: PlayerWindowController {
     // label
     timePreviewWhenSeek.frame.origin = CGPoint(
       x: round(sender.knobPointPosition() - timePreviewWhenSeek.frame.width / 2),
-      y: playSlider.frame.origin.y + 16)
+      y: playSlider.frame.origin.y + playSlider.frame.height)
     timePreviewWhenSeek.stringValue = (player.info.videoDuration! * percentage * 0.01).stringRepresentation
   }
 
@@ -2587,9 +2686,9 @@ class MainWindowController: PlayerWindowController {
         }
       }
     case .playlist:
-      playlistButtonAction(sender)
+      showPlaylistSidebar()
     case .settings:
-      settingsButtonAction(sender)
+      showSettingsSidebar()
     case .subTrack:
       quickSettingView.showSubChooseMenu(forView: sender, showLoadedSubs: true)
     }
@@ -2670,7 +2769,9 @@ extension MainWindowController: PIPViewControllerDelegate {
     // Therefore we should wait until the view is moved to the PIP superview.
     let currentTrackIsAlbumArt = player.info.currentTrack(.video)?.isAlbumart ?? false
     if player.info.isPaused || currentTrackIsAlbumArt {
-      videoView.pendingRedrawAfterEnteringPIP = true
+      // It takes two `layout` before finishing entering PIP (tested on macOS 12, but
+      // could be earlier). Force redraw for the first two `layout`s.
+      videoView.pendingRedrawsAfterEnteringPIP = 2
     }
 
     if let window = self.window {
@@ -2692,6 +2793,8 @@ extension MainWindowController: PIPViewControllerDelegate {
         player.pause()
       }
     }
+
+    player.events.emit(.pipChanged, data: true)
   }
 
   func exitPIP() {
@@ -2703,6 +2806,7 @@ extension MainWindowController: PIPViewControllerDelegate {
       // is chosen in this case. See https://bugs.swift.org/browse/SR-8956.
       pip.dismiss(pipVideo!)
     }
+    player.events.emit(.pipChanged, data: false)
   }
 
   func doneExitingPIP() {
@@ -2734,7 +2838,7 @@ extension MainWindowController: PIPViewControllerDelegate {
     guard let window = window else { return }
     // This is called right before we're about to close the PIP
     pipStatus = .intermediate
-    
+
     // Hide the overlay view preemptively, to prevent any issues where it does
     // not hide in time and ends up covering the video view (which will be added
     // to the window under everything else, including the overlay).

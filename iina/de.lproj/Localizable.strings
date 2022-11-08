@@ -18,13 +18,13 @@
 
 // Guide Window
 "guide.highlights" = "Highlights";
-"guide.basic_settings" = "Basic Settings";
+"guide.basic_settings" = "Allgemeine Einstellungen";
 "guide.faq" = "Häufig gestellte Fragen (FAQ)";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Puffern … %d%%";
 "main.opening_stream" = "Stream öffnen …";
-"osc.precision" = "Precision";
+"osc.precision" = "Genauigkeit";
 "osc.1s" = "1 Sekunde";
 "osc.100ms" = "100 Millisekunden";
 "osc.10ms" = "10 Millisekunden";
@@ -82,6 +82,8 @@
 "osd.canceled" = "Abgebrochen";
 "osd.filter_added" = "Filter \"%@\" hinzugefügt";
 "osd.filter_removed" = "Filter gelöscht";
+"osd.file_loop" = "Datei Schleife: %@";
+"osd.playlist_loop" = "Wiedergabeliste wiederholen: %@";
 
 "preference.title" = "Einstellungen";
 "preference.general" = "Allgemein";
@@ -92,6 +94,7 @@
 "preference.control" = "Steuerung";
 "preference.keybindings" = "Kurzbefehle";
 "preference.advanced" = "Erweitert";
+"preference.plugins" = "Plugins";
 "preference.utilities" = "Werkzeuge";
 "preference.scripts" = "Skripte";
 "preference.not_logged_in" = "Nicht angemeldet";
@@ -113,6 +116,16 @@
 "menu.pause" = "Pause";
 "menu.resume" = "Wiedergabe";
 "menu.speed" = "Geschwindigkeit: %.2fx";
+"menu.chapters" = "Show Chapters Panel";
+"menu.hide_chapters" = "Hide Chapters Panel";
+"menu.playlist" = "Show Playlist Panel";
+"menu.hide_playlist" = "Hide Playlist Panel";
+"menu.video" = "Show Video Panel";
+"menu.hide_video" = "Hide Video Panel";
+"menu.audio" = "Show Audio Panel";
+"menu.hide_audio" = "Hide Audio Panel";
+"menu.subtitles" = "Show Subtitles Panel";
+"menu.hide_subtitles" = "Hide Subtitles Panel";
 
 "menu.seek_forward" = "%.0f s vorspulen";
 "menu.seek_backward" = "%.0f s zurückspulen";
@@ -125,7 +138,8 @@
 "menu.sub_delay_up" = "Untertitelverzögerung + %.1f s";
 "menu.sub_delay_down" = "Untertitelverzögerung − %.1f s";
 
-"menu.crop_custom" = "Benutzerdefiniert...";
+"menu.crop_custom" = "Benutzerdefiniert …";
+"menu.find_online_sub" = "Find Online Subtitles from %@";
 
 "track.none" = "Keine";
 
@@ -141,7 +155,7 @@
 
 "alert.fatal_error" = "Schwerwiegender Fehler: %@ \nProgramm wird beendet.";
 "alert.mpv_error" = "Interner Fehler %@ (%@) beim Setzen der Einstellung %@.";
-"alert.sleep" = "Ruhezustand des Monitors konnte nicht verhindert werden.";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "Externe Audiodatei nicht unterstützt.";
 "alert.unsupported_sub" = "Externe Untertiteldatei nicht untersützt.";
@@ -220,6 +234,9 @@
 "alert.clear_watch_later.title" = "Gesicherten Wiedergabefortschritt löschen";
 "alert.clear_watch_later.message" = "Möchtest du den Wiedergabefortschritt aller Videos löschen?";
 
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
+
 "alert.nothing_to_open" = "Nichts zu öffnen.";
 
 "alert.no_video_track" = "Keine Videospur vorhanden.";
@@ -232,6 +249,15 @@
 "alert.assrt_token_prompt.title" = "Bitte API token hier eingeben.";
 "alert.assrt_token_prompt.message" = "Bitte auf der jetzt geöffneten Internetseite registrieren. Das Token kannst du auf deiner User-Seite finden. Bitte hier eingeben:";
 "alert.assrt_token_invalid" = "Dein Assrt API token schein ungültig zu sein.";
+
+"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
+"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
+"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+"alert.plugin_no_update" = "No update found.";
+"alert.plugin_update_found.title" = "Update found for %@";
+"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
+"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
+"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
 
 "playlist.total_length" = "%@ insgesamt";
 "playlist.total_length_with_selected" = "%@ von %@ ausgewählt";
@@ -301,3 +327,31 @@
 "touchbar.time" = "Position";
 "touchbar.remainingTimeOrTotalDuration" = "verbleibende Zeit / gespielt";
 "touchbar.toggle_pip" = "Bild-in-Bild ein-/ausschalten";
+
+// Plugin permissions
+
+"permissions.network-request.name" = "Network Request";
+"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
+"permissions.network-request.any_site" = "Any site";
+"permissions.show-osd.name" = "Show OSD";
+"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
+"permissions.show-alert.name" = "Show Alerts";
+"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
+"permissions.video-overlay.name" = "Add overlay on videos";
+"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
+"permissions.file-system.name" = "Access the file system";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+
+"plugin.install" = "Install";
+"plugin.installed" = "Installed";
+"plugin.not_installed" = "Not Installed";
+"plugin.local" = "Installed locally";
+"alert.plugin.install_error" = "Error occured during the installation: %@";
+"alert.invalid_url" = "The URL is invalid.";
+"plugin.install_error.invalid_url" = "The URL is invalid.";
+"plugin.install_error.file_not_found" = "Cannot find the package file.";
+"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
+"plugin.check_for_updates" = "Check for Updates";
+"plugin.updating" = "Downloading update…";

@@ -11,7 +11,7 @@
 "50C-1R-wlJ.title" = "Nombre de fils:";
 
 /* Class = "NSButtonCell"; title = "Force dedicated GPU"; ObjectID = "YUr-aJ-xfC"; */
-"YUr-aJ-xfC.title" = "Force dedicated GPU";
+"YUr-aJ-xfC.title" = "Força GPU dedicada";
 
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "bxW-np-SGm"; */
 "bxW-np-SGm.title" = "Per defecte: 0 (Automàtic)";
@@ -23,7 +23,7 @@
 "g4c-vG-URh.title" = "Volum inicial:";
 
 /* Class = "NSTextFieldCell"; title = "Always use the dedicated GPU for rendering (if exists). This can improve performance but may result in poor battery life."; ObjectID = "gCv-sJ-uQJ"; */
-"gCv-sJ-uQJ.title" = "Always use the dedicated GPU for rendering (if it exists). This can improve performance but may reduce battery life.";
+"gCv-sJ-uQJ.title" = "Utilitza sempre la GPU dedicada per a la renderització (si existeix). Això pot millorar el rendiment, però pot reduir la durada de la bateria.";
 
 /* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
 "m5P-5f-5uo.title" = "Vídeo:";
@@ -51,3 +51,15 @@
 
 /* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "wjt-O6-KbC"; */
 "wjt-O6-KbC.title" = "Idioma preferit:";
+
+/* Class = "NSButtonCell"; title = "Load ICC profile"; ObjectID = "3g4-jW-uJd"; */
+"3g4-jW-uJd.title" = "Carrega el perfil ICC";
+
+/* Class = "NSTextFieldCell"; title = "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"; ObjectID = "M2M-of-gjd"; */
+"M2M-of-gjd.title" = "Carrega el perfil ICC per a la visualització actual i utilitza'l per transformar vídeo RGB a la sortida de pantalla. (només per al mode SDR)";
+
+/* Class = "NSButtonCell"; title = "Enable HDR support"; ObjectID = "R7Z-9c-vPJ"; */
+"R7Z-9c-vPJ.title" = "Enable HDR support";
+
+/* Class = "NSTextFieldCell"; title = "Enable HDR mode by default when playing HDR videos."; ObjectID = "ZgQ-bc-yEE"; */
+"ZgQ-bc-yEE.title" = "Enable HDR mode by default when playing HDR videos.";

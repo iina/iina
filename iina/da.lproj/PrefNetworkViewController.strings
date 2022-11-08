@@ -29,7 +29,7 @@
 "YqE-yV-BvQ.title" = "IINA søger nu igennem youtube-dl i denne folder. Genstart kræves.";
 
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "aNr-lv-K0r"; */
-"aNr-lv-K0r.title" = "Auto";
+"aNr-lv-K0r.title" = "Automatisk";
 
 /* Class = "NSButtonCell"; title = "Enable youtube-dl"; ObjectID = "cyH-Md-FAD"; */
 "cyH-Md-FAD.title" = "Aktiver youtube-dl";
@@ -40,17 +40,17 @@
 /* Class = "NSTextFieldCell"; title = "User agent:"; ObjectID = "eN6-Sk-kUa"; */
 "eN6-Sk-kUa.title" = "Bruger agent:";
 
-/* Class = "NSTextFieldCell"; title = "Default: 100"; ObjectID = "fab-7d-mMQ"; */
-"fab-7d-mMQ.title" = "Standart: 100";
+/* Class = "NSTextFieldCell"; title = "Default: 36000"; ObjectID = "fab-7d-mMQ"; */
+"fab-7d-mMQ.title" = "Default: 36000";
 
 /* Class = "NSButtonCell"; title = "Enable cache"; ObjectID = "fpV-al-bn7"; */
 "fpV-al-bn7.title" = "Aktiver cache";
 
 /* Class = "NSTextFieldCell"; title = "Transport RTSP stream through:"; ObjectID = "hfn-h6-NCd"; */
-"hfn-h6-NCd.title" = "Transport RTSP stream through:";
+"hfn-h6-NCd.title" = "Transport RTSP stream gennem:";
 
 /* Class = "NSTextFieldCell"; title = "Network:"; ObjectID = "yrh-Jm-Q4e"; */
 "yrh-Jm-Q4e.title" = "Netværk:";
 
 /* Class = "NSTextFieldCell"; title = "Raw options:"; ObjectID = "zCD-9d-ziV"; */
-"zCD-9d-ziV.title" = "Raw options:";
+"zCD-9d-ziV.title" = "Råindstillinger:";

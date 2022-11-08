@@ -28,7 +28,7 @@
 "sharpen.amount" = "Miktar";
 
 "blur" = "Bulandır";
-"blur.msize" = "Matrix boyutu";
+"blur.msize" = "Matris boyutu";
 "blur.amount" = "Miktar";
 
 "delogo" = "Logo kaldır";
@@ -43,7 +43,7 @@
 "hflip" = "Aynala";
 
 "lut3d" = "3D LUT";
-"lut3d.file" = "Dosya";
+"lut3d.file" = "Dosya yolu (dosyayı girdi kutusuna da sürükleyip bırakabilirsiniz)";
 "lut3d.interp" = "İnterpolasyon modu";
 
 "custom_mpv" = "Özel (mpv)";

@@ -24,6 +24,7 @@ enum OSDType {
   case normal
   case withText(String)
   case withProgress(Double)
+//  case withButton(String)
 }
 
 enum OSDMessage {
@@ -71,8 +72,14 @@ enum OSDMessage {
   case fileError
   case networkError
   case canceled
+  case cannotConnect
+  case timedOut
+
   case fileLoop(Bool)
   case playlistLoop(Bool)
+
+  case custom(String)
+  case customWithDetail(String, String)
 
   func message() -> (String, OSDType) {
     switch self {
@@ -306,6 +313,18 @@ enum OSDMessage {
         .normal
       )
 
+    case .cannotConnect:
+      return (
+        NSLocalizedString("osd.cannot_connect", comment: "Cannot connect"),
+        .normal
+      )
+
+    case .timedOut:
+      return (
+        NSLocalizedString("osd.timed_out", comment: "Timed out"),
+        .normal
+      )
+
     case .fileLoop(let enabled):
       return (
         String(format: NSLocalizedString("osd.file_loop", comment: "File Loop: %@"),
@@ -319,6 +338,11 @@ enum OSDMessage {
                enabled ? NSLocalizedString("general.on", comment: "On") : NSLocalizedString("general.off", comment: "Off")),
         .normal
       )
+    case .custom(let message):
+      return (message, .normal)
+
+    case .customWithDetail(let message, let detail):
+      return (message, .withText(detail))
     }
   }
 }

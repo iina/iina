@@ -1,0 +1,167 @@
+/* Class = "NSTextFieldCell"; title = "Forced"; ObjectID = "0vG-Pg-DIl"; */
+"0vG-Pg-DIl.title" = "إجباري";
+
+/* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "1dz-Vt-0MO"; */
+"1dz-Vt-0MO.title" = "إطار/ثانية:";
+
+/* Class = "NSTextFieldCell"; title = "File path:"; ObjectID = "4jf-w4-kkv"; */
+"4jf-w4-kkv.title" = "مسار الملف:";
+
+/* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "5H6-qJ-RDS"; */
+"5H6-qJ-RDS.title" = "الصيغة:";
+
+/* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "7QX-tu-rvs"; */
+"7QX-tu-rvs.title" = "إطار/ثانية:";
+
+/* Class = "NSTextFieldCell"; title = "Title:"; ObjectID = "9eq-rd-zGy"; */
+"9eq-rd-zGy.title" = "العنوان:";
+
+/* Class = "NSTextFieldCell"; title = "Bit Rate:"; ObjectID = "A4y-LL-x0z"; */
+"A4y-LL-x0z.title" = "معدل بت:";
+
+/* Class = "NSTextFieldCell"; title = "Mistimed Frames:"; ObjectID = "AYt-pH-UCi"; */
+"AYt-pH-UCi.title" = "إطارات خاطئة:";
+
+/* Class = "NSTextFieldCell"; title = "Display FPS:"; ObjectID = "AjU-1T-aGR"; */
+"AjU-1T-aGR.title" = "عرض الإطارات/ثانية:";
+
+/* Class = "NSTextFieldCell"; title = "Dropped Frames:"; ObjectID = "CrF-UR-udW"; */
+"CrF-UR-udW.title" = "الإطارات المسقطة:";
+
+/* Class = "NSTextFieldCell"; title = "Hw Decoder:"; ObjectID = "DHh-ne-10f"; */
+"DHh-ne-10f.title" = "هيو ديكوديرز:";
+
+/* Class = "NSWindow"; title = "Inspector"; ObjectID = "F0z-JX-Cv5"; */
+"F0z-JX-Cv5.title" = "الفاحص";
+
+/* Class = "NSTextFieldCell"; title = "Language:"; ObjectID = "FIw-CH-b05"; */
+"FIw-CH-b05.title" = "اللغة:";
+
+/* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[0] = "General"; ObjectID = "Fqo-1c-3L1"; */
+"Fqo-1c-3L1.ibShadowedLabels[0]" = "عام";
+
+/* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[1] = "Tracks"; ObjectID = "Fqo-1c-3L1"; */
+"Fqo-1c-3L1.ibShadowedLabels[1]" = "المسارات";
+
+/* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[2] = "File"; ObjectID = "Fqo-1c-3L1"; */
+"Fqo-1c-3L1.ibShadowedLabels[2]" = "ملف";
+
+/* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[3] = "Status"; ObjectID = "Fqo-1c-3L1"; */
+"Fqo-1c-3L1.ibShadowedLabels[3]" = "الحالة";
+
+/* Class = "NSTextFieldCell"; title = "Driver:"; ObjectID = "I2E-6Z-Gnn"; */
+"I2E-6Z-Gnn.title" = "برنامج التشغيل:";
+
+/* Class = "NSTextFieldCell"; title = "Estimated Disp FPS"; ObjectID = "JN9-3E-OJp"; */
+"JN9-3E-OJp.title" = "عدد الإطارات/ثانية المقدر";
+
+/* Class = "NSTextFieldCell"; title = "File Path:"; ObjectID = "Jxp-Wf-BhU"; */
+"Jxp-Wf-BhU.title" = "مسار الملف:";
+
+/* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "KqD-NM-WiK"; */
+"KqD-NM-WiK.title" = "الحجم:";
+
+/* Class = "NSTextFieldCell"; title = "Channels:"; ObjectID = "Luq-rQ-aO4"; */
+"Luq-rQ-aO4.title" = "القنوات:";
+
+/* Class = "NSTextFieldCell"; title = "Driver:"; ObjectID = "MME-KZ-jrG"; */
+"MME-KZ-jrG.title" = "برنامج التشغيل:";
+
+/* Class = "NSTextFieldCell"; title = "Duration:"; ObjectID = "OCm-zb-deg"; */
+"OCm-zb-deg.title" = "المدة:";
+
+/* Class = "NSTextFieldCell"; title = "Selected"; ObjectID = "P65-zr-dOH"; */
+"P65-zr-dOH.title" = "تم تحديدها";
+
+/* Class = "NSTextFieldCell"; title = "Chapters:"; ObjectID = "PBk-VC-4gu"; */
+"PBk-VC-4gu.title" = "الفصول:";
+
+/* Class = "NSTextFieldCell"; title = "External"; ObjectID = "PLL-fC-blc"; */
+"PLL-fC-blc.title" = "خارجي";
+
+/* Class = "NSTextFieldCell"; title = "Editions:"; ObjectID = "POj-mQ-zP9"; */
+"POj-mQ-zP9.title" = "الإصدارات:";
+
+/* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "PQD-yB-mm6"; */
+"PQD-yB-mm6.title" = "الصيغة:";
+
+/* Class = "NSTextFieldCell"; title = "Default"; ObjectID = "S3X-Df-UMB"; */
+"S3X-Df-UMB.title" = "الافتراضي";
+
+/* Class = "NSTabViewItem"; label = "Tracks"; ObjectID = "UuR-M1-YLj"; */
+"UuR-M1-YLj.label" = "المسارات";
+
+/* Class = "NSTabViewItem"; label = "Status"; ObjectID = "VGm-BL-xOI"; */
+"VGm-BL-xOI.label" = "الحالة";
+
+/* Class = "NSTabViewItem"; label = "File"; ObjectID = "WrI-Sr-O2S"; */
+"WrI-Sr-O2S.label" = "ملف";
+
+/* Class = "NSTextFieldCell"; title = "Codec:"; ObjectID = "bki-sE-xCA"; */
+"bki-sE-xCA.title" = "الترميز:";
+
+/* Class = "NSTextFieldCell"; title = "Codec:"; ObjectID = "daB-hU-mku"; */
+"daB-hU-mku.title" = "الترميز:";
+
+/* Class = "NSTextFieldCell"; title = "Properties:"; ObjectID = "dtn-wS-j6U"; */
+"dtn-wS-j6U.title" = "خصائص:";
+
+/* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "f2P-qb-wRx"; */
+"f2P-qb-wRx.title" = "الحجم:";
+
+/* Class = "NSTabViewItem"; label = "General"; ObjectID = "f7a-XG-NCc"; */
+"f7a-XG-NCc.label" = "عام";
+
+/* Class = "NSTextFieldCell"; title = "Track:"; ObjectID = "f7i-wX-uxQ"; */
+"f7i-wX-uxQ.title" = "المسار:";
+
+/* Class = "NSTextFieldCell"; title = "Estimated Output FPS:"; ObjectID = "g8p-Ec-awO"; */
+"g8p-Ec-awO.title" = "عدد الإطارات/ثانية المقدر:";
+
+/* Class = "NSTextFieldCell"; title = "VIDEO"; ObjectID = "gDG-Eq-1Bc"; */
+"gDG-Eq-1Bc.title" = "فيديو";
+
+/* Class = "NSTextFieldCell"; title = "A/V Sync Diff:"; ObjectID = "iVK-Ck-Lyq"; */
+"iVK-Ck-Lyq.title" = "فرق المزامنة A/V:";
+
+/* Class = "NSTextFieldCell"; title = "Channels:"; ObjectID = "it3-05-Pwu"; */
+"it3-05-Pwu.title" = "القنوات:";
+
+/* Class = "NSTextFieldCell"; title = "Source ID:"; ObjectID = "jCY-og-BAa"; */
+"jCY-og-BAa.title" = "معرف المصدر:";
+
+/* Class = "NSTextFieldCell"; title = "Bit Rate:"; ObjectID = "jyV-Pd-UvH"; */
+"jyV-Pd-UvH.title" = "معدل بت:";
+
+/* Class = "NSTextFieldCell"; title = "Sample Rate:"; ObjectID = "llF-4b-Z8b"; */
+"llF-4b-Z8b.title" = "معدل العينة:";
+
+/* Class = "NSTextFieldCell"; title = "ID:"; ObjectID = "mZG-ik-Led"; */
+"mZG-ik-Led.title" = "المعرِّف:";
+
+/* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "mgl-Et-20K"; */
+"mgl-Et-20K.title" = "الصيغة:";
+
+/* Class = "NSTextFieldCell"; title = "Codec:"; ObjectID = "n0s-eM-42w"; */
+"n0s-eM-42w.title" = "الترميز:";
+
+/* Class = "NSTextFieldCell"; title = "AUDIO"; ObjectID = "nrG-IH-kFg"; */
+"nrG-IH-kFg.title" = "صوت";
+
+/* Class = "NSTextFieldCell"; title = "Total A/V Sync:"; ObjectID = "sbO-Cn-gpI"; */
+"sbO-Cn-gpI.title" = "إجمالي المزامنة:";
+
+/* Class = "NSTextFieldCell"; title = "Watch"; ObjectID = "tNS-gW-PcC"; */
+"tNS-gW-PcC.title" = "مشاهدة";
+
+/* Class = "NSTextFieldCell"; title = "Sample Rate:"; ObjectID = "vrP-XL-Weg"; */
+"vrP-XL-Weg.title" = "معدل العينة:";
+
+/* Class = "NSTextFieldCell"; title = "Decoder:"; ObjectID = "xix-0S-ehE"; */
+"xix-0S-ehE.title" = "ديكودير:";
+
+/* Class = "NSTextFieldCell"; title = "Primaries:"; ObjectID = "1kw-LO-KmJ"; */
+"1kw-LO-KmJ.title" = "Primaries:";
+
+/* Class = "NSTextFieldCell"; title = "Colorspace:"; ObjectID = "mLo-Wc-BoO"; */
+"mLo-Wc-BoO.title" = "Colorspace:";

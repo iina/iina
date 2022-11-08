@@ -8,7 +8,7 @@
 "1Tq-5k-o6R.title" = "Nahoru";
 
 /* Class = "NSButtonCell"; title = "Display subtitles in letterboxes while in full screen"; ObjectID = "2XY-Un-0Fg"; */
-"2XY-Un-0Fg.title" = "Zobrazit titulky v rámečkách během režimu celé obrazovky";
+"2XY-Un-0Fg.title" = "Zobrazit titulky v rámečcích během režimu celé obrazovky";
 
 /* Class = "NSTextFieldCell"; title = "strip"; ObjectID = "3H8-Ei-cTm"; */
 "3H8-Ei-cTm.title" = "Základní";
@@ -62,7 +62,7 @@
 "LiG-iV-AQK.title" = "Ostatní:";
 
 /* Class = "NSTextFieldCell"; title = "Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed."; ObjectID = "Luv-2B-9v8"; */
-"Luv-2B-9v8.title" = "Adresáře oddělte dvojtečkou (:). Relativní cesty a \"wildcards\" (*) na konci jsou povolené.";
+"Luv-2B-9v8.title" = "Složky oddělte dvojtečkou (:). Relativní cesty a \"wildcards\" (*) na konci jsou povolené.";
 
 /* Class = "NSTextFieldCell"; title = "Please enter a comma-separated list of strings."; ObjectID = "Mk1-sv-QB8"; */
 "Mk1-sv-QB8.title" = "Seznam řetězců oddělte čárkami.";
@@ -71,10 +71,10 @@
 "OcF-0z-7qe.title" = "Všechny ASS titulky budou vykreslené pomocí následujících stylů.";
 
 /* Class = "NSTextFieldCell"; title = "Text subtitles:"; ObjectID = "Qda-dp-nhg"; */
-"Qda-dp-nhg.title" = "Titulky:";
+"Qda-dp-nhg.title" = "Textové titulky:";
 
 /* Class = "NSTextFieldCell"; title = "Also search subtitles in following directories:"; ObjectID = "QsS-wD-2hY"; */
-"QsS-wD-2hY.title" = "Hledat titulky také v následujících adresářích:";
+"QsS-wD-2hY.title" = "Hledat titulky také v následujících složkách:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "SIh-Sv-6XI"; */
 "SIh-Sv-6XI.title" = "Barva:";
@@ -98,7 +98,7 @@
 "Y75-4k-2Du.title" = "Výchozí kódování:";
 
 /* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will work for both mpv and opensubtitles."; ObjectID = "Z2M-dh-eq1"; */
-"Z2M-dh-eq1.title" = "Tato volba bude uložena jako jazykový kód ISO 639-2 a bude kompatibilní s mpv a opensubtitles.";
+"Z2M-dh-eq1.title" = "Tato volba bude uložena jako ISO 639-2 kód a bude kompatibilní s mpv a opensubtitles.";
 
 /* Class = "NSTextFieldCell"; title = "Blur:"; ObjectID = "aO9-D6-KG8"; */
 "aO9-D6-KG8.title" = "Rozostření:";
@@ -116,7 +116,7 @@
 "eYO-c0-Rjp.title" = "Pozadí:";
 
 /* Class = "NSBox"; title = "Other Styles"; ObjectID = "egf-g3-b7a"; */
-"egf-g3-b7a.title" = "Box";
+"egf-g3-b7a.title" = "Další styly";
 
 /* Class = "NSTextFieldCell"; title = "Override level:"; ObjectID = "gAq-Vr-hRY"; */
 "gAq-Vr-hRY.title" = "Úroveň přepsání:";
@@ -149,7 +149,7 @@
 "rZf-bj-qbV.title" = "Ignorovat ASS styly";
 
 /* Class = "NSTextFieldCell"; title = "Auto load:"; ObjectID = "raf-Yu-ck0"; */
-"raf-Yu-ck0.title" = "Automaticky nahrát:";
+"raf-Yu-ck0.title" = "Automatické načítání:";
 
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "slU-Ox-aeF"; */
 "slU-Ox-aeF.title" = "Na střed";

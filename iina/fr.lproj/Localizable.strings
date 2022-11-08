@@ -33,13 +33,13 @@
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Défaut";
 "quicksetting.item_none" = "Aucun";
-"quicksetting.hwdec" = "Décodage Matériel";
+"quicksetting.hwdec" = "Décodage matériel";
 "quicksetting.deinterlace" = "Désentrelacer";
 "quicksetting.hdr" = "HDR";
 
 // OSDMessage.swift
 "osd.pause" = "En pause";
-"osd.resume" = "Reprise de la lecture";
+"osd.resume" = "Reprendre";
 "osd.volume" = "Volume : %i";
 "osd.speed" = "Vitesse : %.2fx";
 "osd.aspect" = "Format d'image : %@";
@@ -61,7 +61,7 @@
 "osd.abloop.b" = "Boucle AB : B";
 "osd.abloop.clear" = "Boucle AB: vidé";
 "osd.stop" = "Arrêté";
-"osd.chapter" = "Chapitre: %@";
+"osd.chapter" = "Chapitre : %@";
 "osd.subtitle_scale" = "Échelle des sous-titres : %.2fx";
 "osd.add_to_playlist" = "Ajouté %i fichiers à la playlist";
 "osd.clear_playlist" = "Playlist vidée";
@@ -82,6 +82,8 @@
 "osd.canceled" = "Annulé";
 "osd.filter_added" = "Filtre ajouté : %@";
 "osd.filter_removed" = "Filtre supprimé";
+"osd.file_loop" = "Lire le fichier en boucle : %@";
+"osd.playlist_loop" = "Lire la liste de lecture en boucle : %@";
 
 "preference.title" = "Préférences";
 "preference.general" = "Général";
@@ -92,6 +94,7 @@
 "preference.control" = "Contrôles";
 "preference.keybindings" = "Raccourcis clavier";
 "preference.advanced" = "Avancé";
+"preference.plugins" = "Extensions";
 "preference.utilities" = "Utilitaires";
 "preference.scripts" = "Scripts";
 "preference.not_logged_in" = "Déconnecté";
@@ -113,6 +116,16 @@
 "menu.pause" = "Pause";
 "menu.resume" = "Lire";
 "menu.speed" = "Vitesse : %.2fx";
+"menu.chapters" = "Show Chapters Panel";
+"menu.hide_chapters" = "Hide Chapters Panel";
+"menu.playlist" = "Show Playlist Panel";
+"menu.hide_playlist" = "Hide Playlist Panel";
+"menu.video" = "Show Video Panel";
+"menu.hide_video" = "Hide Video Panel";
+"menu.audio" = "Show Audio Panel";
+"menu.hide_audio" = "Hide Audio Panel";
+"menu.subtitles" = "Show Subtitles Panel";
+"menu.hide_subtitles" = "Hide Subtitles Panel";
 
 "menu.seek_forward" = "Reculer de %.0fs";
 "menu.seek_backward" = "Avancer de %.0fs";
@@ -126,6 +139,7 @@
 "menu.sub_delay_down" = "Délai des sous-titres -%.1fs";
 
 "menu.crop_custom" = "Personnalisé…";
+"menu.find_online_sub" = "Chercher des sous-titres en ligne sur %@";
 
 "track.none" = "<Aucun>";
 
@@ -141,7 +155,7 @@
 
 "alert.fatal_error" = "Erreur fatale : %@ \nL'application va maintenant quitter.";
 "alert.mpv_error" = "Erreur %@ (%@) lors de la configuration de l'option %@.";
-"alert.sleep" = "Impossible d'empêcher la veille de l'écran !";
+"alert.sleep" = "Impossible d'empêcher la veille de l'écran ! (0x%0X8)";
 
 "alert.unsupported_audio" = "Fichier audio externe non supporté.";
 "alert.unsupported_sub" = "Fichier sous-titre externe non supporté.";
@@ -220,6 +234,9 @@
 "alert.clear_watch_later.title" = "Effacer les progressions de lecture";
 "alert.clear_watch_later.message" = "Souhaitez-vous vraiment effacer les progressions de lecture sauvegardées (\"à regarder plus tard\") ?";
 
+"alert.restore_alerts.title" = "Rétablir les alertes masquées";
+"alert.restore_alerts.message" = "Êtes-vous sûr de vouloir rétablir les alertes sélectionnées ?";
+
 "alert.nothing_to_open" = "Aucun fichier à ouvrir.";
 
 "alert.no_video_track" = "Il n'y a pas de piste vidéo.";
@@ -232,6 +249,15 @@
 "alert.assrt_token_prompt.title" = "Saisissez votre token d'API";
 "alert.assrt_token_prompt.message" = "Veuillez vous inscrire sur la page web ouverte. Récupérez votre token sur votre espace client et saisissez-le ci-dessous :";
 "alert.assrt_token_invalid" = "Votre token d'API Assrt semble être invalide.";
+
+"alert.plugin_uninstall.title" = "Êtes-vous sûr de vouloir désinstaller %@ ?";
+"alert.plugin_uninstall.message" = "Cette extension sera supprimée de votre disque dur.";
+"alert.duplicated_plugin_id" = "Plusieurs extensions ont le même identifiant : \"%@\". Cela peut entraîner des comportements anormaux. Vous pouvez les identifier Préférences - Extensions et le signaler à leurs auteurs. Si une extension est installée localement, vous pouvez changer manuellement son identifiant dans le fichier Info.json de celle-ci.";
+"alert.plugin_no_update" = "Aucune mise à jour disponible.";
+"alert.plugin_update_found.title" = "Mise à jour disponible pour %@";
+"alert.plugin_update_found.message" = "La dernière version est %@. Vous avez %@. Voulez-vous mettre à jour ?";
+"alert.plugin_permission" = "Cette extension demande les autorisations suivantes. Veuillez les vérifier avant de continuer.";
+"alert.plugin_permission_added" = "Cette extension demande les autorisations suivantes. Veuillez les vérifier avant de continuer.";
 
 "playlist.total_length" = "%@ au total";
 "playlist.total_length_with_selected" = "%@ sur %@ sélectionnés";
@@ -301,3 +327,31 @@
 "touchbar.time" = "Position horaire";
 "touchbar.remainingTimeOrTotalDuration" = "Durée restante / Durée totale";
 "touchbar.toggle_pip" = "Activer le mode Image dans l'image";
+
+// Plugin permissions
+
+"permissions.network-request.name" = "Réseau";
+"permissions.network-request.desc" = "Cette extension peut interroger et envoyer des données à ces sites Web :";
+"permissions.network-request.any_site" = "N'import quel site";
+"permissions.show-osd.name" = "Afficher l'OSD";
+"permissions.show-osd.desc" = "Cette extension peut afficher des messages OSD (\"On-Screen Display\").";
+"permissions.show-alert.name" = "Afficher les alertes";
+"permissions.show-alert.desc" = "Cette extension peut afficher des alertes.";
+"permissions.video-overlay.name" = "Ajouter une superposition aux vidéos";
+"permissions.video-overlay.desc" = "Cette extension peut afficher du contenu supplémentaire par-dessus la vidéo.";
+"permissions.file-system.name" = "Accéder au système de fichiers";
+"permissions.file-system.desc" = "Cette extension peut lire ou écrire des fichiers sur votre disque dur, y compris des informations sensibles. Elle peut également appeler d'autres programmes ou applications qui peuvent nuire à votre ordinateur. Assurez-vous qu'elle provient d'une source fiable.";
+
+"plugin.install" = "Installer";
+"plugin.installed" = "Installée";
+"plugin.not_installed" = "Non installée";
+"plugin.local" = "Installée localement";
+"alert.plugin.install_error" = "Une erreur s'est produite lors de l'installation : %@";
+"alert.invalid_url" = "L'URL n'est pas valide.";
+"plugin.install_error.invalid_url" = "L'URL n'est pas valide.";
+"plugin.install_error.file_not_found" = "Impossible de trouver le fichier du paquet.";
+"plugin.install_error.cannot_download" = "Impossible de télécharger l'extension.\n\nRésultat : %@\n";
+"plugin.install_error.cannot_unpackage" = "Impossible de décompresser l'extension.\n\nRésultat : %@\n";
+"plugin.install_error.cannot_load" = "IINA ne parvient pas à charger cette extension. Elle est peut-être dans un mauvais format.";
+"plugin.check_for_updates" = "Vérifier les mises à jour";
+"plugin.updating" = "Téléchargement de la mise à jour…";

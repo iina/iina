@@ -22,14 +22,18 @@ fileprivate extension NSColor {
 }
 
 class PlaySliderCell: NSSliderCell {
+  weak var _playerCore: PlayerCore!
+  var playerCore: PlayerCore {
+    if let player = _playerCore { return player }
 
-  lazy var playerCore: PlayerCore = {
     let windowController = self.controlView!.window!.windowController
     if let mainWindowController = windowController as? MainWindowController {
       return mainWindowController.player
     }
-    return (windowController as! MiniPlayerWindowController).player
-  }()
+    let player = (windowController as! MiniPlayerWindowController).player
+    _playerCore = player
+    return player
+  }
 
   override var knobThickness: CGFloat {
     return knobWidth
@@ -95,6 +99,13 @@ class PlaySliderCell: NSSliderCell {
   override func awakeFromNib() {
     minValue = 0
     maxValue = 100
+    if #available(macOS 11, *) {
+      let slider = self.controlView as! NSSlider
+      // Apple increased the height of sliders in Big Sur. Until we have time to restructure the
+      // on screen controller to accommodate a larger slider reduce the size of the slider from
+      // regular to small. This makes the slider match the behavior seen under Catalina.
+      slider.controlSize = .small
+    }
   }
 
   override func drawKnob(_ knobRect: NSRect) {

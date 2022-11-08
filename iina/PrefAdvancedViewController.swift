@@ -26,6 +26,10 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
     return NSImage(named: NSImage.Name("pref_advanced"))!
   }
 
+  var preferenceContentIsScrollable: Bool {
+    return false
+  }
+
   var hasResizableWidth: Bool = false
 
   var options: [[String]] = []
@@ -70,7 +74,7 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
   // MARK: - IBAction
 
   @IBAction func revealLogDir(_ sender: AnyObject) {
-    NSWorkspace.shared.open(Utility.logDirURL)
+    NSWorkspace.shared.open(Logger.logDirectory)
   }
 
   @IBAction func addOptionBtnAction(_ sender: AnyObject) {

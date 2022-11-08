@@ -49,6 +49,18 @@
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "kbP-VI-dmT"; */
 "kbP-VI-dmT.title" = "Відміна";
 
+/* Class = "NSTextFieldCell"; title = "Restore Alerts"; ObjectID = "AAD-Db-Acs"; */
+"AAD-Db-Acs.title" = "Відновити оповіщення";
+
+/* Class = "NSButtonCell"; title = "Restore Suppressed Alerts…"; ObjectID = "XAz-xa-LVo"; */
+"XAz-xa-LVo.title" = "Відновити приховані оповіщення…";
+
+/* Class = "NSTextFieldCell"; title = "Restored."; ObjectID = "Wdh-me-hdC"; */
+"Wdh-me-hdC.title" = "Відновлено.";
+
+/* Class = "NSTextFieldCell"; title = "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."; ObjectID = "F5i-KF-2SW"; */
+"F5i-KF-2SW.title" = "Кнопка нижче відновить всі оповіщення, що були приховані за допомогою прапорця \"Не показувати це повідомлення знову\".";
+
 /* Class = "NSTextFieldCell"; title = "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."; ObjectID = "pPC-q2-9Gh"; */
 "pPC-q2-9Gh.title" = "Кнопка нижче видалить усі файли з папки відкладеного перегляду. Ці файли містять увесь прогрес перегляду та налаштування, застосовані під час перегляду.";
 

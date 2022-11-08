@@ -11,7 +11,7 @@
 "50C-1R-wlJ.title" = "Počet vláken:";
 
 /* Class = "NSButtonCell"; title = "Force dedicated GPU"; ObjectID = "YUr-aJ-xfC"; */
-"YUr-aJ-xfC.title" = "Force dedicated GPU";
+"YUr-aJ-xfC.title" = "Vynutit používání samostatného grafického procesoru";
 
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "bxW-np-SGm"; */
 "bxW-np-SGm.title" = "Výchozí: 0 (Automaticky)";
@@ -23,7 +23,7 @@
 "g4c-vG-URh.title" = "Počáteční hlasitost:";
 
 /* Class = "NSTextFieldCell"; title = "Always use the dedicated GPU for rendering (if exists). This can improve performance but may result in poor battery life."; ObjectID = "gCv-sJ-uQJ"; */
-"gCv-sJ-uQJ.title" = "Always use the dedicated GPU for rendering (if it exists). This can improve performance but may reduce battery life.";
+"gCv-sJ-uQJ.title" = "Vždy použít samostatný grafický procesor pro vykreslování (pokud existuje). Toto umožňuje zvýšit výkon, ale může zkrátit výdrž baterie.";
 
 /* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
 "m5P-5f-5uo.title" = "Video:";
@@ -51,3 +51,15 @@
 
 /* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "wjt-O6-KbC"; */
 "wjt-O6-KbC.title" = "Preferovaný jazyk:";
+
+/* Class = "NSButtonCell"; title = "Load ICC profile"; ObjectID = "3g4-jW-uJd"; */
+"3g4-jW-uJd.title" = "Načíst ICC profil";
+
+/* Class = "NSTextFieldCell"; title = "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"; ObjectID = "M2M-of-gjd"; */
+"M2M-of-gjd.title" = "Načíst ICC profil pro aktuální displej a použít jej k transformaci RGB videa na výstup obrazovky. (Pouze pro režim SDR)";
+
+/* Class = "NSButtonCell"; title = "Enable HDR support"; ObjectID = "R7Z-9c-vPJ"; */
+"R7Z-9c-vPJ.title" = "Povolit podporu HDR";
+
+/* Class = "NSTextFieldCell"; title = "Enable HDR mode by default when playing HDR videos."; ObjectID = "ZgQ-bc-yEE"; */
+"ZgQ-bc-yEE.title" = "Při přehrávání HDR videí povolit jako výchozí režim HDR.";

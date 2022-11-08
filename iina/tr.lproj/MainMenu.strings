@@ -1,5 +1,5 @@
 /* Class = "NSMenuItem"; title = "Subtitle Delay + 0.1s"; ObjectID = "0Cz-OE-85L"; */
-"0Cz-OE-85L.title" = "Altyazı Gecikme + 0.1 sn";
+"0Cz-OE-85L.title" = "+0,1 sn Altyazı Geciktir";
 
 /* Class = "NSMenuItem"; title = "Show Playlist Panel"; ObjectID = "0T7-Nu-SL7"; */
 "0T7-Nu-SL7.title" = "Oynatma Listesi Paneli";
@@ -23,22 +23,22 @@
 "2aU-bk-bmu.title" = "Kes";
 
 /* Class = "NSMenuItem"; title = "Jump to…"; ObjectID = "2id-wn-xsC"; */
-"2id-wn-xsC.title" = "Şu zamana atla…";
+"2id-wn-xsC.title" = "Şu Zamana Atla…";
 
-/* Class = "NSMenuItem"; title = "Show Quick Settings Panel"; ObjectID = "2t8-Ot-yoO"; */
-"2t8-Ot-yoO.title" = "Hızlı Ayarlar Panelini Göster";
+/* Class = "NSMenuItem"; title = "Show Video Panel"; ObjectID = "2t8-Ot-yoO"; */
+"2t8-Ot-yoO.title" = "Show Video Panel";
 
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "3Ax-P3-QQu"; */
-"3Ax-P3-QQu.title" = "Hepsini Seç";
+"3Ax-P3-QQu.title" = "Tümünü Seç";
 
-/* Class = "NSMenuItem"; title = "Show Quick Settings Panel"; ObjectID = "43n-Ed-5kT"; */
-"43n-Ed-5kT.title" = "Hızlı Ayarlar Panelini Göster";
+/* Class = "NSMenuItem"; title = "Show Audio Panel"; ObjectID = "43n-Ed-5kT"; */
+"43n-Ed-5kT.title" = "Show Audio Panel";
 
 /* Class = "NSMenuItem"; title = "Audio Delay + 0.5s"; ObjectID = "4ae-MT-2L1"; */
-"4ae-MT-2L1.title" = "Ses Gecikmesi + 0.5 sn";
+"4ae-MT-2L1.title" = "+0,5 sn Ses Geciktir";
 
 /* Class = "NSMenuItem"; title = "Quit IINA"; ObjectID = "4sb-4s-VLi"; */
-"4sb-4s-VLi.title" = "IINA'den Çık";
+"4sb-4s-VLi.title" = "IINA'dan Çık";
 
 /* Class = "NSMenuItem"; title = "Reset Speed"; ObjectID = "5Gn-90-oDu"; */
 "5Gn-90-oDu.title" = "Hızı Sıfırla";
@@ -53,7 +53,7 @@
 "6Eq-ni-6hG.title" = "Tam Ekrana Geç";
 
 /* Class = "NSMenuItem"; title = "Step Forward 5s"; ObjectID = "6yE-op-DTS"; */
-"6yE-op-DTS.title" = "İleriye Sar 5 sn";
+"6yE-op-DTS.title" = "5 sn İleri Sar";
 
 /* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "7Bn-Mp-EvJ"; */
 "7Bn-Mp-EvJ.title" = "Dönüşümler";
@@ -70,14 +70,14 @@
 /* Class = "NSMenuItem"; title = "Speed:"; ObjectID = "8pV-XQ-AvB"; */
 "8pV-XQ-AvB.title" = "Hız:";
 
-/* Class = "NSMenuItem"; title = "Show Quick Settings Panel"; ObjectID = "8y7-Cy-lKT"; */
-"8y7-Cy-lKT.title" = "Hızlı Ayarlar Panelini Göster";
+/* Class = "NSMenuItem"; title = "Show Subtitles Panel"; ObjectID = "8y7-Cy-lKT"; */
+"8y7-Cy-lKT.title" = "Show Subtitles Panel";
 
 /* Class = "NSMenuItem"; title = "Speed Up to 1.1x"; ObjectID = "91n-xW-L37"; */
 "91n-xW-L37.title" = "1.1x Hızlandır";
 
 /* Class = "NSMenuItem"; title = "Audio Delay - 0.1s"; ObjectID = "9ee-7i-xs7"; */
-"9ee-7i-xs7.title" = "Ses Gecikmesi - 0.1 sn";
+"9ee-7i-xs7.title" = "-0,1 sn Ses Geciktir";
 
 /* Class = "NSMenuItem"; title = "<None>"; ObjectID = "9pa-9C-ueQ"; */
 "9pa-9C-ueQ.title" = "<Hiçbiri>";
@@ -146,7 +146,7 @@
 "GF1-xB-KcA.title" = "Ses İzi";
 
 /* Class = "NSMenuItem"; title = "Next Media"; ObjectID = "GR6-4V-lRT"; */
-"GR6-4V-lRT.title" = "Sonraki Medya";
+"GR6-4V-lRT.title" = "Sonraki Ortam";
 
 /* Class = "NSMenuItem"; title = "Playlist"; ObjectID = "Gi5-1S-RQB"; */
 "Gi5-1S-RQB.title" = "Oynatma Listesi";
@@ -176,7 +176,7 @@
 "IXq-yq-uDF.title" = "Ses Aygıtı";
 
 /* Class = "NSMenuItem"; title = "Horizontal (Mirror)"; ObjectID = "JJq-qH-toq"; */
-"JJq-qH-toq.title" = "Yatay (Ayna)";
+"JJq-qH-toq.title" = "Yatay (Yansıla)";
 
 /* Class = "NSMenuItem"; title = "Open…"; ObjectID = "Kby-lQ-HCW"; */
 "Kby-lQ-HCW.title" = "Aç...";
@@ -185,19 +185,19 @@
 "Kd2-mp-pUS.title" = "Tümünü Göster";
 
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "LE2-aR-0XJ"; */
-"LE2-aR-0XJ.title" = "Hepsini Öne Getir";
+"LE2-aR-0XJ.title" = "Tümünü Öne Getir";
 
 /* Class = "NSMenuItem"; title = "Playback History"; ObjectID = "LND-1n-DU2"; */
 "LND-1n-DU2.title" = "Oynatma Geçmişi";
 
 /* Class = "NSMenuItem"; title = "Audio Delay - 0.5s"; ObjectID = "Lc4-4W-thE"; */
-"Lc4-4W-thE.title" = "Ses Gecikmesi - 0.5 sn";
+"Lc4-4W-thE.title" = "-0,5 sn Ses Geciktir";
 
 /* Class = "NSMenuItem"; title = "Speed Up to 2x"; ObjectID = "Lqa-OG-EEg"; */
 "Lqa-OG-EEg.title" = "2x Hızlandır";
 
 /* Class = "NSMenuItem"; title = "Subtitle Delay - 0.5s"; ObjectID = "LsU-Qz-dax"; */
-"LsU-Qz-dax.title" = "Altyazı Gecikmesi - 0.5 sn";
+"LsU-Qz-dax.title" = "- 0,5 sn Altyazı Geciktir";
 
 /* Class = "NSMenuItem"; title = "Find Online Subtitles…"; ObjectID = "Mg3-WB-gjZ"; */
 "Mg3-WB-gjZ.title" = "Çevrimiçi Altyazı Bul…";
@@ -206,7 +206,7 @@
 "Mjr-lL-oEt.title" = "Oynatma Listesini Kaydet...";
 
 /* Class = "NSMenuItem"; title = "Services"; ObjectID = "NMo-om-nkz"; */
-"NMo-om-nkz.title" = "Hizmetler";
+"NMo-om-nkz.title" = "Servisler";
 
 /* Class = "NSMenuItem"; title = "Paste"; ObjectID = "NdF-0z-k5s"; */
 "NdF-0z-k5s.title" = "Yapıştır";
@@ -224,10 +224,10 @@
 "P1a-ot-P31.title" = "Altyazı Boyutunu Sıfırla";
 
 /* Class = "NSMenuItem"; title = "Encoding"; ObjectID = "Pci-OQ-Vni"; */
-"Pci-OQ-Vni.title" = "Karakter kodlaması";
+"Pci-OQ-Vni.title" = "Karakter Kodlaması";
 
 /* Class = "NSMenu"; title = "Encoding"; ObjectID = "Pf6-5i-B1E"; */
-"Pf6-5i-B1E.title" = "Karakter kodlaması";
+"Pf6-5i-B1E.title" = "Karakter Kodlaması";
 
 /* Class = "NSMenuItem"; title = "Video Filters…"; ObjectID = "PyY-pR-jz7"; */
 "PyY-pR-jz7.title" = "Video Filtreleri…";
@@ -248,7 +248,7 @@
 "SLr-6g-Mgh.title" = "Altyazı Gecikmesini Sıfırla";
 
 /* Class = "NSMenuItem"; title = "Step Backward 5s"; ObjectID = "Sif-85-FF1"; */
-"Sif-85-FF1.title" = "5 sn Geriye Sar";
+"Sif-85-FF1.title" = "5 sn Geri Sar";
 
 /* Class = "NSMenuItem"; title = "Subtitle Delay: "; ObjectID = "THG-4o-U6A"; */
 "THG-4o-U6A.title" = "Altyazı Gecikmesi: ";
@@ -275,22 +275,22 @@
 "WOL-Us-ByA.title" = "Sesi Kapat";
 
 /* Class = "NSMenuItem"; title = "Volume + 5%"; ObjectID = "Wbq-vt-hzX"; */
-"Wbq-vt-hzX.title" = "Ses Seviyesi + 5%";
+"Wbq-vt-hzX.title" = "%5 Ses Artır";
 
 /* Class = "NSMenuItem"; title = "Next Frame"; ObjectID = "XDC-Pc-rS1"; */
 "XDC-Pc-rS1.title" = "Sonraki Kare";
 
 /* Class = "NSMenuItem"; title = "Scale Up"; ObjectID = "XHu-Dl-Vq2"; */
-"XHu-Dl-Vq2.title" = "Boyutu Arttır";
+"XHu-Dl-Vq2.title" = "Boyutu Artır";
 
 /* Class = "NSMenuItem"; title = "Undo"; ObjectID = "XPz-ml-OQ3"; */
 "XPz-ml-OQ3.title" = "Geri Al";
 
 /* Class = "NSMenuItem"; title = "Smaller Size"; ObjectID = "ZOF-MG-6II"; */
-"ZOF-MG-6II.title" = "Küçült";
+"ZOF-MG-6II.title" = "Daha Küçük Boyut";
 
 /* Class = "NSMenuItem"; title = "Volume - 1%"; ObjectID = "Zhv-Bz-I5V"; */
-"Zhv-Bz-I5V.title" = "Ses Seviyesi - 1%";
+"Zhv-Bz-I5V.title" = "%1 Ses Azalt";
 
 /* Class = "NSMenuItem"; title = "Custom Touch Bar…"; ObjectID = "ZnF-yX-7jP"; */
 "ZnF-yX-7jP.title" = "Touch Bar'ı Düzenle...";
@@ -323,10 +323,10 @@
 "c1x-bx-69F.title" = "Normal Boyut (Retina)";
 
 /* Class = "NSMenuItem"; title = "Volume + 1%"; ObjectID = "c6Y-0e-vgf"; */
-"c6Y-0e-vgf.title" = "Ses Seviyesi + 1%";
+"c6Y-0e-vgf.title" = "%1 Ses Artır";
 
 /* Class = "NSMenuItem"; title = "Aspect Ratio"; ObjectID = "d15-8v-dXA"; */
-"d15-8v-dXA.title" = "En/Boy Oranı";
+"d15-8v-dXA.title" = "En-Boy Oranı";
 
 /* Class = "NSMenu"; title = "Chapters"; ObjectID = "d9c-me-L2H"; */
 "d9c-me-L2H.title" = "Bölümler";
@@ -356,13 +356,13 @@
 "h9w-Rj-Hm1.title" = "Sil";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "hz9-B4-Xy5"; */
-"hz9-B4-Xy5.title" = "Hizmetler";
+"hz9-B4-Xy5.title" = "Servisler";
 
 /* Class = "NSMenuItem"; title = "A-B Loop"; ObjectID = "i3P-Xw-8D7"; */
 "i3P-Xw-8D7.title" = "A-B Döngüsü";
 
 /* Class = "NSMenuItem"; title = "Volume:"; ObjectID = "iQF-1S-9EK"; */
-"iQF-1S-9EK.title" = "Ses Seviyesi:";
+"iQF-1S-9EK.title" = "Ses Düzeyi:";
 
 /* Class = "NSMenuItem"; title = "Video Track"; ObjectID = "j8P-Gb-HR7"; */
 "j8P-Gb-HR7.title" = "Video İzi";
@@ -374,13 +374,13 @@
 "k6x-hf-ATi.title" = "Dışarıdan Altyazı Dosyası Ekle…";
 
 /* Class = "NSMenuItem"; title = "Bigger Size"; ObjectID = "lDC-IC-peP"; */
-"lDC-IC-peP.title" = "Büyüt";
+"lDC-IC-peP.title" = "Daha Büyük Boyut";
 
 /* Class = "NSMenuItem"; title = "Audio"; ObjectID = "lYN-0x-lzT"; */
 "lYN-0x-lzT.title" = "Ses";
 
 /* Class = "NSMenuItem"; title = "Audio Delay + 0.1s"; ObjectID = "lew-3S-oGY"; */
-"lew-3S-oGY.title" = "Ses Gecikmesi + 0.1s";
+"lew-3S-oGY.title" = "+0,1 sn Ses Geciktir";
 
 /* Class = "NSMenuItem"; title = "Go to Screenshot Folder"; ObjectID = "lj0-Oo-7nB"; */
 "lj0-Oo-7nB.title" = "Ekran Görüntüsü Klasörüne Git";
@@ -404,31 +404,31 @@
 "n90-to-nRT.title" = "Çevir";
 
 /* Class = "NSMenuItem"; title = "Delete Current File"; ObjectID = "npH-8B-XA4"; */
-"npH-8B-XA4.title" = "Şu Anki Dosyayı Sil";
+"npH-8B-XA4.title" = "Geçerli Dosyayı Sil";
 
 /* Class = "NSMenu"; title = "Open Recent"; ObjectID = "oas-Oc-fiZ"; */
 "oas-Oc-fiZ.title" = "Son Kullanılanları Aç";
 
 /* Class = "NSMenuItem"; title = "Previous Media"; ObjectID = "oqG-7L-NLD"; */
-"oqG-7L-NLD.title" = "Önceki Medya";
+"oqG-7L-NLD.title" = "Önceki Ortam";
 
 /* Class = "NSMenuItem"; title = "Previous Frame"; ObjectID = "oxF-BB-lBy"; */
 "oxF-BB-lBy.title" = "Önceki Kare";
 
 /* Class = "NSMenuItem"; title = "Subtitle Delay + 0.5s"; ObjectID = "pAo-L5-qTO"; */
-"pAo-L5-qTO.title" = "Altyazı Gecikmesi +0.5 sn";
+"pAo-L5-qTO.title" = "+0,5 sn Altyazı Geciktir";
 
 /* Class = "NSMenuItem"; title = "Edit"; ObjectID = "pWh-nh-0pN"; */
-"pWh-nh-0pN.title" = "Düzenle";
+"pWh-nh-0pN.title" = "Düzen";
 
 /* Class = "NSMenuItem"; title = "Volume - 5%"; ObjectID = "pdj-9C-Fn1"; */
-"pdj-9C-Fn1.title" = "Ses Seviyesi - 5%";
+"pdj-9C-Fn1.title" = "%5 Ses Azalt";
 
 /* Class = "NSMenuItem"; title = "Previous Chapter"; ObjectID = "pqF-SZ-Ifz"; */
 "pqF-SZ-Ifz.title" = "Önceki Bölüm";
 
 /* Class = "NSMenuItem"; title = "Font…"; ObjectID = "rme-fr-5rr"; */
-"rme-fr-5rr.title" = "Yazı Tipi...";
+"rme-fr-5rr.title" = "Font…";
 
 /* Class = "NSMenu"; title = "Audio"; ObjectID = "sW8-ri-eA5"; */
 "sW8-ri-eA5.title" = "Ses";
@@ -461,7 +461,7 @@
 "vuV-uP-CAD.title" = "Kaydedilmiş Ses Filtreleri";
 
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "w8n-XJ-Pgi"; */
-"w8n-XJ-Pgi.title" = "Düzenle";
+"w8n-XJ-Pgi.title" = "Düzen";
 
 /* Class = "NSMenuItem"; title = "Float on Top"; ObjectID = "wex-rX-PcY"; */
 "wex-rX-PcY.title" = "En Üstte Kal";

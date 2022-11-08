@@ -22,9 +22,16 @@ $ git rebase upstream/develop
 ```
 * Please submit separate pull requests for different features; i.e. try not to shove multiple, unrelated changes into one pull request.
 * Please make sure the pull request only contains changes that you've made intentionally; if you didn't mean to touch a file, you should probably not include it in your commit. Here are some files that like to have spurious changes in them:
-  - `Podfile.lock`: This file may change if you have a different CocoaPods version installed than the project maintainers. We suggest updating to the ~~latest release~~ whatever `sudo gem install cocoapods --pre` gives you, at least until CocoaPods 1.6 is released.
   - `project.pbxproj`: This file may change if you sign the project with a different developer account. Changes due to adding or removing files are OK, generally.
   - `xib` files: Please discard changes to an `xib` file if you didn't change anything in it.
+
+### Localizations
+
+We use [Crowdin](https://crowdin.com/project/iina) for localization.
+When there is a UI text change, only add/update the strings in `Base.lproj` and `en.lproj`.
+Please do not include any localization changes for other languages in the pull request.
+New strings on the develop branch from the `en.lproj` folder will be synced automatically to Crowdin, and we will fetch the latest translations from Crowdin before
+releasing the next version.
 
 ## Some Guidelines
 
@@ -44,7 +51,7 @@ $ git rebase upstream/develop
 
 * Use a XIB for UI if possible for things like as positioning of UI elements, whether a view uses layer, Cocoa bindings, etc.
 * Add comments when necessary.
-* Use 2 spaces for indentation.
+* Use 2 spaces for indentation and remove trailing spaces.
 * There's no fixed guidelines for code style, unfortunately, so please use your best judgement in making the code look consistent. We may add one in the future.
 
 ### Current structure

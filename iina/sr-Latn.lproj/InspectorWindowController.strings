@@ -38,7 +38,7 @@
 "FIw-CH-b05.title" = "Jezik:";
 
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[0] = "General"; ObjectID = "Fqo-1c-3L1"; */
-"Fqo-1c-3L1.ibShadowedLabels[0]" = "Opšte postavke";
+"Fqo-1c-3L1.ibShadowedLabels[0]" = "Opšte";
 
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[1] = "Tracks"; ObjectID = "Fqo-1c-3L1"; */
 "Fqo-1c-3L1.ibShadowedLabels[1]" = "Zapisi";
@@ -110,7 +110,7 @@
 "f2P-qb-wRx.title" = "Veličina:";
 
 /* Class = "NSTabViewItem"; label = "General"; ObjectID = "f7a-XG-NCc"; */
-"f7a-XG-NCc.label" = "Opšte postavke";
+"f7a-XG-NCc.label" = "Opšte";
 
 /* Class = "NSTextFieldCell"; title = "Track:"; ObjectID = "f7i-wX-uxQ"; */
 "f7i-wX-uxQ.title" = "Zapis:";
@@ -152,10 +152,16 @@
 "sbO-Cn-gpI.title" = "Ukupna A/V sinhronizacija:";
 
 /* Class = "NSTextFieldCell"; title = "Watch"; ObjectID = "tNS-gW-PcC"; */
-"tNS-gW-PcC.title" = "Gledaj";
+"tNS-gW-PcC.title" = "Nadgledaj";
 
 /* Class = "NSTextFieldCell"; title = "Sample Rate:"; ObjectID = "vrP-XL-Weg"; */
 "vrP-XL-Weg.title" = "Brzina uzorka:";
 
 /* Class = "NSTextFieldCell"; title = "Decoder:"; ObjectID = "xix-0S-ehE"; */
 "xix-0S-ehE.title" = "Dekoder:";
+
+/* Class = "NSTextFieldCell"; title = "Primaries:"; ObjectID = "1kw-LO-KmJ"; */
+"1kw-LO-KmJ.title" = "Primaries:";
+
+/* Class = "NSTextFieldCell"; title = "Colorspace:"; ObjectID = "mLo-Wc-BoO"; */
+"mLo-Wc-BoO.title" = "Colorspace:";

@@ -1,0 +1,357 @@
+/*
+  String_ui.strings
+  iina
+
+  Created by lhc on 3/1/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+// Common
+
+"general.on" = "Bật";
+"general.off" = "Tắt";
+"general.login" = "Đăng nhập";
+"general.logout" = "Đăng xuất";
+"general.ok" = "OK";
+"general.cancel" = "Hủy";
+"general.username" = "Tên đăng nhập";
+"general.password" = "Mật khẩu";
+
+// Guide Window
+"guide.highlights" = "Vùng sáng";
+"guide.basic_settings" = "Cài đặt cơ bản";
+"guide.faq" = "Câu hỏi Thường Gặp";
+
+// MainWindowController.swift
+"main.buffering_indicator" = "Buffering… %d%%";
+"main.opening_stream" = "Mở luồng…";
+"osc.precision" = "Độ chính xác";
+"osc.1s" = "1 giây";
+"osc.100ms" = "100 mili giây";
+"osc.10ms" = "10 mili giây";
+"osc.1ms" = "1 phần ngàn giây";
+
+// QuickSettingViewController.swift
+"quicksetting.item_default" = "Mặc định";
+"quicksetting.item_none" = "Không";
+"quicksetting.hwdec" = "Bộ giải mã phần cứng";
+"quicksetting.deinterlace" = "Khử nhoè";
+"quicksetting.hdr" = "Chế độ HDR";
+
+// OSDMessage.swift
+"osd.pause" = "Tạm dừng";
+"osd.resume" = "Tiếp tục";
+"osd.volume" = "Âm lượng: %i";
+"osd.speed" = "Tốc độ: %.2fx";
+"osd.aspect" = "Tỉ lệ khung hình: %@";
+"osd.crop" = "Cắt: %@";
+"osd.rotate" = "Rotate: %i°";
+"osd.deinterlace" = "Deinterlace: %@";
+"osd.hwdec" = "Hardware Decoding: %@";
+"osd.audio_delay.nodelay" = "Độ trễ âm thanh: Không trễ";
+"osd.audio_delay.later" = "Độ trễ âm thanh: %.2fs trễ";
+"osd.audio_delay.earlier" = "Độ trễ âm thanh: %.2fs nhanh";
+"osd.sub_delay.nodelay" = "Subtitle Delay: No Delay";
+"osd.sub_delay.later" = "Subtitle Delay: %.2fs Later";
+"osd.sub_delay.earlier" = "Subtitle Delay: %.2fs Earlier";
+"osd.subtitle_pos" = "Subtitle Position: %.1f";
+"osd.mute" = "Tắt tiếng";
+"osd.unmute" = "Bật tiếng";
+"osd.screenshot" = "Đã chụp màn hình";
+"osd.abloop.a" = "AB-Loop: A";
+"osd.abloop.b" = "AB-Loop: B";
+"osd.abloop.clear" = "AB-Loop: Cleared";
+"osd.stop" = "Dừng";
+"osd.chapter" = "Chapter: %@";
+"osd.subtitle_scale" = "Subtitle Scale: %.2fx";
+"osd.add_to_playlist" = "Added %i Files to Playlist";
+"osd.clear_playlist" = "Đã xóa danh sách phát";
+"osd.video_eq.contrast" = "Tương phản: %i";
+"osd.video_eq.gamma" = "Gamma: %i";
+"osd.video_eq.hue" = "Nền màu: %i";
+"osd.video_eq.saturation" = "Độ rực màu: %i";
+"osd.video_eq.brightness" = "Độ sáng: %i";
+"osd.find_online_sub" = "Tìm phụ đề trực tuyến…";
+"osd.find_online_sub.source" = "từ";
+"osd.sub_not_found" = "Không tìm thấy phụ đề";
+"osd.sub_found" = "Tìm thấy %d phụ đề. Đang tải…";
+"osd.sub_downloaded" = "Đã tải phụ đề";
+"osd.sub_saved" = "Đã lưu phụ đề";
+"osd.network_error" = "Lỗi mạng";
+"osd.file_error" = "Lỗi đọc tập tin";
+"osd.cannot_login" = "Không thể đăng nhập";
+"osd.canceled" = "Đã hủy";
+"osd.filter_added" = "Bộ lọc đã thêm: %@";
+"osd.filter_removed" = "Bộ lọc đã xoá";
+"osd.file_loop" = "File Loop: %@";
+"osd.playlist_loop" = "Playlist Loop: %@";
+
+"preference.title" = "Cài đặt";
+"preference.general" = "Tổng quan";
+"preference.ui" = "Giao diện";
+"preference.video_audio" = "Hình ảnh/Âm thanh";
+"preference.subtitle" = "Phụ đề";
+"preference.network" = "Mạng";
+"preference.control" = "Điều khiển";
+"preference.keybindings" = "Các tổ hợp phím";
+"preference.advanced" = "Nâng cao";
+"preference.plugins" = "Plugins";
+"preference.utilities" = "Tiện ích";
+"preference.scripts" = "Tập lệnh";
+"preference.not_logged_in" = "Chưa đăng nhập";
+"preference.logged_in_as" = "Đăng nhập với vai trò %@";
+"preference.system_media_control" = "Dùng phím điều khiển media của hệ thống";
+
+"preference.key_binding_hint_1" = "To edit key bindings in current configuration file, click \"Duplicate…\" button first to create a copy.";
+"preference.key_binding_hint_2" = "Double click a row at the right side to edit the corresponding key binding.";
+
+"preference.enable_adv_settings" = "Enable advanced settings";
+
+"menu.volume" = "Volume: %d";
+"menu.audio_delay" = "Audio Delay: %.2fs";
+"menu.sub_delay" = "Subtitle Delay: %.2fs";
+"menu.fullscreen" = "Enter Full Screen";
+"menu.exit_fullscreen" = "Exit Full Screen";
+"menu.pip" = "Enter Picture-in-Picture";
+"menu.exit_pip" = "Exit Picture-in-Picture";
+"menu.pause" = "Pause";
+"menu.resume" = "Resume";
+"menu.speed" = "Speed: %.2fx";
+"menu.chapters" = "Show Chapters Panel";
+"menu.hide_chapters" = "Hide Chapters Panel";
+"menu.playlist" = "Show Playlist Panel";
+"menu.hide_playlist" = "Hide Playlist Panel";
+"menu.video" = "Show Video Panel";
+"menu.hide_video" = "Hide Video Panel";
+"menu.audio" = "Show Audio Panel";
+"menu.hide_audio" = "Hide Audio Panel";
+"menu.subtitles" = "Show Subtitles Panel";
+"menu.hide_subtitles" = "Hide Subtitles Panel";
+
+"menu.seek_forward" = "Step Forward %.0fs";
+"menu.seek_backward" = "Step Backward %.0fs";
+"menu.speed_up" = "Speed Up by %.1fx";
+"menu.speed_down" = "Speed Down by %.1fx";
+"menu.volume_up" = "Volume + %.0f%%";
+"menu.volume_down" = "Âm lượng - %.0f%%";
+"menu.audio_delay_up" = "Audio Delay + %.1fs";
+"menu.audio_delay_down" = "Audio Delay - %.1fs";
+"menu.sub_delay_up" = "Subtitle Delay + %.1fs";
+"menu.sub_delay_down" = "Subtitle Delay - %.1fs";
+
+"menu.crop_custom" = "Tùy chỉnh...";
+"menu.find_online_sub" = "Find Online Subtitles from %@";
+
+"track.none" = "<None>";
+
+"subtrack.no_loaded" = "No Subtitles Loaded";
+"subtrack.no_external" = "No External Subtitles Found";
+
+// Alerts
+"alert.beta_channel.title" = "Receive Updates for Beta Versions";
+
+"alert.title_error" = "Lỗi";
+"alert.title_warning" = "Cảnh báo";
+"alert.title_info" = "Thông tin";
+
+"alert.fatal_error" = "Lỗi nghiêm trọng: %@ \nỨng dụng sẽ đóng ngay bây giờ.";
+"alert.mpv_error" = "Lỗi nội bộ %@ (%@) khi đặt thiết lập %@.";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
+
+"alert.unsupported_audio" = "Unsupported external audio file.";
+"alert.unsupported_sub" = "Unsupported external subtitle.";
+"alert.unsupported_url" = "URL không được hỗ trợ.";
+"alert.wrong_url_format" = "Sai định dạng URL.";
+
+"alert.error_open" = "Không thể mở tệp hoặc luồng!";
+"alert.error_finding_file" = "Không thể tìm thấy tệp %@!";
+"alert.error_loading_script" = "Cannot load script %@!";
+"alert.error_saving_file" = "Error occured when saving %@: %@";
+"alert.error_deleting_file" = "Cannot delete the file.";
+
+"alert.config.new.title" = "New Input Configuration";
+"alert.config.new.message" = "Please enter a name for the new configuration.";
+"alert.config.duplicate.title" = "Duplicate Configuration";
+"alert.config.duplicate.message" = "Please enter name for the duplicated configuration file.";
+"alert.config.empty_name" = "The name cannot be empty.";
+"alert.config.name_existing" = "The name already exists.";
+"alert.config.file_existing.title" = "File Already Exists";
+"alert.config.file_existing.message" = "This should not happen. Choose OK to overwrite, Cancel to reveal the file in Finder.";
+"alert.config.cannot_create" = "Cannot create config file!\n%@";
+"alert.config.cannot_write" = "Cannot write to config file!";
+
+"alert.filter.incorrect" = "Error occured when setting filters. Please check your parameter format.";
+"alert.add_filter.title" = "New Filter";
+"alert.add_filter.message" = "Please enter a filter string in format of mpv's vf or af command.";
+
+"alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
+
+"alert.extra_option.cannot_read" = "Cannot read user defined extra mpv options.";
+"alert.extra_option.empty" = "Key or value cannot be empty!";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
+"alert.extra_option.config_folder" = "Error setting config directory \"%@\".";
+
+"alert.playlist.error_deleting" = "Error deleting: %@";
+
+"alert.sub.no_selected" = "Please select a downloaded subtitle first.";
+"alert.sub_lang_not_set" = "Please set preferred subtitle languages in preferences before using OpenSubtitles. English(eng) will be used this time.";
+"alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
+"alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
+
+"alert.set_default.title" = "Setting IINA as Default App";
+"alert.set_default.message" = "IINA will be set as the default app for all file types it supports.";
+"alert.set_default.success" = "Finished with %d success and %d failed.";
+
+"alert.add_watch.title" = "Add Watch Property";
+"alert.add_watch.message" = "Please enter a valid mpv property name.";
+
+"alert.jump_to.title" = "Jump to";
+"alert.jump_to.message" = "Please enter the time you want to jump to. Example: 20:35";
+
+"alert.opensub.login.title" = "OpenSubtitles Login";
+"alert.opensub.login.message" = "Please enter your username and password";
+
+"alert.open_url.title" = "Open URL";
+"alert.open_url.message" = "Please enter the URL:";
+"alert.choose_media_file.title" = "Choose Media Files";
+
+"alert.add_url.title" = "Add URL";
+"alert.add_url.message" = "Please enter the URL:";
+
+"alert.delete_history.title" = "Delete Playback History";
+"alert.delete_history.message" = "Are you sure to delete selected entries?";
+
+"alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
+"alert.filter_hwdec.abort" = "Abort";
+"alert.filter_hwdec.turn_off" = "Turn off hardware decoding";
+"alert.filter_hwdec.use_copy" = "Switch to Auto(Copy)";
+
+"alert.clear_cache.title" = "Clear Thumbnail Cache";
+"alert.clear_cache.message" = "Are you sure to clear all thumbnail Cache?";
+
+"alert.clear_history.title" = "Clear Playback History";
+"alert.clear_history.message" = "Are you sure to delete all playback history?";
+
+"alert.clear_watch_later.title" = "Clear Saved Playback Progress";
+"alert.clear_watch_later.message" = "Are you sure to delete all saved playback progress (\"watch later\" data)?";
+
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
+
+"alert.nothing_to_open" = "Nothing to open.";
+
+"alert.no_video_track" = "There is no video track.";
+
+"alert.duplicate_config" = "You cannot edit default configurations directly. Please duplicate one before editing.";
+
+"alert.assrt_register" = "Due to limited API quota, you are strongly recommended to use your own API token. The default token is only for demo usage, and you may encounter network error.";
+"alert.assrt_register.register" = "Register Now";
+"alert.assrt_register.try" = "Try First";
+"alert.assrt_token_prompt.title" = "Enter your API token";
+"alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
+"alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
+
+"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
+"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
+"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+"alert.plugin_no_update" = "No update found.";
+"alert.plugin_update_found.title" = "Update found for %@";
+"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
+"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
+"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+
+"playlist.total_length" = "%@ in total";
+"playlist.total_length_with_selected" = "%@ of %@ selected";
+"pl_menu.title_multi" = "%d Items";
+"pl_menu.play_next" = "Play Next";
+"pl_menu.play_in_new_window" = "Play in New Window";
+"pl_menu.remove" = "Remove";
+"pl_menu.remove_multi" = "Remove Selected";
+"pl_menu.delete" = "Move to Trash";
+"pl_menu.delete_multi" = "Move Selected Files to Trash";
+"pl_menu.delete_after_play" = "Move to Trash After Playback";
+"pl_menu.delete_after_play_multi" = "Move Selected Files to Trash After Playback";
+"pl_menu.reveal_in_finder" = "Reveal in Finder";
+"pl_menu.add_file" = "Add File…";
+"pl_menu.add_url" = "Add URL…";
+"pl_menu.clear_playlist" = "Clear Playlist";
+"pl_menu.matched_sub" = "Matched %d Subtitle(s)";
+"pl_menu.add_sub" = "Add Subtitle…";
+"pl_menu.wrong_sub" = "Wrong Subtitle!";
+"pl_menu.browser" = "Open in Browser";
+"pl_menu.copy_url" = "Copy URL";
+"pl_menu.copy_url_multi" = "Copy URLs";
+
+"keymapping.title" = "Key Mapping";
+"keymapping.message" = "Press any key to record.";
+
+"filter.video_filters" = "Video Filters";
+"filter.audio_filters" = "Audio Filters";
+
+"hwdec.no" = "Disable hardware decoding.";
+"hwdec.auto" = "Enable hardware decoding. However, most of the video filters won't work properly.";
+"hwdec.auto-copy" = "Enable hardware decoding. It will consume double the memory but work with video filters.";
+
+"subencoding.auto" = "Auto detect";
+
+"osc_toolbar.settings" = "Quick Settings";
+"osc_toolbar.playlist" = "Playlist and chapters";
+"osc_toolbar.pip" = "Toggle Picture-in-Picture";
+"osc_toolbar.full_screen" = "Toggle full screen";
+"osc_toolbar.music_mode" = "Enter music mode";
+"osc_toolbar.sub_track" = "Choose subtitle track";
+
+"mini_player.album_art" = "Toggle album art";
+"mini_player.loop" = "Repeat";
+"mini_player.shuffle" = "Shuffle";
+"mini_player.remove" = "Remove from playlist";
+"mini_player.add" = "Add to playlist";
+"mini_player.delete" = "Delete all tracks from playlist";
+"mini_player.volume" = "Volume";
+"mini_player.close" = "Close music mode";
+"mini_player.back" = "Return to video mode";
+
+// Touch bar
+
+"touchbar.ahead_15" = "15sec Ahead";
+"touchbar.ahead_30" = "30sec Ahead";
+"touchbar.back_15" = "15sec Back";
+"touchbar.back_30" = "30sec Back";
+"touchbar.next_video" = "Next Video";
+"touchbar.prev_video" = "Previous Video";
+"touchbar.increase_volume" = "Volume +";
+"touchbar.decrease_volume" = "Volume -";
+"touchbar.rewind" = "Rewind";
+"touchbar.fast_forward" = "Fast Forward";
+"touchbar.play_pause" = "Play / Pause";
+"touchbar.seek" = "Seek";
+"touchbar.time" = "Time Position";
+"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
+"touchbar.toggle_pip" = "Toggle Picture-in-Picture";
+
+// Plugin permissions
+
+"permissions.network-request.name" = "Network Request";
+"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
+"permissions.network-request.any_site" = "Any site";
+"permissions.show-osd.name" = "Show OSD";
+"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
+"permissions.show-alert.name" = "Show Alerts";
+"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
+"permissions.video-overlay.name" = "Add overlay on videos";
+"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
+"permissions.file-system.name" = "Access the file system";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+
+"plugin.install" = "Install";
+"plugin.installed" = "Installed";
+"plugin.not_installed" = "Not Installed";
+"plugin.local" = "Installed locally";
+"alert.plugin.install_error" = "Error occured during the installation: %@";
+"alert.invalid_url" = "The URL is invalid.";
+"plugin.install_error.invalid_url" = "The URL is invalid.";
+"plugin.install_error.file_not_found" = "Cannot find the package file.";
+"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
+"plugin.check_for_updates" = "Check for Updates";
+"plugin.updating" = "Downloading update…";

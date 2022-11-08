@@ -2,7 +2,7 @@
 "0Cz-OE-85L.title" = "Zpoždění titulků +0,1 s";
 
 /* Class = "NSMenuItem"; title = "Show Playlist Panel"; ObjectID = "0T7-Nu-SL7"; */
-"0T7-Nu-SL7.title" = "Zobrazit playlist";
+"0T7-Nu-SL7.title" = "Zobrazit panel playlistu";
 
 /* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "0m7-3r-twH"; */
 "0m7-3r-twH.title" = "Otevřít URL…";
@@ -25,14 +25,14 @@
 /* Class = "NSMenuItem"; title = "Jump to…"; ObjectID = "2id-wn-xsC"; */
 "2id-wn-xsC.title" = "Přejít na čas…";
 
-/* Class = "NSMenuItem"; title = "Show Quick Settings Panel"; ObjectID = "2t8-Ot-yoO"; */
-"2t8-Ot-yoO.title" = "Zobrazit panel rychlých nastavení";
+/* Class = "NSMenuItem"; title = "Show Video Panel"; ObjectID = "2t8-Ot-yoO"; */
+"2t8-Ot-yoO.title" = "Zobrazit panel videa";
 
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "3Ax-P3-QQu"; */
 "3Ax-P3-QQu.title" = "Vybrat vše";
 
-/* Class = "NSMenuItem"; title = "Show Quick Settings Panel"; ObjectID = "43n-Ed-5kT"; */
-"43n-Ed-5kT.title" = "Zobrazit panel rychlých nastavení";
+/* Class = "NSMenuItem"; title = "Show Audio Panel"; ObjectID = "43n-Ed-5kT"; */
+"43n-Ed-5kT.title" = "Zobrazit panel zvuku";
 
 /* Class = "NSMenuItem"; title = "Audio Delay + 0.5s"; ObjectID = "4ae-MT-2L1"; */
 "4ae-MT-2L1.title" = "Zpoždění zvuku +0,5 s";
@@ -68,25 +68,25 @@
 "8Zh-hU-Cc4.title" = "Zvukové filtry…";
 
 /* Class = "NSMenuItem"; title = "Speed:"; ObjectID = "8pV-XQ-AvB"; */
-"8pV-XQ-AvB.title" = "Rýchlost:";
+"8pV-XQ-AvB.title" = "Rychlost:";
 
-/* Class = "NSMenuItem"; title = "Show Quick Settings Panel"; ObjectID = "8y7-Cy-lKT"; */
-"8y7-Cy-lKT.title" = "Zobrazit panel rychlých nastavení";
+/* Class = "NSMenuItem"; title = "Show Subtitles Panel"; ObjectID = "8y7-Cy-lKT"; */
+"8y7-Cy-lKT.title" = "Zobrazit panel titulků";
 
 /* Class = "NSMenuItem"; title = "Speed Up to 1.1x"; ObjectID = "91n-xW-L37"; */
-"91n-xW-L37.title" = "Zrychlit na 1,1x";
+"91n-xW-L37.title" = "Zrychlit 1,1×";
 
 /* Class = "NSMenuItem"; title = "Audio Delay - 0.1s"; ObjectID = "9ee-7i-xs7"; */
 "9ee-7i-xs7.title" = "Zpoždění zvuku −0,1 s";
 
 /* Class = "NSMenuItem"; title = "<None>"; ObjectID = "9pa-9C-ueQ"; */
-"9pa-9C-ueQ.title" = "<Prázdné>";
+"9pa-9C-ueQ.title" = "<Žádná>";
 
 /* Class = "NSMenuItem"; title = "Save Downloaded Subtitle"; ObjectID = "9zk-co-roT"; */
 "9zk-co-roT.title" = "Uložit stažené titulky";
 
 /* Class = "NSMenuItem"; title = "Take a Screenshot"; ObjectID = "AoP-K6-Kb5"; */
-"AoP-K6-Kb5.title" = "Pořídit snímek obrazovky";
+"AoP-K6-Kb5.title" = "Zachytit snímek obrazovky";
 
 /* Class = "NSMenuItem"; title = "Delogo"; ObjectID = "ArE-2s-JIV"; */
 "ArE-2s-JIV.title" = "Odebrat logo";
@@ -95,7 +95,7 @@
 "BDr-G9-IRx.title" = "Uložené video filtry";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "BOF-NM-1cW"; */
-"BOF-NM-1cW.title" = "Předvolby…";
+"BOF-NM-1cW.title" = "Nastavení…";
 
 /* Class = "NSMenuItem"; title = "Scale Down"; ObjectID = "Bli-YK-Rl0"; */
 "Bli-YK-Rl0.title" = "Zmenšit";
@@ -107,13 +107,13 @@
 "CKi-JE-yLT.title" = "Pokročilý snímek obrazovky…";
 
 /* Class = "NSMenuItem"; title = "File Loop"; ObjectID = "D1y-kv-85s"; */
-"D1y-kv-85s.title" = "Opakování souborů";
+"D1y-kv-85s.title" = "Opakovat soubor";
 
 /* Class = "NSMenu"; title = "Audio Track"; ObjectID = "DRb-Y8-xir"; */
 "DRb-Y8-xir.title" = "Zvuková stopa";
 
 /* Class = "NSMenuItem"; title = "Speed Down to 0.9x"; ObjectID = "DUP-nm-BJt"; */
-"DUP-nm-BJt.title" = "Zpomalit na 0,9x";
+"DUP-nm-BJt.title" = "Zpomalit 0,9×";
 
 /* Class = "NSMenuItem"; title = "Close"; ObjectID = "DVo-aG-piG"; */
 "DVo-aG-piG.title" = "Zavřít";
@@ -164,7 +164,7 @@
 "Hal-18-Tnf.title" = "Dvojnásobná velikost";
 
 /* Class = "NSMenuItem"; title = "Speed Down to 0.5x"; ObjectID = "HsE-LN-Nd6"; */
-"HsE-LN-Nd6.title" = "Zpomalit na 0,5x";
+"HsE-LN-Nd6.title" = "Zpomalit 0,5×";
 
 /* Class = "NSMenu"; title = "Video"; ObjectID = "HyV-fh-RgO"; */
 "HyV-fh-RgO.title" = "Video";
@@ -194,7 +194,7 @@
 "Lc4-4W-thE.title" = "Zpoždění zvuku −0,5 s";
 
 /* Class = "NSMenuItem"; title = "Speed Up to 2x"; ObjectID = "Lqa-OG-EEg"; */
-"Lqa-OG-EEg.title" = "Zrychlit na 2x";
+"Lqa-OG-EEg.title" = "Zrychlit 2×";
 
 /* Class = "NSMenuItem"; title = "Subtitle Delay - 0.5s"; ObjectID = "LsU-Qz-dax"; */
 "LsU-Qz-dax.title" = "Zpoždění titulků −0,5 s";
@@ -236,7 +236,7 @@
 "Qv1-xd-wj5.title" = "Nové okno";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "R4o-n2-Eq4"; */
-"R4o-n2-Eq4.title" = "Zvětšit";
+"R4o-n2-Eq4.title" = "Přepnout velikost";
 
 /* Class = "NSMenuItem"; title = "Website"; ObjectID = "Rqg-VS-aIj"; */
 "Rqg-VS-aIj.title" = "Webová stránka";
@@ -293,10 +293,10 @@
 "Zhv-Bz-I5V.title" = "Hlasitost −1 %";
 
 /* Class = "NSMenuItem"; title = "Custom Touch Bar…"; ObjectID = "ZnF-yX-7jP"; */
-"ZnF-yX-7jP.title" = "Upravit Touch Bar…";
+"ZnF-yX-7jP.title" = "Přizpůsobit Touch Bar…";
 
 /* Class = "NSMenuItem"; title = "Playlist Loop"; ObjectID = "aSc-P6-fiZ"; */
-"aSc-P6-fiZ.title" = "Opakování playlistů";
+"aSc-P6-fiZ.title" = "Opakovat playlist";
 
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "aUF-d1-5bR"; */
 "aUF-d1-5bR.title" = "Okno";
@@ -317,7 +317,7 @@
 "bib-Uj-vzu.title" = "Soubor";
 
 /* Class = "NSMenuItem"; title = "Inspector"; ObjectID = "bwz-r0-peR"; */
-"bwz-r0-peR.title" = "Inspektor";
+"bwz-r0-peR.title" = "Zobrazit inspektor filmu";
 
 /* Class = "NSMenuItem"; title = "Normal Size (Retina)"; ObjectID = "c1x-bx-69F"; */
 "c1x-bx-69F.title" = "Normální velikost (Retina)";
@@ -353,7 +353,7 @@
 "gMo-qL-m08.title" = "Vyhledat aktualizace…";
 
 /* Class = "NSMenuItem"; title = "Delete"; ObjectID = "h9w-Rj-Hm1"; */
-"h9w-Rj-Hm1.title" = "Odstranit";
+"h9w-Rj-Hm1.title" = "Smazat";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "hz9-B4-Xy5"; */
 "hz9-B4-Xy5.title" = "Služby";
@@ -371,7 +371,7 @@
 "jxT-CU-nIS.title" = "Přehrávání";
 
 /* Class = "NSMenuItem"; title = "Load External Subtitle…"; ObjectID = "k6x-hf-ATi"; */
-"k6x-hf-ATi.title" = "Přidat soubor s titulky…";
+"k6x-hf-ATi.title" = "Načíst externí titulky…";
 
 /* Class = "NSMenuItem"; title = "Bigger Size"; ObjectID = "lDC-IC-peP"; */
 "lDC-IC-peP.title" = "Zvětšit";
@@ -389,19 +389,19 @@
 "m7w-hc-Y2F.title" = "Převést na velká písmena";
 
 /* Class = "NSMenuItem"; title = "Second Subtitle"; ObjectID = "mGw-jm-5x2"; */
-"mGw-jm-5x2.title" = "Druhé titulky";
+"mGw-jm-5x2.title" = "Druhá stopa titulků";
 
 /* Class = "NSMenuItem"; title = "Enter Picture in Picture"; ObjectID = "mND-N8-z6o"; */
 "mND-N8-z6o.title" = "Spustit obraz v obrazu";
 
 /* Class = "NSMenuItem"; title = "Flip"; ObjectID = "mT1-1m-HwN"; */
-"mT1-1m-HwN.title" = "Překlopit";
+"mT1-1m-HwN.title" = "Převrátit";
 
 /* Class = "NSMenuItem"; title = "Cycle Audio Tracks"; ObjectID = "n8f-ub-Udb"; */
 "n8f-ub-Udb.title" = "Opakovat zvukové stopy";
 
 /* Class = "NSMenu"; title = "Flip"; ObjectID = "n90-to-nRT"; */
-"n90-to-nRT.title" = "Překlopit";
+"n90-to-nRT.title" = "Převrátit";
 
 /* Class = "NSMenuItem"; title = "Delete Current File"; ObjectID = "npH-8B-XA4"; */
 "npH-8B-XA4.title" = "Odstranit přehrávaný soubor";
@@ -449,7 +449,7 @@
 "taT-mP-2Kv.title" = "Opakovat video stopy";
 
 /* Class = "NSMenuItem"; title = "Subtitle"; ObjectID = "uGZ-lo-pJJ"; */
-"uGZ-lo-pJJ.title" = "Titulky";
+"uGZ-lo-pJJ.title" = "Stopa titulků";
 
 /* Class = "NSMenu"; title = "Speech"; ObjectID = "uO1-9S-6Yy"; */
 "uO1-9S-6Yy.title" = "Řeč";
@@ -473,7 +473,7 @@
 "wpr-3q-Mcd.title" = "Nápověda";
 
 /* Class = "NSMenuItem"; title = "<None>"; ObjectID = "wrS-JG-jF6"; */
-"wrS-JG-jF6.title" = "<Prázdné>";
+"wrS-JG-jF6.title" = "<Žádná>";
 
 /* Class = "NSMenuItem"; title = "Subtitles"; ObjectID = "xDJ-GA-Gjs"; */
 "xDJ-GA-Gjs.title" = "Titulky";

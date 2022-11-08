@@ -17,18 +17,18 @@
 "general.password" = "Heslo";
 
 // Guide Window
-"guide.highlights" = "Highlights";
-"guide.basic_settings" = "Basic Settings";
-"guide.faq" = "Frequently Asked Questions";
+"guide.highlights" = "Novinky";
+"guide.basic_settings" = "Základné nastavenia";
+"guide.faq" = "Často kladené otázky";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Načítava sa… %d%%";
 "main.opening_stream" = "Otváram stream…";
-"osc.precision" = "Precision";
-"osc.1s" = "1 second";
-"osc.100ms" = "100 milliseconds";
-"osc.10ms" = "10 milliseconds";
-"osc.1ms" = "1 millisecond";
+"osc.precision" = "Presnosť";
+"osc.1s" = "1 sekunda";
+"osc.100ms" = "100 milisekúnd";
+"osc.10ms" = "10 milisekúnd";
+"osc.1ms" = "1 milisekunda";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Predvolené";
@@ -82,6 +82,8 @@
 "osd.canceled" = "Zrušené";
 "osd.filter_added" = "Pridaný filter: %@";
 "osd.filter_removed" = "Odstránený filter";
+"osd.file_loop" = "File Loop: %@";
+"osd.playlist_loop" = "Playlist Loop: %@";
 
 "preference.title" = "Nastavenia";
 "preference.general" = "Všeobecné";
@@ -92,6 +94,7 @@
 "preference.control" = "Ovládanie";
 "preference.keybindings" = "Klávesové skratky";
 "preference.advanced" = "Pokročilé";
+"preference.plugins" = "Plugins";
 "preference.utilities" = "Pomocné programy";
 "preference.scripts" = "Skripty";
 "preference.not_logged_in" = "Neprihlásený";
@@ -113,6 +116,16 @@
 "menu.pause" = "Pozastaviť";
 "menu.resume" = "Pokračovať";
 "menu.speed" = "Rýchlosť: %.2fx";
+"menu.chapters" = "Show Chapters Panel";
+"menu.hide_chapters" = "Hide Chapters Panel";
+"menu.playlist" = "Show Playlist Panel";
+"menu.hide_playlist" = "Hide Playlist Panel";
+"menu.video" = "Show Video Panel";
+"menu.hide_video" = "Hide Video Panel";
+"menu.audio" = "Show Audio Panel";
+"menu.hide_audio" = "Hide Audio Panel";
+"menu.subtitles" = "Show Subtitles Panel";
+"menu.hide_subtitles" = "Hide Subtitles Panel";
 
 "menu.seek_forward" = "Posunúť dopredu %.0f s";
 "menu.seek_backward" = "Posunúť dozadu %.0f s";
@@ -126,6 +139,7 @@
 "menu.sub_delay_down" = "Posunutie titulkov -%.1f s";
 
 "menu.crop_custom" = "Vlastné...";
+"menu.find_online_sub" = "Find Online Subtitles from %@";
 
 "track.none" = "<Prázdne>";
 
@@ -141,7 +155,7 @@
 
 "alert.fatal_error" = "Závažná chyba: %@ \nAplikácia sa teraz ukončí.";
 "alert.mpv_error" = "Interná chyba %@ (%@) pri nastavení možnosti %@.";
-"alert.sleep" = "Nedá sa zabrániť uspaniu displeja!";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "Nepodporovaný externý zvukový súbor.";
 "alert.unsupported_sub" = "Nepodporované externé titulky.";
@@ -220,6 +234,9 @@
 "alert.clear_watch_later.title" = "Vymazať uložené priebehy prehrávania";
 "alert.clear_watch_later.message" = "Naozaj chcete vymazať všetky uložené priebehy prehrávania (dáta \"pozrieť neskôr\")?";
 
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
+
 "alert.nothing_to_open" = "Žiaden súbor.";
 
 "alert.no_video_track" = "Neobsahuje video stopu.";
@@ -232,6 +249,15 @@
 "alert.assrt_token_prompt.title" = "Zadaj tvoj API token";
 "alert.assrt_token_prompt.message" = "Zaregistrujte sa na otvorenej webstránke. Váš token z domovskej stránky vložte sem:";
 "alert.assrt_token_invalid" = "Váš Assrt API token je neplatný.";
+
+"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
+"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
+"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+"alert.plugin_no_update" = "No update found.";
+"alert.plugin_update_found.title" = "Update found for %@";
+"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
+"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
+"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
 
 "playlist.total_length" = "%@ celkovo";
 "playlist.total_length_with_selected" = "%@ z %@ označených";
@@ -301,3 +327,31 @@
 "touchbar.time" = "Pozícia";
 "touchbar.remainingTimeOrTotalDuration" = "Ostávajúci Čas / Celková Dĺžka";
 "touchbar.toggle_pip" = "Zapnúť/Vypnúť Picture-in-Picture";
+
+// Plugin permissions
+
+"permissions.network-request.name" = "Network Request";
+"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
+"permissions.network-request.any_site" = "Any site";
+"permissions.show-osd.name" = "Show OSD";
+"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
+"permissions.show-alert.name" = "Show Alerts";
+"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
+"permissions.video-overlay.name" = "Add overlay on videos";
+"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
+"permissions.file-system.name" = "Access the file system";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+
+"plugin.install" = "Install";
+"plugin.installed" = "Installed";
+"plugin.not_installed" = "Not Installed";
+"plugin.local" = "Installed locally";
+"alert.plugin.install_error" = "Error occured during the installation: %@";
+"alert.invalid_url" = "The URL is invalid.";
+"plugin.install_error.invalid_url" = "The URL is invalid.";
+"plugin.install_error.file_not_found" = "Cannot find the package file.";
+"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
+"plugin.check_for_updates" = "Check for Updates";
+"plugin.updating" = "Downloading update…";

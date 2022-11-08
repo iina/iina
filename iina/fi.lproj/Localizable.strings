@@ -7,59 +7,59 @@
 */
 // Common
 
-"general.on" = "On";
-"general.off" = "Off";
-"general.login" = "Login";
-"general.logout" = "Logout";
+"general.on" = "Päällä";
+"general.off" = "Pois päältä";
+"general.login" = "Kirjaudu sisään";
+"general.logout" = "Kirjaudu ulos";
 "general.ok" = "OK";
-"general.cancel" = "Cancel";
-"general.username" = "Username";
-"general.password" = "Password";
+"general.cancel" = "Peruuta";
+"general.username" = "Käyttäjätunnus";
+"general.password" = "Salasana";
 
 // Guide Window
-"guide.highlights" = "Highlights";
-"guide.basic_settings" = "Basic Settings";
-"guide.faq" = "Frequently Asked Questions";
+"guide.highlights" = "Kohokohdat";
+"guide.basic_settings" = "Perusasetukset";
+"guide.faq" = "Usein kysytyt kysymykset";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Buffering… %d%%";
-"main.opening_stream" = "Opening stream…";
-"osc.precision" = "Precision";
-"osc.1s" = "1 second";
-"osc.100ms" = "100 milliseconds";
-"osc.10ms" = "10 milliseconds";
-"osc.1ms" = "1 millisecond";
+"main.buffering_indicator" = "Puskuroidaan… %d%%";
+"main.opening_stream" = "Avataan streamia…";
+"osc.precision" = "Tarkkuus";
+"osc.1s" = "1 sekunti";
+"osc.100ms" = "100 millisekuntia";
+"osc.10ms" = "10 millisekuntia";
+"osc.1ms" = "1 millisekunti";
 
 // QuickSettingViewController.swift
-"quicksetting.item_default" = "Default";
-"quicksetting.item_none" = "None";
-"quicksetting.hwdec" = "Hardware Decoding";
-"quicksetting.deinterlace" = "Deinterlace";
+"quicksetting.item_default" = "Oletus";
+"quicksetting.item_none" = "Ei mitään";
+"quicksetting.hwdec" = "Laitteistopohjainen purku";
+"quicksetting.deinterlace" = "Lomituksenpoisto";
 "quicksetting.hdr" = "HDR";
 
 // OSDMessage.swift
-"osd.pause" = "Pause";
-"osd.resume" = "Resume";
-"osd.volume" = "Volume: %i";
-"osd.speed" = "Speed: %.2fx";
-"osd.aspect" = "Aspect Ratio: %@";
-"osd.crop" = "Crop: %@";
-"osd.rotate" = "Rotate: %i°";
-"osd.deinterlace" = "Deinterlace: %@";
-"osd.hwdec" = "Hardware Decoding: %@";
-"osd.audio_delay.nodelay" = "Audio Delay: No Delay";
-"osd.audio_delay.later" = "Audio Delay: %.2fs Later";
-"osd.audio_delay.earlier" = "Audio Delay: %.2fs Earlier";
-"osd.sub_delay.nodelay" = "Subtitle Delay: No Delay";
-"osd.sub_delay.later" = "Subtitle Delay: %.2fs Later";
-"osd.sub_delay.earlier" = "Subtitle Delay: %.2fs Earlier";
-"osd.subtitle_pos" = "Subtitle Position: %.1f";
-"osd.mute" = "Mute";
-"osd.unmute" = "Unmute";
-"osd.screenshot" = "Screenshot Captured";
-"osd.abloop.a" = "AB-Loop: A";
-"osd.abloop.b" = "AB-Loop: B";
-"osd.abloop.clear" = "AB-Loop: Cleared";
+"osd.pause" = "Tauko";
+"osd.resume" = "Jatka";
+"osd.volume" = "Äänenvoimakkuus: %i";
+"osd.speed" = "Nopeus: %.2fx";
+"osd.aspect" = "Kuvasuhde: %@";
+"osd.crop" = "Rajaus: %@";
+"osd.rotate" = "Kierto: %i°";
+"osd.deinterlace" = "Lomituksenpoisto: %@";
+"osd.hwdec" = "Laitteistopohjainen purku: %@";
+"osd.audio_delay.nodelay" = "Äänen viive: Ei viivästystä";
+"osd.audio_delay.later" = "Äänen viive: %.2fs myöhemmin";
+"osd.audio_delay.earlier" = "Äänen viive: %.2fs aiemmin";
+"osd.sub_delay.nodelay" = "Äänen viive: Ei viivästystä";
+"osd.sub_delay.later" = "Tekstityksen viive: %.2fs myöhemmin";
+"osd.sub_delay.earlier" = "Tekstityksen viive: %.2fs aiemmin";
+"osd.subtitle_pos" = "Tekstityksen sijainti: %.1f";
+"osd.mute" = "Mykistä";
+"osd.unmute" = "Poista mykistys";
+"osd.screenshot" = "Kuvankaappaus otettu";
+"osd.abloop.a" = "AB-silmukka: A";
+"osd.abloop.b" = "AB-silmukka: B";
+"osd.abloop.clear" = "AB-silmukka: Tyhjennetty";
 "osd.stop" = "Pysäytä";
 "osd.chapter" = "Kappale: %@";
 "osd.subtitle_scale" = "Tekstityksen skaalaus: %.2fx";
@@ -82,6 +82,8 @@
 "osd.canceled" = "Peruutettu";
 "osd.filter_added" = "Lisätty suodatin %@";
 "osd.filter_removed" = "Poistettu suodatin";
+"osd.file_loop" = "File Loop: %@";
+"osd.playlist_loop" = "Playlist Loop: %@";
 
 "preference.title" = "Asetukset";
 "preference.general" = "Yleiset";
@@ -92,6 +94,7 @@
 "preference.control" = "Ohjaus";
 "preference.keybindings" = "Oikotiet";
 "preference.advanced" = "Lisäasetukset";
+"preference.plugins" = "Plugins";
 "preference.utilities" = "Apuohjelmat";
 "preference.scripts" = "Komentosarjat";
 "preference.not_logged_in" = "Ei kirjautuneena";
@@ -113,72 +116,83 @@
 "menu.pause" = "Tauko";
 "menu.resume" = "Jatka";
 "menu.speed" = "Nopeus: %.2fx";
+"menu.chapters" = "Show Chapters Panel";
+"menu.hide_chapters" = "Hide Chapters Panel";
+"menu.playlist" = "Show Playlist Panel";
+"menu.hide_playlist" = "Hide Playlist Panel";
+"menu.video" = "Show Video Panel";
+"menu.hide_video" = "Hide Video Panel";
+"menu.audio" = "Show Audio Panel";
+"menu.hide_audio" = "Hide Audio Panel";
+"menu.subtitles" = "Show Subtitles Panel";
+"menu.hide_subtitles" = "Hide Subtitles Panel";
 
 "menu.seek_forward" = "Astu eteenpäin %.0fs";
-"menu.seek_backward" = "Step Backward %.0fs";
-"menu.speed_up" = "Speed Up by %.1fx";
-"menu.speed_down" = "Speed Down by %.1fx";
-"menu.volume_up" = "Volume + %.0f%%";
-"menu.volume_down" = "Volume - %.0f%%";
-"menu.audio_delay_up" = "Audio Delay + %.1fs";
-"menu.audio_delay_down" = "Audio Delay - %.1fs";
-"menu.sub_delay_up" = "Subtitle Delay + %.1fs";
-"menu.sub_delay_down" = "Subtitle Delay - %.1fs";
+"menu.seek_backward" = "Siirry taaksepäin %.0fs";
+"menu.speed_up" = "Nopeuden nosto %.1fx";
+"menu.speed_down" = "Nopeuden lasku %.1fx";
+"menu.volume_up" = "Äänenvoimakkuus + %.0f%%";
+"menu.volume_down" = "Äänenvoimakkuus - %.0f%%";
+"menu.audio_delay_up" = "Äänen viive + %.1fs";
+"menu.audio_delay_down" = "Äänen viive - %.1fs";
+"menu.sub_delay_up" = "Tekstityksen viive + %.1fs";
+"menu.sub_delay_down" = "Tekstityksen viive - %.1fs";
 
-"menu.crop_custom" = "Custom...";
+"menu.crop_custom" = "Mukautettu...";
+"menu.find_online_sub" = "Find Online Subtitles from %@";
 
-"track.none" = "<None>";
+"track.none" = "<Ei mitään>";
 
-"subtrack.no_loaded" = "No Subtitles Loaded";
-"subtrack.no_external" = "No External Subtitles Found";
+"subtrack.no_loaded" = "Teksityksiä ei ladattu";
+"subtrack.no_external" = "Ulkoisia tekstityksiä ei löytynyt";
 
 // Alerts
-"alert.beta_channel.title" = "Receive Updates for Beta Versions";
+"alert.beta_channel.title" = "Vastaanota päivityksiä beta-versioihin";
 
-"alert.title_error" = "Error";
-"alert.title_warning" = "Warning";
-"alert.title_info" = "Information";
+"alert.title_error" = "Virhe";
+"alert.title_warning" = "Varoitus";
+"alert.title_info" = "Tietoja";
 
-"alert.fatal_error" = "Fatal error: %@ \nThe application will exit now.";
-"alert.mpv_error" = "Internal error %@ (%@) when setting option %@.";
-"alert.sleep" = "Cannot prevent display sleep!";
+"alert.fatal_error" = "Vakava virhe: %@ \nSovellus lopetetaan nyt.";
+"alert.mpv_error" = "Sisäinen virhe %@ (%@) asetettaessa valintaa %@.";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
-"alert.unsupported_audio" = "Unsupported external audio file.";
-"alert.unsupported_sub" = "Unsupported external subtitle.";
-"alert.unsupported_url" = "Unsupported URL.";
-"alert.wrong_url_format" = "Wrong URL format.";
+"alert.unsupported_audio" = "Ulkoista äänitiedostoa ei tuettu.";
+"alert.unsupported_sub" = "Ulkoista tekstitystä ei tuettu.";
+"alert.unsupported_url" = "URL-osoitetta ei tuettu.";
+"alert.wrong_url_format" = "Virheellinen URL-osoitteen muoto.";
 
-"alert.error_open" = "Cannot open file or stream!";
-"alert.error_finding_file" = "Cannot find %@ file!";
-"alert.error_loading_script" = "Cannot load script %@!";
-"alert.error_saving_file" = "Error occurred when saving %@: %@";
-"alert.error_deleting_file" = "Cannot delete the file.";
+"alert.error_open" = "Tiedostoa tai suoratoistoa ei voida avata!";
+"alert.error_finding_file" = "Tiedostoa %@ ei löydy!";
+"alert.error_loading_script" = "Skriptiä %@ ei voida ladata!";
+"alert.error_saving_file" = "Virhe tallennettaessa kohdetta %@: %@";
+"alert.error_deleting_file" = "Tiedostoa ei voida poistaa.";
 
-"alert.config.new.title" = "New Input Configuration";
-"alert.config.new.message" = "Please enter a name for the new configuration.";
-"alert.config.duplicate.title" = "Duplicate Configuration";
-"alert.config.duplicate.message" = "Please enter name for the duplicated configuration file.";
-"alert.config.empty_name" = "The name cannot be empty.";
-"alert.config.name_existing" = "The name already exists.";
-"alert.config.file_existing.title" = "File Already Exists";
-"alert.config.file_existing.message" = "This should not happen. Choose OK to overwrite, Cancel to reveal the file in Finder.";
-"alert.config.cannot_create" = "Cannot create config file!\n%@";
-"alert.config.cannot_write" = "Cannot write to config file!";
+"alert.config.new.title" = "Uudet syöttöasetukset";
+"alert.config.new.message" = "Anna nimi uudelle konfiguraatiolle.";
+"alert.config.duplicate.title" = "Monista asetukset";
+"alert.config.duplicate.message" = "Anna nimi monistetulle asetustiedostolle.";
+"alert.config.empty_name" = "Nimi ei voi olla tyhjä.";
+"alert.config.name_existing" = "Nimi on jo käytössä.";
+"alert.config.file_existing.title" = "Tiedosto on jo olemassa";
+"alert.config.file_existing.message" = "Tätä ei pitäisi tapahtua. Valitse OK korvataksesi, Peruuta näyttääksesi tiedoston Finderissa.";
+"alert.config.cannot_create" = "Asetustiedostoa ei voitu luoda!\n%@";
+"alert.config.cannot_write" = "Asetustiedostoon ei voida kirjoittaa!";
 
-"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
-"alert.add_filter.title" = "New Filter";
-"alert.add_filter.message" = "Please enter a filter string in format of mpv's vf or af command.";
+"alert.filter.incorrect" = "Suodattimia asetettaessa tapahtui virhe. Tarkista parametrisi muoto.";
+"alert.add_filter.title" = "Uusi suodatin";
+"alert.add_filter.message" = "Anna suodatinmerkkijono mpv:n vf tai af komennon muodossa.";
 
-"alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
+"alert.keybinding_config.error" = "Virhe luettaessa näppäimistöasetusten tiedostoa. \"%@\"! Palautetaan IINAn oletusnäppäimistöasetukset. Tarkista asetustiedostosi.";
 
-"alert.extra_option.cannot_read" = "Cannot read user defined extra mpv options.";
-"alert.extra_option.empty" = "Key or value cannot be empty!";
-"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
-"alert.extra_option.config_folder" = "Error setting config directory \"%@\".";
+"alert.extra_option.cannot_read" = "Ei voi lukea käyttäjän määrittämiä mpv-lisävalintoja.";
+"alert.extra_option.empty" = "Avain tai arvo ei voi olla tyhjä!";
+"alert.extra_option.error" = "Virhe asetettaessa valintaa --%@=%@ palautusarvolla %d. Tarkista lisävalintojen asetukset kohdasta Asetukset > Lisäasetukset.";
+"alert.extra_option.config_folder" = "Virhe asetettaessa asetushakemistoa \"%@\".";
 
-"alert.playlist.error_deleting" = "Error deleting: %@";
+"alert.playlist.error_deleting" = "Virhe poistettaessa: %@";
 
-"alert.sub.no_selected" = "Please select a downloaded subtitle first.";
+"alert.sub.no_selected" = "Valitse ensin ladatut tekstitykset.";
 "alert.sub_lang_not_set" = "Aseta ensisijaiset tekstityskielet asetuksissa ennen OpenSubtitles-palvelun käyttöä. Englantia (eng) käytetään tällä kertaa.";
 "alert.sub.cannot_save_passwd" = "Salasanaasi ei voi tallentaa Avainnippuun: %@";
 "alert.sub.cannot_login" = "Kirjautuminen ei onnistu. Tarkista käyttäjänimesi, salasanasi ja verkon tila.\n\n%@";
@@ -218,86 +232,126 @@
 "alert.clear_history.message" = "Poistetaanko varmasti kaikki toistohistoria?";
 
 "alert.clear_watch_later.title" = "Tyhjennä tallennettu toiston edistyminen";
-"alert.clear_watch_later.message" = "Are you sure to delete all saved playback progress (\"watch later\" data)?";
+"alert.clear_watch_later.message" = "Haluatko varmasti poistaa kaikki talletetut toiston edistymistiedot (\"katso myöhemmin\" tiedot)?";
 
-"alert.nothing_to_open" = "Nothing to open.";
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
 
-"alert.no_video_track" = "There is no video track.";
+"alert.nothing_to_open" = "Ei mitään avattavaa.";
 
-"alert.duplicate_config" = "You cannot edit default configurations directly. Please duplicate one before editing.";
+"alert.no_video_track" = "Videorataa ei ole.";
 
-"alert.assrt_register" = "Due to limited API quota, you are strongly recommended to use your own API token. The default token is only for demo usage, and you may encounter network error.";
-"alert.assrt_register.register" = "Register Now";
-"alert.assrt_register.try" = "Try First";
-"alert.assrt_token_prompt.title" = "Enter your API token";
-"alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
-"alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
+"alert.duplicate_config" = "Et voi muokata oletusasetusmäärittelyä suoraan. Kopioi asetusmäärittely ennen muokkausta.";
 
-"playlist.total_length" = "%@ in total";
-"playlist.total_length_with_selected" = "%@ of %@ selected";
-"pl_menu.title_multi" = "%d Items";
+"alert.assrt_register" = "Rajoitetusta API-kiintiöstä johtuen, on erittäin suositeltavaa käyttää omaa API-avainta. Oletusavain on tarkoitettu vain demokäyttöön ja voi johtaa verkkovirheeseen.";
+"alert.assrt_register.register" = "Rekisteröidy nyt";
+"alert.assrt_register.try" = "Kokeile ensin";
+"alert.assrt_token_prompt.title" = "Lisää API-avain";
+"alert.assrt_token_prompt.message" = "Ole hyvä ja rekisteröidy avatulla verkkosivulla. Hae avaimesi käyttäjäsi kotisivulta ja syötä se alle:";
+"alert.assrt_token_invalid" = "Assrt API -tunnisteesi näyttää olevan virheellinen.";
+
+"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
+"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
+"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+"alert.plugin_no_update" = "No update found.";
+"alert.plugin_update_found.title" = "Update found for %@";
+"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
+"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
+"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+
+"playlist.total_length" = "%@ yhteensä";
+"playlist.total_length_with_selected" = "%@ / %@ valittu";
+"pl_menu.title_multi" = "%d kohdetta";
 "pl_menu.play_next" = "Play Next";
-"pl_menu.play_in_new_window" = "Play in New Window";
-"pl_menu.remove" = "Remove";
-"pl_menu.remove_multi" = "Remove Selected";
-"pl_menu.delete" = "Move to Trash";
-"pl_menu.delete_multi" = "Move Selected Files to Trash";
-"pl_menu.delete_after_play" = "Move to Trash After Playback";
-"pl_menu.delete_after_play_multi" = "Move Selected Files to Trash After Playback";
-"pl_menu.reveal_in_finder" = "Reveal in Finder";
-"pl_menu.add_file" = "Add File…";
-"pl_menu.add_url" = "Add URL…";
-"pl_menu.clear_playlist" = "Clear Playlist";
+"pl_menu.play_in_new_window" = "Toista uudessa ikkunassa";
+"pl_menu.remove" = "Poista";
+"pl_menu.remove_multi" = "Poista valitut";
+"pl_menu.delete" = "Siirrä roskakoriin";
+"pl_menu.delete_multi" = "Siirrä valitut tiedostot roskakoriin";
+"pl_menu.delete_after_play" = "Siirrä roskakoriin toiston jälkeen";
+"pl_menu.delete_after_play_multi" = "Siirrä valitut tiedostot roskakoriin toiston jälkeen";
+"pl_menu.reveal_in_finder" = "Näytä Finderissa";
+"pl_menu.add_file" = "Lisää tiedosto…";
+"pl_menu.add_url" = "Lisää URL-osoite…";
+"pl_menu.clear_playlist" = "Tyhjennä soittolista";
 "pl_menu.matched_sub" = "Matched %d Subtitle(s)";
-"pl_menu.add_sub" = "Add Subtitle…";
-"pl_menu.wrong_sub" = "Wrong Subtitle!";
-"pl_menu.browser" = "Open in Browser";
-"pl_menu.copy_url" = "Copy URL";
-"pl_menu.copy_url_multi" = "Copy URLs";
+"pl_menu.add_sub" = "Lisää tekstitys…";
+"pl_menu.wrong_sub" = "Väärä tekstitys!";
+"pl_menu.browser" = "Avaa selaimessa";
+"pl_menu.copy_url" = "Kopioi URL-osoite";
+"pl_menu.copy_url_multi" = "Kopioi URL-osoitteet";
 
-"keymapping.title" = "Key Mapping";
-"keymapping.message" = "Press any key to record.";
+"keymapping.title" = "Näppäinmääritykset";
+"keymapping.message" = "Tallenna painamalla mitä tahansa näppäintä.";
 
-"filter.video_filters" = "Video Filters";
-"filter.audio_filters" = "Audio Filters";
+"filter.video_filters" = "Videosuodattimet";
+"filter.audio_filters" = "Äänisuodattimet";
 
-"hwdec.no" = "Disable hardware decoding.";
-"hwdec.auto" = "Enable hardware decoding. However, most of the video filters won't work properly.";
-"hwdec.auto-copy" = "Enable hardware decoding. It will consume double the memory but work with video filters.";
+"hwdec.no" = "Poista laitteistopurku käytöstä.";
+"hwdec.auto" = "Ota käyttöön laitteistopurku. Useimmat videosuodattimet eivät kuitenkaan toimi kunnolla.";
+"hwdec.auto-copy" = "Ota käyttöön laitteistopurku. Kuluttaa muistia kaksinkertaisesti, mutta toimii videosuodattimien kanssa.";
 
-"subencoding.auto" = "Auto detect";
+"subencoding.auto" = "Automaattinen tunnistus";
 
-"osc_toolbar.settings" = "Quick Settings";
-"osc_toolbar.playlist" = "Playlist and chapters";
-"osc_toolbar.pip" = "Toggle Picture-in-Picture";
-"osc_toolbar.full_screen" = "Toggle full screen";
-"osc_toolbar.music_mode" = "Enter music mode";
-"osc_toolbar.sub_track" = "Choose subtitle track";
+"osc_toolbar.settings" = "Pika-asetukset";
+"osc_toolbar.playlist" = "Soittolista ja luvut";
+"osc_toolbar.pip" = "Vaihda kuva kuvassa -tilaa";
+"osc_toolbar.full_screen" = "Vaihda koko näytön tilaan";
+"osc_toolbar.music_mode" = "Siirry musiikkitilaan";
+"osc_toolbar.sub_track" = "Valitse tekstitysraita";
 
-"mini_player.album_art" = "Toggle album art";
-"mini_player.loop" = "Repeat";
-"mini_player.shuffle" = "Shuffle";
-"mini_player.remove" = "Remove from playlist";
-"mini_player.add" = "Add to playlist";
-"mini_player.delete" = "Delete all tracks from playlist";
-"mini_player.volume" = "Volume";
-"mini_player.close" = "Close music mode";
-"mini_player.back" = "Return to video mode";
+"mini_player.album_art" = "Näytä albumin kansikuva";
+"mini_player.loop" = "Toista";
+"mini_player.shuffle" = "Sekoitus";
+"mini_player.remove" = "Poista soittolistalta";
+"mini_player.add" = "Lisää soittolistaan";
+"mini_player.delete" = "Poista kaikki kappaleet soittolistalta";
+"mini_player.volume" = "Äänenvoimakkuus";
+"mini_player.close" = "Sulje musiikkitila";
+"mini_player.back" = "Palaa videotilaan";
 
 // Touch bar
 
-"touchbar.ahead_15" = "15sec Ahead";
-"touchbar.ahead_30" = "30sec Ahead";
-"touchbar.back_15" = "15sec Back";
-"touchbar.back_30" = "30sec Back";
-"touchbar.next_video" = "Next Video";
-"touchbar.prev_video" = "Previous Video";
-"touchbar.increase_volume" = "Volume +";
-"touchbar.decrease_volume" = "Volume -";
-"touchbar.rewind" = "Rewind";
-"touchbar.fast_forward" = "Fast Forward";
-"touchbar.play_pause" = "Play / Pause";
-"touchbar.seek" = "Seek";
-"touchbar.time" = "Time Position";
-"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
-"touchbar.toggle_pip" = "Toggle Picture-in-Picture";
+"touchbar.ahead_15" = "15sek eteen";
+"touchbar.ahead_30" = "30sek eteen";
+"touchbar.back_15" = "15sek taakse";
+"touchbar.back_30" = "30sek taakse";
+"touchbar.next_video" = "Seuraava video";
+"touchbar.prev_video" = "Edellinen video";
+"touchbar.increase_volume" = "Äänenvoimakkuus +";
+"touchbar.decrease_volume" = "Äänenvoimakkuus -";
+"touchbar.rewind" = "Kelaa taaksepäin";
+"touchbar.fast_forward" = "Kelaa eteenpäin";
+"touchbar.play_pause" = "Toista / Tauko";
+"touchbar.seek" = "Siirry";
+"touchbar.time" = "Ajan sijainti";
+"touchbar.remainingTimeOrTotalDuration" = "Jäljellä oleva aika / kokonaiskesto";
+"touchbar.toggle_pip" = "Vaihda kuva kuvassa -tilaan";
+
+// Plugin permissions
+
+"permissions.network-request.name" = "Network Request";
+"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
+"permissions.network-request.any_site" = "Any site";
+"permissions.show-osd.name" = "Show OSD";
+"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
+"permissions.show-alert.name" = "Show Alerts";
+"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
+"permissions.video-overlay.name" = "Add overlay on videos";
+"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
+"permissions.file-system.name" = "Access the file system";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+
+"plugin.install" = "Install";
+"plugin.installed" = "Installed";
+"plugin.not_installed" = "Not Installed";
+"plugin.local" = "Installed locally";
+"alert.plugin.install_error" = "Error occured during the installation: %@";
+"alert.invalid_url" = "The URL is invalid.";
+"plugin.install_error.invalid_url" = "The URL is invalid.";
+"plugin.install_error.file_not_found" = "Cannot find the package file.";
+"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
+"plugin.check_for_updates" = "Check for Updates";
+"plugin.updating" = "Downloading update…";

@@ -332,9 +332,9 @@ extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
             recentFilesTableView.selectRowIndexes(IndexSet(), byExtendingSelection: false)
             return
           }
-        } else if recentFilesTableView.selectedRow == 0 {
-            super.keyDown(with: event)  // invalid command: beep at user
-            return
+        } else if recentFilesTableView.selectedRow == 0 || recentDocuments.isEmpty {
+          super.keyDown(with: event)  // invalid command: beep at user
+          return
         }
         // default: let recentFilesTableView handle it
         recentFilesTableView.keyDown(with: event)

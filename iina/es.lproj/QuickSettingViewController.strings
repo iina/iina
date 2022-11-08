@@ -65,7 +65,7 @@
 "RA1-fF-OrB.title" = "Subtítulos externos:";
 
 /* Class = "NSSegmentedCell"; Rbb-wh-cLc.ibShadowedLabels[0] = "Search Online…"; ObjectID = "Rbb-wh-cLc"; */
-"Rbb-wh-cLc.ibShadowedLabels[0]" = "Buscar en línea…";
+"Rbb-wh-cLc.ibShadowedLabels[0]" = "Busqueda en linea…";
 
 /* Class = "NSTextFieldCell"; title = "Saturation:"; ObjectID = "Rky-lo-Buu"; */
 "Rky-lo-Buu.title" = "Saturación:";
@@ -80,7 +80,7 @@
 "Wbx-Ti-qiS.title" = "Escala:";
 
 /* Class = "NSTextFieldCell"; title = "Subtitle delay:"; ObjectID = "Wkz-wW-sOM"; */
-"Wkz-wW-sOM.title" = "Retraso de subtítulos:";
+"Wkz-wW-sOM.title" = "Retraso de los subtítulos:";
 
 /* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "Xez-sb-mfB"; */
 "Xez-sb-mfB.title" = "Ecualizador";
@@ -104,7 +104,7 @@
 "bzk-c2-LH5.label" = "Audio";
 
 /* Class = "NSSegmentedCell"; cMu-YF-riv.ibShadowedLabels[0] = "Default"; ObjectID = "cMu-YF-riv"; */
-"cMu-YF-riv.ibShadowedLabels[0]" = "Predeterminado";
+"cMu-YF-riv.ibShadowedLabels[0]" = "Por defecto";
 
 /* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "cdR-uY-riN"; */
 "cdR-uY-riN.title" = "Brillo:";
@@ -176,7 +176,7 @@
 "vFD-HU-RVz.title" = "Personalizado…";
 
 /* Class = "NSTextFieldCell"; title = "Subtitle style options may break ASS rendering, and some of them will be disabled depending on subtitle type."; ObjectID = "wBD-pZ-Bvu"; */
-"wBD-pZ-Bvu.title" = "Las opciones de estilo para subtítulos pueden romper el renderizado de ASS, algunas de opciones se deshabilitarán dependiendo del tipo de subtítulo.";
+"wBD-pZ-Bvu.title" = "Las opciones de estilo para subtítulos pueden romper el renderizado ASS, algunas opciones se deshabilitarán dependiendo del tipo de subtítulo.";
 
 /* Class = "NSTextFieldCell"; title = "Audio track:"; ObjectID = "x39-62-7KC"; */
 "x39-62-7KC.title" = "Pista de audio:";

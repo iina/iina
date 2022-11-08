@@ -2,13 +2,13 @@
 "02L-0u-zae.title" = "Mentés";
 
 /* Class = "NSTableColumn"; headerCell.title = "Filter String"; ObjectID = "4g6-LW-373"; */
-"4g6-LW-373.headerCell.title" = "Filter String";
+"4g6-LW-373.headerCell.title" = "Karakterláncok szűrése";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "6fq-yx-3dE"; */
 "6fq-yx-3dE.title" = "Mégse";
 
 /* Class = "NSTextFieldCell"; title = "By saving a filter, you can enable or disable it conveniently and even assign a shortcut key to it."; ObjectID = "8JN-kb-kGF"; */
-"8JN-kb-kGF.title" = "By saving a filter, you can enable or disable it conveniently and even assign a shortcut key to it.";
+"8JN-kb-kGF.title" = "A szűrőt mentés után, egyszerűen ki- és bekapcsolhatja és akár gyorsbillentyűt is rendelhet hozzá.";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "9Au-ZV-KXN"; */
 "9Au-ZV-KXN.title" = "Mégse";
@@ -29,19 +29,19 @@
 "KGV-G1-A2l.title" = "Szűrő mentése";
 
 /* Class = "NSTextFieldCell"; title = "Shortcut key:"; ObjectID = "M9z-ss-1Ma"; */
-"M9z-ss-1Ma.title" = "Shortcut key:";
+"M9z-ss-1Ma.title" = "Gyorsbillentyű:";
 
 /* Class = "NSTextFieldCell"; title = "Shortcut key:"; ObjectID = "Nzk-zW-mIL"; */
-"Nzk-zW-mIL.title" = "Shortcut key:";
+"Nzk-zW-mIL.title" = "Gyorsbillentyű:";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "Xqd-Ft-hTS"; */
 "Xqd-Ft-hTS.title" = "Mégse";
 
 /* Class = "NSTextFieldCell"; title = "Press any button to record"; ObjectID = "dL4-so-Qss"; */
-"dL4-so-Qss.title" = "Press any button to record";
+"dL4-so-Qss.title" = "Nyomon meg egy gombot a felvételhez";
 
 /* Class = "NSTextFieldCell"; title = "Press any button to record"; ObjectID = "jJk-0R-KQo"; */
-"jJk-0R-KQo.title" = "Press any button to record";
+"jJk-0R-KQo.title" = "Nyomon meg egy gombot a felvételhez";
 
 /* Class = "NSButtonCell"; title = "Add"; ObjectID = "ljR-R1-mo7"; */
 "ljR-R1-mo7.title" = "Hozzáad";
@@ -50,7 +50,7 @@
 "m5X-Zl-aOj.title" = "Elmentett szűrők";
 
 /* Class = "NSTextFieldCell"; title = "Filter string:"; ObjectID = "t9F-EU-fKj"; */
-"t9F-EU-fKj.title" = "Filter string:";
+"t9F-EU-fKj.title" = "Karakterláncok szűrése:";
 
 /* Class = "NSButtonCell"; title = "Save"; ObjectID = "tPs-K2-ZPz"; */
 "tPs-K2-ZPz.title" = "Mentés";

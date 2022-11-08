@@ -1,35 +1,35 @@
 /* Class = "NSTextFieldCell"; title = "Assrt API token:"; ObjectID = "0aU-O1-R6G"; */
-"0aU-O1-R6G.title" = "Assrt API token:";
+"0aU-O1-R6G.title" = "Potvrdi token API-ja:";
 
 /* Class = "NSTextFieldCell"; title = "Online Subtitles:"; ObjectID = "0fB-es-DmV"; */
-"0fB-es-DmV.title" = "Online Subtitles:";
+"0fB-es-DmV.title" = "Titlovi na mreži:";
 
 /* Class = "NSMenuItem"; title = "Top"; ObjectID = "1Tq-5k-o6R"; */
-"1Tq-5k-o6R.title" = "Top";
+"1Tq-5k-o6R.title" = "Vrh";
 
 /* Class = "NSButtonCell"; title = "Display subtitles in letterboxes while in full screen"; ObjectID = "2XY-Un-0Fg"; */
-"2XY-Un-0Fg.title" = "Display subtitles in letterboxes while in full screen";
+"2XY-Un-0Fg.title" = "Prikaži titlove na crnoj traci u režimu celog ekrana";
 
 /* Class = "NSTextFieldCell"; title = "strip"; ObjectID = "3H8-Ei-cTm"; */
-"3H8-Ei-cTm.title" = "strip";
+"3H8-Ei-cTm.title" = "ukloni";
 
 /* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "4Tb-Yh-PdP"; */
-"4Tb-Yh-PdP.title" = "Position:";
+"4Tb-Yh-PdP.title" = "Položaj:";
 
 /* Class = "NSMenuItem"; title = "Bottom"; ObjectID = "6i0-Sx-V7F"; */
-"6i0-Sx-V7F.title" = "Bottom";
+"6i0-Sx-V7F.title" = "Dno";
 
 /* Class = "NSTextFieldCell"; title = "Subtitles have priority when filename containing:"; ObjectID = "7pf-Kb-TNr"; */
-"7pf-Kb-TNr.title" = "Subtitles have priority when filename containing:";
+"7pf-Kb-TNr.title" = "Titlovi imaju prioritet kada naziv datoteke sadrži:";
 
 /* Class = "NSButtonCell"; title = "Scale subtitles with window size"; ObjectID = "8hj-ki-R0h"; */
-"8hj-ki-R0h.title" = "Scale subtitles with window size";
+"8hj-ki-R0h.title" = "Podesi titlove prema veličini prozora";
 
 /* Class = "NSTextFieldCell"; title = "Font spacing:"; ObjectID = "9EP-XB-lyO"; */
-"9EP-XB-lyO.title" = "Font spacing:";
+"9EP-XB-lyO.title" = "Razmaci u fontu:";
 
 /* Class = "NSTextFieldCell"; title = "Vertical position:"; ObjectID = "9N4-Zg-M7m"; */
-"9N4-Zg-M7m.title" = "Vertical position:";
+"9N4-Zg-M7m.title" = "Vertikalni položaj:";
 
 /* Class = "NSBox"; title = "Font"; ObjectID = "9pv-1r-nuH"; */
 "9pv-1r-nuH.title" = "Font";
@@ -38,10 +38,10 @@
 "ALz-LB-8sf.title" = "Y:";
 
 /* Class = "NSBox"; title = "Shadow"; ObjectID = "BgE-Kk-MXC"; */
-"BgE-Kk-MXC.title" = "Shadow";
+"BgE-Kk-MXC.title" = "Senka";
 
 /* Class = "NSButtonCell"; title = "Search online subtitles automatically"; ObjectID = "C3p-uP-8u8"; */
-"C3p-uP-8u8.title" = "Search online subtitles automatically";
+"C3p-uP-8u8.title" = "Potraži titlove na mreži automatski";
 
 /* Class = "NSTextFieldCell"; title = "Font:"; ObjectID = "C4C-XP-i2S"; */
 "C4C-XP-i2S.title" = "Font:";
@@ -50,133 +50,133 @@
 "CdS-9J-f2h.title" = " X:";
 
 /* Class = "NSTextFieldCell"; title = "Advanced"; ObjectID = "DUA-7H-Yje"; */
-"DUA-7H-Yje.title" = "Advanced";
+"DUA-7H-Yje.title" = "Napredno";
 
 /* Class = "NSMenuItem"; title = "Right"; ObjectID = "Gie-38-Kk4"; */
-"Gie-38-Kk4.title" = "Right";
+"Gie-38-Kk4.title" = "Desno";
 
 /* Class = "NSTextFieldCell"; title = "OpenSubtitles account:"; ObjectID = "Iax-cc-YIO"; */
-"Iax-cc-YIO.title" = "OpenSubtitles account:";
+"Iax-cc-YIO.title" = "OpenSubtitles nalog:";
 
 /* Class = "NSTextFieldCell"; title = "Other:"; ObjectID = "LiG-iV-AQK"; */
-"LiG-iV-AQK.title" = "Other:";
+"LiG-iV-AQK.title" = "Ostalo:";
 
 /* Class = "NSTextFieldCell"; title = "Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed."; ObjectID = "Luv-2B-9v8"; */
-"Luv-2B-9v8.title" = "Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed.";
+"Luv-2B-9v8.title" = "Direktorijumi su odvojeni dvotačkom (:). Relativne putanje i džokeri (*) na kraju mogu se koristiti.";
 
 /* Class = "NSTextFieldCell"; title = "Please enter a comma-separated list of strings."; ObjectID = "Mk1-sv-QB8"; */
-"Mk1-sv-QB8.title" = "Please enter a comma-separated list of strings.";
+"Mk1-sv-QB8.title" = "Unesite listu nizova razdvojenih zarezom.";
 
 /* Class = "NSTextFieldCell"; title = "If enabled, all ASS subtitles will be drawn using the styles below."; ObjectID = "OcF-0z-7qe"; */
-"OcF-0z-7qe.title" = "If enabled, all ASS subtitles will be drawn using the styles below.";
+"OcF-0z-7qe.title" = "Ako je omogućeno, svi ASS titlovi biće prikazani pomoću dolenavedenih stilova.";
 
 /* Class = "NSTextFieldCell"; title = "Text subtitles:"; ObjectID = "Qda-dp-nhg"; */
-"Qda-dp-nhg.title" = "Text subtitles:";
+"Qda-dp-nhg.title" = "Tekstualni titlovi:";
 
 /* Class = "NSTextFieldCell"; title = "Also search subtitles in following directories:"; ObjectID = "QsS-wD-2hY"; */
-"QsS-wD-2hY.title" = "Also search subtitles in following directories:";
+"QsS-wD-2hY.title" = "Titlove potraži i u sledećim direktorijumima:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "SIh-Sv-6XI"; */
-"SIh-Sv-6XI.title" = "Color:";
+"SIh-Sv-6XI.title" = "Boja:";
 
 /* Class = "NSTextFieldCell"; title = "Download subtitles from:"; ObjectID = "TPK-CJ-HX7"; */
-"TPK-CJ-HX7.title" = "Download subtitles from:";
+"TPK-CJ-HX7.title" = "Preuzmi titlove sa:";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "Vbl-Im-3UI"; */
-"Vbl-Im-3UI.title" = "Size:";
+"Vbl-Im-3UI.title" = "Veličina:";
 
 /* Class = "NSButtonCell"; title = "Login"; ObjectID = "WHk-sk-gmK"; */
-"WHk-sk-gmK.title" = "Login";
+"WHk-sk-gmK.title" = "Prijavi me";
 
 /* Class = "NSTextFieldCell"; title = "Advanced"; ObjectID = "X7X-18-FJg"; */
-"X7X-18-FJg.title" = "Advanced";
+"X7X-18-FJg.title" = "Napredno";
 
 /* Class = "NSMenuItem"; title = "Detect intelligently by IINA"; ObjectID = "XiL-eE-jah"; */
-"XiL-eE-jah.title" = "Detect intelligently by IINA";
+"XiL-eE-jah.title" = "Inteligentno otkriva IINA";
 
 /* Class = "NSTextFieldCell"; title = "Default encoding:"; ObjectID = "Y75-4k-2Du"; */
-"Y75-4k-2Du.title" = "Default encoding:";
+"Y75-4k-2Du.title" = "Podrazumеvano kodiranje:";
 
-/* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will works for both mpv and opensubtitles."; ObjectID = "Z2M-dh-eq1"; */
-"Z2M-dh-eq1.title" = "This option will be stored as ISO 639-2 language code and will works for both mpv and opensubtitles.";
+/* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will work for both mpv and opensubtitles."; ObjectID = "Z2M-dh-eq1"; */
+"Z2M-dh-eq1.title" = "Ova opcija će biti sačuvana kao šifra jezika ISO 639-2 i funkcionisaće i za mpv i za opensubtitles.";
 
 /* Class = "NSTextFieldCell"; title = "Blur:"; ObjectID = "aO9-D6-KG8"; */
-"aO9-D6-KG8.title" = "Blur:";
+"aO9-D6-KG8.title" = "Zamućenje:";
 
 /* Class = "NSTextFieldCell"; title = "Not logged in"; ObjectID = "cov-Uy-wnc"; */
-"cov-Uy-wnc.title" = "Not logged in";
+"cov-Uy-wnc.title" = "Niste prijavljeni";
 
 /* Class = "NSTextFieldCell"; title = "Offset:"; ObjectID = "dtP-9o-yhy"; */
-"dtP-9o-yhy.title" = "Offset:";
+"dtP-9o-yhy.title" = "Odstupanje:";
 
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "e0e-dB-Ir6"; */
-"e0e-dB-Ir6.title" = "Center";
+"e0e-dB-Ir6.title" = "Centar";
 
 /* Class = "NSTextFieldCell"; title = "Background:"; ObjectID = "eYO-c0-Rjp"; */
-"eYO-c0-Rjp.title" = "Background:";
+"eYO-c0-Rjp.title" = "Pozadina:";
 
 /* Class = "NSBox"; title = "Other Styles"; ObjectID = "egf-g3-b7a"; */
-"egf-g3-b7a.title" = "Other Styles";
+"egf-g3-b7a.title" = "Drugi stilovi";
 
 /* Class = "NSTextFieldCell"; title = "Override level:"; ObjectID = "gAq-Vr-hRY"; */
-"gAq-Vr-hRY.title" = "Override level:";
+"gAq-Vr-hRY.title" = "Nivo zamene:";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "gkc-qt-sD9"; */
-"gkc-qt-sD9.title" = "Size:";
+"gkc-qt-sD9.title" = "Veličina:";
 
 /* Class = "NSButtonCell"; title = "Bold"; ObjectID = "hEk-7E-10r"; */
-"hEk-7E-10r.title" = "Bold";
+"hEk-7E-10r.title" = "Podebljano";
 
 /* Class = "NSBox"; title = "Align"; ObjectID = "kvJ-Tj-KMb"; */
-"kvJ-Tj-KMb.title" = "Align";
+"kvJ-Tj-KMb.title" = "Poravnaj";
 
 /* Class = "NSTextFieldCell"; title = " X:"; ObjectID = "l7l-ZO-W79"; */
 "l7l-ZO-W79.title" = " X:";
 
 /* Class = "NSTextFieldCell"; title = "ASS subtitles:"; ObjectID = "mFm-Q6-aja"; */
-"mFm-Q6-aja.title" = "ASS subtitles:";
+"mFm-Q6-aja.title" = "ASS titlovi:";
 
 /* Class = "NSButtonCell"; title = "Choose…"; ObjectID = "nH7-kO-S15"; */
-"nH7-kO-S15.title" = "Choose…";
+"nH7-kO-S15.title" = "Odaberi…";
 
 /* Class = "NSButtonCell"; title = "Italic"; ObjectID = "pNF-Fw-QtW"; */
-"pNF-Fw-QtW.title" = "Italic";
+"pNF-Fw-QtW.title" = "Kurziv";
 
 /* Class = "NSBox"; title = "Margin"; ObjectID = "pRe-wv-VVi"; */
-"pRe-wv-VVi.title" = "Margin";
+"pRe-wv-VVi.title" = "Margina";
 
 /* Class = "NSButtonCell"; title = "Ignore ASS styles"; ObjectID = "rZf-bj-qbV"; */
-"rZf-bj-qbV.title" = "Ignore ASS styles";
+"rZf-bj-qbV.title" = "Zanemari ASS stilove";
 
 /* Class = "NSTextFieldCell"; title = "Auto load:"; ObjectID = "raf-Yu-ck0"; */
-"raf-Yu-ck0.title" = "Auto load:";
+"raf-Yu-ck0.title" = "Automatski učitaj:";
 
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "slU-Ox-aeF"; */
-"slU-Ox-aeF.title" = "Center";
+"slU-Ox-aeF.title" = "Centar";
 
 /* Class = "NSBox"; title = "Border"; ObjectID = "t5n-mc-dss"; */
-"t5n-mc-dss.title" = "Border";
+"t5n-mc-dss.title" = "Okvir";
 
 /* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "u31-eV-Arr"; */
-"u31-eV-Arr.title" = "Disabled";
+"u31-eV-Arr.title" = "Onemogućeno";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "vDc-dw-liI"; */
-"vDc-dw-liI.title" = "Color:";
+"vDc-dw-liI.title" = "Boja:";
 
 /* Class = "NSTextFieldCell"; title = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues."; ObjectID = "vYb-qH-XkH"; */
-"vYb-qH-XkH.title" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues.";
+"vYb-qH-XkH.title" = "Ako je omogućeno, IINA će automatski pretraživati titlove na mreži samo za video-zapise bez učitanih titlova i duže od 20 minuta.";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "xGf-fF-4Hx"; */
 "xGf-fF-4Hx.title" = "Y:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "xid-E9-FC9"; */
-"xid-E9-FC9.title" = "Color:";
+"xid-E9-FC9.title" = "Boja:";
 
 /* Class = "NSMenuItem"; title = "Subtitles containing media filename"; ObjectID = "y1E-JR-KRI"; */
-"y1E-JR-KRI.title" = "Subtitles containing media filename";
+"y1E-JR-KRI.title" = "Titlovi sadrže naziv medijske datoteke";
 
 /* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "zaE-bH-XfT"; */
-"zaE-bH-XfT.title" = "Preferred language:";
+"zaE-bH-XfT.title" = "Željeni jezik:";
 
 /* Class = "NSMenuItem"; title = "Left"; ObjectID = "zml-kt-LN8"; */
-"zml-kt-LN8.title" = "Left";
+"zml-kt-LN8.title" = "Levo";

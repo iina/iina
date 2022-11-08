@@ -2,10 +2,10 @@
 "0Cz-OE-85L.title" = "Délai des sous-titres +0.1s";
 
 /* Class = "NSMenuItem"; title = "Show Playlist Panel"; ObjectID = "0T7-Nu-SL7"; */
-"0T7-Nu-SL7.title" = "Afficher la playlist";
+"0T7-Nu-SL7.title" = "Afficher le panneau des listes de lecture";
 
 /* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "0m7-3r-twH"; */
-"0m7-3r-twH.title" = "Ouvrir une adresse…";
+"0m7-3r-twH.title" = "Ouvrir une URL…";
 
 /* Class = "NSMenu"; title = "Subtitle"; ObjectID = "16p-PA-x34"; */
 "16p-PA-x34.title" = "Sous-titres";
@@ -25,14 +25,14 @@
 /* Class = "NSMenuItem"; title = "Jump to…"; ObjectID = "2id-wn-xsC"; */
 "2id-wn-xsC.title" = "Aller à…";
 
-/* Class = "NSMenuItem"; title = "Show Quick Settings Panel"; ObjectID = "2t8-Ot-yoO"; */
-"2t8-Ot-yoO.title" = "Afficher les réglages rapides";
+/* Class = "NSMenuItem"; title = "Show Video Panel"; ObjectID = "2t8-Ot-yoO"; */
+"2t8-Ot-yoO.title" = "Show Video Panel";
 
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "3Ax-P3-QQu"; */
 "3Ax-P3-QQu.title" = "Tout sélectionner";
 
-/* Class = "NSMenuItem"; title = "Show Quick Settings Panel"; ObjectID = "43n-Ed-5kT"; */
-"43n-Ed-5kT.title" = "Afficher les réglages rapides";
+/* Class = "NSMenuItem"; title = "Show Audio Panel"; ObjectID = "43n-Ed-5kT"; */
+"43n-Ed-5kT.title" = "Show Audio Panel";
 
 /* Class = "NSMenuItem"; title = "Audio Delay + 0.5s"; ObjectID = "4ae-MT-2L1"; */
 "4ae-MT-2L1.title" = "Délai audio +0.5s";
@@ -44,7 +44,7 @@
 "5Gn-90-oDu.title" = "Réinitialiser la vitesse";
 
 /* Class = "NSMenuItem"; title = "About IINA"; ObjectID = "5kV-Vb-QxS"; */
-"5kV-Vb-QxS.title" = "À propos de IINA";
+"5kV-Vb-QxS.title" = "À propos d’IINA";
 
 /* Class = "NSMenu"; title = "Rotation"; ObjectID = "5xN-ZB-VLI"; */
 "5xN-ZB-VLI.title" = "Rotation";
@@ -70,8 +70,8 @@
 /* Class = "NSMenuItem"; title = "Speed:"; ObjectID = "8pV-XQ-AvB"; */
 "8pV-XQ-AvB.title" = "Vitesse :";
 
-/* Class = "NSMenuItem"; title = "Show Quick Settings Panel"; ObjectID = "8y7-Cy-lKT"; */
-"8y7-Cy-lKT.title" = "Afficher les réglages rapides";
+/* Class = "NSMenuItem"; title = "Show Subtitles Panel"; ObjectID = "8y7-Cy-lKT"; */
+"8y7-Cy-lKT.title" = "Show Subtitles Panel";
 
 /* Class = "NSMenuItem"; title = "Speed Up to 1.1x"; ObjectID = "91n-xW-L37"; */
 "91n-xW-L37.title" = "Accélérer de 1.1x";
@@ -131,7 +131,7 @@
 "F6G-Ln-fqI.title" = "Chapitre suivant";
 
 /* Class = "NSMenuItem"; title = "IINA Help"; ObjectID = "FKE-Sm-Kum"; */
-"FKE-Sm-Kum.title" = "Aide IINA";
+"FKE-Sm-Kum.title" = "Aide d’IINA";
 
 /* Class = "NSMenu"; title = "Video Track"; ObjectID = "FTu-CF-O0R"; */
 "FTu-CF-O0R.title" = "Piste vidéo";

@@ -37,7 +37,7 @@ class VideoView: NSView {
   // cached indicator to prevent unnecessary updates of DisplayLink
   var currentDisplay: UInt32?
 
-  var pendingRedrawAfterEnteringPIP = false;
+  var pendingRedrawsAfterEnteringPIP = 0;
 
   lazy var hdrSubsystem = Logger.Subsystem(rawValue: "hdr")
 
@@ -95,9 +95,9 @@ class VideoView: NSView {
 
   override func layout() {
     super.layout()
-    if pendingRedrawAfterEnteringPIP && superview != nil {
+    if pendingRedrawsAfterEnteringPIP != 0 && superview != nil {
+      pendingRedrawsAfterEnteringPIP -= 1
       videoLayer.draw(forced: true)
-      pendingRedrawAfterEnteringPIP = false
     }
   }
 
@@ -306,7 +306,10 @@ extension VideoView {
   func requestEdrMode() -> Bool? {
     guard let mpv = player.mpv else { return false }
 
-    guard let primaries = mpv.getString(MPVProperty.videoParamsPrimaries), let gamma = mpv.getString(MPVProperty.videoParamsGamma) else { return false }
+    guard let primaries = mpv.getString(MPVProperty.videoParamsPrimaries), let gamma = mpv.getString(MPVProperty.videoParamsGamma) else {
+      Logger.log("HDR primaries and gamma not available", level: .debug, subsystem: hdrSubsystem);
+      return false;
+    }
 
     var name: CFString? = nil;
     switch primaries {
@@ -360,6 +363,11 @@ extension VideoView {
     }
 
     guard player.info.hdrEnabled else { return nil }
+
+    if videoLayer.colorspace?.name == name {
+      Logger.log("HDR mode has been enabled, skipping", level: .debug, subsystem: hdrSubsystem);
+      return true;
+    }
 
     Logger.log("Will activate HDR color space instead of using ICC profile", level: .debug, subsystem: hdrSubsystem);
 

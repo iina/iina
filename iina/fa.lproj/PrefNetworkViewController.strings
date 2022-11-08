@@ -23,7 +23,7 @@
 "LNk-io-MM7.title" = "حافظه نهان:";
 
 /* Class = "NSTextFieldCell"; title = "Requires restarting IINA to take effect."; ObjectID = "RwW-JS-iTv"; */
-"RwW-JS-iTv.title" = "Requires restarting IINA to take effect.";
+"RwW-JS-iTv.title" = "برای اعمال تنظیمات برنامه را بسته و باز کنید.";
 
 /* Class = "NSTextFieldCell"; title = "IINA will search youtube-dl in this folder. Restart needed."; ObjectID = "YqE-yV-BvQ"; */
 "YqE-yV-BvQ.title" = "IINA ٬ youtube-dl را در این پوشه جستجو خواهد کرد. نیازمند restart.";
@@ -35,13 +35,13 @@
 "cyH-Md-FAD.title" = "فعال کردن YouTube-dl";
 
 /* Class = "NSTextFieldCell"; title = "Cache buffer size (KB):"; ObjectID = "dDD-g3-54w"; */
-"dDD-g3-54w.title" = "Cache buffer size (KB):";
+"dDD-g3-54w.title" = "حجم بافر(KB):";
 
 /* Class = "NSTextFieldCell"; title = "User agent:"; ObjectID = "eN6-Sk-kUa"; */
 "eN6-Sk-kUa.title" = "نماینده کاربر:";
 
-/* Class = "NSTextFieldCell"; title = "Default: 100"; ObjectID = "fab-7d-mMQ"; */
-"fab-7d-mMQ.title" = "پیش فرض: ۱۰۰";
+/* Class = "NSTextFieldCell"; title = "Default: 36000"; ObjectID = "fab-7d-mMQ"; */
+"fab-7d-mMQ.title" = "Default: 36000";
 
 /* Class = "NSButtonCell"; title = "Enable cache"; ObjectID = "fpV-al-bn7"; */
 "fpV-al-bn7.title" = "فعال کردن حافظه نهان";
@@ -53,4 +53,4 @@
 "yrh-Jm-Q4e.title" = "شبکه:";
 
 /* Class = "NSTextFieldCell"; title = "Raw options:"; ObjectID = "zCD-9d-ziV"; */
-"zCD-9d-ziV.title" = "Raw options:";
+"zCD-9d-ziV.title" = "تنظیمات خام:";

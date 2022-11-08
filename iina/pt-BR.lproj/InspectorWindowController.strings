@@ -20,7 +20,7 @@
 "A4y-LL-x0z.title" = "Taxa de Bits:";
 
 /* Class = "NSTextFieldCell"; title = "Mistimed Frames:"; ObjectID = "AYt-pH-UCi"; */
-"AYt-pH-UCi.title" = "Frames com tempo incorrecto:";
+"AYt-pH-UCi.title" = "Frames com tempo incorreto:";
 
 /* Class = "NSTextFieldCell"; title = "Display FPS:"; ObjectID = "AjU-1T-aGR"; */
 "AjU-1T-aGR.title" = "Exibir FPS:";
@@ -159,3 +159,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Decoder:"; ObjectID = "xix-0S-ehE"; */
 "xix-0S-ehE.title" = "Decodificador:";
+
+/* Class = "NSTextFieldCell"; title = "Primaries:"; ObjectID = "1kw-LO-KmJ"; */
+"1kw-LO-KmJ.title" = "Primaries:";
+
+/* Class = "NSTextFieldCell"; title = "Colorspace:"; ObjectID = "mLo-Wc-BoO"; */
+"mLo-Wc-BoO.title" = "Colorspace:";

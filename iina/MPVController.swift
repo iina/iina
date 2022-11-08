@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-import Foundation
+import JavaScriptCore
 
 fileprivate let yes_str = "yes"
 fileprivate let no_str = "no"
@@ -25,6 +25,46 @@ fileprivate let no_str = "no"
  */
 fileprivate let MPVLogLevel = "warn"
 
+
+// FIXME: should be moved to a separated file
+struct MPVHookValue {
+  typealias Block = (@escaping () -> Void) -> Void
+
+  var id: String?
+  var isJavascript: Bool
+  var block: Block?
+  var jsBlock: JSManagedValue!
+  var context: JSContext!
+
+  init(withIdentifier id: String, jsContext context: JSContext, jsBlock block: JSValue, owner: JavascriptAPIMpv) {
+    self.id = id
+    self.isJavascript = true
+    self.jsBlock = JSManagedValue(value: block)
+    self.context = context
+    context.virtualMachine.addManagedReference(self.jsBlock, withOwner: owner)
+  }
+
+  init(withBlock block: @escaping Block) {
+    self.isJavascript = false
+    self.block = block
+  }
+
+  func call(withNextBlock next: @escaping () -> Void) {
+    if isJavascript {
+      let block: @convention(block) () -> Void = { next() }
+      guard let callback = jsBlock.value else {
+        next()
+        return
+      }
+      callback.call(withArguments: [JSValue(object: block, in: context)!])
+      if callback.forProperty("constructor")?.forProperty("name")?.toString() != "AsyncFunction" {
+        next()
+      }
+    } else {
+      block!(next)
+    }
+  }
+}
 
 // Global functions
 
@@ -58,7 +98,7 @@ class MPVController: NSObject {
 
   var fileLoaded: Bool = false
 
-  private var hooks: [UInt64: () -> Void] = [:]
+  private var hooks: [UInt64: MPVHookValue] = [:]
   private var hookCounter: UInt64 = 1
 
   let observeProperties: [String: mpv_format] = [
@@ -92,6 +132,8 @@ class MPVController: NSObject {
     MPVOption.Window.windowScale: MPV_FORMAT_DOUBLE,
     MPVProperty.mediaTitle: MPV_FORMAT_STRING,
     MPVProperty.videoParamsRotate: MPV_FORMAT_INT64,
+    MPVProperty.videoParamsPrimaries: MPV_FORMAT_STRING,
+    MPVProperty.videoParamsGamma: MPV_FORMAT_STRING,
     MPVProperty.idleActive: MPV_FORMAT_FLAG
   ]
 
@@ -101,11 +143,7 @@ class MPVController: NSObject {
   }
 
   deinit {
-    ObjcUtils.silenced {
-      self.optionObservers.forEach { (k, _) in
-        UserDefaults.standard.removeObserver(self, forKeyPath: k)
-      }
-    }
+    removeOptionObservers()
   }
 
   /**
@@ -399,6 +437,8 @@ class MPVController: NSObject {
 
   func mpvUninitRendering() {
     guard let mpvRenderContext = mpvRenderContext else { return }
+    lockAndSetOpenGLContext()
+    defer { unlockOpenGLContext() }
     mpv_render_context_set_update_callback(mpvRenderContext, nil, nil)
     mpv_render_context_free(mpvRenderContext)
   }
@@ -414,8 +454,26 @@ class MPVController: NSObject {
     return flags & UInt64(MPV_RENDER_UPDATE_FRAME.rawValue) > 0
   }
 
-  // Basically send quit to mpv
+  /// Remove registered observers for IINA preferences.
+  private func removeOptionObservers() {
+    // Remove observers for IINA preferences.
+    ObjcUtils.silenced {
+      self.optionObservers.forEach { (k, _) in
+        UserDefaults.standard.removeObserver(self, forKeyPath: k)
+      }
+    }
+  }
+
+  /// Shutdown this mpv controller.
   func mpvQuit() {
+    // Remove observers for IINA preference. Must not attempt to change a mpv setting
+    // in response to an IINA preference change while mpv is shutting down.
+    removeOptionObservers()
+    // Remove observers for mpv properties. Because 0 was passed for reply_userdata when
+    // registering mpv property observers all observers can be removed in one call.
+    mpv_unobserve_property(mpv, 0)
+    // Start mpv quitting. Even though this command is being sent using the synchronous
+    // command API the quit command is special and will be executed by mpv asynchronously.
     command(.quit)
   }
 
@@ -468,6 +526,10 @@ class MPVController: NSObject {
     if checkError {
       chkErr(returnValue)
     }
+  }
+
+  func observe(property: String, format: mpv_format = MPV_FORMAT_DOUBLE) {
+    mpv_observe_property(mpv, 0, property, format)
   }
 
   // Set property
@@ -679,12 +741,25 @@ class MPVController: NSObject {
     return parsed
   }
 
+  func setNode(_ name: String, _ value: Any) {
+    guard var node = try? MPVNode.create(value) else {
+      Logger.log("setNode: cannot encode value for \(name)", level: .error)
+      return
+    }
+    mpv_set_property(mpv, name, MPV_FORMAT_NODE, &node)
+    MPVNode.free(node)
+  }
+
   // MARK: - Hooks
 
-  func addHook(_ name: MPVHook, priority: Int32 = 0, hook: @escaping () -> Void) {
+  func addHook(_ name: MPVHook, priority: Int32 = 0, hook: MPVHookValue) {
     mpv_hook_add(mpv, hookCounter, name.rawValue, priority)
     hooks[hookCounter] = hook
     hookCounter += 1
+  }
+
+  func removeHooks(withIdentifier id: String) {
+    hooks.filter { (k, v) in v.isJavascript && v.id == id }.keys.forEach { hooks.removeValue(forKey: $0) }
   }
 
   // MARK: - Events
@@ -703,20 +778,53 @@ class MPVController: NSObject {
     }
   }
 
+  /// Tell Cocoa to terminate the application.
+  ///
+  /// - Note: This code must be in a method that can be a target of a selector in order to support macOS 10.11.
+  ///     The `perform` method in `RunLoop` that accepts a closure was introduced in macOS 10.12. If IINA drops
+  ///     support for 10.11 then the code in this method can be moved to the closure in `handleEvent and this
+  ///     method can then be removed.`
+  @objc
+  internal func terminateApplication() {
+    NSApp.terminate(nil)
+  }
+
   // Handle the event
   private func handleEvent(_ event: UnsafePointer<mpv_event>!) {
     let eventId = event.pointee.event_id
 
     switch eventId {
     case MPV_EVENT_SHUTDOWN:
-      let quitByMPV = !player.isMpvTerminated
+      let quitByMPV = !player.isShuttingDown
       if quitByMPV {
+        // This happens when the user presses "q" in a player window and the quit command is sent
+        // directly to mpv. The user could also use mpv's IPC interface to send the quit command to
+        // mpv. Must not attempt to change a mpv setting in response to an IINA preference change
+        // now that mpv has shut down. This is not needed when IINA sends the quit command to mpv
+        // as in that case the observers are removed before the quit command is sent.
+        removeOptionObservers()
+        // Submit the following task synchronously to ensure it is done before application
+        // termination is started.
         DispatchQueue.main.sync {
-          NSApp.terminate(nil)
+          self.player.mpvHasShutdown(isMPVInitiated: true)
+        }
+        // Initiate application termination. AppKit requires this be done from the main thread,
+        // however the main dispatch queue must not be used to avoid blocking the queue as per
+        // instructions from Apple.
+        if #available(macOS 10.12, *) {
+          RunLoop.main.perform(inModes: [.common]) {
+            self.terminateApplication()
+          }
+        } else {
+          RunLoop.main.perform(#selector(self.terminateApplication), target: self,
+                               argument: nil, order: Int.min, modes: [.common])
         }
       } else {
         mpv_destroy(mpv)
         mpv = nil
+        DispatchQueue.main.async {
+          self.player.mpvHasShutdown()
+        }
       }
 
     case MPV_EVENT_LOG_MESSAGE:
@@ -732,9 +840,10 @@ class MPVController: NSObject {
       let hookEvent = event.pointee.data.bindMemory(to: mpv_event_hook.self, capacity: 1).pointee
       let hookID = hookEvent.id
       if let hook = hooks[userData] {
-        hook()
+        hook.call {
+          mpv_hook_continue(self.mpv, hookID)
+        }
       }
-      mpv_hook_continue(mpv, hookID)
 
     case MPV_EVENT_PROPERTY_CHANGE:
       let dataOpaquePtr = OpaquePointer(event.pointee.data)
@@ -791,6 +900,11 @@ class MPVController: NSObject {
       } else {
         player.info.shouldAutoLoadFiles = false
       }
+      if reason == MPV_END_FILE_REASON_STOP {
+        DispatchQueue.main.async {
+          self.player.playbackStopped()
+        }
+      }
 
     case MPV_EVENT_COMMAND_REPLY:
       let reply = event.pointee.reply_userdata
@@ -802,6 +916,9 @@ class MPVController: NSObject {
       // let eventName = String(cString: mpv_event_name(eventId))
       // Utility.log("mpv event (unhandled): \(eventName)")
     }
+
+    let eventName = "mpv.\(String(cString: mpv_event_name(eventId)))"
+    player.events.emit(.init(eventName))
   }
 
   private func onVideoParamsChange(_ data: UnsafePointer<mpv_node_list>) {
@@ -874,14 +991,18 @@ class MPVController: NSObject {
         player.mainWindow.rotation = rotation
       }
 
+    case MPVProperty.videoParamsPrimaries:
+      fallthrough;
+
+    case MPVProperty.videoParamsGamma:
+      if #available(macOS 10.15, *) {
+        player.refreshEdrMode()
+      }
+
     case MPVOption.TrackSelection.vid:
       player.info.vid = Int(getInt(MPVOption.TrackSelection.vid))
       player.postNotification(.iinaVIDChanged)
       player.sendOSD(.track(player.info.currentTrack(.video) ?? .noneVideoTrack))
-
-      if #available(macOS 10.15, *) {
-        player.refreshEdrMode()
-      }
 
     case MPVOption.TrackSelection.aid:
       player.info.aid = Int(getInt(MPVOption.TrackSelection.aid))
@@ -1120,6 +1241,25 @@ class MPVController: NSObject {
         self.player.mainWindow.quickSettingView.reload()
       }
     }
+
+    let eventName = EventController.Name("mpv.\(name).changed")
+    if player.events.hasListener(for: eventName) {
+      // FIXME: better convert to JSValue before passing to call()
+      let data: Any
+      switch property.format {
+      case MPV_FORMAT_FLAG:
+        data = property.data.bindMemory(to: Bool.self, capacity: 1).pointee
+      case MPV_FORMAT_INT64:
+        data = property.data.bindMemory(to: Int64.self, capacity: 1).pointee
+      case MPV_FORMAT_DOUBLE:
+        data = property.data.bindMemory(to: Double.self, capacity: 1).pointee
+      case MPV_FORMAT_STRING:
+        data = property.data.bindMemory(to: String.self, capacity: 1).pointee
+      default:
+        data = 0
+      }
+      player.events.emit(eventName, data: data)
+    }
   }
 
   // MARK: - User Options
@@ -1272,8 +1412,5 @@ fileprivate func mpvGetOpenGLFunc(_ ctx: UnsafeMutableRawPointer?, _ name: Unsaf
 fileprivate func mpvUpdateCallback(_ ctx: UnsafeMutableRawPointer?) {
   let layer = bridge(ptr: ctx!) as ViewLayer
   guard !layer.blocked else { return }
-
-  layer.mpvGLQueue.async {
-    layer.draw()
-  }
+  layer.draw()
 }

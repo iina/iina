@@ -1,5 +1,5 @@
 /* Class = "NSMenuItem"; title = "Show open file panel"; ObjectID = "1ce-4b-kgG"; */
-"1ce-4b-kgG.title" = "Mostrar painel de abrir arquivo";
+"1ce-4b-kgG.title" = "Mostrar painel de abrir ficheiro";
 
 /* Class = "NSButtonCell"; title = "Keep window open after playback finishes"; ObjectID = "2iM-j7-AzQ"; */
 "2iM-j7-AzQ.title" = "Manter a janela aberta depois de terminar a reprodução";
@@ -20,7 +20,7 @@
 "55O-ik-ql6.title" = "Ativar menu \"Abrir Recente\"";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "5RN-PV-pOZ"; */
-"5RN-PV-pOZ.title" = "Box";
+"5RN-PV-pOZ.title" = "Caixa";
 
 /* Class = "NSButtonCell"; title = "Minimized/un-minimized"; ObjectID = "5Y9-bX-K0f"; */
 "5Y9-bX-K0f.title" = "Minimizar/Não-minimizar";
@@ -32,13 +32,13 @@
 "8kU-8g-VgX.title" = "Requer reinício do IINA para ter efeito.";
 
 /* Class = "NSButtonCell"; title = "Only in \"music mode\""; ObjectID = "AVe-9Z-RgQ"; */
-"AVe-9Z-RgQ.title" = "Only in \"music mode\"";
+"AVe-9Z-RgQ.title" = "Apenas no \"modo de música\"";
 
 /* Class = "NSButtonCell"; title = "Track all played files in \"Open Recent\" menu"; ObjectID = "Ci8-j2-QS3"; */
-"Ci8-j2-QS3.title" = "Acompanhar todos os arquivos reproduzidos no menu \"Abrir Recente\"";
+"Ci8-j2-QS3.title" = "Acompanhar todos os ficheiros reproduzidos no menu \"Abrir Recente\"";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "DZT-7n-S4M"; */
-"DZT-7n-S4M.title" = "Box";
+"DZT-7n-S4M.title" = "Caixa";
 
 /* Class = "NSMenuItem"; title = "Daily"; ObjectID = "Ez8-qY-WAZ"; */
 "Ez8-qY-WAZ.title" = "Diariamente";
@@ -62,7 +62,7 @@
 "KYi-0W-zOr.title" = "Apagar outros ecrãs enquanto em ecrã completo";
 
 /* Class = "NSButtonCell"; title = "Switch to \"music mode\" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
-"KfL-r7-Uav.title" = "Alternar para \"modo de música\" automaticamente ao reproduzir um arquivo de áudio";
+"KfL-r7-Uav.title" = "Alternar para \"modo de música\" automaticamente ao reproduzir um ficheiro de áudio";
 
 /* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
 "Lac-Ol-g6E.title" = "Reproduzir Seguinte Automaticamente";
@@ -74,7 +74,7 @@
 "MlG-hl-goB.title" = "Entrar em Ecrã Completo";
 
 /* Class = "NSMenuItem"; title = "JPEG (.jpeg)"; ObjectID = "NVh-C5-b9i"; */
-"NVh-C5-b9i.title" = "JPEG (.jpeg)";
+"NVh-C5-b9i.title" = "JPEG (*.jpg)";
 
 /* Class = "NSTextFieldCell"; title = "Destination:"; ObjectID = "PhL-vP-i7L"; */
 "PhL-vP-i7L.title" = "Destino:";
@@ -86,10 +86,10 @@
 "REP-70-XOi.title" = "Mensalmente";
 
 /* Class = "NSButtonCell"; title = "Use legacy full screen"; ObjectID = "TvB-UM-FrS"; */
-"TvB-UM-FrS.title" = "Usar tela cheia legacy";
+"TvB-UM-FrS.title" = "Usar ecrã completo legacy";
 
 /* Class = "NSTextFieldCell"; title = "Otherwise only files that opened manually will show up in this menu."; ObjectID = "XFC-Lr-LmP"; */
-"XFC-Lr-LmP.title" = "Caso contrário, apenas arquivos que abriram manualmente aparecerão neste menu.";
+"XFC-Lr-LmP.title" = "Caso contrário, apenas ficheiros que abriram manualmente aparecerão neste menu.";
 
 /* Class = "NSButtonCell"; title = "Quit after all windows are closed"; ObjectID = "YLo-6E-tT7"; */
 "YLo-6E-tT7.title" = "Sair quando todas as janelas estiverem fechadas";
@@ -121,8 +121,8 @@
 /* Class = "NSTextFieldCell"; title = "History:"; ObjectID = "jeK-46-2BG"; */
 "jeK-46-2BG.title" = "Histórico:";
 
-/* Class = "NSButtonCell"; title = "Show artist and track name for audio files when available"; ObjectID = "kBI-Th-bBV"; */
-"kBI-Th-bBV.title" = "Show artist and track name for audio files when available";
+/* Class = "NSButtonCell"; title = "Show artist and track name for audio files when avaliable"; ObjectID = "kBI-Th-bBV"; */
+"kBI-Th-bBV.title" = "Mostrar o nome do artista e da faixa para ficheiros de áudio, quando disponível";
 
 /* Class = "NSButtonCell"; title = "Play upon entering full screen"; ObjectID = "lOw-pu-Llm"; */
 "lOw-pu-Llm.title" = "Começar quando entrar em ecrã completo";
@@ -140,13 +140,13 @@
 "slG-Jb-54B.title" = "De hora em hora";
 
 /* Class = "NSMenuItem"; title = "JPEG (.jpg)"; ObjectID = "tmy-ty-8uK"; */
-"tmy-ty-8uK.title" = "JPEG (.jpg)";
+"tmy-ty-8uK.title" = "JPEG (*.jpg)";
 
 /* Class = "NSTextFieldCell"; title = "Behavior:"; ObjectID = "uQR-Fx-oEm"; */
 "uQR-Fx-oEm.title" = "Comportamento:";
 
 /* Class = "NSButtonCell"; title = "Show previews after taking screenshots"; ObjectID = "xE7-Uu-19f"; */
-"xE7-Uu-19f.title" = "Show previews after taking screenshots";
+"xE7-Uu-19f.title" = "Mostrar pré-visualizações depois de fazer capturas de ecrã";
 
 /* Class = "NSTextFieldCell"; title = "Pause/resume when:"; ObjectID = "xr2-rB-O0x"; */
 "xr2-rB-O0x.title" = "Pausar / resumir quando:";

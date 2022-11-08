@@ -110,7 +110,7 @@
 "f2P-qb-wRx.title" = "Размер:";
 
 /* Class = "NSTabViewItem"; label = "General"; ObjectID = "f7a-XG-NCc"; */
-"f7a-XG-NCc.label" = "Обшее";
+"f7a-XG-NCc.label" = "Общее";
 
 /* Class = "NSTextFieldCell"; title = "Track:"; ObjectID = "f7i-wX-uxQ"; */
 "f7i-wX-uxQ.title" = "Трек:";
@@ -159,3 +159,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Decoder:"; ObjectID = "xix-0S-ehE"; */
 "xix-0S-ehE.title" = "Декодер:";
+
+/* Class = "NSTextFieldCell"; title = "Primaries:"; ObjectID = "1kw-LO-KmJ"; */
+"1kw-LO-KmJ.title" = "Главное:";
+
+/* Class = "NSTextFieldCell"; title = "Colorspace:"; ObjectID = "mLo-Wc-BoO"; */
+"mLo-Wc-BoO.title" = "Цветовое пространство:";

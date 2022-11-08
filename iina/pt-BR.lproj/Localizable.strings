@@ -82,6 +82,8 @@
 "osd.canceled" = "Cancelado";
 "osd.filter_added" = "Filtro adicionado: %@";
 "osd.filter_removed" = "Filtro removido";
+"osd.file_loop" = "Repetição do Arquivo: %@";
+"osd.playlist_loop" = "Repetição da Playlist: %@";
 
 "preference.title" = "Preferencias";
 "preference.general" = "Geral";
@@ -92,6 +94,7 @@
 "preference.control" = "Controles";
 "preference.keybindings" = "Combinações de teclas";
 "preference.advanced" = "Avançado";
+"preference.plugins" = "Plugins";
 "preference.utilities" = "Utilitários";
 "preference.scripts" = "Scripts";
 "preference.not_logged_in" = "Não está logado";
@@ -113,6 +116,16 @@
 "menu.pause" = "Pausar";
 "menu.resume" = "Reproduzir";
 "menu.speed" = "Velocidade: %.2fx";
+"menu.chapters" = "Show Chapters Panel";
+"menu.hide_chapters" = "Hide Chapters Panel";
+"menu.playlist" = "Show Playlist Panel";
+"menu.hide_playlist" = "Hide Playlist Panel";
+"menu.video" = "Show Video Panel";
+"menu.hide_video" = "Hide Video Panel";
+"menu.audio" = "Show Audio Panel";
+"menu.hide_audio" = "Hide Audio Panel";
+"menu.subtitles" = "Show Subtitles Panel";
+"menu.hide_subtitles" = "Hide Subtitles Panel";
 
 "menu.seek_forward" = "Ir adiante %.0fs";
 "menu.seek_backward" = "Ir pra trás %.0fs";
@@ -126,6 +139,7 @@
 "menu.sub_delay_down" = "Atraso de legenda - %.1fs";
 
 "menu.crop_custom" = "Personalizado...";
+"menu.find_online_sub" = "Find Online Subtitles from %@";
 
 "track.none" = "<None>";
 
@@ -141,7 +155,7 @@
 
 "alert.fatal_error" = "Erro fatal: %@ \nAplicação vai terminar.";
 "alert.mpv_error" = "Erro interno %@ (%@) ao ajustar a opção %@.";
-"alert.sleep" = "Impossível prevenir a tela de desligar!";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "Audio externo não suportado.";
 "alert.unsupported_sub" = "Legenda externa não suportada.";
@@ -220,6 +234,9 @@
 "alert.clear_watch_later.title" = "Limpar progresso de reprodução";
 "alert.clear_watch_later.message" = "Tem certeza que deseja excluir o progresso de reprodução (dados de \"ver mais tarde\")?";
 
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
+
 "alert.nothing_to_open" = "Nada para abrir.";
 
 "alert.no_video_track" = "Não há trilha de video.";
@@ -232,6 +249,15 @@
 "alert.assrt_token_prompt.title" = "Insira seu token de API";
 "alert.assrt_token_prompt.message" = "Por favor, registre-se na página da web aberta. Obtenha seu token na página inicial do usuário e insira-o abaixo:";
 "alert.assrt_token_invalid" = "Seu token da API do Assrt parece ser inválido.";
+
+"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
+"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
+"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+"alert.plugin_no_update" = "No update found.";
+"alert.plugin_update_found.title" = "Update found for %@";
+"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
+"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
+"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
 
 "playlist.total_length" = "%@ do total";
 "playlist.total_length_with_selected" = "%@ de %@ selecionado";
@@ -301,3 +327,31 @@
 "touchbar.time" = "Posição do Tempo";
 "touchbar.remainingTimeOrTotalDuration" = "Tempo Restante / Duração Total";
 "touchbar.toggle_pip" = "Ativar/Desativar Picture-in-Picture";
+
+// Plugin permissions
+
+"permissions.network-request.name" = "Network Request";
+"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
+"permissions.network-request.any_site" = "Any site";
+"permissions.show-osd.name" = "Show OSD";
+"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
+"permissions.show-alert.name" = "Show Alerts";
+"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
+"permissions.video-overlay.name" = "Add overlay on videos";
+"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
+"permissions.file-system.name" = "Access the file system";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+
+"plugin.install" = "Install";
+"plugin.installed" = "Installed";
+"plugin.not_installed" = "Not Installed";
+"plugin.local" = "Installed locally";
+"alert.plugin.install_error" = "Error occured during the installation: %@";
+"alert.invalid_url" = "The URL is invalid.";
+"plugin.install_error.invalid_url" = "The URL is invalid.";
+"plugin.install_error.file_not_found" = "Cannot find the package file.";
+"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
+"plugin.check_for_updates" = "Check for Updates";
+"plugin.updating" = "Downloading update…";

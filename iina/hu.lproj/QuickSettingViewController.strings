@@ -38,7 +38,7 @@
 "Ew1-N1-0Pi.title" = "0.25x";
 
 /* Class = "NSTextFieldCell"; title = "BORDER"; ObjectID = "GlZ-YU-dNm"; */
-"GlZ-YU-dNm.title" = "BORDER";
+"GlZ-YU-dNm.title" = "KERET";
 
 /* Class = "NSTextFieldCell"; title = "31.25"; ObjectID = "HBF-J7-Tie"; */
 "HBF-J7-Tie.title" = "31.25";
@@ -131,7 +131,7 @@
 "iS4-Zr-9Ig.title" = "Hangszínszabályzó";
 
 /* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[0] = "None"; ObjectID = "iuN-rN-jT7"; */
-"iuN-rN-jT7.ibShadowedLabels[0]" = "None";
+"iuN-rN-jT7.ibShadowedLabels[0]" = "Egyik sem";
 
 /* Class = "NSTabViewItem"; label = "Subtitle"; ObjectID = "jND-MZ-sKB"; */
 "jND-MZ-sKB.label" = "Felirat";
@@ -176,7 +176,7 @@
 "vFD-HU-RVz.title" = "Egyéni…";
 
 /* Class = "NSTextFieldCell"; title = "Subtitle style options may break ASS rendering, and some of them will be disabled depending on subtitle type."; ObjectID = "wBD-pZ-Bvu"; */
-"wBD-pZ-Bvu.title" = "Subtitle style options may break ASS rendering, and some of them will be disabled depending on subtitle type.";
+"wBD-pZ-Bvu.title" = "A felirat beállítások megszakíthatják az ASS renderelést, ezért pár le lesz tiltva a felirat típusától függően.";
 
 /* Class = "NSTextFieldCell"; title = "Audio track:"; ObjectID = "x39-62-7KC"; */
 "x39-62-7KC.title" = "Hangsáv:";

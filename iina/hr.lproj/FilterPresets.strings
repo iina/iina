@@ -1,0 +1,55 @@
+/*
+  FilterPresets.strings
+  iina
+
+  Created by lhc on 25/8/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+/* It's optional to localize descriptions for each parameter! */
+
+
+
+"crop" = "Obreži";
+"crop.w" = "Širina (početno: video širina)";
+"crop.h" = "Visina (početno: video visina)";
+"crop.x" = "Izvorište X (početno: centar)";
+"crop.y" = "Izvorište Y (početno: centar)";
+
+"expand" = "Proširi";
+"expand.w" = "Širina (početno: video širina)";
+"expand.h" = "Visina (početno: video visina)";
+"expand.x" = "Izvorište X (početno: centar)";
+"expand.y" = "Izvorište Y (početno: centar)";
+"expand.aspect" = "Raširi na omjer (npr. 4/3)";
+"expand.round" = "Zaokružuje vrijednost, kako bi bilo djeljivo s ovom vrijednosti";
+
+"sharpen" = "Izoštri";
+"sharpen.msize" = "Veličina matrice";
+"sharpen.amount" = "Količina";
+
+"blur" = "Zamagljenje";
+"blur.msize" = "Veličina matrice";
+"blur.amount" = "Količina";
+
+"delogo" = "Izbriši vodeni žig";
+"delogo.w" = "Širina";
+"delogo.h" = "Visina";
+"delogo.x" = "Izvorište X";
+"delogo.y" = "Izvorište Y";
+
+"negative" = "Negativ";
+
+"vflip" = "Preokreni";
+"hflip" = "Zrcali";
+
+"lut3d" = "3D LUT";
+"lut3d.file" = "Datoteka (možete i samo povući i pustiti u polje za unos)";
+"lut3d.interp" = "Interpolacija";
+
+"custom_mpv" = "Prilagođeno (mpv)";
+"custom_mpv.name" = "Naziv filtera";
+"custom_mpv.string" = "Vrijednost filtera";
+
+"custom_ffmpeg" = "Prilagođeno (FFmpeg)";
+"custom_ffmpeg.name" = "Naziv filtera";
+"custom_ffmpeg.string" = "Vrijednost filtera";

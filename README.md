@@ -1,5 +1,5 @@
 <p align="center">
-<img height="256" src="https://github.com/iina/iina/raw/master/iina/Assets.xcassets/AppIcon.appiconset/1024-1.png" />
+<img height="256" src="https://github.com/iina/iina/raw/master/iina/Assets.xcassets/AppIcon.appiconset/iina-icon-256.png" />
 </p>
 
 <h1 align="center">IINA</h1>
@@ -41,6 +41,9 @@ IINA uses mpv for media playback. To build IINA, you can either fetch copies of 
 ```console
 ./other/download_libs.sh
 ```
+  - Tips:
+    - Change URL in the shell script if you want to download arch-specific binaries. By default, it will download the universal ones. You can download other binaries from `https://iina.io/dylibs/${ARCH}/fileList.txt` where `ARCH` can be `universal`, `arm64` and `x86_64`.
+    - If you want to build an older IINA version, make sure to download the correponding dylibs. For example, `https://iina.io/dylibs/1.2.0/universal/fileList.txt`.
 
 2. Open iina.xcodeproj in the [latest public version of Xcode](https://itunes.apple.com/us/app/xcode/id497799835). *IINA may not build if you use any other version.*
 
@@ -67,9 +70,9 @@ IINA uses mpv for media playback. To build IINA, you can either fetch copies of 
 	# port install mpv +uchardet -bundle -rubberband configure.args="--enable-libmpv-shared --enable-lua --enable-libarchive --enable-libbluray --disable-swift --disable-rubberband"
 	```
 
-2. Copy the latest [header files from mpv](https://github.com/mpv-player/mpv/tree/master/libmpv) (\*.h) into `deps/include/mpv/`.
+2. Copy the correponding mpv and FFmpeg header files into `deps/include/`, replacing the current ones. You can find them on GitHub [(e.g. mpv)](https://github.com/mpv-player/mpv/tree/master/libmpv), but it's recommended to copy them from the Homebrew or MacPorts installation. Always make sure the header files have the same version of the dylibs.
 
-3. Run `other/parse_doc.rb`. This script will fetch the latest mpv documentation and generate `MPVOption.swift`, `MPVCommand.swift` and `MPVProperty.swift`. This is only needed when updating libmpv. Note that if the API changes, the player source code may also need to be changed.
+3. Run `other/parse_doc.rb`. This script will fetch the latest mpv documentation and generate `MPVOption.swift`, `MPVCommand.swift` and `MPVProperty.swift`. Copy them from `other/` to `iina/`, replacing the current files. This is only needed when updating libmpv. Note that if the API changes, the player source code may also need to be changed.
 
 4. Run `other/change_lib_dependencies.rb`. This script will deploy the dependent libraries into `deps/lib`. If you're using a package manager to manage dependencies, invoke it like so:
 
@@ -87,11 +90,13 @@ IINA uses mpv for media playback. To build IINA, you can either fetch copies of 
 
 5. Open iina.xcodeproj in the [latest public version of Xcode](https://itunes.apple.com/us/app/xcode/id497799835). *IINA may not build if you use any other version.*
 
-6. Remove all of references to .dylib files from the Frameworks group in the sidebar and drag all the .dylib files in `deps/lib` to that group.
+6. Remove all of references to .dylib files from the Frameworks group in the sidebar and add all the .dylib files in `deps/lib` to that group by clicking  "Add Files to iina..." in the context menu.
 
-7. Drag all the .dylib files in `deps/lib` into the "Embedded Binaries" section of the iina target.
+7. Add all the imported .dylib files into the "Copy Dylibs" phase under "Build Phases" tab of the iina target.
 
-8. Build the project.
+8. Make sure the necessary .dylib files present in the "Link Binary With Libraries" phase under "Build Phases". Xcode should already added all dylibs under this section.
+
+9. Build the project.
 
 ## Contributing
 

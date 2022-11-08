@@ -1,5 +1,5 @@
 /* Class = "NSButtonCell"; title = "Clear Saved Playback Progress…"; ObjectID = "4nM-C4-9oM"; */
-"4nM-C4-9oM.title" = "保存済み再生位置を消去する…";
+"4nM-C4-9oM.title" = "保存済みの再生進度を消去する…";
 
 /* Class = "NSButtonCell"; title = "Video"; ObjectID = "8wH-Gi-mRV"; */
 "8wH-Gi-mRV.title" = "ビデオ";
@@ -49,8 +49,20 @@
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "kbP-VI-dmT"; */
 "kbP-VI-dmT.title" = "キャンセル";
 
+/* Class = "NSTextFieldCell"; title = "Restore Alerts"; ObjectID = "AAD-Db-Acs"; */
+"AAD-Db-Acs.title" = "Restore Alerts";
+
+/* Class = "NSButtonCell"; title = "Restore Suppressed Alerts…"; ObjectID = "XAz-xa-LVo"; */
+"XAz-xa-LVo.title" = "Restore Suppressed Alerts…";
+
+/* Class = "NSTextFieldCell"; title = "Restored."; ObjectID = "Wdh-me-hdC"; */
+"Wdh-me-hdC.title" = "Restored.";
+
+/* Class = "NSTextFieldCell"; title = "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."; ObjectID = "F5i-KF-2SW"; */
+"F5i-KF-2SW.title" = "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox.";
+
 /* Class = "NSTextFieldCell"; title = "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."; ObjectID = "pPC-q2-9Gh"; */
-"pPC-q2-9Gh.title" = "このボタンをクリックすると「あとで見る」フォルダーにある全てのファイルが消去されます。これらのファイルには再生位置や再生中に適用された設定が含まれています。";
+"pPC-q2-9Gh.title" = "以下のボタンをクリックすると「あとで見る」フォルダーにある全てのファイルが消去されます。これらのファイルには再生進度や再生中に適用された設定が含まれています。";
 
 /* Class = "NSTextFieldCell"; title = "Calculating…"; ObjectID = "tRq-eU-AV3"; */
 "tRq-eU-AV3.title" = "計算中…";

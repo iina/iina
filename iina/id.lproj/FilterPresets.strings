@@ -10,46 +10,46 @@
 
 
 "crop" = "Crop";
-"crop.w" = "Width (default: video width)";
-"crop.h" = "Height (default: video height)";
-"crop.x" = "Origin X (default: center)";
-"crop.y" = "Origin Y (default: center)";
+"crop.w" = "Lebar (bawaan: lebar video)";
+"crop.h" = "Tinggi (bawaan: tinggi video)";
+"crop.x" = "Asal X (bawaan: tengah)";
+"crop.y" = "Asal Y (bawaan: tengah)";
 
-"expand" = "Expand";
-"expand.w" = "Width (default: video width)";
-"expand.h" = "Height (default: video height)";
-"expand.x" = "Origin X (default: center)";
-"expand.y" = "Origin Y (default: center)";
-"expand.aspect" = "Expands to fit an aspect (e.g: 4/3)";
-"expand.round" = "Rounds up to make divisible by this value";
+"expand" = "Perluas";
+"expand.w" = "Lebar (bawaan: lebar video)";
+"expand.h" = "Tinggi (bawaan: tinggi video)";
+"expand.x" = "Asal X (bawaan: tengah)";
+"expand.y" = "Asal Y (bawaan: tengah)";
+"expand.aspect" = "Perbesar untuk mengepaskan aspek rasio (cth: 4/3)";
+"expand.round" = "Bulatkan agar dapat dibagi dengan nilai ini";
 
-"sharpen" = "Sharpen";
-"sharpen.msize" = "Matrix size";
-"sharpen.amount" = "Amount";
+"sharpen" = "Pertajam";
+"sharpen.msize" = "Ukuran matriks";
+"sharpen.amount" = "Besaran";
 
 "blur" = "Blur";
-"blur.msize" = "Matrix size";
-"blur.amount" = "Amount";
+"blur.msize" = "Ukuran matriks";
+"blur.amount" = "Besaran";
 
 "delogo" = "Hapus Logo";
-"delogo.w" = "Width";
-"delogo.h" = "Height";
+"delogo.w" = "Lebar";
+"delogo.h" = "Tinggi";
 "delogo.x" = "Origin X";
 "delogo.y" = "Origin Y";
 
-"negative" = "Negative";
+"negative" = "Alih Negatif";
 
-"vflip" = "Flip";
-"hflip" = "Mirror";
+"vflip" = "Balikkan";
+"hflip" = "Cerminkan";
 
 "lut3d" = "3D LUT";
-"lut3d.file" = "File path (you can also drag & drop the file into the input box)";
-"lut3d.interp" = "Interpolation mode";
+"lut3d.file" = "Alamat file (anda juga dapat menggeser file langsung ke dalam input box)";
+"lut3d.interp" = "Interpolasi";
 
 "custom_mpv" = "Custom (mpv)";
-"custom_mpv.name" = "Filter name";
-"custom_mpv.string" = "Filter value";
+"custom_mpv.name" = "Nama filter";
+"custom_mpv.string" = "Nilai filter";
 
 "custom_ffmpeg" = "Custom (FFmpeg)";
-"custom_ffmpeg.name" = "Filter name";
-"custom_ffmpeg.string" = "Filter value";
+"custom_ffmpeg.name" = "Nama filter";
+"custom_ffmpeg.string" = "Nilai filter";

@@ -10,6 +10,7 @@ import Cocoa
 
 typealias PK = Preference.Key
 
+
 class Utility {
 
   static let supportedFileExt: [MPVTrack.TrackType: [String]] = [
@@ -44,8 +45,15 @@ class Utility {
     alert.runModal()
   }
 
-  static func showAlert(_ key: String, comment: String? = nil, arguments: [CVarArg]? = nil, style: NSAlert.Style = .critical, sheetWindow: NSWindow? = nil) {
+  static func showAlert(_ key: String, comment: String? = nil, arguments: [CVarArg]? = nil, style: NSAlert.Style = .critical, sheetWindow: NSWindow? = nil, suppressionKey: PK? = nil) {
     let alert = NSAlert()
+    if let suppressionKey = suppressionKey {
+      // This alert includes a suppression button that allows the user to suppress the alert.
+      // Do not show the alert if it has been suppressed.
+      guard !Preference.bool(for: suppressionKey) else { return }
+      alert.showsSuppressionButton = true
+    }
+
     switch style {
     case .critical:
       alert.messageText = NSLocalizedString("alert.title_error", comment: "Error")
@@ -76,6 +84,11 @@ class Utility {
     } else {
       alert.runModal()
     }
+
+    // If the user asked for this alert to be suppressed set the associated preference.
+    if let suppressionButton = alert.suppressionButton, suppressionButton.state == .on {
+      Preference.set(true, for: suppressionKey!)
+    }
   }
 
   // MARK: - Panels, Alerts
@@ -91,12 +104,22 @@ class Utility {
    - Returns: Whether user dismissed the panel by clicking OK, discardable when using sheet.
    */
   @discardableResult
-  static func quickAskPanel(_ key: String, titleComment: String? = nil, messageComment: String? = nil, sheetWindow: NSWindow? = nil, callback: ((NSApplication.ModalResponse) -> Void)? = nil) -> Bool {
+  static func quickAskPanel(_ key: String, titleComment: String? = nil, messageComment: String? = nil, titleArgs: [CVarArg]? = nil, messageArgs: [CVarArg]? = nil, sheetWindow: NSWindow? = nil, callback: ((NSApplication.ModalResponse) -> Void)? = nil) -> Bool {
     let panel = NSAlert()
     let titleKey = "alert." + key + ".title"
     let messageKey = "alert." + key + ".message"
-    panel.messageText = NSLocalizedString(titleKey, comment: titleComment ?? titleKey)
-    panel.informativeText = NSLocalizedString(messageKey, comment: messageComment ?? messageKey)
+    let titleFormat = NSLocalizedString(titleKey, comment: titleComment ?? titleKey)
+    let messageFormat = NSLocalizedString(messageKey, comment: messageComment ?? messageKey)
+    if let args = titleArgs {
+      panel.messageText = String(format: titleFormat, arguments: args)
+    } else {
+      panel.messageText = titleFormat
+    }
+    if let args = messageArgs {
+      panel.informativeText = String(format: messageFormat, arguments: args)
+    } else {
+      panel.informativeText = messageFormat
+    }
     panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
     panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
 
@@ -171,11 +194,15 @@ class Utility {
   /**
    Pop up a save panel.
    */
-  static func quickSavePanel(title: String, types: [String], sheetWindow: NSWindow? = nil, callback: @escaping (URL) -> Void) {
+  static func quickSavePanel(title: String, filename: String? = nil, types: [String]? = nil,
+                             sheetWindow: NSWindow? = nil, callback: @escaping (URL) -> Void) {
     let panel = NSSavePanel()
     panel.title = title
     panel.canCreateDirectories = true
     panel.allowedFileTypes = types
+    if filename != nil {
+      panel.nameFieldStringValue = filename!
+    }
     let handler: (NSApplication.ModalResponse) -> Void = { result in
       if result == .OK, let url = panel.url {
         callback(url)
@@ -319,6 +346,14 @@ class Utility {
     }
   }
 
+  static func createFileIfNotExist(url: URL) {
+    let path = url.path
+    // check exist
+    if !FileManager.default.fileExists(atPath: path) {
+      FileManager.default.createFile(atPath: url.path, contents: nil, attributes: nil)
+    }
+  }
+
   static private let allTypes: [MPVTrack.TrackType] = [.video, .audio, .sub]
 
   static func mediaType(forExtension ext: String) -> MPVTrack.TrackType? {
@@ -356,23 +391,24 @@ class Utility {
     return url
   }()
 
-  static let logDirURL: URL = {
-    // get path
-    let libraryPath = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)
-    Logger.ensure(libraryPath.count >= 1, "Cannot get path to Logs directory")
-    let logsUrl = libraryPath.first!.appendingPathComponent("Logs", isDirectory: true)
-    let bundleID = Bundle.main.bundleIdentifier!
-    let appLogsUrl = logsUrl.appendingPathComponent(bundleID, isDirectory: true)
-    createDirIfNotExist(url: appLogsUrl)
-    return appLogsUrl
-  }()
-
   static let watchLaterURL: URL = {
     let url = Utility.appSupportDirUrl.appendingPathComponent(AppData.watchLaterFolder, isDirectory: true)
     createDirIfNotExist(url: url)
     return url
   }()
-  
+
+  static let pluginsURL: URL = {
+    let url = Utility.appSupportDirUrl.appendingPathComponent(AppData.pluginsFolder, isDirectory: true)
+    createDirIfNotExist(url: url)
+    return url
+  }()
+
+  static let binariesURL: URL = {
+    let url = Utility.appSupportDirUrl.appendingPathComponent(AppData.binariesFolder, isDirectory: true)
+    createDirIfNotExist(url: url)
+    return url
+  }()
+
   static let cacheURL: URL = {
     let cachesPath = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)
     Logger.ensure(cachesPath.count >= 1, "Cannot get path to Caches directory")
@@ -386,7 +422,7 @@ class Utility {
     createDirIfNotExist(url: appThumbnailCacheUrl)
     return appThumbnailCacheUrl
   }()
-  
+
   static let screenshotCacheURL: URL = {
     let url = cacheURL.appendingPathComponent(AppData.screenshotCacheFolder, isDirectory: true)
     createDirIfNotExist(url: url)
@@ -478,6 +514,18 @@ class Utility {
       }
     }
     return latestFile
+  }
+
+  /// Make sure the block is executed on the main thread. Be careful since it uses `sync`. Keep the block mininal.
+  @discardableResult
+  static func executeOnMainThread<T>(block: () -> T) -> T {
+    if Thread.isMainThread {
+      return block()
+    } else {
+      return DispatchQueue.main.sync {
+        block()
+      }
+    }
   }
 
   // MARK: - Util classes

@@ -1,0 +1,116 @@
+/*
+  KeyBinding.strings
+  iina
+
+  Created by lhc on 4/2/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+"cmd.ignore" = "تجاهل";
+"cmd.seek" = "بحث";
+"cmd.revert-seek" = "عكس البحث";
+"cmd.set" = "تعيين";
+"cmd.cycle" = "دورة";
+"cmd.cycle-values" = "دورة في";
+"cmd.add" = "تغيير";
+"cmd.multiply" = "مضاعفة";
+"cmd.frame-step" = "الإطار التالي";
+"cmd.frame-back-step" = "الإطار السابق";
+"cmd.ab-loop" = "حلقة A-B";
+"cmd.sub-seek" = "البحث عن الترجمة";
+"cmd.playlist-next" = "الوسائط التالية";
+"cmd.playlist-prev" = "الوسائط السابقة";
+"cmd.playlist-move" = "نقل عنصر قائمة التشغيل";
+"cmd.playlist-clear" = "مسح قائمة التشغيل";
+"cmd.playlist-remove" = "إزالة الحالي";
+"cmd.playlist-shuffle" = "خلط";
+"cmd.write-watch-later-config" = "تسجيل سجل التشغيل";
+"cmd.stop" = "إيقاف";
+"cmd.quit" = "الخروج";
+"cmd.quit-watch-later" = "إنهاء (حفظ التقدم)";
+"cmd.screenshot" = "لقطة الشاشة";
+"cmd.screenshot-to-file" = "لقطة شاشة للملف";
+"cmd.loadfile" = "تحميل الملف";
+"cmd.loadlist" = "تحميل قائمة التشغيل";
+"cmd.run" = "تشغيل";
+
+"iina.flip" = "قلب";
+"iina.mirror" = "عكس";
+
+"iina.toggle-pip" = "تبديل إلى الصورة في الصورة";
+"iina.toggle-music-mode" = "تبديل إلى وضع الموسيقى";
+"iina.open-file" = "فتح ملف";
+"iina.open-url" = "فتح عنوان URL";
+"iina.video-panel" = "لوحة الفيديو";
+"iina.audio-panel" = "لوحة الصوت";
+"iina.sub-panel" = "لوحة الترجمة";
+"iina.playlist-panel" = "لوحة قائمة التشغيل";
+"iina.chapter-panel" = "لوحة الفصل";
+"iina.bigger-window" = "نافذة أكبر";
+"iina.smaller-window" = "نافذة أصغر";
+"iina.fit-to-screen" = "ملائمة للشاشة";
+"iina.toggle-flip" = "تشغيل قلب الصورة";
+"iina.toggle-mirror" = "تشغيل وضع المرآة";
+"iina.save-playlist" = "حفظ قائمة التشغيل الحالية";
+"iina.delete-current-file" = "حذف الملف الحالي";
+"iina.delete-current-file-hard" = "حذف الملف الحالي مباشرة دون الانتقال إلى سلة المهملات";
+"iina.find-online-subs" = "البحث عن ترجمات على الإنترنت";
+"iina.save-downloaded-sub" = "حفظ الترجمة التي تم تنزيلها";
+
+"yes" = "نعم";
+"no" = "لا";
+"to" = "إلى";
+"by" = "بواسطة";
+"in" = "في";
+"add" = "زود";
+"minus" = "انقص";
+"forward" = "تقدم";
+"backward" = "ترجيع";
+"seek-to" = "إلى";
+
+"relative" = "ث";
+"absolute" = "ث";
+"absolute-percent" = "٪";
+"relative-percent" = "٪";
+"relative+exact" = "ث (دقيق)";
+"relative-percent+exact" = "٪ (دقيق)";
+"absolute+keyframe" = "٪ (إطار رئيسي)";
+"absolute-percent+keyframe" = "٪ (إطار رئيسي)";
+
+"opt.pause" = "توقف";
+"opt.speed" = "السرعة";
+
+"opt.window-scale" = "مقياس النافذة";
+
+"opt.video" = "ملف الڤيديو";
+"opt.video-aspect" = "تجانب الفيديو";
+"opt.contrast" = "التباين";
+"opt.brightness" = "السطوع";
+"opt.gamma" = "جاما";
+"opt.saturation" = "التشبع";
+"opt.deinterlace" = "تصحيح تشابك الصورة";
+
+"opt.audio" = "ملف الصوت";
+"opt.volume" = "مستوى الصوت";
+"opt.mute" = "كتم الصوت";
+"opt.audio-delay" = "تأخير الصوت";
+
+"opt.sub" = "ملف الترجمة";
+"opt.sub-delay" = "تأخير الترجمة";
+"opt.sub-pos" = "موضع الترجمة";
+"opt.sub-scale" = "مقياس الترجمة";
+"opt.sub-visibility" = "وضوح الترجمة";
+"opt.sub-ass-style-override" = "تعديل نمط ASS";
+
+"opt.fullscreen" = "ملء الشاشة";
+"opt.ontop" = "عائمة في الأعلى";
+
+"opt.chapter" = "الفصل";
+
+"read.set" = "تعيين {{property}} إلى {{value}}";
+"read.add" = "{{property}} {{value}}";
+"read.multiply" = "ضرب {{property}} ب {{factor}}x";
+"read.cycle" = "الدورة {{property}}{{#dir_down}} نزولًا{{/dir_down}}";
+"read.cycle-values" = "الدورة {{property}} في ({{{values}}})";
+"read.seek" = "ابحث عن {{#fwd}}إلى الأمام{{/fwd}}{{#bwd}}خلف{{/bwd}}{{#abs}}إلى{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(دقيقة){{/exact}}{{#kf}}(المفتاح){{/kf}}";
+"read.sub-seek" = "البحث عن الترجمة {{#skip_1}}التالي{{/skip_1}}{{#skip_-1}}السابق{{/skip_-1}}";

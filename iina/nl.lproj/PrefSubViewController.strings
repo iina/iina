@@ -125,7 +125,7 @@
 "gkc-qt-sD9.title" = "Dikte:";
 
 /* Class = "NSButtonCell"; title = "Bold"; ObjectID = "hEk-7E-10r"; */
-"hEk-7E-10r.title" = "Vet";
+"hEk-7E-10r.title" = "Dikgedrukt";
 
 /* Class = "NSBox"; title = "Align"; ObjectID = "kvJ-Tj-KMb"; */
 "kvJ-Tj-KMb.title" = "Positie";
@@ -164,7 +164,7 @@
 "vDc-dw-liI.title" = "Kleur:";
 
 /* Class = "NSTextFieldCell"; title = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues."; ObjectID = "vYb-qH-XkH"; */
-"vYb-qH-XkH.title" = "Indien ingeschakeld zoekt IINA automatisch online naar ondertiteling voor video's langer dan 20 minuten die geen ondertiteling bevatten.";
+"vYb-qH-XkH.title" = "Indien ingeschakeld zal IINA automatisch onderteling zoeken voor video's langer dan 20 minuten.";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "xGf-fF-4Hx"; */
 "xGf-fF-4Hx.title" = "Y:";
@@ -176,7 +176,7 @@
 "y1E-JR-KRI.title" = "Dezelfde bestandsnaam";
 
 /* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "zaE-bH-XfT"; */
-"zaE-bH-XfT.title" = "Voorkeurstalen:";
+"zaE-bH-XfT.title" = "Taalvoorkeur:";
 
 /* Class = "NSMenuItem"; title = "Left"; ObjectID = "zml-kt-LN8"; */
 "zml-kt-LN8.title" = "Links";

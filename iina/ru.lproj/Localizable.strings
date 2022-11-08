@@ -82,6 +82,8 @@
 "osd.canceled" = "Отменено";
 "osd.filter_added" = "Добавлен фильтр: %@";
 "osd.filter_removed" = "Фильтр удален";
+"osd.file_loop" = "Цикл файла: %@";
+"osd.playlist_loop" = "Цикл плейлиста: %@";
 
 "preference.title" = "Настройки";
 "preference.general" = "Основные";
@@ -92,6 +94,7 @@
 "preference.control" = "Управление";
 "preference.keybindings" = "Клавиши";
 "preference.advanced" = "Дополнительно";
+"preference.plugins" = "Плагины";
 "preference.utilities" = "Утилиты";
 "preference.scripts" = "Скрипты";
 "preference.not_logged_in" = "Вход не выполнен";
@@ -113,6 +116,16 @@
 "menu.pause" = "Пауза";
 "menu.resume" = "Возобновить";
 "menu.speed" = "Скорость: %.2fx";
+"menu.chapters" = "Показать панель глав";
+"menu.hide_chapters" = "Скрыть панель глав";
+"menu.playlist" = "Показать панель плейлиста";
+"menu.hide_playlist" = "Скрыть панель плейлиста";
+"menu.video" = "Показать панель видео";
+"menu.hide_video" = "Скрыть панель видео";
+"menu.audio" = "Показать панель аудио";
+"menu.hide_audio" = "Скрыть аудио-панель";
+"menu.subtitles" = "Показывать панель субтитров";
+"menu.hide_subtitles" = "Скрыть панель субтитров";
 
 "menu.seek_forward" = "Шаг вперед %.0f с";
 "menu.seek_backward" = "Шаг назад %.0f с";
@@ -126,6 +139,7 @@
 "menu.sub_delay_down" = "Задержка субтитров - %.1f с";
 
 "menu.crop_custom" = "Другое...";
+"menu.find_online_sub" = "Найти субтитры онлайн на %@";
 
 "track.none" = "<Нет>";
 
@@ -141,7 +155,7 @@
 
 "alert.fatal_error" = "Фатальная ошибка: %@ \nПриложение будет завершено.";
 "alert.mpv_error" = "Внутренняя ошибка %@ (%@) при установке опции %@.";
-"alert.sleep" = "Не удалось предотвратить переход дисплея в режим сна!";
+"alert.sleep" = "Не удалось оставить дисплей включенным! (0x%0X8)";
 
 "alert.unsupported_audio" = "Неподдерживаемая внешняя аудиодорожка.";
 "alert.unsupported_sub" = "Неподдерживаемые внешние субтитры.";
@@ -220,6 +234,9 @@
 "alert.clear_watch_later.title" = "Очистить сохраненный прогресс воспроизведения";
 "alert.clear_watch_later.message" = "Вы уверены, что хотите удалить весь сохраненный прогресс воспроизведения (Посмотреть позже)?";
 
+"alert.restore_alerts.title" = "Восстановить скрытые оповещения";
+"alert.restore_alerts.message" = "Вы уверены, что хотите включить скрытые оповещения?";
+
 "alert.nothing_to_open" = "Нечего открывать.";
 
 "alert.no_video_track" = "Нет видеодорожки.";
@@ -232,6 +249,15 @@
 "alert.assrt_token_prompt.title" = "ведите свой API  токен";
 "alert.assrt_token_prompt.message" = "Зарегистрируйтесь на отрытом сайте. Получите свой токен на в проыиле пользователя и введите его ниже:";
 "alert.assrt_token_invalid" = "Ваш API токен кажется недействительен.";
+
+"alert.plugin_uninstall.title" = "Вы уверены, что хотите удалить %@?";
+"alert.plugin_uninstall.message" = "Плагин будет удален с диска.";
+"alert.duplicated_plugin_id" = "Обнаружены одинаковые идентификаторы для двух или более плагинов: \"%@\". Это может привести к необычному поведению. Пожалуйста, найдите эти плагины в настройках и сообщите об этой проблеме их авторам. Вы также можете самостоятельно изменить идентификатор в файле info.json, если плагин установлен локально.";
+"alert.plugin_no_update" = "Обновления не найдены.";
+"alert.plugin_update_found.title" = "Найдены обновления для %@";
+"alert.plugin_update_found.message" = "Последняя версия %@. У вас %@. Хотите обновить?";
+"alert.plugin_permission" = "Этот плагин запрашивает следующие разрешения. Проверьте их, перед тем как продолжить.";
+"alert.plugin_permission_added" = "Это обновление требует дополнительные разрешения. Проверьте их, перед тем как продолжить.";
 
 "playlist.total_length" = "%@ в общей сложности";
 "playlist.total_length_with_selected" = "%@ из %@ выбрано";
@@ -301,3 +327,31 @@
 "touchbar.time" = "Временная позиция";
 "touchbar.remainingTimeOrTotalDuration" = "Оставшееся время / Общая продолжительность";
 "touchbar.toggle_pip" = "Переключить в \"Картинка в картинке\"";
+
+// Plugin permissions
+
+"permissions.network-request.name" = "Сеть";
+"permissions.network-request.desc" = "Этот плагин может запрашивать или загружать данные с этих сайтов:";
+"permissions.network-request.any_site" = "Любой сайт";
+"permissions.show-osd.name" = "Показывать сообщения на экране";
+"permissions.show-osd.desc" = "Этот плагин сможет показывать сообщения на экране.";
+"permissions.show-alert.name" = "Показывать уведомления";
+"permissions.show-alert.desc" = "Этот плагин сможет показывать всплывающие уведомления.";
+"permissions.video-overlay.name" = "Добавлять оверлей на видео";
+"permissions.video-overlay.desc" = "Этот плагин сможет отображать дополнительный контент поверх видео.";
+"permissions.file-system.name" = "Доступ к диску";
+"permissions.file-system.desc" = "Этот плагин сможет получить доступ ко всем файлам на диске, включая конфиденциальную информацию. Он также сможет запускать другие программы, которые в теории могут навредить компьютеру. Пожалуйста, проверьте исходный код плагина.";
+
+"plugin.install" = "Установить";
+"plugin.installed" = "Установлено";
+"plugin.not_installed" = "Не установлено";
+"plugin.local" = "Установлено локально";
+"alert.plugin.install_error" = "Произошла ошибка при установке: %@";
+"alert.invalid_url" = "Недопустимая URL-ссылка.";
+"plugin.install_error.invalid_url" = "Неправильная ссылка на плагин.";
+"plugin.install_error.file_not_found" = "Не удалось найти пакет.";
+"plugin.install_error.cannot_download" = "Не удалось загрузить плагин.\n\nВывод установщика:%@\n";
+"plugin.install_error.cannot_unpackage" = "Не удалось распаковать плагин.\n\nВывод установщика:%@\n";
+"plugin.install_error.cannot_load" = "IINA не может загрузить этот плагин. Возможно, у него неверный формат.";
+"plugin.check_for_updates" = "Проверить обновления";
+"plugin.updating" = "Загружаю обновление…";

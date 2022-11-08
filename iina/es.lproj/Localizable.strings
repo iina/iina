@@ -17,18 +17,18 @@
 "general.password" = "Contraseña";
 
 // Guide Window
-"guide.highlights" = "Highlights";
-"guide.basic_settings" = "Basic Settings";
-"guide.faq" = "Frequently Asked Questions";
+"guide.highlights" = "Destacados";
+"guide.basic_settings" = "Configuración básica";
+"guide.faq" = "Preguntas frecuentes";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Cargando… %d%%";
 "main.opening_stream" = "Abrir flujo de datos";
-"osc.precision" = "Precision";
-"osc.1s" = "1 second";
-"osc.100ms" = "100 milliseconds";
-"osc.10ms" = "10 milliseconds";
-"osc.1ms" = "1 millisecond";
+"osc.precision" = "Precisión";
+"osc.1s" = "1 segundo";
+"osc.100ms" = "100 milisegundos";
+"osc.10ms" = "10 milisegundos";
+"osc.1ms" = "1 milisegundo";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Predeterminado";
@@ -82,6 +82,8 @@
 "osd.canceled" = "Cancelado";
 "osd.filter_added" = "Filtro Añadido: %@";
 "osd.filter_removed" = "Filtro Eliminado";
+"osd.file_loop" = "Bucle de archivo: %@";
+"osd.playlist_loop" = "Bucle de lista de reproducción: %@";
 
 "preference.title" = "Preferencias";
 "preference.general" = "General";
@@ -92,6 +94,7 @@
 "preference.control" = "Controles";
 "preference.keybindings" = "Atajos de teclado";
 "preference.advanced" = "Avanzado";
+"preference.plugins" = "Plugins";
 "preference.utilities" = "Utilidades";
 "preference.scripts" = "Scripts";
 "preference.not_logged_in" = "Sin iniciar sesión";
@@ -113,6 +116,16 @@
 "menu.pause" = "Pausar";
 "menu.resume" = "Reanudar";
 "menu.speed" = "Velocidad: %.2fx";
+"menu.chapters" = "Mostrar el panel de capítulos";
+"menu.hide_chapters" = "Ocultar el panel de capítulos";
+"menu.playlist" = "Mostrar el panel de la lista de reproducción";
+"menu.hide_playlist" = "Ocultar el panel de la lista de reproducción";
+"menu.video" = "Mostrar el panel de vídeo";
+"menu.hide_video" = "Ocultar el panel de vídeo";
+"menu.audio" = "Mostrar el panel de audio";
+"menu.hide_audio" = "Ocultar el panel de audio";
+"menu.subtitles" = "Mostrar el panel de subtítulos";
+"menu.hide_subtitles" = "Ocultar el panel de subtítulos";
 
 "menu.seek_forward" = "Adelantar %.0fs";
 "menu.seek_backward" = "Retroceder %.0fs";
@@ -126,6 +139,7 @@
 "menu.sub_delay_down" = "Retrasar subtítulos - %.1fs";
 
 "menu.crop_custom" = "Personalizado...";
+"menu.find_online_sub" = "Buscar subtítulos en línea desde %@";
 
 "track.none" = "<Ninguno>";
 
@@ -141,7 +155,7 @@
 
 "alert.fatal_error" = "Error fatal: %@ \nLa aplicación se cerrará ahora.";
 "alert.mpv_error" = "Error interno %@ (%@) al configurar la opción %@.";
-"alert.sleep" = "¡No se puede evitar que la pantalla entre en reposo!";
+"alert.sleep" = "¡No se puede evitar que la pantalla entre en reposo! (0x%0X8)";
 
 "alert.unsupported_audio" = "Archivo de audio externo no compatible.";
 "alert.unsupported_sub" = "Subtítulo externo no compatible.";
@@ -220,6 +234,9 @@
 "alert.clear_watch_later.title" = "Borrar el progreso de reproducción guardada";
 "alert.clear_watch_later.message" = "¿Estás seguro de borrar todo el progreso de reproducción guardado (datos de \"ver más tarde\")?";
 
+"alert.restore_alerts.title" = "Restaurar alertas reprimidas";
+"alert.restore_alerts.message" = "¿Estás seguro de que quieres restaurar las alertas suprimidas?";
+
 "alert.nothing_to_open" = "Nada para abrir.";
 
 "alert.no_video_track" = "No hay una pista de vídeo.";
@@ -232,6 +249,15 @@
 "alert.assrt_token_prompt.title" = "Ingresa tu token de la API";
 "alert.assrt_token_prompt.message" = "Por favor, regístrese en la página web. Obtenga su token en la página de inicio de usuario e ingréselo a continuación:";
 "alert.assrt_token_invalid" = "Parece que tu token de la API Assrt no es válido.";
+
+"alert.plugin_uninstall.title" = "¿Estás seguro de desinstalar %@?";
+"alert.plugin_uninstall.message" = "El plugin se eliminará de su disco.";
+"alert.duplicated_plugin_id" = "Se han detectado identificadores de plugins duplicados. Dos o más plugins tienen el mismo identificador \"%@\". Esto puede causar comportamientos anormales. Puede encontrarlos en Preferencias -> Plugins e informe a sus autores. Si un plugin está instalado localmente, también puede cambiar manualmente su identificador en el archivo Info.json del plugin.";
+"alert.plugin_no_update" = "No se encontraron actualizaciones.";
+"alert.plugin_update_found.title" = "Actualización encontrada para %@";
+"alert.plugin_update_found.message" = "La última versión es %@. Tienes la versión %@. ¿Desea actualizarla?";
+"alert.plugin_permission" = "Este plugin requiere los siguientes permisos. Por favor, revíselos antes de continuar.";
+"alert.plugin_permission_added" = "Esta actualización requiere permisos adicionales. Por favor, revíselos antes de continuar.";
 
 "playlist.total_length" = "%@ en total";
 "playlist.total_length_with_selected" = "%@ de %@ seleccionados";
@@ -301,3 +327,31 @@
 "touchbar.time" = "Posición en el tiempo";
 "touchbar.remainingTimeOrTotalDuration" = "Tiempo restante / Duración total";
 "touchbar.toggle_pip" = "Alternar Imagen dentro de imagen";
+
+// Plugin permissions
+
+"permissions.network-request.name" = "Solicitud de red";
+"permissions.network-request.desc" = "Este plugin puede solicitar o subir datos a estos sitios web:";
+"permissions.network-request.any_site" = "Cualquier sitio";
+"permissions.show-osd.name" = "Mostrar OSD";
+"permissions.show-osd.desc" = "Este plugin puede mostrar mensajes OSD (en pantalla).";
+"permissions.show-alert.name" = "Mostrar alertas";
+"permissions.show-alert.desc" = "Este plugin puede mostrar alertas emergentes.";
+"permissions.video-overlay.name" = "Añadir superposición en vídeos";
+"permissions.video-overlay.desc" = "Este plugin puede representar contenido adicional en la parte superior del vídeo.";
+"permissions.file-system.name" = "Acceder al sistema de archivos";
+"permissions.file-system.desc" = "Este plugin puede leer o escribir archivos en su disco, incluyendo información confidencial. También puede llamar a otros programas o aplicaciones que puedan dañar su ordenador, así que asegúrese de verificar la fuente.";
+
+"plugin.install" = "Instalar";
+"plugin.installed" = "Instalado";
+"plugin.not_installed" = "No instalado";
+"plugin.local" = "Instalado localmente";
+"alert.plugin.install_error" = "Ha ocurrido un error durante la instalación: %@";
+"alert.invalid_url" = "La URL no es válida.";
+"plugin.install_error.invalid_url" = "La URL no es válida.";
+"plugin.install_error.file_not_found" = "No se pudo encontrar el archivo de paquete.";
+"plugin.install_error.cannot_download" = "Error al descargar el plugin.\n\nSalida:%@\n";
+"plugin.install_error.cannot_unpackage" = "Error al desempaquetar el plugin.\n\nSalida:%@\n";
+"plugin.install_error.cannot_load" = "IINA no puede cargar este plugin. Puede estar en el formato incorrecto.";
+"plugin.check_for_updates" = "Buscar actualizaciones";
+"plugin.updating" = "Descargando actualización…";

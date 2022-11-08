@@ -82,6 +82,8 @@
 "osd.canceled" = "キャンセルされました";
 "osd.filter_added" = "追加したフィルター: %@";
 "osd.filter_removed" = "削除したフィルター";
+"osd.file_loop" = "ファイルループ: %@";
+"osd.playlist_loop" = "プレイリストループ: %@";
 
 "preference.title" = "環境設定";
 "preference.general" = "一般";
@@ -92,6 +94,7 @@
 "preference.control" = "コントロール";
 "preference.keybindings" = "キーの割り当て";
 "preference.advanced" = "詳細設定";
+"preference.plugins" = "Plugins";
 "preference.utilities" = "ユーティリティ";
 "preference.scripts" = "スクリプト";
 "preference.not_logged_in" = "ログインしていません";
@@ -113,6 +116,16 @@
 "menu.pause" = "一時停止";
 "menu.resume" = "再生";
 "menu.speed" = "再生速度: %.2f倍";
+"menu.chapters" = "Show Chapters Panel";
+"menu.hide_chapters" = "Hide Chapters Panel";
+"menu.playlist" = "Show Playlist Panel";
+"menu.hide_playlist" = "Hide Playlist Panel";
+"menu.video" = "Show Video Panel";
+"menu.hide_video" = "Hide Video Panel";
+"menu.audio" = "Show Audio Panel";
+"menu.hide_audio" = "Hide Audio Panel";
+"menu.subtitles" = "Show Subtitles Panel";
+"menu.hide_subtitles" = "Hide Subtitles Panel";
 
 "menu.seek_forward" = "%.0f秒進む";
 "menu.seek_backward" = "%.0f秒戻る";
@@ -126,6 +139,7 @@
 "menu.sub_delay_down" = "字幕ディレイ - %.1f秒";
 
 "menu.crop_custom" = "カスタム...";
+"menu.find_online_sub" = "Find Online Subtitles from %@";
 
 "track.none" = "<なし>";
 
@@ -141,7 +155,7 @@
 
 "alert.fatal_error" = "致命的なエラー: %@ \nアプリケーションを終了します。";
 "alert.mpv_error" = "内部エラー %@ (%@) がユーザーオプション %@ の設定中に発生しました。";
-"alert.sleep" = "ディスプレイのスリープを解除できません！";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "対応していない外部のオーディオファイルです。";
 "alert.unsupported_sub" = "対応していない外部の字幕ファイルです。";
@@ -217,8 +231,11 @@
 "alert.clear_history.title" = "再生履歴を消去する";
 "alert.clear_history.message" = "本当にすべての再生履歴を消去しますか？";
 
-"alert.clear_watch_later.title" = "保存済み再生位置を消去する";
-"alert.clear_watch_later.message" = "本当にすべての保存済み再生位置(\"あとで見る\"情報)を消去しますか？";
+"alert.clear_watch_later.title" = "保存済みの再生進度を消去する";
+"alert.clear_watch_later.message" = "本当にすべての保存済み再生進度(\"あとで見る\"情報)を消去しますか？";
+
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
 
 "alert.nothing_to_open" = "開くファイルがありません。";
 
@@ -232,6 +249,15 @@
 "alert.assrt_token_prompt.title" = "APIトークンを入力";
 "alert.assrt_token_prompt.message" = "開かれたWebページで登録してください。ホーム画面でトークンを取得し、以下に入力してください:";
 "alert.assrt_token_invalid" = "Assrt APIトークンが有効ではないようです。";
+
+"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
+"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
+"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+"alert.plugin_no_update" = "No update found.";
+"alert.plugin_update_found.title" = "Update found for %@";
+"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
+"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
+"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
 
 "playlist.total_length" = "合計 %@";
 "playlist.total_length_with_selected" = "%@ / %@を選択中";
@@ -268,7 +294,7 @@
 "subencoding.auto" = "自動検出";
 
 "osc_toolbar.settings" = "クイック設定";
-"osc_toolbar.playlist" = "プレイリストとチャプタ";
+"osc_toolbar.playlist" = "プレイリストとチャプター";
 "osc_toolbar.pip" = "ピクチャー・イン・ピクチャーの切り替え";
 "osc_toolbar.full_screen" = "フルスクリーン切り替え";
 "osc_toolbar.music_mode" = "ミュージックモード切り替え";
@@ -286,8 +312,8 @@
 
 // Touch bar
 
-"touchbar.ahead_15" = "15秒 進める";
-"touchbar.ahead_30" = "30秒 進める";
+"touchbar.ahead_15" = "15秒 進む";
+"touchbar.ahead_30" = "30秒 進む";
 "touchbar.back_15" = "15秒 戻す";
 "touchbar.back_30" = "30秒 戻す";
 "touchbar.next_video" = "次のビデオへ";
@@ -301,3 +327,31 @@
 "touchbar.time" = "再生位置";
 "touchbar.remainingTimeOrTotalDuration" = "残り時間/合計時間";
 "touchbar.toggle_pip" = "ピクチャー・イン・ピクチャーの切り替え";
+
+// Plugin permissions
+
+"permissions.network-request.name" = "Network Request";
+"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
+"permissions.network-request.any_site" = "Any site";
+"permissions.show-osd.name" = "Show OSD";
+"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
+"permissions.show-alert.name" = "Show Alerts";
+"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
+"permissions.video-overlay.name" = "Add overlay on videos";
+"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
+"permissions.file-system.name" = "Access the file system";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+
+"plugin.install" = "Install";
+"plugin.installed" = "Installed";
+"plugin.not_installed" = "Not Installed";
+"plugin.local" = "Installed locally";
+"alert.plugin.install_error" = "Error occured during the installation: %@";
+"alert.invalid_url" = "The URL is invalid.";
+"plugin.install_error.invalid_url" = "The URL is invalid.";
+"plugin.install_error.file_not_found" = "Cannot find the package file.";
+"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
+"plugin.check_for_updates" = "Check for Updates";
+"plugin.updating" = "Downloading update…";

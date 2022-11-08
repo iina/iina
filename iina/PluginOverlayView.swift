@@ -16,7 +16,7 @@ class PluginOverlayView: WKWebView, WKNavigationDelegate {
 
   override func hitTest(_ point: NSPoint) -> NSView? {
     guard isClickable else {
-      return super.hitTest(point)
+      return nil
     }
 
     var clickable = false

@@ -49,6 +49,18 @@
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "kbP-VI-dmT"; */
 "kbP-VI-dmT.title" = "Vazgeç";
 
+/* Class = "NSTextFieldCell"; title = "Restore Alerts"; ObjectID = "AAD-Db-Acs"; */
+"AAD-Db-Acs.title" = "Uyarıları geri yükle";
+
+/* Class = "NSButtonCell"; title = "Restore Suppressed Alerts…"; ObjectID = "XAz-xa-LVo"; */
+"XAz-xa-LVo.title" = "Bastırılmış Uyarıları Geri Yükle…";
+
+/* Class = "NSTextFieldCell"; title = "Restored."; ObjectID = "Wdh-me-hdC"; */
+"Wdh-me-hdC.title" = "Geri yüklendi.";
+
+/* Class = "NSTextFieldCell"; title = "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."; ObjectID = "F5i-KF-2SW"; */
+"F5i-KF-2SW.title" = "Aşağıdaki düğme, \"Bu mesajı bir daha gösterme\" onay kutusu kullanılarak bastırılan tüm uyarıları geri yükleyecektir.";
+
 /* Class = "NSTextFieldCell"; title = "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."; ObjectID = "pPC-q2-9Gh"; */
 "pPC-q2-9Gh.title" = "Aşağıdaki düğme \"daha sonra izle\" klasöründeki tüm dosyaları silecektir. Bu dosyalar kaydedilmiş tüm oynatma ilerlemelerini ve oynatma sırasında uygulanan ayarları içerir.";
 

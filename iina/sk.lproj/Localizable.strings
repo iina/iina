@@ -116,6 +116,16 @@
 "menu.pause" = "Pozastaviť";
 "menu.resume" = "Pokračovať";
 "menu.speed" = "Rýchlosť: %.2fx";
+"menu.chapters" = "Show Chapters Panel";
+"menu.hide_chapters" = "Hide Chapters Panel";
+"menu.playlist" = "Show Playlist Panel";
+"menu.hide_playlist" = "Hide Playlist Panel";
+"menu.video" = "Show Video Panel";
+"menu.hide_video" = "Hide Video Panel";
+"menu.audio" = "Show Audio Panel";
+"menu.hide_audio" = "Hide Audio Panel";
+"menu.subtitles" = "Show Subtitles Panel";
+"menu.hide_subtitles" = "Hide Subtitles Panel";
 
 "menu.seek_forward" = "Posunúť dopredu %.0f s";
 "menu.seek_backward" = "Posunúť dozadu %.0f s";
@@ -145,7 +155,7 @@
 
 "alert.fatal_error" = "Závažná chyba: %@ \nAplikácia sa teraz ukončí.";
 "alert.mpv_error" = "Interná chyba %@ (%@) pri nastavení možnosti %@.";
-"alert.sleep" = "Nedá sa zabrániť uspaniu displeja!";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "Nepodporovaný externý zvukový súbor.";
 "alert.unsupported_sub" = "Nepodporované externé titulky.";
@@ -223,6 +233,9 @@
 
 "alert.clear_watch_later.title" = "Vymazať uložené priebehy prehrávania";
 "alert.clear_watch_later.message" = "Naozaj chcete vymazať všetky uložené priebehy prehrávania (dáta \"pozrieť neskôr\")?";
+
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
 
 "alert.nothing_to_open" = "Žiaden súbor.";
 

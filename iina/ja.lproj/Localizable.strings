@@ -116,6 +116,16 @@
 "menu.pause" = "一時停止";
 "menu.resume" = "再生";
 "menu.speed" = "再生速度: %.2f倍";
+"menu.chapters" = "Show Chapters Panel";
+"menu.hide_chapters" = "Hide Chapters Panel";
+"menu.playlist" = "Show Playlist Panel";
+"menu.hide_playlist" = "Hide Playlist Panel";
+"menu.video" = "Show Video Panel";
+"menu.hide_video" = "Hide Video Panel";
+"menu.audio" = "Show Audio Panel";
+"menu.hide_audio" = "Hide Audio Panel";
+"menu.subtitles" = "Show Subtitles Panel";
+"menu.hide_subtitles" = "Hide Subtitles Panel";
 
 "menu.seek_forward" = "%.0f秒進む";
 "menu.seek_backward" = "%.0f秒戻る";
@@ -145,7 +155,7 @@
 
 "alert.fatal_error" = "致命的なエラー: %@ \nアプリケーションを終了します。";
 "alert.mpv_error" = "内部エラー %@ (%@) がユーザーオプション %@ の設定中に発生しました。";
-"alert.sleep" = "ディスプレイのスリープを解除できません！";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "対応していない外部のオーディオファイルです。";
 "alert.unsupported_sub" = "対応していない外部の字幕ファイルです。";
@@ -223,6 +233,9 @@
 
 "alert.clear_watch_later.title" = "保存済みの再生進度を消去する";
 "alert.clear_watch_later.message" = "本当にすべての保存済み再生進度(\"あとで見る\"情報)を消去しますか？";
+
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
 
 "alert.nothing_to_open" = "開くファイルがありません。";
 

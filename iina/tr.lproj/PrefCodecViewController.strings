@@ -51,3 +51,15 @@
 
 /* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "wjt-O6-KbC"; */
 "wjt-O6-KbC.title" = "Tercih edilen dil:";
+
+/* Class = "NSButtonCell"; title = "Load ICC profile"; ObjectID = "3g4-jW-uJd"; */
+"3g4-jW-uJd.title" = "ICC profilini yükle";
+
+/* Class = "NSTextFieldCell"; title = "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"; ObjectID = "M2M-of-gjd"; */
+"M2M-of-gjd.title" = "Videoyu RGB'den ekran görüntüsüne çevirebilmek için kullanılan ekrana gerekli olan ICC profilini yükle ve kullan(Sadece SDR modu)";
+
+/* Class = "NSButtonCell"; title = "Enable HDR support"; ObjectID = "R7Z-9c-vPJ"; */
+"R7Z-9c-vPJ.title" = "Enable HDR support";
+
+/* Class = "NSTextFieldCell"; title = "Enable HDR mode by default when playing HDR videos."; ObjectID = "ZgQ-bc-yEE"; */
+"ZgQ-bc-yEE.title" = "Enable HDR mode by default when playing HDR videos.";

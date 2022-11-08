@@ -116,6 +116,16 @@
 "menu.pause" = "Pauză";
 "menu.resume" = "Reia";
 "menu.speed" = "Viteză: %.2fx";
+"menu.chapters" = "Show Chapters Panel";
+"menu.hide_chapters" = "Hide Chapters Panel";
+"menu.playlist" = "Show Playlist Panel";
+"menu.hide_playlist" = "Hide Playlist Panel";
+"menu.video" = "Show Video Panel";
+"menu.hide_video" = "Hide Video Panel";
+"menu.audio" = "Show Audio Panel";
+"menu.hide_audio" = "Hide Audio Panel";
+"menu.subtitles" = "Show Subtitles Panel";
+"menu.hide_subtitles" = "Hide Subtitles Panel";
 
 "menu.seek_forward" = "Sari înainte %.0fs";
 "menu.seek_backward" = "Sari înapoi %.0fs";
@@ -145,7 +155,7 @@
 
 "alert.fatal_error" = "Eroare critică: %@ \nAplicația se va închide.";
 "alert.mpv_error" = "Eroare internă %@ (%@) la setarea opțiunii %@.";
-"alert.sleep" = "Nu se poate preveni adormirea ecranului!";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "Fișier audio extern neacceptat.";
 "alert.unsupported_sub" = "Subtitrare externă neacceptată. ";
@@ -223,6 +233,9 @@
 
 "alert.clear_watch_later.title" = "Șterge progresul de redare salvat";
 "alert.clear_watch_later.message" = "Sigur dorești să ștergi istoricul de redare salvat (incluzând „urmărește mai târziu”)?";
+
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
 
 "alert.nothing_to_open" = "Nimic de redat.";
 

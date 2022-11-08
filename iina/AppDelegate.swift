@@ -84,6 +84,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     return PreferenceWindowController(viewControllers: list)
   }()
 
+  /// Whether the shutdown sequence timed out.
+  private var timedOut = false
+
   @IBOutlet weak var menuController: MenuController!
 
   @IBOutlet weak var dockMenu: NSMenu!
@@ -300,6 +303,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     return Preference.bool(for: .quitWhenNoOpenedWindow)
   }
 
+  @objc
+  func shutdownTimedout() {
+    timedOut = true
+    Logger.log("Timed out waiting for players to stop and shutdown", level: .warning)
+    // For debugging list players that have not terminated.
+    for player in PlayerCore.playerCores {
+      let label = player.label ?? "unlabeled"
+      if !player.isStopped {
+        Logger.log("Player \(label) failed to stop", level: .warning)
+      } else if !player.isShutdown {
+        Logger.log("Player \(label) failed to shutdown", level: .warning)
+      }
+    }
+    // For debugging purposes we do not remove observers in case players stop or shutdown after
+    // the timeout has fired as knowing that occurred maybe useful for debugging why the
+    // termination sequence failed to complete on time.
+    Logger.log("Not waiting for players to shutdown; proceeding with application termination",
+               level: .warning)
+    // Tell Cocoa to proceed with termination.
+    NSApp.reply(toApplicationShouldTerminate: true)
+  }
+
   func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
     Logger.log("App should terminate")
     isTerminating = true
@@ -356,26 +381,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // arbitrary timeout that forces termination to complete. The expectation is that this timeout
     // is never triggered. If a timeout warning is logged during termination then that needs to be
     // investigated.
-    var timedOut = false
-    let timer = Timer(timeInterval: 10, repeats: false) { _ in
-      timedOut = true
-      Logger.log("Timed out waiting for players to stop and shutdown", level: .warning)
-      // For debugging list players that have not terminated.
-      for player in PlayerCore.playerCores {
-        let label = player.label ?? "unlabeled"
-        if !player.isStopped {
-          Logger.log("Player \(label) failed to stop", level: .warning)
-        } else if !player.isShutdown {
-          Logger.log("Player \(label) failed to shutdown", level: .warning)
-        }
+    var timer: Timer
+    if #available(macOS 10.12, *) {
+      timer = Timer(timeInterval: 10, repeats: false) { _ in
+        // Once macOS 10.11 is no longer supported the contents of the method can be inlined in this
+        // closure.
+        self.shutdownTimedout()
       }
-      // For debugging purposes we do not remove observers in case players stop or shutdown after
-      // the timeout has fired as knowing that occurred maybe useful for debugging why the
-      // termination sequence failed to complete on time.
-      Logger.log("Not waiting for players to shutdown; proceeding with application termination",
-                 level: .warning)
-      // Tell Cocoa to proceed with termination.
-      NSApp.reply(toApplicationShouldTerminate: true)
+    } else {
+      timer = Timer(timeInterval: TimeInterval(10), target: self,
+                    selector: #selector(self.shutdownTimedout), userInfo: nil, repeats: false)
     }
     RunLoop.main.add(timer, forMode: .common)
 
@@ -383,7 +398,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let center = NotificationCenter.default
     var observers: [NSObjectProtocol] = []
     var observer = center.addObserver(forName: .iinaPlayerStopped, object: nil, queue: .main) { note in
-      guard !timedOut else {
+      guard !self.timedOut else {
         // The player has stopped after IINA already timed out, gave up waiting for players to
         // shutdown, and told Cocoa to proceed with termination. AppKit will continue to process
         // queued tasks during application termination even after AppKit has called
@@ -409,7 +424,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     // Establish an observer for a player core shutting down.
     observer = center.addObserver(forName: .iinaPlayerShutdown, object: nil, queue: .main) { _ in
-      guard !timedOut else {
+      guard !self.timedOut else {
         // The player has shutdown after IINA already timed out, gave up waiting for players to
         // shutdown, and told Cocoa to proceed with termination. AppKit will continue to process
         // queued tasks during application termination even after AppKit has called

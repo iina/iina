@@ -116,6 +116,16 @@
 "menu.pause" = "Pauzeer";
 "menu.resume" = "Hervat";
 "menu.speed" = "Snelheid: %.2fx";
+"menu.chapters" = "Show Chapters Panel";
+"menu.hide_chapters" = "Hide Chapters Panel";
+"menu.playlist" = "Show Playlist Panel";
+"menu.hide_playlist" = "Hide Playlist Panel";
+"menu.video" = "Show Video Panel";
+"menu.hide_video" = "Hide Video Panel";
+"menu.audio" = "Show Audio Panel";
+"menu.hide_audio" = "Hide Audio Panel";
+"menu.subtitles" = "Show Subtitles Panel";
+"menu.hide_subtitles" = "Hide Subtitles Panel";
 
 "menu.seek_forward" = "Ga %.0fs vooruit";
 "menu.seek_backward" = "Ga %.0fs terug";
@@ -145,7 +155,7 @@
 
 "alert.fatal_error" = "Fatale fout: %@ \nDe applicatie zal nu afsluiten.";
 "alert.mpv_error" = "Interne fout: %@ (%@) bij het instellen van optie %@.";
-"alert.sleep" = "Kan de slaapstand van het beeldscherm niet voorkomen.";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "Het externe audiobestand wordt niet ondersteund.";
 "alert.unsupported_sub" = "De externe ondertiteling wordt niet ondersteund.";
@@ -223,6 +233,9 @@
 
 "alert.clear_watch_later.title" = "Wis opgeslagen afspeelpositie";
 "alert.clear_watch_later.message" = "Weet je zeker dat je alle opgeslagen afspeelposities wilt wissen?";
+
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
 
 "alert.nothing_to_open" = "Niets om te openen.";
 

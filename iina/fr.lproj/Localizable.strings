@@ -94,7 +94,7 @@
 "preference.control" = "Contrôles";
 "preference.keybindings" = "Raccourcis clavier";
 "preference.advanced" = "Avancé";
-"preference.plugins" = "Plugins";
+"preference.plugins" = "Extensions";
 "preference.utilities" = "Utilitaires";
 "preference.scripts" = "Scripts";
 "preference.not_logged_in" = "Déconnecté";
@@ -116,6 +116,16 @@
 "menu.pause" = "Pause";
 "menu.resume" = "Lire";
 "menu.speed" = "Vitesse : %.2fx";
+"menu.chapters" = "Show Chapters Panel";
+"menu.hide_chapters" = "Hide Chapters Panel";
+"menu.playlist" = "Show Playlist Panel";
+"menu.hide_playlist" = "Hide Playlist Panel";
+"menu.video" = "Show Video Panel";
+"menu.hide_video" = "Hide Video Panel";
+"menu.audio" = "Show Audio Panel";
+"menu.hide_audio" = "Hide Audio Panel";
+"menu.subtitles" = "Show Subtitles Panel";
+"menu.hide_subtitles" = "Hide Subtitles Panel";
 
 "menu.seek_forward" = "Reculer de %.0fs";
 "menu.seek_backward" = "Avancer de %.0fs";
@@ -129,7 +139,7 @@
 "menu.sub_delay_down" = "Délai des sous-titres -%.1fs";
 
 "menu.crop_custom" = "Personnalisé…";
-"menu.find_online_sub" = "Find Online Subtitles from %@";
+"menu.find_online_sub" = "Chercher des sous-titres en ligne sur %@";
 
 "track.none" = "<Aucun>";
 
@@ -145,7 +155,7 @@
 
 "alert.fatal_error" = "Erreur fatale : %@ \nL'application va maintenant quitter.";
 "alert.mpv_error" = "Erreur %@ (%@) lors de la configuration de l'option %@.";
-"alert.sleep" = "Impossible d'empêcher la veille de l'écran !";
+"alert.sleep" = "Impossible d'empêcher la veille de l'écran ! (0x%0X8)";
 
 "alert.unsupported_audio" = "Fichier audio externe non supporté.";
 "alert.unsupported_sub" = "Fichier sous-titre externe non supporté.";
@@ -224,6 +234,9 @@
 "alert.clear_watch_later.title" = "Effacer les progressions de lecture";
 "alert.clear_watch_later.message" = "Souhaitez-vous vraiment effacer les progressions de lecture sauvegardées (\"à regarder plus tard\") ?";
 
+"alert.restore_alerts.title" = "Rétablir les alertes masquées";
+"alert.restore_alerts.message" = "Êtes-vous sûr de vouloir rétablir les alertes sélectionnées ?";
+
 "alert.nothing_to_open" = "Aucun fichier à ouvrir.";
 
 "alert.no_video_track" = "Il n'y a pas de piste vidéo.";
@@ -237,14 +250,14 @@
 "alert.assrt_token_prompt.message" = "Veuillez vous inscrire sur la page web ouverte. Récupérez votre token sur votre espace client et saisissez-le ci-dessous :";
 "alert.assrt_token_invalid" = "Votre token d'API Assrt semble être invalide.";
 
-"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
-"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
-"alert.plugin_no_update" = "No update found.";
-"alert.plugin_update_found.title" = "Update found for %@";
-"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
-"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
-"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+"alert.plugin_uninstall.title" = "Êtes-vous sûr de vouloir désinstaller %@ ?";
+"alert.plugin_uninstall.message" = "Cette extension sera supprimée de votre disque dur.";
+"alert.duplicated_plugin_id" = "Plusieurs extensions ont le même identifiant : \"%@\". Cela peut entraîner des comportements anormaux. Vous pouvez les identifier Préférences - Extensions et le signaler à leurs auteurs. Si une extension est installée localement, vous pouvez changer manuellement son identifiant dans le fichier Info.json de celle-ci.";
+"alert.plugin_no_update" = "Aucune mise à jour disponible.";
+"alert.plugin_update_found.title" = "Mise à jour disponible pour %@";
+"alert.plugin_update_found.message" = "La dernière version est %@. Vous avez %@. Voulez-vous mettre à jour ?";
+"alert.plugin_permission" = "Cette extension demande les autorisations suivantes. Veuillez les vérifier avant de continuer.";
+"alert.plugin_permission_added" = "Cette extension demande les autorisations suivantes. Veuillez les vérifier avant de continuer.";
 
 "playlist.total_length" = "%@ au total";
 "playlist.total_length_with_selected" = "%@ sur %@ sélectionnés";
@@ -317,28 +330,28 @@
 
 // Plugin permissions
 
-"permissions.network-request.name" = "Network Request";
-"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
-"permissions.network-request.any_site" = "Any site";
-"permissions.show-osd.name" = "Show OSD";
-"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
-"permissions.show-alert.name" = "Show Alerts";
-"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
-"permissions.video-overlay.name" = "Add overlay on videos";
-"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
-"permissions.file-system.name" = "Access the file system";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.network-request.name" = "Réseau";
+"permissions.network-request.desc" = "Cette extension peut interroger et envoyer des données à ces sites Web :";
+"permissions.network-request.any_site" = "N'import quel site";
+"permissions.show-osd.name" = "Afficher l'OSD";
+"permissions.show-osd.desc" = "Cette extension peut afficher des messages OSD (\"On-Screen Display\").";
+"permissions.show-alert.name" = "Afficher les alertes";
+"permissions.show-alert.desc" = "Cette extension peut afficher des alertes.";
+"permissions.video-overlay.name" = "Ajouter une superposition aux vidéos";
+"permissions.video-overlay.desc" = "Cette extension peut afficher du contenu supplémentaire par-dessus la vidéo.";
+"permissions.file-system.name" = "Accéder au système de fichiers";
+"permissions.file-system.desc" = "Cette extension peut lire ou écrire des fichiers sur votre disque dur, y compris des informations sensibles. Elle peut également appeler d'autres programmes ou applications qui peuvent nuire à votre ordinateur. Assurez-vous qu'elle provient d'une source fiable.";
 
-"plugin.install" = "Install";
-"plugin.installed" = "Installed";
-"plugin.not_installed" = "Not Installed";
-"plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occured during the installation: %@";
-"alert.invalid_url" = "The URL is invalid.";
-"plugin.install_error.invalid_url" = "The URL is invalid.";
-"plugin.install_error.file_not_found" = "Cannot find the package file.";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Check for Updates";
-"plugin.updating" = "Downloading update…";
+"plugin.install" = "Installer";
+"plugin.installed" = "Installée";
+"plugin.not_installed" = "Non installée";
+"plugin.local" = "Installée localement";
+"alert.plugin.install_error" = "Une erreur s'est produite lors de l'installation : %@";
+"alert.invalid_url" = "L'URL n'est pas valide.";
+"plugin.install_error.invalid_url" = "L'URL n'est pas valide.";
+"plugin.install_error.file_not_found" = "Impossible de trouver le fichier du paquet.";
+"plugin.install_error.cannot_download" = "Impossible de télécharger l'extension.\n\nRésultat : %@\n";
+"plugin.install_error.cannot_unpackage" = "Impossible de décompresser l'extension.\n\nRésultat : %@\n";
+"plugin.install_error.cannot_load" = "IINA ne parvient pas à charger cette extension. Elle est peut-être dans un mauvais format.";
+"plugin.check_for_updates" = "Vérifier les mises à jour";
+"plugin.updating" = "Téléchargement de la mise à jour…";

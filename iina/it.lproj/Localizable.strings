@@ -116,6 +116,16 @@
 "menu.pause" = "Pausa";
 "menu.resume" = "Riprendi";
 "menu.speed" = "Velocità: %.2fx";
+"menu.chapters" = "Show Chapters Panel";
+"menu.hide_chapters" = "Hide Chapters Panel";
+"menu.playlist" = "Show Playlist Panel";
+"menu.hide_playlist" = "Hide Playlist Panel";
+"menu.video" = "Show Video Panel";
+"menu.hide_video" = "Hide Video Panel";
+"menu.audio" = "Show Audio Panel";
+"menu.hide_audio" = "Hide Audio Panel";
+"menu.subtitles" = "Show Subtitles Panel";
+"menu.hide_subtitles" = "Hide Subtitles Panel";
 
 "menu.seek_forward" = "Avanti %.0fs";
 "menu.seek_backward" = "Indietro %.0fs";
@@ -145,7 +155,7 @@
 
 "alert.fatal_error" = "Fatal error: %@ \nL'appicazione verrà subito chiusa.";
 "alert.mpv_error" = "Errore %@ (%@) nell'impostazioni dell'utente %@.";
-"alert.sleep" = "Impossibile impedire lo stop dello schermo!";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "File audo esterno non supportato.";
 "alert.unsupported_sub" = "Sottotitoli esterni non supportati.";
@@ -223,6 +233,9 @@
 
 "alert.clear_watch_later.title" = "Elimina gli avanzamenti di riproduzione salvati";
 "alert.clear_watch_later.message" = "Sei sicuro di eliminare tutti gli avanzamenti di riproduzione salvati (e i dati \"guarda dopo\")?";
+
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
 
 "alert.nothing_to_open" = "Niente da aprire.";
 

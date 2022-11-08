@@ -94,7 +94,7 @@
 "preference.control" = "Керування";
 "preference.keybindings" = "Призначення клавіш";
 "preference.advanced" = "Експертні";
-"preference.plugins" = "Plugins";
+"preference.plugins" = "Плаґіни";
 "preference.utilities" = "Службові команди";
 "preference.scripts" = "Сценарії";
 "preference.not_logged_in" = "Не зайдено";
@@ -116,6 +116,16 @@
 "menu.pause" = "Пауза";
 "menu.resume" = "Відновити";
 "menu.speed" = "Швидкість: %.2fx";
+"menu.chapters" = "Показати панель розділів";
+"menu.hide_chapters" = "Приховати панель розділів";
+"menu.playlist" = "Показати панель списку відтворення";
+"menu.hide_playlist" = "Приховати панель списку відтворення";
+"menu.video" = "Показати панель відео";
+"menu.hide_video" = "Приховати панель відео";
+"menu.audio" = "Показати панель аудіо";
+"menu.hide_audio" = "Приховати панель аудіо";
+"menu.subtitles" = "Показати панель субтитрів";
+"menu.hide_subtitles" = "Приховати панель субтитрів";
 
 "menu.seek_forward" = "Крок уперед на %.0f с";
 "menu.seek_backward" = "Крок назад на %.0f с";
@@ -129,7 +139,7 @@
 "menu.sub_delay_down" = "Затримка субтитрів на –%.1f с";
 
 "menu.crop_custom" = "Інше...";
-"menu.find_online_sub" = "Find Online Subtitles from %@";
+"menu.find_online_sub" = "Знайти онлайн субтитри з %@";
 
 "track.none" = "<—>";
 
@@ -145,7 +155,7 @@
 
 "alert.fatal_error" = "Критична помилка: %@ \nПрограма зараз закриється.";
 "alert.mpv_error" = "Внутрішня помилка %@ (%@) при застосуванні опції %@.";
-"alert.sleep" = "Не можу запобігти вимкненню екрана!";
+"alert.sleep" = "Не вдалося запобігти переходу в режим сну! (0x%0X8)";
 
 "alert.unsupported_audio" = "Непідтримуваний зовнішній аудіофайл.";
 "alert.unsupported_sub" = "Непідтримувані зовнішні субтитри.";
@@ -224,6 +234,9 @@
 "alert.clear_watch_later.title" = "Очистити збережений прогрес перегляду";
 "alert.clear_watch_later.message" = "Упевнені, що хочете видалити весь прогрес перегляду (дані «переглянути пізніше»)?";
 
+"alert.restore_alerts.title" = "Відновити приховані оповіщення";
+"alert.restore_alerts.message" = "Ви дійсно бажаєте відновити приховані сповіщення?";
+
 "alert.nothing_to_open" = "Немає чого відкривати.";
 
 "alert.no_video_track" = "Відеодоріжка відсутня.";
@@ -237,14 +250,14 @@
 "alert.assrt_token_prompt.message" = "Будь ласка, зареєструйтеся на відкритій сторінці. Отримайте свій маркер на своїй сторінці користувача та введіть його нижче:";
 "alert.assrt_token_invalid" = "Ваш перевірчий API-маркер, здається, недійсний.";
 
-"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
-"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
-"alert.plugin_no_update" = "No update found.";
-"alert.plugin_update_found.title" = "Update found for %@";
-"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
-"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
-"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+"alert.plugin_uninstall.title" = "Ви дійсно бажаєте вилучити %@?";
+"alert.plugin_uninstall.message" = "Плагін буде видалено з вашого диску.";
+"alert.duplicated_plugin_id" = "Виявлено дубльовані ідентифікатори плагінів. Два або більше плагінів мають однаковий ідентифікатор \"%@\". Це може спричинити ненормальну поведінку. Будь ласка, знайдіть їх у \"Налаштування - Плагіни\" та повідомте авторам. Якщо плагін встановлений локально, ви також можете вручну змінити його ідентифікатор у файлі Info.json плагіна.";
+"alert.plugin_no_update" = "Оновлень не знайдено.";
+"alert.plugin_update_found.title" = "Оновлення знайдено для %@";
+"alert.plugin_update_found.message" = "Найновіша версія %@. Ваша версія %@. Хотіли би ви оновити?";
+"alert.plugin_permission" = "Цей плагін потребує додаткових дозволів. Будь ласка, перегляньте їх, перш ніж продовжити.";
+"alert.plugin_permission_added" = "Це оновлення потребує додаткових дозволів. Будь ласка, перегляньте їх, перш ніж продовжити.";
 
 "playlist.total_length" = "%@ загалом";
 "playlist.total_length_with_selected" = "%@ з %@ вибрано";
@@ -317,28 +330,28 @@
 
 // Plugin permissions
 
-"permissions.network-request.name" = "Network Request";
-"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
-"permissions.network-request.any_site" = "Any site";
-"permissions.show-osd.name" = "Show OSD";
-"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
-"permissions.show-alert.name" = "Show Alerts";
-"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
-"permissions.video-overlay.name" = "Add overlay on videos";
-"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
-"permissions.file-system.name" = "Access the file system";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.network-request.name" = "Мережевий запит";
+"permissions.network-request.desc" = "Цей плагін може завантажувати дані на або з цих сайтів:";
+"permissions.network-request.any_site" = "Будь-який сайт";
+"permissions.show-osd.name" = "Показати OSD";
+"permissions.show-osd.desc" = "Цей плагін може відображати повідомлення OSD (на дисплеї екрану).";
+"permissions.show-alert.name" = "Показувати оповіщення";
+"permissions.show-alert.desc" = "Цей плагін може показувати спливаючі сповіщення.";
+"permissions.video-overlay.name" = "Додати накладання на відео";
+"permissions.video-overlay.desc" = "Цей плагін може відображувати додатковий контент поверх відео.";
+"permissions.file-system.name" = "Доступ до файлової системи";
+"permissions.file-system.desc" = "Цей плагін може читати або записувати файли на вашому диску, включаючи конфіденційну інформацію. Також він може викликати інші програми чи програми, які можуть зашкодити комп'ютеру - обов'язково перевіряйте джерело.";
 
-"plugin.install" = "Install";
-"plugin.installed" = "Installed";
-"plugin.not_installed" = "Not Installed";
-"plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occured during the installation: %@";
-"alert.invalid_url" = "The URL is invalid.";
-"plugin.install_error.invalid_url" = "The URL is invalid.";
-"plugin.install_error.file_not_found" = "Cannot find the package file.";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Check for Updates";
-"plugin.updating" = "Downloading update…";
+"plugin.install" = "Встановити";
+"plugin.installed" = "Встановлено";
+"plugin.not_installed" = "Не встановлено";
+"plugin.local" = "Встановлено локально";
+"alert.plugin.install_error" = "Під час встановлення сталася помилка: %@";
+"alert.invalid_url" = "Невірна URL-адреса.";
+"plugin.install_error.invalid_url" = "Невірна URL-адреса.";
+"plugin.install_error.file_not_found" = "Неможливо знайти пакет файлу.";
+"plugin.install_error.cannot_download" = "Не вдалося завантажити плагін.\n\nРезультат:%@\n";
+"plugin.install_error.cannot_unpackage" = "Не вдалося розпакувати плагін.\n\nРезультат:%@\n";
+"plugin.install_error.cannot_load" = "IINA не може завантажити цей плагін. Можливо, формат плагіну невірний.";
+"plugin.check_for_updates" = "Перевірити наявність оновлень";
+"plugin.updating" = "Завантаження оновлення…";

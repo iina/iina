@@ -162,7 +162,6 @@ class MenuController: NSObject, NSMenuDelegate {
   // Plugin
   @IBOutlet weak var pluginMenu: NSMenu!
   @IBOutlet weak var pluginMenuItem: NSMenuItem!
-  var pluginMenuNeedsUpdate = false
   // Window
   @IBOutlet weak var customTouchBar: NSMenuItem!
   @IBOutlet weak var inspector: NSMenuItem!
@@ -584,8 +583,6 @@ class MenuController: NSObject, NSMenuDelegate {
         NSMenuItem(title: "⚠︎ Conflicting key shortcuts…", action: nil, keyEquivalent: ""),
         at: 0)
     }
-
-    pluginMenuNeedsUpdate = false
   }
 
   @discardableResult

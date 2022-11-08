@@ -116,6 +116,16 @@
 "menu.pause" = "Pauza";
 "menu.resume" = "Wznów";
 "menu.speed" = "Prędkość: %.2fx";
+"menu.chapters" = "Show Chapters Panel";
+"menu.hide_chapters" = "Hide Chapters Panel";
+"menu.playlist" = "Show Playlist Panel";
+"menu.hide_playlist" = "Hide Playlist Panel";
+"menu.video" = "Show Video Panel";
+"menu.hide_video" = "Hide Video Panel";
+"menu.audio" = "Show Audio Panel";
+"menu.hide_audio" = "Hide Audio Panel";
+"menu.subtitles" = "Show Subtitles Panel";
+"menu.hide_subtitles" = "Hide Subtitles Panel";
 
 "menu.seek_forward" = "Przewiń w przód o %.0fs";
 "menu.seek_backward" = "Przewiń w tył o %.0fs";
@@ -145,7 +155,7 @@
 
 "alert.fatal_error" = "Błąd krytyczny: %@ \nAplikacja zostanie zamknięta.";
 "alert.mpv_error" = "Wystąpił wewnętrzny błąd %@ (%@) podczas ustawiania opcji %@.";
-"alert.sleep" = "Nie można zapobiec wygaszeniu ekranu!";
+"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "Nieobsługiwany zewnętrzny plik audio.";
 "alert.unsupported_sub" = "Nieobsługiwane zewnętrzne napisy.";
@@ -223,6 +233,9 @@
 
 "alert.clear_watch_later.title" = "Wyczyść zapisane postępy odtwarzania";
 "alert.clear_watch_later.message" = "Czy na pewno chcesz usunąć wszystkie postępy odtwarzania (dane \"obejrzyj później\") ?";
+
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
 
 "alert.nothing_to_open" = "Nic do otwarcia.";
 

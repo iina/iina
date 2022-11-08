@@ -49,6 +49,18 @@
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "kbP-VI-dmT"; */
 "kbP-VI-dmT.title" = "Cancel·la";
 
+/* Class = "NSTextFieldCell"; title = "Restore Alerts"; ObjectID = "AAD-Db-Acs"; */
+"AAD-Db-Acs.title" = "Restaurar alertes";
+
+/* Class = "NSButtonCell"; title = "Restore Suppressed Alerts…"; ObjectID = "XAz-xa-LVo"; */
+"XAz-xa-LVo.title" = "Restaura alertes silenciades…";
+
+/* Class = "NSTextFieldCell"; title = "Restored."; ObjectID = "Wdh-me-hdC"; */
+"Wdh-me-hdC.title" = "Restaurat.";
+
+/* Class = "NSTextFieldCell"; title = "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."; ObjectID = "F5i-KF-2SW"; */
+"F5i-KF-2SW.title" = "El botó de sota restaurarà totes les alertes que s'han silenciat amb l'opció \"No mostris aquest missatge un altre cop\".";
+
 /* Class = "NSTextFieldCell"; title = "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."; ObjectID = "pPC-q2-9Gh"; */
 "pPC-q2-9Gh.title" = "El següent botó suprimirà tots els fitxers a la carpeta \"veure més tard\". Els fitxers contenen tot el progrés de reproducció i les opcions aplicades durant la reproducció.";
 

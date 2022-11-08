@@ -94,7 +94,7 @@
 "preference.control" = "控制";
 "preference.keybindings" = "快捷键";
 "preference.advanced" = "高级";
-"preference.plugins" = "Plugins";
+"preference.plugins" = "插件";
 "preference.utilities" = "实用工具";
 "preference.scripts" = "脚本";
 "preference.not_logged_in" = "未登录";
@@ -116,6 +116,16 @@
 "menu.pause" = "暂停";
 "menu.resume" = "继续";
 "menu.speed" = "速度: %.2fx";
+"menu.chapters" = "显示章节面板";
+"menu.hide_chapters" = "隐藏章节面板";
+"menu.playlist" = "显示播放列表面板";
+"menu.hide_playlist" = "隐藏播放列表面板";
+"menu.video" = "显示视频面板";
+"menu.hide_video" = "隐藏视频面板";
+"menu.audio" = "显示音频面板";
+"menu.hide_audio" = "隐藏音频面板";
+"menu.subtitles" = "显示字幕面板";
+"menu.hide_subtitles" = "隐藏字幕面板";
 
 "menu.seek_forward" = "渐进 %.0f秒";
 "menu.seek_backward" = "渐退 %.0f秒";
@@ -129,7 +139,7 @@
 "menu.sub_delay_down" = "字幕延迟 - %.1f秒";
 
 "menu.crop_custom" = "自定义…";
-"menu.find_online_sub" = "Find Online Subtitles from %@";
+"menu.find_online_sub" = "查找在线字幕…";
 
 "track.none" = "<无>";
 
@@ -145,7 +155,7 @@
 
 "alert.fatal_error" = "严重错误：%@ \n程序将立即终止。";
 "alert.mpv_error" = "出现内部错误 %@ (%@) (设定选项 %@ 时)。";
-"alert.sleep" = "无法阻止显示休眠！";
+"alert.sleep" = "无法阻止显示器睡眠! (0x%0X8)";
 
 "alert.unsupported_audio" = "不支持的外置音频文件。";
 "alert.unsupported_sub" = "不支持的外挂字幕。";
@@ -224,6 +234,9 @@
 "alert.clear_watch_later.title" = "清除已保存的播放进度";
 "alert.clear_watch_later.message" = "确定清除所有保存的播放进度（即“watch later”）数据吗？";
 
+"alert.restore_alerts.title" = "还原先前的警告";
+"alert.restore_alerts.message" = "您确定要恢复默认设置吗？";
+
 "alert.nothing_to_open" = "没有可打开的文件。";
 
 "alert.no_video_track" = "没有可用的视频轨道。";
@@ -237,14 +250,14 @@
 "alert.assrt_token_prompt.message" = "请在弹出的网页中注册帐号，然后进入用户首页查看 API token 并在下方输入:";
 "alert.assrt_token_invalid" = "你的射手网(伪) API token 格式错误。";
 
-"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
-"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
-"alert.plugin_no_update" = "No update found.";
-"alert.plugin_update_found.title" = "Update found for %@";
-"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
-"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
-"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+"alert.plugin_uninstall.title" = "你确定要卸载%@吗？";
+"alert.plugin_uninstall.message" = "插件将从您的磁盘中删除";
+"alert.duplicated_plugin_id" = "检测到重复的插件标识符。两个或多个插件具有相同的标识符“%@”。这可能会导致异常行为。 请在首选项 - 插件中找到它们，并向作者报告。 如果插件是本地安装的，您也可以手动更改插件的 Info.json 文件中的标识符。";
+"alert.plugin_no_update" = "没有发现更新。";
+"alert.plugin_update_found.title" = "找到 %@ 的更新";
+"alert.plugin_update_found.message" = "最新版本是 %@。您有 %@。您想要更新吗？";
+"alert.plugin_permission" = "此插件需要以下权限。请在继续之前给予它们权限。";
+"alert.plugin_permission_added" = "此插件需要以下权限。请在继续之前给予它们权限。";
 
 "playlist.total_length" = "总计 %@";
 "playlist.total_length_with_selected" = "选中 %@ / %@";
@@ -317,28 +330,28 @@
 
 // Plugin permissions
 
-"permissions.network-request.name" = "Network Request";
-"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
-"permissions.network-request.any_site" = "Any site";
-"permissions.show-osd.name" = "Show OSD";
-"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
-"permissions.show-alert.name" = "Show Alerts";
-"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
-"permissions.video-overlay.name" = "Add overlay on videos";
-"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
-"permissions.file-system.name" = "Access the file system";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.network-request.name" = "网络请求";
+"permissions.network-request.desc" = "此插件可以制作requst或上传数据到这些网站：";
+"permissions.network-request.any_site" = "任何网站";
+"permissions.show-osd.name" = "显示 OSD";
+"permissions.show-osd.desc" = "此插件可以显示 OSD (屏幕显示) 消息。";
+"permissions.show-alert.name" = "显示通知";
+"permissions.show-alert.desc" = "此插件可以显示弹出提醒。";
+"permissions.video-overlay.name" = "添加视频叠加层";
+"permissions.video-overlay.desc" = "此插件可以渲染视频顶部的附加内容。";
+"permissions.file-system.name" = "访问文件系统";
+"permissions.file-system.desc" = "此插件可以在您的磁盘上读取或写入文件，包括敏感信息。 它也可以调用可能伤害您的计算机的其他程序或应用程序。所以肯定要验证源。";
 
-"plugin.install" = "Install";
-"plugin.installed" = "Installed";
-"plugin.not_installed" = "Not Installed";
-"plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occured during the installation: %@";
-"alert.invalid_url" = "The URL is invalid.";
-"plugin.install_error.invalid_url" = "The URL is invalid.";
-"plugin.install_error.file_not_found" = "Cannot find the package file.";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Check for Updates";
-"plugin.updating" = "Downloading update…";
+"plugin.install" = "安装";
+"plugin.installed" = "已安装";
+"plugin.not_installed" = "未安装";
+"plugin.local" = "本地安装";
+"alert.plugin.install_error" = "安装过程发生错误：%@";
+"alert.invalid_url" = "URL 无效";
+"plugin.install_error.invalid_url" = "URL 无效";
+"plugin.install_error.file_not_found" = "找不到软件包文件。";
+"plugin.install_error.cannot_download" = "下载插件失败。\n\n输出：%@\n";
+"plugin.install_error.cannot_unpackage" = "解包插件失败。\n\n输出：%@\n";
+"plugin.install_error.cannot_load" = "IINA无法加载此插件。格式可能是错误的。";
+"plugin.check_for_updates" = "检查更新";
+"plugin.updating" = "下载更新中...";

@@ -94,7 +94,7 @@
 "preference.control" = "Controls";
 "preference.keybindings" = "Dreceres de teclar";
 "preference.advanced" = "Avançat";
-"preference.plugins" = "Plugins";
+"preference.plugins" = "Extensions";
 "preference.utilities" = "Utilitats";
 "preference.scripts" = "Scripts";
 "preference.not_logged_in" = "Sense sessió";
@@ -116,6 +116,16 @@
 "menu.pause" = "Pausa";
 "menu.resume" = "Reprèn";
 "menu.speed" = "Velocitat: %.2fx";
+"menu.chapters" = "Show Chapters Panel";
+"menu.hide_chapters" = "Hide Chapters Panel";
+"menu.playlist" = "Show Playlist Panel";
+"menu.hide_playlist" = "Hide Playlist Panel";
+"menu.video" = "Show Video Panel";
+"menu.hide_video" = "Hide Video Panel";
+"menu.audio" = "Show Audio Panel";
+"menu.hide_audio" = "Hide Audio Panel";
+"menu.subtitles" = "Show Subtitles Panel";
+"menu.hide_subtitles" = "Hide Subtitles Panel";
 
 "menu.seek_forward" = "Avança %.0fs";
 "menu.seek_backward" = "Retrocedeix %.0fs";
@@ -129,7 +139,7 @@
 "menu.sub_delay_down" = "Retarda en els subtítols - %.1fs";
 
 "menu.crop_custom" = "Personalitza...";
-"menu.find_online_sub" = "Find Online Subtitles from %@";
+"menu.find_online_sub" = "Cerca subtítols en línia a %@";
 
 "track.none" = "<Cap>";
 
@@ -145,7 +155,7 @@
 
 "alert.fatal_error" = "Error: fatal %@ \nL'aplicació es tancarà ara.";
 "alert.mpv_error" = "Error intern %@ (%@) establint la opció %@.";
-"alert.sleep" = "No es pot prevenir que la pantalla se'n vagi a dormir!";
+"alert.sleep" = "No es pot evitar que la pantalla es posi en repòs! (0x%0X8)";
 
 "alert.unsupported_audio" = "Fitxer d'àudio extern no compatible.";
 "alert.unsupported_sub" = "Subtítols no compatibles.";
@@ -224,6 +234,9 @@
 "alert.clear_watch_later.title" = "Suprimeix el progrés de reproducció desat";
 "alert.clear_watch_later.message" = "Estàs segur que vols suprimir tot el progrés de reproducció desat? (dades de \"watch later\")?";
 
+"alert.restore_alerts.title" = "Restaura alertes silenciades";
+"alert.restore_alerts.message" = "Segur que vols restaurar les alertes silenciades?";
+
 "alert.nothing_to_open" = "Res per obrir.";
 
 "alert.no_video_track" = "No hi ha pista de vídeo.";
@@ -237,14 +250,14 @@
 "alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
 "alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
 
-"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
-"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
-"alert.plugin_no_update" = "No update found.";
-"alert.plugin_update_found.title" = "Update found for %@";
-"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
-"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
-"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+"alert.plugin_uninstall.title" = "Estàs segur que vols desinstal·lar %@?";
+"alert.plugin_uninstall.message" = "El complement s'esborrarà del teu disc.";
+"alert.duplicated_plugin_id" = "S'han trobat complements duplicats. Dos o més complements tenen el mateix identificador \"%@\". Això pot comportar un funcionament extrany. Si us plau, busca'ls a Preferències - Complements i comunica-ho als seus autors. Si un complement està instal·lat localment, tu també pots canviar manualment el seu identificador modificant el fitxer Info.json del complement.";
+"alert.plugin_no_update" = "No s'han trobat actualitzacions.";
+"alert.plugin_update_found.title" = "Actualitzacions trobades per a %@";
+"alert.plugin_update_found.message" = "L'última versió és %@. Tu tens %@. Vols actualitzar?";
+"alert.plugin_permission" = "Aquest complement necessita els següents permisos. Si us plau, revisa'ls abans de continuar.";
+"alert.plugin_permission_added" = "Aquesta actualització necessita els següents permisos. Si us plau, revisa'ls abans de continuar.";
 
 "playlist.total_length" = "%@ en total";
 "playlist.total_length_with_selected" = "%@ de %@ seleccionats";
@@ -317,28 +330,28 @@
 
 // Plugin permissions
 
-"permissions.network-request.name" = "Network Request";
-"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
-"permissions.network-request.any_site" = "Any site";
-"permissions.show-osd.name" = "Show OSD";
-"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
-"permissions.show-alert.name" = "Show Alerts";
-"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
-"permissions.video-overlay.name" = "Add overlay on videos";
-"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
-"permissions.file-system.name" = "Access the file system";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.network-request.name" = "Petició d'accés a la xarxa";
+"permissions.network-request.desc" = "Aquest complement pot fer peticions o pujar dades a aquests llocs web:";
+"permissions.network-request.any_site" = "Qualsevol lloc web";
+"permissions.show-osd.name" = "Mostra subtítols";
+"permissions.show-osd.desc" = "Aquest complement pot ensenyar missatges en pantalla (OSD).";
+"permissions.show-alert.name" = "Mostrar alertes";
+"permissions.show-alert.desc" = "Aquest complement pot mostrar finestres emergents.";
+"permissions.video-overlay.name" = "Afegir overlay als vídeos";
+"permissions.video-overlay.desc" = "Aquest complement pot renderitzar contingut adicional al damunt del vídeo.";
+"permissions.file-system.name" = "Accedeix els fitxers";
+"permissions.file-system.desc" = "Aquest complement pot llegir o escriure fitxers al teu disc, incloent informació sensible. També pot cridar altres programes o aplicacions que poden malmetre el teu ordinador. Comprova el seu origen.";
 
-"plugin.install" = "Install";
-"plugin.installed" = "Installed";
-"plugin.not_installed" = "Not Installed";
-"plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occured during the installation: %@";
-"alert.invalid_url" = "The URL is invalid.";
-"plugin.install_error.invalid_url" = "The URL is invalid.";
-"plugin.install_error.file_not_found" = "Cannot find the package file.";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Check for Updates";
-"plugin.updating" = "Downloading update…";
+"plugin.install" = "Instal·la";
+"plugin.installed" = "Instal·lat";
+"plugin.not_installed" = "No instal·lat";
+"plugin.local" = "Instal·lat localment";
+"alert.plugin.install_error" = "Hi ha hagut un error durant la instal·lació: %@";
+"alert.invalid_url" = "L'adreça URL no és vàlida.";
+"plugin.install_error.invalid_url" = "L'adreça URL no és vàlida.";
+"plugin.install_error.file_not_found" = "No es pot trobar el fitxer.";
+"plugin.install_error.cannot_download" = "No s'ha pogut descarregar el complement.\n\nSortida:%@\n";
+"plugin.install_error.cannot_unpackage" = "No s'ha pogut descomprimir el complement.\n\nSortida: %@\n";
+"plugin.install_error.cannot_load" = "IINA no pot carregar aquest complement. Potser té un format incorrecte.";
+"plugin.check_for_updates" = "Comprova si hi ha actualitzacions";
+"plugin.updating" = "S'està baixant l'actualització…";

@@ -929,8 +929,13 @@ class MPVController: NSObject {
       // Utility.log("mpv event (unhandled): \(eventName)")
     }
 
-    let eventName = "mpv.\(String(cString: mpv_event_name(eventId)))"
-    player.events.emit(.init(eventName))
+    // This code is running in the com.colliderli.iina.controller dispatch queue. We must not run
+    // plugins from a task in this queue. Accessing EventController data from a thread in this queue
+    // results in data races that can cause a crash. See issue 3986.
+    DispatchQueue.main.async { [self] in
+      let eventName = "mpv.\(String(cString: mpv_event_name(eventId)))"
+      player.events.emit(.init(eventName))
+    }
   }
 
   private func onVideoParamsChange(_ data: UnsafePointer<mpv_node_list>) {
@@ -1254,23 +1259,28 @@ class MPVController: NSObject {
       }
     }
 
-    let eventName = EventController.Name("mpv.\(name).changed")
-    if player.events.hasListener(for: eventName) {
-      // FIXME: better convert to JSValue before passing to call()
-      let data: Any
-      switch property.format {
-      case MPV_FORMAT_FLAG:
-        data = property.data.bindMemory(to: Bool.self, capacity: 1).pointee
-      case MPV_FORMAT_INT64:
-        data = property.data.bindMemory(to: Int64.self, capacity: 1).pointee
-      case MPV_FORMAT_DOUBLE:
-        data = property.data.bindMemory(to: Double.self, capacity: 1).pointee
-      case MPV_FORMAT_STRING:
-        data = property.data.bindMemory(to: String.self, capacity: 1).pointee
-      default:
-        data = 0
+    // This code is running in the com.colliderli.iina.controller dispatch queue. We must not run
+    // plugins from a task in this queue. Accessing EventController data from a thread in this queue
+    // results in data races that can cause a crash. See issue 3986.
+    DispatchQueue.main.async { [self] in
+      let eventName = EventController.Name("mpv.\(name).changed")
+      if player.events.hasListener(for: eventName) {
+        // FIXME: better convert to JSValue before passing to call()
+        let data: Any
+        switch property.format {
+        case MPV_FORMAT_FLAG:
+          data = property.data.bindMemory(to: Bool.self, capacity: 1).pointee
+        case MPV_FORMAT_INT64:
+          data = property.data.bindMemory(to: Int64.self, capacity: 1).pointee
+        case MPV_FORMAT_DOUBLE:
+          data = property.data.bindMemory(to: Double.self, capacity: 1).pointee
+        case MPV_FORMAT_STRING:
+          data = property.data.bindMemory(to: String.self, capacity: 1).pointee
+        default:
+          data = 0
+        }
+        player.events.emit(eventName, data: data)
       }
-      player.events.emit(eventName, data: data)
     }
   }
 

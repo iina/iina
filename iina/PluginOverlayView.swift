@@ -12,6 +12,10 @@ import WebKit
 class PluginOverlayView: WKWebView, WKNavigationDelegate {
   weak private var pluginInstance: JavascriptPluginInstance!
 
+  var isEnteringSimpleMode = false
+  private var pendingStyle: String?
+  private var pendingContent: String?
+
   var isClickable = false
 
   override func hitTest(_ point: NSPoint) -> NSView? {
@@ -78,9 +82,57 @@ class PluginOverlayView: WKWebView, WKNavigationDelegate {
     }
   }
 
+  // MARK: Simple mode
+
+  func setSimpleModeStyle(_ style: String) {
+    if isEnteringSimpleMode {
+      pendingStyle = style
+    } else {
+      _simpleModeSetStyle(style)
+    }
+  }
+
+  func setSimpleModeContent(_ content: String) {
+    if isEnteringSimpleMode {
+      pendingContent = content
+    } else {
+      _simpleModeSetContent(content)
+    }
+  }
+
   func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){
     if let wc = window?.windowController as? PlayerWindowController {
       wc.player.events.emit(.pluginOverlayLoaded)
+    }
+
+    guard isEnteringSimpleMode else { return }
+    isEnteringSimpleMode = false
+
+    if let style = pendingStyle {
+      _simpleModeSetStyle(style)
+    }
+    if let content = pendingContent {
+      _simpleModeSetContent(content)
+    }
+  }
+
+  private func _simpleModeSetStyle(_ style: String) {
+    Utility.executeOnMainThread {
+      evaluateJavaScript("window.iina._simpleModeSetStyle(`\(style)`)") { (_, error) in
+        if let error = error {
+          Logger.log(error.localizedDescription, level: .error, subsystem: self.pluginInstance.subsystem)
+        }
+      }
+    }
+  }
+
+  private func _simpleModeSetContent(_ content: String) {
+    Utility.executeOnMainThread {
+      evaluateJavaScript("window.iina._simpleModeSetContent(`\(content)`)") { (_, error) in
+        if let error = error {
+          Logger.log(error.localizedDescription, level: .error, subsystem: self.pluginInstance.subsystem)
+        }
+      }
     }
   }
 }

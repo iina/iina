@@ -77,6 +77,7 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
       return
     }
     if (inSimpleMode) { return }
+    pluginInstance.overlayView.isEnteringSimpleMode = true
     pluginInstance.overlayView.loadHTMLString(simpleModeHTMLString, baseURL: nil)
     pluginInstance.overlayViewLoaded = true
     inSimpleMode = true
@@ -90,11 +91,7 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
       log("overlay.setStyle is only available in simple mode.", level: .error)
       return
     }
-    pluginInstance.overlayView.evaluateJavaScript("window.iina._simpleModeSetStyle(`\(style)`)") { (_, error) in
-      if let error = error {
-        self.log(error.localizedDescription, level: .error)
-      }
-    }
+    pluginInstance.overlayView.setSimpleModeStyle(style)
   }
 
   func setContent(_ content: String) {
@@ -104,11 +101,7 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
       log("overlay.setContent is only available in simple mode.", level: .error)
       return
     }
-    pluginInstance.overlayView.evaluateJavaScript("window.iina._simpleModeSetContent(`\(content)`)") { (_, error) in
-      if let error = error {
-        self.log(error.localizedDescription, level: .error)
-      }
-    }
+    pluginInstance.overlayView.setSimpleModeContent(content)
   }
 
 

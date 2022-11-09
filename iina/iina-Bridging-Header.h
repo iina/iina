@@ -1,7 +1,7 @@
 #define MPV_ENABLE_DEPRECATED 0
 
 #pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Weverything"
+#pragma clang diagnostic ignored "-Wdocumentation"
 #import <mpv/client.h>
 #import <mpv/render.h>
 #import <mpv/render_gl.h>

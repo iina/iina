@@ -10,7 +10,7 @@
 #import <Cocoa/Cocoa.h>
 
 #pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Weverything"
+#pragma clang diagnostic ignored "-Wdocumentation"
 #import <libavcodec/avcodec.h>
 #import <libavformat/avformat.h>
 #import <libswscale/swscale.h>

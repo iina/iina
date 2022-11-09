@@ -19,12 +19,12 @@ class JavascriptMessageHub {
   }
 
   func postMessage(to webView: WKWebView, name: String, data: JSValue) {
-    guard let object = data.toObject() else { return }
     DispatchQueue.main.async {
-      guard let data = try? JSONSerialization.data(withJSONObject: object),
-         let dataString = String(data: data, encoding: .utf8) else {
-          webView.evaluateJavaScript("window.iina._emit(`\(name)`)")
-          return
+      guard let object = data.toObject(),
+            let data = try? JSONSerialization.data(withJSONObject: object),
+            let dataString = String(data: data, encoding: .utf8) else {
+        webView.evaluateJavaScript("window.iina._emit(`\(name)`)")
+        return
       }
       webView.evaluateJavaScript("window.iina._emit(`\(name)`, `\(dataString)`)")
     }

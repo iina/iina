@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="19455" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -107,7 +107,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <binding destination="7jz-PW-fuz" name="value" keyPath="automaticallyChecksForUpdates" id="eyv-rg-N7I"/>
+                        <binding destination="xyA-SE-Ihh" name="value" keyPath="updater.automaticallyChecksForUpdates" id="vbY-TI-GsH"/>
                     </connections>
                 </button>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="6Hg-O4-cBP">
@@ -137,7 +137,6 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="receiveBetaUpdatesChanged:" target="-2" id="aNq-Cs-Eva"/>
                         <binding destination="IBP-Mz-Maa" name="value" keyPath="values.receiveBetaUpdate" id="hup-g9-DSv"/>
                     </connections>
                 </button>
@@ -148,9 +147,15 @@
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" id="oZC-kI-PeA">
                             <items>
-                                <menuItem title="Hourly" state="on" tag="3600" id="slG-Jb-54B"/>
-                                <menuItem title="Daily" tag="86400" id="Ez8-qY-WAZ"/>
-                                <menuItem title="Weekly" tag="604800" id="Imf-6g-2Cd"/>
+                                <menuItem title="Hourly" state="on" tag="3600" id="slG-Jb-54B">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Daily" tag="86400" id="Ez8-qY-WAZ">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="Weekly" tag="604800" id="Imf-6g-2Cd">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
                                 <menuItem title="Monthly" tag="2629800" id="REP-70-XOi">
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
@@ -158,8 +163,8 @@
                         </menu>
                     </popUpButtonCell>
                     <connections>
-                        <binding destination="7jz-PW-fuz" name="enabled" keyPath="automaticallyChecksForUpdates" id="IAt-xU-SK7"/>
-                        <binding destination="7jz-PW-fuz" name="selectedTag" keyPath="updateCheckInterval" id="DVF-Pp-2HC"/>
+                        <binding destination="xyA-SE-Ihh" name="enabled" keyPath="updater.automaticallyChecksForUpdates" id="z2H-Xa-zIs"/>
+                        <binding destination="xyA-SE-Ihh" name="selectedTag" keyPath="updater.updateCheckInterval" id="tcC-qq-eR4"/>
                     </connections>
                 </popUpButton>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="b7I-2V-MYa">
@@ -207,11 +212,11 @@
                         <box identifier="Content0" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="DZT-7n-S4M">
                             <rect key="frame" x="-3" y="-4" width="458" height="42"/>
                             <view key="contentView" id="867-m1-aVc">
-                                <rect key="frame" x="3" y="3" width="452" height="36"/>
+                                <rect key="frame" x="4" y="5" width="450" height="34"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="8Ql-ym-BvF">
-                                        <rect key="frame" x="14" y="11" width="63" height="14"/>
+                                        <rect key="frame" x="14" y="11" width="63" height="12"/>
                                         <buttonCell key="cell" type="check" title="Pause" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="FbF-jJ-W5b">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -224,7 +229,7 @@
                                         </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="U8N-xw-dgL">
-                                        <rect key="frame" x="83" y="9" width="121" height="18"/>
+                                        <rect key="frame" x="83" y="9" width="121" height="16"/>
                                         <buttonCell key="cell" type="check" title="Enter fullscreen" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="MlG-hl-goB">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -300,11 +305,11 @@
                         <box identifier="Content1" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="5RN-PV-pOZ">
                             <rect key="frame" x="-3" y="-4" width="458" height="132"/>
                             <view key="contentView" id="gWB-X2-AzC">
-                                <rect key="frame" x="3" y="3" width="452" height="126"/>
+                                <rect key="frame" x="4" y="5" width="450" height="124"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UFY-vM-qHd">
-                                        <rect key="frame" x="14" y="98" width="174" height="18"/>
+                                        <rect key="frame" x="14" y="96" width="174" height="18"/>
                                         <buttonCell key="cell" type="check" title="Minimized/un-minimized" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="5Y9-bX-K0f">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -314,7 +319,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mr8-te-85z">
-                                        <rect key="frame" x="14" y="76" width="225" height="18"/>
+                                        <rect key="frame" x="14" y="74" width="225" height="18"/>
                                         <buttonCell key="cell" type="check" title="Window becomes inactive/active" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="J8g-aS-W6e">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -324,7 +329,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H40-Tk-atD">
-                                        <rect key="frame" x="14" y="54" width="206" height="18"/>
+                                        <rect key="frame" x="14" y="52" width="206" height="18"/>
                                         <buttonCell key="cell" type="check" title="Play upon entering full screen" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="lOw-pu-Llm">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -334,7 +339,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DX0-mO-Ick">
-                                        <rect key="frame" x="14" y="32" width="210" height="18"/>
+                                        <rect key="frame" x="14" y="30" width="210" height="18"/>
                                         <buttonCell key="cell" type="check" title="Pause upon leaving full screen" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="g2A-Kf-vct">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -344,7 +349,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MJd-4d-ykB">
-                                        <rect key="frame" x="14" y="10" width="239" height="18"/>
+                                        <rect key="frame" x="14" y="8" width="239" height="18"/>
                                         <buttonCell key="cell" type="check" title="Pause when machine goes to sleep" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="i4A-86-dGC">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -441,7 +446,6 @@
             <point key="canvasLocation" x="-2189" y="118.5"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="IBP-Mz-Maa"/>
-        <customObject id="7jz-PW-fuz" customClass="SUUpdaterProxy" customModule="IINA" customModuleProvider="target"/>
         <customView id="y7O-rd-dnT">
             <rect key="frame" x="0.0" y="0.0" width="580" height="122"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -764,8 +768,9 @@
             </constraints>
             <point key="canvasLocation" x="-2189" y="483"/>
         </customView>
+        <customObject id="xyA-SE-Ihh" customClass="SPUStandardUpdaterController"/>
     </objects>
     <resources>
-        <image name="NSRevealFreestandingTemplate" width="15" height="15"/>
+        <image name="NSRevealFreestandingTemplate" width="19" height="19"/>
     </resources>
 </document>

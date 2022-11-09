@@ -61,29 +61,5 @@ class PrefGeneralViewController: PreferenceViewController, PreferenceWindowEmbed
       NSDocumentController.shared.clearRecentDocuments(self)
     }
   }
-
-  @IBAction func receiveBetaUpdatesChanged(_ sender: NSButton) {
-    SUUpdater.shared().feedURL = URL(string: sender.state == .on ? AppData.appcastBetaLink : AppData.appcastLink)!
-  }
-
 }
 
-
-class SUUpdaterProxy: NSObject {
-  @objc dynamic var automaticallyChecksForUpdates: Bool {
-    get {
-      return SUUpdater.shared().automaticallyChecksForUpdates
-    }
-    set {
-      SUUpdater.shared().automaticallyChecksForUpdates = newValue
-    }
-  }
-  @objc dynamic var updateCheckInterval: Double {
-    get {
-      return SUUpdater.shared().updateCheckInterval
-    }
-    set {
-      SUUpdater.shared().updateCheckInterval = newValue
-    }
-  }
-}

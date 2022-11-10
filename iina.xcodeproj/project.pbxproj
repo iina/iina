@@ -2560,6 +2560,7 @@
 				84E745DA1DFDE9C600588DED /* Copy Configs */,
 				8461BA631E423423008BB852 /* Copy Executables */,
 				4954298A216C34960058F680 /* Embed App Extensions */,
+				51728768291B6F30009E6EC1 /* Write Info.h */,
 			);
 			buildRules = (
 			);
@@ -2744,6 +2745,27 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		51728768291B6F30009E6EC1 /* Write Info.h */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(CONFIGURATION_BUILD_DIR)/$(EXECUTABLE_FOLDER_PATH)/$(EXECUTABLE_NAME)",
+			);
+			name = "Write Info.h";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(INFOPLIST_PREFIX_HEADER)",
+				"$(INFOPLIST_FILE)",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "iina/write_info_plist_header.sh\n";
+		};
 		84B1CE561F98CAE300994D63 /* Copy Dylib Symlinks */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;

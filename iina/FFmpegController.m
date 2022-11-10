@@ -9,11 +9,14 @@
 #import "FFmpegController.h"
 #import <Cocoa/Cocoa.h>
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 #import <libavcodec/avcodec.h>
 #import <libavformat/avformat.h>
 #import <libswscale/swscale.h>
 #import <libavutil/imgutils.h>
 #import <libavutil/mastering_display_metadata.h>
+#pragma clang diagnostic pop
 
 #define THUMB_COUNT_DEFAULT 100
 

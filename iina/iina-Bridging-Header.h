@@ -1,5 +1,7 @@
 #define MPV_ENABLE_DEPRECATED 0
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 #import <mpv/client.h>
 #import <mpv/render.h>
 #import <mpv/render_gl.h>
@@ -8,6 +10,7 @@
 #import <libavformat/avformat.h>
 #import <libavutil/avutil.h>
 #import <libswscale/swscale.h>
+#pragma clang diagnostic pop
 
 #import <stdio.h>
 #import <stdlib.h>

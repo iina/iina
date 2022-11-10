@@ -102,6 +102,35 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
   // MARK: - App Delegate
 
+  /// Log details about when and from what sources IINA was built.
+  ///
+  /// For developers that take a development build to other machines for testing it is useful to log information that can be used to
+  /// distinguish between development builds.
+  ///
+  /// In support of this the build populated `Info.plist` with keys giving:
+  /// - The build date
+  /// - The git branch
+  /// - The git commit
+  private func logBuildDetails() {
+    // Xcode refused to allow the build date in the Info.plist to use Date as the type because the
+    // value specified in the Info.plist is an identifier that is replaced at build time using the
+    // C preprocessor. So we need to convert from the ISO formatted string to a Date object.
+    let fromString = ISO8601DateFormatter()
+    // As recommended by Apple IINA's custom Info.plist keys start with the bundle identifier.
+    guard let infoDic = Bundle.main.infoDictionary,
+          let bundleIdentifier = infoDic["CFBundleIdentifier"] as? String else { return }
+    let keyPrefix = bundleIdentifier + ".build"
+    guard let branch = infoDic["\(keyPrefix).branch"] as? String,
+          let commit = infoDic["\(keyPrefix).commit"] as? String,
+          let date = infoDic["\(keyPrefix).date"] as? String,
+          let dateObj = fromString.date(from: date) else { return }
+    // Use a localized date in the log message.
+    let toString = DateFormatter()
+    toString.dateStyle = .medium
+    toString.timeStyle = .medium
+    Logger.log("Built \(toString.string(from: dateObj)) from branch \(branch), commit \(commit)")
+  }
+
   func applicationWillFinishLaunching(_ notification: Notification) {
     // Must setup preferences before logging so log level is set correctly.
     registerUserDefaultValues()
@@ -133,6 +162,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       // format which needs to be decoded into a string for display.
       Logger.log("  \(library.name) \(AppDelegate.versionAsString(library.version))")
     }
+    logBuildDetails()
 
     Logger.log("App will launch")
 

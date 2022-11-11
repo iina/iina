@@ -112,23 +112,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   /// - The git branch
   /// - The git commit
   private func logBuildDetails() {
-    // Xcode refused to allow the build date in the Info.plist to use Date as the type because the
-    // value specified in the Info.plist is an identifier that is replaced at build time using the
-    // C preprocessor. So we need to convert from the ISO formatted string to a Date object.
-    let fromString = ISO8601DateFormatter()
-    // As recommended by Apple IINA's custom Info.plist keys start with the bundle identifier.
-    guard let infoDic = Bundle.main.infoDictionary,
-          let bundleIdentifier = infoDic["CFBundleIdentifier"] as? String else { return }
-    let keyPrefix = bundleIdentifier + ".build"
-    guard let branch = infoDic["\(keyPrefix).branch"] as? String,
-          let commit = infoDic["\(keyPrefix).commit"] as? String,
-          let date = infoDic["\(keyPrefix).date"] as? String,
-          let dateObj = fromString.date(from: date) else { return }
-    // Use a localized date in the log message.
-    let toString = DateFormatter()
-    toString.dateStyle = .medium
-    toString.timeStyle = .medium
-    Logger.log("Built \(toString.string(from: dateObj)) from branch \(branch), commit \(commit)")
+    guard let branch = InfoDictionary.shared.buildBranch,
+          let commit = InfoDictionary.shared.buildCommit,
+          let date = InfoDictionary.shared.buildDate else { return }
+    Logger.log("Built \(date) from branch \(branch), commit \(commit)")
   }
 
   func applicationWillFinishLaunching(_ notification: Notification) {
@@ -136,12 +123,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     registerUserDefaultValues()
 
     // Start the log file by logging the version of IINA producing the log file.
-    let (version, build) = Utility.iinaVersion()
+    let (version, build) = InfoDictionary.shared.version
     Logger.log("IINA \(version) Build \(build)")
 
     // The copyright is used in the Finder "Get Info" window which is a narrow window so the
     // copyright consists of multiple lines.
-    let copyright = Utility.iinaCopyright()
+    let copyright = InfoDictionary.shared.copyright
     copyright.enumerateLines { line, _ in
       Logger.log(line)
     }

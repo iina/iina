@@ -38,6 +38,11 @@ class AboutWindowController: NSWindowController {
   }
   @IBOutlet weak var versionLabel: NSTextField!
   @IBOutlet weak var mpvVersionLabel: NSTextField!
+  @IBOutlet weak var ffmpegVersionLabel: NSTextField!
+  @IBOutlet weak var buildView: NSView!
+  @IBOutlet weak var buildBranchLabel: NSTextField!
+  @IBOutlet weak var buildDateLabel: NSTextField!
+
   @IBOutlet var detailTextView: NSTextView!
   @IBOutlet var creditsTextView: NSTextView!
 
@@ -54,6 +59,27 @@ class AboutWindowController: NSWindowController {
   private lazy var contributors = getContributors()
   private lazy var translators = loadTraslators()
 
+  /// The user has released the left mouse button.
+  ///
+  /// The `About Window` supports displaying the date and time when the IINA executable was built along with the Git branch from
+  /// which the build was made. As this information is only interesting to developers that take builds to other machines for long term
+  /// testing this information is hidden and only reveled if the user option-clicks between the mpv and FFmpeg versions and the
+  /// `License` button.
+  override func mouseUp(with event: NSEvent) {
+     guard event.modifierFlags.contains(.option), buildDateLabel.isHidden,
+          buildView.isMousePoint(event.locationInWindow, in: buildView.frame),
+          let buildDate = InfoDictionary.shared.buildDate,
+          let buildBranch = InfoDictionary.shared.buildBranch else {
+      super.mouseUp(with: event)
+      return
+    }
+    buildDateLabel.stringValue = buildDate
+    buildBranchLabel.stringValue = buildBranch
+    buildDateLabel.isHidden = false
+    buildBranchLabel.isHidden = false
+    window?.contentView?.needsDisplay = true
+  }
+
   override func windowDidLoad() {
     super.windowDidLoad()
 
@@ -63,11 +89,11 @@ class AboutWindowController: NSWindowController {
     windowBackgroundBox.fillColor = .windowBackgroundColor
     iconImageView.image = NSApp.applicationIconImage
 
-    let (version, build) = Utility.iinaVersion()
+    let (version, build) = InfoDictionary.shared.version
     versionLabel.stringValue = "\(version) Build \(build)"
-    // let copyright = infoDic["NSHumanReadableCopyright"] as! String
 
     mpvVersionLabel.stringValue = PlayerCore.active.mpv.mpvVersion
+    ffmpegVersionLabel.stringValue = "FFmpeg \(String(cString: av_version_info()))"
 
     if let contrubutionFile = Bundle.main.path(forResource: "Contribution", ofType: "rtf") {
       detailTextView.readRTFD(fromFile: contrubutionFile)

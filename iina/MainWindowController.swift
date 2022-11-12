@@ -2616,7 +2616,7 @@ class MainWindowController: PlayerWindowController {
         self.showSideBar(viewController: view, type: .settings)
       }
     case .settings:
-      if view.currentTab == tab {
+      if view.currentTab == tab || tab == nil {
         if hideIfAlreadyShown {
           hideSideBar()
         }
@@ -2645,7 +2645,7 @@ class MainWindowController: PlayerWindowController {
         self.showSideBar(viewController: view, type: .playlist)
       }
     case .playlist:
-      if view.currentTab == tab {
+      if view.currentTab == tab || tab == nil {
         if hideIfAlreadyShown {
           hideSideBar()
         }

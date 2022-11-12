@@ -41,8 +41,6 @@ struct Logger {
     case warning
     case error
 
-    static var preferred: Level = Level(rawValue: Preference.integer(for: .logLevel).clamped(to: 0...3))!
-
     var description: String {
       switch self {
       case .verbose: return "v"
@@ -154,7 +152,7 @@ struct Logger {
     guard enabled else { return }
     #endif
 
-    guard level >= .preferred else { return }
+    guard level.rawValue >= Preference.integer(for: .logLevel) else { return }
     let string = formatMessage(message, level, subsystem, appendNewlineAtTheEnd)
     print(string, terminator: "")
 

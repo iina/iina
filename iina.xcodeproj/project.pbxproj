@@ -2563,6 +2563,7 @@
 				8461BA631E423423008BB852 /* Copy Executables */,
 				4954298A216C34960058F680 /* Embed App Extensions */,
 				51728768291B6F30009E6EC1 /* Write Info.h */,
+				49FCA042292108C4003BF6D3 /* Patch version */,
 			);
 			buildRules = (
 			);
@@ -2747,6 +2748,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		49FCA042292108C4003BF6D3 /* Patch version */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Patch version";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "iina/patch_version.sh\n";
+		};
 		51728768291B6F30009E6EC1 /* Write Info.h */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

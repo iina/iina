@@ -6,6 +6,7 @@
 //  Copyright © 2022 lhc. All rights reserved.
 //
 
+#include "Availability.xcconfig"
 #include "Deployment.xcconfig"
 
 ALWAYS_SEARCH_USER_PATHS = NO

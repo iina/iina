@@ -8,8 +8,10 @@ on:
 
 jobs:
   build:
-    # FIXME: This builds with macOS 10.15. Move this to the 11.0 builders when possible. (See: https://github.com/actions/virtual-environments/issues/2486)
-    runs-on:  macos-latest
+    strategy:
+      matrix:
+        xcode: ["13.4.1", "14.1"]
+    runs-on:  macos-12
     steps:
       - uses: actions/checkout@v2
 
@@ -18,3 +20,5 @@ jobs:
 
       - name: Build
         run: xcodebuild -project iina.xcodeproj -scheme iina CODE_SIGNING_ALLOWED=NO
+        env:
+          DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer

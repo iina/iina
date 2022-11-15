@@ -51,6 +51,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   lazy var inspector: InspectorWindowController = InspectorWindowController()
   lazy var historyWindow: HistoryWindowController = HistoryWindowController()
   lazy var guideWindow: GuideWindowController = GuideWindowController()
+  var logWindow: LogWindowController = LogWindowController()
 
   lazy var vfWindow: FilterWindowController = {
     let w = FilterWindowController()

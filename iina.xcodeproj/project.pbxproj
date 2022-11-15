@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1326717E20852D0D000FA7E2 /* SubChooseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1326718020852D0D000FA7E2 /* SubChooseViewController.xib */; };
+		3485FADC2921DF9500B67EFB /* LogWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3485FADB2921DF9500B67EFB /* LogWindowController.xib */; };
+		34FD798E291C76A600963EDE /* LogWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FD798D291C76A600963EDE /* LogWindowController.swift */; };
 		49542975216C34950058F680 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49542974216C34950058F680 /* Cocoa.framework */; };
 		49542978216C34950058F680 /* SafariExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49542977216C34950058F680 /* SafariExtensionHandler.swift */; };
 		49542980216C34950058F680 /* open-in-iina.js in Resources */ = {isa = PBXBuildFile; fileRef = 4954297F216C34950058F680 /* open-in-iina.js */; };
@@ -501,6 +503,7 @@
 		2FE1FCAF1F98D3DB004C4D6B /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = sk; path = sk.lproj/Contribution.rtf; sourceTree = "<group>"; };
 		2FE1FCB01F98D3DB004C4D6B /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/FilterPresets.strings; sourceTree = "<group>"; };
 		2FE1FCB11F98D3DB004C4D6B /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/KeyBinding.strings; sourceTree = "<group>"; };
+		3485FADB2921DF9500B67EFB /* LogWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogWindowController.xib; sourceTree = "<group>"; };
 		348B000028DC688D0045F683 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/MiniPlayerWindowController.strings"; sourceTree = "<group>"; };
 		348B000128DC688D0045F683 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/GuideWindowController.strings"; sourceTree = "<group>"; };
 		348B000228DC688E0045F683 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/CropSettingsViewController.strings"; sourceTree = "<group>"; };
@@ -736,6 +739,7 @@
 		348BFFFD28DC688D0045F683 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/OpenURLWindowController.strings"; sourceTree = "<group>"; };
 		348BFFFE28DC688D0045F683 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/HistoryWindowController.strings"; sourceTree = "<group>"; };
 		348BFFFF28DC688D0045F683 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/InitialWindowController.strings"; sourceTree = "<group>"; };
+		34FD798D291C76A600963EDE /* LogWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogWindowController.swift; sourceTree = "<group>"; };
 		440DDE351E9010420063E211 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		440DDE361E9010420063E211 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MainWindowController.strings; sourceTree = "<group>"; };
 		440DDE371E9010420063E211 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/QuickSettingViewController.strings; sourceTree = "<group>"; };
@@ -2065,6 +2069,8 @@
 				8F49C370213EFB7E0076C4F9 /* MiniPlayerWindowController.xib */,
 				E36E8D7A24F6052F00B8C097 /* GuideWindowController.swift */,
 				E34E909C24F821280073BF04 /* GuideWindowController.xib */,
+				34FD798D291C76A600963EDE /* LogWindowController.swift */,
+				3485FADB2921DF9500B67EFB /* LogWindowController.xib */,
 				84D0FB7B1F5E510C00C6A6A7 /* Interactive Mode */,
 				84D377691D74163B007F7396 /* Video */,
 				84D377681D7413D8007F7396 /* Accessories */,
@@ -2723,6 +2729,7 @@
 				84D0FB821F5E6A3800C6A6A7 /* FreeSelectingViewController.xib in Resources */,
 				8400D5E11E1AB32F006785F5 /* PrefUIViewController.xib in Resources */,
 				E338368A202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.xib in Resources */,
+				3485FADC2921DF9500B67EFB /* LogWindowController.xib in Resources */,
 				8483FB001EDFF325000F55D6 /* Credits.rtf in Resources */,
 				E353070621496CE4008FE492 /* PrefPluginViewController.xib in Resources */,
 				84F5D49A1E44E9A50060A838 /* KeyBinding.strings in Resources */,
@@ -2927,6 +2934,7 @@
 				E395858A253314400096811F /* JavascriptAPISidebarView.swift in Sources */,
 				E33BA5C4204315740069A0F6 /* AssrtSubtitle.swift in Sources */,
 				E32693F924BA138000BF7ADC /* JavascriptPluginSubtitleItem.swift in Sources */,
+				34FD798E291C76A600963EDE /* LogWindowController.swift in Sources */,
 				844DE1BF1D3E2B9900272589 /* MPVEvent.swift in Sources */,
 				845040471E0B0F500079C194 /* CropSettingsViewController.swift in Sources */,
 				E33836852026223800ABC812 /* PrefOSCToolbarSettingsSheetController.swift in Sources */,

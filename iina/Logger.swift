@@ -41,8 +41,6 @@ struct Logger {
     case warning
     case error
 
-    static var preferred: Level = Level(rawValue: Preference.integer(for: .logLevel).clamped(to: 0...3))!
-
     var description: String {
       switch self {
       case .verbose: return "v"
@@ -144,8 +142,8 @@ struct Logger {
   }
 
   private static func formatMessage(_ message: String, _ level: Level, _ subsystem: Subsystem,
-                                    _ appendNewlineAtTheEnd: Bool) -> String {
-    let time = dateFormatter.string(from: Date())
+                                    _ appendNewlineAtTheEnd: Bool, _ date: Date = Date()) -> String {
+    let time = dateFormatter.string(from: date)
     return "\(time) [\(subsystem.rawValue)][\(level.description)] \(message)\(appendNewlineAtTheEnd ? "\n" : "")"
   }
 
@@ -154,8 +152,20 @@ struct Logger {
     guard enabled else { return }
     #endif
 
-    guard level >= .preferred else { return }
-    let string = formatMessage(message, level, subsystem, appendNewlineAtTheEnd)
+    guard level.rawValue >= Preference.integer(for: .logLevel) else { return }
+
+    let date = Date()
+    let log = Log(subsystem: subsystem.rawValue, level: level.rawValue, message: message, date: dateFormatter.string(from: date))
+    DispatchQueue.main.async {
+      (NSApp.delegate as! AppDelegate).logWindow.logs.append(log)
+    }
+//    let (inserted, _) = subsystems.insert(subsystem)
+//    if inserted {
+//      logWindowController.updateSubsystems()
+//    }
+//    logs.append(log)
+
+    let string = formatMessage(message, level, subsystem, appendNewlineAtTheEnd, date)
     print(string, terminator: "")
 
     #if DEBUG

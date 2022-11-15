@@ -58,6 +58,7 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
 
     optionsTableView.dataSource = self
     optionsTableView.delegate = self
+    optionsTableView.sizeLastColumnToFit()
     removeButton.isEnabled = false
 
     enableAdvancedSettingsBtn.checked = Preference.bool(for: .enableAdvancedSettings)
@@ -75,6 +76,11 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
 
   @IBAction func openLogDir(_ sender: AnyObject) {
     NSWorkspace.shared.open(Logger.logDirectory)
+  }
+  
+  @IBAction func showLogWindow(_ sender: AnyObject) {
+    let logWindow = (NSApp.delegate as! AppDelegate).logWindow
+    logWindow.showWindow(self)
   }
 
   @IBAction func addOptionBtnAction(_ sender: AnyObject) {

@@ -35,7 +35,7 @@ class LogWindowController: NSWindowController, NSTableViewDelegate, NSTableViewD
   @IBOutlet weak var subsystemPopUpButton: NSPopUpButton!
 
   @objc dynamic var logs: [Log] = []
-  private static var subsystems = Set<Logger.Subsystem>()
+//  private static var subsystems = Set<Logger.Subsystem>()
 
   override func windowWillLoad() {
     super.windowWillLoad()

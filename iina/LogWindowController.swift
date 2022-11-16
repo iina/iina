@@ -22,7 +22,7 @@ class Log: NSObject {
   }
 }
 
-class LogWindowController: NSWindowController, NSTableViewDelegate, NSTableViewDataSource {
+class LogWindowController: NSWindowController, NSTableViewDelegate, NSTableViewDataSource, NSMenuDelegate {
   override var windowNibName: NSNib.Name {
     return NSNib.Name("LogWindowController")
   }
@@ -32,71 +32,42 @@ class LogWindowController: NSWindowController, NSTableViewDelegate, NSTableViewD
   }
 
   @IBOutlet weak var logTableView: NSTableView!
+  @IBOutlet var logArrayController: NSArrayController!
   @IBOutlet weak var subsystemPopUpButton: NSPopUpButton!
+  @IBOutlet weak var levelPopUpButton: NSPopUpButton!
 
   @objc dynamic var logs: [Log] = []
-//  private static var subsystems = Set<Logger.Subsystem>()
-
-  override func windowWillLoad() {
-    super.windowWillLoad()
-  }
+  @objc dynamic var predicate = NSPredicate(value: true)
 
   override func windowDidLoad() {
     super.windowDidLoad()
 
-//    NotificationCenter.default.addObserver(self, selector: #selector(updateLog), name: .iinaNewLog, object: nil)
-
-//    updateSubsystems()
     logTableView.sizeLastColumnToFit()
+    subsystemPopUpButton.menu!.delegate = self
   }
 
-//  func updateSubsystems()
-//  {
-//    DispatchQueue.main.async { [unowned self] in
-//      guard isWindowLoaded else { return }
-//      subsystemPopupButton.removeAllItems()
-//      subsystemPopupButton.addItem(withTitle: NSLocalizedString("All", comment: "All"))
-//      subsystemPopupButton.addItems(withTitles: Logger.subsystems.map { $0.rawValue })
-//    }
-//  }
+  // NSMenuDelegate
 
-//  // NSTableViewDataSource
-//  func numberOfRows(in tableView: NSTableView) -> Int {
-//    return Logger.logs.count
-//  }
-//
-//  func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-//    return Logger.logs[row]
-//  }
-//
-//  // NSTableViewDelegate
-//  func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-//    let log = Logger.logs[row]
-//
-//    guard let column = tableColumn,
-//          let cell = tableView.makeView(withIdentifier: column.identifier, owner: self) as? NSTableCellView else { return nil }
-//
-//    switch column.identifier.rawValue {
-//    case "subsystem":
-//      cell.textField?.stringValue = log.subsystem.rawValue
-//    case "message":
-//      cell.textField?.stringValue = log.message
-//    case "time":
-//      cell.textField?.stringValue = Logger.dateFormatter.string(from: log.date)
-//    case "level":
-//      cell.imageView!.wantsLayer = true
-//      let colorDict: [Logger.Level: CGColor] =
-//      [
-//        .verbose: NSColor.lightGray.cgColor,
-//        .debug: NSColor.green.cgColor,
-//        .warning: NSColor.yellow.cgColor,
-//        .error: NSColor.red.cgColor,
-//      ]
-//      cell.imageView!.layer?.backgroundColor = colorDict[log.level]
-//    default:
-//      break
-//    }
-//    return cell
-//  }
-//
+  func menuNeedsUpdate(_ menu: NSMenu) {
+    Logger.Subsystem.subsystems.forEach {
+      if !$0.added {
+        menu.addItem(withTitle: $0.rawValue)
+        $0.added = true
+      }
+    }
+  }
+
+  private func updatePredicate() {
+    var subsystemPredicate = NSPredicate(value: true)
+    if subsystemPopUpButton.indexOfSelectedItem != 0 {
+      subsystemPredicate = NSPredicate(format: "subsystem = %@", subsystemPopUpButton.titleOfSelectedItem!)
+    }
+    let levelPredicate = NSPredicate(format: "level >= %d", levelPopUpButton.selectedTag())
+    predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [subsystemPredicate, levelPredicate])
+  }
+
+  @IBAction func subsystemUpdated(_ sender: Any) {
+    updatePredicate()
+  }
+
 }

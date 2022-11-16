@@ -21,13 +21,16 @@ import Foundation
 ///     the logger uses its own similar method.
 struct Logger {
 
-  struct Subsystem: RawRepresentable {
-    var rawValue: String
+  class Subsystem: RawRepresentable {
+    let rawValue: String
+    var added = false
 
     static let general = Subsystem(rawValue: "iina")
+    static var subsystems: [Subsystem] = []
 
-    init(rawValue: String) {
+    required init(rawValue: String) {
       self.rawValue = rawValue
+      Subsystem.subsystems.append(self)
     }
   }
 
@@ -159,11 +162,6 @@ struct Logger {
     DispatchQueue.main.async {
       (NSApp.delegate as! AppDelegate).logWindow.logs.append(log)
     }
-//    let (inserted, _) = subsystems.insert(subsystem)
-//    if inserted {
-//      logWindowController.updateSubsystems()
-//    }
-//    logs.append(log)
 
     let string = formatMessage(message, level, subsystem, appendNewlineAtTheEnd, date)
     print(string, terminator: "")

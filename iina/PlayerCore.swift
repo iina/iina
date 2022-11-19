@@ -93,6 +93,12 @@ class PlayerCore: NSObject {
   }
   private var _touchBarSupport: Any?
 
+  /// `true` if this Mac is known to have a touch bar.
+  ///
+  /// - Note: This is set based on whether `AppKit` has called `MakeTouchBar`, therefore it can, for example, be `false` for
+  ///         a MacBook that has a touch bar if the touch bar is asleep because the Mac is in closed clamshell mode.
+  var hasTouchBar = false
+
   /// A dispatch queue for auto load feature.
   let backgroundQueue = DispatchQueue(label: "IINAPlayerCoreTask", qos: .background)
   let playlistQueue = DispatchQueue(label: "IINAPlaylistTask", qos: .utility)
@@ -1771,6 +1777,19 @@ class PlayerCore: NSObject {
         ffmpegController.generateThumbnail(forFile: url.path, thumbWidth:Int32(Preference.integer(for: .thumbnailWidth)))
       }
     }
+  }
+
+  @available(macOS 10.12.2, *)
+  func makeTouchBar() -> NSTouchBar {
+    Logger.log("Activating Touch Bar", subsystem: subsystem)
+    hasTouchBar = true
+    // The timer that synchronizes the UI is shutdown to conserve energy when the OSC is hidden.
+    // However the timer can't be stopped if it is needed to update the information being displayed
+    // in the touch bar. If currently playing make sure the timer is running.
+    if info.isPlaying && !isShuttingDown && !isShutdown {
+      createSyncUITimer()
+    }
+    return touchBarSupport.touchBar
   }
 
   func refreshTouchBarSlider() {

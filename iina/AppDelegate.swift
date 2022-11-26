@@ -723,6 +723,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     historyWindow.showWindow(self)
   }
 
+  @IBAction func showLogWindow(_ sender: AnyObject) {
+    logWindow.showWindow(self)
+  }
+
   @IBAction func showHighlights(_ sender: AnyObject) {
     guideWindow.show(pages: [.highlights])
   }

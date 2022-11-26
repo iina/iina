@@ -75,13 +75,8 @@ class LogWindowController: NSWindowController, NSTableViewDelegate, NSTableViewD
 
   @IBAction func save(_ sender: Any) {
     Utility.quickSavePanel(title: "Log", filename: "log.txt", sheetWindow: window) { URL in
-      var logs = ""
-      (self.logArrayController.arrangedObjects as? [Log])!.forEach {
-        logs += $0.logString
-      }
-      do {
-        try logs.write(to: URL, atomically: true, encoding: .utf8)
-      } catch {}
+      let logs = (self.logArrayController.arrangedObjects as! [Log]).map { $0.logString }.joined()
+      try? logs.write(to: URL, atomically: true, encoding: .utf8)
     }
   }
 

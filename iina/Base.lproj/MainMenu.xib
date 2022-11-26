@@ -625,6 +625,11 @@ CA
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
                             <menuItem title="Inspector" keyEquivalent="i" id="bwz-r0-peR"/>
+                            <menuItem title="Log Window" keyEquivalent="l" id="0tJ-RQ-kuW">
+                                <connections>
+                                    <action selector="showLogWindow:" target="Voe-Tx-rLC" id="2EU-WD-3kO"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="6qV-kv-e0C"/>
                             <menuItem title="Bring All to Front" id="LE2-aR-0XJ">
                                 <modifierMask key="keyEquivalentModifierMask"/>

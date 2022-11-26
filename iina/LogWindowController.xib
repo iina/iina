@@ -12,6 +12,7 @@
                 <outlet property="logArrayController" destination="F8n-tu-6OJ" id="wqV-iD-q1N"/>
                 <outlet property="logTableView" destination="ybI-a9-gbe" id="fjN-T7-4EN"/>
                 <outlet property="subsystemPopUpButton" destination="Wj3-KQ-CjI" id="64G-vs-CfO"/>
+                <outlet property="window" destination="QvC-M9-y7g" id="OkG-QY-4CJ"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -63,12 +64,12 @@
                     </textField>
                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Wj3-KQ-CjI">
                         <rect key="frame" x="222" y="304" width="55" height="25"/>
-                        <popUpButtonCell key="cell" type="push" title="All" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="9Mt-2c-hRy" id="GeW-eF-yJv">
+                        <popUpButtonCell key="cell" type="push" title="All" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="9Mt-2c-hRy" id="GeW-eF-yJv">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="menu"/>
                             <menu key="menu" id="AVl-0L-beC">
                                 <items>
-                                    <menuItem title="All" id="9Mt-2c-hRy">
+                                    <menuItem title="All" state="on" id="9Mt-2c-hRy">
                                         <modifierMask key="keyEquivalentModifierMask"/>
                                     </menuItem>
                                 </items>
@@ -301,12 +302,15 @@
                     <constraint firstItem="UoZ-gj-OUA" firstAttribute="firstBaseline" secondItem="Wj3-KQ-CjI" secondAttribute="firstBaseline" id="y0d-Wo-hMc"/>
                 </constraints>
             </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="mae-Dm-nKq"/>
+            </connections>
             <point key="canvasLocation" x="-221" y="610"/>
         </window>
         <arrayController editable="NO" id="F8n-tu-6OJ">
             <connections>
-                <binding destination="-2" name="filterPredicate" keyPath="self.predicate" id="nZ0-0A-Shh"/>
                 <binding destination="-2" name="contentArray" keyPath="logs" id="4hB-xT-oTS"/>
+                <binding destination="-2" name="filterPredicate" keyPath="self.predicate" id="nZ0-0A-Shh"/>
             </connections>
         </arrayController>
         <userDefaultsController representsSharedInstance="YES" id="Byb-k1-Sgm"/>

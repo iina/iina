@@ -45,6 +45,9 @@ class LogWindowController: NSWindowController, NSTableViewDelegate, NSTableViewD
     super.windowDidLoad()
 
     logTableView.sizeLastColumnToFit()
+    let tableViewMenu = NSMenu()
+    tableViewMenu.insertItem(withTitle: "Copy", action: #selector(menuCopy), keyEquivalent: "", at: 0)
+    logTableView.menu = tableViewMenu
     subsystemPopUpButton.menu!.delegate = self
     subsystemPopUpButton.selectItem(withTag: Preference.integer(for: .logLevel))
   }
@@ -78,6 +81,16 @@ class LogWindowController: NSWindowController, NSTableViewDelegate, NSTableViewD
       let logs = (self.logArrayController.arrangedObjects as! [Log]).map { $0.logString }.joined()
       try? logs.write(to: URL, atomically: true, encoding: .utf8)
     }
+  }
+
+  // Menu actions
+
+  @objc private func menuCopy()
+  {
+    let string = (logArrayController.selectedObjects as! [Log]).map { $0.logString }.joined()
+    let pasteboard = NSPasteboard.general
+    pasteboard.clearContents()
+    pasteboard.setString(string, forType: .string)
   }
 
 }

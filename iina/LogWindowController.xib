@@ -265,6 +265,7 @@
                                     </tableColumns>
                                     <connections>
                                         <binding destination="F8n-tu-6OJ" name="content" keyPath="arrangedObjects" id="fBd-gx-u8K"/>
+                                        <binding destination="F8n-tu-6OJ" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="fBd-gx-u8K" id="A9k-lg-T2I"/>
                                     </connections>
                                 </tableView>
                             </subviews>

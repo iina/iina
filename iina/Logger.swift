@@ -158,12 +158,12 @@ struct Logger {
     guard level.rawValue >= Preference.integer(for: .logLevel) else { return }
 
     let date = Date()
-    let log = Log(subsystem: subsystem.rawValue, level: level.rawValue, message: message, date: dateFormatter.string(from: date))
+    let string = formatMessage(message, level, subsystem, appendNewlineAtTheEnd, date)
+    let log = Log(subsystem: subsystem.rawValue, level: level.rawValue, message: message, date: dateFormatter.string(from: date), logString: string)
     DispatchQueue.main.async {
       (NSApp.delegate as! AppDelegate).logWindow.logs.append(log)
     }
 
-    let string = formatMessage(message, level, subsystem, appendNewlineAtTheEnd, date)
     print(string, terminator: "")
 
     #if DEBUG

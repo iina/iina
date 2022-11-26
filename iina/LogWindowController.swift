@@ -13,22 +13,24 @@ class Log: NSObject {
   @objc dynamic let level: Int
   @objc dynamic let message: String
   @objc dynamic let date: String
+  let logString: String
 
-  init(subsystem: String, level: Int, message: String, date: String) {
+  init(subsystem: String, level: Int, message: String, date: String, logString: String) {
     self.subsystem = subsystem
     self.level = level
     self.message = message
     self.date = date
+    self.logString = logString
+  }
+
+  override var description: String {
+      return logString
   }
 }
 
 class LogWindowController: NSWindowController, NSTableViewDelegate, NSTableViewDataSource, NSMenuDelegate {
   override var windowNibName: NSNib.Name {
     return NSNib.Name("LogWindowController")
-  }
-
-  convenience init() {
-    self.init(windowNibName: "LogWindowController")
   }
 
   @IBOutlet weak var logTableView: NSTableView!
@@ -44,6 +46,7 @@ class LogWindowController: NSWindowController, NSTableViewDelegate, NSTableViewD
 
     logTableView.sizeLastColumnToFit()
     subsystemPopUpButton.menu!.delegate = self
+    subsystemPopUpButton.selectItem(withTag: Preference.integer(for: .logLevel))
   }
 
   // NSMenuDelegate
@@ -68,6 +71,18 @@ class LogWindowController: NSWindowController, NSTableViewDelegate, NSTableViewD
 
   @IBAction func subsystemUpdated(_ sender: Any) {
     updatePredicate()
+  }
+
+  @IBAction func save(_ sender: Any) {
+    Utility.quickSavePanel(title: "Log", filename: "log.txt", sheetWindow: window) { URL in
+      var logs = ""
+      (self.logArrayController.arrangedObjects as? [Log])!.forEach {
+        logs += $0.logString
+      }
+      do {
+        try logs.write(to: URL, atomically: true, encoding: .utf8)
+      } catch {}
+    }
   }
 
 }

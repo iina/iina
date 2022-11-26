@@ -135,10 +135,6 @@
                             <menuItem title="Save Current Playlist..." id="Mjr-lL-oEt">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="xX3-Bc-McX"/>
-                            <menuItem title="Share" id="BtY-iQ-6Pf">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
                             <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">
                                 <connections>

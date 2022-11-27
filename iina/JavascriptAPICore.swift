@@ -326,6 +326,8 @@ fileprivate class StatusAPI: JavascriptAPI, CoreSubAPIExportable {
       return player!.info.isNetworkResource
     case "url":
       return player!.info.currentURL?.absoluteString.removingPercentEncoding ?? NSNull()
+    case "title":
+      return player!.getMediaTitle(withExtension: false)
     default:
       return nil
     }

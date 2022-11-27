@@ -85,6 +85,10 @@ class LogWindowController: NSWindowController, NSTableViewDelegate, NSTableViewD
 
   // Menu actions
 
+  @IBAction func copy(_ sender: Any) {
+    menuCopy()
+  }
+
   @objc private func menuCopy()
   {
     let string = (logArrayController.selectedObjects as! [Log]).map { $0.logString }.joined()

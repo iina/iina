@@ -37,20 +37,21 @@ class PluginStandaloneWindow: NSWindow, WKNavigationDelegate {
   func initializeWebView(pluginInstance: JavascriptPluginInstance) {
     self.pluginInstance = pluginInstance
 
-    let config = WKWebViewConfiguration()
-    config.userContentController.addUserScript(
-      WKUserScript(source: JavascriptMessageHub.bridgeScript, injectionTime: .atDocumentStart, forMainFrameOnly: true)
-    )
+    Utility.executeOnMainThread { 
+      let config = WKWebViewConfiguration()
+      config.userContentController.addUserScript(
+        WKUserScript(source: JavascriptMessageHub.bridgeScript, injectionTime: .atDocumentStart, forMainFrameOnly: true)
+      )
 
-    config.userContentController.add(pluginInstance.apis!["standaloneWindow"] as! WKScriptMessageHandler, name: "iina")
+      config.userContentController.add(pluginInstance.apis!["standaloneWindow"] as! WKScriptMessageHandler, name: "iina")
 
-    webView = WKWebView(frame: .zero, configuration: config)
-    webView.navigationDelegate = self
-    webView.translatesAutoresizingMaskIntoConstraints = false
-    webView.setValue(false, forKey: "drawsBackground")
-    contentView?.addSubview(webView)
-
-    Utility.quickConstraints(["H:|-0-[v]-0-|", "V:|-0-[v]-0-|"], ["v": webView])
+      webView = WKWebView(frame: .zero, configuration: config)
+      webView.navigationDelegate = self
+      webView.translatesAutoresizingMaskIntoConstraints = false
+      webView.setValue(false, forKey: "drawsBackground")
+      contentView?.addSubview(webView)
+      Utility.quickConstraints(["H:|-0-[v]-0-|", "V:|-0-[v]-0-|"], ["v": webView])
+    }
   }
 
   func setSimpleModeStyle(_ style: String) {

@@ -44,7 +44,7 @@ class JavascriptPluginInstance {
     DispatchQueue(label: "com.colliderli.iina.plugin.\(plugin.identifier)", qos: .background)
   }()
 
-  lazy var subsystem: Logger.Subsystem = .init(rawValue: "JS:\(plugin.name)")
+  lazy var subsystem: Logger.Subsystem = .init(rawValue: "\(isGlobal ? "global" : "player\(player.label!)") - \(plugin.name)")
 
   var currentFile: URL? {
     currentFileStack.last

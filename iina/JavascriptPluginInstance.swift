@@ -67,7 +67,9 @@ class JavascriptPluginInstance {
   }
 
   deinit {
-    Logger.log("Unload \(self.plugin.name)", level: .debug, subsystem: subsystem)
+    if let plugin = self.plugin {
+      Logger.log("Unload \(plugin.name)", level: .debug, subsystem: subsystem)
+    }
     apis.values.forEach { $0.cleanUp(self) }
   }
 

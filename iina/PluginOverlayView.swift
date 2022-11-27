@@ -54,24 +54,25 @@ class PluginOverlayView: WKWebView, WKNavigationDelegate {
   }
 
   static func create(pluginInstance: JavascriptPluginInstance) -> PluginOverlayView {
-    let config = WKWebViewConfiguration()
-    config.userContentController.addUserScript(
-      WKUserScript(source: JavascriptMessageHub.bridgeScript, injectionTime: .atDocumentStart, forMainFrameOnly: true)
-    )
-    config.userContentController.addUserScript(
-      WKUserScript(source: hitTestScript, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
-    )
+    Utility.executeOnMainThread {
+      let config = WKWebViewConfiguration()
+      config.userContentController.addUserScript(
+        WKUserScript(source: JavascriptMessageHub.bridgeScript, injectionTime: .atDocumentStart, forMainFrameOnly: true)
+      )
+      config.userContentController.addUserScript(
+        WKUserScript(source: hitTestScript, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+      )
 
-    config.userContentController.add(pluginInstance.apis!["overlay"] as! WKScriptMessageHandler, name: "iina")
+      config.userContentController.add(pluginInstance.apis!["overlay"] as! WKScriptMessageHandler, name: "iina")
 
-    let webView = PluginOverlayView(frame: .zero, configuration: config)
-    webView.pluginInstance = pluginInstance
-    webView.navigationDelegate = webView
-    webView.translatesAutoresizingMaskIntoConstraints = false
-    webView.setValue(false, forKey: "drawsBackground")
-    webView.isHidden = true
-
-    return webView
+      let webView = PluginOverlayView(frame: .zero, configuration: config)
+      webView.pluginInstance = pluginInstance
+      webView.navigationDelegate = webView
+      webView.translatesAutoresizingMaskIntoConstraints = false
+      webView.setValue(false, forKey: "drawsBackground")
+      webView.isHidden = true
+      return webView
+    }
   }
 
   func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {

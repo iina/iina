@@ -489,7 +489,40 @@ extension NSTextField {
 
 }
 
+let kIconSize = 17.0
+let kBorderWidth = 1.25
+
 extension NSImage {
+  static var circleDict: [NSColor: NSImage] = [:]
+  static func circle(withColor color: NSColor) -> NSImage {
+    if let cached = circleDict[color] {
+      return cached
+    }
+    let image = NSImage(size: NSMakeSize(kIconSize, kIconSize), flipped: false) { rect in
+      let inset = NSInsetRect(rect, kBorderWidth / 2 + rect.size.width * 0.25, kBorderWidth / 2 + rect.size.height * 0.25)
+      let path = NSBezierPath.init(ovalIn: inset)
+      path.lineWidth = kBorderWidth
+
+      let fractionOfBlendedColor: CGFloat
+      if #available(macOS 10.14, *) {
+        fractionOfBlendedColor = (NSApp.appearance?.isDark ?? false) ? 0.15 : 0.3
+      } else {
+        fractionOfBlendedColor = 0.15
+      };
+      let borderColor = color.blended(withFraction: fractionOfBlendedColor, of: .controlTextColor)
+
+      borderColor?.setStroke()
+      path.stroke()
+
+      color.setFill()
+      path.fill()
+
+      return true
+    }
+    circleDict[color] = image
+    return image
+  }
+
   func tinted(_ tintColor: NSColor) -> NSImage {
     guard self.isTemplate else { return self }
 

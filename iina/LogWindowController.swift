@@ -28,6 +28,8 @@ class Log: NSObject {
   }
 }
 
+fileprivate let colorMap: [Int: NSColor] = [0: .red, 1: .green, 2: .yellow, 3: .gray]
+
 class LogWindowController: NSWindowController, NSTableViewDelegate, NSTableViewDataSource, NSMenuDelegate {
   override var windowNibName: NSNib.Name {
     return NSNib.Name("LogWindowController")
@@ -48,6 +50,10 @@ class LogWindowController: NSWindowController, NSTableViewDelegate, NSTableViewD
     let tableViewMenu = NSMenu()
     tableViewMenu.insertItem(withTitle: "Copy", action: #selector(menuCopy), keyEquivalent: "", at: 0)
     logTableView.menu = tableViewMenu
+
+    levelPopUpButton.menu?.items.forEach {
+      $0.image = NSImage.circle(withColor: colorMap[$0.tag]!)
+    }
     subsystemPopUpButton.menu!.delegate = self
     subsystemPopUpButton.selectItem(withTag: Preference.integer(for: .logLevel))
   }
@@ -98,3 +104,19 @@ class LogWindowController: NSWindowController, NSTableViewDelegate, NSTableViewD
   }
 
 }
+
+@objc(LogLevelTransformer) class LogLevelTransformer: ValueTransformer {
+  static override func allowsReverseTransformation() -> Bool {
+    return false
+  }
+
+  static override func transformedValueClass() -> AnyClass {
+    return NSImage.self
+  }
+
+  override func transformedValue(_ value: Any?) -> Any? {
+    guard let value = value as? Int else { return nil }
+    return NSImage.circle(withColor: colorMap[value]!)
+  }
+}
+

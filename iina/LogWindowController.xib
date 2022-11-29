@@ -17,6 +17,13 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <arrayController editable="NO" id="F8n-tu-6OJ">
+            <connections>
+                <binding destination="-2" name="contentArray" keyPath="logs" id="4hB-xT-oTS"/>
+                <binding destination="-2" name="filterPredicate" keyPath="self.predicate" id="nZ0-0A-Shh"/>
+            </connections>
+        </arrayController>
+        <userDefaultsController representsSharedInstance="YES" id="Byb-k1-Sgm"/>
         <window title="Log Viewer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -91,7 +98,7 @@
                     </button>
                     <scrollView autohidesScrollers="YES" horizontalLineScroll="17" horizontalPageScroll="10" verticalLineScroll="17" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2RH-JP-b9l">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
-                        <clipView key="contentView" ambiguous="YES" id="f4H-CM-Gq3">
+                        <clipView key="contentView" ambiguous="YES" drawsBackground="NO" id="f4H-CM-Gq3">
                             <rect key="frame" x="1" y="1" width="598" height="298"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
@@ -118,27 +125,19 @@
                                                     <rect key="frame" x="8" y="0.0" width="8" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="DoX-Tw-ETL">
-                                                            <rect key="frame" x="0.0" y="6" width="8" height="13"/>
-                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="dLA-1F-IjW">
-                                                                <font key="font" size="11" name="Menlo-Regular"/>
-                                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                            </textFieldCell>
+                                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ibr-rS-L68">
+                                                            <rect key="frame" x="-20" y="-14" width="48" height="48"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="CGS-jK-0bK"/>
                                                             <connections>
-                                                                <binding destination="ojI-Yf-tJx" name="value" keyPath="objectValue.level" id="JXW-rN-wsI"/>
+                                                                <binding destination="ojI-Yf-tJx" name="value" keyPath="objectValue.level" id="KpJ-t7-EQD">
+                                                                    <dictionary key="options">
+                                                                        <string key="NSValueTransformerName">LogLevelTransformer</string>
+                                                                    </dictionary>
+                                                                </binding>
                                                             </connections>
-                                                        </textField>
+                                                        </imageView>
                                                     </subviews>
-                                                    <constraints>
-                                                        <constraint firstItem="DoX-Tw-ETL" firstAttribute="top" secondItem="ojI-Yf-tJx" secondAttribute="top" id="AcC-cL-iiW"/>
-                                                        <constraint firstAttribute="trailing" secondItem="DoX-Tw-ETL" secondAttribute="trailing" constant="2" id="JVK-uw-s2k"/>
-                                                        <constraint firstItem="DoX-Tw-ETL" firstAttribute="leading" secondItem="ojI-Yf-tJx" secondAttribute="leading" constant="2" id="PlA-cc-Cvj"/>
-                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="DoX-Tw-ETL" secondAttribute="bottom" id="a9U-CA-bca"/>
-                                                    </constraints>
-                                                    <connections>
-                                                        <outlet property="textField" destination="DoX-Tw-ETL" id="FBV-Bi-TNB"/>
-                                                    </connections>
                                                 </tableCellView>
                                             </prototypeCellViews>
                                         </tableColumn>
@@ -269,6 +268,7 @@
                                     </connections>
                                 </tableView>
                             </subviews>
+                            <nil key="backgroundColor"/>
                         </clipView>
                         <constraints>
                             <constraint firstAttribute="width" constant="600" placeholder="YES" id="P7J-Rg-WXD"/>
@@ -311,12 +311,5 @@
             </connections>
             <point key="canvasLocation" x="-221" y="610"/>
         </window>
-        <arrayController editable="NO" id="F8n-tu-6OJ">
-            <connections>
-                <binding destination="-2" name="contentArray" keyPath="logs" id="4hB-xT-oTS"/>
-                <binding destination="-2" name="filterPredicate" keyPath="self.predicate" id="nZ0-0A-Shh"/>
-            </connections>
-        </arrayController>
-        <userDefaultsController representsSharedInstance="YES" id="Byb-k1-Sgm"/>
     </objects>
 </document>

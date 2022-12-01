@@ -45,17 +45,6 @@ extension MenuController {
   }
 }
 
-protocol JavascriptExecutable {
-  func evaluateJavaScript(
-    _ javaScriptString: String,
-    completionHandler: ((Any?, Error?) -> Void)?
-  )
-}
-
-extension WKWebView: JavascriptExecutable {
-  
-}
-
 
 // MARK: - Data
 
@@ -89,7 +78,7 @@ fileprivate struct JSEvent: Identifiable {
 }
 
 @available(macOS 12.0, *)
-fileprivate class JSCommandsContainer : ObservableObject{
+fileprivate class JSEventsContainer : ObservableObject{
   @Published var idCounter = 0
   @Published var counter = 0
   @Published var data = [JSEvent]()
@@ -137,14 +126,13 @@ fileprivate class JSCommandsContainer : ObservableObject{
 @available(macOS 12.0, *)
 struct JavasctiptDevTool: View {
   // NSMenuItem
-
   static let JSMenuItemInstance = 1
   static let JSMenuItemWebView = 3
 
   // SwiftUI
   unowned let jsContext: JSContext
 
-  @ObservedObject fileprivate var commands = JSCommandsContainer()
+  @ObservedObject fileprivate var events = JSEventsContainer()
 
   @State private var input: String = ""
 
@@ -152,7 +140,7 @@ struct JavasctiptDevTool: View {
     VSplitView {
       ScrollViewReader { proxy in
         // Message history
-        List(commands.data, id: \.id) { command in
+        List(events.data, id: \.id) { command in
           // Message item
           if command.isMessage {
             ResultView(command: command).id(command.id)
@@ -177,7 +165,7 @@ struct JavasctiptDevTool: View {
             }.id(command.id)
           }
         }
-        .onReceive(commands.$idChanged) { id in
+        .onReceive(events.$idChanged) { id in
           proxy.scrollTo(id, anchor: .bottom)
         }
       }
@@ -210,8 +198,8 @@ struct JavasctiptDevTool: View {
     if source.isEmpty {
       return
     }
-    commands.addPrompt(source)
-    commands.postChange()
+    events.addPrompt(source)
+    events.postChange()
 
     let jsResult: JSEvent.Result
 
@@ -239,8 +227,8 @@ struct JavasctiptDevTool: View {
           jsResult = .opaqueObject(result.toString())
         }
       }
-      commands.addResult(jsResult)
-      commands.postChange()
+      events.addResult(jsResult)
+      events.postChange()
     }
 
     input = ""
@@ -296,7 +284,7 @@ struct CommandEditor: NSViewRepresentable {
       super.keyDown(with: event)
       if event.keyCode == 126 && self.string.isEmpty {
         if let prompt = (self.window as! JSDevToolWindow)
-          .rootView.commands.data.last(where: { $0.prompt != nil })?.prompt {
+          .rootView.events.data.last(where: { $0.prompt != nil })?.prompt {
           self.string = prompt
           parent.text = self.string
         }
@@ -482,14 +470,14 @@ func createJavascriptDevToolWindow(forInstance inst: JavascriptPluginInstance, t
 
       let message = exception?.toString() ?? "Unknown exception"
       let stack = exception?.objectForKeyedSubscript("stack")?.toString() ?? "???"
-      window.rootView.commands.addException(message: message, stack: stack)
+      window.rootView.events.addException(message: message, stack: stack)
     }
 
     // add log handler
     inst.logHandler = { message, level in
       Utility.executeOnMainThread {
-        window.rootView.commands.addLog(message: message, level: level)
-        window.rootView.commands.postChange()
+        window.rootView.events.addLog(message: message, level: level)
+        window.rootView.events.postChange()
       }
     }
 

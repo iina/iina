@@ -28,7 +28,7 @@ class Log: NSObject {
   }
 }
 
-fileprivate let colorMap: [Int: NSColor] = [0: .red, 1: .green, 2: .yellow, 3: .gray]
+fileprivate let colorMap: [Int: NSColor] = [0: .lightGray, 1: .green, 2: .yellow, 3: .red]
 
 class LogWindowController: NSWindowController, NSTableViewDelegate, NSTableViewDataSource, NSMenuDelegate {
   override var windowNibName: NSNib.Name {
@@ -102,7 +102,6 @@ class LogWindowController: NSWindowController, NSTableViewDelegate, NSTableViewD
     pasteboard.clearContents()
     pasteboard.setString(string, forType: .string)
   }
-
 }
 
 @objc(LogLevelTransformer) class LogLevelTransformer: ValueTransformer {

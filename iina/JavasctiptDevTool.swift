@@ -170,20 +170,32 @@ struct JavasctiptDevTool: View {
         }
       }
       VStack(alignment: .leading, spacing: 0) {
+        // Toolbar
         HStack {
-          Button(action: executePrompt) {
+          // Run code
+          Button(action: { executePrompt() }) {
             Image(systemName: "play.circle")
               .renderingMode(.template)
               .foregroundColor(.accentColor)
           }
+          .help("Run code")
           .buttonStyle(PlainButtonStyle())
           .keyboardShortcut(.return, modifiers: .command)
+          // Show global objects
+          Button(action: { executePrompt(printGlobalObject: true) }) {
+            Image(systemName: "point.3.filled.connected.trianglepath.dotted")
+              .renderingMode(.template)
+              .foregroundColor(.secondary)
+          }
+          .buttonStyle(PlainButtonStyle())
+          .help("Print global objects")
           Spacer()
           Text("Cmd+Return to run code")
             .font(.footnote)
             .foregroundColor(.secondary)
         }
         .padding([.top, .horizontal], 8)
+        // Editor
         CommandEditor(text: $input)
           .frame(maxHeight: 100)
           .padding(.all, 8)
@@ -193,8 +205,8 @@ struct JavasctiptDevTool: View {
     .listStyle(.plain)
   }
 
-  private func executePrompt() {
-    let source = input.trimmingCharacters(in: .whitespacesAndNewlines)
+  private func executePrompt(printGlobalObject: Bool = false) {
+    let source = printGlobalObject ? "$global" : input.trimmingCharacters(in: .whitespacesAndNewlines)
     if source.isEmpty {
       return
     }
@@ -203,7 +215,11 @@ struct JavasctiptDevTool: View {
 
     let jsResult: JSEvent.Result
 
-    if let result = jsContext.evaluateScript(source) {
+    let result = source == "$global" ?
+    jsContext.globalObject :
+    jsContext.evaluateScript(source)
+
+    if let result = result {
       if result.isNumber {
         jsResult = .number(result.toNumber())
       } else if result.isString {
@@ -222,7 +238,7 @@ struct JavasctiptDevTool: View {
         let object = result.toObject()!
         if let dict = object as? [String: Any] {
           jsResult = .object(
-            result.toString(), dict.keys.map { ($0, "\(dict[$0] ?? "nil")") })
+            result.toString() ?? "", dict.keys.map { ($0, "\(dict[$0] ?? "nil")") })
         } else {
           jsResult = .opaqueObject(result.toString())
         }
@@ -231,7 +247,9 @@ struct JavasctiptDevTool: View {
       events.postChange()
     }
 
-    input = ""
+    if !printGlobalObject {
+      input = ""
+    }
   }
 }
 
@@ -391,6 +409,7 @@ fileprivate struct ResultView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .foregroundColor(.secondary)
         }
+        .textSelection(.enabled)
         .padding(.all, 8)
       }
       .background(Color.red.opacity(0.1))
@@ -399,6 +418,7 @@ fileprivate struct ResultView: View {
       ZStack {
         Text(message).mono()
           .frame(maxWidth: .infinity, alignment: .leading)
+          .textSelection(.enabled)
           .padding(.all, 8)
       }
       .background(

@@ -306,6 +306,7 @@
 		E3ECC89E1FE9A6D900BED8C7 /* GeometryDef.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ECC89D1FE9A6D900BED8C7 /* GeometryDef.swift */; };
 		E3F698872120D878005792C9 /* ExtendedColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F698862120D878005792C9 /* ExtendedColors.swift */; };
 		E3FC31461FE1501E00B9B86F /* PowerSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FC31451FE1501E00B9B86F /* PowerSource.swift */; };
+		E3FF5AC02938582F0019CE45 /* JavasctiptDevTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FF5ABF2938582F0019CE45 /* JavasctiptDevTool.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1669,6 +1670,7 @@
 		E3ECC89D1FE9A6D900BED8C7 /* GeometryDef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryDef.swift; sourceTree = "<group>"; };
 		E3F698862120D878005792C9 /* ExtendedColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedColors.swift; sourceTree = "<group>"; };
 		E3FC31451FE1501E00B9B86F /* PowerSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerSource.swift; sourceTree = "<group>"; };
+		E3FF5ABF2938582F0019CE45 /* JavasctiptDevTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavasctiptDevTool.swift; sourceTree = "<group>"; };
 		E53BAB3F1F1692B700D2609F /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
 		E53EB2A7205A865D003F34A0 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
 		E5436AA61E844761005BEB5C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = fr; path = fr.lproj/Contribution.rtf; sourceTree = "<group>"; };
@@ -2388,6 +2390,7 @@
 				E3965E192487C99900607EB4 /* JavascriptPluginSubtitle.swift */,
 				E32693F824BA138000BF7ADC /* JavascriptPluginSubtitleItem.swift */,
 				E38BA1C3254110BD000B551D /* JavascriptMessageHub.swift */,
+				E3FF5ABF2938582F0019CE45 /* JavasctiptDevTool.swift */,
 			);
 			name = Javascript;
 			sourceTree = "<group>";
@@ -2780,6 +2783,7 @@
 				E34EAA83251A36CE00057F27 /* JavascriptAPIFile.swift in Sources */,
 				E32712B024EAA14500359DAB /* ScreenshootOSDView.swift in Sources */,
 				E3BA79EE2131443A00529D99 /* OpenURLWindowController.swift in Sources */,
+				E3FF5AC02938582F0019CE45 /* JavasctiptDevTool.swift in Sources */,
 				84FBCB381EEACDDD0076C77C /* FFmpegController.m in Sources */,
 				84879A981E0FFC7E0004F894 /* PrefUIViewController.swift in Sources */,
 				84C6D3641EB276E9009BF721 /* PlaybackHistory.swift in Sources */,

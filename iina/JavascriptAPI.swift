@@ -28,6 +28,9 @@ class JavascriptAPI: NSObject {
   func log(_ message: String, level: Logger.Level = .debug) {
     guard pluginInstance != nil else { return }
     Logger.log(message, level: level, subsystem: pluginInstance.subsystem)
+    if let logHandler = pluginInstance.logHandler {
+      logHandler(message, level)
+    }
   }
 
   func whenPermitted<T>(to permission: JavascriptPlugin.Permission, block: () -> T?) -> T? {

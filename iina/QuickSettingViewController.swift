@@ -404,7 +404,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     let currentTag = currentTab.buttonTag
     [videoTabBtn, audioTabBtn, subTabBtn].forEach { btn in
       let isActive = currentTag == btn!.tag
-      if #available(OSX 10.14, *) {
+      if #available(macOS 10.14, *) {
         btn!.contentTintColor = isActive ? .sidebarTabTintActive : .sidebarTabTint
       } else {
         Utility.setBoldTitle(for: btn!, isActive)

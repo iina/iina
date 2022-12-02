@@ -11,13 +11,12 @@ import Mustache
 import WebKit
 
 fileprivate let isMacOS11: Bool = {
-  var res = false
   if #available(macOS 11.0, *) {
-    if #available(macOS 12.0, *) {} else {
-      res = true
+    if #unavailable(macOS 12.0) {
+        return true
     }
   }
-  return res
+  return false
 }()
 
 fileprivate let TitleBarHeightNormal: CGFloat = {

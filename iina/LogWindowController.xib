@@ -28,7 +28,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="608" height="350"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1415"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="3440" height="1415"/>
             <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="600" height="335"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -130,8 +130,9 @@
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="CGS-jK-0bK"/>
                                                             <connections>
-                                                                <binding destination="ojI-Yf-tJx" name="value" keyPath="objectValue.level" id="KpJ-t7-EQD">
+                                                                <binding destination="ojI-Yf-tJx" name="value" keyPath="objectValue.level" id="YxB-OT-qaq">
                                                                     <dictionary key="options">
+                                                                        <bool key="NSConditionallySetsEnabled" value="NO"/>
                                                                         <string key="NSValueTransformerName">LogLevelTransformer</string>
                                                                     </dictionary>
                                                                 </binding>

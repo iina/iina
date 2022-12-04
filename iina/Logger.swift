@@ -19,25 +19,49 @@ import Foundation
 /// - Important: The `createDirIfNotExist` method in `Utilities` **must not** be used by the logger. If an error occurs
 ///     that method will attempt to report it using the logger. If the logger is still being initialized this will result in a crash. For that reason
 ///     the logger uses its own similar method.
-struct Logger {
+class Logger: NSObject {
+
+  class Log: NSObject {
+    @objc dynamic let subsystem: String
+    @objc dynamic let level: Int
+    @objc dynamic let message: String
+    @objc dynamic let date: String
+    let logString: String
+
+    init(subsystem: String, level: Int, message: String, date: String, logString: String) {
+      self.subsystem = subsystem
+      self.level = level
+      self.message = message
+      self.date = date
+      self.logString = logString
+    }
+
+    override var description: String {
+      return logString
+    }
+  }
 
   class Subsystem: RawRepresentable {
     let rawValue: String
     var added = false
 
     static let general = Subsystem(rawValue: "iina")
-    static var subsystems: [Subsystem] = []
 
     required init(rawValue: String) {
       self.rawValue = rawValue
-      Subsystem.subsystems.append(self)
+      subsystems.append(self)
     }
   }
+
+  static var logs: [Log] = []
+  static var subsystems: [Subsystem] = []
 
   enum Level: Int, Comparable, CustomStringConvertible {
     static func < (lhs: Level, rhs: Level) -> Bool {
       return lhs.rawValue < rhs.rawValue
     }
+
+    static var preferred: Level = Level(rawValue: Preference.integer(for: .logLevel).clamped(to: 0...3))!
 
     case verbose
     case debug
@@ -161,7 +185,7 @@ struct Logger {
     let string = formatMessage(message, level, subsystem, appendNewlineAtTheEnd, date)
     let log = Log(subsystem: subsystem.rawValue, level: level.rawValue, message: message, date: dateFormatter.string(from: date), logString: string)
     DispatchQueue.main.async {
-      (NSApp.delegate as! AppDelegate).logWindow.logs.append(log)
+      logs.append(log)
     }
 
     print(string, terminator: "")

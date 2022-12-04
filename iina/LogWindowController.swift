@@ -8,27 +8,10 @@
 
 import Foundation
 
-class Log: NSObject {
-  @objc dynamic let subsystem: String
-  @objc dynamic let level: Int
-  @objc dynamic let message: String
-  @objc dynamic let date: String
-  let logString: String
-
-  init(subsystem: String, level: Int, message: String, date: String, logString: String) {
-    self.subsystem = subsystem
-    self.level = level
-    self.message = message
-    self.date = date
-    self.logString = logString
-  }
-
-  override var description: String {
-      return logString
-  }
-}
-
 fileprivate let colorMap: [Int: NSColor] = [0: .lightGray, 1: .green, 2: .yellow, 3: .red]
+fileprivate var circleDict: [NSColor: NSImage] = [:]
+fileprivate let kIconSize = 17.0
+fileprivate let kBorderWidth = 1.25
 
 class LogWindowController: NSWindowController, NSTableViewDelegate, NSTableViewDataSource, NSMenuDelegate {
   override var windowNibName: NSNib.Name {
@@ -40,7 +23,9 @@ class LogWindowController: NSWindowController, NSTableViewDelegate, NSTableViewD
   @IBOutlet weak var subsystemPopUpButton: NSPopUpButton!
   @IBOutlet weak var levelPopUpButton: NSPopUpButton!
 
-  @objc dynamic var logs: [Log] = []
+  @objc dynamic var logs: [Logger.Log] {
+    Logger.logs
+  }
   @objc dynamic var predicate = NSPredicate(value: true)
 
   override func windowDidLoad() {
@@ -48,20 +33,49 @@ class LogWindowController: NSWindowController, NSTableViewDelegate, NSTableViewD
 
     logTableView.sizeLastColumnToFit()
     let tableViewMenu = NSMenu()
-    tableViewMenu.insertItem(withTitle: "Copy", action: #selector(menuCopy), keyEquivalent: "", at: 0)
+    tableViewMenu.addItem(withTitle: "Copy", action: #selector(menuCopy), keyEquivalent: "")
     logTableView.menu = tableViewMenu
 
     levelPopUpButton.menu?.items.forEach {
-      $0.image = NSImage.circle(withColor: colorMap[$0.tag]!)
+      $0.image = LogWindowController.indicatorIcon(withColor: colorMap[$0.tag]!)
     }
+    levelPopUpButton.selectItem(withTag: Logger.Level.preferred.rawValue)
     subsystemPopUpButton.menu!.delegate = self
-    subsystemPopUpButton.selectItem(withTag: Preference.integer(for: .logLevel))
+  }
+
+  fileprivate static func indicatorIcon(withColor color: NSColor) -> NSImage {
+    if let cached = circleDict[color] {
+      return cached
+    }
+    let image = NSImage(size: NSMakeSize(kIconSize, kIconSize), flipped: false) { rect in
+      let inset = NSInsetRect(rect, kBorderWidth / 2 + rect.size.width * 0.25, kBorderWidth / 2 + rect.size.height * 0.25)
+      let path = NSBezierPath.init(ovalIn: inset)
+      path.lineWidth = kBorderWidth
+
+      let fractionOfBlendedColor: CGFloat
+      if #available(macOS 10.14, *) {
+        fractionOfBlendedColor = (NSApp.appearance?.isDark ?? false) ? 0.15 : 0.3
+      } else {
+        fractionOfBlendedColor = 0.15
+      };
+      let borderColor = color.blended(withFraction: fractionOfBlendedColor, of: .controlTextColor)
+
+      borderColor?.setStroke()
+      path.stroke()
+
+      color.setFill()
+      path.fill()
+
+      return true
+    }
+    circleDict[color] = image
+    return image
   }
 
   // NSMenuDelegate
 
   func menuNeedsUpdate(_ menu: NSMenu) {
-    Logger.Subsystem.subsystems.forEach {
+    Logger.subsystems.forEach {
       if !$0.added {
         menu.addItem(withTitle: $0.rawValue)
         $0.added = true
@@ -83,9 +97,9 @@ class LogWindowController: NSWindowController, NSTableViewDelegate, NSTableViewD
   }
 
   @IBAction func save(_ sender: Any) {
-    Utility.quickSavePanel(title: "Log", filename: "log.txt", sheetWindow: window) { URL in
-      let logs = (self.logArrayController.arrangedObjects as! [Log]).map { $0.logString }.joined()
-      try? logs.write(to: URL, atomically: true, encoding: .utf8)
+    Utility.quickSavePanel(title: "Log", filename: "log.txt", sheetWindow: window) { url in
+      let logs = (self.logArrayController.arrangedObjects as! [Logger.Log]).map { $0.logString }.joined()
+      try? logs.write(to: url, atomically: true, encoding: .utf8)
     }
   }
 
@@ -97,7 +111,7 @@ class LogWindowController: NSWindowController, NSTableViewDelegate, NSTableViewD
 
   @objc private func menuCopy()
   {
-    let string = (logArrayController.selectedObjects as! [Log]).map { $0.logString }.joined()
+    let string = (logArrayController.selectedObjects as! [Logger.Log]).map { $0.logString }.joined()
     let pasteboard = NSPasteboard.general
     pasteboard.clearContents()
     pasteboard.setString(string, forType: .string)
@@ -115,7 +129,7 @@ class LogWindowController: NSWindowController, NSTableViewDelegate, NSTableViewD
 
   override func transformedValue(_ value: Any?) -> Any? {
     guard let value = value as? Int else { return nil }
-    return NSImage.circle(withColor: colorMap[value]!)
+    return LogWindowController.indicatorIcon(withColor: colorMap[value]!)
   }
 }
 

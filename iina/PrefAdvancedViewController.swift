@@ -79,8 +79,7 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
   }
   
   @IBAction func showLogWindow(_ sender: AnyObject) {
-    let logWindow = (NSApp.delegate as! AppDelegate).logWindow
-    logWindow.showWindow(self)
+    (NSApp.delegate as! AppDelegate).logWindow.showWindow(self)
   }
 
   @IBAction func addOptionBtnAction(_ sender: AnyObject) {

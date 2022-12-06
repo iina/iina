@@ -72,7 +72,7 @@ class LogWindowController: NSWindowController, NSTableViewDelegate, NSTableViewD
     return image
   }
 
-  // NSMenuDelegate
+  // MARK: - NSMenuDelegate
 
   func menuNeedsUpdate(_ menu: NSMenu) {
     Logger.subsystems.forEach {
@@ -97,8 +97,8 @@ class LogWindowController: NSWindowController, NSTableViewDelegate, NSTableViewD
   }
 
   @IBAction func save(_ sender: Any) {
-    Utility.quickSavePanel(title: "Log", filename: "log.txt", sheetWindow: window) { url in
-      let logs = (self.logArrayController.arrangedObjects as! [Logger.Log]).map { $0.logString }.joined()
+    Utility.quickSavePanel(title: "Log", filename: "iina.log", sheetWindow: window) { url in
+      let logs = (self.logArrayController.content as! [Logger.Log]).map { $0.logString }.joined()
       try? logs.write(to: url, atomically: true, encoding: .utf8)
     }
   }

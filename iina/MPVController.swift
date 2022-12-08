@@ -23,8 +23,15 @@ fileprivate let no_str = "no"
  "debug" - very noisy technical information
  "trace" - extremely noisy
  */
-fileprivate let MPVLogLevel = "warn"
-
+fileprivate let MPVLogLevel = "debug"
+fileprivate let logLevelMap: [String: Logger.Level] = ["fatal": .error,
+                                                       "error": .error,
+                                                       "warn": .warning,
+                                                       "info": .debug,
+                                                       "v": .verbose,
+                                                       "debug": .debug,
+                                                       "trace": .verbose]
+fileprivate let mpvSubsystem = Logger.Subsystem(rawValue: "mpv")
 
 // FIXME: should be moved to a separated file
 struct MPVHookValue {
@@ -832,8 +839,8 @@ class MPVController: NSObject {
       let msg = UnsafeMutablePointer<mpv_event_log_message>(dataOpaquePtr)
       let prefix = String(cString: (msg?.pointee.prefix)!)
       let level = String(cString: (msg?.pointee.level)!)
-      let text = String(cString: (msg?.pointee.text)!)
-      Logger.log("mpv log: [\(prefix)] \(level): \(text)", level: .warning, subsystem: .general, appendNewlineAtTheEnd: false)
+      let text = String(cString: (msg?.pointee.text)!).trimmingCharacters(in: .newlines)
+      Logger.log("[\(prefix)] \(level): \(text)", level: logLevelMap[level] ?? .verbose, subsystem: mpvSubsystem, appendNewlineAtTheEnd: false)
 
     case MPV_EVENT_HOOK:
       let userData = event.pointee.reply_userdata

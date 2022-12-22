@@ -301,7 +301,7 @@ class PlayerCore: NSObject {
 
     let isFirstLoad = !mainWindow.loaded
     let _ = mainWindow.window
-    initialWindow.close()
+    initialWindow.closeWhenMainWindowWillOpen()
     if isInMiniPlayer {
       miniPlayer.showWindow(nil)
     } else {

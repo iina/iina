@@ -64,8 +64,7 @@ struct Preference {
     /** Black out other monitors while fullscreen (bool) */
     static let blackOutMonitor = Key("blackOutMonitor")
 
-    /** Quit when no open window (bool) */
-    static let quitWhenNoOpenedWindow = Key("quitWhenNoOpenedWindow")
+    static let actionWhenNoOpenedWindow = Key("actionWhenNoOpenedWindow")
 
     /** Keep player window open on end of file / playlist. (bool) */
     static let keepOpenOnFileEnd = Key("keepOpenOnFileEnd")
@@ -312,6 +311,18 @@ struct Preference {
     case seek = 2
 
     static var defaultValue = ArrowButtonAction.speed
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
+  }
+
+  enum ActionWhenNoOpenedWindow: Int, InitializingFromKey {
+    case welcomeWindow = 0
+    case quit
+    case none
+
+    static var defaultValue = ActionWhenNoOpenedWindow.none
 
     init?(key: Key) {
       self.init(rawValue: Preference.integer(for: key))
@@ -806,7 +817,7 @@ struct Preference {
     .iinaEnablePluginSystem: false,
 
     .keepOpenOnFileEnd: true,
-    .quitWhenNoOpenedWindow: false,
+    .actionWhenNoOpenedWindow: ActionWhenNoOpenedWindow.none.rawValue,
     .useExactSeek: SeekOption.relative.rawValue,
     .followGlobalSeekTypeWhenAdjustSlider: false,
     .relativeSeekAmount: 3,

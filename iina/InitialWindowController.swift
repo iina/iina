@@ -96,7 +96,7 @@ fileprivate class GrayHighlightRowView: NSTableRowView {
   }
 }
 
-class InitialWindowController: NSWindowController {
+class InitialWindowController: NSWindowController, NSWindowDelegate {
 
   override var windowNibName: NSNib.Name {
     return NSNib.Name("InitialWindowController")
@@ -105,6 +105,7 @@ class InitialWindowController: NSWindowController {
   weak var player: PlayerCore!
 
   var loaded = false
+  private var anotherWindowIsOpening = false
 
   @IBOutlet weak var recentFilesTableView: NSTableView!
   @IBOutlet weak var appIcon: NSImageView!
@@ -265,6 +266,29 @@ class InitialWindowController: NSWindowController {
     
     if lastFileContainerView.isHidden && recentFilesTableView.numberOfRows > 0 {
       recentFilesTableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+    }
+  }
+
+  // MARK: - Window delegate
+
+  // Video is about to start playing in a new window, but Welcome window needs to be closed first.
+  // Need to add special logic around `close()` so that it doesn't think the last window is being closed, and decide to quit.
+  func closeWhenMainWindowWillOpen() {
+    anotherWindowIsOpening = true
+    defer {
+      anotherWindowIsOpening = false
+    }
+    self.close()
+  }
+
+  func windowWillClose(_ notification: Notification) {
+    guard !anotherWindowIsOpening else {
+      return
+    }
+
+    if Preference.ActionWhenNoOpenedWindow(key: .actionWhenNoOpenedWindow) == .welcomeWindow {
+      Logger.log("Configured to show Welcome window when all windows closed, but user closed the Welcome window. Will quit instead of re-opening it.")
+      (NSApp.delegate as! AppDelegate).terminateSafely()
     }
   }
 }

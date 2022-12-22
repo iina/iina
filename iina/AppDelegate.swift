@@ -306,21 +306,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   @objc
   func checkForShowingInitialWindow() {
     if !openFileCalled {
-      showWelcomeWindow()
+      showWindowAfterLaunch()
     }
   }
 
-  private func showWelcomeWindow(checkingForUpdatedData: Bool = false) {
+  private func showWindowAfterLaunch(checkingForUpdatedData: Bool = false) {
     let actionRawValue = Preference.integer(for: .actionAfterLaunch)
     let action: Preference.ActionAfterLaunch = Preference.ActionAfterLaunch(rawValue: actionRawValue) ?? .welcomeWindow
     switch action {
     case .welcomeWindow:
-      let window = PlayerCore.first.initialWindow!
-      window.showWindow(nil)
-      if checkingForUpdatedData {
-        window.loadLastPlaybackInfo()
-        window.reloadData()
-      }
+      showWelcomeWindow(checkingForUpdatedData: checkingForUpdatedData)
     case .openPanel:
       openFile(self)
     default:
@@ -333,10 +328,36 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     return false
   }
 
+  private func showWelcomeWindow(checkingForUpdatedData: Bool = false) {
+    let window = PlayerCore.first.initialWindow!
+    window.showWindow(nil)
+    if checkingForUpdatedData {
+      window.loadLastPlaybackInfo()
+      window.reloadData()
+    }
+  }
+
   func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
-    guard PlayerCore.active.mainWindow.loaded || PlayerCore.active.initialWindow.loaded else { return false }
-    guard !PlayerCore.active.mainWindow.isWindowHidden else { return false }
-    return Preference.bool(for: .quitWhenNoOpenedWindow)
+    guard PlayerCore.active.mainWindow.loaded || PlayerCore.active.initialWindow.loaded,
+          !PlayerCore.active.mainWindow.isWindowHidden else { return false }
+    if let whatToDo = Preference.ActionWhenNoOpenedWindow(key: .actionWhenNoOpenedWindow) {
+      switch whatToDo {
+        case .quit:
+          return true
+        case .welcomeWindow:
+          showWelcomeWindow(checkingForUpdatedData: true)
+        default:
+          break
+      }
+    }
+    return false
+  }
+
+  func terminateSafely() {
+    // Prevent infinite loop
+    guard !isTerminating else { return }
+
+    NSApp.terminate(nil)
   }
 
   func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
@@ -499,7 +520,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     guard !isTerminating else { return false }
     guard !flag else { return true }
     Logger.log("Handle reopen")
-    showWelcomeWindow(checkingForUpdatedData: true)
+    showWindowAfterLaunch(checkingForUpdatedData: true)
     return true
   }
 

@@ -24,7 +24,7 @@
             <point key="canvasLocation" x="-1607" y="64"/>
         </customView>
         <customView id="6zR-96-iKB" userLabel="Prefs &gt; General &gt; Behavior">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="501"/>
+            <rect key="frame" x="0.0" y="0.0" width="534" height="501"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField identifier="SectionTitleBehavior" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="38y-2I-MGs">
@@ -72,16 +72,6 @@
                     <connections>
                         <binding destination="IBP-Mz-Maa" name="value" keyPath="values.alwaysOpenInNewWindow" id="pIG-7D-0J8"/>
                     </connections>
-                </button>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="5G0-Ih-CIb">
-                    <rect key="frame" x="118" y="200" width="223" height="18"/>
-                    <buttonCell key="cell" type="check" title="Quit after all windows are closed" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="YLo-6E-tT7">
-                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                        <connections>
-                            <binding destination="IBP-Mz-Maa" name="value" keyPath="values.quitWhenNoOpenedWindow" id="wJX-a3-saG"/>
-                        </connections>
-                    </buttonCell>
                 </button>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="Xi9-i5-9V4">
                     <rect key="frame" x="118" y="176" width="281" height="18"/>
@@ -181,10 +171,10 @@
                     </connections>
                 </button>
                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aKH-Me-5XB" customClass="CollapseView" customModule="IINA" customModuleProvider="target">
-                    <rect key="frame" x="120" y="412" width="360" height="57"/>
+                    <rect key="frame" x="120" y="412" width="414" height="57"/>
                     <subviews>
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="Pga-vd-zGA">
-                            <rect key="frame" x="0.0" y="40" width="360" height="17"/>
+                            <rect key="frame" x="0.0" y="40" width="414" height="17"/>
                             <subviews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="10b-EJ-N6W">
                                     <rect key="frame" x="13" y="0.0" width="146" height="17"/>
@@ -213,9 +203,9 @@
                             </constraints>
                         </customView>
                         <box identifier="Content0" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="DZT-7n-S4M">
-                            <rect key="frame" x="-3" y="-4" width="366" height="42"/>
+                            <rect key="frame" x="-3" y="-4" width="420" height="42"/>
                             <view key="contentView" id="867-m1-aVc">
-                                <rect key="frame" x="4" y="5" width="358" height="34"/>
+                                <rect key="frame" x="4" y="5" width="412" height="34"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="8Ql-ym-BvF">
@@ -274,10 +264,10 @@
                     </customSpacing>
                 </stackView>
                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8iE-FU-0g0" customClass="CollapseView" customModule="IINA" customModuleProvider="target">
-                    <rect key="frame" x="120" y="257" width="360" height="147"/>
+                    <rect key="frame" x="120" y="257" width="414" height="147"/>
                     <subviews>
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="W54-Em-Hx4">
-                            <rect key="frame" x="0.0" y="130" width="360" height="17"/>
+                            <rect key="frame" x="0.0" y="130" width="414" height="17"/>
                             <subviews>
                                 <button identifier="Trigger1" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CaQ-Om-AFL">
                                     <rect key="frame" x="0.0" y="0.0" width="13" height="13"/>
@@ -306,9 +296,9 @@
                             </constraints>
                         </customView>
                         <box identifier="Content1" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="5RN-PV-pOZ">
-                            <rect key="frame" x="-3" y="-4" width="366" height="132"/>
+                            <rect key="frame" x="-3" y="-4" width="420" height="132"/>
                             <view key="contentView" id="gWB-X2-AzC">
-                                <rect key="frame" x="4" y="5" width="358" height="124"/>
+                                <rect key="frame" x="4" y="5" width="412" height="124"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UFY-vM-qHd">
@@ -403,10 +393,35 @@
                         <real value="3.4028234663852886e+38"/>
                     </customSpacing>
                 </stackView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SsM-Tv-8AZ">
+                    <rect key="frame" x="118" y="201" width="183" height="16"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="When all windows are closed:" id="Oni-TE-rZ6">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hgu-y0-ExB">
+                    <rect key="frame" x="304" y="194" width="179" height="25"/>
+                    <popUpButtonCell key="cell" type="push" title="Do nothing" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="2" imageScaling="proportionallyDown" inset="2" selectedItem="Fs6-nN-5xA" id="tYn-kA-qou">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" id="goc-77-KKW">
+                            <items>
+                                <menuItem title="Show welcome window" id="LIN-tj-dkl"/>
+                                <menuItem title="Quit" tag="1" id="6gI-C4-fwd"/>
+                                <menuItem title="Do nothing" state="on" tag="2" id="Fs6-nN-5xA"/>
+                            </items>
+                        </menu>
+                    </popUpButtonCell>
+                    <connections>
+                        <binding destination="IBP-Mz-Maa" name="selectedTag" keyPath="values.actionWhenNoOpenedWindow" id="GW9-fR-qJ9"/>
+                    </connections>
+                </popUpButton>
             </subviews>
             <constraints>
+                <constraint firstItem="Xi9-i5-9V4" firstAttribute="leading" secondItem="SsM-Tv-8AZ" secondAttribute="leading" id="2HC-NO-brG"/>
                 <constraint firstItem="ibu-Tq-kBr" firstAttribute="height" secondItem="DUm-O0-pdI" secondAttribute="height" id="3Oe-KF-l3A"/>
-                <constraint firstItem="5G0-Ih-CIb" firstAttribute="height" secondItem="DUm-O0-pdI" secondAttribute="height" id="3k4-Eu-Tew"/>
                 <constraint firstItem="OXi-vL-mzp" firstAttribute="leading" secondItem="6zR-96-iKB" secondAttribute="leading" constant="120" id="4O3-ht-PYG"/>
                 <constraint firstItem="8iE-FU-0g0" firstAttribute="top" secondItem="aKH-Me-5XB" secondAttribute="bottom" constant="8" id="59d-ue-PTZ"/>
                 <constraint firstItem="QvG-Ma-br0" firstAttribute="height" secondItem="DUm-O0-pdI" secondAttribute="height" id="5Sj-zN-kO5"/>
@@ -416,46 +431,48 @@
                 <constraint firstItem="bV8-LP-cwH" firstAttribute="leading" secondItem="OXi-vL-mzp" secondAttribute="trailing" constant="8" id="8Kb-Fe-QIo"/>
                 <constraint firstItem="b7I-2V-MYa" firstAttribute="top" secondItem="QvG-Ma-br0" secondAttribute="bottom" constant="16" id="9H8-4r-eDa"/>
                 <constraint firstItem="bV8-LP-cwH" firstAttribute="baseline" secondItem="OXi-vL-mzp" secondAttribute="baseline" id="9fY-Y6-onK"/>
+                <constraint firstItem="SsM-Tv-8AZ" firstAttribute="leading" secondItem="OXi-vL-mzp" secondAttribute="leading" id="AT6-J8-Gxf"/>
                 <constraint firstItem="tUl-6f-ClP" firstAttribute="top" secondItem="ibu-Tq-kBr" secondAttribute="bottom" constant="8" id="DQg-F2-jP7"/>
                 <constraint firstItem="38y-2I-MGs" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="6zR-96-iKB" secondAttribute="leading" constant="120" id="Dd3-CV-21F"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6Hg-O4-cBP" secondAttribute="trailing" priority="100" id="EU4-oh-Sn4"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6Hg-O4-cBP" secondAttribute="trailing" id="EU4-oh-Sn4"/>
                 <constraint firstItem="Xi9-i5-9V4" firstAttribute="height" secondItem="DUm-O0-pdI" secondAttribute="height" id="Eee-r5-9jP"/>
                 <constraint firstItem="38y-2I-MGs" firstAttribute="top" secondItem="6zR-96-iKB" secondAttribute="top" constant="8" id="EkZ-1t-Li0"/>
                 <constraint firstItem="6Hg-O4-cBP" firstAttribute="height" secondItem="DUm-O0-pdI" secondAttribute="height" id="FS1-AW-faa"/>
                 <constraint firstItem="ONF-nX-zDm" firstAttribute="baseline" secondItem="ibu-Tq-kBr" secondAttribute="baseline" id="GtH-hr-0BD"/>
                 <constraint firstItem="ibu-Tq-kBr" firstAttribute="leading" secondItem="b7I-2V-MYa" secondAttribute="leading" id="Iut-G6-4zl"/>
+                <constraint firstItem="SsM-Tv-8AZ" firstAttribute="firstBaseline" secondItem="hgu-y0-ExB" secondAttribute="firstBaseline" id="MHh-gW-uyI"/>
                 <constraint firstItem="aKH-Me-5XB" firstAttribute="leading" secondItem="OXi-vL-mzp" secondAttribute="leading" id="NEg-jy-N85"/>
                 <constraint firstItem="F6o-D4-gDa" firstAttribute="leading" secondItem="Xi9-i5-9V4" secondAttribute="leading" id="ONu-Gw-6jM"/>
                 <constraint firstItem="F6o-D4-gDa" firstAttribute="height" secondItem="DUm-O0-pdI" secondAttribute="height" id="Owa-Fs-41I"/>
                 <constraint firstItem="tUl-6f-ClP" firstAttribute="height" secondItem="DUm-O0-pdI" secondAttribute="height" id="PId-am-AqK"/>
+                <constraint firstItem="Xi9-i5-9V4" firstAttribute="top" secondItem="SsM-Tv-8AZ" secondAttribute="bottom" constant="8" id="PRi-bP-Yjs"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bV8-LP-cwH" secondAttribute="trailing" id="Plb-z2-kxR"/>
                 <constraint firstItem="OXi-vL-mzp" firstAttribute="baseline" secondItem="38y-2I-MGs" secondAttribute="baseline" id="RqH-AX-8dj"/>
                 <constraint firstItem="DUm-O0-pdI" firstAttribute="top" secondItem="8iE-FU-0g0" secondAttribute="bottom" constant="16" id="RqT-Pp-kVR"/>
                 <constraint firstItem="8iE-FU-0g0" firstAttribute="leading" secondItem="aKH-Me-5XB" secondAttribute="leading" id="SRe-Ue-ubz"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="QvG-Ma-br0" secondAttribute="trailing" priority="100" id="Sai-n4-ewq"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="QvG-Ma-br0" secondAttribute="trailing" id="Sai-n4-ewq"/>
+                <constraint firstItem="SsM-Tv-8AZ" firstAttribute="top" secondItem="DUm-O0-pdI" secondAttribute="bottom" constant="8" id="SnC-ew-Kcd"/>
+                <constraint firstItem="hgu-y0-ExB" firstAttribute="leading" secondItem="SsM-Tv-8AZ" secondAttribute="trailing" constant="8" id="Wfd-Dl-hWc"/>
                 <constraint firstItem="b7I-2V-MYa" firstAttribute="height" secondItem="DUm-O0-pdI" secondAttribute="height" id="Y3C-r1-4Ae"/>
-                <constraint firstItem="Xi9-i5-9V4" firstAttribute="top" secondItem="5G0-Ih-CIb" secondAttribute="bottom" constant="8" id="YOU-SQ-93U"/>
                 <constraint firstItem="6Hg-O4-cBP" firstAttribute="top" secondItem="F6o-D4-gDa" secondAttribute="bottom" constant="16" id="a76-ej-aJs"/>
                 <constraint firstItem="ONF-nX-zDm" firstAttribute="top" secondItem="b7I-2V-MYa" secondAttribute="bottom" constant="16" id="awt-JH-Sx1"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DUm-O0-pdI" secondAttribute="trailing" priority="100" id="c2z-9x-EKo"/>
                 <constraint firstItem="tUl-6f-ClP" firstAttribute="leading" secondItem="ibu-Tq-kBr" secondAttribute="leading" id="d7A-WU-gG9"/>
+                <constraint firstItem="SsM-Tv-8AZ" firstAttribute="height" secondItem="DUm-O0-pdI" secondAttribute="height" id="eri-gt-JQ2"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ONF-nX-zDm" secondAttribute="trailing" id="esl-VM-bcw"/>
                 <constraint firstItem="DUm-O0-pdI" firstAttribute="leading" secondItem="8iE-FU-0g0" secondAttribute="leading" id="ez5-7v-y5R"/>
                 <constraint firstItem="aKH-Me-5XB" firstAttribute="top" secondItem="OXi-vL-mzp" secondAttribute="bottom" constant="8" id="gTe-Cv-cgu"/>
                 <constraint firstItem="6Hg-O4-cBP" firstAttribute="leading" secondItem="F6o-D4-gDa" secondAttribute="leading" id="hbH-qB-dC3"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="b7I-2V-MYa" secondAttribute="trailing" priority="100" id="kla-t0-rVJ"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="b7I-2V-MYa" secondAttribute="trailing" id="kla-t0-rVJ"/>
                 <constraint firstItem="ONF-nX-zDm" firstAttribute="leading" secondItem="ibu-Tq-kBr" secondAttribute="trailing" constant="8" id="myc-5t-FrF"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5G0-Ih-CIb" secondAttribute="trailing" priority="100" id="n4Z-6X-Oou"/>
                 <constraint firstItem="b7I-2V-MYa" firstAttribute="leading" secondItem="QvG-Ma-br0" secondAttribute="leading" id="o0g-jc-tgK"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hgu-y0-ExB" secondAttribute="trailing" id="oIb-if-VmB"/>
                 <constraint firstAttribute="trailing" secondItem="8iE-FU-0g0" secondAttribute="trailing" id="oIv-Ho-Lbb"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Xi9-i5-9V4" secondAttribute="trailing" priority="100" id="oZd-sR-YOa"/>
-                <constraint firstItem="5G0-Ih-CIb" firstAttribute="top" secondItem="DUm-O0-pdI" secondAttribute="bottom" constant="8" id="qiu-A2-Mtr"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Xi9-i5-9V4" secondAttribute="trailing" id="oZd-sR-YOa"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tUl-6f-ClP" secondAttribute="trailing" id="rJU-fV-3iD"/>
                 <constraint firstAttribute="bottom" secondItem="tUl-6f-ClP" secondAttribute="bottom" constant="8" id="s4G-EO-NkU"/>
                 <constraint firstItem="QvG-Ma-br0" firstAttribute="leading" secondItem="6Hg-O4-cBP" secondAttribute="leading" id="snr-fe-bxJ"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="F6o-D4-gDa" secondAttribute="trailing" priority="100" id="tRu-Sz-D5y"/>
-                <constraint firstItem="5G0-Ih-CIb" firstAttribute="leading" secondItem="DUm-O0-pdI" secondAttribute="leading" id="uxk-Ul-hVP"/>
-                <constraint firstItem="Xi9-i5-9V4" firstAttribute="leading" secondItem="5G0-Ih-CIb" secondAttribute="leading" id="vs3-xk-YxI"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="F6o-D4-gDa" secondAttribute="trailing" id="tRu-Sz-D5y"/>
                 <constraint firstItem="38y-2I-MGs" firstAttribute="leading" secondItem="6zR-96-iKB" secondAttribute="leading" id="ykt-2x-cLQ"/>
             </constraints>
             <point key="canvasLocation" x="-2189" y="118.5"/>

@@ -149,11 +149,13 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
         process.waitUntilExit()
         stderr.fileHandleForReading.readabilityHandler = nil
         stdout.fileHandleForReading.readabilityHandler = nil
-        resolve.call(withArguments: [[
-          "status": process.terminationStatus,
-          "stdout": stdoutContent,
-          "stderr": stderrContent
-        ] as [String: Any]])
+        DispatchQueue.main.async {
+          resolve.call(withArguments: [[
+            "status": process.terminationStatus,
+            "stdout": stdoutContent,
+            "stderr": stderrContent
+          ] as [String: Any]])
+        }
       }
     }
   }

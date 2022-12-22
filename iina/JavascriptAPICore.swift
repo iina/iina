@@ -272,7 +272,7 @@ fileprivate class WindowAPI: JavascriptAPI, CoreSubAPIExportable {
       guard let val = value as? Bool, val != window.fsState.isFullscreen else { return }
       window.toggleWindowFullScreen()
     case "pip":
-      if #available(OSX 10.12, *) {
+      if #available(macOS 10.12, *) {
         guard let val = value as? Bool else { return }
         if val {
           window.enterPIP()
@@ -326,6 +326,8 @@ fileprivate class StatusAPI: JavascriptAPI, CoreSubAPIExportable {
       return player!.info.isNetworkResource
     case "url":
       return player!.info.currentURL?.absoluteString.removingPercentEncoding ?? NSNull()
+    case "title":
+      return player!.getMediaTitle(withExtension: false)
     default:
       return nil
     }

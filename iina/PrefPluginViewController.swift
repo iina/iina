@@ -12,6 +12,7 @@ import WebKit
 fileprivate let defaultPlugins = [
   ["url": "iina/plugin-demo", "id": "io.iina.demo"],
   ["url": "iina/plugin-online-media", "id": "io.iina.ytdl"],
+  ["url": "iina/plugin-userscript", "id": "io.iina.userscript"],
 ]
 
 fileprivate extension NSUserInterfaceItemIdentifier {

@@ -241,12 +241,11 @@ class MainWindowController: PlayerWindowController {
 
   var fsState: FullScreenState = .windowed {
     didSet {
+      guard !isClosing else { return }
       switch fsState {
       case .fullscreen: player.mpv.setFlag(MPVOption.Window.fullscreen, true)
       case .animating:  break
-      case .windowed:
-        guard !isClosing else { return }
-        player.mpv.setFlag(MPVOption.Window.fullscreen, false)
+      case .windowed: player.mpv.setFlag(MPVOption.Window.fullscreen, false)
       }
     }
   }

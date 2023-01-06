@@ -8,36 +8,65 @@
 
 import Cocoa
 
-fileprivate func sameKeyAction(_ lhs: [String], _ rhs: [String], _ normalizeLastNum: Bool, _ numRange: ClosedRange<Double>?) -> (Bool, Double?) {
+fileprivate func sameKeyAction(_ lhs: [String], _ rhs: [String], _ normalizeLastNum: Bool, _ numRange: ClosedRange<Double>?) -> (Bool, Double?, Any?) {
   var lhs = lhs
-  if lhs.first == "seek" && (lhs.last == "exact" || lhs.last == "keyframe") {
-    lhs = [String](lhs.dropLast())
+  var extraData: Any? = nil
+  if lhs.first == "seek" {
+    if let last = lhs.last {
+      if let _ = Double(last) {
+        // "relative+keyframes" is implicit default.
+        extraData = Preference.SeekOption.defaultValue
+      } else {
+        // matching values are one of: "relative", "keyframes", "exact", "relative+keyframes", "relative+exact"
+        let splitArray = last.split(whereSeparator: { $0 == "+" })
+        if splitArray.count == 2 && splitArray[0] == "relative" {
+          if splitArray[1] == "exact" {
+            lhs = [String](lhs.dropLast())
+            extraData = Preference.SeekOption.exact
+          } else if splitArray[1] == "keyframes" {
+            lhs = [String](lhs.dropLast())
+            extraData = Preference.SeekOption.relative
+          }
+        } else if splitArray.count == 1 {
+          if splitArray[0] == "exact" {
+            lhs = [String](lhs.dropLast())
+            extraData = Preference.SeekOption.exact
+          } else if splitArray[0] == "keyframes" {
+            lhs = [String](lhs.dropLast())
+            extraData = Preference.SeekOption.relative
+          } else if splitArray[0] == "relative" {
+            lhs = [String](lhs.dropLast())
+            extraData = Preference.SeekOption.defaultValue
+          }
+        }
+      }
+    }
   }
   guard lhs.count > 0 && lhs.count == rhs.count else {
-    return (false, nil)
+    return (false, nil, nil)
   }
   if normalizeLastNum {
     for i in 0..<lhs.count-1 {
       if lhs[i] != rhs[i] {
-        return (false, nil)
+        return (false, nil, nil)
       }
     }
     guard let ld = Double(lhs.last!), let rd = Double(rhs.last!) else {
-      return (false, nil)
+      return (false, nil, nil)
     }
     if let range = numRange {
-      return (range.contains(ld), ld)
+      return (range.contains(ld), ld, extraData)
     } else {
-      return (ld == rd, ld)
+      return (ld == rd, ld, extraData)
     }
   } else {
     for i in 0..<lhs.count {
       if lhs[i] != rhs[i] {
-        return (false, nil)
+        return (false, nil, nil)
       }
     }
   }
-  return (true, nil)
+  return (true, nil, nil)
 }
 
 class MenuController: NSObject, NSMenuDelegate {
@@ -830,13 +859,17 @@ class MenuController: NSObject, NSMenuDelegate {
       var bound = false
       for kb in keyBindings {
         guard kb.isIINACommand == isIINACmd else { continue }
-        let (sameAction, value) = sameKeyAction(kb.action, actions, normalizeLastNum, numRange)
-        if sameAction, let (kEqv, kMdf) = KeyCodeHelper.macOSKeyEquivalent(from: kb.rawKey) {
+        let (sameAction, value, extraData) = sameKeyAction(kb.action, actions, normalizeLastNum, numRange)
+        if sameAction, let (kEqv, kMdf) = KeyCodeHelper.macOSKeyEquivalent(from: kb.normalizedMpvKey) {
           menuItem.keyEquivalent = kEqv
           menuItem.keyEquivalentModifierMask = kMdf
           if let value = value, let l10nKey = l10nKey {
             menuItem.title = String(format: NSLocalizedString("menu." + l10nKey, comment: ""), abs(value))
-            menuItem.representedObject = value
+            if let extraData = extraData {
+              menuItem.representedObject = (value, extraData)
+            } else {
+              menuItem.representedObject = value
+            }
           }
           bound = true
           break

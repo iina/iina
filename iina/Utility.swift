@@ -507,7 +507,7 @@ class Utility {
     return contents.filter { $0.creationDate != nil }.max { $0.creationDate! < $1.creationDate! }
   }
 
-  /// Make sure the block is executed on the main thread. Be careful since it uses `sync`. Keep the block mininal.
+  /// Make sure the block is executed on the main thread. Be careful since it uses `sync`. Keep the block minimal.
   @discardableResult
   static func executeOnMainThread<T>(block: () -> T) -> T {
     if Thread.isMainThread {

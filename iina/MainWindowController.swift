@@ -2598,7 +2598,7 @@ class MainWindowController: PlayerWindowController {
 
   func showSettingsSidebar(tab: QuickSettingViewController.TabViewType? = nil, force: Bool = false, hideIfAlreadyShown: Bool = true) {
     if !force && sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
-      return  // do not interrput other actions while it is animating
+      return  // do not interrupt other actions while it is animating
     }
     let view = quickSettingView
     switch sideBarStatus {
@@ -2627,7 +2627,7 @@ class MainWindowController: PlayerWindowController {
 
   func showPlaylistSidebar(tab: PlaylistViewController.TabViewType? = nil, force: Bool = false, hideIfAlreadyShown: Bool = true) {
     if !force && sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
-      return  // do not interrput other actions while it is animating
+      return  // do not interrupt other actions while it is animating
     }
     let view = playlistView
     switch sideBarStatus {

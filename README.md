@@ -43,7 +43,7 @@ IINA uses mpv for media playback. To build IINA, you can either fetch copies of 
 ```
   - Tips:
     - Change URL in the shell script if you want to download arch-specific binaries. By default, it will download the universal ones. You can download other binaries from `https://iina.io/dylibs/${ARCH}/fileList.txt` where `ARCH` can be `universal`, `arm64` and `x86_64`.
-    - If you want to build an older IINA version, make sure to download the correponding dylibs. For example, `https://iina.io/dylibs/1.2.0/universal/fileList.txt`.
+    - If you want to build an older IINA version, make sure to download the corresponding dylibs. For example, `https://iina.io/dylibs/1.2.0/universal/fileList.txt`.
 
 2. Open iina.xcodeproj in the [latest public version of Xcode](https://itunes.apple.com/us/app/xcode/id497799835). *IINA may not build if you use any other version.*
 
@@ -70,7 +70,7 @@ IINA uses mpv for media playback. To build IINA, you can either fetch copies of 
 	# port install mpv +uchardet -bundle -rubberband configure.args="--enable-libmpv-shared --enable-lua --enable-libarchive --enable-libbluray --disable-swift --disable-rubberband"
 	```
 
-2. Copy the correponding mpv and FFmpeg header files into `deps/include/`, replacing the current ones. You can find them on GitHub [(e.g. mpv)](https://github.com/mpv-player/mpv/tree/master/libmpv), but it's recommended to copy them from the Homebrew or MacPorts installation. Always make sure the header files have the same version of the dylibs.
+2. Copy the corresponding mpv and FFmpeg header files into `deps/include/`, replacing the current ones. You can find them on GitHub [(e.g. mpv)](https://github.com/mpv-player/mpv/tree/master/libmpv), but it's recommended to copy them from the Homebrew or MacPorts installation. Always make sure the header files have the same version of the dylibs.
 
 3. Run `other/parse_doc.rb`. This script will fetch the latest mpv documentation and generate `MPVOption.swift`, `MPVCommand.swift` and `MPVProperty.swift`. Copy them from `other/` to `iina/`, replacing the current files. This is only needed when updating libmpv. Note that if the API changes, the player source code may also need to be changed.
 

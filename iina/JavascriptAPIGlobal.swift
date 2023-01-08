@@ -60,7 +60,7 @@ class JavascriptAPIGlobalController: JavascriptAPI, JavascriptAPIGlobalControlle
       pc.reloadPlugin(pluginInstance.plugin)
     }
 
-    // accociate child plugin
+    // associate child plugin
     let childPluginInstance = pc.plugins.first { $0.plugin == pluginInstance.plugin }!
     let childAPI = childPluginInstance.apis["global"] as! JavascriptAPIGlobalChild
     childAPI.parentAPI = self

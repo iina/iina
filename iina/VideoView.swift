@@ -41,6 +41,8 @@ class VideoView: NSView {
 
   lazy var hdrSubsystem = Logger.Subsystem(rawValue: "hdr")
 
+  static let deviceRGBColorspace = CGColorSpaceCreateDeviceRGB()
+
   // MARK: - Attributes
 
   override var mouseDownCanMoveWindow: Bool {
@@ -58,6 +60,7 @@ class VideoView: NSView {
 
     // set up layer
     layer = videoLayer
+    videoLayer.colorspace = VideoView.deviceRGBColorspace
     videoLayer.contentsScale = NSScreen.main!.backingScaleFactor
     wantsLayer = true
 
@@ -283,10 +286,10 @@ class VideoView: NSView {
       }
     }
 
-    if videoLayer.colorspace != nil {
-      Logger.log("Nilling out colorspace", subsystem: hdrSubsystem)
-      videoLayer.colorspace = nil;
+    if videoLayer.colorspace != VideoView.deviceRGBColorspace {
+      Logger.log("Returning to deviceRGB color space", subsystem: hdrSubsystem)
       videoLayer.wantsExtendedDynamicRangeContent = false
+      videoLayer.colorspace = VideoView.deviceRGBColorspace
       player.mpv.setString(MPVOption.GPURendererOptions.targetTrc, "auto")
       player.mpv.setString(MPVOption.GPURendererOptions.targetPrim, "auto")
     }
@@ -319,43 +322,26 @@ extension VideoView {
       Logger.log("HDR primaries and gamma not available", level: .debug, subsystem: hdrSubsystem);
       return false;
     }
+  
+    let peak = mpv.getDouble(MPVProperty.videoParamsSigPeak)
+    Logger.log("HDR gamma=\(gamma), primaries=\(primaries), sig_peak=\(peak)", level: .debug, subsystem: hdrSubsystem)
 
     var name: CFString? = nil;
     switch primaries {
     case "display-p3":
-      switch gamma {
-      case "pq":
-        if #available(macOS 10.15.4, *) {
-          name = CGColorSpace.displayP3_PQ
-        } else {
-          name = CGColorSpace.displayP3_PQ_EOTF
-        }
-      case "hlg":
-        name = CGColorSpace.displayP3_HLG
-      default:
-        name = CGColorSpace.displayP3
+      if #available(macOS 10.15.4, *) {
+        name = CGColorSpace.displayP3_PQ
+      } else {
+        name = CGColorSpace.displayP3_PQ_EOTF
       }
 
     case "bt.2020":
-      switch gamma {
-      case "pq":
-        if #available(macOS 11.0, *) {
-          name = CGColorSpace.itur_2100_PQ
-        } else if #available(macOS 10.15.4, *) {
-          name = CGColorSpace.itur_2020_PQ
-        } else {
-          name = CGColorSpace.itur_2020_PQ_EOTF
-        }
-      case "hlg":
-        if #available(macOS 11.0, *) {
-          name = CGColorSpace.itur_2100_HLG
-        } else if #available(macOS 10.15.6, *) {
-          name = CGColorSpace.itur_2020_HLG
-        } else {
-          fallthrough
-        }
-      default:
-        name = CGColorSpace.itur_2020
+      if #available(macOS 11.0, *) {
+        name = CGColorSpace.itur_2100_PQ
+      } else if #available(macOS 10.15.4, *) {
+        name = CGColorSpace.itur_2020_PQ
+      } else {
+        name = CGColorSpace.itur_2020_PQ_EOTF
       }
 
     case "bt.709":
@@ -383,7 +369,7 @@ extension VideoView {
     videoLayer.wantsExtendedDynamicRangeContent = true
     videoLayer.colorspace = CGColorSpace(name: name!)
     mpv.setString(MPVOption.GPURendererOptions.iccProfile, "")
-    mpv.setString(MPVOption.GPURendererOptions.targetTrc, gamma)
+    mpv.setString(MPVOption.GPURendererOptions.targetTrc, "pq")
     mpv.setString(MPVOption.GPURendererOptions.targetPrim, primaries)
     return true;
   }

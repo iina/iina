@@ -241,12 +241,12 @@ class MainWindowController: PlayerWindowController {
 
   var fsState: FullScreenState = .windowed {
     didSet {
+      // Must not access mpv while it is asynchronously processing stop and quit commands.
+      guard !isClosing else { return }
       switch fsState {
       case .fullscreen: player.mpv.setFlag(MPVOption.Window.fullscreen, true)
       case .animating:  break
-      case .windowed:
-        guard !isClosing else { return }
-        player.mpv.setFlag(MPVOption.Window.fullscreen, false)
+      case .windowed:   player.mpv.setFlag(MPVOption.Window.fullscreen, false)
       }
     }
   }
@@ -1286,9 +1286,9 @@ class MainWindowController: PlayerWindowController {
     // this method. Because windows are tied to player cores and cores are cached and reused some
     // processing must be performed to leave the window in a consistent state for reuse. However
     // the windowWillClose method will have initiated unloading of the file being played. That
-    // operation is processed asynchronously by mpv. If the window is being close due to IINA
-    // quitting then mpv could be shutting down. Must not access mpv while it is asynchronously
-    // processing stop and quit commands.
+    // operation is processed asynchronously by mpv. If the window is being closed due to IINA
+    // quitting then mpv could be in the process of shutting down. Must not access mpv while it is
+    // asynchronously processing stop and quit commands.
     guard !isClosing else { return }
     videoView.videoLayer.suspend()
     player.mpv.setFlag(MPVOption.Window.keepaspect, false)
@@ -1318,6 +1318,7 @@ class MainWindowController: PlayerWindowController {
     window!.addTitlebarAccessoryViewController(titlebarAccesoryViewController)
 
     // Must not access mpv while it is asynchronously processing stop and quit commands.
+    // See comments in windowWillExitFullScreen for details.
     guard !isClosing else { return }
     showUI()
     updateTimer()
@@ -1554,6 +1555,9 @@ class MainWindowController: PlayerWindowController {
 
   // resize framebuffer in videoView after resizing.
   func windowDidEndLiveResize(_ notification: Notification) {
+    // Must not access mpv while it is asynchronously processing stop and quit commands.
+    // See comments in windowWillExitFullScreen for details.
+    guard !isClosing else { return }
     videoView.videoSize = window!.convertToBacking(videoView.bounds).size
     updateWindowParametersForMPV()
   }

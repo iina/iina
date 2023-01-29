@@ -48,7 +48,7 @@ return -1;\
   double _timestamp;
 }
 
-- (int)getPeeksForFile:(NSString *)file thumbnailsWidth:(int)thumbnailsWidth;
+- (int)getPeeksForFile:(NSString *)file thumbnailWidth:(int)thumbnailWidth;
 - (void)saveThumbnail:(AVFrame *)pFrame width:(int)width height:(int)height index:(int)index realTime:(int)second forFile:(NSString *)file;
 
 @end
@@ -82,10 +82,11 @@ return -1;\
       return;
     }
     self->_timestamp = CACurrentMediaTime();
-    int success = [self getPeeksForFile:file thumbnailsWidth:thumbWidth];
+    int success = [self getPeeksForFile:file thumbnailWidth:thumbWidth];
     if (self.delegate) {
       [self.delegate didGenerateThumbnails:[NSArray arrayWithArray:self->_thumbnails]
                                    forFile: file
+                                thumbWidth: thumbWidth
                                  succeeded:(success < 0 ? NO : YES)];
     }
   }];
@@ -93,7 +94,7 @@ return -1;\
 }
 
 - (int)getPeeksForFile:(NSString *)file
-       thumbnailsWidth:(int)thumbnailsWidth
+        thumbnailWidth:(int)thumbnailWidth
 {
   int i, ret;
 
@@ -162,7 +163,7 @@ return -1;\
 
   // Allocate the output frame
   // We need to convert the video frame to RGBA to satisfy CGImage's data format
-  int thumbWidth = thumbnailsWidth;
+  int thumbWidth = thumbnailWidth;
   int thumbHeight = (float)thumbWidth / ((float)pCodecCtx->width / pCodecCtx->height);
 
   AVFrame *pFrameRGB = av_frame_alloc();
@@ -235,7 +236,7 @@ return -1;\
             double currentTime = CACurrentMediaTime();
             if (currentTime - _timestamp > 1) {
               if (self.delegate) {
-                [self.delegate didUpdateThumbnails:NULL forFile: file withProgress: i];
+                [self.delegate didUpdateThumbnails:NULL forFile: file thumbWidth: thumbWidth withProgress: i];
                 _timestamp = currentTime;
               }
             }
@@ -327,6 +328,7 @@ return -1;\
       if (self.delegate) {
         [self.delegate didUpdateThumbnails:[NSArray arrayWithArray:_thumbnailPartialResult]
                                    forFile: file
+                                thumbWidth: width
                               withProgress: index];
       }
       [_thumbnailPartialResult removeAllObjects];

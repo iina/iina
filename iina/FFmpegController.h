@@ -22,12 +22,12 @@
 /**
  A notification being sent
  */
-- (void)didUpdateThumbnails:(nullable NSArray<FFThumbnail *> *)thumbnails forFile:(nonnull NSString *)filename withProgress:(NSInteger)progress;
+- (void)didUpdateThumbnails:(nullable NSArray<FFThumbnail *> *)thumbnails forFile:(nonnull NSString *)filename thumbWidth:(int)thumbWidth withProgress:(NSInteger)progress;
 
 /**
- Did generated thumbnails for the video.
+ Did generate thumbnails for the video.
  */
-- (void)didGenerateThumbnails:(nonnull NSArray<FFThumbnail *> *)thumbnails forFile:(nonnull NSString *)filename succeeded:(BOOL)succeeded;
+- (void)didGenerateThumbnails:(nonnull NSArray<FFThumbnail *> *)thumbnails forFile:(nonnull NSString *)filename thumbWidth:(int)width succeeded:(BOOL)succeeded;
 
 @end
 

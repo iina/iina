@@ -1753,23 +1753,27 @@ class PlayerCore: NSObject {
         return
       }
     }
-    if Preference.bool(for: .enableThumbnailPreview) {
-      if let cacheName = info.mpvMd5, ThumbnailCache.fileIsCached(forName: cacheName, forVideo: info.currentURL) {
-        Logger.log("Found thumbnail cache", subsystem: subsystem)
-        thumbnailQueue.async {
-          if let thumbnails = ThumbnailCache.read(forName: cacheName) {
-            self.info.thumbnails = thumbnails
-            self.info.thumbnailsReady = true
-            self.info.thumbnailsProgress = 1
-            self.refreshTouchBarSlider()
-          } else {
-            Logger.log("Cannot read thumbnail from cache", level: .error, subsystem: self.subsystem)
-          }
+    guard Preference.bool(for: .enableThumbnailPreview) else {
+      return
+    }
+    
+    let width = Preference.integer(for: .thumbnailWidth)
+    info.thumbnailWidth = width
+    if let cacheName = info.mpvMd5, ThumbnailCache.fileIsCached(forName: cacheName, forVideo: info.currentURL, forWidth: width) {
+      Logger.log("Found thumbnail cache named \(cacheName.quoted), width: \(width)px", subsystem: subsystem)
+      thumbnailQueue.async {
+        if let thumbnails = ThumbnailCache.read(forName: cacheName, forWidth: width) {
+          self.info.thumbnails = thumbnails
+          self.info.thumbnailsReady = true
+          self.info.thumbnailsProgress = 1
+          self.refreshTouchBarSlider()
+        } else {
+          Logger.log("Cannot read thumbnail from cache \(cacheName.quoted), width \(width)px", level: .error, subsystem: self.subsystem)
         }
-      } else {
-        Logger.log("Request new thumbnails", subsystem: subsystem)
-        ffmpegController.generateThumbnail(forFile: url.path, thumbWidth:Int32(Preference.integer(for: .thumbnailWidth)))
       }
+    } else {
+      Logger.log("Generating new thumbnails, width=\(width)", subsystem: subsystem)
+      ffmpegController.generateThumbnail(forFile: url.path, thumbWidth:Int32(width))
     }
   }
 
@@ -2033,19 +2037,28 @@ class PlayerCore: NSObject {
 
 extension PlayerCore: FFmpegControllerDelegate {
 
-  func didUpdate(_ thumbnails: [FFThumbnail]?, forFile filename: String, withProgress progress: Int) {
-    guard let currentFilePath = info.currentURL?.path, currentFilePath == filename else { return }
-    Logger.log("Got new thumbnails, progress \(progress)", subsystem: subsystem)
+  func didUpdate(_ thumbnails: [FFThumbnail]?, forFile filename: String, thumbWidth width: Int32, withProgress progress: Int) {
+    guard let currentFilePath = info.currentURL?.path, currentFilePath == filename, width == info.thumbnailWidth else {
+      Logger.log("Discarding thumbnails update (\(width)px width, progress \(progress)): either sourcePath or thumbnailWidth does not match expected",
+                 level: .error, subsystem: subsystem)
+      return
+    }
+    let targetCount = ffmpegController.thumbnailCount
     if let thumbnails = thumbnails {
       info.thumbnails.append(contentsOf: thumbnails)
     }
-    info.thumbnailsProgress = Double(progress) / Double(ffmpegController.thumbnailCount)
+    Logger.log("Got \(thumbnails?.count ?? 0) more \(width)px thumbs (\(info.thumbnails.count) so far), progress: \(progress) / \(targetCount)", subsystem: subsystem)
+    info.thumbnailsProgress = Double(progress) / Double(targetCount)
     refreshTouchBarSlider()
   }
 
-  func didGenerate(_ thumbnails: [FFThumbnail], forFile filename: String, succeeded: Bool) {
-    guard let currentFilePath = info.currentURL?.path, currentFilePath == filename else { return }
-    Logger.log("Got all thumbnails, succeeded=\(succeeded)", subsystem: subsystem)
+  func didGenerate(_ thumbnails: [FFThumbnail], forFile filename: String, thumbWidth width: Int32, succeeded: Bool) {
+    guard let currentFilePath = info.currentURL?.path, currentFilePath == filename, width == info.thumbnailWidth else {
+      Logger.log("Ignoring generated thumbnails (\(width)px width): either filePath or thumbnailWidth does not match expected",
+                 level: .error, subsystem: subsystem)
+      return
+    }
+    Logger.log("Done generating thumbnails: success=\(succeeded) count=\(thumbnails.count) width=\(width)px", subsystem: subsystem)
     if succeeded {
       info.thumbnails = thumbnails
       info.thumbnailsReady = true
@@ -2053,7 +2066,7 @@ extension PlayerCore: FFmpegControllerDelegate {
       refreshTouchBarSlider()
       if let cacheName = info.mpvMd5 {
         backgroundQueue.async {
-          ThumbnailCache.write(self.info.thumbnails, forName: cacheName, forVideo: self.info.currentURL)
+          ThumbnailCache.write(self.info.thumbnails, forName: cacheName, forVideo: self.info.currentURL, forWidth: Int(width))
         }
       }
       events.emit(.thumbnailsReady)

@@ -19,9 +19,11 @@ class CacheManager {
 
   private func cacheFolderContents() -> [URL]? {
     if needsRefresh {
+      Logger.log("Refreshing cached thumbnails index", level: .verbose, subsystem: ThumbnailCache.subsystem)
       cachedContents = try? FileManager.default.contentsOfDirectory(at: Utility.thumbnailCacheURL,
                                                                     includingPropertiesForKeys: [.fileSizeKey, .contentAccessDateKey],
                                                                     options: [.skipsHiddenFiles, .skipsSubdirectoryDescendants])
+      needsRefresh = false
     }
     return cachedContents
   }
@@ -59,6 +61,7 @@ class CacheManager {
         break
       }
     }
+    Logger.log("Cleared \(clearedCacheSize) bytes from thumbnail cache", subsystem: ThumbnailCache.subsystem)
   }
 
 }

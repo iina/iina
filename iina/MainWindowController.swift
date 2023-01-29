@@ -312,6 +312,7 @@ class MainWindowController: PlayerWindowController {
 
   private let localObservedPrefKeys: [Preference.Key] = [
     .oscPosition,
+    .thumbnailWidth,
     .showChapterPos,
     .arrowButtonAction,
     .pinchAction,
@@ -330,6 +331,16 @@ class MainWindowController: PlayerWindowController {
     case PK.oscPosition.rawValue:
       if let newValue = change[.newKey] as? Int {
         setupOnScreenController(withPosition: Preference.OSCPosition(rawValue: newValue) ?? .floating)
+      }
+    case PK.thumbnailWidth.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        DispatchQueue.main.asyncAfter(deadline: .now() + AppData.thumbnailRegenerationDelay) {
+          if newValue == Preference.integer(for: .thumbnailWidth) && newValue != self.player.info.thumbnailWidth {
+            Logger.log("Pref \(Preference.Key.thumbnailWidth.rawValue.quoted) changed to \(newValue)px: requesting thumbs regen",
+                       subsystem: self.player.subsystem)
+            self.player.generateThumbnails()
+          }
+        }
       }
     case PK.showChapterPos.rawValue:
       if let newValue = change[.newKey] as? Bool {
@@ -2142,11 +2153,12 @@ class MainWindowController: PlayerWindowController {
       if player.info.thumbnailsReady, let image = player.info.getThumbnail(forSecond: previewTime.second)?.image {
         thumbnailPeekView.imageView.image = image.rotate(rotation)
         thumbnailPeekView.isHidden = false
-        let height = round(120 / thumbnailPeekView.imageView.image!.size.aspect)
+        let width = CGFloat(player.info.thumbnailWidth)
+        let height = round(width / thumbnailPeekView.imageView.image!.size.aspect)
         let timePreviewFrameInWindow = timePreviewWhenSeek.superview!.convert(timePreviewWhenSeek.frame.origin, to: nil)
         let showAbove = canShowThumbnailAbove(timnePreviewYPos: timePreviewFrameInWindow.y, thumbnailHeight: height)
         let yPos = showAbove ? timePreviewFrameInWindow.y + timePreviewWhenSeek.frame.height : sliderFrameInWindow.y - height
-        thumbnailPeekView.frame.size = NSSize(width: 120, height: height)
+        thumbnailPeekView.frame.size = NSSize(width: width, height: height)
         thumbnailPeekView.frame.origin = NSPoint(x: round(originalPos.x - thumbnailPeekView.frame.width / 2), y: yPos)
       } else {
         thumbnailPeekView.isHidden = true

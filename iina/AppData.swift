@@ -37,6 +37,11 @@ struct AppData {
   static let seekAmountMapMouse = [0, 0.5, 1, 2, 4]
   static let volumeMap = [0, 0.25, 0.5, 0.75, 1]
 
+  // Time in seconds to wait before regenerating thumbnails.
+  // Each character the user types into the thumbnailWidth text field triggers a new thumb regen request.
+  // This should help cut down on unnecessary requests.
+  static let thumbnailRegenerationDelay = 2.0
+
   static let encodings = CharEncoding.list
 
   static let userInputConfFolder = "input_conf"

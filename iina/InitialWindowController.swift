@@ -96,15 +96,13 @@ fileprivate class GrayHighlightRowView: NSTableRowView {
   }
 }
 
-class InitialWindowController: NSWindowController {
+class InitialWindowController: NSWindowController, NSWindowDelegate {
 
   override var windowNibName: NSNib.Name {
     return NSNib.Name("InitialWindowController")
   }
 
-  weak var player: PlayerCore!
-
-  var loaded = false
+  private var expectingAnotherWindowToOpen = false
 
   @IBOutlet weak var recentFilesTableView: NSTableView!
   @IBOutlet weak var appIcon: NSImageView!
@@ -140,10 +138,9 @@ class InitialWindowController: NSWindowController {
   lazy var recentDocuments: [URL] = {
     makeRecentDocumentsList()
   }()
-  private var lastPlaybackURL: URL?
+  fileprivate var lastPlaybackURL: URL?
 
-  init(playerCore: PlayerCore) {
-    self.player = playerCore
+  init() {
     super.init(window: nil)
   }
 
@@ -160,7 +157,6 @@ class InitialWindowController: NSWindowController {
 
   override func windowDidLoad() {
     super.windowDidLoad()
-    loaded = true
 
     window?.titlebarAppearsTransparent = true
     window?.titleVisibility = .hidden
@@ -174,8 +170,6 @@ class InitialWindowController: NSWindowController {
     let isStableRelease = !version.contains("-")
     versionLabel.stringValue = isStableRelease ? version : "\(version) (\(build))"
     betaIndicatorView.isHidden = isStableRelease
-
-    loadLastPlaybackInfo()
 
     recentFilesTableView.delegate = self
     recentFilesTableView.dataSource = self
@@ -212,17 +206,22 @@ class InitialWindowController: NSWindowController {
     }
   }
 
+  fileprivate func openInNewPlayer(_ url: URL) {
+    PlayerCore.newPlayerCore.openURL(url)
+  }
+
   @objc func onTableClicked() {
     openRecentItemFromTable(recentFilesTableView.clickedRow)
   }
 
   private func openRecentItemFromTable(_ rowIndex: Int) {
     if let url = recentDocuments[at: rowIndex] {
-      player.openURL(url)
+      Logger.log("Opening recentDocuments[\(rowIndex)] in new player window", level: .verbose)
+      openInNewPlayer(url)
     }
   }
 
-  func loadLastPlaybackInfo() {
+  private func loadLastPlaybackInfo() {
     if Preference.bool(for: .recordRecentFiles),
       Preference.bool(for: .resumeLastPosition),
       let lastFile = Preference.url(for: .iinaLastPlayedFilePath),
@@ -246,6 +245,8 @@ class InitialWindowController: NSWindowController {
   }
 
   func reloadData() {
+    guard isWindowLoaded else { return }
+
     loadLastPlaybackInfo()
     recentDocuments = makeRecentDocumentsList()
     recentFilesTableView.reloadData()
@@ -265,6 +266,28 @@ class InitialWindowController: NSWindowController {
     
     if lastFileContainerView.isHidden && recentFilesTableView.numberOfRows > 0 {
       recentFilesTableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+    }
+  }
+
+  // MARK: - Window delegate
+
+  // Video is about to start playing in a new window, but welcome window needs to be closed first.
+  // Need to add special logic around `close()` so that it doesn't think the last window is being closed, and decide to quit.
+  func closePriorToOpeningMainWindow() {
+    expectingAnotherWindowToOpen = true
+    defer {
+      expectingAnotherWindowToOpen = false
+    }
+    self.close()
+  }
+
+  func windowWillClose(_ notification: Notification) {
+    guard !expectingAnotherWindowToOpen else { return }
+    guard let window = self.window, window.isOnlyOpenWindow() else { return }
+
+    if Preference.ActionWhenNoOpenedWindow(key: .actionWhenNoOpenedWindow) == .welcomeWindow {
+      Logger.log("Configured to show Welcome window when all windows closed, but user closed the Welcome window. Will quit instead of re-opening it.")
+      (NSApp.delegate as! AppDelegate).terminateSafely()
     }
   }
 }
@@ -330,7 +353,8 @@ extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
           openRecentItemFromTable(recentFilesTableView.selectedRow)
         } else if let lastURL = lastPlaybackURL {
           // If no row selected in table, most recent file button is selected. Use that if it exists
-          player.openURL(lastURL)
+          Logger.log("Opening lastPlaybackURL new player window", level: .verbose)
+          openInNewPlayer(lastURL)
         } else if recentFilesTableView.numberOfRows > 0 {
           // Most recent file no longer exists? Try to load next one
           openRecentItemFromTable(0)
@@ -379,7 +403,7 @@ extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
 class InitialWindowContentView: NSView {
 
   var player: PlayerCore {
-    return (window!.windowController as! InitialWindowController).player
+    return PlayerCore.newPlayerCore
   }
 
   override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
@@ -432,13 +456,19 @@ class InitialWindowViewActionButton: NSView {
   override func mouseDown(with event: NSEvent) {
     self.layer?.backgroundColor = pressedBackground.cgColor
     if self.identifier == .openFile {
+      Logger.log("User clicked the Open File button", level: .verbose)
       (NSApp.delegate as! AppDelegate).openFile(self)
     } else if self.identifier == .openURL {
+      Logger.log("User clicked the Open URL button", level: .verbose)
       (NSApp.delegate as! AppDelegate).openURL(self)
     } else {
-      if let lastFile = Preference.url(for: .iinaLastPlayedFilePath),
-        let windowController = window?.windowController as? InitialWindowController {
-        windowController.player.openURL(lastFile)
+
+      // Make sure to load the same file which is displayed: get from window controller.
+      // Do not load from prefs because that may have changed since the window was opened (by another IINA instance, most likely)
+      if let windowController = window?.windowController as? InitialWindowController,
+         let lastURL = windowController.lastPlaybackURL {
+        Logger.log("Opening lastPlaybackURL by default for mouse click", level: .verbose)
+        PlayerCore.newPlayerCore.openURL(lastURL)
       }
     }
   }

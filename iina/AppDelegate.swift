@@ -41,10 +41,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
   private var commandLineStatus = CommandLineStatus()
 
-  private var isTerminating = false
+  private(set) var isTerminating = false
 
   // Windows
 
+  lazy var initialWindow: InitialWindowController = InitialWindowController()
   lazy var openURLWindow: OpenURLWindowController = OpenURLWindowController()
   lazy var aboutWindow: AboutWindowController = AboutWindowController()
   lazy var fontPicker: FontPickerWindowController = FontPickerWindowController()
@@ -306,23 +307,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   @objc
   func checkForShowingInitialWindow() {
     if !openFileCalled {
-      showWelcomeWindow()
+      showWindowAfterLaunch()
     }
   }
 
-  private func showWelcomeWindow(checkingForUpdatedData: Bool = false) {
+  private func showWindowAfterLaunch() {
     let actionRawValue = Preference.integer(for: .actionAfterLaunch)
     let action: Preference.ActionAfterLaunch = Preference.ActionAfterLaunch(rawValue: actionRawValue) ?? .welcomeWindow
     switch action {
     case .welcomeWindow:
-      let window = PlayerCore.first.initialWindow!
-      window.showWindow(nil)
-      if checkingForUpdatedData {
-        window.loadLastPlaybackInfo()
-        window.reloadData()
-      }
+      showWelcomeWindow()
     case .openPanel:
       openFile(self)
+    case .historyWindow:
+      historyWindow.showWindow(self)
     default:
       break
     }
@@ -333,10 +331,37 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     return false
   }
 
+  func showWelcomeWindow() {
+    Logger.log("Showing welcome window", level: .verbose)
+    initialWindow.reloadData()
+    initialWindow.showWindow(nil)
+  }
+
   func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
-    guard PlayerCore.active.mainWindow.loaded || PlayerCore.active.initialWindow.loaded else { return false }
-    guard !PlayerCore.active.mainWindow.isWindowHidden else { return false }
-    return Preference.bool(for: .quitWhenNoOpenedWindow)
+    // Certain events (like when PIP is enabled) can result in this being called when it shouldn't.
+    guard !PlayerCore.active.mainWindow.isOpen else { return false }
+
+    if let whatToDo = Preference.ActionWhenNoOpenedWindow(key: .actionWhenNoOpenedWindow) {
+      Logger.log("Last window closed; whatToDo: \(whatToDo)", level: .verbose)
+      switch whatToDo {
+        case .quit:
+          return true
+        case .welcomeWindow:
+          showWelcomeWindow()
+        case .historyWindow:
+          historyWindow.showWindow(self)
+        default:
+          break
+      }
+    }
+    return false
+  }
+
+  func terminateSafely() {
+    // Prevent infinite loop
+    guard !isTerminating else { return }
+
+    NSApp.terminate(nil)
   }
 
   func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
@@ -499,7 +524,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     guard !isTerminating else { return false }
     guard !flag else { return true }
     Logger.log("Handle reopen")
-    showWelcomeWindow(checkingForUpdatedData: true)
+    showWindowAfterLaunch()
     return true
   }
 
@@ -699,7 +724,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   }
 
   @IBAction func menuNewWindow(_ sender: Any) {
-    PlayerCore.newPlayerCore.initialWindow.showWindow(nil)
+    initialWindow.showWindow(nil)
   }
 
   @IBAction func menuOpenScreenshotFolder(_ sender: NSMenuItem) {

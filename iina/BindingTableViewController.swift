@@ -212,36 +212,10 @@ extension BindingTableViewController: NSTableViewDelegate {
         textColor = .linkColor
       }
 
-      setText(of: textField, to: stringValue, textColor: origin == InputBindingOrigin.confFile ? nil : textColor, italic: italic)
+      textField.setFormattedText(stringValue: stringValue, textColor: origin == InputBindingOrigin.confFile ? nil : textColor, italic: italic)
     } else {
-      setText(of: textField, to: stringValue, textColor: NSColor.systemRed, strikethrough: true, italic: italic)
+      textField.setFormattedText(stringValue: stringValue, textColor: NSColor.systemRed, strikethrough: true, italic: italic)
     }
-  }
-
-  private func setText(of textField: NSTextField, to stringValue: String,
-                       textColor: NSColor? = nil,
-                       strikethrough: Bool = false,
-                       italic: Bool = false) {
-    let attrString = NSMutableAttributedString(string: stringValue)
-
-    let fgColor: NSColor
-    if let textColor = textColor {
-      // If using custom text colors, need to make sure `EditableTextFieldCell` is specified
-      // as the class of the child cell in Interface Builder.
-      fgColor = textColor
-    } else {
-      fgColor = NSColor.controlTextColor
-    }
-    textField.textColor = fgColor
-
-    if strikethrough {
-      attrString.addAttrib(NSAttributedString.Key.strikethroughStyle, NSUnderlineStyle.single.rawValue)
-    }
-
-    if italic {
-      attrString.addItalic(from: textField.font)
-    }
-    textField.attributedStringValue = attrString
   }
 
   private var isRaw: Bool {

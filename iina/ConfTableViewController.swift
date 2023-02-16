@@ -16,8 +16,7 @@ fileprivate let COPY_COUNT_REGEX = try! NSRegularExpression(
 
 fileprivate let nameColumnIndex = 0
 fileprivate let draggingFormation: NSDraggingFormation = .default
-
-fileprivate let enableInlineCreate = Preference.bool(for: .useInlineEditorInsteadOfDialogForNewInputConf)
+fileprivate let useSeparateColorForBuiltinConfs = false
 
 fileprivate let blendFraction: CGFloat = 0.05
 @available(macOS 10.14, *)
@@ -34,8 +33,13 @@ class ConfTableViewController: NSObject {
     return ConfTableState.current
   }
   private unowned var bindingTableViewController: BindingTableViewController
-  private var distObservers: [NSObjectProtocol] = []
-  private var observers: [NSObjectProtocol] = []
+  private var distObservers: [NSObjectProtocol] = []  // For DistributedNotificationCenter
+  private var observers: [NSObjectProtocol] = []      // For regular NotificationCenter
+
+  // Convenience var. Pref lookup is super fast; should be fine to check on each access. Try to reduce need for restart
+  fileprivate var enableInlineCreate: Bool {
+    Preference.bool(for: .useInlineEditorInsteadOfDialogForNewInputConf)
+  }
 
   init(_ inputConfTableView: EditableTableView, _ bindingTableViewController: BindingTableViewController) {
     self.tableView = inputConfTableView
@@ -129,18 +133,22 @@ extension ConfTableViewController: NSTableViewDelegate {
     guard let confName = confTableState.getConfName(at: rowIndex) else { return nil }
     let isBuiltinConf = ConfTableState.isBuiltinConf(confName)
 
+    // For built-in conf rows, make text italic and show lock icon (also add color to text & icon if configured)
     switch columnName {
       case "nameColumn":
-        cell.textField?.stringValue = confName
-        if #available(macOS 10.14, *) {
-          cell.textField?.textColor = isBuiltinConf ? builtinConfTextColor : .controlTextColor
+        let textColor: NSColor?
+        if #available(macOS 10.14, *), useSeparateColorForBuiltinConfs {
+          textColor = isBuiltinConf ? builtinConfTextColor : .controlTextColor
+        } else {
+          textColor = nil
         }
+        cell.textField?.setFormattedText(stringValue: confName, textColor: textColor, italic: isBuiltinConf)
         return cell
       case "isDefaultColumn":
-        cell.imageView?.isHidden = !isBuiltinConf
-        if #available(macOS 10.14, *) {
+        if #available(macOS 10.14, *), useSeparateColorForBuiltinConfs {
           cell.imageView?.contentTintColor = builtinConfTextColor
         }
+        cell.imageView?.isHidden = !isBuiltinConf
         return cell
       default:
         Logger.log("Unrecognized column: '\(columnName)'", level: .error)

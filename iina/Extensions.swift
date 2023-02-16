@@ -526,6 +526,30 @@ extension NSTextField {
     }
   }
 
+  func setFormattedText(stringValue: String, textColor: NSColor? = nil,
+                        strikethrough: Bool = false, italic: Bool = false) {
+    let attrString = NSMutableAttributedString(string: stringValue)
+
+    let fgColor: NSColor
+    if let textColor = textColor {
+      // If using custom text colors, need to make sure `EditableTextFieldCell` is specified
+      // as the class of the child cell in Interface Builder.
+      fgColor = textColor
+    } else {
+      fgColor = NSColor.controlTextColor
+    }
+    self.textColor = fgColor
+
+    if strikethrough {
+      attrString.addAttrib(NSAttributedString.Key.strikethroughStyle, NSUnderlineStyle.single.rawValue)
+    }
+
+    if italic {
+      attrString.addItalic(from: self.font)
+    }
+    self.attributedStringValue = attrString
+  }
+
 }
 
 extension NSImage {

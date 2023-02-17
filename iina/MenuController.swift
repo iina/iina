@@ -211,10 +211,6 @@ class MenuController: NSObject, NSMenuDelegate {
     jumpTo.action = #selector(MainMenuActionHandler.menuJumpTo(_:))
 
     // -- speed
-    (speedUp.representedObject,
-     speedUpSlightly.representedObject,
-     speedDown.representedObject,
-     speedDownSlightly.representedObject) = (2.0, 1.1, 0.5, 0.9)
     [speedUp, speedDown, speedUpSlightly, speedDownSlightly, speedReset].forEach { item in
       item?.action = #selector(MainMenuActionHandler.menuChangeSpeed(_:))
     }
@@ -317,20 +313,12 @@ class MenuController: NSObject, NSMenuDelegate {
     audioTrackMenu.delegate = self
 
     // - volume
-    (increaseVolume.representedObject,
-     decreaseVolume.representedObject,
-     increaseVolumeSlightly.representedObject,
-     decreaseVolumeSlightly.representedObject) = (5, -5, 1, -1)
     [increaseVolume, decreaseVolume, increaseVolumeSlightly, decreaseVolumeSlightly].forEach { item in
       item?.action = #selector(MainMenuActionHandler.menuChangeVolume(_:))
     }
     mute.action = #selector(MainMenuActionHandler.menuToggleMute(_:))
 
     // - audio delay
-    (increaseAudioDelay.representedObject,
-     increaseAudioDelaySlightly.representedObject,
-     decreaseAudioDelay.representedObject,
-     decreaseAudioDelaySlightly.representedObject) = (0.5, 0.1, -0.5, -0.1)
     [increaseAudioDelay, decreaseAudioDelay, increaseAudioDelaySlightly, decreaseAudioDelaySlightly].forEach { item in
       item?.action = #selector(MainMenuActionHandler.menuChangeAudioDelay(_:))
     }
@@ -365,10 +353,6 @@ class MenuController: NSObject, NSMenuDelegate {
     }
 
     // - delay
-    (increaseSubDelay.representedObject,
-     increaseSubDelaySlightly.representedObject,
-     decreaseSubDelay.representedObject,
-     decreaseSubDelaySlightly.representedObject) = (0.5, 0.1, -0.5, -0.1)
     [increaseSubDelay, decreaseSubDelay, increaseSubDelaySlightly, decreaseSubDelaySlightly].forEach { item in
       item?.action = #selector(MainMenuActionHandler.menuChangeSubDelay(_:))
     }
@@ -842,9 +826,19 @@ class MenuController: NSObject, NSMenuDelegate {
           break
         }
       }
+
       if !bound {
         menuItem.keyEquivalent = ""
         menuItem.keyEquivalentModifierMask = []
+
+        // Need to regenerate `title` and `representedObject` from their default values.
+        // This is needed for the case where the menu item previously matched to a key binding, but now there is no match.
+        // Obviously this is a little kludgey, but it avoids having to do a big refactor and/or writing a bunch of new code.
+        let (_, value) = sameKeyAction(actions, actions, normalizeLastNum, numRange)
+        if let value = value, let l10nKey = l10nKey {
+          menuItem.title = String(format: NSLocalizedString("menu." + l10nKey, comment: ""), abs(value))
+          menuItem.representedObject = value
+        }
       }
     }
   }

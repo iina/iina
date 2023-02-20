@@ -49,6 +49,8 @@ fileprivate extension NSStackView.VisibilityPriority {
   static let detachEarliest = NSStackView.VisibilityPriority(rawValue: 750)
 }
 
+// The minimum distance that the user must drag before their click or tap gesture is interpreted as a drag gesture:
+fileprivate let minimumInitialDragDistance: CGFloat = 2.0
 
 class MainWindowController: PlayerWindowController {
 
@@ -836,6 +838,9 @@ class MainWindowController: PlayerWindowController {
   }
 
   override func mouseDown(with event: NSEvent) {
+    if Logger.enabled && Logger.Level.preferred >= .verbose {
+      Logger.log("MainWindow mouseDown \(event.locationInWindow)", level: .verbose, subsystem: player.subsystem)
+    }
     // do nothing if it's related to floating OSC
     guard !controlBarFloating.isDragging else { return }
     // record current mouse pos
@@ -850,22 +855,42 @@ class MainWindowController: PlayerWindowController {
   }
 
   override func mouseDragged(with event: NSEvent) {
+    if Logger.enabled && Logger.Level.preferred >= .verbose {
+      Logger.log("MainWindow mouseDrag \(event.locationInWindow)", level: .verbose, subsystem: player.subsystem)
+    }
     if isResizingSidebar {
       // resize sidebar
       let currentLocation = event.locationInWindow
       let newWidth = window!.frame.width - currentLocation.x - 2
       sideBarWidthConstraint.constant = newWidth.clamped(to: PlaylistMinWidth...PlaylistMaxWidth)
     } else if !fsState.isFullscreen {
-      // move the window by dragging
-      isDragging = true
       guard !controlBarFloating.isDragging else { return }
-      if mousePosRelatedToWindow != nil {
+
+      if let mousePosRelatedToWindow = mousePosRelatedToWindow {
+        if !isDragging {
+          // Require that the user must drag the cursor at least a small distance for it to start a "drag" (`isDragging==true`)
+          // The user's action will only be counted as a click if `isDragging==false` when `mouseUp` is called.
+          // (Apple's trackpad in particular is very sensitive and tends to call `mouseDragged()` if there is even the slightest
+          // roll of the finger during a click, and the distance of the "drag" may be less than 1 pixel)
+          if mousePosRelatedToWindow.isWithinRadius(radius: minimumInitialDragDistance,
+                                                    ofPoint: event.locationInWindow) {
+            return
+          }
+          if Logger.enabled && Logger.Level.preferred >= .verbose {
+            Logger.log("MainWindow mouseDrag: minimum dragging distance was met!", level: .verbose, subsystem: player.subsystem)
+          }
+          isDragging = true
+        }
         window?.performDrag(with: event)
       }
     }
   }
 
   override func mouseUp(with event: NSEvent) {
+    if Logger.enabled && Logger.Level.preferred >= .verbose {
+      Logger.log("MainWindow mouseUp! isDragging: \(isDragging), isResizingSidebar: \(isResizingSidebar), clickCount: \(event.clickCount)", level: .verbose, subsystem: player.subsystem)
+    }
+
     mousePosRelatedToWindow = nil
     if isDragging {
       // if it's a mouseup after dragging window
@@ -876,11 +901,13 @@ class MainWindowController: PlayerWindowController {
       Preference.set(Int(sideBarWidthConstraint.constant), for: .playlistWidth)
     } else {
       // if it's a mouseup after clicking
-      if event.clickCount == 1 && !isMouseEvent(event, inAnyOf: [sideBarView, subPopoverView]) && sideBarStatus != .hidden {
+
+      // Single click. Note that `event.clickCount` will be 0 if there is at least one call to `mouseDragged()`,
+      // but we will only count it as a drag if `isDragging==true`
+      if event.clickCount <= 1 && !isMouseEvent(event, inAnyOf: [sideBarView, subPopoverView]) && sideBarStatus != .hidden {
         hideSideBar()
         return
       }
-
       if event.clickCount == 2 && isMouseEvent(event, inAnyOf: [titleBarView]) {
         let userDefault = UserDefaults.standard.string(forKey: "AppleActionOnDoubleClick")
         if userDefault == "Minimize" {

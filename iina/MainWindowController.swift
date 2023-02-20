@@ -119,6 +119,19 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
+  var isOpen: Bool {
+    if !self.isWindowLoaded {
+      return false
+    }
+    guard let window = self.window else { return false }
+    // Also check if hidden due to PIP
+    return window.isVisible || isWindowHidden
+  }
+
+  var hasKeyboardFocus: Bool {
+    window?.isKeyWindow ?? false
+  }
+
   /** For mpv's `geometry` option. We cache the parsed structure
    so never need to parse it every time. */
   var cachedGeometry: GeometryDef?
@@ -1119,6 +1132,25 @@ class MainWindowController: PlayerWindowController {
   }
 
   func windowWillClose(_ notification: Notification) {
+    Logger.log("Window closing", subsystem: player.subsystem)
+
+    // Check whether this is the last player closed; show welcome or history window if configured.
+    // Other windows like Settings may be open, and user shouldn't need to close them all to get back the welcome window.
+    if let app = (NSApp.delegate as? AppDelegate), !app.isTerminating && player.isOnlyOpenPlayer() {
+      Logger.log("Window was last player window open", level: .verbose, subsystem: player.subsystem)
+      if let whatToDo = Preference.ActionWhenNoOpenedWindow(key: .actionWhenNoOpenedWindow) {
+
+        switch whatToDo {
+          case .welcomeWindow:
+            app.showWelcomeWindow()
+          case .historyWindow:
+            app.historyWindow.showWindow(self)
+          default:
+            break
+        }
+      }
+    }
+
     shouldApplyInitialWindowSize = true
     // Close PIP
     if pipStatus == .inPIP {

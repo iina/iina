@@ -111,7 +111,6 @@ class PlayerCore: NSObject {
   var backgroundQueueTicket = 0
 
   var mainWindow: MainWindowController!
-  var initialWindow: InitialWindowController!
   var miniPlayer: MiniPlayerWindowController!
 
   var mpv: MPVController!
@@ -162,7 +161,6 @@ class PlayerCore: NSObject {
     self.mpv = MPVController(playerCore: self)
     self.mainWindow = MainWindowController(playerCore: self)
     self.miniPlayer = MiniPlayerWindowController(playerCore: self)
-    self.initialWindow = InitialWindowController(playerCore: self)
     if #available(macOS 10.12.2, *) {
       self._touchBarSupport = TouchBarSupport(playerCore: self)
     }
@@ -291,9 +289,17 @@ class PlayerCore: NSObject {
     }
   }
 
+  func isOnlyOpenPlayer() -> Bool {
+    for player in PlayerCore.playerCores {
+      if player != self && player.mainWindow.isOpen {
+        return false
+      }
+    }
+    return true
+  }
 
   private func openMainWindow(path: String, url: URL, isNetwork: Bool) {
-    Logger.log("Opening \(path) in main window", subsystem: subsystem)
+    Logger.log("Opening in main window: \(path.quoted)", subsystem: subsystem)
     info.currentURL = url
     // clear currentFolder since playlist is cleared, so need to auto-load again in playerCore#fileStarted
     info.currentFolder = nil
@@ -301,7 +307,7 @@ class PlayerCore: NSObject {
 
     let isFirstLoad = !mainWindow.loaded
     let _ = mainWindow.window
-    initialWindow.close()
+    (NSApp.delegate as! AppDelegate).initialWindow.closePriorToOpeningMainWindow()
     if isInMiniPlayer {
       miniPlayer.showWindow(nil)
     } else {

@@ -422,6 +422,10 @@ extension String {
     return localizedCompare(other) == .orderedSame
   }
 
+  var quoted: String {
+    return "\"\(self)\""
+  }
+
   mutating func deleteLast(_ num: Int) {
     removeLast(Swift.min(num, count))
   }
@@ -666,6 +670,22 @@ extension NSWindow {
       return NSScreen.main!
     }
     return NSScreen.screens[0]
+  }
+
+  func isOnlyOpenWindow() -> Bool {
+    for window in NSApp.windows {
+      if window != self {
+        if window.isVisible {
+          Logger.log("Found another window which is still open: \(window.title.quoted)", level: .verbose)
+          return false
+        } else if let mainWindow = window.windowController as? MainWindowController, mainWindow.isOpen {
+          Logger.log("Window for player\(mainWindow.player.label.quoted) is still open", level: .verbose)
+          return false
+        }
+      }
+    }
+    Logger.log("Window is the only window currently open: \(self.title.quoted)", level: .verbose)
+    return true
   }
 }
 

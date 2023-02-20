@@ -24,7 +24,7 @@ fileprivate extension NSUserInterfaceItemIdentifier {
 }
 
 
-class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutlineViewDataSource, NSMenuDelegate, NSMenuItemValidation {
+class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutlineViewDataSource, NSMenuDelegate, NSMenuItemValidation, NSWindowDelegate {
 
   enum SortOption: Int {
     case lastPlayed = 0
@@ -111,6 +111,17 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     } else if event.charactersIgnoringModifiers == "\u{7f}" {
       let entries = outlineView.selectedRowIndexes.compactMap { outlineView.item(atRow: $0) as? PlaybackHistory }
       HistoryController.shared.remove(entries)
+    }
+  }
+
+  // MARK: NSWindowDelegate
+  
+  func windowWillClose(_ notification: Notification) {
+    guard let window = self.window, window.isOnlyOpenWindow() else { return }
+
+    if Preference.ActionWhenNoOpenedWindow(key: .actionWhenNoOpenedWindow) == .historyWindow {
+      Logger.log("Configured to show Playback History window when all windows closed, but user closed the Playback History window. Will quit instead of re-opening it.")
+      (NSApp.delegate as! AppDelegate).terminateSafely()
     }
   }
 

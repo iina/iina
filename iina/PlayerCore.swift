@@ -1723,12 +1723,14 @@ class PlayerCore: NSObject {
   func errorOpeningFileAndCloseMainWindow() {
     DispatchQueue.main.async {
       Utility.showAlert("error_open")
+      self.isStopped = true
       self.mainWindow.close()
     }
   }
 
   func closeMainWindow() {
     DispatchQueue.main.async {
+      self.isStopped = true
       self.mainWindow.close()
     }
   }

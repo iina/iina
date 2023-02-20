@@ -109,6 +109,7 @@
 "preference.enable_adv_settings" = "Enable advanced settings";
 
 "menu.volume" = "Volume: %d";
+"menu.volume_muted" = "Volume: %d (Muted)";
 "menu.audio_delay" = "Audio Delay: %.2fs";
 "menu.sub_delay" = "Subtitle Delay: %.2fs";
 "menu.fullscreen" = "Enter Full Screen";

@@ -135,9 +135,7 @@ class InitialWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
-  lazy var recentDocuments: [URL] = {
-    makeRecentDocumentsList()
-  }()
+  fileprivate var recentDocuments: [URL] = []
   fileprivate var lastPlaybackURL: URL?
 
   init() {
@@ -146,13 +144,6 @@ class InitialWindowController: NSWindowController, NSWindowDelegate {
 
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
-  }
-
-  private func makeRecentDocumentsList() -> [URL] {
-    // Need to call resolvingSymlinksInPath() on both sides, because it changes "/private/var" to "/var" as a special case,
-    // even though "/var" points to "/private/var" (i.e. it changes it the opposite direction from what is expected).
-    // This is probably a kludge on Apple's part to avoid breaking legacy FreeBSD code.
-    NSDocumentController.shared.recentDocumentURLs.filter { $0.resolvingSymlinksInPath() != lastPlaybackURL?.resolvingSymlinksInPath() }
   }
 
   override func windowDidLoad() {
@@ -221,11 +212,8 @@ class InitialWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
-  private func loadLastPlaybackInfo() {
-    if Preference.bool(for: .recordRecentFiles),
-      Preference.bool(for: .resumeLastPosition),
-      let lastFile = Preference.url(for: .iinaLastPlayedFilePath),
-      FileManager.default.fileExists(atPath: lastFile.path) {
+  private func refreshLastFileDisplay() {
+    if let lastFile = lastPlaybackURL {
       // if last file exists
       lastPlaybackURL = lastFile
       lastFileContainerView.isHidden = false
@@ -244,28 +232,53 @@ class InitialWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
+  private func getLastPlaybackIfValid() -> URL? {
+    guard Preference.bool(for: .recordRecentFiles) && Preference.bool(for: .resumeLastPosition),
+          let lastFile = Preference.url(for: .iinaLastPlayedFilePath) else {
+      return nil
+    }
+
+    guard FileManager.default.fileExists(atPath: lastFile.path) else {
+      Logger.log("File does not exist at lastPlaybackURL: \(lastFile.path.quoted)")
+      return nil
+    }
+    return lastFile
+  }
+
   func reloadData() {
     guard isWindowLoaded else { return }
 
-    loadLastPlaybackInfo()
-    recentDocuments = makeRecentDocumentsList()
+    // Reload data:
+
+    let recentsUnfiltered = NSDocumentController.shared.recentDocumentURLs
+    lastPlaybackURL = getLastPlaybackIfValid()
+    if let lastURL = lastPlaybackURL {
+      // Need to call resolvingSymlinksInPath() on both sides, because it changes "/private/var" to "/var" as a special case,
+      // even though "/var" points to "/private/var" (i.e. it changes it the opposite direction from what is expected).
+      // This is probably a kludge on Apple's part to avoid breaking legacy FreeBSD code.
+      recentDocuments = recentsUnfiltered.filter { $0.resolvingSymlinksInPath() != lastURL.resolvingSymlinksInPath() }
+    } else {
+      recentDocuments = recentsUnfiltered
+    }
+
+    // Refresh UI:
+
+    refreshLastFileDisplay()
     recentFilesTableView.reloadData()
 
-    if Logger.enabled && Logger.Level.preferred >= .verbose {
-      let last = lastPlaybackURL.flatMap { $0.resolvingSymlinksInPath().path } ?? "<none>"
-      Logger.log("InitialWindow.reloadData(): LastPlaybackURL: \(last)", level: .verbose)
-
-      for (index, url) in NSDocumentController.shared.recentDocumentURLs.enumerated() {
-        Logger.log("InitialWindow.reloadData(): RecentDocuments_Unfiltered[\(index)]: \(url.resolvingSymlinksInPath().path)", level: .verbose)
-      }
-
-      for (index, url) in recentDocuments.enumerated() {
-        Logger.log("InitialWindow.reloadData(): Loaded RecentDocuments[\(index)]: \(url.resolvingSymlinksInPath().path)", level: .verbose)
-      }
-    }
-    
     if lastFileContainerView.isHidden && recentFilesTableView.numberOfRows > 0 {
       recentFilesTableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+    }
+
+    // Debug logging:
+    if Logger.isEnabled(.verbose) {
+      let last = lastPlaybackURL.flatMap { $0.resolvingSymlinksInPath().path.quoted } ?? "nil"
+      let didFilter = recentsUnfiltered.count > recentDocuments.count
+      Logger.log("Reloading WelcomeWindow. LastPlaybackURL: \(last), UnfilteredRecents: \(recentsUnfiltered.count), DidFilter: \(didFilter)", level: .verbose)
+
+      for (index, url) in recentDocuments.enumerated() {
+        Logger.log("Recents[\(index)]: \(url.resolvingSymlinksInPath().path.quoted)", level: .verbose)
+      }
     }
   }
 

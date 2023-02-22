@@ -1653,7 +1653,7 @@ class MainWindowController: PlayerWindowController {
     // off whether AppKit has requested that a NSTouchBar object be created. This avoids running the
     // timer on Macs that do not have a touch bar. It also may avoid running the timer when a
     // MacBook with a touch bar is being operated in closed clameshell mode.
-    if !player.isInMiniPlayer && !player.hasTouchBar {
+    if !player.isInMiniPlayer && !player.needsTouchBar {
       player.invalidateTimer()
     }
 

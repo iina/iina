@@ -97,7 +97,7 @@ class PlayerCore: NSObject {
   ///
   /// - Note: This is set based on whether `AppKit` has called `MakeTouchBar`, therefore it can, for example, be `false` for
   ///         a MacBook that has a touch bar if the touch bar is asleep because the Mac is in closed clamshell mode.
-  var hasTouchBar = false
+  var needsTouchBar = false
 
   /// A dispatch queue for auto load feature.
   let backgroundQueue = DispatchQueue(label: "IINAPlayerCoreTask", qos: .background)
@@ -1788,7 +1788,7 @@ class PlayerCore: NSObject {
   @available(macOS 10.12.2, *)
   func makeTouchBar() -> NSTouchBar {
     Logger.log("Activating Touch Bar", subsystem: subsystem)
-    hasTouchBar = true
+    needsTouchBar = true
     // The timer that synchronizes the UI is shutdown to conserve energy when the OSC is hidden.
     // However the timer can't be stopped if it is needed to update the information being displayed
     // in the touch bar. If currently playing make sure the timer is running.

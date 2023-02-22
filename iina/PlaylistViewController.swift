@@ -96,6 +96,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     }
     playlistTableView.menu?.delegate = self
 
+    buttonTopConstraint.constant = MainWindowController.sidebarDownShift
+
     [deleteBtn, loopBtn, shuffleBtn].forEach {
       $0?.image?.isTemplate = true
       $0?.alternateImage?.isTemplate = true

@@ -170,12 +170,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   private var pluginTabsStackView: NSStackView!
   private var pluginTabs: [String: SidebarTabView] = [:]
 
-  var downShift: CGFloat = 0 {
-    didSet {
-      buttonTopConstraint.constant = downShift
-    }
-  }
-
   override func viewDidLoad() {
     super.viewDidLoad()
     withAllTableViews { (view, _) in
@@ -183,6 +177,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       view.dataSource = self
       view.superview?.superview?.layer?.cornerRadius = 4
     }
+
+    buttonTopConstraint.constant = MainWindowController.sidebarDownShift
 
     // colors
     if #available(macOS 10.14, *) {

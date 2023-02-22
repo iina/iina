@@ -19,17 +19,25 @@ fileprivate let isMacOS11: Bool = {
   return false
 }()
 
+/**
+ `NSWindow` doesn't provide title bar height directly, but we can derive it by asking `NSWindow` for
+ the dimensions of a prototypical window with titlebar, then subtracting the height of its `contentView`.
+ Note that we can't use this trick to get it from our window instance directly, because our window has the
+ `fullSizeContentView` style and so its `frameRect` does not include any extra space for its title bar.
+ */
 fileprivate let TitleBarHeightNormal: CGFloat = {
-  if #available(macOS 10.16, *) {
-    return 28
-  } else {
-    return 22
-  }
+  // Probably doesn't matter what dimensions we pick for the dummy contentRect, but to be safe let's make them nonzero.
+  let dummyContentRect = NSRect(x: 0, y: 0, width: 10, height: 10)
+  let dummyFrameRect = NSWindow.frameRect(forContentRect: dummyContentRect, styleMask: .titled)
+  let titleBarHeight = dummyFrameRect.height - dummyContentRect.height
+  return titleBarHeight
 }()
-fileprivate let TitleBarHeightWithOSC: CGFloat = TitleBarHeightNormal + 24 + 10
-fileprivate let TitleBarHeightWithOSCInFullScreen: CGFloat = 24 + 10
-fileprivate let OSCTopMainViewMarginTop: CGFloat = 26
-fileprivate let OSCTopMainViewMarginTopInFullScreen: CGFloat = 6
+fileprivate let OSCTopHeightInFullScreen: CGFloat = 40
+// When putting titlebar & OSC together, subtract 8 pts to reduce excess gap between the two:
+fileprivate let OSCTopHeightWithTitleBar: CGFloat = TitleBarHeightNormal + OSCTopHeightInFullScreen - 8
+// Manual adjustment needed to vertically center the top OSC. Larger numbers == controls are placed farther down
+fileprivate let OSCTopMainViewMarginTop: CGFloat = 28
+fileprivate let OSCTopMainViewMarginTopInFullScreen: CGFloat = 8
 
 fileprivate let SettingsWidth: CGFloat = 360
 fileprivate let PlaylistMinWidth: CGFloat = 240
@@ -51,6 +59,9 @@ fileprivate extension NSStackView.VisibilityPriority {
 
 
 class MainWindowController: PlayerWindowController {
+  /** Adjust vertical offset so that when sidebar is open & "top" OSC is shown, the separator
+   under the sidebar tab buttons aligns with bottom of OSC. */
+  static let sidebarDownShift: CGFloat = TitleBarHeightNormal - 17
 
   override var windowNibName: NSNib.Name {
     return NSNib.Name("MainWindowController")
@@ -722,10 +733,10 @@ class MainWindowController: PlayerWindowController {
       if isInFullScreen {
         addBackTitlebarViewToFadeableViews()
         oscTopMainViewTopConstraint.constant = OSCTopMainViewMarginTopInFullScreen
-        titleBarHeightConstraint.constant = TitleBarHeightWithOSCInFullScreen
+        titleBarHeightConstraint.constant = OSCTopHeightInFullScreen
       } else {
         oscTopMainViewTopConstraint.constant = OSCTopMainViewMarginTop
-        titleBarHeightConstraint.constant = TitleBarHeightWithOSC
+        titleBarHeightConstraint.constant = OSCTopHeightWithTitleBar
       }
       // Remove this if it's acceptable in 10.13-
       // titleBarBottomBorder.isHidden = true
@@ -1191,7 +1202,7 @@ class MainWindowController: PlayerWindowController {
     // show titlebar
     if oscPosition == .top {
       oscTopMainViewTopConstraint.constant = OSCTopMainViewMarginTopInFullScreen
-      titleBarHeightConstraint.constant = TitleBarHeightWithOSCInFullScreen
+      titleBarHeightConstraint.constant = OSCTopHeightInFullScreen
     } else {
       // stop animation and hide titleBarView
       removeTitlebarViewFromFadeableViews()
@@ -1261,7 +1272,7 @@ class MainWindowController: PlayerWindowController {
     // show titleBarView
     if oscPosition == .top {
       oscTopMainViewTopConstraint.constant = OSCTopMainViewMarginTop
-      titleBarHeightConstraint.constant = TitleBarHeightWithOSC
+      titleBarHeightConstraint.constant = OSCTopHeightWithTitleBar
     }
 
     thumbnailPeekView.isHidden = true
@@ -1894,8 +1905,6 @@ class MainWindowController: PlayerWindowController {
     let constraintsV = NSLayoutConstraint.constraints(withVisualFormat: "V:|[v]|", options: [], metrics: nil, views: ["v": view])
     NSLayoutConstraint.activate(constraintsH)
     NSLayoutConstraint.activate(constraintsV)
-    var viewController = viewController
-    viewController.downShift = titleBarView.frame.height
     // show sidebar
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = AccessibilityPreferences.adjustedDuration(SideBarAnimationDuration)
@@ -2885,5 +2894,4 @@ extension MainWindowController: PIPViewControllerDelegate {
 }
 
 protocol SidebarViewController {
-  var downShift: CGFloat { get set }
 }

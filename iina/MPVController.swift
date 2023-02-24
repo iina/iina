@@ -137,6 +137,8 @@ class MPVController: NSObject {
     MPVOption.Audio.volume: MPV_FORMAT_DOUBLE,
     MPVOption.Audio.audioDelay: MPV_FORMAT_DOUBLE,
     MPVOption.PlaybackControl.speed: MPV_FORMAT_DOUBLE,
+    MPVOption.Subtitles.subVisibility: MPV_FORMAT_FLAG,
+    MPVOption.Subtitles.secondarySubVisibility: MPV_FORMAT_FLAG,
     MPVOption.Subtitles.subDelay: MPV_FORMAT_DOUBLE,
     MPVOption.Subtitles.subScale: MPV_FORMAT_DOUBLE,
     MPVOption.Subtitles.subPos: MPV_FORMAT_DOUBLE,
@@ -502,6 +504,22 @@ not applying FFmpeg 9599 workaround
     chkErr(setString(MPVOption.Video.vo, "libmpv", level: .verbose))
     chkErr(setString(MPVOption.Window.keepaspect, "no", level: .verbose))
     chkErr(setString(MPVOption.Video.gpuHwdecInterop, "auto", level: .verbose))
+
+    // The option watch-later-options is not available until after the mpv instance is initialized.
+    // In mpv 0.34.1 the default value for the watch-later-options property contains the option
+    // sub-visibility, but the option secondary-sub-visibility is missing. This inconsistency is
+    // likely to confuse users, so insure the visibility setting for secondary subtitles is also
+    // saved in watch later files.
+    if  let watchLaterOptions = getString(MPVOption.WatchLater.watchLaterOptions),
+        watchLaterOptions.contains(MPVOption.Subtitles.subVisibility),
+        !watchLaterOptions.contains(MPVOption.Subtitles.secondarySubVisibility) {
+      log("Adding \(MPVOption.Subtitles.secondarySubVisibility) to \(MPVOption.WatchLater.watchLaterOptions)")
+      setString(MPVOption.WatchLater.watchLaterOptions, watchLaterOptions + "," +
+                MPVOption.Subtitles.secondarySubVisibility)
+    }
+    if let watchLaterOptions = getString(MPVOption.WatchLater.watchLaterOptions) {
+      log("Options mpv is configured to save in watch later files: \(watchLaterOptions)")
+    }
   }
 
   func mpvInitRendering() {
@@ -873,7 +891,7 @@ not applying FFmpeg 9599 workaround
   func removeHooks(withIdentifier id: String) {
     hooks.filter { (k, v) in v.isJavascript && v.id == id }.keys.forEach { hooks.removeValue(forKey: $0) }
   }
-  
+
   // MARK: - Events
 
   // Read event and handle it async
@@ -1211,6 +1229,22 @@ not applying FFmpeg 9599 workaround
       if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
         player.info.audioDelay = data
         player.sendOSD(.audioDelay(data))
+      }
+
+    case MPVOption.Subtitles.subVisibility:
+      if let visible = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
+        if player.info.isSubVisible != visible {
+          player.info.isSubVisible = visible
+          player.sendOSD(.subVisible(visible))
+        }
+      }
+
+    case MPVOption.Subtitles.secondarySubVisibility:
+      if let visible = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
+        if player.info.isSecondSubVisible != visible {
+          player.info.isSecondSubVisible = visible
+          player.sendOSD(.secondSubVisible(visible))
+        }
       }
 
     case MPVOption.Subtitles.subDelay:

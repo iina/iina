@@ -149,6 +149,9 @@ class PlaybackInfo {
   var vid: Int?
   var secondSid: Int?
 
+  var isSubVisible = true
+  var isSecondSubVisible = true
+
   var subEncoding: String?
 
   var haveDownloadedSub: Bool = false

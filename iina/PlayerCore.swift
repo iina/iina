@@ -1130,6 +1130,14 @@ class PlayerCore: NSObject {
     }
   }
 
+  func toggleSubVisibility() {
+    mpv.setFlag(MPVOption.Subtitles.subVisibility, !info.isSubVisible)
+  }
+
+  func toggleSecondSubVisibility() {
+    mpv.setFlag(MPVOption.Subtitles.secondarySubVisibility, !info.isSecondSubVisible)
+  }
+
   func loadExternalSubFile(_ url: URL, delay: Bool = false) {
     if let track = info.subTracks.first(where: { $0.externalFilename == url.path }) {
       mpv.command(.subReload, args: [String(track.id)], checkError: false)

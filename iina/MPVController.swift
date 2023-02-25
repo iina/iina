@@ -1235,7 +1235,7 @@ not applying FFmpeg 9599 workaround
       if let visible = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
         if player.info.isSubVisible != visible {
           player.info.isSubVisible = visible
-          player.sendOSD(.subVisible(visible))
+          player.sendOSD(visible ? .subVisible : .subHidden)
         }
       }
 
@@ -1243,7 +1243,7 @@ not applying FFmpeg 9599 workaround
       if let visible = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
         if player.info.isSecondSubVisible != visible {
           player.info.isSecondSubVisible = visible
-          player.sendOSD(.secondSubVisible(visible))
+          player.sendOSD(visible ? .secondSubVisible : .secondSubHidden)
         }
       }
 

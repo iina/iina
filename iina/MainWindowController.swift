@@ -50,7 +50,7 @@ fileprivate extension NSStackView.VisibilityPriority {
 }
 
 // The minimum distance that the user must drag before their click or tap gesture is interpreted as a drag gesture:
-fileprivate let minimumInitialDragDistance: CGFloat = 2.0
+fileprivate let minimumInitialDragDistance: CGFloat = 4.0
 
 class MainWindowController: PlayerWindowController {
 

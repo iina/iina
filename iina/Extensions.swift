@@ -43,7 +43,7 @@ extension CGPoint {
   }
 
   func isWithinRadius(radius: CGFloat, ofPoint otherPoint: CGPoint) -> Bool {
-    return self.distanceSquared(to: otherPoint) < (radius * radius)
+    return self.distanceSquared(to: otherPoint) <= (radius * radius)
   }
 }
 

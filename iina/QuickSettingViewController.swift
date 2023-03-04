@@ -178,7 +178,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       view.superview?.superview?.layer?.cornerRadius = 4
     }
 
-    buttonTopConstraint.constant = MainWindowController.sidebarDownShift
+    buttonTopConstraint.constant = mainWindow.sidebarDownShift
 
     // colors
     if #available(macOS 10.14, *) {

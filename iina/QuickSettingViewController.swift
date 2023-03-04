@@ -91,8 +91,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   var observers: [NSObjectProtocol] = []
 
-  @IBOutlet weak var videoTabScrollView: NSScrollView!
-  @IBOutlet weak var videoTabContentViewWidthConstraint: NSLayoutConstraint!
+  @IBOutlet weak var tabHeightConstraint: NSLayoutConstraint!
 
   @IBOutlet weak var videoTabBtn: NSButton!
   @IBOutlet weak var audioTabBtn: NSButton!
@@ -178,7 +177,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       view.superview?.superview?.layer?.cornerRadius = 4
     }
 
-    buttonTopConstraint.constant = mainWindow.sidebarDownShift
+    buttonTopConstraint.constant = mainWindow.sidebarSeparatorOffsetFromTop - tabHeightConstraint.constant
 
     // colors
     if #available(macOS 10.14, *) {

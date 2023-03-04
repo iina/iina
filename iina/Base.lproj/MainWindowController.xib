@@ -15,6 +15,7 @@
                 <outlet property="additionalInfoTitle" destination="3uh-OF-zy6" id="N6w-Hh-fQ1"/>
                 <outlet property="additionalInfoView" destination="Qbi-jx-9pO" id="bdV-ZH-SkC"/>
                 <outlet property="bottomBarBottomConstraint" destination="vP1-IE-sbB" id="G77-vL-Wf8"/>
+                <outlet property="bottomOSCPreferredHeightConstraint" destination="Kcz-RI-CQp" id="3Gt-QN-wYJ"/>
                 <outlet property="bottomView" destination="Tdb-EA-alw" id="5Xv-Ja-j4G"/>
                 <outlet property="bufferDetailLabel" destination="hlZ-5D-Wag" id="3Ld-2C-wGO"/>
                 <outlet property="bufferIndicatorView" destination="oX4-0N-but" id="fXY-gn-jfQ"/>
@@ -59,6 +60,7 @@
                 <outlet property="titleBarOverlayHeightConstraint" destination="1CI-Wl-F8h" id="K0U-G8-X9f"/>
                 <outlet property="titlebarAccessoryView" destination="maF-Zr-K8w" id="nvF-H7-z8G"/>
                 <outlet property="titlebarOnTopButton" destination="Ztc-Kn-fxI" id="xCA-hX-VpW"/>
+                <outlet property="topOSCPreferredHeightConstraint" destination="DXc-2g-UvP" id="3vj-Gl-4aQ"/>
                 <outlet property="topOverlayView" destination="TRx-2V-Gr3" id="4CG-pA-rHP"/>
                 <outlet property="volumeSlider" destination="SAG-kc-FAt" id="zM0-Gg-vfy"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
@@ -69,7 +71,7 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" tabbingMode="disallowed" id="F0z-JX-Cv5" userLabel="Main Player Window" customClass="MainWindow" customModule="IINA" customModuleProvider="target">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <rect key="contentRect" x="196" y="240" width="640" height="400"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="3440" height="1415"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1728" height="1079"/>
             <view key="contentView" id="se5-gp-TjO" userLabel="Window-Content View">
                 <rect key="frame" x="0.0" y="0.0" width="640" height="400"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -98,7 +100,7 @@
                         </constraints>
                     </visualEffectView>
                     <visualEffectView hidden="YES" wantsLayer="YES" horizontalCompressionResistancePriority="250" blendingMode="withinWindow" material="popover" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="Qbi-jx-9pO" userLabel="Additional-Info View">
-                        <rect key="frame" x="477" y="297" width="155" height="67"/>
+                        <rect key="frame" x="477" y="253" width="155" height="67"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HJv-RK-JT8">
                                 <rect key="frame" x="16" y="4" width="123" height="30"/>
@@ -227,7 +229,7 @@
                         </constraints>
                     </visualEffectView>
                     <visualEffectView hidden="YES" wantsLayer="YES" blendingMode="withinWindow" material="popover" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="g0O-v5-RQj" userLabel="OSD View">
-                        <rect key="frame" x="8" y="294" width="193" height="70"/>
+                        <rect key="frame" x="8" y="250" width="193" height="70"/>
                         <subviews>
                             <stackView orientation="vertical" alignment="leading" spacing="2" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="g0j-zS-jKv">
                                 <rect key="frame" x="16" y="8" width="161" height="54"/>
@@ -272,19 +274,22 @@
                         </constraints>
                     </visualEffectView>
                     <visualEffectView wantsLayer="YES" blendingMode="withinWindow" material="headerView" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="TRx-2V-Gr3" userLabel="Top-of-video Overlay View">
-                        <rect key="frame" x="0.0" y="372" width="640" height="28"/>
+                        <rect key="frame" x="0.0" y="328" width="640" height="72"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="WaC-08-utU" userLabel="TitleBar Overlay View">
-                                <rect key="frame" x="0.0" y="0.0" width="640" height="28"/>
+                                <rect key="frame" x="0.0" y="44" width="640" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="1CI-Wl-F8h"/>
                                 </constraints>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="pgt-r3-Vbf" userLabel="OSC-Top View">
-                                <rect key="frame" x="0.0" y="0.0" width="640" height="0.0"/>
+                                <rect key="frame" x="0.0" y="0.0" width="640" height="44"/>
                                 <subviews>
                                     <stackView orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="fDY-vk-Ylv" userLabel="OSC-Top Stack View">
-                                        <rect key="frame" x="8" y="0.0" width="624" height="0.0"/>
+                                        <rect key="frame" x="8" y="0.0" width="624" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" priority="900" constant="44" id="DXc-2g-UvP"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
@@ -321,14 +326,12 @@
                         <subviews>
                             <stackView orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Qmi-hb-0aM" userLabel="Bottom OSC Stack View">
                                 <rect key="frame" x="8" y="0.0" width="624" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" priority="900" constant="44" placeholder="YES" id="j6b-zQ-0Jf"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="Qmi-hb-0aM" secondAttribute="bottom" id="84H-65-Ego"/>
                             <constraint firstItem="Qmi-hb-0aM" firstAttribute="top" secondItem="DFb-1L-U9o" secondAttribute="top" id="ANy-8g-kkb"/>
+                            <constraint firstAttribute="height" priority="900" constant="44" id="Kcz-RI-CQp"/>
                             <constraint firstAttribute="trailing" secondItem="Qmi-hb-0aM" secondAttribute="trailing" constant="8" id="bOW-iG-HNY"/>
                             <constraint firstItem="Qmi-hb-0aM" firstAttribute="leading" secondItem="DFb-1L-U9o" secondAttribute="leading" constant="8" id="c3E-rA-tSH"/>
                         </constraints>
@@ -452,18 +455,18 @@
             </constraints>
             <point key="canvasLocation" x="318" y="584"/>
         </customView>
-        <customView translatesAutoresizingMaskIntoConstraints="NO" id="BE1-yC-oJL" userLabel="OSC Fragment: Playback Position Slider">
-            <rect key="frame" x="0.0" y="0.0" width="500" height="44"/>
+        <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BE1-yC-oJL" userLabel="OSC Fragment: Playback Position Slider">
+            <rect key="frame" x="0.0" y="0.0" width="500" height="42"/>
             <subviews>
                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eBP-6g-bAT" userLabel="Playback-Position Horizontal Slider">
-                    <rect key="frame" x="46" y="5" width="408" height="30"/>
+                    <rect key="frame" x="46" y="5" width="408" height="28"/>
                     <sliderCell key="cell" continuous="YES" refusesFirstResponder="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="f1c-xF-8a2" customClass="PlaySliderCell" customModule="IINA" customModuleProvider="target"/>
                     <connections>
                         <action selector="playSliderChanges:" target="-2" id="UBG-Ky-3rr"/>
                     </connections>
                 </slider>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" alphaValue="0.5" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NBD-MV-OuG" userLabel="Left Label" customClass="DurationDisplayTextField" customModule="IINA" customModuleProvider="target">
-                    <rect key="frame" x="-2" y="17" width="50" height="11"/>
+                    <rect key="frame" x="-2" y="16" width="50" height="11"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="11" id="BzO-eZ-2m8"/>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="46" id="CMl-dC-PCr"/>
@@ -478,7 +481,7 @@
                     </connections>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" alphaValue="0.5" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GgV-Cc-sk0" userLabel="Right Label" customClass="DurationDisplayTextField" customModule="IINA" customModuleProvider="target">
-                    <rect key="frame" x="452" y="17" width="50" height="11"/>
+                    <rect key="frame" x="452" y="16" width="50" height="11"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="11" id="elM-ER-FAc"/>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="46" id="sDf-om-KlV"/>
@@ -493,7 +496,7 @@
                     </connections>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" alphaValue="0.5" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qOq-6a-7j7">
-                    <rect key="frame" x="198" y="33" width="39" height="11"/>
+                    <rect key="frame" x="198" y="31" width="39" height="11"/>
                     <constraints>
                         <constraint firstAttribute="height" priority="900" constant="11" id="Eis-nn-SIU"/>
                     </constraints>
@@ -505,7 +508,6 @@
                 </textField>
             </subviews>
             <constraints>
-                <constraint firstAttribute="height" priority="900" constant="44" id="2tG-3g-wMN"/>
                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="E6z-SF-UDn"/>
                 <constraint firstItem="GgV-Cc-sk0" firstAttribute="centerY" secondItem="NBD-MV-OuG" secondAttribute="centerY" id="N3P-Qk-arP"/>
                 <constraint firstItem="qOq-6a-7j7" firstAttribute="bottom" secondItem="eBP-6g-bAT" secondAttribute="top" id="Usb-aX-iyc"/>

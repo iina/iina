@@ -2008,7 +2008,11 @@ class MainWindowController: PlayerWindowController {
       videoView.needsLayout = true
       videoView.layoutSubtreeIfNeeded()
       // force rerender a frame
-      videoView.videoLayer.draw(forced: true)
+      videoView.videoLayer.mpvGLQueue.async {
+        DispatchQueue.main.sync {
+          self.videoView.videoLayer.draw()
+        }
+      }
     }
 
     let controlView = mode.viewController()

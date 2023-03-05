@@ -80,9 +80,9 @@ final class PlaySlider: NSSlider {
     super.viewDidUnhide()
     // When IINA is not the application being used and the onscreen controller is hidden if the
     // mouse is moved over an IINA window the IINA will unhide the controller. If the slider is
-    // not marked as needing display the controller will show without the slider. I would of thought
-    // the NSView method would do this. The current Apple documentation does not say what the NSView
-    // method does or even if it needs to be called by subclasses.
+    // not marked as needing display the controller will show without the slider. I would have
+    // thought the NSView method would do this. The current Apple documentation does not say what
+    // the NSView method does or even if it needs to be called by subclasses.
     needsDisplay = true
   }
 }

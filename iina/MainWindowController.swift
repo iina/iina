@@ -438,11 +438,15 @@ class MainWindowController: PlayerWindowController {
   @IBOutlet weak var topOSCPreferredHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var bottomOSCPreferredHeightConstraint: NSLayoutConstraint!
 
-  // Top-of-video overlay, may contain title bar and/or top OSC if configured:
+  /** Top-of-video overlay, may contain `titleBarOverlayView` and/or top OSC if configured. */
   @IBOutlet weak var topOverlayView: NSVisualEffectView!
-  @IBOutlet weak var titleBarBottomBorder: NSBox!
+  @IBOutlet weak var topOverlayBottomBorder: NSBox!
+  /** This exists primarily to as a height-adjustable spacer inside the `topOverlayView`. Does not contain any child views.
+      Reserves space for the title bar components */
+  @IBOutlet weak var titleBarOverlayView: NSView!
   @IBOutlet weak var titlebarOnTopButton: NSButton!
 
+  @IBOutlet weak var controlBarTop: NSView!
   @IBOutlet weak var controlBarFloating: ControlBarView!
   @IBOutlet weak var controlBarBottom: NSVisualEffectView!
   @IBOutlet weak var timePreviewWhenSeek: NSTextField!
@@ -456,7 +460,7 @@ class MainWindowController: PlayerWindowController {
   @IBOutlet weak var bufferProgressLabel: NSTextField!
   @IBOutlet weak var bufferSpin: NSProgressIndicator!
   @IBOutlet weak var bufferDetailLabel: NSTextField!
-  @IBOutlet var thumbnailPeekView: ThumbnailPeekView!
+  @IBOutlet weak var thumbnailPeekView: ThumbnailPeekView!
   @IBOutlet weak var additionalInfoView: NSVisualEffectView!
   @IBOutlet weak var additionalInfoLabel: NSTextField!
   @IBOutlet weak var additionalInfoStackView: NSStackView!
@@ -611,7 +615,7 @@ class MainWindowController: PlayerWindowController {
     // other initialization
     osdAccessoryProgress.usesThreadedAnimation = false
     if #available(macOS 10.14, *) {
-      titleBarBottomBorder.fillColor = NSColor(named: .titleBarBorder)!
+      topOverlayBottomBorder.fillColor = NSColor(named: .titleBarBorder)!
     }
     cachedScreenCount = NSScreen.screens.count
     [topOverlayView, osdVisualEffectView, controlBarBottom, controlBarFloating, sideBarView, osdVisualEffectView, pipOverlayView].forEach {
@@ -732,7 +736,7 @@ class MainWindowController: PlayerWindowController {
     }
 
     // reset
-    ([controlBarFloating, controlBarBottom, oscTopMainView] as [NSView]).forEach { $0.isHidden = true }
+    ([controlBarFloating, controlBarBottom, controlBarTop] as [NSView]).forEach { $0.isHidden = true }
 
     controlBarFloating.isDragging = false
 
@@ -759,9 +763,9 @@ class MainWindowController: PlayerWindowController {
         titleBarOverlayHeightConstraint.constant = reducedTitleBarHeight
       }
       // Remove this if it's acceptable in 10.13-
-      // titleBarBottomBorder.isHidden = true
+      // topOverlayBottomBorder.isHidden = true
     } else {
-      // titleBarBottomBorder.isHidden = false
+      // topOverlayBottomBorder.isHidden = false
       titleBarOverlayHeightConstraint.constant = StandardTitleBarHeight
       topOSCPreferredHeightConstraint.constant = 0
       bottomOSCPreferredHeightConstraint.constant = fullWidthOSCPreferredHeight
@@ -780,6 +784,7 @@ class MainWindowController: PlayerWindowController {
     switch oscPosition {
     case .floating:
       currentControlBar = controlBarFloating
+      fadeableViews.append(controlBarFloating)
       fragControlView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragControlViewLeftView)
       fragControlView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragControlViewRightView)
       oscFloatingTopView.addView(fragVolumeView, in: .leading)
@@ -802,8 +807,8 @@ class MainWindowController: PlayerWindowController {
       controlBarFloating.xConstraint.constant = window!.frame.width * CGFloat(cph)
       controlBarFloating.yConstraint.constant = window!.frame.height * CGFloat(cpv)
     case .top:
-      oscTopMainView.isHidden = false
-      currentControlBar = nil
+      currentControlBar = controlBarTop
+      controlBarTop.isHidden = false
       fragControlView.setVisibilityPriority(.notVisible, for: fragControlViewLeftView)
       fragControlView.setVisibilityPriority(.notVisible, for: fragControlViewRightView)
       oscTopMainView.addView(fragVolumeView, in: .trailing)
@@ -816,6 +821,7 @@ class MainWindowController: PlayerWindowController {
       oscTopMainView.setVisibilityPriority(.detachEarlier, for: fragToolbarView)
     case .bottom:
       currentControlBar = controlBarBottom
+      fadeableViews.append(controlBarBottom)
       fragControlView.setVisibilityPriority(.notVisible, for: fragControlViewLeftView)
       fragControlView.setVisibilityPriority(.notVisible, for: fragControlViewRightView)
       oscBottomMainView.addView(fragVolumeView, in: .trailing)
@@ -828,9 +834,6 @@ class MainWindowController: PlayerWindowController {
       oscBottomMainView.setVisibilityPriority(.detachEarlier, for: fragToolbarView)
     }
 
-    if currentControlBar != nil {
-      fadeableViews.append(currentControlBar!)
-    }
     showUI()
 
     if isFloating {
@@ -945,7 +948,7 @@ class MainWindowController: PlayerWindowController {
 
   override func scrollWheel(with event: NSEvent) {
     guard !isInInteractiveMode else { return }
-    guard !isMouseEvent(event, inAnyOf: [sideBarView, topOverlayView, subPopoverView]) else { return }
+    guard !isMouseEvent(event, inAnyOf: [sideBarView, titleBarOverlayView, subPopoverView]) else { return }
 
     if isMouseEvent(event, inAnyOf: [fragSliderView]) && playSlider.isEnabled {
       seekOverride = true
@@ -1019,7 +1022,7 @@ class MainWindowController: PlayerWindowController {
       showUI()
     }
     // check whether mouse is in osc
-    if isMouseEvent(event, inAnyOf: [currentControlBar, topOverlayView]) {
+    if isMouseEvent(event, inAnyOf: [currentControlBar, titleBarOverlayView]) {
       destroyTimer()
     } else {
       updateTimer()

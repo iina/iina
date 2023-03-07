@@ -312,7 +312,7 @@ class MainWindowController: PlayerWindowController {
 
   private let localObservedPrefKeys: [Preference.Key] = [
     .oscPosition,
-    .thumbnailWidth,
+    .thumbnailLength,
     .showChapterPos,
     .arrowButtonAction,
     .pinchAction,
@@ -332,11 +332,11 @@ class MainWindowController: PlayerWindowController {
       if let newValue = change[.newKey] as? Int {
         setupOnScreenController(withPosition: Preference.OSCPosition(rawValue: newValue) ?? .floating)
       }
-    case PK.thumbnailWidth.rawValue:
+    case PK.thumbnailLength.rawValue:
       if let newValue = change[.newKey] as? Int {
         DispatchQueue.main.asyncAfter(deadline: .now() + AppData.thumbnailRegenerationDelay) {
-          if newValue == Preference.integer(for: .thumbnailWidth) && newValue != self.player.info.thumbnailWidth {
-            Logger.log("Pref \(Preference.Key.thumbnailWidth.rawValue.quoted) changed to \(newValue)px: requesting thumbs regen",
+          if newValue == Preference.integer(for: .thumbnailLength) && newValue != self.player.info.thumbnailLength {
+            Logger.log("Pref \(Preference.Key.thumbnailLength.rawValue.quoted) changed to \(newValue)px: requesting thumbs regen",
                        subsystem: self.player.subsystem)
             self.player.generateThumbnails()
           }
@@ -2120,12 +2120,12 @@ class MainWindowController: PlayerWindowController {
   ///   - timnePreviewYPos: The y-coordinate of the time preview `TextField`.
   ///   - thumbnailHeight: The height of the thumbnail.
   /// - Returns: `true` if the thumbnail can be shown above the slider, `false` otherwise.
-  private func canShowThumbnailAbove(timnePreviewYPos: Double, thumbnailHeight: Double) -> Bool {
+  private func canShowThumbnailAbove(timePreviewYPos: Double, thumbnailHeight: Double) -> Bool {
     guard oscPosition != .bottom else { return true }
     guard oscPosition != .top else { return false }
     // The layout preference for the on screen controller is set to the default floating layout.
     // Must insure the top of the thumbnail would be below the top of the window.
-    let topOfThumbnail = timnePreviewYPos + timePreviewWhenSeek.frame.height + thumbnailHeight
+    let topOfThumbnail = timePreviewYPos + timePreviewWhenSeek.frame.height + thumbnailHeight
     // Normally the height of the usable area of the window can be obtained from the content
     // layout. But when the legacy full screen preference is enabled the layout height may be
     // larger than the content view if the display contains a camera housing. Use the lower of
@@ -2146,23 +2146,33 @@ class MainWindowController: PlayerWindowController {
       percentage = 0
     }
 
-    if let duration = player.info.videoDuration {
-      let previewTime = duration * percentage
-      timePreviewWhenSeek.stringValue = previewTime.stringRepresentation
+    guard let duration = player.info.videoDuration else { return }
+    let previewTime = duration * percentage
+    guard timePreviewWhenSeek.stringValue != previewTime.stringRepresentation else { return }
+    timePreviewWhenSeek.stringValue = previewTime.stringRepresentation
 
-      if player.info.thumbnailsReady, let image = player.info.getThumbnail(forSecond: previewTime.second)?.image {
-        thumbnailPeekView.imageView.image = image.rotate(rotation)
-        thumbnailPeekView.isHidden = false
-        let width = CGFloat(player.info.thumbnailWidth)
-        let height = round(width / thumbnailPeekView.imageView.image!.size.aspect)
-        let timePreviewFrameInWindow = timePreviewWhenSeek.superview!.convert(timePreviewWhenSeek.frame.origin, to: nil)
-        let showAbove = canShowThumbnailAbove(timnePreviewYPos: timePreviewFrameInWindow.y, thumbnailHeight: height)
-        let yPos = showAbove ? timePreviewFrameInWindow.y + timePreviewWhenSeek.frame.height : sliderFrameInWindow.y - height
-        thumbnailPeekView.frame.size = NSSize(width: width, height: height)
-        thumbnailPeekView.frame.origin = NSPoint(x: round(originalPos.x - thumbnailPeekView.frame.width / 2), y: yPos)
+    if player.info.thumbnailsReady, let image = player.info.getThumbnail(forSecond: previewTime.second)?.image {
+      let imageToDisplay = image.rotate(rotation)
+      thumbnailPeekView.imageView.image = imageToDisplay
+      thumbnailPeekView.isHidden = false
+
+      let thumbWidth = imageToDisplay.size.width
+      let thumbHeight = imageToDisplay.size.height
+      thumbnailPeekView.frame.size = imageToDisplay.size
+      Logger.log("Displaying thumbnail: \(thumbWidth) W x \(thumbHeight) H", level: .verbose, subsystem: player.subsystem)
+      let timePreviewOriginY = timePreviewWhenSeek.superview!.convert(timePreviewWhenSeek.frame.origin, to: nil).y
+      let showAbove = canShowThumbnailAbove(timePreviewYPos: timePreviewOriginY, thumbnailHeight: thumbHeight)
+      let thumbOriginY: CGFloat
+      if showAbove {
+        // Show thumbnail above seek time, which is above slider
+        thumbOriginY = timePreviewOriginY + timePreviewWhenSeek.frame.height
       } else {
-        thumbnailPeekView.isHidden = true
+        // Show thumbnail below slider
+        thumbOriginY = sliderFrameInWindow.y - thumbHeight
       }
+      thumbnailPeekView.frame.origin = NSPoint(x: round(originalPos.x - thumbnailPeekView.frame.width / 2), y: thumbOriginY)
+    } else {
+      thumbnailPeekView.isHidden = true
     }
   }
 

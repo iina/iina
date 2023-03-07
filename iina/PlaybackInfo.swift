@@ -257,6 +257,7 @@ class PlaybackInfo {
   var thumbnailsReady = false
   var thumbnailsProgress: Double = 0
   var thumbnails: [FFThumbnail] = []
+  var thumbnailLength: Int = 0
   var thumbnailWidth: Int = 0
 
   func getThumbnail(forSecond sec: Double) -> FFThumbnail? {

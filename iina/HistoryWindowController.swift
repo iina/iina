@@ -95,22 +95,32 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     historyData[key]!.append(entry)
   }
 
+  private func removeAfterConfirmation(_ entries: [PlaybackHistory]) {
+    Utility.quickAskPanel("delete_history", sheetWindow: window) { respond in
+      guard respond == .alertFirstButtonReturn else { return }
+      HistoryController.shared.remove(self.selectedEntries)
+    }
+  }
+
   // MARK: Key event
 
   override func keyDown(with event: NSEvent) {
-    let commandKey = NSEvent.ModifierFlags.command
-    if event.modifierFlags.intersection(.deviceIndependentFlagsMask) == commandKey  {
+    let flags = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
+    if flags == .command  {
       switch event.charactersIgnoringModifiers! {
-      case "f":
-        window!.makeFirstResponder(historySearchField)
-      case "a":
-        outlineView.selectAll(nil)
-      default:
-        break
+        case "f":
+          window!.makeFirstResponder(historySearchField)
+        case "a":
+          outlineView.selectAll(nil)
+        default:
+          break
       }
-    } else if event.charactersIgnoringModifiers == "\u{7f}" {
-      let entries = outlineView.selectedRowIndexes.compactMap { outlineView.item(atRow: $0) as? PlaybackHistory }
-      HistoryController.shared.remove(entries)
+    } else {
+      let key = KeyCodeHelper.mpvKeyCode(from: event)
+      if key == "DEL" || key == "BS" {
+        let entries = outlineView.selectedRowIndexes.compactMap { outlineView.item(atRow: $0) as? PlaybackHistory }
+        removeAfterConfirmation(entries)
+      }
     }
   }
 
@@ -268,10 +278,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   }
 
   @IBAction func deleteAction(_ sender: AnyObject) {
-    Utility.quickAskPanel("delete_history", sheetWindow: window) { respond in
-      guard respond == .alertFirstButtonReturn else { return }
-      HistoryController.shared.remove(self.selectedEntries)
-    }
+    removeAfterConfirmation(self.selectedEntries)
   }
 
   @IBAction func searchOptionFilenameAction(_ sender: AnyObject) {

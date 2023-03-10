@@ -55,6 +55,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   override func windowDidLoad() {
     super.windowDidLoad()
+    self.windowFrameAutosaveName = "PlaybackHistoryWindow"
 
     NotificationCenter.default.addObserver(forName: .iinaHistoryUpdated, object: nil, queue: .main) { [unowned self] _ in
       self.reloadData()

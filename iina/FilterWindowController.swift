@@ -411,10 +411,10 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
     }
     if let paramOrder = preset.paramOrder {
       for name in paramOrder {
-        generateInputs(name, preset.params[name]!)
+        generateInputs(name, preset.params.get(name)!)
       }
     } else {
-      for (name, param) in preset.params {
+      preset.params.forEach { (name, param) in
         generateInputs(name, param)
       }
     }
@@ -490,7 +490,7 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
     // create instance
     let instance = FilterPresetInstance(from: preset)
     for (name, control) in currentBindings {
-      switch preset.params[name]!.type {
+      switch preset.params.get(name)!.type {
       case .text:
         instance.params[name] = FilterParameterValue(string: control.stringValue)
       case .int:
@@ -498,7 +498,7 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
       case .float:
         instance.params[name] = FilterParameterValue(float: control.floatValue)
       case .choose:
-        instance.params[name] = FilterParameterValue(string: preset.params[name]!.choices[Int(control.intValue)])
+        instance.params[name] = FilterParameterValue(string: preset.params.get(name)!.choices[Int(control.intValue)])
       }
     }
     // create filter

@@ -21,7 +21,7 @@ class FilterPreset {
   }
 
   var name: String
-  var params: [String: FilterParameter]
+  var params: FilterParameters
   var paramOrder: [String]?
   /** Given an instance, create the corresponding `MPVFilter`. */
   var transformer: Transformer
@@ -31,11 +31,11 @@ class FilterPreset {
   }
 
   init(_ name: String,
-       params: [String: FilterParameter],
+       params: KeyValuePairs<String, FilterParameter>,
        paramOrder: String? = nil,
        transformer: @escaping Transformer = FilterPreset.defaultTransformer) {
     self.name = name
-    self.params = params
+    self.params = FilterParameters(params)
     self.paramOrder = paramOrder?.components(separatedBy: ":")
     self.transformer = transformer
   }
@@ -57,7 +57,7 @@ class FilterPresetInstance {
   }
 
   func value(for name: String) -> FilterParameterValue {
-    return params[name] ?? preset.params[name]!.defaultValue
+    return params[name] ?? preset.params.get(name)!.defaultValue
   }
 }
 
@@ -112,6 +112,30 @@ class FilterParameter {
   private init(_ type: ParamType, defaultValue: FilterParameterValue) {
     self.type = type
     self.defaultValue = defaultValue
+  }
+}
+
+/// An ordered collection of name to `FilterParameter` pairs.
+///
+/// This structure preserves the order of filter parameters specified in the `FilterPreset` definitions by using [KeyValuePairs](https://developer.apple.com/documentation/swift/keyvaluepairs)
+/// instead of a Swift dictionary to hold the name to `FilterParameter` mapping. The order of the parameters dictates the order
+/// of the UI controls displayed to the user. A dictionary **must not** be used as that would cause the UI controls representing the
+/// parameters to appear in random order.
+struct FilterParameters {
+
+  private let params: KeyValuePairs<String, FilterParameter>
+
+  init(_ params: KeyValuePairs<String, FilterParameter>) {
+    self.params = params
+  }
+
+  func forEach(_ body: (String, FilterParameter) throws -> Void) rethrows {
+    try params.forEach(body)
+  }
+
+  func get(_ name: String) -> FilterParameter? {
+    guard let index = params.firstIndex(where: { $0.0 == name }) else { return nil }
+    return params[index].value
   }
 }
 

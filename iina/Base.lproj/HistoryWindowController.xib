@@ -19,13 +19,13 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="600" height="400"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="3440" height="1415"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1728" height="1079"/>
             <value key="minSize" type="size" width="400" height="200"/>
             <view key="contentView" wantsLayer="YES" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="se5-gp-TjO" userLabel="PlaybackHistoryWindow Content View">
-                <rect key="frame" x="0.0" y="0.0" width="600" height="400"/>
+                <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
                 <subviews>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="OQZ-Pk-zUa" userLabel="Top Panel">
-                        <rect key="frame" x="0.0" y="368" width="600" height="32"/>
+                        <rect key="frame" x="0.0" y="268" width="600" height="32"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ob0-Up-S1q" userLabel="GroupBy Label">
                                 <rect key="frame" x="6" y="7" width="64" height="18"/>
@@ -54,9 +54,7 @@
                                     </menu>
                                 </popUpButtonCell>
                                 <connections>
-                                    <connections>
-                                        <action selector="groupByChangedAction:" target="-2" id="YOC-15-2CZ"/>
-                                    </connections>
+                                    <action selector="groupByChangedAction:" target="-2" id="YOC-15-2CZ"/>
                                 </connections>
                             </popUpButton>
                             <searchField wantsLayer="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nfA-G1-DVj">
@@ -90,20 +88,20 @@
                         </constraints>
                     </customView>
                     <scrollView horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="II4-dF-AGa" userLabel="PlaybackHistoryTable Scroll View">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="368"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="268"/>
                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="IB5-0J-8sn" userLabel="PlaybackHistoryTable Clip View">
-                            <rect key="frame" x="1" y="1" width="598" height="366"/>
+                            <rect key="frame" x="1" y="1" width="598" height="266"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" tableStyle="fullWidth" autosaveName="PlaybackHistoryTable" rowHeight="22" headerView="MiB-ow-W6T" viewBased="YES" indentationPerLevel="12" autoresizesOutlineColumn="YES" outlineTableColumn="DIC-tR-R2F" id="6jR-CS-fgx" userLabel="PlaybackHistoryTable Outline View">
-                                    <rect key="frame" x="0.0" y="0.0" width="598" height="343"/>
+                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" tableStyle="fullWidth" columnReordering="NO" autosaveName="HistoryWindowTable" rowHeight="22" headerView="MiB-ow-W6T" viewBased="YES" indentationPerLevel="12" indentationMarkerFollowsCell="NO" outlineTableColumn="DIC-tR-R2F" id="6jR-CS-fgx" userLabel="PlaybackHistoryTable Outline View">
+                                    <rect key="frame" x="0.0" y="0.0" width="606" height="243"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <size key="intercellSpacing" width="4" height="2"/>
+                                    <size key="intercellSpacing" width="8" height="2"/>
                                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
-                                        <tableColumn identifier="Filename" editable="NO" width="408" minWidth="200" maxWidth="1000" id="DIC-tR-R2F" userLabel="File Column">
-                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="File">
+                                        <tableColumn identifier="Filename" editable="NO" width="408" minWidth="200" maxWidth="5000" id="DIC-tR-R2F" userLabel="File Column">
+                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="File">
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                             </tableHeaderCell>
@@ -115,7 +113,7 @@
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView identifier="Filename" id="wYh-IS-KLy" customClass="HistoryFilenameCellView" customModule="IINA" customModuleProvider="target">
-                                                    <rect key="frame" x="2" y="1" width="412" height="17"/>
+                                                    <rect key="frame" x="4" y="1" width="410" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <imageView translatesAutoresizingMaskIntoConstraints="NO" id="iVY-ZI-AZI">
@@ -127,8 +125,8 @@
                                                             <imageCell key="cell" controlSize="large" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="VSC-Pt-fuS"/>
                                                         </imageView>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Fqk-Qo-Mj5" userLabel="History Filename Table View Cell">
-                                                            <rect key="frame" x="20" y="1" width="394" height="16"/>
-                                                            <textFieldCell key="cell" controlSize="large" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="hAx-fJ-3rD">
+                                                            <rect key="frame" x="20" y="1" width="392" height="16"/>
+                                                            <textFieldCell key="cell" controlSize="large" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="Table View Cell" id="hAx-fJ-3rD">
                                                                 <font key="font" metaFont="system"/>
                                                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -148,12 +146,12 @@
                                                     </connections>
                                                 </tableCellView>
                                                 <tableCellView identifier="Group" id="RoJ-be-42E" userLabel="Group Table Cell View">
-                                                    <rect key="frame" x="2" y="20" width="412" height="17"/>
+                                                    <rect key="frame" x="4" y="20" width="410" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Nf6-hw-AKB" userLabel="Group Table View Cell">
-                                                            <rect key="frame" x="-2" y="1" width="416" height="16"/>
-                                                            <textFieldCell key="cell" controlSize="large" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Group Table View Cell" id="vDR-ax-UJb">
+                                                            <rect key="frame" x="2" y="1" width="410" height="16"/>
+                                                            <textFieldCell key="cell" controlSize="large" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="Group Table View Cell" id="vDR-ax-UJb">
                                                                 <font key="font" metaFont="system"/>
                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -164,7 +162,7 @@
                                                         </textField>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="Nf6-hw-AKB" firstAttribute="leading" secondItem="RoJ-be-42E" secondAttribute="leading" id="KkS-gh-eI6"/>
+                                                        <constraint firstItem="Nf6-hw-AKB" firstAttribute="leading" secondItem="RoJ-be-42E" secondAttribute="leading" constant="4" id="KkS-gh-eI6"/>
                                                         <constraint firstAttribute="trailing" secondItem="Nf6-hw-AKB" secondAttribute="trailing" id="g4u-zI-tC6"/>
                                                         <constraint firstItem="Nf6-hw-AKB" firstAttribute="centerY" secondItem="RoJ-be-42E" secondAttribute="centerY" id="oDv-9f-Eo1"/>
                                                     </constraints>
@@ -187,11 +185,11 @@
                                             <tableColumnResizingMask key="resizingMask" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView id="pqd-3v-fYy" customClass="HistoryProgressCellView" customModule="IINA" customModuleProvider="target">
-                                                    <rect key="frame" x="418" y="1" width="110" height="17"/>
+                                                    <rect key="frame" x="422" y="1" width="110" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="1" bezeled="NO" controlSize="small" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="MG3-Zj-U3c">
-                                                            <rect key="frame" x="3" y="3" width="50" height="12"/>
+                                                            <rect key="frame" x="4" y="3" width="49" height="12"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="f9e-xF-cPT"/>
                                                             </constraints>
@@ -209,7 +207,7 @@
                                                         <constraint firstAttribute="trailing" secondItem="UIs-Aj-nFe" secondAttribute="trailing" id="4hJ-zz-4Ud"/>
                                                         <constraint firstItem="UIs-Aj-nFe" firstAttribute="centerY" secondItem="pqd-3v-fYy" secondAttribute="centerY" id="9e9-vF-BVn"/>
                                                         <constraint firstItem="UIs-Aj-nFe" firstAttribute="leading" secondItem="MG3-Zj-U3c" secondAttribute="trailing" constant="8" id="Adl-4O-Gzf"/>
-                                                        <constraint firstItem="MG3-Zj-U3c" firstAttribute="leading" secondItem="pqd-3v-fYy" secondAttribute="leading" constant="3" id="VAL-K4-ovJ"/>
+                                                        <constraint firstItem="MG3-Zj-U3c" firstAttribute="leading" secondItem="pqd-3v-fYy" secondAttribute="leading" constant="4" id="VAL-K4-ovJ"/>
                                                         <constraint firstItem="UIs-Aj-nFe" firstAttribute="centerY" secondItem="MG3-Zj-U3c" secondAttribute="centerY" id="fqe-YB-vaN"/>
                                                     </constraints>
                                                     <connections>
@@ -219,7 +217,7 @@
                                                 </tableCellView>
                                             </prototypeCellViews>
                                         </tableColumn>
-                                        <tableColumn identifier="Time" editable="NO" width="60" minWidth="60" maxWidth="400" id="M7K-6H-OPw" userLabel="Played at Column">
+                                        <tableColumn identifier="Time" editable="NO" width="60" minWidth="60" maxWidth="300" id="M7K-6H-OPw" userLabel="Played at Column">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Played at">
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -232,12 +230,12 @@
                                             <tableColumnResizingMask key="resizingMask" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView identifier="Time" id="1Qm-L8-ZC5">
-                                                    <rect key="frame" x="532" y="1" width="64" height="17"/>
+                                                    <rect key="frame" x="540" y="1" width="62" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Esj-ym-AE9">
-                                                            <rect key="frame" x="-2" y="1" width="64" height="16"/>
-                                                            <textFieldCell key="cell" controlSize="large" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="right" title="00:00 AM" id="z9u-td-fQW">
+                                                            <rect key="frame" x="2" y="1" width="62" height="16"/>
+                                                            <textFieldCell key="cell" controlSize="large" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="00:00 AM" id="z9u-td-fQW">
                                                                 <font key="font" metaFont="system"/>
                                                                 <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -248,8 +246,8 @@
                                                         </textField>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="Esj-ym-AE9" firstAttribute="leading" secondItem="1Qm-L8-ZC5" secondAttribute="leading" id="2ti-fC-ySL"/>
-                                                        <constraint firstAttribute="trailing" secondItem="Esj-ym-AE9" secondAttribute="trailing" constant="4" id="PTv-O2-9gu"/>
+                                                        <constraint firstItem="Esj-ym-AE9" firstAttribute="leading" secondItem="1Qm-L8-ZC5" secondAttribute="leading" constant="4" id="2ti-fC-ySL"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Esj-ym-AE9" secondAttribute="trailing" id="PTv-O2-9gu"/>
                                                         <constraint firstItem="Esj-ym-AE9" firstAttribute="centerY" secondItem="1Qm-L8-ZC5" secondAttribute="centerY" id="egq-j1-maM"/>
                                                     </constraints>
                                                     <connections>
@@ -265,8 +263,8 @@
                                 </outlineView>
                             </subviews>
                         </clipView>
-                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="Hfw-fb-gd5">
-                            <rect key="frame" x="1" y="31" width="214" height="16"/>
+                        <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="Hfw-fb-gd5">
+                            <rect key="frame" x="1" y="251" width="598" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="dwA-h7-ch3">
@@ -274,7 +272,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <tableHeaderView key="headerView" wantsLayer="YES" id="MiB-ow-W6T" userLabel="PlaybackHistoryTable Table Header View">
-                            <rect key="frame" x="0.0" y="0.0" width="598" height="23"/>
+                            <rect key="frame" x="0.0" y="0.0" width="606" height="23"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </tableHeaderView>
                     </scrollView>
@@ -282,7 +280,7 @@
                 <constraints>
                     <constraint firstItem="OQZ-Pk-zUa" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="04h-qy-HPu"/>
                     <constraint firstAttribute="trailing" secondItem="II4-dF-AGa" secondAttribute="trailing" id="2el-lQ-ebS"/>
-                    <constraint firstAttribute="height" constant="400" placeholder="YES" id="Dqr-GP-aT1"/>
+                    <constraint firstAttribute="height" constant="300" placeholder="YES" id="Dqr-GP-aT1"/>
                     <constraint firstItem="OQZ-Pk-zUa" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="GGJ-cK-v1o"/>
                     <constraint firstItem="II4-dF-AGa" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="He6-cF-muG"/>
                     <constraint firstItem="OQZ-Pk-zUa" firstAttribute="bottom" secondItem="II4-dF-AGa" secondAttribute="top" id="bAK-Ww-Ds4"/>

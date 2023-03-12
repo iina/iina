@@ -23,7 +23,6 @@ fileprivate extension NSUserInterfaceItemIdentifier {
   static let contextMenu = NSUserInterfaceItemIdentifier("ContextMenu")
 }
 
-
 class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutlineViewDataSource, NSMenuDelegate, NSMenuItemValidation {
 
   enum SortOption: Int {
@@ -34,6 +33,11 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   enum SearchOption {
     case filename, fullPath
   }
+
+  private static let timeColMinWidths: [SortOption: CGFloat] = [
+    .lastPlayed: 60,
+    .fileLocation: 130
+  ]
 
   private let getKey: [SortOption: (PlaybackHistory) -> String] = [
     .lastPlayed: { DateFormatter.localizedString(from: $0.addedDate, dateStyle: .medium, timeStyle: .none) },
@@ -72,8 +76,42 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   func reloadData() {
     prepareData()
+    adjustTimeColumnMinWidth()
     outlineView.reloadData()
     outlineView.expandItem(nil, expandChildren: true)
+  }
+
+  // Change min width of "Played at" column
+  private func adjustTimeColumnMinWidth() {
+    guard let timeColumn = outlineView.tableColumn(withIdentifier: .time) else { return }
+    let newMinWidth = HistoryWindowController.timeColMinWidths[groupBy]!
+    guard newMinWidth != timeColumn.minWidth else { return }
+    if timeColumn.width < newMinWidth {
+      if let filenameColumn = outlineView.tableColumn(withIdentifier: .filename) {
+        donateColWidth(to: timeColumn, targetWidth: newMinWidth, from: filenameColumn)
+      }
+      if timeColumn.width < timeColumn.minWidth {
+        if let progressColumn = outlineView.tableColumn(withIdentifier: .progress) {
+          donateColWidth(to: timeColumn, targetWidth: newMinWidth, from: progressColumn)
+        }
+      }
+    }
+    // Do not set this until after width has been adjusted! Otherwise AppKit will change its width property
+    // but will not actually resize it:
+    timeColumn.minWidth = newMinWidth
+    outlineView.layoutSubtreeIfNeeded()
+    Logger.log("Updated \"\(timeColumn.identifier.rawValue)\" col width: \(timeColumn.width), minWidth: \(timeColumn.minWidth)", level: .verbose)
+  }
+
+  private func donateColWidth(to targetColumn: NSTableColumn, targetWidth: CGFloat, from donorColumn: NSTableColumn) {
+    let extraWidthNeeded = targetWidth - targetColumn.width
+    // Don't take more than needed, or more than possible:
+    let widthToDonate = min(extraWidthNeeded, max(donorColumn.width - donorColumn.minWidth, 0))
+    if widthToDonate > 0 {
+      Logger.log("Donating \(widthToDonate) pts width to col \"\(targetColumn.identifier.rawValue)\" from \"\(donorColumn.identifier.rawValue)\" width (\(donorColumn.width))")
+      donorColumn.width -= widthToDonate
+      targetColumn.width += widthToDonate
+    }
   }
 
   private func prepareData(fromHistory historyList: [PlaybackHistory]? = nil) {
@@ -174,14 +212,16 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
       } else if identifier == .progress {
         // Progress cell
         let entry = item as! PlaybackHistory
-        let filenameView = (view as! HistoryProgressCellView)
+        let progressView = (view as! HistoryProgressCellView)
+        // Do not animate! Causes unneeded slowdown
+        progressView.indicator.usesThreadedAnimation = false
         if let progress = entry.mpvProgress {
-          filenameView.textField?.stringValue = progress.stringRepresentation
-          filenameView.indicator.isHidden = false
-          filenameView.indicator.doubleValue = (progress / entry.duration) ?? 0
+          progressView.textField?.stringValue = progress.stringRepresentation
+          progressView.indicator.isHidden = false
+          progressView.indicator.doubleValue = (progress / entry.duration) ?? 0
         } else {
-          filenameView.textField?.stringValue = ""
-          filenameView.indicator.isHidden = true
+          progressView.textField?.stringValue = ""
+          progressView.indicator.isHidden = true
         }
       }
       return view

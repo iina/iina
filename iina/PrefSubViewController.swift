@@ -71,7 +71,7 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
     defaultEncodingList.menu?.insertItem(NSMenuItem.separator(), at: 1)
     loginIndicator.isHidden = true
 
-    subLangTokenView.stringValue = Preference.string(for: .subLang) ?? ""
+    subLangTokenView.commaSeparatedValues = Preference.string(for: .subLang) ?? ""
 
     refreshSubSources()
     refreshSubSourceAccessoryView()
@@ -149,7 +149,11 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
   }
 
   @IBAction func preferredLanguageAction(_ sender: LanguageTokenField) {
-    Preference.set(sender.stringValue, for: .subLang)
+    let csv = sender.commaSeparatedValues
+    if Preference.string(for: .subLang) != csv {
+      Logger.log("Saving \(Preference.Key.subLang.rawValue): \"\(csv)\"", level: .verbose)
+      Preference.set(csv, for: .subLang)
+    }
   }
 
   private func refreshSubSources() {

@@ -41,7 +41,7 @@ class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbedda
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    audioLangTokenField.stringValue = Preference.string(for: .audioLanguage) ?? ""
+    audioLangTokenField.commaSeparatedValues = Preference.string(for: .audioLanguage) ?? ""
     updateHwdecDescription()
   }
 
@@ -88,7 +88,11 @@ class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbedda
   }
 
   @IBAction func preferredLanguageAction(_ sender: LanguageTokenField) {
-    Preference.set(sender.stringValue, for: .audioLanguage)
+    let csv = sender.commaSeparatedValues
+    if Preference.string(for: .audioLanguage) != csv {
+      Logger.log("Saving \(Preference.Key.audioLanguage.rawValue): \"\(csv)\"", level: .verbose)
+      Preference.set(csv, for: .audioLanguage)
+    }
   }
 
   private func updateHwdecDescription() {

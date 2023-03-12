@@ -422,6 +422,10 @@ extension String {
     return localizedCompare(other) == .orderedSame
   }
 
+  var quoted: String {
+    return "\"\(self)\""
+  }
+
   mutating func deleteLast(_ num: Int) {
     removeLast(Swift.min(num, count))
   }

@@ -98,7 +98,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   private func removeAfterConfirmation(_ entries: [PlaybackHistory]) {
     Utility.quickAskPanel("delete_history", sheetWindow: window) { respond in
       guard respond == .alertFirstButtonReturn else { return }
-      HistoryController.shared.remove(self.selectedEntries)
+      HistoryController.shared.remove(entries)
     }
   }
 
@@ -223,13 +223,13 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   private var selectedEntries: [PlaybackHistory] = []
 
   func menuNeedsUpdate(_ menu: NSMenu) {
-    let selectedRow = outlineView.selectedRowIndexes
+    let selectedRowIndexes = outlineView.selectedRowIndexes
     let clickedRow = outlineView.clickedRow
     var indexSet = IndexSet()
     if menu.identifier == .contextMenu {
       if clickedRow != -1 {
-        if selectedRow.contains(clickedRow) {
-          indexSet = selectedRow
+        if selectedRowIndexes.contains(clickedRow) {
+          indexSet = selectedRowIndexes
         } else {
           indexSet.insert(clickedRow)
         }

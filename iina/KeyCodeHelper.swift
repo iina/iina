@@ -10,6 +10,12 @@ import Foundation
 import Carbon
 
 class KeyCodeHelper {
+  class KeyEquivalents { // MacOS
+    static let BACKSPACE = String(UnicodeScalar(NSBackspaceCharacter)!)
+    static let DEL = String(UnicodeScalar(NSDeleteCharacter)!)
+    static let ENTER = String(UnicodeScalar(NSEnterCharacter)!)
+    static let RETURN = String(UnicodeScalar(NSNewlineCharacter)!)
+  }
 
   // mpv modifiers in normal form:
   static let CTRL_KEY = "Ctrl"
@@ -25,6 +31,7 @@ class KeyCodeHelper {
   ]
 
   fileprivate static let modifierSymbols: [(NSEvent.ModifierFlags, String)] = [(.control, "⌃"), (.option, "⌥"), (.shift, "⇧"), (.command, "⌘")]
+  fileprivate static let modifierFlagsToMpv: [(NSEvent.ModifierFlags, String)] = [(.control, CTRL_KEY), (.option, ALT_KEY), (.shift, SHIFT_KEY), (.command, META_KEY)]
 
   static let keyMap: [UInt16 : (String, String?)] = [
     0x00: ("a", "A"),
@@ -255,6 +262,24 @@ class KeyCodeHelper {
     return utf8View.count == 1 && utf8View.first! > 32 && utf8View.first! < 127
   }
 
+  static func escapeReservedMpvKeys(_ rawKey: String) -> String? {
+    // "#" and " " are not valid for `rawKey` because are reserved as tokens when parsing the conf file.
+    // Try to help the user out a little bit before rejecting
+    if rawKey == " " {
+      return "SPACE"
+    }
+    var keystrokes: [String] = KeyCodeHelper.splitKeystrokes(rawKey.trimmingCharacters(in: .whitespaces))
+    for (i, rawKey) in keystrokes.enumerated() {
+      if rawKey == " " {
+        keystrokes[i] = "SPACE"
+      }
+      if rawKey == "#" {
+        keystrokes[i] = "SHARP"
+      }
+    }
+    return keystrokes.joined(separator: "-")
+  }
+
   static func mpvKeyCode(from event: NSEvent) -> String {
     var keyString = ""
     let keyChar: String
@@ -263,14 +288,12 @@ class KeyCodeHelper {
 
     if let char = event.charactersIgnoringModifiers, isPrintable(char) {
       keyChar = char
-      let (_, rawKeyChar) = event.readableKeyDescription
-      if rawKeyChar != char {
-        modifiers.remove(.shift)
-      }
+      // The char in `charactersIgnoringModifiers` should always include shift info.
+      modifiers.remove(.shift)
     } else {
       // find the key from key code
       guard let keyName = KeyCodeHelper.keyMap[keyCode] else {
-        Logger.log("Undefined key code?", level: .warning)
+        Logger.log("Undefined key code: \"\(keyCode)\"", level: .warning)
         return ""
       }
       keyChar = keyName.0
@@ -294,6 +317,58 @@ class KeyCodeHelper {
     return keyString
   }
 
+  // Finds and returns the end index of the next key in the string
+  private static func getNextEndIndex(_ unparsedRemainder: Substring) -> String.Index? {
+    if let dashIndex = unparsedRemainder.firstIndex(of: "-"),
+     let indexBeyondDash = unparsedRemainder.index(dashIndex, offsetBy: 1, limitedBy: unparsedRemainder.index(before: unparsedRemainder.endIndex)) { // There is a '-' somewhere, and there is at least 1 char after it
+      if dashIndex == unparsedRemainder.startIndex {
+        guard unparsedRemainder[indexBeyondDash] == "-" else {
+          return nil
+        }
+        // Next char is '-' and should be treated like a key, but needs to be terminated
+        return indexBeyondDash
+      } else {
+        // The '-' should be treated like a separator char
+        return dashIndex
+      }
+    }
+    // No '-' in string, or it is the only char in the string: use whole string as the next key
+    return unparsedRemainder.endIndex
+  }
+
+  // See mpv/input/keycodes.c: mp_input_get_keys_from_string()
+  public static func splitKeystrokes(_ keystrokes: String) -> [String] {
+    // Older versions of IINA's saved filters would add 3 null chars to end before saving in IINA's preferences.
+    // They will cause matching logic to fail, so it's necessary to check for this for the forseeable future.
+    let ksClean = keystrokes.replacingOccurrences(of: "\0", with: "")
+    if ksClean.count != keystrokes.count {
+      Logger.log("Found \(keystrokes.count - ksClean.count) null characters in \"\(keystrokes)\"; will try to fix & continue", level: .warning)
+    }
+    var unparsedRemainder = Substring(ksClean)
+    var splitKeystrokeList: [String] = []
+
+    while !unparsedRemainder.isEmpty && splitKeystrokeList.count < MP_MAX_KEY_DOWN {
+      guard let endIndex = getNextEndIndex(unparsedRemainder) else {
+        Logger.log("Could not split keystrokes; not a valid sequence: \"\(keystrokes)\"", level: .warning)
+        return [keystrokes]
+      }
+
+      let ks = String(unparsedRemainder[unparsedRemainder.startIndex..<endIndex])
+      guard !ks.isEmpty else {
+          Logger.log("While splitting keystrokes: Last keystroke is empty! Returning list: \(splitKeystrokeList)", level: .error)
+          return splitKeystrokeList
+      }
+      splitKeystrokeList.append(ks)
+
+      guard let indexBeyondEnd = unparsedRemainder.index(endIndex, offsetBy: 1, limitedBy: unparsedRemainder.endIndex) else {
+        break
+      }
+
+      unparsedRemainder = unparsedRemainder[indexBeyondEnd...]
+    }
+    return splitKeystrokeList
+  }
+
   // Normalizes a single "press" of possibly multiple keys (as joined with '+')
   private static func normalizeSingleMpvKeystroke(_ mpvKeystroke: String) -> String {
     if mpvKeystroke == "+" {
@@ -305,7 +380,7 @@ class KeyCodeHelper {
     splitted.dropLast().forEach { k in
       // Modifiers have first letter capitalized. All other special chars are capitalized
       if k.equalsIgnoreCase(SHIFT_KEY) {
-        // For alphabetic chars, remove the "Shift+" and replace with actual uppercase char
+        // For chars with upper & lower cases, remove the "Shift+" and replace with actual uppercase char
         if key.count == 1, key.lowercased() != key.uppercased() {
           key = key.uppercased()
         } else {
@@ -329,6 +404,20 @@ class KeyCodeHelper {
 
     normalizedList = normalizedList.sorted { modifierOrder[$0, default: 9] < modifierOrder[$1, default: 9] }
     return normalizedList.joined(separator: "+")
+  }
+
+  public static func splitAndNormalizeMpvString(_ mpvKeystrokes: String) -> [String] {
+    // this is a hard-coded special case in mpv
+    if mpvKeystrokes == "default-bindings" {
+      return [mpvKeystrokes]
+    }
+    let keystrokesList = splitKeystrokes(mpvKeystrokes)
+
+    var normalizedList: [String] = []
+    for keystroke in keystrokesList {
+      normalizedList.append(normalizeSingleMpvKeystroke(keystroke))
+    }
+    return normalizedList
   }
 
   /*
@@ -361,21 +450,21 @@ class KeyCodeHelper {
       (examples: SHARP, SPACE, PGDOWN)
    */
   public static func normalizeMpv(_ mpvKeystrokes: String) -> String {
-    // this is a hard-coded special case in mpv
-    if mpvKeystrokes == "default-bindings" {
-      return mpvKeystrokes
-    }
-    // Ignore sequences until full support is added
-    if mpvKeystrokes.filter({ $0 == "-" }).count > 1 {
-      return mpvKeystrokes
-    }
-    return normalizeSingleMpvKeystroke(mpvKeystrokes)
+    let normalizedList = splitAndNormalizeMpvString(mpvKeystrokes)
+    return normalizedList.joined(separator: "-")
   }
 
   // Converts an mpv-formatted key string to a (key, modifiers) pair suitable for assignment to a MacOS menu item.
   // IMPORTANT: `mpvKeyCode` must be normalized first! Use `KeyCodeHelper.normalizeMpv()`.
   static func macOSKeyEquivalent(from mpvKeyCode: String, usePrintableKeyName: Bool = false) -> (key: String, modifiers: NSEvent.ModifierFlags)? {
-    let splitted = mpvKeyCode.components(separatedBy: "+")
+    if mpvKeyCode == "default-bindings" {
+      return nil
+    }
+    let keystrokeList = splitKeystrokes(mpvKeyCode)
+    if keystrokeList.count > 1 {
+      Logger.log("macOSKeyEquivalent(): found more than one keystroke in input string: \"\(mpvKeyCode)\"", level: .error)
+    }
+    let splitted = keystrokeList[0].components(separatedBy: "+")
     var key: String
     var modifiers: NSEvent.ModifierFlags = []
     guard !splitted.isEmpty else { return nil }
@@ -407,6 +496,46 @@ class KeyCodeHelper {
     return modifierSymbols.map { modifiers.contains($0.0) ? $0.1 : "" }
       .joined()
       .appending(key)
+  }
+
+  static func macString(from modifiers: NSEvent.ModifierFlags) -> String {
+    return modifierSymbols.map { modifiers.contains($0.0) ? $0.1 : "" }
+      .joined()
+  }
+
+  // Formats a string of one or more keystrokes from mpv form to Mac form
+  // IMPORTANT: `mpvKeyCode` must be normalized first! Use `KeyCodeHelper.normalizeMpv()`.
+  static func normalizedMacKeySequence(from normalizedMpvKeySequence: String) -> String {
+    if normalizedMpvKeySequence == "default-bindings" {
+      return normalizedMpvKeySequence
+    }
+    var macKeyList: [String] = []
+    let keystrokes = splitKeystrokes(normalizedMpvKeySequence)
+    for keystroke in keystrokes {
+      if let (keyChar, modifiers) = KeyCodeHelper.macOSKeyEquivalent(from: keystroke, usePrintableKeyName: true) {
+        macKeyList.append(KeyCodeHelper.readableString(fromKey: keyChar, modifiers: modifiers))
+      } else {
+        // Probabaly a weird key. Just pass it through
+        macKeyList.append(keystroke)
+      }
+    }
+    return macKeyList.joined(separator: ", ")
+  }
+
+  static func macOSToMpv(key: String, modifiers: NSEvent.ModifierFlags) -> String {
+    var mpvTokens: [String] = []
+    for (modifierFlag, mpvModifier) in modifierFlagsToMpv {
+      if modifiers.contains(modifierFlag) {
+        mpvTokens.append(mpvModifier)
+      }
+    }
+
+    // MacOS key equivalents always display single characters in uppercase, but mpv will interpret this as adding "Shift".
+    // If there is supposed to be a Shift key pressed, it will have been in the modifier flags above,
+    // and converted to explicit "+Shift".
+    let cleanKey = key.count == 1 ? key.lowercased() : key
+    mpvTokens.append(cleanKey)
+    return mpvTokens.joined(separator: "+")
   }
 }
 
@@ -463,48 +592,3 @@ fileprivate let NSEventKeyCodeMapping: [Int: String] = [
   kVK_ANSI_KeypadMinus: "-",
   kVK_ANSI_KeypadEquals: "="
 ]
-
-extension NSEvent {
-  var readableKeyDescription: (String, String) {
-    get {
-
-      let rawKeyCharacter: String
-      if let char = NSEventKeyCodeMapping[Int(self.keyCode)] {
-        rawKeyCharacter = char
-      } else {
-        let inputSource = TISCopyCurrentASCIICapableKeyboardLayoutInputSource().takeUnretainedValue()
-        if let layoutData = TISGetInputSourceProperty(inputSource, kTISPropertyUnicodeKeyLayoutData) {
-          let dataRef = unsafeBitCast(layoutData, to: CFData.self)
-          let keyLayout = unsafeBitCast(CFDataGetBytePtr(dataRef), to: UnsafePointer<UCKeyboardLayout>.self)
-          var deadKeyState = UInt32(0)
-          let maxLength = 4
-          var actualLength = 0
-          var actualString = [UniChar](repeating: 0, count: maxLength)
-          let error = UCKeyTranslate(keyLayout,
-                                     UInt16(self.keyCode),
-                                     UInt16(kUCKeyActionDisplay),
-                                     UInt32((0 >> 8) & 0xFF),
-                                     UInt32(LMGetKbdType()),
-                                     OptionBits(kUCKeyTranslateNoDeadKeysBit),
-                                     &deadKeyState,
-                                     maxLength,
-                                     &actualLength,
-                                     &actualString)
-          if error == 0 {
-            rawKeyCharacter = String(utf16CodeUnits: &actualString, count: maxLength).uppercased()
-
-          } else {
-            rawKeyCharacter = KeyCodeHelper.keyMap[self.keyCode]?.0 ?? ""
-          }
-        } else {
-          rawKeyCharacter = KeyCodeHelper.keyMap[self.keyCode]?.0 ?? ""
-        }
-      }
-
-      return (([(.control, "⌃"), (.option, "⌥"), (.shift, "⇧"), (.command, "⌘")] as [(NSEvent.ModifierFlags, String)])
-        .map { self.modifierFlags.contains($0.0) ? $0.1 : "" }
-        .joined()
-        .appending(rawKeyCharacter), rawKeyCharacter)
-    }
-  }
-}

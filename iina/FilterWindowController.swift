@@ -249,7 +249,7 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
     currentSavedFilter = savedFilters[row]
     editFilterNameTextField.stringValue = currentSavedFilter!.name
     editFilterStringTextField.stringValue = currentSavedFilter!.filterString
-    editFilterKeyRecordView.currentRawKey = currentSavedFilter!.shortcutKey
+    editFilterKeyRecordView.currentKey = currentSavedFilter!.shortcutKey
     editFilterKeyRecordView.currentKeyModifiers = currentSavedFilter!.shortcutKeyModifiers
     editFilterKeyRecordViewLabel.stringValue = currentSavedFilter!.readableShortCutKey
     window!.beginSheet(editFilterSheet)
@@ -310,7 +310,8 @@ extension FilterWindowController: NSTableViewDelegate, NSTableViewDataSource {
 extension FilterWindowController: KeyRecordViewDelegate {
 
   func keyRecordView(_ view: KeyRecordView, recordedKeyDownWith event: NSEvent) {
-    (view == keyRecordView ? keyRecordViewLabel : editFilterKeyRecordViewLabel).stringValue = event.charactersIgnoringModifiers != nil ? event.readableKeyDescription.0 : ""
+    let readableMacKey = KeyCodeHelper.normalizedMacKeySequence(from: KeyCodeHelper.mpvKeyCode(from: event))
+    (view == keyRecordView ? keyRecordViewLabel : editFilterKeyRecordViewLabel).stringValue = readableMacKey
   }
 
 }
@@ -322,7 +323,7 @@ extension FilterWindowController {
     if let currentFilter = currentFilter {
       let filter = SavedFilter(name: saveFilterNameTextField.stringValue,
                                filterString: currentFilter.stringFormat,
-                               shortcutKey: keyRecordView.currentRawKey,
+                               shortcutKey: keyRecordView.currentKey,
                                modifiers: keyRecordView.currentKeyModifiers)
       savedFilters.append(filter)
       reloadTable()
@@ -339,8 +340,7 @@ extension FilterWindowController {
     if let currentFilter = currentSavedFilter {
       currentFilter.name = editFilterNameTextField.stringValue
       currentFilter.filterString = editFilterStringTextField.stringValue
-      // FIXME: shouldn't be shift-modified; should examine this carefully
-      currentFilter.shortcutKey = editFilterKeyRecordView.currentRawKey.lowercased()
+      currentFilter.shortcutKey = editFilterKeyRecordView.currentKey
       currentFilter.shortcutKeyModifiers = editFilterKeyRecordView.currentKeyModifiers
       reloadTable()
       syncSavedFilter()

@@ -11,12 +11,12 @@ import Cocoa
 class MainWindow: NSWindow {
   var forceKeyAndMain = false
 
-  override func cancelOperation(_ sender: Any?) {
-    let controller = windowController as! MainWindowController
-    if let kb = PlayerCore.keyBindings["ESC"] {
-      controller.handleKeyBinding(kb)
-    } else {
-      super.cancelOperation(sender)
+  override func keyDown(with event: NSEvent) {
+    // Forward all key events which the window receives to controller. This fixes:
+    // (a) ESC key not otherwise sent to window
+    // (b) window was not getting a chance to respond before main menu
+    if let controller = windowController as? MainWindowController {
+      controller.keyDown(with: event)
     }
   }
 

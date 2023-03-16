@@ -102,6 +102,7 @@ class JavascriptPlugin: NSObject {
   static private func loadPlugins() -> [JavascriptPlugin] {
     guard IINA_ENABLE_PLUGIN_SYSTEM else { return [] }
 
+    Logger.log("Reading plugins from directory \"\(Utility.pluginsURL)\"")
     guard let contents = try?
       FileManager.default.contentsOfDirectory(at: Utility.pluginsURL,
                                               includingPropertiesForKeys: [.isDirectoryKey],
@@ -126,11 +127,19 @@ class JavascriptPlugin: NSObject {
         let path = isDev ? path_.resolvingSymlinksInPath() : path_
         if let plugin = JavascriptPlugin(filename: path.lastPathComponent, externalURL: isDev ? path : nil) {
           if identifiers.contains(plugin.identifier) {
-            Utility.showAlert("duplicated_plugin_id", comment: nil, arguments: [plugin.identifier])
-            plugin.identifier += ".\(UUID().uuidString)"
+            Logger.log("Another plugin is already installed with identifier \"\(plugin.identifier)\"", level: .error)
+            // This code can run at startup and is called by the PlayerCore constructor during a static variable init.
+            // Launch the modal window in a new task so that it does not block and lock up the whole app.
+            DispatchQueue.main.async {
+              Utility.showAlert("duplicated_plugin_id", comment: nil, arguments: [plugin.identifier])
+              plugin.identifier += ".\(UUID().uuidString)"
+            }
           }
           identifiers.insert(plugin.identifier)
+          Logger.log("Finished loading plugin: \"\(plugin.identifier)\"")
           return plugin
+        } else {
+          Logger.log("Failed to load plugin: \"\(path)\"", level: .error)
         }
         return nil
       }
@@ -286,9 +295,9 @@ class JavascriptPlugin: NSObject {
   init?(filename: String, externalURL: URL? = nil) {
     // find package
     let url = externalURL ?? Utility.pluginsURL.appendingPathComponent(filename)
-    Logger.log("Loading JS plugin from \(url.path)")
+    Logger.log("Loading JS plugin from \"\(url.path)\"")
     guard url.isFileURL && url.isExistingDirectory else {
-      Logger.log("The plugin package doesn't exist.")
+      Logger.log("The plugin package doesn't exist.", level: .error)
       return nil
     }
 

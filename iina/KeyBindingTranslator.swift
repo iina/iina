@@ -34,6 +34,9 @@ class KeyBindingTranslator {
   static func readableCommand(fromAction action: [String], isIINACommand: Bool = false) -> String {
     var commands = action.filter { !KeyBindingTranslator.UnsupportedCmdPrefix.contains($0) }
     // Command
+    guard !commands.isEmpty else {
+      return ""
+    }
     let cmd = commands[0]
 
     // If is IINA command

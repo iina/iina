@@ -119,6 +119,10 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
+  var hasKeyboardFocus: Bool {
+    window?.isKeyWindow ?? false
+  }
+
   /** For mpv's `geometry` option. We cache the parsed structure
    so never need to parse it every time. */
   var cachedGeometry: GeometryDef?
@@ -820,7 +824,8 @@ class MainWindowController: PlayerWindowController {
   @discardableResult
   override func handleKeyBinding(_ keyBinding: KeyMapping) -> Bool {
     let success = super.handleKeyBinding(keyBinding)
-    if success && keyBinding.action.first! == MPVCommand.screenshot.rawValue {
+    // FIXME: find a better place to check for this
+    if success && keyBinding.action.first == MPVCommand.screenshot.rawValue {
       player.sendOSD(.screenshot)
     }
     return success
@@ -1119,6 +1124,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   func windowWillClose(_ notification: Notification) {
+    Logger.log("Window closing", subsystem: player.subsystem)
     shouldApplyInitialWindowSize = true
     // Close PIP
     if pipStatus == .inPIP {
@@ -2597,6 +2603,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   func showSettingsSidebar(tab: QuickSettingViewController.TabViewType? = nil, force: Bool = false, hideIfAlreadyShown: Bool = true) {
+    Logger.log("showSettingsSidebar(): tab=\(tab?.name ?? "nil"), force=\(force), hideIfAlreadyShown=\(hideIfAlreadyShown)")
     if !force && sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
       return  // do not interrput other actions while it is animating
     }
@@ -2715,7 +2722,7 @@ class MainWindowController: PlayerWindowController {
     case .toggleMusicMode:
       menuSwitchToMiniPlayer(.dummy)
     case .deleteCurrentFileHard:
-      menuActionHandler.menuDeleteCurrentFileHard(.dummy)
+      menuDeleteCurrentFileHard(.dummy)
     case .biggerWindow:
       let item = NSMenuItem()
       item.tag = 11

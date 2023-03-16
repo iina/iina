@@ -800,7 +800,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   @IBAction func searchOnlineAction(_ sender: AnyObject) {
-    mainWindow.menuActionHandler.menuFindOnlineSub(.dummy)
+    mainWindow.menuFindOnlineSub(.dummy)
   }
 
   @IBAction func subDelayChangedAction(_ sender: NSSlider) {

@@ -8,6 +8,15 @@
 
 import Cocoa
 
+infix operator %%
+
+extension Int {
+  /** Modulo operator. Swift's remainder operator (%) can return negative values, which is rarely what we want. */
+  static  func %% (_ left: Int, _ right: Int) -> Int {
+    return (left % right + right) % right
+  }
+}
+
 extension NSSlider {
   /** Returns the position of knob center by point */
   func knobPointPosition() -> CGFloat {
@@ -322,6 +331,25 @@ extension NSMutableAttributedString {
     self.addAttribute(.font, value: font, range: range)
     self.endEditing()
   }
+
+  // Adds the given attribute for the entire string
+  func addAttrib(_ key: NSAttributedString.Key, _ value: Any) {
+    self.addAttributes([key: value], range: NSRange(location: 0, length: self.length))
+  }
+
+  func addItalic(from font: NSFont?) {
+    if let italicFont = makeItalic(font) {
+      self.addAttrib(NSAttributedString.Key.font, italicFont)
+    }
+  }
+
+  private func makeItalic(_ font: NSFont?) -> NSFont? {
+    if let font = font {
+      let italicDescriptor: NSFontDescriptor = font.fontDescriptor.withSymbolicTraits(NSFontDescriptor.SymbolicTraits.italic)
+      return NSFont(descriptor: italicDescriptor, size: 0)
+    }
+    return nil
+  }
 }
 
 
@@ -457,6 +485,17 @@ extension CharacterSet {
 
 extension NSMenuItem {
   static let dummy = NSMenuItem(title: "Dummy", action: nil, keyEquivalent: "")
+
+  var menuPathDescription: String {
+    var ancestors: [String] = [self.title]
+    var parent = self.parent
+    while let parentItem = parent {
+      ancestors.append(parentItem.title)
+      parent = parentItem.parent
+    }
+    return ancestors.reversed().joined(separator: " → ")
+  }
+
 }
 
 

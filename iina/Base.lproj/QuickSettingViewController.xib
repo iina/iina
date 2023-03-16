@@ -943,7 +943,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="360" height="827"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="oVx-Sp-Lhl" userLabel="AudioTab Clip View">
                                             <rect key="frame" x="0.0" y="0.0" width="360" height="827"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="NZU-RD-Dm3" userLabel="AudioTab Flipped View" customClass="FlippedView" customModule="IINA" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="331" width="360" height="496"/>
@@ -969,7 +969,7 @@
                                                                     <rect key="frame" x="0.0" y="377" width="360" height="75"/>
                                                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="vgF-KN-yHf" userLabel="AudioTrackTable Clip View">
                                                                         <rect key="frame" x="0.0" y="0.0" width="360" height="75"/>
-                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
                                                                             <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" tableStyle="fullWidth" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="FLg-2m-Zaq" userLabel="AudioTrackTable Table View">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="360" height="75"/>
@@ -1582,8 +1582,8 @@
                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3kA-IY-poi" userLabel="SubtitlesTab Scroll View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="827"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="epy-wp-Ja5" userLabel="SubtitlesTab Clip View">
-                                            <rect key="frame" x="0.0" y="0.0" width="360" height="827"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="827"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="pm4-x9-WJ5" userLabel="SubtitlesTab Flipped CONTENT VIEW" customClass="FlippedView" customModule="IINA" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="-3" width="360" height="830"/>
@@ -1601,7 +1601,7 @@
                                                                     <rect key="frame" x="0.0" y="285" width="360" height="75"/>
                                                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="dJV-R0-O3M" userLabel="SubTable Clip View">
                                                                         <rect key="frame" x="0.0" y="0.0" width="360" height="75"/>
-                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
                                                                             <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" tableStyle="fullWidth" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="2vU-hm-gGB" userLabel="SubTable Table View">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="360" height="75"/>
@@ -1757,7 +1757,7 @@
                                                                     <rect key="frame" x="0.0" y="166" width="360" height="75"/>
                                                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="EKn-MX-Fao" userLabel="SecondarySub Clip View">
                                                                         <rect key="frame" x="0.0" y="0.0" width="360" height="75"/>
-                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
                                                                             <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" tableStyle="fullWidth" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="Jve-qX-Agy" userLabel="SecondarySub Table View">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="360" height="75"/>

@@ -39,8 +39,7 @@ class JavascriptAPIGlobalController: JavascriptAPI, JavascriptAPIGlobalControlle
   func createPlayerInstance(_ options: [String: Any]) -> Any {
     instanceCounter += 1
     // create the `PlayerCore` manually since it's managed directly by the plugin
-    let pc = PlayerCore()
-    pc.label = "\(instanceCounter)-\(pluginInstance.plugin.identifier)"
+    let pc = PlayerCore("\(instanceCounter)-\(pluginInstance.plugin.identifier)")
     pc.isManagedByPlugin = true
     pc.startMPV()
     if options["disableWindowAnimation"] as? Bool == true {

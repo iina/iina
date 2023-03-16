@@ -84,13 +84,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     return PreferenceWindowController(viewControllers: list)
   }()
 
+  // MARK: Other components
+
+  // Need to store these somewhere which isn't only inside a struct.
+  // Swift doesn't seem to count them as strong references
+  private let bindingTableStateManger: BindingTableStateManager = BindingTableState.manager
+  private let confTableStateManager: ConfTableStateManager = ConfTableState.manager
+
   @IBOutlet weak var menuController: MenuController!
 
   @IBOutlet weak var dockMenu: NSMenu!
 
   private func getReady() {
+    confTableStateManager.startUp()
     menuController.bindMenuItems()
-    PlayerCore.loadKeyBindings()
     isReady = true
   }
 
@@ -229,10 +236,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     Logger.log("App launched")
 
-    if !isReady {
-      getReady()
-    }
-
     // show alpha in color panels
     NSColorPanel.shared.showsAlpha = true
 
@@ -252,6 +255,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
         RemoteCommandController.setup()
         NowPlayingInfoManager.updateInfo(state: .unknown)
       }
+    }
+
+    if !isReady {
+      getReady()
     }
 
     // if have pending open request
@@ -401,7 +408,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       Logger.log("Timed out waiting for players to stop and shutdown", level: .warning)
       // For debugging list players that have not terminated.
       for player in PlayerCore.playerCores {
-        let label = player.label ?? "unlabeled"
+        let label = player.label
         if !player.isStopped {
           Logger.log("Player \(label) failed to stop", level: .warning)
         } else if !player.isShutdown {

@@ -577,11 +577,13 @@ extension BindingTableViewController: EditableTableViewDelegate {
     panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
     panel.beginSheetModal(for: tableView.window!) { respond in
       if respond == .alertFirstButtonReturn {
-        let rawKey = keyRecordViewController.keyCode
+        let enteredKey = keyRecordViewController.keyCode
         let readableAction = keyRecordViewController.action
         let rawAction: String
         let isIINACommand: Bool
 
+        // Do some processing on the entered values before returning:
+        let rawKey = KeyCodeHelper.escapeReservedMpvKeys(enteredKey)
         if let trimmedAction = KeyMapping.removeIINAPrefix(from: readableAction) {
           rawAction = trimmedAction
           isIINACommand = true

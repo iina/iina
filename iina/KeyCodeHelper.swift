@@ -255,6 +255,18 @@ class KeyCodeHelper {
     return utf8View.count == 1 && utf8View.first! > 32 && utf8View.first! < 127
   }
 
+  static func escapeReservedMpvKeys(_ keystrokesString: String) -> String {
+    // "#" and " " are not valid for `rawKey` because are reserved as tokens when parsing the conf file.
+    // Try to help the user out a little bit before rejecting
+    var keystrokes = keystrokesString.trimmingCharacters(in: .whitespaces)
+    if keystrokes == " " {
+      keystrokes = "SPACE"
+    } else if keystrokes == "#" {
+      keystrokes = "SHARP"
+    }
+    return keystrokes
+  }
+
   static func mpvKeyCode(from event: NSEvent) -> String {
     var keyString = ""
     let keyChar: String

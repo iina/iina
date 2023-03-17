@@ -149,8 +149,8 @@ class PlayerInputConfig {
       log("Event could not be translated; ignoring: \(keyDownEvent)")
       return nil
     }
-
-    return matchShortestKeySequence(endingWith: keySequence)
+    let normalizedKeySequence = KeyCodeHelper.normalizeMpv(keySequence)
+    return matchShortestKeySequence(endingWith: normalizedKeySequence)
   }
 
   // Try to match key sequences, up to 4 keystrokes. shortest match wins

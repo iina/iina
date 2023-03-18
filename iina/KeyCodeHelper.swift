@@ -288,8 +288,8 @@ class KeyCodeHelper {
     if let char = event.charactersIgnoringModifiers, isPrintable(char) {
       // Is a classic ASCII printable char.
       keyChar = char
-      // The char in `charactersIgnoringModifiers` will be either uppercase or lowercase,
-      // so remove the redundant modifier flag so we don't print an extra "SHIFT+"
+      /// The char in `charactersIgnoringModifiers` will be either uppercase or lowercase,
+      /// so remove the redundant modifier flag so we don't print an extra "SHIFT+"
       modifiers.remove(.shift)
     } else {
       // Is probably an unprintable char such as KP_ENTER.
@@ -299,8 +299,7 @@ class KeyCodeHelper {
       }
       keyChar = keyName.0
     }
-    // modifiers
-    // the same order as `KeyCodeHelper.modifiersInOrder`
+    /// Modifiers: use the same order as `KeyCodeHelper.modifiersInOrder`
     if modifiers.contains(.control) {
       keyString += "\(CTRL_KEY)+"
     }
@@ -318,15 +317,17 @@ class KeyCodeHelper {
     return keyString
   }
 
-  /// Normalizes a single "press" of possibly multiple keys (as joined with '+')
-  /// _Examples:
-  /// Ex01: "Shift+-" → "_"
-  /// Ex02: "Shift+=" → "PLUS"
-  /// Ex03: "+-+" → "PLUS-PLUS"
-  /// Ex04: "meta+shift+k" → "Meta+K"
-  /// Ex05: "esc" → "ESC"
-  /// Ex06: "CTRL+SHIFT+SHIFT+SHIFT+x" → "Ctrl+X"
-  /// _
+  /**
+   Normalizes a single "press" of possibly multiple keys (as joined with '+').
+
+   _Examples: {raw}  → {normalized}_
+   1. "Shift+-" → "_"
+   2. "Shift+=" → "PLUS"
+   3. "Meta+Alt+X" → "Alt+Meta+X"
+   4. "meta+shift+k" → "Meta+K"
+   5. "esc" → "ESC"
+   6. "CTRL+SHIFT+SHIFT+SHIFT+x" → "Ctrl+X"
+   */
   private static func normalizeSingleMpvKeystroke(_ mpvKeystroke: String) -> String {
     if mpvKeystroke == "+" {
       return "PLUS"
@@ -373,7 +374,7 @@ class KeyCodeHelper {
     return normalizedList.joined(separator: "+")
   }
 
-  /*
+  /**
    Several forms for the same keystroke are accepted by mpv. This ensures that it is reduced to a single standardized form
    (such that it can be used in a set or map, and which matches what `mpvKeyCode()` returns).
 
@@ -417,10 +418,10 @@ class KeyCodeHelper {
     return normalizeSingleMpvKeystroke(mpvKeystrokes)
   }
 
-  // Converts an mpv-formatted key string to a (key, modifiers) pair suitable for assignment to a MacOS menu item.
-  // IMPORTANT: `mpvKeyCode` must be normalized first! Use `KeyCodeHelper.normalizeMpv()`.
-  static func macOSKeyEquivalent(from mpvKeyCode: String, usePrintableKeyName: Bool = false) -> (key: String, modifiers: NSEvent.ModifierFlags)? {
-    let splitted = mpvKeyCode.components(separatedBy: "+")
+  /** Converts an mpv-formatted key string to a (key, modifiers) pair suitable for assignment to a MacOS menu item.
+   IMPORTANT: `normalizedMpvKey` must be normalized first! Use `KeyCodeHelper.normalizeMpv()`. */
+  static func macOSKeyEquivalent(from normalizedMpvKey: String, usePrintableKeyName: Bool = false) -> (key: String, modifiers: NSEvent.ModifierFlags)? {
+    let splitted = normalizedMpvKey.components(separatedBy: "+")
     var key: String
     var modifiers: NSEvent.ModifierFlags = []
     guard !splitted.isEmpty else { return nil }

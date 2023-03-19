@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,7 +16,7 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="500" height="60"/>
+            <rect key="frame" x="0.0" y="0.0" width="562" height="60"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EC9-NQ-gwl">
                     <rect key="frame" x="24" y="43" width="34" height="17"/>
@@ -30,7 +30,7 @@
                     </textFieldCell>
                 </textField>
                 <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yrf-Aq-Gy6">
-                    <rect key="frame" x="22" y="14" width="284" height="24"/>
+                    <rect key="frame" x="22" y="13" width="284" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="daU-3D-oN9"/>
                         <constraint firstAttribute="width" constant="280" id="qxp-bm-iSs"/>
@@ -56,13 +56,13 @@
                         <constraint firstAttribute="height" constant="14" id="8Hk-sR-8dp"/>
                     </constraints>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="Fgl-Cs-eEh">
-                        <font key="font" metaFont="smallSystem"/>
+                        <font key="font" metaFont="controlContent" size="11"/>
                         <color key="textColor" name="linkColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sHe-JW-Elk">
-                    <rect key="frame" x="410" y="11" width="72" height="29"/>
+                    <rect key="frame" x="472" y="9" width="72" height="29"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="18" id="Pt7-22-dpN"/>
                     </constraints>
@@ -75,7 +75,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="99r-Th-YSz">
-                    <rect key="frame" x="335" y="11" width="82" height="29"/>
+                    <rect key="frame" x="397" y="9" width="82" height="29"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="18" id="IaY-oN-WAf"/>
                     </constraints>
@@ -90,20 +90,38 @@ Gw
                         <action selector="cancelBtnAction:" target="-2" id="L9R-GV-vYv"/>
                     </connections>
                 </button>
+                <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7a4-Wz-kzd">
+                    <rect key="frame" x="312" y="15" width="58" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="58" id="pNn-1d-GJj"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="fmj-Zk-xbC" customClass="RoundedTextFieldCell" customModule="IINA" customModuleProvider="target">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <action selector="customCropEditFinishedAction:" target="-2" id="jUD-og-uJc"/>
+                    </connections>
+                </textField>
             </subviews>
             <constraints>
+                <constraint firstItem="7a4-Wz-kzd" firstAttribute="leading" secondItem="yrf-Aq-Gy6" secondAttribute="trailing" constant="8" id="Aza-sO-BYU"/>
                 <constraint firstItem="99r-Th-YSz" firstAttribute="centerY" secondItem="sHe-JW-Elk" secondAttribute="centerY" id="CYO-k8-qKy"/>
-                <constraint firstItem="99r-Th-YSz" firstAttribute="baseline" secondItem="yrf-Aq-Gy6" secondAttribute="baseline" id="FSv-Cr-xkP"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hsz-Wv-zHe" secondAttribute="trailing" constant="20" symbolic="YES" id="Dxo-1Y-Hzp"/>
+                <constraint firstItem="99r-Th-YSz" firstAttribute="baseline" secondItem="yrf-Aq-Gy6" secondAttribute="baseline" constant="-1" id="FSv-Cr-xkP"/>
                 <constraint firstItem="hsz-Wv-zHe" firstAttribute="leading" secondItem="EC9-NQ-gwl" secondAttribute="trailing" constant="10" id="FVG-qD-NKx"/>
                 <constraint firstItem="yrf-Aq-Gy6" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="24" id="Gnw-C5-HOK"/>
                 <constraint firstItem="sHe-JW-Elk" firstAttribute="leading" secondItem="99r-Th-YSz" secondAttribute="trailing" constant="5" id="KrU-2L-Jcb"/>
+                <constraint firstItem="7a4-Wz-kzd" firstAttribute="firstBaseline" secondItem="yrf-Aq-Gy6" secondAttribute="firstBaseline" id="Mat-W7-zg3"/>
+                <constraint firstAttribute="bottom" secondItem="sHe-JW-Elk" secondAttribute="bottom" constant="16" id="Vhh-Eo-0kw"/>
                 <constraint firstItem="EC9-NQ-gwl" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="a0X-o8-wnM"/>
                 <constraint firstAttribute="trailing" secondItem="sHe-JW-Elk" secondAttribute="trailing" constant="24" id="b0k-Ij-6vn"/>
                 <constraint firstItem="hsz-Wv-zHe" firstAttribute="baseline" secondItem="EC9-NQ-gwl" secondAttribute="baseline" id="bwy-R7-vsC"/>
                 <constraint firstItem="EC9-NQ-gwl" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="26" id="gic-Fg-ZHv"/>
-                <constraint firstAttribute="bottom" secondItem="yrf-Aq-Gy6" secondAttribute="bottom" constant="16" id="ugR-VB-Oeh"/>
+                <constraint firstItem="99r-Th-YSz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7a4-Wz-kzd" secondAttribute="trailing" constant="8" symbolic="YES" id="jRv-Ug-qJM"/>
             </constraints>
-            <point key="canvasLocation" x="73" y="121"/>
+            <point key="canvasLocation" x="104" y="121"/>
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="TVN-ds-Qtr"/>
     </objects>

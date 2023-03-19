@@ -668,10 +668,17 @@ class PlayerCore: NSObject {
   }
 
   func frameStep(backwards: Bool) {
+    // When playback is paused the display link is stopped in order to avoid wasting energy on
+    // It must be running when stepping to avoid slowdowns caused by mpv waiting for IINA to call
+    // mpv_render_report_swap.
+    mainWindow.videoView.displayActive()
     if backwards {
       mpv.command(.frameBackStep)
     } else {
       mpv.command(.frameStep)
+    }
+    if info.isPaused {
+      mainWindow.videoView.displayIdle()
     }
   }
 

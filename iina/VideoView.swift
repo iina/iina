@@ -39,6 +39,8 @@ class VideoView: NSView {
 
   var pendingRedrawsAfterEnteringPIP = 0;
 
+  private var displayIdleTimer: Timer?
+
   lazy var hdrSubsystem = Logger.Subsystem(rawValue: "hdr")
 
   // MARK: - Attributes
@@ -203,6 +205,7 @@ class VideoView: NSView {
     guard let link = link else {
       Logger.fatal("Cannot Create display link!")
     }
+    guard !CVDisplayLinkIsRunning(link) else { return }
     updateDisplayLink()
     CVDisplayLinkSetOutputCallback(link, displayLinkCallback, mutableRawPointerOf(obj: player.mpv))
     CVDisplayLinkStart(link)
@@ -248,6 +251,38 @@ class VideoView: NSView {
       refreshEdrMode()
     } else {
       setICCProfile(displayId)
+    }
+  }
+
+  // MARK: - Reducing Energy Use
+
+  /// Starts the display link if it has been stopped in order to save energy.
+  func displayActive() {
+    displayIdleTimer?.invalidate()
+    startDisplayLink()
+  }
+
+  /// Reduces energy consumption when the display link does not need to be running.
+  ///
+  /// Adherence to energy efficiency best practices requires that IINA be absolutely idle when there is no reason to be performing any
+  /// processing, such as when playback is paused. The [CVDisplayLink](https://developer.apple.com/documentation/corevideo/cvdisplaylink-k0k)
+  /// is a high-priority thread that runs at the refresh rate of a display. If the display is not being updated it is desirable to stop the
+  /// display link in order to not waste energy on needless processing.
+  ///
+  /// However, IINA will pause playback for short intervals when performing certain operations. In such cases it does not make sense to
+  /// shutdown the display link only to have to immediately start it again. To avoid this a `Timer` is used to delay shutting down the
+  /// display link. If playback becomes active again before the timer has fired then the `Timer` will be invalidated and the display link
+  /// will not be shutdown.
+  ///
+  /// - Note: In addition to playback the display link must be running for operations such seeking, stepping and entering and leaving
+  ///         full screen mode.
+  func displayIdle() {
+    displayIdleTimer?.invalidate()
+    // The time of 3 seconds is somewhat arbitrary. As mpv does not provide an event indicating a
+    // frame step has completed it must not be too short or will catch mpv still drawing when
+    // stepping.
+    displayIdleTimer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
+      self.stopDisplayLink()
     }
   }
 

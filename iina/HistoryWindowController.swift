@@ -188,9 +188,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   func outlineView(_ outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
     if let entry = item as? PlaybackHistory {
       if tableColumn?.identifier == .time {
-        return groupBy == .lastPlayed ?
-          DateFormatter.localizedString(from: entry.addedDate, dateStyle: .none, timeStyle: .short) :
-          DateFormatter.localizedString(from: entry.addedDate, dateStyle: .short, timeStyle: .short)
+        return getTimeString(from: entry)
       } else if tableColumn?.identifier == .progress {
         return entry.duration.stringRepresentation
       }
@@ -200,19 +198,18 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
     if let identifier = tableColumn?.identifier {
-      let view = outlineView.makeView(withIdentifier: identifier, owner: nil)
+      guard let cell: NSTableCellView = outlineView.makeView(withIdentifier: identifier, owner: nil) as? NSTableCellView else { return nil }
+      guard let entry = item as? PlaybackHistory else { return cell }
       if identifier == .filename {
         // Filename cell
-        let entry = item as! PlaybackHistory
-        let filenameView = (view as! HistoryFilenameCellView)
+        let filenameView = cell as! HistoryFilenameCellView
         let fileExists = !entry.url.isFileURL || FileManager.default.fileExists(atPath: entry.url.path)
         filenameView.textField?.stringValue = entry.url.isFileURL ? entry.name : entry.url.absoluteString
         filenameView.textField?.textColor = fileExists ? .controlTextColor : .disabledControlTextColor
         filenameView.docImage.image = NSWorkspace.shared.icon(forFileType: entry.url.pathExtension)
       } else if identifier == .progress {
         // Progress cell
-        let entry = item as! PlaybackHistory
-        let progressView = (view as! HistoryProgressCellView)
+        let progressView = cell as! HistoryProgressCellView
         // Do not animate! Causes unneeded slowdown
         progressView.indicator.usesThreadedAnimation = false
         if let progress = entry.mpvProgress {
@@ -223,12 +220,39 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
           progressView.textField?.stringValue = ""
           progressView.indicator.isHidden = true
         }
+      } else if identifier == .time {
+        let timeString = getTimeString(from: entry)
+        setMonospacedText(cell, timeString)
       }
-      return view
+      return cell
     } else {
       // group columns
       return outlineView.makeView(withIdentifier: .group, owner: nil)
     }
+  }
+
+  private func getTimeString(from entry: PlaybackHistory) -> String {
+    if groupBy == .lastPlayed {
+      return DateFormatter.localizedString(from: entry.addedDate, dateStyle: .none, timeStyle: .short)
+    } else {
+      return DateFormatter.localizedString(from: entry.addedDate, dateStyle: .short, timeStyle: .short)
+    }
+  }
+
+  private func setMonospacedText(_ cell: NSTableCellView, _ stringValue: String) {
+    guard let textField = cell.textField else { return }
+
+    let font: NSFont
+    if #available(macOS 10.15, *) {
+      font = NSFont.monospacedSystemFont(ofSize: NSFont.systemFontSize, weight: .regular)
+    } else if let fixedPitchFont = NSFont.userFixedPitchFont(ofSize: NSFont.systemFontSize) {
+      font = fixedPitchFont
+    } else {
+      return
+    }
+    let attrString = NSMutableAttributedString(string: stringValue)
+    attrString.addAttrib(.font, font)
+    textField.attributedStringValue = attrString
   }
 
   // MARK: - Searching

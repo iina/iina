@@ -322,6 +322,11 @@ extension NSMutableAttributedString {
     self.addAttribute(.font, value: font, range: range)
     self.endEditing()
   }
+
+  // Adds the given attribute for the entire string
+  func addAttrib(_ key: NSAttributedString.Key, _ value: Any) {
+    self.addAttributes([key: value], range: NSRange(location: 0, length: self.length))
+  }
 }
 
 

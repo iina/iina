@@ -91,8 +91,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   var observers: [NSObjectProtocol] = []
 
-  @IBOutlet weak var videoTabScrollView: NSScrollView!
-  @IBOutlet weak var videoTabContentViewWidthConstraint: NSLayoutConstraint!
+  @IBOutlet weak var tabHeightConstraint: NSLayoutConstraint!
 
   @IBOutlet weak var videoTabBtn: NSButton!
   @IBOutlet weak var audioTabBtn: NSButton!
@@ -170,12 +169,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   private var pluginTabsStackView: NSStackView!
   private var pluginTabs: [String: SidebarTabView] = [:]
 
-  var downShift: CGFloat = 0 {
-    didSet {
-      buttonTopConstraint.constant = downShift
-    }
-  }
-
   override func viewDidLoad() {
     super.viewDidLoad()
     withAllTableViews { (view, _) in
@@ -183,6 +176,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       view.dataSource = self
       view.superview?.superview?.layer?.cornerRadius = 4
     }
+
+    buttonTopConstraint.constant = mainWindow.sidebarSeparatorOffsetFromTop - tabHeightConstraint.constant
 
     // colors
     if #available(macOS 10.14, *) {

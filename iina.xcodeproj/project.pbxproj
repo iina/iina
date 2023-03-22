@@ -45,7 +45,6 @@
 		840D47A01DFEFC49000D9A64 /* KeyRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D479F1DFEFC49000D9A64 /* KeyRecordView.swift */; };
 		8418A2F5213F5791003166AC /* OpenURLWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8418A2F7213F5791003166AC /* OpenURLWindowController.xib */; };
 		841A599D1E1FF5800079E177 /* SleepPreventer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841A599C1E1FF5800079E177 /* SleepPreventer.swift */; };
-		841B14281E941DFF00744AB8 /* TimeLabelOverflowedStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B14271E941DFF00744AB8 /* TimeLabelOverflowedStackView.swift */; };
 		842904E21F0EC01600478376 /* AutoFileMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842904E11F0EC01600478376 /* AutoFileMatcher.swift */; };
 		842F55A51EA17E7E0081D475 /* IINACommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842F55A41EA17E7E0081D475 /* IINACommand.swift */; };
 		8434BAA71D5DF2DA003BECF2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8434BAA61D5DF2DA003BECF2 /* Extensions.swift */; };
@@ -120,7 +119,6 @@
 		84BEEC3F1DFEDE2F00F945CA /* PrefKeyBindingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BEEC3D1DFEDE2F00F945CA /* PrefKeyBindingViewController.swift */; };
 		84BEEC421DFEE46200F945CA /* StreamReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BEEC411DFEE46200F945CA /* StreamReader.swift */; };
 		84C3AB8B1E7BF22300FEFB7A /* MPVCommandFormat.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84C3AB8A1E7BF22300FEFB7A /* MPVCommandFormat.strings */; };
-		84C644601E92BA2700B1410B /* TimeLabelOverflowedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6445F1E92BA2700B1410B /* TimeLabelOverflowedView.swift */; };
 		84C6D3621EAF8D63009BF721 /* HistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6D3611EAF8D63009BF721 /* HistoryController.swift */; };
 		84C6D3641EB276E9009BF721 /* PlaybackHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6D3631EB276E9009BF721 /* PlaybackHistory.swift */; };
 		84C6D3671EB2A427009BF721 /* HistoryWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6D3651EB2A427009BF721 /* HistoryWindowController.swift */; };
@@ -1039,7 +1037,6 @@
 		8418A2F6213F5791003166AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/OpenURLWindowController.xib; sourceTree = "<group>"; };
 		8418A2F8213F5794003166AC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/OpenURLWindowController.strings"; sourceTree = "<group>"; };
 		841A599C1E1FF5800079E177 /* SleepPreventer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SleepPreventer.swift; sourceTree = "<group>"; };
-		841B14271E941DFF00744AB8 /* TimeLabelOverflowedStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLabelOverflowedStackView.swift; sourceTree = "<group>"; };
 		842904E11F0EC01600478376 /* AutoFileMatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoFileMatcher.swift; sourceTree = "<group>"; };
 		842F55A41EA17E7E0081D475 /* IINACommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IINACommand.swift; sourceTree = "<group>"; };
 		8434BAA61D5DF2DA003BECF2 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -1287,7 +1284,6 @@
 		84C21A891F8996F000AD5B64 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/FilterPresets.strings; sourceTree = "<group>"; };
 		84C21A8A1F8996F000AD5B64 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/KeyBinding.strings; sourceTree = "<group>"; };
 		84C3AB8A1E7BF22300FEFB7A /* MPVCommandFormat.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = MPVCommandFormat.strings; sourceTree = "<group>"; };
-		84C6445F1E92BA2700B1410B /* TimeLabelOverflowedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLabelOverflowedView.swift; sourceTree = "<group>"; };
 		84C6D3611EAF8D63009BF721 /* HistoryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryController.swift; sourceTree = "<group>"; };
 		84C6D3631EB276E9009BF721 /* PlaybackHistory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackHistory.swift; sourceTree = "<group>"; };
 		84C6D3651EB2A427009BF721 /* HistoryWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryWindowController.swift; sourceTree = "<group>"; };
@@ -2363,8 +2359,6 @@
 				84817C971DBDCE4300CC2279 /* RoundedColorWell.swift */,
 				84AABE921DBFAF1A00D138FD /* FontPickerWindowController.swift */,
 				8400D5DD1E1AB326006785F5 /* FontPickerWindowController.xib */,
-				84C6445F1E92BA2700B1410B /* TimeLabelOverflowedView.swift */,
-				841B14271E941DFF00744AB8 /* TimeLabelOverflowedStackView.swift */,
 				840D479F1DFEFC49000D9A64 /* KeyRecordView.swift */,
 				E322A4F720A8442E00C67D32 /* PlaylistPlaybackProgressView.swift */,
 				845E70B1210CB59D00D06C42 /* ScrollingTextField.swift */,
@@ -2824,7 +2818,6 @@
 				84A09A0E1F2DF596000FF343 /* MiniPlayerWindowController.swift in Sources */,
 				84BEEC421DFEE46200F945CA /* StreamReader.swift in Sources */,
 				E3CAD4AF2146DB47000B373A /* JavascriptAPI.swift in Sources */,
-				84C644601E92BA2700B1410B /* TimeLabelOverflowedView.swift in Sources */,
 				E3958565253133E80096811F /* SidebarTabView.swift in Sources */,
 				E3C12F6B201F281F00297964 /* FirstRunManager.swift in Sources */,
 				84EB1F071D2F5E76004FA5A1 /* Utility.swift in Sources */,
@@ -2933,7 +2926,6 @@
 				845404AC1E43980900B02B12 /* LuaScript.swift in Sources */,
 				E35306F42147F78D008FE492 /* JavascriptAPICore.swift in Sources */,
 				847557141F405F8C0006B0FF /* MainWindowMenuActions.swift in Sources */,
-				841B14281E941DFF00744AB8 /* TimeLabelOverflowedStackView.swift in Sources */,
 				E33BA5C7204BD9FE0069A0F6 /* SubChooseViewController.swift in Sources */,
 				8460FBA91D6497490081841B /* PlaylistViewController.swift in Sources */,
 				8450404A1E0B13230079C194 /* CropBoxView.swift in Sources */,

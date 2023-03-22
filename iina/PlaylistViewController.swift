@@ -77,16 +77,15 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   private var playlistTotalLengthIsReady = false
   private var playlistTotalLength: Double? = nil
 
-  var downShift: CGFloat = 0 {
+  var useCompactTabHeight = false {
     didSet {
-      buttonTopConstraint.constant = downShift
+      updateTabHeightAndDownshift()
     }
   }
 
-  var useCompactTabHeight = false {
-    didSet {
-      tabHeightConstraint.constant = useCompactTabHeight ? 32 : 48
-    }
+  private func updateTabHeightAndDownshift() {
+    tabHeightConstraint.constant = useCompactTabHeight ? 32 : 48
+    buttonTopConstraint.constant = mainWindow.sidebarSeparatorOffsetFromTop - tabHeightConstraint.constant
   }
 
   override func viewDidLoad() {
@@ -95,6 +94,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       view.dataSource = self
     }
     playlistTableView.menu?.delegate = self
+
+    updateTabHeightAndDownshift()
 
     [deleteBtn, loopBtn, shuffleBtn].forEach {
       $0?.image?.isTemplate = true

@@ -236,7 +236,7 @@
                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Esj-ym-AE9">
                                                             <rect key="frame" x="2" y="1" width="62" height="16"/>
                                                             <textFieldCell key="cell" controlSize="large" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" title="00:00 AM" id="z9u-td-fQW">
-                                                                <font key="font" metaFont="system"/>
+                                                                <font key="font" size="13" name="Menlo-Regular"/>
                                                                 <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>

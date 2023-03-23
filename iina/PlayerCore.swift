@@ -138,6 +138,9 @@ class PlayerCore: NSObject {
   /// Whether shutdown of this player has completed (mpv has shutdown).
   var isShutdown = false
 
+  /// Whether stopping of this player has been initiated.
+  var isStopping = false
+
   /// Whether mpv playback has stopped and the media has been unloaded.
   var isStopped = true
 
@@ -590,6 +593,7 @@ class PlayerCore: NSObject {
     // initiated directly through mpv.
     guard !isStopped else { return }
     Logger.log("Stopping playback", subsystem: subsystem)
+    isStopping = true
     mpv.command(.stop)
   }
 
@@ -600,6 +604,11 @@ class PlayerCore: NSObject {
   func playbackStopped() {
     Logger.log("Playback has stopped", subsystem: subsystem)
     isStopped = true
+    isStopping = false
+    // Must clear audio and video filters or they will be applied to the next video if this core is
+    // reused.
+    mpv.command(.af, args: ["clr", ""], checkError: false)
+    mpv.command(.vf, args: ["clr", ""], checkError: false)
     postNotification(.iinaPlayerStopped)
   }
 
@@ -1392,6 +1401,7 @@ class PlayerCore: NSObject {
     triedUsingExactSeekForCurrentFile = false
     info.fileLoading = false
     info.haveDownloadedSub = false
+    isStopping = false
     isStopped = false
     checkUnsyncedWindowOptions()
     // generate thumbnails if window has loaded video

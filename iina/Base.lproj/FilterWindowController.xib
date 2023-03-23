@@ -8,6 +8,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="FilterWindowController" customModule="IINA" customModuleProvider="target">
             <connections>
+                <outlet property="addButton" destination="La1-eJ-8B2" id="R96-ah-Qy4"/>
                 <outlet property="currentFiltersTableView" destination="iTp-t4-bao" id="kgR-wA-2qY"/>
                 <outlet property="editFilterKeyRecordView" destination="dAY-w3-zCx" id="45M-ij-r6G"/>
                 <outlet property="editFilterKeyRecordViewLabel" destination="B5v-za-vBd" id="8JH-aQ-LQH"/>

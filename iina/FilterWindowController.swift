@@ -34,6 +34,7 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var editFilterKeyRecordView: KeyRecordView!
   @IBOutlet weak var editFilterKeyRecordViewLabel: NSTextField!
   @IBOutlet weak var removeButton: NSButton!
+  @IBOutlet weak var addButton: NSButton!
 
   var loaded = false
 
@@ -60,7 +61,7 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
     splitView.setPosition(splitView.frame.height - 140, ofDividerAt: 0)
 
     savedFilters = (Preference.array(for: filterType == MPVProperty.af ? .savedAudioFilters : .savedVideoFilters) ?? []).compactMap(SavedFilter.init(dict:))
-    filters = PlayerCore.active.mpv.getFilters(filterType)
+    filters = PlayerCore.lastActive.mpv.getFilters(filterType)
     currentFiltersTableView.reloadData()
     savedFiltersTableView.reloadData()
 
@@ -84,7 +85,13 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
 
   @objc
   func reloadTable() {
-    filters = PlayerCore.active.mpv.getFilters(filterType)
+    let pc = PlayerCore.lastActive
+    // When IINA is terminating player windows are closed, which causes the iinaMainWindowChanged
+    // notification to be posted and that results in the observer established above calling this
+    // method. Thus this method may be called after IINA has commanded mpv to shutdown. Once mpv has
+    // been told to shutdown mpv APIs must not be called as it can trigger a crash in mpv.
+    guard !pc.isShuttingDown, !pc.isShutdown else { return }
+    filters = pc.mpv.getFilters(filterType)
     filterIsSaved = [Bool](repeatElement(false, count: filters.count))
     savedFilters.forEach { savedFilter in
       if let asObject = MPVFilter(rawString: savedFilter.filterString),
@@ -97,10 +104,13 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
     }
     currentFiltersTableView.reloadData()
     savedFiltersTableView.reloadData()
+    // Once a player window is being closed the user must not be allowed to add a filter to the
+    // active player core if it is being stopped and about to be added to the player core cache.
+    addButton.isEnabled = !pc.isStopping && !pc.isStopped
   }
 
   func setFilters() {
-    PlayerCore.active.mpv.setFilters(filterType, filters: filters)
+    PlayerCore.lastActive.mpv.setFilters(filterType, filters: filters)
   }
 
   deinit {
@@ -109,12 +119,12 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
 
   func addFilter(_ filter: MPVFilter) -> Bool {
     if filterType == MPVProperty.vf {
-      guard PlayerCore.active.addVideoFilter(filter) else {
+      guard PlayerCore.lastActive.addVideoFilter(filter) else {
         Utility.showAlert("filter.incorrect", sheetWindow: window)
         return false
       }
     } else {
-      guard PlayerCore.active.addAudioFilter(filter) else {
+      guard PlayerCore.lastActive.addAudioFilter(filter) else {
         Utility.showAlert("filter.incorrect", sheetWindow: window)
         return false
       }
@@ -160,7 +170,7 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
   }
 
   @IBAction func removeFilterAction(_ sender: Any) {
-    let pc = PlayerCore.active
+    let pc = PlayerCore.lastActive
     let selectedRow = currentFiltersTableView.selectedRow
     if selectedRow >= 0 {
       let success: Bool
@@ -190,7 +200,7 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
   @IBAction func toggleSavedFilterAction(_ sender: NSButton) {
     let row = savedFiltersTableView.row(for: sender)
     let savedFilter = savedFilters[row]
-    let pc = PlayerCore.active
+    let pc = PlayerCore.lastActive
 
     // choose appropriate add/remove functions for .af/.vf
     var addFilterFunction: (String) -> Bool
@@ -503,7 +513,7 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
     }
     // create filter
     if filterWindow.addFilter(preset.transformer(instance)) {
-      PlayerCore.active.sendOSD(.addFilter(preset.localizedName))
+      PlayerCore.lastActive.sendOSD(.addFilter(preset.localizedName))
     }
   }
 

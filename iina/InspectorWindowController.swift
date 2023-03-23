@@ -260,7 +260,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
     if identifier == .key {
       return property
     } else if identifier == .value {
-      return PlayerCore.active.mpv.getString(property) ?? "<Error>"
+      return PlayerCore.lastActive.mpv.getString(property) ?? "<Error>"
     }
     return ""
   }

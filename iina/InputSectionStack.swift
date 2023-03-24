@@ -141,15 +141,15 @@ class InputSectionStack {
       var isExclusive = false
       for flag in flags {
         switch flag {
-          case "allow-hide-cursor", "allow-vo-dragging":
-            // Ignore
-            break
-          case "exclusive":
-            isExclusive = true
-            log("Enabling exclusive section: \(sectionName.quoted)")
-            break
-          default:
-            log("Found unexpected flag \(flag.quoted) when enabling input section \(sectionName.quoted)", level: .error)
+        case "allow-hide-cursor", "allow-vo-dragging":
+          // Ignore
+          break
+        case "exclusive":
+          isExclusive = true
+          log("Enabling exclusive section: \(sectionName.quoted)")
+          break
+        default:
+          log("Found unexpected flag \(flag.quoted) when enabling input section \(sectionName.quoted)", level: .error)
         }
       }
 

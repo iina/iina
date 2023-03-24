@@ -146,58 +146,58 @@ extension BindingTableViewController: NSTableViewDelegate {
     let columnName = identifier.rawValue
 
     switch columnName {
-      case "keyColumn":
-        let stringValue = bindingRow.getKeyColumnDisplay(raw: isRaw)
-        setFormattedText(for: cell, to: stringValue, isEnabled: bindingRow.isEnabled, origin: bindingRow.origin)
-        return cell
+    case "keyColumn":
+      let stringValue = bindingRow.getKeyColumnDisplay(raw: isRaw)
+      setFormattedText(for: cell, to: stringValue, isEnabled: bindingRow.isEnabled, origin: bindingRow.origin)
+      return cell
 
-      case "actionColumn":
-        let stringValue = bindingRow.getActionColumnDisplay(raw: isRaw)
-        setFormattedText(for: cell, to: stringValue, isEnabled: bindingRow.isEnabled, origin: bindingRow.origin, italic: !bindingRow.canBeModified)
-        return cell
+    case "actionColumn":
+      let stringValue = bindingRow.getActionColumnDisplay(raw: isRaw)
+      setFormattedText(for: cell, to: stringValue, isEnabled: bindingRow.isEnabled, origin: bindingRow.origin, italic: !bindingRow.canBeModified)
+      return cell
 
-      case "statusColumn":
-        cell.toolTip = bindingRow.displayMessage
+    case "statusColumn":
+      cell.toolTip = bindingRow.displayMessage
 
-        if let imageView: NSImageView = cell.imageView {
-          if #available(macOS 11.0, *) {
-            imageView.isHidden = false
+      if let imageView: NSImageView = cell.imageView {
+        if #available(macOS 11.0, *) {
+          imageView.isHidden = false
 
-            if !bindingRow.isEnabled {
-              imageView.image = NSImage(systemSymbolName: "exclamationmark.circle", accessibilityDescription: nil)!
-              imageView.contentTintColor = NSColor.systemRed
-              return cell
-            }
-
-            switch bindingRow.origin {
-              case .iinaPlugin:
-                imageView.image = NSImage(systemSymbolName: "powerplug.fill", accessibilityDescription: nil)!
-                imageView.contentTintColor = pluginIconColor
-              case .libmpv:
-                imageView.image = NSImage(systemSymbolName: "applescript.fill", accessibilityDescription: nil)!
-                imageView.contentTintColor = libmpvIconColor
-              case .savedFilter:
-                imageView.image = NSImage(systemSymbolName: "camera.filters", accessibilityDescription: nil)!
-                imageView.contentTintColor = filterIconColor
-              default:
-                if bindingRow.menuItem != nil {
-                  imageView.image = NSImage(systemSymbolName: "menubar.rectangle", accessibilityDescription: nil)!
-                } else {
-                  imageView.image = nil
-                }
-                imageView.contentTintColor = NSColor.controlTextColor
-            }
-          } else {
-            // FIXME: find icons to use so that all versions are supported
-            imageView.isHidden = true
+          if !bindingRow.isEnabled {
+            imageView.image = NSImage(systemSymbolName: "exclamationmark.circle", accessibilityDescription: nil)!
+            imageView.contentTintColor = NSColor.systemRed
+            return cell
           }
+
+          switch bindingRow.origin {
+          case .iinaPlugin:
+            imageView.image = NSImage(systemSymbolName: "powerplug.fill", accessibilityDescription: nil)!
+            imageView.contentTintColor = pluginIconColor
+          case .libmpv:
+            imageView.image = NSImage(systemSymbolName: "applescript.fill", accessibilityDescription: nil)!
+            imageView.contentTintColor = libmpvIconColor
+          case .savedFilter:
+            imageView.image = NSImage(systemSymbolName: "camera.filters", accessibilityDescription: nil)!
+            imageView.contentTintColor = filterIconColor
+          default:
+            if bindingRow.menuItem != nil {
+              imageView.image = NSImage(systemSymbolName: "menubar.rectangle", accessibilityDescription: nil)!
+            } else {
+              imageView.image = nil
+            }
+            imageView.contentTintColor = NSColor.controlTextColor
+          }
+        } else {
+          // FIXME: find icons to use so that all versions are supported
+          imageView.isHidden = true
         }
+      }
 
-        return cell
+      return cell
 
-      default:
-        Logger.log("Unrecognized column: '\(columnName)'", level: .error)
-        return nil
+    default:
+      Logger.log("Unrecognized column: '\(columnName)'", level: .error)
+      return nil
     }
   }
 
@@ -254,12 +254,12 @@ extension BindingTableViewController: NSTableViewDataSource {
     session.draggingFormation = draggingFormation
 
     switch(context) {
-      case .withinApplication:
-        return .copy.union(.move)
-      case .outsideApplication:
-        return .copy
-      default:
-        return .copy
+    case .withinApplication:
+      return .copy.union(.move)
+    case .outsideApplication:
+      return .copy
+    default:
+      return .copy
     }
   }
 
@@ -460,21 +460,21 @@ extension BindingTableViewController: EditableTableViewDelegate {
     let rawKey, rawAction: String?
     var isIINA: Bool? = nil
     switch columnIndex {
-      case keyColumnIndex:
-        rawKey = KeyCodeHelper.escapeReservedMpvKeys(newValue)
-        rawAction = nil
-      case actionColumnIndex:
-        rawKey = nil
-        if let trimmedValue = KeyMapping.removeIINAPrefix(from: newValue) {
-          isIINA = true
-          rawAction = trimmedValue
-        } else {
-          isIINA = false
-          rawAction = newValue
-        }
-      default:
-        Logger.log("userDidEndEditing(): bad column index: \(columnIndex)")
-        return false
+    case keyColumnIndex:
+      rawKey = KeyCodeHelper.escapeReservedMpvKeys(newValue)
+      rawAction = nil
+    case actionColumnIndex:
+      rawKey = nil
+      if let trimmedValue = KeyMapping.removeIINAPrefix(from: newValue) {
+        isIINA = true
+        rawAction = trimmedValue
+      } else {
+        isIINA = false
+        rawAction = newValue
+      }
+    default:
+      Logger.log("userDidEndEditing(): bad column index: \(columnIndex)")
+      return false
     }
 
     let newVersion = editedRow.keyMapping.clone(rawKey: rawKey, rawAction: rawAction, isIINACommand: isIINA)
@@ -782,17 +782,17 @@ extension BindingTableViewController: NSMenuDelegate {
     } else if !isRowEditable {
       let culprit: String
       switch clickedRow.origin {
-        case .iinaPlugin:
-          let sourceName = (clickedRow.keyMapping as? MenuItemMapping)?.sourceName ?? "<ERROR>"
-          culprit = "the IINA plugin \(sourceName.quoted)"
-        case .savedFilter:
-          let sourceName = (clickedRow.keyMapping as? MenuItemMapping)?.sourceName ?? "<ERROR>"
-          culprit = "the saved filter \(sourceName.quoted)"
-        case .libmpv:
-          culprit = "a Lua script or other mpv interface"
-        default:
-          Logger.log("Unrecognized binding origin for rowIndex \(clickedRowIndex): \(clickedRow.origin)", level: .error)
-          culprit = "<unknown>"
+      case .iinaPlugin:
+        let sourceName = (clickedRow.keyMapping as? MenuItemMapping)?.sourceName ?? "<ERROR>"
+        culprit = "the IINA plugin \(sourceName.quoted)"
+      case .savedFilter:
+        let sourceName = (clickedRow.keyMapping as? MenuItemMapping)?.sourceName ?? "<ERROR>"
+        culprit = "the saved filter \(sourceName.quoted)"
+      case .libmpv:
+        culprit = "a Lua script or other mpv interface"
+      default:
+        Logger.log("Unrecognized binding origin for rowIndex \(clickedRowIndex): \(clickedRow.origin)", level: .error)
+        culprit = "<unknown>"
       }
       mib.addItalicDisabledItem("Cannot modify binding: it is owned by \(culprit)")
     } else {

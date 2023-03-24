@@ -67,19 +67,19 @@ class EditableTableView: NSTableView {
 
     var isAllowed = false
     switch item.action {
-      case #selector(copy(_:)):
-        isAllowed = delegate.isCopyEnabled()
-      case #selector(cut(_:)):
-        isAllowed = delegate.isCutEnabled()
-      case #selector(paste(_:)):
-        isAllowed = delegate.isPasteEnabled()
-      case #selector(delete(_:)):
-        isAllowed = delegate.isDeleteEnabled()
-      case #selector(selectAll(_:)):
-        isAllowed = delegate.isSelectAllEnabled()
-      default:
-        Logger.log("EditableTableView.validateUserInterfaceItem(): defaulting isAllowed=false for \"\(actionDescription)\"", level: .verbose)
-        return false
+    case #selector(copy(_:)):
+      isAllowed = delegate.isCopyEnabled()
+    case #selector(cut(_:)):
+      isAllowed = delegate.isCutEnabled()
+    case #selector(paste(_:)):
+      isAllowed = delegate.isPasteEnabled()
+    case #selector(delete(_:)):
+      isAllowed = delegate.isDeleteEnabled()
+    case #selector(selectAll(_:)):
+      isAllowed = delegate.isSelectAllEnabled()
+    default:
+      Logger.log("EditableTableView.validateUserInterfaceItem(): defaulting isAllowed=false for \"\(actionDescription)\"", level: .verbose)
+      return false
     }
     Logger.log("EditableTableView.validateUserInterfaceItem(): isAllowed=\(isAllowed) for \"\(actionDescription)\"", level: .verbose)
     return isAllowed
@@ -90,16 +90,16 @@ class EditableTableView: NSTableView {
   override func keyDown(with event: NSEvent) {
     if let keyChar = KeyCodeHelper.keyMap[event.keyCode]?.0 {
       switch keyChar {
-        case "ENTER", "KP_ENTER":
-          if selectedRow >= 0 && selectedRow < numberOfRows && !editableTextColumnIndexes.isEmpty {
-            if let delegate = self.editableDelegate, delegate.userDidPressEnterOnRow(selectedRow) {
-              Logger.log("TableView.KeyDown: \(keyChar) on row \(selectedRow)")
-              editCell(row: selectedRow, column: editableTextColumnIndexes[0])
-              return
-            }
+      case "ENTER", "KP_ENTER":
+        if selectedRow >= 0 && selectedRow < numberOfRows && !editableTextColumnIndexes.isEmpty {
+          if let delegate = self.editableDelegate, delegate.userDidPressEnterOnRow(selectedRow) {
+            Logger.log("TableView.KeyDown: \(keyChar) on row \(selectedRow)")
+            editCell(row: selectedRow, column: editableTextColumnIndexes[0])
+            return
           }
-        default:
-          break
+        }
+      default:
+        break
       }
     }
     super.keyDown(with: event)
@@ -211,7 +211,8 @@ class EditableTableView: NSTableView {
       }
     }
 
-    session.enumerateDraggingItems(options: .clearNonenumeratedImages, for: nil, classes: [NSPasteboardItem.self], searchOptions: [:]) {(draggingItem, rowNumber, stop) in
+    session.enumerateDraggingItems(options: .clearNonenumeratedImages, for: nil, classes: [NSPasteboardItem.self],
+                                   searchOptions: [:]) {(draggingItem, rowNumber, stop) in
 
       draggingItem.imageComponentsProvider = {
         var componentArray: [NSDraggingImageComponent] = []

@@ -788,21 +788,21 @@ class MenuController: NSObject, NSMenuDelegate {
 
     for binding in candidateBindings {
       switch binding.origin {
-        case .iinaPlugin:
-          // include disabled bindings: need to set their menu item key equivs to nil
-          updateKeyEquivalent(from: binding)
-          if !binding.isEnabled {
-            pluginKeyConflicts.append(binding)
-          }
-        case .savedFilter:
-          // include disabled bindings: need to set their menu item key equivs to nil
-          updateKeyEquivalent(from: binding)
-        case .confFile:
-          if binding.isEnabled { // don't care about disabled bindings here
-            mpvBindings.append(binding)
-          }
-        default:
-          break
+      case .iinaPlugin:
+        // include disabled bindings: need to set their menu item key equivs to nil
+        updateKeyEquivalent(from: binding)
+        if !binding.isEnabled {
+          pluginKeyConflicts.append(binding)
+        }
+      case .savedFilter:
+        // include disabled bindings: need to set their menu item key equivs to nil
+        updateKeyEquivalent(from: binding)
+      case .confFile:
+        if binding.isEnabled { // don't care about disabled bindings here
+          mpvBindings.append(binding)
+        }
+      default:
+        break
       }
     }
     // Show Plugin menu error notice if there are binding conflicts:

@@ -48,8 +48,7 @@ extension RemainingRemovalTracker {
 }
 
 @available(macOS 10.15, *)
-extension CollectionDifference where ChangeElement: Hashable
-{
+extension CollectionDifference where ChangeElement: Hashable {
   public typealias Steps = Array<CollectionDifference<ChangeElement>.ChangeStep>
 
   public enum ChangeStep {
@@ -68,25 +67,25 @@ extension CollectionDifference where ChangeElement: Hashable
 
     inferringMoves().forEach { change in
       switch change {
-        case let .remove(offset, element, associatedWith):
-          if associatedWith != nil {
-            offsetTracker.addSkippedRemoval(atOffset: offset)
-          } else {
-            steps.append(.remove(element, at: offset))
-            offsetTracker.removalMade(at: offset)
-          }
+      case let .remove(offset, element, associatedWith):
+        if associatedWith != nil {
+          offsetTracker.addSkippedRemoval(atOffset: offset)
+        } else {
+          steps.append(.remove(element, at: offset))
+          offsetTracker.removalMade(at: offset)
+        }
 
-        case let.insert(offset, element, associatedWith):
-          if let associatedWith = associatedWith {
-            let from = offsetTracker.useSkippedRemoval(withOriginalOffset: associatedWith)
-            let to = offsetTracker.adjustedInsertion(withOriginalOffset: offset)
-            steps.append(.move(element, from: from, to: to))
-            offsetTracker.insertionMade(at: to)
-          } else {
-            let to = offsetTracker.adjustedInsertion(withOriginalOffset: offset)
-            steps.append(.insert(element, at: to))
-            offsetTracker.insertionMade(at: to)
-          }
+      case let.insert(offset, element, associatedWith):
+        if let associatedWith = associatedWith {
+          let from = offsetTracker.useSkippedRemoval(withOriginalOffset: associatedWith)
+          let to = offsetTracker.adjustedInsertion(withOriginalOffset: offset)
+          steps.append(.move(element, from: from, to: to))
+          offsetTracker.insertionMade(at: to)
+        } else {
+          let to = offsetTracker.adjustedInsertion(withOriginalOffset: offset)
+          steps.append(.insert(element, at: to))
+          offsetTracker.insertionMade(at: to)
+        }
       }
     }
 
@@ -95,12 +94,11 @@ extension CollectionDifference where ChangeElement: Hashable
 }
 
 @available(macOS 10.15, *)
-extension CollectionDifference.Change
-{
+extension CollectionDifference.Change {
   var offset: Int {
     switch self {
-      case let .insert(offset, _, _): return offset
-      case let .remove(offset, _, _): return offset
+    case let .insert(offset, _, _): return offset
+    case let .remove(offset, _, _): return offset
     }
   }
 }

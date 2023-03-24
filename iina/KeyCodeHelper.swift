@@ -401,15 +401,15 @@ class KeyCodeHelper {
     // First, process the key on its own:
     var key = splitted.last!
     switch key {
-      case "#":
-        key = "SHARP"
-      case "+":
-        key = "PLUS"
-      default:
-        if key.count > 1 {
-          // Assume it's a special char. All (non-modifier) special chars are capitalized
-          key = key.uppercased()
-        }
+    case "#":
+      key = "SHARP"
+    case "+":
+      key = "PLUS"
+    default:
+      if key.count > 1 {
+        // Assume it's a special char. All (non-modifier) special chars are capitalized
+        key = key.uppercased()
+      }
     }
 
     var modifiers = Set<String>()

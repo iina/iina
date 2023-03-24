@@ -96,25 +96,25 @@ class ConfTableStateManager: NSObject {
 
       switch keyPath {
 
-        case Preference.Key.currentInputConfigName.rawValue:
-          guard let selectedConfNameNew = change[.newKey] as? String, !selectedConfNameNew.equalsIgnoreCase(curr.selectedConfName) else { return }
-          guard curr.specialState != .fallBackToDefaultConf else {
-            // Avoids infinite loop if two or more instances are running at the same time
-            Logger.log("Already in error state; ignoring pref update for selectedConf: \(selectedConfNameNew.quoted)", level: .verbose)
-            return
-          }
-          Logger.log("Detected pref update for selectedConf: \(selectedConfNameNew.quoted)", level: .verbose)
-          // Update the UI in case the update came from an external source. Make sure not to update prefs,
-          // as this can cause a runaway chain reaction of back-and-forth updates if two or more instances are open!
-          ConfTableState.current.changeSelectedConf(selectedConfNameNew, skipSaveToPrefs: true)
-        case Preference.Key.inputConfigs.rawValue:
-          guard let userConfDictNew = change[.newKey] as? [String: String] else { return }
-          if !userConfDictNew.keys.sorted().elementsEqual(curr.userConfDict.keys.sorted()) {
-            Logger.log("Detected pref update for inputConfigs", level: .verbose)
-            self.changeState(userConfDictNew, selectedConfName: curr.selectedConfName, skipSaveToPrefs: true)
-          }
-        default:
+      case Preference.Key.currentInputConfigName.rawValue:
+        guard let selectedConfNameNew = change[.newKey] as? String, !selectedConfNameNew.equalsIgnoreCase(curr.selectedConfName) else { return }
+        guard curr.specialState != .fallBackToDefaultConf else {
+          // Avoids infinite loop if two or more instances are running at the same time
+          Logger.log("Already in error state; ignoring pref update for selectedConf: \(selectedConfNameNew.quoted)", level: .verbose)
           return
+        }
+        Logger.log("Detected pref update for selectedConf: \(selectedConfNameNew.quoted)", level: .verbose)
+        // Update the UI in case the update came from an external source. Make sure not to update prefs,
+        // as this can cause a runaway chain reaction of back-and-forth updates if two or more instances are open!
+        ConfTableState.current.changeSelectedConf(selectedConfNameNew, skipSaveToPrefs: true)
+      case Preference.Key.inputConfigs.rawValue:
+        guard let userConfDictNew = change[.newKey] as? [String: String] else { return }
+        if !userConfDictNew.keys.sorted().elementsEqual(curr.userConfDict.keys.sorted()) {
+          Logger.log("Detected pref update for inputConfigs", level: .verbose)
+          self.changeState(userConfDictNew, selectedConfName: curr.selectedConfName, skipSaveToPrefs: true)
+        }
+      default:
+        return
       }
     }
   }
@@ -312,17 +312,17 @@ class ConfTableStateManager: NSObject {
     }
 
     switch new.specialState {
-      case .addingNewInline:  // special case: creating an all-new config
-        // Select the new blank row, which will be the last one:
-        tableUIChange.newSelectedRowIndexes = IndexSet(integer: new.confTableRows.count - 1)
-      case .none, .fallBackToDefaultConf:
-        // Always keep the current config selected
-        if let selectedConfIndex = new.confTableRows.firstIndex(of: new.selectedConfName) {
-          Logger.log("Will change Conf Table selection index to \(selectedConfIndex) (\(new.selectedConfName.quoted))", level: .verbose)
-          tableUIChange.newSelectedRowIndexes = IndexSet(integer: selectedConfIndex)
-        } else {
-          Logger.log("Failed to find selection index for \(new.selectedConfName.quoted) in new Conf Table state!", level: .error)
-        }
+    case .addingNewInline:  // special case: creating an all-new config
+      // Select the new blank row, which will be the last one:
+      tableUIChange.newSelectedRowIndexes = IndexSet(integer: new.confTableRows.count - 1)
+    case .none, .fallBackToDefaultConf:
+      // Always keep the current config selected
+      if let selectedConfIndex = new.confTableRows.firstIndex(of: new.selectedConfName) {
+        Logger.log("Will change Conf Table selection index to \(selectedConfIndex) (\(new.selectedConfName.quoted))", level: .verbose)
+        tableUIChange.newSelectedRowIndexes = IndexSet(integer: selectedConfIndex)
+      } else {
+        Logger.log("Failed to find selection index for \(new.selectedConfName.quoted) in new Conf Table state!", level: .error)
+      }
     }
     // Finally, fire notification. This covers row selection too
     updateTableUI(tableUIChange)

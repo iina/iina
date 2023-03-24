@@ -826,18 +826,18 @@ class MPVController: NSObject {
     let eventId: mpv_event_id = event.pointee.event_id
 
     switch eventId {
-      case MPV_EVENT_CLIENT_MESSAGE:
-        let dataOpaquePtr = OpaquePointer(event.pointee.data)
-        let msg = UnsafeMutablePointer<mpv_event_client_message>(dataOpaquePtr)
-        let numArgs: Int = Int((msg?.pointee.num_args)!)
-        var args: [String] = []
-        if numArgs > 0 {
-          let bufferPointer = UnsafeBufferPointer(start: msg?.pointee.args, count: numArgs)
-          for i in 0..<numArgs {
-            args.append(String(cString: (bufferPointer[i])!))
-          }
+    case MPV_EVENT_CLIENT_MESSAGE:
+      let dataOpaquePtr = OpaquePointer(event.pointee.data)
+      let msg = UnsafeMutablePointer<mpv_event_client_message>(dataOpaquePtr)
+      let numArgs: Int = Int((msg?.pointee.num_args)!)
+      var args: [String] = []
+      if numArgs > 0 {
+        let bufferPointer = UnsafeBufferPointer(start: msg?.pointee.args, count: numArgs)
+        for i in 0..<numArgs {
+          args.append(String(cString: (bufferPointer[i])!))
         }
-        Logger.log("mpv \(eventId): \(numArgs >= 0 ? "\(args)": "numArgs=\(numArgs)")", level: .verbose)
+      }
+      Logger.log("Got mpv '\(eventId)': \(numArgs >= 0 ? "\(args)": "numArgs=\(numArgs)")", level: .verbose, subsystem: player.subsystem)
 
     case MPV_EVENT_SHUTDOWN:
       let quitByMPV = !player.isShuttingDown

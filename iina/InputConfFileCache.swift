@@ -54,14 +54,14 @@ class InputConfFileCache {
   // Throws exception if cache could not be updated.
   fileprivate func saveFile(_ inputConfFile: InputConfFile) throws {
     switch inputConfFile.status {
-      case .readOnly:
-        Logger.log("Aborting saveFile() for \(inputConfFile.filePath.quoted): isReadOnly==true!", level: .error)
-        throw IINAError.confFileIsReadOnly
-      case .failedToLoad:
-        Logger.log("Aborting saveFile() for \(inputConfFile.filePath.quoted): invalid operation: file never loaded properly!", level: .error)
-        throw IINAError.confFileIsReadOnly
-      case .normal:
-        break
+    case .readOnly:
+      Logger.log("Aborting saveFile() for \(inputConfFile.filePath.quoted): isReadOnly==true!", level: .error)
+      throw IINAError.confFileIsReadOnly
+    case .failedToLoad:
+      Logger.log("Aborting saveFile() for \(inputConfFile.filePath.quoted): invalid operation: file never loaded properly!", level: .error)
+      throw IINAError.confFileIsReadOnly
+    case .normal:
+      break
     }
 
     storageLock.withLock {

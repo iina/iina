@@ -15,22 +15,22 @@ class TableUIChangeBuilder {
 
     switch original.changeType {
 
-      case .removeRows:
-        inverted = TableUIChange(.insertRows)
+    case .removeRows:
+      inverted = TableUIChange(.insertRows)
 
-      case .insertRows:
-        inverted = TableUIChange(.removeRows)
+    case .insertRows:
+      inverted = TableUIChange(.removeRows)
 
-      case .moveRows:
-        inverted = TableUIChange(.moveRows)
+    case .moveRows:
+      inverted = TableUIChange(.moveRows)
 
-      case .updateRows:
-        inverted = TableUIChange(.updateRows)
+    case .updateRows:
+      inverted = TableUIChange(.updateRows)
 
-      case .none, .reloadAll, .wholeTableDiff:
-        // Will not cause a failure. But can't think of a reason to ever invert these types
-        Logger.log("Calling inverted() on content change type '\(original.changeType)': was this intentional?", level: .warning)
-        inverted = TableUIChange(original.changeType)
+    case .none, .reloadAll, .wholeTableDiff:
+      // Will not cause a failure. But can't think of a reason to ever invert these types
+      Logger.log("Calling inverted() on content change type '\(original.changeType)': was this intentional?", level: .warning)
+      inverted = TableUIChange(original.changeType)
     }
 
     if inverted.changeType != .none && inverted.changeType != .reloadAll {
@@ -121,32 +121,32 @@ class TableUIChangeBuilder {
     // Override default behavior for single row: treat del + ins as move
     if overrideSingleRowMove && steps.count == 2 {
       switch steps[0] {
-        case let .remove(_, indexToRemove):
-          switch steps[1] {
-            case let .insert(_, indexToInsert):
-              if indexToRemove == indexToInsert {
-                diff.toUpdate = IndexSet(integer: indexToInsert)
-                Logger.log("Overrode TableUIChange from diff: changed 1 rm + 1 add into 1 update: \(indexToInsert)", level: .verbose)
-                return diff
-              }
-              diff.toMove?.append((indexToRemove, indexToInsert))
-              Logger.log("Overrode TableUIChange from diff: changed 1 rm + 1 add into 1 move: from \(indexToRemove) to \(indexToInsert)", level: .verbose)
-              return diff
-            default: break
+      case let .remove(_, indexToRemove):
+        switch steps[1] {
+        case let .insert(_, indexToInsert):
+          if indexToRemove == indexToInsert {
+            diff.toUpdate = IndexSet(integer: indexToInsert)
+            Logger.log("Overrode TableUIChange from diff: changed 1 rm + 1 add into 1 update: \(indexToInsert)", level: .verbose)
+            return diff
           }
+          diff.toMove?.append((indexToRemove, indexToInsert))
+          Logger.log("Overrode TableUIChange from diff: changed 1 rm + 1 add into 1 move: from \(indexToRemove) to \(indexToInsert)", level: .verbose)
+          return diff
         default: break
+        }
+      default: break
       }
     }
 
     for step in steps {
       switch step {
-        case let .remove(_, index):
-          // If toOffset != nil, it signifies a MOVE from fromOffset -> toOffset. But the offset must be adjusted for removes!
-          diff.toRemove?.insert(index)
-        case let .insert(_, index):
-          diff.toInsert?.insert(index)
-        case let .move(_, from, to):
-          diff.toMove?.append((from, to))
+      case let .remove(_, index):
+        // If toOffset != nil, it signifies a MOVE from fromOffset -> toOffset. But the offset must be adjusted for removes!
+        diff.toRemove?.insert(index)
+      case let .insert(_, index):
+        diff.toInsert?.insert(index)
+      case let .move(_, from, to):
+        diff.toMove?.append((from, to))
       }
     }
 

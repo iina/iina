@@ -135,24 +135,24 @@ extension ConfTableViewController: NSTableViewDelegate {
 
     // For built-in conf rows, make text italic and show lock icon (also add color to text & icon if configured)
     switch columnName {
-      case "nameColumn":
-        let textColor: NSColor?
-        if #available(macOS 10.14, *), useSeparateColorForBuiltinConfs {
-          textColor = isBuiltinConf ? builtinConfTextColor : .controlTextColor
-        } else {
-          textColor = nil
-        }
-        cell.textField?.setFormattedText(stringValue: confName, textColor: textColor, italic: isBuiltinConf)
-        return cell
-      case "isDefaultColumn":
-        if #available(macOS 10.14, *), useSeparateColorForBuiltinConfs {
-          cell.imageView?.contentTintColor = builtinConfTextColor
-        }
-        cell.imageView?.isHidden = !isBuiltinConf
-        return cell
-      default:
-        Logger.log("Unrecognized column: '\(columnName)'", level: .error)
-        return nil
+    case "nameColumn":
+      let textColor: NSColor?
+      if #available(macOS 10.14, *), useSeparateColorForBuiltinConfs {
+        textColor = isBuiltinConf ? builtinConfTextColor : .controlTextColor
+      } else {
+        textColor = nil
+      }
+      cell.textField?.setFormattedText(stringValue: confName, textColor: textColor)
+      return cell
+    case "isDefaultColumn":
+      if #available(macOS 10.14, *), useSeparateColorForBuiltinConfs {
+        cell.imageView?.contentTintColor = builtinConfTextColor
+      }
+      cell.imageView?.isHidden = !isBuiltinConf
+      return cell
+    default:
+      Logger.log("Unrecognized column: '\(columnName)'", level: .error)
+      return nil
     }
   }
 }

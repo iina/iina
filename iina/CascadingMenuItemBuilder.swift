@@ -66,63 +66,63 @@ class CascadingMenuItemBuilder {
 
     func associatedValue() -> Any? {
       switch self {
-        case .target(let val): return val
-        case .key(let val): return val
-        case .keyMods(let val): return val
-        case .unit(let val): return val
-        case .unitActionFormat(let val): return val
-        case .menu(let val): return val
-        case .targetRow(let val): return val
-        case .targetRowIndex(let val): return val
-        case .action(let val): return val
-        case .enabled(let val): return val
-        case .title(let val): return val
-        case .unitCount(let val): return val
+      case .target(let val): return val
+      case .key(let val): return val
+      case .keyMods(let val): return val
+      case .unit(let val): return val
+      case .unitActionFormat(let val): return val
+      case .menu(let val): return val
+      case .targetRow(let val): return val
+      case .targetRowIndex(let val): return val
+      case .action(let val): return val
+      case .enabled(let val): return val
+      case .title(let val): return val
+      case .unitCount(let val): return val
       }
     }
 
     var identifier: AttributeIdentifier {
       switch self {
-        case .target: return .target
-        case .key: return .key
-        case .keyMods: return .keyMods
-        case .unit: return .unit
-        case .unitActionFormat: return .unitActionFormat
-        case .menu: return .menu
-        case .targetRow: return .targetRow
-        case .targetRowIndex: return .targetRowIndex
-        case .action: return .action
-        case .enabled: return .enabled
-        case .title: return .title
-        case .unitCount: return .unitCount
+      case .target: return .target
+      case .key: return .key
+      case .keyMods: return .keyMods
+      case .unit: return .unit
+      case .unitActionFormat: return .unitActionFormat
+      case .menu: return .menu
+      case .targetRow: return .targetRow
+      case .targetRowIndex: return .targetRowIndex
+      case .action: return .action
+      case .enabled: return .enabled
+      case .title: return .title
+      case .unitCount: return .unitCount
       }
     }
     var debugDescription: String {
       let val = self.associatedValue()
       var debugVal: String = "⚠️"  // default
       switch self {
-        case .target, .action, .targetRow, .menu:
-          debugVal = val == nil ? "nil" : "!nil"
-        case .keyMods:
-          if let val = val as? KeyModsType {
-            debugVal = KeyCodeHelper.macString(from: val)
-          }
-        case .key, .title:
-          if let val = val as? String {
-            debugVal = val.quoted
-          }
-        case .unit:
-          if let val = val as? UnitType {
-            debugVal = val.singular.quoted
-          }
-        case .unitActionFormat:
-          if let val = val as? UnitActionFormatType {
-            debugVal = val.none.quoted
-          }
-        case .enabled, .targetRowIndex, .unitCount:
-          if let val = val {
-            debugVal = "\(val)"
-          }
+      case .target, .action, .targetRow, .menu:
+        debugVal = val == nil ? "nil" : "!nil"
+      case .keyMods:
+        if let val = val as? KeyModsType {
+          debugVal = KeyCodeHelper.macString(from: val)
+        }
+      case .key, .title:
+        if let val = val as? String {
+          debugVal = val.quoted
+        }
+      case .unit:
+        if let val = val as? UnitType {
+          debugVal = val.singular.quoted
+        }
+      case .unitActionFormat:
+        if let val = val as? UnitActionFormatType {
+          debugVal = val.none.quoted
+        }
+      case .enabled, .targetRowIndex, .unitCount:
+        if let val = val {
+          debugVal = "\(val)"
+        }
       }
       return "\(self.identifier)=\(debugVal)"
     }
@@ -198,7 +198,7 @@ class CascadingMenuItemBuilder {
   func butWith(_ overrideAttrs: Attribute...) -> CascadingMenuItemBuilder {
     decorateWith(overrideAttrs)
   }
-
+  
   // MARK: Attribute manipulation (mostly internal)
 
   private var attrsDebugDescription: String {

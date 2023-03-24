@@ -8,17 +8,18 @@
 
 import Foundation
 
-/*
+/**
  Each instance of this class:
- * Represents an atomic state change to the UI of an associated `EditableTableView`
- * Contains all the metadata (though not the actual data) needed to transition it from {State_N} to {State_N+1}, where each state refers to a single user action or the response to some external update. All of thiis is needed in order to make AppKit animations work.
+ - Represents an atomic state change to the UI of an associated `EditableTableView`
+ - Contains all the metadata (though not the actual data) needed to transition it from {State_N} to {State_N+1}, where each state refers
+   to a single user action or the response to some external update. All of thiis is needed in order to make AppKit animations work.
 
  In order to facilitate table animations, and to get around some AppKit limitations such as the tendency
  for it to lose track of the row selection, much additional boilerplate is needed to keep track of state.
  This objects attempts to provide as much of this as possible and provide future reusability.
  */
 class TableUIChange {
-  // MARK: Static definitions
+  // - MARK: Static definitions
 
   typealias CompletionHandler = (TableUIChange) -> Void
   typealias AnimationBlock = (NSAnimationContext) -> Void
@@ -62,7 +63,7 @@ class TableUIChange {
   // Will not call to update selection if this is nil.
   var newSelectedRowIndexes: IndexSet? = nil
 
-  // MARK: Optional vars
+  // - MARK: Optional vars
 
   // Provide this to restore old selection when calculating the inverse of this change (when doing an undo of "move").
   // TODO: (optimization) figure out how to calculate this from `toMove` instead of storing this

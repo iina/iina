@@ -159,12 +159,12 @@ extension KeyMapping: NSPasteboardWriting, NSPasteboardReading {
 
   func pasteboardPropertyList(forType type: NSPasteboard.PasteboardType) -> Any? {
     switch type {
-      case .string:
-        return NSString(utf8String: self.confFileFormat)
-      case .iinaKeyMapping:
-        return try? PropertyListEncoder().encode(self)
-      default:
-        return nil
+    case .string:
+      return NSString(utf8String: self.confFileFormat)
+    case .iinaKeyMapping:
+      return try? PropertyListEncoder().encode(self)
+    default:
+      return nil
     }
   }
 

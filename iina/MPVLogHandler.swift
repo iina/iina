@@ -146,13 +146,13 @@ class MPVLogHandler {
     var isForce = false  // defaults to false
     for flag in flags {
       switch flag {
-        case MPVInputSection.FLAG_FORCE:
-          isForce = true
-        case MPVInputSection.FLAG_DEFAULT:
-          isForce = false
-        default:
-          Logger.log("Unrecognized flag in 'define-section': \(flag)", level: .error, subsystem: player.subsystem)
-          Logger.log("Offending log line: `\(msg)`", level: .error, subsystem: player.subsystem)
+      case MPVInputSection.FLAG_FORCE:
+        isForce = true
+      case MPVInputSection.FLAG_DEFAULT:
+        isForce = false
+      default:
+        Logger.log("Unrecognized flag in 'define-section': \(flag)", level: .error, subsystem: player.subsystem)
+        Logger.log("Offending log line: `\(msg)`", level: .error, subsystem: player.subsystem)
       }
     }
 

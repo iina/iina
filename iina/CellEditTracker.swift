@@ -37,18 +37,18 @@ class CellEditTracker: NSObject, NSTextFieldDelegate {
 
     let tm = NSTextMovement(rawValue: textMovementInt)
     switch tm {
-      case .return:
-        return "return"
-      case .backtab:
-        return "backtab"
-      case .cancel:
-        return "cancel"
-      case .other:
-        return "other"
-      case .tab:
-        return "tab"
-      default:
-        return "{\(textMovementInt)}"
+    case .return:
+      return "return"
+    case .backtab:
+      return "backtab"
+    case .cancel:
+      return "cancel"
+    case .other:
+      return "other"
+    case .tab:
+      return "tab"
+    default:
+      return "{\(textMovementInt)}"
     }
   }
 
@@ -195,55 +195,55 @@ class CellEditTracker: NSObject, NSTextFieldDelegate {
     var newRowIndex: Int
     var newColIndex: Int
     switch textMovement {
-      case .tab:
-        // Snake down the grid, left to right, top down
-        newColIndex = nextTabColumnIndex(columnIndex)
-        if newColIndex < 0 {
-          Logger.log("Invalid value for next column: \(newColIndex)", level: .error)
-          return false
-        }
-        if newColIndex <= columnIndex {
-          guard isInterRowTabEditingEnabled else {
-            return false
-          }
-          newRowIndex = rowIndex + 1
-          if newRowIndex >= self.parentTable.numberOfRows {
-            // Always done after last row
-            return false
-          }
-        } else {
-          newRowIndex = rowIndex
-        }
-      case .backtab:
-        // Snake up the grid, right to left, bottom up
-        newColIndex = prevTabColumnIndex(columnIndex)
-        if newColIndex < 0 {
-          Logger.log("Invalid value for prev column: \(newColIndex)", level: .error)
-          return false
-        }
-        if newColIndex >= columnIndex {
-          guard isInterRowTabEditingEnabled else {
-            return false
-          }
-          newRowIndex = rowIndex - 1
-          if newRowIndex < 0 {
-            return false
-          }
-        } else {
-          newRowIndex = rowIndex
-        }
-      case .return:
+    case .tab:
+      // Snake down the grid, left to right, top down
+      newColIndex = nextTabColumnIndex(columnIndex)
+      if newColIndex < 0 {
+        Logger.log("Invalid value for next column: \(newColIndex)", level: .error)
+        return false
+      }
+      if newColIndex <= columnIndex {
         guard isInterRowTabEditingEnabled else {
           return false
         }
-        // Go to cell directly below
         newRowIndex = rowIndex + 1
         if newRowIndex >= self.parentTable.numberOfRows {
           // Always done after last row
           return false
         }
-        newColIndex = columnIndex
-      default: return false
+      } else {
+        newRowIndex = rowIndex
+      }
+    case .backtab:
+      // Snake up the grid, right to left, bottom up
+      newColIndex = prevTabColumnIndex(columnIndex)
+      if newColIndex < 0 {
+        Logger.log("Invalid value for prev column: \(newColIndex)", level: .error)
+        return false
+      }
+      if newColIndex >= columnIndex {
+        guard isInterRowTabEditingEnabled else {
+          return false
+        }
+        newRowIndex = rowIndex - 1
+        if newRowIndex < 0 {
+          return false
+        }
+      } else {
+        newRowIndex = rowIndex
+      }
+    case .return:
+      guard isInterRowTabEditingEnabled else {
+        return false
+      }
+      // Go to cell directly below
+      newRowIndex = rowIndex + 1
+      if newRowIndex >= self.parentTable.numberOfRows {
+        // Always done after last row
+        return false
+      }
+      newColIndex = columnIndex
+    default: return false
     }
 
     DispatchQueue.main.async {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-/*
+/**
  Responsible for changing the state of the Key Bindings table by building new versions of `BindingTableState`.
  */
 class BindingTableStateManager {
@@ -37,14 +37,14 @@ class BindingTableStateManager {
     BindingTableState(AppInputConfig.current, filterString: "", inputConfFile: ConfTableState.manager.loadConfFile())
   }
 
-  /*
+  /**
    Executes a single "action" to the current table state.
    This is either the "do" of an undoable action, or an undo of that action, or a redo of that undo.
    Don't use this for changes which aren't undoable, like filter string updates.
 
    Currently, all changes are to bindings in the current conf file. Must execute sequentially:
    1. Save conf file, get updated default section rows
-   2. Send updated default section bindings to InputBindingController. It will recalculate all bindings and re-bind appropriately, then
+   2. Send updated default section bindings to `InputBindingController`. It will recalculate all bindings and re-bind appropriately, then
    returns the updated set of all bindings to us.
    3. Update this class's unfiltered list of bindings, and recalculate filtered list
    4. Push update to the Key Bindings table in the UI so it can be animated.
@@ -56,13 +56,13 @@ class BindingTableStateManager {
     // If a filter is active for these ops, clear it. Otherwise the new row may be hidden by the filter, which might confuse the user.
     if !BindingTableState.current.filterString.isEmpty {
       switch tableUIChange.changeType {
-        case .updateRows, .insertRows, .moveRows, .removeRows:
-          // This will cause an asynchronous load of the table's UI. So we will end up with 2 table updates from our one action.
-          // We will do the op as a separate step, because a "reload" is a sledgehammer which
-          // doesn't support animation and also blows away selections and editors.
-          clearFilter()
-        default:
-          break
+      case .updateRows, .insertRows, .moveRows, .removeRows:
+        // This will cause an asynchronous load of the table's UI. So we will end up with 2 table updates from our one action.
+        // We will do the op as a separate step, because a "reload" is a sledgehammer which
+        // doesn't support animation and also blows away selections and editors.
+        clearFilter()
+      default:
+        break
       }
     }
 
@@ -71,12 +71,14 @@ class BindingTableStateManager {
     undoHelper.register(buildActionName(basedOn: tableUIChange), undo: {
       let tableStateNew = BindingTableState.current
 
-      // The undo of the original TableUIChange is just its inverse.
-      // HOWEVER: at present, the undo/redo logic in this class only cares about the "default section" bindings.
-      // This means that other bindings could have been added/removed by other sections above and below the default section
-      // since the last `TableUIChange` was calculated. Don't need to care about anything below the default section,
-      // but do need to adjust the indexes in each `TableUIChange` by the number of rows added/removed above them in order
-      // to stay current.
+      /**
+       The undo of the original TableUIChange is just its inverse.
+       HOWEVER: at present, the undo/redo logic in this class only cares about the "default section" bindings.
+       This means that other bindings could have been added/removed by other sections above and below the default section
+       since the last `TableUIChange` was calculated. Don't need to care about anything below the default section,
+       but do need to adjust the indexes in each `TableUIChange` by the number of rows added/removed above them in order
+       to stay current.
+       */
       let userConfSectionStartIndexOld = tableStateOld.appInputConfig.userConfSectionStartIndex
       let userConfSectionStartIndexNew = tableStateNew.appInputConfig.userConfSectionStartIndex
       let userConfSectionOffsetChange = userConfSectionStartIndexOld - userConfSectionStartIndexNew
@@ -90,7 +92,7 @@ class BindingTableStateManager {
     // Enqueue task to save user's changes to file:
     let updatedConfFile = overwrite(currentConfFile: tableStateOld.inputConfFile, with: userConfMappingsNew)
 
-    /*
+    /**
      Replace the shared static "default" section bindings with the given list, which will trigger a rebuild
      of AppInputConfig, which will result in `appInputConfigDidChange()` being called asynchronously.
 
@@ -115,16 +117,16 @@ class BindingTableStateManager {
     }
 
     switch tableUIChange.changeType {
-      case .insertRows:
-        return Utility.format(.keyBinding, tableUIChange.toInsert?.count ?? 0, .add)
-      case .removeRows:
-        return Utility.format(.keyBinding, tableUIChange.toRemove?.count ?? 0, .delete)
-      case .moveRows:
-        return Utility.format(.keyBinding, tableUIChange.toMove?.count ?? 0, .move)
-      case .updateRows:
-        return Utility.format(.keyBinding, tableUIChange.toUpdate?.count ?? 0, .update)
-      default:
-        return nil
+    case .insertRows:
+      return Utility.format(.keyBinding, tableUIChange.toInsert?.count ?? 0, .add)
+    case .removeRows:
+      return Utility.format(.keyBinding, tableUIChange.toRemove?.count ?? 0, .delete)
+    case .moveRows:
+      return Utility.format(.keyBinding, tableUIChange.toMove?.count ?? 0, .move)
+    case .updateRows:
+      return Utility.format(.keyBinding, tableUIChange.toUpdate?.count ?? 0, .update)
+    default:
+      return nil
     }
   }
 
@@ -157,7 +159,7 @@ class BindingTableStateManager {
     self.applyStateUpdate(appInputConfig, desiredTableUIChange: tableUIChange, newInputConfFile: newInputConfFile)
   }
 
-  /*
+  /**
    Builds a new `BindingTableState` and sets `BindingTableState.current` to it, using the given params if provided.
    Then notifies the table to update its UI. More notes:
    • If an update to `AppInputConfig` was needed, that will be done first and this method will be called asychronously

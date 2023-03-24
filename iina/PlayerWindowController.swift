@@ -161,7 +161,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     setMaterial(Preference.enum(for: .themeMaterial))
     
     addObserver(to: .default, forName: .iinaMediaTitleChanged, object: player) { [unowned self] _ in
-        self.updateTitle()
+      self.updateTitle()
     }
 
     leftLabel.mode = .current

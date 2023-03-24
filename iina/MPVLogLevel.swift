@@ -21,68 +21,68 @@ enum MPVLogLevel: Int, CustomStringConvertible {
   static func fromString(_ name: String) -> MPVLogLevel? {
     if name.count == 1 {
       switch name {
-        case "n":
-          return .no
-        case "f":
-          return .fatal
-        case "e":
-          return .error
-        case "w":
-          return .warn
-        case "i":
-          return .info
-        case "v":
-          return .verbose
-        case "d":
-          return .debug
-        case "t":
-          return .trace
-        default:
-          return nil
+      case "n":
+        return .no
+      case "f":
+        return .fatal
+      case "e":
+        return .error
+      case "w":
+        return .warn
+      case "i":
+        return .info
+      case "v":
+        return .verbose
+      case "d":
+        return .debug
+      case "t":
+        return .trace
+      default:
+        return nil
       }
     }
 
     switch name {
-      case "no":
-        return .no
-      case "fatal":
-        return .fatal
-      case "error":
-        return .error
-      case "warn":
-        return .warn
-      case "info":
-        return .info
-      case "verbose":
-        return .verbose
-      case "debug":
-        return .debug
-      case "trace":
-        return .trace
-      default:
-        return nil
+    case "no":
+      return .no
+    case "fatal":
+      return .fatal
+    case "error":
+      return .error
+    case "warn":
+      return .warn
+    case "info":
+      return .info
+    case "verbose":
+      return .verbose
+    case "debug":
+      return .debug
+    case "trace":
+      return .trace
+    default:
+      return nil
     }
   }
 
   public var description: String {
     get {
       switch self {
-        case .no:
-          return "no"
-        case .fatal:
-          return "fatal"
-        case .error:
-          return "error"
-        case .warn:
-          return "warn"
-        case .info:
-          return "info"
-        case .verbose:
-          return "verbose"
-        case .debug:
-          return "debug"
-        case .trace:
-          return "trace"
+      case .no:
+        return "no"
+      case .fatal:
+        return "fatal"
+      case .error:
+        return "error"
+      case .warn:
+        return "warn"
+      case .info:
+        return "info"
+      case .verbose:
+        return "verbose"
+      case .debug:
+        return "debug"
+      case .trace:
+        return "trace"
       }
     }
   }
@@ -103,12 +103,12 @@ enum MPVLogLevel: Int, CustomStringConvertible {
    1. MPVLogLevel.info.shouldLog("debug") -> false
    2. MPVLogLevel.debug.shouldLog("verbose") -> false
    */
- public func shouldLog(severity: String) -> Bool {
-   if let severityParsed = MPVLogLevel.fromString(severity) {
-     return shouldLog(severity: severityParsed.rawValue)
-   } else {
-     Logger.log("Failed to parse logging level: \(severity.quoted)", level: .error)
-     return false
-   }
- }
+  public func shouldLog(severity: String) -> Bool {
+    if let severityParsed = MPVLogLevel.fromString(severity) {
+      return shouldLog(severity: severityParsed.rawValue)
+    } else {
+      Logger.log("Failed to parse logging level: \(severity.quoted)", level: .error)
+      return false
+    }
+  }
 }

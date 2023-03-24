@@ -338,9 +338,6 @@
                                     </textField>
                                     <progressIndicator wantsLayer="YES" horizontalHuggingPriority="270" misplaced="YES" maxValue="1" controlSize="small" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="i10-rt-9cb">
                                         <rect key="frame" x="0.0" y="0.0" width="161" height="12"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="150" id="PvC-N6-ZBT"/>
-                                        </constraints>
                                     </progressIndicator>
                                 </beginningViews>
                                 <visibilityPriorities>

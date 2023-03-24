@@ -17,6 +17,8 @@ class PlayerCore: NSObject {
 
   static private weak var _lastActive: PlayerCore?
 
+  /// - Important: Code referencing this property **must** be run on the main thread as getting the value of this property _may_
+  ///              result in a reference the `active` property and that requires use of the main thread.
   static var lastActive: PlayerCore {
     get {
       return _lastActive ?? active
@@ -26,6 +28,8 @@ class PlayerCore: NSObject {
     }
   }
 
+  /// - Important: Code referencing this property **must** be run on the main thread because it references
+  ///              [NSApplication.mainWindow`](https://developer.apple.com/documentation/appkit/nsapplication/1428723-mainwindow)
   static var active: PlayerCore {
     if let wc = NSApp.mainWindow?.windowController as? MainWindowController {
       return wc.player
@@ -92,6 +96,12 @@ class PlayerCore: NSObject {
     }
   }
   private var _touchBarSupport: Any?
+
+  /// `true` if this Mac is known to have a touch bar.
+  ///
+  /// - Note: This is set based on whether `AppKit` has called `MakeTouchBar`, therefore it can, for example, be `false` for
+  ///         a MacBook that has a touch bar if the touch bar is asleep because the Mac is in closed clamshell mode.
+  var needsTouchBar = false
 
   /// A dispatch queue for auto load feature.
   let backgroundQueue = DispatchQueue(label: "IINAPlayerCoreTask", qos: .background)
@@ -468,6 +478,12 @@ class PlayerCore: NSObject {
 
     miniPlayer.updateTitle()
     syncUITime()
+    // When not in the mini player the timer that updates the OSC may be stopped to conserve energy
+    // when the OSC is hidden. As the OSC is always displayed in the mini player ensure the timer is
+    // running if media is playing.
+    if !info.isPaused {
+      createSyncUITimer()
+    }
     let playlistView = mainWindow.playlistView.view
     let videoView = mainWindow.videoView
     // reset down shift for playlistView
@@ -1451,10 +1467,10 @@ class PlayerCore: NSObject {
     mainWindow.videoView.videoLayer.draw(forced: true)
 
     if #available(macOS 10.13, *), RemoteCommandController.useSystemMediaControl {
-      NowPlayingInfoManager.updateInfo()
+      DispatchQueue.main.sync {
+        NowPlayingInfoManager.updateInfo()
+      }
     }
-
-
     DispatchQueue.main.async {
       Timer.scheduledTimer(timeInterval: TimeInterval(0.2), target: self, selector: #selector(self.reEnableOSDAfterFileLoading), userInfo: nil, repeats: false)
     }
@@ -1773,6 +1789,19 @@ class PlayerCore: NSObject {
     }
   }
 
+  @available(macOS 10.12.2, *)
+  func makeTouchBar() -> NSTouchBar {
+    Logger.log("Activating Touch Bar", subsystem: subsystem)
+    needsTouchBar = true
+    // The timer that synchronizes the UI is shutdown to conserve energy when the OSC is hidden.
+    // However the timer can't be stopped if it is needed to update the information being displayed
+    // in the touch bar. If currently playing make sure the timer is running.
+    if info.isPlaying && !isShuttingDown && !isShutdown {
+      createSyncUITimer()
+    }
+    return touchBarSupport.touchBar
+  }
+
   func refreshTouchBarSlider() {
     if #available(macOS 10.12.2, *) {
       DispatchQueue.main.async {
@@ -2064,14 +2093,20 @@ extension PlayerCore: FFmpegControllerDelegate {
 
 @available (macOS 10.13, *)
 class NowPlayingInfoManager {
-  static private let lock = NSLock()
 
+  /// Update the information shown by macOS in `Now Playing`.
+  ///
+  /// The macOS [Control Center](https://support.apple.com/guide/mac-help/quickly-change-settings-mchl50f94f8f/mac)
+  /// contains a `Now Playing` module. This module can also be configured to be directly accessible from the menu bar.
+  /// `Now Playing` displays the title of the media currently  playing and other information about the state of playback. It also can be
+  /// used to control playback. IINA is fully integrated with the macOS `Now Playing` module.
+  ///
+  /// - Note: See [Becoming a Now Playable App](https://developer.apple.com/documentation/mediaplayer/becoming_a_now_playable_app)
+  ///         and [MPNowPlayingInfoCenter](https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfocenter)
+  ///         for more information.
+  ///
+  /// - Important: This method **must** be run on the main thread because it references `PlayerCore.lastActive`.
   static func updateInfo(state: MPNowPlayingPlaybackState? = nil, withTitle: Bool = false) {
-    // This method is called from the main thread and from background threads. Must single thread access.
-    lock.lock()
-    defer {
-      lock.unlock()
-    }
     let center = MPNowPlayingInfoCenter.default()
     var info = center.nowPlayingInfo ?? [String: Any]()
 

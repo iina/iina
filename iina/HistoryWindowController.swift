@@ -108,12 +108,12 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     let flags = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
     if flags == .command  {
       switch event.charactersIgnoringModifiers! {
-        case "f":
-          window!.makeFirstResponder(historySearchField)
-        case "a":
-          outlineView.selectAll(nil)
-        default:
-          break
+      case "f":
+        window!.makeFirstResponder(historySearchField)
+      case "a":
+        outlineView.selectAll(nil)
+      default:
+        break
       }
     } else {
       let key = KeyCodeHelper.mpvKeyCode(from: event)

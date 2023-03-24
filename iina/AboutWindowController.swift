@@ -38,6 +38,11 @@ class AboutWindowController: NSWindowController {
   }
   @IBOutlet weak var versionLabel: NSTextField!
   @IBOutlet weak var mpvVersionLabel: NSTextField!
+  @IBOutlet weak var ffmpegVersionLabel: NSTextField!
+  @IBOutlet weak var buildView: NSView!
+  @IBOutlet weak var buildBranchLabel: NSTextField!
+  @IBOutlet weak var buildDateLabel: NSTextField!
+
   @IBOutlet var detailTextView: NSTextView!
   @IBOutlet var creditsTextView: NSTextView!
 
@@ -63,11 +68,19 @@ class AboutWindowController: NSWindowController {
     windowBackgroundBox.fillColor = .windowBackgroundColor
     iconImageView.image = NSApp.applicationIconImage
 
-    let (version, build) = Utility.iinaVersion()
+    let (version, build) = InfoDictionary.shared.version
     versionLabel.stringValue = "\(version) Build \(build)"
-    // let copyright = infoDic["NSHumanReadableCopyright"] as! String
 
     mpvVersionLabel.stringValue = PlayerCore.active.mpv.mpvVersion
+    ffmpegVersionLabel.stringValue = "FFmpeg \(String(cString: av_version_info()))"
+
+    if let buildDate = InfoDictionary.shared.buildDate,
+       let buildBranch = InfoDictionary.shared.buildBranch {
+      buildDateLabel.stringValue = buildDate
+      buildDateLabel.isHidden = false
+      buildBranchLabel.stringValue = buildBranch
+      buildBranchLabel.isHidden = false
+    }
 
     if let contrubutionFile = Bundle.main.path(forResource: "Contribution", ofType: "rtf") {
       detailTextView.readRTFD(fromFile: contrubutionFile)

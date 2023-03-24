@@ -126,7 +126,7 @@ class JavascriptAPICore: JavascriptAPI, JavascriptAPICoreExportable {
   }
 
   func getVersion() -> Any {
-    let (iinaVersion, build) = Utility.iinaVersion()
+    let (iinaVersion, build) = InfoDictionary.shared.version
     return [
       "iina": iinaVersion,
       "build": build,

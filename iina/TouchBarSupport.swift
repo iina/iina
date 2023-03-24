@@ -247,18 +247,16 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
 extension MainWindowController {
 
   override func makeTouchBar() -> NSTouchBar? {
-    return player.touchBarSupport.touchBar
+    return player.makeTouchBar()
   }
-
 }
 
 @available(macOS 10.12.2, *)
 extension MiniPlayerWindowController {
 
   override func makeTouchBar() -> NSTouchBar? {
-    return player.touchBarSupport.touchBar
+    return player.makeTouchBar()
   }
-
 }
 
 // MARK: - Slider

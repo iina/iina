@@ -1,5 +1,5 @@
 //
-//  ISO639_2Helper.swift
+//  ISO639_Helper.swift
 //  iina
 //
 //  Created by lhc on 14/3/2017.
@@ -27,6 +27,8 @@ class ISO639Helper {
       let names = v.split(separator: ";").map { String($0) }
       result.append(Language(code: k, name: names))
     }
+    // Sort by description, ascending alpha order
+    result.sort{$0.description.localizedCompare($1.description) == .orderedAscending}
     return result
   }()
 

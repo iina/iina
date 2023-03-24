@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -25,16 +25,15 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
-            <point key="canvasLocation" x="139" y="240"/>
+        <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY" userLabel="Prefs &gt; Utils View">
+            <rect key="frame" x="0.0" y="0.0" width="420" height="400"/>
+            <point key="canvasLocation" x="676" y="630"/>
         </customView>
-        <customView id="qu5-4u-ozP">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="70"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+        <customView translatesAutoresizingMaskIntoConstraints="NO" id="qu5-4u-ozP" userLabel="Prefs &gt; Utils &gt; Default Application">
+            <rect key="frame" x="0.0" y="0.0" width="420" height="68"/>
             <subviews>
                 <textField identifier="SectionTitleDefaultApp" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jnk-en-c84">
-                    <rect key="frame" x="-2" y="45" width="129" height="17"/>
+                    <rect key="frame" x="-2" y="44" width="129" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Default Application" id="ORO-lK-yK5">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -42,7 +41,7 @@
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9bz-Mj-bPf">
-                    <rect key="frame" x="-6" y="1" width="259" height="32"/>
+                    <rect key="frame" x="-6" y="1" width="254" height="32"/>
                     <buttonCell key="cell" type="push" title="Set IINA as the Default Application…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="e1p-Aa-WFG">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -58,17 +57,16 @@
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9bz-Mj-bPf" secondAttribute="trailing" id="KWd-CH-8kp"/>
                 <constraint firstAttribute="bottom" secondItem="9bz-Mj-bPf" secondAttribute="bottom" constant="8" id="NtU-eb-GEd"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jnk-en-c84" secondAttribute="trailing" id="OEH-vJ-iDa"/>
-                <constraint firstItem="9bz-Mj-bPf" firstAttribute="leading" secondItem="jnk-en-c84" secondAttribute="leading" id="kfR-lE-YdU"/>
+                <constraint firstItem="9bz-Mj-bPf" firstAttribute="leading" secondItem="jnk-en-c84" secondAttribute="leading" constant="1" id="kfR-lE-YdU"/>
                 <constraint firstItem="9bz-Mj-bPf" firstAttribute="top" secondItem="jnk-en-c84" secondAttribute="bottom" constant="16" id="vuJ-Zp-jDb"/>
             </constraints>
             <point key="canvasLocation" x="139" y="464"/>
         </customView>
-        <customView id="ve7-5i-dg4">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="248"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+        <customView translatesAutoresizingMaskIntoConstraints="NO" id="ve7-5i-dg4" userLabel="Prefs &gt; Utils &gt; Cache">
+            <rect key="frame" x="0.0" y="0.0" width="419" height="244"/>
             <subviews>
                 <textField identifier="SectionTitleClearCache" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ggb-jX-7Sf">
-                    <rect key="frame" x="-2" y="223" width="83" height="17"/>
+                    <rect key="frame" x="-2" y="220" width="83" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Clear Cache" id="QHA-tO-oSn">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -76,7 +74,7 @@
                     </textFieldCell>
                 </textField>
                 <button identifier="FunctionalButtonClearProg" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bHj-vX-uFl">
-                    <rect key="frame" x="-6" y="143" width="238" height="32"/>
+                    <rect key="frame" x="-6" y="141" width="234" height="32"/>
                     <buttonCell key="cell" type="push" title="Clear Saved Playback Progress…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4nM-C4-9oM">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -85,8 +83,8 @@
                         <action selector="clearWatchLaterBtnAction:" target="-2" id="oL3-bX-caO"/>
                     </connections>
                 </button>
-                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="2Kf-ce-zj1">
-                    <rect key="frame" x="-2" y="179" width="484" height="28"/>
+                <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="2Kf-ce-zj1">
+                    <rect key="frame" x="-2" y="176" width="423" height="28"/>
                     <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" id="pPC-q2-9Gh">
                         <font key="font" metaFont="smallSystem"/>
                         <string key="title">The button below will delete all files in the "watch later" folder. These files contain all saved playback progress and settings applied during playback.</string>
@@ -94,8 +92,8 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Eby-fI-erw">
-                    <rect key="frame" x="-2" y="120" width="484" height="14"/>
+                <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Eby-fI-erw">
+                    <rect key="frame" x="-2" y="118" width="423" height="14"/>
                     <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="The button below will delete all playback histories and entries in &quot;Open Recent&quot;." id="9uP-I0-tdX">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -103,7 +101,7 @@
                     </textFieldCell>
                 </textField>
                 <button identifier="FunctionalButtonClearHistory" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SSk-Rd-BxH">
-                    <rect key="frame" x="-6" y="84" width="187" height="32"/>
+                    <rect key="frame" x="-6" y="83" width="182" height="32"/>
                     <buttonCell key="cell" type="push" title="Clear Playback History…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MP6-Em-Lp4">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -113,7 +111,7 @@
                     </connections>
                 </button>
                 <button identifier="FunctionalButtonClearThumb" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aCe-0n-uch">
-                    <rect key="frame" x="-6" y="1" width="192" height="32"/>
+                    <rect key="frame" x="-6" y="1" width="186" height="32"/>
                     <buttonCell key="cell" type="push" title="Clear Thumbnail Cache…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hsG-JB-TT9">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -123,7 +121,7 @@
                     </connections>
                 </button>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="oBG-5o-wZ1">
-                    <rect key="frame" x="-2" y="59" width="484" height="14"/>
+                    <rect key="frame" x="-2" y="58" width="273" height="14"/>
                     <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="The button below will delete all cached thumbnails." id="Bag-TV-Stp">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -131,7 +129,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2nt-Ax-K1T">
-                    <rect key="frame" x="-2" y="37" width="137" height="14"/>
+                    <rect key="frame" x="-2" y="36" width="137" height="14"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Current thumbnail cache:" id="uV3-aF-UB7">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -139,7 +137,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H1t-lX-s9l">
-                    <rect key="frame" x="139" y="37" width="72" height="14"/>
+                    <rect key="frame" x="139" y="36" width="72" height="14"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Calculating…" id="tRq-eU-AV3">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -147,7 +145,7 @@
                     </textFieldCell>
                 </textField>
                 <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sI2-xW-v1S">
-                    <rect key="frame" x="181" y="94" width="48" height="14"/>
+                    <rect key="frame" x="175" y="93" width="48" height="14"/>
                     <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="Cleared." id="Fb4-dy-CXX">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -155,7 +153,7 @@
                     </textFieldCell>
                 </textField>
                 <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="btv-7s-L8M">
-                    <rect key="frame" x="232" y="153" width="48" height="14"/>
+                    <rect key="frame" x="227" y="151" width="48" height="14"/>
                     <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="Cleared." id="Efe-8C-4eV">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -165,9 +163,9 @@
             </subviews>
             <constraints>
                 <constraint firstItem="btv-7s-L8M" firstAttribute="firstBaseline" secondItem="bHj-vX-uFl" secondAttribute="firstBaseline" id="0S9-c6-mAK"/>
-                <constraint firstItem="bHj-vX-uFl" firstAttribute="leading" secondItem="ve7-5i-dg4" secondAttribute="leading" id="0gW-1v-lvU"/>
+                <constraint firstItem="bHj-vX-uFl" firstAttribute="leading" secondItem="ve7-5i-dg4" secondAttribute="leading" constant="1" id="0gW-1v-lvU"/>
                 <constraint firstItem="H1t-lX-s9l" firstAttribute="leading" secondItem="2nt-Ax-K1T" secondAttribute="trailing" constant="8" id="0wR-aS-I1K"/>
-                <constraint firstAttribute="trailing" secondItem="2Kf-ce-zj1" secondAttribute="trailing" id="2OO-2C-XuI"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2Kf-ce-zj1" secondAttribute="trailing" id="2OO-2C-XuI"/>
                 <constraint firstItem="2Kf-ce-zj1" firstAttribute="top" secondItem="ggb-jX-7Sf" secondAttribute="bottom" constant="16" id="4wd-3x-V1k"/>
                 <constraint firstItem="aCe-0n-uch" firstAttribute="top" secondItem="2nt-Ax-K1T" secondAttribute="bottom" constant="8" id="5MO-Ws-kl9"/>
                 <constraint firstItem="Eby-fI-erw" firstAttribute="top" secondItem="bHj-vX-uFl" secondAttribute="bottom" constant="16" id="5ss-60-YfH"/>
@@ -182,16 +180,16 @@
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="aCe-0n-uch" secondAttribute="trailing" id="O8f-oq-G8C"/>
                 <constraint firstItem="Eby-fI-erw" firstAttribute="leading" secondItem="ve7-5i-dg4" secondAttribute="leading" id="ONf-sb-lXx"/>
                 <constraint firstItem="sI2-xW-v1S" firstAttribute="firstBaseline" secondItem="SSk-Rd-BxH" secondAttribute="firstBaseline" id="Pjn-Os-dCj"/>
-                <constraint firstItem="SSk-Rd-BxH" firstAttribute="leading" secondItem="ve7-5i-dg4" secondAttribute="leading" id="QO1-85-aWx"/>
+                <constraint firstItem="SSk-Rd-BxH" firstAttribute="leading" secondItem="ve7-5i-dg4" secondAttribute="leading" constant="1" id="QO1-85-aWx"/>
                 <constraint firstItem="SSk-Rd-BxH" firstAttribute="top" secondItem="Eby-fI-erw" secondAttribute="bottom" constant="8" id="R0O-Rh-rSa"/>
                 <constraint firstItem="btv-7s-L8M" firstAttribute="leading" secondItem="bHj-vX-uFl" secondAttribute="trailing" constant="8" id="WJg-zh-JMa"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bHj-vX-uFl" secondAttribute="trailing" id="WuM-dI-sLS"/>
                 <constraint firstItem="sI2-xW-v1S" firstAttribute="leading" secondItem="SSk-Rd-BxH" secondAttribute="trailing" constant="8" id="Y4R-V1-TZS"/>
-                <constraint firstAttribute="trailing" secondItem="Eby-fI-erw" secondAttribute="trailing" id="Yd3-8f-tuC"/>
-                <constraint firstAttribute="trailing" secondItem="oBG-5o-wZ1" secondAttribute="trailing" id="b2I-RE-KhA"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Eby-fI-erw" secondAttribute="trailing" id="Yd3-8f-tuC"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="oBG-5o-wZ1" secondAttribute="trailing" id="b2I-RE-KhA"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ggb-jX-7Sf" secondAttribute="trailing" id="bmh-Ky-JTi"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="sI2-xW-v1S" secondAttribute="trailing" id="cXZ-6r-orn"/>
-                <constraint firstItem="aCe-0n-uch" firstAttribute="leading" secondItem="ve7-5i-dg4" secondAttribute="leading" id="dWb-Ts-MLj"/>
+                <constraint firstItem="aCe-0n-uch" firstAttribute="leading" secondItem="ve7-5i-dg4" secondAttribute="leading" constant="1" id="dWb-Ts-MLj"/>
                 <constraint firstItem="2Kf-ce-zj1" firstAttribute="leading" secondItem="ve7-5i-dg4" secondAttribute="leading" id="iZX-Wh-11C"/>
                 <constraint firstItem="2nt-Ax-K1T" firstAttribute="leading" secondItem="oBG-5o-wZ1" secondAttribute="leading" id="sWZ-Vh-V9U"/>
                 <constraint firstItem="ggb-jX-7Sf" firstAttribute="top" secondItem="ve7-5i-dg4" secondAttribute="top" constant="8" id="t2W-Wg-LbY"/>
@@ -199,9 +197,8 @@
             </constraints>
             <point key="canvasLocation" x="139" y="828"/>
         </customView>
-        <customView id="Bem-Ss-PQZ">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="104"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+        <customView translatesAutoresizingMaskIntoConstraints="NO" id="Bem-Ss-PQZ" userLabel="Prefs &gt; Utils &gt; Alerts">
+            <rect key="frame" x="0.0" y="0.0" width="420" height="104"/>
             <subviews>
                 <textField identifier="SectionTitleRestoreAlert" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2lD-HN-fmS">
                     <rect key="frame" x="-2" y="80" width="97" height="16"/>
@@ -212,7 +209,7 @@
                     </textFieldCell>
                 </textField>
                 <button identifier="FunctionalButtonRestoreAlerts" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y5P-5X-X4x">
-                    <rect key="frame" x="-7" y="1" width="206" height="32"/>
+                    <rect key="frame" x="-6" y="1" width="206" height="32"/>
                     <buttonCell key="cell" type="push" title="Restore Suppressed Alerts…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XAz-xa-LVo">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -221,8 +218,8 @@
                         </connections>
                     </buttonCell>
                 </button>
-                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="xmX-IR-h5j">
-                    <rect key="frame" x="-2" y="36" width="484" height="28"/>
+                <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="xmX-IR-h5j">
+                    <rect key="frame" x="-2" y="36" width="424" height="28"/>
                     <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="The button below will restore all alerts that have been suppressed using the &quot;Do not show this message again&quot; checkbox." id="F5i-KF-2SW">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -230,7 +227,7 @@
                     </textFieldCell>
                 </textField>
                 <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KAc-Jd-4LW">
-                    <rect key="frame" x="198" y="11" width="55" height="14"/>
+                    <rect key="frame" x="199" y="11" width="55" height="14"/>
                     <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="Restored." id="Wdh-me-hdC">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -246,21 +243,20 @@
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="y5P-5X-X4x" secondAttribute="trailing" id="CIV-gs-kNa"/>
                 <constraint firstItem="KAc-Jd-4LW" firstAttribute="leading" secondItem="y5P-5X-X4x" secondAttribute="trailing" constant="8" id="EHh-wZ-laO"/>
                 <constraint firstItem="KAc-Jd-4LW" firstAttribute="firstBaseline" secondItem="y5P-5X-X4x" secondAttribute="firstBaseline" id="Lgn-Sk-E3m"/>
-                <constraint firstAttribute="trailing" secondItem="xmX-IR-h5j" secondAttribute="trailing" id="NLT-RO-rS1"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xmX-IR-h5j" secondAttribute="trailing" id="NLT-RO-rS1"/>
                 <constraint firstAttribute="bottom" secondItem="y5P-5X-X4x" secondAttribute="bottom" constant="8" id="ODa-Bv-ffy"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KAc-Jd-4LW" secondAttribute="trailing" id="Vlk-9p-5DO"/>
                 <constraint firstItem="y5P-5X-X4x" firstAttribute="top" secondItem="xmX-IR-h5j" secondAttribute="bottom" constant="8" id="jSk-J3-DdX"/>
-                <constraint firstItem="y5P-5X-X4x" firstAttribute="leading" secondItem="Bem-Ss-PQZ" secondAttribute="leading" id="lCU-Pd-QhR"/>
+                <constraint firstItem="y5P-5X-X4x" firstAttribute="leading" secondItem="Bem-Ss-PQZ" secondAttribute="leading" constant="1" id="lCU-Pd-QhR"/>
                 <constraint firstItem="2lD-HN-fmS" firstAttribute="leading" secondItem="Bem-Ss-PQZ" secondAttribute="leading" id="wMJ-ay-p77"/>
             </constraints>
             <point key="canvasLocation" x="139" y="600"/>
         </customView>
-        <customView id="lOp-07-Z6M">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="101"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+        <customView translatesAutoresizingMaskIntoConstraints="NO" id="lOp-07-Z6M" userLabel="Prefs &gt; Utils &gt; Browser Extension">
+            <rect key="frame" x="0.0" y="0.0" width="420" height="102"/>
             <subviews>
                 <textField identifier="SectionTitleBrowserExt" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Al6-1d-mCg">
-                    <rect key="frame" x="-2" y="76" width="211" height="17"/>
+                    <rect key="frame" x="-2" y="78" width="211" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Get Browser Extensions for IINA" id="zCe-1f-tkF">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -268,7 +264,7 @@
                     </textFieldCell>
                 </textField>
                 <button identifier="FunctionalButtonChrome" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HRq-fs-0uo">
-                    <rect key="frame" x="0.0" y="7" width="76" height="17"/>
+                    <rect key="frame" x="0.0" y="8" width="73" height="18"/>
                     <buttonCell key="cell" type="inline" title="Chrome" bezelStyle="inline" image="NSFollowLinkFreestandingTemplate" imagePosition="left" alignment="center" borderStyle="border" inset="2" id="yuw-2i-ICd">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystemBold"/>
@@ -278,7 +274,7 @@
                     </connections>
                 </button>
                 <button identifier="FunctionalButtonFirefox" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="G58-js-HgZ">
-                    <rect key="frame" x="88" y="7" width="71" height="17"/>
+                    <rect key="frame" x="85" y="8" width="68" height="18"/>
                     <buttonCell key="cell" type="inline" title="Firefox" bezelStyle="inline" image="NSFollowLinkFreestandingTemplate" imagePosition="left" alignment="center" borderStyle="border" inset="2" id="f9i-sS-MJN">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystemBold"/>
@@ -288,7 +284,7 @@
                     </connections>
                 </button>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="DZn-sK-pTY">
-                    <rect key="frame" x="-2" y="32" width="484" height="28"/>
+                    <rect key="frame" x="-2" y="34" width="424" height="28"/>
                     <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Open links or current webpage in IINA with one click. The website must be supported by youtube-dl." id="GAo-fx-NG0">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -307,22 +303,22 @@
                 <constraint firstItem="HRq-fs-0uo" firstAttribute="leading" secondItem="lOp-07-Z6M" secondAttribute="leading" id="jhd-yd-lnA"/>
                 <constraint firstAttribute="bottom" secondItem="HRq-fs-0uo" secondAttribute="bottom" constant="8" id="rd0-xS-Ehg"/>
                 <constraint firstItem="HRq-fs-0uo" firstAttribute="top" secondItem="DZn-sK-pTY" secondAttribute="bottom" constant="8" id="tN3-Bb-JbP"/>
-                <constraint firstAttribute="trailing" secondItem="DZn-sK-pTY" secondAttribute="trailing" id="uEn-NP-ZYa"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DZn-sK-pTY" secondAttribute="trailing" id="uEn-NP-ZYa"/>
                 <constraint firstItem="Al6-1d-mCg" firstAttribute="top" secondItem="lOp-07-Z6M" secondAttribute="top" constant="8" id="vMZ-SW-pO3"/>
             </constraints>
             <point key="canvasLocation" x="139" y="1059"/>
         </customView>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="gck-1e-Yi7">
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="gck-1e-Yi7" userLabel="&quot;Set as Default&quot; Window">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="163" y="199" width="448" height="192"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="3440" height="1415"/>
             <view key="contentView" id="HNy-Eo-3UU">
                 <rect key="frame" x="0.0" y="0.0" width="448" height="192"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2JS-Ar-lM8">
-                        <rect key="frame" x="18" y="135" width="412" height="34"/>
+                        <rect key="frame" x="18" y="140" width="412" height="32"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Please select the media types that you want to make IINA as the default Application for." id="uvK-Y1-dZr">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -330,28 +326,28 @@
                         </textFieldCell>
                     </textField>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dhO-nq-Edx">
-                        <rect key="frame" x="26" y="103" width="57" height="18"/>
+                        <rect key="frame" x="26" y="107" width="61" height="18"/>
                         <buttonCell key="cell" type="check" title="Video" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="8wH-Gi-mRV">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bjj-u6-vYB">
-                        <rect key="frame" x="26" y="81" width="57" height="18"/>
+                        <rect key="frame" x="26" y="83" width="61" height="18"/>
                         <buttonCell key="cell" type="check" title="Audio" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="jFt-2a-nmc">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MC6-FT-IVG">
-                        <rect key="frame" x="26" y="59" width="65" height="18"/>
+                        <rect key="frame" x="26" y="59" width="69" height="18"/>
                         <buttonCell key="cell" type="check" title="Playlist" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="MGo-J8-zWE">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Lh7-1a-rsH">
-                        <rect key="frame" x="352" y="13" width="82" height="32"/>
+                        <rect key="frame" x="359" y="13" width="76" height="32"/>
                         <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="IkF-qG-s4j">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -364,7 +360,7 @@ DQ
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ak8-rh-mxC">
-                        <rect key="frame" x="274" y="13" width="82" height="32"/>
+                        <rect key="frame" x="289" y="13" width="76" height="32"/>
                         <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kbP-VI-dmT">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -399,10 +395,10 @@ Gw
                     <constraint firstItem="MC6-FT-IVG" firstAttribute="leading" secondItem="bjj-u6-vYB" secondAttribute="leading" id="zaq-Rb-2fW"/>
                 </constraints>
             </view>
-            <point key="canvasLocation" x="-493" y="582.5"/>
+            <point key="canvasLocation" x="-388" y="657"/>
         </window>
     </objects>
     <resources>
-        <image name="NSFollowLinkFreestandingTemplate" width="14" height="14"/>
+        <image name="NSFollowLinkFreestandingTemplate" width="20" height="20"/>
     </resources>
 </document>

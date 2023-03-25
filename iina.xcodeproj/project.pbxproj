@@ -14,6 +14,7 @@
 		49542982216C34950058F680 /* ToolbarItemIcon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 49542981216C34950058F680 /* ToolbarItemIcon.pdf */; };
 		49542986216C34950058F680 /* OpenInIINA.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 49542973216C34950058F680 /* OpenInIINA.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		496B19921E2968530035AF10 /* PIP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496B19911E2968530035AF10 /* PIP.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		513A4FFA29B53F8100A8EA7D /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513A4FF929B53F8100A8EA7D /* Atomic.swift */; };
 		519872FF26879B9B00F84BCC /* AccessibilityPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519872FE26879B9B00F84BCC /* AccessibilityPreferences.swift */; };
 		51C1BA3A291CA76700C1208A /* InfoDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C1BA39291CA76700C1208A /* InfoDictionary.swift */; };
 		51F7974728C7E00200812D0D /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F7974628C7E00200812D0D /* Lock.swift */; };
@@ -774,6 +775,7 @@
 		4964988E2919E47900CD61A5 /* OpenInIINA.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = OpenInIINA.xcconfig; sourceTree = "<group>"; };
 		496B19911E2968530035AF10 /* PIP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PIP.framework; path = ../../../../System/Library/PrivateFrameworks/PIP.framework; sourceTree = "<group>"; };
 		49F7E3BF2920D65C002DA28E /* Availability.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Availability.xcconfig; sourceTree = "<group>"; };
+		513A4FF929B53F8100A8EA7D /* Atomic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		519872FE26879B9B00F84BCC /* AccessibilityPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityPreferences.swift; sourceTree = "<group>"; };
 		51C1BA39291CA76700C1208A /* InfoDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoDictionary.swift; sourceTree = "<group>"; };
 		51F7974628C7E00200812D0D /* Lock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
@@ -2077,6 +2079,7 @@
 			children = (
 				84A886E21E24F2D3008755BB /* Sub */,
 				8497A4831D2FF573005F504F /* iina-Bridging-Header.h */,
+				513A4FF929B53F8100A8EA7D /* Atomic.swift */,
 				84A0BA9A1D2FAB4100BC8DA1 /* Parameter.swift */,
 				84EB1F061D2F5E76004FA5A1 /* Utility.swift */,
 				8461C52F1D462488006E91FF /* VideoTime.swift */,
@@ -2877,6 +2880,7 @@
 				E35306EF2147A8CE008FE492 /* JavascriptPlugin.swift in Sources */,
 				84795C371E0825AD0059A648 /* GifGenerator.swift in Sources */,
 				845ABEAC1D4D19C000BFB15B /* MPVTrack.swift in Sources */,
+				513A4FFA29B53F8100A8EA7D /* Atomic.swift in Sources */,
 				84AABE981DBFB62F00D138FD /* FixedFontManager.m in Sources */,
 				84EB1EDA1D2F51D3004FA5A1 /* AppDelegate.swift in Sources */,
 				84CFC92623F8DDE000381E5B /* PlayerWindowController.swift in Sources */,

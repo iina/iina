@@ -289,7 +289,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   private func updateSubTabControl() {
     if let currSub = player.info.currentTrack(.sub) {
-      subScaleSlider.isEnabled = !currSub.isImageSub
       // FIXME: CollorWells cannot be disable?
       let enableTextSettings = !(currSub.isAssSub || currSub.isImageSub)
       [subTextColorWell, subTextSizePopUp, subTextBgColorWell, subTextBorderColorWell, subTextBorderWidthPopUp, subTextFontBtn].forEach { $0.isEnabled = enableTextSettings }

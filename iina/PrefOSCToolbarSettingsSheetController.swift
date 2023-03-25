@@ -13,6 +13,10 @@ extension NSPasteboard.PasteboardType {
   static let iinaOSCCurrentToolbarButtonType = NSPasteboard.PasteboardType("com.collider.iina.iinaOSCCurrentToolbarButtonType")
 }
 
+class ToolbarSettingsSheetWindow: NSWindow {
+  override var canBecomeKey: Bool { return true }
+}
+
 class PrefOSCToolbarSettingsSheetController: NSWindowController, PrefOSCToolbarCurrentItemsViewDelegate {
   override var windowNibName: NSNib.Name {
     return NSNib.Name("PrefOSCToolbarSettingsSheetController")

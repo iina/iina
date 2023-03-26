@@ -10,8 +10,10 @@
             <connections>
                 <outlet property="completionPopover" destination="p0p-bU-ap2" id="CDT-9L-7cL"/>
                 <outlet property="completionTableView" destination="MUI-pR-u00" id="0hW-JH-Bsp"/>
+                <outlet property="imageViewLeadingConstraint" destination="ekq-kA-abF" id="wFT-ym-4sD"/>
                 <outlet property="maskView" destination="mpW-1b-ztU" id="1IU-tZ-HzF"/>
                 <outlet property="navTableSearchFieldSpacingConstraint" destination="nOO-7o-aOI" id="zeq-Jq-9Ma"/>
+                <outlet property="navTableWidthConstraint" destination="YP9-me-Ohm" id="LrO-Ha-X4z"/>
                 <outlet property="noResultLabel" destination="0yO-bT-GQW" id="9Yr-Yb-yWw"/>
                 <outlet property="prefDetailContentView" destination="5R5-77-bmq" id="om5-Bx-6J5"/>
                 <outlet property="prefDetailScrollView" destination="VYU-tb-v3l" id="vrz-s4-dn8"/>

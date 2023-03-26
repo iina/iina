@@ -138,6 +138,8 @@ class PreferenceWindowController: NSWindowController {
   @IBOutlet weak var noResultLabel: NSTextField!
 
   @IBOutlet weak var navTableSearchFieldSpacingConstraint: NSLayoutConstraint!
+  @IBOutlet weak var navTableWidthConstraint: NSLayoutConstraint!
+  @IBOutlet weak var imageViewLeadingConstraint: NSLayoutConstraint!
 
   private var detailViewBottomConstraint: NSLayoutConstraint?
 
@@ -170,6 +172,8 @@ class PreferenceWindowController: NSWindowController {
     // But for older MacOS versions, the style will default to "full width" with no highlight offset, which will touch the Search field.
     if #unavailable(macOS 11.0) {
       navTableSearchFieldSpacingConstraint.constant = 10.0
+      navTableWidthConstraint.isActive = false
+      imageViewLeadingConstraint.constant = 20
     }
 
     var viewMap = [

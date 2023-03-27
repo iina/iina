@@ -16,6 +16,7 @@
             <connections>
                 <outlet property="dockMenu" destination="fxS-xv-Jb2" id="YdT-kw-qmk"/>
                 <outlet property="menuController" destination="cyK-tE-xgA" id="6U6-oJ-g0G"/>
+                <outlet property="updaterController" destination="wTK-gz-aTs" id="pWT-ES-mjo"/>
             </connections>
         </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>

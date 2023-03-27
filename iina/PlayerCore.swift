@@ -677,9 +677,6 @@ class PlayerCore: NSObject {
     } else {
       mpv.command(.frameStep)
     }
-    if info.isPaused {
-      mainWindow.videoView.displayIdle()
-    }
   }
 
   func screenshot() {

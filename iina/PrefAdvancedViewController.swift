@@ -35,11 +35,12 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
   var options: [[String]] = []
 
   override var sectionViews: [NSView] {
-    return [headerView, settingsView]
+    return [headerView, loggingSettingsView, mpvSettingsView]
   }
 
   @IBOutlet var headerView: NSView!
-  @IBOutlet var settingsView: NSView!
+  @IBOutlet var loggingSettingsView: NSView!
+  @IBOutlet var mpvSettingsView: NSView!
 
   @IBOutlet weak var enableAdvancedSettingsBtn: Switch!
   @IBOutlet weak var optionsTableView: NSTableView!

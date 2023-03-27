@@ -102,7 +102,6 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     currentConfName = currentConf
     guard let path = getFilePath(forConfig: currentConf) else { return }
     currentConfFilePath = path
-    loadConfigFile()
     
     NotificationCenter.default.addObserver(forName: .iinaKeyBindingChanged, object: nil, queue: .main, using: saveToConfFile)
   }

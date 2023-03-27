@@ -506,6 +506,7 @@ class PlayerCore: NSObject {
     let (width, height) = originalVideoSize
     let aspect = (width == 0 || height == 0) ? 1 : CGFloat(width) / CGFloat(height)
     miniPlayer.updateVideoViewAspectConstraint(withAspect: aspect)
+    miniPlayer.window?.layoutIfNeeded()
 
     // if received video size before switching to music mode, hide default album art
     if info.vid != 0 {

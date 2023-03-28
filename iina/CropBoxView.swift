@@ -220,8 +220,8 @@ class CropBoxView: NSView {
   func updateCursorRects() {
     let x = boxRect.origin.x
     let y = boxRect.origin.y
-    let w = boxRect.width
-    let h = boxRect.height
+    let w = boxRect.size.width
+    let h = boxRect.size.height
 
     rectTop = NSMakeRect(x, y-2, w, 4)
     rectBottom = NSMakeRect(x, y+h-2, w, 4)

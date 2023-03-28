@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -30,7 +30,7 @@
                     </textFieldCell>
                 </textField>
                 <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yrf-Aq-Gy6">
-                    <rect key="frame" x="22" y="14" width="284" height="24"/>
+                    <rect key="frame" x="22" y="15" width="284" height="23"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="daU-3D-oN9"/>
                         <constraint firstAttribute="width" constant="280" id="qxp-bm-iSs"/>
@@ -62,7 +62,7 @@
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sHe-JW-Elk">
-                    <rect key="frame" x="410" y="11" width="72" height="29"/>
+                    <rect key="frame" x="417" y="10" width="66" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="18" id="Pt7-22-dpN"/>
                     </constraints>
@@ -75,7 +75,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="99r-Th-YSz">
-                    <rect key="frame" x="335" y="11" width="82" height="29"/>
+                    <rect key="frame" x="350" y="10" width="76" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="18" id="IaY-oN-WAf"/>
                     </constraints>
@@ -92,15 +92,17 @@ Gw
                 </button>
             </subviews>
             <constraints>
+                <constraint firstItem="hsz-Wv-zHe" firstAttribute="leading" secondItem="EC9-NQ-gwl" secondAttribute="trailing" constant="10" id="C2y-Zz-xI5"/>
                 <constraint firstItem="99r-Th-YSz" firstAttribute="centerY" secondItem="sHe-JW-Elk" secondAttribute="centerY" id="CYO-k8-qKy"/>
                 <constraint firstItem="99r-Th-YSz" firstAttribute="baseline" secondItem="yrf-Aq-Gy6" secondAttribute="baseline" id="FSv-Cr-xkP"/>
-                <constraint firstItem="hsz-Wv-zHe" firstAttribute="leading" secondItem="EC9-NQ-gwl" secondAttribute="trailing" constant="10" id="FVG-qD-NKx"/>
                 <constraint firstItem="yrf-Aq-Gy6" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="24" id="Gnw-C5-HOK"/>
                 <constraint firstItem="sHe-JW-Elk" firstAttribute="leading" secondItem="99r-Th-YSz" secondAttribute="trailing" constant="5" id="KrU-2L-Jcb"/>
                 <constraint firstItem="EC9-NQ-gwl" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="a0X-o8-wnM"/>
                 <constraint firstAttribute="trailing" secondItem="sHe-JW-Elk" secondAttribute="trailing" constant="24" id="b0k-Ij-6vn"/>
                 <constraint firstItem="hsz-Wv-zHe" firstAttribute="baseline" secondItem="EC9-NQ-gwl" secondAttribute="baseline" id="bwy-R7-vsC"/>
+                <constraint firstItem="99r-Th-YSz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yrf-Aq-Gy6" secondAttribute="trailing" id="cQK-Sp-AJP"/>
                 <constraint firstItem="EC9-NQ-gwl" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="26" id="gic-Fg-ZHv"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hsz-Wv-zHe" secondAttribute="trailing" id="t4W-lu-EHv"/>
                 <constraint firstAttribute="bottom" secondItem="yrf-Aq-Gy6" secondAttribute="bottom" constant="16" id="ugR-VB-Oeh"/>
             </constraints>
             <point key="canvasLocation" x="73" y="121"/>

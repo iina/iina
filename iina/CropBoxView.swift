@@ -222,24 +222,10 @@ class CropBoxView: NSView {
     let w = boxRect.size.width
     let h = boxRect.size.height
     
-    // call NSMakeRect with non-negative width and heights
-    func makeRect(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat) -> NSRect {
-      var (x, y, w, h) = (x, y, w, h)
-      if w < 0 {
-        w = -w
-        x -= w
-      }
-      if h < 0 {
-        h = -h
-        y -= h
-      }
-      return NSMakeRect(x, y, w, h)
-    }
-    
-    rectTop = makeRect(x, y-2, w, 4)
-    rectBottom = makeRect(x, y+h-2, w, 4)
-    rectLeft = makeRect(x-2, y+2, 4, h-4)
-    rectRight = makeRect(x+w-2, y+2, 4, h-4)
+    rectTop = NSMakeRect(x, y-2, w, 4).standardized
+    rectBottom = NSMakeRect(x, y+h-2, w, 4).standardized
+    rectLeft = NSMakeRect(x-2, y+2, 4, h-4).standardized
+    rectRight = NSMakeRect(x+w-2, y+2, 4, h-4).standardized
 
     window?.invalidateCursorRects(for: self)
   }

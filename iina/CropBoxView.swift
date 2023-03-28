@@ -205,7 +205,6 @@ class CropBoxView: NSView {
     path.lineWidth = 2
     path.fill()
     path.stroke()
-
   }
 
   // MARK: - Cursor rects
@@ -222,11 +221,25 @@ class CropBoxView: NSView {
     let y = boxRect.origin.y
     let w = boxRect.size.width
     let h = boxRect.size.height
-
-    rectTop = NSMakeRect(x, y-2, w, 4)
-    rectBottom = NSMakeRect(x, y+h-2, w, 4)
-    rectLeft = NSMakeRect(x-2, y+2, 4, h-4)
-    rectRight = NSMakeRect(x+w-2, y+2, 4, h-4)
+    
+    // call NSMakeRect with non-negative width and heights
+    func makeRect(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat) -> NSRect {
+      var (x, y, w, h) = (x, y, w, h)
+      if w < 0 {
+        w = -w
+        x -= w
+      }
+      if h < 0 {
+        h = -h
+        y -= h
+      }
+      return NSMakeRect(x, y, w, h)
+    }
+    
+    rectTop = makeRect(x, y-2, w, 4)
+    rectBottom = makeRect(x, y+h-2, w, 4)
+    rectLeft = makeRect(x-2, y+2, 4, h-4)
+    rectRight = makeRect(x+w-2, y+2, 4, h-4)
 
     window?.invalidateCursorRects(for: self)
   }

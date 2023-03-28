@@ -2079,7 +2079,7 @@ class MainWindowController: PlayerWindowController {
 
     // show crop settings view
     NSAnimationContext.runAnimationGroup({ (context) in
-      context.duration = CropAnimationDuration
+      context.duration = AccessibilityPreferences.adjustedDuration(CropAnimationDuration)
       context.timingFunction = CAMediaTimingFunction(name: .easeIn)
       bottomBarBottomConstraint.animator().constant = 0
       ([.top, .bottom, .left, .right] as [NSLayoutConstraint.Attribute]).forEach { attr in
@@ -2118,7 +2118,7 @@ class MainWindowController: PlayerWindowController {
 
     // if with animation
     NSAnimationContext.runAnimationGroup({ (context) in
-      context.duration = CropAnimationDuration
+      context.duration = AccessibilityPreferences.adjustedDuration(CropAnimationDuration)
       context.timingFunction = CAMediaTimingFunction(name: .easeIn)
       bottomBarBottomConstraint.animator().constant = -InteractiveModeBottomViewHeight
       ([.top, .bottom, .left, .right] as [NSLayoutConstraint.Attribute]).forEach { attr in

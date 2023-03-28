@@ -185,6 +185,7 @@ class CropBoxView: NSView {
   override func mouseUp(with event: NSEvent) {
     if isDragging {
       isDragging = false
+      boxRect = boxRect.standardized
     } else if isFreeSelecting {
       isFreeSelecting = false
       updateCursorRects()
@@ -218,8 +219,8 @@ class CropBoxView: NSView {
   }
 
   func updateCursorRects() {
-    let x = boxRect.origin.x
-    let y = boxRect.origin.y
+    let x = boxRect.minX
+    let y = boxRect.minY
     let w = boxRect.width
     let h = boxRect.height
 

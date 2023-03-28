@@ -221,7 +221,6 @@ class CropBoxView: NSView {
     let y = boxRect.origin.y
     let w = boxRect.size.width
     let h = boxRect.size.height
-    
     rectTop = NSMakeRect(x, y-2, w, 4).standardized
     rectBottom = NSMakeRect(x, y+h-2, w, 4).standardized
     rectLeft = NSMakeRect(x-2, y+2, 4, h-4).standardized

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -110,7 +110,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <binding destination="xyA-SE-Ihh" name="value" keyPath="updater.automaticallyChecksForUpdates" id="vbY-TI-GsH"/>
+                        <binding destination="-3" name="value" keyPath="delegate.updaterController.updater.automaticallyChecksForUpdates" id="jlJ-QN-IRH"/>
                     </connections>
                 </button>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="6Hg-O4-cBP">
@@ -166,8 +166,8 @@
                         </menu>
                     </popUpButtonCell>
                     <connections>
-                        <binding destination="xyA-SE-Ihh" name="enabled" keyPath="updater.automaticallyChecksForUpdates" id="z2H-Xa-zIs"/>
-                        <binding destination="xyA-SE-Ihh" name="selectedTag" keyPath="updater.updateCheckInterval" id="tcC-qq-eR4"/>
+                        <binding destination="-3" name="enabled" keyPath="delegate.updaterController.updater.automaticallyChecksForUpdates" id="Ly4-Xs-Mka"/>
+                        <binding destination="-3" name="selectedTag" keyPath="delegate.updaterController.updater.updateCheckInterval" id="iLA-V7-aFg"/>
                     </connections>
                 </popUpButton>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="b7I-2V-MYa">
@@ -799,9 +799,8 @@
             </constraints>
             <point key="canvasLocation" x="-2190" y="463"/>
         </customView>
-        <customObject id="xyA-SE-Ihh" customClass="SPUStandardUpdaterController"/>
     </objects>
     <resources>
-        <image name="NSRevealFreestandingTemplate" width="20" height="20"/>
+        <image name="NSRevealFreestandingTemplate" width="19" height="19"/>
     </resources>
 </document>

@@ -35,15 +35,9 @@ func - (lhs: NSPoint, rhs: NSPoint) -> NSPoint {
 }
 
 extension CGPoint {
-  // This is Pythagoras's theorem to calculate the distance between two points,
-  // but omitting the square root at the end, which is an expensive operation.
-  // If doing a comparison with another number, it's more efficient to just square the other number.
-  func distanceSquared(to: CGPoint) -> CGFloat {
-    return (self.x - to.x) * (self.x - to.x) + (self.y - to.y) * (self.y - to.y)
-  }
-
-  func isWithinRadius(radius: CGFloat, ofPoint otherPoint: CGPoint) -> Bool {
-    return self.distanceSquared(to: otherPoint) <= (radius * radius)
+  // Uses Pythagorean theorem to calculate the distance between two points
+  func distance(to: CGPoint) -> CGFloat {
+    return sqrt(pow(self.x - to.x, 2) + pow(self.y - to.y, 2))
   }
 }
 

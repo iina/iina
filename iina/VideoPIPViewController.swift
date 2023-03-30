@@ -10,6 +10,16 @@ import Cocoa
 
 class VideoPIPViewController: PIPViewController {
 
+  /// Force a draw, if needed.
+  ///
+  /// If the image is changing there is no need to force a draw. However if playback is paused, or if playback is in progress but the video
+  /// track is an album art still image then drawing is required.
+  private func forceDraw() {
+    guard let controller = delegate as? MainWindowController, controller.player.info.isPaused
+            || controller.player.info.currentTrack(.video)?.isAlbumart ?? false else { return }
+    controller.videoView.videoLayer.draw(forced: true)
+  }
+
   /// Force a draw after entering PiP.
   ///
   /// If playback is paused then after entering PiP mode the PiP window will sometimes be white. Force a draw to ensure this does not
@@ -19,8 +29,7 @@ class VideoPIPViewController: PIPViewController {
   /// asynchronously.
   override func viewDidLayout() {
     super.viewDidLayout()
-    guard let controller = delegate as? MainWindowController else { return }
-    controller.videoView.videoLayer.draw(forced: true)
+    forceDraw()
   }
 
   /// Force a draw after exiting PiP.
@@ -29,7 +38,6 @@ class VideoPIPViewController: PIPViewController {
   /// happen and a frame is displayed. See issue #4268 and PR #4286 for details.
   override func viewDidDisappear() {
     super.viewDidDisappear()
-    guard let controller = delegate as? MainWindowController else { return }
-    controller.videoView.videoLayer.draw(forced: true)
+    forceDraw()
   }
 }

@@ -605,10 +605,21 @@ class PlayerCore: NSObject {
     Logger.log("Playback has stopped", subsystem: subsystem)
     isStopped = true
     isStopping = false
-    // Must clear audio and video filters or they will be applied to the next video if this core is
-    // reused.
-    mpv.command(.af, args: ["clr", ""], checkError: false)
-    mpv.command(.vf, args: ["clr", ""], checkError: false)
+    // The mpv player carries over many settings when playing the next video. This behavior is
+    // useful when playing a series of videos such as the episodes of a show. However IINA differs
+    // from mpv in that if the preference "Always open media in a new window" is enabled then there
+    // can be multiple videos open and playable at the same time each with their own mpv core. Each
+    // mpv core has its own set of settings. Once there is more than one player/mpv core in the
+    // cache will appear random to the user as to which settings are applied when another video is
+    // opened. This means we want to preserve the mpv behavior of applying settings to the next
+    // video when "Always open media in a new window" is not enabled. However if this preference is
+    // enabled then we want to clear certain settings to avoid random behavior.
+    if Preference.bool(for: .alwaysOpenInNewWindow) {
+      // Must clear audio and video filters or they will be applied to the next video if this core
+      // is reused.
+      mpv.command(.af, args: ["clr", ""], checkError: false)
+      mpv.command(.vf, args: ["clr", ""], checkError: false)
+    }
     postNotification(.iinaPlayerStopped)
   }
 

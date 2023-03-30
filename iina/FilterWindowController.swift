@@ -104,9 +104,13 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
     }
     currentFiltersTableView.reloadData()
     savedFiltersTableView.reloadData()
-    // Once a player window is being closed the user must not be allowed to add a filter to the
-    // active player core if it is being stopped and about to be added to the player core cache.
-    addButton.isEnabled = !pc.isStopping && !pc.isStopped
+    // If the preference "Always open media in a new window" is enabled then once a player window is
+    // being closed the user must not be allowed to add a filter to the active player core if it is
+    // being stopped and about to be added to the player core cache. With that preference enabled
+    // there can be multiple player/mpv cores cached which would result in random behavior as to
+    // what filters would be applied to the next video.
+    addButton.isEnabled = !Preference.bool(for: .alwaysOpenInNewWindow)
+                          || !pc.isStopping && !pc.isStopped
   }
 
   func setFilters() {

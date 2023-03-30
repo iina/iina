@@ -34,6 +34,13 @@ func - (lhs: NSPoint, rhs: NSPoint) -> NSPoint {
   return NSMakePoint(lhs.x - rhs.x, lhs.y - rhs.y)
 }
 
+extension CGPoint {
+  // Uses Pythagorean theorem to calculate the distance between two points
+  func distance(to: CGPoint) -> CGFloat {
+    return sqrt(pow(self.x - to.x, 2) + pow(self.y - to.y, 2))
+  }
+}
+
 extension NSSize {
 
   var aspect: CGFloat {

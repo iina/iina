@@ -186,10 +186,17 @@ extension FilterPreset {
     ], paramOrder: "w:h:x:y:aspect:round") { instance in
       return MPVFilter(mpvFilterFromPresetInstance: instance)
     },
+    // From the FFmpeg 6.0 documentation for the unsharp filter you would expect the luma matrix
+    // horizontal and vertical size parameters to be limited to a maximum of 23. This is clearly
+    // spelled out in the documentation. However FFmpeg imposes an additional restriction on the
+    // combined size of these two parameters that is not currently mentioned in the documentation.
+    // If this size is exceeded FFmpeg will reject the filter reporting the error message
+    // "luma or chroma or alpha matrix size too big". To adhere to this restriction the matrix size
+    // maximum must be 13. See issue #4259 for details.
     // sharpen
     FilterPreset("sharpen", params: [
       "amount": PM.float(min: 0, max: 1.5),
-      "msize": PM.int(min: 3, max: 23, step: 2, defaultValue: 5)
+      "msize": PM.int(min: 3, max: 13, step: 2, defaultValue: 5)
     ]) { instance in
       return MPVFilter.unsharp(amount: instance.value(for: "amount").floatValue,
                                msize: instance.value(for: "msize").intValue)
@@ -197,7 +204,7 @@ extension FilterPreset {
     // blur
     FilterPreset("blur", params: [
       "amount": PM.float(min: 0, max: 1.5),
-      "msize": PM.int(min: 3, max: 23, step: 2, defaultValue: 5)
+      "msize": PM.int(min: 3, max: 13, step: 2, defaultValue: 5)
     ]) { instance in
       return MPVFilter.unsharp(amount: -instance.value(for: "amount").floatValue,
                                msize: instance.value(for: "msize").intValue)

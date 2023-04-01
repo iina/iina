@@ -202,7 +202,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
       self.setLabelColor(self.vprimariesField, by: sigPeak > 0)
 
       if PlayerCore.lastActive.mainWindow.loaded && controller.fileLoaded {
-        if let colorspace = PlayerCore.lastActive.mainWindow.videoView.videoLayer.colorspace, #available(macOS 10.15, *) {
+        if #available(macOS 10.15, *), let colorspace = PlayerCore.lastActive.mainWindow.videoView.videoLayer.colorspace {
           var isHdr: Bool
           if #available(macOS 11.0, *) {
             isHdr = CGColorSpaceUsesExtendedRange(colorspace) || CGColorSpaceUsesITUR_2100TF(colorspace)

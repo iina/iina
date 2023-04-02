@@ -377,7 +377,7 @@
                     <rect key="frame" x="10" y="96" width="298" height="42"/>
                     <textFieldCell key="cell" controlSize="small" selectable="YES" sendsActionOnEndEditing="YES" allowsEditingTextAttributes="YES" id="3aN-Hg-GkT">
                         <font key="font" metaFont="menu" size="11"/>
-                        <string key="title">Uncheck "receive beta updates" from Preferences - General, and install a stable release from our &lt;a href="https://iina.io"&gt;official website&lt;/a&gt;.</string>
+                        <string key="title">Uncheck "receive beta updates" from Settings &gt; General, and install a stable release from our &lt;a href="https://iina.io"&gt;official website&lt;/a&gt;.</string>
                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>

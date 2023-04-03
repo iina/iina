@@ -13,7 +13,7 @@ fileprivate var circleDict: [NSColor: NSImage] = [:]
 fileprivate let kIconSize = 17.0
 fileprivate let kBorderWidth = 1.25
 
-class LogWindowController: NSWindowController, NSTableViewDelegate, NSTableViewDataSource, NSMenuDelegate {
+class LogWindowController: NSWindowController, NSMenuDelegate {
   override var windowNibName: NSNib.Name {
     return NSNib.Name("LogWindowController")
   }
@@ -23,9 +23,7 @@ class LogWindowController: NSWindowController, NSTableViewDelegate, NSTableViewD
   @IBOutlet weak var subsystemPopUpButton: NSPopUpButton!
   @IBOutlet weak var levelPopUpButton: NSPopUpButton!
 
-  @objc dynamic var logs: [Logger.Log] {
-    Logger.logs
-  }
+  @objc dynamic var logs: [Logger.Log] = []
   @objc dynamic var predicate = NSPredicate(value: true)
 
   override func windowDidLoad() {
@@ -75,11 +73,12 @@ class LogWindowController: NSWindowController, NSTableViewDelegate, NSTableViewD
   // MARK: - NSMenuDelegate
 
   func menuNeedsUpdate(_ menu: NSMenu) {
-    Logger.subsystems.forEach {
-      if !$0.added {
-        menu.addItem(withTitle: $0.rawValue)
-        $0.added = true
-      }
+    // The first menu item is "All"
+    let offset = 1
+    for (index, subsystem) in Logger.subsystems.enumerated() {
+      guard !subsystem.added else { continue }
+      subsystem.added = true
+      menu.insertItem(withTitle: subsystem.rawValue, action: nil, keyEquivalent: "", at: index + offset)
     }
   }
 
@@ -103,7 +102,7 @@ class LogWindowController: NSWindowController, NSTableViewDelegate, NSTableViewD
     }
   }
 
-  // Menu actions
+  // MARK: - Menu actions
 
   @IBAction func copy(_ sender: Any) {
     menuCopy()

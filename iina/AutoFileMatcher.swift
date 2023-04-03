@@ -8,7 +8,7 @@
 
 import Foundation
 
-fileprivate let subsystem = Logger.Subsystem(rawValue: "fmatcher")
+fileprivate let subsystem = Logger.makeSubsystem("fmatcher")
 
 class AutoFileMatcher {
 

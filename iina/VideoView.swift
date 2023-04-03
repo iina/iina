@@ -39,7 +39,7 @@ class VideoView: NSView {
 
   var pendingRedrawsAfterEnteringPIP = 0;
 
-  lazy var hdrSubsystem = Logger.Subsystem(rawValue: "hdr")
+  lazy var hdrSubsystem = Logger.makeSubsystem("hdr")
 
   // MARK: - Attributes
 

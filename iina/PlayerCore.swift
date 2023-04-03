@@ -81,7 +81,7 @@ class PlayerCore: NSObject {
 
   // MARK: - Fields
 
-  lazy var subsystem = Logger.Subsystem(rawValue: "player\(label!)")
+  lazy var subsystem = Logger.makeSubsystem("player\(label!)")
 
   var label: String!
   var isManagedByPlugin = false

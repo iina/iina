@@ -23,7 +23,8 @@ fileprivate let no_str = "no"
  "debug" - very noisy technical information
  "trace" - extremely noisy
  */
-fileprivate let MPVLogLevel = "debug"
+fileprivate let MPVLogLevel = "warn"
+fileprivate let mpvSubsystem = Logger.makeSubsystem("mpv")
 fileprivate let logLevelMap: [String: Logger.Level] = ["fatal": .error,
                                                        "error": .error,
                                                        "warn": .warning,
@@ -31,7 +32,6 @@ fileprivate let logLevelMap: [String: Logger.Level] = ["fatal": .error,
                                                        "v": .verbose,
                                                        "debug": .debug,
                                                        "trace": .verbose]
-fileprivate let mpvSubsystem = Logger.Subsystem(rawValue: "mpv")
 
 // FIXME: should be moved to a separated file
 struct MPVHookValue {

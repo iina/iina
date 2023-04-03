@@ -49,12 +49,27 @@ class Logger: NSObject {
 
     required init(rawValue: String) {
       self.rawValue = rawValue
-      subsystems.append(self)
     }
   }
 
-  static var logs: [Log] = []
-  static var subsystems: [Subsystem] = []
+  static var subsystems: [Subsystem] = [.general]
+
+  static func makeSubsystem(_ rawValue: String) -> Subsystem {
+    for (index, subsystem) in subsystems.enumerated() {
+      // The first subsystem will always be "iina"
+      if index == 0 { continue }
+      if rawValue < subsystem.rawValue {
+        let newSubsystem = Subsystem(rawValue: rawValue)
+        subsystems.insert(newSubsystem, at: index)
+        return newSubsystem
+      } else if rawValue == subsystem.rawValue {
+        return subsystem
+      }
+    }
+    let newSubsystem = Subsystem(rawValue: rawValue)
+    subsystems.append(newSubsystem)
+    return newSubsystem
+  }
 
   enum Level: Int, Comparable, CustomStringConvertible {
     static func < (lhs: Level, rhs: Level) -> Bool {
@@ -108,7 +123,7 @@ class Logger: NSObject {
 
   private static let logFile: URL = logDirectory.appendingPathComponent("iina.log")
 
-  private static let loggerSubsystem = Logger.Subsystem(rawValue: "logger")
+  private static let loggerSubsystem = Logger.makeSubsystem("logger")
 
   private static var logFileHandle: FileHandle? = {
     FileManager.default.createFile(atPath: logFile.path, contents: nil, attributes: nil)
@@ -185,7 +200,7 @@ class Logger: NSObject {
     let string = formatMessage(message, level, subsystem, appendNewlineAtTheEnd, date)
     let log = Log(subsystem: subsystem.rawValue, level: level.rawValue, message: message, date: dateFormatter.string(from: date), logString: string)
     DispatchQueue.main.async {
-      logs.append(log)
+      (NSApp.delegate as? AppDelegate)?.logWindow.logs.append(log)
     }
 
     print(string, terminator: "")

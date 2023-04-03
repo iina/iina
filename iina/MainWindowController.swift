@@ -483,7 +483,7 @@ class MainWindowController: PlayerWindowController {
   // MARK: - PIP
 
   lazy var _pip: PIPViewController = {
-    let pip = PIPViewController()
+    let pip = VideoPIPViewController()
     if #available(macOS 10.12, *) {
       pip.delegate = self
     }
@@ -2840,17 +2840,6 @@ extension MainWindowController: PIPViewControllerDelegate {
 
     pip.presentAsPicture(inPicture: pipVideo)
     pipOverlayView.isHidden = false
-
-    // If the video is paused, it will end up in a weird state due to the
-    // animation. By forcing a redraw it will keep its paused image throughout.
-    // (At least) in 10.15, presentAsPictureInPicture: behaves asynchronously.
-    // Therefore we should wait until the view is moved to the PIP superview.
-    let currentTrackIsAlbumArt = player.info.currentTrack(.video)?.isAlbumart ?? false
-    if player.info.isPaused || currentTrackIsAlbumArt {
-      // It takes two `layout` before finishing entering PIP (tested on macOS 12, but
-      // could be earlier). Force redraw for the first two `layout`s.
-      videoView.pendingRedrawsAfterEnteringPIP = 2
-    }
 
     if let window = self.window {
       let windowShouldDoNothing = window.styleMask.contains(.fullScreen) || window.isMiniaturized

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -24,7 +24,7 @@
             </connections>
         </arrayController>
         <userDefaultsController representsSharedInstance="YES" id="Byb-k1-Sgm"/>
-        <window title="Log Viewer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
+        <window title="Log Viewer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="IINALogViewer" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="608" height="350"/>
@@ -62,15 +62,15 @@
                         </connections>
                     </popUpButton>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QNX-uw-ybL">
-                        <rect key="frame" x="148" y="311" width="71" height="16"/>
-                        <textFieldCell key="cell" lineBreakMode="clipping" title="Subsystem" id="91n-Sw-RQj">
+                        <rect key="frame" x="148" y="311" width="75" height="16"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="Subsystem:" id="91n-Sw-RQj">
                             <font key="font" usesAppearanceFont="YES"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Wj3-KQ-CjI">
-                        <rect key="frame" x="222" y="304" width="55" height="25"/>
+                        <rect key="frame" x="226" y="304" width="55" height="25"/>
                         <popUpButtonCell key="cell" type="push" title="All" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="9Mt-2c-hRy" id="GeW-eF-yJv">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="menu"/>
@@ -102,7 +102,7 @@
                             <rect key="frame" x="1" y="1" width="598" height="298"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" typeSelect="NO" autosaveName="LogTableView" usesAutomaticRowHeights="YES" headerView="BPl-bi-fCb" viewBased="YES" id="ybI-a9-gbe">
+                                <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" typeSelect="NO" autosaveName="IINALogTableView" usesAutomaticRowHeights="YES" headerView="jrK-9y-haB" viewBased="YES" id="ybI-a9-gbe">
                                     <rect key="frame" x="0.0" y="0.0" width="601" height="270"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <size key="intercellSpacing" width="17" height="0.0"/>
@@ -143,7 +143,7 @@
                                             </prototypeCellViews>
                                         </tableColumn>
                                         <tableColumn identifier="AutomaticTableColumnIdentifier.1" width="90" minWidth="90" maxWidth="90" id="jdC-eg-YUY">
-                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Time">
+                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="justified" title="Time">
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                             </tableHeaderCell>
@@ -222,7 +222,7 @@
                                                 </tableCellView>
                                             </prototypeCellViews>
                                         </tableColumn>
-                                        <tableColumn width="338" minWidth="10" maxWidth="1000" id="ISx-4s-GjQ">
+                                        <tableColumn width="338" minWidth="10" maxWidth="1000000" id="ISx-4s-GjQ">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Message">
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -283,7 +283,7 @@
                             <rect key="frame" x="224" y="17" width="15" height="102"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
-                        <tableHeaderView key="headerView" wantsLayer="YES" id="BPl-bi-fCb">
+                        <tableHeaderView key="headerView" wantsLayer="YES" id="jrK-9y-haB">
                             <rect key="frame" x="0.0" y="0.0" width="601" height="28"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </tableHeaderView>

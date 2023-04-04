@@ -19,16 +19,56 @@ import Foundation
 /// - Important: The `createDirIfNotExist` method in `Utilities` **must not** be used by the logger. If an error occurs
 ///     that method will attempt to report it using the logger. If the logger is still being initialized this will result in a crash. For that reason
 ///     the logger uses its own similar method.
-struct Logger {
+class Logger: NSObject {
 
-  struct Subsystem: RawRepresentable {
-    var rawValue: String
+  class Log: NSObject {
+    @objc dynamic let subsystem: String
+    @objc dynamic let level: Int
+    @objc dynamic let message: String
+    @objc dynamic let date: String
+    let logString: String
+
+    init(subsystem: String, level: Int, message: String, date: String, logString: String) {
+      self.subsystem = subsystem
+      self.level = level
+      self.message = message
+      self.date = date
+      self.logString = logString
+    }
+
+    override var description: String {
+      return logString
+    }
+  }
+
+  class Subsystem: RawRepresentable {
+    let rawValue: String
+    var added = false
 
     static let general = Subsystem(rawValue: "iina")
 
-    init(rawValue: String) {
+    required init(rawValue: String) {
       self.rawValue = rawValue
     }
+  }
+
+  static var subsystems: [Subsystem] = [.general]
+
+  static func makeSubsystem(_ rawValue: String) -> Subsystem {
+    for (index, subsystem) in subsystems.enumerated() {
+      // The first subsystem will always be "iina"
+      if index == 0 { continue }
+      if rawValue < subsystem.rawValue {
+        let newSubsystem = Subsystem(rawValue: rawValue)
+        subsystems.insert(newSubsystem, at: index)
+        return newSubsystem
+      } else if rawValue == subsystem.rawValue {
+        return subsystem
+      }
+    }
+    let newSubsystem = Subsystem(rawValue: rawValue)
+    subsystems.append(newSubsystem)
+    return newSubsystem
   }
 
   enum Level: Int, Comparable, CustomStringConvertible {
@@ -36,12 +76,12 @@ struct Logger {
       return lhs.rawValue < rhs.rawValue
     }
 
+    static var preferred: Level = Level(rawValue: Preference.integer(for: .logLevel).clamped(to: 0...3))!
+
     case verbose
     case debug
     case warning
     case error
-
-    static var preferred: Level = Level(rawValue: Preference.integer(for: .logLevel).clamped(to: 0...3))!
 
     var description: String {
       switch self {
@@ -83,7 +123,7 @@ struct Logger {
 
   private static let logFile: URL = logDirectory.appendingPathComponent("iina.log")
 
-  private static let loggerSubsystem = Logger.Subsystem(rawValue: "logger")
+  private static let loggerSubsystem = Logger.makeSubsystem("logger")
 
   private static var logFileHandle: FileHandle? = {
     FileManager.default.createFile(atPath: logFile.path, contents: nil, attributes: nil)
@@ -144,8 +184,8 @@ struct Logger {
   }
 
   private static func formatMessage(_ message: String, _ level: Level, _ subsystem: Subsystem,
-                                    _ appendNewlineAtTheEnd: Bool) -> String {
-    let time = dateFormatter.string(from: Date())
+                                    _ appendNewlineAtTheEnd: Bool, _ date: Date = Date()) -> String {
+    let time = dateFormatter.string(from: date)
     return "\(time) [\(subsystem.rawValue)][\(level.description)] \(message)\(appendNewlineAtTheEnd ? "\n" : "")"
   }
 
@@ -154,8 +194,15 @@ struct Logger {
     guard enabled else { return }
     #endif
 
-    guard level >= .preferred else { return }
-    let string = formatMessage(message, level, subsystem, appendNewlineAtTheEnd)
+    guard level.rawValue >= Preference.integer(for: .logLevel) else { return }
+
+    let date = Date()
+    let string = formatMessage(message, level, subsystem, appendNewlineAtTheEnd, date)
+    let log = Log(subsystem: subsystem.rawValue, level: level.rawValue, message: message, date: dateFormatter.string(from: date), logString: string)
+    DispatchQueue.main.async {
+      (NSApp.delegate as? AppDelegate)?.logWindow.logs.append(log)
+    }
+
     print(string, terminator: "")
 
     #if DEBUG

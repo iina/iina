@@ -428,5 +428,5 @@ class OpenSub {
 }
 
 extension Logger.Sub {
-  static let opensub = Logger.Subsystem(rawValue: "opensub")
+  static let opensub = Logger.makeSubsystem("opensub")
 }

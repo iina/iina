@@ -39,7 +39,7 @@ class VideoView: NSView {
 
   private var displayIdleTimer: Timer?
 
-  lazy var hdrSubsystem = Logger.Subsystem(rawValue: "hdr")
+  lazy var hdrSubsystem = Logger.makeSubsystem("hdr")
 
   static let deviceRGBColorspace = CGColorSpaceCreateDeviceRGB()
 

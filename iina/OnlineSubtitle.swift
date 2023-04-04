@@ -237,6 +237,6 @@ class OnlineSubtitle: NSObject {
 
 extension Logger {
   struct Sub {
-    static let onlinesub = Logger.Subsystem(rawValue: "onlinesub")
+    static let onlinesub = Logger.makeSubsystem("onlinesub")
   }
 }

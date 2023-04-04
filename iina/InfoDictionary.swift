@@ -19,9 +19,17 @@ struct InfoDictionary {
   var buildBranch: String? { dictionary["\(buildKeyPrefix).branch"] as? String }
   var buildCommit: String? { dictionary["\(buildKeyPrefix).commit"] as? String }
   var buildDate: String? {
-    let fromString = ISO8601DateFormatter()
+    let dateParser: (String) -> Date?
+    if #available(macOS 10.12, *) {
+      let formatter = ISO8601DateFormatter()
+      dateParser = formatter.date(from:)
+    } else {
+      let formatter = DateFormatter()
+      formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+      dateParser = formatter.date(from:)
+    }
     guard let date = dictionary["\(buildKeyPrefix).date"] as? String,
-          let dateObj = fromString.date(from: date) else {
+          let dateObj = dateParser(date) else {
       return nil
     }
     // Use a localized date for the build date.

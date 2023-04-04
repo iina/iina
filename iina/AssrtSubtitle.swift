@@ -291,5 +291,5 @@ class Assrt {
 }
 
 extension Logger.Sub {
-  static let assrt = Logger.Subsystem(rawValue: "assrt")
+  static let assrt = Logger.makeSubsystem("assrt")
 }

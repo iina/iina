@@ -35,11 +35,12 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
   var options: [[String]] = []
 
   override var sectionViews: [NSView] {
-    return [headerView, settingsView]
+    return [headerView, loggingSettingsView, mpvSettingsView]
   }
 
   @IBOutlet var headerView: NSView!
-  @IBOutlet var settingsView: NSView!
+  @IBOutlet var loggingSettingsView: NSView!
+  @IBOutlet var mpvSettingsView: NSView!
 
   @IBOutlet weak var enableAdvancedSettingsBtn: Switch!
   @IBOutlet weak var optionsTableView: NSTableView!
@@ -58,6 +59,7 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
 
     optionsTableView.dataSource = self
     optionsTableView.delegate = self
+    optionsTableView.sizeLastColumnToFit()
     removeButton.isEnabled = false
 
     enableAdvancedSettingsBtn.checked = Preference.bool(for: .enableAdvancedSettings)
@@ -75,6 +77,10 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
 
   @IBAction func openLogDir(_ sender: AnyObject) {
     NSWorkspace.shared.open(Logger.logDirectory)
+  }
+  
+  @IBAction func showLogWindow(_ sender: AnyObject) {
+    (NSApp.delegate as! AppDelegate).logWindow.showWindow(self)
   }
 
   @IBAction func addOptionBtnAction(_ sender: AnyObject) {

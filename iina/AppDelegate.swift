@@ -51,6 +51,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   lazy var inspector: InspectorWindowController = InspectorWindowController()
   lazy var historyWindow: HistoryWindowController = HistoryWindowController()
   lazy var guideWindow: GuideWindowController = GuideWindowController()
+  lazy var logWindow: LogWindowController = LogWindowController()
 
   lazy var vfWindow: FilterWindowController = {
     let w = FilterWindowController()
@@ -94,15 +95,23 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     isReady = true
   }
 
-  // MARK: - SPUUpdaterDelegate
+  // MARK: - Logs
+  private let observedPrefKeys: [Preference.Key] = [.logLevel]
 
-  @IBOutlet weak var updaterController: SPUStandardUpdaterController!
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    guard let keyPath = keyPath, let change = change else { return }
 
-  func feedURLString(for updater: SPUUpdater) -> String? {
-    return Preference.bool(for: .receiveBetaUpdate) ? AppData.appcastBetaLink : AppData.appcastLink
+    switch keyPath {
+    case Preference.Key.logLevel.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        Logger.Level.preferred = Logger.Level(rawValue: newValue.clamped(to: 0...3))!
+      }
+
+    default:
+      return
+    }
   }
 
-  // MARK: - App Delegate
 
   /// Log details about when and from what sources IINA was built.
   ///
@@ -120,9 +129,23 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     Logger.log("Built \(date) from branch \(branch), commit \(commit)")
   }
 
+
+  // MARK: - SPUUpdaterDelegate
+  @IBOutlet weak var updaterController: SPUStandardUpdaterController!
+
+  func feedURLString(for updater: SPUUpdater) -> String? {
+    return Preference.bool(for: .receiveBetaUpdate) ? AppData.appcastBetaLink : AppData.appcastLink
+  }
+
+  // MARK: - App Delegate
+
   func applicationWillFinishLaunching(_ notification: Notification) {
     // Must setup preferences before logging so log level is set correctly.
     registerUserDefaultValues()
+
+    observedPrefKeys.forEach { key in
+      UserDefaults.standard.addObserver(self, forKeyPath: key.rawValue, options: .new, context: nil)
+    }
 
     // Start the log file by logging the version of IINA producing the log file.
     let (version, build) = InfoDictionary.shared.version
@@ -213,6 +236,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     shouldIgnoreOpenFile = true
     commandLineStatus.isCommandLine = true
     commandLineStatus.filenames = iinaArgFilenames
+  }
+
+  deinit {
+    ObjcUtils.silenced {
+      for key in self.observedPrefKeys {
+        UserDefaults.standard.removeObserver(self, forKeyPath: key.rawValue)
+      }
+    }
   }
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -725,6 +756,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
   @IBAction func showHistoryWindow(_ sender: AnyObject) {
     historyWindow.showWindow(self)
+  }
+
+  @IBAction func showLogWindow(_ sender: AnyObject) {
+    logWindow.showWindow(self)
   }
 
   @IBAction func showHighlights(_ sender: AnyObject) {

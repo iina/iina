@@ -204,7 +204,7 @@ class VideoView: NSView {
     CVDisplayLinkStart(link)
   }
 
-  func stopDisplayLink() {
+  @objc func stopDisplayLink() {
     guard let link = link, CVDisplayLinkIsRunning(link) else { return }
     CVDisplayLinkStop(link)
   }
@@ -274,9 +274,8 @@ class VideoView: NSView {
     // The time of 3 seconds is somewhat arbitrary. As mpv does not provide an event indicating a
     // frame step has completed it must not be too short or will catch mpv still drawing when
     // stepping.
-    displayIdleTimer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
-      self.stopDisplayLink()
-    }
+    displayIdleTimer = Timer(timeInterval: 3.0, target: self, selector: #selector(stopDisplayLink), userInfo: nil, repeats: false)
+    RunLoop.current.add(displayIdleTimer!, forMode: .default)
   }
 
   func setICCProfile(_ displayId: UInt32) {

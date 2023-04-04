@@ -57,9 +57,6 @@ static inline int min(int a, int b, int c) {
 
   int dist[len0 + 1][len1 + 1];
   for (i = 0; i <= len0; ++i)
-    memset(dist[i], 0, sizeof(int) * (len1 + 1));
-
-  for (i = 0; i <= len0; ++i)
     for (j = 0; j <= len1; ++j)
         dist[i][j] = 0;
 

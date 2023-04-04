@@ -14,13 +14,13 @@ class ViewLayer: CAOpenGLLayer {
 
   weak var videoView: VideoView!
 
-  private let mpvGLQueue = DispatchQueue(label: "com.colliderli.iina.mpvgl", qos: .userInteractive)
-  var blocked = false
+  let mpvGLQueue = DispatchQueue(label: "com.colliderli.iina.mpvgl", qos: .userInteractive)
+  @Atomic var blocked = false
 
   private var fbo: GLint = 1
 
-  private var needsMPVRender = false
-  private var forceRender = false
+  @Atomic private var needsMPVRender = false
+  @Atomic private var forceRender = false
 
   override init() {
     super.init()
@@ -47,6 +47,8 @@ class ViewLayer: CAOpenGLLayer {
     var attributeList: [CGLPixelFormatAttribute] = [
       kCGLPFADoubleBuffer,
       kCGLPFAAllowOfflineRenderers,
+      kCGLPFAColorFloat,
+      kCGLPFAColorSize, CGLPixelFormatAttribute(64),
       kCGLPFAOpenGLProfile, CGLPixelFormatAttribute(kCGLOGLPVersion_3_2_Core.rawValue),
       kCGLPFAAccelerated,
     ]
@@ -143,30 +145,28 @@ class ViewLayer: CAOpenGLLayer {
   }
 
   func draw(forced: Bool = false) {
-    mpvGLQueue.async { [self] in
-      needsMPVRender = true
-      if forced { forceRender = true }
-      display()
-      if forced {
-        forceRender = false
-        return
-      }
-      if needsMPVRender {
-        videoView.player.mpv.lockAndSetOpenGLContext()
-        defer { videoView.player.mpv.unlockOpenGLContext() }
-        // draw(inCGLContext:) is not called, needs a skip render
-        if !videoView.isUninited, let renderContext = videoView.player.mpv.mpvRenderContext {
-          var skip: CInt = 1
-          withUnsafeMutablePointer(to: &skip) { skip in
-            var params: [mpv_render_param] = [
-              mpv_render_param(type: MPV_RENDER_PARAM_SKIP_RENDERING, data: .init(skip)),
-              mpv_render_param()
-            ]
-            mpv_render_context_render(renderContext, &params);
-          }
+    needsMPVRender = true
+    if forced { forceRender = true }
+    display()
+    if forced {
+      forceRender = false
+      return
+    }
+    if needsMPVRender {
+      videoView.player.mpv.lockAndSetOpenGLContext()
+      defer { videoView.player.mpv.unlockOpenGLContext() }
+      // draw(inCGLContext:) is not called, needs a skip render
+      if !videoView.isUninited, let renderContext = videoView.player.mpv.mpvRenderContext {
+        var skip: CInt = 1
+        withUnsafeMutablePointer(to: &skip) { skip in
+          var params: [mpv_render_param] = [
+            mpv_render_param(type: MPV_RENDER_PARAM_SKIP_RENDERING, data: .init(skip)),
+            mpv_render_param()
+          ]
+          mpv_render_context_render(renderContext, &params);
         }
-        needsMPVRender = false
       }
+      needsMPVRender = false
     }
   }
 

@@ -34,6 +34,13 @@ func - (lhs: NSPoint, rhs: NSPoint) -> NSPoint {
   return NSMakePoint(lhs.x - rhs.x, lhs.y - rhs.y)
 }
 
+extension CGPoint {
+  // Uses Pythagorean theorem to calculate the distance between two points
+  func distance(to: CGPoint) -> CGFloat {
+    return sqrt(pow(self.x - to.x, 2) + pow(self.y - to.y, 2))
+  }
+}
+
 extension NSSize {
 
   var aspect: CGFloat {
@@ -476,14 +483,9 @@ extension NSTextField {
   func setHTMLValue(_ html: String) {
     let font = self.font ?? NSFont.systemFont(ofSize: NSFont.systemFontSize)
     let color = self.textColor ?? NSColor.labelColor
-    let style = String(format: "<style>body{font-family: '%@'; font-size:%fpx;}</style>", font.fontName, font.pointSize)
-    if let data = (style + html).data(using: .utf8), let string = NSMutableAttributedString(html: data, options: [.textEncodingName: "utf8"], documentAttributes: nil) {
-      string.enumerateAttributes(in: NSMakeRange(0, string.length) , options: []) { attrs, range, _ in
-        if attrs[.link] == nil {
-          string.setAttributes([.foregroundColor: color], range: range)
-        }
-      }
-      self.attributedStringValue = string
+    if let data = html.data(using: .utf8), let str = NSMutableAttributedString(html: data, documentAttributes: nil) {
+      str.addAttributes([.font: font, .foregroundColor: color], range: NSMakeRange(0, str.length))
+      self.attributedStringValue = str
     }
   }
 

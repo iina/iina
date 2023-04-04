@@ -506,6 +506,7 @@ class PlayerCore: NSObject {
     let (width, height) = originalVideoSize
     let aspect = (width == 0 || height == 0) ? 1 : CGFloat(width) / CGFloat(height)
     miniPlayer.updateVideoViewAspectConstraint(withAspect: aspect)
+    miniPlayer.window?.layoutIfNeeded()
 
     // if received video size before switching to music mode, hide default album art
     if info.vid != 0 {
@@ -668,6 +669,10 @@ class PlayerCore: NSObject {
   }
 
   func frameStep(backwards: Bool) {
+    // When playback is paused the display link is stopped in order to avoid wasting energy on
+    // It must be running when stepping to avoid slowdowns caused by mpv waiting for IINA to call
+    // mpv_render_report_swap.
+    mainWindow.videoView.displayActive()
     if backwards {
       mpv.command(.frameBackStep)
     } else {
@@ -1439,12 +1444,8 @@ class PlayerCore: NSObject {
         miniPlayer.defaultAlbumArt.isHidden = self.info.vid != 0
       }
     }
-    // set initial properties for the first file
-    if info.justLaunched {
-      if Preference.bool(for: .fullScreenWhenOpen) && !mainWindow.fsState.isFullscreen && !isInMiniPlayer {
-        DispatchQueue.main.async(execute: self.mainWindow.toggleWindowFullScreen)
-      }
-      info.justLaunched = false
+    if Preference.bool(for: .fullScreenWhenOpen) && !mainWindow.fsState.isFullscreen && !isInMiniPlayer {
+      DispatchQueue.main.async(execute: self.mainWindow.toggleWindowFullScreen)
     }
     // add to history
     if let url = info.currentURL {
@@ -1739,12 +1740,14 @@ class PlayerCore: NSObject {
   func errorOpeningFileAndCloseMainWindow() {
     DispatchQueue.main.async {
       Utility.showAlert("error_open")
+      self.isStopped = true
       self.mainWindow.close()
     }
   }
 
   func closeMainWindow() {
     DispatchQueue.main.async {
+      self.isStopped = true
       self.mainWindow.close()
     }
   }

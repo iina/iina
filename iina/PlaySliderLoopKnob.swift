@@ -1,5 +1,5 @@
 //
-//  PlaySliderKnob.swift
+//  PlaySliderLoopKnob.swift
 //  iina
 //
 //  Created by low-batt on 10/14/21.
@@ -24,77 +24,63 @@ fileprivate extension NSColor {
 /// - Note: This class is derived from `NSView` in part to gain support for help tags (tool tips).
 final class PlaySliderLoopKnob: NSView {
 
-  // Must accept first responder for help tags to work.
-  override var acceptsFirstResponder: Bool { true }
-
-  /// The location of this knob as a slider value which is always greater than or equal to the slider's `minValue` and less than or equal
-  /// to the slider's `maxValue`.
-  var doubleValue: Double {
-    get { value }
-    set {
-      value = constrainValue(newValue)
-      // Move the knob to the position on the bar that represents the new value.
-      moveKnob(to: computeX())
+  /// The location of this knob as a slider value.
+  ///
+  /// The value is always greater than or equal to the slider's `minValue` and less than or equal to the slider's `maxValue`.
+  var doubleValue: Double = 0 {
+    didSet {
+      doubleValue = doubleValue.clamped(to: slider.range)
+      slider.needsDisplay = true
     }
   }
 
-  var isDragging: Bool = false
-
-  override var isFlipped: Bool {
-    // Match the behavior of the slider and use a flipped coordinate system.
-    get { slider.isFlipped }
-  }
+  /// A Boolean value indicating whether the view uses a flipped coordinate system.
+  ///
+  /// Knobs match the behavior of the slider.
+  override var isFlipped: Bool { slider.isFlipped }
 
   // MARK:- Private Properties
 
   private var cell: PlaySliderCell!
 
-  /// Number of points to add to the width of the knob's frame.
-  ///
-  /// If a user attempts to click on a loop knob but fails to put the cursor precisely on the loop knob, clicking will land on the slider
-  /// which moves the primary knob. Since the small size of the knobs makes this an easy mistake to make, the width of the frame of
-  /// loop knobs is sightly increased over the width of the primary knob to mitigate the problem of unintentional movement of the
-  /// primary knob. Loop knobs are still drawn with the same width as the primary knob.
-  private static let frameWidthAdjustment: CGFloat = 2
-
-  /// Number of points to offset X coordinate by due to enlargement of the frame.
-  private static let xAdjustment = frameWidthAdjustment / 2
+  private var isDragging: Bool = false
 
   private let knobHeight: CGFloat
   
   /// Percentage of the height of the primary knob to use for the loop knobs when drawing.
   ///
-  /// The height of loop knobs is reduced in order to give prominence to the primary knob.
+  /// The height of loop knobs is reduced in order to give prominence to the slider's knob that controls the playback position.
   private static let knobHeightAdjustment: CGFloat = 0.75
 
-  // The X coordinate of the last mouse location when dragging.
+  // The x coordinate of the last mouse location when dragging.
   private var lastDragLocation: CGFloat = 0
 
   private var slider: PlaySlider!
 
-  private var value: Double = 0
-
-  /// The knob's x coordinate calculated based on the value.
+  /// The knob's x coordinate associated with the current value.
+  ///
+  /// The x coordinate is calculated based on the current knob value and the current usable width of the slider's bar. When the OSC's
+  /// layout is set to `Bottom` or `Top` the width of the slider's bar will change with the width of the window. The width will also
+  /// change if the user changes the OSC layout from either of those layouts to `Floating`. Thus the x coordinate can change even
+  /// though the value has remained constant.
   private var x: CGFloat {
     get {
-      let valueToX = computeX()
-      // If the size of the slider bar has changed the knob will no longer be in the correct
-      // position and will need to be moved.
-      if frame.origin.x != valueToX {
-        moveKnob(to: valueToX)
-      }
-      return valueToX
+      let bar = cell.barRect(flipped: isFlipped)
+      // The usable width of the bar is reduced by the width of the knob.
+      let effectiveWidth = bar.width - cell.knobWidth
+      let percentage = CGFloat(doubleValue / slider.span)
+      let calculatedX = constrainX(bar.origin.x + percentage * effectiveWidth)
+      setFrameOrigin(NSPoint(x: calculatedX, y: frame.origin.y))
+      return calculatedX
     }
     set {
       let constrainedX = constrainX(newValue)
       // Calculate the value selected by the new location.
       let bar = cell.barRect(flipped: isFlipped)
-      // The knob is not allowed to slide past the end of the bar, so the usable width is reduced.
+      // The usable width of the bar is reduced by the width of the knob.
       let effectiveWidth = bar.width - cell.knobWidth
-      // The knob's frame is larger than the drawn knob. Adjust x to start of drawn knob.
-      let percentage = Double((constrainedX + PlaySliderLoopKnob.xAdjustment) / effectiveWidth)
-      value = constrainValue(percentage * slider.maxValue)
-      moveKnob(to: constrainedX)
+      let percentage = Double((constrainedX - bar.origin.x) / effectiveWidth)
+      doubleValue = percentage * slider.span
     }
   }
 
@@ -115,40 +101,23 @@ final class PlaySliderLoopKnob: NSView {
     self.toolTip = toolTip
     // This knob is hidden unless the mpv A-B loop feature is activated.
     isHidden = true
-    let rect = knobRect()
-    setFrameOrigin(NSPoint(x: rect.origin.x, y: rect.origin.y))
+    // Set the size of the frame to match the size of the slider's knob. The frame origin will be
+    // adjusted when the knob is unhidden.
+    let rect = cell.knobRect(flipped: isFlipped)
     setFrameSize(NSSize(width: rect.width, height: rect.height))
     slider.addSubview(self)
   }
 
   required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
-  private func constrainValue(_ value: Double) -> Double {
-    return value.clamped(to: cell.minValue...cell.maxValue)
-  }
-
   /// Constrain the x coordinate to insure the knob stays within the bar.
   /// - Parameter x: The proposed x coordinate.
   /// - Returns: The given x coordinate constrained to keep the knob within the bar.
   private func constrainX(_ x: CGFloat) -> CGFloat {
     let bar = cell.barRect(flipped: isFlipped)
-    // The knob's frame is larger than the drawn knob so the frame can start before the bar and the
-    // knob will still be contained within the bar.
-    let minX = bar.minX - PlaySliderLoopKnob.xAdjustment
     // The coordinate must be short of the end of the bar to keep the knob within the bar.
-    let maxX = bar.maxX - cell.knobWidth - PlaySliderLoopKnob.xAdjustment
-    return x.clamped(to: minX...maxX)
-  }
-
-  /// Compute the position of the knob on the bar that represents the current value.
-  /// - Returns: The x coordinate to use for the knob's frame.
-  private func computeX() -> CGFloat {
-    let percentage = CGFloat(value / slider.maxValue)
-    let bar = cell.barRect(flipped: isFlipped)
-    // The knob is not allowed to slide past the end of the bar, so the usable width is reduced.
-    let effectiveWidth = bar.width - cell.knobWidth
-    // The knob's frame is larger than the drawn knob, offset the frame location accordingly.
-    return constrainX(percentage * effectiveWidth - PlaySliderLoopKnob.xAdjustment)
+    let maxX = bar.maxX - cell.knobWidth
+    return x.clamped(to: bar.minX...maxX)
   }
 
   // MARK:- Drawing
@@ -168,9 +137,8 @@ final class PlaySliderLoopKnob: NSView {
     let rect = knobRect()
     // The frame is taller than the drawn knob. Adjust the y coordinate accordingly.
     let adjustedY = rect.origin.y + (rect.height - knobHeight) / 2
-    // The frame is wider than the drawn knob. Adjust the x coordinate accordingly.
-    let adjustedX = rect.origin.x + PlaySliderLoopKnob.xAdjustment
-    let drawing = NSMakeRect(adjustedX, adjustedY, cell.knobWidth, knobHeight)
+    // Round the X position for cleaner drawing
+    let drawing = NSMakeRect(round(rect.origin.x), adjustedY, cell.knobWidth, knobHeight)
     let path = NSBezierPath(roundedRect: drawing, xRadius: cell.knobRadius, yRadius: cell.knobRadius)
     knobColor().setFill()
     path.fill()
@@ -178,8 +146,7 @@ final class PlaySliderLoopKnob: NSView {
 
   private func knobRect() -> NSRect {
     let rect = cell.knobRect(flipped: isFlipped)
-    // The frame of a loop knob is larger than the drawn knob to make it easier to click on.
-    return NSMakeRect(x, rect.origin.y, rect.width + PlaySliderLoopKnob.frameWidthAdjustment, rect.height)
+    return NSMakeRect(x, rect.origin.y, rect.width, rect.height)
   }
 
   // MARK:- Mouse Events
@@ -190,9 +157,6 @@ final class PlaySliderLoopKnob: NSView {
   }
 
   /// Begin dragging the knob.
-  ///
-  /// - Important: The method `mouseDown` is not overriden in order to allow `PlaySlider` to give preference to the primary
-  ///     knob when the knobs are overlapping
   /// - Parameter event: An object encapsulating information about the mouse-down event initiating the drag.
   func beginDragging(with event: NSEvent) {
     let clickLocation = slider.convert(event.locationInWindow, from: nil)
@@ -200,19 +164,45 @@ final class PlaySliderLoopKnob: NSView {
     isDragging = true
   }
 
+  /// The user has pressed the left mouse button within the frame of this knob.
+  ///
+  /// When the slider knobs are overlapping we assume the user is trying to move the play knob rather than one of the loop knobs in
+  /// order to avoid the user accidentally changing the loop points. The desired priority order for which knob is selected when they are
+  /// overlapping is:
+  /// - Play knob
+  /// - B loop knob
+  /// - A loop knob
+  ///
+  /// The order of slider subviews controls the order of the responder chain. That order is:
+  /// - B loop knob
+  /// - A loop knob
+  /// - Play knob
+  ///
+  /// Thus the B loop knob is naturally given preference over the A loop knob, however to give priority to the play knob this method
+  /// must specifically test to see if the click falls within the play knob and if so, pass the event up the responder chain.
+  override func mouseDown(with event: NSEvent) {
+    let clickLocation = slider.convert(event.locationInWindow, from: nil)
+    // If this click lands on the play knob then pass the event up the responder chain.
+    if isMousePoint(clickLocation, in: slider.customCell.knobRect(flipped: slider.isFlipped)) {
+      super.mouseDown(with: event)
+      return
+    }
+    // This loop knob will be hidden when this loop point is not active.
+    if !isHidden && isMousePoint(clickLocation, in: frame) {
+      beginDragging(with: event)
+      return
+    }
+    super.mouseDown(with: event)
+  }
+
   override func mouseDragged(with event: NSEvent) {
     let newDragLocation = slider.convert(event.locationInWindow, from: nil)
-    x = frame.origin.x + newDragLocation.x - lastDragLocation
+    x += newDragLocation.x - lastDragLocation
     lastDragLocation = constrainX(newDragLocation.x)
     NotificationCenter.default.post(Notification(name: .iinaPlaySliderLoopKnobChanged, object: self))
   }
 
   override func mouseUp(with event: NSEvent) {
     isDragging = false
-  }
-
-  private func moveKnob(to x: CGFloat) {
-    setFrameOrigin(NSPoint(x: x, y: frame.origin.y))
-    slider.needsDisplay = true
   }
 }

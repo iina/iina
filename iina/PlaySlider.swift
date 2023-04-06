@@ -27,6 +27,12 @@ final class PlaySlider: NSSlider {
   /// The slider's cell correctly typed for convenience.
   var customCell: PlaySliderCell { cell as! PlaySliderCell }
 
+  /// Range of values the slider is configured to return.
+  var range: ClosedRange<Double> { minValue...maxValue }
+
+  /// Span of the range of values the slider is configured to return.
+  var span: Double { maxValue - minValue }
+
   // MARK:- Private Properties
 
   private var abLoopAKnob: PlaySliderLoopKnob!
@@ -37,6 +43,14 @@ final class PlaySlider: NSSlider {
 
   required init?(coder: NSCoder) {
     super.init(coder: coder)
+    if #available(macOS 11, *) {
+      // Apple increased the height of sliders in Big Sur. Until we have time to restructure the
+      // on screen controller to accommodate a larger slider reduce the size of the slider from
+      // regular to small. This makes the slider match the behavior seen under Catalina. This MUST
+      // be set before creating the loop knobs as it changes the height of knobs which is referenced
+      // during loop knob initialization.
+      controlSize = .small
+    }
     abLoopAKnob = PlaySliderLoopKnob(slider: self, toolTip: "A-B loop A")
     abLoopBKnob = PlaySliderLoopKnob(slider: self, toolTip: "A-B loop B")
   }
@@ -51,29 +65,6 @@ final class PlaySlider: NSSlider {
     super.draw(dirtyRect)
     abLoopA.draw(dirtyRect)
     abLoopB.draw(dirtyRect)
-  }
-
-  // MARK:- Mouse Events
-
-  override func mouseDown(with event: NSEvent) {
-    let clickLocation = convert(event.locationInWindow, from: nil)
-    // When the knobs are overlapping we assume the user is trying to move the play knob rather than
-    // change the loop points. So we intentionally test first for the mouse clicking on the play
-    // knob, then test the B knob and then test the A knob and lastly default to the slider itself,
-    // which will move the play knob.
-    if isMousePoint(clickLocation, in: customCell.knobRect(flipped: isFlipped)) {
-      super.mouseDown(with: event)
-      return
-    }
-    if !abLoopB.isHidden && isMousePoint(clickLocation, in: abLoopB.frame) {
-      abLoopB.beginDragging(with: event)
-      return
-    }
-    if !abLoopA.isHidden && isMousePoint(clickLocation, in: abLoopA.frame) {
-      abLoopA.beginDragging(with: event)
-      return
-    }
-    super.mouseDown(with: event)
   }
 
   override func viewDidUnhide() {

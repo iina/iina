@@ -634,16 +634,16 @@ class MainWindowController: PlayerWindowController {
 
     // Observe the loop knobs on the progress bar and update mpv when the knobs move.
     addObserver(to: .default, forName: .iinaPlaySliderLoopKnobChanged, object: playSlider.abLoopA) { [weak self] _ in
-      guard let strongSelf = self else { return }
-      let seconds = strongSelf.percentToSeconds(strongSelf.playSlider.abLoopA.doubleValue)
-      strongSelf.player.abLoopA = seconds
-      strongSelf.player.sendOSD(.abLoopUpdate(.aSet, VideoTime(seconds).stringRepresentation))
+      guard let self = self else { return }
+      let seconds = self.percentToSeconds(self.playSlider.abLoopA.doubleValue)
+      self.player.abLoopA = seconds
+      self.player.sendOSD(.abLoopUpdate(.aSet, VideoTime(seconds).stringRepresentation))
     }
     addObserver(to: .default, forName: .iinaPlaySliderLoopKnobChanged, object: playSlider.abLoopB) { [weak self] _ in
-      guard let strongSelf = self else { return }
-      let seconds = strongSelf.percentToSeconds(strongSelf.playSlider.abLoopB.doubleValue)
-      strongSelf.player.abLoopB = seconds
-      strongSelf.player.sendOSD(.abLoopUpdate(.bSet, VideoTime(seconds).stringRepresentation))
+      guard let self = self else { return }
+      let seconds = self.percentToSeconds(self.playSlider.abLoopB.doubleValue)
+      self.player.abLoopB = seconds
+      self.player.sendOSD(.abLoopUpdate(.bSet, VideoTime(seconds).stringRepresentation))
     }
 
     player.events.emit(.windowLoaded)

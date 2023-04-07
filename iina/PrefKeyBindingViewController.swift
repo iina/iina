@@ -400,7 +400,7 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
     return [
       "name": name,
       "isHidden": !isDefaultConfig(name)
-    ]
+    ] as [String: Any]
   }
 
   // NSTableViewDelegate

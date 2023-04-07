@@ -112,7 +112,7 @@ class JavascriptAPICore: JavascriptAPI, JavascriptAPICoreExportable {
         "date": $0.addedDate,
         "progress": $0.mpvProgress?.second ?? NSNull(),
         "duration": $0.duration.second
-      ]
+      ] as [String: Any]
     }
   }
 

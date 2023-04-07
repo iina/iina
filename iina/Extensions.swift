@@ -483,7 +483,9 @@ extension NSTextField {
   func setHTMLValue(_ html: String) {
     let font = self.font ?? NSFont.systemFont(ofSize: NSFont.systemFontSize)
     let color = self.textColor ?? NSColor.labelColor
-    if let data = html.data(using: .utf8), let str = NSMutableAttributedString(html: data, documentAttributes: nil) {
+    if let data = html.data(using: .utf8), let str = NSMutableAttributedString(html: data,
+                                                                               options: [.textEncodingName: "utf8"],
+                                                                               documentAttributes: nil) {
       str.addAttributes([.font: font, .foregroundColor: color], range: NSMakeRange(0, str.length))
       self.attributedStringValue = str
     }

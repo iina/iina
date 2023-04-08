@@ -445,6 +445,11 @@ class PlayerCore: NSObject {
     isShuttingDown = true
     Logger.log("Shutting down", subsystem: subsystem)
     savePlayerState()
+    // Once mpv has been instructed to quit accessing the mpv core can result in a crash. Must not
+    // allow the display link thread or the mpvGLQueue dispatch queue to continue processing because
+    // these entities will call mpv.
+    mainWindow.videoView.videoLayer.suspend()
+    mainWindow.videoView.stopDisplayLink()
     mpv.mpvQuit()
   }
 

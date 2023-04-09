@@ -118,7 +118,7 @@ class PlayerCore: NSObject {
 
    `autoLoadFilesInCurrentFolder(ticket:)`
    */
-  var backgroundQueueTicket = 0
+  @Atomic var backgroundQueueTicket = 0
 
   var mainWindow: MainWindowController!
   var initialWindow: InitialWindowController!
@@ -595,13 +595,17 @@ class PlayerCore: NSObject {
 
   /// Stop playback and unload the media.
   func stop() {
+    // If the user immediately closes the player window it is possible the background task may still
+    // be working to load subtitles. Invalidate the ticket to get that task to abandon the work.
+    $backgroundQueueTicket.withLock { $0 += 1 }
+
     savePlaybackPosition()
 
     mainWindow.videoView.stopDisplayLink()
     invalidateTimer()
 
     info.currentFolder = nil
-    info.matchedSubs.removeAll()
+    info.$matchedSubs.withLock { $0.removeAll() }
 
     // Do not send a stop command to mpv if it is already stopped. This happens when quitting is
     // initiated directly through mpv.
@@ -1381,7 +1385,7 @@ class PlayerCore: NSObject {
     }
 
     // Auto load
-    backgroundQueueTicket += 1
+    $backgroundQueueTicket.withLock { $0 += 1 }
     let shouldAutoLoadFiles = info.shouldAutoLoadFiles
     let currentTicket = backgroundQueueTicket
     backgroundQueue.async {
@@ -1391,7 +1395,7 @@ class PlayerCore: NSObject {
         self.autoLoadFilesInCurrentFolder(ticket: currentTicket)
       }
       // auto load matched subtitles
-      if let matchedSubs = self.info.matchedSubs[path] {
+      if let matchedSubs = self.info.getMatchedSubs(path) {
         Logger.log("Found \(matchedSubs.count) subs for current file", subsystem: self.subsystem)
         for sub in matchedSubs {
           guard currentTicket == self.backgroundQueueTicket else { return }

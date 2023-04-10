@@ -376,7 +376,7 @@ extension PreferenceWindowController: NSTableViewDelegate, NSTableViewDataSource
         "noSection": noLabel,
         "section": result.strippedSection,
         "label": result.strippedLabel ?? result.strippedSection,
-      ]
+      ] as [String: Any?]
     }
   }
 

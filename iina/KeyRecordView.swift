@@ -33,8 +33,6 @@ class KeyRecordView: NSView {
 
   var delegate: KeyRecordViewDelegate!
 
-  var currentRawKey: String = ""
-  var currentKeyInReadableFormat: String = ""
   var currentKey: String = ""
   var currentKeyModifiers: NSEvent.ModifierFlags = []
 
@@ -55,7 +53,6 @@ class KeyRecordView: NSView {
   override func keyDown(with event: NSEvent) {
     currentKey = event.charactersIgnoringModifiers ?? ""
     currentKeyModifiers = event.modifierFlags
-    (currentKeyInReadableFormat, currentRawKey) = event.readableKeyDescription
     delegate.keyRecordView(self, recordedKeyDownWith: event)
   }
 

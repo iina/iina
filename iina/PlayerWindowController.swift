@@ -117,7 +117,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   @IBOutlet weak var volumeSlider: NSSlider!
   @IBOutlet weak var muteButton: NSButton!
   @IBOutlet weak var playButton: NSButton!
-  @IBOutlet weak var playSlider: NSSlider!
+  @IBOutlet weak var playSlider: PlaySlider!
   @IBOutlet weak var rightLabel: DurationDisplayTextField!
   @IBOutlet weak var leftLabel: DurationDisplayTextField!
 
@@ -239,7 +239,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       // execute the command
       switch keyBinding.action.first! {
       case MPVCommand.abLoop.rawValue:
-        player.abLoop()
+        abLoop()
         returnValue = 0
       default:
         returnValue = player.mpv.command(rawString: keyBinding.rawAction)
@@ -250,6 +250,39 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         Logger.log("Return value \(returnValue) when executing key command \(keyBinding.rawAction)", level: .error)
         return false
       }
+    }
+  }
+
+  func abLoop() {
+    player.abLoop()
+    syncSlider()
+  }
+
+  func syncSlider() {
+    let a = player.abLoopA
+    playSlider.abLoopA.isHidden = a == 0
+    playSlider.abLoopA.doubleValue = secondsToPercent(a)
+    let b = player.abLoopB
+    playSlider.abLoopB.isHidden = b == 0
+    playSlider.abLoopB.doubleValue = secondsToPercent(b)
+    playSlider.needsDisplay = true
+  }
+
+  /// Returns the percent of the total duration of the video the given position in seconds represents.
+  ///
+  /// The percentage returned must be considered an estimate that could change. The duration of the video is obtained from the
+  /// [mpv](https://mpv.io/manual/stable/) `duration` property. The documentation for this property cautions that mpv
+  /// is not always able to determine the duration and when it does return a duration it may be an estimate. If the duration is unknown
+  /// this method will fallback to using the current playback position, if that is known. Otherwise this method will return zero.
+  /// - Parameter seconds: Position in the video as seconds from start.
+  /// - Returns: The percent of the video the given position represents.
+  private func secondsToPercent(_ seconds: Double) -> Double {
+    if let duration = player.info.videoDuration?.second {
+      return duration == 0 ? 0 : seconds / duration * 100
+    } else if let position = player.info.videoPosition?.second {
+      return position == 0 ? 0 : seconds / position * 100
+    } else {
+      return 0
     }
   }
 

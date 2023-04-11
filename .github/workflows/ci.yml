@@ -10,7 +10,11 @@ jobs:
   build:
     strategy:
       matrix:
-        xcode: ["13.4.1", "14.1"]
+        include:
+          - xcode: "13.4.1"
+            deployment_target: "MACOSX_DEPLOYMENT_TARGET=10.11"
+          - xcode: "14.1"
+            deployment_target: ""
     runs-on:  macos-12
     steps:
       - uses: actions/checkout@v3
@@ -19,6 +23,6 @@ jobs:
         run: ./other/download_libs.sh
 
       - name: Build
-        run: xcodebuild -project iina.xcodeproj -scheme iina CODE_SIGNING_ALLOWED=NO
+        run: xcodebuild -project iina.xcodeproj -scheme iina CODE_SIGNING_ALLOWED=NO ${{ matrix.deployment_target }}
         env:
           DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer

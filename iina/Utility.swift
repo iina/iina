@@ -210,7 +210,7 @@ class Utility {
       }
     }
     if let sheetWindow = sheetWindow {
-      panel.beginSheet(sheetWindow, completionHandler: handler)
+      panel.beginSheetModal(for: sheetWindow, completionHandler: handler)
     } else {
       panel.begin(completionHandler: handler)
     }

@@ -23,7 +23,6 @@ fileprivate extension NSUserInterfaceItemIdentifier {
   static let contextMenu = NSUserInterfaceItemIdentifier("ContextMenu")
 }
 
-
 class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutlineViewDataSource, NSMenuDelegate, NSMenuItemValidation {
 
   enum SortOption: Int {
@@ -34,6 +33,11 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   enum SearchOption {
     case filename, fullPath
   }
+
+  private static let timeColMinWidths: [SortOption: CGFloat] = [
+    .lastPlayed: 60,
+    .fileLocation: 145
+  ]
 
   private let getKey: [SortOption: (PlaybackHistory) -> String] = [
     .lastPlayed: { DateFormatter.localizedString(from: $0.addedDate, dateStyle: .medium, timeStyle: .none) },
@@ -71,8 +75,42 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   func reloadData() {
     prepareData()
+    adjustTimeColumnMinWidth()
     outlineView.reloadData()
     outlineView.expandItem(nil, expandChildren: true)
+  }
+
+  // Change min width of "Played at" column
+  private func adjustTimeColumnMinWidth() {
+    guard let timeColumn = outlineView.tableColumn(withIdentifier: .time) else { return }
+    let newMinWidth = HistoryWindowController.timeColMinWidths[groupBy]!
+    guard newMinWidth != timeColumn.minWidth else { return }
+    if timeColumn.width < newMinWidth {
+      if let filenameColumn = outlineView.tableColumn(withIdentifier: .filename) {
+        donateColWidth(to: timeColumn, targetWidth: newMinWidth, from: filenameColumn)
+      }
+      if timeColumn.width < timeColumn.minWidth {
+        if let progressColumn = outlineView.tableColumn(withIdentifier: .progress) {
+          donateColWidth(to: timeColumn, targetWidth: newMinWidth, from: progressColumn)
+        }
+      }
+    }
+    // Do not set this until after width has been adjusted! Otherwise AppKit will change its width property
+    // but will not actually resize it:
+    timeColumn.minWidth = newMinWidth
+    outlineView.layoutSubtreeIfNeeded()
+    Logger.log("Updated \"\(timeColumn.identifier.rawValue)\" col width: \(timeColumn.width), minWidth: \(timeColumn.minWidth)", level: .verbose)
+  }
+
+  private func donateColWidth(to targetColumn: NSTableColumn, targetWidth: CGFloat, from donorColumn: NSTableColumn) {
+    let extraWidthNeeded = targetWidth - targetColumn.width
+    // Don't take more than needed, or more than possible:
+    let widthToDonate = min(extraWidthNeeded, max(donorColumn.width - donorColumn.minWidth, 0))
+    if widthToDonate > 0 {
+      Logger.log("Donating \(widthToDonate) pts width to col \"\(targetColumn.identifier.rawValue)\" from \"\(donorColumn.identifier.rawValue)\" width (\(donorColumn.width))")
+      donorColumn.width -= widthToDonate
+      targetColumn.width += widthToDonate
+    }
   }
 
   private func prepareData(fromHistory historyList: [PlaybackHistory]? = nil) {
@@ -95,11 +133,18 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     historyData[key]!.append(entry)
   }
 
+  private func removeAfterConfirmation(_ entries: [PlaybackHistory]) {
+    Utility.quickAskPanel("delete_history", sheetWindow: window) { respond in
+      guard respond == .alertFirstButtonReturn else { return }
+      HistoryController.shared.remove(entries)
+    }
+  }
+
   // MARK: Key event
 
   override func keyDown(with event: NSEvent) {
-    let commandKey = NSEvent.ModifierFlags.command
-    if event.modifierFlags.intersection(.deviceIndependentFlagsMask) == commandKey  {
+    let flags = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
+    if flags == .command  {
       switch event.charactersIgnoringModifiers! {
       case "f":
         window!.makeFirstResponder(historySearchField)
@@ -108,9 +153,12 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
       default:
         break
       }
-    } else if event.charactersIgnoringModifiers == "\u{7f}" {
-      let entries = outlineView.selectedRowIndexes.compactMap { outlineView.item(atRow: $0) as? PlaybackHistory }
-      HistoryController.shared.remove(entries)
+    } else {
+      let key = KeyCodeHelper.mpvKeyCode(from: event)
+      if key == "DEL" || key == "BS" {
+        let entries = outlineView.selectedRowIndexes.compactMap { outlineView.item(atRow: $0) as? PlaybackHistory }
+        removeAfterConfirmation(entries)
+      }
     }
   }
 
@@ -149,9 +197,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   func outlineView(_ outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
     if let entry = item as? PlaybackHistory {
       if tableColumn?.identifier == .time {
-        return groupBy == .lastPlayed ?
-          DateFormatter.localizedString(from: entry.addedDate, dateStyle: .none, timeStyle: .short) :
-          DateFormatter.localizedString(from: entry.addedDate, dateStyle: .short, timeStyle: .short)
+        return getTimeString(from: entry)
       } else if tableColumn?.identifier == .progress {
         return entry.duration.stringRepresentation
       }
@@ -161,32 +207,41 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
     if let identifier = tableColumn?.identifier {
-      let view = outlineView.makeView(withIdentifier: identifier, owner: nil)
+      guard let cell: NSTableCellView = outlineView.makeView(withIdentifier: identifier, owner: nil) as? NSTableCellView else { return nil }
+      guard let entry = item as? PlaybackHistory else { return cell }
       if identifier == .filename {
         // Filename cell
-        let entry = item as! PlaybackHistory
-        let filenameView = (view as! HistoryFilenameCellView)
+        let filenameView = cell as! HistoryFilenameCellView
         let fileExists = !entry.url.isFileURL || FileManager.default.fileExists(atPath: entry.url.path)
         filenameView.textField?.stringValue = entry.url.isFileURL ? entry.name : entry.url.absoluteString
         filenameView.textField?.textColor = fileExists ? .controlTextColor : .disabledControlTextColor
         filenameView.docImage.image = NSWorkspace.shared.icon(forFileType: entry.url.pathExtension)
       } else if identifier == .progress {
         // Progress cell
-        let entry = item as! PlaybackHistory
-        let filenameView = (view as! HistoryProgressCellView)
+        let progressView = cell as! HistoryProgressCellView
+        // Do not animate! Causes unneeded slowdown
+        progressView.indicator.usesThreadedAnimation = false
         if let progress = entry.mpvProgress {
-          filenameView.textField?.stringValue = progress.stringRepresentation
-          filenameView.indicator.isHidden = false
-          filenameView.indicator.doubleValue = (progress / entry.duration) ?? 0
+          progressView.textField?.stringValue = progress.stringRepresentation
+          progressView.indicator.isHidden = false
+          progressView.indicator.doubleValue = (progress / entry.duration) ?? 0
         } else {
-          filenameView.textField?.stringValue = ""
-          filenameView.indicator.isHidden = true
+          progressView.textField?.stringValue = ""
+          progressView.indicator.isHidden = true
         }
       }
-      return view
+      return cell
     } else {
       // group columns
       return outlineView.makeView(withIdentifier: .group, owner: nil)
+    }
+  }
+
+  private func getTimeString(from entry: PlaybackHistory) -> String {
+    if groupBy == .lastPlayed {
+      return DateFormatter.localizedString(from: entry.addedDate, dateStyle: .none, timeStyle: .short)
+    } else {
+      return DateFormatter.localizedString(from: entry.addedDate, dateStyle: .short, timeStyle: .short)
     }
   }
 
@@ -213,13 +268,13 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   private var selectedEntries: [PlaybackHistory] = []
 
   func menuNeedsUpdate(_ menu: NSMenu) {
-    let selectedRow = outlineView.selectedRowIndexes
+    let selectedRowIndexes = outlineView.selectedRowIndexes
     let clickedRow = outlineView.clickedRow
     var indexSet = IndexSet()
     if menu.identifier == .contextMenu {
       if clickedRow != -1 {
-        if selectedRow.contains(clickedRow) {
-          indexSet = selectedRow
+        if selectedRowIndexes.contains(clickedRow) {
+          indexSet = selectedRowIndexes
         } else {
           indexSet.insert(clickedRow)
         }
@@ -268,10 +323,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   }
 
   @IBAction func deleteAction(_ sender: AnyObject) {
-    Utility.quickAskPanel("delete_history", sheetWindow: window) { respond in
-      guard respond == .alertFirstButtonReturn else { return }
-      HistoryController.shared.remove(self.selectedEntries)
-    }
+    removeAfterConfirmation(self.selectedEntries)
   }
 
   @IBAction func searchOptionFilenameAction(_ sender: AnyObject) {

@@ -37,9 +37,11 @@ class VideoView: NSView {
   // cached indicator to prevent unnecessary updates of DisplayLink
   var currentDisplay: UInt32?
 
-  var pendingRedrawsAfterEnteringPIP = 0;
+  private var displayIdleTimer: Timer?
 
-  lazy var hdrSubsystem = Logger.Subsystem(rawValue: "hdr")
+  lazy var hdrSubsystem = Logger.makeSubsystem("hdr")
+
+  static let deviceRGBColorspace = CGColorSpaceCreateDeviceRGB()
 
   // MARK: - Attributes
 
@@ -58,6 +60,7 @@ class VideoView: NSView {
 
     // set up layer
     layer = videoLayer
+    videoLayer.colorspace = VideoView.deviceRGBColorspace
     videoLayer.contentsScale = NSScreen.main!.backingScaleFactor
     wantsLayer = true
 
@@ -91,14 +94,6 @@ class VideoView: NSView {
 
   deinit {
     uninit()
-  }
-
-  override func layout() {
-    super.layout()
-    if pendingRedrawsAfterEnteringPIP != 0 && superview != nil {
-      pendingRedrawsAfterEnteringPIP -= 1
-      videoLayer.draw(forced: true)
-    }
   }
 
   override func draw(_ dirtyRect: NSRect) {
@@ -203,12 +198,13 @@ class VideoView: NSView {
     guard let link = link else {
       Logger.fatal("Cannot Create display link!")
     }
+    guard !CVDisplayLinkIsRunning(link) else { return }
     updateDisplayLink()
     CVDisplayLinkSetOutputCallback(link, displayLinkCallback, mutableRawPointerOf(obj: player.mpv))
     CVDisplayLinkStart(link)
   }
 
-  func stopDisplayLink() {
+  @objc func stopDisplayLink() {
     guard let link = link, CVDisplayLinkIsRunning(link) else { return }
     CVDisplayLinkStop(link)
   }
@@ -251,6 +247,37 @@ class VideoView: NSView {
     }
   }
 
+  // MARK: - Reducing Energy Use
+
+  /// Starts the display link if it has been stopped in order to save energy.
+  func displayActive() {
+    displayIdleTimer?.invalidate()
+    startDisplayLink()
+  }
+
+  /// Reduces energy consumption when the display link does not need to be running.
+  ///
+  /// Adherence to energy efficiency best practices requires that IINA be absolutely idle when there is no reason to be performing any
+  /// processing, such as when playback is paused. The [CVDisplayLink](https://developer.apple.com/documentation/corevideo/cvdisplaylink-k0k)
+  /// is a high-priority thread that runs at the refresh rate of a display. If the display is not being updated it is desirable to stop the
+  /// display link in order to not waste energy on needless processing.
+  ///
+  /// However, IINA will pause playback for short intervals when performing certain operations. In such cases it does not make sense to
+  /// shutdown the display link only to have to immediately start it again. To avoid this a `Timer` is used to delay shutting down the
+  /// display link. If playback becomes active again before the timer has fired then the `Timer` will be invalidated and the display link
+  /// will not be shutdown.
+  ///
+  /// - Note: In addition to playback the display link must be running for operations such seeking, stepping and entering and leaving
+  ///         full screen mode.
+  func displayIdle() {
+    displayIdleTimer?.invalidate()
+    // The time of 3 seconds is somewhat arbitrary. As mpv does not provide an event indicating a
+    // frame step has completed it must not be too short or will catch mpv still drawing when
+    // stepping.
+    displayIdleTimer = Timer(timeInterval: 3.0, target: self, selector: #selector(stopDisplayLink), userInfo: nil, repeats: false)
+    RunLoop.current.add(displayIdleTimer!, forMode: .default)
+  }
+
   func setICCProfile(_ displayId: UInt32) {
     if !Preference.bool(for: .loadIccProfile) {
       Logger.log("Not using ICC due to user preference", subsystem: hdrSubsystem)
@@ -283,10 +310,10 @@ class VideoView: NSView {
       }
     }
 
-    if videoLayer.colorspace != nil {
-      Logger.log("Nilling out colorspace", subsystem: hdrSubsystem)
-      videoLayer.colorspace = nil;
+    if videoLayer.colorspace != VideoView.deviceRGBColorspace {
+      Logger.log("Returning to deviceRGB color space", subsystem: hdrSubsystem)
       videoLayer.wantsExtendedDynamicRangeContent = false
+      videoLayer.colorspace = VideoView.deviceRGBColorspace
       player.mpv.setString(MPVOption.GPURendererOptions.targetTrc, "auto")
       player.mpv.setString(MPVOption.GPURendererOptions.targetPrim, "auto")
     }
@@ -319,43 +346,26 @@ extension VideoView {
       Logger.log("HDR primaries and gamma not available", level: .debug, subsystem: hdrSubsystem);
       return false;
     }
+  
+    let peak = mpv.getDouble(MPVProperty.videoParamsSigPeak)
+    Logger.log("HDR gamma=\(gamma), primaries=\(primaries), sig_peak=\(peak)", level: .debug, subsystem: hdrSubsystem)
 
     var name: CFString? = nil;
     switch primaries {
     case "display-p3":
-      switch gamma {
-      case "pq":
-        if #available(macOS 10.15.4, *) {
-          name = CGColorSpace.displayP3_PQ
-        } else {
-          name = CGColorSpace.displayP3_PQ_EOTF
-        }
-      case "hlg":
-        name = CGColorSpace.displayP3_HLG
-      default:
-        name = CGColorSpace.displayP3
+      if #available(macOS 10.15.4, *) {
+        name = CGColorSpace.displayP3_PQ
+      } else {
+        name = CGColorSpace.displayP3_PQ_EOTF
       }
 
     case "bt.2020":
-      switch gamma {
-      case "pq":
-        if #available(macOS 11.0, *) {
-          name = CGColorSpace.itur_2100_PQ
-        } else if #available(macOS 10.15.4, *) {
-          name = CGColorSpace.itur_2020_PQ
-        } else {
-          name = CGColorSpace.itur_2020_PQ_EOTF
-        }
-      case "hlg":
-        if #available(macOS 11.0, *) {
-          name = CGColorSpace.itur_2100_HLG
-        } else if #available(macOS 10.15.6, *) {
-          name = CGColorSpace.itur_2020_HLG
-        } else {
-          fallthrough
-        }
-      default:
-        name = CGColorSpace.itur_2020
+      if #available(macOS 11.0, *) {
+        name = CGColorSpace.itur_2100_PQ
+      } else if #available(macOS 10.15.4, *) {
+        name = CGColorSpace.itur_2020_PQ
+      } else {
+        name = CGColorSpace.itur_2020_PQ_EOTF
       }
 
     case "bt.709":
@@ -383,7 +393,7 @@ extension VideoView {
     videoLayer.wantsExtendedDynamicRangeContent = true
     videoLayer.colorspace = CGColorSpace(name: name!)
     mpv.setString(MPVOption.GPURendererOptions.iccProfile, "")
-    mpv.setString(MPVOption.GPURendererOptions.targetTrc, gamma)
+    mpv.setString(MPVOption.GPURendererOptions.targetTrc, "pq")
     mpv.setString(MPVOption.GPURendererOptions.targetPrim, primaries)
     return true;
   }

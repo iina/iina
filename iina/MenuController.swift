@@ -476,7 +476,15 @@ class MenuController: NSObject, NSMenuDelegate {
           player.mainWindow.quickSettingView.currentTab == .audio
     quickSettingsAudio?.title = isDisplayingSettings ? Constants.String.hideAudioPanel :
         Constants.String.audioPanel
-    volumeIndicator.title = String(format: NSLocalizedString("menu.volume", comment: "Volume:"), Int(player.info.volume))
+    let volFmtString: String
+    if player.info.isMuted {
+      volFmtString = NSLocalizedString("menu.volume_muted", comment: "Volume: (Muted)")
+      mute.state = .on
+    } else {
+      volFmtString = NSLocalizedString("menu.volume", comment: "Volume:")
+      mute.state = .off
+    }
+    volumeIndicator.title = String(format: volFmtString, Int(player.info.volume))
     audioDelayIndicator.title = String(format: NSLocalizedString("menu.audio_delay", comment: "Audio Delay:"), player.info.audioDelay)
   }
 

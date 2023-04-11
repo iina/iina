@@ -916,6 +916,12 @@ class MPVController: NSObject {
 
     case MPV_EVENT_SEEK:
       player.info.isSeeking = true
+      DispatchQueue.main.sync {
+        // When playback is paused the display link may be shutdown in order to not waste energy.
+        // It must be running when seeking to avoid slowdowns caused by mpv waiting for IINA to call
+        // mpv_render_report_swap.
+        player.mainWindow.videoView.displayActive()
+      }
       if needRecordSeekTime {
         recordedSeekStartTime = CACurrentMediaTime()
       }
@@ -928,6 +934,14 @@ class MPVController: NSObject {
     case MPV_EVENT_PLAYBACK_RESTART:
       player.info.isIdle = false
       player.info.isSeeking = false
+      DispatchQueue.main.sync {
+        // When playback is paused the display link may be shutdown in order to not waste energy.
+        // The display link will be restarted while seeking. If playback is paused shut it down
+        // again.
+        if player.info.isPaused {
+          player.mainWindow.videoView.displayIdle()
+        }
+      }
       if needRecordSeekTime {
         recordedSeekTimeListener?(CACurrentMediaTime() - recordedSeekStartTime)
         recordedSeekTimeListener = nil
@@ -1098,9 +1112,9 @@ class MPVController: NSObject {
             // the timer that synchronizes the UI and the high priority display link thread.
             if paused {
               player.invalidateTimer()
-              player.mainWindow.videoView.stopDisplayLink()
+              player.mainWindow.videoView.displayIdle()
             } else {
-              player.mainWindow.videoView.startDisplayLink()
+              player.mainWindow.videoView.displayActive()
               player.createSyncUITimer()
             }
           }
@@ -1497,5 +1511,8 @@ fileprivate func mpvGetOpenGLFunc(_ ctx: UnsafeMutableRawPointer?, _ name: Unsaf
 fileprivate func mpvUpdateCallback(_ ctx: UnsafeMutableRawPointer?) {
   let layer = bridge(ptr: ctx!) as ViewLayer
   guard !layer.blocked else { return }
-  layer.draw()
+
+  layer.mpvGLQueue.async {
+    layer.draw()
+  }
 }

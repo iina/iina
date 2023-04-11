@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -279,7 +279,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="JPS-9i-fOz">
-                                    <rect key="frame" x="310" y="1" width="16" height="16"/>
+                                    <rect key="frame" x="309" y="1" width="16" height="16"/>
                                 </progressIndicator>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7Mg-Vi-hfK">
                                     <rect key="frame" x="175" y="2" width="75" height="14"/>
@@ -310,7 +310,7 @@
                                     </connections>
                                 </button>
                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Fcc-I5-Ri2">
-                                    <rect key="frame" x="256" y="-1" width="46" height="19"/>
+                                    <rect key="frame" x="256" y="-1" width="45" height="19"/>
                                     <buttonCell key="cell" type="roundRect" title="Login" bezelStyle="roundedRect" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="WHk-sk-gmK">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="cellTitle"/>
@@ -536,7 +536,7 @@
                                 </connections>
                             </button>
                             <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="6fT-hS-kdG">
-                                <rect key="frame" x="177" y="8" width="44" height="23"/>
+                                <rect key="frame" x="189" y="8" width="44" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="38" id="7vO-WO-Jfm"/>
                                     <constraint firstAttribute="height" constant="19" id="RCS-3D-h4Z"/>
@@ -551,7 +551,7 @@
                                 </connections>
                             </colorWell>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zCF-pU-dtb">
-                                <rect key="frame" x="104" y="12" width="70" height="14"/>
+                                <rect key="frame" x="116" y="12" width="70" height="14"/>
                                 <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Background:" id="eYO-c0-Rjp">
                                     <font key="font" metaFont="message" size="11"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -597,7 +597,7 @@
                             <constraint firstItem="1rB-s8-3s0" firstAttribute="top" secondItem="W8T-T8-H6B" secondAttribute="bottom" constant="12" id="8OP-b7-qVg"/>
                             <constraint firstItem="W8T-T8-H6B" firstAttribute="leading" secondItem="aHT-R0-nxi" secondAttribute="leading" constant="12" id="993-UC-lUr"/>
                             <constraint firstItem="6fT-hS-kdG" firstAttribute="leading" secondItem="zCF-pU-dtb" secondAttribute="trailing" constant="8" id="9we-lA-Drd"/>
-                            <constraint firstItem="zCF-pU-dtb" firstAttribute="leading" secondItem="AaL-am-9qW" secondAttribute="trailing" constant="12" id="DFA-N5-1p6"/>
+                            <constraint firstItem="zCF-pU-dtb" firstAttribute="leading" secondItem="AaL-am-9qW" secondAttribute="trailing" constant="24" id="DFA-N5-1p6"/>
                             <constraint firstItem="ZnB-Tk-bG4" firstAttribute="top" secondItem="aHT-R0-nxi" secondAttribute="top" constant="10" id="DQR-jl-lR2"/>
                             <constraint firstItem="LYh-2j-Fsx" firstAttribute="leading" secondItem="W8T-T8-H6B" secondAttribute="trailing" constant="12" id="Ehb-tI-T9B"/>
                             <constraint firstItem="QUk-An-HgX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JHb-3k-TMv" secondAttribute="trailing" id="Ge2-Sk-uAf"/>

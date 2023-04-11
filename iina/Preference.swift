@@ -823,7 +823,7 @@ struct Preference {
     .ytdlRawOptions: "",
     .httpProxy: "",
 
-    .inputConfigs: [:],
+    .inputConfigs: [String: Any](),
     .currentInputConfigName: "IINA Default",
 
     .enableAdvancedSettings: false,
@@ -837,7 +837,7 @@ struct Preference {
     .acceptRawTextAsKeyBindings: false,
     .animateKeyBindingTableReloadAll: true,
     .tableEditKeyNavContinuesBetweenRows: false,
-    .userOptions: [],
+    .userOptions: [[String]](),
     .useUserDefinedConfDir: false,
     .userDefinedConfDir: "~/.config/mpv/",
     .iinaEnablePluginSystem: false,
@@ -866,9 +866,9 @@ struct Preference {
     .screenshotTemplate: "%F-%n",
     .screenshotShowPreview: true,
 
-    .watchProperties: [],
-    .savedVideoFilters: [],
-    .savedAudioFilters: [],
+    .watchProperties: [String](),
+    .savedVideoFilters: [SavedFilter](),
+    .savedAudioFilters: [SavedFilter](),
 
     .suppressCannotPreventDisplaySleep: false
   ]

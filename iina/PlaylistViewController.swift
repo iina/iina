@@ -637,20 +637,23 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
   @IBAction func contextMenuDeleteFile(_ sender: NSMenuItem) {
     guard let selectedRows = selectedRows else { return }
-    var count = 0
+    Logger.log("User chose to delete files from playlist at indexes: \(selectedRows.map{$0})")
+
+    var successes = IndexSet()
     for index in selectedRows {
-      player.playlistRemove(index)
       guard !player.info.playlist[index].isNetworkResource else { continue }
       let url = URL(fileURLWithPath: player.info.playlist[index].filename)
       do {
+        Logger.log("Trashing row \(index): \(url.standardizedFileURL)")
         try FileManager.default.trashItem(at: url, resultingItemURL: nil)
-        count += 1
+        successes.insert(index)
       } catch let error {
-        Utility.showAlert("playlist.error_deleting", arguments:
-          [error.localizedDescription])
+        Utility.showAlert("playlist.error_deleting", arguments: [error.localizedDescription])
       }
     }
-    playlistTableView.deselectAll(nil)
+    if !successes.isEmpty {
+      player.playlistRemove(successes)
+    }
   }
 
   @IBAction func contextMenuDeleteFileAfterPlayback(_ sender: NSMenuItem) {

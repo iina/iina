@@ -382,13 +382,6 @@ class PlayerCore: NSObject {
     isStopping = false
     isStopped = false
     mpv.command(.loadfile, args: [path])
-
-    if Preference.bool(for: .enablePlaylistLoop) {
-      mpv.setString(MPVOption.PlaybackControl.loopPlaylist, "inf")
-    }
-    if Preference.bool(for: .enableFileLoop) {
-      mpv.setString(MPVOption.PlaybackControl.loopFile, "inf")
-    }
   }
 
   static func loadKeyBindings() {
@@ -837,11 +830,22 @@ class PlayerCore: NSObject {
     sendOSD(.fileLoop(!isLoop))
   }
 
-  func togglePlaylistLoop() {
-    let loopStatus = mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
-    let isLoop = (loopStatus == "inf" || loopStatus == "force")
-    mpv.setString(MPVOption.PlaybackControl.loopPlaylist, isLoop ? "no" : "inf")
-    sendOSD(.playlistLoop(!isLoop))
+  func loopState(newState: NSControl.StateValue) {
+    switch newState {
+    // playlist loop
+    case .mixed:
+      mpv.setString(MPVOption.PlaybackControl.loopPlaylist, "inf")
+      mpv.setString(MPVOption.PlaybackControl.loopFile, "no")
+    // file loop
+    case .on:
+      mpv.setString(MPVOption.PlaybackControl.loopFile, "inf")
+    // off
+    case .off:
+      mpv.setString(MPVOption.PlaybackControl.loopPlaylist, "no")
+      mpv.setString(MPVOption.PlaybackControl.loopFile, "no")
+    default: break
+    }
+    sendOSD(.playlistLoop(newState != .off))
   }
 
   func toggleShuffle() {
@@ -1758,8 +1762,7 @@ class PlayerCore: NSObject {
     case muteButton
     case chapterList
     case playlist
-    case playlistLoop
-    case fileLoop
+    case loop
     case additionalInfo
   }
 
@@ -1861,14 +1864,9 @@ class PlayerCore: NSObject {
         }
       }
 
-    case .playlistLoop:
+    case .loop:
       DispatchQueue.main.async {
-        self.mainWindow.playlistView.updateLoopPlaylistBtnStatus()
-      }
-
-    case .fileLoop:
-      DispatchQueue.main.async {
-        self.mainWindow.playlistView.updateLoopFileBtnStatus()
+        self.mainWindow.playlistView.updateLoopBtnStatus()
       }
 
     case .additionalInfo:

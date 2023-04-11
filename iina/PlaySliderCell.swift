@@ -1,5 +1,5 @@
 //
-//  PlaySlider.swift
+//  PlaySliderCell.swift
 //  iina
 //
 //  Created by lhc on 25/7/16.
@@ -99,14 +99,9 @@ class PlaySliderCell: NSSliderCell {
   override func awakeFromNib() {
     minValue = 0
     maxValue = 100
-    if #available(macOS 11, *) {
-      let slider = self.controlView as! NSSlider
-      // Apple increased the height of sliders in Big Sur. Until we have time to restructure the
-      // on screen controller to accommodate a larger slider reduce the size of the slider from
-      // regular to small. This makes the slider match the behavior seen under Catalina.
-      slider.controlSize = .small
-    }
   }
+
+  // MARK:- Displaying the Cell
 
   override func drawKnob(_ knobRect: NSRect) {
     // Round the X position for cleaner drawing
@@ -138,20 +133,21 @@ class PlaySliderCell: NSSliderCell {
   }
 
   override func knobRect(flipped: Bool) -> NSRect {
-    let slider = self.controlView as! NSSlider
-    let barRect = super.barRect(flipped: flipped)
-    let percentage = slider.doubleValue / (slider.maxValue - slider.minValue)
-    let pos = min(CGFloat(percentage) * barRect.width, barRect.width - 1);
+    let slider = self.controlView as! PlaySlider
+    let barRect = barRect(flipped: flipped)
+    let percentage = slider.doubleValue / slider.span
+    // The usable width of the bar is reduced by the width of the knob.
+    let effectiveBarWidth = barRect.width - knobWidth
+    let pos = barRect.origin.x + CGFloat(percentage) * effectiveBarWidth
     let rect = super.knobRect(flipped: flipped)
-    let flippedMultiplier = flipped ? CGFloat(-1) : CGFloat(1)
 
     let height: CGFloat
-    if #available(macOS 10.16, *) {
+    if #available(macOS 11, *) {
       height = (barRect.origin.y - rect.origin.y) * 2 + barRect.height
     } else {
       height = rect.height
     }
-    return NSMakeRect(pos - flippedMultiplier * 0.5 * knobWidth, rect.origin.y, knobWidth, height)
+    return NSMakeRect(pos, rect.origin.y, knobWidth, height)
   }
 
   override func drawBar(inside rect: NSRect, flipped: Bool) {
@@ -177,7 +173,7 @@ class PlaySliderCell: NSSliderCell {
 
     NSGraphicsContext.saveGraphicsState()
     let barRect: NSRect
-    if #available(macOS 10.16, *) {
+    if #available(macOS 11, *) {
       barRect = rect
     } else {
       barRect = NSMakeRect(rect.origin.x, rect.origin.y + 1, rect.width, rect.height - 2)
@@ -228,11 +224,7 @@ class PlaySliderCell: NSSliderCell {
     NSGraphicsContext.restoreGraphicsState()
   }
 
-  override func barRect(flipped: Bool) -> NSRect {
-    let rect = super.barRect(flipped: flipped)
-    return NSMakeRect(0, rect.origin.y, rect.width + rect.origin.x * 2, rect.height)
-  }
-
+  // MARK:- Tracking the Mouse
 
   override func startTracking(at startPoint: NSPoint, in controlView: NSView) -> Bool {
     isPausedBeforeSeeking = playerCore.info.isPaused
@@ -250,5 +242,4 @@ class PlaySliderCell: NSSliderCell {
     }
     super.stopTracking(last: lastPoint, current: stopPoint, in: controlView, mouseIsUp: flag)
   }
-
 }

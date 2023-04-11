@@ -48,7 +48,8 @@ enum OSDMessage {
   case mute
   case unMute
   case screenshot
-  case abLoop(Int)
+  case abLoop(PlaybackInfo.LoopStatus)
+  case abLoopUpdate(PlaybackInfo.LoopStatus, String)
   case stop
   case chapter(String)
   case track(MPVTrack)
@@ -181,12 +182,25 @@ enum OSDMessage {
       return (NSLocalizedString("osd.screenshot", comment: "Screenshot Captured"), .normal)
 
     case .abLoop(let value):
-      if value == 1 {
-        return (NSLocalizedString("osd.abloop.a", comment: "AB-Loop: A"), .withText("{{position}} / {{duration}}"))
-      } else if value == 2 {
-        return (NSLocalizedString("osd.abloop.b", comment: "AB-Loop: B"), .withText("{{position}} / {{duration}}"))
-      } else {
+      // The A-B loop command was invoked.
+      switch (value) {
+      case .cleared:
         return (NSLocalizedString("osd.abloop.clear", comment: "AB-Loop: Cleared"), .normal)
+      case .aSet:
+        return (NSLocalizedString("osd.abloop.a", comment: "AB-Loop: A"), .withText("{{position}} / {{duration}}"))
+      case .bSet:
+        return (NSLocalizedString("osd.abloop.b", comment: "AB-Loop: B"), .withText("{{position}} / {{duration}}"))
+      }
+
+    case .abLoopUpdate(let value, let position):
+      // One of the A-B loop points has been updated to the given position.
+      switch (value) {
+      case .cleared:
+        Logger.fatal("Attempt to display invalid OSD message, type: .abLoopUpdate value: .cleared position \(position)")
+      case .aSet:
+        return (NSLocalizedString("osd.abloop.a", comment: "AB-Loop: A"), .withText("\(position) / {{duration}}"))
+      case .bSet:
+        return (NSLocalizedString("osd.abloop.b", comment: "AB-Loop: B"), .withText("\(position) / {{duration}}"))
       }
 
     case .stop:

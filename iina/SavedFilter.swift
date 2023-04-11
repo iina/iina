@@ -22,10 +22,7 @@ class SavedFilter: NSObject {
   @objc var filterString: String
   @objc var readableShortCutKey: String {
     get {
-      return ([(.control, "⌃"), (.option, "⌥"), (.shift, "⇧"), (.command, "⌘")] as [(NSEvent.ModifierFlags, String)])
-        .map { shortcutKeyModifiers.contains($0.0) ? $0.1 : "" }
-        .joined()
-        .appending(shortcutKey.uppercased())
+      return KeyCodeHelper.readableString(fromKey: shortcutKey, modifiers: shortcutKeyModifiers)
     }
   }
   @objc var isEnabled = false

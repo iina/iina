@@ -148,17 +148,6 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     }
   }
 
-  func getLoopState() -> NSControl.StateValue {
-    let loopPlaylistStatus = player.mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
-    let loopFileStatus = player.mpv.getString(MPVOption.PlaybackControl.loopFile)
-    if loopFileStatus == "inf" || loopFileStatus == "force" {
-      return .on
-    } else if loopPlaylistStatus == "inf" || loopFileStatus == "force" {
-      return .mixed
-    }
-    return .off
-  }
-
   override func viewDidAppear() {
     reloadData(playlist: true, chapters: true)
     updateLoopBtnStatus()
@@ -219,7 +208,12 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     
   func updateLoopBtnStatus() {
     guard isViewLoaded else { return }
-    loopBtn.state = getLoopState()
+    let loopMode = player.getLoopMode()
+    switch loopMode {
+    case .off:  loopBtn.state = .off
+    case .file: loopBtn.state = .on
+    default:    loopBtn.state = .mixed
+    }
     updateLoopBtnImage()
   }
 
@@ -443,7 +437,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
   @IBAction func loopBtnAction(_ sender: NSButton) {
     updateLoopBtnImage()
-    player.loopState(newState: sender.state)
+    player.nextLoopMode()
   }
 
   @IBAction func shuffleBtnAction(_ sender: AnyObject) {

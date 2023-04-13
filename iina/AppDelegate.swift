@@ -927,7 +927,7 @@ class RemoteCommandController {
       return .success
     }
     remoteCommand.changeRepeatModeCommand.addTarget { _ in
-      // TODO
+      PlayerCore.lastActive.nextLoopMode()
       return .success
     }
     remoteCommand.changeShuffleModeCommand.isEnabled = false

@@ -144,7 +144,7 @@ extension MainMenuActionHandler {
   }
 
   @objc func menuPlaylistLoop(_ sender: NSMenuItem) {
-    // TODO
+    player.togglePlaylistLoop()
   }
 
   @objc func menuPlaylistItem(_ sender: NSMenuItem) {

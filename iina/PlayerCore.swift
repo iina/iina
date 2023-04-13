@@ -824,28 +824,54 @@ class PlayerCore: NSObject {
     Logger.log("Synchronized info.abLoopStatus \(info.abLoopStatus)")
   }
 
-  func toggleFileLoop() {
-    let isLoop = mpv.getString(MPVOption.PlaybackControl.loopFile) == "inf"
-    mpv.setString(MPVOption.PlaybackControl.loopFile, isLoop ? "no" : "inf")
-    sendOSD(.fileLoop(!isLoop))
+  func togglePlaylistLoop() {
+    let loopMode = getLoopMode()
+    if loopMode == .playlist {
+      setLoopMode(.off)
+    } else {
+      setLoopMode(.playlist)
+    }
+    sendOSD(.fileLoop(!(loopMode == .playlist)))
   }
 
-  func loopState(newState: NSControl.StateValue) {
-    switch newState {
-    // playlist loop
-    case .mixed:
+  func toggleFileLoop() {
+    let loopMode = getLoopMode()
+    if loopMode == .file {
+      setLoopMode(.off)
+    } else {
+      setLoopMode(.file)
+    }
+    sendOSD(.fileLoop(!(loopMode == .file)))
+  }
+
+  func getLoopMode() -> LoopMode {
+    let loopPlaylistStatus = mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
+    let loopFileStatus = mpv.getString(MPVOption.PlaybackControl.loopFile)
+    if loopFileStatus == "inf" || loopFileStatus == "force" {
+      return .file
+    } else if loopPlaylistStatus == "inf" || loopPlaylistStatus == "force" {
+      return .playlist
+    }
+    return .off
+  }
+
+  func setLoopMode(_ newMode: LoopMode) {
+    switch newMode {
+    case .playlist:
       mpv.setString(MPVOption.PlaybackControl.loopPlaylist, "inf")
       mpv.setString(MPVOption.PlaybackControl.loopFile, "no")
-    // file loop
-    case .on:
+    case .file:
       mpv.setString(MPVOption.PlaybackControl.loopFile, "inf")
-    // off
     case .off:
       mpv.setString(MPVOption.PlaybackControl.loopPlaylist, "no")
       mpv.setString(MPVOption.PlaybackControl.loopFile, "no")
-    default: break
     }
-    sendOSD(.playlistLoop(newState != .off))
+    sendOSD(.playlistLoop(newMode != .off))
+  }
+
+
+  func nextLoopMode() {
+    setLoopMode(getLoopMode().next())
   }
 
   func toggleShuffle() {

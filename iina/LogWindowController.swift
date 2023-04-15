@@ -75,10 +75,12 @@ class LogWindowController: NSWindowController, NSMenuDelegate {
   func menuNeedsUpdate(_ menu: NSMenu) {
     // The first menu item is "All"
     let offset = 1
-    for (index, subsystem) in Logger.subsystems.enumerated() {
-      guard !subsystem.added else { continue }
-      subsystem.added = true
-      menu.insertItem(withTitle: subsystem.rawValue, action: nil, keyEquivalent: "", at: index + offset)
+    Logger.$subsystems.withLock() { subsystems in
+      for (index, subsystem) in subsystems.enumerated() {
+        guard !subsystem.added else { continue }
+        subsystem.added = true
+        menu.insertItem(withTitle: subsystem.rawValue, action: nil, keyEquivalent: "", at: index + offset)
+      }
     }
   }
 

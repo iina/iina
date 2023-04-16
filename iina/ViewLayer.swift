@@ -181,7 +181,7 @@ class ViewLayer: CAOpenGLLayer {
   }
 
   override func display() {
-    let needsFlush = videoView.$isUninited.withLock() { isUninited in
+    let needsFlush: Bool = videoView.$isUninited.withLock() { isUninited in
       guard !isUninited else { return false }
 
       super.display()

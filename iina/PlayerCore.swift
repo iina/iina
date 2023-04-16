@@ -496,11 +496,6 @@ class PlayerCore: NSObject {
     isShuttingDown = true
     Logger.log("Shutting down", subsystem: subsystem)
     savePlayerState()
-    // Once mpv has been instructed to quit accessing the mpv core can result in a crash. Must not
-    // allow the display link thread or the mpvGLQueue dispatch queue to continue processing because
-    // these entities will call mpv.
-    mainWindow.videoView.videoLayer.suspend()
-    mainWindow.videoView.stopDisplayLink()
     mpv.mpvQuit()
   }
 
@@ -1578,6 +1573,26 @@ class PlayerCore: NSObject {
             switchBackFromMiniPlayer(automatically: true)
           }
         }
+      }
+    }
+  }
+
+  func onVideoReconfig() {
+    // If loading file, video reconfig can return 0 width and height
+    guard !info.fileLoading, !isShuttingDown, !isShutdown else { return }
+    var dwidth = mpv.getInt(MPVProperty.dwidth)
+    var dheight = mpv.getInt(MPVProperty.dheight)
+    if info.rotation == 90 || info.rotation == 270 {
+      swap(&dwidth, &dheight)
+    }
+    if dwidth != info.displayWidth! || dheight != info.displayHeight! {
+      // filter the last video-reconfig event before quit
+      if dwidth == 0 && dheight == 0 && mpv.getFlag(MPVProperty.coreIdle) { return }
+      // video size changed
+      info.displayWidth = dwidth
+      info.displayHeight = dheight
+      DispatchQueue.main.sync {
+        notifyMainWindowVideoSizeChanged()
       }
     }
   }

@@ -22,7 +22,7 @@ class VideoView: NSView {
 
   var videoSize: NSSize?
 
-  var isUninited = false
+  @Atomic var isUninited = false
 
   var draggingTimer: Timer?
 
@@ -82,14 +82,19 @@ class VideoView: NSView {
     fatalError("init(coder:) has not been implemented")
   }
 
+  /// Uninitialize this view.
+  ///
+  /// This method will stop drawing and free the mpv render context. This is done before sending a quit command to mpv.
+  /// - Important: Once mpv has been instructed to quit accessing the mpv core can result in a crash, therefore locks must be
+  ///     used to coordinate uninitializing the view so that other threads do not attempt to use the mpv core while it is shutting down.
   func uninit() {
-    player.mpv.lockAndSetOpenGLContext()
-    defer { player.mpv.unlockOpenGLContext() }
+    $isUninited.withLock() { isUninited in
+      guard !isUninited else { return }
+      isUninited = true
 
-    guard !isUninited else { return }
-
-    player.mpv.mpvUninitRendering()
-    isUninited = true
+      videoLayer.suspend()
+      player.mpv.mpvUninitRendering()
+    }
   }
 
   deinit {
@@ -200,7 +205,7 @@ class VideoView: NSView {
     }
     guard !CVDisplayLinkIsRunning(link) else { return }
     updateDisplayLink()
-    CVDisplayLinkSetOutputCallback(link, displayLinkCallback, mutableRawPointerOf(obj: player.mpv))
+    CVDisplayLinkSetOutputCallback(link, displayLinkCallback, mutableRawPointerOf(obj: self))
     CVDisplayLinkStart(link)
   }
 
@@ -405,7 +410,10 @@ fileprivate func displayLinkCallback(
   _ flagsIn: CVOptionFlags,
   _ flagsOut: UnsafeMutablePointer<CVOptionFlags>,
   _ context: UnsafeMutableRawPointer?) -> CVReturn {
-  let mpv = unsafeBitCast(context, to: MPVController.self)
-  mpv.mpvReportSwap()
+  let videoView = unsafeBitCast(context, to: VideoView.self)
+  videoView.$isUninited.withLock() { isUninited in
+    guard !isUninited else { return }
+    videoView.player.mpv.mpvReportSwap()
+  }
   return kCVReturnSuccess
 }

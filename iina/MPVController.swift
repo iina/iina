@@ -862,7 +862,7 @@ class MPVController: NSObject {
     case MPV_EVENT_AUDIO_RECONFIG: break
 
     case MPV_EVENT_VIDEO_RECONFIG:
-      onVideoReconfig()
+      player.onVideoReconfig()
 
     case MPV_EVENT_START_FILE:
       player.info.isIdle = false
@@ -988,28 +988,6 @@ class MPVController: NSObject {
       setFlag(MPVOption.PlaybackControl.pause, false)
     }
     player.syncUI(.playlist)
-  }
-
-  private func onVideoReconfig() {
-    // If loading file, video reconfig can return 0 width and height
-    if player.info.fileLoading {
-      return
-    }
-    var dwidth = getInt(MPVProperty.dwidth)
-    var dheight = getInt(MPVProperty.dheight)
-    if player.info.rotation == 90 || player.info.rotation == 270 {
-      swap(&dwidth, &dheight)
-    }
-    if dwidth != player.info.displayWidth! || dheight != player.info.displayHeight! {
-      // filter the last video-reconfig event before quit
-      if dwidth == 0 && dheight == 0 && getFlag(MPVProperty.coreIdle) { return }
-      // video size changed
-      player.info.displayWidth = dwidth
-      player.info.displayHeight = dheight
-      DispatchQueue.main.sync {
-        player.notifyMainWindowVideoSizeChanged()
-      }
-    }
   }
 
   // MARK: - Property listeners

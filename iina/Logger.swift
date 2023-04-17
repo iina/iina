@@ -52,23 +52,25 @@ class Logger: NSObject {
     }
   }
 
-  static var subsystems: [Subsystem] = [.general]
+  @Atomic static var subsystems: [Subsystem] = [.general]
 
   static func makeSubsystem(_ rawValue: String) -> Subsystem {
-    for (index, subsystem) in subsystems.enumerated() {
-      // The first subsystem will always be "iina"
-      if index == 0 { continue }
-      if rawValue < subsystem.rawValue {
-        let newSubsystem = Subsystem(rawValue: rawValue)
-        subsystems.insert(newSubsystem, at: index)
-        return newSubsystem
-      } else if rawValue == subsystem.rawValue {
-        return subsystem
+    $subsystems.withLock() { subsystems in
+      for (index, subsystem) in subsystems.enumerated() {
+        // The first subsystem will always be "iina"
+        if index == 0 { continue }
+        if rawValue < subsystem.rawValue {
+          let newSubsystem = Subsystem(rawValue: rawValue)
+          subsystems.insert(newSubsystem, at: index)
+          return newSubsystem
+        } else if rawValue == subsystem.rawValue {
+          return subsystem
+        }
       }
+      let newSubsystem = Subsystem(rawValue: rawValue)
+      subsystems.append(newSubsystem)
+      return newSubsystem
     }
-    let newSubsystem = Subsystem(rawValue: rawValue)
-    subsystems.append(newSubsystem)
-    return newSubsystem
   }
 
   enum Level: Int, Comparable, CustomStringConvertible {

@@ -23,8 +23,6 @@
 
 #include <stddef.h>
 
-#include "attributes.h"
-
 #define AV_CPU_FLAG_FORCE    0x80000000 /* force usage of selected flags (OR) */
 
     /* lower 16 bits - CPU features */
@@ -56,6 +54,8 @@
 #define AV_CPU_FLAG_BMI1        0x20000 ///< Bit Manipulation Instruction Set 1
 #define AV_CPU_FLAG_BMI2        0x40000 ///< Bit Manipulation Instruction Set 2
 #define AV_CPU_FLAG_AVX512     0x100000 ///< AVX-512 functions: requires OS support even if YMM/ZMM registers aren't used
+#define AV_CPU_FLAG_AVX512ICL  0x200000 ///< F/CD/BW/DQ/VL/VNNI/IFMA/VBMI/VBMI2/VPOPCNTDQ/BITALG/GFNI/VAES/VPCLMULQDQ
+#define AV_CPU_FLAG_SLOW_GATHER  0x2000000 ///< CPU has slow gathers.
 
 #define AV_CPU_FLAG_ALTIVEC      0x0001 ///< standard
 #define AV_CPU_FLAG_VSX          0x0002 ///< ISA 2.06
@@ -74,6 +74,20 @@
 #define AV_CPU_FLAG_MMI          (1 << 0)
 #define AV_CPU_FLAG_MSA          (1 << 1)
 
+//Loongarch SIMD extension.
+#define AV_CPU_FLAG_LSX          (1 << 0)
+#define AV_CPU_FLAG_LASX         (1 << 1)
+
+// RISC-V extensions
+#define AV_CPU_FLAG_RVI          (1 << 0) ///< I (full GPR bank)
+#define AV_CPU_FLAG_RVF          (1 << 1) ///< F (single precision FP)
+#define AV_CPU_FLAG_RVD          (1 << 2) ///< D (double precision FP)
+#define AV_CPU_FLAG_RVV_I32      (1 << 3) ///< Vectors of 8/16/32-bit int's */
+#define AV_CPU_FLAG_RVV_F32      (1 << 4) ///< Vectors of float's */
+#define AV_CPU_FLAG_RVV_I64      (1 << 5) ///< Vectors of 64-bit int's */
+#define AV_CPU_FLAG_RVV_F64      (1 << 6) ///< Vectors of double's
+#define AV_CPU_FLAG_RVB_BASIC    (1 << 7) ///< Basic bit-manipulations
+
 /**
  * Return the flags which specify extensions supported by the CPU.
  * The returned value is affected by av_force_cpu_flags() if that was used
@@ -89,25 +103,6 @@ int av_get_cpu_flags(void);
 void av_force_cpu_flags(int flags);
 
 /**
- * Set a mask on flags returned by av_get_cpu_flags().
- * This function is mainly useful for testing.
- * Please use av_force_cpu_flags() and av_get_cpu_flags() instead which are more flexible
- */
-attribute_deprecated void av_set_cpu_flags_mask(int mask);
-
-/**
- * Parse CPU flags from a string.
- *
- * The returned flags contain the specified flags as well as related unspecified flags.
- *
- * This function exists only for compatibility with libav.
- * Please use av_parse_cpu_caps() when possible.
- * @return a combination of AV_CPU_* flags, negative on error.
- */
-attribute_deprecated
-int av_parse_cpu_flags(const char *s);
-
-/**
  * Parse CPU caps from a string and update the given AV_CPU_* flags based on that.
  *
  * @return negative on error.
@@ -118,6 +113,12 @@ int av_parse_cpu_caps(unsigned *flags, const char *s);
  * @return the number of logical CPU cores present.
  */
 int av_cpu_count(void);
+
+/**
+ * Overrides cpu count detection and forces the specified count.
+ * Count < 1 disables forcing of specific count.
+ */
+void av_cpu_force_count(int count);
 
 /**
  * Get the maximum data alignment that may be required by FFmpeg.

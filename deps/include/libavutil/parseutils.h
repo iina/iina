@@ -79,6 +79,8 @@ int av_parse_video_rate(AVRational *rate, const char *str);
 /**
  * Put the RGBA values that correspond to color_string in rgba_color.
  *
+ * @param rgba_color 4-elements array of uint8_t values, where the respective
+ * red, green, blue and alpha component values are written.
  * @param color_string a string specifying a color. It can be the name of
  * a color (case insensitive match) or a [0x|#]RRGGBB[AA] sequence,
  * possibly followed by "@" and a string representing the alpha
@@ -92,6 +94,8 @@ int av_parse_video_rate(AVRational *rate, const char *str);
  * @param slen length of the initial part of color_string containing the
  * color. It can be set to -1 if color_string is a null terminated string
  * containing nothing else than the color.
+ * @param log_ctx a pointer to an arbitrary struct of which the first field
+ * is a pointer to an AVClass struct (used for av_log()). Can be NULL.
  * @return >= 0 in case of success, a negative value in case of
  * failure (for example if color_string cannot be parsed).
  */
@@ -106,7 +110,7 @@ int av_parse_color(uint8_t *rgba_color, const char *color_string, int slen,
  * av_parse_color().
  *
  * @param color_idx index of the requested color, starting from 0
- * @param rgbp      if not NULL, will point to a 3-elements array with the color value in RGB
+ * @param rgb      if not NULL, will point to a 3-elements array with the color value in RGB
  * @return the color name string or NULL if color_idx is not in the array
  */
 const char *av_get_known_color_name(int color_idx, const uint8_t **rgb);
@@ -162,19 +166,19 @@ int av_find_info_tag(char *arg, int arg_size, const char *tag1, const char *info
  * by the standard strptime().
  *
  * The supported input field descriptors are listed below.
- * - %H: the hour as a decimal number, using a 24-hour clock, in the
+ * - `%%H`: the hour as a decimal number, using a 24-hour clock, in the
  *   range '00' through '23'
- * - %J: hours as a decimal number, in the range '0' through INT_MAX
- * - %M: the minute as a decimal number, using a 24-hour clock, in the
+ * - `%%J`: hours as a decimal number, in the range '0' through INT_MAX
+ * - `%%M`: the minute as a decimal number, using a 24-hour clock, in the
  *   range '00' through '59'
- * - %S: the second as a decimal number, using a 24-hour clock, in the
+ * - `%%S`: the second as a decimal number, using a 24-hour clock, in the
  *   range '00' through '59'
- * - %Y: the year as a decimal number, using the Gregorian calendar
- * - %m: the month as a decimal number, in the range '1' through '12'
- * - %d: the day of the month as a decimal number, in the range '1'
+ * - `%%Y`: the year as a decimal number, using the Gregorian calendar
+ * - `%%m`: the month as a decimal number, in the range '1' through '12'
+ * - `%%d`: the day of the month as a decimal number, in the range '1'
  *   through '31'
- * - %T: alias for '%H:%M:%S'
- * - %%: a literal '%'
+ * - `%%T`: alias for `%%H:%%M:%%S`
+ * - `%%`: a literal `%`
  *
  * @return a pointer to the first character not processed in this function
  *         call. In case the input string contains more characters than

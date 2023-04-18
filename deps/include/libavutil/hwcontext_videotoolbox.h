@@ -23,17 +23,21 @@
 
 #include <VideoToolbox/VideoToolbox.h>
 
+#include "frame.h"
 #include "pixfmt.h"
 
 /**
  * @file
  * An API-specific header for AV_HWDEVICE_TYPE_VIDEOTOOLBOX.
  *
- * This API currently does not support frame allocation, as the raw VideoToolbox
- * API does allocation, and FFmpeg itself never has the need to allocate frames.
+ * This API supports frame allocation using a native CVPixelBufferPool
+ * instead of an AVBufferPool.
  *
  * If the API user sets a custom pool, AVHWFramesContext.pool must return
  * AVBufferRefs whose data pointer is a CVImageBufferRef or CVPixelBufferRef.
+ * Note that the underlying CVPixelBuffer could be retained by OS frameworks
+ * depending on application usage, so it is preferable to let CoreVideo manage
+ * the pool using the default implementation.
  *
  * Currently AVHWDeviceContext.hwctx and AVHWFramesContext.hwctx are always
  * NULL.
@@ -56,5 +60,37 @@ uint32_t av_map_videotoolbox_format_from_pixfmt(enum AVPixelFormat pix_fmt);
  * return full range pixel formats via a flag.
  */
 uint32_t av_map_videotoolbox_format_from_pixfmt2(enum AVPixelFormat pix_fmt, bool full_range);
+
+/**
+ * Convert an AVChromaLocation to a VideoToolbox/CoreVideo chroma location string.
+ * Returns 0 if no known equivalent was found.
+ */
+CFStringRef av_map_videotoolbox_chroma_loc_from_av(enum AVChromaLocation loc);
+
+/**
+ * Convert an AVColorSpace to a VideoToolbox/CoreVideo color matrix string.
+ * Returns 0 if no known equivalent was found.
+ */
+CFStringRef av_map_videotoolbox_color_matrix_from_av(enum AVColorSpace space);
+
+/**
+ * Convert an AVColorPrimaries to a VideoToolbox/CoreVideo color primaries string.
+ * Returns 0 if no known equivalent was found.
+ */
+CFStringRef av_map_videotoolbox_color_primaries_from_av(enum AVColorPrimaries pri);
+
+/**
+ * Convert an AVColorTransferCharacteristic to a VideoToolbox/CoreVideo color transfer
+ * function string.
+ * Returns 0 if no known equivalent was found.
+ */
+CFStringRef av_map_videotoolbox_color_trc_from_av(enum AVColorTransferCharacteristic trc);
+
+/**
+ * Update a CVPixelBufferRef's metadata to based on an AVFrame.
+ * Returns 0 if no known equivalent was found.
+ */
+int av_vt_pixbuf_set_attachments(void *log_ctx,
+                                 CVPixelBufferRef pixbuf, const struct AVFrame *src);
 
 #endif /* AVUTIL_HWCONTEXT_VIDEOTOOLBOX_H */

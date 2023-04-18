@@ -19,9 +19,11 @@
 #ifndef AVUTIL_FILE_H
 #define AVUTIL_FILE_H
 
+#include <stddef.h>
 #include <stdint.h>
 
-#include "avutil.h"
+#include "version.h"
+#include "attributes.h"
 
 /**
  * @file
@@ -37,6 +39,9 @@
  * case *bufptr will be set to NULL and *size will be set to 0.
  * The returned buffer must be released with av_file_unmap().
  *
+ * @param filename path to the file
+ * @param[out] bufptr pointee is set to the mapped or allocated buffer
+ * @param[out] size pointee is set to the size in bytes of the buffer
  * @param log_offset loglevel offset used for logging
  * @param log_ctx context used for logging
  * @return a non negative number in case of success, a negative value
@@ -49,11 +54,13 @@ int av_file_map(const char *filename, uint8_t **bufptr, size_t *size,
 /**
  * Unmap or free the buffer bufptr created by av_file_map().
  *
+ * @param bufptr the buffer previously created with av_file_map()
  * @param size size in bytes of bufptr, must be the same as returned
  * by av_file_map()
  */
 void av_file_unmap(uint8_t *bufptr, size_t size);
 
+#if FF_API_AV_FOPEN_UTF8
 /**
  * Wrapper to work around the lack of mkstemp() on mingw.
  * Also, tries to create file in /tmp first, if possible.
@@ -66,6 +73,8 @@ void av_file_unmap(uint8_t *bufptr, size_t size);
  *       libraries and could interfere with the calling application.
  * @deprecated as fd numbers cannot be passed saftely between libs on some platforms
  */
+attribute_deprecated
 int av_tempfile(const char *prefix, char **filename, int log_offset, void *log_ctx);
+#endif
 
 #endif /* AVUTIL_FILE_H */

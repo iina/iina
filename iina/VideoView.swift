@@ -41,7 +41,7 @@ class VideoView: NSView {
 
   lazy var hdrSubsystem = Logger.makeSubsystem("hdr")
 
-  static let deviceRGBColorspace = CGColorSpaceCreateDeviceRGB()
+  static let SRGB = CGColorSpaceCreateDeviceRGB()
 
   // MARK: - Attributes
 
@@ -60,7 +60,7 @@ class VideoView: NSView {
 
     // set up layer
     layer = videoLayer
-    videoLayer.colorspace = VideoView.deviceRGBColorspace
+    videoLayer.colorspace = VideoView.SRGB
     videoLayer.contentsScale = NSScreen.main!.backingScaleFactor
     wantsLayer = true
 
@@ -310,12 +310,16 @@ class VideoView: NSView {
       }
     }
 
-    if videoLayer.colorspace != VideoView.deviceRGBColorspace {
-      Logger.log("Returning to deviceRGB color space", subsystem: hdrSubsystem)
+    if videoLayer.colorspace != VideoView.SRGB {
+      videoLayer.colorspace = VideoView.SRGB;
       videoLayer.wantsExtendedDynamicRangeContent = false
-      videoLayer.colorspace = VideoView.deviceRGBColorspace
       player.mpv.setString(MPVOption.GPURendererOptions.targetTrc, "auto")
       player.mpv.setString(MPVOption.GPURendererOptions.targetPrim, "auto")
+      player.mpv.setString(MPVOption.GPURendererOptions.targetPeak, "auto")
+      player.mpv.setString(MPVOption.GPURendererOptions.toneMapping, "auto")
+      player.mpv.setString(MPVOption.GPURendererOptions.toneMappingParam, "default")
+      player.mpv.setString(MPVOption.GPURendererOptions.toneMapping, "")
+      player.mpv.setFlag(MPVOption.Screenshot.screenshotTagColorspace, false)
     }
   }
 }
@@ -393,8 +397,45 @@ extension VideoView {
     videoLayer.wantsExtendedDynamicRangeContent = true
     videoLayer.colorspace = CGColorSpace(name: name!)
     mpv.setString(MPVOption.GPURendererOptions.iccProfile, "")
-    mpv.setString(MPVOption.GPURendererOptions.targetTrc, "pq")
     mpv.setString(MPVOption.GPURendererOptions.targetPrim, primaries)
+    // PQ videos will be display as it was, HLG videos will be converted to PQ
+    mpv.setString(MPVOption.GPURendererOptions.targetTrc, "pq")
+    mpv.setFlag(MPVOption.Screenshot.screenshotTagColorspace, true)
+
+    if Preference.bool(for: .enableToneMapping) {
+      var targetPeak = Preference.integer(for: .toneMappingTargetPeak)
+      // If the target peak is set to zero then IINA attempts to determine peak brightness of the
+      // display.
+      if targetPeak == 0 {
+        if let displayInfo = CoreDisplay_DisplayCreateInfoDictionary(currentDisplay!)?.takeRetainedValue() as? [String: AnyObject] {
+          Logger.log("Successfully obtained information about the display", subsystem: hdrSubsystem)
+          // Prefer ReferencePeakHDRLuminance, which is reported by newer macOS versions.
+          if let hdrLuminance = displayInfo["ReferencePeakHDRLuminance"] as? Int {
+            Logger.log("Found ReferencePeakHDRLuminance: \(hdrLuminance)", subsystem: hdrSubsystem);
+            targetPeak = hdrLuminance
+          } else if let hdrLuminance = displayInfo["DisplayBacklight"] as? Int {
+            // We know macOS Catalina uses this key.
+            Logger.log("Found DisplayBacklight: \(hdrLuminance)", subsystem: hdrSubsystem);
+            targetPeak = hdrLuminance
+          } else {
+            Logger.log("Didn't find ReferencePeakHDRLuminance or DisplayBacklight, assuming HDR400", subsystem: hdrSubsystem);
+            Logger.log("Display info dictionary: \(displayInfo)", subsystem: hdrSubsystem)
+            targetPeak = 400
+          }
+        } else {
+          Logger.log("Unable to obtain display information", level: .warning, subsystem: hdrSubsystem);
+        }
+      }
+      let algorithm = Preference.ToneMappingAlgorithmOption(rawValue: Preference.integer(for: .toneMappingAlgorithm))?.mpvString
+        ?? Preference.ToneMappingAlgorithmOption.defaultValue.mpvString
+
+      Logger.log("Will enable tone mapping target-peak=\(targetPeak) algorithm=\(algorithm)", subsystem: hdrSubsystem);
+      mpv.setInt(MPVOption.GPURendererOptions.targetPeak, targetPeak)
+      mpv.setString(MPVOption.GPURendererOptions.toneMapping, algorithm)
+    } else {
+      mpv.setString(MPVOption.GPURendererOptions.targetPeak, "auto")
+      mpv.setString(MPVOption.GPURendererOptions.toneMapping, "")
+    }
     return true;
   }
 }

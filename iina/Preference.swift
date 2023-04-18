@@ -151,6 +151,9 @@ struct Preference {
     static let forceDedicatedGPU = Key("forceDedicatedGPU")
     static let loadIccProfile = Key("loadIccProfile")
     static let enableHdrSupport = Key("enableHdrSupport")
+    static let enableToneMapping = Key("enableToneMapping")
+    static let toneMappingTargetPeak = Key("toneMappingTargetPeak")
+    static let toneMappingAlgorithm = Key("toneMappingAlgorithm")
 
     static let audioThreads = Key("audioThreads")
     static let audioLanguage = Key("audioLanguage")
@@ -581,6 +584,36 @@ struct Preference {
     }
   }
 
+  enum ToneMappingAlgorithmOption: Int, InitializingFromKey {
+    case auto = 0
+    case clip
+    case mobius
+    case reinhard
+    case hable
+    case bt_2390
+    case gamma
+    case linear
+
+    static var defaultValue = ToneMappingAlgorithmOption.auto
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
+
+    var mpvString: String {
+      switch self {
+      case .auto: return "auto"
+      case .clip: return "clip"
+      case .mobius: return "mobius"
+      case .reinhard: return "reinhard"
+      case .hable: return "hable"
+      case .bt_2390: return "bt.2390"
+      case .gamma: return "gamma"
+      case .linear: return "linear"
+      }
+    }
+  }
+
   enum ResizeWindowTiming: Int, InitializingFromKey {
     case always = 0
     case onlyWhenOpen
@@ -737,6 +770,9 @@ struct Preference {
     .forceDedicatedGPU: false,
     .loadIccProfile: true,
     .enableHdrSupport: true,
+    .enableToneMapping: false,
+    .toneMappingTargetPeak: 0,
+    .toneMappingAlgorithm: "auto",
     .audioThreads: 0,
     .audioLanguage: "",
     .maxVolume: 100,

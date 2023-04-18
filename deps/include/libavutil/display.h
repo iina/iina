@@ -20,6 +20,7 @@
 
 /**
  * @file
+ * @ingroup lavu_video_display
  * Display matrix
  */
 
@@ -27,18 +28,11 @@
 #define AVUTIL_DISPLAY_H
 
 #include <stdint.h>
-#include "common.h"
 
 /**
- * @addtogroup lavu_video
- * @{
- *
  * @defgroup lavu_video_display Display transformation matrix functions
- * @{
- */
-
-/**
- * @addtogroup lavu_video_display
+ * @ingroup lavu_video
+ *
  * The display transformation matrix specifies an affine transformation that
  * should be applied to video frames for correct presentation. It is compatible
  * with the matrices stored in the ISO/IEC 14496-12 container format.
@@ -72,6 +66,8 @@
  *   q' = (b * p + d * q + y) / z;
  *   z  =  u * p + v * q + w
  * @endcode
+ *
+ * @{
  */
 
 /**
@@ -88,11 +84,11 @@
 double av_display_rotation_get(const int32_t matrix[9]);
 
 /**
- * Initialize a transformation matrix describing a pure counterclockwise
+ * Initialize a transformation matrix describing a pure clockwise
  * rotation by the specified angle (in degrees).
  *
- * @param matrix an allocated transformation matrix (will be fully overwritten
- *               by this function)
+ * @param[out] matrix a transformation matrix (will be fully overwritten
+ *                    by this function)
  * @param angle rotation angle in degrees.
  */
 void av_display_rotation_set(int32_t matrix[9], double angle);
@@ -100,14 +96,13 @@ void av_display_rotation_set(int32_t matrix[9], double angle);
 /**
  * Flip the input matrix horizontally and/or vertically.
  *
- * @param matrix an allocated transformation matrix
+ * @param[in,out] matrix a transformation matrix
  * @param hflip whether the matrix should be flipped horizontally
  * @param vflip whether the matrix should be flipped vertically
  */
 void av_display_matrix_flip(int32_t matrix[9], int hflip, int vflip);
 
 /**
- * @}
  * @}
  */
 

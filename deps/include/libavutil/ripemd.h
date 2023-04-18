@@ -32,7 +32,6 @@
 #include <stdint.h>
 
 #include "attributes.h"
-#include "version.h"
 
 /**
  * @defgroup lavu_ripemd RIPEMD
@@ -67,11 +66,7 @@ int av_ripemd_init(struct AVRIPEMD* context, int bits);
  * @param data    input data to update hash with
  * @param len     input data length
  */
-#if FF_API_CRYPTO_SIZE_T
-void av_ripemd_update(struct AVRIPEMD* context, const uint8_t* data, unsigned int len);
-#else
 void av_ripemd_update(struct AVRIPEMD* context, const uint8_t* data, size_t len);
-#endif
 
 /**
  * Finish hashing and output digest value.

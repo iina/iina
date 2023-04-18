@@ -135,6 +135,7 @@ size_t av_strlcatf(char *dst, size_t size, const char *fmt, ...) av_printf_forma
 /**
  * Get the count of continuous non zero chars starting from the beginning.
  *
+ * @param s   the string whose length to count
  * @param len maximum number of characters to check in the string, that
  *            is the maximum value which is returned by the function
  */
@@ -155,15 +156,6 @@ static inline size_t av_strnlen(const char *s, size_t len)
  * @note You have to free the string yourself with av_free().
  */
 char *av_asprintf(const char *fmt, ...) av_printf_format(1, 2);
-
-#if FF_API_D2STR
-/**
- * Convert a number to an av_malloced string.
- * @deprecated  use av_asprintf() with "%f" or a more specific format
- */
-attribute_deprecated
-char *av_d2str(double d);
-#endif
 
 /**
  * Unescape the given string until a non escaped terminating char,

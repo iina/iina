@@ -24,6 +24,7 @@
 #include <stdint.h>
 
 #include "libavutil/avutil.h"
+#include "libavutil/channel_layout.h"
 #include "libavutil/rational.h"
 #include "libavutil/pixfmt.h"
 
@@ -31,15 +32,16 @@
 
 /**
  * @addtogroup lavc_core
+ * @{
  */
 
 enum AVFieldOrder {
     AV_FIELD_UNKNOWN,
     AV_FIELD_PROGRESSIVE,
-    AV_FIELD_TT,          //< Top coded_first, top displayed first
-    AV_FIELD_BB,          //< Bottom coded first, bottom displayed first
-    AV_FIELD_TB,          //< Top coded first, bottom displayed first
-    AV_FIELD_BT,          //< Bottom coded first, top displayed first
+    AV_FIELD_TT,          ///< Top coded_first, top displayed first
+    AV_FIELD_BB,          ///< Bottom coded first, bottom displayed first
+    AV_FIELD_TB,          ///< Top coded first, bottom displayed first
+    AV_FIELD_BT,          ///< Bottom coded first, top displayed first
 };
 
 /**
@@ -154,16 +156,22 @@ typedef struct AVCodecParameters {
      */
     int video_delay;
 
+#if FF_API_OLD_CHANNEL_LAYOUT
     /**
      * Audio only. The channel layout bitmask. May be 0 if the channel layout is
      * unknown or unspecified, otherwise the number of bits set must be equal to
      * the channels field.
+     * @deprecated use ch_layout
      */
+    attribute_deprecated
     uint64_t channel_layout;
     /**
      * Audio only. The number of audio channels.
+     * @deprecated use ch_layout.nb_channels
      */
+    attribute_deprecated
     int      channels;
+#endif
     /**
      * Audio only. The number of audio samples per second.
      */
@@ -198,6 +206,11 @@ typedef struct AVCodecParameters {
      * Audio only. Number of samples to skip after a discontinuity.
      */
     int seek_preroll;
+
+    /**
+     * Audio only. The channel layout and number of channels.
+     */
+    AVChannelLayout ch_layout;
 } AVCodecParameters;
 
 /**
@@ -221,6 +234,11 @@ void avcodec_parameters_free(AVCodecParameters **par);
  */
 int avcodec_parameters_copy(AVCodecParameters *dst, const AVCodecParameters *src);
 
+/**
+ * This function is the same as av_get_audio_frame_duration(), except it works
+ * with AVCodecParameters instead of an AVCodecContext.
+ */
+int av_get_audio_frame_duration2(AVCodecParameters *par, int frame_bytes);
 
 /**
  * @}

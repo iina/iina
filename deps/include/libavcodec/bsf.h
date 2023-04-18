@@ -30,11 +30,30 @@
 #include "packet.h"
 
 /**
- * @addtogroup lavc_core
+ * @defgroup lavc_bsf Bitstream filters
+ * @ingroup libavc
+ *
+ * Bitstream filters transform encoded media data without decoding it. This
+ * allows e.g. manipulating various header values. Bitstream filters operate on
+ * @ref AVPacket "AVPackets".
+ *
+ * The bitstream filtering API is centered around two structures:
+ * AVBitStreamFilter and AVBSFContext. The former represents a bitstream filter
+ * in abstract, the latter a specific filtering process. Obtain an
+ * AVBitStreamFilter using av_bsf_get_by_name() or av_bsf_iterate(), then pass
+ * it to av_bsf_alloc() to create an AVBSFContext. Fill in the user-settable
+ * AVBSFContext fields, as described in its documentation, then call
+ * av_bsf_init() to prepare the filter context for use.
+ *
+ * Submit packets for filtering using av_bsf_send_packet(), obtain filtered
+ * results with av_bsf_receive_packet(). When no more input packets will be
+ * sent, submit a NULL AVPacket to signal the end of the stream to the filter.
+ * av_bsf_receive_packet() will then return trailing packets, if any are
+ * produced by the filter.
+ *
+ * Finally, free the filter context with av_bsf_free().
  * @{
  */
-
-typedef struct AVBSFInternal AVBSFInternal;
 
 /**
  * The bitstream filter state.
@@ -56,12 +75,6 @@ typedef struct AVBSFContext {
      * The bitstream filter this context is an instance of.
      */
     const struct AVBitStreamFilter *filter;
-
-    /**
-     * Opaque libavcodec internal data. Must not be touched by the caller in any
-     * way.
-     */
-    AVBSFInternal *internal;
 
     /**
      * Opaque filter-specific private data. If filter->priv_class is non-NULL,
@@ -115,20 +128,6 @@ typedef struct AVBitStreamFilter {
      * code to this class.
      */
     const AVClass *priv_class;
-
-    /*****************************************************************
-     * No fields below this line are part of the public API. They
-     * may not be used outside of libavcodec and can be changed and
-     * removed at will.
-     * New public fields should be added right above.
-     *****************************************************************
-     */
-
-    int priv_data_size;
-    int (*init)(AVBSFContext *ctx);
-    int (*filter)(AVBSFContext *ctx, AVPacket *pkt);
-    void (*close)(AVBSFContext *ctx);
-    void (*flush)(AVBSFContext *ctx);
 } AVBitStreamFilter;
 
 /**
@@ -154,9 +153,9 @@ const AVBitStreamFilter *av_bsf_iterate(void **opaque);
  * av_bsf_init() before sending any data to the filter.
  *
  * @param filter the filter for which to allocate an instance.
- * @param ctx a pointer into which the pointer to the newly-allocated context
- *            will be written. It must be freed with av_bsf_free() after the
- *            filtering is done.
+ * @param[out] ctx a pointer into which the pointer to the newly-allocated context
+ *                 will be written. It must be freed with av_bsf_free() after the
+ *                 filtering is done.
  *
  * @return 0 on success, a negative AVERROR code on failure
  */
@@ -165,6 +164,8 @@ int av_bsf_alloc(const AVBitStreamFilter *filter, AVBSFContext **ctx);
 /**
  * Prepare the filter for use, after all the parameters and options have been
  * set.
+ *
+ * @param ctx a AVBSFContext previously allocated with av_bsf_alloc()
  */
 int av_bsf_init(AVBSFContext *ctx);
 
@@ -175,6 +176,7 @@ int av_bsf_init(AVBSFContext *ctx);
  * av_bsf_receive_packet() repeatedly until it returns AVERROR(EAGAIN) or
  * AVERROR_EOF.
  *
+ * @param ctx an initialized AVBSFContext
  * @param pkt the packet to filter. The bitstream filter will take ownership of
  * the packet and reset the contents of pkt. pkt is not touched if an error occurs.
  * If pkt is empty (i.e. NULL, or pkt->data is NULL and pkt->side_data_elems zero),
@@ -182,15 +184,18 @@ int av_bsf_init(AVBSFContext *ctx);
  * sending more empty packets does nothing) and will cause the filter to output
  * any packets it may have buffered internally.
  *
- * @return 0 on success. AVERROR(EAGAIN) if packets need to be retrieved from the
- * filter (using av_bsf_receive_packet()) before new input can be consumed. Another
- * negative AVERROR value if an error occurs.
+ * @return
+ *  - 0 on success.
+ *  - AVERROR(EAGAIN) if packets need to be retrieved from the filter (using
+ *    av_bsf_receive_packet()) before new input can be consumed.
+ *  - Another negative AVERROR value if an error occurs.
  */
 int av_bsf_send_packet(AVBSFContext *ctx, AVPacket *pkt);
 
 /**
  * Retrieve a filtered packet.
  *
+ * @param ctx an initialized AVBSFContext
  * @param[out] pkt this struct will be filled with the contents of the filtered
  *                 packet. It is owned by the caller and must be freed using
  *                 av_packet_unref() when it is no longer needed.
@@ -201,10 +206,12 @@ int av_bsf_send_packet(AVBSFContext *ctx, AVPacket *pkt);
  *                 overwritten by the returned data. On failure, pkt is not
  *                 touched.
  *
- * @return 0 on success. AVERROR(EAGAIN) if more packets need to be sent to the
- * filter (using av_bsf_send_packet()) to get more output. AVERROR_EOF if there
- * will be no further output from the filter. Another negative AVERROR value if
- * an error occurs.
+ * @return
+ *  - 0 on success.
+ *  - AVERROR(EAGAIN) if more packets need to be sent to the filter (using
+ *    av_bsf_send_packet()) to get more output.
+ *  - AVERROR_EOF if there will be no further output from the filter.
+ *  - Another negative AVERROR value if an error occurs.
  *
  * @note one input packet may result in several output packets, so after sending
  * a packet with av_bsf_send_packet(), this function needs to be called

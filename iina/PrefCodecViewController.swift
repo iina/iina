@@ -108,4 +108,16 @@ class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbedda
     toneMappingTargetPeakTextField.isEnabled = sender.state == .on;
     toneMappingAlgorithmPopUpBtn.isEnabled = sender.state == .on;
   }
+
+  @IBAction func toneMappingHelpAction(_ sender: Any) {
+    NSWorkspace.shared.open(URL(string: AppData.toneMappingHelpLink)!)
+  }
+
+  @IBAction func targetPeakHelpAction(_ sender: Any) {
+    NSWorkspace.shared.open(URL(string: AppData.targetPeakHelpLink)!)
+  }
+
+  @IBAction func algorithmHelpAction(_ sender: Any) {
+    NSWorkspace.shared.open(URL(string: AppData.algorithmHelpLink)!)
+  }
 }

@@ -840,7 +840,7 @@ class MPVController: NSObject {
       let prefix = String(cString: (msg?.pointee.prefix)!)
       let level = String(cString: (msg?.pointee.level)!)
       let text = String(cString: (msg?.pointee.text)!).trimmingCharacters(in: .newlines)
-      Logger.log("[\(prefix)] \(level): \(text)", level: logLevelMap[level] ?? .verbose, subsystem: mpvSubsystem, appendNewlineAtTheEnd: false)
+      Logger.log("[\(prefix)] \(level): \(text)", level: logLevelMap[level] ?? .verbose, subsystem: mpvSubsystem)
 
     case MPV_EVENT_HOOK:
       let userData = event.pointee.reply_userdata

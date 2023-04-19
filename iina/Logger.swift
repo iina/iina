@@ -191,7 +191,7 @@ class Logger: NSObject {
     return "\(time) [\(subsystem.rawValue)][\(level.description)] \(message)\(appendNewlineAtTheEnd ? "\n" : "")"
   }
 
-  static func log(_ message: String, level: Level = .debug, subsystem: Subsystem = .general, appendNewlineAtTheEnd: Bool = true) {
+  static func log(_ message: String, level: Level = .debug, subsystem: Subsystem = .general) {
     #if !DEBUG
     guard enabled else { return }
     #endif
@@ -199,7 +199,7 @@ class Logger: NSObject {
     guard level.rawValue >= Preference.integer(for: .logLevel) else { return }
 
     let date = Date()
-    let string = formatMessage(message, level, subsystem, appendNewlineAtTheEnd, date)
+    let string = formatMessage(message, level, subsystem, true, date)
     let log = Log(subsystem: subsystem.rawValue, level: level.rawValue, message: message, date: dateFormatter.string(from: date), logString: string)
     DispatchQueue.main.async {
       (NSApp.delegate as? AppDelegate)?.logWindow.logs.append(log)

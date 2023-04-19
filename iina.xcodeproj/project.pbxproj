@@ -1350,21 +1350,9 @@
 		84BAFD3B2142FE25006B3CC1 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/MiniPlayerWindowController.strings; sourceTree = "<group>"; };
 		84BAFD3C2142FE2E006B3CC1 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/OpenURLWindowController.strings; sourceTree = "<group>"; };
 		84BAFD3E2142FF0A006B3CC1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MiniPlayerWindowController.strings"; sourceTree = "<group>"; };
-		84BC785E1EEECBE30068BF17 /* avdevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avdevice.h; sourceTree = "<group>"; };
-		84BC785F1EEECBE30068BF17 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
-		84BC78611EEECBE30068BF17 /* avfilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avfilter.h; sourceTree = "<group>"; };
-		84BC78631EEECBE30068BF17 /* buffersink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = buffersink.h; sourceTree = "<group>"; };
-		84BC78641EEECBE30068BF17 /* buffersrc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = buffersrc.h; sourceTree = "<group>"; };
-		84BC78651EEECBE30068BF17 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
 		84BC78671EEECBE30068BF17 /* avformat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avformat.h; sourceTree = "<group>"; };
 		84BC78681EEECBE30068BF17 /* avio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avio.h; sourceTree = "<group>"; };
 		84BC78691EEECBE30068BF17 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
-		84BC786B1EEECBE30068BF17 /* avresample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avresample.h; sourceTree = "<group>"; };
-		84BC786C1EEECBE30068BF17 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
-		84BC78BB1EEECBE30068BF17 /* postprocess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = postprocess.h; sourceTree = "<group>"; };
-		84BC78BC1EEECBE30068BF17 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
-		84BC78BE1EEECBE30068BF17 /* swresample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = swresample.h; sourceTree = "<group>"; };
-		84BC78BF1EEECBE30068BF17 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
 		84BC78C11EEECBE30068BF17 /* swscale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = swscale.h; sourceTree = "<group>"; };
 		84BC78C21EEECBE30068BF17 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
 		84BEEC3D1DFEDE2F00F945CA /* PrefKeyBindingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefKeyBindingViewController.swift; sourceTree = "<group>"; };
@@ -2245,26 +2233,6 @@
 			path = libavcodec;
 			sourceTree = "<group>";
 		};
-		84BC785D1EEECBE30068BF17 /* libavdevice */ = {
-			isa = PBXGroup;
-			children = (
-				84BC785E1EEECBE30068BF17 /* avdevice.h */,
-				84BC785F1EEECBE30068BF17 /* version.h */,
-			);
-			path = libavdevice;
-			sourceTree = "<group>";
-		};
-		84BC78601EEECBE30068BF17 /* libavfilter */ = {
-			isa = PBXGroup;
-			children = (
-				84BC78611EEECBE30068BF17 /* avfilter.h */,
-				84BC78631EEECBE30068BF17 /* buffersink.h */,
-				84BC78641EEECBE30068BF17 /* buffersrc.h */,
-				84BC78651EEECBE30068BF17 /* version.h */,
-			);
-			path = libavfilter;
-			sourceTree = "<group>";
-		};
 		84BC78661EEECBE30068BF17 /* libavformat */ = {
 			isa = PBXGroup;
 			children = (
@@ -2273,15 +2241,6 @@
 				84BC78691EEECBE30068BF17 /* version.h */,
 			);
 			path = libavformat;
-			sourceTree = "<group>";
-		};
-		84BC786A1EEECBE30068BF17 /* libavresample */ = {
-			isa = PBXGroup;
-			children = (
-				84BC786B1EEECBE30068BF17 /* avresample.h */,
-				84BC786C1EEECBE30068BF17 /* version.h */,
-			);
-			path = libavresample;
 			sourceTree = "<group>";
 		};
 		84BC786D1EEECBE30068BF17 /* libavutil */ = {
@@ -2369,24 +2328,6 @@
 				840456D721A919A700DF2424 /* xtea.h */,
 			);
 			path = libavutil;
-			sourceTree = "<group>";
-		};
-		84BC78BA1EEECBE30068BF17 /* libpostproc */ = {
-			isa = PBXGroup;
-			children = (
-				84BC78BB1EEECBE30068BF17 /* postprocess.h */,
-				84BC78BC1EEECBE30068BF17 /* version.h */,
-			);
-			path = libpostproc;
-			sourceTree = "<group>";
-		};
-		84BC78BD1EEECBE30068BF17 /* libswresample */ = {
-			isa = PBXGroup;
-			children = (
-				84BC78BE1EEECBE30068BF17 /* swresample.h */,
-				84BC78BF1EEECBE30068BF17 /* version.h */,
-			);
-			path = libswresample;
 			sourceTree = "<group>";
 		};
 		84BC78C01EEECBE30068BF17 /* libswscale */ = {
@@ -2522,13 +2463,8 @@
 			isa = PBXGroup;
 			children = (
 				84BC784B1EEECBE30068BF17 /* libavcodec */,
-				84BC785D1EEECBE30068BF17 /* libavdevice */,
-				84BC78601EEECBE30068BF17 /* libavfilter */,
 				84BC78661EEECBE30068BF17 /* libavformat */,
-				84BC786A1EEECBE30068BF17 /* libavresample */,
 				84BC786D1EEECBE30068BF17 /* libavutil */,
-				84BC78BA1EEECBE30068BF17 /* libpostproc */,
-				84BC78BD1EEECBE30068BF17 /* libswresample */,
 				84BC78C01EEECBE30068BF17 /* libswscale */,
 				84FF846F1D2FF698001B318A /* mpv */,
 			);

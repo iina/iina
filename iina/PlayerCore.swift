@@ -379,6 +379,8 @@ class PlayerCore: NSObject {
     // Send load file command
     info.fileLoading = true
     info.justOpenedFile = true
+    isStopping = false
+    isStopped = false
     mpv.command(.loadfile, args: [path])
   }
 
@@ -1481,8 +1483,6 @@ class PlayerCore: NSObject {
     triedUsingExactSeekForCurrentFile = false
     info.fileLoading = false
     info.haveDownloadedSub = false
-    isStopping = false
-    isStopped = false
     checkUnsyncedWindowOptions()
     // generate thumbnails if window has loaded video
     if mainWindow.isVideoLoaded {
@@ -1531,6 +1531,35 @@ class PlayerCore: NSObject {
     events.emit(.fileLoaded, data: info.currentURL?.absoluteString ?? "")
   }
 
+  func afChanged() {
+    guard !isShuttingDown, !isShutdown else { return }
+    postNotification(.iinaAFChanged)
+  }
+
+  func aidChanged() {
+    guard !isShuttingDown, !isShutdown else { return }
+    info.aid = Int(mpv.getInt(MPVOption.TrackSelection.aid))
+    guard mainWindow.loaded else { return }
+    DispatchQueue.main.sync {
+      mainWindow?.muteButton.isEnabled = (info.aid != 0)
+      mainWindow?.volumeSlider.isEnabled = (info.aid != 0)
+    }
+    postNotification(.iinaAIDChanged)
+    sendOSD(.track(info.currentTrack(.audio) ?? .noneAudioTrack))
+  }
+
+  func mediaTitleChanged() {
+    guard !isShuttingDown, !isShutdown else { return }
+    postNotification(.iinaMediaTitleChanged)
+  }
+
+  func needReloadQuickSettingsView() {
+    guard !isShuttingDown, !isShutdown else { return }
+    DispatchQueue.main.async {
+      self.mainWindow.quickSettingView.reload()
+    }
+  }
+
   func playbackRestarted() {
     Logger.log("Playback restarted", subsystem: subsystem)
     reloadSavedIINAfilters()
@@ -1546,11 +1575,35 @@ class PlayerCore: NSObject {
     }
   }
 
+  @available(macOS 10.15, *)
+  func refreshEdrMode() {
+    guard mainWindow.loaded else { return }
+    DispatchQueue.main.async { [self] in
+      // No need to refresh if playback is being stopped. Must not attempt to refresh if mpv is
+      // terminating as accessing mpv once shutdown has been initiated can trigger a crash.
+      guard !isStopping, !isStopped, !isShuttingDown, !isShutdown else { return }
+      mainWindow.videoView.refreshEdrMode()
+    }
+  }
+
+  func secondarySidChanged() {
+    guard !isShuttingDown, !isShutdown else { return }
+    info.secondSid = Int(mpv.getInt(MPVOption.Subtitles.secondarySid))
+    postNotification(.iinaSIDChanged)
+  }
+
+  func sidChanged() {
+    guard !isShuttingDown, !isShutdown else { return }
+    info.sid = Int(mpv.getInt(MPVOption.TrackSelection.sid))
+    postNotification(.iinaSIDChanged)
+    sendOSD(.track(info.currentTrack(.sub) ?? .noneSubTrack))
+  }
+
   func trackListChanged() {
     // No need to process track list changes if playback is being stopped. Must not process track
     // list changes if mpv is terminating as accessing mpv once shutdown has been initiated can
     // trigger a crash.
-    guard !isStopping, !isStopped, !isShuttingDown else { return }
+    guard !isStopping, !isStopped, !isShuttingDown, !isShutdown else { return }
     Logger.log("Track list changed", subsystem: subsystem)
     getTrackInfo()
     getSelectedTracks()
@@ -1575,6 +1628,7 @@ class PlayerCore: NSObject {
         }
       }
     }
+    postNotification(.iinaTracklistChanged)
   }
 
   func onVideoReconfig() {
@@ -1597,15 +1651,16 @@ class PlayerCore: NSObject {
     }
   }
 
-  @available(macOS 10.15, *)
-  func refreshEdrMode() {
-    guard mainWindow.loaded else { return }
-    DispatchQueue.main.async {
-      // No need to refresh if playback is being stopped. Must not attempt to refresh if mpv is
-      // terminating as accessing mpv once shutdown has been initiated can trigger a crash.
-      guard !self.isStopping, !self.isStopped, !self.isShuttingDown else { return }
-      self.mainWindow.videoView.refreshEdrMode()
-    }
+  func vfChanged() {
+    guard !isShuttingDown, !isShutdown else { return }
+    postNotification(.iinaVFChanged)
+  }
+
+  func vidChanged() {
+    guard !isShuttingDown, !isShutdown else { return }
+    info.vid = Int(mpv.getInt(MPVOption.TrackSelection.vid))
+    postNotification(.iinaVIDChanged)
+    sendOSD(.track(info.currentTrack(.video) ?? .noneVideoTrack))
   }
 
   @objc

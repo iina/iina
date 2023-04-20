@@ -1015,28 +1015,16 @@ class MPVController: NSObject {
       }
 
     case MPVOption.TrackSelection.vid:
-      player.info.vid = Int(getInt(MPVOption.TrackSelection.vid))
-      player.postNotification(.iinaVIDChanged)
-      player.sendOSD(.track(player.info.currentTrack(.video) ?? .noneVideoTrack))
+      player.vidChanged()
 
     case MPVOption.TrackSelection.aid:
-      player.info.aid = Int(getInt(MPVOption.TrackSelection.aid))
-      guard player.mainWindow.loaded else { break }
-      DispatchQueue.main.sync {
-        player.mainWindow?.muteButton.isEnabled = (player.info.aid != 0)
-        player.mainWindow?.volumeSlider.isEnabled = (player.info.aid != 0)
-      }
-      player.postNotification(.iinaAIDChanged)
-      player.sendOSD(.track(player.info.currentTrack(.audio) ?? .noneAudioTrack))
+      player.aidChanged()
 
     case MPVOption.TrackSelection.sid:
-      player.info.sid = Int(getInt(MPVOption.TrackSelection.sid))
-      player.postNotification(.iinaSIDChanged)
-      player.sendOSD(.track(player.info.currentTrack(.sub) ?? .noneSubTrack))
+      player.sidChanged()
 
     case MPVOption.Subtitles.secondarySid:
-      player.info.secondSid = Int(getInt(MPVOption.Subtitles.secondarySid))
-      player.postNotification(.iinaSIDChanged)
+      player.secondarySidChanged()
 
     case MPVOption.PlaybackControl.pause:
       if let paused = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
@@ -1193,14 +1181,13 @@ class MPVController: NSObject {
 
     case MPVProperty.trackList:
       player.trackListChanged()
-      player.postNotification(.iinaTracklistChanged)
 
     case MPVProperty.vf:
       needReloadQuickSettingsView = true
-      player.postNotification(.iinaVFChanged)
+      player.vfChanged()
 
     case MPVProperty.af:
-      player.postNotification(.iinaAFChanged)
+      player.afChanged()
 
     case MPVOption.Window.fullscreen:
       guard player.mainWindow.loaded else { break }
@@ -1228,10 +1215,10 @@ class MPVController: NSObject {
       }
 
     case MPVProperty.mediaTitle:
-      player.postNotification(.iinaMediaTitleChanged)
+      player.mediaTitleChanged()
 
     case MPVProperty.idleActive:
-      if getFlag(MPVProperty.idleActive) {
+      if let idleActive = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee, idleActive {
         if receivedEndFileWhileLoading && player.info.fileLoading {
           player.errorOpeningFileAndCloseMainWindow()
           player.info.fileLoading = false
@@ -1252,9 +1239,7 @@ class MPVController: NSObject {
     }
 
     if needReloadQuickSettingsView {
-      DispatchQueue.main.async {
-        self.player.mainWindow.quickSettingView.reload()
-      }
+      player.needReloadQuickSettingsView()
     }
 
     // This code is running in the com.colliderli.iina.controller dispatch queue. We must not run

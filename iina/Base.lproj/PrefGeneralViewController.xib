@@ -588,6 +588,12 @@
                                 <menuItem title="PNG" state="on" id="3XO-ks-TDg"/>
                                 <menuItem title="JPEG (.jpg)" tag="1" id="tmy-ty-8uK"/>
                                 <menuItem title="JPEG (.jpeg)" tag="2" id="NVh-C5-b9i"/>
+                                <menuItem title="WebP (.webp)" tag="3" id="KOO-mQ-9JG">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
+                                <menuItem title="JPEG XL (.jxl)" tag="4" id="H5d-pS-Cum">
+                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                </menuItem>
                             </items>
                         </menu>
                     </popUpButtonCell>
@@ -795,6 +801,7 @@
                 <constraint firstItem="pfH-CF-O2T" firstAttribute="leading" secondItem="Kmu-J1-cbE" secondAttribute="leading" id="c9q-SG-bJV"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4zm-YX-iM8" secondAttribute="trailing" id="ca7-1x-vvq"/>
                 <constraint firstItem="pfH-CF-O2T" firstAttribute="top" secondItem="Kmu-J1-cbE" secondAttribute="top" constant="8" id="di6-Om-iYm"/>
+
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gxK-Zo-PtQ" secondAttribute="trailing" priority="100" id="eWv-bL-SZ2"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="da1-EI-Ny1" secondAttribute="trailing" id="l2x-XY-er0"/>
                 <constraint firstItem="gxK-Zo-PtQ" firstAttribute="top" secondItem="4zm-YX-iM8" secondAttribute="bottom" constant="8" id="lnd-OY-DqJ"/>

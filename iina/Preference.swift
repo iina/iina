@@ -537,10 +537,8 @@ struct Preference {
     case png = 0
     case jpg
     case jpeg
-    case ppm
-    case pgm
-    case pgmyuv
-    case tga
+    case webp
+    case jxl
 
     static var defaultValue = ScreenshotFormat.png
 
@@ -554,10 +552,8 @@ struct Preference {
         case .png: return "png"
         case .jpg: return "jpg"
         case .jpeg: return "jpeg"
-        case .ppm: return "ppm"
-        case .pgm: return "pgm"
-        case .pgmyuv: return "pgmyuv"
-        case .tga: return "tga"
+        case .webp: return "webp"
+        case .jxl: return "jxl"
         }
       }
     }

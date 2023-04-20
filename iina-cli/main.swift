@@ -57,7 +57,8 @@ if userArgs.contains(where: { $0 == "--help" || $0 == "-h" }) {
     --music-mode:
             Enter music mode after opening the media.
     --pip:
-            Enter Picture-in-Picture after opening the media.
+            Enter Picture-in-Picture after opening the media. Music mode does not
+            support Picture-in-Picture.
     --help | -h:
             Print this message.
 
@@ -66,6 +67,13 @@ if userArgs.contains(where: { $0 == "--help" || $0 == "-h" }) {
     Example: --volume=20 --no-resume-playback
     """)
   exit(0)
+}
+
+if userArgs.contains("--music-mode"), userArgs.contains("--pip") {
+  // Music mode does not support Picture-in-Picture. Combining these options is not permitted.
+  print("Cannot specify both --music-mode and --pip")
+  // Command line usage error.
+  exit(EX_USAGE)
 }
 
 var isStdin = false

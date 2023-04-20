@@ -316,8 +316,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       }
 
       if let pc = lastPlayerCore {
-        // PiP is not supported in music mode. Ignore the PiP option if music mode was specified.
         if commandLineStatus.enterMusicMode {
+          if commandLineStatus.enterPIP {
+            // PiP is not supported in music mode. Combining these options is not permitted and is
+            // rejected by iina-cli. The IINA executable must have been invoked directly with
+            // arguments.
+            Logger.log("Cannot specify both --music-mode and --pip", level: .error)
+            // Command line usage error.
+            exit(EX_USAGE)
+          }
           pc.switchToMiniPlayer()
         } else if #available(macOS 10.12, *), commandLineStatus.enterPIP {
           pc.mainWindow.enterPIP()

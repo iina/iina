@@ -67,7 +67,7 @@ class CollapseView: NSStackView {
     setVisibilityPriority(folded ? .notVisible : .mustHold, for: contentView!)
     if animated {
       NSAnimationContext.runAnimationGroup({ context in
-        context.duration = 0.25
+        context.duration = AccessibilityPreferences.adjustedDuration(0.25)
         context.allowsImplicitAnimation = true
         self.window?.layoutIfNeeded()
       }, completionHandler: nil)

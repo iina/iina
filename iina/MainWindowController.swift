@@ -1739,6 +1739,8 @@ class MainWindowController: PlayerWindowController {
     guard pipStatus == .notInPIP || animationState == .hidden else {
       return
     }
+    // Don't hide UI when Always show OSC option is enabled
+    guard !Preference.bool(for: .alwaysShowControlBar) else { return }
 
     // Follow energy efficiency best practices and stop the timer that updates the OSC while it is
     // hidden. However the timer can't be stopped if the mini player is being used as it always

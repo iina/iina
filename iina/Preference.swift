@@ -112,8 +112,8 @@ struct Preference {
     /** Timeout for auto hiding control bar (float) */
     static let controlBarAutoHideTimeout = Key("controlBarAutoHideTimeout")
     
-    /** Whether to always show control bar. (bool)*/
-    static let alwaysShowControlBar = Key("alwaysShowControlBar")
+    /** Whether auto hiding control bar is enabled. (bool)*/
+    static let enableControlBarAutoHide = Key("enableControlBarAutoHide")
     
     static let controlBarToolbarButtons = Key("controlBarToolbarButtons")
 
@@ -683,7 +683,7 @@ struct Preference {
     .controlBarPositionVertical: Float(0.1),
     .controlBarStickToCenter: true,
     .controlBarAutoHideTimeout: Float(2.5),
-    .alwaysShowControlBar: false,
+    .enableControlBarAutoHide: true,
     .controlBarToolbarButtons: [ToolBarButton.pip.rawValue, ToolBarButton.playlist.rawValue, ToolBarButton.settings.rawValue],
     .oscPosition: OSCPosition.floating.rawValue,
     .playlistWidth: 270,

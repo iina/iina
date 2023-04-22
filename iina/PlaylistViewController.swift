@@ -224,15 +224,23 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     switch tab {
     case .playlist:
       tabView.selectTabViewItem(at: 0)
-      Utility.setBoldTitle(for: playlistBtn, true)
-      Utility.setBoldTitle(for: chaptersBtn, false)
+      updateTabActiveStatus(for: playlistBtn, isActive: true)
+      updateTabActiveStatus(for: chaptersBtn, isActive: false)
     case .chapters:
       tabView.selectTabViewItem(at: 1)
-      Utility.setBoldTitle(for: chaptersBtn, true)
-      Utility.setBoldTitle(for: playlistBtn, false)
+      updateTabActiveStatus(for: playlistBtn, isActive: false)
+      updateTabActiveStatus(for: chaptersBtn, isActive: true)
     }
 
     currentTab = tab
+  }
+
+  private func updateTabActiveStatus(for btn: NSButton, isActive: Bool) {
+    if #available(macOS 10.14, *) {
+      btn.contentTintColor = isActive ? NSColor.sidebarTabTintActive : NSColor.sidebarTabTint
+    } else {
+      Utility.setBoldTitle(for: btn, isActive)
+    }
   }
 
   // MARK: - NSTableViewDataSource

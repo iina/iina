@@ -22,15 +22,12 @@ fileprivate extension NSColor {
 }
 
 class PlaySliderCell: NSSliderCell {
-  weak var _playerCore: PlayerCore!
+  unowned var _playerCore: PlayerCore!
   var playerCore: PlayerCore {
     if let player = _playerCore { return player }
 
     let windowController = self.controlView!.window!.windowController
-    if let mainWindowController = windowController as? MainWindowController {
-      return mainWindowController.player
-    }
-    let player = (windowController as! MiniPlayerWindowController).player
+    let player = (windowController as! PlayerWindowController).player
     _playerCore = player
     return player
   }

@@ -76,6 +76,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
     watchProperties = Preference.array(for: .watchProperties) as! [String]
     watchTableView.delegate = self
     watchTableView.dataSource = self
+    AccessibilityPreferences.adjustElasticityInSubviews(watchTableView)
 
     deleteButton.isEnabled = false
 

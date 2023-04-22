@@ -704,3 +704,27 @@ extension Process {
     return (process, stdout, stderr)
   }
 }
+
+extension NSView {
+
+  /// Calls the given closure on this view and all of the subviews.
+  ///
+  /// A recursive depth first traversal algorithm is used to visit all of the subviews.
+  /// - Parameter body: A closure that takes a view as a parameter.
+  func forEachSubview(_ body: (NSView) throws -> Void) rethrows {
+    try body(self)
+    for view in self.subviews {
+      try view.forEachSubview(body)
+    }
+  }
+
+  /// Calls the given closure on this view and each of its superviews.
+  /// - Parameter body: A closure that takes a view as a parameter.
+  func forEachSuperview(_ body: (NSView) throws -> Void) rethrows {
+    var view: NSView? = self
+    while view != nil {
+      try body(view!)
+      view = view!.superview
+    }
+  }
+}

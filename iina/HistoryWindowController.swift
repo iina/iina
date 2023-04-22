@@ -71,6 +71,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     outlineView.target = self
     outlineView.doubleAction = #selector(doubleAction)
     outlineView.expandItem(nil, expandChildren: true)
+    AccessibilityPreferences.adjustElasticityInSubviews(outlineView)
   }
 
   func reloadData() {

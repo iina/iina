@@ -33,7 +33,7 @@ class LogWindowController: NSWindowController, NSMenuDelegate {
     let tableViewMenu = NSMenu()
     tableViewMenu.addItem(withTitle: "Copy", action: #selector(menuCopy), keyEquivalent: "")
     logTableView.menu = tableViewMenu
-
+    AccessibilityPreferences.adjustElasticityInSubviews(logTableView)
     levelPopUpButton.menu?.items.forEach {
       $0.image = LogWindowController.indicatorIcon(withColor: colorMap[$0.tag]!)
     }

@@ -62,8 +62,10 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
 
     kbTableView.delegate = self
     kbTableView.doubleAction = Preference.bool(for: .displayKeyBindingRawValues) ? nil : #selector(editRow)
+    AccessibilityPreferences.adjustElasticityInSuperviews(kbTableView)
     confTableView.dataSource = self
     confTableView.delegate = self
+    AccessibilityPreferences.adjustElasticityInSuperviews(confTableView)
 
     removeKmBtn.isEnabled = false
 

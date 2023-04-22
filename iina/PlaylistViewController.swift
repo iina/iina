@@ -93,6 +93,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     super.viewDidLoad()
     withAllTableViews { (view) in
       view.dataSource = self
+      AccessibilityPreferences.adjustElasticityInSuperviews(view)
     }
     playlistTableView.menu?.delegate = self
 

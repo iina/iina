@@ -17,6 +17,42 @@ struct AccessibilityPreferences {
     return motionReductionEnabled ? 0 : duration
   }
 
+  /// Adjusts the elasticity of the view and all of the subviews, if the user has enabled `Reduce motion` in macOS system settings.
+  ///
+  /// If `Reduce motion` is enabled then the view and  all of the subviews will be traversed searching for scroll views. Any scroll
+  /// views will have their [horizontalScrollElasticity](https://developer.apple.com/documentation/appkit/nsscrollview/1403540-horizontalscrollelasticity)
+  /// and [verticalScrollElasticity](https://developer.apple.com/documentation/appkit/nsscrollview/1403475-verticalscrollelasticity)
+  /// properties set to [none](https://developer.apple.com/documentation/appkit/nsscrollview/elasticity/none).
+  /// This reduces the bouncing rubber band scrolling effect which can be a problem for users with vestibular disorders.
+  /// - Parameter view: View hierarchy to adjust.
+  static func adjustElasticityInSubviews(_ view: NSView) {
+    guard motionReductionEnabled else { return }
+    view.forEachSuperview() { view in
+      if let scrollView = view as? NSScrollView {
+        scrollView.horizontalScrollElasticity = .none
+        scrollView.verticalScrollElasticity = .none
+     }
+    }
+  }
+
+  /// Adjusts the elasticity of the view and its ancestors, if the user has enabled `Reduce motion` in macOS system settings.
+  ///
+  /// If `Reduce motion` is enabled then the view and its ancestors will be traversed searching for scroll views. Any scroll views will
+  /// have their [horizontalScrollElasticity](https://developer.apple.com/documentation/appkit/nsscrollview/1403540-horizontalscrollelasticity)
+  /// and [verticalScrollElasticity](https://developer.apple.com/documentation/appkit/nsscrollview/1403475-verticalscrollelasticity)
+  /// properties set to [none](https://developer.apple.com/documentation/appkit/nsscrollview/elasticity/none).
+  /// This reduces the bouncing rubber band scrolling effect which can be a problem for users with vestibular disorders.
+  /// - Parameter view: View hierarchy to adjust.
+  static func adjustElasticityInSuperviews(_ view: NSView) {
+    guard motionReductionEnabled else { return }
+    view.forEachSuperview() { view in
+      if let scrollView = view as? NSScrollView {
+        scrollView.horizontalScrollElasticity = .none
+        scrollView.verticalScrollElasticity = .none
+      }
+    }
+  }
+
   /// Reflects whether the macOS System Preference accessibility option to retuce motion is in an enabled state.
   ///
   /// This property provides a wrapper around the `NSWorkspace` property so that code that needs to check this preference setting

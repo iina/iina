@@ -184,6 +184,7 @@ class InitialWindowController: NSWindowController {
                                         options: [.activeInKeyWindow, .mouseMoved], owner: self, userInfo: nil))
     recentFilesTableView.addTrackingArea(NSTrackingArea(rect: recentFilesTableView.bounds,
                                                         options: [.activeInKeyWindow, .mouseEnteredAndExited], owner: self, userInfo: nil))
+    AccessibilityPreferences.adjustElasticityInSubviews(recentFilesTableView)
 
     setMaterial(Preference.enum(for: .themeMaterial))
 

@@ -60,6 +60,7 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
     optionsTableView.dataSource = self
     optionsTableView.delegate = self
     optionsTableView.sizeLastColumnToFit()
+    AccessibilityPreferences.adjustElasticityInSuperviews(optionsTableView)
     removeButton.isEnabled = false
 
     enableAdvancedSettingsBtn.checked = Preference.bool(for: .enableAdvancedSettings)

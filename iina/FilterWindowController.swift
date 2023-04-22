@@ -59,6 +59,9 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|", "H:|[w]|", "V:|[w]|"], ["v": upperView, "w": lowerView])
     splitView.setPosition(splitView.frame.height - 140, ofDividerAt: 0)
 
+    AccessibilityPreferences.adjustElasticityInSubviews(currentFiltersTableView)
+    AccessibilityPreferences.adjustElasticityInSubviews(savedFiltersTableView)
+
     savedFilters = (Preference.array(for: filterType == MPVProperty.af ? .savedAudioFilters : .savedVideoFilters) ?? []).compactMap(SavedFilter.init(dict:))
     filters = PlayerCore.lastActive.mpv.getFilters(filterType)
     currentFiltersTableView.reloadData()

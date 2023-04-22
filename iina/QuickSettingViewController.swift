@@ -182,6 +182,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       view.delegate = self
       view.dataSource = self
       view.superview?.superview?.layer?.cornerRadius = 4
+      AccessibilityPreferences.adjustElasticityInSuperviews(view)
     }
 
     // colors

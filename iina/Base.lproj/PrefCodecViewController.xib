@@ -241,7 +241,7 @@
                     <rect key="frame" x="138" y="29" width="308" height="42"/>
                     <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" id="aTt-aZ-rjK">
                         <font key="font" metaFont="label" size="11"/>
-                        <string key="title">Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400</string>
+                        <string key="title">Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400.</string>
                         <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>

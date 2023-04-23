@@ -46,7 +46,6 @@ class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbedda
     super.viewDidLoad()
     audioLangTokenField.commaSeparatedValues = Preference.string(for: .audioLanguage) ?? ""
     updateHwdecDescription()
-    updateEnableToneMapping(enableToneMappingBtn)
   }
 
   override func viewWillAppear() {
@@ -102,11 +101,6 @@ class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbedda
   private func updateHwdecDescription() {
     let hwdec: Preference.HardwareDecoderOption = Preference.enum(for: .hardwareDecoder)
     hwdecDescriptionTextField.stringValue = hwdec.localizedDescription
-  }
-
-  @IBAction func updateEnableToneMapping(_ sender: NSButton) {
-    toneMappingTargetPeakTextField.isEnabled = sender.state == .on;
-    toneMappingAlgorithmPopUpBtn.isEnabled = sender.state == .on;
   }
 
   @IBAction func toneMappingHelpAction(_ sender: Any) {

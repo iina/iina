@@ -197,7 +197,10 @@ class PlaybackInfo {
   var chapters: [MPVChapter] = []
   var chapter = 0
 
-  var matchedSubs: [String: [URL]] = [:]
+  @Atomic var matchedSubs: [String: [URL]] = [:]
+
+  func getMatchedSubs(_ file: String) -> [URL]? { $matchedSubs.withLock { $0[file] } }
+
   var currentSubsInfo: [FileInfo] = []
   var currentVideosInfo: [FileInfo] = []
 

@@ -58,6 +58,9 @@ struct AppData {
   static let assrtRegisterLink = "https://secure.assrt.net/user/register.xml?redir=http%3A%2F%2Fassrt.net%2Fusercp.php"
   static let chromeExtensionLink = "https://chrome.google.com/webstore/detail/open-in-iina/pdnojahnhpgmdhjdhgphgdcecehkbhfo"
   static let firefoxExtensionLink = "https://addons.mozilla.org/addon/open-in-iina-x"
+  static let toneMappingHelpLink = "https://en.wikipedia.org/wiki/Tone_mapping"
+  static let targetPeakHelpLink = "https://mpv.io/manual/stable/#options-target-peak"
+  static let algorithmHelpLink = "https://mpv.io/manual/stable/#options-tone-mapping"
 
   static let widthWhenNoVideo = 640
   static let heightWhenNoVideo = 360

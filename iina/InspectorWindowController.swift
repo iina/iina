@@ -33,6 +33,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
   @IBOutlet weak var vdecoderField: NSTextField!
   @IBOutlet weak var vcolorspaceField: NSTextField!
   @IBOutlet weak var vprimariesField: NSTextField!
+  @IBOutlet weak var vPixelFormat: NSTextField!
 
   @IBOutlet weak var voField: NSTextField!
   @IBOutlet weak var vsizeField: NSTextField!
@@ -203,12 +204,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
 
       if PlayerCore.lastActive.mainWindow.loaded && controller.fileLoaded {
         if #available(macOS 10.15, *), let colorspace = PlayerCore.lastActive.mainWindow.videoView.videoLayer.colorspace {
-          var isHdr: Bool
-          if #available(macOS 11.0, *) {
-            isHdr = CGColorSpaceUsesExtendedRange(colorspace) || CGColorSpaceUsesITUR_2100TF(colorspace)
-          } else {
-            isHdr = colorspace.isHDR()
-          }
+          let isHdr = colorspace != VideoView.SRGB
           self.vcolorspaceField.stringValue = "\(colorspace.name!) (\(isHdr ? "H" : "S")DR)"
         } else {
           self.vcolorspaceField.stringValue = "Unspecified (SDR)"
@@ -217,6 +213,17 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
         self.vcolorspaceField.stringValue = "N/A"
       }
       self.setLabelColor(self.vcolorspaceField, by: controller.fileLoaded)
+
+      if PlayerCore.lastActive.mainWindow.loaded && controller.fileLoaded {
+        if let hwPf = controller.getString(MPVProperty.videoParamsHwPixelformat) {
+          self.vPixelFormat.stringValue = "\(hwPf) (HW)"
+        } else if let swPf = controller.getString(MPVProperty.videoParamsPixelformat) {
+          self.vPixelFormat.stringValue = "\(swPf) (SW)"
+        } else {
+          self.vPixelFormat.stringValue = "N/A"
+        }
+      }
+      self.setLabelColor(self.vPixelFormat, by: controller.fileLoaded)
     }
   }
 

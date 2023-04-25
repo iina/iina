@@ -109,6 +109,14 @@ class VideoView: NSView {
     return Preference.bool(for: .videoViewAcceptsFirstMouse)
   }
 
+  /// Workaround for issue #4183, Cursor remains visible after resuming playback with the touchpad using secondary click
+  ///
+  /// See `MainWindowController.workaroundCursorDefect` and the issue for details on this workaround.
+  override func rightMouseDown(with event: NSEvent) {
+    player.mainWindow.rightMouseDown(with: event)
+    super.rightMouseDown(with: event)
+  }
+
   /// Workaround for issue #3211, Legacy fullscreen is broken (11.0.1)
   ///
   /// Changes in Big Sur broke the legacy full screen feature. The `MainWindowController` method `legacyAnimateToWindowed`

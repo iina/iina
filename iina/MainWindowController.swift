@@ -873,10 +873,25 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
+  /// Workaround for issue #4183, Cursor remains visible after resuming playback with the touchpad using secondary click
+  ///
+  /// When IINA hides the OSC it also calls the macOS AppKit method `NSCursor.setHiddenUntilMouseMoves` to hide the
+  /// cursor. In macOS Catalina that method works as documented and keeps the cursor hidden until the mouse moves. Starting with
+  /// macOS Big Sur the cursor becomes visible if mouse buttons are clicked without moving the mouse. To workaround this defect
+  /// call this method again to keep the cursor hidden when the OSC is not visible.
+  ///
+  /// This erroneous behavior has been reported to Apple as: "Regression in NSCursor.setHiddenUntilMouseMoves"
+  /// Feedback number FB11963121
+  private func workaroundCursorDefect() {
+    guard #available(macOS 11, *) else { return }
+    NSCursor.setHiddenUntilMouseMoves(true)
+  }
+
   override func mouseDown(with event: NSEvent) {
     if Logger.enabled && Logger.Level.preferred >= .verbose {
       Logger.log("MainWindow mouseDown @ \(event.locationInWindow)", level: .verbose, subsystem: player.subsystem)
     }
+    workaroundCursorDefect()
     // do nothing if it's related to floating OSC
     guard !controlBarFloating.isDragging else { return }
     // record current mouse pos
@@ -923,7 +938,7 @@ class MainWindowController: PlayerWindowController {
       Logger.log("MainWindow mouseUp @ \(event.locationInWindow), isDragging: \(isDragging), isResizingSidebar: \(isResizingSidebar), clickCount: \(event.clickCount)",
                  level: .verbose, subsystem: player.subsystem)
     }
-
+    workaroundCursorDefect()
     mousePosRelatedToWindow = nil
     if isDragging {
       // if it's a mouseup after dragging window
@@ -953,6 +968,31 @@ class MainWindowController: PlayerWindowController {
 
       super.mouseUp(with: event)
     }
+  }
+
+  override func otherMouseDown(with event: NSEvent) {
+    workaroundCursorDefect()
+    super.otherMouseDown(with: event)
+  }
+
+  override func otherMouseUp(with event: NSEvent) {
+    workaroundCursorDefect()
+    super.otherMouseUp(with: event)
+  }
+
+  /// Workaround for issue #4183, Cursor remains visible after resuming playback with the touchpad using secondary click
+  ///
+  /// AppKit contains special handling for [rightMouseDown](https://developer.apple.com/documentation/appkit/nsview/event_handling/1806802-rightmousedown) having to do with contextual menus.
+  /// Even though the documentation indicates the event will be passed up the responder chain, the event is not being received by the
+  /// window controller. We are having to catch the event in the view. Because of that we do not call the super method and instead
+  /// return to the view.`
+  override func rightMouseDown(with event: NSEvent) {
+    workaroundCursorDefect()
+  }
+
+  override func rightMouseUp(with event: NSEvent) {
+    workaroundCursorDefect()
+    super.rightMouseUp(with: event)
   }
 
   override internal func performMouseAction(_ action: Preference.MouseClickAction) {

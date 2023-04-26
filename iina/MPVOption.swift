@@ -118,10 +118,6 @@ struct MPVOption {
     static let logFile = "log-file"
     /** --config-dir=<path> */
     static let configDir = "config-dir"
-    /** --save-position-on-quit */
-    static let savePositionOnQuit = "save-position-on-quit"
-    /** --watch-later-directory=<path> */
-    static let watchLaterDirectory = "watch-later-directory"
     /** --dump-stats=<filename> */
     static let dumpStats = "dump-stats"
     /** --idle=<no|yes|once> */
@@ -138,20 +134,10 @@ struct MPVOption {
     static let scriptOpts = "script-opts"
     /** --merge-files */
     static let mergeFiles = "merge-files"
-    /** --no-resume-playback */
-    static let noResumePlayback = "no-resume-playback"
-    /** --resume-playback-check-mtime */
-    static let resumePlaybackCheckMtime = "resume-playback-check-mtime"
     /** --profile=<profile1 */
     static let profile = "profile"
     /** --reset-on-next-file=<all|option1 */
     static let resetOnNextFile = "reset-on-next-file"
-    /** --watch-later-options=option1 */
-    static let watchLaterOptions = "watch-later-options"
-    /** --write-filename-in-watch-later-config */
-    static let writeFilenameInWatchLaterConfig = "write-filename-in-watch-later-config"
-    /** --ignore-path-in-watch-later-config */
-    static let ignorePathInWatchLaterConfig = "ignore-path-in-watch-later-config"
     /** --show-profile=<profile> */
     static let showProfile = "show-profile"
     /** --use-filedir-conf */
@@ -172,6 +158,23 @@ struct MPVOption {
     static let loadAutoProfiles = "load-auto-profiles"
     /** --player-operation-mode=<cplayer|pseudo-gui> */
     static let playerOperationMode = "player-operation-mode"
+  }
+
+  struct WatchLater {
+    /** --save-position-on-quit */
+    static let savePositionOnQuit = "save-position-on-quit"
+    /** --watch-later-directory=<path> */
+    static let watchLaterDirectory = "watch-later-directory"
+    /** --no-resume-playback */
+    static let noResumePlayback = "no-resume-playback"
+    /** --resume-playback-check-mtime */
+    static let resumePlaybackCheckMtime = "resume-playback-check-mtime"
+    /** --watch-later-options=option1 */
+    static let watchLaterOptions = "watch-later-options"
+    /** --write-filename-in-watch-later-config */
+    static let writeFilenameInWatchLaterConfig = "write-filename-in-watch-later-config"
+    /** --ignore-path-in-watch-later-config */
+    static let ignorePathInWatchLaterConfig = "ignore-path-in-watch-later-config"
   }
 
   struct Video {
@@ -253,7 +256,9 @@ struct MPVOption {
     static let vdLavcCheckHwProfile = "vd-lavc-check-hw-profile"
     /** --vd-lavc-software-fallback=<yes|no|N> */
     static let vdLavcSoftwareFallback = "vd-lavc-software-fallback"
-    /** --vd-lavc-dr=<yes|no> */
+    /** --vd-lavc-film-grain=<auto|cpu|gpu> */
+    static let vdLavcFilmGrain = "vd-lavc-film-grain"
+    /** --vd-lavc-dr=<auto|yes|no> */
     static let vdLavcDr = "vd-lavc-dr"
     /** --vd-lavc-bitexact */
     static let vdLavcBitexact = "vd-lavc-bitexact"
@@ -263,9 +268,9 @@ struct MPVOption {
     static let vdLavcO = "vd-lavc-o"
     /** --vd-lavc-show-all=<yes|no> */
     static let vdLavcShowAll = "vd-lavc-show-all"
-    /** --vd-lavc-skiploopfilter=<skipvalue> (H.264 only) */
+    /** --vd-lavc-skiploopfilter=<skipvalue> */
     static let vdLavcSkiploopfilter = "vd-lavc-skiploopfilter"
-    /** --vd-lavc-skipidct=<skipvalue> (MPEG-1/2 only) */
+    /** --vd-lavc-skipidct=<skipvalue> */
     static let vdLavcSkipidct = "vd-lavc-skipidct"
     /** --vd-lavc-skipframe=<skipvalue> */
     static let vdLavcSkipframe = "vd-lavc-skipframe"
@@ -598,10 +603,8 @@ struct MPVOption {
     static let noNativeFs = "no-native-fs"
     /** --monitorpixelaspect=<ratio> */
     static let monitorpixelaspect = "monitorpixelaspect"
-    /** --stop-screensaver */
+    /** --stop-screensaver=<yes|no|always> */
     static let stopScreensaver = "stop-screensaver"
-    /** --no-stop-screensaver */
-    static let noStopScreensaver = "no-stop-screensaver"
     /** --wid=<ID> */
     static let wid = "wid"
     /** --no-window-dragging */
@@ -612,6 +615,8 @@ struct MPVOption {
     static let x11Netwm = "x11-netwm"
     /** --x11-bypass-compositor=<yes|no|fs-only|never> */
     static let x11BypassCompositor = "x11-bypass-compositor"
+    /** --x11-present=<no|auto|yes> */
+    static let x11Present = "x11-present"
   }
 
   struct DiscDevices {
@@ -815,6 +820,8 @@ struct MPVOption {
     static let osdStatusMsg = "osd-status-msg"
     /** --osd-playing-msg=<string> */
     static let osdPlayingMsg = "osd-playing-msg"
+    /** --osd-playing-msg-duration=<time> */
+    static let osdPlayingMsgDuration = "osd-playing-msg-duration"
     /** --osd-bar-align-x=<-1-1> */
     static let osdBarAlignX = "osd-bar-align-x"
     /** --osd-bar-align-y=<-1-1> */
@@ -890,6 +897,10 @@ struct MPVOption {
     static let screenshotWebpQuality = "screenshot-webp-quality"
     /** --screenshot-webp-compression=<0-6> */
     static let screenshotWebpCompression = "screenshot-webp-compression"
+    /** --screenshot-jxl-distance=<0-15> */
+    static let screenshotJxlDistance = "screenshot-jxl-distance"
+    /** --screenshot-jxl-effort=<1-9> */
+    static let screenshotJxlEffort = "screenshot-jxl-effort"
     /** --screenshot-sw=<yes|no> */
     static let screenshotSw = "screenshot-sw"
   }
@@ -1212,6 +1223,8 @@ struct MPVOption {
     static let interpolation = "interpolation"
     /** --interpolation-threshold=<0..1 */
     static let interpolationThreshold = "interpolation-threshold"
+    /** --interpolation-preserve */
+    static let interpolationPreserve = "interpolation-preserve"
     /** --opengl-pbo */
     static let openglPbo = "opengl-pbo"
     /** --dither-depth=<N|no|auto> */
@@ -1240,8 +1253,6 @@ struct MPVOption {
     static let vulkanAsyncTransfer = "vulkan-async-transfer"
     /** --vulkan-async-compute */
     static let vulkanAsyncCompute = "vulkan-async-compute"
-    /** --vulkan-disable-events */
-    static let vulkanDisableEvents = "vulkan-disable-events"
     /** --vulkan-display-display=<n> */
     static let vulkanDisplayDisplay = "vulkan-display-display"
     /** --vulkan-display-mode=<n> */
@@ -1268,6 +1279,8 @@ struct MPVOption {
     static let d3d11vaZeroCopy = "d3d11va-zero-copy"
     /** --wayland-app-id=<string> */
     static let waylandAppId = "wayland-app-id"
+    /** --wayland-configure-bounds=<yes|no> */
+    static let waylandConfigureBounds = "wayland-configure-bounds"
     /** --wayland-disable-vsync=<yes|no> */
     static let waylandDisableVsync = "wayland-disable-vsync"
     /** --wayland-edge-pixels-pointer=<value> */
@@ -1280,6 +1293,8 @@ struct MPVOption {
     static let glslShader = "glsl-shader"
     /** --glsl-shaders=<file-list> */
     static let glslShaders = "glsl-shaders"
+    /** --glsl-shader-opts=param1=value1 */
+    static let glslShaderOpts = "glsl-shader-opts"
     /** --deband */
     static let deband = "deband"
     /** --deband-iterations=<1..16> */
@@ -1342,34 +1357,44 @@ struct MPVOption {
     static let gammaFactor = "gamma-factor"
     /** --gamma-auto */
     static let gammaAuto = "gamma-auto"
+    /** --image-lut=<file> */
+    static let imageLut = "image-lut"
+    /** --image-lut-type=<value> */
+    static let imageLutType = "image-lut-type"
+    /** --target-colorspace-hint */
+    static let targetColorspaceHint = "target-colorspace-hint"
     /** --target-prim=<value> */
     static let targetPrim = "target-prim"
     /** --target-trc=<value> */
     static let targetTrc = "target-trc"
     /** --target-peak=<auto|nits> */
     static let targetPeak = "target-peak"
+    /** --target-lut=<file> */
+    static let targetLut = "target-lut"
     /** --tone-mapping=<value> */
     static let toneMapping = "tone-mapping"
     /** --tone-mapping-param=<value> */
     static let toneMappingParam = "tone-mapping-param"
+    /** --inverse-tone-mapping */
+    static let inverseToneMapping = "inverse-tone-mapping"
+    /** --tone-mapping-crosstalk=<0.0..0.30> */
+    static let toneMappingCrosstalk = "tone-mapping-crosstalk"
     /** --tone-mapping-max-boost=<1.0..10.0> */
     static let toneMappingMaxBoost = "tone-mapping-max-boost"
+    /** --tone-mapping-mode */
+    static let toneMappingMode = "tone-mapping-mode"
+    /** --gamut-mapping-mode */
+    static let gamutMappingMode = "gamut-mapping-mode"
     /** --hdr-compute-peak=<auto|yes|no> */
     static let hdrComputePeak = "hdr-compute-peak"
+    /** --allow-delayed-peak-detect */
+    static let allowDelayedPeakDetect = "allow-delayed-peak-detect"
     /** --hdr-peak-decay-rate=<1.0..1000.0> */
     static let hdrPeakDecayRate = "hdr-peak-decay-rate"
     /** --hdr-scene-threshold-low=<0.0..100.0> */
     static let hdrSceneThresholdLow = "hdr-scene-threshold-low"
     /** --hdr-scene-threshold-high=<0.0..100.0> */
     static let hdrSceneThresholdHigh = "hdr-scene-threshold-high"
-    /** --tone-mapping-desaturate=<0.0..1.0> */
-    static let toneMappingDesaturate = "tone-mapping-desaturate"
-    /** --tone-mapping-desaturate-exponent=<0.0..20.0> */
-    static let toneMappingDesaturateExponent = "tone-mapping-desaturate-exponent"
-    /** --gamut-warning */
-    static let gamutWarning = "gamut-warning"
-    /** --gamut-clipping */
-    static let gamutClipping = "gamut-clipping"
     /** --use-embedded-icc-profile */
     static let useEmbeddedIccProfile = "use-embedded-icc-profile"
     /** --icc-profile=<file> */
@@ -1384,6 +1409,10 @@ struct MPVOption {
     static let icc3dlutSize = "icc-3dlut-size"
     /** --icc-force-contrast=<no|0-1000000|inf> */
     static let iccForceContrast = "icc-force-contrast"
+    /** --lut=<file> */
+    static let lut = "lut"
+    /** --lut-type=<value> */
+    static let lutType = "lut-type"
     /** --blend-subtitles=<yes|video|no> */
     static let blendSubtitles = "blend-subtitles"
     /** --alpha=<blend-tiles|blend|yes|no> */
@@ -1445,6 +1474,8 @@ struct MPVOption {
     static let coverArtFile = "cover-art-file"
     /** --cover-art-auto=<no|exact|fuzzy|all> */
     static let coverArtAuto = "cover-art-auto"
+    /** --cover-art-whitelist=<no|yes> */
+    static let coverArtWhitelist = "cover-art-whitelist"
     /** --autoload-files=<yes|no> */
     static let autoloadFiles = "autoload-files"
     /** --record-file=<file> */

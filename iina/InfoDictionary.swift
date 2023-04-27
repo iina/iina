@@ -17,6 +17,7 @@ struct InfoDictionary {
   static let shared = InfoDictionary()
 
   var buildBranch: String? { dictionary["\(buildKeyPrefix).branch"] as? String }
+  var buildConfiguration: String? { dictionary["\(buildKeyPrefix).configuration"] as? String }
   var buildCommit: String? { dictionary["\(buildKeyPrefix).commit"] as? String }
   var buildDate: String? {
     let dateParser: (String) -> Date?
@@ -44,14 +45,53 @@ struct InfoDictionary {
     bundleIdentifier + ".build"
   }
 
+  /// The type of build used to generate this IINA executable.
+  ///
+  /// This corresponds to the Xcode build configuration.
+  var buildType: BuildType? {
+    guard let buildConfiguration = buildConfiguration else { return nil }
+    return BuildType(rawValue: buildConfiguration)
+  }
+
+  /// A string identifying the Xcode build configuration that was used to generate this executable.
+  ///
+  /// IINA's convention is that if there is no indication of the type of build then it is a release build. Therefore this property is `nil` if
+  /// this executable was built using the release configuration. Otherwise this property contains a string suitable for display to the user.
+  var buildTypeIdentifier: String? { isRelease ? nil : buildType?.description }
+
   var bundleIdentifier: String { dictionary["CFBundleIdentifier"] as! String }
 
   var copyright: String { dictionary["NSHumanReadableCopyright"] as! String }
 
   let dictionary = Bundle.main.infoDictionary!
 
+  /// A Boolean value that indicates whether this executable was built with the Xcode release configuration.
+  var isRelease: Bool { buildType == .release }
+
   var version: (String, String) {
     return (dictionary["CFBundleShortVersionString"] as! String,
             dictionary["CFBundleVersion"] as! String)
+  }
+
+  // MARK: - Enums
+
+  /// Enum corresponding to the build configurations in IINA's Xcode project.
+  enum BuildType: String, CustomStringConvertible {
+    case beta = "Beta"
+    case debug = "Debug"
+    case nightly = "Nightly"
+    case release = "Release"
+
+    /// A textual representation of this instance.
+    ///
+    /// IINA's convention is to display the build type in capital letters to ensure it is not over looked.
+    var description: String {
+      switch self {
+      case .beta: return "BETA"
+      case .debug: return "DEBUG"
+      case .nightly: return "NIGHTLY"
+      case .release: return "RELEASE"
+      }
+    }
   }
 }

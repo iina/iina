@@ -462,7 +462,7 @@
                     <rect key="frame" x="121" y="294" width="120" height="48"/>
                     <buttonCell key="cell" type="square" title="CHAPTERS" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="jUF-xa-uRI">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
+                        <font key="font" metaFont="systemBold"/>
                     </buttonCell>
                     <connections>
                         <action selector="chaptersBtnAction:" target="-2" id="Gpo-6e-oRu"/>

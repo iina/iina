@@ -3,7 +3,7 @@
 
   "name": "Open In IINA",
   "description": "Open videos and audios in IINA.",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "options_page": "options.html",
   "background": {
     "service_worker": "background.js",

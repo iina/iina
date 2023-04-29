@@ -4269,10 +4269,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 496498882919E47900CD61A5 /* iina.xcconfig */;
 			buildSettings = {
+				CURRENT_PROJECT_VERSION = 134;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/deps/lib",
 				);
+				MARKETING_VERSION = 1.3.2;
 			};
 			name = Debug;
 		};
@@ -4280,10 +4283,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 496498882919E47900CD61A5 /* iina.xcconfig */;
 			buildSettings = {
+				CURRENT_PROJECT_VERSION = 134;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/deps/lib",
 				);
+				MARKETING_VERSION = 1.3.2;
 			};
 			name = Release;
 		};

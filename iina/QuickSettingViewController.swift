@@ -8,12 +8,6 @@
 
 import Cocoa
 
-@available(OSX 10.14, *)
-fileprivate extension NSColor {
-  static let sidebarTabTint: NSColor = NSColor(named: .sidebarTabTint)!
-  static let sidebarTabTintActive: NSColor = NSColor(named: .sidebarTabTintActive)!
-}
-
 class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, SidebarViewController {
   override var nibName: NSNib.Name {
     return NSNib.Name("QuickSettingViewController")

@@ -118,6 +118,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     if pendingSwitchRequest != nil {
       switchToTab(pendingSwitchRequest!)
       pendingSwitchRequest = nil
+    } else {
+      // Initial display: need to draw highlight for currentTab
+      updateTabButtons(activeTab: currentTab)
     }
 
     // nofitications
@@ -221,18 +224,35 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
   /** Switch tab (for internal call) */
   private func switchToTab(_ tab: TabViewType) {
+    updateTabButtons(activeTab: tab)
     switch tab {
     case .playlist:
       tabView.selectTabViewItem(at: 0)
-      Utility.setBoldTitle(for: playlistBtn, true)
-      Utility.setBoldTitle(for: chaptersBtn, false)
     case .chapters:
       tabView.selectTabViewItem(at: 1)
-      Utility.setBoldTitle(for: chaptersBtn, true)
-      Utility.setBoldTitle(for: playlistBtn, false)
     }
 
     currentTab = tab
+  }
+
+  // Updates display of all tabs buttons to indicate that the given tab is active and the rest are not
+  private func updateTabButtons(activeTab: TabViewType) {
+    switch activeTab {
+    case .playlist:
+      updateTabActiveStatus(for: playlistBtn, isActive: true)
+      updateTabActiveStatus(for: chaptersBtn, isActive: false)
+    case .chapters:
+      updateTabActiveStatus(for: playlistBtn, isActive: false)
+      updateTabActiveStatus(for: chaptersBtn, isActive: true)
+    }
+  }
+
+  private func updateTabActiveStatus(for btn: NSButton, isActive: Bool) {
+    if #available(macOS 10.14, *) {
+      btn.contentTintColor = isActive ? NSColor.sidebarTabTintActive : NSColor.sidebarTabTint
+    } else {
+      Utility.setBoldTitle(for: btn, isActive)
+    }
   }
 
   // MARK: - NSTableViewDataSource

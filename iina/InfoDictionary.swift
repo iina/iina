@@ -54,8 +54,8 @@ struct InfoDictionary {
   ///
   /// This corresponds to the Xcode build configuration.
   var buildType: BuildType {
-    guard let buildConfiguration = buildConfiguration else { return .debug }
-    return BuildType(rawValue: buildConfiguration) ?? .debug
+    guard let buildConfiguration = buildConfiguration else { return .nightly }
+    return BuildType(rawValue: buildConfiguration) ?? .nightly
   }
 
   /// A string identifying the Xcode build configuration that was used to generate this executable.
@@ -71,7 +71,11 @@ struct InfoDictionary {
   let dictionary = Bundle.main.infoDictionary!
 
   /// A Boolean value that indicates whether this executable was built with the Xcode release configuration.
-  var isRelease: Bool { buildType == .release }
+  #if DEBUG
+  let isRelease = false
+  #else
+  let isRelease = true
+  #endif
 
   var version: (String, String) {
     return (dictionary["CFBundleShortVersionString"] as! String,
@@ -83,7 +87,6 @@ struct InfoDictionary {
   /// Enum corresponding to the build configurations in IINA's Xcode project.
   enum BuildType: String, CustomStringConvertible {
     case beta = "Beta"
-    case debug = "Debug"
     case nightly = "Nightly"
     case release = "Release"
 
@@ -93,7 +96,6 @@ struct InfoDictionary {
     var description: String {
       switch self {
       case .beta: return "BETA"
-      case .debug: return "DEBUG"
       case .nightly: return "NIGHTLY"
       case .release: return "RELEASE"
       }

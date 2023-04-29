@@ -71,13 +71,6 @@ fileprivate extension NSColor {
       return NSColor(calibratedRed: 0, green: 1, blue: 1, alpha: 1)
     }
   }()
-  static let initialWindowDebugLabel: NSColor = {
-    if #available(macOS 10.14, *) {
-      return NSColor(named: .initialWindowDebugLabel)!
-    } else {
-      return NSColor(calibratedRed: 1, green: 1, blue: 1, alpha: 1)
-    }
-  }()
 }
 
 fileprivate class GrayHighlightRowView: NSTableRowView {
@@ -194,14 +187,15 @@ class InitialWindowController: NSWindowController {
     case .release:
       versionLabel.stringValue = version
     case .beta:
-      versionLabel.stringValue = "\(version) (\(build))"
+      versionLabel.stringValue = "\(version) (build \(build))"
       betaIndicatorView.isHidden = false
     case .nightly:
       versionLabel.stringValue = "\(version)+g\(InfoDictionary.shared.shortCommitSHA ?? "")"
       betaIndicatorView.isHidden = false
-    default:
-      versionLabel.stringValue = "\(version)+g\(InfoDictionary.shared.shortCommitSHA ?? "")"
-      betaIndicatorView.isHidden = false
+    }
+
+    if !infoDict.isRelease {
+      versionLabel.stringValue += " DEBUG"
     }
 
     loadLastPlaybackInfo()
@@ -489,17 +483,15 @@ class BetaIndicatorView: NSView {
   override func awakeFromNib() {
     let buildType = InfoDictionary.shared.buildType
     switch buildType {
-    case .debug:
-      self.layer?.backgroundColor = NSColor.initialWindowDebugLabel.cgColor
-    case .beta:
-      self.layer?.backgroundColor = NSColor.initialWindowBetaLabel.cgColor
     case .nightly:
       self.layer?.backgroundColor = NSColor.initialWindowNightlyLabel.cgColor
+    case .beta:
+      self.layer?.backgroundColor = NSColor.initialWindowBetaLabel.cgColor
     default:
       break
     }
 
-    announcementLabel.stringValue = String(format: NSLocalizedString("initial.announcement", comment: "Version annoucnement"), buildType.rawValue)
+    announcementLabel.stringValue = String(format: NSLocalizedString("initial.announcement", comment: "Version announcement"), buildType.rawValue)
     text1.setHTMLValue(NSLocalizedString("initial." + buildType.rawValue.lowercased() + ".desc", comment: "Build type desc"))
     text2.setHTMLValue(NSLocalizedString("initial.bug_report", comment: "Bug report desc"))
 

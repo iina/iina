@@ -58,7 +58,7 @@ export function restoreOptions() {
 
 export function openInIINA(tabId, url, options = {}) {
     const baseURL = `iina://open?`;
-    const params = [`url=${encodeURIComponent(url)}`];
+    const params = [`url=${encodeURIComponent(url).replace(/'/g, '%27')}`];
     switch (options.mode) {
         case "fullScreen":
             params.push("full_screen=1"); break;

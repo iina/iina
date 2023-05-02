@@ -22,15 +22,12 @@ fileprivate extension NSColor {
 }
 
 class PlaySliderCell: NSSliderCell {
-  weak var _playerCore: PlayerCore!
+  unowned var _playerCore: PlayerCore!
   var playerCore: PlayerCore {
     if let player = _playerCore { return player }
 
     let windowController = self.controlView!.window!.windowController
-    if let mainWindowController = windowController as? MainWindowController {
-      return mainWindowController.player
-    }
-    let player = (windowController as! MiniPlayerWindowController).player
+    let player = (windowController as! PlayerWindowController).player
     _playerCore = player
     return player
   }
@@ -133,9 +130,9 @@ class PlaySliderCell: NSSliderCell {
   }
 
   override func knobRect(flipped: Bool) -> NSRect {
-    let slider = self.controlView as! PlaySlider
+    let slider = self.controlView as! NSSlider
     let barRect = barRect(flipped: flipped)
-    let percentage = slider.doubleValue / slider.span
+    let percentage = slider.doubleValue / (slider.maxValue - slider.minValue)
     // The usable width of the bar is reduced by the width of the knob.
     let effectiveBarWidth = barRect.width - knobWidth
     let pos = barRect.origin.x + CGFloat(percentage) * effectiveBarWidth

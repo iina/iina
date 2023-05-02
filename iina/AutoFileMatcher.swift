@@ -213,7 +213,7 @@ class AutoFileMatcher {
               video.relatedSubs.append(sub)
               if sub.prefix == matchedSubPrefix {
                 try checkTicket()
-                player.info.matchedSubs[video.path, default: []].append(sub.url)
+                player.info.$matchedSubs.withLock { $0[video.path, default: []].append(sub.url) }
                 sub.isMatched = true
                 matchedSubs.insert(sub)
               }
@@ -231,7 +231,7 @@ class AutoFileMatcher {
         }.forEach { sub in
           try checkTicket()
           Logger.log("Matched \(sub.filename) and \(video.filename)", level: .verbose, subsystem: subsystem)
-          player.info.matchedSubs[video.path, default: []].append(sub.url)
+          player.info.$matchedSubs.withLock { $0[video.path, default: []].append(sub.url) }
           sub.isMatched = true
           matchedSubs.insert(sub)
         }
@@ -261,14 +261,16 @@ class AutoFileMatcher {
             minOccurrences = sub.priorityStringOccurrences
           }
         }
-        try matchedSubs
-          .filter { $0.priorityStringOccurrences > minOccurrences }  // eliminate false positives in filenames
-          .compactMap { player.info.matchedSubs[video.path]!.firstIndex(of: $0.url) }  // get index
-          .forEach {  // move the sub with index to first
-            try checkTicket()
-            Logger.log("Move \(player.info.matchedSubs[video.path]![$0]) to front", level: .verbose, subsystem: subsystem)
-            if let s = player.info.matchedSubs[video.path]?.remove(at: $0) {
-              player.info.matchedSubs[video.path]!.insert(s, at: 0)
+        try player.info.$matchedSubs.withLock { subs in
+          try matchedSubs
+            .filter { $0.priorityStringOccurrences > minOccurrences }  // eliminate false positives in filenames
+            .compactMap { subs[video.path]!.firstIndex(of: $0.url) }   // get index
+            .forEach { // move the sub with index to first
+              try checkTicket()
+              Logger.log("Move \(subs[video.path]![$0]) to front", level: .verbose, subsystem: subsystem)
+              if let s = subs[video.path]?.remove(at: $0) {
+                subs[video.path]!.insert(s, at: 0)
+              }
             }
         }
         Logger.log("Finished", level: .verbose, subsystem: subsystem)
@@ -314,7 +316,9 @@ class AutoFileMatcher {
         try checkTicket()
         unmatchedSubs
           .filter { video.dist[$0]! == minDistToSub && $0.minDist.contains(video) }
-          .forEach { player.info.matchedSubs[video.path, default: []].append($0.url) }
+          .forEach { sub in
+            player.info.$matchedSubs.withLock { $0[video.path, default: []].append(sub.url) }
+          }
       }
     }
   }
@@ -368,5 +372,4 @@ class AutoFileMatcher {
       return
     }
   }
-
 }

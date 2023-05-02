@@ -103,11 +103,11 @@ struct AppInputConfig {
 
       AppInputConfig.lastStartedVersion = requestedVersion
 
-      guard let activePlayerInputConfig = PlayerCore.active.inputConfig else {
+      guard let activePlayerBindingController = PlayerCore.active.bindingController else {
         Logger.fatal("AppInputConfig.rebuildCurrent(): no active player!")
       }
 
-      let builder = activePlayerInputConfig.makeAppInputConfigBuilder()
+      let builder = activePlayerBindingController.makeAppInputConfigBuilder()
       let appInputConfigNew = builder.build(version: requestedVersion)
 
       // This will update all standard menu item bindings, and also update the isMenuItem status of each:

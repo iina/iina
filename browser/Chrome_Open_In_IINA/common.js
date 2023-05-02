@@ -1,4 +1,3 @@
-
 class Option {
     constructor(name, type, defaultValue) {
         this.name = name;
@@ -59,7 +58,7 @@ export function restoreOptions() {
 
 export function openInIINA(tabId, url, options = {}) {
     const baseURL = `iina://open?`;
-    const params = [`url=${encodeURIComponent(url)}`];
+    const params = [`url=${encodeURIComponent(url).replace(/'/g, '%27')}`];
     switch (options.mode) {
         case "fullScreen":
             params.push("full_screen=1"); break;
@@ -71,33 +70,27 @@ export function openInIINA(tabId, url, options = {}) {
     if (options.newWindow) {
         params.push("new_window=1");
     }
-    const code = `
-        var link = document.createElement('a');
-        link.href='${baseURL}${params.join("&")}';
-        document.body.appendChild(link);
-        link.click();
-        `;
-    chrome.tabs.executeScript(tabId, { code });
+
+  chrome.scripting.executeScript({
+    args: [baseURL, params],
+    target: { tabId: tabId },
+    func: openIINA,
+  });
 }
 
+const openIINA = (baseURL, params) => {
+  var link = document.createElement("a");
+  link.href = `${baseURL}${params.join("&")}`;
+  document.body.appendChild(link);
+  link.click();
+};
+
 export function updateBrowserAction() {
-    getOptions((options) => {
-        if (options.iconAction === "clickOnly") {
-            chrome.browserAction.setPopup({ popup: "" });
-            chrome.browserAction.onClicked.addListener(() => {
-                // get active window
-                chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {
-                    if (tabs.length === 0) { return; }
-                    // TODO: filter url
-                    const tab = tabs[0];
-                    if (tab.id === chrome.tabs.TAB_ID_NONE) { return; }
-                    openInIINA(tab.id, tab.url, {
-                        mode: options.iconActionOption,
-                    });
-                });
-            });
-        } else {
-            chrome.browserAction.setPopup({ popup: "popup.html" });
-        }
-    });
+  getOptions((options) => {
+    if (options.iconAction === "clickOnly") {
+      chrome.action.setPopup({ popup: "" });
+    } else {
+      chrome.action.setPopup({ popup: "popup.html" });
+    }
+  });
 }

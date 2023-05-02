@@ -12,6 +12,31 @@ import JavaScriptCore
 fileprivate let yes_str = "yes"
 fileprivate let no_str = "no"
 
+/*
+ * Change this variable to adjust threshold for *receiving* MPV_EVENT_LOG_MESSAGE messages.
+ * NOTE: Lua keybindings require at *least* level "debug", so don't set threshold to be stricter than this level
+ */
+fileprivate let mpvLogSubscriptionLevel: String = "debug"
+
+/*
+ "no"    - disable absolutely all messages
+ "fatal" - critical/aborting errors
+ "error" - simple errors
+ "warn"  - possible problems
+ "info"  - informational message
+ "v"     - noisy informational message
+ "debug" - very noisy technical information
+ "trace" - extremely noisy
+ */
+fileprivate let mpvSubsystem = Logger.makeSubsystem("mpv")
+fileprivate let logLevelMap: [String: Logger.Level] = ["fatal": .error,
+                                                       "error": .error,
+                                                       "warn": .warning,
+                                                       "info": .debug,
+                                                       "v": .verbose,
+                                                       "debug": .debug,
+                                                       "trace": .verbose]
+
 extension mpv_event_id: CustomStringConvertible {
   // Generated code from mpv is objc and does not have Swift's built-in enum name introspection.
   // We provide that here using mpv_event_name()
@@ -94,7 +119,7 @@ class MPVController: NSObject {
 
   var fileLoaded: Bool = false
 
-  let mpvLogHandler: MPVLogHandler!
+  let inputSectionLogScanner: MPVInputSectionLogScanner!
 
   private var hooks: [UInt64: MPVHookValue] = [:]
   private var hookCounter: UInt64 = 1
@@ -137,7 +162,7 @@ class MPVController: NSObject {
 
   init(playerCore: PlayerCore) {
     self.player = playerCore
-    self.mpvLogHandler = MPVLogHandler(player: playerCore)
+    self.inputSectionLogScanner = MPVInputSectionLogScanner(player: playerCore)
     super.init()
   }
 
@@ -215,7 +240,7 @@ class MPVController: NSObject {
     }
 
     chkErr(mpv_set_option_string(mpv, "watch-later-directory", Utility.watchLaterURL.path))
-    setUserOption(PK.resumeLastPosition, type: .bool, forName: MPVOption.ProgramBehavior.savePositionOnQuit)
+    setUserOption(PK.resumeLastPosition, type: .bool, forName: MPVOption.WatchLater.savePositionOnQuit)
     setUserOption(PK.resumeLastPosition, type: .bool, forName: "resume-playback")
 
     setUserOption(.initialWindowSizePosition, type: .string, forName: MPVOption.Window.geometry)
@@ -362,7 +387,7 @@ class MPVController: NSObject {
     chkErr(mpv_set_option_string(mpv, MPVOption.Input.inputConf, inputConfPath))
 
     // Receive log messages at given level of verbosity.
-    chkErr(mpv_request_log_messages(mpv, MPVLogHandler.mpvLogSubscriptionLevel.description))
+    chkErr(mpv_request_log_messages(mpv, mpvLogSubscriptionLevel))
 
     // Request tick event.
     // chkErr(mpv_request_event(mpv, MPV_EVENT_TICK, 1))
@@ -397,8 +422,7 @@ class MPVController: NSObject {
     }
     let apiType = UnsafeMutableRawPointer(mutating: (MPV_RENDER_API_TYPE_OPENGL as NSString).utf8String)
     var openGLInitParams = mpv_opengl_init_params(get_proc_address: mpvGetOpenGLFunc,
-                                                  get_proc_address_ctx: nil,
-                                                  extra_exts: nil)
+                                                  get_proc_address_ctx: nil)
     withUnsafeMutablePointer(to: &openGLInitParams) { openGLInitParams in
       // var advanced: CInt = 1
       var params = [
@@ -874,13 +898,13 @@ class MPVController: NSObject {
 
     case MPV_EVENT_LOG_MESSAGE:
       let dataOpaquePtr = OpaquePointer(event.pointee.data)
-      if let dataPtr = UnsafeMutablePointer<mpv_event_log_message>(dataOpaquePtr) {
-        let prefix = String(cString: (dataPtr.pointee.prefix)!)
-        let level = String(cString: (dataPtr.pointee.level)!)
-        let message = String(cString: (dataPtr.pointee.text)!)
+      let msg = UnsafeMutablePointer<mpv_event_log_message>(dataOpaquePtr)
+      let prefix = String(cString: (msg?.pointee.prefix)!)
+      let level = String(cString: (msg?.pointee.level)!)
+      let text = String(cString: (msg?.pointee.text)!).trimmingCharacters(in: .newlines)
+      Logger.log("[\(prefix)] \(level): \(text)", level: logLevelMap[level] ?? .verbose, subsystem: mpvSubsystem)
 
-        mpvLogHandler.handleLogMessage(prefix: prefix, level: level, msg: message)
-      }
+      inputSectionLogScanner.handleLogMessage(prefix: prefix, level: level, msg: text)
 
     case MPV_EVENT_HOOK:
       let userData = event.pointee.reply_userdata
@@ -901,7 +925,7 @@ class MPVController: NSObject {
     case MPV_EVENT_AUDIO_RECONFIG: break
 
     case MPV_EVENT_VIDEO_RECONFIG:
-      onVideoReconfig()
+      player.onVideoReconfig()
 
     case MPV_EVENT_START_FILE:
       player.info.isIdle = false
@@ -1029,28 +1053,6 @@ class MPVController: NSObject {
     player.syncUI(.playlist)
   }
 
-  private func onVideoReconfig() {
-    // If loading file, video reconfig can return 0 width and height
-    if player.info.fileLoading {
-      return
-    }
-    var dwidth = getInt(MPVProperty.dwidth)
-    var dheight = getInt(MPVProperty.dheight)
-    if player.info.rotation == 90 || player.info.rotation == 270 {
-      swap(&dwidth, &dheight)
-    }
-    if dwidth != player.info.displayWidth! || dheight != player.info.displayHeight! {
-      // filter the last video-reconfig event before quit
-      if dwidth == 0 && dheight == 0 && getFlag(MPVProperty.coreIdle) { return }
-      // video size changed
-      player.info.displayWidth = dwidth
-      player.info.displayHeight = dheight
-      DispatchQueue.main.sync {
-        player.notifyMainWindowVideoSizeChanged()
-      }
-    }
-  }
-
   // MARK: - Property listeners
 
   private func handlePropertyChange(_ property: mpv_event_property) {
@@ -1078,28 +1080,16 @@ class MPVController: NSObject {
       }
 
     case MPVOption.TrackSelection.vid:
-      player.info.vid = Int(getInt(MPVOption.TrackSelection.vid))
-      player.postNotification(.iinaVIDChanged)
-      player.sendOSD(.track(player.info.currentTrack(.video) ?? .noneVideoTrack))
+      player.vidChanged()
 
     case MPVOption.TrackSelection.aid:
-      player.info.aid = Int(getInt(MPVOption.TrackSelection.aid))
-      guard player.mainWindow.loaded else { break }
-      DispatchQueue.main.sync {
-        player.mainWindow?.muteButton.isEnabled = (player.info.aid != 0)
-        player.mainWindow?.volumeSlider.isEnabled = (player.info.aid != 0)
-      }
-      player.postNotification(.iinaAIDChanged)
-      player.sendOSD(.track(player.info.currentTrack(.audio) ?? .noneAudioTrack))
+      player.aidChanged()
 
     case MPVOption.TrackSelection.sid:
-      player.info.sid = Int(getInt(MPVOption.TrackSelection.sid))
-      player.postNotification(.iinaSIDChanged)
-      player.sendOSD(.track(player.info.currentTrack(.sub) ?? .noneSubTrack))
+      player.sidChanged()
 
     case MPVOption.Subtitles.secondarySid:
-      player.info.secondSid = Int(getInt(MPVOption.Subtitles.secondarySid))
-      player.postNotification(.iinaSIDChanged)
+      player.secondarySidChanged()
 
     case MPVOption.PlaybackControl.pause:
       if let paused = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
@@ -1256,14 +1246,13 @@ class MPVController: NSObject {
 
     case MPVProperty.trackList:
       player.trackListChanged()
-      player.postNotification(.iinaTracklistChanged)
 
     case MPVProperty.vf:
       needReloadQuickSettingsView = true
-      player.postNotification(.iinaVFChanged)
+      player.vfChanged()
 
     case MPVProperty.af:
-      player.postNotification(.iinaAFChanged)
+      player.afChanged()
 
     case MPVOption.Window.fullscreen:
       guard player.mainWindow.loaded else { break }
@@ -1291,10 +1280,10 @@ class MPVController: NSObject {
       }
 
     case MPVProperty.mediaTitle:
-      player.postNotification(.iinaMediaTitleChanged)
+      player.mediaTitleChanged()
 
     case MPVProperty.idleActive:
-      if getFlag(MPVProperty.idleActive) {
+      if let idleActive = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee, idleActive {
         if receivedEndFileWhileLoading && player.info.fileLoading {
           player.errorOpeningFileAndCloseMainWindow()
           player.info.fileLoading = false
@@ -1331,9 +1320,7 @@ class MPVController: NSObject {
     }
 
     if needReloadQuickSettingsView {
-      DispatchQueue.main.async {
-        self.player.mainWindow.quickSettingView.reload()
-      }
+      player.needReloadQuickSettingsView()
     }
 
     // This code is running in the com.colliderli.iina.controller dispatch queue. We must not run

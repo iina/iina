@@ -118,6 +118,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     if pendingSwitchRequest != nil {
       switchToTab(pendingSwitchRequest!)
       pendingSwitchRequest = nil
+    } else {
+      // Initial display: need to draw highlight for currentTab
+      updateTabButtons(activeTab: currentTab)
     }
 
     // nofitications
@@ -221,18 +224,35 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
   /** Switch tab (for internal call) */
   private func switchToTab(_ tab: TabViewType) {
+    updateTabButtons(activeTab: tab)
     switch tab {
     case .playlist:
       tabView.selectTabViewItem(at: 0)
-      Utility.setBoldTitle(for: playlistBtn, true)
-      Utility.setBoldTitle(for: chaptersBtn, false)
     case .chapters:
       tabView.selectTabViewItem(at: 1)
-      Utility.setBoldTitle(for: chaptersBtn, true)
-      Utility.setBoldTitle(for: playlistBtn, false)
     }
 
     currentTab = tab
+  }
+
+  // Updates display of all tabs buttons to indicate that the given tab is active and the rest are not
+  private func updateTabButtons(activeTab: TabViewType) {
+    switch activeTab {
+    case .playlist:
+      updateTabActiveStatus(for: playlistBtn, isActive: true)
+      updateTabActiveStatus(for: chaptersBtn, isActive: false)
+    case .chapters:
+      updateTabActiveStatus(for: playlistBtn, isActive: false)
+      updateTabActiveStatus(for: chaptersBtn, isActive: true)
+    }
+  }
+
+  private func updateTabActiveStatus(for btn: NSButton, isActive: Bool) {
+    if #available(macOS 10.14, *) {
+      btn.contentTintColor = isActive ? NSColor.sidebarTabTintActive : NSColor.sidebarTabTint
+    } else {
+      Utility.setBoldTitle(for: btn, isActive)
+    }
   }
 
   // MARK: - NSTableViewDataSource
@@ -542,7 +562,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
         }
         // sub button
         if !info.isMatchingSubtitles,
-          let matchedSubs = player.info.matchedSubs[item.filename], !matchedSubs.isEmpty {
+          let matchedSubs = player.info.getMatchedSubs(item.filename), !matchedSubs.isEmpty {
           cellView.setDisplaySubButton(true)
         } else {
           cellView.setDisplaySubButton(false)
@@ -679,7 +699,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     Utility.quickMultipleOpenPanel(title: NSLocalizedString("alert.choose_media_file.title", comment: "Choose Media File"), dir: fileURL, canChooseDir: true) { subURLs in
       for subURL in subURLs {
         guard Utility.supportedFileExt[.sub]!.contains(subURL.pathExtension.lowercased()) else { return }
-        self.player.info.matchedSubs[filename, default: []].append(subURL)
+        self.player.info.$matchedSubs.withLock { $0[filename, default: []].append(subURL) }
       }
       self.playlistTableView.reloadData(forRowIndexes: selectedRows, columnIndexes: IndexSet(integersIn: 0...1))
     }
@@ -689,10 +709,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     guard let selectedRows = selectedRows else { return }
     for index in selectedRows {
       let filename = player.info.playlist[index].filename
-      player.info.matchedSubs[filename]?.removeAll()
+      player.info.$matchedSubs.withLock { $0[filename]?.removeAll() }
       playlistTableView.reloadData(forRowIndexes: selectedRows, columnIndexes: IndexSet(integersIn: 0...1))
     }
-
   }
 
   @IBAction func contextOpenInBrowser(_ sender: NSMenuItem) {
@@ -721,7 +740,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
     if !rows.isEmpty {
       let firstURL = player.info.playlist[rows.first!]
-      let matchedSubCount = player.info.matchedSubs[firstURL.filename]?.count ?? 0
+      let matchedSubCount = player.info.getMatchedSubs(firstURL.filename)?.count ?? 0
       let title: String = isSingleItem ?
         firstURL.filenameForDisplay :
         String(format: NSLocalizedString("pl_menu.title_multi", comment: "%d Items"), rows.count)
@@ -942,22 +961,21 @@ class SubPopoverViewController: NSViewController, NSTableViewDelegate, NSTableVi
   }
 
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-    guard let matchedSubs = player.info.matchedSubs[filePath] else { return nil }
+    guard let matchedSubs = player.info.getMatchedSubs(filePath) else { return nil }
     return matchedSubs[row].lastPathComponent
   }
 
   func numberOfRows(in tableView: NSTableView) -> Int {
-    return player.info.matchedSubs[filePath]?.count ?? 0
+    return player.info.getMatchedSubs(filePath)?.count ?? 0
   }
 
   @IBAction func wrongSubBtnAction(_ sender: AnyObject) {
-    player.info.matchedSubs[filePath]?.removeAll()
+    player.info.$matchedSubs.withLock { $0[filePath]?.removeAll() }
     tableView.reloadData()
     if let row = player.info.playlist.firstIndex(where: { $0.filename == filePath }) {
       playlistTableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(integersIn: 0...1))
     }
   }
-
 }
 
 class ChapterTableCellView: NSTableCellView {
@@ -968,4 +986,3 @@ class ChapterTableCellView: NSTableCellView {
     textField?.toolTip = title
   }
 }
-

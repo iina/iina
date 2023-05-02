@@ -22,7 +22,6 @@
 #define AVUTIL_LOG_H
 
 #include <stdarg.h>
-#include "avutil.h"
 #include "attributes.h"
 #include "version.h"
 
@@ -108,24 +107,6 @@ typedef struct AVClass {
     int parent_log_context_offset;
 
     /**
-     * Return next AVOptions-enabled child or NULL
-     */
-    void* (*child_next)(void *obj, void *prev);
-
-#if FF_API_CHILD_CLASS_NEXT
-    /**
-     * Return an AVClass corresponding to the next potential
-     * AVOptions-enabled child.
-     *
-     * The difference between child_next and this is that
-     * child_next iterates over _already existing_ objects, while
-     * child_class_next iterates over _all possible_ children.
-     */
-    attribute_deprecated
-    const struct AVClass* (*child_class_next)(const struct AVClass *prev);
-#endif
-
-    /**
      * Category used for visualization (like color)
      * This is only set if the category is equal for all objects using this class.
      * available since version (51 << 16 | 56 << 8 | 100)
@@ -143,6 +124,11 @@ typedef struct AVClass {
      * available since version (52.12)
      */
     int (*query_ranges)(struct AVOptionRanges **, void *obj, const char *key, int flags);
+
+    /**
+     * Return next AVOptions-enabled child or NULL
+     */
+    void* (*child_next)(void *obj, void *prev);
 
     /**
      * Iterate over the AVClasses corresponding to potential AVOptions-enabled

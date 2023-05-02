@@ -284,7 +284,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   override func keyDown(with event: NSEvent) {
-    guard let keyBinding = player.inputConfig.matchActiveKeyBinding(endingWith: event) else {
+    guard let keyBinding = player.bindingController.matchActiveKeyBinding(endingWith: event) else {
       // invalid key
       super.keyDown(with: event)
       return

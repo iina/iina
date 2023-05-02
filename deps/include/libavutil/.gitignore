@@ -1,0 +1,25 @@
+# Exclude everything except the FFmpeg headers IINA needs.
+*
+!.gitignore
+!attributes.h
+!avconfig.h
+!avutil.h
+!buffer.h
+!channel_layout.h
+!common.h
+!dict.h
+!error.h
+!frame.h
+!hwcontext.h
+!imgutils.h
+!intfloat.h
+!log.h
+!macros.h
+!mastering_display_metadata.h
+!mathematics.h
+!mem.h
+!pixdesc.h
+!pixfmt.h
+!rational.h
+!samplefmt.h
+!version.h

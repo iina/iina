@@ -22,7 +22,7 @@ class VideoView: NSView {
 
   var videoSize: NSSize?
 
-  var isUninited = false
+  @Atomic var isUninited = false
 
   var draggingTimer: Timer?
 
@@ -41,7 +41,7 @@ class VideoView: NSView {
 
   lazy var hdrSubsystem = Logger.makeSubsystem("hdr")
 
-  static let deviceRGBColorspace = CGColorSpaceCreateDeviceRGB()
+  static let SRGB = CGColorSpaceCreateDeviceRGB()
 
   // MARK: - Attributes
 
@@ -60,7 +60,7 @@ class VideoView: NSView {
 
     // set up layer
     layer = videoLayer
-    videoLayer.colorspace = VideoView.deviceRGBColorspace
+    videoLayer.colorspace = VideoView.SRGB
     videoLayer.contentsScale = NSScreen.main!.backingScaleFactor
     wantsLayer = true
 
@@ -82,14 +82,19 @@ class VideoView: NSView {
     fatalError("init(coder:) has not been implemented")
   }
 
+  /// Uninitialize this view.
+  ///
+  /// This method will stop drawing and free the mpv render context. This is done before sending a quit command to mpv.
+  /// - Important: Once mpv has been instructed to quit accessing the mpv core can result in a crash, therefore locks must be
+  ///     used to coordinate uninitializing the view so that other threads do not attempt to use the mpv core while it is shutting down.
   func uninit() {
-    player.mpv.lockAndSetOpenGLContext()
-    defer { player.mpv.unlockOpenGLContext() }
+    $isUninited.withLock() { isUninited in
+      guard !isUninited else { return }
+      isUninited = true
 
-    guard !isUninited else { return }
-
-    player.mpv.mpvUninitRendering()
-    isUninited = true
+      videoLayer.suspend()
+      player.mpv.mpvUninitRendering()
+    }
   }
 
   deinit {
@@ -102,6 +107,14 @@ class VideoView: NSView {
 
   override func acceptsFirstMouse(for event: NSEvent?) -> Bool {
     return Preference.bool(for: .videoViewAcceptsFirstMouse)
+  }
+
+  /// Workaround for issue #4183, Cursor remains visible after resuming playback with the touchpad using secondary click
+  ///
+  /// See `MainWindowController.workaroundCursorDefect` and the issue for details on this workaround.
+  override func rightMouseDown(with event: NSEvent) {
+    player.mainWindow.rightMouseDown(with: event)
+    super.rightMouseDown(with: event)
   }
 
   /// Workaround for issue #3211, Legacy fullscreen is broken (11.0.1)
@@ -200,7 +213,7 @@ class VideoView: NSView {
     }
     guard !CVDisplayLinkIsRunning(link) else { return }
     updateDisplayLink()
-    CVDisplayLinkSetOutputCallback(link, displayLinkCallback, mutableRawPointerOf(obj: player.mpv))
+    CVDisplayLinkSetOutputCallback(link, displayLinkCallback, mutableRawPointerOf(obj: self))
     CVDisplayLinkStart(link)
   }
 
@@ -221,7 +234,7 @@ class VideoView: NSView {
     CVDisplayLinkSetCurrentCGDisplay(link, displayId)
     let actualData = CVDisplayLinkGetActualOutputVideoRefreshPeriod(link)
     let nominalData = CVDisplayLinkGetNominalOutputVideoRefreshPeriod(link)
-    var actualFps: Double = 0;
+    var actualFps: Double = 0
 
     if (nominalData.flags & Int32(CVTimeFlags.isIndefinite.rawValue)) < 1 {
       let nominalFps = Double(nominalData.timeScale) / Double(nominalData.timeValue)
@@ -232,11 +245,11 @@ class VideoView: NSView {
 
       if abs(actualFps - nominalFps) > 1 {
         Logger.log("Falling back to nominal display refresh rate: \(nominalFps) from \(actualFps)")
-        actualFps = nominalFps;
+        actualFps = nominalFps
       }
     } else {
       Logger.log("Falling back to standard display refresh rate: 60 from \(actualFps)")
-      actualFps = 60;
+      actualFps = 60
     }
     player.mpv.setDouble(MPVOption.Video.overrideDisplayFps, actualFps)
 
@@ -310,12 +323,15 @@ class VideoView: NSView {
       }
     }
 
-    if videoLayer.colorspace != VideoView.deviceRGBColorspace {
-      Logger.log("Returning to deviceRGB color space", subsystem: hdrSubsystem)
+    if videoLayer.colorspace != VideoView.SRGB {
+      videoLayer.colorspace = VideoView.SRGB
       videoLayer.wantsExtendedDynamicRangeContent = false
-      videoLayer.colorspace = VideoView.deviceRGBColorspace
       player.mpv.setString(MPVOption.GPURendererOptions.targetTrc, "auto")
       player.mpv.setString(MPVOption.GPURendererOptions.targetPrim, "auto")
+      player.mpv.setString(MPVOption.GPURendererOptions.targetPeak, "auto")
+      player.mpv.setString(MPVOption.GPURendererOptions.toneMapping, "auto")
+      player.mpv.setString(MPVOption.GPURendererOptions.toneMappingParam, "default")
+      player.mpv.setFlag(MPVOption.Screenshot.screenshotTagColorspace, false)
     }
   }
 }
@@ -327,7 +343,7 @@ extension VideoView {
   func refreshEdrMode() {
     guard player.mainWindow.loaded else { return }
     guard player.mpv.fileLoaded else { return }
-    guard let displayId = currentDisplay else { return };
+    guard let displayId = currentDisplay else { return }
     if let screen = self.window?.screen {
       NSScreen.log("Refreshing HDR for \(player.subsystem.rawValue) @ display\(displayId)", screen)
     }
@@ -343,14 +359,14 @@ extension VideoView {
     guard let mpv = player.mpv else { return false }
 
     guard let primaries = mpv.getString(MPVProperty.videoParamsPrimaries), let gamma = mpv.getString(MPVProperty.videoParamsGamma) else {
-      Logger.log("HDR primaries and gamma not available", level: .debug, subsystem: hdrSubsystem);
-      return false;
+      Logger.log("HDR primaries and gamma not available", level: .debug, subsystem: hdrSubsystem)
+      return false
     }
   
     let peak = mpv.getDouble(MPVProperty.videoParamsSigPeak)
     Logger.log("HDR gamma=\(gamma), primaries=\(primaries), sig_peak=\(peak)", level: .debug, subsystem: hdrSubsystem)
 
-    var name: CFString? = nil;
+    var name: CFString? = nil
     switch primaries {
     case "display-p3":
       if #available(macOS 10.15.4, *) {
@@ -369,33 +385,71 @@ extension VideoView {
       }
 
     case "bt.709":
-      return false; // SDR
+      return false // SDR
 
     default:
-      Logger.log("Unknown HDR color space information gamma=\(gamma) primaries=\(primaries)", level: .debug, subsystem: hdrSubsystem);
-      return false;
+      Logger.log("Unknown HDR color space information gamma=\(gamma) primaries=\(primaries)", level: .debug, subsystem: hdrSubsystem)
+      return false
     }
 
     guard (window?.screen?.maximumPotentialExtendedDynamicRangeColorComponentValue ?? 1.0) > 1.0 else {
-      Logger.log("HDR video was found but the display does not support EDR mode", level: .debug, subsystem: hdrSubsystem);
-      return false;
+      Logger.log("HDR video was found but the display does not support EDR mode", level: .debug, subsystem: hdrSubsystem)
+      return false
     }
 
     guard player.info.hdrEnabled else { return nil }
 
     if videoLayer.colorspace?.name == name {
-      Logger.log("HDR mode already enabled, skipping", level: .debug, subsystem: hdrSubsystem);
-      return true;
+      Logger.log("HDR mode already enabled, skipping", level: .debug, subsystem: hdrSubsystem)
+      return true
     }
 
-    Logger.log("Will activate HDR color space instead of using ICC profile", level: .debug, subsystem: hdrSubsystem);
+    Logger.log("Will activate HDR color space instead of using ICC profile", level: .debug, subsystem: hdrSubsystem)
 
     videoLayer.wantsExtendedDynamicRangeContent = true
     videoLayer.colorspace = CGColorSpace(name: name!)
     mpv.setString(MPVOption.GPURendererOptions.iccProfile, "")
-    mpv.setString(MPVOption.GPURendererOptions.targetTrc, "pq")
     mpv.setString(MPVOption.GPURendererOptions.targetPrim, primaries)
-    return true;
+    // PQ videos will be display as it was, HLG videos will be converted to PQ
+    mpv.setString(MPVOption.GPURendererOptions.targetTrc, "pq")
+    mpv.setFlag(MPVOption.Screenshot.screenshotTagColorspace, true)
+
+    if Preference.bool(for: .enableToneMapping) {
+      var targetPeak = Preference.integer(for: .toneMappingTargetPeak)
+      // If the target peak is set to zero then IINA attempts to determine peak brightness of the
+      // display.
+      if targetPeak == 0 {
+        if let displayInfo = CoreDisplay_DisplayCreateInfoDictionary(currentDisplay!)?.takeRetainedValue() as? [String: AnyObject] {
+          Logger.log("Successfully obtained information about the display", subsystem: hdrSubsystem)
+          // Prefer ReferencePeakHDRLuminance, which is reported by newer macOS versions.
+          if let hdrLuminance = displayInfo["ReferencePeakHDRLuminance"] as? Int {
+            Logger.log("Found ReferencePeakHDRLuminance: \(hdrLuminance)", subsystem: hdrSubsystem)
+            targetPeak = hdrLuminance
+          } else if let hdrLuminance = displayInfo["DisplayBacklight"] as? Int {
+            // We know macOS Catalina uses this key.
+            Logger.log("Found DisplayBacklight: \(hdrLuminance)", subsystem: hdrSubsystem)
+            targetPeak = hdrLuminance
+          } else {
+            Logger.log("Didn't find ReferencePeakHDRLuminance or DisplayBacklight, assuming HDR400", subsystem: hdrSubsystem)
+            Logger.log("Display info dictionary: \(displayInfo)", subsystem: hdrSubsystem)
+            targetPeak = 400
+          }
+        } else {
+          Logger.log("Unable to obtain display information, assuming HDR400", level: .warning, subsystem: hdrSubsystem)
+          targetPeak = 400
+        }
+      }
+      let algorithm = Preference.ToneMappingAlgorithmOption(rawValue: Preference.integer(for: .toneMappingAlgorithm))?.mpvString
+        ?? Preference.ToneMappingAlgorithmOption.defaultValue.mpvString
+
+      Logger.log("Will enable tone mapping target-peak=\(targetPeak) algorithm=\(algorithm)", subsystem: hdrSubsystem)
+      mpv.setInt(MPVOption.GPURendererOptions.targetPeak, targetPeak)
+      mpv.setString(MPVOption.GPURendererOptions.toneMapping, algorithm)
+    } else {
+      mpv.setString(MPVOption.GPURendererOptions.targetPeak, "auto")
+      mpv.setString(MPVOption.GPURendererOptions.toneMapping, "")
+    }
+    return true
   }
 }
 
@@ -405,7 +459,10 @@ fileprivate func displayLinkCallback(
   _ flagsIn: CVOptionFlags,
   _ flagsOut: UnsafeMutablePointer<CVOptionFlags>,
   _ context: UnsafeMutableRawPointer?) -> CVReturn {
-  let mpv = unsafeBitCast(context, to: MPVController.self)
-  mpv.mpvReportSwap()
+  let videoView = unsafeBitCast(context, to: VideoView.self)
+  videoView.$isUninited.withLock() { isUninited in
+    guard !isUninited else { return }
+    videoView.player.mpv.mpvReportSwap()
+  }
   return kCVReturnSuccess
 }

@@ -120,11 +120,6 @@ typedef struct mpv_opengl_init_params {
      * Value passed as ctx parameter to get_proc_address().
      */
     void *get_proc_address_ctx;
-    /**
-     * This should not be used. It is deprecated and will be removed or ignored
-     * when the opengl_cb API is removed.
-     */
-    const char *extra_exts;
 } mpv_opengl_init_params;
 
 /**

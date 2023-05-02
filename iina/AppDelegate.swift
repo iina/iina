@@ -378,7 +378,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     Logger.log("Timed out waiting for players to stop and shutdown", level: .warning)
     // For debugging list players that have not terminated.
     for player in PlayerCore.playerCores {
-      let label = player.label ?? "unlabeled"
+      let label = player.label
       if !player.isStopped {
         Logger.log("Player \(label) failed to stop", level: .warning)
       } else if !player.isShutdown {

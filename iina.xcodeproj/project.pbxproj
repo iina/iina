@@ -4424,14 +4424,28 @@
 			};
 			name = Release;
 		};
-		84EB1EFA1D2F51D3004FA5A1 /* Debug */ = {
-			};
-			name = Debug;
-		};
-		84EB1EFB1D2F51D3004FA5A1 /* Release */ = {
-			};
-			name = Release;
-		};
+                    84EB1EFA1D2F51D3004FA5A1 /* Debug */ = {
+                       isa = XCBuildConfiguration;
+                       baseConfigurationReference = 496498882919E47900CD61A5 /* iina.xcconfig */;
+                       buildSettings = {
+                               LIBRARY_SEARCH_PATHS = (
+                                       "$(inherited)",
+                                       "$(PROJECT_DIR)/deps/lib",
+                               );
+                        };
+                        name = Debug;
+                };
+                84EB1EFB1D2F51D3004FA5A1 /* Release */ = {
+                       isa = XCBuildConfiguration;
+                       baseConfigurationReference = 496498882919E47900CD61A5 /* iina.xcconfig */;
+                       buildSettings = {
+                               LIBRARY_SEARCH_PATHS = (
+                                       "$(inherited)",
+                                       "$(PROJECT_DIR)/deps/lib",
+                               );
+                        };
+                        name = Release;
+                };
 		E3DE8DCE1FD8166A0021921C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4964988B2919E47900CD61A5 /* iina-cli.xcconfig */;

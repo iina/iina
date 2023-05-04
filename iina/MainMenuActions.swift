@@ -295,7 +295,8 @@ extension PlayerWindowController {
 // MARK: - Sub
 
   @objc func menuLoadExternalSub(_ sender: NSMenuItem) {
-    Utility.quickOpenPanel(title: "Load external subtitle file", chooseDir: false) { url in
+    let currentDir = player.info.currentURL?.deletingLastPathComponent()
+    Utility.quickOpenPanel(title: "Load external subtitle file", chooseDir: false, dir: currentDir) { url in
       self.player.loadExternalSubFile(url, delay: true)
     }
   }

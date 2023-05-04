@@ -322,9 +322,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
         }
       }
 
-      // enter PIP
-      if #available(macOS 10.12, *), let pc = lastPlayerCore, commandLineStatus.enterPIP {
-        pc.mainWindow.enterPIP()
+      if let pc = lastPlayerCore {
+        if commandLineStatus.enterMusicMode {
+          if commandLineStatus.enterPIP {
+            // PiP is not supported in music mode. Combining these options is not permitted and is
+            // rejected by iina-cli. The IINA executable must have been invoked directly with
+            // arguments.
+            Logger.log("Cannot specify both --music-mode and --pip", level: .error)
+            // Command line usage error.
+            exit(EX_USAGE)
+          }
+          pc.switchToMiniPlayer()
+        } else if #available(macOS 10.12, *), commandLineStatus.enterPIP {
+          pc.mainWindow.enterPIP()
+        }
       }
     }
 
@@ -853,6 +864,7 @@ struct CommandLineStatus {
   var isCommandLine = false
   var isStdin = false
   var openSeparateWindows = false
+  var enterMusicMode = false
   var enterPIP = false
   var mpvArguments: [(String, String)] = []
   var iinaArguments: [(String, String)] = []
@@ -886,6 +898,9 @@ struct CommandLineStatus {
         }
         if name == "separate-windows" {
           openSeparateWindows = true
+        }
+        if name == "music-mode" {
+          enterMusicMode = true
         }
         if name == "pip" {
           enterPIP = true

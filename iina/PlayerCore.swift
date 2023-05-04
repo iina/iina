@@ -1433,6 +1433,10 @@ class PlayerCore: NSObject {
     invalidateTimer()
     triedUsingExactSeekForCurrentFile = false
     info.fileLoading = false
+    // Playback will move directly from stopped to loading when transitioning to the next file in
+    // the playlist.
+    isStopping = false
+    isStopped = false
     info.haveDownloadedSub = false
     checkUnsyncedWindowOptions()
     // generate thumbnails if window has loaded video

@@ -206,15 +206,15 @@
                                                     <scrollView wantsLayer="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t2q-cR-Rly">
                                                         <rect key="frame" x="0.0" y="0.0" width="400" height="344"/>
                                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="9n1-qG-jVw">
-                                                            <rect key="frame" x="0.0" y="0.0" width="385" height="344"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="400" height="344"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textView editable="NO" drawsBackground="NO" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="qhB-2z-pCF">
-                                                                    <rect key="frame" x="0.0" y="-1" width="385" height="344"/>
+                                                                    <rect key="frame" x="0.0" y="-1" width="400" height="344"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                    <size key="minSize" width="385" height="344"/>
+                                                                    <size key="minSize" width="400" height="344"/>
                                                                     <size key="maxSize" width="463" height="10000000"/>
                                                                     <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                 </textView>
@@ -225,7 +225,7 @@
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </scroller>
                                                         <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="iiz-lw-07s">
-                                                            <rect key="frame" x="385" y="0.0" width="15" height="344"/>
+                                                            <rect key="frame" x="384" y="0.0" width="16" height="344"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </scroller>
                                                     </scrollView>
@@ -240,17 +240,17 @@
                                         </tabViewItem>
                                         <tabViewItem label="Contributors" identifier="" id="oIB-g4-IyG">
                                             <view key="view" id="Rtt-1M-7Kd">
-                                                <rect key="frame" x="0.0" y="0.0" width="384" height="344"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="400" height="344"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iaQ-kz-jCh">
-                                                        <rect key="frame" x="4" y="62" width="376" height="282"/>
+                                                        <rect key="frame" x="4" y="62" width="392" height="282"/>
                                                         <clipView key="contentView" copiesOnScroll="NO" id="WXV-ZB-2K2">
-                                                            <rect key="frame" x="0.0" y="0.0" width="376" height="282"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="392" height="282"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <collectionView id="KDi-R3-lE7">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="376" height="282"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="392" height="282"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                     <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="4" minimumLineSpacing="4" id="yDt-JM-rDt">
                                                                         <size key="itemSize" width="32" height="32"/>
@@ -270,17 +270,17 @@
                                                         </scroller>
                                                     </scrollView>
                                                     <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bUk-MP-jkv">
-                                                        <rect key="frame" x="0.0" y="62" width="384" height="60"/>
+                                                        <rect key="frame" x="0.0" y="62" width="400" height="60"/>
                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="Q2i-kp-Z0G"/>
                                                     </imageView>
                                                     <visualEffectView appearanceType="inheritedVibrantLight" blendingMode="withinWindow" material="underWindowBackground" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="nmC-ZN-RcQ">
-                                                        <rect key="frame" x="0.0" y="62" width="384" height="60"/>
+                                                        <rect key="frame" x="0.0" y="62" width="400" height="60"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="60" id="HjS-gA-ymy"/>
                                                         </constraints>
                                                     </visualEffectView>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0PM-oG-4Qs">
-                                                        <rect key="frame" x="132" y="70" width="121" height="18"/>
+                                                        <rect key="frame" x="140" y="70" width="121" height="18"/>
                                                         <buttonCell key="cell" type="inline" title="iina/contributors" bezelStyle="inline" image="NSFollowLinkFreestandingTemplate" imagePosition="left" alignment="center" borderStyle="border" inset="2" id="U9l-uR-i7g">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="smallSystemBold"/>
@@ -290,7 +290,7 @@
                                                         </connections>
                                                     </button>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="trK-iz-kG7">
-                                                        <rect key="frame" x="128" y="0.0" width="128" height="18"/>
+                                                        <rect key="frame" x="136" y="0.0" width="128" height="18"/>
                                                         <buttonCell key="cell" type="inline" title="crowdin/members" bezelStyle="inline" image="NSFollowLinkFreestandingTemplate" imagePosition="left" alignment="center" borderStyle="border" inset="2" id="7k7-70-Kku">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="smallSystemBold"/>
@@ -301,7 +301,7 @@
                                                     </button>
                                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lR7-ma-7xF">
                                                         <rect key="frame" x="-2" y="38" width="246" height="16"/>
-                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="IINA localization is powered by Corwdin." id="HLj-vT-kNp">
+                                                        <textFieldCell key="cell" lineBreakMode="clipping" title="IINA localization is powered by Crowdin." id="HLj-vT-kNp">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

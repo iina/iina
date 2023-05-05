@@ -584,7 +584,27 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     let urls = pendingFilesForOpenFile.map { URL(fileURLWithPath: $0) }
 
     pendingFilesForOpenFile.removeAll()
-    if PlayerCore.activeOrNew.openURLs(urls) == 0 {
+    
+    if urls.count == 1,
+       let url = urls.first,
+       url.pathExtension == "iinaplgz" {
+      
+      do {
+        let plugin = try JavascriptPlugin.create(fromPackageURL: url)
+        Utility.showPermissionsAlert(forPlugin: plugin, previousPlugin: nil) { ok in
+          if ok {
+            plugin.normalizePath()
+            JavascriptPlugin.plugins.append(plugin)
+            plugin.enabled = true
+          } else {
+            plugin.remove()
+          }
+        }
+      } catch let error {
+        Utility.handlePluginInstallationError(error)
+      }
+      
+    } else if PlayerCore.activeOrNew.openURLs(urls) == 0 {
       Utility.showAlert("nothing_to_open")
     }
   }

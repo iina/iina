@@ -320,6 +320,99 @@ class Utility {
     appDelegate.fontPicker.showWindow(self)
   }
 
+  // MARK: - Plugin Installation alerts
+  
+  /**
+   Pop up a plugin Permissions alert.
+   - parameters:
+     - plugin: The plugin whose permission list needs to be displayed.
+     - previousPlugin: (Optional) The old plugin will update.
+     - sheetWindow: (Optional) The window on which to display the sheet.
+     - handler: The completion handler that gets called when the sheet’s modal session ends.
+   */
+  
+  static func showPermissionsAlert(forPlugin plugin: JavascriptPlugin, previousPlugin: JavascriptPlugin?, sheetWindow: NSWindow? = nil, handler: @escaping (Bool) -> Void) {
+    let block = {
+      let alert = NSAlert()
+      let permissionListView = PrefPluginPermissionListView()
+      let scrollView = NSScrollView(frame: NSRect(x: 0, y: 0, width: 280, height: 300))
+      permissionListView.translatesAutoresizingMaskIntoConstraints = false
+      alert.messageText = NSLocalizedString("alert.title_warning", comment: "Warning")
+      alert.informativeText = NSLocalizedString(previousPlugin == nil ? "alert.plugin_permission" : "alert.plugin_permission_added", comment: "")
+      alert.alertStyle = .warning
+      alert.accessoryView = scrollView
+      scrollView.drawsBackground = false
+      scrollView.documentView = permissionListView
+      Utility.quickConstraints(["H:|-0-[v]-0-|", "V:|-0-[v]"], ["v": permissionListView])
+      alert.addButton(withTitle: NSLocalizedString("plugin.install", comment: "Install"))
+      alert.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
+      permissionListView.setPlugin(plugin, onlyShowAddedFrom: previousPlugin)
+      alert.layout()
+      let height = permissionListView.frame.height
+      if height < 300 {
+        scrollView.frame.size.height = height
+        alert.layout()
+      }
+      
+      if let sheetWindow {
+        alert.beginSheetModal(for: sheetWindow) { result in
+          handler(result == .alertFirstButtonReturn)
+        }
+      } else {
+        let result = alert.runModal()
+        handler(result == .alertFirstButtonReturn)
+      }
+    }
+    if Thread.isMainThread {
+      block()
+    } else {
+      DispatchQueue.main.sync {
+        block()
+      }
+    }
+  }
+  
+  /**
+   Pop up a plugin installation error alert.
+   - parameters:
+     - error: JavascriptPlugin object creation error.
+     - sheetWindow: (Optional) The window on which to display the sheet.
+   */
+
+  static func handlePluginInstallationError(_ error: Error, sheetWindow: NSWindow? = nil) {
+    let message: String
+    if let pluginError = error as? JavascriptPlugin.PluginError {
+      switch pluginError {
+      case .fileNotFound(let url):
+        Logger.log("Plugin install error: file not found: \"\(url)\"", level: .error)
+        message = NSLocalizedString("plugin.install_error.file_not_found", comment: "")
+      case .invalidURL(let url):
+        Logger.log("Plugin install error: URL is invalid: \"\(url)\"", level: .error)
+        message = NSLocalizedString("plugin.install_error.invalid_url", comment: "")
+      case .cannotDownload(let out, let err):
+        Logger.log("Plugin install error: cannot download", level: .error)
+        Logger.log("\nSTDOUT_BEGIN\(out)\nSTDOUT_END", level: .debug)
+        Logger.log("\nSTDERR_BEGIN\(err)\nSTDERR_END", level: .error)
+        let str = NSLocalizedString("plugin.install_error.cannot_download", comment: "")
+        message = String(format: str, err)
+      case .cannotUnpackage(_, let err):
+        let str = NSLocalizedString("plugin.install_error.cannot_unpackage", comment: "")
+        message = String(format: str, err)
+      case .cannotLoadPlugin:
+        message = NSLocalizedString("plugin.install_error.cannot_load", comment: "")
+      }
+    } else {
+      message = error.localizedDescription
+    }
+    if Thread.isMainThread {
+      Utility.showAlert("plugin.install_error", arguments: [message], sheetWindow: sheetWindow)
+    } else {
+      DispatchQueue.main.sync {
+        Utility.showAlert("plugin.install_error", arguments: [message], sheetWindow: sheetWindow)
+      }
+    }
+  }
+
   // MARK: - App functions
 
   static func createDirIfNotExist(url: URL) {

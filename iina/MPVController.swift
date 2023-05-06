@@ -1228,7 +1228,7 @@ class MPVController: NSObject {
         player.info.isIdle = true
         if fileLoaded {
           fileLoaded = false
-          player.closeMainWindow()
+          player.closeWindow()
         }
         receivedEndFileWhileLoading = false
       }

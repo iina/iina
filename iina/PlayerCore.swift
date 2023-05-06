@@ -1901,10 +1901,14 @@ class PlayerCore: NSObject {
     }
   }
 
-  func closeMainWindow() {
+  func closeWindow() {
     DispatchQueue.main.async {
       self.isStopped = true
-      self.mainWindow.close()
+      if self.isInMiniPlayer {
+        self.miniPlayer.close()
+      } else {
+        self.mainWindow.close()
+      }
     }
   }
 

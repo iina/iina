@@ -63,6 +63,20 @@ struct AppData {
   static let targetPeakHelpLink = "https://mpv.io/manual/stable/#options-target-peak"
   static let algorithmHelpLink = "https://mpv.io/manual/stable/#options-tone-mapping"
 
+  static let confFileExtension = "conf"
+
+  // Immmutable default input configs.
+  // TODO: combine into a SortedDictionary when available
+  static let defaultConfNamesSorted = ["IINA Default", "mpv Default", "VLC Default", "Movist Default"]
+  static let defaultConfs: [String: String] = [
+    "IINA Default": Bundle.main.path(forResource: "iina-default-input", ofType: AppData.confFileExtension, inDirectory: "config")!,
+    "mpv Default": Bundle.main.path(forResource: "input", ofType: AppData.confFileExtension, inDirectory: "config")!,
+    "VLC Default": Bundle.main.path(forResource: "vlc-default-input", ofType: AppData.confFileExtension, inDirectory: "config")!,
+    "Movist Default": Bundle.main.path(forResource: "movist-default-input", ofType: AppData.confFileExtension, inDirectory: "config")!
+  ]
+  // Max allowed lines when reading a single input config file, or reading them from the Clipboard.
+  static let maxConfFileLinesAccepted = 10000
+
   static let widthWhenNoVideo = 640
   static let heightWhenNoVideo = 360
   static let sizeWhenNoVideo = NSSize(width: widthWhenNoVideo, height: heightWhenNoVideo)
@@ -112,7 +126,35 @@ struct Constants {
   }
 }
 
+struct Unit {
+  let singular: String
+  let plural: String
+
+  static let config = Unit(singular: "Config", plural: "Configs")
+  static let keyBinding = Unit(singular: "Binding", plural: "Bindings")
+}
+struct UnitActionFormat {
+  let none: String      // action only
+  let single: String    // action, unit.singular
+  let multiple: String  // action, count, unit.plural
+  static let cut = UnitActionFormat(none: "Cut", single: "Cut %@", multiple: "Cut %d %@")
+  static let copy = UnitActionFormat(none: "Copy", single: "Copy %@", multiple: "Copy %d %@")
+  static let paste = UnitActionFormat(none: "Paste", single: "Paste %@", multiple: "Paste %d %@")
+  static let pasteAbove = UnitActionFormat(none: "Paste Above", single: "Paste %@ Above", multiple: "Paste %d %@ Above")
+  static let pasteBelow = UnitActionFormat(none: "Paste Below", single: "Paste %@ Below", multiple: "Paste %d %@ Below")
+  static let delete = UnitActionFormat(none: "Delete", single: "Delete %@", multiple: "Delete %d %@")
+  static let add = UnitActionFormat(none: "Add", single: "Add %@", multiple: "Add %d %@")
+  static let insertNewAbove = UnitActionFormat(none: "Insert Above", single: "Insert New %@ Above", multiple: "Insert %d New %@ Above")
+  static let insertNewBelow = UnitActionFormat(none: "Insert Below", single: "Insert New %@ Below", multiple: "Insert %d New %@ Below")
+  static let move = UnitActionFormat(none: "Move", single: "Move %@", multiple: "Move %d %@")
+  static let update = UnitActionFormat(none: "Update", single: "%@ Update", multiple: "%d %@ Updates")
+  static let copyToFile = UnitActionFormat(none: "Copy to File", single: "Copy %@ to File", multiple: "Copy %d %@ to File")
+}
+
 extension Notification.Name {
+  // User changed System Settings > Appearance > Accent Color. Must handle via DistributedNotificationCenter
+  static let appleColorPreferencesChangedNotification = Notification.Name("AppleColorPreferencesChangedNotification")
+
   static let iinaMainWindowChanged = Notification.Name("IINAMainWindowChanged")
   static let iinaPlaylistChanged = Notification.Name("IINAPlaylistChanged")
   static let iinaTracklistChanged = Notification.Name("IINATracklistChanged")
@@ -122,12 +164,22 @@ extension Notification.Name {
   static let iinaMediaTitleChanged = Notification.Name("IINAMediaTitleChanged")
   static let iinaVFChanged = Notification.Name("IINAVfChanged")
   static let iinaAFChanged = Notification.Name("IINAAfChanged")
+  // An error occurred in the key bindings page and needs to be displayed:
+  static let iinaKeyBindingErrorOccurred = Notification.Name("IINAKeyBindingErrorOccurred")
+  // Supports auto-complete for key binding editing:
   static let iinaKeyBindingInputChanged = Notification.Name("IINAKeyBindingInputChanged")
+  // Contains a TableUIChange which should be applied to the Input Conf table:
+  // user input conf additions, subtractions, a rename, or the selection changed
+  static let iinaPendingUIChangeForConfTable = Notification.Name("IINAPendingUIChangeForConfTable")
+  // Contains a TableUIChange which should be applied to the Key Bindings table
+  static let iinaPendingUIChangeForBindingTable = Notification.Name("IINAPendingUIChangeForBindingTable")
+  // Requests that the search field above the Key Bindings table change its text to the contained string
+  static let iinaKeyBindingSearchFieldShouldUpdate = Notification.Name("IINAKeyBindingSearchFieldShouldUpdate")
+  // The AppInputConfig was rebuilt
+  static let iinaAppInputConfigDidChange = Notification.Name("IINAAppInputConfigDidChange")
   static let iinaFileLoaded = Notification.Name("IINAFileLoaded")
   static let iinaHistoryUpdated = Notification.Name("IINAHistoryUpdated")
   static let iinaLegacyFullScreen = Notification.Name("IINALegacyFullScreen")
-  static let iinaGlobalKeyBindingsChanged = Notification.Name("iinaGlobalKeyBindingsChanged")
-  static let iinaKeyBindingChanged = Notification.Name("iinaKeyBindingChanged")
   static let iinaPluginChanged = Notification.Name("IINAPluginChanged")
   static let iinaPlayerStopped = Notification.Name("iinaPlayerStopped")
   static let iinaPlayerShutdown = Notification.Name("iinaPlayerShutdown")

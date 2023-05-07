@@ -269,7 +269,38 @@ struct Preference {
     static let enableLogging = Key("enableLogging")
     static let logLevel = Key("logLevel")
 
+    /* [advanced] The highest mpv log level which IINA will include mpv log events in its own logfile (mutually exclusive of mpv's logfile) */
+    static let iinaMpvLogLevel = Key("iinaMpvLogLevel")
+
+    /* [debugging] If true, enables even more verbose logging so that input bindings computations can be more easily debugged. */
+    static let logKeyBindingsRebuild = Key("logKeyBindingsRebuild")
+
+    /* Saved value of checkbox in Key Bindings settings UI */
     static let displayKeyBindingRawValues = Key("displayKeyBindingRawValues")
+
+    /* Behavior when setting the name of a new configuration to the Settings > Key Bindings > Configuration table, when duplicating an
+     existing file or adding a new file.
+     If true, a new row will be created in the table and a field editor will be displayed in it to allow setting the name (more modern).
+     If false, a dialog will pop up containing a prompt and text field for entering the name.
+     */
+    static let useInlineEditorInsteadOfDialogForNewInputConf = Key("useInlineEditorInsteadOfDialogForNewInputConf")
+
+    /* [advanced] If true, a selection of raw text can be pasted, or dragged from an input config file and dropped as a list of
+     input bindings wherever input bindings can be dropped. */
+    static let acceptRawTextAsKeyBindings = Key("acceptRawTextAsKeyBindings")
+
+    /* If true, when the Key Bindings table is completely reloaded (as when changing the selected conf file), the changes will be animated using
+     a calculated diff of the new contents compared to the old. If false, the contents of the table will be changed without an animation. */
+    static let animateKeyBindingTableReloadAll = Key("animateKeyBindingTableReloadAll")
+
+    /* [advanced] If true, enables spreadsheet-like navigation for quickly editing the Key Bindings table.
+     When this pref is `true`:
+     * When editing the last column of a row, pressing TAB accepts changes and opens a new editor in the first column of the next row.
+     * When editing the first column of a row, pressing SHIFT+TAB accepts changes and opens a new editor in the last column of the previous row.
+     * When editing any column, pressing RETURN will accept changes and open an editor in the same column of the next row.
+     When this pref is `false` (default), each of the above actions will accept changes but will not open a new editor.
+     */
+    static let tableEditKeyNavContinuesBetweenRows = Key("tableEditKeyNavContinuesBetweenRows")
 
     /** unused */
     // static let resizeFrameBuffer = Key("resizeFrameBuffer")
@@ -835,7 +866,13 @@ struct Preference {
     .useMpvOsd: false,
     .enableLogging: false,
     .logLevel: Logger.Level.debug.rawValue,
+    .iinaMpvLogLevel: MPVLogLevel.warn.rawValue,
+    .logKeyBindingsRebuild: false,
     .displayKeyBindingRawValues: false,
+    .useInlineEditorInsteadOfDialogForNewInputConf: true,
+    .acceptRawTextAsKeyBindings: false,
+    .animateKeyBindingTableReloadAll: true,
+    .tableEditKeyNavContinuesBetweenRows: false,
     .userOptions: [[String]](),
     .useUserDefinedConfDir: false,
     .userDefinedConfDir: "~/.config/mpv/",

@@ -10,7 +10,6 @@ import Cocoa
 
 typealias PK = Preference.Key
 
-
 class Utility {
 
   static let supportedFileExt: [MPVTrack.TrackType: [String]] = [
@@ -77,6 +76,8 @@ class Utility {
     } else {
       alert.informativeText = String(format: format)
     }
+
+    Logger.log("Showing alert: \"\(alert.informativeText)\"")
 
     alert.alertStyle = style
     if let sheetWindow = sheetWindow {
@@ -348,19 +349,8 @@ class Utility {
     return allTypes.first { supportedFileExt[$0]!.contains(ext.lowercased()) }
   }
 
-  static func getFilePath(Configs userConfigs: [String: Any]!, forConfig conf: String, showAlert: Bool = true) -> String? {
-
-    // if is default config
-    if let dv = PrefKeyBindingViewController.defaultConfigs[conf] {
-      return dv
-    } else if let uv = userConfigs[conf] as? String {
-      return uv
-    } else {
-      if showAlert {
-        Utility.showAlert("error_finding_file", arguments: ["config"])
-      }
-      return nil
-    }
+  static func buildConfFilePath(for userConfName: String) -> String {
+    return Utility.userInputConfDirURL.appendingPathComponent(userConfName).appendingPathExtension(AppData.confFileExtension).path
   }
 
   static let appSupportDirUrl: URL = {
@@ -441,6 +431,18 @@ class Utility {
     return realScale >= 1 ? realScale : -1 / realScale
   }
 
+  static func format(_ unit: Unit, _ unitCount: Int, _ format: UnitActionFormat) -> String {
+    // 3 forms: if count==0, count==1, or count>1
+    if unitCount == 0 {
+      return format.none
+    }
+    if unitCount == 1 {  // single
+      return String(format: format.single, unit.singular)
+    }
+    // multiple
+    return String(format: format.multiple, unitCount, unit.plural)
+  }
+
   static func quickConstraints(_ constraints: [String], _ views: [String: NSView]) {
     constraints.forEach { c in
       let cc = NSLayoutConstraint.constraints(withVisualFormat: c, options: [], metrics: nil, views: views)
@@ -508,6 +510,20 @@ class Utility {
   }
 
   // MARK: - Util classes
+
+  class AlertInfo {
+    let key: String
+    let comment: String?
+    let args: [CVarArg]?
+    let style: NSAlert.Style
+
+    init(key: String, comment: String? = nil, args: [CVarArg]? = nil, _ style: NSAlert.Style = .critical) {
+      self.key = key
+      self.comment = comment
+      self.args = args
+      self.style = style
+    }
+  }
 
   class FontAttributes {
     struct AttributeType {

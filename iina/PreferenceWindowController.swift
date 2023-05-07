@@ -40,6 +40,7 @@ extension PreferenceWindowEmbeddable {
 }
 
 class PreferenceWindowController: NSWindowController {
+  static unowned var undoManager: UndoManager? = nil
 
   class Trie {
 
@@ -154,6 +155,12 @@ class PreferenceWindowController: NSWindowController {
 
   override func windowDidLoad() {
     super.windowDidLoad()
+
+    if let undoManager = window?.undoManager {
+      Logger.log("PreferenceWindow loaded: setting UndoManager", level: .verbose)
+      // Make more easily accessible for other components
+      PreferenceWindowController.undoManager = undoManager
+    }
 
     window?.titlebarAppearsTransparent = true
     window?.titleVisibility = .hidden

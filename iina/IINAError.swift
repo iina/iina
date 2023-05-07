@@ -16,4 +16,6 @@ enum IINAError: Error {
   case gifCannotConvertImage
   case gifCannotFinalize
 
+  case confFileIsReadOnly
+  case confFileError
 }

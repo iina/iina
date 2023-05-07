@@ -11,13 +11,11 @@ import Cocoa
 class PlayerWindowController: NSWindowController, NSWindowDelegate {
 
   unowned var player: PlayerCore
-  
+
   var videoView: VideoView {
     fatalError("Subclass must implement")
   }
 
-  var menuActionHandler: MainMenuActionHandler!
-  
   var isOntop = false {
     didSet {
       player.mpv.setFlag(MPVOption.Window.ontop, isOntop)
@@ -157,19 +155,13 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     
     guard let window = window else { return }
     
-    // Insert `menuActionHandler` into the responder chain
-    menuActionHandler = MainMenuActionHandler(playerCore: player)
-    let responder = window.nextResponder
-    window.nextResponder = menuActionHandler
-    menuActionHandler.nextResponder = responder
-    
     window.initialFirstResponder = nil
     window.titlebarAppearsTransparent = true
     
     setMaterial(Preference.enum(for: .themeMaterial))
     
     addObserver(to: .default, forName: .iinaMediaTitleChanged, object: player) { [unowned self] _ in
-        self.updateTitle()
+      self.updateTitle()
     }
 
     leftLabel.mode = .current
@@ -219,18 +211,23 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     // See overridden functions for 10.14-
   }
 
-  // MARK: - Mouse / Trackpad events
-
-
+  // MARK: - Key events
+  
   @discardableResult
   func handleKeyBinding(_ keyBinding: KeyMapping) -> Bool {
-    if keyBinding.isIINACommand {
+    if let menuItem = keyBinding.menuItem, let action = menuItem.action {
+      // - Menu item (e.g. custom video filter)
+      // If a menu item's key equivalent doesn't have any modifiers, the player window will get the key event instead of the main menu.
+      Logger.log("Executing action for menuItem \(menuItem.title.quoted)", level: .verbose)
+      NSApp.sendAction(action, to: self, from: menuItem)
+      return true
+    } else if keyBinding.isIINACommand {
       // - IINA command
       if let iinaCommand = IINACommand(rawValue: keyBinding.rawAction) {
         handleIINACommand(iinaCommand)
         return true
       } else {
-        Logger.log("Unknown iina command \(keyBinding.rawAction)", level: .error)
+        Logger.log("Unrecognized IINA command: \(keyBinding.rawAction.quoted)", level: .error)
         return false
       }
     } else {
@@ -247,7 +244,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       if returnValue == 0 {
         return true
       } else {
-        Logger.log("Return value \(returnValue) when executing key command \(keyBinding.rawAction)", level: .error)
+        Logger.log("Return value \(returnValue) when executing key command \(keyBinding.rawAction.quoted)", level: .error)
         return false
       }
     }
@@ -287,13 +284,24 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   override func keyDown(with event: NSEvent) {
-    let keyCode = KeyCodeHelper.mpvKeyCode(from: event)
-    if let kb = PlayerCore.keyBindings[keyCode] {
-      handleKeyBinding(kb)
-    } else {
+    guard let keyBinding = player.bindingController.matchActiveKeyBinding(endingWith: event) else {
+      // invalid key
+      super.keyDown(with: event)
+      return
+    }
+    // if "ignore", just swallow the event. Do not forward; do not beep
+    guard !keyBinding.isIgnored else {
+      return
+    }
+
+    let cmdSucceeded = handleKeyBinding(keyBinding)
+    if !cmdSucceeded {
+      // beep if cmd failed
       super.keyDown(with: event)
     }
   }
+
+  // MARK: - Mouse / Trackpad events
 
   override func mouseUp(with event: NSEvent) {
     guard !isMouseEvent(event, inAnyOf: mouseActionDisabledViews) else { return }
@@ -444,6 +452,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   // MARK: - Window delegate: Activeness status
 
   func windowDidBecomeMain(_ notification: Notification) {
+    Logger.log("Window became main: \(player.subsystem.rawValue)", level: .verbose)
+
     PlayerCore.lastActive = player
     if #available(macOS 10.13, *), RemoteCommandController.useSystemMediaControl {
       NowPlayingInfoManager.updateInfo(withTitle: true)
@@ -454,6 +464,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
   
   func windowDidResignMain(_ notification: Notification) {
+    Logger.log("Window is no longer main: \(player.subsystem.rawValue)", level: .verbose)
+
     NotificationCenter.default.post(name: .iinaMainWindowChanged, object: false)
   }
 
@@ -547,17 +559,17 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     case .openURL:
       appDelegate.openURL(self)
     case .flip:
-      menuActionHandler.menuToggleFlip(.dummy)
+      menuToggleFlip(.dummy)
     case .mirror:
-      menuActionHandler.menuToggleMirror(.dummy)
+      menuToggleMirror(.dummy)
     case .saveCurrentPlaylist:
-      menuActionHandler.menuSavePlaylist(.dummy)
+      menuSavePlaylist(.dummy)
     case .deleteCurrentFile:
-      menuActionHandler.menuDeleteCurrentFile(.dummy)
+      menuDeleteCurrentFile(.dummy)
     case .findOnlineSubs:
-      menuActionHandler.menuFindOnlineSub(.dummy)
+      menuFindOnlineSub(.dummy)
     case .saveDownloadedSub:
-      menuActionHandler.saveDownloadedSub(.dummy)
+      saveDownloadedSub(.dummy)
     default:
       break
     }

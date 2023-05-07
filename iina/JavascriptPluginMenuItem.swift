@@ -76,11 +76,16 @@ class JavascriptPluginMenuItem: NSObject, JavascriptPluginMenuItemExportable {
 
   /// Return false to indicate that the call failed.
   func callAction() -> Bool {
+    Logger.log("Executing plugin menu item action: \"\(self.title)\"")
+
     if let action = action, let value = action.value {
-      // if the value is null or undefined, the item has an empty action.
-      if value.isNull || value.isUndefined { return true }
+      if value.isNull || value.isUndefined {
+        Logger.log("Action's value is \(value.isNull ? "null" : "undefined"); nothing will happen (item=\"\(self.title)\")")
+        return true
+      }
       return value.call(withArguments: [self]) != nil
     }
+    Logger.log("Executing plugin menu item action: \"\(self.title)\"")
     return false
   }
 

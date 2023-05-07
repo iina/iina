@@ -73,8 +73,7 @@ class PlayerCore: NSObject {
   }
 
   static private func createPlayerCore() -> PlayerCore {
-    let pc = PlayerCore()
-    pc.label = "\(playerCoreCounter)"
+    let pc = PlayerCore("\(playerCoreCounter)")
     playerCores.append(pc)
     pc.startMPV()
     pc.loadPlugins()
@@ -89,9 +88,9 @@ class PlayerCore: NSObject {
 
   // MARK: - Fields
 
-  lazy var subsystem = Logger.makeSubsystem("player\(label!)")
+  let subsystem: Logger.Subsystem
 
-  var label: String!
+  var label: String
   var isManagedByPlugin = false
   var userLabel: String?
   var disableUI = false
@@ -133,6 +132,8 @@ class PlayerCore: NSObject {
   var miniPlayer: MiniPlayerWindowController!
 
   var mpv: MPVController!
+
+  var bindingController: PlayerBindingController!
 
   var plugins: [JavascriptPluginInstance] = []
   private var pluginMap: [String: JavascriptPluginInstance] = [:]
@@ -218,9 +219,12 @@ class PlayerCore: NSObject {
 
   static var keyBindings: [String: KeyMapping] = [:]
 
-  override init() {
+  init(_ label: String) {
+    self.label = label
+    self.subsystem = Logger.Subsystem(rawValue: "player\(label)")
     super.init()
     self.mpv = MPVController(playerCore: self)
+    self.bindingController = PlayerBindingController(playerCore: self)
     self.mainWindow = MainWindowController(playerCore: self)
     self.miniPlayer = MiniPlayerWindowController(playerCore: self)
     self.initialWindow = InitialWindowController(playerCore: self)
@@ -382,63 +386,6 @@ class PlayerCore: NSObject {
     isStopping = false
     isStopped = false
     mpv.command(.loadfile, args: [path])
-  }
-
-  static func loadKeyBindings() {
-    Logger.log("Loading key bindings")
-    let userConfigs = Preference.dictionary(for: .inputConfigs)
-    let iinaDefaultConfPath = PrefKeyBindingViewController.defaultConfigs["IINA Default"]!
-    var inputConfPath = iinaDefaultConfPath
-    if let confFromUd = Preference.string(for: .currentInputConfigName) {
-      if let currentConfigFilePath = Utility.getFilePath(Configs: userConfigs, forConfig: confFromUd, showAlert: false) {
-        inputConfPath = currentConfigFilePath
-      }
-    }
-    setKeyBindings(KeyMapping.parseInputConf(at: inputConfPath) ?? KeyMapping.parseInputConf(at: iinaDefaultConfPath)!)
-  }
-
-  static func setKeyBindings(_ keyMappings: [KeyMapping]) {
-    Logger.log("Set key bindings (\(keyMappings.count) mappings)")
-    // If multiple bindings map to the same key, choose the last one
-    var keyBindingsDict: [String: KeyMapping] = [:]
-    var orderedKeyList: [String] = []
-    keyMappings.forEach {
-      if $0.rawKey == "default-bindings" && $0.action.count == 1 && $0.action[0] == "start" {
-        Logger.log("Skipping line: \"default-bindings start\"", level: .verbose)
-      } else if let kb = filterSectionBindings($0) {
-        let key = kb.normalizedMpvKey
-        if keyBindingsDict[key] == nil {
-          orderedKeyList.append(key)
-        }
-        keyBindingsDict[key] = kb
-      }
-    }
-    PlayerCore.keyBindings = keyBindingsDict
-
-    // For menu item bindings, filter duplicate keys as above, but preserve order
-    var kbUniqueOrderedList: [KeyMapping] = []
-    for key in orderedKeyList {
-      kbUniqueOrderedList.append(keyBindingsDict[key]!)
-    }
-
-    (NSApp.delegate as? AppDelegate)?.menuController.updateKeyEquivalentsFrom(kbUniqueOrderedList)
-
-    NotificationCenter.default.post(Notification(name: .iinaGlobalKeyBindingsChanged, object: kbUniqueOrderedList))
-  }
-
-  static private func filterSectionBindings(_ kb: KeyMapping) -> KeyMapping? {
-    guard let section = kb.section else {
-      return kb
-    }
-
-    if section == "default" {
-      // Drop "{default}" because it is unnecessary and will get in the way of libmpv command execution
-      let newRawAction = Array(kb.action.dropFirst()).joined(separator: " ")
-      return KeyMapping(rawKey: kb.rawKey, rawAction: newRawAction, isIINACommand: kb.isIINACommand, comment: kb.comment)
-    } else {
-      Logger.log("Skipping binding from section \"\(section)\": \(kb.rawKey)", level: .verbose)
-      return nil
-    }
   }
 
   func startMPV() {
@@ -1682,7 +1629,7 @@ class PlayerCore: NSObject {
       !info.isNetworkResource && info.subTracks.isEmpty &&
       (info.videoDuration?.second ?? 0.0) >= Preference.double(for: .autoSearchThreshold) * 60 {
       DispatchQueue.main.async {
-        self.mainWindow.menuActionHandler.menuFindOnlineSub(.dummy)
+        self.mainWindow.menuFindOnlineSub(.dummy)
       }
     }
   }
@@ -1776,7 +1723,7 @@ class PlayerCore: NSObject {
   func syncUI(_ option: SyncUIOption) {
     // if window not loaded, ignore
     guard mainWindow.loaded else { return }
-    Logger.log("Syncing UI \(option)", level: .verbose, subsystem: subsystem)
+//    Logger.log("Syncing UI \(option)", level: .verbose, subsystem: subsystem)
 
     switch option {
 
@@ -1871,7 +1818,7 @@ class PlayerCore: NSObject {
   }
 
   func sendOSD(_ osd: OSDMessage, autoHide: Bool = true, forcedTimeout: Float? = nil, accessoryView: NSView? = nil, context: Any? = nil, external: Bool = false) {
-    // querying `mainWindow.isWindowLoaded` will initialize mainWindow unexpectly
+    // querying `mainWindow.isWindowLoaded` will initialize mainWindow unexpectedly
     guard mainWindow.loaded && Preference.bool(for: .enableOSD) else { return }
     if info.disableOSDForFileLoading && !external {
       guard case .fileStart = osd else {

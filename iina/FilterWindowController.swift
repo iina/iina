@@ -316,7 +316,8 @@ extension FilterWindowController: NSTableViewDelegate, NSTableViewDataSource {
 extension FilterWindowController: KeyRecordViewDelegate {
 
   func keyRecordView(_ view: KeyRecordView, recordedKeyDownWith event: NSEvent) {
-    (view == keyRecordView ? keyRecordViewLabel : editFilterKeyRecordViewLabel).stringValue = event.charactersIgnoringModifiers != nil ? event.readableKeyDescription.0 : ""
+    let readableMacKey = KeyCodeHelper.normalizedMacKeySequence(from: KeyCodeHelper.mpvKeyCode(from: event))
+    (view == keyRecordView ? keyRecordViewLabel : editFilterKeyRecordViewLabel).stringValue = readableMacKey
   }
 
 }

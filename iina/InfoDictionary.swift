@@ -89,6 +89,7 @@ struct InfoDictionary {
     case beta = "Beta"
     case nightly = "Nightly"
     case release = "Release"
+    case debug = "Debug"
 
     /// A textual representation of this instance.
     ///
@@ -98,6 +99,7 @@ struct InfoDictionary {
       case .beta: return "BETA"
       case .nightly: return "NIGHTLY"
       case .release: return "RELEASE"
+      case .debug: return "DEBUG"
       }
     }
   }

@@ -61,14 +61,21 @@ fileprivate extension NSColor {
     if #available(macOS 10.14, *) {
       return NSColor(named: .initialWindowBetaLabel)!
     } else {
-      return NSColor(calibratedRed: 1, green: 0.6, blue: 0.2, alpha: 1)
+      return NSColor(calibratedRed: 255.0 / 255, green: 137.0 / 255, blue: 40.0 / 255, alpha: 1)
     }
   }()
   static let initialWindowNightlyLabel: NSColor = {
     if #available(macOS 10.14, *) {
       return NSColor(named: .initialWindowNightlyLabel)!
     } else {
-      return NSColor(calibratedRed: 0, green: 1, blue: 1, alpha: 1)
+      return NSColor(calibratedRed: 149.0 / 255, green: 77.0 / 255, blue: 255.0 / 255, alpha: 1)
+    }
+  }()
+  static let initialWindowDebugLabel: NSColor = {
+    if #available(macOS 10.14, *) {
+      return NSColor(named: .initialWindowDebugLabel)!
+    } else {
+      return NSColor(calibratedRed: 31.0 / 255, green: 210.0 / 255, blue: 170.0 / 255, alpha: 1)
     }
   }()
 }
@@ -192,10 +199,9 @@ class InitialWindowController: NSWindowController {
     case .nightly:
       versionLabel.stringValue = "\(version)+g\(InfoDictionary.shared.shortCommitSHA ?? "")"
       betaIndicatorView.isHidden = false
-    }
-
-    if !infoDict.isRelease {
-      versionLabel.stringValue += " DEBUG"
+    case .debug:
+      versionLabel.stringValue = "\(version)+g\(InfoDictionary.shared.shortCommitSHA ?? "")"
+      betaIndicatorView.isHidden = false
     }
 
     loadLastPlaybackInfo()
@@ -487,6 +493,8 @@ class BetaIndicatorView: NSView {
       self.layer?.backgroundColor = NSColor.initialWindowNightlyLabel.cgColor
     case .beta:
       self.layer?.backgroundColor = NSColor.initialWindowBetaLabel.cgColor
+    case .debug:
+      self.layer?.backgroundColor = NSColor.initialWindowDebugLabel.cgColor
     default:
       break
     }
@@ -500,14 +508,17 @@ class BetaIndicatorView: NSView {
   }
 
   override func mouseEntered(with event: NSEvent) {
+    guard InfoDictionary.shared.buildType != .debug else { return }
     NSCursor.pointingHand.push()
   }
 
   override func mouseExited(with event: NSEvent) {
+    guard InfoDictionary.shared.buildType != .debug else { return }
     NSCursor.pop()
   }
 
   override func mouseUp(with event: NSEvent) {
+    guard InfoDictionary.shared.buildType != .debug else { return }
     if betaPopover.isShown {
       betaPopover.close()
     } else {

@@ -1822,13 +1822,13 @@
 			isa = PBXGroup;
 			children = (
 				49F7E3BF2920D65C002DA28E /* Availability.xcconfig */,
-				4964988C2919E47900CD61A5 /* Debug.xcconfig */,
 				496498892919E47900CD61A5 /* Deployment.xcconfig */,
 				4964988B2919E47900CD61A5 /* iina-cli.xcconfig */,
 				496498882919E47900CD61A5 /* iina.xcconfig */,
 				4964988E2919E47900CD61A5 /* OpenInIINA.xcconfig */,
-				4964988D2919E47900CD61A5 /* Release.xcconfig */,
 				4964988A2919E47900CD61A5 /* Shared.xcconfig */,
+				4964988C2919E47900CD61A5 /* Debug.xcconfig */,
+				4964988D2919E47900CD61A5 /* Release.xcconfig */,
 				51537C7229FA26DD00F9A472 /* Nightly.xcconfig */,
 				51A0F0F629FA2C8E000130CF /* Beta.xcconfig */,
 			);

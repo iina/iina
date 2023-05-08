@@ -348,7 +348,11 @@ class PlayerCore: NSObject {
         Logger.log("Cannot add percent encoding for \(str)", level: .error, subsystem: subsystem)
         return
       }
-      openURL(url)
+      if hasSubtitleFile(in: [str]) {
+        loadExternalSubFile(url)
+      } else {
+        openURL(url)
+      }
     }
   }
 
@@ -980,10 +984,15 @@ class PlayerCore: NSObject {
       mpv.command(.subReload, args: [String(track.id)], checkError: false)
       return
     }
+    
+    var subPath = url.absoluteString
+    if url.scheme == "file"{
+      subPath = url.path
+    }
 
-    mpv.command(.subAdd, args: [url.path], checkError: false) { code in
+    mpv.command(.subAdd, args: [subPath], checkError: false) { code in
       if code < 0 {
-        Logger.log("Unsupported sub: \(url.path)", level: .error, subsystem: self.subsystem)
+        Logger.log("Unsupported sub: \(subPath)", level: .error, subsystem: self.subsystem)
         // if another modal panel is shown, popping up an alert now will cause some infinite loop.
         if delay {
           DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {

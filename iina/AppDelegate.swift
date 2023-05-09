@@ -588,47 +588,50 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     if urls.count == 1,
        let url = urls.first,
        url.pathExtension == "iinaplgz" {
-      
-      do {
-        let plugin = try JavascriptPlugin.create(fromPackageURL: url)
-        
-        let previousPlugin = JavascriptPlugin.plugins.first {
-          $0.identifier == plugin.identifier
-        }
-        
-        func updatePlugin() {
-          Utility.showPermissionsAlert(forPlugin: plugin,
-                                       previousPlugin: previousPlugin) { ok in
-            guard ok else {
-              plugin.remove()
-              return
-            }
-            
-            if let previousPlugin,
-               let pos = previousPlugin.remove() {
-              JavascriptPlugin.plugins.insert(plugin, at: pos)
-            }
-            
-            plugin.normalizePath()
-            plugin.enabled = true
-          }
-        }
-        
-        if let previousPlugin {
-          if previousPlugin.isExternal {
-            throw JavascriptPlugin.PluginError.cannotUpdateExternalPlugin
-          } else if Utility.quickAskPanel("plugin_update_found", titleArgs: [previousPlugin.name], messageArgs: [plugin.version, previousPlugin.version]) {
-            updatePlugin()
-          }
-        } else {
-          updatePlugin()
-        }
-      } catch let error {
-        Utility.handlePluginInstallationError(error)
-      }
-      
+      installPlugin(form: url)
     } else if PlayerCore.activeOrNew.openURLs(urls) == 0 {
       Utility.showAlert("nothing_to_open")
+    }
+  }
+  
+  // MARK: - Plugin Installer
+  func installPlugin(form url: URL) {
+    do {
+      let plugin = try JavascriptPlugin.create(fromPackageURL: url)
+      
+      let previousPlugin = JavascriptPlugin.plugins.first {
+        $0.identifier == plugin.identifier
+      }
+      
+      func updatePlugin() {
+        Utility.showPermissionsAlert(forPlugin: plugin,
+                                     previousPlugin: previousPlugin) { ok in
+          guard ok else {
+            plugin.remove()
+            return
+          }
+          
+          if let previousPlugin,
+             let pos = previousPlugin.remove() {
+            JavascriptPlugin.plugins.insert(plugin, at: pos)
+          }
+          
+          plugin.normalizePath()
+          plugin.enabled = true
+        }
+      }
+      
+      if let previousPlugin {
+        if previousPlugin.isExternal {
+          throw JavascriptPlugin.PluginError.cannotUpdateExternalPlugin
+        } else if Utility.quickAskPanel("plugin_update_found", titleArgs: [previousPlugin.name], messageArgs: [plugin.version, previousPlugin.version]) {
+          updatePlugin()
+        }
+      } else {
+        updatePlugin()
+      }
+    } catch let error {
+      Utility.handlePluginInstallationError(error)
     }
   }
 

@@ -692,6 +692,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
    - `pip`: 0 (default) or 1 to indicate whether open the media and enter pip.
    - `mpv_*`: additional mpv options to be passed. e.g. `mpv_volume=20`.
      Options starting with `no-` are not supported.
+   
+   __/plugin__
+   - `url`: plugin file path to open.
    */
   private func parsePendingURL(_ url: String) {
     Logger.log("Parsing URL \(url)")
@@ -759,6 +762,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       }
 
       Logger.log("Finished URL scheme handling")
+    } else if host == "plugin" {
+      // open a plugin file path
+      guard let queries = parsed.queryItems else { return }
+      let queryDict = [String: String](uniqueKeysWithValues: queries.map { ($0.name, $0.value ?? "") })
+
+      // url
+      guard let urlValue = queryDict["url"], !urlValue.isEmpty else {
+        Logger.log("Cannot find plugin parameter \"url\", stopped")
+        return
+      }
+      
+      let url = URL(fileURLWithPath: urlValue)
+      installPlugin(form: url)
     }
   }
 

@@ -128,7 +128,8 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
     panel.beginSheetModal(for: view.window!) { respond in
       if respond == .alertFirstButtonReturn {
-        ok(keyRecordViewController.keyCode, keyRecordViewController.action)
+        let rawKey = KeyCodeHelper.escapeReservedMpvKeys(keyRecordViewController.keyCode)
+        ok(rawKey, keyRecordViewController.action)
       }
     }
   }
@@ -324,11 +325,14 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
   func saveToConfFile(_ sender: Notification) {
     let predicate = mappingController.filterPredicate
     mappingController.filterPredicate = nil
-    let keyMapping = mappingController.arrangedObjects as! [KeyMapping]
+    let keyMappings = mappingController.arrangedObjects as! [KeyMapping]
+    for mapping in keyMappings {
+      mapping.rawKey = KeyCodeHelper.escapeReservedMpvKeys(mapping.rawKey)
+    }
     setKeybindingsForPlayerCore()
     mappingController.filterPredicate = predicate
     do {
-      try KeyMapping.generateInputConf(from: keyMapping).write(toFile: currentConfFilePath, atomically: true, encoding: .utf8)
+      try KeyMapping.generateInputConf(from: keyMappings).write(toFile: currentConfFilePath, atomically: true, encoding: .utf8)
     } catch {
       Utility.showAlert("config.cannot_write", sheetWindow: view.window)
     }

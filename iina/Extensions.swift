@@ -426,7 +426,7 @@ extension String {
   }
 
   func equalsIgnoreCase(_ other: String) -> Bool {
-    return localizedCompare(other) == .orderedSame
+    return localizedCaseInsensitiveCompare(other) == .orderedSame
   }
 
   var quoted: String {

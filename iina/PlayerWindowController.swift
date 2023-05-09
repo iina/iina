@@ -288,7 +288,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
 
   override func keyDown(with event: NSEvent) {
     let keyCode = KeyCodeHelper.mpvKeyCode(from: event)
-    if let kb = PlayerCore.keyBindings[keyCode] {
+    let normalizedKeyCode = KeyCodeHelper.normalizeMpv(keyCode)
+    if let kb = PlayerCore.keyBindings[normalizedKeyCode] {
       handleKeyBinding(kb)
     } else {
       super.keyDown(with: event)

@@ -17,11 +17,11 @@ class KeyCodeHelper {
   static let SHIFT_KEY = "Shift"
   static let META_KEY = "Meta"
 
-  fileprivate static let modifierOrder: [String: Int] = [
-    CTRL_KEY: 0,
-    ALT_KEY: 1,
-    SHIFT_KEY: 2,
-    META_KEY: 3
+  fileprivate static let modifiersInOrder: [String] = [
+    CTRL_KEY,
+    ALT_KEY,
+    SHIFT_KEY,
+    META_KEY,
   ]
 
   fileprivate static let modifierSymbols: [(NSEvent.ModifierFlags, String)] = [(.control, "⌃"), (.option, "⌥"), (.shift, "⇧"), (.command, "⌘")]
@@ -50,7 +50,7 @@ class KeyCodeHelper {
     0x15: ("4", "$"),
     0x16: ("6", "^"),
     0x17: ("5", "%"),
-    0x18: ("=", "+"),
+    0x18: ("=", "PLUS"),
     0x19: ("9", "("),
     0x1A: ("7", "&"),
     0x1B: ("-", "_"),
@@ -64,10 +64,10 @@ class KeyCodeHelper {
     0x23: ("p", "P"),
     0x25: ("l", "L"),
     0x26: ("j", "J"),
-    0x27: ("'", "\"\"\""),
+    0x27: ("'", "\""),
     0x28: ("k", "K"),
     0x29: (";", ":"),
-    0x2A: ("\"\\\"", "|"),
+    0x2A: ("\\", "|"),
     0x2B: (",", "<"),
     0x2C: ("/", "?"),
     0x2D: ("n", "N"),
@@ -197,7 +197,7 @@ class KeyCodeHelper {
 
   }()
 
-  static let mpvSymbolToKeyName: [String: String] = [
+  private static let mpvSymbolToPrettyMacKey: [String: String] = [
     META_KEY: "⌘",
     SHIFT_KEY: "⇧",
     ALT_KEY: "⌥",
@@ -238,13 +238,25 @@ class KeyCodeHelper {
     "KP9": "9",
   ]
 
-  static var reversedKeyMapForShift: [String: String] = keyMap.reduce([:]) { partial, keyMap in
+  private static var reversedKeyMapForShift: [String: String] = keyMap.reduce([:]) { partial, keyMap in
     var partial = partial
     if let value = keyMap.value.1 {
       partial[value] = keyMap.value.0
     }
     return partial
   }
+
+  private static var lowerToUpperKeyMap: [String: String] = keyMap.reduce([:]) { partial, keyValuePair in
+    var partial = partial
+    let (upper, lower): (String, String?) = keyValuePair.value
+    if let lower = lower {
+      partial[upper] = lower
+    }
+    return partial
+  }
+
+  /** Also includes symbols (e.g., `uppercaseMpvKeySet["4"] == "$"`)  */
+  private static var uppercaseMpvKeySet: Set<String> = Set(lowerToUpperKeyMap.values)
 
   static func canBeModifiedByShift(_ key: UInt16) -> Bool {
     return key != 0x24 && (key <= 0x2F || key == 0x32)
@@ -255,6 +267,18 @@ class KeyCodeHelper {
     return utf8View.count == 1 && utf8View.first! > 32 && utf8View.first! < 127
   }
 
+  static func escapeReservedMpvKeys(_ keystrokesString: String) -> String {
+    // "#" and " " are not valid for `rawKey` because are reserved as tokens when parsing the conf file.
+    // Try to help the user out a little bit before rejecting
+    var keystrokes = keystrokesString.trimmingCharacters(in: .whitespaces)
+    if keystrokes == " " {
+      keystrokes = "SPACE"
+    } else if keystrokes == "#" {
+      keystrokes = "SHARP"
+    }
+    return keystrokes
+  }
+
   static func mpvKeyCode(from event: NSEvent) -> String {
     var keyString = ""
     let keyChar: String
@@ -262,21 +286,20 @@ class KeyCodeHelper {
     var modifiers = event.modifierFlags
 
     if let char = event.charactersIgnoringModifiers, isPrintable(char) {
+      // Is a classic ASCII printable char.
       keyChar = char
-      let (_, rawKeyChar) = event.readableKeyDescription
-      if rawKeyChar != char {
-        modifiers.remove(.shift)
-      }
+      /// The char in `charactersIgnoringModifiers` will be either uppercase or lowercase,
+      /// so remove the redundant modifier flag so we don't print an extra "SHIFT+"
+      modifiers.remove(.shift)
     } else {
-      // find the key from key code
+      // Is probably an unprintable char such as KP_ENTER.
       guard let keyName = KeyCodeHelper.keyMap[keyCode] else {
         Logger.log("Undefined key code?", level: .warning)
         return ""
       }
       keyChar = keyName.0
     }
-    // modifiers
-    // the same order as `KeyCodeHelper.modifierOrder`
+    /// Modifiers: use the same order as `KeyCodeHelper.modifiersInOrder`
     if modifiers.contains(.control) {
       keyString += "\(CTRL_KEY)+"
     }
@@ -294,44 +317,64 @@ class KeyCodeHelper {
     return keyString
   }
 
-  // Normalizes a single "press" of possibly multiple keys (as joined with '+')
+  /**
+   Normalizes a single "press" of possibly multiple keys (as joined with '+').
+
+   _Examples: {raw}  → {normalized}_
+   1. "Shift+-" → "_"
+   2. "Shift+=" → "PLUS"
+   3. "Meta+Alt+X" → "Alt+Meta+X"
+   4. "meta+shift+k" → "Meta+K"
+   5. "esc" → "ESC"
+   6. "CTRL+SHIFT+SHIFT+SHIFT+x" → "Ctrl+X"
+   */
   private static func normalizeSingleMpvKeystroke(_ mpvKeystroke: String) -> String {
     if mpvKeystroke == "+" {
-      return mpvKeystroke
+      return "PLUS"
     }
-    var normalizedList: [String] = []
     let splitted = mpvKeystroke.replacingOccurrences(of: "++", with: "+PLUS").components(separatedBy: "+")
+
+    // First, process the key on its own:
     var key = splitted.last!
-    splitted.dropLast().forEach { k in
-      // Modifiers have first letter capitalized. All other special chars are capitalized
-      if k.equalsIgnoreCase(SHIFT_KEY) {
-        // For alphabetic chars, remove the "Shift+" and replace with actual uppercase char
-        if key.count == 1, key.lowercased() != key.uppercased() {
-          key = key.uppercased()
-        } else {
-          normalizedList.append(SHIFT_KEY)
-        }
-      } else if k.equalsIgnoreCase(META_KEY) {
-        normalizedList.append(META_KEY)
-      } else if k.equalsIgnoreCase(CTRL_KEY) {
-        normalizedList.append(CTRL_KEY)
-      } else if k.equalsIgnoreCase(ALT_KEY) {
-        normalizedList.append(ALT_KEY)
-      } else {
-        normalizedList.append(k.uppercased())
+    switch key {
+    case "#":
+      key = "SHARP"
+    case "+":
+      key = "PLUS"
+    default:
+      if key.count > 1 {
+        // Assume it's a special char. All (non-modifier) special chars are capitalized
+        key = key.uppercased()
       }
     }
-    if key.count > 1 {
-      // assume it's a special char
-      key = key.uppercased()
-    }
-    normalizedList.append(key)
 
-    normalizedList = normalizedList.sorted { modifierOrder[$0, default: 9] < modifierOrder[$1, default: 9] }
+    var modifiers = Set<String>()
+    // Now handle modifiers:
+    splitted.dropLast().forEach { mod in
+      // In normal form, modifiers have first letter capitalized. All other special chars are capitalized
+      if mod.equalsIgnoreCase(SHIFT_KEY) {
+        // For chars with upper & lower cases, remove the "Shift+" and replace with actual uppercase char
+        if let uppercaseKey = lowerToUpperKeyMap[key] {
+          key = uppercaseKey
+        } else if !uppercaseMpvKeySet.contains(key) {
+          modifiers.insert(SHIFT_KEY)
+        }
+      } else if mod.equalsIgnoreCase(META_KEY) {
+        modifiers.insert(META_KEY)
+      } else if mod.equalsIgnoreCase(CTRL_KEY) {
+        modifiers.insert(CTRL_KEY)
+      } else if mod.equalsIgnoreCase(ALT_KEY) {
+        modifiers.insert(ALT_KEY)
+      } else {
+        modifiers.insert(mod.uppercased())
+      }
+    }
+    var normalizedList: [String] = modifiersInOrder.filter{ modifiers.contains($0) }
+    normalizedList.append(key)
     return normalizedList.joined(separator: "+")
   }
 
-  /*
+  /**
    Several forms for the same keystroke are accepted by mpv. This ensures that it is reduced to a single standardized form
    (such that it can be used in a set or map, and which matches what `mpvKeyCode()` returns).
 
@@ -339,26 +382,29 @@ class KeyCodeHelper {
    - A "key" is just any individual key on a keyboard (including keyboards from different locales around the world).
    - A "keystroke" for our purposes is any combination of up to 4 different keys which are held down simultaneously, of which only one is a
      "regular" (non-modifier) key, and the rest are "modifier keys". Note that currently we don't enforce the restriction on only one regular key.
-   - The 4 "modifier keys" include: "Meta" (aka Command), "Ctrl", "Alt" (aka Option), "Shift"
+   - The 4 "modifier keys" include: "Meta" (aka Command), "Ctrl", "Alt" (aka Option), "Shift".
    - A "key sequence" is an ordered list of up to 4 keystrokes. Whereas a "keystroke" is a set of keys typed in parallel, a "key sequence" is a set
      of keystrokes typed serially.
 
    Normal Form Rules:
-   1. If the key is matches the exact string "default-bindings", assume it is part of the special line "default-bindings start",
-      and return it as-is.
-   2. The input string is parsed as a sequence of up to 4 keystrokes, each of which is separated by the character "-".
-      Note that "-" is itself a valid keystroke, so that e.g. this is a valid 4-key sequence: "-------"
-   3. Each resulting keystroke shall be parsed into up to 4 keys, each of which is separated by the character "+".
-      Note that the "+" character is accepted as a valid key, but it is normalized to "PLUS".
-   4. Each of the 4 modifiers shall be written with the first letter in uppercase and the remaining letters in lowercase.
-   5. There always shall be exactly 1 "regular" key in each keystroke, and it is always the last key in the keystroke.
-   6. A keystroke can contain between 0 and 3 modifiers (up to 1 of each kind).
-   7. The modifiers, if present, shall respect the following order from left to right: "Ctrl", "Alt", "Shift", "Meta"
-      (e.g., "Meta+Ctrl+J" is invalid, but "Ctrl+Alt+DEL" is valid)
-   8. If the regular key in the keystroke is of the set of characters which have separate and distinct uppercase and lowercase versions, then
-      the keystroke shall never contain an explicit "Shift" modifier but instead shall use the uppercase character.
-   9. Any remaining special keys not previously mentioned and which have more than one character in their name shall be written in all uppercase.
-      (examples: SHARP, SPACE, PGDOWN)
+   1.  If the key is matches the exact string "default-bindings", assume it is part of the special line `default-bindings start`,
+       and return it as-is.
+   2.  The input string is parsed as a sequence of up to 4 keystrokes, each of which is separated by the character `-`.
+       Note that `-` is itself a valid keystroke, so that e.g. this is a valid 4-key sequence: `-------`.
+   3.  Each resulting keystroke shall be parsed into up to 4 keys, each of which is separated by the character `+`.
+       Note that the `+` character is accepted as a valid key, but it is normalized to `PLUS`.
+   4.  Each of the 4 modifiers shall be written with the first letter in uppercase and the remaining letters in lowercase.
+   5.  There always shall be exactly 1 "regular" key in each keystroke, and it is always the last key in the keystroke.
+   6.  A keystroke can contain between 0 and 3 modifiers (up to 1 of each kind).
+   7.  The modifiers, if present, shall respect the following order from left to right: `Ctrl`, `Alt`, `Shift`, `Meta`
+       (e.g., `Meta+Ctrl+J` is invalid, but `Ctrl+Alt+DEL` is valid).
+   8.  If the regular key in the keystroke is of the set of characters which have separate and distinct uppercase and lowercase versions, then
+       the keystroke shall never contain an explicit "Shift" modifier but instead shall use the uppercase character.
+   9.  Special names for certain characters:
+       `#` shall be written as `SHARP`.
+       `+` shall be written as `PLUS`.
+   10. Any remaining special keys not previously mentioned and which have more than one character in their name shall be written in all uppercase.
+       (examples: `UP`, `SPACE`, `PGDOWN`, `KP_DEL`)
    */
   public static func normalizeMpv(_ mpvKeystrokes: String) -> String {
     // this is a hard-coded special case in mpv
@@ -372,10 +418,10 @@ class KeyCodeHelper {
     return normalizeSingleMpvKeystroke(mpvKeystrokes)
   }
 
-  // Converts an mpv-formatted key string to a (key, modifiers) pair suitable for assignment to a MacOS menu item.
-  // IMPORTANT: `mpvKeyCode` must be normalized first! Use `KeyCodeHelper.normalizeMpv()`.
-  static func macOSKeyEquivalent(from mpvKeyCode: String, usePrintableKeyName: Bool = false) -> (key: String, modifiers: NSEvent.ModifierFlags)? {
-    let splitted = mpvKeyCode.components(separatedBy: "+")
+  /** Converts an mpv-formatted key string to a (key, modifiers) pair suitable for assignment to a MacOS menu item.
+   IMPORTANT: `normalizedMpvKey` must be normalized first! Use `KeyCodeHelper.normalizeMpv()`. */
+  static func macOSKeyEquivalent(from normalizedMpvKey: String, usePrintableKeyName: Bool = false) -> (key: String, modifiers: NSEvent.ModifierFlags)? {
+    let splitted = normalizedMpvKey.components(separatedBy: "+")
     var key: String
     var modifiers: NSEvent.ModifierFlags = []
     guard !splitted.isEmpty else { return nil }
@@ -389,7 +435,7 @@ class KeyCodeHelper {
       default: break
       }
     }
-    if let realKey = (usePrintableKeyName ? mpvSymbolToKeyName : mpvSymbolToKeyChar)[key] {
+    if let realKey = (usePrintableKeyName ? mpvSymbolToPrettyMacKey : mpvSymbolToKeyChar)[key] {
       key = realKey
     }
     guard key.count == 1 else { return nil }

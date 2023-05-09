@@ -400,6 +400,8 @@ class Utility {
         message = String(format: str, err)
       case .cannotLoadPlugin:
         message = NSLocalizedString("plugin.install_error.cannot_load", comment: "")
+      case .cannotUpdateExternalPlugin:
+        message = NSLocalizedString("plugin.install_error.cannot_update_external", comment: "")
       }
     } else {
       message = error.localizedDescription

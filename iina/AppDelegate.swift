@@ -591,14 +591,29 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       
       do {
         let plugin = try JavascriptPlugin.create(fromPackageURL: url)
-        Utility.showPermissionsAlert(forPlugin: plugin, previousPlugin: nil) { ok in
-          if ok {
-            plugin.normalizePath()
-            JavascriptPlugin.plugins.append(plugin)
-            plugin.enabled = true
-          } else {
+        
+        let previousPlugin = JavascriptPlugin.plugins.first {
+          $0.identifier == plugin.identifier
+        }
+        
+        if let previousPlugin, previousPlugin.isExternal {
+          throw JavascriptPlugin.PluginError.cannotUpdateExternalPlugin
+        }
+        
+        Utility.showPermissionsAlert(forPlugin: plugin,
+                                     previousPlugin: previousPlugin) { ok in
+          guard ok else {
             plugin.remove()
+            return
           }
+          
+          if let previousPlugin,
+             let pos = previousPlugin.remove() {
+            JavascriptPlugin.plugins.insert(plugin, at: pos)
+          }
+          
+          plugin.normalizePath()
+          plugin.enabled = true
         }
       } catch let error {
         Utility.handlePluginInstallationError(error)

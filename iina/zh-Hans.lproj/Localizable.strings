@@ -353,5 +353,6 @@
 "plugin.install_error.cannot_download" = "下载插件失败。\n\n输出：%@\n";
 "plugin.install_error.cannot_unpackage" = "解包插件失败。\n\n输出：%@\n";
 "plugin.install_error.cannot_load" = "IINA无法加载此插件。格式可能是错误的。";
+"plugin.install_error.cannot_update_external" = "IINA无法更新此插件。这是一个外部插件。";
 "plugin.check_for_updates" = "检查更新";
 "plugin.updating" = "下载更新中...";

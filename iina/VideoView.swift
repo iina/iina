@@ -284,10 +284,10 @@ class VideoView: NSView {
   ///         full screen mode.
   func displayIdle() {
     displayIdleTimer?.invalidate()
-    // The time of 3 seconds is somewhat arbitrary. As mpv does not provide an event indicating a
-    // frame step has completed it must not be too short or will catch mpv still drawing when
-    // stepping.
-    displayIdleTimer = Timer(timeInterval: 3.0, target: self, selector: #selector(stopDisplayLink), userInfo: nil, repeats: false)
+    // The time of 6 seconds was picked to match up with the time QuickTime delays once playback is
+    // paused before stopping audio. As mpv does not provide an event indicating a frame step has
+    // completed the time used must not be too short or will catch mpv still drawing when stepping.
+    displayIdleTimer = Timer(timeInterval: 6.0, target: self, selector: #selector(stopDisplayLink), userInfo: nil, repeats: false)
     RunLoop.current.add(displayIdleTimer!, forMode: .default)
   }
 

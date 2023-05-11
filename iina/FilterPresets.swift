@@ -22,7 +22,12 @@ class FilterPreset {
 
   var name: String
   var params: [String: FilterParameter]
-  var paramOrder: [String]?
+
+  /// Order of the filter parameters.
+  ///
+  /// This dictates the order of parameters when the filter string is assembled as well as the order of controls presented to the user
+  /// when adding a filter.
+  var paramOrder: [String]
   /** Given an instance, create the corresponding `MPVFilter`. */
   var transformer: Transformer
 
@@ -32,11 +37,11 @@ class FilterPreset {
 
   init(_ name: String,
        params: [String: FilterParameter],
-       paramOrder: String? = nil,
+       paramOrder: String,
        transformer: @escaping Transformer = FilterPreset.defaultTransformer) {
     self.name = name
     self.params = params
-    self.paramOrder = paramOrder?.components(separatedBy: ":")
+    self.paramOrder = paramOrder.isEmpty ? [] : paramOrder.components(separatedBy: ":")
     self.transformer = transformer
   }
 
@@ -160,11 +165,11 @@ extension FilterPreset {
     return dic
   }()
 
-  static private let customMPVFilterPreset = FilterPreset("custom_mpv", params: ["name": PM.text(defaultValue: ""), "string": PM.text(defaultValue: "")]) { instance in
+  static private let customMPVFilterPreset = FilterPreset("custom_mpv", params: ["name": PM.text(defaultValue: ""), "string": PM.text(defaultValue: "")], paramOrder: "name:string") { instance in
       return MPVFilter(rawString: instance.value(for: "name").stringValue + "=" + instance.value(for: "string").stringValue)!
   }
   // custom ffmpeg
-  static private let customFFmpegFilterPreset = FilterPreset("custom_ffmpeg", params: [ "name": PM.text(defaultValue: ""), "string": PM.text(defaultValue: "") ]) { instance in
+  static private let customFFmpegFilterPreset = FilterPreset("custom_ffmpeg", params: [ "name": PM.text(defaultValue: ""), "string": PM.text(defaultValue: "") ], paramOrder: "name:string") { instance in
     return MPVFilter(name: "lavfi", label: nil, paramString: "[\(instance.value(for: "name").stringValue)=\(instance.value(for: "string").stringValue)]")
   }
 
@@ -197,7 +202,7 @@ extension FilterPreset {
     FilterPreset("sharpen", params: [
       "amount": PM.float(min: 0, max: 1.5),
       "msize": PM.int(min: 3, max: 13, step: 2, defaultValue: 5)
-    ]) { instance in
+    ], paramOrder: "msize:amount") { instance in
       return MPVFilter.unsharp(amount: instance.value(for: "amount").floatValue,
                                msize: instance.value(for: "msize").intValue)
     },
@@ -205,7 +210,7 @@ extension FilterPreset {
     FilterPreset("blur", params: [
       "amount": PM.float(min: 0, max: 1.5),
       "msize": PM.int(min: 3, max: 13, step: 2, defaultValue: 5)
-    ]) { instance in
+    ], paramOrder: "msize:amount") { instance in
       return MPVFilter.unsharp(amount: -instance.value(for: "amount").floatValue,
                                msize: instance.value(for: "msize").intValue)
     },
@@ -217,24 +222,24 @@ extension FilterPreset {
       "h": PM.text(defaultValue: "1")
     ], paramOrder: "x:y:w:h"),
     // invert color
-    FilterPreset("negative", params: [:]) { instance in
+    FilterPreset("negative", params: [:], paramOrder: "") { instance in
       return MPVFilter(lavfiName: "lutrgb", label: nil, paramDict: [
           "r": "negval", "g": "negval", "b": "negval"
         ])
     },
     // flip
-    FilterPreset("vflip", params: [:]) { instance in
+    FilterPreset("vflip", params: [:], paramOrder: "") { instance in
       return MPVFilter(mpvFilterFromPresetInstance: instance)
     },
     // mirror
-    FilterPreset("hflip", params: [:]) { instance in
+    FilterPreset("hflip", params: [:], paramOrder: "") { instance in
       return MPVFilter(mpvFilterFromPresetInstance: instance)
     },
     // 3d lut
     FilterPreset("lut3d", params: [
       "file": PM.text(),
       "interp": PM.choose(from: ["nearest", "trilinear", "tetrahedral"], defaultChoiceIndex: 0)
-    ]) { instance in
+    ], paramOrder: "file:interp") { instance in
       return MPVFilter(lavfiName: "lut3d", label: nil, paramDict: [
         "file": instance.value(for: "file").stringValue,
         "interp": instance.value(for: "interp").stringValue,

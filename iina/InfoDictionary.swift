@@ -62,7 +62,7 @@ struct InfoDictionary {
   ///
   /// IINA's convention is that if there is no indication of the type of build then it is a release build. Therefore this property is `nil` if
   /// this executable was built using the release configuration. Otherwise this property contains a string suitable for display to the user.
-  var buildTypeIdentifier: String? { isRelease ? nil : buildType.description }
+  var buildTypeIdentifier: String? { buildType == .release ? nil : buildType.description }
 
   var bundleIdentifier: String { dictionary["CFBundleIdentifier"] as! String }
 
@@ -70,7 +70,7 @@ struct InfoDictionary {
 
   let dictionary = Bundle.main.infoDictionary!
 
-  /// A Boolean value that indicates whether this executable was built with the Xcode release configuration.
+  /// A Boolean value that indicates whether this executable was an optimized (not debug) build.
   #if DEBUG
   let isRelease = false
   #else

@@ -72,9 +72,9 @@ struct InfoDictionary {
 
   /// A Boolean value that indicates whether this executable was an optimized (not debug) build.
   #if DEBUG
-  let isRelease = false
+  let isDebug = true
   #else
-  let isRelease = true
+  let isDebug = false
   #endif
 
   var version: (String, String) {

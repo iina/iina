@@ -29,6 +29,8 @@ extension NSColor.Name {
   static let initialWindowLastFileBackgroundHover = NSColor.Name("InitialWindowLastFileBackgroundHover")
   static let initialWindowLastFileBackgroundPressed = NSColor.Name("InitialWindowLastFileBackgroundPressed")
   static let initialWindowBetaLabel = NSColor.Name("InitialWindowBetaLabel")
+  static let initialWindowNightlyLabel = NSColor.Name("InitialWindowNightlyLabel")
+  static let initialWindowDebugLabel = NSColor.Name("InitialWindowDebugLabel")
 
   static let cropBoxFill = NSColor.Name("CropBoxFill")
   static let playlistProgressBar = NSColor.Name("PlaylistProgressBar")

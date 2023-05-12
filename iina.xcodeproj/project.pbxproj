@@ -883,6 +883,7 @@
 		496B19911E2968530035AF10 /* PIP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PIP.framework; path = /System/Library/PrivateFrameworks/PIP.framework; sourceTree = "<group>"; };
 		49F7E3BF2920D65C002DA28E /* Availability.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Availability.xcconfig; sourceTree = "<group>"; };
 		513A4FF929B53F8100A8EA7D /* Atomic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
+		51537C7229FA26DD00F9A472 /* Nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Nightly.xcconfig; sourceTree = "<group>"; };
 		5158FAB429F881B000F626E6 /* mem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mem.h; sourceTree = "<group>"; };
 		5158FAB529F8822F00F626E6 /* hwcontext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hwcontext.h; sourceTree = "<group>"; };
 		5158FAB629F8827400F626E6 /* mastering_display_metadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mastering_display_metadata.h; sourceTree = "<group>"; };
@@ -898,6 +899,7 @@
 		51626CBA29F1CEFB0000CCC9 /* version_major.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version_major.h; sourceTree = "<group>"; };
 		5196819929EC963F00B05D55 /* CoreDisplay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreDisplay.framework; path = /System/Library/Frameworks/CoreDisplay.framework; sourceTree = "<group>"; };
 		519872FE26879B9B00F84BCC /* AccessibilityPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityPreferences.swift; sourceTree = "<group>"; };
+		51A0F0F629FA2C8E000130CF /* Beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Beta.xcconfig; sourceTree = "<group>"; };
 		51C1BA39291CA76700C1208A /* InfoDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoDictionary.swift; sourceTree = "<group>"; };
 		51CACB9429D500290034CEE5 /* VideoPIPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPIPViewController.swift; sourceTree = "<group>"; };
 		51E63DFA29CFB031008AFC20 /* PlaySlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySlider.swift; sourceTree = "<group>"; };
@@ -1820,13 +1822,15 @@
 			isa = PBXGroup;
 			children = (
 				49F7E3BF2920D65C002DA28E /* Availability.xcconfig */,
-				4964988C2919E47900CD61A5 /* Debug.xcconfig */,
 				496498892919E47900CD61A5 /* Deployment.xcconfig */,
 				4964988B2919E47900CD61A5 /* iina-cli.xcconfig */,
 				496498882919E47900CD61A5 /* iina.xcconfig */,
 				4964988E2919E47900CD61A5 /* OpenInIINA.xcconfig */,
-				4964988D2919E47900CD61A5 /* Release.xcconfig */,
 				4964988A2919E47900CD61A5 /* Shared.xcconfig */,
+				4964988C2919E47900CD61A5 /* Debug.xcconfig */,
+				4964988D2919E47900CD61A5 /* Release.xcconfig */,
+				51537C7229FA26DD00F9A472 /* Nightly.xcconfig */,
+				51A0F0F629FA2C8E000130CF /* Beta.xcconfig */,
 			);
 			path = Configs;
 			sourceTree = "<group>";
@@ -4110,6 +4114,70 @@
 			};
 			name = Release;
 		};
+		51537C6E29FA25D000F9A472 /* Nightly */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 51537C7229FA26DD00F9A472 /* Nightly.xcconfig */;
+			buildSettings = {
+			};
+			name = Nightly;
+		};
+		51537C6F29FA25D000F9A472 /* Nightly */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 496498882919E47900CD61A5 /* iina.xcconfig */;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/deps/lib",
+				);
+			};
+			name = Nightly;
+		};
+		51537C7029FA25D000F9A472 /* Nightly */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4964988B2919E47900CD61A5 /* iina-cli.xcconfig */;
+			buildSettings = {
+			};
+			name = Nightly;
+		};
+		51537C7129FA25D000F9A472 /* Nightly */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4964988E2919E47900CD61A5 /* OpenInIINA.xcconfig */;
+			buildSettings = {
+			};
+			name = Nightly;
+		};
+		51A0F0F229FA2C65000130CF /* Beta */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 51A0F0F629FA2C8E000130CF /* Beta.xcconfig */;
+			buildSettings = {
+			};
+			name = Beta;
+		};
+		51A0F0F329FA2C65000130CF /* Beta */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 496498882919E47900CD61A5 /* iina.xcconfig */;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/deps/lib",
+				);
+			};
+			name = Beta;
+		};
+		51A0F0F429FA2C65000130CF /* Beta */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4964988B2919E47900CD61A5 /* iina-cli.xcconfig */;
+			buildSettings = {
+			};
+			name = Beta;
+		};
+		51A0F0F529FA2C65000130CF /* Beta */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4964988E2919E47900CD61A5 /* OpenInIINA.xcconfig */;
+			buildSettings = {
+			};
+			name = Beta;
+		};
 		84EB1EF71D2F51D3004FA5A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4964988C2919E47900CD61A5 /* Debug.xcconfig */;
@@ -4168,6 +4236,8 @@
 			buildConfigurations = (
 				49542987216C34960058F680 /* Debug */,
 				49542988216C34960058F680 /* Release */,
+				51A0F0F529FA2C65000130CF /* Beta */,
+				51537C7129FA25D000F9A472 /* Nightly */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -4177,6 +4247,8 @@
 			buildConfigurations = (
 				84EB1EF71D2F51D3004FA5A1 /* Debug */,
 				84EB1EF81D2F51D3004FA5A1 /* Release */,
+				51A0F0F229FA2C65000130CF /* Beta */,
+				51537C6E29FA25D000F9A472 /* Nightly */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -4186,6 +4258,8 @@
 			buildConfigurations = (
 				84EB1EFA1D2F51D3004FA5A1 /* Debug */,
 				84EB1EFB1D2F51D3004FA5A1 /* Release */,
+				51A0F0F329FA2C65000130CF /* Beta */,
+				51537C6F29FA25D000F9A472 /* Nightly */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -4195,6 +4269,8 @@
 			buildConfigurations = (
 				E3DE8DCE1FD8166A0021921C /* Debug */,
 				E3DE8DCF1FD8166A0021921C /* Release */,
+				51A0F0F429FA2C65000130CF /* Beta */,
+				51537C7029FA25D000F9A472 /* Nightly */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

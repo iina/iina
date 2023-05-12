@@ -40,7 +40,7 @@ class AboutWindowController: NSWindowController {
   @IBOutlet weak var mpvVersionLabel: NSTextField!
   @IBOutlet weak var ffmpegVersionLabel: NSTextField!
   @IBOutlet weak var buildView: NSView!
-  @IBOutlet weak var buildBranchLabel: NSTextField!
+  @IBOutlet weak var buildBranchButton: NSButton!
   @IBOutlet weak var buildDateLabel: NSTextField!
 
   @IBOutlet var detailTextView: NSTextView!
@@ -71,12 +71,28 @@ class AboutWindowController: NSWindowController {
     mpvVersionLabel.stringValue = PlayerCore.active.mpv.mpvVersion
     ffmpegVersionLabel.stringValue = "FFmpeg \(String(cString: av_version_info()))"
 
-    if let buildDate = InfoDictionary.shared.buildDate,
-       let buildBranch = InfoDictionary.shared.buildBranch {
-      buildDateLabel.stringValue = buildDate
-      buildDateLabel.isHidden = false
-      buildBranchLabel.stringValue = buildBranch
-      buildBranchLabel.isHidden = false
+    switch InfoDictionary.shared.buildType {
+    case .nightly:
+      if let buildDate = InfoDictionary.shared.buildDate,
+         let buildSHA = InfoDictionary.shared.shortCommitSHA {
+        buildDateLabel.stringValue = buildDate
+        buildDateLabel.isHidden = false
+        buildBranchButton.title = "NIGHTLY " + buildSHA
+        buildBranchButton.action = #selector(self.openCommitLink)
+        buildBranchButton.isHidden = false
+      }
+    case .debug:
+      if let buildDate = InfoDictionary.shared.buildDate,
+         let buildBranch = InfoDictionary.shared.buildBranch,
+         let buildSHA = InfoDictionary.shared.shortCommitSHA {
+        buildDateLabel.stringValue = buildDate
+        buildDateLabel.isHidden = false
+        buildBranchButton.title = buildBranch + " " + buildSHA
+        buildBranchButton.action = #selector(self.openCommitLink)
+        buildBranchButton.isHidden = false
+      }
+    default:
+      break
     }
 
     if let contrubutionFile = Bundle.main.path(forResource: "Contribution", ofType: "rtf") {
@@ -111,6 +127,11 @@ class AboutWindowController: NSWindowController {
     }
 
     contributorsCollectionView.enclosingScrollView?.contentInsets.bottom = contributorsFooterView.frame.height * loc[colors.firstIndex(of: 0)! - 1]
+  }
+
+  @objc func openCommitLink() {
+    guard let commitSHA = InfoDictionary.shared.buildCommit else { return }
+    NSWorkspace.shared.open(.init(string: "https://github.com/iina/iina/commit/\(commitSHA)")!)
   }
 
   @IBAction func sectionBtnAction(_ sender: NSButton) {

@@ -6,6 +6,8 @@
 	<string>IINA_BUILD_BRANCH</string>
 	<key>com.colliderli.iina.build.commit</key>
 	<string>IINA_BUILD_COMMIT</string>
+	<key>com.colliderli.iina.build.configuration</key>
+	<string>$(CONFIGURATION)</string>
 	<key>com.colliderli.iina.build.date</key>
 	<string>IINA_BUILD_DATE</string>
 	<key>CFBundleDevelopmentRegion</key>

@@ -8,7 +8,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AboutWindowController" customModule="IINA" customModuleProvider="target">
             <connections>
-                <outlet property="buildBranchLabel" destination="OzG-UF-nJ7" id="RGS-da-01O"/>
+                <outlet property="buildBranchButton" destination="4og-gN-tB4" id="I0h-jO-imV"/>
                 <outlet property="buildDateLabel" destination="O3G-Ax-VRU" id="ExO-hI-ZRf"/>
                 <outlet property="buildView" destination="10Q-XR-xzb" id="Xbk-OU-3UO"/>
                 <outlet property="contributorsButton" destination="ZI5-MK-cHL" id="ITp-Pd-sWy"/>
@@ -113,18 +113,18 @@
                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                 </textField>
-                                                <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" textCompletion="NO" id="OzG-UF-nJ7" userLabel="Branch">
-                                                    <rect key="frame" x="0.0" y="22" width="180" height="11"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                    <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" selectable="YES" refusesFirstResponder="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="Branch" usesSingleLineMode="YES" id="g0N-l1-tgb">
+                                                <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4og-gN-tB4">
+                                                    <rect key="frame" x="72" y="21" width="36" height="12"/>
+                                                    <buttonCell key="cell" type="roundRect" title="Branch" bezelStyle="roundedRect" alignment="center" controlSize="mini" state="on" imageScaling="proportionallyDown" inset="2" id="oha-Ne-oEr">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="miniSystem"/>
-                                                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                </textField>
+                                                    </buttonCell>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="48" id="0Da-44-dnw"/>
+                                                <constraint firstItem="4og-gN-tB4" firstAttribute="centerX" secondItem="10Q-XR-xzb" secondAttribute="centerX" id="8nR-Wl-uLI"/>
+                                                <constraint firstItem="4og-gN-tB4" firstAttribute="top" secondItem="O3G-Ax-VRU" secondAttribute="bottom" constant="4" id="gXh-LM-sTf"/>
                                                 <constraint firstAttribute="width" constant="180" id="h5w-AR-qVQ"/>
                                             </constraints>
                                         </customView>

@@ -611,7 +611,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
             return
           }
           
-          if let previousPlugin,
+          if let previousPlugin = previousPlugin,
              let pos = previousPlugin.remove() {
             JavascriptPlugin.plugins.insert(plugin, at: pos)
           }
@@ -621,7 +621,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
         }
       }
       
-      if let previousPlugin {
+      if let previousPlugin = previousPlugin {
         if previousPlugin.isExternal {
           throw JavascriptPlugin.PluginError.cannotUpdateExternalPlugin
         } else if Utility.quickAskPanel("plugin_update_found", titleArgs: [previousPlugin.name], messageArgs: [plugin.version, previousPlugin.version]) {

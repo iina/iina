@@ -354,7 +354,7 @@ class Utility {
         alert.layout()
       }
       
-      if let sheetWindow {
+      if let sheetWindow = sheetWindow {
         alert.beginSheetModal(for: sheetWindow) { result in
           handler(result == .alertFirstButtonReturn)
         }

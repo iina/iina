@@ -9,19 +9,16 @@
 import SwiftUI
 import JavaScriptCore
 import WebKit
+import Carbon
 
 
 // MARK: - Menu Controller
 
 @available(macOS 12.0, *)
 extension MenuController {
-  func createMenuItem(fromPluginInstance inst: JavascriptPluginInstance, tag: Int) -> NSMenuItem {
+  func menuItem(forPluginInstance inst: JavascriptPluginInstance, tag: Int) -> NSMenuItem {
     let item = NSMenuItem()
-    if inst.isGlobal {
-      item.title = "\(inst.plugin.name) (Global)"
-    } else {
-      item.title = inst.plugin.name
-    }
+    item.title = inst.plugin.name + (inst.isGlobal ? " Global" : "")
     item.representedObject = inst
     item.tag = JavasctiptDevTool.JSMenuItemInstance
     item.target = self
@@ -32,15 +29,14 @@ extension MenuController {
   @objc func openJavascriptDevTool(_ sender: NSMenuItem) {
     switch (sender.tag) {
     case JavasctiptDevTool.JSMenuItemInstance:
-      if let inst = sender.representedObject as? JavascriptPluginInstance {
-        createJavascriptDevToolWindow(forInstance: inst, title: sender.title)
-      }
+      let inst = sender.representedObject as! JavascriptPluginInstance
+      createJavascriptDevToolWindow(forInstance: inst, title: sender.title)
       //    case JSMenuItemWebView:
       //      is let webView = sender.representedObject as? WKWebView {
       //        createJavascriptDevToolWindow(forWebView: webView)
       //      }
     default:
-      break
+      assertionFailure("Unhandled menu item type")
     }
   }
 }
@@ -49,7 +45,7 @@ extension MenuController {
 // MARK: - Data
 
 fileprivate struct JSEvent: Identifiable {
-  enum Result {
+  enum CommandResult {
     case nothing
     case number(NSNumber)
     case string(String)
@@ -65,7 +61,7 @@ fileprivate struct JSEvent: Identifiable {
   let id: Int
   let index: Int
   let prompt: String?
-  let result: Result
+  let result: CommandResult
 
   var isMessage: Bool {
     switch self.result {
@@ -78,7 +74,7 @@ fileprivate struct JSEvent: Identifiable {
 }
 
 @available(macOS 12.0, *)
-fileprivate class JSEventsContainer : ObservableObject{
+fileprivate class JSEventsContainer : ObservableObject {
   @Published var idCounter = 0
   @Published var counter = 0
   @Published var data = [JSEvent]()
@@ -90,7 +86,7 @@ fileprivate class JSEventsContainer : ObservableObject{
     data.append(JSEvent(id: idCounter, index: counter, prompt: prompt, result: .nothing))
   }
 
-  func addResult(_ result: JSEvent.Result) {
+  func addResult(_ result: JSEvent.CommandResult) {
     idCounter += 1
     data.append(JSEvent(id: idCounter, index: counter, prompt: nil, result: result))
     postChange()
@@ -213,7 +209,7 @@ struct JavasctiptDevTool: View {
     events.addPrompt(source)
     events.postChange()
 
-    let jsResult: JSEvent.Result
+    let jsResult: JSEvent.CommandResult
 
     let result = source == "$global" ?
     jsContext.globalObject :
@@ -279,6 +275,7 @@ struct CommandEditor: NSViewRepresentable {
     let view = TextView()
     view.delegate = context.coordinator
     view.parent = self
+    view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }
 
@@ -293,6 +290,7 @@ struct CommandEditor: NSViewRepresentable {
       return
     }
     textView.selectedRanges = context.coordinator.selectedRanges
+    Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": textView])
   }
 
   class TextView: NSTextView {
@@ -300,13 +298,21 @@ struct CommandEditor: NSViewRepresentable {
 
     override func keyDown(with event: NSEvent) {
       super.keyDown(with: event)
-      if event.keyCode == 126 && self.string.isEmpty {
+      // Display history commands when up arrow pressed
+      if event.keyCode == kVK_UpArrow && self.string.isEmpty {
         if let prompt = (self.window as! JSDevToolWindow)
           .rootView.events.data.last(where: { $0.prompt != nil })?.prompt {
           self.string = prompt
           parent.text = self.string
         }
       }
+    }
+
+    override func preferredPasteboardType(from availableTypes: [NSPasteboard.PasteboardType], restrictedToTypesFrom allowedTypes: [NSPasteboard.PasteboardType]?) -> NSPasteboard.PasteboardType? {
+      if availableTypes.contains(.string) {
+        return .string
+      }
+      return super.preferredPasteboardType(from: availableTypes, restrictedToTypesFrom: allowedTypes)
     }
   }
 

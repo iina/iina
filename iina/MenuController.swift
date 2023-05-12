@@ -578,10 +578,10 @@ class MenuController: NSObject, NSMenuDelegate {
         let devToolItem = NSMenuItem()
         devToolItem.title = inst.plugin.name
         developerTool.submenu?.addItem(
-          createMenuItem(fromPluginInstance: inst, tag: JavasctiptDevTool.JSMenuItemInstance))
+          menuItem(forPluginInstance: inst, tag: JavasctiptDevTool.JSMenuItemInstance))
         if let globalInst = inst.plugin.globalInstance {
           developerTool.submenu?.addItem(
-            createMenuItem(fromPluginInstance: globalInst, tag: JavasctiptDevTool.JSMenuItemInstance))
+            menuItem(forPluginInstance: globalInst, tag: JavasctiptDevTool.JSMenuItemInstance))
         }
       }
     }

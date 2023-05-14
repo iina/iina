@@ -598,18 +598,6 @@ class MPVController: NSObject {
     return str
   }
 
-  func getScreenshot(_ arg: String) -> NSImage? {
-    var args = try! MPVNode.create(["screenshot-raw", arg])
-    defer {
-      MPVNode.free(args)
-    }
-    var result = mpv_node()
-    mpv_command_node(self.mpv, &args, &result)
-    let image = ObjcUtils.getImageFrom(&result)
-    mpv_free_node_contents(&result)
-    return image;
-  }
-
   /** Get filter. only "af" or "vf" is supported for name */
   func getFilters(_ name: String) -> [MPVFilter] {
     Logger.ensure(name == MPVProperty.vf || name == MPVProperty.af, "getFilters() do not support \(name)!")

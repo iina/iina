@@ -152,10 +152,14 @@
 			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>doc_gif.icns</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>0</integer>
 			<key>CFBundleTypeName</key>
 			<string>GIF image</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSPersistentStoreTypeKey</key>
@@ -1351,6 +1355,31 @@ Released under GPLv3.</string>
 				<array>
 					<string>m3u8</string>
 					<string>m3u</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>com.compuserve.gif</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>GIF image</string>
+			<key>UTTypeIconFile</key>
+			<string>doc_gif</string>
+			<key>UTTypeIcons</key>
+			<dict/>
+			<key>UTTypeIdentifier</key>
+			<string>io.iina.gif</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>gif</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>image/gif</string>
 				</array>
 			</dict>
 		</dict>

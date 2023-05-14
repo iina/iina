@@ -580,6 +580,9 @@ class PlayerCore: NSObject {
     if needRestoreLayout {
       if !Preference.bool(for: .musicModeShowAlbumArt) {
         miniPlayer.toggleVideoView(self)
+        if let origin = miniPlayer.window?.frame.origin {
+          miniPlayer.window?.setFrameOrigin(.init(x: origin.x, y: origin.y + miniPlayer.videoView.frame.height))
+        }
       }
       if Preference.bool(for: .musicModeShowPlaylist) {
         miniPlayer.togglePlaylist(self)

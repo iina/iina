@@ -31,10 +31,6 @@ extension MenuController {
     case JavasctiptDevTool.JSMenuItemInstance:
       let inst = sender.representedObject as! JavascriptPluginInstance
       createJavascriptDevToolWindow(forInstance: inst, title: sender.title)
-      //    case JSMenuItemWebView:
-      //      is let webView = sender.representedObject as? WKWebView {
-      //        createJavascriptDevToolWindow(forWebView: webView)
-      //      }
     default:
       assertionFailure("Unhandled menu item type")
     }
@@ -44,9 +40,9 @@ extension MenuController {
 
 // MARK: - Data
 
-fileprivate struct JSEvent: Identifiable {
-  enum CommandResult {
-    case nothing
+@available(macOS 12.0, *)
+fileprivate struct ResultItem: Identifiable {
+  enum ResultType {
     case number(NSNumber)
     case string(String)
     case boolean(Bool)
@@ -60,8 +56,8 @@ fileprivate struct JSEvent: Identifiable {
   }
   let id: Int
   let index: Int
+  let result: ResultType?
   let prompt: String?
-  let result: CommandResult
 
   var isMessage: Bool {
     switch self.result {
@@ -77,34 +73,37 @@ fileprivate struct JSEvent: Identifiable {
 fileprivate class JSEventsContainer : ObservableObject {
   @Published var idCounter = 0
   @Published var counter = 0
-  @Published var data = [JSEvent]()
+  @Published var data = [ResultItem]()
   @Published var idChanged = 0
 
   func addPrompt(_ prompt: String) {
     idCounter += 1
     counter += 1
-    data.append(JSEvent(id: idCounter, index: counter, prompt: prompt, result: .nothing))
+    data.append(ResultItem(id: idCounter, index: counter, result: nil, prompt: prompt))
   }
 
-  func addResult(_ result: JSEvent.CommandResult) {
+  func addResult(_ result: ResultItem.ResultType) {
     idCounter += 1
-    data.append(JSEvent(id: idCounter, index: counter, prompt: nil, result: result))
+    data.append(ResultItem(id: idCounter, index: counter, result: result, prompt: nil))
     postChange()
   }
 
   func addException(message: String, stack: String) {
     idCounter += 1
     data.append(
-      JSEvent(id: idCounter, index: counter, prompt: nil,
-                result: .exception(message, stack)))
+      ResultItem(id: idCounter, index: counter, result: .exception(message, stack), prompt: nil))
     postChange()
   }
 
   func addLog(message: String, level: Logger.Level) {
     idCounter += 1
     data.append(
-      JSEvent(id: idCounter, index: counter, prompt: nil,
-                result: .log(message, level)))
+      ResultItem(id: idCounter, index: counter, result: .log(message, level), prompt: nil))
+    postChange()
+  }
+  
+  func clearAll() {
+    data.removeAll()
     postChange()
   }
 
@@ -123,84 +122,276 @@ fileprivate class JSEventsContainer : ObservableObject {
 struct JavasctiptDevTool: View {
   // NSMenuItem
   static let JSMenuItemInstance = 1
-  static let JSMenuItemWebView = 3
+  static let JSMenuItemWebView = 2
 
   // SwiftUI
   unowned let jsContext: JSContext
-
   @ObservedObject fileprivate var events = JSEventsContainer()
-
-  @State private var input: String = ""
 
   var body: some View {
     VSplitView {
       ScrollViewReader { proxy in
         // Message history
-        List(events.data, id: \.id) { command in
+        List(events.data, id: \.id) { item in
           // Message item
-          if command.isMessage {
-            ResultView(command: command).id(command.id)
-          } else if let prompt = command.prompt {
+          if item.prompt != nil {
             // Prompt
-            HStack(alignment: .top, spacing: 8) {
-              Text("[\(command.index)]:")
-                .frame(width: 50, alignment: .trailing)
-                .mono()
-                .foregroundColor(.green)
-              Text(prompt)
-                .mono()
-            }.id(command.id)
+            PromptView(result: item).id(item.id)
+          } else if item.isMessage {
+            // Message
+            ResultView(result: item).id(item.id)
           } else {
             // Result
-            HStack(alignment: .top, spacing: 8) {
-              Text("→")
-                .frame(width: 50, alignment: .trailing)
-                .mono()
-                .foregroundColor(.secondary)
-              ResultView(command: command)
-            }.id(command.id)
+            ReturnValueView(result: item).id(item.id)
           }
         }
         .onReceive(events.$idChanged) { id in
           proxy.scrollTo(id, anchor: .bottom)
         }
       }
-      VStack(alignment: .leading, spacing: 0) {
-        // Toolbar
-        HStack {
-          // Run code
-          Button(action: { executePrompt() }) {
-            Image(systemName: "play.circle")
-              .renderingMode(.template)
-              .foregroundColor(.accentColor)
-          }
-          .help("Run code")
-          .buttonStyle(PlainButtonStyle())
-          .keyboardShortcut(.return, modifiers: .command)
-          // Show global objects
-          Button(action: { executePrompt(printGlobalObject: true) }) {
-            Image(systemName: "point.3.filled.connected.trianglepath.dotted")
-              .renderingMode(.template)
-              .foregroundColor(.secondary)
-          }
-          .buttonStyle(PlainButtonStyle())
-          .help("Print global objects")
-          Spacer()
-          Text("Cmd+Return to run code")
-            .font(.footnote)
-            .foregroundColor(.secondary)
-        }
-        .padding([.top, .horizontal], 8)
-        // Editor
-        CommandEditor(text: $input)
-          .frame(maxHeight: 100)
-          .padding(.all, 8)
-
-      }
+      ConsoleView(jsContext: jsContext)
+        .environmentObject(events)
     }
     .listStyle(.plain)
   }
+}
 
+
+#if DEBUG
+@available(macOS 12.0, *)
+struct JavasctiptDevTool_Previews: PreviewProvider {
+  static let jsContext = JSContext()
+  static fileprivate let events: JSEventsContainer = {
+    let events_ = JSEventsContainer()
+    events_.addPrompt("1 + 1")
+    events_.addResult(.number(2))
+    events_.addLog(message: "Log Message", level: .debug)
+    return events_
+  }()
+  static var previews: some View {
+    var view = JavasctiptDevTool(jsContext: jsContext!)
+    view.events = events
+    return view
+  }
+}
+#endif
+
+
+// MARK: - Views
+
+/// The text editor view in the console
+@available(macOS 12.0, *)
+struct CommandEditor: NSViewRepresentable {
+  @Binding var text: String
+
+  init(text: Binding<String>) {
+    _text = text
+  }
+
+  func makeCoordinator() -> Coordinator {
+    Coordinator(self)
+  }
+
+  func makeNSView(context: Context) -> NSView {
+    let view = TextView()
+    view.delegate = context.coordinator
+    view.parent = self
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }
+
+  func updateNSView(_ nsView: NSView, context: Context) {
+    let textView = nsView as! NSTextView
+    textView.string = text
+    textView.font = .monospacedSystemFont(ofSize: NSFont.systemFontSize(for: .regular), weight: .regular)
+    textView.isAutomaticDashSubstitutionEnabled = false
+    textView.isAutomaticQuoteSubstitutionEnabled = false
+    textView.isAutomaticSpellingCorrectionEnabled = false
+    guard !context.coordinator.selectedRanges.isEmpty else {
+      return
+    }
+    textView.selectedRanges = context.coordinator.selectedRanges
+    Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": textView])
+  }
+
+  class TextView: NSTextView {
+    var parent: CommandEditor!
+    var recallIndex: Int? = nil
+
+    override func keyDown(with event: NSEvent) {
+      super.keyDown(with: event)
+      // Display history commands when up arrow pressed
+      if event.keyCode == kVK_UpArrow {
+        if self.string.isEmpty {
+          recallIndex = 0
+        }
+        if let idx = recallIndex {
+          let data = (self.window as! JSDevToolWindow).rootView.events.data
+            .compactMap({ $0.prompt }).reversed()
+          let dataIdx = data.index(data.startIndex, offsetBy: idx)
+          if data.indices.contains(dataIdx) {
+            let prompt = data[dataIdx]
+            self.string = prompt
+            parent.text = self.string
+            recallIndex = idx + 1
+            return
+          }
+        }
+      }
+      recallIndex = nil
+    }
+
+    override func preferredPasteboardType(from availableTypes: [NSPasteboard.PasteboardType], restrictedToTypesFrom allowedTypes: [NSPasteboard.PasteboardType]?) -> NSPasteboard.PasteboardType? {
+      if availableTypes.contains(.string) {
+        return .string
+      }
+      return super.preferredPasteboardType(from: availableTypes, restrictedToTypesFrom: allowedTypes)
+    }
+  }
+
+  class Coordinator: NSObject, NSTextViewDelegate {
+    var parent: CommandEditor
+    var selectedRanges = [NSValue]()
+
+    init(_ parent: CommandEditor) {
+      self.parent = parent
+    }
+
+    func textDidChange(_ notification: Notification) {
+      guard let textView = notification.object as? NSTextView else { return }
+      parent.text = textView.string
+      selectedRanges = textView.selectedRanges
+    }
+  }
+}
+
+
+/// Display the content of a JavaScript array or object
+@available(macOS 12.0, *)
+struct ObjectView: View {
+  enum ViewType {
+    case array, object
+  }
+  let viewType: ViewType
+  let title: String
+  let arrayDisplayLimit = 100
+  let data: [(String, String)]
+
+  @State var isExpanded = false
+
+  var body: some View {
+    VStack(alignment: .leading) {
+      HStack {
+        Image(systemName: "chevron.\(isExpanded ? "down" : "forward").circle.fill")
+          .frame(width: 10, height: 10)
+        Text(title).font(.monospacedSystem)
+      }
+      .onTapGesture {
+        isExpanded.toggle()
+      }
+      let dataToDisplay = viewType == .array ? Array(data.prefix(arrayDisplayLimit)) : data
+      if isExpanded {
+        ForEach(dataToDisplay, id: \.0) { item in
+          HStack {
+            Text("\(item.0):").font(.monospacedSystem).foregroundColor(.secondary)
+              .padding(.leading, 8)
+            Text(item.1).font(.monospacedSystem)
+              .lineLimit(1)
+          }
+        }
+        if viewType == .array && data.count > 100 {
+          Text("... (\(data.count - 100)) more").font(.monospacedSystem).foregroundColor(.secondary)
+        }
+      }
+    }
+  }
+}
+
+
+/// Display a JavaScript command entered by user
+@available(macOS 12.0, *)
+fileprivate struct PromptView: View {
+  var result: ResultItem
+  
+  var body: some View {
+    HStack(alignment: .top, spacing: 8) {
+      Text("[\(result.index)]:")
+        .frame(width: 50, alignment: .trailing)
+        .font(.monospacedSystem)
+        .foregroundColor(.green)
+      Text(result.prompt ?? "")
+        .font(.monospacedSystem)
+    }
+  }
+}
+
+
+/// Display the return value of the JavaScript command
+@available(macOS 12.0, *)
+fileprivate struct ReturnValueView: View {
+  var result: ResultItem
+  
+  var body: some View {
+    HStack(alignment: .top, spacing: 8) {
+      Text("→")
+        .frame(width: 50, alignment: .trailing)
+        .font(.monospacedSystem)
+        .foregroundColor(.secondary)
+      ResultView(result: result)
+    }
+  }
+}
+
+
+@available(macOS 12.0, *)
+fileprivate struct ConsoleView: View {
+  unowned let jsContext: JSContext
+  @EnvironmentObject fileprivate var events: JSEventsContainer
+  @State private var input: String = ""
+
+  
+  var body: some View {
+    VStack(alignment: .leading, spacing: 0) {
+      // Toolbar
+      HStack {
+        // Run code
+        Button(action: { executePrompt() }) {
+          Image(systemName: "play.circle")
+            .renderingMode(.template)
+            .foregroundColor(.accentColor)
+        }
+        .help("Run code")
+        .buttonStyle(PlainButtonStyle())
+        .keyboardShortcut(.return, modifiers: .command)
+        // Show global objects
+        Button(action: { executePrompt(printGlobalObject: true) }) {
+          Image(systemName: "point.3.filled.connected.trianglepath.dotted")
+            .renderingMode(.template)
+            .foregroundColor(.secondary)
+        }
+        .buttonStyle(PlainButtonStyle())
+        .help("Print global objects")
+        // Clear history
+        Button(action: {events.clearAll()} ) {
+          Image(systemName: "clear")
+            .renderingMode(.template)
+            .foregroundColor(.secondary)
+        }
+        .buttonStyle(PlainButtonStyle())
+        .help("Clear history")
+        Spacer()
+        Text("Cmd+Return to run code")
+          .font(.footnote)
+          .foregroundColor(.secondary)
+      }
+      .padding([.top, .horizontal], 8)
+      // Editor
+      CommandEditor(text: $input)
+        .frame(maxHeight: 100)
+        .padding(.all, 8)
+    }.background(.regularMaterial)
+  }
+  
   private func executePrompt(printGlobalObject: Bool = false) {
     let source = printGlobalObject ? "$global" : input.trimmingCharacters(in: .whitespacesAndNewlines)
     if source.isEmpty {
@@ -209,7 +400,7 @@ struct JavasctiptDevTool: View {
     events.addPrompt(source)
     events.postChange()
 
-    let jsResult: JSEvent.CommandResult
+    let jsResult: ResultItem.ResultType
 
     let result = source == "$global" ?
     jsContext.globalObject :
@@ -247,154 +438,31 @@ struct JavasctiptDevTool: View {
       input = ""
     }
   }
-}
 
-@available(macOS 12.0, *)
-struct JavasctiptDevTool_Previews: PreviewProvider {
-  static var previews: some View {
-    JavasctiptDevTool(jsContext: JSContext())
-  }
 }
 
 
-// MARK: - Views
-
-@available(macOS 12.0, *)
-struct CommandEditor: NSViewRepresentable {
-  @Binding var text: String
-
-  init(text: Binding<String>) {
-    _text = text
-  }
-
-  func makeCoordinator() -> Coordinator {
-    Coordinator(self)
-  }
-
-  func makeNSView(context: Context) -> NSView {
-    let view = TextView()
-    view.delegate = context.coordinator
-    view.parent = self
-    view.translatesAutoresizingMaskIntoConstraints = false
-    return view
-  }
-
-  func updateNSView(_ nsView: NSView, context: Context) {
-    let textView = nsView as! NSTextView
-    textView.string = text
-    textView.font = .monospacedSystemFont(ofSize: NSFont.systemFontSize(for: .regular), weight: .regular)
-    textView.isAutomaticDashSubstitutionEnabled = false
-    textView.isAutomaticQuoteSubstitutionEnabled = false
-    textView.isAutomaticSpellingCorrectionEnabled = false
-    guard context.coordinator.selectedRanges.count > 0 else {
-      return
-    }
-    textView.selectedRanges = context.coordinator.selectedRanges
-    Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": textView])
-  }
-
-  class TextView: NSTextView {
-    var parent: CommandEditor!
-
-    override func keyDown(with event: NSEvent) {
-      super.keyDown(with: event)
-      // Display history commands when up arrow pressed
-      if event.keyCode == kVK_UpArrow && self.string.isEmpty {
-        if let prompt = (self.window as! JSDevToolWindow)
-          .rootView.events.data.last(where: { $0.prompt != nil })?.prompt {
-          self.string = prompt
-          parent.text = self.string
-        }
-      }
-    }
-
-    override func preferredPasteboardType(from availableTypes: [NSPasteboard.PasteboardType], restrictedToTypesFrom allowedTypes: [NSPasteboard.PasteboardType]?) -> NSPasteboard.PasteboardType? {
-      if availableTypes.contains(.string) {
-        return .string
-      }
-      return super.preferredPasteboardType(from: availableTypes, restrictedToTypesFrom: allowedTypes)
-    }
-  }
-
-  class Coordinator: NSObject, NSTextViewDelegate {
-    var parent: CommandEditor
-    var selectedRanges = [NSValue]()
-
-    init(_ parent: CommandEditor) {
-      self.parent = parent
-    }
-
-    func textDidChange(_ notification: Notification) {
-      guard let textView = notification.object as? NSTextView else { return }
-      parent.text = textView.string
-      selectedRanges = textView.selectedRanges
-    }
-  }
-}
-
-
-@available(macOS 12.0, *)
-struct ObjectView: View {
-  enum ViewType {
-    case array, object
-  }
-  let viewType: ViewType
-  let title: String
-  let data: [(String, String)]
-
-  @State var isExpanded = false
-
-  var body: some View {
-    VStack(alignment: .leading) {
-      HStack {
-        Image(systemName: "chevron.\(isExpanded ? "down" : "forward").circle.fill")
-          .frame(width: 10, height: 10)
-        Text(title).mono()
-      }
-      .onTapGesture {
-        isExpanded.toggle()
-      }
-      let dataToDisplay = viewType == .array ? Array(data.first(count: 100)) : data
-      if isExpanded {
-        ForEach(dataToDisplay, id: \.0) { item in
-          HStack {
-            Text("\(item.0):").mono().foregroundColor(.secondary)
-              .padding(.leading, 8)
-            Text(item.1).mono()
-              .lineLimit(1)
-          }
-        }
-        if viewType == .array && data.count > 100 {
-          Text("... (\(data.count - 100)) more").mono().foregroundColor(.secondary)
-        }
-      }
-    }
-  }
-}
-
+/// Display various JavaScipt values and log messages
 @available(macOS 12.0, *)
 fileprivate struct ResultView: View {
-  var command: JSEvent
+  var result: ResultItem
 
   var body: some View {
-    switch (command.result) {
-    case .nothing:
-      Text("")
-
+    switch (result.result) {
     case .string(let value):
-      Text(value).mono().foregroundColor(.brown)
+      Text(value).font(.monospacedSystem).foregroundColor(.brown)
 
     case .number(let value):
-      Text("\(value)").mono().foregroundColor(.blue)
+      Text("\(value)").font(.monospacedSystem).foregroundColor(.blue)
 
     case .boolean(let value):
-      Text(value ? "true" : "false").mono().foregroundColor(.purple)
+      Text(value ? "true" : "false").font(.monospacedSystem).foregroundColor(.purple)
 
     case .null:
-      Text("null").mono().foregroundColor(.secondary)
+      Text("null").font(.monospacedSystem).foregroundColor(.secondary)
 
     case .undefined:
-      Text("undefined").mono().foregroundColor(.secondary)
+      Text("undefined").font(.monospacedSystem).foregroundColor(.secondary)
 
     case .array(let title, let data):
       ObjectView(viewType: .array, title: title, data: data)
@@ -403,7 +471,7 @@ fileprivate struct ResultView: View {
       ObjectView(viewType: .array, title: title, data: data)
 
     case .opaqueObject(let value):
-      Text(value).mono()
+      Text(value).font(.monospacedSystem)
 
     case .exception(let message, let stack):
       ZStack {
@@ -422,13 +490,15 @@ fileprivate struct ResultView: View {
 
     case .log(let message, let level):
       ZStack {
-        Text(message).mono()
+        Text(message).font(.monospacedSystem)
           .frame(maxWidth: .infinity, alignment: .leading)
           .textSelection(.enabled)
           .padding(.all, 8)
       }
       .background(
         ([.error: .red, .debug: .gray, .verbose: .gray, .warning: .orange] as [Logger.Level: Color])[level]!.opacity(0.1))
+    case .none:
+      Text("")
     }
   }
 }
@@ -436,28 +506,10 @@ fileprivate struct ResultView: View {
 
 // MARK: - Utils
 
-fileprivate extension Array {
-  func first(count len: Int) -> ArraySlice<Self.Element> {
-    let cnt = len > self.count ? self.count : len
-    return self[0..<cnt]
-  }
-}
-
 @available(macOS 12.0, *)
-struct MonospacedText: ViewModifier {
-  func body(content: Content) -> some View {
-    content
-      .font(.system(.body, design: .monospaced))
-  }
+fileprivate extension Font {
+  static let monospacedSystem: Font = .system(.body, design: .monospaced)
 }
-
-@available(macOS 12.0, *)
-extension View {
-  func mono() -> some View {
-    modifier(MonospacedText())
-  }
-}
-
 
 // MARK: - Window
 
@@ -476,15 +528,15 @@ func createJavascriptDevToolWindow(forInstance inst: JavascriptPluginInstance, t
     window.makeKeyAndOrderFront(nil)
   } else {
     // create window
-    let rect = ((NSScreen.main ?? NSScreen.screens.first)?.frame ?? NSRect(x: 0, y: 0, width: 0, height: 0))
-      .centeredResize(to: NSSize(width: 500, height: 300))
-    let window = JSDevToolWindow(contentRect: rect,
+    let window = JSDevToolWindow(contentRect: NSRect(origin: .zero, size: CGSize(width: 500, height: 400)),
                                  styleMask: [.titled, .closable, .miniaturizable, .resizable],
                                  backing: .buffered,
                                  defer: false)
     window.title = "DevTool: " + title
     window.rootView = JavasctiptDevTool(jsContext: ctx)
     window.contentView = NSHostingView(rootView: window.rootView)
+    window.center()
+    window.backgroundColor = .clear
     windows[ctx] = window
 
     // override exception handler

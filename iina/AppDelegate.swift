@@ -88,7 +88,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   /// Whether the shutdown sequence timed out.
   private var timedOut = false
 
-  @IBOutlet weak var menuController: MenuController!
+  @IBOutlet var menuController: MenuController!
 
   @IBOutlet weak var dockMenu: NSMenu!
 
@@ -134,7 +134,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
 
   // MARK: - SPUUpdaterDelegate
-  @IBOutlet weak var updaterController: SPUStandardUpdaterController!
+  @IBOutlet var updaterController: SPUStandardUpdaterController!
 
   func feedURLString(for updater: SPUUpdater) -> String? {
     return Preference.bool(for: .receiveBetaUpdate) ? AppData.appcastBetaLink : AppData.appcastLink

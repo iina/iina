@@ -16,7 +16,7 @@ if ! OPTS=$(getopt -o "h": --long "arch:,yt-dlp-src,help": -n 'parse-options' --
   exit 1
 fi
 
-function printUsageHelp() {
+printUsageHelp() {
   echo
   echo "Usage:"
   echo "    $0 [-h|--help]:           Displays this help message"
@@ -24,6 +24,19 @@ function printUsageHelp() {
   echo "    $0 [--yt-dlp-src] <SRC>:  Source to download youtube-dl from: github | iina"
   echo
 }
+
+realpath() (
+  OURPWD=$PWD
+  cd "$(dirname "$1")" || exit
+  LINK=$(readlink "$(basename "$1")")
+  while [ "$LINK" ]; do
+    cd "$(dirname "$LINK")" || exit
+    LINK=$(readlink "$(basename "$1")")
+  done
+  REALPATH="$PWD/$(basename "$1")"
+  cd "$OURPWD" || exit
+  echo "$REALPATH"
+)
 
 while true; do
   case "$1" in

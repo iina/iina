@@ -1233,17 +1233,15 @@ not applying FFmpeg 9599 workaround
 
     case MPVOption.Subtitles.subVisibility:
       if let visible = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
-        if player.info.isSubVisible != visible {
-          player.info.isSubVisible = visible
-          player.sendOSD(visible ? .subVisible : .subHidden)
+        DispatchQueue.main.async {
+          self.player.subVisibilityChanged(visible)
         }
       }
 
     case MPVOption.Subtitles.secondarySubVisibility:
       if let visible = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
-        if player.info.isSecondSubVisible != visible {
-          player.info.isSecondSubVisible = visible
-          player.sendOSD(visible ? .secondSubVisible : .secondSubHidden)
+        DispatchQueue.main.async {
+          self.player.secondSubVisibilityChanged(visible)
         }
       }
 

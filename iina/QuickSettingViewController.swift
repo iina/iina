@@ -140,7 +140,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var audioDelaySliderConstraint: NSLayoutConstraint!
   @IBOutlet weak var customAudioDelayTextField: NSTextField!
 
-
+  @IBOutlet weak var hideSwitch: NSSwitch!
+  @IBOutlet weak var secHideSwitch: NSSwitch!
   @IBOutlet weak var subLoadSementedControl: NSSegmentedControl!
   @IBOutlet weak var subDelaySlider: NSSlider!
   @IBOutlet weak var subDelaySliderIndicator: NSTextField!
@@ -223,6 +224,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       self.subTableView.reloadData()
       self.secSubTableView.reloadData()
     }
+    observe(.iinaSecondSubVisibilityChanged) { [unowned self] _ in secHideSwitch.state = player.info.isSecondSubVisible ? .on : .off }
+    observe(.iinaSubVisibilityChanged) { [unowned self] _ in hideSwitch.state = player.info.isSubVisible ? .on : .off }
   }
 
   // MARK: - Right to Left Constraints
@@ -384,6 +387,9 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   private func updateSubTabControl() {
+    hideSwitch.state = player.info.isSubVisible ? .on : .off
+    secHideSwitch.state = player.info.isSecondSubVisible ? .on : .off
+
     if let currSub = player.info.currentTrack(.sub) {
       // FIXME: CollorWells cannot be disable?
       let enableTextSettings = !(currSub.isAssSub || currSub.isImageSub)
@@ -825,6 +831,14 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
 
   // MARK: Sub tab
+
+  @IBAction func hideSubAction(_ sender: NSSwitch) {
+    player.toggleSubVisibility()
+  }
+
+  @IBAction func hideSecSubAction(_ sender: NSSwitch) {
+    player.toggleSecondSubVisibility()
+  }
 
   @IBAction func loadExternalSubAction(_ sender: NSSegmentedControl) {
     if sender.selectedSegment == 0 {

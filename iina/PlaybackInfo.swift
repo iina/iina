@@ -44,7 +44,6 @@ class PlaybackInfo {
       }
     }
   }
-  var currentFolder: URL?
   var isNetworkResource: Bool = false
   var mpvMd5: String?
 
@@ -150,8 +149,6 @@ class PlaybackInfo {
   var secondSid: Int?
 
   var subEncoding: String?
-
-  var haveDownloadedSub: Bool = false
 
   func trackList(_ type: MPVTrack.TrackType) -> [MPVTrack] {
     switch type {

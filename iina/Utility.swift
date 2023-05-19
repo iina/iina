@@ -27,24 +27,6 @@ class Utility {
 
   // MARK: - Logs, alerts
 
-  @available(*, deprecated, message: "showAlert(message:alertStyle:) is deprecated, use showAlert(_ key:comment:arguments:alertStyle:) instead")
-  static func showAlert(message: String, alertStyle: NSAlert.Style = .critical) {
-    let alert = NSAlert()
-    switch alertStyle {
-    case .critical:
-      alert.messageText = NSLocalizedString("alert.title_error", comment: "Error")
-    case .informational:
-      alert.messageText = NSLocalizedString("alert.title_info", comment: "Information")
-    case .warning:
-      alert.messageText = NSLocalizedString("alert.title_warning", comment: "Warning")
-    @unknown default:
-      assertionFailure("Unknown \(type(of: alertStyle)) \(alertStyle)")
-    }
-    alert.informativeText = message
-    alert.alertStyle = alertStyle
-    alert.runModal()
-  }
-
   static func showAlert(_ key: String, comment: String? = nil, arguments: [CVarArg]? = nil, style: NSAlert.Style = .critical, sheetWindow: NSWindow? = nil, suppressionKey: PK? = nil) {
     let alert = NSAlert()
     if let suppressionKey = suppressionKey {
@@ -433,10 +415,6 @@ class Utility {
                                                 attributes: FontAttributes(font: active ? .systemBold : .system, size: .system, align: .center).value)
   }
 
-  static func toRealSubScale(fromDisplaySubScale scale: Double) -> Double {
-    return scale > 0 ? scale : -1 / scale
-  }
-
   static func toDisplaySubScale(fromRealSubScale realScale: Double) -> Double {
     return realScale >= 1 ? realScale : -1 / realScale
   }
@@ -613,11 +591,6 @@ class Utility {
 
 // http://stackoverflow.com/questions/33294620/
 
-
-func rawPointerOf<T : AnyObject>(obj : T) -> UnsafeRawPointer {
-  return UnsafeRawPointer(Unmanaged.passUnretained(obj).toOpaque())
-}
-
 func mutableRawPointerOf<T : AnyObject>(obj : T) -> UnsafeMutableRawPointer {
   return UnsafeMutableRawPointer(Unmanaged.passUnretained(obj).toOpaque())
 }
@@ -626,12 +599,3 @@ func mutableRawPointerOf<T : AnyObject>(obj : T) -> UnsafeMutableRawPointer {
 func bridge<T : AnyObject>(ptr : UnsafeRawPointer) -> T {
   return Unmanaged<T>.fromOpaque(ptr).takeUnretainedValue()
 }
-
-func bridgeRetained<T : AnyObject>(obj : T) -> UnsafeRawPointer {
-  return UnsafeRawPointer(Unmanaged.passRetained(obj).toOpaque())
-}
-
-func bridgeTransfer<T : AnyObject>(ptr : UnsafeRawPointer) -> T {
-  return Unmanaged<T>.fromOpaque(ptr).takeRetainedValue()
-}
-

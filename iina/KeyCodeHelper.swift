@@ -238,14 +238,6 @@ class KeyCodeHelper {
     "KP9": "9",
   ]
 
-  private static var reversedKeyMapForShift: [String: String] = keyMap.reduce([:]) { partial, keyMap in
-    var partial = partial
-    if let value = keyMap.value.1 {
-      partial[value] = keyMap.value.0
-    }
-    return partial
-  }
-
   private static var lowerToUpperKeyMap: [String: String] = keyMap.reduce([:]) { partial, keyValuePair in
     var partial = partial
     let (upper, lower): (String, String?) = keyValuePair.value
@@ -257,10 +249,6 @@ class KeyCodeHelper {
 
   /** Also includes symbols (e.g., `uppercaseMpvKeySet["4"] == "$"`)  */
   private static var uppercaseMpvKeySet: Set<String> = Set(lowerToUpperKeyMap.values)
-
-  static func canBeModifiedByShift(_ key: UInt16) -> Bool {
-    return key != 0x24 && (key <= 0x2F || key == 0x32)
-  }
 
   static func isPrintable(_ char: String) -> Bool {
     let utf8View = char.utf8
@@ -406,7 +394,7 @@ class KeyCodeHelper {
    10. Any remaining special keys not previously mentioned and which have more than one character in their name shall be written in all uppercase.
        (examples: `UP`, `SPACE`, `PGDOWN`, `KP_DEL`)
    */
-  public static func normalizeMpv(_ mpvKeystrokes: String) -> String {
+  static func normalizeMpv(_ mpvKeystrokes: String) -> String {
     // this is a hard-coded special case in mpv
     if mpvKeystrokes == "default-bindings" {
       return mpvKeystrokes

@@ -70,13 +70,6 @@ struct InfoDictionary {
 
   let dictionary = Bundle.main.infoDictionary!
 
-  /// A Boolean value that indicates whether this executable was an optimized (not debug) build.
-  #if DEBUG
-  let isDebug = true
-  #else
-  let isDebug = false
-  #endif
-
   var version: (String, String) {
     return (dictionary["CFBundleShortVersionString"] as! String,
             dictionary["CFBundleVersion"] as! String)

@@ -14,14 +14,6 @@ fileprivate func searchBinary(_ file: String, in url: URL) -> URL? {
   return FileManager.default.fileExists(atPath: url.path) ? url : nil
 }
 
-fileprivate extension Process {
-  var descriptionDict: [String: Any] {
-    return [
-      "status": terminationStatus
-    ]
-  }
-}
-
 @objc protocol JavascriptAPIUtilsExportable: JSExport {
   func fileInPath(_ file: String) -> Bool
   func resolvePath(_ path: String) -> String?

@@ -92,7 +92,6 @@ class PlayerCore: NSObject {
   lazy var subsystem = Logger.makeSubsystem("player\(label!)")
 
   var label: String!
-  var isManagedByPlugin = false
   var userLabel: String?
   var disableUI = false
   var disableWindowAnimation = false
@@ -356,8 +355,6 @@ class PlayerCore: NSObject {
   private func openMainWindow(path: String, url: URL, isNetwork: Bool) {
     Logger.log("Opening \(path) in main window", subsystem: subsystem)
     info.currentURL = url
-    // clear currentFolder since playlist is cleared, so need to auto-load again in playerCore#fileStarted
-    info.currentFolder = nil
     info.isNetworkResource = isNetwork
 
     let isFirstLoad = !mainWindow.loaded
@@ -633,7 +630,7 @@ class PlayerCore: NSObject {
 
   // MARK: - MPV commands
 
-  func togglePause(_ set: Bool? = nil) {
+  func togglePause() {
     info.isPaused ? resume() : pause()
   }
 
@@ -660,7 +657,6 @@ class PlayerCore: NSObject {
     mainWindow.videoView.stopDisplayLink()
     invalidateTimer()
 
-    info.currentFolder = nil
     info.$matchedSubs.withLock { $0.removeAll() }
 
     // Do not send a stop command to mpv if it is already stopped. This happens when quitting is
@@ -1082,13 +1078,6 @@ class PlayerCore: NSObject {
     postNotification(.iinaPlaylistChanged)
   }
 
-  func playFile(_ path: String) {
-    info.justOpenedFile = true
-    info.shouldAutoLoadFiles = true
-    mpv.command(.loadfile, args: [path, "replace"])
-    getPlaylist()
-  }
-
   func playFileInPlaylist(_ pos: Int) {
     mpv.setInt(MPVProperty.playlistPos, pos)
     getPlaylist()
@@ -1362,10 +1351,6 @@ class PlayerCore: NSObject {
     mpv.setDouble("options/" + MPVOption.Subtitles.subFontSize, size)
   }
 
-  func setSubTextBold(_ bold: Bool) {
-    mpv.setFlag("options/" + MPVOption.Subtitles.subBold, bold)
-  }
-
   func setSubTextBorderColor(_ colorString: String) {
     mpv.setString("options/" + MPVOption.Subtitles.subBorderColor, colorString)
   }
@@ -1385,14 +1370,6 @@ class PlayerCore: NSObject {
 
   func setSubFont(_ font: String) {
     mpv.setString(MPVOption.Subtitles.subFont, font)
-  }
-
-  func execKeyCode(_ code: String) {
-    mpv.command(.keypress, args: [code], checkError: false) { errCode in
-      if errCode < 0 {
-        Logger.log("Error when executing key code (\(errCode))", level: .error, subsystem: self.subsystem)
-      }
-    }
   }
 
   func savePlaybackPosition() {
@@ -1493,7 +1470,6 @@ class PlayerCore: NSObject {
     // the playlist.
     isStopping = false
     isStopped = false
-    info.haveDownloadedSub = false
     checkUnsyncedWindowOptions()
     // generate thumbnails if window has loaded video
     if mainWindow.isVideoLoaded {
@@ -1800,9 +1776,9 @@ class PlayerCore: NSObject {
       info.constrainVideoPosition()
       DispatchQueue.main.async {
         if self.isInMiniPlayer {
-          self.miniPlayer.updatePlayTime(withDuration: self.info.isNetworkResource, andProgressBar: true)
+          self.miniPlayer.updatePlayTime(withProgressBar: true)
         } else {
-          self.mainWindow.updatePlayTime(withDuration: self.info.isNetworkResource, andProgressBar: true)
+          self.mainWindow.updatePlayTime(withProgressBar: true)
         }
       }
 
@@ -1825,9 +1801,9 @@ class PlayerCore: NSObject {
       info.bufferingState = mpv.getInt(MPVProperty.cacheBufferingState)
       DispatchQueue.main.async {
         if self.isInMiniPlayer {
-          self.miniPlayer.updatePlayTime(withDuration: true, andProgressBar: true)
+          self.miniPlayer.updatePlayTime(withProgressBar: true)
         } else {
-          self.mainWindow.updatePlayTime(withDuration: true, andProgressBar: true)
+          self.mainWindow.updatePlayTime(withProgressBar: true)
         }
         self.mainWindow.updateNetworkState()
       }

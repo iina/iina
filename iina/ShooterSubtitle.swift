@@ -12,8 +12,6 @@ import PromiseKit
 
 class Shooter {
   class Subtitle: OnlineSubtitle {
-    var desc: String
-    var delay: Int
     var files: [SubFile]
 
     struct SubFile {
@@ -21,9 +19,7 @@ class Shooter {
       var path: String
     }
 
-    init(index: Int, desc: String, delay: Int, files: [SubFile]) {
-      self.desc = desc
-      self.delay = delay
+    init(index: Int, files: [SubFile]) {
       self.files = files
       super.init(index: index)
     }
@@ -74,8 +70,6 @@ class Shooter {
 
     private let chunkSize: Int = 4096
     private let apiPath = "https://www.shooter.cn/api/subapi.php"
-
-    private var language: String?
 
     func fetch(from url: URL, withProviderID id: String, playerCore player: PlayerCore) -> Promise<[Subtitle]> {
       return hash(url).then { self.request($0) }
@@ -136,10 +130,8 @@ class Shooter {
             let files = filesDic.map { o -> Subtitle.SubFile in
               return Subtitle.SubFile(ext: o["Ext"]!, path: o["Link"]!)
             }
-            let desc = sub["Desc"] as? String ?? ""
-            let delay = sub["Delay"] as? Int ?? 0
 
-            subtitles.append(Subtitle(index: index, desc: desc, delay: delay, files: files))
+            subtitles.append(Subtitle(index: index, files: files))
             index += 1
           }
           resolver.fulfill(subtitles)
@@ -147,8 +139,4 @@ class Shooter {
       }
     }
   }
-}
-
-extension Logger.Sub {
-  static let shooter = Logger.makeSubsystem("sub.shooter")
 }

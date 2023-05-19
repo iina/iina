@@ -48,10 +48,4 @@ class HistoryController: NSObject {
     history = history.filter { !entries.contains($0) }
     save()
   }
-
-  func removeAll() {
-    history.removeAll()
-    save()
-  }
-
 }

@@ -14,8 +14,6 @@ let IINA_ENABLE_PLUGIN_SYSTEM = Preference.bool(for: .iinaEnablePluginSystem)
 
 /** Max time interval for repeated `application(_:openFile:)` calls. */
 fileprivate let OpenFileRepeatTime = TimeInterval(0.2)
-/** Tags for "Open File/URL" menu item when "Always open file in new windows" is off. Vice versa. */
-fileprivate let NormalMenuItemTag = 0
 /** Tags for "Open File/URL in New Window" when "Always open URL" when "Open file in new windows" is off. Vice versa. */
 fileprivate let AlternativeMenuItemTag = 1
 
@@ -187,7 +185,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
     // guide window
     if FirstRunManager.isFirstRun(for: .init("firstLaunchAfter\(version)")) {
-      guideWindow.show(pages: [.highlights])
+      guideWindow.show(page: .highlights)
     }
 
     // Hide Window > "Enter Full Screen" menu item, because this is already present in the Video menu
@@ -790,7 +788,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   }
 
   @IBAction func showHighlights(_ sender: AnyObject) {
-    guideWindow.show(pages: [.highlights])
+    guideWindow.show(page: .highlights)
   }
 
   @IBAction func helpAction(_ sender: AnyObject) {

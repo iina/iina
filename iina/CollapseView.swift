@@ -55,7 +55,7 @@ class CollapseView: NSStackView {
     updateContentView(animated: animated)
   }
 
-  @objc private func triggerAction(_ sender: NSControl) {
+  @objc private func triggerAction() {
     folded = !folded
     if let action = originalAction {
       _ = originalTarget?.perform(action, with: trigger)

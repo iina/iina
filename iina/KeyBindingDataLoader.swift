@@ -11,7 +11,7 @@ import Foundation
 fileprivate typealias KBI = KeyBindingItem
 
 fileprivate enum PropertyType {
-  case bool, num, string, choose, separator
+  case bool, num, string, separator
 }
 
 class KeyBindingDataLoader {

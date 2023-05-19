@@ -14,9 +14,4 @@ struct MPVHook: RawRepresentable {
 
   init(_ string: String) { self.rawValue = string }
   init?(rawValue: RawValue) { self.rawValue = rawValue }
-
-  static let onLoad = MPVHook("on_load")
-  static let onLoadFail = MPVHook("on_load_fail")
-  static let onPreLoaded = MPVHook("on_preloaded")
-  static let onUnLoad = MPVHook("on_unload")
 }

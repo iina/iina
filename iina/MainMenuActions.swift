@@ -380,7 +380,6 @@ extension MainMenuActionHandler {
         self.player.sendOSD(.downloadedSub(
           urls.map({ $0.lastPathComponent }).joined(separator: "\n")
         ))
-        self.player.info.haveDownloadedSub = true
       }
       self.player.isSearchingOnlineSubtitle = false
     }

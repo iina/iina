@@ -20,8 +20,6 @@ class VideoView: NSView {
     return layer
   }()
 
-  var videoSize: NSSize?
-
   @Atomic var isUninited = false
 
   var draggingTimer: Timer?
@@ -454,10 +452,10 @@ extension VideoView {
 }
 
 fileprivate func displayLinkCallback(
-  _ displayLink: CVDisplayLink, _ inNow: UnsafePointer<CVTimeStamp>,
-  _ inOutputTime: UnsafePointer<CVTimeStamp>,
-  _ flagsIn: CVOptionFlags,
-  _ flagsOut: UnsafeMutablePointer<CVOptionFlags>,
+  _: CVDisplayLink, _: UnsafePointer<CVTimeStamp>,
+  _: UnsafePointer<CVTimeStamp>,
+  _: CVOptionFlags,
+  _: UnsafeMutablePointer<CVOptionFlags>,
   _ context: UnsafeMutableRawPointer?) -> CVReturn {
   let videoView = unsafeBitCast(context, to: VideoView.self)
   videoView.$isUninited.withLock() { isUninited in

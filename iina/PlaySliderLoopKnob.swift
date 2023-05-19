@@ -43,8 +43,6 @@ final class PlaySliderLoopKnob: NSView {
 
   private var cell: PlaySliderCell!
 
-  private var isDragging: Bool = false
-
   private let knobHeight: CGFloat
   
   /// Percentage of the height of the primary knob to use for the loop knobs when drawing.
@@ -161,7 +159,6 @@ final class PlaySliderLoopKnob: NSView {
   func beginDragging(with event: NSEvent) {
     let clickLocation = slider.convert(event.locationInWindow, from: nil)
     lastDragLocation = constrainX(clickLocation.x)
-    isDragging = true
   }
 
   /// The user has pressed the left mouse button within the frame of this knob.
@@ -200,9 +197,5 @@ final class PlaySliderLoopKnob: NSView {
     x += newDragLocation.x - lastDragLocation
     lastDragLocation = constrainX(newDragLocation.x)
     NotificationCenter.default.post(Notification(name: .iinaPlaySliderLoopKnobChanged, object: self))
-  }
-
-  override func mouseUp(with event: NSEvent) {
-    isDragging = false
   }
 }

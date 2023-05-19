@@ -24,10 +24,6 @@ class KeychainAccess {
       self.rawValue = rawValue
     }
 
-    init(_ rawValue: String) {
-      self.init(rawValue: rawValue)
-    }
-
     static let openSubAccount = ServiceName(rawValue: "IINA OpenSubtitles Account")
     static let httpAuth = ServiceName(rawValue: "IINA Saved HTTP Password")
   }

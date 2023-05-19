@@ -68,7 +68,6 @@ class JavascriptPlugin: NSObject {
   var identifier: String
   let version: String
   let desc: String?
-  var isExternal: Bool = false
 
   var root: URL
   let entryPath: String
@@ -334,10 +333,6 @@ class JavascriptPlugin: NSObject {
     self.helpPage = jsonDict["helpPage"] as? String
     self.domainList = (jsonDict["allowedDomains"] as? [String]) ?? []
     self.subProviders = jsonDict["subtitleProviders"] as? [[String: String]]
-    
-    if externalURL != nil {
-      self.isExternal = true
-    }
 
     if let sidebarTabDef = jsonDict["sidebarTab"] as? [String: String] {
       self.sidebarTabName = sidebarTabDef["name"]

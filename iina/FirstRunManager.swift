@@ -20,8 +20,6 @@ class FirstRunManager {
     init(rawValue: String) {
       self.rawValue = rawValue
     }
-
-    static let joinBetaChannel = Key(rawValue: "joinBetaChannel")
   }
 
   static func isFirstRun(for key: Key) -> Bool {

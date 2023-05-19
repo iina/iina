@@ -96,10 +96,6 @@ class KeyMapping: NSObject {
     }
   }
 
-  var isIgnored: Bool {
-    return privateRawAction == MPVCommand.ignore.rawValue
-  }
-
   @objc var prettyCommand: String {
     return KeyBindingTranslator.readableCommand(fromAction: action, isIINACommand: isIINACommand)
   }

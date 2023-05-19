@@ -45,7 +45,7 @@ class PrefOSCToolbarSettingsSheetController: NSWindowController, PrefOSCToolbarC
     }
   }
 
-  func currentItemsView(_ view: PrefOSCToolbarCurrentItemsView, updatedItems items: [Preference.ToolBarButton]) {
+  func currentItemsView(_: PrefOSCToolbarCurrentItemsView, updatedItems items: [Preference.ToolBarButton]) {
     currentButtonTypes = items
   }
 

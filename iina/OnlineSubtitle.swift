@@ -10,11 +10,7 @@ import Foundation
 import PromiseKit
 
 fileprivate protocol ProviderProtocol {
-  associatedtype F: OnlineSubtitleFetcher
-  var id: String { get }
   var name: String { get }
-  var origin: OnlineSubtitle.Origin { get }
-  func getFetcher() -> F
   func fetchSubtitles(url: URL, player: PlayerCore) -> Promise<[URL]>
 }
 

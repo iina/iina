@@ -8,7 +8,6 @@
 
 import Foundation
 
-fileprivate let charSetGroups: [CharacterSet] = [.decimalDigits, .letters]
 fileprivate let subsystem = Logger.makeSubsystem("fgroup")
 
 class FileInfo: Hashable {

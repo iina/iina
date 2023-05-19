@@ -20,8 +20,6 @@ class GuideWindowController: NSWindowController {
     case highlights
   }
 
-  private var page = 0
-
   var highlightsWebView: WKWebView?
   @IBOutlet weak var highlightsContainerView: NSView!
   @IBOutlet weak var highlightsLoadingIndicator: NSProgressIndicator!
@@ -31,8 +29,11 @@ class GuideWindowController: NSWindowController {
     super.windowDidLoad()
   }
 
-  func show(pages: [Page]) {
-    loadHighlightsPage()
+  func show(page: Page) {
+    switch page {
+    case .highlights:
+      loadHighlightsPage()
+    }
     showWindow(self)
   }
 

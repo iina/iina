@@ -23,9 +23,7 @@ class Assrt {
     var subType: String
 
     var subLang: String?
-    var title: String?
     var filename: String?
-    var size: String?
     var url: URL?
     var fileList: [File]?
 
@@ -288,8 +286,4 @@ class Assrt {
       return ["Authorization": "Bearer \(token)"]
     }
   }
-}
-
-extension Logger.Sub {
-  static let assrt = Logger.makeSubsystem("assrt")
 }

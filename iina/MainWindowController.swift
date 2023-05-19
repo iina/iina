@@ -46,7 +46,6 @@ fileprivate let CropAnimationDuration = 0.2
 fileprivate extension NSStackView.VisibilityPriority {
   static let detachEarly = NSStackView.VisibilityPriority(rawValue: 850)
   static let detachEarlier = NSStackView.VisibilityPriority(rawValue: 800)
-  static let detachEarliest = NSStackView.VisibilityPriority(rawValue: 750)
 }
 
 // The minimum distance that the user must drag before their click or tap gesture is interpreted as a drag gesture:
@@ -1675,7 +1674,6 @@ class MainWindowController: PlayerWindowController {
     // Must not access mpv while it is asynchronously processing stop and quit commands.
     // See comments in windowWillExitFullScreen for details.
     guard !isClosing else { return }
-    videoView.videoSize = window!.convertToBacking(videoView.bounds).size
     updateWindowParametersForMPV()
   }
 
@@ -2417,8 +2415,6 @@ class MainWindowController: PlayerWindowController {
       pip.aspectRatio = originalVideoSize
     }
 
-    videoView.videoSize = window.convertToBacking(videoView.frame).size
-
     var rect: NSRect
     let needResizeWindow: Bool
 
@@ -2512,7 +2508,7 @@ class MainWindowController: PlayerWindowController {
     }
 
     // UI and slider
-    updatePlayTime(withDuration: true, andProgressBar: true)
+    updatePlayTime(withProgressBar: true)
     player.events.emit(.windowSizeAdjusted, data: rect)
   }
 

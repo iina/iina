@@ -11,7 +11,6 @@ import Cocoa
 @available(macOS 10.13, *)
 extension NSColor.Name {
   static let sidebarTableBackground = NSColor.Name("SidebarTableBackground")
-  static let aboutWindowBackground = NSColor.Name("AboutWindowBackground")
 
   static let mainSliderBarLeft = NSColor.Name("MainSliderBarLeft")
   static let mainSliderBarRight = NSColor.Name("MainSliderBarRight")

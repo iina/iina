@@ -15,24 +15,18 @@ class OpenSub {
   final class Subtitle: OnlineSubtitle {
     var filename: String = ""
     var langID: String
-    var authorComment: String
     var addDate: String
     var rating: String
     var dlCount: String
-    var movieFPS: String
     var subDlLink: String
-    var zipDlLink: String
 
-    init(index: Int, filename: String, langID: String, authorComment: String, addDate: String, rating: String, dlCount: String, movieFPS: String, subDlLink: String, zipDlLink: String) {
+    init(index: Int, filename: String, langID: String, addDate: String, rating: String, dlCount: String, subDlLink: String) {
       self.filename = filename
       self.langID = langID
-      self.authorComment = authorComment
       self.addDate = addDate
       self.rating = rating
       self.dlCount = dlCount
-      self.movieFPS = movieFPS
       self.subDlLink = subDlLink
-      self.zipDlLink = zipDlLink
       super.init(index: index)
     }
 
@@ -106,13 +100,11 @@ class OpenSub {
 
     private let chunkSize: Int = 65536
     private let apiPath = "https://api.opensubtitles.org:443/xml-rpc"
-    private static let serviceName: NSString = "IINA OpenSubtitles Account"
     private let xmlRpc: JustXMLRPC
 
     private let subChooseViewController = SubChooseViewController()
 
     var language: String
-    var username: String = ""
 
     let ua: String = {
       let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
@@ -337,15 +329,12 @@ class OpenSub {
             var result: [Subtitle] = []
             for (index, subData) in pData.enumerated() {
               let sub = Subtitle(index: index,
-                                        filename: subData["SubFileName"] as! String,
-                                        langID: subData["SubLanguageID"] as! String,
-                                        authorComment: subData["SubAuthorComment"] as! String,
-                                        addDate: subData["SubAddDate"] as! String,
-                                        rating: subData["SubRating"] as! String,
-                                        dlCount: subData["SubDownloadsCnt"] as! String,
-                                        movieFPS: subData["MovieFPS"] as! String,
-                                        subDlLink: subData["SubDownloadLink"] as! String,
-                                        zipDlLink: subData["ZipDownloadLink"] as! String)
+                                 filename: subData["SubFileName"] as! String,
+                                 langID: subData["SubLanguageID"] as! String,
+                                 addDate: subData["SubAddDate"] as! String,
+                                 rating: subData["SubRating"] as! String,
+                                 dlCount: subData["SubDownloadsCnt"] as! String,
+                                 subDlLink: subData["SubDownloadLink"] as! String)
               result.append(sub)
             }
             if result.isEmpty {

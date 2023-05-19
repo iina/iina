@@ -428,30 +428,6 @@ struct Preference {
     }
   }
 
-  enum AutoLoadAction: Int, InitializingFromKey {
-    case no = 0
-    case exact
-    case fuzzy
-    case all
-
-    static var defaultValue = AutoLoadAction.fuzzy
-
-    init?(key: Key) {
-      self.init(rawValue: Preference.integer(for: key))
-    }
-
-    var string: String {
-      get {
-        switch self {
-        case .no: return "no"
-        case .exact: return "exact"
-        case .fuzzy: return "fuzzy"
-        case .all: return "all"
-        }
-      }
-    }
-  }
-
   enum SubOverrideLevel: Int, InitializingFromKey {
     case yes = 0
     case force
@@ -875,10 +851,6 @@ struct Preference {
 
   static private let ud = UserDefaults.standard
 
-  static func object(for key: Key) -> Any? {
-    return ud.object(forKey: key.rawValue)
-  }
-
   static func array(for key: Key) -> [Any]? {
     return ud.array(forKey: key.rawValue)
   }
@@ -893,14 +865,6 @@ struct Preference {
 
   static func string(for key: Key) -> String? {
     return ud.string(forKey: key.rawValue)
-  }
-
-  static func stringArray(for key: Key) -> [String]? {
-    return ud.stringArray(forKey: key.rawValue)
-  }
-
-  static func data(for key: Key) -> Data? {
-    return ud.data(forKey: key.rawValue)
   }
 
   static func bool(for key: Key) -> Bool {
@@ -936,10 +900,6 @@ struct Preference {
   }
 
   static func set(_ value: String, for key: Key) {
-    ud.set(value, forKey: key.rawValue)
-  }
-
-  static func set(_ value: Float, for key: Key) {
     ud.set(value, forKey: key.rawValue)
   }
 

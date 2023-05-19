@@ -51,11 +51,6 @@ struct MPVHookValue {
     context.virtualMachine.addManagedReference(self.jsBlock, withOwner: owner)
   }
 
-  init(withBlock block: @escaping Block) {
-    self.isJavascript = false
-    self.block = block
-  }
-
   func call(withNextBlock next: @escaping () -> Void) {
     if isJavascript {
       let block: @convention(block) () -> Void = { next() }
@@ -75,10 +70,6 @@ struct MPVHookValue {
 
 // Global functions
 
-protocol MPVEventDelegate {
-  func onMPVEvent(_ event: MPVEvent)
-}
-
 class MPVController: NSObject {
   struct UserData {
     static let screenshot: UInt64 = 1000000
@@ -90,7 +81,6 @@ class MPVController: NSObject {
 
   private var openGLContext: CGLContextObj! = nil
 
-  var mpvClientName: UnsafePointer<CChar>!
   var mpvVersion: String!
 
   lazy var queue = DispatchQueue(label: "com.colliderli.iina.controller", qos: .userInitiated)
@@ -159,9 +149,6 @@ class MPVController: NSObject {
   func mpvInit() {
     // Create a new mpv instance and an associated client API handle to control the mpv instance.
     mpv = mpv_create()
-
-    // Get the name of this client handle.
-    mpvClientName = mpv_client_name(mpv)
 
     // User default settings
 
@@ -554,21 +541,6 @@ class MPVController: NSObject {
     mpv_set_property(mpv, name, MPV_FORMAT_DOUBLE, &data)
   }
 
-  func setFlagAsync(_ name: String, _ flag: Bool) {
-    var data: Int = flag ? 1 : 0
-    mpv_set_property_async(mpv, 0, name, MPV_FORMAT_FLAG, &data)
-  }
-
-  func setIntAsync(_ name: String, _ value: Int) {
-    var data = Int64(value)
-    mpv_set_property_async(mpv, 0, name, MPV_FORMAT_INT64, &data)
-  }
-
-  func setDoubleAsync(_ name: String, _ value: Double) {
-    var data = value
-    mpv_set_property_async(mpv, 0, name, MPV_FORMAT_DOUBLE, &data)
-  }
-
   func setString(_ name: String, _ value: String) {
     mpv_set_property_string(mpv, name, value)
   }
@@ -946,11 +918,6 @@ class MPVController: NSObject {
     }
   }
 
-  private func onVideoParamsChange(_ data: UnsafePointer<mpv_node_list>) {
-    //let params = data.pointee
-    //params.keys.
-  }
-
   private func onFileLoaded() {
     // mpvSuspend()
     setFlag(MPVOption.PlaybackControl.pause, true)
@@ -987,7 +954,6 @@ class MPVController: NSObject {
 
     case MPVProperty.videoParams:
       needReloadQuickSettingsView = true
-      onVideoParamsChange(UnsafePointer<mpv_node_list>(OpaquePointer(property.data)))
 
     case MPVProperty.videoParamsRotate:
       if let rotation = UnsafePointer<Int>(OpaquePointer(property.data))?.pointee {
@@ -1394,7 +1360,7 @@ class MPVController: NSObject {
   }
 }
 
-fileprivate func mpvGetOpenGLFunc(_ ctx: UnsafeMutableRawPointer?, _ name: UnsafePointer<Int8>?) -> UnsafeMutableRawPointer? {
+fileprivate func mpvGetOpenGLFunc(_: UnsafeMutableRawPointer?, _ name: UnsafePointer<Int8>?) -> UnsafeMutableRawPointer? {
   let symbolName: CFString = CFStringCreateWithCString(kCFAllocatorDefault, name, kCFStringEncodingASCII);
   guard let addr = CFBundleGetFunctionPointerForName(CFBundleGetBundleWithIdentifier(CFStringCreateCopy(kCFAllocatorDefault, "com.apple.opengl" as CFString)), symbolName) else {
     Logger.fatal("Cannot get OpenGL function pointer!")

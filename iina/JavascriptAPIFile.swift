@@ -116,16 +116,6 @@ class JavascriptAPIFile: JavascriptAPI, JavascriptAPIFileExportable {
     }
   }
 
-  func move(_ source: String, _ dest: String) {
-    guard let sourcePath = parsePath(source).path, let destPath = parsePath(dest).path else { return }
-
-    do {
-      try FileManager.default.moveItem(atPath: sourcePath, toPath: destPath)
-    } catch let error {
-      throwError(withMessage: "Cannot move file: \(error.localizedDescription)")
-    }
-  }
-
   func showInFinder(_ path: String) {
     guard let filePath = parsePath(path).path else { return }
 

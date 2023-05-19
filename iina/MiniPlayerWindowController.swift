@@ -57,8 +57,6 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
 
   var videoViewAspectConstraint: NSLayoutConstraint?
 
-  private var originalWindowFrame: NSRect!
-
   lazy var hideVolumePopover: DispatchWorkItem = {
     DispatchWorkItem {
       self.volumePopover.animates = true
@@ -194,10 +192,6 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   }
 
   // MARK: - Window delegate: Size
-
-  func windowWillStartLiveResize(_ notification: Notification) {
-    originalWindowFrame = window!.frame
-  }
 
   func windowDidResize(_ notification: Notification) {
     guard let window = window, !window.inLiveResize else { return }

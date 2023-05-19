@@ -468,10 +468,26 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
   private func showNewPluginPermissions(_ plugin: JavascriptPlugin) {
     showPermissionsSheet(forPlugin: plugin, previousPlugin: nil) { ok in
       if ok {
-        plugin.normalizePath()
-        JavascriptPlugin.plugins.append(plugin)
-        plugin.enabled = true
-        self.tableView.reloadData()
+        // check whether a duplicate plugin exists, if yes, replace
+        if JavascriptPlugin.plugins.contains { $0.identifier == plugin.identifier } {
+          Utility.quickAskPanel("plugin_reinstall", titleArgs: [plugin.name], sheetWindow: self.view.window!) { response in
+            if response == .alertFirstButtonReturn {
+              let pos = JavascriptPlugin.plugins.firstIndex { $0.identifier == plugin.identifier }
+              if let pos = pos {
+                JavascriptPlugin.plugins[pos].remove()
+                plugin.normalizePath()
+                JavascriptPlugin.plugins.insert(plugin, at: pos)
+                plugin.enabled = true
+                self.tableView.reloadData()
+              }
+            }
+          }
+        } else {
+          plugin.normalizePath()
+          JavascriptPlugin.plugins.append(plugin)
+          plugin.enabled = true
+          self.tableView.reloadData()
+        }
       } else {
         plugin.remove()
       }

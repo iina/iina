@@ -195,6 +195,39 @@ class ViewLayer: CAOpenGLLayer {
   }
 
   // MARK: Utils
+  
+  /** Check OpenGL error (for debug only). */
+  func gle() {
+    let e = glGetError()
+    print(arc4random())
+    switch e {
+    case GLenum(GL_NO_ERROR):
+      break
+    case GLenum(GL_OUT_OF_MEMORY):
+      print("GL_OUT_OF_MEMORY")
+      break
+    case GLenum(GL_INVALID_ENUM):
+      print("GL_INVALID_ENUM")
+      break
+    case GLenum(GL_INVALID_VALUE):
+      print("GL_INVALID_VALUE")
+      break
+    case GLenum(GL_INVALID_OPERATION):
+      print("GL_INVALID_OPERATION")
+      break
+    case GLenum(GL_INVALID_FRAMEBUFFER_OPERATION):
+      print("GL_INVALID_FRAMEBUFFER_OPERATION")
+      break
+    case GLenum(GL_STACK_UNDERFLOW):
+      print("GL_STACK_UNDERFLOW")
+      break
+    case GLenum(GL_STACK_OVERFLOW):
+      print("GL_STACK_OVERFLOW")
+      break
+    default:
+      break
+    }
+  }
 
   func ignoreGLError() {
     glGetError()

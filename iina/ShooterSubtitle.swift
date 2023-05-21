@@ -140,3 +140,7 @@ class Shooter {
     }
   }
 }
+
+extension Logger.Sub {
+  static let shooter = Logger.makeSubsystem("sub.shooter")
+}

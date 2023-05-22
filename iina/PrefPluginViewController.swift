@@ -469,12 +469,18 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
     showPermissionsSheet(forPlugin: plugin, previousPlugin: nil) { ok in
       if ok {
         // check whether a duplicate plugin exists, if yes, replace
-        if JavascriptPlugin.plugins.contains { $0.identifier == plugin.identifier } {
+        let isDuplicate = JavascriptPlugin.plugins.contains { $0.identifier == plugin.identifier }
+        if isDuplicate {
           Utility.quickAskPanel("plugin_reinstall", titleArgs: [plugin.name], sheetWindow: self.view.window!) { response in
             if response == .alertFirstButtonReturn {
               let pos = JavascriptPlugin.plugins.firstIndex { $0.identifier == plugin.identifier }
               if let pos = pos {
-                JavascriptPlugin.plugins[pos].remove()
+                // uninstall the old plugins
+                let oldPlugin = JavascriptPlugin.plugins[pos]
+                oldPlugin.enabled = false
+                oldPlugin.remove()
+                self.clearPluginPage()
+                // install the new plugin
                 plugin.normalizePath()
                 JavascriptPlugin.plugins.insert(plugin, at: pos)
                 plugin.enabled = true

@@ -130,6 +130,10 @@ extension NSSize {
   func multiply(_ multiplier: CGFloat) -> NSSize {
     return NSSize(width: width * multiplier, height: height * multiplier)
   }
+  
+  func add(_ value: CGFloat) -> NSSize {
+    return NSSize(width: width + value, height: height + value)
+  }
 }
 
 

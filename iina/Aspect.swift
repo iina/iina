@@ -11,6 +11,24 @@ import Cocoa
 class Aspect: NSObject {
 
   private var size: NSSize!
+  
+  var width: CGFloat {
+    get {
+      return size.width
+    }
+    set {
+      size.width = newValue
+    }
+  }
+  
+  var height: CGFloat {
+    get {
+      return size.height
+    }
+    set {
+      size.height = newValue
+    }
+  }
 
   var value: CGFloat {
     get {

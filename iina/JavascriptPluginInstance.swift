@@ -14,6 +14,7 @@ class JavascriptPluginInstance {
   private var polyfill: JavascriptPolyfill!
 
   lazy var js: JSContext = createJSContext()
+  var logHandler: ((String, Logger.Level) -> Void)?
 
   weak var player: PlayerCore!
   weak var plugin: JavascriptPlugin!

@@ -197,6 +197,7 @@ struct CommandEditor: NSViewRepresentable {
     view.delegate = context.coordinator
     view.parent = self
     view.translatesAutoresizingMaskIntoConstraints = false
+    view.backgroundColor = .clear
     return view
   }
 
@@ -389,7 +390,7 @@ fileprivate struct ConsoleView: View {
       CommandEditor(text: $input)
         .frame(maxHeight: 100)
         .padding(.all, 8)
-    }.background(.regularMaterial)
+    }.background(.ultraThickMaterial)
   }
   
   private func executePrompt(printGlobalObject: Bool = false) {

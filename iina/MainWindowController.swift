@@ -2023,7 +2023,7 @@ class MainWindowController: PlayerWindowController {
       accessoryView.layer?.opacity = 0
 
       NSAnimationContext.runAnimationGroup({ context in
-        context.duration = 0.3
+        context.duration = AccessibilityPreferences.adjustedDuration(0.3)
         context.allowsImplicitAnimation = true
         window!.setFrame(newFrame, display: true)
         osdVisualEffectView.layoutSubtreeIfNeeded()

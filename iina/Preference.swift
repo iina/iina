@@ -292,10 +292,13 @@ struct Preference {
     /** Alerts */
     static let suppressCannotPreventDisplaySleep = Key("suppressCannotPreventDisplaySleep")
 
+    /** Internal */
     static let iinaEnablePluginSystem = Key("iinaEnablePluginSystem")
 
     /** Workaround for issue [#4688](https://github.com/iina/iina/issues/4688) */
     static let recentDocuments = Key("recentDocuments")
+
+    static let enableFFmpegImageDecoder = Key("enableFFmpegImageDecoder")
   }
 
   // MARK: - Enums
@@ -873,7 +876,9 @@ struct Preference {
 
     .suppressCannotPreventDisplaySleep: false,
 
-    .recentDocuments: [Any]()
+    .recentDocuments: [Any](),
+
+    .enableFFmpegImageDecoder: true
   ]
 
 

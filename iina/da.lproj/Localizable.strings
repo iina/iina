@@ -21,6 +21,13 @@
 "guide.basic_settings" = "Grundlæggende Indstillinger";
 "guide.faq" = "Ofte Stillede Spørgsmål";
 
+// Initial Window
+"initial.announcement" = "You are using a %@ version of IINA";
+"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
+"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffering... %d%%";
 "main.opening_stream" = "Åbn stream…";
@@ -94,7 +101,7 @@
 "preference.control" = "Kontrol";
 "preference.keybindings" = "Tastegenveje";
 "preference.advanced" = "Avanceret";
-"preference.plugins" = "Plugins";
+"preference.plugins" = "Udvidelser";
 "preference.utilities" = "Værktøjer";
 "preference.scripts" = "Scripts";
 "preference.not_logged_in" = "Ikke logget ind";
@@ -107,6 +114,7 @@
 "preference.enable_adv_settings" = "Aktiver avancerede indstillinger";
 
 "menu.volume" = "Volumen: %d";
+"menu.volume_muted" = "Lydstyrke: %d (Lydløs)";
 "menu.audio_delay" = "Lydforsinkelse: %.2fs";
 "menu.sub_delay" = "Undertekstforsinkelse: %.2fs";
 "menu.fullscreen" = "Gå til fuldskærmsvisning";
@@ -116,9 +124,9 @@
 "menu.pause" = "Pause";
 "menu.resume" = "Genoptag";
 "menu.speed" = "Hastighed: %.2fx";
-"menu.chapters" = "Show Chapters Panel";
-"menu.hide_chapters" = "Hide Chapters Panel";
-"menu.playlist" = "Show Playlist Panel";
+"menu.chapters" = "Vis kapitel panel";
+"menu.hide_chapters" = "Skjul Kapitel Panel";
+"menu.playlist" = "Vis Playlist Panel";
 "menu.hide_playlist" = "Hide Playlist Panel";
 "menu.video" = "Show Video Panel";
 "menu.hide_video" = "Hide Video Panel";
@@ -155,7 +163,7 @@
 
 "alert.fatal_error" = "Fatal fejl: %@ \nProgrammet afsluttes.";
 "alert.mpv_error" = "Intern fejl %@ (%@) under ændring af %@.";
-"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
+"alert.sleep" = "Kan ikke forhindre dvale tilstand! (0x%0X8)";
 
 "alert.unsupported_audio" = "Ikke supporteret ekstern lydfil.";
 "alert.unsupported_sub" = "Ikke supporteret ekstern undertekster.";
@@ -191,6 +199,8 @@
 "alert.extra_option.config_folder" = "Fejl under konfiguration af config mappen \"%@\".";
 
 "alert.playlist.error_deleting" = "Fejl under sletning af: %@";
+
+"alert.screenshot.error_taking" = "Kan ikke tage et skærmbillede!";
 
 "alert.sub.no_selected" = "Venligst vælg downloadet undertekst først.";
 "alert.sub_lang_not_set" = "Venligst vælgt det fortrukne undertekstsprog i preferancer før du bruger opensubtitles. Engelsk vil blive brugt denne gang.";
@@ -234,8 +244,8 @@
 "alert.clear_watch_later.title" = "Fjern gemte afspilningsfremskridt";
 "alert.clear_watch_later.message" = "Er du sikker på at du vil slette alle gemte afspilningsfremskridt (\"se senere\" data)?";
 
-"alert.restore_alerts.title" = "Restore Suppressed Alerts";
-"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
+"alert.restore_alerts.title" = "Gendan skjulte advarsler";
+"alert.restore_alerts.message" = "Er du sikker på at du vil gendanne skjulte advarsler?";
 
 "alert.nothing_to_open" = "Intet at åbne.";
 
@@ -250,12 +260,12 @@
 "alert.assrt_token_prompt.message" = "Registrer dig på den åbnede hjemmeside. Få din token på din brugerstartside og indtast det nedenfor:";
 "alert.assrt_token_invalid" = "Din Assrt API token lader til at være ugyldig.";
 
-"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
-"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
+"alert.plugin_uninstall.title" = "Er du sikker på at du vil afinstallere %@?";
+"alert.plugin_uninstall.message" = "Denne udvidelse vil blive fjernet fra din harddisk.";
 "alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
-"alert.plugin_no_update" = "No update found.";
-"alert.plugin_update_found.title" = "Update found for %@";
-"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
+"alert.plugin_no_update" = "Ingen nye opdateringer fundet.";
+"alert.plugin_update_found.title" = "Ny Opdatering fundet for %@";
+"alert.plugin_update_found.message" = "Den seneste version er %@. Du har %@. Vil du gerne opdatere?";
 "alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
 "alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
 
@@ -335,20 +345,20 @@
 "permissions.network-request.any_site" = "Any site";
 "permissions.show-osd.name" = "Show OSD";
 "permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
-"permissions.show-alert.name" = "Show Alerts";
+"permissions.show-alert.name" = "Vi advarsler";
 "permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
 "permissions.video-overlay.name" = "Add overlay on videos";
 "permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
 "permissions.file-system.name" = "Access the file system";
 "permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
 
-"plugin.install" = "Install";
-"plugin.installed" = "Installed";
-"plugin.not_installed" = "Not Installed";
-"plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occured during the installation: %@";
-"alert.invalid_url" = "The URL is invalid.";
-"plugin.install_error.invalid_url" = "The URL is invalid.";
+"plugin.install" = "Installer";
+"plugin.installed" = "Installeret";
+"plugin.not_installed" = "Ikke Installeret";
+"plugin.local" = "Installeret lokalt";
+"alert.plugin.install_error" = "Der skete en fejl under installationen: %@";
+"alert.invalid_url" = "URL'en er ugyldig.";
+"plugin.install_error.invalid_url" = "URL'en er ugyldig.";
 "plugin.install_error.file_not_found" = "Cannot find the package file.";
 "plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";

@@ -89,7 +89,7 @@
 "AoP-K6-Kb5.title" = "Take a Screenshot";
 
 /* Class = "NSMenuItem"; title = "Delogo"; ObjectID = "ArE-2s-JIV"; */
-"ArE-2s-JIV.title" = "Delogo";
+"ArE-2s-JIV.title" = "Уклони логотип";
 
 /* Class = "NSMenuItem"; title = "Saved Video Filters"; ObjectID = "BDr-G9-IRx"; */
 "BDr-G9-IRx.title" = "Saved Video Filters";
@@ -152,7 +152,7 @@
 "Gi5-1S-RQB.title" = "Playlist";
 
 /* Class = "NSMenuItem"; title = "Crop"; ObjectID = "Gqg-wU-RRo"; */
-"Gqg-wU-RRo.title" = "Crop";
+"Gqg-wU-RRo.title" = "Исеци";
 
 /* Class = "NSMenuItem"; title = "Reset Audio Delay"; ObjectID = "H3d-jR-YCr"; */
 "H3d-jR-YCr.title" = "Reset Audio Delay";
@@ -173,7 +173,7 @@
 "IAo-SY-fd9.title" = "Open…";
 
 /* Class = "NSMenuItem"; title = "Audio Device"; ObjectID = "IXq-yq-uDF"; */
-"IXq-yq-uDF.title" = "Audio Device";
+"IXq-yq-uDF.title" = "Аудио-уређај";
 
 /* Class = "NSMenuItem"; title = "Horizontal (Mirror)"; ObjectID = "JJq-qH-toq"; */
 "JJq-qH-toq.title" = "Horizontal (Mirror)";
@@ -305,7 +305,7 @@
 "aXa-aM-Jaq.title" = "Playlist";
 
 /* Class = "NSMenuItem"; title = "Rotation"; ObjectID = "ar5-3T-O9h"; */
-"ar5-3T-O9h.title" = "Rotation";
+"ar5-3T-O9h.title" = "Ротација";
 
 /* Class = "NSMenuItem"; title = "Music Mode"; ObjectID = "bGN-E4-V5A"; */
 "bGN-E4-V5A.title" = "Music Mode";
@@ -329,7 +329,7 @@
 "d15-8v-dXA.title" = "Aspect Ratio";
 
 /* Class = "NSMenu"; title = "Chapters"; ObjectID = "d9c-me-L2H"; */
-"d9c-me-L2H.title" = "Chapters";
+"d9c-me-L2H.title" = "Поглавља";
 
 /* Class = "NSMenu"; title = "Transformations"; ObjectID = "dBM-BU-5xS"; */
 "dBM-BU-5xS.title" = "Transformations";
@@ -341,7 +341,7 @@
 "deS-xK-iBb.title" = "Stop and Clear Playlists";
 
 /* Class = "NSMenu"; title = "Crop"; ObjectID = "eo2-Tt-SLx"; */
-"eo2-Tt-SLx.title" = "Crop";
+"eo2-Tt-SLx.title" = "Исеци";
 
 /* Class = "NSMenuItem"; title = "Audio Delay:"; ObjectID = "foC-r3-8mp"; */
 "foC-r3-8mp.title" = "Audio Delay:";
@@ -368,7 +368,7 @@
 "j8P-Gb-HR7.title" = "Video Track";
 
 /* Class = "NSMenuItem"; title = "Playback"; ObjectID = "jxT-CU-nIS"; */
-"jxT-CU-nIS.title" = "Playback";
+"jxT-CU-nIS.title" = "Репродукција";
 
 /* Class = "NSMenuItem"; title = "Load External Subtitle…"; ObjectID = "k6x-hf-ATi"; */
 "k6x-hf-ATi.title" = "Load External Subtitle…";
@@ -395,13 +395,13 @@
 "mND-N8-z6o.title" = "Enter Picture in Picture";
 
 /* Class = "NSMenuItem"; title = "Flip"; ObjectID = "mT1-1m-HwN"; */
-"mT1-1m-HwN.title" = "Flip";
+"mT1-1m-HwN.title" = "Преокрени";
 
 /* Class = "NSMenuItem"; title = "Cycle Audio Tracks"; ObjectID = "n8f-ub-Udb"; */
 "n8f-ub-Udb.title" = "Cycle Audio Tracks";
 
 /* Class = "NSMenu"; title = "Flip"; ObjectID = "n90-to-nRT"; */
-"n90-to-nRT.title" = "Flip";
+"n90-to-nRT.title" = "Преокрени";
 
 /* Class = "NSMenuItem"; title = "Delete Current File"; ObjectID = "npH-8B-XA4"; */
 "npH-8B-XA4.title" = "Delete Current File";
@@ -452,7 +452,7 @@
 "uGZ-lo-pJJ.title" = "Subtitle";
 
 /* Class = "NSMenu"; title = "Speech"; ObjectID = "uO1-9S-6Yy"; */
-"uO1-9S-6Yy.title" = "Speech";
+"uO1-9S-6Yy.title" = "Говор";
 
 /* Class = "NSMenuItem"; title = "Clear Menu"; ObjectID = "vNY-rz-j42"; */
 "vNY-rz-j42.title" = "Clear Menu";
@@ -470,13 +470,13 @@
 "wgZ-DO-nn3.title" = "Saved Audio Filters";
 
 /* Class = "NSMenuItem"; title = "Help"; ObjectID = "wpr-3q-Mcd"; */
-"wpr-3q-Mcd.title" = "Help";
+"wpr-3q-Mcd.title" = "Помоћ";
 
 /* Class = "NSMenuItem"; title = "<None>"; ObjectID = "wrS-JG-jF6"; */
 "wrS-JG-jF6.title" = "<None>";
 
 /* Class = "NSMenuItem"; title = "Subtitles"; ObjectID = "xDJ-GA-Gjs"; */
-"xDJ-GA-Gjs.title" = "Subtitles";
+"xDJ-GA-Gjs.title" = "Титлови";
 
 /* Class = "NSMenu"; title = "Saved Video Filters"; ObjectID = "xhY-fF-oio"; */
 "xhY-fF-oio.title" = "Saved Video Filters";

@@ -21,6 +21,13 @@
 "guide.basic_settings" = "일반 설정";
 "guide.faq" = "자주 묻는 질문";
 
+// Initial Window
+"initial.announcement" = "You are using a %@ version of IINA";
+"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
+"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "버퍼링… %d%%";
 "main.opening_stream" = "스트림 여는 중…";
@@ -94,7 +101,7 @@
 "preference.control" = "컨트롤";
 "preference.keybindings" = "단축키";
 "preference.advanced" = "고급설정";
-"preference.plugins" = "Plugins";
+"preference.plugins" = "플러그인";
 "preference.utilities" = "유틸리티";
 "preference.scripts" = "스크립트";
 "preference.not_logged_in" = "로그인되지 않음";
@@ -107,6 +114,7 @@
 "preference.enable_adv_settings" = "고급 설정 사용";
 
 "menu.volume" = "음량: %d";
+"menu.volume_muted" = "음량: %d (음소거 됨)";
 "menu.audio_delay" = "오디오 지연: %.2f초";
 "menu.sub_delay" = "자막 지연: %.2f초";
 "menu.fullscreen" = "전체 화면";
@@ -116,16 +124,16 @@
 "menu.pause" = "일시 정지";
 "menu.resume" = "재생";
 "menu.speed" = "재생속도: %.2fx";
-"menu.chapters" = "Show Chapters Panel";
-"menu.hide_chapters" = "Hide Chapters Panel";
-"menu.playlist" = "Show Playlist Panel";
-"menu.hide_playlist" = "Hide Playlist Panel";
-"menu.video" = "Show Video Panel";
-"menu.hide_video" = "Hide Video Panel";
-"menu.audio" = "Show Audio Panel";
-"menu.hide_audio" = "Hide Audio Panel";
-"menu.subtitles" = "Show Subtitles Panel";
-"menu.hide_subtitles" = "Hide Subtitles Panel";
+"menu.chapters" = "챕터 목록 보기";
+"menu.hide_chapters" = "챕터 패널 숨기기";
+"menu.playlist" = "재생목록 보기";
+"menu.hide_playlist" = "재생목록 패널 숨기기";
+"menu.video" = "비디오 패널 보기";
+"menu.hide_video" = "비디오 패널 숨기기";
+"menu.audio" = "오디오 패널 보기";
+"menu.hide_audio" = "오디오 패널 숨기기";
+"menu.subtitles" = "자막 패널 보기";
+"menu.hide_subtitles" = "자막 패널 숨기기";
 
 "menu.seek_forward" = "앞으로 탐색 %.0f초";
 "menu.seek_backward" = "뒤로 탐색 %.0f초";
@@ -139,7 +147,7 @@
 "menu.sub_delay_down" = "자막 지연 -%.1f초";
 
 "menu.crop_custom" = "사용자 설정…";
-"menu.find_online_sub" = "Find Online Subtitles from %@";
+"menu.find_online_sub" = "%@에서 온라인 자막 찾기";
 
 "track.none" = "<없음>";
 
@@ -155,7 +163,7 @@
 
 "alert.fatal_error" = "심각한 오류: %@ \n프로그램이 지금 종료됩니다.";
 "alert.mpv_error" = "%@ (%@)오류가 사용자 지정 옵션 %@을 설정하는 도중 발생했습니다.";
-"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
+"alert.sleep" = "화면 잠자기 설정을 끌 수 없습니다! (0x%0X8)";
 
 "alert.unsupported_audio" = "지원되지 않는 외부 오디오 파일입니다.";
 "alert.unsupported_sub" = "지원되지 않는 자막 형식입니다.";
@@ -191,6 +199,8 @@
 "alert.extra_option.config_folder" = "\"%@\"를 설정 디렉토리로 지정하는 도중 오류가 발생했습니다.";
 
 "alert.playlist.error_deleting" = "삭제 오류: %@";
+
+"alert.screenshot.error_taking" = "스크린샷을 찍을 수 없습니다!";
 
 "alert.sub.no_selected" = "다운로드된 자막을 선택하십시오.";
 "alert.sub_lang_not_set" = "OpenSubtitles를 사용하기 전에 자막의 선호 언어를 설정하십시오. 지금은 영어(eng)를 사용합니다.";
@@ -234,8 +244,8 @@
 "alert.clear_watch_later.title" = "이어보기 목록 지우기";
 "alert.clear_watch_later.message" = "\"watch later\"폴더에 저장된 이어보기 목록을 지우겠습니까?";
 
-"alert.restore_alerts.title" = "Restore Suppressed Alerts";
-"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
+"alert.restore_alerts.title" = "비활성화된 알림 복구하기";
+"alert.restore_alerts.message" = "비활성화된 모든 알림을 다시 활성화 하시겠습니까?";
 
 "alert.nothing_to_open" = "열 수 있는 파일이 없습니다.";
 
@@ -250,14 +260,14 @@
 "alert.assrt_token_prompt.message" = "열린 웹페이지에서 등록해 주십시오. 홈페이지의 사용자 설정에서 토큰을 발급받아 아래에 입력하십시오:";
 "alert.assrt_token_invalid" = "Assrt API 토큰을 잘못 입력한 것 같습니다.";
 
-"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
-"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
-"alert.plugin_no_update" = "No update found.";
-"alert.plugin_update_found.title" = "Update found for %@";
-"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
-"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
-"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+"alert.plugin_uninstall.title" = "%@을(를) 삭제 하시겠습니까?";
+"alert.plugin_uninstall.message" = "이 플러그인이 디스크에서 삭제됩니다.";
+"alert.duplicated_plugin_id" = "중복된 플러그인 식별자가 감지되었습니다. 두 개 이상의 플러그인 식별자 \"%@\"가 동일합니다. 이로 인해 비정상적인 동작이 발생할 수 있습니다. 환경설정 - 플러그인에서 해당 플러그인을 찾아 해당 플러그인 작성자에게 신고하세요. 플러그인이 로컬에 설치된 경우 플러그인의 Info.json 파일에서 식별자를 수동으로 변경할 수도 있습니다.";
+"alert.plugin_no_update" = "업데이트가 없습니다.";
+"alert.plugin_update_found.title" = "%@의 업데이트를 찾음";
+"alert.plugin_update_found.message" = "최신 버전은 %@입니다. %@에서 업데이트 하시겠습니까?";
+"alert.plugin_permission" = "이 플러그인은 다음과 같은 권한을 필요로 합니다. 진행하기 전에 확인해 주세요.";
+"alert.plugin_permission_added" = "이 업데이트는 추가적인 승인이 필요합니다. 진행하기 전에 다시 한번 읽어주세요.";
 
 "playlist.total_length" = "전체 %@";
 "playlist.total_length_with_selected" = "%@ 선택됨 / 전체 %@";
@@ -330,28 +340,28 @@
 
 // Plugin permissions
 
-"permissions.network-request.name" = "Network Request";
-"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
-"permissions.network-request.any_site" = "Any site";
-"permissions.show-osd.name" = "Show OSD";
-"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
-"permissions.show-alert.name" = "Show Alerts";
-"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
-"permissions.video-overlay.name" = "Add overlay on videos";
-"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
-"permissions.file-system.name" = "Access the file system";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.network-request.name" = "네트워크 요청";
+"permissions.network-request.desc" = "이 플러그인은 아래 웹사이트에 요청을 보내거나 데이터를 업로드할 수 있습니다:";
+"permissions.network-request.any_site" = "모든 사이트";
+"permissions.show-osd.name" = "OSD 보기";
+"permissions.show-osd.desc" = "이 플러그인은 화면에 OSD가 표시될 수 있습니다";
+"permissions.show-alert.name" = "경고 표시";
+"permissions.show-alert.desc" = "이 플러그인은 경고창이 뜰 수 있습니다.";
+"permissions.video-overlay.name" = "비디오에 오버레이 추가";
+"permissions.video-overlay.desc" = "이 플러그인은 화면에 다른 콘텐츠를 표시할 수 있습니다.";
+"permissions.file-system.name" = "파일 시스템에 접근합니다.";
+"permissions.file-system.desc" = "이 플러그인은 민감한 정보를 포함하여 디스크의 파일을 읽거나 쓸 수 있습니다. 또한 컴퓨터에 해를 끼칠 수 있는 다른 프로그램이나 애플리케이션을 호출할 수도 있습니다. 따라서 출처를 반드시 확인하세요.";
 
-"plugin.install" = "Install";
-"plugin.installed" = "Installed";
-"plugin.not_installed" = "Not Installed";
-"plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occured during the installation: %@";
-"alert.invalid_url" = "The URL is invalid.";
-"plugin.install_error.invalid_url" = "The URL is invalid.";
-"plugin.install_error.file_not_found" = "Cannot find the package file.";
+"plugin.install" = "설치";
+"plugin.installed" = "설치됨";
+"plugin.not_installed" = "설치되지 않음";
+"plugin.local" = "로컬에 설치되었습니다";
+"alert.plugin.install_error" = "설치 중 오류발생: %@";
+"alert.invalid_url" = "URL이 유효하지 않습니다.";
+"plugin.install_error.invalid_url" = "URL이 유효하지 않습니다.";
+"plugin.install_error.file_not_found" = "패키지 파일을 찾을 수 없습니다.";
 "plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Check for Updates";
-"plugin.updating" = "Downloading update…";
+"plugin.install_error.cannot_load" = "IINA가 이 플러그인을 로드할 수 없습니다. 플러그인이 잘못된 형식일 수 있습니다.";
+"plugin.check_for_updates" = "업데이트 확인";
+"plugin.updating" = "업데이트 다운로드 중...";

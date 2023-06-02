@@ -20,7 +20,7 @@
 "55O-ik-ql6.title" = "فعال کردن منوی \"فایلهای اخیر\"";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "5RN-PV-pOZ"; */
-"5RN-PV-pOZ.title" = "Box";
+"5RN-PV-pOZ.title" = "جعبه";
 
 /* Class = "NSButtonCell"; title = "Minimized/un-minimized"; ObjectID = "5Y9-bX-K0f"; */
 "5Y9-bX-K0f.title" = "کمینه/برگرداندن کمینه";
@@ -38,7 +38,7 @@
 "Ci8-j2-QS3.title" = "Track all played files in \"Open Recent\" menu";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "DZT-7n-S4M"; */
-"DZT-7n-S4M.title" = "Box";
+"DZT-7n-S4M.title" = "جعبه";
 
 /* Class = "NSMenuItem"; title = "Daily"; ObjectID = "Ez8-qY-WAZ"; */
 "Ez8-qY-WAZ.title" = "روزانه";
@@ -62,13 +62,13 @@
 "KYi-0W-zOr.title" = "Black out other monitors while in full screen";
 
 /* Class = "NSButtonCell"; title = "Switch to \"music mode\" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
-"KfL-r7-Uav.title" = "Switch to \"music mode\" automatically when playing an audio file";
+"KfL-r7-Uav.title" = "هنگام پخش فایل صوتی، به صورت اتوماتیک به حالت موسیقی سوییچ شود";
 
 /* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
 "Lac-Ol-g6E.title" = "پخش آیتم بعدی به صورت خودکار";
 
 /* Class = "NSButtonCell"; title = "Always open media in new window"; ObjectID = "M0z-bI-88d"; */
-"M0z-bI-88d.title" = "Always open media in new window";
+"M0z-bI-88d.title" = "همیشه مدیا را در پنجره جدید باز کن";
 
 /* Class = "NSButtonCell"; title = "Enter fullscreen"; ObjectID = "MlG-hl-goB"; */
 "MlG-hl-goB.title" = "ورود به حالت تمام صفحه";
@@ -80,7 +80,7 @@
 "PhL-vP-i7L.title" = "مقصد:";
 
 /* Class = "NSButtonCell"; title = "Add files in the same folder automatically"; ObjectID = "QJq-fO-hhK"; */
-"QJq-fO-hhK.title" = "Add files in the same folder automatically";
+"QJq-fO-hhK.title" = "فایل ها را در همان فولدر اضافه کن";
 
 /* Class = "NSMenuItem"; title = "Monthly"; ObjectID = "REP-70-XOi"; */
 "REP-70-XOi.title" = "ماهانه";
@@ -128,7 +128,7 @@
 "lOw-pu-Llm.title" = "Play when entered full screen";
 
 /* Class = "NSButtonCell"; title = "Include subtitles"; ObjectID = "lvA-Rc-Sh6"; */
-"lvA-Rc-Sh6.title" = "Include subtitles";
+"lvA-Rc-Sh6.title" = "شامل زیرنویس ها";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "oJY-Iz-3sO"; */
 "oJY-Iz-3sO.title" = "فرمت:";
@@ -143,7 +143,7 @@
 "tmy-ty-8uK.title" = "JPEG (.jpg)";
 
 /* Class = "NSTextFieldCell"; title = "Behavior:"; ObjectID = "uQR-Fx-oEm"; */
-"uQR-Fx-oEm.title" = "Behavior:";
+"uQR-Fx-oEm.title" = "رفتار:";
 
 /* Class = "NSButtonCell"; title = "Show previews after taking screenshots"; ObjectID = "xE7-Uu-19f"; */
 "xE7-Uu-19f.title" = "Show previews after taking screenshots";

@@ -50,16 +50,16 @@
 "kbP-VI-dmT.title" = "Abbrechen";
 
 /* Class = "NSTextFieldCell"; title = "Restore Alerts"; ObjectID = "AAD-Db-Acs"; */
-"AAD-Db-Acs.title" = "Restore Alerts";
+"AAD-Db-Acs.title" = "Warnungen wiederherstellen";
 
 /* Class = "NSButtonCell"; title = "Restore Suppressed Alerts…"; ObjectID = "XAz-xa-LVo"; */
-"XAz-xa-LVo.title" = "Restore Suppressed Alerts…";
+"XAz-xa-LVo.title" = "Warnungen wiederherstellen …";
 
 /* Class = "NSTextFieldCell"; title = "Restored."; ObjectID = "Wdh-me-hdC"; */
-"Wdh-me-hdC.title" = "Restored.";
+"Wdh-me-hdC.title" = "Wiederhergestellt.";
 
 /* Class = "NSTextFieldCell"; title = "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."; ObjectID = "F5i-KF-2SW"; */
-"F5i-KF-2SW.title" = "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox.";
+"F5i-KF-2SW.title" = "Stellt alle Warnungen wieder her, die mit dem Kontrollkästchen „Diese Meldung nicht mehr anzeigen“ unterdrückt wurden.";
 
 /* Class = "NSTextFieldCell"; title = "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."; ObjectID = "pPC-q2-9Gh"; */
 "pPC-q2-9Gh.title" = "Wiedergabefortschritt und videospezifische Einstellungen wie angewandte Filter löschen";

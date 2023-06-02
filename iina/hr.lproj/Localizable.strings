@@ -21,8 +21,15 @@
 "guide.basic_settings" = "Osnovne postavke";
 "guide.faq" = "Često postavljena pitanja";
 
+// Initial Window
+"initial.announcement" = "You are using a %@ version of IINA";
+"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
+"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+
 // MainWindowController.swift
-"main.buffering_indicator" = "Buffering… %d%%";
+"main.buffering_indicator" = "Učitavanje %d%%";
 "main.opening_stream" = "Otvaranje zapisa…";
 "osc.precision" = "Točnost";
 "osc.1s" = "1 sekunda";
@@ -34,7 +41,7 @@
 "quicksetting.item_default" = "Standardno";
 "quicksetting.item_none" = "Ništa";
 "quicksetting.hwdec" = "Hardversko dekodiranje";
-"quicksetting.deinterlace" = "Deinterlace";
+"quicksetting.deinterlace" = "Preplitanje";
 "quicksetting.hdr" = "HDR";
 
 // OSDMessage.swift
@@ -107,6 +114,7 @@
 "preference.enable_adv_settings" = "Aktiviraj napredne postavke";
 
 "menu.volume" = "Glasnoća: %d";
+"menu.volume_muted" = "Volume: %d (Muted)";
 "menu.audio_delay" = "Kašnjenje zvuka: %.2fs";
 "menu.sub_delay" = "Kašnjenje titlova: %.2fs";
 "menu.fullscreen" = "Pokreni cjeloekranski prikaz";
@@ -116,16 +124,16 @@
 "menu.pause" = "Zaustavi";
 "menu.resume" = "Nastavi";
 "menu.speed" = "Brzina: %.2fx";
-"menu.chapters" = "Show Chapters Panel";
+"menu.chapters" = "Prikaži ploču poglavlja";
 "menu.hide_chapters" = "Hide Chapters Panel";
-"menu.playlist" = "Show Playlist Panel";
+"menu.playlist" = "Prikaži ploču playliste";
 "menu.hide_playlist" = "Hide Playlist Panel";
-"menu.video" = "Show Video Panel";
-"menu.hide_video" = "Hide Video Panel";
-"menu.audio" = "Show Audio Panel";
-"menu.hide_audio" = "Hide Audio Panel";
-"menu.subtitles" = "Show Subtitles Panel";
-"menu.hide_subtitles" = "Hide Subtitles Panel";
+"menu.video" = "Prikaži video postavke";
+"menu.hide_video" = "Sakrij video postavke";
+"menu.audio" = "Prikaži audio postavke";
+"menu.hide_audio" = "Sakrij audio postavke";
+"menu.subtitles" = "Prikaži postavke titlova";
+"menu.hide_subtitles" = "Sakrij postavke titlova";
 
 "menu.seek_forward" = "Korak naprijed %.0fs";
 "menu.seek_backward" = "Korak natrag %.0fs";
@@ -191,6 +199,8 @@
 "alert.extra_option.config_folder" = "Error setting config directory \"%@\".";
 
 "alert.playlist.error_deleting" = "Error deleting: %@";
+
+"alert.screenshot.error_taking" = "Cannot take a screenshot!";
 
 "alert.sub.no_selected" = "Najprije odaberi preuzeti titl.";
 "alert.sub_lang_not_set" = "Please set preferred subtitle languages in preferences before using OpenSubtitles. English(eng) will be used this time.";
@@ -339,19 +349,19 @@
 "permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
 "permissions.video-overlay.name" = "Add overlay on videos";
 "permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
-"permissions.file-system.name" = "Access the file system";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.file-system.name" = "Pristupi datotečnom sustavu";
+"permissions.file-system.desc" = "Ovaj dodatak može čitati ili pisati datoteke na tvom disku, uključujući osjetljive podatke. Također može pozvati druge programe ili aplikacije koje mogu oštetiti tvoje računalo. Stoga svakako provjeri izvor.";
 
-"plugin.install" = "Install";
-"plugin.installed" = "Installed";
-"plugin.not_installed" = "Not Installed";
-"plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occured during the installation: %@";
-"alert.invalid_url" = "The URL is invalid.";
-"plugin.install_error.invalid_url" = "The URL is invalid.";
-"plugin.install_error.file_not_found" = "Cannot find the package file.";
+"plugin.install" = "Instaliraj";
+"plugin.installed" = "Instalirano";
+"plugin.not_installed" = "Nije Instalirano";
+"plugin.local" = "Instalirano lokalno";
+"alert.plugin.install_error" = "Došlo je do greške tijekom instalacije: %@";
+"alert.invalid_url" = "URL je neispravan.";
+"plugin.install_error.invalid_url" = "URL je neispravan.";
+"plugin.install_error.file_not_found" = "Datoteka paketa nije pronađena.";
 "plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Check for Updates";
-"plugin.updating" = "Downloading update…";
+"plugin.install_error.cannot_load" = "IINA ne može učitati ovaj dodatak. Možda je u pogrešnom formatu.";
+"plugin.check_for_updates" = "Traži nove verzije ";
+"plugin.updating" = "Preuzimanje nove verzije …";

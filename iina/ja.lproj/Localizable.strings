@@ -21,6 +21,13 @@
 "guide.basic_settings" = "基本設定";
 "guide.faq" = "よくある質問";
 
+// Initial Window
+"initial.announcement" = "You are using a %@ version of IINA";
+"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
+"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "バッファ中… %d%%";
 "main.opening_stream" = "ストリームを展開中…";
@@ -94,7 +101,7 @@
 "preference.control" = "コントロール";
 "preference.keybindings" = "キーの割り当て";
 "preference.advanced" = "詳細設定";
-"preference.plugins" = "Plugins";
+"preference.plugins" = "プラグイン";
 "preference.utilities" = "ユーティリティ";
 "preference.scripts" = "スクリプト";
 "preference.not_logged_in" = "ログインしていません";
@@ -107,6 +114,7 @@
 "preference.enable_adv_settings" = "高度な設定を有効化";
 
 "menu.volume" = "音量: %d";
+"menu.volume_muted" = "Volume: %d (Muted)";
 "menu.audio_delay" = "オーディオディレイ: %.2fs";
 "menu.sub_delay" = "字幕ディレイ: %.2fs";
 "menu.fullscreen" = "フルスクリーンにする";
@@ -116,16 +124,16 @@
 "menu.pause" = "一時停止";
 "menu.resume" = "再生";
 "menu.speed" = "再生速度: %.2f倍";
-"menu.chapters" = "Show Chapters Panel";
-"menu.hide_chapters" = "Hide Chapters Panel";
-"menu.playlist" = "Show Playlist Panel";
-"menu.hide_playlist" = "Hide Playlist Panel";
-"menu.video" = "Show Video Panel";
-"menu.hide_video" = "Hide Video Panel";
-"menu.audio" = "Show Audio Panel";
-"menu.hide_audio" = "Hide Audio Panel";
-"menu.subtitles" = "Show Subtitles Panel";
-"menu.hide_subtitles" = "Hide Subtitles Panel";
+"menu.chapters" = "チャプターパネルを表示";
+"menu.hide_chapters" = "チャプターパネルを隠す";
+"menu.playlist" = "プレイリストパネルを開く";
+"menu.hide_playlist" = "プレイリストパネルを隠す";
+"menu.video" = "ビデオパネルを表示";
+"menu.hide_video" = "ビデオパネルを隠す";
+"menu.audio" = "オーディオパネルを表示";
+"menu.hide_audio" = "オーディオパネルを隠す";
+"menu.subtitles" = "字幕パネルを表示";
+"menu.hide_subtitles" = "字幕パネルを隠す";
 
 "menu.seek_forward" = "%.0f秒進む";
 "menu.seek_backward" = "%.0f秒戻る";
@@ -139,7 +147,7 @@
 "menu.sub_delay_down" = "字幕ディレイ - %.1f秒";
 
 "menu.crop_custom" = "カスタム...";
-"menu.find_online_sub" = "Find Online Subtitles from %@";
+"menu.find_online_sub" = "%@ からオンライン字幕を探す";
 
 "track.none" = "<なし>";
 
@@ -155,7 +163,7 @@
 
 "alert.fatal_error" = "致命的なエラー: %@ \nアプリケーションを終了します。";
 "alert.mpv_error" = "内部エラー %@ (%@) がユーザーオプション %@ の設定中に発生しました。";
-"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
+"alert.sleep" = "ディスプレイのスリープを防ぐことはできません！(0x%0X8)";
 
 "alert.unsupported_audio" = "対応していない外部のオーディオファイルです。";
 "alert.unsupported_sub" = "対応していない外部の字幕ファイルです。";
@@ -191,6 +199,8 @@
 "alert.extra_option.config_folder" = "設定ディレクトリー\"%@\"の設定エラーが発生しました";
 
 "alert.playlist.error_deleting" = "削除エラー: %@";
+
+"alert.screenshot.error_taking" = "スクリーンショットを撮ることができません！";
 
 "alert.sub.no_selected" = "ダウンロードした字幕を最初に選択してください。";
 "alert.sub_lang_not_set" = "OpenSubtitlesを利用する前に、環境設定で字幕の優先言語を設定してください。今回は英語(eng)が使用されます。";
@@ -234,8 +244,8 @@
 "alert.clear_watch_later.title" = "保存済みの再生進度を消去する";
 "alert.clear_watch_later.message" = "本当にすべての保存済み再生進度(\"あとで見る\"情報)を消去しますか？";
 
-"alert.restore_alerts.title" = "Restore Suppressed Alerts";
-"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
+"alert.restore_alerts.title" = "ダイアログの警告をリセット";
+"alert.restore_alerts.message" = "すべてのダイアログの警告をリセットします。よろしいですか？";
 
 "alert.nothing_to_open" = "開くファイルがありません。";
 
@@ -250,14 +260,14 @@
 "alert.assrt_token_prompt.message" = "開かれたWebページで登録してください。ホーム画面でトークンを取得し、以下に入力してください:";
 "alert.assrt_token_invalid" = "Assrt APIトークンが有効ではないようです。";
 
-"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
-"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
-"alert.plugin_no_update" = "No update found.";
-"alert.plugin_update_found.title" = "Update found for %@";
-"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
-"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
-"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+"alert.plugin_uninstall.title" = "%@ をアンインストールしてもよろしいですか？";
+"alert.plugin_uninstall.message" = "プラグインはディスクから削除されます。";
+"alert.duplicated_plugin_id" = "重複したプラグイン識別子が検出されました。2つ以上のプラグインには同じ識別子 \"%@\" があります。異常な動作を引き起こす可能性があります。 環境設定 - プラグインを見つけ、著者に報告してください。 プラグインがローカルにインストールされている場合は、プラグインの Info.json ファイル内の識別子を手動で変更することもできます。";
+"alert.plugin_no_update" = "アップデートは見つかりませんでした。";
+"alert.plugin_update_found.title" = "%@ のアップデートが見つかりました";
+"alert.plugin_update_found.message" = "最新バージョンは %@です。 今のバージョンは%@です。アップデートしますか？";
+"alert.plugin_permission" = "このプラグインには以下の権限が必要です。続行する前に確認してください。";
+"alert.plugin_permission_added" = "このアップデートには追加の権限が必要です。続行する前に確認してください。";
 
 "playlist.total_length" = "合計 %@";
 "playlist.total_length_with_selected" = "%@ / %@を選択中";
@@ -330,28 +340,28 @@
 
 // Plugin permissions
 
-"permissions.network-request.name" = "Network Request";
-"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
-"permissions.network-request.any_site" = "Any site";
-"permissions.show-osd.name" = "Show OSD";
-"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
-"permissions.show-alert.name" = "Show Alerts";
-"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
-"permissions.video-overlay.name" = "Add overlay on videos";
-"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
-"permissions.file-system.name" = "Access the file system";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.network-request.name" = "ネットワークリクエスト";
+"permissions.network-request.desc" = "このプラグインは、これらのウェブサイトにデータを通信（アップロード含む）することができます：";
+"permissions.network-request.any_site" = "任意のサイト";
+"permissions.show-osd.name" = "OSDを表示";
+"permissions.show-osd.desc" = "このプラグインは OSD (オンスクリーン機能) メッセージを表示できます。";
+"permissions.show-alert.name" = "アラートを表示";
+"permissions.show-alert.desc" = "このプラグインはポップアップアラートを表示できます。";
+"permissions.video-overlay.name" = "動画にオーバーレイを追加";
+"permissions.video-overlay.desc" = "このプラグインは、ビデオに追加のコンテンツを表示することができます。";
+"permissions.file-system.name" = "ファイルシステムにアクセス";
+"permissions.file-system.desc" = "このプラグインは、機密情報を含むディスク上のファイルを読み書きすることができます。 また、お使いのコンピュータに害を与える可能性がある他のプログラムやアプリケーションを呼び出すことができます。続行する前にソースを十分に確認してください.";
 
-"plugin.install" = "Install";
-"plugin.installed" = "Installed";
-"plugin.not_installed" = "Not Installed";
-"plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occured during the installation: %@";
-"alert.invalid_url" = "The URL is invalid.";
-"plugin.install_error.invalid_url" = "The URL is invalid.";
-"plugin.install_error.file_not_found" = "Cannot find the package file.";
+"plugin.install" = "インストール";
+"plugin.installed" = "インストール済";
+"plugin.not_installed" = "インストールされていません";
+"plugin.local" = "ローカルにインストールされました";
+"alert.plugin.install_error" = "インストール中にエラーが発生しました: %@";
+"alert.invalid_url" = "URLが無効です。";
+"plugin.install_error.invalid_url" = "URLが無効です。";
+"plugin.install_error.file_not_found" = "パッケージファイルが見つかりません。";
 "plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Check for Updates";
-"plugin.updating" = "Downloading update…";
+"plugin.install_error.cannot_load" = "IINAはこのプラグインを読み込むことができません。フォーマットが間違っている可能性があります。";
+"plugin.check_for_updates" = "アップデートを確認";
+"plugin.updating" = "アップデートをダウンロード中...";

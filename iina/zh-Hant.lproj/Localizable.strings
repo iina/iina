@@ -21,6 +21,13 @@
 "guide.basic_settings" = "基本設定";
 "guide.faq" = "常見問題";
 
+// Initial Window
+"initial.announcement" = "You are using a %@ version of IINA";
+"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
+"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "緩衝處理中⋯ %d%%";
 "main.opening_stream" = "開啟串流中⋯⋯";
@@ -94,7 +101,7 @@
 "preference.control" = "控制";
 "preference.keybindings" = "快速鍵";
 "preference.advanced" = "進階設定";
-"preference.plugins" = "Plugins";
+"preference.plugins" = "外掛程式";
 "preference.utilities" = "實用工具";
 "preference.scripts" = "工序指令";
 "preference.not_logged_in" = "尚未登入";
@@ -107,6 +114,7 @@
 "preference.enable_adv_settings" = "啟用進階設定";
 
 "menu.volume" = "音量：%d";
+"menu.volume_muted" = "音量：%d (靜音)";
 "menu.audio_delay" = "音訊延遲：%.2f 秒";
 "menu.sub_delay" = "字幕延遲：%.2f 秒";
 "menu.fullscreen" = "進入全螢幕";
@@ -139,7 +147,7 @@
 "menu.sub_delay_down" = "字幕延遲 - %.1f 秒";
 
 "menu.crop_custom" = "自訂...";
-"menu.find_online_sub" = "Find Online Subtitles from %@";
+"menu.find_online_sub" = "從 %@ 尋找線上字幕";
 
 "track.none" = "<無>";
 
@@ -155,7 +163,7 @@
 
 "alert.fatal_error" = "ㄧ嚴重錯誤：%@ \n，IINA 即將關閉。";
 "alert.mpv_error" = "發生內部錯誤 %@（%@）（設定 %@ 時）";
-"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
+"alert.sleep" = "無法阻止顯示器睡眠！(0x%0X8)";
 
 "alert.unsupported_audio" = "不支援載入此音訊檔";
 "alert.unsupported_sub" = "不支援載入此字幕檔";
@@ -191,6 +199,8 @@
 "alert.extra_option.config_folder" = "設定設定檔案夾「%@」時發生錯誤";
 
 "alert.playlist.error_deleting" = "刪除 %@ 時發生錯誤";
+
+"alert.screenshot.error_taking" = "擷圖失敗！";
 
 "alert.sub.no_selected" = "請先選取一個已下載的字幕檔";
 "alert.sub_lang_not_set" = "在使用 OpenSubtitles 前請先在「偏好設定」中設定字幕的偏好語言，目前將使用英文（eng）。";
@@ -234,8 +244,8 @@
 "alert.clear_watch_later.title" = "清除儲存的播放進度";
 "alert.clear_watch_later.message" = "確定要清除所有儲存的播放進度，即「watch later」資料嗎？";
 
-"alert.restore_alerts.title" = "Restore Suppressed Alerts";
-"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
+"alert.restore_alerts.title" = "復原已關閉的警告";
+"alert.restore_alerts.message" = "你確定想要復原這些關閉的警告嗎？";
 
 "alert.nothing_to_open" = "沒有可打開的檔案。";
 
@@ -250,14 +260,14 @@
 "alert.assrt_token_prompt.message" = "請在彈出的網頁中註冊帳號，然後進入使用者首頁檢視 API token 並在下方輸入：";
 "alert.assrt_token_invalid" = "你的射手網(偽) API token 格式無效。";
 
-"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
-"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
-"alert.plugin_no_update" = "No update found.";
-"alert.plugin_update_found.title" = "Update found for %@";
-"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
-"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
-"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+"alert.plugin_uninstall.title" = "你確定想要移除 %@？";
+"alert.plugin_uninstall.message" = "這外掛程式將從你的磁碟移除。";
+"alert.duplicated_plugin_id" = "偵測到重複的外掛程式識別碼，有兩個或更多外掛程式使用的相同的識別碼「%@」，這將造成不正常的行為。請在「偏好設定 - 外掛程式」中找到它們，並回報給外掛程式的作者。如果外掛程式安裝於本機，你可以手動在外掛程式的 Info.json 檔案中手動變更該外掛的識別碼。";
+"alert.plugin_no_update" = "未找到更新。";
+"alert.plugin_update_found.title" = "找到 %@ 的更新";
+"alert.plugin_update_found.message" = "最新版本是 %@，你的版本是 %@，要更新嗎？";
+"alert.plugin_permission" = "本外掛程式需要以下權限，請在繼續之前先審核這些權限。";
+"alert.plugin_permission_added" = "此更新需要額外的權限，請在繼續之前先審核這些權限。";
 
 "playlist.total_length" = "總計 %@";
 "playlist.total_length_with_selected" = "%@ / %@ 已選取";
@@ -330,28 +340,28 @@
 
 // Plugin permissions
 
-"permissions.network-request.name" = "Network Request";
-"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
-"permissions.network-request.any_site" = "Any site";
-"permissions.show-osd.name" = "Show OSD";
-"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
-"permissions.show-alert.name" = "Show Alerts";
-"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
-"permissions.video-overlay.name" = "Add overlay on videos";
-"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
+"permissions.network-request.name" = "網路請求";
+"permissions.network-request.desc" = "此外掛可以送出或傳送數據至這些網站：";
+"permissions.network-request.any_site" = "任何站台";
+"permissions.show-osd.name" = "顯示 OSD";
+"permissions.show-osd.desc" = "這個外掛可以顯示 OSD（螢幕顯示選單）訊息。";
+"permissions.show-alert.name" = "顯示警告";
+"permissions.show-alert.desc" = "此外掛可以顯示彈出警告。";
+"permissions.video-overlay.name" = "於影片新增重疊顯示";
+"permissions.video-overlay.desc" = "此外掛可以在影片上渲染額外內容。";
 "permissions.file-system.name" = "存取檔案系統";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.file-system.desc" = "此外掛可以讀取或寫入你的磁碟上的檔案，包含敏感資訊。它也可以呼叫其他可能破壞電腦的程式或軟體。請確定你有驗證此外掛的來源。";
 
 "plugin.install" = "安裝";
 "plugin.installed" = "已安裝";
 "plugin.not_installed" = "尚未安裝";
-"plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occured during the installation: %@";
+"plugin.local" = "已安裝於本機";
+"alert.plugin.install_error" = "安裝時發生錯誤：%@";
 "alert.invalid_url" = "無效的 URL。";
 "plugin.install_error.invalid_url" = "無效的 URL。";
-"plugin.install_error.file_not_found" = "Cannot find the package file.";
+"plugin.install_error.file_not_found" = "無法找到套件檔案。";
 "plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
+"plugin.install_error.cannot_load" = "IINA 無法載入此外掛程式，可能使用了錯誤的格式。";
 "plugin.check_for_updates" = "檢查更新";
 "plugin.updating" = "正在下載更新…";

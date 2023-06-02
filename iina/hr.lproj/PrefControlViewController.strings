@@ -14,7 +14,7 @@
 "7wy-xt-c8Z.title" = "Uključi/isključi cjeloekranski prikaz";
 
 /* Class = "NSMenuItem"; title = "Hide OSC"; ObjectID = "9qx-ao-oxE"; */
-"9qx-ao-oxE.title" = "Hide OSC";
+"9qx-ao-oxE.title" = "Sakrij kontrole";
 
 /* Class = "NSMenuItem"; title = "Pause / Resume"; ObjectID = "A8c-wa-IFR"; */
 "A8c-wa-IFR.title" = "Zaustavi/Nastavi";
@@ -26,13 +26,13 @@
 "Dm7-JG-fLd.title" = "Zaustavi/Nastavi";
 
 /* Class = "NSTextFieldCell"; title = "Pinch to:"; ObjectID = "E8H-pO-MLc"; */
-"E8H-pO-MLc.title" = "Pinch to:";
+"E8H-pO-MLc.title" = "Smanji/Povećaj prstima:";
 
 /* Class = "NSTextFieldCell"; title = "Double click to:"; ObjectID = "GPH-fM-XHN"; */
-"GPH-fM-XHN.title" = "Double click to:";
+"GPH-fM-XHN.title" = "Dvostruki pritisak tipke miša:";
 
 /* Class = "NSTextFieldCell"; title = "Middle click to:"; ObjectID = "Gyd-Qt-FEo"; */
-"Gyd-Qt-FEo.title" = "Middle click to:";
+"Gyd-Qt-FEo.title" = "Pritisak srednje tipke miša:";
 
 /* Class = "NSButtonCell"; title = "Acccepts first mouse"; ObjectID = "gZK-ry-lQs"; */
 "gZK-ry-lQs.title" = "Accepts first mouse click when not focused";
@@ -47,25 +47,25 @@
 "K9H-w9-wmT.title" = "Automatski";
 
 /* Class = "NSMenuItem"; title = "Hide OSC"; ObjectID = "M6K-ME-cve"; */
-"M6K-ME-cve.title" = "Hide OSC";
+"M6K-ME-cve.title" = "Sakrij kontrole";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "NjV-fH-YgN"; */
 "NjV-fH-YgN.title" = "Ništa";
 
 /* Class = "NSMenuItem"; title = "Hide OSC"; ObjectID = "OOM-jo-N4V"; */
-"OOM-jo-N4V.title" = "Hide OSC";
+"OOM-jo-N4V.title" = "Sakrij kontrole";
 
 /* Class = "NSMenuItem"; title = "Adjust window size"; ObjectID = "Ols-Lr-fiH"; */
 "Ols-Lr-fiH.title" = "Prilagodi veličinu prozora";
 
 /* Class = "NSTextFieldCell"; title = "Single click to:"; ObjectID = "QhO-As-ZLL"; */
-"QhO-As-ZLL.title" = "Single click to:";
+"QhO-As-ZLL.title" = "Pritisak tipke miša:";
 
 /* Class = "NSMenuItem"; title = "Seek"; ObjectID = "RCe-3m-q9N"; */
-"RCe-3m-q9N.title" = "Seek";
+"RCe-3m-q9N.title" = "Traži";
 
 /* Class = "NSTextFieldCell"; title = "Right click to:"; ObjectID = "Rqy-g2-AP2"; */
-"Rqy-g2-AP2.title" = "Right click to:";
+"Rqy-g2-AP2.title" = "Pritisak desne tipke miša:";
 
 /* Class = "NSMenuItem"; title = "Adjust volume"; ObjectID = "SYg-hW-b6r"; */
 "SYg-hW-b6r.title" = "Podesi glasnoću";
@@ -89,10 +89,10 @@
 "hDh-Lk-FJe.title" = "Uključi/isključi cjeloekranski prikaz";
 
 /* Class = "NSTextFieldCell"; title = "Scroll vertically to:"; ObjectID = "hNU-dJ-5Cj"; */
-"hNU-dJ-5Cj.title" = "Scroll vertically to:";
+"hNU-dJ-5Cj.title" = "Okomito klizanje:";
 
 /* Class = "NSMenuItem"; title = "Hide OSC"; ObjectID = "iFF-Gq-tVx"; */
-"iFF-Gq-tVx.title" = "Hide OSC";
+"iFF-Gq-tVx.title" = "Sakrij kontrole";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "jnR-2I-4x4"; */
 "jnR-2I-4x4.title" = "Ništa";
@@ -113,7 +113,7 @@
 "uqM-UM-Xvb.title" = "Zaustavi/Nastavi";
 
 /* Class = "NSTextFieldCell"; title = "Scroll horizontally to:"; ObjectID = "w1Y-jy-vNc"; */
-"w1Y-jy-vNc.title" = "Scroll horizontally to:";
+"w1Y-jy-vNc.title" = "Vodoravno klizanje:";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "w54-7I-QfW"; */
 "w54-7I-QfW.title" = "Ništa";
@@ -122,7 +122,7 @@
 "wBB-fx-Mao.title" = "Keyframe seek";
 
 /* Class = "NSMenuItem"; title = "Seek"; ObjectID = "wcS-tP-wav"; */
-"wcS-tP-wav.title" = "Seek";
+"wcS-tP-wav.title" = "Traži";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "wkV-Gq-B0T"; */
 "wkV-Gq-B0T.title" = "Ništa";

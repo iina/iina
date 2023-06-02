@@ -21,6 +21,13 @@
 "guide.basic_settings" = "Ustawienia podstawowe";
 "guide.faq" = "Najczęściej zadawane pytania (FAQ)";
 
+// Initial Window
+"initial.announcement" = "You are using a %@ version of IINA";
+"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
+"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Buforowanie… %d%%";
 "main.opening_stream" = "Otwieram strumień…";
@@ -82,8 +89,8 @@
 "osd.canceled" = "Anulowane";
 "osd.filter_added" = "Dodano filtr: %@";
 "osd.filter_removed" = "Usunięto filtr";
-"osd.file_loop" = "File Loop: %@";
-"osd.playlist_loop" = "Playlist Loop: %@";
+"osd.file_loop" = "Pętla pliku: %@";
+"osd.playlist_loop" = "Pętla listy odtwarzania: %@";
 
 "preference.title" = "Preferencje";
 "preference.general" = "Ogólne";
@@ -94,7 +101,7 @@
 "preference.control" = "Kontrola";
 "preference.keybindings" = "Skróty klawiszowe";
 "preference.advanced" = "Zaawansowane";
-"preference.plugins" = "Plugins";
+"preference.plugins" = "Wtyczki";
 "preference.utilities" = "Narzędzia";
 "preference.scripts" = "Skrypty";
 "preference.not_logged_in" = "Nie zalogowano";
@@ -107,6 +114,7 @@
 "preference.enable_adv_settings" = "Włącz ustawienia zaawansowane";
 
 "menu.volume" = "Głośność: %d";
+"menu.volume_muted" = "Volume: %d (Muted)";
 "menu.audio_delay" = "Opóźnienie audio: %.2fs";
 "menu.sub_delay" = "Opóźnienie napisów: %.2fs";
 "menu.fullscreen" = "Włącz tryb pełnoekranowy";
@@ -116,16 +124,16 @@
 "menu.pause" = "Pauza";
 "menu.resume" = "Wznów";
 "menu.speed" = "Prędkość: %.2fx";
-"menu.chapters" = "Show Chapters Panel";
-"menu.hide_chapters" = "Hide Chapters Panel";
-"menu.playlist" = "Show Playlist Panel";
-"menu.hide_playlist" = "Hide Playlist Panel";
-"menu.video" = "Show Video Panel";
-"menu.hide_video" = "Hide Video Panel";
-"menu.audio" = "Show Audio Panel";
-"menu.hide_audio" = "Hide Audio Panel";
-"menu.subtitles" = "Show Subtitles Panel";
-"menu.hide_subtitles" = "Hide Subtitles Panel";
+"menu.chapters" = "Panel rozdziałów";
+"menu.hide_chapters" = "Ukryj panel rozdziałów";
+"menu.playlist" = "Panel playlisty";
+"menu.hide_playlist" = "Ukryj panel listy odtwarzania";
+"menu.video" = "Pokaż panel wideo";
+"menu.hide_video" = "Ukryj panel wideo";
+"menu.audio" = "Pokaż panel audio";
+"menu.hide_audio" = "Ukryj panel audio";
+"menu.subtitles" = "Pokaż panel napisów";
+"menu.hide_subtitles" = "Ukryj panel napisów";
 
 "menu.seek_forward" = "Przewiń w przód o %.0fs";
 "menu.seek_backward" = "Przewiń w tył o %.0fs";
@@ -139,7 +147,7 @@
 "menu.sub_delay_down" = "Opóźnienie napisów -%.1fs";
 
 "menu.crop_custom" = "Niestandardowe...";
-"menu.find_online_sub" = "Find Online Subtitles from %@";
+"menu.find_online_sub" = "Znajdź napisy online z %@";
 
 "track.none" = "<Brak>";
 
@@ -155,7 +163,7 @@
 
 "alert.fatal_error" = "Błąd krytyczny: %@ \nAplikacja zostanie zamknięta.";
 "alert.mpv_error" = "Wystąpił wewnętrzny błąd %@ (%@) podczas ustawiania opcji %@.";
-"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
+"alert.sleep" = "Nie można zapobiec uśpieniu ekranu! (0x%0X8)";
 
 "alert.unsupported_audio" = "Nieobsługiwany zewnętrzny plik audio.";
 "alert.unsupported_sub" = "Nieobsługiwane zewnętrzne napisy.";
@@ -191,6 +199,8 @@
 "alert.extra_option.config_folder" = "Błąd podczas ustawiania ścieżki z konfiguracją \"%@\".";
 
 "alert.playlist.error_deleting" = "Błąd podczas usuwania: %@";
+
+"alert.screenshot.error_taking" = "Nie można zrobić zrzutu ekranu!";
 
 "alert.sub.no_selected" = "Proszę najpierw wybrać pobrane napisy.";
 "alert.sub_lang_not_set" = "Przed użyciem OpenSubtitles ustaw preferowany język napisów w preferencjach. Angielski(eng) zostaną tym razem użyte.";
@@ -234,8 +244,8 @@
 "alert.clear_watch_later.title" = "Wyczyść zapisane postępy odtwarzania";
 "alert.clear_watch_later.message" = "Czy na pewno chcesz usunąć wszystkie postępy odtwarzania (dane \"obejrzyj później\") ?";
 
-"alert.restore_alerts.title" = "Restore Suppressed Alerts";
-"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
+"alert.restore_alerts.title" = "Przywróć ukryte alerty";
+"alert.restore_alerts.message" = "Czy na pewno chcesz przywrócić ukryte alerty?";
 
 "alert.nothing_to_open" = "Nic do otwarcia.";
 
@@ -250,14 +260,14 @@
 "alert.assrt_token_prompt.message" = "Zarejestruj się na otwartej stronie. Następnie wygeneruj własny token na stronie domowej swojego profilu i wprowadź go poniżej:";
 "alert.assrt_token_invalid" = "Twój token Assrt API wygląda na nieprawidłowy.";
 
-"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
-"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
+"alert.plugin_uninstall.title" = "Czy na pewno chcesz odinstalować %@?";
+"alert.plugin_uninstall.message" = "Wtyczka zostanie usunięta z Twojego dysku.";
 "alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
-"alert.plugin_no_update" = "No update found.";
-"alert.plugin_update_found.title" = "Update found for %@";
-"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
-"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
-"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+"alert.plugin_no_update" = "Nie znaleziono aktualizacji.";
+"alert.plugin_update_found.title" = "Znaleziono aktualizację dla %@";
+"alert.plugin_update_found.message" = "Najnowsza wersja to %@. Masz %@. Czy chcesz zaktualizować?";
+"alert.plugin_permission" = "Ta wtyczka wymaga następujących uprawnień. Sprawdź je przed kontynuowaniem.";
+"alert.plugin_permission_added" = "Ta aktualizacja wymaga dodatkowych uprawnień. Sprawdź je przed kontynuowaniem.";
 
 "playlist.total_length" = "Całkowity czas %@";
 "playlist.total_length_with_selected" = "Zaznaczono %@ z %@";
@@ -330,28 +340,28 @@
 
 // Plugin permissions
 
-"permissions.network-request.name" = "Network Request";
-"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
-"permissions.network-request.any_site" = "Any site";
-"permissions.show-osd.name" = "Show OSD";
-"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
-"permissions.show-alert.name" = "Show Alerts";
-"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
-"permissions.video-overlay.name" = "Add overlay on videos";
-"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
-"permissions.file-system.name" = "Access the file system";
+"permissions.network-request.name" = "Żądanie sieciowe";
+"permissions.network-request.desc" = "Ta wtyczka może żądać danych lub przesłać dane na te strony:";
+"permissions.network-request.any_site" = "Dowolna strona";
+"permissions.show-osd.name" = "Pokaż OSD";
+"permissions.show-osd.desc" = "Ta wtyczka może pokazywać wiadomości OSD (na ekranie wyświetlacza).";
+"permissions.show-alert.name" = "Pokaż alerty";
+"permissions.show-alert.desc" = "Ta wtyczka może wyświetlać wyskakujące powiadomienia.";
+"permissions.video-overlay.name" = "Dodaj nakładkę na filmy";
+"permissions.video-overlay.desc" = "Ta wtyczka może renderować dodatkowe treści nałożone na film.";
+"permissions.file-system.name" = "Dostęp do systemu plików";
 "permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
 
-"plugin.install" = "Install";
-"plugin.installed" = "Installed";
-"plugin.not_installed" = "Not Installed";
-"plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occured during the installation: %@";
-"alert.invalid_url" = "The URL is invalid.";
-"plugin.install_error.invalid_url" = "The URL is invalid.";
-"plugin.install_error.file_not_found" = "Cannot find the package file.";
+"plugin.install" = "Zainstaluj";
+"plugin.installed" = "Zainstalowano";
+"plugin.not_installed" = "Nie zainstalowano";
+"plugin.local" = "Zainstalowane lokalnie";
+"alert.plugin.install_error" = "Wystąpił błąd podczas instalacji: %@";
+"alert.invalid_url" = "Adres URL jest nieprawidłowy.";
+"plugin.install_error.invalid_url" = "Adres URL jest nieprawidłowy.";
+"plugin.install_error.file_not_found" = "Nie można znaleźć pliku pakietu.";
 "plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Check for Updates";
-"plugin.updating" = "Downloading update…";
+"plugin.install_error.cannot_load" = "IINA nie może załadować tej wtyczki. Może być w złym formacie.";
+"plugin.check_for_updates" = "Sprawdź aktualizacje";
+"plugin.updating" = "Pobieranie aktualizacji…";

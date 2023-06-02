@@ -1,0 +1,116 @@
+/*
+  KeyBinding.strings
+  iina
+
+  Created by lhc on 4/2/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+"cmd.ignore" = "Ignore";
+"cmd.seek" = "Seek";
+"cmd.revert-seek" = "Revert seek";
+"cmd.set" = "Set";
+"cmd.cycle" = "Cycle";
+"cmd.cycle-values" = "Cycle in";
+"cmd.add" = "Change";
+"cmd.multiply" = "Multiply";
+"cmd.frame-step" = "Next frame";
+"cmd.frame-back-step" = "Previous frame";
+"cmd.ab-loop" = "A-B loop";
+"cmd.sub-seek" = "Subtitle seek";
+"cmd.playlist-next" = "Next media";
+"cmd.playlist-prev" = "Previous media";
+"cmd.playlist-move" = "Move playlist item";
+"cmd.playlist-clear" = "Clear playlist";
+"cmd.playlist-remove" = "Remove current";
+"cmd.playlist-shuffle" = "Shuffle";
+"cmd.write-watch-later-config" = "Record play history";
+"cmd.stop" = "Stop";
+"cmd.quit" = "Quit";
+"cmd.quit-watch-later" = "Quit (save progress)";
+"cmd.screenshot" = "Screenshot";
+"cmd.screenshot-to-file" = "Screenshot to file";
+"cmd.loadfile" = "Load file";
+"cmd.loadlist" = "Load playlist";
+"cmd.run" = "Run";
+
+"iina.flip" = "Flip";
+"iina.mirror" = "Mirror";
+
+"iina.toggle-pip" = "Toggle Picture-in-Picture";
+"iina.toggle-music-mode" = "Toggle Music Mode";
+"iina.open-file" = "Open file";
+"iina.open-url" = "Open URL";
+"iina.video-panel" = "Video panel";
+"iina.audio-panel" = "Audio panel";
+"iina.sub-panel" = "Subtitle panel";
+"iina.playlist-panel" = "Playlist panel";
+"iina.chapter-panel" = "Chapter panel";
+"iina.bigger-window" = "Bigger Window";
+"iina.smaller-window" = "Smaller Window";
+"iina.fit-to-screen" = "Fit to Screen";
+"iina.toggle-flip" = "Toggle flip";
+"iina.toggle-mirror" = "Toggle mirror";
+"iina.save-playlist" = "Save current playlist";
+"iina.delete-current-file" = "Delete current file";
+"iina.delete-current-file-hard" = "Delete current file directly without moving to trash";
+"iina.find-online-subs" = "Find online subtitles";
+"iina.save-downloaded-sub" = "Save downloaded subtitle";
+
+"yes" = "Yes";
+"no" = "No";
+"to" = "to";
+"by" = "by";
+"in" = "in";
+"add" = "increase";
+"minus" = "decrease";
+"forward" = "forward";
+"backward" = "backward";
+"seek-to" = "to";
+
+"relative" = "s";
+"absolute" = "s";
+"absolute-percent" = "%";
+"relative-percent" = "%";
+"relative+exact" = "s (exact)";
+"relative-percent+exact" = "% (exact)";
+"absolute+keyframe" = "s (keyframe)";
+"absolute-percent+keyframe" = "% (keyframe)";
+
+"opt.pause" = "Pause";
+"opt.speed" = "Speed";
+
+"opt.window-scale" = "Window scale";
+
+"opt.video" = "Video track";
+"opt.video-aspect" = "Video aspect";
+"opt.contrast" = "Contrast";
+"opt.brightness" = "Brightness";
+"opt.gamma" = "Gamma";
+"opt.saturation" = "Saturation";
+"opt.deinterlace" = "Deinterlace";
+
+"opt.audio" = "Audio track";
+"opt.volume" = "Volume";
+"opt.mute" = "Mute";
+"opt.audio-delay" = "Audio delay";
+
+"opt.sub" = "Subtitle track";
+"opt.sub-delay" = "Subtitle delay";
+"opt.sub-pos" = "Subtitle position";
+"opt.sub-scale" = "Subtitle scale";
+"opt.sub-visibility" = "Subtitle visibility";
+"opt.sub-ass-style-override" = "ASS style override";
+
+"opt.fullscreen" = "Fullscreen";
+"opt.ontop" = "Float on top";
+
+"opt.chapter" = "Chapter";
+
+"read.set" = "Set {{property}} to {{value}}";
+"read.add" = "{{property}} {{value}}";
+"read.multiply" = "Multiply {{property}} by {{factor}}x";
+"read.cycle" = "Cycle {{property}}{{#dir_down}} Downwards{{/dir_down}}";
+"read.cycle-values" = "Cycle {{property}} in ({{{values}}})";
+"read.seek" = "Seek {{#fwd}}forward{{/fwd}}{{#bwd}}backward{{/bwd}}{{#abs}}to{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";
+"read.sub-seek" = "Seek to {{#skip_1}}next{{/skip_1}}{{#skip_-1}}previous{{/skip_-1}} subtitle";

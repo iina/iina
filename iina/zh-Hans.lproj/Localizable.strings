@@ -21,6 +21,13 @@
 "guide.basic_settings" = "基本设置";
 "guide.faq" = "常见问题";
 
+// Initial Window
+"initial.announcement" = "You are using a %@ version of IINA";
+"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
+"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "缓冲中… %d%%";
 "main.opening_stream" = "正在打开流……";
@@ -107,6 +114,7 @@
 "preference.enable_adv_settings" = "启用高级设置";
 
 "menu.volume" = "音量: %d";
+"menu.volume_muted" = "音量：%d （缄默）";
 "menu.audio_delay" = "音频延迟: %.2f秒";
 "menu.sub_delay" = "字幕延迟: %.2f秒";
 "menu.fullscreen" = "进入全屏";
@@ -191,6 +199,8 @@
 "alert.extra_option.config_folder" = "设置配置文件目录 \"%@\" 时出错。";
 
 "alert.playlist.error_deleting" = "删除 %@ 时出错。";
+
+"alert.screenshot.error_taking" = "无法截图！";
 
 "alert.sub.no_selected" = "请先选择一个已下载字幕。";
 "alert.sub_lang_not_set" = "请在使用 opensubtitles 之前设定字幕语言. 此次将会使用英语 (eng) 。\n\n0.0.7 之后默认的字幕来源将会是 opensubtitles。如果您是中文用户，请在「偏好设置 > 字幕」中确认「字幕来源」为「shooter.cn」，以继续使用射手字幕。";

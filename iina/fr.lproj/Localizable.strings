@@ -21,6 +21,13 @@
 "guide.basic_settings" = "Réglages de base";
 "guide.faq" = "Questions fréquemment posées";
 
+// Initial Window
+"initial.announcement" = "You are using a %@ version of IINA";
+"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
+"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Mise en mémoire tampon… %d%%";
 "main.opening_stream" = "Lancement du stream…";
@@ -107,25 +114,26 @@
 "preference.enable_adv_settings" = "Activer les paramètres avancés";
 
 "menu.volume" = "Volume : %d";
+"menu.volume_muted" = "Volume : %d (coupé)";
 "menu.audio_delay" = "Délai audio : %.2fs";
 "menu.sub_delay" = "Délai des sous-titres : %.2fs";
 "menu.fullscreen" = "Plein écran";
 "menu.exit_fullscreen" = "Quitter le mode plein écran";
 "menu.pip" = "Passer en inscrustation";
 "menu.exit_pip" = "Quitter le mode incrustation";
-"menu.pause" = "Pause";
+"menu.pause" = "Mettre en pause";
 "menu.resume" = "Lire";
 "menu.speed" = "Vitesse : %.2fx";
-"menu.chapters" = "Show Chapters Panel";
-"menu.hide_chapters" = "Hide Chapters Panel";
-"menu.playlist" = "Show Playlist Panel";
-"menu.hide_playlist" = "Hide Playlist Panel";
-"menu.video" = "Show Video Panel";
-"menu.hide_video" = "Hide Video Panel";
-"menu.audio" = "Show Audio Panel";
-"menu.hide_audio" = "Hide Audio Panel";
-"menu.subtitles" = "Show Subtitles Panel";
-"menu.hide_subtitles" = "Hide Subtitles Panel";
+"menu.chapters" = "Afficher le panneau des chapitres";
+"menu.hide_chapters" = "Masquer le panneau des chapitres";
+"menu.playlist" = "Afficher le panneau des listes de lecture";
+"menu.hide_playlist" = "Masquer le panneau des listes de lecture";
+"menu.video" = "Afficher le panneau vidéo";
+"menu.hide_video" = "Masquer le panneau vidéo";
+"menu.audio" = "Afficher le panneau audio";
+"menu.hide_audio" = "Masquer le panneau audio";
+"menu.subtitles" = "Afficher le panneau des sous-titres";
+"menu.hide_subtitles" = "Masquer le panneau des sous-titres";
 
 "menu.seek_forward" = "Reculer de %.0fs";
 "menu.seek_backward" = "Avancer de %.0fs";
@@ -191,6 +199,8 @@
 "alert.extra_option.config_folder" = "Erreur lors de la configuration du dossier de config : \"%@\".";
 
 "alert.playlist.error_deleting" = "Erreur lors de la suppression de : %@";
+
+"alert.screenshot.error_taking" = "Impossible de prendre une capture d'écran !";
 
 "alert.sub.no_selected" = "Veuillez d'abord sélectionner un sous-titre téléchargé.";
 "alert.sub_lang_not_set" = "Veuillez configurer une langue de sous-titres dans les préférences avant d'utiliser OpenSubtitles. L'anglais (eng) sera utilisé cette fois-ci.";

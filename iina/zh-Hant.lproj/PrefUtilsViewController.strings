@@ -50,16 +50,16 @@
 "kbP-VI-dmT.title" = "取消";
 
 /* Class = "NSTextFieldCell"; title = "Restore Alerts"; ObjectID = "AAD-Db-Acs"; */
-"AAD-Db-Acs.title" = "Restore Alerts";
+"AAD-Db-Acs.title" = "復原警告";
 
 /* Class = "NSButtonCell"; title = "Restore Suppressed Alerts…"; ObjectID = "XAz-xa-LVo"; */
-"XAz-xa-LVo.title" = "Restore Suppressed Alerts…";
+"XAz-xa-LVo.title" = "復原已關閉的警告⋯⋯";
 
 /* Class = "NSTextFieldCell"; title = "Restored."; ObjectID = "Wdh-me-hdC"; */
-"Wdh-me-hdC.title" = "Restored.";
+"Wdh-me-hdC.title" = "已恢復";
 
 /* Class = "NSTextFieldCell"; title = "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."; ObjectID = "F5i-KF-2SW"; */
-"F5i-KF-2SW.title" = "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox.";
+"F5i-KF-2SW.title" = "下方的按鈕將復原所有透過「不要再顯示此訊息」核取方塊關閉的警告。";
 
 /* Class = "NSTextFieldCell"; title = "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."; ObjectID = "pPC-q2-9Gh"; */
 "pPC-q2-9Gh.title" = "此按鈕將會刪除「watch later」檔案夾中的所有檔案。這些檔案包含了儲存的播放進度和播放時所套用的一些設定。";

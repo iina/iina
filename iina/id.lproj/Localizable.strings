@@ -21,6 +21,13 @@
 "guide.basic_settings" = "Setelan Dasar";
 "guide.faq" = "Pertanyaan Umum";
 
+// Initial Window
+"initial.announcement" = "You are using a %@ version of IINA";
+"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
+"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Menyangga… %d%%";
 "main.opening_stream" = "Membuka stream…";
@@ -44,314 +51,317 @@
 "osd.speed" = "Kecepatan: %.2fx";
 "osd.aspect" = "Aspek Rasio: %@";
 "osd.crop" = "Crop: %@";
-"osd.rotate" = "Rotate: %i°";
+"osd.rotate" = "Putar: %i°";
 "osd.deinterlace" = "Deinterlace: %@";
 "osd.hwdec" = "Hardware Decoding: %@";
-"osd.audio_delay.nodelay" = "Audio Delay: No Delay";
-"osd.audio_delay.later" = "Audio Delay: %.2fs Later";
-"osd.audio_delay.earlier" = "Audio Delay: %.2fs Earlier";
-"osd.sub_delay.nodelay" = "Subtitle Delay: No Delay";
-"osd.sub_delay.later" = "Subtitle Delay: %.2fs Later";
-"osd.sub_delay.earlier" = "Subtitle Delay: %.2fs Earlier";
-"osd.subtitle_pos" = "Subtitle Position: %.1f";
-"osd.mute" = "Mute";
-"osd.unmute" = "Unmute";
-"osd.screenshot" = "Screenshot Captured";
-"osd.abloop.a" = "AB-Loop: A";
-"osd.abloop.b" = "AB-Loop: B";
-"osd.abloop.clear" = "AB-Loop: Cleared";
-"osd.stop" = "Stop";
+"osd.audio_delay.nodelay" = "Penundaan Audio: Tanpa Penundaan";
+"osd.audio_delay.later" = "Penundaan Audio: %.2f dtk Lebih Akhir";
+"osd.audio_delay.earlier" = "Jeda Audio: %.2f dtk Lebih Awal";
+"osd.sub_delay.nodelay" = "Penundaan Terjemahan: Tanpa Penundaan";
+"osd.sub_delay.later" = "Penundaan Terjemahan: %.2f dtk Lebih Akhir";
+"osd.sub_delay.earlier" = "Penundaan Terjemahan: %.2f dtk Lebih Awal";
+"osd.subtitle_pos" = "Posisi Terjemahan: %.1f";
+"osd.mute" = "Bisukan";
+"osd.unmute" = "Nyalakan Suara";
+"osd.screenshot" = "Tangkapan Layar Berhasil";
+"osd.abloop.a" = "Pengulangan-AB: A";
+"osd.abloop.b" = "Pengulangan-AB: B";
+"osd.abloop.clear" = "Pengulangan-AB: Dibersihkan";
+"osd.stop" = "Berhenti";
 "osd.chapter" = "Chapter: %@";
-"osd.subtitle_scale" = "Subtitle Scale: %.2fx";
-"osd.add_to_playlist" = "Added %i Files to Playlist";
-"osd.clear_playlist" = "Cleared Playlist";
-"osd.video_eq.contrast" = "Contrast: %i";
+"osd.subtitle_scale" = "Skala Terjemahan: %.2fx";
+"osd.add_to_playlist" = "File %i Berhasil Ditambahkan ke Playlist";
+"osd.clear_playlist" = "Playlist Dibersihkan";
+"osd.video_eq.contrast" = "Kontras: %i";
 "osd.video_eq.gamma" = "Gamma: %i";
-"osd.video_eq.hue" = "Hue: %i";
-"osd.video_eq.saturation" = "Saturation: %i";
-"osd.video_eq.brightness" = "Brightness: %i";
-"osd.find_online_sub" = "Finding online subtitles…";
-"osd.find_online_sub.source" = "from";
-"osd.sub_not_found" = "No subtitles found";
-"osd.sub_found" = "%d subtitles found. Downloading…";
-"osd.sub_downloaded" = "Subtitle downloaded";
-"osd.sub_saved" = "Subtitle saved";
-"osd.network_error" = "Network error";
-"osd.file_error" = "Error reading file";
-"osd.cannot_login" = "Cannot login";
-"osd.canceled" = "Canceled";
-"osd.filter_added" = "Added Filter: %@";
-"osd.filter_removed" = "Removed Filter";
-"osd.file_loop" = "File Loop: %@";
-"osd.playlist_loop" = "Playlist Loop: %@";
+"osd.video_eq.hue" = "Warna: %i";
+"osd.video_eq.saturation" = "Saturasi: %i";
+"osd.video_eq.brightness" = "Kecerahan: %i";
+"osd.find_online_sub" = "Mencari terjemahan online…";
+"osd.find_online_sub.source" = "dari";
+"osd.sub_not_found" = "Terjemahan tidak ditemukan";
+"osd.sub_found" = "%d terjemahan ditemukan. Mengunduh…";
+"osd.sub_downloaded" = "Terjemahan berhasil terunduh";
+"osd.sub_saved" = "Terjemahan berhasil tersimpan";
+"osd.network_error" = "Jaringan bermasalah";
+"osd.file_error" = "Terjadi kesalahan saat membaca file";
+"osd.cannot_login" = "Tidak bisa masuk";
+"osd.canceled" = "Dibatalkan";
+"osd.filter_added" = "Filter berdasarkan: %@";
+"osd.filter_removed" = "Filter Terhapus";
+"osd.file_loop" = "Pengulangan File: %@";
+"osd.playlist_loop" = "Pengulangan Playlist: %@";
 
-"preference.title" = "Preferences";
-"preference.general" = "General";
-"preference.ui" = "UI";
+"preference.title" = "Preferensi";
+"preference.general" = "Umum";
+"preference.ui" = "Antarmuka";
 "preference.video_audio" = "Video/Audio";
-"preference.subtitle" = "Subtitle";
-"preference.network" = "Network";
-"preference.control" = "Control";
-"preference.keybindings" = "Key Bindings";
-"preference.advanced" = "Advanced";
-"preference.plugins" = "Plugins";
-"preference.utilities" = "Utilities";
-"preference.scripts" = "Scripts";
-"preference.not_logged_in" = "Not logged in";
-"preference.logged_in_as" = "Logged in as %@";
-"preference.system_media_control" = "Use system media control";
+"preference.subtitle" = "Terjemahan";
+"preference.network" = "Jaringan";
+"preference.control" = "Kontrol";
+"preference.keybindings" = "Pemetaan Tombol";
+"preference.advanced" = "Tingkat Lanjut";
+"preference.plugins" = "Plugin";
+"preference.utilities" = "Alat";
+"preference.scripts" = "Skrip";
+"preference.not_logged_in" = "Belum masuk";
+"preference.logged_in_as" = "Masuk sebagai %@";
+"preference.system_media_control" = "Gunakan kontrol media dari sistem";
 
-"preference.key_binding_hint_1" = "To edit key bindings in current configuration file, click \"Duplicate…\" button first to create a copy.";
-"preference.key_binding_hint_2" = "Double click a row at the right side to edit the corresponding key binding.";
+"preference.key_binding_hint_1" = "Untuk mengubah pemetaan tombol dari konfigurasi saat ini, klik tombol \"Duplikat…\" terlebih dahulu untuk membuat salinan.";
+"preference.key_binding_hint_2" = "Klik dua kali pada salah satu pilihan di kanan untuk mengedit pemetaan tombolnya.";
 
-"preference.enable_adv_settings" = "Enable advanced settings";
+"preference.enable_adv_settings" = "Aktifkan pengaturan lanjutan";
 
 "menu.volume" = "Volume: %d";
-"menu.audio_delay" = "Audio Delay: %.2fs";
-"menu.sub_delay" = "Subtitle Delay: %.2fs";
-"menu.fullscreen" = "Enter Full Screen";
-"menu.exit_fullscreen" = "Exit Full Screen";
-"menu.pip" = "Enter Picture-in-Picture";
-"menu.exit_pip" = "Exit Picture-in-Picture";
-"menu.pause" = "Pause";
-"menu.resume" = "Resume";
-"menu.speed" = "Speed: %.2fx";
-"menu.chapters" = "Show Chapters Panel";
-"menu.hide_chapters" = "Hide Chapters Panel";
-"menu.playlist" = "Show Playlist Panel";
-"menu.hide_playlist" = "Hide Playlist Panel";
-"menu.video" = "Show Video Panel";
-"menu.hide_video" = "Hide Video Panel";
-"menu.audio" = "Show Audio Panel";
-"menu.hide_audio" = "Hide Audio Panel";
-"menu.subtitles" = "Show Subtitles Panel";
-"menu.hide_subtitles" = "Hide Subtitles Panel";
+"menu.volume_muted" = "Volume: %d (Muted)";
+"menu.audio_delay" = "Penundaan Audio: %.2f dtk";
+"menu.sub_delay" = "Penundaan Terjemahan: %.2f dtk";
+"menu.fullscreen" = "Masuk Layar Penuh";
+"menu.exit_fullscreen" = "Keluar dari Layar Penuh";
+"menu.pip" = "Masuk Picture in Picture";
+"menu.exit_pip" = "Keluar dari Picture in Picture";
+"menu.pause" = "Jeda";
+"menu.resume" = "Lanjutkan";
+"menu.speed" = "Kecepatan: %.2fx";
+"menu.chapters" = "Lihat Panel Chapter";
+"menu.hide_chapters" = "Sembunyikan Panel Chapter";
+"menu.playlist" = "Tampilkan Panel Playlist";
+"menu.hide_playlist" = "Sembunyikan Panel Playlist";
+"menu.video" = "Tampilkan Panel Video";
+"menu.hide_video" = "Sembunyikan Panel Video";
+"menu.audio" = "Tampilkan Panel Audio";
+"menu.hide_audio" = "Sembunyikan Panel Audio";
+"menu.subtitles" = "Tampilkan Panel Terjemahan";
+"menu.hide_subtitles" = "Sembunyikan Panel Terjemahan";
 
-"menu.seek_forward" = "Step Forward %.0fs";
-"menu.seek_backward" = "Step Backward %.0fs";
-"menu.speed_up" = "Speed Up by %.1fx";
-"menu.speed_down" = "Speed Down by %.1fx";
+"menu.seek_forward" = "Majukan %.0fdtk";
+"menu.seek_backward" = "Mundurkan %.0fdtk";
+"menu.speed_up" = "Percepat %.1fx";
+"menu.speed_down" = "Perlambat %.1fx";
 "menu.volume_up" = "Volume + %.0f%%";
 "menu.volume_down" = "Volume - %.0f%%";
-"menu.audio_delay_up" = "Audio Delay + %.1fs";
-"menu.audio_delay_down" = "Audio Delay - %.1fs";
-"menu.sub_delay_up" = "Subtitle Delay + %.1fs";
-"menu.sub_delay_down" = "Subtitle Delay - %.1fs";
+"menu.audio_delay_up" = "Penundaan Audio + %.1fdtk";
+"menu.audio_delay_down" = "Penundaan Audio - %.1fdtk";
+"menu.sub_delay_up" = "Penundaan Terjemahan + %.1fdtk";
+"menu.sub_delay_down" = "Penundaan Terjemahan - %.1fdtk";
 
-"menu.crop_custom" = "Custom...";
-"menu.find_online_sub" = "Find Online Subtitles from %@";
+"menu.crop_custom" = "Kustom...";
+"menu.find_online_sub" = "Cari Terjemahan Online dari %@";
 
-"track.none" = "<None>";
+"track.none" = "<Tidak Ada>";
 
-"subtrack.no_loaded" = "No Subtitles Loaded";
-"subtrack.no_external" = "No External Subtitles Found";
+"subtrack.no_loaded" = "Tidak Ada Terjemahan Aktif";
+"subtrack.no_external" = "Terjemahan Eksternal Tidak Ditemukan";
 
 // Alerts
-"alert.beta_channel.title" = "Receive Updates for Beta Versions";
+"alert.beta_channel.title" = "Dapatkan Pembaruan untuk Versi Beta";
 
-"alert.title_error" = "Error";
-"alert.title_warning" = "Warning";
-"alert.title_info" = "Information";
+"alert.title_error" = "Eror";
+"alert.title_warning" = "Peringatan";
+"alert.title_info" = "Informasi";
 
 "alert.fatal_error" = "Fatal error: %@ \nThe application will exit now.";
-"alert.mpv_error" = "Internal error %@ (%@) when setting option %@.";
-"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
+"alert.mpv_error" = "Kesalahan internal %@ (%@) saat menerapkan opsi %@.";
+"alert.sleep" = "Tidak bisa menonaktifkan istirahat layar! (0x%0X8)";
 
-"alert.unsupported_audio" = "Unsupported external audio file.";
-"alert.unsupported_sub" = "Unsupported external subtitle.";
-"alert.unsupported_url" = "Unsupported URL.";
-"alert.wrong_url_format" = "Wrong URL format.";
+"alert.unsupported_audio" = "File audio eksternal tidak didukung.";
+"alert.unsupported_sub" = "File terjemahan eksternal tidak didukung.";
+"alert.unsupported_url" = "URL tidak didukung.";
+"alert.wrong_url_format" = "Format URL salah.";
 
-"alert.error_open" = "Cannot open file or stream!";
-"alert.error_finding_file" = "Cannot find %@ file!";
-"alert.error_loading_script" = "Cannot load script %@!";
-"alert.error_saving_file" = "Error occured when saving %@: %@";
-"alert.error_deleting_file" = "Cannot delete the file.";
+"alert.error_open" = "Tidak dapat membuka file atau tautan!";
+"alert.error_finding_file" = "File %@ tidak dapat ditemukan!";
+"alert.error_loading_script" = "Tidak dapat memuat skrip %@!";
+"alert.error_saving_file" = "Terjadi kesalahan saat menyimpan %@: %@";
+"alert.error_deleting_file" = "Tidak dapat menghapus file.";
 
-"alert.config.new.title" = "New Input Configuration";
-"alert.config.new.message" = "Please enter a name for the new configuration.";
-"alert.config.duplicate.title" = "Duplicate Configuration";
-"alert.config.duplicate.message" = "Please enter name for the duplicated configuration file.";
-"alert.config.empty_name" = "The name cannot be empty.";
-"alert.config.name_existing" = "The name already exists.";
-"alert.config.file_existing.title" = "File Already Exists";
+"alert.config.new.title" = "Konfigurasi Input Baru";
+"alert.config.new.message" = "Masukkan nama untuk konfigurasi yang baru.";
+"alert.config.duplicate.title" = "Duplikat Konfigurasi";
+"alert.config.duplicate.message" = "Masukkan nama untuk duplikasi konfigurasi.";
+"alert.config.empty_name" = "Nama tidak boleh kosong.";
+"alert.config.name_existing" = "Nama ini sudah ada.";
+"alert.config.file_existing.title" = "File Sudah Ada";
 "alert.config.file_existing.message" = "This should not happen. Choose OK to overwrite, Cancel to reveal the file in Finder.";
 "alert.config.cannot_create" = "Cannot create config file!\n%@";
-"alert.config.cannot_write" = "Cannot write to config file!";
+"alert.config.cannot_write" = "Tidak dapat menulis pada file konfig!";
 
-"alert.filter.incorrect" = "Error occured when setting filters. Please check your parameter format.";
-"alert.add_filter.title" = "New Filter";
-"alert.add_filter.message" = "Please enter a filter string in format of mpv's vf or af command.";
+"alert.filter.incorrect" = "Kesalahan terjadi saat menyetel filter. Mohon cek kembali format parameter Anda.";
+"alert.add_filter.title" = "Filter Baru";
+"alert.add_filter.message" = "Mohon isi string filter dengan format vf dari mpv atau af.";
 
-"alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
+"alert.keybinding_config.error" = "Terjadi kesalahan saat memuat file konfigurasi pemetaan tombol \"%@\"! Pemetaan tombol akan dikembalikan ke setelan bawaan IINA. Mohon periksa kembali konfigurasi Anda.";
 
-"alert.extra_option.cannot_read" = "Cannot read user defined extra mpv options.";
-"alert.extra_option.empty" = "Key or value cannot be empty!";
-"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
-"alert.extra_option.config_folder" = "Error setting config directory \"%@\".";
+"alert.extra_option.cannot_read" = "Tidak dapat membaca opsi mpv extra dari user.";
+"alert.extra_option.empty" = "Tombol atau nilai tidak boleh kosong!";
+"alert.extra_option.error" = "Kesalahan dalam menyetel opsi --%@=%@ dengan nilai %d. Mohon periksa kembali setelan opsi ekstra Anda di Preferensi > Tingkat Lanjut.";
+"alert.extra_option.config_folder" = "Kesalahan dalam menyetel direktori config \"%@\".";
 
-"alert.playlist.error_deleting" = "Error deleting: %@";
+"alert.playlist.error_deleting" = "Kesalahan saat menghapus: %@";
 
-"alert.sub.no_selected" = "Please select a downloaded subtitle first.";
-"alert.sub_lang_not_set" = "Please set preferred subtitle languages in preferences before using OpenSubtitles. English(eng) will be used this time.";
-"alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
+"alert.screenshot.error_taking" = "Tidak dapat mengambil tangkapan layar!";
+
+"alert.sub.no_selected" = "Pilih terjemahan terunduh terlebih dahulu.";
+"alert.sub_lang_not_set" = "Mohon tetapkan bahasa terjemahan yang diinginkan pada setelan sebelum menggunakan OpenSubtitles. Saat ini Bahasa Inggris(eng) akan digunakan.";
+"alert.sub.cannot_save_passwd" = "Tidak dapat menyimpan kata sandi pada Keychain: %@";
 "alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
 
-"alert.set_default.title" = "Setting IINA as Default App";
-"alert.set_default.message" = "IINA will be set as the default app for all file types it supports.";
-"alert.set_default.success" = "Finished with %d success and %d failed.";
+"alert.set_default.title" = "Tetapkan IINA sebagai Aplikasi Utama";
+"alert.set_default.message" = "IINA akan ditetapkan sebagai aplikasi utama untuk semua tipe file yang didukung.";
+"alert.set_default.success" = "Tuntas dengan kesuksesan %d dan kegagalan %d.";
 
-"alert.add_watch.title" = "Add Watch Property";
-"alert.add_watch.message" = "Please enter a valid mpv property name.";
+"alert.add_watch.title" = "Tambahkan Properti mpv";
+"alert.add_watch.message" = "Masukkan nilai properti mpv yang valid.";
 
-"alert.jump_to.title" = "Jump to";
-"alert.jump_to.message" = "Please enter the time you want to jump to. Example: 20:35";
+"alert.jump_to.title" = "Lewati ke";
+"alert.jump_to.message" = "Masukkan waktu tujuan yang ingin dilewati. Contoh: 20:35";
 
-"alert.opensub.login.title" = "OpenSubtitles Login";
-"alert.opensub.login.message" = "Please enter your username and password";
+"alert.opensub.login.title" = "Masuk ke OpenSubtitles";
+"alert.opensub.login.message" = "Masukkan nama pengguna dan kata sandi Anda";
 
-"alert.open_url.title" = "Open URL";
-"alert.open_url.message" = "Please enter the URL:";
-"alert.choose_media_file.title" = "Choose Media Files";
+"alert.open_url.title" = "Buka URL";
+"alert.open_url.message" = "Mohon masukkan URL:";
+"alert.choose_media_file.title" = "Pilih File Media";
 
-"alert.add_url.title" = "Add URL";
-"alert.add_url.message" = "Please enter the URL:";
+"alert.add_url.title" = "Tambahkan URL";
+"alert.add_url.message" = "Mohon masukkan URL:";
 
-"alert.delete_history.title" = "Delete Playback History";
-"alert.delete_history.message" = "Are you sure to delete selected entries?";
+"alert.delete_history.title" = "Hapus Riwayat Pemutaran";
+"alert.delete_history.message" = "Apakah Anda yakin untuk menghapus entri terpilih?";
 
 "alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
-"alert.filter_hwdec.abort" = "Abort";
-"alert.filter_hwdec.turn_off" = "Turn off hardware decoding";
-"alert.filter_hwdec.use_copy" = "Switch to Auto(Copy)";
+"alert.filter_hwdec.abort" = "Batalkan";
+"alert.filter_hwdec.turn_off" = "Matikan hardware decoding";
+"alert.filter_hwdec.use_copy" = "Setel ke Otomatis(Copy)";
 
-"alert.clear_cache.title" = "Clear Thumbnail Cache";
-"alert.clear_cache.message" = "Are you sure to clear all thumbnail Cache?";
+"alert.clear_cache.title" = "Bersihkan Cache Thumbnail";
+"alert.clear_cache.message" = "Apakah Anda yakin untuk menghapus semua cache thumbnail?";
 
-"alert.clear_history.title" = "Clear Playback History";
-"alert.clear_history.message" = "Are you sure to delete all playback history?";
+"alert.clear_history.title" = "Bersihkan Riwayat Pemutaran";
+"alert.clear_history.message" = "Apakah Anda yakin untuk menghapus seluruh riwayat pemutaran?";
 
-"alert.clear_watch_later.title" = "Clear Saved Playback Progress";
-"alert.clear_watch_later.message" = "Are you sure to delete all saved playback progress (\"watch later\" data)?";
+"alert.clear_watch_later.title" = "Bersihkan Progres Pemutaran yang Tersimpan";
+"alert.clear_watch_later.message" = "Apakah Anda yakin untuk membersihkan seluruh progres pemutaran yang tersimpan (data \"putar nanti\")?";
 
-"alert.restore_alerts.title" = "Restore Suppressed Alerts";
-"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
+"alert.restore_alerts.title" = "Kembalikan Pemberitahuan Senyap";
+"alert.restore_alerts.message" = "Apakah Anda yakin untuk mengembalikan pemberitahuan senyap?";
 
-"alert.nothing_to_open" = "Nothing to open.";
+"alert.nothing_to_open" = "Tidak ada yang dapat dibuka.";
 
-"alert.no_video_track" = "There is no video track.";
+"alert.no_video_track" = "Tidak ada trek video.";
 
-"alert.duplicate_config" = "You cannot edit default configurations directly. Please duplicate one before editing.";
+"alert.duplicate_config" = "Anda tidak dapat mengubah konfigurasi bawaan secara langsung. Mohon lakukan duplikasi sebelum mengeditnya.";
 
-"alert.assrt_register" = "Due to limited API quota, you are strongly recommended to use your own API token. The default token is only for demo usage, and you may encounter network error.";
-"alert.assrt_register.register" = "Register Now";
-"alert.assrt_register.try" = "Try First";
-"alert.assrt_token_prompt.title" = "Enter your API token";
-"alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
-"alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
+"alert.assrt_register" = "Sehubungan dengan terbatasnya kuota API, sangat direkomendasikan untuk menggunakan token API milik Anda sendiri. Token bawaan hanya ditujukan untuk demonstrasi, sehingga Anda mungkin bertemu dengan kesalahan jaringan.";
+"alert.assrt_register.register" = "Daftar Sekarang";
+"alert.assrt_register.try" = "Coba Dulu";
+"alert.assrt_token_prompt.title" = "Masukkan token API Anda";
+"alert.assrt_token_prompt.message" = "Mohon registrasi pada laman yang terbuka. Dapatkan token pada halaman utama user dan masukkan di bawah ini:";
+"alert.assrt_token_invalid" = "Assrt API token Anda kemungkinan tidak valid.";
 
-"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
-"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
-"alert.plugin_no_update" = "No update found.";
-"alert.plugin_update_found.title" = "Update found for %@";
-"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
-"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
-"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+"alert.plugin_uninstall.title" = "Apakah Anda yakin untuk mencabut pemasangan %@?";
+"alert.plugin_uninstall.message" = "Plugin akan dihapus dari disk Anda.";
+"alert.duplicated_plugin_id" = "Duplikasi identifikasi plugin terdeteksi. Dua plugin atau lebih memiliki identifikasi yang sama \"%@\", sehingga dapat menyebabkan aktivitas tidak normal. Mohon cari di Preferensi - Plugin dan laporkan pada pembuatnya. Ketika plugin dipasang secara lokal, Anda juga dapat mengganti identifikasinya secara manual pada file Info.json dari plugin tersebut.";
+"alert.plugin_no_update" = "Tidak ada pembaruan ditemukan.";
+"alert.plugin_update_found.title" = "Terdapat pembaruan untuk %@";
+"alert.plugin_update_found.message" = "Versi terbaru adalah %@. Anda memiliki versi %@. Apakah Anda ingin memperbarui?";
+"alert.plugin_permission" = "Plugin ini memerlukan izin berikut. Mohon dicermati sebelum melanjutkan.";
+"alert.plugin_permission_added" = "Plugin ini memerlukan izin tambahan. Mohon dicermati sebelum melanjutkan.";
 
-"playlist.total_length" = "%@ in total";
-"playlist.total_length_with_selected" = "%@ of %@ selected";
-"pl_menu.title_multi" = "%d Items";
-"pl_menu.play_next" = "Play Next";
-"pl_menu.play_in_new_window" = "Play in New Window";
-"pl_menu.remove" = "Remove";
-"pl_menu.remove_multi" = "Remove Selected";
-"pl_menu.delete" = "Move to Trash";
-"pl_menu.delete_multi" = "Move Selected Files to Trash";
-"pl_menu.delete_after_play" = "Move to Trash After Playback";
-"pl_menu.delete_after_play_multi" = "Move Selected Files to Trash After Playback";
-"pl_menu.show_in_finder" = "Show in Finder";
-"pl_menu.add_file" = "Add File…";
-"pl_menu.add_url" = "Add URL…";
-"pl_menu.clear_playlist" = "Clear Playlist";
-"pl_menu.matched_sub" = "Matched %d Subtitle(s)";
-"pl_menu.add_sub" = "Add Subtitle…";
-"pl_menu.wrong_sub" = "Wrong Subtitle!";
-"pl_menu.browser" = "Open in Browser";
-"pl_menu.copy_url" = "Copy URL";
-"pl_menu.copy_url_multi" = "Copy URLs";
+"playlist.total_length" = "Total %@";
+"playlist.total_length_with_selected" = "%@ dari %@ terpilih";
+"pl_menu.title_multi" = "%d item";
+"pl_menu.play_next" = "Putar Berikutnya";
+"pl_menu.play_in_new_window" = "Putar di Window Baru";
+"pl_menu.remove" = "Hapus";
+"pl_menu.remove_multi" = "Hapus Pilihan";
+"pl_menu.delete" = "Pindahkan ke Trash";
+"pl_menu.delete_multi" = "Pindahkan File Terpilih ke Trash";
+"pl_menu.delete_after_play" = "Pindahkan ke Trash Setelah Pemutaran";
+"pl_menu.delete_after_play_multi" = "Pindahkan File Terpilih ke Trash Setelah Pemutaran";
+"pl_menu.show_in_finder" = "Tampilkan di Finder";
+"pl_menu.add_file" = "Tambahkan file…";
+"pl_menu.add_url" = "Tambahkan URL…";
+"pl_menu.clear_playlist" = "Hapus Playlist";
+"pl_menu.matched_sub" = "%d Terjemahan yang Cocok";
+"pl_menu.add_sub" = "Tambahkan Terjemahan…";
+"pl_menu.wrong_sub" = "Terjemahan Tidak Sesuai!";
+"pl_menu.browser" = "Buka di Browser";
+"pl_menu.copy_url" = "Salin URL";
+"pl_menu.copy_url_multi" = "Salin URL";
 
-"keymapping.title" = "Key Mapping";
-"keymapping.message" = "Press any key to record.";
+"keymapping.title" = "Pemetaan Tombol";
+"keymapping.message" = "Tekan tombol apapun untuk merekam.";
 
-"filter.video_filters" = "Video Filters";
-"filter.audio_filters" = "Audio Filters";
+"filter.video_filters" = "Filter Video";
+"filter.audio_filters" = "Filter Audio";
 
-"hwdec.no" = "Disable hardware decoding.";
-"hwdec.auto" = "Enable hardware decoding. However, most of the video filters won't work properly.";
-"hwdec.auto-copy" = "Enable hardware decoding. It will consume double the memory but work with video filters.";
+"hwdec.no" = "Matikan hardware decoding.";
+"hwdec.auto" = "Aktifkan hardware decoding. Namun beberapa filter video tidak akan bekerja dengan baik.";
+"hwdec.auto-copy" = "Aktifkan hardware decoding. Filter video akan bekerja, namun memakan memori dua kali lipat dari biasanya.";
 
-"subencoding.auto" = "Auto detect";
+"subencoding.auto" = "Deteksi otomatis";
 
-"osc_toolbar.settings" = "Quick Settings";
-"osc_toolbar.playlist" = "Playlist and chapters";
-"osc_toolbar.pip" = "Toggle Picture-in-Picture";
-"osc_toolbar.full_screen" = "Toggle full screen";
-"osc_toolbar.music_mode" = "Enter music mode";
-"osc_toolbar.sub_track" = "Choose subtitle track";
+"osc_toolbar.settings" = "Pengaturan Cepat";
+"osc_toolbar.playlist" = "Playlist dan chapter";
+"osc_toolbar.pip" = "Aktif/nonaktifkan Picture-in-Picture";
+"osc_toolbar.full_screen" = "Aktif/nonaktifkan layar penuh";
+"osc_toolbar.music_mode" = "Aktifkan mode musik";
+"osc_toolbar.sub_track" = "Pilih trek terjemahan";
 
-"mini_player.album_art" = "Toggle album art";
-"mini_player.loop" = "Repeat";
-"mini_player.shuffle" = "Shuffle";
-"mini_player.remove" = "Remove from playlist";
-"mini_player.add" = "Add to playlist";
-"mini_player.delete" = "Delete all tracks from playlist";
+"mini_player.album_art" = "Aktif/nonaktifkan Album Art";
+"mini_player.loop" = "Ulangi";
+"mini_player.shuffle" = "Acak";
+"mini_player.remove" = "Hapus dari playlist";
+"mini_player.add" = "Tambahkan ke playlist";
+"mini_player.delete" = "Hapus seluruh trek dari playlist";
 "mini_player.volume" = "Volume";
-"mini_player.close" = "Close music mode";
-"mini_player.back" = "Return to video mode";
+"mini_player.close" = "Tutup mode musik";
+"mini_player.back" = "Kembali ke mode video";
 
 // Touch bar
 
-"touchbar.ahead_15" = "15sec Ahead";
-"touchbar.ahead_30" = "30sec Ahead";
-"touchbar.back_15" = "15sec Back";
-"touchbar.back_30" = "30sec Back";
-"touchbar.next_video" = "Next Video";
-"touchbar.prev_video" = "Previous Video";
+"touchbar.ahead_15" = "Maju 15dtk";
+"touchbar.ahead_30" = "Maju 30dtk";
+"touchbar.back_15" = "Mundur 15dtk";
+"touchbar.back_30" = "Mundur 30dtk";
+"touchbar.next_video" = "Video Selanjutnya";
+"touchbar.prev_video" = "Video Sebelumnya";
 "touchbar.increase_volume" = "Volume +";
 "touchbar.decrease_volume" = "Volume -";
-"touchbar.rewind" = "Rewind";
-"touchbar.fast_forward" = "Fast Forward";
-"touchbar.play_pause" = "Play / Pause";
-"touchbar.seek" = "Seek";
-"touchbar.time" = "Time Position";
-"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
-"touchbar.toggle_pip" = "Toggle Picture-in-Picture";
+"touchbar.rewind" = "Putar balik";
+"touchbar.fast_forward" = "Percepat-maju";
+"touchbar.play_pause" = "Putar / Jeda";
+"touchbar.seek" = "Geser";
+"touchbar.time" = "Posisi Waktu";
+"touchbar.remainingTimeOrTotalDuration" = "Sisa Waktu / Total Durasi";
+"touchbar.toggle_pip" = "Aktif/nonaktifkan Picture-in-Picture";
 
 // Plugin permissions
 
-"permissions.network-request.name" = "Network Request";
-"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
-"permissions.network-request.any_site" = "Any site";
-"permissions.show-osd.name" = "Show OSD";
-"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
-"permissions.show-alert.name" = "Show Alerts";
-"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
-"permissions.video-overlay.name" = "Add overlay on videos";
-"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
-"permissions.file-system.name" = "Access the file system";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.network-request.name" = "Permintaan Jaringan";
+"permissions.network-request.desc" = "Plugin ini dapat meminta atau mengunggah data ke situs-situs berikut:";
+"permissions.network-request.any_site" = "Situs apapun";
+"permissions.show-osd.name" = "Tampilkan OSD";
+"permissions.show-osd.desc" = "Plugin ini dapat menampilkan pesan OSD (On Screen Display).";
+"permissions.show-alert.name" = "Tampilkan Peringatan";
+"permissions.show-alert.desc" = "Plugin ini dapat menampilkan peringatan pop-up.";
+"permissions.video-overlay.name" = "Tambahkan overlay pada video";
+"permissions.video-overlay.desc" = "Plugin ini dapat menampilkan konten tambahan di atas video.";
+"permissions.file-system.name" = "Akses sistem file";
+"permissions.file-system.desc" = "Plugin ini dapat melakukan baca-tulis file pada disk Anda, termasuk informasi sensitif. Plugin ini juga dapat mengaktifkan program atau aplikasi lain yang dapat membahayakan komputer Anda. Mohon pastikan kembali keamanan sumbernya.";
 
-"plugin.install" = "Install";
-"plugin.installed" = "Installed";
-"plugin.not_installed" = "Not Installed";
-"plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occured during the installation: %@";
-"alert.invalid_url" = "The URL is invalid.";
-"plugin.install_error.invalid_url" = "The URL is invalid.";
-"plugin.install_error.file_not_found" = "Cannot find the package file.";
+"plugin.install" = "Pasang";
+"plugin.installed" = "Terpasang";
+"plugin.not_installed" = "Tidak Terpasang";
+"plugin.local" = "Terpasang secara lokal";
+"alert.plugin.install_error" = "Terjadi kesalahan saat proses instalasi: %@";
+"alert.invalid_url" = "URL tidak valid.";
+"plugin.install_error.invalid_url" = "URL tidak valid.";
+"plugin.install_error.file_not_found" = "Tidak dapat menemukan package file.";
 "plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Check for Updates";
-"plugin.updating" = "Downloading update…";
+"plugin.install_error.cannot_load" = "IINA tidak dapat memproses plugin ini. Kemungkinan terdapat kesalahan format.";
+"plugin.check_for_updates" = "Periksa Pembaruan";
+"plugin.updating" = "Mengunduh pembaruan…";

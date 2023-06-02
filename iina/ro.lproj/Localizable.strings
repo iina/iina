@@ -21,6 +21,13 @@
 "guide.basic_settings" = "Setări de bază";
 "guide.faq" = "Întrebări adresate frecvent";
 
+// Initial Window
+"initial.announcement" = "You are using a %@ version of IINA";
+"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
+"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffering...%d%%";
 "main.opening_stream" = "Se deschide streamul…";
@@ -94,7 +101,7 @@
 "preference.control" = "Control";
 "preference.keybindings" = "Atribuiri de taste";
 "preference.advanced" = "Avansat";
-"preference.plugins" = "Plugins";
+"preference.plugins" = "Extensii";
 "preference.utilities" = "Utilități";
 "preference.scripts" = "Scripturi";
 "preference.not_logged_in" = "Nu te-ai logat";
@@ -107,6 +114,7 @@
 "preference.enable_adv_settings" = "Activează setările avansate";
 
 "menu.volume" = "Volum: %d";
+"menu.volume_muted" = "Volum: %d (Mut)";
 "menu.audio_delay" = "Întârziere audio: %.2fs";
 "menu.sub_delay" = "Întârziere subtitrare: %.2fs";
 "menu.fullscreen" = "Afișează pe ecran complet";
@@ -116,16 +124,16 @@
 "menu.pause" = "Pauză";
 "menu.resume" = "Reia";
 "menu.speed" = "Viteză: %.2fx";
-"menu.chapters" = "Show Chapters Panel";
-"menu.hide_chapters" = "Hide Chapters Panel";
-"menu.playlist" = "Show Playlist Panel";
-"menu.hide_playlist" = "Hide Playlist Panel";
-"menu.video" = "Show Video Panel";
-"menu.hide_video" = "Hide Video Panel";
-"menu.audio" = "Show Audio Panel";
-"menu.hide_audio" = "Hide Audio Panel";
-"menu.subtitles" = "Show Subtitles Panel";
-"menu.hide_subtitles" = "Hide Subtitles Panel";
+"menu.chapters" = "Afilșează panoul Capitole";
+"menu.hide_chapters" = "Ascunde panoul Capitole";
+"menu.playlist" = "Arată panoul Listă de redare";
+"menu.hide_playlist" = "Ascunde panoul Listă de Redare";
+"menu.video" = "Arată panoul Video";
+"menu.hide_video" = "Ascunde panoul Video";
+"menu.audio" = "Arată panoul Audio";
+"menu.hide_audio" = "Ascunde panoul Audio";
+"menu.subtitles" = "Arată panoul Subtitrări";
+"menu.hide_subtitles" = "Ascunde panoul Subtitrări";
 
 "menu.seek_forward" = "Sari înainte %.0fs";
 "menu.seek_backward" = "Sari înapoi %.0fs";
@@ -139,7 +147,7 @@
 "menu.sub_delay_down" = "Întârziere subitrare -%.1fs";
 
 "menu.crop_custom" = "Personalizează...";
-"menu.find_online_sub" = "Find Online Subtitles from %@";
+"menu.find_online_sub" = "Găsește subtitrări online din %@";
 
 "track.none" = "<None>";
 
@@ -155,7 +163,7 @@
 
 "alert.fatal_error" = "Eroare critică: %@ \nAplicația se va închide.";
 "alert.mpv_error" = "Eroare internă %@ (%@) la setarea opțiunii %@.";
-"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
+"alert.sleep" = "Nu se poate preveni adormirea ecranului! (0x%0X8)";
 
 "alert.unsupported_audio" = "Fișier audio extern neacceptat.";
 "alert.unsupported_sub" = "Subtitrare externă neacceptată. ";
@@ -191,6 +199,8 @@
 "alert.extra_option.config_folder" = "Eroare la setarea directorului de configurare \"%@\".";
 
 "alert.playlist.error_deleting" = "Eroare la ștergere: %@";
+
+"alert.screenshot.error_taking" = "Nu se poate face o captură de ecran!";
 
 "alert.sub.no_selected" = "Inițial, selectează o subtitrare descărcată.";
 "alert.sub_lang_not_set" = "Te rog să specifici limba subtitrării preferată înainte de a utiliza OpenSubtitles. Engleză(eng) va fi utilizată de această dată.";
@@ -234,8 +244,8 @@
 "alert.clear_watch_later.title" = "Șterge progresul de redare salvat";
 "alert.clear_watch_later.message" = "Sigur dorești să ștergi istoricul de redare salvat (incluzând „urmărește mai târziu”)?";
 
-"alert.restore_alerts.title" = "Restore Suppressed Alerts";
-"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
+"alert.restore_alerts.title" = "Restaurează alertele reprimate";
+"alert.restore_alerts.message" = "Sunteţi sigur că doriţi să restauraţi alertele reprimate?";
 
 "alert.nothing_to_open" = "Nimic de redat.";
 
@@ -250,14 +260,14 @@
 "alert.assrt_token_prompt.message" = "Înregistrează-te în pagina deschiă. Obține token-ul din pagina ta home și introdu-l mai jos:";
 "alert.assrt_token_invalid" = "Token-ul API Assrt pare să fie invalid.";
 
-"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
-"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
-"alert.plugin_no_update" = "No update found.";
-"alert.plugin_update_found.title" = "Update found for %@";
-"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
-"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
-"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+"alert.plugin_uninstall.title" = "Sunteți sigur ca doriți sa dezinstalați %@?";
+"alert.plugin_uninstall.message" = "Extensia va fi ștearsă de pe discul dvs.";
+"alert.duplicated_plugin_id" = "S-au detectat duplicate ale identificatoarelor de extensii. Două sau mai multe extensii au același identificator \"%@\". Acest lucru poate cauza comportamente anormale. Le puteți găsi în Preferințe - Extensii și le puteți raporta autorilor lor. Dacă o extensie este instalată local, puteți schimba manual identificatorul ei în fișierul Info.json al acesteia.";
+"alert.plugin_no_update" = "Nu s-a găsit nicio actualizare.";
+"alert.plugin_update_found.title" = "Actualizare găsită pentru %@";
+"alert.plugin_update_found.message" = "Ultima versiune este %@. Aveți %@. Doriți să actualizați?";
+"alert.plugin_permission" = "Această extensie necesită următoarele permisiuni. Vă rugăm să le revizuiți înainte de a continua.";
+"alert.plugin_permission_added" = "Această actualizare necesită permisiuni suplimentare. Vă rugăm să le revizuiți înainte de a continua.";
 
 "playlist.total_length" = "%@ în total";
 "playlist.total_length_with_selected" = "%@ din %@ selectat";
@@ -330,28 +340,28 @@
 
 // Plugin permissions
 
-"permissions.network-request.name" = "Network Request";
-"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
-"permissions.network-request.any_site" = "Any site";
-"permissions.show-osd.name" = "Show OSD";
-"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
-"permissions.show-alert.name" = "Show Alerts";
-"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
-"permissions.video-overlay.name" = "Add overlay on videos";
-"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
-"permissions.file-system.name" = "Access the file system";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.network-request.name" = "Solicitare rețea";
+"permissions.network-request.desc" = "Această extensie poate cere sau încărca date pe aceste site-uri:";
+"permissions.network-request.any_site" = "Orice site";
+"permissions.show-osd.name" = "Arată OSD";
+"permissions.show-osd.desc" = "Această extensie poate afișa mesajele OSD (On Screen Display).";
+"permissions.show-alert.name" = "Arată alerte";
+"permissions.show-alert.desc" = "Această extensie poate afișa alerte pop-up.";
+"permissions.video-overlay.name" = "Adaugă overlay peste video";
+"permissions.video-overlay.desc" = "Această extensie poate reda conținut suplimentar în partea de sus a videoclipului.";
+"permissions.file-system.name" = "Accesează fișiere de sistem";
+"permissions.file-system.desc" = "Această extensie poate citi sau scrie fișiere pe discul dvs., inclusiv informații sensibile. De asemenea, poate apela alte programe sau aplicații care vă pot afecta calculatorul. Deci asigurați-vă că ați verificat sursa.";
 
-"plugin.install" = "Install";
-"plugin.installed" = "Installed";
-"plugin.not_installed" = "Not Installed";
-"plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occured during the installation: %@";
-"alert.invalid_url" = "The URL is invalid.";
-"plugin.install_error.invalid_url" = "The URL is invalid.";
-"plugin.install_error.file_not_found" = "Cannot find the package file.";
+"plugin.install" = "Instalare";
+"plugin.installed" = "Instalat";
+"plugin.not_installed" = "Nu este instalat";
+"plugin.local" = "Instalat local";
+"alert.plugin.install_error" = "A apărut o eroare în timpul instalării: %@";
+"alert.invalid_url" = "URL-ul nu este valid.";
+"plugin.install_error.invalid_url" = "URL-ul nu este valid.";
+"plugin.install_error.file_not_found" = "Fișierul package nu poate fi găsit.";
 "plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Check for Updates";
-"plugin.updating" = "Downloading update…";
+"plugin.install_error.cannot_load" = "IINA nu poate încărca aceasta extensie. Ar putea fi într-un format greşit.";
+"plugin.check_for_updates" = "Verifică dacă există actualizări";
+"plugin.updating" = "Se descarcă actualizarea…";

@@ -21,6 +21,13 @@
 "guide.basic_settings" = "Configuración básica";
 "guide.faq" = "Preguntas frecuentes";
 
+// Initial Window
+"initial.announcement" = "You are using a %@ version of IINA";
+"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
+"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Cargando… %d%%";
 "main.opening_stream" = "Abrir flujo de datos";
@@ -107,6 +114,7 @@
 "preference.enable_adv_settings" = "Habilitar configuración avanzada";
 
 "menu.volume" = "Volumen: %d";
+"menu.volume_muted" = "Volumen: %d (Silenciado)";
 "menu.audio_delay" = "Retraso de audio: %.2fs";
 "menu.sub_delay" = "Retraso de subtítulos: %.2fs";
 "menu.fullscreen" = "Ver a pantalla completa";
@@ -191,6 +199,8 @@
 "alert.extra_option.config_folder" = "Error al configurar el directorio de configuración \"%@\".";
 
 "alert.playlist.error_deleting" = "Error al eliminar: %@";
+
+"alert.screenshot.error_taking" = "¡No se puede tomar una captura de pantalla!";
 
 "alert.sub.no_selected" = "Por favor, seleccione primero un subtítulo descargado.";
 "alert.sub_lang_not_set" = "Por favor, configure el idioma predeterminado de los subtítulos en las preferencias antes de usar OpenSubtitles. Inglés(eng) se utilizará esta vez.";

@@ -8,7 +8,7 @@
 "2rJ-mg-OuU.title" = "Sichern unter";
 
 /* Class = "NSMenuItem"; title = "PNG"; ObjectID = "3XO-ks-TDg"; */
-"3XO-ks-TDg.title" = "PNG";
+"3XO-ks-TDg.title" = "PNG (*.png)";
 
 /* Class = "NSButtonCell"; title = "Copy to clipboard"; ObjectID = "3gs-3w-rg6"; */
 "3gs-3w-rg6.title" = "In die Zwischenablage kopieren";
@@ -74,7 +74,7 @@
 "MlG-hl-goB.title" = "Vollbildmodus aktivieren";
 
 /* Class = "NSMenuItem"; title = "JPEG (.jpeg)"; ObjectID = "NVh-C5-b9i"; */
-"NVh-C5-b9i.title" = "JPEG (.jpeg)";
+"NVh-C5-b9i.title" = "JPEG (*.jpeg)";
 
 /* Class = "NSTextFieldCell"; title = "Destination:"; ObjectID = "PhL-vP-i7L"; */
 "PhL-vP-i7L.title" = "Speicherort:";
@@ -95,7 +95,7 @@
 "YLo-6E-tT7.title" = "Beenden, wenn keine Fenster mehr geöffnet sind";
 
 /* Class = "NSTextFieldCell"; title = "/path/to/screenshot/folder"; ObjectID = "YeH-hk-7NN"; */
-"YeH-hk-7NN.title" = "/path/to/screenshot/folder";
+"YeH-hk-7NN.title" = "~/Desktop";
 
 /* Class = "NSButtonCell"; title = "Receive beta updates"; ObjectID = "f0j-Dn-cxt"; */
 "f0j-Dn-cxt.title" = "Beta-Updates erhalten";

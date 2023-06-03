@@ -21,6 +21,13 @@
 "guide.basic_settings" = "Grundläggande inställningar";
 "guide.faq" = "Vanliga frågor (FAQ)";
 
+// Initial Window
+"initial.announcement" = "You are using a %@ version of IINA";
+"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
+"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffrar… %d%%";
 "main.opening_stream" = "Öppnar ström…";
@@ -83,7 +90,7 @@
 "osd.filter_added" = "La till filter: %@";
 "osd.filter_removed" = "Tog bort filter";
 "osd.file_loop" = "Fil-loop: %@";
-"osd.playlist_loop" = "Playlist Loop: %@";
+"osd.playlist_loop" = "Upprepning av spellistor: %@";
 
 "preference.title" = "Inställningar";
 "preference.general" = "Allmänt";
@@ -94,7 +101,7 @@
 "preference.control" = "Kontroll";
 "preference.keybindings" = "Kortkommandon";
 "preference.advanced" = "Avancerat";
-"preference.plugins" = "Plugins";
+"preference.plugins" = "Tillägg";
 "preference.utilities" = "Verktyg";
 "preference.scripts" = "Skript";
 "preference.not_logged_in" = "Ej inloggad";
@@ -107,6 +114,7 @@
 "preference.enable_adv_settings" = "Aktivera avancerade inställningar";
 
 "menu.volume" = "Volym: %d";
+"menu.volume_muted" = "Volym: %d (Tystat)";
 "menu.audio_delay" = "Ljudfördröjning: %.2fs";
 "menu.sub_delay" = "Undertextfördröjning: %.2f s";
 "menu.fullscreen" = "Gå in i helskärmsläge";
@@ -116,16 +124,16 @@
 "menu.pause" = "Pausa";
 "menu.resume" = "Fortsätt";
 "menu.speed" = "Hastighet: %.2fx";
-"menu.chapters" = "Show Chapters Panel";
-"menu.hide_chapters" = "Hide Chapters Panel";
-"menu.playlist" = "Show Playlist Panel";
-"menu.hide_playlist" = "Hide Playlist Panel";
-"menu.video" = "Show Video Panel";
-"menu.hide_video" = "Hide Video Panel";
-"menu.audio" = "Show Audio Panel";
-"menu.hide_audio" = "Hide Audio Panel";
-"menu.subtitles" = "Show Subtitles Panel";
-"menu.hide_subtitles" = "Hide Subtitles Panel";
+"menu.chapters" = "Visa kapitelpanel";
+"menu.hide_chapters" = "Dölj kapitelpanelen";
+"menu.playlist" = "Visa spellistepanel";
+"menu.hide_playlist" = "Dölj spellistepanelen";
+"menu.video" = "Visa videopanelen";
+"menu.hide_video" = "Dölj videopanelen";
+"menu.audio" = "Visa ljudpanelen";
+"menu.hide_audio" = "Dölj ljudpanelen";
+"menu.subtitles" = "Visa undertextspanelen";
+"menu.hide_subtitles" = "Dölj undertextspanelen";
 
 "menu.seek_forward" = "Gå framåt %.0f s";
 "menu.seek_backward" = "Gå bakåt %.0f s";
@@ -139,7 +147,7 @@
 "menu.sub_delay_down" = "Undertextfördröjning -%.1f s";
 
 "menu.crop_custom" = "Anpassad...";
-"menu.find_online_sub" = "Find Online Subtitles from %@";
+"menu.find_online_sub" = "Hitta undertexter online från %@";
 
 "track.none" = "<Inget>";
 
@@ -155,7 +163,7 @@
 
 "alert.fatal_error" = "Fatal error: %@ \nProgrammet avslutas nu.";
 "alert.mpv_error" = "Internt fel %@ (%@) vid inställning av alternativ %@.";
-"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
+"alert.sleep" = "Kan inte förhindra skärmens viloläge! (0x%0X8)";
 
 "alert.unsupported_audio" = "Den externa ljudfilen stöds ej.";
 "alert.unsupported_sub" = "Den externa undertexten stöds ej.";
@@ -191,6 +199,8 @@
 "alert.extra_option.config_folder" = "Fel vid inställning av konfigurationskatalog \"%@\".";
 
 "alert.playlist.error_deleting" = "Fel vid radering: %@";
+
+"alert.screenshot.error_taking" = "Kan inte ta en skärmdump!";
 
 "alert.sub.no_selected" = "Vänligen välj en nedladdad undertext först.";
 "alert.sub_lang_not_set" = "Vänligen välj föredraget undertextspråk i inställningar innan du använder OpenSubtitles. Engelska(eng) används denna gång.";
@@ -234,8 +244,8 @@
 "alert.clear_watch_later.title" = "Rensa sparade uppspelningspositioner";
 "alert.clear_watch_later.message" = "Är du säker på att du vill radera all uppspelningsinformation (\"titta senare\"-data)?";
 
-"alert.restore_alerts.title" = "Restore Suppressed Alerts";
-"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
+"alert.restore_alerts.title" = "Återställ dolda varningar";
+"alert.restore_alerts.message" = "Är du säker på att du vill återställa dolda varningar?";
 
 "alert.nothing_to_open" = "Inget att öppna.";
 
@@ -250,14 +260,14 @@
 "alert.assrt_token_prompt.message" = "Vänligen registrera dig på den öppnade webbsidan. Skaffa din token från din användarsida och ange den nedan:";
 "alert.assrt_token_invalid" = "Din Assrt API-token ser ut att vara ogiltig.";
 
-"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
-"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
-"alert.plugin_no_update" = "No update found.";
-"alert.plugin_update_found.title" = "Update found for %@";
-"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
-"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
-"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+"alert.plugin_uninstall.title" = "Vill du verkligen avinstallera %@?";
+"alert.plugin_uninstall.message" = "Tillägget kommer att tas bort från din disk.";
+"alert.duplicated_plugin_id" = "Duplicerade tilläggsidentifierare upptäcktes. Minst två tillägg har samma identifierare, \"%@\". Detta kan leda till oförväntade beteenden. Vänligen hitta dem under Inställningar - Tillägg och rapportera detta till deras skapare. Om ett tillägg är installerat lokalt kan du även manuellt ändra dess idenfierare i tilläggets Info.json-fil.";
+"alert.plugin_no_update" = "Ingen uppdatering hittades.";
+"alert.plugin_update_found.title" = "Uppdatering hittades för %@";
+"alert.plugin_update_found.message" = "Den senaste versionen är %@. Du har %@. Vill du uppdatera?";
+"alert.plugin_permission" = "Detta tillägget kräver följande behörigheter. Vänligen granska dem innan du fortsätter.";
+"alert.plugin_permission_added" = "Denna uppdateringen kräver ytterligare behörigheter. Vänligen granska dem innan du fortsätter.";
 
 "playlist.total_length" = "Totalt %@";
 "playlist.total_length_with_selected" = "%@ av %@ markerade";
@@ -330,28 +340,28 @@
 
 // Plugin permissions
 
-"permissions.network-request.name" = "Network Request";
-"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
-"permissions.network-request.any_site" = "Any site";
-"permissions.show-osd.name" = "Show OSD";
-"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
-"permissions.show-alert.name" = "Show Alerts";
-"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
+"permissions.network-request.name" = "Nätverksförfrågan";
+"permissions.network-request.desc" = "Detta tillägget kan göra förfrågan samt ladda upp data till följande webbplatser:";
+"permissions.network-request.any_site" = "Alla sidor";
+"permissions.show-osd.name" = "Visa OSD";
+"permissions.show-osd.desc" = "Detta tillägget kan visa OSD (\"On-Screen Display\")-meddelanden.";
+"permissions.show-alert.name" = "Visa Meddelanden";
+"permissions.show-alert.desc" = "Detta tillägget kan visa popup-meddelanden.";
 "permissions.video-overlay.name" = "Add overlay on videos";
-"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
-"permissions.file-system.name" = "Access the file system";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.video-overlay.desc" = "Detta tillägget kan rendera ytterligare innehåll ovanpå videon.";
+"permissions.file-system.name" = "Åtkomst till filsystemet";
+"permissions.file-system.desc" = "Detta tillägget kan läsa och skriva till filer på din hårddisk, inklusive känslig information. Det kan även anropa andra program eller applikationer som kan skada din dator. Se till att verifiera källan noggrant.";
 
-"plugin.install" = "Install";
-"plugin.installed" = "Installed";
-"plugin.not_installed" = "Not Installed";
-"plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occured during the installation: %@";
-"alert.invalid_url" = "The URL is invalid.";
-"plugin.install_error.invalid_url" = "The URL is invalid.";
-"plugin.install_error.file_not_found" = "Cannot find the package file.";
+"plugin.install" = "Installera";
+"plugin.installed" = "Installerat";
+"plugin.not_installed" = "Inte installerat";
+"plugin.local" = "Installerat lokalt";
+"alert.plugin.install_error" = "Ett fel uppstod under installationen: %@";
+"alert.invalid_url" = "URL:en är ogiltig.";
+"plugin.install_error.invalid_url" = "URL:en är ogiltig.";
+"plugin.install_error.file_not_found" = "Kan inte hitta paketfilen.";
 "plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Check for Updates";
-"plugin.updating" = "Downloading update…";
+"plugin.install_error.cannot_load" = "IINA kan inte ladda detta tillägget. Det kanske är i fel format.";
+"plugin.check_for_updates" = "Sök efter uppdateringar";
+"plugin.updating" = "Laddar ner uppdateringen…";

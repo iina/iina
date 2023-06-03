@@ -21,6 +21,13 @@
 "guide.basic_settings" = "Cài đặt cơ bản";
 "guide.faq" = "Câu hỏi Thường Gặp";
 
+// Initial Window
+"initial.announcement" = "You are using a %@ version of IINA";
+"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
+"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffering… %d%%";
 "main.opening_stream" = "Mở luồng…";
@@ -104,21 +111,22 @@
 "preference.key_binding_hint_1" = "To edit key bindings in current configuration file, click \"Duplicate…\" button first to create a copy.";
 "preference.key_binding_hint_2" = "Double click a row at the right side to edit the corresponding key binding.";
 
-"preference.enable_adv_settings" = "Enable advanced settings";
+"preference.enable_adv_settings" = "Bật cài đặt nâng cao";
 
 "menu.volume" = "Volume: %d";
+"menu.volume_muted" = "Volume: %d (Muted)";
 "menu.audio_delay" = "Audio Delay: %.2fs";
 "menu.sub_delay" = "Subtitle Delay: %.2fs";
 "menu.fullscreen" = "Enter Full Screen";
 "menu.exit_fullscreen" = "Exit Full Screen";
 "menu.pip" = "Enter Picture-in-Picture";
 "menu.exit_pip" = "Exit Picture-in-Picture";
-"menu.pause" = "Pause";
-"menu.resume" = "Resume";
-"menu.speed" = "Speed: %.2fx";
-"menu.chapters" = "Show Chapters Panel";
+"menu.pause" = "Tạm dừng";
+"menu.resume" = "Tiếp tục";
+"menu.speed" = "Tốc độ: %.2fx";
+"menu.chapters" = "Hiện bảng Chương xem";
 "menu.hide_chapters" = "Hide Chapters Panel";
-"menu.playlist" = "Show Playlist Panel";
+"menu.playlist" = "Hiện bảng Danh sách phát";
 "menu.hide_playlist" = "Hide Playlist Panel";
 "menu.video" = "Show Video Panel";
 "menu.hide_video" = "Hide Video Panel";
@@ -192,6 +200,8 @@
 
 "alert.playlist.error_deleting" = "Error deleting: %@";
 
+"alert.screenshot.error_taking" = "Cannot take a screenshot!";
+
 "alert.sub.no_selected" = "Please select a downloaded subtitle first.";
 "alert.sub_lang_not_set" = "Please set preferred subtitle languages in preferences before using OpenSubtitles. English(eng) will be used this time.";
 "alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
@@ -210,7 +220,7 @@
 "alert.opensub.login.title" = "OpenSubtitles Login";
 "alert.opensub.login.message" = "Please enter your username and password";
 
-"alert.open_url.title" = "Open URL";
+"alert.open_url.title" = "Mở liên kết URL";
 "alert.open_url.message" = "Please enter the URL:";
 "alert.choose_media_file.title" = "Choose Media Files";
 
@@ -263,14 +273,14 @@
 "playlist.total_length_with_selected" = "%@ of %@ selected";
 "pl_menu.title_multi" = "%d Items";
 "pl_menu.play_next" = "Play Next";
-"pl_menu.play_in_new_window" = "Play in New Window";
+"pl_menu.play_in_new_window" = "Phát trong cửa sổ mới";
 "pl_menu.remove" = "Remove";
 "pl_menu.remove_multi" = "Remove Selected";
 "pl_menu.delete" = "Move to Trash";
 "pl_menu.delete_multi" = "Move Selected Files to Trash";
 "pl_menu.delete_after_play" = "Move to Trash After Playback";
 "pl_menu.delete_after_play_multi" = "Move Selected Files to Trash After Playback";
-"pl_menu.show_in_finder" = "Show in Finder";
+"pl_menu.show_in_finder" = "Duyệt trong Finder";
 "pl_menu.add_file" = "Add File…";
 "pl_menu.add_url" = "Add URL…";
 "pl_menu.clear_playlist" = "Clear Playlist";
@@ -295,7 +305,7 @@
 
 "osc_toolbar.settings" = "Quick Settings";
 "osc_toolbar.playlist" = "Playlist and chapters";
-"osc_toolbar.pip" = "Toggle Picture-in-Picture";
+"osc_toolbar.pip" = "Hình trong hình";
 "osc_toolbar.full_screen" = "Toggle full screen";
 "osc_toolbar.music_mode" = "Enter music mode";
 "osc_toolbar.sub_track" = "Choose subtitle track";
@@ -306,7 +316,7 @@
 "mini_player.remove" = "Remove from playlist";
 "mini_player.add" = "Add to playlist";
 "mini_player.delete" = "Delete all tracks from playlist";
-"mini_player.volume" = "Volume";
+"mini_player.volume" = "Âm lượng";
 "mini_player.close" = "Close music mode";
 "mini_player.back" = "Return to video mode";
 
@@ -323,10 +333,10 @@
 "touchbar.rewind" = "Rewind";
 "touchbar.fast_forward" = "Fast Forward";
 "touchbar.play_pause" = "Play / Pause";
-"touchbar.seek" = "Seek";
+"touchbar.seek" = "Tìm kiếm";
 "touchbar.time" = "Time Position";
 "touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
-"touchbar.toggle_pip" = "Toggle Picture-in-Picture";
+"touchbar.toggle_pip" = "Hình trong hình";
 
 // Plugin permissions
 

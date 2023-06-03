@@ -9,47 +9,47 @@
 
 
 
-"crop" = "Crop";
-"crop.w" = "Width (default: video width)";
-"crop.h" = "Height (default: video height)";
-"crop.x" = "Origin X (default: center)";
-"crop.y" = "Origin Y (default: center)";
+"crop" = "Կտրել";
+"crop.w" = "Լայն(նախապատվություն: Վիդեո լայնություն)";
+"crop.h" = "Բարձր (նախապատվություն: Վիդեո բարձրություն)";
+"crop.x" = "Ծագում է X (նախապատվություն：կենտրոնական)";
+"crop.y" = "Ծագում է Y (նախապատվություն：կենտրոնական)";
 
-"expand" = "Expand";
-"expand.w" = "Width (default: video width)";
-"expand.h" = "Height (default: video height)";
-"expand.x" = "Origin X (default: center)";
-"expand.y" = "Origin Y (default: center)";
-"expand.aspect" = "Expands to fit an aspect (e.g: 4/3)";
-"expand.round" = "Rounds up to make divisible by this value";
+"expand" = "Ընդարձակել";
+"expand.w" = "Լայն(նախապատվություն: Վիդեո լայնություն)";
+"expand.h" = "Բարձր (նախապատվություն: Վիդեո բարձրություն)";
+"expand.x" = "Ծագում է X (նախապատվություն：կենտրոնական)";
+"expand.y" = "Ծագում է Y (նախապատվություն：կենտրոնական)";
+"expand.aspect" = "Ընդլայնեցնել հարաբերակցիության համար (օրինակ: 4/3)";
+"expand.round" = "Հավաքել մինչև այն քառակուսային արժեքի, որը կարող է բաժանվել այդ արժեքի հետ";
 
-"sharpen" = "Sharpen";
-"sharpen.msize" = "Matrix size";
-"sharpen.amount" = "Amount";
+"sharpen" = "Սրել";
+"sharpen.msize" = "Մատրիցայի չափերը";
+"sharpen.amount" = "Գումար";
 
-"blur" = "Blur";
-"blur.msize" = "Matrix size";
-"blur.amount" = "Amount";
+"blur" = "Ֆոն";
+"blur.msize" = "Մատրիցայի չափերը";
+"blur.amount" = "Գումար";
 
-"delogo" = "Delogo";
-"delogo.w" = "Width";
-"delogo.h" = "Height";
-"delogo.x" = "Origin X";
-"delogo.y" = "Origin Y";
+"delogo" = "Հեռացնել ջրանշանը";
+"delogo.w" = "Լայնություն";
+"delogo.h" = "Բարձրություն";
+"delogo.x" = "Բնօրինակը X";
+"delogo.y" = "Բնօրինակը Y";
 
-"negative" = "Negative";
+"negative" = "Բացասական";
 
-"vflip" = "Flip";
-"hflip" = "Mirror";
+"vflip" = "Շրջել";
+"hflip" = "Հայելային";
 
 "lut3d" = "3D LUT";
-"lut3d.file" = "File path (you can also drag & drop the file into the input box)";
-"lut3d.interp" = "Interpolation mode";
+"lut3d.file" = "Ֆայլի ուղին";
+"lut3d.interp" = "Կոմպլեմենտար ռեժիմ";
 
-"custom_mpv" = "Custom (mpv)";
-"custom_mpv.name" = "Filter name";
-"custom_mpv.string" = "Filter value";
+"custom_mpv" = "Անհատականացված (mpv)";
+"custom_mpv.name" = "Ֆիլտրի անուն";
+"custom_mpv.string" = "Ֆիլտրային լար";
 
-"custom_ffmpeg" = "Custom (FFmpeg)";
-"custom_ffmpeg.name" = "Filter name";
-"custom_ffmpeg.string" = "Filter value";
+"custom_ffmpeg" = "Անհատականացված (FFmpeg)";
+"custom_ffmpeg.name" = "Ֆիլտրի անուն";
+"custom_ffmpeg.string" = "Ֆիլտրային լար";

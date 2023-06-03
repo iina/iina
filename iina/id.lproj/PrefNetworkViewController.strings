@@ -5,7 +5,7 @@
 "0yu-5Q-363.title" = "Ukuran cache bawaan (KB):";
 
 /* Class = "NSTextFieldCell"; title = "Custom youtube-dl path:"; ObjectID = "2qf-cC-Lfi"; */
-"2qf-cC-Lfi.title" = "Custom youtube-dl path:";
+"2qf-cC-Lfi.title" = "Jalur kustom youtube-dl:";
 
 /* Class = "NSTextFieldCell"; title = "Default: 153600"; ObjectID = "3os-7u-lv8"; */
 "3os-7u-lv8.title" = "Bawaan: 153600";
@@ -17,7 +17,7 @@
 "GBe-wd-tne.title" = "Format: <key>=<value>[,<key>=<value>[,…]]";
 
 /* Class = "NSTextFieldCell"; title = "Seconds to prefetch:"; ObjectID = "J96-32-M9A"; */
-"J96-32-M9A.title" = "Seconds to prefetch:";
+"J96-32-M9A.title" = "Detik untuk memuat:";
 
 /* Class = "NSTextFieldCell"; title = "Cache:"; ObjectID = "LNk-io-MM7"; */
 "LNk-io-MM7.title" = "Cache:";
@@ -35,13 +35,13 @@
 "cyH-Md-FAD.title" = "Aktifkan youtube-dl";
 
 /* Class = "NSTextFieldCell"; title = "Cache buffer size (KB):"; ObjectID = "dDD-g3-54w"; */
-"dDD-g3-54w.title" = "Cache buffer size (KB):";
+"dDD-g3-54w.title" = "Ukuran buffer cache (KB):";
 
 /* Class = "NSTextFieldCell"; title = "User agent:"; ObjectID = "eN6-Sk-kUa"; */
 "eN6-Sk-kUa.title" = "Agen pengguna:";
 
 /* Class = "NSTextFieldCell"; title = "Default: 36000"; ObjectID = "fab-7d-mMQ"; */
-"fab-7d-mMQ.title" = "Default: 36000";
+"fab-7d-mMQ.title" = "Bawaan: 36000";
 
 /* Class = "NSButtonCell"; title = "Enable cache"; ObjectID = "fpV-al-bn7"; */
 "fpV-al-bn7.title" = "Aktifkan cache";

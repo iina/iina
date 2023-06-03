@@ -5,15 +5,15 @@
 "7ml-VU-xWv.title" = "Aktiviraj napredne postavke";
 
 /* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "E3I-Q7-9t1"; */
-"E3I-Q7-9t1.headerCell.title" = "Name";
+"E3I-Q7-9t1.headerCell.title" = "Ime";
 
 /* Class = "NSTextFieldCell"; title = "The following settings will require restarting IINA to take effect."; ObjectID = "HMa-Vz-EUk"; */
-"HMa-Vz-EUk.title" = "The following settings will require restarting IINA to take effect.";
+"HMa-Vz-EUk.title" = "Sljedeće postavke zahtijevaju ponovno pokretanje IINA-e kako bi stupile na snagu.";
 
 /* Class = "NSButtonCell"; title = "Open log directory"; ObjectID = "JDA-g3-RNX"; */
 "JDA-g3-RNX.title" = "Otvori mapa dnevnika";
 
-/* Class = "NSButtonCell"; title = "Enable logging"; ObjectID = "LCd-uY-Yze"; */
+/* Class = "NSButtonCell"; title = "Enable logging to file"; ObjectID = "LCd-uY-Yze"; */
 "LCd-uY-Yze.title" = "Omogući dnevnika";
 
 /* Class = "NSButtonCell"; title = "Choose directory…"; ObjectID = "MRT-u8-xTX"; */
@@ -23,10 +23,10 @@
 "Qmc-Tb-d7d.title" = "Postavke";
 
 /* Class = "NSTableColumn"; headerCell.title = "Value"; ObjectID = "SX9-fy-bss"; */
-"SX9-fy-bss.headerCell.title" = "Value";
+"SX9-fy-bss.headerCell.title" = "Vrijednost";
 
 /* Class = "NSButtonCell"; title = "Use config directory:"; ObjectID = "ehL-8Y-G8h"; */
-"ehL-8Y-G8h.title" = "Use config directory:";
+"ehL-8Y-G8h.title" = "Koristi mapu konfguracije:";
 
 /* Class = "NSButtonCell"; title = "Use mpv's OSD"; ObjectID = "phK-g9-Vbg"; */
 "phK-g9-Vbg.title" = "Koristi mpv-ov zaslon";

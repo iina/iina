@@ -1,8 +1,8 @@
 /* Class = "NSMenuItem"; title = "Show open file panel"; ObjectID = "1ce-4b-kgG"; */
-"1ce-4b-kgG.title" = "Show open file panel";
+"1ce-4b-kgG.title" = "Prikaži ploču za otvaranje datoteka";
 
 /* Class = "NSButtonCell"; title = "Keep window open after playback finishes"; ObjectID = "2iM-j7-AzQ"; */
-"2iM-j7-AzQ.title" = "Keep window open after playback finishes";
+"2iM-j7-AzQ.title" = "Ostavi prozor otvoren nakon završetka reprodukcije";
 
 /* Class = "NSButtonCell"; title = "Save to"; ObjectID = "2rJ-mg-OuU"; */
 "2rJ-mg-OuU.title" = "Spremi u";
@@ -29,7 +29,7 @@
 "6TV-DG-503.title" = "Popis za reprodukciju:";
 
 /* Class = "NSTextFieldCell"; title = "Requires restarting IINA to take effect."; ObjectID = "8kU-8g-VgX"; */
-"8kU-8g-VgX.title" = "Requires restarting IINA to take effect.";
+"8kU-8g-VgX.title" = "Za primjenu se IINA mora ponovo pokrenuti.";
 
 /* Class = "NSButtonCell"; title = "Only in \"music mode\""; ObjectID = "AVe-9Z-RgQ"; */
 "AVe-9Z-RgQ.title" = "Samo u \"način glazbe\"";
@@ -65,13 +65,13 @@
 "KfL-r7-Uav.title" = "Switch to \"music mode\" automatically when playing an audio file";
 
 /* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
-"Lac-Ol-g6E.title" = "Play next item automatically";
+"Lac-Ol-g6E.title" = "Automatski reprodukciraj sljedeći medij";
 
 /* Class = "NSButtonCell"; title = "Always open media in new window"; ObjectID = "M0z-bI-88d"; */
-"M0z-bI-88d.title" = "Always open media in new window";
+"M0z-bI-88d.title" = "Uvijek otvori medije u novom prozoru";
 
 /* Class = "NSButtonCell"; title = "Enter fullscreen"; ObjectID = "MlG-hl-goB"; */
-"MlG-hl-goB.title" = "Enter fullscreen";
+"MlG-hl-goB.title" = "Pokreni cjeloekranski prikaz";
 
 /* Class = "NSMenuItem"; title = "JPEG (.jpeg)"; ObjectID = "NVh-C5-b9i"; */
 "NVh-C5-b9i.title" = "JPEG (.jpeg)";
@@ -80,7 +80,7 @@
 "PhL-vP-i7L.title" = "Odredište:";
 
 /* Class = "NSButtonCell"; title = "Add files in the same folder automatically"; ObjectID = "QJq-fO-hhK"; */
-"QJq-fO-hhK.title" = "Add files in the same folder automatically";
+"QJq-fO-hhK.title" = "Dodaj datoteke u istu mapu automatski";
 
 /* Class = "NSMenuItem"; title = "Monthly"; ObjectID = "REP-70-XOi"; */
 "REP-70-XOi.title" = "Mjesečno";
@@ -101,7 +101,7 @@
 "f0j-Dn-cxt.title" = "Podrška za beta inačice";
 
 /* Class = "NSButtonCell"; title = "Pause upon leaving full screen"; ObjectID = "g2A-Kf-vct"; */
-"g2A-Kf-vct.title" = "Pause upon leaving full screen";
+"g2A-Kf-vct.title" = "Zaustavi pri prekidu cjeloekranskog prikaza";
 
 /* Class = "NSTextFieldCell"; title = "At launch:"; ObjectID = "gqT-CB-Puw"; */
 "gqT-CB-Puw.title" = "Kada se otvori:";
@@ -125,10 +125,10 @@
 "kBI-Th-bBV.title" = "Prikaži pjevač i ime staze zvučni datoteka ako su dostupne";
 
 /* Class = "NSButtonCell"; title = "Play upon entering full screen"; ObjectID = "lOw-pu-Llm"; */
-"lOw-pu-Llm.title" = "Play upon entering full screen";
+"lOw-pu-Llm.title" = "Pokreni pri pokretanju cjeloekranskog prikaza";
 
 /* Class = "NSButtonCell"; title = "Include subtitles"; ObjectID = "lvA-Rc-Sh6"; */
-"lvA-Rc-Sh6.title" = "Include subtitles";
+"lvA-Rc-Sh6.title" = "Uključi titlove";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "oJY-Iz-3sO"; */
 "oJY-Iz-3sO.title" = "Format:";
@@ -143,10 +143,10 @@
 "tmy-ty-8uK.title" = "JPEG (.jpg)";
 
 /* Class = "NSTextFieldCell"; title = "Behavior:"; ObjectID = "uQR-Fx-oEm"; */
-"uQR-Fx-oEm.title" = "Behavior:";
+"uQR-Fx-oEm.title" = "Ponašanjе:";
 
 /* Class = "NSButtonCell"; title = "Show previews after taking screenshots"; ObjectID = "xE7-Uu-19f"; */
-"xE7-Uu-19f.title" = "Show previews after taking screenshots";
+"xE7-Uu-19f.title" = "Prikaži pregled nakon snimanja ekrana";
 
 /* Class = "NSTextFieldCell"; title = "Pause/resume when:"; ObjectID = "xr2-rB-O0x"; */
 "xr2-rB-O0x.title" = "Pauziraj/nastavi kada:";

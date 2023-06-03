@@ -34,8 +34,8 @@
 "delogo" = "Hapus Logo";
 "delogo.w" = "Lebar";
 "delogo.h" = "Tinggi";
-"delogo.x" = "Origin X";
-"delogo.y" = "Origin Y";
+"delogo.x" = "Asal X";
+"delogo.y" = "Asal Y";
 
 "negative" = "Alih Negatif";
 
@@ -50,6 +50,6 @@
 "custom_mpv.name" = "Nama filter";
 "custom_mpv.string" = "Nilai filter";
 
-"custom_ffmpeg" = "Custom (FFmpeg)";
+"custom_ffmpeg" = "Kustom (FFmpeg)";
 "custom_ffmpeg.name" = "Nama filter";
 "custom_ffmpeg.string" = "Nilai filter";

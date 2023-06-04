@@ -39,7 +39,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   /** The timer for `OpenFileRepeatTime` and `application(_:openFile:)`. */
   private var openFileTimer: Timer?
 
-  private var commandLineStatus = CommandLineStatus()
+  private var commandLineStatus: CommandLineStatus!
 
   private var isTerminating = false
 
@@ -195,43 +195,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
     // handle arguments
     let arguments = ProcessInfo.processInfo.arguments.dropFirst()
-    guard arguments.count > 0 else { return }
-
-    var iinaArgs: [String] = []
-    var iinaArgFilenames: [String] = []
-    var dropNextArg = false
-
-    Logger.log("Got arguments \(arguments)")
-    for arg in arguments {
-      if dropNextArg {
-        dropNextArg = false
-        continue
-      }
-      if arg.first == "-" {
-        let indexAfterDash = arg.index(after: arg.startIndex)
-        if indexAfterDash == arg.endIndex {
-          // single '-'
-          commandLineStatus.isStdin = true
-        } else if arg[indexAfterDash] == "-" {
-          // args starting with --
-          iinaArgs.append(arg)
-        } else {
-          // args starting with -
-          dropNextArg = true
-        }
-      } else {
-        // assume args starting with nothing is a filename
-        iinaArgFilenames.append(arg)
-      }
-    }
-
-    Logger.log("IINA arguments: \(iinaArgs)")
-    Logger.log("Filenames from arguments: \(iinaArgFilenames)")
-    commandLineStatus.parseArguments(iinaArgs)
+    Logger.log("All app arguments: \(arguments)")
+    commandLineStatus = CommandLineStatus(arguments)
 
     print("IINA \(version) Build \(build)")
 
-    guard !iinaArgFilenames.isEmpty || commandLineStatus.isStdin else {
+    guard !commandLineStatus.filenames.isEmpty || commandLineStatus.isStdin else {
       print("This binary is not intended for being used as a command line tool. Please use the bundled iina-cli.")
       print("Please ignore this message if you are running in a debug environment.")
       return
@@ -239,7 +208,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
     shouldIgnoreOpenFile = true
     commandLineStatus.isCommandLine = true
-    commandLineStatus.filenames = iinaArgFilenames
   }
 
   deinit {
@@ -854,53 +822,78 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 }
 
 
-struct CommandLineStatus {
+class CommandLineStatus {
   var isCommandLine = false
   var isStdin = false
   var openSeparateWindows = false
   var enterMusicMode = false
   var enterPIP = false
   var mpvArguments: [(String, String)] = []
-  var iinaArguments: [(String, String)] = []
   var filenames: [String] = []
 
-  mutating func parseArguments(_ args: [String]) {
-    mpvArguments.removeAll()
-    iinaArguments.removeAll()
-    for arg in args {
-      let splitted = arg.dropFirst(2).split(separator: "=", maxSplits: 1)
-      let name = String(splitted[0])
-      if (name.hasPrefix("mpv-")) {
-        // mpv args
-        let strippedName = String(name.dropFirst(4))
-        if strippedName == "-" {
-          isStdin = true
-        } else if splitted.count <= 1 {
-          mpvArguments.append((strippedName, "yes"))
-        } else {
-          mpvArguments.append((strippedName, String(splitted[1])))
-        }
+  init(_ arguments: ArraySlice<String>) {
+    guard !arguments.isEmpty else { return }
+
+    for arg in arguments {
+      if arg.hasPrefix("--") {
+        parseDoubleDashedArg(arg)
+      } else if arg.hasPrefix("-") {
+        parseSingleDashedArg(arg)
       } else {
-        // other args
+        // assume arg with no starting dashes is a filename
+        filenames.append(arg)
+      }
+    }
+
+    Logger.log("Parsed command-line args: isStdin=\(isStdin) separateWindows=\(openSeparateWindows), enterMusicMode=\(enterMusicMode), enterPIP=\(enterPIP))")
+    Logger.log("Filenames from arguments: \(filenames)")
+  }
+
+  private func parseDoubleDashedArg(_ arg: String) {
+    if arg == "--" {
+      // ignore
+      return
+    }
+    let splitted = arg.dropFirst(2).split(separator: "=", maxSplits: 1)
+    let name = String(splitted[0])
+    if name.hasPrefix("mpv-") {
+      // mpv args
+      let strippedName = String(name.dropFirst(4))
+      if strippedName == "-" {
+        isStdin = true
+      } else if splitted.count <= 1 {
+        mpvArguments.append((strippedName, "yes"))
+      } else {
+        mpvArguments.append((strippedName, String(splitted[1])))
+      }
+    } else {
+      // Check for IINA args. If an arg is not recognized, assume it is an mpv arg.
+      // (The names here should match the "Usage" message in main.swift)
+      switch name {
+      case "stdin":
+        isStdin = true
+      case "separate-windows":
+        openSeparateWindows = true
+      case "music-mode":
+        enterMusicMode = true
+      case "pip":
+        enterPIP = true
+      default:
         if splitted.count <= 1 {
-          iinaArguments.append((name, "yes"))
+          mpvArguments.append((name, "yes"))
         } else {
-          iinaArguments.append((name, String(splitted[1])))
-        }
-        if name == "stdin" {
-          isStdin = true
-        }
-        if name == "separate-windows" {
-          openSeparateWindows = true
-        }
-        if name == "music-mode" {
-          enterMusicMode = true
-        }
-        if name == "pip" {
-          enterPIP = true
+          mpvArguments.append((name, String(splitted[1])))
         }
       }
     }
+  }
+
+  private func parseSingleDashedArg(_ arg: String) {
+    if arg == "-" {
+      // single '-'
+      isStdin = true
+    }
+    // else ignore all single-dashed args
   }
 
   func assignMPVArguments(to playerCore: PlayerCore) {

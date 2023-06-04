@@ -20,24 +20,24 @@
 
 #import "IINA-Swift.h"
 
-#define ERROR(msg, ...) [FFmpegLogger error:([NSString stringWithFormat:(msg), ##__VA_ARGS__])];
-#define LOG(msg, ...) [FFmpegLogger debug:([NSString stringWithFormat:(msg), ##__VA_ARGS__])];
-#define WARN(msg, ...) [FFmpegLogger warn:([NSString stringWithFormat:(msg), ##__VA_ARGS__])];
+#define LOG_DEBUG(msg, ...) [FFmpegLogger debug:([NSString stringWithFormat:(msg), ##__VA_ARGS__])];
+#define LOG_ERROR(msg, ...) [FFmpegLogger error:([NSString stringWithFormat:(msg), ##__VA_ARGS__])];
+#define LOG_WARN(msg, ...) [FFmpegLogger warn:([NSString stringWithFormat:(msg), ##__VA_ARGS__])];
 
 #define THUMB_COUNT_DEFAULT 100
 
 #define CHECK_NOTNULL(ptr,msg) if (ptr == NULL) {\
-ERROR(@"Error when getting thumbnails: %@", msg);\
+LOG_ERROR(@"Error when getting thumbnails: %@", msg);\
 return -1;\
 }
 
 #define CHECK_SUCCESS(ret,msg) if (ret < 0) {\
-ERROR(@"Error when getting thumbnails: %@ (%d)", msg, ret);\
+LOG_ERROR(@"Error when getting thumbnails: %@ (%d)", msg, ret);\
 return -1;\
 }
 
 #define CHECK(ret,msg) if (!(ret)) {\
-ERROR(@"Error when getting thumbnails: %@", msg);\
+LOG_ERROR(@"Error when getting thumbnails: %@", msg);\
 return -1;\
 }
 
@@ -138,7 +138,7 @@ return -1;\
 
   // Check whether the denominator (AVRational.den) is zero to prevent division-by-zero
   if (videoAvgFrameRate.den == 0 || av_q2d(videoAvgFrameRate) == 0) {
-    LOG(@"Avg frame rate = 0, ignore");
+    LOG_DEBUG(@"Avg frame rate = 0, ignore");
     return -1;
   }
 
@@ -156,7 +156,7 @@ return -1;\
   if (pCodecCtx->pix_fmt < 0 || pCodecCtx->pix_fmt >= AV_PIX_FMT_NB) {
     avcodec_free_context(&pCodecCtx);
     avformat_close_input(&pFormatCtx);
-    ERROR(@"Error when getting thumbnails: Pixel format is null");
+    LOG_ERROR(@"Error when getting thumbnails: Pixel format is null");
     return -1;
   }
 
@@ -290,7 +290,7 @@ return -1;\
   // Close the video file
   avformat_close_input(&pFormatCtx);
 
-  // LOG(@"Thumbnails generated.");
+  // LOG_DEBUG(@"Thumbnails generated.");
   return 0;
 }
 
@@ -355,7 +355,7 @@ return -1;\
   ret = avformat_open_input(&pFormatCtx, cFilename, NULL, NULL);
   free(cFilename);
   if (ret < 0) {
-    ERROR(@"Error when opening file %@ to obtain info: %s (%d)", file, av_err2str(ret), ret);
+    LOG_ERROR(@"Error when opening file %@ to obtain info: %s (%d)", file, av_err2str(ret), ret);
     return NULL;
   }
 
@@ -363,7 +363,7 @@ return -1;\
   if (duration <= 0) {
     ret = avformat_find_stream_info(pFormatCtx, NULL);
     if (ret < 0) {
-      ERROR(@"Error when probing %@ to obtain info: %s (%d)", file, av_err2str(ret), ret);
+      LOG_ERROR(@"Error when probing %@ to obtain info: %s (%d)", file, av_err2str(ret), ret);
       duration = -1;
     } else
       duration = pFormatCtx->duration;
@@ -383,7 +383,7 @@ return -1;\
 
 // MARK: - Decoding Image
 
-+ (NSImage *)createNSImageWithContentsOf:(nonnull NSURL *)url
++ (NSImage *)createNSImageWithContentsOfURL:(nonnull NSURL *)url
 {
   // Variables holding objects that will need to be freed.
   AVFormatContext *pFormatCtx = NULL;
@@ -398,63 +398,60 @@ return -1;\
   CGImageRef cgImage = NULL;
 
   @try {
-    char *cFilename = strdup(url.fileSystemRepresentation);
-
 #if DEBUG
-    LOG(@"Creating image with contents of file: %s", cFilename)
+    LOG_DEBUG(@"Creating image with contents of file: %s", url.fileSystemRepresentation)
 #endif
 
-    int ret = avformat_open_input(&pFormatCtx, cFilename, NULL, NULL);
-    free(cFilename);
+    int ret = avformat_open_input(&pFormatCtx, url.fileSystemRepresentation, NULL, NULL);
     if (ret < 0) {
-      ERROR(@"Error when opening file %@ to construct NSImage: %s (%d)", url, av_err2str(ret), ret);
+      LOG_ERROR(@"Error when opening file %@ to construct NSImage: %s (%d)", url, av_err2str(ret), ret);
       return NULL;
     }
 
     ret = avformat_find_stream_info(pFormatCtx, NULL);
     if (ret < 0) {
-      ERROR(@"Cannot get stream info: %s (%d)", av_err2str(ret), ret);
+      LOG_ERROR(@"Cannot get stream info: %s (%d)", av_err2str(ret), ret);
       return NULL;
     }
 
     // Expecting image files to have one video stream.
     if (pFormatCtx->nb_streams != 1) {
-      ERROR(@"Expected one stream found: %d", pFormatCtx->nb_streams);
+      LOG_ERROR(@"Expected one stream found: %d", pFormatCtx->nb_streams);
       return NULL;
     }
     const AVStream *pVideoStream = pFormatCtx->streams[0];
     const enum AVMediaType codecType = pVideoStream->codecpar->codec_type;
     if (codecType != AVMEDIA_TYPE_VIDEO) {
-      ERROR(@"Unexpected stream type: %s (%d)", av_get_media_type_string(codecType), codecType);
+      LOG_ERROR(@"Unexpected stream type: %s (%d)", av_get_media_type_string(codecType), codecType);
       return NULL;
     }
     // Expecting the number of frames to be unknown (0) or 1.
     if (pVideoStream->nb_frames > 1) {
-      ERROR(@"Expected one frame found: %lld", pVideoStream->nb_frames);
+      LOG_ERROR(@"Expected one frame found: %lld", pVideoStream->nb_frames);
       return NULL;
     }
 
     const AVCodec *pCodec = avcodec_find_decoder(pVideoStream->codecpar->codec_id);
     if (!pCodec) {
-      ERROR(@"Cannot get decoder codec: %d", pVideoStream->codecpar->codec_id);
+      LOG_ERROR(@"Cannot get decoder codec: %d", pVideoStream->codecpar->codec_id);
       return NULL;
     }
 
     // This method is only intended to be used for JPEG XL or WebP encoded images. As only these
     // formats have been tested, refuse to process other formats.
     if (pCodec->id != AV_CODEC_ID_JPEGXL && pCodec->id != AV_CODEC_ID_WEBP) {
-      ERROR(@"Unexpected encoding: %s (%d)", pCodec->name, pCodec->id);
+      LOG_ERROR(@"Unexpected encoding: %s (%d)", pCodec->name, pCodec->id);
       return NULL;
     }
 
     pCodecCtx = avcodec_alloc_context3(pCodec);
     if (!pCodecCtx) {
-      ERROR(@"Cannot alloc codec context: %s (%d)", pCodec->name, pCodec->id);
+      LOG_ERROR(@"Cannot alloc codec context: %s (%d)", pCodec->name, pCodec->id);
       return NULL;
     }
     avcodec_parameters_to_context(pCodecCtx, pVideoStream->codecpar);
     if (pCodecCtx->pix_fmt < 0 || pCodecCtx->pix_fmt >= AV_PIX_FMT_NB) {
-      ERROR(@"Invalid pixel format: %d", pCodecCtx->pix_fmt);
+      LOG_ERROR(@"Invalid pixel format: %d", pCodecCtx->pix_fmt);
       return NULL;
     }
 
@@ -476,35 +473,35 @@ return -1;\
 
     ret = avcodec_open2(pCodecCtx, pCodec, NULL);
     if (ret < 0) {
-      ERROR(@"Cannot open codec: %s (%d)", av_err2str(ret), ret);
+      LOG_ERROR(@"Cannot open codec: %s (%d)", av_err2str(ret), ret);
       return NULL;
     }
 
     packet = av_packet_alloc();
     ret = av_read_frame(pFormatCtx, packet);
     if (ret < 0) {
-      ERROR(@"Cannot read packet: %s (%d)", av_err2str(ret), ret);
+      LOG_ERROR(@"Cannot read packet: %s (%d)", av_err2str(ret), ret);
       return NULL;
     }
     if (packet->stream_index != 0) {
-      ERROR(@"Unexpected video stream: %d", packet->stream_index);
+      LOG_ERROR(@"Unexpected video stream: %d", packet->stream_index);
       return NULL;
     }
 
     pFrame = av_frame_alloc();
     if (!pFrame) {
-      ERROR(@"Cannot alloc frame");
+      LOG_ERROR(@"Cannot alloc frame");
       return NULL;
     }
 
     ret = avcodec_send_packet(pCodecCtx, packet);
     if (ret < 0) {
-      ERROR(@"Cannot send packet: %s (%d)", av_err2str(ret), ret);
+      LOG_ERROR(@"Cannot send packet: %s (%d)", av_err2str(ret), ret);
       return NULL;
     }
     ret = avcodec_receive_frame(pCodecCtx, pFrame);
     if (ret < 0) {
-      ERROR(@"Cannot receive frame: %s (%d)", av_err2str(ret), ret);
+      LOG_ERROR(@"Cannot receive frame: %s (%d)", av_err2str(ret), ret);
       return NULL;
     }
 
@@ -515,7 +512,7 @@ return -1;\
     // CGImage requires the image frame to be converted to RGBA.
     pFrameRGB = av_frame_alloc();
     if (!pFrameRGB) {
-      ERROR(@"Cannot alloc RGBA frame");
+      LOG_ERROR(@"Cannot alloc RGBA frame");
       return NULL;
     }
     pFrameRGB->width = pFrame->width;
@@ -527,7 +524,7 @@ return -1;\
       default:
         // If this message is logged then the situation needs to be investigated to determine the
         // correct conversion. Fall through and treat this as a SDR image.
-        WARN(@"Unexpected pixel format: %s (%d)", av_get_pix_fmt_name(pFrame->format),
+        LOG_WARN(@"Unexpected pixel format: %s (%d)", av_get_pix_fmt_name(pFrame->format),
              pFrame->format);
       case AV_PIX_FMT_ARGB: // WebP with screenshot-webp-lossless mpv option enabled.
       case AV_PIX_FMT_RGB24: // JPEG XL SDR video.
@@ -538,9 +535,9 @@ return -1;\
       case AV_PIX_FMT_RGB48LE: // JPEG XL HDR video.
         // Workaround missing FFmpeg 6.0 scalar capabilities. As per Apple EDR requires using 16 bit
         // floating point components in the image bit map. Therefore we want the scalar to convert
-        // the frame to the AV_PIX_FMT_RGBAF16LE pixel formation. However when that was specified
-        // the call to sws_getContext returned NULL. The scalar printed the message "rgbaf16le is
-        // not supported as output pixel format" to the console. As a workaround we convert to
+        // the frame to the AV_PIX_FMT_RGBAF16LE pixel format. However when that was specified the
+        // call to sws_getContext returned NULL. The scalar printed the message "rgbaf16le is not
+        // supported as output pixel format" to the console. As a workaround we convert to
         // AV_PIX_FMT_RGBA64LE and then convert the components to floating point.
         pFrameRGB->format = AV_PIX_FMT_RGBA64LE;
         bitmapInfo = kCGImageByteOrder16Little | kCGImageAlphaPremultipliedLast |
@@ -551,7 +548,7 @@ return -1;\
     const int size = av_image_get_buffer_size(pFrameRGB->format, pFrame->width, pFrame->height, 1);
     pFrameRGBBuffer = (uint8_t *)av_malloc(size);
     if (!pFrameRGBBuffer) {
-      ERROR(@"Cannot alloc RGBA buffer");
+      LOG_ERROR(@"Cannot alloc RGBA buffer");
       return NULL;
     }
 
@@ -559,7 +556,7 @@ return -1;\
     ret = av_image_fill_arrays(pFrameRGB->data, pFrameRGB->linesize, pFrameRGBBuffer,
         pFrameRGB->format, pFrameRGB->width, pFrameRGB->height, 1);
     if (ret < 0) {
-      ERROR(@"Cannot fill data for RGBA frame: %s (%d)", av_err2str(ret), ret);
+      LOG_ERROR(@"Cannot fill data for RGBA frame: %s (%d)", av_err2str(ret), ret);
       return NULL;
     }
 
@@ -567,7 +564,7 @@ return -1;\
     swsContext = sws_getContext(pFrame->width, pFrame->height, pFrame->format,
         pFrameRGB->width, pFrameRGB->height, pFrameRGB->format, SWS_BILINEAR, NULL, NULL, NULL);
     if (!swsContext) {
-      ERROR(@"Cannot alloc sws context");
+      LOG_ERROR(@"Cannot alloc sws context");
       return NULL;
     }
     sws_scale(swsContext, (const uint8_t* const *)pFrame->data, pFrame->linesize, 0, pFrame->height,
@@ -576,7 +573,7 @@ return -1;\
     // Obtain information about the pixel format that is needed to create the bitmap image.
     const AVPixFmtDescriptor *pixFmtDesc = av_pix_fmt_desc_get(pFrameRGB->format);
     if (!pixFmtDesc){
-      ERROR(@"Cannot get descriptor for pixel format: %s (%d)",
+      LOG_ERROR(@"Cannot get descriptor for pixel format: %s (%d)",
             av_get_pix_fmt_name(pFrameRGB->format), pFrameRGB->format);
       return NULL;
     }
@@ -609,7 +606,7 @@ return -1;\
       default:
         // If this message is logged then the situation needs to be investigated to determine the
         // correct color space. Fall through and treat this as a SDR image.
-        WARN(@"Unexpected color primaries: %s (%d)",
+        LOG_WARN(@"Unexpected color primaries: %s (%d)",
              av_color_primaries_name(pFrame->color_primaries), pFrame->color_primaries);
       case AVCOL_PRI_UNSPECIFIED:
       case AVCOL_PRI_BT709:
@@ -636,32 +633,32 @@ return -1;\
         }
     }
     if (!cgColorSpace) {
-      ERROR(@"Cannot create color space");
+      LOG_ERROR(@"Cannot create color space");
       return NULL;
     }
 
 #if DEBUG
-    LOG(@"Selected %s color space for bitmap image",
+    LOG_DEBUG(@"Selected %s color space for bitmap image",
         CFStringGetCStringPtr(CGColorSpaceCopyName(cgColorSpace), CFStringGetSystemEncoding()));
-    LOG(@"Creating bitmap image with %d bits per component and %d bytes per pixel",
+    LOG_DEBUG(@"Creating bitmap image with %d bits per component and %d bytes per pixel",
         bitsPerComponent, bytesPerPixel);
 #endif
 
     cgContext = CGBitmapContextCreate(pFrameRGB->data[0], pFrameRGB->width, pFrameRGB->height,
         bitsPerComponent, pFrameRGB->width * bytesPerPixel, cgColorSpace, bitmapInfo);
     if (!cgContext) {
-      ERROR(@"Cannot create bitmap context");
+      LOG_ERROR(@"Cannot create bitmap context");
       return NULL;
     }
     cgImage = CGBitmapContextCreateImage(cgContext);
     if (!cgImage) {
-      ERROR(@"Cannot create bitmap image");
+      LOG_ERROR(@"Cannot create bitmap image");
       return NULL;
     }
 
     NSImage *image = [[NSImage alloc] initWithCGImage:cgImage size: NSZeroSize];
     if (!image) {
-      ERROR(@"Cannot create image");
+      LOG_ERROR(@"Cannot create image");
     }
     return image;
   }
@@ -690,14 +687,14 @@ return -1;\
 + (void)logFrame:(const AVCodec *)pCodec
                 :(const AVFrame *)pFrame
 {
-  LOG(@"Decoded %s frame", pCodec->long_name);
-  LOG(@"Pixel format: %s (%d)", av_get_pix_fmt_name(pFrame->format), pFrame->format);
-  LOG(@"Color range: %s (%d)", av_color_range_name(pFrame->color_range), pFrame->color_range);
-  LOG(@"Color primaries: %s (%d)", av_color_primaries_name(pFrame->color_primaries), pFrame->color_primaries);
-  LOG(@"Color transfer: %s (%d)", av_color_transfer_name(pFrame->color_trc), pFrame->color_trc);
-  LOG(@"Color space: %s (%d)", av_color_space_name(pFrame->colorspace), pFrame->colorspace);
-  LOG(@"Width: %d", pFrame->width);
-  LOG(@"Height: %d", pFrame->height);
+  LOG_DEBUG(@"Decoded %s frame", pCodec->long_name);
+  LOG_DEBUG(@"Pixel format: %s (%d)", av_get_pix_fmt_name(pFrame->format), pFrame->format);
+  LOG_DEBUG(@"Color range: %s (%d)", av_color_range_name(pFrame->color_range), pFrame->color_range);
+  LOG_DEBUG(@"Color primaries: %s (%d)", av_color_primaries_name(pFrame->color_primaries), pFrame->color_primaries);
+  LOG_DEBUG(@"Color transfer: %s (%d)", av_color_transfer_name(pFrame->color_trc), pFrame->color_trc);
+  LOG_DEBUG(@"Color space: %s (%d)", av_color_space_name(pFrame->colorspace), pFrame->colorspace);
+  LOG_DEBUG(@"Width: %d", pFrame->width);
+  LOG_DEBUG(@"Height: %d", pFrame->height);
 }
 #endif
 

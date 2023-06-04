@@ -51,7 +51,7 @@
 /// - Parameter url: The URL identifying the image.
 /// - Returns: An initialized NSImage object or null if the method cannot create an image representation from the contents of the
 ///       specified URL.
-+ (nullable NSImage *)createNSImageWithContentsOf:(nonnull NSURL *)url;
++ (nullable NSImage *)createNSImageWithContentsOfURL:(nonnull NSURL *)url;
 
 - (void)generateThumbnailForFile:(nonnull NSString *)file
                       thumbWidth:(int)thumbWidth;

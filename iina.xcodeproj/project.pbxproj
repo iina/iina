@@ -1837,6 +1837,16 @@
 			path = Configs;
 			sourceTree = "<group>";
 		};
+		515790D52A2050EC00526DBA /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				847644091D48CC3D004F6DF5 /* MPVCommand.swift */,
+				847644071D48B413004F6DF5 /* MPVOption.swift */,
+				84F7258E1D486185000DEF1B /* MPVProperty.swift */,
+			);
+			name = Generated;
+			sourceTree = "<group>";
+		};
 		8452DD7F1D3A1F2A008A543A /* Preference */ = {
 			isa = PBXGroup;
 			children = (
@@ -2117,10 +2127,7 @@
 		84A0BAA81D2FAFCD00BC8DA1 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				847644091D48CC3D004F6DF5 /* MPVCommand.swift */,
-				847644071D48B413004F6DF5 /* MPVOption.swift */,
 				844DE1BE1D3E2B9900272589 /* MPVEvent.swift */,
-				84F7258E1D486185000DEF1B /* MPVProperty.swift */,
 				E3CB258E222799B800A62C47 /* MPVHook.swift */,
 				84EB1F041D2F5C5B004FA5A1 /* AppData.swift */,
 				84A0BA8F1D2F8D4100BC8DA1 /* IINAError.swift */,
@@ -2309,6 +2316,7 @@
 				84FF846D1D2FF698001B318A /* deps */,
 				84A0BAA21D2FAE8200BC8DA1 /* Assets */,
 				84A0BAA71D2FAF9700BC8DA1 /* Controllers */,
+				515790D52A2050EC00526DBA /* Generated */,
 				84A0BAA81D2FAFCD00BC8DA1 /* Data */,
 				845ABEAD1D4D19CF00BFB15B /* Models */,
 				847557121F405F2B0006B0FF /* Menu */,

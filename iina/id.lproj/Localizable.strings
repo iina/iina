@@ -8,7 +8,7 @@
 // Common
 
 "general.on" = "Hidup";
-"general.off" = "Matikan";
+"general.off" = "Mati";
 "general.login" = "Masuk";
 "general.logout" = "Keluar";
 "general.ok" = "OK";
@@ -22,11 +22,11 @@
 "guide.faq" = "Pertanyaan Umum";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.announcement" = "Kamu memakai IINA versi %@";
+"initial.beta.desc" = "Jika anda ingin mengembalikan ke versi rilis, hilangkan \"terima pembaruan beta\" dari Pengaturan > Umum, dan instal versi stabil dari <a href=\"https://iina.io\">situs resmi</a>.";
+"initial.nightly.desc" = "Nightly tidak disarankan untuk digunakan sebagai drive harian. Bangunan nightly saat ini tidak mendukung pembaruan otomatis. Unduh bangunan baru secara manual dari <a href=\"https://nightly.iina.io\">situs web nightly</a> kami.";
+"initial.debug.desc" = "Bangunan debug biasanya tidak dioptimalkan performanya, sehingga tidak disarankan untuk digunakan sebagai drive harian. Bangunan debug tidak mendukung pembaruan otomatis.";
+"initial.bug_report" = "Laporkan melalui <a href=\"https://github.com/iina/iina/issues\">Masalah GitHub</a>.";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Menyangga… %d%%";
@@ -55,11 +55,11 @@
 "osd.deinterlace" = "Deinterlace: %@";
 "osd.hwdec" = "Hardware Decoding: %@";
 "osd.audio_delay.nodelay" = "Penundaan Audio: Tanpa Penundaan";
-"osd.audio_delay.later" = "Penundaan Audio: %.2f dtk Lebih Akhir";
-"osd.audio_delay.earlier" = "Jeda Audio: %.2f dtk Lebih Awal";
+"osd.audio_delay.later" = "Penundaan Audio: %.2f dtk lebih cepat";
+"osd.audio_delay.earlier" = "Jeda Audio: %.2f dtk lebih lambat";
 "osd.sub_delay.nodelay" = "Penundaan Terjemahan: Tanpa Penundaan";
-"osd.sub_delay.later" = "Penundaan Terjemahan: %.2f dtk Lebih Akhir";
-"osd.sub_delay.earlier" = "Penundaan Terjemahan: %.2f dtk Lebih Awal";
+"osd.sub_delay.later" = "Penundaan Terjemahan: %.2f dtk lebih cepat";
+"osd.sub_delay.earlier" = "Penundaan Terjemahan: %.2f dtk lebih lambat";
 "osd.subtitle_pos" = "Posisi Terjemahan: %.1f";
 "osd.mute" = "Bisukan";
 "osd.unmute" = "Nyalakan Suara";
@@ -68,10 +68,10 @@
 "osd.abloop.b" = "Pengulangan-AB: B";
 "osd.abloop.clear" = "Pengulangan-AB: Dibersihkan";
 "osd.stop" = "Berhenti";
-"osd.chapter" = "Chapter: %@";
+"osd.chapter" = "Bab: %@";
 "osd.subtitle_scale" = "Skala Terjemahan: %.2fx";
-"osd.add_to_playlist" = "File %i Berhasil Ditambahkan ke Playlist";
-"osd.clear_playlist" = "Playlist Dibersihkan";
+"osd.add_to_playlist" = "Menambahkan %i file ke Daftar Putar";
+"osd.clear_playlist" = "Daftar Putar Dihapus";
 "osd.video_eq.contrast" = "Kontras: %i";
 "osd.video_eq.gamma" = "Gamma: %i";
 "osd.video_eq.hue" = "Warna: %i";
@@ -81,16 +81,16 @@
 "osd.find_online_sub.source" = "dari";
 "osd.sub_not_found" = "Terjemahan tidak ditemukan";
 "osd.sub_found" = "%d terjemahan ditemukan. Mengunduh…";
-"osd.sub_downloaded" = "Terjemahan berhasil terunduh";
-"osd.sub_saved" = "Terjemahan berhasil tersimpan";
+"osd.sub_downloaded" = "Terjemahan terunduh";
+"osd.sub_saved" = "Terjemahan tersimpan";
 "osd.network_error" = "Jaringan bermasalah";
-"osd.file_error" = "Terjadi kesalahan saat membaca file";
+"osd.file_error" = "Terjadi kesalahan membaca file";
 "osd.cannot_login" = "Tidak bisa masuk";
 "osd.canceled" = "Dibatalkan";
-"osd.filter_added" = "Filter berdasarkan: %@";
+"osd.filter_added" = "Filter yang ditambahkan: %@";
 "osd.filter_removed" = "Filter Terhapus";
 "osd.file_loop" = "Pengulangan File: %@";
-"osd.playlist_loop" = "Pengulangan Playlist: %@";
+"osd.playlist_loop" = "Pengulangan Daftar Putar: %@";
 
 "preference.title" = "Preferensi";
 "preference.general" = "Umum";
@@ -106,21 +106,21 @@
 "preference.scripts" = "Skrip";
 "preference.not_logged_in" = "Belum masuk";
 "preference.logged_in_as" = "Masuk sebagai %@";
-"preference.system_media_control" = "Gunakan kontrol media dari sistem";
+"preference.system_media_control" = "Gunakan sistem kontrol media";
 
 "preference.key_binding_hint_1" = "Untuk mengubah pemetaan tombol dari konfigurasi saat ini, klik tombol \"Duplikat…\" terlebih dahulu untuk membuat salinan.";
-"preference.key_binding_hint_2" = "Klik dua kali pada salah satu pilihan di kanan untuk mengedit pemetaan tombolnya.";
+"preference.key_binding_hint_2" = "Klik dua kali baris di sisi kanan untuk mengedit pemetaan tombol yang sesuai.";
 
 "preference.enable_adv_settings" = "Aktifkan pengaturan lanjutan";
 
 "menu.volume" = "Volume: %d";
-"menu.volume_muted" = "Volume: %d (Muted)";
+"menu.volume_muted" = "Volume: %d (Dimatikan)";
 "menu.audio_delay" = "Penundaan Audio: %.2f dtk";
 "menu.sub_delay" = "Penundaan Terjemahan: %.2f dtk";
 "menu.fullscreen" = "Masuk Layar Penuh";
 "menu.exit_fullscreen" = "Keluar dari Layar Penuh";
-"menu.pip" = "Masuk Picture in Picture";
-"menu.exit_pip" = "Keluar dari Picture in Picture";
+"menu.pip" = "Masuk Picture-in-Picture";
+"menu.exit_pip" = "Keluar dari Picture-in-Picture";
 "menu.pause" = "Jeda";
 "menu.resume" = "Lanjutkan";
 "menu.speed" = "Kecepatan: %.2fx";
@@ -161,7 +161,7 @@
 "alert.title_warning" = "Peringatan";
 "alert.title_info" = "Informasi";
 
-"alert.fatal_error" = "Fatal error: %@ \nThe application will exit now.";
+"alert.fatal_error" = "Kesalahan fatal: %@ \nAplikasi akan ditutup sekarang.";
 "alert.mpv_error" = "Kesalahan internal %@ (%@) saat menerapkan opsi %@.";
 "alert.sleep" = "Tidak bisa menonaktifkan istirahat layar! (0x%0X8)";
 
@@ -184,7 +184,7 @@
 "alert.config.name_existing" = "Nama ini sudah ada.";
 "alert.config.file_existing.title" = "File Sudah Ada";
 "alert.config.file_existing.message" = "This should not happen. Choose OK to overwrite, Cancel to reveal the file in Finder.";
-"alert.config.cannot_create" = "Cannot create config file!\n%@";
+"alert.config.cannot_create" = "Tidak dapat membuat file konfigurasi!\n%@";
 "alert.config.cannot_write" = "Tidak dapat menulis pada file konfig!";
 
 "alert.filter.incorrect" = "Kesalahan terjadi saat menyetel filter. Mohon cek kembali format parameter Anda.";
@@ -205,7 +205,7 @@
 "alert.sub.no_selected" = "Pilih terjemahan terunduh terlebih dahulu.";
 "alert.sub_lang_not_set" = "Mohon tetapkan bahasa terjemahan yang diinginkan pada setelan sebelum menggunakan OpenSubtitles. Saat ini Bahasa Inggris(eng) akan digunakan.";
 "alert.sub.cannot_save_passwd" = "Tidak dapat menyimpan kata sandi pada Keychain: %@";
-"alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
+"alert.sub.cannot_login" = "Tidak bisa masuk. Harap periksa nama pengguna, kata sandi, dan status jaringan Anda.\n\n%@";
 
 "alert.set_default.title" = "Tetapkan IINA sebagai Aplikasi Utama";
 "alert.set_default.message" = "IINA akan ditetapkan sebagai aplikasi utama untuk semua tipe file yang didukung.";
@@ -230,7 +230,7 @@
 "alert.delete_history.title" = "Hapus Riwayat Pemutaran";
 "alert.delete_history.message" = "Apakah Anda yakin untuk menghapus entri terpilih?";
 
-"alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
+"alert.filter_hwdec.message" = "Anda akan menerapkan filter video. Namun, dekoder perangkat keras Anda saat ini mungkin tidak mendukung filter video dengan baik. Anda dapat menonaktifkan dekoding perangkat keras atau beralih ke Otomatis(Copy), yang akan menghabiskan dua kali memori.\nAnda mungkin perlu mengulangi operasi sebelumnya (seperti menyetel potongan) untuk membuatnya berfungsi.";
 "alert.filter_hwdec.abort" = "Batalkan";
 "alert.filter_hwdec.turn_off" = "Matikan hardware decoding";
 "alert.filter_hwdec.use_copy" = "Setel ke Otomatis(Copy)";
@@ -360,8 +360,8 @@
 "alert.invalid_url" = "URL tidak valid.";
 "plugin.install_error.invalid_url" = "URL tidak valid.";
 "plugin.install_error.file_not_found" = "Tidak dapat menemukan package file.";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_download" = "Gagal mengunduh plugin.\n\nHasil:%@\n";
+"plugin.install_error.cannot_unpackage" = "Gagal membongkar plugin.\n\nHasil:%@\n";
 "plugin.install_error.cannot_load" = "IINA tidak dapat memproses plugin ini. Kemungkinan terdapat kesalahan format.";
 "plugin.check_for_updates" = "Periksa Pembaruan";
 "plugin.updating" = "Mengunduh pembaruan…";

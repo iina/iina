@@ -149,6 +149,8 @@ class MainWindowController: PlayerWindowController {
 
   var lastMagnification: CGFloat = 0.0
 
+  var denyNextWindowResize = false
+
   /** Views that will show/hide when cursor moving in/out the window. */
   var fadeableViews: [NSView] = []
 
@@ -692,7 +694,8 @@ class MainWindowController: PlayerWindowController {
 
 
   private func addVideoViewToWindow() {
-    guard let cv = window?.contentView else { return }
+    guard let window = window,
+          let cv = window.contentView else { return }
     cv.addSubview(videoView, positioned: .below, relativeTo: nil)
     videoView.translatesAutoresizingMaskIntoConstraints = false
     // add constraints
@@ -1559,9 +1562,17 @@ class MainWindowController: PlayerWindowController {
 
   // MARK: - Window delegate: Size
 
-  func windowWillResize(_ sender: NSWindow, to frameSize: NSSize) -> NSSize {
-    guard let window = window else { return frameSize }
+  func windowWillResize(_ window: NSWindow, to frameSize: NSSize) -> NSSize {
+    if denyNextWindowResize {
+      let oldSize = window.frame.size
+      Logger.log("WindowWillResize: forcing size to stay at \(oldSize) (requested size was: \(frameSize))",
+                 level: .verbose, subsystem: player.subsystem)
+      denyNextWindowResize = false
+      return oldSize
+    }
     if frameSize.height <= minSize.height || frameSize.width <= minSize.width {
+      Logger.log("WindowWillResize: requested size (\(frameSize)) too small; growing to size \(minSize)",
+                 level: .verbose, subsystem: player.subsystem)
       return window.aspectRatio.grow(toSize: minSize)
     }
     return frameSize
@@ -1683,6 +1694,7 @@ class MainWindowController: PlayerWindowController {
     if let oldScale = (notification.userInfo?[NSWindow.oldScaleFactorUserInfoKey] as? NSNumber)?.doubleValue,
       oldScale != Double(window!.backingScaleFactor) {
       videoView.videoLayer.contentsScale = window!.backingScaleFactor
+      denyNextWindowResize = true
     }
   }
   

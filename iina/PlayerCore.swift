@@ -90,7 +90,7 @@ class PlayerCore: NSObject {
   // MARK: - Fields
 
   lazy var subsystem = Logger.makeSubsystem("player\(label!)")
-  
+
   private func log(_ message: String, level: Logger.Level = .debug) {
     Logger.log(message, level: level, subsystem: subsystem)
   }
@@ -171,8 +171,10 @@ class PlayerCore: NSObject {
   var isStopped = true
 
   var isInMiniPlayer = false
-  var switchedToMiniPlayerManually = false
-  var switchedBackFromMiniPlayerManually = false
+  /// Set this to `true` if user changes "music mode" status manually. This disables `autoSwitchToMusicMode`
+  /// functionality for the duration of this player even if the preference is `true`. But if they manually change the
+  /// "music mode" status again, change this to `false` so that the preference is honored again.
+  var overrideAutoSwitchToMusicMode = false
 
   var isSearchingOnlineSubtitle = false
 
@@ -555,9 +557,11 @@ class PlayerCore: NSObject {
   func switchToMiniPlayer(automatically: Bool = false) {
     log("Switch to mini player, automatically=\(automatically)")
     if !automatically {
-      switchedToMiniPlayerManually = true
+      // Toggle manual override
+      overrideAutoSwitchToMusicMode = !overrideAutoSwitchToMusicMode
+      Logger.log("Changed overrideAutoSwitchToMusicMode to \(overrideAutoSwitchToMusicMode)",
+                 level: .verbose, subsystem: subsystem)
     }
-    switchedBackFromMiniPlayerManually = false
 
     let needRestoreLayout = !miniPlayer.loaded
     miniPlayer.showWindow(self)
@@ -616,16 +620,17 @@ class PlayerCore: NSObject {
         miniPlayer.togglePlaylist(self)
       }
     }
-    
+
     events.emit(.musicModeChanged, data: true)
   }
 
-  func switchBackFromMiniPlayer(automatically: Bool, showMainWindow: Bool = true) {
+  func switchBackFromMiniPlayer(automatically: Bool = false, showMainWindow: Bool = true) {
     log("Switch to normal window from mini player, automatically=\(automatically)")
     if !automatically {
-      switchedBackFromMiniPlayerManually = true
+      overrideAutoSwitchToMusicMode = !overrideAutoSwitchToMusicMode
+      Logger.log("Changed overrideAutoSwitchToMusicMode to \(overrideAutoSwitchToMusicMode)",
+                 level: .verbose, subsystem: subsystem)
     }
-    switchedToMiniPlayerManually = true
     mainWindow.playlistView.view.removeFromSuperview()
     mainWindow.playlistView.useCompactTabHeight = false
     // add back video view
@@ -655,7 +660,7 @@ class PlayerCore: NSObject {
     mainWindow.videoView.videoLayer.draw(forced: true)
 
     mainWindow.updateTitle()
-    
+
     events.emit(.musicModeChanged, data: false)
   }
 
@@ -1107,7 +1112,7 @@ class PlayerCore: NSObject {
     }
     mpv.command(.set, args: [optionName, value.description], level: .verbose)
   }
-  
+
   func loadExternalVideoFile(_ url: URL) {
     mpv.command(.videoAdd, args: [url.path], checkError: false) { code in
       if code < 0 {
@@ -1376,7 +1381,7 @@ class PlayerCore: NSObject {
     }
     return result
   }
-  
+
   private func logRemoveFilter(type: String, result: Bool, name: String) {
     if !result {
       log("Failed to remove \(type) filter \(name)", level: .warning)
@@ -1852,24 +1857,22 @@ class PlayerCore: NSObject {
     log("Track list changed")
     getTrackInfo()
     getSelectedTracks()
-    let audioStatusWasUnkownBefore = currentMediaIsAudio == .unknown
-    currentMediaIsAudio = checkCurrentMediaIsAudio()
-    let audioStatusIsAvailableNow = currentMediaIsAudio != .unknown && audioStatusWasUnkownBefore
+    let audioStatus = checkCurrentMediaIsAudio()
+    currentMediaIsAudio = audioStatus
+
     // if need to switch to music mode
-    if audioStatusIsAvailableNow && Preference.bool(for: .autoSwitchToMusicMode) {
-      if currentMediaIsAudio == .isAudio {
-        if !isInMiniPlayer && !mainWindow.fsState.isFullscreen && !switchedBackFromMiniPlayerManually {
-          log("Current media is audio, switch to mini player")
-          DispatchQueue.main.sync {
-            switchToMiniPlayer(automatically: true)
-          }
+    if Preference.bool(for: .autoSwitchToMusicMode) {
+      if overrideAutoSwitchToMusicMode {
+        log("Skipping music mode auto-switch because overrideAutoSwitchToMusicMode is true", level: .verbose)
+      } else if audioStatus == .isAudio && !isInMiniPlayer && !mainWindow.fsState.isFullscreen {
+        log("Current media is audio: auto-switching to mini player")
+        DispatchQueue.main.sync {
+          switchToMiniPlayer(automatically: true)
         }
-      } else {
-        if isInMiniPlayer && !switchedToMiniPlayerManually {
-          log("Current media is not audio, switch to normal window")
-          DispatchQueue.main.sync {
-            switchBackFromMiniPlayer(automatically: true)
-          }
+      } else if audioStatus == .notAudio && isInMiniPlayer {
+        log("Current media is not audio: auto-switching to normal window")
+        DispatchQueue.main.sync {
+          switchBackFromMiniPlayer(automatically: true)
         }
       }
     }

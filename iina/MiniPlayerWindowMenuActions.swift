@@ -16,7 +16,7 @@ extension MiniPlayerWindowController {
 
 
   @objc func menuSwitchToMiniPlayer(_ sender: NSMenuItem) {
-    player.switchBackFromMiniPlayer(automatically: false)
+    player.switchBackFromMiniPlayer()
   }
 
 }

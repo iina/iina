@@ -163,8 +163,10 @@ class PlayerCore: NSObject {
   var isStopped = true
 
   var isInMiniPlayer = false
-  var switchedToMiniPlayerManually = false
-  var switchedBackFromMiniPlayerManually = false
+  /// Set this to `true` if user changes "music mode" status manually. This disables `autoSwitchToMusicMode`
+  /// functionality for the duration of this player even if the preference is `true`. But if they manually change the
+  /// "music mode" status again, change this to `false` so that the preference is honored again.
+  var overrideAutoSwitchToMusicMode = false
 
   var isSearchingOnlineSubtitle = false
 
@@ -522,9 +524,11 @@ class PlayerCore: NSObject {
   func switchToMiniPlayer(automatically: Bool = false) {
     Logger.log("Switch to mini player, automatically=\(automatically)", subsystem: subsystem)
     if !automatically {
-      switchedToMiniPlayerManually = true
+      // Toggle manual override
+      overrideAutoSwitchToMusicMode = !overrideAutoSwitchToMusicMode
+      Logger.log("Changed overrideAutoSwitchToMusicMode to \(overrideAutoSwitchToMusicMode)",
+                 level: .verbose, subsystem: subsystem)
     }
-    switchedBackFromMiniPlayerManually = false
 
     let needRestoreLayout = !miniPlayer.loaded
     miniPlayer.showWindow(self)
@@ -592,12 +596,13 @@ class PlayerCore: NSObject {
     events.emit(.musicModeChanged, data: true)
   }
 
-  func switchBackFromMiniPlayer(automatically: Bool, showMainWindow: Bool = true) {
+  func switchBackFromMiniPlayer(automatically: Bool = false, showMainWindow: Bool = true) {
     Logger.log("Switch to normal window from mini player, automatically=\(automatically)", subsystem: subsystem)
     if !automatically {
-      switchedBackFromMiniPlayerManually = true
+      overrideAutoSwitchToMusicMode = !overrideAutoSwitchToMusicMode
+      Logger.log("Changed overrideAutoSwitchToMusicMode to \(overrideAutoSwitchToMusicMode)",
+                 level: .verbose, subsystem: subsystem)
     }
-    switchedToMiniPlayerManually = true
     mainWindow.playlistView.view.removeFromSuperview()
     mainWindow.playlistView.useCompactTabHeight = false
     // add back video view
@@ -1618,24 +1623,23 @@ class PlayerCore: NSObject {
     Logger.log("Track list changed", subsystem: subsystem)
     getTrackInfo()
     getSelectedTracks()
-    let audioStatusWasUnkownBefore = currentMediaIsAudio == .unknown
-    currentMediaIsAudio = checkCurrentMediaIsAudio()
-    let audioStatusIsAvailableNow = currentMediaIsAudio != .unknown && audioStatusWasUnkownBefore
+    let audioStatus = checkCurrentMediaIsAudio()
+    currentMediaIsAudio = audioStatus
+
     // if need to switch to music mode
-    if audioStatusIsAvailableNow && Preference.bool(for: .autoSwitchToMusicMode) {
-      if currentMediaIsAudio == .isAudio {
-        if !isInMiniPlayer && !mainWindow.fsState.isFullscreen && !switchedBackFromMiniPlayerManually {
-          Logger.log("Current media is audio, switch to mini player", subsystem: subsystem)
-          DispatchQueue.main.sync {
-            switchToMiniPlayer(automatically: true)
-          }
+    if Preference.bool(for: .autoSwitchToMusicMode) {
+      if overrideAutoSwitchToMusicMode {
+        Logger.log("Skipping music mode auto-switch because overrideAutoSwitchToMusicMode is true",
+                   level: .verbose, subsystem: subsystem)
+      } else if audioStatus == .isAudio && !isInMiniPlayer && !mainWindow.fsState.isFullscreen {
+        Logger.log("Current media is audio: auto-switching to mini player", subsystem: subsystem)
+        DispatchQueue.main.sync {
+          switchToMiniPlayer(automatically: true)
         }
-      } else {
-        if isInMiniPlayer && !switchedToMiniPlayerManually {
-          Logger.log("Current media is not audio, switch to normal window", subsystem: subsystem)
-          DispatchQueue.main.sync {
-            switchBackFromMiniPlayer(automatically: true)
-          }
+      } else if audioStatus == .notAudio && isInMiniPlayer {
+        Logger.log("Current media is not audio: auto-switching to normal window", subsystem: subsystem)
+        DispatchQueue.main.sync {
+          switchBackFromMiniPlayer(automatically: true)
         }
       }
     }

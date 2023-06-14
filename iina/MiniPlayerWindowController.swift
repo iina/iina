@@ -113,11 +113,11 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     // close button
     closeButtonVE.action = #selector(self.close)
     closeButtonBox.action = #selector(self.close)
-    closeButtonView.alphaValue = 0
     closeButtonBackgroundViewVE.roundCorners(withRadius: 8)
-    closeButtonBackgroundViewBox.isHidden = true
 
-    // switching UI
+    // hide controls initially
+    closeButtonBackgroundViewBox.isHidden = true
+    closeButtonView.alphaValue = 0
     controlView.alphaValue = 0
     
     // tool tips
@@ -168,10 +168,9 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   // MARK: - Window delegate: Open / Close
 
   func windowWillClose(_ notification: Notification) {
-    player.switchedToMiniPlayerManually = false
-    player.switchedBackFromMiniPlayerManually = false
     if !player.isShuttingDown {
       // not needed if called when terminating the whole app
+      player.overrideAutoSwitchToMusicMode = false
       player.switchBackFromMiniPlayer(automatically: true, showMainWindow: false)
     }
     player.mainWindow.close()
@@ -371,7 +370,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   }
 
   @IBAction func backBtnAction(_ sender: NSButton) {
-    player.switchBackFromMiniPlayer(automatically: false)
+    player.switchBackFromMiniPlayer()
   }
 
   @IBAction func nextBtnAction(_ sender: NSButton) {

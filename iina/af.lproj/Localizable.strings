@@ -359,7 +359,7 @@
 "alert.plugin.install_error" = "Error occured during the installation: %@";
 "alert.invalid_url" = "Die URL is ongeldig.";
 "plugin.install_error.invalid_url" = "Die URL is ongeldig.";
-"plugin.install_error.file_not_found" = "Cannot find the package file.";
+"plugin.install_error.file_not_found" = "Kan nie die pakketlêer vind nie.";
 "plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";

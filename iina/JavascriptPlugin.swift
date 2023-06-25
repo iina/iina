@@ -433,7 +433,9 @@ class JavascriptPlugin: NSObject {
       try fileManager.moveItem(at: self.root, to: dest)
       self.root = dest
       self.entryURL = resolvePath(entryPath, root: root)!
-      self.globalEntryURL = resolvePath(globalEntryPath, root: root)!
+      if let globalEntryPath = globalEntryPath {
+        self.globalEntryURL = resolvePath(globalEntryPath, root: root)!
+      }
       self.preferencesPageURL = resolvePath(preferencesPage, root: root)
       self.helpPageURL = resolvePath(helpPage, root: root, allowNetwork: true)
     } catch let error {

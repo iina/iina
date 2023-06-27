@@ -360,7 +360,7 @@
 "alert.invalid_url" = "無效的 URL。";
 "plugin.install_error.invalid_url" = "無效的 URL。";
 "plugin.install_error.file_not_found" = "無法找到套件檔案。";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_download" = "無法下載外掛程式。\n\n詳細內容:%@\n";
 "plugin.install_error.cannot_unpackage" = "無法打開外掛程式。\n\n詳細內容：%@\n";
 "plugin.install_error.cannot_load" = "IINA 無法載入此外掛程式，可能使用了錯誤的格式。";
 "plugin.check_for_updates" = "檢查更新";

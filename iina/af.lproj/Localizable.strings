@@ -348,7 +348,7 @@
 "permissions.show-alert.name" = "Toon waarskuwings";
 "permissions.show-alert.desc" = "Hierdie inprop kan opwipwaarskuwings toon.";
 "permissions.video-overlay.name" = "Add overlay on videos";
-"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
+"permissions.video-overlay.desc" = "Hierdie inprop kan bykomende inhoud bo-oor die video verbeeld.";
 "permissions.file-system.name" = "Toegang tot die lêerstelsel";
 "permissions.file-system.desc" = "Hierdie inprop kan lêers insluitend sensitiewe inligting op u skyf lees of skryf. Dit kan ook ander programmatuur of toepassings oproep wat u rekenaar kan skaad. Maak seker dat u die bron verifieer.";
 
@@ -360,8 +360,8 @@
 "alert.invalid_url" = "Die URL is ongeldig.";
 "plugin.install_error.invalid_url" = "Die URL is ongeldig.";
 "plugin.install_error.file_not_found" = "Kan nie die pakketlêer vind nie.";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_download" = "Kon nie die inprop aflaai nie.\n\nAfvoer:%@\n";
+"plugin.install_error.cannot_unpackage" = "Kon nie die inprop uitpak nie.\n\nAfvoer:%@\n";
 "plugin.install_error.cannot_load" = "IINA kan nie hierdie inprop laai nie. Dit is dalk in die verkeerde formaat.";
 "plugin.check_for_updates" = "Soek na bywerkings";
 "plugin.updating" = "Bywerking word afgelaai…";

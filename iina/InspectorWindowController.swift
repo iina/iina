@@ -99,8 +99,10 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
   }
 
   func updateInfo(dynamic: Bool = false) {
-    let controller = PlayerCore.lastActive.mpv!
-    let info = PlayerCore.lastActive.info
+    let player = PlayerCore.lastActive
+    guard !player.isStopping, !player.isStopped, !player.isShuttingDown, !player.isShutdown else { return }
+    let controller = player.mpv!
+    let info = player.info
 
     DispatchQueue.main.async {
 

@@ -9,15 +9,15 @@
 
 
 
-"crop" = "Crop";
-"crop.w" = "Width (default: video width)";
-"crop.h" = "Height (default: video height)";
+"crop" = "חתוך";
+"crop.w" = "רוחב (ברירת מחדל: רוחב הוידאו)";
+"crop.h" = "גובה (ברירת מחדל: גובה הוידאו)";
 "crop.x" = "Origin X (default: center)";
 "crop.y" = "Origin Y (default: center)";
 
-"expand" = "Expand";
-"expand.w" = "Width (default: video width)";
-"expand.h" = "Height (default: video height)";
+"expand" = "הרחב";
+"expand.w" = "רוחב (ברירת מחדל: רוחב הוידאו)";
+"expand.h" = "גובה (ברירת מחדל: גובה הוידאו)";
 "expand.x" = "Origin X (default: center)";
 "expand.y" = "Origin Y (default: center)";
 "expand.aspect" = "Expands to fit an aspect (e.g: 4/3)";

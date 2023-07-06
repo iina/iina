@@ -398,14 +398,16 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
   }
 
   private func showNewPluginPermissions(_ plugin: JavascriptPlugin) {
-    Utility.showPermissionsAlert(forPlugin: plugin, previousPlugin: nil, sheetWindow: self.view.window) { ok in
-      if ok {
-        plugin.normalizePath()
-        JavascriptPlugin.plugins.append(plugin)
-        plugin.enabled = true
-        self.tableView.reloadData()
-      } else {
-        plugin.remove()
+    DispatchQueue.main.async {
+      Utility.showPermissionsAlert(forPlugin: plugin, previousPlugin: nil, sheetWindow: self.view.window) { ok in
+        if ok {
+          plugin.normalizePath()
+          JavascriptPlugin.plugins.append(plugin)
+          plugin.enabled = true
+          self.tableView.reloadData()
+        } else {
+          plugin.remove()
+        }
       }
     }
   }

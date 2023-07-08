@@ -230,12 +230,16 @@ func createPlugin(_ args: ArraySlice<String>) -> Bool {
   }
   
   print("Plugin directory created.")
-  print("\n----------\n")
-  print("Please run the following commands to install npm packages:")
-  print("\n  cd \(name) && npm install\n")
-  print("Use the following command to build the project:")
-  print("\n  npm run build\n")
-  print("Please read the plugin documentation and inspect the generated package.json for more info.")
+  if useBundler {
+    print("\n----------\n")
+    print("Please run the following commands to install npm packages:")
+    print("\n  cd \(name) && npm install\n")
+    print("Use the following command to build the project:")
+    print("\n  npm run build\n")
+    print("Please read the plugin documentation at https://docs.iina.io and inspect the generated package.json for more info.")
+  } else {
+    print("Please read the plugin documentation at https://docs.iina.io.")
+  }
   return true
 }
 

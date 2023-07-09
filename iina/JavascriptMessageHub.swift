@@ -27,7 +27,7 @@ class JavascriptMessageHub {
         webView.evaluateJavaScript("window.iina._emit(`\(name)`)")
         return
       }
-      webView.evaluateJavaScript("window.iina._emit(`\(name)`, `\(dataString)`)")
+      webView.evaluateJavaScript("window.iina._emit(`\(name)`, String.raw`\(dataString)`)")
     }
   }
 

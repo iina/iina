@@ -63,11 +63,13 @@ class PluginInputManager: NSObject {
     if let previousCallback = listeners[input]![event] {
       JSContext.current()!.virtualMachine.removeManagedReference(previousCallback, withOwner: owner)
     }
-    let managed = JSManagedValue(value: callback)!
-    listeners[input]![event] = Listener(callback: managed,
-                                        priority: Priority(rawValue: priority))
-    print("Added \(managed)")
-    JSContext.current()!.virtualMachine.addManagedReference(managed, withOwner: owner)
+    if let callback = callback, callback.isObject {
+      let managed = JSManagedValue(value: callback)!
+      listeners[input]![event] = Listener(callback: managed,
+                                          priority: Priority(rawValue: priority))
+      print("Added \(managed)")
+      JSContext.current()!.virtualMachine.addManagedReference(managed, withOwner: owner)
+    }
   }
   
   func callListener(forInput input: String, event: Event, withArgs args: [Any]) {

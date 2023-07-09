@@ -98,6 +98,10 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
     newPluginSourceTextField.delegate = self
 
     clearPluginPage()
+    
+    NotificationCenter.default.addObserver(forName: .iinaPluginChanged, object: nil, queue: .main) { [unowned self] _ in
+      self.tableView.reloadData()
+    }
   }
 
   private func createPreferenceView() {

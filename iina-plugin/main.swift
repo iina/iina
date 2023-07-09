@@ -1,6 +1,6 @@
 //
-//  plugin.swift
-//  iina-cli
+//  main.swift
+//  iina-plugin
 //
 //  Created by Hechen Li on 5/12/23.
 //  Copyright © 2023 lhc. All rights reserved.
@@ -12,30 +12,30 @@ import Mustache
 func printPluginHelp() {
   print(
     """
-    Usage:
-        iina-plugin <command> <args>
+    Usage: iina-plugin <command> [arguments]
 
-    Plugin Commands:
-        new <name>
-            Create a new IINA plugin at the current directory with specified name.
+    Commands:
+        new <name> [--url=template_url]
+            Create a new IINA plugin in the current directory with specified name.
+    
+            Options:
+            --url=template_url:
+                Use template_url as the plugin template. The default template is
+                https://github.com/iina/iina-plugin-template/archive/refs/heads/master.zip.
+    
         pack <dir>
             Compress a plugin folder into an .iinaplgz file.
+    
         link <path>
             Create a symlink to the plugin folder at <path> so IINA can load it as
             a development package.
+    
         unlink <path>
             Remove the plugin symlink from IINA's plugin folder.
     """)
 }
 
-guard var execURL = Bundle.main.executableURL else {
-  print("Cannot get executable path.")
-  exit(1)
-}
-
 let currentDirURL = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
-
-execURL.resolveSymlinksInPath()
 
 let processInfo = ProcessInfo.processInfo
 
@@ -154,7 +154,7 @@ func createPlugin(_ args: ArraySlice<String>) -> Bool {
   
   // Download the template. We uploaded the file
   // https://github.com/iina/iina-plugin-template/archive/refs/heads/master.zip
-  // to iina.io to avoid
+  // to iina.io to avoid GitHub access issues in China.
   let defaultTemplateURL = "https://dl.iina.io/plugin-template/master.zip"
   let templateURL = userTemplateURL ?? defaultTemplateURL
   
@@ -422,7 +422,7 @@ func prompt(_ message: String, chooseFrom choices: [String]) -> String {
       print("  \(i + 1): \(choice)")
     }
     print("Input a number (default: 1): ", terminator: "")
-    if let answer = readLine() {
+    if let answer = readLine(), !answer.isEmpty {
       if let idx = Int(answer), idx > 0, choices.count >= idx {
         return choices[idx - 1]
       }

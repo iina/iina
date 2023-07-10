@@ -946,8 +946,10 @@ class RemoteCommandController {
       PlayerCore.lastActive.togglePlaylistLoop()
       return .success
     }
-    remoteCommand.changeShuffleModeCommand.isEnabled = false
-    // remoteCommand.changeShuffleModeCommand.addTarget {})
+    remoteCommand.changeShuffleModeCommand.addTarget { _ in
+      PlayerCore.lastActive.toggleShuffle()
+      return .success
+    }
     remoteCommand.changePlaybackRateCommand.supportedPlaybackRates = [0.5, 1, 1.5, 2]
     remoteCommand.changePlaybackRateCommand.addTarget { event in
       PlayerCore.lastActive.setSpeed(Double((event as! MPChangePlaybackRateCommandEvent).playbackRate))

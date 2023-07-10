@@ -78,6 +78,7 @@ enum OSDMessage {
 
   case fileLoop(Bool)
   case playlistLoop(Bool)
+  case shuffle(Bool)
 
   case custom(String)
   case customWithDetail(String, String)
@@ -350,6 +351,14 @@ enum OSDMessage {
       return (
         String(format: NSLocalizedString("osd.playlist_loop", comment: "Playlist Loop: %@"),
                enabled ? NSLocalizedString("general.on", comment: "On") : NSLocalizedString("general.off", comment: "Off")),
+        .normal
+      )
+
+    case .shuffle(let enabled):
+      return (
+        String(format: NSLocalizedString("osd.shuffle", comment: "Shuffle: %@"),
+               enabled ? NSLocalizedString("general.on", comment: "On") :
+                   NSLocalizedString("general.off", comment: "Off")),
         .normal
       )
     case .custom(let message):

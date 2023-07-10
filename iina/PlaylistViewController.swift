@@ -153,6 +153,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
     let loopStatus = player.mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
     loopBtn.state = (loopStatus == "inf" || loopStatus == "force") ? .on : .off
+    
+    let shuffleStatus = player.mpv.getFlag(MPVOption.PlaybackControl.shuffle)
+    shuffleBtn.state = shuffleStatus ? .on : .off
   }
 
   deinit {
@@ -208,6 +211,12 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     guard isViewLoaded else { return }
     let loopStatus = player.mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
     loopBtn.state = (loopStatus == "inf" || loopStatus == "force") ? .on : .off
+  }
+  
+  func updateShuffleBtnStatus() {
+    guard isViewLoaded else { return }
+    let shuffleStatus = player.mpv.getFlag(MPVOption.PlaybackControl.shuffle)
+    shuffleBtn.state = shuffleStatus ? .on : .off
   }
     
   // MARK: - Tab switching

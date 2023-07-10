@@ -613,6 +613,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
           
           plugin.normalizePath()
           
+          previousPlugin?.enabled = false
           if let previousPlugin = previousPlugin,
              let pos = previousPlugin.remove() {
             JavascriptPlugin.plugins.insert(plugin, at: pos)

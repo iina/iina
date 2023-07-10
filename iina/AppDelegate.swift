@@ -620,8 +620,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
           } else {
             JavascriptPlugin.plugins.append(plugin)
           }
-          
           plugin.enabled = true
+          
+          plugin.reloadGlobalInstance()
+          PlayerCore.reloadPluginForAll(plugin)
         }
       }
       

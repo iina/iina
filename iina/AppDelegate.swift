@@ -611,8 +611,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
             return
           }
           
-          plugin.normalizePath()
-          
           previousPlugin?.enabled = false
           if let previousPlugin = previousPlugin,
              let pos = previousPlugin.remove() {
@@ -620,6 +618,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
           } else {
             JavascriptPlugin.plugins.append(plugin)
           }
+          
+          plugin.normalizePath()
           plugin.enabled = true
           
           plugin.reloadGlobalInstance()

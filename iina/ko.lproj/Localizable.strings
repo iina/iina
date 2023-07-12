@@ -22,11 +22,11 @@
 "guide.faq" = "자주 묻는 질문";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.announcement" = "%@ 버전을 사용하고 있습니다.";
+"initial.beta.desc" = "정식 버전으로 롤백하려면, 환경 설정 > 일반 탭에서 \"베타 업데이트 받기\"를 해제하고, <a href=\"https://iina.io\"> 공식 웹사이트</a>에서 정식 버전을 설치하세요.";
+"initial.nightly.desc" = "나이틀리 빌드는 일반적으로 사용하지 않는 것이 좋습니다. 나이틀리 빌드는 자동 업데이트를 지원하지 않습니다. <a href=\"https://nightly.iina.io\">나이틀리 웹사이트</a>에서 최신 빌드를 수동으로 다운로드하세요.";
+"initial.debug.desc" = "디버그 빌드는 성능에 최적화되어 있지 않으므로, 일반적으로 사용하지 않는 것이 좋습니다. 디버그 빌드는 자동 업데이트를 지원하지 않습니다.";
+"initial.bug_report" = "<a href=\"https://github.com/iina/iina/issues\">GitHub 이슈</a>를 통해 오류를 보고해주십시오.";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "버퍼링… %d%%";
@@ -360,8 +360,8 @@
 "alert.invalid_url" = "URL이 유효하지 않습니다.";
 "plugin.install_error.invalid_url" = "URL이 유효하지 않습니다.";
 "plugin.install_error.file_not_found" = "패키지 파일을 찾을 수 없습니다.";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_download" = "플러그인 다운로드에 실패했습니다.\n\n출력: %@\n";
+"plugin.install_error.cannot_unpackage" = "플러그인 설치에 실패했습니다.\n\n출력: %@\n";
 "plugin.install_error.cannot_load" = "IINA가 이 플러그인을 로드할 수 없습니다. 플러그인이 잘못된 형식일 수 있습니다.";
 "plugin.check_for_updates" = "업데이트 확인";
 "plugin.updating" = "업데이트 다운로드 중...";

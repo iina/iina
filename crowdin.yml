@@ -1,3 +1,9 @@
 files:
   - source: /iina/en.lproj/*.strings
     translation: /iina/%osx_code%/%original_file_name%
+targets:
+  - name: Strings
+    sources:
+      - iina/en.lproj/*.strings
+    file: /iina/%osx_code%/%original_file_name%.strings
+    format: macosx

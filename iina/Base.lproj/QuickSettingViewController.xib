@@ -363,7 +363,7 @@
                                                         </scrollView>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CUa-0e-DwY" userLabel="Aspect ratio Label">
                                                             <rect key="frame" x="18" y="605" width="331" height="16"/>
-                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Aspect ratio:" id="AiH-PV-YHQ">
+                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Aspect ratio:" id="YgL-iV-bca">
                                                                 <font key="font" metaFont="systemBold"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -416,7 +416,7 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="230" id="tTp-B3-gF5"/>
                                                             </constraints>
-                                                            <segmentedCell key="cell" borderStyle="border" alignment="left" segmentDistribution="fillProportionally" style="rounded" trackingMode="selectOne" id="SxB-cw-MYx" userLabel="CropChooser Segmented Cell">
+                                                            <segmentedCell key="cell" borderStyle="border" alignment="left" segmentDistribution="fillProportionally" style="rounded" trackingMode="selectOne" id="iuN-rN-jT7" userLabel="CropChooser Segmented Cell">
                                                                 <font key="font" metaFont="system"/>
                                                                 <segments>
                                                                     <segment label="None"/>
@@ -425,7 +425,7 @@
                                                                     <segment label="16:10" tag="3"/>
                                                                     <segment label="21:9" tag="4"/>
                                                                     <segment label="5:4"/>
-                                                                    <segment label="Custom..."/>
+                                                                    <segment label="Custom…"/>
                                                                 </segments>
                                                             </segmentedCell>
                                                             <connections>
@@ -638,7 +638,7 @@
                                                         </box>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QqK-iZ-rFX" userLabel="EqualizerLabel Text Field">
                                                             <rect key="frame" x="18" y="150" width="331" height="16"/>
-                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Equalizer" id="zcD-Tg-7Oi">
+                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Equalizer" id="Xez-sb-mfB">
                                                                 <font key="font" metaFont="systemBold"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -649,7 +649,7 @@
                                                             <subviews>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kzg-Uw-tpM">
                                                                     <rect key="frame" x="-2" y="97" width="59" height="13"/>
-                                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Brightness:" id="kLX-08-cJm">
+                                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Brightness:" id="cdR-uY-riN">
                                                                         <font key="font" metaFont="message" size="11"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -657,7 +657,7 @@
                                                                 </textField>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zeE-QB-5WQ">
                                                                     <rect key="frame" x="-2" y="73" width="59" height="13"/>
-                                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Contrast:" id="orm-fg-Pcr">
+                                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Contrast:" id="eDl-Si-LSa">
                                                                         <font key="font" metaFont="message" size="11"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -665,7 +665,7 @@
                                                                 </textField>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="inU-m8-46Z">
                                                                     <rect key="frame" x="-2" y="48" width="59" height="14"/>
-                                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Saturation:" id="Jtb-ax-aRg">
+                                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Saturation:" id="Rky-lo-Buu">
                                                                         <font key="font" metaFont="message" size="11"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -673,7 +673,7 @@
                                                                 </textField>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NFp-1S-x9x">
                                                                     <rect key="frame" x="-2" y="24" width="59" height="13"/>
-                                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Gamma:" id="Hqp-4g-tfS">
+                                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Gamma:" id="r6x-z0-oFC">
                                                                         <font key="font" metaFont="message" size="11"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -681,7 +681,7 @@
                                                                 </textField>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BdF-A5-VPG">
                                                                     <rect key="frame" x="-2" y="0.0" width="59" height="13"/>
-                                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Hue:" id="fqk-nd-STV">
+                                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Hue:" id="eLh-fu-pMj">
                                                                         <font key="font" metaFont="message" size="11"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -1131,7 +1131,7 @@
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="305" id="J6K-sf-QKi"/>
                                                                     </constraints>
-                                                                    <buttonCell key="cell" type="push" title="Load External Audio Track..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8Ax-5X-osl">
+                                                                    <buttonCell key="cell" type="push" title="Load External Audio Track…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8Ax-5X-osl">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
@@ -1173,7 +1173,7 @@
                                                                         </textField>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tGk-m1-Vjc" userLabel="-5s Text Field">
                                                                             <rect key="frame" x="-2" y="0.0" width="20" height="11"/>
-                                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="-5s" id="IYU-eq-dls" userLabel="-5s">
+                                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="-5s" id="YCG-xK-eAs" userLabel="-5s">
                                                                                 <font key="font" metaFont="label" size="9"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -1198,9 +1198,7 @@
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qiz-tS-aWT" userLabel="CustomAudioDelay Text Field">
                                                                             <rect key="frame" x="248" y="12" width="61" height="21"/>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" title="1" drawsBackground="YES" usesSingleLineMode="YES" id="EHa-PR-jHw" userLabel="CustomAudioDelay Text Field Cell" customClass="RoundedTextFieldCell" customModule="IINA" customModuleProvider="target">
-                                                                                <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="C53-E5-t2Z">
-                                                                                    <real key="minimum" value="0.01"/>
-                                                                                </numberFormatter>
+                                                                                <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="C53-E5-t2Z"/>
                                                                                 <font key="font" metaFont="system"/>
                                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

@@ -65,22 +65,22 @@
 "ZgQ-bc-yEE.title" = "Activer le HDR par défaut lors de la lecture de vidéos HDR.";
 
 /* Class = "NSButtonCell"; title = "Enable tone mapping"; ObjectID = "a5Y-gU-JTj"; */
-"a5Y-gU-JTj.title" = "Enable tone mapping";
+"a5Y-gU-JTj.title" = "Activer la gamme dynamique";
 
 /* Class = "NSTextFieldCell"; title = "Enable tone mapping images onto the display"; ObjectID = "mNn-cb-IVw"; */
-"mNn-cb-IVw.title" = "Enable tone mapping images onto the display";
+"mNn-cb-IVw.title" = "Activer les images de gamme dynamique sur l'écran";
 
 /* Class = "NSTextFieldCell"; title = "Target peak:"; ObjectID = "xVk-OA-kOf"; */
-"xVk-OA-kOf.title" = "Target peak:";
+"xVk-OA-kOf.title" = "Target peak :";
 
 /* Class = "NSTextFieldCell"; title = "nits"; ObjectID = "baO-xy-7hD"; */
 "baO-xy-7hD.title" = "nits";
 
 /* Class = "NSTextFieldCell"; title = "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."; ObjectID = "aTt-aZ-rjK"; */
-"aTt-aZ-rjK.title" = "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400.";
+"aTt-aZ-rjK.title" = "Luminosité maximale mesurée de l'écran, Si défini à 0, IINA détecte la valeur automatiquement. Si la détection auto échoue, la valeur est fixée à 400.";
 
 /* Class = "NSTextFieldCell"; title = "Algorithm:"; ObjectID = "qzI-rq-PqO"; */
-"qzI-rq-PqO.title" = "Algorithm:";
+"qzI-rq-PqO.title" = "Algorithme :";
 
 /* Class = "NSTextFieldCell"; title = "Algorithm to use for tone mapping images onto the display."; ObjectID = "szA-8r-plt"; */
-"szA-8r-plt.title" = "Algorithm to use for tone mapping images onto the display.";
+"szA-8r-plt.title" = "Algorithme à utiliser pour le mapping tonale des images sur l'écran.";

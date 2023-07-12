@@ -65,10 +65,10 @@
 "ZgQ-bc-yEE.title" = "播放 HDR 视频时默认启用 HDR 模式。";
 
 /* Class = "NSButtonCell"; title = "Enable tone mapping"; ObjectID = "a5Y-gU-JTj"; */
-"a5Y-gU-JTj.title" = "启用法线贴图";
+"a5Y-gU-JTj.title" = "启用色调映射";
 
 /* Class = "NSTextFieldCell"; title = "Enable tone mapping images onto the display"; ObjectID = "mNn-cb-IVw"; */
-"mNn-cb-IVw.title" = "Enable tone mapping images onto the display";
+"mNn-cb-IVw.title" = "在显示器上启用色调映射图像";
 
 /* Class = "NSTextFieldCell"; title = "Target peak:"; ObjectID = "xVk-OA-kOf"; */
 "xVk-OA-kOf.title" = "目标峰值：";

@@ -172,8 +172,8 @@
 /* Class = "NSTextFieldCell"; title = "BACKGROUND"; ObjectID = "uqb-mz-A22"; */
 "uqb-mz-A22.title" = "ARKA PLAN";
 
-/* Class = "NSButtonCell"; title = "Custom…"; ObjectID = "vFD-HU-RVz"; */
-"vFD-HU-RVz.title" = "Özel...";
+/* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[6] = "Custom…"; ObjectID = "iuN-rN-jT7"; */
+"iuN-rN-jT7.ibShadowedLabels[6]" = "Özel...";
 
 /* Class = "NSTextFieldCell"; title = "Subtitle style options may break ASS rendering, and some of them will be disabled depending on subtitle type."; ObjectID = "wBD-pZ-Bvu"; */
 "wBD-pZ-Bvu.title" = "Altyazı stil seçenekleri ASS görüntüsünü bozabilir. Bazı seçenekler ise altyazı türüne bağlı olarak devre dışı bırakılacaktır.";

@@ -224,12 +224,12 @@ extension mpv_node: CustomDebugStringConvertible {
 
   /// A textual representation of this instance, suitable for debugging.
   ///
-  /// If the node is an array or a map the string will contine mulitple lines.
+  /// If the node is an array or a map the string will contine multiple lines.
   public var debugDescription: String { mpv_node.toString(self) }
 
   /// Return a textual representation of the given`mpv_node`, suitable for debugging.
   ///
-  /// If the node is an array or a map the string will contine mulitple lines. For arrays and maps the string will include all nodes
+  /// If the node is an array or a map the string will contine multiple lines. For arrays and maps the string will include all nodes
   /// referenced by the given node.
   /// - Parameter node: The `mpv_node` to return a textual representation of.
   /// - Parameter indent: Used to control indentation of nested arrays and maps.

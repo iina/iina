@@ -172,7 +172,7 @@ class MPVController: NSObject {
       Logger.log("Failed to construct string for sysinfo.machine", level: .error)
       return false
     }
-    return machine.replacingOccurrences(of: "\0", with: "") == "arm64"
+    return machine.starts(with: "arm64")
   }
 
   /// Apply a workaround for issue [#4486](https://github.com/iina/iina/issues/4486), if needed.

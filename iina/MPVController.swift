@@ -153,6 +153,66 @@ class MPVController: NSObject {
     removeOptionObservers()
   }
 
+
+  /// Determine if this Mac has an Apple Silicon chip.
+  /// - Returns: `true` if running on a Mac with an Apple Silicon chip, `false` otherwise.
+  private func runningOnAppleSilicon() -> Bool {
+    // Old versions of macOS do not support Apple Silicon.
+    if #unavailable(macOS 11.0) {
+      return false
+    }
+    var sysinfo = utsname()
+    let result = uname(&sysinfo)
+    guard result == EXIT_SUCCESS else {
+      Logger.log("uname failed returning \(result)", level: .error)
+      return false
+    }
+    let data = Data(bytes: &sysinfo.machine, count: Int(_SYS_NAMELEN))
+    guard let machine = String(bytes: data, encoding: .ascii) else {
+      Logger.log("Failed to construct string for sysinfo.machine", level: .error)
+      return false
+    }
+    return machine.starts(with: "arm64")
+  }
+
+  /// Apply a workaround for issue [#4486](https://github.com/iina/iina/issues/4486), if needed.
+  ///
+  /// On Macs with an Intel chip VP9 hardware acceleration is causing a hang in
+  ///[VTDecompressionSessionWaitForAsynchronousFrames](https://developer.apple.com/documentation/videotoolbox/1536066-vtdecompressionsessionwaitforasy).
+  /// This has been reproduced with FFmpeg and has been reported in ticket [9599](https://trac.ffmpeg.org/ticket/9599).
+  ///
+  /// The workaround removes VP9 from the value of the mpv [hwdec-codecs](https://mpv.io/manual/master/#options-hwdec-codecs) option,
+  /// the list of codecs eligible for hardware acceleration.
+  private func applyHardwareAccelerationWorkaround() {
+    // The problem is not reproducible under Apple Silicon.
+    guard !runningOnAppleSilicon() else {
+      Logger.log("Running on Apple Silicon, not applying FFmpeg 9599 workaround")
+      return
+    }
+    // Do not apply the workaround if the user has configured a value for the hwdec-codecs option in
+    // IINA's advanced settings. This code is only needed to avoid emitting confusing log messages
+    // as the user's settings are applied after this and would overwrite the workaround, but without
+    // this check the log would indicate VP9 hardware acceleration is disabled, which may or may not
+    // be true.
+    if Preference.bool(for: .enableAdvancedSettings),
+        let userOptions = Preference.value(for: .userOptions) as? [[String]] {
+      for op in userOptions {
+        guard op[0] != MPVOption.Video.hwdecCodecs else {
+          Logger.log("""
+Option \(MPVOption.Video.hwdecCodecs) has been set in advanced settings, \
+not applying FFmpeg 9599 workaround
+""")
+          return
+        }
+      }
+    }
+    // Apply the workaround.
+    Logger.log("Disabling hardware acceleration for VP9 encoded videos to workaround FFmpeg 9599")
+    let value = "h264,vc1,hevc,vp8,av1,prores"
+    mpv_set_option_string(mpv, MPVOption.Video.hwdecCodecs, value)
+    Logger.log("Option \(MPVOption.Video.hwdecCodecs) has been set to: \(value)")
+  }
+
   /**
    Init the mpv context, set options
    */
@@ -186,6 +246,8 @@ class MPVController: NSObject {
       let path = Logger.logDirectory.appendingPathComponent("mpv.log").path
       chkErr(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.logFile, path))
     }
+
+    applyHardwareAccelerationWorkaround()
 
     // - General
 

@@ -1,11 +1,17 @@
 /* Class = "NSTextFieldCell"; title = "Speed:"; ObjectID = "1KQ-oZ-A2x"; */
 "1KQ-oZ-A2x.title" = "재생 속도";
 
+/* Class = "NSTextFieldCell"; title = "s"; ObjectID = "1VY-EN-1mi"; */
+"1VY-EN-1mi.title" = "초";
+
 /* Class = "NSTextFieldCell"; title = "Width:"; ObjectID = "22j-ra-GAY"; */
 "22j-ra-GAY.title" = "두께";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "3kI-6i-ujt"; */
 "3kI-6i-ujt.title" = "색상:";
+
+/* Class = "NSTextFieldCell"; title = "+12 dB"; ObjectID = "4BZ-H1-GEU"; */
+"4BZ-H1-GEU.title" = "+12 dB";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "6LO-6y-IsA"; */
 "6LO-6y-IsA.title" = "색상:";
@@ -25,9 +31,6 @@
 /* Class = "NSTextFieldCell"; title = "1x"; ObjectID = "B0I-bX-HZS"; */
 "B0I-bX-HZS.title" = "1배";
 
-/* Class = "NSTextFieldCell"; title = "5s"; ObjectID = "C0t-gm-Tim"; */
-"C0t-gm-Tim.title" = "5초";
-
 /* Class = "NSTabViewItem"; label = "Video"; ObjectID = "CYP-el-A6A"; */
 "CYP-el-A6A.label" = "비디오";
 
@@ -42,6 +45,9 @@
 
 /* Class = "NSTextFieldCell"; title = "31.25"; ObjectID = "HBF-J7-Tie"; */
 "HBF-J7-Tie.title" = "31.25";
+
+/* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "IYU-eq-dls"; */
+"YCG-xK-eAs.title" = "-5초";
 
 /* Class = "NSMenuItem"; title = "1.5"; ObjectID = "JbG-Ur-b55"; */
 "JbG-Ur-b55.title" = "1.5";
@@ -82,14 +88,8 @@
 /* Class = "NSTextFieldCell"; title = "Subtitle delay:"; ObjectID = "Wkz-wW-sOM"; */
 "Wkz-wW-sOM.title" = "자막 지연:";
 
-/* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "Xez-sb-mfB"; */
-"Xez-sb-mfB.title" = "이퀄라이저";
-
-/* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "YCG-xK-eAs"; */
-"YCG-xK-eAs.title" = "-5초";
-
-/* Class = "NSTextFieldCell"; title = "Aspect Ratio:"; ObjectID = "YgL-iV-bca"; */
-"YgL-iV-bca.title" = "화면비:";
+/* Class = "NSTextFieldCell"; title = "Aspect ratio:"; ObjectID = "YgL-iV-bca"; */
+"YgL-iV-bca.title" = "Aspect ratio:";
 
 /* Class = "NSTextFieldCell"; title = "Text Style:"; ObjectID = "ZBd-13-lA1"; */
 "ZBd-13-lA1.title" = "텍스트 효과:";
@@ -99,6 +99,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Secondary subtitle:"; ObjectID = "bKb-pW-HnS"; */
 "bKb-pW-HnS.title" = "부자막:";
+
+/* Class = "NSTextFieldCell"; title = "s"; ObjectID = "bsT-FB-GhF"; */
+"bsT-FB-GhF.title" = "초";
 
 /* Class = "NSTabViewItem"; label = "Audio"; ObjectID = "bzk-c2-LH5"; */
 "bzk-c2-LH5.label" = "오디오";
@@ -114,6 +117,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Contrast:"; ObjectID = "eDl-Si-LSa"; */
 "eDl-Si-LSa.title" = "대비:";
+
+/* Class = "NSTabViewItem"; label = "Plugin"; ObjectID = "eE3-9i-hpU"; */
+"eE3-9i-hpU.label" = "Plugin";
 
 /* Class = "NSTextFieldCell"; title = "Hue:"; ObjectID = "eLh-fu-pMj"; */
 "eLh-fu-pMj.title" = "색조";
@@ -132,6 +138,9 @@
 
 /* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[0] = "None"; ObjectID = "iuN-rN-jT7"; */
 "iuN-rN-jT7.ibShadowedLabels[0]" = "없음";
+
+/* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[6] = "Custom…"; ObjectID = "iuN-rN-jT7"; */
+"iuN-rN-jT7.ibShadowedLabels[6]" = "사용자 설정…";
 
 /* Class = "NSTabViewItem"; label = "Subtitle"; ObjectID = "jND-MZ-sKB"; */
 "jND-MZ-sKB.label" = "자막";
@@ -169,11 +178,14 @@
 /* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "uCX-EC-jXM"; */
 "uCX-EC-jXM.title" = "-5초";
 
+/* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "udN-rq-omw"; */
+"udN-rq-omw.title" = "0초";
+
+/* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "upM-Lz-YwK"; */
+"upM-Lz-YwK.title" = "0초";
+
 /* Class = "NSTextFieldCell"; title = "BACKGROUND"; ObjectID = "uqb-mz-A22"; */
 "uqb-mz-A22.title" = "배경";
-
-/* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[6] = "Custom…"; ObjectID = "iuN-rN-jT7"; */
-"iuN-rN-jT7.ibShadowedLabels[6]" = "사용자 설정…";
 
 /* Class = "NSTextFieldCell"; title = "Subtitle style options may break ASS rendering, and some of them will be disabled depending on subtitle type."; ObjectID = "wBD-pZ-Bvu"; */
 "wBD-pZ-Bvu.title" = "자막 효과를 적용하면 ASS 자막이 잘 표시되지 않을 수도 있으며, 일부 설정은 자막 유형에 따라 사용할 수 없을 수도 있습니다.";
@@ -183,3 +195,6 @@
 
 /* Class = "NSTextFieldCell"; title = "+5s"; ObjectID = "xfX-wr-DTJ"; */
 "xfX-wr-DTJ.title" = "+5초";
+
+/* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "zcD-Tg-7Oi"; */
+"zcD-Tg-7Oi.title" = "이퀄라이저";

@@ -22,11 +22,11 @@
 "guide.faq" = "Häufig gestellte Fragen (FAQ)";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.announcement" = "Du benutzt Version %@ von IINA";
+"initial.beta.desc" = "Wenn du eine Release Version benutzen willst, entferne den Haken bei „Betaupdates erhalten“ in Einstellungen -> Allgemein und installiere eine stabile Version von unserer <a href=\"https://iina.io\">offiziellen Webseite</a>.";
+"initial.nightly.desc" = "Nightly Versionen sollten nicht für den täglichen Gebrauch eingesetzt werden. Aktuell unterstützen diese keine Auto Updates. Bitte lade neuere Versionen von <a href=\"https://nightly.iina.io\">Nightly Website</a>.";
+"initial.debug.desc" = "Debug-Builds sind normalerweise nicht auf Leistung optimiert, daher wird es nicht empfohlen diese für den täglichen Gebrauch einzusetzen. Debug-Builds unterstützen keine automatischen Updates.";
+"initial.bug_report" = "Melde via <a href=\"https://github.com/iina/iina/issues\">GitHub Tickets</a>.";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Puffern … %d%%";
@@ -360,8 +360,8 @@
 "alert.invalid_url" = "Die Adresse ist ungültig.";
 "plugin.install_error.invalid_url" = "Die Adresse ist ungültig.";
 "plugin.install_error.file_not_found" = "Die Paketdatei wurde nicht gefunden.";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_download" = "Die Erweiterung konnte nicht heruntergeladen werden.\n\nAusgabe: %@\n";
+"plugin.install_error.cannot_unpackage" = "Die Erweiterung konnte nicht entpackt werden.\n\nAusgabe: %@\n";
 "plugin.install_error.cannot_load" = "IINA kann diese Erweiterung nicht laden. Es könnte im falschen Format sein.";
 "plugin.check_for_updates" = "Nach Updates suchen";
 "plugin.updating" = "Update herunterladen …";

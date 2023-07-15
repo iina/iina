@@ -1,11 +1,17 @@
 /* Class = "NSTextFieldCell"; title = "Speed:"; ObjectID = "1KQ-oZ-A2x"; */
 "1KQ-oZ-A2x.title" = "Velocitat:";
 
+/* Class = "NSTextFieldCell"; title = "s"; ObjectID = "1VY-EN-1mi"; */
+"1VY-EN-1mi.title" = "s";
+
 /* Class = "NSTextFieldCell"; title = "Width:"; ObjectID = "22j-ra-GAY"; */
 "22j-ra-GAY.title" = "Amplada:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "3kI-6i-ujt"; */
 "3kI-6i-ujt.title" = "Color:";
+
+/* Class = "NSTextFieldCell"; title = "+12 dB"; ObjectID = "4BZ-H1-GEU"; */
+"4BZ-H1-GEU.title" = "+12 dB";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "6LO-6y-IsA"; */
 "6LO-6y-IsA.title" = "Color:";
@@ -25,9 +31,6 @@
 /* Class = "NSTextFieldCell"; title = "1x"; ObjectID = "B0I-bX-HZS"; */
 "B0I-bX-HZS.title" = "1x";
 
-/* Class = "NSTextFieldCell"; title = "5s"; ObjectID = "C0t-gm-Tim"; */
-"C0t-gm-Tim.title" = "5s";
-
 /* Class = "NSTabViewItem"; label = "Video"; ObjectID = "CYP-el-A6A"; */
 "CYP-el-A6A.label" = "Vídeo";
 
@@ -42,6 +45,9 @@
 
 /* Class = "NSTextFieldCell"; title = "31.25"; ObjectID = "HBF-J7-Tie"; */
 "HBF-J7-Tie.title" = "31.25";
+
+/* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "IYU-eq-dls"; */
+"YCG-xK-eAs.title" = "-5s";
 
 /* Class = "NSMenuItem"; title = "1.5"; ObjectID = "JbG-Ur-b55"; */
 "JbG-Ur-b55.title" = "1.5";
@@ -82,14 +88,8 @@
 /* Class = "NSTextFieldCell"; title = "Subtitle delay:"; ObjectID = "Wkz-wW-sOM"; */
 "Wkz-wW-sOM.title" = "Retard en el subtítol:";
 
-/* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "Xez-sb-mfB"; */
-"Xez-sb-mfB.title" = "Equalitzador";
-
-/* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "YCG-xK-eAs"; */
-"YCG-xK-eAs.title" = "-5s";
-
-/* Class = "NSTextFieldCell"; title = "Aspect Ratio:"; ObjectID = "YgL-iV-bca"; */
-"YgL-iV-bca.title" = "Relació d'aspecte:";
+/* Class = "NSTextFieldCell"; title = "Aspect ratio:"; ObjectID = "YgL-iV-bca"; */
+"YgL-iV-bca.title" = "Aspect ratio:";
 
 /* Class = "NSTextFieldCell"; title = "Text Style:"; ObjectID = "ZBd-13-lA1"; */
 "ZBd-13-lA1.title" = "Estil de text:";
@@ -99,6 +99,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Secondary subtitle:"; ObjectID = "bKb-pW-HnS"; */
 "bKb-pW-HnS.title" = "Subtítols secundaris:";
+
+/* Class = "NSTextFieldCell"; title = "s"; ObjectID = "bsT-FB-GhF"; */
+"bsT-FB-GhF.title" = "s";
 
 /* Class = "NSTabViewItem"; label = "Audio"; ObjectID = "bzk-c2-LH5"; */
 "bzk-c2-LH5.label" = "Àudio";
@@ -114,6 +117,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Contrast:"; ObjectID = "eDl-Si-LSa"; */
 "eDl-Si-LSa.title" = "Contrast:";
+
+/* Class = "NSTabViewItem"; label = "Plugin"; ObjectID = "eE3-9i-hpU"; */
+"eE3-9i-hpU.label" = "Plugin";
 
 /* Class = "NSTextFieldCell"; title = "Hue:"; ObjectID = "eLh-fu-pMj"; */
 "eLh-fu-pMj.title" = "To:";
@@ -132,6 +138,9 @@
 
 /* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[0] = "None"; ObjectID = "iuN-rN-jT7"; */
 "iuN-rN-jT7.ibShadowedLabels[0]" = "Cap";
+
+/* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[6] = "Custom…"; ObjectID = "iuN-rN-jT7"; */
+"iuN-rN-jT7.ibShadowedLabels[6]" = "Personalitzat...";
 
 /* Class = "NSTabViewItem"; label = "Subtitle"; ObjectID = "jND-MZ-sKB"; */
 "jND-MZ-sKB.label" = "Subtítol";
@@ -169,11 +178,14 @@
 /* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "uCX-EC-jXM"; */
 "uCX-EC-jXM.title" = "-5s";
 
+/* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "udN-rq-omw"; */
+"udN-rq-omw.title" = "0s";
+
+/* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "upM-Lz-YwK"; */
+"upM-Lz-YwK.title" = "0s";
+
 /* Class = "NSTextFieldCell"; title = "BACKGROUND"; ObjectID = "uqb-mz-A22"; */
 "uqb-mz-A22.title" = "FONS";
-
-/* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[6] = "Custom…"; ObjectID = "iuN-rN-jT7"; */
-"iuN-rN-jT7.ibShadowedLabels[6]" = "Personalitzat...";
 
 /* Class = "NSTextFieldCell"; title = "Subtitle style options may break ASS rendering, and some of them will be disabled depending on subtitle type."; ObjectID = "wBD-pZ-Bvu"; */
 "wBD-pZ-Bvu.title" = "Les opcions d'estils dels subtítols poden fer que el renderitzat ASS deixi de funcionar, algunes opcions seràn inhabilitades depenent del tipus de subtítol.";
@@ -183,3 +195,6 @@
 
 /* Class = "NSTextFieldCell"; title = "+5s"; ObjectID = "xfX-wr-DTJ"; */
 "xfX-wr-DTJ.title" = "+5s";
+
+/* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "zcD-Tg-7Oi"; */
+"zcD-Tg-7Oi.title" = "Equalitzador";

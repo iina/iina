@@ -294,12 +294,18 @@ class PlayerCore: NSObject {
     guard !urls.isEmpty else { return 0 }
     let urls = Utility.resolveURLs(urls)
 
-    // handle BD folders and m3u / m3u8 files first
-    if urls.count == 1 && (isBDFolder(urls[0]) ||
-      Utility.playlistFileExt.contains(urls[0].absoluteString.lowercasedPathExtension)) {
-      info.shouldAutoLoadFiles = false
-      open(urls[0])
-      return nil
+    // Handle folder URL (to support mpv shuffle, etc), BD folders and m3u / m3u8 files first.
+    // For these cases, mpv will load/build the playlist and notify IINA when it can be retrieved.
+    if urls.count == 1 {
+      let url = urls[0]
+
+      if url.isExistingDirectory
+          || isBDFolder(url)
+          || Utility.playlistFileExt.contains(url.absoluteString.lowercasedPathExtension) {
+        info.shouldAutoLoadFiles = false
+        open(url)
+        return nil
+      }
     }
 
     let playableFiles = getPlayableFiles(in: urls)

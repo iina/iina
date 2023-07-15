@@ -108,7 +108,7 @@
 "preference.logged_in_as" = "Přihlášen jako %@";
 "preference.system_media_control" = "Používat systémové multimediální klávesy";
 
-"preference.key_binding_hint_1" = "Pro úpravy konfiguračního souboru klávesových zkratek, vytvořte jejich kopii stisknutím \"Duplikovat…\".";
+"preference.key_binding_hint_1" = "Pro úpravy konfiguračního souboru klávesových zkratek, vytvořte jejich kopii stisknutím „Duplikovat…“.";
 "preference.key_binding_hint_2" = "Pro změnu klávesové zkratky, klikněte dvakrát na odpovídající řádek po pravé straně.";
 
 "preference.enable_adv_settings" = "Povolit pokročilá nastavení";
@@ -183,7 +183,7 @@
 "alert.config.empty_name" = "Název nemůže být prázdný.";
 "alert.config.name_existing" = "Název již existuje.";
 "alert.config.file_existing.title" = "Soubor již existuje.";
-"alert.config.file_existing.message" = "Toto by se nemělo stát. Zvolte OK pro nahrazení, Zrušit pro zobrazení souboru ve Finderu.";
+"alert.config.file_existing.message" = "Toto by se nemělo stát. Vyberte OK pro přepsání, Zrušit pro zobrazení souboru v aplikaci Finder.";
 "alert.config.cannot_create" = "Konfigurační soubor nelze vytvořit!\n%@";
 "alert.config.cannot_write" = "Nelze zapisovat do konfiguračního souboru!";
 
@@ -191,19 +191,19 @@
 "alert.add_filter.title" = "Přidat filtr";
 "alert.add_filter.message" = "Zadejte řetězec filtru ve formátu mpv příkazu vf nebo af.";
 
-"alert.keybinding_config.error" = "Chyba analýzy konfiguračního souboru klávesových zkratek \"%@\"! Vraťte se k výchozímu IINA nastavení klávesových zkratek. Zkontrolujte prosím vaši konfiguraci.";
+"alert.keybinding_config.error" = "Chyba analýzy konfiguračního souboru klávesových zkratek „%@“! Vraťte se k výchozímu IINA nastavení klávesových zkratek. Zkontrolujte prosím vaši konfiguraci.";
 
 "alert.extra_option.cannot_read" = "Nelze načíst uživatelsky vymezené další možnosti mpv.";
 "alert.extra_option.empty" = "Název nebo hodnota nemohou být prázdné!";
 "alert.extra_option.error" = "Při nastavování %@=%@ se vyskytla chyba číslo %d. Prosím zkontrolujte vaše nastavení dalších možností v Nastavení > Pokročilé.";
-"alert.extra_option.config_folder" = "Chyba při nastavování konfigurační složky \"%@\".";
+"alert.extra_option.config_folder" = "Chyba při nastavování konfigurační složky „%@“.";
 
 "alert.playlist.error_deleting" = "%@ nelze smazat";
 
 "alert.screenshot.error_taking" = "Nelze zachytit snímek obrazovky!";
 
 "alert.sub.no_selected" = "Nejdříve vyberte stažené titulky.";
-"alert.sub_lang_not_set" = "Před používáním OpenSubtitles nastavte upřednostňovaný jazyk titulků. Tentokrát bude použita angličtina.";
+"alert.sub_lang_not_set" = "Před používáním OpenSubtitles nastavte preferovaný jazyk titulků. Tentokrát bude použita angličtina.";
 "alert.sub.cannot_save_passwd" = "Nelze uložit vaše heslo do svazku klíčů: %@";
 "alert.sub.cannot_login" = "Nelze se přihlásit. Zkontrolujte prosím uživatelské jméno, heslo a připojení k síti.\n\n%@";
 
@@ -222,7 +222,7 @@
 
 "alert.open_url.title" = "Otevřít URL";
 "alert.open_url.message" = "Zadejte URL:";
-"alert.choose_media_file.title" = "Zvolte soubor";
+"alert.choose_media_file.title" = "Vyberte soubor";
 
 "alert.add_url.title" = "Přidat URL";
 "alert.add_url.message" = "Zadejte URL:";
@@ -242,7 +242,7 @@
 "alert.clear_history.message" = "Opravdu chcete smazat celou historii přehrávání?";
 
 "alert.clear_watch_later.title" = "Smazat uložené pozice přehrávání";
-"alert.clear_watch_later.message" = "Opravdu chcete smazat všechny uložené pozice přehrávání? (Data ve složce \"Přehrát později\")";
+"alert.clear_watch_later.message" = "Opravdu chcete smazat všechny uložené pozice přehrávání? (Data ve složce „Přehrát později“)";
 
 "alert.restore_alerts.title" = "Obnovit potlačená upozornění";
 "alert.restore_alerts.message" = "Opravdu chcete obnovit potlačená upozornění?";
@@ -262,7 +262,7 @@
 
 "alert.plugin_uninstall.title" = "Opravdu chcete odinstalovat %@?";
 "alert.plugin_uninstall.message" = "Plug-in bude odstraněn z disku.";
-"alert.duplicated_plugin_id" = "Detekovány duplicitní identifikátory plug-inu. Dva nebo více plug-inů mají stejný identifikátor \"%@\". To může způsobit neobvyklé chování. Najděte je prosím v Nastavení > Plug-iny a nahlaste toto jejich autorům. Pokud je plug-in nainstalován lokálně, můžete také ručně změnit jeho identifikátor v souboru Info.json.";
+"alert.duplicated_plugin_id" = "Detekovány duplicitní identifikátory plug-inu. Dva nebo více plug-inů mají stejný identifikátor „%@“. To může způsobit neobvyklé chování. Najděte je prosím v Nastavení > Plug-iny a nahlaste toto jejich autorům. Pokud je plug-in nainstalován lokálně, můžete také ručně změnit jeho identifikátor v souboru Info.json.";
 "alert.plugin_no_update" = "Plug-in je aktuální.";
 "alert.plugin_update_found.title" = "Je dostupná nová verze %@";
 "alert.plugin_update_found.message" = "Nejnovější dostupná verze k dispozici je %@. Nainstalována je %@. Přejete si nyní stáhnout aktualizaci?";
@@ -280,7 +280,7 @@
 "pl_menu.delete_multi" = "Přesunout vybrané soubory do koše";
 "pl_menu.delete_after_play" = "Po přehrání přesunout do koše";
 "pl_menu.delete_after_play_multi" = "Po přehrání přesunout vybrané soubory do koše";
-"pl_menu.show_in_finder" = "Zobrazit ve Finderu";
+"pl_menu.show_in_finder" = "Zobrazit v aplikaci Finder";
 "pl_menu.add_file" = "Přidat soubor…";
 "pl_menu.add_url" = "Přidat URL…";
 "pl_menu.clear_playlist" = "Smazat playlist";
@@ -297,9 +297,9 @@
 "filter.video_filters" = "Video filtry";
 "filter.audio_filters" = "Zvukové filtry";
 
-"hwdec.no" = "Hardwarové dekódování vypnuto.";
-"hwdec.auto" = "Hardwarové dekódování zapnuto. Většina video filtrů však nebude pracovat správně.";
-"hwdec.auto-copy" = "Hardwarové dekódování zapnuto. Spotřebuje dvojnásobek paměti, bude však kompatibilní s video filtry.";
+"hwdec.no" = "Hardwarové dekódování zakázáno.";
+"hwdec.auto" = "Hardwarové dekódování povoleno. Většina video filtrů však nebude pracovat správně.";
+"hwdec.auto-copy" = "Hardwarové dekódování povoleno. Spotřebuje dvojnásobek paměti, bude však kompatibilní s video filtry.";
 
 "subencoding.auto" = "Automaticky";
 

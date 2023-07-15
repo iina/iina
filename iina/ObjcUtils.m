@@ -48,19 +48,22 @@ static inline int min(int a, int b, int c) {
 + (NSUInteger)levDistance:(NSString *)str0 and:(NSString *)str1 {
   int i, j;
   
-  str0 = [@" " stringByAppendingString:str0];
-  str1 = [@" " stringByAppendingString:str1];
+  // Prepend a blank space and add a null terminator. The leading space is required so the strings
+  // can be accessed using the one based indexes in the last loop below. The string must be null
+  // terminated to be able to use the wcslen method and because the loop expects to be able to
+  // access a null at the end of the string.
+  str0 = [@" " stringByAppendingFormat:@"%@\0", str0];
+  str1 = [@" " stringByAppendingFormat:@"%@\0", str1];
 
   // Convert from variable length character encoding to fixed length UTF-32 to make it easy to
   // access individual characters.
   const NSData *str0AsUTF32 = [str0 dataUsingEncoding:NSUTF32LittleEndianStringEncoding];
   const NSData *str1AsUTF32 = [str1 dataUsingEncoding:NSUTF32LittleEndianStringEncoding];
-  const NSUInteger len0 = str0AsUTF32.length / sizeof(wchar_t);
-  const NSUInteger len1 = str1AsUTF32.length / sizeof(wchar_t);
 
-  // CAUTION these strings are not null terminated.
   const wchar_t *cstr0 = (const wchar_t *)[str0AsUTF32 bytes];
   const wchar_t *cstr1 = (const wchar_t *)[str1AsUTF32 bytes];;
+  const size_t len0 = wcslen(cstr0);
+  const size_t len1 = wcslen(cstr1);
 
   int *_dist = malloc(sizeof(int) * (len0 + 1) * (len1 + 1));
   int (*dist)[len0 + 1][len1 + 1] = (int (*)[len0 + 1][len1 + 1])_dist;
@@ -77,7 +80,7 @@ static inline int min(int a, int b, int c) {
     for (i = 1; i <= len0; ++i)
       (*dist)[i][j] = min((*dist)[i - 1][j] + INDEL_WEIGHT,
                           (*dist)[i][j - 1] + INDEL_WEIGHT,
-                          (*dist)[i - 1][j - 1] + (cstr0[i - 1] == cstr1[j - 1] ? 0 : SUBSTITUTION_WEIGHT));
+                          (*dist)[i - 1][j - 1] + (cstr0[i] == cstr1[j] ? 0 : SUBSTITUTION_WEIGHT));
   
   int result = (*dist)[len0][len1];
   free(_dist);

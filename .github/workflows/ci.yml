@@ -21,12 +21,12 @@ jobs:
         run: ./other/download_libs.sh
 
       - name: Build
-        run: xcodebuild -project iina.xcodeproj -configuration Release CODE_SIGNING_ALLOWED=NO ${{ matrix.deployment_target }}
+        run: xcodebuild -project iina.xcodeproj ONLY_ACTIVE_ARCH=NO -scheme iina CODE_SIGNING_ALLOWED=NO ${{ matrix.deployment_target }}
         env:
           DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer
 
       - name: Archive
-        run: tar cvJf ~/iina.tar.xz -C /Users/runner/Library/Developer/Xcode/DerivedData/iina-csbkugdtxazzqogjnydbothqrvib/Build/Products/Release IINA.app 
+        run: tar cvJf ~/iina.tar.xz -C /Users/runner/Library/Developer/Xcode/DerivedData/iina-csbkugdtxazzqogjnydbothqrvib/Build/Products/Debug IINA.app 
 
       - name: Save artifacts
         uses: actions/upload-artifact@v3

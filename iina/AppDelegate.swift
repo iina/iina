@@ -585,8 +585,60 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     let urls = pendingFilesForOpenFile.map { URL(fileURLWithPath: $0) }
 
     pendingFilesForOpenFile.removeAll()
-    if PlayerCore.activeOrNew.openURLs(urls) == 0 {
+    
+    if urls.count == 1,
+       let url = urls.first,
+       url.pathExtension == "iinaplgz" {
+      installPlugin(form: url)
+    } else if PlayerCore.activeOrNew.openURLs(urls) == 0 {
       Utility.showAlert("nothing_to_open")
+    }
+  }
+  
+  // MARK: - Plugin Installer
+  func installPlugin(form url: URL) {
+    do {
+      let plugin = try JavascriptPlugin.create(fromPackageURL: url)
+      
+      let previousPlugin = JavascriptPlugin.plugins.first {
+        $0.identifier == plugin.identifier
+      }
+      
+      func updatePlugin() {
+        Utility.showPermissionsAlert(forPlugin: plugin,
+                                     previousPlugin: previousPlugin) { ok in
+          guard ok else {
+            plugin.remove()
+            return
+          }
+          
+          previousPlugin?.enabled = false
+          if let previousPlugin = previousPlugin,
+             let pos = previousPlugin.remove() {
+            JavascriptPlugin.plugins.insert(plugin, at: pos)
+          } else {
+            JavascriptPlugin.plugins.append(plugin)
+          }
+          
+          plugin.normalizePath()
+          plugin.enabled = true
+          
+          plugin.reloadGlobalInstance()
+          PlayerCore.reloadPluginForAll(plugin)
+        }
+      }
+      
+      if let previousPlugin = previousPlugin {
+        if previousPlugin.isExternal {
+          throw JavascriptPlugin.PluginError.cannotUpdateExternalPlugin
+        } else if Utility.quickAskPanel("plugin_update_found", titleArgs: [previousPlugin.name], messageArgs: [plugin.version, previousPlugin.version]) {
+          updatePlugin()
+        }
+      } else {
+        updatePlugin()
+      }
+    } catch let error {
+      Utility.handlePluginInstallationError(error)
     }
   }
 
@@ -647,6 +699,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
    - `pip`: 0 (default) or 1 to indicate whether open the media and enter pip.
    - `mpv_*`: additional mpv options to be passed. e.g. `mpv_volume=20`.
      Options starting with `no-` are not supported.
+   
+   __/plugin__
+   - `url`: plugin file path to open.
    */
   private func parsePendingURL(_ url: String) {
     Logger.log("Parsing URL \(url)")
@@ -714,6 +769,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       }
 
       Logger.log("Finished URL scheme handling")
+    } else if host == "plugin" {
+      // open a plugin file path
+      guard let queries = parsed.queryItems else { return }
+      let queryDict = [String: String](uniqueKeysWithValues: queries.map { ($0.name, $0.value ?? "") })
+
+      // url
+      guard let urlValue = queryDict["url"], !urlValue.isEmpty else {
+        Logger.log("Cannot find plugin parameter \"url\", stopped")
+        return
+      }
+      
+      let url = URL(fileURLWithPath: urlValue)
+      installPlugin(form: url)
     }
   }
 

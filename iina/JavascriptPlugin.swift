@@ -37,6 +37,7 @@ class JavascriptPlugin: NSObject {
     case invalidURL(String)
     case cannotDownload(String, String)
     case cannotLoadPlugin
+    case cannotUpdateExternalPlugin
   }
 
   static var plugins = loadPlugins() {

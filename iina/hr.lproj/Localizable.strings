@@ -21,13 +21,6 @@
 "guide.basic_settings" = "Osnovne postavke";
 "guide.faq" = "Često postavljena pitanja";
 
-// Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
-
 // MainWindowController.swift
 "main.buffering_indicator" = "Učitavanje %d%%";
 "main.opening_stream" = "Otvaranje zapisa…";
@@ -183,7 +176,7 @@
 "alert.config.empty_name" = "Naziv ne smije biti prazan.";
 "alert.config.name_existing" = "Naziv već postoji.";
 "alert.config.file_existing.title" = "Datoteka već postoji";
-"alert.config.file_existing.message" = "This should not happen. Choose OK to overwrite, Cancel to reveal the file in Finder.";
+"alert.config.file_existing.message" = "This should not happen. Choose OK to overwrite, Cancel to show the file in Finder.";
 "alert.config.cannot_create" = "Nije moguće stvoriti konfiguracijsku datoteku!\n%@";
 "alert.config.cannot_write" = "Nije moguće pisati u konfiguracijsku datoteku!";
 
@@ -360,8 +353,8 @@
 "alert.invalid_url" = "URL je neispravan.";
 "plugin.install_error.invalid_url" = "URL je neispravan.";
 "plugin.install_error.file_not_found" = "Datoteka paketa nije pronađena.";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_download" = "Neuspjelo preuzimanje dodatka.\n\nRezultat:%@\n";
+"plugin.install_error.cannot_unpackage" = "Neuspjelo raspakiranje dodatka.\n\nRezultat:%@\n";
 "plugin.install_error.cannot_load" = "IINA ne može učitati ovaj dodatak. Možda je u pogrešnom formatu.";
 "plugin.check_for_updates" = "Traži nove verzije ";
 "plugin.updating" = "Preuzimanje nove verzije …";

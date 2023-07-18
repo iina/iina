@@ -21,13 +21,6 @@
 "guide.basic_settings" = "Alapvető beállítások";
 "guide.faq" = "Gyakran Ismételt Kérdések";
 
-// Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
-
 // MainWindowController.swift
 "main.buffering_indicator" = "Bufferelés…%d%%";
 "main.opening_stream" = "Stream megnyitása…";
@@ -124,9 +117,9 @@
 "menu.pause" = "Pause (Megállít)";
 "menu.resume" = "Folytatás";
 "menu.speed" = "Sebesség: %.2fx";
-"menu.chapters" = "Fejezet Panel Megjelenítése";
+"menu.chapters" = "Mutasd a fejezetek panelt";
 "menu.hide_chapters" = "Rejtsd a fejezetek panelt";
-"menu.playlist" = "Lejátszási lista megjelenítése";
+"menu.playlist" = "Mutasd a lejátszólistát";
 "menu.hide_playlist" = "Rejtsd a lejátszólistát";
 "menu.video" = "Mutasd a videó panelt";
 "menu.hide_video" = "Rejtsd a videó panelt";
@@ -183,7 +176,7 @@
 "alert.config.empty_name" = "A név mező nem lehet üres.";
 "alert.config.name_existing" = "A név már létezik.";
 "alert.config.file_existing.title" = "A fájl már létezik";
-"alert.config.file_existing.message" = "Ennek nem szabadna megtörténnie. Kattints az OK gombra a felülíráshoz, a Mégse gombra a fájl felfedéséhez a Finderben.";
+"alert.config.file_existing.message" = "Ennek nem szabadna megtörténnie. Kattints az OK gombra a felülíráshoz, a Mégse gombra a fájl megjelenítéséhez a Finderben.";
 "alert.config.cannot_create" = "Konfigurációs fájl nem hozható létre!\n%@";
 "alert.config.cannot_write" = "Konfigurációs fájl nem irható!";
 
@@ -280,7 +273,7 @@
 "pl_menu.delete_multi" = "A kiválasztott fájlok áthelyezése a kukába";
 "pl_menu.delete_after_play" = "Áthelyezés a kukába lejátszás után";
 "pl_menu.delete_after_play_multi" = "Kiválasztott fájlok áthelyezése a kukába lejátszás után";
-"pl_menu.show_in_finder" = "Megjelenítés a Finder-ben";
+"pl_menu.show_in_finder" = "Mutasd a Finderben";
 "pl_menu.add_file" = "Fájl hozzáadása…";
 "pl_menu.add_url" = "URL hozzáadása…";
 "pl_menu.clear_playlist" = "Lejátszási lista ürítése";

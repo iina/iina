@@ -21,13 +21,6 @@
 "guide.basic_settings" = "Impostazioni di base";
 "guide.faq" = "Domande frequenti (FAQ)";
 
-// Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
-
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffer… %d%%";
 "main.opening_stream" = "Apertura stream…";
@@ -124,9 +117,9 @@
 "menu.pause" = "Pausa";
 "menu.resume" = "Riprendi";
 "menu.speed" = "Velocità: %.2fx";
-"menu.chapters" = "Pannello capitoli";
+"menu.chapters" = "Mostra pannello capitoli";
 "menu.hide_chapters" = "Nascondi pannello capitoli";
-"menu.playlist" = "Pannello playlist";
+"menu.playlist" = "Mostra pannello playlist";
 "menu.hide_playlist" = "Nascondi pannello playlist";
 "menu.video" = "Mostra pannello video";
 "menu.hide_video" = "Nascondi pannello video";
@@ -183,7 +176,7 @@
 "alert.config.empty_name" = "Il nome non può essere vuoto.";
 "alert.config.name_existing" = "Il nome esite già.";
 "alert.config.file_existing.title" = "Il file è già esistente";
-"alert.config.file_existing.message" = "Questo non sarebbe dovuto succedere. Scegli OK per sovrascrivere, Annulla per mostrere il file nel Finder.";
+"alert.config.file_existing.message" = "Questo non sarebbe dovuto succedere. Scegli OK per sovrascrivere, Annulla per mostrare il file nel Finder.";
 "alert.config.cannot_create" = "Impossibile creare il file di configurazione!\n%@";
 "alert.config.cannot_write" = "Impossibile scrivere il file di configurazione!";
 
@@ -360,8 +353,8 @@
 "alert.invalid_url" = "L'URL non è valido.";
 "plugin.install_error.invalid_url" = "L'URL non è valido.";
 "plugin.install_error.file_not_found" = "Impossibile trovare il file del pacchetto.";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_download" = "Impossibile scaricare il plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_unpackage" = "Scompattamento del plugin non riuscito.\n\nOutput: %@\n";
 "plugin.install_error.cannot_load" = "IINA non può caricare questo plugin. Potrebbe essere nel formato sbagliato.";
 "plugin.check_for_updates" = "Controlla aggiornamenti";
 "plugin.updating" = "Sto scaricando l'aggiornamento…";

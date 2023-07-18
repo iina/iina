@@ -15,13 +15,13 @@
 "crop.x" = "Asal X (bawaan: tengah)";
 "crop.y" = "Asal Y (bawaan: tengah)";
 
-"expand" = "Perluas";
+"expand" = "Lebarkan";
 "expand.w" = "Lebar (bawaan: lebar video)";
 "expand.h" = "Tinggi (bawaan: tinggi video)";
 "expand.x" = "Asal X (bawaan: tengah)";
 "expand.y" = "Asal Y (bawaan: tengah)";
-"expand.aspect" = "Perbesar untuk mengepaskan aspek rasio (cth: 4/3)";
-"expand.round" = "Bulatkan agar dapat dibagi dengan nilai ini";
+"expand.aspect" = "Perbesar agar muat dengan rasio aspek (cth: 4/3)";
+"expand.round" = "Bulatkan agar dapat terbagi dengan nilai ini";
 
 "sharpen" = "Pertajam";
 "sharpen.msize" = "Ukuran matriks";
@@ -31,7 +31,7 @@
 "blur.msize" = "Ukuran matriks";
 "blur.amount" = "Besaran";
 
-"delogo" = "Hapus Logo";
+"delogo" = "Hapus Watermark";
 "delogo.w" = "Lebar";
 "delogo.h" = "Tinggi";
 "delogo.x" = "Asal X";
@@ -43,7 +43,7 @@
 "hflip" = "Cerminkan";
 
 "lut3d" = "3D LUT";
-"lut3d.file" = "Alamat file (anda juga dapat menggeser file langsung ke dalam input box)";
+"lut3d.file" = "Lokasi file (Anda juga dapat menggeser file langsung ke dalam input box)";
 "lut3d.interp" = "Interpolasi";
 
 "custom_mpv" = "Custom (mpv)";

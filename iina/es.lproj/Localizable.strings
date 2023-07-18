@@ -21,13 +21,6 @@
 "guide.basic_settings" = "Configuración básica";
 "guide.faq" = "Preguntas frecuentes";
 
-// Initial Window
-"initial.announcement" = "Estás usando una versión %@ de IINA";
-"initial.beta.desc" = "Si desea volver a una versión estable, desmarque \"recibir actualizaciones beta\" desde Ajustes > Generales, e instale una versión estable de nuestro <a href=\"https://iina.io\">sitio web oficial</a>.";
-"initial.nightly.desc" = "No se recomienda usar versiones nocturnas para el uso diario. Actualmente las versiones nocturnas no soportan la actualización automática. Por favor, descargue manualmente nuevas versiones de nuestro <a href=\"https://nightly.iina.io\">sitio web nocturno</a>.";
-"initial.debug.desc" = "Las compilaciones de depuración normalmente no están optimizadas para el rendimiento, por lo que no se recomienda que se utilicen de manera habitual. Las compilaciones de depuración no soportan la actualización automática.";
-"initial.bug_report" = "Notifique a través de <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
-
 // MainWindowController.swift
 "main.buffering_indicator" = "Cargando… %d%%";
 "main.opening_stream" = "Abrir flujo de datos";
@@ -183,7 +176,7 @@
 "alert.config.empty_name" = "El nombre no puede estar vacío.";
 "alert.config.name_existing" = "El nombre ya existe.";
 "alert.config.file_existing.title" = "El archivo ya existe";
-"alert.config.file_existing.message" = "Esto no debería suceder. Seleccione Aceptar para sobrescribir, Cancelar para revelar el archivo en el Finder.";
+"alert.config.file_existing.message" = "Esto no debería ocurrir. Elige OK para sobreescribir, cancelar para mostrar el archivo en Finder.";
 "alert.config.cannot_create" = "¡No se puede crear el archivo de configuración!\n%@";
 "alert.config.cannot_write" = "¡No se puede escribir en el archivo de configuración!";
 
@@ -280,7 +273,7 @@
 "pl_menu.delete_multi" = "Mover los archivos seleccionados a la Papelera";
 "pl_menu.delete_after_play" = "Mover a la Papelera después de reproducir";
 "pl_menu.delete_after_play_multi" = "Mover los archivos seleccionados a la Papelera después de reproducir";
-"pl_menu.show_in_finder" = "Mostrar en el Finder";
+"pl_menu.show_in_finder" = "Mostrar en Finder";
 "pl_menu.add_file" = "Añadir archivo…";
 "pl_menu.add_url" = "Añadir URL…";
 "pl_menu.clear_playlist" = "Borrar la lista de reproducción";

@@ -21,13 +21,6 @@
 "guide.basic_settings" = "الإعدادات الأساسية";
 "guide.faq" = "الأسئلة المتكررة";
 
-// Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
-
 // MainWindowController.swift
 "main.buffering_indicator" = "التخزين… %d%%";
 "main.opening_stream" = "فتح البث…";
@@ -183,7 +176,7 @@
 "alert.config.empty_name" = "الاسم لا يمكن أن يكون فارغاً.";
 "alert.config.name_existing" = "الاسم موجود مسبقا.";
 "alert.config.file_existing.title" = "الملف موجود بالفعل";
-"alert.config.file_existing.message" = "هذا لا ينبغي أن يحدث. اختر موافق للإستبدال، اختر إلغاء لعرض الملف في Finder.";
+"alert.config.file_existing.message" = "This should not happen. Choose OK to overwrite, Cancel to show the file in Finder.";
 "alert.config.cannot_create" = "لا يمكن إنشاء ملف التكوين!\n%@";
 "alert.config.cannot_write" = "لا يمكن الكتابة إلى ملف التكوين!";
 
@@ -280,7 +273,7 @@
 "pl_menu.delete_multi" = "نقل الملفات المحددة إلى سلة المهملات";
 "pl_menu.delete_after_play" = "النقل إلى سلة المهملات بعد التشغيل";
 "pl_menu.delete_after_play_multi" = "نقل الملفات المحددة إلى سلة المهملات بعد تشغيلها";
-"pl_menu.show_in_finder" = "كشف في Finder";
+"pl_menu.show_in_finder" = "Show in Finder";
 "pl_menu.add_file" = "إضافة ملف…";
 "pl_menu.add_url" = "إضافة عنوان URL…";
 "pl_menu.clear_playlist" = "مسح قائمة التشغيل";

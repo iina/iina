@@ -21,13 +21,6 @@
 "guide.basic_settings" = "基本設定";
 "guide.faq" = "常見問題";
 
-// Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
-
 // MainWindowController.swift
 "main.buffering_indicator" = "緩衝處理中⋯ %d%%";
 "main.opening_stream" = "開啟串流中⋯⋯";
@@ -280,7 +273,7 @@
 "pl_menu.delete_multi" = "將所選檔案丟到垃圾桶";
 "pl_menu.delete_after_play" = "播放完畢後丟到垃圾桶";
 "pl_menu.delete_after_play_multi" = "播放完畢後，將已所選的檔案丟到垃圾桶";
-"pl_menu.show_in_finder" = "顯示於 Finder";
+"pl_menu.show_in_finder" = "在 Finder中顯示";
 "pl_menu.add_file" = "加入檔案⋯";
 "pl_menu.add_url" = "加入 URL⋯";
 "pl_menu.clear_playlist" = "清除播放列表";
@@ -360,8 +353,8 @@
 "alert.invalid_url" = "無效的 URL。";
 "plugin.install_error.invalid_url" = "無效的 URL。";
 "plugin.install_error.file_not_found" = "無法找到套件檔案。";
-"plugin.install_error.cannot_download" = "無法下載外掛程式。\n\n詳細內容:%@\n";
-"plugin.install_error.cannot_unpackage" = "無法打開外掛程式。\n\n詳細內容：%@\n";
+"plugin.install_error.cannot_download" = "下載外掛程式失敗。\n\n輸出：%@\n";
+"plugin.install_error.cannot_unpackage" = "解開套件失敗。\n\n輸出：%@\n";
 "plugin.install_error.cannot_load" = "IINA 無法載入此外掛程式，可能使用了錯誤的格式。";
 "plugin.check_for_updates" = "檢查更新";
 "plugin.updating" = "正在下載更新…";

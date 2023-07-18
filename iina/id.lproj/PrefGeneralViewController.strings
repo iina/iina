@@ -17,7 +17,7 @@
 "4Qe-7S-8xK.title" = "Opsi:";
 
 /* Class = "NSButtonCell"; title = "Enable \"Open Recent\" menu"; ObjectID = "55O-ik-ql6"; */
-"55O-ik-ql6.title" = "Aktifkan menu \"Buka File Terkini\"";
+"55O-ik-ql6.title" = "Aktifkan menu \"Buka Item Terkini\"";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "5RN-PV-pOZ"; */
 "5RN-PV-pOZ.title" = "Boks";
@@ -26,7 +26,7 @@
 "5Y9-bX-K0f.title" = "Diperkecil/tidak-diperkecil";
 
 /* Class = "NSTextFieldCell"; title = "Playlist:"; ObjectID = "6TV-DG-503"; */
-"6TV-DG-503.title" = "Daftar Putar:";
+"6TV-DG-503.title" = "Playlist:";
 
 /* Class = "NSTextFieldCell"; title = "Requires restarting IINA to take effect."; ObjectID = "8kU-8g-VgX"; */
 "8kU-8g-VgX.title" = "Perlu menjalankan ulang IINA untuk dapat berpengaruh.";
@@ -35,7 +35,7 @@
 "AVe-9Z-RgQ.title" = "Hanya pada \"mode musik\"";
 
 /* Class = "NSButtonCell"; title = "Track all played files in \"Open Recent\" menu"; ObjectID = "Ci8-j2-QS3"; */
-"Ci8-j2-QS3.title" = "Ingat semua file yang sudah diputar di menu \"Buka File Terkini\"";
+"Ci8-j2-QS3.title" = "Ingat semua file yang sudah diputar di menu \"Buka Item Terkini\"";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "DZT-7n-S4M"; */
 "DZT-7n-S4M.title" = "Boks";
@@ -56,7 +56,7 @@
 "J8g-aS-W6e.title" = "Window menjadi tidak aktif/aktif";
 
 /* Class = "NSMenuItem"; title = "Do nothing"; ObjectID = "JfZ-D8-aF2"; */
-"JfZ-D8-aF2.title" = "Jangan lakukan apa-apa";
+"JfZ-D8-aF2.title" = "Biarkan";
 
 /* Class = "NSButtonCell"; title = "Black out other monitors while in full screen"; ObjectID = "KYi-0W-zOr"; */
 "KYi-0W-zOr.title" = "Hitamkan monitor lain saat mengaktifkan mode layar penuh";
@@ -86,7 +86,7 @@
 "REP-70-XOi.title" = "Setiap bulan";
 
 /* Class = "NSButtonCell"; title = "Use legacy full screen"; ObjectID = "TvB-UM-FrS"; */
-"TvB-UM-FrS.title" = "Gunakan mode layar penuh legacy";
+"TvB-UM-FrS.title" = "Gunakan mode layar penuh lama (sebelum OS X 10.6)";
 
 /* Class = "NSTextFieldCell"; title = "Otherwise only files that opened manually will show up in this menu."; ObjectID = "XFC-Lr-LmP"; */
 "XFC-Lr-LmP.title" = "Jika tidak, hanya file yang dibuka secara manual yang akan muncul di dalam menu.";
@@ -95,7 +95,7 @@
 "YLo-6E-tT7.title" = "Matikan aplikasi setelah semua window ditutup";
 
 /* Class = "NSTextFieldCell"; title = "/path/to/screenshot/folder"; ObjectID = "YeH-hk-7NN"; */
-"YeH-hk-7NN.title" = "/alamat/ke/folder/tangkapanlayar";
+"YeH-hk-7NN.title" = "/lokasi/ke/folder/tangkapanlayar";
 
 /* Class = "NSButtonCell"; title = "Receive beta updates"; ObjectID = "f0j-Dn-cxt"; */
 "f0j-Dn-cxt.title" = "Terima pembaruan versi beta";
@@ -113,7 +113,7 @@
 "i4A-86-dGC.title" = "Jeda saat komputer memasuki mode sleep";
 
 /* Class = "NSButtonCell"; title = "Enable playback history"; ObjectID = "iGS-qN-f5q"; */
-"iGS-qN-f5q.title" = "Aktifkan riwayat pemutaran";
+"iGS-qN-f5q.title" = "Simpan riwayat pemutaran";
 
 /* Class = "NSButtonCell"; title = "Resume last playback position"; ObjectID = "jOB-D3-WT3"; */
 "jOB-D3-WT3.title" = "Lanjutkan posisi pemutaran terakhir";

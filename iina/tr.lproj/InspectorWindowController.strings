@@ -86,7 +86,7 @@
 "PQD-yB-mm6.title" = "Biçim:";
 
 /* Class = "NSTextFieldCell"; title = "Default"; ObjectID = "S3X-Df-UMB"; */
-"S3X-Df-UMB.title" = "Varsayılan";
+"S3X-Df-UMB.title" = "Saptanmış";
 
 /* Class = "NSTabViewItem"; label = "Tracks"; ObjectID = "UuR-M1-YLj"; */
 "UuR-M1-YLj.label" = "İzler";
@@ -128,7 +128,7 @@
 "it3-05-Pwu.title" = "Kanallar:";
 
 /* Class = "NSTextFieldCell"; title = "Source ID:"; ObjectID = "jCY-og-BAa"; */
-"jCY-og-BAa.title" = "Kaynak ID:";
+"jCY-og-BAa.title" = "Kaynak Kimliği:";
 
 /* Class = "NSTextFieldCell"; title = "Bit Rate:"; ObjectID = "jyV-Pd-UvH"; */
 "jyV-Pd-UvH.title" = "Bit Hızı:";
@@ -149,7 +149,7 @@
 "nrG-IH-kFg.title" = "SES";
 
 /* Class = "NSTextFieldCell"; title = "Total A/V Sync:"; ObjectID = "sbO-Cn-gpI"; */
-"sbO-Cn-gpI.title" = "Toplam A/V Senk. :";
+"sbO-Cn-gpI.title" = "Toplam A/V Eşzamanlaması:";
 
 /* Class = "NSTextFieldCell"; title = "Watch"; ObjectID = "tNS-gW-PcC"; */
 "tNS-gW-PcC.title" = "İzle";
@@ -164,4 +164,4 @@
 "1kw-LO-KmJ.title" = "Ana Renkler:";
 
 /* Class = "NSTextFieldCell"; title = "Colorspace:"; ObjectID = "mLo-Wc-BoO"; */
-"mLo-Wc-BoO.title" = "Renk uzayı:";
+"mLo-Wc-BoO.title" = "Renk Uzayı:";

@@ -21,13 +21,6 @@
 "guide.basic_settings" = "Základné nastavenia";
 "guide.faq" = "Často kladené otázky";
 
-// Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
-
 // MainWindowController.swift
 "main.buffering_indicator" = "Načítava sa… %d%%";
 "main.opening_stream" = "Otváram stream…";
@@ -183,7 +176,7 @@
 "alert.config.empty_name" = "Názov nemôže byť prázdny.";
 "alert.config.name_existing" = "Názov už existuje.";
 "alert.config.file_existing.title" = "Súbor už existuje";
-"alert.config.file_existing.message" = "Toto sa nemalo stať. Zvoľte OK na prepísanie alebo Zrušiť na zobrazenie súboru vo Finderi.";
+"alert.config.file_existing.message" = "This should not happen. Choose OK to overwrite, Cancel to show the file in Finder.";
 "alert.config.cannot_create" = "Nedá sa vytvoriť konfiguračný súbor!\n%@";
 "alert.config.cannot_write" = "Nedá sa zapisovať do konfiguračného súboru!";
 
@@ -312,7 +305,7 @@
 
 "mini_player.album_art" = "Prepnúť obal albumu";
 "mini_player.loop" = "Opakovať";
-"mini_player.shuffle" = "Náhodne";
+"mini_player.shuffle" = "Shuffle";
 "mini_player.remove" = "Odstrániť z playlistu";
 "mini_player.add" = "Pridať do playlistu";
 "mini_player.delete" = "Odstrániť všetky skladby z playlistu";

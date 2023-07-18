@@ -21,13 +21,6 @@
 "guide.basic_settings" = "Configurações Básicas";
 "guide.faq" = "Perguntas Frequentes";
 
-// Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
-
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffer de dados… %d%%";
 "main.opening_stream" = "A abrir stream…";
@@ -183,7 +176,7 @@
 "alert.config.empty_name" = "Este nome não pode estar vazio.";
 "alert.config.name_existing" = "Este nome já existe.";
 "alert.config.file_existing.title" = "Ficheiro já existe";
-"alert.config.file_existing.message" = "Isto não deveria acontecer. Escolha OK para substituir, Cancelar para mostrar o ficheiro no Finder.";
+"alert.config.file_existing.message" = "This should not happen. Choose OK to overwrite, Cancel to show the file in Finder.";
 "alert.config.cannot_create" = "Não foi possível criar um ficheiro de configuração!\n%@";
 "alert.config.cannot_write" = "Não foi possível escrever no arquivo de configuração!";
 
@@ -280,7 +273,7 @@
 "pl_menu.delete_multi" = "Mover Ficheiros Selecionados para o Lixo";
 "pl_menu.delete_after_play" = "Mover para o Lixo depois da Reprodução";
 "pl_menu.delete_after_play_multi" = "Mover Ficheiros Selecionados para o Lixo depois da Reprodução";
-"pl_menu.show_in_finder" = "Mostrar no Finder";
+"pl_menu.show_in_finder" = "Mostrar no Procurador";
 "pl_menu.add_file" = "Adicionar Ficheiro…";
 "pl_menu.add_url" = "Adicionar URL…";
 "pl_menu.clear_playlist" = "Limpar Lista de Reprodução";

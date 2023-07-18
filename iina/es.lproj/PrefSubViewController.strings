@@ -71,7 +71,7 @@
 "OcF-0z-7qe.title" = "Al activar, todos los subtítulos ASS se dibujarán usando los siguientes estilos.";
 
 /* Class = "NSTextFieldCell"; title = "Text subtitles:"; ObjectID = "Qda-dp-nhg"; */
-"Qda-dp-nhg.title" = "Texto:";
+"Qda-dp-nhg.title" = "Subtítulos del texto:";
 
 /* Class = "NSTextFieldCell"; title = "Also search subtitles in following directories:"; ObjectID = "QsS-wD-2hY"; */
 "QsS-wD-2hY.title" = "También buscar subtítulos en los siguientes directorios:";
@@ -149,7 +149,7 @@
 "rZf-bj-qbV.title" = "Ignorar los estilos ASS";
 
 /* Class = "NSTextFieldCell"; title = "Auto load:"; ObjectID = "raf-Yu-ck0"; */
-"raf-Yu-ck0.title" = "Carga automática:";
+"raf-Yu-ck0.title" = "Autocarga:";
 
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "slU-Ox-aeF"; */
 "slU-Ox-aeF.title" = "Centro";

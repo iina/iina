@@ -14,31 +14,24 @@
 "general.ok" = "Tamam";
 "general.cancel" = "Vazgeç";
 "general.username" = "Kullanıcı Adı";
-"general.password" = "Şifre";
+"general.password" = "Parola";
 
 // Guide Window
-"guide.highlights" = "Vurgulamalar";
+"guide.highlights" = "Öne Çıkanlar";
 "guide.basic_settings" = "Temel Ayarlar";
 "guide.faq" = "Sık Sorulan Sorular";
 
-// Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
-
 // MainWindowController.swift
-"main.buffering_indicator" = "Ara belleğe alınıyor... %d%%";
+"main.buffering_indicator" = "Arabelleğe alınıyor... %%%d";
 "main.opening_stream" = "Akış açılıyor...";
-"osc.precision" = "Hassasiyet";
+"osc.precision" = "Kesinlik";
 "osc.1s" = "1 saniye";
 "osc.100ms" = "100 milisaniye";
 "osc.10ms" = "10 milisaniye";
 "osc.1ms" = "1 milisaniye";
 
 // QuickSettingViewController.swift
-"quicksetting.item_default" = "Varsayılan";
+"quicksetting.item_default" = "Saptanmış";
 "quicksetting.item_none" = "Hiçbiri";
 "quicksetting.hwdec" = "Donanımsal Kod Çözücü";
 "quicksetting.deinterlace" = "Taramasızlık";
@@ -47,9 +40,9 @@
 // OSDMessage.swift
 "osd.pause" = "Duraklat";
 "osd.resume" = "Sürdür";
-"osd.volume" = "Ses Seviyesi: %i";
+"osd.volume" = "Ses Yüksekliği: %i";
 "osd.speed" = "Hız: %.2fx";
-"osd.aspect" = "En Boy Oranı: %@";
+"osd.aspect" = "En-Boy Oranı: %@";
 "osd.crop" = "Kırp: %@";
 "osd.rotate" = "Döndür: %i°";
 "osd.deinterlace" = "Taramasızlık: %@";
@@ -74,7 +67,7 @@
 "osd.clear_playlist" = "Oynatma Listesi Temizlendi";
 "osd.video_eq.contrast" = "Kontrast: %i";
 "osd.video_eq.gamma" = "Gama: %i";
-"osd.video_eq.hue" = "Renk: %i";
+"osd.video_eq.hue" = "Ton: %i";
 "osd.video_eq.saturation" = "Doygunluk: %i";
 "osd.video_eq.brightness" = "Parlaklık: %i";
 "osd.find_online_sub" = "Çevrimiçi altyazılar bulunuyor...";
@@ -85,28 +78,28 @@
 "osd.sub_saved" = "Altyazı kaydedildi";
 "osd.network_error" = "Ağ hatası";
 "osd.file_error" = "Dosya okunurken hata oluştu";
-"osd.cannot_login" = "Giriş yapılamıyor";
+"osd.cannot_login" = "Oturum açılamıyor";
 "osd.canceled" = "İptal edildi";
-"osd.filter_added" = "Eklenen filtre: %@";
-"osd.filter_removed" = "Filtre kaldırıldı";
+"osd.filter_added" = "Filtre Eklendi: %@";
+"osd.filter_removed" = "Filtre Kaldırıldı";
 "osd.file_loop" = "Dosya Döngüsü: %@";
 "osd.playlist_loop" = "Oynatma Listesi Döngüsü: %@";
 
 "preference.title" = "Tercihler";
 "preference.general" = "Genel";
 "preference.ui" = "Arayüz";
-"preference.video_audio" = "Çözücü";
+"preference.video_audio" = "Video/Ses";
 "preference.subtitle" = "Altyazı";
 "preference.network" = "Ağ";
-"preference.control" = "Kontrol";
-"preference.keybindings" = "Kestirmeler";
+"preference.control" = "Denetimler";
+"preference.keybindings" = "Tuş Bağıntıları";
 "preference.advanced" = "Gelişmiş";
 "preference.plugins" = "Eklentiler";
-"preference.utilities" = "Araçlar";
+"preference.utilities" = "İzlenceler";
 "preference.scripts" = "Betikler";
-"preference.not_logged_in" = "Giriş yapılmadı";
-"preference.logged_in_as" = "%@ olarak giriş yapıldı";
-"preference.system_media_control" = "Sistem medya kontrol tuşlarını kullan";
+"preference.not_logged_in" = "Oturum açılmadı";
+"preference.logged_in_as" = "%@ olarak oturum açıldı";
+"preference.system_media_control" = "Sistem medya denetim tuşlarını kullan";
 
 "preference.key_binding_hint_1" = "Geçerli yapılandırma dosyasındaki kestirmeleri düzenlemek için, önce \"Çoğalt ...\" düğmesine tıklayarak kopya oluşturun.";
 "preference.key_binding_hint_2" = "İlgili kestirmeyi düzenlemek için sağ taraftaki bir satırı çift tıklayın.";
@@ -126,7 +119,7 @@
 "menu.speed" = "Hız: %.2fx";
 "menu.chapters" = "Bölümler Panelini Göster";
 "menu.hide_chapters" = "Bölümler Panelini Gizle";
-"menu.playlist" = "Oynatma Listesi Paneli";
+"menu.playlist" = "Oynatma Listesi Panelini Göster";
 "menu.hide_playlist" = "Oynatma Listesi Panelini Gizle";
 "menu.video" = "Video Panelini Göster";
 "menu.hide_video" = "Video Panelini Gizle";
@@ -152,7 +145,7 @@
 "track.none" = "<Hiçbiri>";
 
 "subtrack.no_loaded" = "Yüklenmiş Altyazı Yok";
-"subtrack.no_external" = "Harici Altyazı Bulunamadı";
+"subtrack.no_external" = "Dış Altyazı Bulunamadı";
 
 // Alerts
 "alert.beta_channel.title" = "Beta Sürümler için Güncellemeleri Al";
@@ -161,37 +154,37 @@
 "alert.title_warning" = "Uyarı";
 "alert.title_info" = "Bilgi";
 
-"alert.fatal_error" = "Ölümcül hata: %@ \nUygulamadan şimdi çıkılacak.";
+"alert.fatal_error" = "Onulmaz hata: %@ \nUygulamadan şimdi çıkılacak.";
 "alert.mpv_error" = "İç hata: %@ (%@) %@ seçeneği hatalı.";
 "alert.sleep" = "Ekran uykusu engellenemiyor(0x%0X8)";
 
-"alert.unsupported_audio" = "Desteklenmeyen harici ses dosyası.";
-"alert.unsupported_sub" = "Desteklenmeyen harici altyazı.";
+"alert.unsupported_audio" = "Desteklenmeyen dış ses dosyası.";
+"alert.unsupported_sub" = "Desteklenmeyen dış altyazı.";
 "alert.unsupported_url" = "Desteklenmeyen URL.";
 "alert.wrong_url_format" = "Yanlış URL biçimi.";
 
 "alert.error_open" = "Dosya veya akış açılamıyor!";
-"alert.error_finding_file" = "%@ dosyası bulamıyor!";
-"alert.error_loading_script" = "%@ komut dosyası yüklenemiyor!";
+"alert.error_finding_file" = "%@ dosyası bulunamıyor!";
+"alert.error_loading_script" = "%@ betiği yüklenemiyor!";
 "alert.error_saving_file" = "%@: %@ kaydedilirken hata oluştu!";
-"alert.error_deleting_file" = "Dosyayı silemezsiniz.";
+"alert.error_deleting_file" = "Dosya silinemiyor.";
 
-"alert.config.new.title" = "Yeni Giriş Konfigürasyonu";
+"alert.config.new.title" = "Yeni Giriş Yapılandırması";
 "alert.config.new.message" = "Lütfen yeni yapılandırma için bir ad girin.";
 "alert.config.duplicate.title" = "Yapılandırmayı Çoğalt";
 "alert.config.duplicate.message" = "Lütfen çoğaltılan yapılandırma dosyası için bir ad girin.";
 "alert.config.empty_name" = "Ad alanı boş olamaz.";
-"alert.config.name_existing" = "Bu isim zaten alınmış.";
-"alert.config.file_existing.title" = "Dosya Zaten Mevcut";
-"alert.config.file_existing.message" = "Bu olmamalıydı. Dosyanın üzerine yazmak için Tamam'ı, dosyayı Finder'da göstermek için İptal'i seçin.";
+"alert.config.name_existing" = "Bu ad halihazırda alınmış.";
+"alert.config.file_existing.title" = "Dosya Halihazırda Var";
+"alert.config.file_existing.message" = "Bu olmamalıydı. Dosyanın üzerine yazmak için Tamam'ı, dosyayı Finder'da göstermek için Vazgeç'i seçin.";
 "alert.config.cannot_create" = "Yapılandırma dosyası oluşturulamıyor!\n%@";
 "alert.config.cannot_write" = "Yapılandırma dosyasına yazılamıyor!";
 
 "alert.filter.incorrect" = "Filtreler ayarlanırken hata oluştu. Lütfen parametre biçiminizi kontrol edin.";
 "alert.add_filter.title" = "Yeni Filtre";
-"alert.add_filter.message" = "Lütfen mpv'nin vf veya af komutu biçiminde bir filtre dizesi girin.";
+"alert.add_filter.message" = "Lütfen mpv'nin vf veya af komutu biçiminde bir filtre dizisi girin.";
 
-"alert.keybinding_config.error" = "\"%@\" yapılandırma dosyasını ayrıştırırken hata! Varsayılan IINA ayarlarına dönülüyor. Lütfen yapılandırmanızı gözden geçirin.";
+"alert.keybinding_config.error" = "\"%@\" tuş bağlntısı yapılandırma dosyası ayrıştırırken hata! Saptanmış IINA ayarlarına dönülüyor. Lütfen yapılandırmanızı gözden geçirin.";
 
 "alert.extra_option.cannot_read" = "Kullanıcı tanımlı ek mpv seçenekleri okunamıyor.";
 "alert.extra_option.empty" = "Anahtar veya değer boş olamaz!";
@@ -207,8 +200,8 @@
 "alert.sub.cannot_save_passwd" = "Anahtar zincirinize şifrenizi kaydedemiyoruz: %@";
 "alert.sub.cannot_login" = "Giriş yapılamıyor. Lütfen kullanıcı adınızı, şifrenizi ve ağ durumunuzu kontrol edin.\n\n%@ ";
 
-"alert.set_default.title" = "IINA'yı Varsayılan Uygulama Olarak Ayarla";
-"alert.set_default.message" = "Desteklenen tüm dosya türleri için IINA varsayılan uygulama olarak ayarlanacaktır.";
+"alert.set_default.title" = "IINA'yı Saptanmış Uygulama Olarak Ayarla";
+"alert.set_default.message" = "Desteklenen tüm dosya türleri için IINA saptanmış uygulama olarak ayarlanacak.";
 "alert.set_default.success" = "%d başarıyla tamamlandı ve %d başarısız oldu.";
 
 "alert.add_watch.title" = "İzleme Özelliği Ekle";
@@ -228,9 +221,9 @@
 "alert.add_url.message" = "Lütfen URL adresini girin:";
 
 "alert.delete_history.title" = "Oynatma listesi geçmişini sil";
-"alert.delete_history.message" = "Seçili maddeleri silmek istediğinize emin misiniz?";
+"alert.delete_history.message" = "Seçili girdileri silmek istediğinizden emin misiniz?";
 
-"alert.filter_hwdec.message" = "Video filtresi uygulamak üzeresiniz ancak donanımsal çözücünüz video filtrelerini iyi desteklemiyor olabilir. \n\nDonanımsal çözücüyü devre dışı bırakabilirsiniz veya “Auto (Copy)” seçeneğini etkinleştirebilirsiniz. “Auto (Copy)” seçeneği donanım çözücüsünü kullanır ancak bellek kullanımı 2 kat fazladır. \n \nEylemin çalışması için son operasyonu tekrarlamanız gerekebilir (kırpma ayarı gibi).";
+"alert.filter_hwdec.message" = "Video filtresi uygulamak üzeresiniz; ancak donanımsal çözücünüz video filtrelerini iyi desteklemiyor olabilir. \n\nDonanımsal çözücüyü devre dışı bırakabilirsiniz veya “Otomatik (Kopya)” seçeneğini etkinleştirebilirsiniz. Bu seçenek donanım çözücüsünü kullanır; ancak bellek kullanımı 2 kat fazladır. \n \nEylemin çalışması için son işlemi yinelemeniz gerekebilir (kırpma ayarı gibi).";
 "alert.filter_hwdec.abort" = "İptal Et";
 "alert.filter_hwdec.turn_off" = "Donanım Çözücüsünü Kapat";
 "alert.filter_hwdec.use_copy" = "Otomatik (Kopya)'yı Etkinleştir";
@@ -239,10 +232,10 @@
 "alert.clear_cache.message" = "Küçük resim önbelleğini silmek istediğinizden emin misiniz?";
 
 "alert.clear_history.title" = "Oynatma Geçmişini Temizle";
-"alert.clear_history.message" = "Tüm oynatma geçmişi silinecek emin misin?";
+"alert.clear_history.message" = "Tüm oynatma geçmişini silmek istediğinizden emin misiniz?";
 
-"alert.clear_watch_later.title" = "Kayıtlı Oynatma İşlemlerini Temizle";
-"alert.clear_watch_later.message" = "Kayıtlı tüm oynatma ilerlemesi silinecek emin misiniz (\"daha sonra izleyin\" verisi)?";
+"alert.clear_watch_later.title" = "Kayıtlı Oynatma İlerlemesini Temizle";
+"alert.clear_watch_later.message" = "Tüm kayıtlı oynatma ilerlemesini silmek istediğinizden emin misiniz (\"sonra izle\" verisi)?";
 
 "alert.restore_alerts.title" = "Baskılanmış uyarıları geri al";
 "alert.restore_alerts.message" = "Baskılanmış uyarıları  geri yüklemek istediğinizden emin misiniz?";
@@ -255,12 +248,12 @@
 
 "alert.assrt_register" = "Sınırlı API kotası yüzünden kendi API kimliğinizi kullanmanız şiddetle tavsiye edilir. Varsayılan token sadece demo kullanım için olduğundan ağ hatası almanız kuvvetle muhtemeldir.";
 "alert.assrt_register.register" = "Şimdi Kaydol";
-"alert.assrt_register.try" = "Lütfen Deneyin";
-"alert.assrt_token_prompt.title" = "API tokeninizi girin";
+"alert.assrt_register.try" = "Önce Dene";
+"alert.assrt_token_prompt.title" = "API jetonunuzu girin";
 "alert.assrt_token_prompt.message" = "Lütfen açılan web sayfasında kayıt olun. Kullanıcı web sayfasından tokeniniz alın ve aşağıya girin:";
 "alert.assrt_token_invalid" = "Assrt API tokeniniz geçerli gözükmüyor.";
 
-"alert.plugin_uninstall.title" = "%@ kaldırmaktan emin misiniz?";
+"alert.plugin_uninstall.title" = "%@ öğesini kaldırmak istediğinizden emin misiniz?";
 "alert.plugin_uninstall.message" = "Bu eklenti sabit diskinizden silinecek.";
 "alert.duplicated_plugin_id" = "Yinelenen eklenti tanımlayıcıları algılandı. İki veya daha fazla eklenti aynı \"%@\" tanımlayıcısına sahip. Bu anormal davranışlara neden olabilir. Lütfen bunları Tercihler - Eklentiler bölümünde bulun ve yazarlarına bildirin. Bir eklenti yerel olarak kuruluysa, eklentinin Info.json dosyasındaki tanımlayıcısını manuel olarak da değiştirebilirsiniz.";
 "alert.plugin_no_update" = "Güncelleme bulunamadı.";
@@ -272,26 +265,26 @@
 "playlist.total_length" = "toplamda %@";
 "playlist.total_length_with_selected" = "%@ / %@ seçildi";
 "pl_menu.title_multi" = "%d Öğe";
-"pl_menu.play_next" = "Sıradakini Oynat";
+"pl_menu.play_next" = "Sonrakini Oynat";
 "pl_menu.play_in_new_window" = "Yeni Pencerede Oynat";
 "pl_menu.remove" = "Kaldır";
-"pl_menu.remove_multi" = "Seçileni Kaldır";
+"pl_menu.remove_multi" = "Seçiliyi Kaldır";
 "pl_menu.delete" = "Çöp Kutusuna Taşı";
 "pl_menu.delete_multi" = "Seçili Dosyaları Çöp Kutusuna Taşı";
 "pl_menu.delete_after_play" = "Oynatma İşleminden Sonra Çöp Kutusuna Taşı";
 "pl_menu.delete_after_play_multi" = "Seçilen Dosyaları Oynatma İşleminden Sonra Çöp Kutusuna Taşı";
-"pl_menu.show_in_finder" = "Finder'da göster";
+"pl_menu.show_in_finder" = "Finder'da Göster";
 "pl_menu.add_file" = "Dosya Ekle";
-"pl_menu.add_url" = "Internet Adresi (URL) Ekle...";
+"pl_menu.add_url" = "URL Ekle…";
 "pl_menu.clear_playlist" = "Oynatma Listesini Temizle";
 "pl_menu.matched_sub" = "%d Altyazı Eşleşti";
 "pl_menu.add_sub" = "Altyazı Ekle…";
 "pl_menu.wrong_sub" = "Yanlış Altyazı!";
 "pl_menu.browser" = "Tarayıcıda Aç";
 "pl_menu.copy_url" = "URL'yi kopyala";
-"pl_menu.copy_url_multi" = "URL'leri kopyala";
+"pl_menu.copy_url_multi" = "URL'leri Kopyala";
 
-"keymapping.title" = "Klavye Kestirmeleri";
+"keymapping.title" = "Tuş Eşlemlemeleri";
 "keymapping.message" = "Kaydetmek için herhangi bir tuşa basın.";
 
 "filter.video_filters" = "Video Filtreleri";
@@ -306,35 +299,35 @@
 "osc_toolbar.settings" = "Hızlı Ayarlar";
 "osc_toolbar.playlist" = "Oynatma listesi ve bölümler";
 "osc_toolbar.pip" = "Resim İçinde Resim'i Aç/Kapa";
-"osc_toolbar.full_screen" = "Tam Ekran Aç/Kapa";
-"osc_toolbar.music_mode" = "Müzik moduna geç";
+"osc_toolbar.full_screen" = "Tam Ekranı Aç/Kapat";
+"osc_toolbar.music_mode" = "Müzik kipine geç";
 "osc_toolbar.sub_track" = "Altyazı izini seç";
 
 "mini_player.album_art" = "Albüm kapağını göster";
-"mini_player.loop" = "Tekrarla";
+"mini_player.loop" = "Yinele";
 "mini_player.shuffle" = "Karıştır";
-"mini_player.remove" = "Şarkı listesinden kaldır";
+"mini_player.remove" = "Oynatma listesinden kaldır";
 "mini_player.add" = "Oynatma listesine ekle";
 "mini_player.delete" = "Tüm izleri oynatma listesinden kaldır";
-"mini_player.volume" = "Ses Seviyesi";
-"mini_player.close" = "Müzik modunu kapat";
-"mini_player.back" = "Video moduna geri dön";
+"mini_player.volume" = "Ses Yüksekliği";
+"mini_player.close" = "Müzik kipini kapat";
+"mini_player.back" = "Video kipine geri dön";
 
 // Touch bar
 
-"touchbar.ahead_15" = "15sn ileriye";
-"touchbar.ahead_30" = "30sn ileriye";
+"touchbar.ahead_15" = "15 sn İleri";
+"touchbar.ahead_30" = "30 sn İleri";
 "touchbar.back_15" = "15 sn Geri";
 "touchbar.back_30" = "30 sn Geri";
-"touchbar.next_video" = "Sıradaki Video";
+"touchbar.next_video" = "Sonraki Video";
 "touchbar.prev_video" = "Önceki Video";
 "touchbar.increase_volume" = "Ses Seviyesi +";
 "touchbar.decrease_volume" = "Ses Seviyesi -";
-"touchbar.rewind" = "Geriye Sar";
-"touchbar.fast_forward" = "Hızlı İlerletme";
+"touchbar.rewind" = "Geri Sar";
+"touchbar.fast_forward" = "İleri Sar";
 "touchbar.play_pause" = "Oynat / Duraklat";
 "touchbar.seek" = "Sar";
-"touchbar.time" = "Zaman Pozisyonu";
+"touchbar.time" = "Zaman Konumu";
 "touchbar.remainingTimeOrTotalDuration" = "Kalan Zaman / Toplam Süre";
 "touchbar.toggle_pip" = "Resim İçinde Resim'i Aç/Kapa";
 
@@ -342,15 +335,15 @@
 
 "permissions.network-request.name" = "Ağ İstekleri";
 "permissions.network-request.desc" = "Bu eklenti yandaki web sitelerinden veri alabilir yada veri gönderebilir:";
-"permissions.network-request.any_site" = "Herhangi site";
-"permissions.show-osd.name" = "OSD göster";
-"permissions.show-osd.desc" = "Bu eklenti OSD(Ekran Üstü Gösterim) iletilerini gösterebilir.";
+"permissions.network-request.any_site" = "Herhangi bir site";
+"permissions.show-osd.name" = "Ekran Üzeri Paneli Göster";
+"permissions.show-osd.desc" = "Bu eklenti, OSD (Ekran Üzeri Paneli) iletilerini gösterebilir.";
 "permissions.show-alert.name" = "Uyarıları göster";
-"permissions.show-alert.desc" = "Bu eklenti pop-up uyarılar gösterebilir.";
+"permissions.show-alert.desc" = "Bu eklenti, açılır uyarılar gösterebilir.";
 "permissions.video-overlay.name" = "Video üzerine katman ekle";
-"permissions.video-overlay.desc" = "Bu eklenti video üzerinde başka içerikleride gösterebilir.";
-"permissions.file-system.name" = "Dosya erişimi";
-"permissions.file-system.desc" = "Bu eklenti hassas bilgilere sahip dosyalarda dahil olmak üzere sabit diskteki dosyaları okuyabilir ve yazabilir. Ayrıca bu eklenti bilgisayarınıza zarar verebilecek diğer uygulamalar tarafından çağırılabilir. Lütfen eklenti kaynağından emin olunuz.";
+"permissions.video-overlay.desc" = "Bu eklenti, video üzerinde başka içerikler gösterebilir.";
+"permissions.file-system.name" = "Dosya sistemine erişim";
+"permissions.file-system.desc" = "Bu eklenti, hassas bilgilere sahip dosyalar da dahil olmak üzere sabit diskteki dosyaları okuyabilir ve yazabilir. Ayrıca bu eklenti bilgisayarınıza zarar verebilecek diğer uygulamalar tarafından çağrılabilir. Lütfen eklenti kaynağından emin olun.";
 
 "plugin.install" = "Yükle";
 "plugin.installed" = "Yüklendi";
@@ -359,9 +352,9 @@
 "alert.plugin.install_error" = "Yükleme sırasında hata oluştu: %@";
 "alert.invalid_url" = "URL geçerli değil.";
 "plugin.install_error.invalid_url" = "URL geçerli değil.";
-"plugin.install_error.file_not_found" = "Paket dosya bulunamadı.";
-"plugin.install_error.cannot_download" = "Ektenti paketini indirmede hata oluştu.\n\nHata çıktısı:%@\n";
-"plugin.install_error.cannot_unpackage" = "Ektenti paketini açmada hata oluştu.\n\nHata çıktısı:%@\n";
-"plugin.install_error.cannot_load" = "IINA eklentiyi yükleyemedi. Eklenti yanlış formatta olabilir.";
-"plugin.check_for_updates" = "Güncellemeleri kontrol et";
+"plugin.install_error.file_not_found" = "Paket dosyası bulunamadı.";
+"plugin.install_error.cannot_download" = "Ektenti indirilemedi.\n\nHata çıktısı:%@\n";
+"plugin.install_error.cannot_unpackage" = "Eklenti paketi açılamadı.\n\nHata çıktısı:%@\n";
+"plugin.install_error.cannot_load" = "IINA eklentiyi yükleyemedi. Eklenti yanlış biçimde olabilir.";
+"plugin.check_for_updates" = "Güncellemeleri Denetle";
 "plugin.updating" = "Güncelleme indiriliyor…";

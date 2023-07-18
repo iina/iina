@@ -21,13 +21,6 @@
 "guide.basic_settings" = "基本設定";
 "guide.faq" = "よくある質問";
 
-// Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
-
 // MainWindowController.swift
 "main.buffering_indicator" = "バッファ中… %d%%";
 "main.opening_stream" = "ストリームを展開中…";
@@ -126,7 +119,7 @@
 "menu.speed" = "再生速度: %.2f倍";
 "menu.chapters" = "チャプターパネルを表示";
 "menu.hide_chapters" = "チャプターパネルを隠す";
-"menu.playlist" = "プレイリストパネルを開く";
+"menu.playlist" = "プレイリストパネルを表示";
 "menu.hide_playlist" = "プレイリストパネルを隠す";
 "menu.video" = "ビデオパネルを表示";
 "menu.hide_video" = "ビデオパネルを隠す";
@@ -183,7 +176,7 @@
 "alert.config.empty_name" = "名前は空欄にできません。";
 "alert.config.name_existing" = "この名前はすでに存在しています。";
 "alert.config.file_existing.title" = "ファイルが既に存在しています";
-"alert.config.file_existing.message" = "既にファイルが存在しています。上書きするにはOKを選択、Finderで表示するにはキャンセルを選択してください。";
+"alert.config.file_existing.message" = "これは起こるべきではありません。ファイルを上書きするにはOKを、Finderに表示するにはキャンセルを選択してください。";
 "alert.config.cannot_create" = "設定ファイルが作成できません！\n%@";
 "alert.config.cannot_write" = "設定ファイルに書き込めません！";
 
@@ -280,7 +273,7 @@
 "pl_menu.delete_multi" = "選択したファイルをゴミ箱へ移動";
 "pl_menu.delete_after_play" = "再生した後にゴミ箱へ移動";
 "pl_menu.delete_after_play_multi" = "再生した後に選択したファイルをゴミ箱へ移動";
-"pl_menu.show_in_finder" = "Finderで表示";
+"pl_menu.show_in_finder" = "Finderに表示";
 "pl_menu.add_file" = "ファイルの追加…";
 "pl_menu.add_url" = "URLの追加…";
 "pl_menu.clear_playlist" = "プレイリストを消去する";
@@ -360,8 +353,8 @@
 "alert.invalid_url" = "URLが無効です。";
 "plugin.install_error.invalid_url" = "URLが無効です。";
 "plugin.install_error.file_not_found" = "パッケージファイルが見つかりません。";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_download" = "プラグインのダウンロードに失敗しました。\n\n結果:%@\n";
+"plugin.install_error.cannot_unpackage" = "プラグインのパッケージ解除に失敗しました。\n\n結果:%@\n";
 "plugin.install_error.cannot_load" = "IINAはこのプラグインを読み込むことができません。フォーマットが間違っている可能性があります。";
 "plugin.check_for_updates" = "アップデートを確認";
 "plugin.updating" = "アップデートをダウンロード中...";

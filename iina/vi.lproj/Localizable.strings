@@ -21,13 +21,6 @@
 "guide.basic_settings" = "Cài đặt cơ bản";
 "guide.faq" = "Câu hỏi Thường Gặp";
 
-// Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
-
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffering… %d%%";
 "main.opening_stream" = "Mở luồng…";
@@ -183,7 +176,7 @@
 "alert.config.empty_name" = "The name cannot be empty.";
 "alert.config.name_existing" = "The name already exists.";
 "alert.config.file_existing.title" = "File Already Exists";
-"alert.config.file_existing.message" = "This should not happen. Choose OK to overwrite, Cancel to reveal the file in Finder.";
+"alert.config.file_existing.message" = "This should not happen. Choose OK to overwrite, Cancel to show the file in Finder.";
 "alert.config.cannot_create" = "Cannot create config file!\n%@";
 "alert.config.cannot_write" = "Cannot write to config file!";
 

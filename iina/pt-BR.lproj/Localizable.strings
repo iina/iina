@@ -21,13 +21,6 @@
 "guide.basic_settings" = "Configurações Básicas";
 "guide.faq" = "Dúvidas frequentes";
 
-// Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
-
 // MainWindowController.swift
 "main.buffering_indicator" = "Carregando… %d%%";
 "main.opening_stream" = "Abrindo stream…";
@@ -124,7 +117,7 @@
 "menu.pause" = "Pausar";
 "menu.resume" = "Reproduzir";
 "menu.speed" = "Velocidade: %.2fx";
-"menu.chapters" = "Mostrar Capitulos";
+"menu.chapters" = "Mostrar Painel de Capítulos";
 "menu.hide_chapters" = "Ocultar Painel de Capítulos";
 "menu.playlist" = "Mostrar painel de playlist";
 "menu.hide_playlist" = "Ocultar Painel de Playlist";
@@ -183,7 +176,7 @@
 "alert.config.empty_name" = "Nome não pode ser vazio.";
 "alert.config.name_existing" = "Nome já existe.";
 "alert.config.file_existing.title" = "Arquivo já existe";
-"alert.config.file_existing.message" = "Isso não deveria ocorrer. Escolha OK pra forçar, Cancelar para mostrar o arquivo no Finder.";
+"alert.config.file_existing.message" = "Isto não deve acontecer. Escolha OK para sobrescrever, Cancelar para mostrar o arquivo no Finder.";
 "alert.config.cannot_create" = "Não é possível criar arquivo de configuração!\n%@";
 "alert.config.cannot_write" = "Não é possível escrever no arquivo de configuração!";
 
@@ -360,8 +353,8 @@
 "alert.invalid_url" = "A URL é inválida.";
 "plugin.install_error.invalid_url" = "A URL é inválida.";
 "plugin.install_error.file_not_found" = "Não foi possível encontrar o arquivo do pacote.";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_download" = "Falha ao baixar o plugin.\n\nSaída:%@\n";
+"plugin.install_error.cannot_unpackage" = "Falha ao desempacotar o plugin.\n\nSaída:%@\n";
 "plugin.install_error.cannot_load" = "IINA não pode carregar este plugin. Ele pode estar no formato errado.";
 "plugin.check_for_updates" = "Buscar por atualizações";
 "plugin.updating" = "Baixando a atualização…";

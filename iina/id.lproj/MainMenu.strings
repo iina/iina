@@ -1,14 +1,14 @@
 /* Class = "NSMenuItem"; title = "Subtitle Delay + 0.1s"; ObjectID = "0Cz-OE-85L"; */
-"0Cz-OE-85L.title" = "Kecepatan Subtitel + 0.1s";
+"0Cz-OE-85L.title" = "Penundaan Terjemahan + 0.1dtk";
 
 /* Class = "NSMenuItem"; title = "Show Playlist Panel"; ObjectID = "0T7-Nu-SL7"; */
-"0T7-Nu-SL7.title" = "Lihat Panel Daftar Putar";
+"0T7-Nu-SL7.title" = "Tampilkan Panel Playlist";
 
 /* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "0m7-3r-twH"; */
 "0m7-3r-twH.title" = "Buka URL…";
 
 /* Class = "NSMenu"; title = "Subtitle"; ObjectID = "16p-PA-x34"; */
-"16p-PA-x34.title" = "Subtitel";
+"16p-PA-x34.title" = "Terjemahan";
 
 /* Class = "NSMenuItem"; title = "Normal Size"; ObjectID = "1UK-8n-QPP"; */
 "1UK-8n-QPP.title" = "Ukuran Normal";
@@ -35,10 +35,10 @@
 "43n-Ed-5kT.title" = "Tampilkan Panel Audio";
 
 /* Class = "NSMenuItem"; title = "Audio Delay + 0.5s"; ObjectID = "4ae-MT-2L1"; */
-"4ae-MT-2L1.title" = "Perlambatan Audio + 0.5s";
+"4ae-MT-2L1.title" = "Penundaan Audio + 0.5dtk";
 
 /* Class = "NSMenuItem"; title = "Quit IINA"; ObjectID = "4sb-4s-VLi"; */
-"4sb-4s-VLi.title" = "Keluar IINA";
+"4sb-4s-VLi.title" = "Keluar dari IINA";
 
 /* Class = "NSMenuItem"; title = "Reset Speed"; ObjectID = "5Gn-90-oDu"; */
 "5Gn-90-oDu.title" = "Setel Ulang Kecepatan";
@@ -53,16 +53,16 @@
 "6Eq-ni-6hG.title" = "Masuk Layar Penuh";
 
 /* Class = "NSMenuItem"; title = "Step Forward 5s"; ObjectID = "6yE-op-DTS"; */
-"6yE-op-DTS.title" = "Langkah Maju 5s";
+"6yE-op-DTS.title" = "Majukan 5dtk";
 
 /* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "7Bn-Mp-EvJ"; */
 "7Bn-Mp-EvJ.title" = "Transformasi";
 
 /* Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "7rG-Yq-EYG"; */
-"7rG-Yq-EYG.title" = "Berhenti bicara";
+"7rG-Yq-EYG.title" = "Berhenti Wicara";
 
 /* Class = "NSMenuItem"; title = "Speech"; ObjectID = "8Oy-tP-udW"; */
-"8Oy-tP-udW.title" = "Ucapan";
+"8Oy-tP-udW.title" = "Wicara";
 
 /* Class = "NSMenuItem"; title = "Audio Filters…"; ObjectID = "8Zh-hU-Cc4"; */
 "8Zh-hU-Cc4.title" = "Filter Audio…";
@@ -71,43 +71,43 @@
 "8pV-XQ-AvB.title" = "Kecepatan:";
 
 /* Class = "NSMenuItem"; title = "Show Subtitles Panel"; ObjectID = "8y7-Cy-lKT"; */
-"8y7-Cy-lKT.title" = "Tampilkan Panel Subtitel";
+"8y7-Cy-lKT.title" = "Tampilkan Panel Terjemahan";
 
 /* Class = "NSMenuItem"; title = "Speed Up to 1.1x"; ObjectID = "91n-xW-L37"; */
 "91n-xW-L37.title" = "Percepat 1.1x";
 
 /* Class = "NSMenuItem"; title = "Audio Delay - 0.1s"; ObjectID = "9ee-7i-xs7"; */
-"9ee-7i-xs7.title" = "Perlambatan Audio - 0.1s";
+"9ee-7i-xs7.title" = "Penundaan Audio - 0.1dtk";
 
 /* Class = "NSMenuItem"; title = "<None>"; ObjectID = "9pa-9C-ueQ"; */
 "9pa-9C-ueQ.title" = "<Tidak Ada>";
 
 /* Class = "NSMenuItem"; title = "Save Downloaded Subtitle"; ObjectID = "9zk-co-roT"; */
-"9zk-co-roT.title" = "Menyimpan Subtitel yang Ter-unduh";
+"9zk-co-roT.title" = "Simpan Terjemahan Terunduh";
 
 /* Class = "NSMenuItem"; title = "Take a Screenshot"; ObjectID = "AoP-K6-Kb5"; */
-"AoP-K6-Kb5.title" = "Mengambil Screenshot";
+"AoP-K6-Kb5.title" = "Ambil Tangkapan Layar";
 
 /* Class = "NSMenuItem"; title = "Delogo"; ObjectID = "ArE-2s-JIV"; */
-"ArE-2s-JIV.title" = "Hapus Watermark";
+"ArE-2s-JIV.title" = "Delogo";
 
 /* Class = "NSMenuItem"; title = "Saved Video Filters"; ObjectID = "BDr-G9-IRx"; */
-"BDr-G9-IRx.title" = "Filter Video Terunduh";
+"BDr-G9-IRx.title" = "Filter Video Tersimpan";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "BOF-NM-1cW"; */
 "BOF-NM-1cW.title" = "Preferensi…";
 
 /* Class = "NSMenuItem"; title = "Scale Down"; ObjectID = "Bli-YK-Rl0"; */
-"Bli-YK-Rl0.title" = "Mengecilkan";
+"Bli-YK-Rl0.title" = "Perkecil";
 
 /* Class = "NSMenuItem"; title = "Share"; ObjectID = "BtY-iQ-6Pf"; */
 "BtY-iQ-6Pf.title" = "Bagikan";
 
 /* Class = "NSMenuItem"; title = "Advanced Screenshot…"; ObjectID = "CKi-JE-yLT"; */
-"CKi-JE-yLT.title" = "Screenshot Lanjutan…";
+"CKi-JE-yLT.title" = "Tangkapan Layar Lanjutan…";
 
 /* Class = "NSMenuItem"; title = "File Loop"; ObjectID = "D1y-kv-85s"; */
-"D1y-kv-85s.title" = "Perulangan File";
+"D1y-kv-85s.title" = "Pengulangan File";
 
 /* Class = "NSMenu"; title = "Audio Track"; ObjectID = "DRb-Y8-xir"; */
 "DRb-Y8-xir.title" = "Trek Audio";
@@ -119,16 +119,16 @@
 "DVo-aG-piG.title" = "Tutup";
 
 /* Class = "NSMenuItem"; title = "Show Chapters Panel"; ObjectID = "DwM-3d-Eb9"; */
-"DwM-3d-Eb9.title" = "Lihat Panel Bab";
+"DwM-3d-Eb9.title" = "Lihat Panel Chapter";
 
 /* Class = "NSMenu"; title = "Subtitles"; ObjectID = "EKp-Qx-4Mn"; */
-"EKp-Qx-4Mn.title" = "Subtitel";
+"EKp-Qx-4Mn.title" = "Terjemahan";
 
 /* Class = "NSMenu"; title = "Help"; ObjectID = "F2S-fz-NVQ"; */
 "F2S-fz-NVQ.title" = "Bantuan";
 
 /* Class = "NSMenuItem"; title = "Next Chapter"; ObjectID = "F6G-Ln-fqI"; */
-"F6G-Ln-fqI.title" = "Bab Selanjutnya";
+"F6G-Ln-fqI.title" = "Chapter Selanjutnya";
 
 /* Class = "NSMenuItem"; title = "IINA Help"; ObjectID = "FKE-Sm-Kum"; */
 "FKE-Sm-Kum.title" = "Bantuan IINA";
@@ -137,7 +137,7 @@
 "FTu-CF-O0R.title" = "Trek Video";
 
 /* Class = "NSMenuItem"; title = "Chapters"; ObjectID = "Fal-I4-PZk"; */
-"Fal-I4-PZk.title" = "Bab";
+"Fal-I4-PZk.title" = "Chapter";
 
 /* Class = "NSMenu"; title = "Playback"; ObjectID = "GEO-Iw-cKr"; */
 "GEO-Iw-cKr.title" = "Pemutaran";
@@ -146,7 +146,7 @@
 "GF1-xB-KcA.title" = "Trek Audio";
 
 /* Class = "NSMenuItem"; title = "Next Media"; ObjectID = "GR6-4V-lRT"; */
-"GR6-4V-lRT.title" = "Media Lanjutan";
+"GR6-4V-lRT.title" = "Media Berikutnya";
 
 /* Class = "NSMenuItem"; title = "Playlist"; ObjectID = "Gi5-1S-RQB"; */
 "Gi5-1S-RQB.title" = "Playlist";
@@ -155,7 +155,7 @@
 "Gqg-wU-RRo.title" = "Crop";
 
 /* Class = "NSMenuItem"; title = "Reset Audio Delay"; ObjectID = "H3d-jR-YCr"; */
-"H3d-jR-YCr.title" = "Setel Ulang Perlambatan Audio";
+"H3d-jR-YCr.title" = "Setel Ulang Penundaan Audio";
 
 /* Class = "NSMenuItem"; title = "Video"; ObjectID = "H8h-7b-M4v"; */
 "H8h-7b-M4v.title" = "Video";
@@ -176,13 +176,13 @@
 "IXq-yq-uDF.title" = "Perangkat Audio";
 
 /* Class = "NSMenuItem"; title = "Horizontal (Mirror)"; ObjectID = "JJq-qH-toq"; */
-"JJq-qH-toq.title" = "Horisontal (Mirror)";
+"JJq-qH-toq.title" = "Horizontal (Cerminkan)";
 
 /* Class = "NSMenuItem"; title = "Open…"; ObjectID = "Kby-lQ-HCW"; */
 "Kby-lQ-HCW.title" = "Buka…";
 
 /* Class = "NSMenuItem"; title = "Show All"; ObjectID = "Kd2-mp-pUS"; */
-"Kd2-mp-pUS.title" = "Tunjukkan Semua";
+"Kd2-mp-pUS.title" = "Tampilkan Semua";
 
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "LE2-aR-0XJ"; */
 "LE2-aR-0XJ.title" = "Bawa Semua ke Depan";
@@ -191,19 +191,19 @@
 "LND-1n-DU2.title" = "Riwayat Pemutaran";
 
 /* Class = "NSMenuItem"; title = "Audio Delay - 0.5s"; ObjectID = "Lc4-4W-thE"; */
-"Lc4-4W-thE.title" = "Perlambatan Audio - 0.5s";
+"Lc4-4W-thE.title" = "Penundaan Audio - 0.5dtk";
 
 /* Class = "NSMenuItem"; title = "Speed Up to 2x"; ObjectID = "Lqa-OG-EEg"; */
 "Lqa-OG-EEg.title" = "Percepat 2x";
 
 /* Class = "NSMenuItem"; title = "Subtitle Delay - 0.5s"; ObjectID = "LsU-Qz-dax"; */
-"LsU-Qz-dax.title" = "Kecepatan Subtitel - 0.5s";
+"LsU-Qz-dax.title" = "Penundaan Terjemahan - 0.5dtk";
 
 /* Class = "NSMenuItem"; title = "Find Online Subtitles…"; ObjectID = "Mg3-WB-gjZ"; */
-"Mg3-WB-gjZ.title" = "Cari Subtitel Online…";
+"Mg3-WB-gjZ.title" = "Cari Terjemahan Online…";
 
 /* Class = "NSMenuItem"; title = "Save Current Playlist…"; ObjectID = "Mjr-lL-oEt"; */
-"Mjr-lL-oEt.title" = "Simpant Playlist Ini…";
+"Mjr-lL-oEt.title" = "Simpan Playlist Ini…";
 
 /* Class = "NSMenuItem"; title = "Services"; ObjectID = "NMo-om-nkz"; */
 "NMo-om-nkz.title" = "Layanan";
@@ -212,7 +212,7 @@
 "NdF-0z-k5s.title" = "Tempel";
 
 /* Class = "NSMenuItem"; title = "Vertical (Flip)"; ObjectID = "OIu-H0-Mht"; */
-"OIu-H0-Mht.title" = "Vertikal (Flip)";
+"OIu-H0-Mht.title" = "Vertikal (Balikkan)";
 
 /* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "OY7-WF-poV"; */
 "OY7-WF-poV.title" = "Perkecil";
@@ -221,7 +221,7 @@
 "Olw-nP-bQN.title" = "Sembunyikan IINA";
 
 /* Class = "NSMenuItem"; title = "Reset Subtitle Scale"; ObjectID = "P1a-ot-P31"; */
-"P1a-ot-P31.title" = "Setel Ulang Skala Subtitel";
+"P1a-ot-P31.title" = "Setel Ulang Ukuran Terjemahan";
 
 /* Class = "NSMenuItem"; title = "Encoding"; ObjectID = "Pci-OQ-Vni"; */
 "Pci-OQ-Vni.title" = "Enkode";
@@ -233,46 +233,46 @@
 "PyY-pR-jz7.title" = "Filter Video…";
 
 /* Class = "NSMenuItem"; title = "New Window"; ObjectID = "Qv1-xd-wj5"; */
-"Qv1-xd-wj5.title" = "Jendela Baru";
+"Qv1-xd-wj5.title" = "Window Baru";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "R4o-n2-Eq4"; */
-"R4o-n2-Eq4.title" = "Perbesaran";
+"R4o-n2-Eq4.title" = "Perbesar";
 
 /* Class = "NSMenuItem"; title = "Website"; ObjectID = "Rqg-VS-aIj"; */
 "Rqg-VS-aIj.title" = "Situs";
 
 /* Class = "NSMenuItem"; title = "Fit to Screen"; ObjectID = "SHd-63-Xoh"; */
-"SHd-63-Xoh.title" = "Sesuaikan dengan Layar";
+"SHd-63-Xoh.title" = "Paskan dengan layar";
 
 /* Class = "NSMenuItem"; title = "Reset Subtitle Delay"; ObjectID = "SLr-6g-Mgh"; */
-"SLr-6g-Mgh.title" = "Setel Ulang Perlambatan Subtitel";
+"SLr-6g-Mgh.title" = "Setel Ulang Penundaan Terjemahan";
 
 /* Class = "NSMenuItem"; title = "Step Backward 5s"; ObjectID = "Sif-85-FF1"; */
-"Sif-85-FF1.title" = "Langkah Mundur 5s";
+"Sif-85-FF1.title" = "Mundurkan 5dtk";
 
 /* Class = "NSMenuItem"; title = "Subtitle Delay: "; ObjectID = "THG-4o-U6A"; */
-"THG-4o-U6A.title" = "Perlambatan Subtitel: ";
+"THG-4o-U6A.title" = "Penundaan Terjemahan: ";
 
 /* Class = "NSMenu"; title = "Window"; ObjectID = "Td7-aD-5lo"; */
-"Td7-aD-5lo.title" = "Jendela";
+"Td7-aD-5lo.title" = "Window";
 
 /* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "Tue-O7-cei"; */
-"Tue-O7-cei.title" = "Jadikan Huruf Besar";
+"Tue-O7-cei.title" = "Kapitalkan";
 
 /* Class = "NSMenuItem"; title = "Pause"; ObjectID = "UOE-MJ-8ku"; */
-"UOE-MJ-8ku.title" = "Tunda";
+"UOE-MJ-8ku.title" = "Jeda";
 
 /* Class = "NSMenu"; title = "Second Subtitle"; ObjectID = "UwY-P2-Xdb"; */
-"UwY-P2-Xdb.title" = "Subtitel Cadangan";
+"UwY-P2-Xdb.title" = "Terjemahan Sekunder";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "VDZ-ro-z5z"; */
 "VDZ-ro-z5z.title" = "Ulang";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "Vdr-fp-XzO"; */
-"Vdr-fp-XzO.title" = "Sembunyikan Yang Lain";
+"Vdr-fp-XzO.title" = "Sembunyikan Lainnya";
 
 /* Class = "NSMenuItem"; title = "Mute"; ObjectID = "WOL-Us-ByA"; */
-"WOL-Us-ByA.title" = "Senyap";
+"WOL-Us-ByA.title" = "Bisukan";
 
 /* Class = "NSMenuItem"; title = "Volume + 5%"; ObjectID = "Wbq-vt-hzX"; */
 "Wbq-vt-hzX.title" = "Volume + 5%";
@@ -281,7 +281,7 @@
 "XDC-Pc-rS1.title" = "Frame Selanjutnya";
 
 /* Class = "NSMenuItem"; title = "Scale Up"; ObjectID = "XHu-Dl-Vq2"; */
-"XHu-Dl-Vq2.title" = "Membesar";
+"XHu-Dl-Vq2.title" = "Perbesar";
 
 /* Class = "NSMenuItem"; title = "Undo"; ObjectID = "XPz-ml-OQ3"; */
 "XPz-ml-OQ3.title" = "Batal";
@@ -293,13 +293,13 @@
 "Zhv-Bz-I5V.title" = "Volume - 1%";
 
 /* Class = "NSMenuItem"; title = "Custom Touch Bar…"; ObjectID = "ZnF-yX-7jP"; */
-"ZnF-yX-7jP.title" = "Kustom Touch Bar…";
+"ZnF-yX-7jP.title" = "Touch Bar Kustom…";
 
 /* Class = "NSMenuItem"; title = "Playlist Loop"; ObjectID = "aSc-P6-fiZ"; */
-"aSc-P6-fiZ.title" = "Perulangan Playlist";
+"aSc-P6-fiZ.title" = "Pengulangan Playlist";
 
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "aUF-d1-5bR"; */
-"aUF-d1-5bR.title" = "Jendela";
+"aUF-d1-5bR.title" = "Window";
 
 /* Class = "NSMenu"; title = "Playlist"; ObjectID = "aXa-aM-Jaq"; */
 "aXa-aM-Jaq.title" = "Playlist";
@@ -311,10 +311,10 @@
 "bGN-E4-V5A.title" = "Mode Musik";
 
 /* Class = "NSMenuItem"; title = "Open URL in New Window…"; ObjectID = "bfB-bn-KeM"; */
-"bfB-bn-KeM.title" = "Membuka URL di Jendela Baru…";
+"bfB-bn-KeM.title" = "Buka URL di Jendela Baru…";
 
 /* Class = "NSMenu"; title = "File"; ObjectID = "bib-Uj-vzu"; */
-"bib-Uj-vzu.title" = "Berkas";
+"bib-Uj-vzu.title" = "File";
 
 /* Class = "NSMenuItem"; title = "Inspector"; ObjectID = "bwz-r0-peR"; */
 "bwz-r0-peR.title" = "Inspektur";
@@ -326,16 +326,16 @@
 "c6Y-0e-vgf.title" = "Volume + 1%";
 
 /* Class = "NSMenuItem"; title = "Aspect Ratio"; ObjectID = "d15-8v-dXA"; */
-"d15-8v-dXA.title" = "Aspek Rasio";
+"d15-8v-dXA.title" = "Rasio Aspek";
 
 /* Class = "NSMenu"; title = "Chapters"; ObjectID = "d9c-me-L2H"; */
-"d9c-me-L2H.title" = "Bab";
+"d9c-me-L2H.title" = "Chapter";
 
 /* Class = "NSMenu"; title = "Transformations"; ObjectID = "dBM-BU-5xS"; */
 "dBM-BU-5xS.title" = "Transformasi";
 
 /* Class = "NSMenuItem"; title = "File"; ObjectID = "dMs-cI-mzQ"; */
-"dMs-cI-mzQ.title" = "Berkas";
+"dMs-cI-mzQ.title" = "File";
 
 /* Class = "NSMenuItem"; title = "Stop and Clear Playlists"; ObjectID = "deS-xK-iBb"; */
 "deS-xK-iBb.title" = "Berhenti dan Bersihkan Playlist";
@@ -344,13 +344,13 @@
 "eo2-Tt-SLx.title" = "Crop";
 
 /* Class = "NSMenuItem"; title = "Audio Delay:"; ObjectID = "foC-r3-8mp"; */
-"foC-r3-8mp.title" = "Perlambatan Audio:";
+"foC-r3-8mp.title" = "Penundaan Audio:";
 
 /* Class = "NSMenuItem"; title = "Subtitle Delay - 0.1s"; ObjectID = "fyL-tr-6Bu"; */
-"fyL-tr-6Bu.title" = "Perlambatan Subtitel - 0.1s";
+"fyL-tr-6Bu.title" = "Penundaan Terjemahan - 0.1dtk";
 
 /* Class = "NSMenuItem"; title = "Check for Updates…"; ObjectID = "gMo-qL-m08"; */
-"gMo-qL-m08.title" = "Memeriksa Pembaruan…";
+"gMo-qL-m08.title" = "Periksa Pembaruan…";
 
 /* Class = "NSMenuItem"; title = "Delete"; ObjectID = "h9w-Rj-Hm1"; */
 "h9w-Rj-Hm1.title" = "Hapus";
@@ -368,10 +368,10 @@
 "j8P-Gb-HR7.title" = "Trek Video";
 
 /* Class = "NSMenuItem"; title = "Playback"; ObjectID = "jxT-CU-nIS"; */
-"jxT-CU-nIS.title" = "Putaran Ulang";
+"jxT-CU-nIS.title" = "Pemutaran";
 
 /* Class = "NSMenuItem"; title = "Load External Subtitle…"; ObjectID = "k6x-hf-ATi"; */
-"k6x-hf-ATi.title" = "Memuat Subtitel Eksternal…";
+"k6x-hf-ATi.title" = "Muat Terjemahan Eksternal…";
 
 /* Class = "NSMenuItem"; title = "Bigger Size"; ObjectID = "lDC-IC-peP"; */
 "lDC-IC-peP.title" = "Ukuran Lebih Besar";
@@ -380,34 +380,34 @@
 "lYN-0x-lzT.title" = "Audio";
 
 /* Class = "NSMenuItem"; title = "Audio Delay + 0.1s"; ObjectID = "lew-3S-oGY"; */
-"lew-3S-oGY.title" = "Perlambatan Audio + 0.1s";
+"lew-3S-oGY.title" = "Penundaan Audio + 0.1dtk";
 
 /* Class = "NSMenuItem"; title = "Go to Screenshot Folder"; ObjectID = "lj0-Oo-7nB"; */
-"lj0-Oo-7nB.title" = "Menuju ke Berkas Screenshot";
+"lj0-Oo-7nB.title" = "Buka Folder Tangkapan Layar";
 
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "m7w-hc-Y2F"; */
 "m7w-hc-Y2F.title" = "Buat Huruf Besar";
 
 /* Class = "NSMenuItem"; title = "Second Subtitle"; ObjectID = "mGw-jm-5x2"; */
-"mGw-jm-5x2.title" = "Subtitel Cadangan";
+"mGw-jm-5x2.title" = "Terjemahan Sekunder";
 
 /* Class = "NSMenuItem"; title = "Enter Picture in Picture"; ObjectID = "mND-N8-z6o"; */
-"mND-N8-z6o.title" = "Terapkan Picture in Picture";
+"mND-N8-z6o.title" = "Masuk Picture-in-Picture";
 
 /* Class = "NSMenuItem"; title = "Flip"; ObjectID = "mT1-1m-HwN"; */
-"mT1-1m-HwN.title" = "Membalik";
+"mT1-1m-HwN.title" = "Balikkan";
 
 /* Class = "NSMenuItem"; title = "Cycle Audio Tracks"; ObjectID = "n8f-ub-Udb"; */
-"n8f-ub-Udb.title" = "Siklus Trak Audio";
+"n8f-ub-Udb.title" = "Ganti Trek Audio";
 
 /* Class = "NSMenu"; title = "Flip"; ObjectID = "n90-to-nRT"; */
-"n90-to-nRT.title" = "Membalik";
+"n90-to-nRT.title" = "Balikkan";
 
 /* Class = "NSMenuItem"; title = "Delete Current File"; ObjectID = "npH-8B-XA4"; */
-"npH-8B-XA4.title" = "Hapus Berkas Ini";
+"npH-8B-XA4.title" = "Hapus File Ini";
 
 /* Class = "NSMenu"; title = "Open Recent"; ObjectID = "oas-Oc-fiZ"; */
-"oas-Oc-fiZ.title" = "Buka Yang Baru-baru Ini";
+"oas-Oc-fiZ.title" = "Buka Item Terkini";
 
 /* Class = "NSMenuItem"; title = "Previous Media"; ObjectID = "oqG-7L-NLD"; */
 "oqG-7L-NLD.title" = "Media Sebelumnya";
@@ -416,7 +416,7 @@
 "oxF-BB-lBy.title" = "Frame Sebelumnya";
 
 /* Class = "NSMenuItem"; title = "Subtitle Delay + 0.5s"; ObjectID = "pAo-L5-qTO"; */
-"pAo-L5-qTO.title" = "Perlambatan Subtitel + 0.5s";
+"pAo-L5-qTO.title" = "Penundaan Terjemahan + 0.5dtk";
 
 /* Class = "NSMenuItem"; title = "Edit"; ObjectID = "pWh-nh-0pN"; */
 "pWh-nh-0pN.title" = "Edit";
@@ -425,7 +425,7 @@
 "pdj-9C-Fn1.title" = "Volume - 5%";
 
 /* Class = "NSMenuItem"; title = "Previous Chapter"; ObjectID = "pqF-SZ-Ifz"; */
-"pqF-SZ-Ifz.title" = "Bab Sebelumnya";
+"pqF-SZ-Ifz.title" = "Chapter Sebelumnya";
 
 /* Class = "NSMenuItem"; title = "Font…"; ObjectID = "rme-fr-5rr"; */
 "rme-fr-5rr.title" = "Font…";
@@ -434,40 +434,40 @@
 "sW8-ri-eA5.title" = "Audio";
 
 /* Class = "NSMenuItem"; title = "Cycle Subtitles"; ObjectID = "sgu-dK-IGE"; */
-"sgu-dK-IGE.title" = "Siklus Subtitel";
+"sgu-dK-IGE.title" = "Ganti Terjemahan";
 
 /* Class = "NSMenuItem"; title = "Half Size"; ObjectID = "snW-S8-Cw5"; */
-"snW-S8-Cw5.title" = "Setengah Ukuran";
+"snW-S8-Cw5.title" = "Ukuran Separuh";
 
 /* Class = "NSMenuItem"; title = "Copy"; ObjectID = "tH0-KL-c9V"; */
 "tH0-KL-c9V.title" = "Salin";
 
 /* Class = "NSMenuItem"; title = "Open Recent"; ObjectID = "tXI-mr-wws"; */
-"tXI-mr-wws.title" = "Buka Yang Baru-baru Ini";
+"tXI-mr-wws.title" = "Buka Item Terkini";
 
 /* Class = "NSMenuItem"; title = "Cycle Video Tracks"; ObjectID = "taT-mP-2Kv"; */
-"taT-mP-2Kv.title" = "Siklus Trak Video";
+"taT-mP-2Kv.title" = "Ganti Trek Video";
 
 /* Class = "NSMenuItem"; title = "Subtitle"; ObjectID = "uGZ-lo-pJJ"; */
-"uGZ-lo-pJJ.title" = "Subtitel";
+"uGZ-lo-pJJ.title" = "Terjemahan";
 
 /* Class = "NSMenu"; title = "Speech"; ObjectID = "uO1-9S-6Yy"; */
-"uO1-9S-6Yy.title" = "Ucapan";
+"uO1-9S-6Yy.title" = "Wicara";
 
 /* Class = "NSMenuItem"; title = "Clear Menu"; ObjectID = "vNY-rz-j42"; */
 "vNY-rz-j42.title" = "Kosongkan Menu";
 
 /* Class = "NSMenu"; title = "Saved Audio Filters"; ObjectID = "vuV-uP-CAD"; */
-"vuV-uP-CAD.title" = "Filter Audio Terunduh";
+"vuV-uP-CAD.title" = "Filter Audio Tersimpan";
 
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "w8n-XJ-Pgi"; */
 "w8n-XJ-Pgi.title" = "Edit";
 
 /* Class = "NSMenuItem"; title = "Float on Top"; ObjectID = "wex-rX-PcY"; */
-"wex-rX-PcY.title" = "Mengapung";
+"wex-rX-PcY.title" = "Apungkan di atas";
 
 /* Class = "NSMenuItem"; title = "Saved Audio Filters"; ObjectID = "wgZ-DO-nn3"; */
-"wgZ-DO-nn3.title" = "Filter Audio Terunduh";
+"wgZ-DO-nn3.title" = "Filter Audio Tersimpan";
 
 /* Class = "NSMenuItem"; title = "Help"; ObjectID = "wpr-3q-Mcd"; */
 "wpr-3q-Mcd.title" = "Bantuan";
@@ -476,19 +476,19 @@
 "wrS-JG-jF6.title" = "<Tidak Ada>";
 
 /* Class = "NSMenuItem"; title = "Subtitles"; ObjectID = "xDJ-GA-Gjs"; */
-"xDJ-GA-Gjs.title" = "Subtitel";
+"xDJ-GA-Gjs.title" = "Terjemahan";
 
 /* Class = "NSMenu"; title = "Saved Video Filters"; ObjectID = "xhY-fF-oio"; */
-"xhY-fF-oio.title" = "Filter Video Terunduh";
+"xhY-fF-oio.title" = "Filter Video Tersimpan";
 
 /* Class = "NSMenuItem"; title = "Deinterlace"; ObjectID = "yHI-7D-OaI"; */
 "yHI-7D-OaI.title" = "Deinterlace";
 
 /* Class = "NSMenuItem"; title = "Open in New Window…"; ObjectID = "z9W-ga-j3b"; */
-"z9W-ga-j3b.title" = "Membuka di Jendela Baru…";
+"z9W-ga-j3b.title" = "Buka di Window Baru…";
 
 /* Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "zez-g5-2Pt"; */
 "zez-g5-2Pt.title" = "Buat Huruf Kecil";
 
 /* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "zpw-Ac-F3M"; */
-"zpw-Ac-F3M.title" = "Mulai bicara";
+"zpw-Ac-F3M.title" = "Mulai Bicara";

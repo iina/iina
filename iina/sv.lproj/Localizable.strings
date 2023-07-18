@@ -21,13 +21,6 @@
 "guide.basic_settings" = "Grundläggande inställningar";
 "guide.faq" = "Vanliga frågor (FAQ)";
 
-// Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
-
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffrar… %d%%";
 "main.opening_stream" = "Öppnar ström…";
@@ -55,11 +48,11 @@
 "osd.deinterlace" = "Avfläta: %@";
 "osd.hwdec" = "Hårdvaruavkodning: %@";
 "osd.audio_delay.nodelay" = "Ljudfördröjning: ingen fördröjning";
-"osd.audio_delay.later" = "Ljudfördröjning: %.2f s senare";
-"osd.audio_delay.earlier" = "Ljudfördröjning: %.2f s tidigare";
-"osd.sub_delay.nodelay" = "Undertextfördröjning: ingen fördröjning";
-"osd.sub_delay.later" = "Undertextfördröjning: %.2f s senare";
-"osd.sub_delay.earlier" = "Undertextfördröjning: %.2f s tidigare";
+"osd.audio_delay.later" = "Ljudfördröjning: %.2fs senare";
+"osd.audio_delay.earlier" = "Ljudfördröjning: %.2fs tidigare";
+"osd.sub_delay.nodelay" = "Undertextsfördröjning: Ingen fördröjning";
+"osd.sub_delay.later" = "Undertextsfördröjning: %.2fs senare";
+"osd.sub_delay.earlier" = "Undertextsfördröjning: %.2fs tidigare";
 "osd.subtitle_pos" = "Undertextposition: %.1f";
 "osd.mute" = "Tysta";
 "osd.unmute" = "Tysta av";
@@ -116,7 +109,7 @@
 "menu.volume" = "Volym: %d";
 "menu.volume_muted" = "Volym: %d (Tystat)";
 "menu.audio_delay" = "Ljudfördröjning: %.2fs";
-"menu.sub_delay" = "Undertextfördröjning: %.2f s";
+"menu.sub_delay" = "Undertextsfördröjning: %.2fs";
 "menu.fullscreen" = "Gå in i helskärmsläge";
 "menu.exit_fullscreen" = "Lämna helskärmsläge";
 "menu.pip" = "Använd bild-i-bild";
@@ -124,9 +117,9 @@
 "menu.pause" = "Pausa";
 "menu.resume" = "Fortsätt";
 "menu.speed" = "Hastighet: %.2fx";
-"menu.chapters" = "Visa kapitelpanel";
+"menu.chapters" = "Visa kapitelpanelen";
 "menu.hide_chapters" = "Dölj kapitelpanelen";
-"menu.playlist" = "Visa spellistepanel";
+"menu.playlist" = "Visa spellistepanelen";
 "menu.hide_playlist" = "Dölj spellistepanelen";
 "menu.video" = "Visa videopanelen";
 "menu.hide_video" = "Dölj videopanelen";
@@ -139,12 +132,12 @@
 "menu.seek_backward" = "Gå bakåt %.0f s";
 "menu.speed_up" = "Snabba upp till %.1fx";
 "menu.speed_down" = "Sakta ner till %.1fx";
-"menu.volume_up" = "Volym +%.0f %%";
-"menu.volume_down" = "Volym -%.0f %%";
-"menu.audio_delay_up" = "Ljudfördröjning +%.1f s";
-"menu.audio_delay_down" = "Ljudfördröjning -%.1f s";
-"menu.sub_delay_up" = "Undertextfördröjning +%.1f s";
-"menu.sub_delay_down" = "Undertextfördröjning -%.1f s";
+"menu.volume_up" = "Volym +%.0f%%";
+"menu.volume_down" = "Volym -%.0f%%";
+"menu.audio_delay_up" = "Ljudfördröjning +%.1fs";
+"menu.audio_delay_down" = "Ljudfördröjning -%.1fs";
+"menu.sub_delay_up" = "Undertextsfördröjning +%.1fs";
+"menu.sub_delay_down" = "Undertextsfördröjning -%.1fs";
 
 "menu.crop_custom" = "Anpassad...";
 "menu.find_online_sub" = "Hitta undertexter online från %@";
@@ -183,7 +176,7 @@
 "alert.config.empty_name" = "Namnet får ej vara tomt.";
 "alert.config.name_existing" = "Namnet existerar redan.";
 "alert.config.file_existing.title" = "Filen finns redan";
-"alert.config.file_existing.message" = "Det borde inte hända. Välj OK för att skriva över, Avbryt för att visa filen i Finder.";
+"alert.config.file_existing.message" = "Detta bör inte hända. Välj OK för att skriva över, Avbryt för att visa filen i Finder.";
 "alert.config.cannot_create" = "Kan inte skapa konfigurationsfil!\n%@";
 "alert.config.cannot_write" = "Kan inte skriva till konfigurationsfil!";
 
@@ -230,7 +223,7 @@
 "alert.delete_history.title" = "Radera uppspelningshistorik";
 "alert.delete_history.message" = "Är du säker på att du vill radera valda objekt?";
 
-"alert.filter_hwdec.message" = "Du är i färd med att aktivera ett videofilter, men det kan hända att din nuvarade hårdvaruavkodare inte har ett ordentligt stöd för videofilter. Du kan antingen stänga av hårdvaruavkodning eller växla till Auto(Kopiera), vilket kommer att uppta dubbel minnesmängd.\nDu kan behöva upprepa föregående åtgärd (t.ex. att ange beskärning) för att få det att fungera.";
+"alert.filter_hwdec.message" = "Du är på väg att aktivera ett videofilter, men det kan hända att din nuvarade hårdvaruavkodare inte stöder videofilter väl. Du kan antingen stänga av hårdvaruavkodning eller byta till Auto(Kopiera), vilket kommer att använda dubbla mängden minne.\nDu må behöva upprepa den föregående åtgärden (t.ex. att ange beskärning) för att få det att fungera.";
 "alert.filter_hwdec.abort" = "Avbryt";
 "alert.filter_hwdec.turn_off" = "Stäng av hårdvaruavkodning";
 "alert.filter_hwdec.use_copy" = "Växla till Auto(Kopiera)";
@@ -360,8 +353,8 @@
 "alert.invalid_url" = "URL:en är ogiltig.";
 "plugin.install_error.invalid_url" = "URL:en är ogiltig.";
 "plugin.install_error.file_not_found" = "Kan inte hitta paketfilen.";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_download" = "Det gick inte att ladda ner tillägget.\n\nUtdata: %@\n";
+"plugin.install_error.cannot_unpackage" = "Det gick inte att packa upp tillägget.\n\nUtdata: %@\n";
 "plugin.install_error.cannot_load" = "IINA kan inte ladda detta tillägget. Det kanske är i fel format.";
 "plugin.check_for_updates" = "Sök efter uppdateringar";
 "plugin.updating" = "Laddar ner uppdateringen…";

@@ -360,8 +360,8 @@
 "alert.invalid_url" = "URLが無効です。";
 "plugin.install_error.invalid_url" = "URLが無効です。";
 "plugin.install_error.file_not_found" = "パッケージファイルが見つかりません。";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_download" = "プラグインのダウンロードに失敗しました。\n\n結果:%@\n";
+"plugin.install_error.cannot_unpackage" = "プラグインのパッケージ解除に失敗しました。\n\n結果:%@\n";
 "plugin.install_error.cannot_load" = "IINAはこのプラグインを読み込むことができません。フォーマットが間違っている可能性があります。";
 "plugin.check_for_updates" = "アップデートを確認";
 "plugin.updating" = "アップデートをダウンロード中...";

@@ -21,13 +21,6 @@
 "guide.basic_settings" = "Основні параметри";
 "guide.faq" = "Часті запитання";
 
-// Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
-
 // MainWindowController.swift
 "main.buffering_indicator" = "Буферизація… %d%%";
 "main.opening_stream" = "Відкриття потоку…";
@@ -183,7 +176,7 @@
 "alert.config.empty_name" = "Назва не може бути пустою.";
 "alert.config.name_existing" = "Така назва вже є.";
 "alert.config.file_existing.title" = "Файл вже існує";
-"alert.config.file_existing.message" = "Цього не мало статися. Виберіть «OK», щоб переписати, або «Скасувати», щоб показати файл у Finder.";
+"alert.config.file_existing.message" = "Цього не мало статися. Виберіть «OK», щоб перезаписати, або «Скасувати», щоб показати файл у Finder.";
 "alert.config.cannot_create" = "Не можу створити файл налаштувань!\n%@";
 "alert.config.cannot_write" = "Не можу записати у файл налаштувань!";
 

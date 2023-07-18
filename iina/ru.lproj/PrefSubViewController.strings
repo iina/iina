@@ -1,8 +1,8 @@
 /* Class = "NSTextFieldCell"; title = "Assrt API token:"; ObjectID = "0aU-O1-R6G"; */
-"0aU-O1-R6G.title" = "Assrt API токен:";
+"0aU-O1-R6G.title" = "API-токен Assrt:";
 
 /* Class = "NSTextFieldCell"; title = "Online Subtitles:"; ObjectID = "0fB-es-DmV"; */
-"0fB-es-DmV.title" = "Онлайн субтитры:";
+"0fB-es-DmV.title" = "Cубтитры онлайн:";
 
 /* Class = "NSMenuItem"; title = "Top"; ObjectID = "1Tq-5k-o6R"; */
 "1Tq-5k-o6R.title" = "Сверху";
@@ -11,7 +11,7 @@
 "2XY-Un-0Fg.title" = "В полноэкранном режиме показывать субтитры под видео";
 
 /* Class = "NSTextFieldCell"; title = "strip"; ObjectID = "3H8-Ei-cTm"; */
-"3H8-Ei-cTm.title" = "полоса";
+"3H8-Ei-cTm.title" = "удалить";
 
 /* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "4Tb-Yh-PdP"; */
 "4Tb-Yh-PdP.title" = "Расположение:";
@@ -71,7 +71,7 @@
 "OcF-0z-7qe.title" = "Если включено, субтитры ASS будут стилизованы заданным образом.";
 
 /* Class = "NSTextFieldCell"; title = "Text subtitles:"; ObjectID = "Qda-dp-nhg"; */
-"Qda-dp-nhg.title" = "Текст субтитров:";
+"Qda-dp-nhg.title" = "Текстовые субтитры:";
 
 /* Class = "NSTextFieldCell"; title = "Also search subtitles in following directories:"; ObjectID = "QsS-wD-2hY"; */
 "QsS-wD-2hY.title" = "Также искать субтитры в следующих папках:";
@@ -134,7 +134,7 @@
 "l7l-ZO-W79.title" = " X:";
 
 /* Class = "NSTextFieldCell"; title = "ASS subtitles:"; ObjectID = "mFm-Q6-aja"; */
-"mFm-Q6-aja.title" = "ASS субтитры:";
+"mFm-Q6-aja.title" = "ASS-субтитры:";
 
 /* Class = "NSButtonCell"; title = "Choose…"; ObjectID = "nH7-kO-S15"; */
 "nH7-kO-S15.title" = "Выберите…";

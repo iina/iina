@@ -21,13 +21,6 @@
 "guide.basic_settings" = "Réglages de base";
 "guide.faq" = "Questions fréquemment posées";
 
-// Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
-
 // MainWindowController.swift
 "main.buffering_indicator" = "Mise en mémoire tampon… %d%%";
 "main.opening_stream" = "Lancement du stream…";
@@ -70,8 +63,8 @@
 "osd.stop" = "Arrêté";
 "osd.chapter" = "Chapitre : %@";
 "osd.subtitle_scale" = "Échelle des sous-titres : %.2fx";
-"osd.add_to_playlist" = "Ajouté %i fichiers à la playlist";
-"osd.clear_playlist" = "Playlist vidée";
+"osd.add_to_playlist" = "%i fichiers ajoutés à la liste de lecture";
+"osd.clear_playlist" = "Liste de lecture vidée";
 "osd.video_eq.contrast" = "Contraste : %i";
 "osd.video_eq.gamma" = "Gamma : %i";
 "osd.video_eq.hue" = "Teinte : %i";
@@ -121,7 +114,7 @@
 "menu.exit_fullscreen" = "Quitter le mode plein écran";
 "menu.pip" = "Passer en inscrustation";
 "menu.exit_pip" = "Quitter le mode incrustation";
-"menu.pause" = "Mettre en pause";
+"menu.pause" = "Pause";
 "menu.resume" = "Lire";
 "menu.speed" = "Vitesse : %.2fx";
 "menu.chapters" = "Afficher le panneau des chapitres";
@@ -183,7 +176,7 @@
 "alert.config.empty_name" = "Le nom ne peut pas être vide.";
 "alert.config.name_existing" = "Ce nom existe déjà.";
 "alert.config.file_existing.title" = "Le fichier existe déjà";
-"alert.config.file_existing.message" = "Ceci n'est pas censé arriver. Cliquez OK pour écraser ou Annuler pour révéler le fichier dans le Finder.";
+"alert.config.file_existing.message" = "Ceci n'est pas censé arriver. Cliquez OK pour écrase ou Annuler pour afficher le fichier dans le Finder.";
 "alert.config.cannot_create" = "Impossible de créer le fichier de configuration ! %@";
 "alert.config.cannot_write" = "Impossible d'écrire sur le fichier de configuration !";
 
@@ -283,7 +276,7 @@
 "pl_menu.show_in_finder" = "Afficher dans le Finder";
 "pl_menu.add_file" = "Ajouter un fichier…";
 "pl_menu.add_url" = "Ajouter une URL…";
-"pl_menu.clear_playlist" = "Vider la playlist";
+"pl_menu.clear_playlist" = "Effacer la liste de lecture";
 "pl_menu.matched_sub" = "Trouvé %d sous-titre(s)";
 "pl_menu.add_sub" = "Ajouter un sous-titre…";
 "pl_menu.wrong_sub" = "Mauvais sous-titre !";
@@ -304,7 +297,7 @@
 "subencoding.auto" = "Détection automatique";
 
 "osc_toolbar.settings" = "Réglages rapides";
-"osc_toolbar.playlist" = "Playlist et chapitres";
+"osc_toolbar.playlist" = "Liste de lecture et chapitres";
 "osc_toolbar.pip" = "Image dans l'Image";
 "osc_toolbar.full_screen" = "Activer le mode plein écran";
 "osc_toolbar.music_mode" = "Activer le mode musique";

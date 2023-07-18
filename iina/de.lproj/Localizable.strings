@@ -21,13 +21,6 @@
 "guide.basic_settings" = "Allgemeine Einstellungen";
 "guide.faq" = "Häufig gestellte Fragen (FAQ)";
 
-// Initial Window
-"initial.announcement" = "Du benutzt Version %@ von IINA";
-"initial.beta.desc" = "Wenn du eine Release Version benutzen willst, entferne den Haken bei „Betaupdates erhalten“ in Einstellungen -> Allgemein und installiere eine stabile Version von unserer <a href=\"https://iina.io\">offiziellen Webseite</a>.";
-"initial.nightly.desc" = "Nightly Versionen sollten nicht für den täglichen Gebrauch eingesetzt werden. Aktuell unterstützen diese keine Auto Updates. Bitte lade neuere Versionen von <a href=\"https://nightly.iina.io\">Nightly Website</a>.";
-"initial.debug.desc" = "Debug-Builds sind normalerweise nicht auf Leistung optimiert, daher wird es nicht empfohlen diese für den täglichen Gebrauch einzusetzen. Debug-Builds unterstützen keine automatischen Updates.";
-"initial.bug_report" = "Melde via <a href=\"https://github.com/iina/iina/issues\">GitHub Tickets</a>.";
-
 // MainWindowController.swift
 "main.buffering_indicator" = "Puffern … %d%%";
 "main.opening_stream" = "Stream öffnen …";
@@ -45,7 +38,7 @@
 "quicksetting.hdr" = "HDR";
 
 // OSDMessage.swift
-"osd.pause" = "Pausieren";
+"osd.pause" = "Pause";
 "osd.resume" = "Wiedergabe";
 "osd.volume" = "Lautstärke: %i";
 "osd.speed" = "Geschwindigkeit: %.2fx";
@@ -53,7 +46,7 @@
 "osd.crop" = "Zuschneiden: %@";
 "osd.rotate" = "Drehung: %i°";
 "osd.deinterlace" = "Deinterlacing: %@";
-"osd.hwdec" = "Hardware Dekodierung %@";
+"osd.hwdec" = "Hardware-Dekodierung %@";
 "osd.audio_delay.nodelay" = "Audioverzögerung: Keine";
 "osd.audio_delay.later" = "Audioverzögerung: %.2f s später";
 "osd.audio_delay.earlier" = "Audioverzögerung: %.2f s früher";
@@ -87,10 +80,10 @@
 "osd.file_error" = "Lesefehler";
 "osd.cannot_login" = "Anmeldung fehlgeschlagen";
 "osd.canceled" = "Abgebrochen";
-"osd.filter_added" = "Filter \"%@\" hinzugefügt";
+"osd.filter_added" = "Filter „%@“ hinzugefügt";
 "osd.filter_removed" = "Filter gelöscht";
-"osd.file_loop" = "Datei Schleife: %@";
-"osd.playlist_loop" = "Wiedergabeliste wiederholen: %@";
+"osd.file_loop" = "Datei wiederholen: „%@“";
+"osd.playlist_loop" = "Wiedergabeliste wiederholen: „%@“";
 
 "preference.title" = "Einstellungen";
 "preference.general" = "Allgemein";
@@ -105,7 +98,7 @@
 "preference.utilities" = "Werkzeuge";
 "preference.scripts" = "Skripte";
 "preference.not_logged_in" = "Nicht angemeldet";
-"preference.logged_in_as" = "Angemeldet als %@";
+"preference.logged_in_as" = "Angemeldet als „%@“";
 "preference.system_media_control" = "Nutze Medienkontrolltasten des Systems";
 
 "preference.key_binding_hint_1" = "Um Kurzbefehle der ausgewählten Konfiguration zu bearbeiten, klicke vorher auf „Duplizieren …“, um eine Kopie zu erstellen.";
@@ -118,10 +111,10 @@
 "menu.audio_delay" = "Audioverzögerung: %.2f s";
 "menu.sub_delay" = "Untertitelverzögerung: %.2f s";
 "menu.fullscreen" = "Vollbildmodus";
-"menu.exit_fullscreen" = "Vollbildmodus aus";
+"menu.exit_fullscreen" = "Vollbildmodus beenden";
 "menu.pip" = "Bild-in-Bild öffnen";
 "menu.exit_pip" = "Bild-in-Bild schließen";
-"menu.pause" = "Pausieren";
+"menu.pause" = "Pause";
 "menu.resume" = "Wiedergabe";
 "menu.speed" = "Geschwindigkeit: %.2fx";
 "menu.chapters" = "Kapitel anzeigen";
@@ -161,8 +154,8 @@
 "alert.title_warning" = "Warnung";
 "alert.title_info" = "Information";
 
-"alert.fatal_error" = "Schwerwiegender Fehler: %@ \nProgramm wird beendet.";
-"alert.mpv_error" = "Interner Fehler %@ (%@) beim Setzen der Einstellung %@.";
+"alert.fatal_error" = "Schwerwiegender Fehler: „%@“ \nProgramm wird beendet.";
+"alert.mpv_error" = "Interner Fehler „%@“ (%@) beim Setzen der Einstellung „%@“.";
 "alert.sleep" = "Der Ruhezustand des Bildschirms konnte nicht verhindert werden! (0x%0X8)";
 
 "alert.unsupported_audio" = "Externe Audiodatei nicht unterstützt.";
@@ -171,9 +164,9 @@
 "alert.wrong_url_format" = "Falsches Adressformat.";
 
 "alert.error_open" = "Datei oder Stream konnte nicht geöffnet werden.";
-"alert.error_finding_file" = "Die Datei %@ konnte nicht gefunden werden.";
-"alert.error_loading_script" = "Das Skript %@ konnte nicht geladen werden.";
-"alert.error_saving_file" = "Fehler beim Sichern von %@: %@";
+"alert.error_finding_file" = "Die Datei „%@“ konnte nicht gefunden werden.";
+"alert.error_loading_script" = "Das Skript „%@“ konnte nicht geladen werden.";
+"alert.error_saving_file" = "Fehler beim Sichern von „%@“: %@";
 "alert.error_deleting_file" = "Datei konnte nicht gelöscht werden.";
 
 "alert.config.new.title" = "Neue Eingabekonfiguration";
@@ -183,7 +176,7 @@
 "alert.config.empty_name" = "Der Name darf nicht leer sein.";
 "alert.config.name_existing" = "Der Name existiert bereits.";
 "alert.config.file_existing.title" = "Die Datei existiert bereits.";
-"alert.config.file_existing.message" = "Das sollte nicht passieren. Wähle OK zum überschreiben oder Abbrechen, um die Datei im Finder anzuzeigen.";
+"alert.config.file_existing.message" = "Das sollte nicht passieren. Wählen Sie „OK“, um zu überschreiben oder „Abbrechen“, um die Datei im Finder anzuzeigen.";
 "alert.config.cannot_create" = "Konfigurationsdatei konnte nicht erstellt werden.\n%@";
 "alert.config.cannot_write" = "Konfigurationsdatei nicht beschreibbar.";
 
@@ -191,20 +184,20 @@
 "alert.add_filter.title" = "Neuer Filter";
 "alert.add_filter.message" = "Bitte gib die Zeichenkette für den Filter im Stil der vf- bzw. af-Kommandos von mpv an.";
 
-"alert.keybinding_config.error" = "Fehler beim Einlesen der Kurzbefehl-Konfiguration \"%@\"! Standard-Kurzbefehle von IINA werden benutzt. Bitte überprüfe die Einstellungen.";
+"alert.keybinding_config.error" = "Fehler beim Einlesen der Kurzbefehl-Konfiguration „%@“! Standard-Kurzbefehle von IINA werden benutzt. Bitte überprüfe die Einstellungen.";
 
 "alert.extra_option.cannot_read" = "Benutzerdefinierte mpv-Optionen konnten nicht gelesen werden.";
 "alert.extra_option.empty" = "Schlüssel oder Wert dürfen nicht leer sein.";
-"alert.extra_option.error" = "Fehler beim Setzen der Option --%@=%@ mit Fehlercode %d. Bitte überprüfe die Zusatzoptionen unter Einstellungen > Erweitert.";
-"alert.extra_option.config_folder" = "Konnte Konfigurationsordner nicht setzen \"%@\".";
+"alert.extra_option.error" = "Fehler beim Setzen der Option „--%@=%@“ mit Fehlercode „%d“. Bitte überprüfe die Zusatzoptionen in den Einstellungen unter „Erweitert“.";
+"alert.extra_option.config_folder" = "Konnte Konfigurationsordner nicht setzen: „%@“.";
 
-"alert.playlist.error_deleting" = "Fehler beim Löschen der Datei %@.";
+"alert.playlist.error_deleting" = "Fehler beim Löschen der Datei: „%@“.";
 
 "alert.screenshot.error_taking" = "Bildschirmfoto konnte nicht erstellt werden.";
 
 "alert.sub.no_selected" = "Bitte wähle zuerst eine heruntergeladene Untertiteldatei aus.";
-"alert.sub_lang_not_set" = "Bitte lege vor der Benutzung von OpenSubtitles die bevorzugte Untertitelsprache fest. Benutzte diesmal English(eng).";
-"alert.sub.cannot_save_passwd" = "Passwort konnte nicht im Schlüsselbund gesichert werden: %@.";
+"alert.sub_lang_not_set" = "Bitte lege vor der Benutzung von OpenSubtitles die bevorzugte Untertitelsprache fest. „Englisch(eng)“ wird diesmal benutzt.";
+"alert.sub.cannot_save_passwd" = "Passwort konnte nicht im Schlüsselbund gesichert werden: „%@“.";
 "alert.sub.cannot_login" = "Anmelden nicht möglich. Bitte überprüfe Benutzername, Passwort und Netzwerkverbindung.\n\n%@";
 
 "alert.set_default.title" = "IINA als Standardprogramm setzten";
@@ -232,7 +225,7 @@
 
 "alert.filter_hwdec.message" = "Du bist dabei einen Videofilter anzuwenden. Es könnte sein, dass Dein aktueller Hardwaredecoder diese nicht richtig unterstützt. Du kannst entweder das Hardwaredecoding abschalten oder auf Auto(Copy) umschalten. Auto(Copy) benötigt zweimal soviel Arbeitsspeicher. \nUnter Umständen musst Du die zuvor gemachten Einstellungen (wie zum Beispiel die Crop-Einstellungen) erneut vornehmen, damit es funktioniert.";
 "alert.filter_hwdec.abort" = "Abbrechen";
-"alert.filter_hwdec.turn_off" = "Hardwaredecoding deaktivieren";
+"alert.filter_hwdec.turn_off" = "Hardware-Dekodierung deaktivieren";
 "alert.filter_hwdec.use_copy" = "Zu Autom. (Kopieren) wechseln";
 
 "alert.clear_cache.title" = "Vorschaubilder-Cache leeren";
@@ -253,12 +246,12 @@
 
 "alert.duplicate_config" = "Du kannst die Standardeinstellungen nicht direkt bearbeiten. Bitte dupliziere diese vorher.";
 
-"alert.assrt_register" = "Bitte erstelle Dir ein eigenes API-Token. Das hier voreingestellte Token ist nur für Testzwecke und kann zu Netzwerfehlern führen.";
+"alert.assrt_register" = "Bitte erstelle Dir ein eigenes API-Token. Das hier voreingestellte Token ist nur für Testzwecke und kann zu Netzwerkfehlern führen.";
 "alert.assrt_register.register" = "Jetzt registrieren";
 "alert.assrt_register.try" = "Testen";
-"alert.assrt_token_prompt.title" = "Bitte API token hier eingeben.";
+"alert.assrt_token_prompt.title" = "Bitte API-Token hier eingeben.";
 "alert.assrt_token_prompt.message" = "Bitte auf der jetzt geöffneten Internetseite registrieren. Das Token kannst du auf deiner User-Seite finden. Bitte hier eingeben:";
-"alert.assrt_token_invalid" = "Dein Assrt API token schein ungültig zu sein.";
+"alert.assrt_token_invalid" = "Dein Assrt-API-Token scheint ungültig zu sein.";
 
 "alert.plugin_uninstall.title" = "Bist du sicher, dass du „%@“ entfernen möchtest?";
 "alert.plugin_uninstall.message" = "Die Erweiterung wird entfernt.";
@@ -272,7 +265,7 @@
 "playlist.total_length" = "%@ insgesamt";
 "playlist.total_length_with_selected" = "%@ von %@ ausgewählt";
 "pl_menu.title_multi" = "%d Dateien";
-"pl_menu.play_next" = "Als nächstes wiedergeben";
+"pl_menu.play_next" = "Als Nächstes wiedergeben";
 "pl_menu.play_in_new_window" = "In neuem Fenster wiedergeben";
 "pl_menu.remove" = "Entfernen";
 "pl_menu.remove_multi" = "Auswahl entfernen";
@@ -280,7 +273,7 @@
 "pl_menu.delete_multi" = "Auswahl in den Papierkorb legen";
 "pl_menu.delete_after_play" = "Nach Wiedergabe in den Papierkorb legen";
 "pl_menu.delete_after_play_multi" = "Auswahl nach Wiedergabe in den Papierkorb legen";
-"pl_menu.show_in_finder" = "Im Finder anzeigen";
+"pl_menu.show_in_finder" = "In Finder anzeigen";
 "pl_menu.add_file" = "Datei hinzufügen …";
 "pl_menu.add_url" = "Adresse hinzufügen …";
 "pl_menu.clear_playlist" = "Wiedergabeliste leeren";
@@ -288,8 +281,8 @@
 "pl_menu.add_sub" = "Untertitel hinzufügen …";
 "pl_menu.wrong_sub" = "Falscher Untertitel!";
 "pl_menu.browser" = "In Browser öffnen";
-"pl_menu.copy_url" = "URL kopieren";
-"pl_menu.copy_url_multi" = "URLs kopieren";
+"pl_menu.copy_url" = "Adresse kopieren";
+"pl_menu.copy_url_multi" = "Adressen kopieren";
 
 "keymapping.title" = "Kurzbefehle";
 "keymapping.message" = "Zum Zuweisen beliebige Taste(n) drücken.";
@@ -303,19 +296,19 @@
 
 "subencoding.auto" = "Automatisch erkennen";
 
-"osc_toolbar.settings" = "Einstellungspanel";
+"osc_toolbar.settings" = "Einstellungen";
 "osc_toolbar.playlist" = "Wiedergabeliste und Kapitel";
 "osc_toolbar.pip" = "Bild-in-Bild ein-/ausschalten";
 "osc_toolbar.full_screen" = "Vollbild ein-/ausschalten";
 "osc_toolbar.music_mode" = "Musikmodus";
 "osc_toolbar.sub_track" = "Untertitelspur auswählen";
 
-"mini_player.album_art" = "Albumcover";
+"mini_player.album_art" = "Albumcover ein-/ausblenden";
 "mini_player.loop" = "Wiederholen";
 "mini_player.shuffle" = "Zufallswiedergabe";
-"mini_player.remove" = "Aus Playlist entfernen";
-"mini_player.add" = "Zur Playlist hinzufügen";
-"mini_player.delete" = "Playlist leeren";
+"mini_player.remove" = "Aus Wiedergabeliste entfernen";
+"mini_player.add" = "Zur Wiedergabeliste hinzufügen";
+"mini_player.delete" = "Wiedergabeliste leeren";
 "mini_player.volume" = "Laufwerk";
 "mini_player.close" = "Musikmodus schließen";
 "mini_player.back" = "Zurück zum Video Modus";
@@ -335,7 +328,7 @@
 "touchbar.play_pause" = "Wiedergabe / Pause";
 "touchbar.seek" = "Verlauf";
 "touchbar.time" = "Position";
-"touchbar.remainingTimeOrTotalDuration" = "verbleibende Zeit / gespielt";
+"touchbar.remainingTimeOrTotalDuration" = "Verbleibende Zeit / Gesamtdauer";
 "touchbar.toggle_pip" = "Bild-in-Bild ein-/ausschalten";
 
 // Plugin permissions

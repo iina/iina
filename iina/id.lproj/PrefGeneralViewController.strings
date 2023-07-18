@@ -86,7 +86,7 @@
 "REP-70-XOi.title" = "Setiap bulan";
 
 /* Class = "NSButtonCell"; title = "Use legacy full screen"; ObjectID = "TvB-UM-FrS"; */
-"TvB-UM-FrS.title" = "Gunakan mode layar penuh legacy";
+"TvB-UM-FrS.title" = "Gunakan mode layar penuh lama (sebelum OS X 10.6)";
 
 /* Class = "NSTextFieldCell"; title = "Otherwise only files that opened manually will show up in this menu."; ObjectID = "XFC-Lr-LmP"; */
 "XFC-Lr-LmP.title" = "Jika tidak, hanya file yang dibuka secara manual yang akan muncul di dalam menu.";
@@ -95,7 +95,7 @@
 "YLo-6E-tT7.title" = "Matikan aplikasi setelah semua window ditutup";
 
 /* Class = "NSTextFieldCell"; title = "/path/to/screenshot/folder"; ObjectID = "YeH-hk-7NN"; */
-"YeH-hk-7NN.title" = "/alamat/ke/folder/tangkapanlayar";
+"YeH-hk-7NN.title" = "/lokasi/ke/folder/tangkapanlayar";
 
 /* Class = "NSButtonCell"; title = "Receive beta updates"; ObjectID = "f0j-Dn-cxt"; */
 "f0j-Dn-cxt.title" = "Terima pembaruan versi beta";

@@ -25,11 +25,11 @@
 "cmd.playlist-remove" = "Убрать текущий файл";
 "cmd.playlist-shuffle" = "Перемешать";
 "cmd.write-watch-later-config" = "Сохранять историю воспроизведения";
-"cmd.stop" = "Стоп";
-"cmd.quit" = "Завершить";
-"cmd.quit-watch-later" = "Завершить (запомнить место)";
-"cmd.screenshot" = "Снимок экрана";
-"cmd.screenshot-to-file" = "Снимок экрана в файл";
+"cmd.stop" = "Остановить";
+"cmd.quit" = "Выйти";
+"cmd.quit-watch-later" = "Выйти (запомнить место)";
+"cmd.screenshot" = "Скриншот";
+"cmd.screenshot-to-file" = "Скриншот в файл";
 "cmd.loadfile" = "Загрузить файл";
 "cmd.loadlist" = "Загрузить плейлист";
 "cmd.run" = "Запустить";
@@ -38,7 +38,7 @@
 "iina.mirror" = "Зеркально";
 
 "iina.toggle-pip" = "Режим «Картинка в картинке»";
-"iina.toggle-music-mode" = "Переключить режим музыки";
+"iina.toggle-music-mode" = "Режим музыки";
 "iina.open-file" = "Открыть файл";
 "iina.open-url" = "Открыть URL";
 "iina.video-panel" = "Панель видео";
@@ -46,8 +46,8 @@
 "iina.sub-panel" = "Панель субтитров";
 "iina.playlist-panel" = "Панель плейлистов";
 "iina.chapter-panel" = "Панель глав";
-"iina.bigger-window" = "Большое окно";
-"iina.smaller-window" = "Маленькое окно";
+"iina.bigger-window" = "Увеличить окно";
+"iina.smaller-window" = "Уменьшить окно";
 "iina.fit-to-screen" = "По размеру экрана";
 "iina.toggle-flip" = "Отразить по вертикали (вверх ногами)";
 "iina.toggle-mirror" = "Отразить по горизонтали (зеркально)";
@@ -61,7 +61,7 @@
 "no" = "выкл.";
 "to" = "на";
 "by" = "на";
-"in" = "в";
+"in" = "между";
 "add" = "увеличить на";
 "minus" = "уменьшить на";
 "forward" = "вперёд на";

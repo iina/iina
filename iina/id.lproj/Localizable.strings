@@ -7,18 +7,18 @@
 */
 // Common
 
-"general.on" = "Hidup";
+"general.on" = "Nyala";
 "general.off" = "Mati";
 "general.login" = "Masuk";
 "general.logout" = "Keluar";
 "general.ok" = "OK";
-"general.cancel" = "Batalkan";
+"general.cancel" = "Batal";
 "general.username" = "Nama pengguna";
 "general.password" = "Kata sandi";
 
 // Guide Window
 "guide.highlights" = "Sorotan";
-"guide.basic_settings" = "Setelan Dasar";
+"guide.basic_settings" = "Pengaturan Dasar";
 "guide.faq" = "Pertanyaan Umum";
 
 // Initial Window
@@ -49,7 +49,7 @@
 "osd.resume" = "Lanjutkan";
 "osd.volume" = "Volume: %i";
 "osd.speed" = "Kecepatan: %.2fx";
-"osd.aspect" = "Aspek Rasio: %@";
+"osd.aspect" = "Rasio Aspek: %@";
 "osd.crop" = "Crop: %@";
 "osd.rotate" = "Putar: %i°";
 "osd.deinterlace" = "Deinterlace: %@";
@@ -61,7 +61,7 @@
 "osd.sub_delay.later" = "Penundaan Terjemahan: %.2f dtk lebih cepat";
 "osd.sub_delay.earlier" = "Penundaan Terjemahan: %.2f dtk lebih lambat";
 "osd.subtitle_pos" = "Posisi Terjemahan: %.1f";
-"osd.mute" = "Bisukan";
+"osd.mute" = "Bisukan Suara";
 "osd.unmute" = "Nyalakan Suara";
 "osd.screenshot" = "Tangkapan Layar Berhasil";
 "osd.abloop.a" = "Pengulangan-AB: A";

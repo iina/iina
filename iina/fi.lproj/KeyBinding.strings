@@ -7,8 +7,8 @@
 */
 
 "cmd.ignore" = "Sivuuta";
-"cmd.seek" = "Etsi";
-"cmd.revert-seek" = "Palauta etsintä";
+"cmd.seek" = "Siirry";
+"cmd.revert-seek" = "Peruuta siirtyminen";
 "cmd.set" = "Aseta";
 "cmd.cycle" = "Sykli";
 "cmd.cycle-values" = "Kierrä";
@@ -20,16 +20,16 @@
 "cmd.sub-seek" = "Tekstityksen haku";
 "cmd.playlist-next" = "Seuraava media";
 "cmd.playlist-prev" = "Edellinen media";
-"cmd.playlist-move" = "Siirrä soittolista";
+"cmd.playlist-move" = "Siirrä soittolistan rivi";
 "cmd.playlist-clear" = "Tyhjennä soittolista";
 "cmd.playlist-remove" = "Poista nykyinen";
-"cmd.playlist-shuffle" = "Sekoita";
+"cmd.playlist-shuffle" = "Satunnaistoisto";
 "cmd.write-watch-later-config" = "Tallenna toistohistoria";
 "cmd.stop" = "Pysäytä";
 "cmd.quit" = "Lopeta";
 "cmd.quit-watch-later" = "Lopeta (tallenna edistyminen)";
-"cmd.screenshot" = "Näyttökuva";
-"cmd.screenshot-to-file" = "Näyttökuva tiedostoon";
+"cmd.screenshot" = "Kuvakaappaus";
+"cmd.screenshot-to-file" = "Kuvakaappaus tiedostoon";
 "cmd.loadfile" = "Lataa tiedosto";
 "cmd.loadlist" = "Lataa soittolista";
 "cmd.run" = "Suorita";
@@ -37,10 +37,10 @@
 "iina.flip" = "Käännä";
 "iina.mirror" = "Peilaa";
 
-"iina.toggle-pip" = "Vaihda kuva kuvassa -tilaan";
-"iina.toggle-music-mode" = "Vaihda musiikkitilaan";
+"iina.toggle-pip" = "Vaihda kuva kuvassa -tilaa";
+"iina.toggle-music-mode" = "Musiikkitila päälle/pois";
 "iina.open-file" = "Avaa tiedosto";
-"iina.open-url" = "Avaa URL";
+"iina.open-url" = "Avaa URL-osoite";
 "iina.video-panel" = "Videopaneeli";
 "iina.audio-panel" = "Äänipaneeli";
 "iina.sub-panel" = "Tekstityspaneeli";

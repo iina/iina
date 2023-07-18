@@ -360,8 +360,8 @@
 "alert.invalid_url" = "URL je neispravan.";
 "plugin.install_error.invalid_url" = "URL je neispravan.";
 "plugin.install_error.file_not_found" = "Datoteka paketa nije pronađena.";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_download" = "Neuspjelo preuzimanje dodatka.\n\nRezultat:%@\n";
+"plugin.install_error.cannot_unpackage" = "Neuspjelo raspakiranje dodatka.\n\nRezultat:%@\n";
 "plugin.install_error.cannot_load" = "IINA ne može učitati ovaj dodatak. Možda je u pogrešnom formatu.";
 "plugin.check_for_updates" = "Traži nove verzije ";
 "plugin.updating" = "Preuzimanje nove verzije …";

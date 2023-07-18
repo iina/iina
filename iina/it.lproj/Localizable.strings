@@ -360,8 +360,8 @@
 "alert.invalid_url" = "L'URL non è valido.";
 "plugin.install_error.invalid_url" = "L'URL non è valido.";
 "plugin.install_error.file_not_found" = "Impossibile trovare il file del pacchetto.";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_download" = "Impossibile scaricare il plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_unpackage" = "Scompattamento del plugin non riuscito.\n\nOutput: %@\n";
 "plugin.install_error.cannot_load" = "IINA non può caricare questo plugin. Potrebbe essere nel formato sbagliato.";
 "plugin.check_for_updates" = "Controlla aggiornamenti";
 "plugin.updating" = "Sto scaricando l'aggiornamento…";

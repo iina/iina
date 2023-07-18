@@ -23,13 +23,13 @@
 "g4c-vG-URh.title" = "Startlautstärke:";
 
 /* Class = "NSTextFieldCell"; title = "Always use the dedicated GPU for rendering (if exists). This can improve performance but may result in poor battery life."; ObjectID = "gCv-sJ-uQJ"; */
-"gCv-sJ-uQJ.title" = "Immer die dedizierte GPU zum Rendern verwenden (falls vorhanden). Dies kann zwar die Leistung verbessern, jedoch die Akkulaufzeit verringern.";
+"gCv-sJ-uQJ.title" = "Immer den dedizierten Grafikprozessor für das Rendering verwenden (falls vorhanden). Dies kann die Leistung verbessern, aber auch die Akkulaufzeit verkürzen.";
 
 /* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
 "m5P-5f-5uo.title" = "Video:";
 
 /* Class = "NSTextFieldCell"; title = "Hardware decoder:"; ObjectID = "nwg-2K-G2G"; */
-"nwg-2K-G2G.title" = "Hardwaredecoder:";
+"nwg-2K-G2G.title" = "Hardware-Dekoder:";
 
 /* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "rFu-rL-EJC"; */
 "rFu-rL-EJC.title" = "Deaktiviert";

@@ -8,10 +8,10 @@
 "44m-ge-naq.title" = "Volume maksimum:";
 
 /* Class = "NSTextFieldCell"; title = "Number of threads:"; ObjectID = "50C-1R-wlJ"; */
-"50C-1R-wlJ.title" = "Jumlah thread:";
+"50C-1R-wlJ.title" = "Jumlah rangkaian:";
 
 /* Class = "NSButtonCell"; title = "Force dedicated GPU"; ObjectID = "YUr-aJ-xfC"; */
-"YUr-aJ-xfC.title" = "Paksa GPU terdedikasi";
+"YUr-aJ-xfC.title" = "Paksa GPU resmi";
 
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "bxW-np-SGm"; */
 "bxW-np-SGm.title" = "Bawaan: 0 (Otomatis)";
@@ -20,10 +20,10 @@
 "cJP-ep-847.title" = "(100-1000)";
 
 /* Class = "NSButtonCell"; title = "Initial volume:"; ObjectID = "g4c-vG-URh"; */
-"g4c-vG-URh.title" = "Volume bawaan:";
+"g4c-vG-URh.title" = "Volume Awal:";
 
 /* Class = "NSTextFieldCell"; title = "Always use the dedicated GPU for rendering (if exists). This can improve performance but may result in poor battery life."; ObjectID = "gCv-sJ-uQJ"; */
-"gCv-sJ-uQJ.title" = "Selalu gunakan GPU terdedikasi untuk rendering (jika tersedia). Performa akan meningkat, namun dapat mengurangi ketahanan baterai.";
+"gCv-sJ-uQJ.title" = "Selalu gunakan GPU resmi untuk rendering (jika tersedia). Performa dapat meningkat, namun mungkin mengurangi ketahanan baterai.";
 
 /* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
 "m5P-5f-5uo.title" = "Video:";
@@ -35,7 +35,7 @@
 "rFu-rL-EJC.title" = "Non-aktif";
 
 /* Class = "NSTextFieldCell"; title = "Preferred audio device:"; ObjectID = "sLR-vV-xn2"; */
-"sLR-vV-xn2.title" = "Perangkat audio yang digunakan:";
+"sLR-vV-xn2.title" = "Perangkat audio pilihan:";
 
 /* Class = "NSTextFieldCell"; title = "Audio:"; ObjectID = "sV5-dL-MUt"; */
 "sV5-dL-MUt.title" = "Audio:";
@@ -44,25 +44,25 @@
 "tAQ-oU-1AJ.title" = "Otomatis";
 
 /* Class = "NSTextFieldCell"; title = "Number of threads:"; ObjectID = "tO4-pw-2W9"; */
-"tO4-pw-2W9.title" = "Jumlah thread:";
+"tO4-pw-2W9.title" = "Jumlah rangkaian:";
 
 /* Class = "NSTextFieldCell"; title = "S/PDIF output:"; ObjectID = "up6-6A-4sn"; */
 "up6-6A-4sn.title" = "Output S/PDIF:";
 
 /* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "wjt-O6-KbC"; */
-"wjt-O6-KbC.title" = "Bahasa yang dipilih:";
+"wjt-O6-KbC.title" = "Pilihan bahasa:";
 
 /* Class = "NSButtonCell"; title = "Load ICC profile"; ObjectID = "3g4-jW-uJd"; */
-"3g4-jW-uJd.title" = "Muat profil ICC";
+"3g4-jW-uJd.title" = "Memuat profil ICC";
 
 /* Class = "NSTextFieldCell"; title = "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"; ObjectID = "M2M-of-gjd"; */
-"M2M-of-gjd.title" = "Muat profil ICC untuk display saat ini dan gunakan untuk mengubah RGB video ke output layar. (Hanya untuk mode SDR)";
+"M2M-of-gjd.title" = "Memuat profil ICC untuk tampilan saat ini dan gunakan untuk mengubah video RGB ke output layar. (Hanya untuk mode SDR)";
 
 /* Class = "NSButtonCell"; title = "Enable HDR support"; ObjectID = "R7Z-9c-vPJ"; */
 "R7Z-9c-vPJ.title" = "Aktifkan dukungan HDR";
 
 /* Class = "NSTextFieldCell"; title = "Enable HDR mode by default when playing HDR videos."; ObjectID = "ZgQ-bc-yEE"; */
-"ZgQ-bc-yEE.title" = "Selalu aktifkan mode HDR saat memutar video HDR.";
+"ZgQ-bc-yEE.title" = "Aktifkan mode HDR bawaan saat memutar video HDR.";
 
 /* Class = "NSButtonCell"; title = "Enable tone mapping"; ObjectID = "a5Y-gU-JTj"; */
 "a5Y-gU-JTj.title" = "Mengaktifkan pemetaan nada";

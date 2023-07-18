@@ -360,8 +360,8 @@
 "alert.invalid_url" = "Adres URL jest nieprawidłowy.";
 "plugin.install_error.invalid_url" = "Adres URL jest nieprawidłowy.";
 "plugin.install_error.file_not_found" = "Nie można znaleźć pliku pakietu.";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_download" = "Nie udało się pobrać wtyczki.\n\nWyjście:%@\n";
+"plugin.install_error.cannot_unpackage" = "Nie udało się rozpakować wtyczki.\n\nWyjście:%@\n";
 "plugin.install_error.cannot_load" = "IINA nie może załadować tej wtyczki. Może być w złym formacie.";
 "plugin.check_for_updates" = "Sprawdź aktualizacje";
 "plugin.updating" = "Pobieranie aktualizacji…";

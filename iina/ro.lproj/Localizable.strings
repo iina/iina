@@ -360,8 +360,8 @@
 "alert.invalid_url" = "URL-ul nu este valid.";
 "plugin.install_error.invalid_url" = "URL-ul nu este valid.";
 "plugin.install_error.file_not_found" = "Fișierul package nu poate fi găsit.";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_download" = "Descărcarea extensiei a eșuat.\n\nMotiv:%@\n";
+"plugin.install_error.cannot_unpackage" = "Dezarhivarea extensiei a eșuat.\n\nMotiv:%@\n";
 "plugin.install_error.cannot_load" = "IINA nu poate încărca aceasta extensie. Ar putea fi într-un format greşit.";
 "plugin.check_for_updates" = "Verifică dacă există actualizări";
 "plugin.updating" = "Se descarcă actualizarea…";

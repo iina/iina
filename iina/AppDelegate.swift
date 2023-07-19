@@ -132,6 +132,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     Logger.log("Built \(date) from branch \(branch), commit \(commit)")
   }
 
+  /// Log details about the Mac IINA is running on.
+  ///
+  /// Certain IINA capabilities, such as hardware acceleration, are contingent upon aspects of the Mac IINA is running on. If available,
+  /// this method will log:
+  /// - macOS version
+  /// - model identifier of the Mac
+  /// - kind of processor
+  private func logPlatformDetails() {
+    Logger.log("Running under macOS \(ProcessInfo.processInfo.operatingSystemVersionString)")
+    guard let cpu = Sysctl.shared.machineCpuBrandString, let model = Sysctl.shared.hwModel else { return }
+    Logger.log("On a \(model) with an \(cpu) processor")
+  }
 
   // MARK: - SPUUpdaterDelegate
   @IBOutlet var updaterController: SPUStandardUpdaterController!
@@ -179,6 +191,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       Logger.log("  \(library.name) \(AppDelegate.versionAsString(library.version))")
     }
     logBuildDetails()
+    logPlatformDetails()
 
     Logger.log("App will launch")
 

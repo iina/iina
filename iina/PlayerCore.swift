@@ -216,6 +216,10 @@ class PlayerCore: NSObject {
     }
   }
 
+  var isABLoopActive: Bool {
+    abLoopA != 0 && abLoopB != 0 && mpv.getString(MPVOption.PlaybackControl.abLoopCount) != "0"
+  }
+
   static var keyBindings: [String: KeyMapping] = [:]
 
   override init() {

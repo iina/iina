@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -119,7 +119,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KZA-hu-vhZ">
+                <button identifier="FunctionalButtonShowConfig" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KZA-hu-vhZ">
                     <rect key="frame" x="-6" y="1" width="210" height="32"/>
                     <buttonCell key="cell" type="push" title="Show the config file in Finder" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gDo-JL-a9k">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -365,7 +365,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AuR-Lj-Iz4">
+                <button identifier="FunctionalButtonImportConfig" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AuR-Lj-Iz4">
                     <rect key="frame" x="202" y="1" width="206" height="32"/>
                     <buttonCell key="cell" type="push" title="Import an existing config file" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6cO-C0-33g">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>

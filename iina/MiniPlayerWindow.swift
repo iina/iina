@@ -15,7 +15,7 @@ class MiniPlayerWindow: NSWindow {
     /// This allows `ESC` & `TAB` key bindings to work, instead of getting swallowed by
     /// MacOS keyboard focus navigation (which we don't use).
     if let controller = windowController as? MiniPlayerWindowController {
-      controller.player.mainWindow.keyDown(with: event)
+      controller.keyDown(with: event)
     }
   }
 }

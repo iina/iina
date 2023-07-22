@@ -206,20 +206,22 @@ class VideoView: NSView {
 
   func startDisplayLink() {
     if link == nil {
-      CVDisplayLinkCreateWithActiveCGDisplays(&link)
+      checkResult(CVDisplayLinkCreateWithActiveCGDisplays(&link),
+                  "CVDisplayLinkCreateWithActiveCGDisplays")
     }
     guard let link = link else {
       Logger.fatal("Cannot Create display link!")
     }
     guard !CVDisplayLinkIsRunning(link) else { return }
     updateDisplayLink()
-    CVDisplayLinkSetOutputCallback(link, displayLinkCallback, mutableRawPointerOf(obj: self))
-    CVDisplayLinkStart(link)
+    checkResult(CVDisplayLinkSetOutputCallback(link, displayLinkCallback, mutableRawPointerOf(obj: self)),
+                "CVDisplayLinkSetOutputCallback")
+    checkResult(CVDisplayLinkStart(link), "CVDisplayLinkStart")
   }
 
   @objc func stopDisplayLink() {
     guard let link = link, CVDisplayLinkIsRunning(link) else { return }
-    CVDisplayLinkStop(link)
+    checkResult(CVDisplayLinkStop(link), "CVDisplayLinkStop")
   }
 
   // This should only be called if the window has changed displays
@@ -231,7 +233,7 @@ class VideoView: NSView {
     if (currentDisplay == displayId) { return }
     currentDisplay = displayId
 
-    CVDisplayLinkSetCurrentCGDisplay(link, displayId)
+    checkResult(CVDisplayLinkSetCurrentCGDisplay(link, displayId), "CVDisplayLinkSetCurrentCGDisplay")
     let actualData = CVDisplayLinkGetActualOutputVideoRefreshPeriod(link)
     let nominalData = CVDisplayLinkGetNominalOutputVideoRefreshPeriod(link)
     var actualFps: Double = 0
@@ -332,6 +334,76 @@ class VideoView: NSView {
       player.mpv.setString(MPVOption.GPURendererOptions.toneMapping, "auto")
       player.mpv.setString(MPVOption.GPURendererOptions.toneMappingParam, "default")
       player.mpv.setFlag(MPVOption.Screenshot.screenshotTagColorspace, false)
+    }
+  }
+
+  // MARK: - Error Logging
+
+  /// Check the result of calling a [Core Video](https://developer.apple.com/documentation/corevideo) method.
+  ///
+  /// If the result code is not [kCVReturnSuccess](https://developer.apple.com/documentation/corevideo/kcvreturnsuccess)
+  /// then a warning message will be logged. Failures are only logged because previously the result was not checked. We want to see if
+  /// calls have been failing before taking any action other than logging.
+  /// - Note: Error checking was added in response to issue [#4520](https://github.com/iina/iina/issues/4520)
+  ///         where a core video method unexpectedly failed.
+  /// - Parameters:
+  ///   - result: The [CVReturn](https://developer.apple.com/documentation/corevideo/cvreturn)
+  ///           [result code](https://developer.apple.com/documentation/corevideo/1572713-result_codes)
+  ///           returned by the core video method.
+  ///   - method: The core video method that returned the result code.
+  private func checkResult(_ result: CVReturn, _ method: String) {
+    guard result != kCVReturnSuccess else { return }
+    Logger.log("Core video method \(method) returned: \(codeToString(result)) (\(result))", level: .warning)
+  }
+
+  /// Return a string describing the given [CVReturn](https://developer.apple.com/documentation/corevideo/cvreturn)
+  ///           [result code](https://developer.apple.com/documentation/corevideo/1572713-result_codes).
+  ///
+  /// What is needed is an API similar to `strerr` for a `CVReturn` code. A search of Apple documentation did not find such a
+  /// method.
+  /// - Parameter code: The [CVReturn](https://developer.apple.com/documentation/corevideo/cvreturn)
+  ///           [result code](https://developer.apple.com/documentation/corevideo/1572713-result_codes)
+  ///           returned by a core video method.
+  /// - Returns: A description of what the code indicates.
+  private func codeToString(_ code: CVReturn) -> String {
+    switch code {
+    case kCVReturnSuccess:
+      return "Function executed successfully without errors"
+    case kCVReturnInvalidArgument:
+      return "At least one of the arguments passed in is not valid. Either out of range or the wrong type"
+    case kCVReturnAllocationFailed:
+      return "The allocation for a buffer or buffer pool failed. Most likely because of lack of resources"
+    case kCVReturnInvalidDisplay:
+      return "A CVDisplayLink cannot be created for the given DisplayRef"
+    case kCVReturnDisplayLinkAlreadyRunning:
+      return "The CVDisplayLink is already started and running"
+    case kCVReturnDisplayLinkNotRunning:
+      return "The CVDisplayLink has not been started"
+    case kCVReturnDisplayLinkCallbacksNotSet:
+      return "The output callback is not set"
+    case kCVReturnInvalidPixelFormat:
+      return "The requested pixelformat is not supported for the CVBuffer type"
+    case kCVReturnInvalidSize:
+      return "The requested size (most likely too big) is not supported for the CVBuffer type"
+    case kCVReturnInvalidPixelBufferAttributes:
+      return "A CVBuffer cannot be created with the given attributes"
+    case kCVReturnPixelBufferNotOpenGLCompatible:
+      return "The Buffer cannot be used with OpenGL as either its size, pixelformat or attributes are not supported by OpenGL"
+    case kCVReturnPixelBufferNotMetalCompatible:
+      return "The Buffer cannot be used with Metal as either its size, pixelformat or attributes are not supported by Metal"
+    case kCVReturnWouldExceedAllocationThreshold:
+      return """
+        The allocation request failed because it would have exceeded a specified allocation threshold \
+        (see kCVPixelBufferPoolAllocationThresholdKey)
+        """
+    case kCVReturnPoolAllocationFailed:
+      return "The allocation for the buffer pool failed. Most likely because of lack of resources. Check if your parameters are in range"
+    case kCVReturnInvalidPoolAttributes:
+      return "A CVBufferPool cannot be created with the given attributes"
+    case kCVReturnRetry:
+      return "a scan hasn't completely traversed the CVBufferPool due to a concurrent operation. The client can retry the scan"
+    default:
+      return "Unrecognized core video return code"
     }
   }
 }

@@ -295,10 +295,28 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
 
     switch identifier {
     case .key:
-      cell.textField!.stringValue =  property
+      if let textField = cell.textField {
+        textField.stringValue =  property
+      }
       return cell
     case .value:
-      cell.textField!.stringValue =  PlayerCore.lastActive.mpv.getString(property) ?? "<Error>"
+      let player = PlayerCore.lastActive
+
+      if let textField = cell.textField {
+        if !player.isStopping, !player.isStopped, !player.isShuttingDown, !player.isShutdown,
+            let value = PlayerCore.lastActive.mpv.getString(property) {
+          textField.stringValue = value
+          textField.textColor = .controlTextColor
+        } else {
+          let errorString = NSLocalizedString("inspector.error", comment: "Error")
+
+          let italicDescriptor: NSFontDescriptor = textField.font!.fontDescriptor.withSymbolicTraits(NSFontDescriptor.SymbolicTraits.italic)
+          let errorFont = NSFont(descriptor: italicDescriptor, size: textField.font!.pointSize)
+
+          textField.attributedStringValue = NSMutableAttributedString(string: errorString, attributes: [.font: errorFont!])
+          textField.textColor = .disabledControlTextColor
+        }
+      }
       return cell
     default:
       Logger.log("Unrecognized column: '\(identifier.rawValue)'", level: .error)

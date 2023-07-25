@@ -8,7 +8,9 @@
 
 import Cocoa
 
-class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTableViewDataSource {
+fileprivate let watchTableColumnHeaderColor = NSColor(red: 0.05, green: 0.05, blue: 0.05, alpha: 1)
+
+class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableViewDelegate, NSTableViewDataSource {
 
   override var windowNibName: NSNib.Name {
     return NSNib.Name("InspectorWindowController")
@@ -19,6 +21,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
   var watchProperties: [String] = []
 
   @IBOutlet weak var tabView: NSTabView!
+  @IBOutlet weak var tabButtonGroup: NSSegmentedControl!
   @IBOutlet weak var trackPopup: NSPopUpButton!
 
   @IBOutlet weak var pathField: NSTextField!
@@ -77,6 +80,16 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
     watchProperties = Preference.array(for: .watchProperties) as! [String]
     watchTableView.delegate = self
     watchTableView.dataSource = self
+
+    let headerFont = NSFont.boldSystemFont(ofSize: NSFont.smallSystemFontSize)
+    for column in watchTableView.tableColumns {
+      let headerCell = WatchTableColumnHeaderCell()
+      // Use title from the XIB
+      let title = column.headerCell.title
+      // Use small bold system font
+      headerCell.attributedStringValue = NSMutableAttributedString(string: title, attributes: [.font: headerFont])
+      column.headerCell = headerCell
+    }
 
     deleteButton.isEnabled = false
 
@@ -235,7 +248,9 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
 
   @objc func dynamicUpdate() {
     updateInfo(dynamic: true)
-    watchTableView.reloadData()
+    /// Do not call `reloadData()` (no arg version) because it will clear the selection. Also, because we know the number of rows will not change,
+    /// calling `reloadData(forRowIndexes:)` will get the same result but much more efficiently
+    watchTableView.reloadData(forRowIndexes: IndexSet(0..<watchTableView.numberOfRows), columnIndexes: IndexSet(0..<watchTableView.numberOfColumns))
   }
 
   func updateTrack() {
@@ -271,25 +286,30 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
     return watchProperties.count
   }
 
-  func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+  func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
     guard let identifier = tableColumn?.identifier else { return nil }
-
-    guard let property = watchProperties[at: row] else { return nil }
-    if identifier == .key {
-      return property
-    } else if identifier == .value {
-      return PlayerCore.lastActive.mpv.getString(property) ?? "<Error>"
+    guard let cell = watchTableView.makeView(withIdentifier: identifier, owner: self) as? NSTableCellView else {
+      return nil
     }
-    return ""
+    guard let property = watchProperties[at: row] else { return nil }
+
+    switch identifier {
+    case .key:
+      cell.textField!.stringValue =  property
+      return cell
+    case .value:
+      cell.textField!.stringValue =  PlayerCore.lastActive.mpv.getString(property) ?? "<Error>"
+      return cell
+    default:
+      Logger.log("Unrecognized column: '\(identifier.rawValue)'", level: .error)
+      return nil
+    }
   }
 
-  func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
-    guard let value = object as? String,
-      let identifier = tableColumn?.identifier else { return }
-    if identifier == .key {
-      watchProperties[row] = value
-    }
-    saveWatchList()
+  func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
+    /// The background color for a `NSTableRowView` will default to the parent's background color, which results in an
+    /// unwanted additive effect for translucent backgrounds. Just make each row transparent.
+    rowView.backgroundColor = .clear
   }
 
   func tableViewSelectionDidChange(_ notification: Notification) {
@@ -334,4 +354,14 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
     Preference.set(watchProperties, for: .watchProperties)
   }
 
+  class WatchTableColumnHeaderCell: NSTableHeaderCell {
+    override func draw(withFrame cellFrame: NSRect, in controlView: NSView) {
+      // Override background color
+      self.drawsBackground = false
+      watchTableColumnHeaderColor.set()
+      cellFrame.fill(using: .sourceOver)
+
+      super.draw(withFrame: cellFrame, in: controlView)
+    }
+  }
 }

@@ -35,6 +35,12 @@ fileprivate let SettingsWidth: CGFloat = 360
 fileprivate let PlaylistMinWidth: CGFloat = 240
 fileprivate let PlaylistMaxWidth: CGFloat = 400
 
+// How close the cursor has to be horizontally to the edge of the sidebar in order to trigger its resize:
+fileprivate let sidebarResizeActivationRadius = 10.0
+
+// Is non-nil if within the activation rect of one of the sidebars
+fileprivate var sidebarResizeCursor: NSCursor? = nil
+
 fileprivate let InteractiveModeBottomViewHeight: CGFloat = 60
 
 fileprivate let UIAnimationDuration = 0.25
@@ -897,12 +903,19 @@ class MainWindowController: PlayerWindowController {
     // record current mouse pos
     mousePosRelatedToWindow = event.locationInWindow
     // playlist resizing
+    if isMousePosWithinSidebarResizeRect(mousePositionInWindow: mousePosRelatedToWindow!) {
+      isResizingSidebar = true
+    }
+  }
+
+  func isMousePosWithinSidebarResizeRect(mousePositionInWindow: NSPoint) -> Bool {
     if sideBarStatus == .playlist {
       let sf = sideBarView.frame
-      if NSPointInRect(mousePosRelatedToWindow!, NSMakeRect(sf.origin.x - 4, sf.origin.y, 4, sf.height)) {
-        isResizingSidebar = true
+      if NSPointInRect(mousePositionInWindow, NSMakeRect(sf.origin.x - sidebarResizeActivationRadius, sf.origin.y, sidebarResizeActivationRadius, sf.height)) {
+        return true
       }
     }
+    return false
   }
 
   override func mouseDragged(with event: NSEvent) {
@@ -1079,6 +1092,19 @@ class MainWindowController: PlayerWindowController {
 
   override func mouseMoved(with event: NSEvent) {
     guard !isInInteractiveMode else { return }
+
+    /// Set or unset the cursor to `resizeLeftRight` if able to resize the sidebar
+    if isMousePosWithinSidebarResizeRect(mousePositionInWindow: event.locationInWindow) {
+      if sidebarResizeCursor == nil {
+        let newCursor = NSCursor.resizeLeftRight
+        newCursor.push()
+        sidebarResizeCursor = newCursor
+      }
+    } else if let currentCursor = sidebarResizeCursor {
+      currentCursor.pop()
+      sidebarResizeCursor = nil
+    }
+
     let mousePos = playSlider.convert(event.locationInWindow, from: nil)
     if isMouseInSlider {
       updateTimeLabel(mousePos.x, originalPos: event.locationInWindow)

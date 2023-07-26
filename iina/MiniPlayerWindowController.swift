@@ -75,7 +75,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
 
     guard let window = window else { return }
 
-    window.styleMask = [.fullSizeContentView, .titled, .resizable, .closable]
+    window.styleMask = [.fullSizeContentView, .titled, .resizable, .closable, .miniaturizable]
     window.isMovableByWindowBackground = true
     window.titleVisibility = .hidden
     ([.closeButton, .miniaturizeButton, .zoomButton, .documentIconButton] as [NSWindow.ButtonType]).forEach {
@@ -86,7 +86,6 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
       // to front, but it never becomes key or main window.
       // Removing the button directly will also work but it causes crash on 10.12-, so for the sake of safety we don't use that way for now.
       // FIXME: Not a perfect solution. It should respond to the first click.
-      button?.frame.size = .zero
     }
 
     setToInitialWindowSize(display: false, animate: false)

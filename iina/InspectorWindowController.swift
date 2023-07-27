@@ -8,6 +8,7 @@
 
 import Cocoa
 
+fileprivate let watchTableBackgroundColor = NSColor(red: 2.0/3, green: 2.0/3, blue: 2.0/3, alpha: 0.1)
 fileprivate let watchTableColumnHeaderColor = NSColor(red: 0.05, green: 0.05, blue: 0.05, alpha: 1)
 
 class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableViewDelegate, NSTableViewDataSource {
@@ -74,6 +75,9 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
   @IBOutlet weak var watchTableView: NSTableView!
   @IBOutlet weak var deleteButton: NSButton!
 
+  @IBOutlet weak var watchTableContainerView: NSView!
+  private var tableHeightConstraint: NSLayoutConstraint? = nil
+
   override func windowDidLoad() {
     super.windowDidLoad()
 
@@ -91,6 +95,13 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
       column.headerCell = headerCell
     }
 
+    watchTableContainerView.wantsLayer = true
+    watchTableContainerView.layer?.backgroundColor = watchTableBackgroundColor.cgColor
+
+    tableHeightConstraint = watchTableContainerView.heightAnchor.constraint(greaterThanOrEqualToConstant: computeMinTableHeight())
+    tableHeightConstraint!.isActive = true
+    watchTableContainerView.layout()
+
     deleteButton.isEnabled = false
 
     if #available(macOS 10.14, *) {} else {
@@ -98,11 +109,20 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
     }
 
     updateInfo()
+    watchTableView.scrollRowToVisible(0)
 
     updateTimer = Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(dynamicUpdate), userInfo: nil, repeats: true)
 
     NotificationCenter.default.addObserver(self, selector: #selector(fileLoaded), name: .iinaFileLoaded, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(fileLoaded), name: .iinaMainWindowChanged, object: nil)
+  }
+
+  /// Workaround (as of MacOS 13.4): try to ensure `watchTableView` never scrolls vertically, because `NSTableView` will draw rows
+  /// overlapping the header (maybe only a problem for custom `NSTableHeaderCell`s which are not opaque), but looks quite ugly.
+  private func computeMinTableHeight() -> CGFloat {
+    /// Add `1` to `numberOfRows` because it will scroll if there is not at least 1 empty row
+    return watchTableView.headerView!.frame.height + CGFloat(
+      watchTableView.numberOfRows + 1) * (watchTableView.rowHeight + watchTableView.intercellSpacing.height)
   }
 
   deinit {
@@ -334,14 +354,58 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
     deleteButton.isEnabled = (watchTableView.selectedRow != -1)
   }
 
+  func resizeTableColumns(forTableWidth tableWidth: CGFloat) {
+    guard let keyColumn = watchTableView.tableColumn(withIdentifier: .key),
+          let valueColumn = watchTableView.tableColumn(withIdentifier: .value),
+          let tableScrollView = watchTableView.enclosingScrollView else {
+      return
+    }
+
+    let adjustedTableWidth = tableWidth - tableScrollView.verticalScroller!.frame.width
+    let keyColumnMaxWidth = adjustedTableWidth - valueColumn.minWidth
+    var newKeyColumnWidth = keyColumn.width
+    if keyColumn.width > keyColumnMaxWidth {
+      newKeyColumnWidth = keyColumnMaxWidth
+      keyColumn.width = newKeyColumnWidth
+    }
+    valueColumn.width = adjustedTableWidth - newKeyColumnWidth
+    tableScrollView.needsLayout = true
+    tableScrollView.needsDisplay = true
+  }
+
+  func windowWillResize(_ sender: NSWindow, to newWindowSize: NSSize) -> NSSize {
+    if let window = window, window.inLiveResize {
+      /// Table size will change with window size, so need to find the new table width from `newWindowSize`.
+      /// We know that our window's width is composed of 2 things: the table width + all other fixed "non-table" stuff.
+      /// We first find the non-table width by subtracting current table size from current window size.
+      /// Note: `NSTableView` does not give an honest answer for its width, but can use its parent (`NSClipView`) width.
+      let oldTableWidth = watchTableView.superview!.frame.width
+      let nonTableWidth = window.frame.width - oldTableWidth
+      let newTableWidth = newWindowSize.width - nonTableWidth
+      resizeTableColumns(forTableWidth: newTableWidth)
+    }
+
+    return newWindowSize
+  }
+
+  func windowDidResize(_ notification: Notification) {
+    if let window = window, window.inLiveResize {
+      let tableWidth = watchTableView.superview!.frame.width
+      resizeTableColumns(forTableWidth: tableWidth)
+    }
+  }
+
   @IBAction func addWatchAction(_ sender: AnyObject) {
-    Utility.quickPromptPanel("add_watch", sheetWindow: window) { str in
+    Utility.quickPromptPanel("add_watch", sheetWindow: window) { [self] str in
       self.watchProperties.append(str)
       self.saveWatchList()
 
-      let insertIndexSet = IndexSet(integer: self.watchTableView.numberOfRows)
-      self.watchTableView.insertRows(at: insertIndexSet, withAnimation: AccessibilityPreferences.motionReductionEnabled ? [] : .slideDown)
-      self.watchTableView.selectRowIndexes(insertIndexSet, byExtendingSelection: false)
+      // Append row to end of table, with animation if preferred
+      let insertIndexSet = IndexSet(integer: watchTableView.numberOfRows)
+      watchTableView.insertRows(at: insertIndexSet, withAnimation: AccessibilityPreferences.motionReductionEnabled ? [] : .slideDown)
+      watchTableView.selectRowIndexes(insertIndexSet, byExtendingSelection: false)
+      tableHeightConstraint?.constant = computeMinTableHeight()
+      watchTableContainerView.layout()
     }
   }
 
@@ -353,6 +417,8 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
     saveWatchList()
 
     watchTableView.removeRows(at: IndexSet(integer: rowIndex), withAnimation: AccessibilityPreferences.motionReductionEnabled ? [] : .slideUp)
+    tableHeightConstraint?.constant = computeMinTableHeight()
+    watchTableContainerView.layout()
   }
 
 

@@ -65,12 +65,12 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES" HUD="YES"/>
             <rect key="contentRect" x="1539" y="436" width="350" height="430"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2056" height="1285"/>
-            <view key="contentView" misplaced="YES" id="se5-gp-TjO" userLabel="InspectorWindow Content View">
+            <view key="contentView" id="se5-gp-TjO" userLabel="InspectorWindow Content View">
                 <rect key="frame" x="0.0" y="0.0" width="353" height="430"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <tabView drawsBackground="NO" controlSize="small" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="wHY-jo-uW0">
-                        <rect key="frame" x="12" y="12" width="326" height="437"/>
+                        <rect key="frame" x="12" y="12" width="329" height="382"/>
                         <tabViewItems>
                             <tabViewItem label="General" identifier="1" id="f7a-XG-NCc">
                                 <view key="view" id="mRY-yK-FeT">
@@ -1082,7 +1082,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="305" height="113"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
-                                                        <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="0.0" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                         <tableColumns>
                                                             <tableColumn identifier="Key" editable="NO" width="140" minWidth="100" maxWidth="1000" id="zDk-Ie-EPs">
@@ -1270,7 +1270,7 @@
                         </tabViewItems>
                     </tabView>
                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0rt-Td-kr8">
-                        <rect key="frame" x="87" y="449" width="176" height="21"/>
+                        <rect key="frame" x="89" y="394" width="176" height="21"/>
                         <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="Fqo-1c-3L1">
                             <font key="font" metaFont="smallSystem"/>
                             <segments>

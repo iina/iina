@@ -337,17 +337,22 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
   @IBAction func addWatchAction(_ sender: AnyObject) {
     Utility.quickPromptPanel("add_watch", sheetWindow: window) { str in
       self.watchProperties.append(str)
-      self.watchTableView.reloadData()
       self.saveWatchList()
+
+      let insertIndexSet = IndexSet(integer: self.watchTableView.numberOfRows)
+      self.watchTableView.insertRows(at: insertIndexSet, withAnimation: AccessibilityPreferences.motionReductionEnabled ? [] : .slideDown)
+      self.watchTableView.selectRowIndexes(insertIndexSet, byExtendingSelection: false)
     }
   }
 
   @IBAction func removeWatchAction(_ sender: AnyObject) {
-    if watchTableView.selectedRow >= 0 {
-      watchProperties.remove(at: watchTableView.selectedRow)
-      watchTableView.reloadData()
-    }
+    let rowIndex = watchTableView.selectedRow
+    guard rowIndex >= 0 else { return }
+
+    watchProperties.remove(at: rowIndex)
     saveWatchList()
+
+    watchTableView.removeRows(at: IndexSet(integer: rowIndex), withAnimation: AccessibilityPreferences.motionReductionEnabled ? [] : .slideUp)
   }
 
 

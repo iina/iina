@@ -1762,7 +1762,6 @@ class PlayerCore: NSObject {
   // difficult to use option set
   enum SyncUIOption {
     case time
-    case timeAndCache
     case playButton
     case volume
     case muteButton
@@ -1770,20 +1769,10 @@ class PlayerCore: NSObject {
     case playlist
     case playlistLoop
 //    case fileLoop
-    case additionalInfo
   }
 
   @objc func syncUITime() {
-    if info.isNetworkResource {
-      syncUI(.timeAndCache)
-    } else {
-      syncUI(.time)
-    }
-    if !isInMiniPlayer &&
-      mainWindow.fsState.isFullscreen && mainWindow.displayTimeAndBatteryInFullScreen &&
-      !mainWindow.additionalInfoView.isHidden {
-        syncUI(.additionalInfo)
-    }
+    syncUI(.time)
   }
 
   func syncUI(_ option: SyncUIOption) {
@@ -1793,10 +1782,10 @@ class PlayerCore: NSObject {
     // Logger.log("Syncing UI \(option)", level: .verbose, subsystem: subsystem)
 
     switch option {
-
+      
     case .time:
-      info.videoPosition?.second = mpv.getDouble(MPVProperty.timePos)
-      if info.isNetworkResource {
+      let isNetworkStream = info.isNetworkResource
+      if isNetworkStream {
         info.videoDuration?.second = mpv.getDouble(MPVProperty.duration)
       }
       // When the end of a video file is reached mpv does not update the value of the property
@@ -1806,42 +1795,32 @@ class PlayerCore: NSObject {
       let eofReached = mpv.getFlag(MPVProperty.eofReached)
       if eofReached, let duration = info.videoDuration?.second {
         info.videoPosition?.second = duration
+      } else {
+        info.videoPosition?.second = mpv.getDouble(MPVProperty.timePos)
       }
       info.constrainVideoPosition()
-      DispatchQueue.main.async {
+      if isNetworkStream {
+        // Update cache info
+        info.pausedForCache = mpv.getFlag(MPVProperty.pausedForCache)
+        info.cacheUsed = ((mpv.getNode(MPVProperty.demuxerCacheState) as? [String: Any])?["fw-bytes"] as? Int) ?? 0
+        info.cacheSpeed = mpv.getInt(MPVProperty.cacheSpeed)
+        info.cacheTime = mpv.getInt(MPVProperty.demuxerCacheTime)
+        info.bufferingState = mpv.getInt(MPVProperty.cacheBufferingState)
+      }
+      DispatchQueue.main.async { [self] in
         if self.isInMiniPlayer {
-          self.miniPlayer.updatePlayTime(withDuration: self.info.isNetworkResource, andProgressBar: true)
+          miniPlayer.updatePlayTime(withDuration: isNetworkStream, andProgressBar: true)
         } else {
-          self.mainWindow.updatePlayTime(withDuration: self.info.isNetworkResource, andProgressBar: true)
+          mainWindow.updatePlayTime(withDuration: isNetworkStream, andProgressBar: true)
+          if mainWindow.fsState.isFullscreen && mainWindow.displayTimeAndBatteryInFullScreen && !mainWindow.additionalInfoView.isHidden {
+            self.mainWindow.updateAdditionalInfo()
+          }
+        }
+        if isNetworkStream {
+          self.mainWindow.updateNetworkState()
         }
       }
-
-    case .timeAndCache:
-      info.videoPosition?.second = mpv.getDouble(MPVProperty.timePos)
-      info.videoDuration?.second = mpv.getDouble(MPVProperty.duration)
-      // When the end of a video file is reached mpv does not update the value of the property
-      // time-pos, leaving it reflecting the position of the last frame of the video. This is
-      // especially noticeable if the onscreen controller time labels are configured to show
-      // milliseconds. Adjust the position if the end of the file has been reached.
-      let eofReached = mpv.getFlag(MPVProperty.eofReached)
-      if eofReached, let duration = info.videoDuration?.second {
-        info.videoPosition?.second = duration
-      }
-      info.constrainVideoPosition()
-      info.pausedForCache = mpv.getFlag(MPVProperty.pausedForCache)
-      info.cacheUsed = ((mpv.getNode(MPVProperty.demuxerCacheState) as? [String: Any])?["fw-bytes"] as? Int) ?? 0
-      info.cacheSpeed = mpv.getInt(MPVProperty.cacheSpeed)
-      info.cacheTime = mpv.getInt(MPVProperty.demuxerCacheTime)
-      info.bufferingState = mpv.getInt(MPVProperty.cacheBufferingState)
-      DispatchQueue.main.async {
-        if self.isInMiniPlayer {
-          self.miniPlayer.updatePlayTime(withDuration: true, andProgressBar: true)
-        } else {
-          self.mainWindow.updatePlayTime(withDuration: true, andProgressBar: true)
-        }
-        self.mainWindow.updateNetworkState()
-      }
-
+      
     case .playButton:
       DispatchQueue.main.async {
         self.mainWindow.updatePlayButtonState(self.info.isPaused ? .off : .on)
@@ -1850,13 +1829,13 @@ class PlayerCore: NSObject {
           self.touchBarSupport.updateTouchBarPlayBtn()
         }
       }
-
+      
     case .volume, .muteButton:
       DispatchQueue.main.async {
         self.mainWindow.updateVolume()
         self.miniPlayer.updateVolume()
       }
-
+      
     case .chapterList:
       DispatchQueue.main.async {
         // this should avoid sending reload when table view is not ready
@@ -1864,22 +1843,17 @@ class PlayerCore: NSObject {
           self.mainWindow.playlistView.chapterTableView.reloadData()
         }
       }
-
+      
     case .playlist:
       DispatchQueue.main.async {
         if self.isPlaylistVisible {
           self.mainWindow.playlistView.playlistTableView.reloadData()
         }
       }
-
+      
     case .playlistLoop:
       DispatchQueue.main.async {
         self.mainWindow.playlistView.updateLoopBtnStatus()
-      }
-
-    case .additionalInfo:
-      DispatchQueue.main.async {
-        self.mainWindow.updateAdditionalInfo()
       }
     }
   }

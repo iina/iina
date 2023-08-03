@@ -250,6 +250,27 @@ class JavascriptPlugin: NSObject {
         try? FileManager.default.removeItem(at: pluginsRoot.appendingPathComponent(item))
       }
     }
+    
+    // If there is a iinaplgz file inside the latest release, use the plgz file
+    
+    let response = Just.get("https://api.github.com/repos\(url.path)/releases/latest")
+    if let json = response.json as? [String: Any],
+       let assets = json["assets"] as? [[String: Any]],
+       let plgzItem = assets.first(where: { ($0["name"] as? String)?.hasSuffix(".iinaplgz") ?? false }),
+       let dlURL = plgzItem["browser_download_url"] as? String
+    {
+      do {
+        let plgzName = plgzItem["name"] as! String
+        let destURL = Utility.tempDirURL.appendingPathComponent(plgzName)
+        let downloadResponse = Just.get(dlURL)
+        try downloadResponse.content?.write(to: destURL)
+        return try create(fromPackageURL: destURL)
+      } catch {
+        // ignore any error
+      }
+    }
+    
+    // Otherwise, install from source
 
     func removeTempPluginFolder() {
       try? FileManager.default.removeItem(at: pluginsRoot.appendingPathComponent(tempFolder))

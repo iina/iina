@@ -137,6 +137,8 @@ struct Preference {
     static let autoSwitchToMusicMode = Key("autoSwitchToMusicMode")
     static let musicModeShowPlaylist = Key("musicModeShowPlaylist")
     static let musicModeShowAlbumArt = Key("musicModeShowAlbumArt")
+    static let musicModePlaylistHeight = Key("musicModePlaylistHeight")
+    static let musicModeMaxWidth = Key("musicModeMaxWidth")
 
     static let displayTimeAndBatteryInFullScreen = Key("displayTimeAndBatteryInFullScreen")
 
@@ -758,7 +760,9 @@ struct Preference {
     .thumbnailWidth: 240,
     .autoSwitchToMusicMode: true,
     .musicModeShowPlaylist: false,
+    .musicModePlaylistHeight: 300,
     .musicModeShowAlbumArt: true,
+    .musicModeMaxWidth: 1000,
     .displayTimeAndBatteryInFullScreen: false,
 
     .windowBehaviorWhenPip: WindowBehaviorWhenPip.doNothing.rawValue,

@@ -8,6 +8,10 @@
 
 import Cocoa
 
+// Adjust x offset by this, otherwise text will be off-center
+// (add 2 to frame's actual offset to prevent leading edge from clipping)
+fileprivate let mediaInfoViewLeadingOffset: CGFloat = 20 + 2
+
 class ScrollingTextField: NSTextField {
 
   enum State {
@@ -23,7 +27,7 @@ class ScrollingTextField: NSTextField {
 
   private var scrollingTimer: Timer?
   private var startTimer: Timer?
-  private var drawPoint: NSPoint = .zero
+  private var drawPoint: NSPoint = CGPoint(x: mediaInfoViewLeadingOffset, y: 0)
 
   private var step: CGFloat = 1
 
@@ -38,8 +42,9 @@ class ScrollingTextField: NSTextField {
 
   func scroll() {
     let stringWidth = attributedStringValue.size().width
-    // FIXME: Use hard-coded width here. Should be changed to frame.width and handle the center alignment by ourself in draw().
-    guard state == .idle && stringWidth > 252 else { return }
+    // Must use superview frame as a reference. NSTextField frame is poorly defined
+    let frameWidth = superview!.frame.width
+    guard state == .idle && stringWidth >= frameWidth else { return }
 
     state = .pause
     startTimer = Timer.scheduledTimer(timeInterval: timeToWaitBeforeStart, target: self, selector: #selector(startScrolling),
@@ -63,7 +68,7 @@ class ScrollingTextField: NSTextField {
     scrollingTimer = nil
     startTimer?.invalidate()
     startTimer = nil
-    drawPoint = .zero
+    drawPoint.x = mediaInfoViewLeadingOffset
     state = .idle
     needsDisplay = true
   }
@@ -71,7 +76,7 @@ class ScrollingTextField: NSTextField {
   @objc
   private func moveText() {
     drawPoint.x -= step
-    if drawPoint.x + appendedStringCopyWidth < 0 {
+    if drawPoint.x + appendedStringCopyWidth < mediaInfoViewLeadingOffset {
       reset()
       return
     }
@@ -79,10 +84,15 @@ class ScrollingTextField: NSTextField {
   }
 
   override func draw(_ dirtyRect: NSRect) {
-    if state == .scroll {
-      scrollingString.draw(at: drawPoint)
-    } else {
+    let stringWidth = attributedStringValue.size().width
+    let frameWidth = superview!.frame.width
+    if stringWidth < frameWidth {
+      // Plenty of space. Center text instead
+      let xOffset = (frameWidth - stringWidth) / 2
+      drawPoint.x = xOffset + mediaInfoViewLeadingOffset
       attributedStringValue.draw(at: drawPoint)
+    } else {
+      scrollingString.draw(at: drawPoint)
     }
   }
 

@@ -254,14 +254,22 @@ func packPlugin(_ args: ArraySlice<String>) -> Bool {
     print("Plugin directory doesn't exist.")
     exit(EXIT_FAILURE)
   }
-  let packagePath = pluginDir.appendingPathExtension("iinaplgz").path
+  
+  let infoJsonPath = pluginDir.appendingPathComponent("Info.json").path
+  guard FileManager.default.fileExists(atPath: infoJsonPath) else {
+    print("Plugin directory doesn't contain Info.json.")
+    exit(EXIT_FAILURE)
+  }
+  
+  let plgzFileName = pluginDir.lastPathComponent.appending(".iinaplgz")
+  let packagePath = currentDirURL.appendingPathComponent(plgzFileName).path
   if FileManager.default.fileExists(atPath: packagePath) {
     if !promptYesOrNo("File \(packagePath) already exists. Overwrite?") {
       exit(EXIT_SUCCESS)
     }
   }
   
-  let cmd = "zip -ryq \(packagePath) . -x 'node_modules/*'"
+  let cmd = "zip -ryq \(packagePath) . -x 'node_modules/*' -x '.*'"
   let (process, stdout, stderr) = Process.run(["/bin/bash", "-c", cmd], at: pluginDir)
   
   guard process.terminationStatus == 0 else {

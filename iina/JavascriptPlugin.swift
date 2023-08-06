@@ -266,7 +266,7 @@ class JavascriptPlugin: NSObject {
         try downloadResponse.content?.write(to: destURL)
         return try create(fromPackageURL: destURL)
       } catch {
-        // ignore any error
+        Logger.log("Cannot find an iinaplgz file in the latest release, installing from source.", level: .debug)
       }
     }
     

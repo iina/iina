@@ -158,24 +158,24 @@ class PreferenceWindowController: NSWindowController {
 
   override func windowDidLoad() {
     super.windowDidLoad()
-    
+
     window?.titlebarAppearsTransparent = true
     window?.titleVisibility = .hidden
     window?.isMovableByWindowBackground = true
-    
+
     tableView.delegate = self
     tableView.dataSource = self
     completionTableView.delegate = self
     completionTableView.dataSource = self
-    
+
     detailViewBottomConstraint = prefDetailContentView.bottomAnchor.constraint(equalTo: prefDetailContentView.superview!.bottomAnchor)
-    
+
     // NSTableView's "Source List" style is only available with MacOS 11.0+ and includes a built-in 10pt offset for its highlights.
     // But for older MacOS versions, the style will default to "full width" with no highlight offset, which will touch the Search field.
     if #unavailable(macOS 11.0) {
       navTableSearchFieldSpacingConstraint.constant = 10.0
     }
-    
+
     var viewMap = [
       ["general", "PrefGeneralViewController"],
       ["ui", "PrefUIViewController"],
@@ -193,7 +193,7 @@ class PreferenceWindowController: NSWindowController {
     }
     let labelDict = [String: [String: [String]]](
       uniqueKeysWithValues: viewMap.map { (NSLocalizedString("preference.\($0[0])", comment: ""), self.getLabelDict(inNibNamed: $0[1])) })
-    
+
     indexingQueue.async{
       self.isIndexing = true
       self.makeTries(labelDict)

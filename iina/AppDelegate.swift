@@ -65,7 +65,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     return w
   }()
 
-  lazy var preferenceWindowController: NSWindowController = {
+  lazy var preferenceWindowController: PreferenceWindowController = {
     var list: [NSViewController & PreferenceWindowEmbeddable] = [
       PrefGeneralViewController(),
       PrefUIViewController(),
@@ -594,9 +594,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       shouldIgnoreOpenFile = false
       return
     }
-    // open pending files
     let urls = pendingFilesForOpenFile.map { URL(fileURLWithPath: $0) }
+    
+    // if installing a plugin package
+    if let pluginPackageURL = urls.first(where: { $0.pathExtension == "iinaplgz" }) {
+      showPreferences(self)
+      preferenceWindowController.performAction(.installPlugin(url: pluginPackageURL))
+      return
+    }
 
+    // open pending files
     pendingFilesForOpenFile.removeAll()
     if PlayerCore.activeOrNew.openURLs(urls) == 0 {
       Utility.showAlert("nothing_to_open")

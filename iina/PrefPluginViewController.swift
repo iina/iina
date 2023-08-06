@@ -412,6 +412,12 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
       }
     }
   }
+  
+  @objc func installPluginAction(localPackageURL url: URL) {
+    self.queue.async {
+      self.installPlugin(fromLocalPackageURL: url)
+    }
+  }
 
   @IBAction func endSheet(_ sender: NSButton) {
     view.window!.endSheet(sender.window!)

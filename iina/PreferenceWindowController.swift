@@ -125,6 +125,10 @@ class PreferenceWindowController: NSWindowController {
 
   private let indexingQueue = DispatchQueue(label: "IINAPreferenceIndexingTask", qos: .userInitiated)
   private var isIndexing: Bool = true
+  
+  enum Action {
+    case installPlugin(url: URL)
+  }
 
   @IBOutlet weak var searchField: NSSearchField!
   @IBOutlet weak var tableView: NSTableView!
@@ -195,7 +199,6 @@ class PreferenceWindowController: NSWindowController {
       self.makeTries(labelDict)
       self.isIndexing = false
     }
-
   }
 
   override func mouseDown(with event: NSEvent) {
@@ -350,6 +353,18 @@ class PreferenceWindowController: NSWindowController {
     return nil
   }
 
+  func performAction(_ action: Action) {
+    switch action {
+    case .installPlugin(url: let url):
+      guard let idx = viewControllers.firstIndex(where: { $0 is PrefPluginViewController }) else {
+        return
+      }
+      loadTab(at: idx)
+      let vc = viewControllers[idx] as! PrefPluginViewController
+      vc.installPluginAction(localPackageURL: url)
+      // vc.perform(#selector(vc.installPluginAction(localPackageURL:)), with: url, afterDelay: 0.25)
+    }
+  }
 }
 
 extension PreferenceWindowController: NSTableViewDelegate, NSTableViewDataSource {

@@ -361,7 +361,8 @@ class PreferenceWindowController: NSWindowController {
       }
       loadTab(at: idx)
       let vc = viewControllers[idx] as! PrefPluginViewController
-      vc.perform(#selector(vc.installPluginAction(localPackageURL:)), with: url, afterDelay: 0.25)
+      vc.installPluginAction(localPackageURL: url)
+      // vc.perform(#selector(vc.installPluginAction(localPackageURL:)), with: url, afterDelay: 0.25)
     }
   }
 }

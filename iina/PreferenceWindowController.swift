@@ -126,7 +126,7 @@ class PreferenceWindowController: NSWindowController {
   private let indexingQueue = DispatchQueue(label: "IINAPreferenceIndexingTask", qos: .userInitiated)
   private var isIndexing: Bool = true
   
-  enum PendingAction {
+  enum Action {
     case installPlugin(url: URL)
   }
 
@@ -353,7 +353,7 @@ class PreferenceWindowController: NSWindowController {
     return nil
   }
 
-  func performAction(_ action: PendingAction) {
+  func performAction(_ action: Action) {
     switch action {
     case .installPlugin(url: let url):
       guard let idx = viewControllers.firstIndex(where: { $0 is PrefPluginViewController }) else {

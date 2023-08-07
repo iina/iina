@@ -805,6 +805,10 @@ extension BindingTableViewController: NSMenuDelegate {
       }
     }
 
+    if !clickedRow.isEnabled {
+      mib.addItem("Show All Bindings For \(clickedRow.keyMapping.normalizedMpvKey.quoted)", #selector(self.filterByKey(_:)))
+    }
+
     // ---
     mib.addSeparator()
 
@@ -976,4 +980,10 @@ extension BindingTableViewController: NSMenuDelegate {
   @objc fileprivate func removeRow(_ sender: BindingMenuItem) {
     bindingTableState.removeBindings(at: IndexSet(integer: sender.rowIndex))
   }
+
+  @objc fileprivate func filterByKey(_ sender: BindingMenuItem) {
+    let mpvKey = sender.row.keyMapping.normalizedMpvKey
+    bindingTableState.applyFilter("#key=\(mpvKey)")
+  }
+
 }

@@ -81,6 +81,9 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
         Logger.log("Received \(notification.name.rawValue.quoted) with invalid object: \(type(of: notification.object))", level: .error)
         return
       }
+      guard self.bindingSearchField.stringValue != newStringValue else {
+        return
+      }
       self.bindingSearchField.stringValue = newStringValue
     })
 

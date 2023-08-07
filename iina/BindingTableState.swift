@@ -394,9 +394,25 @@ struct BindingTableState {
 
     var biDict = BiDictionary<Int, Int>()
 
-    for (indexUnfiltered, bindingRow) in unfilteredRows.enumerated() {
-      if matches(bindingRow, filterString) {
-        biDict[key: indexUnfiltered] = biDict.values.count
+
+    if filterString.hasPrefix("#key=") {
+      // Match all occurrences of normalized key. Useful for finding duplicates
+      let key = filterString.dropFirst(5)
+      if key.isEmpty {
+        return biDict
+      }
+      let normalizedMpvKey = KeyCodeHelper.normalizeMpv(String(key))
+      for (indexUnfiltered, bindingRow) in unfilteredRows.enumerated() {
+        if bindingRow.keyMapping.normalizedMpvKey == normalizedMpvKey {
+          biDict[key: indexUnfiltered] = biDict.values.count
+        }
+      }
+
+    } else {
+      for (indexUnfiltered, bindingRow) in unfilteredRows.enumerated() {
+        if matches(bindingRow, filterString) {
+          biDict[key: indexUnfiltered] = biDict.values.count
+        }
       }
     }
 

@@ -73,12 +73,6 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
   @IBOutlet weak var watchTableView: NSTableView!
   @IBOutlet weak var deleteButton: NSButton!
 
-  deinit {
-    ObjcUtils.silenced {
-      NotificationCenter.default.removeObserver(self)
-    }
-  }
-
   // MARK: - Window Delegate
 
   override func windowDidLoad() {

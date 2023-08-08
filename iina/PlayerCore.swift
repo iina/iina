@@ -749,7 +749,7 @@ class PlayerCore: NSObject {
 
   func resume() {
     // Restart playback when reached EOF
-    if mpv.getFlag(MPVProperty.eofReached) {
+    if Preference.bool(for: .resumeFromEndRestartsPlayback) && mpv.getFlag(MPVProperty.eofReached) {
       seek(absoluteSecond: 0)
     }
     mpv.setFlag(MPVOption.PlaybackControl.pause, false, level: .verbose)

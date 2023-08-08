@@ -93,6 +93,16 @@
                         <binding destination="IBP-Mz-Maa" name="value" keyPath="values.keepOpenOnFileEnd" id="4qh-CV-UAH"/>
                     </connections>
                 </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="y2l-T9-GFV">
+                    <rect key="frame" x="138" y="176" width="325" height="18"/>
+                    <buttonCell key="cell" type="check" title="Restart media from the end using Play or Resume" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="vDa-4g-6AP">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="IBP-Mz-Maa" name="value" keyPath="values.resumeFromEndRestartsPlayback" id="XbN-op-Bzk"/>
+                    </connections>
+                </button>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="F6o-D4-gDa">
                     <rect key="frame" x="118" y="225" width="210" height="18"/>
                     <buttonCell key="cell" type="check" title="Resume last playback position" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="jOB-D3-WT3">
@@ -213,7 +223,7 @@
                     <rect key="frame" x="120" y="485" width="360" height="57"/>
                     <subviews>
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="Pga-vd-zGA">
-                            <rect key="frame" x="0.0" y="40" width="360" height="17"/>
+                            <rect key="frame" x="0.0" y="40" width="448" height="17"/>
                             <subviews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="10b-EJ-N6W">
                                     <rect key="frame" x="13" y="0.0" width="146" height="17"/>
@@ -242,9 +252,9 @@
                             </constraints>
                         </customView>
                         <box identifier="Content0" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="DZT-7n-S4M">
-                            <rect key="frame" x="-3" y="-4" width="366" height="42"/>
+                            <rect key="frame" x="-3" y="-4" width="454" height="42"/>
                             <view key="contentView" id="867-m1-aVc">
-                                <rect key="frame" x="4" y="5" width="358" height="34"/>
+                                <rect key="frame" x="4" y="5" width="446" height="34"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="8Ql-ym-BvF">
@@ -306,7 +316,7 @@
                     <rect key="frame" x="120" y="330" width="360" height="147"/>
                     <subviews>
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="W54-Em-Hx4">
-                            <rect key="frame" x="0.0" y="130" width="360" height="17"/>
+                            <rect key="frame" x="0.0" y="130" width="448" height="17"/>
                             <subviews>
                                 <button identifier="Trigger1" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CaQ-Om-AFL">
                                     <rect key="frame" x="0.0" y="0.0" width="13" height="13"/>
@@ -335,9 +345,9 @@
                             </constraints>
                         </customView>
                         <box identifier="Content1" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="5RN-PV-pOZ">
-                            <rect key="frame" x="-3" y="-4" width="366" height="132"/>
+                            <rect key="frame" x="-3" y="-4" width="454" height="132"/>
                             <view key="contentView" id="gWB-X2-AzC">
-                                <rect key="frame" x="4" y="5" width="358" height="124"/>
+                                <rect key="frame" x="4" y="5" width="446" height="124"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UFY-vM-qHd">
@@ -439,16 +449,17 @@
             <constraints>
                 <constraint firstItem="ibu-Tq-kBr" firstAttribute="height" secondItem="DUm-O0-pdI" secondAttribute="height" id="3Oe-KF-l3A"/>
                 <constraint firstItem="5G0-Ih-CIb" firstAttribute="height" secondItem="DUm-O0-pdI" secondAttribute="height" id="3k4-Eu-Tew"/>
+                <constraint firstItem="F6o-D4-gDa" firstAttribute="top" secondItem="y2l-T9-GFV" secondAttribute="bottom" constant="8" id="42y-0l-iXa"/>
                 <constraint firstItem="OXi-vL-mzp" firstAttribute="leading" secondItem="6zR-96-iKB" secondAttribute="leading" constant="120" id="4O3-ht-PYG"/>
                 <constraint firstItem="8iE-FU-0g0" firstAttribute="top" secondItem="aKH-Me-5XB" secondAttribute="bottom" constant="8" id="59d-ue-PTZ"/>
                 <constraint firstItem="QvG-Ma-br0" firstAttribute="height" secondItem="DUm-O0-pdI" secondAttribute="height" id="5Sj-zN-kO5"/>
-                <constraint firstItem="F6o-D4-gDa" firstAttribute="top" secondItem="Xi9-i5-9V4" secondAttribute="bottom" constant="8" id="6Jr-af-XZC"/>
+                <constraint firstItem="y2l-T9-GFV" firstAttribute="top" secondItem="Xi9-i5-9V4" secondAttribute="bottom" constant="8" id="6Jr-af-XZC"/>
                 <constraint firstAttribute="trailing" secondItem="aKH-Me-5XB" secondAttribute="trailing" id="7gW-uv-Fba"/>
                 <constraint firstItem="QvG-Ma-br0" firstAttribute="top" secondItem="6Hg-O4-cBP" secondAttribute="bottom" constant="8" id="85F-05-dDh"/>
                 <constraint firstItem="bV8-LP-cwH" firstAttribute="leading" secondItem="OXi-vL-mzp" secondAttribute="trailing" constant="8" id="8Kb-Fe-QIo"/>
                 <constraint firstItem="b7I-2V-MYa" firstAttribute="top" secondItem="QvG-Ma-br0" secondAttribute="bottom" constant="16" id="9H8-4r-eDa"/>
                 <constraint firstItem="bV8-LP-cwH" firstAttribute="baseline" secondItem="OXi-vL-mzp" secondAttribute="baseline" id="9fY-Y6-onK"/>
-                <constraint firstItem="MWj-we-UuR" firstAttribute="leading" secondItem="b7I-2V-MYa" secondAttribute="leading" id="CNM-Ri-Ubf"/>
+                <constraint firstItem="y2l-T9-GFV" firstAttribute="leading" secondItem="Xi9-i5-9V4" secondAttribute="leading" constant="20" id="BzC-bL-tYB"/>
                 <constraint firstItem="tUl-6f-ClP" firstAttribute="top" secondItem="ibu-Tq-kBr" secondAttribute="bottom" constant="8" id="DQg-F2-jP7"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fms-nd-RFo" secondAttribute="trailing" id="DYp-M6-7kk"/>
                 <constraint firstItem="38y-2I-MGs" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="6zR-96-iKB" secondAttribute="leading" constant="120" id="Dd3-CV-21F"/>
@@ -461,6 +472,7 @@
                 <constraint firstItem="ibu-Tq-kBr" firstAttribute="leading" secondItem="b7I-2V-MYa" secondAttribute="leading" id="Iut-G6-4zl"/>
                 <constraint firstItem="aKH-Me-5XB" firstAttribute="leading" secondItem="OXi-vL-mzp" secondAttribute="leading" id="NEg-jy-N85"/>
                 <constraint firstItem="F6o-D4-gDa" firstAttribute="leading" secondItem="Xi9-i5-9V4" secondAttribute="leading" id="ONu-Gw-6jM"/>
+                <constraint firstItem="MWj-we-UuR" firstAttribute="leading" secondItem="b7I-2V-MYa" secondAttribute="leading" id="OR6-ui-xG3"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MWj-we-UuR" secondAttribute="trailing" id="Ov9-bk-NKH"/>
                 <constraint firstItem="F6o-D4-gDa" firstAttribute="height" secondItem="DUm-O0-pdI" secondAttribute="height" id="Owa-Fs-41I"/>
                 <constraint firstItem="tUl-6f-ClP" firstAttribute="height" secondItem="DUm-O0-pdI" secondAttribute="height" id="PId-am-AqK"/>
@@ -489,6 +501,7 @@
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Xi9-i5-9V4" secondAttribute="trailing" priority="100" id="oZd-sR-YOa"/>
                 <constraint firstItem="5G0-Ih-CIb" firstAttribute="top" secondItem="DUm-O0-pdI" secondAttribute="bottom" constant="8" id="qiu-A2-Mtr"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tUl-6f-ClP" secondAttribute="trailing" id="rJU-fV-3iD"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="y2l-T9-GFV" secondAttribute="trailing" id="rmV-ag-PoN"/>
                 <constraint firstAttribute="bottom" secondItem="tUl-6f-ClP" secondAttribute="bottom" constant="8" id="s4G-EO-NkU"/>
                 <constraint firstItem="QvG-Ma-br0" firstAttribute="leading" secondItem="6Hg-O4-cBP" secondAttribute="leading" id="snr-fe-bxJ"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="F6o-D4-gDa" secondAttribute="trailing" priority="100" id="tRu-Sz-D5y"/>
@@ -884,6 +897,6 @@
         </customView>
     </objects>
     <resources>
-        <image name="NSRevealFreestandingTemplate" width="19" height="19"/>
+        <image name="NSRevealFreestandingTemplate" width="20" height="20"/>
     </resources>
 </document>

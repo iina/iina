@@ -289,43 +289,101 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   override func keyDown(with event: NSEvent) {
     let keyCode = KeyCodeHelper.mpvKeyCode(from: event)
     let normalizedKeyCode = KeyCodeHelper.normalizeMpv(keyCode)
-    if let kb = PlayerCore.keyBindings[normalizedKeyCode] {
-      handleKeyBinding(kb)
-    } else {
+    
+    PluginInputManager.handle(
+      input: normalizedKeyCode, event: .keyDown, player: player,
+      arguments: keyEventArgs(event), handler: {
+      if let kb = PlayerCore.keyBindings[normalizedKeyCode] {
+        self.handleKeyBinding(kb)
+        return true
+      }
+      return false
+    }, defaultHandler: {
       super.keyDown(with: event)
-    }
+    })
+  }
+  
+  override func keyUp(with event: NSEvent) {
+    let keyCode = KeyCodeHelper.mpvKeyCode(from: event)
+    let normalizedKeyCode = KeyCodeHelper.normalizeMpv(keyCode)
+    
+    PluginInputManager.handle(
+      input: normalizedKeyCode, event: .keyUp, player: player,
+      arguments: keyEventArgs(event)
+    )
+  }
+  
+  
+  override func mouseDown(with event: NSEvent) {
+    PluginInputManager.handle(
+      input: PluginInputManager.Input.mouse, event: .mouseDown,
+      player: player, arguments: mouseEventArgs(event)
+    )
+    // we don't call super here because before adding the plugin system,
+    // MainWindowController didn't call super at all
   }
 
   override func mouseUp(with event: NSEvent) {
-    guard !isMouseEvent(event, inAnyOf: mouseActionDisabledViews) else { return }
-    if event.clickCount == 1 {
-      if doubleClickAction == .none {
-        performMouseAction(singleClickAction)
-      } else {
-        singleClickTimer = Timer.scheduledTimer(timeInterval: NSEvent.doubleClickInterval, target: self, selector: #selector(performMouseActionLater), userInfo: singleClickAction, repeats: false)
-        mouseExitEnterCount = 0
+    guard !self.isMouseEvent(event, inAnyOf: mouseActionDisabledViews) else { return }
+    
+    PluginInputManager.handle(
+      input: PluginInputManager.Input.mouse, event: .mouseUp, player: player,
+      arguments: mouseEventArgs(event), defaultHandler: { [self] in
+      // default handler
+      if event.clickCount == 1 {
+        if doubleClickAction == .none {
+          performMouseAction(singleClickAction)
+        } else {
+          singleClickTimer = Timer.scheduledTimer(timeInterval: NSEvent.doubleClickInterval, target: self, selector: #selector(performMouseActionLater), userInfo: singleClickAction, repeats: false)
+          mouseExitEnterCount = 0
+        }
+      } else if event.clickCount == 2 {
+        if let timer = singleClickTimer {
+          timer.invalidate()
+          singleClickTimer = nil
+        }
+        performMouseAction(doubleClickAction)
       }
-    } else if event.clickCount == 2 {
-      if let timer = singleClickTimer {
-        timer.invalidate()
-        singleClickTimer = nil
-      }
-      performMouseAction(doubleClickAction)
-    }
+    })
+  }
+
+  /// This method is provided soly for invoking plugin input handlers.
+  func informPluginMouseDragged(with event: NSEvent) {
+    PluginInputManager.handle(
+      input: PluginInputManager.Input.mouse, event: .mouseDrag, player: player,
+      arguments: mouseEventArgs(event)
+    )
+  }
+
+  override func rightMouseDown(with event: NSEvent) {
+    PluginInputManager.handle(
+      input: PluginInputManager.Input.rightMouse, event: .mouseDown,
+      player: player, arguments: mouseEventArgs(event)
+    )
   }
 
   override func rightMouseUp(with event: NSEvent) {
     guard !isMouseEvent(event, inAnyOf: mouseActionDisabledViews) else { return }
-    performMouseAction(Preference.enum(for: .rightClickAction))
+    
+    PluginInputManager.handle(
+      input: PluginInputManager.Input.rightMouse, event: .mouseUp, player: player,
+      arguments: mouseEventArgs(event), defaultHandler: {
+      self.performMouseAction(Preference.enum(for: .rightClickAction))
+    })
   }
 
   override func otherMouseUp(with event: NSEvent) {
     guard !isMouseEvent(event, inAnyOf: mouseActionDisabledViews) else { return }
-    if event.type == .otherMouseUp {
-      performMouseAction(Preference.enum(for: .middleClickAction))
-    } else {
-      super.otherMouseUp(with: event)
-    }
+    
+    PluginInputManager.handle(
+      input: PluginInputManager.Input.otherMouse, event: .mouseUp, player: player,
+      arguments: mouseEventArgs(event), defaultHandler: {
+      if event.type == .otherMouseUp {
+        self.performMouseAction(Preference.enum(for: .middleClickAction))
+      } else {
+        super.otherMouseUp(with: event)
+      }
+    })
   }
 
   internal func performMouseAction(_ action: Preference.MouseClickAction) {
@@ -570,4 +628,22 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     })
   }
 
+}
+
+
+fileprivate func mouseEventArgs(_ event: NSEvent) -> [[String: Any]] {
+  return [[
+    "x": event.locationInWindow.x,
+    "y": event.locationInWindow.y,
+    "clickCount": event.clickCount,
+    "pressure": event.pressure
+  ] as [String : Any]]
+}
+
+fileprivate func keyEventArgs(_ event: NSEvent) -> [[String: Any]] {
+  return [[
+    "x": event.locationInWindow.x,
+    "y": event.locationInWindow.y,
+    "isRepeat": event.isARepeat
+  ] as [String : Any]]
 }

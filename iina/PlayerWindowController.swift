@@ -317,9 +317,10 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   override func mouseDown(with event: NSEvent) {
     PluginInputManager.handle(
       input: PluginInputManager.Input.mouse, event: .mouseDown,
-      player: player, arguments: mouseEventArgs(event), defaultHandler: {
-      super.mouseDown(with: event)
-    })
+      player: player, arguments: mouseEventArgs(event)
+    )
+    // we don't call super here because before adding the plugin system,
+    // MainWindowController didn't call super at all
   }
 
   override func mouseUp(with event: NSEvent) {
@@ -344,6 +345,21 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         performMouseAction(doubleClickAction)
       }
     })
+  }
+
+  /// This method is provided soly for invoking plugin input handlers.
+  func informPluginMouseDragged(with event: NSEvent) {
+    PluginInputManager.handle(
+      input: PluginInputManager.Input.mouse, event: .mouseDrag, player: player,
+      arguments: mouseEventArgs(event)
+    )
+  }
+
+  override func rightMouseDown(with event: NSEvent) {
+    PluginInputManager.handle(
+      input: PluginInputManager.Input.rightMouse, event: .mouseDown,
+      player: player, arguments: mouseEventArgs(event)
+    )
   }
 
   override func rightMouseUp(with event: NSEvent) {

@@ -21,7 +21,7 @@ class PluginInputManager: NSObject {
     case keyUp
     case mouseDown
     case mouseUp
-    case mouseMove
+    case mouseDrag
   }
   
   struct Priority: RawRepresentable, Comparable {

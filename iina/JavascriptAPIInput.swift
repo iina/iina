@@ -14,6 +14,8 @@ import JavaScriptCore
   func normalizeKeyCode(_ code: String) -> String
   func getAllKeyBindings() -> JSValue
   func onMouseUp(_ button: String, _ callback: JSValue, _ priority: JSValue)
+  func onMouseDown(_ button: String, _ callback: JSValue, _ priority: JSValue)
+  func onMouseDrag(_ button: String, _ callback: JSValue, _ priority: JSValue)
   func onKeyDown(_ key: String, _ callback: JSValue , _ priority: JSValue)
   func onKeyUp(_ key: String, _ callback: JSValue, _ priority: JSValue)
 }
@@ -50,7 +52,15 @@ class JavascriptAPIInput: JavascriptAPI, JavascriptAPIInputExportable {
   func onMouseUp(_ button: String, _ callback: JSValue, _ priority: JSValue) {
     addListener(.mouseUp, button, callback, priority, normalizeKey: false)
   }
-  
+
+  func onMouseDown(_ button: String, _ callback: JSValue, _ priority: JSValue) {
+    addListener(.mouseDown, button, callback, priority, normalizeKey: false)
+  }
+
+  func onMouseDrag(_ button: String, _ callback: JSValue, _ priority: JSValue) {
+    addListener(.mouseDrag, button, callback, priority, normalizeKey: false)
+  }
+
   fileprivate func addListener(
     _ event: PluginInputManager.Event,
     _ key: String,  _ callback: JSValue, _ priority: JSValue, normalizeKey: Bool = true

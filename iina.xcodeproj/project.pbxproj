@@ -209,6 +209,8 @@
 		E374160C20F138A900B4F7F9 /* CollapseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E374160B20F138A900B4F7F9 /* CollapseView.swift */; };
 		E374160F20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E374160D20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift */; };
 		E374161120F3C0AB00B4F7F9 /* PrefUtilsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E374161320F3C0AB00B4F7F9 /* PrefUtilsViewController.xib */; };
+		E3785B072A83039600787CB7 /* JavascriptAPIWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3785B062A83039600787CB7 /* JavascriptAPIWebSocket.swift */; };
+		E3785B092A83380E00787CB7 /* WebSocketServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3785B082A83380E00787CB7 /* WebSocketServer.swift */; };
 		E38372922443634500F57718 /* LanguageTokenField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38372912443634500F57718 /* LanguageTokenField.swift */; };
 		E3839C5724FFF201007D0AB4 /* PluginStandaloneWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3839C5624FFF201007D0AB4 /* PluginStandaloneWindow.swift */; };
 		E3839C5924FFF817007D0AB4 /* JavascriptAPIStandaloneWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3839C5824FFF817007D0AB4 /* JavascriptAPIStandaloneWindow.swift */; };
@@ -1636,6 +1638,8 @@
 		E374160D20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefUtilsViewController.swift; sourceTree = "<group>"; };
 		E374161220F3C0AB00B4F7F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PrefUtilsViewController.xib; sourceTree = "<group>"; };
 		E374161520F3C0AD00B4F7F9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PrefUtilsViewController.strings"; sourceTree = "<group>"; };
+		E3785B062A83039600787CB7 /* JavascriptAPIWebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIWebSocket.swift; sourceTree = "<group>"; };
+		E3785B082A83380E00787CB7 /* WebSocketServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketServer.swift; sourceTree = "<group>"; };
 		E38372912443634500F57718 /* LanguageTokenField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageTokenField.swift; sourceTree = "<group>"; };
 		E3839C5624FFF201007D0AB4 /* PluginStandaloneWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginStandaloneWindow.swift; sourceTree = "<group>"; };
 		E3839C5824FFF817007D0AB4 /* JavascriptAPIStandaloneWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIStandaloneWindow.swift; sourceTree = "<group>"; };
@@ -2502,6 +2506,7 @@
 				E34EAA82251A36CE00057F27 /* JavascriptAPIFile.swift */,
 				E38BA1BF253E54F2000B551D /* JavascriptAPIGlobal.swift */,
 				E3DC53972A28F0DC002A5A48 /* JavascriptAPIInput.swift */,
+				E3785B062A83039600787CB7 /* JavascriptAPIWebSocket.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -2530,6 +2535,7 @@
 				E38BA1C3254110BD000B551D /* JavascriptMessageHub.swift */,
 				E3FF5ABF2938582F0019CE45 /* JavascriptDevTool.swift */,
 				E3FEC1322A30400F00CFD845 /* PluginInputManager.swift */,
+				E3785B082A83380E00787CB7 /* WebSocketServer.swift */,
 			);
 			name = Javascript;
 			sourceTree = "<group>";
@@ -2891,6 +2897,7 @@
 				842904E21F0EC01600478376 /* AutoFileMatcher.swift in Sources */,
 				8466BE181D5CDD0300039D03 /* QuickSettingViewController.swift in Sources */,
 				84A0BA9E1D2FAD4000BC8DA1 /* MainWindowController.swift in Sources */,
+				E3785B092A83380E00787CB7 /* WebSocketServer.swift in Sources */,
 				84E48D4E1E0F1090002C7A3F /* FilterWindowController.swift in Sources */,
 				E3F698872120D878005792C9 /* ExtendedColors.swift in Sources */,
 				E3839C5924FFF817007D0AB4 /* JavascriptAPIStandaloneWindow.swift in Sources */,
@@ -2901,6 +2908,7 @@
 				E38B3216214FF700000F6D27 /* EventController.swift in Sources */,
 				E3CB75BD1FDACB82004DB10A /* SavedFilter.swift in Sources */,
 				E337D5E4241C12BE00B5729A /* PrefPluginPermissionListView.swift in Sources */,
+				E3785B072A83039600787CB7 /* JavascriptAPIWebSocket.swift in Sources */,
 				E342832F20B7149800139865 /* Logger.swift in Sources */,
 				84F725561D4783EE000DEF1B /* VolumeSliderCell.swift in Sources */,
 				845040401E0ACADD0079C194 /* MPVNode.swift in Sources */,

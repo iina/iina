@@ -11,7 +11,7 @@ import JavaScriptCore
 import Network
 
 @objc protocol JavascriptAPIWebSocketControllerExportable: JSExport {
-  func createServer(_ options: [String: Any]) -> Bool
+  func createServer(_ options: [String: Any])
   func startServer()
   func onStateUpdate(_ handler: JSValue)
   func onMessage(_ handler: JSValue)
@@ -28,22 +28,24 @@ class JavascriptAPIWebSocketController: JavascriptAPI, JavascriptAPIWebSocketCon
   var newConnHandler: JSManagedValue?
   var connStateHandler: JSManagedValue?
 
-  func createServer(_ options: [String : Any]) -> Bool {
+  func createServer(_ options: [String : Any]) {
     if let previousServer = server {
       previousServer.listener.cancel()
       self.server = nil
     }
     guard let port = options["port"] as? UInt16 else {
       throwError(withMessage: "ws.createServer: port not specified")
-      return false
+      return
     }
     server = WebSocketServer(port: port, label: "\(pluginInstance.plugin.identifier).ws")
+    // The server should be created without any issue at this step,
+    // but errors may occur if we add TLS support in the future.
     if server == nil {
-      return false
-    } else {
-      server?.delegate = self
+      throwError(withMessage: "ws.createServer: server cannot be created.")
+      return
     }
-    return true
+    server?.delegate = self
+    return
   }
 
   func startServer() {
@@ -100,6 +102,8 @@ class JavascriptAPIWebSocketController: JavascriptAPI, JavascriptAPIWebSocketCon
         return
       }
       guard let connEntry = server.connections[conn] else {
+        // not throwing an error hereif there's no such connection ID.
+        // because it's not the server's fault and we just want to "ignore the request"
         resolve.call(withArguments: ["no_connection"])
         return
       }
@@ -144,6 +148,7 @@ extension JavascriptAPIWebSocketController: WebSocketServerDelegate {
     guard let handler = newConnHandler?.value else { return }
     handler.call(withArguments: [
       connID,
+      // may add more useful information in the future
       [
         "path": conn.currentPath?.remoteEndpoint?.debugDescription
       ] as [String: Any?]
@@ -186,6 +191,8 @@ extension JavascriptAPIWebSocketController: WebSocketServerDelegate {
 }
 
 
+/// Represents a WebSocket message, passed to JavaScript environment. Do not decode the message right away
+/// since we don't know whether the JavaScript code need text or binary data, and creating UInt8Array can be expensive
 @objc fileprivate class WSMessage: NSObject, WSMessageExportable {
   let dataObject: Data
 

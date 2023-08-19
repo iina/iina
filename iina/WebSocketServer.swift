@@ -28,7 +28,6 @@ class WebSocketServer {
   var connections: [String: NWConnection] = [:]
   var timer: Timer?
 
-  static var server = WebSocketServer(port: 10010, label: "test")
   lazy var serverQueue = DispatchQueue(label: "IINAWebSocketServer.\(self.label)")
   let subsystem: Logger.Subsystem
 
@@ -60,6 +59,7 @@ class WebSocketServer {
   func start() {
     listener.newConnectionHandler = handleNewConnection(_:)
     listener.stateUpdateHandler = handleStateUpdate(_:)
+    // No error will be thrown here. If the port is in use, the server will fail immediately
     listener.start(queue: serverQueue)
   }
 
@@ -68,6 +68,7 @@ class WebSocketServer {
   }
 
   private func handleNewConnection(_ connection: NWConnection) {
+    // Create a UUID to identify each connection
     let connID = UUID().uuidString
     Logger.log("New connection: \(connID)", level: .debug, subsystem: subsystem)
     Logger.log(connection.debugDescription, level: .debug, subsystem: subsystem)

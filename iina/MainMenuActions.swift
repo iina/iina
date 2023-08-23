@@ -29,7 +29,7 @@ class MainMenuActionHandler: NSResponder {
   }
 
   @objc func menuSavePlaylist(_ sender: NSMenuItem) {
-    Utility.quickSavePanel(title: "Save to playlist", types: ["m3u8"]) { (url) in
+    Utility.quickSavePanel(title: "Save to playlist", types: ["m3u8"], sheetWindow: player.currentWindow) { (url) in
       if url.isFileURL {
         var playlist = ""
         for item in self.player.info.playlist {

@@ -132,6 +132,10 @@ class PlayerCore: NSObject {
   var initialWindow: InitialWindowController!
   var miniPlayer: MiniPlayerWindowController!
 
+  var currentWindow: NSWindow? {
+    return isInMiniPlayer ? miniPlayer.window : mainWindow.window
+  }
+
   var mpv: MPVController!
 
   var plugins: [JavascriptPluginInstance] = []
@@ -174,10 +178,6 @@ class PlayerCore: NSObject {
 
   var isPlaylistVisible: Bool {
     isInMiniPlayer ? miniPlayer.isPlaylistVisible : mainWindow.sideBarStatus == .playlist
-  }
-
-  var currentWindow: NSWindow? {
-    return isInMiniPlayer ? miniPlayer.window : mainWindow.window
   }
 
   /// The A loop point established by the [mpv](https://mpv.io/manual/stable/) A-B loop command.

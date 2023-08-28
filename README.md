@@ -20,7 +20,7 @@
 * Designed with modern versions of macOS (10.11+) in mind
 * All the features you need for video and music: subtitles, playlists, chapters…and much, much more!
 * Force Touch, picture-in-picture and advanced Touch Bar support
-* Customizable user interface including multiple color schemes and on-screen controller (OSC) layout positioning
+* Customizable user interface including multiple color schemes and on screen controller (OSC) layout positioning
 * Standalone Music Mode designed for audio files
 * Video thumbnails
 * Online subtitle searching and intelligent local subtitle matching
@@ -53,7 +53,7 @@ IINA uses mpv for media playback. To build IINA, you can either fetch copies of 
 
 ### Building mpv manually
 
-1. Build your copy of mpv. If you're using a package manager to manage dependencies, the steps below outline the process.
+1. Build your own copy of mpv. If you're using a package manager to manage dependencies, the steps below outline the process.
 
 	#### With Homebrew
 

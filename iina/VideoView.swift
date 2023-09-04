@@ -214,7 +214,7 @@ class VideoView: NSView {
   /// by `Logger.fatal`.
   /// - Returns: A [CVDisplayLink](https://developer.apple.com/documentation/corevideo/cvdisplaylink-k0k).
   private func obtainDisplayLink() -> CVDisplayLink {
-    guard link == nil else { return link! }
+    if let link = link { return link }
     let result = CVDisplayLinkCreateWithActiveCGDisplays(&link)
     checkResult(result, "CVDisplayLinkCreateWithActiveCGDisplays")
     guard let link = link else {

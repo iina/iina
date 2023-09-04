@@ -39,7 +39,7 @@ class PlayerCore: NSObject {
   /// - Important: Code referencing this property **must** be run on the main thread because it references
   ///              [NSApplication.mainWindow`](https://developer.apple.com/documentation/appkit/nsapplication/1428723-mainwindow)
   static var active: PlayerCore {
-    if let wc = NSApp.mainWindow?.windowController as? MainWindowController {
+    if let wc = NSApp.mainWindow?.windowController as? PlayerWindowController {
       return wc.player
     } else {
       return first

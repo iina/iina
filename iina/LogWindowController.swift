@@ -40,7 +40,6 @@ class LogWindowController: NSWindowController, NSMenuDelegate {
     levelPopUpButton.selectItem(withTag: Logger.Level.preferred.rawValue)
     subsystemPopUpButton.menu!.delegate = self
 
-    Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(syncLogs), userInfo: nil, repeats: true)
     syncLogs()
   }
 
@@ -123,19 +122,21 @@ class LogWindowController: NSWindowController, NSMenuDelegate {
 
   // MARK: - Logs
 
-  @objc private func syncLogs()
-  {
-    guard !Logger.logs.isEmpty else { return }
-    var scroll = false
-    let range = logTableView.rows(in: logTableView.visibleRect)
-    if range.location + range.length == logs.count {
-      scroll = true
-    }
+  @objc func syncLogs() {
+    guard isWindowLoaded else { return }
+    Logger.$logs.withLock() { logs in
+      guard !logs.isEmpty else { return }
+      var scroll = false
+      let range = logTableView.rows(in: logTableView.visibleRect)
+      if range.location + range.length >= self.logs.count {
+        scroll = true
+      }
 
-    logs.append(contentsOf: Logger.logs)
-    Logger.logs.removeAll()
-    if scroll {
-      logTableView.scrollRowToVisible(logs.count - 1)
+      self.logs.append(contentsOf: logs)
+      logs.removeAll()
+      if scroll {
+        logTableView.scrollRowToVisible(self.logs.count - 1)
+      }
     }
   }
 }

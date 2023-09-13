@@ -22,11 +22,11 @@
 "guide.faq" = "Questions fréquemment posées";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.announcement" = "Vous utilisez la version %@ de IINA";
+"initial.beta.desc" = "Si vous voulez revenir a une version stable, décochez \"recevoir les mises à jour béta\" dans Réglages > Géneral, et installez une version stable depuis le <a href=\"https://iina.io\">site officiel</a>.";
+"initial.nightly.desc" = "La version expérimentale n'est pas recommandé pour une utilisation de tous les jours. Pour le moment, la version expérimentale, ne supporte pas les mises à jour automatique. Veuillez les telechager depuis le <a href=\"https://nightly.iina.io\">site en beta</a>.";
+"initial.debug.desc" = "La version débugage n'est pas recommandé pour une utilisation de tous les jours. Pour le moment, la version débugage, ne supporte pas les mises à jour automatique.";
+"initial.bug_report" = "Signalez là sur <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Mise en mémoire tampon… %d%%";
@@ -46,7 +46,7 @@
 
 // OSDMessage.swift
 "osd.pause" = "En pause";
-"osd.resume" = "Reprendre";
+"osd.resume" = "Reprise";
 "osd.volume" = "Volume : %i";
 "osd.speed" = "Vitesse : %.2fx";
 "osd.aspect" = "Format d'image : %@";
@@ -230,9 +230,9 @@
 "alert.delete_history.title" = "Supprimer l'historique de lecture";
 "alert.delete_history.message" = "Souhaitez-vous vraiment supprimer les entrées sélectionnées ?";
 
-"alert.filter_hwdec.message" = "Vous êtes sur le point d'activer un filtre vidéo. Cependant, votre décodeur hardware actuel peut ne pas bien supporter les filtres vidéos. Vous pouvez  désactiver le décodage hardware ou passer sur Auto(Copy), ce qui consommera le double en mémoire.\nVous aurez peut-être à répéter l'opération précédente (par exemple, activer le rognage) pour que tout fonctionne.";
+"alert.filter_hwdec.message" = "Vous êtes sur le point d'activer un filtre vidéo. Cependant, votre décodeur matériel actuel peut ne pas bien supporter les filtres vidéos. Vous pouvez désactiver le décodage matériel ou passer sur Auto(Copy), ce qui consommera le double en mémoire.\nVous aurez peut-être à répéter l'opération précédente (par exemple, activer le rognage) pour que tout fonctionne.";
 "alert.filter_hwdec.abort" = "Abandonner";
-"alert.filter_hwdec.turn_off" = "Désactiver le décodage hardware";
+"alert.filter_hwdec.turn_off" = "Désactiver le décodage matériel";
 "alert.filter_hwdec.use_copy" = "Passer sur Auto(Copy)";
 
 "alert.clear_cache.title" = "Vider le cache des miniatures";

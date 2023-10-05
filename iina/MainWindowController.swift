@@ -2018,6 +2018,7 @@ class MainWindowController: PlayerWindowController {
     }) {
       if self.osdAnimationState == .willHide {
         self.osdAnimationState = .hidden
+        self.osdVisualEffectView.isHidden = true
         self.osdStackView.views(in: .bottom).forEach { self.osdStackView.removeView($0) }
       }
     }

@@ -1056,8 +1056,7 @@ class MainWindowController: PlayerWindowController {
         timePreviewWhenSeek.isHidden = false
         thumbnailPeekView.isHidden = !player.info.thumbnailsReady
       }
-      let mousePos = playSlider.convert(event.locationInWindow, from: nil)
-      updateTimeLabel(mousePos.x, originalPos: event.locationInWindow)
+      refreshSeekTimeAndThumnail(from: event)
     }
   }
 
@@ -1078,18 +1077,15 @@ class MainWindowController: PlayerWindowController {
       // slider
       isMouseInSlider = false
       timePreviewWhenSeek.isHidden = true
-      let mousePos = playSlider.convert(event.locationInWindow, from: nil)
-      updateTimeLabel(mousePos.x, originalPos: event.locationInWindow)
+      refreshSeekTimeAndThumnail(from: event)
       thumbnailPeekView.isHidden = true
     }
   }
 
   override func mouseMoved(with event: NSEvent) {
     guard !isInInteractiveMode else { return }
-    let mousePos = playSlider.convert(event.locationInWindow, from: nil)
-    if isMouseInSlider {
-      updateTimeLabel(mousePos.x, originalPos: event.locationInWindow)
-    }
+
+    refreshSeekTimeAndThumnail(from: event)
     if isMouseInWindow {
       showUI()
     }
@@ -2263,6 +2259,16 @@ class MainWindowController: PlayerWindowController {
       self.bottomView.isHidden = true
       self.showUI()
       then()
+    }
+  }
+
+  private func refreshSeekTimeAndThumnail(from event: NSEvent) {
+    let isCoveredByOSD = !osdVisualEffectView.isHidden && isMouseEvent(event, inAnyOf: [osdVisualEffectView])
+    let mousePos = playSlider.convert(event.locationInWindow, from: nil)
+    if isMouseInSlider && !isCoveredByOSD {
+      updateTimeLabel(mousePos.x, originalPos: event.locationInWindow)
+    } else {
+      thumbnailPeekView.isHidden = true
     }
   }
 

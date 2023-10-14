@@ -143,6 +143,7 @@ struct Preference {
     static let windowBehaviorWhenPip = Key("windowBehaviorWhenPip")
     static let pauseWhenPip = Key("pauseWhenPip")
     static let togglePipByMinimizingWindow = Key("togglePipByMinimizingWindow")
+    static let togglePipWhenSwitchingSpaces = Key("togglePipWhenSwitchingSpaces")
 
     // Codec
 
@@ -764,6 +765,7 @@ struct Preference {
     .windowBehaviorWhenPip: WindowBehaviorWhenPip.doNothing.rawValue,
     .pauseWhenPip: false,
     .togglePipByMinimizingWindow: false,
+    .togglePipWhenSwitchingSpaces: true,
 
     .videoThreads: 0,
     .hardwareDecoder: HardwareDecoderOption.auto.rawValue,

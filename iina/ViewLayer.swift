@@ -26,7 +26,6 @@ class ViewLayer: CAOpenGLLayer {
     super.init()
 
     isOpaque = true
-    isAsynchronous = true
 
     autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
   }

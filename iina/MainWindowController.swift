@@ -2170,11 +2170,7 @@ class MainWindowController: PlayerWindowController {
       videoView.needsLayout = true
       videoView.layoutSubtreeIfNeeded()
       // force rerender a frame
-      videoView.videoLayer.mpvGLQueue.async {
-        DispatchQueue.main.sync {
-          self.videoView.videoLayer.draw()
-        }
-      }
+      videoView.videoLayer.draw(forced: true)
     }
 
     let controlView = mode.viewController()

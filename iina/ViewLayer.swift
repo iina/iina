@@ -94,6 +94,12 @@ class ViewLayer: CAOpenGLLayer {
 
   override func draw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj, forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) {
     let mpv = videoView.player.mpv!
+
+    CGLLockContext(ctx)
+    defer {
+      CGLUnlockContext(ctx)
+    }
+    
     needsMPVRender = false
 
     glClear(GLbitfield(GL_COLOR_BUFFER_BIT))

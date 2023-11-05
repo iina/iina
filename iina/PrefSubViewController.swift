@@ -116,8 +116,6 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
           switch err {
           case OpenSub.Error.loginFailed(let reason):
             message = reason
-          case OpenSub.Error.xmlRpcError(let e):
-            message = e.readableDescription
           default:
             message = "Unknown error"
           }

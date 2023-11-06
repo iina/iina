@@ -205,14 +205,14 @@ class VideoView: NSView {
   // MARK: Display link
 
   func startDisplayLink() {
-    if link == nil {
-      checkResult(CVDisplayLinkCreateWithActiveCGDisplays(&link),
-                  "CVDisplayLinkCreateWithActiveCGDisplays")
-    }
-    guard let link = link else {
-      Logger.fatal("Cannot Create display link!")
-    }
-    guard !CVDisplayLinkIsRunning(link) else { return }
+//    if link == nil {
+//      checkResult(CVDisplayLinkCreateWithActiveCGDisplays(&link),
+//                  "CVDisplayLinkCreateWithActiveCGDisplays")
+//    }
+//    guard let link = link else {
+//      Logger.fatal("Cannot Create display link!")
+//    }
+//    guard !CVDisplayLinkIsRunning(link) else { return }
 
     /// Set this to `true` to enable video redraws to match the timing of the view redraw during animations.
     /// This fixes a situation where the layer size may not match the size of its superview at each redraw,
@@ -221,51 +221,51 @@ class VideoView: NSView {
 
     updateDisplayLink()
 
-    checkResult(CVDisplayLinkSetOutputCallback(link, displayLinkCallback, mutableRawPointerOf(obj: self)),
-                "CVDisplayLinkSetOutputCallback")
-    checkResult(CVDisplayLinkStart(link), "CVDisplayLinkStart")
+//    checkResult(CVDisplayLinkSetOutputCallback(link, displayLinkCallback, mutableRawPointerOf(obj: self)),
+//                "CVDisplayLinkSetOutputCallback")
+//    checkResult(CVDisplayLinkStart(link), "CVDisplayLinkStart")
   }
 
   @objc func stopDisplayLink() {
-    guard let link = link, CVDisplayLinkIsRunning(link) else { return }
+//    guard let link = link, CVDisplayLinkIsRunning(link) else { return }
 
     /// If this is set to `true` while the video is paused, there is some degree of busy-waiting as the
     /// layer is polled at a high rate about whether it needs to draw. Disable this to save CPU while idle.
     videoLayer.isAsynchronous = false
 
-    checkResult(CVDisplayLinkStop(link), "CVDisplayLinkStop")
+//    checkResult(CVDisplayLinkStop(link), "CVDisplayLinkStop")
   }
 
   // This should only be called if the window has changed displays
   func updateDisplayLink() {
-    guard let window = window, let link = link, let screen = window.screen else { return }
+    guard let window = window, let screen = window.screen else { return }
     let displayId = screen.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as! UInt32
 
     // Do nothing if on the same display
     if (currentDisplay == displayId) { return }
     currentDisplay = displayId
 
-    checkResult(CVDisplayLinkSetCurrentCGDisplay(link, displayId), "CVDisplayLinkSetCurrentCGDisplay")
-    let actualData = CVDisplayLinkGetActualOutputVideoRefreshPeriod(link)
-    let nominalData = CVDisplayLinkGetNominalOutputVideoRefreshPeriod(link)
-    var actualFps: Double = 0
-
-    if (nominalData.flags & Int32(CVTimeFlags.isIndefinite.rawValue)) < 1 {
-      let nominalFps = Double(nominalData.timeScale) / Double(nominalData.timeValue)
-
-      if actualData > 0 {
-        actualFps = 1/actualData
-      }
-
-      if abs(actualFps - nominalFps) > 1 {
-        Logger.log("Falling back to nominal display refresh rate: \(nominalFps) from \(actualFps)")
-        actualFps = nominalFps
-      }
-    } else {
-      Logger.log("Falling back to standard display refresh rate: 60 from \(actualFps)")
-      actualFps = 60
-    }
-    player.mpv.setDouble(MPVOption.Video.overrideDisplayFps, actualFps)
+//    checkResult(CVDisplayLinkSetCurrentCGDisplay(link, displayId), "CVDisplayLinkSetCurrentCGDisplay")
+//    let actualData = CVDisplayLinkGetActualOutputVideoRefreshPeriod(link)
+//    let nominalData = CVDisplayLinkGetNominalOutputVideoRefreshPeriod(link)
+//    var actualFps: Double = 0
+//
+//    if (nominalData.flags & Int32(CVTimeFlags.isIndefinite.rawValue)) < 1 {
+//      let nominalFps = Double(nominalData.timeScale) / Double(nominalData.timeValue)
+//
+//      if actualData > 0 {
+//        actualFps = 1/actualData
+//      }
+//
+//      if abs(actualFps - nominalFps) > 1 {
+//        Logger.log("Falling back to nominal display refresh rate: \(nominalFps) from \(actualFps)")
+//        actualFps = nominalFps
+//      }
+//    } else {
+//      Logger.log("Falling back to standard display refresh rate: 60 from \(actualFps)")
+//      actualFps = 60
+//    }
+//    player.mpv.setDouble(MPVOption.Video.overrideDisplayFps, actualFps)
 
     if #available(macOS 10.15, *) {
       refreshEdrMode()
@@ -278,8 +278,8 @@ class VideoView: NSView {
 
   /// Starts the display link if it has been stopped in order to save energy.
   func displayActive() {
-    displayIdleTimer?.invalidate()
-    startDisplayLink()
+//    displayIdleTimer?.invalidate()
+//    startDisplayLink()
   }
 
   /// Reduces energy consumption when the display link does not need to be running.
@@ -297,12 +297,12 @@ class VideoView: NSView {
   /// - Note: In addition to playback the display link must be running for operations such seeking, stepping and entering and leaving
   ///         full screen mode.
   func displayIdle() {
-    displayIdleTimer?.invalidate()
-    // The time of 6 seconds was picked to match up with the time QuickTime delays once playback is
-    // paused before stopping audio. As mpv does not provide an event indicating a frame step has
-    // completed the time used must not be too short or will catch mpv still drawing when stepping.
-    displayIdleTimer = Timer(timeInterval: 6.0, target: self, selector: #selector(stopDisplayLink), userInfo: nil, repeats: false)
-    RunLoop.current.add(displayIdleTimer!, forMode: .default)
+//    displayIdleTimer?.invalidate()
+//    // The time of 6 seconds was picked to match up with the time QuickTime delays once playback is
+//    // paused before stopping audio. As mpv does not provide an event indicating a frame step has
+//    // completed the time used must not be too short or will catch mpv still drawing when stepping.
+//    displayIdleTimer = Timer(timeInterval: 6.0, target: self, selector: #selector(stopDisplayLink), userInfo: nil, repeats: false)
+//    RunLoop.current.add(displayIdleTimer!, forMode: .default)
   }
 
   func setICCProfile(_ displayId: UInt32) {
@@ -546,6 +546,7 @@ fileprivate func displayLinkCallback(
   let videoView = unsafeBitCast(context, to: VideoView.self)
   videoView.$isUninited.withLock() { isUninited in
     guard !isUninited else { return }
+    Logger.log("SWAP")
     videoView.player.mpv.mpvReportSwap()
   }
   return kCVReturnSuccess

@@ -2564,6 +2564,9 @@ class MainWindowController: PlayerWindowController {
   private func blackOutOtherMonitors() {
     screens = NSScreen.screens.filter { $0 != window?.screen }
 
+    for window in blackWindows {
+      window.orderOut(self)
+    }
     blackWindows = []
 
     for screen in screens {

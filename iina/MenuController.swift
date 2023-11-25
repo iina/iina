@@ -401,15 +401,16 @@ class MenuController: NSObject, NSMenuDelegate {
   private func updateChapterList() {
     chapterMenu.removeAllItems()
     let info = PlayerCore.active.info
+    let chapters = info.chapters
     let padder = { (time: String) -> String in
-      let standard = (info.chapters.last?.time.stringRepresentation ?? "").reversed()
+      let standard = (chapters.last?.time.stringRepresentation ?? "").reversed()
       return String((time.reversed() + standard[standard.index(standard.startIndex, offsetBy: time.count)...].map {
         $0 == ":" ? ":" : "0"
       }).reversed())
     }
-    for (index, chapter) in info.chapters.enumerated() {
+    for (index, chapter) in chapters.enumerated() {
       let menuTitle = "\(padder(chapter.time.stringRepresentation)) – \(chapter.title)"
-      let nextChapterTime = info.chapters[at: index+1]?.time ?? Constants.Time.infinite
+      let nextChapterTime = chapters[at: index+1]?.time ?? Constants.Time.infinite
       let isPlaying = info.videoPosition?.between(chapter.time, nextChapterTime) ?? false
       let menuItem = NSMenuItem(title: menuTitle, action: #selector(MainMenuActionHandler.menuChapterSwitch(_:)), keyEquivalent: "")
       menuItem.tag = index

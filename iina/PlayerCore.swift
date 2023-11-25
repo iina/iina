@@ -1108,12 +1108,19 @@ class PlayerCore: NSObject {
     mpv.command(nextMedia ? .playlistNext : .playlistPrev, checkError: false)
   }
 
-  func playChapter(_ pos: Int) {
-    let chapter = info.chapters[pos]
+  @discardableResult
+  func playChapter(_ pos: Int) -> MPVChapter? {
+    Logger.log("Seeking to chapter \(pos)", level: .verbose, subsystem: subsystem)
+    let chapters = info.chapters
+    guard pos < chapters.count else {
+      return nil
+    }
+    let chapter = chapters[pos]
     mpv.command(.seek, args: ["\(chapter.time.second)", "absolute"])
     resume()
     // need to update time pos
     syncUITime()
+    return chapter
   }
 
   func setCrop(fromString str: String) {
@@ -1861,6 +1868,7 @@ class PlayerCore: NSObject {
       DispatchQueue.main.async {
         // this should avoid sending reload when table view is not ready
         if self.isInMiniPlayer ? self.miniPlayer.isPlaylistVisible : self.mainWindow.sideBarStatus == .playlist {
+          Logger.log("Syncing UI: chapterList", level: .verbose)
           self.mainWindow.playlistView.chapterTableView.reloadData()
         }
       }
@@ -2051,17 +2059,20 @@ class PlayerCore: NSObject {
   }
 
   func getChapters() {
-    info.chapters.removeAll()
+    Logger.log("Reloading chapter list", level: .verbose, subsystem: subsystem)
+    var chapters: [MPVChapter] = []
     let chapterCount = mpv.getInt(MPVProperty.chapterListCount)
-    if chapterCount == 0 {
-      return
-    }
     for index in 0..<chapterCount {
       let chapter = MPVChapter(title:     mpv.getString(MPVProperty.chapterListNTitle(index)),
                                startTime: mpv.getDouble(MPVProperty.chapterListNTime(index)),
                                index:     index)
-      info.chapters.append(chapter)
+      chapters.append(chapter)
     }
+    // Instead of modifying existing list, overwrite reference to prev list.
+    // This will avoid concurrent modification crashes
+    info.chapters = chapters
+
+    syncUI(.chapterList)
   }
 
   // MARK: - Notifications

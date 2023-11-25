@@ -206,9 +206,8 @@ class PlaySliderCell: NSSliderCell {
       if let totalSec = info.videoDuration?.second {
         chapterStrokeColor.setStroke()
         var chapters = info.chapters
-        if chapters.count > 0 {
-          chapters.remove(at: 0)
-          chapters.forEach { chapt in
+        if chapters.count > 1 {
+          for chapt in chapters[1...] {
             let chapPos = CGFloat(chapt.time.second) / CGFloat(totalSec) * barRect.width
             let linePath = NSBezierPath()
             linePath.move(to: NSPoint(x: chapPos, y: barRect.origin.y))

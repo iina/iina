@@ -123,7 +123,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       updateTabButtons(activeTab: currentTab)
     }
 
-    // nofitications
+    // notifications
     playlistChangeObserver = NotificationCenter.default.addObserver(forName: .iinaPlaylistChanged, object: player, queue: OperationQueue.main) { [unowned self] _ in
       self.playlistTotalLengthIsReady = false
       self.reloadData(playlist: true, chapters: false)
@@ -165,7 +165,6 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       playlistTableView.reloadData()
     }
     if chapters {
-      player.getChapters()
       chapterTableView.reloadData()
     }
   }
@@ -565,6 +564,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     // chapter
     else if tableView == chapterTableView {
       let chapters = info.chapters
+      guard row < chapters.count else {
+        return nil
+      }
       let chapter = chapters[row]
       // next chapter time
       let nextChapterTime = chapters[at: row+1]?.time ?? .infinite

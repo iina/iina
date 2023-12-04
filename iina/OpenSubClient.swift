@@ -99,15 +99,13 @@ class OpenSubClient {
   /// Hostname to initially use to access the REST API.
   private let apiDefaultHostname = "api.opensubtitles.com"
 
-  // FIXME: Obtain official Open Subtitles API key for IINA.
-
   /// Official IINA [Open Subtitles](https://www.opensubtitles.com/)
   /// [API key](https://opensubtitles.stoplight.io/docs/opensubtitles-api/e3750fd63a100-getting-started#api-key).
   ///
   /// The API key identifies the _application_ using the
   /// [REST API](https://opensubtitles.stoplight.io/docs/opensubtitles-api/e3750fd63a100-getting-started),
   /// not the  [Open Subtitles](https://www.opensubtitles.com/) user.
-  private let apiKey = "FIXME FIXME FIXME"
+  private let apiKey = "SPX87dlUuuHpxeh5u3rd7dHekOT6oYpx"
 
   /// [JSON decoder](https://developer.apple.com/documentation/foundation/jsondecoder) properly configured
   /// to decode responses from API methods.

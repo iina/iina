@@ -116,22 +116,25 @@ class OpenSub {
 
     private let subChooseViewController = SubChooseViewController()
 
-    private let languages: [String]
+    private var languages: [String] = {
+      guard let preferredLanguages = Preference.string(for: .subLang) else {
+        Utility.showAlert("sub_lang_not_set")
+        return ["en"]
+      }
+      return preferredLanguages.components(separatedBy: ",")
+    }()
+
+    /// The new OpenSubtitle API only supports a fixed set of language codes.
+    /// Here we cache the result so `obtainLanguageCodes()` only needs to be called once.
+    private static var supportedLanguages: [String] = []
 
     static let shared = Fetcher()
 
-    required init() {
-      guard let preferredLanguages = Preference.string(for: .subLang) else {
-        Utility.showAlert("sub_lang_not_set")
-        self.languages = ["en"]
-        return
-      }
-      self.languages = preferredLanguages.components(separatedBy: ",")
-    }
-
     func fetch(from url: URL, withProviderID id: String, playerCore player: PlayerCore) -> Promise<[Subtitle]> {
       return login().then { _ in
-          self.logIgnoredLanguageCodes()
+        self.obtainLanguageCodes()
+        }.then {
+          self.filterLanguageCodes()
         }.then {
           self.hash(url)
         }.then { hash in
@@ -230,45 +233,50 @@ class OpenSub {
       }
     }
 
-    /// Log ignored language codes.
+    /// Obtain supported language codes.
+    func obtainLanguageCodes() -> Promise<Void> {
+      guard Fetcher.supportedLanguages.isEmpty else { return .value }
+      return OpenSubClient.shared.languages().then { response in
+        Promise { resolver in
+          Fetcher.supportedLanguages = response.data.map { $0.languageCode }
+          resolver.fulfill(())
+        }
+      }.recover { error in
+        throw OnlineSubtitle.CommonError.networkError(error)
+      }
+    }
+
+    /// Filter out unsupported language codes.
     ///
     /// IINA's `Preferred language` setting is used when automatically loading local subtitle files as well as when downloading
     /// from subtitle sites. As a result it may contian language codes not supported by Open Subtitles. When logging is enabled this
     /// method will log the language codes in the setting that are not supported by Open Subtitles and will be ignored. This is only
     /// done for ease of debugging.
-    func logIgnoredLanguageCodes() -> Promise<Void> {
-      guard Logger.enabled else { return .value }
-      return OpenSubClient.shared.languages().then { response in
-        Promise { resolver in
-          resolver.fulfill(())
-          var foundCode = false
-          var ignoredCodes = ""
-          let supportedCodes = response.data.map { $0.languageCode }
-          log("Preferred languages: \(self.languages.sorted().joined(separator: ","))")
-          log("Supported languages: \(supportedCodes.sorted().joined(separator: ","))")
-          for language in self.languages {
-            guard supportedCodes.contains(language) else {
-              if !ignoredCodes.isEmpty {
-                ignoredCodes += ","
-              }
-              ignoredCodes += language
-              continue
-            }
-            foundCode = true
-          }
-          guard foundCode else {
-            log("None of the preferred languages are supported: \(ignoredCodes)", level: .warning)
-            return
-          }
-          guard ignoredCodes.isEmpty else {
-            log("The following preferred languages will be ignored: \(ignoredCodes)")
-            return
-          }
-          log("All preferred languages are supported")
+    func filterLanguageCodes() -> Promise<Void> {
+      let supportedCodes = Fetcher.supportedLanguages
+      log("Preferred languages: \(languages.sorted().joined(separator: ","))")
+      log("Supported languages: \(supportedCodes.sorted().joined(separator: ","))")
+
+      var ignoredCodes: [String] = []
+      var filteredCodes: [String] = []
+      for language in languages {
+        if supportedCodes.contains(language) {
+          filteredCodes.append(language)
+        } else {
+          ignoredCodes.append(language)
         }
-      }.recover { error in
-        throw OnlineSubtitle.CommonError.networkError(error)
       }
+
+      if filteredCodes.isEmpty {
+        log("None of the preferred languages are supported: \(ignoredCodes); using en", level: .warning)
+        filteredCodes = ["en"]
+      } else if !ignoredCodes.isEmpty {
+        log("The following preferred languages will be ignored: \(ignoredCodes)")
+      } else {
+        log("All preferred languages are supported")
+      }
+      languages = filteredCodes
+      return .value
     }
 
     /// Logout of the user session.

@@ -48,8 +48,12 @@ class Assrt {
     override func download() -> Promise<[URL]> {
       if let fileList = fileList {
         // download from file list
-        return when(fulfilled: fileList.map { file -> Promise<URL> in
-          Promise { resolver in
+        var fileGenerator = fileList.makeIterator()
+        let generator = AnyIterator<Promise<URL>> {
+          guard let file = fileGenerator.next() else {
+            return nil
+          }
+          return Promise { resolver in
             Just.get(file.url, asyncCompletionHandler: { response in
               guard response.ok, let data = response.content else {
                 resolver.reject(OnlineSubtitle.CommonError.networkError(response.error))
@@ -61,7 +65,9 @@ class Assrt {
               }
             })
           }
-        })
+        }
+
+        return when(fulfilled: generator, concurrently: 2)
       } else if let url = url, let filename = filename {
         // download from url
         return Promise { resolver in

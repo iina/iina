@@ -16,7 +16,7 @@ import PromiseKit
 class OpenSub {
   final class Subtitle: OnlineSubtitle {
 
-    private static let dateFormatter = {
+    private static let dateFormatter: DateFormatter = {
       let dateFormatter = DateFormatter()
       dateFormatter.dateStyle = .medium
       dateFormatter.timeStyle = .medium

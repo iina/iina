@@ -1545,6 +1545,9 @@ class PlayerCore: NSObject {
       }
       if Preference.bool(for: .recordRecentFiles) && Preference.bool(for: .trackAllFilesInRecentOpenMenu) {
         NSDocumentController.shared.noteNewRecentDocumentURL(url)
+#if DEBUG
+        DispatchQueue.main.async { (NSApp.delegate as? AppDelegate)?.saveRecentDocuments() }
+#endif
       }
 
     }

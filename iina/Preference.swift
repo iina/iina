@@ -293,6 +293,9 @@ struct Preference {
     static let suppressCannotPreventDisplaySleep = Key("suppressCannotPreventDisplaySleep")
 
     static let iinaEnablePluginSystem = Key("iinaEnablePluginSystem")
+
+    /** Workaround for issue [#4688](https://github.com/iina/iina/issues/4688) */
+    static let recentDocuments = Key("recentDocuments")
   }
 
   // MARK: - Enums
@@ -869,7 +872,9 @@ struct Preference {
     .savedVideoFilters: [SavedFilter](),
     .savedAudioFilters: [SavedFilter](),
 
-    .suppressCannotPreventDisplaySleep: false
+    .suppressCannotPreventDisplaySleep: false,
+
+    .recentDocuments: [Any]()
   ]
 
 

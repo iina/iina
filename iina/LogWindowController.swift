@@ -39,6 +39,8 @@ class LogWindowController: NSWindowController, NSMenuDelegate {
     }
     levelPopUpButton.selectItem(withTag: Logger.Level.preferred.rawValue)
     subsystemPopUpButton.menu!.delegate = self
+
+    syncLogs()
   }
 
   fileprivate static func indicatorIcon(withColor color: NSColor) -> NSImage {
@@ -116,6 +118,26 @@ class LogWindowController: NSWindowController, NSMenuDelegate {
     let pasteboard = NSPasteboard.general
     pasteboard.clearContents()
     pasteboard.setString(string, forType: .string)
+  }
+
+  // MARK: - Logs
+
+  @objc func syncLogs() {
+    guard isWindowLoaded else { return }
+    Logger.$logs.withLock() { logs in
+      guard !logs.isEmpty else { return }
+      var scroll = false
+      let range = logTableView.rows(in: logTableView.visibleRect)
+      if range.location + range.length >= self.logs.count {
+        scroll = true
+      }
+
+      self.logs.append(contentsOf: logs)
+      logs.removeAll()
+      if scroll {
+        logTableView.scrollRowToVisible(self.logs.count - 1)
+      }
+    }
   }
 }
 

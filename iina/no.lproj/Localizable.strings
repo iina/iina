@@ -11,8 +11,8 @@
 "general.off" = "Off";
 "general.login" = "Login";
 "general.logout" = "Logout";
-"general.ok" = "OK";
-"general.cancel" = "Cancel";
+"general.ok" = "Godkjenn";
+"general.cancel" = "Avbryt";
 "general.username" = "Username";
 "general.password" = "Password";
 
@@ -20,6 +20,13 @@
 "guide.highlights" = "Highlights";
 "guide.basic_settings" = "Basic Settings";
 "guide.faq" = "Frequently Asked Questions";
+
+// Initial Window
+"initial.announcement" = "You are using a %@ version of IINA";
+"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
+"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffering… %d%%";
@@ -31,7 +38,7 @@
 "osc.1ms" = "1 millisecond";
 
 // QuickSettingViewController.swift
-"quicksetting.item_default" = "Default";
+"quicksetting.item_default" = "Standard";
 "quicksetting.item_none" = "None";
 "quicksetting.hwdec" = "Hardware Decoding";
 "quicksetting.deinterlace" = "Deinterlace";
@@ -39,7 +46,7 @@
 
 // OSDMessage.swift
 "osd.pause" = "Pause";
-"osd.resume" = "Resume";
+"osd.resume" = "Gjenoppta";
 "osd.volume" = "Volume: %i";
 "osd.speed" = "Speed: %.2fx";
 "osd.aspect" = "Aspect Ratio: %@";
@@ -54,7 +61,7 @@
 "osd.sub_delay.later" = "Subtitle Delay: %.2fs Later";
 "osd.sub_delay.earlier" = "Subtitle Delay: %.2fs Earlier";
 "osd.subtitle_pos" = "Subtitle Position: %.1f";
-"osd.mute" = "Mute";
+"osd.mute" = "Demp";
 "osd.unmute" = "Unmute";
 "osd.screenshot" = "Screenshot Captured";
 "osd.abloop.a" = "AB-Loop: A";
@@ -107,6 +114,7 @@
 "preference.enable_adv_settings" = "Enable advanced settings";
 
 "menu.volume" = "Volum: %d";
+"menu.volume_muted" = "Volume: %d (Muted)";
 "menu.audio_delay" = "Lydforsinkelse: %.2fs";
 "menu.sub_delay" = "Undertekstforsinkelse: %.2fs";
 "menu.fullscreen" = "Gå til fullskjerm";
@@ -116,7 +124,7 @@
 "menu.pause" = "Pause";
 "menu.resume" = "Gjenoppta";
 "menu.speed" = "Hastighet: %.2fx";
-"menu.chapters" = "Show Chapters Panel";
+"menu.chapters" = "Vis kapittelpanel";
 "menu.hide_chapters" = "Hide Chapters Panel";
 "menu.playlist" = "Show Playlist Panel";
 "menu.hide_playlist" = "Hide Playlist Panel";
@@ -191,6 +199,8 @@
 "alert.extra_option.config_folder" = "Error setting config directory \"%@\".";
 
 "alert.playlist.error_deleting" = "Error deleting: %@";
+
+"alert.screenshot.error_taking" = "Cannot take a screenshot!";
 
 "alert.sub.no_selected" = "Please select a downloaded subtitle first.";
 "alert.sub_lang_not_set" = "Please set preferred subtitle languages in preferences before using OpenSubtitles. English(eng) will be used this time.";
@@ -306,7 +316,7 @@
 "mini_player.remove" = "Remove from playlist";
 "mini_player.add" = "Add to playlist";
 "mini_player.delete" = "Delete all tracks from playlist";
-"mini_player.volume" = "Volume";
+"mini_player.volume" = "Volum";
 "mini_player.close" = "Close music mode";
 "mini_player.back" = "Return to video mode";
 

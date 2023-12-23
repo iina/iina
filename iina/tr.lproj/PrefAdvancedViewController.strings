@@ -13,7 +13,7 @@
 /* Class = "NSButtonCell"; title = "Open log directory"; ObjectID = "JDA-g3-RNX"; */
 "JDA-g3-RNX.title" = "Günlük dizinini aç";
 
-/* Class = "NSButtonCell"; title = "Enable logging"; ObjectID = "LCd-uY-Yze"; */
+/* Class = "NSButtonCell"; title = "Enable logging to file"; ObjectID = "LCd-uY-Yze"; */
 "LCd-uY-Yze.title" = "Günlük kaydını etkinleştir";
 
 /* Class = "NSButtonCell"; title = "Choose directory…"; ObjectID = "MRT-u8-xTX"; */
@@ -29,4 +29,4 @@
 "ehL-8Y-G8h.title" = "yapılandırma dizinini kullan:";
 
 /* Class = "NSButtonCell"; title = "Use mpv's OSD"; ObjectID = "phK-g9-Vbg"; */
-"phK-g9-Vbg.title" = "mpv'nin OSD'sini kullan";
+"phK-g9-Vbg.title" = "Mpv 'nin OSD 'sini kullanın";

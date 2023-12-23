@@ -11,12 +11,17 @@ import Cocoa
 class MainWindow: NSWindow {
   var forceKeyAndMain = false
 
-  override func cancelOperation(_ sender: Any?) {
-    let controller = windowController as! MainWindowController
-    if let kb = PlayerCore.keyBindings["ESC"] {
-      controller.handleKeyBinding(kb)
+  override func keyDown(with event: NSEvent) {
+    if menu?.performKeyEquivalent(with: event) == true {
+      return
+    }
+    /// Forward all key events which the window receives to its controller.
+    /// This allows `ESC` & `TAB` key bindings to work, instead of getting swallowed by
+    /// MacOS keyboard focus navigation (which we don't use).
+    if let controller = windowController as? MainWindowController {
+      controller.keyDown(with: event)
     } else {
-      super.cancelOperation(sender)
+      super.keyDown(with: event)
     }
   }
 

@@ -250,6 +250,27 @@ class JavascriptPlugin: NSObject {
         try? FileManager.default.removeItem(at: pluginsRoot.appendingPathComponent(item))
       }
     }
+    
+    // If there is a iinaplgz file inside the latest release, use the plgz file
+    
+    let response = Just.get("https://api.github.com/repos\(url.path)/releases/latest")
+    if let json = response.json as? [String: Any],
+       let assets = json["assets"] as? [[String: Any]],
+       let plgzItem = assets.first(where: { ($0["name"] as? String)?.hasSuffix(".iinaplgz") ?? false }),
+       let dlURL = plgzItem["browser_download_url"] as? String
+    {
+      do {
+        let plgzName = plgzItem["name"] as! String
+        let destURL = Utility.tempDirURL.appendingPathComponent(plgzName)
+        let downloadResponse = Just.get(dlURL)
+        try downloadResponse.content?.write(to: destURL)
+        return try create(fromPackageURL: destURL)
+      } catch {
+        Logger.log("Cannot find an iinaplgz file in the latest release, installing from source.", level: .debug)
+      }
+    }
+    
+    // Otherwise, install from source
 
     func removeTempPluginFolder() {
       try? FileManager.default.removeItem(at: pluginsRoot.appendingPathComponent(tempFolder))
@@ -433,7 +454,9 @@ class JavascriptPlugin: NSObject {
       try fileManager.moveItem(at: self.root, to: dest)
       self.root = dest
       self.entryURL = resolvePath(entryPath, root: root)!
-      self.globalEntryURL = resolvePath(globalEntryPath, root: root)!
+      if let globalEntryPath = globalEntryPath {
+        self.globalEntryURL = resolvePath(globalEntryPath, root: root)!
+      }
       self.preferencesPageURL = resolvePath(preferencesPage, root: root)
       self.helpPageURL = resolvePath(helpPage, root: root, allowNetwork: true)
     } catch let error {

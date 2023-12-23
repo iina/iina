@@ -12,7 +12,7 @@
 "general.login" = "Login";
 "general.logout" = "Logout";
 "general.ok" = "OK";
-"general.cancel" = "Cancel";
+"general.cancel" = "ರದ್ದುಮಾಡು";
 "general.username" = "Username";
 "general.password" = "Password";
 
@@ -20,6 +20,13 @@
 "guide.highlights" = "Highlights";
 "guide.basic_settings" = "Basic Settings";
 "guide.faq" = "Frequently Asked Questions";
+
+// Initial Window
+"initial.announcement" = "You are using a %@ version of IINA";
+"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
+"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffering… %d%%";
@@ -107,6 +114,7 @@
 "preference.enable_adv_settings" = "Enable advanced settings";
 
 "menu.volume" = "Volume: %d";
+"menu.volume_muted" = "Volume: %d (Muted)";
 "menu.audio_delay" = "Audio Delay: %.2fs";
 "menu.sub_delay" = "Subtitle Delay: %.2fs";
 "menu.fullscreen" = "Enter Full Screen";
@@ -191,6 +199,8 @@
 "alert.extra_option.config_folder" = "Error setting config directory \"%@\".";
 
 "alert.playlist.error_deleting" = "Error deleting: %@";
+
+"alert.screenshot.error_taking" = "Cannot take a screenshot!";
 
 "alert.sub.no_selected" = "Please select a downloaded subtitle first.";
 "alert.sub_lang_not_set" = "Please set preferred subtitle languages in preferences before using OpenSubtitles. English(eng) will be used this time.";

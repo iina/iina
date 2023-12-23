@@ -10,24 +10,24 @@
 
 
 "crop" = "Obreži";
-"crop.w" = "Width (default: video width)";
-"crop.h" = "Height (default: video height)";
+"crop.w" = "Širina (privzeto: širina videoposnetka)";
+"crop.h" = "Višina (privzeto: višina videoposnetka)";
 "crop.x" = "Origin X (default: center)";
 "crop.y" = "Origin Y (default: center)";
 
 "expand" = "Expand";
-"expand.w" = "Width (default: video width)";
-"expand.h" = "Height (default: video height)";
+"expand.w" = "Širina (privzeto: širina videoposnetka)";
+"expand.h" = "Višina (privzeto: višina videoposnetka)";
 "expand.x" = "Origin X (default: center)";
 "expand.y" = "Origin Y (default: center)";
 "expand.aspect" = "Expands to fit an aspect (e.g: 4/3)";
 "expand.round" = "Rounds up to make divisible by this value";
 
-"sharpen" = "Sharpen";
+"sharpen" = "Izostritev";
 "sharpen.msize" = "Matrix size";
 "sharpen.amount" = "Amount";
 
-"blur" = "Blur";
+"blur" = "Zameglitev";
 "blur.msize" = "Matrix size";
 "blur.amount" = "Amount";
 

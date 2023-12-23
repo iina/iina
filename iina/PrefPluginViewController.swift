@@ -412,6 +412,12 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
       }
     }
   }
+  
+  @objc func installPluginAction(localPackageURL url: URL) {
+    self.queue.async {
+      self.installPlugin(fromLocalPackageURL: url)
+    }
+  }
 
   @IBAction func endSheet(_ sender: NSButton) {
     view.window!.endSheet(sender.window!)
@@ -468,10 +474,32 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
   private func showNewPluginPermissions(_ plugin: JavascriptPlugin) {
     showPermissionsSheet(forPlugin: plugin, previousPlugin: nil) { ok in
       if ok {
-        plugin.normalizePath()
-        JavascriptPlugin.plugins.append(plugin)
-        plugin.enabled = true
-        self.tableView.reloadData()
+        // check whether a duplicate plugin exists, if yes, replace
+        let isDuplicate = JavascriptPlugin.plugins.contains { $0.identifier == plugin.identifier }
+        if isDuplicate {
+          Utility.quickAskPanel("plugin_reinstall", titleArgs: [plugin.name], sheetWindow: self.view.window!) { response in
+            if response == .alertFirstButtonReturn {
+              let pos = JavascriptPlugin.plugins.firstIndex { $0.identifier == plugin.identifier }
+              if let pos = pos {
+                // uninstall the old plugins
+                let oldPlugin = JavascriptPlugin.plugins[pos]
+                oldPlugin.enabled = false
+                oldPlugin.remove()
+                self.clearPluginPage()
+                // install the new plugin
+                plugin.normalizePath()
+                JavascriptPlugin.plugins.insert(plugin, at: pos)
+                plugin.enabled = true
+                self.tableView.reloadData()
+              }
+            }
+          }
+        } else {
+          plugin.normalizePath()
+          JavascriptPlugin.plugins.append(plugin)
+          plugin.enabled = true
+          self.tableView.reloadData()
+        }
       } else {
         plugin.remove()
       }

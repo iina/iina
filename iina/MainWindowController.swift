@@ -894,6 +894,7 @@ class MainWindowController: PlayerWindowController {
     workaroundCursorDefect()
     // do nothing if it's related to floating OSC
     guard !controlBarFloating.isDragging else { return }
+    var shouldCallSuper = true
     // record current mouse pos
     mousePosRelatedToWindow = event.locationInWindow
     // playlist resizing
@@ -901,7 +902,11 @@ class MainWindowController: PlayerWindowController {
       let sf = sideBarView.frame
       if NSPointInRect(mousePosRelatedToWindow!, NSMakeRect(sf.origin.x - 4, sf.origin.y, 4, sf.height)) {
         isResizingSidebar = true
+        shouldCallSuper = false
       }
+    }
+    if shouldCallSuper {
+      super.mouseDown(with: event)
     }
   }
 
@@ -929,6 +934,7 @@ class MainWindowController: PlayerWindowController {
           isDragging = true
         }
         window?.performDrag(with: event)
+        super.informPluginMouseDragged(with: event)
       }
     }
   }
@@ -988,6 +994,7 @@ class MainWindowController: PlayerWindowController {
   /// return to the view.`
   override func rightMouseDown(with event: NSEvent) {
     workaroundCursorDefect()
+    super.rightMouseDown(with: event)
   }
 
   override func rightMouseUp(with event: NSEvent) {

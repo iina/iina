@@ -9,42 +9,42 @@
 
 
 
-"crop" = "Crop";
-"crop.w" = "Width (default: video width)";
-"crop.h" = "Height (default: video height)";
-"crop.x" = "Origin X (default: center)";
-"crop.y" = "Origin Y (default: center)";
+"crop" = "Изрязване";
+"crop.w" = "Широчина (по подразбиране: широчина на образа)";
+"crop.h" = "Височина (по подразбиране: височина на образа)";
+"crop.x" = "Начало X (по подразбиране: средата)";
+"crop.y" = "Начало Y (по подразбиране: средата)";
 
-"expand" = "Expand";
-"expand.w" = "Width (default: video width)";
-"expand.h" = "Height (default: video height)";
-"expand.x" = "Origin X (default: center)";
-"expand.y" = "Origin Y (default: center)";
-"expand.aspect" = "Expands to fit an aspect (e.g: 4/3)";
-"expand.round" = "Rounds up to make divisible by this value";
+"expand" = "Разпъване";
+"expand.w" = "Широчина (по подразбиране: широчина на образа)";
+"expand.h" = "Височина (по подразбиране: височина на образа)";
+"expand.x" = "Начало X (по подразбиране: средата)";
+"expand.y" = "Начало Y (по подразбиране: средата)";
+"expand.aspect" = "Разпъва с побиране в съотношение (напр. 4:3)";
+"expand.round" = "Закръглява нагоре, за да стане делимо на тази стойност";
 
-"sharpen" = "Sharpen";
-"sharpen.msize" = "Matrix size";
-"sharpen.amount" = "Amount";
+"sharpen" = "Изостряне";
+"sharpen.msize" = "Размер на матрица";
+"sharpen.amount" = "Сила";
 
-"blur" = "Blur";
-"blur.msize" = "Matrix size";
-"blur.amount" = "Amount";
+"blur" = "Размиване";
+"blur.msize" = "Размер на матрица";
+"blur.amount" = "Сила";
 
-"delogo" = "Delogo";
-"delogo.w" = "Width";
-"delogo.h" = "Height";
-"delogo.x" = "Origin X";
-"delogo.y" = "Origin Y";
+"delogo" = "БезЛого";
+"delogo.w" = "Широчина";
+"delogo.h" = "Височина";
+"delogo.x" = "Начало X";
+"delogo.y" = "Начало Y";
 
 "negative" = "Negative";
 
-"vflip" = "Flip";
-"hflip" = "Mirror";
+"vflip" = "Преобръщане";
+"hflip" = "Огледално";
 
 "lut3d" = "3D LUT";
-"lut3d.file" = "File path (you can also drag & drop the file into the input box)";
-"lut3d.interp" = "Interpolation mode";
+"lut3d.file" = "Път до файла (можете да завлечете и пуснете файла в полето за въвеждане)";
+"lut3d.interp" = "Режим на интерполация";
 
 "custom_mpv" = "Custom (mpv)";
 "custom_mpv.name" = "Filter name";

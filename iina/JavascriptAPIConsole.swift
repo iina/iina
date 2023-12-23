@@ -40,6 +40,9 @@ class JavascriptAPIConsole: JavascriptAPI, JavascriptAPIConsoleExportable {
   }
 
   private func getStringValue(_ object: JSValue) -> String {
+    if #available(macOS 10.15, *), object.isSymbol {
+      return object.invokeMethod("toString", withArguments: [])!.toString()
+    }
     if object.isString {
       return object.toString()
     } else if object.isNull {

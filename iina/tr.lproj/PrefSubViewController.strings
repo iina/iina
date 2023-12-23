@@ -116,7 +116,7 @@
 "eYO-c0-Rjp.title" = "Arka plan:";
 
 /* Class = "NSBox"; title = "Other Styles"; ObjectID = "egf-g3-b7a"; */
-"egf-g3-b7a.title" = "Box";
+"egf-g3-b7a.title" = "Diğer Stiller";
 
 /* Class = "NSTextFieldCell"; title = "Override level:"; ObjectID = "gAq-Vr-hRY"; */
 "gAq-Vr-hRY.title" = "Geçersiz kılma düzeyi:";
@@ -146,7 +146,7 @@
 "pRe-wv-VVi.title" = "Kenar boşluğu";
 
 /* Class = "NSButtonCell"; title = "Ignore ASS styles"; ObjectID = "rZf-bj-qbV"; */
-"rZf-bj-qbV.title" = "ASS stillerini yoksay ";
+"rZf-bj-qbV.title" = "ASS stillerini yoksay";
 
 /* Class = "NSTextFieldCell"; title = "Auto load:"; ObjectID = "raf-Yu-ck0"; */
 "raf-Yu-ck0.title" = "Altyazıyı otomatik yükle:";
@@ -158,13 +158,13 @@
 "t5n-mc-dss.title" = "Kenar";
 
 /* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "u31-eV-Arr"; */
-"u31-eV-Arr.title" = "Devredışı";
+"u31-eV-Arr.title" = "Devre dışı";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "vDc-dw-liI"; */
 "vDc-dw-liI.title" = "Renk:";
 
 /* Class = "NSTextFieldCell"; title = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues."; ObjectID = "vYb-qH-XkH"; */
-"vYb-qH-XkH.title" = "Etkinleştirilirse, IINA çevrimiçi altyazıları yalnızca altyazısız ve 20 dakikadan uzun videolar için otomatik olarak arar.";
+"vYb-qH-XkH.title" = "Etkinleştirilirse, IINA yalnızca yüklü altyazısı olmayan ve 20 dakikadan uzun videolar için otomatik olarak çevrimiçi altyazıları arayacaktır.";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "xGf-fF-4Hx"; */
 "xGf-fF-4Hx.title" = "Y:";
@@ -173,7 +173,7 @@
 "xid-E9-FC9.title" = "Renk:";
 
 /* Class = "NSMenuItem"; title = "Subtitles containing media filename"; ObjectID = "y1E-JR-KRI"; */
-"y1E-JR-KRI.title" = "Altyazıda medya dosya ismi varsa";
+"y1E-JR-KRI.title" = "Medya dosya adını içeren altyazılar";
 
 /* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "zaE-bH-XfT"; */
 "zaE-bH-XfT.title" = "Tercih edilen dil:";

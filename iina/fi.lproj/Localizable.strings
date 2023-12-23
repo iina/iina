@@ -21,6 +21,13 @@
 "guide.basic_settings" = "Perusasetukset";
 "guide.faq" = "Usein kysytyt kysymykset";
 
+// Initial Window
+"initial.announcement" = "You are using a %@ version of IINA";
+"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
+"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Puskuroidaan… %d%%";
 "main.opening_stream" = "Avataan streamia…";
@@ -107,6 +114,7 @@
 "preference.enable_adv_settings" = "Salli lisäasetukset";
 
 "menu.volume" = "Äänenvoimakkuus: %d";
+"menu.volume_muted" = "Volume: %d (Muted)";
 "menu.audio_delay" = "Äänen viive: %.2fs";
 "menu.sub_delay" = "Tekstityksen viive: %.2fs";
 "menu.fullscreen" = "Siirry koko näytön tilaan";
@@ -116,9 +124,9 @@
 "menu.pause" = "Tauko";
 "menu.resume" = "Jatka";
 "menu.speed" = "Nopeus: %.2fx";
-"menu.chapters" = "Show Chapters Panel";
+"menu.chapters" = "Näytä lukupaneeli";
 "menu.hide_chapters" = "Hide Chapters Panel";
-"menu.playlist" = "Show Playlist Panel";
+"menu.playlist" = "Näytä soittolistan paneeli";
 "menu.hide_playlist" = "Hide Playlist Panel";
 "menu.video" = "Show Video Panel";
 "menu.hide_video" = "Hide Video Panel";
@@ -191,6 +199,8 @@
 "alert.extra_option.config_folder" = "Virhe asetettaessa asetushakemistoa \"%@\".";
 
 "alert.playlist.error_deleting" = "Virhe poistettaessa: %@";
+
+"alert.screenshot.error_taking" = "Cannot take a screenshot!";
 
 "alert.sub.no_selected" = "Valitse ensin ladatut tekstitykset.";
 "alert.sub_lang_not_set" = "Aseta ensisijaiset tekstityskielet asetuksissa ennen OpenSubtitles-palvelun käyttöä. Englantia (eng) käytetään tällä kertaa.";

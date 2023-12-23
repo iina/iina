@@ -21,6 +21,13 @@
 "guide.basic_settings" = "Základné nastavenia";
 "guide.faq" = "Často kladené otázky";
 
+// Initial Window
+"initial.announcement" = "You are using a %@ version of IINA";
+"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
+"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Načítava sa… %d%%";
 "main.opening_stream" = "Otváram stream…";
@@ -82,8 +89,8 @@
 "osd.canceled" = "Zrušené";
 "osd.filter_added" = "Pridaný filter: %@";
 "osd.filter_removed" = "Odstránený filter";
-"osd.file_loop" = "File Loop: %@";
-"osd.playlist_loop" = "Playlist Loop: %@";
+"osd.file_loop" = "Slučka súboru: %@";
+"osd.playlist_loop" = "Slučka Playlistu %@";
 
 "preference.title" = "Nastavenia";
 "preference.general" = "Všeobecné";
@@ -94,7 +101,7 @@
 "preference.control" = "Ovládanie";
 "preference.keybindings" = "Klávesové skratky";
 "preference.advanced" = "Pokročilé";
-"preference.plugins" = "Plugins";
+"preference.plugins" = "Pluginy";
 "preference.utilities" = "Pomocné programy";
 "preference.scripts" = "Skripty";
 "preference.not_logged_in" = "Neprihlásený";
@@ -107,6 +114,7 @@
 "preference.enable_adv_settings" = "Povoliť pokročilé nastavenia";
 
 "menu.volume" = "Hlasitosť: %d";
+"menu.volume_muted" = "Volume: %d (Muted)";
 "menu.audio_delay" = "Posunutie zvuku: %.2f s";
 "menu.sub_delay" = "Posunutie titulkov: %.2f s";
 "menu.fullscreen" = "Spustiť režim celej obrazovky";
@@ -116,16 +124,16 @@
 "menu.pause" = "Pozastaviť";
 "menu.resume" = "Pokračovať";
 "menu.speed" = "Rýchlosť: %.2fx";
-"menu.chapters" = "Show Chapters Panel";
-"menu.hide_chapters" = "Hide Chapters Panel";
-"menu.playlist" = "Show Playlist Panel";
-"menu.hide_playlist" = "Hide Playlist Panel";
-"menu.video" = "Show Video Panel";
-"menu.hide_video" = "Hide Video Panel";
-"menu.audio" = "Show Audio Panel";
-"menu.hide_audio" = "Hide Audio Panel";
-"menu.subtitles" = "Show Subtitles Panel";
-"menu.hide_subtitles" = "Hide Subtitles Panel";
+"menu.chapters" = "Zobraziť panel s kapitolami";
+"menu.hide_chapters" = "Skryť panel s kapitolami";
+"menu.playlist" = "Zobraziť panel playlistu";
+"menu.hide_playlist" = "Skryť panel playlistu";
+"menu.video" = "Zobraziť panel videa";
+"menu.hide_video" = "Skryť panel videa";
+"menu.audio" = "Zobraziť panel audia";
+"menu.hide_audio" = "Skryť panel audia";
+"menu.subtitles" = "Zobraziť panel tituliek";
+"menu.hide_subtitles" = "Skryť panel tituliek";
 
 "menu.seek_forward" = "Posunúť dopredu %.0f s";
 "menu.seek_backward" = "Posunúť dozadu %.0f s";
@@ -139,7 +147,7 @@
 "menu.sub_delay_down" = "Posunutie titulkov -%.1f s";
 
 "menu.crop_custom" = "Vlastné...";
-"menu.find_online_sub" = "Find Online Subtitles from %@";
+"menu.find_online_sub" = "Nájsť titulky online na %@";
 
 "track.none" = "<Prázdne>";
 
@@ -155,7 +163,7 @@
 
 "alert.fatal_error" = "Závažná chyba: %@ \nAplikácia sa teraz ukončí.";
 "alert.mpv_error" = "Interná chyba %@ (%@) pri nastavení možnosti %@.";
-"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
+"alert.sleep" = "Nedá sa zabrániť uspaniu displeja! (0x%0X8)";
 
 "alert.unsupported_audio" = "Nepodporovaný externý zvukový súbor.";
 "alert.unsupported_sub" = "Nepodporované externé titulky.";
@@ -191,6 +199,8 @@
 "alert.extra_option.config_folder" = "Chyba pri nastavovaní konfiguračného priečinka \"%@\".";
 
 "alert.playlist.error_deleting" = "Chyba pri odstraňovaní: %@";
+
+"alert.screenshot.error_taking" = "Cannot take a screenshot!";
 
 "alert.sub.no_selected" = "Najprv vyberte stiahnuté titulky.";
 "alert.sub_lang_not_set" = "Pred vyhľadávaním na OpenSubtitles nastavte v nastaveniach preferovaný jazyk titulkov. Teraz bude použitý jazyk English(eng).";
@@ -302,7 +312,7 @@
 
 "mini_player.album_art" = "Prepnúť obal albumu";
 "mini_player.loop" = "Opakovať";
-"mini_player.shuffle" = "Shuffle";
+"mini_player.shuffle" = "Náhodne";
 "mini_player.remove" = "Odstrániť z playlistu";
 "mini_player.add" = "Pridať do playlistu";
 "mini_player.delete" = "Odstrániť všetky skladby z playlistu";
@@ -330,12 +340,12 @@
 
 // Plugin permissions
 
-"permissions.network-request.name" = "Network Request";
-"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
-"permissions.network-request.any_site" = "Any site";
-"permissions.show-osd.name" = "Show OSD";
-"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
-"permissions.show-alert.name" = "Show Alerts";
+"permissions.network-request.name" = "Sieťová Požiadavka";
+"permissions.network-request.desc" = "Tento plugin môže prijímať alebo odosielať dáta na tieto webstránky:";
+"permissions.network-request.any_site" = "Akákoľvek stránka";
+"permissions.show-osd.name" = "Zozbraziť OSD";
+"permissions.show-osd.desc" = "Tento plugin môže zobraziť OSD (On Screen Display = Displej Na Obrazovku) správy.";
+"permissions.show-alert.name" = "Zobraziť upozornenie";
 "permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
 "permissions.video-overlay.name" = "Add overlay on videos";
 "permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";

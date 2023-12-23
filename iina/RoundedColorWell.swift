@@ -18,7 +18,7 @@ class RoundedColorWell: NSColorWell {
   }
 
   override func draw(_ dirtyRect: NSRect) {
-    let circleRect = NSInsetRect(dirtyRect, 3, 3)
+    let circleRect = NSInsetRect(bounds, 3, 3)
 
     // darker if is pressing mouse button
     if self.isMouseDown {

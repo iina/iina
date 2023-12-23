@@ -20,28 +20,28 @@
 "GAo-fx-NG0.title" = "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl.";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "IkF-qG-s4j"; */
-"IkF-qG-s4j.title" = "OK";
+"IkF-qG-s4j.title" = "U redu";
 
 /* Class = "NSButtonCell"; title = "Playlist"; ObjectID = "MGo-J8-zWE"; */
-"MGo-J8-zWE.title" = "Playlist";
+"MGo-J8-zWE.title" = "Playlista";
 
 /* Class = "NSButtonCell"; title = "Clear Playback History…"; ObjectID = "MP6-Em-Lp4"; */
-"MP6-Em-Lp4.title" = "Clear Playback History…";
+"MP6-Em-Lp4.title" = "Izbriši povijest reprodukcija …";
 
 /* Class = "NSTextFieldCell"; title = "Default Application"; ObjectID = "ORO-lK-yK5"; */
-"ORO-lK-yK5.title" = "Default Application";
+"ORO-lK-yK5.title" = "Standardni program";
 
 /* Class = "NSTextFieldCell"; title = "Clear Cache"; ObjectID = "QHA-tO-oSn"; */
 "QHA-tO-oSn.title" = "Očisti predmemoriju";
 
 /* Class = "NSButtonCell"; title = "Set IINA as the Default Application…"; ObjectID = "e1p-Aa-WFG"; */
-"e1p-Aa-WFG.title" = "Set IINA as the Default Application…";
+"e1p-Aa-WFG.title" = "Postavi IINA kao standardnu aplikacju …";
 
 /* Class = "NSButtonCell"; title = "Firefox"; ObjectID = "f9i-sS-MJN"; */
 "f9i-sS-MJN.title" = "Firefox";
 
 /* Class = "NSButtonCell"; title = "Clear Thumbnail Cache…"; ObjectID = "hsG-JB-TT9"; */
-"hsG-JB-TT9.title" = "Clear Thumbnail Cache…";
+"hsG-JB-TT9.title" = "Izbriši predmemoriju minijatura …";
 
 /* Class = "NSButtonCell"; title = "Audio"; ObjectID = "jFt-2a-nmc"; */
 "jFt-2a-nmc.title" = "Zvuk";
@@ -50,13 +50,13 @@
 "kbP-VI-dmT.title" = "Odustani";
 
 /* Class = "NSTextFieldCell"; title = "Restore Alerts"; ObjectID = "AAD-Db-Acs"; */
-"AAD-Db-Acs.title" = "Restore Alerts";
+"AAD-Db-Acs.title" = "Obnovi upozorenja";
 
 /* Class = "NSButtonCell"; title = "Restore Suppressed Alerts…"; ObjectID = "XAz-xa-LVo"; */
 "XAz-xa-LVo.title" = "Restore Suppressed Alerts…";
 
 /* Class = "NSTextFieldCell"; title = "Restored."; ObjectID = "Wdh-me-hdC"; */
-"Wdh-me-hdC.title" = "Restored.";
+"Wdh-me-hdC.title" = "Obnovljeno.";
 
 /* Class = "NSTextFieldCell"; title = "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."; ObjectID = "F5i-KF-2SW"; */
 "F5i-KF-2SW.title" = "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox.";
@@ -65,10 +65,10 @@
 "pPC-q2-9Gh.title" = "Gumb ispod će oćisti sve datoteka u \"gledat ću kasnije\". Te datoteke imaju sve spremljen napredak i opcije tijekom reprodukcija.";
 
 /* Class = "NSTextFieldCell"; title = "Calculating…"; ObjectID = "tRq-eU-AV3"; */
-"tRq-eU-AV3.title" = "Calculating…";
+"tRq-eU-AV3.title" = "Izračunavanje …";
 
 /* Class = "NSTextFieldCell"; title = "Current thumbnail cache:"; ObjectID = "uV3-aF-UB7"; */
-"uV3-aF-UB7.title" = "Current thumbnail cache:";
+"uV3-aF-UB7.title" = "Trenutačna predmemorija minijatura:";
 
 /* Class = "NSTextFieldCell"; title = "Please select the media types that you want to make IINA as the default Application for."; ObjectID = "uvK-Y1-dZr"; */
 "uvK-Y1-dZr.title" = "Please select the media types that you want to make IINA as the default Application for.";
@@ -77,4 +77,4 @@
 "yuw-2i-ICd.title" = "Chrome";
 
 /* Class = "NSTextFieldCell"; title = "Get Browser Extensions for IINA"; ObjectID = "zCe-1f-tkF"; */
-"zCe-1f-tkF.title" = "Get Browser Extensions for IINA";
+"zCe-1f-tkF.title" = "Nabavi proširenja preglednika za IINA";

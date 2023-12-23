@@ -31,11 +31,11 @@
 "blur.msize" = "Ukuran matriks";
 "blur.amount" = "Besaran";
 
-"delogo" = "Hapus Logo";
+"delogo" = "Hapus Watermark";
 "delogo.w" = "Lebar";
 "delogo.h" = "Tinggi";
-"delogo.x" = "Origin X";
-"delogo.y" = "Origin Y";
+"delogo.x" = "Asal X";
+"delogo.y" = "Asal Y";
 
 "negative" = "Alih Negatif";
 
@@ -43,13 +43,13 @@
 "hflip" = "Cerminkan";
 
 "lut3d" = "3D LUT";
-"lut3d.file" = "Alamat file (anda juga dapat menggeser file langsung ke dalam input box)";
+"lut3d.file" = "Lokasi file (Anda juga dapat menggeser file langsung ke dalam input box)";
 "lut3d.interp" = "Interpolasi";
 
 "custom_mpv" = "Custom (mpv)";
 "custom_mpv.name" = "Nama filter";
 "custom_mpv.string" = "Nilai filter";
 
-"custom_ffmpeg" = "Custom (FFmpeg)";
+"custom_ffmpeg" = "Kustom (FFmpeg)";
 "custom_ffmpeg.name" = "Nama filter";
 "custom_ffmpeg.string" = "Nilai filter";

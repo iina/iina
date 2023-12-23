@@ -39,9 +39,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   /** The timer for `OpenFileRepeatTime` and `application(_:openFile:)`. */
   private var openFileTimer: Timer?
 
+  private var allPlayersHaveShutdown = false
+
   private var commandLineStatus = CommandLineStatus()
 
   private var isTerminating = false
+
+  /// Longest time to wait for asynchronous shutdown tasks to finish before giving up on waiting and proceeding with termination.
+  ///
+  /// Ten seconds was chosen to provide plenty of time for termination and yet not be long enough that users start thinking they will
+  /// need to force quit IINA. As termination may involve logging out of an online subtitles provider it can take a while to complete if
+  /// the provider is slow to respond to the logout request.
+  private let terminationTimeout: TimeInterval = 10
 
   // Windows
 
@@ -65,7 +74,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     return w
   }()
 
-  lazy var preferenceWindowController: NSWindowController = {
+  lazy var preferenceWindowController: PreferenceWindowController = {
     var list: [NSViewController & PreferenceWindowEmbeddable] = [
       PrefGeneralViewController(),
       PrefUIViewController(),
@@ -88,7 +97,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   /// Whether the shutdown sequence timed out.
   private var timedOut = false
 
-  @IBOutlet weak var menuController: MenuController!
+  @IBOutlet var menuController: MenuController!
 
   @IBOutlet weak var dockMenu: NSMenu!
 
@@ -132,9 +141,21 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     Logger.log("Built \(date) from branch \(branch), commit \(commit)")
   }
 
+  /// Log details about the Mac IINA is running on.
+  ///
+  /// Certain IINA capabilities, such as hardware acceleration, are contingent upon aspects of the Mac IINA is running on. If available,
+  /// this method will log:
+  /// - macOS version
+  /// - model identifier of the Mac
+  /// - kind of processor
+  private func logPlatformDetails() {
+    Logger.log("Running under macOS \(ProcessInfo.processInfo.operatingSystemVersionString)")
+    guard let cpu = Sysctl.shared.machineCpuBrandString, let model = Sysctl.shared.hwModel else { return }
+    Logger.log("On a \(model) with an \(cpu) processor")
+  }
 
   // MARK: - SPUUpdaterDelegate
-  @IBOutlet weak var updaterController: SPUStandardUpdaterController!
+  @IBOutlet var updaterController: SPUStandardUpdaterController!
 
   func feedURLString(for updater: SPUUpdater) -> String? {
     return Preference.bool(for: .receiveBetaUpdate) ? AppData.appcastBetaLink : AppData.appcastLink
@@ -152,7 +173,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
     // Start the log file by logging the version of IINA producing the log file.
     let (version, build) = InfoDictionary.shared.version
-    Logger.log("IINA \(version) Build \(build)")
+    let type = InfoDictionary.shared.buildTypeIdentifier
+    Logger.log("IINA \(version) Build \(build)" + (type == nil ? "" : " " + type!))
 
     // The copyright is used in the Finder "Get Info" window which is a narrow window so the
     // copyright consists of multiple lines.
@@ -178,6 +200,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       Logger.log("  \(library.name) \(AppDelegate.versionAsString(library.version))")
     }
     logBuildDetails()
+    logPlatformDetails()
 
     Logger.log("App will launch")
 
@@ -315,9 +338,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
         }
       }
 
-      // enter PIP
-      if #available(macOS 10.12, *), let pc = lastPlayerCore, commandLineStatus.enterPIP {
-        pc.mainWindow.enterPIP()
+      if let pc = lastPlayerCore {
+        if commandLineStatus.enterMusicMode {
+          if commandLineStatus.enterPIP {
+            // PiP is not supported in music mode. Combining these options is not permitted and is
+            // rejected by iina-cli. The IINA executable must have been invoked directly with
+            // arguments.
+            Logger.log("Cannot specify both --music-mode and --pip", level: .error)
+            // Command line usage error.
+            exit(EX_USAGE)
+          }
+          pc.switchToMiniPlayer()
+        } else if #available(macOS 10.12, *), commandLineStatus.enterPIP {
+          pc.mainWindow.enterPIP()
+        }
       }
     }
 
@@ -368,21 +402,32 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   @objc
   func shutdownTimedout() {
     timedOut = true
-    Logger.log("Timed out waiting for players to stop and shutdown", level: .warning)
-    // For debugging list players that have not terminated.
-    for player in PlayerCore.playerCores {
-      let label = player.label ?? "unlabeled"
-      if !player.isStopped {
-        Logger.log("Player \(label) failed to stop", level: .warning)
-      } else if !player.isShutdown {
-        Logger.log("Player \(label) failed to shutdown", level: .warning)
+    if !allPlayersHaveShutdown {
+      Logger.log("Timed out waiting for players to stop and shutdown", level: .warning)
+      // For debugging list players that have not terminated.
+      for player in PlayerCore.playerCores {
+        let label = player.label ?? "unlabeled"
+        if !player.isStopped {
+          Logger.log("Player \(label) failed to stop", level: .warning)
+        } else if !player.isShutdown {
+          Logger.log("Player \(label) failed to shutdown", level: .warning)
+        }
       }
+      // For debugging purposes we do not remove observers in case players stop or shutdown after
+      // the timeout has fired as knowing that occurred maybe useful for debugging why the
+      // termination sequence failed to complete on time.
+      Logger.log("Not waiting for players to shutdown; proceeding with application termination",
+                 level: .warning)
     }
-    // For debugging purposes we do not remove observers in case players stop or shutdown after
-    // the timeout has fired as knowing that occurred maybe useful for debugging why the
-    // termination sequence failed to complete on time.
-    Logger.log("Not waiting for players to shutdown; proceeding with application termination",
-               level: .warning)
+    if OnlineSubtitle.loggedIn {
+      // The request to log out of the online subtitles provider has not completed. This should not
+      // occur as the logout request uses a timeout that is shorter than the termination timeout to
+      // avoid this occurring. Therefore if this message is logged something has gone wrong with the
+      // shutdown code.
+      Logger.log("Timed out waiting for log out of online subtitles provider to complete",
+                 level: .warning)
+    }
+    Logger.log("Proceeding with application termination due to time out", level: .warning)
     // Tell Cocoa to proceed with termination.
     NSApp.reply(toApplicationShouldTerminate: true)
   }
@@ -409,6 +454,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       }
     }
 
+    // The first priority was to shutdown any new input from the user. The second priority is to
+    // send a logout request if logged into an online subtitles provider as that needs time to
+    // complete.
+    if OnlineSubtitle.loggedIn {
+      // Force the logout request to timeout earlier than the overall termination timeout. This
+      // request taking too long does not represent an error in the shutdown code, whereas the
+      // intention of the overall termination timeout is to recover from some sort of hold up in the
+      // shutdown sequence that should not occur.
+      OnlineSubtitle.logout(timeout: terminationTimeout - 1)
+    }
+
     // Close all windows. When a player window is closed it will send a stop command to mpv to stop
     // playback and unload the file.
     Logger.log("Closing all windows")
@@ -421,23 +477,37 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     // player and shutdown was initiated by typing "q" in the player window. That sends a quit
     // command directly to mpv causing mpv and the player to shutdown before application
     // termination is initiated.
-    var canTerminateNow = true
+    allPlayersHaveShutdown = true
     for player in PlayerCore.playerCores {
       if !player.isShutdown {
-        canTerminateNow = false
+        allPlayersHaveShutdown = false
         break
       }
     }
+    if allPlayersHaveShutdown {
+      Logger.log("All players have shutdown")
+    } else {
+      // Shutdown of player cores involves sending the stop and quit commands to mpv. Even though
+      // these commands are sent to mpv using the synchronous API mpv executes them asynchronously.
+      // This requires IINA to wait for mpv to finish executing these commands.
+      Logger.log("Waiting for players to stop and shutdown")
+    }
+
+    // Usually will have to wait for logout request to complete if logged into an online subtitle
+    // provider.
+    var canTerminateNow = allPlayersHaveShutdown
+    if OnlineSubtitle.loggedIn {
+      canTerminateNow = false
+      Logger.log("Waiting for log out of online subtitles provider to complete")
+    }
+
+    // If the user pressed Q and mpv initiated the termination then players will already be
+    // shutdown and it may be possible to proceed with termination.
     if canTerminateNow {
-      Logger.log("All players have shutdown; proceeding with application termination")
+      Logger.log("Proceeding with application termination")
       // Tell Cocoa that it is ok to immediately proceed with termination.
       return .terminateNow
     }
-
-    // Shutdown of player cores involves sending the stop and quit commands to mpv. Even though
-    // these commands are sent to mpv using the synchronous API mpv executes them asynchronously.
-    // This requires IINA to wait for mpv to finish executing these commands.
-    Logger.log("Waiting for players to stop and shutdown")
 
     // To ensure termination completes and the user is not required to force quit IINA, impose an
     // arbitrary timeout that forces termination to complete. The expectation is that this timeout
@@ -445,13 +515,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     // investigated.
     var timer: Timer
     if #available(macOS 10.12, *) {
-      timer = Timer(timeInterval: 10, repeats: false) { _ in
+      timer = Timer(timeInterval: terminationTimeout, repeats: false) { _ in
         // Once macOS 10.11 is no longer supported the contents of the method can be inlined in this
         // closure.
         self.shutdownTimedout()
       }
     } else {
-      timer = Timer(timeInterval: TimeInterval(10), target: self,
+      timer = Timer(timeInterval: terminationTimeout, target: self,
                     selector: #selector(self.shutdownTimedout), userInfo: nil, repeats: false)
     }
     RunLoop.main.add(timer, forMode: .common)
@@ -484,6 +554,37 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     }
     observers.append(observer)
 
+    /// Proceed with termination if all outstanding shutdown tasks have completed.
+    ///
+    /// This method is called when an observer receives a notification that a player has shutdown or an online subtitles provider logout
+    /// request has completed. If there are no other termination tasks outstanding then this method will instruct AppKit to proceed with
+    /// termination.
+    func proceedWithTermination() {
+      if !allPlayersHaveShutdown {
+        // If any player has not shutdown then continue waiting.
+        for player in PlayerCore.playerCores {
+          guard player.isShutdown else { return }
+        }
+        allPlayersHaveShutdown = true
+        // All players have shutdown.
+        Logger.log("All players have shutdown")
+      }
+      guard !OnlineSubtitle.loggedIn else { return }
+      // All players have shutdown. No longer logged into an online subtitles provider.
+      Logger.log("Proceeding with application termination")
+      // No longer need the timer that forces termination to proceed.
+      timer.invalidate()
+      // No longer need the observers for players stopping and shutting down, along with the
+      // observer for logout requests completing.
+      ObjcUtils.silenced {
+        observers.forEach {
+          NotificationCenter.default.removeObserver($0)
+        }
+      }
+      // Tell AppKit to proceed with termination.
+      NSApp.reply(toApplicationShouldTerminate: true)
+    }
+
     // Establish an observer for a player core shutting down.
     observer = center.addObserver(forName: .iinaPlayerShutdown, object: nil, queue: .main) { _ in
       guard !self.timedOut else {
@@ -500,22 +601,24 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
         Logger.log("Player shutdown after application termination timed out", level: .warning)
         return
       }
-      // If any player has not shutdown then continue waiting.
-      for player in PlayerCore.playerCores {
-        guard player.isShutdown else { return }
+      proceedWithTermination()
+    }
+    observers.append(observer)
+
+    // Establish an observer for logging out of the online subtitle provider.
+    observer = center.addObserver(forName: .iinaLogoutCompleted, object: nil, queue: .main) { _ in
+      guard !self.timedOut else {
+        // The request to log out of the online subtitles provider has completed after IINA already
+        // timed out, gave up waiting for players to shutdown, and told Cocoa to proceed with
+        // termination. This should not occur as the logout request uses a timeout that is shorter
+        // than the termination timeout to avoid this occurring. Therefore if this message is logged
+        // something has gone wrong with the shutdown code.
+        Logger.log(
+          "Log out of online subtitles provider completed after application termination timed out",
+          level: .warning)
+        return
       }
-      // All players have shutdown. Proceed with termination.
-      Logger.log("All players have shutdown; proceeding with application termination")
-      // No longer need the timer that forces termination to proceed.
-      timer.invalidate()
-      // No longer need the observers for players stopping and shutting down.
-      ObjcUtils.silenced {
-        observers.forEach {
-          NotificationCenter.default.removeObserver($0)
-        }
-      }
-      // Tell Cocoa to proceed with termination.
-      NSApp.reply(toApplicationShouldTerminate: true)
+      proceedWithTermination()
     }
     observers.append(observer)
 
@@ -526,7 +629,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       }
     }
 
-    // Tell Cocoa that it is ok to proceed with termination, but wait for our reply.
+    // Tell AppKit that it is ok to proceed with termination, but wait for our reply.
     return .terminateLater
   }
 
@@ -569,9 +672,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       shouldIgnoreOpenFile = false
       return
     }
-    // open pending files
     let urls = pendingFilesForOpenFile.map { URL(fileURLWithPath: $0) }
+    
+    // if installing a plugin package
+    if let pluginPackageURL = urls.first(where: { $0.pathExtension == "iinaplgz" }) {
+      showPreferences(self)
+      preferenceWindowController.performAction(.installPlugin(url: pluginPackageURL))
+      return
+    }
 
+    // open pending files
     pendingFilesForOpenFile.removeAll()
     if PlayerCore.activeOrNew.openURLs(urls) == 0 {
       Utility.showAlert("nothing_to_open")
@@ -846,6 +956,7 @@ struct CommandLineStatus {
   var isCommandLine = false
   var isStdin = false
   var openSeparateWindows = false
+  var enterMusicMode = false
   var enterPIP = false
   var mpvArguments: [(String, String)] = []
   var iinaArguments: [(String, String)] = []
@@ -879,6 +990,9 @@ struct CommandLineStatus {
         }
         if name == "separate-windows" {
           openSeparateWindows = true
+        }
+        if name == "music-mode" {
+          enterMusicMode = true
         }
         if name == "pip" {
           enterPIP = true

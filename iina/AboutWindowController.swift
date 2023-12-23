@@ -40,7 +40,7 @@ class AboutWindowController: NSWindowController {
   @IBOutlet weak var mpvVersionLabel: NSTextField!
   @IBOutlet weak var ffmpegVersionLabel: NSTextField!
   @IBOutlet weak var buildView: NSView!
-  @IBOutlet weak var buildBranchLabel: NSTextField!
+  @IBOutlet weak var buildBranchButton: NSButton!
   @IBOutlet weak var buildDateLabel: NSTextField!
 
   @IBOutlet var detailTextView: NSTextView!
@@ -51,13 +51,10 @@ class AboutWindowController: NSWindowController {
   @IBOutlet weak var creditsButton: AboutWindowButton!
   @IBOutlet weak var tabView: NSTabView!
   @IBOutlet weak var contributorsCollectionView: NSCollectionView!
-  @IBOutlet weak var contributorsCollectionViewHeightConstraint: NSLayoutConstraint!
   @IBOutlet weak var contributorsFooterView: NSVisualEffectView!
   @IBOutlet weak var contributorsFooterImage: NSImageView!
-  @IBOutlet weak var translatorsTableView: NSTableView!
 
   private lazy var contributors = getContributors()
-  private lazy var translators = loadTraslators()
 
   override func windowDidLoad() {
     super.windowDidLoad()
@@ -74,12 +71,28 @@ class AboutWindowController: NSWindowController {
     mpvVersionLabel.stringValue = PlayerCore.active.mpv.mpvVersion
     ffmpegVersionLabel.stringValue = "FFmpeg \(String(cString: av_version_info()))"
 
-    if let buildDate = InfoDictionary.shared.buildDate,
-       let buildBranch = InfoDictionary.shared.buildBranch {
-      buildDateLabel.stringValue = buildDate
-      buildDateLabel.isHidden = false
-      buildBranchLabel.stringValue = buildBranch
-      buildBranchLabel.isHidden = false
+    switch InfoDictionary.shared.buildType {
+    case .nightly:
+      if let buildDate = InfoDictionary.shared.buildDate,
+         let buildSHA = InfoDictionary.shared.shortCommitSHA {
+        buildDateLabel.stringValue = buildDate
+        buildDateLabel.isHidden = false
+        buildBranchButton.title = "NIGHTLY " + buildSHA
+        buildBranchButton.action = #selector(self.openCommitLink)
+        buildBranchButton.isHidden = false
+      }
+    case .debug:
+      if let buildDate = InfoDictionary.shared.buildDate,
+         let buildBranch = InfoDictionary.shared.buildBranch,
+         let buildSHA = InfoDictionary.shared.shortCommitSHA {
+        buildDateLabel.stringValue = buildDate
+        buildDateLabel.isHidden = false
+        buildBranchButton.title = buildBranch + " " + buildSHA
+        buildBranchButton.action = #selector(self.openCommitLink)
+        buildBranchButton.isHidden = false
+      }
+    default:
+      break
     }
 
     if let contrubutionFile = Bundle.main.path(forResource: "Contribution", ofType: "rtf") {
@@ -114,9 +127,11 @@ class AboutWindowController: NSWindowController {
     }
 
     contributorsCollectionView.enclosingScrollView?.contentInsets.bottom = contributorsFooterView.frame.height * loc[colors.firstIndex(of: 0)! - 1]
+  }
 
-    translatorsTableView.dataSource = self
-    translatorsTableView.delegate = self
+  @objc func openCommitLink() {
+    guard let commitSHA = InfoDictionary.shared.buildCommit else { return }
+    NSWorkspace.shared.open(.init(string: "https://github.com/iina/iina/commit/\(commitSHA)")!)
   }
 
   @IBAction func sectionBtnAction(_ sender: NSButton) {
@@ -129,6 +144,10 @@ class AboutWindowController: NSWindowController {
 
   @IBAction func contributorsBtnAction(_ sender: Any) {
     NSWorkspace.shared.open(URL(string: AppData.contributorsLink)!)
+  }
+
+  @IBAction func translatorsBtnAction(_ sender: Any) {
+    NSWorkspace.shared.open(URL(string: AppData.crowdinMembersLink)!)
   }
 }
 
@@ -157,9 +176,6 @@ extension AboutWindowController: NSCollectionViewDataSource {
       let prevCount = self.contributors.count
       guard let data = response.content,
         let contributors = try? JSONDecoder().decode([Contributor].self, from: data) else {
-          DispatchQueue.main.async {
-            self.contributorsCollectionViewHeightConstraint.constant = 24
-          }
           return
       }
       self.contributors.append(contentsOf: contributors)
@@ -189,61 +205,6 @@ fileprivate let identifierMap: [NSUserInterfaceItemIdentifier: NSUserInterfaceIt
   .langColumn: .langCell,
   .translatorColumn: .translatorCell
 ]
-
-extension AboutWindowController: NSTableViewDataSource, NSTableViewDelegate {
-  func numberOfRows(in tableView: NSTableView) -> Int {
-    return translators.count
-  }
-
-  func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-    return translators[at: row]
-  }
-
-  func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-    guard
-      let translatorInfo = translators[at: row],
-      let tableColumn = tableColumn,
-      let identifier = identifierMap[tableColumn.identifier],
-      let view = tableView.makeView(withIdentifier: identifier, owner: self) as? NSTableCellView
-      else { return nil }
-    if identifier == .langCell {
-      view.textField!.stringValue = translatorInfo["lang"]!
-    } else {
-      view.textField!.setHTMLValue(translatorInfo["translator"]!)
-    }
-    return view
-  }
-
-  private func loadTraslators() -> [[String: String]] {
-    let locale = NSLocale.current
-    var result: [[String: String]] = []
-
-    let languages = Translator.all.keys.sorted()
-
-    for langCode in languages {
-      let translators = Translator.all[langCode]!
-      let splitted = langCode.split(separator: "-").map(String.init)
-      let baseLangCode = locale.localizedString(forLanguageCode: splitted[0]) ?? ""
-      let language: String
-      if splitted.count == 1 {
-        language = baseLangCode
-      } else {
-        let desc = locale.localizedString(forScriptCode: splitted[1]) ??
-          locale.localizedString(forRegionCode: splitted[1]) ?? ""
-        language = "\(baseLangCode) (\(desc))"
-      }
-      for (index, translator) in translators.enumerated() {
-        let urlString = translator.url == nil ? nil : "(<a href=\"\(translator.url!)\">\(translator.title!)</a>)"
-        let emailString = translator.email == nil ? nil : "<a href=\"mailto:\(translator.email!)\">\(translator.email!)</a>"
-        result.append([
-          "lang": index == 0 ? language : "",
-          "translator": ["\(translator.name)", urlString, emailString].compactMap { $0 }.joined(separator: " ")
-          ])
-      }
-    }
-    return result
-  }
-}
 
 class AboutWindowButton: NSButton {
 

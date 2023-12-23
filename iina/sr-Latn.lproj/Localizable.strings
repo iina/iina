@@ -21,6 +21,13 @@
 "guide.basic_settings" = "Osnovne postavke";
 "guide.faq" = "Često postavljena pitanja";
 
+// Initial Window
+"initial.announcement" = "You are using a %@ version of IINA";
+"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
+"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Smeštanje u bafer… %d%%";
 "main.opening_stream" = "Otvaram strim…";
@@ -82,8 +89,8 @@
 "osd.canceled" = "Otkazano";
 "osd.filter_added" = "Dodati filter: %@";
 "osd.filter_removed" = "Uklonjeni filter";
-"osd.file_loop" = "File Loop: %@";
-"osd.playlist_loop" = "Playlist Loop: %@";
+"osd.file_loop" = "Ponavljanje datoteke: %@";
+"osd.playlist_loop" = "Ponavljanje plejliste: %@";
 
 "preference.title" = "Željene postavke";
 "preference.general" = "Opšte postavke";
@@ -94,7 +101,7 @@
 "preference.control" = "Kontrole";
 "preference.keybindings" = "Prečice na tastaturi";
 "preference.advanced" = "Napredno";
-"preference.plugins" = "Plugins";
+"preference.plugins" = "Dodatne komponente";
 "preference.utilities" = "Uslužni programi";
 "preference.scripts" = "Skripte";
 "preference.not_logged_in" = "Niste prijavljeni";
@@ -107,6 +114,7 @@
 "preference.enable_adv_settings" = "Omogući napredne postavke";
 
 "menu.volume" = "Jačina zvuka: %d";
+"menu.volume_muted" = "Volume: %d (Muted)";
 "menu.audio_delay" = "Kašnjenje zvuka: %.2fs";
 "menu.sub_delay" = "Kašnjenje titla: %.2fs";
 "menu.fullscreen" = "Uđi u režim celog ekrana";
@@ -116,16 +124,16 @@
 "menu.pause" = "Pauziraj";
 "menu.resume" = "Nastavi";
 "menu.speed" = "Brzina: %.2fx";
-"menu.chapters" = "Show Chapters Panel";
-"menu.hide_chapters" = "Hide Chapters Panel";
-"menu.playlist" = "Show Playlist Panel";
-"menu.hide_playlist" = "Hide Playlist Panel";
-"menu.video" = "Show Video Panel";
-"menu.hide_video" = "Hide Video Panel";
-"menu.audio" = "Show Audio Panel";
-"menu.hide_audio" = "Hide Audio Panel";
-"menu.subtitles" = "Show Subtitles Panel";
-"menu.hide_subtitles" = "Hide Subtitles Panel";
+"menu.chapters" = "Prikaži tablu Poglavlja";
+"menu.hide_chapters" = "Sakrij tablu Poglavlja";
+"menu.playlist" = "Prikaži tablu plejliste";
+"menu.hide_playlist" = "Sakrij tablu plejliste";
+"menu.video" = "Prikaži tablu Video";
+"menu.hide_video" = "Sakrij tablu Video";
+"menu.audio" = "Prikaži tablu Audio";
+"menu.hide_audio" = "Sakrij tablu Audio";
+"menu.subtitles" = "Prikaži tablu Titlovi";
+"menu.hide_subtitles" = "Sakrij tablu Titlovi";
 
 "menu.seek_forward" = "Korak unapred: %.0fs";
 "menu.seek_backward" = "Korak unazad: %.0fs";
@@ -139,7 +147,7 @@
 "menu.sub_delay_down" = "Kašnjenje titla - %.1fs";
 
 "menu.crop_custom" = "Prilagođeno...";
-"menu.find_online_sub" = "Find Online Subtitles from %@";
+"menu.find_online_sub" = "Pronađi titlove na mreži s lokacije %@";
 
 "track.none" = "<None>";
 
@@ -155,7 +163,7 @@
 
 "alert.fatal_error" = "Neotklonjiva greška: %@\nAplikacija će prestati sa radom.";
 "alert.mpv_error" = "Unutrašnja greška %@ (%@) prilikom postavljanja opcije %@.";
-"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
+"alert.sleep" = "Ne mogu da sprečim stanje spavanja ekrana! (0x%0X8)";
 
 "alert.unsupported_audio" = "Nepodržana spoljna zvučna datoteka.";
 "alert.unsupported_sub" = "Nepodržani spoljni titl.";
@@ -191,6 +199,8 @@
 "alert.extra_option.config_folder" = "Greška pri postavljanju konfiguracionog direktorijuma „%@“.";
 
 "alert.playlist.error_deleting" = "Greška pri brisanju: %@";
+
+"alert.screenshot.error_taking" = "Nije moguće napraviti snimak ekrana!";
 
 "alert.sub.no_selected" = "Najpre izaberite preuzeti titl.";
 "alert.sub_lang_not_set" = "Postavite željeni jezik titla u željenim postavkama pre nego korišćenja sajta OpenSubtitles. Ovog puta će se koristiti engleski jezik (eng).";
@@ -234,8 +244,8 @@
 "alert.clear_watch_later.title" = "Obriši sačuvani tok reprodukcije";
 "alert.clear_watch_later.message" = "Želite li zaista da izbrišete celokupan sačuvani tok reprodukcije (podatke opcije „Gledaj kasnije“)?";
 
-"alert.restore_alerts.title" = "Restore Suppressed Alerts";
-"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
+"alert.restore_alerts.title" = "Vrati prigušena upozorenja";
+"alert.restore_alerts.message" = "Želite li zaista da vratite prigušena upozorenja?";
 
 "alert.nothing_to_open" = "Nema ničega za otvaranje.";
 
@@ -250,14 +260,14 @@
 "alert.assrt_token_prompt.message" = "Registrujte se na otvorenoj veb-stranici. Dobijte token na korisničkoj početnoj stranici i unesite ga ispod:";
 "alert.assrt_token_invalid" = "Vaš Assrt API token izgleda da je nevažeći.";
 
-"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
-"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
-"alert.plugin_no_update" = "No update found.";
-"alert.plugin_update_found.title" = "Update found for %@";
-"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
-"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
-"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+"alert.plugin_uninstall.title" = "Želite li zaista da deinstalirate %@?";
+"alert.plugin_uninstall.message" = "Dodatna komponenta biće izbrisana sa diska.";
+"alert.duplicated_plugin_id" = "Pronađene su duplirane dodatne komponente. Barem dve dodatne komponente imaju isti identifikator \"%@\". To može dovesti do neobičnog ponašanja. Pronađite ih u okviru opcije Željene postavke - Dodatne komponente i prijavite autorima. Ako je dodatna komponenta instalirana lokalno, možete i ručno promeniti njen identifikator u datoteci Info.json dodatne komponente.";
+"alert.plugin_no_update" = "Nisu pronađena ažuriranja.";
+"alert.plugin_update_found.title" = "Pronađeno je ažuriranje za %@";
+"alert.plugin_update_found.message" = "Najnovija verzija je %@. Vi imate verziju %@. Da li želite da obavite ažuriranje?";
+"alert.plugin_permission" = "Ova dodatna komponenta iziskuje sledeće dozvole. Pregledajte ih pre nego što nastavite.";
+"alert.plugin_permission_added" = "Ovo ažuriranje iziskuje sledeće dozvole. Pregledajte ih pre nego što nastavite.";
 
 "playlist.total_length" = "Ukupno %@";
 "playlist.total_length_with_selected" = "%@ od %@ izabranih";
@@ -330,10 +340,10 @@
 
 // Plugin permissions
 
-"permissions.network-request.name" = "Network Request";
-"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
-"permissions.network-request.any_site" = "Any site";
-"permissions.show-osd.name" = "Show OSD";
+"permissions.network-request.name" = "Mrežni zahtev";
+"permissions.network-request.desc" = "Ova dodatna komponenta može poslati zahtev ili otpremati podatke na sledeće veb-sajtove:";
+"permissions.network-request.any_site" = "Bilo koji sajt";
+"permissions.show-osd.name" = "Prikaži ekranski meni";
 "permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
 "permissions.show-alert.name" = "Show Alerts";
 "permissions.show-alert.desc" = "This plugin can show pop-up alerts.";

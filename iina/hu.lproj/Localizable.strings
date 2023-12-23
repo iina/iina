@@ -21,6 +21,13 @@
 "guide.basic_settings" = "Alapvető beállítások";
 "guide.faq" = "Gyakran Ismételt Kérdések";
 
+// Initial Window
+"initial.announcement" = "You are using a %@ version of IINA";
+"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
+"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Bufferelés…%d%%";
 "main.opening_stream" = "Stream megnyitása…";
@@ -107,6 +114,7 @@
 "preference.enable_adv_settings" = "Haladó beállítások engedélyezése";
 
 "menu.volume" = "Hangerő: %d";
+"menu.volume_muted" = "Volume: %d (Muted)";
 "menu.audio_delay" = "Hangkésleltetés: %.2fmp-vel később";
 "menu.sub_delay" = "Felirat késleltetés: %.2fmp-vel később";
 "menu.fullscreen" = "Váltás teljes képernyőre";
@@ -116,16 +124,16 @@
 "menu.pause" = "Pause (Megállít)";
 "menu.resume" = "Folytatás";
 "menu.speed" = "Sebesség: %.2fx";
-"menu.chapters" = "Show Chapters Panel";
-"menu.hide_chapters" = "Hide Chapters Panel";
-"menu.playlist" = "Show Playlist Panel";
-"menu.hide_playlist" = "Hide Playlist Panel";
-"menu.video" = "Show Video Panel";
-"menu.hide_video" = "Hide Video Panel";
-"menu.audio" = "Show Audio Panel";
-"menu.hide_audio" = "Hide Audio Panel";
-"menu.subtitles" = "Show Subtitles Panel";
-"menu.hide_subtitles" = "Hide Subtitles Panel";
+"menu.chapters" = "Fejezet Panel Megjelenítése";
+"menu.hide_chapters" = "Rejtsd a fejezetek panelt";
+"menu.playlist" = "Lejátszási lista megjelenítése";
+"menu.hide_playlist" = "Rejtsd a lejátszólistát";
+"menu.video" = "Mutasd a videó panelt";
+"menu.hide_video" = "Rejtsd a videó panelt";
+"menu.audio" = "Mutasd a hang panelt";
+"menu.hide_audio" = "Rejtsd a hang panelt";
+"menu.subtitles" = "Mutasd a feliratok panelt";
+"menu.hide_subtitles" = "Rejtsd a feliratok panelt";
 
 "menu.seek_forward" = "Előre ugrás %.0f másodpercet";
 "menu.seek_backward" = "Hátra ugrás %.0f másodpercet";
@@ -191,6 +199,8 @@
 "alert.extra_option.config_folder" = "Hiba a konfigurációs könyvtár beállításánál \"%@\".";
 
 "alert.playlist.error_deleting" = "Hiba törlés közben %@";
+
+"alert.screenshot.error_taking" = "Nem lehet képernyőképet készíteni!";
 
 "alert.sub.no_selected" = "Kérjük, először válassz ki egy letöltött feliratot.";
 "alert.sub_lang_not_set" = "Kérjük, az OpenSubtitles használata előtt állítsd be a kívánt feliratnyelvet a beállításokban. Ezúttal az angol (eng) nyelvet használjuk.";

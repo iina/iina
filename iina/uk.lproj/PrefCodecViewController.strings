@@ -1,5 +1,5 @@
 /* Class = "NSMenuItem"; title = "Auto (Copy)"; ObjectID = "0DK-uZ-duj"; */
-"0DK-uZ-duj.title" = "автоматично (копіювання)";
+"0DK-uZ-duj.title" = "Автоматично (копіювання)";
 
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "2yO-To-el7"; */
 "2yO-To-el7.title" = "Типово: 0 (автоматично)";
@@ -41,7 +41,7 @@
 "sV5-dL-MUt.title" = "Аудіо:";
 
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "tAQ-oU-1AJ"; */
-"tAQ-oU-1AJ.title" = "автоматично";
+"tAQ-oU-1AJ.title" = "Автоматично";
 
 /* Class = "NSTextFieldCell"; title = "Number of threads:"; ObjectID = "tO4-pw-2W9"; */
 "tO4-pw-2W9.title" = "Число потоків:";
@@ -65,22 +65,22 @@
 "ZgQ-bc-yEE.title" = "Увімкнути режим HDR за замовчуванням при відтворенні HDR відео.";
 
 /* Class = "NSButtonCell"; title = "Enable tone mapping"; ObjectID = "a5Y-gU-JTj"; */
-"a5Y-gU-JTj.title" = "Enable tone mapping";
+"a5Y-gU-JTj.title" = "Увімкнути тональне відображення";
 
 /* Class = "NSTextFieldCell"; title = "Enable tone mapping images onto the display"; ObjectID = "mNn-cb-IVw"; */
-"mNn-cb-IVw.title" = "Enable tone mapping images onto the display";
+"mNn-cb-IVw.title" = "Увімкнути тональне відображення зображень на дисплеї";
 
 /* Class = "NSTextFieldCell"; title = "Target peak:"; ObjectID = "xVk-OA-kOf"; */
-"xVk-OA-kOf.title" = "Target peak:";
+"xVk-OA-kOf.title" = "Пікова яскравість:";
 
 /* Class = "NSTextFieldCell"; title = "nits"; ObjectID = "baO-xy-7hD"; */
-"baO-xy-7hD.title" = "nits";
+"baO-xy-7hD.title" = "нит";
 
 /* Class = "NSTextFieldCell"; title = "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."; ObjectID = "aTt-aZ-rjK"; */
-"aTt-aZ-rjK.title" = "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400.";
+"aTt-aZ-rjK.title" = "Вимірювана пікова яскравість дисплея. Якщо встановлено 0, IINA автоматично визначає це значення. Якщо автовизначення не вдалося, IINA встановлює пікову яскравість 400.";
 
 /* Class = "NSTextFieldCell"; title = "Algorithm:"; ObjectID = "qzI-rq-PqO"; */
-"qzI-rq-PqO.title" = "Algorithm:";
+"qzI-rq-PqO.title" = "Алгоритм:";
 
 /* Class = "NSTextFieldCell"; title = "Algorithm to use for tone mapping images onto the display."; ObjectID = "szA-8r-plt"; */
-"szA-8r-plt.title" = "Algorithm to use for tone mapping images onto the display.";
+"szA-8r-plt.title" = "Алгоритм для тонального відображення зображень на дисплеї.";

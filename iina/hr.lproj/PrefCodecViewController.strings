@@ -71,16 +71,16 @@
 "mNn-cb-IVw.title" = "Enable tone mapping images onto the display";
 
 /* Class = "NSTextFieldCell"; title = "Target peak:"; ObjectID = "xVk-OA-kOf"; */
-"xVk-OA-kOf.title" = "Target peak:";
+"xVk-OA-kOf.title" = "Ciljani najviši ton:";
 
 /* Class = "NSTextFieldCell"; title = "nits"; ObjectID = "baO-xy-7hD"; */
-"baO-xy-7hD.title" = "nits";
+"baO-xy-7hD.title" = "nitova";
 
 /* Class = "NSTextFieldCell"; title = "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."; ObjectID = "aTt-aZ-rjK"; */
-"aTt-aZ-rjK.title" = "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400.";
+"aTt-aZ-rjK.title" = "Izmjerena najveća svjetloća ekrana. Ako je postavljeno na 0, IINA otkriva ovu vrijednost. Ako otkrivanje ne uspije, IINA postavlja ciljanu najveću svjetloću na 400.";
 
 /* Class = "NSTextFieldCell"; title = "Algorithm:"; ObjectID = "qzI-rq-PqO"; */
-"qzI-rq-PqO.title" = "Algorithm:";
+"qzI-rq-PqO.title" = "Algoritam:";
 
 /* Class = "NSTextFieldCell"; title = "Algorithm to use for tone mapping images onto the display."; ObjectID = "szA-8r-plt"; */
 "szA-8r-plt.title" = "Algorithm to use for tone mapping images onto the display.";

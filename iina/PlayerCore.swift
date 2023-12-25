@@ -1787,8 +1787,8 @@ class PlayerCore: NSObject {
   }
 
   func syncUI(_ option: SyncUIOption) {
-    // if window not loaded, ignore
-    guard mainWindow.loaded else { return }
+    // If window is not loaded or stopping or shutting down, ignore.
+    guard mainWindow.loaded, !isStopping, !isStopped, !isShuttingDown, !isShutdown else { return }
     // This is too noisy and making verbose logs unreadable. Please uncomment when debugging syncing releated issues.
     // Logger.log("Syncing UI \(option)", level: .verbose, subsystem: subsystem)
 

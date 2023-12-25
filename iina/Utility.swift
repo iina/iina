@@ -642,8 +642,8 @@ enum LoopMode {
 
   func next() -> LoopMode {
     switch self {
-    case .off:      return .playlist
-    case .playlist: return .file
+    case .off:      return .file
+    case .file:     return .playlist
     default:        return .off
     }
   }

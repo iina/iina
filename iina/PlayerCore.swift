@@ -860,7 +860,7 @@ class PlayerCore: NSObject {
   func getLoopMode() -> LoopMode {
     let loopPlaylistStatus = mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
     let loopFileStatus = mpv.getString(MPVOption.PlaybackControl.loopFile)
-    if loopFileStatus == "inf" || loopFileStatus == "force" {
+    if loopFileStatus == "inf" {
       return .file
     } else if loopPlaylistStatus == "inf" || loopPlaylistStatus == "force" {
       return .playlist
@@ -881,7 +881,6 @@ class PlayerCore: NSObject {
     }
     sendOSD(.playlistLoop(newMode != .off))
   }
-
 
   func nextLoopMode() {
     setLoopMode(getLoopMode().next())

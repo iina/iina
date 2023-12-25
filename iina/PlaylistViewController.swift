@@ -436,7 +436,6 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   }
 
   @IBAction func loopBtnAction(_ sender: NSButton) {
-    updateLoopBtnImage()
     player.nextLoopMode()
   }
 

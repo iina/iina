@@ -45,7 +45,7 @@
 "quicksetting.hdr" = "HDR";
 
 // OSDMessage.swift
-"osd.pause" = "Pause";
+"osd.pause" = "Hlé";
 "osd.resume" = "Halda áfram";
 "osd.volume" = "Volume: %i";
 "osd.speed" = "Speed: %.2fx";
@@ -61,13 +61,13 @@
 "osd.sub_delay.later" = "Subtitle Delay: %.2fs Later";
 "osd.sub_delay.earlier" = "Subtitle Delay: %.2fs Earlier";
 "osd.subtitle_pos" = "Subtitle Position: %.1f";
-"osd.mute" = "Mute";
+"osd.mute" = "Þagga";
 "osd.unmute" = "Unmute";
 "osd.screenshot" = "Screenshot Captured";
 "osd.abloop.a" = "AB-Loop: A";
 "osd.abloop.b" = "AB-Loop: B";
 "osd.abloop.clear" = "AB-Loop: Cleared";
-"osd.stop" = "Stop";
+"osd.stop" = "Stöðva";
 "osd.chapter" = "Chapter: %@";
 "osd.subtitle_scale" = "Subtitle Scale: %.2fx";
 "osd.add_to_playlist" = "Added %i Files to Playlist";
@@ -87,6 +87,8 @@
 "osd.file_error" = "Error reading file";
 "osd.cannot_login" = "Cannot login";
 "osd.canceled" = "Canceled";
+"osd.cannot_connect" = "Cannot connect";
+"osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Added Filter: %@";
 "osd.filter_removed" = "Removed Filter";
 "osd.file_loop" = "File Loop: %@";
@@ -121,7 +123,7 @@
 "menu.exit_fullscreen" = "Exit Full Screen";
 "menu.pip" = "Enter Picture-in-Picture";
 "menu.exit_pip" = "Exit Picture-in-Picture";
-"menu.pause" = "Pause";
+"menu.pause" = "Hlé";
 "menu.resume" = "Halda áfram";
 "menu.speed" = "Speed: %.2fx";
 "menu.chapters" = "Show Chapters Panel";
@@ -206,6 +208,7 @@
 "alert.sub_lang_not_set" = "Please set preferred subtitle languages in preferences before using OpenSubtitles. English(eng) will be used this time.";
 "alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
 "alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
+"alert.sub.save_downloaded.title" = "Save Downloaded Subtitle";
 
 "alert.set_default.title" = "Setting IINA as Default App";
 "alert.set_default.message" = "IINA will be set as the default app for all file types it supports.";
@@ -220,7 +223,7 @@
 "alert.opensub.login.title" = "OpenSubtitles Login";
 "alert.opensub.login.message" = "Please enter your username and password";
 
-"alert.open_url.title" = "Open URL";
+"alert.open_url.title" = "Opna URL";
 "alert.open_url.message" = "Please enter the URL:";
 "alert.choose_media_file.title" = "Choose Media Files";
 
@@ -262,6 +265,8 @@
 
 "alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
 "alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
+"alert.plugin_reinstall.title" = "Plugin %@ already exists";
+"alert.plugin_reinstall.message" = "Do you want to reinstall the plugin?";
 "alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
 "alert.plugin_no_update" = "No update found.";
 "alert.plugin_update_found.title" = "Update found for %@";
@@ -316,7 +321,7 @@
 "mini_player.remove" = "Remove from playlist";
 "mini_player.add" = "Add to playlist";
 "mini_player.delete" = "Delete all tracks from playlist";
-"mini_player.volume" = "Volume";
+"mini_player.volume" = "Hljóðstyrkur";
 "mini_player.close" = "Close music mode";
 "mini_player.back" = "Return to video mode";
 
@@ -333,7 +338,7 @@
 "touchbar.rewind" = "Rewind";
 "touchbar.fast_forward" = "Fast Forward";
 "touchbar.play_pause" = "Play / Pause";
-"touchbar.seek" = "Seek";
+"touchbar.seek" = "Leita";
 "touchbar.time" = "Time Position";
 "touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
 "touchbar.toggle_pip" = "Toggle Picture-in-Picture";

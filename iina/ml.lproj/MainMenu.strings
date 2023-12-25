@@ -5,7 +5,7 @@
 "0T7-Nu-SL7.title" = "Show Playlist Panel";
 
 /* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "0m7-3r-twH"; */
-"0m7-3r-twH.title" = "Open URL…";
+"0m7-3r-twH.title" = "URL തുറക്കുക…";
 
 /* Class = "NSMenu"; title = "Subtitle"; ObjectID = "16p-PA-x34"; */
 "16p-PA-x34.title" = "Subtitle";
@@ -82,8 +82,8 @@
 /* Class = "NSMenuItem"; title = "<None>"; ObjectID = "9pa-9C-ueQ"; */
 "9pa-9C-ueQ.title" = "<None>";
 
-/* Class = "NSMenuItem"; title = "Save Downloaded Subtitle"; ObjectID = "9zk-co-roT"; */
-"9zk-co-roT.title" = "Save Downloaded Subtitle";
+/* Class = "NSMenuItem"; title = "Save Downloaded Subtitle…"; ObjectID = "9zk-co-roT"; */
+"9zk-co-roT.title" = "Save Downloaded Subtitle…";
 
 /* Class = "NSMenuItem"; title = "Take a Screenshot"; ObjectID = "AoP-K6-Kb5"; */
 "AoP-K6-Kb5.title" = "Take a Screenshot";
@@ -152,7 +152,7 @@
 "Gi5-1S-RQB.title" = "Playlist";
 
 /* Class = "NSMenuItem"; title = "Crop"; ObjectID = "Gqg-wU-RRo"; */
-"Gqg-wU-RRo.title" = "Crop";
+"Gqg-wU-RRo.title" = "ക്രോപ്";
 
 /* Class = "NSMenuItem"; title = "Reset Audio Delay"; ObjectID = "H3d-jR-YCr"; */
 "H3d-jR-YCr.title" = "Reset Audio Delay";
@@ -170,7 +170,7 @@
 "HyV-fh-RgO.title" = "Video";
 
 /* Class = "NSMenuItem"; title = "Open…"; ObjectID = "IAo-SY-fd9"; */
-"IAo-SY-fd9.title" = "Open…";
+"IAo-SY-fd9.title" = "തുറക്കുക…";
 
 /* Class = "NSMenuItem"; title = "Audio Device"; ObjectID = "IXq-yq-uDF"; */
 "IXq-yq-uDF.title" = "Audio Device";
@@ -179,7 +179,7 @@
 "JJq-qH-toq.title" = "Horizontal (Mirror)";
 
 /* Class = "NSMenuItem"; title = "Open…"; ObjectID = "Kby-lQ-HCW"; */
-"Kby-lQ-HCW.title" = "Open…";
+"Kby-lQ-HCW.title" = "തുറക്കുക…";
 
 /* Class = "NSMenuItem"; title = "Show All"; ObjectID = "Kd2-mp-pUS"; */
 "Kd2-mp-pUS.title" = "Show All";
@@ -188,7 +188,7 @@
 "LE2-aR-0XJ.title" = "Bring All to Front";
 
 /* Class = "NSMenuItem"; title = "Playback History"; ObjectID = "LND-1n-DU2"; */
-"LND-1n-DU2.title" = "Playback History";
+"LND-1n-DU2.title" = "പ്ലേബാക്ക് ഹിസ്റ്ററി";
 
 /* Class = "NSMenuItem"; title = "Audio Delay - 0.5s"; ObjectID = "Lc4-4W-thE"; */
 "Lc4-4W-thE.title" = "Audio Delay - 0.5s";
@@ -314,7 +314,7 @@
 "bfB-bn-KeM.title" = "Open URL in New Window…";
 
 /* Class = "NSMenu"; title = "File"; ObjectID = "bib-Uj-vzu"; */
-"bib-Uj-vzu.title" = "File";
+"bib-Uj-vzu.title" = "ഫയൽ";
 
 /* Class = "NSMenuItem"; title = "Inspector"; ObjectID = "bwz-r0-peR"; */
 "bwz-r0-peR.title" = "Inspector";
@@ -335,13 +335,13 @@
 "dBM-BU-5xS.title" = "Transformations";
 
 /* Class = "NSMenuItem"; title = "File"; ObjectID = "dMs-cI-mzQ"; */
-"dMs-cI-mzQ.title" = "File";
+"dMs-cI-mzQ.title" = "ഫയൽ";
 
 /* Class = "NSMenuItem"; title = "Stop and Clear Playlists"; ObjectID = "deS-xK-iBb"; */
 "deS-xK-iBb.title" = "Stop and Clear Playlists";
 
 /* Class = "NSMenu"; title = "Crop"; ObjectID = "eo2-Tt-SLx"; */
-"eo2-Tt-SLx.title" = "Crop";
+"eo2-Tt-SLx.title" = "ക്രോപ്";
 
 /* Class = "NSMenuItem"; title = "Audio Delay:"; ObjectID = "foC-r3-8mp"; */
 "foC-r3-8mp.title" = "Audio Delay:";

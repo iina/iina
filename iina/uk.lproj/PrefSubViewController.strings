@@ -5,19 +5,19 @@
 "0fB-es-DmV.title" = "Онлайнові субтитри:";
 
 /* Class = "NSMenuItem"; title = "Top"; ObjectID = "1Tq-5k-o6R"; */
-"1Tq-5k-o6R.title" = "вгорі";
+"1Tq-5k-o6R.title" = "Вгорі";
 
 /* Class = "NSButtonCell"; title = "Display subtitles in letterboxes while in full screen"; ObjectID = "2XY-Un-0Fg"; */
-"2XY-Un-0Fg.title" = "Показувати субтитри в каше в повноекранному режимі";
+"2XY-Un-0Fg.title" = "У повноекранному режимі показувати субтитри під відео";
 
 /* Class = "NSTextFieldCell"; title = "strip"; ObjectID = "3H8-Ei-cTm"; */
-"3H8-Ei-cTm.title" = "базовий";
+"3H8-Ei-cTm.title" = "видалити";
 
 /* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "4Tb-Yh-PdP"; */
 "4Tb-Yh-PdP.title" = "Позиція:";
 
 /* Class = "NSMenuItem"; title = "Bottom"; ObjectID = "6i0-Sx-V7F"; */
-"6i0-Sx-V7F.title" = "внизу";
+"6i0-Sx-V7F.title" = "Внизу";
 
 /* Class = "NSTextFieldCell"; title = "Subtitles have priority when filename containing:"; ObjectID = "7pf-Kb-TNr"; */
 "7pf-Kb-TNr.title" = "Субтитри мають пріоритет, коли назва файлу містить:";
@@ -41,7 +41,7 @@
 "BgE-Kk-MXC.title" = "Тінь";
 
 /* Class = "NSButtonCell"; title = "Search online subtitles automatically"; ObjectID = "C3p-uP-8u8"; */
-"C3p-uP-8u8.title" = "Шукати онлайнові субтитри автоматично";
+"C3p-uP-8u8.title" = "Автоматично шукати субтитри в інтернеті";
 
 /* Class = "NSTextFieldCell"; title = "Font:"; ObjectID = "C4C-XP-i2S"; */
 "C4C-XP-i2S.title" = "Шрифт:";
@@ -53,7 +53,7 @@
 "DUA-7H-Yje.title" = "Додатково";
 
 /* Class = "NSMenuItem"; title = "Right"; ObjectID = "Gie-38-Kk4"; */
-"Gie-38-Kk4.title" = "справа";
+"Gie-38-Kk4.title" = "Справа";
 
 /* Class = "NSTextFieldCell"; title = "OpenSubtitles account:"; ObjectID = "Iax-cc-YIO"; */
 "Iax-cc-YIO.title" = "Обліковий запис OpenSubtitles:";
@@ -92,7 +92,7 @@
 "X7X-18-FJg.title" = "Додатково";
 
 /* Class = "NSMenuItem"; title = "Detect intelligently by IINA"; ObjectID = "XiL-eE-jah"; */
-"XiL-eE-jah.title" = "шляхом розумного виявлення засобами IINA";
+"XiL-eE-jah.title" = "Розумне визначення IINA";
 
 /* Class = "NSTextFieldCell"; title = "Default encoding:"; ObjectID = "Y75-4k-2Du"; */
 "Y75-4k-2Du.title" = "Стандартне кодування:";
@@ -110,7 +110,7 @@
 "dtP-9o-yhy.title" = "Зсув:";
 
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "e0e-dB-Ir6"; */
-"e0e-dB-Ir6.title" = "по центру";
+"e0e-dB-Ir6.title" = "По центру";
 
 /* Class = "NSTextFieldCell"; title = "Background:"; ObjectID = "eYO-c0-Rjp"; */
 "eYO-c0-Rjp.title" = "Фон:";

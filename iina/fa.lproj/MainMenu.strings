@@ -26,13 +26,13 @@
 "2id-wn-xsC.title" = "پرش به…";
 
 /* Class = "NSMenuItem"; title = "Show Video Panel"; ObjectID = "2t8-Ot-yoO"; */
-"2t8-Ot-yoO.title" = "Show Video Panel";
+"2t8-Ot-yoO.title" = "پنل پلی لیست رو نشون بده";
 
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "3Ax-P3-QQu"; */
 "3Ax-P3-QQu.title" = "انتخاب همه";
 
 /* Class = "NSMenuItem"; title = "Show Audio Panel"; ObjectID = "43n-Ed-5kT"; */
-"43n-Ed-5kT.title" = "Show Audio Panel";
+"43n-Ed-5kT.title" = "پنل صدا رو نشون بده";
 
 /* Class = "NSMenuItem"; title = "Audio Delay + 0.5s"; ObjectID = "4ae-MT-2L1"; */
 "4ae-MT-2L1.title" = "تاخیر صوت + 0.5 ثانيه";
@@ -71,7 +71,7 @@
 "8pV-XQ-AvB.title" = "سرعت:";
 
 /* Class = "NSMenuItem"; title = "Show Subtitles Panel"; ObjectID = "8y7-Cy-lKT"; */
-"8y7-Cy-lKT.title" = "Show Subtitles Panel";
+"8y7-Cy-lKT.title" = "پنل زیرنویس رو نشون بده";
 
 /* Class = "NSMenuItem"; title = "Speed Up to 1.1x"; ObjectID = "91n-xW-L37"; */
 "91n-xW-L37.title" = "بالا بردن سرعت به مقدار 1.1 برابر";
@@ -80,10 +80,10 @@
 "9ee-7i-xs7.title" = "Audio Delay - 0.1s";
 
 /* Class = "NSMenuItem"; title = "<None>"; ObjectID = "9pa-9C-ueQ"; */
-"9pa-9C-ueQ.title" = "<None>";
+"9pa-9C-ueQ.title" = "<هیچکدام>";
 
-/* Class = "NSMenuItem"; title = "Save Downloaded Subtitle"; ObjectID = "9zk-co-roT"; */
-"9zk-co-roT.title" = "ذخیره زیرنویس دانلود شده";
+/* Class = "NSMenuItem"; title = "Save Downloaded Subtitle…"; ObjectID = "9zk-co-roT"; */
+"9zk-co-roT.title" = "Save Downloaded Subtitle…";
 
 /* Class = "NSMenuItem"; title = "Take a Screenshot"; ObjectID = "AoP-K6-Kb5"; */
 "AoP-K6-Kb5.title" = "گرفتن تصویر از صفحه";
@@ -473,7 +473,7 @@
 "wpr-3q-Mcd.title" = "راهنما";
 
 /* Class = "NSMenuItem"; title = "<None>"; ObjectID = "wrS-JG-jF6"; */
-"wrS-JG-jF6.title" = "<None>";
+"wrS-JG-jF6.title" = "<هیچکدام>";
 
 /* Class = "NSMenuItem"; title = "Subtitles"; ObjectID = "xDJ-GA-Gjs"; */
 "xDJ-GA-Gjs.title" = "زیرنویس ها";

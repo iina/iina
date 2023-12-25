@@ -87,6 +87,8 @@
 "osd.file_error" = "Error llegint el fitxer";
 "osd.cannot_login" = "No és possible iniciar sessió";
 "osd.canceled" = "Cancel·lat";
+"osd.cannot_connect" = "Cannot connect";
+"osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Filtre afegit: %@";
 "osd.filter_removed" = "Filtre suprimit";
 "osd.file_loop" = "Bucle de fitxer: %@";
@@ -206,6 +208,7 @@
 "alert.sub_lang_not_set" = "Si us plau, estableix un idioma per defecte a les preferències abans d'utilitzar OpenSubtitles. Anglès(eng) serà utilitzat aquesta vegada.";
 "alert.sub.cannot_save_passwd" = "No s'ha pogut desar la teva contrasenya en el Clauer: %@";
 "alert.sub.cannot_login" = "No s'ha pogut iniciar sessió. Si us play, verifica el teu nom d'usuari, la contrasenya i l'estat de la xarxa.\n\n%@";
+"alert.sub.save_downloaded.title" = "Desa els subtítols baixats";
 
 "alert.set_default.title" = "Establir IINA com aplicació per defecte";
 "alert.set_default.message" = "IINA serà establerta com a aplicació per defecte per a tots els tipus de fitxer que suporta.";
@@ -262,6 +265,8 @@
 
 "alert.plugin_uninstall.title" = "Estàs segur que vols desinstal·lar %@?";
 "alert.plugin_uninstall.message" = "El complement s'esborrarà del teu disc.";
+"alert.plugin_reinstall.title" = "Plugin %@ already exists";
+"alert.plugin_reinstall.message" = "Do you want to reinstall the plugin?";
 "alert.duplicated_plugin_id" = "S'han trobat complements duplicats. Dos o més complements tenen el mateix identificador \"%@\". Això pot comportar un funcionament extrany. Si us plau, busca'ls a Preferències - Complements i comunica-ho als seus autors. Si un complement està instal·lat localment, tu també pots canviar manualment el seu identificador modificant el fitxer Info.json del complement.";
 "alert.plugin_no_update" = "No s'han trobat actualitzacions.";
 "alert.plugin_update_found.title" = "Actualitzacions trobades per a %@";

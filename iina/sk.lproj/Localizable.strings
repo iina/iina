@@ -22,11 +22,11 @@
 "guide.faq" = "Často kladené otázky";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.announcement" = "Používate %@ beta verziu aplikácie IINA";
+"initial.beta.desc" = "Odškrtnite \"Sťahovať beta aktualizácie\" v Nastavenia - Všeobecné a nainštalujte stabilnú verziu z našej <a href=\"https://iina.io\">oficiálnej stránky</a>.";
+"initial.nightly.desc" = "Nočné zostavenia nie sú odporúčané pre každodenné použitie. V súčasnej dobe nepodporujú automatické aktualizácie. Stiahnite si ručne novšie zostavenie z našej <a href=\"https://nightly.iina.io\">nočnej webovej stránky</a>.";
+"initial.debug.desc" = "Ladiace zostavenie obvykle nie sú optimalizované pre výkon, nie sú teda odporúčané pre každodenné použitie. Ladiaci zostavenie nepodporujú automatické aktualizácie.";
+"initial.bug_report" = "Nahláste na <a href=\"https://github.com/iina/iina/issues\">GitHub</a>.";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Načítava sa… %d%%";
@@ -87,6 +87,8 @@
 "osd.file_error" = "Chyba pri čítaní súboru";
 "osd.cannot_login" = "Nie je možné prihlásiť";
 "osd.canceled" = "Zrušené";
+"osd.cannot_connect" = "Cannot connect";
+"osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Pridaný filter: %@";
 "osd.filter_removed" = "Odstránený filter";
 "osd.file_loop" = "Slučka súboru: %@";
@@ -114,7 +116,7 @@
 "preference.enable_adv_settings" = "Povoliť pokročilé nastavenia";
 
 "menu.volume" = "Hlasitosť: %d";
-"menu.volume_muted" = "Volume: %d (Muted)";
+"menu.volume_muted" = "Hlasitosť: %d (stíšene)";
 "menu.audio_delay" = "Posunutie zvuku: %.2f s";
 "menu.sub_delay" = "Posunutie titulkov: %.2f s";
 "menu.fullscreen" = "Spustiť režim celej obrazovky";
@@ -200,12 +202,13 @@
 
 "alert.playlist.error_deleting" = "Chyba pri odstraňovaní: %@";
 
-"alert.screenshot.error_taking" = "Cannot take a screenshot!";
+"alert.screenshot.error_taking" = "Nemôžem vytvoriť snímku obrazovky!";
 
 "alert.sub.no_selected" = "Najprv vyberte stiahnuté titulky.";
 "alert.sub_lang_not_set" = "Pred vyhľadávaním na OpenSubtitles nastavte v nastaveniach preferovaný jazyk titulkov. Teraz bude použitý jazyk English(eng).";
 "alert.sub.cannot_save_passwd" = "Heslo sa nedá uložiť do Kľúčenky: %@";
 "alert.sub.cannot_login" = "Nedá sa prihlásiť. Skontrolujte používateľské meno, heslo a stav siete. \n\n%@";
+"alert.sub.save_downloaded.title" = "Uložiť stiahnuté titulky";
 
 "alert.set_default.title" = "Nastaviť IINA ako predvolenú aplikáciu";
 "alert.set_default.message" = "IINA bude nastavená ako predvolená aplikácia pre všetky typy súborov, ktoré podporuje.";
@@ -244,8 +247,8 @@
 "alert.clear_watch_later.title" = "Vymazať uložené priebehy prehrávania";
 "alert.clear_watch_later.message" = "Naozaj chcete vymazať všetky uložené priebehy prehrávania (dáta \"pozrieť neskôr\")?";
 
-"alert.restore_alerts.title" = "Restore Suppressed Alerts";
-"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
+"alert.restore_alerts.title" = "Obnoviť potlačené upozornenia";
+"alert.restore_alerts.message" = "Naozaj chcete obnoviť potlačené upozornenia?";
 
 "alert.nothing_to_open" = "Žiaden súbor.";
 
@@ -260,14 +263,16 @@
 "alert.assrt_token_prompt.message" = "Zaregistrujte sa na otvorenej webstránke. Váš token z domovskej stránky vložte sem:";
 "alert.assrt_token_invalid" = "Váš Assrt API token je neplatný.";
 
-"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
-"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
-"alert.plugin_no_update" = "No update found.";
-"alert.plugin_update_found.title" = "Update found for %@";
-"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
-"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
-"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+"alert.plugin_uninstall.title" = "Ste si istý, že chcete odinštalovať %@?";
+"alert.plugin_uninstall.message" = "Doplnok bude odinštalovaný z disku.";
+"alert.plugin_reinstall.title" = "Doplnok %@ už existuje";
+"alert.plugin_reinstall.message" = "Chcete preinštalovať doplnok?";
+"alert.duplicated_plugin_id" = "Detekované duplicitné identifikátory plug-inu. Dva alebo viac plug-inov majú rovnaký identifikátor „%@“. To môže spôsobiť neobvyklé správanie. Nájdite ich prosím v Nastavenia > Plug-iny a nahláste toto ich autorom. Ak je plug-in nainštalovaný lokálne, môžete tiež manuálne zmeniť jeho identifikátor v súbore Info.json.";
+"alert.plugin_no_update" = "Nenašli sa žiadne aktualizácie.";
+"alert.plugin_update_found.title" = "Je dostupná nová verzia %@";
+"alert.plugin_update_found.message" = "Najnovšia dostupná verzia je %@. Nainštalovaná je %@. Prajete si teraz stiahnuť aktualizáciu?";
+"alert.plugin_permission" = "Tento plug-in vyžaduje nasledujúce oprávnenia. Pred pokračovaním vykonajte ich kontrolu.";
+"alert.plugin_permission_added" = "Táto aktualizácia vyžaduje ďalšie oprávnenia. Pred pokračovaním vykonajte ich kontrolu.";
 
 "playlist.total_length" = "%@ celkovo";
 "playlist.total_length_with_selected" = "%@ z %@ označených";
@@ -346,22 +351,22 @@
 "permissions.show-osd.name" = "Zozbraziť OSD";
 "permissions.show-osd.desc" = "Tento plugin môže zobraziť OSD (On Screen Display = Displej Na Obrazovku) správy.";
 "permissions.show-alert.name" = "Zobraziť upozornenie";
-"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
-"permissions.video-overlay.name" = "Add overlay on videos";
-"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
-"permissions.file-system.name" = "Access the file system";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.show-alert.desc" = "Tento plug-in môže zobrazovať vyskakovacie upozornenie.";
+"permissions.video-overlay.name" = "Pridať prekrytie cez video";
+"permissions.video-overlay.desc" = "Tento plug-in môže vykresľovať cez video ďalší obsah.";
+"permissions.file-system.name" = "Prístup k súborovému systému";
+"permissions.file-system.desc" = "Tento plug-in môže čítať alebo zapisovať súbory na disk, vrátane citlivých informácií. Môže tiež využívať iné programy alebo aplikácie, ktoré môžu poškodiť váš počítač. Uistite sa teda, že ste overili jeho zdroj.";
 
-"plugin.install" = "Install";
-"plugin.installed" = "Installed";
-"plugin.not_installed" = "Not Installed";
-"plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occured during the installation: %@";
-"alert.invalid_url" = "The URL is invalid.";
-"plugin.install_error.invalid_url" = "The URL is invalid.";
-"plugin.install_error.file_not_found" = "Cannot find the package file.";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Check for Updates";
-"plugin.updating" = "Downloading update…";
+"plugin.install" = "Inštalovať";
+"plugin.installed" = "Nainštalované";
+"plugin.not_installed" = "Nenainštalované";
+"plugin.local" = "Nainštalované lokálne";
+"alert.plugin.install_error" = "Pri inštalácii sa vyskytla chyba: %@";
+"alert.invalid_url" = "URL je neplatná.";
+"plugin.install_error.invalid_url" = "URL je neplatná.";
+"plugin.install_error.file_not_found" = "Súbor balíčka sa nedá nájsť.";
+"plugin.install_error.cannot_download" = "Sťahovanie plug-inu zlyhalo.\n\nVýstup:%@\n";
+"plugin.install_error.cannot_unpackage" = "Rozbaľovanie plug-inu zlyhalo.\n\nVýstup:%@\n";
+"plugin.install_error.cannot_load" = "IINA nemôže načítať tento plug-in. Môže byť v chybnom formáte.";
+"plugin.check_for_updates" = "Skontrolovať aktualizácie";
+"plugin.updating" = "Sťahovanie aktualizácie…";

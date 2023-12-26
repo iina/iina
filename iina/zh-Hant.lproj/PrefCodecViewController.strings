@@ -68,19 +68,19 @@
 "a5Y-gU-JTj.title" = "啟用色調對應";
 
 /* Class = "NSTextFieldCell"; title = "Enable tone mapping images onto the display"; ObjectID = "mNn-cb-IVw"; */
-"mNn-cb-IVw.title" = "Enable tone mapping images onto the display";
+"mNn-cb-IVw.title" = "啟用將圖像進行色調映射並顯示在螢幕上";
 
 /* Class = "NSTextFieldCell"; title = "Target peak:"; ObjectID = "xVk-OA-kOf"; */
-"xVk-OA-kOf.title" = "Target peak:";
+"xVk-OA-kOf.title" = "目標峰值:";
 
 /* Class = "NSTextFieldCell"; title = "nits"; ObjectID = "baO-xy-7hD"; */
 "baO-xy-7hD.title" = "尼特";
 
 /* Class = "NSTextFieldCell"; title = "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."; ObjectID = "aTt-aZ-rjK"; */
-"aTt-aZ-rjK.title" = "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400.";
+"aTt-aZ-rjK.title" = "螢幕的測量最大亮度。如果設為0，IINA將檢測此值。若檢測失敗，IINA將目標峰值設為400。";
 
 /* Class = "NSTextFieldCell"; title = "Algorithm:"; ObjectID = "qzI-rq-PqO"; */
 "qzI-rq-PqO.title" = "演算法：";
 
 /* Class = "NSTextFieldCell"; title = "Algorithm to use for tone mapping images onto the display."; ObjectID = "szA-8r-plt"; */
-"szA-8r-plt.title" = "Algorithm to use for tone mapping images onto the display.";
+"szA-8r-plt.title" = "在將圖像映射到螢幕上時使用的算法。";

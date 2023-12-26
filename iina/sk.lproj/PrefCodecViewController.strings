@@ -11,7 +11,7 @@
 "50C-1R-wlJ.title" = "Počet threadov:";
 
 /* Class = "NSButtonCell"; title = "Force dedicated GPU"; ObjectID = "YUr-aJ-xfC"; */
-"YUr-aJ-xfC.title" = "Force dedicated GPU";
+"YUr-aJ-xfC.title" = "Vynútiť dedikovanú GPU";
 
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "bxW-np-SGm"; */
 "bxW-np-SGm.title" = "Predvolené: 0 (Automaticky)";
@@ -23,7 +23,7 @@
 "g4c-vG-URh.title" = "Počiatočná hlasitosť:";
 
 /* Class = "NSTextFieldCell"; title = "Always use the dedicated GPU for rendering (if exists). This can improve performance but may result in poor battery life."; ObjectID = "gCv-sJ-uQJ"; */
-"gCv-sJ-uQJ.title" = "Always use the dedicated GPU for rendering (if it exists). This can improve performance but may reduce battery life.";
+"gCv-sJ-uQJ.title" = "Vždy použiť samostatný grafický procesor na vykresľovanie (ak existuje). Toto umožňuje zvýšiť výkon, ale môže skrátiť výdrž batérie.";
 
 /* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
 "m5P-5f-5uo.title" = "Video:";
@@ -56,31 +56,31 @@
 "3g4-jW-uJd.title" = "Načítať ICC profil";
 
 /* Class = "NSTextFieldCell"; title = "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"; ObjectID = "M2M-of-gjd"; */
-"M2M-of-gjd.title" = "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)";
+"M2M-of-gjd.title" = "Načítať ICC profil pre aktuálny displej a použiť ho na transformáciu RGB videa na výstup obrazovky. (Len pre režim SDR)";
 
 /* Class = "NSButtonCell"; title = "Enable HDR support"; ObjectID = "R7Z-9c-vPJ"; */
 "R7Z-9c-vPJ.title" = "Povoliť podporu HDR";
 
 /* Class = "NSTextFieldCell"; title = "Enable HDR mode by default when playing HDR videos."; ObjectID = "ZgQ-bc-yEE"; */
-"ZgQ-bc-yEE.title" = "Enable HDR mode by default when playing HDR videos.";
+"ZgQ-bc-yEE.title" = "Pri prehrávaní HDR videí povoliť ako predvolený režim HDR.";
 
 /* Class = "NSButtonCell"; title = "Enable tone mapping"; ObjectID = "a5Y-gU-JTj"; */
-"a5Y-gU-JTj.title" = "Enable tone mapping";
+"a5Y-gU-JTj.title" = "Povoliť mapovanie tonality";
 
 /* Class = "NSTextFieldCell"; title = "Enable tone mapping images onto the display"; ObjectID = "mNn-cb-IVw"; */
-"mNn-cb-IVw.title" = "Enable tone mapping images onto the display";
+"mNn-cb-IVw.title" = "Povoliť mapovanie tonality obrazu na displeji";
 
 /* Class = "NSTextFieldCell"; title = "Target peak:"; ObjectID = "xVk-OA-kOf"; */
-"xVk-OA-kOf.title" = "Target peak:";
+"xVk-OA-kOf.title" = "Cieľová špička:";
 
 /* Class = "NSTextFieldCell"; title = "nits"; ObjectID = "baO-xy-7hD"; */
 "baO-xy-7hD.title" = "nits";
 
 /* Class = "NSTextFieldCell"; title = "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."; ObjectID = "aTt-aZ-rjK"; */
-"aTt-aZ-rjK.title" = "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400.";
+"aTt-aZ-rjK.title" = "Zmeraný maximálny jas displeja. Pokiaľ je nastavený na 0, IINA túto hodnotu detekuje. V prípade zlyhania detekcie nastaví IINA cieľové maximum na 400.";
 
 /* Class = "NSTextFieldCell"; title = "Algorithm:"; ObjectID = "qzI-rq-PqO"; */
-"qzI-rq-PqO.title" = "Algorithm:";
+"qzI-rq-PqO.title" = "Algoritmus:";
 
 /* Class = "NSTextFieldCell"; title = "Algorithm to use for tone mapping images onto the display."; ObjectID = "szA-8r-plt"; */
-"szA-8r-plt.title" = "Algorithm to use for tone mapping images onto the display.";
+"szA-8r-plt.title" = "Algoritmus na mapovanie tonality obrazu na displeji.";

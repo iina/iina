@@ -9,13 +9,13 @@
 
 
 
-"crop" = "Crop";
+"crop" = "Ebaki";
 "crop.w" = "Width (default: video width)";
 "crop.h" = "Height (default: video height)";
 "crop.x" = "Origin X (default: center)";
 "crop.y" = "Origin Y (default: center)";
 
-"expand" = "Expand";
+"expand" = "Zabaldu";
 "expand.w" = "Width (default: video width)";
 "expand.h" = "Height (default: video height)";
 "expand.x" = "Origin X (default: center)";
@@ -27,7 +27,7 @@
 "sharpen.msize" = "Matrix size";
 "sharpen.amount" = "Amount";
 
-"blur" = "Blur";
+"blur" = "Lausotu";
 "blur.msize" = "Matrix size";
 "blur.amount" = "Amount";
 

@@ -82,8 +82,8 @@
 /* Class = "NSMenuItem"; title = "<None>"; ObjectID = "9pa-9C-ueQ"; */
 "9pa-9C-ueQ.title" = "<None>";
 
-/* Class = "NSMenuItem"; title = "Save Downloaded Subtitle"; ObjectID = "9zk-co-roT"; */
-"9zk-co-roT.title" = "Saglabāt lejupielādēto subtitra failu";
+/* Class = "NSMenuItem"; title = "Save Downloaded Subtitle…"; ObjectID = "9zk-co-roT"; */
+"9zk-co-roT.title" = "Save Downloaded Subtitle…";
 
 /* Class = "NSMenuItem"; title = "Take a Screenshot"; ObjectID = "AoP-K6-Kb5"; */
 "AoP-K6-Kb5.title" = "Uzņemt ekrānuzņēmumu";
@@ -152,7 +152,7 @@
 "Gi5-1S-RQB.title" = "Atskaņošanas saraksts";
 
 /* Class = "NSMenuItem"; title = "Crop"; ObjectID = "Gqg-wU-RRo"; */
-"Gqg-wU-RRo.title" = "Crop";
+"Gqg-wU-RRo.title" = "Apgriezt";
 
 /* Class = "NSMenuItem"; title = "Reset Audio Delay"; ObjectID = "H3d-jR-YCr"; */
 "H3d-jR-YCr.title" = "Atiestatīt skaņas aizkavi";
@@ -341,7 +341,7 @@
 "deS-xK-iBb.title" = "Stop and Clear Playlists";
 
 /* Class = "NSMenu"; title = "Crop"; ObjectID = "eo2-Tt-SLx"; */
-"eo2-Tt-SLx.title" = "Crop";
+"eo2-Tt-SLx.title" = "Apgriezt";
 
 /* Class = "NSMenuItem"; title = "Audio Delay:"; ObjectID = "foC-r3-8mp"; */
 "foC-r3-8mp.title" = "Skaņas aizkave:";

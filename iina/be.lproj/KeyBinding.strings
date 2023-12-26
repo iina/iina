@@ -7,12 +7,12 @@
 */
 
 "cmd.ignore" = "Ігнараваць";
-"cmd.seek" = "Seek";
-"cmd.revert-seek" = "Revert seek";
-"cmd.set" = "Set";
+"cmd.seek" = "Пераматаць";
+"cmd.revert-seek" = "Перамотка назад";
+"cmd.set" = "Усталяваць";
 "cmd.cycle" = "Cycle";
 "cmd.cycle-values" = "Cycle in";
-"cmd.add" = "Change";
+"cmd.add" = "Змяніць";
 "cmd.multiply" = "Multiply";
 "cmd.frame-step" = "Next frame";
 "cmd.frame-back-step" = "Previous frame";

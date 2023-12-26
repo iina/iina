@@ -22,11 +22,11 @@
 "guide.faq" = "Često postavljena pitanja";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.announcement" = "Koristite verziju %@ programa IINA";
+"initial.beta.desc" = "Ako želite da se vratite na stabilno izdanje, opozovite izbor stavke „primaj beta ažuriranja“ u okviru opcije Željene postavke – Opšte postavke, a zatim instalirajte stabilno izdanje sa <a href=\"https://iina.io\">zvaničnog veb-sajta</a>.";
+"initial.nightly.desc" = "Automatizovana izdanja ne preporučuju se za svakodnevno korišćenje. Trenutna automatizovana izdanja ne podržavaju automatsko ažuriranje. Ručno preuzmite najnovija izdanja s našeg veb-sajta za <a href=\"https://nightly.iina.io\">automatizovana izdanja</a>.";
+"initial.debug.desc" = "Izdanja za otklanjanje grešaka obično nisu optimizovana za performanse, tako da se ne preporučuju za svakodnevnu upotrebu. Izdanja za otklanjanje grešaka ne podržavaju automatsko ažuriranje.";
+"initial.bug_report" = "Prijavite putem <a href=\"https://github.com/iina/iina/issues\">problema na GitHubu</a>.";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Smeštanje u bafer… %d%%";
@@ -87,6 +87,8 @@
 "osd.file_error" = "Greška pri čitanju datoteke";
 "osd.cannot_login" = "Prijava nije moguća";
 "osd.canceled" = "Otkazano";
+"osd.cannot_connect" = "Cannot connect";
+"osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Dodati filter: %@";
 "osd.filter_removed" = "Uklonjeni filter";
 "osd.file_loop" = "Ponavljanje datoteke: %@";
@@ -114,7 +116,7 @@
 "preference.enable_adv_settings" = "Omogući napredne postavke";
 
 "menu.volume" = "Jačina zvuka: %d";
-"menu.volume_muted" = "Volume: %d (Muted)";
+"menu.volume_muted" = "Jačina zvuka: %d (isključen zvuk)";
 "menu.audio_delay" = "Kašnjenje zvuka: %.2fs";
 "menu.sub_delay" = "Kašnjenje titla: %.2fs";
 "menu.fullscreen" = "Uđi u režim celog ekrana";
@@ -206,6 +208,7 @@
 "alert.sub_lang_not_set" = "Postavite željeni jezik titla u željenim postavkama pre nego korišćenja sajta OpenSubtitles. Ovog puta će se koristiti engleski jezik (eng).";
 "alert.sub.cannot_save_passwd" = "Nije moguće sačuvati lozinku u Privezak ključeva: %@";
 "alert.sub.cannot_login" = "Prijava nije moguća. Proverite korisničko ime, lozinku i status mreže\n\n%@";
+"alert.sub.save_downloaded.title" = "Sačuvaj preuzeti titl";
 
 "alert.set_default.title" = "Postavljanje aplikacije IINA kao podrazumevane";
 "alert.set_default.message" = "IINA će biti postavljena kao podrazumevana aplikacija za sve tipove datoteka koje podržava.";
@@ -262,6 +265,8 @@
 
 "alert.plugin_uninstall.title" = "Želite li zaista da deinstalirate %@?";
 "alert.plugin_uninstall.message" = "Dodatna komponenta biće izbrisana sa diska.";
+"alert.plugin_reinstall.title" = "Dodatna komponenta %@ već postoji";
+"alert.plugin_reinstall.message" = "Želite li zaista da deinstalirate dodatnu komponentu?";
 "alert.duplicated_plugin_id" = "Pronađene su duplirane dodatne komponente. Barem dve dodatne komponente imaju isti identifikator \"%@\". To može dovesti do neobičnog ponašanja. Pronađite ih u okviru opcije Željene postavke - Dodatne komponente i prijavite autorima. Ako je dodatna komponenta instalirana lokalno, možete i ručno promeniti njen identifikator u datoteci Info.json dodatne komponente.";
 "alert.plugin_no_update" = "Nisu pronađena ažuriranja.";
 "alert.plugin_update_found.title" = "Pronađeno je ažuriranje za %@";
@@ -344,12 +349,12 @@
 "permissions.network-request.desc" = "Ova dodatna komponenta može poslati zahtev ili otpremati podatke na sledeće veb-sajtove:";
 "permissions.network-request.any_site" = "Bilo koji sajt";
 "permissions.show-osd.name" = "Prikaži ekranski meni";
-"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
-"permissions.show-alert.name" = "Show Alerts";
-"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
-"permissions.video-overlay.name" = "Add overlay on videos";
-"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
-"permissions.file-system.name" = "Access the file system";
+"permissions.show-osd.desc" = "Ova dodatna komponenta može prikazati poruke ekranskog menija (OSD).";
+"permissions.show-alert.name" = "Prikaži upozorenja";
+"permissions.show-alert.desc" = "Ova dodatna komponenta može prikazati iskačuća upozorenja.";
+"permissions.video-overlay.name" = "Dodaj prekrivajući element na video-zapise";
+"permissions.video-overlay.desc" = "Ova dodatna komponenta može prikazati dodatni sadržaj preko video-zapisa.";
+"permissions.file-system.name" = "Pristupite sistemu datoteka";
 "permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Install";

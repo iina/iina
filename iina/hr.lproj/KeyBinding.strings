@@ -20,10 +20,10 @@
 "cmd.sub-seek" = "Traži titl";
 "cmd.playlist-next" = "Sljedeći medij";
 "cmd.playlist-prev" = "Prethodni medij";
-"cmd.playlist-move" = "Premjesti naslov reprodukcije";
-"cmd.playlist-clear" = "Očisti popis naslova";
-"cmd.playlist-remove" = "Ukloni trenutačni popis";
-"cmd.playlist-shuffle" = "Nasumična reprodukcija";
+"cmd.playlist-move" = "Premjesti stavku playliste";
+"cmd.playlist-clear" = "Izbriši playlistu";
+"cmd.playlist-remove" = "Ukloni trenutačnu";
+"cmd.playlist-shuffle" = "Odaberi nasumice";
 "cmd.write-watch-later-config" = "Povijest reprodukcija";
 "cmd.stop" = "Prekini";
 "cmd.quit" = "Izlaz";
@@ -31,7 +31,7 @@
 "cmd.screenshot" = "Snimka zaslona";
 "cmd.screenshot-to-file" = "Snimka zaslona do datoteke";
 "cmd.loadfile" = "Učitaj datotek";
-"cmd.loadlist" = "Učitaj popis naslova";
+"cmd.loadlist" = "Učitaj playlistu";
 "cmd.run" = "Pokreni";
 
 "iina.flip" = "Preokreni";
@@ -44,14 +44,14 @@
 "iina.video-panel" = "Video ploča";
 "iina.audio-panel" = "Zvučni ploča";
 "iina.sub-panel" = "Ploča titlova";
-"iina.playlist-panel" = "Ploča popisa naslova";
+"iina.playlist-panel" = "Ploča playliste";
 "iina.chapter-panel" = "Ploča poglavlja";
 "iina.bigger-window" = "Veći prozor";
 "iina.smaller-window" = "Manji prozor";
 "iina.fit-to-screen" = "Prilagodi veličini ekrana";
 "iina.toggle-flip" = "Uključi/Isključi okretanje";
 "iina.toggle-mirror" = "Uključi/Isključi zrcaljenje";
-"iina.save-playlist" = "Spremi trenutačni popis naslova";
+"iina.save-playlist" = "Spremi trenutačnu playlistu";
 "iina.delete-current-file" = "Izbriši trenutačnu datoteku";
 "iina.delete-current-file-hard" = "Odmah izbriši trenutačnu datoteku";
 "iina.find-online-subs" = "Pronađi titlove na internetu";
@@ -102,7 +102,7 @@
 "opt.sub-visibility" = "Vidljivost titla";
 "opt.sub-ass-style-override" = "Prepisivanje ASS stila";
 
-"opt.fullscreen" = "Cijeli zaslon";
+"opt.fullscreen" = "Cjeloekranski prikaz";
 "opt.ontop" = "Postavi ispred";
 
 "opt.chapter" = "Poglavlje";

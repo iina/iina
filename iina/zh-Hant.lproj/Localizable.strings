@@ -22,11 +22,11 @@
 "guide.faq" = "常見問題";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
+"initial.announcement" = "您正在使用IINA的%@版本";
+"initial.beta.desc" = "如果您希望回滾至穩定版本，請從 設置 > 通用 取消勾選“接收Beta版本更新”，然後從 我們的<a href=\"https://iina.io\">官方網站</a>安裝穩定版本.";
 "initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.debug.desc" = "開發版通常沒有將效能最佳化，所以不建議作為生產力軟件。開發版不支持自動更新。";
+"initial.bug_report" = "通過<a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>發送報告.";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "緩衝處理中⋯ %d%%";
@@ -87,6 +87,8 @@
 "osd.file_error" = "讀取檔案發生錯誤";
 "osd.cannot_login" = "無法登入";
 "osd.canceled" = "已取消";
+"osd.cannot_connect" = "Cannot connect";
+"osd.timed_out" = "Timed Out";
 "osd.filter_added" = "已加入濾鏡：%@";
 "osd.filter_removed" = "已移除濾鏡";
 "osd.file_loop" = "文件循環";
@@ -206,6 +208,7 @@
 "alert.sub_lang_not_set" = "在使用 OpenSubtitles 前請先在「偏好設定」中設定字幕的偏好語言，目前將使用英文（eng）。";
 "alert.sub.cannot_save_passwd" = "無法將您這個密碼「%@」儲存到鑰匙圈";
 "alert.sub.cannot_login" = "登入失敗，請檢查您的使用者帳戶、密碼、網路連線。\n\n%@";
+"alert.sub.save_downloaded.title" = "儲存已下載的字幕";
 
 "alert.set_default.title" = "將 IINA 設為預設應用程式";
 "alert.set_default.message" = "即將把 IINA 設為所有受支援檔案格式的預設應用程式";
@@ -262,6 +265,8 @@
 
 "alert.plugin_uninstall.title" = "你確定想要移除 %@？";
 "alert.plugin_uninstall.message" = "這外掛程式將從你的磁碟移除。";
+"alert.plugin_reinstall.title" = "插件%@已存在";
+"alert.plugin_reinstall.message" = "您是否希望重新安裝此插件？";
 "alert.duplicated_plugin_id" = "偵測到重複的外掛程式識別碼，有兩個或更多外掛程式使用的相同的識別碼「%@」，這將造成不正常的行為。請在「偏好設定 - 外掛程式」中找到它們，並回報給外掛程式的作者。如果外掛程式安裝於本機，你可以手動在外掛程式的 Info.json 檔案中手動變更該外掛的識別碼。";
 "alert.plugin_no_update" = "未找到更新。";
 "alert.plugin_update_found.title" = "找到 %@ 的更新";

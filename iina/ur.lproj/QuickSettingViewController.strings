@@ -107,13 +107,13 @@
 "bzk-c2-LH5.label" = "Audio";
 
 /* Class = "NSSegmentedCell"; cMu-YF-riv.ibShadowedLabels[0] = "Default"; ObjectID = "cMu-YF-riv"; */
-"cMu-YF-riv.ibShadowedLabels[0]" = "Default";
+"cMu-YF-riv.ibShadowedLabels[0]" = "طے شدہ";
 
 /* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "cdR-uY-riN"; */
 "cdR-uY-riN.title" = "Brightness:";
 
 /* Class = "NSButtonCell"; title = "AUDIO"; ObjectID = "cpm-5o-a2c"; */
-"cpm-5o-a2c.title" = "AUDIO";
+"cpm-5o-a2c.title" = "آڈیو";
 
 /* Class = "NSTextFieldCell"; title = "Contrast:"; ObjectID = "eDl-Si-LSa"; */
 "eDl-Si-LSa.title" = "Contrast:";
@@ -134,7 +134,7 @@
 "ghy-e7-7Of.title" = "Font…";
 
 /* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "iS4-Zr-9Ig"; */
-"iS4-Zr-9Ig.title" = "Equalizer";
+"iS4-Zr-9Ig.title" = "Equalizer:";
 
 /* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[0] = "None"; ObjectID = "iuN-rN-jT7"; */
 "iuN-rN-jT7.ibShadowedLabels[0]" = "None";
@@ -149,7 +149,7 @@
 "lBn-YS-jL7.title" = "0 dB";
 
 /* Class = "NSButtonCell"; title = "VIDEO"; ObjectID = "lQt-I0-jHO"; */
-"lQt-I0-jHO.title" = "VIDEO";
+"lQt-I0-jHO.title" = "ویڈیو";
 
 /* Class = "NSTextFieldCell"; title = "1x"; ObjectID = "ldQ-YL-IEp"; */
 "ldQ-YL-IEp.title" = "1x";
@@ -197,4 +197,4 @@
 "xfX-wr-DTJ.title" = "+5s";
 
 /* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "zcD-Tg-7Oi"; */
-"zcD-Tg-7Oi.title" = "Equalizer";
+"zcD-Tg-7Oi.title" = "Equalizer:";

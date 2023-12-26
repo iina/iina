@@ -87,6 +87,8 @@
 "osd.file_error" = "파일 읽기 오류";
 "osd.cannot_login" = "로그인할 수 없음";
 "osd.canceled" = "취소됨";
+"osd.cannot_connect" = "Cannot connect";
+"osd.timed_out" = "Timed Out";
 "osd.filter_added" = "필터 추가됨: %@";
 "osd.filter_removed" = "필터 제거됨";
 "osd.file_loop" = "파일 반복: %@";
@@ -206,6 +208,7 @@
 "alert.sub_lang_not_set" = "OpenSubtitles를 사용하기 전에 자막의 선호 언어를 설정하십시오. 지금은 영어(eng)를 사용합니다.";
 "alert.sub.cannot_save_passwd" = "키체인에 암호를 저장할 수 없습니다: %@";
 "alert.sub.cannot_login" = "로그인할 수 없습니다. 계정 이름과 암호, 네트워크 상태를 확인하십시오.\n\n%@";
+"alert.sub.save_downloaded.title" = "다운로드된 자막 저장";
 
 "alert.set_default.title" = "IINA를 기본 프로그램으로 설정";
 "alert.set_default.message" = "지원하는 모든 파일 유형에 대해 IINA를 기본 프로그램으로 설정합니다.";
@@ -262,6 +265,8 @@
 
 "alert.plugin_uninstall.title" = "%@을(를) 삭제 하시겠습니까?";
 "alert.plugin_uninstall.message" = "이 플러그인이 디스크에서 삭제됩니다.";
+"alert.plugin_reinstall.title" = "%@ 플러그인이 이미 존재합니다.";
+"alert.plugin_reinstall.message" = "플러그인을 재설치하시겠습니까?";
 "alert.duplicated_plugin_id" = "중복된 플러그인 식별자가 감지되었습니다. 두 개 이상의 플러그인 식별자 \"%@\"가 동일합니다. 이로 인해 비정상적인 동작이 발생할 수 있습니다. 환경설정 - 플러그인에서 해당 플러그인을 찾아 해당 플러그인 작성자에게 신고하세요. 플러그인이 로컬에 설치된 경우 플러그인의 Info.json 파일에서 식별자를 수동으로 변경할 수도 있습니다.";
 "alert.plugin_no_update" = "업데이트가 없습니다.";
 "alert.plugin_update_found.title" = "%@의 업데이트를 찾음";

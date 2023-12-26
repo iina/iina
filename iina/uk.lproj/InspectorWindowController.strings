@@ -2,7 +2,7 @@
 "0vG-Pg-DIl.title" = "Примусово";
 
 /* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "1dz-Vt-0MO"; */
-"1dz-Vt-0MO.title" = "Частота кадрів (кадр/c):";
+"1dz-Vt-0MO.title" = "Кадр/с:";
 
 /* Class = "NSTextFieldCell"; title = "File path:"; ObjectID = "4jf-w4-kkv"; */
 "4jf-w4-kkv.title" = "Шлях до файлу:";
@@ -11,25 +11,25 @@
 "5H6-qJ-RDS.title" = "Формат:";
 
 /* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "7QX-tu-rvs"; */
-"7QX-tu-rvs.title" = "Частота кадрів (кадр/с):";
+"7QX-tu-rvs.title" = "Кадр/с:";
 
 /* Class = "NSTextFieldCell"; title = "Title:"; ObjectID = "9eq-rd-zGy"; */
 "9eq-rd-zGy.title" = "Назва:";
 
 /* Class = "NSTextFieldCell"; title = "Bit Rate:"; ObjectID = "A4y-LL-x0z"; */
-"A4y-LL-x0z.title" = "Бітова швидкість:";
+"A4y-LL-x0z.title" = "Бітрейт:";
 
 /* Class = "NSTextFieldCell"; title = "Mistimed Frames:"; ObjectID = "AYt-pH-UCi"; */
-"AYt-pH-UCi.title" = "Розсинхронізовані кадри:";
+"AYt-pH-UCi.title" = "Розсинхрон. кадрів:";
 
 /* Class = "NSTextFieldCell"; title = "Display FPS:"; ObjectID = "AjU-1T-aGR"; */
-"AjU-1T-aGR.title" = "Фактична частота кадрів (кадр/с):";
+"AjU-1T-aGR.title" = "Відтвор. кадр/с:";
 
 /* Class = "NSTextFieldCell"; title = "Dropped Frames:"; ObjectID = "CrF-UR-udW"; */
-"CrF-UR-udW.title" = "Пропущені кадри:";
+"CrF-UR-udW.title" = "Пропущено кадрів:";
 
 /* Class = "NSTextFieldCell"; title = "Hw Decoder:"; ObjectID = "DHh-ne-10f"; */
-"DHh-ne-10f.title" = "Апаратний декодер:";
+"DHh-ne-10f.title" = "Апар. декодер:";
 
 /* Class = "NSWindow"; title = "Inspector"; ObjectID = "F0z-JX-Cv5"; */
 "F0z-JX-Cv5.title" = "Інспектор";
@@ -53,7 +53,7 @@
 "I2E-6Z-Gnn.title" = "Драйвер:";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Disp FPS"; ObjectID = "JN9-3E-OJp"; */
-"JN9-3E-OJp.title" = "Орієнтовна частота кадрів (кадр/с)";
+"JN9-3E-OJp.title" = "Орієнт. відтвор. кадр/с";
 
 /* Class = "NSTextFieldCell"; title = "File Path:"; ObjectID = "Jxp-Wf-BhU"; */
 "Jxp-Wf-BhU.title" = "Шлях до файлу:";
@@ -116,28 +116,28 @@
 "f7i-wX-uxQ.title" = "Доріжка:";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Output FPS:"; ObjectID = "g8p-Ec-awO"; */
-"g8p-Ec-awO.title" = "Орієнтовна вихідна частота кадрів (кадр/с):";
+"g8p-Ec-awO.title" = "Орієнт. вихід. кадр/с:";
 
 /* Class = "NSTextFieldCell"; title = "VIDEO"; ObjectID = "gDG-Eq-1Bc"; */
 "gDG-Eq-1Bc.title" = "ВІДЕО";
 
 /* Class = "NSTextFieldCell"; title = "A/V Sync Diff:"; ObjectID = "iVK-Ck-Lyq"; */
-"iVK-Ck-Lyq.title" = "Різниця синхронізації аудио-відео:";
+"iVK-Ck-Lyq.title" = "Різн. синхр. ауд/від:";
 
 /* Class = "NSTextFieldCell"; title = "Channels:"; ObjectID = "it3-05-Pwu"; */
 "it3-05-Pwu.title" = "Канали:";
 
 /* Class = "NSTextFieldCell"; title = "Source ID:"; ObjectID = "jCY-og-BAa"; */
-"jCY-og-BAa.title" = "Ідентифікатор джерела:";
+"jCY-og-BAa.title" = "ID джерела:";
 
 /* Class = "NSTextFieldCell"; title = "Bit Rate:"; ObjectID = "jyV-Pd-UvH"; */
-"jyV-Pd-UvH.title" = "Бітова швидкість:";
+"jyV-Pd-UvH.title" = "Битрейт:";
 
 /* Class = "NSTextFieldCell"; title = "Sample Rate:"; ObjectID = "llF-4b-Z8b"; */
-"llF-4b-Z8b.title" = "Частота дискретизації:";
+"llF-4b-Z8b.title" = "Частота дискр:";
 
 /* Class = "NSTextFieldCell"; title = "ID:"; ObjectID = "mZG-ik-Led"; */
-"mZG-ik-Led.title" = "Идентифікатор:";
+"mZG-ik-Led.title" = "ID:";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "mgl-Et-20K"; */
 "mgl-Et-20K.title" = "Формат:";

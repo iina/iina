@@ -22,11 +22,11 @@
 "guide.faq" = "Sık Sorulan Sorular";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.announcement" = "Şu an IINA'nın %@ BETA sürümünü kullanıyorsunuz";
+"initial.beta.desc" = "Lütfen “Ayarlar > Genel” sekmesinden “Beta güncellemeleri al” seçeneğini kapatın ve <a href=\"https://iina.io\">resmi sitemizden</a> kararlı son sürümü indirin.";
+"initial.nightly.desc" = "Test edilmemiş sürümlerin günlük olarak kullanılması tavsiye edilmez. Şu anda test edilmemiş sürümler otomatik güncellemeyi desteklemiyor. Lütfen daha yeni test edilmemiş sürümleri <a href=\"https://nightly.iina.io\">test edilmemiş sürümler web sitemizden</a> manuel olarak indirin.";
+"initial.debug.desc" = "Hata ayıklama amaçlı derlenmiş sürümler genellikle performans açısından optimize edilmediğinden günlük olarak kullanılması önerilmez. Hata ayıklama amaçlı sürümler otomatik güncellemeyi desteklemez.";
+"initial.bug_report" = "<a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>. web sitesine raporlayabilirsiniz.";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Arabelleğe alınıyor... %%%d";
@@ -87,6 +87,8 @@
 "osd.file_error" = "Dosya okunurken hata oluştu";
 "osd.cannot_login" = "Oturum açılamıyor";
 "osd.canceled" = "İptal edildi";
+"osd.cannot_connect" = "Cannot connect";
+"osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Filtre Eklendi: %@";
 "osd.filter_removed" = "Filtre Kaldırıldı";
 "osd.file_loop" = "Dosya Döngüsü: %@";
@@ -206,6 +208,7 @@
 "alert.sub_lang_not_set" = "Lütfen OpenSubtitles'ı kullanmadan önce tercih ettiğiniz altyazı dilini tercihlerinize ekleyiniz. Bu sefer İngilizce (eng) kullanılacaktır.";
 "alert.sub.cannot_save_passwd" = "Anahtar zincirinize şifrenizi kaydedemiyoruz: %@";
 "alert.sub.cannot_login" = "Giriş yapılamıyor. Lütfen kullanıcı adınızı, şifrenizi ve ağ durumunuzu kontrol edin.\n\n%@ ";
+"alert.sub.save_downloaded.title" = "İndirilmiş Altyazıyı Kaydet";
 
 "alert.set_default.title" = "IINA'yı Saptanmış Uygulama Olarak Ayarla";
 "alert.set_default.message" = "Desteklenen tüm dosya türleri için IINA saptanmış uygulama olarak ayarlanacak.";
@@ -262,6 +265,8 @@
 
 "alert.plugin_uninstall.title" = "%@ öğesini kaldırmak istediğinizden emin misiniz?";
 "alert.plugin_uninstall.message" = "Bu eklenti sabit diskinizden silinecek.";
+"alert.plugin_reinstall.title" = "%@ eklentisi zaten yüklü";
+"alert.plugin_reinstall.message" = "Bu eklentiyi kurmak istiyor musun?";
 "alert.duplicated_plugin_id" = "Yinelenen eklenti tanımlayıcıları algılandı. İki veya daha fazla eklenti aynı \"%@\" tanımlayıcısına sahip. Bu anormal davranışlara neden olabilir. Lütfen bunları Tercihler - Eklentiler bölümünde bulun ve yazarlarına bildirin. Bir eklenti yerel olarak kuruluysa, eklentinin Info.json dosyasındaki tanımlayıcısını manuel olarak da değiştirebilirsiniz.";
 "alert.plugin_no_update" = "Güncelleme bulunamadı.";
 "alert.plugin_update_found.title" = "%@ için güncelleme bulundu";

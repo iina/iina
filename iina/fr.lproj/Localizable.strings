@@ -22,11 +22,11 @@
 "guide.faq" = "Questions fréquemment posées";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.announcement" = "Vous utilisez la version %@ d'IINA";
+"initial.beta.desc" = "Si vous voulez revenir à une version officielle, décochez la case \"recevoir les versions bêta\" depuis Paramètres > Général, et installer une version stable depuis <a href=\"https://iina.io\">notre site officielle</a>.";
+"initial.nightly.desc" = "Les versions quotidiennes ne sont pas recommandées pour être utilisées comme lecteur en production. Les versions quotidiennes ne prennent pas en charge la mise à jour automatique. Veuillez télécharger manuellement les dernières versions de notre site <a href=\"https://nightly.iina.io\">versions quotidiennes</a>.";
+"initial.debug.desc" = "Les versions de débogage ne sont généralement pas optimisées pour les performances, donc il n'est pas recommandé d'être utilisé comme lecteur en production. Les versions de débogage ne prennent pas en charge la mise à jour automatique.";
+"initial.bug_report" = "Signaler un bug via <a href=\"https://github.com/iina/iina/issues\">GitHub</a>.";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Mise en mémoire tampon… %d%%";
@@ -87,6 +87,8 @@
 "osd.file_error" = "Erreur lors de la lecture du fichier";
 "osd.cannot_login" = "Impossible de se connecter";
 "osd.canceled" = "Annulé";
+"osd.cannot_connect" = "Cannot connect";
+"osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Filtre ajouté : %@";
 "osd.filter_removed" = "Filtre supprimé";
 "osd.file_loop" = "Lire le fichier en boucle : %@";
@@ -206,6 +208,7 @@
 "alert.sub_lang_not_set" = "Veuillez configurer une langue de sous-titres dans les préférences avant d'utiliser OpenSubtitles. L'anglais (eng) sera utilisé cette fois-ci.";
 "alert.sub.cannot_save_passwd" = "Impossible de sauvegarder le mot de passe dans votre trousseau d'accès : %@";
 "alert.sub.cannot_login" = "Impossible de se connecter. Veuillez vérifier votre nom d'utilisateur, votre mot de passe et votre connexion Internet.\n\n%@";
+"alert.sub.save_downloaded.title" = "Sauvegarder le sous-titre téléchargé";
 
 "alert.set_default.title" = "Définir IINA comme application par défaut";
 "alert.set_default.message" = "Tous les fichiers supportés par IINA seront dorénavant ouverts par défaut avec IINA.";
@@ -262,6 +265,8 @@
 
 "alert.plugin_uninstall.title" = "Êtes-vous sûr de vouloir désinstaller %@ ?";
 "alert.plugin_uninstall.message" = "Cette extension sera supprimée de votre disque dur.";
+"alert.plugin_reinstall.title" = "Le plugin %@ existe déjà";
+"alert.plugin_reinstall.message" = "Voulez-vous réinstaller le plugin ?";
 "alert.duplicated_plugin_id" = "Plusieurs extensions ont le même identifiant : \"%@\". Cela peut entraîner des comportements anormaux. Vous pouvez les identifier Préférences - Extensions et le signaler à leurs auteurs. Si une extension est installée localement, vous pouvez changer manuellement son identifiant dans le fichier Info.json de celle-ci.";
 "alert.plugin_no_update" = "Aucune mise à jour disponible.";
 "alert.plugin_update_found.title" = "Mise à jour disponible pour %@";

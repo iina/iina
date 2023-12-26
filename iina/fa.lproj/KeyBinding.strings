@@ -11,7 +11,7 @@
 "cmd.revert-seek" = "برگرداندن جستجو";
 "cmd.set" = "اعمال";
 "cmd.cycle" = "چرخه";
-"cmd.cycle-values" = "دوچرخه سواری کنید";
+"cmd.cycle-values" = "ورودی چرخه";
 "cmd.add" = "عوض کردن";
 "cmd.multiply" = "تکثیر کردن";
 "cmd.frame-step" = "فریم بعدی";
@@ -110,7 +110,7 @@
 "read.set" = "تنظیم {{property}} به {{value}}";
 "read.add" = "{{property}} {{value}}";
 "read.multiply" = "تکثیر کردن {{property}} با {{factor}}x";
-"read.cycle" = "Cycle {{property}}{{#dir_down}} Downwards{{/dir_down}}";
-"read.cycle-values" = "Cycle {{property}} in ({{{values}}})";
-"read.seek" = "Seek {{#fwd}}forward{{/fwd}}{{#bwd}}backward{{/bwd}}{{#abs}}to{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";
-"read.sub-seek" = "Seek to {{#skip_1}}next{{/skip_1}}{{#skip_-1}}previous{{/skip_-1}} subtitle";
+"read.cycle" = "چرخه {{property}}{{#dir_down}} دانلود{{/dir_down}}";
+"read.cycle-values" = "چرخه {{property}} در ({{{values}}})";
+"read.seek" = "دنبال کردن {{#fwd}}ادامه{{/fwd}}{{#bwd}}برگشت{{/bwd}}{{#abs}}به{{/abs}} {{value}}{{#sec}}ثانیه{{/sec}}{{#per}}%{{/per}} {{#exact}}(دقیق){{/exact}}{{#kf}}(مقدار فریم){{/kf}}";
+"read.sub-seek" = "دنباله {{#skip_1}}بعدی{{/skip_1}}{{#skip_-1}}قبلی{{/skip_-1}} زیرنویس";

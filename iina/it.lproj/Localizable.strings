@@ -22,11 +22,11 @@
 "guide.faq" = "Domande frequenti (FAQ)";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.announcement" = "Stai usando una versione %@ di IINA";
+"initial.beta.desc" = "Se vuoi passare al canale di release ufficiali di IINA, togli la spunta da 'Ricevi aggiornamenti beta' in Impostazioni → Generali, poi scarica l'ultima versione stabile dal <a href=\"https://iina.io\">sito ufficiale</a>.";
+"initial.nightly.desc" = "Le Nightly sono versioni di sviluppo instabili e non adatte all'utilizzo quotidiano. Attualmente, inoltre, non sono aggiornate automaticamente: se desideri, puoi scaricarle dalla <a href=\"https://nightly.iina.io\">pagina dedicata</a>.";
+"initial.debug.desc" = "Le versioni di debug sono dedicate alla raccolta di dati per la risoluzione di problemi e per altre finalità analitiche. Non sono ottimizzate per le prestazioni e non prevedono aggiornamenti automatici; in generale se ne sconsiglia l'utilizzo.";
+"initial.bug_report" = "Segnala tramite <a href=\"https://github.com/iina/iina/issues\">GitHub</a>.";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffer… %d%%";
@@ -87,6 +87,8 @@
 "osd.file_error" = "Errore lettura file";
 "osd.cannot_login" = "Login non riuscito";
 "osd.canceled" = "Annullato";
+"osd.cannot_connect" = "Cannot connect";
+"osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Aggiungto filtro: %@";
 "osd.filter_removed" = "Filtro rimosso";
 "osd.file_loop" = "Ripeti file: %@";
@@ -206,6 +208,7 @@
 "alert.sub_lang_not_set" = "Imposta la lingua preferita per i sottotitoli nelle preferenze prima di utilizzare OpenSubtitles. Questa volta verrà utilizzato l'Inglese (eng).";
 "alert.sub.cannot_save_passwd" = "Impossibile salvare la password nel portachiavi: %@";
 "alert.sub.cannot_login" = "Impossibile accedere. Controlla il tuo nome utente, la password e la connessione di rete.\n\n%@";
+"alert.sub.save_downloaded.title" = "Salva i sottotitoli scaricati";
 
 "alert.set_default.title" = "Imposta IINA come applicazione predefinita";
 "alert.set_default.message" = "IINA sarà impostata come applicazione predefinita per tutti i formati che supporta.";
@@ -262,6 +265,8 @@
 
 "alert.plugin_uninstall.title" = "Sei sicuro di voler disintallare %@?";
 "alert.plugin_uninstall.message" = "Il plugin verrà eliminato dal disco.";
+"alert.plugin_reinstall.title" = "Il plugin %@ esiste già";
+"alert.plugin_reinstall.message" = "Vuoi reinstallare il plugin?";
 "alert.duplicated_plugin_id" = "Rilevati identificatori di plugin duplicati. Due o più plugin hanno lo stesso identificatore \"%@\". Questo può causare comportamenti anomali. Si prega di trovarli in Preferenze - Plugin e segnalarli ai loro autori. Se un plugin è installato localmente, è anche possibile modificare manualmente il suo identificatore tramite il file Info.json del plugin.";
 "alert.plugin_no_update" = "Nessun aggiornamento trovato.";
 "alert.plugin_update_found.title" = "Trovato aggiornamento per %@";

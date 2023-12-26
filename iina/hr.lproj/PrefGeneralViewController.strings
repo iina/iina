@@ -17,31 +17,31 @@
 "4Qe-7S-8xK.title" = "Opcije:";
 
 /* Class = "NSButtonCell"; title = "Enable \"Open Recent\" menu"; ObjectID = "55O-ik-ql6"; */
-"55O-ik-ql6.title" = "Enable \"Open Recent\" menu";
+"55O-ik-ql6.title" = "Aktiviraj izbornik „Otvori nedavne”";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "5RN-PV-pOZ"; */
 "5RN-PV-pOZ.title" = "Okvir";
 
 /* Class = "NSButtonCell"; title = "Minimized/un-minimized"; ObjectID = "5Y9-bX-K0f"; */
-"5Y9-bX-K0f.title" = "Minimized/un-minimized";
+"5Y9-bX-K0f.title" = "Sklopljeno/Rasklopljeno";
 
 /* Class = "NSTextFieldCell"; title = "Playlist:"; ObjectID = "6TV-DG-503"; */
-"6TV-DG-503.title" = "Popis za reprodukciju:";
+"6TV-DG-503.title" = "Playlista:";
 
 /* Class = "NSTextFieldCell"; title = "Requires restarting IINA to take effect."; ObjectID = "8kU-8g-VgX"; */
 "8kU-8g-VgX.title" = "Za primjenu se IINA mora ponovo pokrenuti.";
 
 /* Class = "NSButtonCell"; title = "Only in \"music mode\""; ObjectID = "AVe-9Z-RgQ"; */
-"AVe-9Z-RgQ.title" = "Samo u \"način glazbe\"";
+"AVe-9Z-RgQ.title" = "Samo u „Modus glazbe”";
 
 /* Class = "NSButtonCell"; title = "Track all played files in \"Open Recent\" menu"; ObjectID = "Ci8-j2-QS3"; */
-"Ci8-j2-QS3.title" = "Track all played files in \"Open Recent\" menu";
+"Ci8-j2-QS3.title" = "Prati sve reproducirane datoteke u izborniku „Otvori nedavne”";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "DZT-7n-S4M"; */
 "DZT-7n-S4M.title" = "Okvir";
 
 /* Class = "NSMenuItem"; title = "Daily"; ObjectID = "Ez8-qY-WAZ"; */
-"Ez8-qY-WAZ.title" = "Svaki dan";
+"Ez8-qY-WAZ.title" = "Dnevno";
 
 /* Class = "NSButtonCell"; title = "Pause"; ObjectID = "FbF-jJ-W5b"; */
 "FbF-jJ-W5b.title" = "Pauziraj";
@@ -53,16 +53,16 @@
 "Imf-6g-2Cd.title" = "Tjedno";
 
 /* Class = "NSButtonCell"; title = "Window becomes inactive/active"; ObjectID = "J8g-aS-W6e"; */
-"J8g-aS-W6e.title" = "Window becomes inactive/active";
+"J8g-aS-W6e.title" = "Prozor postaje neaktivan/aktivan";
 
 /* Class = "NSMenuItem"; title = "Do nothing"; ObjectID = "JfZ-D8-aF2"; */
 "JfZ-D8-aF2.title" = "Ne čini ništa";
 
 /* Class = "NSButtonCell"; title = "Black out other monitors while in full screen"; ObjectID = "KYi-0W-zOr"; */
-"KYi-0W-zOr.title" = "Black out other monitors while in full screen";
+"KYi-0W-zOr.title" = "Zatamni druge monitore kad je uključen cjeloekranski prikaz";
 
 /* Class = "NSButtonCell"; title = "Switch to \"music mode\" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
-"KfL-r7-Uav.title" = "Switch to \"music mode\" automatically when playing an audio file";
+"KfL-r7-Uav.title" = "Prebaci se automatski na „Modus glazbe” prilikom reprodukcije audio datoteke";
 
 /* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
 "Lac-Ol-g6E.title" = "Automatski reprodukciraj sljedeći medij";
@@ -86,10 +86,10 @@
 "REP-70-XOi.title" = "Mjesečno";
 
 /* Class = "NSButtonCell"; title = "Use legacy full screen"; ObjectID = "TvB-UM-FrS"; */
-"TvB-UM-FrS.title" = "Use legacy full screen";
+"TvB-UM-FrS.title" = "Koristi zastarjeli cijeloekranski prikaz";
 
 /* Class = "NSTextFieldCell"; title = "Otherwise only files that opened manually will show up in this menu."; ObjectID = "XFC-Lr-LmP"; */
-"XFC-Lr-LmP.title" = "Otherwise only files that opened manually will show up in this menu.";
+"XFC-Lr-LmP.title" = "U suprotnom će se u ovom izborniku prikazati samo datoteke koje su otvorene ručno.";
 
 /* Class = "NSButtonCell"; title = "Quit after all windows are closed"; ObjectID = "YLo-6E-tT7"; */
 "YLo-6E-tT7.title" = "Izlaz kada su zatvoren sve prozora";
@@ -101,7 +101,7 @@
 "f0j-Dn-cxt.title" = "Podrška za beta inačice";
 
 /* Class = "NSButtonCell"; title = "Pause upon leaving full screen"; ObjectID = "g2A-Kf-vct"; */
-"g2A-Kf-vct.title" = "Zaustavi pri prekidu cjeloekranskog prikaza";
+"g2A-Kf-vct.title" = "Zaustavi nakon isključivanja cjeloekranskog prikaza";
 
 /* Class = "NSTextFieldCell"; title = "At launch:"; ObjectID = "gqT-CB-Puw"; */
 "gqT-CB-Puw.title" = "Kada se otvori:";
@@ -125,7 +125,7 @@
 "kBI-Th-bBV.title" = "Prikaži pjevač i ime staze zvučni datoteka ako su dostupne";
 
 /* Class = "NSButtonCell"; title = "Play upon entering full screen"; ObjectID = "lOw-pu-Llm"; */
-"lOw-pu-Llm.title" = "Pokreni pri pokretanju cjeloekranskog prikaza";
+"lOw-pu-Llm.title" = "Pokreni nakon uključivanja cjeloekranskog prikaza";
 
 /* Class = "NSButtonCell"; title = "Include subtitles"; ObjectID = "lvA-Rc-Sh6"; */
 "lvA-Rc-Sh6.title" = "Uključi titlove";

@@ -35,40 +35,40 @@
 "rFu-rL-EJC.title" = "Disabled";
 
 /* Class = "NSTextFieldCell"; title = "Preferred audio device:"; ObjectID = "sLR-vV-xn2"; */
-"sLR-vV-xn2.title" = "Preferred audio device:";
+"sLR-vV-xn2.title" = "جهاز الصوت المفضل:";
 
 /* Class = "NSTextFieldCell"; title = "Audio:"; ObjectID = "sV5-dL-MUt"; */
-"sV5-dL-MUt.title" = "Audio:";
+"sV5-dL-MUt.title" = "الصوت:";
 
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "tAQ-oU-1AJ"; */
-"tAQ-oU-1AJ.title" = "Auto";
+"tAQ-oU-1AJ.title" = "تلقائي";
 
 /* Class = "NSTextFieldCell"; title = "Number of threads:"; ObjectID = "tO4-pw-2W9"; */
-"tO4-pw-2W9.title" = "Number of threads:";
+"tO4-pw-2W9.title" = "عدد المواضيع:";
 
 /* Class = "NSTextFieldCell"; title = "S/PDIF output:"; ObjectID = "up6-6A-4sn"; */
-"up6-6A-4sn.title" = "S/PDIF output:";
+"up6-6A-4sn.title" = "مخرجات S/PDIF:";
 
 /* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "wjt-O6-KbC"; */
-"wjt-O6-KbC.title" = "Preferred language:";
+"wjt-O6-KbC.title" = "اللغة المفضلة:";
 
 /* Class = "NSButtonCell"; title = "Load ICC profile"; ObjectID = "3g4-jW-uJd"; */
-"3g4-jW-uJd.title" = "Load ICC profile";
+"3g4-jW-uJd.title" = "تحميل ملف تعريف غرفة التجارة الدولية";
 
 /* Class = "NSTextFieldCell"; title = "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"; ObjectID = "M2M-of-gjd"; */
-"M2M-of-gjd.title" = "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)";
+"M2M-of-gjd.title" = "تحميل الملف الشخصي لغرفة التجارة الدولية للعرض الحالي واستخدامه لتحويل RGB الفيديو لشاشة الإخراج. (فقط لوضع حقوق السحب الخاصة)";
 
 /* Class = "NSButtonCell"; title = "Enable HDR support"; ObjectID = "R7Z-9c-vPJ"; */
-"R7Z-9c-vPJ.title" = "Enable HDR support";
+"R7Z-9c-vPJ.title" = "تمكين دعم DFS";
 
 /* Class = "NSTextFieldCell"; title = "Enable HDR mode by default when playing HDR videos."; ObjectID = "ZgQ-bc-yEE"; */
-"ZgQ-bc-yEE.title" = "Enable HDR mode by default when playing HDR videos.";
+"ZgQ-bc-yEE.title" = "تمكين وضع HDR بشكل افتراضي عند تشغيل مقاطع الفيديو HDR.";
 
 /* Class = "NSButtonCell"; title = "Enable tone mapping"; ObjectID = "a5Y-gU-JTj"; */
-"a5Y-gU-JTj.title" = "Enable tone mapping";
+"a5Y-gU-JTj.title" = "تفعيل تعيين الماوس";
 
 /* Class = "NSTextFieldCell"; title = "Enable tone mapping images onto the display"; ObjectID = "mNn-cb-IVw"; */
-"mNn-cb-IVw.title" = "Enable tone mapping images onto the display";
+"mNn-cb-IVw.title" = "تفعيل تعيين الماوس";
 
 /* Class = "NSTextFieldCell"; title = "Target peak:"; ObjectID = "xVk-OA-kOf"; */
 "xVk-OA-kOf.title" = "Target peak:";

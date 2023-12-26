@@ -202,10 +202,6 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     }
   }
 
-  private func updateLoopBtnImage() {
-    loopBtn.alternateImage = NSImage.init(named: loopBtn.state == .on ? "loop_file" : "loop_dark")
-  }
-    
   func updateLoopBtnStatus() {
     guard isViewLoaded else { return }
     let loopMode = player.getLoopMode()
@@ -214,7 +210,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     case .file: loopBtn.state = .on
     default:    loopBtn.state = .mixed
     }
-    updateLoopBtnImage()
+    loopBtn.alternateImage = NSImage.init(named: loopBtn.state == .on ? "loop_file" : "loop_dark")
   }
 
   // MARK: - Tab switching

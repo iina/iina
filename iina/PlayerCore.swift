@@ -844,7 +844,6 @@ class PlayerCore: NSObject {
     } else {
       setLoopMode(.playlist)
     }
-    sendOSD(.fileLoop(!(loopMode == .playlist)))
   }
 
   func toggleFileLoop() {
@@ -854,7 +853,6 @@ class PlayerCore: NSObject {
     } else {
       setLoopMode(.file)
     }
-    sendOSD(.fileLoop(!(loopMode == .file)))
   }
 
   func getLoopMode() -> LoopMode {
@@ -873,13 +871,15 @@ class PlayerCore: NSObject {
     case .playlist:
       mpv.setString(MPVOption.PlaybackControl.loopPlaylist, "inf")
       mpv.setString(MPVOption.PlaybackControl.loopFile, "no")
+      sendOSD(.playlistLoop)
     case .file:
       mpv.setString(MPVOption.PlaybackControl.loopFile, "inf")
+      sendOSD(.fileLoop)
     case .off:
       mpv.setString(MPVOption.PlaybackControl.loopPlaylist, "no")
       mpv.setString(MPVOption.PlaybackControl.loopFile, "no")
+      sendOSD(.noLoop)
     }
-    sendOSD(.playlistLoop(newMode != .off))
   }
 
   func nextLoopMode() {

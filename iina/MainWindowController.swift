@@ -2856,6 +2856,8 @@ class MainWindowController: PlayerWindowController {
       showSettingsSidebar()
     case .subTrack:
       quickSettingView.showSubChooseMenu(forView: sender, showLoadedSubs: true)
+    case .screenshot:
+      player.screenshot()
     }
   }
 

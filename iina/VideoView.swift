@@ -204,14 +204,27 @@ class VideoView: NSView {
 
   // MARK: Display link
 
-  func startDisplayLink() {
-    if link == nil {
-      checkResult(CVDisplayLinkCreateWithActiveCGDisplays(&link),
-                  "CVDisplayLinkCreateWithActiveCGDisplays")
-    }
+  /// Returns a [Core Video](https://developer.apple.com/documentation/corevideo) display link.
+  ///
+  /// If a display link has already been created then that link will be returned, otherwise a display link will be created and returned.
+  ///
+  /// - Note: Issue [#4520](https://github.com/iina/iina/issues/4520) reports a case where it appears the call to
+  ///[CVDisplayLinkCreateWithActiveCGDisplays](https://developer.apple.com/documentation/corevideo/1456863-cvdisplaylinkcreatewithactivecgd) is failing. In case that failure is
+  ///encountered again this method is careful to log any failure and include the [result code](https://developer.apple.com/documentation/corevideo/1572713-result_codes) in the alert displayed
+  /// by `Logger.fatal`.
+  /// - Returns: A [CVDisplayLink](https://developer.apple.com/documentation/corevideo/cvdisplaylink-k0k).
+  private func obtainDisplayLink() -> CVDisplayLink {
+    if let link = link { return link }
+    let result = CVDisplayLinkCreateWithActiveCGDisplays(&link)
+    checkResult(result, "CVDisplayLinkCreateWithActiveCGDisplays")
     guard let link = link else {
-      Logger.fatal("Cannot Create display link!")
+      Logger.fatal("Cannot create display link: \(codeToString(result)) (\(result))")
     }
+    return link
+  }
+
+  func startDisplayLink() {
+    let link = obtainDisplayLink()
     guard !CVDisplayLinkIsRunning(link) else { return }
     updateDisplayLink()
     checkResult(CVDisplayLinkSetOutputCallback(link, displayLinkCallback, mutableRawPointerOf(obj: self)),

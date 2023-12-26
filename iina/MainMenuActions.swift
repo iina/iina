@@ -156,7 +156,7 @@ extension MainMenuActionHandler {
     let index = sender.tag
     guard let chapter = player.playChapter(index) else {
       Logger.log("Cannot switch to chapter \(index) because it was not found! Will ignore request and reload chapters instead",
-                 level: .error, subsystem: player.subsystem)
+                 subsystem: player.subsystem)
       player.getChapters()
       return
     }

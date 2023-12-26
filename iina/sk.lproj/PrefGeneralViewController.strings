@@ -11,13 +11,13 @@
 "3XO-ks-TDg.title" = "PNG";
 
 /* Class = "NSButtonCell"; title = "Copy to clipboard"; ObjectID = "3gs-3w-rg6"; */
-"3gs-3w-rg6.title" = "Zkopírovať";
+"3gs-3w-rg6.title" = "Skopírovať do schránky";
 
 /* Class = "NSTextFieldCell"; title = "Options:"; ObjectID = "4Qe-7S-8xK"; */
 "4Qe-7S-8xK.title" = "Nastavenia:";
 
 /* Class = "NSButtonCell"; title = "Enable \"Open Recent\" menu"; ObjectID = "55O-ik-ql6"; */
-"55O-ik-ql6.title" = "Povoliť \"Otvoriť Nedávne\"";
+"55O-ik-ql6.title" = "Povoliť \"Otvoriť nedávne\"";
 
 /* Class = "NSBox"; title = "Box"; ObjectID = "5RN-PV-pOZ"; */
 "5RN-PV-pOZ.title" = "Box";
@@ -29,10 +29,10 @@
 "6TV-DG-503.title" = "Zoznam:";
 
 /* Class = "NSTextFieldCell"; title = "Requires restarting IINA to take effect."; ObjectID = "8kU-8g-VgX"; */
-"8kU-8g-VgX.title" = "Vyžaduje reštartovať IINA, aby to fungovalo.";
+"8kU-8g-VgX.title" = "Vyžaduje sa reštartovať IINA, pre správne fungovanie.";
 
 /* Class = "NSButtonCell"; title = "Only in \"music mode\""; ObjectID = "AVe-9Z-RgQ"; */
-"AVe-9Z-RgQ.title" = "Only in \"music mode\"";
+"AVe-9Z-RgQ.title" = "Iba v \"režime hudby\"";
 
 /* Class = "NSButtonCell"; title = "Track all played files in \"Open Recent\" menu"; ObjectID = "Ci8-j2-QS3"; */
 "Ci8-j2-QS3.title" = "Zaznamenať všetky prehrané súbory v \"Otvoriť Nedávne\"";
@@ -122,7 +122,7 @@
 "jeK-46-2BG.title" = "História:";
 
 /* Class = "NSButtonCell"; title = "Show artist and track name for audio files when avaliable"; ObjectID = "kBI-Th-bBV"; */
-"kBI-Th-bBV.title" = "Show artist and track name for audio files when avaliable";
+"kBI-Th-bBV.title" = "Zobraziť umelca a názov stopy pre audio súbory, ak sú dostupné";
 
 /* Class = "NSButtonCell"; title = "Play upon entering full screen"; ObjectID = "lOw-pu-Llm"; */
 "lOw-pu-Llm.title" = "Spustiť pri zobrazení na celú obrazovku";
@@ -146,7 +146,7 @@
 "uQR-Fx-oEm.title" = "Prispôsobenie:";
 
 /* Class = "NSButtonCell"; title = "Show previews after taking screenshots"; ObjectID = "xE7-Uu-19f"; */
-"xE7-Uu-19f.title" = "Show previews after taking screenshots";
+"xE7-Uu-19f.title" = "Zobraz náhľady po vytvorení snímok obrazovky";
 
 /* Class = "NSTextFieldCell"; title = "Pause/resume when:"; ObjectID = "xr2-rB-O0x"; */
 "xr2-rB-O0x.title" = "Pozastaviť/spustiť ak:";

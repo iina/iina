@@ -7,8 +7,8 @@
 */
 // Common
 
-"general.on" = "Вкл.";
-"general.off" = "Выкл.";
+"general.on" = "Вкл";
+"general.off" = "Выкл";
 "general.login" = "Войти";
 "general.logout" = "Выйти";
 "general.ok" = "OK";
@@ -22,11 +22,11 @@
 "guide.faq" = "Часто задаваемые вопросы (FAQ)";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.announcement" = "Вы используете %@ версию IINA";
+"initial.beta.desc" = "Снимите отметку \"Получать бета-обновления\" из \"Настройки\" - \"Основные\" и установите стабильную версию с нашего <a href=\"https://iina.io\"> официального сайта </a>.";
+"initial.nightly.desc" = "Ночные сборки не рекомендуются для ежедневного использования. На данный момент ночные сборки не поддерживают автоматическое обновление. Пожалуйста, загрузите новейшую сборку вручную с нашего <a href=\"https://nightly.iina.io\">веб-сайта ночных сборок</a>.";
+"initial.debug.desc" = "Отладочные сборки обычно не окончательно оптимизированы, поэтому не рекомендуются для ежедневного использования. Отладочные сборки не поддерживают автоматическое обновление.";
+"initial.bug_report" = "Сообщить через <a href=\"https://github.com/iina/iina/issues\">GitHub проблемы</a>.";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Буферизация… %d%%";
@@ -61,7 +61,7 @@
 "osd.sub_delay.later" = "Задержка субтитров: на %.2f с позже";
 "osd.sub_delay.earlier" = "Задержка субтитров: на %.2f с раньше";
 "osd.subtitle_pos" = "Позиция субтитров: %.1f";
-"osd.mute" = "Отключение";
+"osd.mute" = "Без звука";
 "osd.unmute" = "Включение звука";
 "osd.screenshot" = "Скриншот сохранен";
 "osd.abloop.a" = "Цикл: точка А";
@@ -87,6 +87,8 @@
 "osd.file_error" = "Ошибка при чтении файла";
 "osd.cannot_login" = "Не могу войти";
 "osd.canceled" = "Отменено";
+"osd.cannot_connect" = "Cannot connect";
+"osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Добавлен фильтр: %@";
 "osd.filter_removed" = "Фильтр удален";
 "osd.file_loop" = "Цикл файла: %@";
@@ -206,13 +208,14 @@
 "alert.sub_lang_not_set" = "Перед использованием OpenSubtitles выберите в настройках предпочитаемый язык субтитров. Сейчас используется английский.";
 "alert.sub.cannot_save_passwd" = "Не удалось сохранить пароль в Keychain: %@";
 "alert.sub.cannot_login" = "Не удалось выполнить вход. Проверьте имя пользователя, пароль и состояние сети.\n\n%@";
+"alert.sub.save_downloaded.title" = "Сохранить загруженные субтитры";
 
 "alert.set_default.title" = "Установка IINA приложением по умолчанию";
 "alert.set_default.message" = "IINA станет приложением по умолчанию для всех поддерживаемых типов файлов.";
 "alert.set_default.success" = "Завершено: %d успешно и %d неудачно.";
 
-"alert.add_watch.title" = "Добавить свойство для наблюдения";
-"alert.add_watch.message" = "Введите корректное свойство (property) из mpv для наблюдения за ним.";
+"alert.add_watch.title" = "Добавить свойство просмотра";
+"alert.add_watch.message" = "Введите корректное имя для свойства mpv.";
 
 "alert.jump_to.title" = "Перейти к";
 "alert.jump_to.message" = "Введите время, к которому хотите перейти. Например: 20:35";
@@ -262,6 +265,8 @@
 
 "alert.plugin_uninstall.title" = "Вы уверены, что хотите удалить %@?";
 "alert.plugin_uninstall.message" = "Плагин будет удален с диска.";
+"alert.plugin_reinstall.title" = "Плагин %@ уже существует";
+"alert.plugin_reinstall.message" = "Вы хотите переустановить плагин?";
 "alert.duplicated_plugin_id" = "Обнаружены одинаковые идентификаторы для двух или более плагинов: \"%@\". Это может привести к необычному поведению. Пожалуйста, найдите эти плагины в настройках и сообщите об этой проблеме их авторам. Вы также можете самостоятельно изменить идентификатор в файле info.json, если плагин установлен локально.";
 "alert.plugin_no_update" = "Обновления не найдены.";
 "alert.plugin_update_found.title" = "Найдены обновления для %@";

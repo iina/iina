@@ -87,6 +87,8 @@
 "osd.file_error" = "读取文件错误";
 "osd.cannot_login" = "无法登录";
 "osd.canceled" = "已取消";
+"osd.cannot_connect" = "Cannot connect";
+"osd.timed_out" = "Timed Out";
 "osd.filter_added" = "已添加滤镜: %@";
 "osd.filter_removed" = "已移除滤镜";
 "osd.file_loop" = "文件循环: %@";
@@ -114,7 +116,7 @@
 "preference.enable_adv_settings" = "启用高级设置";
 
 "menu.volume" = "音量: %d";
-"menu.volume_muted" = "音量：%d （缄默）";
+"menu.volume_muted" = "音量：%d （静音）";
 "menu.audio_delay" = "音频延迟: %.2f秒";
 "menu.sub_delay" = "字幕延迟: %.2f秒";
 "menu.fullscreen" = "进入全屏";
@@ -183,7 +185,7 @@
 "alert.config.empty_name" = "名称不能为空。";
 "alert.config.name_existing" = "此配置名称已存在。";
 "alert.config.file_existing.title" = "同名文件已存在";
-"alert.config.file_existing.message" = "选择「好」来覆盖，选择「取消」来在 Finder 中查看该文件。";
+"alert.config.file_existing.message" = "这不应该发生。选择确定来覆盖，选择取消则在访达中显示文件。";
 "alert.config.cannot_create" = "无法创建配置文件！\n%@";
 "alert.config.cannot_write" = "无法写入配置文件！";
 
@@ -200,12 +202,13 @@
 
 "alert.playlist.error_deleting" = "删除 %@ 时出错。";
 
-"alert.screenshot.error_taking" = "无法截图！";
+"alert.screenshot.error_taking" = "截图失败！";
 
 "alert.sub.no_selected" = "请先选择一个已下载字幕。";
 "alert.sub_lang_not_set" = "请在使用 opensubtitles 之前设定字幕语言. 此次将会使用英语 (eng) 。\n\n0.0.7 之后默认的字幕来源将会是 opensubtitles。如果您是中文用户，请在「偏好设置 > 字幕」中确认「字幕来源」为「shooter.cn」，以继续使用射手字幕。";
 "alert.sub.cannot_save_passwd" = "无法将密码保存到钥匙串：%@";
 "alert.sub.cannot_login" = "无法登录。请检查您的用户名、密码及网络状态。\n\n%@";
+"alert.sub.save_downloaded.title" = "保存下载的字幕";
 
 "alert.set_default.title" = "将 IINA 设为默认播放器";
 "alert.set_default.message" = "IINA 将会被关联至所有支持的文件格式。";
@@ -261,12 +264,14 @@
 "alert.assrt_token_invalid" = "你的射手网(伪) API token 格式错误。";
 
 "alert.plugin_uninstall.title" = "你确定要卸载 %@ 吗？";
-"alert.plugin_uninstall.message" = "插件将从您的硬盘中删除。";
+"alert.plugin_uninstall.message" = "插件将从您的磁盘中删除";
+"alert.plugin_reinstall.title" = "插件 %@ 已存在";
+"alert.plugin_reinstall.message" = "您希望重新安装此插件吗？";
 "alert.duplicated_plugin_id" = "检测到重复的插件标识符。两个或多个插件具有相同的标识符“%@”，这可能会导致异常行为。 请在首选项 - 插件中找到它们，并向插件作者报告。 如果插件是本地安装的，您也可以手动更改插件的 Info.json 文件中的标识符。";
 "alert.plugin_no_update" = "没有发现更新。";
 "alert.plugin_update_found.title" = "找到 %@ 的更新";
 "alert.plugin_update_found.message" = "最新版本是 %@。您有 %@。您想要更新吗？";
-"alert.plugin_permission" = "此插件需要以下权限，请在继续之前检视。";
+"alert.plugin_permission" = "此插件需要以下权限，请在继续之前检查。";
 "alert.plugin_permission_added" = "此次更新需要额外给予以下权限，请在继续之前检视。";
 
 "playlist.total_length" = "总计 %@";
@@ -280,7 +285,7 @@
 "pl_menu.delete_multi" = "将选中项移到废纸篓";
 "pl_menu.delete_after_play" = "播放后移到废纸篓";
 "pl_menu.delete_after_play_multi" = "播放后将选中项移到废纸篓";
-"pl_menu.show_in_finder" = "在访达中显示";
+"pl_menu.show_in_finder" = "在“访达”中显示";
 "pl_menu.add_file" = "添加文件…";
 "pl_menu.add_url" = "添加 URL…";
 "pl_menu.clear_playlist" = "清除播放列表";
@@ -349,7 +354,7 @@
 "permissions.show-alert.desc" = "此插件可以显示弹出提醒。";
 "permissions.video-overlay.name" = "添加视频叠加层";
 "permissions.video-overlay.desc" = "此插件可以在视频顶部渲染附加内容。";
-"permissions.file-system.name" = "访问文件";
+"permissions.file-system.name" = "访问文件系统";
 "permissions.file-system.desc" = "此插件可以在您的硬盘上读取或写入文件，包括敏感信息。 它也可以调用可能伤害您的计算机的其他程序。所以务必要验证插件来源。";
 
 "plugin.install" = "安装";
@@ -362,6 +367,6 @@
 "plugin.install_error.file_not_found" = "找不到软件包文件。";
 "plugin.install_error.cannot_download" = "下载插件失败。\n\n输出: %@\n";
 "plugin.install_error.cannot_unpackage" = "解包插件失败。\n\n输出: %@\n";
-"plugin.install_error.cannot_load" = "IINA无法加载此插件，可能是格式错误。";
+"plugin.install_error.cannot_load" = "IINA无法加载此插件，其格式可能是错误的";
 "plugin.check_for_updates" = "检查更新";
 "plugin.updating" = "下载更新中……";

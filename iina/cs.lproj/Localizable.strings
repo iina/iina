@@ -22,11 +22,11 @@
 "guide.faq" = "Nejčastější dotazy";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.announcement" = "Používáte verzi %@ aplikace IINA";
+"initial.beta.desc" = "Pokud se chcete vrátit k vydané verzi, zrušte výběr „Dostávat beta aktualizace“ v Nastavení > Obecné, a nainstalujte stabilní verzi z naší <a href=\"https://iina.io\">oficiální webové stránky</a>.";
+"initial.nightly.desc" = "Noční sestavení nejsou doporučena pro každodenní použití. V současné době nepodporují automatické aktualizace. Stáhněte si ručně novější sestavení z naší <a href=\"https://nightly.iina.io\">noční webové stránky</a>.";
+"initial.debug.desc" = "Ladící sestavení obvykle nejsou optimalizována pro výkon, nejsou tedy doporučena pro každodenní použití. Ladící sestavení nepodporují automatické aktualizace.";
+"initial.bug_report" = "Nahlaste na <a href=\"https://github.com/iina/iina/issues\">GitHub</a>.";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Načítá se… %d%%";
@@ -87,6 +87,8 @@
 "osd.file_error" = "Soubor nelze načíst";
 "osd.cannot_login" = "Nelze se přihlásit";
 "osd.canceled" = "Zrušeno";
+"osd.cannot_connect" = "Cannot connect";
+"osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Přidán filtr: %@";
 "osd.filter_removed" = "Filtr odebrán";
 "osd.file_loop" = "Opakování souboru: %@";
@@ -94,7 +96,7 @@
 
 "preference.title" = "Nastavení";
 "preference.general" = "Obecné";
-"preference.ui" = "Uživatelské rozhraní";
+"preference.ui" = "Vzhled";
 "preference.video_audio" = "Video/zvuk";
 "preference.subtitle" = "Titulky";
 "preference.network" = "Síť";
@@ -206,6 +208,7 @@
 "alert.sub_lang_not_set" = "Před používáním OpenSubtitles nastavte preferovaný jazyk titulků. Tentokrát bude použita angličtina.";
 "alert.sub.cannot_save_passwd" = "Nelze uložit vaše heslo do svazku klíčů: %@";
 "alert.sub.cannot_login" = "Nelze se přihlásit. Zkontrolujte prosím uživatelské jméno, heslo a připojení k síti.\n\n%@";
+"alert.sub.save_downloaded.title" = "Uložit stažené titulky";
 
 "alert.set_default.title" = "Nastavit IINA jako výchozí aplikaci";
 "alert.set_default.message" = "IINA bude nastavena jako výchozí aplikace pro všechny typy souborů, které podporuje.";
@@ -262,6 +265,8 @@
 
 "alert.plugin_uninstall.title" = "Opravdu chcete odinstalovat %@?";
 "alert.plugin_uninstall.message" = "Plug-in bude odstraněn z disku.";
+"alert.plugin_reinstall.title" = "Plug-in %@ již existuje";
+"alert.plugin_reinstall.message" = "Chcete přeinstalovat plug-in?";
 "alert.duplicated_plugin_id" = "Detekovány duplicitní identifikátory plug-inu. Dva nebo více plug-inů mají stejný identifikátor „%@“. To může způsobit neobvyklé chování. Najděte je prosím v Nastavení > Plug-iny a nahlaste toto jejich autorům. Pokud je plug-in nainstalován lokálně, můžete také ručně změnit jeho identifikátor v souboru Info.json.";
 "alert.plugin_no_update" = "Plug-in je aktuální.";
 "alert.plugin_update_found.title" = "Je dostupná nová verze %@";

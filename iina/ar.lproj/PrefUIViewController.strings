@@ -32,7 +32,7 @@
 "AE4-BD-wZi.title" = "% of screen";
 
 /* Class = "NSTextFieldCell"; title = "Window:"; ObjectID = "AmS-Sl-b2h"; */
-"AmS-Sl-b2h.title" = "Window:";
+"AmS-Sl-b2h.title" = "النافذة:";
 
 /* Class = "NSMenuItem"; title = "Width:"; ObjectID = "B1c-oO-fIs"; */
 "B1c-oO-fIs.title" = "Width:";
@@ -56,7 +56,7 @@
 "G8w-J7-1q1.title" = "Picture-in-\nPicture:";
 
 /* Class = "NSTextFieldCell"; title = "Window:"; ObjectID = "GKy-3g-4MB"; */
-"GKy-3g-4MB.title" = "Window:";
+"GKy-3g-4MB.title" = "النافذة:";
 
 /* Class = "NSTextFieldCell"; title = "side of the screen"; ObjectID = "GXO-iT-BIr"; */
 "GXO-iT-BIr.title" = "side of the screen";
@@ -102,6 +102,9 @@
 
 /* Class = "NSButtonCell"; title = "Always float on top while playing"; ObjectID = "SFX-ct-8MB"; */
 "SFX-ct-8MB.title" = "Always float on top while playing";
+
+/* Class = "NSButtonCell"; title = "Always show float on top status in the title bar"; ObjectID = "ih8-5a-PYY"; */
+"ih8-5a-PYY.title" = "Always show float on top status in the title bar";
 
 /* Class = "NSMenuItem"; title = "Speed"; ObjectID = "TWq-Xb-8Ee"; */
 "TWq-Xb-8Ee.title" = "السرعة";

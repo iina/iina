@@ -6,41 +6,41 @@
   Copyright © 2017 lhc. All rights reserved.
 */
 
-"cmd.ignore" = "Ignore";
-"cmd.seek" = "Seek";
-"cmd.revert-seek" = "Revert seek";
+"cmd.ignore" = "Hunsa";
+"cmd.seek" = "Leita";
+"cmd.revert-seek" = "Leita aftur";
 "cmd.set" = "Set";
 "cmd.cycle" = "Cycle";
-"cmd.cycle-values" = "Cycle in";
-"cmd.add" = "Change";
+"cmd.cycle-values" = "Keyra í";
+"cmd.add" = "Breyta";
 "cmd.multiply" = "Multiply";
 "cmd.frame-step" = "Next frame";
 "cmd.frame-back-step" = "Previous frame";
 "cmd.ab-loop" = "A-B loop";
-"cmd.sub-seek" = "Subtitle seek";
-"cmd.playlist-next" = "Next media";
+"cmd.sub-seek" = "Textaleit";
+"cmd.playlist-next" = "Næsta efni";
 "cmd.playlist-prev" = "Previous media";
 "cmd.playlist-move" = "Move playlist item";
 "cmd.playlist-clear" = "Clear playlist";
 "cmd.playlist-remove" = "Remove current";
 "cmd.playlist-shuffle" = "Shuffle";
 "cmd.write-watch-later-config" = "Record play history";
-"cmd.stop" = "Stop";
-"cmd.quit" = "Quit";
-"cmd.quit-watch-later" = "Quit (save progress)";
-"cmd.screenshot" = "Screenshot";
-"cmd.screenshot-to-file" = "Screenshot to file";
+"cmd.stop" = "Stöðva";
+"cmd.quit" = "Hætta";
+"cmd.quit-watch-later" = "Hætta (Vista framfarir)";
+"cmd.screenshot" = "Skjáskot";
+"cmd.screenshot-to-file" = "Skjáskot í skjal";
 "cmd.loadfile" = "Load file";
 "cmd.loadlist" = "Load playlist";
-"cmd.run" = "Run";
+"cmd.run" = "Keyra";
 
 "iina.flip" = "Snúa";
 "iina.mirror" = "Spegla";
 
 "iina.toggle-pip" = "Toggle Picture-in-Picture";
 "iina.toggle-music-mode" = "Toggle Music Mode";
-"iina.open-file" = "Open file";
-"iina.open-url" = "Open URL";
+"iina.open-file" = "Opna skrá";
+"iina.open-url" = "Opna URL";
 "iina.video-panel" = "Video panel";
 "iina.audio-panel" = "Audio panel";
 "iina.sub-panel" = "Subtitle panel";
@@ -57,47 +57,47 @@
 "iina.find-online-subs" = "Find online subtitles";
 "iina.save-downloaded-sub" = "Save downloaded subtitle";
 
-"yes" = "Yes";
-"no" = "No";
-"to" = "to";
-"by" = "by";
-"in" = "in";
-"add" = "increase";
-"minus" = "decrease";
-"forward" = "forward";
-"backward" = "backward";
-"seek-to" = "to";
+"yes" = "Já";
+"no" = "Nei";
+"to" = "til";
+"by" = "af";
+"in" = "í";
+"add" = "stækka";
+"minus" = "smækka";
+"forward" = "áfram";
+"backward" = "afturábak";
+"seek-to" = "til";
 
 "relative" = "s";
 "absolute" = "s";
 "absolute-percent" = "%";
 "relative-percent" = "%";
-"relative+exact" = "s (exact)";
-"relative-percent+exact" = "% (exact)";
+"relative+exact" = "s (nákvæmt)";
+"relative-percent+exact" = "% (nákvæmt)";
 "absolute+keyframe" = "s (keyframe)";
 "absolute-percent+keyframe" = "% (keyframe)";
 
-"opt.pause" = "Pause";
-"opt.speed" = "Speed";
+"opt.pause" = "Hlé";
+"opt.speed" = "Hraði";
 
 "opt.window-scale" = "Window scale";
 
 "opt.video" = "Video track";
 "opt.video-aspect" = "Video aspect";
-"opt.contrast" = "Contrast";
-"opt.brightness" = "Brightness";
-"opt.gamma" = "Gamma";
-"opt.saturation" = "Saturation";
+"opt.contrast" = "Skerpa";
+"opt.brightness" = "Birtustig";
+"opt.gamma" = "Litróf (gamma)";
+"opt.saturation" = "Mettun";
 "opt.deinterlace" = "Deinterlace";
 
 "opt.audio" = "Audio track";
-"opt.volume" = "Volume";
-"opt.mute" = "Mute";
+"opt.volume" = "Hljóðstyrkur";
+"opt.mute" = "Þagga";
 "opt.audio-delay" = "Audio delay";
 
 "opt.sub" = "Subtitle track";
 "opt.sub-delay" = "Subtitle delay";
-"opt.sub-pos" = "Subtitle position";
+"opt.sub-pos" = "Staðsetning texta";
 "opt.sub-scale" = "Subtitle scale";
 "opt.sub-visibility" = "Subtitle visibility";
 "opt.sub-ass-style-override" = "ASS style override";

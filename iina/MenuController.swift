@@ -465,6 +465,7 @@ class MenuController: NSObject, NSMenuDelegate {
     deinterlace.state = player.info.deinterlace ? .on : .off
     fullScreen.title = isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen
     pictureInPicture?.title = isInPIP ? Constants.String.exitPIP : Constants.String.pip
+    miniPlayer.title = player.isInMiniPlayer ? Constants.String.exitMiniPlayer : Constants.String.miniPlayer
     delogo.state = isDelogo ? .on : .off
   }
 

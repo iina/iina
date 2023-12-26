@@ -669,6 +669,7 @@ struct Preference {
     case fullScreen
     case musicMode
     case subTrack
+    case screenshot
 
     func image() -> NSImage {
       switch self {
@@ -678,6 +679,7 @@ struct Preference {
       case .fullScreen: return #imageLiteral(resourceName: "fullscreen")
       case .musicMode: return #imageLiteral(resourceName: "toggle-album-art")
       case .subTrack: return #imageLiteral(resourceName: "sub-track")
+      case .screenshot: return #imageLiteral(resourceName: "screenshot")
       }
     }
 
@@ -690,6 +692,7 @@ struct Preference {
       case .fullScreen: key = "full_screen"
       case .musicMode: key = "music_mode"
       case .subTrack: key = "sub_track"
+      case .screenshot: key = "screenshot"
       }
       return NSLocalizedString("osc_toolbar.\(key)", comment: key)
     }

@@ -1086,7 +1086,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="420" height="201"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
-                                                            <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" tableStyle="fullWidth" columnReordering="NO" multipleSelection="NO" typeSelect="NO" autosaveName="InspectorWatchTable" rowSizeStyle="automatic" headerView="pnK-fx-7et" viewBased="YES" floatsGroupRows="NO" id="oUp-DO-OKl" userLabel="WatchTable Table View">
+                                                            <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" tableStyle="fullWidth" columnReordering="NO" typeSelect="NO" autosaveName="InspectorWatchTable" rowSizeStyle="automatic" headerView="pnK-fx-7et" viewBased="YES" floatsGroupRows="NO" id="oUp-DO-OKl" userLabel="WatchTable Table View">
                                                                 <rect key="frame" x="0.0" y="0.0" width="420" height="173"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <size key="intercellSpacing" width="0.0" height="2"/>

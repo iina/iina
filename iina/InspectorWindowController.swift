@@ -351,7 +351,7 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
   }
 
   func tableViewSelectionDidChange(_ notification: Notification) {
-    deleteButton.isEnabled = (watchTableView.selectedRow != -1)
+    deleteButton.isEnabled = !watchTableView.selectedRowIndexes.isEmpty
   }
 
   func resizeTableColumns(forTableWidth tableWidth: CGFloat) {
@@ -410,13 +410,20 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
   }
 
   @IBAction func removeWatchAction(_ sender: AnyObject) {
-    let rowIndex = watchTableView.selectedRow
-    guard rowIndex >= 0 else { return }
+    let rowIndexes = watchTableView.selectedRowIndexes
+    guard !rowIndexes.isEmpty else { return }
 
-    watchProperties.remove(at: rowIndex)
+    let watchPropertiesOld = watchProperties
+    var watchPropertiesNew: [String] = []
+    for (index, property) in watchPropertiesOld.enumerated() {
+      if !rowIndexes.contains(index) {
+        watchPropertiesNew.append(property)
+      }
+    }
+    watchProperties = watchPropertiesNew
     saveWatchList()
 
-    watchTableView.removeRows(at: IndexSet(integer: rowIndex), withAnimation: AccessibilityPreferences.motionReductionEnabled ? [] : .slideUp)
+    watchTableView.removeRows(at: rowIndexes, withAnimation: AccessibilityPreferences.motionReductionEnabled ? [] : .slideUp)
     tableHeightConstraint?.constant = computeMinTableHeight()
     watchTableContainerView.layout()
   }

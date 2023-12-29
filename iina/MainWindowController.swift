@@ -1056,7 +1056,7 @@ class MainWindowController: PlayerWindowController {
         timePreviewWhenSeek.isHidden = false
         thumbnailPeekView.isHidden = !player.info.thumbnailsReady
       }
-      refreshSeekTimeAndThumnail(from: event)
+      refreshSeekTimeAndThumbnail(from: event)
     }
   }
 
@@ -1077,7 +1077,7 @@ class MainWindowController: PlayerWindowController {
       // slider
       isMouseInSlider = false
       timePreviewWhenSeek.isHidden = true
-      refreshSeekTimeAndThumnail(from: event)
+      refreshSeekTimeAndThumbnail(from: event)
       thumbnailPeekView.isHidden = true
     }
   }
@@ -1085,7 +1085,7 @@ class MainWindowController: PlayerWindowController {
   override func mouseMoved(with event: NSEvent) {
     guard !isInInteractiveMode else { return }
 
-    refreshSeekTimeAndThumnail(from: event)
+    refreshSeekTimeAndThumbnail(from: event)
     if isMouseInWindow {
       showUI()
     }
@@ -2262,11 +2262,11 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
-  private func refreshSeekTimeAndThumnail(from event: NSEvent) {
+  private func refreshSeekTimeAndThumbnail(from event: NSEvent) {
     let isCoveredByOSD = !osdVisualEffectView.isHidden && isMouseEvent(event, inAnyOf: [osdVisualEffectView])
-    let mousePos = playSlider.convert(event.locationInWindow, from: nil)
-    if isMouseInSlider && !isCoveredByOSD {
-      updateTimeLabel(mousePos.x, originalPos: event.locationInWindow)
+    let isCoveredBySidebar = !sideBarView.isHidden && isMouseEvent(event, inAnyOf: [sideBarView])
+    if isMouseInSlider, !isCoveredByOSD, !isCoveredBySidebar {
+      updateTimeLabel(event.locationInWindow)
     } else {
       thumbnailPeekView.isHidden = true
     }
@@ -2297,7 +2297,8 @@ class MainWindowController: PlayerWindowController {
   }
 
   /** Display time label when mouse over slider */
-  private func updateTimeLabel(_ mouseXPos: CGFloat, originalPos: NSPoint) {
+  private func updateTimeLabel(_ posInWindow: NSPoint) {
+    let mouseXPos = playSlider.convert(posInWindow, from: nil).x
     let timeLabelXPos = round(mouseXPos + playSlider.frame.origin.x - timePreviewWhenSeek.frame.width / 2)
     let timeLabelYPos = playSlider.frame.origin.y + playSlider.frame.height
     timePreviewWhenSeek.frame.origin = NSPoint(x: timeLabelXPos, y: timeLabelYPos)
@@ -2320,7 +2321,7 @@ class MainWindowController: PlayerWindowController {
         let showAbove = canShowThumbnailAbove(timnePreviewYPos: timePreviewFrameInWindow.y, thumbnailHeight: height)
         let yPos = showAbove ? timePreviewFrameInWindow.y + timePreviewWhenSeek.frame.height : sliderFrameInWindow.y - height
         thumbnailPeekView.frame.size = NSSize(width: 120, height: height)
-        thumbnailPeekView.frame.origin = NSPoint(x: round(originalPos.x - thumbnailPeekView.frame.width / 2), y: yPos)
+        thumbnailPeekView.frame.origin = NSPoint(x: round(posInWindow.x - thumbnailPeekView.frame.width / 2), y: yPos)
       } else {
         thumbnailPeekView.isHidden = true
       }

@@ -647,7 +647,18 @@ class PlayerCore: NSObject {
     info.isPaused ? resume() : pause()
   }
 
+  /// Pause playback.
+  ///
+  /// - Important: Setting the `pause` property will cause `mpv` to emit a `MPV_EVENT_PROPERTY_CHANGE` event. The
+  ///     event will still be emitted even if the `mpv` core is idle. If the setting `Pause when machine goes to sleep` is
+  ///     enabled then `PlayerWindowController` will call this method in response to a
+  ///     `NSWorkspace.willSleepNotification`. That happens even if the window is closed and the player is idle. In
+  ///     response the event handler in `MPVController` will call `VideoView.displayIdle`. The suspicion is that calling this
+  ///     method results in a call to `CVDisplayLinkCreateWithActiveCGDisplays` which fails because the display is
+  ///     asleep. Thus `setFlag` **must not** be called if the `mpv` core is idle or stopping. See issue
+  ///     [#4520](https://github.com/iina/iina/issues/4520)
   func pause() {
+    guard !info.isIdle, !isStopping, !isStopped, !isShuttingDown, !isShutdown else { return }
     mpv.setFlag(MPVOption.PlaybackControl.pause, true)
   }
 

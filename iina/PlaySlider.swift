@@ -57,12 +57,28 @@ final class PlaySlider: NSSlider {
 
   // MARK:- Drawing
 
+  /// Draw the slider.
+  ///
+  /// The [NSSlider](https://developer.apple.com/documentation/appkit/nsslider) method is being overridden
+  /// for two reasons.
+  ///
+  /// With the onscreen controller hidden and a movie playing spindumps showed time being spent drawing the slider even though it
+  /// was not visible. Apparently `NSSlider.draw` is not calling
+  /// [hiddenOrHasHiddenAncestor](https://developer.apple.com/documentation/appkit/nsview/1483473-hiddenorhashiddenancestor)
+  /// to see if drawing can be avoided.  This was noticed under macOS Monterey.  Unknown if Apple addressed this in later macOS
+  /// releases.
+  ///
+  /// The loop knobs are added as subviews to the slider. That should have resulted in the `PlaySliderLoopKnob.draw` method
+  /// being called when the slider was being drawn. Prior to macOS Sonoma that did not occur. The assumption is that the
+  /// [NSSlider](https://developer.apple.com/documentation/appkit/nsslider) `draw` method was not calling
+  /// `super.draw` and that has now been corrected. As a workaround on earlier versions of macOS the loop knob `draw` method
+  /// is called directly.
   override func draw(_ dirtyRect: NSRect) {
-    // With the onscreen controller hidden and a movie playing spindumps showed time being spent
-    // drawing the slider even though it was not visible. Apparently NSSlider is missing the
-    // following check.
     guard !isHiddenOrHasHiddenAncestor else { return }
     super.draw(dirtyRect)
+    abLoopA.needsDisplay = true
+    abLoopB.needsDisplay = true
+    guard #unavailable(macOS 14) else { return }
     abLoopA.draw(dirtyRect)
     abLoopB.draw(dirtyRect)
   }

@@ -132,13 +132,24 @@ final class PlaySliderLoopKnob: NSView {
     }
   }
 
+  /// Draw the knob.
+  ///
+  /// If IINA is running under macOS Ventura or earlier this method is called directly by `PlaySlider.draw`. This workaround
+  /// requires this method to use the knob position within the slider as the x-coordinate when drawing. In macOS Sonoma
+  /// [NSSlider](https://developer.apple.com/documentation/appkit/nsslider) changed and the workaround is no
+  /// longer required and the drawing origin is relative to this view's frame. See `PlaySlider.draw` for more details.
   override func draw(_ dirtyRect: NSRect) {
     guard !isHiddenOrHasHiddenAncestor else { return }
     let rect = knobRect()
     // The frame is taller than the drawn knob. Adjust the y coordinate accordingly.
     let adjustedY = rect.origin.y + (rect.height - knobHeight) / 2
-    // Round the X position for cleaner drawing
-    let drawing = NSMakeRect(round(rect.origin.x), adjustedY, cell.knobWidth, knobHeight)
+    let drawing: NSRect
+    if #available(macOS 14, *) {
+      drawing = NSMakeRect(0, adjustedY, cell.knobWidth, knobHeight)
+    } else {
+      // Round the X position for cleaner drawing
+      drawing = NSMakeRect(round(rect.origin.x), adjustedY, cell.knobWidth, knobHeight)
+    }
     let path = NSBezierPath(roundedRect: drawing, xRadius: cell.knobRadius, yRadius: cell.knobRadius)
     knobColor().setFill()
     path.fill()

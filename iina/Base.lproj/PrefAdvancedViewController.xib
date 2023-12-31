@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22154" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -24,7 +24,7 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="52"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M2l-at-Cbp">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M2l-at-Cbp">
                     <rect key="frame" x="0.0" y="0.0" width="336" height="14"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="The following settings will require restarting IINA to take effect." id="HMa-Vz-EUk">
                         <font key="font" metaFont="message" size="11"/>
@@ -70,7 +70,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="shz-CZ-kqM">
-                    <rect key="frame" x="139" y="1" width="147" height="32"/>
+                    <rect key="frame" x="140" y="1" width="148" height="32"/>
                     <buttonCell key="cell" type="push" title="Open log directory" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JDA-g3-RNX">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -81,7 +81,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XBa-zS-RVU">
-                    <rect key="frame" x="-6" y="1" width="147" height="32"/>
+                    <rect key="frame" x="-6" y="1" width="148" height="32"/>
                     <buttonCell key="cell" type="push" title="Show log viewer" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Owx-92-Ogg">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -91,7 +91,7 @@
                         <binding destination="nyg-fH-Pug" name="enabled" keyPath="values.enableAdvancedSettings" id="LGK-Uc-oPe"/>
                     </connections>
                 </button>
-                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="upp-mq-cio">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="upp-mq-cio">
                     <rect key="frame" x="-1" y="75" width="62" height="16"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Log level:" id="nFf-vh-bNd">
                         <font key="font" metaFont="system"/>
@@ -230,7 +230,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </tableHeaderView>
                 </scrollView>
-                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wWR-n2-u2E">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wWR-n2-u2E">
                     <rect key="frame" x="-2" y="274" width="143" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Additional mpv options" id="6F6-Y7-8oR">
                         <font key="font" metaFont="system"/>
@@ -246,14 +246,14 @@
                         <subviews>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="RY9-rr-eGr">
                                 <rect key="frame" x="0.0" y="-2" width="20" height="24"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSAddTemplate" imagePosition="only" alignment="center" inset="2" id="un3-1k-6jk">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="XfO-xd-O4d"/>
                                     <constraint firstAttribute="width" secondItem="RY9-rr-eGr" secondAttribute="height" multiplier="1:1" id="zHQ-Qh-S3o"/>
                                 </constraints>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSAddTemplate" imagePosition="only" alignment="center" inset="2" id="un3-1k-6jk">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
                                 <connections>
                                     <action selector="addOptionBtnAction:" target="-2" id="NIn-fH-EeK"/>
                                     <binding destination="nyg-fH-Pug" name="enabled" keyPath="values.enableAdvancedSettings" id="xWE-hY-lvV"/>
@@ -261,13 +261,13 @@
                             </button>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="EU2-5a-Lpj">
                                 <rect key="frame" x="20" y="3" width="20" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="EU2-5a-Lpj" secondAttribute="height" multiplier="1:1" id="Rtd-NO-VuP"/>
+                                </constraints>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRemoveTemplate" imagePosition="only" alignment="center" inset="2" id="fPD-uF-WvG">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="EU2-5a-Lpj" secondAttribute="height" multiplier="1:1" id="Rtd-NO-VuP"/>
-                                </constraints>
                                 <connections>
                                     <action selector="removeOptionBtnAction:" target="-2" id="5ff-xC-dEc"/>
                                     <binding destination="nyg-fH-Pug" name="enabled" keyPath="values.enableAdvancedSettings" id="LaY-r1-ff3"/>
@@ -288,13 +288,13 @@
                 </box>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="Gf8-9e-wu7">
                     <rect key="frame" x="-1" y="36" width="153" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="nel-hG-EmW"/>
+                    </constraints>
                     <buttonCell key="cell" type="check" title="Use config directory:" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="ehL-8Y-G8h">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="14" id="nel-hG-EmW"/>
-                    </constraints>
                     <connections>
                         <binding destination="nyg-fH-Pug" name="enabled" keyPath="values.enableAdvancedSettings" id="Tkk-E5-xQi"/>
                         <binding destination="nyg-fH-Pug" name="value" keyPath="values.useUserDefinedConfDir" id="RwC-LQ-wlP"/>
@@ -319,7 +319,7 @@
                         <binding destination="nyg-fH-Pug" name="enabled" keyPath="values.useUserDefinedConfDir" id="TqF-Pi-es4"/>
                     </connections>
                 </button>
-                <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jsf-pn-h6s">
+                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jsf-pn-h6s">
                     <rect key="frame" x="19" y="8" width="461" height="21"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="~/.config/mpv/" drawsBackground="YES" id="gWN-ya-xRD">
                         <font key="font" metaFont="system"/>
@@ -344,7 +344,7 @@
                         </binding>
                     </connections>
                 </textField>
-                <textField identifier="SectionTitleSettings" hidden="YES" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dfL-W8-kmJ">
+                <textField identifier="SectionTitleSettings" hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dfL-W8-kmJ">
                     <rect key="frame" x="427" y="306" width="55" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Settings" id="BZq-Iy-OSr">
                         <font key="font" metaFont="system"/>

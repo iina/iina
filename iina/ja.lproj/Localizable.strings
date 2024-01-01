@@ -123,6 +123,8 @@
 "menu.exit_fullscreen" = "フルスクリーンを解除";
 "menu.pip" = "ピクチャー・イン・ピクチャーを使用";
 "menu.exit_pip" = "ピクチャー・イン・ピクチャーを終了";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "一時停止";
 "menu.resume" = "再生";
 "menu.speed" = "再生速度: %.2f倍";
@@ -175,7 +177,7 @@
 "alert.error_open" = "ファイルもしくはURLが開けません！";
 "alert.error_finding_file" = "%@ というファイルは見つかりません！";
 "alert.error_loading_script" = "次のスクリプトは読み込めません！%@";
-"alert.error_saving_file" = "%@の保存時にエラーが発生しました: %@";
+"alert.error_saving_file" = "Error occurred when saving %@: %@";
 "alert.error_deleting_file" = "ファイルを削除できません。";
 
 "alert.config.new.title" = "設定の新規作成";
@@ -189,7 +191,7 @@
 "alert.config.cannot_create" = "設定ファイルが作成できません！\n%@";
 "alert.config.cannot_write" = "設定ファイルに書き込めません！";
 
-"alert.filter.incorrect" = "フィルタの設定時にエラーが発生しました。パラメータの形式を確認してください。";
+"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "フィルターの新規作成";
 "alert.add_filter.message" = "mpvの vf または af オプションの形式でフィルター名を入力してください。";
 
@@ -314,6 +316,7 @@
 "osc_toolbar.full_screen" = "フルスクリーン切り替え";
 "osc_toolbar.music_mode" = "ミュージックモード切り替え";
 "osc_toolbar.sub_track" = "字幕トラックを選択";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "アルバムアートの切り替え";
 "mini_player.loop" = "リピート";
@@ -346,22 +349,22 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "ネットワークリクエスト";
-"permissions.network-request.desc" = "このプラグインは、これらのウェブサイトにデータを通信（アップロード含む）することができます：";
+"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
 "permissions.network-request.any_site" = "任意のサイト";
 "permissions.show-osd.name" = "OSDを表示";
 "permissions.show-osd.desc" = "このプラグインは OSD (オンスクリーン機能) メッセージを表示できます。";
 "permissions.show-alert.name" = "アラートを表示";
 "permissions.show-alert.desc" = "このプラグインはポップアップアラートを表示できます。";
-"permissions.video-overlay.name" = "動画にオーバーレイを追加";
+"permissions.video-overlay.name" = "Add overlays on videos";
 "permissions.video-overlay.desc" = "このプラグインは、ビデオに追加のコンテンツを表示することができます。";
 "permissions.file-system.name" = "ファイルシステムにアクセス";
-"permissions.file-system.desc" = "このプラグインは、機密情報を含むディスク上のファイルを読み書きすることができます。 また、お使いのコンピュータに害を与える可能性がある他のプログラムやアプリケーションを呼び出すことができます。続行する前にソースを十分に確認してください.";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "インストール";
 "plugin.installed" = "インストール済";
 "plugin.not_installed" = "インストールされていません";
 "plugin.local" = "ローカルにインストールされました";
-"alert.plugin.install_error" = "インストール中にエラーが発生しました: %@";
+"alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "URLが無効です。";
 "plugin.install_error.invalid_url" = "URLが無効です。";
 "plugin.install_error.file_not_found" = "パッケージファイルが見つかりません。";

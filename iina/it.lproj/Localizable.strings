@@ -123,6 +123,8 @@
 "menu.exit_fullscreen" = "Disattiva modalità a tutto schermo";
 "menu.pip" = "Attiva Picture-in-Picture";
 "menu.exit_pip" = "Termina Picture-in-Picture";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pausa";
 "menu.resume" = "Riprendi";
 "menu.speed" = "Velocità: %.2fx";
@@ -175,7 +177,7 @@
 "alert.error_open" = "Impossibile aprire il file o lo stream!";
 "alert.error_finding_file" = "Impossibile trovare il %@ file!";
 "alert.error_loading_script" = "Impossibile caricare lo script %@!";
-"alert.error_saving_file" = "Si è verificato un errore durante il salvataggio %@: %@";
+"alert.error_saving_file" = "Error occurred when saving %@: %@";
 "alert.error_deleting_file" = "Impossibile eliminare il file.";
 
 "alert.config.new.title" = "Nuova configurazione di input";
@@ -189,7 +191,7 @@
 "alert.config.cannot_create" = "Impossibile creare il file di configurazione!\n%@";
 "alert.config.cannot_write" = "Impossibile scrivere il file di configurazione!";
 
-"alert.filter.incorrect" = "Si è verificato un errore durante l'impostazione dei filtri. Verifica il formato dei parametri.";
+"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "Nuovo filtro";
 "alert.add_filter.message" = "Inserisci una stringa di filtro nel formato dei comandi vf o af di mpv.";
 
@@ -314,6 +316,7 @@
 "osc_toolbar.full_screen" = "Inverti a tutto schermo";
 "osc_toolbar.music_mode" = "Attiva la modalità musicale";
 "osc_toolbar.sub_track" = "Scegli la traccia dei sottotitoli";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "Attiva/Disattiva copertina album";
 "mini_player.loop" = "Ripeti";
@@ -346,22 +349,22 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Richiesta di rete";
-"permissions.network-request.desc" = "Questo plugin può fare richieste o inviare dati ai seguenti siti:";
+"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
 "permissions.network-request.any_site" = "Qualsiasi sito";
 "permissions.show-osd.name" = "Mostra OSD";
 "permissions.show-osd.desc" = "Questo plugin può mostrare messaggi OSD (On Screen Display).";
 "permissions.show-alert.name" = "Mostra avvisi";
 "permissions.show-alert.desc" = "Questo plugin può mostrare avvisi pop-up.";
-"permissions.video-overlay.name" = "Aggiungi overlay ai video";
+"permissions.video-overlay.name" = "Add overlays on videos";
 "permissions.video-overlay.desc" = "Questo plugin può effettuare il render di contenuti aggiuntivi sopra il video.";
 "permissions.file-system.name" = "Accedi ai file di sistema";
-"permissions.file-system.desc" = "Questo plugin può leggere o scrivere file sul disco, comprese le informazioni sensibili. Può anche utilizzare altri programmi o applicazioni che possono danneggiare il computer. Assicurati di verificare la sua provenienza prima di procedere.";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Installa";
 "plugin.installed" = "Installato";
 "plugin.not_installed" = "Non installato";
 "plugin.local" = "Installato localmente";
-"alert.plugin.install_error" = "Si è verificato un errore durante l'installazione: %@";
+"alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "L'URL non è valido.";
 "plugin.install_error.invalid_url" = "L'URL non è valido.";
 "plugin.install_error.file_not_found" = "Impossibile trovare il file del pacchetto.";

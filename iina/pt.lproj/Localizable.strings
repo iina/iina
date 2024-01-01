@@ -123,6 +123,8 @@
 "menu.exit_fullscreen" = "Sair do Ecrã Completo";
 "menu.pip" = "Usar Picture in Picture";
 "menu.exit_pip" = "Sair do Picture in Picture";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pausa";
 "menu.resume" = "Retomar";
 "menu.speed" = "Velocidade: %.2fx";
@@ -175,7 +177,7 @@
 "alert.error_open" = "Impossível abrir ficheiro ou stream!";
 "alert.error_finding_file" = "Impossível encontrar o ficheiro %@!";
 "alert.error_loading_script" = "Impossível carregar o script %@!";
-"alert.error_saving_file" = "Ocorreu um erro ao salvar %@: %@";
+"alert.error_saving_file" = "Error occurred when saving %@: %@";
 "alert.error_deleting_file" = "Não foi possível apagar o ficheiro.";
 
 "alert.config.new.title" = "Nova configuração";
@@ -189,7 +191,7 @@
 "alert.config.cannot_create" = "Não foi possível criar um ficheiro de configuração!\n%@";
 "alert.config.cannot_write" = "Não foi possível escrever no arquivo de configuração!";
 
-"alert.filter.incorrect" = "Ocorreu um erro ao configurar os filtros. Por favor, verifique o formato de seu parâmetro.";
+"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "Novo Filtro";
 "alert.add_filter.message" = "Por favor, digite uma string de filtro no formato de comando vf ou af de mpv.";
 
@@ -314,6 +316,7 @@
 "osc_toolbar.full_screen" = "Alternar ecrã completo";
 "osc_toolbar.music_mode" = "Entrar no modo música";
 "osc_toolbar.sub_track" = "Selecionar faixa de legenda";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "Alternar arte do álbum";
 "mini_player.loop" = "Repetir";
@@ -346,22 +349,22 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Network Request";
-"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
+"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
 "permissions.network-request.any_site" = "Any site";
 "permissions.show-osd.name" = "Show OSD";
 "permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
 "permissions.show-alert.name" = "Show Alerts";
 "permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
-"permissions.video-overlay.name" = "Add overlay on videos";
+"permissions.video-overlay.name" = "Add overlays on videos";
 "permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
 "permissions.file-system.name" = "Access the file system";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Instalar";
 "plugin.installed" = "Instalado";
 "plugin.not_installed" = "Não instalado";
 "plugin.local" = "Instalado localmente";
-"alert.plugin.install_error" = "Ocorreu um erro durante a instalação: %@";
+"alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "O URL é inválido.";
 "plugin.install_error.invalid_url" = "O URL é inválido.";
 "plugin.install_error.file_not_found" = "Cannot find the package file.";

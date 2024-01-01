@@ -123,6 +123,8 @@
 "menu.exit_fullscreen" = "Ukončiť režim celej obrazovky";
 "menu.pip" = "Zapnúť Picture-in-Picture";
 "menu.exit_pip" = "Vypnúť Picture-in-Picture";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pozastaviť";
 "menu.resume" = "Pokračovať";
 "menu.speed" = "Rýchlosť: %.2fx";
@@ -175,7 +177,7 @@
 "alert.error_open" = "Nemožno otvoriť súbor alebo stream!";
 "alert.error_finding_file" = "Nemožno nájst súbor %@!";
 "alert.error_loading_script" = "Nemožno načítať skript %@!";
-"alert.error_saving_file" = "Nastala chyba pri ukladaní %@: %@";
+"alert.error_saving_file" = "Error occurred when saving %@: %@";
 "alert.error_deleting_file" = "Súbor nemožno vymazať.";
 
 "alert.config.new.title" = "Nová konfigurácia vstupu";
@@ -189,7 +191,7 @@
 "alert.config.cannot_create" = "Nedá sa vytvoriť konfiguračný súbor!\n%@";
 "alert.config.cannot_write" = "Nedá sa zapisovať do konfiguračného súboru!";
 
-"alert.filter.incorrect" = "Vyskytla sa chyba pri nastavovaní filtra. Skontrolujte formát parametra.";
+"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "Nový filter";
 "alert.add_filter.message" = "Zadajte reťazec filtru vo formáte mpv príkazu vf alebo af.";
 
@@ -314,6 +316,7 @@
 "osc_toolbar.full_screen" = "Prepnúť zobrazenie na celú obrazovku";
 "osc_toolbar.music_mode" = "Zapnúť režim pre hudbu";
 "osc_toolbar.sub_track" = "Vyber titulky";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "Prepnúť obal albumu";
 "mini_player.loop" = "Opakovať";
@@ -346,22 +349,22 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Sieťová Požiadavka";
-"permissions.network-request.desc" = "Tento plugin môže prijímať alebo odosielať dáta na tieto webstránky:";
+"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
 "permissions.network-request.any_site" = "Akákoľvek stránka";
 "permissions.show-osd.name" = "Zozbraziť OSD";
 "permissions.show-osd.desc" = "Tento plugin môže zobraziť OSD (On Screen Display = Displej Na Obrazovku) správy.";
 "permissions.show-alert.name" = "Zobraziť upozornenie";
 "permissions.show-alert.desc" = "Tento plug-in môže zobrazovať vyskakovacie upozornenie.";
-"permissions.video-overlay.name" = "Pridať prekrytie cez video";
+"permissions.video-overlay.name" = "Add overlays on videos";
 "permissions.video-overlay.desc" = "Tento plug-in môže vykresľovať cez video ďalší obsah.";
 "permissions.file-system.name" = "Prístup k súborovému systému";
-"permissions.file-system.desc" = "Tento plug-in môže čítať alebo zapisovať súbory na disk, vrátane citlivých informácií. Môže tiež využívať iné programy alebo aplikácie, ktoré môžu poškodiť váš počítač. Uistite sa teda, že ste overili jeho zdroj.";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Inštalovať";
 "plugin.installed" = "Nainštalované";
 "plugin.not_installed" = "Nenainštalované";
 "plugin.local" = "Nainštalované lokálne";
-"alert.plugin.install_error" = "Pri inštalácii sa vyskytla chyba: %@";
+"alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "URL je neplatná.";
 "plugin.install_error.invalid_url" = "URL je neplatná.";
 "plugin.install_error.file_not_found" = "Súbor balíčka sa nedá nájsť.";

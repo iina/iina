@@ -123,6 +123,8 @@
 "menu.exit_fullscreen" = "Ieși din ecran complet";
 "menu.pip" = "Afișează în Picture-in-Picture";
 "menu.exit_pip" = "Ieși din Picture-in-Picture";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pauză";
 "menu.resume" = "Reia";
 "menu.speed" = "Viteză: %.2fx";
@@ -175,7 +177,7 @@
 "alert.error_open" = "Fișierul sau stream-ul nu poate fi deschis!";
 "alert.error_finding_file" = "Fișierul %@ nu poate fi găsit!";
 "alert.error_loading_script" = "Scriptul %@ nu poate fi încărcat!";
-"alert.error_saving_file" = "A apărut o eroare la salvarea %@: %@";
+"alert.error_saving_file" = "Error occurred when saving %@: %@";
 "alert.error_deleting_file" = "Fișierul nu poate fi șters.";
 
 "alert.config.new.title" = "Configurație nouă de intrare";
@@ -189,7 +191,7 @@
 "alert.config.cannot_create" = "Nu se poate crea fișierul de configurare!\n%@";
 "alert.config.cannot_write" = "Nu se poate scrie în fișierul de configurare!";
 
-"alert.filter.incorrect" = "Eroare la setarea filtrelor. Te rog verifică formatul parametrilor. ";
+"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "Filtru nou";
 "alert.add_filter.message" = "Te rog introdu un șir care să fie o comandă în formatul mpv vf sau af.";
 
@@ -314,6 +316,7 @@
 "osc_toolbar.full_screen" = "Activează ecran complet";
 "osc_toolbar.music_mode" = "Intră în modul Muzică";
 "osc_toolbar.sub_track" = "Alege pista de subtitrare";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "Comută coperta albumului";
 "mini_player.loop" = "Repetare";
@@ -346,22 +349,22 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Solicitare rețea";
-"permissions.network-request.desc" = "Această extensie poate cere sau încărca date pe aceste site-uri:";
+"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
 "permissions.network-request.any_site" = "Orice site";
 "permissions.show-osd.name" = "Arată OSD";
 "permissions.show-osd.desc" = "Această extensie poate afișa mesajele OSD (On Screen Display).";
 "permissions.show-alert.name" = "Arată alerte";
 "permissions.show-alert.desc" = "Această extensie poate afișa alerte pop-up.";
-"permissions.video-overlay.name" = "Adaugă overlay peste video";
+"permissions.video-overlay.name" = "Add overlays on videos";
 "permissions.video-overlay.desc" = "Această extensie poate reda conținut suplimentar în partea de sus a videoclipului.";
 "permissions.file-system.name" = "Accesează fișiere de sistem";
-"permissions.file-system.desc" = "Această extensie poate citi sau scrie fișiere pe discul dvs., inclusiv informații sensibile. De asemenea, poate apela alte programe sau aplicații care vă pot afecta calculatorul. Deci asigurați-vă că ați verificat sursa.";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Instalare";
 "plugin.installed" = "Instalat";
 "plugin.not_installed" = "Nu este instalat";
 "plugin.local" = "Instalat local";
-"alert.plugin.install_error" = "A apărut o eroare în timpul instalării: %@";
+"alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "URL-ul nu este valid.";
 "plugin.install_error.invalid_url" = "URL-ul nu este valid.";
 "plugin.install_error.file_not_found" = "Fișierul package nu poate fi găsit.";

@@ -123,6 +123,8 @@
 "menu.exit_fullscreen" = "Kilépés a teljes képernyős módból";
 "menu.pip" = "Kép a képben";
 "menu.exit_pip" = "Kilépés kép a képben módból";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pause (Megállít)";
 "menu.resume" = "Folytatás";
 "menu.speed" = "Sebesség: %.2fx";
@@ -175,7 +177,7 @@
 "alert.error_open" = "Fájl vagy közvetítés megnyitás sikertelen!";
 "alert.error_finding_file" = "A fájl %@ nem található!";
 "alert.error_loading_script" = "A szkript %@ nem tölthetõ be!";
-"alert.error_saving_file" = "Hiba történt mentéskor %@: %@";
+"alert.error_saving_file" = "Error occurred when saving %@: %@";
 "alert.error_deleting_file" = "Nem sikerült törölni a fájlt.";
 
 "alert.config.new.title" = "Új beviteli konfiguráció";
@@ -189,7 +191,7 @@
 "alert.config.cannot_create" = "Konfigurációs fájl nem hozható létre!\n%@";
 "alert.config.cannot_write" = "Konfigurációs fájl nem irható!";
 
-"alert.filter.incorrect" = "Hiba történt a szűrők beállításakor. Kérjük, ellenőrizd le a paraméter formátumát.";
+"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "Új filter";
 "alert.add_filter.message" = "Adjon meg egy szűrő karakterláncot az mpv vf vagy af parancsának formátumában.";
 
@@ -314,6 +316,7 @@
 "osc_toolbar.full_screen" = "Váltás teljes képernyõre";
 "osc_toolbar.music_mode" = "Belépés \"zene\" módba";
 "osc_toolbar.sub_track" = "Válassz felirat sávot";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "Album borító váltás";
 "mini_player.loop" = "Ismétlés";
@@ -346,22 +349,22 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Hálózati kérés";
-"permissions.network-request.desc" = "Ez a bővítvény a következő webhelyekre kérhet vagy tölthet fel adatokat:";
+"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
 "permissions.network-request.any_site" = "Bármely webhely";
 "permissions.show-osd.name" = "OSD megjelenítése";
 "permissions.show-osd.desc" = "Ez a bővítvény képes megjeleníteni az OSD-n (képernyőn megjelenő kijelző) üzeneteket.";
 "permissions.show-alert.name" = "Figyelmeztetések megjelenítése";
 "permissions.show-alert.desc" = "Ez a bővítmény képes felugró figyelmeztetéseket megjeleníteni.";
-"permissions.video-overlay.name" = "Overlay hozzáadása videókhoz";
+"permissions.video-overlay.name" = "Add overlays on videos";
 "permissions.video-overlay.desc" = "Ez a bővítmény képes további tartalmakat megjeleníteni a videó tetején.";
 "permissions.file-system.name" = "Hozzáférés a fájlrendszerhez";
-"permissions.file-system.desc" = "Ez a bővítmény képes olvasni vagy írni a lemezen lévő fájlokat, beleértve az érzékeny információkat is. Más programokat vagy alkalmazásokat is meghívhat, amelyek kárt tehetnek a számítógépében. Ezért mindenképpen ellenőrizze a forrást.";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Telepítés";
 "plugin.installed" = "Telepítve";
 "plugin.not_installed" = "Nincs telepítve";
 "plugin.local" = "Helyben telepítve";
-"alert.plugin.install_error" = "Hiba lépett fel a telepítés során: %@";
+"alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "Érvénytelen link.";
 "plugin.install_error.invalid_url" = "Érvénytelen link.";
 "plugin.install_error.file_not_found" = "A csomagfájl nem található.";

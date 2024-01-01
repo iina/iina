@@ -123,6 +123,8 @@
 "menu.exit_fullscreen" = "Keluar dari Layar Penuh";
 "menu.pip" = "Masuk Picture-in-Picture";
 "menu.exit_pip" = "Keluar dari Picture-in-Picture";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Jeda";
 "menu.resume" = "Lanjutkan";
 "menu.speed" = "Kecepatan: %.2fx";
@@ -175,7 +177,7 @@
 "alert.error_open" = "Tidak dapat membuka file atau tautan!";
 "alert.error_finding_file" = "File %@ tidak dapat ditemukan!";
 "alert.error_loading_script" = "Tidak dapat memuat skrip %@!";
-"alert.error_saving_file" = "Terjadi kesalahan saat menyimpan %@: %@";
+"alert.error_saving_file" = "Error occurred when saving %@: %@";
 "alert.error_deleting_file" = "Tidak dapat menghapus file.";
 
 "alert.config.new.title" = "Konfigurasi Input Baru";
@@ -189,7 +191,7 @@
 "alert.config.cannot_create" = "Tidak dapat membuat file konfigurasi!\n%@";
 "alert.config.cannot_write" = "Tidak dapat menulis pada file konfig!";
 
-"alert.filter.incorrect" = "Kesalahan terjadi saat menyetel filter. Mohon cek kembali format parameter Anda.";
+"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "Filter Baru";
 "alert.add_filter.message" = "Mohon isi string filter dengan format vf dari mpv atau af.";
 
@@ -314,6 +316,7 @@
 "osc_toolbar.full_screen" = "Aktif/nonaktifkan layar penuh";
 "osc_toolbar.music_mode" = "Aktifkan mode musik";
 "osc_toolbar.sub_track" = "Pilih trek terjemahan";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "Aktif/nonaktifkan Album Art";
 "mini_player.loop" = "Ulangi";
@@ -346,22 +349,22 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Permintaan Jaringan";
-"permissions.network-request.desc" = "Plugin ini dapat meminta atau mengunggah data ke situs-situs berikut:";
+"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
 "permissions.network-request.any_site" = "Situs apapun";
 "permissions.show-osd.name" = "Tampilkan OSD";
 "permissions.show-osd.desc" = "Plugin ini dapat menampilkan pesan OSD (On Screen Display).";
 "permissions.show-alert.name" = "Tampilkan Peringatan";
 "permissions.show-alert.desc" = "Plugin ini dapat menampilkan peringatan pop-up.";
-"permissions.video-overlay.name" = "Tambahkan overlay pada video";
+"permissions.video-overlay.name" = "Add overlays on videos";
 "permissions.video-overlay.desc" = "Plugin ini dapat menampilkan konten tambahan di atas video.";
 "permissions.file-system.name" = "Akses sistem file";
-"permissions.file-system.desc" = "Plugin ini dapat melakukan baca-tulis file pada disk Anda, termasuk informasi sensitif. Plugin ini juga dapat mengaktifkan program atau aplikasi lain yang dapat membahayakan komputer Anda. Mohon pastikan kembali keamanan sumbernya.";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Pasang";
 "plugin.installed" = "Terpasang";
 "plugin.not_installed" = "Tidak Terpasang";
 "plugin.local" = "Terpasang secara lokal";
-"alert.plugin.install_error" = "Terjadi kesalahan saat proses instalasi: %@";
+"alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "URL tidak valid.";
 "plugin.install_error.invalid_url" = "URL tidak valid.";
 "plugin.install_error.file_not_found" = "Tidak dapat menemukan package file.";

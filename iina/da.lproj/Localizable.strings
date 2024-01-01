@@ -123,6 +123,8 @@
 "menu.exit_fullscreen" = "Afslut fuldskærmsvisning";
 "menu.pip" = "Gå til Picture-in-Picture";
 "menu.exit_pip" = "Afslut Picture-in-Picture";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pause";
 "menu.resume" = "Genoptag";
 "menu.speed" = "Hastighed: %.2fx";
@@ -175,7 +177,7 @@
 "alert.error_open" = "Kan ikke åbne fil eller stream!";
 "alert.error_finding_file" = "Kan ikke finde %@ !";
 "alert.error_loading_script" = "Kan ikke loade script %@!";
-"alert.error_saving_file" = "Fejl under forsøg på at gemme %@: %@";
+"alert.error_saving_file" = "Error occurred when saving %@: %@";
 "alert.error_deleting_file" = "Kan ikke slette fil.";
 
 "alert.config.new.title" = "Ny input konfiguration";
@@ -189,7 +191,7 @@
 "alert.config.cannot_create" = "Kan ikke oprette config filen!";
 "alert.config.cannot_write" = "Kan ikke skrive til config filen!";
 
-"alert.filter.incorrect" = "Fejl opstået under anvendelse af filtre. Venligst tjek dit parameter format.";
+"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "Nyt filter";
 "alert.add_filter.message" = "Venligst indtast en filter streng af mpvs vf eller af kommando.";
 
@@ -314,6 +316,7 @@
 "osc_toolbar.full_screen" = "Skift fuld skærm";
 "osc_toolbar.music_mode" = "Gå i musik-tilstand";
 "osc_toolbar.sub_track" = "Vælg undertekstspor";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "Slå album art Til/Fra";
 "mini_player.loop" = "Gentag";
@@ -346,22 +349,22 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Netværksanmodning";
-"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
+"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
 "permissions.network-request.any_site" = "Enhver side";
 "permissions.show-osd.name" = "Vis OSD";
 "permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
 "permissions.show-alert.name" = "Vi advarsler";
 "permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
-"permissions.video-overlay.name" = "Tilføj overlay på videoer";
+"permissions.video-overlay.name" = "Add overlays on videos";
 "permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
 "permissions.file-system.name" = "Adgang til fil systemet";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Installer";
 "plugin.installed" = "Installeret";
 "plugin.not_installed" = "Ikke Installeret";
 "plugin.local" = "Installeret lokalt";
-"alert.plugin.install_error" = "Der skete en fejl under installationen: %@";
+"alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "URL'en er ugyldig.";
 "plugin.install_error.invalid_url" = "URL'en er ugyldig.";
 "plugin.install_error.file_not_found" = "Cannot find the package file.";

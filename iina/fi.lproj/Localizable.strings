@@ -123,6 +123,8 @@
 "menu.exit_fullscreen" = "Poistu koko näytön tilasta";
 "menu.pip" = "Siirry kuva kuvassa -tilaan";
 "menu.exit_pip" = "Poistu kuva kuvassa -tilasta";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Tauko";
 "menu.resume" = "Jatka";
 "menu.speed" = "Nopeus: %.2fx";
@@ -175,7 +177,7 @@
 "alert.error_open" = "Tiedostoa tai suoratoistoa ei voida avata!";
 "alert.error_finding_file" = "Tiedostoa %@ ei löydy!";
 "alert.error_loading_script" = "Skriptiä %@ ei voida ladata!";
-"alert.error_saving_file" = "Virhe tallennettaessa kohdetta %@: %@";
+"alert.error_saving_file" = "Error occurred when saving %@: %@";
 "alert.error_deleting_file" = "Tiedostoa ei voida poistaa.";
 
 "alert.config.new.title" = "Uudet syöttöasetukset";
@@ -189,7 +191,7 @@
 "alert.config.cannot_create" = "Asetustiedostoa ei voitu luoda!\n%@";
 "alert.config.cannot_write" = "Asetustiedostoon ei voida kirjoittaa!";
 
-"alert.filter.incorrect" = "Suodattimia asetettaessa tapahtui virhe. Tarkista parametrisi muoto.";
+"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "Uusi suodatin";
 "alert.add_filter.message" = "Anna suodatinmerkkijono mpv:n vf tai af komennon muodossa.";
 
@@ -314,6 +316,7 @@
 "osc_toolbar.full_screen" = "Vaihda koko näytön tilaan";
 "osc_toolbar.music_mode" = "Siirry musiikkitilaan";
 "osc_toolbar.sub_track" = "Valitse tekstitysraita";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "Näytä albumin kansikuva";
 "mini_player.loop" = "Toista";
@@ -346,22 +349,22 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Network Request";
-"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
+"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
 "permissions.network-request.any_site" = "Any site";
 "permissions.show-osd.name" = "Show OSD";
 "permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
 "permissions.show-alert.name" = "Show Alerts";
 "permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
-"permissions.video-overlay.name" = "Add overlay on videos";
+"permissions.video-overlay.name" = "Add overlays on videos";
 "permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
 "permissions.file-system.name" = "Access the file system";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Install";
 "plugin.installed" = "Installed";
 "plugin.not_installed" = "Not Installed";
 "plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occured during the installation: %@";
+"alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "The URL is invalid.";
 "plugin.install_error.invalid_url" = "The URL is invalid.";
 "plugin.install_error.file_not_found" = "Cannot find the package file.";

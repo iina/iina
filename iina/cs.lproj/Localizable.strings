@@ -87,8 +87,8 @@
 "osd.file_error" = "Soubor nelze načíst";
 "osd.cannot_login" = "Nelze se přihlásit";
 "osd.canceled" = "Zrušeno";
-"osd.cannot_connect" = "Cannot connect";
-"osd.timed_out" = "Timed Out";
+"osd.cannot_connect" = "Nelze se spojit";
+"osd.timed_out" = "Časový limit vypršel";
 "osd.filter_added" = "Přidán filtr: %@";
 "osd.filter_removed" = "Filtr odebrán";
 "osd.file_loop" = "Opakování souboru: %@";
@@ -123,6 +123,8 @@
 "menu.exit_fullscreen" = "Ukončit režim celé obrazovky";
 "menu.pip" = "Spustit obraz v obrazu";
 "menu.exit_pip" = "Ukončit obraz v obrazu";
+"menu.mini_player" = "Spustit hudební režim";
+"menu.exit_mini_player" = "Ukončit hudební režim";
 "menu.pause" = "Pozastavit";
 "menu.resume" = "Pokračovat";
 "menu.speed" = "Rychlost: %.2f×";
@@ -175,7 +177,7 @@
 "alert.error_open" = "Nelze otevřít soubor nebo stream!";
 "alert.error_finding_file" = "Soubor %@ nelze nalézt!";
 "alert.error_loading_script" = "Skript %@ nelze načíst!";
-"alert.error_saving_file" = "Během ukládání %@: %@ nastala chyba.";
+"alert.error_saving_file" = "Error occurred when saving %@: %@";
 "alert.error_deleting_file" = "Soubor nelze odstranit.";
 
 "alert.config.new.title" = "Konfigurace nového vstupu";
@@ -189,7 +191,7 @@
 "alert.config.cannot_create" = "Konfigurační soubor nelze vytvořit!\n%@";
 "alert.config.cannot_write" = "Nelze zapisovat do konfiguračního souboru!";
 
-"alert.filter.incorrect" = "Při nastavování filtrů nastala chyba. Zkontrolujte prosím parametry formátu.";
+"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "Přidat filtr";
 "alert.add_filter.message" = "Zadejte řetězec filtru ve formátu mpv příkazu vf nebo af.";
 
@@ -314,6 +316,7 @@
 "osc_toolbar.full_screen" = "Režim celé obrazovky";
 "osc_toolbar.music_mode" = "Spustit hudební režim";
 "osc_toolbar.sub_track" = "Vybrat stopu titulků";
+"osc_toolbar.screenshot" = "Zachytit snímek obrazovky";
 
 "mini_player.album_art" = "Přepnout zobrazení grafiky alba";
 "mini_player.loop" = "Opakovat";
@@ -322,7 +325,7 @@
 "mini_player.add" = "Přidat do playlistu";
 "mini_player.delete" = "Smazat všechny stopy z playlistu";
 "mini_player.volume" = "Hlasitost";
-"mini_player.close" = "Zavřít hudební režim";
+"mini_player.close" = "Ukončit hudební režim";
 "mini_player.back" = "Zpět do zobrazení videa";
 
 // Touch bar
@@ -346,22 +349,22 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Síťový požadavek";
-"permissions.network-request.desc" = "Tento plug-in může odesílat požadavky nebo nahrávat data na tyto webové stránky:";
+"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
 "permissions.network-request.any_site" = "Jakékoliv webové stránky";
 "permissions.show-osd.name" = "Zobrazit OSD";
 "permissions.show-osd.desc" = "Tento plug-in může zobrazovat OSD zprávy (zobrazení na obrazovce).";
 "permissions.show-alert.name" = "Zobrazit upozornění";
 "permissions.show-alert.desc" = "Tento plug-in může zobrazovat vyskakovací upozornění.";
-"permissions.video-overlay.name" = "Přidat překrytí přes video";
+"permissions.video-overlay.name" = "Add overlays on videos";
 "permissions.video-overlay.desc" = "Tento plug-in může vykreslovat přes video další obsah.";
 "permissions.file-system.name" = "Přístup k souborovému systému";
-"permissions.file-system.desc" = "Tento plug-in může číst nebo zapisovat soubory na disk, včetně citlivých informací. Může také využívat jiné programy nebo aplikace, které mohou poškodit váš počítač. Ujistěte se tedy, že jste ověřili jeho zdroj.";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Instalovat";
 "plugin.installed" = "Nainstalován";
 "plugin.not_installed" = "Není nainstalován";
 "plugin.local" = "Nainstalován lokálně";
-"alert.plugin.install_error" = "Při instalaci se vyskytla chyba: %@";
+"alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "URL adresa je neplatná.";
 "plugin.install_error.invalid_url" = "URL adresa je neplatná.";
 "plugin.install_error.file_not_found" = "Soubor balíčku nelze nalézt.";

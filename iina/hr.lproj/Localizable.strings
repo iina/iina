@@ -123,6 +123,8 @@
 "menu.exit_fullscreen" = "Prekini cjeloekranski prikaz";
 "menu.pip" = "Pokreni sliku u slici";
 "menu.exit_pip" = "Prekini sliku u slici";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Zaustavi";
 "menu.resume" = "Nastavi";
 "menu.speed" = "Brzina: %.2fx";
@@ -175,7 +177,7 @@
 "alert.error_open" = "Cannot open file or stream!";
 "alert.error_finding_file" = "Nije moguće pronaći datoteku %@!";
 "alert.error_loading_script" = "Nije moguće učitati skripta %@!";
-"alert.error_saving_file" = "Došlo je do greške prilikom spremanja %@: %@";
+"alert.error_saving_file" = "Error occurred when saving %@: %@";
 "alert.error_deleting_file" = "Nije moguće izbrisati datoteku.";
 
 "alert.config.new.title" = "New Input Configuration";
@@ -189,7 +191,7 @@
 "alert.config.cannot_create" = "Nije moguće stvoriti konfiguracijsku datoteku!\n%@";
 "alert.config.cannot_write" = "Nije moguće pisati u konfiguracijsku datoteku!";
 
-"alert.filter.incorrect" = "Error occured when setting filters. Please check your parameter format.";
+"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "Novi filtar";
 "alert.add_filter.message" = "Please enter a filter string in format of mpv's vf or af command.";
 
@@ -314,6 +316,7 @@
 "osc_toolbar.full_screen" = "Uključi/isključi cjeloekranski prikaz";
 "osc_toolbar.music_mode" = "Pokreni glazbeni modus";
 "osc_toolbar.sub_track" = "Odaberi traku titlova";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "Uključi/isključi ilustraciju albuma";
 "mini_player.loop" = "Ponovi";
@@ -346,22 +349,22 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Network Request";
-"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
+"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
 "permissions.network-request.any_site" = "Any site";
 "permissions.show-osd.name" = "Show OSD";
 "permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
 "permissions.show-alert.name" = "Prikaži upozorenja";
 "permissions.show-alert.desc" = "Ovaj dodatak omogućuje prikaz prozora upozorenja.";
-"permissions.video-overlay.name" = "Dodaj sloj na videa";
+"permissions.video-overlay.name" = "Add overlays on videos";
 "permissions.video-overlay.desc" = "Ovaj dodatak omogućuje prikaz dodatnog sadržaja u videu.";
 "permissions.file-system.name" = "Pristupi datotečnom sustavu";
-"permissions.file-system.desc" = "Ovaj dodatak može čitati ili pisati datoteke na tvom disku, uključujući osjetljive podatke. Također može pozvati druge programe ili aplikacije koje mogu oštetiti tvoje računalo. Stoga svakako provjeri izvor.";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Instaliraj";
 "plugin.installed" = "Instalirano";
 "plugin.not_installed" = "Nije Instalirano";
 "plugin.local" = "Instalirano lokalno";
-"alert.plugin.install_error" = "Došlo je do greške tijekom instalacije: %@";
+"alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "URL je neispravan.";
 "plugin.install_error.invalid_url" = "URL je neispravan.";
 "plugin.install_error.file_not_found" = "Datoteka paketa nije pronađena.";

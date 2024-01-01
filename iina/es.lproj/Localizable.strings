@@ -123,6 +123,8 @@
 "menu.exit_fullscreen" = "Salir de pantalla completa";
 "menu.pip" = "Ver en picture in picture";
 "menu.exit_pip" = "Salir de picture in picture";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pausar";
 "menu.resume" = "Reanudar";
 "menu.speed" = "Velocidad: %.2fx";
@@ -175,7 +177,7 @@
 "alert.error_open" = "¡No se puede abrir el archivo o la secuencia!";
 "alert.error_finding_file" = "¡No se puede encontrar el archivo %@!";
 "alert.error_loading_script" = "¡No se puede cargar el script %@!";
-"alert.error_saving_file" = "Se ha producido un error al guardar %@: %@";
+"alert.error_saving_file" = "Error occurred when saving %@: %@";
 "alert.error_deleting_file" = "No se puede eliminar el archivo.";
 
 "alert.config.new.title" = "Nueva configuración de entrada";
@@ -189,7 +191,7 @@
 "alert.config.cannot_create" = "¡No se puede crear el archivo de configuración!\n%@";
 "alert.config.cannot_write" = "¡No se puede escribir en el archivo de configuración!";
 
-"alert.filter.incorrect" = "Se produjo un error al configurar los filtros. Por favor, compruebe el formato de los parámetros.";
+"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "Nuevo filtro";
 "alert.add_filter.message" = "Por favor ingrese el filtro usando el formato de comando vf o af de mpv.";
 
@@ -314,6 +316,7 @@
 "osc_toolbar.full_screen" = "Alternar pantalla completa";
 "osc_toolbar.music_mode" = "Entrar en modo música";
 "osc_toolbar.sub_track" = "Elegir la pista de subtítulos";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "Alternar imagen de álbum";
 "mini_player.loop" = "Repetir";
@@ -346,22 +349,22 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Solicitud de red";
-"permissions.network-request.desc" = "Este plugin puede solicitar o subir datos a estos sitios web:";
+"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
 "permissions.network-request.any_site" = "Cualquier sitio";
 "permissions.show-osd.name" = "Mostrar OSD";
 "permissions.show-osd.desc" = "Este plugin puede mostrar mensajes OSD (en pantalla).";
 "permissions.show-alert.name" = "Mostrar alertas";
 "permissions.show-alert.desc" = "Este plugin puede mostrar alertas emergentes.";
-"permissions.video-overlay.name" = "Añadir superposición en vídeos";
+"permissions.video-overlay.name" = "Add overlays on videos";
 "permissions.video-overlay.desc" = "Este plugin puede representar contenido adicional en la parte superior del vídeo.";
 "permissions.file-system.name" = "Acceder al sistema de archivos";
-"permissions.file-system.desc" = "Este plugin puede leer o escribir archivos en su disco, incluyendo información confidencial. También puede llamar a otros programas o aplicaciones que puedan dañar su ordenador, así que asegúrese de verificar la fuente.";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Instalar";
 "plugin.installed" = "Instalado";
 "plugin.not_installed" = "No instalado";
 "plugin.local" = "Instalado localmente";
-"alert.plugin.install_error" = "Ha ocurrido un error durante la instalación: %@";
+"alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "La URL no es válida.";
 "plugin.install_error.invalid_url" = "La URL no es válida.";
 "plugin.install_error.file_not_found" = "No se pudo encontrar el archivo de paquete.";

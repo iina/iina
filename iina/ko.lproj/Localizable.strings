@@ -87,8 +87,8 @@
 "osd.file_error" = "파일 읽기 오류";
 "osd.cannot_login" = "로그인할 수 없음";
 "osd.canceled" = "취소됨";
-"osd.cannot_connect" = "Cannot connect";
-"osd.timed_out" = "Timed Out";
+"osd.cannot_connect" = "연결할 수 없음";
+"osd.timed_out" = "시간 초과됨";
 "osd.filter_added" = "필터 추가됨: %@";
 "osd.filter_removed" = "필터 제거됨";
 "osd.file_loop" = "파일 반복: %@";
@@ -123,6 +123,8 @@
 "menu.exit_fullscreen" = "전체 화면에서 나가기";
 "menu.pip" = "화면 속 화면";
 "menu.exit_pip" = "화면 속 화면에서 나가기";
+"menu.mini_player" = "음악 모드 전환";
+"menu.exit_mini_player" = "음악 모드 나가기";
 "menu.pause" = "일시 정지";
 "menu.resume" = "재생";
 "menu.speed" = "재생속도: %.2fx";
@@ -175,7 +177,7 @@
 "alert.error_open" = "파일 또는 스트림을 열 수 없습니다!";
 "alert.error_finding_file" = "%@ 파일을 찾을 수 없습니다!";
 "alert.error_loading_script" = "%@ 스크립트를 불러올 수 없습니다!";
-"alert.error_saving_file" = "%@: %@을 저장하는 도중 오류가 발생했습니다.";
+"alert.error_saving_file" = "Error occurred when saving %@: %@";
 "alert.error_deleting_file" = "파일을 삭제할 수 없습니다.";
 
 "alert.config.new.title" = "새 설정 파일";
@@ -189,7 +191,7 @@
 "alert.config.cannot_create" = "설정 파일을 만들 수 없습니다!\n%@";
 "alert.config.cannot_write" = "설정 파일에 저장할 수 없습니다!";
 
-"alert.filter.incorrect" = "필터를 설정하는 도중 오류가 발생했습니다. 매개변수 형식을 확인하십시오.";
+"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "새 필터";
 "alert.add_filter.message" = "mpv 플레이어의 vf 또는 af 명령의 형식으로 필터 설정 문자열을 입력하십시오.";
 
@@ -314,6 +316,7 @@
 "osc_toolbar.full_screen" = "전체 화면 전환/복귀";
 "osc_toolbar.music_mode" = "음악 모드 전환";
 "osc_toolbar.sub_track" = "자막 선택";
+"osc_toolbar.screenshot" = "스크린샷 찍기";
 
 "mini_player.album_art" = "앨범 아트 켜기/끄기";
 "mini_player.loop" = "반복";
@@ -346,22 +349,22 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "네트워크 요청";
-"permissions.network-request.desc" = "이 플러그인은 아래 웹사이트에 요청을 보내거나 데이터를 업로드할 수 있습니다:";
+"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
 "permissions.network-request.any_site" = "모든 사이트";
 "permissions.show-osd.name" = "OSD 보기";
 "permissions.show-osd.desc" = "이 플러그인은 화면에 OSD가 표시될 수 있습니다";
 "permissions.show-alert.name" = "경고 표시";
 "permissions.show-alert.desc" = "이 플러그인은 경고창이 뜰 수 있습니다.";
-"permissions.video-overlay.name" = "비디오에 오버레이 추가";
+"permissions.video-overlay.name" = "Add overlays on videos";
 "permissions.video-overlay.desc" = "이 플러그인은 화면에 다른 콘텐츠를 표시할 수 있습니다.";
 "permissions.file-system.name" = "파일 시스템에 접근합니다.";
-"permissions.file-system.desc" = "이 플러그인은 민감한 정보를 포함하여 디스크의 파일을 읽거나 쓸 수 있습니다. 또한 컴퓨터에 해를 끼칠 수 있는 다른 프로그램이나 애플리케이션을 호출할 수도 있습니다. 따라서 출처를 반드시 확인하세요.";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "설치";
 "plugin.installed" = "설치됨";
 "plugin.not_installed" = "설치되지 않음";
 "plugin.local" = "로컬에 설치되었습니다";
-"alert.plugin.install_error" = "설치 중 오류발생: %@";
+"alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "URL이 유효하지 않습니다.";
 "plugin.install_error.invalid_url" = "URL이 유효하지 않습니다.";
 "plugin.install_error.file_not_found" = "패키지 파일을 찾을 수 없습니다.";

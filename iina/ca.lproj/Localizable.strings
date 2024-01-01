@@ -123,6 +123,8 @@
 "menu.exit_fullscreen" = "Surt de la pantalla completa";
 "menu.pip" = "Picture-in-Picture";
 "menu.exit_pip" = "Surt del Picture-in-Picture";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pausa";
 "menu.resume" = "Reprèn";
 "menu.speed" = "Velocitat: %.2fx";
@@ -175,7 +177,7 @@
 "alert.error_open" = "No es pot obrir el fitxer!";
 "alert.error_finding_file" = "No es pot trobar el fitxer %@!";
 "alert.error_loading_script" = "No es pot carregar l'script %@!";
-"alert.error_saving_file" = "S'ha produït un error al desar %@: %@";
+"alert.error_saving_file" = "Error occurred when saving %@: %@";
 "alert.error_deleting_file" = "No es pot suprimir el fitxer.";
 
 "alert.config.new.title" = "Nova configuració d'entrada";
@@ -189,7 +191,7 @@
 "alert.config.cannot_create" = "No es pot crear el fitxer de configuració!\n%@";
 "alert.config.cannot_write" = "No es pot escriure en el fitxer de configuració!";
 
-"alert.filter.incorrect" = "Error establint filtres. Si us plau verifica el format dels paràmetres.";
+"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "Crea filtre";
 "alert.add_filter.message" = "Si us plau introdueix un filtre de text en format mpv's o format af.";
 
@@ -314,6 +316,7 @@
 "osc_toolbar.full_screen" = "Commuta pantalla completa";
 "osc_toolbar.music_mode" = "Canvia a mode de música";
 "osc_toolbar.sub_track" = "Selecciona la pista dels subtítols";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "Mescla la caràtula";
 "mini_player.loop" = "Repeteix";
@@ -346,22 +349,22 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Petició d'accés a la xarxa";
-"permissions.network-request.desc" = "Aquest complement pot fer peticions o pujar dades a aquests llocs web:";
+"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
 "permissions.network-request.any_site" = "Qualsevol lloc web";
 "permissions.show-osd.name" = "Mostra subtítols";
 "permissions.show-osd.desc" = "Aquest complement pot ensenyar missatges en pantalla (OSD).";
 "permissions.show-alert.name" = "Mostrar alertes";
 "permissions.show-alert.desc" = "Aquest complement pot mostrar finestres emergents.";
-"permissions.video-overlay.name" = "Afegir overlay als vídeos";
+"permissions.video-overlay.name" = "Add overlays on videos";
 "permissions.video-overlay.desc" = "Aquest complement pot renderitzar contingut adicional al damunt del vídeo.";
 "permissions.file-system.name" = "Accedeix els fitxers";
-"permissions.file-system.desc" = "Aquest complement pot llegir o escriure fitxers al teu disc, incloent informació sensible. També pot cridar altres programes o aplicacions que poden malmetre el teu ordinador. Comprova el seu origen.";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Instal·la";
 "plugin.installed" = "Instal·lat";
 "plugin.not_installed" = "No instal·lat";
 "plugin.local" = "Instal·lat localment";
-"alert.plugin.install_error" = "Hi ha hagut un error durant la instal·lació: %@";
+"alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "L'adreça URL no és vàlida.";
 "plugin.install_error.invalid_url" = "L'adreça URL no és vàlida.";
 "plugin.install_error.file_not_found" = "No es pot trobar el fitxer.";

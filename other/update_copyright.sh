@@ -23,7 +23,7 @@ function update () {
 }
 
 # Update the copyright displayed in the macOS "Get Info" window for the application.
-update . Info.plist
+update ../iina.xcodeproj project.pbxproj
 
 # Update the copyright displayed in the about window.
 # This copyright text is contained in Contribution.rtf which is localized.

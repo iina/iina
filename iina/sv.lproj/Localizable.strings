@@ -123,6 +123,8 @@
 "menu.exit_fullscreen" = "Lämna helskärmsläge";
 "menu.pip" = "Använd bild-i-bild";
 "menu.exit_pip" = "Lämna bild-i-bild";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pausa";
 "menu.resume" = "Fortsätt";
 "menu.speed" = "Hastighet: %.2fx";
@@ -175,7 +177,7 @@
 "alert.error_open" = "Kan ej öppna fil eller ström!";
 "alert.error_finding_file" = "Kan ej hitta filen %@!";
 "alert.error_loading_script" = "Kan ej hitta skript %@!";
-"alert.error_saving_file" = "Fel uppstod vid sparande av %@: %@";
+"alert.error_saving_file" = "Error occurred when saving %@: %@";
 "alert.error_deleting_file" = "Kan ej radera denna fil.";
 
 "alert.config.new.title" = "Ny inmatningskonfiguration";
@@ -189,7 +191,7 @@
 "alert.config.cannot_create" = "Kan inte skapa konfigurationsfil!\n%@";
 "alert.config.cannot_write" = "Kan inte skriva till konfigurationsfil!";
 
-"alert.filter.incorrect" = "Fel uppstod vid inställning av filter. Vänligen kontrollera ditt parameterformat.";
+"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "Nytt filter";
 "alert.add_filter.message" = "Vänligen ange en filtersträng i formatet för mpv:s vf- eller af-kommando.";
 
@@ -314,6 +316,7 @@
 "osc_toolbar.full_screen" = "Växla fullskärmsläge";
 "osc_toolbar.music_mode" = "Gå in i musikläge";
 "osc_toolbar.sub_track" = "Välj undertextspår";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "Växla skivomslag";
 "mini_player.loop" = "Upprepa";
@@ -346,22 +349,22 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Nätverksförfrågan";
-"permissions.network-request.desc" = "Detta tillägget kan göra förfrågan samt ladda upp data till följande webbplatser:";
+"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
 "permissions.network-request.any_site" = "Alla sidor";
 "permissions.show-osd.name" = "Visa OSD";
 "permissions.show-osd.desc" = "Detta tillägget kan visa OSD (\"On-Screen Display\")-meddelanden.";
 "permissions.show-alert.name" = "Visa Meddelanden";
 "permissions.show-alert.desc" = "Detta tillägget kan visa popup-meddelanden.";
-"permissions.video-overlay.name" = "Add overlay on videos";
+"permissions.video-overlay.name" = "Add overlays on videos";
 "permissions.video-overlay.desc" = "Detta tillägget kan rendera ytterligare innehåll ovanpå videon.";
 "permissions.file-system.name" = "Åtkomst till filsystemet";
-"permissions.file-system.desc" = "Detta tillägget kan läsa och skriva till filer på din hårddisk, inklusive känslig information. Det kan även anropa andra program eller applikationer som kan skada din dator. Se till att verifiera källan noggrant.";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Installera";
 "plugin.installed" = "Installerat";
 "plugin.not_installed" = "Inte installerat";
 "plugin.local" = "Installerat lokalt";
-"alert.plugin.install_error" = "Ett fel uppstod under installationen: %@";
+"alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "URL:en är ogiltig.";
 "plugin.install_error.invalid_url" = "URL:en är ogiltig.";
 "plugin.install_error.file_not_found" = "Kan inte hitta paketfilen.";

@@ -123,6 +123,8 @@
 "menu.exit_fullscreen" = "Opuść tryb pełnoekranowy";
 "menu.pip" = "Włącz tryb Obraz-w-obrazie";
 "menu.exit_pip" = "Wyłącz tryb Obraz-w-obrazie";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pauza";
 "menu.resume" = "Wznów";
 "menu.speed" = "Prędkość: %.2fx";
@@ -175,7 +177,7 @@
 "alert.error_open" = "Nie można otworzyć pliku lub strumienia!";
 "alert.error_finding_file" = "Nie odnaleziono %@!";
 "alert.error_loading_script" = "Nie można załadować skryptu %@!";
-"alert.error_saving_file" = "Podczas zapisywania %@ wystąpił błąd: %@";
+"alert.error_saving_file" = "Error occurred when saving %@: %@";
 "alert.error_deleting_file" = "Nie można usunąć pliku.";
 
 "alert.config.new.title" = "Nowa konfiguracja wejściowa";
@@ -189,7 +191,7 @@
 "alert.config.cannot_create" = "Nie można utworzyć pliku konfiguracyjnego!\n%@";
 "alert.config.cannot_write" = "Nie można zapisać pliku konfiguracyjnego!";
 
-"alert.filter.incorrect" = "Podczas ustawiania filtrów wystąpił błąd. Proszę sprawdzić format parametru.";
+"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "Nowy filtr";
 "alert.add_filter.message" = "Wprowadź filtry w formacie zgodnym ze specyfikacją mpv.";
 
@@ -314,6 +316,7 @@
 "osc_toolbar.full_screen" = "Przełącz tryb pełnoekranowy";
 "osc_toolbar.music_mode" = "Przejdź w tryb muzyczny";
 "osc_toolbar.sub_track" = "Wybierz ścieżkę napisów";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "Przełącz okładkę albumu";
 "mini_player.loop" = "Powtarzaj";
@@ -346,22 +349,22 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Żądanie sieciowe";
-"permissions.network-request.desc" = "Ta wtyczka może żądać danych lub przesłać dane na te strony:";
+"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
 "permissions.network-request.any_site" = "Dowolna strona";
 "permissions.show-osd.name" = "Pokaż OSD";
 "permissions.show-osd.desc" = "Ta wtyczka może pokazywać wiadomości OSD (na ekranie wyświetlacza).";
 "permissions.show-alert.name" = "Pokaż alerty";
 "permissions.show-alert.desc" = "Ta wtyczka może wyświetlać wyskakujące powiadomienia.";
-"permissions.video-overlay.name" = "Dodaj nakładkę na filmy";
+"permissions.video-overlay.name" = "Add overlays on videos";
 "permissions.video-overlay.desc" = "Ta wtyczka może renderować dodatkowe treści nałożone na film.";
 "permissions.file-system.name" = "Dostęp do systemu plików";
-"permissions.file-system.desc" = "Ta wtyczka może odczytywać i zapisywać pliki na dysku, w tym poufne informacje. Może także wywoływać inne programy lub aplikacje, które mogą uszkodzić komputer. Dlatego koniecznie sprawdź źródło.";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Zainstaluj";
 "plugin.installed" = "Zainstalowano";
 "plugin.not_installed" = "Nie zainstalowano";
 "plugin.local" = "Zainstalowane lokalnie";
-"alert.plugin.install_error" = "Wystąpił błąd podczas instalacji: %@";
+"alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "Adres URL jest nieprawidłowy.";
 "plugin.install_error.invalid_url" = "Adres URL jest nieprawidłowy.";
 "plugin.install_error.file_not_found" = "Nie można znaleźć pliku pakietu.";

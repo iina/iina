@@ -123,6 +123,8 @@
 "menu.exit_fullscreen" = "Vollbildmodus beenden";
 "menu.pip" = "Bild-in-Bild öffnen";
 "menu.exit_pip" = "Bild-in-Bild schließen";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pausieren";
 "menu.resume" = "Wiedergabe";
 "menu.speed" = "Geschwindigkeit: %.2fx";
@@ -175,7 +177,7 @@
 "alert.error_open" = "Datei oder Stream konnte nicht geöffnet werden.";
 "alert.error_finding_file" = "Die Datei „%@“ konnte nicht gefunden werden.";
 "alert.error_loading_script" = "Das Skript „%@“ konnte nicht geladen werden.";
-"alert.error_saving_file" = "Fehler beim Sichern von „%@“: %@";
+"alert.error_saving_file" = "Error occurred when saving %@: %@";
 "alert.error_deleting_file" = "Datei konnte nicht gelöscht werden.";
 
 "alert.config.new.title" = "Neue Eingabekonfiguration";
@@ -189,7 +191,7 @@
 "alert.config.cannot_create" = "Konfigurationsdatei konnte nicht erstellt werden.\n%@";
 "alert.config.cannot_write" = "Konfigurationsdatei nicht beschreibbar.";
 
-"alert.filter.incorrect" = "Fehler beim Setzen der Filter. Bitte überprüfe die Parameter.";
+"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "Neuer Filter";
 "alert.add_filter.message" = "Bitte gib die Zeichenkette für den Filter im Stil der vf- bzw. af-Kommandos von mpv an.";
 
@@ -314,6 +316,7 @@
 "osc_toolbar.full_screen" = "Vollbild ein-/ausschalten";
 "osc_toolbar.music_mode" = "Musikmodus";
 "osc_toolbar.sub_track" = "Untertitelspur auswählen";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "Albumcover ein-/ausblenden";
 "mini_player.loop" = "Wiederholen";
@@ -346,22 +349,22 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Netzwerk-Anfrage";
-"permissions.network-request.desc" = "Dieser Erweiterung kann Daten auf diesen Websites anfordern oder hochladen:";
+"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
 "permissions.network-request.any_site" = "Beliebige Seiten";
 "permissions.show-osd.name" = "On-Screen-Anzeige einblenden";
 "permissions.show-osd.desc" = "Diese Erweiterung On-Screen-Nachrichten einblenden.";
 "permissions.show-alert.name" = "Warnungen anzeigen";
 "permissions.show-alert.desc" = "Diese Erweiterung kann Pop-Up-Warnungen anzeigen.";
-"permissions.video-overlay.name" = "Überlagerungen zu Videos hinzufügen";
+"permissions.video-overlay.name" = "Add overlays on videos";
 "permissions.video-overlay.desc" = "Diese Erweiterung kann zusätzliche Inhalte am oberen Rand des Videos darstellen.";
 "permissions.file-system.name" = "Dateisystem-Zugriff";
-"permissions.file-system.desc" = "Diese Erweiterung kann Dateien, einschließlich sensibler Informationen lesen oder schreiben. Es kann auch andere Programme oder Anwendungen aufrufen, die deinem Computer schaden können. Überprüfe daher unbedingt die Quelle.";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Installieren";
 "plugin.installed" = "Installiert";
 "plugin.not_installed" = "Nicht installiert";
 "plugin.local" = "Lokal installiert";
-"alert.plugin.install_error" = "Während der Installation ist ein Fehler aufgetreten: „@%“.";
+"alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "Die Adresse ist ungültig.";
 "plugin.install_error.invalid_url" = "Die Adresse ist ungültig.";
 "plugin.install_error.file_not_found" = "Die Paketdatei wurde nicht gefunden.";

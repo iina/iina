@@ -123,6 +123,8 @@
 "menu.exit_fullscreen" = "पूर्ण स्क्रीन से बाहर निकलें";
 "menu.pip" = "पिक्चर-इन-पिक्चर डालें";
 "menu.exit_pip" = "पिक्चर-इन-पिक्चर से बाहर निकलें";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "रोकें";
 "menu.resume" = "पुनः आरंभ";
 "menu.speed" = "गति: %.2fx";
@@ -175,7 +177,7 @@
 "alert.error_open" = "फ़ाइल या स्ट्रीम नहीं खोल सकता!";
 "alert.error_finding_file" = "%@ फ़ाइल नहीं मिल रही है!";
 "alert.error_loading_script" = "स्क्रिप्ट %@! लोड नहीं किया जा सकता";
-"alert.error_saving_file" = "%@: %@ को सहेजते समय त्रुटि आई\n";
+"alert.error_saving_file" = "Error occurred when saving %@: %@";
 "alert.error_deleting_file" = "फ़ाइल को हटा नहीं सकता।";
 
 "alert.config.new.title" = "नया इनपुट कॉन्फ़िगरेशन";
@@ -189,7 +191,7 @@
 "alert.config.cannot_create" = "कॉन्फ़िगरेशन फ़ाइल नहीं बना सकता है!\n%@";
 "alert.config.cannot_write" = "फ़ाइल को कॉन्फ़िगर करने के लिए नहीं लिख सकता!";
 
-"alert.filter.incorrect" = "फ़िल्टर सेट करते समय त्रुटि आई। कृपया अपना पैरामीटर प्रारूप जांचें।";
+"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "नया फ़िल्टर";
 "alert.add_filter.message" = "कृपया mpv के vf या af कमांड के प्रारूप में एक फिल्टर स्ट्रिंग दर्ज करें।";
 
@@ -314,6 +316,7 @@
 "osc_toolbar.full_screen" = "पूर्णस्क्रीन चालू करें";
 "osc_toolbar.music_mode" = "संगीत मोड दर्ज करें";
 "osc_toolbar.sub_track" = "उपशीर्षक ट्रैक चुनें";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "Toggle album art";
 "mini_player.loop" = "Repeat";
@@ -346,22 +349,22 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Network Request";
-"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
+"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
 "permissions.network-request.any_site" = "Any site";
 "permissions.show-osd.name" = "Show OSD";
 "permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
 "permissions.show-alert.name" = "Show Alerts";
 "permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
-"permissions.video-overlay.name" = "Add overlay on videos";
+"permissions.video-overlay.name" = "Add overlays on videos";
 "permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
 "permissions.file-system.name" = "Access the file system";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Install";
 "plugin.installed" = "Installed";
 "plugin.not_installed" = "Not Installed";
 "plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occured during the installation: %@";
+"alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "The URL is invalid.";
 "plugin.install_error.invalid_url" = "The URL is invalid.";
 "plugin.install_error.file_not_found" = "Cannot find the package file.";

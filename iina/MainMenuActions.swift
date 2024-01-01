@@ -90,11 +90,15 @@ extension MainMenuActionHandler {
   }
 
   @objc func menuStep(_ sender: NSMenuItem) {
-    let seconds = Double(abs((sender.representedObject as? Int) ?? 5))
-    if sender.tag == 0 { // -> 5s
-      player.seek(relativeSecond: seconds, option: .relative)
-    } else if sender.tag == 1 { // <- 5s
-      player.seek(relativeSecond: -seconds, option: .relative)
+    if let args = sender.representedObject as? (Double, Preference.SeekOption) {
+      player.seek(relativeSecond: args.0, option: args.1)
+    } else {
+      let seconds = Double(abs((sender.representedObject as? Int) ?? 5))
+      if sender.tag == 0 { // -> 5s
+        player.seek(relativeSecond: seconds, option: Preference.SeekOption.defaultValue)
+      } else if sender.tag == 1 { // <- 5s
+        player.seek(relativeSecond: -seconds, option: Preference.SeekOption.defaultValue)
+      }
     }
   }
 

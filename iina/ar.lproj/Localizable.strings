@@ -123,6 +123,8 @@
 "menu.exit_fullscreen" = "إنهاء وضع ملء الشاشة";
 "menu.pip" = "الدخول إلى وضع صورة في صورة";
 "menu.exit_pip" = "الخروج من وضع صورة في صورة";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "إيقاف مؤقت";
 "menu.resume" = "استئناف";
 "menu.speed" = "السرعة: %.2fx";
@@ -175,7 +177,7 @@
 "alert.error_open" = "لا يمكن فتح الملف أو عرضه!";
 "alert.error_finding_file" = "لا يمكن العثور على %@ ملف!";
 "alert.error_loading_script" = "لا يمكن تحميل النص %@!";
-"alert.error_saving_file" = "حدث خطأ في أثناء الحفظ %@: %@";
+"alert.error_saving_file" = "Error occurred when saving %@: %@";
 "alert.error_deleting_file" = "لا يمكن حذف الملف.";
 
 "alert.config.new.title" = "تكوين مصدر إدخال جديد";
@@ -189,7 +191,7 @@
 "alert.config.cannot_create" = "لا يمكن إنشاء ملف التكوين!\n%@";
 "alert.config.cannot_write" = "لا يمكن الكتابة إلى ملف التكوين!";
 
-"alert.filter.incorrect" = "حدث خطأ أثناء إعداد عوامل التصفية. الرجاء التحقق من صيغة الوسيط الخاصة بك.";
+"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "عامل تصفية جديد";
 "alert.add_filter.message" = "الرجاء إدخال سلسلة فلتر في شكل أمر mpv أو af.";
 
@@ -314,6 +316,7 @@
 "osc_toolbar.full_screen" = "التبديل لوضع ملء الشاشة";
 "osc_toolbar.music_mode" = "الدخول إلى وضع الموسيقى";
 "osc_toolbar.sub_track" = "اختيار مسار الترجمة";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "تبديل صورة الألبوم";
 "mini_player.loop" = "تكرار";
@@ -346,22 +349,22 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "طلب الشبكة";
-"permissions.network-request.desc" = "هذا البرنامج المساعد يمكن أن يجعل إعادة تأكيد أو تحميل البيانات إلى هذه المواقع:";
+"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
 "permissions.network-request.any_site" = "أي موقع";
 "permissions.show-osd.name" = "إظهار OSD";
 "permissions.show-osd.desc" = "يمكن لهذه الإضافة أن تظهر رسائل OSD (على شاشة العرض).";
 "permissions.show-alert.name" = "عرض التنبيه";
 "permissions.show-alert.desc" = "هذه الإضافة يمكن أن تظهر تنبيهات منبثقة.";
-"permissions.video-overlay.name" = "";
+"permissions.video-overlay.name" = "Add overlays on videos";
 "permissions.video-overlay.desc" = "يمكن لهذه الإضافة أن توفر محتوى إضافياً في الجزء العلوي من الفيديو.";
 "permissions.file-system.name" = "Access the file system";
-"permissions.file-system.desc" = "يمكن لهذه الإضافة قراءة أو كتابة الملفات على القرص الخاص بك، بما في ذلك المعلومات الحساسة. يمكنها أيضًا الاتصال بالبرامج أو التطبيقات الأخرى التي يمكن أن تضر بجهاز الكمبيوتر الخاص بك. لذا تأكد من التحقق من المصدر.";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "تثبيت";
 "plugin.installed" = "Installed";
 "plugin.not_installed" = "Not Installed";
 "plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occured during the installation: %@";
+"alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "The URL is invalid.";
 "plugin.install_error.invalid_url" = "The URL is invalid.";
 "plugin.install_error.file_not_found" = "Cannot find the package file.";

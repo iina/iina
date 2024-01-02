@@ -541,6 +541,7 @@ class PlayerCore: NSObject {
 
     miniPlayer.updateTitle()
     syncUITime()
+    syncUI(.playButton)
     // When not in the mini player the timer that updates the OSC may be stopped to conserve energy
     // when the OSC is hidden. As the OSC is always displayed in the mini player ensure the timer is
     // running if media is playing.

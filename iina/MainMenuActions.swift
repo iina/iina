@@ -29,7 +29,7 @@ class MainMenuActionHandler: NSResponder {
   }
 
   @objc func menuSavePlaylist(_ sender: NSMenuItem) {
-    Utility.quickSavePanel(title: "Save to playlist", types: ["m3u8"]) { (url) in
+    Utility.quickSavePanel(title: "Save to playlist", types: ["m3u8"], sheetWindow: player.currentWindow) { (url) in
       if url.isFileURL {
         var playlist = ""
         for item in self.player.info.playlist {
@@ -325,7 +325,8 @@ extension MainMenuActionHandler {
 extension MainMenuActionHandler {
   @objc func menuLoadExternalSub(_ sender: NSMenuItem) {
     let currentDir = player.info.currentURL?.deletingLastPathComponent()
-    Utility.quickOpenPanel(title: "Load external subtitle file", chooseDir: false, dir: currentDir) { url in
+    Utility.quickOpenPanel(title: "Load external subtitle file", chooseDir: false, dir: currentDir,
+                           sheetWindow: player.currentWindow) { url in
       self.player.loadExternalSubFile(url, delay: true)
     }
   }
@@ -409,8 +410,8 @@ extension MainMenuActionHandler {
     }
     let subURL = URL(fileURLWithPath: path)
     let subFileName = subURL.lastPathComponent
-    Utility.quickSavePanel(title: NSLocalizedString("alert.sub.save_downloaded.title",
-         comment: "Save Downloaded Subtitle"), filename: subFileName) { (destURL) in
+    let windowTitle = NSLocalizedString("alert.sub.save_downloaded.title", comment: "Save Downloaded Subtitle")
+    Utility.quickSavePanel(title: windowTitle, filename: subFileName, sheetWindow: player.currentWindow) { (destURL) in
       do {
         // The Save panel checks to see if a file already exists and if so asks if it should be
         // replaced. The quickSavePanel would not have called this code if the user canceled, so if

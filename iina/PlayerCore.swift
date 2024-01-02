@@ -132,6 +132,10 @@ class PlayerCore: NSObject {
   var initialWindow: InitialWindowController!
   var miniPlayer: MiniPlayerWindowController!
 
+  var currentWindow: NSWindow? {
+    return isInMiniPlayer ? miniPlayer.window : mainWindow.window
+  }
+
   var mpv: MPVController!
 
   var plugins: [JavascriptPluginInstance] = []

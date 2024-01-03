@@ -9,7 +9,6 @@
 import Foundation
 
 class VideoTime {
-
   static let infinite = VideoTime(999, 0, 0)
   static let zero = VideoTime(0)
 
@@ -49,11 +48,15 @@ class VideoTime {
   }
 
   convenience init?(_ format: String) {
-    let split = Array(format.split(separator: ":").map { String($0) }.reversed())
+    let split = Array(format.split(separator: ":").reversed())
 
     let hour : Int? = split.count > 2 ? Int(split[2]) : nil
     let minute : Int? = split.count > 1 ? Int(split[1]) : nil
     let second : Double? = !split.isEmpty ? Double(split[0]) : nil
+
+    if hour == nil && minute == nil && second == nil {
+      return nil
+    }
 
     self.init(hour ?? 0, minute ?? 0, second ?? 0.0)
   }

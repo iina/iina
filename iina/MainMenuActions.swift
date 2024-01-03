@@ -130,7 +130,7 @@ extension MainMenuActionHandler {
   @objc func menuJumpTo(_ sender: NSMenuItem) {
     Utility.quickPromptPanel("jump_to", inputValue: self.player.info.videoPosition?.stringRepresentationWithPrecision(3)) { input in
       if let vt = VideoTime(input) {
-        self.player.seek(absoluteSecond: Double(vt.second))
+        self.player.seek(absoluteSecond: vt.second)
       }
     }
   }

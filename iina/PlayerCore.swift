@@ -856,14 +856,17 @@ class PlayerCore: NSObject {
   }
 
   func getLoopMode() -> LoopMode {
-    let loopPlaylistStatus = mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
     let loopFileStatus = mpv.getString(MPVOption.PlaybackControl.loopFile)
-    if loopFileStatus == "inf" {
+    guard loopFileStatus != "inf" else { return .file }
+    if let loopFileStatus = loopFileStatus, let count = Int(loopFileStatus), count != 0 {
       return .file
-    } else if loopPlaylistStatus == "inf" || loopPlaylistStatus == "force" {
-      return .playlist
     }
-    return .off
+    let loopPlaylistStatus = mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
+    guard loopPlaylistStatus != "inf", loopPlaylistStatus != "force" else { return .playlist }
+    guard let loopPlaylistStatus = loopPlaylistStatus, let count = Int(loopPlaylistStatus) else {
+      return .off
+    }
+    return count == 0 ? .off : .playlist
   }
 
   func setLoopMode(_ newMode: LoopMode) {

@@ -51,7 +51,7 @@
                         <action selector="helpBtnAction:" target="-2" id="G8C-1V-IMW"/>
                     </connections>
                 </button>
-                <customView translatesAutoresizingMaskIntoConstraints="NO" id="PCZ-06-pn4" customClass="Switch" customModule="IINA" customModuleProvider="target">
+                <customView identifier="FunctionalButtonEnableAdvanced" translatesAutoresizingMaskIntoConstraints="NO" id="PCZ-06-pn4" customClass="Switch" customModule="IINA" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="18" width="459" height="28"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="switchOnLeft" value="YES"/>

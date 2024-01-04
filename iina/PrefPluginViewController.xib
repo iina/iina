@@ -44,6 +44,15 @@
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY" userLabel="Prefs &gt; Plugins View">
             <rect key="frame" x="0.0" y="0.0" width="480" height="545"/>
             <subviews>
+                <textField identifier="SectionTitlePlugins" hidden="YES" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="bIU-VC-U2r" userLabel="Plugins">
+                    <rect key="frame" x="211" y="265" width="57" height="16"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Plugins" id="uW4-Bs-Wg3">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
                 <scrollView autohidesScrollers="YES" horizontalLineScroll="38" horizontalPageScroll="10" verticalLineScroll="38" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZO-wR-pQN">
                     <rect key="frame" x="0.0" y="8" width="160" height="400"/>
                     <clipView key="contentView" id="MLE-fd-V2n">
@@ -157,7 +166,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kmI-AD-0GL">
+                                    <button identifier="FunctionalButtonUninstallPlugin" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kmI-AD-0GL">
                                         <rect key="frame" x="238" y="368" width="60" height="17"/>
                                         <buttonCell key="cell" type="roundRect" title="Uninstall" bezelStyle="roundedRect" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ue8-hU-kLm">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -454,7 +463,7 @@
                                             <action selector="tabSwitched:" target="-2" id="kXO-mk-C1a"/>
                                         </connections>
                                     </segmentedControl>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sl8-zI-7f5">
+                                    <button identifier="FunctionalButtonShowPlugin" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sl8-zI-7f5">
                                         <rect key="frame" x="138" y="368" width="92" height="17"/>
                                         <buttonCell key="cell" type="roundRect" title="Show in Finder" bezelStyle="roundedRect" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="drh-6w-3z1">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -533,7 +542,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DbD-Cu-uoz">
+                <button identifier="FunctionalButtonInstallGitHub" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DbD-Cu-uoz">
                     <rect key="frame" x="-7" y="454" width="159" height="32"/>
                     <buttonCell key="cell" type="push" title="Install from GitHub..." bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="enP-C1-4vu">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -554,7 +563,7 @@
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="q8W-0n-Rem">
                     <rect key="frame" x="0.0" y="442" width="480" height="5"/>
                 </box>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="K9h-qs-0tJ">
+                <button identifier="FunctionalButtonInstallLocal" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="K9h-qs-0tJ">
                     <rect key="frame" x="150" y="454" width="210" height="32"/>
                     <buttonCell key="cell" type="push" title="Install from a local package…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="sdU-FG-dTO">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>

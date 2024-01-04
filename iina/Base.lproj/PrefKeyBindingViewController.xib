@@ -33,7 +33,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="lOm-I3-MpB"/>
                     </constraints>
-                    <buttonCell key="cell" type="check" title="Use media keys" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="2WY-CR-baD">
+                    <buttonCell key="cell" type="check" title="Use system media control" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="2WY-CR-baD">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>

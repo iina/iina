@@ -189,7 +189,7 @@ class PreferenceWindowController: NSWindowController {
       ["utilities", "PrefUtilsViewController"],
     ]
     if IINA_ENABLE_PLUGIN_SYSTEM {
-      viewMap.insert(["plugin", "PrefPluginViewController"], at: 8)
+      viewMap.insert(["plugins", "PrefPluginViewController"], at: 8)
     }
     let labelDict = [String: [String: [String]]](
       uniqueKeysWithValues: viewMap.map { (NSLocalizedString("preference.\($0[0])", comment: ""), self.getLabelDict(inNibNamed: $0[1])) })
@@ -348,7 +348,7 @@ class PreferenceWindowController: NSWindowController {
 
   private func getTitle(from view: NSView) -> String? {
     if let label = view as? NSTextField,
-      !label.isEditable, label.textColor == .labelColor,
+      !label.isEditable, label.textColor == .labelColor, label.stringValue != "Label",
       !label.identifierStartsWith("AccessoryLabel"), !label.identifierStartsWith("Trigger") {
       return formSearchTerm(label.stringValue)
     } else if let button = view as? NSButton,

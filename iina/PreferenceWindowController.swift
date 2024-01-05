@@ -10,10 +10,13 @@ import Cocoa
 
 fileprivate extension String {
   func removedLastSemicolon() -> String {
-    if self.hasSuffix(":") || self.hasSuffix("：") {
-      return String(self.dropLast())
-    }
+    let trimed = trimWhitespaceSuffix()
+    guard !trimed.hasSuffix(":") else { return String(trimed.dropLast()) }
     return self
+  }
+
+  func trimWhitespaceSuffix() -> String {
+    self.replacingOccurrences(of: "\\s+$", with: "", options: .regularExpression)
   }
 }
 
@@ -227,7 +230,7 @@ class PreferenceWindowController: NSWindowController {
 
   @IBAction func searchFieldAction(_ sender: Any) {
     guard !isIndexing else { return }
-    let searchString = searchField.stringValue.lowercased()
+    let searchString = searchField.stringValue.lowercased().trimWhitespaceSuffix().removedLastSemicolon()
     if searchString == lastString { return }
     if searchString.count == 0 {
       dismissCompletionList()
@@ -328,7 +331,7 @@ class PreferenceWindowController: NSWindowController {
   ///
   /// The UI labels and titles contain extraneous characters that must be removed for them to be used as a search term.
   /// - Parameter string: The string to turn into a search term.
-  /// - Returns: The given string with extraneous character removed.
+  /// - Returns: The given string with extraneous characters removed.
   private func formSearchTerm(_ string: String) -> String {
     string.trimmingCharacters(in: .whitespacesAndNewlines)
       .replacingOccurrences(of: "[:…()\"\n]", with: "", options: .regularExpression)

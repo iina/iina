@@ -540,8 +540,9 @@ class PlayerCore: NSObject {
     }
     switchedBackFromMiniPlayerManually = false
 
-    let needRestoreLayout = !miniPlayer.loaded
-    miniPlayer.showWindow(self)
+    // build mini player window offscreen for now
+    miniPlayer.window?.orderOut(self)
+    isInMiniPlayer = true
 
     miniPlayer.updateTitle()
     syncUITime()
@@ -571,38 +572,11 @@ class PlayerCore: NSObject {
     miniPlayer.videoWrapperView.addSubview(videoView, positioned: .below, relativeTo: nil)
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": videoView])
 
-    let (width, height) = originalVideoSize
-    let aspect = (width == 0 || height == 0) ? 1 : CGFloat(width) / CGFloat(height)
-    miniPlayer.updateVideoViewAspectConstraint(withAspect: aspect)
-    miniPlayer.window?.layoutIfNeeded()
-
-    // if received video size before switching to music mode, hide default album art
-    if info.vid != 0 {
-      miniPlayer.defaultAlbumArt.isHidden = true
-    }
-    // in case of video size changed, reset mini player window size if playlist is folded
-    if !miniPlayer.isPlaylistVisible {
-      miniPlayer.setToInitialWindowSize(display: true, animate: false)
-    }
-
-    // hide main window
+    // hide main window, and show mini player window
     mainWindow.window?.orderOut(self)
-    isInMiniPlayer = true
+    miniPlayer.showWindow(self)
 
     videoView.videoLayer.draw(forced: true)
-
-    // restore layout
-    if needRestoreLayout {
-      if !Preference.bool(for: .musicModeShowAlbumArt) {
-        miniPlayer.toggleVideoView(self)
-        if let origin = miniPlayer.window?.frame.origin {
-          miniPlayer.window?.setFrameOrigin(.init(x: origin.x, y: origin.y + miniPlayer.videoView.frame.height))
-        }
-      }
-      if Preference.bool(for: .musicModeShowPlaylist) {
-        miniPlayer.togglePlaylist(self)
-      }
-    }
     
     events.emit(.musicModeChanged, data: true)
   }
@@ -617,8 +591,6 @@ class PlayerCore: NSObject {
     mainWindow.playlistView.useCompactTabHeight = false
     // add back video view
     let mainWindowContentView = mainWindow.window!.contentView
-    miniPlayer.videoViewAspectConstraint?.isActive = false
-    miniPlayer.videoViewAspectConstraint = nil
     mainWindow.videoView.removeFromSuperview()
     mainWindowContentView?.addSubview(mainWindow.videoView, positioned: .below, relativeTo: nil)
     ([.top, .bottom, .left, .right] as [NSLayoutConstraint.Attribute]).forEach { attr in
@@ -1552,10 +1524,6 @@ class PlayerCore: NSObject {
       if info.vid == 0 {
         notifyMainWindowVideoSizeChanged()
       }
-
-      if self.isInMiniPlayer {
-        miniPlayer.defaultAlbumArt.isHidden = self.info.vid != 0
-      }
     }
     if Preference.bool(for: .fullScreenWhenOpen) && !mainWindow.fsState.isFullscreen && !isInMiniPlayer {
       DispatchQueue.main.async(execute: self.mainWindow.toggleWindowFullScreen)
@@ -1780,9 +1748,6 @@ class PlayerCore: NSObject {
 
   func notifyMainWindowVideoSizeChanged() {
     mainWindow.adjustFrameByVideoSize()
-    if isInMiniPlayer {
-      miniPlayer.updateVideoSize()
-    }
   }
 
   // difficult to use option set

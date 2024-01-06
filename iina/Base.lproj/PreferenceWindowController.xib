@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22154" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22154"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -27,7 +27,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="820" height="480"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="3008" height="1667"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1415"/>
             <value key="minSize" type="size" width="820" height="320"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO" userLabel="PrefWindow Content View">
                 <rect key="frame" x="0.0" y="0.0" width="820" height="480"/>
@@ -36,7 +36,7 @@
                     <visualEffectView blendingMode="behindWindow" material="sidebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="AO2-1e-7F6" userLabel="PrefNavPanel Visual Effect View">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="480"/>
                         <subviews>
-                            <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKj-eM-MTH">
+                            <searchField wantsLayer="YES" focusRingType="none" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKj-eM-MTH">
                                 <rect key="frame" x="9" y="420" width="182" height="30"/>
                                 <searchFieldCell key="cell" controlSize="large" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" refusesFirstResponder="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="ZLM-z2-CyT">
                                     <font key="font" metaFont="system"/>
@@ -86,7 +86,7 @@
                                                                         <binding destination="Cky-oa-sEY" name="value" keyPath="objectValue.image" id="C2q-6f-8qZ"/>
                                                                     </connections>
                                                                 </imageView>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="XDU-ud-pYc">
+                                                                <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="XDU-ud-pYc">
                                                                     <rect key="frame" x="24" y="10" width="138" height="16"/>
                                                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Table View Cell" id="Ukj-Vg-wHf" customClass="PrefTabTitleLabelCell" customModule="IINA" customModuleProvider="target">
                                                                         <font key="font" metaFont="systemBold"/>
@@ -106,7 +106,6 @@
                                                                 <constraint firstItem="XDU-ud-pYc" firstAttribute="centerY" secondItem="Cky-oa-sEY" secondAttribute="centerY" id="h97-II-d9Q"/>
                                                             </constraints>
                                                             <connections>
-                                                                <outlet property="image" destination="5Yr-Dy-tXq" id="XsY-WS-4e9"/>
                                                                 <outlet property="imageView" destination="5Yr-Dy-tXq" id="AEl-yO-dwj"/>
                                                                 <outlet property="leadingConstraint" destination="ekq-kA-abF" id="enZ-7g-e32"/>
                                                                 <outlet property="textField" destination="XDU-ud-pYc" id="NpG-es-Dgj"/>
@@ -225,7 +224,7 @@
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="XXu-SH-FYF" userLabel="Completion Popover">
             <rect key="frame" x="0.0" y="0.0" width="340" height="180"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0yO-bT-GQW">
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0yO-bT-GQW">
                     <rect key="frame" x="137" y="82" width="67" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="No Result" id="jUU-3A-jLW">
                         <font key="font" metaFont="systemBold"/>
@@ -237,7 +236,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="340" height="180"/>
                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="oMs-Q9-XbP">
                         <rect key="frame" x="0.0" y="0.0" width="340" height="180"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="40" rowSizeStyle="automatic" viewBased="YES" id="MUI-pR-u00">
                                 <rect key="frame" x="0.0" y="0.0" width="340" height="180"/>
@@ -268,7 +267,7 @@
                                                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="MoT-Tv-Eut">
                                                                 <rect key="frame" x="0.0" y="13" width="86" height="17"/>
                                                                 <subviews>
-                                                                    <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WvU-OP-qKD">
+                                                                    <textField focusRingType="none" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WvU-OP-qKD">
                                                                         <rect key="frame" x="0.0" y="0.0" width="37" height="17"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="17" id="GnV-ad-Nfb"/>
@@ -297,7 +296,7 @@
                                                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="OxQ-u7-hBa">
                                                                         <rect key="frame" x="0.0" y="0.0" width="41" height="11"/>
                                                                         <subviews>
-                                                                            <textField horizontalHuggingPriority="751" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uYa-E5-kPM">
+                                                                            <textField focusRingType="none" horizontalHuggingPriority="751" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uYa-E5-kPM">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="28" height="11"/>
                                                                                 <textFieldCell key="cell" controlSize="mini" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Label" drawsBackground="YES" id="Yqs-iT-EDU">
                                                                                     <font key="font" metaFont="label" size="9"/>
@@ -308,7 +307,7 @@
                                                                                     <binding destination="PUp-P1-eMl" name="value" keyPath="objectValue.tab" id="bag-hs-AJQ"/>
                                                                                 </connections>
                                                                             </textField>
-                                                                            <textField horizontalHuggingPriority="751" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ch8-7m-EVc">
+                                                                            <textField focusRingType="none" horizontalHuggingPriority="751" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ch8-7m-EVc">
                                                                                 <rect key="frame" x="30" y="0.0" width="11" height="11"/>
                                                                                 <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="»" drawsBackground="YES" id="hIj-J9-06Z">
                                                                                     <font key="font" metaFont="label" size="9"/>
@@ -328,7 +327,7 @@
                                                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="jkh-bf-K5S">
                                                                         <rect key="frame" x="45" y="0.0" width="41" height="11"/>
                                                                         <subviews>
-                                                                            <textField horizontalHuggingPriority="751" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wYV-pe-vBk">
+                                                                            <textField focusRingType="none" horizontalHuggingPriority="751" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wYV-pe-vBk">
                                                                                 <rect key="frame" x="30" y="0.0" width="11" height="11"/>
                                                                                 <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="»" drawsBackground="YES" id="KCo-fS-6w5">
                                                                                     <font key="font" metaFont="label" size="9"/>
@@ -336,7 +335,7 @@
                                                                                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
                                                                                 </textFieldCell>
                                                                             </textField>
-                                                                            <textField horizontalHuggingPriority="751" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Oir-KU-ax2">
+                                                                            <textField focusRingType="none" horizontalHuggingPriority="751" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Oir-KU-ax2">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="28" height="11"/>
                                                                                 <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" drawsBackground="YES" id="nPh-AY-eX8">
                                                                                     <font key="font" metaFont="label" size="9"/>

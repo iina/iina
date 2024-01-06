@@ -130,6 +130,9 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
       guard respond == .alertFirstButtonReturn else { return }
       try? FileManager.default.removeItem(atPath: Utility.playbackHistoryURL.path)
       NSDocumentController.shared.clearRecentDocuments(self)
+#if DEBUG
+      (NSApp.delegate as? AppDelegate)?.saveRecentDocuments()
+#endif
       Preference.set(nil, for: .iinaLastPlayedFilePath)
       self.playHistoryClearedLabel.isHidden = false
     }

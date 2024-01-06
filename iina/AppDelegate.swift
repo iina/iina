@@ -204,6 +204,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
     Logger.log("App will launch")
 
+#if DEBUG
+    restoreRecentDocuments()
+#endif
+
     // register for url event
     NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(self.handleURLEvent(event:withReplyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
 
@@ -830,6 +834,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
         for url in panel.urls {
           NSDocumentController.shared.noteNewRecentDocumentURL(url)
         }
+#if DEBUG
+        saveRecentDocuments()
+#endif
       }
       let isAlternative = (sender as? NSMenuItem)?.tag == AlternativeMenuItemTag
       let playerCore = PlayerCore.activeOrNewForMenuAction(isAlternative: isAlternative)
@@ -949,6 +956,79 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     let micro = AppDelegate.avVersionMicro(version)
     return "\(major).\(minor).\(micro)"
   }
+
+  // MARK: - Recent Documents
+
+#if DEBUG
+  /// Restore the list of recently opened files.
+  ///
+  /// For macOS Sonoma `sharedfilelistd` was changed to tie the list of recent documents to the app based on its certificate.
+  /// if `sharedfilelistd` determines the list is being accessed by a different app then it clears the list. See issue
+  /// [#4688](https://github.com/iina/iina/issues/4688) for details.
+  ///
+  /// This new behavior does not cause a problem when the code is signed with IINA's certificate. However developer builds use an
+  /// ad hoc certificate. This causes the list of recently opened files to be cleared each time a developer runs a new build. As a
+  /// workaround a copy of the list of recent documents is saved in IINA's preference file to preserve the list across builds.
+  ///
+  /// If the following is true:
+  /// - Running under macOS Sonoma and above
+  /// - Recording of recent files is enabled
+  /// - The list in  [NSDocumentController.shared.recentDocumentURLs](https://developer.apple.com/documentation/appkit/nsdocumentcontroller/1514976-recentdocumenturls) is empty
+  /// - The list in the IINA setting `recentDocuments` is not empty
+  ///
+  /// Then this method assumes that the macOS daemon `sharedfilelistd` cleared the list and it populates the list of recent
+  /// document URLs with the list stored in IINA's settings.
+  /// - Note: This is not a perfect workaround. For example, running a version of IINA signed with IINA's certificate after running a
+  ///         developer build will result in an empty list of recent files. This workaround is only intended to provide a better
+  ///         experience for developers. Improving the workaround would require including it in the released version of IINA.
+  ///         As the released version is working fine, we do not want to do that.
+  private func restoreRecentDocuments() {
+    guard #available(macOS 14, *), Preference.bool(for: .recordRecentFiles),
+          NSDocumentController.shared.recentDocumentURLs.isEmpty,
+          let recentDocuments = Preference.array(for: .recentDocuments),
+          !recentDocuments.isEmpty else { return }
+    var foundStale = false
+    for document in recentDocuments {
+      var isStale = false
+      guard let asData = document as? Data,
+            let bookmark = try? URL(resolvingBookmarkData: asData, bookmarkDataIsStale: &isStale) else {
+        guard let asString = document as? String, let url = URL(string: asString) else { continue }
+        // Saving as a bookmark must have failed and instead the URL was saved as a string.
+        NSDocumentController.shared.noteNewRecentDocumentURL(url)
+        continue
+      }
+      foundStale = foundStale || isStale
+      NSDocumentController.shared.noteNewRecentDocumentURL(bookmark)
+    }
+    Logger.log("Restored list of recent documents")
+    guard !foundStale else { return }
+    Logger.log("Found stale bookmarks in saved recent documents")
+    // Save the recent documents in order to refresh stale bookmarks.
+    saveRecentDocuments()
+  }
+
+  /// Save the list of recently opened files.
+  ///
+  /// Save the list of recent documents in [NSDocumentController.shared.recentDocumentURLs](https://developer.apple.com/documentation/appkit/nsdocumentcontroller/1514976-recentdocumenturls)
+  /// to `recentDocuments` in the IINA settings property file.
+  ///
+  /// This is a workaround for developers. See the method `restoreRecentDocuments` and the issue
+  /// [#4688](https://github.com/iina/iina/issues/4688) for more information..
+  func saveRecentDocuments() {
+    guard #available(macOS 14, *), Preference.bool(for: .recordRecentFiles) else { return }
+    var recentDocuments: [Any] = []
+    for document in NSDocumentController.shared.recentDocumentURLs {
+      guard let bookmark = try? document.bookmarkData() else {
+        // Fall back to storing a string when unable to create a bookmark.
+        recentDocuments.append(document.absoluteString)
+        continue
+      }
+      recentDocuments.append(bookmark)
+    }
+    Preference.set(recentDocuments, for: .recentDocuments)
+    Logger.log("Saved list of recent documents")
+  }
+#endif
 }
 
 

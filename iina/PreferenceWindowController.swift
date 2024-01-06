@@ -42,6 +42,18 @@ extension PreferenceWindowEmbeddable {
   }
 }
 
+class CustomCellView: NSTableCellView {
+  @IBOutlet weak var leadingConstraint: NSLayoutConstraint!
+
+  override func viewWillDraw() {
+    if #unavailable (macOS 11.0) {
+      leadingConstraint.constant = 20
+    }
+    super.viewWillDraw()
+  }
+}
+
+
 class PreferenceWindowController: NSWindowController {
 
   class Trie {

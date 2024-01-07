@@ -219,7 +219,7 @@
 "alert.add_watch.title" = "Add Watch Property";
 "alert.add_watch.message" = "Please enter a valid mpv property name.";
 
-"alert.jump_to.title" = "Jump to";
+"alert.jump_to.title" = "Nhảy đến";
 "alert.jump_to.message" = "Please enter the time you want to jump to. Example: 20:35";
 
 "alert.opensub.login.title" = "OpenSubtitles Login";
@@ -229,7 +229,7 @@
 "alert.open_url.message" = "Please enter the URL:";
 "alert.choose_media_file.title" = "Choose Media Files";
 
-"alert.add_url.title" = "Add URL";
+"alert.add_url.title" = "Thêm liên kết URL";
 "alert.add_url.message" = "Please enter the URL:";
 
 "alert.delete_history.title" = "Delete Playback History";
@@ -243,7 +243,7 @@
 "alert.clear_cache.title" = "Clear Thumbnail Cache";
 "alert.clear_cache.message" = "Are you sure to clear all thumbnail Cache?";
 
-"alert.clear_history.title" = "Clear Playback History";
+"alert.clear_history.title" = "Xoá lịch sử xem";
 "alert.clear_history.message" = "Are you sure to delete all playback history?";
 
 "alert.clear_watch_later.title" = "Clear Saved Playback Progress";
@@ -288,12 +288,12 @@
 "pl_menu.delete_after_play" = "Move to Trash After Playback";
 "pl_menu.delete_after_play_multi" = "Move Selected Files to Trash After Playback";
 "pl_menu.show_in_finder" = "Duyệt trong Finder";
-"pl_menu.add_file" = "Add File…";
-"pl_menu.add_url" = "Add URL…";
+"pl_menu.add_file" = "Thêm tệp tin…";
+"pl_menu.add_url" = "Thêm liên kết URL…";
 "pl_menu.clear_playlist" = "Clear Playlist";
 "pl_menu.matched_sub" = "Matched %d Subtitle(s)";
 "pl_menu.add_sub" = "Add Subtitle…";
-"pl_menu.wrong_sub" = "Wrong Subtitle!";
+"pl_menu.wrong_sub" = "Sai phụ đề!";
 "pl_menu.browser" = "Open in Browser";
 "pl_menu.copy_url" = "Copy URL";
 "pl_menu.copy_url_multi" = "Copy URLs";
@@ -301,8 +301,8 @@
 "keymapping.title" = "Key Mapping";
 "keymapping.message" = "Press any key to record.";
 
-"filter.video_filters" = "Video Filters";
-"filter.audio_filters" = "Audio Filters";
+"filter.video_filters" = "Bộ lọc video";
+"filter.audio_filters" = "Bộ lọc âm thanh";
 
 "hwdec.no" = "Disable hardware decoding.";
 "hwdec.auto" = "Enable hardware decoding. However, most of the video filters won't work properly.";
@@ -336,8 +336,8 @@
 "touchbar.back_30" = "30sec Back";
 "touchbar.next_video" = "Next Video";
 "touchbar.prev_video" = "Previous Video";
-"touchbar.increase_volume" = "Volume +";
-"touchbar.decrease_volume" = "Volume -";
+"touchbar.increase_volume" = "Âm lượng +";
+"touchbar.decrease_volume" = "Âm lượng -";
 "touchbar.rewind" = "Rewind";
 "touchbar.fast_forward" = "Fast Forward";
 "touchbar.play_pause" = "Play / Pause";
@@ -371,5 +371,5 @@
 "plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Check for Updates";
+"plugin.check_for_updates" = "Kiểm tra cập nhật";
 "plugin.updating" = "Downloading update…";

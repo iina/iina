@@ -76,8 +76,9 @@ enum OSDMessage {
   case cannotConnect
   case timedOut
 
-  case fileLoop(Bool)
-  case playlistLoop(Bool)
+  case fileLoop
+  case playlistLoop
+  case noLoop
 
   case custom(String)
   case customWithDetail(String, String)
@@ -339,19 +340,24 @@ enum OSDMessage {
         .normal
       )
 
-    case .fileLoop(let enabled):
+    case .fileLoop:
       return (
-        String(format: NSLocalizedString("osd.file_loop", comment: "File Loop: %@"),
-               enabled ? NSLocalizedString("general.on", comment: "On") : NSLocalizedString("general.off", comment: "Off")),
-        .normal
+        NSLocalizedString("osd.file_loop", comment: "Enable file looping"),
+          .normal
       )
 
-    case .playlistLoop(let enabled):
+    case .playlistLoop:
       return (
-        String(format: NSLocalizedString("osd.playlist_loop", comment: "Playlist Loop: %@"),
-               enabled ? NSLocalizedString("general.on", comment: "On") : NSLocalizedString("general.off", comment: "Off")),
-        .normal
+        NSLocalizedString("osd.playlist_loop", comment: "Enable playlist looping"), 
+          .normal
       )
+
+    case .noLoop:
+      return (
+        NSLocalizedString("osd.no_loop", comment: "Disable loop"),
+          .normal
+      )
+
     case .custom(let message):
       return (message, .normal)
 

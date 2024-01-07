@@ -635,3 +635,16 @@ func bridgeTransfer<T : AnyObject>(ptr : UnsafeRawPointer) -> T {
   return Unmanaged<T>.fromOpaque(ptr).takeRetainedValue()
 }
 
+enum LoopMode {
+  case off
+  case file
+  case playlist
+
+  func next() -> LoopMode {
+    switch self {
+    case .off:      return .file
+    case .file:     return .playlist
+    default:        return .off
+    }
+  }
+}

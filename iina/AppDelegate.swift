@@ -1121,7 +1121,7 @@ class RemoteCommandController {
       return .success
     }
     remoteCommand.changeRepeatModeCommand.addTarget { _ in
-      PlayerCore.lastActive.togglePlaylistLoop()
+      PlayerCore.lastActive.nextLoopMode()
       return .success
     }
     remoteCommand.changeShuffleModeCommand.isEnabled = false

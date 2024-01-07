@@ -91,8 +91,9 @@
 "osd.timed_out" = "Tiempo agotado";
 "osd.filter_added" = "Filtro Añadido: %@";
 "osd.filter_removed" = "Filtro Eliminado";
-"osd.file_loop" = "Bucle de archivo: %@";
-"osd.playlist_loop" = "Bucle de lista de reproducción: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Preferencias";
 "preference.general" = "General";

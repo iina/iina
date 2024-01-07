@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Filtro Adicionado: %@";
 "osd.filter_removed" = "Filtro Removido";
-"osd.file_loop" = "Repetição do Arquivo: %@";
-"osd.playlist_loop" = "Repetição da Playlist: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Preferências";
 "preference.general" = "Geral";
@@ -364,7 +365,7 @@
 "plugin.installed" = "Instalado";
 "plugin.not_installed" = "Não instalado";
 "plugin.local" = "Instalado localmente";
-"alert.plugin.install_error" = "Error occurred during the installation: %@";
+"alert.plugin.install_error" = "Ocorreu um erro durante a instalação: %@";
 "alert.invalid_url" = "O URL é inválido.";
 "plugin.install_error.invalid_url" = "O URL é inválido.";
 "plugin.install_error.file_not_found" = "Cannot find the package file.";

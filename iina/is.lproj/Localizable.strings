@@ -94,11 +94,11 @@
 "osd.file_loop" = "File Loop: %@";
 "osd.playlist_loop" = "Playlist Loop: %@";
 
-"preference.title" = "Preferences";
+"preference.title" = "Valmöguleikar";
 "preference.general" = "General";
 "preference.ui" = "UI";
 "preference.video_audio" = "Video/Audio";
-"preference.subtitle" = "Subtitle";
+"preference.subtitle" = "Texti";
 "preference.network" = "Network";
 "preference.control" = "Control";
 "preference.keybindings" = "Key Bindings";
@@ -119,7 +119,7 @@
 "menu.volume_muted" = "Volume: %d (Muted)";
 "menu.audio_delay" = "Audio Delay: %.2fs";
 "menu.sub_delay" = "Subtitle Delay: %.2fs";
-"menu.fullscreen" = "Enter Full Screen";
+"menu.fullscreen" = "Heilsskjár";
 "menu.exit_fullscreen" = "Exit Full Screen";
 "menu.pip" = "Enter Picture-in-Picture";
 "menu.exit_pip" = "Exit Picture-in-Picture";
@@ -219,7 +219,7 @@
 "alert.add_watch.title" = "Add Watch Property";
 "alert.add_watch.message" = "Please enter a valid mpv property name.";
 
-"alert.jump_to.title" = "Jump to";
+"alert.jump_to.title" = "Hoppa til";
 "alert.jump_to.message" = "Please enter the time you want to jump to. Example: 20:35";
 
 "alert.opensub.login.title" = "OpenSubtitles Login";
@@ -336,8 +336,8 @@
 "touchbar.back_30" = "30sec Back";
 "touchbar.next_video" = "Next Video";
 "touchbar.prev_video" = "Previous Video";
-"touchbar.increase_volume" = "Volume +";
-"touchbar.decrease_volume" = "Volume -";
+"touchbar.increase_volume" = "Hljóðstyrkur +";
+"touchbar.decrease_volume" = "Hljóðstyrkur -";
 "touchbar.rewind" = "Rewind";
 "touchbar.fast_forward" = "Fast Forward";
 "touchbar.play_pause" = "Play / Pause";

@@ -5,7 +5,7 @@
 "7ml-VU-xWv.title" = "Enable advanced settings";
 
 /* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "E3I-Q7-9t1"; */
-"E3I-Q7-9t1.headerCell.title" = "Name";
+"E3I-Q7-9t1.headerCell.title" = "Назва";
 
 /* Class = "NSTextFieldCell"; title = "The following settings will require restarting IINA to take effect."; ObjectID = "HMa-Vz-EUk"; */
 "HMa-Vz-EUk.title" = "The following settings will require restarting IINA to take effect.";
@@ -38,13 +38,13 @@
 "Owx-92-Ogg.title" = "Show log viewer";
 
 /* Class = "NSMenuItem"; title = "Verbose"; ObjectID = "S9M-yY-q0w"; */
-"S9M-yY-q0w.title" = "Verbose";
+"S9M-yY-q0w.title" = "Падрабязна";
 
 /* Class = "NSMenuItem"; title = "Debug"; ObjectID = "hGq-ek-VHd"; */
-"hGq-ek-VHd.title" = "Debug";
+"hGq-ek-VHd.title" = "Адладка";
 
 /* Class = "NSMenuItem"; title = "Warning"; ObjectID = "exP-JC-h7t"; */
-"exP-JC-h7t.title" = "Warning";
+"exP-JC-h7t.title" = "Папярэджанне";
 
 /* Class = "NSMenuItem"; title = "Error"; ObjectID = "sl8-Df-vbX"; */
-"sl8-Df-vbX.title" = "Error";
+"sl8-Df-vbX.title" = "Памылкі";

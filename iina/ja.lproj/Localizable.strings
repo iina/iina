@@ -178,7 +178,7 @@
 "alert.error_open" = "ファイルもしくはURLが開けません！";
 "alert.error_finding_file" = "%@ というファイルは見つかりません！";
 "alert.error_loading_script" = "次のスクリプトは読み込めません！%@";
-"alert.error_saving_file" = "Error occurred when saving %@: %@";
+"alert.error_saving_file" = "%@の保存時にエラーが発生しました: %@";
 "alert.error_deleting_file" = "ファイルを削除できません。";
 
 "alert.config.new.title" = "設定の新規作成";

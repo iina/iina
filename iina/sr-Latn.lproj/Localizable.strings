@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Dodati filter: %@";
 "osd.filter_removed" = "Uklonjeni filter";
-"osd.file_loop" = "Ponavljanje datoteke: %@";
-"osd.playlist_loop" = "Ponavljanje plejliste: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Željene postavke";
 "preference.general" = "Opšte postavke";
@@ -349,13 +350,13 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Mrežni zahtev";
-"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
+"permissions.network-request.desc" = "Ova dodatna komponenta može poslati zahtev ili otpremati podatke na sledeće veb-sajtove:";
 "permissions.network-request.any_site" = "Bilo koji sajt";
 "permissions.show-osd.name" = "Prikaži ekranski meni";
 "permissions.show-osd.desc" = "Ova dodatna komponenta može prikazati poruke ekranskog menija (OSD).";
 "permissions.show-alert.name" = "Prikaži upozorenja";
 "permissions.show-alert.desc" = "Ova dodatna komponenta može prikazati iskačuća upozorenja.";
-"permissions.video-overlay.name" = "Add overlays on videos";
+"permissions.video-overlay.name" = "Dodaj prekrivajući element na video-zapise";
 "permissions.video-overlay.desc" = "Ova dodatna komponenta može prikazati dodatni sadržaj preko video-zapisa.";
 "permissions.file-system.name" = "Pristupite sistemu datoteka";
 "permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";

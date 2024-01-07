@@ -178,7 +178,7 @@
 "alert.error_open" = "파일 또는 스트림을 열 수 없습니다!";
 "alert.error_finding_file" = "%@ 파일을 찾을 수 없습니다!";
 "alert.error_loading_script" = "%@ 스크립트를 불러올 수 없습니다!";
-"alert.error_saving_file" = "Error occurred when saving %@: %@";
+"alert.error_saving_file" = "%@: %@을 저장하는 도중 오류가 발생했습니다.";
 "alert.error_deleting_file" = "파일을 삭제할 수 없습니다.";
 
 "alert.config.new.title" = "새 설정 파일";
@@ -350,7 +350,7 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "네트워크 요청";
-"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
+"permissions.network-request.desc" = "이 플러그인은 아래 웹사이트에 요청을 보내거나 데이터를 업로드할 수 있습니다:";
 "permissions.network-request.any_site" = "모든 사이트";
 "permissions.show-osd.name" = "OSD 보기";
 "permissions.show-osd.desc" = "이 플러그인은 화면에 OSD가 표시될 수 있습니다";

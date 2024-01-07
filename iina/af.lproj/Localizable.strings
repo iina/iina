@@ -350,7 +350,7 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Netwerkversoek";
-"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
+"permissions.network-request.desc" = "Hierdie inprop kan versoeke doen aan of data oplaai na hierdie webwerwe:";
 "permissions.network-request.any_site" = "Enige werf";
 "permissions.show-osd.name" = "Show OSD";
 "permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
@@ -359,7 +359,7 @@
 "permissions.video-overlay.name" = "Add overlays on videos";
 "permissions.video-overlay.desc" = "Hierdie inprop kan bykomende inhoud bo-oor die video verbeeld.";
 "permissions.file-system.name" = "Toegang tot die lêerstelsel";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.file-system.desc" = "Hierdie inprop kan lêers insluitend sensitiewe inligting op u skyf lees of skryf. Dit kan ook ander programmatuur of toepassings oproep wat u rekenaar kan skaad. Maak seker dat u die bron verifieer.";
 
 "plugin.install" = "Installeer";
 "plugin.installed" = "Geïnstalleer";

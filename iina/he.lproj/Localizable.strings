@@ -7,7 +7,7 @@
 */
 // Common
 
-"general.on" = "On";
+"general.on" = "מופעל";
 "general.off" = "כבוי";
 "general.login" = "התחברות";
 "general.logout" = "התנתקות";
@@ -17,19 +17,19 @@
 "general.password" = "סיסמה";
 
 // Guide Window
-"guide.highlights" = "Highlights";
+"guide.highlights" = "הדגשות";
 "guide.basic_settings" = "הגדרות בסיסיות";
 "guide.faq" = "שאלות נפוצות";
 
 // Initial Window
 "initial.announcement" = "אתה משתמש בגרסת %@ של IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
+"initial.beta.desc" = "אם ברצונך לחזור לגרסה הרגילה, הסר את הסימון \"קבל עדכוני בטא\" בהגדרות > כללי, והתקן את הגרסה הרגילה מ<a href=\"https://iina.io\">האתר הרשמי</a> שלנו.";
 "initial.nightly.desc" = "בניה לילית לא מומלצת לשימוש יומיומי. כרגע, בנייה לילית לא תומכת בעדכון אוטומטי. אנא הורד באופן ידני בניה עדכנית מ<a href=\"https://nightly.iina.io\">האתר</a> שלנו.";
 "initial.debug.desc" = "בניית ניפוי באגים בדרך כלל אינה מותאמת לטובת ביצועים, ולכן אינה מומלצת לשימוש יומיומי. בניית ניפוי באגים לא תומכת בעדכון אוטומטי.";
 "initial.bug_report" = "דווח באמצעות <a href=\"https://github.com/iina/iina/issues\">בעיות GitHub</a>.";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Buffering… %d%%";
+"main.buffering_indicator" = "מוריד נתונים… %d%%";
 "main.opening_stream" = "פותח זרם…";
 "osc.precision" = "דיוק";
 "osc.1s" = "שניה";
@@ -39,9 +39,9 @@
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "ברירת מחדל";
-"quicksetting.item_none" = "None";
-"quicksetting.hwdec" = "Hardware Decoding";
-"quicksetting.deinterlace" = "Deinterlace";
+"quicksetting.item_none" = "ללא";
+"quicksetting.hwdec" = "פענוח חומרה";
+"quicksetting.deinterlace" = "ביטול שזירה";
 "quicksetting.hdr" = "HDR";
 
 // OSDMessage.swift
@@ -51,36 +51,36 @@
 "osd.speed" = "מהירות: x%.2f";
 "osd.aspect" = "יחס גובה-רוחב: %@";
 "osd.crop" = "חיתוך: %@";
-"osd.rotate" = "Rotate: %i°";
-"osd.deinterlace" = "Deinterlace: %@";
-"osd.hwdec" = "Hardware Decoding: %@";
-"osd.audio_delay.nodelay" = "Audio Delay: No Delay";
-"osd.audio_delay.later" = "Audio Delay: %.2fs Later";
+"osd.rotate" = "הטיה: %i°";
+"osd.deinterlace" = "ביטול שזירה: %@";
+"osd.hwdec" = "פענוח חומרה: %@";
+"osd.audio_delay.nodelay" = "עיכוב שמע: ללא עיכוב";
+"osd.audio_delay.later" = "עיכוב שמע: %.2f שנ' איחור";
 "osd.audio_delay.earlier" = "Audio Delay: %.2fs Earlier";
-"osd.sub_delay.nodelay" = "Subtitle Delay: No Delay";
+"osd.sub_delay.nodelay" = "עיכוב כתוביות: ללא עיכוב";
 "osd.sub_delay.later" = "Subtitle Delay: %.2fs Later";
 "osd.sub_delay.earlier" = "Subtitle Delay: %.2fs Earlier";
-"osd.subtitle_pos" = "Subtitle Position: %.1f";
+"osd.subtitle_pos" = "מיקום כתוביות: %.1f";
 "osd.mute" = "השתקה";
 "osd.unmute" = "בטל השתקה";
-"osd.screenshot" = "Screenshot Captured";
+"osd.screenshot" = "צילום מסך בוצע";
 "osd.abloop.a" = "AB-Loop: A";
 "osd.abloop.b" = "AB-Loop: B";
 "osd.abloop.clear" = "AB-Loop: Cleared";
 "osd.stop" = "עצור";
 "osd.chapter" = "פרק: %@";
 "osd.subtitle_scale" = "Subtitle Scale: %.2fx";
-"osd.add_to_playlist" = "Added %i Files to Playlist";
+"osd.add_to_playlist" = "נוספו %i קבצים לרשימת ההשמעה";
 "osd.clear_playlist" = "רשימת ההשמעה אופסה";
 "osd.video_eq.contrast" = "ניגודיות: %i";
-"osd.video_eq.gamma" = "Gamma: %i";
+"osd.video_eq.gamma" = "גמא: %i";
 "osd.video_eq.hue" = "גוון: %i";
 "osd.video_eq.saturation" = "רוויה: %i";
 "osd.video_eq.brightness" = "בהירות: %i";
 "osd.find_online_sub" = "מחפש כתוביות מקוונות…";
-"osd.find_online_sub.source" = "from";
+"osd.find_online_sub.source" = "מאת";
 "osd.sub_not_found" = "לא נמצאו כתוביות";
-"osd.sub_found" = "%d subtitles found. Downloading…";
+"osd.sub_found" = "%d כתוביות נמצאו. מוריד…";
 "osd.sub_downloaded" = "הכתוביות הורדו";
 "osd.sub_saved" = "הכתוביות נשמרו";
 "osd.network_error" = "שגיאת רשת";
@@ -89,19 +89,19 @@
 "osd.canceled" = "מבוטל";
 "osd.cannot_connect" = "ההתחברות נכשלה";
 "osd.timed_out" = "Timed Out";
-"osd.filter_added" = "Added Filter: %@";
+"osd.filter_added" = "נוסף מסנן: %@";
 "osd.filter_removed" = "המסנן הוסר";
-"osd.file_loop" = "File Loop: %@";
-"osd.playlist_loop" = "Playlist Loop: %@";
+"osd.file_loop" = "חזרה על קובץ: %@";
+"osd.playlist_loop" = "חזרה על רשימת השמעה: %@";
 
 "preference.title" = "העדפות";
 "preference.general" = "כללי";
 "preference.ui" = "ממשק משתמש";
-"preference.video_audio" = "וידאו/אודיו";
+"preference.video_audio" = "וידאו/שמע";
 "preference.subtitle" = "כתוביות";
 "preference.network" = "רשת";
 "preference.control" = "שליטה";
-"preference.keybindings" = "Key Bindings";
+"preference.keybindings" = "קיצורי מקשים";
 "preference.advanced" = "מתקדם";
 "preference.plugins" = "תוספים";
 "preference.utilities" = "עזרים";
@@ -111,14 +111,14 @@
 "preference.system_media_control" = "השתמש בבקרת המדיה של המערכת";
 
 "preference.key_binding_hint_1" = "כדי לערוך קיצור מקשים בקובץ התצורה הנוכחי, לחץ תחילה על כפתור \"שכפל…\" כדי ליצור עותק.";
-"preference.key_binding_hint_2" = "Double click a row at the right side to edit the corresponding key binding.";
+"preference.key_binding_hint_2" = "לחץ פעמיים בצד ימין של שורה כדי לערוך את קיצור המקשים.";
 
 "preference.enable_adv_settings" = "אפשר הגדרות מתקדמות";
 
 "menu.volume" = "עוצמת שמע: %d";
 "menu.volume_muted" = "עוצמת שמע: %d (מושתק)";
-"menu.audio_delay" = "Audio Delay: %.2fs";
-"menu.sub_delay" = "Subtitle Delay: %.2fs";
+"menu.audio_delay" = "עיכוב שמע: %.2f שנ'";
+"menu.sub_delay" = "עיכוב כתוביות: %.2f שנ'";
 "menu.fullscreen" = "היכנס למסך מלא";
 "menu.exit_fullscreen" = "צא ממסך מלא";
 "menu.pip" = "היכנס למצב תמונה בתוך תמונה";
@@ -128,38 +128,38 @@
 "menu.pause" = "השהיה";
 "menu.resume" = "המשך";
 "menu.speed" = "מהירות: x%.2f";
-"menu.chapters" = "Show Chapters Panel";
-"menu.hide_chapters" = "Hide Chapters Panel";
-"menu.playlist" = "Show Playlist Panel";
-"menu.hide_playlist" = "Hide Playlist Panel";
-"menu.video" = "Show Video Panel";
-"menu.hide_video" = "Hide Video Panel";
-"menu.audio" = "Show Audio Panel";
-"menu.hide_audio" = "Hide Audio Panel";
-"menu.subtitles" = "Show Subtitles Panel";
-"menu.hide_subtitles" = "Hide Subtitles Panel";
+"menu.chapters" = "הצג פאנל פרקים";
+"menu.hide_chapters" = "הסתר פאנל פרקים";
+"menu.playlist" = "הצג פאנל רשימת השמעה";
+"menu.hide_playlist" = "הסתר פאנל רשימת השמעה";
+"menu.video" = "הצג פאנל וידאו";
+"menu.hide_video" = "הסתר פאנל וידאו";
+"menu.audio" = "הצג פאנל אודיו";
+"menu.hide_audio" = "הסתר פאנל וידאו";
+"menu.subtitles" = "הצג פאנל כתוביות";
+"menu.hide_subtitles" = "הסתר פאנל כתוביות";
 
-"menu.seek_forward" = "Step Forward %.0fs";
-"menu.seek_backward" = "Step Backward %.0fs";
+"menu.seek_forward" = "דלג קדימה %.0f שנ'";
+"menu.seek_backward" = "חזרה %.0f שניות אחורה";
 "menu.speed_up" = "Speed Up by %.1fx";
 "menu.speed_down" = "Speed Down by %.1fx";
 "menu.volume_up" = "Volume + %.0f%%";
 "menu.volume_down" = "Volume - %.0f%%";
-"menu.audio_delay_up" = "Audio Delay + %.1fs";
-"menu.audio_delay_down" = "Audio Delay - %.1fs";
-"menu.sub_delay_up" = "Subtitle Delay + %.1fs";
-"menu.sub_delay_down" = "Subtitle Delay - %.1fs";
+"menu.audio_delay_up" = "עיכוב שמע: הוסף %.1f שנ'";
+"menu.audio_delay_down" = "עיכוב שמע: הפחת %.1f שנ'";
+"menu.sub_delay_up" = "עיכוב כתוביות: הוסף %.1f שנ'";
+"menu.sub_delay_down" = "עיכוב כתוביות: הפחת %.1f שנ'";
 
 "menu.crop_custom" = "התאמה אישית...";
 "menu.find_online_sub" = "מצא כתוביות מקוונות מאת %@";
 
 "track.none" = "<None>";
 
-"subtrack.no_loaded" = "No Subtitles Loaded";
-"subtrack.no_external" = "No External Subtitles Found";
+"subtrack.no_loaded" = "לא נטענו כתוביות";
+"subtrack.no_external" = "לא נמצאו כתוביות חיצוניות";
 
 // Alerts
-"alert.beta_channel.title" = "Receive Updates for Beta Versions";
+"alert.beta_channel.title" = "קבל עדכונים עבור גרסאות בטא";
 
 "alert.title_error" = "שגיאה";
 "alert.title_warning" = "אזהרה";
@@ -195,7 +195,7 @@
 "alert.add_filter.title" = "מסנן חדש";
 "alert.add_filter.message" = "Please enter a filter string in format of mpv's vf or af command.";
 
-"alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
+"alert.keybinding_config.error" = "שגיאה בניתוח קובץ תצורת קיצורי מקשים \"%@\"! חוזר לקיצורי מקשים ברירת המחדל של IINA. אנא בדוק את התצורה שלך.";
 
 "alert.extra_option.cannot_read" = "קריאת אפשרויות mpv נוספות המוגדרות על ידי המשתמש נכשלה.";
 "alert.extra_option.empty" = "המפתח או הערך לא יכולים להיות ריקים!";
@@ -206,18 +206,18 @@
 
 "alert.screenshot.error_taking" = "שגיאה בביצוע צילום מסך!";
 
-"alert.sub.no_selected" = "Please select a downloaded subtitle first.";
-"alert.sub_lang_not_set" = "Please set preferred subtitle languages in preferences before using OpenSubtitles. English(eng) will be used this time.";
+"alert.sub.no_selected" = "אנא בחר תחילה כתוביות שהורדת.";
+"alert.sub_lang_not_set" = "אנא הגדר שפות כתוביות מועדפות בהגדרות לפני השימוש ב-OpenSubtitles. אנגלית (en) תשמש הפעם.";
 "alert.sub.cannot_save_passwd" = "שמירת הסיסמה למחזיק המפתחות נכשלה: %@";
 "alert.sub.cannot_login" = "ההתחברות נכשלה. אנא בדוק את שם המשתמש, הסיסמה ומצב הרשת שלך.\n\n%@";
-"alert.sub.save_downloaded.title" = "Save Downloaded Subtitle";
+"alert.sub.save_downloaded.title" = "שמור כתוביות שהורדו";
 
 "alert.set_default.title" = "הגדרת IINA כאפליקציית ברירת המחדל";
 "alert.set_default.message" = "IINA תוגדר כאפליקציית ברירת המחדל עבור כל סוגי הקבצים שבהם היא תומכת.";
-"alert.set_default.success" = "Finished with %d success and %d failed.";
+"alert.set_default.success" = "הסתיים עם %d שהצליחו ו-%d שנכשלו.";
 
 "alert.add_watch.title" = "Add Watch Property";
-"alert.add_watch.message" = "Please enter a valid mpv property name.";
+"alert.add_watch.message" = "אנא הזן שם מאפיין mpv חוקי.";
 
 "alert.jump_to.title" = "קפיצה אל";
 "alert.jump_to.message" = "יש להזין את השעה אליה ברצונך לקפוץ. לדוגמה: 20:35";
@@ -299,10 +299,10 @@
 "pl_menu.copy_url_multi" = "העתק URLs";
 
 "keymapping.title" = "Key Mapping";
-"keymapping.message" = "Press any key to record.";
+"keymapping.message" = "לחץ על מקש כלשהו כדי להקליט.";
 
-"filter.video_filters" = "Video Filters";
-"filter.audio_filters" = "Audio Filters";
+"filter.video_filters" = "מסנני וידאו";
+"filter.audio_filters" = "מסנני שמע";
 
 "hwdec.no" = "השבת פענוח חומרה.";
 "hwdec.auto" = "אפשר פענוח חומרה, אך רוב מסנני הווידאו לא יפעלו כראוי.";
@@ -349,7 +349,7 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "בקשת רשת";
-"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
+"permissions.network-request.desc" = "תוסף זה יכול לשלוח בקשות רשת ולהעלות נתונים לאתרים הבאים:";
 "permissions.network-request.any_site" = "כל אתר";
 "permissions.show-osd.name" = "Show OSD";
 "permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
@@ -372,4 +372,4 @@
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_load" = "IINA לא יכול לטעון את התוסף הזה. ייתכן שהוא בפורמט שגוי.";
 "plugin.check_for_updates" = "חפש עדכונים";
-"plugin.updating" = "Downloading update…";
+"plugin.updating" = "מוריד את העדכון…";

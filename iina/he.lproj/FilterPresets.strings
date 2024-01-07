@@ -31,13 +31,13 @@
 "blur.msize" = "Matrix size";
 "blur.amount" = "רמה";
 
-"delogo" = "Delogo";
+"delogo" = "הסרת סימן מים";
 "delogo.w" = "רוחב";
 "delogo.h" = "גובה";
-"delogo.x" = "Origin X";
-"delogo.y" = "Origin Y";
+"delogo.x" = "מקור בציר X";
+"delogo.y" = "מקור בציר Y";
 
-"negative" = "Negative";
+"negative" = "שלילי";
 
 "vflip" = "היפוך";
 "hflip" = "מראה";

@@ -178,7 +178,7 @@
 "alert.error_open" = "لا يمكن فتح الملف أو عرضه!";
 "alert.error_finding_file" = "لا يمكن العثور على %@ ملف!";
 "alert.error_loading_script" = "لا يمكن تحميل النص %@!";
-"alert.error_saving_file" = "Error occurred when saving %@: %@";
+"alert.error_saving_file" = "حدث خطأ في أثناء الحفظ %@: %@";
 "alert.error_deleting_file" = "لا يمكن حذف الملف.";
 
 "alert.config.new.title" = "تكوين مصدر إدخال جديد";
@@ -192,7 +192,7 @@
 "alert.config.cannot_create" = "لا يمكن إنشاء ملف التكوين!\n%@";
 "alert.config.cannot_write" = "لا يمكن الكتابة إلى ملف التكوين!";
 
-"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
+"alert.filter.incorrect" = "حدث خطأ أثناء إعداد عوامل التصفية. الرجاء التحقق من صيغة الوسيط الخاصة بك.";
 "alert.add_filter.title" = "عامل تصفية جديد";
 "alert.add_filter.message" = "الرجاء إدخال سلسلة فلتر في شكل أمر mpv أو af.";
 
@@ -350,7 +350,7 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "طلب الشبكة";
-"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
+"permissions.network-request.desc" = "هذا البرنامج المساعد يمكن أن يجعل إعادة تأكيد أو تحميل البيانات إلى هذه المواقع:";
 "permissions.network-request.any_site" = "أي موقع";
 "permissions.show-osd.name" = "إظهار OSD";
 "permissions.show-osd.desc" = "يمكن لهذه الإضافة أن تظهر رسائل OSD (على شاشة العرض).";

@@ -132,11 +132,11 @@
 "menu.hide_chapters" = "Hide Chapters Panel";
 "menu.playlist" = "Näytä soittolistan paneeli";
 "menu.hide_playlist" = "Hide Playlist Panel";
-"menu.video" = "Show Video Panel";
+"menu.video" = "Näytä Videopaneeli";
 "menu.hide_video" = "Hide Video Panel";
-"menu.audio" = "Show Audio Panel";
+"menu.audio" = "Näytä Äänipaneeli";
 "menu.hide_audio" = "Hide Audio Panel";
-"menu.subtitles" = "Show Subtitles Panel";
+"menu.subtitles" = "Näytä Tekstityspaneeli";
 "menu.hide_subtitles" = "Hide Subtitles Panel";
 
 "menu.seek_forward" = "Astu eteenpäin %.0fs";
@@ -371,5 +371,5 @@
 "plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Check for Updates";
+"plugin.check_for_updates" = "Tarkista päivitykset";
 "plugin.updating" = "Downloading update…";

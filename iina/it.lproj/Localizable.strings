@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Aggiungto filtro: %@";
 "osd.filter_removed" = "Filtro rimosso";
-"osd.file_loop" = "Ripeti file: %@";
-"osd.playlist_loop" = "Ripeti playlist: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Preferenze";
 "preference.general" = "Generali";
@@ -191,7 +192,7 @@
 "alert.config.cannot_create" = "Impossibile creare il file di configurazione!\n%@";
 "alert.config.cannot_write" = "Impossibile scrivere il file di configurazione!";
 
-"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
+"alert.filter.incorrect" = "Si è verificato un errore durante l'impostazione dei filtri. Verifica il formato dei parametri.";
 "alert.add_filter.title" = "Nuovo filtro";
 "alert.add_filter.message" = "Inserisci una stringa di filtro nel formato dei comandi vf o af di mpv.";
 
@@ -355,16 +356,16 @@
 "permissions.show-osd.desc" = "Questo plugin può mostrare messaggi OSD (On Screen Display).";
 "permissions.show-alert.name" = "Mostra avvisi";
 "permissions.show-alert.desc" = "Questo plugin può mostrare avvisi pop-up.";
-"permissions.video-overlay.name" = "Add overlays on videos";
+"permissions.video-overlay.name" = "Aggiungi overlay ai video";
 "permissions.video-overlay.desc" = "Questo plugin può effettuare il render di contenuti aggiuntivi sopra il video.";
 "permissions.file-system.name" = "Accedi ai file di sistema";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.file-system.desc" = "Questo plugin può leggere o scrivere file sul disco, comprese le informazioni sensibili. Può anche utilizzare altri programmi o applicazioni che possono danneggiare il computer. Assicurati di verificare la sua provenienza prima di procedere.";
 
 "plugin.install" = "Installa";
 "plugin.installed" = "Installato";
 "plugin.not_installed" = "Non installato";
 "plugin.local" = "Installato localmente";
-"alert.plugin.install_error" = "Error occurred during the installation: %@";
+"alert.plugin.install_error" = "Si è verificato un errore durante l'installazione: %@";
 "alert.invalid_url" = "L'URL non è valido.";
 "plugin.install_error.invalid_url" = "L'URL non è valido.";
 "plugin.install_error.file_not_found" = "Impossibile trovare il file del pacchetto.";

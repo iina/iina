@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Filtru adăugat: %@";
 "osd.filter_removed" = "Filtru șters";
-"osd.file_loop" = "Redare fișier în buclă: %@";
-"osd.playlist_loop" = "Redare playlist în buclă: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Preferințe";
 "preference.general" = "General";
@@ -349,22 +350,22 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Solicitare rețea";
-"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
+"permissions.network-request.desc" = "Această extensie poate cere sau încărca date pe aceste site-uri:";
 "permissions.network-request.any_site" = "Orice site";
 "permissions.show-osd.name" = "Arată OSD";
 "permissions.show-osd.desc" = "Această extensie poate afișa mesajele OSD (On Screen Display).";
 "permissions.show-alert.name" = "Arată alerte";
 "permissions.show-alert.desc" = "Această extensie poate afișa alerte pop-up.";
-"permissions.video-overlay.name" = "Add overlays on videos";
+"permissions.video-overlay.name" = "Adaugă overlay peste video";
 "permissions.video-overlay.desc" = "Această extensie poate reda conținut suplimentar în partea de sus a videoclipului.";
 "permissions.file-system.name" = "Accesează fișiere de sistem";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.file-system.desc" = "Această extensie poate citi sau scrie fișiere pe discul dvs., inclusiv informații sensibile. De asemenea, poate apela alte programe sau aplicații care vă pot afecta calculatorul. Deci asigurați-vă că ați verificat sursa.";
 
 "plugin.install" = "Instalare";
 "plugin.installed" = "Instalat";
 "plugin.not_installed" = "Nu este instalat";
 "plugin.local" = "Instalat local";
-"alert.plugin.install_error" = "Error occurred during the installation: %@";
+"alert.plugin.install_error" = "A apărut o eroare în timpul instalării: %@";
 "alert.invalid_url" = "URL-ul nu este valid.";
 "plugin.install_error.invalid_url" = "URL-ul nu este valid.";
 "plugin.install_error.file_not_found" = "Fișierul package nu poate fi găsit.";

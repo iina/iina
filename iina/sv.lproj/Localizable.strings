@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "La till filter: %@";
 "osd.filter_removed" = "Tog bort filter";
-"osd.file_loop" = "Fil-loop: %@";
-"osd.playlist_loop" = "Upprepning av spellistor: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Inställningar";
 "preference.general" = "Allmänt";
@@ -349,7 +350,7 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Nätverksförfrågan";
-"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
+"permissions.network-request.desc" = "Detta tillägget kan göra förfrågan samt ladda upp data till följande webbplatser:";
 "permissions.network-request.any_site" = "Alla sidor";
 "permissions.show-osd.name" = "Visa OSD";
 "permissions.show-osd.desc" = "Detta tillägget kan visa OSD (\"On-Screen Display\")-meddelanden.";
@@ -358,13 +359,13 @@
 "permissions.video-overlay.name" = "Add overlays on videos";
 "permissions.video-overlay.desc" = "Detta tillägget kan rendera ytterligare innehåll ovanpå videon.";
 "permissions.file-system.name" = "Åtkomst till filsystemet";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.file-system.desc" = "Detta tillägget kan läsa och skriva till filer på din hårddisk, inklusive känslig information. Det kan även anropa andra program eller applikationer som kan skada din dator. Se till att verifiera källan noggrant.";
 
 "plugin.install" = "Installera";
 "plugin.installed" = "Installerat";
 "plugin.not_installed" = "Inte installerat";
 "plugin.local" = "Installerat lokalt";
-"alert.plugin.install_error" = "Error occurred during the installation: %@";
+"alert.plugin.install_error" = "Ett fel uppstod under installationen: %@";
 "alert.invalid_url" = "URL:en är ogiltig.";
 "plugin.install_error.invalid_url" = "URL:en är ogiltig.";
 "plugin.install_error.file_not_found" = "Kan inte hitta paketfilen.";

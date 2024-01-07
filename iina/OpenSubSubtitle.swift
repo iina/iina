@@ -136,12 +136,51 @@ class OpenSub {
         }.then {
           self.filterLanguageCodes()
         }.then {
-          self.hash(url)
-        }.then { hash in
-          self.searchForSubtitles(url, hash, player.getMediaTitle())
+          when(fulfilled: self.guessit(url, player.getMediaTitle()), self.hash(url))
+        }.then { info, hash in
+          self.searchForSubtitles(url, info, hash, player.getMediaTitle())
         }.then { subs in
           self.showSubSelectWindow(with: subs)
         }
+    }
+
+    /// Extract information from the video filename.
+    /// - Parameters:
+    ///   - url: A [URL](https://developer.apple.com/documentation/foundation/url) to the movie to search
+    ///          for subtitles for.
+    ///   - mediaTitle: The title of the movie.
+    /// - Returns: A `GuessitResponse` containing the information that could be extracted from the filename.
+    func guessit(_ url: URL, _ mediaTitle: String) -> Promise<OpenSubClient.GuessitResponse> {
+      // When streaming prefer the movie's title.
+      let filename = url.isFileURL ? url.deletingPathExtension().lastPathComponent : mediaTitle
+      return OpenSubClient.shared.guessit(filename: filename).then { response in
+        Promise { resolver in
+          var message = ""
+          if let type = response.type {
+            message += "type \(type)"
+          }
+          if let season = response.season {
+            if !message.isEmpty { message += ", " }
+            message += "season \(season)"
+          }
+          if let episode = response.episode {
+            if !message.isEmpty { message += ", " }
+            message += "episode \(episode)"
+          }
+          if let year = response.year {
+            if !message.isEmpty { message += ", " }
+            message += "year \(year)"
+          }
+          if message.isEmpty {
+            log("Unable to extract information from video filename")
+          } else {
+            log("Information extracted from video filename: \(message)")
+          }
+          resolver.fulfill((response))
+        }
+      }.recover { error -> Promise<OpenSubClient.GuessitResponse> in
+        throw Error.searchFailed(error.localizedDescription)
+      }
     }
 
     /// Calculate an [Open Subtitles](https://www.opensubtitles.com/) hash code value.
@@ -302,10 +341,12 @@ class OpenSub {
     /// - Parameters:
     ///   - url: A [URL](https://developer.apple.com/documentation/foundation/url) to the movie to search
     ///          for subtitles for.
+    ///   - info: Information extracted from the video filename.
     ///   - hash: An [Open Subtitles](https://www.opensubtitles.com/) hash code value or `nil`.
     ///   - mediaTitle: The title of the movie.
     /// - Returns: An array containing one or more `Subtitle` objects.
-    func searchForSubtitles(_ url: URL, _ hash: String?, _ mediaTitle: String) -> Promise<[Subtitle]> {
+    func searchForSubtitles(_ url: URL, _ info: OpenSubClient.GuessitResponse, _ hash: String?,
+                            _ mediaTitle: String) -> Promise<[Subtitle]> {
       // When streaming prefer the movie's title.
       let searchString = url.isFileURL ? url.deletingPathExtension().lastPathComponent : mediaTitle
       if let hash = hash {
@@ -313,7 +354,8 @@ class OpenSub {
       } else {
         log("Searching for subtitles of movies matching '\(searchString)'")
       }
-      return OpenSubClient.shared.subtitles(languages: languages, hash: hash, query: searchString).then { response in
+      return OpenSubClient.shared.subtitles(languages: languages, info: info, hash: hash,
+                                            query: searchString).then { response in
         Promise { resolver in
           guard response.totalCount != 0 else {
             resolver.reject(OnlineSubtitle.CommonError.noResult)

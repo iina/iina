@@ -267,6 +267,30 @@ class OpenSubClient {
     }
   }
 
+  /// [Guessit](https://opensubtitles.stoplight.io/docs/opensubtitles-api/7783e082edcf7-guessit)
+  /// method.
+  ///
+  /// Extracts as much information as possible from a video filename.
+  /// - Parameter filename: Video filename to extract information from.
+  /// - Returns: A `GuessitResponse` containing the information that could be extracted from the filename.
+  func guessit(filename: String) -> Promise<GuessitResponse> {
+    return after(seconds: rateLimiter.delayBeforeCall()).then { [self] in
+      Promise { resolver in
+        let params = ["filename": filename]
+        let url = apiURL("utilities/guessit")
+        Just.get(url, params: params, headers: formHeaders(), asyncCompletionHandler: { [self] result in
+          logHTTPResult(result)
+          do {
+            let response = try self.decodeResponse(GuessitResponse.self, from: result)
+            resolver.fulfill(response)
+          } catch {
+            resolver.reject(error)
+          }
+        })
+      }
+    }
+  }
+
   /// [Languages](https://opensubtitles.stoplight.io/docs/opensubtitles-api/1de776d20e873-languages)
   /// method.
   /// - Returns: A `LanguagesResponse` containing a list of the supported lanuage codes.
@@ -380,20 +404,34 @@ class OpenSubClient {
   ///         percent encoding.
   /// - Parameters:
   ///   - languages: Language code(s).
+  ///   - info: Information extracted from the video filename.
   ///   - hash: Moviehash of the movie file.
   ///   - query:File name or text search.
   /// - Returns: A `SubtitlesResponse` object.
-  func subtitles(languages: [String], hash: String?, query: String?) -> Promise<SubtitlesResponse> {
+  func subtitles(languages: [String], info: GuessitResponse, hash: String?, query: String?) -> Promise<SubtitlesResponse> {
     return after(seconds: rateLimiter.delayBeforeCall()).then { [self] in
       Promise { resolver in
         // As per REST API best practices, attempt to send GET parameters in alphabetical order.
         // Unfortunately, Just.get takes a Swift dictionary therefore order is not guaranteed.
-        var params = ["languages": languages.sorted().joined(separator: ",")]
+        var params:[String: Any] = [:]
+        if let episode = info.episode {
+          params["episode_number"] = episode
+        }
+        params["languages"] = languages.sorted().joined(separator: ",")
         if let hash = hash {
           params["moviehash"] = hash
         }
         if let query = query {
           params["query"] = query
+        }
+        if let season = info.season {
+          params["season_number"] = season
+        }
+        if let type = info.type {
+          params["type"] = type
+        }
+        if let year = info.year {
+          params["year"] = year
         }
         let url = apiURL("subtitles")
         Just.get(url, params: params, headers: formHeaders(), asyncCompletionHandler: { [self] result in
@@ -725,6 +763,38 @@ class OpenSubClient {
     var requests: Int?
     var resetTime: String?
     var resetTimeUtc: Date?
+  }
+
+  /// Response returned by the
+  /// [Guessit](https://opensubtitles.stoplight.io/docs/opensubtitles-api/7783e082edcf7-guessit)
+  /// method.
+  struct GuessitResponse: Response {
+#if DEBUG
+    var audioChannels: String?
+    var audioCodec: String?
+    var container: String?
+#endif
+    var episode: Int?
+#if DEBUG
+    var episodeTitle: String?
+    var language: String?
+    var mimetype: String?
+    var other: String?
+    var releaseGroup: String?
+    var screenSize: String?
+#endif
+    var season: Int?
+#if DEBUG
+    var source: String?
+    var streamingService: String?
+    var subtitleLanguage: String?
+    var title: String?
+#endif
+    var type: String?
+#if DEBUG
+    var videoCodec: String?
+#endif
+    var year: Int?
   }
 
   /// Part of the response returned by the

@@ -91,8 +91,9 @@
 "osd.timed_out" = "超时";
 "osd.filter_added" = "已添加滤镜: %@";
 "osd.filter_removed" = "已移除滤镜";
-"osd.file_loop" = "文件循环: %@";
-"osd.playlist_loop" = "播放列表循环: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "偏好设置";
 "preference.general" = "通用";
@@ -349,7 +350,7 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "网络请求";
-"permissions.network-request.desc" = "此插件可以从这些网站生成requsts或上传数据：";
+"permissions.network-request.desc" = "此插件可以从这些网站生成请求或上传数据：";
 "permissions.network-request.any_site" = "任何网站";
 "permissions.show-osd.name" = "显示 OSD";
 "permissions.show-osd.desc" = "此插件可以显示 OSD (屏幕显示) 消息。";

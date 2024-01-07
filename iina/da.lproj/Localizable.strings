@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Tilføjet filter: %@";
 "osd.filter_removed" = "Fjernet filter";
-"osd.file_loop" = "File Loop: %@";
-"osd.playlist_loop" = "Playlist Loop: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Preferancer";
 "preference.general" = "Generalt";
@@ -191,7 +192,7 @@
 "alert.config.cannot_create" = "Kan ikke oprette config filen!";
 "alert.config.cannot_write" = "Kan ikke skrive til config filen!";
 
-"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
+"alert.filter.incorrect" = "Fejl opstået under anvendelse af filtre. Venligst tjek dit parameter format.";
 "alert.add_filter.title" = "Nyt filter";
 "alert.add_filter.message" = "Venligst indtast en filter streng af mpvs vf eller af kommando.";
 
@@ -355,7 +356,7 @@
 "permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
 "permissions.show-alert.name" = "Vi advarsler";
 "permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
-"permissions.video-overlay.name" = "Add overlays on videos";
+"permissions.video-overlay.name" = "Tilføj overlay på videoer";
 "permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
 "permissions.file-system.name" = "Adgang til fil systemet";
 "permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
@@ -364,7 +365,7 @@
 "plugin.installed" = "Installeret";
 "plugin.not_installed" = "Ikke Installeret";
 "plugin.local" = "Installeret lokalt";
-"alert.plugin.install_error" = "Error occurred during the installation: %@";
+"alert.plugin.install_error" = "Der skete en fejl under installationen: %@";
 "alert.invalid_url" = "URL'en er ugyldig.";
 "plugin.install_error.invalid_url" = "URL'en er ugyldig.";
 "plugin.install_error.file_not_found" = "Cannot find the package file.";

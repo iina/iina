@@ -371,5 +371,5 @@
 "plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Check for Updates";
+"plugin.check_for_updates" = "Proveri da li postoje ažuriranja";
 "plugin.updating" = "Downloading update…";

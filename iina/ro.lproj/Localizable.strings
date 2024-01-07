@@ -178,7 +178,7 @@
 "alert.error_open" = "Fișierul sau stream-ul nu poate fi deschis!";
 "alert.error_finding_file" = "Fișierul %@ nu poate fi găsit!";
 "alert.error_loading_script" = "Scriptul %@ nu poate fi încărcat!";
-"alert.error_saving_file" = "Error occurred when saving %@: %@";
+"alert.error_saving_file" = "A apărut o eroare la salvarea %@: %@";
 "alert.error_deleting_file" = "Fișierul nu poate fi șters.";
 
 "alert.config.new.title" = "Configurație nouă de intrare";

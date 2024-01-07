@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Filter „%@“ hinzugefügt";
 "osd.filter_removed" = "Filter gelöscht";
-"osd.file_loop" = "Datei wiederholen: „%@“";
-"osd.playlist_loop" = "Wiedergabeliste wiederholen: „%@“";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Einstellungen";
 "preference.general" = "Allgemein";
@@ -191,7 +192,7 @@
 "alert.config.cannot_create" = "Konfigurationsdatei konnte nicht erstellt werden.\n%@";
 "alert.config.cannot_write" = "Konfigurationsdatei nicht beschreibbar.";
 
-"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
+"alert.filter.incorrect" = "Fehler beim Setzen der Filter. Bitte überprüfe die Parameter.";
 "alert.add_filter.title" = "Neuer Filter";
 "alert.add_filter.message" = "Bitte gib die Zeichenkette für den Filter im Stil der vf- bzw. af-Kommandos von mpv an.";
 
@@ -355,16 +356,16 @@
 "permissions.show-osd.desc" = "Diese Erweiterung On-Screen-Nachrichten einblenden.";
 "permissions.show-alert.name" = "Warnungen anzeigen";
 "permissions.show-alert.desc" = "Diese Erweiterung kann Pop-Up-Warnungen anzeigen.";
-"permissions.video-overlay.name" = "Add overlays on videos";
+"permissions.video-overlay.name" = "Überlagerungen zu Videos hinzufügen";
 "permissions.video-overlay.desc" = "Diese Erweiterung kann zusätzliche Inhalte am oberen Rand des Videos darstellen.";
 "permissions.file-system.name" = "Dateisystem-Zugriff";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.file-system.desc" = "Diese Erweiterung kann Dateien, einschließlich sensibler Informationen lesen oder schreiben. Es kann auch andere Programme oder Anwendungen aufrufen, die deinem Computer schaden können. Überprüfe daher unbedingt die Quelle.";
 
 "plugin.install" = "Installieren";
 "plugin.installed" = "Installiert";
 "plugin.not_installed" = "Nicht installiert";
 "plugin.local" = "Lokal installiert";
-"alert.plugin.install_error" = "Error occurred during the installation: %@";
+"alert.plugin.install_error" = "Während der Installation ist ein Fehler aufgetreten: „%@“";
 "alert.invalid_url" = "Die Adresse ist ungültig.";
 "plugin.install_error.invalid_url" = "Die Adresse ist ungültig.";
 "plugin.install_error.file_not_found" = "Die Paketdatei wurde nicht gefunden.";

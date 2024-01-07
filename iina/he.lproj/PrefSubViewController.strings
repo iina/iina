@@ -17,7 +17,7 @@
 "4Tb-Yh-PdP.title" = "מיקום:";
 
 /* Class = "NSMenuItem"; title = "Bottom"; ObjectID = "6i0-Sx-V7F"; */
-"6i0-Sx-V7F.title" = "למטה";
+"6i0-Sx-V7F.title" = "תחתית";
 
 /* Class = "NSTextFieldCell"; title = "Subtitles have priority when filename containing:"; ObjectID = "7pf-Kb-TNr"; */
 "7pf-Kb-TNr.title" = "לכתוביות יש עדיפות כאשר שם הקובץ מכיל:";
@@ -26,7 +26,7 @@
 "8hj-ki-R0h.title" = "Scale subtitles with window size";
 
 /* Class = "NSTextFieldCell"; title = "Font spacing:"; ObjectID = "9EP-XB-lyO"; */
-"9EP-XB-lyO.title" = "Font spacing:";
+"9EP-XB-lyO.title" = "ריווח גופן:";
 
 /* Class = "NSTextFieldCell"; title = "Vertical position:"; ObjectID = "9N4-Zg-M7m"; */
 "9N4-Zg-M7m.title" = "מיקום אנכי:";
@@ -41,7 +41,7 @@
 "BgE-Kk-MXC.title" = "צל";
 
 /* Class = "NSButtonCell"; title = "Search online subtitles automatically"; ObjectID = "C3p-uP-8u8"; */
-"C3p-uP-8u8.title" = "Search online subtitles automatically";
+"C3p-uP-8u8.title" = "חפש כתוביות מקוונות אוטומטית";
 
 /* Class = "NSTextFieldCell"; title = "Font:"; ObjectID = "C4C-XP-i2S"; */
 "C4C-XP-i2S.title" = "גופן:";
@@ -65,16 +65,16 @@
 "Luv-2B-9v8.title" = "תיקיות מופרדות באמצעות נקודתיים (:). ניתן להשתמש בנתיבים יחסיים ובתווים כלליים (*) בסוף.";
 
 /* Class = "NSTextFieldCell"; title = "Please enter a comma-separated list of strings."; ObjectID = "Mk1-sv-QB8"; */
-"Mk1-sv-QB8.title" = "Please enter a comma-separated list of strings.";
+"Mk1-sv-QB8.title" = "אנא הזן רשימה של מחרוזות מופרדות בפסיקים.";
 
 /* Class = "NSTextFieldCell"; title = "If enabled, all ASS subtitles will be drawn using the styles below."; ObjectID = "OcF-0z-7qe"; */
-"OcF-0z-7qe.title" = "If enabled, all ASS subtitles will be drawn using the styles below.";
+"OcF-0z-7qe.title" = "אם מופעל, כל כתוביות ה-ASS יצוירו באמצעות העיצוב שמוגדר להלן.";
 
 /* Class = "NSTextFieldCell"; title = "Text subtitles:"; ObjectID = "Qda-dp-nhg"; */
 "Qda-dp-nhg.title" = "Text subtitles:";
 
 /* Class = "NSTextFieldCell"; title = "Also search subtitles in following directories:"; ObjectID = "QsS-wD-2hY"; */
-"QsS-wD-2hY.title" = "Also search subtitles in following directories:";
+"QsS-wD-2hY.title" = "חפש כתוביות גם בתיקיות הבאות:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "SIh-Sv-6XI"; */
 "SIh-Sv-6XI.title" = "צבע:";
@@ -107,7 +107,7 @@
 "cov-Uy-wnc.title" = "לא מחובר";
 
 /* Class = "NSTextFieldCell"; title = "Offset:"; ObjectID = "dtP-9o-yhy"; */
-"dtP-9o-yhy.title" = "Offset:";
+"dtP-9o-yhy.title" = "קיזוז:";
 
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "e0e-dB-Ir6"; */
 "e0e-dB-Ir6.title" = "מרכז";
@@ -116,7 +116,7 @@
 "eYO-c0-Rjp.title" = "רקע:";
 
 /* Class = "NSBox"; title = "Other Styles"; ObjectID = "egf-g3-b7a"; */
-"egf-g3-b7a.title" = "עיצובים אחרים";
+"egf-g3-b7a.title" = "סגנונות אחרים";
 
 /* Class = "NSTextFieldCell"; title = "Override level:"; ObjectID = "gAq-Vr-hRY"; */
 "gAq-Vr-hRY.title" = "רמת דריסה:";
@@ -146,7 +146,7 @@
 "pRe-wv-VVi.title" = "שוליים";
 
 /* Class = "NSButtonCell"; title = "Ignore ASS styles"; ObjectID = "rZf-bj-qbV"; */
-"rZf-bj-qbV.title" = "Ignore ASS styles";
+"rZf-bj-qbV.title" = "התעלם מסגנונות ASS";
 
 /* Class = "NSTextFieldCell"; title = "Auto load:"; ObjectID = "raf-Yu-ck0"; */
 "raf-Yu-ck0.title" = "Auto load:";
@@ -164,7 +164,7 @@
 "vDc-dw-liI.title" = "צבע:";
 
 /* Class = "NSTextFieldCell"; title = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues."; ObjectID = "vYb-qH-XkH"; */
-"vYb-qH-XkH.title" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues.";
+"vYb-qH-XkH.title" = "אם מופעל, IINA יחפש אוטומטית כתוביות מקוונות (רק עבור סרטונים ללא כתוביות טעונות, שאורכם יותר מ-20 דקות).";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "xGf-fF-4Hx"; */
 "xGf-fF-4Hx.title" = "Y:";
@@ -173,7 +173,7 @@
 "xid-E9-FC9.title" = "צבע:";
 
 /* Class = "NSMenuItem"; title = "Subtitles containing media filename"; ObjectID = "y1E-JR-KRI"; */
-"y1E-JR-KRI.title" = "Subtitles containing media filename";
+"y1E-JR-KRI.title" = "כתוביות שמכילות את שם קובץ המדיה";
 
 /* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "zaE-bH-XfT"; */
 "zaE-bH-XfT.title" = "שפה מועדפת:";

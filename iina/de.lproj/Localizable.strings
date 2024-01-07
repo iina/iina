@@ -178,7 +178,7 @@
 "alert.error_open" = "Datei oder Stream konnte nicht geöffnet werden.";
 "alert.error_finding_file" = "Die Datei „%@“ konnte nicht gefunden werden.";
 "alert.error_loading_script" = "Das Skript „%@“ konnte nicht geladen werden.";
-"alert.error_saving_file" = "Error occurred when saving %@: %@";
+"alert.error_saving_file" = "Fehler beim Sichern von %@: %@";
 "alert.error_deleting_file" = "Datei konnte nicht gelöscht werden.";
 
 "alert.config.new.title" = "Neue Eingabekonfiguration";
@@ -350,7 +350,7 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Netzwerk-Anfrage";
-"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
+"permissions.network-request.desc" = "Dieser Erweiterung kann Daten auf diesen Websites anfordern oder hochladen:";
 "permissions.network-request.any_site" = "Beliebige Seiten";
 "permissions.show-osd.name" = "On-Screen-Anzeige einblenden";
 "permissions.show-osd.desc" = "Diese Erweiterung On-Screen-Nachrichten einblenden.";

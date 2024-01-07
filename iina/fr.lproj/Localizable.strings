@@ -17,13 +17,13 @@
 "general.password" = "Mot de passe";
 
 // Guide Window
-"guide.highlights" = "Mis en avant";
+"guide.highlights" = "Éléments-clés";
 "guide.basic_settings" = "Réglages de base";
 "guide.faq" = "Questions fréquemment posées";
 
 // Initial Window
 "initial.announcement" = "Vous utilisez la version %@ d'IINA";
-"initial.beta.desc" = "Si vous voulez revenir à une version officielle, décochez la case \"recevoir les versions bêta\" depuis Paramètres > Général, et installer une version stable depuis <a href=\"https://iina.io\">notre site officielle</a>.";
+"initial.beta.desc" = "Si vous voulez revenir à une version officielle, décochez la case \"recevoir les versions bêta\" depuis Réglages > Général, et installez une version stable depuis <a href=\"https://iina.io\">notre site officiel</a>.";
 "initial.nightly.desc" = "Les versions quotidiennes ne sont pas recommandées pour être utilisées comme lecteur en production. Les versions quotidiennes ne prennent pas en charge la mise à jour automatique. Veuillez télécharger manuellement les dernières versions de notre site <a href=\"https://nightly.iina.io\">versions quotidiennes</a>.";
 "initial.debug.desc" = "Les versions de débogage ne sont généralement pas optimisées pour les performances, donc il n'est pas recommandé d'être utilisé comme lecteur en production. Les versions de débogage ne prennent pas en charge la mise à jour automatique.";
 "initial.bug_report" = "Signaler un bug via <a href=\"https://github.com/iina/iina/issues\">GitHub</a>.";
@@ -53,7 +53,7 @@
 "osd.crop" = "Rognage : %@";
 "osd.rotate" = "Rotation : %i°";
 "osd.deinterlace" = "Désentrelacer : %@";
-"osd.hwdec" = "Décodage Matériel: %@";
+"osd.hwdec" = "Décodage matériel : %@";
 "osd.audio_delay.nodelay" = "Délai audio : aucun";
 "osd.audio_delay.later" = "Délai audio : %.2fs en avance";
 "osd.audio_delay.earlier" = "Délai audio : %.2fs en retard";
@@ -122,7 +122,7 @@
 "menu.fullscreen" = "Plein écran";
 "menu.exit_fullscreen" = "Quitter le mode plein écran";
 "menu.pip" = "Passer en inscrustation";
-"menu.exit_pip" = "Quitter le mode incrustation";
+"menu.exit_pip" = "Quitter le mode Incrustation";
 "menu.mini_player" = "Activer le Mode Musique";
 "menu.exit_mini_player" = "Quitter le Mode Musique";
 "menu.pause" = "Mettre en pause";
@@ -159,7 +159,7 @@
 "subtrack.no_external" = "Aucun sous-titre externe trouvé";
 
 // Alerts
-"alert.beta_channel.title" = "Recevoir des mises à jour pour les versions beta";
+"alert.beta_channel.title" = "Recevoir des mises à jour pour les versions bêta";
 
 "alert.title_error" = "Erreur";
 "alert.title_warning" = "Attention";
@@ -177,7 +177,7 @@
 "alert.error_open" = "Impossible d'ouvrir ce fichier/stream !";
 "alert.error_finding_file" = "Impossible de trouver le fichier %@ !";
 "alert.error_loading_script" = "Impossible de charger le script %@ !";
-"alert.error_saving_file" = "Error occurred when saving %@: %@";
+"alert.error_saving_file" = "Une erreur est survenue lors de l'enregistrement de %@ : %@";
 "alert.error_deleting_file" = "Impossible de supprimer le fichier.";
 
 "alert.config.new.title" = "Nouvelle configuration des touches";
@@ -235,9 +235,9 @@
 "alert.delete_history.title" = "Supprimer l'historique de lecture";
 "alert.delete_history.message" = "Souhaitez-vous vraiment supprimer les entrées sélectionnées ?";
 
-"alert.filter_hwdec.message" = "Vous êtes sur le point d'activer un filtre vidéo. Cependant, votre décodeur hardware actuel peut ne pas bien supporter les filtres vidéos. Vous pouvez  désactiver le décodage hardware ou passer sur Auto(Copy), ce qui consommera le double en mémoire.\nVous aurez peut-être à répéter l'opération précédente (par exemple, activer le rognage) pour que tout fonctionne.";
-"alert.filter_hwdec.abort" = "Abandonner";
-"alert.filter_hwdec.turn_off" = "Désactiver le décodage hardware";
+"alert.filter_hwdec.message" = "Vous êtes sur le point d'appliquer un filtre vidéo. Cependant, votre décodeur matériel actuel peut ne pas bien supporter les filtres vidéo. Vous pouvez désactiver le décodage matériel ou passer sur Auto(Copy), qui consommera deux fois plus de mémoire.\nVous devrez peut-être répéter l'opération précédente (par exemple, activer le rognage) pour que tout fonctionne.";
+"alert.filter_hwdec.abort" = "Annuler";
+"alert.filter_hwdec.turn_off" = "Désactiver le décodage matériel";
 "alert.filter_hwdec.use_copy" = "Passer sur Auto(Copy)";
 
 "alert.clear_cache.title" = "Vider le cache des miniatures";
@@ -258,7 +258,7 @@
 
 "alert.duplicate_config" = "Vous ne pouvez pas modifier les configurations par défaut directement. Merci d'en dupliquer une pour pouvoir la modifier.";
 
-"alert.assrt_register" = "À cause du quota limité sur l'API d'Assrt, nous vous recommendons fortement d'utiliser votre propre token d'API. Le token par défaut est seulement disponible à des fins de démonstration, et vous risquez de rencontrer une erreur réseau en l'utilisant.";
+"alert.assrt_register" = "À cause du quota limité sur l'API, il est fortement recommandé d'utiliser votre propre jeton d'API. Le jeton par défaut n'est utilisé qu'à des fins de démonstration et vous risquez de rencontrer des erreurs réseau en l'utilisant.";
 "alert.assrt_register.register" = "S'inscrire";
 "alert.assrt_register.try" = "Essayer sans token";
 "alert.assrt_token_prompt.title" = "Saisissez votre token d'API";
@@ -312,7 +312,7 @@
 
 "osc_toolbar.settings" = "Réglages rapides";
 "osc_toolbar.playlist" = "Liste de lecture et chapitres";
-"osc_toolbar.pip" = "Image dans l'Image";
+"osc_toolbar.pip" = "Activer/désactiver le mode Incrustation";
 "osc_toolbar.full_screen" = "Activer le mode plein écran";
 "osc_toolbar.music_mode" = "Activer le mode musique";
 "osc_toolbar.sub_track" = "Choisir une piste de sous-titres";
@@ -344,27 +344,27 @@
 "touchbar.seek" = "Chercher";
 "touchbar.time" = "Position horaire";
 "touchbar.remainingTimeOrTotalDuration" = "Durée restante / Durée totale";
-"touchbar.toggle_pip" = "Activer le mode Image dans l'image";
+"touchbar.toggle_pip" = "Activer/désactiver le mode Incrustation";
 
 // Plugin permissions
 
 "permissions.network-request.name" = "Réseau";
-"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
-"permissions.network-request.any_site" = "N'import quel site";
+"permissions.network-request.desc" = "Cette extension peut envoyer des requêtes ou des données vers ces sites web :";
+"permissions.network-request.any_site" = "N'importe quel site";
 "permissions.show-osd.name" = "Afficher l'OSD";
 "permissions.show-osd.desc" = "Cette extension peut afficher des messages OSD (\"On-Screen Display\").";
 "permissions.show-alert.name" = "Afficher les alertes";
 "permissions.show-alert.desc" = "Cette extension peut afficher des alertes.";
-"permissions.video-overlay.name" = "Add overlays on videos";
+"permissions.video-overlay.name" = "Afficher du contenu supplémentaire par-dessus les vidéos";
 "permissions.video-overlay.desc" = "Cette extension peut afficher du contenu supplémentaire par-dessus la vidéo.";
 "permissions.file-system.name" = "Accéder au système de fichiers";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.file-system.desc" = "Cette extension peut lire ou écrire des fichiers sur votre disque, y compris des informations sensibles. Il peut également exécuter d'autres programmes ou applications susceptibles de nuire à votre ordinateur. Veillez donc à en vérifier la source.";
 
 "plugin.install" = "Installer";
 "plugin.installed" = "Installée";
 "plugin.not_installed" = "Non installée";
 "plugin.local" = "Installée localement";
-"alert.plugin.install_error" = "Error occurred during the installation: %@";
+"alert.plugin.install_error" = "Une erreur est survenue lors de l'installation : %@";
 "alert.invalid_url" = "L'URL n'est pas valide.";
 "plugin.install_error.invalid_url" = "L'URL n'est pas valide.";
 "plugin.install_error.file_not_found" = "Impossible de trouver le fichier du paquet.";

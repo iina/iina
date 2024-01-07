@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Tilføjet filter: %@";
 "osd.filter_removed" = "Fjernet filter";
-"osd.file_loop" = "File Loop: %@";
-"osd.playlist_loop" = "Playlist Loop: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Preferancer";
 "preference.general" = "Generalt";
@@ -123,6 +124,8 @@
 "menu.exit_fullscreen" = "Afslut fuldskærmsvisning";
 "menu.pip" = "Gå til Picture-in-Picture";
 "menu.exit_pip" = "Afslut Picture-in-Picture";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pause";
 "menu.resume" = "Genoptag";
 "menu.speed" = "Hastighed: %.2fx";
@@ -314,6 +317,7 @@
 "osc_toolbar.full_screen" = "Skift fuld skærm";
 "osc_toolbar.music_mode" = "Gå i musik-tilstand";
 "osc_toolbar.sub_track" = "Vælg undertekstspor";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "Slå album art Til/Fra";
 "mini_player.loop" = "Gentag";
@@ -346,7 +350,7 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Netværksanmodning";
-"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
+"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
 "permissions.network-request.any_site" = "Enhver side";
 "permissions.show-osd.name" = "Vis OSD";
 "permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
@@ -355,7 +359,7 @@
 "permissions.video-overlay.name" = "Tilføj overlay på videoer";
 "permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
 "permissions.file-system.name" = "Adgang til fil systemet";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Installer";
 "plugin.installed" = "Installeret";

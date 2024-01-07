@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Filter yang ditambahkan: %@";
 "osd.filter_removed" = "Filter Terhapus";
-"osd.file_loop" = "Pengulangan File: %@";
-"osd.playlist_loop" = "Pengulangan Daftar Putar: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Preferensi";
 "preference.general" = "Umum";
@@ -123,6 +124,8 @@
 "menu.exit_fullscreen" = "Keluar dari Layar Penuh";
 "menu.pip" = "Masuk Picture-in-Picture";
 "menu.exit_pip" = "Keluar dari Picture-in-Picture";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Jeda";
 "menu.resume" = "Lanjutkan";
 "menu.speed" = "Kecepatan: %.2fx";
@@ -314,6 +317,7 @@
 "osc_toolbar.full_screen" = "Aktif/nonaktifkan layar penuh";
 "osc_toolbar.music_mode" = "Aktifkan mode musik";
 "osc_toolbar.sub_track" = "Pilih trek terjemahan";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "Aktif/nonaktifkan Album Art";
 "mini_player.loop" = "Ulangi";

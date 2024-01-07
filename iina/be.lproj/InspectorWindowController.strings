@@ -11,25 +11,25 @@
 "5H6-qJ-RDS.title" = "Фармат:";
 
 /* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "7QX-tu-rvs"; */
-"7QX-tu-rvs.title" = "Частата кадраў (кадр/c):";
+"7QX-tu-rvs.title" = "Кадр/c:";
 
 /* Class = "NSTextFieldCell"; title = "Title:"; ObjectID = "9eq-rd-zGy"; */
 "9eq-rd-zGy.title" = "Назва:";
 
 /* Class = "NSTextFieldCell"; title = "Bit Rate:"; ObjectID = "A4y-LL-x0z"; */
-"A4y-LL-x0z.title" = "Хуткасць струменя:";
+"A4y-LL-x0z.title" = "Бітрэйт:";
 
 /* Class = "NSTextFieldCell"; title = "Mistimed Frames:"; ObjectID = "AYt-pH-UCi"; */
 "AYt-pH-UCi.title" = "Несінхранізаваныя кадры:";
 
 /* Class = "NSTextFieldCell"; title = "Display FPS:"; ObjectID = "AjU-1T-aGR"; */
-"AjU-1T-aGR.title" = "Фактычная частата кадраў (кадраў/с):";
+"AjU-1T-aGR.title" = "Фактычная частата кадраў:";
 
 /* Class = "NSTextFieldCell"; title = "Dropped Frames:"; ObjectID = "CrF-UR-udW"; */
 "CrF-UR-udW.title" = "Прапушчаныя кадры:";
 
 /* Class = "NSTextFieldCell"; title = "Hw Decoder:"; ObjectID = "DHh-ne-10f"; */
-"DHh-ne-10f.title" = "Hw дэкодар";
+"DHh-ne-10f.title" = "Апаратны дэкодар:";
 
 /* Class = "NSWindow"; title = "Inspector"; ObjectID = "F0z-JX-Cv5"; */
 "F0z-JX-Cv5.title" = "Інспектар";
@@ -47,7 +47,7 @@
 "Fqo-1c-3L1.ibShadowedLabels[2]" = "Файл";
 
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[3] = "Status"; ObjectID = "Fqo-1c-3L1"; */
-"Fqo-1c-3L1.ibShadowedLabels[3]" = "Стан";
+"Fqo-1c-3L1.ibShadowedLabels[3]" = "Статус";
 
 /* Class = "NSTextFieldCell"; title = "Driver:"; ObjectID = "I2E-6Z-Gnn"; */
 "I2E-6Z-Gnn.title" = "Драйвер:";
@@ -86,13 +86,13 @@
 "PQD-yB-mm6.title" = "Фармат:";
 
 /* Class = "NSTextFieldCell"; title = "Default"; ObjectID = "S3X-Df-UMB"; */
-"S3X-Df-UMB.title" = "Па змаўчанні";
+"S3X-Df-UMB.title" = "Прадвызначана";
 
 /* Class = "NSTabViewItem"; label = "Tracks"; ObjectID = "UuR-M1-YLj"; */
 "UuR-M1-YLj.label" = "Дарожкі";
 
 /* Class = "NSTabViewItem"; label = "Status"; ObjectID = "VGm-BL-xOI"; */
-"VGm-BL-xOI.label" = "Стан";
+"VGm-BL-xOI.label" = "Статус";
 
 /* Class = "NSTabViewItem"; label = "File"; ObjectID = "WrI-Sr-O2S"; */
 "WrI-Sr-O2S.label" = "Файл";
@@ -116,7 +116,7 @@
 "f7i-wX-uxQ.title" = "Дарожка:";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Output FPS:"; ObjectID = "g8p-Ec-awO"; */
-"g8p-Ec-awO.title" = "Прыблізная выхадная частата кадраў (кадраў/с):";
+"g8p-Ec-awO.title" = "Прыблізная выхадная частата кадраў:";
 
 /* Class = "NSTextFieldCell"; title = "VIDEO"; ObjectID = "gDG-Eq-1Bc"; */
 "gDG-Eq-1Bc.title" = "ВІДЭА";
@@ -131,7 +131,7 @@
 "jCY-og-BAa.title" = "ID Крыніцы:";
 
 /* Class = "NSTextFieldCell"; title = "Bit Rate:"; ObjectID = "jyV-Pd-UvH"; */
-"jyV-Pd-UvH.title" = "Хуткасць струменя:";
+"jyV-Pd-UvH.title" = "Бітрэйт:";
 
 /* Class = "NSTextFieldCell"; title = "Sample Rate:"; ObjectID = "llF-4b-Z8b"; */
 "llF-4b-Z8b.title" = "Частата дыскрэтызацыі:";

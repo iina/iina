@@ -91,10 +91,11 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Added Filter: %@";
 "osd.filter_removed" = "Removed Filter";
-"osd.file_loop" = "File Loop: %@";
-"osd.playlist_loop" = "Playlist Loop: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
-"preference.title" = "Preferences";
+"preference.title" = "Налады";
 "preference.general" = "Асноўныя";
 "preference.ui" = "UI";
 "preference.video_audio" = "Video/Audio";
@@ -123,6 +124,8 @@
 "menu.exit_fullscreen" = "Exit Full Screen";
 "menu.pip" = "Enter Picture-in-Picture";
 "menu.exit_pip" = "Exit Picture-in-Picture";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pause";
 "menu.resume" = "Аднавіць";
 "menu.speed" = "Speed: %.2fx";
@@ -159,8 +162,8 @@
 // Alerts
 "alert.beta_channel.title" = "Receive Updates for Beta Versions";
 
-"alert.title_error" = "Error";
-"alert.title_warning" = "Warning";
+"alert.title_error" = "Памылкі";
+"alert.title_warning" = "Папярэджанне";
 "alert.title_info" = "Information";
 
 "alert.fatal_error" = "Fatal error: %@ \nThe application will exit now.";
@@ -175,7 +178,7 @@
 "alert.error_open" = "Cannot open file or stream!";
 "alert.error_finding_file" = "Cannot find %@ file!";
 "alert.error_loading_script" = "Cannot load script %@!";
-"alert.error_saving_file" = "Error occured when saving %@: %@";
+"alert.error_saving_file" = "Error occurred when saving %@: %@";
 "alert.error_deleting_file" = "Cannot delete the file.";
 
 "alert.config.new.title" = "New Input Configuration";
@@ -189,7 +192,7 @@
 "alert.config.cannot_create" = "Cannot create config file!\n%@";
 "alert.config.cannot_write" = "Cannot write to config file!";
 
-"alert.filter.incorrect" = "Error occured when setting filters. Please check your parameter format.";
+"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "New Filter";
 "alert.add_filter.message" = "Please enter a filter string in format of mpv's vf or af command.";
 
@@ -223,7 +226,7 @@
 "alert.opensub.login.title" = "OpenSubtitles Login";
 "alert.opensub.login.message" = "Please enter your username and password";
 
-"alert.open_url.title" = "Open URL";
+"alert.open_url.title" = "Адкрыць URL-адрас";
 "alert.open_url.message" = "Please enter the URL:";
 "alert.choose_media_file.title" = "Choose Media Files";
 
@@ -314,6 +317,7 @@
 "osc_toolbar.full_screen" = "Toggle full screen";
 "osc_toolbar.music_mode" = "Enter music mode";
 "osc_toolbar.sub_track" = "Choose subtitle track";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "Toggle album art";
 "mini_player.loop" = "Repeat";
@@ -346,22 +350,22 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Network Request";
-"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
+"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
 "permissions.network-request.any_site" = "Any site";
 "permissions.show-osd.name" = "Show OSD";
 "permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
 "permissions.show-alert.name" = "Show Alerts";
 "permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
-"permissions.video-overlay.name" = "Add overlay on videos";
+"permissions.video-overlay.name" = "Add overlays on videos";
 "permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
 "permissions.file-system.name" = "Access the file system";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Install";
 "plugin.installed" = "Installed";
 "plugin.not_installed" = "Not Installed";
 "plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occured during the installation: %@";
+"alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "The URL is invalid.";
 "plugin.install_error.invalid_url" = "The URL is invalid.";
 "plugin.install_error.file_not_found" = "Cannot find the package file.";

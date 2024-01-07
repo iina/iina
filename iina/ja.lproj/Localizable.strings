@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "追加したフィルター: %@";
 "osd.filter_removed" = "削除したフィルター";
-"osd.file_loop" = "ファイルループ: %@";
-"osd.playlist_loop" = "プレイリストループ: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "環境設定";
 "preference.general" = "一般";
@@ -123,6 +124,8 @@
 "menu.exit_fullscreen" = "フルスクリーンを解除";
 "menu.pip" = "ピクチャー・イン・ピクチャーを使用";
 "menu.exit_pip" = "ピクチャー・イン・ピクチャーを終了";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "一時停止";
 "menu.resume" = "再生";
 "menu.speed" = "再生速度: %.2f倍";
@@ -314,6 +317,7 @@
 "osc_toolbar.full_screen" = "フルスクリーン切り替え";
 "osc_toolbar.music_mode" = "ミュージックモード切り替え";
 "osc_toolbar.sub_track" = "字幕トラックを選択";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "アルバムアートの切り替え";
 "mini_player.loop" = "リピート";

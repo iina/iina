@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Filter toegevoegd: %@";
 "osd.filter_removed" = "Filter verwijderd";
-"osd.file_loop" = "Bestands loop: %@";
-"osd.playlist_loop" = "Afspeellijst Loop: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Voorkeuren";
 "preference.general" = "Algemeen";
@@ -123,6 +124,8 @@
 "menu.exit_fullscreen" = "Schakel schermvullende weergave uit";
 "menu.pip" = "Schakel Beeld-in-beeld in";
 "menu.exit_pip" = "Schakel Beeld-in-beeld uit";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pauzeer";
 "menu.resume" = "Hervat";
 "menu.speed" = "Snelheid: %.2fx";
@@ -314,6 +317,7 @@
 "osc_toolbar.full_screen" = "Schermvullende weergave";
 "osc_toolbar.music_mode" = "Schakel over naar muziekmodus";
 "osc_toolbar.sub_track" = "Kies ondertiteling";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "Wijzig albumhoes";
 "mini_player.loop" = "Herhaal";
@@ -346,27 +350,27 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Network Request";
-"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
+"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
 "permissions.network-request.any_site" = "Any site";
 "permissions.show-osd.name" = "Show OSD";
 "permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
 "permissions.show-alert.name" = "Show Alerts";
 "permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
-"permissions.video-overlay.name" = "Add overlay on videos";
+"permissions.video-overlay.name" = "Add overlays on videos";
 "permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
 "permissions.file-system.name" = "Access the file system";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Install";
 "plugin.installed" = "Installed";
 "plugin.not_installed" = "Not Installed";
 "plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occured during the installation: %@";
+"alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "The URL is invalid.";
 "plugin.install_error.invalid_url" = "The URL is invalid.";
 "plugin.install_error.file_not_found" = "Cannot find the package file.";
 "plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Check for Updates";
+"plugin.check_for_updates" = "Zoek naar updates";
 "plugin.updating" = "Downloading update…";

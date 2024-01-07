@@ -87,12 +87,13 @@
 "osd.file_error" = "Помилка читання файлу";
 "osd.cannot_login" = "Не можу зайти";
 "osd.canceled" = "Скасовано";
-"osd.cannot_connect" = "Cannot connect";
-"osd.timed_out" = "Timed Out";
+"osd.cannot_connect" = "Не вдалося підключитися";
+"osd.timed_out" = "Час вийшов";
 "osd.filter_added" = "Доданий фільтр: %@";
 "osd.filter_removed" = "Видалений фільтр";
-"osd.file_loop" = "Зациклити файл: %@";
-"osd.playlist_loop" = "Зациклити підбірку: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Параметри";
 "preference.general" = "Загальні";
@@ -123,6 +124,8 @@
 "menu.exit_fullscreen" = "Вийти з повноекранного режиму";
 "menu.pip" = "Режим «Кадр у кадрі»";
 "menu.exit_pip" = "Вийти з режиму «Кадр у кадрі»";
+"menu.mini_player" = "Перейти до музичного режиму";
+"menu.exit_mini_player" = "Вийти з музичного режиму";
 "menu.pause" = "Пауза";
 "menu.resume" = "Відновити";
 "menu.speed" = "Швидкість: %.2fx";
@@ -202,7 +205,7 @@
 
 "alert.playlist.error_deleting" = "Помилка при видаленні: %@";
 
-"alert.screenshot.error_taking" = "Не вдалося зробити знімок екрану!";
+"alert.screenshot.error_taking" = "Не вдалося зробити скріншот!";
 
 "alert.sub.no_selected" = "Будь ласка, спочатку виберіть завантажені субтитри.";
 "alert.sub_lang_not_set" = "Будь ласка, встановіть у параметрах основну мову субтитрів, перед тим як використовувати opensubtitles. Зараз буде використано англійську (eng).";
@@ -312,8 +315,9 @@
 "osc_toolbar.playlist" = "Підбірка та розділи";
 "osc_toolbar.pip" = "Режим «Кадр у кадрі»";
 "osc_toolbar.full_screen" = "Повноекранний режим";
-"osc_toolbar.music_mode" = "Режим музики";
+"osc_toolbar.music_mode" = "Перейти до музичного режиму";
 "osc_toolbar.sub_track" = "Наявні субтитри";
+"osc_toolbar.screenshot" = "Зробити скріншот";
 
 "mini_player.album_art" = "Показати обкладинку альбому";
 "mini_player.loop" = "Повтор";
@@ -322,7 +326,7 @@
 "mini_player.add" = "Додати до плейлиста";
 "mini_player.delete" = "Видалити всі треки з плейлиста";
 "mini_player.volume" = "Гучність";
-"mini_player.close" = "Закрити режим музики";
+"mini_player.close" = "Закрити музичний режим";
 "mini_player.back" = "Повернутись у режим відео";
 
 // Touch bar
@@ -352,7 +356,7 @@
 "permissions.show-osd.desc" = "Цей плагін може відображати повідомлення OSD (на дисплеї екрану).";
 "permissions.show-alert.name" = "Показувати оповіщення";
 "permissions.show-alert.desc" = "Цей плагін може показувати спливаючі сповіщення.";
-"permissions.video-overlay.name" = "Додати накладання на відео";
+"permissions.video-overlay.name" = "Додати оверлей на відео";
 "permissions.video-overlay.desc" = "Цей плагін може відображувати додатковий контент поверх відео.";
 "permissions.file-system.name" = "Доступ до файлової системи";
 "permissions.file-system.desc" = "Цей плагін може читати або записувати файли на вашому диску, включаючи конфіденційну інформацію. Також він може викликати інші програми чи програми, які можуть зашкодити комп'ютеру - обов'язково перевіряйте джерело.";
@@ -361,7 +365,7 @@
 "plugin.installed" = "Встановлено";
 "plugin.not_installed" = "Не встановлено";
 "plugin.local" = "Встановлено локально";
-"alert.plugin.install_error" = "Під час встановлення сталася помилка: %@";
+"alert.plugin.install_error" = "Сталася помилка під час установки: %@";
 "alert.invalid_url" = "Невірна URL-адреса.";
 "plugin.install_error.invalid_url" = "Невірна URL-адреса.";
 "plugin.install_error.file_not_found" = "Неможливо знайти пакет файлу.";

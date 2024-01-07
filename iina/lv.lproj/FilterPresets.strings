@@ -32,14 +32,14 @@
 "blur.amount" = "Amount";
 
 "delogo" = "Delogo";
-"delogo.w" = "Width";
-"delogo.h" = "Height";
+"delogo.w" = "Platums";
+"delogo.h" = "Augstums";
 "delogo.x" = "Origin X";
 "delogo.y" = "Origin Y";
 
 "negative" = "Negative";
 
-"vflip" = "Flip";
+"vflip" = "Apmest";
 "hflip" = "Mirror";
 
 "lut3d" = "3D LUT";

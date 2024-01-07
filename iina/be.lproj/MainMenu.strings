@@ -137,7 +137,7 @@
 "FTu-CF-O0R.title" = "Video Track";
 
 /* Class = "NSMenuItem"; title = "Chapters"; ObjectID = "Fal-I4-PZk"; */
-"Fal-I4-PZk.title" = "Chapters";
+"Fal-I4-PZk.title" = "Раздзелаў";
 
 /* Class = "NSMenu"; title = "Playback"; ObjectID = "GEO-Iw-cKr"; */
 "GEO-Iw-cKr.title" = "Playback";
@@ -202,6 +202,9 @@
 /* Class = "NSMenuItem"; title = "Find Online Subtitles…"; ObjectID = "Mg3-WB-gjZ"; */
 "Mg3-WB-gjZ.title" = "Find Online Subtitles…";
 
+/* Class = "NSMenuItem"; title = "Find Online Subtitles from" ObjectID = "5dT-kq-WV9"; */
+"5dT-kq-WV9.title" = "Find Online Subtitles from";
+
 /* Class = "NSMenuItem"; title = "Save Current Playlist…"; ObjectID = "Mjr-lL-oEt"; */
 "Mjr-lL-oEt.title" = "Save Current Playlist…";
 
@@ -239,7 +242,7 @@
 "R4o-n2-Eq4.title" = "Zoom";
 
 /* Class = "NSMenuItem"; title = "Website"; ObjectID = "Rqg-VS-aIj"; */
-"Rqg-VS-aIj.title" = "Website";
+"Rqg-VS-aIj.title" = "Вэб-сайт";
 
 /* Class = "NSMenuItem"; title = "Fit to Screen"; ObjectID = "SHd-63-Xoh"; */
 "SHd-63-Xoh.title" = "Fit to Screen";
@@ -254,7 +257,7 @@
 "THG-4o-U6A.title" = "Subtitle Delay: ";
 
 /* Class = "NSMenu"; title = "Window"; ObjectID = "Td7-aD-5lo"; */
-"Td7-aD-5lo.title" = "Window";
+"Td7-aD-5lo.title" = "Акно";
 
 /* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "Tue-O7-cei"; */
 "Tue-O7-cei.title" = "Capitalize";
@@ -299,7 +302,7 @@
 "aSc-P6-fiZ.title" = "Playlist Loop";
 
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "aUF-d1-5bR"; */
-"aUF-d1-5bR.title" = "Window";
+"aUF-d1-5bR.title" = "Акно";
 
 /* Class = "NSMenu"; title = "Playlist"; ObjectID = "aXa-aM-Jaq"; */
 "aXa-aM-Jaq.title" = "Playlist";
@@ -329,7 +332,7 @@
 "d15-8v-dXA.title" = "Aspect Ratio";
 
 /* Class = "NSMenu"; title = "Chapters"; ObjectID = "d9c-me-L2H"; */
-"d9c-me-L2H.title" = "Chapters";
+"d9c-me-L2H.title" = "Раздзелаў";
 
 /* Class = "NSMenu"; title = "Transformations"; ObjectID = "dBM-BU-5xS"; */
 "dBM-BU-5xS.title" = "Transformations";
@@ -353,7 +356,7 @@
 "gMo-qL-m08.title" = "Check for Updates…";
 
 /* Class = "NSMenuItem"; title = "Delete"; ObjectID = "h9w-Rj-Hm1"; */
-"h9w-Rj-Hm1.title" = "Delete";
+"h9w-Rj-Hm1.title" = "Выдаліць";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "hz9-B4-Xy5"; */
 "hz9-B4-Xy5.title" = "Services";

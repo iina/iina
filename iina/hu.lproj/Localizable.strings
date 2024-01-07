@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Szűrő hozzáadása: %@";
 "osd.filter_removed" = "Szűrő eltávolítása";
-"osd.file_loop" = "Fájl ismétlése: %@";
-"osd.playlist_loop" = "Lejátszási lista ismétlése: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Beállítások";
 "preference.general" = "Általános";
@@ -123,6 +124,8 @@
 "menu.exit_fullscreen" = "Kilépés a teljes képernyős módból";
 "menu.pip" = "Kép a képben";
 "menu.exit_pip" = "Kilépés kép a képben módból";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pause (Megállít)";
 "menu.resume" = "Folytatás";
 "menu.speed" = "Sebesség: %.2fx";
@@ -314,6 +317,7 @@
 "osc_toolbar.full_screen" = "Váltás teljes képernyõre";
 "osc_toolbar.music_mode" = "Belépés \"zene\" módba";
 "osc_toolbar.sub_track" = "Válassz felirat sávot";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "Album borító váltás";
 "mini_player.loop" = "Ismétlés";

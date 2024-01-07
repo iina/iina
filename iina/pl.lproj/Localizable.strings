@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Dodano filtr: %@";
 "osd.filter_removed" = "Usunięto filtr";
-"osd.file_loop" = "Pętla pliku: %@";
-"osd.playlist_loop" = "Pętla listy odtwarzania: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Preferencje";
 "preference.general" = "Ogólne";
@@ -123,6 +124,8 @@
 "menu.exit_fullscreen" = "Opuść tryb pełnoekranowy";
 "menu.pip" = "Włącz tryb Obraz-w-obrazie";
 "menu.exit_pip" = "Wyłącz tryb Obraz-w-obrazie";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pauza";
 "menu.resume" = "Wznów";
 "menu.speed" = "Prędkość: %.2fx";
@@ -314,6 +317,7 @@
 "osc_toolbar.full_screen" = "Przełącz tryb pełnoekranowy";
 "osc_toolbar.music_mode" = "Przejdź w tryb muzyczny";
 "osc_toolbar.sub_track" = "Wybierz ścieżkę napisów";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "Przełącz okładkę albumu";
 "mini_player.loop" = "Powtarzaj";

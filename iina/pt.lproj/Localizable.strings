@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Filtro Adicionado: %@";
 "osd.filter_removed" = "Filtro Removido";
-"osd.file_loop" = "Repetição do Arquivo: %@";
-"osd.playlist_loop" = "Repetição da Playlist: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Preferências";
 "preference.general" = "Geral";
@@ -123,6 +124,8 @@
 "menu.exit_fullscreen" = "Sair do Ecrã Completo";
 "menu.pip" = "Usar Picture in Picture";
 "menu.exit_pip" = "Sair do Picture in Picture";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pausa";
 "menu.resume" = "Retomar";
 "menu.speed" = "Velocidade: %.2fx";
@@ -314,6 +317,7 @@
 "osc_toolbar.full_screen" = "Alternar ecrã completo";
 "osc_toolbar.music_mode" = "Entrar no modo música";
 "osc_toolbar.sub_track" = "Selecionar faixa de legenda";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "Alternar arte do álbum";
 "mini_player.loop" = "Repetir";
@@ -346,16 +350,16 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Network Request";
-"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
+"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
 "permissions.network-request.any_site" = "Any site";
 "permissions.show-osd.name" = "Show OSD";
 "permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
 "permissions.show-alert.name" = "Show Alerts";
 "permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
-"permissions.video-overlay.name" = "Add overlay on videos";
+"permissions.video-overlay.name" = "Add overlays on videos";
 "permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
 "permissions.file-system.name" = "Access the file system";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Instalar";
 "plugin.installed" = "Instalado";
@@ -368,5 +372,5 @@
 "plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Check for Updates";
+"plugin.check_for_updates" = "Procurar atualizações";
 "plugin.updating" = "Downloading update…";

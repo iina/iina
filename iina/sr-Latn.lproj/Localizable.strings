@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Dodati filter: %@";
 "osd.filter_removed" = "Uklonjeni filter";
-"osd.file_loop" = "Ponavljanje datoteke: %@";
-"osd.playlist_loop" = "Ponavljanje plejliste: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Željene postavke";
 "preference.general" = "Opšte postavke";
@@ -123,6 +124,8 @@
 "menu.exit_fullscreen" = "Izađi iz rеžima cеlog еkrana";
 "menu.pip" = "Uđi u režim slike u slici";
 "menu.exit_pip" = "Izađi iz režima slike u slici";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pauziraj";
 "menu.resume" = "Nastavi";
 "menu.speed" = "Brzina: %.2fx";
@@ -314,6 +317,7 @@
 "osc_toolbar.full_screen" = "Uključi/isključi rеžim cеlog еkrana";
 "osc_toolbar.music_mode" = "Uđi u muzički režim";
 "osc_toolbar.sub_track" = "Odaberi zapis titla";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "Uključi/isključi omot albuma";
 "mini_player.loop" = "Ponovi";
@@ -355,18 +359,18 @@
 "permissions.video-overlay.name" = "Dodaj prekrivajući element na video-zapise";
 "permissions.video-overlay.desc" = "Ova dodatna komponenta može prikazati dodatni sadržaj preko video-zapisa.";
 "permissions.file-system.name" = "Pristupite sistemu datoteka";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Install";
 "plugin.installed" = "Installed";
 "plugin.not_installed" = "Not Installed";
 "plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occured during the installation: %@";
+"alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "The URL is invalid.";
 "plugin.install_error.invalid_url" = "The URL is invalid.";
 "plugin.install_error.file_not_found" = "Cannot find the package file.";
 "plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Check for Updates";
+"plugin.check_for_updates" = "Proveri da li postoje ažuriranja";
 "plugin.updating" = "Downloading update…";

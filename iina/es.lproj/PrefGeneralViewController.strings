@@ -2,7 +2,7 @@
 "1ce-4b-kgG.title" = "Mostrar el panel de abrir archivo";
 
 /* Class = "NSButtonCell"; title = "Keep window open after playback finishes"; ObjectID = "2iM-j7-AzQ"; */
-"2iM-j7-AzQ.title" = "Mantener abierta la ventana después de finalizada la reproducción";
+"2iM-j7-AzQ.title" = "Mantener abierta la ventana al finalizar la reproducción";
 
 /* Class = "NSButtonCell"; title = "Save to"; ObjectID = "2rJ-mg-OuU"; */
 "2rJ-mg-OuU.title" = "Guardar en";
@@ -29,7 +29,7 @@
 "6TV-DG-503.title" = "Lista de reproducción:";
 
 /* Class = "NSTextFieldCell"; title = "Requires restarting IINA to take effect."; ObjectID = "8kU-8g-VgX"; */
-"8kU-8g-VgX.title" = "Requiere reiniciar IINA para que surta efecto.";
+"8kU-8g-VgX.title" = "Es necesario reiniciar IINA para que los cambios sean aplicados.";
 
 /* Class = "NSButtonCell"; title = "Only in \"music mode\""; ObjectID = "AVe-9Z-RgQ"; */
 "AVe-9Z-RgQ.title" = "Solo en \"modo música\"";
@@ -121,7 +121,7 @@
 /* Class = "NSTextFieldCell"; title = "History:"; ObjectID = "jeK-46-2BG"; */
 "jeK-46-2BG.title" = "Historial:";
 
-/* Class = "NSButtonCell"; title = "Show artist and track name for audio files when avaliable"; ObjectID = "kBI-Th-bBV"; */
+/* Class = "NSButtonCell"; title = "Show artist and track name for audio files when available"; ObjectID = "kBI-Th-bBV"; */
 "kBI-Th-bBV.title" = "Mostrar el nombre del artista y pista en los archivos de audio cuando estén disponibles";
 
 /* Class = "NSButtonCell"; title = "Play upon entering full screen"; ObjectID = "lOw-pu-Llm"; */

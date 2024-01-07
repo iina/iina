@@ -34,13 +34,13 @@
 "cmd.loadlist" = "Ielādēt atskaņošanas sarakstu";
 "cmd.run" = "Palaist";
 
-"iina.flip" = "Flip";
+"iina.flip" = "Apmest";
 "iina.mirror" = "Mirror";
 
 "iina.toggle-pip" = "Toggle Picture-in-Picture";
 "iina.toggle-music-mode" = "Toggle Music Mode";
 "iina.open-file" = "Open file";
-"iina.open-url" = "Open URL";
+"iina.open-url" = "Atvērt URL";
 "iina.video-panel" = "Video panel";
 "iina.audio-panel" = "Audio panel";
 "iina.sub-panel" = "Subtitle panel";
@@ -48,7 +48,7 @@
 "iina.chapter-panel" = "Chapter panel";
 "iina.bigger-window" = "Bigger Window";
 "iina.smaller-window" = "Smaller Window";
-"iina.fit-to-screen" = "Fit to Screen";
+"iina.fit-to-screen" = "Ietilpināt ekrānā";
 "iina.toggle-flip" = "Toggle flip";
 "iina.toggle-mirror" = "Toggle mirror";
 "iina.save-playlist" = "Save current playlist";
@@ -68,8 +68,8 @@
 "backward" = "backward";
 "seek-to" = "to";
 
-"relative" = "s";
-"absolute" = "s";
+"relative" = "sekundēm";
+"absolute" = "sekundēm";
 "absolute-percent" = "%";
 "relative-percent" = "%";
 "relative+exact" = "s (exact)";
@@ -77,8 +77,8 @@
 "absolute+keyframe" = "s (keyframe)";
 "absolute-percent+keyframe" = "% (keyframe)";
 
-"opt.pause" = "Pause";
-"opt.speed" = "Speed";
+"opt.pause" = "Pauze";
+"opt.speed" = "Mainīt ātrumu";
 
 "opt.window-scale" = "Window scale";
 
@@ -91,8 +91,8 @@
 "opt.deinterlace" = "Deinterlace";
 
 "opt.audio" = "Audio track";
-"opt.volume" = "Volume";
-"opt.mute" = "Mute";
+"opt.volume" = "Skaļums";
+"opt.mute" = "Izslēgt skaņu";
 "opt.audio-delay" = "Audio delay";
 
 "opt.sub" = "Subtitle track";

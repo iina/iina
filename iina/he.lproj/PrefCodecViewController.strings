@@ -5,10 +5,10 @@
 "2yO-To-el7.title" = "Default: 0 (Auto)";
 
 /* Class = "NSTextFieldCell"; title = "Maximum volume:"; ObjectID = "44m-ge-naq"; */
-"44m-ge-naq.title" = "Maximum volume:";
+"44m-ge-naq.title" = "עוצמת קול מרבית:";
 
 /* Class = "NSTextFieldCell"; title = "Number of threads:"; ObjectID = "50C-1R-wlJ"; */
-"50C-1R-wlJ.title" = "Number of threads:";
+"50C-1R-wlJ.title" = "מספר ה-Threads:";
 
 /* Class = "NSButtonCell"; title = "Force dedicated GPU"; ObjectID = "YUr-aJ-xfC"; */
 "YUr-aJ-xfC.title" = "Force dedicated GPU";
@@ -20,37 +20,37 @@
 "cJP-ep-847.title" = "(100-1000)";
 
 /* Class = "NSButtonCell"; title = "Initial volume:"; ObjectID = "g4c-vG-URh"; */
-"g4c-vG-URh.title" = "Initial volume:";
+"g4c-vG-URh.title" = "ערך ראשוני:";
 
 /* Class = "NSTextFieldCell"; title = "Always use the dedicated GPU for rendering (if exists). This can improve performance but may result in poor battery life."; ObjectID = "gCv-sJ-uQJ"; */
 "gCv-sJ-uQJ.title" = "Always use the dedicated GPU for rendering (if it exists). This can improve performance but may reduce battery life.";
 
 /* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
-"m5P-5f-5uo.title" = "Video:";
+"m5P-5f-5uo.title" = "וידאו:";
 
 /* Class = "NSTextFieldCell"; title = "Hardware decoder:"; ObjectID = "nwg-2K-G2G"; */
-"nwg-2K-G2G.title" = "Hardware decoder:";
+"nwg-2K-G2G.title" = "מפענח חומרה:";
 
 /* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "rFu-rL-EJC"; */
-"rFu-rL-EJC.title" = "Disabled";
+"rFu-rL-EJC.title" = "מושבת";
 
 /* Class = "NSTextFieldCell"; title = "Preferred audio device:"; ObjectID = "sLR-vV-xn2"; */
-"sLR-vV-xn2.title" = "Preferred audio device:";
+"sLR-vV-xn2.title" = "התקן שמע מועדף:";
 
 /* Class = "NSTextFieldCell"; title = "Audio:"; ObjectID = "sV5-dL-MUt"; */
-"sV5-dL-MUt.title" = "Audio:";
+"sV5-dL-MUt.title" = "שמע:";
 
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "tAQ-oU-1AJ"; */
-"tAQ-oU-1AJ.title" = "Auto";
+"tAQ-oU-1AJ.title" = "אוטומטי";
 
 /* Class = "NSTextFieldCell"; title = "Number of threads:"; ObjectID = "tO4-pw-2W9"; */
-"tO4-pw-2W9.title" = "Number of threads:";
+"tO4-pw-2W9.title" = "מספר ה-Threads:";
 
 /* Class = "NSTextFieldCell"; title = "S/PDIF output:"; ObjectID = "up6-6A-4sn"; */
 "up6-6A-4sn.title" = "S/PDIF output:";
 
 /* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "wjt-O6-KbC"; */
-"wjt-O6-KbC.title" = "Preferred language:";
+"wjt-O6-KbC.title" = "שפה מועדפת:";
 
 /* Class = "NSButtonCell"; title = "Load ICC profile"; ObjectID = "3g4-jW-uJd"; */
 "3g4-jW-uJd.title" = "Load ICC profile";
@@ -59,10 +59,10 @@
 "M2M-of-gjd.title" = "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)";
 
 /* Class = "NSButtonCell"; title = "Enable HDR support"; ObjectID = "R7Z-9c-vPJ"; */
-"R7Z-9c-vPJ.title" = "Enable HDR support";
+"R7Z-9c-vPJ.title" = "הפעל תמיכת HDR";
 
 /* Class = "NSTextFieldCell"; title = "Enable HDR mode by default when playing HDR videos."; ObjectID = "ZgQ-bc-yEE"; */
-"ZgQ-bc-yEE.title" = "Enable HDR mode by default when playing HDR videos.";
+"ZgQ-bc-yEE.title" = "הפעל מצב HDR כברירת מחדל בעת הפעלת סרטוני HDR.";
 
 /* Class = "NSButtonCell"; title = "Enable tone mapping"; ObjectID = "a5Y-gU-JTj"; */
 "a5Y-gU-JTj.title" = "Enable tone mapping";
@@ -74,13 +74,13 @@
 "xVk-OA-kOf.title" = "Target peak:";
 
 /* Class = "NSTextFieldCell"; title = "nits"; ObjectID = "baO-xy-7hD"; */
-"baO-xy-7hD.title" = "nits";
+"baO-xy-7hD.title" = "ניטים";
 
 /* Class = "NSTextFieldCell"; title = "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."; ObjectID = "aTt-aZ-rjK"; */
-"aTt-aZ-rjK.title" = "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400.";
+"aTt-aZ-rjK.title" = "בהירות שיא מדודה של התצוגה. אם מוגדר ל-0, IINA מזהה אוטומטית ערך זה. אם הזיהוי נכשל, IINA מגדיר את שיא היעד ל-400.";
 
 /* Class = "NSTextFieldCell"; title = "Algorithm:"; ObjectID = "qzI-rq-PqO"; */
-"qzI-rq-PqO.title" = "Algorithm:";
+"qzI-rq-PqO.title" = "אלגוריתם:";
 
 /* Class = "NSTextFieldCell"; title = "Algorithm to use for tone mapping images onto the display."; ObjectID = "szA-8r-plt"; */
 "szA-8r-plt.title" = "Algorithm to use for tone mapping images onto the display.";

@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Filtru adăugat: %@";
 "osd.filter_removed" = "Filtru șters";
-"osd.file_loop" = "Redare fișier în buclă: %@";
-"osd.playlist_loop" = "Redare playlist în buclă: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Preferințe";
 "preference.general" = "General";
@@ -123,6 +124,8 @@
 "menu.exit_fullscreen" = "Ieși din ecran complet";
 "menu.pip" = "Afișează în Picture-in-Picture";
 "menu.exit_pip" = "Ieși din Picture-in-Picture";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pauză";
 "menu.resume" = "Reia";
 "menu.speed" = "Viteză: %.2fx";
@@ -189,7 +192,7 @@
 "alert.config.cannot_create" = "Nu se poate crea fișierul de configurare!\n%@";
 "alert.config.cannot_write" = "Nu se poate scrie în fișierul de configurare!";
 
-"alert.filter.incorrect" = "Eroare la setarea filtrelor. Te rog verifică formatul parametrilor. ";
+"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "Filtru nou";
 "alert.add_filter.message" = "Te rog introdu un șir care să fie o comandă în formatul mpv vf sau af.";
 
@@ -314,6 +317,7 @@
 "osc_toolbar.full_screen" = "Activează ecran complet";
 "osc_toolbar.music_mode" = "Intră în modul Muzică";
 "osc_toolbar.sub_track" = "Alege pista de subtitrare";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "Comută coperta albumului";
 "mini_player.loop" = "Repetare";

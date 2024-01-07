@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "تمت إضافة فلتر: %@";
 "osd.filter_removed" = "إزالة الفلتر";
-"osd.file_loop" = "حلقة الملف: %@";
-"osd.playlist_loop" = "حلقة قائمة التشغيل: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "التفضيلات";
 "preference.general" = "عام";
@@ -123,6 +124,8 @@
 "menu.exit_fullscreen" = "إنهاء وضع ملء الشاشة";
 "menu.pip" = "الدخول إلى وضع صورة في صورة";
 "menu.exit_pip" = "الخروج من وضع صورة في صورة";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "إيقاف مؤقت";
 "menu.resume" = "استئناف";
 "menu.speed" = "السرعة: %.2fx";
@@ -314,6 +317,7 @@
 "osc_toolbar.full_screen" = "التبديل لوضع ملء الشاشة";
 "osc_toolbar.music_mode" = "الدخول إلى وضع الموسيقى";
 "osc_toolbar.sub_track" = "اختيار مسار الترجمة";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "تبديل صورة الألبوم";
 "mini_player.loop" = "تكرار";
@@ -352,7 +356,7 @@
 "permissions.show-osd.desc" = "يمكن لهذه الإضافة أن تظهر رسائل OSD (على شاشة العرض).";
 "permissions.show-alert.name" = "عرض التنبيه";
 "permissions.show-alert.desc" = "هذه الإضافة يمكن أن تظهر تنبيهات منبثقة.";
-"permissions.video-overlay.name" = "";
+"permissions.video-overlay.name" = "Add overlays on videos";
 "permissions.video-overlay.desc" = "يمكن لهذه الإضافة أن توفر محتوى إضافياً في الجزء العلوي من الفيديو.";
 "permissions.file-system.name" = "Access the file system";
 "permissions.file-system.desc" = "يمكن لهذه الإضافة قراءة أو كتابة الملفات على القرص الخاص بك، بما في ذلك المعلومات الحساسة. يمكنها أيضًا الاتصال بالبرامج أو التطبيقات الأخرى التي يمكن أن تضر بجهاز الكمبيوتر الخاص بك. لذا تأكد من التحقق من المصدر.";
@@ -361,7 +365,7 @@
 "plugin.installed" = "Installed";
 "plugin.not_installed" = "Not Installed";
 "plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occured during the installation: %@";
+"alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "The URL is invalid.";
 "plugin.install_error.invalid_url" = "The URL is invalid.";
 "plugin.install_error.file_not_found" = "Cannot find the package file.";

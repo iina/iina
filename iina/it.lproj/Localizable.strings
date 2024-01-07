@@ -178,7 +178,7 @@
 "alert.error_open" = "Impossibile aprire il file o lo stream!";
 "alert.error_finding_file" = "Impossibile trovare il %@ file!";
 "alert.error_loading_script" = "Impossibile caricare lo script %@!";
-"alert.error_saving_file" = "Error occurred when saving %@: %@";
+"alert.error_saving_file" = "Si è verificato un errore durante il salvataggio %@: %@";
 "alert.error_deleting_file" = "Impossibile eliminare il file.";
 
 "alert.config.new.title" = "Nuova configurazione di input";
@@ -350,7 +350,7 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Richiesta di rete";
-"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
+"permissions.network-request.desc" = "Questo plugin può fare richieste o inviare dati ai seguenti siti:";
 "permissions.network-request.any_site" = "Qualsiasi sito";
 "permissions.show-osd.name" = "Mostra OSD";
 "permissions.show-osd.desc" = "Questo plugin può mostrare messaggi OSD (On Screen Display).";

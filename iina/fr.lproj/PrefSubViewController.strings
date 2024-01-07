@@ -68,13 +68,13 @@
 "Mk1-sv-QB8.title" = "Merci de renseigner des chaînes de caractères séparées par des virgules.";
 
 /* Class = "NSTextFieldCell"; title = "If enabled, all ASS subtitles will be drawn using the styles below."; ObjectID = "OcF-0z-7qe"; */
-"OcF-0z-7qe.title" = "Si actif, tous les sous-titres ASS seront affichés avec le style ci-dessous.";
+"OcF-0z-7qe.title" = "Si cette option est activée, tous les sous-titres ASS seront affichés avec le style ci-dessous.";
 
 /* Class = "NSTextFieldCell"; title = "Text subtitles:"; ObjectID = "Qda-dp-nhg"; */
 "Qda-dp-nhg.title" = "Sous-titres texte :";
 
 /* Class = "NSTextFieldCell"; title = "Also search subtitles in following directories:"; ObjectID = "QsS-wD-2hY"; */
-"QsS-wD-2hY.title" = "Aussi rechercher des sous-titres dans le dossier suivant :";
+"QsS-wD-2hY.title" = "Rechercher aussi des sous-titres dans le dossier suivant :";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "SIh-Sv-6XI"; */
 "SIh-Sv-6XI.title" = "Couleur :";
@@ -164,7 +164,7 @@
 "vDc-dw-liI.title" = "Couleur :";
 
 /* Class = "NSTextFieldCell"; title = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues."; ObjectID = "vYb-qH-XkH"; */
-"vYb-qH-XkH.title" = "Si activé, IINA cherchera automatiquement des sous-titres en ligne pour les vidéos sans sous-titres de plus de 20 minutes.";
+"vYb-qH-XkH.title" = "Si cette option est activée, IINA cherchera automatiquement des sous-titres en ligne pour les vidéos sans sous-titres de plus de 20 minutes.";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "xGf-fF-4Hx"; */
 "xGf-fF-4Hx.title" = "Y :";

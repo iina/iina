@@ -87,12 +87,13 @@
 "osd.file_error" = "Error al leer el archivo";
 "osd.cannot_login" = "No puedo iniciar sesión";
 "osd.canceled" = "Cancelado";
-"osd.cannot_connect" = "Cannot connect";
-"osd.timed_out" = "Timed Out";
+"osd.cannot_connect" = "No se puede conectar";
+"osd.timed_out" = "Tiempo agotado";
 "osd.filter_added" = "Filtro Añadido: %@";
 "osd.filter_removed" = "Filtro Eliminado";
-"osd.file_loop" = "Bucle de archivo: %@";
-"osd.playlist_loop" = "Bucle de lista de reproducción: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Preferencias";
 "preference.general" = "General";
@@ -123,6 +124,8 @@
 "menu.exit_fullscreen" = "Salir de pantalla completa";
 "menu.pip" = "Ver en picture in picture";
 "menu.exit_pip" = "Salir de picture in picture";
+"menu.mini_player" = "Entrar en modo música";
+"menu.exit_mini_player" = "Salir del modo de música";
 "menu.pause" = "Pausar";
 "menu.resume" = "Reanudar";
 "menu.speed" = "Velocidad: %.2fx";
@@ -314,6 +317,7 @@
 "osc_toolbar.full_screen" = "Alternar pantalla completa";
 "osc_toolbar.music_mode" = "Entrar en modo música";
 "osc_toolbar.sub_track" = "Elegir la pista de subtítulos";
+"osc_toolbar.screenshot" = "Capturar pantalla";
 
 "mini_player.album_art" = "Alternar imagen de álbum";
 "mini_player.loop" = "Repetir";
@@ -355,7 +359,7 @@
 "permissions.video-overlay.name" = "Añadir superposición en vídeos";
 "permissions.video-overlay.desc" = "Este plugin puede representar contenido adicional en la parte superior del vídeo.";
 "permissions.file-system.name" = "Acceder al sistema de archivos";
-"permissions.file-system.desc" = "Este plugin puede leer o escribir archivos en su disco, incluyendo información confidencial. También puede llamar a otros programas o aplicaciones que puedan dañar su ordenador, así que asegúrese de verificar la fuente.";
+"permissions.file-system.desc" = "Este plugin puede leer o escribir archivos en su disco, incluyendo información confidencial. También puede llamar a otros programas o aplicaciones que pueden dañar su sistema, asegúrese de verificar la fuente.";
 
 "plugin.install" = "Instalar";
 "plugin.installed" = "Instalado";

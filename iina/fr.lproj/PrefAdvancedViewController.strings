@@ -11,7 +11,7 @@
 "HMa-Vz-EUk.title" = "Les paramètres suivants nécessitent le redémarrage d’IINA.";
 
 /* Class = "NSButtonCell"; title = "Open log directory"; ObjectID = "JDA-g3-RNX"; */
-"JDA-g3-RNX.title" = "Ouvrir le dossier des historiques";
+"JDA-g3-RNX.title" = "Ouvrir le dossier des journaux";
 
 /* Class = "NSButtonCell"; title = "Enable logging to file"; ObjectID = "LCd-uY-Yze"; */
 "LCd-uY-Yze.title" = "Activer la journalisation";
@@ -30,3 +30,21 @@
 
 /* Class = "NSButtonCell"; title = "Use mpv's OSD"; ObjectID = "phK-g9-Vbg"; */
 "phK-g9-Vbg.title" = "Utiliser l'OSD de mpv";
+
+/* Class = "NSTextFieldCell"; title = "Log level:"; ObjectID = "nFf-vh-bNd"; */
+"nFf-vh-bNd.title" = "Niveau de détail du journal :";
+
+/* Class = "NSButtonCell"; title = "Show log viewer"; ObjectID = "Owx-92-Ogg"; */
+"Owx-92-Ogg.title" = "Afficher la visionneuse de journaux";
+
+/* Class = "NSMenuItem"; title = "Verbose"; ObjectID = "S9M-yY-q0w"; */
+"S9M-yY-q0w.title" = "Détaillé";
+
+/* Class = "NSMenuItem"; title = "Debug"; ObjectID = "hGq-ek-VHd"; */
+"hGq-ek-VHd.title" = "Débogage";
+
+/* Class = "NSMenuItem"; title = "Warning"; ObjectID = "exP-JC-h7t"; */
+"exP-JC-h7t.title" = "Attention";
+
+/* Class = "NSMenuItem"; title = "Error"; ObjectID = "sl8-Df-vbX"; */
+"sl8-Df-vbX.title" = "Erreur";

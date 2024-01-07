@@ -87,12 +87,13 @@
 "osd.file_error" = "Ошибка при чтении файла";
 "osd.cannot_login" = "Не могу войти";
 "osd.canceled" = "Отменено";
-"osd.cannot_connect" = "Cannot connect";
-"osd.timed_out" = "Timed Out";
+"osd.cannot_connect" = "Не удалось установить соединение";
+"osd.timed_out" = "Время вышло";
 "osd.filter_added" = "Добавлен фильтр: %@";
 "osd.filter_removed" = "Фильтр удален";
-"osd.file_loop" = "Цикл файла: %@";
-"osd.playlist_loop" = "Цикл плейлиста: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Настройки";
 "preference.general" = "Основные";
@@ -123,6 +124,8 @@
 "menu.exit_fullscreen" = "Выйти из полноэкранного режима";
 "menu.pip" = "Войти в режим «Картинка в картинке»";
 "menu.exit_pip" = "Выйти из режима «Картинка в картинке»";
+"menu.mini_player" = "Перейти в музыкальный режим";
+"menu.exit_mini_player" = "Выйти из музыкального режима";
 "menu.pause" = "Пауза";
 "menu.resume" = "Возобновить";
 "menu.speed" = "Скорость: %.2fx";
@@ -314,6 +317,7 @@
 "osc_toolbar.full_screen" = "Включить полноэкранный режим";
 "osc_toolbar.music_mode" = "Перейти в музыкальный режим";
 "osc_toolbar.sub_track" = "Выберите дорожку субтитров";
+"osc_toolbar.screenshot" = "Сделать скриншот";
 
 "mini_player.album_art" = "Изменить обложку альбома";
 "mini_player.loop" = "Повторять";
@@ -352,7 +356,7 @@
 "permissions.show-osd.desc" = "Этот плагин сможет показывать сообщения на экране.";
 "permissions.show-alert.name" = "Показывать уведомления";
 "permissions.show-alert.desc" = "Этот плагин сможет показывать всплывающие уведомления.";
-"permissions.video-overlay.name" = "Добавлять оверлей на видео";
+"permissions.video-overlay.name" = "Добавить оверлей на видео";
 "permissions.video-overlay.desc" = "Этот плагин сможет отображать дополнительный контент поверх видео.";
 "permissions.file-system.name" = "Доступ к диску";
 "permissions.file-system.desc" = "Этот плагин сможет получить доступ ко всем файлам на диске, включая конфиденциальную информацию. Он также сможет запускать другие программы, которые в теории могут навредить компьютеру. Пожалуйста, проверьте исходный код плагина.";

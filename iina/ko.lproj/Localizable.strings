@@ -87,12 +87,13 @@
 "osd.file_error" = "파일 읽기 오류";
 "osd.cannot_login" = "로그인할 수 없음";
 "osd.canceled" = "취소됨";
-"osd.cannot_connect" = "Cannot connect";
-"osd.timed_out" = "Timed Out";
+"osd.cannot_connect" = "연결할 수 없음";
+"osd.timed_out" = "시간 초과됨";
 "osd.filter_added" = "필터 추가됨: %@";
 "osd.filter_removed" = "필터 제거됨";
-"osd.file_loop" = "파일 반복: %@";
-"osd.playlist_loop" = "재생목록 반복: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "환경설정";
 "preference.general" = "일반";
@@ -123,6 +124,8 @@
 "menu.exit_fullscreen" = "전체 화면에서 나가기";
 "menu.pip" = "화면 속 화면";
 "menu.exit_pip" = "화면 속 화면에서 나가기";
+"menu.mini_player" = "음악 모드 전환";
+"menu.exit_mini_player" = "음악 모드 나가기";
 "menu.pause" = "일시 정지";
 "menu.resume" = "재생";
 "menu.speed" = "재생속도: %.2fx";
@@ -314,6 +317,7 @@
 "osc_toolbar.full_screen" = "전체 화면 전환/복귀";
 "osc_toolbar.music_mode" = "음악 모드 전환";
 "osc_toolbar.sub_track" = "자막 선택";
+"osc_toolbar.screenshot" = "스크린샷 찍기";
 
 "mini_player.album_art" = "앨범 아트 켜기/끄기";
 "mini_player.loop" = "반복";

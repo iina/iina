@@ -62,7 +62,7 @@
 "KYi-0W-zOr.title" = "Выключить остальные мониторы в полноэкранном режиме";
 
 /* Class = "NSButtonCell"; title = "Switch to \"music mode\" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
-"KfL-r7-Uav.title" = "Автоматически переходить в «музыкальный режим» при воспроизведении аудиофайла";
+"KfL-r7-Uav.title" = "Автоматически переходить в \"музыкальный режим\" при воспроизведении аудиофайла";
 
 /* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
 "Lac-Ol-g6E.title" = "Автоматически воспроизводить следующий файл";
@@ -121,7 +121,7 @@
 /* Class = "NSTextFieldCell"; title = "History:"; ObjectID = "jeK-46-2BG"; */
 "jeK-46-2BG.title" = "История:";
 
-/* Class = "NSButtonCell"; title = "Show artist and track name for audio files when avaliable"; ObjectID = "kBI-Th-bBV"; */
+/* Class = "NSButtonCell"; title = "Show artist and track name for audio files when available"; ObjectID = "kBI-Th-bBV"; */
 "kBI-Th-bBV.title" = "Показывать исполнителя и имя трека для аудио файлов при доступности";
 
 /* Class = "NSButtonCell"; title = "Play upon entering full screen"; ObjectID = "lOw-pu-Llm"; */

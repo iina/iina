@@ -62,7 +62,7 @@
 "KYi-0W-zOr.title" = "Затемнити інші вікна, коли у повноекранному режимі";
 
 /* Class = "NSButtonCell"; title = "Switch to \"music mode\" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
-"KfL-r7-Uav.title" = "Автоматично переходити до режиму музики при відтворюванні аудіофайла";
+"KfL-r7-Uav.title" = "Автоматично переходити до \"музичного режиму\" при відтворюванні аудіофайлу";
 
 /* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
 "Lac-Ol-g6E.title" = "Відтворювати наступний файл автоматично";
@@ -95,7 +95,7 @@
 "YLo-6E-tT7.title" = "Завершити, коли всі вікна закрито";
 
 /* Class = "NSTextFieldCell"; title = "/path/to/screenshot/folder"; ObjectID = "YeH-hk-7NN"; */
-"YeH-hk-7NN.title" = "/шлях/до/папки/знімків/екрану";
+"YeH-hk-7NN.title" = "/шлях/до/папки/скріншотів";
 
 /* Class = "NSButtonCell"; title = "Receive beta updates"; ObjectID = "f0j-Dn-cxt"; */
 "f0j-Dn-cxt.title" = "Отримувати бета-оновлення";
@@ -121,7 +121,7 @@
 /* Class = "NSTextFieldCell"; title = "History:"; ObjectID = "jeK-46-2BG"; */
 "jeK-46-2BG.title" = "Історія:";
 
-/* Class = "NSButtonCell"; title = "Show artist and track name for audio files when avaliable"; ObjectID = "kBI-Th-bBV"; */
+/* Class = "NSButtonCell"; title = "Show artist and track name for audio files when available"; ObjectID = "kBI-Th-bBV"; */
 "kBI-Th-bBV.title" = "Показувати виконавця та назву треку для аудіофайлів, коли це доступно";
 
 /* Class = "NSButtonCell"; title = "Play upon entering full screen"; ObjectID = "lOw-pu-Llm"; */
@@ -134,7 +134,7 @@
 "oJY-Iz-3sO.title" = "Формат:";
 
 /* Class = "NSTextFieldCell"; title = "Screenshots:"; ObjectID = "pdx-zt-kf2"; */
-"pdx-zt-kf2.title" = "Знімки екрана:";
+"pdx-zt-kf2.title" = "Скріншоти:";
 
 /* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "slG-Jb-54B"; */
 "slG-Jb-54B.title" = "щогодини";

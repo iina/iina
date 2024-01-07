@@ -6,67 +6,67 @@
   Copyright © 2017 lhc. All rights reserved.
 */
 
-"cmd.ignore" = "Ignore";
+"cmd.ignore" = "התעלמות";
 "cmd.seek" = "Seek";
 "cmd.revert-seek" = "Revert seek";
-"cmd.set" = "Set";
-"cmd.cycle" = "Cycle";
-"cmd.cycle-values" = "Cycle in";
-"cmd.add" = "Change";
+"cmd.set" = "הגדר";
+"cmd.cycle" = "מחזוריות";
+"cmd.cycle-values" = "מחזוריות ב";
+"cmd.add" = "שינוי";
 "cmd.multiply" = "Multiply";
 "cmd.frame-step" = "Next frame";
 "cmd.frame-back-step" = "Previous frame";
 "cmd.ab-loop" = "A-B loop";
 "cmd.sub-seek" = "Subtitle seek";
-"cmd.playlist-next" = "Next media";
-"cmd.playlist-prev" = "Previous media";
-"cmd.playlist-move" = "Move playlist item";
-"cmd.playlist-clear" = "Clear playlist";
+"cmd.playlist-next" = "מדיה הבאה";
+"cmd.playlist-prev" = "מדיה קודמת";
+"cmd.playlist-move" = "העבר פריט ברשימת השמעה";
+"cmd.playlist-clear" = "ניקוי רשימת ההשמעה";
 "cmd.playlist-remove" = "Remove current";
-"cmd.playlist-shuffle" = "Shuffle";
+"cmd.playlist-shuffle" = "ערבוב";
 "cmd.write-watch-later-config" = "Record play history";
-"cmd.stop" = "Stop";
-"cmd.quit" = "Quit";
-"cmd.quit-watch-later" = "Quit (save progress)";
-"cmd.screenshot" = "Screenshot";
-"cmd.screenshot-to-file" = "Screenshot to file";
-"cmd.loadfile" = "Load file";
-"cmd.loadlist" = "Load playlist";
-"cmd.run" = "Run";
+"cmd.stop" = "עצור";
+"cmd.quit" = "יציאה";
+"cmd.quit-watch-later" = "יציאה (ושמירת התקדמות)";
+"cmd.screenshot" = "צילום מסך";
+"cmd.screenshot-to-file" = "צילום מסך לקובץ";
+"cmd.loadfile" = "טען קובץ";
+"cmd.loadlist" = "טען רשימת השמעה";
+"cmd.run" = "הפעלה";
 
-"iina.flip" = "Flip";
-"iina.mirror" = "Mirror";
+"iina.flip" = "היפוך";
+"iina.mirror" = "מראה";
 
-"iina.toggle-pip" = "Toggle Picture-in-Picture";
+"iina.toggle-pip" = "צא/היכנס ממצב תמונה בתוך תמונה";
 "iina.toggle-music-mode" = "Toggle Music Mode";
-"iina.open-file" = "Open file";
-"iina.open-url" = "Open URL";
-"iina.video-panel" = "Video panel";
-"iina.audio-panel" = "Audio panel";
-"iina.sub-panel" = "Subtitle panel";
-"iina.playlist-panel" = "Playlist panel";
-"iina.chapter-panel" = "Chapter panel";
-"iina.bigger-window" = "Bigger Window";
-"iina.smaller-window" = "Smaller Window";
-"iina.fit-to-screen" = "Fit to Screen";
+"iina.open-file" = "פתח קובץ";
+"iina.open-url" = "פתח כתובת אינטרנט";
+"iina.video-panel" = "פאנל וידאו";
+"iina.audio-panel" = "פאנל אודיו";
+"iina.sub-panel" = "פאנל כתוביות";
+"iina.playlist-panel" = "פאנל רשימת השמעה";
+"iina.chapter-panel" = "פאנל פרק";
+"iina.bigger-window" = "חלון גדול יותר";
+"iina.smaller-window" = "חלון קטן יותר";
+"iina.fit-to-screen" = "התאמה למסך";
 "iina.toggle-flip" = "Toggle flip";
 "iina.toggle-mirror" = "Toggle mirror";
-"iina.save-playlist" = "Save current playlist";
-"iina.delete-current-file" = "Delete current file";
-"iina.delete-current-file-hard" = "Delete current file directly without moving to trash";
-"iina.find-online-subs" = "Find online subtitles";
-"iina.save-downloaded-sub" = "Save downloaded subtitle";
+"iina.save-playlist" = "שמור את רשימת ההשמעה הנוכחית";
+"iina.delete-current-file" = "מחיקת הקובץ הנוכחי";
+"iina.delete-current-file-hard" = "מחיקת הקובץ הנוכחי לצמיתות (ללא העברה לאשפה)";
+"iina.find-online-subs" = "מצא כתוביות מקוונות";
+"iina.save-downloaded-sub" = "שמור כתוביות שהורדו";
 
-"yes" = "Yes";
-"no" = "No";
-"to" = "to";
-"by" = "by";
-"in" = "in";
-"add" = "increase";
-"minus" = "decrease";
-"forward" = "forward";
-"backward" = "backward";
-"seek-to" = "to";
+"yes" = "כן";
+"no" = "לא";
+"to" = "אל";
+"by" = "על ידי";
+"in" = "ב-";
+"add" = "הגדלה";
+"minus" = "הפחתה";
+"forward" = "קדימה";
+"backward" = "אחורה";
+"seek-to" = "אל";
 
 "relative" = "s";
 "absolute" = "s";
@@ -77,40 +77,40 @@
 "absolute+keyframe" = "s (keyframe)";
 "absolute-percent+keyframe" = "% (keyframe)";
 
-"opt.pause" = "Pause";
-"opt.speed" = "Speed";
+"opt.pause" = "השהיה";
+"opt.speed" = "מהירות";
 
-"opt.window-scale" = "Window scale";
+"opt.window-scale" = "קנה מידה של החלון";
 
-"opt.video" = "Video track";
+"opt.video" = "רצועת וידאו";
 "opt.video-aspect" = "Video aspect";
-"opt.contrast" = "Contrast";
-"opt.brightness" = "Brightness";
-"opt.gamma" = "Gamma";
-"opt.saturation" = "Saturation";
-"opt.deinterlace" = "Deinterlace";
+"opt.contrast" = "ניגודיות";
+"opt.brightness" = "בהירות";
+"opt.gamma" = "גמא";
+"opt.saturation" = "רוויה";
+"opt.deinterlace" = "ביטול שזירה";
 
-"opt.audio" = "Audio track";
-"opt.volume" = "Volume";
-"opt.mute" = "Mute";
-"opt.audio-delay" = "Audio delay";
+"opt.audio" = "רצועת שמע";
+"opt.volume" = "עוצמת קול";
+"opt.mute" = "השתקה";
+"opt.audio-delay" = "עיכוב שמע";
 
-"opt.sub" = "Subtitle track";
-"opt.sub-delay" = "Subtitle delay";
-"opt.sub-pos" = "Subtitle position";
+"opt.sub" = "רצועת כתוביות";
+"opt.sub-delay" = "עיכוב כתוביות";
+"opt.sub-pos" = "מיקום כתוביות";
 "opt.sub-scale" = "Subtitle scale";
-"opt.sub-visibility" = "Subtitle visibility";
+"opt.sub-visibility" = "נראות כתוביות";
 "opt.sub-ass-style-override" = "ASS style override";
 
-"opt.fullscreen" = "Fullscreen";
-"opt.ontop" = "Float on top";
+"opt.fullscreen" = "מסך מלא";
+"opt.ontop" = "צף מעל השאר";
 
-"opt.chapter" = "Chapter";
+"opt.chapter" = "פרק";
 
-"read.set" = "Set {{property}} to {{value}}";
+"read.set" = "הגדר את {{property}} ל-{{value}}";
 "read.add" = "{{property}} {{value}}";
 "read.multiply" = "Multiply {{property}} by {{factor}}x";
 "read.cycle" = "Cycle {{property}}{{#dir_down}} Downwards{{/dir_down}}";
-"read.cycle-values" = "Cycle {{property}} in ({{{values}}})";
+"read.cycle-values" = "עבור בין {{property}} ב({{{values}}})";
 "read.seek" = "Seek {{#fwd}}forward{{/fwd}}{{#bwd}}backward{{/bwd}}{{#abs}}to{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";
 "read.sub-seek" = "Seek to {{#skip_1}}next{{/skip_1}}{{#skip_-1}}previous{{/skip_-1}} subtitle";

@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "נוסף מסנן: %@";
 "osd.filter_removed" = "המסנן הוסר";
-"osd.file_loop" = "חזרה על קובץ: %@";
-"osd.playlist_loop" = "חזרה על רשימת השמעה: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "העדפות";
 "preference.general" = "כללי";

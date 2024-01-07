@@ -240,13 +240,13 @@
 "alert.filter_hwdec.turn_off" = "دیکودینگ سخت افزاری رو خاموش کن";
 "alert.filter_hwdec.use_copy" = "Switch to Auto(Copy)";
 
-"alert.clear_cache.title" = "Clear Thumbnail Cache";
+"alert.clear_cache.title" = "پاک کردن حافظه تصاویر بند انگشتی";
 "alert.clear_cache.message" = "Are you sure to clear all thumbnail Cache?";
 
 "alert.clear_history.title" = "پاک کردن تاریخچه‌ی پخش";
 "alert.clear_history.message" = "مطمئنید که می‌خواهید تمام تاریخچه‌ی پخش را پاک کنید؟";
 
-"alert.clear_watch_later.title" = "Clear Saved Playback Progress";
+"alert.clear_watch_later.title" = "در حال پاک کردن پیشرفت های پخش";
 "alert.clear_watch_later.message" = "Are you sure to delete all saved playback progress (\"watch later\" data)?";
 
 "alert.restore_alerts.title" = "Restore Suppressed Alerts";
@@ -288,12 +288,12 @@
 "pl_menu.delete_after_play" = "بعد از پلی شدن، بندازش سطل آشغال";
 "pl_menu.delete_after_play_multi" = "فایل های انتخاب شده رو بعد از پلی شدن بنداز سطل آشغال";
 "pl_menu.show_in_finder" = "نمایش در Finder";
-"pl_menu.add_file" = "Add File…";
-"pl_menu.add_url" = "Add URL…";
+"pl_menu.add_file" = "افزودن فایل…";
+"pl_menu.add_url" = "افزودن URL…";
 "pl_menu.clear_playlist" = "Clear Playlist";
 "pl_menu.matched_sub" = "Matched %d Subtitle(s)";
 "pl_menu.add_sub" = "Add Subtitle…";
-"pl_menu.wrong_sub" = "Wrong Subtitle!";
+"pl_menu.wrong_sub" = "زیر نویس اشتباه است!";
 "pl_menu.browser" = "Open in Browser";
 "pl_menu.copy_url" = "Copy URL";
 "pl_menu.copy_url_multi" = "Copy URLs";
@@ -302,7 +302,7 @@
 "keymapping.message" = "Press any key to record.";
 
 "filter.video_filters" = "Video Filters";
-"filter.audio_filters" = "Audio Filters";
+"filter.audio_filters" = "فیلترهای صدا";
 
 "hwdec.no" = "Disable hardware decoding.";
 "hwdec.auto" = "Enable hardware decoding. However, most of the video filters won't work properly.";
@@ -336,8 +336,8 @@
 "touchbar.back_30" = "30sec Back";
 "touchbar.next_video" = "Next Video";
 "touchbar.prev_video" = "Previous Video";
-"touchbar.increase_volume" = "Volume +";
-"touchbar.decrease_volume" = "Volume -";
+"touchbar.increase_volume" = "صدا +";
+"touchbar.decrease_volume" = "صدا -";
 "touchbar.rewind" = "Rewind";
 "touchbar.fast_forward" = "Fast Forward";
 "touchbar.play_pause" = "Play / Pause";

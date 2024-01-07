@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Pridaný filter: %@";
 "osd.filter_removed" = "Odstránený filter";
-"osd.file_loop" = "Slučka súboru: %@";
-"osd.playlist_loop" = "Slučka Playlistu %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Nastavenia";
 "preference.general" = "Všeobecné";
@@ -349,22 +350,22 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Sieťová Požiadavka";
-"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
+"permissions.network-request.desc" = "Tento plugin môže prijímať alebo odosielať dáta na tieto webstránky:";
 "permissions.network-request.any_site" = "Akákoľvek stránka";
 "permissions.show-osd.name" = "Zozbraziť OSD";
 "permissions.show-osd.desc" = "Tento plugin môže zobraziť OSD (On Screen Display = Displej Na Obrazovku) správy.";
 "permissions.show-alert.name" = "Zobraziť upozornenie";
 "permissions.show-alert.desc" = "Tento plug-in môže zobrazovať vyskakovacie upozornenie.";
-"permissions.video-overlay.name" = "Add overlays on videos";
+"permissions.video-overlay.name" = "Pridať prekrytie cez video";
 "permissions.video-overlay.desc" = "Tento plug-in môže vykresľovať cez video ďalší obsah.";
 "permissions.file-system.name" = "Prístup k súborovému systému";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.file-system.desc" = "Tento plug-in môže čítať alebo zapisovať súbory na disk, vrátane citlivých informácií. Môže tiež využívať iné programy alebo aplikácie, ktoré môžu poškodiť váš počítač. Uistite sa teda, že ste overili jeho zdroj.";
 
 "plugin.install" = "Inštalovať";
 "plugin.installed" = "Nainštalované";
 "plugin.not_installed" = "Nenainštalované";
 "plugin.local" = "Nainštalované lokálne";
-"alert.plugin.install_error" = "Error occurred during the installation: %@";
+"alert.plugin.install_error" = "Pri inštalácii sa vyskytla chyba: %@";
 "alert.invalid_url" = "URL je neplatná.";
 "plugin.install_error.invalid_url" = "URL je neplatná.";
 "plugin.install_error.file_not_found" = "Súbor balíčka sa nedá nájsť.";

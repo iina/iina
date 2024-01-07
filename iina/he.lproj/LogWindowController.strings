@@ -2,10 +2,10 @@
 "1si-iG-tju.title" = "שמור כ...";
 
 /* Class = "NSTextFieldCell"; title = "Subsystem:"; ObjectID = "91n-Sw-RQj"; */
-"91n-Sw-RQj.title" = "Subsystem:";
+"91n-Sw-RQj.title" = "תת מערכת:";
 
 /* Class = "NSMenuItem"; title = "All"; ObjectID = "9Mt-2c-hRy"; */
-"9Mt-2c-hRy.title" = "All";
+"9Mt-2c-hRy.title" = "הכל";
 
 /* Class = "NSMenuItem"; title = "Error"; ObjectID = "FGm-HY-5ln"; */
 "FGm-HY-5ln.title" = "שגיאה";
@@ -14,13 +14,13 @@
 "G3v-tE-ZhU.title" = "Table View Cell";
 
 /* Class = "NSTableColumn"; headerCell.title = "Subsystem"; ObjectID = "GRp-Ls-7Bw"; */
-"GRp-Ls-7Bw.headerCell.title" = "Subsystem";
+"GRp-Ls-7Bw.headerCell.title" = "תת מערכת";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "I7k-Y3-RgJ"; */
-"I7k-Y3-RgJ.title" = "Text Cell";
+"I7k-Y3-RgJ.title" = "תא טקסט";
 
 /* Class = "NSMenuItem"; title = "Debug"; ObjectID = "IAO-ta-GnL"; */
-"IAO-ta-GnL.title" = "Debug";
+"IAO-ta-GnL.title" = "ניפוי שגיאות";
 
 /* Class = "NSTableColumn"; headerCell.title = "Message"; ObjectID = "ISx-4s-GjQ"; */
 "ISx-4s-GjQ.headerCell.title" = "הודעה";
@@ -29,10 +29,10 @@
 "J8Q-uC-tUM.title" = "Table View Cell";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "L92-i2-eTp"; */
-"L92-i2-eTp.title" = "Text Cell";
+"L92-i2-eTp.title" = "תא טקסט";
 
 /* Class = "NSWindow"; title = "Log Viewer"; ObjectID = "QvC-M9-y7g"; */
-"QvC-M9-y7g.title" = "Log Viewer";
+"QvC-M9-y7g.title" = "תצוגת יומן";
 
 /* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "b9E-HK-qN8"; */
 "b9E-HK-qN8.title" = "Table View Cell";
@@ -44,13 +44,13 @@
 "dFU-NP-aIl.title" = "מפורט";
 
 /* Class = "NSTableColumn"; headerCell.title = "Time"; ObjectID = "jdC-eg-YUY"; */
-"jdC-eg-YUY.headerCell.title" = "Time";
+"jdC-eg-YUY.headerCell.title" = "זמן";
 
 /* Class = "NSTextFieldCell"; title = "Level:"; ObjectID = "vaz-WH-G1w"; */
 "vaz-WH-G1w.title" = "רמה:";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "xko-rY-ufQ"; */
-"xko-rY-ufQ.title" = "Text Cell";
+"xko-rY-ufQ.title" = "תא טקסט";
 
 /* Class = "NSMenuItem"; title = "Warning"; ObjectID = "zVH-tI-Wo0"; */
 "zVH-tI-Wo0.title" = "אזהרה";

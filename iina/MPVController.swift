@@ -118,6 +118,7 @@ class MPVController: NSObject {
     MPVOption.Subtitles.secondarySid: MPV_FORMAT_INT64,
     MPVOption.PlaybackControl.pause: MPV_FORMAT_FLAG,
     MPVOption.PlaybackControl.loopPlaylist: MPV_FORMAT_STRING,
+    MPVOption.PlaybackControl.loopFile: MPV_FORMAT_STRING,
     MPVProperty.chapter: MPV_FORMAT_INT64,
     MPVOption.Video.deinterlace: MPV_FORMAT_FLAG,
     MPVOption.Video.hwdec: MPV_FORMAT_STRING,
@@ -1115,8 +1116,8 @@ not applying FFmpeg 9599 workaround
         player.sendOSD(.speed(data))
       }
 
-    case MPVOption.PlaybackControl.loopPlaylist:
-      player.syncUI(.playlistLoop)
+    case MPVOption.PlaybackControl.loopPlaylist, MPVOption.PlaybackControl.loopFile:
+      player.syncUI(.loop)
 
     case MPVOption.Video.deinterlace:
       needReloadQuickSettingsView = true

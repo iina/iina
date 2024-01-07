@@ -474,10 +474,9 @@ class MenuController: NSObject, NSMenuDelegate {
     chapterPanel?.title = isDisplayingChapters ? Constants.String.hideChaptersPanel : Constants.String.chaptersPanel
     pause.title = player.info.isPaused ? Constants.String.resume : Constants.String.pause
     abLoop.state = player.isABLoopActive ? .on : .off
-    let isLoop = player.mpv.getString(MPVOption.PlaybackControl.loopFile) == "inf"
-    fileLoop.state = isLoop ? .on : .off
-    let isPlaylistLoop = player.mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
-    playlistLoop.state = (isPlaylistLoop == "inf" || isPlaylistLoop == "force") ? .on : .off
+    let loopMode = player.getLoopMode()
+    fileLoop.state = loopMode == .file ? .on : .off
+    playlistLoop.state = loopMode == .playlist ? .on : .off
     speedIndicator.title = String(format: NSLocalizedString("menu.speed", comment: "Speed:"), player.info.playSpeed)
   }
 

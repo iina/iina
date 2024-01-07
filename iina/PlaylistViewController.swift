@@ -150,9 +150,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
   override func viewDidAppear() {
     reloadData(playlist: true, chapters: true)
-
-    let loopStatus = player.mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
-    loopBtn.state = (loopStatus == "inf" || loopStatus == "force") ? .on : .off
+    updateLoopBtnStatus()
   }
 
   deinit {
@@ -202,13 +200,18 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       }
     }
   }
-    
+
   func updateLoopBtnStatus() {
     guard isViewLoaded else { return }
-    let loopStatus = player.mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
-    loopBtn.state = (loopStatus == "inf" || loopStatus == "force") ? .on : .off
+    let loopMode = player.getLoopMode()
+    switch loopMode {
+    case .off:  loopBtn.state = .off
+    case .file: loopBtn.state = .on
+    default:    loopBtn.state = .mixed
+    }
+    loopBtn.alternateImage = NSImage.init(named: loopBtn.state == .on ? "loop_file" : "loop_dark")
   }
-    
+
   // MARK: - Tab switching
 
   /** Switch tab (call from other objects) */
@@ -427,8 +430,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     switchToTab(.chapters)
   }
 
-  @IBAction func loopBtnAction(_ sender: AnyObject) {
-    player.togglePlaylistLoop()
+  @IBAction func loopBtnAction(_ sender: NSButton) {
+    player.nextLoopMode()
   }
 
   @IBAction func shuffleBtnAction(_ sender: AnyObject) {

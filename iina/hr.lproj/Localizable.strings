@@ -178,7 +178,7 @@
 "alert.error_open" = "Cannot open file or stream!";
 "alert.error_finding_file" = "Nije moguće pronaći datoteku %@!";
 "alert.error_loading_script" = "Nije moguće učitati skripta %@!";
-"alert.error_saving_file" = "Error occurred when saving %@: %@";
+"alert.error_saving_file" = "Došlo je do greške prilikom spremanja %@: %@";
 "alert.error_deleting_file" = "Nije moguće izbrisati datoteku.";
 
 "alert.config.new.title" = "New Input Configuration";

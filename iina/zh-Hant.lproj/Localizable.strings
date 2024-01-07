@@ -177,7 +177,7 @@
 "alert.error_open" = "無法打開檔案或媒體串流";
 "alert.error_finding_file" = "找不到 %@";
 "alert.error_loading_script" = "無法載入工序指令：%@";
-"alert.error_saving_file" = "Error occurred when saving %@: %@";
+"alert.error_saving_file" = "儲存檔案 %@ 時發生錯誤：%@";
 "alert.error_deleting_file" = "無法刪除此檔案";
 
 "alert.config.new.title" = "新增快速鍵設定檔";
@@ -191,7 +191,7 @@
 "alert.config.cannot_create" = "無法建立設定檔\n%@";
 "alert.config.cannot_write" = "無法寫入設定檔";
 
-"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
+"alert.filter.incorrect" = "設定濾鏡時出現錯誤，請檢查參數格式";
 "alert.add_filter.title" = "新增濾鏡";
 "alert.add_filter.message" = "請輸入符合 mpv 的 vf 或 af 格式的濾鏡指令";
 
@@ -349,22 +349,22 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "網路請求";
-"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
+"permissions.network-request.desc" = "此外掛可以送出或傳送數據至這些網站：";
 "permissions.network-request.any_site" = "任何站台";
 "permissions.show-osd.name" = "顯示 OSD";
 "permissions.show-osd.desc" = "這個外掛可以顯示 OSD（螢幕顯示選單）訊息。";
 "permissions.show-alert.name" = "顯示警告";
 "permissions.show-alert.desc" = "此外掛可以顯示彈出警告。";
-"permissions.video-overlay.name" = "Add overlays on videos";
+"permissions.video-overlay.name" = "於影片新增重疊顯示";
 "permissions.video-overlay.desc" = "此外掛可以在影片上渲染額外內容。";
 "permissions.file-system.name" = "存取檔案系統";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.file-system.desc" = "此外掛可以讀取或寫入你的磁碟上的檔案，包含敏感資訊。它也可以呼叫其他可能破壞電腦的程式或軟體。請確定你有驗證此外掛的來源。";
 
 "plugin.install" = "安裝";
 "plugin.installed" = "已安裝";
 "plugin.not_installed" = "尚未安裝";
 "plugin.local" = "已安裝於本機";
-"alert.plugin.install_error" = "Error occurred during the installation: %@";
+"alert.plugin.install_error" = "安裝時發生錯誤：%@";
 "alert.invalid_url" = "無效的 URL。";
 "plugin.install_error.invalid_url" = "無效的 URL。";
 "plugin.install_error.file_not_found" = "無法找到套件檔案。";

@@ -177,7 +177,7 @@
 "alert.error_open" = "Nelze otevřít soubor nebo stream!";
 "alert.error_finding_file" = "Soubor %@ nelze nalézt!";
 "alert.error_loading_script" = "Skript %@ nelze načíst!";
-"alert.error_saving_file" = "Error occurred when saving %@: %@";
+"alert.error_saving_file" = "Při ukládání %@ došlo k chybě: %@";
 "alert.error_deleting_file" = "Soubor nelze odstranit.";
 
 "alert.config.new.title" = "Konfigurace nového vstupu";
@@ -191,7 +191,7 @@
 "alert.config.cannot_create" = "Konfigurační soubor nelze vytvořit!\n%@";
 "alert.config.cannot_write" = "Nelze zapisovat do konfiguračního souboru!";
 
-"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
+"alert.filter.incorrect" = "Při nastavování filtrů došlo k chybě. Zkontrolujte prosím formát parametru.";
 "alert.add_filter.title" = "Přidat filtr";
 "alert.add_filter.message" = "Zadejte řetězec filtru ve formátu mpv příkazu vf nebo af.";
 
@@ -199,7 +199,7 @@
 
 "alert.extra_option.cannot_read" = "Nelze načíst uživatelsky vymezené další možnosti mpv.";
 "alert.extra_option.empty" = "Název nebo hodnota nemohou být prázdné!";
-"alert.extra_option.error" = "Při nastavování %@=%@ se vyskytla chyba číslo %d. Prosím zkontrolujte vaše nastavení dalších možností v Nastavení > Pokročilé.";
+"alert.extra_option.error" = "Při nastavování --%@=%@ se vyskytla chyba číslo %d. Zkontrolujte prosím vaše nastavení dalších možností v Nastavení > Pokročilé.";
 "alert.extra_option.config_folder" = "Chyba při nastavování konfigurační složky „%@“.";
 
 "alert.playlist.error_deleting" = "%@ nelze smazat";
@@ -349,22 +349,22 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Síťový požadavek";
-"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
+"permissions.network-request.desc" = "Tento plug-in může odesílat požadavky nebo nahrávat data na tyto webové stránky:";
 "permissions.network-request.any_site" = "Jakékoliv webové stránky";
 "permissions.show-osd.name" = "Zobrazit OSD";
 "permissions.show-osd.desc" = "Tento plug-in může zobrazovat OSD zprávy (zobrazení na obrazovce).";
 "permissions.show-alert.name" = "Zobrazit upozornění";
 "permissions.show-alert.desc" = "Tento plug-in může zobrazovat vyskakovací upozornění.";
-"permissions.video-overlay.name" = "Add overlays on videos";
+"permissions.video-overlay.name" = "Přidat překrytí přes video";
 "permissions.video-overlay.desc" = "Tento plug-in může vykreslovat přes video další obsah.";
 "permissions.file-system.name" = "Přístup k souborovému systému";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.file-system.desc" = "Tento plug-in může číst nebo zapisovat soubory na disk, které mohou obsahovat citlivé informace. Může také spouštět jiné programy nebo aplikace, které mohou poškodit váš počítač. Ujistěte se, že jste ověřili jeho zdroj.";
 
 "plugin.install" = "Instalovat";
 "plugin.installed" = "Nainstalován";
 "plugin.not_installed" = "Není nainstalován";
 "plugin.local" = "Nainstalován lokálně";
-"alert.plugin.install_error" = "Error occurred during the installation: %@";
+"alert.plugin.install_error" = "Při instalaci došlo k chybě: %@";
 "alert.invalid_url" = "URL adresa je neplatná.";
 "plugin.install_error.invalid_url" = "URL adresa je neplatná.";
 "plugin.install_error.file_not_found" = "Soubor balíčku nelze nalézt.";

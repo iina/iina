@@ -94,7 +94,7 @@
 "osd.file_loop" = "File Loop: %@";
 "osd.playlist_loop" = "Playlist Loop: %@";
 
-"preference.title" = "Preferences";
+"preference.title" = "Налады";
 "preference.general" = "Асноўныя";
 "preference.ui" = "UI";
 "preference.video_audio" = "Video/Audio";
@@ -161,8 +161,8 @@
 // Alerts
 "alert.beta_channel.title" = "Receive Updates for Beta Versions";
 
-"alert.title_error" = "Error";
-"alert.title_warning" = "Warning";
+"alert.title_error" = "Памылкі";
+"alert.title_warning" = "Папярэджанне";
 "alert.title_info" = "Information";
 
 "alert.fatal_error" = "Fatal error: %@ \nThe application will exit now.";
@@ -225,7 +225,7 @@
 "alert.opensub.login.title" = "OpenSubtitles Login";
 "alert.opensub.login.message" = "Please enter your username and password";
 
-"alert.open_url.title" = "Open URL";
+"alert.open_url.title" = "Адкрыць URL-адрас";
 "alert.open_url.message" = "Please enter the URL:";
 "alert.choose_media_file.title" = "Choose Media Files";
 

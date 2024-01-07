@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Dodani filtar: %@";
 "osd.filter_removed" = "Uklonjen filtar";
-"osd.file_loop" = "File Loop: %@";
-"osd.playlist_loop" = "Ponavljanje playliste: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Postavke";
 "preference.general" = "Opće";
@@ -355,16 +356,16 @@
 "permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
 "permissions.show-alert.name" = "Prikaži upozorenja";
 "permissions.show-alert.desc" = "Ovaj dodatak omogućuje prikaz prozora upozorenja.";
-"permissions.video-overlay.name" = "Add overlays on videos";
+"permissions.video-overlay.name" = "Dodaj sloj na videa";
 "permissions.video-overlay.desc" = "Ovaj dodatak omogućuje prikaz dodatnog sadržaja u videu.";
 "permissions.file-system.name" = "Pristupi datotečnom sustavu";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.file-system.desc" = "Ovaj dodatak može čitati ili pisati datoteke na tvom disku, uključujući osjetljive podatke. Također može pozvati druge programe ili aplikacije koje mogu oštetiti tvoje računalo. Stoga svakako provjeri izvor.";
 
 "plugin.install" = "Instaliraj";
 "plugin.installed" = "Instalirano";
 "plugin.not_installed" = "Nije Instalirano";
 "plugin.local" = "Instalirano lokalno";
-"alert.plugin.install_error" = "Error occurred during the installation: %@";
+"alert.plugin.install_error" = "Došlo je do greške tijekom instalacije: %@";
 "alert.invalid_url" = "URL je neispravan.";
 "plugin.install_error.invalid_url" = "URL je neispravan.";
 "plugin.install_error.file_not_found" = "Datoteka paketa nije pronađena.";

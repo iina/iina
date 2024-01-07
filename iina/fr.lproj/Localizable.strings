@@ -91,8 +91,9 @@
 "osd.timed_out" = "Délai de connexion expiré";
 "osd.filter_added" = "Filtre ajouté : %@";
 "osd.filter_removed" = "Filtre supprimé";
-"osd.file_loop" = "Lire le fichier en boucle : %@";
-"osd.playlist_loop" = "Lire la liste de lecture en boucle : %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Préférences";
 "preference.general" = "Général";
@@ -191,7 +192,7 @@
 "alert.config.cannot_create" = "Impossible de créer le fichier de configuration ! %@";
 "alert.config.cannot_write" = "Impossible d'écrire sur le fichier de configuration !";
 
-"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
+"alert.filter.incorrect" = "Une erreur est survenue lors de la configuration des filtres. Veuillez vérifier le format de votre paramètre.";
 "alert.add_filter.title" = "Nouveau filtre";
 "alert.add_filter.message" = "Veuillez renseigner une chaîne de caractères au format de la commande vf ou af de mpv.";
 

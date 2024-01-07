@@ -35,7 +35,7 @@
 "Gyd-Qt-FEo.title" = "Clic du milieu pour :";
 
 /* Class = "NSButtonCell"; title = "Acccepts first mouse"; ObjectID = "gZK-ry-lQs"; */
-"gZK-ry-lQs.title" = "Accepte le premier clic de souris quand non ciblé";
+"gZK-ry-lQs.title" = "Accepter le premier clic de souris quand hors focus";
 
 /* Class = "NSMenuItem"; title = "Fullscreen"; ObjectID = "Hm3-dh-jgb"; */
 "Hm3-dh-jgb.title" = "Plein écran";
@@ -89,7 +89,7 @@
 "hDh-Lk-FJe.title" = "Basculer en plein écran";
 
 /* Class = "NSTextFieldCell"; title = "Scroll vertically to:"; ObjectID = "hNU-dJ-5Cj"; */
-"hNU-dJ-5Cj.title" = "Scroller verticalement pour :";
+"hNU-dJ-5Cj.title" = "Faire défiler verticalement pour :";
 
 /* Class = "NSMenuItem"; title = "Hide OSC"; ObjectID = "iFF-Gq-tVx"; */
 "iFF-Gq-tVx.title" = "Cacher l'OSC";
@@ -113,7 +113,7 @@
 "uqM-UM-Xvb.title" = "Pause / Lecture";
 
 /* Class = "NSTextFieldCell"; title = "Scroll horizontally to:"; ObjectID = "w1Y-jy-vNc"; */
-"w1Y-jy-vNc.title" = "Scroller horizontalement pour :";
+"w1Y-jy-vNc.title" = "Faire défiler horizontalement pour :";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "w54-7I-QfW"; */
 "w54-7I-QfW.title" = "Aucun";
@@ -128,10 +128,10 @@
 "wkV-Gq-B0T.title" = "Aucun";
 
 /* Class = "NSMenuItem"; title = "Toggle Picture-in-Picture"; ObjectID = "rvS-xA-7bv"; */
-"rvS-xA-7bv.title" = "Activer/désactiver Image dans l'Image";
+"rvS-xA-7bv.title" = "Activer/désactiver le mode Incrustation";
 
 /* Class = "NSMenuItem"; title = "Toggle Picture-in-Picture"; ObjectID = "ibM-4r-SQA"; */
-"ibM-4r-SQA.title" = "Activer/désactiver Image dans l'Image";
+"ibM-4r-SQA.title" = "Activer/désactiver le mode Incrustation";
 
 /* Class = "NSMenuItem"; title = "Toggle Picture-in-Picture"; ObjectID = "3Pm-nn-HpB"; */
-"3Pm-nn-HpB.title" = "Activer/désactiver Image dans l'Image";
+"3Pm-nn-HpB.title" = "Activer/désactiver le mode Incrustation";

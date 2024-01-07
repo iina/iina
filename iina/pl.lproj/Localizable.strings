@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Dodano filtr: %@";
 "osd.filter_removed" = "Usunięto filtr";
-"osd.file_loop" = "Pętla pliku: %@";
-"osd.playlist_loop" = "Pętla listy odtwarzania: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Preferencje";
 "preference.general" = "Ogólne";
@@ -349,22 +350,22 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Żądanie sieciowe";
-"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
+"permissions.network-request.desc" = "Ta wtyczka może żądać danych lub przesłać dane na te strony:";
 "permissions.network-request.any_site" = "Dowolna strona";
 "permissions.show-osd.name" = "Pokaż OSD";
 "permissions.show-osd.desc" = "Ta wtyczka może pokazywać wiadomości OSD (na ekranie wyświetlacza).";
 "permissions.show-alert.name" = "Pokaż alerty";
 "permissions.show-alert.desc" = "Ta wtyczka może wyświetlać wyskakujące powiadomienia.";
-"permissions.video-overlay.name" = "Add overlays on videos";
+"permissions.video-overlay.name" = "Dodaj nakładkę na filmy";
 "permissions.video-overlay.desc" = "Ta wtyczka może renderować dodatkowe treści nałożone na film.";
 "permissions.file-system.name" = "Dostęp do systemu plików";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.file-system.desc" = "Ta wtyczka może odczytywać i zapisywać pliki na dysku, w tym poufne informacje. Może także wywoływać inne programy lub aplikacje, które mogą uszkodzić komputer. Dlatego koniecznie sprawdź źródło.";
 
 "plugin.install" = "Zainstaluj";
 "plugin.installed" = "Zainstalowano";
 "plugin.not_installed" = "Nie zainstalowano";
 "plugin.local" = "Zainstalowane lokalnie";
-"alert.plugin.install_error" = "Error occurred during the installation: %@";
+"alert.plugin.install_error" = "Wystąpił błąd podczas instalacji: %@";
 "alert.invalid_url" = "Adres URL jest nieprawidłowy.";
 "plugin.install_error.invalid_url" = "Adres URL jest nieprawidłowy.";
 "plugin.install_error.file_not_found" = "Nie można znaleźć pliku pakietu.";

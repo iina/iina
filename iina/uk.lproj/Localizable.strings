@@ -91,8 +91,9 @@
 "osd.timed_out" = "Час вийшов";
 "osd.filter_added" = "Доданий фільтр: %@";
 "osd.filter_removed" = "Видалений фільтр";
-"osd.file_loop" = "Зациклити файл: %@";
-"osd.playlist_loop" = "Зациклити підбірку: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Параметри";
 "preference.general" = "Загальні";

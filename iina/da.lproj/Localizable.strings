@@ -178,7 +178,7 @@
 "alert.error_open" = "Kan ikke åbne fil eller stream!";
 "alert.error_finding_file" = "Kan ikke finde %@ !";
 "alert.error_loading_script" = "Kan ikke loade script %@!";
-"alert.error_saving_file" = "Error occurred when saving %@: %@";
+"alert.error_saving_file" = "Fejl under forsøg på at gemme %@: %@";
 "alert.error_deleting_file" = "Kan ikke slette fil.";
 
 "alert.config.new.title" = "Ny input konfiguration";

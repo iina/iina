@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "जोड़ा गया फ़िल्टर: %@";
 "osd.filter_removed" = "फ़िल्टर हटाया गया";
-"osd.file_loop" = "File Loop: %@";
-"osd.playlist_loop" = "Playlist Loop: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "पसंद";
 "preference.general" = "सामान्य";
@@ -191,7 +192,7 @@
 "alert.config.cannot_create" = "कॉन्फ़िगरेशन फ़ाइल नहीं बना सकता है!\n%@";
 "alert.config.cannot_write" = "फ़ाइल को कॉन्फ़िगर करने के लिए नहीं लिख सकता!";
 
-"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
+"alert.filter.incorrect" = "फ़िल्टर सेट करते समय त्रुटि आई। कृपया अपना पैरामीटर प्रारूप जांचें।";
 "alert.add_filter.title" = "नया फ़िल्टर";
 "alert.add_filter.message" = "कृपया mpv के vf या af कमांड के प्रारूप में एक फिल्टर स्ट्रिंग दर्ज करें।";
 

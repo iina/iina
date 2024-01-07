@@ -2,7 +2,7 @@
 "0Cz-OE-85L.title" = "Subtitle Delay + 0.1s";
 
 /* Class = "NSMenuItem"; title = "Show Playlist Panel"; ObjectID = "0T7-Nu-SL7"; */
-"0T7-Nu-SL7.title" = "Show Playlist Panel";
+"0T7-Nu-SL7.title" = "Εμφάνιση Πίνακα Λίστας Αναπαραγωγής";
 
 /* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "0m7-3r-twH"; */
 "0m7-3r-twH.title" = "Άνοιγμα συνδέσμου URL…";
@@ -68,7 +68,7 @@
 "8Zh-hU-Cc4.title" = "Audio Filters…";
 
 /* Class = "NSMenuItem"; title = "Speed:"; ObjectID = "8pV-XQ-AvB"; */
-"8pV-XQ-AvB.title" = "Speed:";
+"8pV-XQ-AvB.title" = "Ταχύτητα:";
 
 /* Class = "NSMenuItem"; title = "Show Subtitles Panel"; ObjectID = "8y7-Cy-lKT"; */
 "8y7-Cy-lKT.title" = "Show Subtitles Panel";
@@ -119,7 +119,7 @@
 "DVo-aG-piG.title" = "Close";
 
 /* Class = "NSMenuItem"; title = "Show Chapters Panel"; ObjectID = "DwM-3d-Eb9"; */
-"DwM-3d-Eb9.title" = "Show Chapters Panel";
+"DwM-3d-Eb9.title" = "Εμφάνιση Πίνακα Κεφαλαίων";
 
 /* Class = "NSMenu"; title = "Subtitles"; ObjectID = "EKp-Qx-4Mn"; */
 "EKp-Qx-4Mn.title" = "Subtitles";
@@ -137,7 +137,7 @@
 "FTu-CF-O0R.title" = "Video Track";
 
 /* Class = "NSMenuItem"; title = "Chapters"; ObjectID = "Fal-I4-PZk"; */
-"Fal-I4-PZk.title" = "Chapters";
+"Fal-I4-PZk.title" = "Κεφάλαια";
 
 /* Class = "NSMenu"; title = "Playback"; ObjectID = "GEO-Iw-cKr"; */
 "GEO-Iw-cKr.title" = "Playback";
@@ -242,7 +242,7 @@
 "R4o-n2-Eq4.title" = "Zoom";
 
 /* Class = "NSMenuItem"; title = "Website"; ObjectID = "Rqg-VS-aIj"; */
-"Rqg-VS-aIj.title" = "Website";
+"Rqg-VS-aIj.title" = "Ιστοσελίδα";
 
 /* Class = "NSMenuItem"; title = "Fit to Screen"; ObjectID = "SHd-63-Xoh"; */
 "SHd-63-Xoh.title" = "Προσαρμογή στην Οθόνη";
@@ -257,7 +257,7 @@
 "THG-4o-U6A.title" = "Subtitle Delay: ";
 
 /* Class = "NSMenu"; title = "Window"; ObjectID = "Td7-aD-5lo"; */
-"Td7-aD-5lo.title" = "Window";
+"Td7-aD-5lo.title" = "Παράθυρο";
 
 /* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "Tue-O7-cei"; */
 "Tue-O7-cei.title" = "Capitalize";
@@ -299,10 +299,10 @@
 "ZnF-yX-7jP.title" = "Custom Touch Bar…";
 
 /* Class = "NSMenuItem"; title = "Playlist Loop"; ObjectID = "aSc-P6-fiZ"; */
-"aSc-P6-fiZ.title" = "Playlist Loop";
+"aSc-P6-fiZ.title" = "Επανάληψη Λίστας Αναπαραγωγής";
 
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "aUF-d1-5bR"; */
-"aUF-d1-5bR.title" = "Window";
+"aUF-d1-5bR.title" = "Παράθυρο";
 
 /* Class = "NSMenu"; title = "Playlist"; ObjectID = "aXa-aM-Jaq"; */
 "aXa-aM-Jaq.title" = "Playlist";
@@ -332,7 +332,7 @@
 "d15-8v-dXA.title" = "Aspect Ratio";
 
 /* Class = "NSMenu"; title = "Chapters"; ObjectID = "d9c-me-L2H"; */
-"d9c-me-L2H.title" = "Chapters";
+"d9c-me-L2H.title" = "Κεφάλαια";
 
 /* Class = "NSMenu"; title = "Transformations"; ObjectID = "dBM-BU-5xS"; */
 "dBM-BU-5xS.title" = "Transformations";
@@ -356,7 +356,7 @@
 "gMo-qL-m08.title" = "Check for Updates…";
 
 /* Class = "NSMenuItem"; title = "Delete"; ObjectID = "h9w-Rj-Hm1"; */
-"h9w-Rj-Hm1.title" = "Delete";
+"h9w-Rj-Hm1.title" = "Διαγραφή";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "hz9-B4-Xy5"; */
 "hz9-B4-Xy5.title" = "Services";
@@ -365,7 +365,7 @@
 "i3P-Xw-8D7.title" = "A-B Loop";
 
 /* Class = "NSMenuItem"; title = "Volume:"; ObjectID = "iQF-1S-9EK"; */
-"iQF-1S-9EK.title" = "Volume:";
+"iQF-1S-9EK.title" = "Ένταση:";
 
 /* Class = "NSMenuItem"; title = "Video Track"; ObjectID = "j8P-Gb-HR7"; */
 "j8P-Gb-HR7.title" = "Video Track";

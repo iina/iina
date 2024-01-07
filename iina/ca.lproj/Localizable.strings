@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Filtre afegit: %@";
 "osd.filter_removed" = "Filtre suprimit";
-"osd.file_loop" = "Bucle de fitxer: %@";
-"osd.playlist_loop" = "Bucle de llista de reproducció: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Preferències";
 "preference.general" = "General";
@@ -191,7 +192,7 @@
 "alert.config.cannot_create" = "No es pot crear el fitxer de configuració!\n%@";
 "alert.config.cannot_write" = "No es pot escriure en el fitxer de configuració!";
 
-"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
+"alert.filter.incorrect" = "Error establint filtres. Si us plau verifica el format dels paràmetres.";
 "alert.add_filter.title" = "Crea filtre";
 "alert.add_filter.message" = "Si us plau introdueix un filtre de text en format mpv's o format af.";
 
@@ -355,16 +356,16 @@
 "permissions.show-osd.desc" = "Aquest complement pot ensenyar missatges en pantalla (OSD).";
 "permissions.show-alert.name" = "Mostrar alertes";
 "permissions.show-alert.desc" = "Aquest complement pot mostrar finestres emergents.";
-"permissions.video-overlay.name" = "Add overlays on videos";
+"permissions.video-overlay.name" = "Afegir overlay als vídeos";
 "permissions.video-overlay.desc" = "Aquest complement pot renderitzar contingut adicional al damunt del vídeo.";
 "permissions.file-system.name" = "Accedeix els fitxers";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.file-system.desc" = "Aquest complement pot llegir o escriure fitxers al teu disc, incloent informació sensible. També pot cridar altres programes o aplicacions que poden malmetre el teu ordinador. Comprova el seu origen.";
 
 "plugin.install" = "Instal·la";
 "plugin.installed" = "Instal·lat";
 "plugin.not_installed" = "No instal·lat";
 "plugin.local" = "Instal·lat localment";
-"alert.plugin.install_error" = "Error occurred during the installation: %@";
+"alert.plugin.install_error" = "Hi ha hagut un error durant la instal·lació: %@";
 "alert.invalid_url" = "L'adreça URL no és vàlida.";
 "plugin.install_error.invalid_url" = "L'adreça URL no és vàlida.";
 "plugin.install_error.file_not_found" = "No es pot trobar el fitxer.";

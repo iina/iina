@@ -178,7 +178,7 @@
 "alert.error_open" = "Impossível abrir ficheiro ou stream!";
 "alert.error_finding_file" = "Impossível encontrar o ficheiro %@!";
 "alert.error_loading_script" = "Impossível carregar o script %@!";
-"alert.error_saving_file" = "Error occurred when saving %@: %@";
+"alert.error_saving_file" = "Ocorreu um erro ao salvar %@: %@";
 "alert.error_deleting_file" = "Não foi possível apagar o ficheiro.";
 
 "alert.config.new.title" = "Nova configuração";
@@ -192,7 +192,7 @@
 "alert.config.cannot_create" = "Não foi possível criar um ficheiro de configuração!\n%@";
 "alert.config.cannot_write" = "Não foi possível escrever no arquivo de configuração!";
 
-"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
+"alert.filter.incorrect" = "Ocorreu um erro ao configurar os filtros. Por favor, verifique o formato de seu parâmetro.";
 "alert.add_filter.title" = "Novo Filtro";
 "alert.add_filter.message" = "Por favor, digite uma string de filtro no formato de comando vf ou af de mpv.";
 

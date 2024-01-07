@@ -178,7 +178,7 @@
 "alert.error_open" = "Αδυναμία ανοίγματος αρχείου ή ροής!";
 "alert.error_finding_file" = "Αδυναμία εύρεσης αρχείου %@!";
 "alert.error_loading_script" = "Αδυναμία φόρτωσης δέσμης ενεργειών %@!";
-"alert.error_saving_file" = "Error occurred when saving %@: %@";
+"alert.error_saving_file" = "Προέκυψε σφάλμα κατά την αποθήκευση %@: %@";
 "alert.error_deleting_file" = "Αδυναμία διαγραφής του αρχείου.";
 
 "alert.config.new.title" = "Νέα Διαμόρφωση Εισόδων";

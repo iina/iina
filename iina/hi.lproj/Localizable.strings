@@ -178,7 +178,7 @@
 "alert.error_open" = "फ़ाइल या स्ट्रीम नहीं खोल सकता!";
 "alert.error_finding_file" = "%@ फ़ाइल नहीं मिल रही है!";
 "alert.error_loading_script" = "स्क्रिप्ट %@! लोड नहीं किया जा सकता";
-"alert.error_saving_file" = "Error occurred when saving %@: %@";
+"alert.error_saving_file" = "%@: %@ को सहेजते समय त्रुटि आई\n";
 "alert.error_deleting_file" = "फ़ाइल को हटा नहीं सकता।";
 
 "alert.config.new.title" = "नया इनपुट कॉन्फ़िगरेशन";

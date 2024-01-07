@@ -91,8 +91,9 @@
 "osd.timed_out" = "已逾時";
 "osd.filter_added" = "已加入濾鏡：%@";
 "osd.filter_removed" = "已移除濾鏡";
-"osd.file_loop" = "文件循環";
-"osd.playlist_loop" = "播放列表循環";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "偏好設定";
 "preference.general" = "一般";

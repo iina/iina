@@ -2,28 +2,28 @@
 "0vG-Pg-DIl.title" = "Forced";
 
 /* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "1dz-Vt-0MO"; */
-"1dz-Vt-0MO.title" = "FPS:";
+"1dz-Vt-0MO.title" = "פריימים לשנייה:";
 
 /* Class = "NSTextFieldCell"; title = "File path:"; ObjectID = "4jf-w4-kkv"; */
-"4jf-w4-kkv.title" = "File path:";
+"4jf-w4-kkv.title" = "נתיב קובץ:";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "5H6-qJ-RDS"; */
 "5H6-qJ-RDS.title" = "פורמט:";
 
 /* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "7QX-tu-rvs"; */
-"7QX-tu-rvs.title" = "FPS:";
+"7QX-tu-rvs.title" = "פריימים לשנייה:";
 
 /* Class = "NSTextFieldCell"; title = "Title:"; ObjectID = "9eq-rd-zGy"; */
 "9eq-rd-zGy.title" = "כותרת:";
 
 /* Class = "NSTextFieldCell"; title = "Bit Rate:"; ObjectID = "A4y-LL-x0z"; */
-"A4y-LL-x0z.title" = "Bit Rate:";
+"A4y-LL-x0z.title" = "קצב סיביות:";
 
 /* Class = "NSTextFieldCell"; title = "Mistimed Frames:"; ObjectID = "AYt-pH-UCi"; */
 "AYt-pH-UCi.title" = "Mistimed Frames:";
 
 /* Class = "NSTextFieldCell"; title = "Display FPS:"; ObjectID = "AjU-1T-aGR"; */
-"AjU-1T-aGR.title" = "Display FPS:";
+"AjU-1T-aGR.title" = "הצג פריימים לשנייה:";
 
 /* Class = "NSTextFieldCell"; title = "Dropped Frames:"; ObjectID = "CrF-UR-udW"; */
 "CrF-UR-udW.title" = "Dropped Frames:";
@@ -32,7 +32,7 @@
 "DHh-ne-10f.title" = "Hw Decoder:";
 
 /* Class = "NSWindow"; title = "Inspector"; ObjectID = "F0z-JX-Cv5"; */
-"F0z-JX-Cv5.title" = "Inspector";
+"F0z-JX-Cv5.title" = "מפקח";
 
 /* Class = "NSTextFieldCell"; title = "Language:"; ObjectID = "FIw-CH-b05"; */
 "FIw-CH-b05.title" = "שפה:";
@@ -122,7 +122,7 @@
 "gDG-Eq-1Bc.title" = "וידאו";
 
 /* Class = "NSTextFieldCell"; title = "A/V Sync Diff:"; ObjectID = "iVK-Ck-Lyq"; */
-"iVK-Ck-Lyq.title" = "A/V Sync Diff:";
+"iVK-Ck-Lyq.title" = "הפרש סנכרון אודיו/וידאו:";
 
 /* Class = "NSTextFieldCell"; title = "Channels:"; ObjectID = "it3-05-Pwu"; */
 "it3-05-Pwu.title" = "ערוצים:";
@@ -146,7 +146,7 @@
 "n0s-eM-42w.title" = "Codec:";
 
 /* Class = "NSTextFieldCell"; title = "AUDIO"; ObjectID = "nrG-IH-kFg"; */
-"nrG-IH-kFg.title" = "אודיו";
+"nrG-IH-kFg.title" = "שמע";
 
 /* Class = "NSTextFieldCell"; title = "Total A/V Sync:"; ObjectID = "sbO-Cn-gpI"; */
 "sbO-Cn-gpI.title" = "Total A/V Sync:";
@@ -164,4 +164,4 @@
 "1kw-LO-KmJ.title" = "Primaries:";
 
 /* Class = "NSTextFieldCell"; title = "Colorspace:"; ObjectID = "mLo-Wc-BoO"; */
-"mLo-Wc-BoO.title" = "Colorspace:";
+"mLo-Wc-BoO.title" = "טווח צבעים:";

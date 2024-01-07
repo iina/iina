@@ -178,7 +178,7 @@
 "alert.error_open" = "Fájl vagy közvetítés megnyitás sikertelen!";
 "alert.error_finding_file" = "A fájl %@ nem található!";
 "alert.error_loading_script" = "A szkript %@ nem tölthetõ be!";
-"alert.error_saving_file" = "Error occurred when saving %@: %@";
+"alert.error_saving_file" = "Hiba történt mentéskor %@: %@";
 "alert.error_deleting_file" = "Nem sikerült törölni a fájlt.";
 
 "alert.config.new.title" = "Új beviteli konfiguráció";
@@ -350,7 +350,7 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Hálózati kérés";
-"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
+"permissions.network-request.desc" = "Ez a bővítvény a következő webhelyekre kérhet vagy tölthet fel adatokat:";
 "permissions.network-request.any_site" = "Bármely webhely";
 "permissions.show-osd.name" = "OSD megjelenítése";
 "permissions.show-osd.desc" = "Ez a bővítvény képes megjeleníteni az OSD-n (képernyőn megjelenő kijelző) üzeneteket.";

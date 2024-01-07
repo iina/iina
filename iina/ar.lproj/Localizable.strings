@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "تمت إضافة فلتر: %@";
 "osd.filter_removed" = "إزالة الفلتر";
-"osd.file_loop" = "حلقة الملف: %@";
-"osd.playlist_loop" = "حلقة قائمة التشغيل: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "التفضيلات";
 "preference.general" = "عام";
@@ -358,7 +359,7 @@
 "permissions.video-overlay.name" = "Add overlays on videos";
 "permissions.video-overlay.desc" = "يمكن لهذه الإضافة أن توفر محتوى إضافياً في الجزء العلوي من الفيديو.";
 "permissions.file-system.name" = "Access the file system";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.file-system.desc" = "يمكن لهذه الإضافة قراءة أو كتابة الملفات على القرص الخاص بك، بما في ذلك المعلومات الحساسة. يمكنها أيضًا الاتصال بالبرامج أو التطبيقات الأخرى التي يمكن أن تضر بجهاز الكمبيوتر الخاص بك. لذا تأكد من التحقق من المصدر.";
 
 "plugin.install" = "تثبيت";
 "plugin.installed" = "Installed";

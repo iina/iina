@@ -178,7 +178,7 @@
 "alert.error_open" = "Dosya veya akış açılamıyor!";
 "alert.error_finding_file" = "%@ dosyası bulunamıyor!";
 "alert.error_loading_script" = "%@ betiği yüklenemiyor!";
-"alert.error_saving_file" = "Error occurred when saving %@: %@";
+"alert.error_saving_file" = "%@: %@ kaydedilirken hata oluştu!";
 "alert.error_deleting_file" = "Dosya silinemiyor.";
 
 "alert.config.new.title" = "Yeni Giriş Yapılandırması";
@@ -192,7 +192,7 @@
 "alert.config.cannot_create" = "Yapılandırma dosyası oluşturulamıyor!\n%@";
 "alert.config.cannot_write" = "Yapılandırma dosyasına yazılamıyor!";
 
-"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
+"alert.filter.incorrect" = "Filtreler ayarlanırken hata oluştu. Lütfen parametre biçiminizi kontrol edin.";
 "alert.add_filter.title" = "Yeni Filtre";
 "alert.add_filter.message" = "Lütfen mpv'nin vf veya af komutu biçiminde bir filtre dizisi girin.";
 

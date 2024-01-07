@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "فیلتر اضافه شده: %@";
 "osd.filter_removed" = "حذف فیلتر";
-"osd.file_loop" = "تکرار فایل: %@";
-"osd.playlist_loop" = "تکرار لیست: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "تنظیمات";
 "preference.general" = "عمومی";

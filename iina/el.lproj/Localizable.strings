@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Προστέθηκε Φίλτρο: %@";
 "osd.filter_removed" = "Φίλτρο Αφαιρέθηκε";
-"osd.file_loop" = "Επανάληψη Αρχείου: %@";
-"osd.playlist_loop" = "Επανάληψη Λίστας Αναπαραγωγής: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Προτιμήσεις";
 "preference.general" = "Γενικά";
@@ -191,7 +192,7 @@
 "alert.config.cannot_create" = "Αδυναμία δημιουργίας αρχείου ρυθμίσεων!\n%@";
 "alert.config.cannot_write" = "Αδυναμία εγγραφής στο αρχείο ρυθμίσεων!";
 
-"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
+"alert.filter.incorrect" = "Σφάλμα κατά τη ρύθμιση φίλτρων. Παρακαλώ ελέγξτε τη μορφή των παραμέτρων σας.";
 "alert.add_filter.title" = "Νέο Φίλτρο";
 "alert.add_filter.message" = "Παρακαλώ εισάγετε μια συμβολοσειρά φίλτρου στην μορφή εντολής mpv, ή vf, ή af.";
 

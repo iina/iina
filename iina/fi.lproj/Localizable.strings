@@ -178,7 +178,7 @@
 "alert.error_open" = "Tiedostoa tai suoratoistoa ei voida avata!";
 "alert.error_finding_file" = "Tiedostoa %@ ei löydy!";
 "alert.error_loading_script" = "Skriptiä %@ ei voida ladata!";
-"alert.error_saving_file" = "Error occurred when saving %@: %@";
+"alert.error_saving_file" = "Virhe tallennettaessa kohdetta %@: %@";
 "alert.error_deleting_file" = "Tiedostoa ei voida poistaa.";
 
 "alert.config.new.title" = "Uudet syöttöasetukset";

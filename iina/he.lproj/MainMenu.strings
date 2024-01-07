@@ -1,8 +1,8 @@
 /* Class = "NSMenuItem"; title = "Subtitle Delay + 0.1s"; ObjectID = "0Cz-OE-85L"; */
-"0Cz-OE-85L.title" = "Subtitle Delay + 0.1s";
+"0Cz-OE-85L.title" = "עיכוב כתוביות: הוסף 0.1 שנ'";
 
 /* Class = "NSMenuItem"; title = "Show Playlist Panel"; ObjectID = "0T7-Nu-SL7"; */
-"0T7-Nu-SL7.title" = "Show Playlist Panel";
+"0T7-Nu-SL7.title" = "הצג פאנל רשימת השמעה";
 
 /* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "0m7-3r-twH"; */
 "0m7-3r-twH.title" = "פתיחת URL…";
@@ -14,7 +14,7 @@
 "1UK-8n-QPP.title" = "גודל רגיל";
 
 /* Class = "NSMenu"; title = "Audio Device"; ObjectID = "2Dp-Ol-Zcf"; */
-"2Dp-Ol-Zcf.title" = "Audio Device";
+"2Dp-Ol-Zcf.title" = "התקן שמע";
 
 /* Class = "NSMenuItem"; title = "Jump to Beginning"; ObjectID = "2Ya-3g-1hy"; */
 "2Ya-3g-1hy.title" = "קפוץ להתחלה";
@@ -26,16 +26,16 @@
 "2id-wn-xsC.title" = "קפיצה אל…";
 
 /* Class = "NSMenuItem"; title = "Show Video Panel"; ObjectID = "2t8-Ot-yoO"; */
-"2t8-Ot-yoO.title" = "Show Video Panel";
+"2t8-Ot-yoO.title" = "הצג פאנל וידאו";
 
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "3Ax-P3-QQu"; */
 "3Ax-P3-QQu.title" = "בחר הכל";
 
 /* Class = "NSMenuItem"; title = "Show Audio Panel"; ObjectID = "43n-Ed-5kT"; */
-"43n-Ed-5kT.title" = "Show Audio Panel";
+"43n-Ed-5kT.title" = "הצג פאנל אודיו";
 
 /* Class = "NSMenuItem"; title = "Audio Delay + 0.5s"; ObjectID = "4ae-MT-2L1"; */
-"4ae-MT-2L1.title" = "Audio Delay + 0.5s";
+"4ae-MT-2L1.title" = "עיכוב שמע: הוסף 0.5 שנ'";
 
 /* Class = "NSMenuItem"; title = "Quit IINA"; ObjectID = "4sb-4s-VLi"; */
 "4sb-4s-VLi.title" = "צא מ-IINA";
@@ -53,7 +53,7 @@
 "6Eq-ni-6hG.title" = "היכנס למסך מלא";
 
 /* Class = "NSMenuItem"; title = "Step Forward 5s"; ObjectID = "6yE-op-DTS"; */
-"6yE-op-DTS.title" = "Step Forward 5s";
+"6yE-op-DTS.title" = "דילוג 5 שניות קדימה";
 
 /* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "7Bn-Mp-EvJ"; */
 "7Bn-Mp-EvJ.title" = "המרות";
@@ -71,25 +71,25 @@
 "8pV-XQ-AvB.title" = "מהירות:";
 
 /* Class = "NSMenuItem"; title = "Show Subtitles Panel"; ObjectID = "8y7-Cy-lKT"; */
-"8y7-Cy-lKT.title" = "Show Subtitles Panel";
+"8y7-Cy-lKT.title" = "הצג פאנל כתוביות";
 
 /* Class = "NSMenuItem"; title = "Speed Up to 1.1x"; ObjectID = "91n-xW-L37"; */
 "91n-xW-L37.title" = "הגבר מהירות ל-x1.1";
 
 /* Class = "NSMenuItem"; title = "Audio Delay - 0.1s"; ObjectID = "9ee-7i-xs7"; */
-"9ee-7i-xs7.title" = "עיכוב שמע - עשירית שניה";
+"9ee-7i-xs7.title" = "עיכוב שמע: הפחת 0.1 שנ'";
 
 /* Class = "NSMenuItem"; title = "<None>"; ObjectID = "9pa-9C-ueQ"; */
 "9pa-9C-ueQ.title" = "<None>";
 
 /* Class = "NSMenuItem"; title = "Save Downloaded Subtitle…"; ObjectID = "9zk-co-roT"; */
-"9zk-co-roT.title" = "Save Downloaded Subtitle…";
+"9zk-co-roT.title" = "שמור כתוביות שהורדו…";
 
 /* Class = "NSMenuItem"; title = "Take a Screenshot"; ObjectID = "AoP-K6-Kb5"; */
 "AoP-K6-Kb5.title" = "צילום מסך";
 
 /* Class = "NSMenuItem"; title = "Delogo"; ObjectID = "ArE-2s-JIV"; */
-"ArE-2s-JIV.title" = "Delogo";
+"ArE-2s-JIV.title" = "הסרת סימן מים";
 
 /* Class = "NSMenuItem"; title = "Saved Video Filters"; ObjectID = "BDr-G9-IRx"; */
 "BDr-G9-IRx.title" = "מסנני וידאו שמורים";
@@ -104,10 +104,10 @@
 "BtY-iQ-6Pf.title" = "שיתוף";
 
 /* Class = "NSMenuItem"; title = "Advanced Screenshot…"; ObjectID = "CKi-JE-yLT"; */
-"CKi-JE-yLT.title" = "Advanced Screenshot…";
+"CKi-JE-yLT.title" = "צילום מסך מתקדם…";
 
 /* Class = "NSMenuItem"; title = "File Loop"; ObjectID = "D1y-kv-85s"; */
-"D1y-kv-85s.title" = "File Loop";
+"D1y-kv-85s.title" = "חזרה על קובץ";
 
 /* Class = "NSMenu"; title = "Audio Track"; ObjectID = "DRb-Y8-xir"; */
 "DRb-Y8-xir.title" = "רצועת שמע";
@@ -119,10 +119,10 @@
 "DVo-aG-piG.title" = "סגור";
 
 /* Class = "NSMenuItem"; title = "Show Chapters Panel"; ObjectID = "DwM-3d-Eb9"; */
-"DwM-3d-Eb9.title" = "Show Chapters Panel";
+"DwM-3d-Eb9.title" = "הצג פאנל פרקים";
 
 /* Class = "NSMenu"; title = "Subtitles"; ObjectID = "EKp-Qx-4Mn"; */
-"EKp-Qx-4Mn.title" = "Subtitles";
+"EKp-Qx-4Mn.title" = "כתוביות";
 
 /* Class = "NSMenu"; title = "Help"; ObjectID = "F2S-fz-NVQ"; */
 "F2S-fz-NVQ.title" = "עזרה";
@@ -134,7 +134,7 @@
 "FKE-Sm-Kum.title" = "עזרת IINA";
 
 /* Class = "NSMenu"; title = "Video Track"; ObjectID = "FTu-CF-O0R"; */
-"FTu-CF-O0R.title" = "Video Track";
+"FTu-CF-O0R.title" = "רצועת וידאו";
 
 /* Class = "NSMenuItem"; title = "Chapters"; ObjectID = "Fal-I4-PZk"; */
 "Fal-I4-PZk.title" = "פרקים";
@@ -155,7 +155,7 @@
 "Gqg-wU-RRo.title" = "חתוך";
 
 /* Class = "NSMenuItem"; title = "Reset Audio Delay"; ObjectID = "H3d-jR-YCr"; */
-"H3d-jR-YCr.title" = "אפס עיכוב אודיו";
+"H3d-jR-YCr.title" = "אפס עיכוב שמע";
 
 /* Class = "NSMenuItem"; title = "Video"; ObjectID = "H8h-7b-M4v"; */
 "H8h-7b-M4v.title" = "וידאו";
@@ -191,13 +191,13 @@
 "LND-1n-DU2.title" = "הסטוריית השמעה";
 
 /* Class = "NSMenuItem"; title = "Audio Delay - 0.5s"; ObjectID = "Lc4-4W-thE"; */
-"Lc4-4W-thE.title" = "עיכוב שמע - חצי שניה";
+"Lc4-4W-thE.title" = "עיכוב שמע: הפחת 0.5 שנ'";
 
 /* Class = "NSMenuItem"; title = "Speed Up to 2x"; ObjectID = "Lqa-OG-EEg"; */
 "Lqa-OG-EEg.title" = "הגבר מהירות ל-x2";
 
 /* Class = "NSMenuItem"; title = "Subtitle Delay - 0.5s"; ObjectID = "LsU-Qz-dax"; */
-"LsU-Qz-dax.title" = "עיכוב כתוביות - חצי שניה";
+"LsU-Qz-dax.title" = "עיכוב כתוביות: הפחת 0.5 שנ'";
 
 /* Class = "NSMenuItem"; title = "Find Online Subtitles…"; ObjectID = "Mg3-WB-gjZ"; */
 "Mg3-WB-gjZ.title" = "מצא כתוביות מקוונות…";
@@ -224,7 +224,7 @@
 "Olw-nP-bQN.title" = "הסתר את IINA";
 
 /* Class = "NSMenuItem"; title = "Reset Subtitle Scale"; ObjectID = "P1a-ot-P31"; */
-"P1a-ot-P31.title" = "Reset Subtitle Scale";
+"P1a-ot-P31.title" = "אפס את קנה המידה של הכתוביות";
 
 /* Class = "NSMenuItem"; title = "Encoding"; ObjectID = "Pci-OQ-Vni"; */
 "Pci-OQ-Vni.title" = "קידוד";
@@ -248,10 +248,10 @@
 "SHd-63-Xoh.title" = "התאמה למסך";
 
 /* Class = "NSMenuItem"; title = "Reset Subtitle Delay"; ObjectID = "SLr-6g-Mgh"; */
-"SLr-6g-Mgh.title" = "Reset Subtitle Delay";
+"SLr-6g-Mgh.title" = "אפס עיכוב כתוביות";
 
 /* Class = "NSMenuItem"; title = "Step Backward 5s"; ObjectID = "Sif-85-FF1"; */
-"Sif-85-FF1.title" = "Step Backward 5s";
+"Sif-85-FF1.title" = "חזרה 5 שניות אחורה";
 
 /* Class = "NSMenuItem"; title = "Subtitle Delay: "; ObjectID = "THG-4o-U6A"; */
 "THG-4o-U6A.title" = "עיכוב כתוביות: ";
@@ -278,7 +278,7 @@
 "WOL-Us-ByA.title" = "השתקה";
 
 /* Class = "NSMenuItem"; title = "Volume + 5%"; ObjectID = "Wbq-vt-hzX"; */
-"Wbq-vt-hzX.title" = "Volume + 5%";
+"Wbq-vt-hzX.title" = "עוצמת שמע: הוסף 5%";
 
 /* Class = "NSMenuItem"; title = "Next Frame"; ObjectID = "XDC-Pc-rS1"; */
 "XDC-Pc-rS1.title" = "Next Frame";
@@ -290,16 +290,16 @@
 "XPz-ml-OQ3.title" = "ביטול";
 
 /* Class = "NSMenuItem"; title = "Smaller Size"; ObjectID = "ZOF-MG-6II"; */
-"ZOF-MG-6II.title" = "Smaller Size";
+"ZOF-MG-6II.title" = "גודל קטן יותר";
 
 /* Class = "NSMenuItem"; title = "Volume - 1%"; ObjectID = "Zhv-Bz-I5V"; */
-"Zhv-Bz-I5V.title" = "עוצמת שמע - 1%";
+"Zhv-Bz-I5V.title" = "עוצמת שמע: הפחת 1%";
 
 /* Class = "NSMenuItem"; title = "Custom Touch Bar…"; ObjectID = "ZnF-yX-7jP"; */
 "ZnF-yX-7jP.title" = "סרגל מגע מותאם אישית…";
 
 /* Class = "NSMenuItem"; title = "Playlist Loop"; ObjectID = "aSc-P6-fiZ"; */
-"aSc-P6-fiZ.title" = "Playlist Loop";
+"aSc-P6-fiZ.title" = "חזרה על רשימת השמעה";
 
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "aUF-d1-5bR"; */
 "aUF-d1-5bR.title" = "חלון";
@@ -320,13 +320,13 @@
 "bib-Uj-vzu.title" = "קובץ";
 
 /* Class = "NSMenuItem"; title = "Inspector"; ObjectID = "bwz-r0-peR"; */
-"bwz-r0-peR.title" = "Inspector";
+"bwz-r0-peR.title" = "מפקח";
 
 /* Class = "NSMenuItem"; title = "Normal Size (Retina)"; ObjectID = "c1x-bx-69F"; */
-"c1x-bx-69F.title" = "Normal Size (Retina)";
+"c1x-bx-69F.title" = "גודל רגיל (Retina)";
 
 /* Class = "NSMenuItem"; title = "Volume + 1%"; ObjectID = "c6Y-0e-vgf"; */
-"c6Y-0e-vgf.title" = "עוצמת שמע + 1%";
+"c6Y-0e-vgf.title" = "עוצמת שמע: הוסף 1%";
 
 /* Class = "NSMenuItem"; title = "Aspect Ratio"; ObjectID = "d15-8v-dXA"; */
 "d15-8v-dXA.title" = "יחס גובה-רוחב";
@@ -341,7 +341,7 @@
 "dMs-cI-mzQ.title" = "קובץ";
 
 /* Class = "NSMenuItem"; title = "Stop and Clear Playlists"; ObjectID = "deS-xK-iBb"; */
-"deS-xK-iBb.title" = "Stop and Clear Playlists";
+"deS-xK-iBb.title" = "עצור ונקה רשימות השמעה";
 
 /* Class = "NSMenu"; title = "Crop"; ObjectID = "eo2-Tt-SLx"; */
 "eo2-Tt-SLx.title" = "חתוך";
@@ -350,10 +350,10 @@
 "foC-r3-8mp.title" = "עיכוב שמע:";
 
 /* Class = "NSMenuItem"; title = "Subtitle Delay - 0.1s"; ObjectID = "fyL-tr-6Bu"; */
-"fyL-tr-6Bu.title" = "עיכוב כתוביות - עשירית שניה";
+"fyL-tr-6Bu.title" = "עיכוב כתוביות: הפחת 0.1 שנ'";
 
 /* Class = "NSMenuItem"; title = "Check for Updates…"; ObjectID = "gMo-qL-m08"; */
-"gMo-qL-m08.title" = "Check for Updates…";
+"gMo-qL-m08.title" = "מחפש עדכונים…";
 
 /* Class = "NSMenuItem"; title = "Delete"; ObjectID = "h9w-Rj-Hm1"; */
 "h9w-Rj-Hm1.title" = "מחיקה";
@@ -368,7 +368,7 @@
 "iQF-1S-9EK.title" = "עוצמת שמע:";
 
 /* Class = "NSMenuItem"; title = "Video Track"; ObjectID = "j8P-Gb-HR7"; */
-"j8P-Gb-HR7.title" = "Video Track";
+"j8P-Gb-HR7.title" = "רצועת וידאו";
 
 /* Class = "NSMenuItem"; title = "Playback"; ObjectID = "jxT-CU-nIS"; */
 "jxT-CU-nIS.title" = "השמעה";
@@ -377,13 +377,13 @@
 "k6x-hf-ATi.title" = "טען כתוביות חיצוניות…";
 
 /* Class = "NSMenuItem"; title = "Bigger Size"; ObjectID = "lDC-IC-peP"; */
-"lDC-IC-peP.title" = "Bigger Size";
+"lDC-IC-peP.title" = "גודל גדול יותר";
 
 /* Class = "NSMenuItem"; title = "Audio"; ObjectID = "lYN-0x-lzT"; */
 "lYN-0x-lzT.title" = "שמע";
 
 /* Class = "NSMenuItem"; title = "Audio Delay + 0.1s"; ObjectID = "lew-3S-oGY"; */
-"lew-3S-oGY.title" = "עיכוב שמע + עשירית שניה";
+"lew-3S-oGY.title" = "עיכוב שמע: הוסף 0.1 שנ'";
 
 /* Class = "NSMenuItem"; title = "Go to Screenshot Folder"; ObjectID = "lj0-Oo-7nB"; */
 "lj0-Oo-7nB.title" = "פתח את תיקיית צילומי המסך";
@@ -395,7 +395,7 @@
 "mGw-jm-5x2.title" = "כתוביות משניות";
 
 /* Class = "NSMenuItem"; title = "Enter Picture in Picture"; ObjectID = "mND-N8-z6o"; */
-"mND-N8-z6o.title" = "Enter Picture in Picture";
+"mND-N8-z6o.title" = "היכנס למצב תמונה בתוך תמונה";
 
 /* Class = "NSMenuItem"; title = "Flip"; ObjectID = "mT1-1m-HwN"; */
 "mT1-1m-HwN.title" = "היפוך";
@@ -419,13 +419,13 @@
 "oxF-BB-lBy.title" = "Previous Frame";
 
 /* Class = "NSMenuItem"; title = "Subtitle Delay + 0.5s"; ObjectID = "pAo-L5-qTO"; */
-"pAo-L5-qTO.title" = "Subtitle Delay + 0.5s";
+"pAo-L5-qTO.title" = "עיכוב כתוביות: הוסף 0.5 שנ'";
 
 /* Class = "NSMenuItem"; title = "Edit"; ObjectID = "pWh-nh-0pN"; */
 "pWh-nh-0pN.title" = "עריכה";
 
 /* Class = "NSMenuItem"; title = "Volume - 5%"; ObjectID = "pdj-9C-Fn1"; */
-"pdj-9C-Fn1.title" = "עוצמת שמע - 5%";
+"pdj-9C-Fn1.title" = "עוצמת שמע: הפחת 5%";
 
 /* Class = "NSMenuItem"; title = "Previous Chapter"; ObjectID = "pqF-SZ-Ifz"; */
 "pqF-SZ-Ifz.title" = "פרק קודם";
@@ -461,7 +461,7 @@
 "vNY-rz-j42.title" = "Clear Menu";
 
 /* Class = "NSMenu"; title = "Saved Audio Filters"; ObjectID = "vuV-uP-CAD"; */
-"vuV-uP-CAD.title" = "Saved Audio Filters";
+"vuV-uP-CAD.title" = "מסנני שמע שמורים";
 
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "w8n-XJ-Pgi"; */
 "w8n-XJ-Pgi.title" = "עריכה";
@@ -470,7 +470,7 @@
 "wex-rX-PcY.title" = "Float on Top";
 
 /* Class = "NSMenuItem"; title = "Saved Audio Filters"; ObjectID = "wgZ-DO-nn3"; */
-"wgZ-DO-nn3.title" = "מסנני אודיו שמורים";
+"wgZ-DO-nn3.title" = "מסנני שמע שמורים";
 
 /* Class = "NSMenuItem"; title = "Help"; ObjectID = "wpr-3q-Mcd"; */
 "wpr-3q-Mcd.title" = "עזרה";
@@ -485,7 +485,7 @@
 "xhY-fF-oio.title" = "מסנני וידאו שמורים";
 
 /* Class = "NSMenuItem"; title = "Deinterlace"; ObjectID = "yHI-7D-OaI"; */
-"yHI-7D-OaI.title" = "Deinterlace";
+"yHI-7D-OaI.title" = "ביטול שזירה";
 
 /* Class = "NSMenuItem"; title = "Open in New Window…"; ObjectID = "z9W-ga-j3b"; */
 "z9W-ga-j3b.title" = "פתח בחלון חדש…";

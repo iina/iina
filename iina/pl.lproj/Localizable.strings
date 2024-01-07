@@ -178,7 +178,7 @@
 "alert.error_open" = "Nie można otworzyć pliku lub strumienia!";
 "alert.error_finding_file" = "Nie odnaleziono %@!";
 "alert.error_loading_script" = "Nie można załadować skryptu %@!";
-"alert.error_saving_file" = "Error occurred when saving %@: %@";
+"alert.error_saving_file" = "Podczas zapisywania %@ wystąpił błąd: %@";
 "alert.error_deleting_file" = "Nie można usunąć pliku.";
 
 "alert.config.new.title" = "Nowa konfiguracja wejściowa";
@@ -192,7 +192,7 @@
 "alert.config.cannot_create" = "Nie można utworzyć pliku konfiguracyjnego!\n%@";
 "alert.config.cannot_write" = "Nie można zapisać pliku konfiguracyjnego!";
 
-"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
+"alert.filter.incorrect" = "Podczas ustawiania filtrów wystąpił błąd. Proszę sprawdzić format parametru.";
 "alert.add_filter.title" = "Nowy filtr";
 "alert.add_filter.message" = "Wprowadź filtry w formacie zgodnym ze specyfikacją mpv.";
 

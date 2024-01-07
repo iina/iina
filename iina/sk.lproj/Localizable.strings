@@ -178,7 +178,7 @@
 "alert.error_open" = "Nemožno otvoriť súbor alebo stream!";
 "alert.error_finding_file" = "Nemožno nájst súbor %@!";
 "alert.error_loading_script" = "Nemožno načítať skript %@!";
-"alert.error_saving_file" = "Error occurred when saving %@: %@";
+"alert.error_saving_file" = "Nastala chyba pri ukladaní %@: %@";
 "alert.error_deleting_file" = "Súbor nemožno vymazať.";
 
 "alert.config.new.title" = "Nová konfigurácia vstupu";
@@ -192,7 +192,7 @@
 "alert.config.cannot_create" = "Nedá sa vytvoriť konfiguračný súbor!\n%@";
 "alert.config.cannot_write" = "Nedá sa zapisovať do konfiguračného súboru!";
 
-"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
+"alert.filter.incorrect" = "Vyskytla sa chyba pri nastavovaní filtra. Skontrolujte formát parametra.";
 "alert.add_filter.title" = "Nový filter";
 "alert.add_filter.message" = "Zadajte reťazec filtru vo formáte mpv príkazu vf alebo af.";
 

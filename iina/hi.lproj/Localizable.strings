@@ -150,7 +150,7 @@
 "menu.sub_delay_up" = "उपशीर्षक देरी + %.1fs";
 "menu.sub_delay_down" = "उपशीर्षक देरी - %.1fs";
 
-"menu.crop_custom" = "Custom...";
+"menu.crop_custom" = "कस्टम...";
 "menu.find_online_sub" = "Find Online Subtitles from %@";
 
 "track.none" = "<कोई नहीं>";
@@ -371,5 +371,5 @@
 "plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Check for Updates";
+"plugin.check_for_updates" = "अद्यतन के लिए जाँच";
 "plugin.updating" = "Downloading update…";

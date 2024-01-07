@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Filter toegevoegd: %@";
 "osd.filter_removed" = "Filter verwijderd";
-"osd.file_loop" = "Bestands loop: %@";
-"osd.playlist_loop" = "Afspeellijst Loop: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Voorkeuren";
 "preference.general" = "Algemeen";
@@ -191,7 +192,7 @@
 "alert.config.cannot_create" = "Kan configuratiebestand niet aanmaken.\n%@";
 "alert.config.cannot_write" = "Kan niet naar configuratiebestand schrijven.";
 
-"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
+"alert.filter.incorrect" = "Fout bij het instellen van filters. Controleer je parameters.";
 "alert.add_filter.title" = "Nieuw filter";
 "alert.add_filter.message" = "Voer een filtertekst met de structuur van mpv's vf/af-commando's in.";
 

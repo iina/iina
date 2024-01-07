@@ -178,7 +178,7 @@
 "alert.error_open" = "Nije moguće otvoriti datoteku ili strim!";
 "alert.error_finding_file" = "Nije moguće pronaći datoteku %@!";
 "alert.error_loading_script" = "Nije moguće učitati skriptu %@!";
-"alert.error_saving_file" = "Error occurred when saving %@: %@";
+"alert.error_saving_file" = "Došlo je do greške prilikom čuvanja %@: %@";
 "alert.error_deleting_file" = "Nije moguće izbrisati datoteku.";
 
 "alert.config.new.title" = "Nova ulazna konfiguracija";
@@ -192,7 +192,7 @@
 "alert.config.cannot_create" = "Nije moguće kreirati konfiguracionu datoteku!\n%@";
 "alert.config.cannot_write" = "Nije moguće upisivati u konfiguracionu datoteku!";
 
-"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
+"alert.filter.incorrect" = "Došlo je do greške prilikom postavljanja filtera. Proverite format parametra.";
 "alert.add_filter.title" = "Novi filter";
 "alert.add_filter.message" = "Unеsitе nisku filtera u formatu naredbi vf ili af programa mpv.";
 

@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "追加したフィルター: %@";
 "osd.filter_removed" = "削除したフィルター";
-"osd.file_loop" = "ファイルループ: %@";
-"osd.playlist_loop" = "プレイリストループ: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "環境設定";
 "preference.general" = "一般";
@@ -191,7 +192,7 @@
 "alert.config.cannot_create" = "設定ファイルが作成できません！\n%@";
 "alert.config.cannot_write" = "設定ファイルに書き込めません！";
 
-"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
+"alert.filter.incorrect" = "フィルタの設定時にエラーが発生しました。パラメータの形式を確認してください。";
 "alert.add_filter.title" = "フィルターの新規作成";
 "alert.add_filter.message" = "mpvの vf または af オプションの形式でフィルター名を入力してください。";
 
@@ -349,22 +350,22 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "ネットワークリクエスト";
-"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
+"permissions.network-request.desc" = "このプラグインは、これらのウェブサイトにデータを通信（アップロード含む）することができます：";
 "permissions.network-request.any_site" = "任意のサイト";
 "permissions.show-osd.name" = "OSDを表示";
 "permissions.show-osd.desc" = "このプラグインは OSD (オンスクリーン機能) メッセージを表示できます。";
 "permissions.show-alert.name" = "アラートを表示";
 "permissions.show-alert.desc" = "このプラグインはポップアップアラートを表示できます。";
-"permissions.video-overlay.name" = "Add overlays on videos";
+"permissions.video-overlay.name" = "動画にオーバーレイを追加";
 "permissions.video-overlay.desc" = "このプラグインは、ビデオに追加のコンテンツを表示することができます。";
 "permissions.file-system.name" = "ファイルシステムにアクセス";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.file-system.desc" = "このプラグインは、機密情報を含むディスク上のファイルを読み書きすることができます。 また、お使いのコンピュータに害を与える可能性がある他のプログラムやアプリケーションを呼び出すことができます。続行する前にソースを十分に確認してください.";
 
 "plugin.install" = "インストール";
 "plugin.installed" = "インストール済";
 "plugin.not_installed" = "インストールされていません";
 "plugin.local" = "ローカルにインストールされました";
-"alert.plugin.install_error" = "Error occurred during the installation: %@";
+"alert.plugin.install_error" = "インストール中にエラーが発生しました: %@";
 "alert.invalid_url" = "URLが無効です。";
 "plugin.install_error.invalid_url" = "URLが無効です。";
 "plugin.install_error.file_not_found" = "パッケージファイルが見つかりません。";

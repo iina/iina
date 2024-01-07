@@ -219,7 +219,7 @@
 "alert.add_watch.title" = "Add Watch Property";
 "alert.add_watch.message" = "Please enter a valid mpv property name.";
 
-"alert.jump_to.title" = "Jump to";
+"alert.jump_to.title" = "Gå til";
 "alert.jump_to.message" = "Please enter the time you want to jump to. Example: 20:35";
 
 "alert.opensub.login.title" = "OpenSubtitles innlogging";
@@ -301,8 +301,8 @@
 "keymapping.title" = "Tilordne taster";
 "keymapping.message" = "Press any key to record.";
 
-"filter.video_filters" = "Video Filters";
-"filter.audio_filters" = "Audio Filters";
+"filter.video_filters" = "Video filtre";
+"filter.audio_filters" = "Lydfilter";
 
 "hwdec.no" = "Disable hardware decoding.";
 "hwdec.auto" = "Enable hardware decoding. However, most of the video filters won't work properly.";
@@ -336,8 +336,8 @@
 "touchbar.back_30" = "30sec Back";
 "touchbar.next_video" = "Next Video";
 "touchbar.prev_video" = "Previous Video";
-"touchbar.increase_volume" = "Volume +";
-"touchbar.decrease_volume" = "Volume -";
+"touchbar.increase_volume" = "Volum +";
+"touchbar.decrease_volume" = "Volum -";
 "touchbar.rewind" = "Rewind";
 "touchbar.fast_forward" = "Fast Forward";
 "touchbar.play_pause" = "Play / Pause";
@@ -371,5 +371,5 @@
 "plugin.install_error.cannot_download" = "Kan ikke nedlaste utvidelsen.\n\nUtdata:%@\n";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Check for Updates";
+"plugin.check_for_updates" = "Se etter oppdateringer";
 "plugin.updating" = "Nedlaster oppdatering…";

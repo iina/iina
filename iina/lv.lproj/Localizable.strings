@@ -45,7 +45,7 @@
 "quicksetting.hdr" = "HDR";
 
 // OSDMessage.swift
-"osd.pause" = "Pause";
+"osd.pause" = "Pauze";
 "osd.resume" = "Turpināt";
 "osd.volume" = "Volume: %i";
 "osd.speed" = "Speed: %.2fx";
@@ -61,7 +61,7 @@
 "osd.sub_delay.later" = "Subtitle Delay: %.2fs Later";
 "osd.sub_delay.earlier" = "Subtitle Delay: %.2fs Earlier";
 "osd.subtitle_pos" = "Subtitle Position: %.1f";
-"osd.mute" = "Mute";
+"osd.mute" = "Izslēgt skaņu";
 "osd.unmute" = "Unmute";
 "osd.screenshot" = "Screenshot Captured";
 "osd.abloop.a" = "AB-Loop: A";
@@ -94,11 +94,11 @@
 "osd.file_loop" = "File Loop: %@";
 "osd.playlist_loop" = "Playlist Loop: %@";
 
-"preference.title" = "Preferences";
+"preference.title" = "Iestatījumi";
 "preference.general" = "General";
 "preference.ui" = "UI";
 "preference.video_audio" = "Video/Audio";
-"preference.subtitle" = "Subtitle";
+"preference.subtitle" = "Subtitrs";
 "preference.network" = "Network";
 "preference.control" = "Control";
 "preference.keybindings" = "Key Bindings";
@@ -119,13 +119,13 @@
 "menu.volume_muted" = "Volume: %d (Muted)";
 "menu.audio_delay" = "Audio Delay: %.2fs";
 "menu.sub_delay" = "Subtitle Delay: %.2fs";
-"menu.fullscreen" = "Enter Full Screen";
+"menu.fullscreen" = "Pilnekrāna režīms";
 "menu.exit_fullscreen" = "Exit Full Screen";
 "menu.pip" = "Enter Picture-in-Picture";
 "menu.exit_pip" = "Exit Picture-in-Picture";
 "menu.mini_player" = "Enter Music Mode";
 "menu.exit_mini_player" = "Exit Music Mode";
-"menu.pause" = "Pause";
+"menu.pause" = "Pauze";
 "menu.resume" = "Turpināt";
 "menu.speed" = "Speed: %.2fx";
 "menu.chapters" = "Parādīt nodaļas paneli";
@@ -161,7 +161,7 @@
 // Alerts
 "alert.beta_channel.title" = "Receive Updates for Beta Versions";
 
-"alert.title_error" = "Error";
+"alert.title_error" = "Kļūda";
 "alert.title_warning" = "Warning";
 "alert.title_info" = "Information";
 
@@ -219,17 +219,17 @@
 "alert.add_watch.title" = "Add Watch Property";
 "alert.add_watch.message" = "Please enter a valid mpv property name.";
 
-"alert.jump_to.title" = "Jump to";
+"alert.jump_to.title" = "Lēkt uz";
 "alert.jump_to.message" = "Please enter the time you want to jump to. Example: 20:35";
 
 "alert.opensub.login.title" = "OpenSubtitles Login";
 "alert.opensub.login.message" = "Please enter your username and password";
 
-"alert.open_url.title" = "Open URL";
+"alert.open_url.title" = "Atvērt URL";
 "alert.open_url.message" = "Please enter the URL:";
 "alert.choose_media_file.title" = "Choose Media Files";
 
-"alert.add_url.title" = "Add URL";
+"alert.add_url.title" = "Pievienot URL saiti";
 "alert.add_url.message" = "Please enter the URL:";
 
 "alert.delete_history.title" = "Delete Playback History";
@@ -240,13 +240,13 @@
 "alert.filter_hwdec.turn_off" = "Turn off hardware decoding";
 "alert.filter_hwdec.use_copy" = "Switch to Auto(Copy)";
 
-"alert.clear_cache.title" = "Clear Thumbnail Cache";
+"alert.clear_cache.title" = "Iztīrīt sīkattēlu kešatmiņu";
 "alert.clear_cache.message" = "Are you sure to clear all thumbnail Cache?";
 
-"alert.clear_history.title" = "Clear Playback History";
+"alert.clear_history.title" = "Notīrīt atskaņošanas vēsturi";
 "alert.clear_history.message" = "Are you sure to delete all playback history?";
 
-"alert.clear_watch_later.title" = "Clear Saved Playback Progress";
+"alert.clear_watch_later.title" = "Notīrīt saglabāto atskaņošanas gaitu";
 "alert.clear_watch_later.message" = "Are you sure to delete all saved playback progress (\"watch later\" data)?";
 
 "alert.restore_alerts.title" = "Restore Suppressed Alerts";
@@ -288,12 +288,12 @@
 "pl_menu.delete_after_play" = "Move to Trash After Playback";
 "pl_menu.delete_after_play_multi" = "Move Selected Files to Trash After Playback";
 "pl_menu.show_in_finder" = "Rādīt programmā Meklētājs";
-"pl_menu.add_file" = "Add File…";
-"pl_menu.add_url" = "Add URL…";
+"pl_menu.add_file" = "Pievienot failu…";
+"pl_menu.add_url" = "Pievienot URL saiti…";
 "pl_menu.clear_playlist" = "Clear Playlist";
 "pl_menu.matched_sub" = "Matched %d Subtitle(s)";
 "pl_menu.add_sub" = "Add Subtitle…";
-"pl_menu.wrong_sub" = "Wrong Subtitle!";
+"pl_menu.wrong_sub" = "Nepareizs subtitrs!";
 "pl_menu.browser" = "Open in Browser";
 "pl_menu.copy_url" = "Copy URL";
 "pl_menu.copy_url_multi" = "Copy URLs";
@@ -301,8 +301,8 @@
 "keymapping.title" = "Key Mapping";
 "keymapping.message" = "Press any key to record.";
 
-"filter.video_filters" = "Video Filters";
-"filter.audio_filters" = "Audio Filters";
+"filter.video_filters" = "Video filtri";
+"filter.audio_filters" = "Skaņas filtri";
 
 "hwdec.no" = "Disable hardware decoding.";
 "hwdec.auto" = "Enable hardware decoding. However, most of the video filters won't work properly.";
@@ -324,7 +324,7 @@
 "mini_player.remove" = "Remove from playlist";
 "mini_player.add" = "Add to playlist";
 "mini_player.delete" = "Delete all tracks from playlist";
-"mini_player.volume" = "Volume";
+"mini_player.volume" = "Skaļums";
 "mini_player.close" = "Close music mode";
 "mini_player.back" = "Return to video mode";
 
@@ -336,8 +336,8 @@
 "touchbar.back_30" = "30sec Back";
 "touchbar.next_video" = "Next Video";
 "touchbar.prev_video" = "Previous Video";
-"touchbar.increase_volume" = "Volume +";
-"touchbar.decrease_volume" = "Volume -";
+"touchbar.increase_volume" = "Skaļums +";
+"touchbar.decrease_volume" = "Skaļums -";
 "touchbar.rewind" = "Rewind";
 "touchbar.fast_forward" = "Fast Forward";
 "touchbar.play_pause" = "Play / Pause";
@@ -371,5 +371,5 @@
 "plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Check for Updates";
+"plugin.check_for_updates" = "Pārbaudīt atjauninājumus";
 "plugin.updating" = "Downloading update…";

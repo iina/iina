@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Filter yang ditambahkan: %@";
 "osd.filter_removed" = "Filter Terhapus";
-"osd.file_loop" = "Pengulangan File: %@";
-"osd.playlist_loop" = "Pengulangan Daftar Putar: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Preferensi";
 "preference.general" = "Umum";
@@ -191,7 +192,7 @@
 "alert.config.cannot_create" = "Tidak dapat membuat file konfigurasi!\n%@";
 "alert.config.cannot_write" = "Tidak dapat menulis pada file konfig!";
 
-"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
+"alert.filter.incorrect" = "Kesalahan terjadi saat menyetel filter. Mohon cek kembali format parameter Anda.";
 "alert.add_filter.title" = "Filter Baru";
 "alert.add_filter.message" = "Mohon isi string filter dengan format vf dari mpv atau af.";
 
@@ -355,16 +356,16 @@
 "permissions.show-osd.desc" = "Plugin ini dapat menampilkan pesan OSD (On Screen Display).";
 "permissions.show-alert.name" = "Tampilkan Peringatan";
 "permissions.show-alert.desc" = "Plugin ini dapat menampilkan peringatan pop-up.";
-"permissions.video-overlay.name" = "Add overlays on videos";
+"permissions.video-overlay.name" = "Tambahkan overlay pada video";
 "permissions.video-overlay.desc" = "Plugin ini dapat menampilkan konten tambahan di atas video.";
 "permissions.file-system.name" = "Akses sistem file";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.file-system.desc" = "Plugin ini dapat melakukan baca-tulis file pada disk Anda, termasuk informasi sensitif. Plugin ini juga dapat mengaktifkan program atau aplikasi lain yang dapat membahayakan komputer Anda. Mohon pastikan kembali keamanan sumbernya.";
 
 "plugin.install" = "Pasang";
 "plugin.installed" = "Terpasang";
 "plugin.not_installed" = "Tidak Terpasang";
 "plugin.local" = "Terpasang secara lokal";
-"alert.plugin.install_error" = "Error occurred during the installation: %@";
+"alert.plugin.install_error" = "Terjadi kesalahan saat proses instalasi: %@";
 "alert.invalid_url" = "URL tidak valid.";
 "plugin.install_error.invalid_url" = "URL tidak valid.";
 "plugin.install_error.file_not_found" = "Tidak dapat menemukan package file.";

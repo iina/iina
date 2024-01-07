@@ -178,7 +178,7 @@
 "alert.error_open" = "No es pot obrir el fitxer!";
 "alert.error_finding_file" = "No es pot trobar el fitxer %@!";
 "alert.error_loading_script" = "No es pot carregar l'script %@!";
-"alert.error_saving_file" = "Error occurred when saving %@: %@";
+"alert.error_saving_file" = "S'ha produït un error al desar %@: %@";
 "alert.error_deleting_file" = "No es pot suprimir el fitxer.";
 
 "alert.config.new.title" = "Nova configuració d'entrada";
@@ -350,7 +350,7 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Petició d'accés a la xarxa";
-"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
+"permissions.network-request.desc" = "Aquest complement pot fer peticions o pujar dades a aquests llocs web:";
 "permissions.network-request.any_site" = "Qualsevol lloc web";
 "permissions.show-osd.name" = "Mostra subtítols";
 "permissions.show-osd.desc" = "Aquest complement pot ensenyar missatges en pantalla (OSD).";

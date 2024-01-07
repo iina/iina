@@ -178,7 +178,7 @@
 "alert.error_open" = "Kan bestand of stream niet openen.";
 "alert.error_finding_file" = "Kan bestand %@ niet vinden.";
 "alert.error_loading_script" = "Kan script %@ niet laden.";
-"alert.error_saving_file" = "Error occurred when saving %@: %@";
+"alert.error_saving_file" = "Fout bij het bewaren van %@: %@";
 "alert.error_deleting_file" = "Kan het bestand niet verwijderen.";
 
 "alert.config.new.title" = "Nieuwe sneltoetsen-configuratie";

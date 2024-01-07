@@ -91,8 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Szűrő hozzáadása: %@";
 "osd.filter_removed" = "Szűrő eltávolítása";
-"osd.file_loop" = "Fájl ismétlése: %@";
-"osd.playlist_loop" = "Lejátszási lista ismétlése: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Beállítások";
 "preference.general" = "Általános";
@@ -191,7 +192,7 @@
 "alert.config.cannot_create" = "Konfigurációs fájl nem hozható létre!\n%@";
 "alert.config.cannot_write" = "Konfigurációs fájl nem irható!";
 
-"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
+"alert.filter.incorrect" = "Hiba történt a szűrők beállításakor. Kérjük, ellenőrizd le a paraméter formátumát.";
 "alert.add_filter.title" = "Új filter";
 "alert.add_filter.message" = "Adjon meg egy szűrő karakterláncot az mpv vf vagy af parancsának formátumában.";
 
@@ -355,16 +356,16 @@
 "permissions.show-osd.desc" = "Ez a bővítvény képes megjeleníteni az OSD-n (képernyőn megjelenő kijelző) üzeneteket.";
 "permissions.show-alert.name" = "Figyelmeztetések megjelenítése";
 "permissions.show-alert.desc" = "Ez a bővítmény képes felugró figyelmeztetéseket megjeleníteni.";
-"permissions.video-overlay.name" = "Add overlays on videos";
+"permissions.video-overlay.name" = "Overlay hozzáadása videókhoz";
 "permissions.video-overlay.desc" = "Ez a bővítmény képes további tartalmakat megjeleníteni a videó tetején.";
 "permissions.file-system.name" = "Hozzáférés a fájlrendszerhez";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.file-system.desc" = "Ez a bővítmény képes olvasni vagy írni a lemezen lévő fájlokat, beleértve az érzékeny információkat is. Más programokat vagy alkalmazásokat is meghívhat, amelyek kárt tehetnek a számítógépében. Ezért mindenképpen ellenőrizze a forrást.";
 
 "plugin.install" = "Telepítés";
 "plugin.installed" = "Telepítve";
 "plugin.not_installed" = "Nincs telepítve";
 "plugin.local" = "Helyben telepítve";
-"alert.plugin.install_error" = "Error occurred during the installation: %@";
+"alert.plugin.install_error" = "Hiba lépett fel a telepítés során: %@";
 "alert.invalid_url" = "Érvénytelen link.";
 "plugin.install_error.invalid_url" = "Érvénytelen link.";
 "plugin.install_error.file_not_found" = "A csomagfájl nem található.";

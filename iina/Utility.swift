@@ -226,7 +226,7 @@ class Utility {
    - Returns: Whether user dismissed the panel by clicking OK. Only works when using `.modal` mode.
    */
   @discardableResult
-  static func quickPromptPanel(_ key: String, titleComment: String? = nil, messageComment: String? = nil, sheetWindow: NSWindow? = nil, callback: @escaping (String) -> Void) -> Bool {
+  static func quickPromptPanel(_ key: String, titleComment: String? = nil, messageComment: String? = nil, inputValue: String? = nil, sheetWindow: NSWindow? = nil, callback: @escaping (String) -> Void) -> Bool {
     let panel = NSAlert()
     let titleKey = "alert." + key + ".title"
     let messageKey = "alert." + key + ".message"
@@ -236,6 +236,9 @@ class Utility {
     input.lineBreakMode = .byClipping
     input.usesSingleLineMode = true
     input.cell?.isScrollable = true
+    if let inputValue = inputValue {
+      input.stringValue = inputValue
+    }
     panel.accessoryView = input
     panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
     panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))

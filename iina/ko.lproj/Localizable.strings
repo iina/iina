@@ -91,9 +91,9 @@
 "osd.timed_out" = "시간 초과됨";
 "osd.filter_added" = "필터 추가됨: %@";
 "osd.filter_removed" = "필터 제거됨";
-"osd.file_loop" = "Loop Single File";
-"osd.playlist_loop" = "Loop Playlist";
-"osd.no_loop" = "Disable Looping";
+"osd.file_loop" = "단일 파일 반복 재생";
+"osd.playlist_loop" = "재생목록 반복 재생";
+"osd.no_loop" = "반복 재생하지 않음";
 
 "preference.title" = "환경설정";
 "preference.general" = "일반";

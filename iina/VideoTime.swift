@@ -50,9 +50,9 @@ class VideoTime {
   convenience init?(_ format: String) {
     let split = Array(format.split(separator: ":").reversed())
 
-    let hour : Int? = split.count > 2 ? Int(split[2]) : nil
-    let minute : Int? = split.count > 1 ? Int(split[1]) : nil
-    let second : Double? = !split.isEmpty ? Double(split[0]) : nil
+    let hour: Int? = split.count > 2 ? Int(split[2]) : nil
+    let minute: Int? = split.count > 1 ? Int(split[1]) : nil
+    let second: Double? = !split.isEmpty ? Double(split[0]) : nil
 
     if hour == nil && minute == nil && second == nil {
       return nil

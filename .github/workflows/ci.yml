@@ -15,7 +15,7 @@ jobs:
           #  deployment_target: "MACOSX_DEPLOYMENT_TARGET=10.11"
           - xcode: "14.2"
             deployment_target: ""
-    runs-on:  macos-12
+    runs-on:  flyci-macos-large-latest-m2
     steps:
       - uses: actions/checkout@v3
 

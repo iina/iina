@@ -1134,6 +1134,7 @@ class PlayerCore: NSObject {
   }
 
   func playlistRemove(_ indexSet: IndexSet) {
+    guard !indexSet.isEmpty else { return }
     var count = 0
     for i in indexSet {
       _playlistRemove(i - count)

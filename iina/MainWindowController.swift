@@ -883,7 +883,7 @@ class MainWindowController: PlayerWindowController {
   /// This erroneous behavior has been reported to Apple as: "Regression in NSCursor.setHiddenUntilMouseMoves"
   /// Feedback number FB11963121
   private func workaroundCursorDefect() {
-    guard #available(macOS 11, *) else { return }
+    guard #available(macOS 11, *), animationState == .hidden else { return }
     NSCursor.setHiddenUntilMouseMoves(true)
   }
 
@@ -1008,7 +1008,7 @@ class MainWindowController: PlayerWindowController {
     case .fullscreen:
       toggleWindowFullScreen()
     case .hideOSC:
-      hideUI()
+      hideUIAndCursor()
     case .togglePIP:
       if #available(macOS 10.12, *) {
         menuTogglePIP(.dummy)

@@ -1056,8 +1056,7 @@ class MainWindowController: PlayerWindowController {
         timePreviewWhenSeek.isHidden = false
         thumbnailPeekView.isHidden = !player.info.thumbnailsReady
       }
-      let mousePos = playSlider.convert(event.locationInWindow, from: nil)
-      updateTimeLabel(mousePos.x, originalPos: event.locationInWindow)
+      refreshSeekTimeAndThumbnail(from: event)
     }
   }
 
@@ -1078,18 +1077,15 @@ class MainWindowController: PlayerWindowController {
       // slider
       isMouseInSlider = false
       timePreviewWhenSeek.isHidden = true
-      let mousePos = playSlider.convert(event.locationInWindow, from: nil)
-      updateTimeLabel(mousePos.x, originalPos: event.locationInWindow)
+      refreshSeekTimeAndThumbnail(from: event)
       thumbnailPeekView.isHidden = true
     }
   }
 
   override func mouseMoved(with event: NSEvent) {
     guard !isInInteractiveMode else { return }
-    let mousePos = playSlider.convert(event.locationInWindow, from: nil)
-    if isMouseInSlider {
-      updateTimeLabel(mousePos.x, originalPos: event.locationInWindow)
-    }
+
+    refreshSeekTimeAndThumbnail(from: event)
     if isMouseInWindow {
       showUI()
     }
@@ -2018,6 +2014,7 @@ class MainWindowController: PlayerWindowController {
     }) {
       if self.osdAnimationState == .willHide {
         self.osdAnimationState = .hidden
+        self.osdVisualEffectView.isHidden = true
         self.osdStackView.views(in: .bottom).forEach { self.osdStackView.removeView($0) }
       }
     }
@@ -2265,6 +2262,16 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
+  private func refreshSeekTimeAndThumbnail(from event: NSEvent) {
+    let isCoveredByOSD = !osdVisualEffectView.isHidden && isMouseEvent(event, inAnyOf: [osdVisualEffectView])
+    let isCoveredBySidebar = !sideBarView.isHidden && isMouseEvent(event, inAnyOf: [sideBarView])
+    if isMouseInSlider, !isCoveredByOSD, !isCoveredBySidebar {
+      updateTimeLabel(event.locationInWindow)
+    } else {
+      thumbnailPeekView.isHidden = true
+    }
+  }
+
   /// Determine if the thumbnail preview can be shown above the progress bar in the on screen controller..
   ///
   /// Normally the OSC's thumbnail preview is shown above the time preview. This is the preferred location. However the
@@ -2290,7 +2297,8 @@ class MainWindowController: PlayerWindowController {
   }
 
   /** Display time label when mouse over slider */
-  private func updateTimeLabel(_ mouseXPos: CGFloat, originalPos: NSPoint) {
+  private func updateTimeLabel(_ posInWindow: NSPoint) {
+    let mouseXPos = playSlider.convert(posInWindow, from: nil).x
     let timeLabelXPos = round(mouseXPos + playSlider.frame.origin.x - timePreviewWhenSeek.frame.width / 2)
     let timeLabelYPos = playSlider.frame.origin.y + playSlider.frame.height
     timePreviewWhenSeek.frame.origin = NSPoint(x: timeLabelXPos, y: timeLabelYPos)
@@ -2313,7 +2321,7 @@ class MainWindowController: PlayerWindowController {
         let showAbove = canShowThumbnailAbove(timnePreviewYPos: timePreviewFrameInWindow.y, thumbnailHeight: height)
         let yPos = showAbove ? timePreviewFrameInWindow.y + timePreviewWhenSeek.frame.height : sliderFrameInWindow.y - height
         thumbnailPeekView.frame.size = NSSize(width: 120, height: height)
-        thumbnailPeekView.frame.origin = NSPoint(x: round(originalPos.x - thumbnailPeekView.frame.width / 2), y: yPos)
+        thumbnailPeekView.frame.origin = NSPoint(x: round(posInWindow.x - thumbnailPeekView.frame.width / 2), y: yPos)
       } else {
         thumbnailPeekView.isHidden = true
       }

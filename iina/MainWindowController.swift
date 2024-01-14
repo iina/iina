@@ -2577,7 +2577,7 @@ class MainWindowController: PlayerWindowController {
       blackWindow.level = .iinaBlackScreen
 
       blackWindows.append(blackWindow)
-      blackWindow.makeKeyAndOrderFront(nil)
+      blackWindow.orderFront(self)
     }
   }
 

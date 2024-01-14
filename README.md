@@ -13,7 +13,7 @@
 </p>
 
 ---
-
+[![Crowdin](https://badges.crowdin.net/iina/localized.svg)](https://crowdin.com/project/iina)
 ## Features
 
 * Based on [mpv](https://github.com/mpv-player/mpv), which provides the best decoding capacity on macOS

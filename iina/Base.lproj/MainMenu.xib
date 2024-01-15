@@ -142,6 +142,10 @@
                                     <action selector="performClose:" target="-1" id="HmO-Ls-i7Q"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Other Actions From Key Bindings" hidden="YES" id="w2L-0L-eUk">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Other Actions From Key Bindings" id="Yf9-Ns-n9l"/>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>
@@ -745,6 +749,7 @@ CA
                 <outlet property="openAlternative" destination="z9W-ga-j3b" id="RRI-7o-x9o"/>
                 <outlet property="openURL" destination="0m7-3r-twH" id="BOj-Zv-hzW"/>
                 <outlet property="openURLAlternative" destination="bfB-bn-KeM" id="I7a-cV-JUC"/>
+                <outlet property="otherKeyBindingsMenu" destination="Yf9-Ns-n9l" id="SVX-M0-MuL"/>
                 <outlet property="pause" destination="UOE-MJ-8ku" id="74t-ZU-dXD"/>
                 <outlet property="pictureInPicture" destination="mND-N8-z6o" id="mrn-ku-bqH"/>
                 <outlet property="playbackMenu" destination="GEO-Iw-cKr" id="Ji3-Wv-EE5"/>

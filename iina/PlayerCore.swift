@@ -172,6 +172,9 @@ class PlayerCore: NSObject {
 
   var isSearchingOnlineSubtitle = false
 
+  /// For supporting `--shuffle` arg, to shuffle playlist when launching from command line
+  var shufflePending = false
+
   // test seeking
   var triedUsingExactSeekForCurrentFile: Bool = false
   var useExactSeekForCurrentFile: Bool = true
@@ -307,8 +310,7 @@ class PlayerCore: NSObject {
     if urls.count == 1 {
       let url = urls[0]
 
-      if url.isExistingDirectory
-          || isBDFolder(url)
+      if isBDFolder(url)
           || Utility.playlistFileExt.contains(url.absoluteString.lowercasedPathExtension) {
         info.shouldAutoLoadFiles = false
         open(url)
@@ -1554,6 +1556,18 @@ class PlayerCore: NSObject {
       self.autoSearchOnlineSub()
     }
     events.emit(.fileStarted)
+  }
+
+  /// Called via mpv hook `on_load`, right before file is loaded.
+  func fileWillLoad() {
+    /// Currently this method is only used to honor `--shuffle` arg via iina-cli
+    guard shufflePending else { return }
+    shufflePending = false
+
+    Logger.log("Shuffling playlist", subsystem: subsystem)
+    mpv.command(.playlistShuffle)
+    /// will cancel this file load sequence (so `fileLoaded` will not be called), then will start loading item at index 0
+    mpv.command(.playlistPlayIndex, args: ["0"])
   }
 
   /** This function is called right after file loaded. Should load all meta info here. */

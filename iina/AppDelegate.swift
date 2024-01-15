@@ -227,7 +227,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     var iinaArgFilenames: [String] = []
     var dropNextArg = false
 
-    Logger.log("Got arguments \(arguments)")
+    Logger.log("Command-line args: \(arguments)")
     for arg in arguments {
       if dropNextArg {
         dropNextArg = false
@@ -251,9 +251,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       }
     }
 
-    Logger.log("IINA arguments: \(iinaArgs)")
-    Logger.log("Filenames from arguments: \(iinaArgFilenames)")
     commandLineStatus.parseArguments(iinaArgs)
+    Logger.log("Filenames from args: \(iinaArgFilenames)")
+    Logger.log("Derived mpv properties from args: \(commandLineStatus.mpvArguments)")
 
     print("IINA \(version) Build \(build)")
 
@@ -317,9 +317,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       Timer.scheduledTimer(timeInterval: TimeInterval(0.1), target: self, selector: #selector(self.checkForShowingInitialWindow), userInfo: nil, repeats: false)
     } else {
       var lastPlayerCore: PlayerCore? = nil
-      let getNewPlayerCore = { () -> PlayerCore in
+      let getNewPlayerCore = { [self] () -> PlayerCore in
         let pc = PlayerCore.newPlayerCore
-        self.commandLineStatus.assignMPVArguments(to: pc)
+        commandLineStatus.assignMPVArguments(to: pc)
+        if commandLineStatus.shufflePlaylist {
+          pc.shufflePending = true
+        }
         lastPlayerCore = pc
         return pc
       }
@@ -1038,6 +1041,7 @@ struct CommandLineStatus {
   var openSeparateWindows = false
   var enterMusicMode = false
   var enterPIP = false
+  var shufflePlaylist = false
   var mpvArguments: [(String, String)] = []
   var iinaArguments: [(String, String)] = []
   var filenames: [String] = []
@@ -1053,10 +1057,20 @@ struct CommandLineStatus {
         let strippedName = String(name.dropFirst(4))
         if strippedName == "-" {
           isStdin = true
-        } else if splitted.count <= 1 {
-          mpvArguments.append((strippedName, "yes"))
         } else {
-          mpvArguments.append((strippedName, String(splitted[1])))
+          let argPair: (String, String)
+          if splitted.count <= 1 {
+            argPair = (strippedName, "yes")
+          } else {
+            argPair = (strippedName, String(splitted[1]))
+          }
+
+          if argPair.0 == "shuffle" && argPair.1 == "yes" {
+            Logger.log("Found shuffle request in command-line args. Will convert it to \"playlist-shuffle\" command")
+            shufflePlaylist = true
+          } else {
+            mpvArguments.append(argPair)
+          }
         }
       } else {
         // other args

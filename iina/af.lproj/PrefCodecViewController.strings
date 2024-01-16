@@ -65,22 +65,22 @@
 "ZgQ-bc-yEE.title" = "Enable HDR mode by default when playing HDR videos.";
 
 /* Class = "NSButtonCell"; title = "Enable tone mapping"; ObjectID = "a5Y-gU-JTj"; */
-"a5Y-gU-JTj.title" = "Enable tone mapping";
+"a5Y-gU-JTj.title" = "Aktiveer toonkartering";
 
 /* Class = "NSTextFieldCell"; title = "Enable tone mapping images onto the display"; ObjectID = "mNn-cb-IVw"; */
-"mNn-cb-IVw.title" = "Enable tone mapping images onto the display";
+"mNn-cb-IVw.title" = "Aktiveer toonkartering van beelde op die skerm";
 
 /* Class = "NSTextFieldCell"; title = "Target peak:"; ObjectID = "xVk-OA-kOf"; */
-"xVk-OA-kOf.title" = "Target peak:";
+"xVk-OA-kOf.title" = "Teikenpiek:";
 
 /* Class = "NSTextFieldCell"; title = "nits"; ObjectID = "baO-xy-7hD"; */
 "baO-xy-7hD.title" = "nits";
 
 /* Class = "NSTextFieldCell"; title = "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."; ObjectID = "aTt-aZ-rjK"; */
-"aTt-aZ-rjK.title" = "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400.";
+"aTt-aZ-rjK.title" = "Gemete hoogste beeldhelderheid. Indien op 0 gestel sal IINA die waarde bespeur. Indien bespeuring misluk, stel IINA die teikenhoogte op 400.";
 
 /* Class = "NSTextFieldCell"; title = "Algorithm:"; ObjectID = "qzI-rq-PqO"; */
 "qzI-rq-PqO.title" = "Algoritme:";
 
 /* Class = "NSTextFieldCell"; title = "Algorithm to use for tone mapping images onto the display."; ObjectID = "szA-8r-plt"; */
-"szA-8r-plt.title" = "Algorithm to use for tone mapping images onto the display.";
+"szA-8r-plt.title" = "Toonkarteringsalgoritme om beelde op die skerm te toon.";

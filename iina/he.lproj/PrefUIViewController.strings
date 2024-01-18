@@ -71,7 +71,7 @@
 "H1F-mm-Saq.title" = "מזער";
 
 /* Class = "NSTextFieldCell"; title = "pt"; ObjectID = "I8t-ey-016"; */
-"I8t-ey-016.title" = "pt";
+"I8t-ey-016.title" = "נקודות";
 
 /* Class = "NSTextFieldCell"; title = "Y offset:"; ObjectID = "KCL-Ki-A0p"; */
 "KCL-Ki-A0p.title" = "היסט רוחב:";
@@ -101,10 +101,10 @@
 "S8H-Xr-uVa.title" = "שניות";
 
 /* Class = "NSButtonCell"; title = "Always float on top while playing"; ObjectID = "SFX-ct-8MB"; */
-"SFX-ct-8MB.title" = "תמיד צף מעל כל החלונות האחרים בזמן השמעה";
+"SFX-ct-8MB.title" = "הצף תמיד מעל החלונות האחרים בזמן השמעה";
 
 /* Class = "NSButtonCell"; title = "Always show float on top status in the title bar"; ObjectID = "ih8-5a-PYY"; */
-"ih8-5a-PYY.title" = "Always show float on top status in the title bar";
+"ih8-5a-PYY.title" = "הצג תמיד כפתור נעיצה (ציפה מעל הכל) בכותרת החלון";
 
 /* Class = "NSMenuItem"; title = "Speed"; ObjectID = "TWq-Xb-8Ee"; */
 "TWq-Xb-8Ee.title" = "לשנות מהירות";
@@ -155,7 +155,7 @@
 "g06-Ja-Ot8.title" = "פקדים על המסך:";
 
 /* Class = "NSTextFieldCell"; title = "of the screen"; ObjectID = "iRn-3s-oQH"; */
-"iRn-3s-oQH.title" = "מהמסך";
+"iRn-3s-oQH.title" = "של המסך";
 
 /* Class = "NSButtonCell"; title = "Display time and battery info when in full screen"; ObjectID = "kOT-8q-E57"; */
 "kOT-8q-E57.title" = "הצג מידע שעה וסוללה כאשר פועל במסך מלא";

@@ -14,7 +14,7 @@
 "JDA-g3-RNX.title" = "Открыть папку журналов";
 
 /* Class = "NSButtonCell"; title = "Enable logging to file"; ObjectID = "LCd-uY-Yze"; */
-"LCd-uY-Yze.title" = "Включить журналирование";
+"LCd-uY-Yze.title" = "Включить запись в журнал";
 
 /* Class = "NSButtonCell"; title = "Choose directory…"; ObjectID = "MRT-u8-xTX"; */
 "MRT-u8-xTX.title" = "Выберите папку…";
@@ -35,7 +35,7 @@
 "nFf-vh-bNd.title" = "Уровень журнала:";
 
 /* Class = "NSButtonCell"; title = "Show log viewer"; ObjectID = "Owx-92-Ogg"; */
-"Owx-92-Ogg.title" = "Показать просмотрщик журнала";
+"Owx-92-Ogg.title" = "Открыть журнал сообщений";
 
 /* Class = "NSMenuItem"; title = "Verbose"; ObjectID = "S9M-yY-q0w"; */
 "S9M-yY-q0w.title" = "Подробно";

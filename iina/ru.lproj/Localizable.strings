@@ -91,9 +91,9 @@
 "osd.timed_out" = "Время вышло";
 "osd.filter_added" = "Добавлен фильтр: %@";
 "osd.filter_removed" = "Фильтр удален";
-"osd.file_loop" = "Loop Single File";
-"osd.playlist_loop" = "Loop Playlist";
-"osd.no_loop" = "Disable Looping";
+"osd.file_loop" = "Повтор одного файла";
+"osd.playlist_loop" = "Повтор плейлиста";
+"osd.no_loop" = "Отключить повтор";
 
 "preference.title" = "Настройки";
 "preference.general" = "Основные";

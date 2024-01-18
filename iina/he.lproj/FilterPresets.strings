@@ -21,14 +21,14 @@
 "expand.x" = "מקור X (ברירת מחדל: מרכז)";
 "expand.y" = "מקור Y (ברירת מחדל: מרכז)";
 "expand.aspect" = "מתרחב כדי להתאים להיבט (לדוגמה: 4/3)";
-"expand.round" = "Rounds up to make divisible by this value";
+"expand.round" = "עיגול כלפי מעלה כדי להפוך לניתן לחלוקה בערך זה";
 
 "sharpen" = "חידוד";
-"sharpen.msize" = "Matrix size";
+"sharpen.msize" = "גודל המטריצה";
 "sharpen.amount" = "רמה";
 
 "blur" = "טשטוש";
-"blur.msize" = "Matrix size";
+"blur.msize" = "גודל המטריצה";
 "blur.amount" = "רמה";
 
 "delogo" = "הסרת סימן מים";
@@ -44,7 +44,7 @@
 
 "lut3d" = "3D LUT";
 "lut3d.file" = "נתיב קובץ (ניתן לגרור את הקובץ לתיבת הקלט)";
-"lut3d.interp" = "Interpolation mode";
+"lut3d.interp" = "מצב אינטרפולציה";
 
 "custom_mpv" = "מותאם אישית (mpv)";
 "custom_mpv.name" = "שם מסנן";

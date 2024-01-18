@@ -24,9 +24,9 @@
 // Initial Window
 "initial.announcement" = "U gebruik ’n %@-weergawe van IINA";
 "initial.beta.desc" = "Indien u na ’n vroeëre weergawe wil terugkeer, verwyder die merkie “ontvang betabywerkings” in Voorkeure - Algemeen en installeer ’n stabiele weergawe d.m.v. ons <a href=\"https://iina.io\">amptelike webwerf</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.nightly.desc" = "Elke nag word nie aanbeveel as daaglikse drywer nie. Huidige nagelike maaksels ondersteun nie outobywerking nie. Laai asb. nuwe maaksels van ons <a href=\"https://nightly.iina.io\">nagtelike webwerf</a> af.";
+"initial.debug.desc" = "Maaksels vir ontfouting is nie geoptimeer vir verrigting nie daarom word dit nie aanbeveel om as daaglikse drywer gebruik te word nie. Ontfoutmaaksels ondersteun ook nie outobywerking nie.";
+"initial.bug_report" = "Rapporteer via <a href=\"https://github.com/iina/iina/issues\">GitHub-kwessies</a>.";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Bufferwerking… %d%%";
@@ -87,13 +87,13 @@
 "osd.file_error" = "Lêerleesfout";
 "osd.cannot_login" = "Kan nie aanteken nie";
 "osd.canceled" = "Gekanselleer";
-"osd.cannot_connect" = "Cannot connect";
-"osd.timed_out" = "Timed Out";
+"osd.cannot_connect" = "Kan nie koppel nie";
+"osd.timed_out" = "Uitgetel";
 "osd.filter_added" = "Filter toegevoeg: %@";
 "osd.filter_removed" = "Filter verwyder";
-"osd.file_loop" = "Loop Single File";
-"osd.playlist_loop" = "Loop Playlist";
-"osd.no_loop" = "Disable Looping";
+"osd.file_loop" = "Herhaal enkele lêer";
+"osd.playlist_loop" = "Herhaal afspeellys";
+"osd.no_loop" = "Deaktiveer herhaling";
 
 "preference.title" = "Voorkeure";
 "preference.general" = "Algemeen";
@@ -270,7 +270,7 @@
 "alert.plugin_uninstall.message" = "Hierdie inprop sal van u skyf geskrap word.";
 "alert.plugin_reinstall.title" = "Inprop %@ bestaan reeds";
 "alert.plugin_reinstall.message" = "Wil u die inprop weer installeer?";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+"alert.duplicated_plugin_id" = "Gedupliseerde inpropidentifiseerders bespeur. Twee of meer inproppe het dieselfde identifiseerder “%@”. Die kan abnormale gedrag veroorsaak. Sien dit in Voorkeure - Inproppe en rapporteer dit aan die outeurs. Indien ’n inprop lokaal geïnstalleer is kan u ook die identifiseerder in die inprop se Info.json-lêer verander.";
 "alert.plugin_no_update" = "Geen bywerking gevind.";
 "alert.plugin_update_found.title" = "Bywerking gevind vir %@";
 "alert.plugin_update_found.message" = "Die nuutste weergawe is %@. U het %@. Wil u bywerk?";
@@ -317,7 +317,7 @@
 "osc_toolbar.full_screen" = "Tokkel volskerm";
 "osc_toolbar.music_mode" = "Gaan in musiekmodus";
 "osc_toolbar.sub_track" = "Kies onderskrifsnit";
-"osc_toolbar.screenshot" = "Take a screenshot";
+"osc_toolbar.screenshot" = "Neem ’n skermkiekie";
 
 "mini_player.album_art" = "Tokkel albumkuns";
 "mini_player.loop" = "Herhaal";
@@ -356,7 +356,7 @@
 "permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
 "permissions.show-alert.name" = "Toon waarskuwings";
 "permissions.show-alert.desc" = "Hierdie inprop kan opwipwaarskuwings toon.";
-"permissions.video-overlay.name" = "Add overlays on videos";
+"permissions.video-overlay.name" = "Voeg oorlegsel oor video’s";
 "permissions.video-overlay.desc" = "Hierdie inprop kan bykomende inhoud bo-oor die video verbeeld.";
 "permissions.file-system.name" = "Toegang tot die lêerstelsel";
 "permissions.file-system.desc" = "Hierdie inprop kan lêers insluitend sensitiewe inligting op u skyf lees of skryf. Dit kan ook ander programmatuur of toepassings oproep wat u rekenaar kan skaad. Maak seker dat u die bron verifieer.";

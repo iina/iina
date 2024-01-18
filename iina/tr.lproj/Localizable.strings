@@ -87,13 +87,13 @@
 "osd.file_error" = "Dosya okunurken hata oluştu";
 "osd.cannot_login" = "Oturum açılamıyor";
 "osd.canceled" = "İptal edildi";
-"osd.cannot_connect" = "Cannot connect";
-"osd.timed_out" = "Timed Out";
+"osd.cannot_connect" = "Bağlanılamıyor";
+"osd.timed_out" = "Zaman Aşımı";
 "osd.filter_added" = "Filtre Eklendi: %@";
 "osd.filter_removed" = "Filtre Kaldırıldı";
-"osd.file_loop" = "Loop Single File";
-"osd.playlist_loop" = "Loop Playlist";
-"osd.no_loop" = "Disable Looping";
+"osd.file_loop" = "Bir Dosyayı Yinele";
+"osd.playlist_loop" = "Oynatma Listesini Yinele";
+"osd.no_loop" = "Yinelemeyi Kapat";
 
 "preference.title" = "Tercihler";
 "preference.general" = "Genel";
@@ -124,8 +124,8 @@
 "menu.exit_fullscreen" = "Tam Ekrandan Çık";
 "menu.pip" = "Resim İçinde Resim'e Geç";
 "menu.exit_pip" = "Resim İçinde Resim'den Çık";
-"menu.mini_player" = "Enter Music Mode";
-"menu.exit_mini_player" = "Exit Music Mode";
+"menu.mini_player" = "Müzik Moduna Geç";
+"menu.exit_mini_player" = "Müzik Modundan Çık";
 "menu.pause" = "Duraklat";
 "menu.resume" = "Sürdür";
 "menu.speed" = "Hız: %.2fx";
@@ -317,7 +317,7 @@
 "osc_toolbar.full_screen" = "Tam Ekranı Aç/Kapat";
 "osc_toolbar.music_mode" = "Müzik kipine geç";
 "osc_toolbar.sub_track" = "Altyazı izini seç";
-"osc_toolbar.screenshot" = "Take a screenshot";
+"osc_toolbar.screenshot" = "Ekran görüntüsü al";
 
 "mini_player.album_art" = "Albüm kapağını göster";
 "mini_player.loop" = "Yinele";

@@ -20,10 +20,10 @@
 "cmd.sub-seek" = "Перемотати за субтитром";
 "cmd.playlist-next" = "Наступний файл";
 "cmd.playlist-prev" = "Попередній файл";
-"cmd.playlist-move" = "Перемістити елемент підбірки";
-"cmd.playlist-clear" = "Очистити підбірку";
-"cmd.playlist-remove" = "Прибрати поточний елемент підбірки";
-"cmd.playlist-shuffle" = "Тасувати";
+"cmd.playlist-move" = "Перемістити елемент плейлиста";
+"cmd.playlist-clear" = "Очистити плейлист";
+"cmd.playlist-remove" = "Прибрати поточний файл";
+"cmd.playlist-shuffle" = "Перемішати";
 "cmd.write-watch-later-config" = "Записати історію перегляду";
 "cmd.stop" = "Зупинити";
 "cmd.quit" = "Завершити";
@@ -31,7 +31,7 @@
 "cmd.screenshot" = "Знімок екрану";
 "cmd.screenshot-to-file" = "Знімок у файл";
 "cmd.loadfile" = "Завантажити файл";
-"cmd.loadlist" = "Завантажити підбірку";
+"cmd.loadlist" = "Завантажити плейлист";
 "cmd.run" = "Запустити";
 
 "iina.flip" = "перевертання";
@@ -44,14 +44,14 @@
 "iina.video-panel" = "Панель відео";
 "iina.audio-panel" = "Панель аудіо";
 "iina.sub-panel" = "Панель субтитрів";
-"iina.playlist-panel" = "Панель підбірки";
+"iina.playlist-panel" = "Панель плейлиста";
 "iina.chapter-panel" = "Панель розділів";
 "iina.bigger-window" = "Збільшити вікно";
 "iina.smaller-window" = "Зменшити вікно";
 "iina.fit-to-screen" = "Допасувати до розмірів екрана";
 "iina.toggle-flip" = "Перемкнути перевертання";
 "iina.toggle-mirror" = "Перемкнути віддзеркалення";
-"iina.save-playlist" = "Зберегти поточну підбірку";
+"iina.save-playlist" = "Зберегти поточний плейлист";
 "iina.delete-current-file" = "Видалити поточний файл";
 "iina.delete-current-file-hard" = "Видалити поточний файл, оминаючи Смітник";
 "iina.find-online-subs" = "Знайти субтитри в Інтернеті";

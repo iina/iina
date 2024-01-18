@@ -70,8 +70,8 @@
 "osd.stop" = "Зупинити";
 "osd.chapter" = "Розділ: %@";
 "osd.subtitle_scale" = "Розмір субтитрів: %.2fx";
-"osd.add_to_playlist" = "Додано %i файлів до плейліста";
-"osd.clear_playlist" = "Плейліст очищено";
+"osd.add_to_playlist" = "Додано %i файлів до плейлиста";
+"osd.clear_playlist" = "Плейлист очищено";
 "osd.video_eq.contrast" = "Контрастність: %i";
 "osd.video_eq.gamma" = "Гама: %i";
 "osd.video_eq.hue" = "Відтінок: %i";
@@ -91,9 +91,9 @@
 "osd.timed_out" = "Час вийшов";
 "osd.filter_added" = "Доданий фільтр: %@";
 "osd.filter_removed" = "Видалений фільтр";
-"osd.file_loop" = "Loop Single File";
-"osd.playlist_loop" = "Loop Playlist";
-"osd.no_loop" = "Disable Looping";
+"osd.file_loop" = "Повтор одного файлу";
+"osd.playlist_loop" = "Повтор плейлиста";
+"osd.no_loop" = "Вимкнути повторення";
 
 "preference.title" = "Параметри";
 "preference.general" = "Загальні";
@@ -131,8 +131,8 @@
 "menu.speed" = "Швидкість: %.2fx";
 "menu.chapters" = "Показати панель розділів";
 "menu.hide_chapters" = "Приховати панель розділів";
-"menu.playlist" = "Показати панель списку відтворення";
-"menu.hide_playlist" = "Приховати панель списку відтворення";
+"menu.playlist" = "Показати панель плейлиста";
+"menu.hide_playlist" = "Приховати панель плейлиста";
 "menu.video" = "Показати панель відео";
 "menu.hide_video" = "Приховати панель відео";
 "menu.audio" = "Показати панель аудіо";
@@ -291,7 +291,7 @@
 "pl_menu.show_in_finder" = "Показати у Finder";
 "pl_menu.add_file" = "Додати файл…";
 "pl_menu.add_url" = "Додати URL…";
-"pl_menu.clear_playlist" = "Очистити плейліст";
+"pl_menu.clear_playlist" = "Очистити плейлист";
 "pl_menu.matched_sub" = "Зіставлено %d субтитрів";
 "pl_menu.add_sub" = "Додати субтитри…";
 "pl_menu.wrong_sub" = "Субтитри неправильні!";
@@ -312,7 +312,7 @@
 "subencoding.auto" = "Автовизначення";
 
 "osc_toolbar.settings" = "Швидкі налаштування";
-"osc_toolbar.playlist" = "Підбірка та розділи";
+"osc_toolbar.playlist" = "Плейлист та розділи";
 "osc_toolbar.pip" = "Режим «Кадр у кадрі»";
 "osc_toolbar.full_screen" = "Повноекранний режим";
 "osc_toolbar.music_mode" = "Перейти до музичного режиму";

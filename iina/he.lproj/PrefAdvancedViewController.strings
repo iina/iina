@@ -1,5 +1,5 @@
 /* Class = "NSTextFieldCell"; title = "Additional mpv options"; ObjectID = "6F6-Y7-8oR"; */
-"6F6-Y7-8oR.title" = "Additional mpv options";
+"6F6-Y7-8oR.title" = "אפשרויות mpv נוספות";
 
 /* Class = "NSButtonCell"; title = "Enable advanced settings"; ObjectID = "7ml-VU-xWv"; */
 "7ml-VU-xWv.title" = "אפשר הגדרות מתקדמות";
@@ -8,13 +8,13 @@
 "E3I-Q7-9t1.headerCell.title" = "שם";
 
 /* Class = "NSTextFieldCell"; title = "The following settings will require restarting IINA to take effect."; ObjectID = "HMa-Vz-EUk"; */
-"HMa-Vz-EUk.title" = "The following settings will require restarting IINA to take effect.";
+"HMa-Vz-EUk.title" = "שינוי של ההגדרות הבאות דורש הפעלה מחדש של IINA כדי להיכנס לתוקף.";
 
 /* Class = "NSButtonCell"; title = "Open log directory"; ObjectID = "JDA-g3-RNX"; */
 "JDA-g3-RNX.title" = "פתח תיקיית יומן";
 
 /* Class = "NSButtonCell"; title = "Enable logging to file"; ObjectID = "LCd-uY-Yze"; */
-"LCd-uY-Yze.title" = "Enable logging";
+"LCd-uY-Yze.title" = "הפעל רישום";
 
 /* Class = "NSButtonCell"; title = "Choose directory…"; ObjectID = "MRT-u8-xTX"; */
 "MRT-u8-xTX.title" = "בחר תיקייה…";
@@ -29,13 +29,13 @@
 "ehL-8Y-G8h.title" = "השתמש בתקיית תצורה:";
 
 /* Class = "NSButtonCell"; title = "Use mpv's OSD"; ObjectID = "phK-g9-Vbg"; */
-"phK-g9-Vbg.title" = "Use mpv's OSD";
+"phK-g9-Vbg.title" = "השתמש בOSD של mpv";
 
 /* Class = "NSTextFieldCell"; title = "Log level:"; ObjectID = "nFf-vh-bNd"; */
 "nFf-vh-bNd.title" = "רמת יומן:";
 
 /* Class = "NSButtonCell"; title = "Show log viewer"; ObjectID = "Owx-92-Ogg"; */
-"Owx-92-Ogg.title" = "הצג את מציג היומן";
+"Owx-92-Ogg.title" = "הצג את היומן";
 
 /* Class = "NSMenuItem"; title = "Verbose"; ObjectID = "S9M-yY-q0w"; */
 "S9M-yY-q0w.title" = "מפורט";

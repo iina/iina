@@ -91,9 +91,9 @@
 "osd.timed_out" = "Časový limit vypršel";
 "osd.filter_added" = "Přidán filtr: %@";
 "osd.filter_removed" = "Filtr odebrán";
-"osd.file_loop" = "Loop Single File";
-"osd.playlist_loop" = "Loop Playlist";
-"osd.no_loop" = "Disable Looping";
+"osd.file_loop" = "Opakovat jeden soubor";
+"osd.playlist_loop" = "Opakovat playlist";
+"osd.no_loop" = "Zakázat opakování";
 
 "preference.title" = "Nastavení";
 "preference.general" = "Obecné";

@@ -12,7 +12,7 @@
 "general.login" = "התחברות";
 "general.logout" = "התנתקות";
 "general.ok" = "אישור";
-"general.cancel" = "בטל";
+"general.cancel" = "ביטול";
 "general.username" = "שם משתמש";
 "general.password" = "סיסמה";
 
@@ -45,8 +45,8 @@
 "quicksetting.hdr" = "HDR";
 
 // OSDMessage.swift
-"osd.pause" = "השהיה";
-"osd.resume" = "המשך";
+"osd.pause" = "מושהה";
+"osd.resume" = "ממשיך";
 "osd.volume" = "עוצמת שמע: %i";
 "osd.speed" = "מהירות: x%.2f";
 "osd.aspect" = "יחס גובה-רוחב: %@";
@@ -66,7 +66,7 @@
 "osd.screenshot" = "צילום מסך בוצע";
 "osd.abloop.a" = "לולאת א-ב: א";
 "osd.abloop.b" = "לולאת א-ב: ב";
-"osd.abloop.clear" = "לולאת א-ב: נוקה";
+"osd.abloop.clear" = "לולאת א-ב: בוטלה";
 "osd.stop" = "עצור";
 "osd.chapter" = "פרק: %@";
 "osd.subtitle_scale" = "קנה מידה כתוביות: %.2fx";
@@ -154,7 +154,7 @@
 "menu.crop_custom" = "התאמה אישית...";
 "menu.find_online_sub" = "מצא כתוביות מקוונות מ%@";
 
-"track.none" = "<None>";
+"track.none" = "<ללא>";
 
 "subtrack.no_loaded" = "לא נטענו כתוביות";
 "subtrack.no_external" = "לא נמצאו כתוביות חיצוניות";
@@ -194,14 +194,14 @@
 
 "alert.filter.incorrect" = "אירעה שגיאה בעת הגדרת המסננים. אנא בדוק את פורמט הפרמטר שהגדרת.";
 "alert.add_filter.title" = "מסנן חדש";
-"alert.add_filter.message" = "Please enter a filter string in format of mpv's vf or af command.";
+"alert.add_filter.message" = "אנא הזן מחרוזת מסנן בפורמט פקודת vf או af של mpv.";
 
 "alert.keybinding_config.error" = "שגיאה בניתוח קובץ תצורת קיצורי מקשים \"%@\"! חוזר לקיצורי מקשים ברירת המחדל של IINA. אנא בדוק את התצורה שלך.";
 
 "alert.extra_option.cannot_read" = "קריאת אפשרויות mpv נוספות המוגדרות על ידי המשתמש נכשלה.";
 "alert.extra_option.empty" = "המפתח או הערך לא יכולים להיות ריקים!";
 "alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
-"alert.extra_option.config_folder" = "Error setting config directory \"%@\".";
+"alert.extra_option.config_folder" = "שגיאה בהגדרת ספריית התצורה \"%@\".";
 
 "alert.playlist.error_deleting" = "המחיקה נכשלה: %@";
 

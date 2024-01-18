@@ -2,28 +2,28 @@
 "0DK-uZ-duj.title" = "Auto (Copy)";
 
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "2yO-To-el7"; */
-"2yO-To-el7.title" = "Default: 0 (Auto)";
+"2yO-To-el7.title" = "ברירת מחדל: 0 (אוטומטי)";
 
 /* Class = "NSTextFieldCell"; title = "Maximum volume:"; ObjectID = "44m-ge-naq"; */
-"44m-ge-naq.title" = "עוצמת קול מרבית:";
+"44m-ge-naq.title" = "עוצמה מרבית:";
 
 /* Class = "NSTextFieldCell"; title = "Number of threads:"; ObjectID = "50C-1R-wlJ"; */
 "50C-1R-wlJ.title" = "מספר ה-Threads:";
 
 /* Class = "NSButtonCell"; title = "Force dedicated GPU"; ObjectID = "YUr-aJ-xfC"; */
-"YUr-aJ-xfC.title" = "Force dedicated GPU";
+"YUr-aJ-xfC.title" = "כפה שימוש בGPU ייעודי";
 
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "bxW-np-SGm"; */
-"bxW-np-SGm.title" = "Default: 0 (Auto)";
+"bxW-np-SGm.title" = "ברירת מחדל: 0 (אוטומטי)";
 
 /* Class = "NSTextFieldCell"; title = "(100-1000)"; ObjectID = "cJP-ep-847"; */
 "cJP-ep-847.title" = "(100-1000)";
 
 /* Class = "NSButtonCell"; title = "Initial volume:"; ObjectID = "g4c-vG-URh"; */
-"g4c-vG-URh.title" = "ערך ראשוני:";
+"g4c-vG-URh.title" = "עוצמה ראשונית:";
 
 /* Class = "NSTextFieldCell"; title = "Always use the dedicated GPU for rendering (if exists). This can improve performance but may result in poor battery life."; ObjectID = "gCv-sJ-uQJ"; */
-"gCv-sJ-uQJ.title" = "Always use the dedicated GPU for rendering (if it exists). This can improve performance but may reduce battery life.";
+"gCv-sJ-uQJ.title" = "השתמש תמיד ב-GPU הייעודי (אם קיים) כדי לעבד. זה יכול לשפר את הביצועים, אבל עשוי לצרוך יותר סוללה.";
 
 /* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
 "m5P-5f-5uo.title" = "וידאו:";
@@ -47,16 +47,16 @@
 "tO4-pw-2W9.title" = "מספר ה-Threads:";
 
 /* Class = "NSTextFieldCell"; title = "S/PDIF output:"; ObjectID = "up6-6A-4sn"; */
-"up6-6A-4sn.title" = "S/PDIF output:";
+"up6-6A-4sn.title" = "פלט S/PDIF:";
 
 /* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "wjt-O6-KbC"; */
 "wjt-O6-KbC.title" = "שפה מועדפת:";
 
 /* Class = "NSButtonCell"; title = "Load ICC profile"; ObjectID = "3g4-jW-uJd"; */
-"3g4-jW-uJd.title" = "Load ICC profile";
+"3g4-jW-uJd.title" = "טען פרופיל ICC";
 
 /* Class = "NSTextFieldCell"; title = "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"; ObjectID = "M2M-of-gjd"; */
-"M2M-of-gjd.title" = "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)";
+"M2M-of-gjd.title" = "טען את פרופיל ה-ICC עבור התצוגה הנוכחית והשתמש בו כדי להפוך וידאו RGB לפלט מסך. (עבור מצב SDR בלבד)";
 
 /* Class = "NSButtonCell"; title = "Enable HDR support"; ObjectID = "R7Z-9c-vPJ"; */
 "R7Z-9c-vPJ.title" = "הפעל תמיכת HDR";
@@ -65,19 +65,19 @@
 "ZgQ-bc-yEE.title" = "הפעל מצב HDR כברירת מחדל בעת הפעלת סרטוני HDR.";
 
 /* Class = "NSButtonCell"; title = "Enable tone mapping"; ObjectID = "a5Y-gU-JTj"; */
-"a5Y-gU-JTj.title" = "Enable tone mapping";
+"a5Y-gU-JTj.title" = "הפעל מיפוי גוונים";
 
 /* Class = "NSTextFieldCell"; title = "Enable tone mapping images onto the display"; ObjectID = "mNn-cb-IVw"; */
-"mNn-cb-IVw.title" = "Enable tone mapping images onto the display";
+"mNn-cb-IVw.title" = "אפשר תמונות מיפוי גוונים על גבי התצוגה";
 
 /* Class = "NSTextFieldCell"; title = "Target peak:"; ObjectID = "xVk-OA-kOf"; */
-"xVk-OA-kOf.title" = "Target peak:";
+"xVk-OA-kOf.title" = "בהירות מרבית:";
 
 /* Class = "NSTextFieldCell"; title = "nits"; ObjectID = "baO-xy-7hD"; */
 "baO-xy-7hD.title" = "ניטים";
 
 /* Class = "NSTextFieldCell"; title = "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."; ObjectID = "aTt-aZ-rjK"; */
-"aTt-aZ-rjK.title" = "בהירות שיא מדודה של התצוגה. אם מוגדר ל-0, IINA מזהה אוטומטית ערך זה. אם הזיהוי נכשל, IINA מגדיר את שיא היעד ל-400.";
+"aTt-aZ-rjK.title" = "בהירות מרבית מדודה של התצוגה. אם מוגדר ל-0, IINA יזהה אוטומטית ערך זה. אם הזיהוי נכשל, IINA יגדיר את שיא היעד ל-400.";
 
 /* Class = "NSTextFieldCell"; title = "Algorithm:"; ObjectID = "qzI-rq-PqO"; */
 "qzI-rq-PqO.title" = "אלגוריתם:";

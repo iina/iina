@@ -5,7 +5,7 @@
 "0fB-es-DmV.title" = "כתוביות מקוונות:";
 
 /* Class = "NSMenuItem"; title = "Top"; ObjectID = "1Tq-5k-o6R"; */
-"1Tq-5k-o6R.title" = "למעלה";
+"1Tq-5k-o6R.title" = "חלק עליון";
 
 /* Class = "NSButtonCell"; title = "Display subtitles in letterboxes while in full screen"; ObjectID = "2XY-Un-0Fg"; */
 "2XY-Un-0Fg.title" = "Display subtitles in letterboxes while in full screen";
@@ -17,13 +17,13 @@
 "4Tb-Yh-PdP.title" = "מיקום:";
 
 /* Class = "NSMenuItem"; title = "Bottom"; ObjectID = "6i0-Sx-V7F"; */
-"6i0-Sx-V7F.title" = "תחתית";
+"6i0-Sx-V7F.title" = "בתחתית";
 
 /* Class = "NSTextFieldCell"; title = "Subtitles have priority when filename containing:"; ObjectID = "7pf-Kb-TNr"; */
 "7pf-Kb-TNr.title" = "לכתוביות יש עדיפות כאשר שם הקובץ מכיל:";
 
 /* Class = "NSButtonCell"; title = "Scale subtitles with window size"; ObjectID = "8hj-ki-R0h"; */
-"8hj-ki-R0h.title" = "Scale subtitles with window size";
+"8hj-ki-R0h.title" = "התאם את גודל הכתוביות לגודל החלון";
 
 /* Class = "NSTextFieldCell"; title = "Font spacing:"; ObjectID = "9EP-XB-lyO"; */
 "9EP-XB-lyO.title" = "ריווח גופן:";
@@ -35,7 +35,7 @@
 "9pv-1r-nuH.title" = "גופן";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "ALz-LB-8sf"; */
-"ALz-LB-8sf.title" = "Y:";
+"ALz-LB-8sf.title" = "גובה:";
 
 /* Class = "NSBox"; title = "Shadow"; ObjectID = "BgE-Kk-MXC"; */
 "BgE-Kk-MXC.title" = "צל";
@@ -47,13 +47,13 @@
 "C4C-XP-i2S.title" = "גופן:";
 
 /* Class = "NSTextFieldCell"; title = " X:"; ObjectID = "CdS-9J-f2h"; */
-"CdS-9J-f2h.title" = " X:";
+"CdS-9J-f2h.title" = " רוחב:";
 
 /* Class = "NSTextFieldCell"; title = "Advanced"; ObjectID = "DUA-7H-Yje"; */
 "DUA-7H-Yje.title" = "מתקדם";
 
 /* Class = "NSMenuItem"; title = "Right"; ObjectID = "Gie-38-Kk4"; */
-"Gie-38-Kk4.title" = "Right";
+"Gie-38-Kk4.title" = "ימין";
 
 /* Class = "NSTextFieldCell"; title = "OpenSubtitles account:"; ObjectID = "Iax-cc-YIO"; */
 "Iax-cc-YIO.title" = "חשבון OpenSubtitles:";
@@ -62,7 +62,7 @@
 "LiG-iV-AQK.title" = "אחר:";
 
 /* Class = "NSTextFieldCell"; title = "Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed."; ObjectID = "Luv-2B-9v8"; */
-"Luv-2B-9v8.title" = "תיקיות מופרדות באמצעות נקודתיים (:). ניתן להשתמש בנתיבים יחסיים ובתווים כלליים (*) בסוף.";
+"Luv-2B-9v8.title" = "רשימת תיקיות מופרדת באמצעות נקודתיים (:). ניתן להשתמש בנתיבים יחסיים ובתווים כלליים (*) בסוף הנתיב.";
 
 /* Class = "NSTextFieldCell"; title = "Please enter a comma-separated list of strings."; ObjectID = "Mk1-sv-QB8"; */
 "Mk1-sv-QB8.title" = "אנא הזן רשימה של מחרוזות מופרדות בפסיקים.";
@@ -71,7 +71,7 @@
 "OcF-0z-7qe.title" = "אם מופעל, כל כתוביות ה-ASS יצוירו באמצעות העיצוב שמוגדר להלן.";
 
 /* Class = "NSTextFieldCell"; title = "Text subtitles:"; ObjectID = "Qda-dp-nhg"; */
-"Qda-dp-nhg.title" = "Text subtitles:";
+"Qda-dp-nhg.title" = "טקסט כתוביות:";
 
 /* Class = "NSTextFieldCell"; title = "Also search subtitles in following directories:"; ObjectID = "QsS-wD-2hY"; */
 "QsS-wD-2hY.title" = "חפש כתוביות גם בתיקיות הבאות:";
@@ -80,7 +80,7 @@
 "SIh-Sv-6XI.title" = "צבע:";
 
 /* Class = "NSTextFieldCell"; title = "Download subtitles from:"; ObjectID = "TPK-CJ-HX7"; */
-"TPK-CJ-HX7.title" = "הורד כתוביות מאת:";
+"TPK-CJ-HX7.title" = "הורד כתוביות מ:";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "Vbl-Im-3UI"; */
 "Vbl-Im-3UI.title" = "גודל:";
@@ -110,7 +110,7 @@
 "dtP-9o-yhy.title" = "קיזוז:";
 
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "e0e-dB-Ir6"; */
-"e0e-dB-Ir6.title" = "מרכז";
+"e0e-dB-Ir6.title" = "במרכז";
 
 /* Class = "NSTextFieldCell"; title = "Background:"; ObjectID = "eYO-c0-Rjp"; */
 "eYO-c0-Rjp.title" = "רקע:";
@@ -131,10 +131,10 @@
 "kvJ-Tj-KMb.title" = "יישור";
 
 /* Class = "NSTextFieldCell"; title = " X:"; ObjectID = "l7l-ZO-W79"; */
-"l7l-ZO-W79.title" = " X:";
+"l7l-ZO-W79.title" = " רוחב:";
 
 /* Class = "NSTextFieldCell"; title = "ASS subtitles:"; ObjectID = "mFm-Q6-aja"; */
-"mFm-Q6-aja.title" = "ASS subtitles:";
+"mFm-Q6-aja.title" = "כתוביות ASS:";
 
 /* Class = "NSButtonCell"; title = "Choose…"; ObjectID = "nH7-kO-S15"; */
 "nH7-kO-S15.title" = "בחירה…";
@@ -149,25 +149,25 @@
 "rZf-bj-qbV.title" = "התעלם מסגנונות ASS";
 
 /* Class = "NSTextFieldCell"; title = "Auto load:"; ObjectID = "raf-Yu-ck0"; */
-"raf-Yu-ck0.title" = "Auto load:";
+"raf-Yu-ck0.title" = "טעינה אוטומטית:";
 
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "slU-Ox-aeF"; */
-"slU-Ox-aeF.title" = "מרכז";
+"slU-Ox-aeF.title" = "במרכז";
 
 /* Class = "NSBox"; title = "Border"; ObjectID = "t5n-mc-dss"; */
 "t5n-mc-dss.title" = "גבול";
 
 /* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "u31-eV-Arr"; */
-"u31-eV-Arr.title" = "מושבת";
+"u31-eV-Arr.title" = "מושבתת";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "vDc-dw-liI"; */
 "vDc-dw-liI.title" = "צבע:";
 
 /* Class = "NSTextFieldCell"; title = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues."; ObjectID = "vYb-qH-XkH"; */
-"vYb-qH-XkH.title" = "אם מופעל, IINA יחפש אוטומטית כתוביות מקוונות (רק עבור סרטונים ללא כתוביות טעונות, שאורכם יותר מ-20 דקות).";
+"vYb-qH-XkH.title" = "אם מופעל, IINA יחפש אוטומטית כתוביות מקוונות (רק עבור סרטונים ללא כתוביות טעונות שאורכם יותר מ-20 דקות).";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "xGf-fF-4Hx"; */
-"xGf-fF-4Hx.title" = "Y:";
+"xGf-fF-4Hx.title" = "גובה:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "xid-E9-FC9"; */
 "xid-E9-FC9.title" = "צבע:";

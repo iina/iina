@@ -11,7 +11,7 @@
 "2XY-Un-0Fg.title" = "В полноэкранном режиме показывать субтитры под видео";
 
 /* Class = "NSTextFieldCell"; title = "strip"; ObjectID = "3H8-Ei-cTm"; */
-"3H8-Ei-cTm.title" = "удалить";
+"3H8-Ei-cTm.title" = "игнорировать все теги и стили в .ass";
 
 /* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "4Tb-Yh-PdP"; */
 "4Tb-Yh-PdP.title" = "Расположение:";
@@ -116,7 +116,7 @@
 "eYO-c0-Rjp.title" = "Фон:";
 
 /* Class = "NSBox"; title = "Other Styles"; ObjectID = "egf-g3-b7a"; */
-"egf-g3-b7a.title" = "Box";
+"egf-g3-b7a.title" = "Другие стили";
 
 /* Class = "NSTextFieldCell"; title = "Override level:"; ObjectID = "gAq-Vr-hRY"; */
 "gAq-Vr-hRY.title" = "Уровень переопределения:";
@@ -134,7 +134,7 @@
 "l7l-ZO-W79.title" = " X:";
 
 /* Class = "NSTextFieldCell"; title = "ASS subtitles:"; ObjectID = "mFm-Q6-aja"; */
-"mFm-Q6-aja.title" = "ASS субтитры:";
+"mFm-Q6-aja.title" = "Субтитры ASS:";
 
 /* Class = "NSButtonCell"; title = "Choose…"; ObjectID = "nH7-kO-S15"; */
 "nH7-kO-S15.title" = "Выберите…";

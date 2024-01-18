@@ -87,13 +87,13 @@
 "osd.file_error" = "Lesefehler";
 "osd.cannot_login" = "Anmeldung fehlgeschlagen";
 "osd.canceled" = "Abgebrochen";
-"osd.cannot_connect" = "Cannot connect";
-"osd.timed_out" = "Timed Out";
+"osd.cannot_connect" = "Keine Verbindung möglich";
+"osd.timed_out" = "Zeitüberschreitung";
 "osd.filter_added" = "Filter „%@“ hinzugefügt";
 "osd.filter_removed" = "Filter gelöscht";
-"osd.file_loop" = "Loop Single File";
-"osd.playlist_loop" = "Loop Playlist";
-"osd.no_loop" = "Disable Looping";
+"osd.file_loop" = "Wiederhole einzelne Datei";
+"osd.playlist_loop" = "Wiedergabeliste wiederholen";
+"osd.no_loop" = "Wiederholen deaktivieren";
 
 "preference.title" = "Einstellungen";
 "preference.general" = "Allgemein";
@@ -124,8 +124,8 @@
 "menu.exit_fullscreen" = "Vollbildmodus beenden";
 "menu.pip" = "Bild-in-Bild öffnen";
 "menu.exit_pip" = "Bild-in-Bild schließen";
-"menu.mini_player" = "Enter Music Mode";
-"menu.exit_mini_player" = "Exit Music Mode";
+"menu.mini_player" = "Musikmodus aktivieren";
+"menu.exit_mini_player" = "Musikmodus beenden";
 "menu.pause" = "Pausieren";
 "menu.resume" = "Wiedergabe";
 "menu.speed" = "Geschwindigkeit: %.2fx";
@@ -317,7 +317,7 @@
 "osc_toolbar.full_screen" = "Vollbild ein-/ausschalten";
 "osc_toolbar.music_mode" = "Musikmodus";
 "osc_toolbar.sub_track" = "Untertitelspur auswählen";
-"osc_toolbar.screenshot" = "Take a screenshot";
+"osc_toolbar.screenshot" = "Bildschirmfoto erstellen";
 
 "mini_player.album_art" = "Albumcover ein-/ausblenden";
 "mini_player.loop" = "Wiederholen";

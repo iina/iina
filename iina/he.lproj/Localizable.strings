@@ -55,21 +55,21 @@
 "osd.deinterlace" = "ביטול שזירה: %@";
 "osd.hwdec" = "פענוח חומרה: %@";
 "osd.audio_delay.nodelay" = "עיכוב שמע: ללא עיכוב";
-"osd.audio_delay.later" = "עיכוב שמע: %.2f שנ' איחור";
-"osd.audio_delay.earlier" = "Audio Delay: %.2fs Earlier";
+"osd.audio_delay.later" = "עיכוב שמע: %.2f שניות איחור";
+"osd.audio_delay.earlier" = "עיכוב שמע: %.2f שניות הקדמה";
 "osd.sub_delay.nodelay" = "עיכוב כתוביות: ללא עיכוב";
-"osd.sub_delay.later" = "Subtitle Delay: %.2fs Later";
-"osd.sub_delay.earlier" = "Subtitle Delay: %.2fs Earlier";
+"osd.sub_delay.later" = "עיכוב כתוביות: %.2f שניות איחור";
+"osd.sub_delay.earlier" = "עיכוב כתוביות: %.2f שניות הקדמה";
 "osd.subtitle_pos" = "מיקום כתוביות: %.1f";
 "osd.mute" = "השתקה";
 "osd.unmute" = "בטל השתקה";
 "osd.screenshot" = "צילום מסך בוצע";
-"osd.abloop.a" = "AB-Loop: A";
-"osd.abloop.b" = "AB-Loop: B";
-"osd.abloop.clear" = "AB-Loop: Cleared";
+"osd.abloop.a" = "לולאת א-ב: א";
+"osd.abloop.b" = "לולאת א-ב: ב";
+"osd.abloop.clear" = "לולאת א-ב: נוקה";
 "osd.stop" = "עצור";
 "osd.chapter" = "פרק: %@";
-"osd.subtitle_scale" = "Subtitle Scale: %.2fx";
+"osd.subtitle_scale" = "קנה מידה כתוביות: %.2fx";
 "osd.add_to_playlist" = "נוספו %i קבצים לרשימת ההשמעה";
 "osd.clear_playlist" = "רשימת ההשמעה אופסה";
 "osd.video_eq.contrast" = "ניגודיות: %i";
@@ -91,9 +91,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "נוסף מסנן: %@";
 "osd.filter_removed" = "המסנן הוסר";
-"osd.file_loop" = "Loop Single File";
-"osd.playlist_loop" = "Loop Playlist";
-"osd.no_loop" = "Disable Looping";
+"osd.file_loop" = "חזרה על קובץ בודד";
+"osd.playlist_loop" = "חזרה על רשימת השמעה";
+"osd.no_loop" = "השבת חזרה";
 
 "preference.title" = "העדפות";
 "preference.general" = "כללי";
@@ -118,9 +118,9 @@
 
 "menu.volume" = "עוצמת שמע: %d";
 "menu.volume_muted" = "עוצמת שמע: %d (מושתק)";
-"menu.audio_delay" = "עיכוב שמע: %.2f שנ'";
-"menu.sub_delay" = "עיכוב כתוביות: %.2f שנ'";
-"menu.fullscreen" = "היכנס למסך מלא";
+"menu.audio_delay" = "עיכוב שמע: %.2f שניות";
+"menu.sub_delay" = "עיכוב כתוביות: %.2f שניות";
+"menu.fullscreen" = "עבור למסך מלא";
 "menu.exit_fullscreen" = "צא ממסך מלא";
 "menu.pip" = "היכנס למצב תמונה בתוך תמונה";
 "menu.exit_pip" = "צא ממצב תמונה בתוך תמונה";
@@ -140,19 +140,19 @@
 "menu.subtitles" = "הצג פאנל כתוביות";
 "menu.hide_subtitles" = "הסתר פאנל כתוביות";
 
-"menu.seek_forward" = "דלג קדימה %.0f שנ'";
+"menu.seek_forward" = "דלג קדימה %.0f שניות";
 "menu.seek_backward" = "חזרה %.0f שניות אחורה";
-"menu.speed_up" = "Speed Up by %.1fx";
-"menu.speed_down" = "Speed Down by %.1fx";
-"menu.volume_up" = "Volume + %.0f%%";
-"menu.volume_down" = "Volume - %.0f%%";
-"menu.audio_delay_up" = "עיכוב שמע: הוסף %.1f שנ'";
-"menu.audio_delay_down" = "עיכוב שמע: הפחת %.1f שנ'";
-"menu.sub_delay_up" = "עיכוב כתוביות: הוסף %.1f שנ'";
-"menu.sub_delay_down" = "עיכוב כתוביות: הפחת %.1f שנ'";
+"menu.speed_up" = "הגבר מהירות ב%.1fx";
+"menu.speed_down" = "הפחת מהירות ב%.1fx";
+"menu.volume_up" = "הגבר עוצמת שמע ב%.0f%";
+"menu.volume_down" = "הפחת עוצמת שמע ב%.0f%";
+"menu.audio_delay_up" = "עיכוב שמע: הוסף %.1f שניות";
+"menu.audio_delay_down" = "עיכוב שמע: הפחת %.1f שניות";
+"menu.sub_delay_up" = "עיכוב כתוביות: הוסף %.1f שניות";
+"menu.sub_delay_down" = "עיכוב כתוביות: הפחת %.1f שניות";
 
 "menu.crop_custom" = "התאמה אישית...";
-"menu.find_online_sub" = "מצא כתוביות מקוונות מאת %@";
+"menu.find_online_sub" = "מצא כתוביות מקוונות מ%@";
 
 "track.none" = "<None>";
 
@@ -217,7 +217,7 @@
 "alert.set_default.message" = "IINA תוגדר כאפליקציית ברירת המחדל עבור כל סוגי הקבצים שבהם היא תומכת.";
 "alert.set_default.success" = "הסתיים עם %d שהצליחו ו-%d שנכשלו.";
 
-"alert.add_watch.title" = "Add Watch Property";
+"alert.add_watch.title" = "הוסף מאפיין צפייה";
 "alert.add_watch.message" = "אנא הזן שם מאפיין mpv חוקי.";
 
 "alert.jump_to.title" = "קפיצה אל";
@@ -250,7 +250,7 @@
 "alert.clear_watch_later.title" = "נקה התקדמות הפעלה שמורה";
 "alert.clear_watch_later.message" = "האם אתה בטוח שברצונך למחוק את כל התקדמויות ההשמעה שנשמרו (מידע \"צפה מאוחר יותר\")?";
 
-"alert.restore_alerts.title" = "שחזר התראות שהושתקו";
+"alert.restore_alerts.title" = "שחזר התראות שהוסתרו";
 "alert.restore_alerts.message" = "האם אתה בטוח שברצונך לשחזר התראות מושתקות?";
 
 "alert.nothing_to_open" = "אין מה לפתוח.";
@@ -294,12 +294,12 @@
 "pl_menu.clear_playlist" = "איפוס רשימת השמעה";
 "pl_menu.matched_sub" = "נמצאו %d כתוביות";
 "pl_menu.add_sub" = "הוסף כתוביות…";
-"pl_menu.wrong_sub" = "Wrong Subtitle!";
+"pl_menu.wrong_sub" = "כתוביות לא תקינות!";
 "pl_menu.browser" = "פתח בדפדפן";
 "pl_menu.copy_url" = "העתק URL";
 "pl_menu.copy_url_multi" = "העתק URLs";
 
-"keymapping.title" = "Key Mapping";
+"keymapping.title" = "קיצורי מקשים";
 "keymapping.message" = "לחץ על מקש כלשהו כדי להקליט.";
 
 "filter.video_filters" = "מסנני וידאו";
@@ -313,13 +313,13 @@
 
 "osc_toolbar.settings" = "הגדרות מהירות";
 "osc_toolbar.playlist" = "רשימת השמעה ופרקים";
-"osc_toolbar.pip" = "צא/היכנס ממצב תמונה בתוך תמונה";
+"osc_toolbar.pip" = "היכנס/צא ממצב תמונה בתוך תמונה";
 "osc_toolbar.full_screen" = "היכנס/צא ממסך מלא";
 "osc_toolbar.music_mode" = "היכנס למצב מוזיקה";
 "osc_toolbar.sub_track" = "בחר רצועת כתוביות";
 "osc_toolbar.screenshot" = "בצע צילום מסך";
 
-"mini_player.album_art" = "Toggle album art";
+"mini_player.album_art" = "הצג/הסתר תמונת אלבום";
 "mini_player.loop" = "חזרה";
 "mini_player.shuffle" = "ערבוב";
 "mini_player.remove" = "הסר מרשימת השמעה";
@@ -339,21 +339,21 @@
 "touchbar.prev_video" = "הוידאו הקודם";
 "touchbar.increase_volume" = "הגברת עוצמה";
 "touchbar.decrease_volume" = "הנמכת עוצמה";
-"touchbar.rewind" = "Rewind";
-"touchbar.fast_forward" = "Fast Forward";
+"touchbar.rewind" = "הרצה אחורה";
+"touchbar.fast_forward" = "הרצה קדימה";
 "touchbar.play_pause" = "הפעל/השהה";
-"touchbar.seek" = "Seek";
-"touchbar.time" = "Time Position";
+"touchbar.seek" = "חיפוש";
+"touchbar.time" = "זמן מיקום";
 "touchbar.remainingTimeOrTotalDuration" = "זמן שנותר / משך כולל";
-"touchbar.toggle_pip" = "צא/היכנס ממצב תמונה בתוך תמונה";
+"touchbar.toggle_pip" = "היכנס/צא ממצב תמונה בתוך תמונה";
 
 // Plugin permissions
 
 "permissions.network-request.name" = "בקשת רשת";
 "permissions.network-request.desc" = "תוסף זה יכול לשלוח בקשות רשת ולהעלות נתונים לאתרים הבאים:";
 "permissions.network-request.any_site" = "כל אתר";
-"permissions.show-osd.name" = "Show OSD";
-"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
+"permissions.show-osd.name" = "הצג OSD";
+"permissions.show-osd.desc" = "תוסף זה יכול להציג הודעות OSD (תצוגה על המסך).";
 "permissions.show-alert.name" = "הצג התראות";
 "permissions.show-alert.desc" = "תוסף זה יכול להציג התראות קופצות.";
 "permissions.video-overlay.name" = "הוסף שכבות על לסרטונים";
@@ -368,9 +368,9 @@
 "alert.plugin.install_error" = "אירעה שגיאה במהלך ההתקנה: %@";
 "alert.invalid_url" = "הכתובת לא תקינה.";
 "plugin.install_error.invalid_url" = "הכתובת לא תקינה.";
-"plugin.install_error.file_not_found" = "Cannot find the package file.";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.file_not_found" = "קובץ החבילה לא נמצא.";
+"plugin.install_error.cannot_download" = "שגיאה בהורדת התוסף.\n\nפלט: %@\n";
+"plugin.install_error.cannot_unpackage" = "שגיאה בחילוץ התוסף.\n\nפלט: %@\n";
 "plugin.install_error.cannot_load" = "IINA לא יכול לטעון את התוסף הזה. ייתכן שהוא בפורמט שגוי.";
 "plugin.check_for_updates" = "חפש עדכונים";
 "plugin.updating" = "מוריד את העדכון…";

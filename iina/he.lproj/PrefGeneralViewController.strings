@@ -11,7 +11,7 @@
 "3XO-ks-TDg.title" = "PNG";
 
 /* Class = "NSButtonCell"; title = "Copy to clipboard"; ObjectID = "3gs-3w-rg6"; */
-"3gs-3w-rg6.title" = "העתקה ללוח";
+"3gs-3w-rg6.title" = "העתק ללוח";
 
 /* Class = "NSTextFieldCell"; title = "Options:"; ObjectID = "4Qe-7S-8xK"; */
 "4Qe-7S-8xK.title" = "אפשרויות:";
@@ -23,13 +23,13 @@
 "5RN-PV-pOZ.title" = "Box";
 
 /* Class = "NSButtonCell"; title = "Minimized/un-minimized"; ObjectID = "5Y9-bX-K0f"; */
-"5Y9-bX-K0f.title" = "ממוזער/לא ממוזער";
+"5Y9-bX-K0f.title" = "החלון ממוזער/יוצא ממזעור";
 
 /* Class = "NSTextFieldCell"; title = "Playlist:"; ObjectID = "6TV-DG-503"; */
 "6TV-DG-503.title" = "רשימת השמעה:";
 
 /* Class = "NSTextFieldCell"; title = "Requires restarting IINA to take effect."; ObjectID = "8kU-8g-VgX"; */
-"8kU-8g-VgX.title" = "נדרשת הפעלה מחדש של IINA כדי להשפיע.";
+"8kU-8g-VgX.title" = "נדרשת הפעלה מחדש של IINA כדי שההגדרה תשפיע.";
 
 /* Class = "NSButtonCell"; title = "Only in \"music mode\""; ObjectID = "AVe-9Z-RgQ"; */
 "AVe-9Z-RgQ.title" = "רק ב\"מצב מוזיקה\"";
@@ -41,7 +41,7 @@
 "DZT-7n-S4M.title" = "Box";
 
 /* Class = "NSMenuItem"; title = "Daily"; ObjectID = "Ez8-qY-WAZ"; */
-"Ez8-qY-WAZ.title" = "יומי";
+"Ez8-qY-WAZ.title" = "מדי יום";
 
 /* Class = "NSButtonCell"; title = "Pause"; ObjectID = "FbF-jJ-W5b"; */
 "FbF-jJ-W5b.title" = "השהיה";
@@ -50,7 +50,7 @@
 "GNV-VA-NBW.title" = "כאשר מדיה נפתחת:";
 
 /* Class = "NSMenuItem"; title = "Weekly"; ObjectID = "Imf-6g-2Cd"; */
-"Imf-6g-2Cd.title" = "שבועי";
+"Imf-6g-2Cd.title" = "מדי שבוע";
 
 /* Class = "NSButtonCell"; title = "Window becomes inactive/active"; ObjectID = "J8g-aS-W6e"; */
 "J8g-aS-W6e.title" = "החלון הופך לפעיל/ללא פעיל";
@@ -71,7 +71,7 @@
 "M0z-bI-88d.title" = "תמיד פתח מדיה בחלון חדש";
 
 /* Class = "NSButtonCell"; title = "Enter fullscreen"; ObjectID = "MlG-hl-goB"; */
-"MlG-hl-goB.title" = "היכנס למסך מלא";
+"MlG-hl-goB.title" = "עבור למסך מלא";
 
 /* Class = "NSMenuItem"; title = "JPEG (.jpeg)"; ObjectID = "NVh-C5-b9i"; */
 "NVh-C5-b9i.title" = "JPEG (.jpeg)";
@@ -83,7 +83,7 @@
 "QJq-fO-hhK.title" = "הוסף אוטומטית קבצים שבאותה תיקיה";
 
 /* Class = "NSMenuItem"; title = "Monthly"; ObjectID = "REP-70-XOi"; */
-"REP-70-XOi.title" = "חודשי";
+"REP-70-XOi.title" = "מדי חודש";
 
 /* Class = "NSButtonCell"; title = "Use legacy full screen"; ObjectID = "TvB-UM-FrS"; */
 "TvB-UM-FrS.title" = "השתמש במסך מלא מדור קודם";
@@ -122,7 +122,7 @@
 "jeK-46-2BG.title" = "היסטוריה:";
 
 /* Class = "NSButtonCell"; title = "Show artist and track name for audio files when available"; ObjectID = "kBI-Th-bBV"; */
-"kBI-Th-bBV.title" = "הצג אמן ושם רצועה עבור קובצי אודיו כאשר הם זמינים";
+"kBI-Th-bBV.title" = "הצג אמן ושם רצועה עבור קובצי אודיו (כאשר זמינים)";
 
 /* Class = "NSButtonCell"; title = "Play upon entering full screen"; ObjectID = "lOw-pu-Llm"; */
 "lOw-pu-Llm.title" = "הפעל בעת כניסה למסך מלא";
@@ -149,7 +149,7 @@
 "xE7-Uu-19f.title" = "הצג תצוגה מקדימה לאחר צילום מסך";
 
 /* Class = "NSTextFieldCell"; title = "Pause/resume when:"; ObjectID = "xr2-rB-O0x"; */
-"xr2-rB-O0x.title" = "השעה/המשך כאשר:";
+"xr2-rB-O0x.title" = "השהה/המשך כאשר:";
 
 /* Class = "NSMenuItem"; title = "Show welcome window"; ObjectID = "z9T-8h-1T0"; */
 "z9T-8h-1T0.title" = "הצג חלון ברוך הבא";

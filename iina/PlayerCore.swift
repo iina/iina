@@ -1498,6 +1498,18 @@ class PlayerCore: NSObject {
 
   // MARK: - Listeners
 
+  /// Called via mpv hook `on_before_start_file`, prior to file start sequence.
+  func fileWillStart() {
+    /// Currently this method is only used to honor `--shuffle` arg via iina-cli
+    guard shufflePending else { return }
+    shufflePending = false
+
+    Logger.log("Shuffling playlist", subsystem: subsystem)
+    mpv.command(.playlistShuffle)
+    /// will cancel this file load sequence (so `fileLoaded` will not be called), then will start loading item at index 0
+    mpv.command(.playlistPlayIndex, args: ["0"])
+  }
+
   func fileStarted(path: String) {
     Logger.log("File started", subsystem: subsystem)
     info.justStartedFile = true
@@ -1556,18 +1568,6 @@ class PlayerCore: NSObject {
       self.autoSearchOnlineSub()
     }
     events.emit(.fileStarted)
-  }
-
-  /// Called via mpv hook `on_load`, right before file is loaded.
-  func fileWillLoad() {
-    /// Currently this method is only used to honor `--shuffle` arg via iina-cli
-    guard shufflePending else { return }
-    shufflePending = false
-
-    Logger.log("Shuffling playlist", subsystem: subsystem)
-    mpv.command(.playlistShuffle)
-    /// will cancel this file load sequence (so `fileLoaded` will not be called), then will start loading item at index 0
-    mpv.command(.playlistPlayIndex, args: ["0"])
   }
 
   /** This function is called right after file loaded. Should load all meta info here. */

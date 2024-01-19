@@ -811,7 +811,9 @@ class OpenSubClient {
       var files: [SubtitleFile]
 #if DEBUG
       var foreignPartsOnly: Bool?
+#endif
       var fps: Double?
+#if DEBUG
       var fromTrusted: Bool?
       var hd: Bool?
       var hearingImpaired: Bool?

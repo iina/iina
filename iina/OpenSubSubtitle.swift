@@ -74,12 +74,18 @@ class OpenSub {
       let attributes = subtitle.attributes
       let downloadCount = String(attributes.downloadCount)
       let filename = attributes.files[0].fileName
+      let framesPerSecond: String
+      if let fps = attributes.fps, fps != 0 {
+        framesPerSecond = " \(String(Int(fps.rounded(.up)))) fps"
+      } else {
+        framesPerSecond = ""
+      }
       let language = attributes.language
       let rating = String(attributes.ratings)
       let uploadDate = OpenSub.Subtitle.dateFormatter.string(from: attributes.uploadDate)
       return (
         filename,
-        "\(language) \u{2b07}\(downloadCount) \u{2605}\(rating)",
+        "\(language)\(framesPerSecond) \u{2b07}\(downloadCount) \u{2605}\(rating)",
         uploadDate
       )
     }

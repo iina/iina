@@ -89,6 +89,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var deleteCurrentFile: NSMenuItem!
   @IBOutlet weak var newWindow: NSMenuItem!
   @IBOutlet weak var newWindowSeparator: NSMenuItem!
+  @IBOutlet weak var otherKeyBindingsMenu: NSMenu!
   // Playback
   @IBOutlet weak var playbackMenu: NSMenu!
   @IBOutlet weak var pause: NSMenuItem!
@@ -223,6 +224,8 @@ class MenuController: NSObject, NSMenuDelegate {
       newWindowSeparator.isHidden = false
       newWindow.isHidden = false
     }
+
+    otherKeyBindingsMenu.delegate = self
 
     // Playback menu
 
@@ -418,6 +421,13 @@ class MenuController: NSObject, NSMenuDelegate {
   }
 
   // MARK: - Update Menus
+
+  func updateOtherKeyBindings(replacingAllWith newItems: [NSMenuItem]) {
+    otherKeyBindingsMenu.removeAllItems()
+    for item in newItems {
+      otherKeyBindingsMenu.addItem(item)
+    }
+  }
 
   private func updatePlaylist() {
     playlistMenu.removeAllItems()
@@ -870,44 +880,62 @@ class MenuController: NSObject, NSMenuDelegate {
       settings.append((pictureInPicture, true, ["toggle-pip"], false, nil, nil))
     }
 
+    var otherActionsMenuItems: [NSMenuItem] = []
+
+    /// Loop over all the list of menu items which can be matched with one or more `KeyMapping`s
     settings.forEach { (menuItem, isIINACmd, actions, normalizeLastNum, numRange, l10nKey) in
-      var bound = false
+      /// Loop over all key bindings. Examine each binding's action and see if it is equivalent to `menuItem`'s action
+      var didBindMenuItem = false
       for kb in keyBindings {
         guard kb.isIINACommand == isIINACmd else { continue }
         let (sameAction, value, extraData) = sameKeyAction(kb.action, actions, normalizeLastNum, numRange)
         if sameAction, let (kEqv, kMdf) = KeyCodeHelper.macOSKeyEquivalent(from: kb.normalizedMpvKey) {
-          menuItem.keyEquivalent = kEqv
-          menuItem.keyEquivalentModifierMask = kMdf
-          if let value = value, let l10nKey = l10nKey {
-            menuItem.title = String(format: NSLocalizedString("menu." + l10nKey, comment: ""), abs(value))
-            if let extraData = extraData {
-              menuItem.representedObject = (value, extraData)
-            } else {
-              menuItem.representedObject = value
-            }
+          /// If we got here, `KeyMapping`'s action qualifies for being bound to `menuItem`.
+          let kbMenuItem: NSMenuItem
+
+          if didBindMenuItem {
+            /// This `KeyMapping` matches a menu item whose key equivalent was set from a different `KeyMapping`.
+            /// There can only be one key equivalent per menu item, so we will create a duplicate menu item and put it in a hidden menu.
+            kbMenuItem = NSMenuItem(title: menuItem.title, action: menuItem.action, keyEquivalent: "")
+            kbMenuItem.tag = menuItem.tag
+            otherActionsMenuItems.append(kbMenuItem)
+          } else {
+            /// This `KeyMapping` was the first match found for this menu item.
+            kbMenuItem = menuItem
+            didBindMenuItem = true
           }
-          bound = true
-          break
+          updateMenuItem(kbMenuItem, kEqv: kEqv, kMdf: kMdf, l10nKey: l10nKey, value: value, extraData: extraData)
         }
       }
 
-      if !bound {
-        menuItem.keyEquivalent = ""
-        menuItem.keyEquivalentModifierMask = []
-
+      if !didBindMenuItem {
         // Need to regenerate `title` and `representedObject` from their default values.
         // This is needed for the case where the menu item previously matched to a key binding, but now there is no match.
         // Obviously this is a little kludgey, but it avoids having to do a big refactor and/or writing a bunch of new code.
         let (_, value, extraData) = sameKeyAction(actions, actions, normalizeLastNum, numRange)
-        if let value = value, let l10nKey = l10nKey {
-          menuItem.title = String(format: NSLocalizedString("menu." + l10nKey, comment: ""), abs(value))
-          if let extraData = extraData {
-            menuItem.representedObject = (value, extraData)
-          } else {
-            menuItem.representedObject = value
-          }
-        }
+        updateMenuItem(menuItem, kEqv: "", kMdf: [], l10nKey: l10nKey, value: value, extraData: extraData)
       }
+    }
+
+    updateOtherKeyBindings(replacingAllWith: otherActionsMenuItems)
+  }
+
+  /// Updates the key equivalent of the given menu item.
+  /// May also update its title and representedObject, for items which can change based on some param value(s).
+  private func updateMenuItem(_ menuItem: NSMenuItem, kEqv: String, kMdf: NSEvent.ModifierFlags, l10nKey: String?, value: Double?, extraData: Any?) {
+    menuItem.keyEquivalent = kEqv
+    menuItem.keyEquivalentModifierMask = kMdf
+
+    if let value = value, let l10nKey = l10nKey {
+      menuItem.title = String(format: NSLocalizedString("menu." + l10nKey, comment: ""), abs(value))
+      if let extraData = extraData {
+        menuItem.representedObject = (value, extraData)
+      } else {
+        menuItem.representedObject = value
+      }
+    } else {
+      // Clear any previous value
+      menuItem.representedObject = nil
     }
   }
 

@@ -319,10 +319,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       var lastPlayerCore: PlayerCore? = nil
       let getNewPlayerCore = { [self] () -> PlayerCore in
         let pc = PlayerCore.newPlayerCore
-        commandLineStatus.assignMPVArguments(to: pc)
-        if commandLineStatus.shufflePlaylist {
-          pc.shufflePending = true
-        }
+        commandLineStatus.applyMPVArguments(to: pc)
         lastPlayerCore = pc
         return pc
       }
@@ -1041,7 +1038,6 @@ struct CommandLineStatus {
   var openSeparateWindows = false
   var enterMusicMode = false
   var enterPIP = false
-  var shufflePlaylist = false
   var mpvArguments: [(String, String)] = []
   var iinaArguments: [(String, String)] = []
   var filenames: [String] = []
@@ -1064,13 +1060,7 @@ struct CommandLineStatus {
           } else {
             argPair = (strippedName, String(splitted[1]))
           }
-
-          if argPair.0 == "shuffle" && argPair.1 == "yes" {
-            Logger.log("Found shuffle request in command-line args. Will convert it to \"playlist-shuffle\" command")
-            shufflePlaylist = true
-          } else {
-            mpvArguments.append(argPair)
-          }
+          mpvArguments.append(argPair)
         }
       } else {
         // other args
@@ -1095,10 +1085,16 @@ struct CommandLineStatus {
     }
   }
 
-  func assignMPVArguments(to playerCore: PlayerCore) {
+  func applyMPVArguments(to playerCore: PlayerCore) {
     Logger.log("Setting mpv properties from arguments: \(mpvArguments)")
-    for arg in mpvArguments {
-      playerCore.mpv.setString(arg.0, arg.1)
+    for argPair in mpvArguments {
+      if argPair.0 == "shuffle" && argPair.1 == "yes" {
+        // Special handling for this one
+        Logger.log("Found \"shuffle\" request in command-line args. Adding mpv hook to shuffle playlist")
+        playerCore.addShufflePlaylistHook()
+        continue
+      }
+      playerCore.mpv.setString(argPair.0, argPair.1)
     }
   }
 }

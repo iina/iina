@@ -172,8 +172,8 @@ class PlayerCore: NSObject {
 
   var isSearchingOnlineSubtitle = false
 
-  /// For supporting `--shuffle` arg, to shuffle playlist when launching from command line
-  var shufflePending = false
+  /// For supporting mpv `--shuffle` arg, to shuffle playlist when launching from command line
+  @Atomic private var shufflePending = false
 
   // test seeking
   var triedUsingExactSeekForCurrentFile: Bool = false
@@ -1495,20 +1495,44 @@ class PlayerCore: NSObject {
     return GeometryDef.parse(geometry)
   }
 
+  /// Uses an mpv `on_before_start_file` hook to honor mpv's `shuffle` command via IINA CLI.
+  ///
+  /// There is currently no way to remove an mpv hook once it has been added, so to minimize potential impact and/or side effects
+  /// when not in use:
+  /// 1. Only add the mpv hook if `--mpv-shuffle` (or equivalent) is specified. Because this decision only happens at launch,
+  /// there is no risk of adding the hook more than once per player.
+  /// 2. Use `shufflePending` to decide if it needs to run again. Set to `false` after use, and check its value as early as possible.
+  func addShufflePlaylistHook() {
+    $shufflePending.withLock{ $0 = true }
+
+    func callback(next: @escaping () -> Void) {
+      var mustShuffle = false
+      $shufflePending.withLock{ shufflePending in
+        if shufflePending {
+          mustShuffle = true
+          shufflePending = false
+        }
+      }
+
+      guard mustShuffle else {
+        Logger.log("Triggered on_before_start_file hook, but no shuffle needed", level: .verbose, subsystem: subsystem)
+        next()
+        return
+      }
+
+      DispatchQueue.main.async { [self] in
+        Logger.log("Running on_before_start_file hook: shuffling playlist", subsystem: subsystem)
+        mpv.command(.playlistShuffle)
+        /// will cancel this file load sequence (so `fileLoaded` will not be called), then will start loading item at index 0
+        mpv.command(.playlistPlayIndex, args: ["0"])
+        next()
+      }
+    }
+
+    mpv.addHook(MPVHook.onBeforeStartFile, hook: MPVHookValue(withBlock: callback))
+  }
 
   // MARK: - Listeners
-
-  /// Called via mpv hook `on_before_start_file`, prior to file start sequence.
-  func fileWillStart() {
-    /// Currently this method is only used to honor `--shuffle` arg via iina-cli
-    guard shufflePending else { return }
-    shufflePending = false
-
-    Logger.log("Shuffling playlist", subsystem: subsystem)
-    mpv.command(.playlistShuffle)
-    /// will cancel this file load sequence (so `fileLoaded` will not be called), then will start loading item at index 0
-    mpv.command(.playlistPlayIndex, args: ["0"])
-  }
 
   func fileStarted(path: String) {
     Logger.log("File started", subsystem: subsystem)

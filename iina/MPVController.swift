@@ -438,14 +438,6 @@ not applying FFmpeg 9599 workaround
     // Request tick event.
     // chkErr(mpv_request_event(mpv, MPV_EVENT_TICK, 1))
 
-    addHook(MPVHook.onBeforeStartFile, hook: MPVHookValue(withBlock: { [self] next in
-      DispatchQueue.main.async { [self] in
-        Logger.log("Processing mpv 'on_before_start_file' hook", level: .verbose, subsystem: player.subsystem)
-        player.fileWillStart()
-        next()
-      }
-    }))
-
     // Set a custom function that should be called when there are new events.
     mpv_set_wakeup_callback(self.mpv, { (ctx) in
       let mpvController = unsafeBitCast(ctx, to: MPVController.self)
@@ -826,7 +818,7 @@ not applying FFmpeg 9599 workaround
   func removeHooks(withIdentifier id: String) {
     hooks.filter { (k, v) in v.isJavascript && v.id == id }.keys.forEach { hooks.removeValue(forKey: $0) }
   }
-
+  
   // MARK: - Events
 
   // Read event and handle it async

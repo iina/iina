@@ -1607,7 +1607,7 @@ class PlayerCore: NSObject {
         HistoryController.shared.add(url, duration: duration.second)
       }
       if Preference.bool(for: .recordRecentFiles) && Preference.bool(for: .trackAllFilesInRecentOpenMenu) {
-        DispatchQueue.main.sync { (NSApp.delegate as? AppDelegate)?.noteNewRecentDocumentURL(url) }
+        DispatchQueue.main.sync { (NSApp.delegate as! AppDelegate).noteNewRecentDocumentURL(url) }
       }
 
     }

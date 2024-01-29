@@ -204,9 +204,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
     Logger.log("App will launch")
 
-#if DEBUG
+    // Workaround macOS Sonoma clearing the recent documents list when the IINA code is not signed
+    // with IINA's certificate as is the case for developer and nightly builds.
     restoreRecentDocuments()
-#endif
 
     // register for url event
     NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(self.handleURLEvent(event:withReplyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
@@ -832,11 +832,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     if panel.runModal() == .OK {
       if Preference.bool(for: .recordRecentFiles) {
         for url in panel.urls {
-          NSDocumentController.shared.noteNewRecentDocumentURL(url)
+          noteNewRecentDocumentURL(url)
         }
-#if DEBUG
-        saveRecentDocuments()
-#endif
       }
       let isAlternative = (sender as? NSMenuItem)?.tag == AlternativeMenuItemTag
       let playerCore = PlayerCore.activeOrNewForMenuAction(isAlternative: isAlternative)
@@ -959,16 +956,39 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
   // MARK: - Recent Documents
 
-#if DEBUG
+  /// Empties the recent documents list for the application.
+  ///
+  /// This is part of a workaround for macOS Sonoma clearing the list of recent documents. See the method
+  /// `restoreRecentDocuments` and the issue [#4688](https://github.com/iina/iina/issues/4688) for more
+  /// information..
+  /// - Parameter sender: The object that initiated the clearing of the recent documents.
+  @IBAction
+  func clearRecentDocuments(_ sender: Any?) {
+    NSDocumentController.shared.clearRecentDocuments(sender)
+    saveRecentDocuments()
+  }
+
+  /// Adds or replaces an Open Recent menu item corresponding to the data located by the URL.
+  ///
+  /// This is part of a workaround for macOS Sonoma clearing the list of recent documents. See the method
+  /// `restoreRecentDocuments` and the issue [#4688](https://github.com/iina/iina/issues/4688) for more
+  /// information..
+  /// - Parameter url: The URL to evaluate.
+  func noteNewRecentDocumentURL(_ url: URL) {
+    NSDocumentController.shared.noteNewRecentDocumentURL(url)
+    saveRecentDocuments()
+  }
+
   /// Restore the list of recently opened files.
   ///
   /// For macOS Sonoma `sharedfilelistd` was changed to tie the list of recent documents to the app based on its certificate.
   /// if `sharedfilelistd` determines the list is being accessed by a different app then it clears the list. See issue
   /// [#4688](https://github.com/iina/iina/issues/4688) for details.
   ///
-  /// This new behavior does not cause a problem when the code is signed with IINA's certificate. However developer builds use an
-  /// ad hoc certificate. This causes the list of recently opened files to be cleared each time a developer runs a new build. As a
-  /// workaround a copy of the list of recent documents is saved in IINA's preference file to preserve the list across builds.
+  /// This new behavior does not cause a problem when the code is signed with IINA's certificate. However developer and nightly
+  /// builds use an ad hoc certificate. This causes the list of recently opened files to be cleared each time a different unsigned IINA build
+  /// is run. As a workaround a copy of the list of recent documents is saved in IINA's preference file to preserve the list and allow it to
+  /// be restored when `sharedfilelistd` clears its list.
   ///
   /// If the following is true:
   /// - Running under macOS Sonoma and above
@@ -978,10 +998,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   ///
   /// Then this method assumes that the macOS daemon `sharedfilelistd` cleared the list and it populates the list of recent
   /// document URLs with the list stored in IINA's settings.
-  /// - Note: This is not a perfect workaround. For example, running a version of IINA signed with IINA's certificate after running a
-  ///         developer build will result in an empty list of recent files. This workaround is only intended to provide a better
-  ///         experience for developers. Improving the workaround would require including it in the released version of IINA.
-  ///         As the released version is working fine, we do not want to do that.
   private func restoreRecentDocuments() {
     guard #available(macOS 14, *), Preference.bool(for: .recordRecentFiles),
           NSDocumentController.shared.recentDocumentURLs.isEmpty,
@@ -1012,10 +1028,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   /// Save the list of recent documents in [NSDocumentController.shared.recentDocumentURLs](https://developer.apple.com/documentation/appkit/nsdocumentcontroller/1514976-recentdocumenturls)
   /// to `recentDocuments` in the IINA settings property file.
   ///
-  /// This is a workaround for developers. See the method `restoreRecentDocuments` and the issue
-  /// [#4688](https://github.com/iina/iina/issues/4688) for more information..
+  /// This is part of a workaround for macOS Sonoma clearing the list of recent documents. See the method
+  /// `restoreRecentDocuments` and the issue [#4688](https://github.com/iina/iina/issues/4688) for more
+  /// information..
   func saveRecentDocuments() {
-    guard #available(macOS 14, *), Preference.bool(for: .recordRecentFiles) else { return }
+    guard #available(macOS 14, *) else { return }
     var recentDocuments: [Any] = []
     for document in NSDocumentController.shared.recentDocumentURLs {
       guard let bookmark = try? document.bookmarkData() else {
@@ -1026,9 +1043,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       recentDocuments.append(bookmark)
     }
     Preference.set(recentDocuments, for: .recentDocuments)
-    Logger.log("Saved list of recent documents")
+    if recentDocuments.isEmpty {
+      Logger.log("Cleared list of recent documents")
+    } else {
+      Logger.log("Saved list of recent documents")
+    }
   }
-#endif
 }
 
 

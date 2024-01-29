@@ -129,10 +129,7 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
     Utility.quickAskPanel("clear_history", sheetWindow: view.window) { respond in
       guard respond == .alertFirstButtonReturn else { return }
       try? FileManager.default.removeItem(atPath: Utility.playbackHistoryURL.path)
-      NSDocumentController.shared.clearRecentDocuments(self)
-#if DEBUG
-      (NSApp.delegate as? AppDelegate)?.saveRecentDocuments()
-#endif
+      (NSApp.delegate as! AppDelegate).clearRecentDocuments(self)
       Preference.set(nil, for: .iinaLastPlayedFilePath)
       self.playHistoryClearedLabel.isHidden = false
     }

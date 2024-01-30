@@ -10,13 +10,10 @@ import Cocoa
 
 fileprivate extension String {
   func removedLastSemicolon() -> String {
-    let trimed = trimWhitespaceSuffix()
-    guard !trimed.hasSuffix(":") else { return String(trimed.dropLast()) }
+    if self.hasSuffix(":") || self.hasSuffix("：") {
+      return String(self.dropLast())
+    }
     return self
-  }
-
-  func trimWhitespaceSuffix() -> String {
-    self.replacingOccurrences(of: "\\s+$", with: "", options: .regularExpression)
   }
 }
 
@@ -204,16 +201,10 @@ class PreferenceWindowController: NSWindowController {
       ["utilities", "PrefUtilsViewController"],
     ]
     if IINA_ENABLE_PLUGIN_SYSTEM {
-      viewMap.insert(["plugins", "PrefPluginViewController"], at: 8)
+      viewMap.insert(["plugin", "PrefPluginViewController"], at: 8)
     }
     let labelDict = [String: [String: [String]]](
       uniqueKeysWithValues: viewMap.map { (NSLocalizedString("preference.\($0[0])", comment: ""), self.getLabelDict(inNibNamed: $0[1])) })
-
-#if DEBUG
-    // As the following call emits a lot of messages that are only needed when debugging the NIB
-    // scan it is checked into source control commented out.
-    //logLabelDict(labelDict)
-#endif
 
     indexingQueue.async{
       self.isIndexing = true
@@ -226,7 +217,7 @@ class PreferenceWindowController: NSWindowController {
     dismissCompletionList()
   }
 
-  // MARK: - Searching
+  // MARK: Searching
 
   private func makeTries(_ labelDict: [String: [String: [String]]]) {
     // search for sections and labels
@@ -242,7 +233,7 @@ class PreferenceWindowController: NSWindowController {
 
   @IBAction func searchFieldAction(_ sender: Any) {
     guard !isIndexing else { return }
-    let searchString = searchField.stringValue.lowercased().trimWhitespaceSuffix().removedLastSemicolon()
+    let searchString = searchField.stringValue.lowercased()
     if searchString == lastString { return }
     if searchString.count == 0 {
       dismissCompletionList()
@@ -275,7 +266,7 @@ class PreferenceWindowController: NSWindowController {
     }
   }
 
-  // MARK: - Tabs
+  // MARK: Tabs
 
   private func loadTab(at index: Int, thenFindLabelTitled title: String? = nil) {
     // load view
@@ -322,7 +313,7 @@ class PreferenceWindowController: NSWindowController {
       }) else {
         return nil
     }
-    let title = formSearchTerm((sectionTitleLabel as! NSTextField).stringValue)
+    let title = (sectionTitleLabel as! NSTextField).stringValue
     var labels = findLabels(in: section)
     labels.remove(at: labels.firstIndex(of: title)!)
     return (title, labels)
@@ -339,16 +330,6 @@ class PreferenceWindowController: NSWindowController {
     return labels
   }
 
-  /// Form a search term from the given string.
-  ///
-  /// The UI labels and titles contain extraneous characters that must be removed for them to be used as a search term.
-  /// - Parameter string: The string to turn into a search term.
-  /// - Returns: The given string with extraneous characters removed.
-  private func formSearchTerm(_ string: String) -> String {
-    string.trimmingCharacters(in: .whitespacesAndNewlines)
-      .replacingOccurrences(of: "[:…()\"\n]", with: "", options: .regularExpression)
-  }
-
   private func findLabel(titled title: String, in view: NSView) -> NSView? {
     for subView in view.subviews {
       if getTitle(from: subView) == title {
@@ -363,12 +344,12 @@ class PreferenceWindowController: NSWindowController {
 
   private func getTitle(from view: NSView) -> String? {
     if let label = view as? NSTextField,
-      !label.isEditable, label.textColor == .labelColor, label.stringValue != "Label",
+      !label.isEditable, label.textColor == .labelColor,
       !label.identifierStartsWith("AccessoryLabel"), !label.identifierStartsWith("Trigger") {
-      return formSearchTerm(label.stringValue)
+      return label.stringValue
     } else if let button = view as? NSButton,
       (button.identifierStartsWith("FunctionalButton") || button.bezelStyle == .regularSquare) {
-      return formSearchTerm(button.title)
+      return button.title
     }
     return nil
   }
@@ -396,29 +377,6 @@ class PreferenceWindowController: NSWindowController {
       // vc.perform(#selector(vc.installPluginAction(localPackageURL:)), with: url, afterDelay: 0.25)
     }
   }
-
-  // MARK: - Debugging
-
-#if DEBUG
-  /// Log the search terms found in the NIB scan.
-  ///
-  /// The log messages emitted by this method are only useful to developers when validating the results of scanning the settings NIBs.
-  /// - Parameter labelDict: Nested dictionary  containing the search terms that were found in the scan.
-  private func logLabelDict(_ labelDict: [String: [String: [String]]]) {
-    Logger.log("--------------------------------------------------")
-    Logger.log("Search terms found in scan of settings panel NIBs:")
-    for (section, subSection) in labelDict {
-      Logger.log("\(section)")
-      for (subSectionName, contents) in subSection {
-        Logger.log("  \(subSectionName)")
-        for label in contents {
-          Logger.log("    \(label)")
-        }
-      }
-    }
-    Logger.log("--------------------------------------------------")
-  }
-#endif
 }
 
 extension PreferenceWindowController: NSTableViewDelegate, NSTableViewDataSource {

@@ -818,7 +818,7 @@ not applying FFmpeg 9599 workaround
   func removeHooks(withIdentifier id: String) {
     hooks.filter { (k, v) in v.isJavascript && v.id == id }.keys.forEach { hooks.removeValue(forKey: $0) }
   }
-
+  
   // MARK: - Events
 
   // Read event and handle it async

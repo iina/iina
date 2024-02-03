@@ -227,7 +227,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     var iinaArgFilenames: [String] = []
     var dropNextArg = false
 
-    Logger.log("Got arguments \(arguments)")
+    Logger.log("Command-line args: \(arguments)")
     for arg in arguments {
       if dropNextArg {
         dropNextArg = false
@@ -251,9 +251,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       }
     }
 
-    Logger.log("IINA arguments: \(iinaArgs)")
-    Logger.log("Filenames from arguments: \(iinaArgFilenames)")
     commandLineStatus.parseArguments(iinaArgs)
+    Logger.log("Filenames from args: \(iinaArgFilenames)")
+    Logger.log("Derived mpv properties from args: \(commandLineStatus.mpvArguments)")
 
     print("IINA \(version) Build \(build)")
 
@@ -317,9 +317,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       Timer.scheduledTimer(timeInterval: TimeInterval(0.1), target: self, selector: #selector(self.checkForShowingInitialWindow), userInfo: nil, repeats: false)
     } else {
       var lastPlayerCore: PlayerCore? = nil
-      let getNewPlayerCore = { () -> PlayerCore in
+      let getNewPlayerCore = { [self] () -> PlayerCore in
         let pc = PlayerCore.newPlayerCore
-        self.commandLineStatus.assignMPVArguments(to: pc)
+        commandLineStatus.applyMPVArguments(to: pc)
         lastPlayerCore = pc
         return pc
       }
@@ -1073,10 +1073,14 @@ struct CommandLineStatus {
         let strippedName = String(name.dropFirst(4))
         if strippedName == "-" {
           isStdin = true
-        } else if splitted.count <= 1 {
-          mpvArguments.append((strippedName, "yes"))
         } else {
-          mpvArguments.append((strippedName, String(splitted[1])))
+          let argPair: (String, String)
+          if splitted.count <= 1 {
+            argPair = (strippedName, "yes")
+          } else {
+            argPair = (strippedName, String(splitted[1]))
+          }
+          mpvArguments.append(argPair)
         }
       } else {
         // other args
@@ -1101,10 +1105,16 @@ struct CommandLineStatus {
     }
   }
 
-  func assignMPVArguments(to playerCore: PlayerCore) {
+  func applyMPVArguments(to playerCore: PlayerCore) {
     Logger.log("Setting mpv properties from arguments: \(mpvArguments)")
-    for arg in mpvArguments {
-      playerCore.mpv.setString(arg.0, arg.1)
+    for argPair in mpvArguments {
+      if argPair.0 == "shuffle" && argPair.1 == "yes" {
+        // Special handling for this one
+        Logger.log("Found \"shuffle\" request in command-line args. Adding mpv hook to shuffle playlist")
+        playerCore.addShufflePlaylistHook()
+        continue
+      }
+      playerCore.mpv.setString(argPair.0, argPair.1)
     }
   }
 }

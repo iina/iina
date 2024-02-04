@@ -1125,19 +1125,22 @@ class MainWindowController: PlayerWindowController {
       if recognizer.state == .began {
         // began
         lastMagnification = recognizer.magnification
-        if window.frame.height >= screenFrame.height - window.frame.height / 50 && lastMagnification > 0 {
+        if window.frame.height >= screenFrame.height && lastMagnification > 0 {
           self.toggleWindowFullScreen()
           return
         }
       } else if recognizer.state == .changed {
         // changed
-        let offset = recognizer.magnification - lastMagnification + 1.0;
+        let offset = recognizer.magnification - lastMagnification + 1.0
         let newWidth = window.frame.width * offset
         let newHeight = newWidth / window.aspectRatio.aspect
 
         //Check against max & min threshold
         if newHeight < screenFrame.height && newHeight > minSize.height && newWidth > minSize.width {
-          let newSize = NSSize(width: newWidth, height: newHeight);
+          let newSize = NSSize(width: newWidth, height: newHeight)
+          window.setFrame(window.frame.centeredResize(to: newSize), display: true)
+        } else if newHeight >= screenFrame.height {
+          let newSize = NSSize(width: screenFrame.width, height: screenFrame.height)
           window.setFrame(window.frame.centeredResize(to: newSize), display: true)
         }
 

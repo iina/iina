@@ -74,8 +74,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   @IBOutlet weak var addBtn: NSButton!
   @IBOutlet weak var removeBtn: NSButton!
   
-  private var playlistTotalLengthIsReady = false
-  private var playlistTotalLength: Double? = nil
+  @Atomic private var playlistTotalLengthIsReady = false
+  @Atomic private var playlistTotalLength: Double? = nil
 
   var downShift: CGFloat = 0 {
     didSet {

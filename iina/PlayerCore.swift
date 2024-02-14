@@ -1171,7 +1171,9 @@ class PlayerCore: NSObject {
   }
 
   func loadExternalSubFile(_ url: URL, delay: Bool = false) {
-    if let track = info.subTracks.first(where: { $0.externalFilename == url.path }) {
+    var track: MPVTrack?
+    info.$subTracks.withLock { track = $0.first(where: { $0.externalFilename == url.path }) }
+    if let track = track {
       mpv.command(.subReload, args: [String(track.id)], checkError: false)
       return
     }
@@ -1195,16 +1197,20 @@ class PlayerCore: NSObject {
 
   func reloadAllSubs() {
     let currentSubName = info.currentTrack(.sub)?.externalFilename
-    for subTrack in info.subTracks {
-      mpv.command(.subReload, args: ["\(subTrack.id)"], checkError: false) { code in
-        if code < 0 {
-          self.log("Failed reloading subtitles: error code \(code)", level: .error)
+    info.$subTracks.withLock {
+      for subTrack in $0 {
+        mpv.command(.subReload, args: ["\(subTrack.id)"], checkError: false) { code in
+          if code < 0 {
+            self.log("Failed reloading subtitles: error code \(code)", level: .error)
+          }
         }
       }
     }
     getTrackInfo()
-    if let currentSub = info.subTracks.first(where: {$0.externalFilename == currentSubName}) {
-      setTrack(currentSub.id, forType: .sub)
+    info.$subTracks.withLock {
+      if let currentSub = $0.first(where: {$0.externalFilename == currentSubName}) {
+        setTrack(currentSub.id, forType: .sub)
+      }
     }
     mainWindow?.quickSettingView.reload()
   }
@@ -1752,31 +1758,28 @@ class PlayerCore: NSObject {
     }
     // call `trackListChanged` to load tracks and check whether need to switch to music mode
     trackListChanged()
-    // main thread stuff
-    DispatchQueue.main.sync {
-      getPlaylist()
-      getChapters()
-      syncAbLoop()
-      refreshSyncUITimer()
-      if #available(macOS 10.12.2, *) {
-        touchBarSupport.setupTouchBarUI()
-      }
+    getPlaylist()
+    getChapters()
+    syncAbLoop()
+    refreshSyncUITimer()
+    if #available(macOS 10.12.2, *) {
+      touchBarSupport.setupTouchBarUI()
+    }
 
-      if info.aid == 0 {
-        mainWindow.muteButton.isEnabled = false
-        mainWindow.volumeSlider.isEnabled = false
-      }
+    if info.aid == 0 {
+      mainWindow.muteButton.isEnabled = false
+      mainWindow.volumeSlider.isEnabled = false
+    }
 
-      if info.vid == 0 {
-        notifyMainWindowVideoSizeChanged()
-      }
+    if info.vid == 0 {
+      notifyMainWindowVideoSizeChanged()
+    }
 
-      if self.isInMiniPlayer {
-        miniPlayer.defaultAlbumArt.isHidden = self.info.vid != 0
-      }
+    if self.isInMiniPlayer {
+      miniPlayer.defaultAlbumArt.isHidden = self.info.vid != 0
     }
     if Preference.bool(for: .fullScreenWhenOpen) && !mainWindow.fsState.isFullscreen && !isInMiniPlayer {
-      DispatchQueue.main.async(execute: self.mainWindow.toggleWindowFullScreen)
+      mainWindow.toggleWindowFullScreen()
     }
     // add to history
     if let url = info.currentURL {
@@ -1785,9 +1788,8 @@ class PlayerCore: NSObject {
         HistoryController.shared.add(url, duration: duration.second)
       }
       if Preference.bool(for: .recordRecentFiles) && Preference.bool(for: .trackAllFilesInRecentOpenMenu) {
-        DispatchQueue.main.sync { AppDelegate.shared.noteNewRecentDocumentURL(url) }
+        AppDelegate.shared.noteNewRecentDocumentURL(url)
       }
-
     }
     postNotification(.iinaFileLoaded)
     events.emit(.fileLoaded, data: info.currentURL?.absoluteString ?? "")
@@ -1802,10 +1804,8 @@ class PlayerCore: NSObject {
     guard !isShuttingDown, !isShutdown else { return }
     info.aid = Int(mpv.getInt(MPVOption.TrackSelection.aid))
     guard mainWindow.loaded else { return }
-    DispatchQueue.main.sync {
-      mainWindow?.muteButton.isEnabled = (info.aid != 0)
-      mainWindow?.volumeSlider.isEnabled = (info.aid != 0)
-    }
+    mainWindow?.muteButton.isEnabled = (info.aid != 0)
+    mainWindow?.volumeSlider.isEnabled = (info.aid != 0)
     postNotification(.iinaAIDChanged)
     sendOSD(.track(info.currentTrack(.audio) ?? .noneAudioTrack))
   }
@@ -1817,9 +1817,7 @@ class PlayerCore: NSObject {
 
   func needReloadQuickSettingsView() {
     guard !isShuttingDown, !isShutdown else { return }
-    DispatchQueue.main.async {
-      self.mainWindow.quickSettingView.reload()
-    }
+    mainWindow.quickSettingView.reload()
   }
 
   func playbackRestarted() {
@@ -1828,23 +1826,18 @@ class PlayerCore: NSObject {
     mainWindow.videoView.videoLayer.draw(forced: true)
 
     if #available(macOS 10.13, *), RemoteCommandController.useSystemMediaControl {
-      DispatchQueue.main.sync {
-        NowPlayingInfoManager.updateInfo()
-      }
+      NowPlayingInfoManager.updateInfo()
     }
-    DispatchQueue.main.async {
-      Timer.scheduledTimer(timeInterval: TimeInterval(0.2), target: self, selector: #selector(self.reEnableOSDAfterFileLoading), userInfo: nil, repeats: false)
-    }
+
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { self.info.disableOSDForFileLoading = false }
   }
 
   func refreshEdrMode() {
     guard mainWindow.loaded else { return }
-    DispatchQueue.main.async { [self] in
-      // No need to refresh if playback is being stopped. Must not attempt to refresh if mpv is
-      // terminating as accessing mpv once shutdown has been initiated can trigger a crash.
-      guard !isStopping, !isStopped, !isShuttingDown, !isShutdown else { return }
-      mainWindow.videoView.refreshEdrMode()
-    }
+    // No need to refresh if playback is being stopped. Must not attempt to refresh if mpv is
+    // terminating as accessing mpv once shutdown has been initiated can trigger a crash.
+    guard !isStopping, !isStopped, !isShuttingDown, !isShutdown else { return }
+    mainWindow.videoView.refreshEdrMode()
   }
 
   func secondarySidChanged() {
@@ -1891,14 +1884,10 @@ class PlayerCore: NSObject {
         log("Skipping music mode auto-switch because overrideAutoSwitchToMusicMode is true", level: .verbose)
       } else if audioStatus == .isAudio && !isInMiniPlayer && !mainWindow.fsState.isFullscreen {
         log("Current media is audio: auto-switching to mini player")
-        DispatchQueue.main.sync {
-          switchToMiniPlayer(automatically: true)
-        }
+        switchToMiniPlayer(automatically: true)
       } else if audioStatus == .notAudio && isInMiniPlayer {
         log("Current media is not audio: auto-switching to normal window")
-        DispatchQueue.main.sync {
-          switchBackFromMiniPlayer(automatically: true)
-        }
+        switchBackFromMiniPlayer(automatically: true)
       }
     }
     postNotification(.iinaTracklistChanged)
@@ -1918,9 +1907,7 @@ class PlayerCore: NSObject {
       // video size changed
       info.displayWidth = dwidth
       info.displayHeight = dheight
-      DispatchQueue.main.sync {
-        notifyMainWindowVideoSizeChanged()
-      }
+      notifyMainWindowVideoSizeChanged()
     }
   }
 
@@ -1936,18 +1923,16 @@ class PlayerCore: NSObject {
     sendOSD(.track(info.currentTrack(.video) ?? .noneVideoTrack))
   }
 
-  @objc
-  private func reEnableOSDAfterFileLoading() {
-    info.disableOSDForFileLoading = false
-  }
-
   private func autoSearchOnlineSub() {
     Thread.sleep(forTimeInterval: 0.5)
-    if Preference.bool(for: .autoSearchOnlineSub) &&
-      !info.isNetworkResource && info.subTracks.isEmpty &&
+    if Preference.bool(for: .autoSearchOnlineSub) && !info.isNetworkResource &&
       (info.videoDuration?.second ?? 0.0) >= Preference.double(for: .autoSearchThreshold) * 60 {
-      DispatchQueue.main.async {
-        self.mainWindow.menuActionHandler.menuFindOnlineSub(.dummy)
+      info.$subTracks.withLock {
+        if $0.isEmpty {
+          DispatchQueue.main.async {
+            self.mainWindow.menuActionHandler.menuFindOnlineSub(.dummy)
+          }
+        }
       }
     }
   }
@@ -2229,7 +2214,7 @@ class PlayerCore: NSObject {
   func generateThumbnails() {
     log("Getting thumbnails")
     info.thumbnailsReady = false
-    info.thumbnails.removeAll(keepingCapacity: true)
+    info.$thumbnails.withLock { $0.removeAll(keepingCapacity: true) }
     info.thumbnailsProgress = 0
     if #available(macOS 10.12.2, *) {
       DispatchQueue.main.async {
@@ -2290,41 +2275,43 @@ class PlayerCore: NSObject {
   func getTrackInfo() {
     info.audioTracks.removeAll(keepingCapacity: true)
     info.videoTracks.removeAll(keepingCapacity: true)
-    info.subTracks.removeAll(keepingCapacity: true)
-    let trackCount = mpv.getInt(MPVProperty.trackListCount)
-    for index in 0..<trackCount {
-      // get info for each track
-      guard let trackType = mpv.getString(MPVProperty.trackListNType(index)) else { continue }
-      let track = MPVTrack(id: mpv.getInt(MPVProperty.trackListNId(index)),
-                           type: MPVTrack.TrackType(rawValue: trackType)!,
-                           isDefault: mpv.getFlag(MPVProperty.trackListNDefault(index)),
-                           isForced: mpv.getFlag(MPVProperty.trackListNForced(index)),
-                           isSelected: mpv.getFlag(MPVProperty.trackListNSelected(index)),
-                           isExternal: mpv.getFlag(MPVProperty.trackListNExternal(index)))
-      track.srcId = mpv.getInt(MPVProperty.trackListNSrcId(index))
-      track.title = mpv.getString(MPVProperty.trackListNTitle(index))
-      track.lang = mpv.getString(MPVProperty.trackListNLang(index))
-      track.codec = mpv.getString(MPVProperty.trackListNCodec(index))
-      track.externalFilename = mpv.getString(MPVProperty.trackListNExternalFilename(index))
-      track.isAlbumart = mpv.getString(MPVProperty.trackListNAlbumart(index)) == "yes"
-      track.decoderDesc = mpv.getString(MPVProperty.trackListNDecoderDesc(index))
-      track.demuxW = mpv.getInt(MPVProperty.trackListNDemuxW(index))
-      track.demuxH = mpv.getInt(MPVProperty.trackListNDemuxH(index))
-      track.demuxFps = mpv.getDouble(MPVProperty.trackListNDemuxFps(index))
-      track.demuxChannelCount = mpv.getInt(MPVProperty.trackListNDemuxChannelCount(index))
-      track.demuxChannels = mpv.getString(MPVProperty.trackListNDemuxChannels(index))
-      track.demuxSamplerate = mpv.getInt(MPVProperty.trackListNDemuxSamplerate(index))
+    info.$subTracks.withLock {
+      $0.removeAll(keepingCapacity: true)
+      let trackCount = mpv.getInt(MPVProperty.trackListCount)
+      for index in 0..<trackCount {
+        // get info for each track
+        guard let trackType = mpv.getString(MPVProperty.trackListNType(index)) else { continue }
+        let track = MPVTrack(id: mpv.getInt(MPVProperty.trackListNId(index)),
+                             type: MPVTrack.TrackType(rawValue: trackType)!,
+                             isDefault: mpv.getFlag(MPVProperty.trackListNDefault(index)),
+                             isForced: mpv.getFlag(MPVProperty.trackListNForced(index)),
+                             isSelected: mpv.getFlag(MPVProperty.trackListNSelected(index)),
+                             isExternal: mpv.getFlag(MPVProperty.trackListNExternal(index)))
+        track.srcId = mpv.getInt(MPVProperty.trackListNSrcId(index))
+        track.title = mpv.getString(MPVProperty.trackListNTitle(index))
+        track.lang = mpv.getString(MPVProperty.trackListNLang(index))
+        track.codec = mpv.getString(MPVProperty.trackListNCodec(index))
+        track.externalFilename = mpv.getString(MPVProperty.trackListNExternalFilename(index))
+        track.isAlbumart = mpv.getString(MPVProperty.trackListNAlbumart(index)) == "yes"
+        track.decoderDesc = mpv.getString(MPVProperty.trackListNDecoderDesc(index))
+        track.demuxW = mpv.getInt(MPVProperty.trackListNDemuxW(index))
+        track.demuxH = mpv.getInt(MPVProperty.trackListNDemuxH(index))
+        track.demuxFps = mpv.getDouble(MPVProperty.trackListNDemuxFps(index))
+        track.demuxChannelCount = mpv.getInt(MPVProperty.trackListNDemuxChannelCount(index))
+        track.demuxChannels = mpv.getString(MPVProperty.trackListNDemuxChannels(index))
+        track.demuxSamplerate = mpv.getInt(MPVProperty.trackListNDemuxSamplerate(index))
 
-      // add to lists
-      switch track.type {
-      case .audio:
-        info.audioTracks.append(track)
-      case .video:
-        info.videoTracks.append(track)
-      case .sub:
-        info.subTracks.append(track)
-      default:
-        break
+        // add to lists
+        switch track.type {
+        case .audio:
+          info.audioTracks.append(track)
+        case .video:
+          info.videoTracks.append(track)
+        case .sub:
+          $0.append(track)
+        default:
+          break
+        }
       }
     }
   }
@@ -2544,7 +2531,7 @@ extension PlayerCore: FFmpegControllerDelegate {
     guard let currentFilePath = info.currentURL?.path, currentFilePath == filename else { return }
     log("Got new thumbnails, progress \(progress)")
     if let thumbnails = thumbnails {
-      info.thumbnails.append(contentsOf: thumbnails)
+      info.$thumbnails.withLock { $0.append(contentsOf: thumbnails) }
     }
     info.thumbnailsProgress = Double(progress) / Double(ffmpegController.thumbnailCount)
     refreshTouchBarSlider()

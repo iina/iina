@@ -1017,7 +1017,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       NSDocumentController.shared.noteNewRecentDocumentURL(bookmark)
     }
     Logger.log("Restored list of recent documents")
-    guard !foundStale else { return }
+    guard foundStale else { return }
     Logger.log("Found stale bookmarks in saved recent documents")
     // Save the recent documents in order to refresh stale bookmarks.
     saveRecentDocuments()

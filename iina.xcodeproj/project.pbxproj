@@ -4521,6 +4521,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 51537C7229FA26DD00F9A472 /* Nightly.xcconfig */;
 			buildSettings = {
+				SKIP_INSTALL = YES;
 			};
 			name = Nightly;
 		};
@@ -4537,6 +4538,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/deps/lib",
 				);
+				SKIP_INSTALL = NO;
 			};
 			name = Nightly;
 		};
@@ -4558,6 +4560,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 51A0F0F629FA2C8E000130CF /* Beta.xcconfig */;
 			buildSettings = {
+				SKIP_INSTALL = YES;
 			};
 			name = Beta;
 		};
@@ -4574,6 +4577,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/deps/lib",
 				);
+				SKIP_INSTALL = NO;
 			};
 			name = Beta;
 		};
@@ -4595,6 +4599,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4964988C2919E47900CD61A5 /* Debug.xcconfig */;
 			buildSettings = {
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -4602,6 +4607,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4964988D2919E47900CD61A5 /* Release.xcconfig */;
 			buildSettings = {
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -4621,6 +4627,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/deps/lib",
 				);
+				SKIP_INSTALL = NO;
 			};
 			name = Debug;
 		};
@@ -4637,6 +4644,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/deps/lib",
 				);
+				SKIP_INSTALL = NO;
 			};
 			name = Release;
 		};

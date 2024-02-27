@@ -31,6 +31,10 @@
 * Command line tool and browser extensions provided
 * In active development
 
+## Install
+
+Head to the [downloads page](https://iina.io/download/) on the [website](https://iina.io/) for the latest release and older releases.
+
 ## Building
 
 IINA uses mpv for media playback. To build IINA, you can either fetch copies of these libraries we have already built (using the instructions below) or build them yourself by skipping to [these instructions](#building-mpv-manually).

@@ -144,11 +144,11 @@ class OnlineSubtitle: NSObject {
 
     func fetchSubtitles(url: URL, player: PlayerCore) -> Promise<[URL]> {
       return getFetcher().fetch(from: url, withProviderID: providerID, playerCore: player)
-      .get { subtitles in
+      .get { [self] subtitles in
         if subtitles.isEmpty {
           throw OnlineSubtitle.CommonError.noResult
         } else {
-          player.sendOSD(.foundSub(subtitles.count))
+          player.sendOSD(.downloadingSub(subtitles.count, name))
         }
       }.thenFlatMap { subtitle in
         subtitle.download()

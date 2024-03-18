@@ -67,6 +67,7 @@ enum OSDMessage {
 
   case startFindingSub(String)  // sub source
   case foundSub(Int)
+  case downloadingSub(Int, String)  // download count, ssub source
   case downloadedSub(String)  // filename
   case savedSub
   case cannotLogin
@@ -289,8 +290,12 @@ enum OSDMessage {
     case .foundSub(let count):
       let str = count == 0 ?
         NSLocalizedString("osd.sub_not_found", comment: "No subtitles found.") :
-        String(format: NSLocalizedString("osd.sub_found", comment: "%d subtitle(s) found. Downloading..."), count)
+        String(format: NSLocalizedString("osd.sub_found", comment: "%d subtitle(s) found."), count)
       return (str, .normal)
+
+    case .downloadingSub(let count, let source):
+      let str = String(format: NSLocalizedString("osd.sub_downloading", comment: "Downloading %d subtitles"), count)
+      return (str, .withText(NSLocalizedString("osd.find_online_sub.source", comment: "from") + " " + source))
 
     case .downloadedSub(let filename):
       return (

@@ -80,7 +80,8 @@
 "osd.find_online_sub" = "Finding online subtitles…";
 "osd.find_online_sub.source" = "from";
 "osd.sub_not_found" = "No subtitles found";
-"osd.sub_found" = "%d subtitles found. Downloading…";
+"osd.sub_found" = "%d subtitles found.";
+"osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "Subtitle downloaded";
 "osd.sub_saved" = "Subtitle saved";
 "osd.network_error" = "Network error";

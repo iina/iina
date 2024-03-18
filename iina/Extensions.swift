@@ -280,6 +280,15 @@ extension BinaryInteger {
   }
 }
 
+// Formats a number to max 2 digits after the decimal, rounded, but will omit trailing zeroes, and no commas or other formatting for large numbers
+fileprivate let fmtDecimalMaxFractionDigits2: NumberFormatter = {
+  let fmt = NumberFormatter()
+  fmt.numberStyle = .decimal
+  fmt.usesGroupingSeparator = false
+  fmt.maximumFractionDigits = 2
+  return fmt
+}()
+
 extension FloatingPoint {
   func clamped(to range: Range<Self>) -> Self {
     if self < range.lowerBound {
@@ -290,6 +299,12 @@ extension FloatingPoint {
       return self
     }
   }
+
+  /// Formats as String, rounding the number to 2 digits after the decimal
+  var stringMaxFrac2: String {
+    return fmtDecimalMaxFractionDigits2.string(for: self)!
+  }
+
 }
 
 extension NSColor {

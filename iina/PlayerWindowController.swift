@@ -238,12 +238,18 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       let returnValue: Int32
       // execute the command
       switch keyBinding.action.first! {
+
       case MPVCommand.abLoop.rawValue:
         abLoop()
         returnValue = 0
+
+      case MPVCommand.screenshot.rawValue:
+        return player.screenshot(fromKeyBinding: keyBinding)
+        
       default:
         returnValue = player.mpv.command(rawString: keyBinding.rawAction)
       }
+
       if returnValue == 0 {
         return true
       } else {

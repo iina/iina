@@ -770,15 +770,81 @@ class PlayerCore: NSObject {
     }
   }
 
-  func screenshot() {
-    guard let vid = info.vid, vid > 0 else { return }
+  func isScreenshotEnabled() -> Bool {
     let saveToFile = Preference.bool(for: .screenshotSaveToFile)
     let saveToClipboard = Preference.bool(for: .screenshotCopyToClipboard)
-    guard saveToFile || saveToClipboard else { return }
+    return saveToFile || saveToClipboard
+  }
 
-    let option = Preference.bool(for: .screenshotIncludeSubtitle) ? "subtitles" : "video"
+  /// Takes a screenshot, attempting to augment mpv's `screenshot` command with additional functionality & control, for example
+  /// the ability to save to clipboard instead of or in addition to file, and displaying the screenshot's thumbnail via the OSD.
+  /// Returns `true` if a command was sent to mpv; `false` if no command was sent.
+  ///
+  /// If the prefs for `Preference.Key.screenshotSaveToFile` and `Preference.Key.screenshotCopyToClipboard` are both `false`,
+  /// this function does nothing and returns `false`.
+  ///
+  /// ## Determining screenshot flags
+  /// If `keyBinding` is present, it should contain an mpv `screenshot` command. If its action includes any flags, they will be
+  /// used. If `keyBinding` is not present or its command has no flags, the value for `Preference.Key.screenshotIncludeSubtitle` will
+  /// be used to determine the flags:
+  /// - If `true`, the command `screenshot subtitles` will be sent to mpv.
+  /// - If `false`, the command `screenshot video` will be sent to mpv.
+  ///
+  /// Note: IINA overrides mpv's behavior in some ways:
+  /// 1. As noted above, if the stored values for `Preference.Key.screenshotSaveToFile` and `Preference.Key.screenshotCopyToClipboard` are
+  /// set to false, all screenshot commands will be ignored.
+  /// 2. When no flags are given with `screenshot`: instead of defaulting to `subtitles` as mpv does, IINA will use the value for
+  /// `Preference.Key.screenshotIncludeSubtitle` to decide between `subtitles` or `video`.
+  @discardableResult
+  func screenshot(fromKeyBinding keyBinding: KeyMapping? = nil) -> Bool {
+    guard isScreenshotEnabled() else {
+      Logger.log("Ignoring screenshot request\(keyBinding == nil ? "" : " from key binding") because all forms of screenshots are disabled in prefs")
+      return false
+    }
 
-    mpv.asyncCommand(.screenshot, args: [option], replyUserdata: MPVController.UserData.screenshot)
+    var commandFlags: [String] = []
+
+    if let keyBinding {
+      var canUseIINAScreenshot = true
+
+      guard let commandName = keyBinding.action.first, commandName == MPVCommand.screenshot.rawValue else {
+        Logger.log("Cannot take screenshot: first token in key binding action is unexpected: \(keyBinding.action)")
+        return false
+      }
+      if keyBinding.action.count > 1 {
+        commandFlags = keyBinding.action[1].split(separator: "+").map{String($0)}
+
+        for flag in commandFlags {
+          switch flag {
+          case "window", "subtitles", "video":
+            // These are supported
+            break
+          case "each-frame":
+            // Option is not currently supported by IINA's screenshot command
+            canUseIINAScreenshot = false
+          default:
+            // Unexpected flag. Let mpv decide how to handle
+            Logger.log("Unrecognized flag for mpv 'screenshot' command: '\(flag)'", level: .warning)
+            canUseIINAScreenshot = false
+          }
+        }
+      }
+
+      if !canUseIINAScreenshot {
+        let returnValue = mpv.command(rawString: keyBinding.rawAction)
+        return returnValue == 0
+      }
+    }
+
+    guard let vid = info.vid, vid > 0 else { return false }  // TODO: why this is needed?
+
+    if commandFlags.isEmpty {
+      let includeSubtitles = Preference.bool(for: .screenshotIncludeSubtitle)
+      commandFlags.append(includeSubtitles ? "subtitles" : "video")
+    }
+
+    mpv.asyncCommand(.screenshot, args: commandFlags, replyUserdata: MPVController.UserData.screenshot)
+    return true
   }
 
   func screenshotCallback() {

@@ -178,16 +178,16 @@ struct Preference {
     static let subOverrideLevel = Key("subOverrideLevel")
     static let subTextFont = Key("subTextFont")
     static let subTextSize = Key("subTextSize")
-    static let subTextColor = Key("subTextColor")
-    static let subBgColor = Key("subBgColor")
+    static let subTextColorString = Key("subTextColorString")
+    static let subBgColorString = Key("subBgColorString")
     static let subBold = Key("subBold")
     static let subItalic = Key("subItalic")
     static let subBlur = Key("subBlur")
     static let subSpacing = Key("subSpacing")
     static let subBorderSize = Key("subBorderSize")
-    static let subBorderColor = Key("subBorderColor")
+    static let subBorderColorString = Key("subBorderColorString")
     static let subShadowSize = Key("subShadowSize")
-    static let subShadowColor = Key("subShadowColor")
+    static let subShadowColorString = Key("subShadowColorString")
     static let subAlignX = Key("subAlignX")
     static let subAlignY = Key("subAlignY")
     static let subMarginX = Key("subMarginX")
@@ -797,16 +797,16 @@ struct Preference {
     .subOverrideLevel: SubOverrideLevel.strip.rawValue,
     .subTextFont: "sans-serif",
     .subTextSize: Float(55),
-    .subTextColor: NSArchiver.archivedData(withRootObject: NSColor.white),
-    .subBgColor: NSArchiver.archivedData(withRootObject: NSColor.clear),
+    .subTextColorString: NSColor.white.usingColorSpace(.deviceRGB)!.mpvColorString,
+    .subBgColorString: NSColor.clear.usingColorSpace(.deviceRGB)!.mpvColorString,
     .subBold: false,
     .subItalic: false,
     .subBlur: Float(0),
     .subSpacing: Float(0),
     .subBorderSize: Float(3),
-    .subBorderColor: NSArchiver.archivedData(withRootObject: NSColor.black),
+    .subBorderColorString: NSColor.black.usingColorSpace(.deviceRGB)!.mpvColorString,
     .subShadowSize: Float(0),
-    .subShadowColor: NSArchiver.archivedData(withRootObject: NSColor.clear),
+    .subShadowColorString: NSColor.clear.usingColorSpace(.deviceRGB)!.mpvColorString,
     .subAlignX: SubAlign.center.rawValue,
     .subAlignY: SubAlign.bottom.rawValue,
     .subMarginX: Float(25),
@@ -931,10 +931,6 @@ struct Preference {
     return ud.value(forKey: key.rawValue)
   }
 
-  static func mpvColor(for key: Key) -> String? {
-    return ud.mpvColor(forKey: key.rawValue)
-  }
-
   static func set(_ value: Bool, for key: Key) {
     ud.set(value, forKey: key.rawValue)
   }
@@ -967,4 +963,9 @@ struct Preference {
     return T.init(key: key) ?? T.defaultValue
   }
 
+  static func keyHasBeenPersisted(_ key: Key) -> Bool {
+    let identifier = InfoDictionary.shared.bundleIdentifier
+    guard let persisted = ud.persistentDomain(forName: identifier) else { return false }
+    return persisted.keys.contains(key.rawValue)
+  }
 }

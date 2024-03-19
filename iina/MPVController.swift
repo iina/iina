@@ -330,8 +330,8 @@ not applying FFmpeg 9599 workaround
     setUserOption(PK.subTextFont, type: .string, forName: MPVOption.Subtitles.subFont)
     setUserOption(PK.subTextSize, type: .int, forName: MPVOption.Subtitles.subFontSize)
 
-    setUserOption(PK.subTextColor, type: .color, forName: MPVOption.Subtitles.subColor)
-    setUserOption(PK.subBgColor, type: .color, forName: MPVOption.Subtitles.subBackColor)
+    setUserOption(PK.subTextColorString, type: .color, forName: MPVOption.Subtitles.subColor)
+    setUserOption(PK.subBgColorString, type: .color, forName: MPVOption.Subtitles.subBackColor)
 
     setUserOption(PK.subBold, type: .bool, forName: MPVOption.Subtitles.subBold)
     setUserOption(PK.subItalic, type: .bool, forName: MPVOption.Subtitles.subItalic)
@@ -340,10 +340,10 @@ not applying FFmpeg 9599 workaround
     setUserOption(PK.subSpacing, type: .float, forName: MPVOption.Subtitles.subSpacing)
 
     setUserOption(PK.subBorderSize, type: .int, forName: MPVOption.Subtitles.subBorderSize)
-    setUserOption(PK.subBorderColor, type: .color, forName: MPVOption.Subtitles.subBorderColor)
+    setUserOption(PK.subBorderColorString, type: .color, forName: MPVOption.Subtitles.subBorderColor)
 
     setUserOption(PK.subShadowSize, type: .int, forName: MPVOption.Subtitles.subShadowOffset)
-    setUserOption(PK.subShadowColor, type: .color, forName: MPVOption.Subtitles.subShadowColor)
+    setUserOption(PK.subShadowColorString, type: .color, forName: MPVOption.Subtitles.subShadowColor)
 
     setUserOption(PK.subAlignX, type: .other, forName: MPVOption.Subtitles.subAlignX) { key in
       let v = Preference.integer(for: key)
@@ -1369,7 +1369,7 @@ not applying FFmpeg 9599 workaround
       code = mpv_set_option_string(mpv, name, value)
 
     case .color:
-      let value = Preference.mpvColor(for: key)
+      let value = Preference.string(for: key)
       code = mpv_set_option_string(mpv, name, value)
       // Random error here (perhaps a Swift or mpv one), so set it twice
       // 「没有什么是 set 不了的；如果有，那就 set 两次」
@@ -1428,7 +1428,7 @@ not applying FFmpeg 9599 workaround
         }
 
       case .color:
-        if let value = Preference.mpvColor(for: info.prefKey) {
+        if let value = Preference.string(for: info.prefKey) {
           setString(info.optionName, value)
         }
 

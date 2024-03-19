@@ -211,6 +211,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     // register for url event
     NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(self.handleURLEvent(event:withReplyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
 
+    // Check for legacy pref entries and migrate them to their modern equivalents
+    LegacyMigration.migrateLegacyPreferences()
+
     // guide window
     if FirstRunManager.isFirstRun(for: .init("firstLaunchAfter\(version)")) {
       guideWindow.show(pages: [.highlights])

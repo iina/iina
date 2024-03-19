@@ -228,3 +228,26 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
   }
 
 }
+
+@objc(MPVColorStringTransformer) class MPVColorStringTransformer: ValueTransformer {
+
+  static override func allowsReverseTransformation() -> Bool {
+    return true
+  }
+
+  static override func transformedValueClass() -> AnyClass {
+    return NSString.self
+  }
+
+  // Serializes an NSColor to an mpv-recognized string
+  override func transformedValue(_ value: Any?) -> Any? {
+    guard let mpvColorString = value as? NSString else { return nil }
+    return NSColor(mpvColorString: String(mpvColorString))
+  }
+
+  override func reverseTransformedValue(_ value: Any?) -> Any? {
+    guard let color = value as? NSColor else { return nil }
+    return color.usingColorSpace(.deviceRGB)!.mpvColorString
+  }
+}
+

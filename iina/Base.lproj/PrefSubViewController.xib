@@ -510,9 +510,9 @@
                                 </constraints>
                                 <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
-                                    <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subTextColor" id="57K-5E-1e6">
+                                    <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subTextColorString" id="add-O6-WUQ">
                                         <dictionary key="options">
-                                            <string key="NSValueTransformerName">NSUnarchiveFromData</string>
+                                            <string key="NSValueTransformerName">MPVColorStringTransformer</string>
                                         </dictionary>
                                     </binding>
                                 </connections>
@@ -543,9 +543,9 @@
                                 </constraints>
                                 <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
-                                    <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subBgColor" id="BDd-oz-ARs">
+                                    <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subBgColorString" id="2V9-yF-uLN">
                                         <dictionary key="options">
-                                            <string key="NSValueTransformerName">NSUnarchiveFromData</string>
+                                            <string key="NSValueTransformerName">MPVColorStringTransformer</string>
                                         </dictionary>
                                     </binding>
                                 </connections>
@@ -674,9 +674,9 @@
                                 </constraints>
                                 <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
-                                    <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subBorderColor" id="K3Q-tt-UYU">
+                                    <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subBorderColorString" id="AOH-6Z-CCF">
                                         <dictionary key="options">
-                                            <string key="NSValueTransformerName">NSUnarchiveFromData</string>
+                                            <string key="NSValueTransformerName">MPVColorStringTransformer</string>
                                         </dictionary>
                                     </binding>
                                 </connections>
@@ -753,9 +753,9 @@
                                                 </constraints>
                                                 <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <connections>
-                                                    <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subShadowColor" id="jjh-lk-EJJ">
+                                                    <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subShadowColorString" id="wvE-s6-v6l">
                                                         <dictionary key="options">
-                                                            <string key="NSValueTransformerName">NSUnarchiveFromData</string>
+                                                            <string key="NSValueTransformerName">MPVColorStringTransformer</string>
                                                         </dictionary>
                                                     </binding>
                                                 </connections>

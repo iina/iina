@@ -23,7 +23,7 @@ class MainMenuActionHandler: NSResponder {
   }
 
   @objc func menuShowInspector(_ sender: AnyObject) {
-    let inspector = (NSApp.delegate as! AppDelegate).inspector
+    let inspector = AppDelegate.shared.inspector
     inspector.showWindow(self)
     inspector.updateInfo()
   }
@@ -277,7 +277,8 @@ extension MainMenuActionHandler {
         }
       }
     }
-    if let vfWindow = (NSApp.delegate as? AppDelegate)?.vfWindow, vfWindow.loaded {
+    let vfWindow = AppDelegate.shared.vfWindow
+    if vfWindow.loaded {
       vfWindow.reloadTable()
     }
   }

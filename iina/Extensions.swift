@@ -360,6 +360,21 @@ extension NSData {
 }
 
 extension Data {
+  init<T> (bytesOf thing: T) where T: FixedWidthInteger {
+    var copyOfThing = thing
+    self.init(bytes: &copyOfThing, count: MemoryLayout<T>.size)
+  }
+
+  init(bytesOf num: Double) {
+    var numCopy = num
+    self.init(bytes: &numCopy, count: MemoryLayout<Double>.size)
+  }
+
+  init(bytesOf ts: timespec) {
+    var mutablePointer = ts
+    self.init(bytes: &mutablePointer, count: MemoryLayout<timespec>.size)
+  }
+
   var md5: String {
     get {
       return (self as NSData).md5() as String
@@ -372,11 +387,6 @@ extension Data {
     }
   }
 
-  init<T>(bytesOf thing: T) {
-    var copyOfThing = thing // Hopefully CoW?
-    self.init(bytes: &copyOfThing, count: MemoryLayout.size(ofValue: thing))
-  }
-  
   func saveToFolder(_ url: URL, filename: String) -> URL? {
     let fileUrl = url.appendingPathComponent(filename)
     do {

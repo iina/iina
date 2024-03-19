@@ -547,9 +547,10 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       Logger.log("Video position not available")
       return
     }
-    [leftLabel, rightLabel].forEach { $0.updateText(with: duration, given: pos) }
+    let speed = player.info.playSpeed
+    [leftLabel, rightLabel].forEach { $0.updateText(with: duration, given: pos, and: speed) }
     if #available(macOS 10.12.2, *) {
-      player.touchBarSupport.touchBarPosLabels.forEach { $0.updateText(with: duration, given: pos) }
+      player.touchBarSupport.touchBarPosLabels.forEach { $0.updateText(with: duration, given: pos, and: speed) }
     }
     if andProgressBar {
       let percentage = (pos.second / duration.second) * 100

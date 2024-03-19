@@ -19,6 +19,7 @@ class DurationDisplayTextField: NSTextField {
   var mode: DisplayMode = .duration { didSet { updateText() } }
   var duration: VideoTime = .zero
   var current: VideoTime = .zero
+  var playSpeed: Double = 1.0
 
   /** Switches the display mode between duration and remaining time */
   private func switchMode() {
@@ -30,9 +31,11 @@ class DurationDisplayTextField: NSTextField {
     }
   }
 
-  func updateText(with duration: VideoTime, given current: VideoTime) {
+
+  func updateText(with duration: VideoTime, given current: VideoTime, and playSpeed: Double) {
     self.duration = duration
     self.current = current
+    self.playSpeed = playSpeed
     updateText()
   }
   
@@ -46,6 +49,9 @@ class DurationDisplayTextField: NSTextField {
       stringValue = duration.stringRepresentationWithPrecision(precision)
     case .remaining:
       var remaining = (duration - current)
+      if Preference.bool(for: .scaleRemainingTime) {
+        remaining.second = remaining.second / playSpeed
+      }
       if remaining.second < 0 {
         remaining = VideoTime.zero
       }

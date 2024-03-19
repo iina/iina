@@ -286,6 +286,15 @@ extension MainMenuActionHandler {
 // MARK: - Audio
 
 extension MainMenuActionHandler {
+  @objc func menuLoadExternalAudio(_ sender: NSMenuItem) {
+    let currentDir = player.info.currentURL?.deletingLastPathComponent()
+    Utility.quickOpenPanel(title: "Load external audio file", chooseDir: false, dir: currentDir,
+                           sheetWindow: player.currentWindow,
+                           allowedFileTypes: Utility.playableFileExt) { url in
+      self.player.loadExternalAudioFile(url)
+    }
+  }
+
   @objc func menuChangeVolume(_ sender: NSMenuItem) {
     if let volumeDelta = sender.representedObject as? Int {
       let newVolume = Double(volumeDelta) + player.info.volume

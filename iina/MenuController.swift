@@ -153,6 +153,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var quickSettingsAudio: NSMenuItem!
   @IBOutlet weak var cycleAudioTracks: NSMenuItem!
   @IBOutlet weak var audioTrackMenu: NSMenu!
+  @IBOutlet weak var loadExternalAudio: NSMenuItem!
   @IBOutlet weak var volumeIndicator: NSMenuItem!
   @IBOutlet weak var increaseVolume: NSMenuItem!
   @IBOutlet weak var increaseVolumeSlightly: NSMenuItem!
@@ -343,6 +344,7 @@ class MenuController: NSObject, NSMenuDelegate {
     audioMenu.delegate = self
     quickSettingsAudio.action = #selector(MainWindowController.menuShowAudioQuickSettings(_:))
     audioTrackMenu.delegate = self
+    loadExternalAudio.action = #selector(MainMenuActionHandler.menuLoadExternalAudio(_:))
 
     // - volume
     [increaseVolume, decreaseVolume, increaseVolumeSlightly, decreaseVolumeSlightly].forEach { item in

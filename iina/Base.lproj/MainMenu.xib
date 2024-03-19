@@ -450,6 +450,9 @@ CA
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Audio Track" systemMenu="font" id="DRb-Y8-xir"/>
                             </menuItem>
+                            <menuItem title="Load External Audio…" id="3xl-iD-85w">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="H9C-r1-7eo"/>
                             <menuItem title="Volume:" enabled="NO" id="iQF-1S-9EK">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -733,6 +736,7 @@ CA
                 <outlet property="inspector" destination="bwz-r0-peR" id="dES-1R-XAY"/>
                 <outlet property="jumpTo" destination="2id-wn-xsC" id="wyH-9I-JHJ"/>
                 <outlet property="jumpToBegin" destination="2Ya-3g-1hy" id="atq-PX-lIt"/>
+                <outlet property="loadExternalAudio" destination="3xl-iD-85w" id="e85-xo-lzs"/>
                 <outlet property="loadExternalSub" destination="k6x-hf-ATi" id="lVp-BV-A2C"/>
                 <outlet property="miniPlayer" destination="bGN-E4-V5A" id="gMc-FE-SVO"/>
                 <outlet property="mirror" destination="JJq-qH-toq" id="EWI-VS-c7Q"/>

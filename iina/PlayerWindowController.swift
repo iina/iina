@@ -58,6 +58,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     .verticalScrollAction,
     .playlistShowMetadata,
     .playlistShowMetadataInMusicMode,
+    .autoSwitchToMusicMode,
   ]
   
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -109,6 +110,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       if player.isPlaylistVisible {
         player.mainWindow.playlistView.playlistTableView.reloadData()
       }
+    case PK.autoSwitchToMusicMode.rawValue:
+      player.overrideAutoSwitchToMusicMode = false
     default:
       return
     }

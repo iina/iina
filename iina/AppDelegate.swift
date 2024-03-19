@@ -296,8 +296,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     }
 
     JavascriptPlugin.loadGlobalInstances()
-    let _ = PlayerCore.first
-    Logger.log("Using \(PlayerCore.active.mpv.mpvVersion!)")
+
+    let mpv = PlayerCore.active.mpv!
+    Logger.log("Using \(mpv.mpvVersion) and libass \(mpv.libassVersion)")
 
     if #available(macOS 10.13, *) {
       if RemoteCommandController.useSystemMediaControl {

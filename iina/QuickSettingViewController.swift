@@ -460,7 +460,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     } else if tableView == audioTableView {
       return player.info.audioTracks.count + 1
     } else if tableView == subTableView || tableView == secSubTableView {
-      return player.info.subTracks.count + 1
+      return player.info.$subTracks.withLock { $0.count + 1 }
     } else {
       return 0
     }

@@ -396,7 +396,7 @@ extension MainMenuActionHandler {
   }
 
   @objc func saveDownloadedSub(_ sender: NSMenuItem) {
-    let selected = player.info.subTracks.filter { $0.id == player.info.sid }
+    let selected = player.info.$subTracks.withLock { $0.filter { $0.id == player.info.sid } }
     guard selected.count > 0 else {
       Utility.showAlert("sub.no_selected")
 

@@ -139,15 +139,15 @@ class PlaybackInfo {
 
   var audioTracks: [MPVTrack] = []
   var videoTracks: [MPVTrack] = []
-  var subTracks: [MPVTrack] = []
+  @Atomic var subTracks: [MPVTrack] = []
 
   var abLoopStatus: LoopStatus = .cleared
 
   /** Selected track IDs. Use these (instead of `isSelected` of a track) to check if selected */
-  var aid: Int?
-  var sid: Int?
-  var vid: Int?
-  var secondSid: Int?
+  @Atomic var aid: Int?
+  @Atomic var sid: Int?
+  @Atomic var vid: Int?
+  @Atomic var secondSid: Int?
 
   var subEncoding: String?
 
@@ -268,19 +268,21 @@ class PlaybackInfo {
     }
   }
 
-  var thumbnailsReady = false
-  var thumbnailsProgress: Double = 0
-  var thumbnails: [FFThumbnail] = []
+  @Atomic var thumbnailsReady = false
+  @Atomic var thumbnailsProgress: Double = 0
+  @Atomic var thumbnails: [FFThumbnail] = []
 
   func getThumbnail(forSecond sec: Double) -> FFThumbnail? {
-    guard !thumbnails.isEmpty else { return nil }
-    var tb = thumbnails.last!
-    for i in 0..<thumbnails.count {
-      if thumbnails[i].realTime >= sec {
-        tb = thumbnails[(i == 0 ? i : i - 1)]
-        break
+    $thumbnails.withLock {
+      guard !$0.isEmpty else { return nil }
+      var tb = $0.last!
+      for i in 0..<$0.count {
+        if $0[i].realTime >= sec {
+          tb = $0[(i == 0 ? i : i - 1)]
+          break
+        }
       }
+      return tb
     }
-    return tb
   }
 }

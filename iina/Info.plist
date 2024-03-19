@@ -172,6 +172,10 @@
 			<string>Default</string>
 			<key>LSTypeIsPackage</key>
 			<false/>
+      <key>LSItemContentTypes</key>
+			<array>
+				<string>org.webmproject.webm</string>
+			</array>
 			<key>NSPersistentStoreTypeKey</key>
 			<string>XML</string>
 		</dict>
@@ -1288,12 +1292,17 @@
 			<key>UTTypeDescription</key>
 			<string>WebM Video File</string>
 			<key>UTTypeIdentifier</key>
-			<string>io.iina.webm</string>
+			<string>org.webmproject.webm</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
 				<array>
 					<string>webm</string>
+				</array>
+        <key>public.mime-type</key>
+				<array>
+					<string>audio/webm</string>
+					<string>video/webm</string>
 				</array>
 			</dict>
 		</dict>

@@ -462,6 +462,12 @@ not applying FFmpeg 9599 workaround
     mpvVersion = getString(MPVProperty.mpvVersion)
   }
 
+  /// Initialize the `mpv` renderer.
+  ///
+  /// This method creates and initializes the `mpv` renderer and sets the callback that `mpv` calls when a new video frame is available.
+  ///
+  /// - Note: Advanced control must be enabled for the screenshot command to work when the window flag is used. See issue
+  ///         [#4822](https://github.com/iina/iina/issues/4822) for details.
   func mpvInitRendering() {
     guard let mpv = mpv else {
       fatalError("mpvInitRendering() should be called after mpv handle being initialized!")
@@ -470,14 +476,16 @@ not applying FFmpeg 9599 workaround
     var openGLInitParams = mpv_opengl_init_params(get_proc_address: mpvGetOpenGLFunc,
                                                   get_proc_address_ctx: nil)
     withUnsafeMutablePointer(to: &openGLInitParams) { openGLInitParams in
-      // var advanced: CInt = 1
-      var params = [
-        mpv_render_param(type: MPV_RENDER_PARAM_API_TYPE, data: apiType),
-        mpv_render_param(type: MPV_RENDER_PARAM_OPENGL_INIT_PARAMS, data: openGLInitParams),
-        // mpv_render_param(type: MPV_RENDER_PARAM_ADVANCED_CONTROL, data: &advanced),
-        mpv_render_param()
-      ]
-      mpv_render_context_create(&mpvRenderContext, mpv, &params)
+      var advanced: CInt = 1
+      withUnsafeMutablePointer(to: &advanced) { advanced in
+        var params = [
+          mpv_render_param(type: MPV_RENDER_PARAM_API_TYPE, data: apiType),
+          mpv_render_param(type: MPV_RENDER_PARAM_OPENGL_INIT_PARAMS, data: openGLInitParams),
+          mpv_render_param(type: MPV_RENDER_PARAM_ADVANCED_CONTROL, data: advanced),
+          mpv_render_param()
+        ]
+        mpv_render_context_create(&mpvRenderContext, mpv, &params)
+      }
       openGLContext = CGLGetCurrentContext()
       mpv_render_context_set_update_callback(mpvRenderContext!, mpvUpdateCallback, mutableRawPointerOf(obj: player.mainWindow.videoView.videoLayer))
     }

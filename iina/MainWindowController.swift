@@ -1114,21 +1114,38 @@ class MainWindowController: PlayerWindowController {
         }
       }
     case .windowSize:
-      if fsState.isFullscreen { return }
+      if fsState.isFullscreen {
+        if recognizer.magnification < 0 {
+          self.toggleWindowFullScreen()
+          return
+        }
+      }
 
       // adjust window size
       if recognizer.state == .began {
         // began
         lastMagnification = recognizer.magnification
+        if (window.frame.height >= screenFrame.height || window.frame.width >= screenFrame.width) && lastMagnification > 0 {
+          self.toggleWindowFullScreen()
+          return
+        }
       } else if recognizer.state == .changed {
         // changed
-        let offset = recognizer.magnification - lastMagnification + 1.0;
-        let newWidth = window.frame.width * offset
-        let newHeight = newWidth / window.aspectRatio.aspect
+        let offset = recognizer.magnification - lastMagnification + 1.0
+        var newWidth = window.frame.width * offset
+        var newHeight = newWidth / window.aspectRatio.aspect
 
         //Check against max & min threshold
-        if newHeight < screenFrame.height && newHeight > minSize.height && newWidth > minSize.width {
-          let newSize = NSSize(width: newWidth, height: newHeight);
+        if newHeight > screenFrame.height {
+          newHeight = screenFrame.height
+          newWidth = screenFrame.height * window.aspectRatio.aspect
+        }
+        if newWidth > screenFrame.width {
+          newWidth = screenFrame.width
+          newHeight = screenFrame.width / window.aspectRatio.aspect
+        }
+        if newHeight >= minSize.height && newWidth >= minSize.width {
+          let newSize = NSSize(width: newWidth, height: newHeight)
           window.setFrame(window.frame.centeredResize(to: newSize), display: true)
         }
 

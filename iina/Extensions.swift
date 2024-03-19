@@ -176,10 +176,16 @@ extension NSRect {
   }
 
   func centeredResize(to newSize: NSSize) -> NSRect {
-    return NSRect(x: origin.x - (newSize.width - size.width) / 2,
-                  y: origin.y - (newSize.height - size.height) / 2,
-                  width: newSize.width,
-                  height: newSize.height)
+    var newX = origin.x - (newSize.width - size.width) / 2
+    var newY = origin.y - (newSize.height - size.height) / 2
+    let screenFrame = NSScreen.main?.visibleFrame ?? NSRect.zero
+    
+    // resizes x and y values so the window always stays within a valid screenFrame
+    if screenFrame != NSRect.zero {
+      newX = max(min(newX, screenFrame.maxX - newSize.width), screenFrame.minX)
+      newY = max(min(newY, screenFrame.maxY - newSize.height), screenFrame.minY)
+    }
+    return NSRect(x: newX, y: newY, width: newSize.width, height: newSize.height)
   }
 
   func constrain(in biggerRect: NSRect) -> NSRect {

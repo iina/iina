@@ -231,12 +231,12 @@
                         </constraints>
                     </visualEffectView>
                     <visualEffectView wantsLayer="YES" blendingMode="withinWindow" material="headerView" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="DFb-1L-U9o">
-                        <rect key="frame" x="0.0" y="0.0" width="640" height="40"/>
+                        <rect key="frame" x="0.0" y="0.0" width="640" height="24"/>
                         <subviews>
                             <stackView orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="Qmi-hb-0aM" customClass="TimeLabelOverflowedStackView" customModule="IINA" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="8" width="632" height="24"/>
+                                <rect key="frame" x="0.0" y="8" width="632" height="8"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="4rp-3T-TCc"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="8" id="4rp-3T-TCc"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -440,7 +440,7 @@
             <point key="canvasLocation" x="318" y="584"/>
         </customView>
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="BE1-yC-oJL" customClass="TimeLabelOverflowedView" customModule="IINA" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="500" height="29"/>
+            <rect key="frame" x="0.0" y="0.0" width="500" height="32"/>
             <subviews>
                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eBP-6g-bAT" customClass="PlaySlider" customModule="IINA" customModuleProvider="target">
                     <rect key="frame" x="48" y="-1" width="404" height="28"/>
@@ -450,7 +450,7 @@
                     </connections>
                 </slider>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" alphaValue="0.5" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NBD-MV-OuG" userLabel="Left Label" customClass="DurationDisplayTextField" customModule="IINA" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="8" width="50" height="14"/>
+                    <rect key="frame" x="0.0" y="9" width="50" height="14"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="46" id="CMl-dC-PCr"/>
                     </constraints>
@@ -464,7 +464,7 @@
                     </connections>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" alphaValue="0.5" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GgV-Cc-sk0" userLabel="Right Label" customClass="DurationDisplayTextField" customModule="IINA" customModuleProvider="target">
-                    <rect key="frame" x="450" y="8" width="50" height="14"/>
+                    <rect key="frame" x="450" y="9" width="50" height="14"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="46" id="sDf-om-KlV"/>
                     </constraints>
@@ -478,7 +478,7 @@
                     </connections>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" alphaValue="0.5" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qOq-6a-7j7">
-                    <rect key="frame" x="196" y="16" width="44" height="12"/>
+                    <rect key="frame" x="196" y="19" width="44" height="12"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" alignment="center" title="-:--:--" id="Pw8-rd-mUu">
                         <font key="font" metaFont="system" size="10"/>

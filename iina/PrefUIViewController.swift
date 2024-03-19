@@ -163,13 +163,14 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
 
   private func updateOSCToolbarButtons() {
     oscToolbarStackView.views.forEach { oscToolbarStackView.removeView($0) }
-    let buttons = PrefUIViewController.oscToolbarButtons
-    for buttonType in buttons {
-      let button = NSImageView()
-      button.image = buttonType.image()
-      button.translatesAutoresizingMaskIntoConstraints = false
-      Utility.quickConstraints(["H:[btn(\(Preference.ToolBarButton.frameHeight))]", "V:[btn(\(Preference.ToolBarButton.frameHeight))]"], ["btn": button])
+    for buttonType in PrefUIViewController.oscToolbarButtons {
+      let button = NSButton()
+      OSCToolbarButton.setStyle(of: button, buttonType: buttonType)
       oscToolbarStackView.addView(button, in: .trailing)
+      // Button is actually disabled so that its mouseDown goes to its superview instead
+      button.isEnabled = false
+      // But don't gray it out
+      (button.cell! as! NSButtonCell).imageDimsWhenDisabled = false
     }
   }
 

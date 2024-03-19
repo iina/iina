@@ -710,16 +710,8 @@ class MainWindowController: PlayerWindowController {
     fragToolbarView.views.forEach { fragToolbarView.removeView($0) }
     for buttonType in buttons {
       let button = NSButton()
-      button.bezelStyle = .regularSquare
-      button.isBordered = false
-      button.image = buttonType.image()
+      OSCToolbarButton.setStyle(of: button, buttonType: buttonType)
       button.action = #selector(self.toolBarButtonAction(_:))
-      button.tag = buttonType.rawValue
-      button.translatesAutoresizingMaskIntoConstraints = false
-      button.refusesFirstResponder = true
-      button.toolTip = buttonType.description()
-      let buttonWidth = buttons.count == 5 ? "20" : "24"
-      Utility.quickConstraints(["H:[btn(\(buttonWidth))]", "V:[btn(24)]"], ["btn": button])
       fragToolbarView.addView(button, in: .trailing)
     }
   }

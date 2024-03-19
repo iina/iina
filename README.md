@@ -1,3 +1,4 @@
+<div>
 <p align="center">
 <img height="256" src="https://github.com/iina/iina/raw/master/iina/Assets.xcassets/AppIcon.appiconset/iina-icon-256.png">
 </p>
@@ -11,9 +12,11 @@
 <a href="https://github.com/iina/iina/releases">Releases</a> ·
 <a href="https://t.me/IINAUsers">Telegram Group</a>
 </p>
+</div>
 
 ---
 [![Crowdin](https://badges.crowdin.net/iina/localized.svg)](https://crowdin.com/project/iina)
+
 ## Features
 
 * Based on [mpv](https://github.com/mpv-player/mpv), which provides the best decoding capacity on macOS
@@ -31,6 +34,10 @@
 * Command line tool and browser extensions provided
 * In active development
 
+## Install
+
+Head to the [downloads page](https://iina.io/download/) on the [website](https://iina.io/) for the latest release and older releases.
+
 ## Building
 
 IINA uses mpv for media playback. To build IINA, you can either fetch copies of these libraries we have already built (using the instructions below) or build them yourself by skipping to [these instructions](#building-mpv-manually).
@@ -43,9 +50,9 @@ IINA uses mpv for media playback. To build IINA, you can either fetch copies of 
 ./other/download_libs.sh
 ```
 
-  - Tips:
-    - Change the URL in the shell script if you want to download arch-specific binaries. By default, it will download the universal ones. You can download other binaries from `https://iina.io/dylibs/${ARCH}/fileList.txt` where `ARCH` can be `universal`, `arm64` and `x86_64`.
-    - If you want to build an older IINA version, make sure to download the corresponding dylibs. For example, `https://iina.io/dylibs/1.2.0/universal/fileList.txt`.
+* Tips:
+  * Change the URL in the shell script if you want to download arch-specific binaries. By default, it will download the universal ones. You can download other binaries from `https://iina.io/dylibs/${ARCH}/fileList.txt` where `ARCH` can be `universal`, `arm64` and `x86_64`.
+  * If you want to build an older IINA version, make sure to download the corresponding dylibs. For example, `https://iina.io/dylibs/1.2.0/universal/fileList.txt`.
 
 2. Open iina.xcodeproj in the [latest public version of Xcode](https://apps.apple.com/app/xcode/id497799835). *IINA may not build if you use any other version.*
 
@@ -55,22 +62,22 @@ IINA uses mpv for media playback. To build IINA, you can either fetch copies of 
 
 1. Build your own copy of mpv. If you're using a package manager to manage dependencies, the steps below outline the process.
 
-	#### With Homebrew
+#### With Homebrew
 
-	Use our tap as it passes in the correct flags to mpv's configure script:
+ Use our tap as it passes in the correct flags to mpv's configure script:
 
-	```console
-	brew tap iina/homebrew-mpv-iina
-	brew install mpv-iina
-	```
+ ```console
+ brew tap iina/homebrew-mpv-iina
+ brew install mpv-iina
+ ```
 
-	#### With MacPorts
+#### With MacPorts
 
-	Pass in these flags when installing:
+ Pass in these flags when installing:
 
-	```console
-	port install mpv +uchardet -bundle -rubberband configure.args="--enable-libmpv-shared --enable-lua --enable-libarchive --enable-libbluray --disable-swift --disable-rubberband"
-	```
+ ```console
+ port install mpv +uchardet -bundle -rubberband configure.args="--enable-libmpv-shared --enable-lua --enable-libarchive --enable-libbluray --disable-swift --disable-rubberband"
+ ```
 
 2. Copy the corresponding mpv and FFmpeg header files into `deps/include/`, replacing the current ones. You can find them on GitHub [(e.g. mpv)](https://github.com/mpv-player/mpv/tree/master/libmpv), but it's recommended to copy them from the Homebrew or MacPorts installation. Always make sure the header files have the same version of the dylibs.
 
@@ -78,17 +85,17 @@ IINA uses mpv for media playback. To build IINA, you can either fetch copies of 
 
 4. Run `other/change_lib_dependencies.rb`. This script will deploy the dependent libraries into `deps/lib`. If you're using a package manager to manage dependencies, invoke it like so:
 
-	#### With Homebrew
-	
-	```console
-	other/change_lib_dependencies.rb "$(brew --prefix)" "$(brew --prefix mpv-iina)/lib/libmpv.dylib"
-	```
-	
-	#### With MacPorts
-	
-	```console
-	port contents mpv | grep '\.dylib$' | xargs other/change_lib_dependencies.rb /opt/local
-	```
+#### With Homebrew
+
+ ```console
+ other/change_lib_dependencies.rb "$(brew --prefix)" "$(brew --prefix mpv-iina)/lib/libmpv.dylib"
+ ```
+
+#### With MacPorts
+
+ ```console
+ port contents mpv | grep '\.dylib$' | xargs other/change_lib_dependencies.rb /opt/local
+ ```
 
 5. Open `iina.xcodeproj` in the [latest public version of Xcode](https://apps.apple.com/app/xcode/id497799835). *IINA may not build if you use any other version.*
 

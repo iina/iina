@@ -28,6 +28,9 @@
 "initial.debug.desc" = "Debug builds er normalt ikke optimeret til ydeevne, så det anbefales ikke at blive brugt til daglig brug. Debug builds understøtter ikke automatisk opdatering.";
 "initial.bug_report" = "Meld fejl via <a href=\"https://github.com/iina/iina/issues\">Github Issues</a>.";
 
+// Inspector Window
+"inspector.error" = "Fejl";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffering... %d%%";
 "main.opening_stream" = "Åbner stream…";

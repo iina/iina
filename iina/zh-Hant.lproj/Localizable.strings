@@ -28,6 +28,9 @@
 "initial.debug.desc" = "開發版通常沒有將效能最佳化，所以不建議作為生產力軟件。開發版不支持自動更新。";
 "initial.bug_report" = "通過<a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>發送報告.";
 
+// Inspector Window
+"inspector.error" = "錯誤";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "緩衝處理中⋯ %d%%";
 "main.opening_stream" = "開啟串流中⋯⋯";

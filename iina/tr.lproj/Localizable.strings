@@ -28,6 +28,9 @@
 "initial.debug.desc" = "Hata ayıklama amaçlı derlenmiş sürümler genellikle performans açısından optimize edilmediğinden günlük olarak kullanılması önerilmez. Hata ayıklama amaçlı sürümler otomatik güncellemeyi desteklemez.";
 "initial.bug_report" = "<a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>. web sitesine raporlayabilirsiniz.";
 
+// Inspector Window
+"inspector.error" = "Hata";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Arabelleğe alınıyor... %%%d";
 "main.opening_stream" = "Akış açılıyor...";

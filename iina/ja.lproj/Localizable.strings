@@ -28,6 +28,9 @@
 "initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
 "initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
 
+// Inspector Window
+"inspector.error" = "エラー";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "バッファ中… %d%%";
 "main.opening_stream" = "ストリームを展開中…";

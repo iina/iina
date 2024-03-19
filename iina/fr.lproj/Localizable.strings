@@ -28,6 +28,9 @@
 "initial.debug.desc" = "Les versions de débogage ne sont généralement pas optimisées pour les performances, donc il n'est pas recommandé d'être utilisé comme lecteur en production. Les versions de débogage ne prennent pas en charge la mise à jour automatique.";
 "initial.bug_report" = "Signaler un bug via <a href=\"https://github.com/iina/iina/issues\">GitHub</a>.";
 
+// Inspector Window
+"inspector.error" = "Erreur";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Mise en mémoire tampon… %d%%";
 "main.opening_stream" = "Lancement du stream…";

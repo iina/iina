@@ -8,7 +8,10 @@
 
 import Cocoa
 
-class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTableViewDataSource {
+fileprivate let watchTableBackgroundColor = NSColor(red: 2.0/3, green: 2.0/3, blue: 2.0/3, alpha: 0.1)
+fileprivate let watchTableColumnHeaderColor = NSColor(red: 0.05, green: 0.05, blue: 0.05, alpha: 1)
+
+class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableViewDelegate, NSTableViewDataSource {
 
   override var windowNibName: NSNib.Name {
     return NSNib.Name("InspectorWindowController")
@@ -19,6 +22,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
   var watchProperties: [String] = []
 
   @IBOutlet weak var tabView: NSTabView!
+  @IBOutlet weak var tabButtonGroup: NSSegmentedControl!
   @IBOutlet weak var trackPopup: NSPopUpButton!
 
   @IBOutlet weak var pathField: NSTextField!
@@ -71,12 +75,32 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
   @IBOutlet weak var watchTableView: NSTableView!
   @IBOutlet weak var deleteButton: NSButton!
 
+  @IBOutlet weak var watchTableContainerView: NSView!
+  private var tableHeightConstraint: NSLayoutConstraint? = nil
+
   override func windowDidLoad() {
     super.windowDidLoad()
 
     watchProperties = Preference.array(for: .watchProperties) as! [String]
     watchTableView.delegate = self
     watchTableView.dataSource = self
+
+    let headerFont = NSFont.boldSystemFont(ofSize: NSFont.smallSystemFontSize)
+    for column in watchTableView.tableColumns {
+      let headerCell = WatchTableColumnHeaderCell()
+      // Use title from the XIB
+      let title = column.headerCell.title
+      // Use small bold system font
+      headerCell.attributedStringValue = NSMutableAttributedString(string: title, attributes: [.font: headerFont])
+      column.headerCell = headerCell
+    }
+
+    watchTableContainerView.wantsLayer = true
+    watchTableContainerView.layer?.backgroundColor = watchTableBackgroundColor.cgColor
+
+    tableHeightConstraint = watchTableContainerView.heightAnchor.constraint(greaterThanOrEqualToConstant: computeMinTableHeight())
+    tableHeightConstraint!.isActive = true
+    watchTableContainerView.layout()
 
     deleteButton.isEnabled = false
 
@@ -85,11 +109,20 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
     }
 
     updateInfo()
+    watchTableView.scrollRowToVisible(0)
 
     updateTimer = Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(dynamicUpdate), userInfo: nil, repeats: true)
 
     NotificationCenter.default.addObserver(self, selector: #selector(fileLoaded), name: .iinaFileLoaded, object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(fileLoaded), name: .iinaMainWindowChanged, object: nil)
+  }
+
+  /// Workaround (as of MacOS 13.4): try to ensure `watchTableView` never scrolls vertically, because `NSTableView` will draw rows
+  /// overlapping the header (maybe only a problem for custom `NSTableHeaderCell`s which are not opaque), but looks quite ugly.
+  private func computeMinTableHeight() -> CGFloat {
+    /// Add `1` to `numberOfRows` because it will scroll if there is not at least 1 empty row
+    return watchTableView.headerView!.frame.height + CGFloat(
+      watchTableView.numberOfRows + 1) * (watchTableView.rowHeight + watchTableView.intercellSpacing.height)
   }
 
   deinit {
@@ -235,7 +268,9 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
 
   @objc func dynamicUpdate() {
     updateInfo(dynamic: true)
-    watchTableView.reloadData()
+    /// Do not call `reloadData()` (no arg version) because it will clear the selection. Also, because we know the number of rows will not change,
+    /// calling `reloadData(forRowIndexes:)` will get the same result but much more efficiently
+    watchTableView.reloadData(forRowIndexes: IndexSet(0..<watchTableView.numberOfRows), columnIndexes: IndexSet(0..<watchTableView.numberOfColumns))
   }
 
   func updateTrack() {
@@ -271,45 +306,126 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
     return watchProperties.count
   }
 
-  func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+  func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
     guard let identifier = tableColumn?.identifier else { return nil }
-
-    guard let property = watchProperties[at: row] else { return nil }
-    if identifier == .key {
-      return property
-    } else if identifier == .value {
-      return PlayerCore.lastActive.mpv.getString(property) ?? "<Error>"
+    guard let cell = watchTableView.makeView(withIdentifier: identifier, owner: self) as? NSTableCellView else {
+      return nil
     }
-    return ""
+    guard let property = watchProperties[at: row] else { return nil }
+
+    switch identifier {
+    case .key:
+      if let textField = cell.textField {
+        textField.stringValue =  property
+      }
+      return cell
+    case .value:
+      let player = PlayerCore.lastActive
+
+      if let textField = cell.textField {
+        if !player.isStopping, !player.isStopped, !player.isShuttingDown, !player.isShutdown,
+            let value = PlayerCore.lastActive.mpv.getString(property) {
+          textField.stringValue = value
+          textField.textColor = .controlTextColor
+        } else {
+          let errorString = NSLocalizedString("inspector.error", comment: "Error")
+
+          let italicDescriptor: NSFontDescriptor = textField.font!.fontDescriptor.withSymbolicTraits(NSFontDescriptor.SymbolicTraits.italic)
+          let errorFont = NSFont(descriptor: italicDescriptor, size: textField.font!.pointSize)
+
+          textField.attributedStringValue = NSMutableAttributedString(string: errorString, attributes: [.font: errorFont!])
+          textField.textColor = .disabledControlTextColor
+        }
+      }
+      return cell
+    default:
+      Logger.log("Unrecognized column: '\(identifier.rawValue)'", level: .error)
+      return nil
+    }
   }
 
-  func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
-    guard let value = object as? String,
-      let identifier = tableColumn?.identifier else { return }
-    if identifier == .key {
-      watchProperties[row] = value
-    }
-    saveWatchList()
+  func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
+    /// The background color for a `NSTableRowView` will default to the parent's background color, which results in an
+    /// unwanted additive effect for translucent backgrounds. Just make each row transparent.
+    rowView.backgroundColor = .clear
   }
 
   func tableViewSelectionDidChange(_ notification: Notification) {
-    deleteButton.isEnabled = (watchTableView.selectedRow != -1)
+    deleteButton.isEnabled = !watchTableView.selectedRowIndexes.isEmpty
+  }
+
+  func resizeTableColumns(forTableWidth tableWidth: CGFloat) {
+    guard let keyColumn = watchTableView.tableColumn(withIdentifier: .key),
+          let valueColumn = watchTableView.tableColumn(withIdentifier: .value),
+          let tableScrollView = watchTableView.enclosingScrollView else {
+      return
+    }
+
+    let adjustedTableWidth = tableWidth - tableScrollView.verticalScroller!.frame.width
+    let keyColumnMaxWidth = adjustedTableWidth - valueColumn.minWidth
+    var newKeyColumnWidth = keyColumn.width
+    if keyColumn.width > keyColumnMaxWidth {
+      newKeyColumnWidth = keyColumnMaxWidth
+      keyColumn.width = newKeyColumnWidth
+    }
+    valueColumn.width = adjustedTableWidth - newKeyColumnWidth
+    tableScrollView.needsLayout = true
+    tableScrollView.needsDisplay = true
+  }
+
+  func windowWillResize(_ sender: NSWindow, to newWindowSize: NSSize) -> NSSize {
+    if let window = window, window.inLiveResize {
+      /// Table size will change with window size, so need to find the new table width from `newWindowSize`.
+      /// We know that our window's width is composed of 2 things: the table width + all other fixed "non-table" stuff.
+      /// We first find the non-table width by subtracting current table size from current window size.
+      /// Note: `NSTableView` does not give an honest answer for its width, but can use its parent (`NSClipView`) width.
+      let oldTableWidth = watchTableView.superview!.frame.width
+      let nonTableWidth = window.frame.width - oldTableWidth
+      let newTableWidth = newWindowSize.width - nonTableWidth
+      resizeTableColumns(forTableWidth: newTableWidth)
+    }
+
+    return newWindowSize
+  }
+
+  func windowDidResize(_ notification: Notification) {
+    if let window = window, window.inLiveResize {
+      let tableWidth = watchTableView.superview!.frame.width
+      resizeTableColumns(forTableWidth: tableWidth)
+    }
   }
 
   @IBAction func addWatchAction(_ sender: AnyObject) {
-    Utility.quickPromptPanel("add_watch", sheetWindow: window) { str in
+    Utility.quickPromptPanel("add_watch", sheetWindow: window) { [self] str in
       self.watchProperties.append(str)
-      self.watchTableView.reloadData()
       self.saveWatchList()
+
+      // Append row to end of table, with animation if preferred
+      let insertIndexSet = IndexSet(integer: watchTableView.numberOfRows)
+      watchTableView.insertRows(at: insertIndexSet, withAnimation: AccessibilityPreferences.motionReductionEnabled ? [] : .slideDown)
+      watchTableView.selectRowIndexes(insertIndexSet, byExtendingSelection: false)
+      tableHeightConstraint?.constant = computeMinTableHeight()
+      watchTableContainerView.layout()
     }
   }
 
   @IBAction func removeWatchAction(_ sender: AnyObject) {
-    if watchTableView.selectedRow >= 0 {
-      watchProperties.remove(at: watchTableView.selectedRow)
-      watchTableView.reloadData()
+    let rowIndexes = watchTableView.selectedRowIndexes
+    guard !rowIndexes.isEmpty else { return }
+
+    let watchPropertiesOld = watchProperties
+    var watchPropertiesNew: [String] = []
+    for (index, property) in watchPropertiesOld.enumerated() {
+      if !rowIndexes.contains(index) {
+        watchPropertiesNew.append(property)
+      }
     }
+    watchProperties = watchPropertiesNew
     saveWatchList()
+
+    watchTableView.removeRows(at: rowIndexes, withAnimation: AccessibilityPreferences.motionReductionEnabled ? [] : .slideUp)
+    tableHeightConstraint?.constant = computeMinTableHeight()
+    watchTableContainerView.layout()
   }
 
 
@@ -334,4 +450,14 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
     Preference.set(watchProperties, for: .watchProperties)
   }
 
+  class WatchTableColumnHeaderCell: NSTableHeaderCell {
+    override func draw(withFrame cellFrame: NSRect, in controlView: NSView) {
+      // Override background color
+      self.drawsBackground = false
+      watchTableColumnHeaderColor.set()
+      cellFrame.fill(using: .sourceOver)
+
+      super.draw(withFrame: cellFrame, in: controlView)
+    }
+  }
 }

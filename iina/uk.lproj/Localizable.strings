@@ -28,6 +28,9 @@
 "initial.debug.desc" = "Збірки налагодження зазвичай не остаточно оптимізовані, тому не рекомендуються для щоденного використання. Збірки налагодження не підтримують автоматичне оновлення.";
 "initial.bug_report" = "Повідомити через <a href=\"https://github.com/iina/iina/issues\">GitHub проблеми</a>.";
 
+// Inspector Window
+"inspector.error" = "Помилка";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Буферизація… %d%%";
 "main.opening_stream" = "Відкриття потоку…";

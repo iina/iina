@@ -2316,7 +2316,18 @@ class MainWindowController: PlayerWindowController {
       if player.info.thumbnailsReady, let image = player.info.getThumbnail(forSecond: previewTime.second)?.image {
         thumbnailPeekView.imageView.image = image.rotate(rotation)
         thumbnailPeekView.isHidden = false
-        let height = round(120 / thumbnailPeekView.imageView.image!.size.aspect)
+
+        // In some formats (like most of Japanese TV video formats), display aspect ratios (DAR) are different from the
+        // sample aspect ratio (SAR). A typical configuration is SAR 1440x1080i (4:3) w/ DAR 1920x1080 (16:9). Here we try
+        // to get the display aspect ratio from mpv to properly display the thumbnail.
+        let displayAspectRatio: CGFloat
+        if let width = player.info.displayWidth, let height = player.info.displayHeight {
+          displayAspectRatio = CGFloat(width) / CGFloat(height)
+        } else {
+          displayAspectRatio = thumbnailPeekView.imageView.image!.size.aspect
+        }
+
+        let height = round(120 / displayAspectRatio)
         let timePreviewFrameInWindow = timePreviewWhenSeek.superview!.convert(timePreviewWhenSeek.frame.origin, to: nil)
         let showAbove = canShowThumbnailAbove(timnePreviewYPos: timePreviewFrameInWindow.y, thumbnailHeight: height)
         let yPos = showAbove ? timePreviewFrameInWindow.y + timePreviewWhenSeek.frame.height : sliderFrameInWindow.y - height

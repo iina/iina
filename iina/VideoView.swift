@@ -226,7 +226,14 @@ class VideoView: NSView {
   func startDisplayLink() {
     let link = obtainDisplayLink()
     guard !CVDisplayLinkIsRunning(link) else { return }
+
+    /// Set this to `true` to enable video redraws to match the timing of the view redraw during animations.
+    /// This fixes a situation where the layer size may not match the size of its superview at each redraw,
+    /// which would cause noticable clipping or wobbling during animations.
+    videoLayer.isAsynchronous = true
+
     updateDisplayLink()
+
     checkResult(CVDisplayLinkSetOutputCallback(link, displayLinkCallback, mutableRawPointerOf(obj: self)),
                 "CVDisplayLinkSetOutputCallback")
     checkResult(CVDisplayLinkStart(link), "CVDisplayLinkStart")
@@ -234,6 +241,11 @@ class VideoView: NSView {
 
   @objc func stopDisplayLink() {
     guard let link = link, CVDisplayLinkIsRunning(link) else { return }
+
+    /// If this is set to `true` while the video is paused, there is some degree of busy-waiting as the
+    /// layer is polled at a high rate about whether it needs to draw. Disable this to save CPU while idle.
+    videoLayer.isAsynchronous = false
+
     checkResult(CVDisplayLinkStop(link), "CVDisplayLinkStop")
   }
 

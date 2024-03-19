@@ -519,6 +519,7 @@ not applying FFmpeg 9599 workaround
 
   func shouldRenderUpdateFrame() -> Bool {
     guard let mpvRenderContext = mpvRenderContext else { return false }
+    guard !player.isStopping && !player.isShuttingDown else { return false }
     let flags: UInt64 = mpv_render_context_update(mpvRenderContext)
     return flags & UInt64(MPV_RENDER_UPDATE_FRAME.rawValue) > 0
   }

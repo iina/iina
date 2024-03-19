@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTableViewDataSource {
+class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableViewDelegate, NSTableViewDataSource {
 
   override var windowNibName: NSNib.Name {
     return NSNib.Name("InspectorWindowController")
@@ -17,6 +17,8 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
   var updateTimer: Timer?
 
   var watchProperties: [String] = []
+
+  private var observers: [NSObjectProtocol] = []
 
   @IBOutlet weak var tabView: NSTabView!
   @IBOutlet weak var trackPopup: NSPopUpButton!
@@ -71,6 +73,8 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
   @IBOutlet weak var watchTableView: NSTableView!
   @IBOutlet weak var deleteButton: NSButton!
 
+  // MARK: - Window Delegate
+
   override func windowDidLoad() {
     super.windowDidLoad()
 
@@ -85,17 +89,37 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
     }
 
     updateInfo()
-
-    updateTimer = Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(dynamicUpdate), userInfo: nil, repeats: true)
-
-    NotificationCenter.default.addObserver(self, selector: #selector(fileLoaded), name: .iinaFileLoaded, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(fileLoaded), name: .iinaMainWindowChanged, object: nil)
   }
 
-  deinit {
-    ObjcUtils.silenced {
-      NotificationCenter.default.removeObserver(self)
+  override func showWindow(_ sender: Any?) {
+    Logger.log("Showing Inspector window", level: .verbose)
+
+    guard let _ = self.window else { return }  // trigger lazy load if not loaded
+
+    updateInfo()
+
+    removeTimerAndListeners()
+    updateTimer = Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(dynamicUpdate), userInfo: nil, repeats: true)
+
+    observers.append(NotificationCenter.default.addObserver(forName: .iinaFileLoaded, object: nil, queue: .main, using: self.fileLoaded))
+    observers.append(NotificationCenter.default.addObserver(forName: .iinaMainWindowChanged, object: nil, queue: .main, using: self.fileLoaded))
+
+    super.showWindow(sender)
+  }
+
+  func windowWillClose(_ notification: Notification) {
+    Logger.log("Closing Inspector window", level: .verbose)
+    // Remove timer & listeners to conserve resources
+    removeTimerAndListeners()
+  }
+
+  private func removeTimerAndListeners() {
+    updateTimer?.invalidate()
+    updateTimer = nil
+    for observer in observers {
+      NotificationCenter.default.removeObserver(observer)
     }
+    observers = []
   }
 
   func updateInfo(dynamic: Bool = false) {
@@ -229,7 +253,7 @@ class InspectorWindowController: NSWindowController, NSTableViewDelegate, NSTabl
     }
   }
 
-  @objc func fileLoaded() {
+  func fileLoaded(_ notification: Notification) {
     updateInfo()
   }
 

@@ -360,8 +360,8 @@ class PlayerCore: NSObject {
     if str.first == "/" {
       openURL(URL(fileURLWithPath: str))
     } else {
-      guard let pstr = str.addingPercentEncoding(withAllowedCharacters: .urlAllowed), let url = URL(string: pstr) else {
-        Logger.log("Cannot add percent encoding for \(str)", level: .error, subsystem: subsystem)
+      guard let url = URL(string: str) else {
+        Logger.log("Cannot parse url for \(str)", level: .error, subsystem: subsystem)
         return
       }
       openURL(url)

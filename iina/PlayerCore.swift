@@ -770,12 +770,6 @@ class PlayerCore: NSObject {
     }
   }
 
-  func isScreenshotEnabled() -> Bool {
-    let saveToFile = Preference.bool(for: .screenshotSaveToFile)
-    let saveToClipboard = Preference.bool(for: .screenshotCopyToClipboard)
-    return saveToFile || saveToClipboard
-  }
-
   /// Takes a screenshot, attempting to augment mpv's `screenshot` command with additional functionality & control, for example
   /// the ability to save to clipboard instead of or in addition to file, and displaying the screenshot's thumbnail via the OSD.
   /// Returns `true` if a command was sent to mpv; `false` if no command was sent.
@@ -797,10 +791,19 @@ class PlayerCore: NSObject {
   /// `Preference.Key.screenshotIncludeSubtitle` to decide between `subtitles` or `video`.
   @discardableResult
   func screenshot(fromKeyBinding keyBinding: KeyMapping? = nil) -> Bool {
-    guard isScreenshotEnabled() else {
-      Logger.log("Ignoring screenshot request\(keyBinding == nil ? "" : " from key binding") because all forms of screenshots are disabled in prefs")
+    let saveToFile = Preference.bool(for: .screenshotSaveToFile)
+    let saveToClipboard = Preference.bool(for: .screenshotCopyToClipboard)
+    guard saveToFile || saveToClipboard else {
+      Logger.log("Ignoring screenshot request: all forms of screenshots are disabled in prefs")
       return false
     }
+
+    guard let vid = info.vid, vid > 0 else {
+      Logger.log("Ignoring screenshot request: no video stream is being played")
+      return false
+    }
+
+    Logger.log("Screenshot requested by user\(keyBinding == nil ? "" : " (rawAction: \(keyBinding!.rawAction))")")
 
     var commandFlags: [String] = []
 
@@ -808,7 +811,7 @@ class PlayerCore: NSObject {
       var canUseIINAScreenshot = true
 
       guard let commandName = keyBinding.action.first, commandName == MPVCommand.screenshot.rawValue else {
-        Logger.log("Cannot take screenshot: first token in key binding action is unexpected: \(keyBinding.action)")
+        Logger.log("Cannot take screenshot: unexpected first token in key binding action: \(keyBinding.rawAction)", level: .error)
         return false
       }
       if keyBinding.action.count > 1 {
@@ -836,8 +839,6 @@ class PlayerCore: NSObject {
       }
     }
 
-    guard let vid = info.vid, vid > 0 else { return false }  // TODO: why this is needed?
-
     if commandFlags.isEmpty {
       let includeSubtitles = Preference.bool(for: .screenshotIncludeSubtitle)
       commandFlags.append(includeSubtitles ? "subtitles" : "video")
@@ -851,6 +852,7 @@ class PlayerCore: NSObject {
     let saveToFile = Preference.bool(for: .screenshotSaveToFile)
     let saveToClipboard = Preference.bool(for: .screenshotCopyToClipboard)
     guard saveToFile || saveToClipboard else { return }
+    Logger.log("Screenshot done: saveToFile=\(saveToFile), saveToClipboard=\(saveToClipboard)", level: .verbose)
 
     guard let imageFolder = mpv.getString(MPVOption.Screenshot.screenshotDirectory) else { return }
     guard let lastScreenshotURL = Utility.getLatestScreenshot(from: imageFolder) else { return }

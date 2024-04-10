@@ -136,6 +136,7 @@ class MainWindowController: PlayerWindowController {
   var shouldApplyInitialWindowSize = true
   var isWindowHidden: Bool = false
   var isWindowMiniaturizedDueToPip = false
+  var isWindowPipDueToInactiveSpace = false
 
   // might use another obj to handle slider?
   var isMouseInWindow: Bool = false
@@ -609,6 +610,19 @@ class MainWindowController: PlayerWindowController {
     }
 
     // add notification observers
+
+    NSWorkspace.shared.notificationCenter.addObserver(forName: NSWorkspace.activeSpaceDidChangeNotification, object: nil, queue: .main, using: { [unowned self] _ in
+      guard Preference.bool(for: .togglePipWhenSwitchingSpaces) else { return }
+      if !window.isOnActiveSpace && pipStatus == .notInPIP {
+        Logger.log("Window is no longer in active space; entering PIP", level: .verbose)
+        enterPIP()
+        isWindowPipDueToInactiveSpace = true
+      } else if window.isOnActiveSpace && isWindowPipDueToInactiveSpace && pipStatus == .inPIP {
+        Logger.log("Window is in active space again; exiting PIP", level: .verbose)
+        isWindowPipDueToInactiveSpace = false
+        exitPIP()
+      }
+    })
 
     addObserver(to: .default, forName: .iinaFileLoaded, object: player) { [unowned self] _ in
       self.quickSettingView.reload()

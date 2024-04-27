@@ -822,7 +822,7 @@ class PlayerCore: NSObject {
     DispatchQueue.main.async {
       let osdView = ScreenshootOSDView()
       osdView.setImage(image,
-                       size: image.size.shrink(toSize: NSSize(width: 300, height: 200)),
+                       size: image.size.grow(toSize: NSSize(width: 300, height: 200)),
                        fileURL: saveToFile ? lastScreenshotURL : nil)
       self.sendOSD(.screenshot, forcedTimeout: 5, accessoryView: osdView.view, context: osdView)
       if !saveToFile {

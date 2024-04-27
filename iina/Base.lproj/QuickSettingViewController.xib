@@ -1197,6 +1197,9 @@
                                                                         </textField>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qiz-tS-aWT" userLabel="CustomAudioDelay Text Field">
                                                                             <rect key="frame" x="248" y="12" width="61" height="21"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="28" id="6ch-P7-rIi"/>
+                                                                            </constraints>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" title="1" drawsBackground="YES" usesSingleLineMode="YES" id="EHa-PR-jHw" userLabel="CustomAudioDelay Text Field Cell" customClass="RoundedTextFieldCell" customModule="IINA" customModuleProvider="target">
                                                                                 <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="C53-E5-t2Z"/>
                                                                                 <font key="font" metaFont="system"/>
@@ -1209,7 +1212,7 @@
                                                                         </textField>
                                                                         <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ImH-jg-Agp" userLabel="s">
                                                                             <rect key="frame" x="307" y="15" width="15" height="16"/>
-                                                                            <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="s" id="1VY-EN-1mi">
+                                                                            <textFieldCell key="cell" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="s" id="1VY-EN-1mi">
                                                                                 <font key="font" metaFont="system"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -2006,7 +2009,7 @@
                                                                 <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eOz-bB-vzM" userLabel="CustomDelayEdit Text Field">
                                                                     <rect key="frame" x="268" y="30" width="61" height="21"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="ptd-kK-aWm"/>
+                                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="28" id="ptd-kK-aWm"/>
                                                                     </constraints>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" title="0" drawsBackground="YES" usesSingleLineMode="YES" id="bZu-Wx-06O" customClass="RoundedTextFieldCell" customModule="IINA" customModuleProvider="target">
                                                                         <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="HxX-is-3eO"/>

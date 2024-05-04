@@ -444,6 +444,11 @@ not applying FFmpeg 9599 workaround
     chkErr(setOptionString(MPVOption.ProgramBehavior.resetOnNextFile,
             "\(MPVOption.PlaybackControl.abLoopA),\(MPVOption.PlaybackControl.abLoopB)", level: .verbose))
 
+    // As mpv support for audio using the AVFoundation framework is new we enable it before applying
+    // user's settings. This allows a user to roll back to the Core Audio framework should a problem
+    // be encountered with the new code.
+    chkErr(mpv_set_property_string(mpv, MPVOption.Audio.ao, "avfoundation"))
+
     // Set user defined conf dir.
     if Preference.bool(for: .enableAdvancedSettings),
        Preference.bool(for: .useUserDefinedConfDir),

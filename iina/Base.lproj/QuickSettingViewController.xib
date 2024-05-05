@@ -392,7 +392,7 @@
                                                         <textField identifier="customAspectRatio" horizontalHuggingPriority="500" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XAI-y0-tcy" userLabel="CustomAspectRatio Text Field">
                                                             <rect key="frame" x="287" y="576" width="60" height="21"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" priority="900" constant="60" id="JnW-kS-XvK"/>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="900" constant="30" id="JnW-kS-XvK"/>
                                                             </constraints>
                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="jR7-Mt-N0T" customClass="RoundedTextFieldCell" customModule="IINA" customModuleProvider="target">
                                                                 <font key="font" metaFont="system"/>

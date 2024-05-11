@@ -967,12 +967,13 @@
                     </textFieldCell>
                 </textField>
                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7UX-IL-hdk">
-                    <rect key="frame" x="202" y="5" width="96" height="20"/>
+                    <rect key="frame" x="222" y="5" width="96" height="20"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="92" id="EJa-Kl-S4K"/>
                     </constraints>
                     <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" maxValue="2" doubleValue="2" tickMarkPosition="below" numberOfTickMarks="3" allowsTickMarkValuesOnly="YES" sliderType="linear" id="63l-gO-fEV"/>
                     <connections>
+                        <binding destination="5Up-Ab-aAm" name="enabled" keyPath="values.ignoreAssStyles" id="e5j-Hj-yeR"/>
                         <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subOverrideLevel" id="ofs-dB-Q12"/>
                     </connections>
                 </slider>
@@ -1009,7 +1010,7 @@
                 <constraint firstItem="utN-qX-5BH" firstAttribute="top" secondItem="ATO-g6-mEy" secondAttribute="top" constant="8" id="pVk-D1-vRK"/>
                 <constraint firstAttribute="bottom" secondItem="Dg7-OH-h2a" secondAttribute="bottom" constant="8" id="rbY-5T-ZoB"/>
                 <constraint firstItem="utN-qX-5BH" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="ATO-g6-mEy" secondAttribute="leading" constant="120" id="z5s-tB-6So"/>
-                <constraint firstItem="Dg7-OH-h2a" firstAttribute="leading" secondItem="VF9-G7-jts" secondAttribute="leading" id="z8L-ky-0tU"/>
+                <constraint firstItem="Dg7-OH-h2a" firstAttribute="leading" secondItem="VF9-G7-jts" secondAttribute="leading" constant="20" id="z8L-ky-0tU"/>
             </constraints>
             <point key="canvasLocation" x="-782" y="-73"/>
         </customView>

@@ -319,9 +319,9 @@ not applying FFmpeg 9599 workaround
     player.info.subEncoding = Preference.string(for: .defaultEncoding)
 
     let subOverrideHandler: OptionObserverInfo.Transformer = { key in
-      let v = Preference.bool(for: .ignoreAssStyles)
+      guard Preference.bool(for: .ignoreAssStyles) else { return "no" }
       let level: Preference.SubOverrideLevel = Preference.enum(for: .subOverrideLevel)
-      return v ? level.string : "yes"
+      return level.string
     }
 
     setUserOption(PK.ignoreAssStyles, type: .other, forName: MPVOption.Subtitles.subAssOverride, transformer: subOverrideHandler)

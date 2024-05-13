@@ -10,24 +10,30 @@ import Foundation
 
 struct AccessibilityPreferences {
 
-  /// Adjusts an animation to be instantaneous if the macOS System Preference Reduce motion is enabled.
+  /// Adjusts an animation to be instantaneous if the IINA setting `Enable animations` is disabled.
   /// - Parameter duration: Desired animation duration.
-  /// - Returns: `0` if reduce motion is enabled; otherwise the given duration.
+  /// - Returns: `0` if animations have been disabled; otherwise the given duration.
   static func adjustedDuration(_ duration: TimeInterval) -> TimeInterval {
-    return motionReductionEnabled ? 0 : duration
+    return Preference.bool(for: PK.enableAnimations) ? duration : 0
   }
 
-  /// Reflects whether the macOS System Preference accessibility option to retuce motion is in an enabled state.
+  /// Reflects whether the macOS accessibility setting to reduce motion is in an enabled state.
   ///
-  /// This property provides a wrapper around the `NSWorkspace` property so that code that needs to check this preference setting
-  /// does not need to concern itself with this preference not being available until macOS Sierra.
+  /// This property provides a wrapper around the `NSWorkspace` property so that code that needs to check this setting does not
+  /// need to concern itself with this setting not being available until macOS Sierra.
   ///
-  /// Proper handling of the Reduce motion preference setting is covered in the
-  /// [Apple Human Interface Guidelines under Appearance Effects and Motion](https://developer.apple.com/design/human-interface-guidelines/accessibility/overview/appearance-effects/).
+  /// Proper handling of the Reduce motion setting is covered in the Apple [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/) under
+  /// [Accessibility - Motion](https://developer.apple.com/design/human-interface-guidelines/accessibility#Motion).
   ///
-  /// To change this preference, choose Apple menu > System Preferences, click Accessibility, click Display, then click Display and
-  /// check or uncheck Reduce motion.
-  ///
+  /// To enable the
+  /// [Reduced motion](https://support.apple.com/guide/mac-help/stop-or-reduce-onscreen-motion-mchlc03f57a1/mac)
+  /// setting:
+  /// - Click on `System Settings…` under the  menu
+  /// - The `System Settings` window appears
+  /// - On the left side of the window click on `Accessibility`
+  /// - On the right side of the window click on `Display`
+  /// - In the `Display` section look for the `Reduced motion` setting
+  /// - Slide the toggle button to be on (blue)
   /// - Returns: `true` if reduce motion is enabled; otherwise `false`.
   static var motionReductionEnabled: Bool {
     if #available(macOS 10.12, *) {

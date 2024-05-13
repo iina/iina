@@ -1176,9 +1176,9 @@ class MainWindowController: PlayerWindowController {
     }
 
     if shouldApplyInitialWindowSize, let wfg = windowFrameFromGeometry(newSize: AppData.sizeWhenNoVideo, screen: screen) {
-      window!.setFrame(wfg, display: true, animate: !AccessibilityPreferences.motionReductionEnabled)
+      window!.setFrame(wfg, display: true, animate: Preference.bool(for: PK.enableAnimations))
     } else {
-      window!.setFrame(AppData.sizeWhenNoVideo.centeredRect(in: screen.visibleFrame), display: true, animate: !AccessibilityPreferences.motionReductionEnabled)
+      window!.setFrame(AppData.sizeWhenNoVideo.centeredRect(in: screen.visibleFrame), display: true, animate: Preference.bool(for: PK.enableAnimations))
     }
 
     videoView.videoLayer.draw(forced: true)
@@ -1260,7 +1260,7 @@ class MainWindowController: PlayerWindowController {
   func window(_ window: NSWindow, startCustomAnimationToEnterFullScreenOn screen: NSScreen, withDuration duration: TimeInterval) {
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = duration
-      window.animator().setFrame(screen.frame, display: true, animate: !AccessibilityPreferences.motionReductionEnabled)
+      window.animator().setFrame(screen.frame, display: true, animate: Preference.bool(for: PK.enableAnimations))
     }, completionHandler: nil)
 
   }
@@ -1273,7 +1273,7 @@ class MainWindowController: PlayerWindowController {
 
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = duration
-      window.animator().setFrame(priorWindowedFrame, display: true, animate: !AccessibilityPreferences.motionReductionEnabled)
+      window.animator().setFrame(priorWindowedFrame, display: true, animate: Preference.bool(for: PK.enableAnimations))
     }, completionHandler: nil)
 
     NSMenu.setMenuBarVisible(true)
@@ -1408,7 +1408,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   func windowDidExitFullScreen(_ notification: Notification) {
-    if AccessibilityPreferences.motionReductionEnabled {
+    if !Preference.bool(for: PK.enableAnimations) {
       // When animation is not used exiting full screen does not restore the previous size of the
       // window. Restore it now.
       window!.setFrame(fsState.priorWindowedFrame!, display: true, animate: false)
@@ -1528,7 +1528,7 @@ class MainWindowController: PlayerWindowController {
   private func setWindowFrameForLegacyFullScreen() {
     guard let window = self.window else { return }
     let screen = window.screen ?? NSScreen.main!
-    window.setFrame(screen.frame, display: true, animate: !AccessibilityPreferences.motionReductionEnabled)
+    window.setFrame(screen.frame, display: true, animate: Preference.bool(for: PK.enableAnimations))
     guard let unusable = screen.cameraHousingHeight else { return }
     // This screen contains an embedded camera. Shorten the height of the window's content view's
     // frame to avoid having part of the window obscured by the camera housing.
@@ -1990,7 +1990,7 @@ class MainWindowController: PlayerWindowController {
       accessoryView.layer?.opacity = 0
 
       NSAnimationContext.runAnimationGroup({ context in
-        context.duration = 0.3
+        context.duration = AccessibilityPreferences.adjustedDuration(0.3)
         context.allowsImplicitAnimation = true
         window!.setFrame(newFrame, display: true)
         osdVisualEffectView.layoutSubtreeIfNeeded()
@@ -2035,6 +2035,15 @@ class MainWindowController: PlayerWindowController {
 
   // MARK: - UI: Side bar
 
+  /// Show the given sidebar.
+  ///
+  /// Normally the sidebar is revealed by sliding it into view. However if the macOS [System Settings](https://support.apple.com/guide/mac-help/change-system-settings-mh15217/mac)
+  /// [reduce motion](https://support.apple.com/guide/mac-help/stop-or-reduce-onscreen-motion-mchlc03f57a1/mac)
+  /// setting is enabled then instead the sidebar will fade in. If the user disables the IINA `Enable animations` setting then the
+  /// duration of the animation will be set to zero making the sidebar appear instantly.
+  /// - Parameters:
+  ///   - viewController: View controller for the sidebar to show.
+  ///   - type: Type of sidebar to show (playlist or settings).
   private func showSideBar(viewController: SidebarViewController, type: SideBarViewType) {
     guard !isInInteractiveMode else { return }
 
@@ -2045,8 +2054,12 @@ class MainWindowController: PlayerWindowController {
     sidebarAnimationState = .willShow
     let width = type.width()
     sideBarWidthConstraint.constant = width
-    sideBarRightConstraint.constant = -width
-    sideBarView.isHidden = false
+    if AccessibilityPreferences.motionReductionEnabled {
+      sideBarRightConstraint.constant = 0
+    } else {
+      sideBarRightConstraint.constant = -width
+      sideBarView.isHidden = false
+    }
     // add view and constraints
     sideBarView.addSubview(view)
     let constraintsH = NSLayoutConstraint.constraints(withVisualFormat: "H:|[v]|", options: [], metrics: nil, views: ["v": view])
@@ -2059,7 +2072,11 @@ class MainWindowController: PlayerWindowController {
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = AccessibilityPreferences.adjustedDuration(SideBarAnimationDuration)
       context.timingFunction = CAMediaTimingFunction(name: .easeIn)
-      sideBarRightConstraint.animator().constant = 0
+      if AccessibilityPreferences.motionReductionEnabled {
+        sideBarView.animator().isHidden = false
+      } else {
+        sideBarRightConstraint.animator().constant = 0
+      }
     }) {
       self.sidebarAnimationState = .shown
       self.sideBarStatus = type
@@ -2072,12 +2089,26 @@ class MainWindowController: PlayerWindowController {
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = animate ? AccessibilityPreferences.adjustedDuration(SideBarAnimationDuration) : 0
       context.timingFunction = CAMediaTimingFunction(name: .easeIn)
-      sideBarRightConstraint.animator().constant = -currWidth
+      if AccessibilityPreferences.motionReductionEnabled {
+        sideBarView.animator().alphaValue = 0
+      } else {
+        sideBarRightConstraint.animator().constant = -currWidth
+      }
     }) {
       if self.sidebarAnimationState == .willHide {
         self.sideBarStatus = .hidden
         self.sideBarView.subviews.removeAll()
         self.sideBarView.isHidden = true
+        // When in full screen mode with both the additional info view and the sidebar displayed the
+        // info view will be positioned to avoid overlapping the sidebar. While hidden the sidebar
+        // must be positioned outside of the window to allow the additional info view to be aligned
+        // with the edge of the window. When reduce motion is not enabled the sidebar slides out of
+        // the window. But when the sidebar fades out of view, the constraint must be adjusted to
+        // put the sidebar outside of the window once it is hidden.
+        if AccessibilityPreferences.motionReductionEnabled {
+          self.sideBarRightConstraint.constant = -currWidth
+          self.sideBarView.alphaValue = 1
+        }
         self.sidebarAnimationState = .hidden
         after()
       }

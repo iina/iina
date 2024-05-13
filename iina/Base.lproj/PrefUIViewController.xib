@@ -14,6 +14,7 @@
                 <outlet property="pipDoNothing" destination="o7N-Tm-Aly" id="xg5-HZ-Usj"/>
                 <outlet property="pipHideWindow" destination="BMA-ed-2gf" id="UJv-H3-HDi"/>
                 <outlet property="pipMinimizeWindow" destination="YWw-1J-3Gr" id="5eN-rl-utd"/>
+                <outlet property="sectionAnimationsView" destination="k9o-rY-z6u" id="p0I-TR-Sv6"/>
                 <outlet property="sectionAppearanceView" destination="M9c-Ak-HmK" id="96r-w6-H5K"/>
                 <outlet property="sectionOSCView" destination="gjB-It-iFS" id="cbg-O0-qMd"/>
                 <outlet property="sectionOSDView" destination="c8m-G4-or8" id="e6Y-FN-x1t"/>
@@ -703,6 +704,7 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="18" id="DIC-cT-8P0"/>
                         <constraint firstAttribute="width" secondItem="2Fc-2d-hIJ" secondAttribute="height" multiplier="1:1" id="IBQ-ee-CQV"/>
+                        <constraint firstAttribute="width" secondItem="2Fc-2d-hIJ" secondAttribute="height" multiplier="1:1" id="JSO-Tj-v8X"/>
                     </constraints>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="speed" id="PCr-gs-9Yc"/>
                 </imageView>
@@ -774,7 +776,6 @@
                 <constraint firstItem="HgG-px-UUt" firstAttribute="leading" secondItem="jbc-22-59W" secondAttribute="leading" id="GnR-7V-SWW"/>
                 <constraint firstItem="jbc-22-59W" firstAttribute="top" secondItem="4XH-GU-VhV" secondAttribute="top" id="H5x-dR-Abd"/>
                 <constraint firstAttribute="bottom" secondItem="rft-T0-lds" secondAttribute="bottom" constant="8" id="HLQ-xF-5Qa"/>
-                <constraint firstItem="2Fc-2d-hIJ" firstAttribute="width" secondItem="2Fc-2d-hIJ" secondAttribute="height" multiplier="1:1" id="JSO-Tj-v8X"/>
                 <constraint firstItem="omS-tS-OVJ" firstAttribute="leading" secondItem="q8D-b2-H0y" secondAttribute="trailing" constant="8" id="Kvt-R8-Efd"/>
                 <constraint firstItem="omS-tS-OVJ" firstAttribute="leading" secondItem="bYj-5g-zYO" secondAttribute="leading" id="LgY-kh-ww0"/>
                 <constraint firstItem="gVR-so-xgt" firstAttribute="baseline" secondItem="q8D-b2-H0y" secondAttribute="baseline" id="OEQ-c0-3H3"/>
@@ -1243,6 +1244,40 @@ Picture:</string>
                 <constraint firstItem="eTQ-fy-fNJ" firstAttribute="leading" secondItem="l21-mq-zWd" secondAttribute="leading" id="xog-r6-yIL"/>
             </constraints>
             <point key="canvasLocation" x="14" y="907"/>
+        </customView>
+        <customView id="k9o-rY-z6u" userLabel="Prefs &gt; UI &gt; Animations">
+            <rect key="frame" x="0.0" y="0.0" width="493" height="32"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField identifier="SectionTitleThumb" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M1d-6z-urt">
+                    <rect key="frame" x="-2" y="8" width="82" height="16"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Animations:" id="AYW-Xu-ySw">
+                        <font key="font" metaFont="systemBold"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="6DX-Ep-AbS">
+                    <rect key="frame" x="118" y="7" width="137" height="18"/>
+                    <buttonCell key="cell" type="check" title="Enable animations" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="mjs-jg-wm1">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="lH7-Vv-0M1" name="value" keyPath="values.enableAnimations" id="MBb-V5-ZRW"/>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="M1d-6z-urt" secondAttribute="bottom" constant="8" id="0Zd-Hq-Kal"/>
+                <constraint firstItem="M1d-6z-urt" firstAttribute="leading" secondItem="k9o-rY-z6u" secondAttribute="leading" id="5UK-qs-t0Z"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6DX-Ep-AbS" secondAttribute="trailing" id="cOu-Iy-NWl"/>
+                <constraint firstItem="M1d-6z-urt" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="k9o-rY-z6u" secondAttribute="leading" constant="120" id="j0m-fh-NoW"/>
+                <constraint firstItem="6DX-Ep-AbS" firstAttribute="top" secondItem="M1d-6z-urt" secondAttribute="top" id="j8G-1a-rlS"/>
+                <constraint firstItem="M1d-6z-urt" firstAttribute="top" secondItem="k9o-rY-z6u" secondAttribute="top" constant="8" id="nbs-Tz-GDd"/>
+                <constraint firstItem="6DX-Ep-AbS" firstAttribute="leading" secondItem="k9o-rY-z6u" secondAttribute="leading" constant="120" id="ray-E7-Kek"/>
+            </constraints>
+            <point key="canvasLocation" x="21" y="1020"/>
         </customView>
     </objects>
     <resources>

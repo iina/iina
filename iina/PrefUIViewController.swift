@@ -39,7 +39,7 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
   }
 
   override var sectionViews: [NSView] {
-    return [sectionAppearanceView, sectionWindowView, sectionOSCView, sectionOSDView, sectionThumbnailView, sectionPictureInPictureView]
+    return [sectionAppearanceView, sectionWindowView, sectionOSCView, sectionOSDView, sectionThumbnailView, sectionPictureInPictureView, sectionAnimationsView]
   }
 
   private let toolbarSettingsSheetController = PrefOSCToolbarSettingsSheetController()
@@ -50,7 +50,8 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
   @IBOutlet var sectionOSDView: NSView!
   @IBOutlet var sectionThumbnailView: NSView!
   @IBOutlet var sectionPictureInPictureView: NSView!
-    
+  @IBOutlet var sectionAnimationsView: NSView!
+
   @IBOutlet weak var themeMenu: NSMenu!
   @IBOutlet weak var oscPreviewImageView: NSImageView!
   @IBOutlet weak var oscPositionPopupButton: NSPopUpButton!

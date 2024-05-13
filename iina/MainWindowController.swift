@@ -2054,7 +2054,10 @@ class MainWindowController: PlayerWindowController {
     sidebarAnimationState = .willShow
     let width = type.width()
     sideBarWidthConstraint.constant = width
-    if AccessibilityPreferences.motionReductionEnabled {
+    // The macOS setting could change at any point in time. Remember which type of animation is
+    // being used.
+    let useFade = AccessibilityPreferences.motionReductionEnabled
+    if useFade {
       sideBarRightConstraint.constant = 0
     } else {
       sideBarRightConstraint.constant = -width
@@ -2072,7 +2075,7 @@ class MainWindowController: PlayerWindowController {
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = AccessibilityPreferences.adjustedDuration(SideBarAnimationDuration)
       context.timingFunction = CAMediaTimingFunction(name: .easeIn)
-      if AccessibilityPreferences.motionReductionEnabled {
+      if useFade {
         sideBarView.animator().isHidden = false
       } else {
         sideBarRightConstraint.animator().constant = 0
@@ -2086,10 +2089,13 @@ class MainWindowController: PlayerWindowController {
   func hideSideBar(animate: Bool = true, after: @escaping () -> Void = { }) {
     sidebarAnimationState = .willHide
     let currWidth = sideBarWidthConstraint.constant
+    // The macOS setting could change at any point in time. Remember which type of animation is
+    // being used.
+    let useFade = AccessibilityPreferences.motionReductionEnabled
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = animate ? AccessibilityPreferences.adjustedDuration(SideBarAnimationDuration) : 0
       context.timingFunction = CAMediaTimingFunction(name: .easeIn)
-      if AccessibilityPreferences.motionReductionEnabled {
+      if useFade {
         sideBarView.animator().alphaValue = 0
       } else {
         sideBarRightConstraint.animator().constant = -currWidth
@@ -2105,7 +2111,7 @@ class MainWindowController: PlayerWindowController {
         // with the edge of the window. When reduce motion is not enabled the sidebar slides out of
         // the window. But when the sidebar fades out of view, the constraint must be adjusted to
         // put the sidebar outside of the window once it is hidden.
-        if AccessibilityPreferences.motionReductionEnabled {
+        if useFade {
           self.sideBarRightConstraint.constant = -currWidth
           self.sideBarView.alphaValue = 1
         }

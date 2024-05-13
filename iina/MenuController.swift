@@ -635,10 +635,11 @@ class MenuController: NSObject, NSMenuDelegate {
         at: 0)
     }
 
+    pluginMenu.addItem(.separator())
     if #available(macOS 12.0, *) {
-      pluginMenu.addItem(.separator())
       pluginMenu.addItem(developerTool)
     }
+    pluginMenu.addItem(withTitle: "Reload all plugins", action: #selector(MainMenuActionHandler.reloadAllPlugins(_:)), keyEquivalent: "")
   }
 
   @discardableResult

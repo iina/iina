@@ -451,4 +451,12 @@ extension MainMenuActionHandler {
     default: break
     }
   }
+
+  // MARK: - Plugin
+
+  @objc func reloadAllPlugins(_ sender: NSMenuItem) {
+    for plugin in JavascriptPlugin.plugins {
+      player.reloadPlugin(plugin, forced: true)
+    }
+  }
 }

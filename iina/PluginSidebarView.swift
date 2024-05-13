@@ -25,6 +25,9 @@ class PluginSidebarView: WKWebView, WKNavigationDelegate {
     config.userContentController.add(pluginInstance.apis!["sidebar"] as! WKScriptMessageHandler, name: "iina")
 
     let webView = PluginSidebarView(frame: .zero, configuration: config)
+    if #available(macOS 13.3, *) {
+      webView.isInspectable = true
+    }
     webView.pluginInstance = pluginInstance
     webView.navigationDelegate = webView
     webView.translatesAutoresizingMaskIntoConstraints = false

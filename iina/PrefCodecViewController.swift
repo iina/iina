@@ -24,11 +24,12 @@ class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbedda
   }
 
   override var sectionViews: [NSView] {
-    return [sectionVideoView, sectionAudioView]
+    return [sectionVideoView, sectionAudioView, sectionReplayGainView]
   }
 
   @IBOutlet var sectionVideoView: NSView!
   @IBOutlet var sectionAudioView: NSView!
+  @IBOutlet var sectionReplayGainView: NSView!
 
   @IBOutlet weak var spdifAC3Btn: NSButton!
   @IBOutlet weak var spdifDTSBtn: NSButton!
@@ -113,5 +114,9 @@ class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbedda
 
   @IBAction func algorithmHelpAction(_ sender: Any) {
     NSWorkspace.shared.open(URL(string: AppData.algorithmHelpLink)!)
+  }
+
+  @IBAction func gainAdjustmentHelpAction(_ sender: Any) {
+    NSWorkspace.shared.open(URL(string: AppData.gainAdjustmentHelpLink)!)
   }
 }

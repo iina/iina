@@ -84,6 +84,17 @@ class MPVController: NSObject {
     static let screenshot: UInt64 = 1000000
   }
 
+  /// Version number of the libass library.
+  ///
+  /// The mpv libass version property returns an integer encoded as a hex binary-coded decimal.
+  var libassVersion: String {
+    let version = getInt(MPVProperty.libassVersion)
+    let major = String(version >> 28 & 0xF, radix: 16)
+    let minor = String(version >> 20 & 0xFF, radix: 16)
+    let patch = String(version >> 12 & 0xFF, radix: 16)
+    return "\(major).\(minor).\(patch)"
+  }
+
   // The mpv_handle
   var mpv: OpaquePointer!
   var mpvRenderContext: OpaquePointer?
@@ -91,7 +102,7 @@ class MPVController: NSObject {
   private var openGLContext: CGLContextObj! = nil
 
   var mpvClientName: UnsafePointer<CChar>!
-  var mpvVersion: String!
+  var mpvVersion: String { getString(MPVProperty.mpvVersion)! }
 
   lazy var queue = DispatchQueue(label: "com.colliderli.iina.controller", qos: .userInitiated)
 
@@ -457,9 +468,6 @@ not applying FFmpeg 9599 workaround
     chkErr(mpv_set_property_string(mpv, MPVOption.Video.vo, "libmpv"))
     chkErr(mpv_set_property_string(mpv, MPVOption.Window.keepaspect, "no"))
     chkErr(mpv_set_property_string(mpv, MPVOption.Video.gpuHwdecInterop, "auto"))
-
-    // get version
-    mpvVersion = getString(MPVProperty.mpvVersion)
   }
 
   func mpvInitRendering() {

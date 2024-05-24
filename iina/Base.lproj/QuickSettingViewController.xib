@@ -46,7 +46,17 @@
                 <outlet property="saturationSlider" destination="VlS-Jo-4C0" id="rJV-p9-OVz"/>
                 <outlet property="secSubTableView" destination="Jve-qX-Agy" id="0ia-bh-sbu"/>
                 <outlet property="speedSlider" destination="UWh-M9-5Nw" id="UXr-dD-8K1"/>
+                <outlet property="speedSlider0_25xLabel" destination="Nhb-Co-xbZ" id="16j-wm-Ajt"/>
+                <outlet property="speedSlider16xLabel" destination="mjX-Jf-925" id="4P4-YN-VLh"/>
+                <outlet property="speedSlider16xLabelPrevLabelConstraint" destination="Aep-cH-5hZ" id="oqZ-YH-RdM"/>
+                <outlet property="speedSlider1xLabel" destination="wBg-Dk-cUX" id="3KH-oh-WBJ"/>
+                <outlet property="speedSlider1xLabelCenterXConstraint" destination="hlk-KQ-DJ7" id="Sja-O3-JF3"/>
+                <outlet property="speedSlider1xLabelPrevLabelConstraint" destination="85g-vN-0eC" id="2Au-Nf-kCX"/>
+                <outlet property="speedSlider4xLabel" destination="Njq-za-TIf" id="xtC-vt-JRw"/>
+                <outlet property="speedSlider4xLabelCenterXConstraint" destination="H0i-c4-qHi" id="kd4-J7-2GM"/>
+                <outlet property="speedSlider4xLabelPrevLabelConstraint" destination="0og-bi-e6K" id="mxE-fT-iec"/>
                 <outlet property="speedSliderConstraint" destination="qTf-o6-Mef" id="mB3-5X-SOE"/>
+                <outlet property="speedSliderContainerView" destination="5v4-Te-950" id="TvR-R1-5kh"/>
                 <outlet property="speedSliderIndicator" destination="3EN-WD-QNI" id="vDD-eE-x6w"/>
                 <outlet property="subDelaySlider" destination="dXz-x4-sm5" id="VX5-8O-mf4"/>
                 <outlet property="subDelaySliderConstraint" destination="7t1-v0-J55" id="ypG-K0-i1x"/>

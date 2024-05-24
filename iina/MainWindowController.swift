@@ -541,6 +541,11 @@ class MainWindowController: PlayerWindowController {
 
     updateArrowButtonImage()
 
+    if additionalInfoBattery.userInterfaceLayoutDirection == .rightToLeft {
+      let imageView = additionalInfoBatteryView.subviews.compactMap { $0 as? NSImageView }.first!
+      imageView.image = #imageLiteral(resourceName: "battery-rtl")
+    }
+
     // fade-able views
     fadeableViews.append(contentsOf: standardWindowButtons as [NSView])
     fadeableViews.append(titleBarView)

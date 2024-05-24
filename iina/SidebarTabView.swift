@@ -38,12 +38,13 @@ class SidebarTabView: NSViewController {
   }
 
   private func updateStyle() {
+    let background = NSColor.controlBackgroundColor
     if isActive {
-      view.layer?.backgroundColor = NSColor.white.withAlphaComponent(0.2).cgColor
-      label.textColor = .white
+      view.layer?.backgroundColor = background.withAlphaComponent(0.2).cgColor
+      label.textColor = .textColor
     } else {
-      view.layer?.backgroundColor = NSColor.white.withAlphaComponent(0.1).cgColor
-      label.textColor = NSColor.white.withAlphaComponent(0.5)
+      view.layer?.backgroundColor = background.withAlphaComponent(0.1).cgColor
+      label.textColor = NSColor.textColor.withAlphaComponent(0.5)
     }
   }
 }

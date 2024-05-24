@@ -1362,5 +1362,9 @@
 	<string>$(CONFIGURATION)</string>
 	<key>com.colliderli.iina.build.date</key>
 	<string>IINA_BUILD_DATE</string>
+	<key>com.colliderli.iina.build.sdk</key>
+	<string>$(SDK_VERSION)</string>
+	<key>com.colliderli.iina.build.xcode</key>
+	<string>$(XCODE_VERSION_ACTUAL)</string>
 </dict>
 </plist>

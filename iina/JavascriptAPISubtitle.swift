@@ -33,6 +33,8 @@ class JavascriptAPISubtitle: JavascriptAPI, JavascriptAPISubtitleExportable {
 }
 
 fileprivate let extraSetupScript = """
+iina.subtitle.CUSTOM_IMPLEMENTATION = "custom-implementation";
+
 iina.subtitle.__invokeSearch = (id, complete, fail) => {
   const provider = iina.subtitle.__providers[id];
   if (typeof provider !== "object") {
@@ -41,7 +43,7 @@ iina.subtitle.__invokeSearch = (id, complete, fail) => {
   }
   function checkAsync(name) {
     const func = provider[name];
-    if (func && func.constructor.name === "AsyncFunction") return true;
+    if (func) return true;
     fail(`provider.${name} doesn't exist or is not an async function.`);
     return false;
   }
@@ -66,6 +68,11 @@ iina.subtitle.__invokeSearch = (id, complete, fail) => {
   }
   provider.search().then(
     (subs) => {
+      iina.console.log(subs);
+      if (subs === iina.subtitle.CUSTOM_IMPLEMENTATION) {
+        complete(null);
+        return;
+      }
       if (!Array.isArray(subs)) {
         fail(`provider.search should return an array of subtitle items.`);
         return;
@@ -73,7 +80,7 @@ iina.subtitle.__invokeSearch = (id, complete, fail) => {
       const hasDescFunction = typeof provider.description === "function";
       for (const sub of subs) {
         if (hasDescFunction && !sub.desc) sub.desc = provider.description(sub);
-        sub.__setDownlaodCallback(createDownloadCallback(sub));
+        sub.__setDownloadCallback(createDownloadCallback(sub));
       }
       complete(subs);
     },

@@ -846,6 +846,8 @@
 		348BFFFD28DC688D0045F683 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/OpenURLWindowController.strings"; sourceTree = "<group>"; };
 		348BFFFE28DC688D0045F683 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/HistoryWindowController.strings"; sourceTree = "<group>"; };
 		348BFFFF28DC688D0045F683 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/InitialWindowController.strings"; sourceTree = "<group>"; };
+		3494B3F42C00254500F57FC2 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3494B3F52C00254800F57FC2 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		34ACA04C29DBB0090030C09C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LogWindowController.xib; sourceTree = "<group>"; };
 		34ACA04F29DBB0180030C09C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LogWindowController.strings; sourceTree = "<group>"; };
 		34ACA05129DBB0190030C09C /* af */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = af; path = af.lproj/LogWindowController.strings; sourceTree = "<group>"; };
@@ -4190,6 +4192,8 @@
 				348BFFCF28DC64FB0045F683 /* hu */,
 				348BFFF128DC657F0045F683 /* pt */,
 				348B001328DC688F0045F683 /* sr-Latn */,
+				3494B3F42C00254500F57FC2 /* he */,
+				3494B3F52C00254800F57FC2 /* da */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

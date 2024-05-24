@@ -8,6 +8,7 @@
 
 import Cocoa
 import JavaScriptCore
+import VideoToolbox
 
 fileprivate let yes_str = "yes"
 fileprivate let no_str = "no"
@@ -164,6 +165,19 @@ class MPVController: NSObject {
     MPVProperty.idleActive: MPV_FORMAT_FLAG
   ]
 
+  /// Map from mpv codec name to core media video codec types.
+  ///
+  /// This map only contains the mpv codecs `adjustCodecWhiteList` can remove from the mpv `hwdec-codecs` option.
+  /// If any codec types are added then `HardwareDecodeCapabilities` will need to be updated to support them.
+  private let mpvCodecToCodecTypes: [String: [CMVideoCodecType]] = [
+    "av1": [kCMVideoCodecType_AV1],
+    "prores": [kCMVideoCodecType_AppleProRes422, kCMVideoCodecType_AppleProRes422HQ,
+               kCMVideoCodecType_AppleProRes422LT, kCMVideoCodecType_AppleProRes422Proxy,
+               kCMVideoCodecType_AppleProRes4444, kCMVideoCodecType_AppleProRes4444XQ,
+               kCMVideoCodecType_AppleProResRAW, kCMVideoCodecType_AppleProResRAWHQ],
+    "vp9": [kCMVideoCodecType_VP9]
+  ]
+
   private let subsystem: Logger.Subsystem
 
   /// Creates a `MPVController` object.
@@ -180,6 +194,56 @@ class MPVController: NSObject {
     removeOptionObservers()
   }
 
+  /// Remove codecs from the hardware decoding white list that this Mac does not support.
+  ///
+  /// As explained in [HWAccelIntro](https://trac.ffmpeg.org/wiki/HWAccelIntro),  [FFmpeg](https://ffmpeg.org/)
+  /// will automatically fall back to software decoding. _However_ when it does so `FFmpeg` emits an error level log message
+  /// referring to "Failed setup". This has confused users debugging problems. To eliminate the overhead of setting up for hardware
+  /// decoding only to have it fail, this method removes codecs from the mpv
+  /// [hwdec-codecs](https://mpv.io/manual/stable/#options-hwdec-codecs) option that are known to not have
+  /// hardware decoding support on this Mac. This is not comprehensive. This method only covers the recent codecs whose support
+  /// for hardware decoding varies among Macs. This merely reduces the dependence upon the FFmpeg fallback to software decoding
+  /// feature in some cases.
+  private func adjustCodecWhiteList() {
+    // Allow the user to override this behavior.
+    guard !userOptionsContains(MPVOption.Video.hwdecCodecs) else {
+      log("""
+        Option \(MPVOption.Video.hwdecCodecs) has been set in advanced settings, \
+        will not adjust white list
+        """)
+      return
+    }
+    guard let whitelist = getString(MPVOption.Video.hwdecCodecs) else {
+      // Internal error. Make certain this method is called after mpv_initialize which sets the
+      // default value.
+      log("Failed to obtain the value of option \(MPVOption.Video.hwdecCodecs)", level: .error)
+      return
+    }
+    log("Hardware decoding whitelist (\(MPVOption.Video.hwdecCodecs)) is set to \(whitelist)")
+    var adjusted: [String] = []
+    var needsAdjustment = false
+    codecLoop: for codec in whitelist.components(separatedBy: ",") {
+      guard let codecTypes = mpvCodecToCodecTypes[codec] else {
+        // Not a codec this method supports removing. Retain it in the option value.
+        adjusted.append(codec)
+        continue
+      }
+      // The mpv codec name can map to multiple codec types. If hardware decoding is supported for
+      // any of them retain the codec in the option value.
+      for codecType in codecTypes {
+        if HardwareDecodeCapabilities.shared.isSupported(codecType) {
+          adjusted.append(codec)
+          continue codecLoop
+        }
+      }
+      needsAdjustment = true
+      log("This Mac does not support \(codec) hardware decoding")
+    }
+    // Only set the option if a change is needed to avoid logging when nothing has changed.
+    if needsAdjustment {
+      setString(MPVOption.Video.hwdecCodecs, adjusted.joined(separator: ","))
+    }
+  }
 
   /// Determine if this Mac has an Apple Silicon chip.
   /// - Returns: `true` if running on a Mac with an Apple Silicon chip, `false` otherwise.
@@ -216,26 +280,33 @@ class MPVController: NSObject {
       log("Running on Apple Silicon, not applying FFmpeg 9599 workaround")
       return
     }
-    // Do not apply the workaround if the user has configured a value for the hwdec-codecs option in
-    // IINA's advanced settings. This code is only needed to avoid emitting confusing log messages
-    // as the user's settings are applied after this and would overwrite the workaround, but without
-    // this check the log would indicate VP9 hardware acceleration is disabled, which may or may not
-    // be true.
-    if Preference.bool(for: .enableAdvancedSettings),
-        let userOptions = Preference.value(for: .userOptions) as? [[String]] {
-      for op in userOptions {
-        guard op[0] != MPVOption.Video.hwdecCodecs else {
-          log("""
-Option \(MPVOption.Video.hwdecCodecs) has been set in advanced settings, \
-not applying FFmpeg 9599 workaround
-""")
-          return
-        }
-      }
+    // Allow the user to override this behavior.
+    guard !userOptionsContains(MPVOption.Video.hwdecCodecs) else {
+      log("""
+        Option \(MPVOption.Video.hwdecCodecs) has been set in advanced settings, \
+        not applying FFmpeg 9599 workaround
+        """)
+      return
     }
-    // Apply the workaround.
-    log("Disabling hardware acceleration for VP9 encoded videos to workaround FFmpeg 9599")
-    setOptionString(MPVOption.Video.hwdecCodecs, "h264,vc1,hevc,vp8,av1,prores")
+    guard let whitelist = getString(MPVOption.Video.hwdecCodecs) else {
+      // Internal error. Make certain this method is called after mpv_initialize which sets the
+      // default value.
+      log("Failed to obtain the value of option \(MPVOption.Video.hwdecCodecs)", level: .error)
+      return
+    }
+    var adjusted: [String] = []
+    var needsWorkaround = false
+    codecLoop: for codec in whitelist.components(separatedBy: ",") {
+      guard codec == "vp9" else {
+        adjusted.append(codec)
+        continue
+      }
+      needsWorkaround = true
+    }
+    if needsWorkaround {
+      log("Disabling hardware acceleration for VP9 encoded videos to workaround FFmpeg 9599")
+      setString(MPVOption.Video.hwdecCodecs, adjusted.joined(separator: ","))
+    }
   }
 
   /**
@@ -273,8 +344,6 @@ not applying FFmpeg 9599 workaround
       let path = Logger.logDirectory.appendingPathComponent("mpv.log").path
       chkErr(setOptionString(MPVOption.ProgramBehavior.logFile, path, level: .verbose))
     }
-
-    applyHardwareAccelerationWorkaround()
 
     // - General
 
@@ -551,6 +620,10 @@ not applying FFmpeg 9599 workaround
       let sorted = watchLaterOptions.components(separatedBy: ",").sorted().joined(separator: ",")
       log("Options mpv is configured to save in watch later files: \(sorted)")
     }
+
+    // Must be called after mpv_initialize which sets the default value for hwdec-codecs.
+    adjustCodecWhiteList()
+    applyHardwareAccelerationWorkaround()
 
     // Set options that can be override by user's config. mpv will log user config when initialize,
     // so we put them here.

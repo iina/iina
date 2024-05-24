@@ -110,6 +110,18 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var speedSlider: NSSlider!
   @IBOutlet weak var speedSliderIndicator: NSTextField!
   @IBOutlet weak var speedSliderConstraint: NSLayoutConstraint!
+  @IBOutlet weak var speedSliderContainerView: NSView!
+
+  @IBOutlet weak var speedSlider0_25xLabel: NSTextField!
+  @IBOutlet weak var speedSlider1xLabel: NSTextField!
+  @IBOutlet weak var speedSlider4xLabel: NSTextField!
+  @IBOutlet weak var speedSlider16xLabel: NSTextField!
+  @IBOutlet var speedSlider1xLabelCenterXConstraint: NSLayoutConstraint!
+  @IBOutlet var speedSlider4xLabelCenterXConstraint: NSLayoutConstraint!
+  @IBOutlet var speedSlider1xLabelPrevLabelConstraint: NSLayoutConstraint!
+  @IBOutlet var speedSlider4xLabelPrevLabelConstraint: NSLayoutConstraint!
+  @IBOutlet var speedSlider16xLabelPrevLabelConstraint: NSLayoutConstraint!
+
   @IBOutlet weak var customSpeedTextField: NSTextField!
   @IBOutlet weak var switchHorizontalLine: NSBox!
   @IBOutlet weak var switchHorizontalLine2: NSBox!
@@ -213,6 +225,92 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
   }
 
+  // MARK: - Right to Left Constraints
+
+  /// Prepares the receiver for service after it has been loaded from an Interface Builder archive, or nib file.
+  ///
+  /// If the user interface layout direction is right to left then certain layout constraints that assume a left to right layout will need to be
+  /// replaced. That will be handled by the `viewWillLayout` method. This method will disable these constraints to avoid triggering
+  /// constraint errors before the constraints can be replaced.
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    guard speedSlider.userInterfaceLayoutDirection == .rightToLeft else { return }
+    NSLayoutConstraint.deactivate([
+      speedSlider1xLabelCenterXConstraint,
+      speedSlider4xLabelCenterXConstraint,
+      speedSlider1xLabelPrevLabelConstraint,
+      speedSlider4xLabelPrevLabelConstraint,
+      speedSlider16xLabelPrevLabelConstraint])
+  }
+
+  /// Calculate the constraint multiplier for a speed slider label.
+  ///
+  /// This method calculates the appropriate multiplier to use in a
+  /// [centerX](https://developer.apple.com/documentation/uikit/nslayoutconstraint/attribute/centerx)
+  /// constraint for a text field that sits under the speed slider and displays the speed associated with a particular tick mark.
+  /// - Parameter speed: Playback speed the label indicates.
+  /// - Returns: Multiplier to use in the constraint.
+  private func calculateSliderLabelMultiplier(speed: Double) -> CGFloat {
+    let tickIndex = Int(convertSpeedToSliderValue(speedSlider.closestTickMarkValue(toValue: speed)))
+    let tickRect = speedSlider.rectOfTickMark(at: tickIndex)
+    let tickCenterX = tickRect.origin.x + tickRect.width / 2
+    let containerViewX = speedSlider.frame.origin.x + tickCenterX
+    return containerViewX / speedSliderContainerView.frame.width
+  }
+
+  /// Called just before the `layout()` method of the view controller's view is called.
+  ///
+  /// If the user interface layout direction is right to left then this method will replace certain layout constraints with ones that properly
+  /// position the reversed views.
+  override func viewWillLayout() {
+    // When the layout is right to left the first time this method is called the views will not have
+    // been reversed. Once the views have been repositioned this method will be called again. Must
+    // wait for that to happen before adjusting constraints to avoid triggering constraint errors.
+    // Detect this based on the order of the speed slider labels.
+    guard speedSliderContainerView.userInterfaceLayoutDirection == .rightToLeft,
+          speedSlider16xLabel.frame.origin.x < speedSlider0_25xLabel.frame.origin.x else {
+      super.viewWillLayout()
+      return
+    }
+
+    // Deactive the layout constraints that will be replaced.
+    NSLayoutConstraint.deactivate([
+      speedSlider1xLabelCenterXConstraint,
+      speedSlider4xLabelCenterXConstraint,
+      speedSlider1xLabelPrevLabelConstraint,
+      speedSlider4xLabelPrevLabelConstraint,
+      speedSlider16xLabelPrevLabelConstraint])
+
+    // The multiplier in the constraints that position the 1x and 4x labels must be changed to
+    // reflect the reversed views.
+    speedSlider1xLabelCenterXConstraint = NSLayoutConstraint(
+      item: speedSlider1xLabel as Any, attribute: .centerX, relatedBy: .equal, toItem: speedSlider,
+      attribute: .right, multiplier: calculateSliderLabelMultiplier(speed: 1), constant: 0)
+    speedSlider4xLabelCenterXConstraint = NSLayoutConstraint(
+      item: speedSlider4xLabel as Any, attribute: .centerX, relatedBy: .equal, toItem: speedSlider,
+      attribute: .right, multiplier: calculateSliderLabelMultiplier(speed: 4), constant: 0)
+
+    // The constraints that impose an order on the labels must be changed to reflect the reversed
+    // views.
+    speedSlider1xLabelPrevLabelConstraint = NSLayoutConstraint(
+      item: speedSlider1xLabel as Any, attribute: .right, relatedBy: .lessThanOrEqual,
+      toItem: speedSlider0_25xLabel, attribute: .left, multiplier: 1, constant: 0)
+    speedSlider4xLabelPrevLabelConstraint = NSLayoutConstraint(
+      item: speedSlider4xLabel as Any, attribute: .right, relatedBy: .lessThanOrEqual,
+      toItem: speedSlider1xLabel, attribute: .left, multiplier: 1, constant: 0)
+    speedSlider16xLabelPrevLabelConstraint = NSLayoutConstraint(
+      item: speedSlider16xLabel as Any, attribute: .right, relatedBy: .lessThanOrEqual,
+      toItem: speedSlider4xLabel, attribute: .left, multiplier: 1, constant: 0)
+
+    NSLayoutConstraint.activate([
+      speedSlider1xLabelCenterXConstraint,
+      speedSlider4xLabelCenterXConstraint,
+      speedSlider1xLabelPrevLabelConstraint,
+      speedSlider4xLabelPrevLabelConstraint,
+      speedSlider16xLabelPrevLabelConstraint])
+    super.viewWillLayout()
+  }
+
   // MARK: - Validate UI
 
   /** Do synchronization*/
@@ -234,6 +332,13 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     updateSubTabControl()
     updateVideoEqState()
     updateAudioEqState()
+  }
+
+  /// Return the slider value that represents the given playback speed.
+  /// - Parameter speed: Playback speed.
+  /// - Returns: Appropriate slider value.
+  private func convertSpeedToSliderValue(_ speed: Double) -> Double {
+    log(speed / AppData.minSpeed) / log(AppData.maxSpeed / AppData.minSpeed) * sliderSteps
   }
 
   private func updateVideoTabControl() {
@@ -269,8 +374,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
     let speed = player.mpv.getDouble(MPVOption.PlaybackControl.speed)
     customSpeedTextField.doubleValue = speed
-    let sliderValue = log(speed / AppData.minSpeed) / log(AppData.maxSpeed / AppData.minSpeed) * sliderSteps
-    speedSlider.doubleValue = sliderValue
+    speedSlider.doubleValue = convertSpeedToSliderValue(speed)
     redraw(indicator: speedSliderIndicator, constraint: speedSliderConstraint, slider: speedSlider, value: "\(customSpeedTextField.stringValue)x")
   }
 
@@ -601,8 +705,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       sender.stringValue = "1"
     }
     let value = customSpeedTextField.doubleValue
-    let sliderValue = log(value / AppData.minSpeed) / log(AppData.maxSpeed / AppData.minSpeed) * sliderSteps
-    speedSlider.doubleValue = sliderValue
+    speedSlider.doubleValue = convertSpeedToSliderValue(value)
     if player.info.playSpeed != value {
       player.setSpeed(value)
     }

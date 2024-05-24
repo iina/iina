@@ -29,6 +29,7 @@ class OnlineSubtitle: NSObject {
   enum CommonError: Error {
     case noResult
     case canceled
+    case dismissed
     case cannotConnect(Error)
     case networkError(Error?)
     case timedOut(Error)
@@ -262,6 +263,11 @@ class OnlineSubtitle: NSObject {
         osdMessage = .canceled
         // Not an error.
         log("User canceled download of subtitles")
+      case CommonError.dismissed:
+        // Operation dismissed by, for example, a plugin with custom implementation.
+        log("Default subtitle search wokflow dismissed")
+        player.isSearchingOnlineSubtitle = false
+        return
       default:
         osdMessage = .networkError
         log("\(prefix)\(err.localizedDescription)", level: .error)

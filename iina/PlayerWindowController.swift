@@ -527,6 +527,23 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     fatalError("Must implement in the subclass")
   }
   
+  func volumeIcon() -> NSImage? {
+    guard !player.info.isMuted else { return NSImage(named: "mute") }
+    switch Int(player.info.volume) {
+    case 0:
+      return NSImage(named: "volume-0")
+    case 1...33:
+      return NSImage(named: "volume-1")
+    case 34...66:
+      return NSImage(named: "volume-2")
+    case 67...1000:
+      return NSImage(named: "volume")
+    default:
+      Logger.log("Volume level \(player.info.volume) is invalid", level: .error)
+      return nil
+    }
+  }
+
   func updateVolume() {
     volumeSlider.doubleValue = player.info.volume
     muteButton.state = player.info.isMuted ? .on : .off

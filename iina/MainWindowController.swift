@@ -2641,6 +2641,13 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
+  override func updateVolume() {
+    guard loaded else { return }
+    super.updateVolume()
+    guard !player.info.isMuted else { return }
+    muteButton.image = volumeIcon()
+  }
+
   // MARK: - IBActions
 
   @IBAction override func playButtonAction(_ sender: NSButton) {

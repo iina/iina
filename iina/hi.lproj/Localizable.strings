@@ -116,6 +116,10 @@
 
 "preference.enable_adv_settings" = "उन्नत सेटिंग्स सक्षम करें";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "स्ट्रिप";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "ध्वनि: %d";
 "menu.volume_muted" = "Volume: %d (Muted)";
 "menu.audio_delay" = "ऑडियो विलंब: %.2fs";

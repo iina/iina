@@ -24,7 +24,7 @@
 // Initial Window
 "initial.announcement" = "您正在使用IINA的%@版本";
 "initial.beta.desc" = "如果您希望回滾至穩定版本，請從 設置 > 通用 取消勾選“接收Beta版本更新”，然後從 我們的<a href=\"https://iina.io\">官方網站</a>安裝穩定版本.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.nightly.desc" = "不推薦您使用「每日構建版 Nightly Build」做為日常使用首選。每日構建版不支援自動更新，請至 <a href=\"https://nightly.iina.io\">每日構建版網站頁面</a> 自行下載更新。";
 "initial.debug.desc" = "開發版通常沒有將效能最佳化，所以不建議作為生產力軟件。開發版不支持自動更新。";
 "initial.bug_report" = "通過<a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>發送報告.";
 
@@ -91,9 +91,9 @@
 "osd.timed_out" = "已逾時";
 "osd.filter_added" = "已加入濾鏡：%@";
 "osd.filter_removed" = "已移除濾鏡";
-"osd.file_loop" = "Loop Single File";
-"osd.playlist_loop" = "Loop Playlist";
-"osd.no_loop" = "Disable Looping";
+"osd.file_loop" = "循環播放單一檔案";
+"osd.playlist_loop" = "循環播放全部檔案";
+"osd.no_loop" = "取消循環播放檔案";
 
 "preference.title" = "偏好設定";
 "preference.general" = "一般";
@@ -115,6 +115,10 @@
 "preference.key_binding_hint_2" = "在右邊的任意一行按兩下來編輯相應的快速鍵。";
 
 "preference.enable_adv_settings" = "啟用進階設定";
+
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "過濾";
+"preference.sub_override_level.yes" = "yes";
 
 "menu.volume" = "音量：%d";
 "menu.volume_muted" = "音量：%d (靜音)";

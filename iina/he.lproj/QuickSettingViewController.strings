@@ -11,7 +11,7 @@
 "3kI-6i-ujt.title" = "צבע:";
 
 /* Class = "NSTextFieldCell"; title = "+12 dB"; ObjectID = "4BZ-H1-GEU"; */
-"4BZ-H1-GEU.title" = "+12 dB";
+"4BZ-H1-GEU.title" = "+12 דציבלים";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "6LO-6y-IsA"; */
 "6LO-6y-IsA.title" = "צבע:";
@@ -47,7 +47,7 @@
 "HBF-J7-Tie.title" = "31.25";
 
 /* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "IYU-eq-dls"; */
-"YCG-xK-eAs.title" = "-5 שניות";
+"YCG-xK-eAs.title" = "- 5 שניות";
 
 /* Class = "NSMenuItem"; title = "1.5"; ObjectID = "JbG-Ur-b55"; */
 "JbG-Ur-b55.title" = "1.5";
@@ -59,7 +59,7 @@
 "Lnu-kz-cql.title" = "שמע חיצוני:";
 
 /* Class = "NSTextFieldCell"; title = "-12 dB"; ObjectID = "Lpw-ws-Ezh"; */
-"Lpw-ws-Ezh.title" = "-12 dB";
+"Lpw-ws-Ezh.title" = "- 12 דציבלים";
 
 /* Class = "NSButtonCell"; title = "SUBTITLES"; ObjectID = "NxO-to-jcI"; */
 "NxO-to-jcI.title" = "כתוביות";
@@ -140,13 +140,13 @@
 "iuN-rN-jT7.ibShadowedLabels[0]" = "ללא";
 
 /* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[6] = "Custom…"; ObjectID = "iuN-rN-jT7"; */
-"iuN-rN-jT7.ibShadowedLabels[6]" = "התאמה אישית…";
+"iuN-rN-jT7.ibShadowedLabels[6]" = "מותאם אישית…";
 
 /* Class = "NSTabViewItem"; label = "Subtitle"; ObjectID = "jND-MZ-sKB"; */
 "jND-MZ-sKB.label" = "כתוביות";
 
 /* Class = "NSTextFieldCell"; title = "0 dB"; ObjectID = "lBn-YS-jL7"; */
-"lBn-YS-jL7.title" = "0 dB";
+"lBn-YS-jL7.title" = "0 דציבלים";
 
 /* Class = "NSButtonCell"; title = "VIDEO"; ObjectID = "lQt-I0-jHO"; */
 "lQt-I0-jHO.title" = "וידאו";
@@ -176,7 +176,7 @@
 "to3-rc-Agv.title" = "הטיה:";
 
 /* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "uCX-EC-jXM"; */
-"uCX-EC-jXM.title" = "-5 שניות";
+"uCX-EC-jXM.title" = "- 5 שניות";
 
 /* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "udN-rq-omw"; */
 "udN-rq-omw.title" = "0 שניות";

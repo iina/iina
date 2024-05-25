@@ -29,7 +29,7 @@ jobs:
         run: tar cvJf ~/iina.tar.xz -C /Users/runner/Library/Developer/Xcode/DerivedData/iina-csbkugdtxazzqogjnydbothqrvib/Build/Products/Debug IINA.app 
 
       - name: Save artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: IINA
           path: ~/iina.tar.xz

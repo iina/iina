@@ -112,9 +112,13 @@
 "preference.system_media_control" = "از کنترل‌های چندرسانه‌ای سیستم استفاده شود";
 
 "preference.key_binding_hint_1" = "To edit key bindings in current configuration file, click \"Duplicate…\" button first to create a copy.";
-"preference.key_binding_hint_2" = "Double click a row at the right side to edit the corresponding key binding.";
+"preference.key_binding_hint_2" = "";
 
 "preference.enable_adv_settings" = "فعال‌سازی تنظیمات پیشرفته";
+
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "strip";
+"preference.sub_override_level.yes" = "yes";
 
 "menu.volume" = "بلندی صدا: %d";
 "menu.volume_muted" = "صدا: %d (بی صدا)";

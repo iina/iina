@@ -1,0 +1,55 @@
+/*
+  FilterPresets.strings
+  iina
+
+  Created by lhc on 25/8/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+/* It's optional to localize descriptions for each parameter! */
+
+
+
+"crop" = "Kəs";
+"crop.w" = "Genişlik (Varsayılan: videonun genişliyi)";
+"crop.h" = "Hündürlük (Varsayılan: videonun hündürlüyü)";
+"crop.x" = "Başlanğıc X (Varsayılan: Mərkəz)";
+"crop.y" = "Başlanğıc Y (Varsayılan: Mərkəz)";
+
+"expand" = "Genişləndir";
+"expand.w" = "Genişlik (Varsayılan: videonun genişliyi)";
+"expand.h" = "Hündürlük (Varsayılan: videonun hündürlüyü)";
+"expand.x" = "Başlanğıc X (Varsayılan: Mərkəz)";
+"expand.y" = "Başlanğıc Y (Varsayılan: Mərkəz)";
+"expand.aspect" = "Aspektə uyğunlaşacaq şəkildə genişləndir (misal üçün:4/3)";
+"expand.round" = "Dəyərə bölünəcək şəkildə yuvarlaqlaşdır";
+
+"sharpen" = "Kəskinlik";
+"sharpen.msize" = "Matris ölçüsü";
+"sharpen.amount" = "Miqdar";
+
+"blur" = "Bulanıqlıq";
+"blur.msize" = "Matris ölçüsü";
+"blur.amount" = "Miqdar";
+
+"delogo" = "Delogo (logonu sil)";
+"delogo.w" = "Genişlik";
+"delogo.h" = "Hündürlük";
+"delogo.x" = "Başlanğıc X";
+"delogo.y" = "Başlanğıc Y";
+
+"negative" = "Neqativ";
+
+"vflip" = "Çevir";
+"hflip" = "Əksinə çevir";
+
+"lut3d" = "3D LUT";
+"lut3d.file" = "Faylın yeri (Faylı birbaşa sürükləyib buraxa bilərsiz)";
+"lut3d.interp" = "İnterpolyasiya rejimi";
+
+"custom_mpv" = "Xüsusi (mpv)";
+"custom_mpv.name" = "Filter adı";
+"custom_mpv.string" = "Filter dəyəri";
+
+"custom_ffmpeg" = "Xüsusi (FFmpeg) ";
+"custom_ffmpeg.name" = "Filter adı";
+"custom_ffmpeg.string" = "Filter dəyəri";

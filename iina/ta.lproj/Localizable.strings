@@ -116,6 +116,10 @@
 
 "preference.enable_adv_settings" = "மேம்பட்ட அமைப்புகளை இயக்கு";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "strip";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "ஒலியளவு: %d";
 "menu.volume_muted" = "Volume: %d (Muted)";
 "menu.audio_delay" = "Audio Delay: %.2fs";

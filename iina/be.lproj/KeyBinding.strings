@@ -10,12 +10,12 @@
 "cmd.seek" = "Пераматаць";
 "cmd.revert-seek" = "Перамотка назад";
 "cmd.set" = "Задаць";
-"cmd.cycle" = "Cycle";
+"cmd.cycle" = "Пераключыць";
 "cmd.cycle-values" = "Cycle in";
 "cmd.add" = "Змяніць";
-"cmd.multiply" = "Multiply";
-"cmd.frame-step" = "Next frame";
-"cmd.frame-back-step" = "Previous frame";
+"cmd.multiply" = "Памножыць";
+"cmd.frame-step" = "Наступны кадр";
+"cmd.frame-back-step" = "Папярэдні кадр";
 "cmd.ab-loop" = "A-B loop";
 "cmd.sub-seek" = "Subtitle seek";
 "cmd.playlist-next" = "Next media";
@@ -23,12 +23,12 @@
 "cmd.playlist-move" = "Move playlist item";
 "cmd.playlist-clear" = "Clear playlist";
 "cmd.playlist-remove" = "Remove current";
-"cmd.playlist-shuffle" = "Shuffle";
+"cmd.playlist-shuffle" = "Перамяшаць";
 "cmd.write-watch-later-config" = "Record play history";
-"cmd.stop" = "Stop";
-"cmd.quit" = "Quit";
+"cmd.stop" = "Спыніць";
+"cmd.quit" = "Выйсці";
 "cmd.quit-watch-later" = "Quit (save progress)";
-"cmd.screenshot" = "Screenshot";
+"cmd.screenshot" = "Скрыншот";
 "cmd.screenshot-to-file" = "Screenshot to file";
 "cmd.loadfile" = "Load file";
 "cmd.loadlist" = "Load playlist";
@@ -77,8 +77,8 @@
 "absolute+keyframe" = "s (keyframe)";
 "absolute-percent+keyframe" = "% (keyframe)";
 
-"opt.pause" = "Pause";
-"opt.speed" = "Speed";
+"opt.pause" = "Паўза";
+"opt.speed" = "Хуткасць";
 
 "opt.window-scale" = "Window scale";
 
@@ -105,7 +105,7 @@
 "opt.fullscreen" = "Fullscreen";
 "opt.ontop" = "Float on top";
 
-"opt.chapter" = "Chapter";
+"opt.chapter" = "Раздзел";
 
 "read.set" = "Set {{property}} to {{value}}";
 "read.add" = "{{property}} {{value}}";

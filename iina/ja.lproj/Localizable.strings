@@ -22,8 +22,8 @@
 "guide.faq" = "よくある質問";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
+"initial.announcement" = "%@ バージョンのIINAを使用しています";
+"initial.beta.desc" = "リリースバージョンに戻したい場合は、「設定 > 一般」の「ベータアップデートの受信」のチェックを外してください。その後 <a href=\"https://iina.io\">公式ウェブサイト</a> から安定版リリースをインストールします。";
 "initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
 "initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
@@ -87,13 +87,13 @@
 "osd.file_error" = "ファイルの読み込みエラー";
 "osd.cannot_login" = "ログインできません";
 "osd.canceled" = "キャンセルされました";
-"osd.cannot_connect" = "Cannot connect";
-"osd.timed_out" = "Timed Out";
+"osd.cannot_connect" = "接続できません";
+"osd.timed_out" = "タイムアウト";
 "osd.filter_added" = "追加したフィルター: %@";
 "osd.filter_removed" = "削除したフィルター";
-"osd.file_loop" = "Loop Single File";
-"osd.playlist_loop" = "Loop Playlist";
-"osd.no_loop" = "Disable Looping";
+"osd.file_loop" = "1つのファイルをループ";
+"osd.playlist_loop" = "プレイリストをループ";
+"osd.no_loop" = "ループを無効にする";
 
 "preference.title" = "環境設定";
 "preference.general" = "一般";
@@ -116,16 +116,20 @@
 
 "preference.enable_adv_settings" = "高度な設定を有効化";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "ストリップ";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "音量: %d";
-"menu.volume_muted" = "Volume: %d (Muted)";
+"menu.volume_muted" = "ボリューム: %d (ミュート中)";
 "menu.audio_delay" = "オーディオディレイ: %.2fs";
 "menu.sub_delay" = "字幕ディレイ: %.2fs";
 "menu.fullscreen" = "フルスクリーンにする";
 "menu.exit_fullscreen" = "フルスクリーンを解除";
 "menu.pip" = "ピクチャー・イン・ピクチャーを使用";
 "menu.exit_pip" = "ピクチャー・イン・ピクチャーを終了";
-"menu.mini_player" = "Enter Music Mode";
-"menu.exit_mini_player" = "Exit Music Mode";
+"menu.mini_player" = "ミュージックモードにする";
+"menu.exit_mini_player" = "ミュージックモードを終了する";
 "menu.pause" = "一時停止";
 "menu.resume" = "再生";
 "menu.speed" = "再生速度: %.2f倍";
@@ -317,7 +321,7 @@
 "osc_toolbar.full_screen" = "フルスクリーン切り替え";
 "osc_toolbar.music_mode" = "ミュージックモード切り替え";
 "osc_toolbar.sub_track" = "字幕トラックを選択";
-"osc_toolbar.screenshot" = "Take a screenshot";
+"osc_toolbar.screenshot" = "スクリーンショットを撮影";
 
 "mini_player.album_art" = "アルバムアートの切り替え";
 "mini_player.loop" = "リピート";

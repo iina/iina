@@ -20,8 +20,8 @@
 "cmd.sub-seek" = "Sub spol";
 "cmd.playlist-next" = "Næste medie";
 "cmd.playlist-prev" = "Forrige medie";
-"cmd.playlist-move" = "Flyt playlist punkt";
-"cmd.playlist-clear" = "Tøm playliste";
+"cmd.playlist-move" = "Flyt element i afspilningslisten";
+"cmd.playlist-clear" = "Ryd afspilningsliste";
 "cmd.playlist-remove" = "Fjern valgte";
 "cmd.playlist-shuffle" = "Bland";
 "cmd.write-watch-later-config" = "Optag afspilningshistorik";
@@ -29,23 +29,23 @@
 "cmd.quit" = "Afslut";
 "cmd.quit-watch-later" = "Afslut (gem fremskridt)";
 "cmd.screenshot" = "Skærmbillede";
-"cmd.screenshot-to-file" = "Screenshot til fil";
-"cmd.loadfile" = "Åben fil";
-"cmd.loadlist" = "Åben playlist";
+"cmd.screenshot-to-file" = "Skærmbillede til fil";
+"cmd.loadfile" = "Åbn fil";
+"cmd.loadlist" = "Åbn afspilningsliste";
 "cmd.run" = "Kør";
 
 "iina.flip" = "Vend";
 "iina.mirror" = "Spejlvend";
 
-"iina.toggle-pip" = "Skift Billede-i-Billede";
-"iina.toggle-music-mode" = "Toggle Musik tilstand";
-"iina.open-file" = "Åben fil";
-"iina.open-url" = "Åben URL";
-"iina.video-panel" = "Video panel";
-"iina.audio-panel" = "Lyd panel";
-"iina.sub-panel" = "Undertekst panel";
-"iina.playlist-panel" = "Afspilningsliste panel";
-"iina.chapter-panel" = "Kapittel panel";
+"iina.toggle-pip" = "Skift billede-i-billede";
+"iina.toggle-music-mode" = "Skift musiktilstand";
+"iina.open-file" = "Åbn fil";
+"iina.open-url" = "Åbn URL";
+"iina.video-panel" = "Videopanel";
+"iina.audio-panel" = "Lydpanel";
+"iina.sub-panel" = "Undertekstpanel";
+"iina.playlist-panel" = "Afspilningsliste-panel";
+"iina.chapter-panel" = "Kapitel-panel";
 "iina.bigger-window" = "Større vindue";
 "iina.smaller-window" = "Mindre vindue";
 "iina.fit-to-screen" = "Tilpas til skærm";

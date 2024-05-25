@@ -91,9 +91,9 @@
 "osd.timed_out" = "超时";
 "osd.filter_added" = "已添加滤镜: %@";
 "osd.filter_removed" = "已移除滤镜";
-"osd.file_loop" = "Loop Single File";
-"osd.playlist_loop" = "Loop Playlist";
-"osd.no_loop" = "Disable Looping";
+"osd.file_loop" = "循环单个文件";
+"osd.playlist_loop" = "循环播放列表";
+"osd.no_loop" = "禁用循环";
 
 "preference.title" = "偏好设置";
 "preference.general" = "通用";
@@ -115,6 +115,10 @@
 "preference.key_binding_hint_2" = "双击右边的任意一行来编辑相应的快捷键。";
 
 "preference.enable_adv_settings" = "启用高级设置";
+
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "strip";
+"preference.sub_override_level.yes" = "yes";
 
 "menu.volume" = "音量: %d";
 "menu.volume_muted" = "音量：%d （静音）";
@@ -267,7 +271,7 @@
 "alert.assrt_token_invalid" = "你的射手网(伪) API token 格式错误。";
 
 "alert.plugin_uninstall.title" = "你确定要卸载 %@ 吗？";
-"alert.plugin_uninstall.message" = "插件将从您的磁盘中删除";
+"alert.plugin_uninstall.message" = "插件将从您的硬盘中删除。";
 "alert.plugin_reinstall.title" = "插件 %@ 已存在";
 "alert.plugin_reinstall.message" = "您希望重新安装此插件吗？";
 "alert.duplicated_plugin_id" = "检测到重复的插件标识符。两个或多个插件具有相同的标识符“%@”，这可能会导致异常行为。 请在首选项 - 插件中找到它们，并向插件作者报告。 如果插件是本地安装的，您也可以手动更改插件的 Info.json 文件中的标识符。";
@@ -371,6 +375,6 @@
 "plugin.install_error.file_not_found" = "找不到软件包文件。";
 "plugin.install_error.cannot_download" = "下载插件失败。\n\n输出: %@\n";
 "plugin.install_error.cannot_unpackage" = "解包插件失败。\n\n输出: %@\n";
-"plugin.install_error.cannot_load" = "IINA无法加载此插件，其格式可能是错误的";
+"plugin.install_error.cannot_load" = "IINA无法加载此插件，可能是格式错误。";
 "plugin.check_for_updates" = "检查更新";
 "plugin.updating" = "下载更新中……";

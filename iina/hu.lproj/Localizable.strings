@@ -87,13 +87,13 @@
 "osd.file_error" = "Hiba a fájl olvasásakor";
 "osd.cannot_login" = "Sikertelen belépés";
 "osd.canceled" = "Megszakítva";
-"osd.cannot_connect" = "Cannot connect";
-"osd.timed_out" = "Timed Out";
+"osd.cannot_connect" = "Nem tud csatlakozni";
+"osd.timed_out" = "Időtúllépés";
 "osd.filter_added" = "Szűrő hozzáadása: %@";
 "osd.filter_removed" = "Szűrő eltávolítása";
 "osd.file_loop" = "Loop Single File";
-"osd.playlist_loop" = "Loop Playlist";
-"osd.no_loop" = "Disable Looping";
+"osd.playlist_loop" = "Ismétlődő lejátszási lista";
+"osd.no_loop" = "Ismétlés kikapcsolása";
 
 "preference.title" = "Beállítások";
 "preference.general" = "Általános";
@@ -116,6 +116,10 @@
 
 "preference.enable_adv_settings" = "Haladó beállítások engedélyezése";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "csík";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "Hangerő: %d";
 "menu.volume_muted" = "Hangerő: %d (Némítva)";
 "menu.audio_delay" = "Hangkésleltetés: %.2fmp-vel később";
@@ -124,8 +128,8 @@
 "menu.exit_fullscreen" = "Kilépés a teljes képernyős módból";
 "menu.pip" = "Kép a képben";
 "menu.exit_pip" = "Kilépés kép a képben módból";
-"menu.mini_player" = "Enter Music Mode";
-"menu.exit_mini_player" = "Exit Music Mode";
+"menu.mini_player" = "Belépés \"zene\" módba";
+"menu.exit_mini_player" = "Kilépés zene módból";
 "menu.pause" = "Pause (Megállít)";
 "menu.resume" = "Folytatás";
 "menu.speed" = "Sebesség: %.2fx";
@@ -317,7 +321,7 @@
 "osc_toolbar.full_screen" = "Váltás teljes képernyõre";
 "osc_toolbar.music_mode" = "Belépés \"zene\" módba";
 "osc_toolbar.sub_track" = "Válassz felirat sávot";
-"osc_toolbar.screenshot" = "Take a screenshot";
+"osc_toolbar.screenshot" = "Képernyőmentés készítése";
 
 "mini_player.album_art" = "Album borító váltás";
 "mini_player.loop" = "Ismétlés";

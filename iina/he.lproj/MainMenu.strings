@@ -112,6 +112,9 @@
 /* Class = "NSMenu"; title = "Audio Track"; ObjectID = "DRb-Y8-xir"; */
 "DRb-Y8-xir.title" = "רצועת שמע";
 
+/* Class = "NSMenuItem"; title = "Load External Audio…"; ObjectID = "3xl-iD-85w"; */
+"3xl-iD-85w.title" = "טען רצועת שמע חיצונית…";
+
 /* Class = "NSMenuItem"; title = "Speed Down to 0.9x"; ObjectID = "DUP-nm-BJt"; */
 "DUP-nm-BJt.title" = "האט מהירות ל-x0.9";
 
@@ -188,7 +191,7 @@
 "LE2-aR-0XJ.title" = "הבא הכל לחזית";
 
 /* Class = "NSMenuItem"; title = "Playback History"; ObjectID = "LND-1n-DU2"; */
-"LND-1n-DU2.title" = "הסטוריית השמעה";
+"LND-1n-DU2.title" = "היסטוריית השמעה";
 
 /* Class = "NSMenuItem"; title = "Audio Delay - 0.5s"; ObjectID = "Lc4-4W-thE"; */
 "Lc4-4W-thE.title" = "עיכוב שמע: הפחת 0.5 שניות";
@@ -218,7 +221,7 @@
 "OIu-H0-Mht.title" = "אנכי (הפוך)";
 
 /* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "OY7-WF-poV"; */
-"OY7-WF-poV.title" = "מזער";
+"OY7-WF-poV.title" = "מזעור";
 
 /* Class = "NSMenuItem"; title = "Hide IINA"; ObjectID = "Olw-nP-bQN"; */
 "Olw-nP-bQN.title" = "הסתר את IINA";

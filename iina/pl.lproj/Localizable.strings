@@ -116,6 +116,10 @@
 
 "preference.enable_adv_settings" = "Włącz ustawienia zaawansowane";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "pasek";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "Głośność: %d";
 "menu.volume_muted" = "Głośność: %d (Wyciszono)";
 "menu.audio_delay" = "Opóźnienie audio: %.2fs";

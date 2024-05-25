@@ -112,6 +112,9 @@
 /* Class = "NSMenu"; title = "Audio Track"; ObjectID = "DRb-Y8-xir"; */
 "DRb-Y8-xir.title" = "Audio Track";
 
+/* Class = "NSMenuItem"; title = "Load External Audio…"; ObjectID = "3xl-iD-85w"; */
+"3xl-iD-85w.title" = "Load External Audio…";
+
 /* Class = "NSMenuItem"; title = "Speed Down to 0.9x"; ObjectID = "DUP-nm-BJt"; */
 "DUP-nm-BJt.title" = "Speed Down to 0.9x";
 
@@ -263,7 +266,7 @@
 "Tue-O7-cei.title" = "Capitalize";
 
 /* Class = "NSMenuItem"; title = "Pause"; ObjectID = "UOE-MJ-8ku"; */
-"UOE-MJ-8ku.title" = "Pause";
+"UOE-MJ-8ku.title" = "Паўза";
 
 /* Class = "NSMenu"; title = "Second Subtitle"; ObjectID = "UwY-P2-Xdb"; */
 "UwY-P2-Xdb.title" = "Second Subtitle";

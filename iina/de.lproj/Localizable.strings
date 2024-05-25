@@ -116,6 +116,10 @@
 
 "preference.enable_adv_settings" = "Erweiterte Einstellungen";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "strip";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "Lautstärke: %d";
 "menu.volume_muted" = "Lautstärke: %d (Stumm)";
 "menu.audio_delay" = "Audioverzögerung: %.2f s";

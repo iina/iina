@@ -20,7 +20,7 @@
 "A4y-LL-x0z.title" = "קצב סיביות:";
 
 /* Class = "NSTextFieldCell"; title = "Mistimed Frames:"; ObjectID = "AYt-pH-UCi"; */
-"AYt-pH-UCi.title" = "Mistimed Frames:";
+"AYt-pH-UCi.title" = "פריימים שתוזמנו באופן שגוי:";
 
 /* Class = "NSTextFieldCell"; title = "Display FPS:"; ObjectID = "AjU-1T-aGR"; */
 "AjU-1T-aGR.title" = "הצג פריימים לשנייה:";
@@ -53,7 +53,7 @@
 "I2E-6Z-Gnn.title" = "מנהל התקן:";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Disp FPS"; ObjectID = "JN9-3E-OJp"; */
-"JN9-3E-OJp.title" = "Estimated Disp FPS";
+"JN9-3E-OJp.title" = "כמות פריימים מוצגים לשניה (משוער)";
 
 /* Class = "NSTextFieldCell"; title = "File Path:"; ObjectID = "Jxp-Wf-BhU"; */
 "Jxp-Wf-BhU.title" = "נתיב קובץ:";
@@ -116,7 +116,7 @@
 "f7i-wX-uxQ.title" = "רצועה:";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Output FPS:"; ObjectID = "g8p-Ec-awO"; */
-"g8p-Ec-awO.title" = "Estimated Output FPS:";
+"g8p-Ec-awO.title" = "כמות פריימים משוערת לשניה:";
 
 /* Class = "NSTextFieldCell"; title = "VIDEO"; ObjectID = "gDG-Eq-1Bc"; */
 "gDG-Eq-1Bc.title" = "וידאו";
@@ -149,7 +149,7 @@
 "nrG-IH-kFg.title" = "שמע";
 
 /* Class = "NSTextFieldCell"; title = "Total A/V Sync:"; ObjectID = "sbO-Cn-gpI"; */
-"sbO-Cn-gpI.title" = "Total A/V Sync:";
+"sbO-Cn-gpI.title" = "סה\"כ סנכרון אודיו/וידאו:";
 
 /* Class = "NSTextFieldCell"; title = "Watch"; ObjectID = "tNS-gW-PcC"; */
 "tNS-gW-PcC.title" = "צפיה";
@@ -161,7 +161,7 @@
 "xix-0S-ehE.title" = "מפענח:";
 
 /* Class = "NSTextFieldCell"; title = "Primaries:"; ObjectID = "1kw-LO-KmJ"; */
-"1kw-LO-KmJ.title" = "Primaries:";
+"1kw-LO-KmJ.title" = "צבעי בסיס:";
 
 /* Class = "NSTextFieldCell"; title = "Colorspace:"; ObjectID = "mLo-Wc-BoO"; */
 "mLo-Wc-BoO.title" = "טווח צבעים:";

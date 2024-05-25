@@ -2,7 +2,7 @@
 "1yb-m4-1sK.title" = "סוג חיפוש:";
 
 /* Class = "NSMenuItem"; title = "Toggle fullscreen"; ObjectID = "6F4-gm-oBg"; */
-"6F4-gm-oBg.title" = "היכנס/צא ממסך מלא";
+"6F4-gm-oBg.title" = "להיכנס/לצאת ממצב מסך מלא";
 
 /* Class = "NSTextFieldCell"; title = "Exact seek is more precise but can cause lag and higher CPU usage."; ObjectID = "6FZ-Qm-0k0"; */
 "6FZ-Qm-0k0.title" = "\"חיפוש מדויק\" הוא מדויק יותר אך עלול לגרום לפיגור ולשימוש גבוה יותר במעבד.";
@@ -11,19 +11,19 @@
 "70P-6t-4jC.title" = "חיפוש מדויק";
 
 /* Class = "NSMenuItem"; title = "Toggle fullscreen"; ObjectID = "7wy-xt-c8Z"; */
-"7wy-xt-c8Z.title" = "היכנס/צא ממסך מלא";
+"7wy-xt-c8Z.title" = "להיכנס/לצאת ממצב מסך מלא";
 
 /* Class = "NSMenuItem"; title = "Hide OSC"; ObjectID = "9qx-ao-oxE"; */
-"9qx-ao-oxE.title" = "הסתר OSD";
+"9qx-ao-oxE.title" = "להסתיר את ה-OSD";
 
 /* Class = "NSMenuItem"; title = "Pause / Resume"; ObjectID = "A8c-wa-IFR"; */
-"A8c-wa-IFR.title" = "השהה/המשך";
+"A8c-wa-IFR.title" = "להשהות/לחדש";
 
 /* Class = "NSMenuItem"; title = "Pause / Resume"; ObjectID = "Ba4-eT-rTv"; */
-"Ba4-eT-rTv.title" = "השהה/המשך";
+"Ba4-eT-rTv.title" = "להשהות/לחדש";
 
 /* Class = "NSMenuItem"; title = "Pause / Resume"; ObjectID = "Dm7-JG-fLd"; */
-"Dm7-JG-fLd.title" = "השהה/המשך";
+"Dm7-JG-fLd.title" = "להשהות/לחדש";
 
 /* Class = "NSTextFieldCell"; title = "Pinch to:"; ObjectID = "E8H-pO-MLc"; */
 "E8H-pO-MLc.title" = "צביטה כדי:";
@@ -38,25 +38,25 @@
 "gZK-ry-lQs.title" = "קבל לחיצת עכבר ראשונה כאשר החלון לא ממוקד";
 
 /* Class = "NSMenuItem"; title = "Fullscreen"; ObjectID = "Hm3-dh-jgb"; */
-"Hm3-dh-jgb.title" = "מסך מלא";
+"Hm3-dh-jgb.title" = "להיכנס למצב מסך מלא";
 
 /* Class = "NSTextFieldCell"; title = "Trackpad"; ObjectID = "I6k-ab-IwJ"; */
-"I6k-ab-IwJ.title" = "משטח מגע";
+"I6k-ab-IwJ.title" = "משטח עקיבה";
 
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "K9H-w9-wmT"; */
 "K9H-w9-wmT.title" = "אוטומטי";
 
 /* Class = "NSMenuItem"; title = "Hide OSC"; ObjectID = "M6K-ME-cve"; */
-"M6K-ME-cve.title" = "הסתר OSD";
+"M6K-ME-cve.title" = "להסתיר את ה-OSD";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "NjV-fH-YgN"; */
-"NjV-fH-YgN.title" = "ללא";
+"NjV-fH-YgN.title" = "ללא פעולה";
 
 /* Class = "NSMenuItem"; title = "Hide OSC"; ObjectID = "OOM-jo-N4V"; */
-"OOM-jo-N4V.title" = "הסתר OSD";
+"OOM-jo-N4V.title" = "להסתיר את ה-OSD";
 
 /* Class = "NSMenuItem"; title = "Adjust window size"; ObjectID = "Ols-Lr-fiH"; */
-"Ols-Lr-fiH.title" = "להתאים את גודל החלון";
+"Ols-Lr-fiH.title" = "לשנות את גודל החלון";
 
 /* Class = "NSTextFieldCell"; title = "Single click to:"; ObjectID = "QhO-As-ZLL"; */
 "QhO-As-ZLL.title" = "קליק בודד כדי:";
@@ -68,13 +68,13 @@
 "Rqy-g2-AP2.title" = "קליק ימני כדי:";
 
 /* Class = "NSMenuItem"; title = "Adjust volume"; ObjectID = "SYg-hW-b6r"; */
-"SYg-hW-b6r.title" = "שנה עוצמת קול";
+"SYg-hW-b6r.title" = "לשנות את עוצמת הקול";
 
 /* Class = "NSTextFieldCell"; title = "Sensitivity for volume:"; ObjectID = "YQH-1a-WcM"; */
 "YQH-1a-WcM.title" = "רגישות עוצמת קול:";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "chS-d2-TG1"; */
-"chS-d2-TG1.title" = "ללא";
+"chS-d2-TG1.title" = "ללא פעולה";
 
 /* Class = "NSTextFieldCell"; title = "Force Touch to:"; ObjectID = "dpH-PO-WKt"; */
 "dpH-PO-WKt.title" = "‏Force Touch כדי:";
@@ -83,40 +83,40 @@
 "eA4-AD-oUu.title" = "עכבר";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "guu-dK-YfL"; */
-"guu-dK-YfL.title" = "ללא";
+"guu-dK-YfL.title" = "ללא פעולה";
 
 /* Class = "NSMenuItem"; title = "Toggle fullscreen"; ObjectID = "hDh-Lk-FJe"; */
-"hDh-Lk-FJe.title" = "היכנס/צא ממסך מלא";
+"hDh-Lk-FJe.title" = "להיכנס/לצאת ממצב מסך מלא";
 
 /* Class = "NSTextFieldCell"; title = "Scroll vertically to:"; ObjectID = "hNU-dJ-5Cj"; */
 "hNU-dJ-5Cj.title" = "גלול אנכית כדי:";
 
 /* Class = "NSMenuItem"; title = "Hide OSC"; ObjectID = "iFF-Gq-tVx"; */
-"iFF-Gq-tVx.title" = "הסתר OSD";
+"iFF-Gq-tVx.title" = "להסתיר את ה-OSD";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "jnR-2I-4x4"; */
-"jnR-2I-4x4.title" = "ללא";
+"jnR-2I-4x4.title" = "ללא פעולה";
 
 /* Class = "NSMenuItem"; title = "Pause / Resume"; ObjectID = "mOX-Fi-oTv"; */
-"mOX-Fi-oTv.title" = "השהה/המשך";
+"mOX-Fi-oTv.title" = "להשהות/לחדש";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "oOk-y6-lek"; */
-"oOk-y6-lek.title" = "ללא";
+"oOk-y6-lek.title" = "ללא פעולה";
 
 /* Class = "NSTextFieldCell"; title = "Sensitivity for normal seek:"; ObjectID = "of2-ec-OkC"; */
 "of2-ec-OkC.title" = "רגישות (חיפוש רגיל):";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "unj-zt-RyU"; */
-"unj-zt-RyU.title" = "ללא";
+"unj-zt-RyU.title" = "ללא פעולה";
 
 /* Class = "NSMenuItem"; title = "Pause / Resume"; ObjectID = "uqM-UM-Xvb"; */
-"uqM-UM-Xvb.title" = "השהה/המשך";
+"uqM-UM-Xvb.title" = "להשהות/לחדש";
 
 /* Class = "NSTextFieldCell"; title = "Scroll horizontally to:"; ObjectID = "w1Y-jy-vNc"; */
 "w1Y-jy-vNc.title" = "גלול אופקית כדי:";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "w54-7I-QfW"; */
-"w54-7I-QfW.title" = "ללא";
+"w54-7I-QfW.title" = "ללא פעולה";
 
 /* Class = "NSMenuItem"; title = "Keyframe seek"; ObjectID = "wBB-fx-Mao"; */
 "wBB-fx-Mao.title" = "חיפוש פריים";
@@ -125,13 +125,13 @@
 "wcS-tP-wav.title" = "חיפוש";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "wkV-Gq-B0T"; */
-"wkV-Gq-B0T.title" = "ללא";
+"wkV-Gq-B0T.title" = "ללא פעולה";
 
 /* Class = "NSMenuItem"; title = "Toggle Picture-in-Picture"; ObjectID = "rvS-xA-7bv"; */
-"rvS-xA-7bv.title" = "היכנס/צא ממצב תמונה בתוך תמונה";
+"rvS-xA-7bv.title" = "להיכנס/לצאת ממצב תמונה בתוך תמונה";
 
 /* Class = "NSMenuItem"; title = "Toggle Picture-in-Picture"; ObjectID = "ibM-4r-SQA"; */
-"ibM-4r-SQA.title" = "היכנס/צא ממצב תמונה בתוך תמונה";
+"ibM-4r-SQA.title" = "להיכנס/לצאת ממצב תמונה בתוך תמונה";
 
 /* Class = "NSMenuItem"; title = "Toggle Picture-in-Picture"; ObjectID = "3Pm-nn-HpB"; */
-"3Pm-nn-HpB.title" = "היכנס/צא ממצב תמונה בתוך תמונה";
+"3Pm-nn-HpB.title" = "להיכנס/לצאת ממצב תמונה בתוך תמונה";

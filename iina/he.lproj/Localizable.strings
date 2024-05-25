@@ -17,7 +17,7 @@
 "general.password" = "סיסמה";
 
 // Guide Window
-"guide.highlights" = "הדגשות";
+"guide.highlights" = "נקודות עיקריות";
 "guide.basic_settings" = "הגדרות בסיסיות";
 "guide.faq" = "שאלות נפוצות";
 
@@ -46,7 +46,7 @@
 
 // OSDMessage.swift
 "osd.pause" = "מושהה";
-"osd.resume" = "ממשיך";
+"osd.resume" = "התחדש";
 "osd.volume" = "עוצמת שמע: %i";
 "osd.speed" = "מהירות: x%.2f";
 "osd.aspect" = "יחס גובה-רוחב: %@";
@@ -116,6 +116,10 @@
 
 "preference.enable_adv_settings" = "אפשר הגדרות מתקדמות";
 
+"preference.sub_override_level.force" = "כפויה";
+"preference.sub_override_level.strip" = "הסרת הכל";
+"preference.sub_override_level.yes" = "מאופשרת";
+
 "menu.volume" = "עוצמת שמע: %d";
 "menu.volume_muted" = "עוצמת שמע: %d (מושתק)";
 "menu.audio_delay" = "עיכוב שמע: %.2f שניות";
@@ -151,8 +155,8 @@
 "menu.sub_delay_up" = "עיכוב כתוביות: הוסף %.1f שניות";
 "menu.sub_delay_down" = "עיכוב כתוביות: הפחת %.1f שניות";
 
-"menu.crop_custom" = "התאמה אישית...";
-"menu.find_online_sub" = "מצא כתוביות מקוונות מ%@";
+"menu.crop_custom" = "מותאם אישית...";
+"menu.find_online_sub" = "מצא כתוביות מקוונות מ-%@";
 
 "track.none" = "<ללא>";
 
@@ -176,15 +180,15 @@
 "alert.wrong_url_format" = "פורמט כתובת אתר שגוי.";
 
 "alert.error_open" = "שגיאה בפתיחת קובץ/זרם!";
-"alert.error_finding_file" = "Cannot find %@ file!";
+"alert.error_finding_file" = "הקובץ %@ לא נמצא!";
 "alert.error_loading_script" = "טעינת הסקריפט %@ נכשלה!";
 "alert.error_saving_file" = "אירעה שגיאה בעת שמירת %@: %@";
 "alert.error_deleting_file" = "שגיאה במחיקת הקובץ.";
 
-"alert.config.new.title" = "New Input Configuration";
+"alert.config.new.title" = "תצורת מקשים חדשה";
 "alert.config.new.message" = "נא להזין שם עבור התצורה החדשה.";
 "alert.config.duplicate.title" = "תצורה כפולה";
-"alert.config.duplicate.message" = "Please enter name for the duplicated configuration file.";
+"alert.config.duplicate.message" = "יש להזין שם עבור קובץ התצורה המשוכפל.";
 "alert.config.empty_name" = "השם לא יכול להיות ריק.";
 "alert.config.name_existing" = "השם כבר קיים.";
 "alert.config.file_existing.title" = "הקובץ כבר קיים";
@@ -200,7 +204,7 @@
 
 "alert.extra_option.cannot_read" = "קריאת אפשרויות mpv נוספות המוגדרות על ידי המשתמש נכשלה.";
 "alert.extra_option.empty" = "המפתח או הערך לא יכולים להיות ריקים!";
-"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
+"alert.extra_option.error" = "שגיאה בהגדרת האופציה --%@=%@ שהחזירה ערך %d. אנא בדוק את הגדרות האפשרויות הנוספות שלך בהעדפות > מתקדם.";
 "alert.extra_option.config_folder" = "שגיאה בהגדרת ספריית התצורה \"%@\".";
 
 "alert.playlist.error_deleting" = "המחיקה נכשלה: %@";
@@ -233,7 +237,7 @@
 "alert.add_url.title" = "הוסף URL";
 "alert.add_url.message" = "אנא הזן URL:";
 
-"alert.delete_history.title" = "מחק הסטוריית השמעה";
+"alert.delete_history.title" = "מחק היסטוריית השמעה";
 "alert.delete_history.message" = "האם אתה בטוח שברצונך למחוק את הערכים שנבחרו?";
 
 "alert.filter_hwdec.message" = "אתה עומד להחיל מסנן וידאו. עם זאת, ייתכן שמפענח החומרה הנוכחי שלך לא תומך היטב במסנני וידאו. ניתן להשבית את פענוח החומרה, או לעבור ל-Auto(Copy), שיגרום לצריכת זיכרון כפולה.\nייתכן שתצטרך לחזור על הפעולה הקודמת (כמו הגדרת החיתוך) כדי שזה יעבוד.";
@@ -244,13 +248,13 @@
 "alert.clear_cache.title" = "נקה מטמון תמונות ממוזערות";
 "alert.clear_cache.message" = "האם אתה בטוח שברצונך לנקות את מטמון התמונות הממוזערות?";
 
-"alert.clear_history.title" = "מחק הסטוריית השמעה";
+"alert.clear_history.title" = "מחק היסטוריית השמעה";
 "alert.clear_history.message" = "האם אתה בטוח שברצונך למחוק את כל היסטוריית ההשמעה?";
 
 "alert.clear_watch_later.title" = "נקה התקדמות הפעלה שמורה";
 "alert.clear_watch_later.message" = "האם אתה בטוח שברצונך למחוק את כל התקדמויות ההשמעה שנשמרו (מידע \"צפה מאוחר יותר\")?";
 
-"alert.restore_alerts.title" = "שחזר התראות שהוסתרו";
+"alert.restore_alerts.title" = "שחזור התראות שהוסתרו";
 "alert.restore_alerts.message" = "האם אתה בטוח שברצונך לשחזר התראות מושתקות?";
 
 "alert.nothing_to_open" = "אין מה לפתוח.";

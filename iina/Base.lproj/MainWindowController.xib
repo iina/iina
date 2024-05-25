@@ -244,8 +244,8 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="Qmi-hb-0aM" secondAttribute="bottom" constant="8" id="84H-65-Ego"/>
                             <constraint firstItem="Qmi-hb-0aM" firstAttribute="top" secondItem="DFb-1L-U9o" secondAttribute="top" constant="8" id="ANy-8g-kkb"/>
-                            <constraint firstAttribute="trailing" secondItem="Qmi-hb-0aM" secondAttribute="trailing" constant="8" id="bOW-iG-HNY"/>
-                            <constraint firstItem="Qmi-hb-0aM" firstAttribute="leading" secondItem="DFb-1L-U9o" secondAttribute="leading" id="c3E-rA-tSH"/>
+                            <constraint firstAttribute="right" secondItem="Qmi-hb-0aM" secondAttribute="right" constant="8" id="bOW-iG-HNY"/>
+                            <constraint firstItem="Qmi-hb-0aM" firstAttribute="left" secondItem="DFb-1L-U9o" secondAttribute="left" id="c3E-rA-tSH"/>
                         </constraints>
                     </visualEffectView>
                     <visualEffectView wantsLayer="YES" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" blendingMode="withinWindow" material="popover" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="OiF-pA-8Sd" userLabel="Control Bar" customClass="ControlBarView" customModule="IINA" customModuleProvider="target">
@@ -307,8 +307,8 @@
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="height" constant="22" id="1Dw-Bg-FRS"/>
-                            <constraint firstAttribute="trailing" secondItem="fDY-vk-Ylv" secondAttribute="trailing" constant="8" id="J3u-Qd-3qz"/>
-                            <constraint firstItem="fDY-vk-Ylv" firstAttribute="leading" secondItem="TRx-2V-Gr3" secondAttribute="leading" id="L25-c7-hER"/>
+                            <constraint firstAttribute="right" secondItem="fDY-vk-Ylv" secondAttribute="right" constant="8" id="J3u-Qd-3qz"/>
+                            <constraint firstItem="fDY-vk-Ylv" firstAttribute="left" secondItem="TRx-2V-Gr3" secondAttribute="left" id="L25-c7-hER"/>
                             <constraint firstItem="fDY-vk-Ylv" firstAttribute="top" secondItem="TRx-2V-Gr3" secondAttribute="top" constant="26" id="dAZ-xc-uEC"/>
                             <constraint firstAttribute="trailing" secondItem="iA3-pt-6Jm" secondAttribute="trailing" id="e9D-au-sdb"/>
                             <constraint firstItem="iA3-pt-6Jm" firstAttribute="leading" secondItem="TRx-2V-Gr3" secondAttribute="leading" id="jIX-sE-wsj"/>

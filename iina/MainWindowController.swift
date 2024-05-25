@@ -435,6 +435,7 @@ class MainWindowController: PlayerWindowController {
   @IBOutlet var thumbnailPeekView: ThumbnailPeekView!
   @IBOutlet weak var additionalInfoView: NSVisualEffectView!
   @IBOutlet weak var additionalInfoLabel: NSTextField!
+  @IBOutlet weak var additionalInfoLabelXConstraint: NSLayoutConstraint!
   @IBOutlet weak var additionalInfoStackView: NSStackView!
   @IBOutlet weak var additionalInfoTitle: NSTextField!
   @IBOutlet weak var additionalInfoBatteryView: NSView!
@@ -594,6 +595,9 @@ class MainWindowController: PlayerWindowController {
     osdVisualEffectView.isHidden = true
     osdVisualEffectView.roundCorners(withRadius: 10)
     additionalInfoView.roundCorners(withRadius: 10)
+    if additionalInfoView.userInterfaceLayoutDirection == .rightToLeft {
+      additionalInfoLabelXConstraint.constant = -1
+    }
     leftArrowLabel.isHidden = true
     rightArrowLabel.isHidden = true
     timePreviewWhenSeek.isHidden = true

@@ -7,8 +7,8 @@
 */
 
 "cmd.ignore" = "התעלמות";
-"cmd.seek" = "חיפוש";
-"cmd.revert-seek" = "ביטול חיפוש";
+"cmd.seek" = "קפיצה";
+"cmd.revert-seek" = "ביטול קפיצה";
 "cmd.set" = "הגדר";
 "cmd.cycle" = "מחזוריות";
 "cmd.cycle-values" = "מחזוריות ב";
@@ -24,7 +24,7 @@
 "cmd.playlist-clear" = "ניקוי רשימת ההשמעה";
 "cmd.playlist-remove" = "הסר את הנוכחי";
 "cmd.playlist-shuffle" = "ערבוב";
-"cmd.write-watch-later-config" = "הקלט הסטוריית השמעה";
+"cmd.write-watch-later-config" = "הקלט היסטוריית השמעה";
 "cmd.stop" = "עצור";
 "cmd.quit" = "יציאה";
 "cmd.quit-watch-later" = "יציאה (ושמירת התקדמות)";
@@ -45,7 +45,7 @@
 "iina.audio-panel" = "פאנל אודיו";
 "iina.sub-panel" = "פאנל כתוביות";
 "iina.playlist-panel" = "פאנל רשימת השמעה";
-"iina.chapter-panel" = "פאנל פרק";
+"iina.chapter-panel" = "פאנל פרקים";
 "iina.bigger-window" = "חלון גדול יותר";
 "iina.smaller-window" = "חלון קטן יותר";
 "iina.fit-to-screen" = "התאמה למסך";
@@ -112,5 +112,5 @@
 "read.multiply" = "הכפל {{property}} ב{{factor}}x";
 "read.cycle" = "חזרה על {{property}}{{#dir_down}} כלפי מטה {{/dir_down}}";
 "read.cycle-values" = "עבור בין {{property}} ב({{{values}}})";
-"read.seek" = "Seek {{#fwd}}forward{{/fwd}}{{#bwd}}backward{{/bwd}}{{#abs}}to{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";
-"read.sub-seek" = "Seek to {{#skip_1}}next{{/skip_1}}{{#skip_-1}}previous{{/skip_-1}} subtitle";
+"read.seek" = "קפיצה {{#abs}}אל{{/abs}} {{value}}{{#sec}} שניות{{/sec}}{{#per}}%{{/per}} {{#fwd}}הבא{{/fwd}}{{#bwd}}הקודם{{/bwd}} {{#exact}}(מדויק){{/exact}}{{#kf}}(חיפוש פריים){{/kf}}";
+"read.sub-seek" = "קפיצה לכתובית {{#skip_1}}הבאה{{/skip_1}}{{#skip_-1}}הקודמת{{/skip_-1}}";

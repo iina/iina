@@ -116,6 +116,10 @@
 
 "preference.enable_adv_settings" = "고급 설정 사용";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "strip";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "음량: %d";
 "menu.volume_muted" = "음량: %d (음소거 됨)";
 "menu.audio_delay" = "오디오 지연: %.2f초";

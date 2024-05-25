@@ -7,22 +7,22 @@
 */
 // Common
 
-"general.on" = "On";
-"general.off" = "Off";
+"general.on" = "Укл";
+"general.off" = "Выкл";
 "general.login" = "Login";
-"general.logout" = "Logout";
+"general.logout" = "Выйсці";
 "general.ok" = "Добра";
 "general.cancel" = "Скасаваць";
-"general.username" = "Username";
-"general.password" = "Password";
+"general.username" = "Імя карыстальніка";
+"general.password" = "Пароль";
 
 // Guide Window
 "guide.highlights" = "Highlights";
-"guide.basic_settings" = "Basic Settings";
-"guide.faq" = "Frequently Asked Questions";
+"guide.basic_settings" = "Асноўныя налады";
+"guide.faq" = "Частыя пытанні";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
+"initial.announcement" = "Вы выкарыстоўваеце %@ версію IINA";
 "initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
 "initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
@@ -32,7 +32,7 @@
 "main.buffering_indicator" = "Buffering… %d%%";
 "main.opening_stream" = "Opening stream…";
 "osc.precision" = "Precision";
-"osc.1s" = "1 second";
+"osc.1s" = "1 секунда";
 "osc.100ms" = "100 milliseconds";
 "osc.10ms" = "10 milliseconds";
 "osc.1ms" = "1 millisecond";
@@ -45,7 +45,7 @@
 "quicksetting.hdr" = "HDR";
 
 // OSDMessage.swift
-"osd.pause" = "Pause";
+"osd.pause" = "Паўза";
 "osd.resume" = "Аднавіць";
 "osd.volume" = "Volume: %i";
 "osd.speed" = "Speed: %.2fx";
@@ -67,7 +67,7 @@
 "osd.abloop.a" = "AB-Loop: A";
 "osd.abloop.b" = "AB-Loop: B";
 "osd.abloop.clear" = "AB-Loop: Cleared";
-"osd.stop" = "Stop";
+"osd.stop" = "Спыніць";
 "osd.chapter" = "Chapter: %@";
 "osd.subtitle_scale" = "Subtitle Scale: %.2fx";
 "osd.add_to_playlist" = "Added %i Files to Playlist";
@@ -116,6 +116,10 @@
 
 "preference.enable_adv_settings" = "Enable advanced settings";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "strip";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "Volume: %d";
 "menu.volume_muted" = "Volume: %d (Muted)";
 "menu.audio_delay" = "Audio Delay: %.2fs";
@@ -126,7 +130,7 @@
 "menu.exit_pip" = "Exit Picture-in-Picture";
 "menu.mini_player" = "Enter Music Mode";
 "menu.exit_mini_player" = "Exit Music Mode";
-"menu.pause" = "Pause";
+"menu.pause" = "Паўза";
 "menu.resume" = "Аднавіць";
 "menu.speed" = "Speed: %.2fx";
 "menu.chapters" = "Show Chapters Panel";
@@ -321,7 +325,7 @@
 
 "mini_player.album_art" = "Toggle album art";
 "mini_player.loop" = "Repeat";
-"mini_player.shuffle" = "Shuffle";
+"mini_player.shuffle" = "Перамяшаць";
 "mini_player.remove" = "Remove from playlist";
 "mini_player.add" = "Add to playlist";
 "mini_player.delete" = "Delete all tracks from playlist";

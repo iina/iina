@@ -116,6 +116,10 @@
 
 "preference.enable_adv_settings" = "Aktivera avancerade inställningar";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "avlägsna";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "Volym: %d";
 "menu.volume_muted" = "Volym: %d (Tystat)";
 "menu.audio_delay" = "Ljudfördröjning: %.2fs";

@@ -116,6 +116,10 @@
 
 "preference.enable_adv_settings" = "Salli lisäasetukset";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "poista";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "Äänenvoimakkuus: %d";
 "menu.volume_muted" = "Volume: %d (Muted)";
 "menu.audio_delay" = "Äänen viive: %.2fs";

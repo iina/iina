@@ -18,18 +18,18 @@
 
 // Guide Window
 "guide.highlights" = "Højdepunkter";
-"guide.basic_settings" = "Grundlæggende Indstillinger";
-"guide.faq" = "Ofte Stillede Spørgsmål";
+"guide.basic_settings" = "Grundlæggende indstillinger";
+"guide.faq" = "Ofte stillede spørgsmål";
 
 // Initial Window
 "initial.announcement" = "Du bruger en %@ version af IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
+"initial.beta.desc" = "Hvis du ønsker at vende tilbage til en udgivelsesversion, skal du fjerne markeringen af \"modtag betaopdateringer\" fra Indstillinger > Generelt, og installere en stabil udgivelse fra vores <a href=\"https://iina.io\">officielle hjemmeside</a>.";
 "initial.nightly.desc" = "Nightly er ikke anbefalet til daglig brug. Nuværende nightly builds understøtter ikke automatisk opdatering. Installer nye versioner fra vores <a href=\"https://nightly.iina.io\">hjemmeside</a>.";
 "initial.debug.desc" = "Debug builds er normalt ikke optimeret til ydeevne, så det anbefales ikke at blive brugt til daglig brug. Debug builds understøtter ikke automatisk opdatering.";
 "initial.bug_report" = "Meld fejl via <a href=\"https://github.com/iina/iina/issues\">Github Issues</a>.";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Buffering... %d%%";
+"main.buffering_indicator" = "Indlæser... %d%%";
 "main.opening_stream" = "Åbner stream…";
 "osc.precision" = "Præcision";
 "osc.1s" = "1 sekund";
@@ -87,22 +87,22 @@
 "osd.file_error" = "Fejl under indlæsning af fil";
 "osd.cannot_login" = "Kan ikke logge ind";
 "osd.canceled" = "Annulleret";
-"osd.cannot_connect" = "Cannot connect";
-"osd.timed_out" = "Timed Out";
+"osd.cannot_connect" = "Kan ikke forbinde";
+"osd.timed_out" = "Tiden løb ud";
 "osd.filter_added" = "Tilføjet filter: %@";
 "osd.filter_removed" = "Fjernet filter";
-"osd.file_loop" = "Loop Single File";
-"osd.playlist_loop" = "Loop Playlist";
-"osd.no_loop" = "Disable Looping";
+"osd.file_loop" = "Gentag enkelt fil";
+"osd.playlist_loop" = "Gentag afspilningsliste";
+"osd.no_loop" = "Deaktiver gentagelse";
 
-"preference.title" = "Preferancer";
-"preference.general" = "Generalt";
+"preference.title" = "Indstillinger";
+"preference.general" = "Generelt";
 "preference.ui" = "UI";
 "preference.video_audio" = "Codec";
 "preference.subtitle" = "Undertekster";
 "preference.network" = "Netværk";
 "preference.control" = "Kontrol";
-"preference.keybindings" = "Tastegenveje";
+"preference.keybindings" = "Tastaturgenveje";
 "preference.advanced" = "Avanceret";
 "preference.plugins" = "Udvidelser";
 "preference.utilities" = "Værktøjer";
@@ -111,10 +111,14 @@
 "preference.logged_in_as" = "Logget ind som %@";
 "preference.system_media_control" = "Brug system medie kontrol";
 
-"preference.key_binding_hint_1" = "For at redigere tastebindinger i det aktuelle konfigurationsarkiv, klik først på knappen \"Dupliker…\" for at oprette en kopi.";
-"preference.key_binding_hint_2" = "Dobbeltklik på en række i højre side for at redigere den tilsvarende tastebinding.";
+"preference.key_binding_hint_1" = "For at redigere tastaturgenveje i det aktuelle konfigurationsarkiv, klik først på knappen \"Dupliker…\" for at oprette en kopi.";
+"preference.key_binding_hint_2" = "Dobbeltklik på en række i højre side for at redigere den tilsvarende tastaturgenvej.";
 
 "preference.enable_adv_settings" = "Aktiver avancerede indstillinger";
+
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "strip";
+"preference.sub_override_level.yes" = "yes";
 
 "menu.volume" = "Volumen: %d";
 "menu.volume_muted" = "Lydstyrke: %d (Lydløs)";
@@ -124,19 +128,19 @@
 "menu.exit_fullscreen" = "Afslut fuldskærmsvisning";
 "menu.pip" = "Gå til Picture-in-Picture";
 "menu.exit_pip" = "Afslut Picture-in-Picture";
-"menu.mini_player" = "Enter Music Mode";
-"menu.exit_mini_player" = "Exit Music Mode";
+"menu.mini_player" = "Gå til musiktilstand";
+"menu.exit_mini_player" = "Afslut musiktilstand";
 "menu.pause" = "Pause";
 "menu.resume" = "Genoptag";
 "menu.speed" = "Hastighed: %.2fx";
-"menu.chapters" = "Vis kapitel panel";
-"menu.hide_chapters" = "Skjul Kapitel Panel";
+"menu.chapters" = "Vis kapitel-panel";
+"menu.hide_chapters" = "Skjul kapitel-panel";
 "menu.playlist" = "Vis Playlist Panel";
 "menu.hide_playlist" = "Hide Playlist Panel";
 "menu.video" = "Show Video Panel";
 "menu.hide_video" = "Hide Video Panel";
-"menu.audio" = "Vis Lydpanel";
-"menu.hide_audio" = "Skjul Lydpanel";
+"menu.audio" = "Vis lydpanel";
+"menu.hide_audio" = "Skjul lydpanel";
 "menu.subtitles" = "Show Subtitles Panel";
 "menu.hide_subtitles" = "Hide Subtitles Panel";
 
@@ -160,7 +164,7 @@
 "subtrack.no_external" = "Ingen eksterne undertekster fundet";
 
 // Alerts
-"alert.beta_channel.title" = "Modtag opdateringer for Beta Versioner";
+"alert.beta_channel.title" = "Modtag opdateringer for beta-versioner";
 
 "alert.title_error" = "Fejl";
 "alert.title_warning" = "Advarsel";

@@ -10,16 +10,16 @@
 
 
 "crop" = "Beskær";
-"crop.w" = "Bredde (standart: video bredde)";
-"crop.h" = "Højde (standart: video størrelse)";
-"crop.x" = "Oprindelig X (standart: center)";
-"crop.y" = "Oprindelig Y (Standart: center)";
+"crop.w" = "Bredde (standard: video bredde)";
+"crop.h" = "Højde (standard: video størrelse)";
+"crop.x" = "Oprindelig X (standard: center)";
+"crop.y" = "Oprindelig Y (Standard: center)";
 
 "expand" = "Udvid";
-"expand.w" = "Bredde (standart: video bredde)";
-"expand.h" = "Højde (standart: video højde)";
-"expand.x" = "Oprindelig X (standart: center)";
-"expand.y" = "Oprindelig Y (standart: center)";
+"expand.w" = "Bredde (standard: video bredde)";
+"expand.h" = "Højde (standard: video højde)";
+"expand.x" = "Oprindelig X (standard: center)";
+"expand.y" = "Oprindelig Y (standard: center)";
 "expand.aspect" = "Udvid til at passe til aspekt (fx: 4/3)";
 "expand.round" = "Rund op for at gøre delelig med denne værdi";
 
@@ -43,7 +43,7 @@
 "hflip" = "Spejl";
 
 "lut3d" = "3D LUT";
-"lut3d.file" = "Fil";
+"lut3d.file" = "Filsti (du kan også trække og slippe filen i indtastningsfeltet)";
 "lut3d.interp" = "Interpolations tilstand";
 
 "custom_mpv" = "Brugerdefineret (mpv)";

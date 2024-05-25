@@ -1,4 +1,4 @@
-/* Class = "NSButtonCell"; title = "Save as..."; ObjectID = "1si-iG-tju"; */
+/* Class = "NSButtonCell"; title = "Save as…"; ObjectID = "1si-iG-tju"; */
 "1si-iG-tju.title" = "Enregistrer sous...";
 
 /* Class = "NSTextFieldCell"; title = "Subsystem:"; ObjectID = "91n-Sw-RQj"; */
@@ -10,14 +10,8 @@
 /* Class = "NSMenuItem"; title = "Error"; ObjectID = "FGm-HY-5ln"; */
 "FGm-HY-5ln.title" = "Erreur";
 
-/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "G3v-tE-ZhU"; */
-"G3v-tE-ZhU.title" = "Cellule de vue de tableau";
-
 /* Class = "NSTableColumn"; headerCell.title = "Subsystem"; ObjectID = "GRp-Ls-7Bw"; */
 "GRp-Ls-7Bw.headerCell.title" = "Sous-système";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "I7k-Y3-RgJ"; */
-"I7k-Y3-RgJ.title" = "Cellule de texte";
 
 /* Class = "NSMenuItem"; title = "Debug"; ObjectID = "IAO-ta-GnL"; */
 "IAO-ta-GnL.title" = "Débogage";
@@ -25,20 +19,8 @@
 /* Class = "NSTableColumn"; headerCell.title = "Message"; ObjectID = "ISx-4s-GjQ"; */
 "ISx-4s-GjQ.headerCell.title" = "Message";
 
-/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "J8Q-uC-tUM"; */
-"J8Q-uC-tUM.title" = "Cellule de vue de tableau";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "L92-i2-eTp"; */
-"L92-i2-eTp.title" = "Cellule de texte";
-
 /* Class = "NSWindow"; title = "Log Viewer"; ObjectID = "QvC-M9-y7g"; */
 "QvC-M9-y7g.title" = "Affichage des journaux";
-
-/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "b9E-HK-qN8"; */
-"b9E-HK-qN8.title" = "Cellule de vue de tableau";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "cib-lC-cNh"; */
-"cib-lC-cNh.title" = "Cellule de texte";
 
 /* Class = "NSMenuItem"; title = "Verbose"; ObjectID = "dFU-NP-aIl"; */
 "dFU-NP-aIl.title" = "Détaillé";
@@ -48,9 +30,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Level:"; ObjectID = "vaz-WH-G1w"; */
 "vaz-WH-G1w.title" = "Niveau :";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "xko-rY-ufQ"; */
-"xko-rY-ufQ.title" = "Cellule de texte";
 
 /* Class = "NSMenuItem"; title = "Warning"; ObjectID = "zVH-tI-Wo0"; */
 "zVH-tI-Wo0.title" = "Attention";

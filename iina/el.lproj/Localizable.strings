@@ -116,6 +116,10 @@
 
 "preference.enable_adv_settings" = "Ενεργοποίηση Προηγμένων Ρυθμίσεων";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "strip";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "Ένταση: %d";
 "menu.volume_muted" = "Volume: %d (Muted)";
 "menu.audio_delay" = "Καθυστέρηση Ήχου: %.2fs";

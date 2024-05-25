@@ -22,7 +22,7 @@
 "guide.faq" = "Preguntes freqüents";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
+"initial.announcement" = "Estàs fent servir una versió %@ d'IINA";
 "initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
 "initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
@@ -87,13 +87,13 @@
 "osd.file_error" = "Error llegint el fitxer";
 "osd.cannot_login" = "No és possible iniciar sessió";
 "osd.canceled" = "Cancel·lat";
-"osd.cannot_connect" = "Cannot connect";
-"osd.timed_out" = "Timed Out";
+"osd.cannot_connect" = "No es pot connectar";
+"osd.timed_out" = "Temps d'espera superat";
 "osd.filter_added" = "Filtre afegit: %@";
 "osd.filter_removed" = "Filtre suprimit";
 "osd.file_loop" = "Loop Single File";
-"osd.playlist_loop" = "Loop Playlist";
-"osd.no_loop" = "Disable Looping";
+"osd.playlist_loop" = "Repetir la llista de reproducció";
+"osd.no_loop" = "Desactivar repetició";
 
 "preference.title" = "Preferències";
 "preference.general" = "General";
@@ -116,16 +116,20 @@
 
 "preference.enable_adv_settings" = "Habilita les opcions avançades";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "tira";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "Volum: %d";
-"menu.volume_muted" = "Volume: %d (Muted)";
+"menu.volume_muted" = "Volum: %d (Silenciat)";
 "menu.audio_delay" = "Retard d'àudio: %.2fs";
 "menu.sub_delay" = "Retard en els subtítols: %.2fs";
 "menu.fullscreen" = "Pantalla completa";
 "menu.exit_fullscreen" = "Surt de la pantalla completa";
 "menu.pip" = "Picture-in-Picture";
 "menu.exit_pip" = "Surt del Picture-in-Picture";
-"menu.mini_player" = "Enter Music Mode";
-"menu.exit_mini_player" = "Exit Music Mode";
+"menu.mini_player" = "Entrar Mode de Música";
+"menu.exit_mini_player" = "Sortir Mode de Música";
 "menu.pause" = "Pausa";
 "menu.resume" = "Reprèn";
 "menu.speed" = "Velocitat: %.2fx";

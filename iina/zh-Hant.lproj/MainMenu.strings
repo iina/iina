@@ -112,6 +112,9 @@
 /* Class = "NSMenu"; title = "Audio Track"; ObjectID = "DRb-Y8-xir"; */
 "DRb-Y8-xir.title" = "音軌";
 
+/* Class = "NSMenuItem"; title = "Load External Audio…"; ObjectID = "3xl-iD-85w"; */
+"3xl-iD-85w.title" = "Load External Audio…";
+
 /* Class = "NSMenuItem"; title = "Speed Down to 0.9x"; ObjectID = "DUP-nm-BJt"; */
 "DUP-nm-BJt.title" = "減速至 0.9x";
 
@@ -203,7 +206,7 @@
 "Mg3-WB-gjZ.title" = "尋找線上字幕⋯";
 
 /* Class = "NSMenuItem"; title = "Find Online Subtitles from" ObjectID = "5dT-kq-WV9"; */
-"5dT-kq-WV9.title" = "Find Online Subtitles from";
+"5dT-kq-WV9.title" = "尋找線上字幕⋯";
 
 /* Class = "NSMenuItem"; title = "Save Current Playlist…"; ObjectID = "Mjr-lL-oEt"; */
 "Mjr-lL-oEt.title" = "儲存目前播放列表⋯";

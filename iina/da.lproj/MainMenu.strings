@@ -2,19 +2,19 @@
 "0Cz-OE-85L.title" = "Undertekstforsinkelse + 0.1s";
 
 /* Class = "NSMenuItem"; title = "Show Playlist Panel"; ObjectID = "0T7-Nu-SL7"; */
-"0T7-Nu-SL7.title" = "Vis Playlist Panel";
+"0T7-Nu-SL7.title" = "Vis spilleliste-panel";
 
 /* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "0m7-3r-twH"; */
-"0m7-3r-twH.title" = "Åben URL…";
+"0m7-3r-twH.title" = "Åbn URL…";
 
 /* Class = "NSMenu"; title = "Subtitle"; ObjectID = "16p-PA-x34"; */
 "16p-PA-x34.title" = "Undertekster";
 
 /* Class = "NSMenuItem"; title = "Normal Size"; ObjectID = "1UK-8n-QPP"; */
-"1UK-8n-QPP.title" = "Normal Størrelse";
+"1UK-8n-QPP.title" = "Normalstørrelse";
 
 /* Class = "NSMenu"; title = "Audio Device"; ObjectID = "2Dp-Ol-Zcf"; */
-"2Dp-Ol-Zcf.title" = "Lyd enheder";
+"2Dp-Ol-Zcf.title" = "Lydenheder";
 
 /* Class = "NSMenuItem"; title = "Jump to Beginning"; ObjectID = "2Ya-3g-1hy"; */
 "2Ya-3g-1hy.title" = "Hop til begyndelsen";
@@ -26,16 +26,16 @@
 "2id-wn-xsC.title" = "Hop til…";
 
 /* Class = "NSMenuItem"; title = "Show Video Panel"; ObjectID = "2t8-Ot-yoO"; */
-"2t8-Ot-yoO.title" = "Show Video Panel";
+"2t8-Ot-yoO.title" = "Vis videopanel";
 
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "3Ax-P3-QQu"; */
-"3Ax-P3-QQu.title" = "Vælg Alt";
+"3Ax-P3-QQu.title" = "Vælg alt";
 
 /* Class = "NSMenuItem"; title = "Show Audio Panel"; ObjectID = "43n-Ed-5kT"; */
-"43n-Ed-5kT.title" = "Vis Lydpanel";
+"43n-Ed-5kT.title" = "Vis lydpanel";
 
 /* Class = "NSMenuItem"; title = "Audio Delay + 0.5s"; ObjectID = "4ae-MT-2L1"; */
-"4ae-MT-2L1.title" = "Lyd forsinkelse + 0.5s";
+"4ae-MT-2L1.title" = "Lydforsinkelse + 0.5s";
 
 /* Class = "NSMenuItem"; title = "Quit IINA"; ObjectID = "4sb-4s-VLi"; */
 "4sb-4s-VLi.title" = "Afslut IINA";
@@ -59,19 +59,19 @@
 "7Bn-Mp-EvJ.title" = "Transformationer";
 
 /* Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "7rG-Yq-EYG"; */
-"7rG-Yq-EYG.title" = "Stop Tale";
+"7rG-Yq-EYG.title" = "Stop tale";
 
 /* Class = "NSMenuItem"; title = "Speech"; ObjectID = "8Oy-tP-udW"; */
 "8Oy-tP-udW.title" = "Tale";
 
 /* Class = "NSMenuItem"; title = "Audio Filters…"; ObjectID = "8Zh-hU-Cc4"; */
-"8Zh-hU-Cc4.title" = "Lyd filtre…";
+"8Zh-hU-Cc4.title" = "Lydfiltre…";
 
 /* Class = "NSMenuItem"; title = "Speed:"; ObjectID = "8pV-XQ-AvB"; */
 "8pV-XQ-AvB.title" = "Hastighed:";
 
 /* Class = "NSMenuItem"; title = "Show Subtitles Panel"; ObjectID = "8y7-Cy-lKT"; */
-"8y7-Cy-lKT.title" = "Show Subtitles Panel";
+"8y7-Cy-lKT.title" = "Vis undertekst-panel";
 
 /* Class = "NSMenuItem"; title = "Speed Up to 1.1x"; ObjectID = "91n-xW-L37"; */
 "91n-xW-L37.title" = "Sæt hastighed op til 1.1x";
@@ -83,7 +83,7 @@
 "9pa-9C-ueQ.title" = "<Intet>";
 
 /* Class = "NSMenuItem"; title = "Save Downloaded Subtitle…"; ObjectID = "9zk-co-roT"; */
-"9zk-co-roT.title" = "Gem Downloaded undertekster…";
+"9zk-co-roT.title" = "Gem downloadede undertekster…";
 
 /* Class = "NSMenuItem"; title = "Take a Screenshot"; ObjectID = "AoP-K6-Kb5"; */
 "AoP-K6-Kb5.title" = "Tag et Screenshot";
@@ -92,7 +92,7 @@
 "ArE-2s-JIV.title" = "Fjern vandmærke";
 
 /* Class = "NSMenuItem"; title = "Saved Video Filters"; ObjectID = "BDr-G9-IRx"; */
-"BDr-G9-IRx.title" = "Gemte video filtre";
+"BDr-G9-IRx.title" = "Gemte videofiltre";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "BOF-NM-1cW"; */
 "BOF-NM-1cW.title" = "Preferancer…";
@@ -111,6 +111,9 @@
 
 /* Class = "NSMenu"; title = "Audio Track"; ObjectID = "DRb-Y8-xir"; */
 "DRb-Y8-xir.title" = "Lydfil";
+
+/* Class = "NSMenuItem"; title = "Load External Audio…"; ObjectID = "3xl-iD-85w"; */
+"3xl-iD-85w.title" = "Load External Audio…";
 
 /* Class = "NSMenuItem"; title = "Speed Down to 0.9x"; ObjectID = "DUP-nm-BJt"; */
 "DUP-nm-BJt.title" = "Sæt hastighed ned til 0.9x";
@@ -224,7 +227,7 @@
 "Olw-nP-bQN.title" = "Skjul IINA";
 
 /* Class = "NSMenuItem"; title = "Reset Subtitle Scale"; ObjectID = "P1a-ot-P31"; */
-"P1a-ot-P31.title" = "Reset Undertekst skala";
+"P1a-ot-P31.title" = "";
 
 /* Class = "NSMenuItem"; title = "Encoding"; ObjectID = "Pci-OQ-Vni"; */
 "Pci-OQ-Vni.title" = "Kodning";
@@ -236,7 +239,7 @@
 "PyY-pR-jz7.title" = "Video Filtre…";
 
 /* Class = "NSMenuItem"; title = "New Window"; ObjectID = "Qv1-xd-wj5"; */
-"Qv1-xd-wj5.title" = "Nyt Vindue";
+"Qv1-xd-wj5.title" = "Nyt vindue";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "R4o-n2-Eq4"; */
 "R4o-n2-Eq4.title" = "Zoom";
@@ -266,7 +269,7 @@
 "UOE-MJ-8ku.title" = "Pause";
 
 /* Class = "NSMenu"; title = "Second Subtitle"; ObjectID = "UwY-P2-Xdb"; */
-"UwY-P2-Xdb.title" = "Sekundær undertekster";
+"UwY-P2-Xdb.title" = "Sekundær undertekst";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "VDZ-ro-z5z"; */
 "VDZ-ro-z5z.title" = "Gendan";
@@ -290,7 +293,7 @@
 "XPz-ml-OQ3.title" = "Fortryd";
 
 /* Class = "NSMenuItem"; title = "Smaller Size"; ObjectID = "ZOF-MG-6II"; */
-"ZOF-MG-6II.title" = "Mindre størelse";
+"ZOF-MG-6II.title" = "Mindre størrelse";
 
 /* Class = "NSMenuItem"; title = "Volume - 1%"; ObjectID = "Zhv-Bz-I5V"; */
 "Zhv-Bz-I5V.title" = "Volumen - 1%";

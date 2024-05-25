@@ -116,6 +116,10 @@
 
 "preference.enable_adv_settings" = "Activer les paramètres avancés";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "retirer";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "Volume : %d";
 "menu.volume_muted" = "Volume : %d (coupé)";
 "menu.audio_delay" = "Délai audio : %.2fs";
@@ -268,8 +272,8 @@
 
 "alert.plugin_uninstall.title" = "Êtes-vous sûr de vouloir désinstaller %@ ?";
 "alert.plugin_uninstall.message" = "Cette extension sera supprimée de votre disque dur.";
-"alert.plugin_reinstall.title" = "Le plugin %@ existe déjà";
-"alert.plugin_reinstall.message" = "Voulez-vous réinstaller le plugin ?";
+"alert.plugin_reinstall.title" = "L'extension %@ existe déjà";
+"alert.plugin_reinstall.message" = "Souhaitez-vous réinstaller cette extension ?";
 "alert.duplicated_plugin_id" = "Plusieurs extensions ont le même identifiant : \"%@\". Cela peut entraîner des comportements anormaux. Vous pouvez les identifier Préférences - Extensions et le signaler à leurs auteurs. Si une extension est installée localement, vous pouvez changer manuellement son identifiant dans le fichier Info.json de celle-ci.";
 "alert.plugin_no_update" = "Aucune mise à jour disponible.";
 "alert.plugin_update_found.title" = "Mise à jour disponible pour %@";

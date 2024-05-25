@@ -12,28 +12,28 @@
 "crop" = "ക്രോപ്";
 "crop.w" = "Width (default: video width)";
 "crop.h" = "Height (default: video height)";
-"crop.x" = "Origin X (default: center)";
+"crop.x" = "ആധാരം (X)";
 "crop.y" = "Origin Y (default: center)";
 
-"expand" = "Expand";
+"expand" = "വലുതാക്കുക";
 "expand.w" = "Width (default: video width)";
 "expand.h" = "Height (default: video height)";
-"expand.x" = "Origin X (default: center)";
+"expand.x" = "ആധാരം (X)";
 "expand.y" = "Origin Y (default: center)";
 "expand.aspect" = "Expands to fit an aspect (e.g: 4/3)";
 "expand.round" = "Rounds up to make divisible by this value";
 
 "sharpen" = "Sharpen";
 "sharpen.msize" = "Matrix size";
-"sharpen.amount" = "Amount";
+"sharpen.amount" = "അളവ്";
 
 "blur" = "Blur";
 "blur.msize" = "Matrix size";
-"blur.amount" = "Amount";
+"blur.amount" = "അളവ്";
 
 "delogo" = "Delogo";
-"delogo.w" = "Width";
-"delogo.h" = "Height";
+"delogo.w" = "വീതി";
+"delogo.h" = "ഉയരം";
 "delogo.x" = "Origin X";
 "delogo.y" = "Origin Y";
 

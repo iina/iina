@@ -116,6 +116,10 @@
 
 "preference.enable_adv_settings" = "Aktiver avanserte innstillinger";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "fjern";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "Volum: %d";
 "menu.volume_muted" = "Volum: %d (dempet)";
 "menu.audio_delay" = "Lydforsinkelse: %.2fs";

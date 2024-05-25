@@ -116,6 +116,10 @@
 
 "preference.enable_adv_settings" = "Включить расширенные настройки";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "игнорировать все теги и стили в .ass";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "Громкость: %d";
 "menu.volume_muted" = "Громкость: %d (без звука)";
 "menu.audio_delay" = "Задержка аудио: %.2f с";
@@ -350,7 +354,7 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "Сеть";
-"permissions.network-request.desc" = "Этот плагин может запрашивать или загружать данные с этих сайтов:";
+"permissions.network-request.desc" = "Этот плагин может выполнять запросы или загружать данные на эти сайты:";
 "permissions.network-request.any_site" = "Любой сайт";
 "permissions.show-osd.name" = "Показывать сообщения на экране";
 "permissions.show-osd.desc" = "Этот плагин сможет показывать сообщения на экране.";

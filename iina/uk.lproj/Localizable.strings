@@ -116,6 +116,10 @@
 
 "preference.enable_adv_settings" = "Увімкнути розширені налаштування";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "видалити";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "Гучність: %d";
 "menu.volume_muted" = "Гучність: %d (Без звуку)";
 "menu.audio_delay" = "Затримка звуку: %.2f с";

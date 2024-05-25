@@ -7,7 +7,7 @@
 */
 // Common
 
-"general.on" = "Encendido";
+"general.on" = "Activado";
 "general.off" = "Apagado";
 "general.login" = "Iniciar sesión";
 "general.logout" = "Cerrar sesión";
@@ -91,9 +91,9 @@
 "osd.timed_out" = "Tiempo agotado";
 "osd.filter_added" = "Filtro Añadido: %@";
 "osd.filter_removed" = "Filtro Eliminado";
-"osd.file_loop" = "Loop Single File";
-"osd.playlist_loop" = "Loop Playlist";
-"osd.no_loop" = "Disable Looping";
+"osd.file_loop" = "Leer un solo fichero";
+"osd.playlist_loop" = "Repetir lista de reproducción";
+"osd.no_loop" = "Desactivar bucle";
 
 "preference.title" = "Preferencias";
 "preference.general" = "General";
@@ -115,6 +115,10 @@
 "preference.key_binding_hint_2" = "Haga doble clic en una fila del lado derecho para editar el atajo correspondiente.";
 
 "preference.enable_adv_settings" = "Habilitar configuración avanzada";
+
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "tira";
+"preference.sub_override_level.yes" = "yes";
 
 "menu.volume" = "Volumen: %d";
 "menu.volume_muted" = "Volumen: %d (Silenciado)";

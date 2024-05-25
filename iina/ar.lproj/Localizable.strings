@@ -116,6 +116,10 @@
 
 "preference.enable_adv_settings" = "تمكين الإعدادات المتقدمة";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "strip";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "الصوت: %d";
 "menu.volume_muted" = "الحجم: %d (مكتمل)";
 "menu.audio_delay" = "تأخير الصوت: %.2fث";
@@ -368,9 +372,9 @@
 "alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "The URL is invalid.";
 "plugin.install_error.invalid_url" = "The URL is invalid.";
-"plugin.install_error.file_not_found" = "Cannot find the package file.";
+"plugin.install_error.file_not_found" = "لا يمكن العثور على ملف الحزمة.";
 "plugin.install_error.cannot_download" = "";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
+"plugin.install_error.cannot_load" = "لا يمكن لـ IINA تحميل هذه الإضافة. قد يكون في شكل خاطئ.";
 "plugin.check_for_updates" = "التحقق من وجود تحديثات";
 "plugin.updating" = "ينزّل التّحديث...";

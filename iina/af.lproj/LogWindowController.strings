@@ -1,4 +1,4 @@
-/* Class = "NSButtonCell"; title = "Save as..."; ObjectID = "1si-iG-tju"; */
+/* Class = "NSButtonCell"; title = "Save as…"; ObjectID = "1si-iG-tju"; */
 "1si-iG-tju.title" = "Bewaar as…";
 
 /* Class = "NSTextFieldCell"; title = "Subsystem:"; ObjectID = "91n-Sw-RQj"; */
@@ -10,14 +10,8 @@
 /* Class = "NSMenuItem"; title = "Error"; ObjectID = "FGm-HY-5ln"; */
 "FGm-HY-5ln.title" = "Fout";
 
-/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "G3v-tE-ZhU"; */
-"G3v-tE-ZhU.title" = "Tabelaansigsel";
-
 /* Class = "NSTableColumn"; headerCell.title = "Subsystem"; ObjectID = "GRp-Ls-7Bw"; */
 "GRp-Ls-7Bw.headerCell.title" = "Substelsel";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "I7k-Y3-RgJ"; */
-"I7k-Y3-RgJ.title" = "Tekssel";
 
 /* Class = "NSMenuItem"; title = "Debug"; ObjectID = "IAO-ta-GnL"; */
 "IAO-ta-GnL.title" = "Ontfout";
@@ -25,20 +19,8 @@
 /* Class = "NSTableColumn"; headerCell.title = "Message"; ObjectID = "ISx-4s-GjQ"; */
 "ISx-4s-GjQ.headerCell.title" = "Boodskap";
 
-/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "J8Q-uC-tUM"; */
-"J8Q-uC-tUM.title" = "Tabelaansigsel";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "L92-i2-eTp"; */
-"L92-i2-eTp.title" = "Tekssel";
-
 /* Class = "NSWindow"; title = "Log Viewer"; ObjectID = "QvC-M9-y7g"; */
 "QvC-M9-y7g.title" = "Log Viewer";
-
-/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "b9E-HK-qN8"; */
-"b9E-HK-qN8.title" = "Tabelaansigsel";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "cib-lC-cNh"; */
-"cib-lC-cNh.title" = "Tekssel";
 
 /* Class = "NSMenuItem"; title = "Verbose"; ObjectID = "dFU-NP-aIl"; */
 "dFU-NP-aIl.title" = "Wydlopig";
@@ -48,9 +30,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Level:"; ObjectID = "vaz-WH-G1w"; */
 "vaz-WH-G1w.title" = "Vlak:";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "xko-rY-ufQ"; */
-"xko-rY-ufQ.title" = "Tekssel";
 
 /* Class = "NSMenuItem"; title = "Warning"; ObjectID = "zVH-tI-Wo0"; */
 "zVH-tI-Wo0.title" = "Waarskuwing";

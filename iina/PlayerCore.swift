@@ -231,7 +231,7 @@ class PlayerCore: NSObject {
 
   override init() {
     super.init()
-    self.mpv = MPVController(playerCore: self)
+    self.mpv = MPVController(playerCore: self, playerNumber: PlayerCore.playerCoreCounter)
     self.mainWindow = MainWindowController(playerCore: self)
     self.miniPlayer = MiniPlayerWindowController(playerCore: self)
     self.initialWindow = InitialWindowController(playerCore: self)

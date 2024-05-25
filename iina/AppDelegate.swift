@@ -135,10 +135,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   /// - The git branch
   /// - The git commit
   private func logBuildDetails() {
+    guard let date = InfoDictionary.shared.buildDate,
+          let sdk = InfoDictionary.shared.buildSDK,
+          let xcode = InfoDictionary.shared.buildXcode else { return }
+    Logger.log("Built using Xcode \(xcode) and macOS SDK \(sdk) on \(date)")
     guard let branch = InfoDictionary.shared.buildBranch,
-          let commit = InfoDictionary.shared.buildCommit,
-          let date = InfoDictionary.shared.buildDate else { return }
-    Logger.log("Built \(date) from branch \(branch), commit \(commit)")
+          let commit = InfoDictionary.shared.buildCommit else { return }
+    Logger.log("From branch \(branch), commit \(commit)")
   }
 
   /// Log details about the Mac IINA is running on.
@@ -296,8 +299,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     }
 
     JavascriptPlugin.loadGlobalInstances()
-    let _ = PlayerCore.first
-    Logger.log("Using \(PlayerCore.active.mpv.mpvVersion!)")
+
+    let mpv = PlayerCore.active.mpv!
+    Logger.log("Using \(mpv.mpvVersion) and libass \(mpv.libassVersion)")
 
     if #available(macOS 10.13, *) {
       if RemoteCommandController.useSystemMediaControl {

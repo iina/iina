@@ -183,8 +183,16 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
   }
 
   override func transformedValue(_ value: Any?) -> Any? {
-    guard let num = value as? NSNumber else { return nil }
-    return Preference.SubOverrideLevel(rawValue: num.intValue)?.string
+    guard let num = value as? NSNumber,
+          let level = Preference.SubOverrideLevel(rawValue: num.intValue) else { return nil }
+    switch level {
+    case .yes:
+      return NSLocalizedString("preference.sub_override_level.yes", value: "yes", comment: "yes")
+    case .force:
+      return NSLocalizedString("preference.sub_override_level.force", value: "force", comment: "force")
+    case .strip:
+      return NSLocalizedString("preference.sub_override_level.strip", value: "strip", comment: "strip")
+    }
   }
 
 }

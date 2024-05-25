@@ -83,6 +83,17 @@ class MPVController: NSObject {
     static let screenshot: UInt64 = 1000000
   }
 
+  /// Version number of the libass library.
+  ///
+  /// The mpv libass version property returns an integer encoded as a hex binary-coded decimal.
+  var libassVersion: String {
+    let version = getInt(MPVProperty.libassVersion)
+    let major = String(version >> 28 & 0xF, radix: 16)
+    let minor = String(version >> 20 & 0xFF, radix: 16)
+    let patch = String(version >> 12 & 0xFF, radix: 16)
+    return "\(major).\(minor).\(patch)"
+  }
+
   // The mpv_handle
   var mpv: OpaquePointer!
   var mpvRenderContext: OpaquePointer?
@@ -90,7 +101,7 @@ class MPVController: NSObject {
   private var openGLContext: CGLContextObj! = nil
 
   var mpvClientName: UnsafePointer<CChar>!
-  var mpvVersion: String!
+  var mpvVersion: String { getString(MPVProperty.mpvVersion)! }
 
   lazy var queue = DispatchQueue(label: "com.colliderli.iina.controller", qos: .userInitiated)
 
@@ -332,7 +343,7 @@ not applying FFmpeg 9599 workaround
     setUserOption(PK.subOverrideLevel, type: .other, forName: MPVOption.Subtitles.subAssOverride, transformer: subOverrideHandler)
 
     setUserOption(PK.subTextFont, type: .string, forName: MPVOption.Subtitles.subFont)
-    setUserOption(PK.subTextSize, type: .int, forName: MPVOption.Subtitles.subFontSize)
+    setUserOption(PK.subTextSize, type: .float, forName: MPVOption.Subtitles.subFontSize)
 
     setUserOption(PK.subTextColor, type: .color, forName: MPVOption.Subtitles.subColor)
     setUserOption(PK.subBgColor, type: .color, forName: MPVOption.Subtitles.subBackColor)
@@ -343,10 +354,10 @@ not applying FFmpeg 9599 workaround
     setUserOption(PK.subBlur, type: .float, forName: MPVOption.Subtitles.subBlur)
     setUserOption(PK.subSpacing, type: .float, forName: MPVOption.Subtitles.subSpacing)
 
-    setUserOption(PK.subBorderSize, type: .int, forName: MPVOption.Subtitles.subBorderSize)
+    setUserOption(PK.subBorderSize, type: .float, forName: MPVOption.Subtitles.subBorderSize)
     setUserOption(PK.subBorderColor, type: .color, forName: MPVOption.Subtitles.subBorderColor)
 
-    setUserOption(PK.subShadowSize, type: .int, forName: MPVOption.Subtitles.subShadowOffset)
+    setUserOption(PK.subShadowSize, type: .float, forName: MPVOption.Subtitles.subShadowOffset)
     setUserOption(PK.subShadowColor, type: .color, forName: MPVOption.Subtitles.subShadowColor)
 
     setUserOption(PK.subAlignX, type: .other, forName: MPVOption.Subtitles.subAlignX) { key in
@@ -485,7 +496,7 @@ not applying FFmpeg 9599 workaround
         // mpv_render_param(type: MPV_RENDER_PARAM_ADVANCED_CONTROL, data: &advanced),
         mpv_render_param()
       ]
-      mpv_render_context_create(&mpvRenderContext, mpv, &params)
+      chkErr(mpv_render_context_create(&mpvRenderContext, mpv, &params))
       openGLContext = CGLGetCurrentContext()
       mpv_render_context_set_update_callback(mpvRenderContext!, mpvUpdateCallback, mutableRawPointerOf(obj: player.mainWindow.videoView.videoLayer))
     }

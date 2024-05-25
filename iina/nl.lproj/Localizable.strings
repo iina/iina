@@ -116,6 +116,10 @@
 
 "preference.enable_adv_settings" = "Geavanceerde instellingen inschakelen";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "volledig";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "Volume: %d";
 "menu.volume_muted" = "Volume: %d (Muted)";
 "menu.audio_delay" = "Audiovertraging: %.2fs";

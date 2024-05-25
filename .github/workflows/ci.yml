@@ -12,7 +12,7 @@ jobs:
       matrix:
         include:
           - xcode: "15.3"
-            deployment_target: "MACOSX_DEPLOYMENT_TARGET=10.15"
+            deployment_target: ""
     runs-on:  macos-14-large
     steps:
       - uses: actions/checkout@v3

@@ -116,6 +116,10 @@
 
 "preference.enable_adv_settings" = "Gelişmiş ayarları etkinleştir";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "Sıyır";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "Ses Seviyesi: %d";
 "menu.volume_muted" = "Ses Yüksekliği: %d (Sessiz)";
 "menu.audio_delay" = "Ses Gecikmesi: %.2f sn";

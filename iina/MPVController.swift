@@ -476,9 +476,6 @@ not applying FFmpeg 9599 workaround
     chkErr(setString(MPVOption.Video.vo, "libmpv"))
     chkErr(setString(MPVOption.Window.keepaspect, "no"))
     chkErr(setString(MPVOption.Video.gpuHwdecInterop, "auto"))
-
-    // get version
-    mpvVersion = getString(MPVProperty.mpvVersion)
   }
 
   func mpvInitRendering() {

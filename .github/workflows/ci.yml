@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - xcode: "15.4"
+          - xcode: "15.3"
             deployment_target: "MACOSX_DEPLOYMENT_TARGET=10.15"
     runs-on:  macos-14-large
     steps:

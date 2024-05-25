@@ -116,6 +116,10 @@
 
 "preference.enable_adv_settings" = "Abilita impostazioni avanzate";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "striscia";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "Volume: %d";
 "menu.volume_muted" = "Volume: %d (Spento)";
 "menu.audio_delay" = "Differenza audio: %.2fs";

@@ -116,6 +116,10 @@
 
 "preference.enable_adv_settings" = "Bật cài đặt nâng cao";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "strip";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "Âm lượng: %d";
 "menu.volume_muted" = "Âm lượng: %d (Đã tắt tiếng)";
 "menu.audio_delay" = "Độ trễ âm thanh: %.2fs";

@@ -1927,7 +1927,17 @@ class MainWindowController: PlayerWindowController {
 
   // MARK: - UI: OSD
 
-  // Do not call displayOSD directly, call PlayerCore.sendOSD instead.
+  /// Show a message in the on screen display.
+  /// - Parameters:
+  ///   - message: The `OSDMessage` to display.
+  ///   - autoHide: If `true` (the default) the message will be hidden after a timeout.
+  ///   - forcedTimeout: Timeout after which the message will be hidden (overrides user configured timeout).
+  ///   - accessoryView: Custom view to display (if not supplied normal OSD views are used).
+  ///   - context: Additional information associated with the message.
+  /// - Attention: Do not call `displayOSD` directly, call `PlayerCore.sendOSD` instead.
+  /// - Important: As per Apple's [Internationalization and Localization Guide](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPInternational/SupportingRight-To-LeftLanguages/SupportingRight-To-LeftLanguages.html)
+  ///     timeline indicators should not flip in a right-to-left language. Thus OSD messages referencing a position within the video
+  ///     must always use a left to right layout.
   func displayOSD(_ message: OSDMessage, autoHide: Bool = true, forcedTimeout: Float? = nil, accessoryView: NSView? = nil, context: Any? = nil) {
     guard player.displayOSD && !isShowingPersistentOSD else { return }
 
@@ -1944,14 +1954,27 @@ class MainWindowController: PlayerWindowController {
     osdAccessoryText.font = NSFont.monospacedDigitSystemFont(ofSize: CGFloat(osdTextSize * 0.5).clamped(to: 11...25), weight: .regular)
     osdLabel.stringValue = osdString
 
+    // Most OSD messages are displayed based on the configured language direction.
+    osdAccessoryProgress.userInterfaceLayoutDirection = osdStackView.userInterfaceLayoutDirection
+    osdAccessoryText.baseWritingDirection = .natural
+    osdLabel.baseWritingDirection = .natural
     switch osdType {
     case .normal:
       osdStackView.setVisibilityPriority(.notVisible, for: osdAccessoryText)
       osdStackView.setVisibilityPriority(.notVisible, for: osdAccessoryProgress)
+    case .withPosition(let value):
+      // OSD messages displaying the playback position must always be displayed left to right.
+      osdAccessoryProgress.userInterfaceLayoutDirection = .leftToRight
+      osdLabel.baseWritingDirection = .leftToRight
+      fallthrough
     case .withProgress(let value):
       osdStackView.setVisibilityPriority(.notVisible, for: osdAccessoryText)
       osdStackView.setVisibilityPriority(.mustHold, for: osdAccessoryProgress)
       osdAccessoryProgress.doubleValue = value
+    case .withLeftToRightText(let text):
+      // OSD messages displaying the playback position must always be displayed left to right.
+      osdAccessoryText.baseWritingDirection = .leftToRight
+      fallthrough
     case .withText(let text):
       // data for mustache redering
       let osdData: [String: String] = [

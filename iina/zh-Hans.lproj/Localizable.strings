@@ -28,6 +28,9 @@
 "initial.debug.desc" = "调试版本（Debug）通常没有对性能进行优化，所以不建议日常用。调试版本（Debug）不支持自动更新。";
 "initial.bug_report" = "通过<a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>报告。";
 
+// Inspector Window
+"inspector.error" = "错误";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "缓冲中… %d%%";
 "main.opening_stream" = "正在打开流……";

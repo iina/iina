@@ -28,6 +28,9 @@
 "initial.debug.desc" = "Las compilaciones de depuración normalmente no están optimizadas para el rendimiento, por lo que no se recomienda que se utilicen de manera habitual. Las compilaciones de depuración no soportan la actualización automática.";
 "initial.bug_report" = "Notifique a través de <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
 
+// Inspector Window
+"inspector.error" = "Error";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Cargando… %d%%";
 "main.opening_stream" = "Abrir flujo de datos";

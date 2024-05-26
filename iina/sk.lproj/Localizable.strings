@@ -28,6 +28,9 @@
 "initial.debug.desc" = "Ladiace zostavenie obvykle nie sú optimalizované pre výkon, nie sú teda odporúčané pre každodenné použitie. Ladiaci zostavenie nepodporujú automatické aktualizácie.";
 "initial.bug_report" = "Nahláste na <a href=\"https://github.com/iina/iina/issues\">GitHub</a>.";
 
+// Inspector Window
+"inspector.error" = "Chyba";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Načítava sa… %d%%";
 "main.opening_stream" = "Otváram stream…";

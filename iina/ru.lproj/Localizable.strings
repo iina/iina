@@ -28,6 +28,9 @@
 "initial.debug.desc" = "Отладочные сборки обычно не окончательно оптимизированы, поэтому не рекомендуются для ежедневного использования. Отладочные сборки не поддерживают автоматическое обновление.";
 "initial.bug_report" = "Сообщить через <a href=\"https://github.com/iina/iina/issues\">GitHub проблемы</a>.";
 
+// Inspector Window
+"inspector.error" = "Ошибка";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Буферизация… %d%%";
 "main.opening_stream" = "Открытие потока…";

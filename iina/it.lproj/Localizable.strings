@@ -28,6 +28,9 @@
 "initial.debug.desc" = "Le versioni di debug sono dedicate alla raccolta di dati per la risoluzione di problemi e per altre finalità analitiche. Non sono ottimizzate per le prestazioni e non prevedono aggiornamenti automatici; in generale se ne sconsiglia l'utilizzo.";
 "initial.bug_report" = "Segnala tramite <a href=\"https://github.com/iina/iina/issues\">GitHub</a>.";
 
+// Inspector Window
+"inspector.error" = "Errore";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffer… %d%%";
 "main.opening_stream" = "Apertura stream…";

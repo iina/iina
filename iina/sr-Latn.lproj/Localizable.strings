@@ -28,6 +28,9 @@
 "initial.debug.desc" = "Izdanja za otklanjanje grešaka obično nisu optimizovana za performanse, tako da se ne preporučuju za svakodnevnu upotrebu. Izdanja za otklanjanje grešaka ne podržavaju automatsko ažuriranje.";
 "initial.bug_report" = "Prijavite putem <a href=\"https://github.com/iina/iina/issues\">problema na GitHubu</a>.";
 
+// Inspector Window
+"inspector.error" = "Grеška";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Smeštanje u bafer… %d%%";
 "main.opening_stream" = "Otvaram strim…";

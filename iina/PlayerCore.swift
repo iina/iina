@@ -808,6 +808,9 @@ class PlayerCore: NSObject {
     guard let lastScreenshotURL = Utility.getLatestScreenshot(from: imageFolder) else { return }
     guard let image = NSImage(contentsOf: lastScreenshotURL) else {
       self.sendOSD(.screenshot)
+      if !saveToFile {
+        try? FileManager.default.removeItem(at: lastScreenshotURL)
+      }
       return
     }
     if saveToClipboard {
@@ -816,6 +819,9 @@ class PlayerCore: NSObject {
     }
     guard Preference.bool(for: .screenshotShowPreview) else {
       self.sendOSD(.screenshot)
+      if !saveToFile {
+        try? FileManager.default.removeItem(at: lastScreenshotURL)
+      }
       return
     }
 

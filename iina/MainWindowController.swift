@@ -1176,9 +1176,10 @@ class MainWindowController: PlayerWindowController {
     }
 
     if shouldApplyInitialWindowSize, let wfg = windowFrameFromGeometry(newSize: AppData.sizeWhenNoVideo, screen: screen) {
-      window!.setFrame(wfg, display: true, animate: Preference.bool(for: PK.enableAnimations))
+      window!.setFrame(wfg, display: true, animate: !Preference.bool(for: PK.disableAnimations))
     } else {
-      window!.setFrame(AppData.sizeWhenNoVideo.centeredRect(in: screen.visibleFrame), display: true, animate: Preference.bool(for: PK.enableAnimations))
+      window!.setFrame(AppData.sizeWhenNoVideo.centeredRect(in: screen.visibleFrame), display: true,
+                       animate: !Preference.bool(for: PK.disableAnimations))
     }
 
     videoView.videoLayer.draw(forced: true)
@@ -1260,7 +1261,7 @@ class MainWindowController: PlayerWindowController {
   func window(_ window: NSWindow, startCustomAnimationToEnterFullScreenOn screen: NSScreen, withDuration duration: TimeInterval) {
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = duration
-      window.animator().setFrame(screen.frame, display: true, animate: Preference.bool(for: PK.enableAnimations))
+      window.animator().setFrame(screen.frame, display: true, animate: !Preference.bool(for: PK.disableAnimations))
     }, completionHandler: nil)
 
   }
@@ -1273,7 +1274,7 @@ class MainWindowController: PlayerWindowController {
 
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = duration
-      window.animator().setFrame(priorWindowedFrame, display: true, animate: Preference.bool(for: PK.enableAnimations))
+      window.animator().setFrame(priorWindowedFrame, display: true, animate: !Preference.bool(for: PK.disableAnimations))
     }, completionHandler: nil)
 
     NSMenu.setMenuBarVisible(true)
@@ -1408,7 +1409,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   func windowDidExitFullScreen(_ notification: Notification) {
-    if !Preference.bool(for: PK.enableAnimations) {
+    if Preference.bool(for: PK.disableAnimations) {
       // When animation is not used exiting full screen does not restore the previous size of the
       // window. Restore it now.
       window!.setFrame(fsState.priorWindowedFrame!, display: true, animate: false)
@@ -1528,7 +1529,7 @@ class MainWindowController: PlayerWindowController {
   private func setWindowFrameForLegacyFullScreen() {
     guard let window = self.window else { return }
     let screen = window.screen ?? NSScreen.main!
-    window.setFrame(screen.frame, display: true, animate: Preference.bool(for: PK.enableAnimations))
+    window.setFrame(screen.frame, display: true, animate: !Preference.bool(for: PK.disableAnimations))
     guard let unusable = screen.cameraHousingHeight else { return }
     // This screen contains an embedded camera. Shorten the height of the window's content view's
     // frame to avoid having part of the window obscured by the camera housing.
@@ -2039,7 +2040,7 @@ class MainWindowController: PlayerWindowController {
   ///
   /// Normally the sidebar is revealed by sliding it into view. However if the macOS [System Settings](https://support.apple.com/guide/mac-help/change-system-settings-mh15217/mac)
   /// [reduce motion](https://support.apple.com/guide/mac-help/stop-or-reduce-onscreen-motion-mchlc03f57a1/mac)
-  /// setting is enabled then instead the sidebar will fade in. If the user disables the IINA `Enable animations` setting then the
+  /// setting is enabled then instead the sidebar will fade in. If the user enables the IINA `Disable animations` setting then the
   /// duration of the animation will be set to zero making the sidebar appear instantly.
   /// - Parameters:
   ///   - viewController: View controller for the sidebar to show.

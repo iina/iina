@@ -10,11 +10,11 @@ import Foundation
 
 struct AccessibilityPreferences {
 
-  /// Adjusts an animation to be instantaneous if the IINA setting `Enable animations` is disabled.
+  /// Adjusts an animation to be instantaneous if the IINA setting `Disable animations` is enabled.
   /// - Parameter duration: Desired animation duration.
   /// - Returns: `0` if animations have been disabled; otherwise the given duration.
   static func adjustedDuration(_ duration: TimeInterval) -> TimeInterval {
-    return Preference.bool(for: PK.enableAnimations) ? duration : 0
+    return Preference.bool(for: PK.disableAnimations) ? 0 : duration
   }
 
   /// Reflects whether the macOS accessibility setting to reduce motion is in an enabled state.

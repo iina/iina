@@ -1245,39 +1245,63 @@ Picture:</string>
             </constraints>
             <point key="canvasLocation" x="14" y="907"/>
         </customView>
-        <customView id="k9o-rY-z6u" userLabel="Prefs &gt; UI &gt; Animations">
-            <rect key="frame" x="0.0" y="0.0" width="493" height="32"/>
+        <customView misplaced="YES" id="k9o-rY-z6u" userLabel="Prefs &gt; UI &gt; Accessibility">
+            <rect key="frame" x="0.0" y="0.0" width="550" height="90"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField identifier="SectionTitleThumb" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M1d-6z-urt">
-                    <rect key="frame" x="-2" y="8" width="82" height="16"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Animations:" id="AYW-Xu-ySw">
+                <textField identifier="SectionTitleThumb" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M1d-6z-urt" userLabel="Accessibility">
+                    <rect key="frame" x="-2" y="70" width="91" height="16"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Accessibility:" id="AYW-Xu-ySw">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="6DX-Ep-AbS">
-                    <rect key="frame" x="118" y="7" width="137" height="18"/>
-                    <buttonCell key="cell" type="check" title="Enable animations" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="mjs-jg-wm1">
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="6DX-Ep-AbS" userLabel="Disable animations">
+                    <rect key="frame" x="118" y="69" width="141" height="18"/>
+                    <buttonCell key="cell" type="check" title="Disable animations" bezelStyle="regularSquare" imagePosition="left" inset="2" id="mjs-jg-wm1">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <binding destination="lH7-Vv-0M1" name="value" keyPath="values.enableAnimations" id="MBb-V5-ZRW"/>
+                        <binding destination="lH7-Vv-0M1" name="value" keyPath="values.disableAnimations" id="C94-f2-ocl"/>
                     </connections>
                 </button>
+                <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4QU-uL-rQD" userLabel="Disable animations Help Button">
+                    <rect key="frame" x="264" y="64" width="25" height="25"/>
+                    <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tqd-k0-pR0">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="disableAnimationsHelpAction:" target="-2" id="3Su-2O-LKG"/>
+                    </connections>
+                </button>
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="TmI-kk-Nbj">
+                    <rect key="frame" x="118" y="8" width="434" height="56"/>
+                    <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" id="9IR-Sf-wMq">
+                        <font key="font" metaFont="label" size="11"/>
+                        <string key="title">When the macOS Reduce Motion accessibility setting is enabled IINA will reduce user interface animations that are known to cause problems for those with vestibular disorders. Should that be insufficient, this setting can be used to reduce motion further by eliminating user interface animations.</string>
+                        <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
             <constraints>
-                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="M1d-6z-urt" secondAttribute="bottom" constant="8" id="0Zd-Hq-Kal"/>
+                <constraint firstItem="TmI-kk-Nbj" firstAttribute="leading" secondItem="6DX-Ep-AbS" secondAttribute="leading" id="0an-by-LUR"/>
                 <constraint firstItem="M1d-6z-urt" firstAttribute="leading" secondItem="k9o-rY-z6u" secondAttribute="leading" id="5UK-qs-t0Z"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6DX-Ep-AbS" secondAttribute="trailing" id="cOu-Iy-NWl"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4QU-uL-rQD" secondAttribute="trailing" id="ECi-04-TXI"/>
+                <constraint firstAttribute="bottom" secondItem="TmI-kk-Nbj" secondAttribute="bottom" constant="8" id="FdL-T8-5LI"/>
+                <constraint firstItem="4QU-uL-rQD" firstAttribute="leading" secondItem="6DX-Ep-AbS" secondAttribute="trailing" constant="8" id="MER-sj-cma"/>
+                <constraint firstItem="4QU-uL-rQD" firstAttribute="centerY" secondItem="6DX-Ep-AbS" secondAttribute="centerY" id="Nng-vM-pUe"/>
+                <constraint firstItem="TmI-kk-Nbj" firstAttribute="top" secondItem="4QU-uL-rQD" secondAttribute="bottom" constant="4" id="T9B-vQ-mWt"/>
                 <constraint firstItem="M1d-6z-urt" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="k9o-rY-z6u" secondAttribute="leading" constant="120" id="j0m-fh-NoW"/>
                 <constraint firstItem="6DX-Ep-AbS" firstAttribute="top" secondItem="M1d-6z-urt" secondAttribute="top" id="j8G-1a-rlS"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="TmI-kk-Nbj" secondAttribute="trailing" id="mgO-TO-KgH"/>
                 <constraint firstItem="M1d-6z-urt" firstAttribute="top" secondItem="k9o-rY-z6u" secondAttribute="top" constant="8" id="nbs-Tz-GDd"/>
                 <constraint firstItem="6DX-Ep-AbS" firstAttribute="leading" secondItem="k9o-rY-z6u" secondAttribute="leading" constant="120" id="ray-E7-Kek"/>
             </constraints>
-            <point key="canvasLocation" x="21" y="1020"/>
+            <point key="canvasLocation" x="49" y="1061.5"/>
         </customView>
     </objects>
     <resources>

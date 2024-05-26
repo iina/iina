@@ -144,7 +144,7 @@ struct Preference {
     static let pauseWhenPip = Key("pauseWhenPip")
     static let togglePipByMinimizingWindow = Key("togglePipByMinimizingWindow")
 
-    static let enableAnimations = Key("enableAnimations")
+    static let disableAnimations = Key("disableAnimations")
 
     // Codec
 
@@ -772,7 +772,7 @@ struct Preference {
     .windowBehaviorWhenPip: WindowBehaviorWhenPip.doNothing.rawValue,
     .pauseWhenPip: false,
     .togglePipByMinimizingWindow: false,
-    .enableAnimations: true,
+    .disableAnimations: false,
 
     .videoThreads: 0,
     .hardwareDecoder: HardwareDecoderOption.auto.rawValue,

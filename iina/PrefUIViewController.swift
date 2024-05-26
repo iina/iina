@@ -235,6 +235,10 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
   private func setSubViews(of view: NSBox, enabled: Bool) {
     view.contentView?.subviews.forEach { ($0 as? NSControl)?.isEnabled = enabled }
   }
+
+  @IBAction func disableAnimationsHelpAction(_ sender: Any) {
+    NSWorkspace.shared.open(URL(string: AppData.disableAnimationsHelpLink)!)
+  }
 }
 
 @objc(ResizeTimingTransformer) class ResizeTimingTransformer: ValueTransformer {

@@ -11,6 +11,7 @@
                 <outlet property="additionalInfoBattery" destination="1XY-X2-FcE" id="FA8-zH-CvA"/>
                 <outlet property="additionalInfoBatteryView" destination="Ybl-06-ksj" id="NdR-gs-P1p"/>
                 <outlet property="additionalInfoLabel" destination="4mb-jy-Y1w" id="rgV-hQ-MH2"/>
+                <outlet property="additionalInfoLabelXConstraint" destination="Adp-7U-tTV" id="6n8-LE-8Un"/>
                 <outlet property="additionalInfoStackView" destination="HJv-RK-JT8" id="T3L-fd-A60"/>
                 <outlet property="additionalInfoTitle" destination="3uh-OF-zy6" id="N6w-Hh-fQ1"/>
                 <outlet property="additionalInfoView" destination="Qbi-jx-9pO" id="bdV-ZH-SkC"/>
@@ -243,8 +244,8 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="Qmi-hb-0aM" secondAttribute="bottom" constant="8" id="84H-65-Ego"/>
                             <constraint firstItem="Qmi-hb-0aM" firstAttribute="top" secondItem="DFb-1L-U9o" secondAttribute="top" constant="8" id="ANy-8g-kkb"/>
-                            <constraint firstAttribute="trailing" secondItem="Qmi-hb-0aM" secondAttribute="trailing" constant="8" id="bOW-iG-HNY"/>
-                            <constraint firstItem="Qmi-hb-0aM" firstAttribute="leading" secondItem="DFb-1L-U9o" secondAttribute="leading" id="c3E-rA-tSH"/>
+                            <constraint firstAttribute="right" secondItem="Qmi-hb-0aM" secondAttribute="right" constant="8" id="bOW-iG-HNY"/>
+                            <constraint firstItem="Qmi-hb-0aM" firstAttribute="left" secondItem="DFb-1L-U9o" secondAttribute="left" id="c3E-rA-tSH"/>
                         </constraints>
                     </visualEffectView>
                     <visualEffectView wantsLayer="YES" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" blendingMode="withinWindow" material="popover" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="OiF-pA-8Sd" userLabel="Control Bar" customClass="ControlBarView" customModule="IINA" customModuleProvider="target">
@@ -306,8 +307,8 @@
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="height" constant="22" id="1Dw-Bg-FRS"/>
-                            <constraint firstAttribute="trailing" secondItem="fDY-vk-Ylv" secondAttribute="trailing" constant="8" id="J3u-Qd-3qz"/>
-                            <constraint firstItem="fDY-vk-Ylv" firstAttribute="leading" secondItem="TRx-2V-Gr3" secondAttribute="leading" id="L25-c7-hER"/>
+                            <constraint firstAttribute="right" secondItem="fDY-vk-Ylv" secondAttribute="right" constant="8" id="J3u-Qd-3qz"/>
+                            <constraint firstItem="fDY-vk-Ylv" firstAttribute="left" secondItem="TRx-2V-Gr3" secondAttribute="left" id="L25-c7-hER"/>
                             <constraint firstItem="fDY-vk-Ylv" firstAttribute="top" secondItem="TRx-2V-Gr3" secondAttribute="top" constant="26" id="dAZ-xc-uEC"/>
                             <constraint firstAttribute="trailing" secondItem="iA3-pt-6Jm" secondAttribute="trailing" id="e9D-au-sdb"/>
                             <constraint firstItem="iA3-pt-6Jm" firstAttribute="leading" secondItem="TRx-2V-Gr3" secondAttribute="leading" id="jIX-sE-wsj"/>
@@ -442,7 +443,7 @@
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="BE1-yC-oJL" customClass="TimeLabelOverflowedView" customModule="IINA" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="500" height="29"/>
             <subviews>
-                <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eBP-6g-bAT" customClass="PlaySlider" customModule="IINA" customModuleProvider="target">
+                <slider verticalHuggingPriority="750" mirrorLayoutDirectionWhenInternationalizing="never" translatesAutoresizingMaskIntoConstraints="NO" id="eBP-6g-bAT" customClass="PlaySlider" customModule="IINA" customModuleProvider="target">
                     <rect key="frame" x="48" y="-1" width="404" height="28"/>
                     <sliderCell key="cell" continuous="YES" refusesFirstResponder="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="f1c-xF-8a2" customClass="PlaySliderCell" customModule="IINA" customModuleProvider="target"/>
                     <connections>
@@ -591,14 +592,14 @@
             </subviews>
             <constraints>
                 <constraint firstItem="10x-bg-xlj" firstAttribute="centerY" secondItem="Yv6-0K-6E4" secondAttribute="centerY" id="4a0-xW-jtL"/>
-                <constraint firstItem="10x-bg-xlj" firstAttribute="leading" secondItem="Yv6-0K-6E4" secondAttribute="leading" constant="14" id="8Hx-gQ-ez7"/>
+                <constraint firstItem="10x-bg-xlj" firstAttribute="left" secondItem="Yv6-0K-6E4" secondAttribute="left" constant="14" id="8Hx-gQ-ez7"/>
                 <constraint firstItem="EIi-qd-glM" firstAttribute="centerY" secondItem="Yv6-0K-6E4" secondAttribute="centerY" id="MRS-GF-0U6"/>
                 <constraint firstItem="gxw-pJ-Lcg" firstAttribute="centerX" secondItem="Yv6-0K-6E4" secondAttribute="centerX" id="PrE-1U-klM"/>
-                <constraint firstItem="EIi-qd-glM" firstAttribute="leading" secondItem="gxw-pJ-Lcg" secondAttribute="trailing" constant="24" id="WtE-JF-0m3"/>
+                <constraint firstItem="EIi-qd-glM" firstAttribute="left" secondItem="gxw-pJ-Lcg" secondAttribute="right" constant="24" id="WtE-JF-0m3"/>
                 <constraint firstAttribute="height" constant="24" id="Y49-r6-uWL"/>
-                <constraint firstItem="gxw-pJ-Lcg" firstAttribute="leading" secondItem="10x-bg-xlj" secondAttribute="trailing" constant="24" id="aEy-x5-Ctd"/>
+                <constraint firstItem="gxw-pJ-Lcg" firstAttribute="left" secondItem="10x-bg-xlj" secondAttribute="right" constant="24" id="aEy-x5-Ctd"/>
                 <constraint firstItem="gxw-pJ-Lcg" firstAttribute="centerY" secondItem="Yv6-0K-6E4" secondAttribute="centerY" id="dBB-Jk-nlO"/>
-                <constraint firstAttribute="trailing" secondItem="EIi-qd-glM" secondAttribute="trailing" constant="14" id="enq-Gg-JrN"/>
+                <constraint firstAttribute="right" secondItem="EIi-qd-glM" secondAttribute="right" constant="14" id="enq-Gg-JrN"/>
             </constraints>
             <point key="canvasLocation" x="377" y="703"/>
         </customView>

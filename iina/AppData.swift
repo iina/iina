@@ -73,7 +73,8 @@ struct Constants {
   struct String {
     static let degree = "°"
     static let dot = "●"
-    static let play = "▶︎"
+    static let blackRightPointingTriangle = "▶︎"
+    static let blackLeftPointingTriangle = "◀"
     static let videoTimePlaceholder = "--:--:--"
     static let trackNone = NSLocalizedString("track.none", comment: "<None>")
     static let chapter = "Chapter"

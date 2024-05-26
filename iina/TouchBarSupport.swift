@@ -318,6 +318,18 @@ class TouchBarPlaySliderCell: NSSliderCell {
     return 4
   }
 
+  /// Initializes and returns a newly allocated `TouchBarPlaySliderCell` object.
+  /// - Important: As per Apple's [Internationalization and Localization Guide](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPInternational/SupportingRight-To-LeftLanguages/SupportingRight-To-LeftLanguages.html)
+  ///     video controllers and timeline indicators should not flip in a right-to-left language.
+  override init() {
+    super.init()
+    userInterfaceLayoutDirection = .leftToRight
+  }
+
+  required init(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
   override func barRect(flipped: Bool) -> NSRect {
     self.controlView?.superview?.layer?.backgroundColor = .black
     let rect = super.barRect(flipped: flipped)

@@ -485,7 +485,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       let item = info.playlist[row]
 
       if identifier == .isChosen {
-        v.textField?.stringValue = item.isPlaying ? Constants.String.play : ""
+        let pointer = view.userInterfaceLayoutDirection == .rightToLeft ?
+            Constants.String.blackLeftPointingTriangle :  Constants.String.blackRightPointingTriangle
+        v.textField?.stringValue = item.isPlaying ? pointer : ""
       } else if identifier == .trackName {
         let cellView = v as! PlaylistTrackCellView
         // file name
@@ -577,7 +579,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
       if identifier == .isChosen {
         // left column
-        v.textField?.stringValue = (info.chapter == row) ? Constants.String.play : ""
+        let pointer = view.userInterfaceLayoutDirection == .rightToLeft ?
+            Constants.String.blackLeftPointingTriangle :  Constants.String.blackRightPointingTriangle
+        v.textField?.stringValue = (info.chapter == row) ? pointer : ""
         return v
       } else if identifier == .trackName {
         // right column

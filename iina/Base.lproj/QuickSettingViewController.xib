@@ -46,7 +46,17 @@
                 <outlet property="saturationSlider" destination="VlS-Jo-4C0" id="rJV-p9-OVz"/>
                 <outlet property="secSubTableView" destination="Jve-qX-Agy" id="0ia-bh-sbu"/>
                 <outlet property="speedSlider" destination="UWh-M9-5Nw" id="UXr-dD-8K1"/>
+                <outlet property="speedSlider0_25xLabel" destination="Nhb-Co-xbZ" id="16j-wm-Ajt"/>
+                <outlet property="speedSlider16xLabel" destination="mjX-Jf-925" id="4P4-YN-VLh"/>
+                <outlet property="speedSlider16xLabelPrevLabelConstraint" destination="Aep-cH-5hZ" id="oqZ-YH-RdM"/>
+                <outlet property="speedSlider1xLabel" destination="wBg-Dk-cUX" id="3KH-oh-WBJ"/>
+                <outlet property="speedSlider1xLabelCenterXConstraint" destination="hlk-KQ-DJ7" id="Sja-O3-JF3"/>
+                <outlet property="speedSlider1xLabelPrevLabelConstraint" destination="85g-vN-0eC" id="2Au-Nf-kCX"/>
+                <outlet property="speedSlider4xLabel" destination="Njq-za-TIf" id="xtC-vt-JRw"/>
+                <outlet property="speedSlider4xLabelCenterXConstraint" destination="H0i-c4-qHi" id="kd4-J7-2GM"/>
+                <outlet property="speedSlider4xLabelPrevLabelConstraint" destination="0og-bi-e6K" id="mxE-fT-iec"/>
                 <outlet property="speedSliderConstraint" destination="qTf-o6-Mef" id="mB3-5X-SOE"/>
+                <outlet property="speedSliderContainerView" destination="5v4-Te-950" id="TvR-R1-5kh"/>
                 <outlet property="speedSliderIndicator" destination="3EN-WD-QNI" id="vDD-eE-x6w"/>
                 <outlet property="subDelaySlider" destination="dXz-x4-sm5" id="VX5-8O-mf4"/>
                 <outlet property="subDelaySliderConstraint" destination="7t1-v0-J55" id="ypG-K0-i1x"/>
@@ -392,7 +402,7 @@
                                                         <textField identifier="customAspectRatio" horizontalHuggingPriority="500" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XAI-y0-tcy" userLabel="CustomAspectRatio Text Field">
                                                             <rect key="frame" x="287" y="576" width="60" height="21"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" priority="900" constant="60" id="JnW-kS-XvK"/>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="900" constant="30" id="JnW-kS-XvK"/>
                                                             </constraints>
                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="jR7-Mt-N0T" customClass="RoundedTextFieldCell" customModule="IINA" customModuleProvider="target">
                                                                 <font key="font" metaFont="system"/>
@@ -1518,7 +1528,7 @@
                                                                 <constraint firstItem="XdF-fV-DCz" firstAttribute="top" secondItem="kvu-fg-olx" secondAttribute="bottom" constant="10" id="gud-hM-Hf0"/>
                                                                 <constraint firstItem="TA9-9G-tIE" firstAttribute="leading" secondItem="XdF-fV-DCz" secondAttribute="leading" id="hKL-gp-ucV"/>
                                                                 <constraint firstItem="uUe-VB-wyv" firstAttribute="centerX" secondItem="JaQ-EH-K1U" secondAttribute="centerX" id="iT9-ha-L66"/>
-                                                                <constraint firstItem="EDx-YH-ofM" firstAttribute="centerX" secondItem="pHR-ym-VeQ" secondAttribute="centerX" multiplier="1.1" constant="-4" id="idL-dD-1e3"/>
+                                                                <constraint firstItem="EDx-YH-ofM" firstAttribute="centerX" secondItem="pHR-ym-VeQ" secondAttribute="centerX" id="idL-dD-1e3"/>
                                                                 <constraint firstAttribute="trailing" secondItem="Qal-0X-4kS" secondAttribute="trailing" id="lda-T8-U6J"/>
                                                                 <constraint firstAttribute="trailing" secondItem="TA9-9G-tIE" secondAttribute="trailing" constant="20" id="nPX-nn-l3H"/>
                                                                 <constraint firstItem="izd-aj-gqV" firstAttribute="centerY" secondItem="xtT-Or-HjR" secondAttribute="centerY" id="nqS-iu-yym"/>

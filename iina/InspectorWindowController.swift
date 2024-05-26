@@ -21,6 +21,8 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
 
   var watchProperties: [String] = []
 
+  private var observers: [NSObjectProtocol] = []
+
   @IBOutlet weak var tabView: NSTabView!
   @IBOutlet weak var tabButtonGroup: NSSegmentedControl!
   @IBOutlet weak var trackPopup: NSPopUpButton!
@@ -78,6 +80,8 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
   @IBOutlet weak var watchTableContainerView: NSView!
   private var tableHeightConstraint: NSLayoutConstraint? = nil
 
+  // MARK: - Window Delegate
+
   override func windowDidLoad() {
     super.windowDidLoad()
 
@@ -110,14 +114,31 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
 
     updateInfo()
     watchTableView.scrollRowToVisible(0)
-
-    updateTimer = Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(dynamicUpdate), userInfo: nil, repeats: true)
-
-    NotificationCenter.default.addObserver(self, selector: #selector(fileLoaded), name: .iinaFileLoaded, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(fileLoaded), name: .iinaMainWindowChanged, object: nil)
   }
 
-  /// Workaround (as of MacOS 13.4): try to ensure `watchTableView` never scrolls vertically, because `NSTableView` will draw rows
+  override func showWindow(_ sender: Any?) {
+    Logger.log("Showing Inspector window", level: .verbose)
+
+    guard let _ = self.window else { return }  // trigger lazy load if not loaded
+
+    updateInfo()
+
+    removeTimerAndListeners()
+    updateTimer = Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(dynamicUpdate), userInfo: nil, repeats: true)
+
+    observers.append(NotificationCenter.default.addObserver(forName: .iinaFileLoaded, object: nil, queue: .main, using: self.fileLoaded))
+    observers.append(NotificationCenter.default.addObserver(forName: .iinaMainWindowChanged, object: nil, queue: .main, using: self.fileLoaded))
+
+    super.showWindow(sender)
+  }
+
+  func windowWillClose(_ notification: Notification) {
+    Logger.log("Closing Inspector window", level: .verbose)
+    // Remove timer & listeners to conserve resources
+    removeTimerAndListeners()
+  }
+  
+  /// Workaround (as of macOS 13.4): try to ensure `watchTableView` never scrolls vertically, because `NSTableView` will draw rows
   /// overlapping the header (maybe only a problem for custom `NSTableHeaderCell`s which are not opaque), but looks quite ugly.
   private func computeMinTableHeight() -> CGFloat {
     /// Add `1` to `numberOfRows` because it will scroll if there is not at least 1 empty row
@@ -125,10 +146,13 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
       watchTableView.numberOfRows + 1) * (watchTableView.rowHeight + watchTableView.intercellSpacing.height)
   }
 
-  deinit {
-    ObjcUtils.silenced {
-      NotificationCenter.default.removeObserver(self)
+  private func removeTimerAndListeners() {
+    updateTimer?.invalidate()
+    updateTimer = nil
+    for observer in observers {
+      NotificationCenter.default.removeObserver(observer)
     }
+    observers = []
   }
 
   func updateInfo(dynamic: Bool = false) {
@@ -262,7 +286,7 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
     }
   }
 
-  @objc func fileLoaded() {
+  func fileLoaded(_ notification: Notification) {
     updateInfo()
   }
 

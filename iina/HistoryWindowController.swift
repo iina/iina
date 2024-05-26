@@ -349,4 +349,10 @@ class HistoryProgressCellView: NSTableCellView {
 
   @IBOutlet var indicator: NSProgressIndicator!
 
+  /// Prepares the receiver for service after it has been loaded from an Interface Builder archive, or nib file.
+  /// - Important: As per Apple's [Internationalization and Localization Guide](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPInternational/SupportingRight-To-LeftLanguages/SupportingRight-To-LeftLanguages.html)
+  ///     timeline indicators should not flip in a right-to-left language. This can not be set in the XIB.
+  override func awakeFromNib() {
+    indicator.userInterfaceLayoutDirection = .leftToRight
+  }
 }

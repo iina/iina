@@ -28,6 +28,9 @@
 "initial.debug.desc" = "Ladící sestavení obvykle nejsou optimalizována pro výkon, nejsou tedy doporučena pro každodenní použití. Ladící sestavení nepodporují automatické aktualizace.";
 "initial.bug_report" = "Nahlaste na <a href=\"https://github.com/iina/iina/issues\">GitHub</a>.";
 
+// Inspector Window
+"inspector.error" = "Chyba";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Načítá se… %d%%";
 "main.opening_stream" = "Otevírám stream…";

@@ -28,6 +28,9 @@
 "initial.debug.desc" = "디버그 빌드는 성능에 최적화되어 있지 않으므로, 일반적으로 사용하지 않는 것이 좋습니다. 디버그 빌드는 자동 업데이트를 지원하지 않습니다.";
 "initial.bug_report" = "<a href=\"https://github.com/iina/iina/issues\">GitHub 이슈</a>를 통해 오류를 보고해주십시오.";
 
+// Inspector Window
+"inspector.error" = "오류";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "버퍼링… %d%%";
 "main.opening_stream" = "스트림 여는 중…";

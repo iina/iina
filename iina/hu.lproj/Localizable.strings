@@ -28,6 +28,9 @@
 "initial.debug.desc" = "A hibakeresési verzió általában nincs teljesítményre optimalizálva, ezért nem ajánlott napi használatra. A hibakeresési verziók nem támogatják az automatikus frissítést.";
 "initial.bug_report" = "Jelentés a <a href=\"https://github.com/iina/iina/issues\">GitHub-bugok</a> felületen.";
 
+// Inspector Window
+"inspector.error" = "Hiba";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Bufferelés…%d%%";
 "main.opening_stream" = "Stream megnyitása…";

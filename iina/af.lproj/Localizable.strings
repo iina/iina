@@ -28,6 +28,9 @@
 "initial.debug.desc" = "Maaksels vir ontfouting is nie geoptimeer vir verrigting nie daarom word dit nie aanbeveel om as daaglikse drywer gebruik te word nie. Ontfoutmaaksels ondersteun ook nie outobywerking nie.";
 "initial.bug_report" = "Rapporteer via <a href=\"https://github.com/iina/iina/issues\">GitHub-kwessies</a>.";
 
+// Inspector Window
+"inspector.error" = "Fout";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Bufferwerking… %d%%";
 "main.opening_stream" = "Open tans stroom…";

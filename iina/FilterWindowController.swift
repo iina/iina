@@ -137,7 +137,7 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
 
   private func syncSavedFilter() {
     Preference.set(savedFilters.map { $0.toDict() }, for: filterType == MPVProperty.af ? .savedAudioFilters : .savedVideoFilters)
-    (NSApp.delegate as? AppDelegate)?.menuController?.updateSavedFilters(forType: filterType, from: savedFilters)
+    AppDelegate.shared.menuController?.updateSavedFilters(forType: filterType, from: savedFilters)
     UserDefaults.standard.synchronize()
   }
 

@@ -461,9 +461,9 @@ class InitialWindowViewActionButton: NSView {
   override func mouseDown(with event: NSEvent) {
     self.layer?.backgroundColor = pressedBackground.cgColor
     if self.identifier == .openFile {
-      (NSApp.delegate as! AppDelegate).openFile(self)
+      AppDelegate.shared.openFile(self)
     } else if self.identifier == .openURL {
-      (NSApp.delegate as! AppDelegate).openURL(self)
+      AppDelegate.shared.openURL(self)
     } else {
       if let lastFile = Preference.url(for: .iinaLastPlayedFilePath),
         let windowController = window?.windowController as? InitialWindowController {

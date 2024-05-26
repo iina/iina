@@ -72,7 +72,7 @@ class JavascriptAPIMenu: JavascriptAPI, JavascriptAPIMenuExportable {
 
   func forceUpdate() {
     Utility.executeOnMainThread {
-      (NSApp.delegate as? AppDelegate)?.menuController?.updatePluginMenu()
+      AppDelegate.shared.menuController?.updatePluginMenu()
     }
   }
 }

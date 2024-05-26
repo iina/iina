@@ -244,7 +244,7 @@ class PlayerCore: NSObject {
 
   static func reloadPluginForAll(_ plugin: JavascriptPlugin) {
     playerCores.forEach { $0.reloadPlugin(plugin) }
-    (NSApp.delegate as? AppDelegate)?.menuController?.updatePluginMenu()
+    AppDelegate.shared.menuController?.updatePluginMenu()
   }
 
   func loadPlugins() {
@@ -455,7 +455,7 @@ class PlayerCore: NSObject {
       kbUniqueOrderedList.append(keyBindingsDict[key]!)
     }
 
-    (NSApp.delegate as? AppDelegate)?.menuController.updateKeyEquivalentsFrom(kbUniqueOrderedList)
+    AppDelegate.shared.menuController.updateKeyEquivalentsFrom(kbUniqueOrderedList)
 
     NotificationCenter.default.post(Notification(name: .iinaGlobalKeyBindingsChanged, object: kbUniqueOrderedList))
   }
@@ -1669,7 +1669,7 @@ class PlayerCore: NSObject {
         HistoryController.shared.add(url, duration: duration.second)
       }
       if Preference.bool(for: .recordRecentFiles) && Preference.bool(for: .trackAllFilesInRecentOpenMenu) {
-        DispatchQueue.main.sync { (NSApp.delegate as! AppDelegate).noteNewRecentDocumentURL(url) }
+        DispatchQueue.main.sync { AppDelegate.shared.noteNewRecentDocumentURL(url) }
       }
 
     }

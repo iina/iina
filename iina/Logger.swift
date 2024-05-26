@@ -207,7 +207,7 @@ class Logger: NSObject {
       if logs.isEmpty {
         DispatchQueue.main.async {
           Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { timer in
-            (NSApp.delegate as! AppDelegate).logWindow.syncLogs()
+            AppDelegate.shared.logWindow.syncLogs()
           }
         }
       }

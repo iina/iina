@@ -8,7 +8,7 @@
 "2qf-cC-Lfi.title" = "Інший шлях до youtube-dl:";
 
 /* Class = "NSTextFieldCell"; title = "Default: 153600"; ObjectID = "3os-7u-lv8"; */
-"3os-7u-lv8.title" = "Типово: 153600";
+"3os-7u-lv8.title" = "За замовчуванням: 153600";
 
 /* Class = "NSTextFieldCell"; title = "HTTP proxy:"; ObjectID = "9ut-ID-ffZ"; */
 "9ut-ID-ffZ.title" = "HTTP-проксі:";
@@ -29,7 +29,7 @@
 "YqE-yV-BvQ.title" = "IINA пошукає youtube-dl у цій директорії. Потрібне перезавантаження.";
 
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "aNr-lv-K0r"; */
-"aNr-lv-K0r.title" = "автоматично";
+"aNr-lv-K0r.title" = "Авто";
 
 /* Class = "NSButtonCell"; title = "Enable youtube-dl"; ObjectID = "cyH-Md-FAD"; */
 "cyH-Md-FAD.title" = "Увімкнути youtube-dl";
@@ -53,4 +53,4 @@
 "yrh-Jm-Q4e.title" = "Мережа:";
 
 /* Class = "NSTextFieldCell"; title = "Raw options:"; ObjectID = "zCD-9d-ziV"; */
-"zCD-9d-ziV.title" = "Необроблені параметри:";
+"zCD-9d-ziV.title" = "Параметри Raw:";

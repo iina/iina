@@ -27,20 +27,35 @@ class JavascriptAPISidebarView: JavascriptAPI, JavascriptAPISidebarViewExportabl
   }
 
   func loadFile(_ path: String) {
+    guard player!.mainWindow.loaded else {
+      throwError(withMessage: "sidebar.loadFile called when window is not available. Please call it after receiving the \"iina.window-loaded\" event.")
+      return
+    }
     let rootURL = pluginInstance.plugin.root
     let url = rootURL.appendingPathComponent(path)
     Utility.executeOnMainThread {
-      pluginInstance.sidebarTabView.load(URLRequest(url: url))
+      let nav = pluginInstance.sidebarTabView.load(URLRequest(url: url))
+      if nav == nil {
+        throwError(withMessage: "Failed to load ")
+      }
     }
     messageHub.clearListeners()
   }
 
   func show() {
+    guard player!.mainWindow.loaded else {
+      throwError(withMessage: "sidebar.show called when window is not available. Please call it after receiving the \"iina.window-loaded\" event.")
+      return
+    }
     let id = pluginInstance.plugin.identifier
     player!.mainWindow.showSettingsSidebar(tab: .plugin(id: id), force: true, hideIfAlreadyShown: false)
   }
 
   func hide() {
+    guard player!.mainWindow.loaded else {
+      throwError(withMessage: "sidebar.hide called when window is not available. Please call it after receiving the \"iina.window-loaded\" event.")
+      return
+    }
     player!.mainWindow.hideSideBar()
   }
 

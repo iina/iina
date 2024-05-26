@@ -29,9 +29,38 @@ fileprivate extension Process {
   func ask(_ title: String) -> Bool
   func prompt(_ title: String) -> String?
   func chooseFile(_ title: String, _ options: [String: Any]) -> Any
+  func keychainWrite(_ service: String, _ name: String, _ password: String) -> Any
+  func keychainRead(_ service: String, _ name: String) -> Any
+  func open(_ url: String) -> Bool
 }
 
 class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
+  func keychainWrite(_ service: String, _ name: String, _ password: String) -> Any {
+    if service.isEmpty {
+      return false
+    }
+    let serviceName = "\(pluginInstance.plugin.identifier) - \(service)"
+    do {
+      try KeychainAccess.write(username: name, password: password, forService: .init(serviceName))
+      return true
+    } catch {
+      return false
+    }
+  }
+  
+  func keychainRead(_ service: String, _ name: String) -> Any {
+    if service.isEmpty {
+      return false
+    }
+    let serviceName = "\(pluginInstance.plugin.identifier) - \(service)"
+    do {
+      let (_, result) = try KeychainAccess.read(username: name, forService: .init(serviceName))
+      return result
+    } catch {
+      return false
+    }
+  }
+  
   override func extraSetup() {
     context.evaluateScript("""
     iina.utils.ERROR_BINARY_NOT_FOUND = -1;
@@ -192,5 +221,30 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
         resolve.call(withArguments: [result.path])
       }
     }
+  }
+
+  func open(_ url: String) -> Bool {
+    // always open web links
+    if let url = URL(string: url) {
+      if url.scheme == "https" || url.scheme == "http" {
+        NSWorkspace.shared.open(url)
+        return true
+      }
+    }
+    // might be a file path
+    let (path, isLocal) = parsePath(url)
+    guard let path = path else {
+      log("utils.open: path cannot be found", level: .error)
+      return false
+    }
+    let fileURL = URL(fileURLWithPath: path)
+    if isLocal {
+      NSWorkspace.shared.open(fileURL)
+      return true
+    }
+    return whenPermitted(to: .accessFileSystem) {
+      NSWorkspace.shared.open(fileURL)
+      return true
+    } ?? false
   }
 }

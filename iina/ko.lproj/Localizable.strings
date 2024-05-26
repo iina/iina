@@ -28,6 +28,9 @@
 "initial.debug.desc" = "디버그 빌드는 성능에 최적화되어 있지 않으므로, 일반적으로 사용하지 않는 것이 좋습니다. 디버그 빌드는 자동 업데이트를 지원하지 않습니다.";
 "initial.bug_report" = "<a href=\"https://github.com/iina/iina/issues\">GitHub 이슈</a>를 통해 오류를 보고해주십시오.";
 
+// Inspector Window
+"inspector.error" = "오류";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "버퍼링… %d%%";
 "main.opening_stream" = "스트림 여는 중…";
@@ -87,10 +90,13 @@
 "osd.file_error" = "파일 읽기 오류";
 "osd.cannot_login" = "로그인할 수 없음";
 "osd.canceled" = "취소됨";
+"osd.cannot_connect" = "연결할 수 없음";
+"osd.timed_out" = "시간 초과됨";
 "osd.filter_added" = "필터 추가됨: %@";
 "osd.filter_removed" = "필터 제거됨";
-"osd.file_loop" = "파일 반복: %@";
-"osd.playlist_loop" = "재생목록 반복: %@";
+"osd.file_loop" = "단일 파일 반복 재생";
+"osd.playlist_loop" = "재생목록 반복 재생";
+"osd.no_loop" = "반복 재생하지 않음";
 
 "preference.title" = "환경설정";
 "preference.general" = "일반";
@@ -113,6 +119,10 @@
 
 "preference.enable_adv_settings" = "고급 설정 사용";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "strip";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "음량: %d";
 "menu.volume_muted" = "음량: %d (음소거 됨)";
 "menu.audio_delay" = "오디오 지연: %.2f초";
@@ -121,6 +131,8 @@
 "menu.exit_fullscreen" = "전체 화면에서 나가기";
 "menu.pip" = "화면 속 화면";
 "menu.exit_pip" = "화면 속 화면에서 나가기";
+"menu.mini_player" = "음악 모드 전환";
+"menu.exit_mini_player" = "음악 모드 나가기";
 "menu.pause" = "일시 정지";
 "menu.resume" = "재생";
 "menu.speed" = "재생속도: %.2fx";
@@ -206,6 +218,7 @@
 "alert.sub_lang_not_set" = "OpenSubtitles를 사용하기 전에 자막의 선호 언어를 설정하십시오. 지금은 영어(eng)를 사용합니다.";
 "alert.sub.cannot_save_passwd" = "키체인에 암호를 저장할 수 없습니다: %@";
 "alert.sub.cannot_login" = "로그인할 수 없습니다. 계정 이름과 암호, 네트워크 상태를 확인하십시오.\n\n%@";
+"alert.sub.save_downloaded.title" = "다운로드된 자막 저장";
 
 "alert.set_default.title" = "IINA를 기본 프로그램으로 설정";
 "alert.set_default.message" = "지원하는 모든 파일 유형에 대해 IINA를 기본 프로그램으로 설정합니다.";
@@ -262,6 +275,8 @@
 
 "alert.plugin_uninstall.title" = "%@을(를) 삭제 하시겠습니까?";
 "alert.plugin_uninstall.message" = "이 플러그인이 디스크에서 삭제됩니다.";
+"alert.plugin_reinstall.title" = "%@ 플러그인이 이미 존재합니다.";
+"alert.plugin_reinstall.message" = "플러그인을 재설치하시겠습니까?";
 "alert.duplicated_plugin_id" = "중복된 플러그인 식별자가 감지되었습니다. 두 개 이상의 플러그인 식별자 \"%@\"가 동일합니다. 이로 인해 비정상적인 동작이 발생할 수 있습니다. 환경설정 - 플러그인에서 해당 플러그인을 찾아 해당 플러그인 작성자에게 신고하세요. 플러그인이 로컬에 설치된 경우 플러그인의 Info.json 파일에서 식별자를 수동으로 변경할 수도 있습니다.";
 "alert.plugin_no_update" = "업데이트가 없습니다.";
 "alert.plugin_update_found.title" = "%@의 업데이트를 찾음";
@@ -309,6 +324,7 @@
 "osc_toolbar.full_screen" = "전체 화면 전환/복귀";
 "osc_toolbar.music_mode" = "음악 모드 전환";
 "osc_toolbar.sub_track" = "자막 선택";
+"osc_toolbar.screenshot" = "스크린샷 찍기";
 
 "mini_player.album_art" = "앨범 아트 켜기/끄기";
 "mini_player.loop" = "반복";

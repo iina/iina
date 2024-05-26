@@ -22,11 +22,14 @@
 "guide.faq" = "よくある質問";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
+"initial.announcement" = "%@ バージョンのIINAを使用しています";
+"initial.beta.desc" = "リリースバージョンに戻したい場合は、「設定 > 一般」の「ベータアップデートの受信」のチェックを外してください。その後 <a href=\"https://iina.io\">公式ウェブサイト</a> から安定版リリースをインストールします。";
 "initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
 "initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+
+// Inspector Window
+"inspector.error" = "エラー";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "バッファ中… %d%%";
@@ -87,10 +90,13 @@
 "osd.file_error" = "ファイルの読み込みエラー";
 "osd.cannot_login" = "ログインできません";
 "osd.canceled" = "キャンセルされました";
+"osd.cannot_connect" = "接続できません";
+"osd.timed_out" = "タイムアウト";
 "osd.filter_added" = "追加したフィルター: %@";
 "osd.filter_removed" = "削除したフィルター";
-"osd.file_loop" = "ファイルループ: %@";
-"osd.playlist_loop" = "プレイリストループ: %@";
+"osd.file_loop" = "1つのファイルをループ";
+"osd.playlist_loop" = "プレイリストをループ";
+"osd.no_loop" = "ループを無効にする";
 
 "preference.title" = "環境設定";
 "preference.general" = "一般";
@@ -113,14 +119,20 @@
 
 "preference.enable_adv_settings" = "高度な設定を有効化";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "ストリップ";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "音量: %d";
-"menu.volume_muted" = "Volume: %d (Muted)";
+"menu.volume_muted" = "ボリューム: %d (ミュート中)";
 "menu.audio_delay" = "オーディオディレイ: %.2fs";
 "menu.sub_delay" = "字幕ディレイ: %.2fs";
 "menu.fullscreen" = "フルスクリーンにする";
 "menu.exit_fullscreen" = "フルスクリーンを解除";
 "menu.pip" = "ピクチャー・イン・ピクチャーを使用";
 "menu.exit_pip" = "ピクチャー・イン・ピクチャーを終了";
+"menu.mini_player" = "ミュージックモードにする";
+"menu.exit_mini_player" = "ミュージックモードを終了する";
 "menu.pause" = "一時停止";
 "menu.resume" = "再生";
 "menu.speed" = "再生速度: %.2f倍";
@@ -206,6 +218,7 @@
 "alert.sub_lang_not_set" = "OpenSubtitlesを利用する前に、環境設定で字幕の優先言語を設定してください。今回は英語(eng)が使用されます。";
 "alert.sub.cannot_save_passwd" = "パスワードをキーチェーンに保存できません: %@";
 "alert.sub.cannot_login" = "ログインできません。ユーザー名とパスワード、ネットワーク環境をご確認ください。\n\n%@";
+"alert.sub.save_downloaded.title" = "ダウンロードした字幕を保存";
 
 "alert.set_default.title" = "IINAをデフォルトのアプリケーションに設定";
 "alert.set_default.message" = "対応する全てのファイル形式にIINAをデフォルトアプリケーションとして設定します。";
@@ -262,6 +275,8 @@
 
 "alert.plugin_uninstall.title" = "%@ をアンインストールしてもよろしいですか？";
 "alert.plugin_uninstall.message" = "プラグインはディスクから削除されます。";
+"alert.plugin_reinstall.title" = "%@はすでに存在しています";
+"alert.plugin_reinstall.message" = "プラグインを再インストールしますか？";
 "alert.duplicated_plugin_id" = "重複したプラグイン識別子が検出されました。2つ以上のプラグインには同じ識別子 \"%@\" があります。異常な動作を引き起こす可能性があります。 環境設定 - プラグインを見つけ、著者に報告してください。 プラグインがローカルにインストールされている場合は、プラグインの Info.json ファイル内の識別子を手動で変更することもできます。";
 "alert.plugin_no_update" = "アップデートは見つかりませんでした。";
 "alert.plugin_update_found.title" = "%@ のアップデートが見つかりました";
@@ -309,6 +324,7 @@
 "osc_toolbar.full_screen" = "フルスクリーン切り替え";
 "osc_toolbar.music_mode" = "ミュージックモード切り替え";
 "osc_toolbar.sub_track" = "字幕トラックを選択";
+"osc_toolbar.screenshot" = "スクリーンショットを撮影";
 
 "mini_player.album_art" = "アルバムアートの切り替え";
 "mini_player.loop" = "リピート";

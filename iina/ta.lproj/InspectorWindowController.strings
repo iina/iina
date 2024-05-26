@@ -38,13 +38,13 @@
 "FIw-CH-b05.title" = "Language:";
 
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[0] = "General"; ObjectID = "Fqo-1c-3L1"; */
-"Fqo-1c-3L1.ibShadowedLabels[0]" = "General";
+"Fqo-1c-3L1.ibShadowedLabels[0]" = "பொது";
 
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[1] = "Tracks"; ObjectID = "Fqo-1c-3L1"; */
 "Fqo-1c-3L1.ibShadowedLabels[1]" = "Tracks";
 
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[2] = "File"; ObjectID = "Fqo-1c-3L1"; */
-"Fqo-1c-3L1.ibShadowedLabels[2]" = "File";
+"Fqo-1c-3L1.ibShadowedLabels[2]" = "கோப்பு";
 
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[3] = "Status"; ObjectID = "Fqo-1c-3L1"; */
 "Fqo-1c-3L1.ibShadowedLabels[3]" = "Status";
@@ -86,7 +86,7 @@
 "PQD-yB-mm6.title" = "வடிவமைப்பு:";
 
 /* Class = "NSTextFieldCell"; title = "Default"; ObjectID = "S3X-Df-UMB"; */
-"S3X-Df-UMB.title" = "Default";
+"S3X-Df-UMB.title" = "இயல்புநிலை";
 
 /* Class = "NSTabViewItem"; label = "Tracks"; ObjectID = "UuR-M1-YLj"; */
 "UuR-M1-YLj.label" = "Tracks";
@@ -110,7 +110,7 @@
 "f2P-qb-wRx.title" = "அளவு:";
 
 /* Class = "NSTabViewItem"; label = "General"; ObjectID = "f7a-XG-NCc"; */
-"f7a-XG-NCc.label" = "General";
+"f7a-XG-NCc.label" = "பொது";
 
 /* Class = "NSTextFieldCell"; title = "Track:"; ObjectID = "f7i-wX-uxQ"; */
 "f7i-wX-uxQ.title" = "Track:";
@@ -146,7 +146,7 @@
 "n0s-eM-42w.title" = "Codec:";
 
 /* Class = "NSTextFieldCell"; title = "AUDIO"; ObjectID = "nrG-IH-kFg"; */
-"nrG-IH-kFg.title" = "AUDIO";
+"nrG-IH-kFg.title" = "கேட்பொலி";
 
 /* Class = "NSTextFieldCell"; title = "Total A/V Sync:"; ObjectID = "sbO-Cn-gpI"; */
 "sbO-Cn-gpI.title" = "Total A/V Sync:";

@@ -22,7 +22,7 @@
 "guide.faq" = "Često postavljena pitanja";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
+"initial.announcement" = "Koristite %@ verziju IINA programa";
 "initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
 "initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
@@ -70,8 +70,8 @@
 "osd.stop" = "Prekini";
 "osd.chapter" = "Poglavlje: %@";
 "osd.subtitle_scale" = "Skaliranje titla: %.2fx";
-"osd.add_to_playlist" = "Added %i Files to Playlist";
-"osd.clear_playlist" = "Očišćena popis naslova";
+"osd.add_to_playlist" = "Dodane datoteke u playlistu: %i";
+"osd.clear_playlist" = "Playlista je izbrisana";
 "osd.video_eq.contrast" = "Kontrast: %i";
 "osd.video_eq.gamma" = "Gamut: %i";
 "osd.video_eq.hue" = "Nijansa: %i";
@@ -87,10 +87,13 @@
 "osd.file_error" = "Greška prilikom čitanja datoteke";
 "osd.cannot_login" = "Neuspjela prijava";
 "osd.canceled" = "Prekinuto";
+"osd.cannot_connect" = "Neuspjelo povezivanje";
+"osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Dodani filtar: %@";
 "osd.filter_removed" = "Uklonjen filtar";
-"osd.file_loop" = "File Loop: %@";
-"osd.playlist_loop" = "Playlist Loop: %@";
+"osd.file_loop" = "Ponavljanje datoteke";
+"osd.playlist_loop" = "Ponavljanje playliste";
+"osd.no_loop" = "Isključi ponavljanje";
 
 "preference.title" = "Postavke";
 "preference.general" = "Opće";
@@ -101,7 +104,7 @@
 "preference.control" = "Upravljanje";
 "preference.keybindings" = "Tipkovni prečaci";
 "preference.advanced" = "Napredno";
-"preference.plugins" = "Plugins";
+"preference.plugins" = "Dodaci";
 "preference.utilities" = "Uslužni programi";
 "preference.scripts" = "Skripta";
 "preference.not_logged_in" = "Nisi prijavljen/prijavljena";
@@ -113,21 +116,27 @@
 
 "preference.enable_adv_settings" = "Aktiviraj napredne postavke";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "strip";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "Glasnoća: %d";
-"menu.volume_muted" = "Volume: %d (Muted)";
+"menu.volume_muted" = "Glasnoća: %d (Isključen zvuk)";
 "menu.audio_delay" = "Kašnjenje zvuka: %.2fs";
 "menu.sub_delay" = "Kašnjenje titlova: %.2fs";
 "menu.fullscreen" = "Pokreni cjeloekranski prikaz";
 "menu.exit_fullscreen" = "Prekini cjeloekranski prikaz";
 "menu.pip" = "Pokreni sliku u slici";
 "menu.exit_pip" = "Prekini sliku u slici";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Zaustavi";
 "menu.resume" = "Nastavi";
 "menu.speed" = "Brzina: %.2fx";
 "menu.chapters" = "Prikaži ploču poglavlja";
-"menu.hide_chapters" = "Hide Chapters Panel";
+"menu.hide_chapters" = "Sakrij ploču poglavlja";
 "menu.playlist" = "Prikaži ploču playliste";
-"menu.hide_playlist" = "Hide Playlist Panel";
+"menu.hide_playlist" = "Sakrij ploču playliste";
 "menu.video" = "Prikaži video postavke";
 "menu.hide_video" = "Sakrij video postavke";
 "menu.audio" = "Prikaži audio postavke";
@@ -147,7 +156,7 @@
 "menu.sub_delay_down" = "Kašnjenje titlova − %.1fs";
 
 "menu.crop_custom" = "Prilagođeno …";
-"menu.find_online_sub" = "Find Online Subtitles from %@";
+"menu.find_online_sub" = "Pronađi titlove na internetu iz %@";
 
 "track.none" = "<Ništa>";
 
@@ -165,15 +174,15 @@
 "alert.mpv_error" = "Internal error %@ (%@) when setting option %@.";
 "alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
-"alert.unsupported_audio" = "Unsupported external audio file.";
-"alert.unsupported_sub" = "Unsupported external subtitle.";
+"alert.unsupported_audio" = "Nepodržana eksterna audio datoteka.";
+"alert.unsupported_sub" = "Nepodržan eksterni titl.";
 "alert.unsupported_url" = "Nepodržana URL adresa.";
 "alert.wrong_url_format" = "Pogrešan format URL adrese.";
 
 "alert.error_open" = "Cannot open file or stream!";
 "alert.error_finding_file" = "Nije moguće pronaći datoteku %@!";
 "alert.error_loading_script" = "Nije moguće učitati skripta %@!";
-"alert.error_saving_file" = "Error occured when saving %@: %@";
+"alert.error_saving_file" = "Došlo je do greške prilikom spremanja %@: %@";
 "alert.error_deleting_file" = "Nije moguće izbrisati datoteku.";
 
 "alert.config.new.title" = "New Input Configuration";
@@ -187,7 +196,7 @@
 "alert.config.cannot_create" = "Nije moguće stvoriti konfiguracijsku datoteku!\n%@";
 "alert.config.cannot_write" = "Nije moguće pisati u konfiguracijsku datoteku!";
 
-"alert.filter.incorrect" = "Error occured when setting filters. Please check your parameter format.";
+"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "Novi filtar";
 "alert.add_filter.message" = "Please enter a filter string in format of mpv's vf or af command.";
 
@@ -198,26 +207,27 @@
 "alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
 "alert.extra_option.config_folder" = "Error setting config directory \"%@\".";
 
-"alert.playlist.error_deleting" = "Error deleting: %@";
+"alert.playlist.error_deleting" = "Greška pri brisanju: %@";
 
-"alert.screenshot.error_taking" = "Cannot take a screenshot!";
+"alert.screenshot.error_taking" = "Nije moguće snimiti snimku ekrana!";
 
 "alert.sub.no_selected" = "Najprije odaberi preuzeti titl.";
-"alert.sub_lang_not_set" = "Please set preferred subtitle languages in preferences before using OpenSubtitles. English(eng) will be used this time.";
+"alert.sub_lang_not_set" = "Postavi željene jezike titlova u postavkama prije korištenja web stranice OpenSubtitles. Ovaj put će se koristiti engleski (eng).";
 "alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
 "alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
+"alert.sub.save_downloaded.title" = "Spremi preuzeti titl";
 
 "alert.set_default.title" = "Postavljanje programa IINA kao standardnog programa";
 "alert.set_default.message" = "IINA će se postaviti kao standardni program za sve formate koje podržava.";
 "alert.set_default.success" = "Završeno: uspjelo: %d, neuspjelo: %d.";
 
 "alert.add_watch.title" = "Add Watch Property";
-"alert.add_watch.message" = "Please enter a valid mpv property name.";
+"alert.add_watch.message" = "Upiši ispravno ime mpv svojstva.";
 
 "alert.jump_to.title" = "Idi na";
 "alert.jump_to.message" = "Please enter the time you want to jump to. Example: 20:35";
 
-"alert.opensub.login.title" = "OpenSubtitles Login";
+"alert.opensub.login.title" = "Prijava na OpenSubtitles";
 "alert.opensub.login.message" = "Upiši svoje korisničko ime i lozinku";
 
 "alert.open_url.title" = "Otvori URL adresu";
@@ -244,8 +254,8 @@
 "alert.clear_watch_later.title" = "Izbriši spremljeni napredak reprodukcija";
 "alert.clear_watch_later.message" = "Stvarno želiš izbrisati napredak svih reprodukcija (podaci „gledaj kasnije”)?";
 
-"alert.restore_alerts.title" = "Restore Suppressed Alerts";
-"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
+"alert.restore_alerts.title" = "Obnovi prikrivena upozorenja";
+"alert.restore_alerts.message" = "Sigurno želiš vratiti ova upozorenja?";
 
 "alert.nothing_to_open" = "Ništa se ne može otvoriti.";
 
@@ -260,17 +270,19 @@
 "alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
 "alert.assrt_token_invalid" = "Čini se da je tvoj Assrt API token neispravan.";
 
-"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
-"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
+"alert.plugin_uninstall.title" = "Da li ste sigurni da želite deinstalirati %@?";
+"alert.plugin_uninstall.message" = "Dodatak će se izbrisati s tvog diska.";
+"alert.plugin_reinstall.title" = "Dodatak %@ već postoji";
+"alert.plugin_reinstall.message" = "Želiš li ponovo instalirati dodatak?";
 "alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
-"alert.plugin_no_update" = "No update found.";
-"alert.plugin_update_found.title" = "Update found for %@";
-"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
-"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
-"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+"alert.plugin_no_update" = "Nema pronađenih ažuriranja.";
+"alert.plugin_update_found.title" = "Pronađena je nova verzija za %@";
+"alert.plugin_update_found.message" = "Najnovija verzija je %@. Ti imaš verziju %@. Želiš li preuzeti novu verziju?";
+"alert.plugin_permission" = "Ovaj dodatak zahtijeva sljedeće dozvole. Pregledaj ih prije nastavljanja.";
+"alert.plugin_permission_added" = "Ova nova verzija zahtijeva sljedeće dozvole. Pregledaj ih prije nastavljanja.";
 
-"playlist.total_length" = "%@ ukupno";
-"playlist.total_length_with_selected" = "%@ od %@ odabrano";
+"playlist.total_length" = "Ukupno %@";
+"playlist.total_length_with_selected" = "Odabrano %@ od %@";
 "pl_menu.title_multi" = "%d Items";
 "pl_menu.play_next" = "Pokreni sljedeću snimku";
 "pl_menu.play_in_new_window" = "Pokreni u novom prozoru";
@@ -283,8 +295,8 @@
 "pl_menu.show_in_finder" = "Prikaži u Finderu";
 "pl_menu.add_file" = "Dodaj datoteku…";
 "pl_menu.add_url" = "Dodaj URL adresu…";
-"pl_menu.clear_playlist" = "Očisti popis naslova";
-"pl_menu.matched_sub" = "Matched %d Subtitle(s)";
+"pl_menu.clear_playlist" = "Izbriši playlistu";
+"pl_menu.matched_sub" = "Broj odgovarajućih titlova: %d";
 "pl_menu.add_sub" = "Dodaj titl…";
 "pl_menu.wrong_sub" = "Krivi titl!";
 "pl_menu.browser" = "Otvori u pregledniku";
@@ -304,18 +316,19 @@
 "subencoding.auto" = "Otkrij automatski";
 
 "osc_toolbar.settings" = "Brze postavke";
-"osc_toolbar.playlist" = "Popis naslova i poglavlja";
+"osc_toolbar.playlist" = "Playlista i poglavlja";
 "osc_toolbar.pip" = "Uključi/isključi sliku u slici";
 "osc_toolbar.full_screen" = "Uključi/isključi cjeloekranski prikaz";
 "osc_toolbar.music_mode" = "Pokreni glazbeni modus";
 "osc_toolbar.sub_track" = "Odaberi traku titlova";
+"osc_toolbar.screenshot" = "Snimi snimku ekrana";
 
 "mini_player.album_art" = "Uključi/isključi ilustraciju albuma";
 "mini_player.loop" = "Ponovi";
 "mini_player.shuffle" = "Odaberi nasumice";
-"mini_player.remove" = "Ukloni iz popisa";
-"mini_player.add" = "Dodaj na popis";
-"mini_player.delete" = "Delete all tracks from playlist";
+"mini_player.remove" = "Ukloni iz playliste";
+"mini_player.add" = "Dodaj u playlistu";
+"mini_player.delete" = "Izbriši sve iz playliste";
 "mini_player.volume" = "Glasnoća";
 "mini_player.close" = "Zatvori glazbeni modus";
 "mini_player.back" = "Vrati se u glazbeni modus";
@@ -340,15 +353,15 @@
 
 // Plugin permissions
 
-"permissions.network-request.name" = "Network Request";
-"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
-"permissions.network-request.any_site" = "Any site";
-"permissions.show-osd.name" = "Show OSD";
-"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
-"permissions.show-alert.name" = "Show Alerts";
-"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
-"permissions.video-overlay.name" = "Add overlay on videos";
-"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
+"permissions.network-request.name" = "Mrežni zahtjev";
+"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
+"permissions.network-request.any_site" = "Bilo koja web stranica";
+"permissions.show-osd.name" = "Prikaži OSD";
+"permissions.show-osd.desc" = "Ovaj dodatak može prikazati OSD (On Screen Display) poruke.";
+"permissions.show-alert.name" = "Prikaži upozorenja";
+"permissions.show-alert.desc" = "Ovaj dodatak omogućuje prikaz prozora upozorenja.";
+"permissions.video-overlay.name" = "Dodaj sloj na videa";
+"permissions.video-overlay.desc" = "Ovaj dodatak omogućuje prikaz dodatnog sadržaja u videu.";
 "permissions.file-system.name" = "Pristupi datotečnom sustavu";
 "permissions.file-system.desc" = "Ovaj dodatak može čitati ili pisati datoteke na tvom disku, uključujući osjetljive podatke. Također može pozvati druge programe ili aplikacije koje mogu oštetiti tvoje računalo. Stoga svakako provjeri izvor.";
 

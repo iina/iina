@@ -87,10 +87,13 @@
 "osd.file_error" = "Terjadi kesalahan membaca file";
 "osd.cannot_login" = "Tidak bisa masuk";
 "osd.canceled" = "Dibatalkan";
+"osd.cannot_connect" = "Tidak dapat terhubung";
+"osd.timed_out" = "Terputus";
 "osd.filter_added" = "Filter yang ditambahkan: %@";
 "osd.filter_removed" = "Filter Terhapus";
-"osd.file_loop" = "Pengulangan File: %@";
-"osd.playlist_loop" = "Pengulangan Daftar Putar: %@";
+"osd.file_loop" = "Pengulangan Pada Satu File";
+"osd.playlist_loop" = "Pengulangan Pada Playlist";
+"osd.no_loop" = "Nonaktifkan Mode Pengulangan";
 
 "preference.title" = "Preferensi";
 "preference.general" = "Umum";
@@ -113,6 +116,10 @@
 
 "preference.enable_adv_settings" = "Aktifkan pengaturan lanjutan";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "strip";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "Volume: %d";
 "menu.volume_muted" = "Volume: %d (Dimatikan)";
 "menu.audio_delay" = "Penundaan Audio: %.2f dtk";
@@ -121,6 +128,8 @@
 "menu.exit_fullscreen" = "Keluar dari Layar Penuh";
 "menu.pip" = "Masuk Picture-in-Picture";
 "menu.exit_pip" = "Keluar dari Picture-in-Picture";
+"menu.mini_player" = "Aktifkan Mode Musik";
+"menu.exit_mini_player" = "Keluar dari Mode Musik";
 "menu.pause" = "Jeda";
 "menu.resume" = "Lanjutkan";
 "menu.speed" = "Kecepatan: %.2fx";
@@ -206,6 +215,7 @@
 "alert.sub_lang_not_set" = "Mohon tetapkan bahasa terjemahan yang diinginkan pada setelan sebelum menggunakan OpenSubtitles. Saat ini Bahasa Inggris(eng) akan digunakan.";
 "alert.sub.cannot_save_passwd" = "Tidak dapat menyimpan kata sandi pada Keychain: %@";
 "alert.sub.cannot_login" = "Tidak bisa masuk. Harap periksa nama pengguna, kata sandi, dan status jaringan Anda.\n\n%@";
+"alert.sub.save_downloaded.title" = "Simpan Terjemahan Terunduh";
 
 "alert.set_default.title" = "Tetapkan IINA sebagai Aplikasi Utama";
 "alert.set_default.message" = "IINA akan ditetapkan sebagai aplikasi utama untuk semua tipe file yang didukung.";
@@ -262,6 +272,8 @@
 
 "alert.plugin_uninstall.title" = "Apakah Anda yakin untuk mencabut pemasangan %@?";
 "alert.plugin_uninstall.message" = "Plugin akan dihapus dari disk Anda.";
+"alert.plugin_reinstall.title" = "Plugin %@ sudah terpasang";
+"alert.plugin_reinstall.message" = "Apakah Anda ingin memasang ulang plugin?";
 "alert.duplicated_plugin_id" = "Duplikasi identifikasi plugin terdeteksi. Dua plugin atau lebih memiliki identifikasi yang sama \"%@\", sehingga dapat menyebabkan aktivitas tidak normal. Mohon cari di Preferensi - Plugin dan laporkan pada pembuatnya. Ketika plugin dipasang secara lokal, Anda juga dapat mengganti identifikasinya secara manual pada file Info.json dari plugin tersebut.";
 "alert.plugin_no_update" = "Tidak ada pembaruan ditemukan.";
 "alert.plugin_update_found.title" = "Terdapat pembaruan untuk %@";
@@ -309,6 +321,7 @@
 "osc_toolbar.full_screen" = "Aktif/nonaktifkan layar penuh";
 "osc_toolbar.music_mode" = "Aktifkan mode musik";
 "osc_toolbar.sub_track" = "Pilih trek terjemahan";
+"osc_toolbar.screenshot" = "Ambil tangkapan layar";
 
 "mini_player.album_art" = "Aktif/nonaktifkan Album Art";
 "mini_player.loop" = "Ulangi";

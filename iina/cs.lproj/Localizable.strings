@@ -22,11 +22,14 @@
 "guide.faq" = "Nejčastější dotazy";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.announcement" = "Používáte verzi %@ aplikace IINA";
+"initial.beta.desc" = "Pokud se chcete vrátit k vydané verzi, zrušte výběr „Dostávat beta aktualizace“ v Nastavení > Obecné, a nainstalujte stabilní verzi z naší <a href=\"https://iina.io\">oficiální webové stránky</a>.";
+"initial.nightly.desc" = "Noční sestavení nejsou doporučena pro každodenní použití. V současné době nepodporují automatické aktualizace. Stáhněte si ručně novější sestavení z naší <a href=\"https://nightly.iina.io\">noční webové stránky</a>.";
+"initial.debug.desc" = "Ladící sestavení obvykle nejsou optimalizována pro výkon, nejsou tedy doporučena pro každodenní použití. Ladící sestavení nepodporují automatické aktualizace.";
+"initial.bug_report" = "Nahlaste na <a href=\"https://github.com/iina/iina/issues\">GitHub</a>.";
+
+// Inspector Window
+"inspector.error" = "Chyba";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Načítá se… %d%%";
@@ -87,14 +90,17 @@
 "osd.file_error" = "Soubor nelze načíst";
 "osd.cannot_login" = "Nelze se přihlásit";
 "osd.canceled" = "Zrušeno";
+"osd.cannot_connect" = "Nelze se spojit";
+"osd.timed_out" = "Časový limit vypršel";
 "osd.filter_added" = "Přidán filtr: %@";
 "osd.filter_removed" = "Filtr odebrán";
-"osd.file_loop" = "Opakování souboru: %@";
-"osd.playlist_loop" = "Opakování playlistu: %@";
+"osd.file_loop" = "Opakovat jeden soubor";
+"osd.playlist_loop" = "Opakovat playlist";
+"osd.no_loop" = "Zakázat opakování";
 
 "preference.title" = "Nastavení";
 "preference.general" = "Obecné";
-"preference.ui" = "Uživatelské rozhraní";
+"preference.ui" = "Vzhled";
 "preference.video_audio" = "Video/zvuk";
 "preference.subtitle" = "Titulky";
 "preference.network" = "Síť";
@@ -113,6 +119,10 @@
 
 "preference.enable_adv_settings" = "Povolit pokročilá nastavení";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "Základní";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "Hlasitost: %d";
 "menu.volume_muted" = "Hlasitost: %d (Ztlumeno)";
 "menu.audio_delay" = "Zpoždění zvuku: %.2f s";
@@ -121,6 +131,8 @@
 "menu.exit_fullscreen" = "Ukončit režim celé obrazovky";
 "menu.pip" = "Spustit obraz v obrazu";
 "menu.exit_pip" = "Ukončit obraz v obrazu";
+"menu.mini_player" = "Spustit hudební režim";
+"menu.exit_mini_player" = "Ukončit hudební režim";
 "menu.pause" = "Pozastavit";
 "menu.resume" = "Pokračovat";
 "menu.speed" = "Rychlost: %.2f×";
@@ -173,7 +185,7 @@
 "alert.error_open" = "Nelze otevřít soubor nebo stream!";
 "alert.error_finding_file" = "Soubor %@ nelze nalézt!";
 "alert.error_loading_script" = "Skript %@ nelze načíst!";
-"alert.error_saving_file" = "Během ukládání %@: %@ nastala chyba.";
+"alert.error_saving_file" = "Při ukládání %@ došlo k chybě: %@";
 "alert.error_deleting_file" = "Soubor nelze odstranit.";
 
 "alert.config.new.title" = "Konfigurace nového vstupu";
@@ -187,7 +199,7 @@
 "alert.config.cannot_create" = "Konfigurační soubor nelze vytvořit!\n%@";
 "alert.config.cannot_write" = "Nelze zapisovat do konfiguračního souboru!";
 
-"alert.filter.incorrect" = "Při nastavování filtrů nastala chyba. Zkontrolujte prosím parametry formátu.";
+"alert.filter.incorrect" = "Při nastavování filtrů došlo k chybě. Zkontrolujte prosím formát parametru.";
 "alert.add_filter.title" = "Přidat filtr";
 "alert.add_filter.message" = "Zadejte řetězec filtru ve formátu mpv příkazu vf nebo af.";
 
@@ -195,7 +207,7 @@
 
 "alert.extra_option.cannot_read" = "Nelze načíst uživatelsky vymezené další možnosti mpv.";
 "alert.extra_option.empty" = "Název nebo hodnota nemohou být prázdné!";
-"alert.extra_option.error" = "Při nastavování %@=%@ se vyskytla chyba číslo %d. Prosím zkontrolujte vaše nastavení dalších možností v Nastavení > Pokročilé.";
+"alert.extra_option.error" = "Při nastavování --%@=%@ se vyskytla chyba číslo %d. Zkontrolujte prosím vaše nastavení dalších možností v Nastavení > Pokročilé.";
 "alert.extra_option.config_folder" = "Chyba při nastavování konfigurační složky „%@“.";
 
 "alert.playlist.error_deleting" = "%@ nelze smazat";
@@ -206,6 +218,7 @@
 "alert.sub_lang_not_set" = "Před používáním OpenSubtitles nastavte preferovaný jazyk titulků. Tentokrát bude použita angličtina.";
 "alert.sub.cannot_save_passwd" = "Nelze uložit vaše heslo do svazku klíčů: %@";
 "alert.sub.cannot_login" = "Nelze se přihlásit. Zkontrolujte prosím uživatelské jméno, heslo a připojení k síti.\n\n%@";
+"alert.sub.save_downloaded.title" = "Uložit stažené titulky";
 
 "alert.set_default.title" = "Nastavit IINA jako výchozí aplikaci";
 "alert.set_default.message" = "IINA bude nastavena jako výchozí aplikace pro všechny typy souborů, které podporuje.";
@@ -262,6 +275,8 @@
 
 "alert.plugin_uninstall.title" = "Opravdu chcete odinstalovat %@?";
 "alert.plugin_uninstall.message" = "Plug-in bude odstraněn z disku.";
+"alert.plugin_reinstall.title" = "Plug-in %@ již existuje";
+"alert.plugin_reinstall.message" = "Chcete přeinstalovat plug-in?";
 "alert.duplicated_plugin_id" = "Detekovány duplicitní identifikátory plug-inu. Dva nebo více plug-inů mají stejný identifikátor „%@“. To může způsobit neobvyklé chování. Najděte je prosím v Nastavení > Plug-iny a nahlaste toto jejich autorům. Pokud je plug-in nainstalován lokálně, můžete také ručně změnit jeho identifikátor v souboru Info.json.";
 "alert.plugin_no_update" = "Plug-in je aktuální.";
 "alert.plugin_update_found.title" = "Je dostupná nová verze %@";
@@ -309,6 +324,7 @@
 "osc_toolbar.full_screen" = "Režim celé obrazovky";
 "osc_toolbar.music_mode" = "Spustit hudební režim";
 "osc_toolbar.sub_track" = "Vybrat stopu titulků";
+"osc_toolbar.screenshot" = "Zachytit snímek obrazovky";
 
 "mini_player.album_art" = "Přepnout zobrazení grafiky alba";
 "mini_player.loop" = "Opakovat";
@@ -317,7 +333,7 @@
 "mini_player.add" = "Přidat do playlistu";
 "mini_player.delete" = "Smazat všechny stopy z playlistu";
 "mini_player.volume" = "Hlasitost";
-"mini_player.close" = "Zavřít hudební režim";
+"mini_player.close" = "Ukončit hudební režim";
 "mini_player.back" = "Zpět do zobrazení videa";
 
 // Touch bar
@@ -350,13 +366,13 @@
 "permissions.video-overlay.name" = "Přidat překrytí přes video";
 "permissions.video-overlay.desc" = "Tento plug-in může vykreslovat přes video další obsah.";
 "permissions.file-system.name" = "Přístup k souborovému systému";
-"permissions.file-system.desc" = "Tento plug-in může číst nebo zapisovat soubory na disk, včetně citlivých informací. Může také využívat jiné programy nebo aplikace, které mohou poškodit váš počítač. Ujistěte se tedy, že jste ověřili jeho zdroj.";
+"permissions.file-system.desc" = "Tento plug-in může číst nebo zapisovat soubory na disk, které mohou obsahovat citlivé informace. Může také spouštět jiné programy nebo aplikace, které mohou poškodit váš počítač. Ujistěte se, že jste ověřili jeho zdroj.";
 
 "plugin.install" = "Instalovat";
 "plugin.installed" = "Nainstalován";
 "plugin.not_installed" = "Není nainstalován";
 "plugin.local" = "Nainstalován lokálně";
-"alert.plugin.install_error" = "Při instalaci se vyskytla chyba: %@";
+"alert.plugin.install_error" = "Při instalaci došlo k chybě: %@";
 "alert.invalid_url" = "URL adresa je neplatná.";
 "plugin.install_error.invalid_url" = "URL adresa je neplatná.";
 "plugin.install_error.file_not_found" = "Soubor balíčku nelze nalézt.";

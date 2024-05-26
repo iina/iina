@@ -41,6 +41,8 @@ class Logger: NSObject {
     }
   }
 
+  @Atomic static var logs: [Logger.Log] = []
+
   class Subsystem: RawRepresentable {
     let rawValue: String
     var added = false
@@ -201,8 +203,15 @@ class Logger: NSObject {
     let date = Date()
     let string = formatMessage(message, level, subsystem, true, date)
     let log = Log(subsystem: subsystem.rawValue, level: level.rawValue, message: message, date: dateFormatter.string(from: date), logString: string)
-    DispatchQueue.main.async {
-      (NSApp.delegate as? AppDelegate)?.logWindow.logs.append(log)
+    $logs.withLock() { logs in
+      if logs.isEmpty {
+        DispatchQueue.main.async {
+          Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { timer in
+            (NSApp.delegate as! AppDelegate).logWindow.syncLogs()
+          }
+        }
+      }
+      logs.append(log)
     }
 
     print(string, terminator: "")

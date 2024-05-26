@@ -7,361 +7,374 @@
 */
 // Common
 
-"general.on" = "On";
-"general.off" = "Off";
-"general.login" = "Login";
-"general.logout" = "Logout";
-"general.ok" = "OK";
-"general.cancel" = "בטל";
-"general.username" = "Username";
-"general.password" = "Password";
+"general.on" = "מופעל";
+"general.off" = "כבוי";
+"general.login" = "התחברות";
+"general.logout" = "התנתקות";
+"general.ok" = "אישור";
+"general.cancel" = "ביטול";
+"general.username" = "שם משתמש";
+"general.password" = "סיסמה";
 
 // Guide Window
-"guide.highlights" = "Highlights";
-"guide.basic_settings" = "Basic Settings";
-"guide.faq" = "Frequently Asked Questions";
+"guide.highlights" = "נקודות עיקריות";
+"guide.basic_settings" = "הגדרות בסיסיות";
+"guide.faq" = "שאלות נפוצות";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.announcement" = "אתה משתמש בגרסת %@ של IINA";
+"initial.beta.desc" = "אם ברצונך לחזור לגרסה הרגילה, הסר את הסימון \"קבל עדכוני בטא\" בהגדרות > כללי, והתקן את הגרסה הרגילה מ<a href=\"https://iina.io\">האתר הרשמי</a> שלנו.";
+"initial.nightly.desc" = "בניה לילית לא מומלצת לשימוש יומיומי. כרגע, בנייה לילית לא תומכת בעדכון אוטומטי. אנא הורד באופן ידני בניה עדכנית מ<a href=\"https://nightly.iina.io\">האתר</a> שלנו.";
+"initial.debug.desc" = "בניית ניפוי באגים בדרך כלל אינה מותאמת לטובת ביצועים, ולכן אינה מומלצת לשימוש יומיומי. בניית ניפוי באגים לא תומכת בעדכון אוטומטי.";
+"initial.bug_report" = "דווח באמצעות <a href=\"https://github.com/iina/iina/issues\">בעיות GitHub</a>.";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Buffering… %d%%";
-"main.opening_stream" = "Opening stream…";
-"osc.precision" = "Precision";
-"osc.1s" = "1 second";
-"osc.100ms" = "100 milliseconds";
-"osc.10ms" = "10 milliseconds";
-"osc.1ms" = "1 millisecond";
+"main.buffering_indicator" = "מוריד נתונים… %d%%";
+"main.opening_stream" = "פותח זרם…";
+"osc.precision" = "דיוק";
+"osc.1s" = "שניה";
+"osc.100ms" = "100 אלפיות שניה";
+"osc.10ms" = "10 אלפיות שניה";
+"osc.1ms" = "אלפית שנייה";
 
 // QuickSettingViewController.swift
-"quicksetting.item_default" = "Default";
-"quicksetting.item_none" = "None";
-"quicksetting.hwdec" = "Hardware Decoding";
-"quicksetting.deinterlace" = "Deinterlace";
+"quicksetting.item_default" = "ברירת מחדל";
+"quicksetting.item_none" = "ללא";
+"quicksetting.hwdec" = "פענוח חומרה";
+"quicksetting.deinterlace" = "ביטול שזירה";
 "quicksetting.hdr" = "HDR";
 
 // OSDMessage.swift
-"osd.pause" = "Pause";
-"osd.resume" = "Resume";
-"osd.volume" = "Volume: %i";
-"osd.speed" = "Speed: %.2fx";
-"osd.aspect" = "Aspect Ratio: %@";
-"osd.crop" = "Crop: %@";
-"osd.rotate" = "Rotate: %i°";
-"osd.deinterlace" = "Deinterlace: %@";
-"osd.hwdec" = "Hardware Decoding: %@";
-"osd.audio_delay.nodelay" = "Audio Delay: No Delay";
-"osd.audio_delay.later" = "Audio Delay: %.2fs Later";
-"osd.audio_delay.earlier" = "Audio Delay: %.2fs Earlier";
-"osd.sub_delay.nodelay" = "Subtitle Delay: No Delay";
-"osd.sub_delay.later" = "Subtitle Delay: %.2fs Later";
-"osd.sub_delay.earlier" = "Subtitle Delay: %.2fs Earlier";
-"osd.subtitle_pos" = "Subtitle Position: %.1f";
-"osd.mute" = "Mute";
-"osd.unmute" = "Unmute";
-"osd.screenshot" = "Screenshot Captured";
-"osd.abloop.a" = "AB-Loop: A";
-"osd.abloop.b" = "AB-Loop: B";
-"osd.abloop.clear" = "AB-Loop: Cleared";
-"osd.stop" = "Stop";
-"osd.chapter" = "Chapter: %@";
-"osd.subtitle_scale" = "Subtitle Scale: %.2fx";
-"osd.add_to_playlist" = "Added %i Files to Playlist";
-"osd.clear_playlist" = "Cleared Playlist";
-"osd.video_eq.contrast" = "Contrast: %i";
-"osd.video_eq.gamma" = "Gamma: %i";
-"osd.video_eq.hue" = "Hue: %i";
-"osd.video_eq.saturation" = "Saturation: %i";
-"osd.video_eq.brightness" = "Brightness: %i";
-"osd.find_online_sub" = "Finding online subtitles…";
-"osd.find_online_sub.source" = "from";
-"osd.sub_not_found" = "No subtitles found";
-"osd.sub_found" = "%d subtitles found. Downloading…";
-"osd.sub_downloaded" = "Subtitle downloaded";
-"osd.sub_saved" = "Subtitle saved";
-"osd.network_error" = "Network error";
-"osd.file_error" = "Error reading file";
-"osd.cannot_login" = "Cannot login";
-"osd.canceled" = "Canceled";
-"osd.filter_added" = "Added Filter: %@";
-"osd.filter_removed" = "Removed Filter";
-"osd.file_loop" = "File Loop: %@";
-"osd.playlist_loop" = "Playlist Loop: %@";
+"osd.pause" = "מושהה";
+"osd.resume" = "התחדש";
+"osd.volume" = "עוצמת שמע: %i";
+"osd.speed" = "מהירות: x%.2f";
+"osd.aspect" = "יחס גובה-רוחב: %@";
+"osd.crop" = "חיתוך: %@";
+"osd.rotate" = "הטיה: %i°";
+"osd.deinterlace" = "ביטול שזירה: %@";
+"osd.hwdec" = "פענוח חומרה: %@";
+"osd.audio_delay.nodelay" = "עיכוב שמע: ללא עיכוב";
+"osd.audio_delay.later" = "עיכוב שמע: %.2f שניות איחור";
+"osd.audio_delay.earlier" = "עיכוב שמע: %.2f שניות הקדמה";
+"osd.sub_delay.nodelay" = "עיכוב כתוביות: ללא עיכוב";
+"osd.sub_delay.later" = "עיכוב כתוביות: %.2f שניות איחור";
+"osd.sub_delay.earlier" = "עיכוב כתוביות: %.2f שניות הקדמה";
+"osd.subtitle_pos" = "מיקום כתוביות: %.1f";
+"osd.mute" = "השתקה";
+"osd.unmute" = "בטל השתקה";
+"osd.screenshot" = "צילום מסך בוצע";
+"osd.abloop.a" = "לולאת א-ב: א";
+"osd.abloop.b" = "לולאת א-ב: ב";
+"osd.abloop.clear" = "לולאת א-ב: בוטלה";
+"osd.stop" = "עצור";
+"osd.chapter" = "פרק: %@";
+"osd.subtitle_scale" = "קנה מידה כתוביות: %.2fx";
+"osd.add_to_playlist" = "נוספו %i קבצים לרשימת ההשמעה";
+"osd.clear_playlist" = "רשימת ההשמעה אופסה";
+"osd.video_eq.contrast" = "ניגודיות: %i";
+"osd.video_eq.gamma" = "גמא: %i";
+"osd.video_eq.hue" = "גוון: %i";
+"osd.video_eq.saturation" = "רוויה: %i";
+"osd.video_eq.brightness" = "בהירות: %i";
+"osd.find_online_sub" = "מחפש כתוביות מקוונות…";
+"osd.find_online_sub.source" = "מאת";
+"osd.sub_not_found" = "לא נמצאו כתוביות";
+"osd.sub_found" = "%d כתוביות נמצאו. מוריד…";
+"osd.sub_downloaded" = "הכתוביות הורדו";
+"osd.sub_saved" = "הכתוביות נשמרו";
+"osd.network_error" = "שגיאת רשת";
+"osd.file_error" = "שגיאה בקריאת הקובץ";
+"osd.cannot_login" = "ההתחברות נכשלה";
+"osd.canceled" = "מבוטל";
+"osd.cannot_connect" = "ההתחברות נכשלה";
+"osd.timed_out" = "Timed Out";
+"osd.filter_added" = "נוסף מסנן: %@";
+"osd.filter_removed" = "המסנן הוסר";
+"osd.file_loop" = "חזרה על קובץ בודד";
+"osd.playlist_loop" = "חזרה על רשימת השמעה";
+"osd.no_loop" = "השבת חזרה";
 
-"preference.title" = "Preferences";
-"preference.general" = "General";
-"preference.ui" = "UI";
-"preference.video_audio" = "Video/Audio";
-"preference.subtitle" = "Subtitle";
-"preference.network" = "Network";
-"preference.control" = "Control";
-"preference.keybindings" = "Key Bindings";
-"preference.advanced" = "Advanced";
-"preference.plugins" = "Plugins";
-"preference.utilities" = "Utilities";
-"preference.scripts" = "Scripts";
-"preference.not_logged_in" = "Not logged in";
-"preference.logged_in_as" = "Logged in as %@";
-"preference.system_media_control" = "Use system media control";
+"preference.title" = "העדפות";
+"preference.general" = "כללי";
+"preference.ui" = "ממשק משתמש";
+"preference.video_audio" = "וידאו/שמע";
+"preference.subtitle" = "כתוביות";
+"preference.network" = "רשת";
+"preference.control" = "שליטה";
+"preference.keybindings" = "קיצורי מקשים";
+"preference.advanced" = "מתקדם";
+"preference.plugins" = "תוספים";
+"preference.utilities" = "עזרים";
+"preference.scripts" = "סקריפטים";
+"preference.not_logged_in" = "לא מחובר";
+"preference.logged_in_as" = "מחובר בתור %@";
+"preference.system_media_control" = "השתמש בבקרת המדיה של המערכת";
 
-"preference.key_binding_hint_1" = "To edit key bindings in current configuration file, click \"Duplicate…\" button first to create a copy.";
-"preference.key_binding_hint_2" = "Double click a row at the right side to edit the corresponding key binding.";
+"preference.key_binding_hint_1" = "כדי לערוך קיצור מקשים בקובץ התצורה הנוכחי, לחץ תחילה על כפתור \"שכפל…\" כדי ליצור עותק.";
+"preference.key_binding_hint_2" = "לחץ פעמיים בצד ימין של שורה כדי לערוך את קיצור המקשים.";
 
-"preference.enable_adv_settings" = "Enable advanced settings";
+"preference.enable_adv_settings" = "אפשר הגדרות מתקדמות";
 
-"menu.volume" = "Volume: %d";
-"menu.volume_muted" = "Volume: %d (Muted)";
-"menu.audio_delay" = "Audio Delay: %.2fs";
-"menu.sub_delay" = "Subtitle Delay: %.2fs";
-"menu.fullscreen" = "Enter Full Screen";
-"menu.exit_fullscreen" = "Exit Full Screen";
-"menu.pip" = "Enter Picture-in-Picture";
-"menu.exit_pip" = "Exit Picture-in-Picture";
-"menu.pause" = "Pause";
-"menu.resume" = "Resume";
-"menu.speed" = "Speed: %.2fx";
-"menu.chapters" = "Show Chapters Panel";
-"menu.hide_chapters" = "Hide Chapters Panel";
-"menu.playlist" = "Show Playlist Panel";
-"menu.hide_playlist" = "Hide Playlist Panel";
-"menu.video" = "Show Video Panel";
-"menu.hide_video" = "Hide Video Panel";
-"menu.audio" = "Show Audio Panel";
-"menu.hide_audio" = "Hide Audio Panel";
-"menu.subtitles" = "Show Subtitles Panel";
-"menu.hide_subtitles" = "Hide Subtitles Panel";
+"preference.sub_override_level.force" = "כפויה";
+"preference.sub_override_level.strip" = "הסרת הכל";
+"preference.sub_override_level.yes" = "מאופשרת";
 
-"menu.seek_forward" = "Step Forward %.0fs";
-"menu.seek_backward" = "Step Backward %.0fs";
-"menu.speed_up" = "Speed Up by %.1fx";
-"menu.speed_down" = "Speed Down by %.1fx";
-"menu.volume_up" = "Volume + %.0f%%";
-"menu.volume_down" = "Volume - %.0f%%";
-"menu.audio_delay_up" = "Audio Delay + %.1fs";
-"menu.audio_delay_down" = "Audio Delay - %.1fs";
-"menu.sub_delay_up" = "Subtitle Delay + %.1fs";
-"menu.sub_delay_down" = "Subtitle Delay - %.1fs";
+"menu.volume" = "עוצמת שמע: %d";
+"menu.volume_muted" = "עוצמת שמע: %d (מושתק)";
+"menu.audio_delay" = "עיכוב שמע: %.2f שניות";
+"menu.sub_delay" = "עיכוב כתוביות: %.2f שניות";
+"menu.fullscreen" = "עבור למסך מלא";
+"menu.exit_fullscreen" = "צא ממסך מלא";
+"menu.pip" = "היכנס למצב תמונה בתוך תמונה";
+"menu.exit_pip" = "צא ממצב תמונה בתוך תמונה";
+"menu.mini_player" = "היכנס למצב מוזיקה";
+"menu.exit_mini_player" = "צא ממצב מוזיקה";
+"menu.pause" = "השהיה";
+"menu.resume" = "המשך";
+"menu.speed" = "מהירות: x%.2f";
+"menu.chapters" = "הצג פאנל פרקים";
+"menu.hide_chapters" = "הסתר פאנל פרקים";
+"menu.playlist" = "הצג פאנל רשימת השמעה";
+"menu.hide_playlist" = "הסתר פאנל רשימת השמעה";
+"menu.video" = "הצג פאנל וידאו";
+"menu.hide_video" = "הסתר פאנל וידאו";
+"menu.audio" = "הצג פאנל אודיו";
+"menu.hide_audio" = "הסתר פאנל וידאו";
+"menu.subtitles" = "הצג פאנל כתוביות";
+"menu.hide_subtitles" = "הסתר פאנל כתוביות";
 
-"menu.crop_custom" = "Custom...";
-"menu.find_online_sub" = "Find Online Subtitles from %@";
+"menu.seek_forward" = "דלג קדימה %.0f שניות";
+"menu.seek_backward" = "חזרה %.0f שניות אחורה";
+"menu.speed_up" = "הגבר מהירות ב%.1fx";
+"menu.speed_down" = "הפחת מהירות ב%.1fx";
+"menu.volume_up" = "הגבר עוצמת שמע ב%.0f%";
+"menu.volume_down" = "הפחת עוצמת שמע ב%.0f%";
+"menu.audio_delay_up" = "עיכוב שמע: הוסף %.1f שניות";
+"menu.audio_delay_down" = "עיכוב שמע: הפחת %.1f שניות";
+"menu.sub_delay_up" = "עיכוב כתוביות: הוסף %.1f שניות";
+"menu.sub_delay_down" = "עיכוב כתוביות: הפחת %.1f שניות";
 
-"track.none" = "<None>";
+"menu.crop_custom" = "מותאם אישית...";
+"menu.find_online_sub" = "מצא כתוביות מקוונות מ-%@";
 
-"subtrack.no_loaded" = "No Subtitles Loaded";
-"subtrack.no_external" = "No External Subtitles Found";
+"track.none" = "<ללא>";
+
+"subtrack.no_loaded" = "לא נטענו כתוביות";
+"subtrack.no_external" = "לא נמצאו כתוביות חיצוניות";
 
 // Alerts
-"alert.beta_channel.title" = "Receive Updates for Beta Versions";
+"alert.beta_channel.title" = "קבל עדכונים עבור גרסאות בטא";
 
-"alert.title_error" = "Error";
-"alert.title_warning" = "Warning";
-"alert.title_info" = "Information";
+"alert.title_error" = "שגיאה";
+"alert.title_warning" = "אזהרה";
+"alert.title_info" = "מידע";
 
-"alert.fatal_error" = "Fatal error: %@ \nThe application will exit now.";
-"alert.mpv_error" = "Internal error %@ (%@) when setting option %@.";
-"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
+"alert.fatal_error" = "שגיאה קריטית: %@ \nהאפליקציה תיסגר כעת.";
+"alert.mpv_error" = "שגיאה פנימית %@ (%@) בעת הגדרת האפשרות %@.";
+"alert.sleep" = "מניעת כניסת המסך למצב שינה נכשלה! (0x%0X8)";
 
-"alert.unsupported_audio" = "Unsupported external audio file.";
-"alert.unsupported_sub" = "Unsupported external subtitle.";
-"alert.unsupported_url" = "Unsupported URL.";
-"alert.wrong_url_format" = "Wrong URL format.";
+"alert.unsupported_audio" = "קובץ שמע חיצוני לא נתמך.";
+"alert.unsupported_sub" = "הכתוביות החיצוניות לא נתמכות.";
+"alert.unsupported_url" = "כתובת לא נתמכת.";
+"alert.wrong_url_format" = "פורמט כתובת אתר שגוי.";
 
-"alert.error_open" = "Cannot open file or stream!";
-"alert.error_finding_file" = "Cannot find %@ file!";
-"alert.error_loading_script" = "Cannot load script %@!";
-"alert.error_saving_file" = "Error occured when saving %@: %@";
-"alert.error_deleting_file" = "Cannot delete the file.";
+"alert.error_open" = "שגיאה בפתיחת קובץ/זרם!";
+"alert.error_finding_file" = "הקובץ %@ לא נמצא!";
+"alert.error_loading_script" = "טעינת הסקריפט %@ נכשלה!";
+"alert.error_saving_file" = "אירעה שגיאה בעת שמירת %@: %@";
+"alert.error_deleting_file" = "שגיאה במחיקת הקובץ.";
 
-"alert.config.new.title" = "New Input Configuration";
-"alert.config.new.message" = "Please enter a name for the new configuration.";
-"alert.config.duplicate.title" = "Duplicate Configuration";
-"alert.config.duplicate.message" = "Please enter name for the duplicated configuration file.";
-"alert.config.empty_name" = "The name cannot be empty.";
-"alert.config.name_existing" = "The name already exists.";
-"alert.config.file_existing.title" = "File Already Exists";
+"alert.config.new.title" = "תצורת מקשים חדשה";
+"alert.config.new.message" = "נא להזין שם עבור התצורה החדשה.";
+"alert.config.duplicate.title" = "תצורה כפולה";
+"alert.config.duplicate.message" = "יש להזין שם עבור קובץ התצורה המשוכפל.";
+"alert.config.empty_name" = "השם לא יכול להיות ריק.";
+"alert.config.name_existing" = "השם כבר קיים.";
+"alert.config.file_existing.title" = "הקובץ כבר קיים";
 "alert.config.file_existing.message" = "This should not happen. Choose OK to overwrite, Cancel to reveal the file in Finder.";
-"alert.config.cannot_create" = "Cannot create config file!\n%@";
-"alert.config.cannot_write" = "Cannot write to config file!";
+"alert.config.cannot_create" = "יצירת קובץ התצורה נכשלה!\n%@";
+"alert.config.cannot_write" = "הכתיבה לקובץ התצורה נכשלה!";
 
-"alert.filter.incorrect" = "Error occured when setting filters. Please check your parameter format.";
-"alert.add_filter.title" = "New Filter";
-"alert.add_filter.message" = "Please enter a filter string in format of mpv's vf or af command.";
+"alert.filter.incorrect" = "אירעה שגיאה בעת הגדרת המסננים. אנא בדוק את פורמט הפרמטר שהגדרת.";
+"alert.add_filter.title" = "מסנן חדש";
+"alert.add_filter.message" = "אנא הזן מחרוזת מסנן בפורמט פקודת vf או af של mpv.";
 
-"alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
+"alert.keybinding_config.error" = "שגיאה בניתוח קובץ תצורת קיצורי מקשים \"%@\"! חוזר לקיצורי מקשים ברירת המחדל של IINA. אנא בדוק את התצורה שלך.";
 
-"alert.extra_option.cannot_read" = "Cannot read user defined extra mpv options.";
-"alert.extra_option.empty" = "Key or value cannot be empty!";
-"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
-"alert.extra_option.config_folder" = "Error setting config directory \"%@\".";
+"alert.extra_option.cannot_read" = "קריאת אפשרויות mpv נוספות המוגדרות על ידי המשתמש נכשלה.";
+"alert.extra_option.empty" = "המפתח או הערך לא יכולים להיות ריקים!";
+"alert.extra_option.error" = "שגיאה בהגדרת האופציה --%@=%@ שהחזירה ערך %d. אנא בדוק את הגדרות האפשרויות הנוספות שלך בהעדפות > מתקדם.";
+"alert.extra_option.config_folder" = "שגיאה בהגדרת ספריית התצורה \"%@\".";
 
-"alert.playlist.error_deleting" = "Error deleting: %@";
+"alert.playlist.error_deleting" = "המחיקה נכשלה: %@";
 
-"alert.screenshot.error_taking" = "Cannot take a screenshot!";
+"alert.screenshot.error_taking" = "שגיאה בביצוע צילום מסך!";
 
-"alert.sub.no_selected" = "Please select a downloaded subtitle first.";
-"alert.sub_lang_not_set" = "Please set preferred subtitle languages in preferences before using OpenSubtitles. English(eng) will be used this time.";
-"alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
-"alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
+"alert.sub.no_selected" = "אנא בחר תחילה כתוביות שהורדת.";
+"alert.sub_lang_not_set" = "אנא הגדר שפות כתוביות מועדפות בהגדרות לפני השימוש ב-OpenSubtitles. אנגלית (en) תשמש הפעם.";
+"alert.sub.cannot_save_passwd" = "שמירת הסיסמה למחזיק המפתחות נכשלה: %@";
+"alert.sub.cannot_login" = "ההתחברות נכשלה. אנא בדוק את שם המשתמש, הסיסמה ומצב הרשת שלך.\n\n%@";
+"alert.sub.save_downloaded.title" = "שמור כתוביות שהורדו";
 
-"alert.set_default.title" = "Setting IINA as Default App";
-"alert.set_default.message" = "IINA will be set as the default app for all file types it supports.";
-"alert.set_default.success" = "Finished with %d success and %d failed.";
+"alert.set_default.title" = "הגדרת IINA כאפליקציית ברירת המחדל";
+"alert.set_default.message" = "IINA תוגדר כאפליקציית ברירת המחדל עבור כל סוגי הקבצים שבהם היא תומכת.";
+"alert.set_default.success" = "הסתיים עם %d שהצליחו ו-%d שנכשלו.";
 
-"alert.add_watch.title" = "Add Watch Property";
-"alert.add_watch.message" = "Please enter a valid mpv property name.";
+"alert.add_watch.title" = "הוסף מאפיין צפייה";
+"alert.add_watch.message" = "אנא הזן שם מאפיין mpv חוקי.";
 
-"alert.jump_to.title" = "Jump to";
-"alert.jump_to.message" = "Please enter the time you want to jump to. Example: 20:35";
+"alert.jump_to.title" = "קפיצה אל";
+"alert.jump_to.message" = "יש להזין את השעה אליה ברצונך לקפוץ. לדוגמה: 20:35";
 
-"alert.opensub.login.title" = "OpenSubtitles Login";
-"alert.opensub.login.message" = "Please enter your username and password";
+"alert.opensub.login.title" = "התחברות ל-OpenSubtitles";
+"alert.opensub.login.message" = "אנא הזן את שם המשתמש והסיסמה שלך";
 
-"alert.open_url.title" = "Open URL";
-"alert.open_url.message" = "Please enter the URL:";
-"alert.choose_media_file.title" = "Choose Media Files";
+"alert.open_url.title" = "פתח כתובת אינטרנט";
+"alert.open_url.message" = "אנא הזן כתובת URL:";
+"alert.choose_media_file.title" = "בחר קבצי מדיה";
 
-"alert.add_url.title" = "Add URL";
-"alert.add_url.message" = "Please enter the URL:";
+"alert.add_url.title" = "הוסף URL";
+"alert.add_url.message" = "אנא הזן URL:";
 
-"alert.delete_history.title" = "Delete Playback History";
-"alert.delete_history.message" = "Are you sure to delete selected entries?";
+"alert.delete_history.title" = "מחק היסטוריית השמעה";
+"alert.delete_history.message" = "האם אתה בטוח שברצונך למחוק את הערכים שנבחרו?";
 
-"alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
-"alert.filter_hwdec.abort" = "Abort";
-"alert.filter_hwdec.turn_off" = "Turn off hardware decoding";
-"alert.filter_hwdec.use_copy" = "Switch to Auto(Copy)";
+"alert.filter_hwdec.message" = "אתה עומד להחיל מסנן וידאו. עם זאת, ייתכן שמפענח החומרה הנוכחי שלך לא תומך היטב במסנני וידאו. ניתן להשבית את פענוח החומרה, או לעבור ל-Auto(Copy), שיגרום לצריכת זיכרון כפולה.\nייתכן שתצטרך לחזור על הפעולה הקודמת (כמו הגדרת החיתוך) כדי שזה יעבוד.";
+"alert.filter_hwdec.abort" = "ביטול";
+"alert.filter_hwdec.turn_off" = "כבה פענוח חומרה";
+"alert.filter_hwdec.use_copy" = "מעבר אל Auto(Copy)";
 
-"alert.clear_cache.title" = "Clear Thumbnail Cache";
-"alert.clear_cache.message" = "Are you sure to clear all thumbnail Cache?";
+"alert.clear_cache.title" = "נקה מטמון תמונות ממוזערות";
+"alert.clear_cache.message" = "האם אתה בטוח שברצונך לנקות את מטמון התמונות הממוזערות?";
 
-"alert.clear_history.title" = "Clear Playback History";
-"alert.clear_history.message" = "Are you sure to delete all playback history?";
+"alert.clear_history.title" = "מחק היסטוריית השמעה";
+"alert.clear_history.message" = "האם אתה בטוח שברצונך למחוק את כל היסטוריית ההשמעה?";
 
-"alert.clear_watch_later.title" = "Clear Saved Playback Progress";
-"alert.clear_watch_later.message" = "Are you sure to delete all saved playback progress (\"watch later\" data)?";
+"alert.clear_watch_later.title" = "נקה התקדמות הפעלה שמורה";
+"alert.clear_watch_later.message" = "האם אתה בטוח שברצונך למחוק את כל התקדמויות ההשמעה שנשמרו (מידע \"צפה מאוחר יותר\")?";
 
-"alert.restore_alerts.title" = "Restore Suppressed Alerts";
-"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
+"alert.restore_alerts.title" = "שחזור התראות שהוסתרו";
+"alert.restore_alerts.message" = "האם אתה בטוח שברצונך לשחזר התראות מושתקות?";
 
-"alert.nothing_to_open" = "Nothing to open.";
+"alert.nothing_to_open" = "אין מה לפתוח.";
 
-"alert.no_video_track" = "There is no video track.";
+"alert.no_video_track" = "אין רצועת וידאו.";
 
-"alert.duplicate_config" = "You cannot edit default configurations directly. Please duplicate one before editing.";
+"alert.duplicate_config" = "לא ניתן לערוך ישירות תצורות ברירת מחדל. יש לשכפל את התצורה לפני העריכה.";
 
-"alert.assrt_register" = "Due to limited API quota, you are strongly recommended to use your own API token. The default token is only for demo usage, and you may encounter network error.";
-"alert.assrt_register.register" = "Register Now";
-"alert.assrt_register.try" = "Try First";
-"alert.assrt_token_prompt.title" = "Enter your API token";
-"alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
-"alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
+"alert.assrt_register" = "בשל מגבלות מכסות API, מומלץ מאוד להשתמש באסימון API משלך. אסימון ברירת המחדל מיועד רק לשימוש בהדגמה, ואתה עלול להיתקל בשגיאת רשת.";
+"alert.assrt_register.register" = "הירשם עכשיו";
+"alert.assrt_register.try" = "נסה קודם";
+"alert.assrt_token_prompt.title" = "הזן את אסימון ה-API שלך";
+"alert.assrt_token_prompt.message" = "נא להירשם בדף האינטרנט שיפתח. קבל את האסימון שלך בדף המשתמש שלך והזן אותו למטה:";
+"alert.assrt_token_invalid" = "נראה שאסימון ה-API של Assrt אינו חוקי.";
 
-"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
-"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
-"alert.plugin_no_update" = "No update found.";
-"alert.plugin_update_found.title" = "Update found for %@";
-"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
-"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
-"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+"alert.plugin_uninstall.title" = "האם אתה בטוח שברצונך להסיר את %@?";
+"alert.plugin_uninstall.message" = "התוסף יימחק מהדיסק.";
+"alert.plugin_reinstall.title" = "התוסף %@ כבר קיים";
+"alert.plugin_reinstall.message" = "האם ברצונך להתקין מחדש את התוסף?";
+"alert.duplicated_plugin_id" = "זוהו מזהי תוסף כפולים. לשני תוספים או יותר יש את אותו מזהה \"%@\". זה עלול לגרום להתנהגויות לא צפויות. אנא מצא אותם בהעדפות > תוספים ודווח למפתחים שלהם. אם תוסף מותקן באופן מקומי, תוכל גם לשנות ידנית את המזהה שלו בקובץ Info.json של התוסף.";
+"alert.plugin_no_update" = "לא נמצא עדכון.";
+"alert.plugin_update_found.title" = "נמצא עדכון עבור %@";
+"alert.plugin_update_found.message" = "הגרסה האחרונה היא %@. גרסתך הנוכחית היא %@. האם תרצה לעדכן?";
+"alert.plugin_permission" = "תוסף זה דורש את ההרשאות הבאות. אנא עיין בהן לפני שתמשיך.";
+"alert.plugin_permission_added" = "עדכון זה דורש הרשאות נוספות. אנא עיין בהן לפני שתמשיך.";
 
-"playlist.total_length" = "%@ in total";
-"playlist.total_length_with_selected" = "%@ of %@ selected";
-"pl_menu.title_multi" = "%d Items";
-"pl_menu.play_next" = "Play Next";
-"pl_menu.play_in_new_window" = "Play in New Window";
-"pl_menu.remove" = "Remove";
-"pl_menu.remove_multi" = "Remove Selected";
-"pl_menu.delete" = "Move to Trash";
-"pl_menu.delete_multi" = "Move Selected Files to Trash";
-"pl_menu.delete_after_play" = "Move to Trash After Playback";
-"pl_menu.delete_after_play_multi" = "Move Selected Files to Trash After Playback";
-"pl_menu.show_in_finder" = "Show in Finder";
-"pl_menu.add_file" = "Add File…";
-"pl_menu.add_url" = "Add URL…";
-"pl_menu.clear_playlist" = "Clear Playlist";
-"pl_menu.matched_sub" = "Matched %d Subtitle(s)";
-"pl_menu.add_sub" = "Add Subtitle…";
-"pl_menu.wrong_sub" = "Wrong Subtitle!";
-"pl_menu.browser" = "Open in Browser";
-"pl_menu.copy_url" = "Copy URL";
-"pl_menu.copy_url_multi" = "Copy URLs";
+"playlist.total_length" = "%@ סך הכל";
+"playlist.total_length_with_selected" = "נבחרו %@ מתוך %@";
+"pl_menu.title_multi" = "%d פריטים";
+"pl_menu.play_next" = "הפעל את הבא";
+"pl_menu.play_in_new_window" = "הפעלה בחלון חדש";
+"pl_menu.remove" = "הסרה";
+"pl_menu.remove_multi" = "הסרת נבחרים";
+"pl_menu.delete" = "העבר לאשפה";
+"pl_menu.delete_multi" = "העבר קבצים נבחרים לאשפה";
+"pl_menu.delete_after_play" = "העבר לאשפה לאחר ההשמעה";
+"pl_menu.delete_after_play_multi" = "העבר קבצים נבחרים לאשפה לאחר ההשמעה";
+"pl_menu.show_in_finder" = "הצג ב-Finder";
+"pl_menu.add_file" = "הוסף קובץ…";
+"pl_menu.add_url" = "הוסף URL…";
+"pl_menu.clear_playlist" = "איפוס רשימת השמעה";
+"pl_menu.matched_sub" = "נמצאו %d כתוביות";
+"pl_menu.add_sub" = "הוסף כתוביות…";
+"pl_menu.wrong_sub" = "כתוביות לא תקינות!";
+"pl_menu.browser" = "פתח בדפדפן";
+"pl_menu.copy_url" = "העתק URL";
+"pl_menu.copy_url_multi" = "העתק URLs";
 
-"keymapping.title" = "Key Mapping";
-"keymapping.message" = "Press any key to record.";
+"keymapping.title" = "קיצורי מקשים";
+"keymapping.message" = "לחץ על מקש כלשהו כדי להקליט.";
 
-"filter.video_filters" = "Video Filters";
-"filter.audio_filters" = "Audio Filters";
+"filter.video_filters" = "מסנני וידאו";
+"filter.audio_filters" = "מסנני שמע";
 
-"hwdec.no" = "Disable hardware decoding.";
-"hwdec.auto" = "Enable hardware decoding. However, most of the video filters won't work properly.";
-"hwdec.auto-copy" = "Enable hardware decoding. It will consume double the memory but work with video filters.";
+"hwdec.no" = "השבת פענוח חומרה.";
+"hwdec.auto" = "אפשר פענוח חומרה, אך רוב מסנני הווידאו לא יפעלו כראוי.";
+"hwdec.auto-copy" = "אפשר פענוח חומרה. יצרוך זיכרון כפול אבל יעבוד עם מסנני וידאו.";
 
-"subencoding.auto" = "Auto detect";
+"subencoding.auto" = "זיהוי אוטומטי";
 
-"osc_toolbar.settings" = "Quick Settings";
-"osc_toolbar.playlist" = "Playlist and chapters";
-"osc_toolbar.pip" = "Toggle Picture-in-Picture";
-"osc_toolbar.full_screen" = "Toggle full screen";
-"osc_toolbar.music_mode" = "Enter music mode";
-"osc_toolbar.sub_track" = "Choose subtitle track";
+"osc_toolbar.settings" = "הגדרות מהירות";
+"osc_toolbar.playlist" = "רשימת השמעה ופרקים";
+"osc_toolbar.pip" = "היכנס/צא ממצב תמונה בתוך תמונה";
+"osc_toolbar.full_screen" = "היכנס/צא ממסך מלא";
+"osc_toolbar.music_mode" = "היכנס למצב מוזיקה";
+"osc_toolbar.sub_track" = "בחר רצועת כתוביות";
+"osc_toolbar.screenshot" = "בצע צילום מסך";
 
-"mini_player.album_art" = "Toggle album art";
-"mini_player.loop" = "Repeat";
-"mini_player.shuffle" = "Shuffle";
-"mini_player.remove" = "Remove from playlist";
-"mini_player.add" = "Add to playlist";
-"mini_player.delete" = "Delete all tracks from playlist";
-"mini_player.volume" = "Volume";
-"mini_player.close" = "Close music mode";
-"mini_player.back" = "Return to video mode";
+"mini_player.album_art" = "הצג/הסתר תמונת אלבום";
+"mini_player.loop" = "חזרה";
+"mini_player.shuffle" = "ערבוב";
+"mini_player.remove" = "הסר מרשימת השמעה";
+"mini_player.add" = "הוסף לרשימת ההשמעה";
+"mini_player.delete" = "הסר את כל הרצועות מרשימת ההשמעה";
+"mini_player.volume" = "עוצמת קול";
+"mini_player.close" = "סגור מצב מוזיקה";
+"mini_player.back" = "חזור למצב וידאו";
 
 // Touch bar
 
-"touchbar.ahead_15" = "15sec Ahead";
-"touchbar.ahead_30" = "30sec Ahead";
-"touchbar.back_15" = "15sec Back";
-"touchbar.back_30" = "30sec Back";
-"touchbar.next_video" = "Next Video";
-"touchbar.prev_video" = "Previous Video";
-"touchbar.increase_volume" = "Volume +";
-"touchbar.decrease_volume" = "Volume -";
-"touchbar.rewind" = "Rewind";
-"touchbar.fast_forward" = "Fast Forward";
-"touchbar.play_pause" = "Play / Pause";
-"touchbar.seek" = "Seek";
-"touchbar.time" = "Time Position";
-"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
-"touchbar.toggle_pip" = "Toggle Picture-in-Picture";
+"touchbar.ahead_15" = "15 שניות קדימה";
+"touchbar.ahead_30" = "30 שניות קדימה";
+"touchbar.back_15" = "15 שניות אחורה";
+"touchbar.back_30" = "30 שניות אחורה";
+"touchbar.next_video" = "הוידאו הבא";
+"touchbar.prev_video" = "הוידאו הקודם";
+"touchbar.increase_volume" = "הגברת עוצמה";
+"touchbar.decrease_volume" = "הנמכת עוצמה";
+"touchbar.rewind" = "הרצה אחורה";
+"touchbar.fast_forward" = "הרצה קדימה";
+"touchbar.play_pause" = "הפעל/השהה";
+"touchbar.seek" = "חיפוש";
+"touchbar.time" = "זמן מיקום";
+"touchbar.remainingTimeOrTotalDuration" = "זמן שנותר / משך כולל";
+"touchbar.toggle_pip" = "היכנס/צא ממצב תמונה בתוך תמונה";
 
 // Plugin permissions
 
-"permissions.network-request.name" = "Network Request";
-"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
-"permissions.network-request.any_site" = "Any site";
-"permissions.show-osd.name" = "Show OSD";
-"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
-"permissions.show-alert.name" = "Show Alerts";
-"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
-"permissions.video-overlay.name" = "Add overlay on videos";
-"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
-"permissions.file-system.name" = "Access the file system";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.network-request.name" = "בקשת רשת";
+"permissions.network-request.desc" = "תוסף זה יכול לשלוח בקשות רשת ולהעלות נתונים לאתרים הבאים:";
+"permissions.network-request.any_site" = "כל אתר";
+"permissions.show-osd.name" = "הצג OSD";
+"permissions.show-osd.desc" = "תוסף זה יכול להציג הודעות OSD (תצוגה על המסך).";
+"permissions.show-alert.name" = "הצג התראות";
+"permissions.show-alert.desc" = "תוסף זה יכול להציג התראות קופצות.";
+"permissions.video-overlay.name" = "הוסף שכבות על לסרטונים";
+"permissions.video-overlay.desc" = "תוסף זה יכול להציג תוכן נוסף בחלק העליון של הסרטון.";
+"permissions.file-system.name" = "גישה למערכת הקבצים";
+"permissions.file-system.desc" = "תוסף זה יכול לקרוא או לכתוב קבצים בדיסק שלך, שעשויים לכלול מידע רגיש. הוא יכול גם להפעיל תוכניות או יישומים אחרים שיכולים להזיק למחשב שלך, אז הקפד לאמת את המקור.";
 
-"plugin.install" = "Install";
-"plugin.installed" = "Installed";
-"plugin.not_installed" = "Not Installed";
-"plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occured during the installation: %@";
-"alert.invalid_url" = "The URL is invalid.";
-"plugin.install_error.invalid_url" = "The URL is invalid.";
-"plugin.install_error.file_not_found" = "Cannot find the package file.";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Check for Updates";
-"plugin.updating" = "Downloading update…";
+"plugin.install" = "התקנה";
+"plugin.installed" = "מותקן";
+"plugin.not_installed" = "לא מותקן";
+"plugin.local" = "מותקן מקומית";
+"alert.plugin.install_error" = "אירעה שגיאה במהלך ההתקנה: %@";
+"alert.invalid_url" = "הכתובת לא תקינה.";
+"plugin.install_error.invalid_url" = "הכתובת לא תקינה.";
+"plugin.install_error.file_not_found" = "קובץ החבילה לא נמצא.";
+"plugin.install_error.cannot_download" = "שגיאה בהורדת התוסף.\n\nפלט: %@\n";
+"plugin.install_error.cannot_unpackage" = "שגיאה בחילוץ התוסף.\n\nפלט: %@\n";
+"plugin.install_error.cannot_load" = "IINA לא יכול לטעון את התוסף הזה. ייתכן שהוא בפורמט שגוי.";
+"plugin.check_for_updates" = "חפש עדכונים";
+"plugin.updating" = "מוריד את העדכון…";

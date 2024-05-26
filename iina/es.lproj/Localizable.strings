@@ -7,7 +7,7 @@
 */
 // Common
 
-"general.on" = "Encendido";
+"general.on" = "Activado";
 "general.off" = "Apagado";
 "general.login" = "Iniciar sesión";
 "general.logout" = "Cerrar sesión";
@@ -27,6 +27,9 @@
 "initial.nightly.desc" = "No se recomienda usar versiones nocturnas para el uso diario. Actualmente las versiones nocturnas no soportan la actualización automática. Por favor, descargue manualmente nuevas versiones de nuestro <a href=\"https://nightly.iina.io\">sitio web nocturno</a>.";
 "initial.debug.desc" = "Las compilaciones de depuración normalmente no están optimizadas para el rendimiento, por lo que no se recomienda que se utilicen de manera habitual. Las compilaciones de depuración no soportan la actualización automática.";
 "initial.bug_report" = "Notifique a través de <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+
+// Inspector Window
+"inspector.error" = "Error";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Cargando… %d%%";
@@ -87,10 +90,13 @@
 "osd.file_error" = "Error al leer el archivo";
 "osd.cannot_login" = "No puedo iniciar sesión";
 "osd.canceled" = "Cancelado";
+"osd.cannot_connect" = "No se puede conectar";
+"osd.timed_out" = "Tiempo agotado";
 "osd.filter_added" = "Filtro Añadido: %@";
 "osd.filter_removed" = "Filtro Eliminado";
-"osd.file_loop" = "Bucle de archivo: %@";
-"osd.playlist_loop" = "Bucle de lista de reproducción: %@";
+"osd.file_loop" = "Leer un solo fichero";
+"osd.playlist_loop" = "Repetir lista de reproducción";
+"osd.no_loop" = "Desactivar bucle";
 
 "preference.title" = "Preferencias";
 "preference.general" = "General";
@@ -113,6 +119,10 @@
 
 "preference.enable_adv_settings" = "Habilitar configuración avanzada";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "tira";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "Volumen: %d";
 "menu.volume_muted" = "Volumen: %d (Silenciado)";
 "menu.audio_delay" = "Retraso de audio: %.2fs";
@@ -121,6 +131,8 @@
 "menu.exit_fullscreen" = "Salir de pantalla completa";
 "menu.pip" = "Ver en picture in picture";
 "menu.exit_pip" = "Salir de picture in picture";
+"menu.mini_player" = "Entrar en modo música";
+"menu.exit_mini_player" = "Salir del modo de música";
 "menu.pause" = "Pausar";
 "menu.resume" = "Reanudar";
 "menu.speed" = "Velocidad: %.2fx";
@@ -206,6 +218,7 @@
 "alert.sub_lang_not_set" = "Por favor, configure el idioma predeterminado de los subtítulos en las preferencias antes de usar OpenSubtitles. Inglés(eng) se utilizará esta vez.";
 "alert.sub.cannot_save_passwd" = "No se puede guardar la contraseña en el Llavero: %@";
 "alert.sub.cannot_login" = "No se puede iniciar sesión. Compruebe su nombre de usuario, contraseña, y el estado de la red.\n\n%@";
+"alert.sub.save_downloaded.title" = "Guardar los subtítulos descargados";
 
 "alert.set_default.title" = "Establecer IINA como aplicación predeterminada";
 "alert.set_default.message" = "IINA se establecerá como la aplicación predeterminada para todos los tipos de archivo que soporta.";
@@ -262,6 +275,8 @@
 
 "alert.plugin_uninstall.title" = "¿Estás seguro de desinstalar %@?";
 "alert.plugin_uninstall.message" = "El plugin se eliminará de su disco.";
+"alert.plugin_reinstall.title" = "El plugin %@ ya existe";
+"alert.plugin_reinstall.message" = "¿Quieres reinstalar el plugin?";
 "alert.duplicated_plugin_id" = "Se han detectado identificadores de plugins duplicados. Dos o más plugins tienen el mismo identificador \"%@\". Esto puede causar comportamientos anormales. Puede encontrarlos en Preferencias -> Plugins e informe a sus autores. Si un plugin está instalado localmente, también puede cambiar manualmente su identificador en el archivo Info.json del plugin.";
 "alert.plugin_no_update" = "No se encontraron actualizaciones.";
 "alert.plugin_update_found.title" = "Actualización encontrada para %@";
@@ -309,6 +324,7 @@
 "osc_toolbar.full_screen" = "Alternar pantalla completa";
 "osc_toolbar.music_mode" = "Entrar en modo música";
 "osc_toolbar.sub_track" = "Elegir la pista de subtítulos";
+"osc_toolbar.screenshot" = "Capturar pantalla";
 
 "mini_player.album_art" = "Alternar imagen de álbum";
 "mini_player.loop" = "Repetir";
@@ -350,7 +366,7 @@
 "permissions.video-overlay.name" = "Añadir superposición en vídeos";
 "permissions.video-overlay.desc" = "Este plugin puede representar contenido adicional en la parte superior del vídeo.";
 "permissions.file-system.name" = "Acceder al sistema de archivos";
-"permissions.file-system.desc" = "Este plugin puede leer o escribir archivos en su disco, incluyendo información confidencial. También puede llamar a otros programas o aplicaciones que puedan dañar su ordenador, así que asegúrese de verificar la fuente.";
+"permissions.file-system.desc" = "Este plugin puede leer o escribir archivos en su disco, incluyendo información confidencial. También puede llamar a otros programas o aplicaciones que pueden dañar su sistema, asegúrese de verificar la fuente.";
 
 "plugin.install" = "Instalar";
 "plugin.installed" = "Instalado";

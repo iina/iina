@@ -12,44 +12,44 @@
 "crop" = "חתוך";
 "crop.w" = "רוחב (ברירת מחדל: רוחב הוידאו)";
 "crop.h" = "גובה (ברירת מחדל: גובה הוידאו)";
-"crop.x" = "Origin X (default: center)";
-"crop.y" = "Origin Y (default: center)";
+"crop.x" = "מקור X (ברירת מחדל: מרכז)";
+"crop.y" = "מקור Y (ברירת מחדל: מרכז)";
 
 "expand" = "הרחב";
 "expand.w" = "רוחב (ברירת מחדל: רוחב הוידאו)";
 "expand.h" = "גובה (ברירת מחדל: גובה הוידאו)";
-"expand.x" = "Origin X (default: center)";
-"expand.y" = "Origin Y (default: center)";
-"expand.aspect" = "Expands to fit an aspect (e.g: 4/3)";
-"expand.round" = "Rounds up to make divisible by this value";
+"expand.x" = "מקור X (ברירת מחדל: מרכז)";
+"expand.y" = "מקור Y (ברירת מחדל: מרכז)";
+"expand.aspect" = "מתרחב כדי להתאים להיבט (לדוגמה: 4/3)";
+"expand.round" = "מעוגל כלפי מעלה כדי להפוך לניתן לחלוקה בערך זה";
 
-"sharpen" = "Sharpen";
-"sharpen.msize" = "Matrix size";
-"sharpen.amount" = "Amount";
+"sharpen" = "חידוד";
+"sharpen.msize" = "גודל המטריצה";
+"sharpen.amount" = "רמה";
 
-"blur" = "Blur";
-"blur.msize" = "Matrix size";
-"blur.amount" = "Amount";
+"blur" = "טשטוש";
+"blur.msize" = "גודל המטריצה";
+"blur.amount" = "רמה";
 
-"delogo" = "Delogo";
-"delogo.w" = "Width";
-"delogo.h" = "Height";
-"delogo.x" = "Origin X";
-"delogo.y" = "Origin Y";
+"delogo" = "הסרת סימן מים";
+"delogo.w" = "רוחב";
+"delogo.h" = "גובה";
+"delogo.x" = "מקור בציר X";
+"delogo.y" = "מקור בציר Y";
 
-"negative" = "Negative";
+"negative" = "שלילי";
 
-"vflip" = "Flip";
-"hflip" = "Mirror";
+"vflip" = "היפוך";
+"hflip" = "מראה";
 
 "lut3d" = "3D LUT";
-"lut3d.file" = "File path (you can also drag & drop the file into the input box)";
-"lut3d.interp" = "Interpolation mode";
+"lut3d.file" = "נתיב קובץ (ניתן לגרור את הקובץ לתיבת הקלט)";
+"lut3d.interp" = "מצב אינטרפולציה";
 
-"custom_mpv" = "Custom (mpv)";
-"custom_mpv.name" = "Filter name";
-"custom_mpv.string" = "Filter value";
+"custom_mpv" = "מותאם אישית (mpv)";
+"custom_mpv.name" = "שם מסנן";
+"custom_mpv.string" = "ערך מסנן";
 
-"custom_ffmpeg" = "Custom (FFmpeg)";
-"custom_ffmpeg.name" = "Filter name";
-"custom_ffmpeg.string" = "Filter value";
+"custom_ffmpeg" = "מותאם אישית (FFmpeg)";
+"custom_ffmpeg.name" = "שם מסנן";
+"custom_ffmpeg.string" = "ערך מסנן";

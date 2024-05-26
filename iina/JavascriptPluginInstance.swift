@@ -40,6 +40,8 @@ class JavascriptPluginInstance {
   }()
 
   var menuItems: [JavascriptPluginMenuItem] = []
+  
+  let input = PluginInputManager()
 
   lazy var queue: DispatchQueue = {
     DispatchQueue(label: "com.colliderli.iina.plugin.\(plugin.identifier)", qos: .background)
@@ -165,6 +167,11 @@ class JavascriptPluginInstance {
       apis["sidebar"] = JavascriptAPISidebarView(context: ctx, pluginInstance: self)
       apis["playlist"] = JavascriptAPIPlaylist(context: ctx, pluginInstance: self)
       apis["subtitle"] = JavascriptAPISubtitle(context: ctx, pluginInstance: self)
+      apis["input"] = JavascriptAPIInput(context: ctx, pluginInstance: self)
+    }
+
+    if #available(macOS 10.15, *) {
+      apis["ws"] = JavascriptAPIWebSocketController(context: ctx, pluginInstance: self)
     }
 
     if player == nil {

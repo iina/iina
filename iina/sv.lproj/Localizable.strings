@@ -28,6 +28,9 @@
 "initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
 "initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
 
+// Inspector Window
+"inspector.error" = "Fel";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffrar… %d%%";
 "main.opening_stream" = "Öppnar ström…";
@@ -87,10 +90,13 @@
 "osd.file_error" = "Fel vid inläsning av fil";
 "osd.cannot_login" = "Kan ej logga in";
 "osd.canceled" = "Avbruten";
+"osd.cannot_connect" = "Cannot connect";
+"osd.timed_out" = "Timed Out";
 "osd.filter_added" = "La till filter: %@";
 "osd.filter_removed" = "Tog bort filter";
-"osd.file_loop" = "Fil-loop: %@";
-"osd.playlist_loop" = "Upprepning av spellistor: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Loop Playlist";
+"osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Inställningar";
 "preference.general" = "Allmänt";
@@ -113,6 +119,10 @@
 
 "preference.enable_adv_settings" = "Aktivera avancerade inställningar";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "avlägsna";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "Volym: %d";
 "menu.volume_muted" = "Volym: %d (Tystat)";
 "menu.audio_delay" = "Ljudfördröjning: %.2fs";
@@ -121,6 +131,8 @@
 "menu.exit_fullscreen" = "Lämna helskärmsläge";
 "menu.pip" = "Använd bild-i-bild";
 "menu.exit_pip" = "Lämna bild-i-bild";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pausa";
 "menu.resume" = "Fortsätt";
 "menu.speed" = "Hastighet: %.2fx";
@@ -173,7 +185,7 @@
 "alert.error_open" = "Kan ej öppna fil eller ström!";
 "alert.error_finding_file" = "Kan ej hitta filen %@!";
 "alert.error_loading_script" = "Kan ej hitta skript %@!";
-"alert.error_saving_file" = "Fel uppstod vid sparande av %@: %@";
+"alert.error_saving_file" = "Error occurred when saving %@: %@";
 "alert.error_deleting_file" = "Kan ej radera denna fil.";
 
 "alert.config.new.title" = "Ny inmatningskonfiguration";
@@ -187,7 +199,7 @@
 "alert.config.cannot_create" = "Kan inte skapa konfigurationsfil!\n%@";
 "alert.config.cannot_write" = "Kan inte skriva till konfigurationsfil!";
 
-"alert.filter.incorrect" = "Fel uppstod vid inställning av filter. Vänligen kontrollera ditt parameterformat.";
+"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "Nytt filter";
 "alert.add_filter.message" = "Vänligen ange en filtersträng i formatet för mpv:s vf- eller af-kommando.";
 
@@ -206,6 +218,7 @@
 "alert.sub_lang_not_set" = "Vänligen välj föredraget undertextspråk i inställningar innan du använder OpenSubtitles. Engelska(eng) används denna gång.";
 "alert.sub.cannot_save_passwd" = "Kan ej spara ditt lösenord till nyckelring: %@";
 "alert.sub.cannot_login" = "Kan ej logga in. Vänligen kontrollera ditt användarnamn, lösenord och nätverksstatus.\n\n%@";
+"alert.sub.save_downloaded.title" = "Spara nedladdad undertext";
 
 "alert.set_default.title" = "Ställer in IINA som förvald app";
 "alert.set_default.message" = "IINA kommer att ställas in som den förvalda appen för alla filtyper som stöds.";
@@ -262,6 +275,8 @@
 
 "alert.plugin_uninstall.title" = "Vill du verkligen avinstallera %@?";
 "alert.plugin_uninstall.message" = "Tillägget kommer att tas bort från din disk.";
+"alert.plugin_reinstall.title" = "Plugin %@ already exists";
+"alert.plugin_reinstall.message" = "Do you want to reinstall the plugin?";
 "alert.duplicated_plugin_id" = "Duplicerade tilläggsidentifierare upptäcktes. Minst två tillägg har samma identifierare, \"%@\". Detta kan leda till oförväntade beteenden. Vänligen hitta dem under Inställningar - Tillägg och rapportera detta till deras skapare. Om ett tillägg är installerat lokalt kan du även manuellt ändra dess idenfierare i tilläggets Info.json-fil.";
 "alert.plugin_no_update" = "Ingen uppdatering hittades.";
 "alert.plugin_update_found.title" = "Uppdatering hittades för %@";
@@ -309,6 +324,7 @@
 "osc_toolbar.full_screen" = "Växla fullskärmsläge";
 "osc_toolbar.music_mode" = "Gå in i musikläge";
 "osc_toolbar.sub_track" = "Välj undertextspår";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "Växla skivomslag";
 "mini_player.loop" = "Upprepa";
@@ -347,7 +363,7 @@
 "permissions.show-osd.desc" = "Detta tillägget kan visa OSD (\"On-Screen Display\")-meddelanden.";
 "permissions.show-alert.name" = "Visa Meddelanden";
 "permissions.show-alert.desc" = "Detta tillägget kan visa popup-meddelanden.";
-"permissions.video-overlay.name" = "Add overlay on videos";
+"permissions.video-overlay.name" = "Add overlays on videos";
 "permissions.video-overlay.desc" = "Detta tillägget kan rendera ytterligare innehåll ovanpå videon.";
 "permissions.file-system.name" = "Åtkomst till filsystemet";
 "permissions.file-system.desc" = "Detta tillägget kan läsa och skriva till filer på din hårddisk, inklusive känslig information. Det kan även anropa andra program eller applikationer som kan skada din dator. Se till att verifiera källan noggrant.";

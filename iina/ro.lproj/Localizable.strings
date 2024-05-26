@@ -22,11 +22,14 @@
 "guide.faq" = "Întrebări adresate frecvent";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.announcement" = "Folosești o versiune %@ de IINA";
+"initial.beta.desc" = "Dacă vreți să reveniți la o versiune non-beta, debifați \"primește actualizări beta\" din Setări > General, și instalați o actualizare stabilă de pe <a href=\"https://iina.io\">site-ul nostru oficial</a>.";
+"initial.nightly.desc" = "Versiunea Nightly nu este recomandată pentru utilizare zilnică. In momentul de față, versiunile Nightly nu suportă actualizare automată. Va rugăm să descărcați manual versiunile mai noi de pe <a href=\"https://nightly.iina.io\"> site-ul nostru Nightly </a>.";
+"initial.debug.desc" = "Versiunile de debug de obicei nu sunt optimizate pentru performanță, ca urmare nu sunt recomandate în utilizarea de zi cu zi. Versiunile de debug nu suportă actualizări automate.";
+"initial.bug_report" = "Raportați pe <a href=\"https://github.com/iina/iina/issues\">pagina de probleme de pe GitHub</a>.";
+
+// Inspector Window
+"inspector.error" = "Eroare";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffering...%d%%";
@@ -87,10 +90,13 @@
 "osd.file_error" = "Eroare la citirea fișierului";
 "osd.cannot_login" = "Nu se poate loga";
 "osd.canceled" = "Anulat";
+"osd.cannot_connect" = "Nu se poate conecta";
+"osd.timed_out" = "Timp expirat";
 "osd.filter_added" = "Filtru adăugat: %@";
 "osd.filter_removed" = "Filtru șters";
-"osd.file_loop" = "Redare fișier în buclă: %@";
-"osd.playlist_loop" = "Redare playlist în buclă: %@";
+"osd.file_loop" = "Repetă un singur fișier";
+"osd.playlist_loop" = "Repetă playlist-ul";
+"osd.no_loop" = "Dezactivează repetiția";
 
 "preference.title" = "Preferințe";
 "preference.general" = "General";
@@ -113,6 +119,10 @@
 
 "preference.enable_adv_settings" = "Activează setările avansate";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "de tot";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "Volum: %d";
 "menu.volume_muted" = "Volum: %d (Mut)";
 "menu.audio_delay" = "Întârziere audio: %.2fs";
@@ -121,6 +131,8 @@
 "menu.exit_fullscreen" = "Ieși din ecran complet";
 "menu.pip" = "Afișează în Picture-in-Picture";
 "menu.exit_pip" = "Ieși din Picture-in-Picture";
+"menu.mini_player" = "Intră în modul Muzică";
+"menu.exit_mini_player" = "Ieșiți din modul Muzică";
 "menu.pause" = "Pauză";
 "menu.resume" = "Reia";
 "menu.speed" = "Viteză: %.2fx";
@@ -187,7 +199,7 @@
 "alert.config.cannot_create" = "Nu se poate crea fișierul de configurare!\n%@";
 "alert.config.cannot_write" = "Nu se poate scrie în fișierul de configurare!";
 
-"alert.filter.incorrect" = "Eroare la setarea filtrelor. Te rog verifică formatul parametrilor. ";
+"alert.filter.incorrect" = "A apărut o eroare la setarea filtrelor. Verificați formatul parametrului.";
 "alert.add_filter.title" = "Filtru nou";
 "alert.add_filter.message" = "Te rog introdu un șir care să fie o comandă în formatul mpv vf sau af.";
 
@@ -206,6 +218,7 @@
 "alert.sub_lang_not_set" = "Te rog să specifici limba subtitrării preferată înainte de a utiliza OpenSubtitles. Engleză(eng) va fi utilizată de această dată.";
 "alert.sub.cannot_save_passwd" = "Nu se poate salva parola în Portchei: %@";
 "alert.sub.cannot_login" = "Nu se poate efectua login. Te rog verifică numele de utilizator, parola și starea rețelei.\n\n%@";
+"alert.sub.save_downloaded.title" = "Salvează subtitrările descărcate";
 
 "alert.set_default.title" = "Setează IINA ca aplicație implicită";
 "alert.set_default.message" = "IINA va fi aplicația implictă pentru toate fișierele pe care le suportă.";
@@ -262,6 +275,8 @@
 
 "alert.plugin_uninstall.title" = "Sunteți sigur ca doriți sa dezinstalați %@?";
 "alert.plugin_uninstall.message" = "Extensia va fi ștearsă de pe discul dvs.";
+"alert.plugin_reinstall.title" = "Plugin-ul %@ există deja";
+"alert.plugin_reinstall.message" = "Doriți să reinstalați plugin-ul?";
 "alert.duplicated_plugin_id" = "S-au detectat duplicate ale identificatoarelor de extensii. Două sau mai multe extensii au același identificator \"%@\". Acest lucru poate cauza comportamente anormale. Le puteți găsi în Preferințe - Extensii și le puteți raporta autorilor lor. Dacă o extensie este instalată local, puteți schimba manual identificatorul ei în fișierul Info.json al acesteia.";
 "alert.plugin_no_update" = "Nu s-a găsit nicio actualizare.";
 "alert.plugin_update_found.title" = "Actualizare găsită pentru %@";
@@ -309,6 +324,7 @@
 "osc_toolbar.full_screen" = "Activează ecran complet";
 "osc_toolbar.music_mode" = "Intră în modul Muzică";
 "osc_toolbar.sub_track" = "Alege pista de subtitrare";
+"osc_toolbar.screenshot" = "Faceți o captură de ecran";
 
 "mini_player.album_art" = "Comută coperta albumului";
 "mini_player.loop" = "Repetare";

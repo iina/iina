@@ -39,9 +39,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   /** The timer for `OpenFileRepeatTime` and `application(_:openFile:)`. */
   private var openFileTimer: Timer?
 
+  private var allPlayersHaveShutdown = false
+
   private var commandLineStatus = CommandLineStatus()
 
   private var isTerminating = false
+
+  /// Longest time to wait for asynchronous shutdown tasks to finish before giving up on waiting and proceeding with termination.
+  ///
+  /// Ten seconds was chosen to provide plenty of time for termination and yet not be long enough that users start thinking they will
+  /// need to force quit IINA. As termination may involve logging out of an online subtitles provider it can take a while to complete if
+  /// the provider is slow to respond to the logout request.
+  private let terminationTimeout: TimeInterval = 10
 
   // Windows
 
@@ -65,7 +74,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     return w
   }()
 
-  lazy var preferenceWindowController: NSWindowController = {
+  lazy var preferenceWindowController: PreferenceWindowController = {
     var list: [NSViewController & PreferenceWindowEmbeddable] = [
       PrefGeneralViewController(),
       PrefUIViewController(),
@@ -126,10 +135,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   /// - The git branch
   /// - The git commit
   private func logBuildDetails() {
+    guard let date = InfoDictionary.shared.buildDate,
+          let sdk = InfoDictionary.shared.buildSDK,
+          let xcode = InfoDictionary.shared.buildXcode else { return }
+    Logger.log("Built using Xcode \(xcode) and macOS SDK \(sdk) on \(date)")
     guard let branch = InfoDictionary.shared.buildBranch,
-          let commit = InfoDictionary.shared.buildCommit,
-          let date = InfoDictionary.shared.buildDate else { return }
-    Logger.log("Built \(date) from branch \(branch), commit \(commit)")
+          let commit = InfoDictionary.shared.buildCommit else { return }
+    Logger.log("From branch \(branch), commit \(commit)")
   }
 
   /// Log details about the Mac IINA is running on.
@@ -195,6 +207,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
     Logger.log("App will launch")
 
+    // Workaround macOS Sonoma clearing the recent documents list when the IINA code is not signed
+    // with IINA's certificate as is the case for developer and nightly builds.
+    restoreRecentDocuments()
+
     // register for url event
     NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(self.handleURLEvent(event:withReplyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
 
@@ -214,7 +230,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     var iinaArgFilenames: [String] = []
     var dropNextArg = false
 
-    Logger.log("Got arguments \(arguments)")
+    Logger.log("Command-line args: \(arguments)")
     for arg in arguments {
       if dropNextArg {
         dropNextArg = false
@@ -238,9 +254,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       }
     }
 
-    Logger.log("IINA arguments: \(iinaArgs)")
-    Logger.log("Filenames from arguments: \(iinaArgFilenames)")
     commandLineStatus.parseArguments(iinaArgs)
+    Logger.log("Filenames from args: \(iinaArgFilenames)")
+    Logger.log("Derived mpv properties from args: \(commandLineStatus.mpvArguments)")
 
     print("IINA \(version) Build \(build)")
 
@@ -283,8 +299,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     }
 
     JavascriptPlugin.loadGlobalInstances()
-    let _ = PlayerCore.first
-    Logger.log("Using \(PlayerCore.active.mpv.mpvVersion!)")
+
+    let mpv = PlayerCore.active.mpv!
+    Logger.log("Using \(mpv.mpvVersion) and libass \(mpv.libassVersion)")
 
     if #available(macOS 10.13, *) {
       if RemoteCommandController.useSystemMediaControl {
@@ -304,9 +321,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       Timer.scheduledTimer(timeInterval: TimeInterval(0.1), target: self, selector: #selector(self.checkForShowingInitialWindow), userInfo: nil, repeats: false)
     } else {
       var lastPlayerCore: PlayerCore? = nil
-      let getNewPlayerCore = { () -> PlayerCore in
+      let getNewPlayerCore = { [self] () -> PlayerCore in
         let pc = PlayerCore.newPlayerCore
-        self.commandLineStatus.assignMPVArguments(to: pc)
+        commandLineStatus.applyMPVArguments(to: pc)
         lastPlayerCore = pc
         return pc
       }
@@ -393,21 +410,32 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   @objc
   func shutdownTimedout() {
     timedOut = true
-    Logger.log("Timed out waiting for players to stop and shutdown", level: .warning)
-    // For debugging list players that have not terminated.
-    for player in PlayerCore.playerCores {
-      let label = player.label ?? "unlabeled"
-      if !player.isStopped {
-        Logger.log("Player \(label) failed to stop", level: .warning)
-      } else if !player.isShutdown {
-        Logger.log("Player \(label) failed to shutdown", level: .warning)
+    if !allPlayersHaveShutdown {
+      Logger.log("Timed out waiting for players to stop and shutdown", level: .warning)
+      // For debugging list players that have not terminated.
+      for player in PlayerCore.playerCores {
+        let label = player.label ?? "unlabeled"
+        if !player.isStopped {
+          Logger.log("Player \(label) failed to stop", level: .warning)
+        } else if !player.isShutdown {
+          Logger.log("Player \(label) failed to shutdown", level: .warning)
+        }
       }
+      // For debugging purposes we do not remove observers in case players stop or shutdown after
+      // the timeout has fired as knowing that occurred maybe useful for debugging why the
+      // termination sequence failed to complete on time.
+      Logger.log("Not waiting for players to shutdown; proceeding with application termination",
+                 level: .warning)
     }
-    // For debugging purposes we do not remove observers in case players stop or shutdown after
-    // the timeout has fired as knowing that occurred maybe useful for debugging why the
-    // termination sequence failed to complete on time.
-    Logger.log("Not waiting for players to shutdown; proceeding with application termination",
-               level: .warning)
+    if OnlineSubtitle.loggedIn {
+      // The request to log out of the online subtitles provider has not completed. This should not
+      // occur as the logout request uses a timeout that is shorter than the termination timeout to
+      // avoid this occurring. Therefore if this message is logged something has gone wrong with the
+      // shutdown code.
+      Logger.log("Timed out waiting for log out of online subtitles provider to complete",
+                 level: .warning)
+    }
+    Logger.log("Proceeding with application termination due to time out", level: .warning)
     // Tell Cocoa to proceed with termination.
     NSApp.reply(toApplicationShouldTerminate: true)
   }
@@ -434,6 +462,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       }
     }
 
+    // The first priority was to shutdown any new input from the user. The second priority is to
+    // send a logout request if logged into an online subtitles provider as that needs time to
+    // complete.
+    if OnlineSubtitle.loggedIn {
+      // Force the logout request to timeout earlier than the overall termination timeout. This
+      // request taking too long does not represent an error in the shutdown code, whereas the
+      // intention of the overall termination timeout is to recover from some sort of hold up in the
+      // shutdown sequence that should not occur.
+      OnlineSubtitle.logout(timeout: terminationTimeout - 1)
+    }
+
     // Close all windows. When a player window is closed it will send a stop command to mpv to stop
     // playback and unload the file.
     Logger.log("Closing all windows")
@@ -446,23 +485,37 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     // player and shutdown was initiated by typing "q" in the player window. That sends a quit
     // command directly to mpv causing mpv and the player to shutdown before application
     // termination is initiated.
-    var canTerminateNow = true
+    allPlayersHaveShutdown = true
     for player in PlayerCore.playerCores {
       if !player.isShutdown {
-        canTerminateNow = false
+        allPlayersHaveShutdown = false
         break
       }
     }
+    if allPlayersHaveShutdown {
+      Logger.log("All players have shutdown")
+    } else {
+      // Shutdown of player cores involves sending the stop and quit commands to mpv. Even though
+      // these commands are sent to mpv using the synchronous API mpv executes them asynchronously.
+      // This requires IINA to wait for mpv to finish executing these commands.
+      Logger.log("Waiting for players to stop and shutdown")
+    }
+
+    // Usually will have to wait for logout request to complete if logged into an online subtitle
+    // provider.
+    var canTerminateNow = allPlayersHaveShutdown
+    if OnlineSubtitle.loggedIn {
+      canTerminateNow = false
+      Logger.log("Waiting for log out of online subtitles provider to complete")
+    }
+
+    // If the user pressed Q and mpv initiated the termination then players will already be
+    // shutdown and it may be possible to proceed with termination.
     if canTerminateNow {
-      Logger.log("All players have shutdown; proceeding with application termination")
+      Logger.log("Proceeding with application termination")
       // Tell Cocoa that it is ok to immediately proceed with termination.
       return .terminateNow
     }
-
-    // Shutdown of player cores involves sending the stop and quit commands to mpv. Even though
-    // these commands are sent to mpv using the synchronous API mpv executes them asynchronously.
-    // This requires IINA to wait for mpv to finish executing these commands.
-    Logger.log("Waiting for players to stop and shutdown")
 
     // To ensure termination completes and the user is not required to force quit IINA, impose an
     // arbitrary timeout that forces termination to complete. The expectation is that this timeout
@@ -470,13 +523,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     // investigated.
     var timer: Timer
     if #available(macOS 10.12, *) {
-      timer = Timer(timeInterval: 10, repeats: false) { _ in
+      timer = Timer(timeInterval: terminationTimeout, repeats: false) { _ in
         // Once macOS 10.11 is no longer supported the contents of the method can be inlined in this
         // closure.
         self.shutdownTimedout()
       }
     } else {
-      timer = Timer(timeInterval: TimeInterval(10), target: self,
+      timer = Timer(timeInterval: terminationTimeout, target: self,
                     selector: #selector(self.shutdownTimedout), userInfo: nil, repeats: false)
     }
     RunLoop.main.add(timer, forMode: .common)
@@ -509,6 +562,37 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     }
     observers.append(observer)
 
+    /// Proceed with termination if all outstanding shutdown tasks have completed.
+    ///
+    /// This method is called when an observer receives a notification that a player has shutdown or an online subtitles provider logout
+    /// request has completed. If there are no other termination tasks outstanding then this method will instruct AppKit to proceed with
+    /// termination.
+    func proceedWithTermination() {
+      if !allPlayersHaveShutdown {
+        // If any player has not shutdown then continue waiting.
+        for player in PlayerCore.playerCores {
+          guard player.isShutdown else { return }
+        }
+        allPlayersHaveShutdown = true
+        // All players have shutdown.
+        Logger.log("All players have shutdown")
+      }
+      guard !OnlineSubtitle.loggedIn else { return }
+      // All players have shutdown. No longer logged into an online subtitles provider.
+      Logger.log("Proceeding with application termination")
+      // No longer need the timer that forces termination to proceed.
+      timer.invalidate()
+      // No longer need the observers for players stopping and shutting down, along with the
+      // observer for logout requests completing.
+      ObjcUtils.silenced {
+        observers.forEach {
+          NotificationCenter.default.removeObserver($0)
+        }
+      }
+      // Tell AppKit to proceed with termination.
+      NSApp.reply(toApplicationShouldTerminate: true)
+    }
+
     // Establish an observer for a player core shutting down.
     observer = center.addObserver(forName: .iinaPlayerShutdown, object: nil, queue: .main) { _ in
       guard !self.timedOut else {
@@ -525,22 +609,24 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
         Logger.log("Player shutdown after application termination timed out", level: .warning)
         return
       }
-      // If any player has not shutdown then continue waiting.
-      for player in PlayerCore.playerCores {
-        guard player.isShutdown else { return }
+      proceedWithTermination()
+    }
+    observers.append(observer)
+
+    // Establish an observer for logging out of the online subtitle provider.
+    observer = center.addObserver(forName: .iinaLogoutCompleted, object: nil, queue: .main) { _ in
+      guard !self.timedOut else {
+        // The request to log out of the online subtitles provider has completed after IINA already
+        // timed out, gave up waiting for players to shutdown, and told Cocoa to proceed with
+        // termination. This should not occur as the logout request uses a timeout that is shorter
+        // than the termination timeout to avoid this occurring. Therefore if this message is logged
+        // something has gone wrong with the shutdown code.
+        Logger.log(
+          "Log out of online subtitles provider completed after application termination timed out",
+          level: .warning)
+        return
       }
-      // All players have shutdown. Proceed with termination.
-      Logger.log("All players have shutdown; proceeding with application termination")
-      // No longer need the timer that forces termination to proceed.
-      timer.invalidate()
-      // No longer need the observers for players stopping and shutting down.
-      ObjcUtils.silenced {
-        observers.forEach {
-          NotificationCenter.default.removeObserver($0)
-        }
-      }
-      // Tell Cocoa to proceed with termination.
-      NSApp.reply(toApplicationShouldTerminate: true)
+      proceedWithTermination()
     }
     observers.append(observer)
 
@@ -551,7 +637,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       }
     }
 
-    // Tell Cocoa that it is ok to proceed with termination, but wait for our reply.
+    // Tell AppKit that it is ok to proceed with termination, but wait for our reply.
     return .terminateLater
   }
 
@@ -594,9 +680,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       shouldIgnoreOpenFile = false
       return
     }
-    // open pending files
     let urls = pendingFilesForOpenFile.map { URL(fileURLWithPath: $0) }
+    
+    // if installing a plugin package
+    if let pluginPackageURL = urls.first(where: { $0.pathExtension == "iinaplgz" }) {
+      showPreferences(self)
+      preferenceWindowController.performAction(.installPlugin(url: pluginPackageURL))
+      return
+    }
 
+    // open pending files
     pendingFilesForOpenFile.removeAll()
     if PlayerCore.activeOrNew.openURLs(urls) == 0 {
       Utility.showAlert("nothing_to_open")
@@ -743,7 +836,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     if panel.runModal() == .OK {
       if Preference.bool(for: .recordRecentFiles) {
         for url in panel.urls {
-          NSDocumentController.shared.noteNewRecentDocumentURL(url)
+          noteNewRecentDocumentURL(url)
         }
       }
       let isAlternative = (sender as? NSMenuItem)?.tag == AlternativeMenuItemTag
@@ -864,6 +957,102 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     let micro = AppDelegate.avVersionMicro(version)
     return "\(major).\(minor).\(micro)"
   }
+
+  // MARK: - Recent Documents
+
+  /// Empties the recent documents list for the application.
+  ///
+  /// This is part of a workaround for macOS Sonoma clearing the list of recent documents. See the method
+  /// `restoreRecentDocuments` and the issue [#4688](https://github.com/iina/iina/issues/4688) for more
+  /// information..
+  /// - Parameter sender: The object that initiated the clearing of the recent documents.
+  @IBAction
+  func clearRecentDocuments(_ sender: Any?) {
+    NSDocumentController.shared.clearRecentDocuments(sender)
+    saveRecentDocuments()
+  }
+
+  /// Adds or replaces an Open Recent menu item corresponding to the data located by the URL.
+  ///
+  /// This is part of a workaround for macOS Sonoma clearing the list of recent documents. See the method
+  /// `restoreRecentDocuments` and the issue [#4688](https://github.com/iina/iina/issues/4688) for more
+  /// information..
+  /// - Parameter url: The URL to evaluate.
+  func noteNewRecentDocumentURL(_ url: URL) {
+    NSDocumentController.shared.noteNewRecentDocumentURL(url)
+    saveRecentDocuments()
+  }
+
+  /// Restore the list of recently opened files.
+  ///
+  /// For macOS Sonoma `sharedfilelistd` was changed to tie the list of recent documents to the app based on its certificate.
+  /// if `sharedfilelistd` determines the list is being accessed by a different app then it clears the list. See issue
+  /// [#4688](https://github.com/iina/iina/issues/4688) for details.
+  ///
+  /// This new behavior does not cause a problem when the code is signed with IINA's certificate. However developer and nightly
+  /// builds use an ad hoc certificate. This causes the list of recently opened files to be cleared each time a different unsigned IINA build
+  /// is run. As a workaround a copy of the list of recent documents is saved in IINA's preference file to preserve the list and allow it to
+  /// be restored when `sharedfilelistd` clears its list.
+  ///
+  /// If the following is true:
+  /// - Running under macOS Sonoma and above
+  /// - Recording of recent files is enabled
+  /// - The list in  [NSDocumentController.shared.recentDocumentURLs](https://developer.apple.com/documentation/appkit/nsdocumentcontroller/1514976-recentdocumenturls) is empty
+  /// - The list in the IINA setting `recentDocuments` is not empty
+  ///
+  /// Then this method assumes that the macOS daemon `sharedfilelistd` cleared the list and it populates the list of recent
+  /// document URLs with the list stored in IINA's settings.
+  private func restoreRecentDocuments() {
+    guard #available(macOS 14, *), Preference.bool(for: .recordRecentFiles),
+          NSDocumentController.shared.recentDocumentURLs.isEmpty,
+          let recentDocuments = Preference.array(for: .recentDocuments),
+          !recentDocuments.isEmpty else { return }
+    var foundStale = false
+    for document in recentDocuments {
+      var isStale = false
+      guard let asData = document as? Data,
+            let bookmark = try? URL(resolvingBookmarkData: asData, bookmarkDataIsStale: &isStale) else {
+        guard let asString = document as? String, let url = URL(string: asString) else { continue }
+        // Saving as a bookmark must have failed and instead the URL was saved as a string.
+        NSDocumentController.shared.noteNewRecentDocumentURL(url)
+        continue
+      }
+      foundStale = foundStale || isStale
+      NSDocumentController.shared.noteNewRecentDocumentURL(bookmark)
+    }
+    Logger.log("Restored list of recent documents")
+    guard foundStale else { return }
+    Logger.log("Found stale bookmarks in saved recent documents")
+    // Save the recent documents in order to refresh stale bookmarks.
+    saveRecentDocuments()
+  }
+
+  /// Save the list of recently opened files.
+  ///
+  /// Save the list of recent documents in [NSDocumentController.shared.recentDocumentURLs](https://developer.apple.com/documentation/appkit/nsdocumentcontroller/1514976-recentdocumenturls)
+  /// to `recentDocuments` in the IINA settings property file.
+  ///
+  /// This is part of a workaround for macOS Sonoma clearing the list of recent documents. See the method
+  /// `restoreRecentDocuments` and the issue [#4688](https://github.com/iina/iina/issues/4688) for more
+  /// information..
+  func saveRecentDocuments() {
+    guard #available(macOS 14, *) else { return }
+    var recentDocuments: [Any] = []
+    for document in NSDocumentController.shared.recentDocumentURLs {
+      guard let bookmark = try? document.bookmarkData() else {
+        // Fall back to storing a string when unable to create a bookmark.
+        recentDocuments.append(document.absoluteString)
+        continue
+      }
+      recentDocuments.append(bookmark)
+    }
+    Preference.set(recentDocuments, for: .recentDocuments)
+    if recentDocuments.isEmpty {
+      Logger.log("Cleared list of recent documents")
+    } else {
+      Logger.log("Saved list of recent documents")
+    }
+  }
 }
 
 
@@ -888,10 +1077,14 @@ struct CommandLineStatus {
         let strippedName = String(name.dropFirst(4))
         if strippedName == "-" {
           isStdin = true
-        } else if splitted.count <= 1 {
-          mpvArguments.append((strippedName, "yes"))
         } else {
-          mpvArguments.append((strippedName, String(splitted[1])))
+          let argPair: (String, String)
+          if splitted.count <= 1 {
+            argPair = (strippedName, "yes")
+          } else {
+            argPair = (strippedName, String(splitted[1]))
+          }
+          mpvArguments.append(argPair)
         }
       } else {
         // other args
@@ -916,10 +1109,16 @@ struct CommandLineStatus {
     }
   }
 
-  func assignMPVArguments(to playerCore: PlayerCore) {
+  func applyMPVArguments(to playerCore: PlayerCore) {
     Logger.log("Setting mpv properties from arguments: \(mpvArguments)")
-    for arg in mpvArguments {
-      playerCore.mpv.setString(arg.0, arg.1)
+    for argPair in mpvArguments {
+      if argPair.0 == "shuffle" && argPair.1 == "yes" {
+        // Special handling for this one
+        Logger.log("Found \"shuffle\" request in command-line args. Adding mpv hook to shuffle playlist")
+        playerCore.addShufflePlaylistHook()
+        continue
+      }
+      playerCore.mpv.setString(argPair.0, argPair.1)
     }
   }
 }
@@ -956,7 +1155,7 @@ class RemoteCommandController {
       return .success
     }
     remoteCommand.changeRepeatModeCommand.addTarget { _ in
-      PlayerCore.lastActive.togglePlaylistLoop()
+      PlayerCore.lastActive.nextLoopMode()
       return .success
     }
     remoteCommand.changeShuffleModeCommand.isEnabled = false

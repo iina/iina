@@ -2,7 +2,7 @@
 "07n-bk-3ma.title" = "Tøm seneste";
 
 /* Class = "NSMenuItem"; title = "Full path"; ObjectID = "AZL-gY-Tob"; */
-"AZL-gY-Tob.title" = "Fulde sti";
+"AZL-gY-Tob.title" = "Fuld sti";
 
 /* Class = "NSMenuItem"; title = "Delete…"; ObjectID = "CqL-By-26A"; */
 "CqL-By-26A.title" = "Slet…";
@@ -11,7 +11,7 @@
 "DIC-tR-R2F.headerCell.title" = "Fil";
 
 /* Class = "NSWindow"; title = "Playback History"; ObjectID = "F0z-JX-Cv5"; */
-"F0z-JX-Cv5.title" = "Playback Historik";
+"F0z-JX-Cv5.title" = "Afspilningshistorik";
 
 /* Class = "NSMenuItem"; title = "Show in Finder"; ObjectID = "FPK-nx-hvF"; */
 "FPK-nx-hvF.title" = "Vis i Finder";
@@ -34,14 +34,11 @@
 /* Class = "NSMenuItem"; title = "Filename"; ObjectID = "Wkp-Vn-JoJ"; */
 "Wkp-Vn-JoJ.title" = "Filnavn";
 
-/* Class = "NSMenu"; title = "Context Menu"; ObjectID = "lR3-1E-Rwr"; */
-"lR3-1E-Rwr.title" = "Kontext Menu";
-
 /* Class = "NSMenuItem"; title = "Play in New Window"; ObjectID = "mXt-wb-fgT"; */
 "mXt-wb-fgT.title" = "Afspil i nyt vindue";
 
 /* Class = "NSMenuItem"; title = "No Recent Searches"; ObjectID = "ndC-eb-4GZ"; */
-"ndC-eb-4GZ.title" = "Ingen seneste søgninger";
+"ndC-eb-4GZ.title" = "Ingen tidligere søgninger";
 
 /* Class = "NSMenuItem"; title = "Play"; ObjectID = "oMR-4K-aR2"; */
 "oMR-4K-aR2.title" = "Afspil";

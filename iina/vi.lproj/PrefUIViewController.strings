@@ -103,6 +103,9 @@
 /* Class = "NSButtonCell"; title = "Always float on top while playing"; ObjectID = "SFX-ct-8MB"; */
 "SFX-ct-8MB.title" = "Always float on top while playing";
 
+/* Class = "NSButtonCell"; title = "Always show float on top status in the title bar"; ObjectID = "ih8-5a-PYY"; */
+"ih8-5a-PYY.title" = "Always show float on top status in the title bar";
+
 /* Class = "NSMenuItem"; title = "Speed"; ObjectID = "TWq-Xb-8Ee"; */
 "TWq-Xb-8Ee.title" = "Tốc độ";
 
@@ -176,7 +179,7 @@
 "oJ8-74-L3z.title" = "Previous / Next Media";
 
 /* Class = "NSMenuItem"; title = "top"; ObjectID = "oYc-L7-qQd"; */
-"oYc-L7-qQd.title" = "top";
+"oYc-L7-qQd.title" = "trên cùng";
 
 /* Class = "NSMenuItem"; title = "Ultra Dark"; ObjectID = "pV2-12-PmM"; */
 "pV2-12-PmM.title" = "Ultra Dark";

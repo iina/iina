@@ -6,13 +6,13 @@
   Copyright © 2017 lhc. All rights reserved.
 */
 
-"cmd.ignore" = "Ignore";
-"cmd.seek" = "Seek";
-"cmd.revert-seek" = "Revert seek";
-"cmd.set" = "Set";
-"cmd.cycle" = "Cycle";
+"cmd.ignore" = "نظر انداز کریں";
+"cmd.seek" = "آگے";
+"cmd.revert-seek" = "آگے واپس لوٹنا";
+"cmd.set" = "مقرر کریں";
+"cmd.cycle" = "سائیکل";
 "cmd.cycle-values" = "Cycle in";
-"cmd.add" = "Change";
+"cmd.add" = "تبدیل کیا گیا";
 "cmd.multiply" = "Multiply";
 "cmd.frame-step" = "Next frame";
 "cmd.frame-back-step" = "Previous frame";
@@ -34,8 +34,8 @@
 "cmd.loadlist" = "Load playlist";
 "cmd.run" = "Run";
 
-"iina.flip" = "Flip";
-"iina.mirror" = "Mirror";
+"iina.flip" = "پلٹائیں";
+"iina.mirror" = "مرر";
 
 "iina.toggle-pip" = "Toggle Picture-in-Picture";
 "iina.toggle-music-mode" = "Toggle Music Mode";

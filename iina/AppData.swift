@@ -87,6 +87,8 @@ struct Constants {
     static let subDelay = "Subtitle Delay"
     static let pip = NSLocalizedString("menu.pip", comment: "Enter Picture-in-Picture")
     static let exitPIP = NSLocalizedString("menu.exit_pip", comment: "Exit Picture-in-Picture")
+    static let miniPlayer = NSLocalizedString("menu.mini_player", comment: "Enter Music Mode")
+    static let exitMiniPlayer = NSLocalizedString("menu.exit_mini_player", comment: "Exit Music Mode")
     static let custom = NSLocalizedString("menu.crop_custom", comment: "Custom crop size")
     static let findOnlineSubtitles = NSLocalizedString("menu.find_online_sub", comment: "Find Online Subtitles")
     static let chaptersPanel = NSLocalizedString("menu.chapters", comment: "Show Chapters Panel")
@@ -132,4 +134,5 @@ extension Notification.Name {
   static let iinaPlayerStopped = Notification.Name("iinaPlayerStopped")
   static let iinaPlayerShutdown = Notification.Name("iinaPlayerShutdown")
   static let iinaPlaySliderLoopKnobChanged = Notification.Name("iinaPlaySliderLoopKnobChanged")
+  static let iinaLogoutCompleted = Notification.Name("iinaLoggedOutOfSubtitleProvider")
 }

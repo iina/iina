@@ -22,11 +22,14 @@
 "guide.faq" = "常見問題";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.announcement" = "您正在使用IINA的%@版本";
+"initial.beta.desc" = "如果您希望回滾至穩定版本，請從 設置 > 通用 取消勾選“接收Beta版本更新”，然後從 我們的<a href=\"https://iina.io\">官方網站</a>安裝穩定版本.";
+"initial.nightly.desc" = "不推薦您使用「每日構建版 Nightly Build」做為日常使用首選。每日構建版不支援自動更新，請至 <a href=\"https://nightly.iina.io\">每日構建版網站頁面</a> 自行下載更新。";
+"initial.debug.desc" = "開發版通常沒有將效能最佳化，所以不建議作為生產力軟件。開發版不支持自動更新。";
+"initial.bug_report" = "通過<a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>發送報告.";
+
+// Inspector Window
+"inspector.error" = "錯誤";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "緩衝處理中⋯ %d%%";
@@ -87,10 +90,13 @@
 "osd.file_error" = "讀取檔案發生錯誤";
 "osd.cannot_login" = "無法登入";
 "osd.canceled" = "已取消";
+"osd.cannot_connect" = "無法連接";
+"osd.timed_out" = "已逾時";
 "osd.filter_added" = "已加入濾鏡：%@";
 "osd.filter_removed" = "已移除濾鏡";
-"osd.file_loop" = "文件循環";
-"osd.playlist_loop" = "播放列表循環";
+"osd.file_loop" = "循環播放單一檔案";
+"osd.playlist_loop" = "循環播放全部檔案";
+"osd.no_loop" = "取消循環播放檔案";
 
 "preference.title" = "偏好設定";
 "preference.general" = "一般";
@@ -113,6 +119,10 @@
 
 "preference.enable_adv_settings" = "啟用進階設定";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "過濾";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "音量：%d";
 "menu.volume_muted" = "音量：%d (靜音)";
 "menu.audio_delay" = "音訊延遲：%.2f 秒";
@@ -121,6 +131,8 @@
 "menu.exit_fullscreen" = "離開全螢幕";
 "menu.pip" = "進入子母畫面";
 "menu.exit_pip" = "結束子母畫面";
+"menu.mini_player" = "進入音樂模式";
+"menu.exit_mini_player" = "離開音樂模式";
 "menu.pause" = "暫停";
 "menu.resume" = "繼續";
 "menu.speed" = "速度：%.2fx";
@@ -206,6 +218,7 @@
 "alert.sub_lang_not_set" = "在使用 OpenSubtitles 前請先在「偏好設定」中設定字幕的偏好語言，目前將使用英文（eng）。";
 "alert.sub.cannot_save_passwd" = "無法將您這個密碼「%@」儲存到鑰匙圈";
 "alert.sub.cannot_login" = "登入失敗，請檢查您的使用者帳戶、密碼、網路連線。\n\n%@";
+"alert.sub.save_downloaded.title" = "儲存已下載的字幕";
 
 "alert.set_default.title" = "將 IINA 設為預設應用程式";
 "alert.set_default.message" = "即將把 IINA 設為所有受支援檔案格式的預設應用程式";
@@ -262,6 +275,8 @@
 
 "alert.plugin_uninstall.title" = "你確定想要移除 %@？";
 "alert.plugin_uninstall.message" = "這外掛程式將從你的磁碟移除。";
+"alert.plugin_reinstall.title" = "插件%@已存在";
+"alert.plugin_reinstall.message" = "您是否希望重新安裝此插件？";
 "alert.duplicated_plugin_id" = "偵測到重複的外掛程式識別碼，有兩個或更多外掛程式使用的相同的識別碼「%@」，這將造成不正常的行為。請在「偏好設定 - 外掛程式」中找到它們，並回報給外掛程式的作者。如果外掛程式安裝於本機，你可以手動在外掛程式的 Info.json 檔案中手動變更該外掛的識別碼。";
 "alert.plugin_no_update" = "未找到更新。";
 "alert.plugin_update_found.title" = "找到 %@ 的更新";
@@ -309,6 +324,7 @@
 "osc_toolbar.full_screen" = "切換全螢幕";
 "osc_toolbar.music_mode" = "進入音樂模式";
 "osc_toolbar.sub_track" = "選擇字幕軌道";
+"osc_toolbar.screenshot" = "螢幕擷取";
 
 "mini_player.album_art" = "顯示封面圖庫";
 "mini_player.loop" = "重覆播放";

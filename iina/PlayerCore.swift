@@ -39,7 +39,7 @@ class PlayerCore: NSObject {
   /// - Important: Code referencing this property **must** be run on the main thread because it references
   ///              [NSApplication.mainWindow`](https://developer.apple.com/documentation/appkit/nsapplication/1428723-mainwindow)
   static var active: PlayerCore {
-    if let wc = NSApp.mainWindow?.windowController as? MainWindowController {
+    if let wc = NSApp.mainWindow?.windowController as? PlayerWindowController {
       return wc.player
     } else {
       return first
@@ -132,6 +132,10 @@ class PlayerCore: NSObject {
   var initialWindow: InitialWindowController!
   var miniPlayer: MiniPlayerWindowController!
 
+  var currentWindow: NSWindow? {
+    return isInMiniPlayer ? miniPlayer.window : mainWindow.window
+  }
+
   var mpv: MPVController!
 
   var plugins: [JavascriptPluginInstance] = []
@@ -167,6 +171,9 @@ class PlayerCore: NSObject {
   var switchedBackFromMiniPlayerManually = false
 
   var isSearchingOnlineSubtitle = false
+
+  /// For supporting mpv `--shuffle` arg, to shuffle playlist when launching from command line
+  @Atomic private var shufflePending = false
 
   // test seeking
   var triedUsingExactSeekForCurrentFile: Bool = false
@@ -224,7 +231,7 @@ class PlayerCore: NSObject {
 
   override init() {
     super.init()
-    self.mpv = MPVController(playerCore: self)
+    self.mpv = MPVController(playerCore: self, playerNumber: PlayerCore.playerCoreCounter)
     self.mainWindow = MainWindowController(playerCore: self)
     self.miniPlayer = MiniPlayerWindowController(playerCore: self)
     self.initialWindow = InitialWindowController(playerCore: self)
@@ -303,8 +310,7 @@ class PlayerCore: NSObject {
     if urls.count == 1 {
       let url = urls[0]
 
-      if url.isExistingDirectory
-          || isBDFolder(url)
+      if isBDFolder(url)
           || Utility.playlistFileExt.contains(url.absoluteString.lowercasedPathExtension) {
         info.shouldAutoLoadFiles = false
         open(url)
@@ -354,8 +360,26 @@ class PlayerCore: NSObject {
     if str.first == "/" {
       openURL(URL(fileURLWithPath: str))
     } else {
-      guard let pstr = str.addingPercentEncoding(withAllowedCharacters: .urlAllowed), let url = URL(string: pstr) else {
-        Logger.log("Cannot add percent encoding for \(str)", level: .error, subsystem: subsystem)
+      // For apps built with Xcode 15 or later the behavior of the URL initializer has changed when
+      // running under macOS Sonoma or later. The behavior now matches URLComponents and will
+      // automatically percent encode characters. Must not apply percent encoding to the string
+      // passed to the URL initializer if the new new behavior is active.
+      var performPercentEncoding = true
+#if compiler(>=5.9)
+      if #available(macOS 14, *) {
+        performPercentEncoding = false
+      }
+#endif
+      var pstr = str
+      if performPercentEncoding {
+        guard let encoded = str.addingPercentEncoding(withAllowedCharacters: .urlAllowed) else {
+          print("Cannot add percent encoding for \(str)")
+          return
+        }
+        pstr = encoded
+      }
+      guard let url = URL(string: pstr) else {
+        Logger.log("Cannot parse url for \(pstr)", level: .error, subsystem: subsystem)
         return
       }
       openURL(url)
@@ -541,6 +565,7 @@ class PlayerCore: NSObject {
 
     miniPlayer.updateTitle()
     syncUITime()
+    syncUI(.playButton)
     // When not in the mini player the timer that updates the OSC may be stopped to conserve energy
     // when the OSC is hidden. As the OSC is always displayed in the mini player ensure the timer is
     // running if media is playing.
@@ -566,7 +591,7 @@ class PlayerCore: NSObject {
     miniPlayer.videoWrapperView.addSubview(videoView, positioned: .below, relativeTo: nil)
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": videoView])
 
-    let (width, height) = originalVideoSize
+    let (width, height) = videoSizeForDisplay
     let aspect = (width == 0 || height == 0) ? 1 : CGFloat(width) / CGFloat(height)
     miniPlayer.updateVideoViewAspectConstraint(withAspect: aspect)
     miniPlayer.window?.layoutIfNeeded()
@@ -647,7 +672,18 @@ class PlayerCore: NSObject {
     info.isPaused ? resume() : pause()
   }
 
+  /// Pause playback.
+  ///
+  /// - Important: Setting the `pause` property will cause `mpv` to emit a `MPV_EVENT_PROPERTY_CHANGE` event. The
+  ///     event will still be emitted even if the `mpv` core is idle. If the setting `Pause when machine goes to sleep` is
+  ///     enabled then `PlayerWindowController` will call this method in response to a
+  ///     `NSWorkspace.willSleepNotification`. That happens even if the window is closed and the player is idle. In
+  ///     response the event handler in `MPVController` will call `VideoView.displayIdle`. The suspicion is that calling this
+  ///     method results in a call to `CVDisplayLinkCreateWithActiveCGDisplays` which fails because the display is
+  ///     asleep. Thus `setFlag` **must not** be called if the `mpv` core is idle or stopping. See issue
+  ///     [#4520](https://github.com/iina/iina/issues/4520)
   func pause() {
+    guard !info.isIdle, !isStopping, !isStopped, !isShuttingDown, !isShutdown else { return }
     mpv.setFlag(MPVOption.PlaybackControl.pause, true)
   }
 
@@ -772,6 +808,9 @@ class PlayerCore: NSObject {
     guard let lastScreenshotURL = Utility.getLatestScreenshot(from: imageFolder) else { return }
     guard let image = NSImage(contentsOf: lastScreenshotURL) else {
       self.sendOSD(.screenshot)
+      if !saveToFile {
+        try? FileManager.default.removeItem(at: lastScreenshotURL)
+      }
       return
     }
     if saveToClipboard {
@@ -780,6 +819,9 @@ class PlayerCore: NSObject {
     }
     guard Preference.bool(for: .screenshotShowPreview) else {
       self.sendOSD(.screenshot)
+      if !saveToFile {
+        try? FileManager.default.removeItem(at: lastScreenshotURL)
+      }
       return
     }
 
@@ -837,17 +879,56 @@ class PlayerCore: NSObject {
     Logger.log("Synchronized info.abLoopStatus \(info.abLoopStatus)")
   }
 
-  func toggleFileLoop() {
-    let isLoop = mpv.getString(MPVOption.PlaybackControl.loopFile) == "inf"
-    mpv.setString(MPVOption.PlaybackControl.loopFile, isLoop ? "no" : "inf")
-    sendOSD(.fileLoop(!isLoop))
+  func togglePlaylistLoop() {
+    let loopMode = getLoopMode()
+    if loopMode == .playlist {
+      setLoopMode(.off)
+    } else {
+      setLoopMode(.playlist)
+    }
   }
 
-  func togglePlaylistLoop() {
-    let loopStatus = mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
-    let isLoop = (loopStatus == "inf" || loopStatus == "force")
-    mpv.setString(MPVOption.PlaybackControl.loopPlaylist, isLoop ? "no" : "inf")
-    sendOSD(.playlistLoop(!isLoop))
+  func toggleFileLoop() {
+    let loopMode = getLoopMode()
+    if loopMode == .file {
+      setLoopMode(.off)
+    } else {
+      setLoopMode(.file)
+    }
+  }
+
+  func getLoopMode() -> LoopMode {
+    let loopFileStatus = mpv.getString(MPVOption.PlaybackControl.loopFile)
+    guard loopFileStatus != "inf" else { return .file }
+    if let loopFileStatus = loopFileStatus, let count = Int(loopFileStatus), count != 0 {
+      return .file
+    }
+    let loopPlaylistStatus = mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
+    guard loopPlaylistStatus != "inf", loopPlaylistStatus != "force" else { return .playlist }
+    guard let loopPlaylistStatus = loopPlaylistStatus, let count = Int(loopPlaylistStatus) else {
+      return .off
+    }
+    return count == 0 ? .off : .playlist
+  }
+
+  func setLoopMode(_ newMode: LoopMode) {
+    switch newMode {
+    case .playlist:
+      mpv.setString(MPVOption.PlaybackControl.loopPlaylist, "inf")
+      mpv.setString(MPVOption.PlaybackControl.loopFile, "no")
+      sendOSD(.playlistLoop)
+    case .file:
+      mpv.setString(MPVOption.PlaybackControl.loopFile, "inf")
+      sendOSD(.fileLoop)
+    case .off:
+      mpv.setString(MPVOption.PlaybackControl.loopPlaylist, "no")
+      mpv.setString(MPVOption.PlaybackControl.loopFile, "no")
+      sendOSD(.noLoop)
+    }
+  }
+
+  func nextLoopMode() {
+    setLoopMode(getLoopMode().next())
   }
 
   func toggleShuffle() {
@@ -1079,6 +1160,7 @@ class PlayerCore: NSObject {
   }
 
   func playlistRemove(_ indexSet: IndexSet) {
+    guard !indexSet.isEmpty else { return }
     var count = 0
     for i in indexSet {
       _playlistRemove(i - count)
@@ -1108,12 +1190,19 @@ class PlayerCore: NSObject {
     mpv.command(nextMedia ? .playlistNext : .playlistPrev, checkError: false)
   }
 
-  func playChapter(_ pos: Int) {
-    let chapter = info.chapters[pos]
+  @discardableResult
+  func playChapter(_ pos: Int) -> MPVChapter? {
+    Logger.log("Seeking to chapter \(pos)", level: .verbose, subsystem: subsystem)
+    let chapters = info.chapters
+    guard pos < chapters.count else {
+      return nil
+    }
+    let chapter = chapters[pos]
     mpv.command(.seek, args: ["\(chapter.time.second)", "absolute"])
     resume()
     // need to update time pos
     syncUITime()
+    return chapter
   }
 
   func setCrop(fromString str: String) {
@@ -1430,6 +1519,42 @@ class PlayerCore: NSObject {
     return GeometryDef.parse(geometry)
   }
 
+  /// Uses an mpv `on_before_start_file` hook to honor mpv's `shuffle` command via IINA CLI.
+  ///
+  /// There is currently no way to remove an mpv hook once it has been added, so to minimize potential impact and/or side effects
+  /// when not in use:
+  /// 1. Only add the mpv hook if `--mpv-shuffle` (or equivalent) is specified. Because this decision only happens at launch,
+  /// there is no risk of adding the hook more than once per player.
+  /// 2. Use `shufflePending` to decide if it needs to run again. Set to `false` after use, and check its value as early as possible.
+  func addShufflePlaylistHook() {
+    $shufflePending.withLock{ $0 = true }
+
+    func callback(next: @escaping () -> Void) {
+      var mustShuffle = false
+      $shufflePending.withLock{ shufflePending in
+        if shufflePending {
+          mustShuffle = true
+          shufflePending = false
+        }
+      }
+
+      guard mustShuffle else {
+        Logger.log("Triggered on_before_start_file hook, but no shuffle needed", level: .verbose, subsystem: subsystem)
+        next()
+        return
+      }
+
+      DispatchQueue.main.async { [self] in
+        Logger.log("Running on_before_start_file hook: shuffling playlist", subsystem: subsystem)
+        mpv.command(.playlistShuffle)
+        /// will cancel this file load sequence (so `fileLoaded` will not be called), then will start loading item at index 0
+        mpv.command(.playlistPlayIndex, args: ["0"])
+        next()
+      }
+    }
+
+    mpv.addHook(MPVHook.onBeforeStartFile, hook: MPVHookValue(withBlock: callback))
+  }
 
   // MARK: - Listeners
 
@@ -1544,7 +1669,7 @@ class PlayerCore: NSObject {
         HistoryController.shared.add(url, duration: duration.second)
       }
       if Preference.bool(for: .recordRecentFiles) && Preference.bool(for: .trackAllFilesInRecentOpenMenu) {
-        NSDocumentController.shared.noteNewRecentDocumentURL(url)
+        DispatchQueue.main.sync { (NSApp.delegate as! AppDelegate).noteNewRecentDocumentURL(url) }
       }
 
     }
@@ -1768,8 +1893,7 @@ class PlayerCore: NSObject {
     case muteButton
     case chapterList
     case playlist
-    case playlistLoop
-//    case fileLoop
+    case loop
     case additionalInfo
   }
 
@@ -1787,8 +1911,8 @@ class PlayerCore: NSObject {
   }
 
   func syncUI(_ option: SyncUIOption) {
-    // if window not loaded, ignore
-    guard mainWindow.loaded else { return }
+    // If window is not loaded or stopping or shutting down, ignore.
+    guard mainWindow.loaded, !isStopping, !isStopped, !isShuttingDown, !isShutdown else { return }
     // This is too noisy and making verbose logs unreadable. Please uncomment when debugging syncing releated issues.
     // Logger.log("Syncing UI \(option)", level: .verbose, subsystem: subsystem)
 
@@ -1861,6 +1985,7 @@ class PlayerCore: NSObject {
       DispatchQueue.main.async {
         // this should avoid sending reload when table view is not ready
         if self.isInMiniPlayer ? self.miniPlayer.isPlaylistVisible : self.mainWindow.sideBarStatus == .playlist {
+          Logger.log("Syncing UI: chapterList", level: .verbose)
           self.mainWindow.playlistView.chapterTableView.reloadData()
         }
       }
@@ -1872,7 +1997,7 @@ class PlayerCore: NSObject {
         }
       }
 
-    case .playlistLoop:
+    case .loop:
       DispatchQueue.main.async {
         self.mainWindow.playlistView.updateLoopBtnStatus()
       }
@@ -2051,17 +2176,20 @@ class PlayerCore: NSObject {
   }
 
   func getChapters() {
-    info.chapters.removeAll()
+    Logger.log("Reloading chapter list", level: .verbose, subsystem: subsystem)
+    var chapters: [MPVChapter] = []
     let chapterCount = mpv.getInt(MPVProperty.chapterListCount)
-    if chapterCount == 0 {
-      return
-    }
     for index in 0..<chapterCount {
       let chapter = MPVChapter(title:     mpv.getString(MPVProperty.chapterListNTitle(index)),
                                startTime: mpv.getDouble(MPVProperty.chapterListNTime(index)),
                                index:     index)
-      info.chapters.append(chapter)
+      chapters.append(chapter)
     }
+    // Instead of modifying existing list, overwrite reference to prev list.
+    // This will avoid concurrent modification crashes
+    info.chapters = chapters
+
+    syncUI(.chapterList)
   }
 
   // MARK: - Notifications

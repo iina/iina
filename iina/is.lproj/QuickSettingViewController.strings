@@ -5,7 +5,7 @@
 "1VY-EN-1mi.title" = "s";
 
 /* Class = "NSTextFieldCell"; title = "Width:"; ObjectID = "22j-ra-GAY"; */
-"22j-ra-GAY.title" = "Width:";
+"22j-ra-GAY.title" = "Breidd:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "3kI-6i-ujt"; */
 "3kI-6i-ujt.title" = "Color:";
@@ -74,7 +74,7 @@
 "Rbb-wh-cLc.ibShadowedLabels[0]" = "Search Online…";
 
 /* Class = "NSTextFieldCell"; title = "Saturation:"; ObjectID = "Rky-lo-Buu"; */
-"Rky-lo-Buu.title" = "Saturation:";
+"Rky-lo-Buu.title" = "Mettun:";
 
 /* Class = "NSTextFieldCell"; title = "Video track:"; ObjectID = "VzC-tM-KT7"; */
 "VzC-tM-KT7.title" = "Video track:";
@@ -110,13 +110,13 @@
 "cMu-YF-riv.ibShadowedLabels[0]" = "Default";
 
 /* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "cdR-uY-riN"; */
-"cdR-uY-riN.title" = "Brightness:";
+"cdR-uY-riN.title" = "Birtustig:";
 
 /* Class = "NSButtonCell"; title = "AUDIO"; ObjectID = "cpm-5o-a2c"; */
 "cpm-5o-a2c.title" = "AUDIO";
 
 /* Class = "NSTextFieldCell"; title = "Contrast:"; ObjectID = "eDl-Si-LSa"; */
-"eDl-Si-LSa.title" = "Contrast:";
+"eDl-Si-LSa.title" = "Skerpa:";
 
 /* Class = "NSTabViewItem"; label = "Plugin"; ObjectID = "eE3-9i-hpU"; */
 "eE3-9i-hpU.label" = "Plugin";
@@ -125,7 +125,7 @@
 "eLh-fu-pMj.title" = "Hue:";
 
 /* Class = "NSTextFieldCell"; title = "Subtitle:"; ObjectID = "eXZ-HN-qL4"; */
-"eXZ-HN-qL4.title" = "Subtitle:";
+"eXZ-HN-qL4.title" = "Texti:";
 
 /* Class = "NSTextFieldCell"; title = "FONT"; ObjectID = "g6B-DC-lJ0"; */
 "g6B-DC-lJ0.title" = "FONT";
@@ -134,7 +134,7 @@
 "ghy-e7-7Of.title" = "Font…";
 
 /* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "iS4-Zr-9Ig"; */
-"iS4-Zr-9Ig.title" = "Equalizer";
+"iS4-Zr-9Ig.title" = "Equalizer:";
 
 /* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[0] = "None"; ObjectID = "iuN-rN-jT7"; */
 "iuN-rN-jT7.ibShadowedLabels[0]" = "None";
@@ -143,7 +143,7 @@
 "iuN-rN-jT7.ibShadowedLabels[6]" = "Custom…";
 
 /* Class = "NSTabViewItem"; label = "Subtitle"; ObjectID = "jND-MZ-sKB"; */
-"jND-MZ-sKB.label" = "Subtitle";
+"jND-MZ-sKB.label" = "Texti";
 
 /* Class = "NSTextFieldCell"; title = "0 dB"; ObjectID = "lBn-YS-jL7"; */
 "lBn-YS-jL7.title" = "0 dB";
@@ -155,7 +155,7 @@
 "ldQ-YL-IEp.title" = "1x";
 
 /* Class = "NSTextFieldCell"; title = "Crop:"; ObjectID = "m9e-IB-IDJ"; */
-"m9e-IB-IDJ.title" = "Crop:";
+"m9e-IB-IDJ.title" = "Klippa:";
 
 /* Class = "NSMenuItem"; title = "2.5"; ObjectID = "nPr-QJ-Ty3"; */
 "nPr-QJ-Ty3.title" = "2.5";
@@ -173,7 +173,7 @@
 "t03-36-Zge.title" = "Position:";
 
 /* Class = "NSTextFieldCell"; title = "Rotation:"; ObjectID = "to3-rc-Agv"; */
-"to3-rc-Agv.title" = "Rotation:";
+"to3-rc-Agv.title" = "Snúa:";
 
 /* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "uCX-EC-jXM"; */
 "uCX-EC-jXM.title" = "-5s";
@@ -197,4 +197,4 @@
 "xfX-wr-DTJ.title" = "+5s";
 
 /* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "zcD-Tg-7Oi"; */
-"zcD-Tg-7Oi.title" = "Equalizer";
+"zcD-Tg-7Oi.title" = "Equalizer:";

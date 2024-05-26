@@ -44,12 +44,12 @@
 
 "lut3d" = "ลัส 3 มิติ";
 "lut3d.file" = "ชื่อโฟลเดอร์ (ท่านสามารถใช้ ลาก วาง ไฟล์ในกล้องอินพุท)";
-"lut3d.interp" = "Interpolation mode";
+"lut3d.interp" = "";
 
-"custom_mpv" = "Custom (mpv)";
+"custom_mpv" = "";
 "custom_mpv.name" = "Filter name";
 "custom_mpv.string" = "Filter value";
 
 "custom_ffmpeg" = "Custom (FFmpeg)";
 "custom_ffmpeg.name" = "Filter name";
-"custom_ffmpeg.string" = "Filter value";
+"custom_ffmpeg.string" = "Filter name";

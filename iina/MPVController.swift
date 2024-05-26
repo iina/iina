@@ -24,7 +24,6 @@ fileprivate let no_str = "no"
  "trace" - extremely noisy
  */
 fileprivate let MPVLogLevel = "warn"
-fileprivate let mpvSubsystem = Logger.makeSubsystem("mpv")
 fileprivate let logLevelMap: [String: Logger.Level] = ["fatal": .error,
                                                        "error": .error,
                                                        "warn": .warning,
@@ -84,6 +83,17 @@ class MPVController: NSObject {
     static let screenshot: UInt64 = 1000000
   }
 
+  /// Version number of the libass library.
+  ///
+  /// The mpv libass version property returns an integer encoded as a hex binary-coded decimal.
+  var libassVersion: String {
+    let version = getInt(MPVProperty.libassVersion)
+    let major = String(version >> 28 & 0xF, radix: 16)
+    let minor = String(version >> 20 & 0xFF, radix: 16)
+    let patch = String(version >> 12 & 0xFF, radix: 16)
+    return "\(major).\(minor).\(patch)"
+  }
+
   // The mpv_handle
   var mpv: OpaquePointer!
   var mpvRenderContext: OpaquePointer?
@@ -91,7 +101,7 @@ class MPVController: NSObject {
   private var openGLContext: CGLContextObj! = nil
 
   var mpvClientName: UnsafePointer<CChar>!
-  var mpvVersion: String!
+  var mpvVersion: String { getString(MPVProperty.mpvVersion)! }
 
   lazy var queue = DispatchQueue(label: "com.colliderli.iina.controller", qos: .userInitiated)
 
@@ -118,6 +128,7 @@ class MPVController: NSObject {
     MPVOption.Subtitles.secondarySid: MPV_FORMAT_INT64,
     MPVOption.PlaybackControl.pause: MPV_FORMAT_FLAG,
     MPVOption.PlaybackControl.loopPlaylist: MPV_FORMAT_STRING,
+    MPVOption.PlaybackControl.loopFile: MPV_FORMAT_STRING,
     MPVProperty.chapter: MPV_FORMAT_INT64,
     MPVOption.Video.deinterlace: MPV_FORMAT_FLAG,
     MPVOption.Video.hwdec: MPV_FORMAT_STRING,
@@ -144,8 +155,15 @@ class MPVController: NSObject {
     MPVProperty.idleActive: MPV_FORMAT_FLAG
   ]
 
-  init(playerCore: PlayerCore) {
+  private let subsystem: Logger.Subsystem
+
+  /// Creates a `MPVController` object.
+  /// - Parameters:
+  ///   - playerCore: The player this `MPVController` will be associated with.
+  ///   - playerNumber: Number identifying the player, for use in this controller's logger subsystem.
+  init(playerCore: PlayerCore, playerNumber: Int) {
     self.player = playerCore
+    subsystem = Logger.makeSubsystem("mpv\(playerNumber)")
     super.init()
   }
 
@@ -164,12 +182,12 @@ class MPVController: NSObject {
     var sysinfo = utsname()
     let result = uname(&sysinfo)
     guard result == EXIT_SUCCESS else {
-      Logger.log("uname failed returning \(result)", level: .error)
+      log("uname failed returning \(result)", level: .error)
       return false
     }
     let data = Data(bytes: &sysinfo.machine, count: Int(_SYS_NAMELEN))
     guard let machine = String(bytes: data, encoding: .ascii) else {
-      Logger.log("Failed to construct string for sysinfo.machine", level: .error)
+      log("Failed to construct string for sysinfo.machine", level: .error)
       return false
     }
     return machine.starts(with: "arm64")
@@ -186,7 +204,7 @@ class MPVController: NSObject {
   private func applyHardwareAccelerationWorkaround() {
     // The problem is not reproducible under Apple Silicon.
     guard !runningOnAppleSilicon() else {
-      Logger.log("Running on Apple Silicon, not applying FFmpeg 9599 workaround")
+      log("Running on Apple Silicon, not applying FFmpeg 9599 workaround")
       return
     }
     // Do not apply the workaround if the user has configured a value for the hwdec-codecs option in
@@ -198,7 +216,7 @@ class MPVController: NSObject {
         let userOptions = Preference.value(for: .userOptions) as? [[String]] {
       for op in userOptions {
         guard op[0] != MPVOption.Video.hwdecCodecs else {
-          Logger.log("""
+          log("""
 Option \(MPVOption.Video.hwdecCodecs) has been set in advanced settings, \
 not applying FFmpeg 9599 workaround
 """)
@@ -207,10 +225,8 @@ not applying FFmpeg 9599 workaround
       }
     }
     // Apply the workaround.
-    Logger.log("Disabling hardware acceleration for VP9 encoded videos to workaround FFmpeg 9599")
-    let value = "h264,vc1,hevc,vp8,av1,prores"
-    mpv_set_option_string(mpv, MPVOption.Video.hwdecCodecs, value)
-    Logger.log("Option \(MPVOption.Video.hwdecCodecs) has been set to: \(value)")
+    log("Disabling hardware acceleration for VP9 encoded videos to workaround FFmpeg 9599")
+    setOptionString(MPVOption.Video.hwdecCodecs, "h264,vc1,hevc,vp8,av1,prores")
   }
 
   /**
@@ -236,7 +252,7 @@ not applying FFmpeg 9599 workaround
     // disable internal OSD
     let useMpvOsd = Preference.bool(for: .enableAdvancedSettings) && Preference.bool(for: .useMpvOsd)
     if !useMpvOsd {
-      chkErr(mpv_set_option_string(mpv, MPVOption.OSD.osdLevel, "0"))
+      chkErr(setOptionString(MPVOption.OSD.osdLevel, "0"))
     } else {
       player.displayOSD = false
     }
@@ -244,7 +260,7 @@ not applying FFmpeg 9599 workaround
     // log
     if Logger.enabled {
       let path = Logger.logDirectory.appendingPathComponent("mpv.log").path
-      chkErr(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.logFile, path))
+      chkErr(setOptionString(MPVOption.ProgramBehavior.logFile, path))
     }
 
     applyHardwareAccelerationWorkaround()
@@ -270,7 +286,7 @@ not applying FFmpeg 9599 workaround
 
     // Disable mpv's media key system as it now uses the MediaPlayer Framework.
     // Dropped media key support in 10.11 and 10.12.
-    chkErr(mpv_set_option_string(mpv, MPVOption.Input.inputMediaKeys, no_str))
+    chkErr(setOptionString(MPVOption.Input.inputMediaKeys, no_str))
 
     setUserOption(PK.keepOpenOnFileEnd, type: .other, forName: MPVOption.Window.keepOpen) { key in
       let keepOpen = Preference.bool(for: PK.keepOpenOnFileEnd)
@@ -284,7 +300,7 @@ not applying FFmpeg 9599 workaround
       return keepOpenPl ? "always" : (keepOpen ? "yes" : "no")
     }
 
-    chkErr(mpv_set_option_string(mpv, "watch-later-directory", Utility.watchLaterURL.path))
+    chkErr(setOptionString("watch-later-directory", Utility.watchLaterURL.path))
     setUserOption(PK.resumeLastPosition, type: .bool, forName: MPVOption.WatchLater.savePositionOnQuit)
     setUserOption(PK.resumeLastPosition, type: .bool, forName: "resume-playback")
 
@@ -313,8 +329,8 @@ not applying FFmpeg 9599 workaround
 
     // - Sub
 
-    chkErr(mpv_set_option_string(mpv, MPVOption.Subtitles.subAuto, "no"))
-    chkErr(mpv_set_option_string(mpv, MPVOption.Subtitles.subCodepage, Preference.string(for: .defaultEncoding)))
+    chkErr(setOptionString(MPVOption.Subtitles.subAuto, "no"))
+    chkErr(setOptionalOptionString(MPVOption.Subtitles.subCodepage, Preference.string(for: .defaultEncoding)))
     player.info.subEncoding = Preference.string(for: .defaultEncoding)
 
     let subOverrideHandler: OptionObserverInfo.Transformer = { key in
@@ -327,7 +343,7 @@ not applying FFmpeg 9599 workaround
     setUserOption(PK.subOverrideLevel, type: .other, forName: MPVOption.Subtitles.subAssOverride, transformer: subOverrideHandler)
 
     setUserOption(PK.subTextFont, type: .string, forName: MPVOption.Subtitles.subFont)
-    setUserOption(PK.subTextSize, type: .int, forName: MPVOption.Subtitles.subFontSize)
+    setUserOption(PK.subTextSize, type: .float, forName: MPVOption.Subtitles.subFontSize)
 
     setUserOption(PK.subTextColor, type: .color, forName: MPVOption.Subtitles.subColor)
     setUserOption(PK.subBgColor, type: .color, forName: MPVOption.Subtitles.subBackColor)
@@ -338,10 +354,10 @@ not applying FFmpeg 9599 workaround
     setUserOption(PK.subBlur, type: .float, forName: MPVOption.Subtitles.subBlur)
     setUserOption(PK.subSpacing, type: .float, forName: MPVOption.Subtitles.subSpacing)
 
-    setUserOption(PK.subBorderSize, type: .int, forName: MPVOption.Subtitles.subBorderSize)
+    setUserOption(PK.subBorderSize, type: .float, forName: MPVOption.Subtitles.subBorderSize)
     setUserOption(PK.subBorderColor, type: .color, forName: MPVOption.Subtitles.subBorderColor)
 
-    setUserOption(PK.subShadowSize, type: .int, forName: MPVOption.Subtitles.subShadowOffset)
+    setUserOption(PK.subShadowSize, type: .float, forName: MPVOption.Subtitles.subShadowOffset)
     setUserOption(PK.subShadowColor, type: .color, forName: MPVOption.Subtitles.subShadowColor)
 
     setUserOption(PK.subAlignX, type: .other, forName: MPVOption.Subtitles.subAlignX) { key in
@@ -389,7 +405,7 @@ not applying FFmpeg 9599 workaround
 
     setUserOption(PK.ytdlEnabled, type: .bool, forName: MPVOption.ProgramBehavior.ytdl)
     setUserOption(PK.ytdlRawOptions, type: .string, forName: MPVOption.ProgramBehavior.ytdlRawOptions)
-    chkErr(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.resetOnNextFile,
+    chkErr(setOptionString(MPVOption.ProgramBehavior.resetOnNextFile,
             "\(MPVOption.PlaybackControl.abLoopA),\(MPVOption.PlaybackControl.abLoopB)"))
 
     // Set user defined conf dir.
@@ -397,8 +413,8 @@ not applying FFmpeg 9599 workaround
        Preference.bool(for: .useUserDefinedConfDir),
        var userConfDir = Preference.string(for: .userDefinedConfDir) {
       userConfDir = NSString(string: userConfDir).standardizingPath
-      mpv_set_option_string(mpv, "config", "yes")
-      let status = mpv_set_option_string(mpv, MPVOption.ProgramBehavior.configDir, userConfDir)
+      setOptionString("config", "yes")
+      let status = setOptionString(MPVOption.ProgramBehavior.configDir, userConfDir)
       if status < 0 {
         Utility.showAlert("extra_option.config_folder", arguments: [userConfDir])
       }
@@ -407,12 +423,16 @@ not applying FFmpeg 9599 workaround
     // Set user defined options.
     if Preference.bool(for: .enableAdvancedSettings) {
       if let userOptions = Preference.value(for: .userOptions) as? [[String]] {
-        userOptions.forEach { op in
-          let status = mpv_set_option_string(mpv, op[0], op[1])
-          if status < 0 {
-            Utility.showAlert("extra_option.error", arguments:
-              [op[0], op[1], status])
+        if !userOptions.isEmpty {
+          log("Setting \(userOptions.count) user configured mpv option values")
+          userOptions.forEach { op in
+            let status = setOptionString(op[0], op[1])
+            if status < 0 {
+              Utility.showAlert("extra_option.error", arguments:
+                                  [op[0], op[1], status])
+            }
           }
+          log("Set user configured mpv option values")
         }
       } else {
         Utility.showAlert("extra_option.cannot_read")
@@ -429,7 +449,7 @@ not applying FFmpeg 9599 workaround
         inputConfPath = currentConfigFilePath
       }
     }
-    chkErr(mpv_set_option_string(mpv, MPVOption.Input.inputConf, inputConfPath))
+    chkErr(setOptionalOptionString(MPVOption.Input.inputConf, inputConfPath))
 
     // Receive log messages at warn level.
     chkErr(mpv_request_log_messages(mpv, MPVLogLevel))
@@ -453,12 +473,9 @@ not applying FFmpeg 9599 workaround
 
     // Set options that can be override by user's config. mpv will log user config when initialize,
     // so we put them here.
-    chkErr(mpv_set_property_string(mpv, MPVOption.Video.vo, "libmpv"))
-    chkErr(mpv_set_property_string(mpv, MPVOption.Window.keepaspect, "no"))
-    chkErr(mpv_set_property_string(mpv, MPVOption.Video.gpuHwdecInterop, "auto"))
-
-    // get version
-    mpvVersion = getString(MPVProperty.mpvVersion)
+    chkErr(setString(MPVOption.Video.vo, "libmpv"))
+    chkErr(setString(MPVOption.Window.keepaspect, "no"))
+    chkErr(setString(MPVOption.Video.gpuHwdecInterop, "auto"))
   }
 
   func mpvInitRendering() {
@@ -476,7 +493,7 @@ not applying FFmpeg 9599 workaround
         // mpv_render_param(type: MPV_RENDER_PARAM_ADVANCED_CONTROL, data: &advanced),
         mpv_render_param()
       ]
-      mpv_render_context_create(&mpvRenderContext, mpv, &params)
+      chkErr(mpv_render_context_create(&mpvRenderContext, mpv, &params))
       openGLContext = CGLGetCurrentContext()
       mpv_render_context_set_update_callback(mpvRenderContext!, mpvUpdateCallback, mutableRawPointerOf(obj: player.mainWindow.videoView.videoLayer))
     }
@@ -560,6 +577,7 @@ not applying FFmpeg 9599 workaround
   // Send arbitrary mpv command.
   func command(_ command: MPVCommand, args: [String?] = [], checkError: Bool = true, returnValueCallback: ((Int32) -> Void)? = nil) {
     guard mpv != nil else { return }
+    log("Run command: \(command.rawValue) \(args.compactMap{$0}.joined(separator: " "))")
     var cargs = makeCArgs(command, args).map { $0.flatMap { UnsafePointer<CChar>(strdup($0)) } }
     defer {
       for ptr in cargs {
@@ -577,11 +595,13 @@ not applying FFmpeg 9599 workaround
   }
 
   func command(rawString: String) -> Int32 {
+    log("Run command: \(rawString)")
     return mpv_command_string(mpv, rawString)
   }
 
   func asyncCommand(_ command: MPVCommand, args: [String?] = [], checkError: Bool = true, replyUserdata: UInt64) {
     guard mpv != nil else { return }
+    log("Asynchronously run command: \(command.rawValue) \(args.compactMap{$0}.joined(separator: " "))")
     var cargs = makeCArgs(command, args).map { $0.flatMap { UnsafePointer<CChar>(strdup($0)) } }
     defer {
       for ptr in cargs {
@@ -602,16 +622,19 @@ not applying FFmpeg 9599 workaround
 
   // Set property
   func setFlag(_ name: String, _ flag: Bool) {
+    log("Set property: \(name)=\(flag)")
     var data: Int = flag ? 1 : 0
     mpv_set_property(mpv, name, MPV_FORMAT_FLAG, &data)
   }
 
   func setInt(_ name: String, _ value: Int) {
+    log("Set property: \(name)=\(value)")
     var data = Int64(value)
     mpv_set_property(mpv, name, MPV_FORMAT_INT64, &data)
   }
 
   func setDouble(_ name: String, _ value: Double) {
+    log("Set property: \(name)=\(value)")
     var data = value
     mpv_set_property(mpv, name, MPV_FORMAT_DOUBLE, &data)
   }
@@ -631,8 +654,10 @@ not applying FFmpeg 9599 workaround
     mpv_set_property_async(mpv, 0, name, MPV_FORMAT_DOUBLE, &data)
   }
 
-  func setString(_ name: String, _ value: String) {
-    mpv_set_property_string(mpv, name, value)
+  @discardableResult
+  func setString(_ name: String, _ value: String) -> Int32 {
+    log("Set property: \(name)=\(value)")
+    return mpv_set_property_string(mpv, name, value)
   }
 
   func getInt(_ name: String) -> Int {
@@ -726,8 +751,8 @@ not applying FFmpeg 9599 workaround
     // it is unlikely in practice that this method will be called with an invalid index, but we will
     // validate the index nonetheless to insure this code does not trigger a crash.
     guard index < oldList.num else {
-      Logger.log("Found \(oldList.num) \(name) filters, index of filter to remove (\(index)) is invalid",
-                 level: .error)
+      log("Found \(oldList.num) \(name) filters, index of filter to remove (\(index)) is invalid",
+          level: .error)
       return false
     }
 
@@ -770,6 +795,7 @@ not applying FFmpeg 9599 workaround
     newNode.u.list = newListPtr
 
     // Set the list of filters using the new node that leaves out the filter to be removed.
+    log("Set property: \(name)=<a mpv node>")
     mpv_set_property(mpv, name, MPV_FORMAT_NODE, &newNode)
     return true
   }
@@ -799,9 +825,10 @@ not applying FFmpeg 9599 workaround
 
   func setNode(_ name: String, _ value: Any) {
     guard var node = try? MPVNode.create(value) else {
-      Logger.log("setNode: cannot encode value for \(name)", level: .error)
+      log("setNode: cannot encode value for \(name)", level: .error)
       return
     }
+    log("Set property: \(name)=<a mpv node>")
     mpv_set_property(mpv, name, MPV_FORMAT_NODE, &node)
     MPVNode.free(node)
   }
@@ -817,7 +844,7 @@ not applying FFmpeg 9599 workaround
   func removeHooks(withIdentifier id: String) {
     hooks.filter { (k, v) in v.isJavascript && v.id == id }.keys.forEach { hooks.removeValue(forKey: $0) }
   }
-
+  
   // MARK: - Events
 
   // Read event and handle it async
@@ -889,7 +916,7 @@ not applying FFmpeg 9599 workaround
       let prefix = String(cString: (msg?.pointee.prefix)!)
       let level = String(cString: (msg?.pointee.level)!)
       let text = String(cString: (msg?.pointee.text)!).trimmingCharacters(in: .newlines)
-      Logger.log("[\(prefix)] \(level): \(text)", level: logLevelMap[level] ?? .verbose, subsystem: mpvSubsystem)
+      log("[\(prefix)] \(level): \(text)", level: logLevelMap[level] ?? .verbose)
 
     case MPV_EVENT_HOOK:
       let userData = event.pointee.reply_userdata
@@ -982,7 +1009,7 @@ not applying FFmpeg 9599 workaround
         let code = event.pointee.error
         guard code >= 0 else {
           let error = String(cString: mpv_error_string(code))
-          Logger.log("Cannot take a screenshot, mpv API error: \(error), Return value: \(code)", level: .error)
+          log("Cannot take a screenshot, mpv API error: \(error), Return value: \(code)", level: .error)
           // Unfortunately the mpv API does not provide any details on the failure. The error
           // code returned maps to "error running command", so all the alert can report is
           // that we cannot take a screenshot.
@@ -1115,8 +1142,8 @@ not applying FFmpeg 9599 workaround
         player.sendOSD(.speed(data))
       }
 
-    case MPVOption.PlaybackControl.loopPlaylist:
-      player.syncUI(.playlistLoop)
+    case MPVOption.PlaybackControl.loopPlaylist, MPVOption.PlaybackControl.loopFile:
+      player.syncUI(.loop)
 
     case MPVOption.Video.deinterlace:
       needReloadQuickSettingsView = true
@@ -1343,6 +1370,29 @@ not applying FFmpeg 9599 workaround
 
   private var optionObservers: [String: [OptionObserverInfo]] = [:]
 
+  private func setOptionFloat(_ name: String, _ value: Float) -> Int32 {
+    log("Set option: \(name)=\(value)")
+    var data = Double(value)
+    return mpv_set_option(mpv, name, MPV_FORMAT_DOUBLE, &data)
+  }
+
+  private func setOptionInt(_ name: String, _ value: Int) -> Int32 {
+    log("Set option: \(name)=\(value)")
+    var data = Int64(value)
+    return mpv_set_option(mpv, name, MPV_FORMAT_INT64, &data)
+  }
+
+  @discardableResult
+  private func setOptionString(_ name: String, _ value: String) -> Int32 {
+    log("Set option: \(name)=\(value)")
+    return mpv_set_option_string(mpv, name, value)
+  }
+
+  private func setOptionalOptionString(_ name: String, _ value: String?) -> Int32 {
+    guard let value = value else { return 0 }
+    return setOptionString(name, value)
+  }
+
   private func setUserOption(_ key: Preference.Key, type: UserOptionType, forName name: String, sync: Bool = true, transformer: OptionObserverInfo.Transformer? = nil) {
     var code: Int32 = 0
 
@@ -1350,39 +1400,34 @@ not applying FFmpeg 9599 workaround
 
     switch type {
     case .int:
-      let value = Preference.integer(for: key)
-      var i = Int64(value)
-      code = mpv_set_option(mpv, name, MPV_FORMAT_INT64, &i)
+      code = setOptionInt(name, Preference.integer(for: key))
 
     case .float:
-      let value = Preference.float(for: key)
-      var d = Double(value)
-      code = mpv_set_option(mpv, name, MPV_FORMAT_DOUBLE, &d)
+      code = setOptionFloat(name, Preference.float(for: key))
 
     case .bool:
       let value = Preference.bool(for: key)
-      code = mpv_set_option_string(mpv, name, value ? yes_str : no_str)
+      code = setOptionString(name, value ? yes_str : no_str)
 
     case .string:
-      let value = Preference.string(for: key)
-      code = mpv_set_option_string(mpv, name, value)
+      code = setOptionalOptionString(name, Preference.string(for: key))
 
     case .color:
       let value = Preference.mpvColor(for: key)
-      code = mpv_set_option_string(mpv, name, value)
+      code = setOptionalOptionString(name, value)
       // Random error here (perhaps a Swift or mpv one), so set it twice
       // 「没有什么是 set 不了的；如果有，那就 set 两次」
       if code < 0 {
-        code = mpv_set_option_string(mpv, name, value)
+        code = setOptionalOptionString(name, value)
       }
 
     case .other:
       guard let tr = transformer else {
-        Logger.log("setUserOption: no transformer!", level: .error)
+        log("setUserOption: no transformer!", level: .error)
         return
       }
       if let value = tr(key) {
-        code = mpv_set_option_string(mpv, name, value)
+        code = setOptionString(name, value)
       } else {
         code = 0
       }
@@ -1433,7 +1478,7 @@ not applying FFmpeg 9599 workaround
 
       case .other:
         guard let tr = info.transformer else {
-          Logger.log("setUserOption: no transformer!", level: .error)
+          log("setUserOption: no transformer!", level: .error)
           return
         }
         if let value = tr(info.prefKey) {
@@ -1453,6 +1498,10 @@ not applying FFmpeg 9599 workaround
     DispatchQueue.main.async {
       Logger.fatal("mpv API error: \"\(String(cString: mpv_error_string(status)))\", Return value: \(status!).")
     }
+  }
+
+  private func log(_ message: String, level: Logger.Level = .debug) {
+    Logger.log(message, level: level, subsystem: subsystem)
   }
 }
 

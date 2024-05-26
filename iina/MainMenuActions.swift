@@ -28,7 +28,7 @@ class MainMenuActionHandler: NSResponder {
   }
 
   @objc func menuSavePlaylist(_ sender: NSMenuItem) {
-    Utility.quickSavePanel(title: "Save to playlist", types: ["m3u8"]) { (url) in
+    Utility.quickSavePanel(title: "Save to playlist", types: ["m3u8"], sheetWindow: player.currentWindow) { (url) in
       if url.isFileURL {
         var playlist = ""
         for item in self.player.info.playlist {
@@ -89,11 +89,15 @@ extension MainMenuActionHandler {
   }
 
   @objc func menuStep(_ sender: NSMenuItem) {
-    let seconds = Double(abs((sender.representedObject as? Int) ?? 5))
-    if sender.tag == 0 { // -> 5s
-      player.seek(relativeSecond: seconds, option: .relative)
-    } else if sender.tag == 1 { // <- 5s
-      player.seek(relativeSecond: -seconds, option: .relative)
+    if let args = sender.representedObject as? (Double, Preference.SeekOption) {
+      player.seek(relativeSecond: args.0, option: args.1)
+    } else {
+      let seconds = Double(abs((sender.representedObject as? Int) ?? 5))
+      if sender.tag == 0 { // -> 5s
+        player.seek(relativeSecond: seconds, option: Preference.SeekOption.defaultValue)
+      } else if sender.tag == 1 { // <- 5s
+        player.seek(relativeSecond: -seconds, option: Preference.SeekOption.defaultValue)
+      }
     }
   }
 
@@ -123,9 +127,9 @@ extension MainMenuActionHandler {
   }
 
   @objc func menuJumpTo(_ sender: NSMenuItem) {
-    Utility.quickPromptPanel("jump_to") { input in
+    Utility.quickPromptPanel("jump_to", inputValue: self.player.info.videoPosition?.stringRepresentationWithPrecision(3)) { input in
       if let vt = VideoTime(input) {
-        self.player.seek(absoluteSecond: Double(vt.second))
+        self.player.seek(absoluteSecond: vt.second)
       }
     }
   }
@@ -153,8 +157,12 @@ extension MainMenuActionHandler {
 
   @objc func menuChapterSwitch(_ sender: NSMenuItem) {
     let index = sender.tag
-    player.playChapter(index)
-    let chapter = player.info.chapters[index]
+    guard let chapter = player.playChapter(index) else {
+      Logger.log("Cannot switch to chapter \(index) because it was not found! Will ignore request and reload chapters instead",
+                 subsystem: player.subsystem)
+      player.getChapters()
+      return
+    }
     player.sendOSD(.chapter(chapter.title))
   }
 
@@ -277,6 +285,15 @@ extension MainMenuActionHandler {
 // MARK: - Audio
 
 extension MainMenuActionHandler {
+  @objc func menuLoadExternalAudio(_ sender: NSMenuItem) {
+    let currentDir = player.info.currentURL?.deletingLastPathComponent()
+    Utility.quickOpenPanel(title: "Load external audio file", chooseDir: false, dir: currentDir,
+                           sheetWindow: player.currentWindow,
+                           allowedFileTypes: Utility.playableFileExt) { url in
+      self.player.loadExternalAudioFile(url)
+    }
+  }
+
   @objc func menuChangeVolume(_ sender: NSMenuItem) {
     if let volumeDelta = sender.representedObject as? Int {
       let newVolume = Double(volumeDelta) + player.info.volume
@@ -316,7 +333,8 @@ extension MainMenuActionHandler {
 extension MainMenuActionHandler {
   @objc func menuLoadExternalSub(_ sender: NSMenuItem) {
     let currentDir = player.info.currentURL?.deletingLastPathComponent()
-    Utility.quickOpenPanel(title: "Load external subtitle file", chooseDir: false, dir: currentDir) { url in
+    Utility.quickOpenPanel(title: "Load external subtitle file", chooseDir: false, dir: currentDir,
+                           sheetWindow: player.currentWindow) { url in
       self.player.loadExternalSubFile(url, delay: true)
     }
   }
@@ -400,8 +418,8 @@ extension MainMenuActionHandler {
     }
     let subURL = URL(fileURLWithPath: path)
     let subFileName = subURL.lastPathComponent
-    Utility.quickSavePanel(title: NSLocalizedString("alert.sub.save_downloaded.title",
-         comment: "Save Downloaded Subtitle"), filename: subFileName) { (destURL) in
+    let windowTitle = NSLocalizedString("alert.sub.save_downloaded.title", comment: "Save Downloaded Subtitle")
+    Utility.quickSavePanel(title: windowTitle, filename: subFileName, sheetWindow: player.currentWindow) { (destURL) in
       do {
         // The Save panel checks to see if a file already exists and if so asks if it should be
         // replaced. The quickSavePanel would not have called this code if the user canceled, so if
@@ -430,6 +448,14 @@ extension MainMenuActionHandler {
     case 1: player.mpv.command(.cycle, args: ["audio"])
     case 2: player.mpv.command(.cycle, args: ["sub"])
     default: break
+    }
+  }
+
+  // MARK: - Plugin
+
+  @objc func reloadAllPlugins(_ sender: NSMenuItem) {
+    for plugin in JavascriptPlugin.plugins {
+      player.reloadPlugin(plugin, forced: true)
     }
   }
 }

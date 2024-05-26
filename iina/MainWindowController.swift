@@ -883,7 +883,7 @@ class MainWindowController: PlayerWindowController {
   /// This erroneous behavior has been reported to Apple as: "Regression in NSCursor.setHiddenUntilMouseMoves"
   /// Feedback number FB11963121
   private func workaroundCursorDefect() {
-    guard #available(macOS 11, *) else { return }
+    guard #available(macOS 11, *), animationState == .hidden else { return }
     NSCursor.setHiddenUntilMouseMoves(true)
   }
 
@@ -894,6 +894,7 @@ class MainWindowController: PlayerWindowController {
     workaroundCursorDefect()
     // do nothing if it's related to floating OSC
     guard !controlBarFloating.isDragging else { return }
+    var shouldCallSuper = true
     // record current mouse pos
     mousePosRelatedToWindow = event.locationInWindow
     // playlist resizing
@@ -901,7 +902,11 @@ class MainWindowController: PlayerWindowController {
       let sf = sideBarView.frame
       if NSPointInRect(mousePosRelatedToWindow!, NSMakeRect(sf.origin.x - 4, sf.origin.y, 4, sf.height)) {
         isResizingSidebar = true
+        shouldCallSuper = false
       }
+    }
+    if shouldCallSuper {
+      super.mouseDown(with: event)
     }
   }
 
@@ -929,6 +934,7 @@ class MainWindowController: PlayerWindowController {
           isDragging = true
         }
         window?.performDrag(with: event)
+        super.informPluginMouseDragged(with: event)
       }
     }
   }
@@ -988,6 +994,7 @@ class MainWindowController: PlayerWindowController {
   /// return to the view.`
   override func rightMouseDown(with event: NSEvent) {
     workaroundCursorDefect()
+    super.rightMouseDown(with: event)
   }
 
   override func rightMouseUp(with event: NSEvent) {
@@ -1001,7 +1008,7 @@ class MainWindowController: PlayerWindowController {
     case .fullscreen:
       toggleWindowFullScreen()
     case .hideOSC:
-      hideUI()
+      hideUIAndCursor()
     case .togglePIP:
       if #available(macOS 10.12, *) {
         menuTogglePIP(.dummy)
@@ -1049,8 +1056,7 @@ class MainWindowController: PlayerWindowController {
         timePreviewWhenSeek.isHidden = false
         thumbnailPeekView.isHidden = !player.info.thumbnailsReady
       }
-      let mousePos = playSlider.convert(event.locationInWindow, from: nil)
-      updateTimeLabel(mousePos.x, originalPos: event.locationInWindow)
+      refreshSeekTimeAndThumbnail(from: event)
     }
   }
 
@@ -1071,18 +1077,15 @@ class MainWindowController: PlayerWindowController {
       // slider
       isMouseInSlider = false
       timePreviewWhenSeek.isHidden = true
-      let mousePos = playSlider.convert(event.locationInWindow, from: nil)
-      updateTimeLabel(mousePos.x, originalPos: event.locationInWindow)
+      refreshSeekTimeAndThumbnail(from: event)
       thumbnailPeekView.isHidden = true
     }
   }
 
   override func mouseMoved(with event: NSEvent) {
     guard !isInInteractiveMode else { return }
-    let mousePos = playSlider.convert(event.locationInWindow, from: nil)
-    if isMouseInSlider {
-      updateTimeLabel(mousePos.x, originalPos: event.locationInWindow)
-    }
+
+    refreshSeekTimeAndThumbnail(from: event)
     if isMouseInWindow {
       showUI()
     }
@@ -2011,6 +2014,7 @@ class MainWindowController: PlayerWindowController {
     }) {
       if self.osdAnimationState == .willHide {
         self.osdAnimationState = .hidden
+        self.osdVisualEffectView.isHidden = true
         self.osdStackView.views(in: .bottom).forEach { self.osdStackView.removeView($0) }
       }
     }
@@ -2258,6 +2262,16 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
+  private func refreshSeekTimeAndThumbnail(from event: NSEvent) {
+    let isCoveredByOSD = !osdVisualEffectView.isHidden && isMouseEvent(event, inAnyOf: [osdVisualEffectView])
+    let isCoveredBySidebar = !sideBarView.isHidden && isMouseEvent(event, inAnyOf: [sideBarView])
+    if isMouseInSlider, !isCoveredByOSD, !isCoveredBySidebar {
+      updateTimeLabel(event.locationInWindow)
+    } else {
+      thumbnailPeekView.isHidden = true
+    }
+  }
+
   /// Determine if the thumbnail preview can be shown above the progress bar in the on screen controller..
   ///
   /// Normally the OSC's thumbnail preview is shown above the time preview. This is the preferred location. However the
@@ -2283,7 +2297,8 @@ class MainWindowController: PlayerWindowController {
   }
 
   /** Display time label when mouse over slider */
-  private func updateTimeLabel(_ mouseXPos: CGFloat, originalPos: NSPoint) {
+  private func updateTimeLabel(_ posInWindow: NSPoint) {
+    let mouseXPos = playSlider.convert(posInWindow, from: nil).x
     let timeLabelXPos = round(mouseXPos + playSlider.frame.origin.x - timePreviewWhenSeek.frame.width / 2)
     let timeLabelYPos = playSlider.frame.origin.y + playSlider.frame.height
     timePreviewWhenSeek.frame.origin = NSPoint(x: timeLabelXPos, y: timeLabelYPos)
@@ -2301,12 +2316,23 @@ class MainWindowController: PlayerWindowController {
       if player.info.thumbnailsReady, let image = player.info.getThumbnail(forSecond: previewTime.second)?.image {
         thumbnailPeekView.imageView.image = image.rotate(rotation)
         thumbnailPeekView.isHidden = false
-        let height = round(120 / thumbnailPeekView.imageView.image!.size.aspect)
+
+        // In some formats (like most of Japanese TV video formats), display aspect ratios (DAR) are different from the
+        // sample aspect ratio (SAR). A typical configuration is SAR 1440x1080i (4:3) w/ DAR 1920x1080 (16:9). Here we try
+        // to get the display aspect ratio from mpv to properly display the thumbnail.
+        let displayAspectRatio: CGFloat
+        if let width = player.info.displayWidth, let height = player.info.displayHeight {
+          displayAspectRatio = CGFloat(width) / CGFloat(height)
+        } else {
+          displayAspectRatio = thumbnailPeekView.imageView.image!.size.aspect
+        }
+
+        let height = round(120 / displayAspectRatio)
         let timePreviewFrameInWindow = timePreviewWhenSeek.superview!.convert(timePreviewWhenSeek.frame.origin, to: nil)
         let showAbove = canShowThumbnailAbove(timnePreviewYPos: timePreviewFrameInWindow.y, thumbnailHeight: height)
         let yPos = showAbove ? timePreviewFrameInWindow.y + timePreviewWhenSeek.frame.height : sliderFrameInWindow.y - height
         thumbnailPeekView.frame.size = NSSize(width: 120, height: height)
-        thumbnailPeekView.frame.origin = NSPoint(x: round(originalPos.x - thumbnailPeekView.frame.width / 2), y: yPos)
+        thumbnailPeekView.frame.origin = NSPoint(x: round(posInWindow.x - thumbnailPeekView.frame.width / 2), y: yPos)
       } else {
         thumbnailPeekView.isHidden = true
       }
@@ -2557,6 +2583,9 @@ class MainWindowController: PlayerWindowController {
   private func blackOutOtherMonitors() {
     screens = NSScreen.screens.filter { $0 != window?.screen }
 
+    for window in blackWindows {
+      window.orderOut(self)
+    }
     blackWindows = []
 
     for screen in screens {
@@ -2567,7 +2596,7 @@ class MainWindowController: PlayerWindowController {
       blackWindow.level = .iinaBlackScreen
 
       blackWindows.append(blackWindow)
-      blackWindow.makeKeyAndOrderFront(nil)
+      blackWindow.orderFront(self)
     }
   }
 
@@ -2621,6 +2650,13 @@ class MainWindowController: PlayerWindowController {
       leftArrowButton.image = #imageLiteral(resourceName: "speedl")
       rightArrowButton.image = #imageLiteral(resourceName: "speed")
     }
+  }
+
+  override func updateVolume() {
+    guard loaded else { return }
+    super.updateVolume()
+    guard !player.info.isMuted else { return }
+    muteButton.image = volumeIcon()
   }
 
   // MARK: - IBActions
@@ -2849,6 +2885,8 @@ class MainWindowController: PlayerWindowController {
       showSettingsSidebar()
     case .subTrack:
       quickSettingView.showSubChooseMenu(forView: sender, showLoadedSubs: true)
+    case .screenshot:
+      player.screenshot()
     }
   }
 

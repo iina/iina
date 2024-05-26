@@ -11,13 +11,11 @@ jobs:
     strategy:
       matrix:
         include:
-          #- xcode: "13.4.1"
-          #  deployment_target: "MACOSX_DEPLOYMENT_TARGET=10.11"
-          - xcode: "14.2"
+          - xcode: "15.2"
             deployment_target: ""
-    runs-on:  macos-12
+    runs-on:  macos-13
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Install dependencies
         run: ./other/download_libs.sh
@@ -31,7 +29,7 @@ jobs:
         run: tar cvJf ~/iina.tar.xz -C /Users/runner/Library/Developer/Xcode/DerivedData/iina-csbkugdtxazzqogjnydbothqrvib/Build/Products/Debug IINA.app 
 
       - name: Save artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: IINA
           path: ~/iina.tar.xz

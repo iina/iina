@@ -28,6 +28,9 @@
 "initial.debug.desc" = "调试版本（Debug）通常没有对性能进行优化，所以不建议日常用。调试版本（Debug）不支持自动更新。";
 "initial.bug_report" = "通过<a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>报告。";
 
+// Inspector Window
+"inspector.error" = "错误";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "缓冲中… %d%%";
 "main.opening_stream" = "正在打开流……";
@@ -87,10 +90,13 @@
 "osd.file_error" = "读取文件错误";
 "osd.cannot_login" = "无法登录";
 "osd.canceled" = "已取消";
+"osd.cannot_connect" = "无法连接";
+"osd.timed_out" = "超时";
 "osd.filter_added" = "已添加滤镜: %@";
 "osd.filter_removed" = "已移除滤镜";
-"osd.file_loop" = "文件循环: %@";
-"osd.playlist_loop" = "播放列表循环: %@";
+"osd.file_loop" = "循环单个文件";
+"osd.playlist_loop" = "循环播放列表";
+"osd.no_loop" = "禁用循环";
 
 "preference.title" = "偏好设置";
 "preference.general" = "通用";
@@ -113,14 +119,20 @@
 
 "preference.enable_adv_settings" = "启用高级设置";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "strip";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "音量: %d";
-"menu.volume_muted" = "音量：%d （缄默）";
+"menu.volume_muted" = "音量：%d （静音）";
 "menu.audio_delay" = "音频延迟: %.2f秒";
 "menu.sub_delay" = "字幕延迟: %.2f秒";
 "menu.fullscreen" = "进入全屏";
 "menu.exit_fullscreen" = "退出全屏";
 "menu.pip" = "进入「画中画」模式";
 "menu.exit_pip" = "退出「画中画」模式";
+"menu.mini_player" = "进入音乐模式";
+"menu.exit_mini_player" = "退出音乐模式";
 "menu.pause" = "暂停";
 "menu.resume" = "继续";
 "menu.speed" = "速度: %.2fx";
@@ -173,7 +185,7 @@
 "alert.error_open" = "无法打开文件或流！";
 "alert.error_finding_file" = "无法找到文件 %@！";
 "alert.error_loading_script" = "无法加载脚本 %@！";
-"alert.error_saving_file" = "保存文件 %@ 时出现错误： %@";
+"alert.error_saving_file" = "保存 %@时出错： %@";
 "alert.error_deleting_file" = "无法删除该文件。";
 
 "alert.config.new.title" = "新建快捷键配置";
@@ -183,11 +195,11 @@
 "alert.config.empty_name" = "名称不能为空。";
 "alert.config.name_existing" = "此配置名称已存在。";
 "alert.config.file_existing.title" = "同名文件已存在";
-"alert.config.file_existing.message" = "选择「好」来覆盖，选择「取消」来在 Finder 中查看该文件。";
+"alert.config.file_existing.message" = "这不应该发生。选择确定来覆盖，选择取消则在访达中显示文件。";
 "alert.config.cannot_create" = "无法创建配置文件！\n%@";
 "alert.config.cannot_write" = "无法写入配置文件！";
 
-"alert.filter.incorrect" = "设置滤镜时出现错误。请检查您的参数格式。";
+"alert.filter.incorrect" = "设置过滤器时出错。请检查您的参数格式。";
 "alert.add_filter.title" = "添加新滤镜";
 "alert.add_filter.message" = "请输入符合 mpv 的 vf 或 af 选项格式的滤镜字符串。";
 
@@ -200,12 +212,13 @@
 
 "alert.playlist.error_deleting" = "删除 %@ 时出错。";
 
-"alert.screenshot.error_taking" = "无法截图！";
+"alert.screenshot.error_taking" = "截图失败！";
 
 "alert.sub.no_selected" = "请先选择一个已下载字幕。";
 "alert.sub_lang_not_set" = "请在使用 opensubtitles 之前设定字幕语言. 此次将会使用英语 (eng) 。\n\n0.0.7 之后默认的字幕来源将会是 opensubtitles。如果您是中文用户，请在「偏好设置 > 字幕」中确认「字幕来源」为「shooter.cn」，以继续使用射手字幕。";
 "alert.sub.cannot_save_passwd" = "无法将密码保存到钥匙串：%@";
 "alert.sub.cannot_login" = "无法登录。请检查您的用户名、密码及网络状态。\n\n%@";
+"alert.sub.save_downloaded.title" = "保存下载的字幕";
 
 "alert.set_default.title" = "将 IINA 设为默认播放器";
 "alert.set_default.message" = "IINA 将会被关联至所有支持的文件格式。";
@@ -262,11 +275,13 @@
 
 "alert.plugin_uninstall.title" = "你确定要卸载 %@ 吗？";
 "alert.plugin_uninstall.message" = "插件将从您的硬盘中删除。";
+"alert.plugin_reinstall.title" = "插件 %@ 已存在";
+"alert.plugin_reinstall.message" = "您希望重新安装此插件吗？";
 "alert.duplicated_plugin_id" = "检测到重复的插件标识符。两个或多个插件具有相同的标识符“%@”，这可能会导致异常行为。 请在首选项 - 插件中找到它们，并向插件作者报告。 如果插件是本地安装的，您也可以手动更改插件的 Info.json 文件中的标识符。";
 "alert.plugin_no_update" = "没有发现更新。";
 "alert.plugin_update_found.title" = "找到 %@ 的更新";
 "alert.plugin_update_found.message" = "最新版本是 %@。您有 %@。您想要更新吗？";
-"alert.plugin_permission" = "此插件需要以下权限，请在继续之前检视。";
+"alert.plugin_permission" = "此插件需要以下权限，请在继续之前检查。";
 "alert.plugin_permission_added" = "此次更新需要额外给予以下权限，请在继续之前检视。";
 
 "playlist.total_length" = "总计 %@";
@@ -280,7 +295,7 @@
 "pl_menu.delete_multi" = "将选中项移到废纸篓";
 "pl_menu.delete_after_play" = "播放后移到废纸篓";
 "pl_menu.delete_after_play_multi" = "播放后将选中项移到废纸篓";
-"pl_menu.show_in_finder" = "在访达中显示";
+"pl_menu.show_in_finder" = "在“访达”中显示";
 "pl_menu.add_file" = "添加文件…";
 "pl_menu.add_url" = "添加 URL…";
 "pl_menu.clear_playlist" = "清除播放列表";
@@ -309,6 +324,7 @@
 "osc_toolbar.full_screen" = "切换全屏";
 "osc_toolbar.music_mode" = "进入音乐模式";
 "osc_toolbar.sub_track" = "选择字幕轨道";
+"osc_toolbar.screenshot" = "截图";
 
 "mini_player.album_art" = "切换专辑封面";
 "mini_player.loop" = "重复";
@@ -341,22 +357,22 @@
 // Plugin permissions
 
 "permissions.network-request.name" = "网络请求";
-"permissions.network-request.desc" = "此插件可以向这些网站请求或上传数据：";
+"permissions.network-request.desc" = "此插件可以从这些网站生成请求或上传数据：";
 "permissions.network-request.any_site" = "任何网站";
 "permissions.show-osd.name" = "显示 OSD";
 "permissions.show-osd.desc" = "此插件可以显示 OSD (屏幕显示) 消息。";
 "permissions.show-alert.name" = "显示通知";
 "permissions.show-alert.desc" = "此插件可以显示弹出提醒。";
-"permissions.video-overlay.name" = "添加视频叠加层";
+"permissions.video-overlay.name" = "在视频上添加叠加层";
 "permissions.video-overlay.desc" = "此插件可以在视频顶部渲染附加内容。";
-"permissions.file-system.name" = "访问文件";
-"permissions.file-system.desc" = "此插件可以在您的硬盘上读取或写入文件，包括敏感信息。 它也可以调用可能伤害您的计算机的其他程序。所以务必要验证插件来源。";
+"permissions.file-system.name" = "访问文件系统";
+"permissions.file-system.desc" = "此插件可以在磁盘上读取或写入文件，其中可能包括敏感信息。 它也可以执行其他可能伤害您的计算机的程序或应用程序。所以肯定要验证源。";
 
 "plugin.install" = "安装";
 "plugin.installed" = "已安装";
 "plugin.not_installed" = "未安装";
 "plugin.local" = "已安装本地文件";
-"alert.plugin.install_error" = "安装过程发生错误: %@";
+"alert.plugin.install_error" = "安装过程中发生错误: %@";
 "alert.invalid_url" = "URL 无效";
 "plugin.install_error.invalid_url" = "URL 无效";
 "plugin.install_error.file_not_found" = "找不到软件包文件。";

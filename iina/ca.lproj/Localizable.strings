@@ -22,11 +22,14 @@
 "guide.faq" = "Preguntes freqüents";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
+"initial.announcement" = "Estàs fent servir una versió %@ d'IINA";
 "initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
 "initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
 "initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+
+// Inspector Window
+"inspector.error" = "Error";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Carregant… %d%%";
@@ -87,10 +90,13 @@
 "osd.file_error" = "Error llegint el fitxer";
 "osd.cannot_login" = "No és possible iniciar sessió";
 "osd.canceled" = "Cancel·lat";
+"osd.cannot_connect" = "No es pot connectar";
+"osd.timed_out" = "Temps d'espera superat";
 "osd.filter_added" = "Filtre afegit: %@";
 "osd.filter_removed" = "Filtre suprimit";
-"osd.file_loop" = "Bucle de fitxer: %@";
-"osd.playlist_loop" = "Bucle de llista de reproducció: %@";
+"osd.file_loop" = "Loop Single File";
+"osd.playlist_loop" = "Repetir la llista de reproducció";
+"osd.no_loop" = "Desactivar repetició";
 
 "preference.title" = "Preferències";
 "preference.general" = "General";
@@ -113,14 +119,20 @@
 
 "preference.enable_adv_settings" = "Habilita les opcions avançades";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "tira";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "Volum: %d";
-"menu.volume_muted" = "Volume: %d (Muted)";
+"menu.volume_muted" = "Volum: %d (Silenciat)";
 "menu.audio_delay" = "Retard d'àudio: %.2fs";
 "menu.sub_delay" = "Retard en els subtítols: %.2fs";
 "menu.fullscreen" = "Pantalla completa";
 "menu.exit_fullscreen" = "Surt de la pantalla completa";
 "menu.pip" = "Picture-in-Picture";
 "menu.exit_pip" = "Surt del Picture-in-Picture";
+"menu.mini_player" = "Entrar Mode de Música";
+"menu.exit_mini_player" = "Sortir Mode de Música";
 "menu.pause" = "Pausa";
 "menu.resume" = "Reprèn";
 "menu.speed" = "Velocitat: %.2fx";
@@ -206,6 +218,7 @@
 "alert.sub_lang_not_set" = "Si us plau, estableix un idioma per defecte a les preferències abans d'utilitzar OpenSubtitles. Anglès(eng) serà utilitzat aquesta vegada.";
 "alert.sub.cannot_save_passwd" = "No s'ha pogut desar la teva contrasenya en el Clauer: %@";
 "alert.sub.cannot_login" = "No s'ha pogut iniciar sessió. Si us play, verifica el teu nom d'usuari, la contrasenya i l'estat de la xarxa.\n\n%@";
+"alert.sub.save_downloaded.title" = "Desa els subtítols baixats";
 
 "alert.set_default.title" = "Establir IINA com aplicació per defecte";
 "alert.set_default.message" = "IINA serà establerta com a aplicació per defecte per a tots els tipus de fitxer que suporta.";
@@ -262,6 +275,8 @@
 
 "alert.plugin_uninstall.title" = "Estàs segur que vols desinstal·lar %@?";
 "alert.plugin_uninstall.message" = "El complement s'esborrarà del teu disc.";
+"alert.plugin_reinstall.title" = "Plugin %@ already exists";
+"alert.plugin_reinstall.message" = "Do you want to reinstall the plugin?";
 "alert.duplicated_plugin_id" = "S'han trobat complements duplicats. Dos o més complements tenen el mateix identificador \"%@\". Això pot comportar un funcionament extrany. Si us plau, busca'ls a Preferències - Complements i comunica-ho als seus autors. Si un complement està instal·lat localment, tu també pots canviar manualment el seu identificador modificant el fitxer Info.json del complement.";
 "alert.plugin_no_update" = "No s'han trobat actualitzacions.";
 "alert.plugin_update_found.title" = "Actualitzacions trobades per a %@";
@@ -309,6 +324,7 @@
 "osc_toolbar.full_screen" = "Commuta pantalla completa";
 "osc_toolbar.music_mode" = "Canvia a mode de música";
 "osc_toolbar.sub_track" = "Selecciona la pista dels subtítols";
+"osc_toolbar.screenshot" = "Take a screenshot";
 
 "mini_player.album_art" = "Mescla la caràtula";
 "mini_player.loop" = "Repeteix";

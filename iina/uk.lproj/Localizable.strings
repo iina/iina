@@ -22,11 +22,14 @@
 "guide.faq" = "Часті запитання";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.announcement" = "Ви користуєтеся %@ версією IINA";
+"initial.beta.desc" = "Зніміть відмітку «Отримувати бета-оновлення» через Параметри → Загальні та встановіть стабільну версію з нашого <a href=\"https://iina.io\">офіційного веб-сайту</a>.";
+"initial.nightly.desc" = "Нічні збірки не рекомендуються для щоденного використання. На даний час нічні збірки не підтримують автоматичного оновлення. Будь ласка, завантажте найновішу збірку вручну з нашого <a href=\"https://nightly.iina.io\">веб-сайту нічних збірок</a>.";
+"initial.debug.desc" = "Збірки налагодження зазвичай не остаточно оптимізовані, тому не рекомендуються для щоденного використання. Збірки налагодження не підтримують автоматичне оновлення.";
+"initial.bug_report" = "Повідомити через <a href=\"https://github.com/iina/iina/issues\">GitHub проблеми</a>.";
+
+// Inspector Window
+"inspector.error" = "Помилка";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Буферизація… %d%%";
@@ -70,8 +73,8 @@
 "osd.stop" = "Зупинити";
 "osd.chapter" = "Розділ: %@";
 "osd.subtitle_scale" = "Розмір субтитрів: %.2fx";
-"osd.add_to_playlist" = "Додано %i файлів до плейліста";
-"osd.clear_playlist" = "Плейліст очищено";
+"osd.add_to_playlist" = "Додано %i файлів до плейлиста";
+"osd.clear_playlist" = "Плейлист очищено";
 "osd.video_eq.contrast" = "Контрастність: %i";
 "osd.video_eq.gamma" = "Гама: %i";
 "osd.video_eq.hue" = "Відтінок: %i";
@@ -87,10 +90,13 @@
 "osd.file_error" = "Помилка читання файлу";
 "osd.cannot_login" = "Не можу зайти";
 "osd.canceled" = "Скасовано";
+"osd.cannot_connect" = "Не вдалося підключитися";
+"osd.timed_out" = "Час вийшов";
 "osd.filter_added" = "Доданий фільтр: %@";
 "osd.filter_removed" = "Видалений фільтр";
-"osd.file_loop" = "Зациклити файл: %@";
-"osd.playlist_loop" = "Зациклити підбірку: %@";
+"osd.file_loop" = "Повтор одного файлу";
+"osd.playlist_loop" = "Повтор плейлиста";
+"osd.no_loop" = "Вимкнути повторення";
 
 "preference.title" = "Параметри";
 "preference.general" = "Загальні";
@@ -113,21 +119,27 @@
 
 "preference.enable_adv_settings" = "Увімкнути розширені налаштування";
 
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.strip" = "видалити";
+"preference.sub_override_level.yes" = "yes";
+
 "menu.volume" = "Гучність: %d";
-"menu.volume_muted" = "Volume: %d (Muted)";
+"menu.volume_muted" = "Гучність: %d (Без звуку)";
 "menu.audio_delay" = "Затримка звуку: %.2f с";
 "menu.sub_delay" = "Затримка субтитрів: %.2f с";
 "menu.fullscreen" = "Увійти до повноекранного режиму";
 "menu.exit_fullscreen" = "Вийти з повноекранного режиму";
 "menu.pip" = "Режим «Кадр у кадрі»";
 "menu.exit_pip" = "Вийти з режиму «Кадр у кадрі»";
+"menu.mini_player" = "Перейти до музичного режиму";
+"menu.exit_mini_player" = "Вийти з музичного режиму";
 "menu.pause" = "Пауза";
 "menu.resume" = "Відновити";
 "menu.speed" = "Швидкість: %.2fx";
 "menu.chapters" = "Показати панель розділів";
 "menu.hide_chapters" = "Приховати панель розділів";
-"menu.playlist" = "Показати панель списку відтворення";
-"menu.hide_playlist" = "Приховати панель списку відтворення";
+"menu.playlist" = "Показати панель плейлиста";
+"menu.hide_playlist" = "Приховати панель плейлиста";
 "menu.video" = "Показати панель відео";
 "menu.hide_video" = "Приховати панель відео";
 "menu.audio" = "Показати панель аудіо";
@@ -200,12 +212,13 @@
 
 "alert.playlist.error_deleting" = "Помилка при видаленні: %@";
 
-"alert.screenshot.error_taking" = "Не вдалося зробити знімок екрану!";
+"alert.screenshot.error_taking" = "Не вдалося зробити скріншот!";
 
 "alert.sub.no_selected" = "Будь ласка, спочатку виберіть завантажені субтитри.";
 "alert.sub_lang_not_set" = "Будь ласка, встановіть у параметрах основну мову субтитрів, перед тим як використовувати opensubtitles. Зараз буде використано англійську (eng).";
 "alert.sub.cannot_save_passwd" = "Не можу зберегти пароль у Ключарі: %@";
 "alert.sub.cannot_login" = "Не можу зайти. Будь ласка, перевірте ім'я, пароль та статус мережі.\n\n%@";
+"alert.sub.save_downloaded.title" = "Зберегти завантажені субтитри";
 
 "alert.set_default.title" = "Встановлюю IINA як стандартну програму";
 "alert.set_default.message" = "IINA буде встановлено як стандартну програму для всіх файлів, які він підтримує.";
@@ -262,6 +275,8 @@
 
 "alert.plugin_uninstall.title" = "Ви дійсно бажаєте вилучити %@?";
 "alert.plugin_uninstall.message" = "Плагін буде видалено з вашого диску.";
+"alert.plugin_reinstall.title" = "Плагін %@ вже існує";
+"alert.plugin_reinstall.message" = "Ви хочете перевстановити плагін?";
 "alert.duplicated_plugin_id" = "Виявлено дубльовані ідентифікатори плагінів. Два або більше плагінів мають однаковий ідентифікатор \"%@\". Це може спричинити ненормальну поведінку. Будь ласка, знайдіть їх у \"Налаштування - Плагіни\" та повідомте авторам. Якщо плагін встановлений локально, ви також можете вручну змінити його ідентифікатор у файлі Info.json плагіна.";
 "alert.plugin_no_update" = "Оновлень не знайдено.";
 "alert.plugin_update_found.title" = "Оновлення знайдено для %@";
@@ -283,7 +298,7 @@
 "pl_menu.show_in_finder" = "Показати у Finder";
 "pl_menu.add_file" = "Додати файл…";
 "pl_menu.add_url" = "Додати URL…";
-"pl_menu.clear_playlist" = "Очистити плейліст";
+"pl_menu.clear_playlist" = "Очистити плейлист";
 "pl_menu.matched_sub" = "Зіставлено %d субтитрів";
 "pl_menu.add_sub" = "Додати субтитри…";
 "pl_menu.wrong_sub" = "Субтитри неправильні!";
@@ -304,11 +319,12 @@
 "subencoding.auto" = "Автовизначення";
 
 "osc_toolbar.settings" = "Швидкі налаштування";
-"osc_toolbar.playlist" = "Підбірка та розділи";
+"osc_toolbar.playlist" = "Плейлист та розділи";
 "osc_toolbar.pip" = "Режим «Кадр у кадрі»";
 "osc_toolbar.full_screen" = "Повноекранний режим";
-"osc_toolbar.music_mode" = "Режим музики";
+"osc_toolbar.music_mode" = "Перейти до музичного режиму";
 "osc_toolbar.sub_track" = "Наявні субтитри";
+"osc_toolbar.screenshot" = "Зробити скріншот";
 
 "mini_player.album_art" = "Показати обкладинку альбому";
 "mini_player.loop" = "Повтор";
@@ -317,7 +333,7 @@
 "mini_player.add" = "Додати до плейлиста";
 "mini_player.delete" = "Видалити всі треки з плейлиста";
 "mini_player.volume" = "Гучність";
-"mini_player.close" = "Закрити режим музики";
+"mini_player.close" = "Закрити музичний режим";
 "mini_player.back" = "Повернутись у режим відео";
 
 // Touch bar
@@ -347,7 +363,7 @@
 "permissions.show-osd.desc" = "Цей плагін може відображати повідомлення OSD (на дисплеї екрану).";
 "permissions.show-alert.name" = "Показувати оповіщення";
 "permissions.show-alert.desc" = "Цей плагін може показувати спливаючі сповіщення.";
-"permissions.video-overlay.name" = "Додати накладання на відео";
+"permissions.video-overlay.name" = "Додати оверлей на відео";
 "permissions.video-overlay.desc" = "Цей плагін може відображувати додатковий контент поверх відео.";
 "permissions.file-system.name" = "Доступ до файлової системи";
 "permissions.file-system.desc" = "Цей плагін може читати або записувати файли на вашому диску, включаючи конфіденційну інформацію. Також він може викликати інші програми чи програми, які можуть зашкодити комп'ютеру - обов'язково перевіряйте джерело.";
@@ -356,7 +372,7 @@
 "plugin.installed" = "Встановлено";
 "plugin.not_installed" = "Не встановлено";
 "plugin.local" = "Встановлено локально";
-"alert.plugin.install_error" = "Під час встановлення сталася помилка: %@";
+"alert.plugin.install_error" = "Сталася помилка під час установки: %@";
 "alert.invalid_url" = "Невірна URL-адреса.";
 "plugin.install_error.invalid_url" = "Невірна URL-адреса.";
 "plugin.install_error.file_not_found" = "Неможливо знайти пакет файлу.";

@@ -101,13 +101,21 @@ extension PlayerCore {
    - Returns: Whether the URL is a BD folder.
    */
   func isBDFolder(_ url: URL) -> Bool {
-    let bdmvFolder = url.appendingPathComponent("BDMV")
-    guard bdmvFolder.isExistingDirectory else { return false }
-    if let files = try? FileManager.default.contentsOfDirectory(atPath: bdmvFolder.path) {
-      return files.contains("MovieObject.bdmv") && files.contains("index.bdmv")
-    } else {
+  
+    func isBDMVFolder(_ url: URL) -> Bool {
+      if let files = try? FileManager.default.contentsOfDirectory(atPath: url.path) {
+        return files.contains("MovieObject.bdmv") && files.contains("index.bdmv")
+      }
       return false
     }
+    
+    if isBDMVFolder(url) {
+      return true
+    }
+    
+    let bdmvFolder = url.appendingPathComponent("BDMV")
+    guard bdmvFolder.isExistingDirectory else { return false }
+    return isBDMVFolder(bdmvFolder)
   }
 
   /**

@@ -14,7 +14,7 @@
                 <outlet property="pipDoNothing" destination="o7N-Tm-Aly" id="xg5-HZ-Usj"/>
                 <outlet property="pipHideWindow" destination="BMA-ed-2gf" id="UJv-H3-HDi"/>
                 <outlet property="pipMinimizeWindow" destination="YWw-1J-3Gr" id="5eN-rl-utd"/>
-                <outlet property="sectionAnimationsView" destination="k9o-rY-z6u" id="p0I-TR-Sv6"/>
+                <outlet property="sectionAccessibilityView" destination="k9o-rY-z6u" id="p0I-TR-Sv6"/>
                 <outlet property="sectionAppearanceView" destination="M9c-Ak-HmK" id="96r-w6-H5K"/>
                 <outlet property="sectionOSCView" destination="gjB-It-iFS" id="cbg-O0-qMd"/>
                 <outlet property="sectionOSDView" destination="c8m-G4-or8" id="e6Y-FN-x1t"/>

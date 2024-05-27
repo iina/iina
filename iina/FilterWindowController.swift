@@ -382,12 +382,14 @@ extension FilterWindowController {
 
 
 class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
+  private static let textAndTableWidthDifference = 20.0
 
   @IBOutlet weak var filterWindow: FilterWindowController!
   @IBOutlet weak var tableView: NSTableView!
   @IBOutlet weak var scrollContentView: NSView!
   @IBOutlet weak var addButton: NSButton!
-  
+  @IBOutlet weak var presetsClipViewWidthConstraint: NSLayoutConstraint!
+
   private var currentPreset: FilterPreset?
   private var currentBindings: [String: NSControl] = [:]
   private var presets: [FilterPreset] = []
@@ -396,6 +398,20 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
     tableView.dataSource = self
     tableView.delegate = self
     presets = filterWindow.filterType == MPVProperty.vf ? FilterPreset.vfPresets : FilterPreset.afPresets
+
+    // Different locales have different text width requirements. Examine all content and fit table to widest item.
+    var maxWidth = 0.0
+    for preset in presets {
+      let presetString = NSMutableAttributedString(string: preset.localizedName)
+      let fontSize = NSFont.systemFontSize(for: .regular)
+      let textFont = NSFont.systemFont(ofSize: fontSize)
+      presetString.addAttribute(.font, value: textFont, range: NSRange(location: 0, length: presetString.length))
+      let textWidth = presetString.size().width
+      if textWidth > maxWidth {
+        maxWidth = textWidth
+      }
+    }
+    presetsClipViewWidthConstraint.constant = maxWidth + NewFilterSheetViewController.textAndTableWidthDifference
 
     // Select first filter preset in table if nothing already selected
     if tableView.selectedRowIndexes.isEmpty {

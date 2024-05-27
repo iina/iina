@@ -46,6 +46,17 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
   private var currentFilter: MPVFilter?
   private var currentSavedFilter: SavedFilter?
 
+  init(filterType: String, autosaveName: String) {
+    self.filterType = filterType
+    super.init(window: nil)
+    self.windowFrameAutosaveName = autosaveName
+    Logger.log("Init \(windowFrameAutosaveName)", level: .verbose)
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
   override func windowDidLoad() {
     super.windowDidLoad()
     loaded = true
@@ -66,6 +77,9 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
 
     keyRecordView.delegate = self
     editFilterKeyRecordView.delegate = self
+
+    // Double-click saved filter to edit
+    savedFiltersTableView.doubleAction = #selector(self.editSavedFilterAction(_:))
 
     updateButtonStatus()
 
@@ -251,7 +265,15 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
   }
 
   @IBAction func editSavedFilterAction(_ sender: NSButton) {
-    let row = savedFiltersTableView.row(for: sender)
+    var row = savedFiltersTableView.clickedRow  // if double-clicking
+    if row < 0 {
+      row = savedFiltersTableView.row(for: sender)  // If using Edit button
+    }
+    guard row >= 0 && row < savedFiltersTableView.numberOfRows else {
+      Logger.log("Cannot edit saved filter! Invalid row: \(row)", level: .verbose)
+      return
+    }
+    Logger.log("Editing saved filter for row \(row)", level: .verbose)
     currentSavedFilter = savedFilters[row]
     editFilterNameTextField.stringValue = currentSavedFilter!.name
     editFilterStringTextField.stringValue = currentSavedFilter!.filterString
@@ -374,6 +396,11 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
     tableView.dataSource = self
     tableView.delegate = self
     presets = filterWindow.filterType == MPVProperty.vf ? FilterPreset.vfPresets : FilterPreset.afPresets
+
+    // Select first filter preset in table if nothing already selected
+    if tableView.selectedRowIndexes.isEmpty {
+      tableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+    }
   }
 
   func numberOfRows(in tableView: NSTableView) -> Int {

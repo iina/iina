@@ -93,7 +93,7 @@
                             <rect key="frame" x="1" y="1" width="598" height="266"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" tableStyle="fullWidth" columnReordering="NO" autosaveName="HistoryWindowTable" rowHeight="22" headerView="MiB-ow-W6T" viewBased="YES" indentationPerLevel="12" indentationMarkerFollowsCell="NO" outlineTableColumn="DIC-tR-R2F" id="6jR-CS-fgx" userLabel="PlaybackHistoryTable Outline View">
+                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="firstColumnOnly" tableStyle="fullWidth" columnReordering="NO" autosaveName="HistoryWindowTable" rowHeight="22" headerView="MiB-ow-W6T" viewBased="YES" indentationPerLevel="12" indentationMarkerFollowsCell="NO" outlineTableColumn="DIC-tR-R2F" id="6jR-CS-fgx" userLabel="PlaybackHistoryTable Outline View" customClass="OutlineView" customModule="IINA" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="606" height="243"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <size key="intercellSpacing" width="8" height="2"/>

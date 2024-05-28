@@ -106,6 +106,10 @@ struct Constants {
   struct Time {
     static let infinite = VideoTime(999, 0, 0)
   }
+  struct WindowAutosaveName {
+    static let videoFilters = "VideoFilters"
+    static let audioFilters = "AudioFilters"
+  }
   struct FilterName {
     static let crop = "iina_crop"
     static let flip = "iina_flip"

@@ -66,14 +66,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   lazy var logWindow: LogWindowController = LogWindowController()
 
   lazy var vfWindow: FilterWindowController = {
-    let w = FilterWindowController()
-    w.filterType = MPVProperty.vf
+    let w = FilterWindowController(filterType: MPVProperty.vf, autosaveName: Constants.WindowAutosaveName.videoFilters)
     return w
   }()
 
   lazy var afWindow: FilterWindowController = {
-    let w = FilterWindowController()
-    w.filterType = MPVProperty.af
+    let w = FilterWindowController(filterType: MPVProperty.af, autosaveName: Constants.WindowAutosaveName.audioFilters)
     return w
   }()
 

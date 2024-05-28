@@ -14,6 +14,7 @@
                 <outlet property="pipDoNothing" destination="o7N-Tm-Aly" id="xg5-HZ-Usj"/>
                 <outlet property="pipHideWindow" destination="BMA-ed-2gf" id="UJv-H3-HDi"/>
                 <outlet property="pipMinimizeWindow" destination="YWw-1J-3Gr" id="5eN-rl-utd"/>
+                <outlet property="sectionAccessibilityView" destination="k9o-rY-z6u" id="p0I-TR-Sv6"/>
                 <outlet property="sectionAppearanceView" destination="M9c-Ak-HmK" id="96r-w6-H5K"/>
                 <outlet property="sectionOSCView" destination="gjB-It-iFS" id="cbg-O0-qMd"/>
                 <outlet property="sectionOSDView" destination="c8m-G4-or8" id="e6Y-FN-x1t"/>
@@ -703,6 +704,7 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="18" id="DIC-cT-8P0"/>
                         <constraint firstAttribute="width" secondItem="2Fc-2d-hIJ" secondAttribute="height" multiplier="1:1" id="IBQ-ee-CQV"/>
+                        <constraint firstAttribute="width" secondItem="2Fc-2d-hIJ" secondAttribute="height" multiplier="1:1" id="JSO-Tj-v8X"/>
                     </constraints>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="speed" id="PCr-gs-9Yc"/>
                 </imageView>
@@ -774,7 +776,6 @@
                 <constraint firstItem="HgG-px-UUt" firstAttribute="leading" secondItem="jbc-22-59W" secondAttribute="leading" id="GnR-7V-SWW"/>
                 <constraint firstItem="jbc-22-59W" firstAttribute="top" secondItem="4XH-GU-VhV" secondAttribute="top" id="H5x-dR-Abd"/>
                 <constraint firstAttribute="bottom" secondItem="rft-T0-lds" secondAttribute="bottom" constant="8" id="HLQ-xF-5Qa"/>
-                <constraint firstItem="2Fc-2d-hIJ" firstAttribute="width" secondItem="2Fc-2d-hIJ" secondAttribute="height" multiplier="1:1" id="JSO-Tj-v8X"/>
                 <constraint firstItem="omS-tS-OVJ" firstAttribute="leading" secondItem="q8D-b2-H0y" secondAttribute="trailing" constant="8" id="Kvt-R8-Efd"/>
                 <constraint firstItem="omS-tS-OVJ" firstAttribute="leading" secondItem="bYj-5g-zYO" secondAttribute="leading" id="LgY-kh-ww0"/>
                 <constraint firstItem="gVR-so-xgt" firstAttribute="baseline" secondItem="q8D-b2-H0y" secondAttribute="baseline" id="OEQ-c0-3H3"/>
@@ -1243,6 +1244,64 @@ Picture:</string>
                 <constraint firstItem="eTQ-fy-fNJ" firstAttribute="leading" secondItem="l21-mq-zWd" secondAttribute="leading" id="xog-r6-yIL"/>
             </constraints>
             <point key="canvasLocation" x="14" y="907"/>
+        </customView>
+        <customView misplaced="YES" id="k9o-rY-z6u" userLabel="Prefs &gt; UI &gt; Accessibility">
+            <rect key="frame" x="0.0" y="0.0" width="550" height="90"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField identifier="SectionTitleThumb" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M1d-6z-urt" userLabel="Accessibility">
+                    <rect key="frame" x="-2" y="70" width="91" height="16"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Accessibility:" id="AYW-Xu-ySw">
+                        <font key="font" metaFont="systemBold"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="6DX-Ep-AbS" userLabel="Disable animations">
+                    <rect key="frame" x="118" y="69" width="141" height="18"/>
+                    <buttonCell key="cell" type="check" title="Disable animations" bezelStyle="regularSquare" imagePosition="left" inset="2" id="mjs-jg-wm1">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="lH7-Vv-0M1" name="value" keyPath="values.disableAnimations" id="C94-f2-ocl"/>
+                    </connections>
+                </button>
+                <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4QU-uL-rQD" userLabel="Disable animations Help Button">
+                    <rect key="frame" x="264" y="64" width="25" height="25"/>
+                    <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tqd-k0-pR0">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="disableAnimationsHelpAction:" target="-2" id="3Su-2O-LKG"/>
+                    </connections>
+                </button>
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="TmI-kk-Nbj">
+                    <rect key="frame" x="118" y="8" width="434" height="56"/>
+                    <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" id="9IR-Sf-wMq">
+                        <font key="font" metaFont="label" size="11"/>
+                        <string key="title">When the macOS Reduce Motion accessibility setting is enabled IINA will reduce user interface animations that are known to cause problems for those with vestibular disorders. Should that be insufficient, this setting can be used to reduce motion further by eliminating user interface animations.</string>
+                        <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="TmI-kk-Nbj" firstAttribute="leading" secondItem="6DX-Ep-AbS" secondAttribute="leading" id="0an-by-LUR"/>
+                <constraint firstItem="M1d-6z-urt" firstAttribute="leading" secondItem="k9o-rY-z6u" secondAttribute="leading" id="5UK-qs-t0Z"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4QU-uL-rQD" secondAttribute="trailing" id="ECi-04-TXI"/>
+                <constraint firstAttribute="bottom" secondItem="TmI-kk-Nbj" secondAttribute="bottom" constant="8" id="FdL-T8-5LI"/>
+                <constraint firstItem="4QU-uL-rQD" firstAttribute="leading" secondItem="6DX-Ep-AbS" secondAttribute="trailing" constant="8" id="MER-sj-cma"/>
+                <constraint firstItem="4QU-uL-rQD" firstAttribute="centerY" secondItem="6DX-Ep-AbS" secondAttribute="centerY" id="Nng-vM-pUe"/>
+                <constraint firstItem="TmI-kk-Nbj" firstAttribute="top" secondItem="4QU-uL-rQD" secondAttribute="bottom" constant="4" id="T9B-vQ-mWt"/>
+                <constraint firstItem="M1d-6z-urt" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="k9o-rY-z6u" secondAttribute="leading" constant="120" id="j0m-fh-NoW"/>
+                <constraint firstItem="6DX-Ep-AbS" firstAttribute="top" secondItem="M1d-6z-urt" secondAttribute="top" id="j8G-1a-rlS"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="TmI-kk-Nbj" secondAttribute="trailing" id="mgO-TO-KgH"/>
+                <constraint firstItem="M1d-6z-urt" firstAttribute="top" secondItem="k9o-rY-z6u" secondAttribute="top" constant="8" id="nbs-Tz-GDd"/>
+                <constraint firstItem="6DX-Ep-AbS" firstAttribute="leading" secondItem="k9o-rY-z6u" secondAttribute="leading" constant="120" id="ray-E7-Kek"/>
+            </constraints>
+            <point key="canvasLocation" x="49" y="1061.5"/>
         </customView>
     </objects>
     <resources>

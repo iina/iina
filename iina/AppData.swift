@@ -62,6 +62,7 @@ struct AppData {
   static let toneMappingHelpLink = "https://en.wikipedia.org/wiki/Tone_mapping"
   static let targetPeakHelpLink = "https://mpv.io/manual/stable/#options-target-peak"
   static let algorithmHelpLink = "https://mpv.io/manual/stable/#options-tone-mapping"
+  static let disableAnimationsHelpLink = "https://developer.apple.com/design/human-interface-guidelines/accessibility#Motion"
 
   static let widthWhenNoVideo = 640
   static let heightWhenNoVideo = 360

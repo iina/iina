@@ -577,7 +577,7 @@ not applying FFmpeg 9599 workaround
   // Send arbitrary mpv command.
   func command(_ command: MPVCommand, args: [String?] = [], checkError: Bool = true, returnValueCallback: ((Int32) -> Void)? = nil) {
     guard mpv != nil else { return }
-    log("Run command: \(command.rawValue) \(args.compactMap{$0}.joined(separator: " "))")
+    log("Run command: \(command.rawValue) \(args.compactMap{$0}.joined(separator: " "))", level: .verbose)
     var cargs = makeCArgs(command, args).map { $0.flatMap { UnsafePointer<CChar>(strdup($0)) } }
     defer {
       for ptr in cargs {
@@ -595,13 +595,13 @@ not applying FFmpeg 9599 workaround
   }
 
   func command(rawString: String) -> Int32 {
-    log("Run command: \(rawString)")
+    log("Run command: \(rawString)", level: .verbose)
     return mpv_command_string(mpv, rawString)
   }
 
   func asyncCommand(_ command: MPVCommand, args: [String?] = [], checkError: Bool = true, replyUserdata: UInt64) {
     guard mpv != nil else { return }
-    log("Asynchronously run command: \(command.rawValue) \(args.compactMap{$0}.joined(separator: " "))")
+    log("Asynchronously run command: \(command.rawValue) \(args.compactMap{$0}.joined(separator: " "))", level: .verbose)
     var cargs = makeCArgs(command, args).map { $0.flatMap { UnsafePointer<CChar>(strdup($0)) } }
     defer {
       for ptr in cargs {
@@ -622,19 +622,19 @@ not applying FFmpeg 9599 workaround
 
   // Set property
   func setFlag(_ name: String, _ flag: Bool) {
-    log("Set property: \(name)=\(flag)")
+    log("Set property: \(name)=\(flag)", level: .verbose)
     var data: Int = flag ? 1 : 0
     mpv_set_property(mpv, name, MPV_FORMAT_FLAG, &data)
   }
 
   func setInt(_ name: String, _ value: Int) {
-    log("Set property: \(name)=\(value)")
+    log("Set property: \(name)=\(value)", level: .verbose)
     var data = Int64(value)
     mpv_set_property(mpv, name, MPV_FORMAT_INT64, &data)
   }
 
   func setDouble(_ name: String, _ value: Double) {
-    log("Set property: \(name)=\(value)")
+    log("Set property: \(name)=\(value)", level: .verbose)
     var data = value
     mpv_set_property(mpv, name, MPV_FORMAT_DOUBLE, &data)
   }
@@ -656,7 +656,7 @@ not applying FFmpeg 9599 workaround
 
   @discardableResult
   func setString(_ name: String, _ value: String) -> Int32 {
-    log("Set property: \(name)=\(value)")
+    log("Set property: \(name)=\(value)", level: .verbose)
     return mpv_set_property_string(mpv, name, value)
   }
 
@@ -828,7 +828,7 @@ not applying FFmpeg 9599 workaround
       log("setNode: cannot encode value for \(name)", level: .error)
       return
     }
-    log("Set property: \(name)=<a mpv node>")
+    log("Set property: \(name)=<a mpv node>", level: .verbose)
     mpv_set_property(mpv, name, MPV_FORMAT_NODE, &node)
     MPVNode.free(node)
   }
@@ -1371,20 +1371,20 @@ not applying FFmpeg 9599 workaround
   private var optionObservers: [String: [OptionObserverInfo]] = [:]
 
   private func setOptionFloat(_ name: String, _ value: Float) -> Int32 {
-    log("Set option: \(name)=\(value)")
+    log("Set option: \(name)=\(value)", level: .verbose)
     var data = Double(value)
     return mpv_set_option(mpv, name, MPV_FORMAT_DOUBLE, &data)
   }
 
   private func setOptionInt(_ name: String, _ value: Int) -> Int32 {
-    log("Set option: \(name)=\(value)")
+    log("Set option: \(name)=\(value)", level: .verbose)
     var data = Int64(value)
     return mpv_set_option(mpv, name, MPV_FORMAT_INT64, &data)
   }
 
   @discardableResult
   private func setOptionString(_ name: String, _ value: String) -> Int32 {
-    log("Set option: \(name)=\(value)")
+    log("Set option: \(name)=\(value)", level: .verbose)
     return mpv_set_option_string(mpv, name, value)
   }
 

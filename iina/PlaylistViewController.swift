@@ -331,7 +331,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
           player.playlistMove(oldIndex, to: row + newIndexOffset)
           newIndexOffset += 1
         }
-        Logger.log("Playlist Drag & Drop from \(oldIndex) to \(row)")
+        Logger.log("Playlist Drag & Drop from \(oldIndex) to \(row)", subsystem: player.subsystem)
       }
       player.postNotification(.iinaPlaylistChanged)
       return true
@@ -656,14 +656,14 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
   @IBAction func contextMenuDeleteFile(_ sender: NSMenuItem) {
     guard let selectedRows = selectedRows else { return }
-    Logger.log("User chose to delete files from playlist at indexes: \(selectedRows.map{$0})")
+    Logger.log("User chose to delete files from playlist at indexes: \(selectedRows.map{$0})", subsystem: player.subsystem)
 
     var successes = IndexSet()
     for index in selectedRows {
       guard !player.info.playlist[index].isNetworkResource else { continue }
       let url = URL(fileURLWithPath: player.info.playlist[index].filename)
       do {
-        Logger.log("Trashing row \(index): \(url.standardizedFileURL)")
+        Logger.log("Trashing row \(index): \(url.standardizedFileURL)", subsystem: player.subsystem)
         try FileManager.default.trashItem(at: url, resultingItemURL: nil)
         successes.insert(index)
       } catch let error {

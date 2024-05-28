@@ -293,7 +293,7 @@ class OpenSub {
     /// - Parameter timeout: The timeout to to use for the the request.
     override func logout(timeout: TimeInterval? = nil) -> Promise<Void> {
       guard OpenSubClient.shared.loggedIn else {
-        Logger.log("Not logged in to Open Subtitles")
+        log("Not logged in to Open Subtitles")
         return .value
       }
       log("Logging out of Open Subtitles")

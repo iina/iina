@@ -72,16 +72,16 @@
             <point key="canvasLocation" x="139" y="217"/>
         </window>
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="tI1-4J-bvZ" userLabel="Active Filters View">
-            <rect key="frame" x="0.0" y="0.0" width="638" height="143"/>
+            <rect key="frame" x="0.0" y="0.0" width="638" height="75"/>
             <subviews>
                 <scrollView autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="brl-j0-vbe">
-                    <rect key="frame" x="-1" y="19" width="640" height="125"/>
+                    <rect key="frame" x="-1" y="21" width="640" height="55"/>
                     <clipView key="contentView" id="Hbi-ga-FRu">
-                        <rect key="frame" x="1" y="1" width="638" height="123"/>
+                        <rect key="frame" x="1" y="1" width="638" height="53"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" tableStyle="fullWidth" alternatingRowBackgroundColors="YES" columnReordering="NO" autosaveName="FilterTable" rowHeight="24" rowSizeStyle="systemDefault" headerView="ESY-lT-CzV" viewBased="YES" id="iTp-t4-bao">
-                                <rect key="frame" x="0.0" y="0.0" width="638" height="98"/>
+                                <rect key="frame" x="0.0" y="0.0" width="638" height="28"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -210,7 +210,7 @@
                         </subviews>
                     </clipView>
                     <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="120" id="VTD-Sc-iBR"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="EIQ-xX-FNj"/>
                     </constraints>
                     <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="fYA-q7-Cne">
                         <rect key="frame" x="1" y="108" width="638" height="16"/>
@@ -225,53 +225,63 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </tableHeaderView>
                 </scrollView>
-                <box boxType="custom" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="G4c-Vf-UqH">
-                    <rect key="frame" x="-1" y="-1" width="640" height="22"/>
+                <box boxType="custom" borderType="line" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="G4c-Vf-UqH">
+                    <rect key="frame" x="0.0" y="-1" width="638" height="22"/>
                     <view key="contentView" id="RLZ-UD-oYg" userLabel="Box View">
-                        <rect key="frame" x="1" y="1" width="638" height="20"/>
+                        <rect key="frame" x="1" y="1" width="636" height="20"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="La1-eJ-8B2" userLabel="Add Filter Button">
-                                <rect key="frame" x="0.0" y="0.5" width="20.5" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="La1-eJ-8B2" userLabel="Add Filter Button">
+                                <rect key="frame" x="1" y="-1.5" width="20.5" height="24"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSAddTemplate" imagePosition="only" alignment="center" inset="2" id="skC-wc-wWf">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="dDK-xH-yZu"/>
+                                    <constraint firstAttribute="width" secondItem="La1-eJ-8B2" secondAttribute="height" multiplier="1:1" id="keE-YU-o14"/>
+                                </constraints>
                                 <connections>
                                     <action selector="addFilterAction:" target="-2" id="joq-SS-0iv"/>
                                 </connections>
                             </button>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fCm-Dl-yIc" userLabel="Remove Filter Button">
-                                <rect key="frame" x="20" y="0.0" width="20.5" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="fCm-Dl-yIc" userLabel="Remove Filter Button">
+                                <rect key="frame" x="21" y="3" width="20.5" height="15"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRemoveTemplate" imagePosition="only" alignment="center" inset="2" id="DRr-Vt-evM">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="I7K-vd-6jo"/>
+                                    <constraint firstAttribute="width" constant="20" id="JHw-2Y-UQh"/>
+                                </constraints>
                                 <connections>
                                     <action selector="removeFilterAction:" target="-2" id="9at-jv-q44"/>
                                 </connections>
                             </button>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="fCm-Dl-yIc" firstAttribute="top" secondItem="La1-eJ-8B2" secondAttribute="top" id="3dk-aK-j1E"/>
+                            <constraint firstItem="fCm-Dl-yIc" firstAttribute="leading" secondItem="La1-eJ-8B2" secondAttribute="trailing" id="5L5-Ux-XOj"/>
+                            <constraint firstItem="La1-eJ-8B2" firstAttribute="leading" secondItem="RLZ-UD-oYg" secondAttribute="leading" constant="1" id="fdY-bb-gZI"/>
+                            <constraint firstAttribute="bottom" secondItem="La1-eJ-8B2" secondAttribute="bottom" id="iPG-Nw-Ghh"/>
+                        </constraints>
                     </view>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="22" id="lIS-W3-u4k"/>
-                    </constraints>
                     <color key="borderColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                     <color key="fillColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                 </box>
             </subviews>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="G4c-Vf-UqH" secondAttribute="bottom" constant="-1" id="7nU-fM-4kX"/>
+                <constraint firstItem="G4c-Vf-UqH" firstAttribute="top" secondItem="tI1-4J-bvZ" secondAttribute="bottom" constant="-21" id="7nU-fM-4kX"/>
                 <constraint firstAttribute="trailing" secondItem="brl-j0-vbe" secondAttribute="trailing" constant="-1" id="KHV-eM-yke"/>
-                <constraint firstItem="RLZ-UD-oYg" firstAttribute="top" secondItem="brl-j0-vbe" secondAttribute="bottom" constant="-1" id="NV7-Fu-Z1r"/>
-                <constraint firstItem="G4c-Vf-UqH" firstAttribute="leading" secondItem="tI1-4J-bvZ" secondAttribute="leading" constant="-1" id="T9M-bt-KYX"/>
-                <constraint firstAttribute="trailing" secondItem="G4c-Vf-UqH" secondAttribute="trailing" constant="-1" id="bNf-qM-1OQ"/>
+                <constraint firstItem="G4c-Vf-UqH" firstAttribute="leading" secondItem="tI1-4J-bvZ" secondAttribute="leading" id="T9M-bt-KYX"/>
+                <constraint firstAttribute="trailing" secondItem="G4c-Vf-UqH" secondAttribute="trailing" id="bNf-qM-1OQ"/>
                 <constraint firstItem="brl-j0-vbe" firstAttribute="top" secondItem="tI1-4J-bvZ" secondAttribute="top" constant="-1" id="bkI-IP-vh3"/>
+                <constraint firstAttribute="bottom" secondItem="brl-j0-vbe" secondAttribute="bottom" constant="21" id="cvr-nZ-qjB"/>
                 <constraint firstItem="brl-j0-vbe" firstAttribute="leading" secondItem="tI1-4J-bvZ" secondAttribute="leading" constant="-1" id="tux-kP-U9v"/>
+                <constraint firstAttribute="bottom" secondItem="G4c-Vf-UqH" secondAttribute="bottom" constant="-1" id="vJ2-67-9t3"/>
             </constraints>
-            <point key="canvasLocation" x="-564" y="71"/>
+            <point key="canvasLocation" x="-564" y="25.5"/>
         </customView>
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="itW-qD-XDg" userLabel="Saved Filters View">
             <rect key="frame" x="0.0" y="0.0" width="640" height="168"/>
@@ -462,7 +472,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" tableStyle="fullWidth" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n0t-vk-dME" userLabel="FilterPresets Table View">
-                                    <rect key="frame" x="-1" y="0.0" width="160" height="146"/>
+                                    <rect key="frame" x="-1" y="0.0" width="158" height="146"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>

@@ -17,7 +17,7 @@
 ## Features
 
 * Based on [mpv](https://github.com/mpv-player/mpv), which provides the best decoding capacity on macOS
-* Designed with modern versions of macOS (10.11+) in mind
+* Designed with modern versions of macOS (10.15+) in mind
 * All the features you need for video and music: subtitles, playlists, chapters…and much, much more!
 * Force Touch, picture-in-picture and advanced Touch Bar support
 * Customizable user interface including multiple color schemes and on screen controller (OSC) layout positioning

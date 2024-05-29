@@ -419,7 +419,7 @@ class PlayerCore: NSObject {
     info.justOpenedFile = true
     isStopping = false
     isStopped = false
-    mpv.command(.loadfile, args: [path])
+    mpv.command(.loadfile, args: [path], level: .verbose)
   }
 
   static func loadKeyBindings() {
@@ -688,7 +688,7 @@ class PlayerCore: NSObject {
   ///     [#4520](https://github.com/iina/iina/issues/4520)
   func pause() {
     guard !info.isIdle, !isStopping, !isStopped, !isShuttingDown, !isShutdown else { return }
-    mpv.setFlag(MPVOption.PlaybackControl.pause, true)
+    mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
   }
 
   func resume() {
@@ -696,7 +696,7 @@ class PlayerCore: NSObject {
     if mpv.getFlag(MPVProperty.eofReached) {
       seek(absoluteSecond: 0)
     }
-    mpv.setFlag(MPVOption.PlaybackControl.pause, false)
+    mpv.setFlag(MPVOption.PlaybackControl.pause, false, level: .verbose)
   }
 
   /// Stop playback and unload the media.
@@ -748,14 +748,14 @@ class PlayerCore: NSObject {
     }
     let useExact = forceExact ? true : Preference.bool(for: .useExactSeek)
     let seekMode = useExact ? "absolute-percent+exact" : "absolute-percent"
-    mpv.command(.seek, args: ["\(percent)", seekMode], checkError: false)
+    mpv.command(.seek, args: ["\(percent)", seekMode], checkError: false, level: .verbose)
   }
 
   func seek(relativeSecond: Double, option: Preference.SeekOption) {
     switch option {
 
     case .relative:
-      mpv.command(.seek, args: ["\(relativeSecond)", "relative"], checkError: false)
+      mpv.command(.seek, args: ["\(relativeSecond)", "relative"], checkError: false, level: .verbose)
 
     case .exact:
       mpv.command(.seek, args: ["\(relativeSecond)", "relative+exact"], checkError: false)
@@ -1013,7 +1013,7 @@ class PlayerCore: NSObject {
     let constrainedVolume = volume.clamped(to: 0...Double(maxVolume))
     let appliedVolume = constrain ? constrainedVolume : volume
     info.volume = appliedVolume
-    mpv.setDouble(MPVOption.Audio.volume, appliedVolume)
+    mpv.setDouble(MPVOption.Audio.volume, appliedVolume, level: .verbose)
     Preference.set(constrainedVolume, for: .softVolume)
   }
 
@@ -1116,7 +1116,7 @@ class PlayerCore: NSObject {
     case .hue:
       optionName = MPVOption.Equalizer.hue
     }
-    mpv.command(.set, args: [optionName, value.description])
+    mpv.command(.set, args: [optionName, value.description], level: .verbose)
   }
   
   func loadExternalVideoFile(_ url: URL) {
@@ -1147,7 +1147,7 @@ class PlayerCore: NSObject {
       return
     }
 
-    mpv.command(.subAdd, args: [url.path], checkError: false) { code in
+    mpv.command(.subAdd, args: [url.path], checkError: false, level: .verbose) { code in
       if code < 0 {
         self.log("Unsupported sub: \(url.path)", level: .error)
         // if another modal panel is shown, popping up an alert now will cause some infinite loop.
@@ -1189,7 +1189,7 @@ class PlayerCore: NSObject {
   }
 
   private func _addToPlaylist(_ path: String) {
-    mpv.command(.loadfile, args: [path, "append"])
+    mpv.command(.loadfile, args: [path, "append"], level: .verbose)
   }
 
   func addToPlaylist(_ path: String, silent: Bool = false) {
@@ -1200,7 +1200,7 @@ class PlayerCore: NSObject {
   }
 
   private func _playlistMove(_ from: Int, to: Int) {
-    mpv.command(.playlistMove, args: ["\(from)", "\(to)"])
+    mpv.command(.playlistMove, args: ["\(from)", "\(to)"], level: .verbose)
   }
 
   func playlistMove(_ from: Int, to: Int) {
@@ -1249,7 +1249,7 @@ class PlayerCore: NSObject {
   func playFile(_ path: String) {
     info.justOpenedFile = true
     info.shouldAutoLoadFiles = true
-    mpv.command(.loadfile, args: [path, "replace"])
+    mpv.command(.loadfile, args: [path, "replace"], level: .verbose)
     getPlaylist()
   }
 
@@ -1531,14 +1531,14 @@ class PlayerCore: NSObject {
   /** Scale is a double value in [-100, -1] + [1, 100] */
   func setSubScale(_ scale: Double) {
     if scale > 0 {
-      mpv.setDouble(MPVOption.Subtitles.subScale, scale)
+      mpv.setDouble(MPVOption.Subtitles.subScale, scale, level: .verbose)
     } else {
-      mpv.setDouble(MPVOption.Subtitles.subScale, -scale)
+      mpv.setDouble(MPVOption.Subtitles.subScale, -scale, level: .verbose)
     }
   }
 
   func setSubPos(_ pos: Int) {
-    mpv.setInt(MPVOption.Subtitles.subPos, pos)
+    mpv.setInt(MPVOption.Subtitles.subPos, pos, level: .verbose)
   }
 
   func setSubTextColor(_ colorString: String) {

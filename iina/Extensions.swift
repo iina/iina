@@ -638,7 +638,7 @@ extension NSScreen {
   /// - parameter screen: The `NSScreen` object to log.
   static func log(_ label: String, _ screen: NSScreen?) {
     guard let screen = screen else {
-      Logger.log("\(label): nil")
+      Logger.log("\(label): nil", level: .warning)
       return
     }
     // Unfortunately localizedName is not available until macOS Catalina.

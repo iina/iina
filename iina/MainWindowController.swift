@@ -1073,7 +1073,7 @@ class MainWindowController: PlayerWindowController {
   override func mouseExited(with event: NSEvent) {
     guard !isInInteractiveMode else { return }
     guard let obj = event.trackingArea?.userInfo?["obj"] as? Int else {
-      Logger.log("No data for tracking area", level: .warning)
+      Logger.log("No data for tracking area", level: .warning, subsystem: player.subsystem)
       return
     }
     mouseExitEnterCount += 1

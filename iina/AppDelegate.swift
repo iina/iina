@@ -303,6 +303,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
     let mpv = PlayerCore.active.mpv!
     Logger.log("Using \(mpv.mpvVersion) and libass \(mpv.libassVersion)")
+    Logger.log("Configuration when building mpv: \(mpv.getString(MPVProperty.mpvConfiguration)!)", level: .verbose)
 
     if #available(macOS 10.13, *) {
       if RemoteCommandController.useSystemMediaControl {

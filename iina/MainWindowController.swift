@@ -538,7 +538,6 @@ class MainWindowController: PlayerWindowController {
     fragControlView.addView(fragControlViewRightView, in: .center)
     // Video controllers and timeline indicators should not flip in a right-to-left language.
     fragControlView.userInterfaceLayoutDirection = .leftToRight
-    oscFloatingTopView.userInterfaceLayoutDirection = .leftToRight
     setupOnScreenController(withPosition: oscPosition)
     let buttons = (Preference.array(for: .controlBarToolbarButtons) as? [Int] ?? []).compactMap(Preference.ToolBarButton.init(rawValue:))
     setupOSCToolbarButtons(buttons)

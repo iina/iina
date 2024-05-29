@@ -1249,7 +1249,7 @@ Picture:</string>
             <rect key="frame" x="0.0" y="0.0" width="550" height="90"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField identifier="SectionTitleThumb" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M1d-6z-urt" userLabel="Accessibility">
+                <textField identifier="SectionTitleAccessibility" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M1d-6z-urt" userLabel="Accessibility">
                     <rect key="frame" x="-2" y="70" width="91" height="16"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Accessibility:" id="AYW-Xu-ySw">
                         <font key="font" metaFont="systemBold"/>

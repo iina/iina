@@ -2,7 +2,8 @@
   "images" : [
     {
       "filename" : "forward.pdf",
-      "idiom" : "universal"
+      "idiom" : "universal",
+      "language-direction" : "left-to-right"
     }
   ],
   "info" : {

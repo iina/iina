@@ -90,6 +90,10 @@ class PlayerCore: NSObject {
   // MARK: - Fields
 
   lazy var subsystem = Logger.makeSubsystem("player\(label!)")
+  
+  private func log(_ message: String, level: Logger.Level = .debug) {
+    Logger.log(message, level: level, subsystem: subsystem)
+  }
 
   var label: String!
   var isManagedByPlugin = false
@@ -280,10 +284,10 @@ class PlayerCore: NSObject {
 
   private func open(_ url: URL?, shouldAutoLoad: Bool = false) {
     guard let url = url else {
-      Logger.log("empty file path or url", level: .error, subsystem: subsystem)
+      log("empty file path or url", level: .error)
       return
     }
-    Logger.log("Open URL: \(url.absoluteString)", subsystem: subsystem)
+    log("Open URL: \(url.absoluteString)")
     let isNetwork = !url.isFileURL
     if shouldAutoLoad {
       info.shouldAutoLoadFiles = true
@@ -373,13 +377,13 @@ class PlayerCore: NSObject {
       var pstr = str
       if performPercentEncoding {
         guard let encoded = str.addingPercentEncoding(withAllowedCharacters: .urlAllowed) else {
-          print("Cannot add percent encoding for \(str)")
+          log("Cannot add percent encoding for \(str)", level: .error)
           return
         }
         pstr = encoded
       }
       guard let url = URL(string: pstr) else {
-        Logger.log("Cannot parse url for \(pstr)", level: .error, subsystem: subsystem)
+        log("Cannot parse url for \(pstr)", level: .error)
         return
       }
       openURL(url)
@@ -388,7 +392,7 @@ class PlayerCore: NSObject {
 
 
   private func openMainWindow(path: String, url: URL, isNetwork: Bool) {
-    Logger.log("Opening \(path) in main window", subsystem: subsystem)
+    log("Opening \(path) in main window")
     info.currentURL = url
     // clear currentFolder since playlist is cleared, so need to auto-load again in playerCore#fileStarted
     info.currentFolder = nil
@@ -483,12 +487,12 @@ class PlayerCore: NSObject {
       path = customYtdlPath + ":" + path
     }
     setenv("PATH", path, 1)
-    Logger.log("Set path to \(path)", subsystem: subsystem)
+    log("Set path to \(path)")
 
     // set http proxy
     if let proxy = Preference.string(for: .httpProxy), !proxy.isEmpty {
       setenv("http_proxy", "http://" + proxy, 1)
-      Logger.log("Set http_proxy to \(proxy)", subsystem: subsystem)
+      log("Set http_proxy to \(proxy)")
     }
 
     mpv.mpvInit()
@@ -530,14 +534,14 @@ class PlayerCore: NSObject {
   func shutdown() {
     guard !isShuttingDown else { return }
     isShuttingDown = true
-    Logger.log("Shutting down", subsystem: subsystem)
+    log("Shutting down")
     savePlayerState()
     mpv.mpvQuit()
   }
 
   func mpvHasShutdown(isMPVInitiated: Bool = false) {
     let suffix = isMPVInitiated ? " (initiated by mpv)" : ""
-    Logger.log("Player has shutdown\(suffix)", subsystem: subsystem)
+    log("Player has shutdown\(suffix)")
     isStopped = true
     isShutdown = true
     // If mpv shutdown was initiated by mpv then the player state has not been saved.
@@ -554,7 +558,7 @@ class PlayerCore: NSObject {
   }
 
   func switchToMiniPlayer(automatically: Bool = false) {
-    Logger.log("Switch to mini player, automatically=\(automatically)", subsystem: subsystem)
+    log("Switch to mini player, automatically=\(automatically)")
     if !automatically {
       switchedToMiniPlayerManually = true
     }
@@ -628,7 +632,7 @@ class PlayerCore: NSObject {
   }
 
   func switchBackFromMiniPlayer(automatically: Bool, showMainWindow: Bool = true) {
-    Logger.log("Switch to normal window from mini player, automatically=\(automatically)", subsystem: subsystem)
+    log("Switch to normal window from mini player, automatically=\(automatically)")
     if !automatically {
       switchedBackFromMiniPlayerManually = true
     }
@@ -712,7 +716,7 @@ class PlayerCore: NSObject {
     // Do not send a stop command to mpv if it is already stopped. This happens when quitting is
     // initiated directly through mpv.
     guard !isStopped else { return }
-    Logger.log("Stopping playback", subsystem: subsystem)
+    log("Stopping playback")
     isStopping = true
     mpv.command(.stop)
   }
@@ -722,7 +726,7 @@ class PlayerCore: NSObject {
   /// This method is called by `MPVController` when mpv emits an event indicating the asynchronous mpv `stop` command
   /// has completed executing.
   func playbackStopped() {
-    Logger.log("Playback has stopped", subsystem: subsystem)
+    log("Playback has stopped")
     isStopped = true
     isStopping = false
     postNotification(.iinaPlayerStopped)
@@ -812,16 +816,16 @@ class PlayerCore: NSObject {
     let saveToFile = Preference.bool(for: .screenshotSaveToFile)
     let saveToClipboard = Preference.bool(for: .screenshotCopyToClipboard)
     guard saveToFile || saveToClipboard else {
-      Logger.log("Ignoring screenshot request: all forms of screenshots are disabled in prefs")
+      log("Ignoring screenshot request: all forms of screenshots are disabled in prefs", level: .warning)
       return false
     }
 
     guard let vid = info.vid, vid > 0 else {
-      Logger.log("Ignoring screenshot request: no video stream is being played")
+      log("Ignoring screenshot request: no video stream is being played", level: .warning)
       return false
     }
 
-    Logger.log("Screenshot requested by user\(keyBinding == nil ? "" : " (rawAction: \(keyBinding!.rawAction))")")
+    log("Screenshot requested by user\(keyBinding == nil ? "" : " (rawAction: \(keyBinding!.rawAction))")")
 
     var commandFlags: [String] = []
 
@@ -829,7 +833,7 @@ class PlayerCore: NSObject {
       var canUseIINAScreenshot = true
 
       guard let commandName = keyBinding.action.first, commandName == MPVCommand.screenshot.rawValue else {
-        Logger.log("Cannot take screenshot: unexpected first token in key binding action: \(keyBinding.rawAction)", level: .error)
+        log("Cannot take screenshot: unexpected first token in key binding action: \(keyBinding.rawAction)", level: .error)
         return false
       }
       if keyBinding.action.count > 1 {
@@ -845,7 +849,7 @@ class PlayerCore: NSObject {
             canUseIINAScreenshot = false
           default:
             // Unexpected flag. Let mpv decide how to handle
-            Logger.log("Unrecognized flag for mpv 'screenshot' command: '\(flag)'", level: .warning)
+            log("Unrecognized flag for mpv 'screenshot' command: '\(flag)'", level: .warning)
             canUseIINAScreenshot = false
           }
         }
@@ -870,7 +874,7 @@ class PlayerCore: NSObject {
     let saveToFile = Preference.bool(for: .screenshotSaveToFile)
     let saveToClipboard = Preference.bool(for: .screenshotCopyToClipboard)
     guard saveToFile || saveToClipboard else { return }
-    Logger.log("Screenshot done: saveToFile=\(saveToFile), saveToClipboard=\(saveToClipboard)", level: .verbose)
+    log("Screenshot done: saveToFile=\(saveToFile), saveToClipboard=\(saveToClipboard)", level: .verbose)
 
     guard let imageFolder = mpv.getString(MPVOption.Screenshot.screenshotDirectory) else { return }
     guard let lastScreenshotURL = Utility.getLatestScreenshot(from: imageFolder) else { return }
@@ -935,7 +939,7 @@ class PlayerCore: NSObject {
         // The B loop point is set without the A loop point having been set. This is allowed by mpv
         // but IINA is not supposed to allow mpv to get into this state, so something has gone
         // wrong. This is an internal error. Log it and pretend that just the A loop point is set.
-        Logger.log("Unexpected A-B loop state, ab-loop-a is \(a) ab-loop-b is \(b)", level: .error, subsystem: subsystem)
+        log("Unexpected A-B loop state, ab-loop-a is \(a) ab-loop-b is \(b)", level: .error)
         info.abLoopStatus = .aSet
       }
     } else {
@@ -944,7 +948,7 @@ class PlayerCore: NSObject {
     }
     // The play slider has knobs representing the loop points, make insure the slider is in sync.
     mainWindow?.syncSlider()
-    Logger.log("Synchronized info.abLoopStatus \(info.abLoopStatus)")
+    log("Synchronized info.abLoopStatus \(info.abLoopStatus)")
   }
 
   func togglePlaylistLoop() {
@@ -1118,7 +1122,7 @@ class PlayerCore: NSObject {
   func loadExternalVideoFile(_ url: URL) {
     mpv.command(.videoAdd, args: [url.path], checkError: false) { code in
       if code < 0 {
-        Logger.log("Unsupported video: \(url.path)", level: .error, subsystem: self.subsystem)
+        self.log("Unsupported video: \(url.path)", level: .error)
         DispatchQueue.main.async {
           Utility.showAlert("unsupported_audio")
         }
@@ -1129,7 +1133,7 @@ class PlayerCore: NSObject {
   func loadExternalAudioFile(_ url: URL) {
     mpv.command(.audioAdd, args: [url.path], checkError: false) { code in
       if code < 0 {
-        Logger.log("Unsupported audio: \(url.path)", level: .error, subsystem: self.subsystem)
+        self.log("Unsupported audio: \(url.path)", level: .error)
         DispatchQueue.main.async {
           Utility.showAlert("unsupported_audio")
         }
@@ -1145,7 +1149,7 @@ class PlayerCore: NSObject {
 
     mpv.command(.subAdd, args: [url.path], checkError: false) { code in
       if code < 0 {
-        Logger.log("Unsupported sub: \(url.path)", level: .error, subsystem: self.subsystem)
+        self.log("Unsupported sub: \(url.path)", level: .error)
         // if another modal panel is shown, popping up an alert now will cause some infinite loop.
         if delay {
           DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
@@ -1165,7 +1169,7 @@ class PlayerCore: NSObject {
     for subTrack in info.subTracks {
       mpv.command(.subReload, args: ["\(subTrack.id)"], checkError: false) { code in
         if code < 0 {
-          Logger.log("Failed reloading subtitles: error code \(code)", level: .error, subsystem: self.subsystem)
+          self.log("Failed reloading subtitles: error code \(code)", level: .error)
         }
       }
     }
@@ -1260,7 +1264,7 @@ class PlayerCore: NSObject {
 
   @discardableResult
   func playChapter(_ pos: Int) -> MPVChapter? {
-    Logger.log("Seeking to chapter \(pos)", level: .verbose, subsystem: subsystem)
+    log("Seeking to chapter \(pos)", level: .verbose)
     let chapters = info.chapters
     guard pos < chapters.count else {
       return nil
@@ -1328,7 +1332,7 @@ class PlayerCore: NSObject {
   /// - Parameter filter: The filter to add.
   /// - Returns: `true` if the filter was successfully added, `false` otherwise.
   func addVideoFilter(_ filter: String) -> Bool {
-    Logger.log("Adding video filter \(filter)...", subsystem: subsystem)
+    log("Adding video filter \(filter)...")
     // check hwdec
     let askHwdec: (() -> Bool) = {
       let panel = NSAlert()
@@ -1366,8 +1370,20 @@ class PlayerCore: NSObject {
     // try apply filter
     var result = true
     mpv.command(.vf, args: ["add", filter], checkError: false) { result = $0 >= 0 }
-    Logger.log(result ? "Succeeded" : "Failed", subsystem: self.subsystem)
+    if !result {
+      log("Failed to add video filter \(filter)", level: .warning)
+    } else {
+      log("Successfully added video filter \(filter)")
+    }
     return result
+  }
+  
+  private func logRemoveFilter(type: String, result: Bool, name: String) {
+    if !result {
+      log("Failed to remove \(type) filter \(name)", level: .warning)
+    } else {
+      log("Successfully removed \(type) filter \(name)")
+    }
   }
 
   /// Remove a video filter based on its position in the list of filters.
@@ -1387,9 +1403,9 @@ class PlayerCore: NSObject {
   /// - Parameter index: The index of the filter to be removed.
   /// - Returns: `true` if the filter was successfully removed, `false` otherwise.
   func removeVideoFilter(_ filter: String, _ index: Int) -> Bool {
-    Logger.log("Removing video filter \(filter)...", subsystem: subsystem)
+    log("Removing video filter \(filter)...")
     let result = mpv.removeFilter(MPVProperty.vf, index)
-    Logger.log(result ? "Succeeded" : "Failed", subsystem: self.subsystem)
+    logRemoveFilter(type: "video", result: result, name: filter)
     return result
   }
 
@@ -1420,10 +1436,10 @@ class PlayerCore: NSObject {
   /// - Parameter filter: The filter to remove.
   /// - Returns: `true` if the filter was successfully removed, `false` otherwise.
   func removeVideoFilter(_ filter: String) -> Bool {
-    Logger.log("Removing video filter \(filter)...", subsystem: subsystem)
+    log("Removing video filter \(filter)...")
     var result = true
     mpv.command(.vf, args: ["remove", filter], checkError: false) { result = $0 >= 0 }
-    Logger.log(result ? "Succeeded" : "Failed", subsystem: self.subsystem)
+    logRemoveFilter(type: "video", result: result, name: filter)
     return result
   }
 
@@ -1436,10 +1452,14 @@ class PlayerCore: NSObject {
   /// - Parameter filter: The filter to add.
   /// - Returns: `true` if the filter was successfully added, `false` otherwise.
   func addAudioFilter(_ filter: String) -> Bool {
-    Logger.log("Adding audio filter \(filter)...", subsystem: subsystem)
+    log("Adding audio filter \(filter)...")
     var result = true
     mpv.command(.af, args: ["add", filter], checkError: false) { result = $0 >= 0 }
-    Logger.log(result ? "Succeeded" : "Failed", subsystem: self.subsystem)
+    if !result {
+      log("Failed to add audio filter \(filter)", level: .warning)
+    } else {
+      log("Successfully added audio filter \(filter)")
+    }
     return result
   }
 
@@ -1460,9 +1480,9 @@ class PlayerCore: NSObject {
   /// - Parameter index: The index of the filter to be removed.
   /// - Returns: `true` if the filter was successfully removed, `false` otherwise.
   func removeAudioFilter(_ filter: String, _ index: Int) -> Bool {
-    Logger.log("Removing audio filter \(filter)...", subsystem: subsystem)
+    log("Removing audio filter \(filter)...")
     let result = mpv.removeFilter(MPVProperty.af, index)
-    Logger.log(result ? "Succeeded" : "Failed", subsystem: self.subsystem)
+    logRemoveFilter(type: "audio", result: result, name: filter)
     return result
   }
 
@@ -1488,10 +1508,10 @@ class PlayerCore: NSObject {
   /// - Parameter filter: The filter to remove.
   /// - Returns: `true` if the filter was successfully removed, `false` otherwise.
   func removeAudioFilter(_ filter: String) -> Bool {
-    Logger.log("Removing audio filter \(filter)...", subsystem: subsystem)
+    log("Removing audio filter \(filter)...")
     var result = true
     mpv.command(.af, args: ["remove", filter], checkError: false)  { result = $0 >= 0 }
-    Logger.log(result ? "Succeeded" : "Failed", subsystem: self.subsystem)
+    logRemoveFilter(type: "audio", result: result, name: filter)
     return result
   }
 
@@ -1557,7 +1577,7 @@ class PlayerCore: NSObject {
   func execKeyCode(_ code: String) {
     mpv.command(.keypress, args: [code], checkError: false) { errCode in
       if errCode < 0 {
-        Logger.log("Error when executing key code (\(errCode))", level: .error, subsystem: self.subsystem)
+        self.log("Error when executing key code (\(errCode))", level: .error)
       }
     }
   }
@@ -1568,7 +1588,7 @@ class PlayerCore: NSObject {
     // If the player is stopped then the file has been unloaded and it is too late to save the
     // watch later configuration.
     if !isStopped {
-      Logger.log("Write watch later config", subsystem: subsystem)
+      log("Write watch later config")
       mpv.command(.writeWatchLaterConfig)
     }
     if let url = info.currentURL {
@@ -1607,13 +1627,13 @@ class PlayerCore: NSObject {
       }
 
       guard mustShuffle else {
-        Logger.log("Triggered on_before_start_file hook, but no shuffle needed", level: .verbose, subsystem: subsystem)
+        log("Triggered on_before_start_file hook, but no shuffle needed", level: .verbose)
         next()
         return
       }
 
       DispatchQueue.main.async { [self] in
-        Logger.log("Running on_before_start_file hook: shuffling playlist", subsystem: subsystem)
+        log("Running on_before_start_file hook: shuffling playlist")
         mpv.command(.playlistShuffle)
         /// will cancel this file load sequence (so `fileLoaded` will not be called), then will start loading item at index 0
         mpv.command(.playlistPlayIndex, args: ["0"])
@@ -1627,7 +1647,7 @@ class PlayerCore: NSObject {
   // MARK: - Listeners
 
   func fileStarted(path: String) {
-    Logger.log("File started", subsystem: subsystem)
+    log("File started")
     info.justStartedFile = true
     info.disableOSDForFileLoading = true
     currentMediaIsAudio = .unknown
@@ -1667,12 +1687,12 @@ class PlayerCore: NSObject {
     backgroundQueue.async {
       // add files in same folder
       if shouldAutoLoadFiles {
-        Logger.log("Started auto load", subsystem: self.subsystem)
+        self.log("Started auto load")
         self.autoLoadFilesInCurrentFolder(ticket: currentTicket)
       }
       // auto load matched subtitles
       if let matchedSubs = self.info.getMatchedSubs(path) {
-        Logger.log("Found \(matchedSubs.count) subs for current file", subsystem: self.subsystem)
+        self.log("Found \(matchedSubs.count) subs for current file")
         for sub in matchedSubs {
           guard currentTicket == self.backgroundQueueTicket else { return }
           self.loadExternalSubFile(sub)
@@ -1688,7 +1708,7 @@ class PlayerCore: NSObject {
 
   /** This function is called right after file loaded. Should load all meta info here. */
   func fileLoaded() {
-    Logger.log("File loaded", subsystem: subsystem)
+    log("File loaded")
     invalidateTimer()
     triedUsingExactSeekForCurrentFile = false
     info.fileLoading = false
@@ -1775,7 +1795,7 @@ class PlayerCore: NSObject {
   }
 
   func playbackRestarted() {
-    Logger.log("Playback restarted", subsystem: subsystem)
+    log("Playback restarted")
     reloadSavedIINAfilters()
     mainWindow.videoView.videoLayer.draw(forced: true)
 
@@ -1818,7 +1838,7 @@ class PlayerCore: NSObject {
     // list changes if mpv is terminating as accessing mpv once shutdown has been initiated can
     // trigger a crash.
     guard !isStopping, !isStopped, !isShuttingDown, !isShutdown else { return }
-    Logger.log("Track list changed", subsystem: subsystem)
+    log("Track list changed")
     getTrackInfo()
     getSelectedTracks()
     let audioStatusWasUnkownBefore = currentMediaIsAudio == .unknown
@@ -1828,14 +1848,14 @@ class PlayerCore: NSObject {
     if audioStatusIsAvailableNow && Preference.bool(for: .autoSwitchToMusicMode) {
       if currentMediaIsAudio == .isAudio {
         if !isInMiniPlayer && !mainWindow.fsState.isFullscreen && !switchedBackFromMiniPlayerManually {
-          Logger.log("Current media is audio, switch to mini player", subsystem: subsystem)
+          log("Current media is audio, switch to mini player")
           DispatchQueue.main.sync {
             switchToMiniPlayer(automatically: true)
           }
         }
       } else {
         if isInMiniPlayer && !switchedToMiniPlayerManually {
-          Logger.log("Current media is not audio, switch to normal window", subsystem: subsystem)
+          log("Current media is not audio, switch to normal window")
           DispatchQueue.main.sync {
             switchBackFromMiniPlayer(automatically: true)
           }
@@ -1982,7 +2002,7 @@ class PlayerCore: NSObject {
     // If window is not loaded or stopping or shutting down, ignore.
     guard mainWindow.loaded, !isStopping, !isStopped, !isShuttingDown, !isShutdown else { return }
     // This is too noisy and making verbose logs unreadable. Please uncomment when debugging syncing releated issues.
-    // Logger.log("Syncing UI \(option)", level: .verbose, subsystem: subsystem)
+    // log("Syncing UI \(option)", level: .verbose)
 
     switch option {
 
@@ -2053,7 +2073,7 @@ class PlayerCore: NSObject {
       DispatchQueue.main.async {
         // this should avoid sending reload when table view is not ready
         if self.isInMiniPlayer ? self.miniPlayer.isPlaylistVisible : self.mainWindow.sideBarStatus == .playlist {
-          Logger.log("Syncing UI: chapterList", level: .verbose)
+          self.log("Syncing UI: chapterList")
           self.mainWindow.playlistView.chapterTableView.reloadData()
         }
       }
@@ -2120,7 +2140,7 @@ class PlayerCore: NSObject {
   }
 
   func generateThumbnails() {
-    Logger.log("Getting thumbnails", subsystem: subsystem)
+    log("Getting thumbnails")
     info.thumbnailsReady = false
     info.thumbnails.removeAll(keepingCapacity: true)
     info.thumbnailsProgress = 0
@@ -2130,18 +2150,18 @@ class PlayerCore: NSObject {
       }
     }
     guard !info.isNetworkResource, let url = info.currentURL else {
-      Logger.log("...stopped because cannot get file path", subsystem: subsystem)
+      log("...stopped because cannot get file path", level: .warning)
       return
     }
     if !Preference.bool(for: .enableThumbnailForRemoteFiles) {
       if let attrs = try? url.resourceValues(forKeys: Set([.volumeIsLocalKey])), !attrs.volumeIsLocal! {
-        Logger.log("...stopped because file is on a mounted remote drive", subsystem: subsystem)
+        log("...stopped because file is on a mounted remote drive", level: .warning)
         return
       }
     }
     if Preference.bool(for: .enableThumbnailPreview) {
       if let cacheName = info.mpvMd5, ThumbnailCache.fileIsCached(forName: cacheName, forVideo: info.currentURL) {
-        Logger.log("Found thumbnail cache", subsystem: subsystem)
+        log("Found thumbnail cache")
         thumbnailQueue.async {
           if let thumbnails = ThumbnailCache.read(forName: cacheName) {
             self.info.thumbnails = thumbnails
@@ -2149,11 +2169,11 @@ class PlayerCore: NSObject {
             self.info.thumbnailsProgress = 1
             self.refreshTouchBarSlider()
           } else {
-            Logger.log("Cannot read thumbnail from cache", level: .error, subsystem: self.subsystem)
+            self.log("Cannot read thumbnail from cache", level: .error)
           }
         }
       } else {
-        Logger.log("Request new thumbnails", subsystem: subsystem)
+        log("Request new thumbnails")
         ffmpegController.generateThumbnail(forFile: url.path, thumbWidth:Int32(Preference.integer(for: .thumbnailWidth)))
       }
     }
@@ -2161,7 +2181,7 @@ class PlayerCore: NSObject {
 
   @available(macOS 10.12.2, *)
   func makeTouchBar() -> NSTouchBar {
-    Logger.log("Activating Touch Bar", subsystem: subsystem)
+    log("Activating Touch Bar")
     needsTouchBar = true
     // The timer that synchronizes the UI is shutdown to conserve energy when the OSC is hidden.
     // However the timer can't be stopped if it is needed to update the information being displayed
@@ -2244,7 +2264,7 @@ class PlayerCore: NSObject {
   }
 
   func getChapters() {
-    Logger.log("Reloading chapter list", level: .verbose, subsystem: subsystem)
+    log("Reloading chapter list", level: .verbose)
     var chapters: [MPVChapter] = []
     let chapterCount = mpv.getInt(MPVProperty.chapterListCount)
     for index in 0..<chapterCount {
@@ -2437,7 +2457,7 @@ extension PlayerCore: FFmpegControllerDelegate {
 
   func didUpdate(_ thumbnails: [FFThumbnail]?, forFile filename: String, withProgress progress: Int) {
     guard let currentFilePath = info.currentURL?.path, currentFilePath == filename else { return }
-    Logger.log("Got new thumbnails, progress \(progress)", subsystem: subsystem)
+    log("Got new thumbnails, progress \(progress)")
     if let thumbnails = thumbnails {
       info.thumbnails.append(contentsOf: thumbnails)
     }
@@ -2447,7 +2467,7 @@ extension PlayerCore: FFmpegControllerDelegate {
 
   func didGenerate(_ thumbnails: [FFThumbnail], forFile filename: String, succeeded: Bool) {
     guard let currentFilePath = info.currentURL?.path, currentFilePath == filename else { return }
-    Logger.log("Got all thumbnails, succeeded=\(succeeded)", subsystem: subsystem)
+    log("Got all thumbnails, succeeded=\(succeeded)")
     if succeeded {
       info.thumbnails = thumbnails
       info.thumbnailsReady = true

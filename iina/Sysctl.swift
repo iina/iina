@@ -28,13 +28,13 @@ struct Sysctl {
     var size = 0
     // Get the size of the string.
     guard sysctlbyname(name, nil, &size, nil, 0) == EXIT_SUCCESS else {
-      Logger.log("Call to sysctlbyname for \(name) failed: \(String(cString: strerror(errno))) (\(errno))")
+      Logger.log("Call to sysctlbyname for \(name) failed: \(String(cString: strerror(errno))) (\(errno))", level: .warning)
       return nil
     }
     // Now get the named kernel state as a string.
     var value = [CChar](repeating: 0,  count: Int(size))
     guard sysctlbyname(name, &value, &size, nil, 0) == EXIT_SUCCESS else {
-      Logger.log("Call to sysctlbyname for \(name) failed: \(String(cString: strerror(errno))) (\(errno))")
+      Logger.log("Call to sysctlbyname for \(name) failed: \(String(cString: strerror(errno))) (\(errno))", level: .warning)
       return nil
     }
     return String(cString: value)

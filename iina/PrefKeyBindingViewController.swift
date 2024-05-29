@@ -27,15 +27,25 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     return false
   }
 
-  static let defaultConfigs: [String: String] = [
-    "IINA Default": Bundle.main.path(forResource: "iina-default-input", ofType: "conf", inDirectory: "config")!,
-    "mpv Default": Bundle.main.path(forResource: "input", ofType: "conf", inDirectory: "config")!,
-    "VLC Default": Bundle.main.path(forResource: "vlc-default-input", ofType: "conf", inDirectory: "config")!,
-    "Movist Default": Bundle.main.path(forResource: "movist-default-input", ofType: "conf", inDirectory: "config")!
+  static let defaultConfigMap: KeyValuePairs<String, String> = [
+    "IINA Default": "iina-default-input",
+    "mpv Default": "input",
+    "VLC Default": "vlc-default-input",
+    "Movist Default": "movist-default-input",
   ]
 
-  var userConfigs: [String: Any]!
-  var userConfigNames: [String] = []
+  static var defaultConfigs: [String: String] = {
+    var configs: [String: String] = [:]
+    for (key, value) in defaultConfigMap {
+      configs[key] = Bundle.main.path(forResource: value, ofType: "conf", inDirectory: "config")!
+    }
+    return configs
+  }()
+
+  var userConfigs: [String: Any] = [:]
+  var userConfigNames: [String] {
+    return PrefKeyBindingViewController.defaultConfigMap.map { $0.key } + Array(userConfigs.keys).sorted()
+  }
 
   var currentConfName: String!
   var currentConfFilePath: String!
@@ -74,36 +84,24 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     }
 
     // config files
-    // - default
-    PrefKeyBindingViewController.defaultConfigs.forEach {
-      userConfigNames.append($0.key)
-    }
-    // - user
-    guard let uc = Preference.dictionary(for: .inputConfigs)
-    else  {
+    guard let uc = Preference.dictionary(for: .inputConfigs) else {
       Logger.fatal("Cannot get config file list!")
     }
     userConfigs = uc
-    userConfigs.forEach {
-      userConfigNames.append($0.key)
-    }
 
-    var currentConf = ""
-    var gotCurrentConf = false
+    // Fallback default input config
+    var currentConf = "IINA Default"
     if let confFromUd = Preference.string(for: .currentInputConfigName) {
       if getFilePath(forConfig: confFromUd, showAlert: false) != nil {
         currentConf = confFromUd
-        gotCurrentConf = true
       }
-    }
-    if !gotCurrentConf {
-      currentConf = "IINA Default"
     }
     // load
     confTableSelectRow(withTitle: currentConf)
     currentConfName = currentConf
     guard let path = getFilePath(forConfig: currentConf) else { return }
     currentConfFilePath = path
+    loadConfigFile()
     
     NotificationCenter.default.addObserver(forName: .iinaKeyBindingChanged, object: nil, queue: .main, using: saveToConfFile)
   }
@@ -193,7 +191,6 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     
     currentConfName = filename
     currentConfFilePath = filePath
-    userConfigNames.append(filename)
     confTableView.reloadData()
     confTableSelectRow(withTitle: filename)
     loadConfigFile()
@@ -239,9 +236,6 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
         return
       }
       self.userConfigs.removeValue(forKey: oldName)
-      if let index = self.userConfigNames.firstIndex(of: oldName) {
-        self.userConfigNames.remove(at: index)
-      }
       self.enableNewConfigFile(newName, newFilePath)
     }
   }
@@ -260,9 +254,6 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     userConfigs.removeValue(forKey: currentConfName)
     Preference.set(userConfigs, for: Preference.Key.inputConfigs)
     // load
-    if let index = userConfigNames.firstIndex(of: currentConfName) {
-      userConfigNames.remove(at: index)
-    }
     confTableView.reloadData()
     currentConfName = userConfigNames[0]
     currentConfFilePath = getFilePath(forConfig: currentConfName)

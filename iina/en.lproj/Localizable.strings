@@ -193,11 +193,13 @@
 "alert.config.duplicate.title" = "Duplicate Configuration";
 "alert.config.duplicate.message" = "Please enter name for the duplicated configuration file.";
 "alert.config.empty_name" = "The name cannot be empty.";
-"alert.config.name_existing" = "The name already exists.";
+"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "File Already Exists";
 "alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Cannot create config file!\n%@";
 "alert.config.cannot_write" = "Cannot write to config file!";
+"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "New Filter";

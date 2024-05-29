@@ -216,12 +216,31 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     Utility.quickPromptPanel("config.duplicate", sheetWindow: view.window) { newName in
       guard let newFilePath = self.checkNewConfigFile(with: newName) else { return }
 
-      let currFilePath = self.currentConfFilePath!
       do {
-        try self.fm.copyItem(atPath: currFilePath, toPath: newFilePath)
+        try self.fm.copyItem(atPath: self.currentConfFilePath!, toPath: newFilePath)
       } catch let error {
         Utility.showAlert("config.cannot_create", arguments: [error.localizedDescription], sheetWindow: self.view.window)
         return
+      }
+      self.enableNewConfigFile(newName, newFilePath)
+    }
+    
+  }
+  
+  @IBAction func configFileListDoubleAction(_ sender: NSTableView) {
+    guard shouldEnableEdit else { return }
+    Utility.quickPromptPanel("config.rename", sheetWindow: view.window) { newName in
+      guard let newFilePath = self.checkNewConfigFile(with: newName) else { return }
+      let oldName = self.currentConfName!
+      do {
+        try self.fm.moveItem(atPath: self.currentConfFilePath!, toPath: newFilePath)
+      } catch let error {
+        Utility.showAlert("config.cannot_create", arguments: [error.localizedDescription], sheetWindow: self.view.window)
+        return
+      }
+      self.userConfigs.removeValue(forKey: oldName)
+      if let index = self.userConfigNames.firstIndex(of: oldName) {
+        self.userConfigNames.remove(at: index)
       }
       self.enableNewConfigFile(newName, newFilePath)
     }

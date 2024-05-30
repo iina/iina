@@ -111,7 +111,9 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
   @IBAction func resetSuppressedAlertsBtnAction(_ sender: Any) {
     Utility.quickAskPanel("restore_alerts", sheetWindow: view.window) { respond in
       guard respond == .alertFirstButtonReturn else { return }
-      Preference.set(false, for: .suppressCannotPreventDisplaySleep)
+      // This operation used to restore an alert about preventing display sleeping failing. That
+      // alert has been removed so at this time we do not have any alerts that can be suppressed.
+      // That might change in the future, so for now we are retaining this operation.
       self.restoreAlertsRestoredLabel.isHidden = false
     }
   }

@@ -73,6 +73,9 @@ struct Preference {
     /** Resume from last position */
     static let resumeLastPosition = Key("resumeLastPosition")
 
+    static let preventScreenSaver = Key("preventScreenSaver")
+    static let allowScreenSaverForAudio = Key("allowScreenSaverForAudio")
+
     static let alwaysFloatOnTop = Key("alwaysFloatOnTop")
     static let alwaysShowOnTopIcon = Key("alwaysShowOnTopIcon")
 
@@ -295,9 +298,6 @@ struct Preference {
 
     static let iinaLastPlayedFilePath = Key("iinaLastPlayedFilePath")
     static let iinaLastPlayedFilePosition = Key("iinaLastPlayedFilePosition")
-
-    /** Alerts */
-    static let suppressCannotPreventDisplaySleep = Key("suppressCannotPreventDisplaySleep")
 
     /** Internal */
     static let iinaEnablePluginSystem = Key("iinaEnablePluginSystem")
@@ -774,6 +774,8 @@ struct Preference {
     .legacyFullScreenAnimation: false,
     .showChapterPos: false,
     .resumeLastPosition: true,
+    .preventScreenSaver: true,
+    .allowScreenSaverForAudio: false,
     .useMediaKeys: true,
     .useAppleRemote: false,
     .alwaysFloatOnTop: false,
@@ -917,8 +919,6 @@ struct Preference {
     .watchProperties: [String](),
     .savedVideoFilters: [SavedFilter](),
     .savedAudioFilters: [SavedFilter](),
-
-    .suppressCannotPreventDisplaySleep: false,
 
     .enableRecentDocumentsWorkaround: false,
     .recentDocuments: [Any](),

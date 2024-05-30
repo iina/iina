@@ -44,6 +44,7 @@ class SleepPreventer: NSObject {
                                               reason,
                                               &assertionID)
     guard success != kIOReturnSuccess else {
+      Logger.log("Requiring screen to stay powered on", level: .verbose)
       preventedSleep = true
       return
     }
@@ -69,6 +70,7 @@ class SleepPreventer: NSObject {
     } else {
       let success = IOPMAssertionRelease(assertionID)
       if success == kIOReturnSuccess {
+        Logger.log("Allowing screen to power off", level: .verbose)
         preventedSleep = false
       } else {
         Logger.log("Cannot allow display sleep", level: .warning)

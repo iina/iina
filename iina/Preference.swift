@@ -73,6 +73,9 @@ struct Preference {
     /** Resume from last position */
     static let resumeLastPosition = Key("resumeLastPosition")
 
+    static let preventDisplaySleepForAudio = Key("preventDisplaySleepForAudio")
+    static let preventDisplaySleepForVideo = Key("preventDisplaySleepForVideo")
+
     static let alwaysFloatOnTop = Key("alwaysFloatOnTop")
     static let alwaysShowOnTopIcon = Key("alwaysShowOnTopIcon")
 
@@ -769,6 +772,8 @@ struct Preference {
     .legacyFullScreenAnimation: false,
     .showChapterPos: false,
     .resumeLastPosition: true,
+    .preventDisplaySleepForAudio: true,
+    .preventDisplaySleepForVideo: true,
     .useMediaKeys: true,
     .useAppleRemote: false,
     .alwaysFloatOnTop: false,

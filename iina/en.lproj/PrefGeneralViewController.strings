@@ -131,6 +131,9 @@
 /* Class = "NSTextFieldCell"; title = "Screenshots:"; ObjectID = "pdx-zt-kf2"; */
 "pdx-zt-kf2.title" = "Screenshots:";
 
+/* Class = "NSButtonCell"; title = "Require display to stay on while actively playing video"; ObjectID = "r2u-P9-J5p"; */
+"r2u-P9-J5p.title" = "Require display to stay on while actively playing video";
+
 /* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "slG-Jb-54B"; */
 "slG-Jb-54B.title" = "Hourly";
 
@@ -145,6 +148,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Pause/resume when:"; ObjectID = "xr2-rB-O0x"; */
 "xr2-rB-O0x.title" = "Pause/resume when:";
+
+/* Class = "NSButtonCell"; title = "Require display to stay on while actively playing audio"; ObjectID = "yla-DT-YTx"; */
+"yla-DT-YTx.title" = "Require display to stay on while actively playing audio";
 
 /* Class = "NSMenuItem"; title = "Show welcome window"; ObjectID = "z9T-8h-1T0"; */
 "z9T-8h-1T0.title" = "Show welcome window";

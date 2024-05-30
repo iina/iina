@@ -2541,10 +2541,17 @@ class PlayerCore: NSObject {
 
   static func checkStatusForSleep() {
     for player in playing {
-      if player.info.isPlaying {
+      guard player.info.isPlaying else { continue }
+      let isAudio = player.info.isAudio
+      guard isAudio != .unknown else { continue }
+      if player.info.isAudio == .isAudio {
+        guard Preference.bool(for: .preventDisplaySleepForAudio) else { continue }
         SleepPreventer.preventSleep()
         return
       }
+      guard Preference.bool(for: .preventDisplaySleepForVideo) else { continue }
+      SleepPreventer.preventSleep()
+      return
     }
     SleepPreventer.allowSleep()
   }

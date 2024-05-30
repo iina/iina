@@ -2562,12 +2562,27 @@ class PlayerCore: NSObject {
   }
 
   static func checkStatusForSleep() {
-    for player in playing {
-      if player.info.isPlaying {
-        SleepPreventer.preventSleep()
-        return
-      }
+    guard Preference.bool(for: .preventScreenSaver) else {
+      SleepPreventer.allowSleep()
+      return
     }
+    // Look for players actively playing that are not in music mode and are not just playing audio.
+    for player in playing {
+      guard player.info.isPlaying,
+            player.info.isAudio != .isAudio && !player.isInMiniPlayer else { continue }
+      SleepPreventer.preventSleep()
+      return
+    }
+    // Now look for players in music mode or playing audio.
+    for player in playing {
+      guard player.info.isPlaying,
+            player.info.isAudio == .isAudio || player.isInMiniPlayer else { continue }
+      // Either prevent the screen saver from activating or prevent system from sleeping depending
+      // upon user setting.
+      SleepPreventer.preventSleep(allowScreenSaver: Preference.bool(for: .allowScreenSaverForAudio))
+      return
+    }
+    // No players are actively playing.
     SleepPreventer.allowSleep()
   }
 }

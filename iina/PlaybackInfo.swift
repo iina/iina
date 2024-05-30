@@ -22,6 +22,12 @@ class PlaybackInfo {
     case bSet
   }
 
+  enum MediaIsAudioStatus {
+    case unknown
+    case isAudio
+    case notAudio
+  }
+
   unowned let player: PlayerCore
 
   init(_ pc: PlayerCore) {
@@ -65,6 +71,17 @@ class PlaybackInfo {
     guard let duration = videoDuration, let position = videoPosition else { return }
     if position.second < 0 { position.second = 0 }
     if position.second > duration.second { position.second = duration.second }
+  }
+
+  var isAudio: MediaIsAudioStatus {
+    guard !isNetworkResource else { return .notAudio }
+    let noVideoTrack = videoTracks.isEmpty
+    let noAudioTrack = audioTracks.isEmpty
+    if noVideoTrack && noAudioTrack {
+      return .unknown
+    }
+    let allVideoTracksAreAlbumCover = !videoTracks.contains { !$0.isAlbumart }
+    return (noVideoTrack || allVideoTracksAreAlbumCover) ? .isAudio : .notAudio
   }
 
   var isSeeking: Bool = false

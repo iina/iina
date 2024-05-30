@@ -6,74 +6,63 @@
 //  Copyright © 2017 lhc. All rights reserved.
 //
 
-import IOKit.pwr_mgt
-
-
+/// Manage process information agent
+/// [activities](https://developer.apple.com/documentation/foundation/processinfo#1651116) for preventing
+/// sleep.
+/// - Attention: This portion of macOS has proven to be **unreliable**. Previously the macOS function
+///     [IOPMAssertionCreateWithName](https://developer.apple.com/documentation/iokit/1557134-iopmassertioncreatewithname)
+///     was used to create a
+///     [kIOPMAssertionTypeNoDisplaySleep](https://developer.apple.com/documentation/iokit/kiopmassertiontypenodisplaysleep)
+///     assertion with the macOS power management system. That method returns a status code so IINA was able to detect when
+///     macOS power management was malfunctioning. This class now uses the
+///     [beginActivity](https://developer.apple.com/documentation/foundation/processinfo/1415995-beginactivity)
+///     method that does not provide a status code so it will not be obvious when macOS is broken. Should a user report problems
+///     with sleep prevention review issues [#3842](https://github.com/iina/iina/issues/3842) and
+///     [#3478](https://github.com/iina/iina/issues/3478) to see if they explain the failure.
 class SleepPreventer: NSObject {
 
-  static private let reason = "IINA is playing video" as CFString
+  /// Token returned by [beginActivity](https://developer.apple.com/documentation/foundation/processinfo/1415995-beginactivity).
+  static private var activityToken: NSObjectProtocol?
 
-  static private var assertionID = IOPMAssertionID()
+  /// If `true` then the current activity only prevents the system from sleeping.
+  static private var allowScreenSaver = false
 
-  static private var haveShownAlert = false
-
-  static private var preventedSleep = false
-
-  /// Ask macOS to not dim or sleep the display.
+  /// Ask macOS to prevent the screen saver from starting or just prevent the system from sleeping.
   ///
-  /// This method uses the macOS function [IOPMAssertionCreateWithName](https://developer.apple.com/documentation/iokit/1557134-iopmassertioncreatewithname)
-  /// to create a [kIOPMAssertionTypeNoDisplaySleep](https://developer.apple.com/documentation/iokit/kiopmassertiontypenodisplaysleep)
-  /// assertion with the macOS power management system.
-  /// - Attention: This portion of macOS has proven to be **unreliable**.
+  /// This method uses the macOS function
+  /// [beginActivity](https://developer.apple.com/documentation/foundation/processinfo/1415995-beginactivity)
+  /// to create an
+  /// [idleDisplaySleepDisabled](https://developer.apple.com/documentation/foundation/processinfo/activityoptions/1416839-idledisplaysleepdisabled)
+  /// activity that prevents the screen saver from starting or an
+  /// [idleSystemSleepDisabled](https://developer.apple.com/documentation/foundation/processinfo/activityoptions/1409849-idlesystemsleepdisabled)
+  /// activity that prevents the system from sleeping.
   ///
-  /// It is important to inform the user that macOS power management is malfunctioning as this can explain
-  /// why there is trouble with audio/video playback. For this reason IINA posts an alert if  `IOPMAssertionCreateWithName` fails.
-  ///
-  /// As this alert can be irritating to users the alert is only displayed once per IINA invocation. In addition
-  /// the alert supports a [suppression button](https://developer.apple.com/documentation/appkit/nsalert/1535196-showssuppressionbutton)
-  /// to allow the user to permanently suppress this alert. 
-  ///
-  /// See issues [#3842](https://github.com/iina/iina/issues/3842) and [#3478](https://github.com/iina/iina/issues/3478) for details on the macOS failure.
-  static func preventSleep() {
-    if preventedSleep {
-      return
+  /// To see the power management assertion created by the activity run the command `pmset -g assertions` in  terminal.
+  /// - Parameter allowScreenSaver: If `true` the screen saver will be allowed to start but the system will be prevented from
+  ///     sleeping.
+  static func preventSleep(allowScreenSaver: Bool = false) {
+    if activityToken != nil {
+      guard self.allowScreenSaver != allowScreenSaver else { return }
+      // The outstanding activity does not match what is requested. End the current activity and
+      // create a new one.
+      allowSleep()
     }
+    SleepPreventer.allowScreenSaver = allowScreenSaver
+    let options: ProcessInfo.ActivityOptions = allowScreenSaver ?
+      .idleSystemSleepDisabled : .idleDisplaySleepDisabled
+    activityToken = ProcessInfo.processInfo.beginActivity(options: options,
+                                                          reason: "IINA playback is in progress")
 
-    let success = IOPMAssertionCreateWithName(kIOPMAssertionTypeNoDisplaySleep as NSString,
-                                              IOPMAssertionLevel(kIOPMAssertionLevelOn),
-                                              reason,
-                                              &assertionID)
-    guard success != kIOReturnSuccess else {
-      preventedSleep = true
-      return
-    }
-    // Something has gone wrong with power management on this Mac.
-    Logger.log(String(format: "IOPMAssertionCreateWithName returned 0x%0X8, \(String(cString: mach_error_string(success)))",
-                      success), level: .error)
-    Logger.log(
-      "Cannot prevent display sleep because macOS power management is broken on this machine",
-      level: .error)
-    // To avoid irritating users only display this alert once per IINA invocation and support a
-    // button to allow the alert to be permanently suppressed.
-    guard !haveShownAlert else { return }
-    haveShownAlert = true
-    DispatchQueue.main.async {
-      Utility.showAlert("sleep", arguments: [success],
-                        suppressionKey: .suppressCannotPreventDisplaySleep)
-    }
+    let logMessage = allowScreenSaver ? "Preventing system from sleeping" : "Preventing screen saver from starting"
+    Logger.log(logMessage, level: .verbose)
   }
 
   static func allowSleep() {
-    if !preventedSleep {
-      return
-    } else {
-      let success = IOPMAssertionRelease(assertionID)
-      if success == kIOReturnSuccess {
-        preventedSleep = false
-      } else {
-        Logger.log("Cannot allow display sleep", level: .warning)
-      }
-    }
+    guard let activityToken = activityToken else { return }
+    ProcessInfo.processInfo.endActivity(activityToken)
+    SleepPreventer.activityToken = nil
+    
+    let logMessage = allowScreenSaver ? "Allowing system to sleep when inactive" : "Allowing screen saver to start when inactive"
+    Logger.log(logMessage, level: .verbose)
   }
-
 }

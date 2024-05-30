@@ -1219,7 +1219,7 @@
                                                                         </textField>
                                                                         <textField focusRingType="none" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ImH-jg-Agp" userLabel="s">
                                                                             <rect key="frame" x="307" y="15" width="15" height="16"/>
-                                                                            <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="s" id="1VY-EN-1mi">
+                                                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="s" id="1VY-EN-1mi">
                                                                                 <font key="font" metaFont="system"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>

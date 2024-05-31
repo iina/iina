@@ -267,6 +267,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
   /// If the target config file cannot be found, or the file cannot be parsed correctly, it will fallback to the default config.
   /// - Parameter configName: the target config name
   private func loadConfigFile(_ configName: String?) {
+    guard configName != Preference.string(for: .currentInputConfigName) else { return }
     isLoading = true
     
     func fallback() {

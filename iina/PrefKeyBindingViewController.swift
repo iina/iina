@@ -37,6 +37,8 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     "Movist Default": "movist-default-input",
   ]
 
+  let fallbackDefault = "IINA Default"
+
   static var defaultConfigs: [String: String] = {
     var configs: [String: String] = [:]
     for (key, value) in defaultConfigMap {
@@ -144,38 +146,10 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     mappingController.remove(sender)
     NotificationCenter.default.post(Notification(name: .iinaKeyBindingChanged))
   }
-  
-  // Check whether or not a new config file with provided filename should be created.
-  // Returns the path of the new config if could be created; nil otherwise
-  private func checkNewConfigFile(with filename: String) -> String? {
-    // Check if the name is empty
-    guard !filename.isEmpty else {
-      Utility.showAlert("config.empty_name", sheetWindow: self.view.window)
-      return nil
-    }
-    
-    // Check if there already exists a config which has the same name
-    guard KC.userConfigs[filename] == nil && KC.defaultConfigs[filename] == nil else {
-      Utility.showAlert("config.name_existing", sheetWindow: self.view.window)
-      return nil
-    }
-    
-    // Check if there exists a config file with the same filename
-    let filePath = Utility.userInputConfDirURL.appendingPathComponent(filename + ".conf").path
-    if fm.fileExists(atPath: filePath) {
-      Utility.quickAskPanel("config.file_existing", sheetWindow: self.view.window) { result in
-        if result == .alertFirstButtonReturn {
-          NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: filePath)])
-        }
-      }
-      return nil
-    }
-    return filePath
-  }
 
   @IBAction func newConfFileAction(_ sender: AnyObject) {
     Utility.quickPromptPanel("config.new", sheetWindow: view.window) { newName in
-      guard let newFilePath = self.checkNewConfigFile(with: newName) else { return }
+      guard let newFilePath = self.newConfigFilePath(forName: newName) else { return }
 
       if !fm.createFile(atPath: newFilePath, contents: nil, attributes: nil) {
         Utility.showAlert("config.cannot_create", sheetWindow: self.view.window)
@@ -187,7 +161,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
 
   @IBAction func duplicateConfFileAction(_ sender: AnyObject) {
     Utility.quickPromptPanel("config.duplicate", sheetWindow: view.window) { newName in
-      guard let newFilePath = self.checkNewConfigFile(with: newName) else { return }
+      guard let newFilePath = self.newConfigFilePath(forName: newName) else { return }
 
       do {
         try fm.copyItem(atPath: self.currentConfFilePath!, toPath: newFilePath)
@@ -203,7 +177,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
   @IBAction func configFileListDoubleAction(_ sender: NSTableView) {
     guard shouldEnableEdit else { return }
     Utility.quickPromptPanel("config.rename", sheetWindow: view.window) { newName in
-      guard let newFilePath = self.checkNewConfigFile(with: newName) else { return }
+      guard let newFilePath = self.newConfigFilePath(forName: newName) else { return }
 
       do {
         try fm.moveItem(atPath: self.currentConfFilePath!, toPath: newFilePath)
@@ -227,7 +201,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
       Utility.showAlert("error_deleting_file", sheetWindow: view.window)
     }
     // Fallback to default
-    loadConfigFile(configNames[0])
+    loadConfigFile(fallbackDefault)
   }
 
   @IBAction func importConfigBtnAction(_ sender: Any) {
@@ -285,16 +259,16 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
 
   // MARK: - Private
 
-  // This function firstly reloads the table data, select the config file row, then load the config file
-  // If the target config file cannot be found, or the file cannot be parsed correctly, it will fallback to IINA Default
+  /// This function firstly reloads the table data, select the config file row, then load the config file.
+  /// If the target config file cannot be found, or the file cannot be parsed correctly, it will fallback to the default config.
+  /// - Parameter configName: the target config name
   private func loadConfigFile(_ configName: String?) {
     isLoading = true
     
     func fallback() {
       isLoading = false
       Utility.showAlert("keybinding_config.error", arguments: [currentConfName], sheetWindow: view.window)
-      loadConfigFile(configNames[0])
-      return
+      loadConfigFile(fallbackDefault)
     }
 
     guard let configName = configName else { fallback(); return }
@@ -319,6 +293,35 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     isLoading = false
   }
 
+  /// Check whether or not a new config file with provided filename should be created.
+  /// - Parameter filename: the filename of the new config file
+  /// - Returns: the path of the new config if could be created; nil otherwise.
+  private func newConfigFilePath(forName filename: String) -> String? {
+    // Check if the name is empty
+    guard !filename.isEmpty else {
+      Utility.showAlert("config.empty_name", sheetWindow: self.view.window)
+      return nil
+    }
+
+    // Check if there already exists a config which has the same name
+    guard KC.userConfigs[filename] == nil && KC.defaultConfigs[filename] == nil else {
+      Utility.showAlert("config.name_existing", sheetWindow: self.view.window)
+      return nil
+    }
+
+    // Check if there exists a config file with the same filename
+    let filePath = Utility.userInputConfDirURL.appendingPathComponent(filename + ".conf").path
+    if fm.fileExists(atPath: filePath) {
+      Utility.quickAskPanel("config.file_existing", sheetWindow: self.view.window) { result in
+        if result == .alertFirstButtonReturn {
+          NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: filePath)])
+        }
+      }
+      return nil
+    }
+    return filePath
+  }
+
   private func getFilePath(forConfig conf: String, showAlert: Bool = true) -> String? {
     let path = KC.defaultConfigs[conf] ?? KC.userConfigs[conf]
     if path == nil {
@@ -339,7 +342,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
 
 }
 
-// MARK: -
+// MARK: - NSTableViewDelegate, NSTableViewDataSource
 
 extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSource {
 
@@ -386,8 +389,7 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
   func tableViewSelectionDidChange(_ notification: Notification) {
     guard !isLoading else { return }
     if let tableView = notification.object as? NSTableView, tableView == confTableView {
-      let title = configNames[at: confTableView.selectedRow]
-      guard title != currentConfName else { return }
+      guard let title = configNames[at: confTableView.selectedRow], title != currentConfName else { return }
       loadConfigFile(title)
     }
     removeKmBtn.isEnabled = shouldEnableEdit && kbTableView.selectedRow != -1

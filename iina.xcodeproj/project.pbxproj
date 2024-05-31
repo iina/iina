@@ -914,6 +914,7 @@
 		34F294692C0A1BE000F14962 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = id; path = id.lproj/Contribution.rtf; sourceTree = "<group>"; };
 		34F2946A2C0A1BE000F14962 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/FilterPresets.strings; sourceTree = "<group>"; };
 		34F2946B2C0A1BE000F14962 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/KeyBinding.strings; sourceTree = "<group>"; };
+		34F2946F2C0A1E1800F14962 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/KeyBinding.strings"; sourceTree = "<group>"; };
 		34FD798D291C76A600963EDE /* LogWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogWindowController.swift; sourceTree = "<group>"; };
 		440DDE351E9010420063E211 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		440DDE361E9010420063E211 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MainWindowController.strings; sourceTree = "<group>"; };
@@ -4192,6 +4193,7 @@
 				348BFFF528DC657F0045F683 /* pt */,
 				05B91AB22BFEE5E70012631C /* he */,
 				34F2946B2C0A1BE000F14962 /* id */,
+				34F2946F2C0A1E1800F14962 /* sr-Latn */,
 			);
 			name = KeyBinding.strings;
 			sourceTree = "<group>";

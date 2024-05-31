@@ -57,6 +57,8 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     }
   }
 
+  private var cachedConfigNames: [String]!
+
   var configNames: [String] {
     return KC.defaultConfigMap.map { $0.key } + Array(KC.userConfigs.keys).sorted()
   }
@@ -85,6 +87,8 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    cachedConfigNames = configNames
 
     kbTableView.delegate = self
     kbTableView.doubleAction = Preference.bool(for: .displayKeyBindingRawValues) ? nil : #selector(editRow)
@@ -273,8 +277,9 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
 
     guard let configName = configName else { fallback(); return }
     
+    cachedConfigNames = configNames
     confTableView.reloadData()
-    if let index = configNames.firstIndex(of: configName) {
+    if let index = cachedConfigNames.firstIndex(of: configName) {
       confTableView.selectRowIndexes(IndexSet(integer: index), byExtendingSelection: false)
     }
     currentConfName = configName
@@ -349,11 +354,11 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
   // NSTableViewDataSource
 
   func numberOfRows(in tableView: NSTableView) -> Int {
-    return configNames.count
+    return cachedConfigNames.count
   }
 
   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-    let name = configNames[row]
+    let name = cachedConfigNames[row]
     return [
       "name": name,
       "isHidden": !isDefaultConfig(name)
@@ -389,7 +394,7 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
   func tableViewSelectionDidChange(_ notification: Notification) {
     guard !isLoading else { return }
     if let tableView = notification.object as? NSTableView, tableView == confTableView {
-      guard let title = configNames[at: confTableView.selectedRow], title != currentConfName else { return }
+      guard let title = cachedConfigNames[at: confTableView.selectedRow], title != currentConfName else { return }
       loadConfigFile(title)
     }
     removeKmBtn.isEnabled = shouldEnableEdit && kbTableView.selectedRow != -1

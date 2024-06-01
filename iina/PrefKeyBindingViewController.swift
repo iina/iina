@@ -66,7 +66,8 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
   var currentConfName: String!
   var currentConfFilePath: String!
   
-  var isLoading = false
+  // This variable is to prevent `NSTableView.reloadData()` in the `loadConfigFile` to trigger `loadConfigFile` again thus forming an infinite loop
+  var isLoadingConfig = false
 
   var shouldEnableEdit: Bool = true
 
@@ -268,10 +269,10 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
   /// - Parameter configName: the target config name
   private func loadConfigFile(_ configName: String?) {
     guard configName != Preference.string(for: .currentInputConfigName) else { return }
-    isLoading = true
+    isLoadingConfig = true
     
     func fallback() {
-      isLoading = false
+      isLoadingConfig = false
       Utility.showAlert("keybinding_config.error", arguments: [currentConfName], sheetWindow: view.window)
       loadConfigFile(fallbackDefault)
     }
@@ -296,7 +297,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     setKeybindingsForPlayerCore()
     changeButtonEnabledStatus()
     
-    isLoading = false
+    isLoadingConfig = false
   }
 
   /// Check whether or not a new config file with provided filename should be created.
@@ -393,7 +394,7 @@ extension PrefKeyBindingViewController: NSTableViewDelegate, NSTableViewDataSour
   }
 
   func tableViewSelectionDidChange(_ notification: Notification) {
-    guard !isLoading else { return }
+    guard !isLoadingConfig else { return }
     if let tableView = notification.object as? NSTableView, tableView == confTableView {
       guard let title = cachedConfigNames[at: confTableView.selectedRow], title != currentConfName else { return }
       loadConfigFile(title)

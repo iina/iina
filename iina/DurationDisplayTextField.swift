@@ -93,9 +93,7 @@ class DurationDisplayTextField: NSTextField {
     DurationDisplayTextField.precision = precision
     Preference.set(Int(precision), for: .timeDisplayPrecision)
     PlayerCore.playerCores.forEach { core in
-      if core.syncPlayTimeTimer != nil {
-        core.createSyncUITimer()
-      }
+      core.refreshSyncUITimer()
     }
   }
 }

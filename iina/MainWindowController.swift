@@ -597,9 +597,6 @@ class MainWindowController: PlayerWindowController {
     osdVisualEffectView.isHidden = true
     osdVisualEffectView.roundCorners(withRadius: 10)
     additionalInfoView.roundCorners(withRadius: 10)
-    if additionalInfoView.userInterfaceLayoutDirection == .rightToLeft {
-      additionalInfoLabelXConstraint.constant = -1
-    }
     leftArrowLabel.isHidden = true
     rightArrowLabel.isHidden = true
     timePreviewWhenSeek.isHidden = true
@@ -2062,6 +2059,9 @@ class MainWindowController: PlayerWindowController {
     additionalInfoTitle.stringValue = window?.representedURL?.lastPathComponent ?? window?.title ?? ""
     if let capacity = PowerSource.getList().filter({ $0.type == "InternalBattery" }).first?.currentCapacity {
       additionalInfoBattery.stringValue = "\(capacity)%"
+      if additionalInfoView.userInterfaceLayoutDirection == .rightToLeft {
+        additionalInfoLabelXConstraint.constant = capacity == 100 ? -1 : -2.5
+      }
       additionalInfoStackView.setVisibilityPriority(.mustHold, for: additionalInfoBatteryView)
     } else {
       additionalInfoStackView.setVisibilityPriority(.notVisible, for: additionalInfoBatteryView)

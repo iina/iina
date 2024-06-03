@@ -1797,7 +1797,6 @@ class PlayerCore: NSObject {
     }
   }
 
-  @available(macOS 10.15, *)
   func refreshEdrMode() {
     guard mainWindow.loaded else { return }
     DispatchQueue.main.async { [self] in

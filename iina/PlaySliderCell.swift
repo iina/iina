@@ -8,19 +8,6 @@
 
 import Cocoa
 
-// These colors are for 10.13- only
-@available(macOS, obsoleted: 10.14)
-fileprivate extension NSColor {
-  static let darkKnobColor = NSColor(calibratedRed: 1, green: 1, blue: 1, alpha: 0.5)
-  static let lightKnobColor = NSColor(calibratedRed: 0.3, green: 0.3, blue: 0.3, alpha: 1)
-  static let darkBarColorLeft = NSColor(calibratedWhite: 1, alpha: 0.3)
-  static let darkBarColorRight = NSColor(calibratedWhite: 1, alpha: 0.1)
-  static let lightBarColorLeft = NSColor(calibratedRed: 0.239, green: 0.569, blue: 0.969, alpha: 1)
-  static let lightBarColorRight = NSColor(calibratedWhite: 0.5, alpha: 0.5)
-  static let lightChapterStrokeColor = NSColor(calibratedWhite: 0.4, alpha: 1)
-  static let darkChapterStrokeColor = NSColor(calibratedWhite: 0.2, alpha: 1)
-}
-
 class PlaySliderCell: NSSliderCell {
   unowned var _playerCore: PlayerCore!
   var playerCore: PlayerCore {
@@ -41,53 +28,11 @@ class PlaySliderCell: NSSliderCell {
   let knobRadius: CGFloat = 1
   let barRadius: CGFloat = 1.5
 
-  var isInDarkTheme: Bool = true {
-    didSet {
-      if #available(macOS 10.14, *) {} else {
-        self.knobColor = isInDarkTheme ? .darkKnobColor : .lightKnobColor
-        self.knobActiveColor = isInDarkTheme ? .darkKnobColor : .lightKnobColor
-        self.barColorLeft = isInDarkTheme ? .darkBarColorLeft : .lightBarColorLeft
-        self.barColorRight = isInDarkTheme ? .darkBarColorRight : .lightBarColorRight
-        self.chapterStrokeColor = isInDarkTheme ? .darkChapterStrokeColor : .lightChapterStrokeColor
-      }
-    }
-  }
-
-  private var knobColor: NSColor = {
-    if #available(macOS 10.14, *) {
-      return NSColor(named: .mainSliderKnob)!
-    } else {
-      return .darkKnobColor
-    }
-  }()
-  private var knobActiveColor: NSColor = {
-    if #available(macOS 10.14, *) {
-      return NSColor(named: .mainSliderKnobActive)!
-    } else {
-      return .darkKnobColor
-    }
-  }()
-  private var barColorLeft: NSColor = {
-    if #available(macOS 10.14, *) {
-      return NSColor(named: .mainSliderBarLeft)!
-    } else {
-      return .darkBarColorLeft
-    }
-  }()
-  private var barColorRight: NSColor = {
-    if #available(macOS 10.14, *) {
-      return NSColor(named: .mainSliderBarRight)!
-    } else {
-      return .darkBarColorRight
-    }
-  }()
-  private var chapterStrokeColor: NSColor = {
-    if #available(macOS 10.14, *) {
-      return NSColor(named: .mainSliderBarChapterStroke)!
-    } else {
-      return .darkChapterStrokeColor
-    }
-  }()
+  private var knobColor = NSColor(named: .mainSliderKnob)!
+  private var knobActiveColor = NSColor(named: .mainSliderKnobActive)!
+  private var barColorLeft = NSColor(named: .mainSliderBarLeft)!
+  private var barColorRight = NSColor(named: .mainSliderBarRight)!
+  private var chapterStrokeColor = NSColor(named: .mainSliderBarChapterStroke)!
 
   var drawChapters = Preference.bool(for: .showChapterPos)
 

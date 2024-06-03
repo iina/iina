@@ -1116,9 +1116,7 @@ not applying FFmpeg 9599 workaround
       fallthrough;
 
     case MPVProperty.videoParamsGamma:
-      if #available(macOS 10.15, *) {
-        player.refreshEdrMode()
-      }
+      player.refreshEdrMode()
 
     case MPVOption.TrackSelection.vid:
       player.vidChanged()

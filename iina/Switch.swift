@@ -6,6 +6,9 @@
 //  Copyright © 2020 lhc. All rights reserved.
 //
 
+// We do not remove the #available checks in this file because we
+// expect to deprecate this entire class soon.
+
 import Cocoa
 
 @IBDesignable
@@ -118,40 +121,23 @@ class Switch: NSView {
   private var checkbox: NSButton?
 
   private func setupSubViews() {
-    if #available(macOS 10.15, *) {
-      let label = NSTextField(labelWithString: title)
-      let nsSwitch = NSSwitch()
-      nsSwitch.target = self
-      nsSwitch.action = #selector(statusChanged)
-      label.translatesAutoresizingMaskIntoConstraints = false
-      nsSwitch.translatesAutoresizingMaskIntoConstraints = false
-      addSubview(label)
-      addSubview(nsSwitch)
-      self.nsSwitch = nsSwitch
-      self.label = label
-      if switchOnLeft {
-        NSLayoutConstraint.activate(switchOnLeftConstraint)
-      } else {
-        NSLayoutConstraint.activate(switchOnRightConstraint)
-      }
-      label.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-      nsSwitch.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+    let label = NSTextField(labelWithString: title)
+    let nsSwitch = NSSwitch()
+    nsSwitch.target = self
+    nsSwitch.action = #selector(statusChanged)
+    label.translatesAutoresizingMaskIntoConstraints = false
+    nsSwitch.translatesAutoresizingMaskIntoConstraints = false
+    addSubview(label)
+    addSubview(nsSwitch)
+    self.nsSwitch = nsSwitch
+    self.label = label
+    if switchOnLeft {
+      NSLayoutConstraint.activate(switchOnLeftConstraint)
     } else {
-      let checkbox: NSButton
-      if #available(macOS 10.12, *) {
-        checkbox = NSButton(checkboxWithTitle: title, target: self, action: #selector(statusChanged))
-      } else {
-        checkbox = NSButton()
-        checkbox.setButtonType(.switch)
-        checkbox.target = self
-        checkbox.action = #selector(statusChanged)
-      }
-      checkbox.translatesAutoresizingMaskIntoConstraints = false
-      self.checkbox = checkbox
-      addSubview(checkbox)
-      Utility.quickConstraints(["H:|-0-[b]-(>=0)-|"], ["b": checkbox])
-      checkbox.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+      NSLayoutConstraint.activate(switchOnRightConstraint)
     }
+    label.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+    nsSwitch.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
   }
 
   override init(frame frameRect: NSRect) {

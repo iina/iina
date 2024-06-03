@@ -191,10 +191,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       }
     }
 
-    if #available(macOS 10.15, *) {
-      addObserver(to: .default, forName: NSScreen.colorSpaceDidChangeNotification, object: nil) { [unowned self] noti in
-        player.refreshEdrMode()
-      }
+    addObserver(to: .default, forName: NSScreen.colorSpaceDidChangeNotification, object: nil) { [unowned self] noti in
+      player.refreshEdrMode()
     }
   }
 

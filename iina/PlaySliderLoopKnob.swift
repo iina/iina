@@ -123,13 +123,7 @@ final class PlaySliderLoopKnob: NSView {
   // MARK:- Drawing
 
   private func knobColor() -> NSColor {
-    // Starting with macOS Mojave 10.14 colors can be configured to automatically adjust for the
-    // current appearance.
-    if #available(macOS 10.14, *) {
-      return NSColor(named: .mainSliderLoopKnob)!
-    } else {
-      return slider.window!.effectiveAppearance.isDark ? .darkKnobColor : .lightKnobColor
-    }
+    return NSColor(named: .mainSliderLoopKnob)!
   }
 
   /// Draw the knob.

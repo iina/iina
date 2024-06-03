@@ -227,7 +227,7 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
     if let widthConstant = sizingTouchBarTextField.cell?.cellSize.width, !touchBarPosLabels.isEmpty {
       if let posConstraint = touchBarPosLabelWidthLayout {
         posConstraint.constant = widthConstant + pad
-        touchBarPosLabels.forEach { $0.setNeedsDisplay() }
+        touchBarPosLabels.forEach { $0.needsDisplay = true }
       } else {
         for posLabel in touchBarPosLabels {
           let posConstraint = NSLayoutConstraint(item: posLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: widthConstant + pad)

@@ -268,11 +268,7 @@ class VideoView: NSView {
     }
     player.mpv.setDouble(MPVOption.Video.overrideDisplayFps, actualFps)
 
-    if #available(macOS 10.15, *) {
-      refreshEdrMode()
-    } else {
-      setICCProfile(displayId)
-    }
+    refreshEdrMode()
   }
 
   // MARK: - Reducing Energy Use
@@ -423,7 +419,6 @@ class VideoView: NSView {
 
 // MARK: - HDR
 
-@available(macOS 10.15, *)
 extension VideoView {
   func refreshEdrMode() {
     guard player.mainWindow.loaded else { return }

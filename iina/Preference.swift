@@ -299,7 +299,12 @@ struct Preference {
 
     static let iinaEnablePluginSystem = Key("iinaEnablePluginSystem")
 
-    /** Workaround for issue [#4688](https://github.com/iina/iina/issues/4688) */
+    /// Workaround for issue [#4688](https://github.com/iina/iina/issues/4688)
+    /// - Note: This workaround can cause significant slowdown at startup if the list of recent documents contains files on a mounted
+    ///         volume that is unreachable. For this reason the workaround is disabled by default and must be enabled by running the
+    ///         following command in [Terminal](https://support.apple.com/guide/terminal/welcome/mac):
+    ///         `defaults write com.colliderli.iina enableRecentDocumentsWorkaround true`
+    static let enableRecentDocumentsWorkaround = Key("enableRecentDocumentsWorkaround")
     static let recentDocuments = Key("recentDocuments")
   }
 
@@ -884,6 +889,7 @@ struct Preference {
 
     .suppressCannotPreventDisplaySleep: false,
 
+    .enableRecentDocumentsWorkaround: false,
     .recentDocuments: [Any]()
   ]
 

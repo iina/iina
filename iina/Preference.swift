@@ -111,10 +111,10 @@ struct Preference {
 
     /** Timeout for auto hiding control bar (float) */
     static let controlBarAutoHideTimeout = Key("controlBarAutoHideTimeout")
-    
+
     /** Whether auto hiding control bar is enabled. (bool)*/
     static let enableControlBarAutoHide = Key("enableControlBarAutoHide")
-    
+
     static let controlBarToolbarButtons = Key("controlBarToolbarButtons")
 
     static let enableOSD = Key("enableOSD")
@@ -302,7 +302,12 @@ struct Preference {
     /** Internal */
     static let iinaEnablePluginSystem = Key("iinaEnablePluginSystem")
 
-    /** Workaround for issue [#4688](https://github.com/iina/iina/issues/4688) */
+    /// Workaround for issue [#4688](https://github.com/iina/iina/issues/4688)
+    /// - Note: This workaround can cause significant slowdown at startup if the list of recent documents contains files on a mounted
+    ///         volume that is unreachable. For this reason the workaround is disabled by default and must be enabled by running the
+    ///         following command in [Terminal](https://support.apple.com/guide/terminal/welcome/mac):
+    ///         `defaults write com.colliderli.iina enableRecentDocumentsWorkaround true`
+    static let enableRecentDocumentsWorkaround = Key("enableRecentDocumentsWorkaround")
     static let recentDocuments = Key("recentDocuments")
 
     static let enableFFmpegImageDecoder = Key("enableFFmpegImageDecoder")
@@ -910,6 +915,7 @@ struct Preference {
 
     .suppressCannotPreventDisplaySleep: false,
 
+    .enableRecentDocumentsWorkaround: false,
     .recentDocuments: [Any](),
 
     .enableFFmpegImageDecoder: true

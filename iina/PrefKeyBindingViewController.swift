@@ -67,9 +67,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
 
     removeKmBtn.isEnabled = false
 
-    if #available(macOS 10.13, *) {
-      useMediaKeysButton.title = NSLocalizedString("preference.system_media_control", comment: "Use system media control")
-    }
+    useMediaKeysButton.title = NSLocalizedString("preference.system_media_control", comment: "Use system media control")
 
     // config files
     // - default

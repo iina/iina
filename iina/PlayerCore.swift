@@ -239,9 +239,7 @@ class PlayerCore: NSObject {
     self.mainWindow = MainWindowController(playerCore: self)
     self.miniPlayer = MiniPlayerWindowController(playerCore: self)
     self.initialWindow = InitialWindowController(playerCore: self)
-    if #available(macOS 10.12.2, *) {
-      self._touchBarSupport = TouchBarSupport(playerCore: self)
-    }
+    self._touchBarSupport = TouchBarSupport(playerCore: self)
   }
 
   // MARK: - Plugins
@@ -1673,7 +1671,7 @@ class PlayerCore: NSObject {
       }
     }
 
-    if #available(macOS 10.13, *), RemoteCommandController.useSystemMediaControl {
+    if RemoteCommandController.useSystemMediaControl {
       DispatchQueue.main.async {
         NowPlayingInfoManager.updateInfo(state: .playing, withTitle: true)
       }
@@ -1728,9 +1726,7 @@ class PlayerCore: NSObject {
       getChapters()
       syncAbLoop()
       refreshSyncUITimer()
-      if #available(macOS 10.12.2, *) {
-        touchBarSupport.setupTouchBarUI()
-      }
+      touchBarSupport.setupTouchBarUI()
 
       if info.aid == 0 {
         mainWindow.muteButton.isEnabled = false
@@ -1797,7 +1793,7 @@ class PlayerCore: NSObject {
     reloadSavedIINAfilters()
     mainWindow.videoView.videoLayer.draw(forced: true)
 
-    if #available(macOS 10.13, *), RemoteCommandController.useSystemMediaControl {
+    if RemoteCommandController.useSystemMediaControl {
       DispatchQueue.main.sync {
         NowPlayingInfoManager.updateInfo()
       }
@@ -2122,9 +2118,7 @@ class PlayerCore: NSObject {
       DispatchQueue.main.async {
         self.mainWindow.updatePlayButtonState(self.info.isPaused ? .off : .on)
         self.miniPlayer.updatePlayButtonState(self.info.isPaused ? .off : .on)
-        if #available(macOS 10.12.2, *) {
-          self.touchBarSupport.updateTouchBarPlayBtn()
-        }
+        self.touchBarSupport.updateTouchBarPlayBtn()
       }
 
     case .volume, .muteButton:
@@ -2203,10 +2197,8 @@ class PlayerCore: NSObject {
     info.thumbnailsReady = false
     info.thumbnails.removeAll(keepingCapacity: true)
     info.thumbnailsProgress = 0
-    if #available(macOS 10.12.2, *) {
-      DispatchQueue.main.async {
-        self.touchBarSupport.touchBarPlaySlider?.resetCachedThumbnails()
-      }
+    DispatchQueue.main.async {
+      self.touchBarSupport.touchBarPlaySlider?.resetCachedThumbnails()
     }
     guard !info.isNetworkResource, let url = info.currentURL else {
       log("...stopped because cannot get file path", level: .warning)
@@ -2250,10 +2242,8 @@ class PlayerCore: NSObject {
   }
 
   func refreshTouchBarSlider() {
-    if #available(macOS 10.12.2, *) {
-      DispatchQueue.main.async {
-        self.touchBarSupport.touchBarPlaySlider?.needsDisplay = true
-      }
+    DispatchQueue.main.async {
+      self.touchBarSupport.touchBarPlaySlider?.needsDisplay = true
     }
   }
 

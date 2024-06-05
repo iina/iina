@@ -285,11 +285,7 @@ class MenuController: NSObject, NSMenuDelegate {
 
     // -- screen
     fullScreen.action = #selector(MainWindowController.menuToggleFullScreen(_:))
-    if #available(macOS 10.12, *) {
-      pictureInPicture.action = #selector(MainWindowController.menuTogglePIP(_:))
-    } else {
-      videoMenu.removeItem(pictureInPicture)
-    }
+    pictureInPicture.action = #selector(MainWindowController.menuTogglePIP(_:))
     alwaysOnTop.action = #selector(MainWindowController.menuAlwaysOnTop(_:))
 
     // -- aspect
@@ -416,11 +412,7 @@ class MenuController: NSObject, NSMenuDelegate {
 
     // Window
 
-    if #available(macOS 10.12.2, *) {
-      customTouchBar.action = #selector(NSApplication.toggleTouchBarCustomizationPalette(_:))
-    } else {
-      customTouchBar.isHidden = true
-    }
+    customTouchBar.action = #selector(NSApplication.toggleTouchBarCustomizationPalette(_:))
 
     inspector.action = #selector(MainMenuActionHandler.menuShowInspector(_:))
     miniPlayer.action = #selector(MainWindowController.menuSwitchToMiniPlayer(_:))
@@ -889,9 +881,7 @@ class MenuController: NSObject, NSMenuDelegate {
       (fullScreen, false, ["cycle", "fullscreen"], false, nil, nil)
     ]
 
-    if #available(macOS 10.12, *) {
-      settings.append((pictureInPicture, true, ["toggle-pip"], false, nil, nil))
-    }
+    settings.append((pictureInPicture, true, ["toggle-pip"], false, nil, nil))
 
     var otherActionsMenuItems: [NSMenuItem] = []
 

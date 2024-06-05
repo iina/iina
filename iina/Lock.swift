@@ -27,11 +27,7 @@ class Lock {
   private let lock: LockImpl
 
   init() {
-    if #available(macOS 10.12, *) {
-      lock = OSUnfairLockImpl()
-    } else {
-      lock = NSLockImpl()
-    }
+    lock = OSUnfairLockImpl()
   }
 
   /// Executes a closure while holding a lock.

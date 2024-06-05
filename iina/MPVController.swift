@@ -941,13 +941,8 @@ not applying FFmpeg 9599 workaround
         // Initiate application termination. AppKit requires this be done from the main thread,
         // however the main dispatch queue must not be used to avoid blocking the queue as per
         // instructions from Apple.
-        if #available(macOS 10.12, *) {
-          RunLoop.main.perform(inModes: [.common]) {
-            self.terminateApplication()
-          }
-        } else {
-          RunLoop.main.perform(#selector(self.terminateApplication), target: self,
-                               argument: nil, order: Int.min, modes: [.common])
+        RunLoop.main.perform(inModes: [.common]) {
+          self.terminateApplication()
         }
       } else {
         mpv_destroy(mpv)

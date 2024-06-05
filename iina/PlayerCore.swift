@@ -1130,6 +1130,16 @@ class PlayerCore: NSObject {
     }
   }
 
+  func toggleSubVisibility(_ set: Bool? = nil) {
+    let newState = set ?? !info.isSubVisible
+    mpv.setFlag(MPVOption.Subtitles.subVisibility, newState)
+  }
+
+  func toggleSecondSubVisibility(_ set: Bool? = nil) {
+    let newState = set ?? !info.isSecondSubVisible
+    mpv.setFlag(MPVOption.Subtitles.secondarySubVisibility, newState)
+  }
+
   func loadExternalSubFile(_ url: URL, delay: Bool = false) {
     if let track = info.subTracks.first(where: { $0.externalFilename == url.path }) {
       mpv.command(.subReload, args: [String(track.id)], checkError: false)
@@ -1813,11 +1823,25 @@ class PlayerCore: NSObject {
     postNotification(.iinaSIDChanged)
   }
 
+  func secondSubVisibilityChanged(_ visible: Bool) {
+    guard info.isSecondSubVisible != visible else { return }
+    info.isSecondSubVisible = visible
+    sendOSD(visible ? .secondSubVisible : .secondSubHidden)
+    postNotification(.iinaSecondSubVisibilityChanged)
+  }
+
   func sidChanged() {
     guard !isShuttingDown, !isShutdown else { return }
     info.sid = Int(mpv.getInt(MPVOption.TrackSelection.sid))
     postNotification(.iinaSIDChanged)
     sendOSD(.track(info.currentTrack(.sub) ?? .noneSubTrack))
+  }
+
+  func subVisibilityChanged(_ visible: Bool) {
+    guard info.isSubVisible != visible else { return }
+    info.isSubVisible = visible
+    sendOSD(visible ? .subVisible : .subHidden)
+    postNotification(.iinaSubVisibilityChanged)
   }
 
   func trackListChanged() {

@@ -71,11 +71,16 @@ class AboutWindowController: NSWindowController {
     mpvVersionLabel.stringValue = PlayerCore.active.mpv.mpvVersion
     ffmpegVersionLabel.stringValue = "FFmpeg \(String(cString: av_version_info()))"
 
+    // Use a localized date for the build date.
+    let toString = DateFormatter()
+    toString.dateStyle = .medium
+    toString.timeStyle = .medium
+
     switch InfoDictionary.shared.buildType {
     case .nightly:
       if let buildDate = InfoDictionary.shared.buildDate,
          let buildSHA = InfoDictionary.shared.shortCommitSHA {
-        buildDateLabel.stringValue = buildDate
+        buildDateLabel.stringValue = toString.string(from: buildDate)
         buildDateLabel.isHidden = false
         buildBranchButton.title = "NIGHTLY " + buildSHA
         buildBranchButton.action = #selector(self.openCommitLink)
@@ -85,7 +90,7 @@ class AboutWindowController: NSWindowController {
       if let buildDate = InfoDictionary.shared.buildDate,
          let buildBranch = InfoDictionary.shared.buildBranch,
          let buildSHA = InfoDictionary.shared.shortCommitSHA {
-        buildDateLabel.stringValue = buildDate
+        buildDateLabel.stringValue = toString.string(from: buildDate)
         buildDateLabel.isHidden = false
         buildBranchButton.title = buildBranch + " " + buildSHA
         buildBranchButton.action = #selector(self.openCommitLink)

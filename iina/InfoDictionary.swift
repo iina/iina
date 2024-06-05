@@ -24,7 +24,7 @@ struct InfoDictionary {
     return String(buildCommit.prefix(7))
   }
 
-  var buildDate: String? {
+  var buildDate: Date? {
     let dateParser: (String) -> Date?
     if #available(macOS 10.12, *) {
       let formatter = ISO8601DateFormatter()
@@ -38,11 +38,7 @@ struct InfoDictionary {
           let dateObj = dateParser(date) else {
       return nil
     }
-    // Use a localized date for the build date.
-    let toString = DateFormatter()
-    toString.dateStyle = .medium
-    toString.timeStyle = .medium
-    return toString.string(from: dateObj)
+    return dateObj
   }
 
   private var buildKeyPrefix: String {

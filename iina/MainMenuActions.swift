@@ -340,6 +340,14 @@ extension MainMenuActionHandler {
     }
   }
 
+  @objc func menuToggleSubVisibility(_ sender: NSMenuItem) {
+    player.toggleSubVisibility()
+  }
+
+  @objc func menuToggleSecondSubVisibility(_ sender: NSMenuItem) {
+    player.toggleSecondSubVisibility()
+  }
+
   @objc func menuChangeSubDelay(_ sender: NSMenuItem) {
     if let delayDelta = sender.representedObject as? Double {
       let newDelay = player.info.subDelay + delayDelta

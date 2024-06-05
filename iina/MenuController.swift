@@ -172,6 +172,8 @@ class MenuController: NSObject, NSMenuDelegate {
   // Subtitle
   @IBOutlet weak var subMenu: NSMenu!
   @IBOutlet weak var quickSettingsSub: NSMenuItem!
+  @IBOutlet weak var hideSubtitles: NSMenuItem!
+  @IBOutlet weak var hideSecondSubtitles: NSMenuItem!
   @IBOutlet weak var cycleSubtitles: NSMenuItem!
   @IBOutlet weak var subTrackMenu: NSMenu!
   @IBOutlet weak var secondSubTrackMenu: NSMenu!
@@ -374,6 +376,8 @@ class MenuController: NSObject, NSMenuDelegate {
     quickSettingsSub.action = #selector(MainWindowController.menuShowSubQuickSettings(_:))
     loadExternalSub.action = #selector(MainMenuActionHandler.menuLoadExternalSub(_:))
     subTrackMenu.delegate = self
+    hideSubtitles.action = #selector(MainMenuActionHandler.menuToggleSubVisibility(_:))
+    hideSecondSubtitles.action = #selector(MainMenuActionHandler.menuToggleSecondSubVisibility(_:))
     secondSubTrackMenu.delegate = self
 
     findOnlineSub.action = #selector(MainMenuActionHandler.menuFindOnlineSub(_:))
@@ -551,6 +555,10 @@ class MenuController: NSObject, NSMenuDelegate {
           player.mainWindow.quickSettingView.currentTab == .sub
     quickSettingsSub?.title = isDisplayingSettings ? Constants.String.hideSubtitlesPanel :
         Constants.String.subtitlesPanel
+    hideSubtitles.title = player.info.isSubVisible ? Constants.String.hideSubtitles :
+        Constants.String.showSubtitles
+    hideSecondSubtitles.title = player.info.isSecondSubVisible ? Constants.String.hideSecondSubtitles :
+        Constants.String.showSecondSubtitles
     subDelayIndicator.title = String(format: NSLocalizedString("menu.sub_delay", comment: "Subtitle Delay:"), player.info.subDelay)
 
     let encodingCode = player.info.subEncoding ?? "auto"
@@ -867,6 +875,8 @@ class MenuController: NSObject, NSMenuDelegate {
       (increaseAudioDelay, false, ["add", "audio-delay", "0.5"], true, nil, "audio_delay_up"),
       (increaseAudioDelaySlightly, false, ["add", "audio-delay", "0.1"], true, nil, "audio_delay_up"),
       (resetAudioDelay, false, ["set", "audio-delay", "0"], true, nil, nil),
+      (hideSubtitles, false, ["cycle", "sub-visibility"], false, nil, nil),
+      (hideSecondSubtitles, false, ["cycle", "secondary-sub-visibility"], false, nil, nil),
       (decreaseSubDelay, false, ["add", "sub-delay", "-0.5"], true, nil, "sub_delay_down"),
       (decreaseSubDelaySlightly, false, ["add", "sub-delay", "-0.1"], true, nil, "sub_delay_down"),
       (increaseSubDelay, false, ["add", "sub-delay", "0.5"], true, nil, "sub_delay_up"),

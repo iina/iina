@@ -46,6 +46,10 @@ enum OSDMessage {
   case audioDelay(Double)
   case subDelay(Double)
   case subScale(Double)
+  case subHidden
+  case subVisible
+  case secondSubHidden
+  case secondSubVisible
   case subPos(Double)
   case mute
   case unMute
@@ -176,6 +180,18 @@ enum OSDMessage {
         String(format: NSLocalizedString("osd.subtitle_pos", comment: "Subtitle Position: %f"), value),
         .withProgress(value / 100)
       )
+
+    case .subHidden:
+      return (NSLocalizedString("osd.sub_hidden", comment: "Subtitles Hidden"), .normal)
+
+    case .subVisible:
+      return (NSLocalizedString("osd.sub_visible", comment: "Subtitles Visible"), .normal)
+
+    case .secondSubHidden:
+      return (NSLocalizedString("osd.sub_second_hidden", comment: "Second Subtitles Hidden"), .normal)
+
+    case .secondSubVisible:
+      return (NSLocalizedString("osd.sub_second_visible", comment: "Second Subtitles Visible"), .normal)
 
     case .mute:
       return (NSLocalizedString("osd.mute", comment: "Mute"), .normal)

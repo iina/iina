@@ -103,6 +103,10 @@ struct Constants {
     static let hideAudioPanel = NSLocalizedString("menu.hide_audio", comment: "Hide Audio Panel")
     static let subtitlesPanel = NSLocalizedString("menu.subtitles", comment: "Show Subtitles Panel")
     static let hideSubtitlesPanel = NSLocalizedString("menu.hide_subtitles", comment: "Hide Subtitles Panel")
+    static let hideSubtitles = NSLocalizedString("menu.sub_hide", comment: "Hide Subtitles")
+    static let showSubtitles = NSLocalizedString("menu.sub_show", comment: "Show Subtitles")
+    static let hideSecondSubtitles = NSLocalizedString("menu.sub_second_hide", comment: "Hide Second Subtitles")
+    static let showSecondSubtitles = NSLocalizedString("menu.sub_second_show", comment: "Show Second Subtitles")
   }
   struct Time {
     static let infinite = VideoTime(999, 0, 0)
@@ -141,4 +145,6 @@ extension Notification.Name {
   static let iinaPlayerShutdown = Notification.Name("iinaPlayerShutdown")
   static let iinaPlaySliderLoopKnobChanged = Notification.Name("iinaPlaySliderLoopKnobChanged")
   static let iinaLogoutCompleted = Notification.Name("iinaLoggedOutOfSubtitleProvider")
+  static let iinaSecondSubVisibilityChanged = Notification.Name("iinaSecondSubVisibilityChanged")
+  static let iinaSubVisibilityChanged = Notification.Name("iinaSubVisibilityChanged")
 }

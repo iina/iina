@@ -435,7 +435,6 @@ class MainWindowController: PlayerWindowController {
   @IBOutlet var thumbnailPeekView: ThumbnailPeekView!
   @IBOutlet weak var additionalInfoView: NSVisualEffectView!
   @IBOutlet weak var additionalInfoLabel: NSTextField!
-  @IBOutlet weak var additionalInfoLabelXConstraint: NSLayoutConstraint!
   @IBOutlet weak var additionalInfoStackView: NSStackView!
   @IBOutlet weak var additionalInfoTitle: NSTextField!
   @IBOutlet weak var additionalInfoBatteryView: NSView!
@@ -2059,9 +2058,6 @@ class MainWindowController: PlayerWindowController {
     additionalInfoTitle.stringValue = window?.representedURL?.lastPathComponent ?? window?.title ?? ""
     if let capacity = PowerSource.getList().filter({ $0.type == "InternalBattery" }).first?.currentCapacity {
       additionalInfoBattery.stringValue = "\(capacity)%"
-      if additionalInfoView.userInterfaceLayoutDirection == .rightToLeft {
-        additionalInfoLabelXConstraint.constant = capacity == 100 ? -1 : -2.5
-      }
       additionalInfoStackView.setVisibilityPriority(.mustHold, for: additionalInfoBatteryView)
     } else {
       additionalInfoStackView.setVisibilityPriority(.notVisible, for: additionalInfoBatteryView)

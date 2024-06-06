@@ -11,7 +11,6 @@
                 <outlet property="additionalInfoBattery" destination="1XY-X2-FcE" id="FA8-zH-CvA"/>
                 <outlet property="additionalInfoBatteryView" destination="Ybl-06-ksj" id="NdR-gs-P1p"/>
                 <outlet property="additionalInfoLabel" destination="4mb-jy-Y1w" id="rgV-hQ-MH2"/>
-                <outlet property="additionalInfoLabelXConstraint" destination="Adp-7U-tTV" id="6n8-LE-8Un"/>
                 <outlet property="additionalInfoStackView" destination="HJv-RK-JT8" id="T3L-fd-A60"/>
                 <outlet property="additionalInfoTitle" destination="3uh-OF-zy6" id="N6w-Hh-fQ1"/>
                 <outlet property="additionalInfoView" destination="Qbi-jx-9pO" id="bdV-ZH-SkC"/>
@@ -71,16 +70,16 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" tabbingMode="disallowed" id="F0z-JX-Cv5" customClass="MainWindow" customModule="IINA" customModuleProvider="target">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <rect key="contentRect" x="196" y="240" width="640" height="400"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1415"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="3440" height="1415"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="640" height="400"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <visualEffectView hidden="YES" wantsLayer="YES" horizontalCompressionResistancePriority="250" blendingMode="withinWindow" material="popover" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="Qbi-jx-9pO">
-                        <rect key="frame" x="477" y="303" width="155" height="67"/>
+                        <rect key="frame" x="471" y="303" width="161" height="67"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HJv-RK-JT8">
-                                <rect key="frame" x="16" y="4" width="123" height="30"/>
+                                <rect key="frame" x="16" y="4" width="129" height="30"/>
                                 <subviews>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="P1S-9b-Nzw">
                                         <rect key="frame" x="0.0" y="0.0" width="56" height="30"/>
@@ -108,13 +107,10 @@
                                         </constraints>
                                     </box>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Ybl-06-ksj">
-                                        <rect key="frame" x="73" y="0.0" width="50" height="30"/>
+                                        <rect key="frame" x="73" y="0.0" width="56" height="30"/>
                                         <subviews>
                                             <textField wantsLayer="YES" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1XY-X2-FcE">
-                                                <rect key="frame" x="0.0" y="8" width="42" height="16"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="38" id="rUi-Ot-gUr"/>
-                                                </constraints>
+                                                <rect key="frame" x="-2" y="8" width="60" height="16"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="100%" id="va1-P5-3b0">
                                                     <font key="font" metaFont="systemBold"/>
                                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -122,17 +118,18 @@
                                                 </textFieldCell>
                                             </textField>
                                             <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EpK-FB-bM0">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="56" height="30"/>
                                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="battery" id="5rw-Sh-BRR"/>
                                             </imageView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="EpK-FB-bM0" secondAttribute="trailing" id="Ab1-a3-Ap7"/>
-                                            <constraint firstItem="1XY-X2-FcE" firstAttribute="centerX" secondItem="Ybl-06-ksj" secondAttribute="centerX" constant="-4" id="Adp-7U-tTV"/>
                                             <constraint firstItem="EpK-FB-bM0" firstAttribute="leading" secondItem="Ybl-06-ksj" secondAttribute="leading" id="ICp-l0-UOF"/>
-                                            <constraint firstAttribute="width" constant="50" id="YE3-Bj-TCo"/>
+                                            <constraint firstAttribute="width" constant="56" id="YE3-Bj-TCo"/>
+                                            <constraint firstItem="1XY-X2-FcE" firstAttribute="centerY" secondItem="Ybl-06-ksj" secondAttribute="centerY" constant="-0.5" id="ewn-Sz-UmC"/>
+                                            <constraint firstItem="1XY-X2-FcE" firstAttribute="leading" secondItem="Ybl-06-ksj" secondAttribute="leading" id="f0s-Zh-SkE"/>
+                                            <constraint firstAttribute="trailing" secondItem="1XY-X2-FcE" secondAttribute="trailing" id="j0h-QD-M18"/>
                                             <constraint firstAttribute="bottom" secondItem="EpK-FB-bM0" secondAttribute="bottom" id="lce-Dz-NZo"/>
-                                            <constraint firstItem="1XY-X2-FcE" firstAttribute="centerY" secondItem="Ybl-06-ksj" secondAttribute="centerY" constant="-1" id="sV7-2T-Ljb"/>
                                             <constraint firstAttribute="height" constant="30" id="skg-xR-yU1"/>
                                             <constraint firstItem="EpK-FB-bM0" firstAttribute="top" secondItem="Ybl-06-ksj" secondAttribute="top" id="xfk-HM-qEp"/>
                                         </constraints>
@@ -150,7 +147,7 @@
                                 </customSpacing>
                             </stackView>
                             <textField focusRingType="none" horizontalHuggingPriority="200" verticalHuggingPriority="750" horizontalCompressionResistancePriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3uh-OF-zy6">
-                                <rect key="frame" x="14" y="38" width="127" height="21"/>
+                                <rect key="frame" x="14" y="38" width="133" height="21"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Label" id="DVg-p3-w5Q">
                                     <font key="font" metaFont="system" size="18"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -665,7 +662,7 @@
         </customView>
     </objects>
     <resources>
-        <image name="battery" width="24" height="12"/>
+        <image name="battery" width="57" height="30"/>
         <image name="mute" width="16" height="14"/>
         <image name="ontop" width="16" height="14"/>
         <image name="ontop_off" width="16" height="14"/>

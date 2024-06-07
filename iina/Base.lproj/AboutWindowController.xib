@@ -280,8 +280,8 @@
                                                         </constraints>
                                                     </visualEffectView>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0PM-oG-4Qs">
-                                                        <rect key="frame" x="140" y="70" width="121" height="18"/>
-                                                        <buttonCell key="cell" type="inline" title="iina/contributors" bezelStyle="inline" image="NSFollowLinkFreestandingTemplate" imagePosition="left" alignment="center" borderStyle="border" inset="2" id="U9l-uR-i7g">
+                                                        <rect key="frame" x="141" y="70" width="118" height="18"/>
+                                                        <buttonCell key="cell" type="inline" title="iina/contributors" bezelStyle="inline" image="forward" imagePosition="left" alignment="center" borderStyle="border" inset="2" id="U9l-uR-i7g">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="smallSystemBold"/>
                                                         </buttonCell>
@@ -290,8 +290,8 @@
                                                         </connections>
                                                     </button>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="trK-iz-kG7">
-                                                        <rect key="frame" x="163" y="0.0" width="75" height="18"/>
-                                                        <buttonCell key="cell" type="inline" title="Crowdin" bezelStyle="inline" image="NSFollowLinkFreestandingTemplate" imagePosition="left" alignment="center" borderStyle="border" inset="2" id="7k7-70-Kku">
+                                                        <rect key="frame" x="164" y="0.0" width="72" height="18"/>
+                                                        <buttonCell key="cell" type="inline" title="Crowdin" bezelStyle="inline" image="forward" imagePosition="left" alignment="center" borderStyle="border" inset="2" id="7k7-70-Kku">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="smallSystemBold"/>
                                                         </buttonCell>
@@ -399,6 +399,6 @@
         </window>
     </objects>
     <resources>
-        <image name="NSFollowLinkFreestandingTemplate" width="20" height="20"/>
+        <image name="forward" width="11" height="11"/>
     </resources>
 </document>

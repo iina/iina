@@ -26,7 +26,7 @@ jobs:
           DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer
 
       - name: Archive
-        run: tar cvJf ~/iina.tar.xz -C /Users/runner/build/Nightly/IINA.app
+        run: tar cvJf ~/iina.tar.xz -C ~/build/Nightly/IINA.app
 
       - name: Save artifacts
         uses: actions/upload-artifact@v4

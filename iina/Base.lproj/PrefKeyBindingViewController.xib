@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22690"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -29,14 +29,14 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="311"/>
             <subviews>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="LU9-QU-BFL">
-                    <rect key="frame" x="-1" y="286" width="121" height="16"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="14" id="lOm-I3-MpB"/>
-                    </constraints>
+                    <rect key="frame" x="-1" y="286" width="183" height="16"/>
                     <buttonCell key="cell" type="check" title="Use system media control" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="2WY-CR-baD">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="lOm-I3-MpB"/>
+                    </constraints>
                     <connections>
                         <binding destination="XM5-Sj-lhw" name="value" keyPath="values.useMediaKeys" id="C7t-pc-JuC"/>
                     </connections>
@@ -111,7 +111,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </tableHeaderView>
                 </scrollView>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZWR-gT-S2p">
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZWR-gT-S2p">
                     <rect key="frame" x="0.0" y="238" width="91" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Configuration:" id="au5-6f-s55">
                         <font key="font" metaFont="system"/>
@@ -136,33 +136,33 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="f5l-5w-zmm">
-                                <rect key="frame" x="0.0" y="-1.5" width="20.5" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="f5l-5w-zmm" secondAttribute="height" multiplier="1:1" id="nxu-Es-dAW"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="-2" width="20" height="24"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSAddTemplate" imagePosition="only" alignment="center" inset="2" id="De2-o3-Acv">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="f5l-5w-zmm" secondAttribute="height" multiplier="1:1" id="nxu-Es-dAW"/>
+                                </constraints>
                                 <connections>
                                     <action selector="addKeyMappingBtnAction:" target="-2" id="oNc-c8-i9c"/>
                                 </connections>
                             </button>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="uFG-OF-DJ5">
-                                <rect key="frame" x="20" y="3" width="20.5" height="15"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="uFG-OF-DJ5" secondAttribute="height" multiplier="1:1" id="ka8-vi-ux9"/>
-                                </constraints>
+                                <rect key="frame" x="20" y="3" width="20" height="15"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRemoveTemplate" imagePosition="only" alignment="center" inset="2" id="nAC-n9-1YJ">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="uFG-OF-DJ5" secondAttribute="height" multiplier="1:1" id="ka8-vi-ux9"/>
+                                </constraints>
                                 <connections>
                                     <action selector="removeKeyMappingBtnAction:" target="-2" id="aeN-fq-0zS"/>
                                 </connections>
                             </button>
                             <button toolTip="Show the raw mpv key code and command." translatesAutoresizingMaskIntoConstraints="NO" id="l2M-TH-eCt">
-                                <rect key="frame" x="184" y="3" width="100" height="12"/>
+                                <rect key="frame" x="184" y="4" width="100" height="11"/>
                                 <buttonCell key="cell" type="check" title="Display raw values" bezelStyle="regularSquare" imagePosition="left" controlSize="mini" inset="2" id="3RK-1k-otl">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="label" size="9"/>
@@ -236,7 +236,7 @@
                                                 <rect key="frame" x="1" y="1" width="176" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="k3i-eY-hmO">
+                                                    <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="k3i-eY-hmO">
                                                         <rect key="frame" x="0.0" y="1" width="96" height="16"/>
                                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="rVW-78-nDm">
                                                             <font key="font" metaFont="system"/>
@@ -248,7 +248,7 @@
                                                         </connections>
                                                     </textField>
                                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3VI-bM-Xn1">
-                                                        <rect key="frame" x="164" y="-1.5" width="12.5" height="22"/>
+                                                        <rect key="frame" x="164" y="-1" width="12" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="12" id="Du5-ms-7jx"/>
                                                             <constraint firstAttribute="height" constant="12" id="p6c-c0-YEO"/>
@@ -274,6 +274,9 @@
                                         </prototypeCellViews>
                                     </tableColumn>
                                 </tableColumns>
+                                <connections>
+                                    <action trigger="doubleAction" selector="configFileListDoubleAction:" target="-2" id="cFL-H1-Eks"/>
+                                </connections>
                             </tableView>
                         </subviews>
                     </clipView>
@@ -296,27 +299,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="iCp-ho-SlQ" userLabel="Square + Button">
-                                <rect key="frame" x="0.0" y="-1.5" width="20.5" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="iCp-ho-SlQ" secondAttribute="height" multiplier="1:1" id="W5T-Sa-grr"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="-2" width="20" height="24"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSAddTemplate" imagePosition="only" alignment="center" inset="2" id="sxT-LD-iKe">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="iCp-ho-SlQ" secondAttribute="height" multiplier="1:1" id="W5T-Sa-grr"/>
+                                </constraints>
                                 <connections>
                                     <action selector="newConfFileAction:" target="-2" id="zyI-2f-FHa"/>
                                 </connections>
                             </button>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="EpF-t6-PtC" userLabel="Square - Button">
-                                <rect key="frame" x="20" y="3" width="20.5" height="15"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="EpF-t6-PtC" secondAttribute="height" multiplier="1:1" id="NBy-aM-7Gt"/>
-                                </constraints>
+                                <rect key="frame" x="20" y="3" width="20" height="15"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRemoveTemplate" imagePosition="only" alignment="center" inset="2" id="mZx-Q0-d48">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="EpF-t6-PtC" secondAttribute="height" multiplier="1:1" id="NBy-aM-7Gt"/>
+                                </constraints>
                                 <connections>
                                     <action selector="deleteConfFileAction:" target="-2" id="v3N-VV-gc0"/>
                                 </connections>
@@ -357,7 +360,7 @@
                     <color key="borderColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                     <color key="fillColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                 </box>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tP6-Ua-acA">
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tP6-Ua-acA">
                     <rect key="frame" x="0.0" y="220" width="480" height="14"/>
                     <textFieldCell key="cell" controlSize="small" title="Label" id="M4N-eg-JA8">
                         <font key="font" metaFont="message" size="11"/>
@@ -375,7 +378,7 @@
                         <action selector="importConfigBtnAction:" target="-2" id="m3a-yn-NIE"/>
                     </connections>
                 </button>
-                <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x6N-6q-HiV">
+                <searchField wantsLayer="YES" focusRingType="none" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x6N-6q-HiV">
                     <rect key="frame" x="188" y="190" width="292" height="22"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="aql-K3-x6M"/>
@@ -393,7 +396,7 @@
                         </binding>
                     </connections>
                 </searchField>
-                <textField identifier="SectionTitleSettings" hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JxQ-iv-eAN">
+                <textField identifier="SectionTitleSettings" hidden="YES" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JxQ-iv-eAN">
                     <rect key="frame" x="427" y="255" width="55" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Settings" id="8yJ-Rj-GWo">
                         <font key="font" metaFont="system"/>
@@ -450,8 +453,8 @@
         </arrayController>
     </objects>
     <resources>
-        <image name="NSAddTemplate" width="18" height="17"/>
-        <image name="NSLockLockedTemplate" width="19" height="19"/>
-        <image name="NSRemoveTemplate" width="18" height="5"/>
+        <image name="NSAddTemplate" width="18" height="16"/>
+        <image name="NSLockLockedTemplate" width="18" height="18"/>
+        <image name="NSRemoveTemplate" width="18" height="4"/>
     </resources>
 </document>

@@ -29,20 +29,13 @@
 #include "libavutil/pixfmt.h"
 
 #include "codec_id.h"
+#include "defs.h"
+#include "packet.h"
 
 /**
  * @addtogroup lavc_core
  * @{
  */
-
-enum AVFieldOrder {
-    AV_FIELD_UNKNOWN,
-    AV_FIELD_PROGRESSIVE,
-    AV_FIELD_TT,          ///< Top coded_first, top displayed first
-    AV_FIELD_BB,          ///< Bottom coded first, bottom displayed first
-    AV_FIELD_TB,          ///< Top coded first, bottom displayed first
-    AV_FIELD_BT,          ///< Bottom coded first, top displayed first
-};
 
 /**
  * This struct describes the properties of an encoded stream.
@@ -78,6 +71,19 @@ typedef struct AVCodecParameters {
      * Size of the extradata content in bytes.
      */
     int      extradata_size;
+
+    /**
+     * Additional data associated with the entire stream.
+     *
+     * Should be allocated with av_packet_side_data_new() or
+     * av_packet_side_data_add(), and will be freed by avcodec_parameters_free().
+     */
+    AVPacketSideData *coded_side_data;
+
+    /**
+     * Amount of entries in @ref coded_side_data.
+     */
+    int nb_coded_side_data;
 
     /**
      * - video: the pixel format, the value corresponds to enum AVPixelFormat.
@@ -138,6 +144,18 @@ typedef struct AVCodecParameters {
     AVRational sample_aspect_ratio;
 
     /**
+     * Video only. Number of frames per second, for streams with constant frame
+     * durations. Should be set to { 0, 1 } when some frames have differing
+     * durations or if the value is not known.
+     *
+     * @note This field correponds to values that are stored in codec-level
+     * headers and is typically overridden by container/transport-layer
+     * timestamps, when available. It should thus be used only as a last resort,
+     * when no higher-level timing information is available.
+     */
+    AVRational framerate;
+
+    /**
      * Video only. The order of the fields in interlaced video.
      */
     enum AVFieldOrder                  field_order;
@@ -156,22 +174,10 @@ typedef struct AVCodecParameters {
      */
     int video_delay;
 
-#if FF_API_OLD_CHANNEL_LAYOUT
     /**
-     * Audio only. The channel layout bitmask. May be 0 if the channel layout is
-     * unknown or unspecified, otherwise the number of bits set must be equal to
-     * the channels field.
-     * @deprecated use ch_layout
+     * Audio only. The channel layout and number of channels.
      */
-    attribute_deprecated
-    uint64_t channel_layout;
-    /**
-     * Audio only. The number of audio channels.
-     * @deprecated use ch_layout.nb_channels
-     */
-    attribute_deprecated
-    int      channels;
-#endif
+    AVChannelLayout ch_layout;
     /**
      * Audio only. The number of audio samples per second.
      */
@@ -206,11 +212,6 @@ typedef struct AVCodecParameters {
      * Audio only. Number of samples to skip after a discontinuity.
      */
     int seek_preroll;
-
-    /**
-     * Audio only. The channel layout and number of channels.
-     */
-    AVChannelLayout ch_layout;
 } AVCodecParameters;
 
 /**

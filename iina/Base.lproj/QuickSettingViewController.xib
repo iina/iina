@@ -236,7 +236,7 @@
                                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                     <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                 </tableHeaderCell>
-                                                                                <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" alignment="right" title="0" id="z4R-2L-mKS">
+                                                                                <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" refusesFirstResponder="YES" alignment="right" title="0" id="z4R-2L-mKS">
                                                                                     <font key="font" metaFont="system"/>
                                                                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -278,7 +278,7 @@
                                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                                 </tableHeaderCell>
-                                                                                <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="9ss-EF-bby">
+                                                                                <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" refusesFirstResponder="YES" alignment="left" title="Text Cell" id="9ss-EF-bby">
                                                                                     <font key="font" metaFont="system"/>
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -320,7 +320,7 @@
                                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                                 </tableHeaderCell>
-                                                                                <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" allowsUndo="NO" alignment="left" title="Text Cell" id="qpa-hD-ImC">
+                                                                                <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" refusesFirstResponder="YES" allowsUndo="NO" alignment="left" title="Text Cell" id="qpa-hD-ImC">
                                                                                     <font key="font" metaFont="system"/>
                                                                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -386,7 +386,7 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="240" id="43J-t3-UhR"/>
                                                             </constraints>
-                                                            <segmentedCell key="cell" borderStyle="border" alignment="left" segmentDistribution="fillProportionally" style="rounded" trackingMode="selectOne" id="cMu-YF-riv">
+                                                            <segmentedCell key="cell" refusesFirstResponder="YES" borderStyle="border" alignment="left" segmentDistribution="fillProportionally" style="rounded" trackingMode="selectOne" id="cMu-YF-riv">
                                                                 <font key="font" metaFont="system"/>
                                                                 <segments>
                                                                     <segment label="Default" selected="YES"/>
@@ -428,7 +428,7 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="230" id="tTp-B3-gF5"/>
                                                             </constraints>
-                                                            <segmentedCell key="cell" borderStyle="border" alignment="left" segmentDistribution="fillProportionally" style="rounded" trackingMode="selectOne" id="iuN-rN-jT7" userLabel="CropChooser Segmented Cell">
+                                                            <segmentedCell key="cell" refusesFirstResponder="YES" borderStyle="border" alignment="left" segmentDistribution="fillProportionally" style="rounded" trackingMode="selectOne" id="iuN-rN-jT7" userLabel="CropChooser Segmented Cell">
                                                                 <font key="font" metaFont="system"/>
                                                                 <segments>
                                                                     <segment label="None"/>
@@ -454,7 +454,7 @@
                                                         </textField>
                                                         <segmentedControl verticalHuggingPriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="bza-SA-tXE" userLabel="Rotation Segmented Control">
                                                             <rect key="frame" x="18" y="442" width="171" height="24"/>
-                                                            <segmentedCell key="cell" borderStyle="border" alignment="left" segmentDistribution="fillEqually" style="rounded" trackingMode="selectOne" id="z1L-0N-dfK">
+                                                            <segmentedCell key="cell" refusesFirstResponder="YES" borderStyle="border" alignment="left" segmentDistribution="fillEqually" style="rounded" trackingMode="selectOne" id="z1L-0N-dfK">
                                                                 <font key="font" metaFont="system"/>
                                                                 <segments>
                                                                     <segment label="0°" selected="YES"/>
@@ -483,7 +483,7 @@
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="236" id="oce-0K-3Eq"/>
                                                                     </constraints>
-                                                                    <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" maxValue="24" doubleValue="8" tickMarkPosition="below" numberOfTickMarks="25" sliderType="linear" id="qxp-Lt-D6o"/>
+                                                                    <sliderCell key="cell" controlSize="small" continuous="YES" refusesFirstResponder="YES" alignment="left" maxValue="24" doubleValue="8" tickMarkPosition="below" numberOfTickMarks="25" sliderType="linear" id="qxp-Lt-D6o"/>
                                                                     <connections>
                                                                         <action selector="speedChangedAction:" target="-2" id="asr-iq-ZNJ"/>
                                                                     </connections>
@@ -592,6 +592,7 @@
                                                                         </constraints>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="string" keyPath="title" value="quicksetting.hwdec"/>
+                                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="refusesFirstResponder" value="NO"/>
                                                                         </userDefinedRuntimeAttributes>
                                                                     </customView>
                                                                     <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="PyM-xa-vx9" userLabel="Horizontal Line 1">
@@ -604,6 +605,7 @@
                                                                         </constraints>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="string" keyPath="title" value="quicksetting.deinterlace"/>
+                                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="refusesFirstResponder" value="NO"/>
                                                                         </userDefinedRuntimeAttributes>
                                                                     </customView>
                                                                     <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="qYi-uQ-6qo" userLabel="Horizontal Line 2">
@@ -616,6 +618,7 @@
                                                                         </constraints>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="string" keyPath="title" value="quicksetting.hdr"/>
+                                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="refusesFirstResponder" value="NO"/>
                                                                         </userDefinedRuntimeAttributes>
                                                                     </customView>
                                                                 </subviews>
@@ -727,7 +730,7 @@
                                                             <subviews>
                                                                 <slider identifier="brightnessSlider" horizontalHuggingPriority="800" verticalHuggingPriority="750" horizontalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="eFW-a3-kWx" userLabel="Brightness Slider">
                                                                     <rect key="frame" x="-2" y="95" width="238" height="17"/>
-                                                                    <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" minValue="-100" maxValue="100" tickMarkPosition="above" sliderType="linear" id="7Km-3j-0F1"/>
+                                                                    <sliderCell key="cell" controlSize="small" continuous="YES" refusesFirstResponder="YES" state="on" alignment="left" minValue="-100" maxValue="100" tickMarkPosition="above" sliderType="linear" id="7Km-3j-0F1"/>
                                                                     <accessibility identifier="brightnessLabel"/>
                                                                     <connections>
                                                                         <action selector="equalizerSliderAction:" target="-2" id="D6V-VG-FTQ"/>
@@ -735,28 +738,28 @@
                                                                 </slider>
                                                                 <slider identifier="contrastSlider" horizontalHuggingPriority="800" verticalHuggingPriority="750" horizontalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="mTb-L6-55O" userLabel="Contrast Slider">
                                                                     <rect key="frame" x="-2" y="71" width="238" height="17"/>
-                                                                    <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" minValue="-100" maxValue="100" tickMarkPosition="above" sliderType="linear" id="hgz-bN-WeD"/>
+                                                                    <sliderCell key="cell" controlSize="small" continuous="YES" refusesFirstResponder="YES" state="on" alignment="left" minValue="-100" maxValue="100" tickMarkPosition="above" sliderType="linear" id="hgz-bN-WeD"/>
                                                                     <connections>
                                                                         <action selector="equalizerSliderAction:" target="-2" id="Nvx-FI-qAc"/>
                                                                     </connections>
                                                                 </slider>
                                                                 <slider identifier="saturationSlider" horizontalHuggingPriority="800" verticalHuggingPriority="750" horizontalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="VlS-Jo-4C0" userLabel="Saturation Slider">
                                                                     <rect key="frame" x="-2" y="46" width="238" height="18"/>
-                                                                    <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" minValue="-100" maxValue="100" tickMarkPosition="above" sliderType="linear" id="XWl-TS-6CD"/>
+                                                                    <sliderCell key="cell" controlSize="small" continuous="YES" refusesFirstResponder="YES" state="on" alignment="left" minValue="-100" maxValue="100" tickMarkPosition="above" sliderType="linear" id="XWl-TS-6CD"/>
                                                                     <connections>
                                                                         <action selector="equalizerSliderAction:" target="-2" id="lqV-jM-722"/>
                                                                     </connections>
                                                                 </slider>
                                                                 <slider identifier="gammaSlider" horizontalHuggingPriority="100" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fLl-8b-pj0" userLabel="Gamma Slider">
                                                                     <rect key="frame" x="-2" y="22" width="245" height="17"/>
-                                                                    <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" minValue="-100" maxValue="100" tickMarkPosition="above" sliderType="linear" id="4De-8a-gIx"/>
+                                                                    <sliderCell key="cell" controlSize="small" continuous="YES" refusesFirstResponder="YES" state="on" alignment="left" minValue="-100" maxValue="100" tickMarkPosition="above" sliderType="linear" id="4De-8a-gIx"/>
                                                                     <connections>
                                                                         <action selector="equalizerSliderAction:" target="-2" id="eBS-E6-XBk"/>
                                                                     </connections>
                                                                 </slider>
                                                                 <slider identifier="hueSlider" horizontalHuggingPriority="100" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mKB-Mu-l5Y" userLabel="Hue Slider">
                                                                     <rect key="frame" x="-2" y="-2" width="245" height="17"/>
-                                                                    <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" minValue="-100" maxValue="100" tickMarkPosition="above" sliderType="linear" id="Bwq-Om-Y6s"/>
+                                                                    <sliderCell key="cell" controlSize="small" continuous="YES" refusesFirstResponder="YES" state="on" alignment="left" minValue="-100" maxValue="100" tickMarkPosition="above" sliderType="linear" id="Bwq-Om-Y6s"/>
                                                                     <connections>
                                                                         <action selector="equalizerSliderAction:" target="-2" id="Lkh-f1-UR2"/>
                                                                     </connections>
@@ -788,7 +791,7 @@
                                                             <subviews>
                                                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cjG-f1-Mkg" userLabel="Brightness Square Button">
                                                                     <rect key="frame" x="0.0" y="94" width="15" height="19"/>
-                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRefreshFreestandingTemplate" imagePosition="overlaps" alignment="center" inset="2" id="63a-cd-eXa">
+                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRefreshFreestandingTemplate" imagePosition="overlaps" alignment="center" refusesFirstResponder="YES" inset="2" id="63a-cd-eXa">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
@@ -798,7 +801,7 @@
                                                                 </button>
                                                                 <button tag="1" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KVl-YU-9O3" userLabel="Contrast Square Button">
                                                                     <rect key="frame" x="0.0" y="70" width="15" height="19"/>
-                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRefreshFreestandingTemplate" imagePosition="overlaps" alignment="center" inset="2" id="NIq-6H-Orr">
+                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRefreshFreestandingTemplate" imagePosition="overlaps" alignment="center" refusesFirstResponder="YES" inset="2" id="NIq-6H-Orr">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
@@ -808,7 +811,7 @@
                                                                 </button>
                                                                 <button tag="2" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lgg-zH-OLr" userLabel="Saturation Square Button">
                                                                     <rect key="frame" x="0.0" y="45" width="15" height="20"/>
-                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRefreshFreestandingTemplate" imagePosition="overlaps" alignment="center" inset="2" id="D5D-O8-MdN">
+                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRefreshFreestandingTemplate" imagePosition="overlaps" alignment="center" refusesFirstResponder="YES" inset="2" id="D5D-O8-MdN">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
@@ -818,7 +821,7 @@
                                                                 </button>
                                                                 <button tag="3" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fGZ-vI-EP8" userLabel="Gamma Square Button">
                                                                     <rect key="frame" x="0.0" y="21" width="15" height="19"/>
-                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRefreshFreestandingTemplate" imagePosition="overlaps" alignment="center" inset="2" id="7sd-9d-D6H">
+                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRefreshFreestandingTemplate" imagePosition="overlaps" alignment="center" refusesFirstResponder="YES" inset="2" id="7sd-9d-D6H">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
@@ -828,7 +831,7 @@
                                                                 </button>
                                                                 <button tag="4" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="W7J-wR-UH3" userLabel="Hue Square Button">
                                                                     <rect key="frame" x="0.0" y="-3" width="15" height="19"/>
-                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRefreshFreestandingTemplate" imagePosition="overlaps" alignment="center" inset="2" id="Mrx-t0-wfm">
+                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRefreshFreestandingTemplate" imagePosition="overlaps" alignment="center" refusesFirstResponder="YES" inset="2" id="Mrx-t0-wfm">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
@@ -996,7 +999,7 @@
                                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                         </tableHeaderCell>
-                                                                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" allowsUndo="NO" alignment="right" title="0" id="L0u-GY-T4V">
+                                                                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" refusesFirstResponder="YES" allowsUndo="NO" alignment="right" title="0" id="L0u-GY-T4V">
                                                                                             <font key="font" metaFont="system"/>
                                                                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1038,7 +1041,7 @@
                                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                                         </tableHeaderCell>
-                                                                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="N1f-X9-gS0">
+                                                                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" refusesFirstResponder="YES" alignment="left" title="Text Cell" id="N1f-X9-gS0">
                                                                                             <font key="font" metaFont="system"/>
                                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1080,7 +1083,7 @@
                                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                                         </tableHeaderCell>
-                                                                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" allowsUndo="NO" alignment="left" title="Text Cell" id="GXH-iA-cJP">
+                                                                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" refusesFirstResponder="YES" allowsUndo="NO" alignment="left" title="Text Cell" id="GXH-iA-cJP">
                                                                                             <font key="font" metaFont="system"/>
                                                                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1140,7 +1143,7 @@
                                                                 </textField>
                                                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XdF-fV-DCz">
                                                                     <rect key="frame" x="13" y="304" width="334" height="32"/>
-                                                                    <buttonCell key="cell" type="push" title="Load External Audio Track…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8Ax-5X-osl">
+                                                                    <buttonCell key="cell" type="push" title="Load External Audio Track…" bezelStyle="rounded" alignment="center" refusesFirstResponder="YES" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8Ax-5X-osl">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
@@ -1167,7 +1170,7 @@
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="240" id="8FO-xx-ocZ"/>
                                                                             </constraints>
-                                                                            <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" minValue="-5" maxValue="5" tickMarkPosition="below" numberOfTickMarks="21" sliderType="linear" id="Xty-CC-H0Z"/>
+                                                                            <sliderCell key="cell" controlSize="small" continuous="YES" refusesFirstResponder="YES" state="on" alignment="left" minValue="-5" maxValue="5" tickMarkPosition="below" numberOfTickMarks="21" sliderType="linear" id="Xty-CC-H0Z"/>
                                                                             <connections>
                                                                                 <action selector="audioDelayChangedAction:" target="-2" id="Rqw-fj-519"/>
                                                                             </connections>
@@ -1264,7 +1267,7 @@
                                                                 </textField>
                                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="dB1-5J-5YU" userLabel="ResetAudioEQ Square Button">
                                                                     <rect key="frame" x="324" y="164.5" width="16" height="21"/>
-                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRefreshFreestandingTemplate" imagePosition="only" alignment="center" controlSize="small" imageScaling="proportionallyUpOrDown" inset="2" id="Cgw-yU-AOF">
+                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRefreshFreestandingTemplate" imagePosition="only" alignment="center" controlSize="small" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="Cgw-yU-AOF">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="message" size="11"/>
                                                                     </buttonCell>
@@ -1281,70 +1284,70 @@
                                                                     <subviews>
                                                                         <slider horizontalHuggingPriority="750" verticalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="pHR-ym-VeQ">
                                                                             <rect key="frame" x="-2" y="-2" width="20" height="120"/>
-                                                                            <sliderCell key="cell" controlSize="small" state="on" alignment="left" minValue="-12" maxValue="12" doubleValue="3.4939236111111125" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="Twm-2U-8ou"/>
+                                                                            <sliderCell key="cell" controlSize="small" refusesFirstResponder="YES" state="on" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="Twm-2U-8ou"/>
                                                                             <connections>
                                                                                 <action selector="audioEqSliderAction:" target="-2" id="ywO-zh-sWU"/>
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" verticalCompressionResistancePriority="500" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="Qhv-oC-xzP">
                                                                             <rect key="frame" x="27" y="-2" width="20" height="120"/>
-                                                                            <sliderCell key="cell" controlSize="small" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="SCy-Om-bV6"/>
+                                                                            <sliderCell key="cell" controlSize="small" refusesFirstResponder="YES" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="SCy-Om-bV6"/>
                                                                             <connections>
                                                                                 <action selector="audioEqSliderAction:" target="-2" id="xQb-Li-0pw"/>
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" verticalCompressionResistancePriority="500" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="iDT-gu-k7t">
                                                                             <rect key="frame" x="56" y="-2" width="20" height="120"/>
-                                                                            <sliderCell key="cell" controlSize="small" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="a7E-4j-6g2"/>
+                                                                            <sliderCell key="cell" controlSize="small" refusesFirstResponder="YES" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="a7E-4j-6g2"/>
                                                                             <connections>
                                                                                 <action selector="audioEqSliderAction:" target="-2" id="bCl-L6-1iR"/>
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" verticalCompressionResistancePriority="500" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="O2w-VO-03F">
                                                                             <rect key="frame" x="85" y="-2" width="20" height="120"/>
-                                                                            <sliderCell key="cell" controlSize="small" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="TbE-dB-ORk"/>
+                                                                            <sliderCell key="cell" controlSize="small" refusesFirstResponder="YES" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="TbE-dB-ORk"/>
                                                                             <connections>
                                                                                 <action selector="audioEqSliderAction:" target="-2" id="15r-Ui-dhW"/>
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" verticalCompressionResistancePriority="500" tag="4" translatesAutoresizingMaskIntoConstraints="NO" id="npn-V6-hjZ">
                                                                             <rect key="frame" x="114" y="-2" width="20" height="120"/>
-                                                                            <sliderCell key="cell" controlSize="small" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="4Ra-VR-yOK"/>
+                                                                            <sliderCell key="cell" controlSize="small" refusesFirstResponder="YES" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="4Ra-VR-yOK"/>
                                                                             <connections>
                                                                                 <action selector="audioEqSliderAction:" target="-2" id="sWe-Hb-axh"/>
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" verticalCompressionResistancePriority="500" tag="5" translatesAutoresizingMaskIntoConstraints="NO" id="TKd-tg-Xtc">
                                                                             <rect key="frame" x="143" y="-2" width="20" height="120"/>
-                                                                            <sliderCell key="cell" controlSize="small" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="xV9-OM-MHq"/>
+                                                                            <sliderCell key="cell" controlSize="small" refusesFirstResponder="YES" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="xV9-OM-MHq"/>
                                                                             <connections>
                                                                                 <action selector="audioEqSliderAction:" target="-2" id="bVX-Tj-pgM"/>
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" verticalCompressionResistancePriority="500" tag="6" translatesAutoresizingMaskIntoConstraints="NO" id="nNf-gg-4tL">
                                                                             <rect key="frame" x="172" y="-2" width="20" height="120"/>
-                                                                            <sliderCell key="cell" controlSize="small" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="TNb-Es-VsX"/>
+                                                                            <sliderCell key="cell" controlSize="small" refusesFirstResponder="YES" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="TNb-Es-VsX"/>
                                                                             <connections>
                                                                                 <action selector="audioEqSliderAction:" target="-2" id="p1d-eK-UB3"/>
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" verticalCompressionResistancePriority="500" tag="7" translatesAutoresizingMaskIntoConstraints="NO" id="JaQ-EH-K1U">
                                                                             <rect key="frame" x="201" y="-2" width="20" height="120"/>
-                                                                            <sliderCell key="cell" controlSize="small" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="P8O-pY-Nby"/>
+                                                                            <sliderCell key="cell" controlSize="small" refusesFirstResponder="YES" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="P8O-pY-Nby"/>
                                                                             <connections>
                                                                                 <action selector="audioEqSliderAction:" target="-2" id="oxX-UX-l6i"/>
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" verticalCompressionResistancePriority="500" tag="8" translatesAutoresizingMaskIntoConstraints="NO" id="gbd-xf-hGS">
                                                                             <rect key="frame" x="230" y="-2" width="20" height="120"/>
-                                                                            <sliderCell key="cell" controlSize="small" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="GEq-jW-WUw"/>
+                                                                            <sliderCell key="cell" controlSize="small" refusesFirstResponder="YES" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="GEq-jW-WUw"/>
                                                                             <connections>
                                                                                 <action selector="audioEqSliderAction:" target="-2" id="pkI-fs-ZCs"/>
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" verticalCompressionResistancePriority="500" tag="9" translatesAutoresizingMaskIntoConstraints="NO" id="w04-h5-qaz">
                                                                             <rect key="frame" x="259" y="-2" width="20" height="120"/>
-                                                                            <sliderCell key="cell" controlSize="small" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="5FD-oT-GpE"/>
+                                                                            <sliderCell key="cell" controlSize="small" refusesFirstResponder="YES" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" numberOfTickMarks="13" sliderType="linear" id="5FD-oT-GpE"/>
                                                                             <connections>
                                                                                 <action selector="audioEqSliderAction:" target="-2" id="I08-gI-z8e"/>
                                                                             </connections>
@@ -1626,7 +1629,7 @@
                                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                         </tableHeaderCell>
-                                                                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" allowsUndo="NO" alignment="right" title="0" id="CAr-N0-j64">
+                                                                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" refusesFirstResponder="YES" allowsUndo="NO" alignment="right" title="0" id="CAr-N0-j64">
                                                                                             <font key="font" metaFont="system"/>
                                                                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1668,7 +1671,7 @@
                                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                                         </tableHeaderCell>
-                                                                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="EUu-Vz-tXf">
+                                                                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" refusesFirstResponder="YES" alignment="left" title="Text Cell" id="EUu-Vz-tXf">
                                                                                             <font key="font" metaFont="system"/>
                                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1710,7 +1713,7 @@
                                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                                         </tableHeaderCell>
-                                                                                        <textFieldCell key="dataCell" lineBreakMode="truncatingMiddle" selectable="YES" allowsUndo="NO" alignment="left" title="Text Cell" id="Ml5-Kc-QjI">
+                                                                                        <textFieldCell key="dataCell" lineBreakMode="truncatingMiddle" selectable="YES" refusesFirstResponder="YES" allowsUndo="NO" alignment="left" title="Text Cell" id="Ml5-Kc-QjI">
                                                                                             <font key="font" metaFont="system"/>
                                                                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1782,7 +1785,7 @@
                                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                         </tableHeaderCell>
-                                                                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" allowsUndo="NO" alignment="right" title="0" id="0ju-Sf-fcb">
+                                                                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" refusesFirstResponder="YES" allowsUndo="NO" alignment="right" title="0" id="0ju-Sf-fcb">
                                                                                             <font key="font" metaFont="system"/>
                                                                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1824,7 +1827,7 @@
                                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                                         </tableHeaderCell>
-                                                                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="CI9-tC-NBv">
+                                                                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" refusesFirstResponder="YES" alignment="left" title="Text Cell" id="CI9-tC-NBv">
                                                                                             <font key="font" metaFont="system"/>
                                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1866,7 +1869,7 @@
                                                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                                         </tableHeaderCell>
-                                                                                        <textFieldCell key="dataCell" lineBreakMode="truncatingMiddle" selectable="YES" allowsUndo="NO" alignment="left" title="Text Cell" id="Zmu-ck-pua">
+                                                                                        <textFieldCell key="dataCell" lineBreakMode="truncatingMiddle" selectable="YES" refusesFirstResponder="YES" allowsUndo="NO" alignment="left" title="Text Cell" id="Zmu-ck-pua">
                                                                                             <font key="font" metaFont="system"/>
                                                                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1945,7 +1948,7 @@
                                                                 </textField>
                                                                 <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zQu-u6-goi" userLabel="Load Subtitle and Disclosure Triangle">
                                                                     <rect key="frame" x="17" y="100" width="128" height="24"/>
-                                                                    <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="AB5-UZ-euc">
+                                                                    <segmentedCell key="cell" refusesFirstResponder="YES" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="AB5-UZ-euc">
                                                                         <font key="font" metaFont="system"/>
                                                                         <segments>
                                                                             <segment label="Load Subtitle…"/>
@@ -1960,7 +1963,7 @@
                                                                 </segmentedControl>
                                                                 <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YIE-pv-gCK" userLabel="Search Online Segmented Control">
                                                                     <rect key="frame" x="147" y="100" width="111" height="24"/>
-                                                                    <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="Rbb-wh-cLc">
+                                                                    <segmentedCell key="cell" refusesFirstResponder="YES" borderStyle="border" alignment="left" style="rounded" trackingMode="momentary" id="Rbb-wh-cLc">
                                                                         <font key="font" metaFont="system"/>
                                                                         <segments>
                                                                             <segment label="Search Online…"/>
@@ -1975,7 +1978,7 @@
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="240" id="Qpm-gC-Y2e"/>
                                                                     </constraints>
-                                                                    <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" minValue="-5" maxValue="5" tickMarkPosition="below" numberOfTickMarks="21" sliderType="linear" id="h1D-gP-Dst"/>
+                                                                    <sliderCell key="cell" controlSize="small" continuous="YES" refusesFirstResponder="YES" state="on" alignment="left" minValue="-5" maxValue="5" tickMarkPosition="below" numberOfTickMarks="21" sliderType="linear" id="h1D-gP-Dst"/>
                                                                     <connections>
                                                                         <action selector="subDelayChangedAction:" target="-2" id="rzg-cd-v6B"/>
                                                                     </connections>
@@ -2123,7 +2126,7 @@
                                                                 </textField>
                                                                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="B8f-KH-BaO">
                                                                     <rect key="frame" x="18" y="307" width="324" height="28"/>
-                                                                    <sliderCell key="cell" continuous="YES" alignment="left" minValue="-5" maxValue="5" tickMarkPosition="above" sliderType="linear" id="Qpw-NH-Unh"/>
+                                                                    <sliderCell key="cell" continuous="YES" refusesFirstResponder="YES" alignment="left" minValue="-5" maxValue="5" tickMarkPosition="above" sliderType="linear" id="Qpw-NH-Unh"/>
                                                                     <connections>
                                                                         <action selector="subScaleSliderAction:" target="-2" id="zEB-hd-cz8"/>
                                                                     </connections>
@@ -2152,7 +2155,7 @@
                                                                         </colorWell>
                                                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xtF-tn-m9W" userLabel="Text font size">
                                                                             <rect key="frame" x="130" y="121" width="78" height="22"/>
-                                                                            <popUpButtonCell key="cell" type="push" title="55" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="mep-aa-rk7" id="qha-uU-Cos" userLabel="Cell">
+                                                                            <popUpButtonCell key="cell" type="push" title="55" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" refusesFirstResponder="YES" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="mep-aa-rk7" id="qha-uU-Cos" userLabel="Cell">
                                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                                 <font key="font" metaFont="message" size="11"/>
                                                                                 <menu key="menu" id="NDG-BT-qrU">
@@ -2264,7 +2267,7 @@
                                                                         </textField>
                                                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bkX-rt-2bg" userLabel="Text Border Width">
                                                                             <rect key="frame" x="130" y="69" width="79" height="22"/>
-                                                                            <popUpButtonCell key="cell" type="push" title="3" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="h6k-DT-fv5" id="xGc-Oh-HJO">
+                                                                            <popUpButtonCell key="cell" type="push" title="3" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" refusesFirstResponder="YES" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="h6k-DT-fv5" id="xGc-Oh-HJO">
                                                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                                 <font key="font" metaFont="message" size="11"/>
                                                                                 <menu key="menu" id="LnU-HE-pGc">
@@ -2291,7 +2294,7 @@
                                                                         </popUpButton>
                                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qGz-rB-dsV">
                                                                             <rect key="frame" x="210" y="118" width="76" height="27"/>
-                                                                            <buttonCell key="cell" type="push" title="Font..." bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ghy-e7-7Of">
+                                                                            <buttonCell key="cell" type="push" title="Font..." bezelStyle="rounded" alignment="center" controlSize="small" refusesFirstResponder="YES" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ghy-e7-7Of">
                                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                 <font key="font" metaFont="message" size="11"/>
                                                                             </buttonCell>
@@ -2343,7 +2346,7 @@
                                                                 </customView>
                                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="8ZC-Wx-nt7">
                                                                     <rect key="frame" x="324" y="338" width="16" height="21"/>
-                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRefreshFreestandingTemplate" imagePosition="only" alignment="center" controlSize="small" imageScaling="proportionallyUpOrDown" inset="2" id="ojj-5V-n3t">
+                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRefreshFreestandingTemplate" imagePosition="only" alignment="center" controlSize="small" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="ojj-5V-n3t">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="message" size="11"/>
                                                                     </buttonCell>
@@ -2365,7 +2368,7 @@
                                                                 </textField>
                                                                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lzW-d6-Asr">
                                                                     <rect key="frame" x="18" y="243" width="324" height="28"/>
-                                                                    <sliderCell key="cell" continuous="YES" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="fZU-F1-3pO"/>
+                                                                    <sliderCell key="cell" continuous="YES" refusesFirstResponder="YES" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="fZU-F1-3pO"/>
                                                                     <connections>
                                                                         <action selector="subPosSliderAction:" target="-2" id="Top-XW-i2A"/>
                                                                     </connections>

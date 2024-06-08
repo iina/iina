@@ -74,6 +74,7 @@ proj_path = File.expand_path(File.join(File.dirname(__FILE__), '../'))
 lib_folder = File.join(proj_path, "deps/lib/")
 
 libs = []
+original_folder = []
 
 rm_rf lib_folder
 mkdir lib_folder
@@ -90,25 +91,35 @@ linked_files.each do |file|
   puts "cp -p #{file} #{dest}"
   copy_entry file, dest, preserve: true
   libs << dest
+  original_folder << File.dirname(file)
 end
 
 fix_count = 0
 
 while !libs.empty?
   file = libs.pop
+  folder = original_folder.pop
   puts "=== Fix dependencies for #{file} ==="
   dylib = DylibFile.new file
   dylib.change_id!
   dylib.deps.each do |dep|
-    if dep.start_with?(prefix)
+    if dep.start_with?(prefix) || dep.start_with?("@rpath")
       fix_count += 1
       basename = File.basename(dep)
       new_name = "@rpath/#{basename}"
       dylib.change_install_name!(dep, new_name)
       dest = File.join(lib_folder, basename)
+      src =
+        if dep.start_with?(prefix)
+            dep
+        else
+            File.join(folder, basename)
+        end
+
       unless File.exists?(dest)
-        cp dep, lib_folder, preserve: true
+        cp src, lib_folder, preserve: true
         libs << dest
+        original_folder << File.dirname(src)
       end
     end
   end

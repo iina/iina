@@ -10,7 +10,6 @@ import Foundation
 import Network
 
 
-@available(macOS 10.15, *)
 protocol WebSocketServerDelegate {
   func stateUpdated(_ state: NWListener.State)
   func newConnection(_ conn: NWConnection, connID: String)
@@ -19,7 +18,6 @@ protocol WebSocketServerDelegate {
 }
 
 
-@available(macOS 10.15, *)
 class WebSocketServer {
   let label: String
   var delegate: WebSocketServerDelegate?

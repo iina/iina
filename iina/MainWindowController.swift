@@ -435,7 +435,6 @@ class MainWindowController: PlayerWindowController {
   @IBOutlet var thumbnailPeekView: ThumbnailPeekView!
   @IBOutlet weak var additionalInfoView: NSVisualEffectView!
   @IBOutlet weak var additionalInfoLabel: NSTextField!
-  @IBOutlet weak var additionalInfoLabelXConstraint: NSLayoutConstraint!
   @IBOutlet weak var additionalInfoStackView: NSStackView!
   @IBOutlet weak var additionalInfoTitle: NSTextField!
   @IBOutlet weak var additionalInfoBatteryView: NSView!
@@ -538,7 +537,6 @@ class MainWindowController: PlayerWindowController {
     fragControlView.addView(fragControlViewRightView, in: .center)
     // Video controllers and timeline indicators should not flip in a right-to-left language.
     fragControlView.userInterfaceLayoutDirection = .leftToRight
-    oscFloatingTopView.userInterfaceLayoutDirection = .leftToRight
     setupOnScreenController(withPosition: oscPosition)
     let buttons = (Preference.array(for: .controlBarToolbarButtons) as? [Int] ?? []).compactMap(Preference.ToolBarButton.init(rawValue:))
     setupOSCToolbarButtons(buttons)
@@ -598,9 +596,6 @@ class MainWindowController: PlayerWindowController {
     osdVisualEffectView.isHidden = true
     osdVisualEffectView.roundCorners(withRadius: 10)
     additionalInfoView.roundCorners(withRadius: 10)
-    if additionalInfoView.userInterfaceLayoutDirection == .rightToLeft {
-      additionalInfoLabelXConstraint.constant = -1
-    }
     leftArrowLabel.isHidden = true
     rightArrowLabel.isHidden = true
     timePreviewWhenSeek.isHidden = true
@@ -673,30 +668,6 @@ class MainWindowController: PlayerWindowController {
       return 0
     }
   }
-
-  /** Set material for OSC and title bar */
-  override internal func setMaterial(_ theme: Preference.Theme?) {
-    if #available(macOS 10.14, *) {
-      super.setMaterial(theme)
-      return
-    }
-    guard let window = window, let theme = theme else { return }
-
-    let (appearance, material) = Utility.getAppearanceAndMaterial(from: theme)
-    let isDarkTheme = appearance?.isDark ?? true
-    (playSlider.cell as? PlaySliderCell)?.isInDarkTheme = isDarkTheme
-
-    [titleBarView, controlBarFloating, controlBarBottom, osdVisualEffectView, pipOverlayView, additionalInfoView, bufferIndicatorView].forEach {
-      $0?.material = material
-      $0?.appearance = appearance
-    }
-
-    sideBarView.material = .dark
-    sideBarView.appearance = NSAppearance(named: .vibrantDark)
-
-    window.appearance = appearance
-  }
-
 
   private func addVideoViewToWindow() {
     guard let cv = window?.contentView else { return }
@@ -1793,23 +1764,11 @@ class MainWindowController: PlayerWindowController {
     guard pipStatus == .notInPIP || animationState == .hidden else {
       return
     }
-
-    // Follow energy efficiency best practices and stop the timer that updates the OSC while it is
-    // hidden. However the timer can't be stopped if the mini player is being used as it always
-    // displays the the OSC or the timer is also updating the information being displayed in the
-    // touch bar. Does this host have a touch bar? Is the touch bar configured to show app controls?
-    // Is the touch bar awake? Is the host being operated in closed clamshell mode? This is the kind
-    // of information needed to avoid running the timer and updating controls that are not visible.
-    // Unfortunately in the documentation for NSTouchBar Apple indicates "There’s no need, and no
-    // API, for your app to know whether or not there’s a Touch Bar available". So this code keys
-    // off whether AppKit has requested that a NSTouchBar object be created. This avoids running the
-    // timer on Macs that do not have a touch bar. It also may avoid running the timer when a
-    // MacBook with a touch bar is being operated in closed clameshell mode.
-    if !player.isInMiniPlayer && !player.needsTouchBar {
-      player.invalidateTimer()
-    }
+    // Don't hide UI when auto hide control bar is disabled
+    guard Preference.bool(for: .enableControlBarAutoHide) else { return }
 
     animationState = .willHide
+    player.refreshSyncUITimer()
     fadeableViews.forEach { (v) in
       v.isHidden = false
     }
@@ -1844,10 +1803,7 @@ class MainWindowController: PlayerWindowController {
     }
     // The OSC may not have been updated while it was hidden to avoid wasting energy. Make sure it
     // is up to date.
-    player.syncUITime()
-    if !player.info.isPaused {
-      player.createSyncUITimer()
-    }
+    player.refreshSyncUITimer()
     standardWindowButtons.forEach { $0.isEnabled = true }
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = UIAnimationDuration
@@ -2089,8 +2045,10 @@ class MainWindowController: PlayerWindowController {
     let width = type.width()
     sideBarWidthConstraint.constant = width
     // The macOS setting could change at any point in time. Remember which type of animation is
-    // being used.
-    let useFade = AccessibilityPreferences.motionReductionEnabled
+    // being used. Avoid using fading when disabling animations as that animation will initially
+    // malfunction if used with a short duration.
+    let useFade = AccessibilityPreferences.motionReductionEnabled &&
+                  !Preference.bool(for: PK.disableAnimations)
     if useFade {
       sideBarRightConstraint.constant = 0
     } else {
@@ -2124,8 +2082,10 @@ class MainWindowController: PlayerWindowController {
     sidebarAnimationState = .willHide
     let currWidth = sideBarWidthConstraint.constant
     // The macOS setting could change at any point in time. Remember which type of animation is
-    // being used.
-    let useFade = AccessibilityPreferences.motionReductionEnabled
+    // being used. Avoid using fading when disabling animations as that animation will initially
+    // malfunction if used with a short duration.
+    let useFade = AccessibilityPreferences.motionReductionEnabled &&
+                  !Preference.bool(for: PK.disableAnimations)
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = animate ? AccessibilityPreferences.adjustedDuration(SideBarAnimationDuration) : 0
       context.timingFunction = CAMediaTimingFunction(name: .easeIn)
@@ -2618,7 +2578,7 @@ class MainWindowController: PlayerWindowController {
     if let videoWidth = player.info.videoWidth {
       let windowScale = Double((frame ?? window.frame).width) / Double(videoWidth)
       player.info.cachedWindowScale = windowScale
-      player.mpv.setDouble(MPVProperty.windowScale, windowScale)
+      player.mpv.setDouble(MPVProperty.windowScale, windowScale, level: .verbose)
     }
   }
 

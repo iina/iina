@@ -154,7 +154,7 @@ class PlayerCore: NSObject {
 
   lazy var info: PlaybackInfo = PlaybackInfo(self)
 
-  var syncPlayTimeTimer: Timer?
+  var syncUITimer: Timer?
 
   var displayOSD: Bool = true
 
@@ -419,7 +419,7 @@ class PlayerCore: NSObject {
     info.justOpenedFile = true
     isStopping = false
     isStopped = false
-    mpv.command(.loadfile, args: [path])
+    mpv.command(.loadfile, args: [path], level: .verbose)
   }
 
   static func loadKeyBindings() {
@@ -520,7 +520,7 @@ class PlayerCore: NSObject {
 
   private func savePlayerState() {
     savePlaybackPosition()
-    invalidateTimer()
+    refreshSyncUITimer()
     uninitVideo()
   }
 
@@ -552,11 +552,6 @@ class PlayerCore: NSObject {
     postNotification(.iinaPlayerShutdown)
   }
 
-  // invalidate timer
-  func invalidateTimer() {
-    self.syncPlayTimeTimer?.invalidate()
-  }
-
   func switchToMiniPlayer(automatically: Bool = false) {
     log("Switch to mini player, automatically=\(automatically)")
     if !automatically {
@@ -568,14 +563,8 @@ class PlayerCore: NSObject {
     miniPlayer.showWindow(self)
 
     miniPlayer.updateTitle()
-    syncUITime()
+    refreshSyncUITimer()
     syncUI(.playButton)
-    // When not in the mini player the timer that updates the OSC may be stopped to conserve energy
-    // when the OSC is hidden. As the OSC is always displayed in the mini player ensure the timer is
-    // running if media is playing.
-    if !info.isPaused {
-      createSyncUITimer()
-    }
     let playlistView = mainWindow.playlistView.view
     let videoView = mainWindow.videoView
     // reset down shift for playlistView
@@ -688,7 +677,7 @@ class PlayerCore: NSObject {
   ///     [#4520](https://github.com/iina/iina/issues/4520)
   func pause() {
     guard !info.isIdle, !isStopping, !isStopped, !isShuttingDown, !isShutdown else { return }
-    mpv.setFlag(MPVOption.PlaybackControl.pause, true)
+    mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
   }
 
   func resume() {
@@ -696,7 +685,7 @@ class PlayerCore: NSObject {
     if mpv.getFlag(MPVProperty.eofReached) {
       seek(absoluteSecond: 0)
     }
-    mpv.setFlag(MPVOption.PlaybackControl.pause, false)
+    mpv.setFlag(MPVOption.PlaybackControl.pause, false, level: .verbose)
   }
 
   /// Stop playback and unload the media.
@@ -708,7 +697,6 @@ class PlayerCore: NSObject {
     savePlaybackPosition()
 
     mainWindow.videoView.stopDisplayLink()
-    invalidateTimer()
 
     info.currentFolder = nil
     info.$matchedSubs.withLock { $0.removeAll() }
@@ -718,6 +706,7 @@ class PlayerCore: NSObject {
     guard !isStopped else { return }
     log("Stopping playback")
     isStopping = true
+    refreshSyncUITimer()
     mpv.command(.stop)
   }
 
@@ -748,14 +737,14 @@ class PlayerCore: NSObject {
     }
     let useExact = forceExact ? true : Preference.bool(for: .useExactSeek)
     let seekMode = useExact ? "absolute-percent+exact" : "absolute-percent"
-    mpv.command(.seek, args: ["\(percent)", seekMode], checkError: false)
+    mpv.command(.seek, args: ["\(percent)", seekMode], checkError: false, level: .verbose)
   }
 
   func seek(relativeSecond: Double, option: Preference.SeekOption) {
     switch option {
 
     case .relative:
-      mpv.command(.seek, args: ["\(relativeSecond)", "relative"], checkError: false)
+      mpv.command(.seek, args: ["\(relativeSecond)", "relative"], checkError: false, level: .verbose)
 
     case .exact:
       mpv.command(.seek, args: ["\(relativeSecond)", "relative+exact"], checkError: false)
@@ -1013,7 +1002,7 @@ class PlayerCore: NSObject {
     let constrainedVolume = volume.clamped(to: 0...Double(maxVolume))
     let appliedVolume = constrain ? constrainedVolume : volume
     info.volume = appliedVolume
-    mpv.setDouble(MPVOption.Audio.volume, appliedVolume)
+    mpv.setDouble(MPVOption.Audio.volume, appliedVolume, level: .verbose)
     Preference.set(constrainedVolume, for: .softVolume)
   }
 
@@ -1116,7 +1105,7 @@ class PlayerCore: NSObject {
     case .hue:
       optionName = MPVOption.Equalizer.hue
     }
-    mpv.command(.set, args: [optionName, value.description])
+    mpv.command(.set, args: [optionName, value.description], level: .verbose)
   }
   
   func loadExternalVideoFile(_ url: URL) {
@@ -1141,13 +1130,23 @@ class PlayerCore: NSObject {
     }
   }
 
+  func toggleSubVisibility(_ set: Bool? = nil) {
+    let newState = set ?? !info.isSubVisible
+    mpv.setFlag(MPVOption.Subtitles.subVisibility, newState)
+  }
+
+  func toggleSecondSubVisibility(_ set: Bool? = nil) {
+    let newState = set ?? !info.isSecondSubVisible
+    mpv.setFlag(MPVOption.Subtitles.secondarySubVisibility, newState)
+  }
+
   func loadExternalSubFile(_ url: URL, delay: Bool = false) {
     if let track = info.subTracks.first(where: { $0.externalFilename == url.path }) {
       mpv.command(.subReload, args: [String(track.id)], checkError: false)
       return
     }
 
-    mpv.command(.subAdd, args: [url.path], checkError: false) { code in
+    mpv.command(.subAdd, args: [url.path], checkError: false, level: .verbose) { code in
       if code < 0 {
         self.log("Unsupported sub: \(url.path)", level: .error)
         // if another modal panel is shown, popping up an alert now will cause some infinite loop.
@@ -1189,7 +1188,7 @@ class PlayerCore: NSObject {
   }
 
   private func _addToPlaylist(_ path: String) {
-    mpv.command(.loadfile, args: [path, "append"])
+    mpv.command(.loadfile, args: [path, "append"], level: .verbose)
   }
 
   func addToPlaylist(_ path: String, silent: Bool = false) {
@@ -1200,7 +1199,7 @@ class PlayerCore: NSObject {
   }
 
   private func _playlistMove(_ from: Int, to: Int) {
-    mpv.command(.playlistMove, args: ["\(from)", "\(to)"])
+    mpv.command(.playlistMove, args: ["\(from)", "\(to)"], level: .verbose)
   }
 
   func playlistMove(_ from: Int, to: Int) {
@@ -1249,7 +1248,7 @@ class PlayerCore: NSObject {
   func playFile(_ path: String) {
     info.justOpenedFile = true
     info.shouldAutoLoadFiles = true
-    mpv.command(.loadfile, args: [path, "replace"])
+    mpv.command(.loadfile, args: [path, "replace"], level: .verbose)
     getPlaylist()
   }
 
@@ -1531,14 +1530,14 @@ class PlayerCore: NSObject {
   /** Scale is a double value in [-100, -1] + [1, 100] */
   func setSubScale(_ scale: Double) {
     if scale > 0 {
-      mpv.setDouble(MPVOption.Subtitles.subScale, scale)
+      mpv.setDouble(MPVOption.Subtitles.subScale, scale, level: .verbose)
     } else {
-      mpv.setDouble(MPVOption.Subtitles.subScale, -scale)
+      mpv.setDouble(MPVOption.Subtitles.subScale, -scale, level: .verbose)
     }
   }
 
   func setSubPos(_ pos: Int) {
-    mpv.setInt(MPVOption.Subtitles.subPos, pos)
+    mpv.setInt(MPVOption.Subtitles.subPos, pos, level: .verbose)
   }
 
   func setSubTextColor(_ colorString: String) {
@@ -1709,7 +1708,6 @@ class PlayerCore: NSObject {
   /** This function is called right after file loaded. Should load all meta info here. */
   func fileLoaded() {
     log("File loaded")
-    invalidateTimer()
     triedUsingExactSeekForCurrentFile = false
     info.fileLoading = false
     // Playback will move directly from stopped to loading when transitioning to the next file in
@@ -1729,7 +1727,7 @@ class PlayerCore: NSObject {
       getPlaylist()
       getChapters()
       syncAbLoop()
-      createSyncUITimer()
+      refreshSyncUITimer()
       if #available(macOS 10.12.2, *) {
         touchBarSupport.setupTouchBarUI()
       }
@@ -1809,7 +1807,6 @@ class PlayerCore: NSObject {
     }
   }
 
-  @available(macOS 10.15, *)
   func refreshEdrMode() {
     guard mainWindow.loaded else { return }
     DispatchQueue.main.async { [self] in
@@ -1826,11 +1823,25 @@ class PlayerCore: NSObject {
     postNotification(.iinaSIDChanged)
   }
 
+  func secondSubVisibilityChanged(_ visible: Bool) {
+    guard info.isSecondSubVisible != visible else { return }
+    info.isSecondSubVisible = visible
+    sendOSD(visible ? .secondSubVisible : .secondSubHidden)
+    postNotification(.iinaSecondSubVisibilityChanged)
+  }
+
   func sidChanged() {
     guard !isShuttingDown, !isShutdown else { return }
     info.sid = Int(mpv.getInt(MPVOption.TrackSelection.sid))
     postNotification(.iinaSIDChanged)
     sendOSD(.track(info.currentTrack(.sub) ?? .noneSubTrack))
+  }
+
+  func subVisibilityChanged(_ visible: Bool) {
+    guard info.isSubVisible != visible else { return }
+    info.isSubVisible = visible
+    sendOSD(visible ? .subVisible : .subHidden)
+    postNotification(.iinaSubVisibilityChanged)
   }
 
   func trackListChanged() {
@@ -1954,10 +1965,84 @@ class PlayerCore: NSObject {
 
   // MARK: - Sync with UI in MainWindow
 
-  func createSyncUITimer() {
-    invalidateTimer()
-    syncPlayTimeTimer = Timer.scheduledTimer(
-      timeInterval: TimeInterval(DurationDisplayTextField.precision >= 2 ? AppData.syncTimePreciseInterval : AppData.syncTimeInterval),
+  /// Call this when `syncUITimer` may need to be started, stopped, or needs its interval changed. It will figure out the correct action.
+  /// Just need to make sure that any state variables (e.g., `info.isPaused`, `isInMiniPlayer`,  etc.) are set *before* calling this method,
+  /// not after, so that it makes the correct decisions.
+  func refreshSyncUITimer() {
+    // Check if timer should start/restart
+
+    let useTimer: Bool
+    if isStopping || isShuttingDown {
+      useTimer = false
+    } else if info.isPaused {
+      // Follow energy efficiency best practices and ensure IINA is absolutely idle when the
+      // video is paused to avoid wasting energy with needless processing. If paused shutdown
+      // the timer that synchronizes the UI and the high priority display link thread.
+      useTimer = false
+    } else if needsTouchBar || isInMiniPlayer {
+      // Follow energy efficiency best practices and stop the timer that updates the OSC while it is
+      // hidden. However the timer can't be stopped if the mini player is being used as it always
+      // displays the the OSC or the timer is also updating the information being displayed in the
+      // touch bar. Does this host have a touch bar? Is the touch bar configured to show app controls?
+      // Is the touch bar awake? Is the host being operated in closed clamshell mode? This is the kind
+      // of information needed to avoid running the timer and updating controls that are not visible.
+      // Unfortunately in the documentation for NSTouchBar Apple indicates "There’s no need, and no
+      // API, for your app to know whether or not there’s a Touch Bar available". So this code keys
+      // off whether AppKit has requested that a NSTouchBar object be created. This avoids running the
+      // timer on Macs that do not have a touch bar. It also may avoid running the timer when a
+      // MacBook with a touch bar is being operated in closed clameshell mode.
+      useTimer = true
+    } else if info.isNetworkResource {
+      // May need to show, hide, or update buffering indicator at any time
+      useTimer = true
+    } else {
+      // Need if fadeable views are visible
+      useTimer = mainWindow.animationState == .shown || mainWindow.animationState == .willShow
+    }
+
+    let timeInterval = TimeInterval(DurationDisplayTextField.precision >= 2 ? AppData.syncTimePreciseInterval : AppData.syncTimeInterval)
+
+    /// Invalidate existing timer:
+    /// - if no longer needed
+    /// - if still needed but need to change the `timeInterval`
+    var wasTimerRunning = false
+    if let existingTimer = self.syncUITimer, existingTimer.isValid {
+      if useTimer && timeInterval == existingTimer.timeInterval {
+        /// Don't restart the existing timer if not needed, because restarting will ignore any time it has
+        /// already spent waiting, and could in theory result in a small visual jump (more so for long intervals).
+
+        // Uncomment for debugging (too many calls)
+//        Logger.log("SyncUITimer already running, no change needed", level: .verbose, subsystem: subsystem)
+        return
+      } else {
+        wasTimerRunning = true
+        existingTimer.invalidate()
+        self.syncUITimer = nil
+      }
+    }
+
+    if Logger.enabled && Logger.Level.preferred >= .verbose {
+      var summary = wasTimerRunning ? (useTimer ? "restarting" : "didStop") : (useTimer ? "starting" : "notNeeded")
+      if summary != "notNeeded" {  // too many calls; try not to flood the log
+        if useTimer {
+          summary += ", timeInterval \(timeInterval)"
+        }
+        Logger.log("SyncUITimer \(summary). Player={paused:\(info.isPaused) network:\(info.isNetworkResource) mini:\(isInMiniPlayer) touchBar:\(needsTouchBar) stopping:\(isStopping) quitting:\(isShuttingDown)}",
+                   level: .verbose, subsystem: subsystem)
+      }
+    }
+
+    guard useTimer else { return }
+
+    // Timer will start
+
+    if !wasTimerRunning {
+      // Do not wait for first redraw
+      syncUITime()
+    }
+
+    syncUITimer = Timer.scheduledTimer(
+      timeInterval: timeInterval,
       target: self,
       selector: #selector(self.syncUITime),
       userInfo: nil,
@@ -1975,27 +2060,16 @@ class PlayerCore: NSObject {
   // difficult to use option set
   enum SyncUIOption {
     case time
-    case timeAndCache
     case playButton
     case volume
     case muteButton
     case chapterList
     case playlist
     case loop
-    case additionalInfo
   }
 
   @objc func syncUITime() {
-    if info.isNetworkResource {
-      syncUI(.timeAndCache)
-    } else {
-      syncUI(.time)
-    }
-    if !isInMiniPlayer &&
-      mainWindow.fsState.isFullscreen && mainWindow.displayTimeAndBatteryInFullScreen &&
-      !mainWindow.additionalInfoView.isHidden {
-        syncUI(.additionalInfo)
-    }
+    syncUI(.time)
   }
 
   func syncUI(_ option: SyncUIOption) {
@@ -2007,8 +2081,8 @@ class PlayerCore: NSObject {
     switch option {
 
     case .time:
-      info.videoPosition?.second = mpv.getDouble(MPVProperty.timePos)
-      if info.isNetworkResource {
+      let isNetworkStream = info.isNetworkResource
+      if isNetworkStream {
         info.videoDuration?.second = mpv.getDouble(MPVProperty.duration)
       }
       // When the end of a video file is reached mpv does not update the value of the property
@@ -2018,40 +2092,30 @@ class PlayerCore: NSObject {
       let eofReached = mpv.getFlag(MPVProperty.eofReached)
       if eofReached, let duration = info.videoDuration?.second {
         info.videoPosition?.second = duration
+      } else {
+        info.videoPosition?.second = mpv.getDouble(MPVProperty.timePos)
       }
       info.constrainVideoPosition()
-      DispatchQueue.main.async {
-        if self.isInMiniPlayer {
-          self.miniPlayer.updatePlayTime(withDuration: self.info.isNetworkResource, andProgressBar: true)
-        } else {
-          self.mainWindow.updatePlayTime(withDuration: self.info.isNetworkResource, andProgressBar: true)
-        }
+      if isNetworkStream {
+        // Update cache info
+        info.pausedForCache = mpv.getFlag(MPVProperty.pausedForCache)
+        info.cacheUsed = ((mpv.getNode(MPVProperty.demuxerCacheState) as? [String: Any])?["fw-bytes"] as? Int) ?? 0
+        info.cacheSpeed = mpv.getInt(MPVProperty.cacheSpeed)
+        info.cacheTime = mpv.getInt(MPVProperty.demuxerCacheTime)
+        info.bufferingState = mpv.getInt(MPVProperty.cacheBufferingState)
       }
-
-    case .timeAndCache:
-      info.videoPosition?.second = mpv.getDouble(MPVProperty.timePos)
-      info.videoDuration?.second = mpv.getDouble(MPVProperty.duration)
-      // When the end of a video file is reached mpv does not update the value of the property
-      // time-pos, leaving it reflecting the position of the last frame of the video. This is
-      // especially noticeable if the onscreen controller time labels are configured to show
-      // milliseconds. Adjust the position if the end of the file has been reached.
-      let eofReached = mpv.getFlag(MPVProperty.eofReached)
-      if eofReached, let duration = info.videoDuration?.second {
-        info.videoPosition?.second = duration
-      }
-      info.constrainVideoPosition()
-      info.pausedForCache = mpv.getFlag(MPVProperty.pausedForCache)
-      info.cacheUsed = ((mpv.getNode(MPVProperty.demuxerCacheState) as? [String: Any])?["fw-bytes"] as? Int) ?? 0
-      info.cacheSpeed = mpv.getInt(MPVProperty.cacheSpeed)
-      info.cacheTime = mpv.getInt(MPVProperty.demuxerCacheTime)
-      info.bufferingState = mpv.getInt(MPVProperty.cacheBufferingState)
-      DispatchQueue.main.async {
+      DispatchQueue.main.async { [self] in
         if self.isInMiniPlayer {
-          self.miniPlayer.updatePlayTime(withDuration: true, andProgressBar: true)
+          miniPlayer.updatePlayTime(withDuration: isNetworkStream, andProgressBar: true)
         } else {
-          self.mainWindow.updatePlayTime(withDuration: true, andProgressBar: true)
+          mainWindow.updatePlayTime(withDuration: isNetworkStream, andProgressBar: true)
+          if mainWindow.fsState.isFullscreen && mainWindow.displayTimeAndBatteryInFullScreen && !mainWindow.additionalInfoView.isHidden {
+            self.mainWindow.updateAdditionalInfo()
+          }
         }
-        self.mainWindow.updateNetworkState()
+        if isNetworkStream {
+          self.mainWindow.updateNetworkState()
+        }
       }
 
     case .playButton:
@@ -2088,11 +2152,6 @@ class PlayerCore: NSObject {
     case .loop:
       DispatchQueue.main.async {
         self.mainWindow.playlistView.updateLoopBtnStatus()
-      }
-
-    case .additionalInfo:
-      DispatchQueue.main.async {
-        self.mainWindow.updateAdditionalInfo()
       }
     }
   }
@@ -2186,9 +2245,7 @@ class PlayerCore: NSObject {
     // The timer that synchronizes the UI is shutdown to conserve energy when the OSC is hidden.
     // However the timer can't be stopped if it is needed to update the information being displayed
     // in the touch bar. If currently playing make sure the timer is running.
-    if info.isPlaying && !isShuttingDown && !isShutdown {
-      createSyncUITimer()
-    }
+    refreshSyncUITimer()
     return touchBarSupport.touchBar
   }
 

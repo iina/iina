@@ -130,6 +130,10 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
       label.alignment = .center
       label.font = .monospacedDigitSystemFont(ofSize: 0, weight: .regular)
       label.mode = Preference.bool(for: .touchbarShowRemainingTime) ? .remaining : .duration
+      // The baseWritingDirection must be changed from natural (the default) to leftToRight or the
+      // minus sign will be drawn on the right side of the time string when displaying time
+      // remaining in a right-to-left language.
+      label.baseWritingDirection = .leftToRight
       self.touchBarPosLabels.append(label)
       item.view = label
       item.customizationLabel = NSLocalizedString("touchbar.remainingTimeOrTotalDuration", comment: "Show Remaining Time or Total Duration")
@@ -223,7 +227,7 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
     if let widthConstant = sizingTouchBarTextField.cell?.cellSize.width, !touchBarPosLabels.isEmpty {
       if let posConstraint = touchBarPosLabelWidthLayout {
         posConstraint.constant = widthConstant + pad
-        touchBarPosLabels.forEach { $0.setNeedsDisplay() }
+        touchBarPosLabels.forEach { $0.needsDisplay = true }
       } else {
         for posLabel in touchBarPosLabels {
           let posConstraint = NSLayoutConstraint(item: posLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: widthConstant + pad)

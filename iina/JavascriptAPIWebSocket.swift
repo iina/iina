@@ -20,7 +20,6 @@ import Network
   func sendText( _ conn: String, _ string: String) -> JSValue
 }
 
-@available(macOS 10.15, *)
 class JavascriptAPIWebSocketController: JavascriptAPI, JavascriptAPIWebSocketControllerExportable {
   var server: WebSocketServer?
   var stateHandler: JSManagedValue?
@@ -123,7 +122,6 @@ class JavascriptAPIWebSocketController: JavascriptAPI, JavascriptAPIWebSocketCon
 }
 
 
-@available(macOS 10.15, *)
 extension JavascriptAPIWebSocketController: WebSocketServerDelegate {
   func stateUpdated(_ state: NWListener.State) {
     guard let handler = stateHandler?.value else { return }
@@ -209,7 +207,6 @@ extension JavascriptAPIWebSocketController: WebSocketServerDelegate {
   }
 }
 
-@available(macOS 10.15, *)
 fileprivate extension Error where Self : CustomDebugStringConvertible {
   func toDict() -> [String: Any] {
     return [

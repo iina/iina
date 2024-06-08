@@ -262,7 +262,7 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
       self.setLabelColor(self.vprimariesField, by: sigPeak > 0)
 
       if PlayerCore.lastActive.mainWindow.loaded && controller.fileLoaded {
-        if #available(macOS 10.15, *), let colorspace = PlayerCore.lastActive.mainWindow.videoView.videoLayer.colorspace {
+        if let colorspace = PlayerCore.lastActive.mainWindow.videoView.videoLayer.colorspace {
           let isHdr = colorspace != VideoView.SRGB
           self.vcolorspaceField.stringValue = "\(colorspace.name!) (\(isHdr ? "H" : "S")DR)"
         } else {

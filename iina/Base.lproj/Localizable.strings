@@ -46,6 +46,7 @@
 "quicksetting.hwdec" = "Hardware Decoding";
 "quicksetting.deinterlace" = "Deinterlace";
 "quicksetting.hdr" = "HDR";
+"quicksetting.hide" = "Hide";
 
 // OSDMessage.swift
 "osd.pause" = "Pause";
@@ -64,6 +65,10 @@
 "osd.sub_delay.later" = "Subtitle Delay: %.2fs Later";
 "osd.sub_delay.earlier" = "Subtitle Delay: %.2fs Earlier";
 "osd.subtitle_pos" = "Subtitle Position: %.1f";
+"osd.sub_hidden" = "Subtitles Hidden";
+"osd.sub_visible" = "Subtitles Visible";
+"osd.sub_second_hidden" = "Second Subtitles Hidden";
+"osd.sub_second_visible" = "Second Subtitles Visible";
 "osd.mute" = "Mute";
 "osd.unmute" = "Unmute";
 "osd.screenshot" = "Screenshot Captured";
@@ -127,6 +132,10 @@
 "menu.volume_muted" = "Volume: %d (Muted)";
 "menu.audio_delay" = "Audio Delay: %.2fs";
 "menu.sub_delay" = "Subtitle Delay: %.2fs";
+"menu.sub_hide" = "Hide Subtitles";
+"menu.sub_show" = "Show Subtitles";
+"menu.sub_second_hide" = "Hide Second Subtitles";
+"menu.sub_second_show" = "Show Second Subtitles";
 "menu.fullscreen" = "Enter Full Screen";
 "menu.exit_fullscreen" = "Exit Full Screen";
 "menu.pip" = "Enter Picture-in-Picture";

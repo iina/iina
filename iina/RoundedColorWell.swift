@@ -37,13 +37,13 @@ class RoundedColorWell: NSColorWell {
 
   override func mouseDown(with event: NSEvent) {
     isMouseDown = true
-    self.setNeedsDisplay()
+    self.needsDisplay = true
   }
 
   override func mouseUp(with event: NSEvent) {
     isMouseDown = false
     self.activate(true)
-    self.setNeedsDisplay()
+    self.needsDisplay = true
   }
 
 

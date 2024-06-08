@@ -332,16 +332,6 @@ extension NSMutableAttributedString {
 }
 
 
-extension UserDefaults {
-
-  func mpvColor(forKey key: String) -> String? {
-    guard let data = self.data(forKey: key) else { return nil }
-    guard let color = NSUnarchiver.unarchiveObject(with: data) as? NSColor else { return nil }
-    return color.usingColorSpace(.deviceRGB)?.mpvColorString
-  }
-}
-
-
 extension NSData {
   func md5() -> NSString {
     let digestLength = Int(CC_MD5_DIGEST_LENGTH)
@@ -642,13 +632,9 @@ extension NSScreen {
       return
     }
     // Unfortunately localizedName is not available until macOS Catalina.
-    if #available(macOS 10.15, *) {
-      let maxPossibleEDR = screen.maximumPotentialExtendedDynamicRangeColorComponentValue
-      let canEnableEDR = maxPossibleEDR > 1.0
-      Logger.log("\(label): \"\(screen.localizedName)\" visible frame \(screen.visibleFrame) EDR: {supports=\(canEnableEDR) maxPotential=\(maxPossibleEDR) maxCurrent=\(screen.maximumExtendedDynamicRangeColorComponentValue)}")
-    } else {
-      Logger.log("\(label): visible frame \(screen.visibleFrame)")
-    }
+    let maxPossibleEDR = screen.maximumPotentialExtendedDynamicRangeColorComponentValue
+    let canEnableEDR = maxPossibleEDR > 1.0
+    Logger.log("\(label): \"\(screen.localizedName)\" visible frame \(screen.visibleFrame) EDR: {supports=\(canEnableEDR) maxPotential=\(maxPossibleEDR) maxCurrent=\(screen.maximumExtendedDynamicRangeColorComponentValue)}")
   }
 }
 

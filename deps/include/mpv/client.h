@@ -17,7 +17,7 @@
  * Note: the client API is licensed under ISC (see above) to enable
  * other wrappers outside of mpv. But keep in mind that the
  * mpv core is by default still GPLv2+ - unless built with
- * --enable-lgpl, which makes it LGPLv2+.
+ * -Dgpl=false, which makes it LGPLv2+.
  */
 
 #ifndef MPV_CLIENT_API_H_
@@ -26,13 +26,21 @@
 #include <stddef.h>
 #include <stdint.h>
 
-/* New symbols must still be added to libmpv/mpv.def. */
 #ifdef _WIN32
 #define MPV_EXPORT __declspec(dllexport)
+#define MPV_SELECTANY __declspec(selectany)
 #elif defined(__GNUC__) || defined(__clang__)
 #define MPV_EXPORT __attribute__((visibility("default")))
+#define MPV_SELECTANY
 #else
 #define MPV_EXPORT
+#define MPV_SELECTANY
+#endif
+
+#ifdef __cpp_decltype
+#define MPV_DECLTYPE decltype
+#else
+#define MPV_DECLTYPE __typeof__
 #endif
 
 #ifdef __cplusplus
@@ -173,7 +181,7 @@ extern "C" {
  * filenames in the local 8 bit encoding. It does not use fopen() either;
  * it uses _wfopen().
  *
- * On OS X, filenames and other strings taken/returned by libmpv can have
+ * On macOS, filenames and other strings taken/returned by libmpv can have
  * inconsistent unicode normalization. This can sometimes lead to problems.
  * You have to hope for the best.
  *
@@ -182,14 +190,14 @@ extern "C" {
  * Embedding the video window
  * --------------------------
  *
- * Using the render API (in render_cb.h) is recommended. This API requires
+ * Using the render API (in render.h) is recommended. This API requires
  * you to create and maintain an OpenGL context, to which you can render
  * video using a specific API call. This API does not include keyboard or mouse
  * input directly.
  *
  * There is an older way to embed the native mpv window into your own. You have
  * to get the raw window handle, and set it as "wid" option. This works on X11,
- * win32, and OSX only. It's much easier to use than the render API, but
+ * win32, and macOS only. It's much easier to use than the render API, but
  * also has various problems.
  *
  * Also see client API examples and the mpv manpage. There is an extensive
@@ -240,7 +248,7 @@ extern "C" {
  * relational operators (<, >, <=, >=).
  */
 #define MPV_MAKE_VERSION(major, minor) (((major) << 16) | (minor) | 0UL)
-#define MPV_CLIENT_API_VERSION MPV_MAKE_VERSION(2, 0)
+#define MPV_CLIENT_API_VERSION MPV_MAKE_VERSION(2, 3)
 
 /**
  * The API user is allowed to "#define MPV_ENABLE_DEPRECATED 0" before
@@ -487,7 +495,7 @@ MPV_EXPORT mpv_handle *mpv_create(void);
  *        - load-scripts
  *        - script
  *        - player-operation-mode
- *        - input-app-events (OSX)
+ *        - input-app-events (macOS)
  *      - all encoding mode options
  *
  * @return error code
@@ -594,7 +602,7 @@ MPV_EXPORT mpv_handle *mpv_create_weak_client(mpv_handle *ctx, const char *name)
 MPV_EXPORT int mpv_load_config_file(mpv_handle *ctx, const char *filename);
 
 /**
- * Return the internal time in microseconds. This has an arbitrary start offset,
+ * Return the internal time in nanoseconds. This has an arbitrary start offset,
  * but will never wrap or go backwards.
  *
  * Note that this is always the real time, and doesn't necessarily have to do
@@ -606,6 +614,11 @@ MPV_EXPORT int mpv_load_config_file(mpv_handle *ctx, const char *filename);
  * within wakeup callbacks), as long as the context is valid.
  *
  * Safe to be called from mpv render API threads.
+ */
+MPV_EXPORT int64_t mpv_get_time_ns(mpv_handle *ctx);
+
+/**
+ * Same as mpv_get_time_ns but in microseconds.
  */
 MPV_EXPORT int64_t mpv_get_time_us(mpv_handle *ctx);
 
@@ -1067,6 +1080,16 @@ MPV_EXPORT int mpv_set_property(mpv_handle *ctx, const char *name, mpv_format fo
  * This is like calling mpv_set_property() with MPV_FORMAT_STRING.
  */
 MPV_EXPORT int mpv_set_property_string(mpv_handle *ctx, const char *name, const char *data);
+
+/**
+ * Convenience function to delete a property.
+ *
+ * This is equivalent to running the command "del [name]".
+ *
+ * @param name The property name. See input.rst for a list of properties.
+ * @return error code
+ */
+MPV_EXPORT int mpv_del_property(mpv_handle *ctx, const char *name);
 
 /**
  * Set a property asynchronously. You will receive the result of the operation
@@ -1876,6 +1899,129 @@ MPV_EXPORT int mpv_hook_continue(mpv_handle *ctx, uint64_t id);
  *         On MS Windows/MinGW, this will always return -1.
  */
 MPV_EXPORT int mpv_get_wakeup_pipe(mpv_handle *ctx);
+
+#endif
+
+/**
+ * Defining MPV_CPLUGIN_DYNAMIC_SYM during plugin compilation will replace mpv_*
+ * functions with function pointers. Those pointer will be initialized when
+ * loading the plugin.
+ *
+ * It is recommended to use this symbol table when targeting Windows. The loader
+ * does not have notion of global symbols. Loading cplugin into mpv process will
+ * not allow this plugin to call any of the symbols that may be available in
+ * other modules. Instead cplugin has to link explicitly to specific PE binary,
+ * libmpv-2.dll/mpv.exe or any other binary that may have linked mpv statically.
+ * This limits portability of cplugin as it would need to be compiled separately
+ * for each of target PE binary that includes mpv's symbols. Which in practice
+ * is unrealistic, as we want one cplugin to be loaded without those restrictions.
+ *
+ * Instead of linking to any PE binary, we create function pointers for all mpv's
+ * exported symbols. For convenience names of entrypoints are redefined to those
+ * pointer, so no changes are required in cplugin source code, except of defining
+ * MPV_CPLUGIN_DYNAMIC_SYM. Those function pointer are exported to make them
+ * available for mpv to init with correct values during runtime, before calling
+ * `mpv_open_cplugin`.
+ *
+ * Note that those pointers are decorated with `selectany` attribute, so no need
+ * to worry about multiple definitions, linker will keep only single instance.
+ */
+#ifdef MPV_CPLUGIN_DYNAMIC_SYM
+
+#define MPV_DEFINE_SYM_PTR(name)  \
+    MPV_SELECTANY MPV_EXPORT      \
+    MPV_DECLTYPE(name) *pfn_##name;
+
+MPV_DEFINE_SYM_PTR(mpv_client_api_version)
+#define mpv_client_api_version pfn_mpv_client_api_version
+MPV_DEFINE_SYM_PTR(mpv_error_string)
+#define mpv_error_string pfn_mpv_error_string
+MPV_DEFINE_SYM_PTR(mpv_free)
+#define mpv_free pfn_mpv_free
+MPV_DEFINE_SYM_PTR(mpv_client_name)
+#define mpv_client_name pfn_mpv_client_name
+MPV_DEFINE_SYM_PTR(mpv_client_id)
+#define mpv_client_id pfn_mpv_client_id
+MPV_DEFINE_SYM_PTR(mpv_create)
+#define mpv_create pfn_mpv_create
+MPV_DEFINE_SYM_PTR(mpv_initialize)
+#define mpv_initialize pfn_mpv_initialize
+MPV_DEFINE_SYM_PTR(mpv_destroy)
+#define mpv_destroy pfn_mpv_destroy
+MPV_DEFINE_SYM_PTR(mpv_terminate_destroy)
+#define mpv_terminate_destroy pfn_mpv_terminate_destroy
+MPV_DEFINE_SYM_PTR(mpv_create_client)
+#define mpv_create_client pfn_mpv_create_client
+MPV_DEFINE_SYM_PTR(mpv_create_weak_client)
+#define mpv_create_weak_client pfn_mpv_create_weak_client
+MPV_DEFINE_SYM_PTR(mpv_load_config_file)
+#define mpv_load_config_file pfn_mpv_load_config_file
+MPV_DEFINE_SYM_PTR(mpv_get_time_ns)
+#define mpv_get_time_ns pfn_mpv_get_time_ns
+MPV_DEFINE_SYM_PTR(mpv_get_time_us)
+#define mpv_get_time_us pfn_mpv_get_time_us
+MPV_DEFINE_SYM_PTR(mpv_free_node_contents)
+#define mpv_free_node_contents pfn_mpv_free_node_contents
+MPV_DEFINE_SYM_PTR(mpv_set_option)
+#define mpv_set_option pfn_mpv_set_option
+MPV_DEFINE_SYM_PTR(mpv_set_option_string)
+#define mpv_set_option_string pfn_mpv_set_option_string
+MPV_DEFINE_SYM_PTR(mpv_command)
+#define mpv_command pfn_mpv_command
+MPV_DEFINE_SYM_PTR(mpv_command_node)
+#define mpv_command_node pfn_mpv_command_node
+MPV_DEFINE_SYM_PTR(mpv_command_ret)
+#define mpv_command_ret pfn_mpv_command_ret
+MPV_DEFINE_SYM_PTR(mpv_command_string)
+#define mpv_command_string pfn_mpv_command_string
+MPV_DEFINE_SYM_PTR(mpv_command_async)
+#define mpv_command_async pfn_mpv_command_async
+MPV_DEFINE_SYM_PTR(mpv_command_node_async)
+#define mpv_command_node_async pfn_mpv_command_node_async
+MPV_DEFINE_SYM_PTR(mpv_abort_async_command)
+#define mpv_abort_async_command pfn_mpv_abort_async_command
+MPV_DEFINE_SYM_PTR(mpv_set_property)
+#define mpv_set_property pfn_mpv_set_property
+MPV_DEFINE_SYM_PTR(mpv_set_property_string)
+#define mpv_set_property_string pfn_mpv_set_property_string
+MPV_DEFINE_SYM_PTR(mpv_del_property)
+#define mpv_del_property pfn_mpv_del_property
+MPV_DEFINE_SYM_PTR(mpv_set_property_async)
+#define mpv_set_property_async pfn_mpv_set_property_async
+MPV_DEFINE_SYM_PTR(mpv_get_property)
+#define mpv_get_property pfn_mpv_get_property
+MPV_DEFINE_SYM_PTR(mpv_get_property_string)
+#define mpv_get_property_string pfn_mpv_get_property_string
+MPV_DEFINE_SYM_PTR(mpv_get_property_osd_string)
+#define mpv_get_property_osd_string pfn_mpv_get_property_osd_string
+MPV_DEFINE_SYM_PTR(mpv_get_property_async)
+#define mpv_get_property_async pfn_mpv_get_property_async
+MPV_DEFINE_SYM_PTR(mpv_observe_property)
+#define mpv_observe_property pfn_mpv_observe_property
+MPV_DEFINE_SYM_PTR(mpv_unobserve_property)
+#define mpv_unobserve_property pfn_mpv_unobserve_property
+MPV_DEFINE_SYM_PTR(mpv_event_name)
+#define mpv_event_name pfn_mpv_event_name
+MPV_DEFINE_SYM_PTR(mpv_event_to_node)
+#define mpv_event_to_node pfn_mpv_event_to_node
+MPV_DEFINE_SYM_PTR(mpv_request_event)
+#define mpv_request_event pfn_mpv_request_event
+MPV_DEFINE_SYM_PTR(mpv_request_log_messages)
+#define mpv_request_log_messages pfn_mpv_request_log_messages
+MPV_DEFINE_SYM_PTR(mpv_wait_event)
+#define mpv_wait_event pfn_mpv_wait_event
+MPV_DEFINE_SYM_PTR(mpv_wakeup)
+#define mpv_wakeup pfn_mpv_wakeup
+MPV_DEFINE_SYM_PTR(mpv_set_wakeup_callback)
+#define mpv_set_wakeup_callback pfn_mpv_set_wakeup_callback
+MPV_DEFINE_SYM_PTR(mpv_wait_async_requests)
+#define mpv_wait_async_requests pfn_mpv_wait_async_requests
+MPV_DEFINE_SYM_PTR(mpv_hook_add)
+#define mpv_hook_add pfn_mpv_hook_add
+MPV_DEFINE_SYM_PTR(mpv_hook_continue)
+#define mpv_hook_continue pfn_mpv_hook_continue
+MPV_DEFINE_SYM_PTR(mpv_get_wakeup_pipe)
+#define mpv_get_wakeup_pipe pfn_mpv_get_wakeup_pipe
 
 #endif
 

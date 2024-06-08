@@ -29,7 +29,7 @@
 
 // Major bumping may affect Ticket5467, 5421, 5451(compatibility with Chromium)
 // Also please add any ticket numbers that you believe might be affected here
-#define LIBAVFORMAT_VERSION_MAJOR  60
+#define LIBAVFORMAT_VERSION_MAJOR  61
 
 /**
  * FF_API_* defines may be placed below to indicate public API that will be
@@ -41,11 +41,12 @@
  * at once through the bump. This improves the git bisect-ability of the change.
  *
  */
-#define FF_API_COMPUTE_PKT_FIELDS2      (LIBAVFORMAT_VERSION_MAJOR < 61)
-#define FF_API_GET_END_PTS              (LIBAVFORMAT_VERSION_MAJOR < 61)
-#define FF_API_AVIODIRCONTEXT           (LIBAVFORMAT_VERSION_MAJOR < 61)
-#define FF_API_AVFORMAT_IO_CLOSE        (LIBAVFORMAT_VERSION_MAJOR < 61)
+#define FF_API_COMPUTE_PKT_FIELDS2      (LIBAVFORMAT_VERSION_MAJOR < 62)
+#define FF_API_LAVF_SHORTEST            (LIBAVFORMAT_VERSION_MAJOR < 62)
+#define FF_API_ALLOW_FLUSH              (LIBAVFORMAT_VERSION_MAJOR < 62)
+#define FF_API_AVSTREAM_SIDE_DATA       (LIBAVFORMAT_VERSION_MAJOR < 62)
 
+#define FF_API_GET_DUR_ESTIMATE_METHOD  (LIBAVFORMAT_VERSION_MAJOR < 62)
 
 #define FF_API_R_FRAME_RATE            1
 

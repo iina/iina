@@ -103,8 +103,8 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     }
 
     // Load the config file saved in user default
-    loadConfigFile(Preference.string(for: .currentInputConfigName))
-    
+    loadConfigFile(Preference.string(for: .currentInputConfigName), true)
+
     NotificationCenter.default.addObserver(forName: .iinaKeyBindingChanged, object: nil, queue: .main, using: saveToConfFile)
   }
 
@@ -267,8 +267,8 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
   /// This function firstly reloads the table data, select the config file row, then load the config file.
   /// If the target config file cannot be found, or the file cannot be parsed correctly, it will fallback to the default config.
   /// - Parameter configName: the target config name
-  private func loadConfigFile(_ configName: String?) {
-    guard configName != Preference.string(for: .currentInputConfigName) else { return }
+  private func loadConfigFile(_ configName: String?, _ initialSetup: Bool = false) {
+    guard configName != Preference.string(for: .currentInputConfigName) || initialSetup else { return }
     isLoadingConfig = true
     
     func fallback() {
@@ -293,10 +293,13 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
     mappingController.add(contentsOf: mapping)
     mappingController.setSelectionIndexes(IndexSet())
 
-    Preference.set(currentConfName, for: .currentInputConfigName)
-    setKeybindingsForPlayerCore()
     changeButtonEnabledStatus()
-    
+
+    if !initialSetup {
+      Preference.set(currentConfName, for: .currentInputConfigName)
+      setKeybindingsForPlayerCore()
+    }
+
     isLoadingConfig = false
   }
 

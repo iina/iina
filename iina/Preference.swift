@@ -256,9 +256,6 @@ struct Preference {
     static let useMediaKeys = Key("useMediaKeys")
     static let useAppleRemote = Key("useAppleRemote")
 
-    /** User created input config list (dic) */
-    static let inputConfigs = Key("inputConfigs")
-
     /** Current input config name */
     static let currentInputConfigName = Key("currentInputConfigName")
 
@@ -841,7 +838,6 @@ struct Preference {
     .ytdlRawOptions: "",
     .httpProxy: "",
 
-    .inputConfigs: [String: Any](),
     .currentInputConfigName: "IINA Default",
 
     .enableAdvancedSettings: false,

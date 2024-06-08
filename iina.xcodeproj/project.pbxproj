@@ -307,7 +307,6 @@
 		8F49C36E213EFB7E0076C4F9 /* MiniPlayerWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F49C370213EFB7E0076C4F9 /* MiniPlayerWindowController.xib */; };
 		9E47DAC01E3CFA6D00457420 /* DurationDisplayTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */; };
 		B4E446E825CB53920069F06E /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = B4E446E725CB53920069F06E /* PromiseKit */; };
-		B4E446F225CB53FF0069F06E /* Gzip in Frameworks */ = {isa = PBXBuildFile; productRef = B4E446F125CB53FF0069F06E /* Gzip */; };
 		B4E446F725CB54EF0069F06E /* Mustache in Frameworks */ = {isa = PBXBuildFile; productRef = B4E446F625CB54EF0069F06E /* Mustache */; };
 		B4E4470125CE3F930069F06E /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = B4E4470025CE3F930069F06E /* Sparkle */; };
 		C789872F1E34EF170005769F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C78987311E34EF170005769F /* InfoPlist.strings */; };
@@ -2160,7 +2159,6 @@
 				34ACAB732C142A0500F871A0 /* libgraphite2.3.dylib in Frameworks */,
 				34ACAB752C142A0500F871A0 /* libp11-kit.0.dylib in Frameworks */,
 				34ACABA52C142A0500F871A0 /* libavcodec.61.dylib in Frameworks */,
-				B4E446F225CB53FF0069F06E /* Gzip in Frameworks */,
 				B4E446E825CB53920069F06E /* PromiseKit in Frameworks */,
 				34ACABB22C142A0500F871A0 /* libfreetype.6.dylib in Frameworks */,
 				34ACABA12C142A0500F871A0 /* libX11.6.dylib in Frameworks */,
@@ -2951,7 +2949,6 @@
 			name = iina;
 			packageProductDependencies = (
 				B4E446E725CB53920069F06E /* PromiseKit */,
-				B4E446F125CB53FF0069F06E /* Gzip */,
 				B4E446F625CB54EF0069F06E /* Mustache */,
 				B4E4470025CE3F930069F06E /* Sparkle */,
 				8451E6D82604AEFC009A15D7 /* Just */,
@@ -3072,7 +3069,6 @@
 			mainGroup = 84EB1ECD1D2F51D3004FA5A1;
 			packageReferences = (
 				B4E446E625CB53920069F06E /* XCRemoteSwiftPackageReference "PromiseKit" */,
-				B4E446F025CB53FF0069F06E /* XCRemoteSwiftPackageReference "GzipSwift" */,
 				B4E446F525CB54EF0069F06E /* XCRemoteSwiftPackageReference "GRMustache" */,
 				B4E446FF25CE3F930069F06E /* XCRemoteSwiftPackageReference "Sparkle" */,
 				8451E6D72604AEFC009A15D7 /* XCRemoteSwiftPackageReference "Just" */,
@@ -5208,7 +5204,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dduan/Just";
 			requirement = {
-				kind = upToNextMinorVersion;
+				kind = upToNextMajorVersion;
 				minimumVersion = 0.8.0;
 			};
 		};
@@ -5216,32 +5212,24 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mxcl/PromiseKit";
 			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 6.13.3;
-			};
-		};
-		B4E446F025CB53FF0069F06E /* XCRemoteSwiftPackageReference "GzipSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/1024jp/GzipSwift";
-			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 5.1.1;
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.22.1;
 			};
 		};
 		B4E446F525CB54EF0069F06E /* XCRemoteSwiftPackageReference "GRMustache" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/groue/GRMustache.swift";
 			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 4.0.1;
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.2.0;
 			};
 		};
 		B4E446FF25CE3F930069F06E /* XCRemoteSwiftPackageReference "Sparkle" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sparkle-project/Sparkle/";
 			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 2.4.0;
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.6.3;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -5256,11 +5244,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B4E446E625CB53920069F06E /* XCRemoteSwiftPackageReference "PromiseKit" */;
 			productName = PromiseKit;
-		};
-		B4E446F125CB53FF0069F06E /* Gzip */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B4E446F025CB53FF0069F06E /* XCRemoteSwiftPackageReference "GzipSwift" */;
-			productName = Gzip;
 		};
 		B4E446F625CB54EF0069F06E /* Mustache */ = {
 			isa = XCSwiftPackageProductDependency;

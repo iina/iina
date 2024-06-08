@@ -2045,8 +2045,10 @@ class MainWindowController: PlayerWindowController {
     let width = type.width()
     sideBarWidthConstraint.constant = width
     // The macOS setting could change at any point in time. Remember which type of animation is
-    // being used.
-    let useFade = AccessibilityPreferences.motionReductionEnabled
+    // being used. Avoid using fading when disabling animations as that animation will initially
+    // malfunction if used with a short duration.
+    let useFade = AccessibilityPreferences.motionReductionEnabled &&
+                  !Preference.bool(for: PK.disableAnimations)
     if useFade {
       sideBarRightConstraint.constant = 0
     } else {
@@ -2080,8 +2082,10 @@ class MainWindowController: PlayerWindowController {
     sidebarAnimationState = .willHide
     let currWidth = sideBarWidthConstraint.constant
     // The macOS setting could change at any point in time. Remember which type of animation is
-    // being used.
-    let useFade = AccessibilityPreferences.motionReductionEnabled
+    // being used. Avoid using fading when disabling animations as that animation will initially
+    // malfunction if used with a short duration.
+    let useFade = AccessibilityPreferences.motionReductionEnabled &&
+                  !Preference.bool(for: PK.disableAnimations)
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = animate ? AccessibilityPreferences.adjustedDuration(SideBarAnimationDuration) : 0
       context.timingFunction = CAMediaTimingFunction(name: .easeIn)

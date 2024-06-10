@@ -46,6 +46,7 @@
 "quicksetting.hwdec" = "Hardware Decoding";
 "quicksetting.deinterlace" = "असंग्रथित";
 "quicksetting.hdr" = "HDR";
+"quicksetting.hide" = "छिपाना";
 
 // OSDMessage.swift
 "osd.pause" = "रोकें";
@@ -64,6 +65,10 @@
 "osd.sub_delay.later" = "उपशीर्षक देरी: %.2fs बाद में";
 "osd.sub_delay.earlier" = "उपशीर्षक देरी: %.2fs पूर्व";
 "osd.subtitle_pos" = "उपशीर्षक पद: %.1f";
+"osd.sub_hidden" = "Subtitles Hidden";
+"osd.sub_visible" = "Subtitles Visible";
+"osd.sub_second_hidden" = "Second Subtitles Hidden";
+"osd.sub_second_visible" = "Second Subtitles Visible";
 "osd.mute" = "म्यूट";
 "osd.unmute" = "Unmute";
 "osd.screenshot" = "स्क्रीनशॉट कैप्चर किया गया";
@@ -127,6 +132,10 @@
 "menu.volume_muted" = "Volume: %d (Muted)";
 "menu.audio_delay" = "ऑडियो विलंब: %.2fs";
 "menu.sub_delay" = "उपशीर्षक देरी: %.2fs";
+"menu.sub_hide" = "Hide Subtitles";
+"menu.sub_show" = "Show Subtitles";
+"menu.sub_second_hide" = "Hide Second Subtitles";
+"menu.sub_second_show" = "Show Second Subtitles";
 "menu.fullscreen" = "पूर्ण स्क्रीन दर्ज करें";
 "menu.exit_fullscreen" = "पूर्ण स्क्रीन से बाहर निकलें";
 "menu.pip" = "पिक्चर-इन-पिक्चर डालें";
@@ -193,11 +202,13 @@
 "alert.config.duplicate.title" = "डुप्लिकेट कॉन्फ़िगरेशन";
 "alert.config.duplicate.message" = "कृपया डुप्लिकेट कॉन्फ़िगरेशन फ़ाइल के लिए नाम दर्ज करें।";
 "alert.config.empty_name" = "नाम खाली नहीं हो सकता।";
-"alert.config.name_existing" = "नाम पहले से मौजूद है।";
+"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "फ़ाइल पहले से ही मौजूद है";
-"alert.config.file_existing.message" = "ऐसा न हो कि। अधिलेखित करने के लिए ठीक चुनें, फ़ाइल को खोजक में प्रकट करने के लिए रद्द करें।";
+"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "कॉन्फ़िगरेशन फ़ाइल नहीं बना सकता है!\n%@";
 "alert.config.cannot_write" = "फ़ाइल को कॉन्फ़िगर करने के लिए नहीं लिख सकता!";
+"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "फ़िल्टर सेट करते समय त्रुटि आई। कृपया अपना पैरामीटर प्रारूप जांचें।";
 "alert.add_filter.title" = "नया फ़िल्टर";

@@ -46,6 +46,7 @@
 "quicksetting.hwdec" = "Apparatuurdekodering";
 "quicksetting.deinterlace" = "Deïnterlinieer";
 "quicksetting.hdr" = "HDR";
+"quicksetting.hide" = "Versteek";
 
 // OSDMessage.swift
 "osd.pause" = "Wag";
@@ -64,6 +65,10 @@
 "osd.sub_delay.later" = "Onderskrif vertraag met %.2fs";
 "osd.sub_delay.earlier" = "Onderskrif versnel met %.2fs";
 "osd.subtitle_pos" = "Onderskrifposisie: %.1f";
+"osd.sub_hidden" = "Subtitles Hidden";
+"osd.sub_visible" = "Subtitles Visible";
+"osd.sub_second_hidden" = "Second Subtitles Hidden";
+"osd.sub_second_visible" = "Second Subtitles Visible";
 "osd.mute" = "Demp";
 "osd.unmute" = "Ontdemp";
 "osd.screenshot" = "Skermkiekie geneem";
@@ -127,6 +132,10 @@
 "menu.volume_muted" = "Volume: %d (gedemp)";
 "menu.audio_delay" = "Oudiovertraging: %.2fs";
 "menu.sub_delay" = "Onderskrifvertraging: %.2fs";
+"menu.sub_hide" = "Hide Subtitles";
+"menu.sub_show" = "Show Subtitles";
+"menu.sub_second_hide" = "Hide Second Subtitles";
+"menu.sub_second_show" = "Show Second Subtitles";
 "menu.fullscreen" = "Gaan in volskerm";
 "menu.exit_fullscreen" = "Verlaat volskerm";
 "menu.pip" = "Aktiveer Beeld-in-beeld";
@@ -193,11 +202,13 @@
 "alert.config.duplicate.title" = "Duplikaat konfigurasie";
 "alert.config.duplicate.message" = "Voer ’n naam vir die gedupliseerde konfigurasielêer in.";
 "alert.config.empty_name" = "Die naam mag nie leeg wees nie.";
-"alert.config.name_existing" = "Die naam bestaan reeds.";
+"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Lêer bestaan reeds";
-"alert.config.file_existing.message" = "Dit behoort nie te gebeur nie. Kies Goed om oor te skryf, Kanselleer om die lêer in Finder te toon.";
+"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Kan nie konfigurasielêer skep nie!\n%@";
 "alert.config.cannot_write" = "Kan nie konfigurasielêer skryf nie!";
+"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "Fout by die instel van filters. Gaan asb. u parameterformaat na.";
 "alert.add_filter.title" = "Nuwe filter";

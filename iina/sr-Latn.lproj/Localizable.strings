@@ -46,6 +46,7 @@
 "quicksetting.hwdec" = "Hardversko dekodiranje";
 "quicksetting.deinterlace" = "Rasplitanje";
 "quicksetting.hdr" = "HDR";
+"quicksetting.hide" = "Sakrij";
 
 // OSDMessage.swift
 "osd.pause" = "Pauziraj";
@@ -64,6 +65,10 @@
 "osd.sub_delay.later" = "Kašnjenje titla: %.2fs kasnije";
 "osd.sub_delay.earlier" = "Kašnjenje titla: %.2fs ranije";
 "osd.subtitle_pos" = "Položaj titla: %.1f";
+"osd.sub_hidden" = "Subtitles Hidden";
+"osd.sub_visible" = "Subtitles Visible";
+"osd.sub_second_hidden" = "Second Subtitles Hidden";
+"osd.sub_second_visible" = "Second Subtitles Visible";
 "osd.mute" = "Isključi zvuk";
 "osd.unmute" = "Ponovo uključi zvuk";
 "osd.screenshot" = "Snimak ekrana je napravljen";
@@ -127,6 +132,10 @@
 "menu.volume_muted" = "Jačina zvuka: %d (isključen zvuk)";
 "menu.audio_delay" = "Kašnjenje zvuka: %.2fs";
 "menu.sub_delay" = "Kašnjenje titla: %.2fs";
+"menu.sub_hide" = "Hide Subtitles";
+"menu.sub_show" = "Show Subtitles";
+"menu.sub_second_hide" = "Hide Second Subtitles";
+"menu.sub_second_show" = "Show Second Subtitles";
 "menu.fullscreen" = "Uđi u režim celog ekrana";
 "menu.exit_fullscreen" = "Izađi iz rеžima cеlog еkrana";
 "menu.pip" = "Uđi u režim slike u slici";
@@ -193,11 +202,13 @@
 "alert.config.duplicate.title" = "Duplirana konfiguracija";
 "alert.config.duplicate.message" = "Unеsitе naziv za dupliranu konfiguracionu datoteku.";
 "alert.config.empty_name" = "Naziv ne može biti prazan.";
-"alert.config.name_existing" = "Naziv već postoji.";
+"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Datoteka već postoji";
-"alert.config.file_existing.message" = "To ne bi smelo da se dešava. Odaberite U redu da biste datoteku zamenili, Otkaži da biste je prikazali u Finderu.";
+"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Nije moguće kreirati konfiguracionu datoteku!\n%@";
 "alert.config.cannot_write" = "Nije moguće upisivati u konfiguracionu datoteku!";
+"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "Došlo je do greške prilikom postavljanja filtera. Proverite format parametra.";
 "alert.add_filter.title" = "Novi filter";

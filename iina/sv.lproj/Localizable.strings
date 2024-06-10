@@ -46,6 +46,7 @@
 "quicksetting.hwdec" = "Hårdvaruavkodning";
 "quicksetting.deinterlace" = "Avfläta";
 "quicksetting.hdr" = "HDR";
+"quicksetting.hide" = "Göm";
 
 // OSDMessage.swift
 "osd.pause" = "Pausa";
@@ -64,6 +65,10 @@
 "osd.sub_delay.later" = "Undertextsfördröjning: %.2fs senare";
 "osd.sub_delay.earlier" = "Undertextsfördröjning: %.2fs tidigare";
 "osd.subtitle_pos" = "Undertextposition: %.1f";
+"osd.sub_hidden" = "Subtitles Hidden";
+"osd.sub_visible" = "Subtitles Visible";
+"osd.sub_second_hidden" = "Second Subtitles Hidden";
+"osd.sub_second_visible" = "Second Subtitles Visible";
 "osd.mute" = "Tysta";
 "osd.unmute" = "Tysta av";
 "osd.screenshot" = "Skärmavbild tagen";
@@ -127,6 +132,10 @@
 "menu.volume_muted" = "Volym: %d (Tystat)";
 "menu.audio_delay" = "Ljudfördröjning: %.2fs";
 "menu.sub_delay" = "Undertextsfördröjning: %.2fs";
+"menu.sub_hide" = "Hide Subtitles";
+"menu.sub_show" = "Show Subtitles";
+"menu.sub_second_hide" = "Hide Second Subtitles";
+"menu.sub_second_show" = "Show Second Subtitles";
 "menu.fullscreen" = "Gå in i helskärmsläge";
 "menu.exit_fullscreen" = "Lämna helskärmsläge";
 "menu.pip" = "Använd bild-i-bild";
@@ -193,11 +202,13 @@
 "alert.config.duplicate.title" = "Duplicera konfigurationsfil";
 "alert.config.duplicate.message" = "Vänligen ange ett namn för den duplicerade konfigurationsfilen.";
 "alert.config.empty_name" = "Namnet får ej vara tomt.";
-"alert.config.name_existing" = "Namnet existerar redan.";
+"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Filen finns redan";
-"alert.config.file_existing.message" = "Det borde inte hända. Välj OK för att skriva över, Avbryt för att visa filen i Finder.";
+"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Kan inte skapa konfigurationsfil!\n%@";
 "alert.config.cannot_write" = "Kan inte skriva till konfigurationsfil!";
+"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "Nytt filter";

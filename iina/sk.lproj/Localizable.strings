@@ -46,6 +46,7 @@
 "quicksetting.hwdec" = "Hardvérové dekódovanie";
 "quicksetting.deinterlace" = "Deinterlace";
 "quicksetting.hdr" = "HDR";
+"quicksetting.hide" = "Skryť";
 
 // OSDMessage.swift
 "osd.pause" = "Pozastaviť";
@@ -64,6 +65,10 @@
 "osd.sub_delay.later" = "Posunutie titulkov: +%.2f s";
 "osd.sub_delay.earlier" = "Posunutie titulkov: -%.2f s";
 "osd.subtitle_pos" = "Umiestnenie titulkov: %.1f";
+"osd.sub_hidden" = "Subtitles Hidden";
+"osd.sub_visible" = "Subtitles Visible";
+"osd.sub_second_hidden" = "Second Subtitles Hidden";
+"osd.sub_second_visible" = "Second Subtitles Visible";
 "osd.mute" = "Stlmiť";
 "osd.unmute" = "Zosilniť";
 "osd.screenshot" = "Snímka obrazovky vyhotovená";
@@ -127,6 +132,10 @@
 "menu.volume_muted" = "Hlasitosť: %d (stíšene)";
 "menu.audio_delay" = "Posunutie zvuku: %.2f s";
 "menu.sub_delay" = "Posunutie titulkov: %.2f s";
+"menu.sub_hide" = "Hide Subtitles";
+"menu.sub_show" = "Show Subtitles";
+"menu.sub_second_hide" = "Hide Second Subtitles";
+"menu.sub_second_show" = "Show Second Subtitles";
 "menu.fullscreen" = "Spustiť režim celej obrazovky";
 "menu.exit_fullscreen" = "Ukončiť režim celej obrazovky";
 "menu.pip" = "Zapnúť Picture-in-Picture";
@@ -193,11 +202,13 @@
 "alert.config.duplicate.title" = "Duplikovať konfiguráciu";
 "alert.config.duplicate.message" = "Zadajte názov pre duplikovaný konfiguračný súbor.";
 "alert.config.empty_name" = "Názov nemôže byť prázdny.";
-"alert.config.name_existing" = "Názov už existuje.";
+"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Súbor už existuje";
-"alert.config.file_existing.message" = "Toto sa nemalo stať. Zvoľte OK na prepísanie alebo Zrušiť na zobrazenie súboru vo Finderi.";
+"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Nedá sa vytvoriť konfiguračný súbor!\n%@";
 "alert.config.cannot_write" = "Nedá sa zapisovať do konfiguračného súboru!";
+"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "Vyskytla sa chyba pri nastavovaní filtra. Skontrolujte formát parametra.";
 "alert.add_filter.title" = "Nový filter";

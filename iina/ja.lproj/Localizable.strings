@@ -24,9 +24,9 @@
 // Initial Window
 "initial.announcement" = "%@ バージョンのIINAを使用しています";
 "initial.beta.desc" = "リリースバージョンに戻したい場合は、「設定 > 一般」の「ベータアップデートの受信」のチェックを外してください。その後 <a href=\"https://iina.io\">公式ウェブサイト</a> から安定版リリースをインストールします。";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.nightly.desc" = "Nightlyを常用することは推奨しません。現在Nightlyビルドは自動アップデートに対応していません。新しいビルドは <a href=\"https://nightly.iina.io\">Nightly ウェブサイト</a> から取得してください。";
+"initial.debug.desc" = "デバッグビルドは大抵性能的に最適化されていません。そのため、常用することは推奨しません。デバッグビルドは自動アップデートに対応していません。";
+"initial.bug_report" = "<a href=\"https://github.com/iina/iina/issues\">GitHub issues</a> で報告";
 
 // Inspector Window
 "inspector.error" = "エラー";
@@ -46,6 +46,7 @@
 "quicksetting.hwdec" = "ハードウェアデコード";
 "quicksetting.deinterlace" = "インターレース解除";
 "quicksetting.hdr" = "HDR";
+"quicksetting.hide" = "隠す";
 
 // OSDMessage.swift
 "osd.pause" = "一時停止";
@@ -64,6 +65,10 @@
 "osd.sub_delay.later" = "字幕ディレイ: %.2f秒 遅く";
 "osd.sub_delay.earlier" = "字幕ディレイ: %.2f秒 早く";
 "osd.subtitle_pos" = "字幕の位置: %.1f";
+"osd.sub_hidden" = "Subtitles Hidden";
+"osd.sub_visible" = "Subtitles Visible";
+"osd.sub_second_hidden" = "Second Subtitles Hidden";
+"osd.sub_second_visible" = "Second Subtitles Visible";
 "osd.mute" = "ミュート";
 "osd.unmute" = "ミュート解除";
 "osd.screenshot" = "スクリーンショットを保存しました";
@@ -119,14 +124,18 @@
 
 "preference.enable_adv_settings" = "高度な設定を有効化";
 
-"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.force" = "強制的";
 "preference.sub_override_level.strip" = "ストリップ";
-"preference.sub_override_level.yes" = "yes";
+"preference.sub_override_level.yes" = "はい";
 
 "menu.volume" = "音量: %d";
 "menu.volume_muted" = "ボリューム: %d (ミュート中)";
 "menu.audio_delay" = "オーディオディレイ: %.2fs";
 "menu.sub_delay" = "字幕ディレイ: %.2fs";
+"menu.sub_hide" = "Hide Subtitles";
+"menu.sub_show" = "Show Subtitles";
+"menu.sub_second_hide" = "Hide Second Subtitles";
+"menu.sub_second_show" = "Show Second Subtitles";
 "menu.fullscreen" = "フルスクリーンにする";
 "menu.exit_fullscreen" = "フルスクリーンを解除";
 "menu.pip" = "ピクチャー・イン・ピクチャーを使用";
@@ -193,11 +202,13 @@
 "alert.config.duplicate.title" = "設定の複製";
 "alert.config.duplicate.message" = "複製する設定ファイルの名前を入力してください。";
 "alert.config.empty_name" = "名前は空欄にできません。";
-"alert.config.name_existing" = "この名前はすでに存在しています。";
+"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "ファイルが既に存在しています";
-"alert.config.file_existing.message" = "既にファイルが存在しています。上書きするにはOKを選択、Finderで表示するにはキャンセルを選択してください。";
+"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "設定ファイルが作成できません！\n%@";
 "alert.config.cannot_write" = "設定ファイルに書き込めません！";
+"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "フィルタの設定時にエラーが発生しました。パラメータの形式を確認してください。";
 "alert.add_filter.title" = "フィルターの新規作成";

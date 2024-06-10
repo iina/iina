@@ -53,10 +53,10 @@
 "wjt-O6-KbC.title" = "Предпочитаемый язык:";
 
 /* Class = "NSButtonCell"; title = "Load ICC profile"; ObjectID = "3g4-jW-uJd"; */
-"3g4-jW-uJd.title" = "Загрузить профиль дисплея";
+"3g4-jW-uJd.title" = "Загрузить ICC-профиль дисплея";
 
 /* Class = "NSTextFieldCell"; title = "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"; ObjectID = "M2M-of-gjd"; */
-"M2M-of-gjd.title" = "Загрузить ICC профиль текущего дисплея и использовать его для преобразования RGB видео. (Только для SDR видео)";
+"M2M-of-gjd.title" = "Загрузить ICC-профиль текущего дисплея и использовать его для преобразования RGB-видео (только для SDR-видео)";
 
 /* Class = "NSButtonCell"; title = "Enable HDR support"; ObjectID = "R7Z-9c-vPJ"; */
 "R7Z-9c-vPJ.title" = "Включить поддержку HDR";
@@ -68,7 +68,7 @@
 "a5Y-gU-JTj.title" = "Включить преобразование Tone Mapping";
 
 /* Class = "NSTextFieldCell"; title = "Enable tone mapping images onto the display"; ObjectID = "mNn-cb-IVw"; */
-"mNn-cb-IVw.title" = "Включить тональное отображение изображений на дисплее";
+"mNn-cb-IVw.title" = "Включить преобразование Tone Mapping на дисплее";
 
 /* Class = "NSTextFieldCell"; title = "Target peak:"; ObjectID = "xVk-OA-kOf"; */
 "xVk-OA-kOf.title" = "Пиковая яркость:";

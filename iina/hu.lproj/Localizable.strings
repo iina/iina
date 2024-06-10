@@ -46,6 +46,7 @@
 "quicksetting.hwdec" = "Hardveres dekódolás";
 "quicksetting.deinterlace" = "Váltottsoros képszűrő";
 "quicksetting.hdr" = "HDR";
+"quicksetting.hide" = "Elrejtés";
 
 // OSDMessage.swift
 "osd.pause" = "Szünet";
@@ -64,6 +65,10 @@
 "osd.sub_delay.later" = "Felirat késleltetés: %.2fmp-vel később";
 "osd.sub_delay.earlier" = "Felirat késleltetés: %.2fmp-vel hamarabb";
 "osd.subtitle_pos" = "Felirat pozíciója: %.1f";
+"osd.sub_hidden" = "Subtitles Hidden";
+"osd.sub_visible" = "Subtitles Visible";
+"osd.sub_second_hidden" = "Second Subtitles Hidden";
+"osd.sub_second_visible" = "Second Subtitles Visible";
 "osd.mute" = "Némítás";
 "osd.unmute" = "Némítás feloldása";
 "osd.screenshot" = "Képernyőkép rögzítve";
@@ -127,6 +132,10 @@
 "menu.volume_muted" = "Hangerő: %d (Némítva)";
 "menu.audio_delay" = "Hangkésleltetés: %.2fmp-vel később";
 "menu.sub_delay" = "Felirat késleltetés: %.2fmp-vel később";
+"menu.sub_hide" = "Hide Subtitles";
+"menu.sub_show" = "Show Subtitles";
+"menu.sub_second_hide" = "Hide Second Subtitles";
+"menu.sub_second_show" = "Show Second Subtitles";
 "menu.fullscreen" = "Váltás teljes képernyőre";
 "menu.exit_fullscreen" = "Kilépés a teljes képernyős módból";
 "menu.pip" = "Kép a képben";
@@ -193,11 +202,13 @@
 "alert.config.duplicate.title" = "Konfiguráció duplikálása";
 "alert.config.duplicate.message" = "Kérlek adj nevet az új duplikált konfigurációnak.";
 "alert.config.empty_name" = "A név mező nem lehet üres.";
-"alert.config.name_existing" = "A név már létezik.";
+"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "A fájl már létezik";
-"alert.config.file_existing.message" = "Ennek nem szabadna megtörténnie. Kattints az OK gombra a felülíráshoz, a Mégse gombra a fájl felfedéséhez a Finderben.";
+"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Konfigurációs fájl nem hozható létre!\n%@";
 "alert.config.cannot_write" = "Konfigurációs fájl nem irható!";
+"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "Hiba történt a szűrők beállításakor. Kérjük, ellenőrizd le a paraméter formátumát.";
 "alert.add_filter.title" = "Új filter";

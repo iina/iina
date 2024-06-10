@@ -46,6 +46,7 @@
 "quicksetting.hwdec" = "硬體解碼";
 "quicksetting.deinterlace" = "去交錯";
 "quicksetting.hdr" = "高動態範圍成效";
+"quicksetting.hide" = "隱藏";
 
 // OSDMessage.swift
 "osd.pause" = "暫停";
@@ -64,6 +65,10 @@
 "osd.sub_delay.later" = "字幕延遲：延遲 %.2f 秒";
 "osd.sub_delay.earlier" = "字幕延遲：提前 %.2f 秒";
 "osd.subtitle_pos" = "字幕位置：%.1f";
+"osd.sub_hidden" = "Subtitles Hidden";
+"osd.sub_visible" = "Subtitles Visible";
+"osd.sub_second_hidden" = "Second Subtitles Hidden";
+"osd.sub_second_visible" = "Second Subtitles Visible";
 "osd.mute" = "靜音";
 "osd.unmute" = "取消靜音";
 "osd.screenshot" = "已儲存畫面截圖";
@@ -127,6 +132,10 @@
 "menu.volume_muted" = "音量：%d (靜音)";
 "menu.audio_delay" = "音訊延遲：%.2f 秒";
 "menu.sub_delay" = "字幕延遲：%.2f 秒";
+"menu.sub_hide" = "Hide Subtitles";
+"menu.sub_show" = "Show Subtitles";
+"menu.sub_second_hide" = "Hide Second Subtitles";
+"menu.sub_second_show" = "Show Second Subtitles";
 "menu.fullscreen" = "進入全螢幕";
 "menu.exit_fullscreen" = "離開全螢幕";
 "menu.pip" = "進入子母畫面";
@@ -193,11 +202,13 @@
 "alert.config.duplicate.title" = "複製設定檔";
 "alert.config.duplicate.message" = "請輸入複製的設定檔名稱";
 "alert.config.empty_name" = "名稱不能留空";
-"alert.config.name_existing" = "名稱已經存在";
+"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "檔案已經存在";
-"alert.config.file_existing.message" = "這不該發生。按一下「好」來覆寫，或是按一下「取消」在 Finder 中顯示檔案。";
+"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "無法建立設定檔\n%@";
 "alert.config.cannot_write" = "無法寫入設定檔";
+"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "設定濾鏡時出現錯誤，請檢查參數格式";
 "alert.add_filter.title" = "新增濾鏡";

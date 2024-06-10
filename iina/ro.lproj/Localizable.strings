@@ -46,6 +46,7 @@
 "quicksetting.hwdec" = "Decodare hardware";
 "quicksetting.deinterlace" = "Deîntrețesere";
 "quicksetting.hdr" = "HDR";
+"quicksetting.hide" = "Se ascunde";
 
 // OSDMessage.swift
 "osd.pause" = "Pauză";
@@ -64,6 +65,10 @@
 "osd.sub_delay.later" = "Întârziere subtitrare: %.2fs mai târziu";
 "osd.sub_delay.earlier" = "Întârziere subtitrare: %.2fs mai devreme";
 "osd.subtitle_pos" = "Poziție subtitrare: %.1f";
+"osd.sub_hidden" = "Subtitles Hidden";
+"osd.sub_visible" = "Subtitles Visible";
+"osd.sub_second_hidden" = "Second Subtitles Hidden";
+"osd.sub_second_visible" = "Second Subtitles Visible";
 "osd.mute" = "Mut";
 "osd.unmute" = "Activează sunetul";
 "osd.screenshot" = "Captură de ecran realizată";
@@ -127,6 +132,10 @@
 "menu.volume_muted" = "Volum: %d (Mut)";
 "menu.audio_delay" = "Întârziere audio: %.2fs";
 "menu.sub_delay" = "Întârziere subtitrare: %.2fs";
+"menu.sub_hide" = "Hide Subtitles";
+"menu.sub_show" = "Show Subtitles";
+"menu.sub_second_hide" = "Hide Second Subtitles";
+"menu.sub_second_show" = "Show Second Subtitles";
 "menu.fullscreen" = "Afișează pe ecran complet";
 "menu.exit_fullscreen" = "Ieși din ecran complet";
 "menu.pip" = "Afișează în Picture-in-Picture";
@@ -193,11 +202,13 @@
 "alert.config.duplicate.title" = "Duplică configurația";
 "alert.config.duplicate.message" = "Te rog introdu numele pentru fișierul de configurare duplicat.";
 "alert.config.empty_name" = "Numele nu poate fi gol.";
-"alert.config.name_existing" = "Numele există deja.";
+"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Fișierul există deja";
-"alert.config.file_existing.message" = "Nu ar trebui să se întâmple. Apasă OK pentru supra-scriere, Anulează pentru a vedea fișierul în Finder.";
+"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Nu se poate crea fișierul de configurare!\n%@";
 "alert.config.cannot_write" = "Nu se poate scrie în fișierul de configurare!";
+"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "A apărut o eroare la setarea filtrelor. Verificați formatul parametrului.";
 "alert.add_filter.title" = "Filtru nou";

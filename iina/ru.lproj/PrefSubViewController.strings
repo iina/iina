@@ -59,10 +59,10 @@
 "LiG-iV-AQK.title" = "Прочее:";
 
 /* Class = "NSTextFieldCell"; title = "Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed."; ObjectID = "Luv-2B-9v8"; */
-"Luv-2B-9v8.title" = "Папки отделяются запятыми (:). Разрешены относительные пути и знак подстановки (*) в конце.";
+"Luv-2B-9v8.title" = "Папки отделяются двоеточием (:). Разрешены относительные пути и знак подстановки (*) в конце.";
 
 /* Class = "NSTextFieldCell"; title = "Please enter a comma-separated list of strings."; ObjectID = "Mk1-sv-QB8"; */
-"Mk1-sv-QB8.title" = "Введите список строк, разделённых запятой.";
+"Mk1-sv-QB8.title" = "Введите список строк, разделенных запятой.";
 
 /* Class = "NSTextFieldCell"; title = "If enabled, all ASS subtitles will be drawn using the styles below."; ObjectID = "OcF-0z-7qe"; */
 "OcF-0z-7qe.title" = "Если включено, субтитры ASS будут стилизованы заданным образом.";
@@ -95,7 +95,7 @@
 "Y75-4k-2Du.title" = "Кодировка по умолчанию:";
 
 /* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will work for both mpv and opensubtitles."; ObjectID = "Z2M-dh-eq1"; */
-"Z2M-dh-eq1.title" = "Этот параметр будет сохранён как языковой код ISO 639-2 и применён для mpv и OpenSubtitles.org.";
+"Z2M-dh-eq1.title" = "Этот параметр будет сохранен как языковой код ISO 639-2 и применен для mpv и OpenSubtitles.org.";
 
 /* Class = "NSTextFieldCell"; title = "Blur:"; ObjectID = "aO9-D6-KG8"; */
 "aO9-D6-KG8.title" = "Размытие:";

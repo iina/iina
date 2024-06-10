@@ -23,10 +23,13 @@
 
 // Initial Window
 "initial.announcement" = "Koristite %@ verziju IINA programa";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.beta.desc" = "Ako se želiš vratiti na stariju verziju izdanja, odznači opciju „Primaj aktualiziranja za beta verzije” u Postavke > Općenito i instaliraj stabilno izdanje s naše <a href=\"https://iina.io\">službene web stranice</a>.";
+"initial.nightly.desc" = "Ne preporučujemo noćna izdanja za svakodnevnu upotrebu. Noćne verzije trenutačno ne podržavaju automatsko aktualiziranje. Preuzmi novije verzije s naše <a href=\"https://nightly.iina.io\">noćne web stranice</a>.";
 "initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.bug_report" = "Prijavi na stranici <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+
+// Inspector Window
+"inspector.error" = "Greška";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Učitavanje %d%%";
@@ -43,6 +46,7 @@
 "quicksetting.hwdec" = "Hardversko dekodiranje";
 "quicksetting.deinterlace" = "Preplitanje";
 "quicksetting.hdr" = "HDR";
+"quicksetting.hide" = "Sakrij";
 
 // OSDMessage.swift
 "osd.pause" = "Zaustavi";
@@ -52,7 +56,7 @@
 "osd.aspect" = "Omjer: %@";
 "osd.crop" = "Obreži: %@";
 "osd.rotate" = "Okreni: %i°";
-"osd.deinterlace" = "Deinterlace: %@";
+"osd.deinterlace" = "Ukloni preplitanje: %@";
 "osd.hwdec" = "Hardversko dekodiranje: %@";
 "osd.audio_delay.nodelay" = "Kašnjenje zvuka: bez kašnjenja";
 "osd.audio_delay.later" = "Kašnjenje zvuka: %.2fs kasnije";
@@ -61,6 +65,10 @@
 "osd.sub_delay.later" = "Kašnjenje titla: %.2fs kasnije";
 "osd.sub_delay.earlier" = "Kašnjenje titla: %.2fs ranije";
 "osd.subtitle_pos" = "Položaj titla: %.1f";
+"osd.sub_hidden" = "Titlovi skriveni";
+"osd.sub_visible" = "Titlovi vidljivi";
+"osd.sub_second_hidden" = "Drugi titlovi skriveni";
+"osd.sub_second_visible" = "Drugi titlovi vidljivi";
 "osd.mute" = "Isključi zvuk";
 "osd.unmute" = "Uključi zvuk";
 "osd.screenshot" = "Slika ekrana snimljena";
@@ -88,7 +96,7 @@
 "osd.cannot_login" = "Neuspjela prijava";
 "osd.canceled" = "Prekinuto";
 "osd.cannot_connect" = "Neuspjelo povezivanje";
-"osd.timed_out" = "Timed Out";
+"osd.timed_out" = "Isteklo";
 "osd.filter_added" = "Dodani filtar: %@";
 "osd.filter_removed" = "Uklonjen filtar";
 "osd.file_loop" = "Ponavljanje datoteke";
@@ -116,20 +124,24 @@
 
 "preference.enable_adv_settings" = "Aktiviraj napredne postavke";
 
-"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.force" = "prisili";
 "preference.sub_override_level.strip" = "strip";
-"preference.sub_override_level.yes" = "yes";
+"preference.sub_override_level.yes" = "da";
 
 "menu.volume" = "Glasnoća: %d";
 "menu.volume_muted" = "Glasnoća: %d (Isključen zvuk)";
 "menu.audio_delay" = "Kašnjenje zvuka: %.2fs";
 "menu.sub_delay" = "Kašnjenje titlova: %.2fs";
+"menu.sub_hide" = "Sakrij titlove";
+"menu.sub_show" = "Prikaži titlove";
+"menu.sub_second_hide" = "Sakrij druge titlove";
+"menu.sub_second_show" = "Prikaži druge titlove";
 "menu.fullscreen" = "Pokreni cjeloekranski prikaz";
 "menu.exit_fullscreen" = "Prekini cjeloekranski prikaz";
 "menu.pip" = "Pokreni sliku u slici";
 "menu.exit_pip" = "Prekini sliku u slici";
-"menu.mini_player" = "Enter Music Mode";
-"menu.exit_mini_player" = "Exit Music Mode";
+"menu.mini_player" = "Pokreni glazbeni modus";
+"menu.exit_mini_player" = "Napusti glazbeni modus";
 "menu.pause" = "Zaustavi";
 "menu.resume" = "Nastavi";
 "menu.speed" = "Brzina: %.2fx";
@@ -170,42 +182,44 @@
 "alert.title_warning" = "Upozorenje";
 "alert.title_info" = "Informacije";
 
-"alert.fatal_error" = "Fatal error: %@ \nThe application will exit now.";
-"alert.mpv_error" = "Internal error %@ (%@) when setting option %@.";
-"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
+"alert.fatal_error" = "Kobna greška: %@ \nAplikacija će se sada zatvoriti.";
+"alert.mpv_error" = "Interna greška %@ (%@) pri postavljanju opcije %@.";
+"alert.sleep" = "Nije moguće spriječiti stanje mirovanja ekrana! (0x%0X8)";
 
 "alert.unsupported_audio" = "Nepodržana eksterna audio datoteka.";
 "alert.unsupported_sub" = "Nepodržan eksterni titl.";
 "alert.unsupported_url" = "Nepodržana URL adresa.";
 "alert.wrong_url_format" = "Pogrešan format URL adrese.";
 
-"alert.error_open" = "Cannot open file or stream!";
+"alert.error_open" = "Neuspjelo otvaranje datoteke ili prijenosa!";
 "alert.error_finding_file" = "Nije moguće pronaći datoteku %@!";
 "alert.error_loading_script" = "Nije moguće učitati skripta %@!";
 "alert.error_saving_file" = "Došlo je do greške prilikom spremanja %@: %@";
 "alert.error_deleting_file" = "Nije moguće izbrisati datoteku.";
 
-"alert.config.new.title" = "New Input Configuration";
-"alert.config.new.message" = "Please enter a name for the new configuration.";
+"alert.config.new.title" = "Nova konfiguracija unosa";
+"alert.config.new.message" = "Upiši naziv za novu konfiguraciju.";
 "alert.config.duplicate.title" = "Duplikat konfiguracije";
 "alert.config.duplicate.message" = "Upiši naziv za dupliciranu konfiguracijsku datoteku.";
 "alert.config.empty_name" = "Naziv ne smije biti prazan.";
-"alert.config.name_existing" = "Naziv već postoji.";
+"alert.config.name_existing" = "Konfiguracija s istim nazivom već postoji.";
 "alert.config.file_existing.title" = "Datoteka već postoji";
-"alert.config.file_existing.message" = "This should not happen. Choose OK to overwrite, Cancel to reveal the file in Finder.";
+"alert.config.file_existing.message" = "Konfiguracija s istim nazivom datoteke već postoji. Odaberi „U redu” za prikaz datoteke u Finderu.";
 "alert.config.cannot_create" = "Nije moguće stvoriti konfiguracijsku datoteku!\n%@";
 "alert.config.cannot_write" = "Nije moguće pisati u konfiguracijsku datoteku!";
+"alert.config.rename.title" = "Preimenuj konfiguraciju unosa";
+"alert.config.rename.message" = "Upiši naziv za novu konfiguraciju.";
 
-"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
+"alert.filter.incorrect" = "Greška prilikom postavljanja filtara. Provjeri format parametra.";
 "alert.add_filter.title" = "Novi filtar";
-"alert.add_filter.message" = "Please enter a filter string in format of mpv's vf or af command.";
+"alert.add_filter.message" = "Upiši znakovni niz za filtar u formatu mpv-ove naredbe vf ili af.";
 
 "alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
 
-"alert.extra_option.cannot_read" = "Cannot read user defined extra mpv options.";
+"alert.extra_option.cannot_read" = "Neuspjelo čitanje dodatne korisnički definirane mpv opcije.";
 "alert.extra_option.empty" = "Ključ ili vrijednost ne smiju biti prazni!";
-"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
-"alert.extra_option.config_folder" = "Error setting config directory \"%@\".";
+"alert.extra_option.error" = "Greška u opciji postavke --%@=%@ s povratnom vrijednošću %d. Provjeri postavke dodatnih opcija u Postavke > Napredno.";
+"alert.extra_option.config_folder" = "Greška u postavljanju konfiguracijskog direktorija „%@”.";
 
 "alert.playlist.error_deleting" = "Greška pri brisanju: %@";
 
@@ -213,19 +227,19 @@
 
 "alert.sub.no_selected" = "Najprije odaberi preuzeti titl.";
 "alert.sub_lang_not_set" = "Postavi željene jezike titlova u postavkama prije korištenja web stranice OpenSubtitles. Ovaj put će se koristiti engleski (eng).";
-"alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
-"alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
+"alert.sub.cannot_save_passwd" = "Neuspjelo spremanje tvoje lozinke u privjesak ključeva: %@";
+"alert.sub.cannot_login" = "Neuspjela prijava. Provjeri svoje korisničko ime, lozinku i stanje mreže.\n\n%@";
 "alert.sub.save_downloaded.title" = "Spremi preuzeti titl";
 
 "alert.set_default.title" = "Postavljanje programa IINA kao standardnog programa";
 "alert.set_default.message" = "IINA će se postaviti kao standardni program za sve formate koje podržava.";
 "alert.set_default.success" = "Završeno: uspjelo: %d, neuspjelo: %d.";
 
-"alert.add_watch.title" = "Add Watch Property";
+"alert.add_watch.title" = "Dodaj svojstvo gledanja";
 "alert.add_watch.message" = "Upiši ispravno ime mpv svojstva.";
 
 "alert.jump_to.title" = "Idi na";
-"alert.jump_to.message" = "Please enter the time you want to jump to. Example: 20:35";
+"alert.jump_to.message" = "Upiši vrijeme na koje želiš skočiti. Primjer: 20:35";
 
 "alert.opensub.login.title" = "Prijava na OpenSubtitles";
 "alert.opensub.login.message" = "Upiši svoje korisničko ime i lozinku";
@@ -261,13 +275,13 @@
 
 "alert.no_video_track" = "Nema videozapis.";
 
-"alert.duplicate_config" = "You cannot edit default configurations directly. Please duplicate one before editing.";
+"alert.duplicate_config" = "Zadane konfiguracije se ne mogu uređivati. Dupliciraj jednu konfiguraciju prije uređivanja.";
 
-"alert.assrt_register" = "Due to limited API quota, you are strongly recommended to use your own API token. The default token is only for demo usage, and you may encounter network error.";
+"alert.assrt_register" = "Zbog ograničene API kvote, preporučujemo da koristiš vlastiti API token. Zadani je token samo za demo upotrebu i može prouzročiti mrežnu grešku.";
 "alert.assrt_register.register" = "Registriraj se sada";
 "alert.assrt_register.try" = "Najprije isprobaj";
 "alert.assrt_token_prompt.title" = "Upiši tvoj API ključ";
-"alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
+"alert.assrt_token_prompt.message" = "Registriraj se na otvorenoj web stranici. Nabavi svoj token u svojoj korisničkoj početnoj stranici i unesi ga dolje:";
 "alert.assrt_token_invalid" = "Čini se da je tvoj Assrt API token neispravan.";
 
 "alert.plugin_uninstall.title" = "Da li ste sigurni da želite deinstalirati %@?";
@@ -283,7 +297,7 @@
 
 "playlist.total_length" = "Ukupno %@";
 "playlist.total_length_with_selected" = "Odabrano %@ od %@";
-"pl_menu.title_multi" = "%d Items";
+"pl_menu.title_multi" = "%d stavki";
 "pl_menu.play_next" = "Pokreni sljedeću snimku";
 "pl_menu.play_in_new_window" = "Pokreni u novom prozoru";
 "pl_menu.remove" = "Ukloni";

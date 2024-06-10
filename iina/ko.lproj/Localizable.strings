@@ -46,6 +46,7 @@
 "quicksetting.hwdec" = "하드웨어 디코딩";
 "quicksetting.deinterlace" = "디인터레이스";
 "quicksetting.hdr" = "HDR";
+"quicksetting.hide" = "숨기기";
 
 // OSDMessage.swift
 "osd.pause" = "일시 정지됨";
@@ -64,6 +65,10 @@
 "osd.sub_delay.later" = "자막 지연: %.2f초 느리게";
 "osd.sub_delay.earlier" = "자막 지연: %.2f초 빠르게";
 "osd.subtitle_pos" = "자막 위치: %.1f";
+"osd.sub_hidden" = "Subtitles Hidden";
+"osd.sub_visible" = "Subtitles Visible";
+"osd.sub_second_hidden" = "Second Subtitles Hidden";
+"osd.sub_second_visible" = "Second Subtitles Visible";
 "osd.mute" = "소리 끔";
 "osd.unmute" = "음소거 해제";
 "osd.screenshot" = "스크린샷 저장됨";
@@ -127,6 +132,10 @@
 "menu.volume_muted" = "음량: %d (음소거 됨)";
 "menu.audio_delay" = "오디오 지연: %.2f초";
 "menu.sub_delay" = "자막 지연: %.2f초";
+"menu.sub_hide" = "Hide Subtitles";
+"menu.sub_show" = "Show Subtitles";
+"menu.sub_second_hide" = "Hide Second Subtitles";
+"menu.sub_second_show" = "Show Second Subtitles";
 "menu.fullscreen" = "전체 화면";
 "menu.exit_fullscreen" = "전체 화면에서 나가기";
 "menu.pip" = "화면 속 화면";
@@ -193,11 +202,13 @@
 "alert.config.duplicate.title" = "설정 파일 복제";
 "alert.config.duplicate.message" = "새로 만들 설정 파일의 이름을 입력하십시오.";
 "alert.config.empty_name" = "파일 이름을 지정하십시오.";
-"alert.config.name_existing" = "같은 이름의 파일이 이미 있습니다.";
+"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "같은 이름의 설정 파일이 이미 있습니다.";
-"alert.config.file_existing.message" = "파일을 덮어 쓰려면 승인을, 파인더에서 파일을 확인하려면 취소를 누르십시오.";
+"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "설정 파일을 만들 수 없습니다!\n%@";
 "alert.config.cannot_write" = "설정 파일에 저장할 수 없습니다!";
+"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "필터를 설정하는 도중 오류가 발생했습니다. 매개변수 형식을 확인하십시오.";
 "alert.add_filter.title" = "새 필터";

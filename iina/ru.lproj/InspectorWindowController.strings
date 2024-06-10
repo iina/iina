@@ -2,7 +2,7 @@
 "0vG-Pg-DIl.title" = "Форсированная";
 
 /* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "1dz-Vt-0MO"; */
-"1dz-Vt-0MO.title" = "Кадр/с:";
+"1dz-Vt-0MO.title" = "Кадры/с:";
 
 /* Class = "NSTextFieldCell"; title = "File path:"; ObjectID = "4jf-w4-kkv"; */
 "4jf-w4-kkv.title" = "Путь к файлу:";
@@ -11,7 +11,7 @@
 "5H6-qJ-RDS.title" = "Формат:";
 
 /* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "7QX-tu-rvs"; */
-"7QX-tu-rvs.title" = "Кадр/с:";
+"7QX-tu-rvs.title" = "Кадры/с:";
 
 /* Class = "NSTextFieldCell"; title = "Title:"; ObjectID = "9eq-rd-zGy"; */
 "9eq-rd-zGy.title" = "Название:";
@@ -29,7 +29,7 @@
 "CrF-UR-udW.title" = "Пропущенных кадров:";
 
 /* Class = "NSTextFieldCell"; title = "Hw Decoder:"; ObjectID = "DHh-ne-10f"; */
-"DHh-ne-10f.title" = "Апп. декодер:";
+"DHh-ne-10f.title" = "Декодер:";
 
 /* Class = "NSWindow"; title = "Inspector"; ObjectID = "F0z-JX-Cv5"; */
 "F0z-JX-Cv5.title" = "Инспектор";
@@ -116,7 +116,7 @@
 "f7i-wX-uxQ.title" = "Трек:";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Output FPS:"; ObjectID = "g8p-Ec-awO"; */
-"g8p-Ec-awO.title" = "Оцен. результ. кадр/с:";
+"g8p-Ec-awO.title" = "Оцен. результ. кадры/с:";
 
 /* Class = "NSTextFieldCell"; title = "VIDEO"; ObjectID = "gDG-Eq-1Bc"; */
 "gDG-Eq-1Bc.title" = "ВИДЕО";
@@ -134,7 +134,7 @@
 "jyV-Pd-UvH.title" = "Битрейт:";
 
 /* Class = "NSTextFieldCell"; title = "Sample Rate:"; ObjectID = "llF-4b-Z8b"; */
-"llF-4b-Z8b.title" = "Частота дискр.:";
+"llF-4b-Z8b.title" = "Частота:";
 
 /* Class = "NSTextFieldCell"; title = "ID:"; ObjectID = "mZG-ik-Led"; */
 "mZG-ik-Led.title" = "ID:";
@@ -152,7 +152,7 @@
 "sbO-Cn-gpI.title" = "Итог. синхр. ауд/вид:";
 
 /* Class = "NSTextFieldCell"; title = "Watch"; ObjectID = "tNS-gW-PcC"; */
-"tNS-gW-PcC.title" = "Наблюдение";
+"tNS-gW-PcC.title" = "Просмотр";
 
 /* Class = "NSTextFieldCell"; title = "Sample Rate:"; ObjectID = "vrP-XL-Weg"; */
 "vrP-XL-Weg.title" = "Частота дискр.:";

@@ -46,6 +46,7 @@
 "quicksetting.hwdec" = "Dekodowanie sprzętowe";
 "quicksetting.deinterlace" = "Usuwanie przeplotu";
 "quicksetting.hdr" = "HDR";
+"quicksetting.hide" = "Ukryj";
 
 // OSDMessage.swift
 "osd.pause" = "Pauza";
@@ -64,6 +65,10 @@
 "osd.sub_delay.later" = "Opóźnienie napisów: %.2fs później";
 "osd.sub_delay.earlier" = "Opóźnienie napisów: %.2fs wcześniej";
 "osd.subtitle_pos" = "Pozycja napisów: %.1f";
+"osd.sub_hidden" = "Subtitles Hidden";
+"osd.sub_visible" = "Subtitles Visible";
+"osd.sub_second_hidden" = "Second Subtitles Hidden";
+"osd.sub_second_visible" = "Second Subtitles Visible";
 "osd.mute" = "Wycisz dźwięk";
 "osd.unmute" = "Włącz dźwięk";
 "osd.screenshot" = "Zachowano zrzut ekranu";
@@ -127,6 +132,10 @@
 "menu.volume_muted" = "Głośność: %d (Wyciszono)";
 "menu.audio_delay" = "Opóźnienie audio: %.2fs";
 "menu.sub_delay" = "Opóźnienie napisów: %.2fs";
+"menu.sub_hide" = "Hide Subtitles";
+"menu.sub_show" = "Show Subtitles";
+"menu.sub_second_hide" = "Hide Second Subtitles";
+"menu.sub_second_show" = "Show Second Subtitles";
 "menu.fullscreen" = "Włącz tryb pełnoekranowy";
 "menu.exit_fullscreen" = "Opuść tryb pełnoekranowy";
 "menu.pip" = "Włącz tryb Obraz-w-obrazie";
@@ -193,11 +202,13 @@
 "alert.config.duplicate.title" = "Powiel konfigurację";
 "alert.config.duplicate.message" = "Proszę wprowadzić nazwę dla duplikatu pliku konfiguracyjnego.";
 "alert.config.empty_name" = "Nazwa nie może być pusta.";
-"alert.config.name_existing" = "Ta nazwa już istnieje.";
+"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Plik już istnieje";
-"alert.config.file_existing.message" = "Coś poszło nie tak. Wybierz OK, aby nadpisać lub Anuluj, aby pokazać plik w Finderze.";
+"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Nie można utworzyć pliku konfiguracyjnego!\n%@";
 "alert.config.cannot_write" = "Nie można zapisać pliku konfiguracyjnego!";
+"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "Podczas ustawiania filtrów wystąpił błąd. Proszę sprawdzić format parametru.";
 "alert.add_filter.title" = "Nowy filtr";

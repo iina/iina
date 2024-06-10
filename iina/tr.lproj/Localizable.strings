@@ -46,6 +46,7 @@
 "quicksetting.hwdec" = "Donanımsal Kod Çözücü";
 "quicksetting.deinterlace" = "Taramasızlık";
 "quicksetting.hdr" = "HDR";
+"quicksetting.hide" = "Gizle";
 
 // OSDMessage.swift
 "osd.pause" = "Duraklat";
@@ -64,6 +65,10 @@
 "osd.sub_delay.later" = "Altyazı Gecikmesi: %.2f sn Geç";
 "osd.sub_delay.earlier" = "Altyazı Gecikmesi: %.2f sn Erken";
 "osd.subtitle_pos" = "Altyazı Konumu: %.1f";
+"osd.sub_hidden" = "Subtitles Hidden";
+"osd.sub_visible" = "Subtitles Visible";
+"osd.sub_second_hidden" = "Second Subtitles Hidden";
+"osd.sub_second_visible" = "Second Subtitles Visible";
 "osd.mute" = "Sesi Kapat";
 "osd.unmute" = "Sesi Aç";
 "osd.screenshot" = "Ekran Görüntüsü Alındı";
@@ -127,6 +132,10 @@
 "menu.volume_muted" = "Ses Yüksekliği: %d (Sessiz)";
 "menu.audio_delay" = "Ses Gecikmesi: %.2f sn";
 "menu.sub_delay" = "Altyazı Gecikmesi: %.2f sn";
+"menu.sub_hide" = "Hide Subtitles";
+"menu.sub_show" = "Show Subtitles";
+"menu.sub_second_hide" = "Hide Second Subtitles";
+"menu.sub_second_show" = "Show Second Subtitles";
 "menu.fullscreen" = "Tam Ekrana Geç";
 "menu.exit_fullscreen" = "Tam Ekrandan Çık";
 "menu.pip" = "Resim İçinde Resim'e Geç";
@@ -193,11 +202,13 @@
 "alert.config.duplicate.title" = "Yapılandırmayı Çoğalt";
 "alert.config.duplicate.message" = "Lütfen çoğaltılan yapılandırma dosyası için bir ad girin.";
 "alert.config.empty_name" = "Ad alanı boş olamaz.";
-"alert.config.name_existing" = "Bu ad halihazırda alınmış.";
+"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Dosya Halihazırda Var";
-"alert.config.file_existing.message" = "Bu olmamalıydı. Dosyanın üzerine yazmak için Tamam'ı, dosyayı Finder'da göstermek için Vazgeç'i seçin.";
+"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Yapılandırma dosyası oluşturulamıyor!\n%@";
 "alert.config.cannot_write" = "Yapılandırma dosyasına yazılamıyor!";
+"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "Filtreler ayarlanırken hata oluştu. Lütfen parametre biçiminizi kontrol edin.";
 "alert.add_filter.title" = "Yeni Filtre";

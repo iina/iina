@@ -65,10 +65,10 @@
 "ZgQ-bc-yEE.title" = "Standardno aktiviraj HDR podršku tijekom reprodukcije HDR videa.";
 
 /* Class = "NSButtonCell"; title = "Enable tone mapping"; ObjectID = "a5Y-gU-JTj"; */
-"a5Y-gU-JTj.title" = "Enable tone mapping";
+"a5Y-gU-JTj.title" = "Aktiviraj prilagođavanje boja";
 
 /* Class = "NSTextFieldCell"; title = "Enable tone mapping images onto the display"; ObjectID = "mNn-cb-IVw"; */
-"mNn-cb-IVw.title" = "Enable tone mapping images onto the display";
+"mNn-cb-IVw.title" = "Aktiviraj prilagođavanje boja slika za ekran";
 
 /* Class = "NSTextFieldCell"; title = "Target peak:"; ObjectID = "xVk-OA-kOf"; */
 "xVk-OA-kOf.title" = "Ciljani najviši ton:";
@@ -83,4 +83,4 @@
 "qzI-rq-PqO.title" = "Algoritam:";
 
 /* Class = "NSTextFieldCell"; title = "Algorithm to use for tone mapping images onto the display."; ObjectID = "szA-8r-plt"; */
-"szA-8r-plt.title" = "Algorithm to use for tone mapping images onto the display.";
+"szA-8r-plt.title" = "Algoritam za prilagođavanje boja slika za ekran.";

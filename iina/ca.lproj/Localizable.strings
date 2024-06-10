@@ -46,6 +46,7 @@
 "quicksetting.hwdec" = "Decodificació per maquinari";
 "quicksetting.deinterlace" = "Desentrellaçament";
 "quicksetting.hdr" = "HDR";
+"quicksetting.hide" = "Amaga";
 
 // OSDMessage.swift
 "osd.pause" = "Pausa";
@@ -64,6 +65,10 @@
 "osd.sub_delay.later" = "Retard dels subtítols: %.2fs després";
 "osd.sub_delay.earlier" = "Retard dels subtítols: %.2fs abans";
 "osd.subtitle_pos" = "Posició dels subtítols: %.1f";
+"osd.sub_hidden" = "Subtitles Hidden";
+"osd.sub_visible" = "Subtitles Visible";
+"osd.sub_second_hidden" = "Second Subtitles Hidden";
+"osd.sub_second_visible" = "Second Subtitles Visible";
 "osd.mute" = "Silencia";
 "osd.unmute" = "Amb so";
 "osd.screenshot" = "Captura de pantalla feta";
@@ -127,6 +132,10 @@
 "menu.volume_muted" = "Volum: %d (Silenciat)";
 "menu.audio_delay" = "Retard d'àudio: %.2fs";
 "menu.sub_delay" = "Retard en els subtítols: %.2fs";
+"menu.sub_hide" = "Hide Subtitles";
+"menu.sub_show" = "Show Subtitles";
+"menu.sub_second_hide" = "Hide Second Subtitles";
+"menu.sub_second_show" = "Show Second Subtitles";
 "menu.fullscreen" = "Pantalla completa";
 "menu.exit_fullscreen" = "Surt de la pantalla completa";
 "menu.pip" = "Picture-in-Picture";
@@ -193,11 +202,13 @@
 "alert.config.duplicate.title" = "Duplica configuració";
 "alert.config.duplicate.message" = "Si us plau introdueix un nom per el fixer de configuració duplicat.";
 "alert.config.empty_name" = "El nom no pot estar buit.";
-"alert.config.name_existing" = "El nom ja existeix.";
+"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "El fitxer ja existeix";
-"alert.config.file_existing.message" = "Això no hauria de passar. Selecciona D'acord per sobreescriure, Cancel·la per mostrar el fitxer al Finder.";
+"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "No es pot crear el fitxer de configuració!\n%@";
 "alert.config.cannot_write" = "No es pot escriure en el fitxer de configuració!";
+"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "Error establint filtres. Si us plau verifica el format dels paràmetres.";
 "alert.add_filter.title" = "Crea filtre";

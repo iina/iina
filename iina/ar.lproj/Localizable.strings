@@ -28,6 +28,9 @@
 "initial.debug.desc" = "عادة ما لا يتم تحسين إصدارات التصحيح للأداء، لذلك لا يوصى باستخدامها كمحرك أقراص يومي. إصدارات التصحيح لا تدعم التحديث التلقائي.";
 "initial.bug_report" = "الإبلاغ عبر <a href=\"https://github.com/iina/iina/issues\">GitHub مشكلات</a>.";
 
+// Inspector Window
+"inspector.error" = "خطأ";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "التخزين… %d%%";
 "main.opening_stream" = "فتح البث…";
@@ -43,6 +46,7 @@
 "quicksetting.hwdec" = "فك ترميز الجهاز";
 "quicksetting.deinterlace" = "تشابك";
 "quicksetting.hdr" = "النطاق الديناميكي العالي HDR";
+"quicksetting.hide" = "Hide";
 
 // OSDMessage.swift
 "osd.pause" = "إيقاف مؤقت";
@@ -61,6 +65,10 @@
 "osd.sub_delay.later" = "تأخير الترجمة: %.2fث لاحقاً";
 "osd.sub_delay.earlier" = "تأخير الترجمة: %.2fثانية سابقة";
 "osd.subtitle_pos" = "موضع الترجمة: %.1f";
+"osd.sub_hidden" = "Subtitles Hidden";
+"osd.sub_visible" = "Subtitles Visible";
+"osd.sub_second_hidden" = "Second Subtitles Hidden";
+"osd.sub_second_visible" = "Second Subtitles Visible";
 "osd.mute" = "كتم";
 "osd.unmute" = "إلغاء الكتم";
 "osd.screenshot" = "تم التقاط لقطة الشاشة";
@@ -124,6 +132,10 @@
 "menu.volume_muted" = "الحجم: %d (مكتمل)";
 "menu.audio_delay" = "تأخير الصوت: %.2fث";
 "menu.sub_delay" = "تأخير الترجمه: %.2f ثانيه";
+"menu.sub_hide" = "Hide Subtitles";
+"menu.sub_show" = "Show Subtitles";
+"menu.sub_second_hide" = "Hide Second Subtitles";
+"menu.sub_second_show" = "Show Second Subtitles";
 "menu.fullscreen" = "الدخول إلى وضع ملء الشاشة";
 "menu.exit_fullscreen" = "إنهاء وضع ملء الشاشة";
 "menu.pip" = "الدخول إلى وضع صورة في صورة";
@@ -190,11 +202,13 @@
 "alert.config.duplicate.title" = "تكرار الإعدادات";
 "alert.config.duplicate.message" = "الرجاء إدخال اسم لملف التكوين المكرر.";
 "alert.config.empty_name" = "الاسم لا يمكن أن يكون فارغاً.";
-"alert.config.name_existing" = "الاسم موجود مسبقا.";
+"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "الملف موجود بالفعل";
-"alert.config.file_existing.message" = "هذا لا ينبغي أن يحدث. اختر موافق للإستبدال، اختر إلغاء لعرض الملف في Finder.";
+"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "لا يمكن إنشاء ملف التكوين!\n%@";
 "alert.config.cannot_write" = "لا يمكن الكتابة إلى ملف التكوين!";
+"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "حدث خطأ أثناء إعداد عوامل التصفية. الرجاء التحقق من صيغة الوسيط الخاصة بك.";
 "alert.add_filter.title" = "عامل تصفية جديد";

@@ -46,6 +46,7 @@
 "quicksetting.hwdec" = "Laitteistopohjainen purku";
 "quicksetting.deinterlace" = "Lomituksenpoisto";
 "quicksetting.hdr" = "HDR";
+"quicksetting.hide" = "Piilota";
 
 // OSDMessage.swift
 "osd.pause" = "Tauko";
@@ -64,6 +65,10 @@
 "osd.sub_delay.later" = "Tekstityksen viive: %.2fs myöhemmin";
 "osd.sub_delay.earlier" = "Tekstityksen viive: %.2fs aiemmin";
 "osd.subtitle_pos" = "Tekstityksen sijainti: %.1f";
+"osd.sub_hidden" = "Subtitles Hidden";
+"osd.sub_visible" = "Subtitles Visible";
+"osd.sub_second_hidden" = "Second Subtitles Hidden";
+"osd.sub_second_visible" = "Second Subtitles Visible";
 "osd.mute" = "Mykistä";
 "osd.unmute" = "Poista mykistys";
 "osd.screenshot" = "Kuvankaappaus otettu";
@@ -127,6 +132,10 @@
 "menu.volume_muted" = "Volume: %d (Muted)";
 "menu.audio_delay" = "Äänen viive: %.2fs";
 "menu.sub_delay" = "Tekstityksen viive: %.2fs";
+"menu.sub_hide" = "Hide Subtitles";
+"menu.sub_show" = "Show Subtitles";
+"menu.sub_second_hide" = "Hide Second Subtitles";
+"menu.sub_second_show" = "Show Second Subtitles";
 "menu.fullscreen" = "Siirry koko näytön tilaan";
 "menu.exit_fullscreen" = "Poistu koko näytön tilasta";
 "menu.pip" = "Siirry kuva kuvassa -tilaan";
@@ -193,11 +202,13 @@
 "alert.config.duplicate.title" = "Monista asetukset";
 "alert.config.duplicate.message" = "Anna nimi monistetulle asetustiedostolle.";
 "alert.config.empty_name" = "Nimi ei voi olla tyhjä.";
-"alert.config.name_existing" = "Nimi on jo käytössä.";
+"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Tiedosto on jo olemassa";
-"alert.config.file_existing.message" = "Tätä ei pitäisi tapahtua. Valitse OK korvataksesi, Peruuta näyttääksesi tiedoston Finderissa.";
+"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Asetustiedostoa ei voitu luoda!\n%@";
 "alert.config.cannot_write" = "Asetustiedostoon ei voida kirjoittaa!";
+"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "Suodattimia asetettaessa tapahtui virhe. Tarkista parametrisi muoto.";
 "alert.add_filter.title" = "Uusi suodatin";

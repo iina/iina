@@ -28,6 +28,9 @@
 "initial.debug.desc" = "نسخه دیباگ معمولا کامل بهینه سازی نشده است ، پس برای استفاده روزانه پیشنهاد نمیشود. نسخه دیباگ از بروزرسانی خودکار پیشتیبانی نمیکنند.";
 "initial.bug_report" = "مشکلات را از طریق <a href=\"https://github.com/iina/iina/issues\"> با ما درمیان بگذارید</a>.";
 
+// Inspector Window
+"inspector.error" = "خطا";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "در حال بارگذاری... %d%%";
 "main.opening_stream" = "در حال بازکردن استریم…";
@@ -43,6 +46,7 @@
 "quicksetting.hwdec" = "رمزگشایی سخت‌افزاری";
 "quicksetting.deinterlace" = "تبدیل تصویر به غیر interlace";
 "quicksetting.hdr" = "اچ‌دی‌آر";
+"quicksetting.hide" = "پنهان کردن";
 
 // OSDMessage.swift
 "osd.pause" = "مکث";
@@ -61,6 +65,10 @@
 "osd.sub_delay.later" = "تاخیر زیرنویس: %.2f ثانیه بعدتر";
 "osd.sub_delay.earlier" = "تاخیر زیرنویس: %.2f ثانیه زودتر";
 "osd.subtitle_pos" = "جایگذاری زیرنویس: %.1f";
+"osd.sub_hidden" = "Subtitles Hidden";
+"osd.sub_visible" = "Subtitles Visible";
+"osd.sub_second_hidden" = "Second Subtitles Hidden";
+"osd.sub_second_visible" = "Second Subtitles Visible";
 "osd.mute" = "بی صدا";
 "osd.unmute" = "با صدا";
 "osd.screenshot" = "عکس از صفحه گرفته شد";
@@ -124,6 +132,10 @@
 "menu.volume_muted" = "صدا: %d (بی صدا)";
 "menu.audio_delay" = "تاخیر صوت: %.2f ثانيه";
 "menu.sub_delay" = "تاخیر زیرنویس: %.2f ثانیه";
+"menu.sub_hide" = "Hide Subtitles";
+"menu.sub_show" = "Show Subtitles";
+"menu.sub_second_hide" = "Hide Second Subtitles";
+"menu.sub_second_show" = "Show Second Subtitles";
 "menu.fullscreen" = "حالت تمام صفحه";
 "menu.exit_fullscreen" = "خروج از تمام صفحه";
 "menu.pip" = "استفاده از تصویر در تصویر";
@@ -190,11 +202,13 @@
 "alert.config.duplicate.title" = "Duplicate Configuration";
 "alert.config.duplicate.message" = "Please enter name for the duplicated configuration file.";
 "alert.config.empty_name" = "The name cannot be empty.";
-"alert.config.name_existing" = "The name already exists.";
+"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "فايل قبلا ساخته شده";
-"alert.config.file_existing.message" = "This should not happen. Choose OK to overwrite, Cancel to reveal the file in Finder.";
+"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "فایل Config غیرقابل ساختن است\n%@";
 "alert.config.cannot_write" = "Cannot write to config file!";
+"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
 "alert.add_filter.title" = "فیلتر جدید";

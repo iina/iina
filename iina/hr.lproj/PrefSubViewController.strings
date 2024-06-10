@@ -17,10 +17,10 @@
 "6i0-Sx-V7F.title" = "Dolje";
 
 /* Class = "NSTextFieldCell"; title = "Subtitles have priority when filename containing:"; ObjectID = "7pf-Kb-TNr"; */
-"7pf-Kb-TNr.title" = "Subtitles have priority when filename containing:";
+"7pf-Kb-TNr.title" = "Titlovi imaju prioritet kada naziv datoteke sadrži:";
 
 /* Class = "NSButtonCell"; title = "Scale subtitles with window size"; ObjectID = "8hj-ki-R0h"; */
-"8hj-ki-R0h.title" = "Scale subtitles with window size";
+"8hj-ki-R0h.title" = "Skaliraj titlove ovisno o veličini prozora";
 
 /* Class = "NSTextFieldCell"; title = "Font spacing:"; ObjectID = "9EP-XB-lyO"; */
 "9EP-XB-lyO.title" = "Spacioniranje:";
@@ -53,25 +53,25 @@
 "Gie-38-Kk4.title" = "Desno";
 
 /* Class = "NSTextFieldCell"; title = "OpenSubtitles account:"; ObjectID = "Iax-cc-YIO"; */
-"Iax-cc-YIO.title" = "OpenSubtitles account:";
+"Iax-cc-YIO.title" = "OpenSubtitles račun:";
 
 /* Class = "NSTextFieldCell"; title = "Other:"; ObjectID = "LiG-iV-AQK"; */
 "LiG-iV-AQK.title" = "Ostalo:";
 
 /* Class = "NSTextFieldCell"; title = "Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed."; ObjectID = "Luv-2B-9v8"; */
-"Luv-2B-9v8.title" = "Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed.";
+"Luv-2B-9v8.title" = "Direktoriji su odvojeni dvotočkom (:). Dozvoljene su relativne staze i zamjenski znakovi (*) na kraju.";
 
 /* Class = "NSTextFieldCell"; title = "Please enter a comma-separated list of strings."; ObjectID = "Mk1-sv-QB8"; */
-"Mk1-sv-QB8.title" = "Please enter a comma-separated list of strings.";
+"Mk1-sv-QB8.title" = "Upiši zarezima odvojen popis nizova.";
 
 /* Class = "NSTextFieldCell"; title = "If enabled, all ASS subtitles will be drawn using the styles below."; ObjectID = "OcF-0z-7qe"; */
-"OcF-0z-7qe.title" = "If enabled, all ASS subtitles will be drawn using the styles below.";
+"OcF-0z-7qe.title" = "Ako je omogućeno, svi ASS titlovi će koristiti donje stilove.";
 
 /* Class = "NSTextFieldCell"; title = "Text subtitles:"; ObjectID = "Qda-dp-nhg"; */
 "Qda-dp-nhg.title" = "Titlovi teksta:";
 
 /* Class = "NSTextFieldCell"; title = "Also search subtitles in following directories:"; ObjectID = "QsS-wD-2hY"; */
-"QsS-wD-2hY.title" = "Also search subtitles in following directories:";
+"QsS-wD-2hY.title" = "Traži titlove i u sljedećim direktorijima:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "SIh-Sv-6XI"; */
 "SIh-Sv-6XI.title" = "Boja:";
@@ -116,7 +116,7 @@
 "egf-g3-b7a.title" = "Drugi stilovi";
 
 /* Class = "NSTextFieldCell"; title = "Override level:"; ObjectID = "gAq-Vr-hRY"; */
-"gAq-Vr-hRY.title" = "Override level:";
+"gAq-Vr-hRY.title" = "Razina zamjene:";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "gkc-qt-sD9"; */
 "gkc-qt-sD9.title" = "Veličina:";

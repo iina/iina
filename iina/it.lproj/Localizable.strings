@@ -46,6 +46,7 @@
 "quicksetting.hwdec" = "Decodifica dell'Hardware";
 "quicksetting.deinterlace" = "Deinterlacciamento";
 "quicksetting.hdr" = "HDR";
+"quicksetting.hide" = "Nascondi";
 
 // OSDMessage.swift
 "osd.pause" = "Pausa";
@@ -64,6 +65,10 @@
 "osd.sub_delay.later" = "Differenza sottotitoli: %.2fs dopo";
 "osd.sub_delay.earlier" = "Differenza sottotitoli: %.2fs prima";
 "osd.subtitle_pos" = "Posizione sottotitoli: %.1f";
+"osd.sub_hidden" = "Subtitles Hidden";
+"osd.sub_visible" = "Subtitles Visible";
+"osd.sub_second_hidden" = "Second Subtitles Hidden";
+"osd.sub_second_visible" = "Second Subtitles Visible";
 "osd.mute" = "Muto";
 "osd.unmute" = "Attiva";
 "osd.screenshot" = "Schermata catturata";
@@ -127,6 +132,10 @@
 "menu.volume_muted" = "Volume: %d (Spento)";
 "menu.audio_delay" = "Differenza audio: %.2fs";
 "menu.sub_delay" = "Differenza sottotitoli: %.2fs";
+"menu.sub_hide" = "Hide Subtitles";
+"menu.sub_show" = "Show Subtitles";
+"menu.sub_second_hide" = "Hide Second Subtitles";
+"menu.sub_second_show" = "Show Second Subtitles";
 "menu.fullscreen" = "Attiva modalità a tutto schermo";
 "menu.exit_fullscreen" = "Disattiva modalità a tutto schermo";
 "menu.pip" = "Attiva Picture-in-Picture";
@@ -193,11 +202,13 @@
 "alert.config.duplicate.title" = "Configurazione del duplicato";
 "alert.config.duplicate.message" = "Inserisci il nome per il duplicato del file di configurazione.";
 "alert.config.empty_name" = "Il nome non può essere vuoto.";
-"alert.config.name_existing" = "Il nome esite già.";
+"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Il file è già esistente";
-"alert.config.file_existing.message" = "Questo non sarebbe dovuto succedere. Scegli OK per sovrascrivere, Annulla per mostrere il file nel Finder.";
+"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Impossibile creare il file di configurazione!\n%@";
 "alert.config.cannot_write" = "Impossibile scrivere il file di configurazione!";
+"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "Si è verificato un errore durante l'impostazione dei filtri. Verifica il formato dei parametri.";
 "alert.add_filter.title" = "Nuovo filtro";

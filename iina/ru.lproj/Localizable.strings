@@ -17,13 +17,13 @@
 "general.password" = "Пароль";
 
 // Guide Window
-"guide.highlights" = "Основные моменты";
+"guide.highlights" = "Что нового в IINA";
 "guide.basic_settings" = "Основные параметры";
 "guide.faq" = "Часто задаваемые вопросы (FAQ)";
 
 // Initial Window
 "initial.announcement" = "Вы используете %@ версию IINA";
-"initial.beta.desc" = "Снимите отметку \"Получать бета-обновления\" из \"Настройки\" - \"Основные\" и установите стабильную версию с нашего <a href=\"https://iina.io\"> официального сайта </a>.";
+"initial.beta.desc" = "Снимите флажок «Получать бета-обновления» в Настройках (вкладка «Основные») и установите стабильную версию с нашего <a href=\"https://iina.io\">официального сайта</a>.";
 "initial.nightly.desc" = "Ночные сборки не рекомендуются для ежедневного использования. На данный момент ночные сборки не поддерживают автоматическое обновление. Пожалуйста, загрузите новейшую сборку вручную с нашего <a href=\"https://nightly.iina.io\">веб-сайта ночных сборок</a>.";
 "initial.debug.desc" = "Отладочные сборки обычно не окончательно оптимизированы, поэтому не рекомендуются для ежедневного использования. Отладочные сборки не поддерживают автоматическое обновление.";
 "initial.bug_report" = "Сообщить через <a href=\"https://github.com/iina/iina/issues\">GitHub проблемы</a>.";
@@ -46,6 +46,7 @@
 "quicksetting.hwdec" = "Аппаратное декодирование";
 "quicksetting.deinterlace" = "Деинтерлейсинг";
 "quicksetting.hdr" = "HDR";
+"quicksetting.hide" = "Скрыть";
 
 // OSDMessage.swift
 "osd.pause" = "Пауза";
@@ -64,6 +65,10 @@
 "osd.sub_delay.later" = "Задержка субтитров: на %.2f с позже";
 "osd.sub_delay.earlier" = "Задержка субтитров: на %.2f с раньше";
 "osd.subtitle_pos" = "Позиция субтитров: %.1f";
+"osd.sub_hidden" = "Субтитры скрыты";
+"osd.sub_visible" = "Субтитры отображаются";
+"osd.sub_second_hidden" = "Вторые субтитры скрыты";
+"osd.sub_second_visible" = "Вторые субтитры отображаются";
 "osd.mute" = "Без звука";
 "osd.unmute" = "Включение звука";
 "osd.screenshot" = "Скриншот сохранен";
@@ -119,14 +124,18 @@
 
 "preference.enable_adv_settings" = "Включить расширенные настройки";
 
-"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.force" = "принудительно";
 "preference.sub_override_level.strip" = "игнорировать все теги и стили в .ass";
-"preference.sub_override_level.yes" = "yes";
+"preference.sub_override_level.yes" = "вкл";
 
 "menu.volume" = "Громкость: %d";
 "menu.volume_muted" = "Громкость: %d (без звука)";
 "menu.audio_delay" = "Задержка аудио: %.2f с";
 "menu.sub_delay" = "Задержка субтитров: %.2f с";
+"menu.sub_hide" = "Скрыть субтитры";
+"menu.sub_show" = "Показать субтитры";
+"menu.sub_second_hide" = "Скрыть вторые субтитры";
+"menu.sub_second_show" = "Показать вторые субтитры";
 "menu.fullscreen" = "Перейти в полноэкранный режим";
 "menu.exit_fullscreen" = "Выйти из полноэкранного режима";
 "menu.pip" = "Войти в режим «Картинка в картинке»";
@@ -193,11 +202,13 @@
 "alert.config.duplicate.title" = "Дублировать конфигурацию";
 "alert.config.duplicate.message" = "Введите имя для дублированного файла конфигурации.";
 "alert.config.empty_name" = "Имя не может быть пустым.";
-"alert.config.name_existing" = "Имя уже существует.";
+"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Файл уже существует";
-"alert.config.file_existing.message" = "Так не должно быть. Нажмите «OK» для перезаписи, «Отмена» для обнаружения файла в Finder.";
+"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Не удалось создать файл конфигурации!\n%@";
 "alert.config.cannot_write" = "Не удалось записать файл конфигурации!";
+"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "При установке фильтров произошла ошибка. Проверьте формат параметров.";
 "alert.add_filter.title" = "Новый фильтр";

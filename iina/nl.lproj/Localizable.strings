@@ -46,6 +46,7 @@
 "quicksetting.hwdec" = "Hardware acceleratie";
 "quicksetting.deinterlace" = "Deinterlace";
 "quicksetting.hdr" = "HDR";
+"quicksetting.hide" = "Verberg";
 
 // OSDMessage.swift
 "osd.pause" = "Pauzeer";
@@ -64,6 +65,10 @@
 "osd.sub_delay.later" = "Ondertiteling versneld met %.2fs";
 "osd.sub_delay.earlier" = "Ondertiteling vertraagd met %.2fs";
 "osd.subtitle_pos" = "Ondertitelingspositie: %.1f";
+"osd.sub_hidden" = "Subtitles Hidden";
+"osd.sub_visible" = "Subtitles Visible";
+"osd.sub_second_hidden" = "Second Subtitles Hidden";
+"osd.sub_second_visible" = "Second Subtitles Visible";
 "osd.mute" = "Geluid uit";
 "osd.unmute" = "Geluid aan";
 "osd.screenshot" = "Schermafbeelding genomen";
@@ -127,6 +132,10 @@
 "menu.volume_muted" = "Volume: %d (Muted)";
 "menu.audio_delay" = "Audiovertraging: %.2fs";
 "menu.sub_delay" = "Ondertitelingvertraging: %.2fs";
+"menu.sub_hide" = "Hide Subtitles";
+"menu.sub_show" = "Show Subtitles";
+"menu.sub_second_hide" = "Hide Second Subtitles";
+"menu.sub_second_show" = "Show Second Subtitles";
 "menu.fullscreen" = "Schakel schermvullende weergave in";
 "menu.exit_fullscreen" = "Schakel schermvullende weergave uit";
 "menu.pip" = "Schakel Beeld-in-beeld in";
@@ -193,11 +202,13 @@
 "alert.config.duplicate.title" = "Dupliceer configuratie";
 "alert.config.duplicate.message" = "Voer een naam in voor de gedupliceerde configuratie.";
 "alert.config.empty_name" = "De naam kan niet leeg zijn.";
-"alert.config.name_existing" = "Deze naam bestaat al.";
+"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Dit bestand bestaat al.";
-"alert.config.file_existing.message" = "Dit zou niet moeten gebeuren. Kies OK om te overschrijven, of Annuleer om het bestand in Finder te tonen.";
+"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Kan configuratiebestand niet aanmaken.\n%@";
 "alert.config.cannot_write" = "Kan niet naar configuratiebestand schrijven.";
+"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "Fout bij het instellen van filters. Controleer je parameters.";
 "alert.add_filter.title" = "Nieuw filter";

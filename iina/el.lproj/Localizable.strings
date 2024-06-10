@@ -28,6 +28,9 @@
 "initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
 "initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
 
+// Inspector Window
+"inspector.error" = "Σφάλμα";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Προφόρτωση… %d%%";
 "main.opening_stream" = "Άνοιγμα Ροής…";
@@ -43,6 +46,7 @@
 "quicksetting.hwdec" = "Αποκωδικοποίηση Υλικού";
 "quicksetting.deinterlace" = "Αποπλεξία";
 "quicksetting.hdr" = "Υψηλό Δυναμικό Εύρος";
+"quicksetting.hide" = "Hide";
 
 // OSDMessage.swift
 "osd.pause" = "Παύση";
@@ -61,6 +65,10 @@
 "osd.sub_delay.later" = "Καθυστέρηση Υποτίτλων: %.2fs Αργότερα";
 "osd.sub_delay.earlier" = "Καθυστέρηση Υποτίτλων: %.2fs Νωρίτερα";
 "osd.subtitle_pos" = "Θέση Υποτίτλων: %.1f";
+"osd.sub_hidden" = "Subtitles Hidden";
+"osd.sub_visible" = "Subtitles Visible";
+"osd.sub_second_hidden" = "Second Subtitles Hidden";
+"osd.sub_second_visible" = "Second Subtitles Visible";
 "osd.mute" = "Σίγαση";
 "osd.unmute" = "Αποσίγαση";
 "osd.screenshot" = "Ελήφθη Στιγμιότυπο Οθόνης";
@@ -124,6 +132,10 @@
 "menu.volume_muted" = "Volume: %d (Muted)";
 "menu.audio_delay" = "Καθυστέρηση Ήχου: %.2fs";
 "menu.sub_delay" = "Καθυστέρηση Υποτίτλων: %.2fs";
+"menu.sub_hide" = "Hide Subtitles";
+"menu.sub_show" = "Show Subtitles";
+"menu.sub_second_hide" = "Hide Second Subtitles";
+"menu.sub_second_show" = "Show Second Subtitles";
 "menu.fullscreen" = "Μετάβαση σε Πλήρη Οθόνη";
 "menu.exit_fullscreen" = "Έξοδος από Πλήρη Οθόνη";
 "menu.pip" = "Μετάβαση σε Εικόνα-σε-Εικόνα";
@@ -190,11 +202,13 @@
 "alert.config.duplicate.title" = "Αντιγραφή Ρυθμίσεων";
 "alert.config.duplicate.message" = "Παρακαλώ εισάγετε ένα όνομα για το αντιγραμμένο αρχείο ρυθμίσεων.";
 "alert.config.empty_name" = "Το όνομα δεν μπορεί να είναι κενό.";
-"alert.config.name_existing" = "Το όνομα αυτό υπάρχει ήδη.";
+"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Ήδη Υπάρχον Αρχείο";
-"alert.config.file_existing.message" = "Αυτό δε θα έπρεπε να συμβεί. Επιλέξτε ΟΚ για αντικατάσταση, ή Άκυρο για εμφάνιση του αρχείου στον Finder.";
+"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Αδυναμία δημιουργίας αρχείου ρυθμίσεων!\n%@";
 "alert.config.cannot_write" = "Αδυναμία εγγραφής στο αρχείο ρυθμίσεων!";
+"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "Σφάλμα κατά τη ρύθμιση φίλτρων. Παρακαλώ ελέγξτε τη μορφή των παραμέτρων σας.";
 "alert.add_filter.title" = "Νέο Φίλτρο";

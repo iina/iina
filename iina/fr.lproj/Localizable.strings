@@ -46,6 +46,7 @@
 "quicksetting.hwdec" = "Décodage matériel";
 "quicksetting.deinterlace" = "Désentrelacer";
 "quicksetting.hdr" = "HDR";
+"quicksetting.hide" = "Cacher";
 
 // OSDMessage.swift
 "osd.pause" = "En pause";
@@ -64,6 +65,10 @@
 "osd.sub_delay.later" = "Délai des sous-titres : %.2fs en avance";
 "osd.sub_delay.earlier" = "Délai des sous-titres : %.2fs en retard";
 "osd.subtitle_pos" = "Position des sous-titres : %.1f";
+"osd.sub_hidden" = "Subtitles Hidden";
+"osd.sub_visible" = "Subtitles Visible";
+"osd.sub_second_hidden" = "Second Subtitles Hidden";
+"osd.sub_second_visible" = "Second Subtitles Visible";
 "osd.mute" = "Son coupé";
 "osd.unmute" = "Son rétabli";
 "osd.screenshot" = "Une capture d'écran a été prise";
@@ -119,14 +124,18 @@
 
 "preference.enable_adv_settings" = "Activer les paramètres avancés";
 
-"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.force" = "forcer";
 "preference.sub_override_level.strip" = "retirer";
-"preference.sub_override_level.yes" = "yes";
+"preference.sub_override_level.yes" = "oui";
 
 "menu.volume" = "Volume : %d";
 "menu.volume_muted" = "Volume : %d (coupé)";
 "menu.audio_delay" = "Délai audio : %.2fs";
 "menu.sub_delay" = "Délai des sous-titres : %.2fs";
+"menu.sub_hide" = "Hide Subtitles";
+"menu.sub_show" = "Show Subtitles";
+"menu.sub_second_hide" = "Hide Second Subtitles";
+"menu.sub_second_show" = "Show Second Subtitles";
 "menu.fullscreen" = "Plein écran";
 "menu.exit_fullscreen" = "Quitter le mode plein écran";
 "menu.pip" = "Passer en inscrustation";
@@ -193,11 +202,13 @@
 "alert.config.duplicate.title" = "Dupliquer la configuration";
 "alert.config.duplicate.message" = "Veuillez entrer un nom pour le fichier de configuration dupliqué.";
 "alert.config.empty_name" = "Le nom ne peut pas être vide.";
-"alert.config.name_existing" = "Ce nom existe déjà.";
+"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Le fichier existe déjà";
-"alert.config.file_existing.message" = "Ceci n'est pas censé arriver. Cliquez OK pour écraser ou Annuler pour révéler le fichier dans le Finder.";
+"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Impossible de créer le fichier de configuration ! %@";
 "alert.config.cannot_write" = "Impossible d'écrire sur le fichier de configuration !";
+"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "Une erreur est survenue lors de la configuration des filtres. Veuillez vérifier le format de votre paramètre.";
 "alert.add_filter.title" = "Nouveau filtre";

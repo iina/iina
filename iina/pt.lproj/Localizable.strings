@@ -46,6 +46,7 @@
 "quicksetting.hwdec" = "Descodificação de hardware";
 "quicksetting.deinterlace" = "Desentrelaçar";
 "quicksetting.hdr" = "HDR";
+"quicksetting.hide" = "Ocultar";
 
 // OSDMessage.swift
 "osd.pause" = "Pausa";
@@ -64,6 +65,10 @@
 "osd.sub_delay.later" = "Atraso da legenda: %.2fs depois";
 "osd.sub_delay.earlier" = "Atraso da Legenda: %.2fs Antes";
 "osd.subtitle_pos" = "Posição da Legenda: %.1f";
+"osd.sub_hidden" = "Subtitles Hidden";
+"osd.sub_visible" = "Subtitles Visible";
+"osd.sub_second_hidden" = "Second Subtitles Hidden";
+"osd.sub_second_visible" = "Second Subtitles Visible";
 "osd.mute" = "Desativar Som";
 "osd.unmute" = "Ligar som";
 "osd.screenshot" = "Captura de ecrã efetuada";
@@ -127,6 +132,10 @@
 "menu.volume_muted" = "Volume: %d (Sem som)";
 "menu.audio_delay" = "Atraso de Áudio: %.2fs";
 "menu.sub_delay" = "Atraso da legenda: %.2fs";
+"menu.sub_hide" = "Hide Subtitles";
+"menu.sub_show" = "Show Subtitles";
+"menu.sub_second_hide" = "Hide Second Subtitles";
+"menu.sub_second_show" = "Show Second Subtitles";
 "menu.fullscreen" = "Entrar em Ecrã Completo";
 "menu.exit_fullscreen" = "Sair do Ecrã Completo";
 "menu.pip" = "Usar Picture in Picture";
@@ -193,11 +202,13 @@
 "alert.config.duplicate.title" = "Duplicar Configuração";
 "alert.config.duplicate.message" = "Por favor digite o nome para o arquivo de configuração duplicado.";
 "alert.config.empty_name" = "Este nome não pode estar vazio.";
-"alert.config.name_existing" = "Este nome já existe.";
+"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Ficheiro já existe";
-"alert.config.file_existing.message" = "Isto não deveria acontecer. Escolha OK para substituir, Cancelar para mostrar o ficheiro no Finder.";
+"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Não foi possível criar um ficheiro de configuração!\n%@";
 "alert.config.cannot_write" = "Não foi possível escrever no arquivo de configuração!";
+"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "Ocorreu um erro ao configurar os filtros. Por favor, verifique o formato de seu parâmetro.";
 "alert.add_filter.title" = "Novo Filtro";

@@ -46,6 +46,7 @@
 "quicksetting.hwdec" = "Hardwareafkodning";
 "quicksetting.deinterlace" = "Deinterlace";
 "quicksetting.hdr" = "HDR";
+"quicksetting.hide" = "Skjul";
 
 // OSDMessage.swift
 "osd.pause" = "Pause";
@@ -64,6 +65,10 @@
 "osd.sub_delay.later" = "Undertekstforsinkelse: %.2fs Senere";
 "osd.sub_delay.earlier" = "Undertekstforsinkelse: %.2fs Tidligere";
 "osd.subtitle_pos" = "Undertekstposition: %.1f";
+"osd.sub_hidden" = "Subtitles Hidden";
+"osd.sub_visible" = "Subtitles Visible";
+"osd.sub_second_hidden" = "Second Subtitles Hidden";
+"osd.sub_second_visible" = "Second Subtitles Visible";
 "osd.mute" = "Lydløs";
 "osd.unmute" = "Lydløs fra";
 "osd.screenshot" = "Screenshot taget";
@@ -127,6 +132,10 @@
 "menu.volume_muted" = "Lydstyrke: %d (Lydløs)";
 "menu.audio_delay" = "Lydforsinkelse: %.2fs";
 "menu.sub_delay" = "Undertekstforsinkelse: %.2fs";
+"menu.sub_hide" = "Hide Subtitles";
+"menu.sub_show" = "Show Subtitles";
+"menu.sub_second_hide" = "Hide Second Subtitles";
+"menu.sub_second_show" = "Show Second Subtitles";
 "menu.fullscreen" = "Gå til fuldskærmsvisning";
 "menu.exit_fullscreen" = "Afslut fuldskærmsvisning";
 "menu.pip" = "Gå til Picture-in-Picture";
@@ -193,11 +202,13 @@
 "alert.config.duplicate.title" = "Dupliker konfiguration";
 "alert.config.duplicate.message" = "Indtast et navn til den dublikerede konfiguration.";
 "alert.config.empty_name" = "Navnet kan ikke være tomt.";
-"alert.config.name_existing" = "Navnet eksistere allerede.";
+"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Filen eksistere allerede";
-"alert.config.file_existing.message" = "Det burde ikke ske. Vælg OK for at overskrive, Annuller for at vise filen i finder.";
+"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Kan ikke oprette config filen!";
 "alert.config.cannot_write" = "Kan ikke skrive til config filen!";
+"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "Fejl opstået under anvendelse af filtre. Venligst tjek dit parameter format.";
 "alert.add_filter.title" = "Nyt filter";

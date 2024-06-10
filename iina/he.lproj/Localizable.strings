@@ -28,6 +28,9 @@
 "initial.debug.desc" = "בניית ניפוי באגים בדרך כלל אינה מותאמת לטובת ביצועים, ולכן אינה מומלצת לשימוש יומיומי. בניית ניפוי באגים לא תומכת בעדכון אוטומטי.";
 "initial.bug_report" = "דווח באמצעות <a href=\"https://github.com/iina/iina/issues\">בעיות GitHub</a>.";
 
+// Inspector Window
+"inspector.error" = "שגיאה";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "מוריד נתונים… %d%%";
 "main.opening_stream" = "פותח זרם…";
@@ -43,6 +46,7 @@
 "quicksetting.hwdec" = "פענוח חומרה";
 "quicksetting.deinterlace" = "ביטול שזירה";
 "quicksetting.hdr" = "HDR";
+"quicksetting.hide" = "הסתר";
 
 // OSDMessage.swift
 "osd.pause" = "מושהה";
@@ -61,9 +65,13 @@
 "osd.sub_delay.later" = "עיכוב כתוביות: %.2f שניות איחור";
 "osd.sub_delay.earlier" = "עיכוב כתוביות: %.2f שניות הקדמה";
 "osd.subtitle_pos" = "מיקום כתוביות: %.1f";
-"osd.mute" = "השתקה";
-"osd.unmute" = "בטל השתקה";
-"osd.screenshot" = "צילום מסך בוצע";
+"osd.sub_hidden" = "Subtitles Hidden";
+"osd.sub_visible" = "Subtitles Visible";
+"osd.sub_second_hidden" = "Second Subtitles Hidden";
+"osd.sub_second_visible" = "Second Subtitles Visible";
+"osd.mute" = "מושתק";
+"osd.unmute" = "לא מושתק";
+"osd.screenshot" = "בוצע צילום מסך";
 "osd.abloop.a" = "לולאת א-ב: א";
 "osd.abloop.b" = "לולאת א-ב: ב";
 "osd.abloop.clear" = "לולאת א-ב: בוטלה";
@@ -111,7 +119,7 @@
 "preference.logged_in_as" = "מחובר בתור %@";
 "preference.system_media_control" = "השתמש בבקרת המדיה של המערכת";
 
-"preference.key_binding_hint_1" = "כדי לערוך קיצור מקשים בקובץ התצורה הנוכחי, לחץ תחילה על כפתור \"שכפל…\" כדי ליצור עותק.";
+"preference.key_binding_hint_1" = "כדי לערוך קיצור מקשים בקובץ התצורה הנוכחי, לחץ תחילה על כפתור \"שכפול…\" כדי ליצור עותק.";
 "preference.key_binding_hint_2" = "לחץ פעמיים בצד ימין של שורה כדי לערוך את קיצור המקשים.";
 
 "preference.enable_adv_settings" = "אפשר הגדרות מתקדמות";
@@ -124,6 +132,10 @@
 "menu.volume_muted" = "עוצמת שמע: %d (מושתק)";
 "menu.audio_delay" = "עיכוב שמע: %.2f שניות";
 "menu.sub_delay" = "עיכוב כתוביות: %.2f שניות";
+"menu.sub_hide" = "Hide Subtitles";
+"menu.sub_show" = "Show Subtitles";
+"menu.sub_second_hide" = "Hide Second Subtitles";
+"menu.sub_second_show" = "Show Second Subtitles";
 "menu.fullscreen" = "עבור למסך מלא";
 "menu.exit_fullscreen" = "צא ממסך מלא";
 "menu.pip" = "היכנס למצב תמונה בתוך תמונה";
@@ -190,11 +202,13 @@
 "alert.config.duplicate.title" = "תצורה כפולה";
 "alert.config.duplicate.message" = "יש להזין שם עבור קובץ התצורה המשוכפל.";
 "alert.config.empty_name" = "השם לא יכול להיות ריק.";
-"alert.config.name_existing" = "השם כבר קיים.";
+"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "הקובץ כבר קיים";
-"alert.config.file_existing.message" = "This should not happen. Choose OK to overwrite, Cancel to reveal the file in Finder.";
+"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "יצירת קובץ התצורה נכשלה!\n%@";
 "alert.config.cannot_write" = "הכתיבה לקובץ התצורה נכשלה!";
+"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "אירעה שגיאה בעת הגדרת המסננים. אנא בדוק את פורמט הפרמטר שהגדרת.";
 "alert.add_filter.title" = "מסנן חדש";
@@ -261,7 +275,7 @@
 
 "alert.no_video_track" = "אין רצועת וידאו.";
 
-"alert.duplicate_config" = "לא ניתן לערוך ישירות תצורות ברירת מחדל. יש לשכפל את התצורה לפני העריכה.";
+"alert.duplicate_config" = "לא ניתן לערוך ישירות את תצורות ברירת המחדל. יש לשכפל את התצורה לפני העריכה.";
 
 "alert.assrt_register" = "בשל מגבלות מכסות API, מומלץ מאוד להשתמש באסימון API משלך. אסימון ברירת המחדל מיועד רק לשימוש בהדגמה, ואתה עלול להיתקל בשגיאת רשת.";
 "alert.assrt_register.register" = "הירשם עכשיו";

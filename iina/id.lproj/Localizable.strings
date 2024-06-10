@@ -28,6 +28,9 @@
 "initial.debug.desc" = "Bangunan debug biasanya tidak dioptimalkan performanya, sehingga tidak disarankan untuk digunakan sebagai drive harian. Bangunan debug tidak mendukung pembaruan otomatis.";
 "initial.bug_report" = "Laporkan melalui <a href=\"https://github.com/iina/iina/issues\">Masalah GitHub</a>.";
 
+// Inspector Window
+"inspector.error" = "Eror";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Menyangga… %d%%";
 "main.opening_stream" = "Membuka stream…";
@@ -43,6 +46,7 @@
 "quicksetting.hwdec" = "Dekoding perangkat keras";
 "quicksetting.deinterlace" = "Deinterlace";
 "quicksetting.hdr" = "HDR";
+"quicksetting.hide" = "Sembunyikan";
 
 // OSDMessage.swift
 "osd.pause" = "Jeda";
@@ -61,6 +65,10 @@
 "osd.sub_delay.later" = "Penundaan Terjemahan: %.2f dtk lebih cepat";
 "osd.sub_delay.earlier" = "Penundaan Terjemahan: %.2f dtk lebih lambat";
 "osd.subtitle_pos" = "Posisi Terjemahan: %.1f";
+"osd.sub_hidden" = "Subtitles Hidden";
+"osd.sub_visible" = "Subtitles Visible";
+"osd.sub_second_hidden" = "Second Subtitles Hidden";
+"osd.sub_second_visible" = "Second Subtitles Visible";
 "osd.mute" = "Bisukan Suara";
 "osd.unmute" = "Nyalakan Suara";
 "osd.screenshot" = "Tangkapan Layar Berhasil";
@@ -124,6 +132,10 @@
 "menu.volume_muted" = "Volume: %d (Dimatikan)";
 "menu.audio_delay" = "Penundaan Audio: %.2f dtk";
 "menu.sub_delay" = "Penundaan Terjemahan: %.2f dtk";
+"menu.sub_hide" = "Hide Subtitles";
+"menu.sub_show" = "Show Subtitles";
+"menu.sub_second_hide" = "Hide Second Subtitles";
+"menu.sub_second_show" = "Show Second Subtitles";
 "menu.fullscreen" = "Masuk Layar Penuh";
 "menu.exit_fullscreen" = "Keluar dari Layar Penuh";
 "menu.pip" = "Masuk Picture-in-Picture";
@@ -190,11 +202,13 @@
 "alert.config.duplicate.title" = "Duplikat Konfigurasi";
 "alert.config.duplicate.message" = "Masukkan nama untuk duplikasi konfigurasi.";
 "alert.config.empty_name" = "Nama tidak boleh kosong.";
-"alert.config.name_existing" = "Nama ini sudah ada.";
+"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "File Sudah Ada";
-"alert.config.file_existing.message" = "This should not happen. Choose OK to overwrite, Cancel to reveal the file in Finder.";
+"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Tidak dapat membuat file konfigurasi!\n%@";
 "alert.config.cannot_write" = "Tidak dapat menulis pada file konfig!";
+"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "Kesalahan terjadi saat menyetel filter. Mohon cek kembali format parameter Anda.";
 "alert.add_filter.title" = "Filter Baru";

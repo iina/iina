@@ -46,6 +46,7 @@
 "quicksetting.hwdec" = "硬件解码";
 "quicksetting.deinterlace" = "反交错";
 "quicksetting.hdr" = "HDR";
+"quicksetting.hide" = "隐藏";
 
 // OSDMessage.swift
 "osd.pause" = "暂停";
@@ -64,6 +65,10 @@
 "osd.sub_delay.later" = "字幕延迟：延迟 %.2f 秒";
 "osd.sub_delay.earlier" = "字幕延迟：提前 %.2f 秒";
 "osd.subtitle_pos" = "字幕位置：%.1f";
+"osd.sub_hidden" = "Subtitles Hidden";
+"osd.sub_visible" = "Subtitles Visible";
+"osd.sub_second_hidden" = "Second Subtitles Hidden";
+"osd.sub_second_visible" = "Second Subtitles Visible";
 "osd.mute" = "静音";
 "osd.unmute" = "取消静音";
 "osd.screenshot" = "已截图";
@@ -119,7 +124,7 @@
 
 "preference.enable_adv_settings" = "启用高级设置";
 
-"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.force" = "";
 "preference.sub_override_level.strip" = "strip";
 "preference.sub_override_level.yes" = "yes";
 
@@ -127,6 +132,10 @@
 "menu.volume_muted" = "音量：%d （静音）";
 "menu.audio_delay" = "音频延迟: %.2f秒";
 "menu.sub_delay" = "字幕延迟: %.2f秒";
+"menu.sub_hide" = "Hide Subtitles";
+"menu.sub_show" = "Show Subtitles";
+"menu.sub_second_hide" = "Hide Second Subtitles";
+"menu.sub_second_show" = "Show Second Subtitles";
 "menu.fullscreen" = "进入全屏";
 "menu.exit_fullscreen" = "退出全屏";
 "menu.pip" = "进入「画中画」模式";
@@ -193,11 +202,13 @@
 "alert.config.duplicate.title" = "复制快捷键配置";
 "alert.config.duplicate.message" = "请输入复制后的配置文件名。";
 "alert.config.empty_name" = "名称不能为空。";
-"alert.config.name_existing" = "此配置名称已存在。";
+"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "同名文件已存在";
-"alert.config.file_existing.message" = "这不应该发生。选择确定来覆盖，选择取消则在访达中显示文件。";
+"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "无法创建配置文件！\n%@";
 "alert.config.cannot_write" = "无法写入配置文件！";
+"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "设置过滤器时出错。请检查您的参数格式。";
 "alert.add_filter.title" = "添加新滤镜";

@@ -118,6 +118,11 @@ struct Preference {
     static let controlBarToolbarButtons = Key("controlBarToolbarButtons")
 
     static let enableOSD = Key("enableOSD")
+    static let disableOSDFileStartMsg = Key("disableOSDFileStartMsg")
+    static let disableOSDPauseResumeMsgs = Key("disableOSDPauseResumeMsgs")
+    static let disableOSDSeekMsg = Key("disableOSDSeekMsg")
+    static let disableOSDSpeedMsg = Key("disableOSDSpeedMsg")
+
     static let osdAutoHideTimeout = Key("osdAutoHideTimeout")
     static let osdTextSize = Key("osdTextSize")
 
@@ -755,6 +760,10 @@ struct Preference {
     .prefetchPlaylistVideoDuration: true,
     .themeMaterial: Theme.dark.rawValue,
     .enableOSD: true,
+    .disableOSDFileStartMsg: false,
+    .disableOSDPauseResumeMsgs: false,
+    .disableOSDSeekMsg: false,
+    .disableOSDSpeedMsg: false,
     .osdAutoHideTimeout: Float(1),
     .osdTextSize: Float(20),
     .softVolume: 100,

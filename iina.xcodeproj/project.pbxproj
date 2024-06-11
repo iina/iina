@@ -384,6 +384,13 @@
 			remoteGlobalIDString = E3DE8DC91FD8166A0021921C;
 			remoteInfo = "iina-cli";
 		};
+		5180D7782C17DB0D00CC9C1C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84EB1ECE1D2F51D3004FA5A1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E38558862A484A2D0083772D;
+			remoteInfo = "iina-plugin";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -2693,6 +2700,7 @@
 			);
 			dependencies = (
 				497747EE20D287C1004B243A /* PBXTargetDependency */,
+				5180D7792C17DB0D00CC9C1C /* PBXTargetDependency */,
 				49542985216C34950058F680 /* PBXTargetDependency */,
 			);
 			name = iina;
@@ -3157,6 +3165,11 @@
 			isa = PBXTargetDependency;
 			target = E3DE8DC91FD8166A0021921C /* iina-cli */;
 			targetProxy = 497747ED20D287C1004B243A /* PBXContainerItemProxy */;
+		};
+		5180D7792C17DB0D00CC9C1C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E38558862A484A2D0083772D /* iina-plugin */;
+			targetProxy = 5180D7782C17DB0D00CC9C1C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

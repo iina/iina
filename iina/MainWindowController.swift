@@ -1896,7 +1896,7 @@ class MainWindowController: PlayerWindowController {
   ///     timeline indicators should not flip in a right-to-left language. Thus OSD messages referencing a position within the video
   ///     must always use a left to right layout.
   func displayOSD(_ message: OSDMessage, autoHide: Bool = true, forcedTimeout: Float? = nil, accessoryView: NSView? = nil, context: Any? = nil) {
-    guard player.displayOSD && !isShowingPersistentOSD else { return }
+    guard player.displayOSD || message.isAlwaysShown, !isShowingPersistentOSD else { return }
 
     if hideOSDTimer != nil {
       hideOSDTimer!.invalidate()

@@ -835,6 +835,17 @@ class MainWindowController: PlayerWindowController {
 
   @discardableResult
   override func handleKeyBinding(_ keyBinding: KeyMapping) -> Bool {
+    if
+      keyBinding.normalizedMpvKey == "ESC",
+      isShowingPersistentOSD,
+      hideOSDTimer?.isValid != true,
+      let currentEvent = NSApp.currentEvent
+    {
+      if osdStackView.performKeyEquivalent(with: currentEvent) {
+        return true
+      }
+    }
+    
     let success = super.handleKeyBinding(keyBinding)
     if success && keyBinding.action.first! == MPVCommand.screenshot.rawValue {
       player.sendOSD(.screenshot)

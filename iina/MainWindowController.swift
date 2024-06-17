@@ -833,19 +833,22 @@ class MainWindowController: PlayerWindowController {
 
   // MARK: - Mouse / Trackpad events
 
-  @discardableResult
-  override func handleKeyBinding(_ keyBinding: KeyMapping) -> Bool {
-    if
-      keyBinding.normalizedMpvKey == "ESC",
-      isShowingPersistentOSD,
-      hideOSDTimer?.isValid != true,
-      let currentEvent = NSApp.currentEvent
-    {
-      if osdStackView.performKeyEquivalent(with: currentEvent) {
-        return true
+  override func keyDown(with event: NSEvent) {
+    if isShowingPersistentOSD {
+      let keyCode = KeyCodeHelper.mpvKeyCode(from: event)
+      let normalizedKeyCode = KeyCodeHelper.normalizeMpv(keyCode)
+
+      if normalizedKeyCode == "ESC", osdStackView.performKeyEquivalent(with: event) {
+        Logger.log("ESC key was handled by OSD", level: .verbose)
+        return
       }
     }
     
+    super.keyDown(with: event)
+  }
+
+  @discardableResult
+  override func handleKeyBinding(_ keyBinding: KeyMapping) -> Bool {
     let success = super.handleKeyBinding(keyBinding)
     if success && keyBinding.action.first! == MPVCommand.screenshot.rawValue {
       player.sendOSD(.screenshot)

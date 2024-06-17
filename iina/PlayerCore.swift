@@ -895,7 +895,7 @@ class PlayerCore: NSObject {
     guard saveToFile || saveToClipboard else { return }
     log("Screenshot done: saveToFile=\(saveToFile), saveToClipboard=\(saveToClipboard)", level: .verbose)
 
-    guard let imageFolder = mpv.getString(MPVOption.Screenshot.screenshotDirectory) else { return }
+    guard let imageFolder = mpv.getString(MPVOption.Screenshot.screenshotDir) else { return }
     guard let lastScreenshotURL = Utility.getLatestScreenshot(from: imageFolder) else { return }
     guard let image = createImage(lastScreenshotURL) else {
       self.sendOSD(.screenshot)
@@ -1059,10 +1059,10 @@ class PlayerCore: NSObject {
 
   func setVideoAspect(_ aspect: String) {
     if Regex.aspect.matches(aspect) {
-      mpv.setString(MPVProperty.videoAspect, aspect)
+      mpv.setString(MPVOption.Video.videoAspectOverride, aspect)
       info.unsureAspect = aspect
     } else {
-      mpv.setString(MPVProperty.videoAspect, "-1")
+      mpv.setString(MPVOption.Video.videoAspectOverride, "-1")
       // if not a aspect string, set aspect to default, and also the info string.
       info.unsureAspect = "Default"
     }

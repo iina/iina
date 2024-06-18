@@ -134,6 +134,9 @@
                     <buttonCell key="cell" type="square" title="CANCEL" bezelStyle="shadowlessSquare" alignment="center" inset="2" id="pPz-om-Xit">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="systemBold"/>
+                        <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
                     </buttonCell>
                     <connections>
                         <action selector="cancelBtnAction:" target="-2" id="trN-ei-1wo"/>

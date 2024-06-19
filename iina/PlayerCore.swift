@@ -588,15 +588,19 @@ class PlayerCore: NSObject {
     miniPlayer.videoWrapperView.addSubview(videoView, positioned: .below, relativeTo: nil)
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": videoView])
 
-    let (width, height) = videoSizeForDisplay
-    let aspect = (width == 0 || height == 0) ? 1 : CGFloat(width) / CGFloat(height)
+    // if received video size before switching to music mode, hide default album art
+    let width, height: Int
+    if info.vid != 0 {
+      miniPlayer.defaultAlbumArt.isHidden = true
+      (width, height) = videoSizeForDisplay
+    } else {
+      (width, height) = (1, 1)
+    }
+
+    let aspect = CGFloat(width) / CGFloat(height)
     miniPlayer.updateVideoViewAspectConstraint(withAspect: aspect)
     miniPlayer.window?.layoutIfNeeded()
 
-    // if received video size before switching to music mode, hide default album art
-    if info.vid != 0 {
-      miniPlayer.defaultAlbumArt.isHidden = true
-    }
     // in case of video size changed, reset mini player window size if playlist is folded
     if !miniPlayer.isPlaylistVisible {
       miniPlayer.setToInitialWindowSize(display: true, animate: false)

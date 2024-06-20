@@ -2024,8 +2024,8 @@ class PlayerCore: NSObject {
       // May need to show, hide, or update buffering indicator at any time
       useTimer = true
     } else {
-      // Need if fadeable views are visible
-      useTimer = mainWindow.animationState == .shown || mainWindow.animationState == .willShow
+      // Need if fadeable views or OSD are visible
+      useTimer = mainWindow.isUITimerNeeded()
     }
 
     let timeInterval = TimeInterval(DurationDisplayTextField.precision >= 2 ? AppData.syncTimePreciseInterval : AppData.syncTimeInterval)

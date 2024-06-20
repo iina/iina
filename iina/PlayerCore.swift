@@ -868,6 +868,27 @@ class PlayerCore: NSObject {
     return true
   }
 
+  /// Initializes and returns an image object with the contents of the specified URL.
+  ///
+  /// At this time, the normal [NSImage](https://developer.apple.com/documentation/appkit/nsimage/1519907-init)
+  /// initializer will fail to create an image object if the image file was encoded in [JPEG XL](https://jpeg.org/jpegxl/) format.
+  /// In older versions of macOS this will also occur if the image file was encoded in [WebP](https://en.wikipedia.org/wiki/WebP/)
+  /// format. As these are supported formats for screenshots this method will fall back to using FFmpeg to create the `NSImage` if
+  /// the normal initializer fails to return an object.
+  /// - Parameter url: The URL identifying the image.
+  /// - Returns: An initialized `NSImage` object or `nil` if the method cannot create an image representation from the contents
+  ///       of the specified URL.
+  private func createImage(_ url: URL) -> NSImage? {
+    if let image = NSImage(contentsOf: url) {
+      return image
+    }
+    // The following internal property was added to provide a way to disable the FFmpeg image
+    // decoder should a problem be discovered by users running old versions of macOS.
+    guard Preference.bool(for: .enableFFmpegImageDecoder) else { return nil }
+    Logger.log("Using FFmpeg to decode screenshot: \(url)")
+    return FFmpegController.createNSImage(withContentsOf: url)
+  }
+
   func screenshotCallback() {
     let saveToFile = Preference.bool(for: .screenshotSaveToFile)
     let saveToClipboard = Preference.bool(for: .screenshotCopyToClipboard)
@@ -876,7 +897,7 @@ class PlayerCore: NSObject {
 
     guard let imageFolder = mpv.getString(MPVOption.Screenshot.screenshotDirectory) else { return }
     guard let lastScreenshotURL = Utility.getLatestScreenshot(from: imageFolder) else { return }
-    guard let image = NSImage(contentsOf: lastScreenshotURL) else {
+    guard let image = createImage(lastScreenshotURL) else {
       self.sendOSD(.screenshot)
       if !saveToFile {
         try? FileManager.default.removeItem(at: lastScreenshotURL)

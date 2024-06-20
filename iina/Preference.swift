@@ -315,7 +315,7 @@ struct Preference {
 
   // MARK: - Enums
 
-  enum ActionAfterLaunch: Int, InitializingFromKey {
+  enum ActionAfterLaunch: Int, InitializingFromKey, CaseIterable {
     case welcomeWindow = 0
     case openPanel
     case none

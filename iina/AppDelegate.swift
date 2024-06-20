@@ -896,7 +896,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   }
 
   @IBAction func showPreferences(_ sender: AnyObject) {
-    preferenceWindowController.showWindow(self)
+//    preferenceWindowController.showWindow(self)
+    SettingsWindow.default.show()
   }
 
   @IBAction func showVideoFilterWindow(_ sender: AnyObject) {

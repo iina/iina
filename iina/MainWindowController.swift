@@ -264,6 +264,8 @@ class MainWindowController: PlayerWindowController {
   var osdAnimationState: UIAnimationState = .hidden
   var sidebarAnimationState: UIAnimationState = .hidden
 
+  private var osdLastMessage: OSDMessage? = nil
+
   // Sidebar
 
   /** Type of the view embedded in sidebar. */
@@ -1907,31 +1909,10 @@ class MainWindowController: PlayerWindowController {
 
   // MARK: - UI: OSD
 
-  /// Show a message in the on screen display.
-  /// - Parameters:
-  ///   - message: The `OSDMessage` to display.
-  ///   - autoHide: If `true` (the default) the message will be hidden after a timeout.
-  ///   - forcedTimeout: Timeout after which the message will be hidden (overrides user configured timeout).
-  ///   - accessoryView: Custom view to display (if not supplied normal OSD views are used).
-  ///   - context: Additional information associated with the message.
-  /// - Attention: Do not call `displayOSD` directly, call `PlayerCore.sendOSD` instead.
-  /// - Important: As per Apple's [Internationalization and Localization Guide](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPInternational/SupportingRight-To-LeftLanguages/SupportingRight-To-LeftLanguages.html)
-  ///     timeline indicators should not flip in a right-to-left language. Thus OSD messages referencing a position within the video
-  ///     must always use a left to right layout.
-  func displayOSD(_ message: OSDMessage, autoHide: Bool = true, forcedTimeout: Float? = nil, accessoryView: NSView? = nil, context: Any? = nil) {
-    guard player.displayOSD || message.alwaysEnabled, !isShowingPersistentOSD else { return }
-
-    if hideOSDTimer != nil {
-      hideOSDTimer!.invalidate()
-      hideOSDTimer = nil
-    }
-    osdAnimationState = .shown
-
+  private func setOSDViews(fromMessage message: OSDMessage) {
+    osdLastMessage = message
+    
     let (osdString, osdType) = message.message()
-
-    let osdTextSize = Preference.float(for: .osdTextSize)
-    osdLabel.font = NSFont.monospacedDigitSystemFont(ofSize: CGFloat(osdTextSize), weight: .regular)
-    osdAccessoryText.font = NSFont.monospacedDigitSystemFont(ofSize: CGFloat(osdTextSize * 0.5).clamped(to: 11...25), weight: .regular)
     osdLabel.stringValue = osdString
 
     // Most OSD messages are displayed based on the configured language direction.
@@ -1968,6 +1949,38 @@ class MainWindowController: PlayerWindowController {
       osdStackView.setVisibilityPriority(.notVisible, for: osdAccessoryProgress)
       osdAccessoryText.stringValue = try! (try! Template(string: text)).render(osdData)
     }
+  }
+
+  /// Show a message in the on screen display.
+  /// - Parameters:
+  ///   - message: The `OSDMessage` to display.
+  ///   - autoHide: If `true` (the default) the message will be hidden after a timeout.
+  ///   - forcedTimeout: Timeout after which the message will be hidden (overrides user configured timeout).
+  ///   - accessoryView: Custom view to display (if not supplied normal OSD views are used).
+  ///   - context: Additional information associated with the message.
+  /// - Attention: Do not call `displayOSD` directly, call `PlayerCore.sendOSD` instead.
+  /// - Important: As per Apple's [Internationalization and Localization Guide](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPInternational/SupportingRight-To-LeftLanguages/SupportingRight-To-LeftLanguages.html)
+  ///     timeline indicators should not flip in a right-to-left language. Thus OSD messages referencing a position within the video
+  ///     must always use a left to right layout.
+  func displayOSD(_ message: OSDMessage, autoHide: Bool = true, forcedTimeout: Float? = nil, accessoryView: NSView? = nil, context: Any? = nil) {
+    guard player.displayOSD || message.alwaysEnabled, !isShowingPersistentOSD else { return }
+
+    if hideOSDTimer != nil {
+      hideOSDTimer!.invalidate()
+      hideOSDTimer = nil
+    }
+    if osdAnimationState != .shown {
+      osdAnimationState = .shown  /// set this before calling `refreshSyncUITimer()`
+      player.refreshSyncUITimer()
+    } else {
+      osdAnimationState = .shown
+    }
+
+    let osdTextSize = Preference.float(for: .osdTextSize)
+    osdLabel.font = NSFont.monospacedDigitSystemFont(ofSize: CGFloat(osdTextSize), weight: .regular)
+    osdAccessoryText.font = NSFont.monospacedDigitSystemFont(ofSize: CGFloat(osdTextSize * 0.5).clamped(to: 11...25), weight: .regular)
+
+    setOSDViews(fromMessage: message)
 
     osdVisualEffectView.alphaValue = 1
     osdVisualEffectView.isHidden = false
@@ -2033,6 +2046,7 @@ class MainWindowController: PlayerWindowController {
     }
     isShowingPersistentOSD = false
     osdContext = nil
+    player.refreshSyncUITimer()
   }
 
   func updateAdditionalInfo() {
@@ -2671,6 +2685,33 @@ class MainWindowController: PlayerWindowController {
   }
 
   // MARK: - Sync UI with playback
+
+  func isUITimerNeeded() -> Bool {
+    let isShowingFadeableViews = animationState == .shown || animationState == .willShow
+    let isShowingOSD = osdAnimationState == .shown || osdAnimationState == .willShow
+    return isShowingFadeableViews || isShowingOSD
+  }
+
+  override func updatePlayTime(withDuration duration: Bool, andProgressBar: Bool) {
+    super.updatePlayTime(withDuration: duration, andProgressBar: andProgressBar)
+
+    if osdAnimationState == .shown, let osdLastMessage = self.osdLastMessage {
+      let message: OSDMessage
+      switch osdLastMessage {
+      case .pause, .resume:
+        message = osdLastMessage
+      case .seek(_, _):
+        let osdText = (player.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder) + " / " +
+        (player.info.videoDuration?.stringRepresentation ?? Constants.String.videoTimePlaceholder)
+        let percentage = (player.info.videoPosition / player.info.videoDuration) ?? 1
+        message = .seek(osdText, percentage)
+      default:
+        return
+      }
+
+      setOSDViews(fromMessage: message)
+    }
+  }
 
   override func updatePlayButtonState(_ state: NSControl.StateValue) {
     super.updatePlayButtonState(state)

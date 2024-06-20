@@ -46,6 +46,8 @@ struct MPVProperty {
   static let streamEnd = "stream-end"
   /** duration */
   static let duration = "duration"
+  /** duration/full */
+  static let durationFull = "duration/full"
   /** avsync */
   static let avsync = "avsync"
   /** total-avsync-change */
@@ -64,16 +66,26 @@ struct MPVProperty {
   static let percentPos = "percent-pos"
   /** time-pos */
   static let timePos = "time-pos"
+  /** time-pos/full */
+  static let timePosFull = "time-pos/full"
   /** time-start */
   static let timeStart = "time-start"
   /** time-remaining */
   static let timeRemaining = "time-remaining"
+  /** time-remaining/full */
+  static let timeRemainingFull = "time-remaining/full"
   /** audio-pts */
   static let audioPts = "audio-pts"
+  /** audio-pts/full */
+  static let audioPtsFull = "audio-pts/full"
   /** playtime-remaining */
   static let playtimeRemaining = "playtime-remaining"
+  /** playtime-remaining/full */
+  static let playtimeRemainingFull = "playtime-remaining/full"
   /** playback-time */
   static let playbackTime = "playback-time"
+  /** playback-time/full */
+  static let playbackTimeFull = "playback-time/full"
   /** chapter */
   static let chapter = "chapter"
   /** edition */
@@ -116,6 +128,8 @@ struct MPVProperty {
   static let filteredMetadata = "filtered-metadata"
   /** chapter-metadata */
   static let chapterMetadata = "chapter-metadata"
+  /** deinterlace-active */
+  static let deinterlaceActive = "deinterlace-active"
   /** idle-active */
   static let idleActive = "idle-active"
   /** core-idle */
@@ -148,10 +162,6 @@ struct MPVProperty {
   static let aoVolume = "ao-volume"
   /** ao-mute */
   static let aoMute = "ao-mute"
-  /** audio-codec */
-  static let audioCodec = "audio-codec"
-  /** audio-codec-name */
-  static let audioCodecName = "audio-codec-name"
   /** audio-params */
   static let audioParams = "audio-params"
   /** audio-params/format */
@@ -178,10 +188,6 @@ struct MPVProperty {
   static let hwdecCurrent = "hwdec-current"
   /** hwdec-interop */
   static let hwdecInterop = "hwdec-interop"
-  /** video-format */
-  static let videoFormat = "video-format"
-  /** video-codec */
-  static let videoCodec = "video-codec"
   /** width */
   static let width = "width"
   /** height */
@@ -202,10 +208,24 @@ struct MPVProperty {
   static let videoParamsDw = "video-params/dw"
   /** video-params/dh */
   static let videoParamsDh = "video-params/dh"
+  /** video-params/crop-x */
+  static let videoParamsCropX = "video-params/crop-x"
+  /** video-params/crop-y */
+  static let videoParamsCropY = "video-params/crop-y"
+  /** video-params/crop-w */
+  static let videoParamsCropW = "video-params/crop-w"
+  /** video-params/crop-h */
+  static let videoParamsCropH = "video-params/crop-h"
   /** video-params/aspect */
   static let videoParamsAspect = "video-params/aspect"
+  /** video-params/aspect-name */
+  static let videoParamsAspectName = "video-params/aspect-name"
   /** video-params/par */
   static let videoParamsPar = "video-params/par"
+  /** video-params/sar */
+  static let videoParamsSar = "video-params/sar"
+  /** video-params/sar-name */
+  static let videoParamsSarName = "video-params/sar-name"
   /** video-params/colormatrix */
   static let videoParamsColormatrix = "video-params/colormatrix"
   /** video-params/colorlevels */
@@ -226,6 +246,24 @@ struct MPVProperty {
   static let videoParamsStereoIn = "video-params/stereo-in"
   /** video-params/alpha */
   static let videoParamsAlpha = "video-params/alpha"
+  /** video-params/min-luma */
+  static let videoParamsMinLuma = "video-params/min-luma"
+  /** video-params/max-luma */
+  static let videoParamsMaxLuma = "video-params/max-luma"
+  /** video-params/max-cll */
+  static let videoParamsMaxCll = "video-params/max-cll"
+  /** video-params/max-fall */
+  static let videoParamsMaxFall = "video-params/max-fall"
+  /** video-params/scene-max-r */
+  static let videoParamsSceneMaxR = "video-params/scene-max-r"
+  /** video-params/scene-max-g */
+  static let videoParamsSceneMaxG = "video-params/scene-max-g"
+  /** video-params/scene-max-b */
+  static let videoParamsSceneMaxB = "video-params/scene-max-b"
+  /** video-params/max-pq-y */
+  static let videoParamsMaxPqY = "video-params/max-pq-y"
+  /** video-params/avg-pq-y */
+  static let videoParamsAvgPqY = "video-params/avg-pq-y"
   /** dwidth */
   static let dwidth = "dwidth"
   /** dheight */
@@ -234,6 +272,8 @@ struct MPVProperty {
   static let videoDecParams = "video-dec-params"
   /** video-out-params */
   static let videoOutParams = "video-out-params"
+  /** video-target-params */
+  static let videoTargetParams = "video-target-params"
   /** video-frame-info */
   static let videoFrameInfo = "video-frame-info"
   /** video-frame-info/picture-type */
@@ -268,8 +308,6 @@ struct MPVProperty {
   static let displayHeight = "display-height"
   /** display-hidpi-scale */
   static let displayHidpiScale = "display-hidpi-scale"
-  /** video-aspect */
-  static let videoAspect = "video-aspect"
   /** osd-width */
   static let osdWidth = "osd-width"
   /** osd-height */
@@ -294,6 +332,14 @@ struct MPVProperty {
   static let osdDimensionsMl = "osd-dimensions/ml"
   /** osd-dimensions/mr */
   static let osdDimensionsMr = "osd-dimensions/mr"
+  /** term-size */
+  static let termSize = "term-size"
+  /** term-size/w */
+  static let termSizeW = "term-size/w"
+  /** term-size/h */
+  static let termSizeH = "term-size/h"
+  /** window-id */
+  static let windowId = "window-id"
   /** mouse-pos */
   static let mousePos = "mouse-pos"
   /** mouse-pos/x */
@@ -302,6 +348,8 @@ struct MPVProperty {
   static let mousePosY = "mouse-pos/y"
   /** mouse-pos/hover */
   static let mousePosHover = "mouse-pos/hover"
+  /** sub-ass-extradata */
+  static let subAssExtradata = "sub-ass-extradata"
   /** sub-text */
   static let subText = "sub-text"
   /** sub-text-ass */
@@ -326,6 +374,8 @@ struct MPVProperty {
   static let playlistPlayingPos = "playlist-playing-pos"
   /** playlist-count */
   static let playlistCount = "playlist-count"
+  /** playlist-path */
+  static let playlistPath = "playlist-path"
   /** playlist */
   static let playlist = "playlist"
   /** playlistCount1 */
@@ -349,6 +399,10 @@ struct MPVProperty {
   /** playlist/N/id */
   static func playlistNId(_ n: Int) -> String {
     return "playlist/\(n)/id"
+  }
+  /** playlist/N/playlist-path */
+  static func playlistNPlaylistPath(_ n: Int) -> String {
+    return "playlist/\(n)/playlist-path"
   }
   /** track-list */
   static let trackList = "track-list"
@@ -394,6 +448,14 @@ struct MPVProperty {
   static func trackListNCodec(_ n: Int) -> String {
     return "track-list/\(n)/codec"
   }
+  /** track-list/N/codec-desc */
+  static func trackListNCodecDesc(_ n: Int) -> String {
+    return "track-list/\(n)/codec-desc"
+  }
+  /** track-list/N/codec-profile */
+  static func trackListNCodecProfile(_ n: Int) -> String {
+    return "track-list/\(n)/codec-profile"
+  }
   /** track-list/N/external */
   static func trackListNExternal(_ n: Int) -> String {
     return "track-list/\(n)/external"
@@ -426,6 +488,22 @@ struct MPVProperty {
   static func trackListNDemuxH(_ n: Int) -> String {
     return "track-list/\(n)/demux-h"
   }
+  /** track-list/N/demux-crop-x */
+  static func trackListNDemuxCropX(_ n: Int) -> String {
+    return "track-list/\(n)/demux-crop-x"
+  }
+  /** track-list/N/demux-crop-y */
+  static func trackListNDemuxCropY(_ n: Int) -> String {
+    return "track-list/\(n)/demux-crop-y"
+  }
+  /** track-list/N/demux-crop-w */
+  static func trackListNDemuxCropW(_ n: Int) -> String {
+    return "track-list/\(n)/demux-crop-w"
+  }
+  /** track-list/N/demux-crop-h */
+  static func trackListNDemuxCropH(_ n: Int) -> String {
+    return "track-list/\(n)/demux-crop-h"
+  }
   /** track-list/N/demux-channel-count */
   static func trackListNDemuxChannelCount(_ n: Int) -> String {
     return "track-list/\(n)/demux-channel-count"
@@ -454,6 +532,10 @@ struct MPVProperty {
   static func trackListNDemuxPar(_ n: Int) -> String {
     return "track-list/\(n)/demux-par"
   }
+  /** track-list/N/format-name */
+  static func trackListNFormatName(_ n: Int) -> String {
+    return "track-list/\(n)/format-name"
+  }
   /** track-list/N/audio-channels */
   static func trackListNAudioChannels(_ n: Int) -> String {
     return "track-list/\(n)/audio-channels"
@@ -474,7 +556,302 @@ struct MPVProperty {
   static func trackListNReplaygainAlbumGain(_ n: Int) -> String {
     return "track-list/\(n)/replaygain-album-gain"
   }
-  /** current-tracks/...  As per mpv docs, scripts etc. should not use this. */
+  /** current-tracks/audio/id */
+  static let currentTracksAudioId = "current-tracks/audio/id"
+  /** current-tracks/video/id */
+  static let currentTracksVideoId = "current-tracks/video/id"
+  /** current-tracks/sub/id */
+  static let currentTracksSubId = "current-tracks/sub/id"
+  /** current-tracks/sub2/id */
+  static let currentTracksSub2Id = "current-tracks/sub2/id"
+  /** current-tracks/audio/type */
+  static let currentTracksAudioType = "current-tracks/audio/type"
+  /** current-tracks/video/type */
+  static let currentTracksVideoType = "current-tracks/video/type"
+  /** current-tracks/sub/type */
+  static let currentTracksSubType = "current-tracks/sub/type"
+  /** current-tracks/sub2/type */
+  static let currentTracksSub2Type = "current-tracks/sub2/type"
+  /** current-tracks/audio/src-id */
+  static let currentTracksAudioSrcId = "current-tracks/audio/src-id"
+  /** current-tracks/video/src-id */
+  static let currentTracksVideoSrcId = "current-tracks/video/src-id"
+  /** current-tracks/sub/src-id */
+  static let currentTracksSubSrcId = "current-tracks/sub/src-id"
+  /** current-tracks/sub2/src-id */
+  static let currentTracksSub2SrcId = "current-tracks/sub2/src-id"
+  /** current-tracks/audio/title */
+  static let currentTracksAudioTitle = "current-tracks/audio/title"
+  /** current-tracks/video/title */
+  static let currentTracksVideoTitle = "current-tracks/video/title"
+  /** current-tracks/sub/title */
+  static let currentTracksSubTitle = "current-tracks/sub/title"
+  /** current-tracks/sub2/title */
+  static let currentTracksSub2Title = "current-tracks/sub2/title"
+  /** current-tracks/audio/lang */
+  static let currentTracksAudioLang = "current-tracks/audio/lang"
+  /** current-tracks/video/lang */
+  static let currentTracksVideoLang = "current-tracks/video/lang"
+  /** current-tracks/sub/lang */
+  static let currentTracksSubLang = "current-tracks/sub/lang"
+  /** current-tracks/sub2/lang */
+  static let currentTracksSub2Lang = "current-tracks/sub2/lang"
+  /** current-tracks/audio/image */
+  static let currentTracksAudioImage = "current-tracks/audio/image"
+  /** current-tracks/video/image */
+  static let currentTracksVideoImage = "current-tracks/video/image"
+  /** current-tracks/sub/image */
+  static let currentTracksSubImage = "current-tracks/sub/image"
+  /** current-tracks/sub2/image */
+  static let currentTracksSub2Image = "current-tracks/sub2/image"
+  /** current-tracks/audio/albumart */
+  static let currentTracksAudioAlbumart = "current-tracks/audio/albumart"
+  /** current-tracks/video/albumart */
+  static let currentTracksVideoAlbumart = "current-tracks/video/albumart"
+  /** current-tracks/sub/albumart */
+  static let currentTracksSubAlbumart = "current-tracks/sub/albumart"
+  /** current-tracks/sub2/albumart */
+  static let currentTracksSub2Albumart = "current-tracks/sub2/albumart"
+  /** current-tracks/audio/default */
+  static let currentTracksAudioDefault = "current-tracks/audio/default"
+  /** current-tracks/video/default */
+  static let currentTracksVideoDefault = "current-tracks/video/default"
+  /** current-tracks/sub/default */
+  static let currentTracksSubDefault = "current-tracks/sub/default"
+  /** current-tracks/sub2/default */
+  static let currentTracksSub2Default = "current-tracks/sub2/default"
+  /** current-tracks/audio/forced */
+  static let currentTracksAudioForced = "current-tracks/audio/forced"
+  /** current-tracks/video/forced */
+  static let currentTracksVideoForced = "current-tracks/video/forced"
+  /** current-tracks/sub/forced */
+  static let currentTracksSubForced = "current-tracks/sub/forced"
+  /** current-tracks/sub2/forced */
+  static let currentTracksSub2Forced = "current-tracks/sub2/forced"
+  /** current-tracks/audio/codec */
+  static let currentTracksAudioCodec = "current-tracks/audio/codec"
+  /** current-tracks/video/codec */
+  static let currentTracksVideoCodec = "current-tracks/video/codec"
+  /** current-tracks/sub/codec */
+  static let currentTracksSubCodec = "current-tracks/sub/codec"
+  /** current-tracks/sub2/codec */
+  static let currentTracksSub2Codec = "current-tracks/sub2/codec"
+  /** current-tracks/audio/codec-desc */
+  static let currentTracksAudioCodecDesc = "current-tracks/audio/codec-desc"
+  /** current-tracks/video/codec-desc */
+  static let currentTracksVideoCodecDesc = "current-tracks/video/codec-desc"
+  /** current-tracks/sub/codec-desc */
+  static let currentTracksSubCodecDesc = "current-tracks/sub/codec-desc"
+  /** current-tracks/sub2/codec-desc */
+  static let currentTracksSub2CodecDesc = "current-tracks/sub2/codec-desc"
+  /** current-tracks/audio/codec-profile */
+  static let currentTracksAudioCodecProfile = "current-tracks/audio/codec-profile"
+  /** current-tracks/video/codec-profile */
+  static let currentTracksVideoCodecProfile = "current-tracks/video/codec-profile"
+  /** current-tracks/sub/codec-profile */
+  static let currentTracksSubCodecProfile = "current-tracks/sub/codec-profile"
+  /** current-tracks/sub2/codec-profile */
+  static let currentTracksSub2CodecProfile = "current-tracks/sub2/codec-profile"
+  /** current-tracks/audio/external */
+  static let currentTracksAudioExternal = "current-tracks/audio/external"
+  /** current-tracks/video/external */
+  static let currentTracksVideoExternal = "current-tracks/video/external"
+  /** current-tracks/sub/external */
+  static let currentTracksSubExternal = "current-tracks/sub/external"
+  /** current-tracks/sub2/external */
+  static let currentTracksSub2External = "current-tracks/sub2/external"
+  /** current-tracks/audio/external-filename */
+  static let currentTracksAudioExternalFilename = "current-tracks/audio/external-filename"
+  /** current-tracks/video/external-filename */
+  static let currentTracksVideoExternalFilename = "current-tracks/video/external-filename"
+  /** current-tracks/sub/external-filename */
+  static let currentTracksSubExternalFilename = "current-tracks/sub/external-filename"
+  /** current-tracks/sub2/external-filename */
+  static let currentTracksSub2ExternalFilename = "current-tracks/sub2/external-filename"
+  /** current-tracks/audio/selected */
+  static let currentTracksAudioSelected = "current-tracks/audio/selected"
+  /** current-tracks/video/selected */
+  static let currentTracksVideoSelected = "current-tracks/video/selected"
+  /** current-tracks/sub/selected */
+  static let currentTracksSubSelected = "current-tracks/sub/selected"
+  /** current-tracks/sub2/selected */
+  static let currentTracksSub2Selected = "current-tracks/sub2/selected"
+  /** current-tracks/audio/main-selection */
+  static let currentTracksAudioMainSelection = "current-tracks/audio/main-selection"
+  /** current-tracks/video/main-selection */
+  static let currentTracksVideoMainSelection = "current-tracks/video/main-selection"
+  /** current-tracks/sub/main-selection */
+  static let currentTracksSubMainSelection = "current-tracks/sub/main-selection"
+  /** current-tracks/sub2/main-selection */
+  static let currentTracksSub2MainSelection = "current-tracks/sub2/main-selection"
+  /** current-tracks/audio/ff-index */
+  static let currentTracksAudioFfIndex = "current-tracks/audio/ff-index"
+  /** current-tracks/video/ff-index */
+  static let currentTracksVideoFfIndex = "current-tracks/video/ff-index"
+  /** current-tracks/sub/ff-index */
+  static let currentTracksSubFfIndex = "current-tracks/sub/ff-index"
+  /** current-tracks/sub2/ff-index */
+  static let currentTracksSub2FfIndex = "current-tracks/sub2/ff-index"
+  /** current-tracks/audio/decoder-desc */
+  static let currentTracksAudioDecoderDesc = "current-tracks/audio/decoder-desc"
+  /** current-tracks/video/decoder-desc */
+  static let currentTracksVideoDecoderDesc = "current-tracks/video/decoder-desc"
+  /** current-tracks/sub/decoder-desc */
+  static let currentTracksSubDecoderDesc = "current-tracks/sub/decoder-desc"
+  /** current-tracks/sub2/decoder-desc */
+  static let currentTracksSub2DecoderDesc = "current-tracks/sub2/decoder-desc"
+  /** current-tracks/audio/demux-w */
+  static let currentTracksAudioDemuxW = "current-tracks/audio/demux-w"
+  /** current-tracks/video/demux-w */
+  static let currentTracksVideoDemuxW = "current-tracks/video/demux-w"
+  /** current-tracks/sub/demux-w */
+  static let currentTracksSubDemuxW = "current-tracks/sub/demux-w"
+  /** current-tracks/sub2/demux-w */
+  static let currentTracksSub2DemuxW = "current-tracks/sub2/demux-w"
+  /** current-tracks/audio/demux-h */
+  static let currentTracksAudioDemuxH = "current-tracks/audio/demux-h"
+  /** current-tracks/video/demux-h */
+  static let currentTracksVideoDemuxH = "current-tracks/video/demux-h"
+  /** current-tracks/sub/demux-h */
+  static let currentTracksSubDemuxH = "current-tracks/sub/demux-h"
+  /** current-tracks/sub2/demux-h */
+  static let currentTracksSub2DemuxH = "current-tracks/sub2/demux-h"
+  /** current-tracks/audio/demux-crop-x */
+  static let currentTracksAudioDemuxCropX = "current-tracks/audio/demux-crop-x"
+  /** current-tracks/video/demux-crop-x */
+  static let currentTracksVideoDemuxCropX = "current-tracks/video/demux-crop-x"
+  /** current-tracks/sub/demux-crop-x */
+  static let currentTracksSubDemuxCropX = "current-tracks/sub/demux-crop-x"
+  /** current-tracks/sub2/demux-crop-x */
+  static let currentTracksSub2DemuxCropX = "current-tracks/sub2/demux-crop-x"
+  /** current-tracks/audio/demux-crop-y */
+  static let currentTracksAudioDemuxCropY = "current-tracks/audio/demux-crop-y"
+  /** current-tracks/video/demux-crop-y */
+  static let currentTracksVideoDemuxCropY = "current-tracks/video/demux-crop-y"
+  /** current-tracks/sub/demux-crop-y */
+  static let currentTracksSubDemuxCropY = "current-tracks/sub/demux-crop-y"
+  /** current-tracks/sub2/demux-crop-y */
+  static let currentTracksSub2DemuxCropY = "current-tracks/sub2/demux-crop-y"
+  /** current-tracks/audio/demux-crop-w */
+  static let currentTracksAudioDemuxCropW = "current-tracks/audio/demux-crop-w"
+  /** current-tracks/video/demux-crop-w */
+  static let currentTracksVideoDemuxCropW = "current-tracks/video/demux-crop-w"
+  /** current-tracks/sub/demux-crop-w */
+  static let currentTracksSubDemuxCropW = "current-tracks/sub/demux-crop-w"
+  /** current-tracks/sub2/demux-crop-w */
+  static let currentTracksSub2DemuxCropW = "current-tracks/sub2/demux-crop-w"
+  /** current-tracks/audio/demux-crop-h */
+  static let currentTracksAudioDemuxCropH = "current-tracks/audio/demux-crop-h"
+  /** current-tracks/video/demux-crop-h */
+  static let currentTracksVideoDemuxCropH = "current-tracks/video/demux-crop-h"
+  /** current-tracks/sub/demux-crop-h */
+  static let currentTracksSubDemuxCropH = "current-tracks/sub/demux-crop-h"
+  /** current-tracks/sub2/demux-crop-h */
+  static let currentTracksSub2DemuxCropH = "current-tracks/sub2/demux-crop-h"
+  /** current-tracks/audio/demux-channel-count */
+  static let currentTracksAudioDemuxChannelCount = "current-tracks/audio/demux-channel-count"
+  /** current-tracks/video/demux-channel-count */
+  static let currentTracksVideoDemuxChannelCount = "current-tracks/video/demux-channel-count"
+  /** current-tracks/sub/demux-channel-count */
+  static let currentTracksSubDemuxChannelCount = "current-tracks/sub/demux-channel-count"
+  /** current-tracks/sub2/demux-channel-count */
+  static let currentTracksSub2DemuxChannelCount = "current-tracks/sub2/demux-channel-count"
+  /** current-tracks/audio/demux-channels */
+  static let currentTracksAudioDemuxChannels = "current-tracks/audio/demux-channels"
+  /** current-tracks/video/demux-channels */
+  static let currentTracksVideoDemuxChannels = "current-tracks/video/demux-channels"
+  /** current-tracks/sub/demux-channels */
+  static let currentTracksSubDemuxChannels = "current-tracks/sub/demux-channels"
+  /** current-tracks/sub2/demux-channels */
+  static let currentTracksSub2DemuxChannels = "current-tracks/sub2/demux-channels"
+  /** current-tracks/audio/demux-samplerate */
+  static let currentTracksAudioDemuxSamplerate = "current-tracks/audio/demux-samplerate"
+  /** current-tracks/video/demux-samplerate */
+  static let currentTracksVideoDemuxSamplerate = "current-tracks/video/demux-samplerate"
+  /** current-tracks/sub/demux-samplerate */
+  static let currentTracksSubDemuxSamplerate = "current-tracks/sub/demux-samplerate"
+  /** current-tracks/sub2/demux-samplerate */
+  static let currentTracksSub2DemuxSamplerate = "current-tracks/sub2/demux-samplerate"
+  /** current-tracks/audio/demux-fps */
+  static let currentTracksAudioDemuxFps = "current-tracks/audio/demux-fps"
+  /** current-tracks/video/demux-fps */
+  static let currentTracksVideoDemuxFps = "current-tracks/video/demux-fps"
+  /** current-tracks/sub/demux-fps */
+  static let currentTracksSubDemuxFps = "current-tracks/sub/demux-fps"
+  /** current-tracks/sub2/demux-fps */
+  static let currentTracksSub2DemuxFps = "current-tracks/sub2/demux-fps"
+  /** current-tracks/audio/demux-bitrate */
+  static let currentTracksAudioDemuxBitrate = "current-tracks/audio/demux-bitrate"
+  /** current-tracks/video/demux-bitrate */
+  static let currentTracksVideoDemuxBitrate = "current-tracks/video/demux-bitrate"
+  /** current-tracks/sub/demux-bitrate */
+  static let currentTracksSubDemuxBitrate = "current-tracks/sub/demux-bitrate"
+  /** current-tracks/sub2/demux-bitrate */
+  static let currentTracksSub2DemuxBitrate = "current-tracks/sub2/demux-bitrate"
+  /** current-tracks/audio/demux-rotation */
+  static let currentTracksAudioDemuxRotation = "current-tracks/audio/demux-rotation"
+  /** current-tracks/video/demux-rotation */
+  static let currentTracksVideoDemuxRotation = "current-tracks/video/demux-rotation"
+  /** current-tracks/sub/demux-rotation */
+  static let currentTracksSubDemuxRotation = "current-tracks/sub/demux-rotation"
+  /** current-tracks/sub2/demux-rotation */
+  static let currentTracksSub2DemuxRotation = "current-tracks/sub2/demux-rotation"
+  /** current-tracks/audio/demux-par */
+  static let currentTracksAudioDemuxPar = "current-tracks/audio/demux-par"
+  /** current-tracks/video/demux-par */
+  static let currentTracksVideoDemuxPar = "current-tracks/video/demux-par"
+  /** current-tracks/sub/demux-par */
+  static let currentTracksSubDemuxPar = "current-tracks/sub/demux-par"
+  /** current-tracks/sub2/demux-par */
+  static let currentTracksSub2DemuxPar = "current-tracks/sub2/demux-par"
+  /** current-tracks/audio/format-name */
+  static let currentTracksAudioFormatName = "current-tracks/audio/format-name"
+  /** current-tracks/video/format-name */
+  static let currentTracksVideoFormatName = "current-tracks/video/format-name"
+  /** current-tracks/sub/format-name */
+  static let currentTracksSubFormatName = "current-tracks/sub/format-name"
+  /** current-tracks/sub2/format-name */
+  static let currentTracksSub2FormatName = "current-tracks/sub2/format-name"
+  /** current-tracks/audio/audio-channels */
+  static let currentTracksAudioAudioChannels = "current-tracks/audio/audio-channels"
+  /** current-tracks/video/audio-channels */
+  static let currentTracksVideoAudioChannels = "current-tracks/video/audio-channels"
+  /** current-tracks/sub/audio-channels */
+  static let currentTracksSubAudioChannels = "current-tracks/sub/audio-channels"
+  /** current-tracks/sub2/audio-channels */
+  static let currentTracksSub2AudioChannels = "current-tracks/sub2/audio-channels"
+  /** current-tracks/audio/replaygain-track-peak */
+  static let currentTracksAudioReplaygainTrackPeak = "current-tracks/audio/replaygain-track-peak"
+  /** current-tracks/video/replaygain-track-peak */
+  static let currentTracksVideoReplaygainTrackPeak = "current-tracks/video/replaygain-track-peak"
+  /** current-tracks/sub/replaygain-track-peak */
+  static let currentTracksSubReplaygainTrackPeak = "current-tracks/sub/replaygain-track-peak"
+  /** current-tracks/sub2/replaygain-track-peak */
+  static let currentTracksSub2ReplaygainTrackPeak = "current-tracks/sub2/replaygain-track-peak"
+  /** current-tracks/audio/replaygain-track-gain */
+  static let currentTracksAudioReplaygainTrackGain = "current-tracks/audio/replaygain-track-gain"
+  /** current-tracks/video/replaygain-track-gain */
+  static let currentTracksVideoReplaygainTrackGain = "current-tracks/video/replaygain-track-gain"
+  /** current-tracks/sub/replaygain-track-gain */
+  static let currentTracksSubReplaygainTrackGain = "current-tracks/sub/replaygain-track-gain"
+  /** current-tracks/sub2/replaygain-track-gain */
+  static let currentTracksSub2ReplaygainTrackGain = "current-tracks/sub2/replaygain-track-gain"
+  /** current-tracks/audio/replaygain-album-peak */
+  static let currentTracksAudioReplaygainAlbumPeak = "current-tracks/audio/replaygain-album-peak"
+  /** current-tracks/video/replaygain-album-peak */
+  static let currentTracksVideoReplaygainAlbumPeak = "current-tracks/video/replaygain-album-peak"
+  /** current-tracks/sub/replaygain-album-peak */
+  static let currentTracksSubReplaygainAlbumPeak = "current-tracks/sub/replaygain-album-peak"
+  /** current-tracks/sub2/replaygain-album-peak */
+  static let currentTracksSub2ReplaygainAlbumPeak = "current-tracks/sub2/replaygain-album-peak"
+  /** current-tracks/audio/replaygain-album-gain */
+  static let currentTracksAudioReplaygainAlbumGain = "current-tracks/audio/replaygain-album-gain"
+  /** current-tracks/video/replaygain-album-gain */
+  static let currentTracksVideoReplaygainAlbumGain = "current-tracks/video/replaygain-album-gain"
+  /** current-tracks/sub/replaygain-album-gain */
+  static let currentTracksSubReplaygainAlbumGain = "current-tracks/sub/replaygain-album-gain"
+  /** current-tracks/sub2/replaygain-album-gain */
+  static let currentTracksSub2ReplaygainAlbumGain = "current-tracks/sub2/replaygain-album-gain"
   /** chapter-list */
   static let chapterList = "chapter-list"
   /** chapter-list/count */
@@ -553,10 +930,14 @@ struct MPVProperty {
   static let audioDevice = "audio-device"
   /** current-vo */
   static let currentVo = "current-vo"
+  /** current-gpu-context */
+  static let currentGpuContext = "current-gpu-context"
   /** current-ao */
   static let currentAo = "current-ao"
-  /** shared-script-properties */
-  static let sharedScriptProperties = "shared-script-properties"
+  /** user-data */
+  static let userData = "user-data"
+  /** menu-data */
+  static let menuData = "menu-data"
   /** working-directory */
   static let workingDirectory = "working-directory"
   /** protocol-list */
@@ -577,6 +958,8 @@ struct MPVProperty {
   static let ffmpegVersion = "ffmpeg-version"
   /** libass-version */
   static let libassVersion = "libass-version"
+  /** platform */
+  static let platform = "platform"
   /** options/<name> */
   static func options(_ name: String) -> String {
     return "options/\(name)"

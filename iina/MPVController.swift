@@ -278,9 +278,9 @@ not applying FFmpeg 9599 workaround
         Utility.screenshotCacheURL.path
     }
 
-    setUserOption(PK.screenshotFolder, type: .other, forName: MPVOption.Screenshot.screenshotDirectory,
+    setUserOption(PK.screenshotFolder, type: .other, forName: MPVOption.Screenshot.screenshotDir,
                   level: .verbose, transformer: setScreenshotPath)
-    setUserOption(PK.screenshotSaveToFile, type: .other, forName: MPVOption.Screenshot.screenshotDirectory,
+    setUserOption(PK.screenshotSaveToFile, type: .other, forName: MPVOption.Screenshot.screenshotDir,
                   level: .verbose, transformer: setScreenshotPath)
 
     setUserOption(PK.screenshotFormat, type: .other, forName: MPVOption.Screenshot.screenshotFormat,

@@ -299,10 +299,13 @@ struct Preference {
     /** Alerts */
     static let suppressCannotPreventDisplaySleep = Key("suppressCannotPreventDisplaySleep")
 
+    /** Internal */
     static let iinaEnablePluginSystem = Key("iinaEnablePluginSystem")
 
     /** Workaround for issue [#4688](https://github.com/iina/iina/issues/4688) */
     static let recentDocuments = Key("recentDocuments")
+
+    static let enableFFmpegImageDecoder = Key("enableFFmpegImageDecoder")
   }
 
   // MARK: - Enums
@@ -544,10 +547,8 @@ struct Preference {
     case png = 0
     case jpg
     case jpeg
-    case ppm
-    case pgm
-    case pgmyuv
-    case tga
+    case webp
+    case jxl
 
     static var defaultValue = ScreenshotFormat.png
 
@@ -561,10 +562,8 @@ struct Preference {
         case .png: return "png"
         case .jpg: return "jpg"
         case .jpeg: return "jpeg"
-        case .ppm: return "ppm"
-        case .pgm: return "pgm"
-        case .pgmyuv: return "pgmyuv"
-        case .tga: return "tga"
+        case .webp: return "webp"
+        case .jxl: return "jxl"
         }
       }
     }
@@ -911,7 +910,9 @@ struct Preference {
 
     .suppressCannotPreventDisplaySleep: false,
 
-    .recentDocuments: [Any]()
+    .recentDocuments: [Any](),
+
+    .enableFFmpegImageDecoder: true
   ]
 
 

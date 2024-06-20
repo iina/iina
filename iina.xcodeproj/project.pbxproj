@@ -21,6 +21,7 @@
 		513A4FFA29B53F8100A8EA7D /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513A4FF929B53F8100A8EA7D /* Atomic.swift */; };
 		515B5E5A2A579903001FCD49 /* iina-plugin in Copy Executables */ = {isa = PBXBuildFile; fileRef = E38558872A484A2D0083772D /* iina-plugin */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5196819A29EC963F00B05D55 /* CoreDisplay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5196819929EC963F00B05D55 /* CoreDisplay.framework */; };
+		51854CDA2A1C489300C40B78 /* FFmpegLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51854CD92A1C489300C40B78 /* FFmpegLogger.swift */; };
 		519872FF26879B9B00F84BCC /* AccessibilityPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519872FE26879B9B00F84BCC /* AccessibilityPreferences.swift */; };
 		51AC1CAB2A9FBF3700DF7079 /* OpenSubClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51AC1CAA2A9FBF3700DF7079 /* OpenSubClient.swift */; };
 		51C1BA3A291CA76700C1208A /* InfoDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C1BA39291CA76700C1208A /* InfoDictionary.swift */; };
@@ -1023,6 +1024,7 @@
 		51626CB029F1CECD0000CCC9 /* version_major.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version_major.h; sourceTree = "<group>"; };
 		51626CBA29F1CEFB0000CCC9 /* version_major.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version_major.h; sourceTree = "<group>"; };
 		5196819929EC963F00B05D55 /* CoreDisplay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreDisplay.framework; path = /System/Library/Frameworks/CoreDisplay.framework; sourceTree = "<group>"; };
+		51854CD92A1C489300C40B78 /* FFmpegLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFmpegLogger.swift; sourceTree = "<group>"; };
 		519872FE26879B9B00F84BCC /* AccessibilityPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityPreferences.swift; sourceTree = "<group>"; };
 		51A0F0F629FA2C8E000130CF /* Beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Beta.xcconfig; sourceTree = "<group>"; };
 		51AC1CAA2A9FBF3700DF7079 /* OpenSubClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSubClient.swift; sourceTree = "<group>"; };
@@ -2306,6 +2308,7 @@
 				84A886E21E24F2D3008755BB /* Sub */,
 				8497A4831D2FF573005F504F /* iina-Bridging-Header.h */,
 				513A4FF929B53F8100A8EA7D /* Atomic.swift */,
+				51854CD92A1C489300C40B78 /* FFmpegLogger.swift */,
 				84A0BA9A1D2FAB4100BC8DA1 /* Parameter.swift */,
 				84EB1F061D2F5E76004FA5A1 /* Utility.swift */,
 				8461C52F1D462488006E91FF /* VideoTime.swift */,
@@ -2975,6 +2978,7 @@
 				84F5D4951E44D5230060A838 /* KeyBindingCriterion.swift in Sources */,
 				846121BD1F35FCA500ABB39C /* DraggingDetect.swift in Sources */,
 				84A886EC1E2573A5008755BB /* JustExtension.swift in Sources */,
+				51854CDA2A1C489300C40B78 /* FFmpegLogger.swift in Sources */,
 				84D0FB811F5E5A4000C6A6A7 /* CropBoxViewController.swift in Sources */,
 				84D377631D6B66DE007F7396 /* MPVPlaylistItem.swift in Sources */,
 				E3ECC89E1FE9A6D900BED8C7 /* GeometryDef.swift in Sources */,

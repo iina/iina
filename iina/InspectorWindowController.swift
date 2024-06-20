@@ -172,13 +172,13 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
           MPVProperty.fileFormat: self.fileFormatField,
           MPVProperty.chapters: self.chaptersField,
           MPVProperty.editions: self.editionsField,
-
-          MPVProperty.videoFormat: self.vformatField,
-          MPVProperty.videoCodec: self.vcodecField,
+          // in mpv 0.38, video-codec-name is an alias of current-tracks/video/codec, etc
+          MPVProperty.currentTracksVideoCodec: self.vformatField,
+          MPVProperty.currentTracksVideoCodecDesc: self.vcodecField,
           MPVProperty.hwdecCurrent: self.vdecoderField,
           MPVProperty.containerFps: self.vfpsField,
           MPVProperty.currentVo: self.voField,
-          MPVProperty.audioCodec: self.acodecField,
+          MPVProperty.currentTracksAudioCodecDesc: self.acodecField,
           MPVProperty.currentAo: self.aoField,
           MPVProperty.audioParamsFormat: self.aformatField,
           MPVProperty.audioParamsChannels: self.achannelsField,

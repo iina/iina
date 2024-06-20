@@ -103,7 +103,7 @@ extern "C" {
  *      In addition, you were required to call all mpv_render*() API functions
  *      from the same thread on which mpv_render_context_create() was originally
  *      run (for the same the mpv_render_context). Not honoring it led to UB
- *      (deadlocks, use of invalid pthread_t handles), even if you moved your GL
+ *      (deadlocks, use of invalid mp_thread handles), even if you moved your GL
  *      context to a different thread correctly.
  *      These problems were addressed in API version 1.105 (mpv 0.30.0).
  *
@@ -730,6 +730,27 @@ MPV_EXPORT void mpv_render_context_report_swap(mpv_render_context *ctx);
  *            a valid pointer anymore. NULL is also allowed and does nothing.
  */
 MPV_EXPORT void mpv_render_context_free(mpv_render_context *ctx);
+
+#ifdef MPV_CPLUGIN_DYNAMIC_SYM
+
+MPV_DEFINE_SYM_PTR(mpv_render_context_create)
+#define mpv_render_context_create pfn_mpv_render_context_create
+MPV_DEFINE_SYM_PTR(mpv_render_context_set_parameter)
+#define mpv_render_context_set_parameter pfn_mpv_render_context_set_parameter
+MPV_DEFINE_SYM_PTR(mpv_render_context_get_info)
+#define mpv_render_context_get_info pfn_mpv_render_context_get_info
+MPV_DEFINE_SYM_PTR(mpv_render_context_set_update_callback)
+#define mpv_render_context_set_update_callback pfn_mpv_render_context_set_update_callback
+MPV_DEFINE_SYM_PTR(mpv_render_context_update)
+#define mpv_render_context_update pfn_mpv_render_context_update
+MPV_DEFINE_SYM_PTR(mpv_render_context_render)
+#define mpv_render_context_render pfn_mpv_render_context_render
+MPV_DEFINE_SYM_PTR(mpv_render_context_report_swap)
+#define mpv_render_context_report_swap pfn_mpv_render_context_report_swap
+MPV_DEFINE_SYM_PTR(mpv_render_context_free)
+#define mpv_render_context_free pfn_mpv_render_context_free
+
+#endif
 
 #ifdef __cplusplus
 }

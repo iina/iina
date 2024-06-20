@@ -31,6 +31,8 @@ struct MPVCommand: RawRepresentable {
   static let frameBackStep = MPVCommand("frame-back-step")
   /** set <name> <value> */
   static let set = MPVCommand("set")
+  /** del <name> */
+  static let del = MPVCommand("del")
   /** add <name> [<value>] */
   static let add = MPVCommand("add")
   /** cycle <name> [<value>] */
@@ -45,11 +47,15 @@ struct MPVCommand: RawRepresentable {
   static let playlistNext = MPVCommand("playlist-next")
   /** playlist-prev <flags> */
   static let playlistPrev = MPVCommand("playlist-prev")
+  /** playlist-next-playlist */
+  static let playlistNextPlaylist = MPVCommand("playlist-next-playlist")
+  /** playlist-prev-playlist */
+  static let playlistPrevPlaylist = MPVCommand("playlist-prev-playlist")
   /** playlist-play-index <integer|current|none> */
   static let playlistPlayIndex = MPVCommand("playlist-play-index")
-  /** loadfile <url> [<flags> [<options>]] */
+  /** loadfile <url> [<flags> [<index> [<options>]]] */
   static let loadfile = MPVCommand("loadfile")
-  /** loadlist <url> [<flags>] */
+  /** loadlist <url> [<flags> [<index>]] */
   static let loadlist = MPVCommand("loadlist")
   /** playlist-clear */
   static let playlistClear = MPVCommand("playlist-clear")
@@ -97,7 +103,7 @@ struct MPVCommand: RawRepresentable {
   static let stop = MPVCommand("stop")
   /** mouse <x> <y> [<button> [<mode>]] */
   static let mouse = MPVCommand("mouse")
-  /** keypress <name> */
+  /** keypress <name> [<scale>] */
   static let keypress = MPVCommand("keypress")
   /** keydown <name> */
   static let keydown = MPVCommand("keydown")
@@ -119,6 +125,8 @@ struct MPVCommand: RawRepresentable {
   static let videoReload = MPVCommand("video-reload")
   /** rescan-external-files [<mode>] */
   static let rescanExternalFiles = MPVCommand("rescan-external-files")
+  /** context-menu */
+  static let contextMenu = MPVCommand("context-menu")
   /** af <operation> <value> */
   static let af = MPVCommand("af")
   /** vf <operation> <value> */
@@ -131,12 +139,14 @@ struct MPVCommand: RawRepresentable {
   static let disableSection = MPVCommand("disable-section")
   /** define-section <name> <contents> [<flags>] */
   static let defineSection = MPVCommand("define-section")
-  /** overlay-add <id> <x> <y> <file> <offset> <fmt> <w> <h> <stride> */
+  /** overlay-add <id> <x> <y> <file> <offset> <fmt> <w> <h> <stride> <dw> <dh> */
   static let overlayAdd = MPVCommand("overlay-add")
   /** overlay-remove <id> */
   static let overlayRemove = MPVCommand("overlay-remove")
   /** osd-overlay */
   static let osdOverlay = MPVCommand("osd-overlay")
+  /** escape-ass <text> */
+  static let escapeAss = MPVCommand("escape-ass")
   /** script-message [<arg1> [<arg2> [...]]] */
   static let scriptMessage = MPVCommand("script-message")
   /** script-message-to <target> [<arg1> [<arg2> [...]]] */
@@ -149,12 +159,16 @@ struct MPVCommand: RawRepresentable {
   static let dropBuffers = MPVCommand("drop-buffers")
   /** screenshot-raw [<flags>] */
   static let screenshotRaw = MPVCommand("screenshot-raw")
-  /** vf-command <label> <command> <argument> */
+  /** vf-command <label> <command> <argument> [<target>] */
   static let vfCommand = MPVCommand("vf-command")
-  /** af-command <label> <command> <argument> */
+  /** af-command <label> <command> <argument> [<target>] */
   static let afCommand = MPVCommand("af-command")
   /** apply-profile <name> [<mode>] */
   static let applyProfile = MPVCommand("apply-profile")
+  /** load-config-file <filename> */
+  static let loadConfigFile = MPVCommand("load-config-file")
+  /** load-input-conf <filename> */
+  static let loadInputConf = MPVCommand("load-input-conf")
   /** load-script <filename> */
   static let loadScript = MPVCommand("load-script")
   /** change-list <name> <operation> <value> */
@@ -165,4 +179,6 @@ struct MPVCommand: RawRepresentable {
   static let abLoopDumpCache = MPVCommand("ab-loop-dump-cache")
   /** ab-loop-align-cache */
   static let abLoopAlignCache = MPVCommand("ab-loop-align-cache")
+  /** begin-vo-dragging */
+  static let beginVoDragging = MPVCommand("begin-vo-dragging")
 }

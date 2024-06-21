@@ -18,7 +18,7 @@ fileprivate let KeyDuration = "IINAPHDuration"
 /// An entry in the playback history file.
 /// - Important: This class conforms to [NSSecureCoding](https://developer.apple.com/documentation/foundation/nssecurecoding).
 ///     When making changes be certain the requirements for secure coding are not violated by the changes.
-class PlaybackHistory: NSObject, NSCoding, NSSecureCoding {
+class PlaybackHistory: NSObject, NSSecureCoding {
 
   /// Indicate this class supports secure coding.
   static var supportsSecureCoding: Bool { true }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22690"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22505"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -130,6 +130,9 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="N0Z-h7-JSg"/>
+                            <menuItem title="Show Current File in Finder" id="che-dy-QUU">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
                             <menuItem title="Delete Current File" id="npH-8B-XA4">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
@@ -781,6 +784,7 @@ CA
                 <outlet property="resetAudioDelay" destination="H3d-jR-YCr" id="Qx9-n3-F90"/>
                 <outlet property="resetSubDelay" destination="SLr-6g-Mgh" id="8oW-hm-TNq"/>
                 <outlet property="resetTextSize" destination="P1a-ot-P31" id="fJk-GP-GBM"/>
+                <outlet property="showCurrentFileInFinder" destination="che-dy-QUU" id="p1H-Xj-dbg"/>
                 <outlet property="rotationMenu" destination="5xN-ZB-VLI" id="YGx-Ae-oMp"/>
                 <outlet property="saveDownloadedSub" destination="9zk-co-roT" id="lGr-mb-oHw"/>
                 <outlet property="savePlaylist" destination="Mjr-lL-oEt" id="ftc-bn-4Qi"/>

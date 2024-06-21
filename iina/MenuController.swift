@@ -86,6 +86,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var openURL: NSMenuItem!
   @IBOutlet weak var openURLAlternative: NSMenuItem!
   @IBOutlet weak var savePlaylist: NSMenuItem!
+  @IBOutlet weak var showCurrentFileInFinder: NSMenuItem!
   @IBOutlet weak var deleteCurrentFile: NSMenuItem!
   @IBOutlet weak var newWindow: NSMenuItem!
   @IBOutlet weak var newWindowSeparator: NSMenuItem!
@@ -221,6 +222,7 @@ class MenuController: NSObject, NSMenuDelegate {
     stringForOpenURLAlternative = openURLAlternative.title
 
     savePlaylist.action = #selector(MainMenuActionHandler.menuSavePlaylist(_:))
+    showCurrentFileInFinder.action = #selector(MainMenuActionHandler.menuShowCurrentFileInFinder(_:))
     deleteCurrentFile.action = #selector(MainMenuActionHandler.menuDeleteCurrentFile(_:))
 
     if Preference.bool(for: .enableCmdN) {
@@ -826,6 +828,7 @@ class MenuController: NSObject, NSMenuDelegate {
 
   func updateKeyEquivalentsFrom(_ keyBindings: [KeyMapping]) {
     var settings: [(NSMenuItem, Bool, [String], Bool, ClosedRange<Double>?, String?)] = [
+      (showCurrentFileInFinder, true, ["show-current-file-in-finder"], false, nil, nil),
       (deleteCurrentFile, true, ["delete-current-file"], false, nil, nil),
       (savePlaylist, true, ["save-playlist"], false, nil, nil),
       (quickSettingsVideo, true, ["video-panel"], false, nil, nil),

@@ -634,6 +634,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       menuActionHandler.menuToggleMirror(.dummy)
     case .saveCurrentPlaylist:
       menuActionHandler.menuSavePlaylist(.dummy)
+    case .showCurrentFileInFinder:
+      menuActionHandler.menuShowCurrentFileInFinder(.dummy)
     case .deleteCurrentFile:
       menuActionHandler.menuDeleteCurrentFile(.dummy)
     case .findOnlineSubs:

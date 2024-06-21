@@ -9,7 +9,7 @@
 import Cocoa
 
 
-class MainMenuActionHandler: NSResponder {
+class MainMenuActionHandler: NSResponder, NSMenuItemValidation {
 
   unowned var player: PlayerCore
 
@@ -466,6 +466,16 @@ extension MainMenuActionHandler {
     }
   }
 
+  func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+    switch menuItem.action {
+    case #selector(menuShowCurrentFileInFinder(_:)):
+      return player.info.currentURL != nil && !player.info.isNetworkResource
+    default:
+      break
+    }
+    return menuItem.isEnabled
+  }
+  
   // MARK: - Plugin
 
   @objc func reloadAllPlugins(_ sender: NSMenuItem) {

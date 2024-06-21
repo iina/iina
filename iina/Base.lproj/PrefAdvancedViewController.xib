@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22690"/>
+        <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -194,7 +195,7 @@
                         <rect key="frame" x="1" y="1" width="478" height="171"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" headerView="wiq-g9-ouS" id="LPs-2B-Pt0">
+                            <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" headerView="wiq-g9-ouS" id="LPs-2B-Pt0">
                                 <rect key="frame" x="0.0" y="0.0" width="478" height="148"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
@@ -256,36 +257,36 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <box boxType="custom" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="1NU-Lr-cuR">
+                <box boxType="custom" borderType="line" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="1NU-Lr-cuR">
                     <rect key="frame" x="0.0" y="72" width="480" height="22"/>
                     <view key="contentView" id="HB1-1I-BjW">
                         <rect key="frame" x="1" y="1" width="478" height="20"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="RY9-rr-eGr">
-                                <rect key="frame" x="0.0" y="-2" width="20" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="XfO-xd-O4d"/>
-                                    <constraint firstAttribute="width" secondItem="RY9-rr-eGr" secondAttribute="height" multiplier="1:1" id="zHQ-Qh-S3o"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="-1.5" width="20.5" height="24"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSAddTemplate" imagePosition="only" alignment="center" inset="2" id="un3-1k-6jk">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="XfO-xd-O4d"/>
+                                    <constraint firstAttribute="width" secondItem="RY9-rr-eGr" secondAttribute="height" multiplier="1:1" id="zHQ-Qh-S3o"/>
+                                </constraints>
                                 <connections>
                                     <action selector="addOptionBtnAction:" target="-2" id="NIn-fH-EeK"/>
                                     <binding destination="nyg-fH-Pug" name="enabled" keyPath="values.enableAdvancedSettings" id="xWE-hY-lvV"/>
                                 </connections>
                             </button>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="EU2-5a-Lpj">
-                                <rect key="frame" x="20" y="3" width="20" height="15"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="EU2-5a-Lpj" secondAttribute="height" multiplier="1:1" id="Rtd-NO-VuP"/>
-                                </constraints>
+                                <rect key="frame" x="20" y="3" width="20.5" height="15"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRemoveTemplate" imagePosition="only" alignment="center" inset="2" id="fPD-uF-WvG">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="EU2-5a-Lpj" secondAttribute="height" multiplier="1:1" id="Rtd-NO-VuP"/>
+                                </constraints>
                                 <connections>
                                     <action selector="removeOptionBtnAction:" target="-2" id="5ff-xC-dEc"/>
                                     <binding destination="nyg-fH-Pug" name="enabled" keyPath="values.enableAdvancedSettings" id="LaY-r1-ff3"/>
@@ -301,18 +302,18 @@
                             <constraint firstAttribute="bottom" secondItem="EU2-5a-Lpj" secondAttribute="bottom" id="hjJ-mb-hIo"/>
                         </constraints>
                     </view>
-                    <color key="borderColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                    <color key="borderColor" name="separatorColor" catalog="System" colorSpace="catalog"/>
                     <color key="fillColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                 </box>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="Gf8-9e-wu7">
                     <rect key="frame" x="-1" y="36" width="153" height="16"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="14" id="nel-hG-EmW"/>
-                    </constraints>
                     <buttonCell key="cell" type="check" title="Use config directory:" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="ehL-8Y-G8h">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="nel-hG-EmW"/>
+                    </constraints>
                     <connections>
                         <binding destination="nyg-fH-Pug" name="enabled" keyPath="values.enableAdvancedSettings" id="Tkk-E5-xQi"/>
                         <binding destination="nyg-fH-Pug" name="value" keyPath="values.useUserDefinedConfDir" id="RwC-LQ-wlP"/>
@@ -405,7 +406,7 @@
         </customView>
     </objects>
     <resources>
-        <image name="NSAddTemplate" width="18" height="16"/>
-        <image name="NSRemoveTemplate" width="18" height="4"/>
+        <image name="NSAddTemplate" width="18" height="17"/>
+        <image name="NSRemoveTemplate" width="18" height="5"/>
     </resources>
 </document>

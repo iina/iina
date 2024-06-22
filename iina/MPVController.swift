@@ -999,8 +999,7 @@ not applying FFmpeg 9599 workaround
       let userData = event.pointee.reply_userdata
       let hookEvent = event.pointee.data.bindMemory(to: mpv_event_hook.self, capacity: 1).pointee
       let hookID = hookEvent.id
-      let hook = $hooks.withLock { $0[userData] }
-      guard let hook = hook else { break }
+      guard let hook = $hooks.withLock({ $0[userData] }) else { break }
       hook.call {
         mpv_hook_continue(self.mpv, hookID)
       }
@@ -1160,9 +1159,7 @@ not applying FFmpeg 9599 workaround
       fallthrough;
 
     case MPVProperty.videoParamsGamma:
-      if #available(macOS 10.15, *) {
-        DispatchQueue.main.async { self.player.refreshEdrMode() }
-      }
+      DispatchQueue.main.async { self.player.refreshEdrMode() }
 
     case MPVOption.TrackSelection.vid:
       DispatchQueue.main.async { self.player.vidChanged() }
@@ -1202,12 +1199,7 @@ not applying FFmpeg 9599 workaround
       }
 
     case MPVProperty.chapter:
-      DispatchQueue.main.async { [self] in
-        player.info.chapter = Int(getInt(MPVProperty.chapter))
-        player.syncUI(.time)
-        player.syncUI(.chapterList)
-        player.postNotification(.iinaMediaTitleChanged)
-      }
+      DispatchQueue.main.async { self.player.chapterChanged() }
 
     case MPVOption.PlaybackControl.speed:
       guard let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee else {
@@ -1413,31 +1405,13 @@ not applying FFmpeg 9599 workaround
       DispatchQueue.main.async { self.player.afChanged() }
 
     case MPVOption.Window.fullscreen:
-      DispatchQueue.main.async { [self] in
-        guard player.mainWindow.loaded else { return }
-        let fs = getFlag(MPVOption.Window.fullscreen)
-        if fs != player.mainWindow.fsState.isFullscreen {
-          player.mainWindow.toggleWindowFullScreen()
-        }
-      }
+      DispatchQueue.main.async { self.player.fullscreenChanged() }
 
     case MPVOption.Window.ontop:
-      DispatchQueue.main.async { [self] in
-        guard player.mainWindow.loaded else { return }
-        let ontop = getFlag(MPVOption.Window.ontop)
-        if ontop != player.mainWindow.isOntop {
-          player.mainWindow.setWindowFloatingOnTop(ontop)
-        }
-      }
+      DispatchQueue.main.async { self.player.ontopChanged() }
 
     case MPVOption.Window.windowScale:
-      DispatchQueue.main.async { [self] in
-        guard player.mainWindow.loaded else { return }
-        let windowScale = getDouble(MPVOption.Window.windowScale)
-        if fabs(windowScale - player.info.cachedWindowScale) > 10e-10 {
-          player.mainWindow.setWindowScale(windowScale)
-        }
-      }
+      DispatchQueue.main.async { self.player.windowScaleChanged() }
 
     case MPVProperty.mediaTitle:
       DispatchQueue.main.async { self.player.mediaTitleChanged() }

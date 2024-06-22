@@ -1810,6 +1810,22 @@ class PlayerCore: NSObject {
     sendOSD(.track(info.currentTrack(.audio) ?? .noneAudioTrack))
   }
 
+  func chapterChanged() {
+    guard !isShuttingDown, !isShutdown else { return }
+    info.chapter = Int(mpv.getInt(MPVProperty.chapter))
+    syncUI(.time)
+    syncUI(.chapterList)
+    postNotification(.iinaMediaTitleChanged)
+  }
+
+  func fullscreenChanged() {
+    guard mainWindow.loaded, !isStopping, !isStopped, !isShuttingDown, !isShutdown else { return }
+    let fs = mpv.getFlag(MPVOption.Window.fullscreen)
+    if fs != mainWindow.fsState.isFullscreen {
+      mainWindow.toggleWindowFullScreen()
+    }
+  }
+
   func mediaTitleChanged() {
     guard !isShuttingDown, !isShutdown else { return }
     postNotification(.iinaMediaTitleChanged)
@@ -1818,6 +1834,14 @@ class PlayerCore: NSObject {
   func needReloadQuickSettingsView() {
     guard !isShuttingDown, !isShutdown else { return }
     mainWindow.quickSettingView.reload()
+  }
+
+  func ontopChanged() {
+    guard mainWindow.loaded, !isStopping, !isStopped, !isShuttingDown, !isShutdown else { return }
+    let ontop = mpv.getFlag(MPVOption.Window.ontop)
+    if ontop != mainWindow.isOntop {
+      mainWindow.setWindowFloatingOnTop(ontop)
+    }
   }
 
   func playbackRestarted() {
@@ -1921,6 +1945,14 @@ class PlayerCore: NSObject {
     info.vid = Int(mpv.getInt(MPVOption.TrackSelection.vid))
     postNotification(.iinaVIDChanged)
     sendOSD(.track(info.currentTrack(.video) ?? .noneVideoTrack))
+  }
+
+  func windowScaleChanged() {
+    guard mainWindow.loaded, !isStopping, !isStopped, !isShuttingDown, !isShutdown else { return }
+    let windowScale = mpv.getDouble(MPVOption.Window.windowScale)
+    if fabs(windowScale - info.cachedWindowScale) > 10e-10 {
+      mainWindow.setWindowScale(windowScale)
+    }
   }
 
   private func autoSearchOnlineSub() {

@@ -15,7 +15,13 @@ fileprivate let KeyPlayed = "IINAPHPlayed"
 fileprivate let KeyAddedDate = "IINAPHDate"
 fileprivate let KeyDuration = "IINAPHDuration"
 
-class PlaybackHistory: NSObject, NSCoding {
+/// An entry in the playback history file.
+/// - Important: This class conforms to [NSSecureCoding](https://developer.apple.com/documentation/foundation/nssecurecoding).
+///     When making changes be certain the requirements for secure coding are not violated by the changes.
+class PlaybackHistory: NSObject, NSSecureCoding {
+
+  /// Indicate this class supports secure coding.
+  static var supportsSecureCoding: Bool { true }
 
   var url: URL
   var name: String
@@ -29,10 +35,10 @@ class PlaybackHistory: NSObject, NSCoding {
 
   required init?(coder aDecoder: NSCoder) {
     guard
-    let url = (aDecoder.decodeObject(forKey: KeyUrl) as? URL),
-    let name = (aDecoder.decodeObject(forKey: KeyName) as? String),
-    let md5 = (aDecoder.decodeObject(forKey: KeyMpvMd5) as? String),
-    let date = (aDecoder.decodeObject(forKey: KeyAddedDate) as? Date)
+      let url = aDecoder.decodeObject(of: NSURL.self, forKey: KeyUrl),
+      let name = aDecoder.decodeObject(of: NSString.self, forKey: KeyName),
+      let md5 = aDecoder.decodeObject(of: NSString.self, forKey: KeyMpvMd5),
+      let date = aDecoder.decodeObject(of: NSDate.self, forKey: KeyAddedDate)
     else {
       return nil
     }
@@ -40,11 +46,11 @@ class PlaybackHistory: NSObject, NSCoding {
     let played = aDecoder.decodeBool(forKey: KeyPlayed)
     let duration = aDecoder.decodeDouble(forKey: KeyDuration)
 
-    self.url = url
-    self.name = name
-    self.mpvMd5 = md5
+    self.url = url as URL
+    self.name = name as String
+    self.mpvMd5 = md5 as String
     self.played = played
-    self.addedDate = date
+    self.addedDate = date as Date
     self.duration = VideoTime(duration)
 
     self.mpvProgress = Utility.playbackProgressFromWatchLater(mpvMd5)

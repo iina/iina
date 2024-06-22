@@ -24,15 +24,26 @@ class HistoryController: NSObject {
   }
 
   private func read() {
-    history = (NSKeyedUnarchiver.unarchiveObject(withFile: plistURL.path) as? [PlaybackHistory]) ?? []
+    // Avoid logging a scary error if the file does not exist.
+    guard FileManager.default.fileExists(atPath: plistURL.path) else { return }
+    do {
+      let data = try Data(contentsOf: plistURL)
+      let object = try NSKeyedUnarchiver.unarchivedObject(ofClasses: [NSArray.self, PlaybackHistory.self],
+                                                          from: data)
+      history = object as? [PlaybackHistory] ?? []
+    } catch {
+      Logger.log("Failed to read playback history file \(plistURL.path): \(error)", level: .error)
+    }
   }
 
   func save() {
-    let result = NSKeyedArchiver.archiveRootObject(history, toFile: plistURL.path)
-    if !result {
-      Logger.log("Cannot save playback history!", level: .error)
+    do {
+      let data = try NSKeyedArchiver.archivedData(withRootObject: history, requiringSecureCoding: true)
+      try data.write(to: plistURL)
+      NotificationCenter.default.post(Notification(name: .iinaHistoryUpdated))
+    } catch {
+      Logger.log("Failed to save playback history to file \(plistURL.path): \(error)", level: .error)
     }
-    NotificationCenter.default.post(Notification(name: .iinaHistoryUpdated))
   }
 
   func add(_ url: URL, duration: Double) {

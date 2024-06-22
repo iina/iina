@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22690"/>
+        <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -129,14 +130,14 @@
                         <action selector="showConfFileAction:" target="-2" id="IMG-HR-TWq"/>
                     </connections>
                 </button>
-                <box boxType="custom" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="mLe-eI-lIk">
+                <box boxType="custom" borderType="line" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="mLe-eI-lIk">
                     <rect key="frame" x="188" y="41" width="292" height="22"/>
                     <view key="contentView" id="0le-1T-r5f">
                         <rect key="frame" x="1" y="1" width="290" height="20"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="f5l-5w-zmm">
-                                <rect key="frame" x="0.0" y="-2" width="20" height="24"/>
+                                <rect key="frame" x="0.0" y="-1.5" width="20.5" height="24"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSAddTemplate" imagePosition="only" alignment="center" inset="2" id="De2-o3-Acv">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -149,7 +150,7 @@
                                 </connections>
                             </button>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="uFG-OF-DJ5">
-                                <rect key="frame" x="20" y="3" width="20" height="15"/>
+                                <rect key="frame" x="20" y="3" width="20.5" height="15"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRemoveTemplate" imagePosition="only" alignment="center" inset="2" id="nAC-n9-1YJ">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -162,7 +163,7 @@
                                 </connections>
                             </button>
                             <button toolTip="Show the raw mpv key code and command." translatesAutoresizingMaskIntoConstraints="NO" id="l2M-TH-eCt">
-                                <rect key="frame" x="184" y="4" width="100" height="11"/>
+                                <rect key="frame" x="184" y="5" width="100" height="11"/>
                                 <buttonCell key="cell" type="check" title="Display raw values" bezelStyle="regularSquare" imagePosition="left" controlSize="mini" inset="2" id="3RK-1k-otl">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="label" size="9"/>
@@ -183,7 +184,7 @@
                             <constraint firstItem="uFG-OF-DJ5" firstAttribute="top" secondItem="0le-1T-r5f" secondAttribute="top" id="ZfQ-Vd-66B"/>
                             <constraint firstItem="GnK-98-Zrg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="uFG-OF-DJ5" secondAttribute="trailing" id="bMg-gh-g0b"/>
                             <constraint firstAttribute="trailing" secondItem="l2M-TH-eCt" secondAttribute="trailing" constant="6" id="ced-22-S2H"/>
-                            <constraint firstItem="l2M-TH-eCt" firstAttribute="centerY" secondItem="0le-1T-r5f" secondAttribute="centerY" constant="1" id="umX-M8-lLx"/>
+                            <constraint firstItem="l2M-TH-eCt" firstAttribute="centerY" secondItem="0le-1T-r5f" secondAttribute="centerY" id="umX-M8-lLx"/>
                             <constraint firstAttribute="bottom" secondItem="f5l-5w-zmm" secondAttribute="bottom" id="vhs-Bl-OW7"/>
                             <constraint firstAttribute="bottom" secondItem="GnK-98-Zrg" secondAttribute="bottom" id="wG6-Hf-CPU"/>
                             <constraint firstItem="uFG-OF-DJ5" firstAttribute="leading" secondItem="f5l-5w-zmm" secondAttribute="trailing" id="xh6-AE-0sz"/>
@@ -194,7 +195,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="fam-VI-AzZ"/>
                     </constraints>
-                    <color key="borderColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                    <color key="borderColor" name="separatorColor" catalog="System" colorSpace="catalog"/>
                     <color key="fillColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                 </box>
                 <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bm5-rb-Qjb">
@@ -248,7 +249,7 @@
                                                         </connections>
                                                     </textField>
                                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3VI-bM-Xn1">
-                                                        <rect key="frame" x="164" y="-1" width="12" height="21"/>
+                                                        <rect key="frame" x="164" y="-1.5" width="12.5" height="22"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="12" id="Du5-ms-7jx"/>
                                                             <constraint firstAttribute="height" constant="12" id="p6c-c0-YEO"/>
@@ -292,14 +293,14 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <box boxType="custom" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="Le4-ai-PiB">
+                <box boxType="custom" borderType="line" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="Le4-ai-PiB">
                     <rect key="frame" x="0.0" y="41" width="180" height="22"/>
                     <view key="contentView" id="Mvx-13-iEj">
                         <rect key="frame" x="1" y="1" width="178" height="20"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="iCp-ho-SlQ" userLabel="Square + Button">
-                                <rect key="frame" x="0.0" y="-2" width="20" height="24"/>
+                                <rect key="frame" x="0.0" y="-1.5" width="20.5" height="24"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSAddTemplate" imagePosition="only" alignment="center" inset="2" id="sxT-LD-iKe">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -312,7 +313,7 @@
                                 </connections>
                             </button>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="EpF-t6-PtC" userLabel="Square - Button">
-                                <rect key="frame" x="20" y="3" width="20" height="15"/>
+                                <rect key="frame" x="20" y="3" width="20.5" height="15"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRemoveTemplate" imagePosition="only" alignment="center" inset="2" id="mZx-Q0-d48">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -325,7 +326,7 @@
                                 </connections>
                             </button>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="5WK-s3-J9x">
-                                <rect key="frame" x="120" y="0.0" width="54" height="20"/>
+                                <rect key="frame" x="120" y="5" width="54" height="11"/>
                                 <buttonCell key="cell" type="square" title="Duplicate…" bezelStyle="shadowlessSquare" alignment="center" inset="2" id="gpZ-Rh-DMn">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="label" size="9"/>
@@ -347,8 +348,6 @@
                             <constraint firstAttribute="trailing" secondItem="5WK-s3-J9x" secondAttribute="trailing" constant="4" id="NlB-hd-hMZ"/>
                             <constraint firstItem="nTU-Bf-Utf" firstAttribute="top" secondItem="Mvx-13-iEj" secondAttribute="top" id="Wsu-Ie-37S"/>
                             <constraint firstAttribute="bottom" secondItem="EpF-t6-PtC" secondAttribute="bottom" id="XUb-wd-Q7m"/>
-                            <constraint firstAttribute="bottom" secondItem="5WK-s3-J9x" secondAttribute="bottom" id="ZlX-FT-PIV"/>
-                            <constraint firstItem="5WK-s3-J9x" firstAttribute="top" secondItem="Mvx-13-iEj" secondAttribute="top" id="hGe-15-t41"/>
                             <constraint firstItem="EpF-t6-PtC" firstAttribute="top" secondItem="Mvx-13-iEj" secondAttribute="top" id="nNy-xV-noG"/>
                             <constraint firstItem="EpF-t6-PtC" firstAttribute="leading" secondItem="iCp-ho-SlQ" secondAttribute="trailing" id="oxu-sV-ch1"/>
                             <constraint firstAttribute="bottom" secondItem="iCp-ho-SlQ" secondAttribute="bottom" id="szb-XO-VMw"/>
@@ -357,7 +356,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="ArZ-bg-Uhh"/>
                     </constraints>
-                    <color key="borderColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                    <color key="borderColor" name="separatorColor" catalog="System" colorSpace="catalog"/>
                     <color key="fillColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                 </box>
                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tP6-Ua-acA">
@@ -439,6 +438,7 @@
                 <constraint firstItem="tP6-Ua-acA" firstAttribute="top" secondItem="ZWR-gT-S2p" secondAttribute="bottom" constant="4" id="krb-us-D9G"/>
                 <constraint firstItem="tP6-Ua-acA" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="2" id="olF-Fw-cWs"/>
                 <constraint firstItem="JxQ-iv-eAN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="q2V-Iu-xwo"/>
+                <constraint firstItem="l2M-TH-eCt" firstAttribute="firstBaseline" secondItem="5WK-s3-J9x" secondAttribute="firstBaseline" id="tI8-3r-ND1"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ZWR-gT-S2p" secondAttribute="trailing" id="tWl-b9-AcQ"/>
                 <constraint firstAttribute="trailing" secondItem="2pX-29-I87" secondAttribute="trailing" id="tl2-El-aGp"/>
                 <constraint firstItem="LU9-QU-BFL" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="10" id="uzh-oa-t27"/>
@@ -453,8 +453,8 @@
         </arrayController>
     </objects>
     <resources>
-        <image name="NSAddTemplate" width="18" height="16"/>
-        <image name="NSLockLockedTemplate" width="18" height="18"/>
-        <image name="NSRemoveTemplate" width="18" height="4"/>
+        <image name="NSAddTemplate" width="18" height="17"/>
+        <image name="NSLockLockedTemplate" width="19" height="19"/>
+        <image name="NSRemoveTemplate" width="18" height="5"/>
     </resources>
 </document>

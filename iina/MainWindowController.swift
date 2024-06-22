@@ -1115,6 +1115,7 @@ class MainWindowController: PlayerWindowController {
       if recognizer.state == .began {
         // began
         lastMagnification = recognizer.magnification
+        videoView.videoLayer.isAsynchronous = true
       } else if recognizer.state == .changed {
         // changed
         let offset = recognizer.magnification - lastMagnification + 1.0;
@@ -1130,6 +1131,7 @@ class MainWindowController: PlayerWindowController {
         lastMagnification = recognizer.magnification
       } else if recognizer.state == .ended {
         updateWindowParametersForMPV()
+        videoView.videoLayer.isAsynchronous = false
       }
     }
   }
@@ -1669,12 +1671,17 @@ class MainWindowController: PlayerWindowController {
     player.events.emit(.windowResized, data: window.frame)
   }
 
+  func windowWillStartLiveResize(_ notification: Notification) {
+    videoView.videoLayer.isAsynchronous = true
+  }
+
   // resize framebuffer in videoView after resizing.
   func windowDidEndLiveResize(_ notification: Notification) {
     // Must not access mpv while it is asynchronously processing stop and quit commands.
     // See comments in windowWillExitFullScreen for details.
     guard !isClosing else { return }
     videoView.videoSize = window!.convertToBacking(videoView.bounds).size
+    videoView.videoLayer.isAsynchronous = false
     updateWindowParametersForMPV()
   }
 

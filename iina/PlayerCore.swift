@@ -101,7 +101,6 @@ class PlayerCore: NSObject {
   var disableUI = false
   var disableWindowAnimation = false
 
-  @available(macOS 10.12.2, *)
   var touchBarSupport: TouchBarSupport {
     get {
       return self._touchBarSupport as! TouchBarSupport
@@ -241,9 +240,7 @@ class PlayerCore: NSObject {
     self.mainWindow = MainWindowController(playerCore: self)
     self.miniPlayer = MiniPlayerWindowController(playerCore: self)
     self.initialWindow = InitialWindowController(playerCore: self)
-    if #available(macOS 10.12.2, *) {
-      self._touchBarSupport = TouchBarSupport(playerCore: self)
-    }
+    self._touchBarSupport = TouchBarSupport(playerCore: self)
   }
 
   // MARK: - Plugins
@@ -1681,6 +1678,12 @@ class PlayerCore: NSObject {
 
   // MARK: - Listeners
 
+  // IMPORTANT!
+  // The listener methods expect to be called from MPVController on the main thread. Much of the
+  // data used by these methods is read by the UI using the main thread. Standardizing on using the
+  // main thread avoids thread data races without the need for locks. Also a few of the methods call
+  // AppKit methods that require use of the main thread.
+
   func fileStarted(path: String) {
     log("File started")
     info.justStartedFile = true
@@ -1709,10 +1712,8 @@ class PlayerCore: NSObject {
       }
     }
 
-    if #available(macOS 10.13, *), RemoteCommandController.useSystemMediaControl {
-      DispatchQueue.main.async {
-        NowPlayingInfoManager.updateInfo(state: .playing, withTitle: true)
-      }
+    if RemoteCommandController.useSystemMediaControl {
+      NowPlayingInfoManager.updateInfo(state: .playing, withTitle: true)
     }
 
     // Auto load
@@ -1762,9 +1763,7 @@ class PlayerCore: NSObject {
     getChapters()
     syncAbLoop()
     refreshSyncUITimer()
-    if #available(macOS 10.12.2, *) {
-      touchBarSupport.setupTouchBarUI()
-    }
+    touchBarSupport.setupTouchBarUI()
 
     if info.aid == 0 {
       mainWindow.muteButton.isEnabled = false
@@ -1849,7 +1848,7 @@ class PlayerCore: NSObject {
     reloadSavedIINAfilters()
     mainWindow.videoView.videoLayer.draw(forced: true)
 
-    if #available(macOS 10.13, *), RemoteCommandController.useSystemMediaControl {
+    if RemoteCommandController.useSystemMediaControl {
       NowPlayingInfoManager.updateInfo()
     }
 
@@ -2167,9 +2166,7 @@ class PlayerCore: NSObject {
       DispatchQueue.main.async {
         self.mainWindow.updatePlayButtonState(self.info.isPaused ? .off : .on)
         self.miniPlayer.updatePlayButtonState(self.info.isPaused ? .off : .on)
-        if #available(macOS 10.12.2, *) {
-          self.touchBarSupport.updateTouchBarPlayBtn()
-        }
+        self.touchBarSupport.updateTouchBarPlayBtn()
       }
 
     case .volume, .muteButton:
@@ -2248,10 +2245,8 @@ class PlayerCore: NSObject {
     info.thumbnailsReady = false
     info.$thumbnails.withLock { $0.removeAll(keepingCapacity: true) }
     info.thumbnailsProgress = 0
-    if #available(macOS 10.12.2, *) {
-      DispatchQueue.main.async {
-        self.touchBarSupport.touchBarPlaySlider?.resetCachedThumbnails()
-      }
+    DispatchQueue.main.async {
+      self.touchBarSupport.touchBarPlaySlider?.resetCachedThumbnails()
     }
     guard !info.isNetworkResource, let url = info.currentURL else {
       log("...stopped because cannot get file path", level: .warning)
@@ -2283,7 +2278,6 @@ class PlayerCore: NSObject {
     }
   }
 
-  @available(macOS 10.12.2, *)
   func makeTouchBar() -> NSTouchBar {
     log("Activating Touch Bar")
     needsTouchBar = true
@@ -2295,10 +2289,8 @@ class PlayerCore: NSObject {
   }
 
   func refreshTouchBarSlider() {
-    if #available(macOS 10.12.2, *) {
-      DispatchQueue.main.async {
-        self.touchBarSupport.touchBarPlaySlider?.needsDisplay = true
-      }
+    DispatchQueue.main.async {
+      self.touchBarSupport.touchBarPlaySlider?.needsDisplay = true
     }
   }
 
@@ -2587,8 +2579,6 @@ extension PlayerCore: FFmpegControllerDelegate {
   }
 }
 
-
-@available (macOS 10.13, *)
 class NowPlayingInfoManager {
 
   /// Update the information shown by macOS in `Now Playing`.

@@ -1115,6 +1115,7 @@ class MainWindowController: PlayerWindowController {
       if recognizer.state == .began {
         // began
         lastMagnification = recognizer.magnification
+        videoView.videoLayer.isAsynchronous = true
       } else if recognizer.state == .changed {
         // changed
         let offset = recognizer.magnification - lastMagnification + 1.0;
@@ -1130,6 +1131,7 @@ class MainWindowController: PlayerWindowController {
         lastMagnification = recognizer.magnification
       } else if recognizer.state == .ended {
         updateWindowParametersForMPV()
+        videoView.videoLayer.isAsynchronous = false
       }
     }
   }

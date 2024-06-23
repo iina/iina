@@ -13,7 +13,7 @@ jobs:
         include:
           - xcode: "15.2"
             deployment_target: ""
-    runs-on:  macos-13
+    runs-on:  macos-latest
     steps:
       - uses: actions/checkout@v4
 

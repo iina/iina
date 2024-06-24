@@ -55,7 +55,7 @@ struct SettingsItem {
       backgroundView.showBottomRoundCorner = isLastItem
       backgroundView.translatesAutoresizingMaskIntoConstraints = false
       self.addSubview(backgroundView)
-      backgroundView.fillSuperView()
+      backgroundView.padding(.all)
 
       if let labelLocalizationKey = labelLocalizationKey {
         label = NSTextField(labelWithString: l10n.localized(labelLocalizationKey))
@@ -67,15 +67,29 @@ struct SettingsItem {
       }
       label.translatesAutoresizingMaskIntoConstraints = false
       label.controlSize = controlSize
+      label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+      label.lineBreakMode = .byWordWrapping
+      switch controlSize {
+      case .small:
+        label.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
+      case .mini:
+        label.font = NSFont.systemFont(ofSize: 9)
+      case .large:
+        label.font = NSFont.systemFont(ofSize: 15)
+      default:
+        label.font = NSFont.systemFont(ofSize: NSFont.systemFontSize)
+      }
       backgroundView.addSubview(label)
 
-      disclosureButton = NSButton(frame: NSRect(x: 0, y: 0, width: 12, height: 12))
+      disclosureButton = NonClickableButton(frame: NSRect(x: 0, y: 0, width: 12, height: 12))
       disclosureButton.translatesAutoresizingMaskIntoConstraints = false
       disclosureButton.setButtonType(.pushOnPushOff)
       disclosureButton.bezelStyle = .disclosure
       disclosureButton.state = .off
       disclosureButton.title = ""
       disclosureButton.isHidden = true
+      disclosureButton.target = nil
+      disclosureButton.action = nil
       backgroundView.addSubview(disclosureButton)
 
       valueView = self.getValueView()
@@ -90,12 +104,12 @@ struct SettingsItem {
       valueStackView.addArrangedSubview(valueView)
       backgroundView.addSubview(valueStackView)
 
-      valueStackView.paddingToSuperView(top: verticalPadding, bottom: verticalPadding, trailing: 8)
-        .centerInSuperView(y: true)
-      disclosureButton.paddingToSuperView(leading: 4)
-        .centerInSuperView(y: true).spacingTo(view: label, trailing: 4)
-      label.centerInSuperView(y: true).flexibleSpacingTo(view: valueStackView, trailing: 8)
-        .flexiblePaddingToSuperView(top: verticalPadding, bottom: verticalPadding)
+      valueStackView.padding(.vertical(verticalPadding), .trailing(8))
+        .center(y: true)
+      disclosureButton.padding(.leading(4))
+        .center(y: true).spacing(to: label, .trailing(4))
+      label.center(y: true).flexibleSpacingTo(view: valueStackView, trailing: 8)
+        .padding(.vertical(greaterThan: verticalPadding))
 
       prepareExpandableView()
     }
@@ -135,11 +149,12 @@ struct SettingsItem {
       expandingStackView!.spacing = 0
       expandingStackView?.translatesAutoresizingMaskIntoConstraints = false
       self.addSubview(expandingStackView!)
-      expandingStackView!.fillSuperView()
+      expandingStackView!.padding(.all)
       expandingStackView!.addArrangedSubview(backgroundView)
       expandingStackView!.addArrangedSubview(expandedView)
-      expandedView.paddingToSuperView(leading: 8, trailing: 0)
+      expandedView.padding(.leading(8), .trailing)
       expandingStackView!.setVisibilityPriority(.notVisible, for: expandedView)
+      expandedView.alphaValue = 0
     }
 
     override func mouseUp(with event: NSEvent) {
@@ -150,10 +165,12 @@ struct SettingsItem {
         disclosureButton.state = .on
         expandingStackView!.setVisibilityPriority(.mustHold, for: expandedView!)
         backgroundView.enableRoundCorner = false
+        expandedView?.alphaValue = 1
       } else {
         disclosureButton.state = .off
         expandingStackView!.setVisibilityPriority(.notVisible, for: expandedView!)
         backgroundView.enableRoundCorner = true
+        expandedView?.alphaValue = 0
       }
 
       NSAnimationContext.runAnimationGroup({ context in
@@ -175,7 +192,8 @@ struct SettingsItem {
     override func getValueView() -> NSView {
       popupButton = NSPopUpButton()
       popupButton.translatesAutoresizingMaskIntoConstraints = false
-      popupButton.isBordered = false
+      popupButton.bezelStyle = .flexiblePush
+      popupButton.showsBorderOnlyWhileMouseInside = true
       return popupButton
     }
 
@@ -221,7 +239,7 @@ struct SettingsItem {
 }
 
 
-class ClickableView: NSView {
+fileprivate class ClickableView: NSView {
   var showBottomRoundCorner = false {
     didSet { setRoundCorners() }
   }
@@ -271,4 +289,10 @@ class ClickableView: NSView {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+}
+
+
+fileprivate class NonClickableButton: NSButton {
+  override func mouseDown(with event: NSEvent) {}
+  override func mouseUp(with event: NSEvent) {}
 }

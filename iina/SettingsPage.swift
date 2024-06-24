@@ -18,7 +18,12 @@ class SettingsPage {
     // inject l10n context
     localizationContext = SettingsLocalization.Context(tableName: localizationTable)
     SettingsLocalization.injectContext(view, localizationContext)
-    return view
+
+    let containerView = NSView()
+    containerView.translatesAutoresizingMaskIntoConstraints = false
+    containerView.addSubview(view)
+    view.padding(.horizontal(4), .vertical)
+    return containerView
   }
 
   func content() -> NSView {
@@ -30,15 +35,27 @@ class SettingsPage {
 class SettingsListView: NSBox, WithSettingsLocalizationContext {
   var container: Container!
 
+  var listTitle: String?
   var l10n: SettingsLocalization.Context!
 
   class Container: NSView {
-    init(_ listView: SettingsListView) {
+    init(_ listView: SettingsListView, title: String? = nil) {
       super.init(frame: NSRect())
 
       self.translatesAutoresizingMaskIntoConstraints = false
       self.addSubview(listView)
-      listView.paddingToSuperView(top: 0, leading: 8, trailing: 8)
+      if let title = title {
+        let titleField = NSTextField(labelWithString: title.localizedUppercase)
+        titleField.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(titleField)
+        titleField.padding(.top, .horizontal(8))
+        titleField.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize, weight: .bold)
+        titleField.textColor = NSColor.secondaryLabelColor
+        listView.spacing(to: titleField, .top(4))
+        listView.padding(.bottom, .horizontal(8))
+      } else {
+        listView.padding(.vertical, .horizontal(8))
+      }
     }
 
     required init?(coder: NSCoder) {
@@ -46,11 +63,12 @@ class SettingsListView: NSBox, WithSettingsLocalizationContext {
     }
   }
 
-  init(_ items: [SettingsItem.General]? = nil) {
+  init(title: String? = nil, _ items: [SettingsItem.General]? = nil) {
     super.init(frame: NSRect())
     self.translatesAutoresizingMaskIntoConstraints = false
 
-    self.container = Container(self)
+    self.container = Container(self, title: title)
+    self.listTitle = title
     self.titlePosition = .noTitle
     self.contentViewMargins = NSSize(width: 0, height: 0)
 
@@ -62,20 +80,20 @@ class SettingsListView: NSBox, WithSettingsLocalizationContext {
   func addItems(_ items: [SettingsItem.General]) {
     items.forEach {
       self.contentView!.addSubview($0)
-      $0.paddingToSuperView(leading: 0, trailing: 0)
+      $0.padding(.horizontal)
     }
-    items.first?.paddingToSuperView(top: 0)
+    items.first?.padding(.top(0))
     items.first?.isFirstItem = true
-    items.last?.paddingToSuperView(bottom: 0)
+    items.last?.padding(.bottom)
     items.last?.isLastItem = true
     zip(items.dropFirst(), items.dropLast()).forEach { (bottomItem, topItem) in
-      bottomItem.spacingTo(view: topItem, top: 0)
+      bottomItem.spacing(to: topItem, .top)
       let separator = NSBox()
       separator.translatesAutoresizingMaskIntoConstraints = false
       separator.boxType = .separator
       separator.titlePosition = .noTitle
       self.contentView!.addSubview(separator)
-      separator.paddingToView(topItem, bottom: 0, leading: 16, trailing: 0)
+      separator.padding(to: topItem, .bottom, .leading(16), .trailing)
     }
   }
 
@@ -86,7 +104,7 @@ class SettingsListView: NSBox, WithSettingsLocalizationContext {
 
 
 class SettingsSubListView: SettingsListView {
-  override init(_ items: [SettingsItem.General]? = nil) {
+  init(_ items: [SettingsItem.General]? = nil) {
     super.init(items)
 
     self.fillColor = .clear
@@ -98,7 +116,7 @@ class SettingsSubListView: SettingsListView {
     separator.boxType = .separator
     separator.titlePosition = .noTitle
     self.contentView!.addSubview(separator)
-    separator.paddingToSuperView(top: 0, leading: 16, trailing: 0)
+    separator.padding(.top, .leading(16), .trailing)
 
     items?.forEach { $0.controlSize = .small }
   }

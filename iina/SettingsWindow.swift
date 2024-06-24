@@ -33,11 +33,11 @@ class SettingsWindow: NSWindow {
     let sidebarBackground = NSVisualEffectView()
     sidebarViewController.view.addSubview(sidebarBackground)
     sidebarBackground.translatesAutoresizingMaskIntoConstraints = false
-    sidebarBackground.fillSuperView()
+    sidebarBackground.padding(.all)
     let searchBox = NSSearchField()
     sidebarBackground.addSubview(searchBox)
     searchBox.translatesAutoresizingMaskIntoConstraints = false
-    searchBox.paddingToSuperView(top: 52, leading: 8, trailing: 8)
+    searchBox.padding(.top(52), .horizontal(8))
     if #available(macOS 11.0, *) {
       searchBox.controlSize = .large
     }
@@ -61,19 +61,22 @@ class SettingsWindow: NSWindow {
     sidebarScrollView.documentView = sidebarList
 
     sidebarBackground.addSubview(sidebarScrollView)
-    sidebarScrollView.paddingToSuperView(bottom: 0, leading: 0, trailing: 0)
+    sidebarScrollView.padding(.bottom, .horizontal)
     sidebarBackground.addConstraint(sidebarScrollView.topAnchor.constraint(equalTo: searchBox.bottomAnchor, constant: 8))
 
     let contentViewController = NSViewController()
     contentViewController.view = NSView()
 
+    let contentView = FlippedClipView()
+    contentView.translatesAutoresizingMaskIntoConstraints = false
+    contentScrollView.contentView = contentView
     contentScrollView.translatesAutoresizingMaskIntoConstraints = false
     contentScrollView.hasVerticalScroller = true
     contentScrollView.borderType = .noBorder
     contentScrollView.drawsBackground = false
 
     contentViewController.view.addSubview(contentScrollView)
-    contentScrollView.fillSuperView()
+    contentScrollView.padding(.all)
 
     NotificationCenter.default.addObserver(self, selector: #selector(scrolled),
                                            name: NSView.boundsDidChangeNotification, object: nil)
@@ -112,7 +115,8 @@ class SettingsWindow: NSWindow {
     let content = page.getContent()
     content.autoresizingMask = [.width, .height]
     contentScrollView.documentView = content
-    content.paddingToView(contentScrollView.contentView, top: 44, bottom: 8, leading: 0, trailing: 0)
+    content.padding(to: contentScrollView.contentView, .horizontal)
+    contentScrollView.documentView!.bottomAnchor.constraint(greaterThanOrEqualTo: content.bottomAnchor).isActive = true
   }
 
   func show() {
@@ -121,7 +125,7 @@ class SettingsWindow: NSWindow {
   }
 
   @objc func scrolled(_ notification: Notification) {
-    titlebarAppearsTransparent = contentScrollView.contentView.bounds.origin.y >= 8
+    titlebarAppearsTransparent = contentScrollView.contentView.bounds.origin.y <= -52
   }
 }
 
@@ -160,3 +164,8 @@ extension SettingsWindow: NSTableViewDataSource, NSTableViewDelegate {
   }
 }
 
+fileprivate class FlippedClipView: NSClipView {
+  override var isFlipped: Bool {
+    return true
+  }
+}

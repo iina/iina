@@ -14,35 +14,60 @@ class SettingsPageGeneral: SettingsPage {
   }
 
   override func content() -> NSView {
-    let listView = SettingsListView([
-      SettingsItem.PopupButton()
-        .bindTo(.actionAfterLaunch, ofType: Preference.ActionAfterLaunch.self),
-      SettingsItem.General(title: .text_WhenMediaIsOpened)
-        .withExpandingDetailView(SettingsSubListView([
-          SettingsItem.Switch()
-            .bindTo(.pauseWhenOpen),
-          SettingsItem.Switch()
-            .bindTo(.fullScreenWhenOpen),
-        ])),
-      SettingsItem.General(title: .text_PauseresumeWhen)
-        .withExpandingDetailView(SettingsSubListView([
-          SettingsItem.Switch()
-            .bindTo(.pauseWhenMinimized),
-          SettingsItem.Switch()
-            .bindTo(.pauseWhenInactive),
-          SettingsItem.Switch()
-            .bindTo(.playWhenEnteringFullScreen),
-          SettingsItem.Switch()
-            .bindTo(.pauseWhenLeavingFullScreen),
-          SettingsItem.Switch()
-            .bindTo(.pauseWhenGoesToSleep),
-        ])),
-      SettingsItem.Switch()
-        .bindTo(.alwaysOpenInNewWindow),
-      SettingsItem.Switch()
-        .bindTo(.quitWhenNoOpenedWindow),
-    ])
+    let views: [NSView] = [
+      SettingsListView(title: "Behavior", [
+        SettingsItem.PopupButton()
+          .bindTo(.actionAfterLaunch, ofType: Preference.ActionAfterLaunch.self),
+        SettingsItem.General(title: .text_WhenMediaIsOpened)
+          .withExpandingDetailView(SettingsSubListView([
+            SettingsItem.Switch()
+              .bindTo(.pauseWhenOpen),
+            SettingsItem.Switch()
+              .bindTo(.fullScreenWhenOpen),
+          ])),
+        SettingsItem.General(title: .text_PauseresumeWhen)
+          .withExpandingDetailView(SettingsSubListView([
+            SettingsItem.Switch()
+              .bindTo(.pauseWhenMinimized),
+            SettingsItem.Switch()
+              .bindTo(.pauseWhenInactive),
+            SettingsItem.Switch()
+              .bindTo(.playWhenEnteringFullScreen),
+            SettingsItem.Switch()
+              .bindTo(.pauseWhenLeavingFullScreen),
+            SettingsItem.Switch()
+              .bindTo(.pauseWhenGoesToSleep),
+          ])),
+        SettingsItem.Switch()
+          .bindTo(.alwaysOpenInNewWindow),
+        SettingsItem.Switch()
+          .bindTo(.quitWhenNoOpenedWindow),
+        SettingsItem.Switch()
+          .bindTo(.keepOpenOnFileEnd),
+        SettingsItem.Switch()
+          .bindTo(.resumeLastPosition),
+      ]).container,
+      // ====================================================
+      SettingsListView([
+        SettingsItem.Switch()
+          .bindTo(.useLegacyFullScreen),
+        SettingsItem.Switch()
+          .bindTo(.blackOutMonitor),
+      ]).container,
+      // ====================================================
+      SettingsListView([
+        SettingsItem.Switch()
+          .bindTo(.autoSwitchToMusicMode),
+      ]).container,
+    ]
 
-    return listView.container
+    let stackView = NSStackView(views: views)
+    stackView.translatesAutoresizingMaskIntoConstraints = false
+    stackView.orientation = .vertical
+    views.forEach {
+      $0.padding(.horizontal)
+      stackView.setVisibilityPriority(.mustHold, for: $0)
+    }
+    return stackView
   }
 }

@@ -148,6 +148,7 @@ class MainWindowController: PlayerWindowController {
   var isPausedPriorToInteractiveMode: Bool = false
 
   var lastMagnification: CGFloat = 0.0
+  var frameWhenStartedPinching = NSRect()
 
   /** Views that will show/hide when cursor moving in/out the window. */
   var fadeableViews: [NSView] = []
@@ -1116,6 +1117,7 @@ class MainWindowController: PlayerWindowController {
         // began
         lastMagnification = recognizer.magnification
         videoView.videoLayer.isAsynchronous = true
+        frameWhenStartedPinching = window.frame
       } else if recognizer.state == .changed {
         // changed
         let offset = recognizer.magnification - lastMagnification + 1.0;
@@ -1125,7 +1127,7 @@ class MainWindowController: PlayerWindowController {
         //Check against max & min threshold
         if newHeight < screenFrame.height && newHeight > minSize.height && newWidth > minSize.width {
           let newSize = NSSize(width: newWidth, height: newHeight);
-          window.setFrame(window.frame.centeredResize(to: newSize), display: true)
+          window.setFrame(frameWhenStartedPinching.centeredResize(to: newSize), display: true)
         }
 
         lastMagnification = recognizer.magnification

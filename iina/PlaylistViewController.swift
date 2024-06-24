@@ -272,11 +272,17 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   // MARK: - Drag and Drop
 
   func copyToPasteboard(_ tableView: NSTableView, writeRowsWith rowIndexes: IndexSet, to pboard: NSPasteboard) {
-    let indexesData = NSKeyedArchiver.archivedData(withRootObject: rowIndexes)
-    let filePaths = rowIndexes.map { player.info.playlist[$0].filename }
-    pboard.declareTypes([.iinaPlaylistItem, .nsFilenames], owner: tableView)
-    pboard.setData(indexesData, forType: .iinaPlaylistItem)
-    pboard.setPropertyList(filePaths, forType: .nsFilenames)
+    do {
+      let indexesData = try NSKeyedArchiver.archivedData(withRootObject: rowIndexes, requiringSecureCoding: true)
+      let filePaths = rowIndexes.map { player.info.playlist[$0].filename }
+      pboard.declareTypes([.iinaPlaylistItem, .nsFilenames], owner: tableView)
+      pboard.setData(indexesData, forType: .iinaPlaylistItem)
+      pboard.setPropertyList(filePaths, forType: .nsFilenames)
+    } catch {
+      // Internal error, archivedData should not fail.
+      Logger.log("Failed to copy from playlist to pasteboard: \(error)", level: .error,
+                 subsystem: player.subsystem)
+    }
   }
 
   @discardableResult
@@ -320,7 +326,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
     if info.draggingSource as? NSTableView === tableView,
       let rowData = info.draggingPasteboard.data(forType: .iinaPlaylistItem),
-      let indexSet = NSKeyedUnarchiver.unarchiveObject(with: rowData) as? IndexSet {
+      let indexSet = try? NSKeyedUnarchiver.unarchivedObject(ofClass: NSIndexSet.self, from: rowData) as? IndexSet {
       // Drag & drop within playlistTableView
       var oldIndexOffset = 0, newIndexOffset = 0
       for oldIndex in indexSet {

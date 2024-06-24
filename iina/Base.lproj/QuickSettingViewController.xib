@@ -67,6 +67,7 @@
                 <outlet property="subPosSlider" destination="lzW-d6-Asr" id="4n0-Xj-8qN"/>
                 <outlet property="subScaleResetBtn" destination="8ZC-Wx-nt7" id="fK9-bQ-Mxl"/>
                 <outlet property="subScaleSlider" destination="B8f-KH-BaO" id="dO9-In-ie0"/>
+                <outlet property="subSegmentedControl" destination="uSx-qN-Wxd" id="OeQ-GG-D5G"/>
                 <outlet property="subTabBtn" destination="rH3-pU-mFc" id="Rgo-kh-2wW"/>
                 <outlet property="subTableView" destination="2vU-hm-gGB" id="RK0-Fm-p9X"/>
                 <outlet property="subTextBgColorWell" destination="Ure-tT-JEy" id="NAH-ul-PxD"/>
@@ -2321,6 +2322,9 @@
                                                                             <segment label="Secondary Subtitles" tag="1"/>
                                                                         </segments>
                                                                     </segmentedCell>
+                                                                    <connections>
+                                                                        <action selector="subSegmentedControlAction:" target="-2" id="G3a-hY-Qcj"/>
+                                                                    </connections>
                                                                 </segmentedControl>
                                                                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lzW-d6-Asr">
                                                                     <rect key="frame" x="18" y="360" width="324" height="28"/>

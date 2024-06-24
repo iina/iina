@@ -1213,8 +1213,9 @@ class PlayerCore: NSObject {
     mpv.setDouble(MPVOption.Audio.audioDelay, delay)
   }
 
-  func setSubDelay(_ delay: Double) {
-    mpv.setDouble(MPVOption.Subtitles.subDelay, delay)
+  func setSubDelay(_ delay: Double, forPrimary: Bool = true) {
+    let option = forPrimary ? MPVOption.Subtitles.subDelay : MPVOption.Subtitles.secondarySubDelay
+    mpv.setDouble(option, delay)
   }
 
   private func _addToPlaylist(_ path: String) {
@@ -1566,8 +1567,9 @@ class PlayerCore: NSObject {
     }
   }
 
-  func setSubPos(_ pos: Int) {
-    mpv.setInt(MPVOption.Subtitles.subPos, pos, level: .verbose)
+  func setSubPos(_ pos: Int, forPrimary: Bool = true) {
+    let option = forPrimary ? MPVOption.Subtitles.subPos : MPVOption.Subtitles.secondarySubPos
+    mpv.setInt(option, pos, level: .verbose)
   }
 
   func setSubTextColor(_ colorString: String) {

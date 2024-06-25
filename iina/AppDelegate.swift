@@ -1165,9 +1165,9 @@ struct CommandLineStatus {
   func applyMPVArguments(to playerCore: PlayerCore) {
     Logger.log("Setting mpv properties from arguments: \(mpvArguments)")
     for argPair in mpvArguments {
-      if argPair.0 == "shuffle" && argPair.1 == "yes" {
+      if argPair.0 == MPVOption.PlaybackControl.shuffle && argPair.1 == "yes" {
         // Special handling for this one
-        Logger.log("Found \"shuffle\" request in command-line args. Adding mpv hook to shuffle playlist")
+        Logger.log("Found \"shuffle\" request in command-line args. Adding mpv hook for shuffling playlist")
         playerCore.addShufflePlaylistHook()
         continue
       }

@@ -2148,11 +2148,11 @@
                                                                         <rect key="frame" x="4" y="5" width="320" height="172"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="9mo-uL-hfC" customClass="RoundedColorWell" customModule="IINA" customModuleProvider="target">
-                                                                                <rect key="frame" x="49" y="118" width="29" height="27"/>
+                                                                            <colorWell wellStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="9mo-uL-hfC" customClass="RoundedColorWell" customModule="IINA" customModuleProvider="target">
+                                                                                <rect key="frame" x="49" y="119" width="29" height="25"/>
                                                                                 <constraints>
-                                                                                    <constraint firstAttribute="height" constant="23" id="Rgf-Cu-gr0"/>
-                                                                                    <constraint firstAttribute="width" constant="23" id="tlC-zK-dZi"/>
+                                                                                    <constraint firstAttribute="height" constant="21" id="Rgf-Cu-gr0"/>
+                                                                                    <constraint firstAttribute="width" constant="21" id="tlC-zK-dZi"/>
                                                                                 </constraints>
                                                                                 <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <connections>
@@ -2160,7 +2160,7 @@
                                                                                 </connections>
                                                                             </colorWell>
                                                                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xtF-tn-m9W" userLabel="Text font size">
-                                                                                <rect key="frame" x="126" y="119" width="78" height="22"/>
+                                                                                <rect key="frame" x="124" y="119" width="78" height="22"/>
                                                                                 <popUpButtonCell key="cell" type="push" title="55" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" refusesFirstResponder="YES" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="mep-aa-rk7" id="qha-uU-Cos" userLabel="Cell">
                                                                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="message" size="11"/>
@@ -2194,7 +2194,7 @@
                                                                                 </textFieldCell>
                                                                             </textField>
                                                                             <textField focusRingType="none" horizontalHuggingPriority="249" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vLY-cB-GEf">
-                                                                                <rect key="frame" x="85" y="124" width="39" height="14"/>
+                                                                                <rect key="frame" x="83" y="124" width="39" height="14"/>
                                                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Size:" id="s9l-Hb-SCk">
                                                                                     <font key="font" metaFont="message" size="11"/>
                                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -2226,29 +2226,29 @@
                                                                                 </textFieldCell>
                                                                             </textField>
                                                                             <textField focusRingType="none" horizontalHuggingPriority="249" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Lw-84-lts">
-                                                                                <rect key="frame" x="85" y="68" width="39" height="14"/>
+                                                                                <rect key="frame" x="83" y="68" width="39" height="14"/>
                                                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Width:" id="22j-ra-GAY">
                                                                                     <font key="font" metaFont="message" size="11"/>
                                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                 </textFieldCell>
                                                                             </textField>
-                                                                            <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="U2e-zB-Kue" customClass="RoundedColorWell" customModule="IINA" customModuleProvider="target">
-                                                                                <rect key="frame" x="49" y="62" width="29" height="27"/>
+                                                                            <colorWell wellStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="U2e-zB-Kue" customClass="RoundedColorWell" customModule="IINA" customModuleProvider="target">
+                                                                                <rect key="frame" x="49" y="63" width="29" height="25"/>
                                                                                 <constraints>
-                                                                                    <constraint firstAttribute="height" constant="23" id="OaA-1O-DoB"/>
-                                                                                    <constraint firstAttribute="width" constant="23" id="kwW-fi-4RZ"/>
+                                                                                    <constraint firstAttribute="height" constant="21" id="OaA-1O-DoB"/>
+                                                                                    <constraint firstAttribute="width" constant="21" id="kwW-fi-4RZ"/>
                                                                                 </constraints>
                                                                                 <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <connections>
                                                                                     <action selector="subTextBorderColorAction:" target="-2" id="ACh-s2-ew1"/>
                                                                                 </connections>
                                                                             </colorWell>
-                                                                            <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="Ure-tT-JEy" customClass="RoundedColorWell" customModule="IINA" customModuleProvider="target">
-                                                                                <rect key="frame" x="49" y="6" width="29" height="27"/>
+                                                                            <colorWell wellStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="Ure-tT-JEy" customClass="RoundedColorWell" customModule="IINA" customModuleProvider="target">
+                                                                                <rect key="frame" x="49" y="7" width="29" height="25"/>
                                                                                 <constraints>
-                                                                                    <constraint firstAttribute="height" constant="23" id="Ivi-Q0-PSs"/>
-                                                                                    <constraint firstAttribute="width" constant="23" id="qQW-fy-gq5"/>
+                                                                                    <constraint firstAttribute="height" constant="21" id="Ivi-Q0-PSs"/>
+                                                                                    <constraint firstAttribute="width" constant="21" id="qQW-fy-gq5"/>
                                                                                 </constraints>
                                                                                 <color key="color" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                                                                 <connections>
@@ -2272,7 +2272,7 @@
                                                                                 </textFieldCell>
                                                                             </textField>
                                                                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bkX-rt-2bg" userLabel="Text Border Width">
-                                                                                <rect key="frame" x="126" y="63" width="79" height="22"/>
+                                                                                <rect key="frame" x="124" y="63" width="78" height="22"/>
                                                                                 <popUpButtonCell key="cell" type="push" title="3" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" refusesFirstResponder="YES" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="h6k-DT-fv5" id="xGc-Oh-HJO">
                                                                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="message" size="11"/>
@@ -2292,14 +2292,14 @@
                                                                                     </menu>
                                                                                 </popUpButtonCell>
                                                                                 <constraints>
-                                                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="71" id="Udn-GZ-bGb"/>
+                                                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="Udn-GZ-bGb"/>
                                                                                 </constraints>
                                                                                 <connections>
                                                                                     <action selector="subTextBorderWidthAction:" target="-2" id="qyR-r0-5LO"/>
                                                                                 </connections>
                                                                             </popUpButton>
                                                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qGz-rB-dsV">
-                                                                                <rect key="frame" x="206" y="116" width="76" height="27"/>
+                                                                                <rect key="frame" x="204" y="116" width="76" height="27"/>
                                                                                 <buttonCell key="cell" type="push" title="Font..." bezelStyle="rounded" alignment="center" controlSize="small" refusesFirstResponder="YES" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ghy-e7-7Of">
                                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                     <font key="font" metaFont="message" size="11"/>

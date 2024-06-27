@@ -14,6 +14,7 @@ class RoundedColorWell: NSColorWell {
 
   override func awakeFromNib() {
     if #available(macOS 13, *) {
+      self.colorWellStyle = .minimal
       super.awakeFromNib()
       return
     }

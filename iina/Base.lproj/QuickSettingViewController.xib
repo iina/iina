@@ -2148,8 +2148,8 @@
                                                                         <rect key="frame" x="4" y="5" width="320" height="172"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
-                                                                            <colorWell wellStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="9mo-uL-hfC" customClass="RoundedColorWell" customModule="IINA" customModuleProvider="target">
-                                                                                <rect key="frame" x="49" y="119" width="29" height="25"/>
+                                                                            <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="9mo-uL-hfC" customClass="RoundedColorWell" customModule="IINA" customModuleProvider="target">
+                                                                                <rect key="frame" x="49" y="119" width="27" height="25"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="21" id="Rgf-Cu-gr0"/>
                                                                                     <constraint firstAttribute="width" constant="21" id="tlC-zK-dZi"/>
@@ -2233,8 +2233,8 @@
                                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                 </textFieldCell>
                                                                             </textField>
-                                                                            <colorWell wellStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="U2e-zB-Kue" customClass="RoundedColorWell" customModule="IINA" customModuleProvider="target">
-                                                                                <rect key="frame" x="49" y="63" width="29" height="25"/>
+                                                                            <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="U2e-zB-Kue" customClass="RoundedColorWell" customModule="IINA" customModuleProvider="target">
+                                                                                <rect key="frame" x="49" y="63" width="27" height="25"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="21" id="OaA-1O-DoB"/>
                                                                                     <constraint firstAttribute="width" constant="21" id="kwW-fi-4RZ"/>
@@ -2244,8 +2244,8 @@
                                                                                     <action selector="subTextBorderColorAction:" target="-2" id="ACh-s2-ew1"/>
                                                                                 </connections>
                                                                             </colorWell>
-                                                                            <colorWell wellStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="Ure-tT-JEy" customClass="RoundedColorWell" customModule="IINA" customModuleProvider="target">
-                                                                                <rect key="frame" x="49" y="7" width="29" height="25"/>
+                                                                            <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="Ure-tT-JEy" customClass="RoundedColorWell" customModule="IINA" customModuleProvider="target">
+                                                                                <rect key="frame" x="49" y="7" width="27" height="25"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="21" id="Ivi-Q0-PSs"/>
                                                                                     <constraint firstAttribute="width" constant="21" id="qQW-fy-gq5"/>
@@ -2453,7 +2453,7 @@
                                             <rect key="frame" x="-100" y="-100" width="360" height="16"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
-                                        <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.19512195121951215" horizontal="NO" id="3ZS-ug-kkq">
+                                        <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="3ZS-ug-kkq">
                                             <rect key="frame" x="346" y="0.0" width="16" height="827"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>

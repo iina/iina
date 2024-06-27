@@ -17,6 +17,8 @@ class ViewLayer: CAOpenGLLayer {
   let mpvGLQueue = DispatchQueue(label: "com.colliderli.iina.mpvgl", qos: .userInteractive)
   @Atomic var blocked = false
 
+  private let displayLock = NSRecursiveLock()
+
   private var fbo: GLint = 1
 
   private var needsMPVRender = false
@@ -88,47 +90,56 @@ class ViewLayer: CAOpenGLLayer {
 
   // MARK: Draw
 
-  override func canDraw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj, forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) -> Bool {
-    if forceRender { return true }
-    return videoView.player.mpv.shouldRenderUpdateFrame()
+  override func canDraw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj,
+                        forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) -> Bool {
+    videoView.$isUninited.withLock() { isUninited in
+      guard !isUninited else { return false }
+      guard !forceRender else { return true }
+      return videoView.player.mpv.shouldRenderUpdateFrame()
+    }
   }
 
-  override func draw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj, forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) {
-    let mpv = videoView.player.mpv!
-    needsMPVRender = false
+  override func draw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj,
+                     forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) {
+    videoView.$isUninited.withLock() { isUninited in
+      guard !isUninited else { return }
 
-    glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
+      let mpv = videoView.player.mpv!
+      needsMPVRender = false
 
-    var i: GLint = 0
-    glGetIntegerv(GLenum(GL_DRAW_FRAMEBUFFER_BINDING), &i)
-    var dims: [GLint] = [0, 0, 0, 0]
-    glGetIntegerv(GLenum(GL_VIEWPORT), &dims);
+      glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
 
-    var flip: CInt = 1
+      var i: GLint = 0
+      glGetIntegerv(GLenum(GL_DRAW_FRAMEBUFFER_BINDING), &i)
+      var dims: [GLint] = [0, 0, 0, 0]
+      glGetIntegerv(GLenum(GL_VIEWPORT), &dims);
 
-    withUnsafeMutablePointer(to: &flip) { flip in
-      if let context = mpv.mpvRenderContext {
-        fbo = i != 0 ? i : fbo
+      var flip: CInt = 1
 
-        var data = mpv_opengl_fbo(fbo: Int32(fbo),
-                                  w: Int32(dims[2]),
-                                  h: Int32(dims[3]),
-                                  internal_format: 0)
-        withUnsafeMutablePointer(to: &data) { data in
-          var params: [mpv_render_param] = [
-            mpv_render_param(type: MPV_RENDER_PARAM_OPENGL_FBO, data: .init(data)),
-            mpv_render_param(type: MPV_RENDER_PARAM_FLIP_Y, data: .init(flip)),
-            mpv_render_param()
-          ]
-          mpv_render_context_render(context, &params);
-          ignoreGLError()
+      withUnsafeMutablePointer(to: &flip) { flip in
+        if let context = mpv.mpvRenderContext {
+          fbo = i != 0 ? i : fbo
+
+          var data = mpv_opengl_fbo(fbo: Int32(fbo),
+                                    w: Int32(dims[2]),
+                                    h: Int32(dims[3]),
+                                    internal_format: 0)
+          withUnsafeMutablePointer(to: &data) { data in
+            var params: [mpv_render_param] = [
+              mpv_render_param(type: MPV_RENDER_PARAM_OPENGL_FBO, data: .init(data)),
+              mpv_render_param(type: MPV_RENDER_PARAM_FLIP_Y, data: .init(flip)),
+              mpv_render_param()
+            ]
+            mpv_render_context_render(context, &params);
+            ignoreGLError()
+          }
+        } else {
+          glClearColor(0, 0, 0, 1)
+          glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
         }
-      } else {
-        glClearColor(0, 0, 0, 1)
-        glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
       }
+      glFlush()
     }
-    glFlush()
   }
 
   func suspend() {
@@ -154,10 +165,19 @@ class ViewLayer: CAOpenGLLayer {
     // Must not call display while holding isUninited's lock as that method will attempt to acquire
     // the lock and our locks do not support recursion.
     display()
+  }
+
+  override func display() {
+    displayLock.lock()
+    defer { displayLock.unlock() }
+
+    super.display()
+    CATransaction.flush()
 
     videoView.$isUninited.withLock() { isUninited in
       guard !isUninited else { return }
-      if forced {
+
+      guard !forceRender else {
         forceRender = false
         return
       }
@@ -181,20 +201,6 @@ class ViewLayer: CAOpenGLLayer {
       }
       needsMPVRender = false
     }
-  }
-
-  override func display() {
-    let needsFlush: Bool = videoView.$isUninited.withLock() { isUninited in
-      guard !isUninited else { return false }
-
-      super.display()
-      return true
-    }
-    guard needsFlush else { return }
-
-    // Must not call flush while holding isUninited's lock as that method may call display and our
-    // locks do not support recursion.
-    CATransaction.flush()
   }
 
   // MARK: Utils

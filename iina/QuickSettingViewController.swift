@@ -220,6 +220,12 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     switchHorizontalLine2.wantsLayer = true
     switchHorizontalLine2.layer?.opacity = 0.5
 
+    if let data = UserDefaults.standard.data(forKey: Preference.Key.userEQPresets.rawValue) {
+      let decoder = JSONDecoder()
+      let dict = try? decoder.decode(Dictionary<String, EQProfile>.self, from: data)
+      userEQs = dict ?? [:]
+    }
+
     eqPopUpButton.menu!.delegate = self
     let presetNames = presetEQs.map { $0.key }
     eqPopUpButton.addItems(withTitles: presetNames)

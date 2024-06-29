@@ -6,7 +6,7 @@
 //  Copyright © 2024 lhc. All rights reserved.
 //
 
-struct EQProfile: Codable {
+class EQProfile: Codable {
   var gains = [Double](repeatElement(0.0, count: 10))
 
   init(_ values: [Double]) {
@@ -22,5 +22,11 @@ let presetEQs: KeyValuePairs = ["Flat": EQProfile([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                                 "Acoustic": EQProfile([0, 0, 0, 0, 12, 0, 0, 0, 0, 0]),
                                 ]
 
-var userEQs = ["test": EQProfile([12, 0, 0, 0, 0, 0, 0, 0, 0, 0]),
-              ]
+var userEQs: Dictionary<String, EQProfile> = [:] {
+  didSet {
+    let encoder = JSONEncoder()
+    if let encoded = try? encoder.encode(userEQs) {
+      UserDefaults.standard.set(encoded, forKey: Preference.Key.userEQPresets.rawValue)
+    }
+  }
+}

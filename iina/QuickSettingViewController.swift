@@ -185,7 +185,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   private lazy var eqSliders: [NSSlider] = [audioEqSlider1, audioEqSlider2, audioEqSlider3, audioEqSlider4, audioEqSlider5,
                                             audioEqSlider6, audioEqSlider7, audioEqSlider8, audioEqSlider9, audioEqSlider10]
 
-  private var lastUsedUserProfile: String = ""
+  private var lastUsedProfileName: String = ""
+  private var inputString: String = ""
 
   var downShift: CGFloat = 0 {
     didSet {
@@ -227,9 +228,11 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
 
     eqPopUpButton.menu!.delegate = self
-    let presetNames = presetEQs.map { $0.key }
-    eqPopUpButton.addItems(withTitles: presetNames)
+    presetEQs.forEach { preset in
+      eqPopUpButton.menu?.addItem(withTitle: preset.name, tag: 1, obj: preset)
+    }
     eqPopUpButton.selectItem(withTag: 1000)
+    lastUsedProfileName = eqPopUpButton.selectedItem!.title
 
     func observe(_ name: Notification.Name, block: @escaping (Notification) -> Void) {
       observers.append(NotificationCenter.default.addObserver(forName: name, object: player, queue: .main, using: block))
@@ -849,54 +852,71 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     player.setAudioEq(fromGains: profile.gains)
   }
 
+  private func makeProfileNameValidationAlert(isNewProfile: Bool) -> NSAlert {
+    let panel = NSAlert()
+    let textInput = NSTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
+    panel.accessoryView = textInput
+    let firstButton = panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
+    firstButton.isEnabled = false
+    panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
+    let key = isNewProfile ? "eq.new_profile" : "eq.rename"
+    panel.messageText = NSLocalizedString(key, comment: key)
+    let nameList = eqPopUpButton.itemArray.filter{ $0.tag == 1 || $0.tag == 0 }.map{ $0.title }
+    NotificationCenter.default.addObserver(forName: NSControl.textDidChangeNotification, object: textInput, queue: .main) { _ in
+      let input = textInput.stringValue
+      if input.isEmpty {
+        firstButton.isEnabled = false
+        return
+      }
+      if nameList.contains( where: { $0 == input } ) {
+        firstButton.isEnabled = false
+      } else {
+        firstButton.isEnabled = true
+        self.inputString = input
+      }
+    }
+    return panel
+  }
+
   @IBAction func eqPopUpButtonAction(_ sender: NSPopUpButton) {
     let tag = sender.selectedTag()
     let name = sender.titleOfSelectedItem
     switch tag {
     case -3: // save
-      let panel = NSAlert()
-      let textInput = NSTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
-      panel.accessoryView = textInput
-      panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
-      panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
-      panel.messageText = "New EQ Profile"
-      let response = panel.runModal()
+      let alert = makeProfileNameValidationAlert(isNewProfile: true)
+      let response = alert.runModal()
       if response == .alertFirstButtonReturn {
         let newProfile = EQProfile(fromCurrentSliders: eqSliders)
-        let name = textInput.stringValue
-        userEQs[name] = newProfile
+        userEQs[inputString] = newProfile
         menuNeedsUpdate(eqPopUpButton.menu!)
-        eqPopUpButton.selectItem(withTitle: name)
+        eqPopUpButton.selectItem(withTitle: inputString)
+      } else {
+        eqPopUpButton.selectItem(withTitle: lastUsedProfileName)
       }
     case -2: // rename
-      let panel = NSAlert()
-      let textInput = NSTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
-      panel.accessoryView = textInput
-      textInput.stringValue = lastUsedUserProfile
-      panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
-      panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
-      panel.messageText = "Rename Current Profile"
-      let response = panel.runModal()
+      let alert = makeProfileNameValidationAlert(isNewProfile: false)
+      let response = alert.runModal()
       if response == .alertFirstButtonReturn {
-        let newName = textInput.stringValue
-        let profile = userEQs.removeValue(forKey: lastUsedUserProfile)
-        userEQs[newName] = profile
+        let profile = userEQs.removeValue(forKey: lastUsedProfileName)
+        userEQs[inputString] = profile
         menuNeedsUpdate(eqPopUpButton.menu!)
-        eqPopUpButton.selectItem(withTitle: newName)
+        eqPopUpButton.selectItem(withTitle: inputString)
+      } else {
+        eqPopUpButton.selectItem(withTitle: lastUsedProfileName)
       }
     case -1: // delete
-      userEQs.removeValue(forKey: lastUsedUserProfile)
+      userEQs.removeValue(forKey: lastUsedProfileName)
       menuNeedsUpdate(eqPopUpButton.menu!)
       eqPopUpButton.selectItem(withTag: 1000)
-      break
     case 1000: // manual
-      break
-    case 0: // preset EQ profiles
-      guard let pair = presetEQs.first(where: { $0.0 == name }) else { break }
-      applyEQ(pair.1)
+      lastUsedProfileName = sender.selectedItem!.title
+    case 1: // preset EQ profiles
+      guard let preset = presetEQs.first(where: { $0.name == name }) else { break }
+      lastUsedProfileName = preset.name
+      applyEQ(preset)
     default: // user defined EQ Profiles
       guard let pair = userEQs.first(where: { $0.0 == name }) else { break }
-      lastUsedUserProfile = pair.0
+      lastUsedProfileName = pair.0
       applyEQ(pair.1)
     }
   }
@@ -906,22 +926,22 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     let saveItem = menu.item(withTag: -3)!
     let editingItems = [menu.item(withTag: -2)!, menu.item(withTag: -1)!]
 
-    editingItems.forEach { $0.isEnabled = (tag == 1) }
+    editingItems.forEach { $0.isEnabled = (tag == 0) }
     saveItem.isEnabled = (tag == 1000)
 
     let selectedName = eqPopUpButton.titleOfSelectedItem!
     var items = menu.items
-    items.removeAll { $0.tag == 1 }
+    items.removeAll { $0.tag == 0 }
     if !userEQs.isEmpty {
       items.append(NSMenuItem.separator())
     }
-    userEQs.forEach { (name, eq) in
-      let newItem = NSMenuItem(title: name, action: nil, keyEquivalent: "")
-      newItem.tag = 1
-      items.append(newItem)
-    }
     menu.items = items
+    userEQs.forEach { (name, eq) in
+      menu.addItem(withTitle: name, tag: 0)
+    }
     eqPopUpButton.selectItem(withTitle: selectedName)
+    eqPopUpButton.itemArray.forEach { $0.state = .off }
+    eqPopUpButton.selectedItem?.state = .on
   }
 
 

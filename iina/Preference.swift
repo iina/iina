@@ -187,6 +187,8 @@ struct Preference {
     static let replayGainClip = Key("replayGainClip")
     static let replayGainFallback = Key("replayGainFallback")
 
+    static let userEQPresets = Key("userEQPresets")
+
     // Subtitle
 
     static let subAutoLoadIINA = Key("subAutoLoadIINA")

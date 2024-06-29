@@ -805,9 +805,7 @@ class OpenSubClient {
       var comments: String?
 #endif
       var downloadCount: Int
-#if DEBUG
       var featureDetails: SubtitleFeatureDetails
-#endif
       var files: [SubtitleFile]
 #if DEBUG
       var foreignPartsOnly: Bool?

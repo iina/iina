@@ -448,9 +448,10 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   private func updateAudioEqState() {
-    if let filters = player.info.audioEqFilters {
-      eqSliders.forEach { slider in
-        if let gain = filters[slider.tag]?.stringFormat.dropLast().split(separator: "=").last {
+    if let filter = player.info.audioEqFilter {
+      let filters = filter.stringFormat.split(separator: ",")
+      zip(filters, eqSliders).forEach { (filter, slider) in
+        if let gain = filter.dropLast().split(separator: "=").last {
           slider.doubleValue = Double(gain) ?? 0
         } else {
           slider.doubleValue = 0
@@ -858,8 +859,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       panel.accessoryView = textInput
       panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
       panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
-      panel.messageText = "New Profile"
-      panel.informativeText = "Input the name for the saved EQ profile:"
+      panel.messageText = "New EQ Profile"
       let response = panel.runModal()
       if response == .alertFirstButtonReturn {
         let newProfile = EQProfile(fromCurrentSliders: eqSliders)
@@ -872,10 +872,10 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       let panel = NSAlert()
       let textInput = NSTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
       panel.accessoryView = textInput
+      textInput.stringValue = lastUsedUserProfile
       panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
       panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
-      panel.messageText = "Rename"
-      panel.informativeText = "Input the new name for the saved EQ profile:"
+      panel.messageText = "Rename Current Profile"
       let response = panel.runModal()
       if response == .alertFirstButtonReturn {
         let newName = textInput.stringValue
@@ -929,12 +929,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     player.setAudioEq(fromGains: eqSliders.map { $0.doubleValue })
     eqPopUpButton.selectItem(withTag: 1000)
   }
-
-  @IBAction func resetAudioEqAction(_ sender: AnyObject) {
-    player.removeAudioEqFilter()
-    updateAudioEqState()
-  }
-
 
   // MARK: Sub tab
 

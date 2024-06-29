@@ -120,7 +120,7 @@ class PlaybackInfo {
   var cropFilter: MPVFilter?
   var flipFilter: MPVFilter?
   var mirrorFilter: MPVFilter?
-  var audioEqFilters: [MPVFilter?]?
+  var audioEqFilter: MPVFilter?
   var delogoFilter: MPVFilter?
 
   var deinterlace: Bool = false

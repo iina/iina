@@ -48,6 +48,33 @@
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Hide";
 
+// EQ Presets
+"eq.preset.flat" = "Flat";
+"eq.preset.acoustic" = "Acoustic";
+"eq.preset.classical" = "Classical";
+"eq.preset.dance" = "Dance";
+"eq.preset.deep" = "Deep";
+"eq.preset.electronic" = "Electronic";
+"eq.preset.hip_hop" = "Hip Hop";
+"eq.preset.increase_bass" = "Increase Bass";
+"eq.preset.increase_treble" = "Increase Treble";
+"eq.preset.increase_vocal" = "Increase Vocal";
+"eq.preset.jazz" = "Jazz";
+"eq.preset.latin" = "Latin";
+"eq.preset.loundness" = "Loundness";
+"eq.preset.lounge" = "Lounge";
+"eq.preset.piano" = "Piano";
+"eq.preset.pop" = "Pop";
+"eq.preset.rnb" = "R&B";
+"eq.preset.reduce_bass" = "Reduce Bass";
+"eq.preset.reduce_treble" = "Reduce Treble";
+"eq.preset.rock" = "Rock";
+"eq.preset.small_speaker" = "Small Speaker";
+"eq.preset.spoken_word" = "Spoken Word";
+
+"eq.new_profile" = "New EQ Profile";
+"eq.rename" = "Rename Currnet Profile";
+
 // OSDMessage.swift
 "osd.pause" = "Pause";
 "osd.resume" = "Resume";

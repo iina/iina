@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, SidebarViewController {
+class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSMenuDelegate, SidebarViewController {
   override var nibName: NSNib.Name {
     return NSNib.Name("QuickSettingViewController")
   }
@@ -152,6 +152,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var customSubDelayTextField: NSTextField!
   @IBOutlet weak var subSegmentedControl: NSSegmentedControl!
 
+  @IBOutlet weak var eqPopUpButton: NSPopUpButton!
   @IBOutlet weak var audioEqSlider1: NSSlider!
   @IBOutlet weak var audioEqSlider2: NSSlider!
   @IBOutlet weak var audioEqSlider3: NSSlider!
@@ -180,6 +181,11 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var pluginContentContainerView: NSView!
   private var pluginTabsStackView: NSStackView!
   private var pluginTabs: [String: SidebarTabView] = [:]
+
+  private lazy var eqSliders: [NSSlider] = [audioEqSlider1, audioEqSlider2, audioEqSlider3, audioEqSlider4, audioEqSlider5,
+                                            audioEqSlider6, audioEqSlider7, audioEqSlider8, audioEqSlider9, audioEqSlider10]
+
+  private var lastUsedUserProfile: String = ""
 
   var downShift: CGFloat = 0 {
     didSet {
@@ -213,6 +219,11 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     switchHorizontalLine.layer?.opacity = 0.5
     switchHorizontalLine2.wantsLayer = true
     switchHorizontalLine2.layer?.opacity = 0.5
+
+    eqPopUpButton.menu!.delegate = self
+    let presetNames = presetEQs.map { $0.key }
+    eqPopUpButton.addItems(withTitles: presetNames)
+    eqPopUpButton.selectItem(withTag: 1000)
 
     func observe(_ name: Notification.Name, block: @escaping (Notification) -> Void) {
       observers.append(NotificationCenter.default.addObserver(forName: name, object: player, queue: .main, using: block))
@@ -432,7 +443,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   private func updateAudioEqState() {
     if let filters = player.info.audioEqFilters {
-      withAllAudioEqSliders { slider in
+      eqSliders.forEach { slider in
         if let gain = filters[slider.tag]?.stringFormat.dropLast().split(separator: "=").last {
           slider.doubleValue = Double(gain) ?? 0
         } else {
@@ -440,7 +451,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
         }
       }
     } else {
-      withAllAudioEqSliders { $0.doubleValue = 0 }
+      eqSliders.forEach { $0.doubleValue = 0 }
     }
   }
 
@@ -631,8 +642,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   private func withAllAudioEqSliders(_ block: (NSSlider) -> Void) {
-    [audioEqSlider1, audioEqSlider2, audioEqSlider3, audioEqSlider4, audioEqSlider5,
-     audioEqSlider6, audioEqSlider7, audioEqSlider8, audioEqSlider9, audioEqSlider10].forEach {
+    eqSliders.forEach {
       block($0)
     }
   }
@@ -825,19 +835,93 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     redraw(indicator: audioDelaySliderIndicator, constraint: audioDelaySliderConstraint, slider: audioDelaySlider, value: "\(sender.stringValue)s")
   }
 
+  func applyEQ(_ profile: EQProfile) {
+    zip(eqSliders, profile.gains).forEach { (slider, gain) in
+      slider.doubleValue = gain
+    }
+    player.setAudioEq(fromGains: profile.gains)
+  }
+
+  @IBAction func eqPopUpButtonAction(_ sender: NSPopUpButton) {
+    let tag = sender.selectedTag()
+    let name = sender.titleOfSelectedItem
+    switch tag {
+    case -3: // save
+      let panel = NSAlert()
+      let textInput = NSTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
+      panel.accessoryView = textInput
+      panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
+      panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
+      panel.messageText = "New Profile"
+      panel.informativeText = "Input the name for the saved EQ profile:"
+      let response = panel.runModal()
+      if response == .alertFirstButtonReturn {
+        let newProfile = EQProfile(fromCurrentSliders: eqSliders)
+        let name = textInput.stringValue
+        userEQs[name] = newProfile
+        menuNeedsUpdate(eqPopUpButton.menu!)
+        eqPopUpButton.selectItem(withTitle: name)
+      }
+    case -2: // rename
+      let panel = NSAlert()
+      let textInput = NSTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
+      panel.accessoryView = textInput
+      panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
+      panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
+      panel.messageText = "Rename"
+      panel.informativeText = "Input the new name for the saved EQ profile:"
+      let response = panel.runModal()
+      if response == .alertFirstButtonReturn {
+        let newName = textInput.stringValue
+        let profile = userEQs.removeValue(forKey: lastUsedUserProfile)
+        userEQs[newName] = profile
+        menuNeedsUpdate(eqPopUpButton.menu!)
+        eqPopUpButton.selectItem(withTitle: newName)
+      }
+    case -1: // delete
+      userEQs.removeValue(forKey: lastUsedUserProfile)
+      menuNeedsUpdate(eqPopUpButton.menu!)
+      eqPopUpButton.selectItem(withTag: 1000)
+      break
+    case 1000: // manual
+      break
+    case 0: // preset EQ profiles
+      guard let pair = presetEQs.first(where: { $0.0 == name }) else { break }
+      applyEQ(pair.1)
+    default: // user defined EQ Profiles
+      guard let pair = userEQs.first(where: { $0.0 == name }) else { break }
+      lastUsedUserProfile = pair.0
+      applyEQ(pair.1)
+    }
+  }
+
+  func menuNeedsUpdate(_ menu: NSMenu) {
+    let tag = eqPopUpButton.selectedTag()
+    let saveItem = menu.item(withTag: -3)!
+    let editingItems = [menu.item(withTag: -2)!, menu.item(withTag: -1)!]
+
+    editingItems.forEach { $0.isEnabled = (tag == 1) }
+    saveItem.isEnabled = (tag == 1000)
+
+    let selectedName = eqPopUpButton.titleOfSelectedItem!
+    var items = menu.items
+    items.removeAll { $0.tag == 1 }
+    if !userEQs.isEmpty {
+      items.append(NSMenuItem.separator())
+    }
+    userEQs.forEach { (name, eq) in
+      let newItem = NSMenuItem(title: name, action: nil, keyEquivalent: "")
+      newItem.tag = 1
+      items.append(newItem)
+    }
+    menu.items = items
+    eqPopUpButton.selectItem(withTitle: selectedName)
+  }
+
+
   @IBAction func audioEqSliderAction(_ sender: NSSlider) {
-    player.setAudioEq(fromGains: [
-      audioEqSlider1.doubleValue,
-      audioEqSlider2.doubleValue,
-      audioEqSlider3.doubleValue,
-      audioEqSlider4.doubleValue,
-      audioEqSlider5.doubleValue,
-      audioEqSlider6.doubleValue,
-      audioEqSlider7.doubleValue,
-      audioEqSlider8.doubleValue,
-      audioEqSlider9.doubleValue,
-      audioEqSlider10.doubleValue,
-      ])
+    player.setAudioEq(fromGains: eqSliders.map { $0.doubleValue })
+    eqPopUpButton.selectItem(withTag: 1000)
   }
 
   @IBAction func resetAudioEqAction(_ sender: AnyObject) {

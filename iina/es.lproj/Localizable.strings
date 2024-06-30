@@ -67,8 +67,12 @@
 "osd.subtitle_pos" = "Posición de subtítulos: %.1f";
 "osd.sub_hidden" = "Subtítulos Visibles";
 "osd.sub_visible" = "Subtítulos Visibles";
-"osd.sub_second_hidden" = "Subtítulos Secundarios Ocultos";
-"osd.sub_second_visible" = "Subtítulos Secundarios Visibles";
+"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Silenciar";
 "osd.unmute" = "No silenciar";
 "osd.screenshot" = "Captura de pantalla";
@@ -88,7 +92,8 @@
 "osd.find_online_sub" = "Buscando subtítulos en línea…";
 "osd.find_online_sub.source" = "desde";
 "osd.sub_not_found" = "No se encontraron subtítulos";
-"osd.sub_found" = "%d subtítulos encontrados. Descargando…";
+"osd.sub_found" = "%d subtitles found.";
+"osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "Subtítulos descargados";
 "osd.sub_saved" = "Subtítulo guardado";
 "osd.network_error" = "Error de red";
@@ -134,8 +139,8 @@
 "menu.sub_delay" = "Retraso de subtítulos: %.2fs";
 "menu.sub_hide" = "Ocultar Subtítulos";
 "menu.sub_show" = "Mostrar Subtítulos";
-"menu.sub_second_hide" = "Ocultar Subtítulos Secundarios";
-"menu.sub_second_show" = "Mostrar Subtítulos Secundarios";
+"menu.sub_second_hide" = "Hide Secondary Subtitles";
+"menu.sub_second_show" = "Show Secondary Subtitles";
 "menu.fullscreen" = "Ver a pantalla completa";
 "menu.exit_fullscreen" = "Salir de pantalla completa";
 "menu.pip" = "Ver en picture in picture";
@@ -167,10 +172,13 @@
 "menu.sub_delay_up" = "Retrasar subtítulos + %.1fs";
 "menu.sub_delay_down" = "Retrasar subtítulos - %.1fs";
 
-"menu.crop_custom" = "Personalizado...";
+"menu.crop_custom" = "Personalizado…";
 "menu.find_online_sub" = "Buscar subtítulos en línea desde %@";
 
+"track.audio" = "Audio";
 "track.none" = "<Ninguno>";
+"track.sub" = "Subtítulos";
+"track.video" = "Vídeo";
 
 "subtrack.no_loaded" = "No se cargaron subtítulos";
 "subtrack.no_external" = "No se encontraron subtítulos externos";

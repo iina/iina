@@ -67,8 +67,12 @@
 "osd.subtitle_pos" = "Tekstityksen sijainti: %.1f";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_hidden" = "Second Subtitles Hidden";
-"osd.sub_second_visible" = "Second Subtitles Visible";
+"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Mykistä";
 "osd.unmute" = "Poista mykistys";
 "osd.screenshot" = "Kuvankaappaus otettu";
@@ -88,7 +92,8 @@
 "osd.find_online_sub" = "Etsitään tekstityksiä verkosta…";
 "osd.find_online_sub.source" = "lähde:";
 "osd.sub_not_found" = "Tekstityksiä ei löytynyt";
-"osd.sub_found" = "%d tekstitystä löytyi. Ladataan…";
+"osd.sub_found" = "%d subtitles found.";
+"osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "Tekstitys ladattu";
 "osd.sub_saved" = "Tekstitys tallennettu";
 "osd.network_error" = "Verkkovirhe";
@@ -134,8 +139,8 @@
 "menu.sub_delay" = "Tekstityksen viive: %.2fs";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Second Subtitles";
-"menu.sub_second_show" = "Show Second Subtitles";
+"menu.sub_second_hide" = "Hide Secondary Subtitles";
+"menu.sub_second_show" = "Show Secondary Subtitles";
 "menu.fullscreen" = "Siirry koko näytön tilaan";
 "menu.exit_fullscreen" = "Poistu koko näytön tilasta";
 "menu.pip" = "Siirry kuva kuvassa -tilaan";
@@ -167,10 +172,13 @@
 "menu.sub_delay_up" = "Tekstityksen viive + %.1fs";
 "menu.sub_delay_down" = "Tekstityksen viive - %.1fs";
 
-"menu.crop_custom" = "Mukautettu...";
+"menu.crop_custom" = "Mukautettu…";
 "menu.find_online_sub" = "Find Online Subtitles from %@";
 
+"track.audio" = "Ääni";
 "track.none" = "<Ei mitään>";
+"track.sub" = "Tekstitys";
+"track.video" = "Video";
 
 "subtrack.no_loaded" = "Teksityksiä ei ladattu";
 "subtrack.no_external" = "Ulkoisia tekstityksiä ei löytynyt";

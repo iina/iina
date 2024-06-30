@@ -67,8 +67,12 @@
 "osd.subtitle_pos" = "Položaj titla: %.1f";
 "osd.sub_hidden" = "Titlovi skriveni";
 "osd.sub_visible" = "Titlovi vidljivi";
-"osd.sub_second_hidden" = "Drugi titlovi skriveni";
-"osd.sub_second_visible" = "Drugi titlovi vidljivi";
+"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Isključi zvuk";
 "osd.unmute" = "Uključi zvuk";
 "osd.screenshot" = "Slika ekrana snimljena";
@@ -88,7 +92,8 @@
 "osd.find_online_sub" = "Pronađi titlovi na vezi…";
 "osd.find_online_sub.source" = "na";
 "osd.sub_not_found" = "Nema titlova";
-"osd.sub_found" = "Broj pronađenih titlova: %d. Preuzimanje u tijeku…";
+"osd.sub_found" = "%d subtitles found.";
+"osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "Titl je preuzet";
 "osd.sub_saved" = "Titl je spremljen";
 "osd.network_error" = "Mrežna greška";
@@ -134,8 +139,8 @@
 "menu.sub_delay" = "Kašnjenje titlova: %.2fs";
 "menu.sub_hide" = "Sakrij titlove";
 "menu.sub_show" = "Prikaži titlove";
-"menu.sub_second_hide" = "Sakrij druge titlove";
-"menu.sub_second_show" = "Prikaži druge titlove";
+"menu.sub_second_hide" = "Hide Secondary Subtitles";
+"menu.sub_second_show" = "Show Secondary Subtitles";
 "menu.fullscreen" = "Pokreni cjeloekranski prikaz";
 "menu.exit_fullscreen" = "Prekini cjeloekranski prikaz";
 "menu.pip" = "Pokreni sliku u slici";
@@ -170,7 +175,10 @@
 "menu.crop_custom" = "Prilagođeno …";
 "menu.find_online_sub" = "Pronađi titlove na internetu iz %@";
 
+"track.audio" = "Audio";
 "track.none" = "<Ništa>";
+"track.sub" = "Titl";
+"track.video" = "Video";
 
 "subtrack.no_loaded" = "Nijedan titl nije učitan";
 "subtrack.no_external" = "Nijedan vanjski titl nije pronađen";
@@ -273,7 +281,7 @@
 
 "alert.nothing_to_open" = "Ništa se ne može otvoriti.";
 
-"alert.no_video_track" = "Nema videozapis.";
+"alert.no_video_track" = "Nema video zapisa.";
 
 "alert.duplicate_config" = "Zadane konfiguracije se ne mogu uređivati. Dupliciraj jednu konfiguraciju prije uređivanja.";
 
@@ -342,7 +350,7 @@
 "mini_player.shuffle" = "Odaberi nasumice";
 "mini_player.remove" = "Ukloni iz playliste";
 "mini_player.add" = "Dodaj u playlistu";
-"mini_player.delete" = "Izbriši sve iz playliste";
+"mini_player.delete" = "Isprazni playlistu";
 "mini_player.volume" = "Glasnoća";
 "mini_player.close" = "Zatvori glazbeni modus";
 "mini_player.back" = "Vrati se u glazbeni modus";

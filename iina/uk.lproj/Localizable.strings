@@ -67,8 +67,12 @@
 "osd.subtitle_pos" = "Позиція субтитрів: %.1f";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_hidden" = "Second Subtitles Hidden";
-"osd.sub_second_visible" = "Second Subtitles Visible";
+"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Заглушити";
 "osd.unmute" = "Зі звуком";
 "osd.screenshot" = "Знімок екрана зроблено";
@@ -88,7 +92,8 @@
 "osd.find_online_sub" = "Шукаю субтитри в Інтернеті…";
 "osd.find_online_sub.source" = "з";
 "osd.sub_not_found" = "Субтитрів не знайдено";
-"osd.sub_found" = "Знайдено %d субтитрів. Завантажую…";
+"osd.sub_found" = "%d subtitles found.";
+"osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "Субтитри завантажено";
 "osd.sub_saved" = "Субтитри збережено";
 "osd.network_error" = "Помилка мережі";
@@ -134,8 +139,8 @@
 "menu.sub_delay" = "Затримка субтитрів: %.2f с";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Second Subtitles";
-"menu.sub_second_show" = "Show Second Subtitles";
+"menu.sub_second_hide" = "Hide Secondary Subtitles";
+"menu.sub_second_show" = "Show Secondary Subtitles";
 "menu.fullscreen" = "Увійти до повноекранного режиму";
 "menu.exit_fullscreen" = "Вийти з повноекранного режиму";
 "menu.pip" = "Режим «Кадр у кадрі»";
@@ -167,10 +172,13 @@
 "menu.sub_delay_up" = "Затримка субтитрів на +%.1f с";
 "menu.sub_delay_down" = "Затримка субтитрів на –%.1f с";
 
-"menu.crop_custom" = "Інше...";
+"menu.crop_custom" = "Інше…";
 "menu.find_online_sub" = "Знайти онлайн субтитри з %@";
 
+"track.audio" = "Аудіо";
 "track.none" = "<—>";
+"track.sub" = "Субтитри";
+"track.video" = "Відео";
 
 "subtrack.no_loaded" = "Субтитри не завантажено";
 "subtrack.no_external" = "Зовнішніх субтитрів не знайдено";

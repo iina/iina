@@ -41,7 +41,7 @@
 "FbF-jJ-W5b.title" = "暂停";
 
 /* Class = "NSTextFieldCell"; title = "When media is opened:"; ObjectID = "GNV-VA-NBW"; */
-"GNV-VA-NBW.title" = "当媒体开启时:";
+"GNV-VA-NBW.title" = "打开媒体时:";
 
 /* Class = "NSMenuItem"; title = "Weekly"; ObjectID = "Imf-6g-2Cd"; */
 "Imf-6g-2Cd.title" = "每周";
@@ -95,10 +95,10 @@
 "f0j-Dn-cxt.title" = "接收测试版本（Beta）更新";
 
 /* Class = "NSButtonCell"; title = "Pause upon leaving full screen"; ObjectID = "g2A-Kf-vct"; */
-"g2A-Kf-vct.title" = "退出全屏后暂停播放";
+"g2A-Kf-vct.title" = "退出全屏后暂停";
 
 /* Class = "NSTextFieldCell"; title = "At launch:"; ObjectID = "gqT-CB-Puw"; */
-"gqT-CB-Puw.title" = "启动时：";
+"gqT-CB-Puw.title" = "启动后:";
 
 /* Class = "NSButtonCell"; title = "Check for updates"; ObjectID = "hWC-KJ-FuC"; */
 "hWC-KJ-FuC.title" = "自动检查更新";
@@ -119,7 +119,7 @@
 "kBI-Th-bBV.title" = "显示音频文件的曲目和艺术家信息";
 
 /* Class = "NSButtonCell"; title = "Play upon entering full screen"; ObjectID = "lOw-pu-Llm"; */
-"lOw-pu-Llm.title" = "进入全屏时播放";
+"lOw-pu-Llm.title" = "进入全屏后播放";
 
 /* Class = "NSButtonCell"; title = "Include subtitles"; ObjectID = "lvA-Rc-Sh6"; */
 "lvA-Rc-Sh6.title" = "包括字幕";

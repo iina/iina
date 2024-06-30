@@ -16,6 +16,12 @@
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "6LO-6y-IsA"; */
 "6LO-6y-IsA.title" = "Boja:";
 
+/* Class = "NSSegmentedCell"; 88M-pi-2Hc.ibShadowedLabels[0] = "Primary Subtitles"; ObjectID = "88M-pi-2Hc"; */
+"88M-pi-2Hc.ibShadowedLabels[0]" = "Primary Subtitles";
+
+/* Class = "NSSegmentedCell"; 88M-pi-2Hc.ibShadowedLabels[1] = "Secondary Subtitles"; ObjectID = "88M-pi-2Hc"; */
+"88M-pi-2Hc.ibShadowedLabels[1]" = "Secondary Subtitles";
+
 /* Class = "NSButtonCell"; title = "Load External Audio Track…"; ObjectID = "8Ax-5X-osl"; */
 "8Ax-5X-osl.title" = "Učitaj vanjski audio zapis …";
 
@@ -47,13 +53,13 @@
 "HBF-J7-Tie.title" = "31,25";
 
 /* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "IYU-eq-dls"; */
-"YCG-xK-eAs.title" = "-5s";
+"YCG-xK-eAs.title" = "−5 s";
 
 /* Class = "NSMenuItem"; title = "1.5"; ObjectID = "JbG-Ur-b55"; */
 "JbG-Ur-b55.title" = "1,5";
 
 /* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "LEZ-fv-buL"; */
-"LEZ-fv-buL.title" = "0s";
+"LEZ-fv-buL.title" = "0 s";
 
 /* Class = "NSTextFieldCell"; title = "External audio:"; ObjectID = "Lnu-kz-cql"; */
 "Lnu-kz-cql.title" = "Vanjski audio zapis:";
@@ -65,7 +71,7 @@
 "NxO-to-jcI.title" = "TITLOVI";
 
 /* Class = "NSTextFieldCell"; title = "4x"; ObjectID = "PLX-gY-e0h"; */
-"PLX-gY-e0h.title" = "4x";
+"PLX-gY-e0h.title" = "4 ×";
 
 /* Class = "NSTextFieldCell"; title = "External subtitles:"; ObjectID = "RA1-fF-OrB"; */
 "RA1-fF-OrB.title" = "Vanjski titl:";
@@ -92,7 +98,7 @@
 "YgL-iV-bca.title" = "Omjer:";
 
 /* Class = "NSTextFieldCell"; title = "Text Style:"; ObjectID = "ZBd-13-lA1"; */
-"ZBd-13-lA1.title" = "Stil Teksta:";
+"ZBd-13-lA1.title" = "Stil teksta:";
 
 /* Class = "NSMenuItem"; title = "0.5"; ObjectID = "avJ-cW-Iws"; */
 "avJ-cW-Iws.title" = "0,5";
@@ -176,13 +182,13 @@
 "to3-rc-Agv.title" = "Rotacija:";
 
 /* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "uCX-EC-jXM"; */
-"uCX-EC-jXM.title" = "-5s";
+"uCX-EC-jXM.title" = "−5 s";
 
 /* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "udN-rq-omw"; */
-"udN-rq-omw.title" = "0s";
+"udN-rq-omw.title" = "0 s";
 
 /* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "upM-Lz-YwK"; */
-"upM-Lz-YwK.title" = "0s";
+"upM-Lz-YwK.title" = "0 s";
 
 /* Class = "NSTextFieldCell"; title = "BACKGROUND"; ObjectID = "uqb-mz-A22"; */
 "uqb-mz-A22.title" = "POZADINA";
@@ -194,10 +200,10 @@
 "x39-62-7KC.title" = "Zvučni zapis:";
 
 /* Class = "NSTextFieldCell"; title = "+5s"; ObjectID = "xfX-wr-DTJ"; */
-"xfX-wr-DTJ.title" = "+5s";
+"xfX-wr-DTJ.title" = "+5 s";
 
 /* Class = "NSTextFieldCell"; title = "+5s"; ObjectID = "Kt8-Kg-i2O"; */
-"Kt8-Kg-i2O.title" = "+5s";
+"Kt8-Kg-i2O.title" = "+5 s";
 
 /* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "zcD-Tg-7Oi"; */
 "zcD-Tg-7Oi.title" = "Ekvilajzer:";

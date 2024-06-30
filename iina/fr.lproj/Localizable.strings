@@ -67,8 +67,12 @@
 "osd.subtitle_pos" = "Position des sous-titres : %.1f";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_hidden" = "Second Subtitles Hidden";
-"osd.sub_second_visible" = "Second Subtitles Visible";
+"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Son coupé";
 "osd.unmute" = "Son rétabli";
 "osd.screenshot" = "Une capture d'écran a été prise";
@@ -88,7 +92,8 @@
 "osd.find_online_sub" = "Recherche de sous-titres en ligne…";
 "osd.find_online_sub.source" = "de";
 "osd.sub_not_found" = "Aucun sous-titre trouvé";
-"osd.sub_found" = "%d sous-titre(s) trouvé(s). Téléchargement…";
+"osd.sub_found" = "%d subtitles found.";
+"osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "Sous-titre téléchargé";
 "osd.sub_saved" = "Sous-titre sauvegardé";
 "osd.network_error" = "Erreur réseau";
@@ -134,8 +139,8 @@
 "menu.sub_delay" = "Délai des sous-titres : %.2fs";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Second Subtitles";
-"menu.sub_second_show" = "Show Second Subtitles";
+"menu.sub_second_hide" = "Hide Secondary Subtitles";
+"menu.sub_second_show" = "Show Secondary Subtitles";
 "menu.fullscreen" = "Plein écran";
 "menu.exit_fullscreen" = "Quitter le mode plein écran";
 "menu.pip" = "Passer en inscrustation";
@@ -167,10 +172,13 @@
 "menu.sub_delay_up" = "Délai des sous-titres +%.1fs";
 "menu.sub_delay_down" = "Délai des sous-titres -%.1fs";
 
-"menu.crop_custom" = "Personnalisé…";
+"menu.crop_custom" = "Perso…";
 "menu.find_online_sub" = "Chercher des sous-titres en ligne sur %@";
 
+"track.audio" = "Audio";
 "track.none" = "<Aucun>";
+"track.sub" = "Sous-titres";
+"track.video" = "Vidéo";
 
 "subtrack.no_loaded" = "Aucun sous-titre chargé";
 "subtrack.no_external" = "Aucun sous-titre externe trouvé";

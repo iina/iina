@@ -67,8 +67,12 @@
 "osd.subtitle_pos" = "Umiestnenie titulkov: %.1f";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_hidden" = "Second Subtitles Hidden";
-"osd.sub_second_visible" = "Second Subtitles Visible";
+"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Stlmiť";
 "osd.unmute" = "Zosilniť";
 "osd.screenshot" = "Snímka obrazovky vyhotovená";
@@ -88,7 +92,8 @@
 "osd.find_online_sub" = "Hľadám titulky na internete…";
 "osd.find_online_sub.source" = "na";
 "osd.sub_not_found" = "Titulky nenájdené";
-"osd.sub_found" = "Nájdené titulky: %d. Sťahujem…";
+"osd.sub_found" = "%d subtitles found.";
+"osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "Titulky stiahnuté";
 "osd.sub_saved" = "Titulky uložené";
 "osd.network_error" = "Problém so sieťou";
@@ -134,8 +139,8 @@
 "menu.sub_delay" = "Posunutie titulkov: %.2f s";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Second Subtitles";
-"menu.sub_second_show" = "Show Second Subtitles";
+"menu.sub_second_hide" = "Hide Secondary Subtitles";
+"menu.sub_second_show" = "Show Secondary Subtitles";
 "menu.fullscreen" = "Spustiť režim celej obrazovky";
 "menu.exit_fullscreen" = "Ukončiť režim celej obrazovky";
 "menu.pip" = "Zapnúť Picture-in-Picture";
@@ -167,10 +172,13 @@
 "menu.sub_delay_up" = "Posunutie titulkov +%.1f s";
 "menu.sub_delay_down" = "Posunutie titulkov -%.1f s";
 
-"menu.crop_custom" = "Vlastné...";
+"menu.crop_custom" = "Vlastné…";
 "menu.find_online_sub" = "Nájsť titulky online na %@";
 
+"track.audio" = "Zvuk";
 "track.none" = "<Prázdne>";
+"track.sub" = "Titulok";
+"track.video" = "Video";
 
 "subtrack.no_loaded" = "Titulky nenačítané";
 "subtrack.no_external" = "Externé titulky nenájdené";

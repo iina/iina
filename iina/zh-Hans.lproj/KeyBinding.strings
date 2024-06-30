@@ -30,7 +30,7 @@
 "cmd.quit-watch-later" = "退出（保存进度）";
 "cmd.screenshot" = "截图";
 "cmd.screenshot-to-file" = "截图至文件";
-"cmd.loadfile" = "打开文件";
+"cmd.loadfile" = "载入文件";
 "cmd.loadlist" = "载入播放列表";
 "cmd.run" = "运行";
 
@@ -55,7 +55,7 @@
 "iina.delete-current-file" = "删除当前文件";
 "iina.delete-current-file-hard" = "直接删除当前文件（不放入废纸篓）";
 "iina.find-online-subs" = "查找在线字幕";
-"iina.save-downloaded-sub" = "保存已下载的字幕";
+"iina.save-downloaded-sub" = "保存已下载字幕";
 
 "yes" = "是";
 "no" = "否";

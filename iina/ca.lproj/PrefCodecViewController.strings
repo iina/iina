@@ -84,3 +84,45 @@
 
 /* Class = "NSTextFieldCell"; title = "Algorithm to use for tone mapping images onto the display."; ObjectID = "szA-8r-plt"; */
 "szA-8r-plt.title" = "Algorithm to use for tone mapping images onto the display.";
+
+/* Class = "NSTextFieldCell"; title = "ReplayGain:"; ObjectID = "gfq-nW-dDu"; */
+"gfq-nW-dDu.title" = "ReplayGain:";
+
+/* Class = "NSTextFieldCell"; title = "Gain adjustment:"; ObjectID = "ZRL-b0-k1L"; */
+"ZRL-b0-k1L.title" = "Gain adjustment:";
+
+/* Class = "NSMenuItem"; title = "No adjustment"; ObjectID = "k7b-6o-lCK"; */
+"k7b-6o-lCK.title" = "No adjustment";
+
+/* Class = "NSMenuItem"; title = "Track gain"; ObjectID = "w6E-lw-g7g"; */
+"w6E-lw-g7g.title" = "Track gain";
+
+/* Class = "NSMenuItem"; title = "Album gain"; ObjectID = "ZJJ-1o-ZGD"; */
+"ZJJ-1o-ZGD.title" = "Album gain";
+
+/* Class = "NSTextFieldCell"; title = "Adjust volume gain according to ReplayGain values stored in the file metadata."; ObjectID = "y61-Ah-c92"; */
+"y61-Ah-c92.title" = "Adjust volume gain according to ReplayGain values stored in the file metadata.";
+
+/* Class = "NSTextFieldCell"; title = "Preamp gain:"; ObjectID = "9Q0-hw-PdU"; */
+"9Q0-hw-PdU.title" = "Preamp gain:";
+
+/* Class = "NSTextFieldCell"; title = "dB"; ObjectID = "Bew-Pv-igg"; */
+"Bew-Pv-igg.title" = "dB";
+
+/* Class = "NSTextFieldCell"; title = "Pre-amplification gain to apply to the ReplayGain gain."; ObjectID = "rIW-XP-zGZ"; */
+"rIW-XP-zGZ.title" = "Pre-amplification gain to apply to the ReplayGain gain.";
+
+/* Class = "NSButtonCell"; title = "Allow the volume gain to clip"; ObjectID = "J3e-oT-fy9"; */
+"J3e-oT-fy9.title" = "Allow the volume gain to clip";
+
+/* Class = "NSTextFieldCell"; title = "If this option is not enabled, clipping will be prevented by lowering the gain."; ObjectID = "HQV-tY-NMj"; */
+"HQV-tY-NMj.title" = "If this option is not enabled, clipping will be prevented by lowering the gain.";
+
+/* Class = "NSTextFieldCell"; title = "Fallback:"; ObjectID = "fOz-6g-MhS"; */
+"fOz-6g-MhS.title" = "Fallback:";
+
+/* Class = "NSTextFieldCell"; title = "dB"; ObjectID = "ovT-D3-3jS"; */
+"ovT-D3-3jS.title" = "dB";
+
+/* Class = "NSTextFieldCell"; title = "Gain to apply if the file has no ReplayGain tags."; ObjectID = "m2n-yd-a4n"; */
+"m2n-yd-a4n.title" = "Gain to apply if the file has no ReplayGain tags.";

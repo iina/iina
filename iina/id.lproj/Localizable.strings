@@ -67,8 +67,12 @@
 "osd.subtitle_pos" = "Posisi Terjemahan: %.1f";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_hidden" = "Second Subtitles Hidden";
-"osd.sub_second_visible" = "Second Subtitles Visible";
+"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Bisukan Suara";
 "osd.unmute" = "Nyalakan Suara";
 "osd.screenshot" = "Tangkapan Layar Berhasil";
@@ -88,7 +92,8 @@
 "osd.find_online_sub" = "Mencari terjemahan online…";
 "osd.find_online_sub.source" = "dari";
 "osd.sub_not_found" = "Terjemahan tidak ditemukan";
-"osd.sub_found" = "%d terjemahan ditemukan. Mengunduh…";
+"osd.sub_found" = "%d subtitles found.";
+"osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "Terjemahan terunduh";
 "osd.sub_saved" = "Terjemahan tersimpan";
 "osd.network_error" = "Jaringan bermasalah";
@@ -134,8 +139,8 @@
 "menu.sub_delay" = "Penundaan Terjemahan: %.2f dtk";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Second Subtitles";
-"menu.sub_second_show" = "Show Second Subtitles";
+"menu.sub_second_hide" = "Hide Secondary Subtitles";
+"menu.sub_second_show" = "Show Secondary Subtitles";
 "menu.fullscreen" = "Masuk Layar Penuh";
 "menu.exit_fullscreen" = "Keluar dari Layar Penuh";
 "menu.pip" = "Masuk Picture-in-Picture";
@@ -167,10 +172,13 @@
 "menu.sub_delay_up" = "Penundaan Terjemahan + %.1fdtk";
 "menu.sub_delay_down" = "Penundaan Terjemahan - %.1fdtk";
 
-"menu.crop_custom" = "Kustom...";
+"menu.crop_custom" = "Kustom…";
 "menu.find_online_sub" = "Cari Terjemahan Online dari %@";
 
+"track.audio" = "Audio";
 "track.none" = "<Tidak Ada>";
+"track.sub" = "Terjemahan";
+"track.video" = "Video";
 
 "subtrack.no_loaded" = "Tidak Ada Terjemahan Aktif";
 "subtrack.no_external" = "Terjemahan Eksternal Tidak Ditemukan";

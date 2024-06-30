@@ -67,8 +67,12 @@
 "osd.subtitle_pos" = "Undertekstposisjon: %.1f";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_hidden" = "Second Subtitles Hidden";
-"osd.sub_second_visible" = "Second Subtitles Visible";
+"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Demp";
 "osd.unmute" = "Opphev demping";
 "osd.screenshot" = "Skjermbilde lagret";
@@ -88,7 +92,8 @@
 "osd.find_online_sub" = "Finner understekster på nett…";
 "osd.find_online_sub.source" = "fra";
 "osd.sub_not_found" = "Ingen undertekster funnet";
-"osd.sub_found" = "%d undertekster funnet. Nedlaster…";
+"osd.sub_found" = "%d subtitles found.";
+"osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "Undertekster nedlastet";
 "osd.sub_saved" = "Undertekster lagret";
 "osd.network_error" = "Nettverksfeil";
@@ -134,8 +139,8 @@
 "menu.sub_delay" = "Undertekstforsinkelse: %.2fs";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Second Subtitles";
-"menu.sub_second_show" = "Show Second Subtitles";
+"menu.sub_second_hide" = "Hide Secondary Subtitles";
+"menu.sub_second_show" = "Show Secondary Subtitles";
 "menu.fullscreen" = "Gå til fullskjerm";
 "menu.exit_fullscreen" = "Avslutt fullskjerm";
 "menu.pip" = "Bilde-i-bilde";
@@ -167,10 +172,13 @@
 "menu.sub_delay_up" = "Undertekstforsinkelse + %.1fs";
 "menu.sub_delay_down" = "Undertekstforsinkelse - %.1fs";
 
-"menu.crop_custom" = "Egendefinert...";
+"menu.crop_custom" = "Custom…";
 "menu.find_online_sub" = "Finn undertekster på nettet fra %@";
 
+"track.audio" = "Lyd";
 "track.none" = "<None>";
+"track.sub" = "Undertekster";
+"track.video" = "Video";
 
 "subtrack.no_loaded" = "Ingen undertekster innlastet";
 "subtrack.no_external" = "Ingen eksterne undertekster funnet";

@@ -29,13 +29,13 @@
 "92n-Uq-o4G.title" = "botten";
 
 /* Class = "NSTextFieldCell"; title = "When the macOS Reduce Motion accessibility setting is enabled IINA will reduce user interface animations that are known to cause problems for those with vestibular disorders. Should that be insufficient, this setting can be used to reduce motion further by eliminating user interface animations."; ObjectID = "9IR-Sf-wMq"; */
-"9IR-Sf-wMq.title" = "When the macOS Reduce Motion accessibility setting is enabled IINA will reduce user interface animations that are known to cause problems for those with vestibular disorders. Should that be insufficient, this setting can be used to reduce motion further by eliminating user interface animations.";
+"9IR-Sf-wMq.title" = "När tillgänglighetsinställningen \"Minska rörelse\" är påslagen i macOS kommer IINA att minska mängden animationer i gränssnittet som kan orsaka problem för personer med vestibulära störningar. Om detta inte skulle räcka kan denna inställning användas för att minska rörelse ännu mer genom att helt ta bort animationer i gränssnittet.";
 
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "AE4-BD-wZi"; */
 "AE4-BD-wZi.title" = "% av skärm";
 
 /* Class = "NSTextFieldCell"; title = "Accessibility:"; ObjectID = "AYW-Xu-ySw"; */
-"AYW-Xu-ySw.title" = "Accessibility:";
+"AYW-Xu-ySw.title" = "Tillgänglighet:";
 
 /* Class = "NSTextFieldCell"; title = "Window:"; ObjectID = "AmS-Sl-b2h"; */
 "AmS-Sl-b2h.title" = "Fönster:";
@@ -110,7 +110,7 @@
 "SFX-ct-8MB.title" = "Förbli flytande överst under uppspelning";
 
 /* Class = "NSButtonCell"; title = "Always show float on top status in the title bar"; ObjectID = "ih8-5a-PYY"; */
-"ih8-5a-PYY.title" = "Always show float on top status in the title bar";
+"ih8-5a-PYY.title" = "Visa alltid ikonen för överst flytande i titelraden";
 
 /* Class = "NSMenuItem"; title = "Speed"; ObjectID = "TWq-Xb-8Ee"; */
 "TWq-Xb-8Ee.title" = "Hastighet";
@@ -182,7 +182,7 @@
 "mdD-if-Wqw.title" = "Fäst till mitten vid förflyttning";
 
 /* Class = "NSButtonCell"; title = "Disable animations"; ObjectID = "mjs-jg-wm1"; */
-"mjs-jg-wm1.title" = "Disable animations";
+"mjs-jg-wm1.title" = "Stäng av animationer";
 
 /* Class = "NSMenuItem"; title = "Previous / Next Media"; ObjectID = "oJ8-74-L3z"; */
 "oJ8-74-L3z.title" = "Föregående / nästa media";

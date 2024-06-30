@@ -67,8 +67,12 @@
 "osd.subtitle_pos" = "Felirat pozíciója: %.1f";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_hidden" = "Second Subtitles Hidden";
-"osd.sub_second_visible" = "Second Subtitles Visible";
+"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Némítás";
 "osd.unmute" = "Némítás feloldása";
 "osd.screenshot" = "Képernyőkép rögzítve";
@@ -88,7 +92,8 @@
 "osd.find_online_sub" = "Online feliratok keresése…";
 "osd.find_online_sub.source" = "forrás";
 "osd.sub_not_found" = "Nem található felirat";
-"osd.sub_found" = "%d felirat található. Letöltés…";
+"osd.sub_found" = "%d subtitles found.";
+"osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "Felirat letöltve";
 "osd.sub_saved" = "Felirat mentve";
 "osd.network_error" = "Hálózati hiba";
@@ -134,8 +139,8 @@
 "menu.sub_delay" = "Felirat késleltetés: %.2fmp-vel később";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Second Subtitles";
-"menu.sub_second_show" = "Show Second Subtitles";
+"menu.sub_second_hide" = "Hide Secondary Subtitles";
+"menu.sub_second_show" = "Show Secondary Subtitles";
 "menu.fullscreen" = "Váltás teljes képernyőre";
 "menu.exit_fullscreen" = "Kilépés a teljes képernyős módból";
 "menu.pip" = "Kép a képben";
@@ -167,10 +172,13 @@
 "menu.sub_delay_up" = "Felirat késleltetés + %.1f másodperccel";
 "menu.sub_delay_down" = "Felirat késleltetés - %.1f másodperccel";
 
-"menu.crop_custom" = "Egyéni...";
+"menu.crop_custom" = "Egyéni…";
 "menu.find_online_sub" = "Online feliratok keresése innen: %@";
 
+"track.audio" = "Hang";
 "track.none" = "<None>";
+"track.sub" = "Felirat";
+"track.video" = "Videó";
 
 "subtrack.no_loaded" = "Nincs felirat betöltve";
 "subtrack.no_external" = "Nem található külsõ forrásból felirat";

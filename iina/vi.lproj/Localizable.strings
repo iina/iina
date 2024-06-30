@@ -67,8 +67,12 @@
 "osd.subtitle_pos" = "Vị trí phụ đề: %.1f";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_hidden" = "Second Subtitles Hidden";
-"osd.sub_second_visible" = "Second Subtitles Visible";
+"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Tắt tiếng";
 "osd.unmute" = "Bật tiếng";
 "osd.screenshot" = "Đã chụp màn hình";
@@ -88,7 +92,8 @@
 "osd.find_online_sub" = "Tìm phụ đề trực tuyến…";
 "osd.find_online_sub.source" = "từ";
 "osd.sub_not_found" = "Không tìm thấy phụ đề";
-"osd.sub_found" = "Tìm thấy %d phụ đề. Đang tải…";
+"osd.sub_found" = "%d subtitles found.";
+"osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "Đã tải phụ đề";
 "osd.sub_saved" = "Đã lưu phụ đề";
 "osd.network_error" = "Lỗi mạng";
@@ -134,8 +139,8 @@
 "menu.sub_delay" = "Độ trễ phụ đề: %.2fs";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Second Subtitles";
-"menu.sub_second_show" = "Show Second Subtitles";
+"menu.sub_second_hide" = "Hide Secondary Subtitles";
+"menu.sub_second_show" = "Show Secondary Subtitles";
 "menu.fullscreen" = "Vào toàn màn hình";
 "menu.exit_fullscreen" = "Thoát toàn màn hình";
 "menu.pip" = "Dùng Hình-trong-Hình";
@@ -167,10 +172,13 @@
 "menu.sub_delay_up" = "Subtitle Delay + %.1fs";
 "menu.sub_delay_down" = "Subtitle Delay - %.1fs";
 
-"menu.crop_custom" = "Tùy chỉnh...";
+"menu.crop_custom" = "Tuỳ chỉnh…";
 "menu.find_online_sub" = "Find Online Subtitles from %@";
 
+"track.audio" = "Âm thanh";
 "track.none" = "<None>";
+"track.sub" = "Phụ đề";
+"track.video" = "Video";
 
 "subtrack.no_loaded" = "No Subtitles Loaded";
 "subtrack.no_external" = "No External Subtitles Found";

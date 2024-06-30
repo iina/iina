@@ -10,28 +10,28 @@
 
 
 "crop" = "Obreži";
-"crop.w" = "Širina (početno: video širina)";
-"crop.h" = "Visina (početno: video visina)";
-"crop.x" = "Izvorište X (početno: centar)";
-"crop.y" = "Izvorište Y (početno: centar)";
+"crop.w" = "Širina (standardno: širina videa)";
+"crop.h" = "Visina (standardno: visina videa)";
+"crop.x" = "Izvorište X (standardno: centar)";
+"crop.y" = "Izvorište Y (standardno: centar)";
 
-"expand" = "Proširi";
-"expand.w" = "Širina (početno: video širina)";
-"expand.h" = "Visina (početno: video visina)";
-"expand.x" = "Izvorište X (početno: centar)";
-"expand.y" = "Izvorište Y (početno: centar)";
-"expand.aspect" = "Raširi na omjer (npr. 4/3)";
-"expand.round" = "Zaokružuje vrijednost, kako bi bilo djeljivo s ovom vrijednosti";
+"expand" = "Raširi";
+"expand.w" = "Širina (standardno: širina videa)";
+"expand.h" = "Visina (standardno: visina videa)";
+"expand.x" = "Izvorište X (standardno: centar)";
+"expand.y" = "Izvorište Y (standardno: centar)";
+"expand.aspect" = "Raširi na omjer (npr. 4:3)";
+"expand.round" = "Zaokružuje prema gore kako bi bilo djeljivo s ovom vrijednosti";
 
 "sharpen" = "Izoštri";
 "sharpen.msize" = "Veličina matrice";
 "sharpen.amount" = "Količina";
 
-"blur" = "Zamagljenje";
+"blur" = "Zamuti";
 "blur.msize" = "Veličina matrice";
 "blur.amount" = "Količina";
 
-"delogo" = "Izbriši vodeni žig";
+"delogo" = "Ukloni logotip";
 "delogo.w" = "Širina";
 "delogo.h" = "Visina";
 "delogo.x" = "Izvorište X";
@@ -39,17 +39,17 @@
 
 "negative" = "Negativ";
 
-"vflip" = "Preokreni";
-"hflip" = "Zrcali";
+"vflip" = "Preokreni okomito";
+"hflip" = "Preokreni vodoravno";
 
 "lut3d" = "3D LUT";
-"lut3d.file" = "Datoteka (možete i samo povući i pustiti u polje za unos)";
+"lut3d.file" = "Putanja datoteke (ili povuci i ispusti u polje za unos)";
 "lut3d.interp" = "Interpolacija";
 
 "custom_mpv" = "Prilagođeno (mpv)";
-"custom_mpv.name" = "Naziv filtera";
+"custom_mpv.name" = "Ime filtra";
 "custom_mpv.string" = "Vrijednost filtera";
 
 "custom_ffmpeg" = "Prilagođeno (FFmpeg)";
-"custom_ffmpeg.name" = "Naziv filtera";
-"custom_ffmpeg.string" = "Vrijednost filtera";
+"custom_ffmpeg.name" = "Ime filtra";
+"custom_ffmpeg.string" = "Vrijednost filtra";

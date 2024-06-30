@@ -67,8 +67,12 @@
 "osd.subtitle_pos" = "Položaj titla: %.1f";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_hidden" = "Second Subtitles Hidden";
-"osd.sub_second_visible" = "Second Subtitles Visible";
+"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Isključi zvuk";
 "osd.unmute" = "Ponovo uključi zvuk";
 "osd.screenshot" = "Snimak ekrana je napravljen";
@@ -88,7 +92,8 @@
 "osd.find_online_sub" = "Pronalaženje titlova na mreži…";
 "osd.find_online_sub.source" = "sa lokacije";
 "osd.sub_not_found" = "Nije pronađen nijedan titl";
-"osd.sub_found" = "Pronađeno titlova: %d. Preuzimam…";
+"osd.sub_found" = "%d subtitles found.";
+"osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "Titl je preuzet";
 "osd.sub_saved" = "Titl je sačuvan";
 "osd.network_error" = "Greška na mreži";
@@ -134,8 +139,8 @@
 "menu.sub_delay" = "Kašnjenje titla: %.2fs";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Second Subtitles";
-"menu.sub_second_show" = "Show Second Subtitles";
+"menu.sub_second_hide" = "Hide Secondary Subtitles";
+"menu.sub_second_show" = "Show Secondary Subtitles";
 "menu.fullscreen" = "Uđi u režim celog ekrana";
 "menu.exit_fullscreen" = "Izađi iz rеžima cеlog еkrana";
 "menu.pip" = "Uđi u režim slike u slici";
@@ -167,10 +172,13 @@
 "menu.sub_delay_up" = "Kašnjenje titla + %.1fs";
 "menu.sub_delay_down" = "Kašnjenje titla - %.1fs";
 
-"menu.crop_custom" = "Prilagođeno...";
+"menu.crop_custom" = "Prilagođeno…";
 "menu.find_online_sub" = "Pronađi titlove na mreži s lokacije %@";
 
+"track.audio" = "Zvuk";
 "track.none" = "<None>";
+"track.sub" = "Titl";
+"track.video" = "Video";
 
 "subtrack.no_loaded" = "Nije učitan nijedan titl";
 "subtrack.no_external" = "Nije pronađen nijedan spoljni titl";

@@ -67,8 +67,12 @@
 "osd.subtitle_pos" = "Позиция субтитров: %.1f";
 "osd.sub_hidden" = "Субтитры скрыты";
 "osd.sub_visible" = "Субтитры отображаются";
-"osd.sub_second_hidden" = "Вторые субтитры скрыты";
-"osd.sub_second_visible" = "Вторые субтитры отображаются";
+"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Без звука";
 "osd.unmute" = "Включение звука";
 "osd.screenshot" = "Скриншот сохранен";
@@ -88,7 +92,8 @@
 "osd.find_online_sub" = "Поиск субтитров в интернете…";
 "osd.find_online_sub.source" = "из";
 "osd.sub_not_found" = "Субтитры не найдены";
-"osd.sub_found" = "Найдено %d субтитров. Скачивание…";
+"osd.sub_found" = "%d subtitles found.";
+"osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "Субтитры скачаны";
 "osd.sub_saved" = "Субтитры сохранены";
 "osd.network_error" = "Ошибка сети";
@@ -134,8 +139,8 @@
 "menu.sub_delay" = "Задержка субтитров: %.2f с";
 "menu.sub_hide" = "Скрыть субтитры";
 "menu.sub_show" = "Показать субтитры";
-"menu.sub_second_hide" = "Скрыть вторые субтитры";
-"menu.sub_second_show" = "Показать вторые субтитры";
+"menu.sub_second_hide" = "Hide Secondary Subtitles";
+"menu.sub_second_show" = "Show Secondary Subtitles";
 "menu.fullscreen" = "Перейти в полноэкранный режим";
 "menu.exit_fullscreen" = "Выйти из полноэкранного режима";
 "menu.pip" = "Войти в режим «Картинка в картинке»";
@@ -167,10 +172,13 @@
 "menu.sub_delay_up" = "Задержка субтитров + %.1f с";
 "menu.sub_delay_down" = "Задержка субтитров - %.1f с";
 
-"menu.crop_custom" = "Другое...";
+"menu.crop_custom" = "Другое…";
 "menu.find_online_sub" = "Найти субтитры онлайн на %@";
 
+"track.audio" = "Аудио";
 "track.none" = "<Нет>";
+"track.sub" = "Субтитры";
+"track.video" = "Видео";
 
 "subtrack.no_loaded" = "Нет загруженных субтитров";
 "subtrack.no_external" = "Внешние субтитры не найдены";
@@ -200,15 +208,15 @@
 "alert.config.new.title" = "Новая конфигурация клавиш";
 "alert.config.new.message" = "Введите имя для новой конфигурации.";
 "alert.config.duplicate.title" = "Дублировать конфигурацию";
-"alert.config.duplicate.message" = "Введите имя для дублированного файла конфигурации.";
+"alert.config.duplicate.message" = "Введите имя для дубля файла конфигурации.";
 "alert.config.empty_name" = "Имя не может быть пустым.";
-"alert.config.name_existing" = "A config with the same name already exists.";
+"alert.config.name_existing" = "Уже есть конфигурация с тем же именем.";
 "alert.config.file_existing.title" = "Файл уже существует";
-"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
+"alert.config.file_existing.message" = "Уже есть файл конфигурации с тем же именем. Нажмите ОК для показа этого файла в Finder.";
 "alert.config.cannot_create" = "Не удалось создать файл конфигурации!\n%@";
 "alert.config.cannot_write" = "Не удалось записать файл конфигурации!";
-"alert.config.rename.title" = "Rename Input Configuration";
-"alert.config.rename.message" = "Please enter the new name for the configuration.";
+"alert.config.rename.title" = "Новое имя для конфигурации клавиш";
+"alert.config.rename.message" = "Пожалуйста, укажите новое имя конфигурации.";
 
 "alert.filter.incorrect" = "При установке фильтров произошла ошибка. Проверьте формат параметров.";
 "alert.add_filter.title" = "Новый фильтр";

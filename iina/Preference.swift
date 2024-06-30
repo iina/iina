@@ -311,6 +311,11 @@ struct Preference {
     static let recentDocuments = Key("recentDocuments")
 
     static let enableFFmpegImageDecoder = Key("enableFFmpegImageDecoder")
+
+    /// The belief is that the workaround for issue #3844 that adds a tiny subview to the player window is no longer needed.
+    /// To confirm this the workaround is being disabled by default using this preference. Should all go well this workaround will be
+    /// removed in the future.
+    static let enableHdrWorkaround = Key("enableHdrWorkaround")
   }
 
   // MARK: - Enums
@@ -918,7 +923,8 @@ struct Preference {
     .enableRecentDocumentsWorkaround: false,
     .recentDocuments: [Any](),
 
-    .enableFFmpegImageDecoder: true
+    .enableFFmpegImageDecoder: true,
+    .enableHdrWorkaround: false
   ]
 
 

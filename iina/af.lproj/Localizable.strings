@@ -67,8 +67,12 @@
 "osd.subtitle_pos" = "Onderskrifposisie: %.1f";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_hidden" = "Second Subtitles Hidden";
-"osd.sub_second_visible" = "Second Subtitles Visible";
+"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Demp";
 "osd.unmute" = "Ontdemp";
 "osd.screenshot" = "Skermkiekie geneem";
@@ -88,7 +92,8 @@
 "osd.find_online_sub" = "Soek aanlyn na onderskrifte…";
 "osd.find_online_sub.source" = "vanaf";
 "osd.sub_not_found" = "Geen onderskrifte gevind";
-"osd.sub_found" = "%d onderskrifte gevind. Laai tans af…";
+"osd.sub_found" = "%d subtitles found.";
+"osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "Onderskrif afgelaai";
 "osd.sub_saved" = "Onderskrif bewaar";
 "osd.network_error" = "Netwerkfout";
@@ -134,8 +139,8 @@
 "menu.sub_delay" = "Onderskrifvertraging: %.2fs";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Second Subtitles";
-"menu.sub_second_show" = "Show Second Subtitles";
+"menu.sub_second_hide" = "Hide Secondary Subtitles";
+"menu.sub_second_show" = "Show Secondary Subtitles";
 "menu.fullscreen" = "Gaan in volskerm";
 "menu.exit_fullscreen" = "Verlaat volskerm";
 "menu.pip" = "Aktiveer Beeld-in-beeld";
@@ -170,7 +175,10 @@
 "menu.crop_custom" = "Pasgemaak…";
 "menu.find_online_sub" = "Soek aanlyn na onderskrifte van %@";
 
+"track.audio" = "Oudio";
 "track.none" = "<Geen>";
+"track.sub" = "Onderskrif";
+"track.video" = "Video";
 
 "subtrack.no_loaded" = "Geen onderskrifte afgelaai";
 "subtrack.no_external" = "Geen eksterne onderskrifte gevind";

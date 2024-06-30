@@ -2573,7 +2573,7 @@ class MainWindowController: PlayerWindowController {
       if let screenFrame = window.screen?.frame {
         rect = rect.constrain(in: screenFrame)
       }
-      if player.disableWindowAnimation {
+      if player.disableWindowAnimation || Preference.bool(for: .disableAnimations) {
         window.setFrame(rect, display: true, animate: false)
       } else {
         // animated `setFrame` can be inaccurate!

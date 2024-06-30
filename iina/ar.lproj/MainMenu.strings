@@ -83,7 +83,7 @@
 "9pa-9C-ueQ.title" = "<فارغ>";
 
 /* Class = "NSMenuItem"; title = "Save Downloaded Subtitle…"; ObjectID = "9zk-co-roT"; */
-"9zk-co-roT.title" = "Save Downloaded Subtitle…";
+"9zk-co-roT.title" = "حفظ الترجمة التي تم تحميلها…";
 
 /* Class = "NSMenuItem"; title = "Take a Screenshot"; ObjectID = "AoP-K6-Kb5"; */
 "AoP-K6-Kb5.title" = "التقاط الشاشة";
@@ -113,7 +113,7 @@
 "DRb-Y8-xir.title" = "المقطع الصوتي";
 
 /* Class = "NSMenuItem"; title = "Load External Audio…"; ObjectID = "3xl-iD-85w"; */
-"3xl-iD-85w.title" = "Load External Audio…";
+"3xl-iD-85w.title" = "استخدام صوت خارجي…";
 
 /* Class = "NSMenuItem"; title = "Speed Down to 0.9x"; ObjectID = "DUP-nm-BJt"; */
 "DUP-nm-BJt.title" = "تبطيء السرعة إلى 0.9";
@@ -268,8 +268,8 @@
 /* Class = "NSMenuItem"; title = "Pause"; ObjectID = "UOE-MJ-8ku"; */
 "UOE-MJ-8ku.title" = "إيقاف مؤقت";
 
-/* Class = "NSMenu"; title = "Second Subtitle"; ObjectID = "UwY-P2-Xdb"; */
-"UwY-P2-Xdb.title" = "الترجمة الثانوية";
+/* Class = "NSMenu"; title = "Secondary Subtitle"; ObjectID = "UwY-P2-Xdb"; */
+"UwY-P2-Xdb.title" = "Secondary Subtitle";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "VDZ-ro-z5z"; */
 "VDZ-ro-z5z.title" = "تراجع";
@@ -344,19 +344,19 @@
 "dMs-cI-mzQ.title" = "ملف";
 
 /* Class = "NSMenuItem"; title = "Stop and Clear Playlists"; ObjectID = "deS-xK-iBb"; */
-"deS-xK-iBb.title" = "Stop and Clear Playlists";
+"deS-xK-iBb.title" = "إيقاف ومسح قوائم التشغيل";
 
 /* Class = "NSMenu"; title = "Crop"; ObjectID = "eo2-Tt-SLx"; */
 "eo2-Tt-SLx.title" = "اقتصاص";
 
 /* Class = "NSMenuItem"; title = "Audio Delay:"; ObjectID = "foC-r3-8mp"; */
-"foC-r3-8mp.title" = "Audio Delay:";
+"foC-r3-8mp.title" = "تأخير الصوت:";
 
 /* Class = "NSMenuItem"; title = "Subtitle Delay - 0.1s"; ObjectID = "fyL-tr-6Bu"; */
 "fyL-tr-6Bu.title" = "مزامنة الترجمة - 0.1ث";
 
 /* Class = "NSMenuItem"; title = "Check for Updates…"; ObjectID = "gMo-qL-m08"; */
-"gMo-qL-m08.title" = "Check for Updates…";
+"gMo-qL-m08.title" = "تحقق من وجود تحديثات…";
 
 /* Class = "NSMenuItem"; title = "Delete"; ObjectID = "h9w-Rj-Hm1"; */
 "h9w-Rj-Hm1.title" = "حذف";
@@ -365,7 +365,7 @@
 "hz9-B4-Xy5.title" = "الخدمات";
 
 /* Class = "NSMenuItem"; title = "A-B Loop"; ObjectID = "i3P-Xw-8D7"; */
-"i3P-Xw-8D7.title" = "A-B Loop";
+"i3P-Xw-8D7.title" = "تكرار A-B";
 
 /* Class = "NSMenuItem"; title = "Volume:"; ObjectID = "iQF-1S-9EK"; */
 "iQF-1S-9EK.title" = "مستوى الصوت:";
@@ -380,25 +380,25 @@
 "k6x-hf-ATi.title" = "تحميل ترجمة خارجية…";
 
 /* Class = "NSMenuItem"; title = "Bigger Size"; ObjectID = "lDC-IC-peP"; */
-"lDC-IC-peP.title" = "Bigger Size";
+"lDC-IC-peP.title" = "حجم أكبر";
 
 /* Class = "NSMenuItem"; title = "Audio"; ObjectID = "lYN-0x-lzT"; */
 "lYN-0x-lzT.title" = "الصوت";
 
 /* Class = "NSMenuItem"; title = "Audio Delay + 0.1s"; ObjectID = "lew-3S-oGY"; */
-"lew-3S-oGY.title" = "Audio Delay + 0.1s";
+"lew-3S-oGY.title" = "تأخير الصوت 0.1s +";
 
 /* Class = "NSMenuItem"; title = "Go to Screenshot Folder"; ObjectID = "lj0-Oo-7nB"; */
-"lj0-Oo-7nB.title" = "Go to Screenshot Folder";
+"lj0-Oo-7nB.title" = "الذهاب إلى مجلد لقطة الشاشة";
 
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "m7w-hc-Y2F"; */
-"m7w-hc-Y2F.title" = "Make Upper Case";
+"m7w-hc-Y2F.title" = "أجعل الأحرف الكبيرة";
 
-/* Class = "NSMenuItem"; title = "Second Subtitle"; ObjectID = "mGw-jm-5x2"; */
-"mGw-jm-5x2.title" = "الترجمة الثانوية";
+/* Class = "NSMenuItem"; title = "Secondary Subtitle"; ObjectID = "mGw-jm-5x2"; */
+"mGw-jm-5x2.title" = "Secondary Subtitle";
 
 /* Class = "NSMenuItem"; title = "Enter Picture in Picture"; ObjectID = "mND-N8-z6o"; */
-"mND-N8-z6o.title" = "Enter Picture in Picture";
+"mND-N8-z6o.title" = "أدخل صورة في صورة";
 
 /* Class = "NSMenuItem"; title = "Flip"; ObjectID = "mT1-1m-HwN"; */
 "mT1-1m-HwN.title" = "قلب";
@@ -410,7 +410,7 @@
 "n90-to-nRT.title" = "قلب";
 
 /* Class = "NSMenuItem"; title = "Delete Current File"; ObjectID = "npH-8B-XA4"; */
-"npH-8B-XA4.title" = "Delete Current File";
+"npH-8B-XA4.title" = "حذف الملف الحالي";
 
 /* Class = "NSMenu"; title = "Open Recent"; ObjectID = "oas-Oc-fiZ"; */
 "oas-Oc-fiZ.title" = "افتح الأخيرة";
@@ -491,10 +491,10 @@
 "yHI-7D-OaI.title" = "تصحيح تشابك الصورة";
 
 /* Class = "NSMenuItem"; title = "Open in New Window…"; ObjectID = "z9W-ga-j3b"; */
-"z9W-ga-j3b.title" = "Open in New Window…";
+"z9W-ga-j3b.title" = "فتح في نافذة جديدة…";
 
 /* Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "zez-g5-2Pt"; */
-"zez-g5-2Pt.title" = "Make Lower Case";
+"zez-g5-2Pt.title" = "أجعل الأحرف الصغيرة";
 
 /* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "zpw-Ac-F3M"; */
-"zpw-Ac-F3M.title" = "Start Speaking";
+"zpw-Ac-F3M.title" = "أبدء الحديث";

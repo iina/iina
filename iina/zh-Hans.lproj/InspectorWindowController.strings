@@ -2,7 +2,7 @@
 "0vG-Pg-DIl.title" = "强制";
 
 /* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "1dz-Vt-0MO"; */
-"1dz-Vt-0MO.title" = "FPS:";
+"1dz-Vt-0MO.title" = "每秒帧数:";
 
 /* Class = "NSTextFieldCell"; title = "File path:"; ObjectID = "4jf-w4-kkv"; */
 "4jf-w4-kkv.title" = "文件路径:";
@@ -11,7 +11,7 @@
 "5H6-qJ-RDS.title" = "格式:";
 
 /* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "7QX-tu-rvs"; */
-"7QX-tu-rvs.title" = "FPS:";
+"7QX-tu-rvs.title" = "每秒帧数:";
 
 /* Class = "NSTextFieldCell"; title = "Title:"; ObjectID = "9eq-rd-zGy"; */
 "9eq-rd-zGy.title" = "标题:";
@@ -23,7 +23,7 @@
 "AYt-pH-UCi.title" = "错位帧:";
 
 /* Class = "NSTextFieldCell"; title = "Display FPS:"; ObjectID = "AjU-1T-aGR"; */
-"AjU-1T-aGR.title" = "显示 FPS:";
+"AjU-1T-aGR.title" = "显示每秒帧数:";
 
 /* Class = "NSTextFieldCell"; title = "Dropped Frames:"; ObjectID = "CrF-UR-udW"; */
 "CrF-UR-udW.title" = "丢帧:";
@@ -53,7 +53,7 @@
 "I2E-6Z-Gnn.title" = "驱动:";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Disp FPS"; ObjectID = "JN9-3E-OJp"; */
-"JN9-3E-OJp.title" = "显示 FPS（估算）";
+"JN9-3E-OJp.title" = "预估显示帧数";
 
 /* Class = "NSTextFieldCell"; title = "File Path:"; ObjectID = "Jxp-Wf-BhU"; */
 "Jxp-Wf-BhU.title" = "文件路径:";
@@ -71,10 +71,10 @@
 "OCm-zb-deg.title" = "时长:";
 
 /* Class = "NSTextFieldCell"; title = "Selected"; ObjectID = "P65-zr-dOH"; */
-"P65-zr-dOH.title" = "已选择";
+"P65-zr-dOH.title" = "已选";
 
 /* Class = "NSTextFieldCell"; title = "Chapters:"; ObjectID = "PBk-VC-4gu"; */
-"PBk-VC-4gu.title" = "章节数:";
+"PBk-VC-4gu.title" = "章节:";
 
 /* Class = "NSTextFieldCell"; title = "External"; ObjectID = "PLL-fC-blc"; */
 "PLL-fC-blc.title" = "外置";
@@ -116,7 +116,7 @@
 "f7i-wX-uxQ.title" = "轨道:";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Output FPS:"; ObjectID = "g8p-Ec-awO"; */
-"g8p-Ec-awO.title" = "输出 FPS（估算）:";
+"g8p-Ec-awO.title" = "预估输出帧数:";
 
 /* Class = "NSTextFieldCell"; title = "VIDEO"; ObjectID = "gDG-Eq-1Bc"; */
 "gDG-Eq-1Bc.title" = "视频";
@@ -149,7 +149,7 @@
 "nrG-IH-kFg.title" = "音频";
 
 /* Class = "NSTextFieldCell"; title = "Total A/V Sync:"; ObjectID = "sbO-Cn-gpI"; */
-"sbO-Cn-gpI.title" = "总音画同步:";
+"sbO-Cn-gpI.title" = "整体音画同步:";
 
 /* Class = "NSTextFieldCell"; title = "Watch"; ObjectID = "tNS-gW-PcC"; */
 "tNS-gW-PcC.title" = "监视";

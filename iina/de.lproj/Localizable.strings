@@ -67,8 +67,12 @@
 "osd.subtitle_pos" = "Untertitelposition: %.1f";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_hidden" = "Second Subtitles Hidden";
-"osd.sub_second_visible" = "Second Subtitles Visible";
+"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Stumm";
 "osd.unmute" = "Ton ein";
 "osd.screenshot" = "Bildschirmfoto aufgenommen";
@@ -88,7 +92,8 @@
 "osd.find_online_sub" = "Online nach Untertiteln suchen …";
 "osd.find_online_sub.source" = "Quelle:";
 "osd.sub_not_found" = "Keine Untertitel gefunden";
-"osd.sub_found" = "%d Untertitel gefunden. Laden …";
+"osd.sub_found" = "%d subtitles found.";
+"osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "Untertitel geladen";
 "osd.sub_saved" = "Untertitel gesichert";
 "osd.network_error" = "Netzwerkfehler";
@@ -134,8 +139,8 @@
 "menu.sub_delay" = "Untertitelverzögerung: %.2f s";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Second Subtitles";
-"menu.sub_second_show" = "Show Second Subtitles";
+"menu.sub_second_hide" = "Hide Secondary Subtitles";
+"menu.sub_second_show" = "Show Secondary Subtitles";
 "menu.fullscreen" = "Vollbildmodus";
 "menu.exit_fullscreen" = "Vollbildmodus beenden";
 "menu.pip" = "Bild-in-Bild öffnen";
@@ -167,10 +172,13 @@
 "menu.sub_delay_up" = "Untertitelverzögerung + %.1f s";
 "menu.sub_delay_down" = "Untertitelverzögerung − %.1f s";
 
-"menu.crop_custom" = "Benutzerdefiniert …";
+"menu.crop_custom" = "Eigene …";
 "menu.find_online_sub" = "Online-Untertitel von „%@“ finden";
 
+"track.audio" = "Audio";
 "track.none" = "Keine";
+"track.sub" = "Untertitel";
+"track.video" = "Video";
 
 "subtrack.no_loaded" = "Keine Untertitel geladen";
 "subtrack.no_external" = "Keine externen Untertitel gefunden";

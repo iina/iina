@@ -11,10 +11,10 @@
 "general.off" = "关";
 "general.login" = "登录";
 "general.logout" = "登出";
-"general.ok" = "好";
+"general.ok" = "确定";
 "general.cancel" = "取消";
 "general.username" = "用户名";
-"general.password" = "密码";
+"general.password" = "口令";
 
 // Guide Window
 "guide.highlights" = "更新亮点";
@@ -33,7 +33,7 @@
 
 // MainWindowController.swift
 "main.buffering_indicator" = "缓冲中… %d%%";
-"main.opening_stream" = "正在打开流……";
+"main.opening_stream" = "正在打开流媒体……";
 "osc.precision" = "精确度";
 "osc.1s" = "1秒";
 "osc.100ms" = "100毫秒";
@@ -67,8 +67,12 @@
 "osd.subtitle_pos" = "字幕位置：%.1f";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_hidden" = "Second Subtitles Hidden";
-"osd.sub_second_visible" = "Second Subtitles Visible";
+"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "静音";
 "osd.unmute" = "取消静音";
 "osd.screenshot" = "已截图";
@@ -87,8 +91,9 @@
 "osd.video_eq.brightness" = "亮度：%i";
 "osd.find_online_sub" = "正在查找在线字幕…";
 "osd.find_online_sub.source" = "从";
-"osd.sub_not_found" = "未找到字幕";
-"osd.sub_found" = "已找到 %d 个字幕。下载中…";
+"osd.sub_not_found" = "查无字幕";
+"osd.sub_found" = "%d subtitles found.";
+"osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "字幕已下载";
 "osd.sub_saved" = "字幕已保存";
 "osd.network_error" = "网络错误";
@@ -110,7 +115,7 @@
 "preference.subtitle" = "字幕";
 "preference.network" = "网络";
 "preference.control" = "控制";
-"preference.keybindings" = "快捷键";
+"preference.keybindings" = "键位设置";
 "preference.advanced" = "高级";
 "preference.plugins" = "插件";
 "preference.utilities" = "实用工具";
@@ -119,8 +124,8 @@
 "preference.logged_in_as" = "已登录为 %@";
 "preference.system_media_control" = "使用系统媒体控制";
 
-"preference.key_binding_hint_1" = "若要编辑此配置文件，请先点击「复制…」按钮来创建一个副本。";
-"preference.key_binding_hint_2" = "双击右边的任意一行来编辑相应的快捷键。";
+"preference.key_binding_hint_1" = "若要在此配置文件中编辑键位设置，先点击「复制…」按钮以创建一个副本。";
+"preference.key_binding_hint_2" = "双击右边的任意一行以编辑对应键位设置。";
 
 "preference.enable_adv_settings" = "启用高级设置";
 
@@ -134,9 +139,9 @@
 "menu.sub_delay" = "字幕延迟: %.2f秒";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Second Subtitles";
-"menu.sub_second_show" = "Show Second Subtitles";
-"menu.fullscreen" = "进入全屏";
+"menu.sub_second_hide" = "Hide Secondary Subtitles";
+"menu.sub_second_show" = "Show Secondary Subtitles";
+"menu.fullscreen" = "进入全屏模式";
 "menu.exit_fullscreen" = "退出全屏";
 "menu.pip" = "进入「画中画」模式";
 "menu.exit_pip" = "退出「画中画」模式";
@@ -170,9 +175,12 @@
 "menu.crop_custom" = "自定义…";
 "menu.find_online_sub" = "从 %@ 查找在线字幕";
 
+"track.audio" = "音频";
 "track.none" = "<无>";
+"track.sub" = "字幕";
+"track.video" = "视频";
 
-"subtrack.no_loaded" = "没有已加载的字幕";
+"subtrack.no_loaded" = "无字幕加载";
 "subtrack.no_external" = "未找到外挂字幕";
 
 // Alerts
@@ -191,20 +199,20 @@
 "alert.unsupported_url" = "不支持的 URL。";
 "alert.wrong_url_format" = "URL 格式错误。";
 
-"alert.error_open" = "无法打开文件或流！";
+"alert.error_open" = "无法打开文件或流媒体！";
 "alert.error_finding_file" = "无法找到文件 %@！";
 "alert.error_loading_script" = "无法加载脚本 %@！";
 "alert.error_saving_file" = "保存 %@时出错： %@";
 "alert.error_deleting_file" = "无法删除该文件。";
 
-"alert.config.new.title" = "新建快捷键配置";
-"alert.config.new.message" = "请输入配置名。";
-"alert.config.duplicate.title" = "复制快捷键配置";
-"alert.config.duplicate.message" = "请输入复制后的配置文件名。";
+"alert.config.new.title" = "新建输入配置";
+"alert.config.new.message" = "请为此新配置输入名称。";
+"alert.config.duplicate.title" = "复制配置";
+"alert.config.duplicate.message" = "请为此复制配置文件输入名称。";
 "alert.config.empty_name" = "名称不能为空。";
-"alert.config.name_existing" = "A config with the same name already exists.";
+"alert.config.name_existing" = "具有相同名称的配置已存在。";
 "alert.config.file_existing.title" = "同名文件已存在";
-"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
+"alert.config.file_existing.message" = "一个具有相同文件名的配置文件已存在。选择“确定”在Finder中显示该文件。";
 "alert.config.cannot_create" = "无法创建配置文件！\n%@";
 "alert.config.cannot_write" = "无法写入配置文件！";
 "alert.config.rename.title" = "Rename Input Configuration";
@@ -212,11 +220,11 @@
 
 "alert.filter.incorrect" = "设置过滤器时出错。请检查您的参数格式。";
 "alert.add_filter.title" = "添加新滤镜";
-"alert.add_filter.message" = "请输入符合 mpv 的 vf 或 af 选项格式的滤镜字符串。";
+"alert.add_filter.message" = "请输入符合 mpv 的 vf 或 af 格式的滤镜字符串。";
 
-"alert.keybinding_config.error" = "无法读取快捷键配置文件”%@“！已回退至 IINA 默认的键位设置。请检查你的快捷键配置。";
+"alert.keybinding_config.error" = "无法读取快捷键配置文件“%@”！已回退至 IINA 默认的键位设置。请检查你的快捷键配置。";
 
-"alert.extra_option.cannot_read" = "无法读取自定义的 mpv 额外选项。";
+"alert.extra_option.cannot_read" = "无法读取用户定义的 mpv 额外选项。";
 "alert.extra_option.empty" = "键或值不能为空！";
 "alert.extra_option.error" = "无法设置选项 --%@=%@ （返回值 %d）。 请在「设置>高级」中检查您的额外 mpv 选项。";
 "alert.extra_option.config_folder" = "设置配置文件目录 \"%@\" 时出错。";
@@ -229,11 +237,11 @@
 "alert.sub_lang_not_set" = "请在使用 opensubtitles 之前设定字幕语言. 此次将会使用英语 (eng) 。\n\n0.0.7 之后默认的字幕来源将会是 opensubtitles。如果您是中文用户，请在「偏好设置 > 字幕」中确认「字幕来源」为「shooter.cn」，以继续使用射手字幕。";
 "alert.sub.cannot_save_passwd" = "无法将密码保存到钥匙串：%@";
 "alert.sub.cannot_login" = "无法登录。请检查您的用户名、密码及网络状态。\n\n%@";
-"alert.sub.save_downloaded.title" = "保存下载的字幕";
+"alert.sub.save_downloaded.title" = "保存已下载字幕";
 
-"alert.set_default.title" = "将 IINA 设为默认播放器";
-"alert.set_default.message" = "IINA 将会被关联至所有支持的文件格式。";
-"alert.set_default.success" = "操作已完成。%d 成功，%d 失败。";
+"alert.set_default.title" = "正在将 IINA 设为默认程序";
+"alert.set_default.message" = "IINA 将作为默认程序打开所有支持文件类型。";
+"alert.set_default.success" = "已完成。%d 成功，%d 失败。";
 
 "alert.add_watch.title" = "添加监视属性";
 "alert.add_watch.message" = "请输入一个有效的 mpv 属性名称。";
@@ -252,15 +260,15 @@
 "alert.add_url.message" = "请输入 URL:";
 
 "alert.delete_history.title" = "删除播放历史记录";
-"alert.delete_history.message" = "确定要删除所选的历史记录吗？";
+"alert.delete_history.message" = "确定删除所选项目？";
 
-"alert.filter_hwdec.message" = "你正在使用一个视频滤镜，但当前的硬件解码器不能很好地支持视频滤镜。你可以选择禁用硬件解码，或切换至自动（拷贝）解码，这将占用两倍内存。\n你可能需要再操作一次（例如设置裁切）才能生效。";
+"alert.filter_hwdec.message" = "你正在添加视频滤镜。然而，当前的硬件解码器不能很好地支持视频滤镜。你可以禁用硬件解码，或使用支持「拷贝」的解码器 (将占用两倍内存)。\n你可能需要再操作一次（例如剪切）才能看到效果。";
 "alert.filter_hwdec.abort" = "放弃";
 "alert.filter_hwdec.turn_off" = "关闭硬件解码";
-"alert.filter_hwdec.use_copy" = "使用”自动（拷贝）“解码器";
+"alert.filter_hwdec.use_copy" = "使用“自动（拷贝）”解码器";
 
 "alert.clear_cache.title" = "清除缩略图缓存";
-"alert.clear_cache.message" = "确定清除所有缩略图缓存吗?";
+"alert.clear_cache.message" = "确定清除所有缩略图缓存?";
 
 "alert.clear_history.title" = "清除播放历史";
 "alert.clear_history.message" = "确定删除所有播放历史吗？";
@@ -271,18 +279,18 @@
 "alert.restore_alerts.title" = "还原已忽略的警告";
 "alert.restore_alerts.message" = "您确定要还原已忽略的警告吗？";
 
-"alert.nothing_to_open" = "没有可打开的文件。";
+"alert.nothing_to_open" = "无文件可打开。";
 
-"alert.no_video_track" = "没有可用的视频轨道。";
+"alert.no_video_track" = "无视频轨道。";
 
-"alert.duplicate_config" = "默认配置不能被编辑。请先复制后再编辑。";
+"alert.duplicate_config" = "您无法直接编辑默认配置。请先复制后再编辑。";
 
-"alert.assrt_register" = "由于射手网(伪)的 API 请求数量限制，请务必在射手网(伪)注册账户后使用自己的 API token。自带 API token 仅用于测试用途，并且可能由于 API 使用超出限额而请求失败。";
-"alert.assrt_register.register" = "去射手网(伪)注册";
-"alert.assrt_register.try" = "先试用一下";
-"alert.assrt_token_prompt.title" = "输入你在射手网(伪)的 API token";
-"alert.assrt_token_prompt.message" = "请在弹出的网页中注册帐号，然后进入用户首页查看 API token 并在下方输入:";
-"alert.assrt_token_invalid" = "你的射手网(伪) API token 格式错误。";
+"alert.assrt_register" = "由于 API 配额限制，我们强烈建议您使用自己的 API token。默认 API token 仅做测试用途，且您有可能遇到网络错误。";
+"alert.assrt_register.register" = "立即注册";
+"alert.assrt_register.try" = "试用一下";
+"alert.assrt_token_prompt.title" = "输入您的 API token";
+"alert.assrt_token_prompt.message" = "请在弹出网页中注册帐号。在您个人首页中获得 token 并在下方输入:";
+"alert.assrt_token_invalid" = "您的 Assrt API token 疑似无效。";
 
 "alert.plugin_uninstall.title" = "你确定要卸载 %@ 吗？";
 "alert.plugin_uninstall.message" = "插件将从您的硬盘中删除。";
@@ -323,7 +331,7 @@
 "filter.video_filters" = "视频滤镜";
 "filter.audio_filters" = "音频滤镜";
 
-"hwdec.no" = "不启用硬件解码。";
+"hwdec.no" = "禁用硬件解码。";
 "hwdec.auto" = "启用硬件解码。但大多数视频滤镜不会正常工作。";
 "hwdec.auto-copy" = "启用硬件解码。这将占用约两倍内存，但支持视频滤镜。";
 
@@ -360,8 +368,8 @@
 "touchbar.rewind" = "快退";
 "touchbar.fast_forward" = "快进";
 "touchbar.play_pause" = "播放 / 暂停";
-"touchbar.seek" = "进度条";
-"touchbar.time" = "播放进度";
+"touchbar.seek" = "查找进度";
+"touchbar.time" = "进度位置";
 "touchbar.remainingTimeOrTotalDuration" = "剩余时间/总时间";
 "touchbar.toggle_pip" = "切换“画中画”模式";
 

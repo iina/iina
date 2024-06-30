@@ -67,8 +67,12 @@
 "osd.subtitle_pos" = "Altyazı Konumu: %.1f";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_hidden" = "Second Subtitles Hidden";
-"osd.sub_second_visible" = "Second Subtitles Visible";
+"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Sesi Kapat";
 "osd.unmute" = "Sesi Aç";
 "osd.screenshot" = "Ekran Görüntüsü Alındı";
@@ -88,7 +92,8 @@
 "osd.find_online_sub" = "Çevrimiçi altyazılar bulunuyor...";
 "osd.find_online_sub.source" = "şu siteden:";
 "osd.sub_not_found" = "Altyazı bulunamadı";
-"osd.sub_found" = "%d altyazı bulundu. İndiriliyor…";
+"osd.sub_found" = "%d subtitles found.";
+"osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "Altyazı indirildi";
 "osd.sub_saved" = "Altyazı kaydedildi";
 "osd.network_error" = "Ağ hatası";
@@ -134,8 +139,8 @@
 "menu.sub_delay" = "Altyazı Gecikmesi: %.2f sn";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Second Subtitles";
-"menu.sub_second_show" = "Show Second Subtitles";
+"menu.sub_second_hide" = "Hide Secondary Subtitles";
+"menu.sub_second_show" = "Show Secondary Subtitles";
 "menu.fullscreen" = "Tam Ekrana Geç";
 "menu.exit_fullscreen" = "Tam Ekrandan Çık";
 "menu.pip" = "Resim İçinde Resim'e Geç";
@@ -170,7 +175,10 @@
 "menu.crop_custom" = "Özel...";
 "menu.find_online_sub" = "Çevrimiçi Altyazı Bul";
 
+"track.audio" = "Ses";
 "track.none" = "<Hiçbiri>";
+"track.sub" = "Altyazı";
+"track.video" = "Video";
 
 "subtrack.no_loaded" = "Yüklenmiş Altyazı Yok";
 "subtrack.no_external" = "Dış Altyazı Bulunamadı";

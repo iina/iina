@@ -65,10 +65,14 @@
 "osd.sub_delay.later" = "עיכוב כתוביות: %.2f שניות איחור";
 "osd.sub_delay.earlier" = "עיכוב כתוביות: %.2f שניות הקדמה";
 "osd.subtitle_pos" = "מיקום כתוביות: %.1f";
-"osd.sub_hidden" = "Subtitles Hidden";
-"osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_hidden" = "Second Subtitles Hidden";
-"osd.sub_second_visible" = "Second Subtitles Visible";
+"osd.sub_hidden" = "הכתוביות מוסתרות";
+"osd.sub_visible" = "הכתוביות מוצגות";
+"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "מושתק";
 "osd.unmute" = "לא מושתק";
 "osd.screenshot" = "בוצע צילום מסך";
@@ -88,7 +92,8 @@
 "osd.find_online_sub" = "מחפש כתוביות מקוונות…";
 "osd.find_online_sub.source" = "מאת";
 "osd.sub_not_found" = "לא נמצאו כתוביות";
-"osd.sub_found" = "%d כתוביות נמצאו. מוריד…";
+"osd.sub_found" = "%d subtitles found.";
+"osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "הכתוביות הורדו";
 "osd.sub_saved" = "הכתוביות נשמרו";
 "osd.network_error" = "שגיאת רשת";
@@ -132,10 +137,10 @@
 "menu.volume_muted" = "עוצמת שמע: %d (מושתק)";
 "menu.audio_delay" = "עיכוב שמע: %.2f שניות";
 "menu.sub_delay" = "עיכוב כתוביות: %.2f שניות";
-"menu.sub_hide" = "Hide Subtitles";
-"menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Second Subtitles";
-"menu.sub_second_show" = "Show Second Subtitles";
+"menu.sub_hide" = "הסתר כתוביות";
+"menu.sub_show" = "הצג כתוביות";
+"menu.sub_second_hide" = "Hide Secondary Subtitles";
+"menu.sub_second_show" = "Show Secondary Subtitles";
 "menu.fullscreen" = "עבור למסך מלא";
 "menu.exit_fullscreen" = "צא ממסך מלא";
 "menu.pip" = "היכנס למצב תמונה בתוך תמונה";
@@ -167,10 +172,13 @@
 "menu.sub_delay_up" = "עיכוב כתוביות: הוסף %.1f שניות";
 "menu.sub_delay_down" = "עיכוב כתוביות: הפחת %.1f שניות";
 
-"menu.crop_custom" = "מותאם אישית...";
+"menu.crop_custom" = "מותאם אישית…";
 "menu.find_online_sub" = "מצא כתוביות מקוונות מ-%@";
 
+"track.audio" = "שמע";
 "track.none" = "<ללא>";
+"track.sub" = "כתוביות";
+"track.video" = "וידאו";
 
 "subtrack.no_loaded" = "לא נטענו כתוביות";
 "subtrack.no_external" = "לא נמצאו כתוביות חיצוניות";
@@ -204,7 +212,7 @@
 "alert.config.empty_name" = "השם לא יכול להיות ריק.";
 "alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "הקובץ כבר קיים";
-"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
+"alert.config.file_existing.message" = "קובץ תצורה באותו שם קובץ כבר קיים. בחר אישור כדי להציג את הקובץ ב-Finder.";
 "alert.config.cannot_create" = "יצירת קובץ התצורה נכשלה!\n%@";
 "alert.config.cannot_write" = "הכתיבה לקובץ התצורה נכשלה!";
 "alert.config.rename.title" = "Rename Input Configuration";

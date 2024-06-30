@@ -67,8 +67,12 @@
 "osd.subtitle_pos" = "جایگذاری زیرنویس: %.1f";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_hidden" = "Second Subtitles Hidden";
-"osd.sub_second_visible" = "Second Subtitles Visible";
+"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "بی صدا";
 "osd.unmute" = "با صدا";
 "osd.screenshot" = "عکس از صفحه گرفته شد";
@@ -88,7 +92,8 @@
 "osd.find_online_sub" = "جستجوی زیرنویس آنلاین…";
 "osd.find_online_sub.source" = "از:";
 "osd.sub_not_found" = "هیچ زیرنویسی یافت نشد.";
-"osd.sub_found" = "%d زیرنویس پیدا شد. در حال بارگیری…";
+"osd.sub_found" = "%d subtitles found.";
+"osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "زیرنویس دانلود شد";
 "osd.sub_saved" = "زیرنویس ذخیره شد";
 "osd.network_error" = "خطای شبکه";
@@ -134,8 +139,8 @@
 "menu.sub_delay" = "تاخیر زیرنویس: %.2f ثانیه";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Second Subtitles";
-"menu.sub_second_show" = "Show Second Subtitles";
+"menu.sub_second_hide" = "Hide Secondary Subtitles";
+"menu.sub_second_show" = "Show Secondary Subtitles";
 "menu.fullscreen" = "حالت تمام صفحه";
 "menu.exit_fullscreen" = "خروج از تمام صفحه";
 "menu.pip" = "استفاده از تصویر در تصویر";
@@ -167,10 +172,13 @@
 "menu.sub_delay_up" = "تاخیر زیرنویس + %.1f ثانیه";
 "menu.sub_delay_down" = "تاخیر زیرنویس - %.1f ثانیه";
 
-"menu.crop_custom" = "سفارشی...";
+"menu.crop_custom" = "سفارشی…";
 "menu.find_online_sub" = "Find Online Subtitles from %@";
 
+"track.audio" = "صدا";
 "track.none" = "<هیچکدام>";
+"track.sub" = "زیرنویس";
+"track.video" = "ویدئو";
 
 "subtrack.no_loaded" = "هیچ زیرنویسی یافته نشد";
 "subtrack.no_external" = "زیرنویسی پیدا نشد";

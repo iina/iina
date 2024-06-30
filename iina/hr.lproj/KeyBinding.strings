@@ -14,8 +14,8 @@
 "cmd.cycle-values" = "Listaj u";
 "cmd.add" = "Promijeni";
 "cmd.multiply" = "Pomnoži";
-"cmd.frame-step" = "Sljedeći okvir";
-"cmd.frame-back-step" = "Prethodan okvir";
+"cmd.frame-step" = "Sljedeći kadar";
+"cmd.frame-back-step" = "Prethodni kadar";
 "cmd.ab-loop" = "A-B petlja";
 "cmd.sub-seek" = "Traži titl";
 "cmd.playlist-next" = "Sljedeći medij";
@@ -24,23 +24,23 @@
 "cmd.playlist-clear" = "Izbriši playlistu";
 "cmd.playlist-remove" = "Ukloni trenutačnu";
 "cmd.playlist-shuffle" = "Odaberi nasumice";
-"cmd.write-watch-later-config" = "Povijest reprodukcija";
+"cmd.write-watch-later-config" = "Zapiši povijest reprodukcija";
 "cmd.stop" = "Prekini";
 "cmd.quit" = "Izlaz";
-"cmd.quit-watch-later" = "Izlaz (spremi)";
-"cmd.screenshot" = "Snimka zaslona";
-"cmd.screenshot-to-file" = "Snimka zaslona do datoteke";
-"cmd.loadfile" = "Učitaj datotek";
+"cmd.quit-watch-later" = "Izlaz (spremi napredak)";
+"cmd.screenshot" = "Snimka ekrana";
+"cmd.screenshot-to-file" = "Snimka ekrana u datoteku";
+"cmd.loadfile" = "Učitaj datoteku";
 "cmd.loadlist" = "Učitaj playlistu";
 "cmd.run" = "Pokreni";
 
-"iina.flip" = "Preokreni";
-"iina.mirror" = "Zrcali";
+"iina.flip" = "Preokreni okomito";
+"iina.mirror" = "Preokreni vodoravno";
 
 "iina.toggle-pip" = "Uključi/isključi sliku u slici";
-"iina.toggle-music-mode" = "Uključi/Isključi modus glazbe";
+"iina.toggle-music-mode" = "Uključi/isključi modus glazbe";
 "iina.open-file" = "Otvori datoteku";
-"iina.open-url" = "Otvori poveznicu";
+"iina.open-url" = "Otvori URL";
 "iina.video-panel" = "Video ploča";
 "iina.audio-panel" = "Zvučni ploča";
 "iina.sub-panel" = "Ploča titlova";
@@ -49,8 +49,8 @@
 "iina.bigger-window" = "Veći prozor";
 "iina.smaller-window" = "Manji prozor";
 "iina.fit-to-screen" = "Prilagodi veličini ekrana";
-"iina.toggle-flip" = "Uključi/Isključi okretanje";
-"iina.toggle-mirror" = "Uključi/Isključi zrcaljenje";
+"iina.toggle-flip" = "Uključi/Isključi okomito preokretanje";
+"iina.toggle-mirror" = "Uključi/Isključi vodoravno preokretanje";
 "iina.save-playlist" = "Spremi trenutačnu playlistu";
 "iina.delete-current-file" = "Izbriši trenutačnu datoteku";
 "iina.delete-current-file-hard" = "Odmah izbriši trenutačnu datoteku";
@@ -59,12 +59,12 @@
 
 "yes" = "Da";
 "no" = "Ne";
-"to" = "do";
+"to" = "na";
 "by" = "od";
 "in" = "u";
 "add" = "povećaj";
 "minus" = "smanji";
-"forward" = "napred";
+"forward" = "naprijed";
 "backward" = "unatrag";
 "seek-to" = "do";
 
@@ -97,9 +97,9 @@
 
 "opt.sub" = "Traka titlova";
 "opt.sub-delay" = "Kašnjenje titlova";
-"opt.sub-pos" = "Položaj titla";
-"opt.sub-scale" = "Skaliranje titla";
-"opt.sub-visibility" = "Vidljivost titla";
+"opt.sub-pos" = "Položaj titlova";
+"opt.sub-scale" = "Veličina titlova";
+"opt.sub-visibility" = "Vidljivost titlova";
 "opt.sub-ass-style-override" = "Prepisivanje ASS stila";
 
 "opt.fullscreen" = "Cjeloekranski prikaz";
@@ -107,7 +107,7 @@
 
 "opt.chapter" = "Poglavlje";
 
-"read.set" = "Postavi {{property}} do {{value}}";
+"read.set" = "Postavi {{property}} na {{value}}";
 "read.add" = "{{property}} {{value}}";
 "read.multiply" = "Pomnoži {{property}} × {{factor}}";
 "read.cycle" = "Listaj {{property}}{{#dir_down}} prema dolje{{/dir_down}}";

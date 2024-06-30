@@ -65,10 +65,14 @@
 "osd.sub_delay.later" = "자막 지연: %.2f초 느리게";
 "osd.sub_delay.earlier" = "자막 지연: %.2f초 빠르게";
 "osd.subtitle_pos" = "자막 위치: %.1f";
-"osd.sub_hidden" = "Subtitles Hidden";
-"osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_hidden" = "Second Subtitles Hidden";
-"osd.sub_second_visible" = "Second Subtitles Visible";
+"osd.sub_hidden" = "자막 숨김";
+"osd.sub_visible" = "자막 보임";
+"osd.sub_second_delay.nodelay" = "두번째 자막 지연: 없음";
+"osd.sub_second_delay.later" = "두번째 자막 지연: %.2f초 느리게";
+"osd.sub_second_delay.earlier" = "두번째 자막 지연: %.2f초 빠르게";
+"osd.sub_second_hidden" = "두번째 자막 숨김";
+"osd.sub_second_pos" = "두번째 자막 위치: %.1f";
+"osd.sub_second_visible" = "두번째 자막 보임";
 "osd.mute" = "소리 끔";
 "osd.unmute" = "음소거 해제";
 "osd.screenshot" = "스크린샷 저장됨";
@@ -88,7 +92,8 @@
 "osd.find_online_sub" = "인터넷에서 자막을 찾는 중…";
 "osd.find_online_sub.source" = "사이트에서 찾는 중";
 "osd.sub_not_found" = "자막을 찾지 못했습니다";
-"osd.sub_found" = "%d 자막을 찾았습니다. 다운로드하는 중…";
+"osd.sub_found" = "%d개의 자막 찾음";
+"osd.sub_downloading" = "%d 자막 다운로드 중";
 "osd.sub_downloaded" = "자막 다운로드됨";
 "osd.sub_saved" = "자막 저장됨";
 "osd.network_error" = "네트워크 오류";
@@ -132,10 +137,10 @@
 "menu.volume_muted" = "음량: %d (음소거 됨)";
 "menu.audio_delay" = "오디오 지연: %.2f초";
 "menu.sub_delay" = "자막 지연: %.2f초";
-"menu.sub_hide" = "Hide Subtitles";
-"menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Second Subtitles";
-"menu.sub_second_show" = "Show Second Subtitles";
+"menu.sub_hide" = "자막 숨기기";
+"menu.sub_show" = "자막 보이기";
+"menu.sub_second_hide" = "두번째 자막 숨기기";
+"menu.sub_second_show" = "두번째 자막 보이기";
 "menu.fullscreen" = "전체 화면";
 "menu.exit_fullscreen" = "전체 화면에서 나가기";
 "menu.pip" = "화면 속 화면";
@@ -170,7 +175,10 @@
 "menu.crop_custom" = "사용자 설정…";
 "menu.find_online_sub" = "%@에서 온라인 자막 찾기";
 
+"track.audio" = "오디오";
 "track.none" = "<없음>";
+"track.sub" = "자막";
+"track.video" = "비디오";
 
 "subtrack.no_loaded" = "자막을 불러올 수 없습니다";
 "subtrack.no_external" = "외부 자막을 찾을 수 없습니다";
@@ -202,13 +210,13 @@
 "alert.config.duplicate.title" = "설정 파일 복제";
 "alert.config.duplicate.message" = "새로 만들 설정 파일의 이름을 입력하십시오.";
 "alert.config.empty_name" = "파일 이름을 지정하십시오.";
-"alert.config.name_existing" = "A config with the same name already exists.";
+"alert.config.name_existing" = "같은 이름의 설정이 이미 존재합니다.";
 "alert.config.file_existing.title" = "같은 이름의 설정 파일이 이미 있습니다.";
-"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
+"alert.config.file_existing.message" = "같은 이름의 설정 파일이 이미 존재합니다. 파일을 보려면 OK를 선택하세요.";
 "alert.config.cannot_create" = "설정 파일을 만들 수 없습니다!\n%@";
 "alert.config.cannot_write" = "설정 파일에 저장할 수 없습니다!";
-"alert.config.rename.title" = "Rename Input Configuration";
-"alert.config.rename.message" = "Please enter the new name for the configuration.";
+"alert.config.rename.title" = "설정 파일 이름 변경하기";
+"alert.config.rename.message" = "새 설정 파일의 이름을 입력해주세요.";
 
 "alert.filter.incorrect" = "필터를 설정하는 도중 오류가 발생했습니다. 매개변수 형식을 확인하십시오.";
 "alert.add_filter.title" = "새 필터";

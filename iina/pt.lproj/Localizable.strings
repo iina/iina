@@ -67,8 +67,12 @@
 "osd.subtitle_pos" = "Posição da Legenda: %.1f";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_hidden" = "Second Subtitles Hidden";
-"osd.sub_second_visible" = "Second Subtitles Visible";
+"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Desativar Som";
 "osd.unmute" = "Ligar som";
 "osd.screenshot" = "Captura de ecrã efetuada";
@@ -88,7 +92,8 @@
 "osd.find_online_sub" = "A encontrar legendas online…";
 "osd.find_online_sub.source" = "de";
 "osd.sub_not_found" = "Não foram encontradas legendas";
-"osd.sub_found" = "%d legendas encontradas. Transferindo…";
+"osd.sub_found" = "%d subtitles found.";
+"osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "Legenda transferida";
 "osd.sub_saved" = "Legenda guardada";
 "osd.network_error" = "Erro de Rede";
@@ -134,8 +139,8 @@
 "menu.sub_delay" = "Atraso da legenda: %.2fs";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Second Subtitles";
-"menu.sub_second_show" = "Show Second Subtitles";
+"menu.sub_second_hide" = "Hide Secondary Subtitles";
+"menu.sub_second_show" = "Show Secondary Subtitles";
 "menu.fullscreen" = "Entrar em Ecrã Completo";
 "menu.exit_fullscreen" = "Sair do Ecrã Completo";
 "menu.pip" = "Usar Picture in Picture";
@@ -167,10 +172,13 @@
 "menu.sub_delay_up" = "Atraso da legenda + %.1fs";
 "menu.sub_delay_down" = "Atraso da legenda - %.1fs";
 
-"menu.crop_custom" = "Personalizar...";
+"menu.crop_custom" = "Personalizado…";
 "menu.find_online_sub" = "Find Online Subtitles from %@";
 
+"track.audio" = "Áudio";
 "track.none" = "<None>";
+"track.sub" = "Legenda";
+"track.video" = "Vídeo";
 
 "subtrack.no_loaded" = "Nenhuma Legenda Carregada";
 "subtrack.no_external" = "Nenhuma Legenda Externa Encontrada";

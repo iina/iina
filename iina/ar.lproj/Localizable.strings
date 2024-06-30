@@ -46,7 +46,7 @@
 "quicksetting.hwdec" = "فك ترميز الجهاز";
 "quicksetting.deinterlace" = "تشابك";
 "quicksetting.hdr" = "النطاق الديناميكي العالي HDR";
-"quicksetting.hide" = "Hide";
+"quicksetting.hide" = "إخفاء";
 
 // OSDMessage.swift
 "osd.pause" = "إيقاف مؤقت";
@@ -65,10 +65,14 @@
 "osd.sub_delay.later" = "تأخير الترجمة: %.2fث لاحقاً";
 "osd.sub_delay.earlier" = "تأخير الترجمة: %.2fثانية سابقة";
 "osd.subtitle_pos" = "موضع الترجمة: %.1f";
-"osd.sub_hidden" = "Subtitles Hidden";
-"osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_hidden" = "Second Subtitles Hidden";
-"osd.sub_second_visible" = "Second Subtitles Visible";
+"osd.sub_hidden" = "الترجمات مخفية";
+"osd.sub_visible" = "الترجمات مرئية";
+"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "كتم";
 "osd.unmute" = "إلغاء الكتم";
 "osd.screenshot" = "تم التقاط لقطة الشاشة";
@@ -88,20 +92,21 @@
 "osd.find_online_sub" = "العثور على الترجمة عبر الإنترنت…";
 "osd.find_online_sub.source" = "من";
 "osd.sub_not_found" = "لم يتم العثور على ترجمات";
-"osd.sub_found" = "تم العثور على ترجمات %d. تحميل…";
+"osd.sub_found" = "%d subtitles found.";
+"osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "تم تنزيل الترجمة";
 "osd.sub_saved" = "تم حفظ الترجمة";
 "osd.network_error" = "خطأ في الشبكة";
 "osd.file_error" = "خطأ في قراءة الملف";
 "osd.cannot_login" = "لا يمكن تسجيل الدخول";
 "osd.canceled" = "ملغاة";
-"osd.cannot_connect" = "Cannot connect";
-"osd.timed_out" = "Timed Out";
+"osd.cannot_connect" = "لا يمكن الاتصال";
+"osd.timed_out" = "انتهت المهلة";
 "osd.filter_added" = "تمت إضافة فلتر: %@";
 "osd.filter_removed" = "إزالة الفلتر";
-"osd.file_loop" = "Loop Single File";
-"osd.playlist_loop" = "Loop Playlist";
-"osd.no_loop" = "Disable Looping";
+"osd.file_loop" = "تكرار ملف واحد";
+"osd.playlist_loop" = "تكرار قائمة التشغيل";
+"osd.no_loop" = "تعطيل التكرار";
 
 "preference.title" = "التفضيلات";
 "preference.general" = "عام";
@@ -126,22 +131,22 @@
 
 "preference.sub_override_level.force" = "force";
 "preference.sub_override_level.strip" = "strip";
-"preference.sub_override_level.yes" = "yes";
+"preference.sub_override_level.yes" = "نعم";
 
 "menu.volume" = "الصوت: %d";
 "menu.volume_muted" = "الحجم: %d (مكتمل)";
 "menu.audio_delay" = "تأخير الصوت: %.2fث";
 "menu.sub_delay" = "تأخير الترجمه: %.2f ثانيه";
-"menu.sub_hide" = "Hide Subtitles";
-"menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Second Subtitles";
-"menu.sub_second_show" = "Show Second Subtitles";
+"menu.sub_hide" = "إخفاء الترجمات";
+"menu.sub_show" = "إظهار الترجمات";
+"menu.sub_second_hide" = "Hide Secondary Subtitles";
+"menu.sub_second_show" = "Show Secondary Subtitles";
 "menu.fullscreen" = "الدخول إلى وضع ملء الشاشة";
 "menu.exit_fullscreen" = "إنهاء وضع ملء الشاشة";
 "menu.pip" = "الدخول إلى وضع صورة في صورة";
 "menu.exit_pip" = "الخروج من وضع صورة في صورة";
-"menu.mini_player" = "Enter Music Mode";
-"menu.exit_mini_player" = "Exit Music Mode";
+"menu.mini_player" = "أدخل وضع الموسيقى";
+"menu.exit_mini_player" = "الخروج من وضع الموسيقى";
 "menu.pause" = "إيقاف مؤقت";
 "menu.resume" = "استئناف";
 "menu.speed" = "السرعة: %.2fx";
@@ -167,10 +172,13 @@
 "menu.sub_delay_up" = "تأخير الترجمه: +%.1f ثانيه";
 "menu.sub_delay_down" = "تأخير الترجمه: -%.1f ثانيه";
 
-"menu.crop_custom" = "مخصص...";
+"menu.crop_custom" = "مخصص…";
 "menu.find_online_sub" = "ابحث عن ترجمات على الإنترنت من %@";
 
+"track.audio" = "الصوت";
 "track.none" = "<None>";
+"track.sub" = "الترجمة";
+"track.video" = "الفيديو";
 
 "subtrack.no_loaded" = "لم يتم العثور على ترجمات محمّله";
 "subtrack.no_external" = "لم يتم العثور على ترجمات خارجيه";
@@ -335,7 +343,7 @@
 "osc_toolbar.full_screen" = "التبديل لوضع ملء الشاشة";
 "osc_toolbar.music_mode" = "الدخول إلى وضع الموسيقى";
 "osc_toolbar.sub_track" = "اختيار مسار الترجمة";
-"osc_toolbar.screenshot" = "Take a screenshot";
+"osc_toolbar.screenshot" = "خذ لقطة شاشة";
 
 "mini_player.album_art" = "تبديل صورة الألبوم";
 "mini_player.loop" = "تكرار";
@@ -380,12 +388,12 @@
 "permissions.file-system.desc" = "يمكن لهذه الإضافة قراءة أو كتابة الملفات على القرص الخاص بك، بما في ذلك المعلومات الحساسة. يمكنها أيضًا الاتصال بالبرامج أو التطبيقات الأخرى التي يمكن أن تضر بجهاز الكمبيوتر الخاص بك. لذا تأكد من التحقق من المصدر.";
 
 "plugin.install" = "تثبيت";
-"plugin.installed" = "Installed";
-"plugin.not_installed" = "Not Installed";
-"plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occurred during the installation: %@";
-"alert.invalid_url" = "The URL is invalid.";
-"plugin.install_error.invalid_url" = "The URL is invalid.";
+"plugin.installed" = "مثبت";
+"plugin.not_installed" = "غير مثبتة";
+"plugin.local" = "مثبتة محليا";
+"alert.plugin.install_error" = "حدث خطأ أثناء التثبيت: %@";
+"alert.invalid_url" = "عنوان URL غير صالح.";
+"plugin.install_error.invalid_url" = "عنوان URL غير صالح.";
 "plugin.install_error.file_not_found" = "لا يمكن العثور على ملف الحزمة.";
 "plugin.install_error.cannot_download" = "";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";

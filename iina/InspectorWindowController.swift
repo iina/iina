@@ -350,7 +350,7 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
         if !player.isStopping, !player.isStopped, !player.isShuttingDown, !player.isShutdown,
             let value = PlayerCore.lastActive.mpv.getString(property) {
           textField.stringValue = value
-          textField.textColor = .controlTextColor
+          textField.textColor = .labelColor
         } else {
           let errorString = NSLocalizedString("inspector.error", comment: "Error")
 
@@ -467,7 +467,7 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
   // MARK: Utils
 
   private func setLabelColor(_ label: NSTextField, by state: Bool) {
-    label.textColor = state ? NSColor.textColor : NSColor.disabledControlTextColor
+    label.textColor = state ? NSColor.labelColor : NSColor.disabledControlTextColor
   }
 
   private func saveWatchList() {

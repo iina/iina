@@ -1865,10 +1865,21 @@ class PlayerCore: NSObject {
     mainWindow.videoView.refreshEdrMode()
   }
 
+  func secondarySubDelayChanged(_ delay: Double) {
+    sendOSD(.secondSubDelay(delay))
+    needReloadQuickSettingsView()
+  }
+
+  func secondarySubPosChanged(_ position: Double) {
+    sendOSD(.secondSubPos(position))
+    needReloadQuickSettingsView()
+  }
+
   func secondarySidChanged() {
     guard !isShuttingDown, !isShutdown else { return }
     info.secondSid = Int(mpv.getInt(MPVOption.Subtitles.secondarySid))
     postNotification(.iinaSIDChanged)
+    sendOSD(.track(info.currentTrack(.secondSub) ?? .noneSubTrack))
   }
 
   func secondSubVisibilityChanged(_ visible: Bool) {
@@ -1883,6 +1894,17 @@ class PlayerCore: NSObject {
     info.sid = Int(mpv.getInt(MPVOption.TrackSelection.sid))
     postNotification(.iinaSIDChanged)
     sendOSD(.track(info.currentTrack(.sub) ?? .noneSubTrack))
+  }
+
+  func subDelayChanged(_ delay: Double) {
+    info.subDelay = delay
+    sendOSD(.subDelay(delay))
+    needReloadQuickSettingsView()
+  }
+
+  func subPosChanged(_ position: Double) {
+    sendOSD(.subPos(position))
+    needReloadQuickSettingsView()
   }
 
   func subVisibilityChanged(_ visible: Bool) {

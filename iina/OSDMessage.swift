@@ -48,7 +48,9 @@ enum OSDMessage {
   case subScale(Double)
   case subHidden
   case subVisible
+  case secondSubDelay(Double)
   case secondSubHidden
+  case secondSubPos(Double)
   case secondSubVisible
   case subPos(Double)
   case mute
@@ -188,6 +190,23 @@ enum OSDMessage {
         return (str, .withProgress(toPercent(value, 10)))
       }
 
+    case .secondSubDelay(let value):
+      if value == 0 {
+        return (
+          NSLocalizedString("osd.sub_second_delay.nodelay", comment: "Secondary Subtitle Delay: No Delay"),
+          .withProgress(0.5)
+        )
+      } else {
+        let str = value > 0 ? String(format: NSLocalizedString("osd.sub_second_delay.later", comment: "Secondary Subtitle Delay: %fs Later"),abs(value)) : String(format: NSLocalizedString("osd.sub_second_delay.earlier", comment: "Secondary Subtitle Delay: %fs Earlier"), abs(value))
+        return (str, .withProgress(toPercent(value, 10)))
+      }
+
+    case .secondSubPos(let value):
+      return (
+        String(format: NSLocalizedString("osd.sub_second_pos", comment: "Secondary Subtitle Position: %f"), value),
+        .withProgress(value / 100)
+      )
+
     case .subDelay(let value):
       if value == 0 {
         return (
@@ -262,13 +281,19 @@ enum OSDMessage {
       )
 
     case .track(let track):
-      let trackTypeStr: String
+      let keySuffix: String
       switch track.type {
-      case .video: trackTypeStr = "Video"
-      case .audio: trackTypeStr = "Audio"
-      case .sub: trackTypeStr = "Subtitle"
-      case .secondSub: trackTypeStr = "Second Subtitle"
+      case .video: keySuffix = "video"
+      case .audio: keySuffix = "audio"
+      case .sub: keySuffix = "sub"
+      case .secondSub:
+        // This enum constant is only used for setting the secondary subtitle. No track should use
+        // this type. This is an internal error.
+        Logger.log("Invalid subtitle track type: secondSub", level: .error)
+        keySuffix = "sub"
       }
+      let trackTypeStr = String(format: NSLocalizedString("track." + keySuffix,
+        comment: "Kind of track (Audio, Video, Subtitle)"))
       return (trackTypeStr + ": " + track.readableTitle, .normal)
 
     case .subScale(let value):

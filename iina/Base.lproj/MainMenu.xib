@@ -534,9 +534,9 @@ CA
                             <menuItem title="Hide Subtitles" id="smo-rw-rg7" userLabel="Hide Subtitles">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Second Subtitle" id="mGw-jm-5x2">
+                            <menuItem title="Secondary Subtitle" id="mGw-jm-5x2">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Second Subtitle" systemMenu="font" id="UwY-P2-Xdb">
+                                <menu key="submenu" title="Secondary Subtitle" systemMenu="font" id="UwY-P2-Xdb">
                                     <items>
                                         <menuItem title="&lt;None&gt;" id="9pa-9C-ueQ">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -547,7 +547,7 @@ CA
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="Hide Second Subtitles" id="BOm-ia-wOV">
+                            <menuItem title="Hide Secondary Subtitles" id="BOm-ia-wOV">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem title="Load External Subtitle…" id="k6x-hf-ATi">

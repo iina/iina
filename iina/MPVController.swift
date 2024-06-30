@@ -142,11 +142,13 @@ class MPVController: NSObject {
     MPVOption.Audio.volume: MPV_FORMAT_DOUBLE,
     MPVOption.Audio.audioDelay: MPV_FORMAT_DOUBLE,
     MPVOption.PlaybackControl.speed: MPV_FORMAT_DOUBLE,
-    MPVOption.Subtitles.subVisibility: MPV_FORMAT_FLAG,
+    MPVOption.Subtitles.secondarySubDelay: MPV_FORMAT_DOUBLE,
+    MPVOption.Subtitles.secondarySubPos: MPV_FORMAT_DOUBLE,
     MPVOption.Subtitles.secondarySubVisibility: MPV_FORMAT_FLAG,
     MPVOption.Subtitles.subDelay: MPV_FORMAT_DOUBLE,
-    MPVOption.Subtitles.subScale: MPV_FORMAT_DOUBLE,
     MPVOption.Subtitles.subPos: MPV_FORMAT_DOUBLE,
+    MPVOption.Subtitles.subScale: MPV_FORMAT_DOUBLE,
+    MPVOption.Subtitles.subVisibility: MPV_FORMAT_FLAG,
     MPVOption.Equalizer.contrast: MPV_FORMAT_INT64,
     MPVOption.Equalizer.brightness: MPV_FORMAT_INT64,
     MPVOption.Equalizer.gamma: MPV_FORMAT_INT64,
@@ -1294,16 +1296,18 @@ not applying FFmpeg 9599 workaround
         }
       }
 
+    case MPVOption.Subtitles.secondarySubDelay:
+      fallthrough
     case MPVOption.Subtitles.subDelay:
       guard let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee else {
-        logPropertyValueError(MPVOption.Subtitles.subDelay, property.format)
+        logPropertyValueError(name, property.format)
         break
       }
-      DispatchQueue.main.async { [self] in
-        player.info.subDelay = data
-        player.sendOSD(.subDelay(data))
-        player.needReloadQuickSettingsView()
+      guard name == MPVOption.Subtitles.subDelay else {
+        DispatchQueue.main.async { self.player.secondarySubDelayChanged(data) }
+        break
       }
+      DispatchQueue.main.async { self.player.subDelayChanged(data) }
 
     case MPVOption.Subtitles.subScale:
       guard let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee else {
@@ -1317,15 +1321,18 @@ not applying FFmpeg 9599 workaround
         player.needReloadQuickSettingsView()
       }
 
+    case MPVOption.Subtitles.secondarySubPos:
+      fallthrough
     case MPVOption.Subtitles.subPos:
       guard let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee else {
-        logPropertyValueError(MPVOption.Subtitles.subPos, property.format)
+        logPropertyValueError(name, property.format)
         break
       }
-      DispatchQueue.main.async { [self] in
-        player.sendOSD(.subPos(data))
-        player.needReloadQuickSettingsView()
+      guard name == MPVOption.Subtitles.subPos else {
+        DispatchQueue.main.async { self.player.secondarySubPosChanged(data) }
+        break
       }
+      DispatchQueue.main.async { self.player.subPosChanged(data) }
 
     case MPVOption.Equalizer.contrast:
       guard let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee else {

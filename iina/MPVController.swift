@@ -1272,7 +1272,7 @@ not applying FFmpeg 9599 workaround
         break
       }
       DispatchQueue.main.async { [self] in
-        player.syncUI(.muteButton)
+        player.syncUI(.volume)
         player.info.isMuted = data
         player.sendOSD(data ? OSDMessage.mute : OSDMessage.unMute)
       }

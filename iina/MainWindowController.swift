@@ -1365,6 +1365,7 @@ class MainWindowController: PlayerWindowController {
       exitPIP()
     }
     
+    updateAdditionalInfo()
     player.events.emit(.windowFullscreenChanged, data: true)
   }
 

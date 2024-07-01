@@ -131,12 +131,17 @@ class PlayerCore: NSObject {
    */
   @Atomic var backgroundQueueTicket = 0
 
-  var mainWindow: MainWindowController!
   var initialWindow: InitialWindowController!
+  
+  var mainWindow: MainWindowController!
   var miniPlayer: MiniPlayerWindowController!
+  
+  var currentController: PlayerWindowController {
+    return isInMiniPlayer ? miniPlayer : mainWindow
+  }
 
   var currentWindow: NSWindow? {
-    return isInMiniPlayer ? miniPlayer.window : mainWindow.window
+    currentController.window
   }
 
   var mpv: MPVController!
@@ -565,7 +570,6 @@ class PlayerCore: NSObject {
 
     miniPlayer.updateTitle()
     refreshSyncUITimer()
-    syncUI(.playButton)
     let playlistView = mainWindow.playlistView.view
     let videoView = mainWindow.videoView
     // reset down shift for playlistView
@@ -622,6 +626,7 @@ class PlayerCore: NSObject {
       }
     }
 
+    currentController.setupUI()
     events.emit(.musicModeChanged, data: true)
   }
 
@@ -662,6 +667,7 @@ class PlayerCore: NSObject {
 
     mainWindow.updateTitle()
 
+    currentController.setupUI()
     events.emit(.musicModeChanged, data: false)
   }
 
@@ -1049,7 +1055,6 @@ class PlayerCore: NSObject {
     getSelectedTracks()
   }
 
-  /** Set speed. */
   func setSpeed(_ speed: Double) {
     mpv.setDouble(MPVOption.PlaybackControl.speed, speed)
   }
@@ -2130,7 +2135,6 @@ class PlayerCore: NSObject {
     case time
     case playButton
     case volume
-    case muteButton
     case chapterList
     case playlist
     case loop
@@ -2138,6 +2142,12 @@ class PlayerCore: NSObject {
 
   @objc func syncUITime() {
     syncUI(.time)
+  }
+  
+  func syncUI(_ options: [SyncUIOption]) {
+    for option in options {
+      syncUI(option)
+    }
   }
 
   func syncUI(_ option: SyncUIOption) {
@@ -2173,13 +2183,9 @@ class PlayerCore: NSObject {
         info.bufferingState = mpv.getInt(MPVProperty.cacheBufferingState)
       }
       DispatchQueue.main.async { [self] in
-        if self.isInMiniPlayer {
-          miniPlayer.updatePlayTime(withDuration: isNetworkStream, andProgressBar: true)
-        } else {
-          mainWindow.updatePlayTime(withDuration: isNetworkStream, andProgressBar: true)
-          if mainWindow.fsState.isFullscreen && mainWindow.displayTimeAndBatteryInFullScreen && !mainWindow.additionalInfoView.isHidden {
-            self.mainWindow.updateAdditionalInfo()
-          }
+        currentController.updatePlayTime(withDuration: isNetworkStream, andProgressBar: true)
+        if !self.isInMiniPlayer && mainWindow.fsState.isFullscreen && mainWindow.displayTimeAndBatteryInFullScreen && !mainWindow.additionalInfoView.isHidden {
+          self.mainWindow.updateAdditionalInfo()
         }
         if isNetworkStream {
           self.mainWindow.updateNetworkState()
@@ -2188,15 +2194,13 @@ class PlayerCore: NSObject {
 
     case .playButton:
       DispatchQueue.main.async {
-        self.mainWindow.updatePlayButtonState(self.info.isPaused ? .off : .on)
-        self.miniPlayer.updatePlayButtonState(self.info.isPaused ? .off : .on)
+        self.currentController.updatePlayButtonState(self.info.isPaused ? .off : .on)
         self.touchBarSupport.updateTouchBarPlayBtn()
       }
 
-    case .volume, .muteButton:
+    case .volume:
       DispatchQueue.main.async {
-        self.mainWindow.updateVolume()
-        self.miniPlayer.updateVolume()
+        self.currentController.updateVolume()
       }
 
     case .chapterList:
@@ -2256,11 +2260,7 @@ class PlayerCore: NSObject {
   func closeWindow() {
     DispatchQueue.main.async {
       self.isStopped = true
-      if self.isInMiniPlayer {
-        self.miniPlayer.close()
-      } else {
-        self.mainWindow.close()
-      }
+      self.currentController.close()
     }
   }
 

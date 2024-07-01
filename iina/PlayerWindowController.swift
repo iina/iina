@@ -528,6 +528,10 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   // MARK: - UI
+  
+  func setupUI() {
+    player.syncUI([.time, .playButton, .volume])
+  }
 
   @objc
   func updateTitle() {

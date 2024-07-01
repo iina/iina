@@ -562,7 +562,7 @@ class MainWindowController: PlayerWindowController {
     // workaround another bug in Ventura where an external monitor goes black could not be
     // reproduced (issue #4015). The workaround adds a tiny subview with such a low alpha level it
     // is invisible to the human eye. This workaround may not be effective in all cases.
-    if #available(macOS 13, *) {
+    if #available(macOS 13, *), Preference.bool(for: .enableHdrWorkaround) {
       let view = NSView(frame: NSRect(origin: .zero, size: NSSize(width: 0.1, height: 0.1)))
       view.wantsLayer = true
       view.layer?.backgroundColor = NSColor.black.cgColor

@@ -519,27 +519,44 @@ not applying FFmpeg 9599 workaround
     // Initialize an uninitialized mpv instance. If the mpv instance is already running, an error is returned.
     chkErr(mpv_initialize(mpv))
 
+    // The option watch-later-options is not available until after the mpv instance is initialized.
+    // Workaround for mpv issue #14417, watch-later-options missing secondary subtitle delay and sid.
+    // Allow the user to override this workaround by setting this mpv option in advanced settings.
+    if !userOptionsContains(MPVOption.WatchLater.watchLaterOptions),
+       var watchLaterOptions = getString(MPVOption.WatchLater.watchLaterOptions) {
+
+      // In mpv 0.38.0 the default value for the watch-later-options property contains the options
+      // sid and sub-delay, but not the corresponding options for the secondary subtitle. This
+      // inconsistency is likely to confuse users, so insure the secondary options are also saved in
+      // watch later files. Issue #14417 has been fixed, so this workaround will not be needed after
+      // the next mpv upgrade.
+      var needsUpdate = false
+      if watchLaterOptions.contains(MPVOption.TrackSelection.sid),
+         !watchLaterOptions.contains(MPVOption.Subtitles.secondarySid) {
+        log("Adding \(MPVOption.Subtitles.secondarySid) to \(MPVOption.WatchLater.watchLaterOptions)")
+        watchLaterOptions += "," + MPVOption.Subtitles.secondarySid
+        needsUpdate = true
+      }
+      if watchLaterOptions.contains(MPVOption.Subtitles.subDelay),
+         !watchLaterOptions.contains(MPVOption.Subtitles.secondarySubDelay) {
+        log("Adding \(MPVOption.Subtitles.secondarySubDelay) to \(MPVOption.WatchLater.watchLaterOptions)")
+        watchLaterOptions += "," + MPVOption.Subtitles.secondarySubDelay
+        needsUpdate = true
+      }
+      if needsUpdate {
+        setString(MPVOption.WatchLater.watchLaterOptions, watchLaterOptions, level: .verbose)
+      }
+    }
+    if let watchLaterOptions = getString(MPVOption.WatchLater.watchLaterOptions) {
+      let sorted = watchLaterOptions.components(separatedBy: ",").sorted().joined(separator: ",")
+      log("Options mpv is configured to save in watch later files: \(sorted)")
+    }
+
     // Set options that can be override by user's config. mpv will log user config when initialize,
     // so we put them here.
     chkErr(setString(MPVOption.Video.vo, "libmpv", level: .verbose))
     chkErr(setString(MPVOption.Window.keepaspect, "no", level: .verbose))
     chkErr(setString(MPVOption.Video.gpuHwdecInterop, "auto", level: .verbose))
-
-    // The option watch-later-options is not available until after the mpv instance is initialized.
-    // In mpv 0.34.1 the default value for the watch-later-options property contains the option
-    // sub-visibility, but the option secondary-sub-visibility is missing. This inconsistency is
-    // likely to confuse users, so insure the visibility setting for secondary subtitles is also
-    // saved in watch later files.
-    if  let watchLaterOptions = getString(MPVOption.WatchLater.watchLaterOptions),
-        watchLaterOptions.contains(MPVOption.Subtitles.subVisibility),
-        !watchLaterOptions.contains(MPVOption.Subtitles.secondarySubVisibility) {
-      log("Adding \(MPVOption.Subtitles.secondarySubVisibility) to \(MPVOption.WatchLater.watchLaterOptions)")
-      setString(MPVOption.WatchLater.watchLaterOptions, watchLaterOptions + "," +
-                MPVOption.Subtitles.secondarySubVisibility)
-    }
-    if let watchLaterOptions = getString(MPVOption.WatchLater.watchLaterOptions) {
-      log("Options mpv is configured to save in watch later files: \(watchLaterOptions)")
-    }
   }
 
   /// Initialize the `mpv` renderer.
@@ -1658,9 +1675,18 @@ not applying FFmpeg 9599 workaround
   private func logPropertyValueError(_ property: String, _ format: mpv_format) {
     guard property != MPVProperty.videoParamsRotate, format != MPV_FORMAT_NONE else { return }
     log("""
-      Value of property \(property) in the property change event could not be converted from 
+      Value of property \(property) in the property change event could not be converted from
       \(format) to the expected type
       """, level: .error)
+  }
+
+  /// Searches the list of user configured `mpv` options and returns `true` if the given option is present.
+  /// - Parameter option: Option to look for.
+  /// - Returns: `true` if the `mpv` option is found, `false` otherwise.
+  private func userOptionsContains(_ option: String) -> Bool {
+    guard Preference.bool(for: .enableAdvancedSettings),
+          let userOptions = Preference.value(for: .userOptions) as? [[String]] else { return false }
+    return userOptions.contains { $0[0] == option }
   }
 }
 

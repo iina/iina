@@ -213,6 +213,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
     Logger.log("App will launch")
 
+    // Start asynchronously gathering and caching information about the hardware decoding
+    // capabilities of this Mac.
+    HardwareDecodeCapabilities.shared.checkCapabilities()
+
     // Workaround macOS Sonoma clearing the recent documents list when the IINA code is not signed
     // with IINA's certificate as is the case for developer and nightly builds.
     restoreRecentDocuments()

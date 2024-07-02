@@ -1178,6 +1178,8 @@ class MainWindowController: PlayerWindowController {
       window!.setFrame(AppData.sizeWhenNoVideo.centeredRect(in: screen.visibleFrame), display: true,
                        animate: !Preference.bool(for: PK.disableAnimations))
     }
+
+    videoView.videoLayer.draw(forced: true)
   }
 
   /** A method being called when window open. Pretend to be a window delegate. */

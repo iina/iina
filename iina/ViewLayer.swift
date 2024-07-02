@@ -20,7 +20,11 @@ class ViewLayer: CAOpenGLLayer {
   private let cglContext: CGLContextObj
   private let cglPixelFormat: CGLPixelFormatObj
 
-  private let displayLock = Lock()
+  /// Lock to single thread calls to `display`.
+  ///
+  /// A recursive lock is needed because the call to `CATransaction.flush()` in `display` calls `display_if_needed`
+  /// which will then call `display` if layout is needed. See the discussion in PR #5029.
+  private let displayLock = NSRecursiveLock()
 
   private var fbo: GLint = 1
 
@@ -134,36 +138,37 @@ class ViewLayer: CAOpenGLLayer {
   }
 
   override func display() {
-    displayLock.withLock {
-      super.display()
-      CATransaction.flush()
-      videoView.$isUninited.withLock() { isUninited in
-        guard !isUninited else { return }
+    displayLock.lock()
+    defer { displayLock.unlock() }
 
-        guard !forceRender else {
-          forceRender = false
-          return
-        }
-        guard needsMPVRender else { return }
+    super.display()
+    CATransaction.flush()
+    videoView.$isUninited.withLock() { isUninited in
+      guard !isUninited else { return }
 
-        // Neither canDraw nor draw(inCGLContext:) were called by AppKit, needs a skip render.
-        // This can happen when IINA is playing in another space, as might occur when just playing
-        // audio. See issue #5025.
-        videoView.player.mpv.lockAndSetOpenGLContext()
-        defer { videoView.player.mpv.unlockOpenGLContext() }
-        if let renderContext = videoView.player.mpv.mpvRenderContext,
-           videoView.player.mpv.shouldRenderUpdateFrame() {
-          var skip: CInt = 1
-          withUnsafeMutablePointer(to: &skip) { skip in
-            var params: [mpv_render_param] = [
-              mpv_render_param(type: MPV_RENDER_PARAM_SKIP_RENDERING, data: .init(skip)),
-              mpv_render_param()
-            ]
-            mpv_render_context_render(renderContext, &params)
-          }
-        }
-        needsMPVRender = false
+      guard !forceRender else {
+        forceRender = false
+        return
       }
+      guard needsMPVRender else { return }
+
+      // Neither canDraw nor draw(inCGLContext:) were called by AppKit, needs a skip render.
+      // This can happen when IINA is playing in another space, as might occur when just playing
+      // audio. See issue #5025.
+      videoView.player.mpv.lockAndSetOpenGLContext()
+      defer { videoView.player.mpv.unlockOpenGLContext() }
+      if let renderContext = videoView.player.mpv.mpvRenderContext,
+         videoView.player.mpv.shouldRenderUpdateFrame() {
+        var skip: CInt = 1
+        withUnsafeMutablePointer(to: &skip) { skip in
+          var params: [mpv_render_param] = [
+            mpv_render_param(type: MPV_RENDER_PARAM_SKIP_RENDERING, data: .init(skip)),
+            mpv_render_param()
+          ]
+          mpv_render_context_render(renderContext, &params)
+        }
+      }
+      needsMPVRender = false
     }
   }
 

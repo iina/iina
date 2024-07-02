@@ -92,6 +92,21 @@ enum OSDMessage {
   case custom(String)
   case customWithDetail(String, String)
 
+  /// `True` if this OSD message has been suppressed by the user, otherwise `false`.
+  ///
+  /// Through settings on the `UI` tab a user can choose to not have certain OSD messages shown. This is useful in certain
+  /// applications such as looping in a kiosk or scrubbing through a video without distractions.
+  var isDisabled: Bool {
+    switch self {
+    case .fileStart: return Preference.bool(for: .disableOSDFileStartMsg)
+    case .pause: return Preference.bool(for: .disableOSDPauseResumeMsgs)
+    case .resume: return Preference.bool(for: .disableOSDPauseResumeMsgs)
+    case .seek: return Preference.bool(for: .disableOSDSeekMsg)
+    case .speed: return Preference.bool(for: .disableOSDSpeedMsg)
+    default: return false
+    }
+  }
+
   /// `True` if this message must always be shown, otherwise `false`.
   ///
   /// A user may disable the OSD by unchecking the `Enable OSD` setting found on the `UI` tab in the `On Screen Display`

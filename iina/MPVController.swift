@@ -103,6 +103,11 @@ class MPVController: NSObject {
   var mpvClientName: UnsafePointer<CChar>!
   var mpvVersion: String { getString(MPVProperty.mpvVersion)! }
 
+  /// [DispatchQueue](https://developer.apple.com/documentation/dispatch/dispatchqueue) for reading `mpv`
+  /// events.
+  ///
+  /// - Important: To avoid using locking to prevent data races the convention is that processing involving data used by the UI is
+  ///     never performed while running on this queue's thread and instead is queued for processing by the main thread .
   lazy var queue = DispatchQueue(label: "com.colliderli.iina.controller", qos: .userInitiated)
 
   unowned let player: PlayerCore
@@ -115,7 +120,7 @@ class MPVController: NSObject {
 
   var fileLoaded: Bool = false
 
-  private var hooks: [UInt64: MPVHookValue] = [:]
+  @Atomic private var hooks: [UInt64: MPVHookValue] = [:]
   private var hookCounter: UInt64 = 1
 
   let observeProperties: [String: mpv_format] = [
@@ -137,11 +142,13 @@ class MPVController: NSObject {
     MPVOption.Audio.volume: MPV_FORMAT_DOUBLE,
     MPVOption.Audio.audioDelay: MPV_FORMAT_DOUBLE,
     MPVOption.PlaybackControl.speed: MPV_FORMAT_DOUBLE,
-    MPVOption.Subtitles.subVisibility: MPV_FORMAT_FLAG,
+    MPVOption.Subtitles.secondarySubDelay: MPV_FORMAT_DOUBLE,
+    MPVOption.Subtitles.secondarySubPos: MPV_FORMAT_DOUBLE,
     MPVOption.Subtitles.secondarySubVisibility: MPV_FORMAT_FLAG,
     MPVOption.Subtitles.subDelay: MPV_FORMAT_DOUBLE,
-    MPVOption.Subtitles.subScale: MPV_FORMAT_DOUBLE,
     MPVOption.Subtitles.subPos: MPV_FORMAT_DOUBLE,
+    MPVOption.Subtitles.subScale: MPV_FORMAT_DOUBLE,
+    MPVOption.Subtitles.subVisibility: MPV_FORMAT_FLAG,
     MPVOption.Equalizer.contrast: MPV_FORMAT_INT64,
     MPVOption.Equalizer.brightness: MPV_FORMAT_INT64,
     MPVOption.Equalizer.gamma: MPV_FORMAT_INT64,
@@ -278,9 +285,9 @@ not applying FFmpeg 9599 workaround
         Utility.screenshotCacheURL.path
     }
 
-    setUserOption(PK.screenshotFolder, type: .other, forName: MPVOption.Screenshot.screenshotDirectory,
+    setUserOption(PK.screenshotFolder, type: .other, forName: MPVOption.Screenshot.screenshotDir,
                   level: .verbose, transformer: setScreenshotPath)
-    setUserOption(PK.screenshotSaveToFile, type: .other, forName: MPVOption.Screenshot.screenshotDirectory,
+    setUserOption(PK.screenshotSaveToFile, type: .other, forName: MPVOption.Screenshot.screenshotDir,
                   level: .verbose, transformer: setScreenshotPath)
 
     setUserOption(PK.screenshotFormat, type: .other, forName: MPVOption.Screenshot.screenshotFormat,
@@ -444,6 +451,11 @@ not applying FFmpeg 9599 workaround
     chkErr(setOptionString(MPVOption.ProgramBehavior.resetOnNextFile,
             "\(MPVOption.PlaybackControl.abLoopA),\(MPVOption.PlaybackControl.abLoopB)", level: .verbose))
 
+    // As mpv support for audio using the AVFoundation framework is new we enable it before applying
+    // user's settings. This allows a user to roll back to the Core Audio framework should a problem
+    // be encountered with the new code.
+    chkErr(setOptionString(MPVOption.Audio.ao, "avfoundation", level: .verbose))
+
     // Set user defined conf dir.
     if Preference.bool(for: .enableAdvancedSettings),
        Preference.bool(for: .useUserDefinedConfDir),
@@ -507,29 +519,52 @@ not applying FFmpeg 9599 workaround
     // Initialize an uninitialized mpv instance. If the mpv instance is already running, an error is returned.
     chkErr(mpv_initialize(mpv))
 
+    // The option watch-later-options is not available until after the mpv instance is initialized.
+    // Workaround for mpv issue #14417, watch-later-options missing secondary subtitle delay and sid.
+    // Allow the user to override this workaround by setting this mpv option in advanced settings.
+    if !userOptionsContains(MPVOption.WatchLater.watchLaterOptions),
+       var watchLaterOptions = getString(MPVOption.WatchLater.watchLaterOptions) {
+
+      // In mpv 0.38.0 the default value for the watch-later-options property contains the options
+      // sid and sub-delay, but not the corresponding options for the secondary subtitle. This
+      // inconsistency is likely to confuse users, so insure the secondary options are also saved in
+      // watch later files. Issue #14417 has been fixed, so this workaround will not be needed after
+      // the next mpv upgrade.
+      var needsUpdate = false
+      if watchLaterOptions.contains(MPVOption.TrackSelection.sid),
+         !watchLaterOptions.contains(MPVOption.Subtitles.secondarySid) {
+        log("Adding \(MPVOption.Subtitles.secondarySid) to \(MPVOption.WatchLater.watchLaterOptions)")
+        watchLaterOptions += "," + MPVOption.Subtitles.secondarySid
+        needsUpdate = true
+      }
+      if watchLaterOptions.contains(MPVOption.Subtitles.subDelay),
+         !watchLaterOptions.contains(MPVOption.Subtitles.secondarySubDelay) {
+        log("Adding \(MPVOption.Subtitles.secondarySubDelay) to \(MPVOption.WatchLater.watchLaterOptions)")
+        watchLaterOptions += "," + MPVOption.Subtitles.secondarySubDelay
+        needsUpdate = true
+      }
+      if needsUpdate {
+        setString(MPVOption.WatchLater.watchLaterOptions, watchLaterOptions, level: .verbose)
+      }
+    }
+    if let watchLaterOptions = getString(MPVOption.WatchLater.watchLaterOptions) {
+      let sorted = watchLaterOptions.components(separatedBy: ",").sorted().joined(separator: ",")
+      log("Options mpv is configured to save in watch later files: \(sorted)")
+    }
+
     // Set options that can be override by user's config. mpv will log user config when initialize,
     // so we put them here.
     chkErr(setString(MPVOption.Video.vo, "libmpv", level: .verbose))
     chkErr(setString(MPVOption.Window.keepaspect, "no", level: .verbose))
     chkErr(setString(MPVOption.Video.gpuHwdecInterop, "auto", level: .verbose))
-
-    // The option watch-later-options is not available until after the mpv instance is initialized.
-    // In mpv 0.34.1 the default value for the watch-later-options property contains the option
-    // sub-visibility, but the option secondary-sub-visibility is missing. This inconsistency is
-    // likely to confuse users, so insure the visibility setting for secondary subtitles is also
-    // saved in watch later files.
-    if  let watchLaterOptions = getString(MPVOption.WatchLater.watchLaterOptions),
-        watchLaterOptions.contains(MPVOption.Subtitles.subVisibility),
-        !watchLaterOptions.contains(MPVOption.Subtitles.secondarySubVisibility) {
-      log("Adding \(MPVOption.Subtitles.secondarySubVisibility) to \(MPVOption.WatchLater.watchLaterOptions)")
-      setString(MPVOption.WatchLater.watchLaterOptions, watchLaterOptions + "," +
-                MPVOption.Subtitles.secondarySubVisibility)
-    }
-    if let watchLaterOptions = getString(MPVOption.WatchLater.watchLaterOptions) {
-      log("Options mpv is configured to save in watch later files: \(watchLaterOptions)")
-    }
   }
 
+  /// Initialize the `mpv` renderer.
+  ///
+  /// This method creates and initializes the `mpv` renderer and sets the callback that `mpv` calls when a new video frame is available.
+  ///
+  /// - Note: Advanced control must be enabled for the screenshot command to work when the window flag is used. See issue
+  ///         [#4822](https://github.com/iina/iina/issues/4822) for details.
   func mpvInitRendering() {
     guard let mpv = mpv else {
       fatalError("mpvInitRendering() should be called after mpv handle being initialized!")
@@ -538,14 +573,16 @@ not applying FFmpeg 9599 workaround
     var openGLInitParams = mpv_opengl_init_params(get_proc_address: mpvGetOpenGLFunc,
                                                   get_proc_address_ctx: nil)
     withUnsafeMutablePointer(to: &openGLInitParams) { openGLInitParams in
-      // var advanced: CInt = 1
-      var params = [
-        mpv_render_param(type: MPV_RENDER_PARAM_API_TYPE, data: apiType),
-        mpv_render_param(type: MPV_RENDER_PARAM_OPENGL_INIT_PARAMS, data: openGLInitParams),
-        // mpv_render_param(type: MPV_RENDER_PARAM_ADVANCED_CONTROL, data: &advanced),
-        mpv_render_param()
-      ]
-      chkErr(mpv_render_context_create(&mpvRenderContext, mpv, &params))
+      var advanced: CInt = 1
+      withUnsafeMutablePointer(to: &advanced) { advanced in
+        var params = [
+          mpv_render_param(type: MPV_RENDER_PARAM_API_TYPE, data: apiType),
+          mpv_render_param(type: MPV_RENDER_PARAM_OPENGL_INIT_PARAMS, data: openGLInitParams),
+          mpv_render_param(type: MPV_RENDER_PARAM_ADVANCED_CONTROL, data: advanced),
+          mpv_render_param()
+        ]
+        chkErr(mpv_render_context_create(&mpvRenderContext, mpv, &params))
+      }
       openGLContext = CGLGetCurrentContext()
       mpv_render_context_set_update_callback(mpvRenderContext!, mpvUpdateCallback, mutableRawPointerOf(obj: player.mainWindow.videoView.videoLayer))
     }
@@ -891,13 +928,17 @@ not applying FFmpeg 9599 workaround
   // MARK: - Hooks
 
   func addHook(_ name: MPVHook, priority: Int32 = 0, hook: MPVHookValue) {
-    mpv_hook_add(mpv, hookCounter, name.rawValue, priority)
-    hooks[hookCounter] = hook
-    hookCounter += 1
+    $hooks.withLock {
+      mpv_hook_add(mpv, hookCounter, name.rawValue, priority)
+      $0[hookCounter] = hook
+      hookCounter += 1
+    }
   }
 
   func removeHooks(withIdentifier id: String) {
-    hooks.filter { (k, v) in v.isJavascript && v.id == id }.keys.forEach { hooks.removeValue(forKey: $0) }
+    $hooks.withLock {
+      $0.filter { (k, v) in v.isJavascript && v.id == id }.keys.forEach { hooks.removeValue(forKey: $0) }
+    }
   }
 
   // MARK: - Events
@@ -977,10 +1018,9 @@ not applying FFmpeg 9599 workaround
       let userData = event.pointee.reply_userdata
       let hookEvent = event.pointee.data.bindMemory(to: mpv_event_hook.self, capacity: 1).pointee
       let hookID = hookEvent.id
-      if let hook = hooks[userData] {
-        hook.call {
-          mpv_hook_continue(self.mpv, hookID)
-        }
+      guard let hook = $hooks.withLock({ $0[userData] }) else { break }
+      hook.call {
+        mpv_hook_continue(self.mpv, hookID)
       }
 
     case MPV_EVENT_PROPERTY_CHANGE:
@@ -993,67 +1033,69 @@ not applying FFmpeg 9599 workaround
     case MPV_EVENT_AUDIO_RECONFIG: break
 
     case MPV_EVENT_VIDEO_RECONFIG:
-      player.onVideoReconfig()
+      DispatchQueue.main.async { self.player.onVideoReconfig() }
 
     case MPV_EVENT_START_FILE:
-      player.info.isIdle = false
       guard let path = getString(MPVProperty.path) else { break }
-      player.fileStarted(path: path)
-      let url = player.info.currentURL
-      let message = player.info.isNetworkResource ? url?.absoluteString : url?.lastPathComponent
-      player.sendOSD(.fileStart(message ?? "-"))
+      DispatchQueue.main.async { [self] in
+        player.info.isIdle = false
+        player.fileStarted(path: path)
+        let url = player.info.currentURL
+        let message = player.info.isNetworkResource ? url?.absoluteString : url?.lastPathComponent
+        player.sendOSD(.fileStart(message ?? "-"))
+      }
 
     case MPV_EVENT_FILE_LOADED:
-      onFileLoaded()
+      DispatchQueue.main.async { self.onFileLoaded() }
 
     case MPV_EVENT_SEEK:
-      player.info.isSeeking = true
-      DispatchQueue.main.sync {
+      DispatchQueue.main.async { [self] in
+        player.info.isSeeking = true
         // When playback is paused the display link may be shutdown in order to not waste energy.
         // It must be running when seeking to avoid slowdowns caused by mpv waiting for IINA to call
         // mpv_render_report_swap.
         player.mainWindow.videoView.displayActive()
-      }
-      if needRecordSeekTime {
-        recordedSeekStartTime = CACurrentMediaTime()
-      }
-      player.syncUI(.time)
-      let osdText = (player.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder) + " / " +
+        if needRecordSeekTime {
+          recordedSeekStartTime = CACurrentMediaTime()
+        }
+        player.syncUI(.time)
+        let osdText = (player.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder) + " / " +
         (player.info.videoDuration?.stringRepresentation ?? Constants.String.videoTimePlaceholder)
-      let percentage = (player.info.videoPosition / player.info.videoDuration) ?? 1
-      player.sendOSD(.seek(osdText, percentage))
+        let percentage = (player.info.videoPosition / player.info.videoDuration) ?? 1
+        player.sendOSD(.seek(osdText, percentage))
+      }
 
     case MPV_EVENT_PLAYBACK_RESTART:
-      player.info.isIdle = false
-      player.info.isSeeking = false
-      DispatchQueue.main.sync {
+      DispatchQueue.main.async { [self] in
+        player.info.isIdle = false
+        player.info.isSeeking = false
         // When playback is paused the display link may be shutdown in order to not waste energy.
         // The display link will be restarted while seeking. If playback is paused shut it down
         // again.
         if player.info.isPaused {
           player.mainWindow.videoView.displayIdle()
         }
+        if needRecordSeekTime {
+          recordedSeekTimeListener?(CACurrentMediaTime() - recordedSeekStartTime)
+          recordedSeekTimeListener = nil
+        }
+        player.playbackRestarted()
+        player.syncUI(.time)
       }
-      if needRecordSeekTime {
-        recordedSeekTimeListener?(CACurrentMediaTime() - recordedSeekStartTime)
-        recordedSeekTimeListener = nil
-      }
-      player.playbackRestarted()
-      player.syncUI(.time)
 
     case MPV_EVENT_END_FILE:
       // if receive end-file when loading file, might be error
       // wait for idle
       let reason = event!.pointee.data.load(as: mpv_end_file_reason.self)
-      if player.info.fileLoading {
-        if reason != MPV_END_FILE_REASON_STOP {
-          receivedEndFileWhileLoading = true
+      DispatchQueue.main.async { [self] in
+        if player.info.fileLoading {
+          if reason != MPV_END_FILE_REASON_STOP {
+            receivedEndFileWhileLoading = true
+          }
+        } else {
+          player.info.shouldAutoLoadFiles = false
         }
-      } else {
-        player.info.shouldAutoLoadFiles = false
-      }
-      if reason == MPV_END_FILE_REASON_STOP {
-        DispatchQueue.main.async {
+        if reason == MPV_END_FILE_REASON_STOP {
           self.player.playbackStopped()
         }
       }
@@ -1073,7 +1115,7 @@ not applying FFmpeg 9599 workaround
           }
           return
         }
-        player.screenshotCallback()
+        DispatchQueue.main.async { self.player.screenshotCallback() }
       }
 
     default: break
@@ -1088,11 +1130,6 @@ not applying FFmpeg 9599 workaround
       let eventName = "mpv.\(String(cString: mpv_event_name(eventId)))"
       player.events.emit(.init(eventName))
     }
-  }
-
-  private func onVideoParamsChange(_ data: UnsafePointer<mpv_node_list>) {
-    //let params = data.pointee
-    //params.keys.
   }
 
   private func onFileLoaded() {
@@ -1125,118 +1162,141 @@ not applying FFmpeg 9599 workaround
 
   private func handlePropertyChange(_ name: String, _ property: mpv_event_property) {
 
-    var needReloadQuickSettingsView = false
-
     switch name {
 
     case MPVProperty.videoParams:
-      needReloadQuickSettingsView = true
-      onVideoParamsChange(UnsafePointer<mpv_node_list>(OpaquePointer(property.data)))
+      DispatchQueue.main.async { self.player.needReloadQuickSettingsView() }
 
     case MPVProperty.videoParamsRotate:
-      if let rotation = UnsafePointer<Int>(OpaquePointer(property.data))?.pointee {
-        player.mainWindow.rotation = rotation
+      guard let rotation = UnsafePointer<Int>(OpaquePointer(property.data))?.pointee else {
+        logPropertyValueError(MPVProperty.videoParamsRotate, property.format)
+        break
       }
+      DispatchQueue.main.async { self.player.mainWindow.rotation = rotation }
 
     case MPVProperty.videoParamsPrimaries:
       fallthrough;
 
     case MPVProperty.videoParamsGamma:
-      player.refreshEdrMode()
+      DispatchQueue.main.async { self.player.refreshEdrMode() }
 
     case MPVOption.TrackSelection.vid:
-      player.vidChanged()
+      DispatchQueue.main.async { self.player.vidChanged() }
 
     case MPVOption.TrackSelection.aid:
-      player.aidChanged()
+      DispatchQueue.main.async { self.player.aidChanged() }
 
     case MPVOption.TrackSelection.sid:
-      player.sidChanged()
+      DispatchQueue.main.async { self.player.sidChanged() }
 
     case MPVOption.Subtitles.secondarySid:
-      player.secondarySidChanged()
+      DispatchQueue.main.async { self.player.secondarySidChanged() }
 
     case MPVOption.PlaybackControl.pause:
-      if let paused = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
+      guard let paused = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee else {
+        logPropertyValueError(MPVOption.PlaybackControl.pause, property.format)
+        break
+      }
+      DispatchQueue.main.async { [self] in
         if player.info.isPaused != paused {
           player.sendOSD(paused ? .pause : .resume)
-          DispatchQueue.main.sync {
-            player.info.isPaused = paused
-            player.refreshSyncUITimer()
-            if paused {
-              player.mainWindow.videoView.displayIdle()
-            } else {
-              player.mainWindow.videoView.displayActive()
-            }
+          player.info.isPaused = paused
+          player.refreshSyncUITimer()
+          // Follow energy efficiency best practices and ensure IINA is absolutely idle when the
+          // video is paused to avoid wasting energy with needless processing. If paused shutdown
+          // the timer that synchronizes the UI and the high priority display link thread.
+          if paused {
+            player.mainWindow.videoView.displayIdle()
+          } else {
+            player.mainWindow.videoView.displayActive()
           }
         }
         if player.mainWindow.loaded && Preference.bool(for: .alwaysFloatOnTop) {
-          DispatchQueue.main.async {
-            self.player.mainWindow.setWindowFloatingOnTop(!paused)
-          }
+          player.mainWindow.setWindowFloatingOnTop(!paused)
         }
+        player.syncUI(.playButton)
       }
-      player.syncUI(.playButton)
 
     case MPVProperty.chapter:
-      player.info.chapter = Int(getInt(MPVProperty.chapter))
-      player.syncUI(.time)
-      player.syncUI(.chapterList)
-      player.postNotification(.iinaMediaTitleChanged)
+      DispatchQueue.main.async { self.player.chapterChanged() }
 
     case MPVOption.PlaybackControl.speed:
-      needReloadQuickSettingsView = true
-      if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
+      guard let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee else {
+        logPropertyValueError(MPVOption.PlaybackControl.speed, property.format)
+        break
+      }
+      DispatchQueue.main.async { [self] in
         player.info.playSpeed = data
         player.sendOSD(.speed(data))
+        player.needReloadQuickSettingsView()
       }
 
     case MPVOption.PlaybackControl.loopPlaylist, MPVOption.PlaybackControl.loopFile:
-      player.syncUI(.loop)
+      DispatchQueue.main.async { self.player.syncUI(.loop) }
 
     case MPVOption.Video.deinterlace:
-      needReloadQuickSettingsView = true
-      if let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
+      guard let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee else {
+        logPropertyValueError(MPVOption.Video.deinterlace, property.format)
+        break
+      }
+      DispatchQueue.main.async { [self] in
         // this property will fire a change event at file start
         if player.info.deinterlace != data {
           player.info.deinterlace = data
           player.sendOSD(.deinterlace(data))
         }
+        player.needReloadQuickSettingsView()
       }
 
     case MPVOption.Video.hwdec:
-      needReloadQuickSettingsView = true
       let data = String(cString: property.data.assumingMemoryBound(to: UnsafePointer<UInt8>.self).pointee)
-      if player.info.hwdec != data {
-        player.info.hwdec = data
-        player.sendOSD(.hwdec(player.info.hwdecEnabled))
+      DispatchQueue.main.async { [self] in
+        if player.info.hwdec != data {
+          player.info.hwdec = data
+          player.sendOSD(.hwdec(player.info.hwdecEnabled))
+        }
+        player.needReloadQuickSettingsView()
       }
 
     case MPVOption.Video.videoRotate:
-      if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
-      let intData = Int(data)
-        player.info.rotation = intData
+      guard let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee else {
+        logPropertyValueError(MPVOption.Video.videoRotate, property.format)
+        break
       }
+      let intData = Int(data)
+      DispatchQueue.main.async { self.player.info.rotation = intData }
 
     case MPVOption.Audio.mute:
-      player.syncUI(.muteButton)
-      if let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
+      guard let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee else {
+        logPropertyValueError(MPVOption.Video.videoRotate, property.format)
+        break
+      }
+      DispatchQueue.main.async { [self] in
+        player.syncUI(.muteButton)
         player.info.isMuted = data
         player.sendOSD(data ? OSDMessage.mute : OSDMessage.unMute)
       }
 
     case MPVOption.Audio.volume:
-      if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
+      guard let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee else {
+        logPropertyValueError(MPVOption.Audio.volume, property.format)
+        break
+      }
+      DispatchQueue.main.async { [self] in
         player.info.volume = data
         player.syncUI(.volume)
         player.sendOSD(.volume(Int(data)))
       }
 
     case MPVOption.Audio.audioDelay:
-      needReloadQuickSettingsView = true
-      if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
+      guard let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee else {
+        logPropertyValueError(MPVOption.Audio.audioDelay, property.format)
+        break
+      }
+      DispatchQueue.main.async { [self] in
         player.info.audioDelay = data
         player.sendOSD(.audioDelay(data))
+        player.needReloadQuickSettingsView()
       }
 
     case MPVOption.Subtitles.subVisibility:
@@ -1253,112 +1313,140 @@ not applying FFmpeg 9599 workaround
         }
       }
 
+    case MPVOption.Subtitles.secondarySubDelay:
+      fallthrough
     case MPVOption.Subtitles.subDelay:
-      needReloadQuickSettingsView = true
-      if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
-        player.info.subDelay = data
-        player.sendOSD(.subDelay(data))
+      guard let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee else {
+        logPropertyValueError(name, property.format)
+        break
       }
+      guard name == MPVOption.Subtitles.subDelay else {
+        DispatchQueue.main.async { self.player.secondarySubDelayChanged(data) }
+        break
+      }
+      DispatchQueue.main.async { self.player.subDelayChanged(data) }
 
     case MPVOption.Subtitles.subScale:
-      needReloadQuickSettingsView = true
-      if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
-        let displayValue = data >= 1 ? data : -1/data
-        let truncated = round(displayValue * 100) / 100
+      guard let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee else {
+        logPropertyValueError(MPVOption.Subtitles.subScale, property.format)
+        break
+      }
+      let displayValue = data >= 1 ? data : -1/data
+      let truncated = round(displayValue * 100) / 100
+      DispatchQueue.main.async { [self] in
         player.sendOSD(.subScale(truncated))
+        player.needReloadQuickSettingsView()
       }
 
+    case MPVOption.Subtitles.secondarySubPos:
+      fallthrough
     case MPVOption.Subtitles.subPos:
-      needReloadQuickSettingsView = true
-      if let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee {
-        player.sendOSD(.subPos(data))
+      guard let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee else {
+        logPropertyValueError(name, property.format)
+        break
       }
+      guard name == MPVOption.Subtitles.subPos else {
+        DispatchQueue.main.async { self.player.secondarySubPosChanged(data) }
+        break
+      }
+      DispatchQueue.main.async { self.player.subPosChanged(data) }
 
     case MPVOption.Equalizer.contrast:
-      needReloadQuickSettingsView = true
-      if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
-        let intData = Int(data)
+      guard let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee else {
+        logPropertyValueError(MPVOption.Equalizer.contrast, property.format)
+        break
+      }
+      let intData = Int(data)
+      DispatchQueue.main.async { [self] in
         player.info.contrast = intData
         player.sendOSD(.contrast(intData))
+        player.needReloadQuickSettingsView()
       }
 
     case MPVOption.Equalizer.hue:
-      needReloadQuickSettingsView = true
-      if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
-        let intData = Int(data)
+      guard let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee else {
+        logPropertyValueError(MPVOption.Equalizer.hue, property.format)
+        break
+      }
+      let intData = Int(data)
+      DispatchQueue.main.async { [self] in
         player.info.hue = intData
         player.sendOSD(.hue(intData))
+        player.needReloadQuickSettingsView()
       }
 
     case MPVOption.Equalizer.brightness:
-      needReloadQuickSettingsView = true
-      if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
-        let intData = Int(data)
+      guard let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee else {
+        logPropertyValueError(MPVOption.Equalizer.brightness, property.format)
+        break
+      }
+      let intData = Int(data)
+      DispatchQueue.main.async { [self] in
         player.info.brightness = intData
         player.sendOSD(.brightness(intData))
+        player.needReloadQuickSettingsView()
       }
 
     case MPVOption.Equalizer.gamma:
-      needReloadQuickSettingsView = true
-      if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
-        let intData = Int(data)
+      guard let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee else {
+        logPropertyValueError(MPVOption.Equalizer.gamma, property.format)
+        break
+      }
+      let intData = Int(data)
+      DispatchQueue.main.async { [self] in
         player.info.gamma = intData
         player.sendOSD(.gamma(intData))
+        player.needReloadQuickSettingsView()
       }
 
     case MPVOption.Equalizer.saturation:
-      needReloadQuickSettingsView = true
-      if let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee {
-        let intData = Int(data)
+      guard let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee else {
+        logPropertyValueError(MPVOption.Equalizer.saturation, property.format)
+        break
+      }
+      let intData = Int(data)
+      DispatchQueue.main.async { [self] in
         player.info.saturation = intData
         player.sendOSD(.saturation(intData))
+        player.needReloadQuickSettingsView()
       }
 
     // following properties may change before file loaded
 
     case MPVProperty.playlistCount:
-      player.postNotification(.iinaPlaylistChanged)
+      DispatchQueue.main.async { self.player.postNotification(.iinaPlaylistChanged) }
 
     case MPVProperty.trackList:
-      player.trackListChanged()
+      DispatchQueue.main.async { self.player.trackListChanged() }
 
     case MPVProperty.vf:
-      needReloadQuickSettingsView = true
-      player.vfChanged()
+      DispatchQueue.main.async { [self] in
+        player.vfChanged()
+        player.needReloadQuickSettingsView()
+      }
 
     case MPVProperty.af:
-      player.afChanged()
+      DispatchQueue.main.async { self.player.afChanged() }
 
     case MPVOption.Window.fullscreen:
-      guard player.mainWindow.loaded else { break }
-      let fs = getFlag(MPVOption.Window.fullscreen)
-      if fs != player.mainWindow.fsState.isFullscreen {
-        DispatchQueue.main.async(execute: self.player.mainWindow.toggleWindowFullScreen)
-      }
+      DispatchQueue.main.async { self.player.fullscreenChanged() }
 
     case MPVOption.Window.ontop:
-      guard player.mainWindow.loaded else { break }
-      let ontop = getFlag(MPVOption.Window.ontop)
-      if ontop != player.mainWindow.isOntop {
-        DispatchQueue.main.async {
-          self.player.mainWindow.setWindowFloatingOnTop(ontop)
-        }
-      }
+      DispatchQueue.main.async { self.player.ontopChanged() }
 
     case MPVOption.Window.windowScale:
-      guard player.mainWindow.loaded else { break }
-      let windowScale = getDouble(MPVOption.Window.windowScale)
-      if fabs(windowScale - player.info.cachedWindowScale) > 10e-10 {
-        DispatchQueue.main.async {
-          self.player.mainWindow.setWindowScale(windowScale)
-        }
-      }
+      DispatchQueue.main.async { self.player.windowScaleChanged() }
 
     case MPVProperty.mediaTitle:
-      player.mediaTitleChanged()
+      DispatchQueue.main.async { self.player.mediaTitleChanged() }
 
     case MPVProperty.idleActive:
-      if let idleActive = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee, idleActive {
+      guard let idleActive = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee else {
+        logPropertyValueError(MPVProperty.idleActive, property.format)
+        break
+      }
+      guard idleActive else { break }
+      DispatchQueue.main.async { [self] in
         if receivedEndFileWhileLoading && player.info.fileLoading {
           player.errorOpeningFileAndCloseMainWindow()
           player.info.fileLoading = false
@@ -1376,10 +1464,6 @@ not applying FFmpeg 9599 workaround
     default:
       // Utility.log("MPV property changed (unhandled): \(name)")
       break
-    }
-
-    if needReloadQuickSettingsView {
-      player.needReloadQuickSettingsView()
     }
 
     // This code is running in the com.colliderli.iina.controller dispatch queue. We must not run
@@ -1568,6 +1652,41 @@ not applying FFmpeg 9599 workaround
 
   private func log(_ message: String, level: Logger.Level = .debug) {
     Logger.log(message, level: level, subsystem: subsystem)
+  }
+
+  /// Log an error when a `mpv` property change event can't be processed because a property value could not be converted to the
+  /// expected type.
+  ///
+  /// A [MPV_EVENT_PROPERTY_CHANGE](https://mpv.io/manual/stable/#command-interface-mpv-event-property-change)
+  /// event contains the new value of the property. If that value could not be converted to the expected type then this method is called
+  /// to log the problem.
+  ///
+  /// _However_ the situation is not that simple. The documentation for [mpv_observe_property](https://github.com/mpv-player/mpv/blob/023d02c9504e308ba5a295cd1846f2508b3dd9c2/libmpv/client.h#L1192-L1195)
+  /// contains the following warning:
+  ///
+  /// "if a property is unavailable or retrieving it caused an error, `MPV_FORMAT_NONE` will be set in `mpv_event_property`, even
+  /// if the format parameter was set to a different value. In this case, the `mpv_event_property.data` field is invalid"
+  ///
+  /// With mpv 0.35.0 we are receiving some property change events for the video-params/rotate property that do not contain the
+  /// property value. This happens when the core starts before a file is loaded and when the core is stopping. At some point this needs
+  /// to be investigated. For now we suppress logging an error for this known case.
+  /// - Parameter property: Name of the property whose value changed.
+  /// - Parameter format: Format of the value contained in the property change event.
+  private func logPropertyValueError(_ property: String, _ format: mpv_format) {
+    guard property != MPVProperty.videoParamsRotate, format != MPV_FORMAT_NONE else { return }
+    log("""
+      Value of property \(property) in the property change event could not be converted from
+      \(format) to the expected type
+      """, level: .error)
+  }
+
+  /// Searches the list of user configured `mpv` options and returns `true` if the given option is present.
+  /// - Parameter option: Option to look for.
+  /// - Returns: `true` if the `mpv` option is found, `false` otherwise.
+  private func userOptionsContains(_ option: String) -> Bool {
+    guard Preference.bool(for: .enableAdvancedSettings),
+          let userOptions = Preference.value(for: .userOptions) as? [[String]] else { return false }
+    return userOptions.contains { $0[0] == option }
   }
 }
 

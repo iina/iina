@@ -73,6 +73,9 @@ struct Preference {
     /** Resume from last position */
     static let resumeLastPosition = Key("resumeLastPosition")
 
+    static let preventScreenSaver = Key("preventScreenSaver")
+    static let allowScreenSaverForAudio = Key("allowScreenSaverForAudio")
+
     static let alwaysFloatOnTop = Key("alwaysFloatOnTop")
     static let alwaysShowOnTopIcon = Key("alwaysShowOnTopIcon")
 
@@ -111,10 +114,10 @@ struct Preference {
 
     /** Timeout for auto hiding control bar (float) */
     static let controlBarAutoHideTimeout = Key("controlBarAutoHideTimeout")
-    
+
     /** Whether auto hiding control bar is enabled. (bool)*/
     static let enableControlBarAutoHide = Key("enableControlBarAutoHide")
-    
+
     static let controlBarToolbarButtons = Key("controlBarToolbarButtons")
 
     static let enableOSD = Key("enableOSD")
@@ -301,13 +304,23 @@ struct Preference {
     static let iinaLastPlayedFilePath = Key("iinaLastPlayedFilePath")
     static let iinaLastPlayedFilePosition = Key("iinaLastPlayedFilePosition")
 
-    /** Alerts */
-    static let suppressCannotPreventDisplaySleep = Key("suppressCannotPreventDisplaySleep")
-
+    /** Internal */
     static let iinaEnablePluginSystem = Key("iinaEnablePluginSystem")
 
-    /** Workaround for issue [#4688](https://github.com/iina/iina/issues/4688) */
+    /// Workaround for issue [#4688](https://github.com/iina/iina/issues/4688)
+    /// - Note: This workaround can cause significant slowdown at startup if the list of recent documents contains files on a mounted
+    ///         volume that is unreachable. For this reason the workaround is disabled by default and must be enabled by running the
+    ///         following command in [Terminal](https://support.apple.com/guide/terminal/welcome/mac):
+    ///         `defaults write com.colliderli.iina enableRecentDocumentsWorkaround true`
+    static let enableRecentDocumentsWorkaround = Key("enableRecentDocumentsWorkaround")
     static let recentDocuments = Key("recentDocuments")
+
+    static let enableFFmpegImageDecoder = Key("enableFFmpegImageDecoder")
+
+    /// The belief is that the workaround for issue #3844 that adds a tiny subview to the player window is no longer needed.
+    /// To confirm this the workaround is being disabled by default using this preference. Should all go well this workaround will be
+    /// removed in the future.
+    static let enableHdrWorkaround = Key("enableHdrWorkaround")
   }
 
   // MARK: - Enums
@@ -549,10 +562,8 @@ struct Preference {
     case png = 0
     case jpg
     case jpeg
-    case ppm
-    case pgm
-    case pgmyuv
-    case tga
+    case webp
+    case jxl
 
     static var defaultValue = ScreenshotFormat.png
 
@@ -566,10 +577,8 @@ struct Preference {
         case .png: return "png"
         case .jpg: return "jpg"
         case .jpeg: return "jpeg"
-        case .ppm: return "ppm"
-        case .pgm: return "pgm"
-        case .pgmyuv: return "pgmyuv"
-        case .tga: return "tga"
+        case .webp: return "webp"
+        case .jxl: return "jxl"
         }
       }
     }
@@ -774,6 +783,8 @@ struct Preference {
     .legacyFullScreenAnimation: false,
     .showChapterPos: false,
     .resumeLastPosition: true,
+    .preventScreenSaver: true,
+    .allowScreenSaverForAudio: false,
     .useMediaKeys: true,
     .useAppleRemote: false,
     .alwaysFloatOnTop: false,
@@ -918,9 +929,11 @@ struct Preference {
     .savedVideoFilters: [SavedFilter](),
     .savedAudioFilters: [SavedFilter](),
 
-    .suppressCannotPreventDisplaySleep: false,
+    .enableRecentDocumentsWorkaround: false,
+    .recentDocuments: [Any](),
 
-    .recentDocuments: [Any]()
+    .enableFFmpegImageDecoder: true,
+    .enableHdrWorkaround: false
   ]
 
 

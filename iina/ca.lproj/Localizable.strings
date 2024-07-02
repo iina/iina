@@ -67,8 +67,12 @@
 "osd.subtitle_pos" = "Posició dels subtítols: %.1f";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_hidden" = "Second Subtitles Hidden";
-"osd.sub_second_visible" = "Second Subtitles Visible";
+"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Silencia";
 "osd.unmute" = "Amb so";
 "osd.screenshot" = "Captura de pantalla feta";
@@ -88,7 +92,8 @@
 "osd.find_online_sub" = "Cercant subtítols en línia…";
 "osd.find_online_sub.source" = "desd de";
 "osd.sub_not_found" = "No s'han trobat subtítols";
-"osd.sub_found" = "%d subtítols trobats. Baixant…";
+"osd.sub_found" = "%d subtitles found.";
+"osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "Subtítols baixats";
 "osd.sub_saved" = "Subtítols desats";
 "osd.network_error" = "Error de xarxa";
@@ -134,8 +139,8 @@
 "menu.sub_delay" = "Retard en els subtítols: %.2fs";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Second Subtitles";
-"menu.sub_second_show" = "Show Second Subtitles";
+"menu.sub_second_hide" = "Hide Secondary Subtitles";
+"menu.sub_second_show" = "Show Secondary Subtitles";
 "menu.fullscreen" = "Pantalla completa";
 "menu.exit_fullscreen" = "Surt de la pantalla completa";
 "menu.pip" = "Picture-in-Picture";
@@ -167,10 +172,13 @@
 "menu.sub_delay_up" = "Retarda en els subtítols + %.1fs";
 "menu.sub_delay_down" = "Retarda en els subtítols - %.1fs";
 
-"menu.crop_custom" = "Personalitza...";
+"menu.crop_custom" = "Personalitzat...";
 "menu.find_online_sub" = "Cerca subtítols en línia a %@";
 
+"track.audio" = "Àudio";
 "track.none" = "<Cap>";
+"track.sub" = "Subtítols";
+"track.video" = "Vídeo";
 
 "subtrack.no_loaded" = "No s'han carregat subtítols";
 "subtrack.no_external" = "No s'han trobat subtítols externs";

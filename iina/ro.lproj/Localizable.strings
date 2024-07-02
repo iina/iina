@@ -67,8 +67,12 @@
 "osd.subtitle_pos" = "Poziție subtitrare: %.1f";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_hidden" = "Second Subtitles Hidden";
-"osd.sub_second_visible" = "Second Subtitles Visible";
+"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Mut";
 "osd.unmute" = "Activează sunetul";
 "osd.screenshot" = "Captură de ecran realizată";
@@ -88,7 +92,8 @@
 "osd.find_online_sub" = "Găsește subtitrări online…";
 "osd.find_online_sub.source" = "de la";
 "osd.sub_not_found" = "Nu s-au găsit subtitrări";
-"osd.sub_found" = "%d subtitrări găsite. Se descarcă…";
+"osd.sub_found" = "%d subtitles found.";
+"osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "Subitrare descărcată";
 "osd.sub_saved" = "Subtitrare salvată";
 "osd.network_error" = "Eroare de rețea";
@@ -134,8 +139,8 @@
 "menu.sub_delay" = "Întârziere subtitrare: %.2fs";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Second Subtitles";
-"menu.sub_second_show" = "Show Second Subtitles";
+"menu.sub_second_hide" = "Hide Secondary Subtitles";
+"menu.sub_second_show" = "Show Secondary Subtitles";
 "menu.fullscreen" = "Afișează pe ecran complet";
 "menu.exit_fullscreen" = "Ieși din ecran complet";
 "menu.pip" = "Afișează în Picture-in-Picture";
@@ -167,10 +172,13 @@
 "menu.sub_delay_up" = "Întârziere subitrare +%.1fs";
 "menu.sub_delay_down" = "Întârziere subitrare -%.1fs";
 
-"menu.crop_custom" = "Personalizează...";
+"menu.crop_custom" = "Personalizat…";
 "menu.find_online_sub" = "Găsește subtitrări online din %@";
 
+"track.audio" = "Audio";
 "track.none" = "<None>";
+"track.sub" = "Subtitrare";
+"track.video" = "Video";
 
 "subtrack.no_loaded" = "Nu s-a încărcat nicio subtitrare";
 "subtrack.no_external" = "Nu s-au găsit subtitrări externe";

@@ -67,8 +67,12 @@
 "osd.subtitle_pos" = "Subtitle Position: %.1f";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_hidden" = "Second Subtitles Hidden";
-"osd.sub_second_visible" = "Second Subtitles Visible";"osd.mute" = "Mute";
+"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Mute";
 "osd.unmute" = "Unmute";
 "osd.screenshot" = "Screenshot Captured";
@@ -88,7 +92,8 @@
 "osd.find_online_sub" = "Finding online subtitles…";
 "osd.find_online_sub.source" = "from";
 "osd.sub_not_found" = "No subtitles found";
-"osd.sub_found" = "%d subtitles found. Downloading…";
+"osd.sub_found" = "%d subtitles found.";
+"osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "Subtitle downloaded";
 "osd.sub_saved" = "Subtitle saved";
 "osd.network_error" = "Network error";
@@ -134,8 +139,8 @@
 "menu.sub_delay" = "Subtitle Delay: %.2fs";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Second Subtitles";
-"menu.sub_second_show" = "Show Second Subtitles";
+"menu.sub_second_hide" = "Hide Secondary Subtitles";
+"menu.sub_second_show" = "Show Secondary Subtitles";
 "menu.fullscreen" = "Enter Full Screen";
 "menu.exit_fullscreen" = "Exit Full Screen";
 "menu.pip" = "Enter Picture-in-Picture";
@@ -167,10 +172,13 @@
 "menu.sub_delay_up" = "Subtitle Delay + %.1fs";
 "menu.sub_delay_down" = "Subtitle Delay - %.1fs";
 
-"menu.crop_custom" = "Custom...";
+"menu.crop_custom" = "Custom…";
 "menu.find_online_sub" = "Find Online Subtitles from %@";
 
+"track.audio" = "Audio";
 "track.none" = "<None>";
+"track.sub" = "Subtitle";
+"track.video" = "Video";
 
 "subtrack.no_loaded" = "No Subtitles Loaded";
 "subtrack.no_external" = "No External Subtitles Found";
@@ -184,7 +192,6 @@
 
 "alert.fatal_error" = "Fatal error: %@ \nThe application will exit now.";
 "alert.mpv_error" = "Internal error %@ (%@) when setting option %@.";
-"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "Unsupported external audio file.";
 "alert.unsupported_sub" = "Unsupported external subtitle.";

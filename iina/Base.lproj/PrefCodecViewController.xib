@@ -622,7 +622,7 @@
             <rect key="frame" x="0.0" y="0.0" width="444" height="206"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField identifier="SectionTitleAudio" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dab-zg-ekF">
+                <textField identifier="SectionTitleReplayGain" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dab-zg-ekF">
                     <rect key="frame" x="-2" y="182" width="82" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="ReplayGain:" id="gfq-nW-dDu">
                         <font key="font" metaFont="systemBold"/>

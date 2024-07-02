@@ -67,8 +67,12 @@
 "osd.subtitle_pos" = "Θέση Υποτίτλων: %.1f";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_hidden" = "Second Subtitles Hidden";
-"osd.sub_second_visible" = "Second Subtitles Visible";
+"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Σίγαση";
 "osd.unmute" = "Αποσίγαση";
 "osd.screenshot" = "Ελήφθη Στιγμιότυπο Οθόνης";
@@ -88,7 +92,8 @@
 "osd.find_online_sub" = "Αναζήτηση Υποτίτλων στο Διαδίκτυο…";
 "osd.find_online_sub.source" = "από";
 "osd.sub_not_found" = "Δεν βρέθηκαν Υπότιτλοι";
-"osd.sub_found" = "%d Υπότιτλοι βρέθηκαν. Μεταφόρτωση…";
+"osd.sub_found" = "%d subtitles found.";
+"osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "Έγινε λήψη Υποτίτλων";
 "osd.sub_saved" = "Έγινε αποθήκευση Υποτίτλων";
 "osd.network_error" = "Σφάλμα Δικτύου";
@@ -134,8 +139,8 @@
 "menu.sub_delay" = "Καθυστέρηση Υποτίτλων: %.2fs";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Second Subtitles";
-"menu.sub_second_show" = "Show Second Subtitles";
+"menu.sub_second_hide" = "Hide Secondary Subtitles";
+"menu.sub_second_show" = "Show Secondary Subtitles";
 "menu.fullscreen" = "Μετάβαση σε Πλήρη Οθόνη";
 "menu.exit_fullscreen" = "Έξοδος από Πλήρη Οθόνη";
 "menu.pip" = "Μετάβαση σε Εικόνα-σε-Εικόνα";
@@ -167,10 +172,13 @@
 "menu.sub_delay_up" = "Καθυστέρηση Υποτίτλων + %.1fs";
 "menu.sub_delay_down" = "Καθυστέρηση Υποτίτλων - %.1fs";
 
-"menu.crop_custom" = "Προσαρμογή...";
+"menu.crop_custom" = "Custom…";
 "menu.find_online_sub" = "Find Online Subtitles from %@";
 
+"track.audio" = "Audio";
 "track.none" = "<Κενό>";
+"track.sub" = "Υπότιτλοι";
+"track.video" = "Video";
 
 "subtrack.no_loaded" = "Δεν Φορτώθηκαν Υπότιτλοι";
 "subtrack.no_external" = "Δεν Βρέθηκαν Εξωτερικοί Υπότιτλοι";

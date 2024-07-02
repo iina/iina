@@ -148,6 +148,7 @@ class MainWindowController: PlayerWindowController {
   var isPausedPriorToInteractiveMode: Bool = false
 
   var lastMagnification: CGFloat = 0.0
+  var frameWhenStartedPinching = NSRect()
 
   /** Views that will show/hide when cursor moving in/out the window. */
   var fadeableViews: [NSView] = []
@@ -562,7 +563,7 @@ class MainWindowController: PlayerWindowController {
     // workaround another bug in Ventura where an external monitor goes black could not be
     // reproduced (issue #4015). The workaround adds a tiny subview with such a low alpha level it
     // is invisible to the human eye. This workaround may not be effective in all cases.
-    if #available(macOS 13, *) {
+    if #available(macOS 13, *), Preference.bool(for: .enableHdrWorkaround) {
       let view = NSView(frame: NSRect(origin: .zero, size: NSSize(width: 0.1, height: 0.1)))
       view.wantsLayer = true
       view.layer?.backgroundColor = NSColor.black.cgColor
@@ -833,6 +834,20 @@ class MainWindowController: PlayerWindowController {
 
   // MARK: - Mouse / Trackpad events
 
+  override func keyDown(with event: NSEvent) {
+    if isShowingPersistentOSD {
+      let keyCode = KeyCodeHelper.mpvKeyCode(from: event)
+      let normalizedKeyCode = KeyCodeHelper.normalizeMpv(keyCode)
+
+      if normalizedKeyCode == "ESC", osdStackView.performKeyEquivalent(with: event) {
+        Logger.log("ESC key was handled by OSD", level: .verbose)
+        return
+      }
+    }
+    
+    super.keyDown(with: event)
+  }
+
   @discardableResult
   override func handleKeyBinding(_ keyBinding: KeyMapping) -> Bool {
     let success = super.handleKeyBinding(keyBinding)
@@ -1101,6 +1116,8 @@ class MainWindowController: PlayerWindowController {
       if recognizer.state == .began {
         // began
         lastMagnification = recognizer.magnification
+        videoView.videoLayer.isAsynchronous = true
+        frameWhenStartedPinching = window.frame
       } else if recognizer.state == .changed {
         // changed
         let offset = recognizer.magnification - lastMagnification + 1.0;
@@ -1110,12 +1127,13 @@ class MainWindowController: PlayerWindowController {
         //Check against max & min threshold
         if newHeight < screenFrame.height && newHeight > minSize.height && newWidth > minSize.width {
           let newSize = NSSize(width: newWidth, height: newHeight);
-          window.setFrame(window.frame.centeredResize(to: newSize), display: true)
+          window.setFrame(frameWhenStartedPinching.centeredResize(to: newSize), display: true)
         }
 
         lastMagnification = recognizer.magnification
       } else if recognizer.state == .ended {
         updateWindowParametersForMPV()
+        videoView.videoLayer.isAsynchronous = false
       }
     }
   }
@@ -1655,12 +1673,17 @@ class MainWindowController: PlayerWindowController {
     player.events.emit(.windowResized, data: window.frame)
   }
 
+  func windowWillStartLiveResize(_ notification: Notification) {
+    videoView.videoLayer.isAsynchronous = true
+  }
+
   // resize framebuffer in videoView after resizing.
   func windowDidEndLiveResize(_ notification: Notification) {
     // Must not access mpv while it is asynchronously processing stop and quit commands.
     // See comments in windowWillExitFullScreen for details.
     guard !isClosing else { return }
     videoView.videoSize = window!.convertToBacking(videoView.bounds).size
+    videoView.videoLayer.isAsynchronous = false
     updateWindowParametersForMPV()
   }
 
@@ -1896,7 +1919,7 @@ class MainWindowController: PlayerWindowController {
   ///     timeline indicators should not flip in a right-to-left language. Thus OSD messages referencing a position within the video
   ///     must always use a left to right layout.
   func displayOSD(_ message: OSDMessage, autoHide: Bool = true, forcedTimeout: Float? = nil, accessoryView: NSView? = nil, context: Any? = nil) {
-    guard player.displayOSD && !isShowingPersistentOSD else { return }
+    guard player.displayOSD || message.alwaysEnabled, !isShowingPersistentOSD else { return }
 
     if hideOSDTimer != nil {
       hideOSDTimer!.invalidate()
@@ -2552,7 +2575,7 @@ class MainWindowController: PlayerWindowController {
       if let screenFrame = window.screen?.frame {
         rect = rect.constrain(in: screenFrame)
       }
-      if player.disableWindowAnimation {
+      if player.disableWindowAnimation || Preference.bool(for: .disableAnimations) {
         window.setFrame(rect, display: true, animate: false)
       } else {
         // animated `setFrame` can be inaccurate!

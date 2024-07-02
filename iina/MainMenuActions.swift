@@ -9,7 +9,7 @@
 import Cocoa
 
 
-class MainMenuActionHandler: NSResponder {
+class MainMenuActionHandler: NSResponder, NSMenuItemValidation {
 
   unowned var player: PlayerCore
 
@@ -43,6 +43,11 @@ class MainMenuActionHandler: NSResponder {
         }
       }
     }
+  }
+
+  @objc func menuShowCurrentFileInFinder(_ sender: NSMenuItem) {
+    guard let url = player.info.currentURL, !player.info.isNetworkResource else { return }
+    NSWorkspace.shared.activateFileViewerSelecting([url])
   }
 
   @objc func menuDeleteCurrentFile(_ sender: NSMenuItem) {
@@ -460,6 +465,16 @@ extension MainMenuActionHandler {
     }
   }
 
+  func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+    switch menuItem.action {
+    case #selector(menuShowCurrentFileInFinder(_:)):
+      return player.info.currentURL != nil && !player.info.isNetworkResource
+    default:
+      break
+    }
+    return menuItem.isEnabled
+  }
+  
   // MARK: - Plugin
 
   @objc func reloadAllPlugins(_ sender: NSMenuItem) {

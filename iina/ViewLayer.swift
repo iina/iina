@@ -17,7 +17,10 @@ class ViewLayer: CAOpenGLLayer {
   let mpvGLQueue = DispatchQueue(label: "com.colliderli.iina.mpvgl", qos: .userInteractive)
   @Atomic var blocked = false
 
-  private let displayLock = NSRecursiveLock()
+  private let cglContext: CGLContextObj
+  private let cglPixelFormat: CGLPixelFormatObj
+
+  private let displayLock = Lock()
 
   private var fbo: GLint = 1
 
@@ -25,6 +28,8 @@ class ViewLayer: CAOpenGLLayer {
   private var forceRender = false
 
   override init() {
+    cglPixelFormat = ViewLayer.createPixelFormat()
+    cglContext = ViewLayer.createContext(cglPixelFormat)
     super.init()
 
     isOpaque = true
@@ -45,50 +50,11 @@ class ViewLayer: CAOpenGLLayer {
     fatalError("init(coder:) has not been implemented")
   }
 
-  override func copyCGLPixelFormat(forDisplayMask mask: UInt32) -> CGLPixelFormatObj {
-    var attributeList: [CGLPixelFormatAttribute] = [
-      kCGLPFADoubleBuffer,
-      kCGLPFAAllowOfflineRenderers,
-      kCGLPFAColorFloat,
-      kCGLPFAColorSize, CGLPixelFormatAttribute(64),
-      kCGLPFAOpenGLProfile, CGLPixelFormatAttribute(kCGLOGLPVersion_3_2_Core.rawValue),
-      kCGLPFAAccelerated,
-    ]
+  override func copyCGLPixelFormat(forDisplayMask mask: UInt32) -> CGLPixelFormatObj { cglPixelFormat }
 
-    if (!Preference.bool(for: .forceDedicatedGPU)) {
-      attributeList.append(kCGLPFASupportsAutomaticGraphicsSwitching)
-    }
+  override func copyCGLContext(forPixelFormat pf: CGLPixelFormatObj) -> CGLContextObj { cglContext }
 
-    var pix: CGLPixelFormatObj?
-    var npix: GLint = 0
-
-    for index in (0..<attributeList.count).reversed() {
-      let attributes = Array(
-        attributeList[0...index] + [_CGLPixelFormatAttribute(rawValue: 0)]
-      )
-      CGLChoosePixelFormat(attributes, &pix, &npix)
-      if let pix = pix {
-        Logger.log("Created OpenGL pixel format with \(attributes)", level: .debug)
-        return pix
-      }
-    }
-
-    Logger.fatal("Cannot create OpenGL pixel format!")
-  }
-
-  override func copyCGLContext(forPixelFormat pf: CGLPixelFormatObj) -> CGLContextObj {
-    let ctx = super.copyCGLContext(forPixelFormat: pf)
-
-    var i: GLint = 1
-    CGLSetParameter(ctx, kCGLCPSwapInterval, &i)
-
-    CGLEnable(ctx, kCGLCEMPEngine)
-
-    CGLSetCurrentContext(ctx)
-    return ctx
-  }
-
-  // MARK: Draw
+  // MARK: - Draw
 
   override func canDraw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj,
                         forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) -> Bool {
@@ -130,7 +96,7 @@ class ViewLayer: CAOpenGLLayer {
               mpv_render_param(type: MPV_RENDER_PARAM_FLIP_Y, data: .init(flip)),
               mpv_render_param()
             ]
-            mpv_render_context_render(context, &params);
+            mpv_render_context_render(context, &params)
             ignoreGLError()
           }
         } else {
@@ -168,42 +134,92 @@ class ViewLayer: CAOpenGLLayer {
   }
 
   override func display() {
-    displayLock.lock()
-    defer { displayLock.unlock() }
+    displayLock.withLock {
+      super.display()
+      CATransaction.flush()
+      videoView.$isUninited.withLock() { isUninited in
+        guard !isUninited else { return }
 
-    super.display()
-    CATransaction.flush()
-
-    videoView.$isUninited.withLock() { isUninited in
-      guard !isUninited else { return }
-
-      guard !forceRender else {
-        forceRender = false
-        return
-      }
-      guard needsMPVRender else { return }
-
-      // Neither canDraw nor draw(inCGLContext:) were called by AppKit, needs a skip render.
-      // This can happen when IINA is playing in another space, as might occur when just playing
-      // audio. See issue #5025.
-      videoView.player.mpv.lockAndSetOpenGLContext()
-      defer { videoView.player.mpv.unlockOpenGLContext() }
-      if let renderContext = videoView.player.mpv.mpvRenderContext,
-         videoView.player.mpv.shouldRenderUpdateFrame() {
-        var skip: CInt = 1
-        withUnsafeMutablePointer(to: &skip) { skip in
-          var params: [mpv_render_param] = [
-            mpv_render_param(type: MPV_RENDER_PARAM_SKIP_RENDERING, data: .init(skip)),
-            mpv_render_param()
-          ]
-          mpv_render_context_render(renderContext, &params);
+        guard !forceRender else {
+          forceRender = false
+          return
         }
+        guard needsMPVRender else { return }
+
+        // Neither canDraw nor draw(inCGLContext:) were called by AppKit, needs a skip render.
+        // This can happen when IINA is playing in another space, as might occur when just playing
+        // audio. See issue #5025.
+        videoView.player.mpv.lockAndSetOpenGLContext()
+        defer { videoView.player.mpv.unlockOpenGLContext() }
+        if let renderContext = videoView.player.mpv.mpvRenderContext,
+           videoView.player.mpv.shouldRenderUpdateFrame() {
+          var skip: CInt = 1
+          withUnsafeMutablePointer(to: &skip) { skip in
+            var params: [mpv_render_param] = [
+              mpv_render_param(type: MPV_RENDER_PARAM_SKIP_RENDERING, data: .init(skip)),
+              mpv_render_param()
+            ]
+            mpv_render_context_render(renderContext, &params)
+          }
+        }
+        needsMPVRender = false
       }
-      needsMPVRender = false
     }
   }
 
-  // MARK: Utils
+  // MARK: - Core OpenGL Context and Pixel Format
+
+  private static func createContext(_ pixelFormat: CGLPixelFormatObj) -> CGLContextObj {
+    var ctx: CGLContextObj?
+    CGLCreateContext(pixelFormat, nil, &ctx)
+
+    guard let ctx = ctx else {
+      Logger.fatal("Cannot create OpenGL context")
+    }
+
+    // Sync to vertical retrace.
+    var i: GLint = 1
+    CGLSetParameter(ctx, kCGLCPSwapInterval, &i)
+
+    // Enable multi-threaded GL engine.
+    CGLEnable(ctx, kCGLCEMPEngine)
+
+    CGLSetCurrentContext(ctx)
+    return ctx
+  }
+
+  private static func createPixelFormat() -> CGLPixelFormatObj {
+    var attributeList: [CGLPixelFormatAttribute] = [
+      kCGLPFADoubleBuffer,
+      kCGLPFAAllowOfflineRenderers,
+      kCGLPFAColorFloat,
+      kCGLPFAColorSize, CGLPixelFormatAttribute(64),
+      kCGLPFAOpenGLProfile, CGLPixelFormatAttribute(kCGLOGLPVersion_3_2_Core.rawValue),
+      kCGLPFAAccelerated,
+    ]
+
+    if (!Preference.bool(for: .forceDedicatedGPU)) {
+      attributeList.append(kCGLPFASupportsAutomaticGraphicsSwitching)
+    }
+
+    var pix: CGLPixelFormatObj?
+    var npix: GLint = 0
+
+    for index in (0..<attributeList.count).reversed() {
+      let attributes = Array(
+        attributeList[0...index] + [_CGLPixelFormatAttribute(rawValue: 0)]
+      )
+      CGLChoosePixelFormat(attributes, &pix, &npix)
+      if let pix = pix {
+        Logger.log("Created OpenGL pixel format with \(attributes)", level: .debug)
+        return pix
+      }
+    }
+
+    Logger.fatal("Cannot create OpenGL pixel format!")
+  }
+
+  // MARK: - Utils
 
   /** Check OpenGL error (for debug only). */
   func gle() {

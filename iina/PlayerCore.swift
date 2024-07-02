@@ -504,8 +504,6 @@ class PlayerCore: NSObject {
 
   func initVideo() {
     // init mpv render context.
-    // The video layer must be displayed once to get the OpenGL context initialized.
-    mainWindow.videoView.videoLayer.display()
     mpv.mpvInitRendering()
     mainWindow.videoView.startDisplayLink()
   }

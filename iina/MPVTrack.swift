@@ -68,55 +68,47 @@ class MPVTrack: NSObject {
   var demuxFps: Double?
 
 
-  var readableTitle: String {
-    get {
-      return "\(self.idString) \(self.infoString)"
-    }
-  }
+  var readableTitle: String { "\(idString) \(infoString)" }
 
-  var idString: String {
-    get {
-      return "#\(self.id)"
-    }
-  }
+  var idString: String { "#\(id)" }
 
   var infoString: String {
     get {
       // title
-      let title = self.title ?? ""
+      let title = title ?? ""
       // lang
       let language: String
-      if let lang = self.lang, lang != "und", let rawLang = ISO639Helper.dictionary[lang] {
+      if let lang, lang != "und", let rawLang = ISO639Helper.dictionary[lang] {
         language = "[\(rawLang)]"
       } else {
         language = ""
       }
       // info
       var components: [String] = []
-      if let ds = self.decoderDesc, let shortDs = ds.components(separatedBy: "(")[at: 0] {
-        components.append("\(shortDs.replacingOccurrences(of: " ", with: ""))")
+      if let codec {
+        components.append(codec)
       }
-      switch self.type {
+      switch type {
       case .video:
-        if let w = self.demuxW, let h = self.demuxH {
-          components.append("\(w)\u{d7}\(h)")
+        if let demuxW, let demuxH {
+          components.append("\(demuxW)\u{d7}\(demuxH)")
         }
-        if let fps = self.demuxFps {
-          components.append("\(fps.prettyFormat())fps")
+        if let demuxFps {
+          components.append("\(demuxFps.prettyFormat())fps")
         }
       case .audio:
-        if let ch = self.demuxChannelCount {
-          components.append("\(ch)ch")
+        if let demuxChannelCount {
+          components.append("\(demuxChannelCount)ch")
         }
-        if let sr = self.demuxSamplerate {
-          components.append("\((Double(sr)/1000).prettyFormat())kHz")
+        if let demuxSamplerate {
+          components.append("\((Double(demuxSamplerate)/1000).prettyFormat())kHz")
         }
       default:
         break
       }
       let info = components.joined(separator: ", ")
       // default
-      let isDefault = self.isDefault ? "(" + NSLocalizedString("quicksetting.item_default", comment: "Default") + ")" : ""
+      let isDefault = isDefault ? "(" + NSLocalizedString("quicksetting.item_default", comment: "Default") + ")" : ""
       // final string
       return [language, title, info, isDefault].filter { !$0.isEmpty }.joined(separator: " ")
     }

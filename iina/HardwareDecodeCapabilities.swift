@@ -88,15 +88,7 @@ class HardwareDecodeCapabilities {
     if #available(macOS 11.0, *) {
       VTRegisterSupplementalVideoDecoderIfAvailable(codecType)
     }
-    if #available(macOS 10.13, *) {
-      return VTIsHardwareDecodeSupported(codecType)
-    }
-    guard codecType != kCMVideoCodecType_AV1, codecType != kCMVideoCodecType_VP9 else {
-      // Neither of these codecs are supported in older versions of macOS.
-      return false
-    }
-    // Unable to determine. For how this information is used by IINA the safe answer is true.
-    return true
+    return VTIsHardwareDecodeSupported(codecType)
   }
 
   private init() {}

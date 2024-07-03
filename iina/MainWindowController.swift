@@ -2987,44 +2987,6 @@ class MainWindowController: PlayerWindowController {
 
   // MARK: - Utility
 
-  internal override func handleIINACommand(_ cmd: IINACommand) {
-    super.handleIINACommand(cmd)
-    switch cmd {
-    case .togglePIP:
-      if #available(macOS 10.12, *) {
-        menuTogglePIP(.dummy)
-      }
-    case .videoPanel:
-      menuShowVideoQuickSettings(.dummy)
-    case .audioPanel:
-      menuShowAudioQuickSettings(.dummy)
-    case .subPanel:
-      menuShowSubQuickSettings(.dummy)
-    case .playlistPanel:
-      menuShowPlaylistPanel(.dummy)
-    case .chapterPanel:
-      menuShowChaptersPanel(.dummy)
-    case .toggleMusicMode:
-      menuSwitchToMiniPlayer(.dummy)
-    case .deleteCurrentFileHard:
-      menuActionHandler.menuDeleteCurrentFileHard(.dummy)
-    case .biggerWindow:
-      let item = NSMenuItem()
-      item.tag = 11
-      menuChangeWindowSize(item)
-    case .smallerWindow:
-      let item = NSMenuItem()
-      item.tag = 10
-      menuChangeWindowSize(item)
-    case .fitToScreen:
-      let item = NSMenuItem()
-      item.tag = 3
-      menuChangeWindowSize(item)
-    default:
-      break
-    }
-  }
-
   private func resetCollectionBehavior() {
     guard !fsState.isFullscreen else { return }
     if Preference.bool(for: .useLegacyFullScreen) {

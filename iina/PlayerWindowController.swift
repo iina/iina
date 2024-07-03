@@ -628,20 +628,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       AppDelegate.shared.openFile(self)
     case .openURL:
       AppDelegate.shared.openURL(self)
-    case .flip:
-      menuActionHandler.menuToggleFlip(.dummy)
-    case .mirror:
-      menuActionHandler.menuToggleMirror(.dummy)
-    case .saveCurrentPlaylist:
-      menuActionHandler.menuSavePlaylist(.dummy)
-    case .showCurrentFileInFinder:
-      menuActionHandler.menuShowCurrentFileInFinder(.dummy)
-    case .deleteCurrentFile:
-      menuActionHandler.menuDeleteCurrentFile(.dummy)
-    case .findOnlineSubs:
-      menuActionHandler.menuFindOnlineSub(.dummy)
-    case .saveDownloadedSub:
-      menuActionHandler.saveDownloadedSub(.dummy)
+    case .deleteCurrentFileHard:
+      menuActionHandler.menuDeleteCurrentFileHard(.dummy)
     default:
       break
     }

@@ -125,9 +125,9 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var customSpeedTextField: NSTextField!
   @IBOutlet weak var switchHorizontalLine: NSBox!
   @IBOutlet weak var switchHorizontalLine2: NSBox!
-  @IBOutlet weak var hardwareDecodingSwitch: Switch!
-  @IBOutlet weak var deinterlaceSwitch: Switch!
-  @IBOutlet weak var hdrSwitch: Switch!
+  @IBOutlet weak var hardwareDecodingSwitch: NSSwitch!
+  @IBOutlet weak var deinterlaceSwitch: NSSwitch!
+  @IBOutlet weak var hdrSwitch: NSSwitch!
 
   @IBOutlet weak var brightnessSlider: NSSlider!
   @IBOutlet weak var contrastSlider: NSSlider!
@@ -359,20 +359,10 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
     rotateSegment.selectSegment(withTag: AppData.rotations.firstIndex(of: player.info.rotation) ?? -1)
 
-    deinterlaceSwitch.checked = player.info.deinterlace
-    deinterlaceSwitch.action = {
-      self.player.toggleDeinterlace($0)
-    }
-    hardwareDecodingSwitch.checked = player.info.hwdecEnabled
-    hardwareDecodingSwitch.action = {
-      self.player.toggleHardwareDecoding($0)
-    }
+    deinterlaceSwitch.state = player.info.deinterlace ? .on : .off
+    hardwareDecodingSwitch.state = player.info.hwdecEnabled ? .on : .off
     hdrSwitch.isEnabled = player.info.hdrAvailable
-    hdrSwitch.checked = player.info.hdrAvailable && player.info.hdrEnabled
-    hdrSwitch.action = {
-      self.player.info.hdrEnabled = $0
-      self.player.refreshEdrMode()
-    }
+    hdrSwitch.state = (player.info.hdrAvailable && player.info.hdrEnabled) ? .on : .off
 
     let speed = player.mpv.getDouble(MPVOption.PlaybackControl.speed)
     customSpeedTextField.doubleValue = speed
@@ -549,7 +539,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     player.info.hdrAvailable = available
     if isViewLoaded {
       hdrSwitch.isEnabled = available
-      hdrSwitch.checked = available && player.info.hdrEnabled
+      hdrSwitch.state = (available && player.info.hdrEnabled) ? .on : .off
     }
   }
 
@@ -681,6 +671,19 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       player.setVideoAspect(value)
       player.sendOSD(.aspect(value))
     }
+  }
+
+  @IBAction func hardwareDecodingAction(_ sender: NSSwitch) {
+    player.toggleHardwareDecoding(sender.state == .on)
+  }
+  
+  @IBAction func deinterlaceAction(_ sender: NSSwitch) {
+    player.toggleDeinterlace(sender.state == .on)
+  }
+  
+  @IBAction func hdrAction(_ sender: NSSwitch) {
+    self.player.info.hdrEnabled = sender.state == .on
+    self.player.refreshEdrMode()
   }
 
   private func redraw(indicator: NSTextField, constraint: NSLayoutConstraint, slider: NSSlider, value: String) {

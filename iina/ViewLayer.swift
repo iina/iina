@@ -64,7 +64,7 @@ class ViewLayer: CAOpenGLLayer {
                         forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) -> Bool {
     videoView.$isUninited.withLock() { isUninited in
       guard !isUninited else { return false }
-      guard !forceRender else { return true }
+      if forceRender { return true }
       return videoView.player.mpv.shouldRenderUpdateFrame()
     }
   }

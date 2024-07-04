@@ -828,20 +828,22 @@ class MenuController: NSObject, NSMenuDelegate {
 
   func updateKeyEquivalentsFrom(_ keyBindings: [KeyMapping]) {
     var settings: [(NSMenuItem, Bool, [String], Bool, ClosedRange<Double>?, String?)] = [
-      (showCurrentFileInFinder, true, ["show-current-file-in-finder"], false, nil, nil),
-      (deleteCurrentFile, true, ["delete-current-file"], false, nil, nil),
-      (savePlaylist, true, ["save-playlist"], false, nil, nil),
-      (quickSettingsVideo, true, ["video-panel"], false, nil, nil),
-      (quickSettingsAudio, true, ["audio-panel"], false, nil, nil),
-      (quickSettingsSub, true, ["sub-panel"], false, nil, nil),
-      (playlistPanel, true, ["playlist-panel"], false, nil, nil),
-      (chapterPanel, true, ["chapter-panel"], false, nil, nil),
-      (findOnlineSub, true, ["find-online-subs"], false, nil, nil),
-      (saveDownloadedSub, true, ["save-downloaded-sub"], false, nil, nil),
-      (biggerSize, true, ["bigger-window"], false, nil, nil),
-      (smallerSize, true, ["smaller-window"], false, nil, nil),
-      (fitToScreen, true, ["fit-to-screen"], false, nil, nil),
-      (miniPlayer, true, ["toggle-music-mode"], false, nil, nil),
+      (showCurrentFileInFinder, true, [IINACommand.showCurrentFileInFinder.rawValue], false, nil, nil),
+      (deleteCurrentFile, true, [IINACommand.deleteCurrentFile.rawValue], false, nil, nil),
+      (savePlaylist, true, [IINACommand.saveCurrentPlaylist.rawValue], false, nil, nil),
+      (quickSettingsVideo, true, [IINACommand.videoPanel.rawValue], false, nil, nil),
+      (quickSettingsAudio, true, [IINACommand.audioPanel.rawValue], false, nil, nil),
+      (quickSettingsSub, true, [IINACommand.subPanel.rawValue], false, nil, nil),
+      (playlistPanel, true, [IINACommand.playlistPanel.rawValue], false, nil, nil),
+      (chapterPanel, true, [IINACommand.chapterPanel.rawValue], false, nil, nil),
+      (findOnlineSub, true, [IINACommand.findOnlineSubs.rawValue], false, nil, nil),
+      (saveDownloadedSub, true, [IINACommand.saveDownloadedSub.rawValue], false, nil, nil),
+      (flip, true, [IINACommand.flip.rawValue], false, nil, nil),
+      (mirror, true, [IINACommand.mirror.rawValue], false, nil, nil),
+      (biggerSize, true, [IINACommand.biggerWindow.rawValue], false, nil, nil),
+      (smallerSize, true, [IINACommand.smallerWindow.rawValue], false, nil, nil),
+      (fitToScreen, true, [IINACommand.fitToScreen.rawValue], false, nil, nil),
+      (miniPlayer, true, [IINACommand.toggleMusicMode.rawValue], false, nil, nil),
       (cycleVideoTracks, false, ["cycle", "video"], false, nil, nil),
       (cycleAudioTracks, false, ["cycle", "audio"], false, nil, nil),
       (cycleSubtitles, false, ["cycle", "sub"], false, nil, nil),
@@ -893,7 +895,7 @@ class MenuController: NSObject, NSMenuDelegate {
     ]
 
     if #available(macOS 10.12, *) {
-      settings.append((pictureInPicture, true, ["toggle-pip"], false, nil, nil))
+      settings.append((pictureInPicture, true, [IINACommand.togglePIP.rawValue], false, nil, nil))
     }
 
     var otherActionsMenuItems: [NSMenuItem] = []

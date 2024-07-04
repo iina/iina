@@ -395,16 +395,6 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     return 72 + (isVideoVisible ? videoWrapperView.frame.height : 0)
   }
 
-  internal override func handleIINACommand(_ cmd: IINACommand) {
-    super.handleIINACommand(cmd)
-    switch cmd {
-    case .toggleMusicMode:
-      menuSwitchToMiniPlayer(.dummy)
-    default:
-      break
-    }
-  }
-
 }
 
 fileprivate extension NSRect {

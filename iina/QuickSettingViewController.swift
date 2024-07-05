@@ -128,6 +128,9 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var hardwareDecodingSwitch: NSSwitch!
   @IBOutlet weak var deinterlaceSwitch: NSSwitch!
   @IBOutlet weak var hdrSwitch: NSSwitch!
+  @IBOutlet weak var hardwareDecodingLabel: NSTextField!
+  @IBOutlet weak var deinterlaceLabel: NSTextField!
+  @IBOutlet weak var hdrLabel: NSTextField!
 
   @IBOutlet weak var brightnessSlider: NSSlider!
   @IBOutlet weak var contrastSlider: NSSlider!
@@ -359,10 +362,15 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
     rotateSegment.selectSegment(withTag: AppData.rotations.firstIndex(of: player.info.rotation) ?? -1)
 
-    deinterlaceSwitch.state = player.info.deinterlace ? .on : .off
     hardwareDecodingSwitch.state = player.info.hwdecEnabled ? .on : .off
+    deinterlaceSwitch.state = player.info.deinterlace ? .on : .off
     hdrSwitch.isEnabled = player.info.hdrAvailable
     hdrSwitch.state = (player.info.hdrAvailable && player.info.hdrEnabled) ? .on : .off
+    
+    // These strings are also contained in the strings file of this view. Remove these lines if the localization of these strings are complete enough.
+    hardwareDecodingLabel.stringValue = NSLocalizedString("quicksetting.hwdec", comment: "Hardware Decoding")
+    deinterlaceLabel.stringValue = NSLocalizedString("quicksetting.deinterlace", comment: "Deinterlace")
+    hdrLabel.stringValue = NSLocalizedString("quicksetting.hdr", comment: "HDR")
 
     let speed = player.mpv.getDouble(MPVOption.PlaybackControl.speed)
     customSpeedTextField.doubleValue = speed

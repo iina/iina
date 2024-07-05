@@ -33,9 +33,12 @@
                 <outlet property="customAudioDelayTextField" destination="Qiz-tS-aWT" id="QQg-ZP-uPz"/>
                 <outlet property="customSpeedTextField" destination="sIs-a1-rGR" id="kRd-3q-zab"/>
                 <outlet property="customSubDelayTextField" destination="eOz-bB-vzM" id="oqr-mw-c55"/>
+                <outlet property="deinterlaceLabel" destination="m39-41-Kwj" id="ggm-Dk-mpK"/>
                 <outlet property="deinterlaceSwitch" destination="UKk-rD-n2A" id="iXS-qY-rHf"/>
                 <outlet property="gammaSlider" destination="fLl-8b-pj0" id="jEi-R0-6G0"/>
+                <outlet property="hardwareDecodingLabel" destination="OvF-ci-44R" id="DlO-Bf-VR3"/>
                 <outlet property="hardwareDecodingSwitch" destination="AbD-ap-nO5" id="prt-hm-rsB"/>
+                <outlet property="hdrLabel" destination="xJo-hi-ale" id="KYh-mb-vQn"/>
                 <outlet property="hdrSwitch" destination="TNg-iM-cVP" id="Cg7-4J-pyL"/>
                 <outlet property="hideSwitch" destination="9f0-0q-rg2" id="tTx-Gl-HNL"/>
                 <outlet property="hueSlider" destination="mKB-Mu-l5Y" id="vy8-lj-ko8"/>

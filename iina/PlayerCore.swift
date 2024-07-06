@@ -1705,11 +1705,10 @@ class PlayerCore: NSObject {
     // set "date last opened" attribute
     if let url = info.currentURL, url.isFileURL {
       // the required data is a timespec struct
-      var ts = timespec()
       let time = Date().timeIntervalSince1970
-      ts.tv_sec = Int(time)
-      ts.tv_nsec = Int(time.truncatingRemainder(dividingBy: 1) * 1_000_000_000)
-      let data = Data(bytesOf: ts)
+      let timespecArray: [Int] = [Int(time), Int(time.truncatingRemainder(dividingBy: 1) * 1_000_000_000)]
+      let data = Data(bytes: timespecArray,
+                      count: MemoryLayout.size(ofValue: timespecArray))
       // set the attribute; the key is undocumented
       let name = "com.apple.lastuseddate#PS"
       url.withUnsafeFileSystemRepresentation { fileSystemPath in

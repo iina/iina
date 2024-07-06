@@ -358,11 +358,6 @@ extension Data {
     self.init(bytes: &numCopy, count: MemoryLayout<Double>.size)
   }
 
-  init(bytesOf ts: timespec) {
-    var mutablePointer = ts
-    self.init(bytes: &mutablePointer, count: MemoryLayout<timespec>.size)
-  }
-
   var md5: String { Insecure.MD5.hash(data: self).map { String(format: "%02x", $0) }.joined() }
 
   var chksum64: UInt64 {

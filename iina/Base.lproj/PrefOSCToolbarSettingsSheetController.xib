@@ -38,7 +38,7 @@ DQ
                         </connections>
                     </button>
                     <stackView orientation="vertical" alignment="leading" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="Sdu-Jk-G6t" customClass="PrefOSCToolbarAvailableItemsView" customModule="IINA" customModuleProvider="target">
-                        <rect key="frame" x="50" y="60" width="240" height="152"/>
+                        <rect key="frame" x="50" y="60" width="240" height="151"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="240" id="WzW-Sh-d8e"/>
                         </constraints>
@@ -60,7 +60,7 @@ DQ
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Neb-Rz-hK4">
-                        <rect key="frame" x="18" y="238" width="99" height="16"/>
+                        <rect key="frame" x="18" y="239" width="99" height="16"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Available Items:" id="DeE-Yj-Q4D">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -99,7 +99,7 @@ Gw
                         </connections>
                     </button>
                     <box horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="l1W-AA-5L4">
-                        <rect key="frame" x="127" y="270" width="86" height="22"/>
+                        <rect key="frame" x="127" y="271" width="86" height="22"/>
                         <view key="contentView" id="Xci-wI-yo3">
                             <rect key="frame" x="4" y="5" width="78" height="14"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -134,13 +134,13 @@ Gw
                     <constraint firstItem="BJG-7U-eKu" firstAttribute="top" secondItem="Neb-Rz-hK4" secondAttribute="bottom" constant="4" id="9zj-Zy-yuf"/>
                     <constraint firstAttribute="bottom" secondItem="I7y-Aj-ui3" secondAttribute="bottom" constant="20" id="BrC-qE-TNO"/>
                     <constraint firstItem="l1W-AA-5L4" firstAttribute="centerX" secondItem="se5-gp-TjO" secondAttribute="centerX" id="C25-lT-jgj"/>
-                    <constraint firstItem="Sdu-Jk-G6t" firstAttribute="top" secondItem="BJG-7U-eKu" secondAttribute="bottom" constant="8" id="FHp-0Q-24y"/>
+                    <constraint firstItem="Sdu-Jk-G6t" firstAttribute="top" secondItem="BJG-7U-eKu" secondAttribute="bottom" constant="10" id="FHp-0Q-24y"/>
                     <constraint firstItem="hAj-RR-fLd" firstAttribute="leading" secondItem="LGR-5z-wrd" secondAttribute="trailing" constant="12" id="KSJ-SA-3h7"/>
                     <constraint firstItem="xw0-SN-fkf" firstAttribute="top" secondItem="pX0-I5-dea" secondAttribute="bottom" constant="4" id="MpI-2v-sfe"/>
                     <constraint firstAttribute="bottom" secondItem="hAj-RR-fLd" secondAttribute="bottom" constant="20" id="P4Z-ak-6Hv"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pX0-I5-dea" secondAttribute="trailing" constant="20" symbolic="YES" id="Uvg-Ur-oaJ"/>
                     <constraint firstItem="Neb-Rz-hK4" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="VVv-wy-PI3"/>
-                    <constraint firstItem="l1W-AA-5L4" firstAttribute="top" secondItem="xw0-SN-fkf" secondAttribute="bottom" constant="11" id="Zjt-cE-loo"/>
+                    <constraint firstItem="l1W-AA-5L4" firstAttribute="top" secondItem="xw0-SN-fkf" secondAttribute="bottom" constant="10" id="Zjt-cE-loo"/>
                     <constraint firstAttribute="trailing" secondItem="xw0-SN-fkf" secondAttribute="trailing" constant="20" id="ZlJ-U9-bfM"/>
                     <constraint firstAttribute="trailing" secondItem="BJG-7U-eKu" secondAttribute="trailing" constant="20" id="aDG-GM-gtc"/>
                     <constraint firstAttribute="width" secondItem="Sdu-Jk-G6t" secondAttribute="width" constant="100" id="aMe-sb-T9b"/>

@@ -480,10 +480,15 @@ struct Preference {
     }
   }
 
+  /// Enum values for the IINA setting that corresponds to the `mpv`
+  /// [sub-ass-override](https://mpv.io/manual/stable/#options-sub-ass-override) option.
+  ///- Important: In order to preserve backward compatibility with enum values stored in user's settings `scale` was added to
+  ///    the end of the enumeration. This is why the constants are not ordered from least impactful to most impactful.
   enum SubOverrideLevel: Int, InitializingFromKey {
     case yes = 0
     case force
     case strip
+    case scale
 
     static var defaultValue = SubOverrideLevel.yes
 
@@ -497,6 +502,7 @@ struct Preference {
         case .yes: return "yes"
         case .force : return "force"
         case .strip: return "strip"
+        case .scale: return "scale"
         }
       }
     }

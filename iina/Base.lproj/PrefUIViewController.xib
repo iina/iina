@@ -926,7 +926,7 @@
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="n6h-el-nAa">
                             <rect key="frame" x="0.0" y="118" width="360" height="17"/>
                             <subviews>
-                                <button identifier="Trigger1" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="d0a-mf-53n">
+                                <button identifier="Trigger2" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="d0a-mf-53n">
                                     <rect key="frame" x="0.0" y="0.0" width="13" height="13"/>
                                     <buttonCell key="cell" type="disclosureTriangle" bezelStyle="disclosure" imagePosition="only" alignment="left" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="lMd-h2-ALd">
                                         <behavior key="behavior" pushIn="YES" changeBackground="YES" changeGray="YES" lightByContents="YES"/>
@@ -952,7 +952,7 @@
                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jNj-dh-I4c" secondAttribute="trailing" constant="20" symbolic="YES" id="hlG-N9-4AC"/>
                             </constraints>
                         </customView>
-                        <box identifier="Content1" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="4KC-lJ-6Fs">
+                        <box identifier="Content2" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="4KC-lJ-6Fs">
                             <rect key="frame" x="-3" y="-4" width="366" height="120"/>
                             <view key="contentView" id="4f4-xe-lQs">
                                 <rect key="frame" x="4" y="5" width="358" height="112"/>

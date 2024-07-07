@@ -25,9 +25,7 @@ class OSCToolbarButton {
   static func buildDragItem(from toolbarButton: NSButton, pasteboardWriter: NSPasteboardWriting,
                             buttonType: Preference.ToolBarButton) -> NSDraggingItem? {
     // seems to be the only reliable way to get image size
-    guard let imgReps = toolbarButton.image?.representations else { return nil }
-    guard !imgReps.isEmpty else { return nil }
-    let imageSize = imgReps[0].size
+    guard let imageSize = toolbarButton.image?.representations[at: 0]?.size else { return nil }
 
     let dragItem = NSDraggingItem(pasteboardWriter: pasteboardWriter)
     let iconSize = Preference.ToolBarButton.frameHeight

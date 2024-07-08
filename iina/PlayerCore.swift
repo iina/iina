@@ -559,8 +559,11 @@ class PlayerCore: NSObject {
                  level: .verbose, subsystem: subsystem)
     }
 
+    // hide main window
+    mainWindow.window?.orderOut(self)
+
     let needRestoreLayout = !miniPlayer.loaded
-    miniPlayer.showWindow(self)
+    let _ = miniPlayer.window
 
     miniPlayer.updateTitle()
     refreshSyncUITimer()
@@ -601,8 +604,6 @@ class PlayerCore: NSObject {
       miniPlayer.setToInitialWindowSize(display: true, animate: false)
     }
 
-    // hide main window
-    mainWindow.window?.orderOut(self)
     isInMiniPlayer = true
 
     videoView.videoLayer.draw(forced: true)
@@ -644,15 +645,7 @@ class PlayerCore: NSObject {
                                                                  toItem: mainWindowContentView, attribute: attr, multiplier: 1, constant: 0)
       mainWindow.videoViewConstraints[attr]!.isActive = true
     }
-    // show main window
-    if showMainWindow {
-      mainWindow.window?.makeKeyAndOrderFront(self)
-    }
-    // if aspect ratio is not set
-    let (width, height) = originalVideoSize
-    if width == 0 && height == 0 {
-      mainWindow.window?.aspectRatio = AppData.sizeWhenNoVideo
-    }
+
     // hide mini player
     miniPlayer.window?.orderOut(nil)
     isInMiniPlayer = false

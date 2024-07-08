@@ -281,6 +281,10 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     var frame = window.frame
     frame.size.height += newHeight - currentHeight - 0.5
     window.setFrame(frame, display: true, animate: false)
+
+    if !window.isVisible {
+      showWindow(self)
+    }
   }
 
   func updateVideoViewAspectConstraint(withAspect aspect: CGFloat) {

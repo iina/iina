@@ -728,7 +728,9 @@ struct Preference {
     }
 
     // Width will be identical
-    static let frameHeight: CGFloat = 24
+    static let frameSize: CGFloat = 24
+    // Reduced size for floating OSC with five buttons
+    static let compactFrameWidth: CGFloat = 20
 
   }
 

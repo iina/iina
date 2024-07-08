@@ -151,7 +151,7 @@ class PrefOSCToolbarCurrentItemsView: NSStackView, NSDraggingSource {
       // remove the dragged view and insert a placeholder at its position.
       let index = views.firstIndex(of: itemBeingDragged)!
       removeView(itemBeingDragged)
-      Utility.quickConstraints(["H:[v(\(Preference.ToolBarButton.frameHeight))]", "V:[v(\(Preference.ToolBarButton.frameHeight))]"], ["v": placeholderView])
+      Utility.quickConstraints(["H:[v(\(Preference.ToolBarButton.frameSize))]", "V:[v(\(Preference.ToolBarButton.frameSize))]"], ["v": placeholderView])
       insertView(placeholderView, at: index, in: .trailing)
     }
   }
@@ -165,7 +165,7 @@ class PrefOSCToolbarCurrentItemsView: NSStackView, NSDraggingSource {
 
   func draggingSession(_ session: NSDraggingSession, endedAt screenPoint: NSPoint, operation: NSDragOperation) {
     if operation == [] || operation == .delete {
-      let diameter = Preference.ToolBarButton.frameHeight
+      let diameter = Preference.ToolBarButton.frameSize
       // Do "poof" animation on item remove
       NSAnimationEffect.disappearingItemDefault.show(centeredAt: screenPoint, size: NSSize(width: diameter, height: diameter), completionHandler: {
         self.updateItems()
@@ -216,7 +216,7 @@ class PrefOSCToolbarCurrentItemsView: NSStackView, NSDraggingSource {
 
     // get the expected drag destination position and index
     let pos = convert(sender.draggingLocation, from: nil)
-    let phWidth = Preference.ToolBarButton.frameHeight
+    let phWidth = Preference.ToolBarButton.frameSize
     let phHeight = phWidth
     var index = views.count - Int(floor((frame.width - pos.x) / phWidth)) - 1
     if index < 0 { index = 0 }

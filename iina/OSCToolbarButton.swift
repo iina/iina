@@ -10,7 +10,10 @@ import Foundation
 
 // Not elegant. Just a place to stick common code so that it won't be duplicated
 class OSCToolbarButton {
-  static func setStyle(of toolbarButton: NSButton, buttonType: Preference.ToolBarButton) {
+  
+  /// - Parameters:
+  ///   - reducedWidth: For the current OSC design, the width need to be compressed when there are five buttons in the floating OSC
+  static func setStyle(of toolbarButton: NSButton, buttonType: Preference.ToolBarButton, reducedWidth: Bool = false) {
     toolbarButton.translatesAutoresizingMaskIntoConstraints = false
     toolbarButton.bezelStyle = .regularSquare
     toolbarButton.image = buttonType.image()
@@ -18,8 +21,9 @@ class OSCToolbarButton {
     toolbarButton.tag = buttonType.rawValue
     toolbarButton.refusesFirstResponder = true
     toolbarButton.toolTip = buttonType.description()
-    let sideSize = Preference.ToolBarButton.frameHeight
-    Utility.quickConstraints(["H:[btn(\(sideSize))]", "V:[btn(\(sideSize))]"], ["btn": toolbarButton])
+    let buttonHeight = Preference.ToolBarButton.frameSize
+    let buttonWidth = reducedWidth ? Preference.ToolBarButton.compactFrameWidth : Preference.ToolBarButton.frameSize
+    Utility.quickConstraints(["H:[btn(\(buttonWidth))]", "V:[btn(\(buttonHeight))]"], ["btn": toolbarButton])
   }
 
   static func buildDragItem(from toolbarButton: NSButton, pasteboardWriter: NSPasteboardWriting,
@@ -28,7 +32,7 @@ class OSCToolbarButton {
     guard let imageSize = toolbarButton.image?.representations[at: 0]?.size else { return nil }
 
     let dragItem = NSDraggingItem(pasteboardWriter: pasteboardWriter)
-    let iconSize = Preference.ToolBarButton.frameHeight
+    let iconSize = Preference.ToolBarButton.frameSize
     // Image is centered in frame, and frame has 0px offset from left & bottom of superview
     let dragOrigin = CGPoint(x: (iconSize - imageSize.width) / 2, y: (iconSize - imageSize.height) / 2)
     dragItem.draggingFrame = NSRect(origin: dragOrigin, size: imageSize)

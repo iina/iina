@@ -691,7 +691,7 @@ class MainWindowController: PlayerWindowController {
     fragToolbarView.views.forEach { fragToolbarView.removeView($0) }
     for buttonType in buttons {
       let button = NSButton()
-      OSCToolbarButton.setStyle(of: button, buttonType: buttonType)
+      OSCToolbarButton.setStyle(of: button, buttonType: buttonType, reducedWidth: buttons.count > 4)
       button.action = #selector(self.toolBarButtonAction(_:))
       fragToolbarView.addView(button, in: .trailing)
     }

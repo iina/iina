@@ -513,15 +513,6 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     performMouseAction(action)
   }
   
-  // MARK: - Window delegate: Open / Close
-  
-  func windowDidOpen() {
-    if Preference.bool(for: .alwaysFloatOnTop) {
-      setWindowFloatingOnTop(true)
-    }
-    videoView.startDisplayLink()
-  }
-  
   // MARK: - Window delegate: Activeness status
 
   func windowDidBecomeMain(_ notification: Notification) {

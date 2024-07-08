@@ -398,18 +398,6 @@ class PlayerCore: NSObject {
     let isFirstLoad = !mainWindow.loaded
     let _ = mainWindow.window
     initialWindow.close()
-    if isInMiniPlayer {
-      miniPlayer.showWindow(nil)
-    } else {
-      // we only want to call windowWillOpen when the window is currently closed.
-      // if the window is opened for the first time, it will become visible in windowDidLoad, so we need to check isFirstLoad.
-      // window.isVisible will work from the second time.
-      if isFirstLoad || !mainWindow.window!.isVisible {
-        mainWindow.windowWillOpen()
-      }
-      mainWindow.showWindow(nil)
-      mainWindow.windowDidOpen()
-    }
 
     // Send load file command
     info.justOpenedFile = true

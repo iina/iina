@@ -171,6 +171,7 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
   }
 }
 
+// MARK: - Transformers
 
 @objc(ASSOverrideLevelTransformer) class ASSOverrideLevelTransformer: ValueTransformer {
 
@@ -192,11 +193,58 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
       return NSLocalizedString("preference.sub_override_level.force", value: "force", comment: "force")
     case .strip:
       return NSLocalizedString("preference.sub_override_level.strip", value: "strip", comment: "strip")
+    case .scale:
+      return NSLocalizedString("preference.sub_override_level.scale", value: "scale", comment: "scale")
     }
   }
-
 }
 
+/// Transform a raw `SubOverrideLevel` enum value into a slider value.
+///
+///Normally there is a 1 to 1 mapping between an enum value and a slider value. However this is not true for `SubOverrideLevel`.
+///Originally the only supported values for the `Override level` setting were `yes`, `force` and `strip`. Then `scale` was
+///added. The order for the slider now _must_ be `yes`, `scale`, `force` and `strip`. But to preserve backward compatibility
+///with enum values stored in user's settings `scale` was added to the end of the enumeration, thus requiring a transformation
+///between the slider and enum values as shown in this table:
+///
+/// | Slider | Raw | Enum |
+/// | --- | --- | --- |
+/// | 0 | 0 | yes |
+/// | 1 | 3 | scale |
+/// | 2 | 1 | force |
+/// | 3 | 2 | strip |
+@objc(ASSOverrideLevelValueTransformer) class ASSOverrideLevelValueTransformer: ValueTransformer {
+
+  private static let enumToSlider: [NSNumber: NSNumber] = [0: 0, 1: 2, 2: 3, 3: 1]
+
+  private static let sliderToEnum: [NSNumber: NSNumber] = {
+    var result: [NSNumber: NSNumber] = [:]
+    for (raw, slider) in enumToSlider { result[slider] = raw }
+    return result
+  }()
+
+  override class func allowsReverseTransformation() -> Bool { true }
+
+  override func reverseTransformedValue(_ value: Any?) -> Any? {
+    guard let value = toNumber(value) else { return nil }
+    return ASSOverrideLevelValueTransformer.sliderToEnum[value]
+  }
+
+  override func transformedValue(_ value: Any?) -> Any? {
+    guard let value = toNumber(value) else { return nil }
+    return ASSOverrideLevelValueTransformer.enumToSlider[value]
+  }
+
+  override class func transformedValueClass() -> AnyClass { NSNumber.self }
+
+  private func toNumber(_ value: Any?) -> NSNumber? {
+    guard let value = value as? NSNumber else {
+      guard let value = value as? NSString else { return nil }
+      return value.integerValue as NSNumber
+    }
+    return value
+  }
+}
 
 @objc(OpenSubAccountNameTransformer) class OpenSubAccountNameTransformer: ValueTransformer {
 
@@ -216,9 +264,7 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
       return String(format: NSLocalizedString("preference.logged_in_as", comment: "Logged in as"), username)
     }
   }
-
 }
-
 
 @objc(LoginButtonTitleTransformer) class LoginButtonTitleTransformer: ValueTransformer {
 
@@ -234,7 +280,6 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
     let username = value as? NSString ?? ""
     return NSLocalizedString((username.length == 0 ? "general.login" : "general.logout"), comment: "")
   }
-
 }
 
 @objc(MPVColorStringTransformer) class MPVColorStringTransformer: ValueTransformer {
@@ -258,4 +303,3 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
     return color.usingColorSpace(.deviceRGB)!.mpvColorString
   }
 }
-

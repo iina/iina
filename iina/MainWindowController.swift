@@ -1183,6 +1183,8 @@ class MainWindowController: PlayerWindowController {
                        animate: !Preference.bool(for: PK.disableAnimations))
     }
 
+    // Draw black screen before playing a video. This is needed due to window reuse. Displaying a
+    // frame from a previously played video would violate good privacy practices.
     videoView.videoLayer.draw(forced: true)
   }
 

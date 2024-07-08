@@ -17,12 +17,23 @@ class ViewLayer: CAOpenGLLayer {
   let mpvGLQueue = DispatchQueue(label: "com.colliderli.iina.mpvgl", qos: .userInteractive)
   @Atomic var blocked = false
 
+  private let cglContext: CGLContextObj
+  private let cglPixelFormat: CGLPixelFormatObj
+
+  /// Lock to single thread calls to `display`.
+  ///
+  /// A recursive lock is needed because the call to `CATransaction.flush()` in `display` calls `display_if_needed`
+  /// which will then call `display` if layout is needed. See the discussion in PR #5029.
+  private let displayLock = NSRecursiveLock()
+
   private var fbo: GLint = 1
 
   private var needsMPVRender = false
   private var forceRender = false
 
   override init() {
+    cglPixelFormat = ViewLayer.createPixelFormat()
+    cglContext = ViewLayer.createContext(cglPixelFormat)
     super.init()
 
     isOpaque = true
@@ -43,7 +54,146 @@ class ViewLayer: CAOpenGLLayer {
     fatalError("init(coder:) has not been implemented")
   }
 
-  override func copyCGLPixelFormat(forDisplayMask mask: UInt32) -> CGLPixelFormatObj {
+  override func copyCGLPixelFormat(forDisplayMask mask: UInt32) -> CGLPixelFormatObj { cglPixelFormat }
+
+  override func copyCGLContext(forPixelFormat pf: CGLPixelFormatObj) -> CGLContextObj { cglContext }
+
+  // MARK: - Draw
+
+  override func canDraw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj,
+                        forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) -> Bool {
+    videoView.$isUninited.withLock() { isUninited in
+      guard !isUninited else { return false }
+      if forceRender { return true }
+      return videoView.player.mpv.shouldRenderUpdateFrame()
+    }
+  }
+
+  override func draw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj,
+                     forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) {
+    videoView.$isUninited.withLock() { isUninited in
+      guard !isUninited else { return }
+
+      let mpv = videoView.player.mpv!
+      needsMPVRender = false
+
+      glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
+
+      var i: GLint = 0
+      glGetIntegerv(GLenum(GL_DRAW_FRAMEBUFFER_BINDING), &i)
+      var dims: [GLint] = [0, 0, 0, 0]
+      glGetIntegerv(GLenum(GL_VIEWPORT), &dims);
+
+      var flip: CInt = 1
+
+      withUnsafeMutablePointer(to: &flip) { flip in
+        if let context = mpv.mpvRenderContext {
+          fbo = i != 0 ? i : fbo
+
+          var data = mpv_opengl_fbo(fbo: Int32(fbo),
+                                    w: Int32(dims[2]),
+                                    h: Int32(dims[3]),
+                                    internal_format: 0)
+          withUnsafeMutablePointer(to: &data) { data in
+            var params: [mpv_render_param] = [
+              mpv_render_param(type: MPV_RENDER_PARAM_OPENGL_FBO, data: .init(data)),
+              mpv_render_param(type: MPV_RENDER_PARAM_FLIP_Y, data: .init(flip)),
+              mpv_render_param()
+            ]
+            mpv_render_context_render(context, &params)
+            ignoreGLError()
+          }
+        } else {
+          glClearColor(0, 0, 0, 1)
+          glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
+        }
+      }
+      glFlush()
+    }
+  }
+
+  func suspend() {
+    blocked = true
+    mpvGLQueue.suspend()
+  }
+
+  func resume() {
+    blocked = false
+    draw(forced: true)
+    mpvGLQueue.resume()
+  }
+
+  func draw(forced: Bool = false) {
+    videoView.$isUninited.withLock() { isUninited in
+      // The properties forceRender and needsMPVRender are always accessed while holding isUninited's
+      // lock. This avoids the need for separate locks to avoid data races with these flags. No need
+      // to check isUninited at this point.
+      needsMPVRender = true
+      if forced { forceRender = true }
+    }
+
+    // Must not call display while holding isUninited's lock as that method will attempt to acquire
+    // the lock and our locks do not support recursion.
+    display()
+  }
+
+  override func display() {
+    displayLock.lock()
+    defer { displayLock.unlock() }
+
+    super.display()
+    CATransaction.flush()
+    videoView.$isUninited.withLock() { isUninited in
+      guard !isUninited else { return }
+
+      guard !forceRender else {
+        forceRender = false
+        return
+      }
+      guard needsMPVRender else { return }
+
+      // Neither canDraw nor draw(inCGLContext:) were called by AppKit, needs a skip render.
+      // This can happen when IINA is playing in another space, as might occur when just playing
+      // audio. See issue #5025.
+      videoView.player.mpv.lockAndSetOpenGLContext()
+      defer { videoView.player.mpv.unlockOpenGLContext() }
+      if let renderContext = videoView.player.mpv.mpvRenderContext,
+         videoView.player.mpv.shouldRenderUpdateFrame() {
+        var skip: CInt = 1
+        withUnsafeMutablePointer(to: &skip) { skip in
+          var params: [mpv_render_param] = [
+            mpv_render_param(type: MPV_RENDER_PARAM_SKIP_RENDERING, data: .init(skip)),
+            mpv_render_param()
+          ]
+          mpv_render_context_render(renderContext, &params)
+        }
+      }
+      needsMPVRender = false
+    }
+  }
+
+  // MARK: - Core OpenGL Context and Pixel Format
+
+  private static func createContext(_ pixelFormat: CGLPixelFormatObj) -> CGLContextObj {
+    var ctx: CGLContextObj?
+    CGLCreateContext(pixelFormat, nil, &ctx)
+
+    guard let ctx = ctx else {
+      Logger.fatal("Cannot create OpenGL context")
+    }
+
+    // Sync to vertical retrace.
+    var i: GLint = 1
+    CGLSetParameter(ctx, kCGLCPSwapInterval, &i)
+
+    // Enable multi-threaded GL engine.
+    CGLEnable(ctx, kCGLCEMPEngine)
+
+    CGLSetCurrentContext(ctx)
+    return ctx
+  }
+
+  private static func createPixelFormat() -> CGLPixelFormatObj {
     var attributeList: [CGLPixelFormatAttribute] = [
       kCGLPFADoubleBuffer,
       kCGLPFAAllowOfflineRenderers,
@@ -74,130 +224,7 @@ class ViewLayer: CAOpenGLLayer {
     Logger.fatal("Cannot create OpenGL pixel format!")
   }
 
-  override func copyCGLContext(forPixelFormat pf: CGLPixelFormatObj) -> CGLContextObj {
-    let ctx = super.copyCGLContext(forPixelFormat: pf)
-
-    var i: GLint = 1
-    CGLSetParameter(ctx, kCGLCPSwapInterval, &i)
-
-    CGLEnable(ctx, kCGLCEMPEngine)
-
-    CGLSetCurrentContext(ctx)
-    return ctx
-  }
-
-  // MARK: Draw
-
-  override func canDraw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj, forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) -> Bool {
-    if forceRender { return true }
-    return videoView.player.mpv.shouldRenderUpdateFrame()
-  }
-
-  override func draw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj, forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) {
-    let mpv = videoView.player.mpv!
-    needsMPVRender = false
-
-    glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
-
-    var i: GLint = 0
-    glGetIntegerv(GLenum(GL_DRAW_FRAMEBUFFER_BINDING), &i)
-    var dims: [GLint] = [0, 0, 0, 0]
-    glGetIntegerv(GLenum(GL_VIEWPORT), &dims);
-
-    var flip: CInt = 1
-
-    withUnsafeMutablePointer(to: &flip) { flip in
-      if let context = mpv.mpvRenderContext {
-        fbo = i != 0 ? i : fbo
-
-        var data = mpv_opengl_fbo(fbo: Int32(fbo),
-                                  w: Int32(dims[2]),
-                                  h: Int32(dims[3]),
-                                  internal_format: 0)
-        withUnsafeMutablePointer(to: &data) { data in
-          var params: [mpv_render_param] = [
-            mpv_render_param(type: MPV_RENDER_PARAM_OPENGL_FBO, data: .init(data)),
-            mpv_render_param(type: MPV_RENDER_PARAM_FLIP_Y, data: .init(flip)),
-            mpv_render_param()
-          ]
-          mpv_render_context_render(context, &params);
-          ignoreGLError()
-        }
-      } else {
-        glClearColor(0, 0, 0, 1)
-        glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
-      }
-    }
-    glFlush()
-  }
-
-  func suspend() {
-    blocked = true
-    mpvGLQueue.suspend()
-  }
-
-  func resume() {
-    blocked = false
-    draw(forced: true)
-    mpvGLQueue.resume()
-  }
-
-  func draw(forced: Bool = false) {
-    videoView.$isUninited.withLock() { isUninited in
-      // The properties forceRender and needsMPVRender are always accessed while holding isUninited's
-      // lock. This avoids the need for separate locks to avoid data races with these flags. No need
-      // to check isUninited at this point.
-      needsMPVRender = true
-      if forced { forceRender = true }
-    }
-
-    // Must not call display while holding isUninited's lock as that method will attempt to acquire
-    // the lock and our locks do not support recursion.
-    display()
-
-    videoView.$isUninited.withLock() { isUninited in
-      guard !isUninited else { return }
-      if forced {
-        forceRender = false
-        return
-      }
-      guard needsMPVRender else { return }
-
-      // Neither canDraw nor draw(inCGLContext:) were called by AppKit, needs a skip render.
-      // This can happen when IINA is playing in another space, as might occur when just playing
-      // audio. See issue #5025.
-      videoView.player.mpv.lockAndSetOpenGLContext()
-      defer { videoView.player.mpv.unlockOpenGLContext() }
-      if let renderContext = videoView.player.mpv.mpvRenderContext,
-         videoView.player.mpv.shouldRenderUpdateFrame() {
-        var skip: CInt = 1
-        withUnsafeMutablePointer(to: &skip) { skip in
-          var params: [mpv_render_param] = [
-            mpv_render_param(type: MPV_RENDER_PARAM_SKIP_RENDERING, data: .init(skip)),
-            mpv_render_param()
-          ]
-          mpv_render_context_render(renderContext, &params);
-        }
-      }
-      needsMPVRender = false
-    }
-  }
-
-  override func display() {
-    let needsFlush: Bool = videoView.$isUninited.withLock() { isUninited in
-      guard !isUninited else { return false }
-
-      super.display()
-      return true
-    }
-    guard needsFlush else { return }
-
-    // Must not call flush while holding isUninited's lock as that method may call display and our
-    // locks do not support recursion.
-    CATransaction.flush()
-  }
-
-  // MARK: Utils
+  // MARK: - Utils
 
   /** Check OpenGL error (for debug only). */
   func gle() {

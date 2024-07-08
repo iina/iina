@@ -17,7 +17,7 @@ class PrefOSCToolbarDraggingItemViewController: NSViewController, NSPasteboardWr
   var availableItemsView: PrefOSCToolbarAvailableItemsView?
   var buttonType: Preference.ToolBarButton
 
-  @IBOutlet weak var iconImageView: NSImageView!
+  @IBOutlet weak var toolbarButton: NSButton!
   @IBOutlet weak var descriptionLabel: NSTextField!
 
 
@@ -33,8 +33,10 @@ class PrefOSCToolbarDraggingItemViewController: NSViewController, NSPasteboardWr
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    iconImageView.image = buttonType.image()
-    iconImageView.translatesAutoresizingMaskIntoConstraints = false
+    OSCToolbarButton.setStyle(of: toolbarButton, buttonType: buttonType)
+    // Button is actually disabled so that its mouseDown goes to its superview instead. But don't gray it out.
+    (toolbarButton.cell! as! NSButtonCell).imageDimsWhenDisabled = false
+
     descriptionLabel.stringValue = buttonType.description()
   }
 
@@ -50,19 +52,10 @@ class PrefOSCToolbarDraggingItemViewController: NSViewController, NSPasteboardWr
   }
 
   override func mouseDown(with event: NSEvent) {
-    let dragItem = NSDraggingItem(pasteboardWriter: self)
-    dragItem.draggingFrame = NSRect(origin: view.convert(event.locationInWindow, from: nil),
-                                    size: NSSize(width: Preference.ToolBarButton.frameHeight, height: Preference.ToolBarButton.frameHeight))
-    dragItem.imageComponentsProvider = {
-      let imageComponent = NSDraggingImageComponent(key: .icon)
-      let image = self.buttonType.image()
-      imageComponent.contents = image
-      imageComponent.frame = NSRect(origin: .zero, size: NSSize(width: image.size.width, height: image.size.height))
-      return [imageComponent]
-    }
-    if let availableItemsView = availableItemsView {
-      view.beginDraggingSession(with: [dragItem], event: event, source: availableItemsView)
-    }
+    guard let availableItemsView = availableItemsView else { return }
+
+    guard let dragItem = OSCToolbarButton.buildDragItem(from: toolbarButton, pasteboardWriter: self, buttonType: buttonType) else { return }
+    view.beginDraggingSession(with: [dragItem], event: event, source: availableItemsView)
   }
 
 }

@@ -960,13 +960,17 @@
                     </textFieldCell>
                 </textField>
                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7UX-IL-hdk">
-                    <rect key="frame" x="202" y="5" width="96" height="20"/>
+                    <rect key="frame" x="202" y="5" width="128" height="20"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="92" id="EJa-Kl-S4K"/>
+                        <constraint firstAttribute="width" constant="124" id="EJa-Kl-S4K"/>
                     </constraints>
-                    <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" maxValue="2" doubleValue="2" tickMarkPosition="below" numberOfTickMarks="3" allowsTickMarkValuesOnly="YES" sliderType="linear" id="63l-gO-fEV"/>
+                    <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" maxValue="3" doubleValue="3" tickMarkPosition="below" numberOfTickMarks="4" allowsTickMarkValuesOnly="YES" sliderType="linear" id="63l-gO-fEV"/>
                     <connections>
-                        <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subOverrideLevel" id="ofs-dB-Q12"/>
+                        <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subOverrideLevel" id="jz2-FJ-liL">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">ASSOverrideLevelValueTransformer</string>
+                            </dictionary>
+                        </binding>
                     </connections>
                 </slider>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FR3-Ar-5Dw">

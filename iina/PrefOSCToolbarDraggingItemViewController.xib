@@ -9,47 +9,53 @@
         <customObject id="-2" userLabel="File's Owner" customClass="PrefOSCToolbarDraggingItemViewController" customModule="IINA" customModuleProvider="target">
             <connections>
                 <outlet property="descriptionLabel" destination="STZ-wb-l3E" id="RR1-Wd-fcz"/>
-                <outlet property="iconImageView" destination="K6f-VH-I1k" id="3GC-nA-ohN"/>
+                <outlet property="toolbarButton" destination="K6f-VH-I1k" id="dho-KW-dWE"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="304" height="30"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+        <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY" userLabel="Available Item View">
+            <rect key="frame" x="0.0" y="0.0" width="332" height="33"/>
             <subviews>
                 <box title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="URy-iX-J9X">
-                    <rect key="frame" x="-3" y="-4" width="310" height="36"/>
-                    <view key="contentView" id="0YW-az-h4Z">
-                        <rect key="frame" x="4" y="5" width="302" height="28"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <rect key="frame" x="-3" y="-4" width="338" height="39"/>
+                    <view key="contentView" translatesAutoresizingMaskIntoConstraints="NO" id="0YW-az-h4Z">
+                        <rect key="frame" x="4" y="5" width="64" height="31"/>
                         <subviews>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="K6f-VH-I1k">
-                                <rect key="frame" x="4" y="2" width="24" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" priority="900" constant="24" id="8hu-73-FcW"/>
-                                    <constraint firstAttribute="width" priority="900" constant="24" id="Lsz-6M-e4p"/>
-                                </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="24D-9A-XWQ"/>
-                            </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="STZ-wb-l3E">
-                                <rect key="frame" x="34" y="6" width="37" height="16"/>
+                                <rect key="frame" x="29" y="8" width="37" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="ebp-YW-3qF">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="K6f-VH-I1k" userLabel="ToolbarButton">
+                                <rect key="frame" x="0.0" y="0.0" width="31" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="K6f-VH-I1k" secondAttribute="height" multiplier="1:1" id="Sij-T1-oK9"/>
+                                </constraints>
+                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" imagePosition="only" alignment="center" enabled="NO" refusesFirstResponder="YES" state="on" focusRingType="none" inset="2" id="fsj-YE-OB7">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="STZ-wb-l3E" firstAttribute="leading" secondItem="K6f-VH-I1k" secondAttribute="trailing" constant="8" id="I14-lQ-yq6"/>
-                            <constraint firstItem="K6f-VH-I1k" firstAttribute="centerY" secondItem="0YW-az-h4Z" secondAttribute="centerY" id="I5t-7N-Fnc"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="STZ-wb-l3E" secondAttribute="trailing" constant="4" id="i3Y-et-dO9"/>
-                            <constraint firstItem="K6f-VH-I1k" firstAttribute="leading" secondItem="0YW-az-h4Z" secondAttribute="leading" constant="4" id="kHl-JF-CLj"/>
-                            <constraint firstItem="STZ-wb-l3E" firstAttribute="centerY" secondItem="0YW-az-h4Z" secondAttribute="centerY" id="rRO-PM-Xjz"/>
+                            <constraint firstItem="STZ-wb-l3E" firstAttribute="leading" secondItem="K6f-VH-I1k" secondAttribute="trailing" id="I14-lQ-yq6"/>
+                            <constraint firstAttribute="bottom" secondItem="K6f-VH-I1k" secondAttribute="bottom" priority="100" id="UNF-1y-roF"/>
+                            <constraint firstItem="K6f-VH-I1k" firstAttribute="leading" secondItem="0YW-az-h4Z" secondAttribute="leading" priority="100" id="g0L-Sc-Dy6"/>
+                            <constraint firstAttribute="trailing" secondItem="STZ-wb-l3E" secondAttribute="trailing" id="i3Y-et-dO9"/>
+                            <constraint firstItem="STZ-wb-l3E" firstAttribute="centerY" secondItem="K6f-VH-I1k" secondAttribute="centerY" id="rRO-PM-Xjz"/>
+                            <constraint firstItem="K6f-VH-I1k" firstAttribute="top" secondItem="0YW-az-h4Z" secondAttribute="top" priority="100" id="yqb-rl-MM0"/>
                         </constraints>
                     </view>
+                    <constraints>
+                        <constraint firstItem="K6f-VH-I1k" firstAttribute="top" secondItem="URy-iX-J9X" secondAttribute="top" constant="1" id="Seh-Lq-2Ha"/>
+                        <constraint firstAttribute="bottom" secondItem="K6f-VH-I1k" secondAttribute="bottom" constant="1" id="liX-rj-LuJ"/>
+                        <constraint firstItem="K6f-VH-I1k" firstAttribute="leading" secondItem="URy-iX-J9X" secondAttribute="leading" constant="1" id="lvb-BV-nHc"/>
+                    </constraints>
                 </box>
             </subviews>
             <constraints>
@@ -58,7 +64,7 @@
                 <constraint firstAttribute="bottom" secondItem="URy-iX-J9X" secondAttribute="bottom" id="Ool-Sx-y1K"/>
                 <constraint firstAttribute="trailing" secondItem="URy-iX-J9X" secondAttribute="trailing" id="jBV-fT-KMp"/>
             </constraints>
-            <point key="canvasLocation" x="51" y="76"/>
+            <point key="canvasLocation" x="65" y="-57.5"/>
         </customView>
     </objects>
 </document>

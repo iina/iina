@@ -52,6 +52,7 @@
 "iina.toggle-flip" = "Commuta invertir";
 "iina.toggle-mirror" = "Commuta reflectir";
 "iina.save-playlist" = "Desa la llista de reproducció actual";
+"iina.show-current-file-in-finder" = "Show current file in Finder";
 "iina.delete-current-file" = "Suprimeix el fitxer actual";
 "iina.delete-current-file-hard" = "Suprimeix directament el fitxer actual sense moure'l a la paperera";
 "iina.find-online-subs" = "Cerca subtítols en línia";
@@ -100,6 +101,7 @@
 "opt.sub-pos" = "Posició dels subtítols";
 "opt.sub-scale" = "Escala dels subtítols";
 "opt.sub-visibility" = "Visibilitat dels subtítols";
+"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
 "opt.sub-ass-style-override" = "Sobreesciure estil ASS";
 
 "opt.fullscreen" = "Pantalla completa";

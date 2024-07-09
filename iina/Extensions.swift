@@ -620,15 +620,15 @@ extension NSScreen {
   /// area in case additional problems are encountered in the future.
   /// - parameter label: Label to include in the log message.
   /// - parameter screen: The `NSScreen` object to log.
-  static func log(_ label: String, _ screen: NSScreen?) {
+  static func log(_ label: String, _ screen: NSScreen?, subsystem: Logger.Subsystem = .general) {
     guard let screen = screen else {
-      Logger.log("\(label): nil", level: .warning)
+      Logger.log("\(label): nil", level: .warning, subsystem: subsystem)
       return
     }
     // Unfortunately localizedName is not available until macOS Catalina.
     let maxPossibleEDR = screen.maximumPotentialExtendedDynamicRangeColorComponentValue
     let canEnableEDR = maxPossibleEDR > 1.0
-    Logger.log("\(label): \"\(screen.localizedName)\" visible frame \(screen.visibleFrame) EDR: {supports=\(canEnableEDR) maxPotential=\(maxPossibleEDR) maxCurrent=\(screen.maximumExtendedDynamicRangeColorComponentValue)}")
+    Logger.log("\(label): \"\(screen.localizedName)\" visible frame \(screen.visibleFrame) EDR: {supports=\(canEnableEDR) maxPotential=\(maxPossibleEDR) maxCurrent=\(screen.maximumExtendedDynamicRangeColorComponentValue)}", subsystem: subsystem)
   }
 }
 

@@ -183,10 +183,9 @@ class MPVController: NSObject {
   /// Creates a `MPVController` object.
   /// - Parameters:
   ///   - playerCore: The player this `MPVController` will be associated with.
-  ///   - playerNumber: Number identifying the player, for use in this controller's logger subsystem.
-  init(playerCore: PlayerCore, playerNumber: Int) {
+  init(playerCore: PlayerCore) {
     self.player = playerCore
-    subsystem = Logger.makeSubsystem("mpv\(playerNumber)")
+    subsystem = Logger.makeSubsystem("mpv\(player.playerNumber)")
     super.init()
   }
 

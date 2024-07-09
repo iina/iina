@@ -130,6 +130,7 @@
 "preference.enable_adv_settings" = "Aktiver avancerede indstillinger";
 
 "preference.sub_override_level.force" = "force";
+"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "strip";
 "preference.sub_override_level.yes" = "yes";
 
@@ -192,7 +193,6 @@
 
 "alert.fatal_error" = "Fatal fejl: %@ \nProgrammet afsluttes.";
 "alert.mpv_error" = "Intern fejl %@ (%@) under ændring af %@.";
-"alert.sleep" = "Kan ikke forhindre dvale tilstand! (0x%0X8)";
 
 "alert.unsupported_audio" = "Ikke supporteret ekstern lydfil.";
 "alert.unsupported_sub" = "Ikke supporteret ekstern undertekster.";

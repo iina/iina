@@ -244,6 +244,18 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         abLoop()
         returnValue = 0
 
+      case MPVCommand.quit.rawValue:
+        // Initiate application termination. AppKit requires this be done from the main thread,
+        // however the main dispatch queue must not be used to avoid blocking the queue as per
+        // instructions from Apple. IINA must support quitting being initiated by mpv as the user
+        // could use mpv's IPC interface to send the quit command directly to mpv. However the
+        // shutdown sequence is cleaner when initiated by IINA, so we do not send the quit command
+        // to mpv and instead trigger the normal app termination sequence.
+        RunLoop.main.perform(inModes: [.common]) {
+          NSApp.terminate(nil)
+        }
+        returnValue = 0
+
       case MPVCommand.screenshot.rawValue:
         return player.screenshot(fromKeyBinding: keyBinding)
         

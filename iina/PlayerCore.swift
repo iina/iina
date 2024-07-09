@@ -516,14 +516,12 @@ class PlayerCore: NSObject {
   // unload main window video view
   func uninitVideo() {
     guard mainWindow.loaded else { return }
-    mainWindow.videoView.stopDisplayLink()
     mainWindow.videoView.uninit()
   }
 
   private func savePlayerState() {
     savePlaybackPosition()
     refreshSyncUITimer()
-    uninitVideo()
   }
 
   /// Initiate shutdown of this player.
@@ -551,7 +549,16 @@ class PlayerCore: NSObject {
       isShuttingDown = true
       savePlayerState()
     }
+    uninitVideo()
     postNotification(.iinaPlayerShutdown)
+    if isMPVInitiated {
+      // Initiate application termination. AppKit requires this be done from the main thread,
+      // however the main dispatch queue must not be used to avoid blocking the queue as per
+      // instructions from Apple.
+      RunLoop.main.perform(inModes: [.common]) {
+        NSApp.terminate(nil)
+      }
+    }
   }
 
   func switchToMiniPlayer(automatically: Bool = false) {
@@ -717,7 +724,7 @@ class PlayerCore: NSObject {
     log("Stopping playback")
     isStopping = true
     refreshSyncUITimer()
-    mpv.command(.stop)
+    mpv.command(.stop, level: .verbose)
   }
 
   /// Playback has stopped and the media has been unloaded.

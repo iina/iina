@@ -92,7 +92,7 @@ class VideoView: NSView {
       guard !isUninited else { return }
       isUninited = true
 
-      videoLayer.suspend()
+      stopDisplayLink()
       player.mpv.mpvUninitRendering()
     }
   }

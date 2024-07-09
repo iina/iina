@@ -65,14 +65,14 @@
 "osd.sub_delay.later" = "Felirat késleltetés: %.2fmp-vel később";
 "osd.sub_delay.earlier" = "Felirat késleltetés: %.2fmp-vel hamarabb";
 "osd.subtitle_pos" = "Felirat pozíciója: %.1f";
-"osd.sub_hidden" = "Subtitles Hidden";
-"osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
-"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
-"osd.sub_second_visible" = "Secondary Subtitles Visible";
+"osd.sub_hidden" = "Feliratok elrejtve";
+"osd.sub_visible" = "Feliratok megjelenítve";
+"osd.sub_second_delay.nodelay" = "Másodlagos felirat késleltetés: Nincs késleltetés";
+"osd.sub_second_delay.later" = "Másodlagos felirat késleltetés: %.2fmp-vel később";
+"osd.sub_second_delay.earlier" = "Másodlagos felirat késleltetés: %.2fmp-vel előbb";
+"osd.sub_second_hidden" = "Másodlagos feliratok elrejtve";
+"osd.sub_second_pos" = "Másodlagos felirat pozíció: %.1f";
+"osd.sub_second_visible" = "Másodlagos feliratok megjelenítve";
 "osd.mute" = "Némítás";
 "osd.unmute" = "Némítás feloldása";
 "osd.screenshot" = "Képernyőkép rögzítve";
@@ -92,8 +92,8 @@
 "osd.find_online_sub" = "Online feliratok keresése…";
 "osd.find_online_sub.source" = "forrás";
 "osd.sub_not_found" = "Nem található felirat";
-"osd.sub_found" = "%d subtitles found.";
-"osd.sub_downloading" = "Downloading %d subtitles";
+"osd.sub_found" = "%d felirat található.";
+"osd.sub_downloading" = "%d felirat letöltése";
 "osd.sub_downloaded" = "Felirat letöltve";
 "osd.sub_saved" = "Felirat mentve";
 "osd.network_error" = "Hálózati hiba";
@@ -104,7 +104,7 @@
 "osd.timed_out" = "Időtúllépés";
 "osd.filter_added" = "Szűrő hozzáadása: %@";
 "osd.filter_removed" = "Szűrő eltávolítása";
-"osd.file_loop" = "Loop Single File";
+"osd.file_loop" = "Egyetlen fájl ismétlése";
 "osd.playlist_loop" = "Ismétlődő lejátszási lista";
 "osd.no_loop" = "Ismétlés kikapcsolása";
 
@@ -129,18 +129,19 @@
 
 "preference.enable_adv_settings" = "Haladó beállítások engedélyezése";
 
-"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.force" = "kényszerített";
+"preference.sub_override_level.scale" = "méretezés";
 "preference.sub_override_level.strip" = "csík";
-"preference.sub_override_level.yes" = "yes";
+"preference.sub_override_level.yes" = "igen";
 
 "menu.volume" = "Hangerő: %d";
 "menu.volume_muted" = "Hangerő: %d (Némítva)";
 "menu.audio_delay" = "Hangkésleltetés: %.2fmp-vel később";
 "menu.sub_delay" = "Felirat késleltetés: %.2fmp-vel később";
-"menu.sub_hide" = "Hide Subtitles";
-"menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Secondary Subtitles";
-"menu.sub_second_show" = "Show Secondary Subtitles";
+"menu.sub_hide" = "Feliratok elrejtése";
+"menu.sub_show" = "Feliratok megjelenítése";
+"menu.sub_second_hide" = "Másodlagos feliratok elrejtése";
+"menu.sub_second_show" = "Másodlagos feliratok megjelenítése";
 "menu.fullscreen" = "Váltás teljes képernyőre";
 "menu.exit_fullscreen" = "Kilépés a teljes képernyős módból";
 "menu.pip" = "Kép a képben";
@@ -192,7 +193,6 @@
 
 "alert.fatal_error" = "Kritikus hiba: %@\nAz alkalmazás bezárul.";
 "alert.mpv_error" = "Hiba történt %@ (%@) az opció %@ beállítása közben.";
-"alert.sleep" = "A kijelző alvó állapotba lépését nem lehet megakadályozni! (0x%0X8)";
 
 "alert.unsupported_audio" = "Nem támogatott külsõ hang fájl.";
 "alert.unsupported_sub" = "Nem támogatott külsõ felirat.";
@@ -210,13 +210,13 @@
 "alert.config.duplicate.title" = "Konfiguráció duplikálása";
 "alert.config.duplicate.message" = "Kérlek adj nevet az új duplikált konfigurációnak.";
 "alert.config.empty_name" = "A név mező nem lehet üres.";
-"alert.config.name_existing" = "A config with the same name already exists.";
+"alert.config.name_existing" = "Egy konfiguráció ezzel a névvel már létezik.";
 "alert.config.file_existing.title" = "A fájl már létezik";
-"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
+"alert.config.file_existing.message" = "Egy azonos fájlnevű konfigurációs fájl már létezik. Válassza az OK lehetőséget a fájl megjelenítéséhez a Finderben.";
 "alert.config.cannot_create" = "Konfigurációs fájl nem hozható létre!\n%@";
 "alert.config.cannot_write" = "Konfigurációs fájl nem irható!";
-"alert.config.rename.title" = "Rename Input Configuration";
-"alert.config.rename.message" = "Please enter the new name for the configuration.";
+"alert.config.rename.title" = "Bemeneti konfiguráció átnevezése";
+"alert.config.rename.message" = "Adja meg a konfiguráció új nevét.";
 
 "alert.filter.incorrect" = "Hiba történt a szűrők beállításakor. Kérjük, ellenőrizd le a paraméter formátumát.";
 "alert.add_filter.title" = "Új filter";

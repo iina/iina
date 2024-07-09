@@ -52,6 +52,7 @@
 "iina.toggle-flip" = "تشغيل قلب الصورة";
 "iina.toggle-mirror" = "تشغيل وضع المرآة";
 "iina.save-playlist" = "حفظ قائمة التشغيل الحالية";
+"iina.show-current-file-in-finder" = "إظهار الملف الحالي في الباحث";
 "iina.delete-current-file" = "حذف الملف الحالي";
 "iina.delete-current-file-hard" = "حذف الملف الحالي مباشرة دون الانتقال إلى سلة المهملات";
 "iina.find-online-subs" = "البحث عن ترجمات على الإنترنت";
@@ -100,6 +101,7 @@
 "opt.sub-pos" = "موضع الترجمة";
 "opt.sub-scale" = "مقياس الترجمة";
 "opt.sub-visibility" = "وضوح الترجمة";
+"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
 "opt.sub-ass-style-override" = "تعديل نمط ASS";
 
 "opt.fullscreen" = "ملء الشاشة";

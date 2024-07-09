@@ -52,6 +52,7 @@
 "iina.toggle-flip" = "Uključi/Isključi okomito preokretanje";
 "iina.toggle-mirror" = "Uključi/Isključi vodoravno preokretanje";
 "iina.save-playlist" = "Spremi trenutačnu playlistu";
+"iina.show-current-file-in-finder" = "Show current file in Finder";
 "iina.delete-current-file" = "Izbriši trenutačnu datoteku";
 "iina.delete-current-file-hard" = "Odmah izbriši trenutačnu datoteku";
 "iina.find-online-subs" = "Pronađi titlove na internetu";
@@ -100,6 +101,7 @@
 "opt.sub-pos" = "Položaj titlova";
 "opt.sub-scale" = "Veličina titlova";
 "opt.sub-visibility" = "Vidljivost titlova";
+"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
 "opt.sub-ass-style-override" = "Prepisivanje ASS stila";
 
 "opt.fullscreen" = "Cjeloekranski prikaz";

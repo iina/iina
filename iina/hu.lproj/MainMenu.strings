@@ -113,7 +113,7 @@
 "DRb-Y8-xir.title" = "Hangsáv";
 
 /* Class = "NSMenuItem"; title = "Load External Audio…"; ObjectID = "3xl-iD-85w"; */
-"3xl-iD-85w.title" = "Load External Audio…";
+"3xl-iD-85w.title" = "Külső audió betöltése…";
 
 /* Class = "NSMenuItem"; title = "Speed Down to 0.9x"; ObjectID = "DUP-nm-BJt"; */
 "DUP-nm-BJt.title" = "0.9x-es Lassítás";
@@ -206,7 +206,7 @@
 "Mg3-WB-gjZ.title" = "Online feliratok keresése…";
 
 /* Class = "NSMenuItem"; title = "Find Online Subtitles from" ObjectID = "5dT-kq-WV9"; */
-"5dT-kq-WV9.title" = "Find Online Subtitles from";
+"5dT-kq-WV9.title" = "Feliratok online keresése innen";
 
 /* Class = "NSMenuItem"; title = "Save Current Playlist…"; ObjectID = "Mjr-lL-oEt"; */
 "Mjr-lL-oEt.title" = "Az aktuális lejátszási lista mentése…";
@@ -269,7 +269,7 @@
 "UOE-MJ-8ku.title" = "Pause (Megállít)";
 
 /* Class = "NSMenu"; title = "Secondary Subtitle"; ObjectID = "UwY-P2-Xdb"; */
-"UwY-P2-Xdb.title" = "Secondary Subtitle";
+"UwY-P2-Xdb.title" = "Másodlagos felirat";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "VDZ-ro-z5z"; */
 "VDZ-ro-z5z.title" = "Újra";
@@ -330,6 +330,9 @@
 
 /* Class = "NSMenuItem"; title = "Volume + 1%"; ObjectID = "c6Y-0e-vgf"; */
 "c6Y-0e-vgf.title" = "Hangerő + 1%";
+
+/* Class = "NSMenuItem"; title = "Show Current File in Finder"; ObjectID = "che-dy-QUU"; */
+"che-dy-QUU.title" = "Jelenlegi fájl megjelenítése a Finderben";
 
 /* Class = "NSMenuItem"; title = "Aspect Ratio"; ObjectID = "d15-8v-dXA"; */
 "d15-8v-dXA.title" = "Képarány";
@@ -395,7 +398,7 @@
 "m7w-hc-Y2F.title" = "Legyen nagybetűs";
 
 /* Class = "NSMenuItem"; title = "Secondary Subtitle"; ObjectID = "mGw-jm-5x2"; */
-"mGw-jm-5x2.title" = "Secondary Subtitle";
+"mGw-jm-5x2.title" = "Másodlagos felirat";
 
 /* Class = "NSMenuItem"; title = "Enter Picture in Picture"; ObjectID = "mND-N8-z6o"; */
 "mND-N8-z6o.title" = "Kép a képben";

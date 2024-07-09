@@ -17,10 +17,10 @@
 "6LO-6y-IsA.title" = "颜色:";
 
 /* Class = "NSSegmentedCell"; 88M-pi-2Hc.ibShadowedLabels[0] = "Primary Subtitles"; ObjectID = "88M-pi-2Hc"; */
-"88M-pi-2Hc.ibShadowedLabels[0]" = "Primary Subtitles";
+"88M-pi-2Hc.ibShadowedLabels[0]" = "主字幕";
 
 /* Class = "NSSegmentedCell"; 88M-pi-2Hc.ibShadowedLabels[1] = "Secondary Subtitles"; ObjectID = "88M-pi-2Hc"; */
-"88M-pi-2Hc.ibShadowedLabels[1]" = "Secondary Subtitles";
+"88M-pi-2Hc.ibShadowedLabels[1]" = "二级字幕";
 
 /* Class = "NSButtonCell"; title = "Load External Audio Track…"; ObjectID = "8Ax-5X-osl"; */
 "8Ax-5X-osl.title" = "加载外置音频…";
@@ -194,7 +194,7 @@
 "uqb-mz-A22.title" = "背景";
 
 /* Class = "NSTextFieldCell"; title = "Subtitle style options may break ASS rendering, and some of them will be disabled depending on subtitle type."; ObjectID = "wBD-pZ-Bvu"; */
-"wBD-pZ-Bvu.title" = "字幕样式可能破坏 ASS 渲染。某些字幕格式无法使用下列部分选项。";
+"wBD-pZ-Bvu.title" = "字幕样式选项可能会破坏ASS渲染。根据字幕类型其中一些样式将被禁用。";
 
 /* Class = "NSTextFieldCell"; title = "Audio track:"; ObjectID = "x39-62-7KC"; */
 "x39-62-7KC.title" = "音频轨道:";
@@ -207,3 +207,12 @@
 
 /* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "zcD-Tg-7Oi"; */
 "zcD-Tg-7Oi.title" = "均衡器:";
+
+/* Class = "NSTextFieldCell"; title = "Hardware Decoding"; ObjectID = "rw1-Qb-0RV"; */
+"rw1-Qb-0RV.title" = "硬件解码";
+
+/* Class = "NSTextFieldCell"; title = "Deinterlace"; ObjectID = "eqd-nF-8ff"; */
+"eqd-nF-8ff.title" = "反交错";
+
+/* Class = "NSTextFieldCell"; title = "HDR"; ObjectID = "UW4-by-XRS"; */
+"UW4-by-XRS.title" = "HDR";

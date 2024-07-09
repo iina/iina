@@ -130,6 +130,7 @@
 "preference.enable_adv_settings" = "啟用進階設定";
 
 "preference.sub_override_level.force" = "force";
+"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "過濾";
 "preference.sub_override_level.yes" = "yes";
 
@@ -192,7 +193,6 @@
 
 "alert.fatal_error" = "ㄧ嚴重錯誤：%@ \n，IINA 即將關閉。";
 "alert.mpv_error" = "發生內部錯誤 %@（%@）（設定 %@ 時）";
-"alert.sleep" = "無法阻止顯示器睡眠！(0x%0X8)";
 
 "alert.unsupported_audio" = "不支援載入此音訊檔";
 "alert.unsupported_sub" = "不支援載入此字幕檔";

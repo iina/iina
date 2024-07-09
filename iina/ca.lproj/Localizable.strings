@@ -67,12 +67,12 @@
 "osd.subtitle_pos" = "Posició dels subtítols: %.1f";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
+"osd.sub_second_delay.nodelay" = "Retard Secundari de Subtítols: Sense Retard";
 "osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
-"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
-"osd.sub_second_visible" = "Secondary Subtitles Visible";
+"osd.sub_second_delay.earlier" = "Retard Secundari de Subtítols: %.2fs Abans";
+"osd.sub_second_hidden" = "Subtítols Secundaris Amagats";
+"osd.sub_second_pos" = "Posició Secundària de Subtítols: %.1f";
+"osd.sub_second_visible" = "Subtítols Secundaris Visibles";
 "osd.mute" = "Silencia";
 "osd.unmute" = "Amb so";
 "osd.screenshot" = "Captura de pantalla feta";
@@ -92,8 +92,8 @@
 "osd.find_online_sub" = "Cercant subtítols en línia…";
 "osd.find_online_sub.source" = "desd de";
 "osd.sub_not_found" = "No s'han trobat subtítols";
-"osd.sub_found" = "%d subtitles found.";
-"osd.sub_downloading" = "Downloading %d subtitles";
+"osd.sub_found" = "Subtítols %d trobats.";
+"osd.sub_downloading" = "Baixant subtítols %d";
 "osd.sub_downloaded" = "Subtítols baixats";
 "osd.sub_saved" = "Subtítols desats";
 "osd.network_error" = "Error de xarxa";
@@ -130,6 +130,7 @@
 "preference.enable_adv_settings" = "Habilita les opcions avançades";
 
 "preference.sub_override_level.force" = "force";
+"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "tira";
 "preference.sub_override_level.yes" = "yes";
 
@@ -139,8 +140,8 @@
 "menu.sub_delay" = "Retard en els subtítols: %.2fs";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Secondary Subtitles";
-"menu.sub_second_show" = "Show Secondary Subtitles";
+"menu.sub_second_hide" = "Amagar Subtítols Secundaris";
+"menu.sub_second_show" = "Veure Subtítols Secundaris";
 "menu.fullscreen" = "Pantalla completa";
 "menu.exit_fullscreen" = "Surt de la pantalla completa";
 "menu.pip" = "Picture-in-Picture";
@@ -192,7 +193,6 @@
 
 "alert.fatal_error" = "Error: fatal %@ \nL'aplicació es tancarà ara.";
 "alert.mpv_error" = "Error intern %@ (%@) establint la opció %@.";
-"alert.sleep" = "No es pot evitar que la pantalla es posi en repòs! (0x%0X8)";
 
 "alert.unsupported_audio" = "Fitxer d'àudio extern no compatible.";
 "alert.unsupported_sub" = "Subtítols no compatibles.";
@@ -210,12 +210,12 @@
 "alert.config.duplicate.title" = "Duplica configuració";
 "alert.config.duplicate.message" = "Si us plau introdueix un nom per el fixer de configuració duplicat.";
 "alert.config.empty_name" = "El nom no pot estar buit.";
-"alert.config.name_existing" = "A config with the same name already exists.";
+"alert.config.name_existing" = "Ja existeix una configuració amb el mateix nom.";
 "alert.config.file_existing.title" = "El fitxer ja existeix";
-"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
+"alert.config.file_existing.message" = "Ja existeix un arxiu de configuració amb el mateix nom d'arxiu. Selecciona OK per veure l'arxiu a Finder.";
 "alert.config.cannot_create" = "No es pot crear el fitxer de configuració!\n%@";
 "alert.config.cannot_write" = "No es pot escriure en el fitxer de configuració!";
-"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.title" = "Reanomenar la Configuració d'Entrada";
 "alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "Error establint filtres. Si us plau verifica el format dels paràmetres.";

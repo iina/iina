@@ -52,6 +52,7 @@
 "iina.toggle-flip" = "Vend";
 "iina.toggle-mirror" = "Speil";
 "iina.save-playlist" = "Arkiver spilleliste";
+"iina.show-current-file-in-finder" = "Show current file in Finder";
 "iina.delete-current-file" = "Slett fil";
 "iina.delete-current-file-hard" = "Slett fil for godt uten å flytte til papirkurv";
 "iina.find-online-subs" = "Finn undertekster på nett";
@@ -100,6 +101,7 @@
 "opt.sub-pos" = "Undertekstposisjon";
 "opt.sub-scale" = "Undrtekstskalering";
 "opt.sub-visibility" = "Undertekstsynlighet";
+"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
 "opt.sub-ass-style-override" = "Overstyring av ASS-stil";
 
 "opt.fullscreen" = "Fullskjerm";

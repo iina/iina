@@ -130,6 +130,7 @@
 "preference.enable_adv_settings" = "Activează setările avansate";
 
 "preference.sub_override_level.force" = "force";
+"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "de tot";
 "preference.sub_override_level.yes" = "yes";
 
@@ -192,7 +193,6 @@
 
 "alert.fatal_error" = "Eroare critică: %@ \nAplicația se va închide.";
 "alert.mpv_error" = "Eroare internă %@ (%@) la setarea opțiunii %@.";
-"alert.sleep" = "Nu se poate preveni adormirea ecranului! (0x%0X8)";
 
 "alert.unsupported_audio" = "Fișier audio extern neacceptat.";
 "alert.unsupported_sub" = "Subtitrare externă neacceptată. ";

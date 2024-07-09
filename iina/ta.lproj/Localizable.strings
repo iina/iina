@@ -130,6 +130,7 @@
 "preference.enable_adv_settings" = "மேம்பட்ட அமைப்புகளை இயக்கு";
 
 "preference.sub_override_level.force" = "force";
+"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "strip";
 "preference.sub_override_level.yes" = "yes";
 
@@ -192,7 +193,6 @@
 
 "alert.fatal_error" = "Fatal error: %@ \nThe application will exit now.";
 "alert.mpv_error" = "Internal error %@ (%@) when setting option %@.";
-"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "Unsupported external audio file.";
 "alert.unsupported_sub" = "Unsupported external subtitle.";

@@ -52,6 +52,7 @@
 "iina.toggle-flip" = "Vaihda kääntö";
 "iina.toggle-mirror" = "Vaihda peilaus";
 "iina.save-playlist" = "Tallenna nykyinen soittolista";
+"iina.show-current-file-in-finder" = "Show current file in Finder";
 "iina.delete-current-file" = "Poista nykyinen tiedosto";
 "iina.delete-current-file-hard" = "Poista nykyinen tiedosto suoraan siirtämättä roskakoriin";
 "iina.find-online-subs" = "Etsi tekstityksiä verkosta";
@@ -100,6 +101,7 @@
 "opt.sub-pos" = "Tekstityksen sijainti";
 "opt.sub-scale" = "Tekstityksen skaalaus";
 "opt.sub-visibility" = "Tekstityksen näkyvyys";
+"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
 "opt.sub-ass-style-override" = "ASS tyylin ohitus";
 
 "opt.fullscreen" = "Koko näyttö";

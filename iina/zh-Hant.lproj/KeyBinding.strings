@@ -52,6 +52,7 @@
 "iina.toggle-flip" = "切換翻轉";
 "iina.toggle-mirror" = "切換鏡像";
 "iina.save-playlist" = "儲存目前播放列表";
+"iina.show-current-file-in-finder" = "Show current file in Finder";
 "iina.delete-current-file" = "刪除目前檔案";
 "iina.delete-current-file-hard" = "直接刪除目前檔案（不經過垃圾桶）";
 "iina.find-online-subs" = "尋找線上字幕";
@@ -100,6 +101,7 @@
 "opt.sub-pos" = "字幕位置";
 "opt.sub-scale" = "字幕縮放";
 "opt.sub-visibility" = "是否顯示字幕";
+"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
 "opt.sub-ass-style-override" = "ASS 字幕樣式覆蓋";
 
 "opt.fullscreen" = "全螢幕";

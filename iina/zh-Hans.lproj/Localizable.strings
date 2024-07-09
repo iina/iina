@@ -65,14 +65,14 @@
 "osd.sub_delay.later" = "字幕延迟：延迟 %.2f 秒";
 "osd.sub_delay.earlier" = "字幕延迟：提前 %.2f 秒";
 "osd.subtitle_pos" = "字幕位置：%.1f";
-"osd.sub_hidden" = "Subtitles Hidden";
-"osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
-"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
-"osd.sub_second_visible" = "Secondary Subtitles Visible";
+"osd.sub_hidden" = "字幕已隐藏";
+"osd.sub_visible" = "字幕可见";
+"osd.sub_second_delay.nodelay" = "二级字幕延迟：无延迟";
+"osd.sub_second_delay.later" = "二级字幕延迟：延迟 %.2f 秒";
+"osd.sub_second_delay.earlier" = "二级字幕延迟：提前 %.2f 秒";
+"osd.sub_second_hidden" = "隐藏二级字幕";
+"osd.sub_second_pos" = "二级字幕位置：%.1f";
+"osd.sub_second_visible" = "开启二级字幕";
 "osd.mute" = "静音";
 "osd.unmute" = "取消静音";
 "osd.screenshot" = "已截图";
@@ -92,8 +92,8 @@
 "osd.find_online_sub" = "正在查找在线字幕…";
 "osd.find_online_sub.source" = "从";
 "osd.sub_not_found" = "查无字幕";
-"osd.sub_found" = "%d subtitles found.";
-"osd.sub_downloading" = "Downloading %d subtitles";
+"osd.sub_found" = "找到 %d 字幕。";
+"osd.sub_downloading" = "正在下载 %d 字幕";
 "osd.sub_downloaded" = "字幕已下载";
 "osd.sub_saved" = "字幕已保存";
 "osd.network_error" = "网络错误";
@@ -130,17 +130,18 @@
 "preference.enable_adv_settings" = "启用高级设置";
 
 "preference.sub_override_level.force" = "";
-"preference.sub_override_level.strip" = "strip";
-"preference.sub_override_level.yes" = "yes";
+"preference.sub_override_level.scale" = "缩放";
+"preference.sub_override_level.strip" = "条形";
+"preference.sub_override_level.yes" = "是";
 
 "menu.volume" = "音量: %d";
 "menu.volume_muted" = "音量：%d （静音）";
 "menu.audio_delay" = "音频延迟: %.2f秒";
 "menu.sub_delay" = "字幕延迟: %.2f秒";
-"menu.sub_hide" = "Hide Subtitles";
-"menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Secondary Subtitles";
-"menu.sub_second_show" = "Show Secondary Subtitles";
+"menu.sub_hide" = "隐藏字幕";
+"menu.sub_show" = "显示字幕";
+"menu.sub_second_hide" = "隐藏二级字幕";
+"menu.sub_second_show" = "显示二级字幕";
 "menu.fullscreen" = "进入全屏模式";
 "menu.exit_fullscreen" = "退出全屏";
 "menu.pip" = "进入「画中画」模式";
@@ -192,7 +193,6 @@
 
 "alert.fatal_error" = "严重错误：%@ \n程序将立即终止。";
 "alert.mpv_error" = "出现内部错误 %@ (%@) (设定选项 %@ 时)。";
-"alert.sleep" = "无法阻止显示器睡眠! (0x%0X8)";
 
 "alert.unsupported_audio" = "不支持的外置音频文件。";
 "alert.unsupported_sub" = "不支持的外挂字幕。";
@@ -215,8 +215,8 @@
 "alert.config.file_existing.message" = "一个具有相同文件名的配置文件已存在。选择“确定”在Finder中显示该文件。";
 "alert.config.cannot_create" = "无法创建配置文件！\n%@";
 "alert.config.cannot_write" = "无法写入配置文件！";
-"alert.config.rename.title" = "Rename Input Configuration";
-"alert.config.rename.message" = "Please enter the new name for the configuration.";
+"alert.config.rename.title" = "重命名输入配置";
+"alert.config.rename.message" = "请输入新的配置名称。";
 
 "alert.filter.incorrect" = "设置过滤器时出错。请检查您的参数格式。";
 "alert.add_filter.title" = "添加新滤镜";

@@ -52,6 +52,7 @@
 "iina.toggle-flip" = "Отразить по вертикали (вверх ногами)";
 "iina.toggle-mirror" = "Отразить по горизонтали (зеркально)";
 "iina.save-playlist" = "Сохранить текущий плейлист";
+"iina.show-current-file-in-finder" = "Show current file in Finder";
 "iina.delete-current-file" = "Удалить текущий файл";
 "iina.delete-current-file-hard" = "Немедленно удалить текущий файл, не помещая его в корзину";
 "iina.find-online-subs" = "Найти субтитры онлайн";
@@ -100,6 +101,7 @@
 "opt.sub-pos" = "Позиция субтитров";
 "opt.sub-scale" = "масштаб субтитров";
 "opt.sub-visibility" = "видимость субтитров";
+"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
 "opt.sub-ass-style-override" = "переопределение стиля ASS";
 
 "opt.fullscreen" = "полноэкранный режим";

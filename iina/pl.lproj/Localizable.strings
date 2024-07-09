@@ -130,6 +130,7 @@
 "preference.enable_adv_settings" = "Włącz ustawienia zaawansowane";
 
 "preference.sub_override_level.force" = "wymuś";
+"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "pasek";
 "preference.sub_override_level.yes" = "tak";
 
@@ -192,7 +193,6 @@
 
 "alert.fatal_error" = "Błąd krytyczny: %@ \nAplikacja zostanie zamknięta.";
 "alert.mpv_error" = "Wystąpił wewnętrzny błąd %@ (%@) podczas ustawiania opcji %@.";
-"alert.sleep" = "Nie można zapobiec uśpieniu ekranu! (0x%0X8)";
 
 "alert.unsupported_audio" = "Nieobsługiwany zewnętrzny plik audio.";
 "alert.unsupported_sub" = "Nieobsługiwane zewnętrzne napisy.";

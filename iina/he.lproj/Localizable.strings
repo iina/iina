@@ -65,14 +65,14 @@
 "osd.sub_delay.later" = "עיכוב כתוביות: %.2f שניות איחור";
 "osd.sub_delay.earlier" = "עיכוב כתוביות: %.2f שניות הקדמה";
 "osd.subtitle_pos" = "מיקום כתוביות: %.1f";
-"osd.sub_hidden" = "הכתוביות מוסתרות";
-"osd.sub_visible" = "הכתוביות מוצגות";
-"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
-"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
-"osd.sub_second_visible" = "Secondary Subtitles Visible";
+"osd.sub_hidden" = "כתוביות מוסתרות";
+"osd.sub_visible" = "כתוביות מוצגות";
+"osd.sub_second_delay.nodelay" = "עיכוב כתוביות משניות: ללא עיכוב";
+"osd.sub_second_delay.later" = "עיכוב כתוביות משניות: %.2f שניות איחור";
+"osd.sub_second_delay.earlier" = "עיכוב כתוביות משניות: %.2f שניות הקדמה";
+"osd.sub_second_hidden" = "כתוביות משניות מוסתרות";
+"osd.sub_second_pos" = "מיקום כתוביות משניות: %.1f";
+"osd.sub_second_visible" = "כתוביות משניות מוצגות";
 "osd.mute" = "מושתק";
 "osd.unmute" = "לא מושתק";
 "osd.screenshot" = "בוצע צילום מסך";
@@ -92,8 +92,8 @@
 "osd.find_online_sub" = "מחפש כתוביות מקוונות…";
 "osd.find_online_sub.source" = "מאת";
 "osd.sub_not_found" = "לא נמצאו כתוביות";
-"osd.sub_found" = "%d subtitles found.";
-"osd.sub_downloading" = "Downloading %d subtitles";
+"osd.sub_found" = "%d כתוביות נמצאו.";
+"osd.sub_downloading" = "מוריד %d כתוביות";
 "osd.sub_downloaded" = "הכתוביות הורדו";
 "osd.sub_saved" = "הכתוביות נשמרו";
 "osd.network_error" = "שגיאת רשת";
@@ -130,6 +130,7 @@
 "preference.enable_adv_settings" = "אפשר הגדרות מתקדמות";
 
 "preference.sub_override_level.force" = "כפויה";
+"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "הסרת הכל";
 "preference.sub_override_level.yes" = "מאופשרת";
 
@@ -139,8 +140,8 @@
 "menu.sub_delay" = "עיכוב כתוביות: %.2f שניות";
 "menu.sub_hide" = "הסתר כתוביות";
 "menu.sub_show" = "הצג כתוביות";
-"menu.sub_second_hide" = "Hide Secondary Subtitles";
-"menu.sub_second_show" = "Show Secondary Subtitles";
+"menu.sub_second_hide" = "הסתר כתוביות משניות";
+"menu.sub_second_show" = "הצג כתוביות משניות";
 "menu.fullscreen" = "עבור למסך מלא";
 "menu.exit_fullscreen" = "צא ממסך מלא";
 "menu.pip" = "היכנס למצב תמונה בתוך תמונה";
@@ -192,7 +193,6 @@
 
 "alert.fatal_error" = "שגיאה קריטית: %@ \nהאפליקציה תיסגר כעת.";
 "alert.mpv_error" = "שגיאה פנימית %@ (%@) בעת הגדרת האפשרות %@.";
-"alert.sleep" = "מניעת כניסת המסך למצב שינה נכשלה! (0x%0X8)";
 
 "alert.unsupported_audio" = "קובץ שמע חיצוני לא נתמך.";
 "alert.unsupported_sub" = "הכתוביות החיצוניות לא נתמכות.";

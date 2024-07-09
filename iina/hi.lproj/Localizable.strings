@@ -130,6 +130,7 @@
 "preference.enable_adv_settings" = "उन्नत सेटिंग्स सक्षम करें";
 
 "preference.sub_override_level.force" = "force";
+"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "स्ट्रिप";
 "preference.sub_override_level.yes" = "yes";
 
@@ -192,7 +193,6 @@
 
 "alert.fatal_error" = "घातक त्रुटि: %@ \n एप्लिकेशन अब बाहर निकल जाएगा।";
 "alert.mpv_error" = "आंतरिक गलती %@ (%@) विकल्प सेट करते समय %@।";
-"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "असमर्थित बाहरी ऑडियो फ़ाइल।";
 "alert.unsupported_sub" = "असमर्थित बाहरी उपशीर्षक।";

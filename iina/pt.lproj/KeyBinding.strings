@@ -52,6 +52,7 @@
 "iina.toggle-flip" = "Ativar virar";
 "iina.toggle-mirror" = "Ativar espelho";
 "iina.save-playlist" = "Guardar playlist atual";
+"iina.show-current-file-in-finder" = "Show current file in Finder";
 "iina.delete-current-file" = "Apagar ficheiro atual";
 "iina.delete-current-file-hard" = "Excluir o arquivo atual diretamente sem mover para a lixeira";
 "iina.find-online-subs" = "Encontrar legendas online";
@@ -100,6 +101,7 @@
 "opt.sub-pos" = "Posição da legenda";
 "opt.sub-scale" = "Tamanho legenda";
 "opt.sub-visibility" = "Visibilidade da legenda";
+"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
 "opt.sub-ass-style-override" = "Substituição de estilo ASS";
 
 "opt.fullscreen" = "Ecrã completo";

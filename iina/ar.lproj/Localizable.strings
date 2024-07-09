@@ -129,7 +129,8 @@
 
 "preference.enable_adv_settings" = "تمكين الإعدادات المتقدمة";
 
-"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.force" = "إجبار";
+"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "strip";
 "preference.sub_override_level.yes" = "نعم";
 
@@ -139,7 +140,7 @@
 "menu.sub_delay" = "تأخير الترجمه: %.2f ثانيه";
 "menu.sub_hide" = "إخفاء الترجمات";
 "menu.sub_show" = "إظهار الترجمات";
-"menu.sub_second_hide" = "Hide Secondary Subtitles";
+"menu.sub_second_hide" = "إخفاء الترجمة الثانوية";
 "menu.sub_second_show" = "Show Secondary Subtitles";
 "menu.fullscreen" = "الدخول إلى وضع ملء الشاشة";
 "menu.exit_fullscreen" = "إنهاء وضع ملء الشاشة";
@@ -192,7 +193,6 @@
 
 "alert.fatal_error" = "خطأ: %@ \nسيتم الخروج من التطبيق الآن.";
 "alert.mpv_error" = "خطأ داخلي %@ (%@) عند خيار الإعداد %@.";
-"alert.sleep" = "لا يمكن منع نوم العرض! (0x%0X8)";
 
 "alert.unsupported_audio" = "ملف صوت خارجي غير مدعوم.";
 "alert.unsupported_sub" = "ملف ترجمه خارجي غير مدعوم.";

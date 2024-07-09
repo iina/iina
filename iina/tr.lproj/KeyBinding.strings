@@ -52,6 +52,7 @@
 "iina.toggle-flip" = "Ters çevirmeyi Aç/Kapa";
 "iina.toggle-mirror" = "Yansıtmayı Aç/Kapat";
 "iina.save-playlist" = "Geçerli oynatma listesini kaydet";
+"iina.show-current-file-in-finder" = "Show current file in Finder";
 "iina.delete-current-file" = "Geçerli dosyayı sil";
 "iina.delete-current-file-hard" = "Geçerli dosyayı çöp kutusuna taşımadan doğrudan sil";
 "iina.find-online-subs" = "Çevrimiçi altyazılar bul";
@@ -100,6 +101,7 @@
 "opt.sub-pos" = "Altyazı konumu";
 "opt.sub-scale" = "Altyazı ölçeği";
 "opt.sub-visibility" = "Altyazı görünürlüğü";
+"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
 "opt.sub-ass-style-override" = "ASS tipi üzerine yazma";
 
 "opt.fullscreen" = "Tam ekran";

@@ -130,6 +130,7 @@
 "preference.enable_adv_settings" = "Erweiterte Einstellungen";
 
 "preference.sub_override_level.force" = "force";
+"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "strip";
 "preference.sub_override_level.yes" = "yes";
 
@@ -192,7 +193,6 @@
 
 "alert.fatal_error" = "Schwerwiegender Fehler: „%@“ \nProgramm wird beendet.";
 "alert.mpv_error" = "Interner Fehler „%@“ (%@) beim Setzen der Einstellung „%@“.";
-"alert.sleep" = "Der Ruhezustand des Bildschirms konnte nicht verhindert werden! (0x%0X8)";
 
 "alert.unsupported_audio" = "Externe Audiodatei nicht unterstützt.";
 "alert.unsupported_sub" = "Externe Untertiteldatei nicht untersützt.";

@@ -17,10 +17,10 @@
 "6LO-6y-IsA.title" = "Szín:";
 
 /* Class = "NSSegmentedCell"; 88M-pi-2Hc.ibShadowedLabels[0] = "Primary Subtitles"; ObjectID = "88M-pi-2Hc"; */
-"88M-pi-2Hc.ibShadowedLabels[0]" = "Primary Subtitles";
+"88M-pi-2Hc.ibShadowedLabels[0]" = "Elsődleges felirat";
 
 /* Class = "NSSegmentedCell"; 88M-pi-2Hc.ibShadowedLabels[1] = "Secondary Subtitles"; ObjectID = "88M-pi-2Hc"; */
-"88M-pi-2Hc.ibShadowedLabels[1]" = "Secondary Subtitles";
+"88M-pi-2Hc.ibShadowedLabels[1]" = "Másodlagos felirat";
 
 /* Class = "NSButtonCell"; title = "Load External Audio Track…"; ObjectID = "8Ax-5X-osl"; */
 "8Ax-5X-osl.title" = "Külső hangfájl betöltése…";
@@ -207,3 +207,12 @@
 
 /* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "zcD-Tg-7Oi"; */
 "zcD-Tg-7Oi.title" = "Hangszínszabályozó:";
+
+/* Class = "NSTextFieldCell"; title = "Hardware Decoding"; ObjectID = "rw1-Qb-0RV"; */
+"rw1-Qb-0RV.title" = "Hardveres dekódolás";
+
+/* Class = "NSTextFieldCell"; title = "Deinterlace"; ObjectID = "eqd-nF-8ff"; */
+"eqd-nF-8ff.title" = "Váltottsoros képszűrő";
+
+/* Class = "NSTextFieldCell"; title = "HDR"; ObjectID = "UW4-by-XRS"; */
+"UW4-by-XRS.title" = "HDR";

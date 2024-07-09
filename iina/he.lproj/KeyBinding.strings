@@ -52,6 +52,7 @@
 "iina.toggle-flip" = "היפוך/ביטול היפוך";
 "iina.toggle-mirror" = "הפעלת/ביטול מראה";
 "iina.save-playlist" = "שמור את רשימת ההשמעה הנוכחית";
+"iina.show-current-file-in-finder" = "הצג את הקובץ הנוכחי ב-Finer";
 "iina.delete-current-file" = "מחיקת הקובץ הנוכחי";
 "iina.delete-current-file-hard" = "מחיקת הקובץ הנוכחי לצמיתות (ללא העברה לאשפה)";
 "iina.find-online-subs" = "מצא כתוביות מקוונות";
@@ -100,6 +101,7 @@
 "opt.sub-pos" = "מיקום כתוביות";
 "opt.sub-scale" = "קנה מידה של כתוביות";
 "opt.sub-visibility" = "נראות כתוביות";
+"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
 "opt.sub-ass-style-override" = "דריסת עיצוב ASS";
 
 "opt.fullscreen" = "מסך מלא";
@@ -112,5 +114,5 @@
 "read.multiply" = "הכפל {{property}} ב{{factor}}x";
 "read.cycle" = "חזרה על {{property}}{{#dir_down}} כלפי מטה {{/dir_down}}";
 "read.cycle-values" = "עבור בין {{property}} ב({{{values}}})";
-"read.seek" = "קפיצה {{#abs}}אל{{/abs}} {{value}}{{#sec}} שניות{{/sec}}{{#per}}%{{/per}} {{#fwd}}הבא{{/fwd}}{{#bwd}}הקודם{{/bwd}} {{#exact}}(מדויק){{/exact}}{{#kf}}(חיפוש פריים){{/kf}}";
+"read.seek" = "קפיצה {{#abs}}אל{{/abs}} {{value}}{{#sec}} שניות{{/sec}}{{#per}}%{{/per}} {{#fwd}}קדימה{{/fwd}}{{#bwd}}אחורה{{/bwd}} {{#exact}}(מדויק){{/exact}}{{#kf}}(חיפוש פריים){{/kf}}";
 "read.sub-seek" = "קפיצה לכתובית {{#skip_1}}הבאה{{/skip_1}}{{#skip_-1}}הקודמת{{/skip_-1}}";

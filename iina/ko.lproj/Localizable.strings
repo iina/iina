@@ -130,6 +130,7 @@
 "preference.enable_adv_settings" = "고급 설정 사용";
 
 "preference.sub_override_level.force" = "force";
+"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "strip";
 "preference.sub_override_level.yes" = "yes";
 
@@ -192,7 +193,6 @@
 
 "alert.fatal_error" = "심각한 오류: %@ \n프로그램이 지금 종료됩니다.";
 "alert.mpv_error" = "%@ (%@)오류가 사용자 지정 옵션 %@을 설정하는 도중 발생했습니다.";
-"alert.sleep" = "화면 잠자기 설정을 끌 수 없습니다! (0x%0X8)";
 
 "alert.unsupported_audio" = "지원되지 않는 외부 오디오 파일입니다.";
 "alert.unsupported_sub" = "지원되지 않는 자막 형식입니다.";
@@ -212,7 +212,7 @@
 "alert.config.empty_name" = "파일 이름을 지정하십시오.";
 "alert.config.name_existing" = "같은 이름의 설정이 이미 존재합니다.";
 "alert.config.file_existing.title" = "같은 이름의 설정 파일이 이미 있습니다.";
-"alert.config.file_existing.message" = "같은 이름의 설정 파일이 이미 존재합니다. 파일을 보려면 OK를 선택하세요.";
+"alert.config.file_existing.message" = "같은 이름의 설정 파일이 이미 존재합니다. Finder에서 파일을 보려면 OK를 선택하세요.";
 "alert.config.cannot_create" = "설정 파일을 만들 수 없습니다!\n%@";
 "alert.config.cannot_write" = "설정 파일에 저장할 수 없습니다!";
 "alert.config.rename.title" = "설정 파일 이름 변경하기";
@@ -314,7 +314,7 @@
 "pl_menu.delete_multi" = "선택한 파일을 휴지통에 버리기";
 "pl_menu.delete_after_play" = "재생 후 휴지통에 버리기";
 "pl_menu.delete_after_play_multi" = "선택항목 재생 후 휴지통에 버리기";
-"pl_menu.show_in_finder" = "파인더에서 보기";
+"pl_menu.show_in_finder" = "Finder에서 보기";
 "pl_menu.add_file" = "파일 추가…";
 "pl_menu.add_url" = "URL 추가…";
 "pl_menu.clear_playlist" = "재생목록 지움";

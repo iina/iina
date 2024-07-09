@@ -130,6 +130,7 @@
 "preference.enable_adv_settings" = "Activer les paramètres avancés";
 
 "preference.sub_override_level.force" = "forcer";
+"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "retirer";
 "preference.sub_override_level.yes" = "oui";
 
@@ -192,7 +193,6 @@
 
 "alert.fatal_error" = "Erreur fatale : %@ \nL'application va maintenant quitter.";
 "alert.mpv_error" = "Erreur %@ (%@) lors de la configuration de l'option %@.";
-"alert.sleep" = "Impossible d'empêcher la veille de l'écran ! (0x%0X8)";
 
 "alert.unsupported_audio" = "Fichier audio externe non supporté.";
 "alert.unsupported_sub" = "Fichier sous-titre externe non supporté.";

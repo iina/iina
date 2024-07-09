@@ -17,10 +17,10 @@
 "6LO-6y-IsA.title" = "رنگ:";
 
 /* Class = "NSSegmentedCell"; 88M-pi-2Hc.ibShadowedLabels[0] = "Primary Subtitles"; ObjectID = "88M-pi-2Hc"; */
-"88M-pi-2Hc.ibShadowedLabels[0]" = "Primary Subtitles";
+"88M-pi-2Hc.ibShadowedLabels[0]" = "زیرنویس اول";
 
 /* Class = "NSSegmentedCell"; 88M-pi-2Hc.ibShadowedLabels[1] = "Secondary Subtitles"; ObjectID = "88M-pi-2Hc"; */
-"88M-pi-2Hc.ibShadowedLabels[1]" = "Secondary Subtitles";
+"88M-pi-2Hc.ibShadowedLabels[1]" = "زیرنویس دوم";
 
 /* Class = "NSButtonCell"; title = "Load External Audio Track…"; ObjectID = "8Ax-5X-osl"; */
 "8Ax-5X-osl.title" = "بارگذاری فایل صدا…";
@@ -95,7 +95,7 @@
 "Wkz-wW-sOM.title" = "تاخیر زیرنویس:";
 
 /* Class = "NSTextFieldCell"; title = "Aspect ratio:"; ObjectID = "YgL-iV-bca"; */
-"YgL-iV-bca.title" = "Aspect ratio:";
+"YgL-iV-bca.title" = "نسبت تصویر:";
 
 /* Class = "NSTextFieldCell"; title = "Text Style:"; ObjectID = "ZBd-13-lA1"; */
 "ZBd-13-lA1.title" = "سبک متن:";
@@ -125,7 +125,7 @@
 "eDl-Si-LSa.title" = "تضاد رنگ:";
 
 /* Class = "NSTabViewItem"; label = "Plugin"; ObjectID = "eE3-9i-hpU"; */
-"eE3-9i-hpU.label" = "Plugin";
+"eE3-9i-hpU.label" = "افزونه";
 
 /* Class = "NSTextFieldCell"; title = "Hue:"; ObjectID = "eLh-fu-pMj"; */
 "eLh-fu-pMj.title" = "رنگ:";
@@ -207,3 +207,12 @@
 
 /* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "zcD-Tg-7Oi"; */
 "zcD-Tg-7Oi.title" = "اکولایزر:";
+
+/* Class = "NSTextFieldCell"; title = "Hardware Decoding"; ObjectID = "rw1-Qb-0RV"; */
+"rw1-Qb-0RV.title" = "رمزگشایی سخت‌افزاری";
+
+/* Class = "NSTextFieldCell"; title = "Deinterlace"; ObjectID = "eqd-nF-8ff"; */
+"eqd-nF-8ff.title" = "جایگزین کردن";
+
+/* Class = "NSTextFieldCell"; title = "HDR"; ObjectID = "UW4-by-XRS"; */
+"UW4-by-XRS.title" = "اچ‌دی‌آر";

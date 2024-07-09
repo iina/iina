@@ -52,6 +52,7 @@
 "iina.toggle-flip" = "反転切り替え";
 "iina.toggle-mirror" = "ミラー (水平)";
 "iina.save-playlist" = "現在のプレイリストを保存";
+"iina.show-current-file-in-finder" = "Show current file in Finder";
 "iina.delete-current-file" = "現在のファイルをゴミ箱に移動";
 "iina.delete-current-file-hard" = "現在のファイルを直接削除";
 "iina.find-online-subs" = "オンラインで字幕を探す";
@@ -100,6 +101,7 @@
 "opt.sub-pos" = "字幕の位置";
 "opt.sub-scale" = "字幕の大きさ";
 "opt.sub-visibility" = "字幕の表示";
+"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
 "opt.sub-ass-style-override" = "ASSの書式を上書き";
 
 "opt.fullscreen" = "フルスクリーン";

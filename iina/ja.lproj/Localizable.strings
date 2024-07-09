@@ -130,6 +130,7 @@
 "preference.enable_adv_settings" = "高度な設定を有効化";
 
 "preference.sub_override_level.force" = "強制的";
+"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "ストリップ";
 "preference.sub_override_level.yes" = "はい";
 
@@ -192,7 +193,6 @@
 
 "alert.fatal_error" = "致命的なエラー: %@ \nアプリケーションを終了します。";
 "alert.mpv_error" = "内部エラー %@ (%@) がユーザーオプション %@ の設定中に発生しました。";
-"alert.sleep" = "ディスプレイのスリープを防ぐことはできません！(0x%0X8)";
 
 "alert.unsupported_audio" = "対応していない外部のオーディオファイルです。";
 "alert.unsupported_sub" = "対応していない外部の字幕ファイルです。";

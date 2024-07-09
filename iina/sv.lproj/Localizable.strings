@@ -130,6 +130,7 @@
 "preference.enable_adv_settings" = "Aktivera avancerade inställningar";
 
 "preference.sub_override_level.force" = "tvinga";
+"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "avlägsna";
 "preference.sub_override_level.yes" = "ja";
 
@@ -192,7 +193,6 @@
 
 "alert.fatal_error" = "Fatal error: %@ \nProgrammet avslutas nu.";
 "alert.mpv_error" = "Internt fel %@ (%@) vid inställning av alternativ %@.";
-"alert.sleep" = "Kan inte förhindra skärmens viloläge! (0x%0X8)";
 
 "alert.unsupported_audio" = "Den externa ljudfilen stöds ej.";
 "alert.unsupported_sub" = "Den externa undertexten stöds ej.";

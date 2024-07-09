@@ -130,6 +130,7 @@
 "preference.enable_adv_settings" = "Ενεργοποίηση Προηγμένων Ρυθμίσεων";
 
 "preference.sub_override_level.force" = "force";
+"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "strip";
 "preference.sub_override_level.yes" = "yes";
 
@@ -192,7 +193,6 @@
 
 "alert.fatal_error" = "Κρίσιμο Σφάλμα: %@ \nΗ Εφαρμογή θα τερματιστεί τώρα.";
 "alert.mpv_error" = "Εσωτερικό σφάλμα %@ (%@) κατά την ρύθμιση %@.";
-"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "Μη υποστηριζόμενο εξωτερικό αρχείο ήχου.";
 "alert.unsupported_sub" = "Μη υποστηριζόμενοι εξωτερικοί υπότιτλοι.";

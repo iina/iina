@@ -52,6 +52,7 @@
 "iina.toggle-flip" = "Växla vänd";
 "iina.toggle-mirror" = "Växla spegla";
 "iina.save-playlist" = "Spara nuvarande spellista";
+"iina.show-current-file-in-finder" = "Show current file in Finder";
 "iina.delete-current-file" = "Radera nuvarande fil";
 "iina.delete-current-file-hard" = "Radera nuvarande katalog omedelbart utan att flytta till papperskorgen";
 "iina.find-online-subs" = "Hitta undertexter online";
@@ -100,6 +101,7 @@
 "opt.sub-pos" = "Undertextposition";
 "opt.sub-scale" = "Undertextskala";
 "opt.sub-visibility" = "Undertextsynlighet";
+"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
 "opt.sub-ass-style-override" = "Åsidosätt ASS-stil";
 
 "opt.fullscreen" = "Fullskärm";

@@ -130,6 +130,7 @@
 "preference.enable_adv_settings" = "Geavanceerde instellingen inschakelen";
 
 "preference.sub_override_level.force" = "force";
+"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "volledig";
 "preference.sub_override_level.yes" = "yes";
 
@@ -192,7 +193,6 @@
 
 "alert.fatal_error" = "Fatale fout: %@ \nDe applicatie zal nu afsluiten.";
 "alert.mpv_error" = "Interne fout: %@ (%@) bij het instellen van optie %@.";
-"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "Het externe audiobestand wordt niet ondersteund.";
 "alert.unsupported_sub" = "De externe ondertiteling wordt niet ondersteund.";

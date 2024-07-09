@@ -130,6 +130,7 @@
 "preference.enable_adv_settings" = "Aktiveer gevorderde instellings";
 
 "preference.sub_override_level.force" = "force";
+"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "volledig";
 "preference.sub_override_level.yes" = "yes";
 
@@ -192,7 +193,6 @@
 
 "alert.fatal_error" = "Fatale fout: %@ \nDie toepassing sal nou afsluit.";
 "alert.mpv_error" = "Interne fout: %@ (%@) by die instel van opsie %@.";
-"alert.sleep" = "Beeldsluimering kan nie voorkom word nie! (0x%0X8)";
 
 "alert.unsupported_audio" = "Onondersteunde eksterne oudiolêer.";
 "alert.unsupported_sub" = "Onondersteunde eksterne onderskrif.";

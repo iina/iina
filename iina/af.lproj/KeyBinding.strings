@@ -52,6 +52,7 @@
 "iina.toggle-flip" = "Tokkel kanteling";
 "iina.toggle-mirror" = "Tokkel spieël";
 "iina.save-playlist" = "Bewaar huidige afspeellys";
+"iina.show-current-file-in-finder" = "Show current file in Finder";
 "iina.delete-current-file" = "Skrap huidige lêer";
 "iina.delete-current-file-hard" = "Skrap huidige lêer sonder om na asblik te skuif";
 "iina.find-online-subs" = "Soek aanlyn na onderskrifte";
@@ -100,6 +101,7 @@
 "opt.sub-pos" = "Onderskrifposisie";
 "opt.sub-scale" = "Onderskrifskaal";
 "opt.sub-visibility" = "Onderskrifsigbaarheid";
+"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
 "opt.sub-ass-style-override" = "ASS-styloorheersing";
 
 "opt.fullscreen" = "Volskerm";

@@ -52,6 +52,7 @@
 "iina.toggle-flip" = "상하 뒤집기 전환/복귀";
 "iina.toggle-mirror" = "좌우 뒤집기 전환/복귀";
 "iina.save-playlist" = "현재 재생목록 저장";
+"iina.show-current-file-in-finder" = "Finder에서 현재 파일 보기";
 "iina.delete-current-file" = "현재 파일 삭제";
 "iina.delete-current-file-hard" = "현재 파일을 휴지통에 버리지 않고 바로 삭제";
 "iina.find-online-subs" = "인터넷에서 자막 찾기";
@@ -100,6 +101,7 @@
 "opt.sub-pos" = "자막 위치";
 "opt.sub-scale" = "자막 크기";
 "opt.sub-visibility" = "자막 보이기";
+"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
 "opt.sub-ass-style-override" = "ASS 자막 효과 덮어쓰기";
 
 "opt.fullscreen" = "전체 화면";

@@ -52,6 +52,7 @@
 "iina.toggle-flip" = "تغییر حالت";
 "iina.toggle-mirror" = "روخوانی از ..";
 "iina.save-playlist" = "ذخیره فهرست پخش جاری";
+"iina.show-current-file-in-finder" = "Show current file in Finder";
 "iina.delete-current-file" = "پاک کردن فایل جاری";
 "iina.delete-current-file-hard" = "حذف مستقیم پرونده فعلی بدون حرکت به زباله‌دان";
 "iina.find-online-subs" = "جستجو زیرنویس آنلاین";
@@ -100,6 +101,7 @@
 "opt.sub-pos" = "موقعیت زیرنویس";
 "opt.sub-scale" = "مقیاس زیرنویس";
 "opt.sub-visibility" = "قابلیت مشاهده زیرنویس";
+"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
 "opt.sub-ass-style-override" = "برنامه بعد از مدرسه";
 
 "opt.fullscreen" = "تمام صفحه";

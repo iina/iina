@@ -52,6 +52,7 @@
 "iina.toggle-flip" = "Chuyển đổi lật";
 "iina.toggle-mirror" = "Chuyển đổi gương";
 "iina.save-playlist" = "Lưu danh sách phát hiện tại";
+"iina.show-current-file-in-finder" = "Show current file in Finder";
 "iina.delete-current-file" = "Xoá tập tin hiện tại";
 "iina.delete-current-file-hard" = "Xoá luôn tệp tin mà không chuyển vào thùng rác";
 "iina.find-online-subs" = "Tìm phụ đề trực tuyến";
@@ -100,6 +101,7 @@
 "opt.sub-pos" = "Vị trí phụ đề";
 "opt.sub-scale" = "Quy mô phụ đề";
 "opt.sub-visibility" = "Subtitle visibility";
+"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
 "opt.sub-ass-style-override" = "Ghi đè kiểu ASS";
 
 "opt.fullscreen" = "Toàn màn hình";

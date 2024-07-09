@@ -130,6 +130,7 @@
 "preference.enable_adv_settings" = "Aktiviraj napredne postavke";
 
 "preference.sub_override_level.force" = "prisili";
+"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "strip";
 "preference.sub_override_level.yes" = "da";
 
@@ -192,7 +193,6 @@
 
 "alert.fatal_error" = "Kobna greška: %@ \nAplikacija će se sada zatvoriti.";
 "alert.mpv_error" = "Interna greška %@ (%@) pri postavljanju opcije %@.";
-"alert.sleep" = "Nije moguće spriječiti stanje mirovanja ekrana! (0x%0X8)";
 
 "alert.unsupported_audio" = "Nepodržana eksterna audio datoteka.";
 "alert.unsupported_sub" = "Nepodržan eksterni titl.";

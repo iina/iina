@@ -65,14 +65,14 @@
 "osd.sub_delay.later" = "تاخیر زیرنویس: %.2f ثانیه بعدتر";
 "osd.sub_delay.earlier" = "تاخیر زیرنویس: %.2f ثانیه زودتر";
 "osd.subtitle_pos" = "جایگذاری زیرنویس: %.1f";
-"osd.sub_hidden" = "Subtitles Hidden";
-"osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
-"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
-"osd.sub_second_visible" = "Secondary Subtitles Visible";
+"osd.sub_hidden" = "مخفی کردن زیرنویس";
+"osd.sub_visible" = "نمایش دادن زیرنویس";
+"osd.sub_second_delay.nodelay" = "تاخیر زیرنویس دوم: بدون تاخیر";
+"osd.sub_second_delay.later" = "تاخیر زیرنویس دوم: %.2f ثانیه دیرتر";
+"osd.sub_second_delay.earlier" = "تاخیر زیرنویس دوم: %.2f ثانیه زودتر";
+"osd.sub_second_hidden" = "زیرنویس دوم مخفی";
+"osd.sub_second_pos" = "جایگاه زیرنویس دوم: %.1f";
+"osd.sub_second_visible" = "زیرنویس دوم مشخص";
 "osd.mute" = "بی صدا";
 "osd.unmute" = "با صدا";
 "osd.screenshot" = "عکس از صفحه گرفته شد";
@@ -92,21 +92,21 @@
 "osd.find_online_sub" = "جستجوی زیرنویس آنلاین…";
 "osd.find_online_sub.source" = "از:";
 "osd.sub_not_found" = "هیچ زیرنویسی یافت نشد.";
-"osd.sub_found" = "%d subtitles found.";
-"osd.sub_downloading" = "Downloading %d subtitles";
+"osd.sub_found" = "%d زیرنویس پیدا شد.";
+"osd.sub_downloading" = "در حال دانلود%d زیرنویس";
 "osd.sub_downloaded" = "زیرنویس دانلود شد";
 "osd.sub_saved" = "زیرنویس ذخیره شد";
 "osd.network_error" = "خطای شبکه";
 "osd.file_error" = "خطا در خواندن فایل";
 "osd.cannot_login" = "عدم توانایی ورود";
 "osd.canceled" = "لغو شده";
-"osd.cannot_connect" = "Cannot connect";
-"osd.timed_out" = "Timed Out";
+"osd.cannot_connect" = "اتصال برقرار نشد";
+"osd.timed_out" = "خارج از دسترس";
 "osd.filter_added" = "فیلتر اضافه شده: %@";
 "osd.filter_removed" = "حذف فیلتر";
-"osd.file_loop" = "Loop Single File";
-"osd.playlist_loop" = "Loop Playlist";
-"osd.no_loop" = "Disable Looping";
+"osd.file_loop" = "تکرار یک فایل";
+"osd.playlist_loop" = "تکرار لیست پحش";
+"osd.no_loop" = "لغو تکرار";
 
 "preference.title" = "تنظیمات";
 "preference.general" = "عمومی";
@@ -130,8 +130,9 @@
 "preference.enable_adv_settings" = "فعال‌سازی تنظیمات پیشرفته";
 
 "preference.sub_override_level.force" = "force";
+"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "strip";
-"preference.sub_override_level.yes" = "yes";
+"preference.sub_override_level.yes" = "بله";
 
 "menu.volume" = "بلندی صدا: %d";
 "menu.volume_muted" = "صدا: %d (بی صدا)";
@@ -192,7 +193,6 @@
 
 "alert.fatal_error" = "Fatal error: %@ \nThe application will exit now.";
 "alert.mpv_error" = "Internal error %@ (%@) when setting option %@.";
-"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "Unsupported external audio file.";
 "alert.unsupported_sub" = "Unsupported external subtitle.";

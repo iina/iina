@@ -130,6 +130,7 @@
 "preference.enable_adv_settings" = "Включить расширенные настройки";
 
 "preference.sub_override_level.force" = "принудительно";
+"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "игнорировать все теги и стили в .ass";
 "preference.sub_override_level.yes" = "вкл";
 
@@ -192,7 +193,6 @@
 
 "alert.fatal_error" = "Фатальная ошибка: %@ \nПриложение будет завершено.";
 "alert.mpv_error" = "Внутренняя ошибка %@ (%@) при установке опции %@.";
-"alert.sleep" = "Не удалось оставить дисплей включенным! (0x%0X8)";
 
 "alert.unsupported_audio" = "Неподдерживаемая внешняя аудиодорожка.";
 "alert.unsupported_sub" = "Неподдерживаемые внешние субтитры.";

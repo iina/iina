@@ -52,6 +52,7 @@
 "iina.toggle-flip" = "टॉगल फ्लिप";
 "iina.toggle-mirror" = " टॉगल दर्पण";
 "iina.save-playlist" = "वर्तमान प्लेलिस्ट सहेजें";
+"iina.show-current-file-in-finder" = "Show current file in Finder";
 "iina.delete-current-file" = "वर्तमान फ़ाइल हटाएं";
 "iina.delete-current-file-hard" = "कचरा हटाए बिना सीधे वर्तमान फ़ाइल हटाएं";
 "iina.find-online-subs" = "ऑनलाइन उपशीर्षक खोजें";
@@ -100,6 +101,7 @@
 "opt.sub-pos" = "उपशीर्षक स्थिति";
 "opt.sub-scale" = "उपशीर्षक पैमाने";
 "opt.sub-visibility" = "उपशीर्षक दृश्यता";
+"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
 "opt.sub-ass-style-override" = "ASS स्टाइल ओवरराइड";
 
 "opt.fullscreen" = "पूर्ण स्क्रीन";

@@ -52,6 +52,7 @@
 "iina.toggle-flip" = "Aktif/nonaktifkan Mode Terbalik";
 "iina.toggle-mirror" = "Aktif/nonaktifkan Mode Cermin";
 "iina.save-playlist" = "Simpan Playlist ini";
+"iina.show-current-file-in-finder" = "Show current file in Finder";
 "iina.delete-current-file" = "Hapus file Ini";
 "iina.delete-current-file-hard" = "Hapus file ini langsung tanpa memindahkan ke Trash";
 "iina.find-online-subs" = "Cari terjemahan online";
@@ -100,6 +101,7 @@
 "opt.sub-pos" = "Posisi terjemahan";
 "opt.sub-scale" = "Ukuran terjemahan";
 "opt.sub-visibility" = "Visibilitas terjemahan";
+"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
 "opt.sub-ass-style-override" = "Paksakan ASS style";
 
 "opt.fullscreen" = "Layar Penuh";

@@ -67,12 +67,12 @@
 "osd.subtitle_pos" = "Posición de subtítulos: %.1f";
 "osd.sub_hidden" = "Subtítulos Visibles";
 "osd.sub_visible" = "Subtítulos Visibles";
-"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
+"osd.sub_second_delay.nodelay" = "Retraso secundario de subtítulos: Sin demora";
 "osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
-"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
-"osd.sub_second_visible" = "Secondary Subtitles Visible";
+"osd.sub_second_delay.earlier" = "Retraso Secundario de Subtítulos: %.2fs Antes";
+"osd.sub_second_hidden" = "Subtítulos Secundarios Escondidos";
+"osd.sub_second_pos" = "Posición Secundaria de Subtítulos: %.1f";
+"osd.sub_second_visible" = "Subtítulos Secundarios Visibles";
 "osd.mute" = "Silenciar";
 "osd.unmute" = "No silenciar";
 "osd.screenshot" = "Captura de pantalla";
@@ -92,8 +92,8 @@
 "osd.find_online_sub" = "Buscando subtítulos en línea…";
 "osd.find_online_sub.source" = "desde";
 "osd.sub_not_found" = "No se encontraron subtítulos";
-"osd.sub_found" = "%d subtitles found.";
-"osd.sub_downloading" = "Downloading %d subtitles";
+"osd.sub_found" = "Subtítulos %d encontrados.";
+"osd.sub_downloading" = "Descargando subtítulos %d";
 "osd.sub_downloaded" = "Subtítulos descargados";
 "osd.sub_saved" = "Subtítulo guardado";
 "osd.network_error" = "Error de red";
@@ -130,6 +130,7 @@
 "preference.enable_adv_settings" = "Habilitar configuración avanzada";
 
 "preference.sub_override_level.force" = "fuerza";
+"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "tira";
 "preference.sub_override_level.yes" = "sí";
 
@@ -139,8 +140,8 @@
 "menu.sub_delay" = "Retraso de subtítulos: %.2fs";
 "menu.sub_hide" = "Ocultar Subtítulos";
 "menu.sub_show" = "Mostrar Subtítulos";
-"menu.sub_second_hide" = "Hide Secondary Subtitles";
-"menu.sub_second_show" = "Show Secondary Subtitles";
+"menu.sub_second_hide" = "Esconder Subtítulos Secundarios";
+"menu.sub_second_show" = "Mostrar Subtítulos Secundarios";
 "menu.fullscreen" = "Ver a pantalla completa";
 "menu.exit_fullscreen" = "Salir de pantalla completa";
 "menu.pip" = "Ver en picture in picture";
@@ -192,7 +193,6 @@
 
 "alert.fatal_error" = "Error fatal: %@ \nLa aplicación se cerrará ahora.";
 "alert.mpv_error" = "Error interno %@ (%@) al configurar la opción %@.";
-"alert.sleep" = "¡No se puede evitar que la pantalla entre en reposo! (0x%0X8)";
 
 "alert.unsupported_audio" = "Archivo de audio externo no compatible.";
 "alert.unsupported_sub" = "Subtítulo externo no compatible.";
@@ -210,9 +210,9 @@
 "alert.config.duplicate.title" = "Configuración duplicada";
 "alert.config.duplicate.message" = "Por favor, introduzca el nombre para el archivo de configuración duplicado.";
 "alert.config.empty_name" = "El nombre no puede estar vacío.";
-"alert.config.name_existing" = "A config with the same name already exists.";
+"alert.config.name_existing" = "Ya existe una configuración con el mismo nombre.";
 "alert.config.file_existing.title" = "El archivo ya existe";
-"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
+"alert.config.file_existing.message" = "Ya existe un archivo de configuración con el mismo nombre de archivo. Elija OK para mostrar el archivo en Finder.";
 "alert.config.cannot_create" = "¡No se puede crear el archivo de configuración!\n%@";
 "alert.config.cannot_write" = "¡No se puede escribir en el archivo de configuración!";
 "alert.config.rename.title" = "Rename Input Configuration";

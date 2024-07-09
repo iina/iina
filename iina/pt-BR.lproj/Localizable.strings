@@ -130,6 +130,7 @@
 "preference.enable_adv_settings" = "Habilitar configurações avançadas";
 
 "preference.sub_override_level.force" = "forçar";
+"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "cortar";
 "preference.sub_override_level.yes" = "sim";
 
@@ -192,7 +193,6 @@
 
 "alert.fatal_error" = "Erro fatal: %@ \nAplicação vai terminar.";
 "alert.mpv_error" = "Erro interno %@ (%@) ao ajustar a opção %@.";
-"alert.sleep" = "Impossível prevenir a tela de desligar! (0x%0X8)";
 
 "alert.unsupported_audio" = "Audio externo não suportado.";
 "alert.unsupported_sub" = "Legenda externa não suportada.";

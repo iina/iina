@@ -65,14 +65,14 @@
 "osd.sub_delay.later" = "Differenza sottotitoli: %.2fs dopo";
 "osd.sub_delay.earlier" = "Differenza sottotitoli: %.2fs prima";
 "osd.subtitle_pos" = "Posizione sottotitoli: %.1f";
-"osd.sub_hidden" = "Subtitles Hidden";
-"osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
-"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
-"osd.sub_second_visible" = "Secondary Subtitles Visible";
+"osd.sub_hidden" = "Nascondere Sottotitoli";
+"osd.sub_visible" = "Mostrare Sottotitoli";
+"osd.sub_second_delay.nodelay" = "Ritardo Sottotitoli Secondari: Nessun Ritardo";
+"osd.sub_second_delay.later" = "Ritardo Sottotitoli Secondari: %.2fs Dopo";
+"osd.sub_second_delay.earlier" = "Ritardo Sottotitoli Secondari: %.2fs Prima";
+"osd.sub_second_hidden" = "Nascondere Sottotitoli Secondari";
+"osd.sub_second_pos" = "Posizione Sottotitoli Secondari: %.1f";
+"osd.sub_second_visible" = "Mostrare Sottotitoli Secondari";
 "osd.mute" = "Muto";
 "osd.unmute" = "Attiva";
 "osd.screenshot" = "Schermata catturata";
@@ -92,8 +92,8 @@
 "osd.find_online_sub" = "Trova sottotitoli online…";
 "osd.find_online_sub.source" = "da";
 "osd.sub_not_found" = "Sottotitoli non trovati";
-"osd.sub_found" = "%d subtitles found.";
-"osd.sub_downloading" = "Downloading %d subtitles";
+"osd.sub_found" = "%d sottotitoli trovati.";
+"osd.sub_downloading" = "Scaricamento %d sottotitoli";
 "osd.sub_downloaded" = "Sottotitoli scaricati";
 "osd.sub_saved" = "Sottotitoli salvati";
 "osd.network_error" = "Errore di rete";
@@ -130,17 +130,18 @@
 "preference.enable_adv_settings" = "Abilita impostazioni avanzate";
 
 "preference.sub_override_level.force" = "force";
+"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "striscia";
-"preference.sub_override_level.yes" = "yes";
+"preference.sub_override_level.yes" = "sì";
 
 "menu.volume" = "Volume: %d";
 "menu.volume_muted" = "Volume: %d (Spento)";
 "menu.audio_delay" = "Differenza audio: %.2fs";
 "menu.sub_delay" = "Differenza sottotitoli: %.2fs";
-"menu.sub_hide" = "Hide Subtitles";
-"menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Secondary Subtitles";
-"menu.sub_second_show" = "Show Secondary Subtitles";
+"menu.sub_hide" = "Nascondere Sottotitoli";
+"menu.sub_show" = "Mostra sottotitoli";
+"menu.sub_second_hide" = "Nascondi Sottotitoli Secondari";
+"menu.sub_second_show" = "Mostra Sottotitoli Secondari";
 "menu.fullscreen" = "Attiva modalità a tutto schermo";
 "menu.exit_fullscreen" = "Disattiva modalità a tutto schermo";
 "menu.pip" = "Attiva Picture-in-Picture";
@@ -192,7 +193,6 @@
 
 "alert.fatal_error" = "Fatal error: %@ \nL'appicazione verrà subito chiusa.";
 "alert.mpv_error" = "Errore %@ (%@) nell'impostazioni dell'utente %@.";
-"alert.sleep" = "Impossibile impedire lo stop dello schermo! (0x%0X8)";
 
 "alert.unsupported_audio" = "File audo esterno non supportato.";
 "alert.unsupported_sub" = "Sottotitoli esterni non supportati.";
@@ -210,13 +210,13 @@
 "alert.config.duplicate.title" = "Configurazione del duplicato";
 "alert.config.duplicate.message" = "Inserisci il nome per il duplicato del file di configurazione.";
 "alert.config.empty_name" = "Il nome non può essere vuoto.";
-"alert.config.name_existing" = "A config with the same name already exists.";
+"alert.config.name_existing" = "Esiste già un profilo con lo stesso nome.";
 "alert.config.file_existing.title" = "Il file è già esistente";
-"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
+"alert.config.file_existing.message" = "Esiste già un file di configurazione con lo stesso nome di file. Scegliere OK per mostrare il file in Finder.";
 "alert.config.cannot_create" = "Impossibile creare il file di configurazione!\n%@";
 "alert.config.cannot_write" = "Impossibile scrivere il file di configurazione!";
-"alert.config.rename.title" = "Rename Input Configuration";
-"alert.config.rename.message" = "Please enter the new name for the configuration.";
+"alert.config.rename.title" = "Rinomina Configurazione Input";
+"alert.config.rename.message" = "Inserisci un nome per la nuova configurazione.";
 
 "alert.filter.incorrect" = "Si è verificato un errore durante l'impostazione dei filtri. Verifica il formato dei parametri.";
 "alert.add_filter.title" = "Nuovo filtro";

@@ -52,6 +52,7 @@
 "iina.toggle-flip" = "Przełącz obrót";
 "iina.toggle-mirror" = "Przełącz odbicie lustrzane";
 "iina.save-playlist" = "Zapisz obecną playlistę";
+"iina.show-current-file-in-finder" = "Show current file in Finder";
 "iina.delete-current-file" = "Przenieś plik do kosza";
 "iina.delete-current-file-hard" = "Usuń plik bez przenoszenia do kosza";
 "iina.find-online-subs" = "Znajdź napisy online";
@@ -100,6 +101,7 @@
 "opt.sub-pos" = "Pozycja napisów";
 "opt.sub-scale" = "Rozmiar napisów";
 "opt.sub-visibility" = "Widoczność napisów";
+"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
 "opt.sub-ass-style-override" = "Nadpisz style ASS";
 
 "opt.fullscreen" = "Tryb pełnoekranowy";

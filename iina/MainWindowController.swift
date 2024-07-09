@@ -834,7 +834,7 @@ class MainWindowController: PlayerWindowController {
       let normalizedKeyCode = KeyCodeHelper.normalizeMpv(keyCode)
 
       if normalizedKeyCode == "ESC", osdStackView.performKeyEquivalent(with: event) {
-        Logger.log("ESC key was handled by OSD", level: .verbose)
+        log("ESC key was handled by OSD", level: .verbose)
         return
       }
     }
@@ -876,7 +876,7 @@ class MainWindowController: PlayerWindowController {
 
   override func mouseDown(with event: NSEvent) {
     if Logger.enabled && Logger.Level.preferred >= .verbose {
-      Logger.log("MainWindow mouseDown @ \(event.locationInWindow)", level: .verbose, subsystem: player.subsystem)
+      log("MainWindow mouseDown @ \(event.locationInWindow)", level: .verbose)
     }
     workaroundCursorDefect()
     // do nothing if it's related to floating OSC
@@ -919,7 +919,7 @@ class MainWindowController: PlayerWindowController {
             return
           }
           if Logger.enabled && Logger.Level.preferred >= .verbose {
-            Logger.log("MainWindow mouseDrag: minimum dragging distance was met", level: .verbose, subsystem: player.subsystem)
+            log("MainWindow mouseDrag: minimum dragging distance was met", level: .verbose)
           }
           isDragging = true
         }
@@ -931,8 +931,8 @@ class MainWindowController: PlayerWindowController {
 
   override func mouseUp(with event: NSEvent) {
     if Logger.enabled && Logger.Level.preferred >= .verbose {
-      Logger.log("MainWindow mouseUp @ \(event.locationInWindow), isDragging: \(isDragging), isResizingSidebar: \(isResizingSidebar), clickCount: \(event.clickCount)",
-                 level: .verbose, subsystem: player.subsystem)
+      log("MainWindow mouseUp @ \(event.locationInWindow), isDragging: \(isDragging), isResizingSidebar: \(isResizingSidebar), clickCount: \(event.clickCount)",
+                 level: .verbose)
     }
     workaroundCursorDefect()
     mousePosRelatedToWindow = nil
@@ -1029,7 +1029,7 @@ class MainWindowController: PlayerWindowController {
   override func mouseEntered(with event: NSEvent) {
     guard !isInInteractiveMode else { return }
     guard let obj = event.trackingArea?.userInfo?["obj"] as? Int else {
-      Logger.log("No data for tracking area", level: .warning)
+      log("No data for tracking area", level: .warning)
       return
     }
     mouseExitEnterCount += 1
@@ -1053,7 +1053,7 @@ class MainWindowController: PlayerWindowController {
   override func mouseExited(with event: NSEvent) {
     guard !isInInteractiveMode else { return }
     guard let obj = event.trackingArea?.userInfo?["obj"] as? Int else {
-      Logger.log("No data for tracking area", level: .warning, subsystem: player.subsystem)
+      log("No data for tracking area", level: .warning)
       return
     }
     mouseExitEnterCount += 1
@@ -1152,10 +1152,10 @@ class MainWindowController: PlayerWindowController {
     window!.title = "Window"
 
     // As there have been issues in this area, log details about the screen selection process.
-    NSScreen.log("window!.screen", window!.screen)
-    NSScreen.log("NSScreen.main", NSScreen.main)
+    NSScreen.log("window!.screen", window!.screen, subsystem: subsystem)
+    NSScreen.log("NSScreen.main", NSScreen.main, subsystem: subsystem)
     NSScreen.screens.enumerated().forEach { screen in
-      NSScreen.log("NSScreen.screens[\(screen.offset)]" , screen.element)
+      NSScreen.log("NSScreen.screens[\(screen.offset)]" , screen.element, subsystem: subsystem)
     }
 
     var screen = window!.selectDefaultScreen()
@@ -1164,7 +1164,7 @@ class MainWindowController: PlayerWindowController {
       let rect = NSRectFromString(rectString)
       if let lastScreen = NSScreen.screens.first(where: { NSPointInRect(rect.origin, $0.visibleFrame) }) {
         screen = lastScreen
-        NSScreen.log("MainWindowLastPosition \(rect.origin) matched", screen)
+        NSScreen.log("MainWindowLastPosition \(rect.origin) matched", screen, subsystem: subsystem)
       }
     }
 

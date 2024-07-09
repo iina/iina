@@ -130,6 +130,7 @@
 "preference.enable_adv_settings" = "Povolit pokročilá nastavení";
 
 "preference.sub_override_level.force" = "force";
+"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "Základní";
 "preference.sub_override_level.yes" = "yes";
 
@@ -192,7 +193,6 @@
 
 "alert.fatal_error" = "Závažná chyba: %@ \nAplikace se teď ukončí.";
 "alert.mpv_error" = "Vnitřní chyba %@ (%@) při nastavení možnosti %@.";
-"alert.sleep" = "Nelze zakázat automatické vypnutí monitoru! (0x%0X8)";
 
 "alert.unsupported_audio" = "Nepodporovaný externí zvukový soubor.";
 "alert.unsupported_sub" = "Nepodporované externí titulky.";

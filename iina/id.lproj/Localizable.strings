@@ -130,6 +130,7 @@
 "preference.enable_adv_settings" = "Aktifkan pengaturan lanjutan";
 
 "preference.sub_override_level.force" = "force";
+"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "strip";
 "preference.sub_override_level.yes" = "yes";
 
@@ -192,7 +193,6 @@
 
 "alert.fatal_error" = "Kesalahan fatal: %@ \nAplikasi akan ditutup sekarang.";
 "alert.mpv_error" = "Kesalahan internal %@ (%@) saat menerapkan opsi %@.";
-"alert.sleep" = "Tidak bisa menonaktifkan istirahat layar! (0x%0X8)";
 
 "alert.unsupported_audio" = "File audio eksternal tidak didukung.";
 "alert.unsupported_sub" = "File terjemahan eksternal tidak didukung.";

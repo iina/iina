@@ -52,6 +52,7 @@
 "iina.toggle-flip" = "Toggle flip";
 "iina.toggle-mirror" = "Toggle mirror";
 "iina.save-playlist" = "Save current playlist";
+"iina.show-current-file-in-finder" = "Show current file in Finder";
 "iina.delete-current-file" = "Delete current file";
 "iina.delete-current-file-hard" = "Delete current file directly without moving to trash";
 "iina.find-online-subs" = "Find online subtitles";
@@ -100,6 +101,7 @@
 "opt.sub-pos" = "Subtitle position";
 "opt.sub-scale" = "Subtitle scale";
 "opt.sub-visibility" = "Subtitle visibility";
+"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
 "opt.sub-ass-style-override" = "ASS style override";
 
 "opt.fullscreen" = "Fullscreen";

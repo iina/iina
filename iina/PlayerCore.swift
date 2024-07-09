@@ -237,11 +237,14 @@ class PlayerCore: NSObject {
     abLoopA != 0 && abLoopB != 0 && mpv.getString(MPVOption.PlaybackControl.abLoopCount) != "0"
   }
 
+  let playerNumber: Int
+
   static var keyBindings: [String: KeyMapping] = [:]
 
   override init() {
+    playerNumber = PlayerCore.playerCoreCounter
     super.init()
-    self.mpv = MPVController(playerCore: self, playerNumber: PlayerCore.playerCoreCounter)
+    self.mpv = MPVController(playerCore: self)
     self.mainWindow = MainWindowController(playerCore: self)
     self.miniPlayer = MiniPlayerWindowController(playerCore: self)
     self.initialWindow = InitialWindowController(playerCore: self)

@@ -25,8 +25,11 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
   var loaded = false
   
+  let subsystem: Logger.Subsystem
+
   init(playerCore: PlayerCore) {
     self.player = playerCore
+    subsystem = Logger.makeSubsystem("window\(player.playerNumber)")
     super.init(window: nil)
   }
 
@@ -231,7 +234,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         handleIINACommand(iinaCommand)
         return true
       } else {
-        Logger.log("Unknown iina command \(keyBinding.rawAction)", level: .error, subsystem: player.subsystem)
+        log("Unknown iina command \(keyBinding.rawAction)", level: .error)
         return false
       }
     } else {
@@ -254,7 +257,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       if returnValue == 0 {
         return true
       } else {
-        Logger.log("Return value \(returnValue) when executing key command \(keyBinding.rawAction)", level: .error, subsystem: player.subsystem)
+        log("Return value \(returnValue) when executing key command \(keyBinding.rawAction)", level: .error)
         return false
       }
     }
@@ -550,7 +553,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     case 67...1000:
       return NSImage(named: "volume")
     default:
-      Logger.log("Volume level \(player.info.volume) is invalid", level: .error, subsystem: player.subsystem)
+      log("Volume level \(player.info.volume) is invalid", level: .error)
       return nil
     }
   }
@@ -568,11 +571,11 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     // The mpv documentation for the duration property indicates mpv is not always able to determine
     // the video duration in which case the property is not available.
     guard let duration = player.info.videoDuration else {
-      Logger.log("Video duration not available", level: .warning, subsystem: player.subsystem)
+      log("Video duration not available", level: .warning)
       return
     }
     guard let pos = player.info.videoPosition else {
-      Logger.log("Video position not available", level: .warning, subsystem: player.subsystem)
+      log("Video position not available", level: .warning)
       return
     }
     [leftLabel, rightLabel].forEach { $0.updateText(with: duration, given: pos) }
@@ -645,6 +648,11 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     })
   }
 
+  // MARK: - Utils
+
+  func log(_ message: String, level: Logger.Level = .debug) {
+    Logger.log(message, level: level, subsystem: subsystem)
+  }
 }
 
 

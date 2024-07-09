@@ -39,7 +39,9 @@ class VideoView: NSView {
 
   private var displayIdleTimer: Timer?
 
-  lazy var hdrSubsystem = Logger.makeSubsystem("hdr")
+  private lazy var hdrSubsystem = Logger.makeSubsystem("hdr\(player.playerNumber)")
+
+  lazy var subsystem = Logger.makeSubsystem("video\(player.playerNumber)")
 
   static let SRGB = CGColorSpaceCreateDeviceRGB()
 
@@ -259,11 +261,11 @@ class VideoView: NSView {
       }
 
       if abs(actualFps - nominalFps) > 1 {
-        Logger.log("Falling back to nominal display refresh rate: \(nominalFps) from \(actualFps)")
+        log("Falling back to nominal display refresh rate: \(nominalFps) from \(actualFps)")
         actualFps = nominalFps
       }
     } else {
-      Logger.log("Falling back to standard display refresh rate: 60 from \(actualFps)")
+      log("Falling back to standard display refresh rate: 60 from \(actualFps)")
       actualFps = 60
     }
     player.mpv.setDouble(MPVOption.Video.displayFpsOverride, actualFps)
@@ -304,10 +306,10 @@ class VideoView: NSView {
 
   func setICCProfile(_ displayId: UInt32) {
     if !Preference.bool(for: .loadIccProfile) {
-      Logger.log("Not using ICC due to user preference", subsystem: hdrSubsystem)
+      logHDR("Not using ICC due to user preference")
       player.mpv.setString(MPVOption.GPURendererOptions.iccProfile, "")
     } else {
-      Logger.log("Loading ICC profile", subsystem: hdrSubsystem)
+      logHDR("Loading ICC profile")
       typealias ProfileData = (uuid: CFUUID, profileUrl: URL?)
       guard let uuid = CGDisplayCreateUUIDFromDisplayID(displayId)?.takeRetainedValue() else { return }
 
@@ -362,7 +364,7 @@ class VideoView: NSView {
   ///   - method: The core video method that returned the result code.
   private func checkResult(_ result: CVReturn, _ method: String) {
     guard result != kCVReturnSuccess else { return }
-    Logger.log("Core video method \(method) returned: \(codeToString(result)) (\(result))", level: .warning)
+    log("Core video method \(method) returned: \(codeToString(result)) (\(result))", level: .warning)
   }
 
   /// Return a string describing the given [CVReturn](https://developer.apple.com/documentation/corevideo/cvreturn)
@@ -425,7 +427,8 @@ extension VideoView {
     guard player.mpv.fileLoaded else { return }
     guard let displayId = currentDisplay else { return }
     if let screen = self.window?.screen {
-      NSScreen.log("Refreshing HDR for \(player.subsystem.rawValue) @ display\(displayId)", screen)
+      NSScreen.log("Refreshing HDR for \(player.subsystem.rawValue) @ display\(displayId)", screen,
+                   subsystem: hdrSubsystem)
     }
     let edrEnabled = requestEdrMode()
     let edrAvailable = edrEnabled != false
@@ -439,12 +442,12 @@ extension VideoView {
     guard let mpv = player.mpv else { return false }
 
     guard let primaries = mpv.getString(MPVProperty.videoParamsPrimaries), let gamma = mpv.getString(MPVProperty.videoParamsGamma) else {
-      Logger.log("HDR primaries and gamma not available", subsystem: hdrSubsystem)
+      logHDR("HDR primaries and gamma not available")
       return false
     }
   
     let peak = mpv.getDouble(MPVProperty.videoParamsSigPeak)
-    Logger.log("HDR gamma=\(gamma), primaries=\(primaries), sig_peak=\(peak)", subsystem: hdrSubsystem)
+    logHDR("HDR gamma=\(gamma), primaries=\(primaries), sig_peak=\(peak)")
 
     var name: CFString? = nil
     switch primaries {
@@ -468,23 +471,23 @@ extension VideoView {
       return false // SDR
 
     default:
-      Logger.log("Unknown HDR color space information gamma=\(gamma) primaries=\(primaries)", level: .warning, subsystem: hdrSubsystem)
+      logHDR("Unknown HDR color space information gamma=\(gamma) primaries=\(primaries)", level: .warning)
       return false
     }
 
     guard (window?.screen?.maximumPotentialExtendedDynamicRangeColorComponentValue ?? 1.0) > 1.0 else {
-      Logger.log("HDR video was found but the display does not support EDR mode", subsystem: hdrSubsystem)
+      logHDR("HDR video was found but the display does not support EDR mode")
       return false
     }
 
     guard player.info.hdrEnabled else { return nil }
 
     if videoLayer.colorspace?.name == name {
-      Logger.log("HDR mode already enabled, skipping", subsystem: hdrSubsystem)
+      logHDR("HDR mode already enabled, skipping")
       return true
     }
 
-    Logger.log("Will activate HDR color space instead of using ICC profile", subsystem: hdrSubsystem)
+    logHDR("Will activate HDR color space instead of using ICC profile")
 
     videoLayer.wantsExtendedDynamicRangeContent = true
     videoLayer.colorspace = CGColorSpace(name: name!)
@@ -500,29 +503,29 @@ extension VideoView {
       // display.
       if targetPeak == 0 {
         if let displayInfo = CoreDisplay_DisplayCreateInfoDictionary(currentDisplay!)?.takeRetainedValue() as? [String: AnyObject] {
-          Logger.log("Successfully obtained information about the display", subsystem: hdrSubsystem)
+          logHDR("Successfully obtained information about the display")
           // Prefer ReferencePeakHDRLuminance, which is reported by newer macOS versions.
           if let hdrLuminance = displayInfo["ReferencePeakHDRLuminance"] as? Int {
-            Logger.log("Found ReferencePeakHDRLuminance: \(hdrLuminance)", subsystem: hdrSubsystem)
+            logHDR("Found ReferencePeakHDRLuminance: \(hdrLuminance)")
             targetPeak = hdrLuminance
           } else if let hdrLuminance = displayInfo["DisplayBacklight"] as? Int {
             // We know macOS Catalina uses this key.
-            Logger.log("Found DisplayBacklight: \(hdrLuminance)", subsystem: hdrSubsystem)
+            logHDR("Found DisplayBacklight: \(hdrLuminance)")
             targetPeak = hdrLuminance
           } else {
-            Logger.log("Didn't find ReferencePeakHDRLuminance or DisplayBacklight, assuming HDR400", subsystem: hdrSubsystem)
-            Logger.log("Display info dictionary: \(displayInfo)", subsystem: hdrSubsystem)
+            logHDR("Didn't find ReferencePeakHDRLuminance or DisplayBacklight, assuming HDR400")
+            logHDR("Display info dictionary: \(displayInfo)")
             targetPeak = 400
           }
         } else {
-          Logger.log("Unable to obtain display information, assuming HDR400", level: .warning, subsystem: hdrSubsystem)
+          logHDR("Unable to obtain display information, assuming HDR400", level: .warning)
           targetPeak = 400
         }
       }
       let algorithm = Preference.ToneMappingAlgorithmOption(rawValue: Preference.integer(for: .toneMappingAlgorithm))?.mpvString
         ?? Preference.ToneMappingAlgorithmOption.defaultValue.mpvString
 
-      Logger.log("Will enable tone mapping target-peak=\(targetPeak) algorithm=\(algorithm)", subsystem: hdrSubsystem)
+      logHDR("Will enable tone mapping target-peak=\(targetPeak) algorithm=\(algorithm)")
       mpv.setInt(MPVOption.GPURendererOptions.targetPeak, targetPeak)
       mpv.setString(MPVOption.GPURendererOptions.toneMapping, algorithm)
     } else {
@@ -530,6 +533,16 @@ extension VideoView {
       mpv.setString(MPVOption.GPURendererOptions.toneMapping, "")
     }
     return true
+  }
+
+  // MARK: - Utils
+
+  func logHDR(_ message: String, level: Logger.Level = .debug) {
+    Logger.log(message, level: level, subsystem: hdrSubsystem)
+  }
+
+  func log(_ message: String, level: Logger.Level = .debug) {
+    Logger.log(message, level: level, subsystem: subsystem)
   }
 }
 

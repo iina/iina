@@ -130,6 +130,7 @@
 "preference.enable_adv_settings" = "Gelişmiş ayarları etkinleştir";
 
 "preference.sub_override_level.force" = "force";
+"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "Sıyır";
 "preference.sub_override_level.yes" = "yes";
 
@@ -192,7 +193,6 @@
 
 "alert.fatal_error" = "Onulmaz hata: %@ \nUygulamadan şimdi çıkılacak.";
 "alert.mpv_error" = "İç hata: %@ (%@) %@ seçeneği hatalı.";
-"alert.sleep" = "Ekran uykusu engellenemiyor(0x%0X8)";
 
 "alert.unsupported_audio" = "Desteklenmeyen dış ses dosyası.";
 "alert.unsupported_sub" = "Desteklenmeyen dış altyazı.";

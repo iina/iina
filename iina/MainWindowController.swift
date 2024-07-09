@@ -180,8 +180,6 @@ class MainWindowController: PlayerWindowController {
   var isShowingPersistentOSD = false
   var osdContext: Any?
 
-  private var isClosing = false
-
   // MARK: - Enums
 
   // Window state
@@ -244,7 +242,7 @@ class MainWindowController: PlayerWindowController {
   var fsState: FullScreenState = .windowed {
     didSet {
       // Must not access mpv while it is asynchronously processing stop and quit commands.
-      guard !isClosing else { return }
+      guard !player.isStopping, !player.isStopped, !player.isShuttingDown, !player.isShutdown else { return }
       switch fsState {
       case .fullscreen: player.mpv.setFlag(MPVOption.Window.fullscreen, true)
       case .animating:  break
@@ -1135,7 +1133,6 @@ class MainWindowController: PlayerWindowController {
   // MARK: - Window delegate: Open / Close
 
   func windowWillOpen() {
-    isClosing = false
     // Must workaround an AppKit defect in some versions of macOS. This defect is known to exist in
     // Catalina and Big Sur. The problem was not reproducible in early versions of Monterey. It
     // reappeared in Ventura. The status of other versions of macOS is unknown, however the
@@ -1221,7 +1218,6 @@ class MainWindowController: PlayerWindowController {
   }
 
   func windowWillClose(_ notification: Notification) {
-    isClosing = true
     shouldApplyInitialWindowSize = true
     // Close PIP
     if pipStatus == .inPIP {
@@ -1399,7 +1395,7 @@ class MainWindowController: PlayerWindowController {
     // operation is processed asynchronously by mpv. If the window is being closed due to IINA
     // quitting then mpv could be in the process of shutting down. Must not access mpv while it is
     // asynchronously processing stop and quit commands.
-    guard !isClosing else { return }
+    guard !player.isStopping, !player.isStopped, !player.isShuttingDown, !player.isShutdown else { return }
     videoView.videoLayer.suspend()
     player.mpv.setFlag(MPVOption.Window.keepaspect, false)
   }
@@ -1436,7 +1432,7 @@ class MainWindowController: PlayerWindowController {
 
     // Must not access mpv while it is asynchronously processing stop and quit commands.
     // See comments in windowWillExitFullScreen for details.
-    guard !isClosing else { return }
+    guard !player.isStopping, !player.isStopped, !player.isShuttingDown, !player.isShutdown else { return }
     showUI()
     updateTimer()
 
@@ -1678,7 +1674,7 @@ class MainWindowController: PlayerWindowController {
   func windowDidEndLiveResize(_ notification: Notification) {
     // Must not access mpv while it is asynchronously processing stop and quit commands.
     // See comments in windowWillExitFullScreen for details.
-    guard !isClosing else { return }
+    guard !player.isStopping, !player.isStopped, !player.isShuttingDown, !player.isShutdown else { return }
     videoView.videoSize = window!.convertToBacking(videoView.bounds).size
     videoView.videoLayer.isAsynchronous = false
     updateWindowParametersForMPV()

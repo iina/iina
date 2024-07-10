@@ -151,12 +151,14 @@ class ViewLayer: CAOpenGLLayer {
         return
       }
       guard needsMPVRender else { return }
-
-      // Neither canDraw nor draw(inCGLContext:) were called by AppKit, needs a skip render.
-      // This can happen when IINA is playing in another space, as might occur when just playing
-      // audio. See issue #5025.
-      videoView.player.mpv.lockAndSetOpenGLContext()
-      defer { videoView.player.mpv.unlockOpenGLContext() }
+    }
+    // Neither canDraw nor draw(inCGLContext:) were called by AppKit, needs a skip render.
+    // This can happen when IINA is playing in another space, as might occur when just playing
+    // audio. See issue #5025.
+    videoView.player.mpv.lockAndSetOpenGLContext()
+    defer { videoView.player.mpv.unlockOpenGLContext() }
+    videoView.$isUninited.withLock() { isUninited in
+      guard !isUninited else { return }
       if let renderContext = videoView.player.mpv.mpvRenderContext,
          videoView.player.mpv.shouldRenderUpdateFrame() {
         var skip: CInt = 1

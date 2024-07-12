@@ -38,50 +38,23 @@
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="oiS-uM-l0S"/>
+                    </constraints>
                     <connections>
                         <binding destination="KNf-nq-d77" name="value" keyPath="values.enableCache" id="b1p-wd-8MM"/>
                     </connections>
                 </button>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="d3H-1Y-XVT">
-                    <rect key="frame" x="118" y="32" width="150" height="16"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Default cache size (KB):" id="0yu-5Q-363">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jlx-wF-OsB">
-                    <rect key="frame" x="118" y="8" width="150" height="16"/>
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jlx-wF-OsB">
+                    <rect key="frame" x="118" y="32" width="164" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Seconds to prefetch:" id="J96-32-M9A">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DH1-5d-J02">
-                    <rect key="frame" x="274" y="29" width="95" height="21"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="95" id="eM2-0L-joY"/>
-                    </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="wnc-Tu-XkN">
-                        <numberFormatter key="formatter" formatterBehavior="default10_4" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="leB-SM-zIC">
-                            <real key="minimum" value="0.0"/>
-                        </numberFormatter>
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                    <connections>
-                        <binding destination="KNf-nq-d77" name="value" keyPath="values.defaultCacheSize" id="4ud-bT-8hK">
-                            <dictionary key="options">
-                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                            </dictionary>
-                        </binding>
-                        <binding destination="KNf-nq-d77" name="enabled" keyPath="values.enableCache" id="Hzs-mZ-91S"/>
-                    </connections>
-                </textField>
-                <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8qr-PT-G7W">
-                    <rect key="frame" x="274" y="5" width="95" height="21"/>
+                <textField focusRingType="none" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8qr-PT-G7W">
+                    <rect key="frame" x="288" y="29" width="95" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="95" id="U1O-ic-Ats"/>
                     </constraints>
@@ -102,17 +75,47 @@
                         </binding>
                     </connections>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VFl-PR-eId">
-                    <rect key="frame" x="377" y="32" width="89" height="14"/>
-                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Default: 153600" id="0bT-f6-rXb">
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Aw2-n0-Y53">
+                    <rect key="frame" x="391" y="32" width="84" height="14"/>
+                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Default: 36000" id="fab-7d-mMQ">
                         <font key="font" metaFont="message" size="11"/>
                         <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Aw2-n0-Y53">
-                    <rect key="frame" x="377" y="8" width="84" height="14"/>
-                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Default: 36000" id="fab-7d-mMQ">
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="d3H-1Y-XVT">
+                    <rect key="frame" x="118" y="8" width="164" height="16"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Maximum cache size (KB):" id="0yu-5Q-363">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField focusRingType="none" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DH1-5d-J02">
+                    <rect key="frame" x="288" y="5" width="95" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="95" id="eM2-0L-joY"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="wnc-Tu-XkN">
+                        <numberFormatter key="formatter" formatterBehavior="default10_4" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="leB-SM-zIC">
+                            <real key="minimum" value="0.0"/>
+                        </numberFormatter>
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="KNf-nq-d77" name="value" keyPath="values.defaultCacheSize" id="4ud-bT-8hK">
+                            <dictionary key="options">
+                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                            </dictionary>
+                        </binding>
+                        <binding destination="KNf-nq-d77" name="enabled" keyPath="values.enableCache" id="Hzs-mZ-91S"/>
+                    </connections>
+                </textField>
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VFl-PR-eId">
+                    <rect key="frame" x="391" y="8" width="89" height="14"/>
+                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Default: 153600" id="0bT-f6-rXb">
                         <font key="font" metaFont="message" size="11"/>
                         <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -120,13 +123,13 @@
                 </textField>
             </subviews>
             <constraints>
-                <constraint firstItem="d3H-1Y-XVT" firstAttribute="top" secondItem="1Nn-zY-Z5N" secondAttribute="bottom" constant="8" id="3Jq-26-MfC"/>
+                <constraint firstItem="d3H-1Y-XVT" firstAttribute="top" secondItem="jlx-wF-OsB" secondAttribute="bottom" constant="8" id="3Jq-26-MfC"/>
                 <constraint firstItem="1Nn-zY-Z5N" firstAttribute="leading" secondItem="dQy-nE-EW3" secondAttribute="leading" constant="120" id="6g1-RW-Ln1"/>
                 <constraint firstItem="1Nn-zY-Z5N" firstAttribute="top" secondItem="2xw-S1-tBi" secondAttribute="top" id="7s0-Y8-rwl"/>
                 <constraint firstItem="DH1-5d-J02" firstAttribute="leading" secondItem="d3H-1Y-XVT" secondAttribute="trailing" constant="8" id="8F3-63-DE4"/>
                 <constraint firstItem="VFl-PR-eId" firstAttribute="leading" secondItem="DH1-5d-J02" secondAttribute="trailing" constant="10" id="8GT-RZ-oW1"/>
-                <constraint firstAttribute="bottom" secondItem="jlx-wF-OsB" secondAttribute="bottom" constant="8" id="8Le-qG-0IO"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1Nn-zY-Z5N" secondAttribute="trailing" id="C1g-NA-RRP"/>
+                <constraint firstAttribute="bottom" secondItem="d3H-1Y-XVT" secondAttribute="bottom" constant="8" id="Ctu-wv-ZyI"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Aw2-n0-Y53" secondAttribute="trailing" id="Djk-O6-TKh"/>
                 <constraint firstItem="1Nn-zY-Z5N" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2xw-S1-tBi" secondAttribute="trailing" id="EfG-ue-Zyb"/>
                 <constraint firstItem="jlx-wF-OsB" firstAttribute="leading" secondItem="1Nn-zY-Z5N" secondAttribute="leading" id="FBP-lN-PFP"/>
@@ -136,7 +139,7 @@
                 <constraint firstItem="8qr-PT-G7W" firstAttribute="leading" secondItem="jlx-wF-OsB" secondAttribute="trailing" constant="8" id="T4b-xd-qxa"/>
                 <constraint firstItem="jlx-wF-OsB" firstAttribute="width" secondItem="d3H-1Y-XVT" secondAttribute="width" id="cjO-X2-bQ9"/>
                 <constraint firstItem="VFl-PR-eId" firstAttribute="baseline" secondItem="d3H-1Y-XVT" secondAttribute="baseline" id="iJL-Ay-LVj"/>
-                <constraint firstItem="jlx-wF-OsB" firstAttribute="top" secondItem="d3H-1Y-XVT" secondAttribute="bottom" constant="8" id="kd6-dh-3X4"/>
+                <constraint firstItem="jlx-wF-OsB" firstAttribute="top" secondItem="1Nn-zY-Z5N" secondAttribute="bottom" constant="8" id="kd6-dh-3X4"/>
                 <constraint firstItem="d3H-1Y-XVT" firstAttribute="leading" secondItem="1Nn-zY-Z5N" secondAttribute="leading" id="m7X-0x-tAH"/>
                 <constraint firstItem="2xw-S1-tBi" firstAttribute="leading" secondItem="dQy-nE-EW3" secondAttribute="leading" id="ouH-0a-jhg"/>
                 <constraint firstItem="8qr-PT-G7W" firstAttribute="baseline" secondItem="jlx-wF-OsB" secondAttribute="baseline" id="pEU-Gj-mK5"/>

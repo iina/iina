@@ -143,6 +143,13 @@ class ViewLayer: CAOpenGLLayer {
 
     super.display()
     CATransaction.flush()
+
+    // Must lock the OpenGL context before calling mpv render methods. Can't wait until we have
+    // checked the flags to see if a skip renderer is needed because the OpenGL context must always
+    // be locked before locking the isUninited lock to avoid deadlocks. The flags can't be checked
+    // without locking isUninited to avoid data races.
+    videoView.player.mpv.lockAndSetOpenGLContext()
+    defer { videoView.player.mpv.unlockOpenGLContext() }
     videoView.$isUninited.withLock() { isUninited in
       guard !isUninited else { return }
 
@@ -151,14 +158,10 @@ class ViewLayer: CAOpenGLLayer {
         return
       }
       guard needsMPVRender else { return }
-    }
-    // Neither canDraw nor draw(inCGLContext:) were called by AppKit, needs a skip render.
-    // This can happen when IINA is playing in another space, as might occur when just playing
-    // audio. See issue #5025.
-    videoView.player.mpv.lockAndSetOpenGLContext()
-    defer { videoView.player.mpv.unlockOpenGLContext() }
-    videoView.$isUninited.withLock() { isUninited in
-      guard !isUninited else { return }
+
+      // Neither canDraw nor draw(inCGLContext:) were called by AppKit, needs a skip render.
+      // This can happen when IINA is playing in another space, as might occur when just playing
+      // audio. See issue #5025.
       if let renderContext = videoView.player.mpv.mpvRenderContext,
          videoView.player.mpv.shouldRenderUpdateFrame() {
         var skip: CInt = 1

@@ -1357,6 +1357,17 @@ Picture:</string>
                         </constraints>
                     </view>
                 </box>
+                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IQA-b2-CuT">
+                    <rect key="frame" x="130" y="8" width="140" height="18"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="check" title="Only for video files" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="cib-Cg-9kn">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="lH7-Vv-0M1" name="value" keyPath="values.togglePipByMinimizingWindowForVideoOnly" id="udA-q4-AOx"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="ghC-br-cK9" firstAttribute="top" secondItem="1fz-oP-RhZ" secondAttribute="top" constant="8" id="5nx-h9-8G4"/>

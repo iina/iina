@@ -672,18 +672,24 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   }
 
   /**
-   When dragging multiple files to App icon, cocoa will simply call this method repeatedly.
-   Therefore we must cache all possible calls and handle them together.
+   When the user opens multiple files at once, the system calls this method once for each file.
    */
   func application(_ sender: NSApplication, openFile filename: String) -> Bool {
     openFileCalled = true
-    openFileTimer?.invalidate()
-    pendingFilesForOpenFile.append(filename)
-    openFileTimer = Timer.scheduledTimer(timeInterval: OpenFileRepeatTime, target: self, selector: #selector(handleOpenFile), userInfo: nil, repeats: false)
+    if Preference.bool(for: .alwaysOpenInNewWindow) {
+      // Open file immediately, in its own window
+      pendingFilesForOpenFile.append(filename)
+      handleOpenFile()
+    } else {
+      // Accumulate file list, then open them in a single window
+      openFileTimer?.invalidate()
+      pendingFilesForOpenFile.append(filename)
+      openFileTimer = Timer.scheduledTimer(timeInterval: OpenFileRepeatTime, target: self, selector: #selector(handleOpenFile), userInfo: nil, repeats: false)
+    }
     return true
   }
 
-  /** Handle pending file paths if `application(_:openFile:)` not being called again in `OpenFileRepeatTime`. */
+  /** Immediately open file paths listed in `pendingFilesForOpenFile` in a single window. */
   @objc
   func handleOpenFile() {
     if !isReady {

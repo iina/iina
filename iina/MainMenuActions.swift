@@ -51,7 +51,7 @@ class MainMenuActionHandler: NSResponder, NSMenuItemValidation {
   }
 
   @objc func menuDeleteCurrentFile(_ sender: NSMenuItem) {
-    guard let url = player.info.currentURL else { return }
+    guard let url = player.info.currentURL, !player.info.isNetworkResource else { return }
     do {
       let index = player.mpv.getInt(MPVProperty.playlistPos)
       player.playlistRemove(index)
@@ -467,7 +467,7 @@ extension MainMenuActionHandler {
 
   func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
     switch menuItem.action {
-    case #selector(menuShowCurrentFileInFinder(_:)):
+    case #selector(menuDeleteCurrentFile(_:)), #selector(menuShowCurrentFileInFinder(_:)):
       return player.info.currentURL != nil && !player.info.isNetworkResource
     default:
       break

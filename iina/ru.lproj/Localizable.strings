@@ -67,12 +67,12 @@
 "osd.subtitle_pos" = "Позиция субтитров: %.1f";
 "osd.sub_hidden" = "Субтитры скрыты";
 "osd.sub_visible" = "Субтитры отображаются";
-"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
-"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
-"osd.sub_second_visible" = "Secondary Subtitles Visible";
+"osd.sub_second_delay.nodelay" = "Задержка вторых субтитров: без задержки";
+"osd.sub_second_delay.later" = "Задержка вторых субтитров: %.2f сек. позже";
+"osd.sub_second_delay.earlier" = "Задержка вторых субтитров: %.2f сек. раньше";
+"osd.sub_second_hidden" = "Вторые субтитры скрыты";
+"osd.sub_second_pos" = "Позиция вторых субтитров: %.1f";
+"osd.sub_second_visible" = "Вторые субтитры видны";
 "osd.mute" = "Без звука";
 "osd.unmute" = "Включение звука";
 "osd.screenshot" = "Скриншот сохранен";
@@ -92,8 +92,8 @@
 "osd.find_online_sub" = "Поиск субтитров в интернете…";
 "osd.find_online_sub.source" = "из";
 "osd.sub_not_found" = "Субтитры не найдены";
-"osd.sub_found" = "%d subtitles found.";
-"osd.sub_downloading" = "Downloading %d subtitles";
+"osd.sub_found" = "%d субтитров найдено.";
+"osd.sub_downloading" = "Загрузка %d субтитров";
 "osd.sub_downloaded" = "Субтитры скачаны";
 "osd.sub_saved" = "Субтитры сохранены";
 "osd.network_error" = "Ошибка сети";
@@ -130,7 +130,7 @@
 "preference.enable_adv_settings" = "Включить расширенные настройки";
 
 "preference.sub_override_level.force" = "принудительно";
-"preference.sub_override_level.scale" = "scale";
+"preference.sub_override_level.scale" = "масштаб";
 "preference.sub_override_level.strip" = "игнорировать все теги и стили в .ass";
 "preference.sub_override_level.yes" = "вкл";
 
@@ -140,8 +140,8 @@
 "menu.sub_delay" = "Задержка субтитров: %.2f с";
 "menu.sub_hide" = "Скрыть субтитры";
 "menu.sub_show" = "Показать субтитры";
-"menu.sub_second_hide" = "Hide Secondary Subtitles";
-"menu.sub_second_show" = "Show Secondary Subtitles";
+"menu.sub_second_hide" = "Скрыть вторые субтитры";
+"menu.sub_second_show" = "Показать вторые субтитры";
 "menu.fullscreen" = "Перейти в полноэкранный режим";
 "menu.exit_fullscreen" = "Выйти из полноэкранного режима";
 "menu.pip" = "Войти в режим «Картинка в картинке»";

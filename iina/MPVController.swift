@@ -701,9 +701,21 @@ class MPVController: NSObject {
     return flags & UInt64(MPV_RENDER_UPDATE_FRAME.rawValue) > 0
   }
 
-  /// Remove registered observers for IINA preferences.
+  /// Remove observers for IINA preferences and mpv properties.
+  /// - Important: Observers **must** be removed before sending a `quit` command to mpv. Accessing a mpv core after it
+  ///     has shutdown is not permitted by mpv and can trigger a crash. During shutdown mpv will emit property change events,
+  ///     thus it is critical that observers be removed, otherwise they may access the core and trigger a crash.
+  func removeObservers() {
+    // Remove observers for IINA preferences. Must not attempt to change a mpv setting in response
+    // to an IINA preference change while mpv is shutting down.
+    removeOptionObservers()
+    // Remove observers for mpv properties. Because 0 was passed for reply_userdata when registering
+    // mpv property observers all observers can be removed in one call.
+    mpv_unobserve_property(mpv, 0)
+  }
+
+  /// Remove observers for IINA preferences.
   private func removeOptionObservers() {
-    // Remove observers for IINA preferences.
     ObjcUtils.silenced {
       self.optionObservers.forEach { (k, _) in
         UserDefaults.standard.removeObserver(self, forKeyPath: k)
@@ -713,14 +725,10 @@ class MPVController: NSObject {
 
   /// Shutdown this mpv controller.
   func mpvQuit() {
-    // Remove observers for IINA preference. Must not attempt to change a mpv setting
-    // in response to an IINA preference change while mpv is shutting down.
-    removeOptionObservers()
-    // Remove observers for mpv properties. Because 0 was passed for reply_userdata when
-    // registering mpv property observers all observers can be removed in one call.
-    mpv_unobserve_property(mpv, 0)
-    // Start mpv quitting. Even though this command is being sent using the synchronous
-    // command API the quit command is special and will be executed by mpv asynchronously.
+    // Observers must be removed to avoid accessing the mpv core after it has shutdown.
+    removeObservers()
+    // Start mpv quitting. Even though this command is being sent using the synchronous command API
+    // the quit command is special and will be executed by mpv asynchronously.
     command(.quit, level: .verbose)
   }
 
@@ -1036,16 +1044,8 @@ class MPVController: NSObject {
 
     switch eventId {
     case MPV_EVENT_SHUTDOWN:
-      let quitByMPV = !player.isShuttingDown
-      if quitByMPV {
-        // This happens when the user uses mpv's IPC interface to send the quit command directly to
-        // mpv. Must not attempt to change a mpv setting in response to an IINA preference change
-        // now that mpv has shut down. This is not needed when IINA sends the quit command to mpv
-        // as in that case the observers are removed before the quit command is sent.
-        removeOptionObservers()
-      }
       DispatchQueue.main.async {
-        self.player.mpvHasShutdown(isMPVInitiated: quitByMPV)
+        self.player.mpvHasShutdown()
       }
 
     case MPV_EVENT_LOG_MESSAGE:
@@ -1080,7 +1080,7 @@ class MPVController: NSObject {
     case MPV_EVENT_START_FILE:
       guard let path = getString(MPVProperty.path) else { break }
       DispatchQueue.main.async { [self] in
-        player.info.isIdle = false
+        player.info.state = .starting
         player.fileStarted(path: path)
         let url = player.info.currentURL
         let message = player.info.isNetworkResource ? url?.absoluteString : url?.lastPathComponent
@@ -1092,7 +1092,7 @@ class MPVController: NSObject {
 
     case MPV_EVENT_SEEK:
       DispatchQueue.main.async { [self] in
-        player.info.isSeeking = true
+        player.info.state = .seeking
         // When playback is paused the display link may be shutdown in order to not waste energy.
         // It must be running when seeking to avoid slowdowns caused by mpv waiting for IINA to call
         // mpv_render_report_swap.
@@ -1109,8 +1109,6 @@ class MPVController: NSObject {
 
     case MPV_EVENT_PLAYBACK_RESTART:
       DispatchQueue.main.async { [self] in
-        player.info.isIdle = false
-        player.info.isSeeking = false
         // When playback is paused the display link may be shutdown in order to not waste energy.
         // The display link will be restarted while seeking. If playback is paused shut it down
         // again.
@@ -1130,14 +1128,23 @@ class MPVController: NSObject {
       // wait for idle
       let reason = event!.pointee.data.load(as: mpv_end_file_reason.self)
       DispatchQueue.main.async { [self] in
-        if player.info.fileLoading {
+        if player.info.state == .loading {
           if reason != MPV_END_FILE_REASON_STOP {
             receivedEndFileWhileLoading = true
           }
         } else {
           player.info.shouldAutoLoadFiles = false
         }
-        if reason == MPV_END_FILE_REASON_STOP {
+        // Previously this code checked if the reason was MPV_END_FILE_REASON_STOP indicating the
+        // event was triggered by the mpv stop command. This proved unreliable as before the stop
+        // command is executed playback could reach EOF. The mpv core then sends this event with a
+        // reason of MPV_END_FILE_REASON_EOF and then the core goes idle. When that happens during
+        // app termination AppDelegate will be waiting to be notified that the stop command has
+        // completed. Normally the notification is this event with a reason of
+        // MPV_END_FILE_REASON_STOP, but that does not happen as the event has already been sent.
+        // Instead of keying off MPV_END_FILE_REASON_STOP check the player state and if it is
+        // stopping then treat this event as indicating the stop command has completed.
+        if player.info.state == .stopping {
           self.player.playbackStopped()
         }
       }
@@ -1242,7 +1249,7 @@ class MPVController: NSObject {
       DispatchQueue.main.async { [self] in
         if player.info.isPaused != paused {
           player.sendOSD(paused ? .pause : .resume)
-          player.info.isPaused = paused
+          player.info.state = paused ? .paused : .playing
           player.refreshSyncUITimer()
           // Follow energy efficiency best practices and ensure IINA is absolutely idle when the
           // video is paused to avoid wasting energy with needless processing. If paused shutdown
@@ -1500,13 +1507,12 @@ class MPVController: NSObject {
       }
       guard idleActive else { break }
       DispatchQueue.main.async { [self] in
-        if receivedEndFileWhileLoading && player.info.fileLoading {
+        if receivedEndFileWhileLoading && player.info.state == .loading {
           player.errorOpeningFileAndCloseMainWindow()
-          player.info.fileLoading = false
           player.info.currentURL = nil
           player.info.isNetworkResource = false
         }
-        player.info.isIdle = true
+        player.info.state = .idle
         if fileLoaded {
           fileLoaded = false
           player.closeWindow()

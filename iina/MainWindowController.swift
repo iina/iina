@@ -242,7 +242,7 @@ class MainWindowController: PlayerWindowController {
   var fsState: FullScreenState = .windowed {
     didSet {
       // Must not access mpv while it is asynchronously processing stop and quit commands.
-      guard !player.isStopping, !player.isStopped, !player.isShuttingDown, !player.isShutdown else { return }
+      guard player.info.isActive else { return }
       switch fsState {
       case .fullscreen: player.mpv.setFlag(MPVOption.Window.fullscreen, true)
       case .animating:  break
@@ -1395,7 +1395,7 @@ class MainWindowController: PlayerWindowController {
     // operation is processed asynchronously by mpv. If the window is being closed due to IINA
     // quitting then mpv could be in the process of shutting down. Must not access mpv while it is
     // asynchronously processing stop and quit commands.
-    guard !player.isStopping, !player.isStopped, !player.isShuttingDown, !player.isShutdown else { return }
+    guard player.info.isActive else { return }
     videoView.videoLayer.suspend()
     player.mpv.setFlag(MPVOption.Window.keepaspect, false)
   }
@@ -1432,7 +1432,7 @@ class MainWindowController: PlayerWindowController {
 
     // Must not access mpv while it is asynchronously processing stop and quit commands.
     // See comments in windowWillExitFullScreen for details.
-    guard !player.isStopping, !player.isStopped, !player.isShuttingDown, !player.isShutdown else { return }
+    guard player.info.isActive else { return }
     showUI()
     updateTimer()
 
@@ -1674,7 +1674,7 @@ class MainWindowController: PlayerWindowController {
   func windowDidEndLiveResize(_ notification: Notification) {
     // Must not access mpv while it is asynchronously processing stop and quit commands.
     // See comments in windowWillExitFullScreen for details.
-    guard !player.isStopping, !player.isStopped, !player.isShuttingDown, !player.isShutdown else { return }
+    guard player.info.isActive else { return }
     videoView.videoSize = window!.convertToBacking(videoView.bounds).size
     videoView.videoLayer.isAsynchronous = false
     updateWindowParametersForMPV()
@@ -2938,7 +2938,7 @@ class MainWindowController: PlayerWindowController {
   /** When slider changes */
   @IBAction override func playSliderChanges(_ sender: NSSlider) {
     // guard let event = NSApp.currentEvent else { return }
-    guard !player.info.fileLoading else { return }
+    guard player.info.isActive, player.info.state != .loading else { return }
     super.playSliderChanges(sender)
 
     // seek and update time

@@ -103,7 +103,7 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
     // notification to be posted and that results in the observer established above calling this
     // method. Thus this method may be called after IINA has commanded mpv to shutdown. Once mpv has
     // been told to shutdown mpv APIs must not be called as it can trigger a crash in mpv.
-    guard !pc.isShuttingDown, !pc.isShutdown else { return }
+    guard pc.info.isActive else { return }
     filters = pc.mpv.getFilters(filterType)
     filterIsSaved = [Bool](repeatElement(false, count: filters.count))
     savedFilters.forEach { savedFilter in

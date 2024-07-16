@@ -636,7 +636,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   @IBAction func playSliderChanges(_ sender: NSSlider) {
-    guard !player.info.fileLoading else { return }
+    guard player.info.isActive else { return }
     let percentage = 100 * sender.doubleValue / sender.maxValue
     player.seek(percent: percentage, forceExact: !followGlobalSeekTypeWhenAdjustSlider)
   }

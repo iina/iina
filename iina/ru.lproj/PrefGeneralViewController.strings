@@ -56,7 +56,7 @@
 "KYi-0W-zOr.title" = "Выключить остальные мониторы в полноэкранном режиме";
 
 /* Class = "NSTextFieldCell"; title = "Still prevents system from sleeping."; ObjectID = "Kdk-iC-e1C"; */
-"Kdk-iC-e1C.title" = "Still prevents system from sleeping.";
+"Kdk-iC-e1C.title" = "По-прежнему не позволяет системе перейти в спящий режим.";
 
 /* Class = "NSButtonCell"; title = "Switch to \"music mode\" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
 "KfL-r7-Uav.title" = "Автоматически переходить в «музыкальный режим» при воспроизведении аудио";
@@ -134,7 +134,7 @@
 "pdx-zt-kf2.title" = "Скриншоты:";
 
 /* Class = "NSButtonCell"; title = "Prevent screen saver from starting while playing"; ObjectID = "r2u-P9-J5p"; */
-"r2u-P9-J5p.title" = "Prevent screen saver from starting while playing";
+"r2u-P9-J5p.title" = "Предотвратить запуск экранной заставки во время воспроизведения";
 
 /* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "slG-Jb-54B"; */
 "slG-Jb-54B.title" = "Каждый час";
@@ -152,7 +152,7 @@
 "xr2-rB-O0x.title" = "Остановить/продолжить воспроизведение, когда:";
 
 /* Class = "NSButtonCell"; title = "Not while in Music Mode or only playing audio"; ObjectID = "yla-DT-YTx"; */
-"yla-DT-YTx.title" = "Not while in Music Mode or only playing audio";
+"yla-DT-YTx.title" = "Не в музыкальном режиме или только при воспроизведении аудио";
 
 /* Class = "NSMenuItem"; title = "Show welcome window"; ObjectID = "z9T-8h-1T0"; */
 "z9T-8h-1T0.title" = "Показать окно приветствия";

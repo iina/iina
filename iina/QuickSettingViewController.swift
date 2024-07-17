@@ -1066,6 +1066,10 @@ extension QuickSettingViewController: NSMenuDelegate {
     }
     return panel
   }
+  
+  func findItem(_ name: String, _ tag: Int = eqUserDefinedProfileMenuItemTag) -> NSMenuItem? {
+    return eqPopUpButton.itemArray.filter{ $0.tag == tag }.first { $0.title == name }
+  }
 
   @IBAction func eqPopUpButtonAction(_ sender: NSPopUpButton) {
     let tag = sender.selectedTag()
@@ -1078,9 +1082,9 @@ extension QuickSettingViewController: NSMenuDelegate {
         let newProfile = EQProfile(fromCurrentSliders: eqSliders)
         userEQs[inputString] = newProfile
         menuNeedsUpdate(eqPopUpButton.menu!)
-        eqPopUpButton.selectItem(withTitle: inputString)
+        eqPopUpButton.select(findItem(inputString))
       } else {
-        eqPopUpButton.selectItem(withTitle: lastUsedProfileName)
+        eqPopUpButton.select(findItem(lastUsedProfileName))
       }
     case eqRenameMenuItemTag:
       let alert = makeProfileNameValidationAlert(isNewProfile: false)
@@ -1089,9 +1093,9 @@ extension QuickSettingViewController: NSMenuDelegate {
         let profile = userEQs.removeValue(forKey: lastUsedProfileName)
         userEQs[inputString] = profile
         menuNeedsUpdate(eqPopUpButton.menu!)
-        eqPopUpButton.selectItem(withTitle: inputString)
+        eqPopUpButton.select(findItem(inputString))
       } else {
-        eqPopUpButton.selectItem(withTitle: lastUsedProfileName)
+        eqPopUpButton.select(findItem(lastUsedProfileName))
       }
     case eqDeleteMenuItemTag:
       userEQs.removeValue(forKey: lastUsedProfileName)
@@ -1119,6 +1123,7 @@ extension QuickSettingViewController: NSMenuDelegate {
     saveItem.isEnabled = (tag == eqCustomMenuItemTag)
 
     let selectedName = eqPopUpButton.titleOfSelectedItem!
+    let selectedTag = eqPopUpButton.selectedTag()
     var items = menu.items
     items.removeAll { $0.tag == eqUserDefinedProfileMenuItemTag }
     if !userEQs.isEmpty {
@@ -1128,7 +1133,7 @@ extension QuickSettingViewController: NSMenuDelegate {
     userEQs.forEach { (name, eq) in
       menu.addItem(withTitle: name, tag: eqUserDefinedProfileMenuItemTag)
     }
-    eqPopUpButton.selectItem(withTitle: selectedName)
+    eqPopUpButton.select(findItem(selectedName, selectedTag))
     eqPopUpButton.itemArray.forEach { $0.state = .off }
     eqPopUpButton.selectedItem?.state = .on
   }

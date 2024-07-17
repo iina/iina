@@ -20,12 +20,11 @@ class EQProfile: Codable {
 
 class PresetEQProfile: EQProfile {
   let localizationKey: String
-  var name: String {
-    NSLocalizedString(localizationKey, comment: localizationKey)
-  }
+  let name: String
 
   init(_ name: String, _ values: [Double]) {
     self.localizationKey = "eq.preset." + name
+    self.name = NSLocalizedString(localizationKey, comment: localizationKey)
     super.init(values)
   }
   

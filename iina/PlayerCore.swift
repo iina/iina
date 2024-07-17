@@ -1348,10 +1348,10 @@ class PlayerCore: NSObject {
 
   func setAudioEq(fromGains gains: [Double]) {
     let freqList = [32, 64, 125, 250, 500, 1000, 2000, 4000, 8000, 16000]
-    let filterStrings = freqList.enumerated().map { (index, freq) -> String in
-      return "equalizer=f=\(freq):t=h:width=\(Double(freq) / 1.224744871):g=\(gains[index])"
-    }
-    let filter = MPVFilter(name: "lavfi", label: Constants.FilterName.audioEq, paramString: "[\(filterStrings.joined(separator: ","))]")
+    let paramString = freqList.enumerated().map { (index, freq) in
+      "equalizer=f=\(freq):t=h:width=\(Double(freq) / 1.224744871):g=\(gains[index])"
+    }.joined(separator: ",")
+    let filter = MPVFilter(name: "lavfi", label: Constants.FilterName.audioEq, paramString: "[\(paramString)]")
     addAudioFilter(filter)
     info.audioEqFilter = filter
   }

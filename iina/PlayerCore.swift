@@ -606,8 +606,6 @@ class PlayerCore: NSObject {
 
     isInMiniPlayer = true
 
-    videoView.videoLayer.draw(forced: true)
-
     // restore layout
     if needRestoreLayout {
       if !Preference.bool(for: .musicModeShowAlbumArt) {
@@ -622,6 +620,8 @@ class PlayerCore: NSObject {
     }
 
     currentController.setupUI()
+    notifyMainWindowVideoSizeChanged()
+    videoView.videoLayer.draw(forced: true)
     events.emit(.musicModeChanged, data: true)
   }
 
@@ -650,11 +650,11 @@ class PlayerCore: NSObject {
     miniPlayer.window?.orderOut(nil)
     isInMiniPlayer = false
 
-    mainWindow.videoView.videoLayer.draw(forced: true)
-
     mainWindow.updateTitle()
 
     currentController.setupUI()
+    notifyMainWindowVideoSizeChanged()
+    mainWindow.videoView.videoLayer.draw(forced: true)
     events.emit(.musicModeChanged, data: false)
   }
 

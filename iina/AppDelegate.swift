@@ -646,7 +646,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
     // Instruct any players that are already stopped to start shutting down.
     for player in PlayerCore.playerCores {
-      if player.info.state == .stopped || player.info.state == .idle {
+      if player.info.state == .idle {
         player.shutdown()
       }
     }

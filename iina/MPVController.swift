@@ -117,10 +117,6 @@ class MPVController: NSObject {
   var recordedSeekStartTime: CFTimeInterval = 0
   var recordedSeekTimeListener: ((Double) -> Void)?
 
-  var receivedEndFileWhileLoading: Bool = false
-
-  var fileLoaded: Bool = false
-
   @Atomic private var hooks: [UInt64: MPVHookValue] = [:]
   private var hookCounter: UInt64 = 1
 
@@ -1088,7 +1084,7 @@ class MPVController: NSObject {
       }
 
     case MPV_EVENT_FILE_LOADED:
-      DispatchQueue.main.async { self.onFileLoaded() }
+      DispatchQueue.main.async { self.player.fileLoaded() }
 
     case MPV_EVENT_SEEK:
       DispatchQueue.main.async { [self] in
@@ -1112,7 +1108,7 @@ class MPVController: NSObject {
         // When playback is paused the display link may be shutdown in order to not waste energy.
         // The display link will be restarted while seeking. If playback is paused shut it down
         // again.
-        if player.info.isPaused {
+        if player.info.state == .paused {
           player.mainWindow.videoView.displayIdle()
         }
         if needRecordSeekTime {
@@ -1124,29 +1120,9 @@ class MPVController: NSObject {
       }
 
     case MPV_EVENT_END_FILE:
-      // if receive end-file when loading file, might be error
-      // wait for idle
       let reason = event!.pointee.data.load(as: mpv_end_file_reason.self)
-      DispatchQueue.main.async { [self] in
-        if player.info.state == .loading {
-          if reason != MPV_END_FILE_REASON_STOP {
-            receivedEndFileWhileLoading = true
-          }
-        } else {
-          player.info.shouldAutoLoadFiles = false
-        }
-        // Previously this code checked if the reason was MPV_END_FILE_REASON_STOP indicating the
-        // event was triggered by the mpv stop command. This proved unreliable as before the stop
-        // command is executed playback could reach EOF. The mpv core then sends this event with a
-        // reason of MPV_END_FILE_REASON_EOF and then the core goes idle. When that happens during
-        // app termination AppDelegate will be waiting to be notified that the stop command has
-        // completed. Normally the notification is this event with a reason of
-        // MPV_END_FILE_REASON_STOP, but that does not happen as the event has already been sent.
-        // Instead of keying off MPV_END_FILE_REASON_STOP check the player state and if it is
-        // stopping then treat this event as indicating the stop command has completed.
-        if player.info.state == .stopping {
-          self.player.playbackStopped()
-        }
+      DispatchQueue.main.async {
+        self.player.fileEnded(doToStopCommand: reason == MPV_END_FILE_REASON_STOP)
       }
 
     case MPV_EVENT_COMMAND_REPLY:
@@ -1179,32 +1155,6 @@ class MPVController: NSObject {
       let eventName = "mpv.\(String(cString: mpv_event_name(eventId)))"
       player.events.emit(.init(eventName))
     }
-  }
-
-  private func onFileLoaded() {
-    // mpvSuspend()
-    setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
-    // Get video size and set the initial window size
-    let width = getInt(MPVProperty.width)
-    let height = getInt(MPVProperty.height)
-    let duration = getDouble(MPVProperty.duration)
-    let pos = getDouble(MPVProperty.timePos)
-    player.info.videoHeight = height
-    player.info.videoWidth = width
-    player.info.displayWidth = 0
-    player.info.displayHeight = 0
-    player.info.videoDuration = VideoTime(duration)
-    if let filename = getString(MPVProperty.path) {
-      self.player.info.setCachedVideoDuration(filename, duration)
-    }
-    player.info.videoPosition = VideoTime(pos)
-    player.fileLoaded()
-    fileLoaded = true
-    // mpvResume()
-    if !(player.info.justOpenedFile && Preference.bool(for: .pauseWhenOpen)) {
-      setFlag(MPVOption.PlaybackControl.pause, false, level: .verbose)
-    }
-    player.syncUI(.playlist)
   }
 
   // MARK: - Property listeners
@@ -1247,7 +1197,7 @@ class MPVController: NSObject {
         break
       }
       DispatchQueue.main.async { [self] in
-        if player.info.isPaused != paused {
+        if (player.info.state == .paused) != paused {
           player.sendOSD(paused ? .pause : .resume)
           player.info.state = paused ? .paused : .playing
           player.refreshSyncUITimer()
@@ -1506,19 +1456,7 @@ class MPVController: NSObject {
         break
       }
       guard idleActive else { break }
-      DispatchQueue.main.async { [self] in
-        if receivedEndFileWhileLoading && player.info.state == .loading {
-          player.errorOpeningFileAndCloseMainWindow()
-          player.info.currentURL = nil
-          player.info.isNetworkResource = false
-        }
-        player.info.state = .idle
-        if fileLoaded {
-          fileLoaded = false
-          player.closeWindow()
-        }
-        receivedEndFileWhileLoading = false
-      }
+      DispatchQueue.main.async { self.player.idleActiveChanged() }
 
     default:
       // Utility.log("MPV property changed (unhandled): \(name)")

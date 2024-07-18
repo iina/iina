@@ -34,41 +34,26 @@ class PlaybackInfo {
     player = pc
   }
 
-  /// `True` if the player is in an active state, `false` otherwise.
-  /// - Important: When the player is not in an active state the operations on the player **must be** restricted. In particular
-  ///         player methods that access the mpv core **must not** be called when the player is in the `shuttingDown` or
-  ///         `shutDown` states. Accessing the mpv core when the player is in these states can trigger a crash.
-  var isActive: Bool { PlayerState.activeStates.contains(state) }
-
-  var isIdle: Bool { state == .idle }
-  var isPaused: Bool { state == .paused }
-  var isPlaying: Bool { state == .playing }
-  var isSeeking: Bool { state == .seeking}
+  // TODO: - Change log level of state changed message to be .verbose once state is confirmed working.
 
   /// The state the `PlayerCore` is in.
   /// - Note: A computed property is used to prevent inappropriate state changes. When IINA terminates players that are actively
   ///     playing will first be stopped and then shutdown. Once a player has stopped the mpv core will go idle. This happens
   ///     asynchronously and could occur after the quit command has been sent to mpv. Thus we must be sure the state does not
   ///     transition from `.shuttingDown` to `.idle`.
-  var state: PlayerState {
-    get { _state }
-    set {
-      guard _state != newValue else { return }
+  var state: PlayerState = .idle {
+    didSet {
+      guard state != oldValue else { return }
       // Once the player is in the shuttingDown state it can only move to the shutDown state. Once
       // in the shutDown state the state can't change.
-      guard _state != .loading || newValue != .idle,
-            _state != .shuttingDown || newValue == .shutDown, _state != .shutDown else {
-        player.log("Ignoring attempt to change state from \(_state) to \(newValue)")
+      guard oldValue != .loading || state != .idle,
+            oldValue != .shuttingDown || state == .shutDown, oldValue != .shutDown else {
+        player.log("Blocked attempt to change state from \(oldValue) to \(state)")
+        state = oldValue
         return
       }
-      _state = newValue
-    }
-  }
-  // TODO: - Change log level to be .verbose once state is confirmed working.
-  private var _state: PlayerState = .idle {
-    didSet {
-      player.log("State changed from \(oldValue) to \(_state)")
-      switch _state {
+      player.log("State changed from \(oldValue) to \(state)")
+      switch state {
       case .idle:
         PlayerCore.checkStatusForSleep()
       case .playing:

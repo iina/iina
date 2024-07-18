@@ -62,7 +62,7 @@ class PlayerCore: NSObject {
   }
 
   static var playing: [PlayerCore] {
-    return playerCores.filter { !$0.info.isIdle }
+    return playerCores.filter { $0.info.state != .idle }
   }
 
   static var playerCores: [PlayerCore] = []
@@ -145,6 +145,8 @@ class PlayerCore: NSObject {
   }
 
   var mpv: MPVController!
+
+  var receivedEndFileWhileLoading: Bool = false
 
   var plugins: [JavascriptPluginInstance] = []
   private var pluginMap: [String: JavascriptPluginInstance] = [:]
@@ -678,7 +680,7 @@ class PlayerCore: NSObject {
   // MARK: - MPV commands
 
   func togglePause(_ set: Bool? = nil) {
-    info.isPaused ? resume() : pause()
+    info.state == .paused ? resume() : pause()
   }
 
   /// Pause playback.
@@ -692,7 +694,7 @@ class PlayerCore: NSObject {
   ///     asleep. Thus `setFlag` **must not** be called if the `mpv` core is idle or stopping. See issue
   ///     [#4520](https://github.com/iina/iina/issues/4520)
   func pause() {
-    guard info.isActive else { return }
+    guard info.state.active else { return }
     mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
   }
 
@@ -719,21 +721,11 @@ class PlayerCore: NSObject {
 
     // Do not send a stop command to mpv if it is already stopped. This happens when quitting is
     // initiated directly through mpv.
-    guard info.isActive else { return }
+    guard info.state.active else { return }
     log("Stopping playback")
     refreshSyncUITimer()
     info.state = .stopping
     mpv.command(.stop, level: .verbose)
-  }
-
-  /// Playback has stopped and the media has been unloaded.
-  ///
-  /// This method is called by `MPVController` when mpv emits an event indicating the asynchronous mpv `stop` command
-  /// has completed executing.
-  func playbackStopped() {
-    log("Playback has stopped")
-    info.state = .stopped
-    postNotification(.iinaPlayerStopped)
   }
 
   func toggleMute(_ set: Bool? = nil) {
@@ -1625,7 +1617,7 @@ class PlayerCore: NSObject {
     guard Preference.bool(for: .resumeLastPosition) else { return }
 
     // The player must be active to be able to save the watch later configuration.
-    if info.isActive {
+    if info.state.active {
       log("Write watch later config")
       mpv.command(.writeWatchLaterConfig)
     }
@@ -1752,6 +1744,22 @@ class PlayerCore: NSObject {
   func fileLoaded() {
     log("File loaded")
     info.state = .playing
+    // mpvSuspend()
+    mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
+    // Get video size and set the initial window size
+    let width = mpv.getInt(MPVProperty.width)
+    let height = mpv.getInt(MPVProperty.height)
+    let duration = mpv.getDouble(MPVProperty.duration)
+    let pos = mpv.getDouble(MPVProperty.timePos)
+    info.videoHeight = height
+    info.videoWidth = width
+    info.displayWidth = 0
+    info.displayHeight = 0
+    info.videoDuration = VideoTime(duration)
+    if let filename = mpv.getString(MPVProperty.path) {
+      info.setCachedVideoDuration(filename, duration)
+    }
+    info.videoPosition = VideoTime(pos)
     triedUsingExactSeekForCurrentFile = false
     info.haveDownloadedSub = false
     checkUnsyncedWindowOptions()
@@ -1794,15 +1802,32 @@ class PlayerCore: NSObject {
     }
     postNotification(.iinaFileLoaded)
     events.emit(.fileLoaded, data: info.currentURL?.absoluteString ?? "")
+    // mpvResume()
+    if !(info.justOpenedFile && Preference.bool(for: .pauseWhenOpen)) {
+      mpv.setFlag(MPVOption.PlaybackControl.pause, false, level: .verbose)
+    }
+    syncUI(.playlist)
+  }
+
+  func fileEnded(doToStopCommand: Bool) {
+    // if receive end-file when loading file, might be error
+    // wait for idle
+    if info.state == .loading {
+      if !doToStopCommand {
+        receivedEndFileWhileLoading = true
+      }
+    } else {
+      info.shouldAutoLoadFiles = false
+    }
   }
 
   func afChanged() {
-    guard info.isActive else { return }
+    guard info.state.active else { return }
     postNotification(.iinaAFChanged)
   }
 
   func aidChanged() {
-    guard info.isActive else { return }
+    guard info.state.active else { return }
     info.aid = Int(mpv.getInt(MPVOption.TrackSelection.aid))
     guard mainWindow.loaded else { return }
     mainWindow?.muteButton.isEnabled = (info.aid != 0)
@@ -1812,7 +1837,7 @@ class PlayerCore: NSObject {
   }
 
   func chapterChanged() {
-    guard info.isActive else { return }
+    guard info.state.active else { return }
     info.chapter = Int(mpv.getInt(MPVProperty.chapter))
     syncUI(.time)
     syncUI(.chapterList)
@@ -1820,25 +1845,42 @@ class PlayerCore: NSObject {
   }
 
   func fullscreenChanged() {
-    guard mainWindow.loaded, info.isActive else { return }
+    guard mainWindow.loaded, info.state.active else { return }
     let fs = mpv.getFlag(MPVOption.Window.fullscreen)
     if fs != mainWindow.fsState.isFullscreen {
       mainWindow.toggleWindowFullScreen()
     }
   }
 
+  func idleActiveChanged() {
+    if receivedEndFileWhileLoading && info.state == .loading {
+      errorOpeningFileAndCloseMainWindow()
+      info.currentURL = nil
+      info.isNetworkResource = false
+    }
+    receivedEndFileWhileLoading = false
+    if info.state.loaded {
+      closeWindow()
+    }
+    if info.state != .loading {
+      log("Playback has stopped")
+      info.state = .idle
+      postNotification(.iinaPlayerStopped)
+    }
+  }
+
   func mediaTitleChanged() {
-    guard info.isActive else { return }
+    guard info.state.active else { return }
     postNotification(.iinaMediaTitleChanged)
   }
 
   func needReloadQuickSettingsView() {
-    guard info.isActive else { return }
+    guard info.state.active else { return }
     mainWindow.quickSettingView.reload()
   }
 
   func ontopChanged() {
-    guard mainWindow.loaded, info.isActive else { return }
+    guard mainWindow.loaded, info.state.active else { return }
     let ontop = mpv.getFlag(MPVOption.Window.ontop)
     if ontop != mainWindow.isOntop {
       mainWindow.setWindowFloatingOnTop(ontop)
@@ -1861,7 +1903,7 @@ class PlayerCore: NSObject {
     guard mainWindow.loaded else { return }
     // No need to refresh if playback is being stopped. Must not attempt to refresh if mpv is
     // terminating as accessing mpv once shutdown has been initiated can trigger a crash.
-    guard info.isActive else { return }
+    guard info.state.active else { return }
     mainWindow.videoView.refreshEdrMode()
   }
 
@@ -1876,7 +1918,7 @@ class PlayerCore: NSObject {
   }
 
   func secondarySidChanged() {
-    guard info.isActive else { return }
+    guard info.state.active else { return }
     info.secondSid = Int(mpv.getInt(MPVOption.Subtitles.secondarySid))
     postNotification(.iinaSIDChanged)
     sendOSD(.track(info.currentTrack(.secondSub) ?? .noneSubTrack))
@@ -1890,7 +1932,7 @@ class PlayerCore: NSObject {
   }
 
   func sidChanged() {
-    guard info.isActive else { return }
+    guard info.state.active else { return }
     info.sid = Int(mpv.getInt(MPVOption.TrackSelection.sid))
     postNotification(.iinaSIDChanged)
     sendOSD(.track(info.currentTrack(.sub) ?? .noneSubTrack))
@@ -1918,7 +1960,7 @@ class PlayerCore: NSObject {
     // No need to process track list changes if playback is being stopped. Must not process track
     // list changes if mpv is terminating as accessing mpv once shutdown has been initiated can
     // trigger a crash.
-    guard info.isActive else { return }
+    guard info.state.active else { return }
     log("Track list changed")
     getTrackInfo()
     getSelectedTracks()
@@ -1942,7 +1984,7 @@ class PlayerCore: NSObject {
 
   func onVideoReconfig() {
     // If loading file, video reconfig can return 0 width and height
-    guard info.state != .loading, info.isActive else { return }
+    guard info.state != .loading, info.state.active else { return }
     var dwidth = mpv.getInt(MPVProperty.dwidth)
     var dheight = mpv.getInt(MPVProperty.dheight)
     if info.rotation == 90 || info.rotation == 270 {
@@ -1959,19 +2001,19 @@ class PlayerCore: NSObject {
   }
 
   func vfChanged() {
-    guard info.isActive else { return }
+    guard info.state.active else { return }
     postNotification(.iinaVFChanged)
   }
 
   func vidChanged() {
-    guard info.isActive else { return }
+    guard info.state.active else { return }
     info.vid = Int(mpv.getInt(MPVOption.TrackSelection.vid))
     postNotification(.iinaVIDChanged)
     sendOSD(.track(info.currentTrack(.video) ?? .noneVideoTrack))
   }
 
   func windowScaleChanged() {
-    guard mainWindow.loaded, info.isActive else { return }
+    guard mainWindow.loaded, info.state.active else { return }
     let windowScale = mpv.getDouble(MPVOption.Window.windowScale)
     if fabs(windowScale - info.cachedWindowScale) > 10e-10 {
       mainWindow.setWindowScale(windowScale)
@@ -2040,9 +2082,9 @@ class PlayerCore: NSObject {
     // Check if timer should start/restart
 
     let useTimer: Bool
-    if !info.isActive {
+    if !info.state.active {
       useTimer = false
-    } else if info.isPaused {
+    } else if info.state == .paused {
       // Follow energy efficiency best practices and ensure IINA is absolutely idle when the
       // video is paused to avoid wasting energy with needless processing. If paused shutdown
       // the timer that synchronizes the UI and the high priority display link thread.
@@ -2147,7 +2189,7 @@ class PlayerCore: NSObject {
 
   func syncUI(_ option: SyncUIOption) {
     // If window is not loaded or stopping or shutting down, ignore.
-    guard mainWindow.loaded, info.isActive else { return }
+    guard mainWindow.loaded, info.state.active else { return }
     // This is too noisy and making verbose logs unreadable. Please uncomment when debugging syncing releated issues.
     // log("Syncing UI \(option)", level: .verbose)
 
@@ -2189,7 +2231,7 @@ class PlayerCore: NSObject {
 
     case .playButton:
       DispatchQueue.main.async {
-        self.currentController.updatePlayButtonState(self.info.isPaused ? .off : .on)
+        self.currentController.updatePlayButtonState(self.info.state == .paused ? .off : .on)
         self.touchBarSupport.updateTouchBarPlayBtn()
       }
 
@@ -2561,14 +2603,14 @@ class PlayerCore: NSObject {
     }
     // Look for players actively playing that are not in music mode and are not just playing audio.
     for player in playing {
-      guard player.info.isPlaying,
+      guard player.info.state == .playing,
             player.info.isAudio != .isAudio && !player.isInMiniPlayer else { continue }
       SleepPreventer.preventSleep()
       return
     }
     // Now look for players in music mode or playing audio.
     for player in playing {
-      guard player.info.isPlaying,
+      guard player.info.state == .playing,
             player.info.isAudio == .isAudio || player.isInMiniPlayer else { continue }
       // Either prevent the screen saver from activating or prevent system from sleeping depending
       // upon user setting.
@@ -2630,7 +2672,7 @@ class NowPlayingInfoManager {
     var info = center.nowPlayingInfo ?? [String: Any]()
 
     let activePlayer = PlayerCore.lastActive
-    guard activePlayer.info.isActive else { return }
+    guard activePlayer.info.state.active else { return }
 
     if withTitle {
       if activePlayer.currentMediaIsAudio == .isAudio {

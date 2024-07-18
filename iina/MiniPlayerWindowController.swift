@@ -168,7 +168,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   // MARK: - Window delegate: Open / Close
 
   func windowWillClose(_ notification: Notification) {
-    if player.info.state != .shuttingDown {
+    if player.info.state != .shuttingDown && player.info.state != .shutDown {
       // not needed if called when terminating the whole app
       player.overrideAutoSwitchToMusicMode = false
       player.switchBackFromMiniPlayer(automatically: true, showMainWindow: false)

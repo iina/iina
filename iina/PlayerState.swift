@@ -9,97 +9,63 @@
 import Foundation
 
 /// The mutually exclusive states a `PlayerCore` can be in.
-struct PlayerState: OptionSet, CustomStringConvertible {
-  let rawValue: Int
-
-  var description: String {
-    switch self {
-    case .idle: return "idle"
-    case .loading: return "loading"
-    case .starting: return "starting"
-    case .playing: return "playing"
-    case .paused: return "paused"
-    case .seeking: return "seeking"
-    case .stopping: return "stopping"
-    case .stopped: return "stopped"
-    case .shuttingDown: return "shuttingDown"
-    case .shutDown: return "shutDown"
-    default:
-      var result = ""
-      for state in PlayerState.allStates {
-        guard self.contains(state) else { continue }
-        if !result.isEmpty {
-          result += ","
-        }
-        result += state.description
-      }
-      return "[\(result)]"
-    }
-  }
-
-  // MARK: - States
-
-  /// No file is loaded.
-  ///
-  /// This is the initial state of a player. The player returns to this state when a
-  /// [MPV_EVENT_PROPERTY_CHANGE](https://mpv.io/manual/stable/#command-interface-mpv-event-property-change)
-  /// for the `idle-active` property is received with a value of `true`.
-  static let idle = PlayerState(rawValue: 1 << 0)
+/// - Important: The value of the computed properties `active` and `loaded` are dependent upon the declaration order of the
+///     enum constants.
+enum PlayerState: Int {
 
   /// The asynchronous `loadfile` command has been sent to mpv.
-  static let loading = PlayerState(rawValue: 1 << 1)
+  case loading
 
   /// Player is loading the file.
   ///
   /// A [MPV_EVENT_START_FILE](https://mpv.io/manual/stable/#command-interface-mpv-event-start-file)
   /// was received.
-  static let starting = PlayerState(rawValue: 1 << 2)
+  case starting
 
   /// Player is playing the file.
   ///
-  /// Initially entered when [MPV_EVENT_FILE_LOADED](https://mpv.io/manual/stable/#command-interface-mpv-event-file-loaded)
+  /// Initially entered when
+  /// [MPV_EVENT_FILE_LOADED](https://mpv.io/manual/stable/#command-interface-mpv-event-file-loaded)
   /// is received indicating file is loaded and playing.
-  static let playing = PlayerState(rawValue: 1 << 3)
+  case playing
 
   /// Playback has paused.
   ///
   /// A [MPV_EVENT_PROPERTY_CHANGE](https://mpv.io/manual/stable/#command-interface-mpv-event-property-change)
   /// for the `pause` property was received with a value of `true`.
-  static let paused = PlayerState(rawValue: 1 << 4)
+  case paused
 
   /// Player is seeking.
   ///
   /// A [MPV_EVENT_SEEK](https://mpv.io/manual/stable/#command-interface-mpv-event-seek) was recieived
   /// indicating seeking is in progress.
-  static let seeking = PlayerState(rawValue: 1 << 5)
+  case seeking
 
   /// The asynchronous `stop` command has been sent to mpv.
-  static let stopping = PlayerState(rawValue: 1 << 6)
+  case stopping
 
   /// Playback has stopped and the media has been unloaded.
   ///
-  /// A [MPV_EVENT_END_FILE](https://mpv.io/manual/stable/#command-interface-mpv-event-end-file)
-  /// was received with a reason of [MPV_END_FILE_REASON_STOP](https://mpv.io/manual/stable/#command-interface-stop)
-  /// indicating the `stop` command completed.
-  static let stopped = PlayerState(rawValue: 1 << 7)
+  /// This is the initial state of a player. The player returns to this state when a
+  /// [MPV_EVENT_PROPERTY_CHANGE](https://mpv.io/manual/stable/#command-interface-mpv-event-property-change)
+  /// for the `idle-active` property is received with a value of `true`.
+  case idle
 
   /// The asynchronous `quit` command has been sent to mpv initiating shutdown.
-  static let shuttingDown = PlayerState(rawValue: 1 << 8)
+  case shuttingDown
 
   /// Shutdown of the player has completed (mpv has shutdown).
   ///
   /// A [MPV_EVENT_SHUTDOWN](https://mpv.io/manual/stable/#command-interface-mpv-event-shutdown)
   /// was received indicating the `quit` command completed.
-  static let shutDown = PlayerState(rawValue: 1 << 9)
+  case shutDown
 
-  // MARK: - Sets
-
-  /// States in which the player is considered active.
+  /// `True` if when the player is in this state the mpv core is considered active, otherwise `false`.
   ///
   /// These are the states in which the player normally interacts with the mpv core. The mpv core **must not** be accessed when the
   /// player is in the `shuttingDown` or `shutDown` states. Accessing the core in these states can trigger a crash.
-  static let activeStates: PlayerState = [.loading, .starting, .playing, .paused, .seeking]
+  @inlinable var active: Bool { self.rawValue <= PlayerState.stopping.rawValue }
 
-  static let allStates: [PlayerState] = [.idle, .loading, .starting, .playing, .paused, .seeking,
-                                        .stopping, .stopped, .shuttingDown, .shutDown]
+  /// `True` if when the player is in this state the file is loaded, otherwise `false`.
+  @inlinable var loaded: Bool { active && self.rawValue >= PlayerState.playing.rawValue }
 }

@@ -157,7 +157,7 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
 
   func updateInfo(dynamic: Bool = false) {
     let player = PlayerCore.lastActive
-    guard player.info.isActive else { return }
+    guard player.info.state.active else { return }
     let controller = player.mpv!
     let info = player.info
 
@@ -261,8 +261,9 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
         : "N/A";
       self.setLabelColor(self.vprimariesField, by: sigPeak > 0)
 
-      if PlayerCore.lastActive.mainWindow.loaded && controller.fileLoaded {
-        if let colorspace = PlayerCore.lastActive.mainWindow.videoView.videoLayer.colorspace {
+      let player = PlayerCore.lastActive
+      if player.mainWindow.loaded && player.info.state.loaded {
+        if let colorspace = player.mainWindow.videoView.videoLayer.colorspace {
           let isHdr = colorspace != VideoView.SRGB
           self.vcolorspaceField.stringValue = "\(colorspace.name!) (\(isHdr ? "H" : "S")DR)"
         } else {
@@ -271,9 +272,9 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
       } else {
         self.vcolorspaceField.stringValue = "N/A"
       }
-      self.setLabelColor(self.vcolorspaceField, by: controller.fileLoaded)
+      self.setLabelColor(self.vcolorspaceField, by: player.info.state.loaded)
 
-      if PlayerCore.lastActive.mainWindow.loaded && controller.fileLoaded {
+      if player.mainWindow.loaded && player.info.state.loaded {
         if let hwPf = controller.getString(MPVProperty.videoParamsHwPixelformat) {
           self.vPixelFormat.stringValue = "\(hwPf) (HW)"
         } else if let swPf = controller.getString(MPVProperty.videoParamsPixelformat) {
@@ -282,7 +283,7 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
           self.vPixelFormat.stringValue = "N/A"
         }
       }
-      self.setLabelColor(self.vPixelFormat, by: controller.fileLoaded)
+      self.setLabelColor(self.vPixelFormat, by: player.info.state.loaded)
     }
   }
 
@@ -347,7 +348,7 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
       let player = PlayerCore.lastActive
 
       if let textField = cell.textField {
-        if player.info.isActive, let value = player.mpv.getString(property) {
+        if player.info.state.active, let value = player.mpv.getString(property) {
           textField.stringValue = value
           textField.textColor = .labelColor
         } else {

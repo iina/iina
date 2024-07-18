@@ -169,7 +169,7 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
   }
 
   func updateTouchBarPlayBtn() {
-    if player.info.isPaused {
+    if player.info.state == .paused {
       touchBarPlayPauseBtn?.image = NSImage(named: NSImage.touchBarPlayTemplateName)
     } else {
       touchBarPlayPauseBtn?.image = NSImage(named: NSImage.touchBarPauseTemplateName)
@@ -276,7 +276,7 @@ class TouchBarPlaySlider: NSSlider {
 
   override func touchesBegan(with event: NSEvent) {
     isTouching = true
-    wasPlayingBeforeTouching = playerCore.info.isPlaying
+    wasPlayingBeforeTouching = playerCore.info.state == .playing
     playerCore.pause()
     super.touchesBegan(with: event)
   }
@@ -369,7 +369,7 @@ class TouchBarPlaySliderCell: NSSliderCell {
 
   override func drawKnob(_ knobRect: NSRect) {
     let info = playerCore.info
-    guard !info.isIdle else { return }
+    guard info.state.active else { return }
     if isTouching, let dur = info.videoDuration?.second, let tb = info.getThumbnail(forSecond: (doubleValue / 100) * dur), let image = tb.image {
       NSGraphicsContext.saveGraphicsState()
       NSBezierPath(roundedRect: knobRect, xRadius: 3, yRadius: 3).setClip()
@@ -397,7 +397,7 @@ class TouchBarPlaySliderCell: NSSliderCell {
 
   override func drawBar(inside rect: NSRect, flipped: Bool) {
     let info = playerCore.info
-    guard !info.isIdle else { return }
+    guard info.state.active else { return }
     let barRect = self.barRect(flipped: flipped)
     if let image = backgroundImage, info.thumbnailsProgress == cachedThumbnailProgress {
       // draw cached background image

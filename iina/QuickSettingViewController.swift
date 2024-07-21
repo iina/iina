@@ -1041,30 +1041,24 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 }
 
 extension QuickSettingViewController: NSMenuDelegate {
-  private func makeProfileNameValidationAlert(isNewProfile: Bool) -> NSAlert {
-    let panel = NSAlert()
-    let textInput = NSTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
-    panel.accessoryView = textInput
-    let firstButton = panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
-    firstButton.isEnabled = false
-    panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
+  private func promptAudioEQProfileName(isNewProfile: Bool) -> String? {
     let key = isNewProfile ? "eq.new_profile" : "eq.rename"
-    panel.messageText = NSLocalizedString(key, comment: key)
-    let nameList = eqPopUpButton.itemArray.filter{ $0.tag == eqPresetProfileMenuItemTag || $0.tag == eqUserDefinedProfileMenuItemTag }.map{ $0.title }
-    NotificationCenter.default.addObserver(forName: NSControl.textDidChangeNotification, object: textInput, queue: .main) { _ in
-      let input = textInput.stringValue
+    let nameList = eqPopUpButton.itemArray
+      .filter{ $0.tag == eqPresetProfileMenuItemTag || $0.tag == eqUserDefinedProfileMenuItemTag }
+      .map{ $0.title }
+    let validator: Utility.InputValidator<String> = { input in
       if input.isEmpty {
-        firstButton.isEnabled = false
-        return
+        return .valueIsEmpty
       }
       if nameList.contains( where: { $0 == input } ) {
-        firstButton.isEnabled = false
+        return .valueAlreadyExists
       } else {
-        firstButton.isEnabled = true
-        self.inputString = input
+        return .ok
       }
     }
-    return panel
+    var inputString: String?
+    Utility.quickPromptPanel(key, validator: validator, callback: { inputString = $0 })
+    return inputString
   }
   
   func findItem(_ name: String, _ tag: Int = eqUserDefinedProfileMenuItemTag) -> NSMenuItem? {
@@ -1076,9 +1070,7 @@ extension QuickSettingViewController: NSMenuDelegate {
     let name = sender.titleOfSelectedItem
     switch tag {
     case eqSaveMenuItemTag:
-      let alert = makeProfileNameValidationAlert(isNewProfile: true)
-      let response = alert.runModal()
-      if response == .alertFirstButtonReturn {
+      if let inputString = promptAudioEQProfileName(isNewProfile: true) {
         let newProfile = EQProfile(fromCurrentSliders: eqSliders)
         userEQs[inputString] = newProfile
         menuNeedsUpdate(eqPopUpButton.menu!)
@@ -1087,9 +1079,7 @@ extension QuickSettingViewController: NSMenuDelegate {
         eqPopUpButton.select(findItem(lastUsedProfileName))
       }
     case eqRenameMenuItemTag:
-      let alert = makeProfileNameValidationAlert(isNewProfile: false)
-      let response = alert.runModal()
-      if response == .alertFirstButtonReturn {
+      if let inputString = promptAudioEQProfileName(isNewProfile: false) {
         let profile = userEQs.removeValue(forKey: lastUsedProfileName)
         userEQs[inputString] = profile
         menuNeedsUpdate(eqPopUpButton.menu!)

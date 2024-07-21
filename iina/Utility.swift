@@ -25,6 +25,15 @@ class Utility {
   static let blacklistExt = supportedFileExt[.sub]! + multipleFilePlaylistExt
   static let lut3dExt = ["3dl", "cube", "dat", "m3d"]
 
+  enum ValidationResult {
+    case ok
+    case valueIsEmpty
+    case valueAlreadyExists
+    case custom(String)
+  }
+
+  typealias InputValidator<T> = (T) -> ValidationResult
+
   // MARK: - Logs, alerts
 
   @available(*, deprecated, message: "showAlert(message:alertStyle:) is deprecated, use showAlert(_ key:comment:arguments:alertStyle:) instead")
@@ -226,33 +235,83 @@ class Utility {
    - Returns: Whether user dismissed the panel by clicking OK. Only works when using `.modal` mode.
    */
   @discardableResult
-  static func quickPromptPanel(_ key: String, titleComment: String? = nil, messageComment: String? = nil, inputValue: String? = nil, sheetWindow: NSWindow? = nil, callback: @escaping (String) -> Void) -> Bool {
+  static func quickPromptPanel(_ key: String, titleComment: String? = nil, messageComment: String? = nil,
+                               inputValue: String? = nil, validator: InputValidator<String>? = nil,
+                               sheetWindow: NSWindow? = nil, callback: @escaping (String) -> Void) -> Bool {
     let panel = NSAlert()
     let titleKey = "alert." + key + ".title"
     let messageKey = "alert." + key + ".message"
     panel.messageText = NSLocalizedString(titleKey, comment: titleComment ?? titleKey)
     panel.informativeText = NSLocalizedString(messageKey, comment: messageComment ?? messageKey)
-    let input = NSTextField(frame: NSRect(x: 0, y: 0, width: 240, height: 24))
+
+    // accessory view
+    let input = NSTextField(frame: NSRect(x: 0, y: 0, width: 240, height: 16))
+    input.translatesAutoresizingMaskIntoConstraints = false
     input.lineBreakMode = .byClipping
     input.usesSingleLineMode = true
     input.cell?.isScrollable = true
     if let inputValue = inputValue {
       input.stringValue = inputValue
     }
-    panel.accessoryView = input
-    panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
-    panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
+    let stackView = NSStackView(frame: NSRect(x: 0, y: 0, width: 240, height: 20))
+    stackView.orientation = .vertical
+    stackView.alignment = .centerX
+    stackView.addArrangedSubview(input)
+
+    // buttons
+    let okButton = panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
+    let _ = panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
     panel.window.initialFirstResponder = input
+
+    // validation
+    var observer: NSObjectProtocol?
+    if let validator = validator {
+      let label = NSTextField(labelWithString: "label")
+      label.textColor = .secondaryLabelColor
+      label.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
+      stackView.addArrangedSubview(label)
+      stackView.frame = NSRect(x: 0, y: 0, width: 240, height: 42)
+
+      let validateInput = {
+        switch validator(input.stringValue) {
+        case .ok:
+          okButton.isEnabled = true
+          label.stringValue = ""
+        case .valueIsEmpty:
+          okButton.isEnabled = false
+          label.stringValue = NSLocalizedString("input.value_is_empty", comment: "Value is empty.")
+        case .valueAlreadyExists:
+          okButton.isEnabled = false
+          label.stringValue = NSLocalizedString("input.already_exists", comment: "Value already exists.")
+        case .custom(let message):
+          label.stringValue = message
+          okButton.isEnabled = false
+        }
+      }
+      observer = NotificationCenter.default.addObserver(forName: NSControl.textDidChangeNotification, object: input, queue: .main) { _ in
+        validateInput()
+      }
+      validateInput()
+    }
+
+    stackView.translatesAutoresizingMaskIntoConstraints = true
+    panel.accessoryView = stackView
 
     if let sheetWindow = sheetWindow {
       panel.beginSheetModal(for: sheetWindow) { response in
         if response == .alertFirstButtonReturn {
           callback(input.stringValue)
         }
+        if let observer = observer {
+          NotificationCenter.default.removeObserver(observer)
+        }
       }
     } else {
       if panel.runModal() == .alertFirstButtonReturn {
         callback(input.stringValue)
+        if let observer = observer {
+          NotificationCenter.default.removeObserver(observer)
+        }
         return true
       }
     }

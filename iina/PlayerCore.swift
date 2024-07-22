@@ -397,6 +397,7 @@ class PlayerCore: NSObject {
 
     let isFirstLoad = !mainWindow.loaded
     let _ = mainWindow.window
+    mainWindow.pendingShow = true
     initialWindow.close()
 
     // Send load file command
@@ -550,7 +551,7 @@ class PlayerCore: NSObject {
     }
   }
 
-  func switchToMiniPlayer(automatically: Bool = false) {
+  func switchToMiniPlayer(automatically: Bool = false, showMiniPlayer: Bool = true) {
     log("Switch to mini player, automatically=\(automatically)")
     if !automatically {
       // Toggle manual override
@@ -620,7 +621,9 @@ class PlayerCore: NSObject {
     }
 
     currentController.setupUI()
-    notifyMainWindowVideoSizeChanged()
+    if showMiniPlayer {
+      notifyWindowVideoSizeChanged()
+    }
     videoView.videoLayer.draw(forced: true)
     events.emit(.musicModeChanged, data: true)
   }
@@ -650,11 +653,13 @@ class PlayerCore: NSObject {
     miniPlayer.window?.orderOut(nil)
     isInMiniPlayer = false
 
-    mainWindow.updateTitle()
-
-    currentController.setupUI()
-    notifyMainWindowVideoSizeChanged()
-    mainWindow.videoView.videoLayer.draw(forced: true)
+    if showMainWindow {
+      currentController.setupUI()
+      mainWindow.updateTitle()
+      mainWindow.pendingShow = true
+      mainWindow.videoView.videoLayer.draw(forced: true)
+      notifyWindowVideoSizeChanged()
+    }
     events.emit(.musicModeChanged, data: false)
   }
 
@@ -1760,7 +1765,7 @@ class PlayerCore: NSObject {
     }
 
     if info.vid == 0 {
-      notifyMainWindowVideoSizeChanged()
+      notifyWindowVideoSizeChanged()
     }
 
     if self.isInMiniPlayer {
@@ -1952,10 +1957,10 @@ class PlayerCore: NSObject {
         log("Skipping music mode auto-switch because overrideAutoSwitchToMusicMode is true", level: .verbose)
       } else if audioStatus == .isAudio && !isInMiniPlayer && !mainWindow.fsState.isFullscreen {
         log("Current media is audio: auto-switching to mini player")
-        switchToMiniPlayer(automatically: true)
+        switchToMiniPlayer(automatically: true, showMiniPlayer: false)
       } else if audioStatus == .notAudio && isInMiniPlayer {
         log("Current media is not audio: auto-switching to normal window")
-        switchBackFromMiniPlayer(automatically: true)
+        switchBackFromMiniPlayer(automatically: true, showMainWindow: false)
       }
     }
     postNotification(.iinaTracklistChanged)
@@ -1975,7 +1980,7 @@ class PlayerCore: NSObject {
       // video size changed
       info.displayWidth = dwidth
       info.displayHeight = dheight
-      notifyMainWindowVideoSizeChanged()
+      notifyWindowVideoSizeChanged()
     }
   }
 
@@ -2139,10 +2144,11 @@ class PlayerCore: NSObject {
     )
   }
 
-  func notifyMainWindowVideoSizeChanged() {
-    mainWindow.adjustFrameByVideoSize()
+  func notifyWindowVideoSizeChanged() {
     if isInMiniPlayer {
       miniPlayer.updateVideoSize()
+    } else {
+      mainWindow.adjustFrameByVideoSize()
     }
   }
 

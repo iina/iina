@@ -180,6 +180,9 @@ class MainWindowController: PlayerWindowController {
   var isShowingPersistentOSD = false
   var osdContext: Any?
 
+  /** This variable is true when the window should show but waiting for size from mpv */
+  var pendingShow = false
+
   // MARK: - Enums
 
   // Window state
@@ -650,7 +653,6 @@ class MainWindowController: PlayerWindowController {
 
     player.events.emit(.windowLoaded)
 
-    isClosing = false
     // Must workaround an AppKit defect in some versions of macOS. This defect is known to exist in
     // Catalina and Big Sur. The problem was not reproducible in early versions of Monterey. It
     // reappeared in Ventura. The status of other versions of macOS is unknown, however the
@@ -2567,7 +2569,8 @@ class MainWindowController: PlayerWindowController {
       if let screenFrame = window.screen?.frame {
         rect = rect.constrain(in: screenFrame)
       }
-      if !player.mainWindow.window!.isVisible && !player.isInMiniPlayer {
+      if pendingShow && !player.isInMiniPlayer {
+        pendingShow = false
         window.setFrame(rect, display: false, animate: false)
         showWindow(nil)
       } else if player.disableWindowAnimation || Preference.bool(for: .disableAnimations) {

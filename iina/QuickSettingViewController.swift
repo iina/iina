@@ -235,7 +235,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
     eqPopUpButton.menu!.delegate = self
     presetEQs.forEach { preset in
-      eqPopUpButton.menu?.addItem(withTitle: preset.name, tag: eqPresetProfileMenuItemTag, obj: preset)
+      eqPopUpButton.menu?.addItem(withTitle: preset.name, tag: eqPresetProfileMenuItemTag, obj: preset.localizationKey)
     }
     eqPopUpButton.selectItem(withTag: eqCustomMenuItemTag)
     lastUsedProfileName = eqPopUpButton.selectedItem!.title
@@ -1068,6 +1068,7 @@ extension QuickSettingViewController: NSMenuDelegate {
   @IBAction func eqPopUpButtonAction(_ sender: NSPopUpButton) {
     let tag = sender.selectedTag()
     let name = sender.titleOfSelectedItem
+    let representedObject = sender.selectedItem?.representedObject as? String
     switch tag {
     case eqSaveMenuItemTag:
       if let inputString = promptAudioEQProfileName(isNewProfile: true) {
@@ -1094,7 +1095,7 @@ extension QuickSettingViewController: NSMenuDelegate {
     case eqCustomMenuItemTag:
       lastUsedProfileName = sender.selectedItem!.title
     case eqPresetProfileMenuItemTag:
-      guard let preset = presetEQs.first(where: { $0.name == name }) else { break }
+      guard let preset = presetEQs.first(where: { $0.localizationKey == representedObject }) else { break }
       lastUsedProfileName = preset.name
       applyEQ(preset)
     default: // user defined EQ Profiles

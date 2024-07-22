@@ -1347,19 +1347,13 @@ class PlayerCore: NSObject {
   }
 
   func setAudioEq(fromGains gains: [Double]) {
-    let channelCount = mpv.getInt(MPVProperty.audioParamsChannelCount)
-    let freqList = [31.25, 62.5, 125, 250, 500, 1000, 2000, 4000, 8000, 16000]
-    let filters = freqList.enumerated().map { (index, freq) -> MPVFilter in
-      let string = [Int](0..<channelCount).map { "c\($0) f=\(freq) w=\(freq / 1.224744871) g=\(gains[index])" }.joined(separator: "|")
-      return MPVFilter(name: "lavfi", label: "\(Constants.FilterName.audioEq)\(index)", paramString: "[anequalizer=\(string)]")
-    }
-    filters.forEach { _ = addAudioFilter($0) }
-    info.audioEqFilters = filters
-  }
-
-  func removeAudioEqFilter() {
-    info.audioEqFilters?.compactMap { $0 }.forEach { _ = removeAudioFilter($0) }
-    info.audioEqFilters = nil
+    let freqList = [32, 64, 125, 250, 500, 1000, 2000, 4000, 8000, 16000]
+    let paramString = freqList.enumerated().map { (index, freq) in
+      "equalizer=f=\(freq):t=h:width=\(Double(freq) / 1.224744871):g=\(gains[index])"
+    }.joined(separator: ",")
+    let filter = MPVFilter(name: "lavfi", label: Constants.FilterName.audioEq, paramString: "[\(paramString)]")
+    addAudioFilter(filter)
+    info.audioEqFilter = filter
   }
 
   /// Add a video filter given as a `MPVFilter` object.
@@ -1489,11 +1483,13 @@ class PlayerCore: NSObject {
   /// Add an audio filter given as a `MPVFilter` object.
   /// - Parameter filter: The filter to add.
   /// - Returns: `true` if the filter was successfully added, `false` otherwise.
+  @discardableResult
   func addAudioFilter(_ filter: MPVFilter) -> Bool { addAudioFilter(filter.stringFormat) }
 
   /// Add an audio filter given as a string.
   /// - Parameter filter: The filter to add.
   /// - Returns: `true` if the filter was successfully added, `false` otherwise.
+  @discardableResult
   func addAudioFilter(_ filter: String) -> Bool {
     log("Adding audio filter \(filter)...")
     var result = true
@@ -1539,6 +1535,7 @@ class PlayerCore: NSObject {
   /// remove a filter.
   /// - Parameter filter: The filter to remove.
   /// - Returns: `true` if the filter was successfully removed, `false` otherwise.
+  @discardableResult
   func removeAudioFilter(_ filter: MPVFilter) -> Bool { removeAudioFilter(filter.stringFormat) }
 
   /// Remove an audio filter given as a string.
@@ -1550,6 +1547,7 @@ class PlayerCore: NSObject {
   /// methods that identify the filter to be removed based on its position in the filter list are the preferred way to remove a filter.
   /// - Parameter filter: The filter to remove.
   /// - Returns: `true` if the filter was successfully removed, `false` otherwise.
+  @discardableResult
   func removeAudioFilter(_ filter: String) -> Bool {
     log("Removing audio filter \(filter)...")
     var result = true
@@ -2509,12 +2507,7 @@ class PlayerCore: NSObject {
     for filter in audioFilters {
       guard let label = filter.label else { continue }
       if label.hasPrefix(Constants.FilterName.audioEq) {
-        if info.audioEqFilters == nil {
-          info.audioEqFilters = Array(repeating: nil, count: 10)
-        }
-        if let index = Int(String(label.last!)) {
-          info.audioEqFilters![index] = filter
-        }
+        info.audioEqFilter = filter
       }
     }
   }

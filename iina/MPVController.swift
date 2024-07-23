@@ -1122,7 +1122,7 @@ class MPVController: NSObject {
     case MPV_EVENT_END_FILE:
       let reason = event!.pointee.data.load(as: mpv_end_file_reason.self)
       DispatchQueue.main.async {
-        self.player.fileEnded(doToStopCommand: reason == MPV_END_FILE_REASON_STOP)
+        self.player.fileEnded(dueToStopCommand: reason == MPV_END_FILE_REASON_STOP)
       }
 
     case MPV_EVENT_COMMAND_REPLY:

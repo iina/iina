@@ -1809,11 +1809,11 @@ class PlayerCore: NSObject {
     syncUI(.playlist)
   }
 
-  func fileEnded(doToStopCommand: Bool) {
+  func fileEnded(dueToStopCommand: Bool) {
     // if receive end-file when loading file, might be error
     // wait for idle
     if info.state == .loading {
-      if !doToStopCommand {
+      if !dueToStopCommand {
         receivedEndFileWhileLoading = true
       }
     } else {

@@ -540,11 +540,7 @@ extension NSImage {
 
 extension NSVisualEffectView {
   func roundCorners(withRadius cornerRadius: CGFloat) {
-    if #available(macOS 10.14, *) {
-      maskImage = .maskImage(cornerRadius: cornerRadius)
-    } else {
-      layer?.cornerRadius = cornerRadius
-    }
+    maskImage = .maskImage(cornerRadius: cornerRadius)
   }
 }
 
@@ -582,7 +578,6 @@ extension NSUserInterfaceItemIdentifier {
 }
 
 extension NSAppearance {
-  @available(macOS 10.14, *)
   convenience init?(iinaTheme theme: Preference.Theme) {
     switch theme {
     case .dark:
@@ -595,11 +590,7 @@ extension NSAppearance {
   }
 
   var isDark: Bool {
-    if #available(macOS 10.14, *) {
-      return name == .darkAqua || name == .vibrantDark || name == .accessibilityHighContrastDarkAqua || name == .accessibilityHighContrastVibrantDark
-    } else {
-      return name == .vibrantDark
-    }
+    return name == .darkAqua || name == .vibrantDark || name == .accessibilityHighContrastDarkAqua || name == .accessibilityHighContrastVibrantDark
   }
 }
 
@@ -666,15 +657,8 @@ extension Process {
 
     let (stdout, stderr) = (Pipe(), Pipe())
     let process = Process()
-    if #available(macOS 10.13, *) {
-      process.executableURL = URL(fileURLWithPath: cmd[0])
-      process.currentDirectoryURL = currentDir
-    } else {
-      process.launchPath = cmd[0]
-      if let path = currentDir?.path {
-        process.currentDirectoryPath = path
-      }
-    }
+    process.executableURL = URL(fileURLWithPath: cmd[0])
+    process.currentDirectoryURL = currentDir
     process.arguments = [String](cmd.dropFirst())
     process.standardOutput = stdout
     process.standardError = stderr

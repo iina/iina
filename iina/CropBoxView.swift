@@ -9,20 +9,8 @@
 import Cocoa
 
 fileprivate extension NSColor {
-  static let cropBoxFill: NSColor = {
-    if #available(macOS 10.14, *) {
-      return NSColor(named: .cropBoxFill)!
-    } else {
-      return NSColor(calibratedWhite: 0.5, alpha: 0.3)
-    }
-  }()
-  static let cropBoxBorder: NSColor = {
-    if #available(macOS 10.14, *) {
-      return .controlAccentColor
-    } else {
-      return NSColor(calibratedRed: 0.4, green: 0.6, blue: 1, alpha: 1)
-    }
-  }()
+  static let cropBoxFill = NSColor(named: .cropBoxFill)!
+  static let cropBoxBorder = NSColor.controlAccentColor
 }
 
 class CropBoxView: NSView {

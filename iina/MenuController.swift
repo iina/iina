@@ -287,11 +287,7 @@ class MenuController: NSObject, NSMenuDelegate {
 
     // -- screen
     fullScreen.action = #selector(MainWindowController.menuToggleFullScreen(_:))
-    if #available(macOS 10.12, *) {
-      pictureInPicture.action = #selector(MainWindowController.menuTogglePIP(_:))
-    } else {
-      videoMenu.removeItem(pictureInPicture)
-    }
+    pictureInPicture.action = #selector(MainWindowController.menuTogglePIP(_:))
     alwaysOnTop.action = #selector(MainWindowController.menuAlwaysOnTop(_:))
 
     // -- aspect
@@ -418,11 +414,7 @@ class MenuController: NSObject, NSMenuDelegate {
 
     // Window
 
-    if #available(macOS 10.12.2, *) {
-      customTouchBar.action = #selector(NSApplication.toggleTouchBarCustomizationPalette(_:))
-    } else {
-      customTouchBar.isHidden = true
-    }
+    customTouchBar.action = #selector(NSApplication.toggleTouchBarCustomizationPalette(_:))
 
     inspector.action = #selector(MainMenuActionHandler.menuShowInspector(_:))
     miniPlayer.action = #selector(MainWindowController.menuSwitchToMiniPlayer(_:))
@@ -827,7 +819,7 @@ class MenuController: NSObject, NSMenuDelegate {
   }
 
   func updateKeyEquivalentsFrom(_ keyBindings: [KeyMapping]) {
-    var settings: [(NSMenuItem, Bool, [String], Bool, ClosedRange<Double>?, String?)] = [
+    let settings: [(NSMenuItem, Bool, [String], Bool, ClosedRange<Double>?, String?)] = [
       (showCurrentFileInFinder, true, [IINACommand.showCurrentFileInFinder.rawValue], false, nil, nil),
       (deleteCurrentFile, true, [IINACommand.deleteCurrentFile.rawValue], false, nil, nil),
       (savePlaylist, true, [IINACommand.saveCurrentPlaylist.rawValue], false, nil, nil),
@@ -844,6 +836,7 @@ class MenuController: NSObject, NSMenuDelegate {
       (smallerSize, true, [IINACommand.smallerWindow.rawValue], false, nil, nil),
       (fitToScreen, true, [IINACommand.fitToScreen.rawValue], false, nil, nil),
       (miniPlayer, true, [IINACommand.toggleMusicMode.rawValue], false, nil, nil),
+      (pictureInPicture, true, [IINACommand.togglePIP.rawValue], false, nil, nil),
       (cycleVideoTracks, false, ["cycle", "video"], false, nil, nil),
       (cycleAudioTracks, false, ["cycle", "audio"], false, nil, nil),
       (cycleSubtitles, false, ["cycle", "sub"], false, nil, nil),
@@ -891,12 +884,8 @@ class MenuController: NSObject, NSMenuDelegate {
       (decreaseTextSize, false, ["multiply", "sub-scale", "0.9"], true, 0.71...0.99, nil),
       (resetTextSize, false, ["set", "sub-scale", "1"], true, nil, nil),
       (alwaysOnTop, false, ["cycle", "ontop"], false, nil, nil),
-      (fullScreen, false, ["cycle", "fullscreen"], false, nil, nil)
+      (fullScreen, false, ["cycle", "fullscreen"], false, nil, nil),
     ]
-
-    if #available(macOS 10.12, *) {
-      settings.append((pictureInPicture, true, [IINACommand.togglePIP.rawValue], false, nil, nil))
-    }
 
     var otherActionsMenuItems: [NSMenuItem] = []
 

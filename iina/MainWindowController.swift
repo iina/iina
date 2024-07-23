@@ -485,13 +485,10 @@ class MainWindowController: PlayerWindowController {
 
   lazy var _pip: PIPViewController = {
     let pip = VideoPIPViewController()
-    if #available(macOS 10.12, *) {
-      pip.delegate = self
-    }
+    pip.delegate = self
     return pip
   }()
   
-  @available(macOS 10.12, *)
   var pip: PIPViewController {
     _pip
   }
@@ -586,9 +583,7 @@ class MainWindowController: PlayerWindowController {
 
     // other initialization
     osdAccessoryProgress.usesThreadedAnimation = false
-    if #available(macOS 10.14, *) {
-      titleBarBottomBorder.fillColor = NSColor(named: .titleBarBorder)!
-    }
+    titleBarBottomBorder.fillColor = NSColor(named: .titleBarBorder)!
     cachedScreenCount = NSScreen.screens.count
     [titleBarView, osdVisualEffectView, controlBarBottom, controlBarFloating, sideBarView, osdVisualEffectView, pipOverlayView].forEach {
       $0?.state = .active
@@ -683,9 +678,6 @@ class MainWindowController: PlayerWindowController {
 
   private func setupOSCToolbarButtons(_ buttons: [Preference.ToolBarButton]) {
     var buttons = buttons
-    if #available(macOS 10.12.2, *) {} else {
-      buttons = buttons.filter { $0 != .pip }
-    }
     fragToolbarView.views.forEach { fragToolbarView.removeView($0) }
     for buttonType in buttons {
       let button = NSButton()
@@ -998,9 +990,7 @@ class MainWindowController: PlayerWindowController {
     case .hideOSC:
       hideUIAndCursor()
     case .togglePIP:
-      if #available(macOS 10.12, *) {
-        menuTogglePIP(.dummy)
-      }
+      menuTogglePIP(.dummy)
     default:
       break
     }
@@ -1221,9 +1211,7 @@ class MainWindowController: PlayerWindowController {
     shouldApplyInitialWindowSize = true
     // Close PIP
     if pipStatus == .inPIP {
-      if #available(macOS 10.12, *) {
-        exitPIP()
-      }
+      exitPIP()
     }
     // stop playing
     if case .fullscreen(legacy: true, priorWindowedFrame: _) = fsState {
@@ -1281,14 +1269,7 @@ class MainWindowController: PlayerWindowController {
 
     // Set the appearance to match the theme so the titlebar matches the theme
     let iinaTheme = Preference.enum(for: .themeMaterial) as Preference.Theme
-    if #available(macOS 10.14, *) {
-      window?.appearance = NSAppearance(iinaTheme: iinaTheme)
-    } else {
-      switch(iinaTheme) {
-      case .dark, .ultraDark: window!.appearance = NSAppearance(named: .vibrantDark)
-      default: window!.appearance = NSAppearance(named: .vibrantLight)
-      }
-    }
+    window?.appearance = NSAppearance(iinaTheme: iinaTheme)
 
     // show titlebar
     if oscPosition == .top {
@@ -1347,15 +1328,12 @@ class MainWindowController: PlayerWindowController {
       }
     }
 
-    if #available(macOS 10.12.2, *) {
-      player.touchBarSupport.toggleTouchBarEsc(enteringFullScr: true)
-    }
+    player.touchBarSupport.toggleTouchBarEsc(enteringFullScr: true)
 
     updateWindowParametersForMPV()
 
     // Exit PIP if necessary
-    if pipStatus == .inPIP,
-      #available(macOS 10.12, *) {
+    if pipStatus == .inPIP {
       exitPIP()
     }
     
@@ -1424,9 +1402,7 @@ class MainWindowController: PlayerWindowController {
       videoView.displayIdle()
     }
 
-    if #available(macOS 10.12.2, *) {
-      player.touchBarSupport.toggleTouchBarEsc(enteringFullScr: false)
-    }
+    player.touchBarSupport.toggleTouchBarEsc(enteringFullScr: false)
 
     window!.addTitlebarAccessoryViewController(titlebarAccesoryViewController)
 
@@ -1746,9 +1722,7 @@ class MainWindowController: PlayerWindowController {
 
   func windowDidMiniaturize(_ notification: Notification) {
     if Preference.bool(for: .togglePipByMinimizingWindow) && !isWindowMiniaturizedDueToPip {
-      if #available(macOS 10.12, *) {
-        enterPIP()
-      }
+      enterPIP()
     }
     player.events.emit(.windowMiniaturized)
   }
@@ -1759,9 +1733,7 @@ class MainWindowController: PlayerWindowController {
       isPausedDueToMiniaturization = false
     }
     if Preference.bool(for: .togglePipByMinimizingWindow) && !isWindowMiniaturizedDueToPip {
-      if #available(macOS 10.12, *) {
-        exitPIP()
-      }
+      exitPIP()
     }
     player.events.emit(.windowDeminiaturized)
   }
@@ -1986,9 +1958,7 @@ class MainWindowController: PlayerWindowController {
         osdContext = context
       }
 
-      if #available(macOS 10.14, *) {} else {
-        accessoryView.appearance = NSAppearance(named: .vibrantDark)
-      }
+      accessoryView.appearance = NSAppearance(named: .vibrantDark)
       let heightConstraint = NSLayoutConstraint(item: accessoryView, attribute: .height, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 300)
       heightConstraint.priority = .defaultLow
       heightConstraint.isActive = true
@@ -2191,11 +2161,7 @@ class MainWindowController: PlayerWindowController {
     // prerequisites
     guard let window = window else { return }
 
-    if #available(macOS 10.14, *) {
-      window.backgroundColor = .windowBackgroundColor
-    } else {
-      window.backgroundColor = NSColor(calibratedWhite: 0.1, alpha: 1)
-    }
+    window.backgroundColor = .windowBackgroundColor
 
     let (ow, oh) = player.originalVideoSize
     guard ow != 0 && oh != 0 else {
@@ -2498,9 +2464,7 @@ class MainWindowController: PlayerWindowController {
     // set aspect ratio
     let originalVideoSize = NSSize(width: width, height: height)
     window.aspectRatio = originalVideoSize
-    if #available(macOS 10.12, *) {
-      pip.aspectRatio = originalVideoSize
-    }
+    pip.aspectRatio = originalVideoSize
 
     videoView.videoSize = window.convertToBacking(videoView.frame).size
 
@@ -2958,12 +2922,10 @@ class MainWindowController: PlayerWindowController {
     case .musicMode:
       player.switchToMiniPlayer()
     case .pip:
-      if #available(macOS 10.12, *) {
-        if pipStatus == .inPIP {
-          exitPIP()
-        } else if pipStatus == .notInPIP {
-          enterPIP()
-        }
+      if pipStatus == .inPIP {
+        exitPIP()
+      } else if pipStatus == .notInPIP {
+        enterPIP()
       }
     case .playlist:
       showPlaylistSidebar()
@@ -2991,7 +2953,6 @@ class MainWindowController: PlayerWindowController {
 
 // MARK: - Picture in Picture
 
-@available(macOS 10.12, *)
 extension MainWindowController: PIPViewControllerDelegate {
 
   func enterPIP() {

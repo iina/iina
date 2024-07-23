@@ -217,10 +217,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   internal func setMaterial(_ theme: Preference.Theme?) {
     guard let window = window, let theme = theme else { return }
 
-    if #available(macOS 10.14, *) {
-      window.appearance = NSAppearance(iinaTheme: theme)
-    }
-    // See overridden functions for 10.14-
+    window.appearance = NSAppearance(iinaTheme: theme)
   }
 
   // MARK: - Mouse / Trackpad events
@@ -526,7 +523,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
 
   func windowDidBecomeMain(_ notification: Notification) {
     PlayerCore.lastActive = player
-    if #available(macOS 10.13, *), RemoteCommandController.useSystemMediaControl {
+    if RemoteCommandController.useSystemMediaControl {
       NowPlayingInfoManager.updateInfo(withTitle: true)
     }
     AppDelegate.shared.menuController?.updatePluginMenu()
@@ -591,15 +588,11 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       return
     }
     [leftLabel, rightLabel].forEach { $0.updateText(with: duration, given: pos) }
-    if #available(macOS 10.12.2, *) {
-      player.touchBarSupport.touchBarPosLabels.forEach { $0.updateText(with: duration, given: pos) }
-    }
+    player.touchBarSupport.touchBarPosLabels.forEach { $0.updateText(with: duration, given: pos) }
     if andProgressBar {
       let percentage = (pos.second / duration.second) * 100
       playSlider.doubleValue = percentage
-      if #available(macOS 10.12.2, *) {
-        player.touchBarSupport.touchBarPlaySlider?.setDoubleValueSafely(percentage)
-      }
+      player.touchBarSupport.touchBarPlaySlider?.setDoubleValueSafely(percentage)
     }
   }
   

@@ -53,7 +53,7 @@ class PlaySliderCell: NSSliderCell {
                           knobHeight)
     let isLightTheme = !controlView!.window!.effectiveAppearance.isDark
 
-    if #available(macOS 10.14, *), isLightTheme {
+    if isLightTheme {
       NSGraphicsContext.saveGraphicsState()
       let shadow = NSShadow()
       shadow.shadowBlurRadius = 1
@@ -66,7 +66,7 @@ class PlaySliderCell: NSSliderCell {
     (isHighlighted ? knobActiveColor : knobColor).setFill()
     path.fill()
 
-    if #available(macOS 10.14, *), isLightTheme {
+    if isLightTheme {
       path.lineWidth = 0.4
       NSColor.controlShadowColor.setStroke()
       path.stroke()
@@ -126,9 +126,7 @@ class PlaySliderCell: NSSliderCell {
     let pathLeftRect : NSRect = NSMakeRect(barRect.origin.x, barRect.origin.y, progress, barRect.height)
     NSBezierPath(rect: pathLeftRect).addClip();
 
-    if #available(macOS 10.14, *), !controlView!.window!.effectiveAppearance.isDark {
-      // Draw knob shadow in 10.14+ light theme
-    } else {
+    if controlView!.window!.effectiveAppearance.isDark {
       // Clip 1px around the knob
       path.append(NSBezierPath(rect: NSRect(x: knobPos - 1, y: barRect.origin.y, width: knobWidth + 2, height: barRect.height)).reversed);
     }

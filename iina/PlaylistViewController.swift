@@ -110,9 +110,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     hideTotalLength()
 
     // colors
-    if #available(macOS 10.14, *) {
-      withAllTableViews { $0.backgroundColor = NSColor(named: .sidebarTableBackground)! }
-    }
+    withAllTableViews { $0.backgroundColor = NSColor(named: .sidebarTableBackground)! }
 
     // handle pending switch tab request
     if pendingSwitchRequest != nil {
@@ -250,11 +248,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   }
 
   private func updateTabActiveStatus(for btn: NSButton, isActive: Bool) {
-    if #available(macOS 10.14, *) {
-      btn.contentTintColor = isActive ? NSColor.sidebarTabTintActive : NSColor.sidebarTabTint
-    } else {
-      Utility.setBoldTitle(for: btn, isActive)
-    }
+    btn.contentTintColor = isActive ? NSColor.sidebarTabTintActive : NSColor.sidebarTabTint
   }
 
   // MARK: - NSTableViewDataSource

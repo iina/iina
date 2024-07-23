@@ -21,19 +21,22 @@ class ViewLayer: CAOpenGLLayer {
   private let cglPixelFormat: CGLPixelFormatObj
 
   /// Lock to single thread calls to `display`.
-  ///
-  /// A recursive lock is needed because the call to `CATransaction.flush()` in `display` calls `display_if_needed`
-  /// which will then call `display` if layout is needed. See the discussion in PR #5029.
-  private let displayLock = NSRecursiveLock()
+  private let displayLock: NSLocking
 
   private var fbo: GLint = 1
 
   private var needsMPVRender = false
   private var forceRender = false
 
+  /// Returns an initialized `ViewLayer` object.
+  ///
+  /// For the display lock a recursive lock is needed because the call to `CATransaction.flush()` in `display` calls
+  /// `display_if_needed` which will then call `display` if layout is needed. See the discussion in PR
+  /// [#5029](https://github.com/iina/iina/pull/5029).
   override init() {
     cglPixelFormat = ViewLayer.createPixelFormat()
     cglContext = ViewLayer.createContext(cglPixelFormat)
+    displayLock = NSRecursiveLock()
     super.init()
 
     isOpaque = true
@@ -42,11 +45,22 @@ class ViewLayer: CAOpenGLLayer {
     autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
   }
 
-  override convenience init(layer: Any) {
-    self.init()
-
+  /// Returns an initialized shadow copy of the given layer with custom instance variables copied from `layer`.
+  ///
+  /// This initializer will be used when `MainWindowController.windowDidChangeBackingProperties` changes
+  /// [contentsScale](https://developer.apple.com/documentation/quartzcore/calayer/1410746-contentsscale).
+  /// To trigger this start IINA playing on an external monitor with a different scale factor with a MacBook in closed clamshell mode then
+  /// unplug the external monitor.
+  /// - Parameter layer: The layer from which custom fields should be copied.
+  override init(layer: Any) {
     let previousLayer = layer as! ViewLayer
-
+    cglPixelFormat = previousLayer.cglPixelFormat
+    cglContext = previousLayer.cglContext
+    displayLock = previousLayer.displayLock
+    super.init(layer: layer)
+    isOpaque = previousLayer.isOpaque
+    isAsynchronous = previousLayer.isAsynchronous
+    autoresizingMask = previousLayer.autoresizingMask
     videoView = previousLayer.videoView
   }
 

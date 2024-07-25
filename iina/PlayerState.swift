@@ -35,12 +35,6 @@ enum PlayerState: Int {
   /// for the `pause` property was received with a value of `true`.
   case paused
 
-  /// Player is seeking.
-  ///
-  /// A [MPV_EVENT_SEEK](https://mpv.io/manual/stable/#command-interface-mpv-event-seek) was recieived
-  /// indicating seeking is in progress.
-  case seeking
-
   /// The asynchronous `stop` command has been sent to mpv.
   case stopping
 

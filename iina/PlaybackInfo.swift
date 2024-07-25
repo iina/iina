@@ -81,6 +81,8 @@ class PlaybackInfo {
     }
   }
 
+  var isSeeking: Bool = false
+
   var currentURL: URL? {
     didSet {
       if let url = currentURL {

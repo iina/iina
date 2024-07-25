@@ -1088,7 +1088,7 @@ class MPVController: NSObject {
 
     case MPV_EVENT_SEEK:
       DispatchQueue.main.async { [self] in
-        player.info.state = .seeking
+        player.info.isSeeking = true
         // When playback is paused the display link may be shutdown in order to not waste energy.
         // It must be running when seeking to avoid slowdowns caused by mpv waiting for IINA to call
         // mpv_render_report_swap.
@@ -1105,6 +1105,7 @@ class MPVController: NSObject {
 
     case MPV_EVENT_PLAYBACK_RESTART:
       DispatchQueue.main.async { [self] in
+        player.info.isSeeking = false
         // When playback is paused the display link may be shutdown in order to not waste energy.
         // The display link will be restarted while seeking. If playback is paused shut it down
         // again.

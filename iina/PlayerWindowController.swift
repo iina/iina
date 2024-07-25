@@ -78,7 +78,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       }
     case PK.alwaysFloatOnTop.rawValue:
       if let newValue = change[.newKey] as? Bool {
-        if player.info.isPlaying {
+        if player.info.state == .playing {
           setWindowFloatingOnTop(newValue)
         }
       }
@@ -451,7 +451,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
 
     if scrollAction == .seek && isTrackpadBegan {
       // record pause status
-      if player.info.isPlaying {
+      if player.info.state == .playing {
         player.pause()
         wasPlayingBeforeSeeking = true
       }
@@ -579,7 +579,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     // IINA listens for changes to mpv properties such as chapter that can occur during file loading
     // resulting in this function being called before mpv has set its position and duration
     // properties. Confirm the window and file have been loaded.
-    guard loaded, player.mpv.fileLoaded else { return }
+    guard loaded, player.info.state.loaded else { return }
     // The mpv documentation for the duration property indicates mpv is not always able to determine
     // the video duration in which case the property is not available.
     guard let duration = player.info.videoDuration else {
@@ -628,7 +628,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   @IBAction func playButtonAction(_ sender: NSButton) {
-    player.info.isPaused ? player.resume() : player.pause()
+    player.info.state == .paused ? player.resume() : player.pause()
   }
 
   @IBAction func muteButtonAction(_ sender: NSButton) {
@@ -636,7 +636,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   @IBAction func playSliderChanges(_ sender: NSSlider) {
-    guard !player.info.fileLoading else { return }
+    guard player.info.state.active else { return }
     let percentage = 100 * sender.doubleValue / sender.maxValue
     player.seek(percent: percentage, forceExact: !followGlobalSeekTypeWhenAdjustSlider)
   }

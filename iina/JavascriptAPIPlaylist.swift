@@ -25,7 +25,7 @@ class JavascriptAPIPlaylist: JavascriptAPI, JavascriptAPIPlaylistExportable {
   var menuItemBuilder: JSManagedValue?
 
   private func isPlaying() -> Bool {
-    if player!.info.isIdle {
+    if player!.info.state == .idle {
       log("Playlist API is only available when playing files.", level: .error)
       return false
     }

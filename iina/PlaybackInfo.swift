@@ -34,12 +34,54 @@ class PlaybackInfo {
     player = pc
   }
 
-  var isIdle: Bool = true {
+  // TODO: - Change log level of state changed message to be .verbose once state is confirmed working.
+
+  /// The state the `PlayerCore` is in.
+  /// - Note: A computed property is used to prevent inappropriate state changes. When IINA terminates players that are actively
+  ///     playing will first be stopped and then shutdown. Once a player has stopped the mpv core will go idle. This happens
+  ///     asynchronously and could occur after the quit command has been sent to mpv. Thus we must be sure the state does not
+  ///     transition from `.shuttingDown` to `.idle`.
+  var state: PlayerState = .idle {
     didSet {
-      PlayerCore.checkStatusForSleep()
+      guard state != oldValue else { return }
+      // Once the player is in the shuttingDown state it can only move to the shutDown state. Once
+      // in the shutDown state the state can't change.
+      guard oldValue != .loading || state != .idle,
+            oldValue != .shuttingDown || state == .shutDown, oldValue != .shutDown else {
+        player.log("Blocked attempt to change state from \(oldValue) to \(state)")
+        state = oldValue
+        return
+      }
+      player.log("State changed from \(oldValue) to \(state)")
+      switch state {
+      case .idle:
+        PlayerCore.checkStatusForSleep()
+      case .playing:
+        PlayerCore.checkStatusForSleep()
+        if player == PlayerCore.lastActive {
+          if RemoteCommandController.useSystemMediaControl {
+            NowPlayingInfoManager.updateInfo(state: .playing)
+          }
+          if player.mainWindow.pipStatus == .inPIP {
+            player.mainWindow.pip.playing = true
+          }
+        }
+      case .paused:
+        PlayerCore.checkStatusForSleep()
+        if player == PlayerCore.lastActive {
+          if RemoteCommandController.useSystemMediaControl {
+            NowPlayingInfoManager.updateInfo(state: .paused)
+          }
+          if player.mainWindow.pipStatus == .inPIP {
+            player.mainWindow.pip.playing = false
+          }
+        }
+      default: return
+      }
     }
   }
-  var fileLoading: Bool = false
+
+  var isSeeking: Bool = false
 
   var currentURL: URL? {
     didSet {
@@ -82,30 +124,6 @@ class PlaybackInfo {
     }
     let allVideoTracksAreAlbumCover = !videoTracks.contains { !$0.isAlbumart }
     return (noVideoTrack || allVideoTracksAreAlbumCover) ? .isAudio : .notAudio
-  }
-
-  var isSeeking: Bool = false
-
-  var isPaused: Bool = false {
-    didSet {
-      PlayerCore.checkStatusForSleep()
-      if player == PlayerCore.lastActive {
-        if #available(macOS 10.13, *), RemoteCommandController.useSystemMediaControl {
-          NowPlayingInfoManager.updateInfo(state: isPaused ? .paused : .playing)
-        }
-        if #available(macOS 10.12, *), player.mainWindow.pipStatus == .inPIP {
-          player.mainWindow.pip.playing = isPlaying
-        }
-      }
-    }
-  }
-  var isPlaying: Bool {
-    get {
-      return !isPaused
-    }
-    set {
-      isPaused = !newValue
-    }
   }
 
   var justStartedFile: Bool = false

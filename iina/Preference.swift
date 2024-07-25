@@ -104,7 +104,7 @@ struct Preference {
     // UI
 
     /// If `false`, never show OSC. If `true`, see `enableControlBarAutoHide`. (bool)
-    static let enableOSC = Key("enableOSC")
+    static let enableTitleBarAndOSC = Key("enableTitleBarAndOSC")
 
     /// Whether auto hiding OSC is enabled. (bool)
     static let enableControlBarAutoHide = Key("enableControlBarAutoHide")
@@ -772,7 +772,7 @@ struct Preference {
     .recordPlaybackHistory: true,
     .recordRecentFiles: true,
     .trackAllFilesInRecentOpenMenu: true,
-    .enableOSC: true,
+    .enableTitleBarAndOSC: true,
     .enableControlBarAutoHide: true,
     .controlBarAutoHideTimeout: Float(2.5),
     .oscPosition: OSCPosition.floating.rawValue,

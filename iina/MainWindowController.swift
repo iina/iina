@@ -312,14 +312,14 @@ class MainWindowController: PlayerWindowController {
   private var oscIsInitialized = false
 
   // Cached user default values
-  private lazy var enableOSC: Bool = Preference.bool(for: .enableOSC)
+  private lazy var enableTitleBarAndOSC: Bool = Preference.bool(for: .enableTitleBarAndOSC)
   private lazy var oscPosition: Preference.OSCPosition = Preference.enum(for: .oscPosition)
   private lazy var arrowBtnFunction: Preference.ArrowButtonAction = Preference.enum(for: .arrowButtonAction)
   private lazy var pinchAction: Preference.PinchAction = Preference.enum(for: .pinchAction)
   lazy var displayTimeAndBatteryInFullScreen: Bool = Preference.bool(for: .displayTimeAndBatteryInFullScreen)
 
   private let localObservedPrefKeys: [Preference.Key] = [
-    .enableOSC,
+    .enableTitleBarAndOSC,
     .oscPosition,
     .showChapterPos,
     .arrowButtonAction,
@@ -336,7 +336,7 @@ class MainWindowController: PlayerWindowController {
     super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
 
     switch keyPath {
-    case PK.enableOSC.rawValue:
+    case PK.enableTitleBarAndOSC.rawValue:
       setupOnScreenController(withPosition: oscPosition)
     case PK.oscPosition.rawValue:
       if let newValue = change[.newKey] as? Int {
@@ -522,7 +522,6 @@ class MainWindowController: PlayerWindowController {
     titlebarAccesoryViewController = NSTitlebarAccessoryViewController()
     titlebarAccesoryViewController.view = titlebarAccessoryView
     titlebarAccesoryViewController.layoutAttribute = .right
-    window.addTitlebarAccessoryViewController(titlebarAccesoryViewController)
     updateOnTopIcon()
 
     // size
@@ -547,11 +546,6 @@ class MainWindowController: PlayerWindowController {
     setupOSCToolbarButtons(buttons)
 
     updateArrowButtonImage()
-
-    // fade-able views
-    fadeableViews.append(contentsOf: standardWindowButtons as [NSView])
-    fadeableViews.append(titleBarView)
-    fadeableViews.append(titlebarAccessoryView)
 
     // video view
     guard let cv = window.contentView else { return }
@@ -700,21 +694,20 @@ class MainWindowController: PlayerWindowController {
   }
 
   private func setupOnScreenController(withPosition newPosition: Preference.OSCPosition) {
-    let isOSCEnabled = Preference.bool(for: .enableOSC)
-    guard !oscIsInitialized || oscPosition != newPosition || enableOSC != isOSCEnabled else { return }
+    let enableTitleBarAndOSC = Preference.bool(for: .enableTitleBarAndOSC)
+    guard !oscIsInitialized || oscPosition != newPosition || self.enableTitleBarAndOSC != enableTitleBarAndOSC else { return }
     oscIsInitialized = true
-    enableOSC = isOSCEnabled
+    self.enableTitleBarAndOSC = enableTitleBarAndOSC
 
     let isSwitchingToTop = newPosition == .top
     let isSwitchingFromTop = oscPosition == .top
     let isFloating = newPosition == .floating
 
-    if let cb = currentControlBar {
-      // remove current osc view from fadeable views
-      fadeableViews = fadeableViews.filter { $0 != cb }
-    }
-
     // reset
+    /// *Must* clear all `fadeableViews`. The `documentIconButton` can change identity over time, so trying to add/remove by it reference
+    /// will not always work. It should be fine to rebuild the list from scratch here because `setupOnScreenController` is only called in 
+    /// response to a configuration change.
+    fadeableViews.removeAll()
     ([controlBarFloating, controlBarBottom, oscTopMainView] as [NSView]).forEach { $0.isHidden = true }
     titleBarHeightConstraint.constant = TitleBarHeightNormal
 
@@ -732,31 +725,43 @@ class MainWindowController: PlayerWindowController {
 
     let isInFullScreen = fsState.isFullscreen
 
-    if isOSCEnabled && isSwitchingToTop {
-      if isInFullScreen {
-        addBackTitlebarViewToFadeableViews()
-        oscTopMainViewTopConstraint.constant = OSCTopMainViewMarginTopInFullScreen
-        titleBarHeightConstraint.constant = TitleBarHeightWithOSCInFullScreen
-      } else {
-        oscTopMainViewTopConstraint.constant = OSCTopMainViewMarginTop
-        titleBarHeightConstraint.constant = TitleBarHeightWithOSC
-      }
-      // Remove this if it's acceptable in 10.13-
-      // titleBarBottomBorder.isHidden = true
-    } else {
-      // titleBarBottomBorder.isHidden = false
-    }
+    // Title Bar
 
-    if isSwitchingFromTop {
-      if isInFullScreen {
-        titleBarView.isHidden = true
-        removeTitlebarViewFromFadeableViews()
+    if enableTitleBarAndOSC {
+      addBackStandardButtonsToFadeableViews()
+      addBackTitlebarViewToFadeableViews()
+      fadeableViews.append(titlebarAccessoryView)
+
+      let hasTitleBarAccessoryViews = !window!.titlebarAccessoryViewControllers.isEmpty
+      if !hasTitleBarAccessoryViews {
+        window!.addTitlebarAccessoryViewController(titlebarAccesoryViewController)
       }
+
+      if isSwitchingToTop {
+        if isInFullScreen {
+          oscTopMainViewTopConstraint.constant = OSCTopMainViewMarginTopInFullScreen
+          titleBarHeightConstraint.constant = TitleBarHeightWithOSCInFullScreen
+        } else {
+          oscTopMainViewTopConstraint.constant = OSCTopMainViewMarginTop
+          titleBarHeightConstraint.constant = TitleBarHeightWithOSC
+        }
+      } else if isSwitchingFromTop {
+        if isInFullScreen {
+          titleBarView.isHidden = true
+        }
+      }
+    } else {
+      // No title bar.
+      hideTitleBar()
     }
+    // May need to update documnet icon
+    updateTitle()
+
+    // OSC
 
     oscPosition = newPosition
 
-    if isOSCEnabled {
+    if enableTitleBarAndOSC {
       // add fragment views
       switch oscPosition {
       case .floating:
@@ -1301,7 +1306,7 @@ class MainWindowController: PlayerWindowController {
     }
 
     // show titlebar
-    if enableOSC && oscPosition == .top {
+    if enableTitleBarAndOSC && oscPosition == .top {
       oscTopMainViewTopConstraint.constant = OSCTopMainViewMarginTopInFullScreen
       titleBarHeightConstraint.constant = TitleBarHeightWithOSCInFullScreen
     } else {
@@ -1309,10 +1314,12 @@ class MainWindowController: PlayerWindowController {
       removeTitlebarViewFromFadeableViews()
       titleBarView.isHidden = true
     }
-    standardWindowButtons.forEach { $0.alphaValue = 0 }
+    standardWindowButtons.forEach { $0.alphaValue = 1e-100 }
     titleTextField?.alphaValue = 0
     
-    window!.removeTitlebarAccessoryViewController(at: 0)
+    if !window!.titlebarAccessoryViewControllers.isEmpty {
+      window!.removeTitlebarAccessoryViewController(at: 0)
+    }
     setWindowFloatingOnTop(false, updateOnTopStatus: false)
 
     thumbnailPeekView.isHidden = true
@@ -1382,9 +1389,14 @@ class MainWindowController: PlayerWindowController {
     }
 
     // show titleBarView
-    if enableOSC && oscPosition == .top {
-      oscTopMainViewTopConstraint.constant = OSCTopMainViewMarginTop
-      titleBarHeightConstraint.constant = TitleBarHeightWithOSC
+    if enableTitleBarAndOSC {
+      if oscPosition == .top {
+        oscTopMainViewTopConstraint.constant = OSCTopMainViewMarginTop
+        titleBarHeightConstraint.constant = TitleBarHeightWithOSC
+      }
+    } else {
+      standardWindowButtons.forEach { $0.alphaValue = 1e-100 }
+      titleTextField?.alphaValue = 0
     }
 
     thumbnailPeekView.isHidden = true
@@ -1416,11 +1428,19 @@ class MainWindowController: PlayerWindowController {
       // window. Restore it now.
       window!.setFrame(fsState.priorWindowedFrame!, display: true, animate: false)
     }
-    if oscPosition != .top {
-      addBackTitlebarViewToFadeableViews()
+    if enableTitleBarAndOSC {
+      if oscPosition != .top {
+        addBackTitlebarViewToFadeableViews()
+      }
+      addBackStandardButtonsToFadeableViews()
+      titleBarView.isHidden = false
+      let hasTitleBarAccessoryViews = !window!.titlebarAccessoryViewControllers.isEmpty
+      if !hasTitleBarAccessoryViews {
+        window!.addTitlebarAccessoryViewController(titlebarAccesoryViewController)
+      }
+    } else {
+      hideTitleBar()
     }
-    addBackStandardButtonsToFadeableViews()
-    titleBarView.isHidden = false
     fsState.finishAnimating()
 
     if Preference.bool(for: .blackOutMonitor) {
@@ -1437,8 +1457,6 @@ class MainWindowController: PlayerWindowController {
     if #available(macOS 10.12.2, *) {
       player.touchBarSupport.toggleTouchBarEsc(enteringFullScr: false)
     }
-
-    window!.addTitlebarAccessoryViewController(titlebarAccesoryViewController)
 
     // Must not access mpv while it is asynchronously processing stop and quit commands.
     // See comments in windowWillExitFullScreen for details.
@@ -1811,10 +1829,15 @@ class MainWindowController: PlayerWindowController {
       if self.animationState == .willHide {
         self.fadeableViews.forEach { (v) in
           if let btn = v as? NSButton, self.standardWindowButtons.contains(btn) {
+            /// It is important to never set the `alphaValue` of the traffic light buttons to exactly `0`.
+            /// It can cause their corresponding menu items to be disabled. (Oddly this does not happen when setting `isHidden=true`).
+            /// We still want to set an alpha value as close to zero as possible to produce a fade-out animation.
             v.alphaValue = 1e-100
-          } else {
+            /// Older versions of MacOS [which...?] did not support changing `isHidden` for some of these buttons.
+            /// But doing so is preferred. Setting the alpha value to near-zero will not prevent it from activating when clicked.
             v.isHidden = true
           }
+          v.isHidden = true
         }
         self.animationState = .hidden
       }
@@ -1836,7 +1859,7 @@ class MainWindowController: PlayerWindowController {
       fadeableViews.forEach { (v) in
         v.animator().alphaValue = 1
       }
-      if !fsState.isFullscreen {
+      if !fsState.isFullscreen && enableTitleBarAndOSC {
         titleTextField?.animator().alphaValue = 1
       }
     }) {
@@ -1844,6 +1867,23 @@ class MainWindowController: PlayerWindowController {
       if self.animationState == .willShow {
         self.animationState = .shown
       }
+    }
+  }
+
+  private func hideTitleBar() {
+    titleBarView.isHidden = true
+    removeStandardButtonsFromFadeableViews()
+    removeTitlebarViewFromFadeableViews()
+    titleBarHeightConstraint.constant = TitleBarHeightNormal
+
+    for btn in standardWindowButtons {
+      btn.isHidden = true
+    }
+    titleTextField?.alphaValue = 0
+
+    let hasTitleBarAccessoryViews = !window!.titlebarAccessoryViewControllers.isEmpty
+    if hasTitleBarAccessoryViews {
+      window!.removeTitlebarAccessoryViewController(at: 0)
     }
   }
 
@@ -1900,7 +1940,12 @@ class MainWindowController: PlayerWindowController {
         window?.setTitleWithRepresentedFilename(player.info.currentURL?.path ?? "")
       }
     }
-    addDocIconToFadeableViews()
+    if enableTitleBarAndOSC {
+      addDocIconToFadeableViews()
+    } else if let docIcon = window?.standardWindowButton(.documentIconButton) {
+      // Hide the recently created document icon
+      docIcon.isHidden = true
+    }
   }
 
   func updateOnTopIcon() {

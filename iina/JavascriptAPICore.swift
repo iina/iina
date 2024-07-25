@@ -307,9 +307,9 @@ fileprivate class StatusAPI: JavascriptAPI, CoreSubAPIExportable {
   func __proxyGet(_ prop: String) -> Any? {
     switch prop {
     case "paused":
-      return !player!.info.isPlaying
+      return player!.info.state == .paused
     case "idle":
-      return player!.info.isIdle
+      return player!.info.state == .idle
     case "position":
       return player!.info.videoPosition?.second ?? NSNull()
     case "duration":

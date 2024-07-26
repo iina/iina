@@ -496,9 +496,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     // arbitrary timeout that forces termination to complete. The expectation is that this timeout
     // is never triggered. If a timeout warning is logged during termination then that needs to be
     // investigated.
-    let timer = Timer(timeInterval: terminationTimeout, repeats: false) { _ in
-      self.timedOut = true
-      if !self.allPlayersHaveShutdown {
+    let timer = Timer(timeInterval: terminationTimeout, repeats: false) { [unowned self] _ in
+      timedOut = true
+      if !allPlayersHaveShutdown {
         Logger.log("Timed out waiting for players to stop and shutdown", level: .warning)
         // For debugging list players that have not terminated.
         for player in PlayerCore.playerCores {

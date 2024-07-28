@@ -653,10 +653,10 @@ class PlayerCore: NSObject {
     miniPlayer.window?.orderOut(nil)
     isInMiniPlayer = false
 
+    mainWindow.pendingShow = true
     if showMainWindow {
       currentController.setupUI()
       mainWindow.updateTitle()
-      mainWindow.pendingShow = true
       mainWindow.videoView.videoLayer.draw(forced: true)
       notifyWindowVideoSizeChanged()
     }

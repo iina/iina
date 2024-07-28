@@ -472,9 +472,9 @@ extension MainMenuActionHandler {
     default:
       break
     }
-    return menuItem.isEnabled
+    return true
   }
-  
+
   // MARK: - Plugin
 
   @objc func reloadAllPlugins(_ sender: NSMenuItem) {

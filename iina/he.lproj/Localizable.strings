@@ -16,6 +16,9 @@
 "general.username" = "שם משתמש";
 "general.password" = "סיסמה";
 
+"input.value_is_empty" = "Value cannot be empty.";
+"input.already_exists" = "Value already exists.";
+
 // Guide Window
 "guide.highlights" = "נקודות עיקריות";
 "guide.basic_settings" = "הגדרות בסיסיות";
@@ -47,6 +50,35 @@
 "quicksetting.deinterlace" = "ביטול שזירה";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "הסתר";
+
+// EQ Presets
+"eq.preset.flat" = "Flat";
+"eq.preset.acoustic" = "אקוסטי";
+"eq.preset.classical" = "קלאסי";
+"eq.preset.dance" = "ריקוד";
+"eq.preset.deep" = "עמוק";
+"eq.preset.electronic" = "אלקטרוני";
+"eq.preset.hip_hop" = "היפ הופ";
+"eq.preset.increase_bass" = "Increase Bass";
+"eq.preset.increase_treble" = "Increase Treble";
+"eq.preset.increase_vocal" = "Increase Vocal";
+"eq.preset.jazz" = "Jazz";
+"eq.preset.latin" = "Latin";
+"eq.preset.loundness" = "Loundness";
+"eq.preset.lounge" = "Lounge";
+"eq.preset.piano" = "Piano";
+"eq.preset.pop" = "Pop";
+"eq.preset.rnb" = "R&B";
+"eq.preset.reduce_bass" = "Reduce Bass";
+"eq.preset.reduce_treble" = "Reduce Treble";
+"eq.preset.rock" = "Rock";
+"eq.preset.small_speaker" = "Small Speaker";
+"eq.preset.spoken_word" = "Spoken Word";
+
+"alert.eq.new_profile.title" = "New EQ Profile";
+"alert.eq.new_profile.message" = "Please enter a profile name.";
+"alert.eq.rename.title" = "Rename Currnet Profile";
+"alert.eq.rename.message" = "Please enter a new profile name.";
 
 // OSDMessage.swift
 "osd.pause" = "מושהה";

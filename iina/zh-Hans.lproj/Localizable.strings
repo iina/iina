@@ -16,6 +16,9 @@
 "general.username" = "用户名";
 "general.password" = "口令";
 
+"input.value_is_empty" = "数值不能为空";
+"input.already_exists" = "值已经存在。";
+
 // Guide Window
 "guide.highlights" = "更新亮点";
 "guide.basic_settings" = "基本设置";
@@ -47,6 +50,35 @@
 "quicksetting.deinterlace" = "反交错";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "隐藏";
+
+// EQ Presets
+"eq.preset.flat" = "平坦";
+"eq.preset.acoustic" = "原声";
+"eq.preset.classical" = "古典";
+"eq.preset.dance" = "Dance";
+"eq.preset.deep" = "Deep";
+"eq.preset.electronic" = "Electronic";
+"eq.preset.hip_hop" = "Hip Hop";
+"eq.preset.increase_bass" = "Increase Bass";
+"eq.preset.increase_treble" = "Increase Treble";
+"eq.preset.increase_vocal" = "Increase Vocal";
+"eq.preset.jazz" = "Jazz";
+"eq.preset.latin" = "Latin";
+"eq.preset.loundness" = "Loundness";
+"eq.preset.lounge" = "Lounge";
+"eq.preset.piano" = "Piano";
+"eq.preset.pop" = "Pop";
+"eq.preset.rnb" = "R&B";
+"eq.preset.reduce_bass" = "Reduce Bass";
+"eq.preset.reduce_treble" = "Reduce Treble";
+"eq.preset.rock" = "Rock";
+"eq.preset.small_speaker" = "Small Speaker";
+"eq.preset.spoken_word" = "Spoken Word";
+
+"alert.eq.new_profile.title" = "New EQ Profile";
+"alert.eq.new_profile.message" = "Please enter a profile name.";
+"alert.eq.rename.title" = "Rename Currnet Profile";
+"alert.eq.rename.message" = "Please enter a new profile name.";
 
 // OSDMessage.swift
 "osd.pause" = "暂停";

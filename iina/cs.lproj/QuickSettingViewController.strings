@@ -49,9 +49,6 @@
 /* Class = "NSTextFieldCell"; title = "BORDER"; ObjectID = "GlZ-YU-dNm"; */
 "GlZ-YU-dNm.title" = "OKRAJ";
 
-/* Class = "NSTextFieldCell"; title = "31.25"; ObjectID = "HBF-J7-Tie"; */
-"HBF-J7-Tie.title" = "31,25";
-
 /* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "IYU-eq-dls"; */
 "YCG-xK-eAs.title" = "−5 s";
 
@@ -216,3 +213,15 @@
 
 /* Class = "NSTextFieldCell"; title = "HDR"; ObjectID = "UW4-by-XRS"; */
 "UW4-by-XRS.title" = "HDR";
+
+/* Class = "NSMenuItem"; title = "Save the current EQ as a preset…"; ObjectID = "sE0-LN-T8i"; */
+"sE0-LN-T8i.title" = "Save the current EQ as a preset…";
+
+/* Class = "NSMenuItem"; title = "Rename the current EQ preset…"; ObjectID = "2tD-0L-UUs"; */
+"2tD-0L-UUs.title" = "Rename the current EQ preset…";
+
+/* Class = "NSMenuItem"; title = "Remove the current EQ preset"; ObjectID = "dvI-Rj-7qF"; */
+"dvI-Rj-7qF.title" = "Remove the current EQ preset";
+
+/* Class = "NSMenuItem"; title = "Manual"; ObjectID = "LPh-nJ-GjN"; */
+"LPh-nJ-GjN.title" = "Manual";

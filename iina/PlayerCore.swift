@@ -1982,7 +1982,7 @@ class PlayerCore: NSObject {
 
   func onVideoReconfig() {
     // If loading file, video reconfig can return 0 width and height
-    guard info.state != .loading, info.state.active else { return }
+    guard info.state.loaded else { return }
     var dwidth = mpv.getInt(MPVProperty.dwidth)
     var dheight = mpv.getInt(MPVProperty.dheight)
     if info.rotation == 90 || info.rotation == 270 {

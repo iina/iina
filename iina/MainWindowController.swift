@@ -1745,7 +1745,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   func windowDidMiniaturize(_ notification: Notification) {
-    if Preference.bool(for: .togglePipByMinimizingWindow) && !isWindowMiniaturizedDueToPip {
+    if Preference.bool(for: .togglePipByMinimizingWindow) && (!Preference.bool(for: .togglePipByMinimizingWindowForVideoOnly) ||  player.checkCurrentMediaIsAudio() == .notAudio) && !isWindowMiniaturizedDueToPip {
       if #available(macOS 10.12, *) {
         enterPIP()
       }
@@ -1758,7 +1758,7 @@ class MainWindowController: PlayerWindowController {
       player.resume()
       isPausedDueToMiniaturization = false
     }
-    if Preference.bool(for: .togglePipByMinimizingWindow) && !isWindowMiniaturizedDueToPip {
+    if Preference.bool(for: .togglePipByMinimizingWindow) && (!Preference.bool(for: .togglePipByMinimizingWindowForVideoOnly) ||  player.checkCurrentMediaIsAudio() == .notAudio) && !isWindowMiniaturizedDueToPip {
       if #available(macOS 10.12, *) {
         exitPIP()
       }

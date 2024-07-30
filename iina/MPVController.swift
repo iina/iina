@@ -654,6 +654,8 @@ class MPVController: NSObject {
       openGLContext = CGLGetCurrentContext()
       mpv_render_context_set_update_callback(mpvRenderContext!, mpvUpdateCallback, mutableRawPointerOf(obj: player.mainWindow.videoView.videoLayer))
     }
+    
+    setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
   }
 
   /// Lock the OpenGL context associated with the mpv renderer and set it to be the current context for this thread.

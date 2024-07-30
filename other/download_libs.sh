@@ -6,22 +6,31 @@ PROJECT_NAME='iina'
 ARCH="universal"
 # github | iina (use iina to get the binary included in the latest release)
 YT_DLP_SOURCE="github"
+PARALLEL_DOWNLOADS=5
 
 DYLIBS_DOWNLOAD_PATH="https://iina.io/dylibs/${ARCH}"
 YT_DLP_DOWNLOAD_PATH="https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos"
 
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
 # Reset in case getopts has been used previously in the shell.
-if ! OPTS=$(getopt -o "h": --long "arch:,yt-dlp-src,help": -n 'parse-options' -- "$@"); then
-  echo "Failed parsing options." >&2
+if ! OPTS=$(getopt -o "h": --long "arch:,yt-dlp-src:,parallel:,help": -n 'parse-options' -- "$@"); then
+  echo -e "${RED}Failed parsing options.${NC}" >&2
   exit 1
 fi
 
 printUsageHelp() {
   echo
-  echo "Usage:"
-  echo "    $0 [-h|--help]:           Displays this help message"
-  echo "    $0 [--arch] <ARCH>:       Architecture to download dylibs for: universal | arm64 | x86_64"
-  echo "    $0 [--yt-dlp-src] <SRC>:  Source to download youtube-dl from: github | iina"
+  echo -e "${BLUE}Usage:${NC}"
+  echo -e "    ${GREEN}$0 [-h|--help]:${NC}           Displays this help message"
+  echo -e "    ${GREEN}$0 [--arch] <ARCH>:${NC}       Architecture to download dylibs for: universal | arm64 | x86_64"
+  echo -e "    ${GREEN}$0 [--yt-dlp-src] <SRC>:${NC}  Source to download youtube-dl from: github | iina"
+  echo -e "    ${GREEN}$0 [--parallel] <N>:${NC}      Number of parallel downloads (default: 5)"
   echo
 }
 
@@ -46,7 +55,7 @@ while true; do
     ;;
   --arch)
     if [[ -z "$2" ]]; then
-      echo "You need to specify an architecture when using --arch"
+      echo -e "${RED}You need to specify an architecture when using --arch${NC}"
       printUsageHelp
       exit 1
     fi
@@ -55,11 +64,20 @@ while true; do
     ;;
   --yt-dlp-src)
     if [[ -z "$2" ]]; then
-      echo "You need to specify a source when using --yt-dlp-src"
+      echo -e "${RED}You need to specify a source when using --yt-dlp-src${NC}"
       printUsageHelp
       exit 1
     fi
     YT_DLP_SOURCE=$2
+    shift 2
+    ;;
+  --parallel)
+    if [[ -z "$2" ]]; then
+      echo -e "${RED}You need to specify a number of parallel downloads when using --parallel${NC}"
+      printUsageHelp
+      exit 1
+    fi
+    PARALLEL_DOWNLOADS=$2
     shift 2
     ;;
   --)
@@ -78,7 +96,7 @@ iina)
   YT_DLP_DOWNLOAD_PATH="https://iina.io/dylibs/youtube-dl"
   ;;
 *)
-  echo "Invalid youtube-dl source: $YT_DLP_SOURCE"
+  echo -e "${RED}Invalid youtube-dl source: $YT_DLP_SOURCE${NC}"
   printUsageHelp
   exit 1
   ;;
@@ -89,7 +107,7 @@ universal | arm64 | x86_64)
   DYLIBS_DOWNLOAD_PATH="https://iina.io/dylibs/${ARCH}"
   ;;
 *)
-  echo "Invalid architecture: $ARCH"
+  echo -e "${RED}Invalid architecture: $ARCH${NC}"
   printUsageHelp
   exit 1
   ;;
@@ -103,7 +121,7 @@ if [[ $(basename "$ROOT_PATH") != "$PROJECT_NAME" ]]; then
     ROOT_PATH=$(dirname "$ROOT_PATH")
   done
   if [[ "$ROOT_PATH" == "/" ]]; then
-    echo "Unable to find the root directory '$PROJECT_NAME' containing the script file." >&2
+    echo -e "${RED}Unable to find the root directory '$PROJECT_NAME' containing the script file.${NC}" >&2
     exit 1
   fi
 fi
@@ -113,16 +131,34 @@ LIB_PATH="$DEPS_PATH/lib"
 EXEC_PATH="$DEPS_PATH/executable"
 YT_DLP_PATH="$EXEC_PATH/youtube-dl"
 
-IFS=$'\n' read -r -d '' -a files < <(curl "${DYLIBS_DOWNLOAD_PATH}/filelist.txt" && printf '\0')
+IFS=$'\n' read -r -d '' -a files < <(curl -s "${DYLIBS_DOWNLOAD_PATH}/filelist.txt" && printf '\0')
 
 mkdir -p "$LIB_PATH"
 
-for FILE in "${files[@]}"; do
-  set -x
-  curl "${DYLIBS_DOWNLOAD_PATH}/${FILE}" >"$LIB_PATH/$FILE"
-  { set +x; } 2>/dev/null
-done
+echo -e "${BLUE}Starting downloads in parallel...${NC}"
+
+# Function to download a single file
+download_file() {
+  local file="$1"
+  echo -e "${YELLOW}Downloading ${file}...${NC}"
+  curl -s "${DYLIBS_DOWNLOAD_PATH}/${file}" -o "${LIB_PATH}/${file}" && echo -e "${GREEN}Downloaded ${file}${NC}"
+}
+
+# Export the function so it can be used by xargs
+export -f download_file
+export DYLIBS_DOWNLOAD_PATH
+export LIB_PATH
+export YELLOW
+export GREEN
+export NC
+
+# Process files in smaller batches using xargs
+printf "%s\n" "${files[@]}" | xargs -n 1 -P "$PARALLEL_DOWNLOADS" bash -c 'download_file "$@"' _
 
 mkdir -p "$EXEC_PATH"
-curl -L "$YT_DLP_DOWNLOAD_PATH" -o "$YT_DLP_PATH"
+echo -e "${YELLOW}Downloading yt-dlp...${NC}"
+curl -s -L "$YT_DLP_DOWNLOAD_PATH" -o "$YT_DLP_PATH" && echo -e "${GREEN}yt-dlp downloaded${NC}"
 chmod +x "$YT_DLP_PATH"
+
+echo -e "${GREEN}All downloads completed.${NC}"
+

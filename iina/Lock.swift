@@ -24,15 +24,7 @@ import Foundation
 ///    between will either trigger a runtime exception (macOS 10.12+) or will block your thread permanently (macOS 10.11).
 class Lock {
 
-  private let lock: LockImpl
-
-  init() {
-    if #available(macOS 10.12, *) {
-      lock = OSUnfairLockImpl()
-    } else {
-      lock = NSLockImpl()
-    }
-  }
+  private let lock = OSUnfairLockImpl()
 
   /// Executes a closure while holding a lock.
   /// - Parameter body: A closure that contains the code to execute using the lock.
@@ -49,7 +41,6 @@ private protocol LockImpl {
   func withLock<R>(_ body: () throws -> R) rethrows -> R
 }
 
-@available(macOS 10.12, *)
 private class OSUnfairLockImpl: LockImpl {
 
   // Use a pointer to ensure the lock, which is a struct, is not copied.

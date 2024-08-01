@@ -306,10 +306,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     NSColorPanel.shared.showsAlpha = true
 
     // other initializations at App level
-    if #available(macOS 10.12.2, *) {
-      NSApp.isAutomaticCustomizeTouchBarMenuItemEnabled = false
-      NSWindow.allowsAutomaticWindowTabbing = false
-    }
+    NSApp.isAutomaticCustomizeTouchBarMenuItemEnabled = false
+    NSWindow.allowsAutomaticWindowTabbing = false
 
     JavascriptPlugin.loadGlobalInstances()
 
@@ -317,12 +315,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     Logger.log("Using \(mpv.mpvVersion) and libass \(mpv.libassVersion)")
     Logger.log("Configuration when building mpv: \(mpv.getString(MPVProperty.mpvConfiguration)!)", level: .verbose)
 
-    if #available(macOS 10.13, *) {
-      if RemoteCommandController.useSystemMediaControl {
-        Logger.log("Setting up MediaPlayer integration")
-        RemoteCommandController.setup()
-        NowPlayingInfoManager.updateInfo(state: .unknown)
-      }
+    if RemoteCommandController.useSystemMediaControl {
+      Logger.log("Setting up MediaPlayer integration")
+      RemoteCommandController.setup()
+      NowPlayingInfoManager.updateInfo(state: .unknown)
     }
 
     // if have pending open request
@@ -371,7 +367,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
             exit(EX_USAGE)
           }
           pc.switchToMiniPlayer()
-        } else if #available(macOS 10.12, *), commandLineStatus.enterPIP {
+        } else if commandLineStatus.enterPIP {
           pc.mainWindow.enterPIP()
         }
       }
@@ -421,39 +417,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     return Preference.bool(for: .quitWhenNoOpenedWindow)
   }
 
-  @objc
-  func shutdownTimedout() {
-    timedOut = true
-    if !allPlayersHaveShutdown {
-      Logger.log("Timed out waiting for players to stop and shutdown", level: .warning)
-      // For debugging list players that have not terminated.
-      for player in PlayerCore.playerCores {
-        let label = player.label ?? "unlabeled"
-        if player.info.state == .stopping {
-          Logger.log("Player \(label) failed to stop", level: .warning)
-        } else if player.info.state == .shuttingDown {
-          Logger.log("Player \(label) failed to shutdown", level: .warning)
-        }
-      }
-      // For debugging purposes we do not remove observers in case players stop or shutdown after
-      // the timeout has fired as knowing that occurred maybe useful for debugging why the
-      // termination sequence failed to complete on time.
-      Logger.log("Not waiting for players to shutdown; proceeding with application termination",
-                 level: .warning)
-    }
-    if OnlineSubtitle.loggedIn {
-      // The request to log out of the online subtitles provider has not completed. This should not
-      // occur as the logout request uses a timeout that is shorter than the termination timeout to
-      // avoid this occurring. Therefore if this message is logged something has gone wrong with the
-      // shutdown code.
-      Logger.log("Timed out waiting for log out of online subtitles provider to complete",
-                 level: .warning)
-    }
-    Logger.log("Proceeding with application termination due to time out", level: .warning)
-    // Tell Cocoa to proceed with termination.
-    NSApp.reply(toApplicationShouldTerminate: true)
-  }
-
   func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
     Logger.log("App should terminate")
     isTerminating = true
@@ -469,11 +432,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     removeAllMenuItems(dockMenu)
     // If supported and enabled disable all remote media commands. This also removes IINA from
     // the Now Playing widget.
-    if #available(macOS 10.13, *) {
-      if RemoteCommandController.useSystemMediaControl {
-        Logger.log("Disabling remote commands")
-        RemoteCommandController.disableAllCommands()
-      }
+    if RemoteCommandController.useSystemMediaControl {
+      Logger.log("Disabling remote commands")
+      RemoteCommandController.disableAllCommands()
     }
 
     // The first priority was to shutdown any new input from the user. The second priority is to
@@ -535,17 +496,38 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     // arbitrary timeout that forces termination to complete. The expectation is that this timeout
     // is never triggered. If a timeout warning is logged during termination then that needs to be
     // investigated.
-    var timer: Timer
-    if #available(macOS 10.12, *) {
-      timer = Timer(timeInterval: terminationTimeout, repeats: false) { _ in
-        // Once macOS 10.11 is no longer supported the contents of the method can be inlined in this
-        // closure.
-        self.shutdownTimedout()
+    let timer = Timer(timeInterval: terminationTimeout, repeats: false) { [unowned self] _ in
+      timedOut = true
+      if !allPlayersHaveShutdown {
+        Logger.log("Timed out waiting for players to stop and shutdown", level: .warning)
+        // For debugging list players that have not terminated.
+        for player in PlayerCore.playerCores {
+          let label = player.label ?? "unlabeled"
+          if player.info.state == .stopping {
+            Logger.log("Player \(label) failed to stop", level: .warning)
+          } else if player.info.state == .shuttingDown {
+            Logger.log("Player \(label) failed to shutdown", level: .warning)
+          }
+        }
+        // For debugging purposes we do not remove observers in case players stop or shutdown after
+        // the timeout has fired as knowing that occurred maybe useful for debugging why the
+        // termination sequence failed to complete on time.
+        Logger.log("Not waiting for players to shutdown; proceeding with application termination",
+                   level: .warning)
       }
-    } else {
-      timer = Timer(timeInterval: terminationTimeout, target: self,
-                    selector: #selector(self.shutdownTimedout), userInfo: nil, repeats: false)
+      if OnlineSubtitle.loggedIn {
+        // The request to log out of the online subtitles provider has not completed. This should not
+        // occur as the logout request uses a timeout that is shorter than the termination timeout to
+        // avoid this occurring. Therefore if this message is logged something has gone wrong with the
+        // shutdown code.
+        Logger.log("Timed out waiting for log out of online subtitles provider to complete",
+                   level: .warning)
+      }
+      Logger.log("Proceeding with application termination due to time out", level: .warning)
+      // Tell Cocoa to proceed with termination.
+      NSApp.reply(toApplicationShouldTerminate: true)
     }
+
     RunLoop.main.add(timer, forMode: .common)
 
     // Establish an observer for a player core stopping.
@@ -832,9 +814,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
         player.mpv.setFlag(MPVOption.Window.fullscreen, true)
       } else if let pipValue = queryDict["pip"], pipValue == "1" {
         // pip
-        if #available(macOS 10.12, *) {
-          player.mainWindow.enterPIP()
-        }
+        player.mainWindow.enterPIP()
       }
 
       // mpv options
@@ -1180,7 +1160,6 @@ struct CommandLineStatus {
   }
 }
 
-@available(macOS 10.13, *)
 class RemoteCommandController {
   static let remoteCommand = MPRemoteCommandCenter.shared()
 

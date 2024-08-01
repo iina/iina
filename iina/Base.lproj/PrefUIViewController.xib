@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23086.1" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22690"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23086.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -88,7 +88,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button tag="1" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Wn6-zz-utQ">
-                                <rect key="frame" x="15" y="47.5" width="190" height="15"/>
+                                <rect key="frame" x="15" y="48" width="190" height="15"/>
                                 <buttonCell key="cell" type="radio" title="When media is opened manually" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="CJE-ap-IH8">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="message" size="11"/>
@@ -98,7 +98,7 @@
                                 </connections>
                             </button>
                             <button tag="2" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UhD-Lf-aPQ">
-                                <rect key="frame" x="15" y="29.5" width="67" height="15"/>
+                                <rect key="frame" x="15" y="30" width="67" height="15"/>
                                 <buttonCell key="cell" type="radio" title="Disabled" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="duf-3s-3bL">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="message" size="11"/>
@@ -140,7 +140,7 @@
                                 </connections>
                             </popUpButton>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="z5X-oj-MdV">
-                                <rect key="frame" x="15" y="65.5" width="58" height="15"/>
+                                <rect key="frame" x="15" y="66" width="58" height="15"/>
                                 <buttonCell key="cell" type="radio" title="Always" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="yIN-jg-MxS">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="message" size="11"/>
@@ -561,7 +561,7 @@
                     <rect key="frame" x="174" y="280" width="187" height="25"/>
                     <popUpButtonCell key="cell" type="push" title="Floating" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="7Dv-q2-5TV" id="XRT-QK-HPy">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="menu"/>
+                        <font key="font" metaFont="message"/>
                         <menu key="menu" id="pgN-77-bP2">
                             <items>
                                 <menuItem title="Floating" state="on" id="7Dv-q2-5TV"/>
@@ -698,7 +698,7 @@
                     <rect key="frame" x="272" y="113" width="173" height="25"/>
                     <popUpButtonCell key="cell" type="push" title="Speed" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="TWq-Xb-8Ee" id="8Ke-vJ-gp6">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="menu"/>
+                        <font key="font" metaFont="message"/>
                         <menu key="menu" id="tw8-Om-zad">
                             <items>
                                 <menuItem title="Speed" state="on" id="TWq-Xb-8Ee"/>
@@ -1213,13 +1213,11 @@
                     <rect key="frame" x="171" y="1" width="202" height="25"/>
                     <popUpButtonCell key="cell" type="push" title="Dark" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="VvZ-mQ-wQB" id="Qe2-v8-Xh7">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="menu"/>
+                        <font key="font" metaFont="message"/>
                         <menu key="menu" id="Cpu-U2-hGC">
                             <items>
                                 <menuItem title="Dark" state="on" id="VvZ-mQ-wQB"/>
-                                <menuItem title="Ultra Dark" tag="1" id="pV2-12-PmM"/>
                                 <menuItem title="Light" tag="2" id="lZc-Dl-3cQ"/>
-                                <menuItem title="Medium Light" tag="3" id="TdN-pM-HHk"/>
                                 <menuItem title="Match System Appearance" tag="4" id="qn6-Bp-Mqp"/>
                             </items>
                         </menu>
@@ -1254,7 +1252,7 @@
             <point key="canvasLocation" x="14" y="-292"/>
         </customView>
         <customView id="1fz-oP-RhZ" userLabel="Prefs &gt; UI &gt; PIP">
-            <rect key="frame" x="0.0" y="-14" width="480" height="138"/>
+            <rect key="frame" x="0.0" y="0.0" width="480" height="138"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField identifier="SectionTitlePictureInPicture" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ghC-br-cK9">
@@ -1300,7 +1298,7 @@ Picture:</string>
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="o7N-Tm-Aly">
-                                <rect key="frame" x="69" y="29.5" width="79" height="15"/>
+                                <rect key="frame" x="69" y="29" width="79" height="15"/>
                                 <buttonCell key="cell" type="radio" title="Do nothing" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="Zc7-sP-Rdp">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="message" size="11"/>
@@ -1310,7 +1308,7 @@ Picture:</string>
                                 </connections>
                             </button>
                             <button tag="1" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BMA-ed-2gf">
-                                <rect key="frame" x="155" y="29.5" width="46" height="15"/>
+                                <rect key="frame" x="155" y="29" width="46" height="15"/>
                                 <buttonCell key="cell" type="radio" title="Hide" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="xtL-XT-xzb">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="message" size="11"/>
@@ -1320,7 +1318,7 @@ Picture:</string>
                                 </connections>
                             </button>
                             <button tag="2" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YWw-1J-3Gr">
-                                <rect key="frame" x="208" y="29.5" width="68" height="15"/>
+                                <rect key="frame" x="208" y="29" width="68" height="15"/>
                                 <buttonCell key="cell" type="radio" title="Minimize" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="H1F-mm-Saq">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="message" size="11"/>

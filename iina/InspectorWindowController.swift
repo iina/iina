@@ -108,10 +108,6 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
 
     deleteButton.isEnabled = false
 
-    if #available(macOS 10.14, *) {} else {
-      window?.appearance = NSAppearance(named: .vibrantDark)
-    }
-
     updateInfo()
     watchTableView.scrollRowToVisible(0)
   }

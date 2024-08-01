@@ -210,9 +210,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
 
     // colors
-    if #available(macOS 10.14, *) {
-      withAllTableViews { tableView, _ in tableView.backgroundColor = NSColor(named: .sidebarTableBackground)! }
-    }
+    withAllTableViews { tableView, _ in tableView.backgroundColor = NSColor(named: .sidebarTableBackground)! }
 
     setupPluginTabs()
     if pendingSwitchRequest == nil {
@@ -535,11 +533,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     let currentTag = currentTab.buttonTag
     [videoTabBtn, audioTabBtn, subTabBtn].forEach { btn in
       let isActive = currentTag == btn!.tag
-      if #available(macOS 10.14, *) {
-        btn!.contentTintColor = isActive ? .sidebarTabTintActive : .sidebarTabTint
-      } else {
-        Utility.setBoldTitle(for: btn!, isActive)
-      }
+      btn!.contentTintColor = isActive ? .sidebarTabTintActive : .sidebarTabTint
     }
     pluginTabs.values.forEach { tab in
       if case .plugin(let id) = currentTab {

@@ -10,14 +10,12 @@ import Cocoa
 
 // MARK: - Touch bar
 
-@available(macOS 10.12.2, *)
 fileprivate extension NSTouchBar.CustomizationIdentifier {
 
   static let windowBar = NSTouchBar.CustomizationIdentifier("\(Bundle.main.bundleIdentifier!).windowTouchBar")
 
 }
 
-@available(macOS 10.12.2, *)
 fileprivate extension NSTouchBarItem.Identifier {
 
   static let playPause = NSTouchBarItem.Identifier("\(Bundle.main.bundleIdentifier!).TouchBarItem.playPause")
@@ -39,7 +37,6 @@ fileprivate extension NSTouchBarItem.Identifier {
 }
 
 // Image name, tag, custom label
-@available(macOS 10.12.2, *)
 fileprivate let touchBarItemBinding: [NSTouchBarItem.Identifier: (NSImage.Name, Int, String)] = [
   .ahead15Sec: (NSImage.touchBarSkipAhead15SecondsTemplateName, 15, NSLocalizedString("touchbar.ahead_15", comment: "15sec Ahead")),
   .ahead30Sec: (NSImage.touchBarSkipAhead30SecondsTemplateName, 30, NSLocalizedString("touchbar.ahead_30", comment: "30sec Ahead")),
@@ -53,7 +50,6 @@ fileprivate let touchBarItemBinding: [NSTouchBarItem.Identifier: (NSImage.Name, 
   .fastForward: (NSImage.touchBarFastForwardTemplateName, 1, NSLocalizedString("touchbar.fast_forward", comment: "Fast Forward"))
 ]
 
-@available(macOS 10.12.2, *)
 class TouchBarSupport: NSObject, NSTouchBarDelegate {
 
   private var player: PlayerCore
@@ -247,7 +243,6 @@ class TouchBarSupport: NSObject, NSTouchBarDelegate {
   }
 }
 
-@available(macOS 10.12.2, *)
 extension MainWindowController {
 
   override func makeTouchBar() -> NSTouchBar? {
@@ -255,7 +250,6 @@ extension MainWindowController {
   }
 }
 
-@available(macOS 10.12.2, *)
 extension MiniPlayerWindowController {
 
   override func makeTouchBar() -> NSTouchBar? {

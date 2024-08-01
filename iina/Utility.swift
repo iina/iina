@@ -533,20 +533,6 @@ class Utility {
     }
   }
 
-  @available(macOS, deprecated: 10.14, message: "Use the system appearance-based APIs instead.")
-  static func getAppearanceAndMaterial(from theme: Preference.Theme) -> (NSAppearance?, NSVisualEffectView.Material) {
-    switch theme {
-    case .ultraDark:
-      return (NSAppearance(named: .vibrantDark), .ultraDark)
-    case .light:
-      return (NSAppearance(named: .vibrantLight), .light)
-    case .mediumLight:
-      return (NSAppearance(named: .vibrantLight), .mediumLight)
-    default:
-      return (NSAppearance(named: .vibrantDark), .dark)
-    }
-  }
-
   static func getLatestScreenshot(from path: String) -> URL? {
     let folder = URL(fileURLWithPath: NSString(string: path).expandingTildeInPath)
     guard let contents = try? FileManager.default.contentsOfDirectory(

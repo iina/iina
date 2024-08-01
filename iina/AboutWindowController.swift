@@ -52,7 +52,6 @@ class AboutWindowController: NSWindowController {
   @IBOutlet weak var tabView: NSTabView!
   @IBOutlet weak var contributorsCollectionView: NSCollectionView!
   @IBOutlet weak var contributorsFooterView: NSVisualEffectView!
-  @IBOutlet weak var contributorsFooterImage: NSImageView!
 
   private lazy var contributors = getContributors()
 
@@ -122,14 +121,8 @@ class AboutWindowController: NSWindowController {
     let gradient = NSGradient(colors: colors.map { NSColor(white: 0.925, alpha: $0) }, atLocations: loc, colorSpace: .deviceGray)
     gradient!.draw(in: rect, angle: 90)
     image.unlockFocus()
-    if #available(macOS 10.14, *) {
-      contributorsFooterView.material = .windowBackground
-      contributorsFooterView.maskImage = image
-    } else {
-      contributorsFooterView.isHidden = true
-      contributorsFooterImage.image = image
-      contributorsFooterImage.isHidden = false
-    }
+    contributorsFooterView.material = .windowBackground
+    contributorsFooterView.maskImage = image
 
     contributorsCollectionView.enclosingScrollView?.contentInsets.bottom = contributorsFooterView.frame.height * loc[colors.firstIndex(of: 0)! - 1]
   }
@@ -221,18 +214,9 @@ class AboutWindowButton: NSButton {
 
   func updateState() {
     if let cell = self.cell as? NSButtonCell {
-      if #available(macOS 10.14, *) {
-        cell.backgroundColor = state == .on ? .controlAccentColor : .clear
-      } else {
-        layer?.backgroundColor = state == .on ? CGColor(red: 0.188, green: 0.482, blue: 0.965, alpha: 1) : .clear
-      }
+      cell.backgroundColor = state == .on ? .controlAccentColor : .clear
     }
-    // Workground for macOS 10.13-
-    // For some reason the text alignment setting will lost after setting in layer
-    // Remove paragraph settings when dropping macOS 10.13 support
-    let paragraph = NSMutableParagraphStyle()
-    paragraph.alignment = .center
     attributedTitle = NSAttributedString(string: title,
-                                         attributes: [.foregroundColor: state == .on ? NSColor.white : NSColor.labelColor, .paragraphStyle: paragraph])
+                                         attributes: [.foregroundColor: state == .on ? NSColor.white : NSColor.labelColor])
   }
 }

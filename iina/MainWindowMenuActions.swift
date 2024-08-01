@@ -71,7 +71,6 @@ extension MainWindowController {
     setWindowFloatingOnTop(!isOntop)
   }
 
-  @available(macOS 10.12, *)
   @objc func menuTogglePIP(_ sender: NSMenuItem) {
     switch pipStatus {
     case .notInPIP:

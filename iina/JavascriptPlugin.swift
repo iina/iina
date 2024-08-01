@@ -506,14 +506,10 @@ class JavascriptPlugin: NSObject {
   func syncPreferences() {
     let url = preferencesFileURL
     Utility.createFileIfNotExist(url: url)
-    if #available(macOS 10.13, *) {
-      do {
-        try (preferences as NSDictionary).write(to: url)
-      } catch let e {
-        Logger.log("Unable to write preferences file: \(e.localizedDescription)", level: .error)
-      }
-    } else {
-      (preferences as NSDictionary).write(to: url, atomically: true)
+    do {
+      try (preferences as NSDictionary).write(to: url)
+    } catch let e {
+      Logger.log("Unable to write preferences file: \(e.localizedDescription)", level: .error)
     }
   }
 

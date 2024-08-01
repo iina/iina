@@ -52,12 +52,7 @@ class LogWindowController: NSWindowController, NSMenuDelegate {
       let path = NSBezierPath.init(ovalIn: inset)
       path.lineWidth = kBorderWidth
 
-      let fractionOfBlendedColor: CGFloat
-      if #available(macOS 10.14, *) {
-        fractionOfBlendedColor = (NSApp.appearance?.isDark ?? false) ? 0.15 : 0.3
-      } else {
-        fractionOfBlendedColor = 0.15
-      };
+      let fractionOfBlendedColor = (NSApp.appearance?.isDark ?? false) ? 0.15 : 0.3
       let borderColor = color.blended(withFraction: fractionOfBlendedColor, of: .controlTextColor)
 
       borderColor?.setStroke()

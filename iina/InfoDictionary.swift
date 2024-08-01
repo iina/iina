@@ -26,14 +26,8 @@ struct InfoDictionary {
 
   var buildDate: Date? {
     let dateParser: (String) -> Date?
-    if #available(macOS 10.12, *) {
-      let formatter = ISO8601DateFormatter()
-      dateParser = formatter.date(from:)
-    } else {
-      let formatter = DateFormatter()
-      formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-      dateParser = formatter.date(from:)
-    }
+    let formatter = ISO8601DateFormatter()
+    dateParser = formatter.date(from:)
     guard let date = dictionary["\(buildKeyPrefix).date"] as? String,
           let dateObj = dateParser(date) else {
       return nil

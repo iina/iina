@@ -9,20 +9,8 @@
 import Cocoa
 
 fileprivate extension NSColor {
-  static let keyRecordViewBackground: NSColor = {
-    if #available(macOS 10.14, *) {
-      return NSColor.controlBackgroundColor.withSystemEffect(.disabled)
-    } else {
-      return NSColor(calibratedWhite: 0.8, alpha: 1)
-    }
-  }()
-  static let keyRecordViewBackgroundActive: NSColor = {
-    if #available(macOS 10.14, *) {
-      return .controlBackgroundColor
-    } else {
-      return .lightGray
-    }
-  }()
+  static let keyRecordViewBackground = NSColor.controlBackgroundColor.withSystemEffect(.disabled)
+  static let keyRecordViewBackgroundActive = NSColor.controlBackgroundColor
 }
 
 protocol KeyRecordViewDelegate {

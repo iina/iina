@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23086.1" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22690"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23086.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,7 +13,6 @@
                 <outlet property="buildView" destination="10Q-XR-xzb" id="Xbk-OU-3UO"/>
                 <outlet property="contributorsButton" destination="ZI5-MK-cHL" id="ITp-Pd-sWy"/>
                 <outlet property="contributorsCollectionView" destination="KDi-R3-lE7" id="WHw-ob-ruR"/>
-                <outlet property="contributorsFooterImage" destination="bUk-MP-jkv" id="9oa-Gt-Sym"/>
                 <outlet property="contributorsFooterView" destination="nmC-ZN-RcQ" id="d3K-PG-wt2"/>
                 <outlet property="creditsButton" destination="XuI-3z-cJF" id="IQr-94-1fD"/>
                 <outlet property="creditsTextView" destination="Vex-sA-zx3" id="xid-ke-4Xp"/>
@@ -35,7 +34,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" fullSizeContentView="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="640" height="400"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1710" height="1068"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="3840" height="1575"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="640" height="400"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -49,7 +48,7 @@
                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="v8u-ZU-g1d">
                                     <rect key="frame" x="0.0" y="0.0" width="220" height="400"/>
                                     <subviews>
-                                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1qX-fa-Cpb">
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1qX-fa-Cpb">
                                             <rect key="frame" x="76" y="237" width="68" height="35"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="IINA" id="dkA-td-UyX">
                                                 <font key="font" metaFont="systemBold" size="30"/>
@@ -64,7 +63,7 @@
                                             </constraints>
                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="GO3-iS-dzs"/>
                                         </imageView>
-                                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bR2-NT-yUx">
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bR2-NT-yUx">
                                             <rect key="frame" x="92" y="213" width="36" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" alignment="center" title="0.0.1" id="gZA-85-Zaw">
                                                 <font key="font" metaFont="system"/>
@@ -75,7 +74,7 @@
                                         <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="6" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X9Q-Ig-Deb">
                                             <rect key="frame" x="55" y="198" width="110" height="11"/>
                                             <subviews>
-                                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="90" translatesAutoresizingMaskIntoConstraints="NO" id="nXJ-o9-ufd">
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="90" translatesAutoresizingMaskIntoConstraints="NO" id="nXJ-o9-ufd">
                                                     <rect key="frame" x="-2" y="0.0" width="48" height="11"/>
                                                     <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" alignment="right" title="mpv 0.0.0" id="ZAx-ah-fbZ">
                                                         <font key="font" metaFont="miniSystem"/>
@@ -83,7 +82,7 @@
                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                 </textField>
-                                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="90" translatesAutoresizingMaskIntoConstraints="NO" id="sBN-RJ-RAS" userLabel="FFmpeg 0.0.0">
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="90" translatesAutoresizingMaskIntoConstraints="NO" id="sBN-RJ-RAS" userLabel="FFmpeg 0.0.0">
                                                     <rect key="frame" x="48" y="0.0" width="64" height="11"/>
                                                     <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" alignment="left" title="FFmpeg 0.0.0" id="WeO-aJ-nY3" userLabel="FFmpeg 0.0.0">
                                                         <font key="font" metaFont="miniSystem"/>
@@ -104,7 +103,7 @@
                                         <customView horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="10Q-XR-xzb" userLabel="Build View">
                                             <rect key="frame" x="20" y="150" width="180" height="48"/>
                                             <subviews>
-                                                <textField hidden="YES" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" mirrorLayoutDirectionWhenInternationalizing="never" textCompletion="NO" id="O3G-Ax-VRU" userLabel="Date">
+                                                <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" mirrorLayoutDirectionWhenInternationalizing="never" textCompletion="NO" id="O3G-Ax-VRU" userLabel="Date">
                                                     <rect key="frame" x="0.0" y="37" width="180" height="11"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" selectable="YES" refusesFirstResponder="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="Date" usesSingleLineMode="YES" id="hp8-K0-WQf">
@@ -269,10 +268,6 @@
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </scroller>
                                                     </scrollView>
-                                                    <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bUk-MP-jkv">
-                                                        <rect key="frame" x="0.0" y="62" width="400" height="60"/>
-                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="Q2i-kp-Z0G"/>
-                                                    </imageView>
                                                     <visualEffectView appearanceType="inheritedVibrantLight" blendingMode="withinWindow" material="underWindowBackground" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="nmC-ZN-RcQ">
                                                         <rect key="frame" x="0.0" y="62" width="400" height="60"/>
                                                         <constraints>
@@ -299,7 +294,7 @@
                                                             <action selector="translatorsBtnAction:" target="-2" id="Jzp-8V-nU9"/>
                                                         </connections>
                                                     </button>
-                                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lR7-ma-7xF">
+                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lR7-ma-7xF">
                                                         <rect key="frame" x="-2" y="38" width="246" height="16"/>
                                                         <textFieldCell key="cell" lineBreakMode="clipping" title="IINA localization is powered by Crowdin." id="HLj-vT-kNp">
                                                             <font key="font" metaFont="system"/>
@@ -310,9 +305,7 @@
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="iaQ-kz-jCh" firstAttribute="leading" secondItem="Rtt-1M-7Kd" secondAttribute="leading" constant="4" id="365-5O-DGk"/>
-                                                    <constraint firstItem="bUk-MP-jkv" firstAttribute="bottom" secondItem="nmC-ZN-RcQ" secondAttribute="bottom" id="Ava-A0-JqP"/>
                                                     <constraint firstAttribute="trailing" secondItem="iaQ-kz-jCh" secondAttribute="trailing" constant="4" id="Foe-AW-ovM"/>
-                                                    <constraint firstItem="bUk-MP-jkv" firstAttribute="leading" secondItem="nmC-ZN-RcQ" secondAttribute="leading" id="GG2-tx-nu0"/>
                                                     <constraint firstItem="iaQ-kz-jCh" firstAttribute="top" secondItem="Rtt-1M-7Kd" secondAttribute="top" id="Tqt-1D-AOb"/>
                                                     <constraint firstAttribute="trailing" secondItem="nmC-ZN-RcQ" secondAttribute="trailing" id="ceK-j8-ptp"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="lR7-ma-7xF" secondAttribute="trailing" id="dpc-cX-9I8"/>
@@ -320,12 +313,10 @@
                                                     <constraint firstItem="lR7-ma-7xF" firstAttribute="top" secondItem="iaQ-kz-jCh" secondAttribute="bottom" constant="8" symbolic="YES" id="gUx-79-9Cr"/>
                                                     <constraint firstItem="0PM-oG-4Qs" firstAttribute="centerX" secondItem="nmC-ZN-RcQ" secondAttribute="centerX" id="h29-pz-GL1"/>
                                                     <constraint firstItem="nmC-ZN-RcQ" firstAttribute="bottom" secondItem="0PM-oG-4Qs" secondAttribute="bottom" constant="8" id="hVS-pi-lV1"/>
-                                                    <constraint firstItem="bUk-MP-jkv" firstAttribute="top" secondItem="nmC-ZN-RcQ" secondAttribute="top" id="iZ0-M4-muf"/>
                                                     <constraint firstItem="trK-iz-kG7" firstAttribute="top" secondItem="lR7-ma-7xF" secondAttribute="bottom" constant="20" id="jXS-j3-JAr"/>
                                                     <constraint firstAttribute="bottom" secondItem="trK-iz-kG7" secondAttribute="bottom" id="kwm-uu-JkJ"/>
                                                     <constraint firstItem="lR7-ma-7xF" firstAttribute="leading" secondItem="Rtt-1M-7Kd" secondAttribute="leading" id="q6A-Sn-AXA"/>
                                                     <constraint firstItem="trK-iz-kG7" firstAttribute="centerX" secondItem="Rtt-1M-7Kd" secondAttribute="centerX" id="qo9-gM-aL0"/>
-                                                    <constraint firstItem="bUk-MP-jkv" firstAttribute="trailing" secondItem="nmC-ZN-RcQ" secondAttribute="trailing" id="vLM-Uv-FeK"/>
                                                     <constraint firstItem="nmC-ZN-RcQ" firstAttribute="leading" secondItem="Rtt-1M-7Kd" secondAttribute="leading" id="xo5-ma-AoO"/>
                                                 </constraints>
                                             </view>

@@ -8,14 +8,6 @@
 
 import Cocoa
 
-// These colors are for 10.13- only
-@available(macOS, obsoleted: 10.14)
-fileprivate extension NSColor {
-  // Use different colors to distinguish loop knobs from the primary knob.
-  static let darkKnobColor = NSColor(calibratedRed: 0.59, green: 0.59, blue: 0.59, alpha: 1)
-  static let lightKnobColor = NSColor(calibratedRed: 0.35, green: 0.35, blue: 0.35, alpha: 1)
-}
-
 /// This class adds an additional thumb (knob) to a slider.
 ///
 /// This class is used to add thumbs representing the A and B loop points of the [mpv](https://mpv.io/manual/stable/) A-B

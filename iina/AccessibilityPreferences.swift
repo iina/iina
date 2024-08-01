@@ -36,10 +36,6 @@ struct AccessibilityPreferences {
   /// - Slide the toggle button to be on (blue)
   /// - Returns: `true` if reduce motion is enabled; otherwise `false`.
   static var motionReductionEnabled: Bool {
-    if #available(macOS 10.12, *) {
-      return NSWorkspace.shared.accessibilityDisplayShouldReduceMotion
-    } else {
-      return false
-    }
+    return NSWorkspace.shared.accessibilityDisplayShouldReduceMotion
   }
 }

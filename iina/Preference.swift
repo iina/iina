@@ -362,14 +362,8 @@ struct Preference {
 
     init?(key: Key) {
       let value = Preference.integer(for: key)
-      if #available(macOS 10.14, *) {
-        if value == 1 || value == 3 {
-          return nil
-        }
-      } else {
-        if value == 4 {
-          return nil
-        }
+      if value == 1 || value == 3 {
+        return nil
       }
       self.init(rawValue: Preference.integer(for: key))
     }

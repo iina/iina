@@ -15,69 +15,15 @@ fileprivate extension NSUserInterfaceItemIdentifier {
 }
 
 fileprivate extension NSColor {
-  static let initialWindowActionButtonBackground: NSColor = {
-    if #available(macOS 10.14, *) {
-      return NSColor(named: .initialWindowActionButtonBackground)!
-    } else {
-      return NSColor(calibratedWhite: 0, alpha: 0)
-    }
-  }()
-  static let initialWindowActionButtonBackgroundHover: NSColor = {
-    if #available(macOS 10.14, *) {
-      return NSColor(named: .initialWindowActionButtonBackgroundHover)!
-    } else {
-      return NSColor(calibratedWhite: 0, alpha: 0.25)
-    }
-  }()
-  static let initialWindowActionButtonBackgroundPressed: NSColor = {
-    if #available(macOS 10.14, *) {
-      return NSColor(named: .initialWindowActionButtonBackgroundPressed)!
-    } else {
-      return NSColor(calibratedWhite: 0, alpha: 0.35)
-    }
-  }()
-  static let initialWindowLastFileBackground: NSColor = {
-    if #available(macOS 10.14, *) {
-      return NSColor(named: .initialWindowLastFileBackground)!
-    } else {
-      return NSColor(calibratedWhite: 1, alpha: 0.1)
-    }
-  }()
-  static let initialWindowLastFileBackgroundHover: NSColor = {
-    if #available(macOS 10.14, *) {
-      return NSColor(named: .initialWindowLastFileBackgroundHover)!
-    } else {
-      return NSColor(calibratedWhite: 0.5, alpha: 0.1)
-    }
-  }()
-  static let initialWindowLastFileBackgroundPressed: NSColor = {
-    if #available(macOS 10.14, *) {
-      return NSColor(named: .initialWindowLastFileBackgroundPressed)!
-    } else {
-      return NSColor(calibratedWhite: 0, alpha: 0.1)
-    }
-  }()
-  static let initialWindowBetaLabel: NSColor = {
-    if #available(macOS 10.14, *) {
-      return NSColor(named: .initialWindowBetaLabel)!
-    } else {
-      return NSColor(calibratedRed: 255.0 / 255, green: 137.0 / 255, blue: 40.0 / 255, alpha: 1)
-    }
-  }()
-  static let initialWindowNightlyLabel: NSColor = {
-    if #available(macOS 10.14, *) {
-      return NSColor(named: .initialWindowNightlyLabel)!
-    } else {
-      return NSColor(calibratedRed: 149.0 / 255, green: 77.0 / 255, blue: 255.0 / 255, alpha: 1)
-    }
-  }()
-  static let initialWindowDebugLabel: NSColor = {
-    if #available(macOS 10.14, *) {
-      return NSColor(named: .initialWindowDebugLabel)!
-    } else {
-      return NSColor(calibratedRed: 31.0 / 255, green: 210.0 / 255, blue: 170.0 / 255, alpha: 1)
-    }
-  }()
+  static let initialWindowActionButtonBackground = NSColor(named: .initialWindowActionButtonBackground)!
+  static let initialWindowActionButtonBackgroundHover = NSColor(named: .initialWindowActionButtonBackgroundHover)!
+  static let initialWindowActionButtonBackgroundPressed = NSColor(named: .initialWindowActionButtonBackgroundPressed)!
+  static let initialWindowLastFileBackground = NSColor(named: .initialWindowLastFileBackground)!
+  static let initialWindowLastFileBackgroundHover = NSColor(named: .initialWindowLastFileBackgroundHover)!
+  static let initialWindowLastFileBackgroundPressed = NSColor(named: .initialWindowLastFileBackgroundPressed)!
+  static let initialWindowBetaLabel = NSColor(named: .initialWindowBetaLabel)!
+  static let initialWindowNightlyLabel = NSColor(named: .initialWindowNightlyLabel)!
+  static let initialWindowDebugLabel = NSColor(named: .initialWindowDebugLabel)!
 }
 
 fileprivate class GrayHighlightRowView: NSTableRowView {
@@ -224,20 +170,14 @@ class InitialWindowController: NSWindowController {
 
   private func setMaterial(_ theme: Preference.Theme?) {
     guard let window = window, let theme = theme else { return }
-    if #available(macOS 10.14, *) {
-      window.appearance = NSAppearance(iinaTheme: theme)
-      if #available(macOS 10.16, *) {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = window.effectiveAppearance.isDark ?
-          [NSColor.black.withAlphaComponent(0.4).cgColor, NSColor.black.withAlphaComponent(0).cgColor] :
-          [NSColor.black.withAlphaComponent(0.1).cgColor, NSColor.black.withAlphaComponent(0).cgColor]
-        leftOverlayView.wantsLayer = true
-        leftOverlayView.layer = gradientLayer
-      }
-    } else {
-      window.appearance = NSAppearance(named: .vibrantDark)
-      mainView.layer?.backgroundColor = CGColor(gray: 0.1, alpha: 1)
-      visualEffectView.material = .ultraDark
+    window.appearance = NSAppearance(iinaTheme: theme)
+    if #available(macOS 10.16, *) {
+      let gradientLayer = CAGradientLayer()
+      gradientLayer.colors = window.effectiveAppearance.isDark ?
+        [NSColor.black.withAlphaComponent(0.4).cgColor, NSColor.black.withAlphaComponent(0).cgColor] :
+        [NSColor.black.withAlphaComponent(0.1).cgColor, NSColor.black.withAlphaComponent(0).cgColor]
+      leftOverlayView.wantsLayer = true
+      leftOverlayView.layer = gradientLayer
     }
   }
 

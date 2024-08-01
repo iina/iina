@@ -1791,9 +1791,7 @@ class PlayerCore: NSObject {
     // add to history
     if let url = info.currentURL {
       let duration = info.videoDuration ?? .zero
-      HistoryController.shared.queue.async {
-        HistoryController.shared.add(url, duration: duration.second)
-      }
+      HistoryController.shared.add(url, duration: duration.second)
       if Preference.bool(for: .recordRecentFiles) && Preference.bool(for: .trackAllFilesInRecentOpenMenu) {
         AppDelegate.shared.noteNewRecentDocumentURL(url)
       }

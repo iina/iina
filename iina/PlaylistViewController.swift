@@ -156,6 +156,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   }
 
   func reloadData(playlist: Bool, chapters: Bool) {
+    guard player.info.state.active else { return }
     if playlist {
       player.getPlaylist()
       playlistTableView.reloadData()

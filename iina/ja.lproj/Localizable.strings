@@ -16,6 +16,9 @@
 "general.username" = "ユーザー名";
 "general.password" = "パスワード";
 
+"input.value_is_empty" = "この項目は必須です。";
+"input.already_exists" = "すでに他の項目で使用されています。";
+
 // Guide Window
 "guide.highlights" = "ハイライト";
 "guide.basic_settings" = "基本設定";
@@ -48,6 +51,35 @@
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "隠す";
 
+// EQ Presets
+"eq.preset.flat" = "フラット";
+"eq.preset.acoustic" = "アコースティック";
+"eq.preset.classical" = "クラシック";
+"eq.preset.dance" = "ダンス";
+"eq.preset.deep" = "ディープ";
+"eq.preset.electronic" = "エレクトロニック";
+"eq.preset.hip_hop" = "ヒップホップ";
+"eq.preset.increase_bass" = "低音を増やす";
+"eq.preset.increase_treble" = "高域を増やす";
+"eq.preset.increase_vocal" = "ボーカルを強調";
+"eq.preset.jazz" = "ジャズ";
+"eq.preset.latin" = "ラテン";
+"eq.preset.loundness" = "ラウドネス";
+"eq.preset.lounge" = "ラウンジ";
+"eq.preset.piano" = "ピアノ";
+"eq.preset.pop" = "ポップ";
+"eq.preset.rnb" = "R&B";
+"eq.preset.reduce_bass" = "低音を減らす";
+"eq.preset.reduce_treble" = "高域を減らす";
+"eq.preset.rock" = "ロック";
+"eq.preset.small_speaker" = "小さいスピーカー";
+"eq.preset.spoken_word" = "朗読";
+
+"alert.eq.new_profile.title" = "新しいEQプロファイル";
+"alert.eq.new_profile.message" = "プロファイルの名前を入力してください。";
+"alert.eq.rename.title" = "現在のプロファイルの名前を変更";
+"alert.eq.rename.message" = "新しいプロファイル名を入力してください。";
+
 // OSDMessage.swift
 "osd.pause" = "一時停止";
 "osd.resume" = "再開";
@@ -65,14 +97,14 @@
 "osd.sub_delay.later" = "字幕ディレイ: %.2f秒 遅く";
 "osd.sub_delay.earlier" = "字幕ディレイ: %.2f秒 早く";
 "osd.subtitle_pos" = "字幕の位置: %.1f";
-"osd.sub_hidden" = "Subtitles Hidden";
-"osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
-"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
-"osd.sub_second_visible" = "Secondary Subtitles Visible";
+"osd.sub_hidden" = "字幕を隠す";
+"osd.sub_visible" = "字幕を表示する";
+"osd.sub_second_delay.nodelay" = "副字幕の遅延: 遅延なし";
+"osd.sub_second_delay.later" = "副字幕の遅延: %.2f秒遅く";
+"osd.sub_second_delay.earlier" = "副字幕の遅延: %.2f秒早く";
+"osd.sub_second_hidden" = "副字幕を隠す";
+"osd.sub_second_pos" = "副字幕の表示位置: %.1f";
+"osd.sub_second_visible" = "副字幕を表示する";
 "osd.mute" = "ミュート";
 "osd.unmute" = "ミュート解除";
 "osd.screenshot" = "スクリーンショットを保存しました";
@@ -92,8 +124,8 @@
 "osd.find_online_sub" = "オンラインで字幕を探しています…";
 "osd.find_online_sub.source" = "検索先:";
 "osd.sub_not_found" = "字幕が見つかりませんでした";
-"osd.sub_found" = "%d subtitles found.";
-"osd.sub_downloading" = "Downloading %d subtitles";
+"osd.sub_found" = "字幕を%d個見つけました。";
+"osd.sub_downloading" = "%d個の字幕をダウンロード中";
 "osd.sub_downloaded" = "字幕をダウンロードしました";
 "osd.sub_saved" = "字幕を保存しました";
 "osd.network_error" = "ネットワークエラー";
@@ -130,7 +162,7 @@
 "preference.enable_adv_settings" = "高度な設定を有効化";
 
 "preference.sub_override_level.force" = "強制的";
-"preference.sub_override_level.scale" = "scale";
+"preference.sub_override_level.scale" = "大きさ";
 "preference.sub_override_level.strip" = "ストリップ";
 "preference.sub_override_level.yes" = "はい";
 
@@ -138,10 +170,10 @@
 "menu.volume_muted" = "ボリューム: %d (ミュート中)";
 "menu.audio_delay" = "オーディオディレイ: %.2fs";
 "menu.sub_delay" = "字幕ディレイ: %.2fs";
-"menu.sub_hide" = "Hide Subtitles";
-"menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Secondary Subtitles";
-"menu.sub_second_show" = "Show Secondary Subtitles";
+"menu.sub_hide" = "字幕を隠す";
+"menu.sub_show" = "字幕を表示する";
+"menu.sub_second_hide" = "副字幕を隠す";
+"menu.sub_second_show" = "副字幕を表示する";
 "menu.fullscreen" = "フルスクリーンにする";
 "menu.exit_fullscreen" = "フルスクリーンを解除";
 "menu.pip" = "ピクチャー・イン・ピクチャーを使用";
@@ -210,13 +242,13 @@
 "alert.config.duplicate.title" = "設定の複製";
 "alert.config.duplicate.message" = "複製する設定ファイルの名前を入力してください。";
 "alert.config.empty_name" = "名前は空欄にできません。";
-"alert.config.name_existing" = "A config with the same name already exists.";
+"alert.config.name_existing" = "同じ名前の設定がすでに存在しています。";
 "alert.config.file_existing.title" = "ファイルが既に存在しています";
-"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
+"alert.config.file_existing.message" = "同じファイル名がすでに存在しています。OKを押してファイルをFinderから表示します。";
 "alert.config.cannot_create" = "設定ファイルが作成できません！\n%@";
 "alert.config.cannot_write" = "設定ファイルに書き込めません！";
-"alert.config.rename.title" = "Rename Input Configuration";
-"alert.config.rename.message" = "Please enter the new name for the configuration.";
+"alert.config.rename.title" = "入力設定の名前を変更";
+"alert.config.rename.message" = "設定の新しい名前を入力してください。";
 
 "alert.filter.incorrect" = "フィルタの設定時にエラーが発生しました。パラメータの形式を確認してください。";
 "alert.add_filter.title" = "フィルターの新規作成";

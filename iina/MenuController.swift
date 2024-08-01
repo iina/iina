@@ -482,7 +482,7 @@ class MenuController: NSObject, NSMenuDelegate {
     let isDisplayingChapters = player.mainWindow.sideBarStatus == .playlist &&
           player.mainWindow.playlistView.currentTab == .chapters
     chapterPanel?.title = isDisplayingChapters ? Constants.String.hideChaptersPanel : Constants.String.chaptersPanel
-    pause.title = player.info.isPaused ? Constants.String.resume : Constants.String.pause
+    pause.title = player.info.state == .paused ? Constants.String.resume : Constants.String.pause
     abLoop.state = player.isABLoopActive ? .on : .off
     let loopMode = player.getLoopMode()
     fileLoop.state = loopMode == .file ? .on : .off

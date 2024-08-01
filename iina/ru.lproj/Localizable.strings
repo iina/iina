@@ -16,6 +16,9 @@
 "general.username" = "Имя пользователя";
 "general.password" = "Пароль";
 
+"input.value_is_empty" = "Значение не может быть пустым.";
+"input.already_exists" = "Значение уже существует.";
+
 // Guide Window
 "guide.highlights" = "Что нового в IINA";
 "guide.basic_settings" = "Основные параметры";
@@ -47,6 +50,35 @@
 "quicksetting.deinterlace" = "Деинтерлейсинг";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Скрыть";
+
+// EQ Presets
+"eq.preset.flat" = "Без коррекции";
+"eq.preset.acoustic" = "Акустическая";
+"eq.preset.classical" = "Классическая";
+"eq.preset.dance" = "Танцевальная";
+"eq.preset.deep" = "Дип-хаус";
+"eq.preset.electronic" = "Электронная";
+"eq.preset.hip_hop" = "Хип-хоп";
+"eq.preset.increase_bass" = "Больше низких частот";
+"eq.preset.increase_treble" = "Больше высоких частот";
+"eq.preset.increase_vocal" = "Больше вокала";
+"eq.preset.jazz" = "Джаз";
+"eq.preset.latin" = "Латиноамериканская";
+"eq.preset.loundness" = "Тонкомпенсация";
+"eq.preset.lounge" = "Лаунж";
+"eq.preset.piano" = "Фортепиано";
+"eq.preset.pop" = "Поп";
+"eq.preset.rnb" = "Ритм-энд-блюз";
+"eq.preset.reduce_bass" = "Меньше низких частот";
+"eq.preset.reduce_treble" = "Меньше высоких частот";
+"eq.preset.rock" = "Рок";
+"eq.preset.small_speaker" = "Малые динамики";
+"eq.preset.spoken_word" = "Речь";
+
+"alert.eq.new_profile.title" = "Новая настройка эквалайзера";
+"alert.eq.new_profile.message" = "Пожалуйста, укажите имя профиля.";
+"alert.eq.rename.title" = "Переименовать текущий профиль";
+"alert.eq.rename.message" = "Пожалуйста, укажите новое имя профиля.";
 
 // OSDMessage.swift
 "osd.pause" = "Пауза";

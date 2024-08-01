@@ -462,7 +462,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     // termination is initiated.
     allPlayersHaveShutdown = true
     for player in PlayerCore.playerCores {
-      if !player.isShutdown {
+      if player.info.state != .shutDown {
         allPlayersHaveShutdown = false
         break
       }
@@ -503,9 +503,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
         // For debugging list players that have not terminated.
         for player in PlayerCore.playerCores {
           let label = player.label ?? "unlabeled"
-          if !player.isStopped {
+          if player.info.state == .stopping {
             Logger.log("Player \(label) failed to stop", level: .warning)
-          } else if !player.isShutdown {
+          } else if player.info.state == .shuttingDown {
             Logger.log("Player \(label) failed to shutdown", level: .warning)
           }
         }
@@ -567,7 +567,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       if !allPlayersHaveShutdown {
         // If any player has not shutdown then continue waiting.
         for player in PlayerCore.playerCores {
-          guard player.isShutdown else { return }
+          guard player.info.state == .shutDown else { return }
         }
         allPlayersHaveShutdown = true
         // All players have shutdown.
@@ -628,7 +628,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
     // Instruct any players that are already stopped to start shutting down.
     for player in PlayerCore.playerCores {
-      if player.isStopped && !player.isShutdown {
+      if player.info.state == .idle {
         player.shutdown()
       }
     }

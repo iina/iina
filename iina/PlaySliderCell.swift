@@ -166,7 +166,7 @@ class PlaySliderCell: NSSliderCell {
   // MARK:- Tracking the Mouse
 
   override func startTracking(at startPoint: NSPoint, in controlView: NSView) -> Bool {
-    isPausedBeforeSeeking = playerCore.info.isPaused
+    isPausedBeforeSeeking = playerCore.info.state == .paused
     let result = super.startTracking(at: startPoint, in: controlView)
     if result {
       playerCore.pause()

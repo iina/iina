@@ -242,7 +242,7 @@ class MainWindowController: PlayerWindowController {
   var fsState: FullScreenState = .windowed {
     didSet {
       // Must not access mpv while it is asynchronously processing stop and quit commands.
-      guard !player.isStopping, !player.isStopped, !player.isShuttingDown, !player.isShutdown else { return }
+      guard player.info.state.active else { return }
       switch fsState {
       case .fullscreen: player.mpv.setFlag(MPVOption.Window.fullscreen, true)
       case .animating:  break
@@ -1317,7 +1317,7 @@ class MainWindowController: PlayerWindowController {
       fadeableViews.append(additionalInfoView)
     }
 
-    if player.info.isPaused {
+    if player.info.state == .paused {
       if Preference.bool(for: .playWhenEnteringFullScreen) {
         player.resume()
       } else {
@@ -1373,7 +1373,7 @@ class MainWindowController: PlayerWindowController {
     // operation is processed asynchronously by mpv. If the window is being closed due to IINA
     // quitting then mpv could be in the process of shutting down. Must not access mpv while it is
     // asynchronously processing stop and quit commands.
-    guard !player.isStopping, !player.isStopped, !player.isShuttingDown, !player.isShutdown else { return }
+    guard player.info.state.active else { return }
     videoView.videoLayer.suspend()
     player.mpv.setFlag(MPVOption.Window.keepaspect, false)
   }
@@ -1395,7 +1395,7 @@ class MainWindowController: PlayerWindowController {
       removeBlackWindow()
     }
 
-    if player.info.isPaused {
+    if player.info.state == .paused {
       // When playback is paused the display link is stopped in order to avoid wasting energy on
       // needless processing. It must be running while transitioning from full screen mode. Now that
       // the transition has completed it can be stopped.
@@ -1408,7 +1408,7 @@ class MainWindowController: PlayerWindowController {
 
     // Must not access mpv while it is asynchronously processing stop and quit commands.
     // See comments in windowWillExitFullScreen for details.
-    guard !player.isStopping, !player.isStopped, !player.isShuttingDown, !player.isShutdown else { return }
+    guard player.info.state.active else { return }
     showUI()
     updateTimer()
 
@@ -1417,12 +1417,12 @@ class MainWindowController: PlayerWindowController {
     videoView.layoutSubtreeIfNeeded()
     videoView.videoLayer.resume()
 
-    if Preference.bool(for: .pauseWhenLeavingFullScreen) && player.info.isPlaying {
+    if Preference.bool(for: .pauseWhenLeavingFullScreen) && player.info.state == .playing {
       player.pause()
     }
 
     // restore ontop status
-    if player.info.isPlaying {
+    if player.info.state == .playing {
       setWindowFloatingOnTop(isOntop, updateOnTopStatus: false)
     }
 
@@ -1650,7 +1650,7 @@ class MainWindowController: PlayerWindowController {
   func windowDidEndLiveResize(_ notification: Notification) {
     // Must not access mpv while it is asynchronously processing stop and quit commands.
     // See comments in windowWillExitFullScreen for details.
-    guard !player.isStopping, !player.isStopped, !player.isShuttingDown, !player.isShutdown else { return }
+    guard player.info.state.active else { return }
     videoView.videoSize = window!.convertToBacking(videoView.bounds).size
     videoView.videoLayer.isAsynchronous = false
     updateWindowParametersForMPV()
@@ -1689,7 +1689,7 @@ class MainWindowController: PlayerWindowController {
     if NSApp.keyWindow == nil ||
       (NSApp.keyWindow?.windowController is MainWindowController ||
         (NSApp.keyWindow?.windowController is MiniPlayerWindowController && NSApp.keyWindow?.windowController != player.miniPlayer)) {
-      if Preference.bool(for: .pauseWhenInactive), player.info.isPlaying {
+      if Preference.bool(for: .pauseWhenInactive), player.info.state == .playing {
         player.pause()
         isPausedDueToInactive = true
       }
@@ -1714,7 +1714,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   func windowWillMiniaturize(_ notification: Notification) {
-    if Preference.bool(for: .pauseWhenMinimized), player.info.isPlaying {
+    if Preference.bool(for: .pauseWhenMinimized), player.info.state == .playing {
       isPausedDueToMiniaturization = true
       player.pause()
     }
@@ -2169,7 +2169,7 @@ class MainWindowController: PlayerWindowController {
       return
     }
 
-    isPausedPriorToInteractiveMode = player.info.isPaused
+    isPausedPriorToInteractiveMode = player.info.state == .paused
     player.pause()
     isInInteractiveMode = true
     hideUI()
@@ -2713,7 +2713,7 @@ class MainWindowController: PlayerWindowController {
 
   @IBAction override func playButtonAction(_ sender: NSButton) {
     super.playButtonAction(sender)
-    if (player.info.isPaused) {
+    if player.info.state == .paused {
       // speed is already reset by playerCore
       speedValueIndex = AppData.availableSpeedValues.count / 2
       leftArrowLabel.isHidden = true
@@ -2902,7 +2902,7 @@ class MainWindowController: PlayerWindowController {
   /** When slider changes */
   @IBAction override func playSliderChanges(_ sender: NSSlider) {
     // guard let event = NSApp.currentEvent else { return }
-    guard !player.info.fileLoading else { return }
+    guard player.info.state.active, player.info.state != .loading else { return }
     super.playSliderChanges(sender)
 
     // seek and update time
@@ -2962,7 +2962,7 @@ extension MainWindowController: PIPViewControllerDelegate {
 
     pipVideo = NSViewController()
     pipVideo.view = videoView
-    pip.playing = player.info.isPlaying
+    pip.playing = player.info.state == .playing
     pip.title = window?.title
 
     pip.presentAsPicture(inPicture: pipVideo)
@@ -3017,7 +3017,7 @@ extension MainWindowController: PIPViewControllerDelegate {
     // it's not necessary while the video is playing and significantly more
     // noticeable, we only redraw if we are paused.
     let currentTrackIsAlbumArt = player.info.currentTrack(.video)?.isAlbumart ?? false
-    if player.info.isPaused || currentTrackIsAlbumArt {
+    if player.info.state == .paused || currentTrackIsAlbumArt {
       videoView.videoLayer.draw(forced: true)
     }
 

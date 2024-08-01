@@ -107,7 +107,7 @@ extension MainMenuActionHandler {
   }
 
   @objc func menuStepFrame(_ sender: NSMenuItem) {
-    if player.info.isPlaying {
+    if player.info.state == .playing {
       player.pause()
     }
     if sender.tag == 0 { // -> 1f
@@ -472,9 +472,9 @@ extension MainMenuActionHandler {
     default:
       break
     }
-    return menuItem.isEnabled
+    return true
   }
-  
+
   // MARK: - Plugin
 
   @objc func reloadAllPlugins(_ sender: NSMenuItem) {

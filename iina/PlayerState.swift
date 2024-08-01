@@ -58,7 +58,7 @@ enum PlayerState: Int {
   ///
   /// These are the states in which the player normally interacts with the mpv core. The mpv core **must not** be accessed when the
   /// player is in the `shuttingDown` or `shutDown` states. Accessing the core in these states can trigger a crash.
-  @inlinable var active: Bool { self.rawValue <= PlayerState.stopping.rawValue }
+  @inlinable var active: Bool { self.rawValue < PlayerState.stopping.rawValue }
 
   /// `True` if when the player is in this state the file is loaded, otherwise `false`.
   @inlinable var loaded: Bool { active && self.rawValue >= PlayerState.playing.rawValue }

@@ -293,7 +293,7 @@ class OpenSub {
     /// Open Subtitles requests that applications logout of of user sessions so that they can free resources. This is discussed in the
     /// [Best Practices](https://opensubtitles.stoplight.io/docs/opensubtitles-api/6ef2e232095c7-best-practices)
     /// section of the Open Subtitles REST API documentation.
-    /// - Parameter timeout: The timeout to to use for the the request.
+    /// - Parameter timeout: The timeout to to use for the request.
     override func logout(timeout: TimeInterval? = nil) -> Promise<Void> {
       guard OpenSubClient.shared.loggedIn else {
         log("Not logged in to Open Subtitles")

@@ -1681,6 +1681,10 @@ class MainWindowController: PlayerWindowController {
       player.resume()
       isPausedDueToInactive = false
     }
+    // TODO: add Preference check
+    if #available(macOS 10.12, *) {
+      exitPIP()
+    }
   }
 
   func windowDidResignKey(_ notification: Notification) {
@@ -1692,6 +1696,13 @@ class MainWindowController: PlayerWindowController {
       if Preference.bool(for: .pauseWhenInactive), player.info.state == .playing {
         player.pause()
         isPausedDueToInactive = true
+      }
+    }
+
+    // TODO: add Preference check
+    if NSApp.keyWindow == nil {
+      if #available(macOS 10.12, *) {
+        enterPIP()
       }
     }
   }

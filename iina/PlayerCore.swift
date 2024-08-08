@@ -551,6 +551,17 @@ class PlayerCore: NSObject {
     }
   }
 
+  /// Swtich the current player to mini player from the main window.
+  ///
+  /// - Parameters:
+  ///     - showMiniPlayer: set to false when this function is called when tracklist is changed.
+  ///     In this case, wait for `MPV_EVENT_VIDEO_RECONFIG` to show the mini player.
+  ///
+  /// This function is called:
+  /// 1) On `trackListChanged`, it will check the current media and settings to determine whether
+  /// or not to switch to mini player automatically
+  /// 2) On user initiated button actions
+  ///
   func switchToMiniPlayer(automatically: Bool = false, showMiniPlayer: Bool = true) {
     log("Switch to mini player, automatically=\(automatically)")
     if !automatically {
@@ -628,6 +639,19 @@ class PlayerCore: NSObject {
     events.emit(.musicModeChanged, data: true)
   }
 
+  /// Swtich the current player to main player from the mini player.
+  ///
+  /// - Parameters:
+  ///     - showMainWindow: set to false when this function is called when tracklist is changed.
+  ///     In this case, wait for `MPV_EVENT_VIDEO_RECONFIG` to show the main window. Also set to false
+  ///     when the mini player is closed.
+  ///
+  /// This function is called:
+  /// 1) On `trackListChanged`, it will check the current media and settings to determine whether
+  /// or not to switch to main window automatically
+  /// 2) On user initiated button actions
+  /// 3) When closing the mini player
+  ///
   func switchBackFromMiniPlayer(automatically: Bool = false, showMainWindow: Bool = true) {
     log("Switch to normal window from mini player, automatically=\(automatically)")
     if !automatically {
@@ -657,9 +681,9 @@ class PlayerCore: NSObject {
     if showMainWindow {
       currentController.setupUI()
       mainWindow.updateTitle()
-      mainWindow.videoView.videoLayer.draw(forced: true)
       notifyWindowVideoSizeChanged()
     }
+    mainWindow.videoView.videoLayer.draw(forced: true)
     events.emit(.musicModeChanged, data: false)
   }
 
@@ -2149,6 +2173,10 @@ class PlayerCore: NSObject {
       miniPlayer.updateVideoSize()
     } else {
       mainWindow.adjustFrameByVideoSize()
+      if mainWindow.pendingShow {
+        mainWindow.pendingShow = false
+        mainWindow.showWindow(self)
+      }
     }
   }
 

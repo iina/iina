@@ -2569,11 +2569,8 @@ class MainWindowController: PlayerWindowController {
       if let screenFrame = window.screen?.frame {
         rect = rect.constrain(in: screenFrame)
       }
-      if pendingShow && !player.isInMiniPlayer {
-        pendingShow = false
-        window.setFrame(rect, display: false, animate: false)
-        showWindow(nil)
-      } else if player.disableWindowAnimation || Preference.bool(for: .disableAnimations) {
+
+      if player.disableWindowAnimation || Preference.bool(for: .disableAnimations) || !window.isVisible {
         window.setFrame(rect, display: true, animate: false)
       } else {
         // animated `setFrame` can be inaccurate!

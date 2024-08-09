@@ -456,9 +456,11 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   private func updateAudioEqState() {
     if let filter = player.info.audioEqFilter {
-      let filters = filter.stringFormat.split(separator: ",")
+      guard let eqString = Regex("\\[(.+?)\\]").captures(in: filter.stringFormat)[at: 1] else { return }
+      let filters = eqString.split(separator: ",")
       zip(filters, eqSliders).forEach { (filter, slider) in
-        if let gain = filter.dropLast().split(separator: "=").last {
+        if let gain = filter.split(separator: "=").last {
+          print(gain)
           slider.doubleValue = Double(gain) ?? 0
         } else {
           slider.doubleValue = 0

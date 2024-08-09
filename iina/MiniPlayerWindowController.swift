@@ -269,7 +269,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     volumeButton.image = image
   }
 
-  func updateVideoSize() {
+  override func handleVideoSizeChange() {
     guard let window = window else { return }
     let w = player.info.displayWidth, h = player.info.displayHeight
     let (width, height) = (w == 0 && h == 0) ? (1, 1) :  player.videoSizeForDisplay
@@ -282,10 +282,6 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     var frame = window.frame
     frame.size.height += newHeight - currentHeight - 0.5
     window.setFrame(frame, display: true, animate: false)
-
-    if !window.isVisible {
-      showWindow(self)
-    }
   }
 
   func updateVideoViewAspectConstraint(withAspect aspect: CGFloat) {

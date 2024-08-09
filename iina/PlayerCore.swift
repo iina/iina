@@ -395,9 +395,9 @@ class PlayerCore: NSObject {
     info.currentFolder = nil
     info.isNetworkResource = isNetwork
 
-    let isFirstLoad = !mainWindow.loaded
     let _ = mainWindow.window
     mainWindow.pendingShow = true
+    miniPlayer.pendingShow = true
     initialWindow.close()
 
     // Send load file command
@@ -632,6 +632,7 @@ class PlayerCore: NSObject {
     }
 
     currentController.setupUI()
+    miniPlayer.pendingShow = true
     if showMiniPlayer {
       notifyWindowVideoSizeChanged()
     }
@@ -2169,14 +2170,10 @@ class PlayerCore: NSObject {
   }
 
   func notifyWindowVideoSizeChanged() {
-    if isInMiniPlayer {
-      miniPlayer.updateVideoSize()
-    } else {
-      mainWindow.adjustFrameByVideoSize()
-      if mainWindow.pendingShow {
-        mainWindow.pendingShow = false
-        mainWindow.showWindow(self)
-      }
+    currentController.handleVideoSizeChange()
+    if currentController.pendingShow {
+      currentController.pendingShow = false
+      currentController.showWindow(self)
     }
   }
 

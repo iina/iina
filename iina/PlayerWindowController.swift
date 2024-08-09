@@ -155,6 +155,12 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
 
   internal var mouseActionDisabledViews: [NSView?] {[]}
 
+  /** This variable is true when the window ready to show but waiting for size from mpv.
+   In the `notifyWindowVideoSizeChanged()` call, this variable will be checked and the
+   window will be shown if this variable is true.
+   */
+  internal var pendingShow = false
+
   // MARK: - Initiaization
 
   override func windowDidLoad() {
@@ -534,7 +540,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   // MARK: - UI
-  
+
   func setupUI() {
     player.syncUI([.time, .playButton, .volume])
   }
@@ -606,6 +612,10 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     if (updateOnTopStatus) {
       self.isOntop = onTop
     }
+  }
+
+  func handleVideoSizeChange() {
+    fatalError("Must implement in the subclass")
   }
 
   // MARK: - IBActions

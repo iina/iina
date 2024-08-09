@@ -180,9 +180,6 @@ class MainWindowController: PlayerWindowController {
   var isShowingPersistentOSD = false
   var osdContext: Any?
 
-  /** This variable is true when the window should show but waiting for size from mpv */
-  var pendingShow = false
-
   // MARK: - Enums
 
   // Window state
@@ -2479,7 +2476,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   /** Set window size when info available, or video size changed. */
-  func adjustFrameByVideoSize() {
+  override func handleVideoSizeChange() {
     guard let window = window else { return }
 
     let (width, height) = player.videoSizeForDisplay

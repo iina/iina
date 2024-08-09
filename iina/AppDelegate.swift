@@ -577,9 +577,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
         // All players have shutdown.
         Logger.log("All players have shutdown")
       }
-      // If still logged in to subtitle providers or still saving playback history then continue
-      // waiting.
-      guard !OnlineSubtitle.loggedIn, HistoryController.shared.tasksOutstanding == 0 else { return }
+      // If still logged in to subtitle providers then continue waiting.
+      guard !OnlineSubtitle.loggedIn else { return }
+      // If still still saving playback history then continue waiting.
+      guard HistoryController.shared.tasksOutstanding == 0 else { return }
       // All players have shutdown. No longer logged into an online subtitles provider and saving of
       // playback history has finished.
       Logger.log("Proceeding with application termination")

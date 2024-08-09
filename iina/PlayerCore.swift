@@ -395,21 +395,10 @@ class PlayerCore: NSObject {
     info.currentFolder = nil
     info.isNetworkResource = isNetwork
 
-    let isFirstLoad = !mainWindow.loaded
     let _ = mainWindow.window
+    mainWindow.pendingShow = true
+    miniPlayer.pendingShow = true
     initialWindow.close()
-    if isInMiniPlayer {
-      miniPlayer.showWindow(nil)
-    } else {
-      // we only want to call windowWillOpen when the window is currently closed.
-      // if the window is opened for the first time, it will become visible in windowDidLoad, so we need to check isFirstLoad.
-      // window.isVisible will work from the second time.
-      if isFirstLoad || !mainWindow.window!.isVisible {
-        mainWindow.windowWillOpen()
-      }
-      mainWindow.showWindow(nil)
-      mainWindow.windowDidOpen()
-    }
 
     // Send load file command
     info.justOpenedFile = true
@@ -562,7 +551,18 @@ class PlayerCore: NSObject {
     }
   }
 
-  func switchToMiniPlayer(automatically: Bool = false) {
+  /// Swtich the current player to mini player from the main window.
+  ///
+  /// - Parameters:
+  ///     - showMiniPlayer: set to false when this function is called when tracklist is changed.
+  ///     In this case, wait for `MPV_EVENT_VIDEO_RECONFIG` to show the mini player.
+  ///
+  /// This function is called:
+  /// 1) On `trackListChanged`, it will check the current media and settings to determine whether
+  /// or not to switch to mini player automatically
+  /// 2) On user initiated button actions
+  ///
+  func switchToMiniPlayer(automatically: Bool = false, showMiniPlayer: Bool = true) {
     log("Switch to mini player, automatically=\(automatically)")
     if !automatically {
       // Toggle manual override
@@ -571,8 +571,11 @@ class PlayerCore: NSObject {
                  level: .verbose, subsystem: subsystem)
     }
 
+    // hide main window
+    mainWindow.window?.orderOut(self)
+
     let needRestoreLayout = !miniPlayer.loaded
-    miniPlayer.showWindow(self)
+    let _ = miniPlayer.window
 
     miniPlayer.updateTitle()
     refreshSyncUITimer()
@@ -613,11 +616,7 @@ class PlayerCore: NSObject {
       miniPlayer.setToInitialWindowSize(display: true, animate: false)
     }
 
-    // hide main window
-    mainWindow.window?.orderOut(self)
     isInMiniPlayer = true
-
-    videoView.videoLayer.draw(forced: true)
 
     // restore layout
     if needRestoreLayout {
@@ -633,9 +632,27 @@ class PlayerCore: NSObject {
     }
 
     currentController.setupUI()
+    miniPlayer.pendingShow = true
+    if showMiniPlayer {
+      notifyWindowVideoSizeChanged()
+    }
+    videoView.videoLayer.draw(forced: true)
     events.emit(.musicModeChanged, data: true)
   }
 
+  /// Swtich the current player to main player from the mini player.
+  ///
+  /// - Parameters:
+  ///     - showMainWindow: set to false when this function is called when tracklist is changed.
+  ///     In this case, wait for `MPV_EVENT_VIDEO_RECONFIG` to show the main window. Also set to false
+  ///     when the mini player is closed.
+  ///
+  /// This function is called:
+  /// 1) On `trackListChanged`, it will check the current media and settings to determine whether
+  /// or not to switch to main window automatically
+  /// 2) On user initiated button actions
+  /// 3) When closing the mini player
+  ///
   func switchBackFromMiniPlayer(automatically: Bool = false, showMainWindow: Bool = true) {
     log("Switch to normal window from mini player, automatically=\(automatically)")
     if !automatically {
@@ -656,24 +673,18 @@ class PlayerCore: NSObject {
                                                                  toItem: mainWindowContentView, attribute: attr, multiplier: 1, constant: 0)
       mainWindow.videoViewConstraints[attr]!.isActive = true
     }
-    // show main window
-    if showMainWindow {
-      mainWindow.window?.makeKeyAndOrderFront(self)
-    }
-    // if aspect ratio is not set
-    let (width, height) = originalVideoSize
-    if width == 0 && height == 0 {
-      mainWindow.window?.aspectRatio = AppData.sizeWhenNoVideo
-    }
+
     // hide mini player
     miniPlayer.window?.orderOut(nil)
     isInMiniPlayer = false
 
+    mainWindow.pendingShow = true
+    if showMainWindow {
+      currentController.setupUI()
+      mainWindow.updateTitle()
+      notifyWindowVideoSizeChanged()
+    }
     mainWindow.videoView.videoLayer.draw(forced: true)
-
-    mainWindow.updateTitle()
-
-    currentController.setupUI()
     events.emit(.musicModeChanged, data: false)
   }
 
@@ -1779,7 +1790,7 @@ class PlayerCore: NSObject {
     }
 
     if info.vid == 0 {
-      notifyMainWindowVideoSizeChanged()
+      notifyWindowVideoSizeChanged()
     }
 
     if self.isInMiniPlayer {
@@ -1971,10 +1982,10 @@ class PlayerCore: NSObject {
         log("Skipping music mode auto-switch because overrideAutoSwitchToMusicMode is true", level: .verbose)
       } else if audioStatus == .isAudio && !isInMiniPlayer && !mainWindow.fsState.isFullscreen {
         log("Current media is audio: auto-switching to mini player")
-        switchToMiniPlayer(automatically: true)
+        switchToMiniPlayer(automatically: true, showMiniPlayer: false)
       } else if audioStatus == .notAudio && isInMiniPlayer {
         log("Current media is not audio: auto-switching to normal window")
-        switchBackFromMiniPlayer(automatically: true)
+        switchBackFromMiniPlayer(automatically: true, showMainWindow: false)
       }
     }
     postNotification(.iinaTracklistChanged)
@@ -1994,7 +2005,7 @@ class PlayerCore: NSObject {
       // video size changed
       info.displayWidth = dwidth
       info.displayHeight = dheight
-      notifyMainWindowVideoSizeChanged()
+      notifyWindowVideoSizeChanged()
     }
   }
 
@@ -2158,10 +2169,11 @@ class PlayerCore: NSObject {
     )
   }
 
-  func notifyMainWindowVideoSizeChanged() {
-    mainWindow.adjustFrameByVideoSize()
-    if isInMiniPlayer {
-      miniPlayer.updateVideoSize()
+  func notifyWindowVideoSizeChanged() {
+    currentController.handleVideoSizeChange()
+    if currentController.pendingShow {
+      currentController.pendingShow = false
+      currentController.showWindow(self)
     }
   }
 

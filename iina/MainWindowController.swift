@@ -550,7 +550,6 @@ class MainWindowController: PlayerWindowController {
     guard let cv = window.contentView else { return }
     cv.autoresizesSubviews = false
     addVideoViewToWindow()
-    window.setIsVisible(true)
 
     // gesture recognizer
     cv.addGestureRecognizer(magnificationGestureRecognizer)
@@ -645,6 +644,40 @@ class MainWindowController: PlayerWindowController {
     }
 
     player.events.emit(.windowLoaded)
+
+    // Must workaround an AppKit defect in some versions of macOS. This defect is known to exist in
+    // Catalina and Big Sur. The problem was not reproducible in early versions of Monterey. It
+    // reappeared in Ventura. The status of other versions of macOS is unknown, however the
+    // workaround should be safe to apply in any version of macOS. The problem was reported in
+    // issues #4229, #3159, #3097 and #3253. The titles of open windows shown in the "Window" menu
+    // are automatically managed by the AppKit framework. To improve performance PlayerCore caches
+    // and reuses player instances along with their windows. This technique is valid and recommended
+    // by Apple. But in some versions of macOS, if a window is reused the framework will display the
+    // title first used for the window in the "Window" menu even after IINA has updated the title of
+    // the window. This problem can also be seen when right-clicking or control-clicking the IINA
+    // icon in the dock. As a workaround reset the window's title to "Window" before it is reused.
+    // This is the default title AppKit assigns to a window when it is first created. Surprising and
+    // rather disturbing this works as a workaround, but it does.
+    window.title = "Window"
+
+    // As there have been issues in this area, log details about the screen selection process.
+    NSScreen.log("window!.screen", window.screen)
+    NSScreen.log("NSScreen.main", NSScreen.main)
+    NSScreen.screens.enumerated().forEach { screen in
+      NSScreen.log("NSScreen.screens[\(screen.offset)]" , screen.element)
+    }
+
+    var screen = window.selectDefaultScreen()
+
+    if let rectString = UserDefaults.standard.value(forKey: "MainWindowLastPosition") as? String {
+      let rect = NSRectFromString(rectString)
+      if let lastScreen = NSScreen.screens.first(where: { NSPointInRect(rect.origin, $0.visibleFrame) }) {
+        screen = lastScreen
+        NSScreen.log("MainWindowLastPosition \(rect.origin) matched", screen)
+      }
+    }
+
+    videoView.videoLayer.draw(forced: true)
   }
 
   /// Returns the position in seconds for the given percent of the total duration of the video the percentage represents.
@@ -1122,57 +1155,10 @@ class MainWindowController: PlayerWindowController {
 
   // MARK: - Window delegate: Open / Close
 
-  func windowWillOpen() {
-    // Must workaround an AppKit defect in some versions of macOS. This defect is known to exist in
-    // Catalina and Big Sur. The problem was not reproducible in early versions of Monterey. It
-    // reappeared in Ventura. The status of other versions of macOS is unknown, however the
-    // workaround should be safe to apply in any version of macOS. The problem was reported in
-    // issues #4229, #3159, #3097 and #3253. The titles of open windows shown in the "Window" menu
-    // are automatically managed by the AppKit framework. To improve performance PlayerCore caches
-    // and reuses player instances along with their windows. This technique is valid and recommended
-    // by Apple. But in some versions of macOS, if a window is reused the framework will display the
-    // title first used for the window in the "Window" menu even after IINA has updated the title of
-    // the window. This problem can also be seen when right-clicking or control-clicking the IINA
-    // icon in the dock. As a workaround reset the window's title to "Window" before it is reused.
-    // This is the default title AppKit assigns to a window when it is first created. Surprising and
-    // rather disturbing this works as a workaround, but it does.
-    window!.title = "Window"
-
-    // As there have been issues in this area, log details about the screen selection process.
-    NSScreen.log("window!.screen", window!.screen, subsystem: subsystem)
-    NSScreen.log("NSScreen.main", NSScreen.main, subsystem: subsystem)
-    NSScreen.screens.enumerated().forEach { screen in
-      NSScreen.log("NSScreen.screens[\(screen.offset)]" , screen.element, subsystem: subsystem)
-    }
-
-    var screen = window!.selectDefaultScreen()
-
-    if let rectString = UserDefaults.standard.value(forKey: "MainWindowLastPosition") as? String {
-      let rect = NSRectFromString(rectString)
-      if let lastScreen = NSScreen.screens.first(where: { NSPointInRect(rect.origin, $0.visibleFrame) }) {
-        screen = lastScreen
-        NSScreen.log("MainWindowLastPosition \(rect.origin) matched", screen, subsystem: subsystem)
-      }
-    }
-
-    if shouldApplyInitialWindowSize, let wfg = windowFrameFromGeometry(newSize: AppData.sizeWhenNoVideo, screen: screen) {
-      window!.setFrame(wfg, display: true, animate: !Preference.bool(for: PK.disableAnimations))
-    } else {
-      window!.setFrame(AppData.sizeWhenNoVideo.centeredRect(in: screen.visibleFrame), display: true,
-                       animate: !Preference.bool(for: PK.disableAnimations))
-    }
-
-    // Draw black screen before playing a video. This is needed due to window reuse. Displaying a
-    // frame from a previously played video would violate good privacy practices.
-    videoView.videoLayer.draw(forced: true)
-  }
-
   /** A method being called when window open. Pretend to be a window delegate. */
-  override func windowDidOpen() {
-    super.windowDidOpen()
+  override func showWindow(_ sender: Any?) {
+    super.showWindow(sender)
 
-    window!.makeMain()
-    window!.makeKeyAndOrderFront(nil)
     resetCollectionBehavior()
     // update buffer indicator view
     updateBufferIndicatorView()
@@ -2456,7 +2442,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   /** Set window size when info available, or video size changed. */
-  func adjustFrameByVideoSize() {
+  override func handleVideoSizeChange() {
     guard let window = window else { return }
 
     let (width, height) = player.videoSizeForDisplay
@@ -2544,7 +2530,8 @@ class MainWindowController: PlayerWindowController {
       if let screenFrame = window.screen?.frame {
         rect = rect.constrain(in: screenFrame)
       }
-      if player.disableWindowAnimation || Preference.bool(for: .disableAnimations) {
+
+      if player.disableWindowAnimation || Preference.bool(for: .disableAnimations) || !window.isVisible {
         window.setFrame(rect, display: true, animate: false)
       } else {
         // animated `setFrame` can be inaccurate!

@@ -269,9 +269,10 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     volumeButton.image = image
   }
 
-  func updateVideoSize() {
+  override func handleVideoSizeChange() {
     guard let window = window else { return }
-    let (width, height) = defaultAlbumArt.isHidden ? player.videoSizeForDisplay : (1, 1)
+    let w = player.info.displayWidth, h = player.info.displayHeight
+    let (width, height) = (w == 0 && h == 0) ? (1, 1) :  player.videoSizeForDisplay
     let aspect = CGFloat(width) / CGFloat(height)
     let currentHeight = videoView.frame.height
     let newHeight = videoView.frame.width / aspect

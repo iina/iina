@@ -8,8 +8,6 @@
 
 import Cocoa
 
-fileprivate let toolBarSymbolStyle = NSImage.SymbolConfiguration(pointSize: 14, weight: .medium)
-
 protocol InitializingFromKey {
 
   static var defaultValue: Self { get }
@@ -700,14 +698,19 @@ struct Preference {
     case screenshot
 
     func image() -> NSImage {
+      func makeSymbol(_ name: String, _ fallbackName: NSImage.Name) -> NSImage {
+        guard #available(macOS 11.0, *) else { return NSImage(named: fallbackName)! }
+        let configuration = NSImage.SymbolConfiguration(pointSize: 14, weight: .medium)
+        return NSImage.findSFSymbol(name, withConfiguration: configuration, fallbackName: fallbackName)
+      }
       switch self {
-      case .settings: return Utility.findSFSymbol("gearshape", withConfiguration: toolBarSymbolStyle, fallbackName: NSImage.actionTemplateName)
-      case .playlist: return Utility.findSFSymbol("list.bullet", withConfiguration: toolBarSymbolStyle, fallbackName: "playlist")
-      case .pip: return Utility.findSFSymbol("pip.swap", withConfiguration: toolBarSymbolStyle, fallbackName: "pip")
-      case .fullScreen: return Utility.findSFSymbol("arrow.up.left.and.arrow.down.right", withConfiguration: toolBarSymbolStyle, fallbackName: "fullscreen")
-      case .musicMode: return Utility.findSFSymbol("music.note.list", withConfiguration: toolBarSymbolStyle, fallbackName: "toggle-album-art")
-      case .subTrack: return Utility.findSFSymbol("captions.bubble.fill", withConfiguration: toolBarSymbolStyle, fallbackName: "sub-track")
-      case .screenshot: return Utility.findSFSymbol("camera.shutter.button", withConfiguration: toolBarSymbolStyle, fallbackName: "screenshot")
+      case .settings: return makeSymbol("gearshape", NSImage.actionTemplateName)
+      case .playlist: return makeSymbol("list.bullet", "playlist")
+      case .pip: return makeSymbol("pip.swap", "pip")
+      case .fullScreen: return makeSymbol("arrow.up.left.and.arrow.down.right", "fullscreen")
+      case .musicMode: return makeSymbol("music.note.list", "toggle-album-art")
+      case .subTrack: return makeSymbol("captions.bubble.fill", "sub-track")
+      case .screenshot: return makeSymbol("camera.shutter.button", "screenshot")
       }
     }
 

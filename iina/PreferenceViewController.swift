@@ -16,6 +16,10 @@ class PreferenceViewController: NSViewController {
     return []
   }
 
+  func makeSymbol(_ name: String) -> NSImage {
+    return NSImage(systemSymbolName: name, accessibilityDescription: nil)!.withSymbolConfiguration(.init(pointSize: 18, weight: .bold))!
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
 

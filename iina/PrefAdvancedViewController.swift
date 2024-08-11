@@ -23,7 +23,11 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
   }
 
   var preferenceTabImage: NSImage {
-    return NSImage(named: NSImage.Name("pref_advanced"))!
+    if #available(macOS 14.0, *) {
+      return makeSymbol("flask")
+    } else {
+      return NSImage(named: NSImage.Name("pref_advanced"))!
+    }
   }
 
   var preferenceContentIsScrollable: Bool {

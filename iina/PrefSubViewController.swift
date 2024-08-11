@@ -21,7 +21,11 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
   }
 
   var preferenceTabImage: NSImage {
-    return NSImage(named: NSImage.Name("pref_sub"))!
+    if #available(macOS 11.0, *) {
+      return makeSymbol("captions.bubble")
+    } else {
+      return NSImage(named: NSImage.Name("pref_sub"))!
+    }
   }
 
   override var sectionViews: [NSView] {

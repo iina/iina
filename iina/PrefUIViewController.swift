@@ -29,7 +29,11 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
   }
 
   var preferenceTabImage: NSImage {
-    return NSImage(named: NSImage.Name("pref_ui"))!
+    if #available(macOS 11.0, *) {
+      return makeSymbol("macwindow")
+    } else {
+      return NSImage(named: NSImage.Name("pref_ui"))!
+    }
   }
 
   static var oscToolbarButtons: [Preference.ToolBarButton] {

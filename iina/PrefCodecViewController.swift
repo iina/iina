@@ -20,11 +20,7 @@ class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbedda
   }
 
   var preferenceTabImage: NSImage {
-    if #available(macOS 12.0, *) {
-      return makeSymbol("play.rectangle.on.rectangle")
-    } else {
-      return NSImage(named: NSImage.Name("pref_av"))!
-    }
+    return makeSymbol("play.rectangle.on.rectangle", fallbackName: "pref_av")
   }
 
   override var sectionViews: [NSView] {

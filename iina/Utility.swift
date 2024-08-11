@@ -555,6 +555,22 @@ class Utility {
     }
   }
 
+  /// Try to find a SF Symbol. If the symbol is found, then return the symbol with the configuration applied; otherwise,
+  /// return the fallback image.
+  ///
+  /// - Parameters:
+  ///   - name: The name of the SF Symbol
+  ///   - configuration: The symbol configuration for the SF symbol
+  ///   - fallbackName: If the current macOS doesn't contains the wanted SF symbol, then the fallback image will be returned
+  static func findSFSymbol(_ name: String, withConfiguration configuration: NSImage.SymbolConfiguration?, fallbackName: NSImage.Name) -> NSImage {
+    let symbol = NSImage.init(systemSymbolName: name, accessibilityDescription: nil)
+    guard let symbol else { return NSImage(named: fallbackName)! }
+    if let configuration {
+      return symbol.withSymbolConfiguration(configuration) ?? symbol
+    }
+    return symbol
+  }
+
   // MARK: - Util classes
 
   class FontAttributes {

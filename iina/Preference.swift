@@ -8,6 +8,8 @@
 
 import Cocoa
 
+fileprivate let toolBarSymbolStyle = NSImage.SymbolConfiguration(pointSize: 14, weight: .medium)
+
 protocol InitializingFromKey {
 
   static var defaultValue: Self { get }
@@ -699,13 +701,13 @@ struct Preference {
 
     func image() -> NSImage {
       switch self {
-      case .settings: return NSImage(named: NSImage.actionTemplateName)!
-      case .playlist: return #imageLiteral(resourceName: "playlist")
-      case .pip: return #imageLiteral(resourceName: "pip")
-      case .fullScreen: return #imageLiteral(resourceName: "fullscreen")
-      case .musicMode: return #imageLiteral(resourceName: "toggle-album-art")
-      case .subTrack: return #imageLiteral(resourceName: "sub-track")
-      case .screenshot: return #imageLiteral(resourceName: "screenshot")
+      case .settings: return Utility.findSFSymbol("gearshape", withConfiguration: toolBarSymbolStyle, fallbackName: NSImage.actionTemplateName)
+      case .playlist: return Utility.findSFSymbol("list.bullet", withConfiguration: toolBarSymbolStyle, fallbackName: "playlist")
+      case .pip: return Utility.findSFSymbol("pip.swap", withConfiguration: toolBarSymbolStyle, fallbackName: "pip")
+      case .fullScreen: return Utility.findSFSymbol("arrow.up.left.and.arrow.down.right", withConfiguration: toolBarSymbolStyle, fallbackName: "fullscreen")
+      case .musicMode: return Utility.findSFSymbol("music.note.list", withConfiguration: toolBarSymbolStyle, fallbackName: "toggle-album-art")
+      case .subTrack: return Utility.findSFSymbol("captions.bubble.fill", withConfiguration: toolBarSymbolStyle, fallbackName: "sub-track")
+      case .screenshot: return Utility.findSFSymbol("camera.shutter.button", withConfiguration: toolBarSymbolStyle, fallbackName: "screenshot")
       }
     }
 

@@ -18,11 +18,7 @@ class PrefNetworkViewController: PreferenceViewController, PreferenceWindowEmbed
   var viewIdentifier: String = "PrefNetworkViewController"
 
   var preferenceTabImage: NSImage {
-    if #available(macOS 11.0, *) {
-      return makeSymbol("network")
-    } else {
-      return NSImage(named: NSImage.Name("pref_network"))!
-    }
+    return makeSymbol("network", fallbackName: "pref_network")
   }
 
   var preferenceTabTitle: String {

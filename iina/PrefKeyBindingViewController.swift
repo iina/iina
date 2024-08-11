@@ -23,11 +23,7 @@ class PrefKeyBindingViewController: PreferenceViewController, PreferenceWindowEm
   }
 
   var preferenceTabImage: NSImage {
-    if #available(macOS 11.0, *) {
-      return makeSymbol("keyboard.badge.ellipsis")
-    } else {
-      return NSImage(named: NSImage.Name("pref_kb"))!
-    }
+    return makeSymbol("keyboard.badge.ellipsis", fallbackName: "pref_kb")
   }
 
   var preferenceContentIsScrollable: Bool {

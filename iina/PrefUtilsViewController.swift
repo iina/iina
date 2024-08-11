@@ -19,11 +19,7 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
   }
 
   var preferenceTabImage: NSImage {
-    if #available(macOS 11.0, *) {
-      return makeSymbol("wrench.and.screwdriver")
-    } else {
-      return NSImage(named: NSImage.Name("pref_utils"))!
-    }
+    return makeSymbol("wrench.and.screwdriver", fallbackName: "pref_utils")
   }
 
   override var sectionViews: [NSView] {

@@ -35,11 +35,7 @@ class PrefPluginViewController: PreferenceViewController, PreferenceWindowEmbedd
   }
 
   var preferenceTabImage: NSImage {
-    if #available(macOS 11.0, *) {
-      return makeSymbol("puzzlepiece.extension")
-    } else {
-      return NSImage(named: NSImage.Name("pref_general"))!
-    }
+    return makeSymbol("puzzlepiece.extension", fallbackName: "pref_general")
   }
 
   var preferenceContentIsScrollable: Bool {

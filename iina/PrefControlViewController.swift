@@ -20,11 +20,7 @@ class PrefControlViewController: PreferenceViewController, PreferenceWindowEmbed
   }
 
   var preferenceTabImage: NSImage {
-    if #available(macOS 12.0, *) {
-      return makeSymbol("rectangle.and.hand.point.up.left")
-    } else {
-      return NSImage(named: NSImage.Name("pref_control"))!
-    }
+    return makeSymbol("rectangle.and.hand.point.up.left", fallbackName: "pref_control")
   }
 
   override var sectionViews: [NSView] {

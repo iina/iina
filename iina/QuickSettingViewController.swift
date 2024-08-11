@@ -460,7 +460,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       let filters = eqString.split(separator: ",")
       zip(filters, eqSliders).forEach { (filter, slider) in
         if let gain = filter.split(separator: "=").last {
-          print(gain)
           slider.doubleValue = Double(gain) ?? 0
         } else {
           slider.doubleValue = 0

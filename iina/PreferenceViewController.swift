@@ -16,6 +16,7 @@ class PreferenceViewController: NSViewController {
     return []
   }
 
+  @available(macOS 11.0, *)
   func makeSymbol(_ name: String) -> NSImage {
     return NSImage(systemSymbolName: name, accessibilityDescription: nil)!.withSymbolConfiguration(.init(pointSize: 18, weight: .bold))!
   }

@@ -411,10 +411,23 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     return false
   }
 
+  /// Returns a Boolean value that indicates if the app terminates once the last window closes.
+  ///
+  /// IINA will not quit when the last window is closed unless the `Quit after all windows are closed` setting is enabled.
+  /// - Note: When the welcome window is enabled this method will be called during the transition from showing the welcome
+  ///     window to playing media. This happens because the welcome window will be closed before the player window is opened as
+  ///     opening the player window is delayed until mpv reports the window size required. For this reason the state of the active
+  ///     player core must be checked as it could be preparing to open a window.
+  /// - Parameter sender: The application object whose last window was closed.
+  /// - Returns: `false` if the application should not be terminated when its last window is closed; otherwise, `true` to
+  ///     terminate the application.
   func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
-    guard PlayerCore.active.mainWindow.loaded || PlayerCore.active.initialWindow.loaded else { return false }
-    guard !PlayerCore.active.mainWindow.isWindowHidden else { return false }
-    return Preference.bool(for: .quitWhenNoOpenedWindow)
+    // If the user has not enabled the setting then no need to check anything else.
+    guard Preference.bool(for: .quitWhenNoOpenedWindow) else { return false }
+    let player = PlayerCore.active
+    guard !player.info.state.active else { return false }
+    guard player.mainWindow.loaded || player.initialWindow.loaded else { return false }
+    return !player.mainWindow.isWindowHidden
   }
 
   func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {

@@ -563,8 +563,7 @@ class Utility {
   ///   - configuration: The symbol configuration for the SF symbol
   ///   - fallbackName: If the current macOS doesn't contains the wanted SF symbol, then the fallback image will be returned
   static func findSFSymbol(_ name: String, withConfiguration configuration: NSImage.SymbolConfiguration?, fallbackName: NSImage.Name) -> NSImage {
-    let symbol = NSImage.init(systemSymbolName: name, accessibilityDescription: nil)
-    guard let symbol else { return NSImage(named: fallbackName)! }
+    guard #available(macOS 11.0, *), let symbol = NSImage(systemSymbolName: name, accessibilityDescription: nil) else { return NSImage(named: fallbackName)! }
     if let configuration {
       return symbol.withSymbolConfiguration(configuration) ?? symbol
     }

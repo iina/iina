@@ -54,12 +54,12 @@ class PlaySliderCell: NSSliderCell {
     let isLightTheme = !controlView!.window!.effectiveAppearance.isDark
 
     if isLightTheme {
-      NSGraphicsContext.saveGraphicsState()
-      let shadow = NSShadow()
-      shadow.shadowBlurRadius = 1
-      shadow.shadowColor = .controlShadowColor
-      shadow.shadowOffset = NSSize(width: 0, height: -0.5)
-      shadow.set()
+        NSGraphicsContext.saveGraphicsState()
+        let shadow = NSShadow()
+        shadow.shadowBlurRadius = 1
+        shadow.shadowColor = NSColor.separatorColor // Use the separatorColor for shadows
+        shadow.shadowOffset = NSSize(width: 0, height: -0.5)
+        shadow.set()
     }
 
     let path = NSBezierPath(roundedRect: rect, xRadius: knobRadius, yRadius: knobRadius)
@@ -67,10 +67,10 @@ class PlaySliderCell: NSSliderCell {
     path.fill()
 
     if isLightTheme {
-      path.lineWidth = 0.4
-      NSColor.controlShadowColor.setStroke()
-      path.stroke()
-      NSGraphicsContext.restoreGraphicsState()
+        path.lineWidth = 0.4
+        NSColor.separatorColor.setStroke() // Use separatorColor instead of controlShadowColor
+        path.stroke()
+        NSGraphicsContext.restoreGraphicsState()
     }
   }
 

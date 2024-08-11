@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import UniformTypeIdentifiers
 
 class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbeddable {
 
@@ -88,14 +89,14 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
       }
 
       for ext in exts {
-        let utiString = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, ext as CFString, nil)!.takeUnretainedValue()
-        let status = LSSetDefaultRoleHandlerForContentType(utiString, .all, cfBundleID)
-        if status == kOSReturnSuccess {
-          successCount += 1
-        } else {
-          Logger.log("failed for \(ext): return value \(status)", level: .error)
-          failedCount += 1
-        }
+          let utiString = UTType(filenameExtension: ext as String)?.identifier ?? ""
+          let status = LSSetDefaultRoleHandlerForContentType(utiString as CFString, .all, cfBundleID)
+          if status == kOSReturnSuccess {
+              successCount += 1
+          } else {
+              Logger.log("failed for \(ext): return value \(status)", level: .error)
+              failedCount += 1
+          }
       }
     }
 

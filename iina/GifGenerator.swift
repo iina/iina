@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import UniformTypeIdentifiers
 
 class GifGenerator: NSObject {
 
@@ -15,8 +16,9 @@ class GifGenerator: NSObject {
     let fileProperties = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFLoopCount as String: loopCount]]
     let frameProperties = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFDelayTime as String: frameDelay]]
 
-    guard let destination = CGImageDestinationCreateWithURL(url as CFURL, kUTTypeGIF, Int(images.count), nil) else {
-      throw IINAError.gifCannotCreateDestination
+    // Replace kUTTypeGIF with UTType.gif.identifier
+    guard let destination = CGImageDestinationCreateWithURL(url as CFURL, UTType.gif.identifier as CFString, images.count, nil) else {
+        throw IINAError.gifCannotCreateDestination
     }
 
     CGImageDestinationSetProperties(destination, fileProperties as CFDictionary)

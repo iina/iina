@@ -605,7 +605,7 @@ return -1;\
     switch (pFrame->color_primaries) {
       default:
         // If this message is logged then the situation needs to be investigated to determine the
-        // correct color space. Fall through and treat this as a SDR image.
+        // correct color space. Fall through and treat this as an SDR image.
         LOG_WARN(@"Unexpected color primaries: %s (%d)",
              av_color_primaries_name(pFrame->color_primaries), pFrame->color_primaries);
       case AVCOL_PRI_UNSPECIFIED:
@@ -615,19 +615,13 @@ return -1;\
       case AVCOL_PRI_BT2020:
         if (@available(macOS 11.0, *)) {
           cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2100_PQ);
-        } else if (@available(macOS 10.15.4, *)) {
-            cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2020_PQ);
-        } else if (@available(macOS 10.14.6, *)) {
-            cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2020_PQ_EOTF);
         } else {
           cgColorSpace = CGColorSpaceCreateDeviceRGB();
         }
         break;
       case AVCOL_PRI_SMPTE432:
-        if (@available(macOS 10.15.4, *)) {
-          cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceDisplayP3_PQ);
-        } else if (@available(macOS 10.14.6, *)) {
-          cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceDisplayP3_PQ_EOTF);
+        if (@available(macOS 11.0, *)) {
+          cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceDisplayP3);
         } else {
           cgColorSpace = CGColorSpaceCreateDeviceRGB();
         }

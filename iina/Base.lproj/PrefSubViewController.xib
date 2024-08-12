@@ -921,81 +921,111 @@
             </constraints>
             <point key="canvasLocation" x="-782" y="284"/>
         </customView>
-        <customView misplaced="YES" id="ATO-g6-mEy" userLabel="Prefs &gt; Subtitle &gt; ASS Subtitles">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="68"/>
+        <customView id="ATO-g6-mEy" userLabel="Prefs &gt; Subtitle &gt; ASS Subtitles">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="113"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField identifier="SectionTitleASS" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="utN-qX-5BH">
-                    <rect key="frame" x="-2" y="44" width="97" height="16"/>
+                    <rect key="frame" x="-2" y="89" width="97" height="16"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="ASS Subtitles:" id="mFm-Q6-aja">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Dg7-OH-h2a">
-                    <rect key="frame" x="118" y="44" width="92" height="16"/>
-                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Override level:" id="gAq-Vr-hRY">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7UX-IL-hdk">
-                    <rect key="frame" x="214" y="42" width="128" height="20"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="124" id="EJa-Kl-S4K"/>
-                    </constraints>
-                    <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" maxValue="3" doubleValue="3" tickMarkPosition="below" numberOfTickMarks="5" allowsTickMarkValuesOnly="YES" sliderType="linear" id="63l-gO-fEV"/>
-                    <connections>
-                        <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subOverrideLevel" id="jz2-FJ-liL">
-                            <dictionary key="options">
-                                <string key="NSValueTransformerName">ASSOverrideLevelValueTransformer</string>
-                            </dictionary>
-                        </binding>
-                    </connections>
-                </slider>
-                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FR3-Ar-5Dw">
-                    <rect key="frame" x="346" y="44" width="41" height="14"/>
-                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="strip" id="3H8-Ei-cTm">
-                        <font key="font" size="12" name="Menlo-Regular"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                    <connections>
-                        <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subOverrideLevel" id="0Y9-zY-OjE">
-                            <dictionary key="options">
-                                <string key="NSValueTransformerName">ASSOverrideLevelTransformer</string>
-                            </dictionary>
-                        </binding>
-                    </connections>
-                </textField>
-                <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="yzs-wK-eRV">
-                    <rect key="frame" x="118" y="8" width="364" height="28"/>
-                    <textFieldCell key="cell" allowsUndo="NO" title="Radically strip all ASS tags and styles from the subtitle. This is equivalent to the old --no-ass / --no-sub-ass options." id="Oaz-i3-yO0">
-                        <font key="font" metaFont="smallSystem"/>
-                        <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
+                <box title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="oat-Ze-x0N">
+                    <rect key="frame" x="117" y="4" width="366" height="103"/>
+                    <view key="contentView" id="flC-Mg-1G1">
+                        <rect key="frame" x="4" y="5" width="358" height="95"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Dg7-OH-h2a">
+                                <rect key="frame" x="6" y="45" width="92" height="16"/>
+                                <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Override level:" id="gAq-Vr-hRY">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7UX-IL-hdk">
+                                <rect key="frame" x="102" y="42" width="128" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="124" id="EJa-Kl-S4K"/>
+                                </constraints>
+                                <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" maxValue="3" doubleValue="3" tickMarkPosition="below" numberOfTickMarks="5" allowsTickMarkValuesOnly="YES" sliderType="linear" id="63l-gO-fEV"/>
+                                <connections>
+                                    <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subOverrideLevel" id="jz2-FJ-liL">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">ASSOverrideLevelValueTransformer</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </slider>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FR3-Ar-5Dw">
+                                <rect key="frame" x="234" y="45" width="41" height="14"/>
+                                <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="strip" id="3H8-Ei-cTm">
+                                    <font key="font" size="12" name="Menlo-Regular"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subOverrideLevel" id="0Y9-zY-OjE">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">ASSOverrideLevelTransformer</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </textField>
+                            <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="yzs-wK-eRV">
+                                <rect key="frame" x="6" y="8" width="345" height="28"/>
+                                <textFieldCell key="cell" allowsUndo="NO" title="Radically strip all ASS tags and styles from the subtitle. This is equivalent to the old --no-ass / --no-sub-ass options." id="Oaz-i3-yO0">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mqJ-QH-Pfa">
+                                <rect key="frame" x="27" y="67" width="304" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="mlq-Dy-mT3"/>
+                                </constraints>
+                                <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" segmentDistribution="fillEqually" style="rounded" trackingMode="selectOne" id="liY-E6-HCB">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <segments>
+                                        <segment label="Primary Subtitles" selected="YES"/>
+                                        <segment label="Secondary Subtitles" tag="1"/>
+                                    </segments>
+                                </segmentedCell>
+                            </segmentedControl>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="FR3-Ar-5Dw" firstAttribute="leading" secondItem="7UX-IL-hdk" secondAttribute="trailing" constant="8" id="Bee-2p-M1w"/>
+                            <constraint firstItem="mqJ-QH-Pfa" firstAttribute="top" secondItem="flC-Mg-1G1" secondAttribute="top" constant="8" id="D9e-SL-DJg"/>
+                            <constraint firstItem="7UX-IL-hdk" firstAttribute="leading" secondItem="Dg7-OH-h2a" secondAttribute="trailing" constant="8" id="M7q-XN-GCK"/>
+                            <constraint firstItem="yzs-wK-eRV" firstAttribute="top" secondItem="7UX-IL-hdk" secondAttribute="bottom" constant="8" id="M9K-V0-Rte"/>
+                            <constraint firstAttribute="trailing" secondItem="yzs-wK-eRV" secondAttribute="trailing" constant="9" id="Pyv-ZH-Hz8"/>
+                            <constraint firstItem="FR3-Ar-5Dw" firstAttribute="firstBaseline" secondItem="Dg7-OH-h2a" secondAttribute="firstBaseline" id="SmM-ZC-GTJ"/>
+                            <constraint firstItem="Dg7-OH-h2a" firstAttribute="leading" secondItem="flC-Mg-1G1" secondAttribute="leading" constant="8" id="Z4Y-PR-Yvx"/>
+                            <constraint firstAttribute="bottom" secondItem="yzs-wK-eRV" secondAttribute="bottom" constant="8" id="dy2-2O-j9V"/>
+                            <constraint firstItem="yzs-wK-eRV" firstAttribute="leading" secondItem="Dg7-OH-h2a" secondAttribute="leading" id="g9B-pv-90g"/>
+                            <constraint firstItem="mqJ-QH-Pfa" firstAttribute="centerX" secondItem="flC-Mg-1G1" secondAttribute="centerX" id="hyt-YB-IzG"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FR3-Ar-5Dw" secondAttribute="trailing" id="mcg-Bg-0C3"/>
+                            <constraint firstItem="Dg7-OH-h2a" firstAttribute="top" secondItem="mqJ-QH-Pfa" secondAttribute="bottom" constant="8" id="tgc-aj-JLm"/>
+                            <constraint firstItem="7UX-IL-hdk" firstAttribute="firstBaseline" secondItem="Dg7-OH-h2a" secondAttribute="firstBaseline" id="vb2-gn-8JY"/>
+                        </constraints>
+                    </view>
+                </box>
             </subviews>
             <constraints>
-                <constraint firstItem="7UX-IL-hdk" firstAttribute="leading" secondItem="Dg7-OH-h2a" secondAttribute="trailing" constant="8" id="0ma-x0-z28"/>
                 <constraint firstItem="utN-qX-5BH" firstAttribute="leading" secondItem="ATO-g6-mEy" secondAttribute="leading" id="4Cw-zR-zEc"/>
-                <constraint firstItem="Dg7-OH-h2a" firstAttribute="leading" secondItem="utN-qX-5BH" secondAttribute="trailing" constant="27" id="EAU-My-lT4"/>
-                <constraint firstItem="Dg7-OH-h2a" firstAttribute="firstBaseline" secondItem="utN-qX-5BH" secondAttribute="firstBaseline" id="ObP-0e-51E"/>
-                <constraint firstItem="FR3-Ar-5Dw" firstAttribute="leading" secondItem="7UX-IL-hdk" secondAttribute="trailing" constant="8" id="Pp8-Z0-oaO"/>
-                <constraint firstAttribute="bottom" secondItem="yzs-wK-eRV" secondAttribute="bottom" constant="8" id="R9j-LN-y20"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FR3-Ar-5Dw" secondAttribute="trailing" id="V1O-hm-hOZ"/>
-                <constraint firstItem="FR3-Ar-5Dw" firstAttribute="baseline" secondItem="Dg7-OH-h2a" secondAttribute="baseline" id="ZDT-Nr-ntX"/>
-                <constraint firstItem="7UX-IL-hdk" firstAttribute="centerY" secondItem="Dg7-OH-h2a" secondAttribute="centerY" id="ncs-DD-GD6"/>
+                <constraint firstItem="oat-Ze-x0N" firstAttribute="leading" secondItem="ATO-g6-mEy" secondAttribute="leading" constant="120" id="OY7-pt-FWk"/>
+                <constraint firstAttribute="trailing" secondItem="oat-Ze-x0N" secondAttribute="trailing" id="PwW-FU-bO7"/>
+                <constraint firstItem="oat-Ze-x0N" firstAttribute="top" secondItem="ATO-g6-mEy" secondAttribute="top" constant="8" id="ZYp-LA-Oiu"/>
+                <constraint firstAttribute="bottom" secondItem="oat-Ze-x0N" secondAttribute="bottom" constant="8" id="esn-gv-5UG"/>
                 <constraint firstItem="utN-qX-5BH" firstAttribute="top" secondItem="ATO-g6-mEy" secondAttribute="top" constant="8" id="pVk-D1-vRK"/>
-                <constraint firstAttribute="trailing" secondItem="yzs-wK-eRV" secondAttribute="trailing" id="peQ-cc-X1J"/>
-                <constraint firstItem="yzs-wK-eRV" firstAttribute="leading" secondItem="Dg7-OH-h2a" secondAttribute="leading" id="qDz-gX-k1K"/>
-                <constraint firstItem="yzs-wK-eRV" firstAttribute="top" secondItem="Dg7-OH-h2a" secondAttribute="bottom" constant="8" id="rbY-5T-ZoB"/>
                 <constraint firstItem="utN-qX-5BH" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="ATO-g6-mEy" secondAttribute="leading" constant="120" id="z5s-tB-6So"/>
             </constraints>
-            <point key="canvasLocation" x="-782" y="-77"/>
+            <point key="canvasLocation" x="-782" y="-52.5"/>
         </customView>
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="ZpT-fB-Daq" userLabel="Prefs &gt; Subtitle &gt; Position">
             <rect key="frame" x="0.0" y="0.0" width="480" height="208"/>

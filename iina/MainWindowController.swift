@@ -710,7 +710,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   private func setupOSCToolbarButtons(_ buttons: [Preference.ToolBarButton]) {
-    let buttons = buttons
+    var buttons = buttons
     fragToolbarView.views.forEach { fragToolbarView.removeView($0) }
     for buttonType in buttons {
       let button = NSButton()

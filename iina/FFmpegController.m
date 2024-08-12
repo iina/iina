@@ -615,19 +615,13 @@ return -1;\
       case AVCOL_PRI_BT2020:
         if (@available(macOS 11.0, *)) {
           cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2100_PQ);
-        } else if (@available(macOS 10.15.4, *)) {
-            cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2020_PQ);
-        } else if (@available(macOS 10.14.6, *)) {
-            cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2020_PQ_EOTF);
         } else {
           cgColorSpace = CGColorSpaceCreateDeviceRGB();
         }
         break;
       case AVCOL_PRI_SMPTE432:
-        if (@available(macOS 10.15.4, *)) {
-          cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceDisplayP3_PQ);
-        } else if (@available(macOS 10.14.6, *)) {
-          cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceDisplayP3_PQ_EOTF);
+        if (@available(macOS 11.0, *)) {
+          cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceDisplayP3);
         } else {
           cgColorSpace = CGColorSpaceCreateDeviceRGB();
         }

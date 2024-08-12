@@ -195,27 +195,30 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
       return NSLocalizedString("preference.sub_override_level.strip", value: "strip", comment: "strip")
     case .scale:
       return NSLocalizedString("preference.sub_override_level.scale", value: "scale", comment: "scale")
+    case .no:
+      return NSLocalizedString("preference.sub_override_level.no", value: "no", comment: "no")
     }
   }
 }
 
 /// Transform a raw `SubOverrideLevel` enum value into a slider value.
 ///
-///Normally there is a 1 to 1 mapping between an enum value and a slider value. However this is not true for `SubOverrideLevel`.
-///Originally the only supported values for the `Override level` setting were `yes`, `force` and `strip`. Then `scale` was
-///added. The order for the slider now _must_ be `yes`, `scale`, `force` and `strip`. But to preserve backward compatibility
-///with enum values stored in user's settings `scale` was added to the end of the enumeration, thus requiring a transformation
-///between the slider and enum values as shown in this table:
+/// Normally there is a 1 to 1 mapping between an enum value and a slider value. However this is not true for `SubOverrideLevel`.
+/// Originally the only supported values for the `Override level` setting were `yes`, `force` and `strip`. Then `scale` and
+/// `no` were added. The order for the slider now _must_ be `no`, `yes`, `scale`, `force` and `strip`. But to preserve
+/// backward compatibility with enum values stored in user's settings `scale` and `no` were added to the end of the enumeration,
+/// thus requiring a transformation between the slider and enum values as shown in this table:
 ///
 /// | Slider | Raw | Enum |
 /// | --- | --- | --- |
-/// | 0 | 0 | yes |
-/// | 1 | 3 | scale |
-/// | 2 | 1 | force |
-/// | 3 | 2 | strip |
+/// | 0 | 4 | no |
+/// | 1 | 0 | yes |
+/// | 2 | 3 | scale |
+/// | 3 | 1 | force |
+/// | 4 | 2 | strip |
 @objc(ASSOverrideLevelValueTransformer) class ASSOverrideLevelValueTransformer: ValueTransformer {
 
-  private static let enumToSlider: [NSNumber: NSNumber] = [0: 0, 1: 2, 2: 3, 3: 1]
+  private static let enumToSlider: [NSNumber: NSNumber] = [0: 1, 1: 3, 2: 4, 3: 2, 4:0]
 
   private static let sliderToEnum: [NSNumber: NSNumber] = {
     var result: [NSNumber: NSNumber] = [:]

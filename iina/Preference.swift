@@ -196,6 +196,7 @@ struct Preference {
     static let subAutoLoadSearchPath = Key("subAutoLoadSearchPath")
     static let ignoreAssStyles = Key("ignoreAssStyles")
     static let subOverrideLevel = Key("subOverrideLevel")
+    static let secondarySubOverrideLevel = Key("secondarySubOverrideLevel")
     static let subTextFont = Key("subTextFont")
     static let subTextSize = Key("subTextSize")
     static let subTextColorString = Key("subTextColorString")
@@ -476,15 +477,17 @@ struct Preference {
     }
   }
 
-  /// Enum values for the IINA setting that corresponds to the `mpv`
-  /// [sub-ass-override](https://mpv.io/manual/stable/#options-sub-ass-override) option.
-  ///- Important: In order to preserve backward compatibility with enum values stored in user's settings `scale` was added to
-  ///    the end of the enumeration. This is why the constants are not ordered from least impactful to most impactful.
+  /// Enum values for the IINA settings that correspond to the `mpv`
+  /// [sub-ass-override](https://mpv.io/manual/stable/#options-sub-ass-override) and
+  /// [secondary-sub-ass-override](https://mpv.io/manual/stable/#options-secondary-sub-ass-override) options.
+  ///- Important: In order to preserve backward compatibility with enum values stored in user's settings `scale` and `no`were
+  ///     added to the end of the enumeration. This is why the constants are not ordered from least impactful to most impactful.
   enum SubOverrideLevel: Int, InitializingFromKey {
     case yes = 0
     case force
     case strip
     case scale
+    case no
 
     static var defaultValue = SubOverrideLevel.yes
 
@@ -499,6 +502,7 @@ struct Preference {
         case .force : return "force"
         case .strip: return "strip"
         case .scale: return "scale"
+        case .no: return "no"
         }
       }
     }
@@ -854,6 +858,7 @@ struct Preference {
     .subAutoLoadSearchPath: "./*",
     .ignoreAssStyles: false,
     .subOverrideLevel: SubOverrideLevel.strip.rawValue,
+    .secondarySubOverrideLevel: SubOverrideLevel.strip.rawValue,
     .subTextFont: "sans-serif",
     .subTextSize: Float(55),
     .subTextColorString: NSColor.white.usingColorSpace(.deviceRGB)!.mpvColorString,

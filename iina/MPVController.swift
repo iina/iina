@@ -428,15 +428,13 @@ class MPVController: NSObject {
     player.info.subEncoding = Preference.string(for: .defaultEncoding)
 
     let subOverrideHandler: OptionObserverInfo.Transformer = { key in
-      let v = Preference.bool(for: .ignoreAssStyles)
-      let level: Preference.SubOverrideLevel = Preference.enum(for: .subOverrideLevel)
-      return v ? level.string : "yes"
+      (Preference.enum(for: key) as Preference.SubOverrideLevel).string
     }
-
-    setUserOption(PK.ignoreAssStyles, type: .other, forName: MPVOption.Subtitles.subAssOverride,
-                  level: .verbose, transformer: subOverrideHandler)
     setUserOption(PK.subOverrideLevel, type: .other, forName: MPVOption.Subtitles.subAssOverride,
                   level: .verbose, transformer: subOverrideHandler)
+    setUserOption(PK.secondarySubOverrideLevel, type: .other,
+                  forName: MPVOption.Subtitles.secondarySubAssOverride, level: .verbose,
+                  transformer: subOverrideHandler)
 
     setUserOption(PK.subTextFont, type: .string, forName: MPVOption.Subtitles.subFont, level: .verbose)
     setUserOption(PK.subTextSize, type: .float, forName: MPVOption.Subtitles.subFontSize, level: .verbose)

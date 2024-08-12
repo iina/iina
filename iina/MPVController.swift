@@ -1013,8 +1013,8 @@ class MPVController: NSObject {
   }
 
   func removeHooks(withIdentifier id: String) {
-    $hooks.withLock {
-      $0.filter { (k, v) in v.isJavascript && v.id == id }.keys.forEach { hooks.removeValue(forKey: $0) }
+    $hooks.withLock { hooks in
+      hooks.filter { (k, v) in v.isJavascript && v.id == id }.keys.forEach { hooks.removeValue(forKey: $0) }
     }
   }
 

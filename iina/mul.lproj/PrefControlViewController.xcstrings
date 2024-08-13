@@ -197,12 +197,6 @@
             "value" : "Mouse"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mus"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -213,6 +207,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Muis"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mus"
           }
         },
         "pl" : {
@@ -257,7 +257,7 @@
             "value" : "Mouse"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Miš"
@@ -527,12 +527,6 @@
             "value" : "Seek type:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Seek type:"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -543,6 +537,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nauwkeurigheid vooruit-/terugspoelen:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Seek type:"
           }
         },
         "pl" : {
@@ -587,7 +587,7 @@
             "value" : "Seek type:"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tip pomeranja:"
@@ -857,12 +857,6 @@
             "value" : "Toggle Picture-in-Picture"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bilde-i-bilde"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -873,6 +867,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Schakel Beeld-in-beeld in/uit"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bilde-i-bilde"
           }
         },
         "pl" : {
@@ -917,7 +917,7 @@
             "value" : "Toggle Picture-in-Picture"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Uključi/isključi sliku u slici"
@@ -1187,12 +1187,6 @@
             "value" : "Toggle fullscreen"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gå til fullskjerm"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1203,6 +1197,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Schermvullende weergave"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gå til fullskjerm"
           }
         },
         "pl" : {
@@ -1247,7 +1247,7 @@
             "value" : "Toggle fullscreen"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Uključi/isključi rеžim cеlog еkrana"
@@ -1517,12 +1517,6 @@
             "value" : "Exact seek is more precise but can cause lag and higher CPU usage."
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Exact seek is more precise but can cause lag and higher CPU usage."
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1533,6 +1527,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vooruit-/terugspoelen per frame kan tot haperingen en een hogere CPU-belasting leiden."
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Exact seek is more precise but can cause lag and higher CPU usage."
           }
         },
         "pl" : {
@@ -1577,7 +1577,7 @@
             "value" : "Exact seek is more precise but can cause lag and higher CPU usage."
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tačno pomeranje je preciznije, ali može dovesti do kašnjenja i većeg zauzeća procesora."
@@ -1847,12 +1847,6 @@
             "value" : "Toggle fullscreen"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gå til fullskjerm"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1863,6 +1857,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Schermvullende weergave"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gå til fullskjerm"
           }
         },
         "pl" : {
@@ -1907,7 +1907,7 @@
             "value" : "Toggle fullscreen"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Uključi/isključi rеžim cеlog еkrana"
@@ -2177,12 +2177,6 @@
             "value" : "Hide OSC"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Skjul OSC"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2193,6 +2187,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Afspeelregelaars verbergen"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skjul OSC"
           }
         },
         "pl" : {
@@ -2237,7 +2237,7 @@
             "value" : "Hide OSC"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sakrij kontrole na ekranu"
@@ -2507,12 +2507,6 @@
             "value" : "Exact seek"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Exact seek"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2523,6 +2517,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Per frame"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Exact seek"
           }
         },
         "pl" : {
@@ -2567,7 +2567,7 @@
             "value" : "Exact seek"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tačno pomeranje"
@@ -2837,12 +2837,6 @@
             "value" : "Pause / Resume"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pause / Gjenoppta"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2853,6 +2847,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pauzeren/hervatten"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pause / Gjenoppta"
           }
         },
         "pl" : {
@@ -2897,7 +2897,7 @@
             "value" : "Pause / Resume"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pauziraj/nastavi"
@@ -3167,12 +3167,6 @@
             "value" : "Pause / Resume"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pause / Gjenoppta"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3183,6 +3177,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pauzeren/hervatten"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pause / Gjenoppta"
           }
         },
         "pl" : {
@@ -3227,7 +3227,7 @@
             "value" : "Pause / Resume"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pauziraj/nastavi"
@@ -3497,12 +3497,6 @@
             "value" : "None"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ingen"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3513,6 +3507,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geen"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingen"
           }
         },
         "pl" : {
@@ -3557,7 +3557,7 @@
             "value" : "None"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nijеdan"
@@ -3827,12 +3827,6 @@
             "value" : "Pause / Resume"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pause / Gjenoppta"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3843,6 +3837,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pauzeren/hervatten"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pause / Gjenoppta"
           }
         },
         "pl" : {
@@ -3887,7 +3887,7 @@
             "value" : "Pause / Resume"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pauziraj/nastavi"
@@ -4157,12 +4157,6 @@
             "value" : "Trackpad"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Styreflate"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -4173,6 +4167,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Trackpad"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Styreflate"
           }
         },
         "pl" : {
@@ -4217,7 +4217,7 @@
             "value" : "Trackpad"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Trackpad"
@@ -4487,12 +4487,6 @@
             "value" : "Force Touch to:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hardt klikk for å:"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -4503,6 +4497,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Klikken met extra druk:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hardt klikk for å:"
           }
         },
         "pl" : {
@@ -4547,7 +4547,7 @@
             "value" : "Force Touch to:"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Force Touch:"
@@ -4817,12 +4817,6 @@
             "value" : "Pinch to:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Knip for å:"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -4833,6 +4827,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Knijpen/spreiden:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Knip for å:"
           }
         },
         "pl" : {
@@ -4877,7 +4877,7 @@
             "value" : "Pinch to:"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pokret prstima:"
@@ -5147,12 +5147,6 @@
             "value" : "Mouse"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mus"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -5163,6 +5157,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Muis"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mus"
           }
         },
         "pl" : {
@@ -5207,7 +5207,7 @@
             "value" : "Mouse"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Miš"
@@ -5477,12 +5477,6 @@
             "value" : "Double click to:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dobbeltklikk for å:"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -5493,6 +5487,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dubbel klikken:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dobbeltklikk for å:"
           }
         },
         "pl" : {
@@ -5537,7 +5537,7 @@
             "value" : "Double click to:"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dvostruki klik:"
@@ -5807,12 +5807,6 @@
             "value" : "None"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ingen"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -5823,6 +5817,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geen"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingen"
           }
         },
         "pl" : {
@@ -5867,7 +5867,7 @@
             "value" : "None"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nijеdan"
@@ -6137,12 +6137,6 @@
             "value" : "Middle click to:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mellomklikk for å:"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -6153,6 +6147,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Middelklikken:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mellomklikk for å:"
           }
         },
         "pl" : {
@@ -6197,7 +6197,7 @@
             "value" : "Middle click to:"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Klik srednjim tasterom miša:"
@@ -6467,12 +6467,6 @@
             "value" : "Accepts first mouse click when not focused"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Godtar første museklikk når ikke i fokus"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -6483,6 +6477,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Accepteert eerste muisklik wanneer niet gefocust"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Godtar første museklikk når ikke i fokus"
           }
         },
         "pl" : {
@@ -6527,7 +6527,7 @@
             "value" : "Accepts first mouse click when not focused"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prihvata prvi klik mišem kada nije u fokusu"
@@ -6797,12 +6797,6 @@
             "value" : "Toggle fullscreen"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gå til fullskjerm"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -6813,6 +6807,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Schermvullende weergave"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gå til fullskjerm"
           }
         },
         "pl" : {
@@ -6857,7 +6857,7 @@
             "value" : "Toggle fullscreen"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Uključi/isključi rеžim cеlog еkrana"
@@ -7127,12 +7127,6 @@
             "value" : "Fullscreen"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fullskjerm"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -7143,6 +7137,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Schermvullende weergave"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fullskjerm"
           }
         },
         "pl" : {
@@ -7187,7 +7187,7 @@
             "value" : "Fullscreen"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ceo ekran"
@@ -7457,12 +7457,6 @@
             "value" : "Scroll vertically to:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rull vertikalt for å:"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -7473,6 +7467,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verticaal scrollen:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rull vertikalt for å:"
           }
         },
         "pl" : {
@@ -7517,7 +7517,7 @@
             "value" : "Scroll vertically to:"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vertikalno pomeranje:"
@@ -7787,12 +7787,6 @@
             "value" : "Trackpad"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Styreflate"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -7803,6 +7797,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Trackpad"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Styreflate"
           }
         },
         "pl" : {
@@ -7847,7 +7847,7 @@
             "value" : "Trackpad"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Trackpad"
@@ -8117,12 +8117,6 @@
             "value" : "Toggle Picture-in-Picture"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bilde-i-bilde"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -8133,6 +8127,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Schakel Beeld-in-beeld in/uit"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bilde-i-bilde"
           }
         },
         "pl" : {
@@ -8177,7 +8177,7 @@
             "value" : "Toggle Picture-in-Picture"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Uključi/isključi sliku u slici"
@@ -8447,12 +8447,6 @@
             "value" : "Hide OSC"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Skjul OSC"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -8463,6 +8457,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Afspeelregelaars verbergen"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skjul OSC"
           }
         },
         "pl" : {
@@ -8507,7 +8507,7 @@
             "value" : "Hide OSC"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sakrij kontrole na ekranu"
@@ -8777,12 +8777,6 @@
             "value" : "None"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ingen"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -8793,6 +8787,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geen"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingen"
           }
         },
         "pl" : {
@@ -8837,7 +8837,7 @@
             "value" : "None"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nijеdan"
@@ -9107,12 +9107,6 @@
             "value" : "Auto"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Auto"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -9123,6 +9117,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Automatisch"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto"
           }
         },
         "pl" : {
@@ -9167,7 +9167,7 @@
             "value" : "Auto"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Automatski"
@@ -9437,12 +9437,6 @@
             "value" : "Hide OSC"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Skjul OSC"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -9453,6 +9447,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Afspeelregelaars verbergen"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skjul OSC"
           }
         },
         "pl" : {
@@ -9497,7 +9497,7 @@
             "value" : "Hide OSC"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sakrij kontrole na ekranu"
@@ -9767,12 +9767,6 @@
             "value" : "Pause / Resume"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pause / Gjenoppta"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -9783,6 +9777,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pauzeren/hervatten"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pause / Gjenoppta"
           }
         },
         "pl" : {
@@ -9827,7 +9827,7 @@
             "value" : "Pause / Resume"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pauziraj/nastavi"
@@ -10097,12 +10097,6 @@
             "value" : "None"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ingen"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -10113,6 +10107,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geen"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingen"
           }
         },
         "pl" : {
@@ -10157,7 +10157,7 @@
             "value" : "None"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nijеdan"
@@ -10427,12 +10427,6 @@
             "value" : "Sensitivity for normal seek:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sensitivitet for normalt søk:"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -10443,6 +10437,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gevoeligheid vooruit-/terugspoelen:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sensitivitet for normalt søk:"
           }
         },
         "pl" : {
@@ -10487,7 +10487,7 @@
             "value" : "Sensitivity for normal seek:"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Osetljivost normalnog pomeranja:"
@@ -10757,12 +10757,6 @@
             "value" : "Adjust window size"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Juster vindustørrelse"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -10773,6 +10767,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Venstergrootte aanpassen"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Juster vindustørrelse"
           }
         },
         "pl" : {
@@ -10817,7 +10817,7 @@
             "value" : "Adjust window size"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prilagodi veličinu prozora"
@@ -11087,12 +11087,6 @@
             "value" : "None"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ingen"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -11103,6 +11097,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geen"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingen"
           }
         },
         "pl" : {
@@ -11147,7 +11147,7 @@
             "value" : "None"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nijеdan"
@@ -11417,12 +11417,6 @@
             "value" : "Hide OSC"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Skjul OSC"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -11433,6 +11427,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Afspeelregelaars verbergen"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skjul OSC"
           }
         },
         "pl" : {
@@ -11477,7 +11477,7 @@
             "value" : "Hide OSC"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sakrij kontrole na ekranu"
@@ -11747,12 +11747,6 @@
             "value" : "Single click to:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enkeltklikk for å:"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -11763,6 +11757,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Klikken:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enkeltklikk for å:"
           }
         },
         "pl" : {
@@ -11807,7 +11807,7 @@
             "value" : "Single click to:"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jedan klik:"
@@ -12077,12 +12077,6 @@
             "value" : "Seek"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Spol"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -12093,6 +12087,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Spoel vooruit of terug"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spol"
           }
         },
         "pl" : {
@@ -12137,7 +12137,7 @@
             "value" : "Seek"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pomeri"
@@ -12407,12 +12407,6 @@
             "value" : "Right click to:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Høreklikk for å:"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -12423,6 +12417,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Secundair klikken:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Høreklikk for å:"
           }
         },
         "pl" : {
@@ -12467,7 +12467,7 @@
             "value" : "Right click to:"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Klik desnim tasterom miša:"
@@ -12737,12 +12737,6 @@
             "value" : "Toggle Picture-in-Picture"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bilde-i-bilde"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -12753,6 +12747,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Schakel Beeld-in-beeld in/uit"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bilde-i-bilde"
           }
         },
         "pl" : {
@@ -12797,7 +12797,7 @@
             "value" : "Toggle Picture-in-Picture"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Uključi/isključi sliku u slici"
@@ -13067,12 +13067,6 @@
             "value" : "Adjust volume"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Juster volum"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -13083,6 +13077,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Volume aanpassen"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Juster volum"
           }
         },
         "pl" : {
@@ -13127,7 +13127,7 @@
             "value" : "Adjust volume"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Podesi jačinu zvuka"
@@ -13397,12 +13397,6 @@
             "value" : "None"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ingen"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -13413,6 +13407,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geen"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingen"
           }
         },
         "pl" : {
@@ -13457,7 +13457,7 @@
             "value" : "None"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nijеdan"
@@ -13727,12 +13727,6 @@
             "value" : "Pause / Resume"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pause / Gjenoppta"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -13743,6 +13737,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pauzeren/hervatten"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pause / Gjenoppta"
           }
         },
         "pl" : {
@@ -13787,7 +13787,7 @@
             "value" : "Pause / Resume"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pauziraj/nastavi"
@@ -14057,12 +14057,6 @@
             "value" : "Scroll horizontally to:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rull horisontalt for å:"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -14073,6 +14067,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Horizontaal scrollen:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rull horisontalt for å:"
           }
         },
         "pl" : {
@@ -14117,7 +14117,7 @@
             "value" : "Scroll horizontally to:"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Horizontalno pomeranje:"
@@ -14387,12 +14387,6 @@
             "value" : "None"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ingen"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -14403,6 +14397,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geen"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingen"
           }
         },
         "pl" : {
@@ -14447,7 +14447,7 @@
             "value" : "None"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nijеdan"
@@ -14717,12 +14717,6 @@
             "value" : "Keyframe seek"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nøkkelbildesøk"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -14733,6 +14727,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Per keyframe (standaard)"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nøkkelbildesøk"
           }
         },
         "pl" : {
@@ -14777,7 +14777,7 @@
             "value" : "Keyframe seek"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pomeri ključni kadar"
@@ -15047,12 +15047,6 @@
             "value" : "Seek"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Spol"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -15063,6 +15057,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Spoel vooruit of terug"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spol"
           }
         },
         "pl" : {
@@ -15107,7 +15107,7 @@
             "value" : "Seek"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pomeri"
@@ -15377,12 +15377,6 @@
             "value" : "None"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ingen"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -15393,6 +15387,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geen"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingen"
           }
         },
         "pl" : {
@@ -15437,7 +15437,7 @@
             "value" : "None"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nijеdan"
@@ -15707,12 +15707,6 @@
             "value" : "Sensitivity for volume:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sensitivitet for volum:"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -15723,6 +15717,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gevoeligheid volumebewerking:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sensitivitet for volum:"
           }
         },
         "pl" : {
@@ -15767,7 +15767,7 @@
             "value" : "Sensitivity for volume:"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Osetljivost zvuka:"

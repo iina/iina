@@ -27,7 +27,7 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="574"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField identifier="SectionTitleBehavior" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="38y-2I-MGs">
+                <textField identifier="SectionTitleBehavior" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="38y-2I-MGs">
                     <rect key="frame" x="-2" y="550" width="66" height="16"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Behavior:" id="uQR-Fx-oEm">
                         <font key="font" metaFont="systemBold"/>
@@ -35,7 +35,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OXi-vL-mzp">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OXi-vL-mzp">
                     <rect key="frame" x="118" y="550" width="65" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="At launch:" id="gqT-CB-Puw">
                         <font key="font" metaFont="system"/>
@@ -201,7 +201,7 @@
                         <binding destination="IBP-Mz-Maa" name="enabled" keyPath="values.preventScreenSaver" id="118-qC-OuP"/>
                     </connections>
                 </button>
-                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vNn-a9-lMx" userLabel="Still prevents system from sleeping">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vNn-a9-lMx" userLabel="Still prevents system from sleeping">
                     <rect key="frame" x="156" y="64" width="191" height="14"/>
                     <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Still prevents system from sleeping." id="Kdk-iC-e1C">
                         <font key="font" metaFont="message" size="11"/>
@@ -215,7 +215,7 @@
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="Pga-vd-zGA">
                             <rect key="frame" x="0.0" y="40" width="360" height="17"/>
                             <subviews>
-                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="10b-EJ-N6W">
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="10b-EJ-N6W">
                                     <rect key="frame" x="13" y="0.0" width="146" height="17"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="When media is opened:" id="GNV-VA-NBW">
                                         <font key="font" metaFont="system"/>
@@ -315,7 +315,7 @@
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
                                 </button>
-                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WSg-Sb-Mqv">
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WSg-Sb-Mqv">
                                     <rect key="frame" x="13" y="0.0" width="130" height="17"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Pause/resume when:" id="xr2-rB-O0x">
                                         <font key="font" metaFont="system"/>
@@ -506,7 +506,7 @@
             <rect key="frame" x="0.0" y="0.0" width="572" height="146"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField identifier="SectionTitlePlaylist" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6gO-wx-MWj">
+                <textField identifier="SectionTitlePlaylist" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6gO-wx-MWj">
                     <rect key="frame" x="-2" y="122" width="56" height="16"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Playlist:" id="6TV-DG-503">
                         <font key="font" metaFont="systemBold"/>
@@ -527,7 +527,7 @@
                         <binding destination="IBP-Mz-Maa" name="value" keyPath="values.playlistAutoAdd" id="k4S-Nc-sCO"/>
                     </connections>
                 </button>
-                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OVz-Nv-1WW">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OVz-Nv-1WW">
                     <rect key="frame" x="136" y="104" width="206" height="14"/>
                     <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Requires restarting IINA to take effect." id="8kU-8g-VgX">
                         <font key="font" metaFont="message" size="11"/>
@@ -567,8 +567,8 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H91-rO-GsT">
-                    <rect key="frame" x="118" y="7" width="269" height="18"/>
-                    <buttonCell key="cell" type="check" title="Repeat when media is opened manually:" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="jok-kc-HjX">
+                    <rect key="frame" x="118" y="7" width="218" height="18"/>
+                    <buttonCell key="cell" type="check" title="When a file is opened manually:" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="jok-kc-HjX">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -577,16 +577,16 @@
                     </connections>
                 </button>
                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ECQ-DS-Mdq">
-                    <rect key="frame" x="392" y="1" width="143" height="25"/>
-                    <popUpButtonCell key="cell" type="push" title="Repeat playlist" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="5WC-Sp-6mg" id="tIo-lj-Gvh">
+                    <rect key="frame" x="341" y="1" width="131" height="25"/>
+                    <popUpButtonCell key="cell" type="push" title="Loop playlist" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="5WC-Sp-6mg" id="tIo-lj-Gvh">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="menu"/>
+                        <font key="font" metaFont="message"/>
                         <menu key="menu" id="Lny-Z2-TiC">
                             <items>
-                                <menuItem title="Repeat playlist" state="on" id="5WC-Sp-6mg">
+                                <menuItem title="Loop playlist" state="on" id="5WC-Sp-6mg">
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
-                                <menuItem title="Repeat single file" tag="1" id="A1p-L4-jtC">
+                                <menuItem title="Loop single file" tag="1" id="A1p-L4-jtC">
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
                             </items>
@@ -633,7 +633,7 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="184"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField identifier="SectionTitleScreenshots" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iLE-bn-UWS">
+                <textField identifier="SectionTitleScreenshots" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iLE-bn-UWS">
                     <rect key="frame" x="-2" y="160" width="90" height="16"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Screenshots:" id="pdx-zt-kf2">
                         <font key="font" metaFont="systemBold"/>
@@ -641,7 +641,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aEK-1q-7Vr">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aEK-1q-7Vr">
                     <rect key="frame" x="137" y="112" width="51" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Format:" id="oJY-Iz-3sO">
                         <font key="font" metaFont="system"/>
@@ -699,7 +699,7 @@
                         <binding destination="IBP-Mz-Maa" name="value" keyPath="values.screenshotSaveToFile" id="yWU-mJ-oKh"/>
                     </connections>
                 </button>
-                <textField focusRingType="none" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZA7-QS-FAH">
+                <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZA7-QS-FAH">
                     <rect key="frame" x="191" y="136" width="162" height="16"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="16" id="ECP-qk-dP6"/>
@@ -739,7 +739,7 @@
                         <binding destination="IBP-Mz-Maa" name="value" keyPath="values.screenshotCopyToClipboard" id="bmv-XM-Shn"/>
                     </connections>
                 </button>
-                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7zO-JV-oG5">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7zO-JV-oG5">
                     <rect key="frame" x="118" y="160" width="77" height="16"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Destination:" id="PhL-vP-i7L">
                         <font key="font" metaFont="system"/>
@@ -747,7 +747,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nvy-Qn-oAE">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nvy-Qn-oAE">
                     <rect key="frame" x="118" y="56" width="56" height="16"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Options:" id="4Qe-7S-8xK">
                         <font key="font" metaFont="system"/>
@@ -808,7 +808,7 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="112"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField identifier="SectionTitleHistory" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pfH-CF-O2T">
+                <textField identifier="SectionTitleHistory" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pfH-CF-O2T">
                     <rect key="frame" x="-2" y="88" width="57" height="16"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="History:" id="jeK-46-2BG">
                         <font key="font" metaFont="systemBold"/>
@@ -840,7 +840,7 @@
                         <binding destination="IBP-Mz-Maa" name="value" keyPath="values.recordRecentFiles" id="VvQ-80-UOa"/>
                     </connections>
                 </button>
-                <textField autoresizesSubviews="NO" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="da1-EI-Ny1">
+                <textField autoresizesSubviews="NO" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="da1-EI-Ny1">
                     <rect key="frame" x="156" y="8" width="326" height="28"/>
                     <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Otherwise only files that opened manually will show up in this menu." id="XFC-Lr-LmP">
                         <font key="font" metaFont="message" size="11"/>

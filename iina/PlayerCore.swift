@@ -404,6 +404,11 @@ class PlayerCore: NSObject {
     info.justOpenedFile = true
     info.state = .loading
     mpv.command(.loadfile, args: [path], level: .verbose)
+
+    if Preference.bool(for: .autoRepeat) {
+       let loopMode = Preference.DefaultRepeatMode(rawValue: Preference.integer(for: .defaultRepeatMode))
+       setLoopMode(loopMode == .file ? .file : .playlist)
+     }
   }
 
   static func loadKeyBindings() {

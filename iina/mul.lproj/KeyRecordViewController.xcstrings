@@ -17,6 +17,30 @@
             "value" : "حدد الإجراء:"
           }
         },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Əməliyyatı seçin:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выберыце дзеянне:"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Select action:"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Select action:"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -65,6 +89,12 @@
             "value" : "Seleccionar acción:"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Select action:"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -107,10 +137,22 @@
             "value" : "Művelet kiválasztása:"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Select action:"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pilih tindakan:"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Veldu aðgerð:"
           }
         },
         "it" : {
@@ -125,6 +167,12 @@
             "value" : "アクションを選択:"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Select action:"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -133,14 +181,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Select action:"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Velg handling:"
+            "state" : "new",
+            "value" : "Select action:"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Select action:"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Select action:"
           }
         },
         "nl" : {
@@ -149,19 +209,25 @@
             "value" : "Selecteer een actie:"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Velg handling:"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wybierz akcję:"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Selecionar ação:"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Selecionar ação:"
@@ -185,10 +251,22 @@
             "value" : "Vyberte akciu:"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Select action:"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Izaberite radnju:"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Изабери радњу:"
           }
         },
         "sv" : {
@@ -197,16 +275,40 @@
             "value" : "Välj åtgärd:"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Select action:"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Select action:"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Eylem seç:"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Select action:"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Оберіть дію:"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Select action:"
           }
         },
         "vi" : {
@@ -242,6 +344,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "أو أدخل أمر mpv:"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Və ya mpv əməliyyatı daxil edin:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ці ўвядзіце каманду mpv:"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Or enter mpv command:"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Or enter mpv command:"
           }
         },
         "ca" : {
@@ -292,6 +418,12 @@
             "value" : "O ingrese el comando mpv:"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Or enter mpv command:"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -334,10 +466,22 @@
             "value" : "Vagy adjon meg egy mpv parancsot:"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Or enter mpv command:"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Atau masukkan perintah mpv:"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eða skrifaðu mpv skipun:"
           }
         },
         "it" : {
@@ -352,6 +496,12 @@
             "value" : "もしくはmpvコマンドを入力:"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Or enter mpv command:"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -360,14 +510,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Or enter mpv command:"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eller skriv mpv-kommando:"
+            "state" : "new",
+            "value" : "Or enter mpv command:"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Or enter mpv command:"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Or enter mpv command:"
           }
         },
         "nl" : {
@@ -376,22 +538,28 @@
             "value" : "Of voer een mpv-commando in:"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eller skriv mpv-kommando:"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lub wprowadź polecenie mpv:"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ou introduza o comando mpv:"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ou insira o comando mvp:"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ou introduza o comando mpv:"
           }
         },
         "ro" : {
@@ -412,10 +580,22 @@
             "value" : "Alebo zadajte mpv príkaz:"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Or enter mpv command:"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ili unesite naredbu za mpv:"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Или унесите наредбу за mpv:"
           }
         },
         "sv" : {
@@ -424,16 +604,40 @@
             "value" : "Eller ange mpv-kommando:"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Or enter mpv command:"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Or enter mpv command:"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Veya mpv komutu gir:"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Or enter mpv command:"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Або введіть команду mpv:"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Or enter mpv command:"
           }
         },
         "vi" : {

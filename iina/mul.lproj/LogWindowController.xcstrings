@@ -197,12 +197,6 @@
             "value" : "Save as..."
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Save as..."
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "translated",
@@ -210,6 +204,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save as..."
+          }
+        },
+        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Save as..."
@@ -257,7 +257,7 @@
             "value" : "Save as..."
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Save as..."
@@ -527,12 +527,6 @@
             "value" : "All"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "All"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -540,6 +534,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "All"
+          }
+        },
+        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "All"
@@ -587,7 +587,7 @@
             "value" : "All"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "All"
@@ -857,12 +857,6 @@
             "value" : "Subsystem:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Subsystem:"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -870,6 +864,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Subsystem:"
+          }
+        },
+        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Subsystem:"
@@ -917,7 +917,7 @@
             "value" : "Subsystem:"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Subsystem:"
@@ -1187,12 +1187,6 @@
             "value" : "Verbose"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Verbose"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1200,6 +1194,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Verbose"
+          }
+        },
+        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Verbose"
@@ -1247,7 +1247,7 @@
             "value" : "Verbose"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Verbose"
@@ -1517,12 +1517,6 @@
             "value" : "Error"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Feil"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1533,6 +1527,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fout"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feil"
           }
         },
         "pl" : {
@@ -1577,7 +1577,7 @@
             "value" : "Error"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Grеška"
@@ -1847,12 +1847,6 @@
             "value" : "Subsystem"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Subsystem"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1860,6 +1854,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Subsystem"
+          }
+        },
+        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Subsystem"
@@ -1907,7 +1907,7 @@
             "value" : "Subsystem"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Subsystem"
@@ -2177,12 +2177,6 @@
             "value" : "Debug"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Debug"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2190,6 +2184,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Debug"
+          }
+        },
+        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Debug"
@@ -2237,7 +2237,7 @@
             "value" : "Debug"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Debug"
@@ -2507,12 +2507,6 @@
             "value" : "Message"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Message"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2520,6 +2514,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Message"
+          }
+        },
+        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Message"
@@ -2567,7 +2567,7 @@
             "value" : "Message"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Message"
@@ -2837,12 +2837,6 @@
             "value" : "Time"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Time"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2850,6 +2844,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Time"
+          }
+        },
+        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Time"
@@ -2897,7 +2897,7 @@
             "value" : "Time"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Time"
@@ -3167,12 +3167,6 @@
             "value" : "Log Viewer"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Log Viewer"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3180,6 +3174,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Log Viewer"
+          }
+        },
+        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Log Viewer"
@@ -3227,7 +3227,7 @@
             "value" : "Log Viewer"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Log Viewer"
@@ -3497,12 +3497,6 @@
             "value" : "Level:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Level:"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3510,6 +3504,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Level:"
+          }
+        },
+        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Level:"
@@ -3557,7 +3557,7 @@
             "value" : "Level:"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Level:"
@@ -3827,12 +3827,6 @@
             "value" : "Warning"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Advarsel"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3843,6 +3837,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Waarschuwing"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Advarsel"
           }
         },
         "pl" : {
@@ -3887,7 +3887,7 @@
             "value" : "Warning"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Upozorenje"

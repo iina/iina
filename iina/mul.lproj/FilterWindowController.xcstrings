@@ -197,12 +197,6 @@
             "value" : "Save"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lagre"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -213,6 +207,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bewaar"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lagre"
           }
         },
         "pl" : {
@@ -257,7 +257,7 @@
             "value" : "Shrani"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sačuvaj"
@@ -527,12 +527,6 @@
             "value" : "Filter String"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filterrekke"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -543,6 +537,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filtertekst"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filterrekke"
           }
         },
         "pl" : {
@@ -587,7 +587,7 @@
             "value" : "Filter String"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Niska filtera"
@@ -857,12 +857,6 @@
             "value" : "റദ്ദാക്കുക"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avbryt"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -873,6 +867,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annuleer"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avbryt"
           }
         },
         "pl" : {
@@ -917,7 +917,7 @@
             "value" : "Prekliči"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otkaži"
@@ -1187,12 +1187,6 @@
             "value" : "New Filter"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "New Filter"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1203,6 +1197,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nieuw filter"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "New Filter"
           }
         },
         "pl" : {
@@ -1247,7 +1247,7 @@
             "value" : "New Filter"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Novi filter"
@@ -1517,12 +1517,6 @@
             "value" : "By saving a filter, you can enable or disable it conveniently and even assign a shortcut key to it."
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ved å lagre et filter kan du aktivere eller deaktivere det lettere ved å tilordne en hurtigtast."
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1533,6 +1527,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Door een filter op te slaan kun je deze makkelijk in- en uitschakelen, en een toetscombinatie toewijzen."
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ved å lagre et filter kan du aktivere eller deaktivere det lettere ved å tilordne en hurtigtast."
           }
         },
         "pl" : {
@@ -1577,7 +1577,7 @@
             "value" : "By saving a filter, you can enable or disable it conveniently and even assign a shortcut key to it."
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kada sačuvate filter, možete ga lako omogućiti ili onemogućiti ili mu čak dodeliti tastersku prečicu."
@@ -1847,12 +1847,6 @@
             "value" : "റദ്ദാക്കുക"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avbryt"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1863,6 +1857,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annuleer"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avbryt"
           }
         },
         "pl" : {
@@ -1907,7 +1907,7 @@
             "value" : "Prekliči"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otkaži"
@@ -2177,12 +2177,6 @@
             "value" : "Name:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Navn:"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2193,6 +2187,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Naam:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Navn:"
           }
         },
         "pl" : {
@@ -2237,7 +2237,7 @@
             "value" : "Ime:"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Naziv:"
@@ -2507,12 +2507,6 @@
             "value" : "Label"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Label"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2520,6 +2514,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Label"
+          }
+        },
+        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Label"
@@ -2551,8 +2551,8 @@
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Label"
+            "state" : "translated",
+            "value" : "Метка"
           }
         },
         "sk" : {
@@ -2567,7 +2567,7 @@
             "value" : "Label"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Label"
@@ -2639,8 +2639,7 @@
             "value" : "Label"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "amK-Iz-lu8.headerCell.title" : {
       "comment" : "Class = \"NSTableColumn\"; headerCell.title = \"#\"; ObjectID = \"amK-Iz-lu8\";",
@@ -2838,12 +2837,6 @@
             "value" : "#"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "#"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2851,6 +2844,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "#"
+          }
+        },
+        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "#"
@@ -2898,7 +2897,7 @@
             "value" : "#"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "#"
@@ -2970,8 +2969,7 @@
             "value" : "#"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "Dab-w9-6TY.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Edit Filter\"; ObjectID = \"Dab-w9-6TY\";",
@@ -3169,12 +3167,6 @@
             "value" : "Edit Filter"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rediger Filter"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3185,6 +3177,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bewerk filter"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rediger Filter"
           }
         },
         "pl" : {
@@ -3229,7 +3227,7 @@
             "value" : "Edit Filter"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Izmeni filter"
@@ -3499,12 +3497,6 @@
             "value" : "Press any button to record"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trykk på en knapp for å ta opp"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3515,6 +3507,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Druk op een willekeurige toets om op te nemen"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trykk på en knapp for å ta opp"
           }
         },
         "pl" : {
@@ -3559,7 +3557,7 @@
             "value" : "Press any button to record"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pritisnite bilo koji taster da biste snimili"
@@ -3829,12 +3827,6 @@
             "value" : "Filters"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filtre"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3845,6 +3837,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filters"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtre"
           }
         },
         "pl" : {
@@ -3889,7 +3887,7 @@
             "value" : "Filters"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filteri"
@@ -4159,12 +4157,6 @@
             "value" : "Save Filter"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lagre filter"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -4175,6 +4167,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sla filter op"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lagre filter"
           }
         },
         "pl" : {
@@ -4219,7 +4217,7 @@
             "value" : "Shrani filter"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sačuvaj filter"
@@ -4489,12 +4487,6 @@
             "value" : "Name:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Navn:"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -4505,6 +4497,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Naam:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Navn:"
           }
         },
         "pl" : {
@@ -4549,7 +4547,7 @@
             "value" : "Ime:"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Naziv:"
@@ -4819,12 +4817,6 @@
             "value" : "Press any button to record"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trykk på en knapp for å ta opp"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -4835,6 +4827,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Druk op een willekeurige toets om op te nemen"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trykk på en knapp for å ta opp"
           }
         },
         "pl" : {
@@ -4879,7 +4877,7 @@
             "value" : "Press any button to record"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pritisnite bilo koji taster da biste snimili"
@@ -5149,12 +5147,6 @@
             "value" : "Save Filter"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lagre filter"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -5165,6 +5157,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sla filter op"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lagre filter"
           }
         },
         "pl" : {
@@ -5209,7 +5207,7 @@
             "value" : "Shrani filter"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sačuvaj filter"
@@ -5479,12 +5477,6 @@
             "value" : "Add"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Legg til"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -5495,6 +5487,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voeg toe"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Legg til"
           }
         },
         "pl" : {
@@ -5539,7 +5537,7 @@
             "value" : "Dodaj"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dodaj"
@@ -5809,12 +5807,6 @@
             "value" : "Saved filters"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lagrede filtre"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -5825,6 +5817,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Opgeslagen filters"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lagrede filtre"
           }
         },
         "pl" : {
@@ -5869,7 +5867,7 @@
             "value" : "Shranjeni filtri"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sačuvani filteri"
@@ -6139,12 +6137,6 @@
             "value" : "Shortcut key:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hurtigtast:"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -6155,6 +6147,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Toetscombinatie:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hurtigtast:"
           }
         },
         "pl" : {
@@ -6199,7 +6197,7 @@
             "value" : "Bližnjična tipka:"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tasterska prečica:"
@@ -6469,12 +6467,6 @@
             "value" : "Shortcut key:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hurtigtast:"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -6485,6 +6477,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Toetscombinatie:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hurtigtast:"
           }
         },
         "pl" : {
@@ -6529,7 +6527,7 @@
             "value" : "Bližnjična tipka:"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tasterska prečica:"
@@ -6799,12 +6797,6 @@
             "value" : "Filter string:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filterrekke:"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -6815,6 +6807,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filtertekst:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filterrekke:"
           }
         },
         "pl" : {
@@ -6859,7 +6857,7 @@
             "value" : "Filter string:"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Niska filtera:"
@@ -7129,12 +7127,6 @@
             "value" : "Save"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lagre"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -7145,6 +7137,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bewaar"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lagre"
           }
         },
         "pl" : {
@@ -7189,7 +7187,7 @@
             "value" : "Shrani"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sačuvaj"
@@ -7459,12 +7457,6 @@
             "value" : "Add"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Legg til"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -7475,6 +7467,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voeg toe"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Legg til"
           }
         },
         "pl" : {
@@ -7519,7 +7517,7 @@
             "value" : "Dodaj"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dodaj"
@@ -7789,12 +7787,6 @@
             "value" : "റദ്ദാക്കുക"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avbryt"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -7805,6 +7797,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annuleer"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avbryt"
           }
         },
         "pl" : {
@@ -7849,7 +7847,7 @@
             "value" : "Prekliči"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otkaži"
@@ -8119,12 +8117,6 @@
             "value" : "Edit Filter"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rediger Filter"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -8135,6 +8127,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bewerk filter"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rediger Filter"
           }
         },
         "pl" : {
@@ -8179,7 +8177,7 @@
             "value" : "Edit Filter"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Izmeni filter"

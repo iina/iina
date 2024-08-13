@@ -20,6 +20,10 @@
                 <outlet property="subBorderColorWell" destination="vyH-G4-g3c" id="vDq-Wc-kGQ"/>
                 <outlet property="subColorWell" destination="AaL-am-9qW" id="5cd-sf-HHl"/>
                 <outlet property="subLangTokenView" destination="bhV-Cx-zgK" id="ixc-wl-Y26"/>
+                <outlet property="subOverrideLevelDescriptiveText" destination="yzs-wK-eRV" id="7a7-Gx-KQf"/>
+                <outlet property="subOverrideLevelSegmentedControl" destination="mqJ-QH-Pfa" id="hcK-8B-EzR"/>
+                <outlet property="subOverrideLevelSlider" destination="7UX-IL-hdk" id="fem-nv-O1m"/>
+                <outlet property="subOverrideLevelText" destination="FR3-Ar-5Dw" id="BSP-zH-sos"/>
                 <outlet property="subShadowColorWell" destination="Gtc-ii-hE0" id="hh5-ON-mLf"/>
                 <outlet property="subSourcePopUpButton" destination="UHS-ce-8t5" id="zmW-Jx-JMg"/>
                 <outlet property="subSourceStackView" destination="bSz-xd-6o2" id="UOh-XZ-MhE"/>
@@ -922,11 +926,11 @@
             <point key="canvasLocation" x="-782" y="284"/>
         </customView>
         <customView id="ATO-g6-mEy" userLabel="Prefs &gt; Subtitle &gt; ASS Subtitles">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="113"/>
+            <rect key="frame" x="0.0" y="0.0" width="480" height="99"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField identifier="SectionTitleASS" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="utN-qX-5BH">
-                    <rect key="frame" x="-2" y="89" width="97" height="16"/>
+                    <rect key="frame" x="-2" y="75" width="97" height="16"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="ASS Subtitles:" id="mFm-Q6-aja">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -934,13 +938,13 @@
                     </textFieldCell>
                 </textField>
                 <box title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="oat-Ze-x0N">
-                    <rect key="frame" x="117" y="4" width="366" height="103"/>
+                    <rect key="frame" x="117" y="4" width="366" height="89"/>
                     <view key="contentView" id="flC-Mg-1G1">
-                        <rect key="frame" x="4" y="5" width="358" height="95"/>
+                        <rect key="frame" x="4" y="5" width="358" height="81"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Dg7-OH-h2a">
-                                <rect key="frame" x="6" y="45" width="92" height="16"/>
+                                <rect key="frame" x="6" y="31" width="92" height="16"/>
                                 <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Override level:" id="gAq-Vr-hRY">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -948,11 +952,11 @@
                                 </textFieldCell>
                             </textField>
                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7UX-IL-hdk">
-                                <rect key="frame" x="102" y="42" width="128" height="20"/>
+                                <rect key="frame" x="102" y="28" width="128" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="124" id="EJa-Kl-S4K"/>
                                 </constraints>
-                                <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" maxValue="3" doubleValue="3" tickMarkPosition="below" numberOfTickMarks="5" allowsTickMarkValuesOnly="YES" sliderType="linear" id="63l-gO-fEV"/>
+                                <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" maxValue="4" doubleValue="4" tickMarkPosition="below" numberOfTickMarks="5" allowsTickMarkValuesOnly="YES" sliderType="linear" id="63l-gO-fEV"/>
                                 <connections>
                                     <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subOverrideLevel" id="jz2-FJ-liL">
                                         <dictionary key="options">
@@ -962,30 +966,37 @@
                                 </connections>
                             </slider>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FR3-Ar-5Dw">
-                                <rect key="frame" x="234" y="45" width="41" height="14"/>
+                                <rect key="frame" x="234" y="31" width="41" height="14"/>
                                 <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="strip" id="3H8-Ei-cTm">
                                     <font key="font" size="12" name="Menlo-Regular"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subOverrideLevel" id="0Y9-zY-OjE">
+                                    <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subOverrideLevel" id="YQl-my-d3h">
                                         <dictionary key="options">
-                                            <string key="NSValueTransformerName">ASSOverrideLevelTransformer</string>
+                                            <string key="NSValueTransformerName">ASSOverrideLevelTextTransformer</string>
                                         </dictionary>
                                     </binding>
                                 </connections>
                             </textField>
                             <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="yzs-wK-eRV">
-                                <rect key="frame" x="6" y="8" width="345" height="28"/>
-                                <textFieldCell key="cell" allowsUndo="NO" title="Radically strip all ASS tags and styles from the subtitle. This is equivalent to the old --no-ass / --no-sub-ass options." id="Oaz-i3-yO0">
+                                <rect key="frame" x="6" y="8" width="345" height="14"/>
+                                <textFieldCell key="cell" allowsUndo="NO" title="Descriptive text" id="Oaz-i3-yO0">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subOverrideLevel" id="6iX-hV-oYq">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">ASSOverrideLevelDescriptiveTextTransformer</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
                             </textField>
                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mqJ-QH-Pfa">
-                                <rect key="frame" x="27" y="67" width="304" height="21"/>
+                                <rect key="frame" x="27" y="53" width="304" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="mlq-Dy-mT3"/>
                                 </constraints>
@@ -996,6 +1007,9 @@
                                         <segment label="Secondary Subtitles" tag="1"/>
                                     </segments>
                                 </segmentedCell>
+                                <connections>
+                                    <action selector="subOverrideLevelSegmentedControlAction:" target="-2" id="ppE-LT-6az"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <constraints>

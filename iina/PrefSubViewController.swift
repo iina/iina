@@ -47,6 +47,11 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
   @IBOutlet var subBorderColorWell: NSColorWell!
   @IBOutlet var subShadowColorWell: NSColorWell!
 
+  @IBOutlet weak var subOverrideLevelSlider: NSSlider!
+  @IBOutlet weak var subOverrideLevelSegmentedControl: NSSegmentedControl!
+  @IBOutlet weak var subOverrideLevelText: NSTextField!
+  @IBOutlet weak var subOverrideLevelDescriptiveText: NSTextField!
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -169,11 +174,18 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
       subSourceStackView.setVisibilityPriority(index == map[id] ? .mustHold : .notVisible, for: view)
     }
   }
+
+  @IBAction func subOverrideLevelSegmentedControlAction(_ sender: NSSegmentedControl) {
+    let keyPath = sender.selectedSegment == 0 ? PK.subOverrideLevel.rawValue : PK.secondarySubOverrideLevel.rawValue
+    subOverrideLevelSlider.bind(.value, to: UserDefaults.standard, withKeyPath: keyPath, options: [.valueTransformer: ASSOverrideLevelValueTransformer()])
+    subOverrideLevelText.bind(.value, to: UserDefaults.standard, withKeyPath: keyPath, options: [.valueTransformer: ASSOverrideLevelTextTransformer()])
+    subOverrideLevelDescriptiveText.bind(.value, to: UserDefaults.standard, withKeyPath: keyPath, options: [.valueTransformer: ASSOverrideLevelDescriptiveTextTransformer()])
+  }
 }
 
 // MARK: - Transformers
 
-@objc(ASSOverrideLevelTransformer) class ASSOverrideLevelTransformer: ValueTransformer {
+class ASSOverrideLevelTransformer: ValueTransformer {
 
   static override func allowsReverseTransformation() -> Bool {
     return false
@@ -186,18 +198,22 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
   override func transformedValue(_ value: Any?) -> Any? {
     guard let num = value as? NSNumber,
           let level = Preference.SubOverrideLevel(rawValue: num.intValue) else { return nil }
-    switch level {
-    case .yes:
-      return NSLocalizedString("preference.sub_override_level.yes", value: "yes", comment: "yes")
-    case .force:
-      return NSLocalizedString("preference.sub_override_level.force", value: "force", comment: "force")
-    case .strip:
-      return NSLocalizedString("preference.sub_override_level.strip", value: "strip", comment: "strip")
-    case .scale:
-      return NSLocalizedString("preference.sub_override_level.scale", value: "scale", comment: "scale")
-    case .no:
-      return NSLocalizedString("preference.sub_override_level.no", value: "no", comment: "no")
-    }
+    return level.string
+  }
+}
+
+@objc(ASSOverrideLevelTextTransformer) class ASSOverrideLevelTextTransformer: ASSOverrideLevelTransformer {
+  override func transformedValue(_ value: Any?) -> Any? {
+    guard let level = super.transformedValue(value) as? String else { return nil }
+    return NSLocalizedString("preference.sub_override_level." + level, comment: level)
+  }
+}
+
+
+@objc(ASSOverrideLevelDescriptiveTextTransformer) class ASSOverrideLevelDescriptiveTextTransformer: ASSOverrideLevelTransformer {
+  override func transformedValue(_ value: Any?) -> Any? {
+    guard let level = super.transformedValue(value) as? String else { return nil }
+    return NSLocalizedString("preference.sub_override_level.descriptive_text." + level, comment: level)
   }
 }
 
@@ -218,7 +234,7 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
 /// | 4 | 2 | strip |
 @objc(ASSOverrideLevelValueTransformer) class ASSOverrideLevelValueTransformer: ValueTransformer {
 
-  private static let enumToSlider: [NSNumber: NSNumber] = [0: 1, 1: 3, 2: 4, 3: 2, 4:0]
+  private static let enumToSlider: [NSNumber: NSNumber] = [0: 1, 1: 3, 2: 4, 3: 2, 4: 0]
 
   private static let sliderToEnum: [NSNumber: NSNumber] = {
     var result: [NSNumber: NSNumber] = [:]

@@ -197,12 +197,6 @@
             "value" : "Use system media control"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bruk systemmediakontroller"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -213,6 +207,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gebruik mediabediening van het systeem"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bruk systemmediakontroller"
           }
         },
         "pl" : {
@@ -257,7 +257,7 @@
             "value" : "Use system media control"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Koristi sistemske kontrole medija"
@@ -527,12 +527,6 @@
             "value" : "Display raw values"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Display raw values"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -543,6 +537,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Toon ruwe waardes"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Display raw values"
           }
         },
         "pl" : {
@@ -587,7 +587,7 @@
             "value" : "Display raw values"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prikaži neobrađene vrednosti"
@@ -857,12 +857,6 @@
             "value" : "Action"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Action"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -873,6 +867,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Handeling"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Action"
           }
         },
         "pl" : {
@@ -917,7 +917,7 @@
             "value" : "Action"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Radnja"
@@ -1187,12 +1187,6 @@
             "value" : "നിലവിലുള്ള ഒരു കോൺഫിഗറേഷൻ ഫയൽ അവതരിപ്പിക്കുക"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Import an existing config file"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1203,6 +1197,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Importeer een configuratiebestand"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Import an existing config file"
           }
         },
         "pl" : {
@@ -1247,7 +1247,7 @@
             "value" : "Import an existing config file"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Uvezi postojeću konfiguracionu datoteku"
@@ -1517,12 +1517,6 @@
             "value" : "സെറ്റിങ്സ്"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Settings"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1533,6 +1527,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Instellingen"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Settings"
           }
         },
         "pl" : {
@@ -1577,7 +1577,7 @@
             "value" : "Settings"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Postavke"
@@ -1847,12 +1847,6 @@
             "value" : "കോൺഫിഗറേഷൻ:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Configuration:"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1863,6 +1857,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Configuratie:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Configuration:"
           }
         },
         "pl" : {
@@ -1907,7 +1907,7 @@
             "value" : "Configuration:"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Konfiguracija:"
@@ -2177,12 +2177,6 @@
             "value" : "ഫൈൻഡറിൽ കോൺഫിഗറേഷൻ ഫയൽ കാണിക്കുക"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show config file in Finder"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2193,6 +2187,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Toon configuratiebestand in Finder"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show config file in Finder"
           }
         },
         "pl" : {
@@ -2237,7 +2237,7 @@
             "value" : "Show config file in Finder"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prikaži konfiguracionu datoteku u Finderu"
@@ -2507,12 +2507,6 @@
             "value" : "ഡ്യൂപ്ലിക്കേറ്റ്…"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Duplicate…"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2523,6 +2517,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dupliceer…"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Duplicate…"
           }
         },
         "pl" : {
@@ -2567,7 +2567,7 @@
             "value" : "Duplicate…"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dupliraj…"
@@ -2837,12 +2837,6 @@
             "value" : "Key"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Key"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2853,6 +2847,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sneltoets"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Key"
           }
         },
         "pl" : {
@@ -2897,7 +2897,7 @@
             "value" : "Key"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Taster"
@@ -3167,12 +3167,6 @@
             "value" : "Show the raw mpv key code and command."
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Show the raw mpv key code and command."
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3183,6 +3177,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Toon de originele mpv-toetscode en commando."
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Show the raw mpv key code and command."
           }
         },
         "pl" : {
@@ -3227,7 +3227,7 @@
             "value" : "Show the raw mpv key code and command."
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prikaži neobrađenu vrednost tastera i naredbu za mpv."
@@ -3497,12 +3497,6 @@
             "value" : "Label"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Label"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3510,6 +3504,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Label"
+          }
+        },
+        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Label"
@@ -3541,8 +3541,8 @@
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Label"
+            "state" : "translated",
+            "value" : "Метка"
           }
         },
         "sk" : {
@@ -3557,7 +3557,7 @@
             "value" : "Label"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Label"
@@ -3629,8 +3629,7 @@
             "value" : "Label"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "veZ-Si-Hv5.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Settings\"; ObjectID = \"veZ-Si-Hv5\";",
@@ -3828,12 +3827,6 @@
             "value" : "സെറ്റിങ്സ്"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Settings"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3844,6 +3837,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Instellingen"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Settings"
           }
         },
         "pl" : {
@@ -3888,7 +3887,7 @@
             "value" : "Settings"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Postavke"

@@ -52,30 +52,30 @@
 "quicksetting.hide" = "הסתר";
 
 // EQ Presets
-"eq.preset.flat" = "Flat";
+"eq.preset.flat" = "שטוח";
 "eq.preset.acoustic" = "אקוסטי";
 "eq.preset.classical" = "קלאסי";
 "eq.preset.dance" = "ריקוד";
 "eq.preset.deep" = "עמוק";
 "eq.preset.electronic" = "אלקטרוני";
 "eq.preset.hip_hop" = "היפ הופ";
-"eq.preset.increase_bass" = "Increase Bass";
-"eq.preset.increase_treble" = "Increase Treble";
-"eq.preset.increase_vocal" = "Increase Vocal";
-"eq.preset.jazz" = "Jazz";
-"eq.preset.latin" = "Latin";
+"eq.preset.increase_bass" = "הגברת צלילים נמוכים";
+"eq.preset.increase_treble" = "הגברת צלילים גבוהים";
+"eq.preset.increase_vocal" = "הגברת שירה";
+"eq.preset.jazz" = "ג׳אז";
+"eq.preset.latin" = "לטינית";
 "eq.preset.loundness" = "Loundness";
-"eq.preset.lounge" = "Lounge";
-"eq.preset.piano" = "Piano";
-"eq.preset.pop" = "Pop";
+"eq.preset.lounge" = "טרקלין";
+"eq.preset.piano" = "פסנתר";
+"eq.preset.pop" = "פופ";
 "eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reduce Bass";
-"eq.preset.reduce_treble" = "Reduce Treble";
-"eq.preset.rock" = "Rock";
-"eq.preset.small_speaker" = "Small Speaker";
-"eq.preset.spoken_word" = "Spoken Word";
+"eq.preset.reduce_bass" = "הפחתת צלילים נמוכים";
+"eq.preset.reduce_treble" = "הפחתת צלילים גבוהים";
+"eq.preset.rock" = "רוק";
+"eq.preset.small_speaker" = "רמקול קטן";
+"eq.preset.spoken_word" = "קריינות";
 
-"alert.eq.new_profile.title" = "New EQ Profile";
+"alert.eq.new_profile.title" = "פרופיל אקולייזר חדש";
 "alert.eq.new_profile.message" = "Please enter a profile name.";
 "alert.eq.rename.title" = "Rename Currnet Profile";
 "alert.eq.rename.message" = "Please enter a new profile name.";

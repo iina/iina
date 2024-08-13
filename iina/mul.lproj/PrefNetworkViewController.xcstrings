@@ -13,7 +13,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Default: 153600"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 153600"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 153600"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 153600"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Default: 153600"
           }
         },
@@ -43,7 +67,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Default: 153600"
           }
         },
@@ -63,6 +87,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Predeterminado: 153600"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 153600"
           }
         },
         "fa" : {
@@ -107,10 +137,22 @@
             "value" : "Alapértelmezett: 153600"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 153600"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bawaan: 153600"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 153600"
           }
         },
         "it" : {
@@ -125,6 +167,12 @@
             "value" : "デフォルト: 153600"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 153600"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -133,14 +181,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Default: 153600"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Standard: 153600"
+            "state" : "new",
+            "value" : "Default: 153600"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 153600"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 153600"
           }
         },
         "nl" : {
@@ -149,22 +209,28 @@
             "value" : "Standaard: 153600"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standard: 153600"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Domyślnie: 153600"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Predefinição: 153600"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Padrão: 153600"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Predefinição: 153600"
           }
         },
         "ro" : {
@@ -185,10 +251,22 @@
             "value" : "Predvolené: 153600"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 153600"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Podrazumevano: 153600"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 153600"
           }
         },
         "sv" : {
@@ -197,16 +275,40 @@
             "value" : "Förval: 153600"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "இயல்புநிலை: 153600"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 153600"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Varsayılan: 153600"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 153600"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "За замовчуванням: 153600"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 153600"
           }
         },
         "vi" : {
@@ -235,31 +337,55 @@
       "localizations" : {
         "af" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Maximum cache size (KB):"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Maximum cache size (KB):"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Maximum cache size (KB):"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Maximum cache size (KB):"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         },
         "cs" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         },
         "da" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         },
@@ -271,7 +397,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         },
@@ -283,31 +409,37 @@
         },
         "en-GB" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Maximum cache size (KB):"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         },
         "fa" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         },
         "fi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         },
@@ -319,31 +451,43 @@
         },
         "hi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         },
         "hr" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         },
         "hu" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Maximum cache size (KB):"
+          }
+        },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         },
         "id" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Maximum cache size (KB):"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         },
@@ -353,51 +497,75 @@
             "value" : "最大キャッシュサイズ(KB):"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Maximum cache size (KB):"
+          }
+        },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Maximum cache size (KB):"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Maximum cache size (KB):"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Maximum cache size (KB):"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Maximum cache size (KB):"
-          }
-        },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Maximum cache size (KB):"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         },
         "ro" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         },
@@ -409,37 +577,73 @@
         },
         "sk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Maximum cache size (KB):"
+          }
+        },
+        "sr-CS" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Maximum cache size (KB):"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         },
         "sv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Maximum cache size (KB):"
+          }
+        },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Maximum cache size (KB):"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Maximum cache size (KB):"
+          }
+        },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Maximum cache size (KB):"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         },
@@ -451,7 +655,7 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Maximum cache size (KB):"
           }
         }
@@ -461,7 +665,325 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"youtube-dl:\"; ObjectID = \"1Ex-0X-pjo\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "af" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
         "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "lv" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "mk" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "sr-CS" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "youtube-dl:"
+          }
+        },
+        "zh-Hant" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "youtube-dl:"
@@ -481,7 +1003,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Custom youtube-dl path:"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom youtube-dl path:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom youtube-dl path:"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom youtube-dl path:"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Custom youtube-dl path:"
           }
         },
@@ -511,7 +1057,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Custom youtube-dl path:"
           }
         },
@@ -531,6 +1077,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ruta personalizada de youtube-dl:"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom youtube-dl path:"
           }
         },
         "fa" : {
@@ -575,10 +1127,22 @@
             "value" : "Egyedi youtube-dl útvonal:"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom youtube-dl path:"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jalur kustom youtube-dl:"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom youtube-dl path:"
           }
         },
         "it" : {
@@ -593,6 +1157,12 @@
             "value" : "youtube-dlのカスタムパスを設定:"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom youtube-dl path:"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -601,13 +1171,25 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Custom youtube-dl path:"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Custom youtube-dl path:"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom youtube-dl path:"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Custom youtube-dl path:"
           }
         },
@@ -617,22 +1199,28 @@
             "value" : "Aangepaste youtube-dl locatie:"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom youtube-dl path:"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Własna ścieżka do youtube-dl:"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Personalizar caminho do youtube-dl:"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Caminho customizado para youtube-dl:"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personalizar caminho do youtube-dl:"
           }
         },
         "ro" : {
@@ -653,10 +1241,22 @@
             "value" : "Vlastná youtube-dl path:"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom youtube-dl path:"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prilagođena putanja do programa youtube-dl:"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom youtube-dl path:"
           }
         },
         "sv" : {
@@ -665,16 +1265,40 @@
             "value" : "Anpassad youtube-dl-sökväg:"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "தனிப்பயன் youtube-dl பாதை:"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom youtube-dl path:"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Özel youtube-dl yolu:"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom youtube-dl path:"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Інший шлях до youtube-dl:"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom youtube-dl path:"
           }
         },
         "vi" : {
@@ -709,7 +1333,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Default: 153600"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 153600"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 153600"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 153600"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Default: 153600"
           }
         },
@@ -739,7 +1387,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Default: 153600"
           }
         },
@@ -759,6 +1407,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Predeterminado: 153600"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 153600"
           }
         },
         "fa" : {
@@ -803,10 +1457,22 @@
             "value" : "Alapértelmezett: 153600"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 153600"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bawaan: 153600"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 153600"
           }
         },
         "it" : {
@@ -821,6 +1487,12 @@
             "value" : "デフォルト: 153600"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 153600"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -829,14 +1501,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Default: 153600"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Standard: 153600"
+            "state" : "new",
+            "value" : "Default: 153600"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 153600"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 153600"
           }
         },
         "nl" : {
@@ -845,22 +1529,28 @@
             "value" : "Standaard: 153600"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standard: 153600"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Domyślnie: 153600"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Predefinição: 153600"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Padrão: 153600"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Predefinição: 153600"
           }
         },
         "ro" : {
@@ -881,10 +1571,22 @@
             "value" : "Predvolené: 153600"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 153600"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Podrazumevano: 153600"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 153600"
           }
         },
         "sv" : {
@@ -893,16 +1595,40 @@
             "value" : "Förval: 153600"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "இயல்புநிலை: 153600"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 153600"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Varsayılan: 153600"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 153600"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "За замовчуванням: 153600"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 153600"
           }
         },
         "vi" : {
@@ -929,7 +1655,325 @@
       "comment" : "Class = \"NSMenuItem\"; title = \"TCP\"; ObjectID = \"6JF-48-aCE\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "af" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
         "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "lv" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "mk" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "sr-CS" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "TCP"
+          }
+        },
+        "zh-Hant" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "TCP"
@@ -949,7 +1993,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "HTTP proxy:"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP proxy:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP proxy:"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP proxy:"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "HTTP proxy:"
           }
         },
@@ -979,7 +2047,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "HTTP proxy:"
           }
         },
@@ -999,6 +2067,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Proxy HTTP:"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP proxy:"
           }
         },
         "fa" : {
@@ -1043,9 +2117,21 @@
             "value" : "HTTP Proxy:"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP proxy:"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "HTTP proxy:"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "HTTP proxy:"
           }
         },
@@ -1061,6 +2147,12 @@
             "value" : "HTTPプロキシ:"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP proxy:"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1069,13 +2161,25 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "HTTP proxy:"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "HTTP proxy:"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP proxy:"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "HTTP proxy:"
           }
         },
@@ -1085,19 +2189,25 @@
             "value" : "HTTP-proxy:"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP proxy:"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "HTTP Proxy:"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Proxy HTTP:"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Proxy HTTP:"
@@ -1121,9 +2231,21 @@
             "value" : "HTTP proxy:"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP proxy:"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "HTTP proxy:"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "HTTP proxy:"
           }
         },
@@ -1133,16 +2255,40 @@
             "value" : "HTTP-proxy:"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP proxy:"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP proxy:"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "HTTP vekil sunucusu:"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP proxy:"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "HTTP-проксі:"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP proxy:"
           }
         },
         "vi" : {
@@ -1181,6 +2327,30 @@
             "value" : "تلقائي"
           }
         },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Auto"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Auto"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Auto"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Auto"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1196,18 +2366,18 @@
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Automatisk"
+            "value" : "Auto"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Autom."
+            "value" : "Automatisch"
           }
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Auto"
           }
         },
@@ -1226,6 +2396,12 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Auto"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Auto"
           }
         },
@@ -1271,10 +2447,22 @@
             "value" : "Automatikus"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Auto"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otomatis"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Auto"
           }
         },
         "it" : {
@@ -1289,6 +2477,12 @@
             "value" : "自動"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Auto"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1301,9 +2495,21 @@
             "value" : "Automātiska"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Auto"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Auto"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Auto"
           }
         },
@@ -1313,22 +2519,28 @@
             "value" : "Automatisch"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Automatycznie"
-          }
-        },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Automático"
+            "value" : "Automatyczny"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Auto"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automático"
           }
         },
         "ro" : {
@@ -1340,7 +2552,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Авто"
+            "value" : "Автоматически"
           }
         },
         "sk" : {
@@ -1349,10 +2561,22 @@
             "value" : "Automaticky"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Auto"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Automatski"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Auto"
           }
         },
         "sv" : {
@@ -1361,16 +2585,40 @@
             "value" : "Automatisk"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "தானியங்கு"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Auto"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otomatik"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Auto"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Авто"
+            "value" : "Автоматично"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Auto"
           }
         },
         "vi" : {
@@ -1405,7 +2653,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Enable youtube-dl"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable youtube-dl"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable youtube-dl"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable youtube-dl"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Enable youtube-dl"
           }
         },
@@ -1435,7 +2707,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Enable youtube-dl"
           }
         },
@@ -1455,6 +2727,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Habilitar youtube-dl"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable youtube-dl"
           }
         },
         "fa" : {
@@ -1499,10 +2777,22 @@
             "value" : "Youtube-dl engedélyezése"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable youtube-dl"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aktifkan youtube-dl"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable youtube-dl"
           }
         },
         "it" : {
@@ -1517,6 +2807,12 @@
             "value" : "youtube-dlを有効化"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable youtube-dl"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1525,14 +2821,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Enable youtube-dl"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktiver YouTube-dl"
+            "state" : "new",
+            "value" : "Enable youtube-dl"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable youtube-dl"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable youtube-dl"
           }
         },
         "nl" : {
@@ -1541,22 +2849,28 @@
             "value" : "Schakel youtube-dl in"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktiver YouTube-dl"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Włącz youtube-dl"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ativar youtube-dl"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Habilitar youtube-dl"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ativar youtube-dl"
           }
         },
         "ro" : {
@@ -1577,10 +2891,22 @@
             "value" : "Povoliť youtube-dl"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable youtube-dl"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Omogući youtube-dl"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable youtube-dl"
           }
         },
         "sv" : {
@@ -1589,16 +2915,40 @@
             "value" : "Aktivera youtube-dl"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "youtube-dl -ஐ இயக்கு"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable youtube-dl"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Youtube-dl'yi etkinleştir"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable youtube-dl"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Увімкнути youtube-dl"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable youtube-dl"
           }
         },
         "vi" : {
@@ -1633,7 +2983,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Cache buffer size (KB):"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cache buffer size (KB):"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cache buffer size (KB):"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cache buffer size (KB):"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Cache buffer size (KB):"
           }
         },
@@ -1663,7 +3037,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Cache buffer size (KB):"
           }
         },
@@ -1683,6 +3057,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tamaño del búfer de caché (KB):"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cache buffer size (KB):"
           }
         },
         "fa" : {
@@ -1727,10 +3107,22 @@
             "value" : "Cache buffer méret (KB):"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cache buffer size (KB):"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ukuran buffer cache (KB):"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cache buffer size (KB):"
           }
         },
         "it" : {
@@ -1745,6 +3137,12 @@
             "value" : "バッファのキャッシュサイズ (KB):"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cache buffer size (KB):"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1753,14 +3151,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Cache buffer size (KB):"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bufferstørrelse (kB):"
+            "state" : "new",
+            "value" : "Cache buffer size (KB):"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cache buffer size (KB):"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cache buffer size (KB):"
           }
         },
         "nl" : {
@@ -1769,22 +3179,28 @@
             "value" : "Cache-buffergrootte (KB):"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bufferstørrelse (kB):"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rozmiar bufora pamięci podręcznej (KB):"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tamanho do buffer de cache (KB):"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tamanho do retro-cache (backBuffer) (KB):"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tamanho do buffer de cache (KB):"
           }
         },
         "ro" : {
@@ -1805,10 +3221,22 @@
             "value" : "Veľkosť buffer cache (KB):"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cache buffer size (KB):"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Veličina bafera keširanja (KB):"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cache buffer size (KB):"
           }
         },
         "sv" : {
@@ -1817,16 +3245,40 @@
             "value" : "Cache-bufferstorlek (KB):"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cache buffer size (KB):"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cache buffer size (KB):"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Önbellek arabellek boyutu (KB):"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cache buffer size (KB):"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Розмір буфера кешу (КБ):"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cache buffer size (KB):"
           }
         },
         "vi" : {
@@ -1861,7 +3313,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "User agent:"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "User agent:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "User agent:"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "User agent:"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "User agent:"
           }
         },
@@ -1891,7 +3367,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "User agent:"
           }
         },
@@ -1911,6 +3387,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Agente de usuario:"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "User agent:"
           }
         },
         "fa" : {
@@ -1955,10 +3437,22 @@
             "value" : "Felhasználó ügynök:"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "User agent:"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Agen pengguna:"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "User agent:"
           }
         },
         "it" : {
@@ -1973,6 +3467,12 @@
             "value" : "ユーザーエージェント:"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "User agent:"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1981,14 +3481,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "User agent:"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Brukeragent:"
+            "state" : "new",
+            "value" : "User agent:"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "User agent:"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "User agent:"
           }
         },
         "nl" : {
@@ -1997,19 +3509,25 @@
             "value" : "Gebruikersagent:"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Brukeragent:"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Agent użytkownika:"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Agente de utilizador:"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Agente de utilizador:"
@@ -2033,10 +3551,22 @@
             "value" : "Používateľský agent:"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "User agent:"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Korisnički agent:"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "User agent:"
           }
         },
         "sv" : {
@@ -2045,16 +3575,40 @@
             "value" : "Användaragent:"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "User agent:"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "User agent:"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kullanıcı aracısı:"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "User agent:"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Агент користувача:"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "User agent:"
           }
         },
         "vi" : {
@@ -2081,7 +3635,325 @@
       "comment" : "Class = \"NSTextField\"; ibExternalAccessibilityHelp = \"/usr/local/bin\"; ObjectID = \"ePv-ZR-5fY\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "af" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
         "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "lv" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "mk" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "sr-CS" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "zh-Hant" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "/usr/local/bin"
@@ -2101,7 +3973,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Default: 36000"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 36000"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 36000"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 36000"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Default: 36000"
           }
         },
@@ -2131,7 +4027,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Default: 36000"
           }
         },
@@ -2151,6 +4047,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Predeterminado: 36000"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 36000"
           }
         },
         "fa" : {
@@ -2195,10 +4097,22 @@
             "value" : "Alapértelmezett: 36000"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 36000"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bawaan: 36000"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 36000"
           }
         },
         "it" : {
@@ -2213,6 +4127,12 @@
             "value" : "デフォルト: 36000"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 36000"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2221,14 +4141,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Default: 36000"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Standard: 36000"
+            "state" : "new",
+            "value" : "Default: 36000"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 36000"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 36000"
           }
         },
         "nl" : {
@@ -2237,22 +4169,28 @@
             "value" : "Standaard: 36000"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standard: 36000"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Domyślnie: 36000"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Predefinição: 36000"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Padrão: 36000"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Predefinição: 36000"
           }
         },
         "ro" : {
@@ -2273,10 +4211,22 @@
             "value" : "Predvolené: 36000"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 36000"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Podrazumevano: 36000"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 36000"
           }
         },
         "sv" : {
@@ -2285,16 +4235,40 @@
             "value" : "Förval: 36000"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "இயல்புநிலை: 36000"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 36000"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Varsayılan: 36000"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 36000"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "За замовчуванням: 36000"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 36000"
           }
         },
         "vi" : {
@@ -2329,7 +4303,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Enable cache"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable cache"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable cache"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable cache"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Enable cache"
           }
         },
@@ -2359,7 +4357,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Enable cache"
           }
         },
@@ -2379,6 +4377,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Habilitar caché"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable cache"
           }
         },
         "fa" : {
@@ -2423,10 +4427,22 @@
             "value" : "Gyorsítótár engedélyezése"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable cache"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aktifkan cache"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable cache"
           }
         },
         "it" : {
@@ -2441,6 +4457,12 @@
             "value" : "キャッシュを有効化"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable cache"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2449,14 +4471,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Enable cache"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktiver buffer"
+            "state" : "new",
+            "value" : "Enable cache"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable cache"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable cache"
           }
         },
         "nl" : {
@@ -2465,22 +4499,28 @@
             "value" : "Schakel cache in"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktiver buffer"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Włącz pamięć podręczną"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ativar cache"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Habilitar cache"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ativar cache"
           }
         },
         "ro" : {
@@ -2501,10 +4541,22 @@
             "value" : "Povoliť cache"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable cache"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Omogući keš"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable cache"
           }
         },
         "sv" : {
@@ -2513,16 +4565,40 @@
             "value" : "Aktivera cache"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable cache"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable cache"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Önbelleği etkinleştir"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable cache"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Увімкнути кеш"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable cache"
           }
         },
         "vi" : {
@@ -2556,7 +4632,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Format: <key>=<value>[,<key>=<value>[,…]]"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Format: <key>=<value>[,<key>=<value>[,…]]"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Format: <key>=<value>[,<key>=<value>[,…]]"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Format: <key>=<value>[,<key>=<value>[,…]]"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Format: <key>=<value>[,<key>=<value>[,…]]"
           }
         },
@@ -2586,7 +4686,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Format: <key>=<value>[,<key>=<value>[,…]]"
           }
         },
@@ -2606,6 +4706,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Formato: <clave>=<valor>[,<clave>=<valor>[,…]]"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Format: <key>=<value>[,<key>=<value>[,…]]"
           }
         },
         "fa" : {
@@ -2650,9 +4756,21 @@
             "value" : "Formátum: <key>=<value>[,<key>=<value>[,…]]"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Format: <key>=<value>[,<key>=<value>[,…]]"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Format: <key>=<value>[,<key>=<value>[,…]]"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Format: <key>=<value>[,<key>=<value>[,…]]"
           }
         },
@@ -2668,6 +4786,12 @@
             "value" : "フォーマット: <key>=<value>[,<key>=<value>[,…]]"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Format: <key>=<value>[,<key>=<value>[,…]]"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2676,13 +4800,25 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Format: <key>=<value>[,<key>=<value>[,…]]"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Format: <key>=<value>[,<key>=<value>[,…]]"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Format: <key>=<value>[,<key>=<value>[,…]]"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Format: <key>=<value>[,<key>=<value>[,…]]"
           }
         },
@@ -2692,19 +4828,25 @@
             "value" : "Structuur: <key>=<value>[,<key>=<value>[,…]]"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Format: <key>=<value>[,<key>=<value>[,…]]"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Format: <key>=<value>[,<key>=<value>[,…]]"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Formato: <key>=<value>[,<key>=<value>[,…]]"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Formato: <key>=<value>[,<key>=<value>[,…]]"
@@ -2728,9 +4870,21 @@
             "value" : "Formát: <key>=<value>[,<key>=<value>[,…]]"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Format: <key>=<value>[,<key>=<value>[,…]]"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Format: <key>=<value>[,<key>=<value>[,…]]"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Format: <key>=<value>[,<key>=<value>[,…]]"
           }
         },
@@ -2740,16 +4894,40 @@
             "value" : "Format: <nyckel>=<värde>[,<nyckel>=<värde>[,…]]"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Format: <key>=<value>[,<key>=<value>[,…]]"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Format: <key>=<value>[,<key>=<value>[,…]]"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Biçim: <key>=<value>[,<key>=<value>[,...]]"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Format: <key>=<value>[,<key>=<value>[,…]]"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Формат: <елемент>=<значення>[,<елемент>=<значення>[,…]]"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Format: <key>=<value>[,<key>=<value>[,…]]"
           }
         },
         "vi" : {
@@ -2784,7 +4962,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Transport RTSP stream through:"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Transport RTSP stream through:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Transport RTSP stream through:"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Transport RTSP stream through:"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Transport RTSP stream through:"
           }
         },
@@ -2814,7 +5016,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Transport RTSP stream through:"
           }
         },
@@ -2836,9 +5038,15 @@
             "value" : "Transportar RTSP a través de:"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Transport RTSP stream through:"
+          }
+        },
         "fa" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Transport RTSP stream through:"
           }
         },
@@ -2878,10 +5086,22 @@
             "value" : "RTSP adatfolyam átvitele a következőn:"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Transport RTSP stream through:"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Salurkan siaran RTSP lewat:"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Transport RTSP stream through:"
           }
         },
         "it" : {
@@ -2896,6 +5116,12 @@
             "value" : "RTSPの通信方式:"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Transport RTSP stream through:"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2904,14 +5130,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Transport RTSP stream through:"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Strøm RTSP gjennom:"
+            "state" : "new",
+            "value" : "Transport RTSP stream through:"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Transport RTSP stream through:"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Transport RTSP stream through:"
           }
         },
         "nl" : {
@@ -2920,22 +5158,28 @@
             "value" : "Vervoer RTSP-stream via:"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Strøm RTSP gjennom:"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Transportuj strumień RTSP przez:"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Transporte RTSP através de:"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Transmitir stream RTSP através de:"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transporte RTSP através de:"
           }
         },
         "ro" : {
@@ -2956,10 +5200,22 @@
             "value" : "Transportovať RTSP stream cez:"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Transport RTSP stream through:"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prenesi RTSP strim kroz:"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Transport RTSP stream through:"
           }
         },
         "sv" : {
@@ -2968,16 +5224,40 @@
             "value" : "Transportera RTSP-ström genom:"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Transport RTSP stream through:"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Transport RTSP stream through:"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "RTSP akışını şu yolla taşı:"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Transport RTSP stream through:"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Транспортувати RTSP-потік через:"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Transport RTSP stream through:"
           }
         },
         "vi" : {
@@ -3012,7 +5292,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Seconds to prefetch:"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Seconds to prefetch:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Seconds to prefetch:"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Seconds to prefetch:"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Seconds to prefetch:"
           }
         },
@@ -3042,7 +5346,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Seconds to prefetch:"
           }
         },
@@ -3062,6 +5366,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Segundos para precargar:"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Seconds to prefetch:"
           }
         },
         "fa" : {
@@ -3106,10 +5416,22 @@
             "value" : "Másodpercek az előtöltéshez:"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Seconds to prefetch:"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Detik untuk memuat:"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Seconds to prefetch:"
           }
         },
         "it" : {
@@ -3124,6 +5446,12 @@
             "value" : "事前読み込み秒数:"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Seconds to prefetch:"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3132,13 +5460,25 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Seconds to prefetch:"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Seconds to prefetch:"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Seconds to prefetch:"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Seconds to prefetch:"
           }
         },
@@ -3148,22 +5488,28 @@
             "value" : "Seconden inladen:"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Seconds to prefetch:"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sekundy do preselekcji:"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Segundos para pré-carregar:"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Segundos a pré-carregar:"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Segundos para pré-carregar:"
           }
         },
         "ro" : {
@@ -3184,10 +5530,22 @@
             "value" : "Sekundy na predbežné načítanie:"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Seconds to prefetch:"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sekundi do predučitavanja:"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Seconds to prefetch:"
           }
         },
         "sv" : {
@@ -3196,16 +5554,40 @@
             "value" : "Sekunder att hämta i förväg:"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Seconds to prefetch:"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Seconds to prefetch:"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Önceden getirilecek saniyeler:"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Seconds to prefetch:"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Попередня вибірка у секундах:"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Seconds to prefetch:"
           }
         },
         "vi" : {
@@ -3240,7 +5622,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Cache:"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cache:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cache:"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cache:"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Cache:"
           }
         },
@@ -3270,7 +5676,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Cache:"
           }
         },
@@ -3290,6 +5696,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Caché:"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cache:"
           }
         },
         "fa" : {
@@ -3334,9 +5746,21 @@
             "value" : "Gyorsítótár:"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cache:"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Cache:"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Cache:"
           }
         },
@@ -3352,6 +5776,12 @@
             "value" : "キャッシュ:"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cache:"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3360,13 +5790,25 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Cache:"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Cache:"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cache:"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Cache:"
           }
         },
@@ -3376,19 +5818,25 @@
             "value" : "Cache:"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cache:"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pamięć podręczna:"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cache:"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cache:"
@@ -3412,15 +5860,39 @@
             "value" : "Vyrovnávacia pamäť:"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cache:"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Keš:"
           }
         },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cache:"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Cache:"
+          }
+        },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cache:"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Cache:"
           }
         },
@@ -3430,10 +5902,22 @@
             "value" : "Önbellek:"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cache:"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Кеш:"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cache:"
           }
         },
         "vi" : {
@@ -3460,7 +5944,325 @@
       "comment" : "Class = \"NSMenuItem\"; title = \"HTTP\"; ObjectID = \"NWQ-Bm-1mJ\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "af" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
         "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "lv" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "mk" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "sr-CS" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP"
+          }
+        },
+        "zh-Hant" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "HTTP"
@@ -3472,7 +6274,325 @@
       "comment" : "Class = \"NSMenuItem\"; title = \"UDP\"; ObjectID = \"qhq-St-KZq\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "af" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
         "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "lv" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "mk" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "sr-CS" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "UDP"
+          }
+        },
+        "zh-Hant" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "UDP"
@@ -3492,14 +6612,38 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Requires restarting IINA to take effect."
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Requires restarting IINA to take effect."
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Requires restarting IINA to take effect."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Requires restarting IINA to take effect."
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Requires restarting IINA to take effect."
           }
         },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "És necessari reiniciar IINA per tenir efecte."
+            "value" : "És necessari reiniciar IINA per tenir efecte"
           }
         },
         "cs" : {
@@ -3511,18 +6655,18 @@
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kræver genstart af IINA for at træde i kræft."
+            "value" : "Kræver genstart af IINA for ændringe at træde i kraft."
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Neustart von IINA erforderlich."
+            "value" : "IINA muss hierfür neu gestartet werden."
           }
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Requires restarting IINA to take effect."
           }
         },
@@ -3541,13 +6685,19 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Requiere reiniciar IINA para que surta efecto."
+            "value" : "Es necesario reiniciar IINA para que los cambios sean aplicados."
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Requires restarting IINA to take effect."
           }
         },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "برای اعمال تنظیمات برنامه را بسته و باز کنید."
+            "value" : "برای اعمال تغییرات باید IINA را بازاجرا کنید."
           }
         },
         "fi" : {
@@ -3583,13 +6733,25 @@
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Az IINA újrainditása szükséges a módositások érvénybe lépéséhez."
+            "value" : "Az IINA újraindítása szükséges ahhoz, hogy életbe lépjen."
+          }
+        },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Requires restarting IINA to take effect."
           }
         },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Perlu menjalankan ulang IINA agar dapat berpengaruh."
+            "value" : "Perlu menjalankan ulang IINA untuk dapat berpengaruh."
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Requires restarting IINA to take effect."
           }
         },
         "it" : {
@@ -3601,7 +6763,13 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "設定を反映させるにはIINAを再起動する必要があります。"
+            "value" : "変更を反映するにはIINAの再起動が必要です。"
+          }
+        },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Requires restarting IINA to take effect."
           }
         },
         "ko" : {
@@ -3616,10 +6784,22 @@
             "value" : "Lai tas stātos spēkā, ir nepieciešams restartēt IINA."
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Krever omstart at IINA for å tre i kraft."
+            "state" : "new",
+            "value" : "Requires restarting IINA to take effect."
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Requires restarting IINA to take effect."
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Requires restarting IINA to take effect."
           }
         },
         "nl" : {
@@ -3628,22 +6808,28 @@
             "value" : "IINA moet opnieuw opstarten voor deze optie."
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Krever omstart at IINA for å tre i kraft."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Program IINA musi zostać zrestartowany aby efekt został zastosowany."
-          }
-        },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Requer reinício do IINA para ter efeito."
+            "value" : "Program IINA musi zostać zrestartowany, aby efekt został zastosowany."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Necessita reiniciar IINA pra funcionar."
+            "value" : "Necessita reiniciar IINA pra fazer efeito."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Requer reinício do IINA para ter efeito."
           }
         },
         "ro" : {
@@ -3661,13 +6847,25 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vyžadujú reštartovať IINA pre správne fungovanie."
+            "value" : "Vyžaduje sa reštartovať IINA, pre správne fungovanie."
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Requires restarting IINA to take effect."
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "IINA se mora ponovo pokrenuti da bi postavka bila prihvaćena."
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Requires restarting IINA to take effect."
           }
         },
         "sv" : {
@@ -3676,16 +6874,40 @@
             "value" : "Kräver omstart av IINA för att ge effekt."
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重启IINA生效."
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Requires restarting IINA to take effect."
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Etkili olabilmesi için IINA'nın yeniden başlatılması gerekir."
+            "value" : "Etkili olabilmesi için IINA'nın yeniden başlatılması gerekli."
+          }
+        },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Requires restarting IINA to take effect."
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Для набуття чинності потребує перезавантаження IINA."
+            "value" : "Для набуття чинності змін треба перезавантажити IINA."
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Requires restarting IINA to take effect."
           }
         },
         "vi" : {
@@ -3712,7 +6934,325 @@
       "comment" : "Class = \"NSTextFieldCell\"; placeholderString = \"/usr/local/bin\"; ObjectID = \"Smc-bL-Dvq\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "af" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
         "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "lv" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "mk" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "sr-CS" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "/usr/local/bin"
+          }
+        },
+        "zh-Hant" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "/usr/local/bin"
@@ -3724,7 +7264,325 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"http://\"; ObjectID = \"WTb-HK-6vU\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "af" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
         "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "lv" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "mk" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "sr-CS" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
+        "zh-Hant" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "http://"
@@ -3744,7 +7602,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "IINA will search youtube-dl in this folder. Restart needed."
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "IINA will search youtube-dl in this folder. Restart needed."
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "IINA will search youtube-dl in this folder. Restart needed."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "IINA will search youtube-dl in this folder. Restart needed."
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "IINA will search youtube-dl in this folder. Restart needed."
           }
         },
@@ -3774,7 +7656,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "IINA will search youtube-dl in this folder. Restart needed."
           }
         },
@@ -3794,6 +7676,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "IINA buscará youtube-dl en esta carpeta. Reinicio necesario."
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "IINA will search youtube-dl in this folder. Restart needed."
           }
         },
         "fa" : {
@@ -3838,10 +7726,22 @@
             "value" : "Az IINA ebben a mappában fogja keresni a youtube-dl-t. Újraindítás szükséges."
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "IINA will search youtube-dl in this folder. Restart needed."
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "IINA akan mencari youtube-dl dalam folder ini. Diperlukan untuk menjalankan ulang aplikasi."
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "IINA will search youtube-dl in this folder. Restart needed."
           }
         },
         "it" : {
@@ -3856,6 +7756,12 @@
             "value" : "IINAはyoutube-dlをこのフォルダー内で探します。反映には再起動が必要です。"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "IINA will search youtube-dl in this folder. Restart needed."
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3864,13 +7770,25 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "IINA will search youtube-dl in this folder. Restart needed."
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "IINA will search youtube-dl in this folder. Restart needed."
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "IINA will search youtube-dl in this folder. Restart needed."
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "IINA will search youtube-dl in this folder. Restart needed."
           }
         },
@@ -3880,22 +7798,28 @@
             "value" : "IINA zoekt youtube-dl in deze map. Let op: IINA moet opnieuw opstarten voor deze instelling."
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "IINA will search youtube-dl in this folder. Restart needed."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "IINA będzie szukać youtube-dl w tym folderze. Wymagany restart."
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "IINA irá procurar youtube-dl nesta pasta. Reinicio necessário."
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "IINA vai procurar youtube-dl nesta pasta. Reinício necessário."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "IINA irá procurar youtube-dl nesta pasta. Reinicio necessário."
           }
         },
         "ro" : {
@@ -3916,10 +7840,22 @@
             "value" : "IINA prehľadá youtube-dl v tomto adresári. Vyžaduje sa reštart."
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "IINA will search youtube-dl in this folder. Restart needed."
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "IINA će potražiti youtube-dl u ovoj fascikli. Potrebno je ponovno pokretanje."
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "IINA will search youtube-dl in this folder. Restart needed."
           }
         },
         "sv" : {
@@ -3928,16 +7864,40 @@
             "value" : "IINA letar efter youtube-dl i denna mapp. Omstart behövs."
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "IINA will search youtube-dl in this folder. Restart needed."
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "IINA will search youtube-dl in this folder. Restart needed."
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "IINA bu klasörde youtube-dl arayacak. Yeniden başlatma gerekli."
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "IINA will search youtube-dl in this folder. Restart needed."
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "IINA пошукає youtube-dl у цій директорії. Потрібне перезавантаження."
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "IINA will search youtube-dl in this folder. Restart needed."
           }
         },
         "vi" : {
@@ -3974,6 +7934,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "الشبكة:"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Network:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Network:"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Network:"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Network:"
           }
         },
         "ca" : {
@@ -4024,6 +8008,12 @@
             "value" : "Red:"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Network:"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4066,10 +8056,22 @@
             "value" : "Hálózat:"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Network:"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jaringan:"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Network:"
           }
         },
         "it" : {
@@ -4084,6 +8086,12 @@
             "value" : "ネットワーク:"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Network:"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4092,14 +8100,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Network:"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nettverk:"
+            "state" : "new",
+            "value" : "Network:"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Network:"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Network:"
           }
         },
         "nl" : {
@@ -4108,19 +8128,25 @@
             "value" : "Netwerk:"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nettverk:"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sieć:"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rede:"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rede:"
@@ -4144,10 +8170,22 @@
             "value" : "Sieť:"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Network:"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mreža:"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Network:"
           }
         },
         "sv" : {
@@ -4156,16 +8194,40 @@
             "value" : "Nätverk:"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "பிணையம்:"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Network:"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ağ:"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Network:"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Мережа:"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Network:"
           }
         },
         "vi" : {
@@ -4200,7 +8262,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Raw options:"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Raw options:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Raw options:"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Raw options:"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Raw options:"
           }
         },
@@ -4230,7 +8316,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Raw options:"
           }
         },
@@ -4250,6 +8336,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Opciones sin procesar:"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Raw options:"
           }
         },
         "fa" : {
@@ -4294,10 +8386,22 @@
             "value" : "Raw beállítások:"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Raw options:"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Opsi murni:"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Raw options:"
           }
         },
         "it" : {
@@ -4312,6 +8416,12 @@
             "value" : "パラメータ:"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Raw options:"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4320,14 +8430,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Raw options:"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Raw alternativer:"
+            "state" : "new",
+            "value" : "Raw options:"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Raw options:"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Raw options:"
           }
         },
         "nl" : {
@@ -4336,22 +8458,28 @@
             "value" : "ytdl-raw-options:"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Raw alternativer:"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Opcje RAW:"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Opções Raw:"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Opções raw:"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opções Raw:"
           }
         },
         "ro" : {
@@ -4372,10 +8500,22 @@
             "value" : "Pokročilé nastavenia:"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Raw options:"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dodatne opcije:"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Raw options:"
           }
         },
         "sv" : {
@@ -4384,16 +8524,40 @@
             "value" : "Råa alternativ:"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Raw options:"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Raw options:"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ham seçenekleri:"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Raw options:"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Параметри Raw:"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Raw options:"
           }
         },
         "vi" : {

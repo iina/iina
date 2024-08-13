@@ -16,6 +16,30 @@
             "value" : "طمس"
           }
         },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bulanıqlıq"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Размытасць"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Размиване"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Blur"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -64,6 +88,12 @@
             "value" : "Difuminar"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lausotu"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -106,10 +136,22 @@
             "value" : "Elmosódás"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ֆոն"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Blur"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Þoka"
           }
         },
         "it" : {
@@ -124,6 +166,12 @@
             "value" : "ぼかし"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Blur"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -132,14 +180,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Blur"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Uskarphet"
+            "value" : "Замати"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Blur"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Blur"
           }
         },
         "nl" : {
@@ -148,22 +208,28 @@
             "value" : "Vervagen"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uskarphet"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rozmycie"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Desfoque"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Desfocar"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desfoque"
           }
         },
         "ro" : {
@@ -184,10 +250,22 @@
             "value" : "Rozostrieť"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zameglitev"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zamuti"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Замути"
           }
         },
         "sv" : {
@@ -196,16 +274,40 @@
             "value" : "Oskärpa"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "கலங்கள்"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "เบลอ"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bulanıklaştır"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Blur"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Розмиття"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "دھندلا"
           }
         },
         "vi" : {
@@ -241,6 +343,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "الكمية"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Miqdar"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Колькасць"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сила"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Amount"
           }
         },
         "ca" : {
@@ -291,6 +417,12 @@
             "value" : "Cantidad"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Amount"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -333,10 +465,22 @@
             "value" : "Mennyiség"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Գումար"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Besaran"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upphæð"
           }
         },
         "it" : {
@@ -351,6 +495,12 @@
             "value" : "強さ"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Amount"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -359,14 +509,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Amount"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mengde"
+            "value" : "Износ"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "അ\fളവ്"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Amount"
           }
         },
         "nl" : {
@@ -375,19 +537,25 @@
             "value" : "Hoeveelheid"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mengde"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wartość"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Quantidade"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Quantidade"
@@ -411,10 +579,22 @@
             "value" : "Množstvo"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Amount"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Iznos"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Износ"
           }
         },
         "sv" : {
@@ -423,16 +603,40 @@
             "value" : "Styrka"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "தொகை"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "จำนวน"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Miktar"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Amount"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Величина"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "رقم"
           }
         },
         "vi" : {
@@ -444,13 +648,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "模糊量"
+            "value" : "锐化度"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "模糊量"
+            "value" : "銳利量"
           }
         }
       }
@@ -468,6 +672,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "حجم المصفوفة"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Matris ölçüsü"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Памер матрыцы"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Размер на матрица"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Matrix size"
           }
         },
         "ca" : {
@@ -518,6 +746,12 @@
             "value" : "Tamaño de la matriz de puntos"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Matrix size"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -560,10 +794,22 @@
             "value" : "Mátrix méret"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Մատրիցայի չափերը"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ukuran matriks"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fylkja stærð"
           }
         },
         "it" : {
@@ -578,6 +824,12 @@
             "value" : "マトリックス"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Matrix size"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -586,14 +838,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Matrix size"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Matrisestørrelse"
+            "value" : "Големина на матрица"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Matrix size"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Matrix size"
           }
         },
         "nl" : {
@@ -602,19 +866,25 @@
             "value" : "Matrixgrootte"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Matrisestørrelse"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rozmiar matrycy"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tamanho da Matriz"
+            "value" : "Tamanho da matriz"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tamanho da Matriz"
@@ -638,10 +908,22 @@
             "value" : "Veľkosť matice"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Matrix size"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Veličina matrice"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Величина матрице"
           }
         },
         "sv" : {
@@ -650,16 +932,40 @@
             "value" : "Matrisstorlek"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "அணி அளவு"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ขนาดเมตริก"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Matris boyutu"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Matrix size"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Розмір матриці"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "قالب سائز"
           }
         },
         "vi" : {
@@ -698,6 +1004,30 @@
             "value" : "اقتصاص"
           }
         },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kəs"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Абрэзаць"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Изрязване"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ক্রপ"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -707,7 +1037,7 @@
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ořez"
+            "value" : "Oříznout"
           }
         },
         "da" : {
@@ -744,6 +1074,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Recortar"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ebaki"
           }
         },
         "fa" : {
@@ -788,22 +1124,40 @@
             "value" : "Körbevágás"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Կտրել"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Crop"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Klippa"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ritaglio"
+            "value" : "Ritaglia"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "クロップ"
+          }
+        },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ಕತ್ತರಿಸು"
           }
         },
         "ko" : {
@@ -818,10 +1172,22 @@
             "value" : "Apgriezt"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Beskjær"
+            "value" : "Исечи"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ക്രോപ്"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Crop"
           }
         },
         "nl" : {
@@ -830,19 +1196,25 @@
             "value" : "Bijsnijden"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beskjær"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kadrowanie"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cortar"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cortar"
@@ -866,10 +1238,22 @@
             "value" : "Orezanie"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obreži"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Iseci"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Исеци"
           }
         },
         "sv" : {
@@ -878,28 +1262,52 @@
             "value" : "Beskär"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "வெட்டு"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ตัด"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kırp"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Crop"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Обрізання"
+            "value" : "Обрізати"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تراشیں"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cắt xén"
+            "value" : "Cắt"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "裁切"
+            "value" : "裁剪："
           }
         },
         "zh-Hant" : {
@@ -923,6 +1331,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "الطول (الافتراضي: طول الفيديو الأصلي)"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hündürlük (Varsayılan: videonun hündürlüyü)"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вышыня (прадвызначана: вышыня відэа)"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Височина (по подразбиране: височина на образа)"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "উচ্চতা (ডিফল্ট: ভিডিওর উচ্চতা)"
           }
         },
         "ca" : {
@@ -973,6 +1405,12 @@
             "value" : "Alto (por defecto: alto del vídeo)"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Height (default: video height)"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1015,10 +1453,22 @@
             "value" : "Magasság (alapértelmezett: videó magassága)"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Բարձր (նախապատվություն: Վիդեո բարձրություն)"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tinggi (bawaan: tinggi video)"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hæð (sjálfgefið: myndhæð)"
           }
         },
         "it" : {
@@ -1033,6 +1483,12 @@
             "value" : "縦幅 (デフォルト: ビデオの縦幅)"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Height (default: video height)"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1041,14 +1497,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Height (default: video height)"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Høyde (standard: videohøyde)"
+            "value" : "Висина (стандардно: висина на видео)"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Height (default: video height)"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Height (default: video height)"
           }
         },
         "nl" : {
@@ -1057,19 +1525,25 @@
             "value" : "Hoogte (standaard: videohoogte)"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Høyde (standard: videohøyde)"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wysokość (domyślnie: wysokość video)"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Altura (padrão: altura do vídeo)"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Altura (padrão: altura do vídeo)"
@@ -1093,10 +1567,22 @@
             "value" : "Výška (predvolené: výška videa)"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Višina (privzeto: višina videoposnetka)"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Visina (podrazumevano: visina video-zapisa)"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Висина (подразумевано: висина видео-записа)"
           }
         },
         "sv" : {
@@ -1105,16 +1591,40 @@
             "value" : "Höjd (förval: videohöjd)"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "உயரம்  (இயல்புநிலை: காணொளி உயரம்)"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ความสูง"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Yükseklik (Saptanmış: Video yüksekliği)"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Height (default: video height)"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Висота (за замовчуванням: висота відео)"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اونچائی (پہلے سے طے شدہ: ویڈیو کی اونچائی)"
           }
         },
         "vi" : {
@@ -1150,6 +1660,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "العَرض (الافتراضي: عَرض الفيديو الأصلي)"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Genişlik (Varsayılan: videonun genişliyi)"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Шырыня (прадвызначана: шырыня відэа)"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Широчина (по подразбиране: широчина на образа)"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "প্রস্থ (ডিফল্ট: ভিডিওর প্রস্থ)"
           }
         },
         "ca" : {
@@ -1200,6 +1734,12 @@
             "value" : "Ancho (por defecto: ancho del vídeo)"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Width (default: video width)"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1242,10 +1782,22 @@
             "value" : "Szélesség (alapértelmezett: videó szélessége)"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Լայն(նախապատվություն: Վիդեո լայնություն)"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lebar (bawaan: lebar video)"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Breidd (sjálfgefið: vídeóbreidd)"
           }
         },
         "it" : {
@@ -1260,6 +1812,12 @@
             "value" : "幅 (デフォルト: ビデオの幅)"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Width (default: video width)"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1268,14 +1826,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Width (default: video width)"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bredde (standard: videobredde)"
+            "value" : "Ширина (стандардно: ширина на видео)"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Width (default: video width)"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Width (default: video width)"
           }
         },
         "nl" : {
@@ -1284,19 +1854,25 @@
             "value" : "Breedte (standaard: videobreedte)"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bredde (standard: videobredde)"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Szerokość (domyślnie: szerokość video)"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Largura (padrão: largura do vídeo)"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Largura (padrão: largura do vídeo)"
@@ -1320,10 +1896,22 @@
             "value" : "Šírka (predvolené: šírka videa)"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Širina (privzeto: širina videoposnetka)"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Širina (podrazumevano: širina video-zapisa)"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ширина (подразумевано: ширина видео-записа)"
           }
         },
         "sv" : {
@@ -1332,16 +1920,40 @@
             "value" : "Bredd (förval: videobredd)"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "அகலம்  (இயல்புநிலை: காணொளி அகலம்)"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ความกว้าง"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Genişlik (Saptanmış: Video genişliği)"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Width (default: video width)"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ширина (типово: ширина відео)"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "چوڑائی (پہلے سے طے شدہ: ویڈیو کی چوڑائی)"
           }
         },
         "vi" : {
@@ -1377,6 +1989,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "الأصل X (الافتراضي: المنتصف)"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Başlanğıc X (Varsayılan: Mərkəz)"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Паходжанне X (па змаўчанні: у цэнтры)"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Начало X (по подразбиране: средата)"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin X (default: center)"
           }
         },
         "ca" : {
@@ -1427,6 +2063,12 @@
             "value" : "Origen X (por defecto: centro)"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin X (default: center)"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1469,10 +2111,22 @@
             "value" : "Középpont X (alapértelmezett: középen)"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ծագում է X (նախապատվություն：կենտրոնական)"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Asal X (bawaan: tengah)"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uppruni X (sjálfgefið: miðja)"
           }
         },
         "it" : {
@@ -1487,6 +2141,12 @@
             "value" : "位置X (デフォルト: 中央)"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin X (default: center)"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1495,14 +2155,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Origin X (default: center)"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Opprinnelse X (standard: sentrert)"
+            "value" : "Почеток X (стандардно: центар)"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ആധാരം (X)"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin X (default: center)"
           }
         },
         "nl" : {
@@ -1511,19 +2183,25 @@
             "value" : "Beginpunt X (standaard: midden)"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opprinnelse X (standard: sentrert)"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Początkowe X (domyślnie: środek)"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Origem X (padrão: centro)"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Origem X (padrão: centro)"
@@ -1547,10 +2225,22 @@
             "value" : "Začiatok X (predvolené: stred)"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin X (default: center)"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Početna vrednost X (podrazumevano: centar)"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Почетна вредност X (подразумевано: центар)"
           }
         },
         "sv" : {
@@ -1559,16 +2249,40 @@
             "value" : "Origo X (förval: center)"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin X (default: center)"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "จุด x เริ่มต้น"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "X Orijini (Saptanmış: Merkez)"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin X (default: center)"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Origin X (за замовчуванням: центр)"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Origin X (پہلے سے طے شدہ: مرکز)"
           }
         },
         "vi" : {
@@ -1604,6 +2318,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "الأصل Y (الافتراضي: المنتصف)"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Başlanğıc Y (Varsayılan: Mərkəz)"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Паходжанне Y (прадвызначана: у цэнтры)"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Начало Y (по подразбиране: средата)"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin Y (default: center)"
           }
         },
         "ca" : {
@@ -1654,6 +2392,12 @@
             "value" : "Origen Y (por defecto: centro)"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin Y (default: center)"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1696,10 +2440,22 @@
             "value" : "Középpont Y (alapértelmezett: középen)"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ծագում է Y (նախապատվություն：կենտրոնական)"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Asal Y (bawaan: tengah)"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uppruni Y (sjálfgefið: miðja)"
           }
         },
         "it" : {
@@ -1714,6 +2470,12 @@
             "value" : "位置Y (デフォルト: 中央)"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin Y (default: center)"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1722,14 +2484,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Origin Y (default: center)"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Oprinnelse Y (standard: sentrert)"
+            "value" : "Почеток Y (стандардно: центар)"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin Y (default: center)"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin Y (default: center)"
           }
         },
         "nl" : {
@@ -1738,19 +2512,25 @@
             "value" : "Beginpunt Y (standaard: midden)"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oprinnelse Y (standard: sentrert)"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Początkowe Y (domyślnie: środek)"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Origem Y (padrão: centro)"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Origem Y (padrão: centro)"
@@ -1774,10 +2554,22 @@
             "value" : "Začiatok Y (predvolené: stred)"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin Y (default: center)"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Početna vrednost Y (podrazumevano: centar)"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Почетна вредност Y (подразумевано: центар)"
           }
         },
         "sv" : {
@@ -1786,16 +2578,40 @@
             "value" : "Origo Y (förval: center)"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin Y (default: center)"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "จุด y เริ่มต้น"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Y ekseninde (Varsayılan: Orta)"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin Y (default: center)"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Origin X (за замовчуванням: центр)"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Origin Y (پہلے سے طے شدہ: مرکز)"
           }
         },
         "vi" : {
@@ -1831,6 +2647,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "مخصص (FFmpeg)"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Xüsusi (FFmpeg) "
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Карыстальніцкі (FFmpeg)"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom (FFmpeg)"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom (FFmpeg)"
           }
         },
         "ca" : {
@@ -1881,6 +2721,12 @@
             "value" : "Personalizado (FFmpeg)"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom (FFmpeg)"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1923,10 +2769,22 @@
             "value" : "Személyreszabott (FFmpeg)"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Անհատականացված (FFmpeg)"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kustom (FFmpeg)"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sérsniðin (FFmpeg)"
           }
         },
         "it" : {
@@ -1941,6 +2799,12 @@
             "value" : "カスタム (FFmpeg)"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom (FFmpeg)"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1949,14 +2813,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Custom (FFmpeg)"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tilpasset (FFmpeg)"
+            "state" : "new",
+            "value" : "Custom (FFmpeg)"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom (FFmpeg)"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom (FFmpeg)"
           }
         },
         "nl" : {
@@ -1965,22 +2841,28 @@
             "value" : "Aangepast (FFmpeg)"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tilpasset (FFmpeg)"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Własny (Fmpeg)"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Personalizado (FFmpeg)"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Customizado (FFmpeg)"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personalizado (FFmpeg)"
           }
         },
         "ro" : {
@@ -2001,10 +2883,22 @@
             "value" : "Vlastné (FFmpeg)"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom (FFmpeg)"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prilagođeno (FFmpeg)"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Прилагођено (FFmpeg)"
           }
         },
         "sv" : {
@@ -2013,16 +2907,40 @@
             "value" : "Eget (FFmpeg)"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom (FFmpeg)"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom (FFmpeg)"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Özel (FFmpeg)"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom (FFmpeg)"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Спеціальний (FFmpeg)"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حسب ضرورت (FFmpeg)"
           }
         },
         "vi" : {
@@ -2058,6 +2976,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "اسم الفلتر"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filter adı"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Назва фільтра"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter name"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter name"
           }
         },
         "ca" : {
@@ -2108,6 +3050,12 @@
             "value" : "Nombre del filtro"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter name"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2150,10 +3098,22 @@
             "value" : "Szűrő neve"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ֆիլտրի անուն"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nama filter"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sía nafn"
           }
         },
         "it" : {
@@ -2168,22 +3128,40 @@
             "value" : "フィルター名"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter name"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "필터 이름"
+            "value" : "필터 항목"
           }
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Filter name"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Filternavn"
+            "value" : "Име на филтерот"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter name"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter name"
           }
         },
         "nl" : {
@@ -2192,22 +3170,28 @@
             "value" : "Filternaam"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filternavn"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nazwa filtra"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nome do filtro"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nome do Filtro"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome do filtro"
           }
         },
         "ro" : {
@@ -2228,10 +3212,22 @@
             "value" : "Názov filtra"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter name"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Naziv filtera"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Назив филтера"
           }
         },
         "sv" : {
@@ -2240,16 +3236,40 @@
             "value" : "Filternamn"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter name"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filter name"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filtre adı"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter name"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Назва фільтру"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فلٹر کا نام"
           }
         },
         "vi" : {
@@ -2285,6 +3305,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "قيمة الفلتر"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filter dəyəri"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Значэнне фільтра"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter value"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter value"
           }
         },
         "ca" : {
@@ -2335,6 +3379,12 @@
             "value" : "Valor del filtro"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter value"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2368,7 +3418,7 @@
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vrijednost filtra"
+            "value" : "Vrijednost filtera"
           }
         },
         "hu" : {
@@ -2377,10 +3427,22 @@
             "value" : "Szűrési érték"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ֆիլտրային լար"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nilai filter"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sía gildi"
           }
         },
         "it" : {
@@ -2395,6 +3457,12 @@
             "value" : "フィルターの値"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter value"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2403,14 +3471,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Filter value"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Filterverdi"
+            "value" : "Вредност на филтерот"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter value"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter value"
           }
         },
         "nl" : {
@@ -2419,22 +3499,28 @@
             "value" : "Filterwaarde"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filterverdi"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wartość filtra"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Valor do filtro"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Valor do Filtro"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valor do filtro"
           }
         },
         "ro" : {
@@ -2455,10 +3541,22 @@
             "value" : "Hodnota filtra"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter value"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vrednost filtera"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вредност филтера"
           }
         },
         "sv" : {
@@ -2467,16 +3565,40 @@
             "value" : "Filtervärde"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter value"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter value"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filtre değeri"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter value"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Значення фільтру"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فلٹر کی قدر"
           }
         },
         "vi" : {
@@ -2512,6 +3634,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "مخصص (mpv)"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Xüsusi (mpv)"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Карыстальніцкі (mpv)"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom (mpv)"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom (mpv)"
           }
         },
         "ca" : {
@@ -2562,6 +3708,12 @@
             "value" : "Personalizado (mpv)"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom (mpv)"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2604,10 +3756,22 @@
             "value" : "Személyreszabott (mpv)"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Անհատականացված (mpv)"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Custom (mpv)"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sérsniðin (mpv)"
           }
         },
         "it" : {
@@ -2622,6 +3786,12 @@
             "value" : "カスタム (mpv)"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom (mpv)"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2630,14 +3800,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Custom (mpv)"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tilpasset (mpv)"
+            "state" : "new",
+            "value" : "Custom (mpv)"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom (mpv)"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom (mpv)"
           }
         },
         "nl" : {
@@ -2646,22 +3828,28 @@
             "value" : "Aangepast (mpv)"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tilpasset (mpv)"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Własny (mpv)"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Personalizado (mpv)"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Customizado (mpv)"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personalizado (mpv)"
           }
         },
         "ro" : {
@@ -2682,10 +3870,22 @@
             "value" : "Vlastné (mpv)"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom (mpv)"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prilagođeno (mpv)"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Прилагођено (mpv)"
           }
         },
         "sv" : {
@@ -2694,16 +3894,40 @@
             "value" : "Eget (mpv)"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom (mpv)"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Özel (mpv)"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom (mpv)"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Спеціальний (mpv)"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حسب ضرورت (mpv)"
           }
         },
         "vi" : {
@@ -2739,6 +3963,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "اسم الفلتر"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filter adı"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Назва фільтра"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter name"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter name"
           }
         },
         "ca" : {
@@ -2789,6 +4037,12 @@
             "value" : "Nombre del filtro"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter name"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2831,10 +4085,22 @@
             "value" : "Szűrő neve"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ֆիլտրի անուն"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nama filter"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sía nafn"
           }
         },
         "it" : {
@@ -2849,6 +4115,12 @@
             "value" : "フィルター名"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter name"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2857,14 +4129,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Filter name"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Filternavn"
+            "value" : "Име на филтерот"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter name"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter name"
           }
         },
         "nl" : {
@@ -2873,22 +4157,28 @@
             "value" : "Filternaam"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filternavn"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nazwa filtra"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nome do filtro"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nome do Filtro"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome do filtro"
           }
         },
         "ro" : {
@@ -2909,10 +4199,22 @@
             "value" : "Názov filtra"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter name"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Naziv filtera"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Назив филтера"
           }
         },
         "sv" : {
@@ -2921,16 +4223,40 @@
             "value" : "Filternamn"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter name"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filter name"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filtre adı"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter name"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Назва фільтру"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فلٹر کا نام"
           }
         },
         "vi" : {
@@ -2966,6 +4292,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "قيمة الفلتر"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filter dəyəri"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Значэнне фільтра"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter value"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter value"
           }
         },
         "ca" : {
@@ -3016,6 +4366,12 @@
             "value" : "Valor del filtro"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter value"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3058,10 +4414,22 @@
             "value" : "Szűrési érték"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ֆիլտրային լար"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nilai filter"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sía gildi"
           }
         },
         "it" : {
@@ -3076,6 +4444,12 @@
             "value" : "フィルターの値"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter value"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3084,14 +4458,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Filter value"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Filterverdi"
+            "value" : "Вредност на филтерот"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter value"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter value"
           }
         },
         "nl" : {
@@ -3100,22 +4486,28 @@
             "value" : "Filterwaarde"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filterverdi"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wartość filtra"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Valor do filtro"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Valor do Filtro"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valor do filtro"
           }
         },
         "ro" : {
@@ -3136,10 +4528,22 @@
             "value" : "Hodnota filtra"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter value"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vrednost filtera"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вредност филтера"
           }
         },
         "sv" : {
@@ -3148,16 +4552,40 @@
             "value" : "Filtervärde"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter value"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter value"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filtre değeri"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filter value"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Значення фільтру"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فلٹر کی قدر"
           }
         },
         "vi" : {
@@ -3193,6 +4621,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "إزالة الشعارات من الفيديو"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delogo (logonu sil)"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сцерці лога"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "БезЛого"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Delogo"
           }
         },
         "ca" : {
@@ -3243,6 +4695,12 @@
             "value" : "Quitar logotipo"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Delogo"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3285,10 +4743,22 @@
             "value" : "Logó eltávolító"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Հեռացնել ջրանշանը"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hapus Watermark"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delogo"
           }
         },
         "it" : {
@@ -3303,6 +4773,12 @@
             "value" : "ウォーターマーク除去"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Delogo"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3311,14 +4787,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Delogo"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fjern logo"
+            "value" : "Отстрани лого"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Delogo"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Delogo"
           }
         },
         "nl" : {
@@ -3327,22 +4815,28 @@
             "value" : "Logo verwijderen"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fjern logo"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Usunięcie Logo"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Remoção de Logótipos"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Remover Logo"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remoção de Logótipos"
           }
         },
         "ro" : {
@@ -3363,10 +4857,22 @@
             "value" : "Delogo"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Delogo"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ukloni logotip"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Уклони логотип"
           }
         },
         "sv" : {
@@ -3375,16 +4881,40 @@
             "value" : "Göm logga"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "இலச்சினை நீக்கம்"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "เอาโลโก้ออก"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Logo kaldır"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Delogo"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Без логотипів"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ڈیلوگو"
           }
         },
         "vi" : {
@@ -3420,6 +4950,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "الإرتفاع"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hündürlük"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вышыня"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Височина"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Height"
           }
         },
         "ca" : {
@@ -3470,6 +5024,12 @@
             "value" : "Alto"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Height"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3512,10 +5072,22 @@
             "value" : "Magasság"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Բարձրություն"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tinggi"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hæð"
           }
         },
         "it" : {
@@ -3530,6 +5102,12 @@
             "value" : "縦幅"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Height"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3542,10 +5120,22 @@
             "value" : "Augstums"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Høyde"
+            "value" : "Висина"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ഉയരം"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Height"
           }
         },
         "nl" : {
@@ -3554,19 +5144,25 @@
             "value" : "Hoogte"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Høyde"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wysokość"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Altura"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Altura"
@@ -3590,10 +5186,22 @@
             "value" : "Výška"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Višina"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Visina"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Висина"
           }
         },
         "sv" : {
@@ -3602,16 +5210,40 @@
             "value" : "Höjd"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "உயரம்"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "สูง"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Yükseklik"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Height"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Висота"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اونچائی"
           }
         },
         "vi" : {
@@ -3647,6 +5279,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "العُرض"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Genişlik"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Шырыня"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Широчина"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Width"
           }
         },
         "ca" : {
@@ -3697,6 +5353,12 @@
             "value" : "Ancho"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Width"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3739,10 +5401,22 @@
             "value" : "Szélesség"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Լայնություն"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lebar"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Breidd"
           }
         },
         "it" : {
@@ -3757,6 +5431,12 @@
             "value" : "横幅"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Width"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3769,10 +5449,22 @@
             "value" : "Platums"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bredde"
+            "value" : "Ширина"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "വീതി"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Width"
           }
         },
         "nl" : {
@@ -3781,19 +5473,25 @@
             "value" : "Breedte"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bredde"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Szerokość"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Largura"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Largura"
@@ -3817,10 +5515,22 @@
             "value" : "Šírka"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Širina"
+          }
+        },
+        "sr-CS" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Širina"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ширина"
           }
         },
         "sv" : {
@@ -3829,16 +5539,40 @@
             "value" : "Bredd"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "அகலம்"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "กว้าง"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Genişlik"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Width"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ширина"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "چوڑائی"
           }
         },
         "vi" : {
@@ -3874,6 +5608,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "الأصل X"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Başlanğıc X"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Паходжанне X"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Начало X"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin X"
           }
         },
         "ca" : {
@@ -3924,6 +5682,12 @@
             "value" : "Origen X"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin X"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3966,10 +5730,22 @@
             "value" : "Kezdőpont X"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Բնօրինակը X"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Asal X"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uprunalega X"
           }
         },
         "it" : {
@@ -3984,6 +5760,12 @@
             "value" : "位置X"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin X"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3992,14 +5774,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Origin X"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Opprinnelse X"
+            "value" : "Почеток X"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin X"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin X"
           }
         },
         "nl" : {
@@ -4008,19 +5802,25 @@
             "value" : "Beginpunt X"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opprinnelse X"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Początek współrzędnej X"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Origem X"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Origem X"
@@ -4044,10 +5844,22 @@
             "value" : "Začiatok X"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin X"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Početna vrednost X"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Почетна вредност X"
           }
         },
         "sv" : {
@@ -4056,16 +5868,40 @@
             "value" : "Origo X"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "நீளமூலம்"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "จุดกำเนิด"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "X Orijini"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin X"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Початкова X"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اورجن X"
           }
         },
         "vi" : {
@@ -4101,6 +5937,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "الأصل Y"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Başlanğıc Y"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Паходжанне Y"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Начало Y"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin Y"
           }
         },
         "ca" : {
@@ -4151,6 +6011,12 @@
             "value" : "Origen Y"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin Y"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4193,10 +6059,22 @@
             "value" : "Kezdőpont Y"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Բնօրինակը Y"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Asal Y"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upprunalega Y"
           }
         },
         "it" : {
@@ -4211,6 +6089,12 @@
             "value" : "位置Y"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin Y"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4219,14 +6103,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Origin Y"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Opprinnelse Y"
+            "value" : "Почеток Y"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin Y"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin Y"
           }
         },
         "nl" : {
@@ -4235,19 +6131,25 @@
             "value" : "Beginpunt Y"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opprinnelse Y"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Początek współrzędnej Y"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Origem Y"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Origem Y"
@@ -4271,10 +6173,22 @@
             "value" : "Začiatok Y"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin Y"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Početna vrednost Y"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Почетна вредност Y"
           }
         },
         "sv" : {
@@ -4283,16 +6197,40 @@
             "value" : "Origo Y"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "அகளமூலம்"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "จุดกำเนิด"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Y Orijini"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin Y"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Початкова Y"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اورجن Y"
           }
         },
         "vi" : {
@@ -4328,6 +6266,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "توسيع"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Genişləndir"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Разгарнуць"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Разпъване"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Expand"
           }
         },
         "ca" : {
@@ -4378,6 +6340,12 @@
             "value" : "Expandir"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zabaldu"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4420,10 +6388,22 @@
             "value" : "Kibontás"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ընդարձակել"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Perluas"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stækkaðu"
           }
         },
         "it" : {
@@ -4438,6 +6418,12 @@
             "value" : "リサイズ"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Expand"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4446,14 +6432,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Expand"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Utvid"
+            "value" : "Прошири"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "വലുതാക്കുക"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Expand"
           }
         },
         "nl" : {
@@ -4462,19 +6460,25 @@
             "value" : "Uitbreiden"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utvid"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rozciągnij"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Expandir"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Expandir"
@@ -4498,10 +6502,22 @@
             "value" : "Zväčšiť"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Expand"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Raširi"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Рашири"
           }
         },
         "sv" : {
@@ -4510,16 +6526,40 @@
             "value" : "Expandera"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "விரிவாக்கு"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ขยาย"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Genişlet"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Expand"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Розгорнутий"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "پھیلائیں"
           }
         },
         "vi" : {
@@ -4555,6 +6595,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "توسيع ليتناسب مع العرض (على سبيل المثال: 4/3)"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aspektə uyğunlaşacaq şəkildə genişləndir (misal üçün:4/3)"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пашыраць у адпаведнасці з суадносінамі бакоў (напр: 4/3)"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Разпъва с побиране в съотношение (напр. 4:3)"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Expands to fit an aspect (e.g: 4/3)"
           }
         },
         "ca" : {
@@ -4605,6 +6669,12 @@
             "value" : "Expandir para ajustarse a una relación de aspecto (ej.: 4/3)"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Expands to fit an aspect (e.g: 4/3)"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4647,10 +6717,22 @@
             "value" : "Kiterjesztés megfelelő méretarányhoz (pl.: 4/3)"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ընդլայնեցնել հարաբերակցիության համար (օրինակ: 4/3)"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Perbesar untuk mengepaskan aspek rasio (cth: 4/3)"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stækkar til að passa við þætti (td: 4/3)"
           }
         },
         "it" : {
@@ -4665,6 +6747,12 @@
             "value" : "アスペクト比に合わせる (例: 4:3)"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Expands to fit an aspect (e.g: 4/3)"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4673,14 +6761,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Expands to fit an aspect (e.g: 4/3)"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Utvid for å passe aspektet (eks. 4/3)"
+            "value" : "Се шири до одреден размер (пр: 4:3)"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Expands to fit an aspect (e.g: 4/3)"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Expands to fit an aspect (e.g: 4/3)"
           }
         },
         "nl" : {
@@ -4689,22 +6789,28 @@
             "value" : "Breid uit naar een beeldverhouding (bv. 4:3)"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utvid for å passe aspektet (eks. 4/3)"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rozciągnij do proporcji (np.: 4/3)"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Expandir para adaptar a um aspeto (ex.: 4/3)"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Expande para adequar a um padrão (ex: 4/3)"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Expandir para adaptar a um aspeto (ex.: 4/3)"
           }
         },
         "ro" : {
@@ -4725,10 +6831,22 @@
             "value" : "Zväčší v pomere (napr.: 4/3)"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Expands to fit an aspect (e.g: 4/3)"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Širenje do uklapanja u razmeru (npr. 4/3)"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ширење до уклапања у размеру (нпр. 4/3)"
           }
         },
         "sv" : {
@@ -4737,16 +6855,40 @@
             "value" : "Expandera till att passa ett förhållande (t.ex: 4/3)"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Expands to fit an aspect (e.g: 4/3)"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ขยายโดยคงอัตราส่วนกว้างยาว"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Belli bir en-boy oranına genişlet (Örneğin: 4/3)"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Expands to fit an aspect (e.g: 4/3)"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Розширити під пропорції (напр., 4:3)"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aspect کو فٹ کرنے کے لیے پھیلائیں (جیسے: 4/3)"
           }
         },
         "vi" : {
@@ -4784,6 +6926,30 @@
             "value" : "الطول (الافتراضي: طول الفيديو الأصلي)"
           }
         },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hündürlük (Varsayılan: videonun hündürlüyü)"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вышыня (прадвызначана: вышыня відэа)"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Височина (по подразбиране: височина на образа)"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "উচ্চতা (ডিফল্ট: ভিডিওর উচ্চতা)"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4799,7 +6965,7 @@
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Højde (standard: video højde)"
+            "value" : "Højde (standard: video størrelse)"
           }
         },
         "de" : {
@@ -4830,6 +6996,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Alto (por defecto: alto del vídeo)"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Height (default: video height)"
           }
         },
         "fa" : {
@@ -4874,10 +7046,22 @@
             "value" : "Magasság (alapértelmezett: videó magassága)"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Բարձր (նախապատվություն: Վիդեո բարձրություն)"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tinggi (bawaan: tinggi video)"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hæð (sjálfgefið: myndhæð)"
           }
         },
         "it" : {
@@ -4892,22 +7076,40 @@
             "value" : "縦幅 (デフォルト: ビデオの縦幅)"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Height (default: video height)"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "세로 (기본값: 영상의 세로 해상도)"
+            "value" : "세로 (기본값: 세로 해상도)"
           }
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Height (default: video height)"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Høyde (standard: videohøyde)"
+            "value" : "Висина (стандардно: висина на видео)"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Height (default: video height)"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Height (default: video height)"
           }
         },
         "nl" : {
@@ -4916,19 +7118,25 @@
             "value" : "Hoogte (standaard: videohoogte)"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Høyde (standard: videohøyde)"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wysokość (domyślnie: wysokość video)"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Altura (padrão: altura do vídeo)"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Altura (padrão: altura do vídeo)"
@@ -4952,10 +7160,22 @@
             "value" : "Výška (predvolené: výška videa)"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Višina (privzeto: višina videoposnetka)"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Visina (podrazumevano: visina video-zapisa)"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Висина (подразумевано: висина видео-записа)"
           }
         },
         "sv" : {
@@ -4964,16 +7184,40 @@
             "value" : "Höjd (förval: videohöjd)"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "உயரம்  (இயல்புநிலை: காணொளி உயரம்)"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ความสูง"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yükseklik (Varsayılan: Video Yüksekliği)"
+            "value" : "Yükseklik (Saptanmış: Video yüksekliği)"
+          }
+        },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Height (default: video height)"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Висота (типово: висота відео)"
+            "value" : "Висота (за замовчуванням: висота відео)"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اونچائی (پہلے سے طے شدہ: ویڈیو کی اونچائی)"
           }
         },
         "vi" : {
@@ -4985,7 +7229,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "高度 (默认: 视频高度)"
+            "value" : "高 (默认: 视频高度)"
           }
         },
         "zh-Hant" : {
@@ -5009,6 +7253,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "تقريب لأعلى لجعل القسمة على هذه القيمة"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dəyərə bölünəcək şəkildə yuvarlaqlaşdır"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Акругляць, каб дзялілася на гэтае значэнне"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Закръглява нагоре, за да стане делимо на тази стойност"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Rounds up to make divisible by this value"
           }
         },
         "ca" : {
@@ -5059,6 +7327,12 @@
             "value" : "Redondear para hacer divisible por este valor"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Rounds up to make divisible by this value"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5101,10 +7375,22 @@
             "value" : "Felfele kerekít, hogy oszthat legyen ezzel az értékkel"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Հավաքել մինչև այն քառակուսային արժեքի, որը կարող է բաժանվել այդ արժեքի հետ"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bulatkan agar dapat dibagi dengan nilai ini"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hringir upp til að gera deilanlegt eftir þessu gildi"
           }
         },
         "it" : {
@@ -5119,6 +7405,12 @@
             "value" : "この数字で割り切れる値に端数を丸める"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Rounds up to make divisible by this value"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5127,14 +7419,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Rounds up to make divisible by this value"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Rund opp for å gjøre delbart på denne verdien"
+            "value" : "Заокружува на следниот цел број за да биде деллив со оваа вредност"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Rounds up to make divisible by this value"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Rounds up to make divisible by this value"
           }
         },
         "nl" : {
@@ -5143,22 +7447,28 @@
             "value" : "Rond af om deelbaar te maken door deze waarde"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rund opp for å gjøre delbart på denne verdien"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zaokrąglenie w górę, aby podzielić przez tą wartość"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Arredonda para se tornar divisível por este valor"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Arredonda para ser divisível por este valor"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arredonda para se tornar divisível por este valor"
           }
         },
         "ro" : {
@@ -5179,10 +7489,22 @@
             "value" : "Zaokrúhli, aby bolo deliteľné hodnotou"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Rounds up to make divisible by this value"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zaokrugljivanje tako da se može deliti ovom vrednošću"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Заокругљивање тако да се може делити овом вредношћу"
           }
         },
         "sv" : {
@@ -5191,16 +7513,40 @@
             "value" : "Runda upp till att bli delbart med detta värde"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Rounds up to make divisible by this value"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ปัดเศษให้หารลงตัวด้วยเลขนี้"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bu sayıya bölünebilir olması için yuvarla"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Rounds up to make divisible by this value"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Округлити для кратності цьому значенню"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اس قدر سے قابل تقسیم بنانے کے لیے راؤنڈ اپ"
           }
         },
         "vi" : {
@@ -5238,10 +7584,34 @@
             "value" : "العَرض (الافتراضي: عَرض الفيديو الأصلي)"
           }
         },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Genişlik (Varsayılan: videonun genişliyi)"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Шырыня (прадвызначана: шырыня відэа)"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Широчина (по подразбиране: широчина на образа)"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "প্রস্থ (ডিফল্ট: ভিডিওর প্রস্থ)"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Amplada (per defecte: amplada del vídeo"
+            "value" : "Amplada (per defecte: amplada del vídeo)"
           }
         },
         "cs" : {
@@ -5286,6 +7656,12 @@
             "value" : "Ancho (por defecto: ancho del vídeo)"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Width (default: video width)"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5328,10 +7704,22 @@
             "value" : "Szélesség (alapértelmezett: videó szélessége)"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Լայն(նախապատվություն: Վիդեո լայնություն)"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lebar (bawaan: lebar video)"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Breidd (sjálfgefið: vídeóbreidd)"
           }
         },
         "it" : {
@@ -5346,22 +7734,40 @@
             "value" : "幅 (デフォルト: ビデオの幅)"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Width (default: video width)"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "가로 (기본값: 영상의 가로 해상도)"
+            "value" : "가로 (기본값: 가로 해상도)"
           }
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Width (default: video width)"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bredde (standard: videobredde)"
+            "value" : "Ширина (стандардно: ширина на видео)"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Width (default: video width)"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Width (default: video width)"
           }
         },
         "nl" : {
@@ -5370,19 +7776,25 @@
             "value" : "Breedte (standaard: videobreedte)"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bredde (standard: videobredde)"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Szerokość (domyślnie: szerokość video)"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Largura (padrão: largura do vídeo)"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Largura (padrão: largura do vídeo)"
@@ -5406,10 +7818,22 @@
             "value" : "Šírka (predvolené: šírka videa)"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Širina (privzeto: širina videoposnetka)"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Širina (podrazumevano: širina video-zapisa)"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ширина (подразумевано: ширина видео-записа)"
           }
         },
         "sv" : {
@@ -5418,16 +7842,40 @@
             "value" : "Bredd (förval: videobredd)"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "அகலம்  (இயல்புநிலை: காணொளி அகலம்)"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ความกว้าง"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Genişlik (Varsayılan: Video Genişliği)"
+            "value" : "Genişlik (Saptanmış: Video genişliği)"
+          }
+        },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Width (default: video width)"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ширина (типово: ширина відео)"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "چوڑائی (پہلے سے طے شدہ: ویڈیو کی چوڑائی)"
           }
         },
         "vi" : {
@@ -5439,7 +7887,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "宽度 (默认: 视频宽度)"
+            "value" : "宽 (默认: 视频宽度)"
           }
         },
         "zh-Hant" : {
@@ -5463,6 +7911,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "الأصل X (الافتراضي: المنتصف)"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Başlanğıc X (Varsayılan: Mərkəz)"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Паходжанне X (па змаўчанні: у цэнтры)"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Начало X (по подразбиране: средата)"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin X (default: center)"
           }
         },
         "ca" : {
@@ -5513,6 +7985,12 @@
             "value" : "Origen X (por defecto: centro)"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin X (default: center)"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5540,7 +8018,7 @@
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "मूल X (default: center)"
+            "value" : "मूल X (डिफ़ॉल्ट: केंद्र)"
           }
         },
         "hr" : {
@@ -5555,10 +8033,22 @@
             "value" : "Középpont X (alapértelmezett: középen)"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ծագում է X (նախապատվություն：կենտրոնական)"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Asal X (bawaan: tengah)"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uppruni X (sjálfgefið: miðja)"
           }
         },
         "it" : {
@@ -5573,6 +8063,12 @@
             "value" : "位置X (デフォルト: 中央)"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin X (default: center)"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5581,14 +8077,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Origin X (default: center)"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Opprinnelse X (standard: sentrert)"
+            "value" : "Почеток X (стандардно: центар)"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ആധാരം (X)"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin X (default: center)"
           }
         },
         "nl" : {
@@ -5597,19 +8105,25 @@
             "value" : "Beginpunt X (standaard: midden)"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opprinnelse X (standard: sentrert)"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Początkowe X (domyślnie: środek)"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Origem X (padrão: centro)"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Origem X (padrão: centro)"
@@ -5633,10 +8147,22 @@
             "value" : "Začiatok X (predvolené: stred)"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin X (default: center)"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Početna vrednost X (podrazumevano: centar)"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Почетна вредност X (подразумевано: центар)"
           }
         },
         "sv" : {
@@ -5645,16 +8171,40 @@
             "value" : "Origo X (förval: center)"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin X (default: center)"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "จุด x เริ่มต้น"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "X ekseninde (Varsayılan: Orta)"
+            "value" : "X Orijini (Saptanmış: Merkez)"
+          }
+        },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin X (default: center)"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Початкова X (типово: центр)"
+            "value" : "Origin X (за замовчуванням: центр)"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Origin X (پہلے سے طے شدہ: مرکز)"
           }
         },
         "vi" : {
@@ -5666,7 +8216,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "起始横坐标 (默认: 从中心扩展)"
+            "value" : "起始 X (默认: 从中心裁切)"
           }
         },
         "zh-Hant" : {
@@ -5692,6 +8242,30 @@
             "value" : "الأصل Y (الافتراضي: المنتصف)"
           }
         },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Başlanğıc Y (Varsayılan: Mərkəz)"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Паходжанне Y (прадвызначана: у цэнтры)"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Начало Y (по подразбиране: средата)"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin Y (default: center)"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5707,7 +8281,7 @@
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Oprindelig Y (standard: center)"
+            "value" : "Oprindelig Y (Standard: center)"
           }
         },
         "de" : {
@@ -5740,6 +8314,12 @@
             "value" : "Origen Y (por defecto: centro)"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin Y (default: center)"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5767,7 +8347,7 @@
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "मूल Y (default: center)"
+            "value" : "मूल Y (डिफ़ॉल्ट: केंद्र)"
           }
         },
         "hr" : {
@@ -5782,10 +8362,22 @@
             "value" : "Középpont Y (alapértelmezett: középen)"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ծագում է Y (նախապատվություն：կենտրոնական)"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Asal Y (bawaan: tengah)"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uppruni Y (sjálfgefið: miðja)"
           }
         },
         "it" : {
@@ -5800,6 +8392,12 @@
             "value" : "位置Y (デフォルト: 中央)"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin Y (default: center)"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5808,14 +8406,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Origin Y (default: center)"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Opprinnelse Y (standard: sentrert)"
+            "value" : "Почеток Y (стандардно: центар)"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin Y (default: center)"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin Y (default: center)"
           }
         },
         "nl" : {
@@ -5824,19 +8434,25 @@
             "value" : "Beginpunt Y (standaard: midden)"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oprinnelse Y (standard: sentrert)"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Początkowe Y (domyślnie: środek)"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Origem Y (padrão: centro)"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Origem Y (padrão: centro)"
@@ -5860,10 +8476,22 @@
             "value" : "Začiatok Y (predvolené: stred)"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin Y (default: center)"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Početna vrednost Y (podrazumevano: centar)"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Почетна вредност Y (подразумевано: центар)"
           }
         },
         "sv" : {
@@ -5872,16 +8500,40 @@
             "value" : "Origo Y (förval: center)"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin Y (default: center)"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "จุด y เริ่มต้น"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Y Orijini (Saptanmış: Merkez)"
+            "value" : "Y ekseninde (Varsayılan: Orta)"
+          }
+        },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Origin Y (default: center)"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Початкова Y (типово: центр)"
+            "value" : "Origin X (за замовчуванням: центр)"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Origin Y (پہلے سے طے شدہ: مرکز)"
           }
         },
         "vi" : {
@@ -5893,7 +8545,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "起始纵坐标 (默认: 从中心扩展)"
+            "value" : "起始 Y (默认: 从中心裁切)"
           }
         },
         "zh-Hant" : {
@@ -5917,6 +8569,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "عكس"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Əksinə çevir"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Адлюстраваць"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Огледално"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Mirror"
           }
         },
         "ca" : {
@@ -5967,6 +8643,12 @@
             "value" : "Reflejar"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Mirror"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6009,10 +8691,22 @@
             "value" : "Tükrözés"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Հայելային"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cerminkan"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spegla"
           }
         },
         "it" : {
@@ -6027,6 +8721,12 @@
             "value" : "左右反転"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Mirror"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6035,14 +8735,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Mirror"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Speil"
+            "value" : "Огледално пресликување"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Mirror"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Mirror"
           }
         },
         "nl" : {
@@ -6051,22 +8763,28 @@
             "value" : "Horiz. spiegelen"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Speil"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lustrzane odbicie"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Espelho"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Espelhar"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Espelho"
           }
         },
         "ro" : {
@@ -6087,10 +8805,22 @@
             "value" : "Zrkadliť"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zrcaljenje"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Preslikaj"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пресликај"
           }
         },
         "sv" : {
@@ -6099,16 +8829,40 @@
             "value" : "Spegla"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "கண்ணாடிப்பிம்பம்"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ส่องกระจก"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Yansıt"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Mirror"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Віддзеркалювання"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مرر"
           }
         },
         "vi" : {
@@ -6143,6 +8897,30 @@
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "3D LUT"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3D LUT"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3D LUT"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3D LUT"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "3D LUT"
           }
         },
@@ -6194,6 +8972,12 @@
             "value" : "3D LUT"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "3D LUT"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6236,7 +9020,19 @@
             "value" : "3D LUT"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3D LUT"
+          }
+        },
         "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3D LUT"
+          }
+        },
+        "is" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "3D LUT"
@@ -6254,6 +9050,12 @@
             "value" : "3D LUT"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "3D LUT"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6262,17 +9064,35 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "3D LUT"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "3D LUT"
           }
         },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "3D LUT"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "3D LUT"
+          }
+        },
         "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3D LUT"
+          }
+        },
+        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "3D LUT"
@@ -6284,13 +9104,13 @@
             "value" : "3D LUT"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "3D LUT"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "3D LUT"
@@ -6314,7 +9134,19 @@
             "value" : "3D LUT"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "3D LUT"
+          }
+        },
+        "sr-CS" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3D LUT"
+          }
+        },
+        "sr-SP" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "3D LUT"
@@ -6326,16 +9158,40 @@
             "value" : "3D-uppslagstabell"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "3D LUT"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ลัส 3 มิติ"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "3B LUT"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "3D LUT"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "3D LUT"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3D لٹ"
           }
         },
         "vi" : {
@@ -6371,6 +9227,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "مسار الملف (يمكنك أيضا سحب وإسقاط الملف في مربع الإدخال)"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faylın yeri (Faylı birbaşa sürükləyib buraxa bilərsiz)"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Шлях да файла (вы таксама можаце перацягнуць файл у поле ўводу)"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Път до файла (можете да завлечете и пуснете файла в полето за въвеждане)"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "File path (you can also drag & drop the file into the input box)"
           }
         },
         "ca" : {
@@ -6421,6 +9301,12 @@
             "value" : "Ruta del archivo (también puede arrastrar y soltar el archivo en la casilla de entrada)"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "File path (you can also drag & drop the file into the input box)"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6463,10 +9349,22 @@
             "value" : "Fájl elérési útvonala (A beviteli mezőre is húzható)"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ֆայլի ուղին"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lokasi file (Anda juga dapat menggeser file langsung ke dalam input box)"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skráarslóð (þú getur líka dregið og sleppt skránni í inntakskassann)"
           }
         },
         "it" : {
@@ -6481,6 +9379,12 @@
             "value" : "ファイルパス (またはファイルをボックス内にドラッグ&ドロップ)"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "File path (you can also drag & drop the file into the input box)"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6489,14 +9393,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "File path (you can also drag & drop the file into the input box)"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Filbane (du kan også dra og slippe filen inn i inntastingsboksen)"
+            "value" : "Патека до датотеката (можете и да ја повлечете и пуштите датотеката во полето за внес)"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "File path (you can also drag & drop the file into the input box)"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "File path (you can also drag & drop the file into the input box)"
           }
         },
         "nl" : {
@@ -6505,22 +9421,28 @@
             "value" : "Bestand"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filbane (du kan også dra og slippe filen inn i inntastingsboksen)"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ścieżka do pliku (można również przeciągnąć plik w pole wprowadzania)"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Caminho do arquivo (também pode-se arrastar e soltar o arquivo na caixa de entrada)"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Local do arquivo (você também pode arrastar e soltar o arquivo na caixa de entrada)"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caminho do arquivo (também pode-se arrastar e soltar o arquivo na caixa de entrada)"
           }
         },
         "ro" : {
@@ -6541,10 +9463,22 @@
             "value" : "Súbor"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "File path (you can also drag & drop the file into the input box)"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Putanja datoteke (možete i povući i otpustiti datoteku u okvir)"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Путања датотеке (можете и повући и отпустити датотеку у оквир)"
           }
         },
         "sv" : {
@@ -6553,16 +9487,40 @@
             "value" : "Fil"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "File path (you can also drag & drop the file into the input box)"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ชื่อโฟลเดอร์ (ท่านสามารถใช้ ลาก วาง ไฟล์ในกล้องอินพุท)"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dosya yolu (dosyayı girdi kutusuna da sürükleyip bırakabilirsiniz)"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "File path (you can also drag & drop the file into the input box)"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Файл"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فائل کی جگہ (آپ فائل کو ان پٹ باکس میں گھسیٹ کر چھوڑ بھی سکتے ہیں)"
           }
         },
         "vi" : {
@@ -6598,6 +9556,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "وضع الاستكمال"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İnterpolyasiya rejimi"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Рэжым інтэрпаляцыі"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Режим на интерполация"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Interpolation mode"
           }
         },
         "ca" : {
@@ -6648,6 +9630,12 @@
             "value" : "Modo de interpolación"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Interpolation mode"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6690,10 +9678,22 @@
             "value" : "Interpolációs mód"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Կոմպլեմենտար ռեժիմ"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Interpolasi"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Interpolation ham"
           }
         },
         "it" : {
@@ -6708,6 +9708,12 @@
             "value" : "補間モード"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Interpolation mode"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6716,14 +9722,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Interpolation mode"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Interpolasjonsmodus"
+            "value" : "Мод на интерполација"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Interpolation mode"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Interpolation mode"
           }
         },
         "nl" : {
@@ -6732,19 +9750,25 @@
             "value" : "Interpolatiemodus"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Interpolasjonsmodus"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tryb interpolacji"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Modo de interpolação"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Modo de interpolação"
@@ -6768,10 +9792,22 @@
             "value" : "Režim interpolácie"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Interpolation mode"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Režim interpolacije"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Режим интерполације"
           }
         },
         "sv" : {
@@ -6780,16 +9816,40 @@
             "value" : "Interpoleringsläge"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Interpolation mode"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "İnterpolasyon modu"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Interpolation mode"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Режим інтерполяції"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "انٹرپولیشن موڈ"
           }
         },
         "vi" : {
@@ -6825,6 +9885,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ألوان سالبة"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neqativ"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Негатыў"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Negative"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Negative"
           }
         },
         "ca" : {
@@ -6875,6 +9959,12 @@
             "value" : "Negativo"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Negative"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6917,10 +10007,22 @@
             "value" : "Negatív"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Բացասական"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Alih Negatif"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neikvætt"
           }
         },
         "it" : {
@@ -6935,6 +10037,12 @@
             "value" : "階調の反転"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Negative"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6943,14 +10051,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Negative"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Negativ"
+            "value" : "Негативен"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Negative"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Negative"
           }
         },
         "nl" : {
@@ -6959,19 +10079,25 @@
             "value" : "Negatief"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Negativ"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Negatyw"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Negativo"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Negativo"
@@ -6995,10 +10121,22 @@
             "value" : "Negatívne"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Negative"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Negativ"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Негатив"
           }
         },
         "sv" : {
@@ -7007,16 +10145,40 @@
             "value" : "Negativ"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "எதிர்மறை"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "เนกาทีฟ"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Negatif"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Negative"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Негатив"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "منفی"
           }
         },
         "vi" : {
@@ -7052,6 +10214,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "زيادة الحدة"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kəskinlik"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Рэзкасць"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Изостряне"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Sharpen"
           }
         },
         "ca" : {
@@ -7102,6 +10288,12 @@
             "value" : "Enfocar"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Sharpen"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7144,10 +10336,22 @@
             "value" : "Élesít"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Սրել"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pertajam"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skerpa"
           }
         },
         "it" : {
@@ -7162,6 +10366,12 @@
             "value" : "シャープ"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Sharpen"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7170,14 +10380,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Sharpen"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gjør skarpere"
+            "value" : "Изостри"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Sharpen"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Sharpen"
           }
         },
         "nl" : {
@@ -7186,22 +10408,28 @@
             "value" : "Verscherpen"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gjør skarpere"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wyostrzanie"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nitidez"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aumentar nitidez"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nitidez"
           }
         },
         "ro" : {
@@ -7222,10 +10450,22 @@
             "value" : "Zaostriť"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Izostritev"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Izoštri"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Изоштри"
           }
         },
         "sv" : {
@@ -7234,16 +10474,40 @@
             "value" : "Skärpa"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "கூர்மைப்படுத்துங்கள்"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ความคมชัด"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Keskinleştir"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Sharpen"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Різкість"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تیز کریں"
           }
         },
         "vi" : {
@@ -7279,6 +10543,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "الكمية"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Miqdar"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Колькасць"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сила"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Amount"
           }
         },
         "ca" : {
@@ -7329,6 +10617,12 @@
             "value" : "Cantidad"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Amount"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7371,10 +10665,22 @@
             "value" : "Mennyiség"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Գումար"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Besaran"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upphæð"
           }
         },
         "it" : {
@@ -7389,6 +10695,12 @@
             "value" : "強さ"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Amount"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7397,14 +10709,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Amount"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mengde"
+            "value" : "Износ"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "അ\fളവ്"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Amount"
           }
         },
         "nl" : {
@@ -7413,19 +10737,25 @@
             "value" : "Hoeveelheid"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mengde"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wartość"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Quantidade"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Quantidade"
@@ -7449,10 +10779,22 @@
             "value" : "Množstvo"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Amount"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Iznos"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Износ"
           }
         },
         "sv" : {
@@ -7461,16 +10803,40 @@
             "value" : "Styrka"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "தொகை"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "จำนวน"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Miktar"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Amount"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Величина"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "رقم"
           }
         },
         "vi" : {
@@ -7506,6 +10872,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "حجم المصفوفة"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Matris ölçüsü"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Памер матрыцы"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Размер на матрица"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Matrix size"
           }
         },
         "ca" : {
@@ -7556,6 +10946,12 @@
             "value" : "Tamaño de la matriz de puntos"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Matrix size"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7598,10 +10994,22 @@
             "value" : "Mátrix méret"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Մատրիցայի չափերը"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ukuran matriks"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fylkja stærð"
           }
         },
         "it" : {
@@ -7616,6 +11024,12 @@
             "value" : "マトリックス"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Matrix size"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7624,14 +11038,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Matrix size"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Matrisestørrelse"
+            "value" : "Големина на матрица"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Matrix size"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Matrix size"
           }
         },
         "nl" : {
@@ -7640,22 +11066,28 @@
             "value" : "Matrixgrootte"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Matrisestørrelse"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rozmiar matrycy"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tamanho da Matriz"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tamanho da matriz"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tamanho da Matriz"
           }
         },
         "ro" : {
@@ -7676,10 +11108,22 @@
             "value" : "Veľkosť matice"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Matrix size"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Veličina matrice"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Величина матрице"
           }
         },
         "sv" : {
@@ -7688,16 +11132,40 @@
             "value" : "Matrisstorlek"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "அணி அளவு"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ขนาดเมตริก"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Matris boyutu"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Matrix size"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Розмір матриці"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "قالب سائز"
           }
         },
         "vi" : {
@@ -7733,6 +11201,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "قلب"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Çevir"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Перавярнуць"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Преобръщане"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Flip"
           }
         },
         "ca" : {
@@ -7783,6 +11275,12 @@
             "value" : "Girar"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Flip"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7825,10 +11323,22 @@
             "value" : "Fordítás"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Շրջել"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Balikkan"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Snúa"
           }
         },
         "it" : {
@@ -7843,6 +11353,12 @@
             "value" : "上下反転"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Flip"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7855,10 +11371,22 @@
             "value" : "Apmest"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vend"
+            "value" : "Преврти"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Flip"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Flip"
           }
         },
         "nl" : {
@@ -7867,22 +11395,28 @@
             "value" : "Vert. spiegelen"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vend"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Odwróć"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Virar"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Inverter"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Virar"
           }
         },
         "ro" : {
@@ -7903,10 +11437,22 @@
             "value" : "Preklopiť"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obrni"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Preokreni"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Преокрени"
           }
         },
         "sv" : {
@@ -7915,16 +11461,40 @@
             "value" : "Vänd"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "சுழற்று"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "พลิก"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ters Çevir"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Flip"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Перевернути"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "پلٹائیں"
           }
         },
         "vi" : {

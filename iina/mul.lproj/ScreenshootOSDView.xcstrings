@@ -17,6 +17,30 @@
             "value" : "إظهار"
           }
         },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Göstər"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "РАСКРЫЦЬ"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "REVEAL"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "REVEAL"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -43,7 +67,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "REVEAL"
           }
         },
@@ -63,6 +87,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "REVELAR"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "REVEAL"
           }
         },
         "fa" : {
@@ -107,10 +137,22 @@
             "value" : "MEGMUTAT"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "REVEAL"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "TAMPILKAN"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Birta"
           }
         },
         "it" : {
@@ -125,6 +167,12 @@
             "value" : "表示"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "REVEAL"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -137,9 +185,21 @@
             "value" : "ATKLĀT"
           }
         },
-        "nb" : {
+        "mk" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "REVEAL"
+          }
+        },
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "വെളിപ്പെടുത്തുക"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "REVEAL"
           }
         },
@@ -149,19 +209,25 @@
             "value" : "TOON"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "REVEAL"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "ODKRYJ"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "REVELAR"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "REVELAR"
@@ -185,10 +251,22 @@
             "value" : "ZOBRAZIŤ"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "REVEAL"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "PRIKAŽI"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ПРИКАЖИ"
           }
         },
         "sv" : {
@@ -197,16 +275,40 @@
             "value" : "VISA"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "REVEAL"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "REVEAL"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "GÖSTER"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "REVEAL"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "ПОКАЗАТИ"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "REVEAL"
           }
         },
         "vi" : {
@@ -245,6 +347,30 @@
             "value" : "تعديل"
           }
         },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DÜZƏLİŞ ET"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ЗМЯНІЦЬ"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "EDIT"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "EDIT"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -271,7 +397,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "EDIT"
           }
         },
@@ -291,6 +417,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "EDITAR"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "EDIT"
           }
         },
         "fa" : {
@@ -335,10 +467,22 @@
             "value" : "SZERKESZT"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "EDIT"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "SUNTING"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Breyta"
           }
         },
         "it" : {
@@ -353,6 +497,12 @@
             "value" : "編集"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "EDIT"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -365,10 +515,22 @@
             "value" : "REDIĢĒT"
           }
         },
-        "nb" : {
+        "mk" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "EDIT"
+          }
+        },
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "REDIGER"
+            "value" : "എഡിറ്റ്"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "EDIT"
           }
         },
         "nl" : {
@@ -377,19 +539,25 @@
             "value" : "BEWERKEN"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "REDIGER"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "EDYTUJ"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "EDITAR"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "EDITAR"
@@ -413,10 +581,22 @@
             "value" : "UPRAVIŤ"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "EDIT"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "UREDI"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "УРЕДИ"
           }
         },
         "sv" : {
@@ -425,16 +605,40 @@
             "value" : "REDIGERA"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "EDIT"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "EDIT"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "DÜZENLE"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "EDIT"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "ЗМІНИТИ"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "EDIT"
           }
         },
         "vi" : {
@@ -473,6 +677,30 @@
             "value" : "حذف"
           }
         },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SİL"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ВЫДАЛІЦЬ"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "DELETE"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "DELETE"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -499,7 +727,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "DELETE"
           }
         },
@@ -519,6 +747,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ELIMINAR"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "DELETE"
           }
         },
         "fa" : {
@@ -563,10 +797,22 @@
             "value" : "TÖRÖL"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "DELETE"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "HAPUS"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eyða"
           }
         },
         "it" : {
@@ -581,6 +827,12 @@
             "value" : "削除"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "DELETE"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -593,10 +845,22 @@
             "value" : "DZĒST"
           }
         },
-        "nb" : {
+        "mk" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "DELETE"
+          }
+        },
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "SLETT"
+            "value" : "ഡിലീറ്റ്"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "DELETE"
           }
         },
         "nl" : {
@@ -605,19 +869,25 @@
             "value" : "VERWIJDEREN"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SLETT"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "USUŃ"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "EXCLUIR"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "EXCLUIR"
@@ -641,10 +911,22 @@
             "value" : "ZMAZAŤ"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "DELETE"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "IZBRIŠI"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ИЗБРИШИ"
           }
         },
         "sv" : {
@@ -653,16 +935,40 @@
             "value" : "RADERA"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "DELETE"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "DELETE"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "SİL"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "DELETE"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "ВИДАЛИТИ"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "DELETE"
           }
         },
         "vi" : {

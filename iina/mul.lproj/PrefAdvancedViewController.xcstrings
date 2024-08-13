@@ -197,6 +197,12 @@
             "value" : "Additional mpv options"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Additional mpv options"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -207,12 +213,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Extra mpv-opties"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Additional mpv options"
           }
         },
         "pl" : {
@@ -257,7 +257,7 @@
             "value" : "Additional mpv options"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dodatne opcije programa mpv"
@@ -527,6 +527,12 @@
             "value" : "Enable advanced settings"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktiver avanserte innstillinger"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -537,12 +543,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Activeer geavanceerde instellingen"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktiver avanserte innstillinger"
           }
         },
         "pl" : {
@@ -587,7 +587,7 @@
             "value" : "Enable advanced settings"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Omogući napredne postavke"
@@ -857,6 +857,12 @@
             "value" : "Logging"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Logging"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -864,12 +870,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Logging"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Logging"
@@ -917,7 +917,7 @@
             "value" : "Logging"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Logging"
@@ -989,7 +989,8 @@
             "value" : "Logging"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "BZq-Iy-OSr.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Settings\"; ObjectID = \"BZq-Iy-OSr\";",
@@ -1187,6 +1188,12 @@
             "value" : "സെറ്റിങ്സ്"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Settings"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1197,12 +1204,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Instellingen"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Settings"
           }
         },
         "pl" : {
@@ -1247,7 +1248,7 @@
             "value" : "Settings"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Postavke"
@@ -1517,6 +1518,12 @@
             "value" : "Name"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Navn"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1527,12 +1534,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Naam"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Navn"
           }
         },
         "pl" : {
@@ -1577,7 +1578,7 @@
             "value" : "Ime"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Naziv"
@@ -1847,6 +1848,12 @@
             "value" : "Use config directory:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Use config directory:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1857,12 +1864,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gebruik configuratiemap:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Use config directory:"
           }
         },
         "pl" : {
@@ -1907,7 +1908,7 @@
             "value" : "Use config directory:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Koristi konfiguracioni direktorijum:"
@@ -2177,6 +2178,12 @@
             "value" : "Warning"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Advarsel"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2187,12 +2194,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Waarschuwing"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Advarsel"
           }
         },
         "pl" : {
@@ -2237,7 +2238,7 @@
             "value" : "Warning"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Upozorenje"
@@ -2507,6 +2508,12 @@
             "value" : "~/.config/mpv/"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "~/.config/mpv/"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2514,12 +2521,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "~/.config/mpv/"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "~/.config/mpv/"
@@ -2567,7 +2568,7 @@
             "value" : "~/.config/mpv/"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "~/.config/mpv/"
@@ -2639,7 +2640,8 @@
             "value" : "~/.config/mpv/"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "hGq-ek-VHd.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"Debug\"; ObjectID = \"hGq-ek-VHd\";",
@@ -2837,6 +2839,12 @@
             "value" : "Debug"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Debug"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2844,12 +2852,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Debug"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Debug"
@@ -2897,7 +2899,7 @@
             "value" : "Debug"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Debug"
@@ -3167,6 +3169,12 @@
             "value" : "The following settings will require restarting IINA to take effect."
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The following settings will require restarting IINA to take effect."
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3177,12 +3185,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Om de volgende instellingen toe te passen moet je IINA opnieuw opstarten."
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "The following settings will require restarting IINA to take effect."
           }
         },
         "pl" : {
@@ -3227,7 +3229,7 @@
             "value" : "The following settings will require restarting IINA to take effect."
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "IINA mora biti ponovo pokrenuta da bi ove postavke bile prihvaćene."
@@ -3497,6 +3499,12 @@
             "value" : "Open log directory"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Open log directory"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3507,12 +3515,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Open logboeken"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Open log directory"
           }
         },
         "pl" : {
@@ -3557,7 +3559,7 @@
             "value" : "Open log directory"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otvori direktorijum evidencije"
@@ -3827,6 +3829,12 @@
             "value" : "~/.config/mpv/"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "~/.config/mpv/"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3834,12 +3842,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "~/.config/mpv/"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "~/.config/mpv/"
@@ -3887,7 +3889,7 @@
             "value" : "~/.config/mpv/"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "~/.config/mpv/"
@@ -3959,7 +3961,8 @@
             "value" : "~/.config/mpv/"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "LCd-uY-Yze.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"Enable logging to file\"; ObjectID = \"LCd-uY-Yze\";",
@@ -4157,6 +4160,12 @@
             "value" : "Enable logging"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable logging"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -4167,12 +4176,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Schakel logboeken in"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable logging"
           }
         },
         "pl" : {
@@ -4217,7 +4220,7 @@
             "value" : "Enable logging"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Omogući vođenje evidencije"
@@ -4487,6 +4490,12 @@
             "value" : "Choose directory…"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Choose directory…"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -4497,12 +4506,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kies map…"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Choose directory…"
           }
         },
         "pl" : {
@@ -4547,7 +4550,7 @@
             "value" : "Choose directory…"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Odaberite direktorijum…"
@@ -4817,6 +4820,12 @@
             "value" : "Log level:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Log level:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -4824,12 +4833,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Log level:"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Log level:"
@@ -4877,7 +4880,7 @@
             "value" : "Log level:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Log level:"
@@ -5147,6 +5150,12 @@
             "value" : "Show log viewer"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Show log viewer"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -5154,12 +5163,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Show log viewer"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Show log viewer"
@@ -5207,7 +5210,7 @@
             "value" : "Show log viewer"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Show log viewer"
@@ -5477,6 +5480,12 @@
             "value" : "Use mpv's OSD"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Use mpv's OSD"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -5487,12 +5496,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gebruik mpv's OSD"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Use mpv's OSD"
           }
         },
         "pl" : {
@@ -5537,7 +5540,7 @@
             "value" : "Use mpv's OSD"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Koristi prikaz na ekranu programa mpv"
@@ -5807,6 +5810,12 @@
             "value" : "Top"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Topp"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -5817,12 +5826,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Boven"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Topp"
           }
         },
         "pl" : {
@@ -5867,7 +5870,7 @@
             "value" : "Top"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vrh"
@@ -6137,6 +6140,12 @@
             "value" : "സെറ്റിങ്സ്"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Settings"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -6147,12 +6156,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Instellingen"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Settings"
           }
         },
         "pl" : {
@@ -6197,7 +6200,7 @@
             "value" : "Settings"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Postavke"
@@ -6467,6 +6470,12 @@
             "value" : "Verbose"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Verbose"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -6474,12 +6483,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Verbose"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Verbose"
@@ -6527,7 +6530,7 @@
             "value" : "Verbose"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Verbose"
@@ -6797,6 +6800,12 @@
             "value" : "Error"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feil"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -6807,12 +6816,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fout"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Feil"
           }
         },
         "pl" : {
@@ -6857,7 +6860,7 @@
             "value" : "Error"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Grеška"
@@ -7127,6 +7130,12 @@
             "value" : "Value"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Value"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -7137,12 +7146,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Waarde"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Value"
           }
         },
         "pl" : {
@@ -7187,7 +7190,7 @@
             "value" : "Value"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vrednost"
@@ -7457,6 +7460,12 @@
             "value" : "Enable advanced settings"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktiver avanserte innstillinger"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -7467,12 +7476,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Activeer geavanceerde instellingen"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktiver avanserte innstillinger"
           }
         },
         "pl" : {
@@ -7517,7 +7520,7 @@
             "value" : "Enable advanced settings"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Omogući napredne postavke"

@@ -197,6 +197,12 @@
             "value" : "Auto (Copy)"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Auto (Copy)"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -207,12 +213,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Automatisch (via kopie)"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Auto (Copy)"
           }
         },
         "pl" : {
@@ -257,7 +257,7 @@
             "value" : "Auto (Copy)"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Automatski (kopiraj)"
@@ -527,6 +527,12 @@
             "value" : "reinhard"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "reinhard"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -534,12 +540,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "reinhard"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "reinhard"
@@ -587,7 +587,7 @@
             "value" : "reinhard"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "reinhard"
@@ -659,7 +659,8 @@
             "value" : "reinhard"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "1uU-MC-7Yh.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"AC3\"; ObjectID = \"1uU-MC-7Yh\";",
@@ -857,6 +858,12 @@
             "value" : "AC3"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "AC3"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -864,12 +871,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "AC3"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "AC3"
@@ -917,7 +918,7 @@
             "value" : "AC3"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "AC3"
@@ -989,7 +990,8 @@
             "value" : "AC3"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "2yO-To-el7.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Default: 0 (Auto)\"; ObjectID = \"2yO-To-el7\";",
@@ -1187,6 +1189,12 @@
             "value" : "Default: 0 (Auto)"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 0 (Auto)"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1197,12 +1205,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Standaard: 0 (automatisch)"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Default: 0 (Auto)"
           }
         },
         "pl" : {
@@ -1247,7 +1249,7 @@
             "value" : "Default: 0 (Auto)"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Podrazumevano: 0 (auto)"
@@ -1517,6 +1519,12 @@
             "value" : "Load ICC profile"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Load ICC profile"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1524,12 +1532,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Load ICC profile"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Load ICC profile"
@@ -1577,7 +1579,7 @@
             "value" : "Load ICC profile"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Učitaj ICC profil"
@@ -1847,6 +1849,12 @@
             "value" : "gamma"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "gamma"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1854,12 +1862,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "gamma"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "gamma"
@@ -1907,7 +1909,7 @@
             "value" : "gamma"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "gamma"
@@ -1979,7 +1981,8 @@
             "value" : "gamma"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "8QO-fX-FbS.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"mobius\"; ObjectID = \"8QO-fX-FbS\";",
@@ -2177,6 +2180,12 @@
             "value" : "mobius"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "mobius"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2184,12 +2193,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "mobius"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "mobius"
@@ -2237,7 +2240,7 @@
             "value" : "mobius"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "mobius"
@@ -2309,7 +2312,8 @@
             "value" : "mobius"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "9Q0-hw-PdU.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Preamp gain:\"; ObjectID = \"9Q0-hw-PdU\";",
@@ -2507,6 +2511,12 @@
             "value" : "Preamp gain:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Preamp gain:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2514,12 +2524,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Preamp gain:"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Preamp gain:"
@@ -2567,7 +2571,7 @@
             "value" : "Preamp gain:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Preamp gain:"
@@ -2837,6 +2841,12 @@
             "value" : "Maximum volume:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Maximum volume:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2847,12 +2857,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Maximale volume:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Maximum volume:"
           }
         },
         "pl" : {
@@ -2897,7 +2901,7 @@
             "value" : "Maximum volume:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Maksimalna jačina zvuka:"
@@ -3167,6 +3171,12 @@
             "value" : "Number of threads:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Number of threads:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3177,12 +3187,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aantal threads:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Number of threads:"
           }
         },
         "pl" : {
@@ -3227,7 +3231,7 @@
             "value" : "Number of threads:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Broj niti:"
@@ -3497,6 +3501,12 @@
             "value" : "Enable tone mapping"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable tone mapping"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3504,12 +3514,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Enable tone mapping"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Enable tone mapping"
@@ -3557,7 +3561,7 @@
             "value" : "Enable tone mapping"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Enable tone mapping"
@@ -3827,6 +3831,12 @@
             "value" : "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3834,12 +3844,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."
@@ -3887,7 +3891,7 @@
             "value" : "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."
@@ -4157,6 +4161,12 @@
             "value" : "nits"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "nits"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -4164,12 +4174,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "nits"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "nits"
@@ -4217,7 +4221,7 @@
             "value" : "nits"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "nits"
@@ -4487,6 +4491,12 @@
             "value" : "dB"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "dB"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -4494,12 +4504,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "dB"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "dB"
@@ -4547,7 +4551,7 @@
             "value" : "dB"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "dB"
@@ -4817,6 +4821,12 @@
             "value" : "Default: 0 (Auto)"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default: 0 (Auto)"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -4827,12 +4837,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Standaard: 0 (automatisch)"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Default: 0 (Auto)"
           }
         },
         "pl" : {
@@ -4877,7 +4881,7 @@
             "value" : "Default: 0 (Auto)"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Podrazumevano: 0 (auto)"
@@ -5147,6 +5151,12 @@
             "value" : "(100-1000)"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "(100-1000)"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -5156,12 +5166,6 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "(100-1000)"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
             "value" : "(100-1000)"
           }
         },
@@ -5207,7 +5211,7 @@
             "value" : "(100-1000)"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "(100-1000)"
@@ -5477,6 +5481,12 @@
             "value" : "Fallback:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Fallback:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -5484,12 +5494,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Fallback:"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Fallback:"
@@ -5537,7 +5541,7 @@
             "value" : "Fallback:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Fallback:"
@@ -5807,6 +5811,12 @@
             "value" : "Initial volume:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Initial volume:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -5817,12 +5827,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aanvankelijk volume:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Initial volume:"
           }
         },
         "pl" : {
@@ -5867,7 +5871,7 @@
             "value" : "Initial volume:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Početna jačina zvuka:"
@@ -6137,6 +6141,12 @@
             "value" : "Always use the dedicated GPU for rendering (if it exists). This can improve performance but may reduce battery life."
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Always use the dedicated GPU for rendering (if it exists). This can improve performance but may reduce battery life."
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -6147,12 +6157,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gebruik altijd de toegewijde GPU voor het renderen (als deze bestaat). Dit kan de prestaties verbeteren, maar kan de levensduur van de batterij verminderen."
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Always use the dedicated GPU for rendering (if it exists). This can improve performance but may reduce battery life."
           }
         },
         "pl" : {
@@ -6197,7 +6201,7 @@
             "value" : "Always use the dedicated GPU for rendering (if it exists). This can improve performance but may reduce battery life."
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Uvek koristi namensku grafičku karticu za prikaz (ako postoji). Ova opcija može poboljšati performanse, ali i umanjiti trajanje baterije."
@@ -6467,6 +6471,12 @@
             "value" : "ReplayGain:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "ReplayGain:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -6474,12 +6484,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "ReplayGain:"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "ReplayGain:"
@@ -6527,7 +6531,7 @@
             "value" : "ReplayGain:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "ReplayGain:"
@@ -6797,6 +6801,12 @@
             "value" : "clip"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "clip"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -6804,12 +6814,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "clip"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "clip"
@@ -6857,7 +6861,7 @@
             "value" : "clip"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "clip"
@@ -6929,7 +6933,8 @@
             "value" : "clip"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "HQV-tY-NMj.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"If this option is not enabled, clipping will be prevented by lowering the gain.\"; ObjectID = \"HQV-tY-NMj\";",
@@ -7127,6 +7132,12 @@
             "value" : "If this option is not enabled, clipping will be prevented by lowering the gain."
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "If this option is not enabled, clipping will be prevented by lowering the gain."
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -7134,12 +7145,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "If this option is not enabled, clipping will be prevented by lowering the gain."
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "If this option is not enabled, clipping will be prevented by lowering the gain."
@@ -7187,7 +7192,7 @@
             "value" : "If this option is not enabled, clipping will be prevented by lowering the gain."
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "If this option is not enabled, clipping will be prevented by lowering the gain."
@@ -7457,6 +7462,12 @@
             "value" : "DTS-HD"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "DTS-HD"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -7464,12 +7475,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "DTS-HD"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "DTS-HD"
@@ -7517,7 +7522,7 @@
             "value" : "DTS-HD"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "DTS-HD"
@@ -7589,7 +7594,8 @@
             "value" : "DTS-HD"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "iQf-Gb-IuO.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"Item 1\"; ObjectID = \"iQf-Gb-IuO\";",
@@ -7787,6 +7793,12 @@
             "value" : "Item 1"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Item 1"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -7794,12 +7806,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Item 1"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Item 1"
@@ -7847,7 +7853,7 @@
             "value" : "Item 1"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Item 1"
@@ -7919,7 +7925,8 @@
             "value" : "Item 1"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "J3e-oT-fy9.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"Allow the volume gain to clip\"; ObjectID = \"J3e-oT-fy9\";",
@@ -8117,6 +8124,12 @@
             "value" : "Allow the volume gain to clip"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Allow the volume gain to clip"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -8124,12 +8137,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Allow the volume gain to clip"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Allow the volume gain to clip"
@@ -8177,7 +8184,7 @@
             "value" : "Allow the volume gain to clip"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Allow the volume gain to clip"
@@ -8447,6 +8454,12 @@
             "value" : "No adjustment"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "No adjustment"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -8454,12 +8467,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "No adjustment"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "No adjustment"
@@ -8507,7 +8514,7 @@
             "value" : "No adjustment"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "No adjustment"
@@ -8777,6 +8784,12 @@
             "value" : "DTS"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "DTS"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -8784,12 +8797,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "DTS"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "DTS"
@@ -8837,7 +8844,7 @@
             "value" : "DTS"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "DTS"
@@ -8909,7 +8916,8 @@
             "value" : "DTS"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "M2M-of-gjd.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)\"; ObjectID = \"M2M-of-gjd\";",
@@ -9107,6 +9115,12 @@
             "value" : "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -9114,12 +9128,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"
@@ -9167,7 +9175,7 @@
             "value" : "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Učitaj ICC profil za trenutni ekran i pomoću njega transformiši video RGB u prikaz ekrana (samo za SDR režim)"
@@ -9437,6 +9445,12 @@
             "value" : "Gain to apply if the file has no ReplayGain tags."
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Gain to apply if the file has no ReplayGain tags."
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -9444,12 +9458,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Gain to apply if the file has no ReplayGain tags."
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Gain to apply if the file has no ReplayGain tags."
@@ -9497,7 +9505,7 @@
             "value" : "Gain to apply if the file has no ReplayGain tags."
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Gain to apply if the file has no ReplayGain tags."
@@ -9767,6 +9775,12 @@
             "value" : "Video:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Video:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -9774,12 +9788,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Video:"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Video:"
@@ -9827,7 +9835,7 @@
             "value" : "Video:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Video:"
@@ -10097,6 +10105,12 @@
             "value" : "Enable tone mapping images onto the display"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable tone mapping images onto the display"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -10104,12 +10118,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Enable tone mapping images onto the display"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Enable tone mapping images onto the display"
@@ -10157,7 +10165,7 @@
             "value" : "Enable tone mapping images onto the display"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Enable tone mapping images onto the display"
@@ -10427,6 +10435,12 @@
             "value" : "Label"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Label"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -10434,12 +10448,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Label"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Label"
@@ -10487,7 +10495,7 @@
             "value" : "Label"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Label"
@@ -10559,7 +10567,8 @@
             "value" : "Label"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "n6V-Hw-yNt.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"hable\"; ObjectID = \"n6V-Hw-yNt\";",
@@ -10757,6 +10766,12 @@
             "value" : "hable"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "hable"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -10764,12 +10779,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "hable"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "hable"
@@ -10817,7 +10826,7 @@
             "value" : "hable"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "hable"
@@ -10889,7 +10898,8 @@
             "value" : "hable"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "nwg-2K-G2G.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Hardware decoder:\"; ObjectID = \"nwg-2K-G2G\";",
@@ -11087,6 +11097,12 @@
             "value" : "Hardware decoder:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Hardware decoder:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -11097,12 +11113,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hardware-acceleratie:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Hardware decoder:"
           }
         },
         "pl" : {
@@ -11147,7 +11157,7 @@
             "value" : "Hardware decoder:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hardverski dekoder:"
@@ -11417,6 +11427,12 @@
             "value" : "dB"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "dB"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -11424,12 +11440,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "dB"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "dB"
@@ -11477,7 +11487,7 @@
             "value" : "dB"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "dB"
@@ -11747,6 +11757,12 @@
             "value" : "bt.2390"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "bt.2390"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -11754,12 +11770,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "bt.2390"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "bt.2390"
@@ -11807,7 +11817,7 @@
             "value" : "bt.2390"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "bt.2390"
@@ -11879,7 +11889,8 @@
             "value" : "bt.2390"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "qzI-rq-PqO.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Algorithm:\"; ObjectID = \"qzI-rq-PqO\";",
@@ -12077,6 +12088,12 @@
             "value" : "Algorithm:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Algorithm:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -12084,12 +12101,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Algorithm:"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Algorithm:"
@@ -12137,7 +12148,7 @@
             "value" : "Algorithm:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Algorithm:"
@@ -12406,6 +12417,12 @@
             "value" : "Enable HDR support"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable HDR support"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -12413,12 +12430,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Enable HDR support"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Enable HDR support"
@@ -12466,7 +12477,7 @@
             "value" : "Enable HDR support"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Omogući podršku za HDR"
@@ -12736,6 +12747,12 @@
             "value" : "Disabled"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deaktivert"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -12746,12 +12763,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Uitgeschakeld"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Deaktivert"
           }
         },
         "pl" : {
@@ -12796,7 +12807,7 @@
             "value" : "Disabled"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Onemogućeno"
@@ -13066,6 +13077,12 @@
             "value" : "Pre-amplification gain to apply to the ReplayGain gain."
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Pre-amplification gain to apply to the ReplayGain gain."
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -13073,12 +13090,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Pre-amplification gain to apply to the ReplayGain gain."
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Pre-amplification gain to apply to the ReplayGain gain."
@@ -13126,7 +13137,7 @@
             "value" : "Pre-amplification gain to apply to the ReplayGain gain."
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Pre-amplification gain to apply to the ReplayGain gain."
@@ -13396,6 +13407,12 @@
             "value" : "Preferred audio device:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Preferred audio device:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -13406,12 +13423,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voorkeursapparaat voor audio:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Preferred audio device:"
           }
         },
         "pl" : {
@@ -13456,7 +13467,7 @@
             "value" : "Preferred audio device:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Željeni audio-uređaj:"
@@ -13726,6 +13737,12 @@
             "value" : "Audio:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lyd:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -13736,12 +13753,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Audio:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lyd:"
           }
         },
         "pl" : {
@@ -13786,7 +13797,7 @@
             "value" : "Audio:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Audio:"
@@ -14056,6 +14067,12 @@
             "value" : "Algorithm to use for tone mapping images onto the display."
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Algorithm to use for tone mapping images onto the display."
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -14063,12 +14080,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Algorithm to use for tone mapping images onto the display."
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Algorithm to use for tone mapping images onto the display."
@@ -14116,7 +14127,7 @@
             "value" : "Algorithm to use for tone mapping images onto the display."
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Algorithm to use for tone mapping images onto the display."
@@ -14386,6 +14397,12 @@
             "value" : "Auto"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -14396,12 +14413,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Automatisch"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Auto"
           }
         },
         "pl" : {
@@ -14446,7 +14457,7 @@
             "value" : "Auto"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Automatski"
@@ -14716,6 +14727,12 @@
             "value" : "Number of threads:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Number of threads:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -14726,12 +14743,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aantal threads:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Number of threads:"
           }
         },
         "pl" : {
@@ -14776,7 +14787,7 @@
             "value" : "Number of threads:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Broj niti:"
@@ -15046,6 +15057,12 @@
             "value" : "auto"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "auto"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -15053,12 +15070,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "auto"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "auto"
@@ -15106,7 +15117,7 @@
             "value" : "auto"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "auto"
@@ -15178,7 +15189,8 @@
             "value" : "auto"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "up6-6A-4sn.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"S/PDIF output:\"; ObjectID = \"up6-6A-4sn\";",
@@ -15376,6 +15388,12 @@
             "value" : "S/PDIF output:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "S/PDIF output:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -15386,12 +15404,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "S/PDIF-uitvoer:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "S/PDIF output:"
           }
         },
         "pl" : {
@@ -15436,7 +15448,7 @@
             "value" : "S/PDIF output:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "S/PDIF izlaz:"
@@ -15706,6 +15718,12 @@
             "value" : "Track gain"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Track gain"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -15713,12 +15731,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Track gain"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Track gain"
@@ -15766,7 +15778,7 @@
             "value" : "Track gain"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Track gain"
@@ -16036,6 +16048,12 @@
             "value" : "Preferred language:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Preferred language:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -16046,12 +16064,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voorkeurstaal:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Preferred language:"
           }
         },
         "pl" : {
@@ -16096,7 +16108,7 @@
             "value" : "Preferred language:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Željeni jezik:"
@@ -16366,6 +16378,12 @@
             "value" : "Target peak:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Target peak:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -16373,12 +16391,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Target peak:"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Target peak:"
@@ -16426,7 +16438,7 @@
             "value" : "Target peak:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Target peak:"
@@ -16696,6 +16708,12 @@
             "value" : "Adjust volume gain according to ReplayGain values stored in the file metadata."
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Adjust volume gain according to ReplayGain values stored in the file metadata."
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -16703,12 +16721,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Adjust volume gain according to ReplayGain values stored in the file metadata."
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Adjust volume gain according to ReplayGain values stored in the file metadata."
@@ -16756,7 +16768,7 @@
             "value" : "Adjust volume gain according to ReplayGain values stored in the file metadata."
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Adjust volume gain according to ReplayGain values stored in the file metadata."
@@ -17026,6 +17038,12 @@
             "value" : "linear"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "linear"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -17033,12 +17051,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "linear"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "linear"
@@ -17086,7 +17098,7 @@
             "value" : "linear"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "linear"
@@ -17158,7 +17170,8 @@
             "value" : "linear"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "YUr-aJ-xfC.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"Force dedicated GPU\"; ObjectID = \"YUr-aJ-xfC\";",
@@ -17356,6 +17369,12 @@
             "value" : "Force dedicated GPU"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Force dedicated GPU"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -17366,12 +17385,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Forceer toegewijde GPU"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Force dedicated GPU"
           }
         },
         "pl" : {
@@ -17416,7 +17429,7 @@
             "value" : "Force dedicated GPU"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nametni namensku grafičku karticu"
@@ -17686,6 +17699,12 @@
             "value" : "Enable HDR mode by default when playing HDR videos."
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Enable HDR mode by default when playing HDR videos."
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -17693,12 +17712,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Enable HDR mode by default when playing HDR videos."
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Enable HDR mode by default when playing HDR videos."
@@ -17746,7 +17759,7 @@
             "value" : "Enable HDR mode by default when playing HDR videos."
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Podrazumevano omogući HDR režim tokom reprodukcije HDR video-zapisa."
@@ -18016,6 +18029,12 @@
             "value" : "Album gain"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Album gain"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -18023,12 +18042,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Album gain"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Album gain"
@@ -18076,7 +18089,7 @@
             "value" : "Album gain"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Album gain"
@@ -18346,6 +18359,12 @@
             "value" : "Gain adjustment:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Gain adjustment:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -18353,12 +18372,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Gain adjustment:"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Gain adjustment:"
@@ -18406,7 +18419,7 @@
             "value" : "Gain adjustment:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Gain adjustment:"

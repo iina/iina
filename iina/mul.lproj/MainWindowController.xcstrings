@@ -197,6 +197,12 @@
             "value" : "-:--:--"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "-:--:--"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -204,12 +210,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "-:--:--"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "-:--:--"
@@ -257,7 +257,7 @@
             "value" : "-:--:--"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "-:--:--"
@@ -329,7 +329,8 @@
             "value" : "-:--:--"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "3fe-fP-yMB.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Buffering... 100%\"; ObjectID = \"3fe-fP-yMB\";",
@@ -527,6 +528,12 @@
             "value" : "Buffering... 100%"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Buffering... 100%"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -534,12 +541,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Buffering... 100%"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Buffering... 100%"
@@ -587,7 +588,7 @@
             "value" : "Buffering... 100%"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Buffering... 100%"
@@ -659,7 +660,8 @@
             "value" : "Buffering... 100%"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "6mL-0A-eq2.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"-:--:--\"; ObjectID = \"6mL-0A-eq2\";",
@@ -857,6 +859,12 @@
             "value" : "-:--:--"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "-:--:--"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -864,12 +872,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "-:--:--"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "-:--:--"
@@ -917,7 +919,7 @@
             "value" : "-:--:--"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "-:--:--"
@@ -989,7 +991,8 @@
             "value" : "-:--:--"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "7aL-lH-m8i.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Label\"; ObjectID = \"7aL-lH-m8i\";",
@@ -1187,6 +1190,12 @@
             "value" : "Label"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Label"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1194,12 +1203,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Label"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Label"
@@ -1247,7 +1250,7 @@
             "value" : "Label"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Label"
@@ -1319,7 +1322,8 @@
             "value" : "Label"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "DVg-p3-w5Q.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Label\"; ObjectID = \"DVg-p3-w5Q\";",
@@ -1517,6 +1521,12 @@
             "value" : "Label"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Label"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1524,12 +1534,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Label"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Label"
@@ -1577,7 +1581,7 @@
             "value" : "Label"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Label"
@@ -1649,7 +1653,8 @@
             "value" : "Label"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "eCe-SS-Wlj.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"-32x\"; ObjectID = \"eCe-SS-Wlj\";",
@@ -1847,6 +1852,12 @@
             "value" : "-32x"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "-32x"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1854,12 +1865,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "-32x"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "-32x"
@@ -1907,7 +1912,7 @@
             "value" : "-32x"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "-32x"
@@ -1979,7 +1984,8 @@
             "value" : "-32x"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "gdE-b5-kod.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"This video is playing in picture in picture\"; ObjectID = \"gdE-b5-kod\";",
@@ -2177,6 +2183,12 @@
             "value" : "This video is playing in picture in picture"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Denne videoen spiller som bilde-i-bilde"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2187,12 +2199,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Deze video wordt beeld in beeld afgespeeld."
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Denne videoen spiller som bilde-i-bilde"
           }
         },
         "pl" : {
@@ -2237,7 +2243,7 @@
             "value" : "This video is playing in picture in picture"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ovaj video-zapis reprodukuje se u režimu slike u slici"
@@ -2507,6 +2513,12 @@
             "value" : "99:99"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "99:99"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2514,12 +2526,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "99:99"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "99:99"
@@ -2567,7 +2573,7 @@
             "value" : "99:99"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "99:99"
@@ -2639,7 +2645,8 @@
             "value" : "99:99"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "JAn-Yu-XA2.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"On Screen Display\"; ObjectID = \"JAn-Yu-XA2\";",
@@ -2837,6 +2844,12 @@
             "value" : "On Screen Display"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "On Screen Display"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2844,12 +2857,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "On Screen Display"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "On Screen Display"
@@ -2897,7 +2904,7 @@
             "value" : "On Screen Display"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "On Screen Display"
@@ -2969,7 +2976,8 @@
             "value" : "On Screen Display"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "Pw8-rd-mUu.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"-:--:--\"; ObjectID = \"Pw8-rd-mUu\";",
@@ -3167,6 +3175,12 @@
             "value" : "-:--:--"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "-:--:--"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3174,12 +3188,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "-:--:--"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "-:--:--"
@@ -3227,7 +3235,7 @@
             "value" : "-:--:--"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "-:--:--"
@@ -3299,7 +3307,8 @@
             "value" : "-:--:--"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "ULE-u4-k9L.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"32x\"; ObjectID = \"ULE-u4-k9L\";",
@@ -3497,6 +3506,12 @@
             "value" : "32x"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "32x"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3504,12 +3519,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "32x"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "32x"
@@ -3557,7 +3566,7 @@
             "value" : "32x"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "32x"
@@ -3629,7 +3638,8 @@
             "value" : "32x"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "va1-P5-3b0.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"100%\"; ObjectID = \"va1-P5-3b0\";",
@@ -3827,6 +3837,12 @@
             "value" : "100%"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "100%"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3834,12 +3850,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "100%"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "100%"
@@ -3887,7 +3897,7 @@
             "value" : "100%"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "100%"
@@ -3959,7 +3969,8 @@
             "value" : "100%"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "WOE-SX-krh.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Label\"; ObjectID = \"WOE-SX-krh\";",
@@ -4157,6 +4168,12 @@
             "value" : "Label"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Label"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -4164,12 +4181,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Label"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Label"
@@ -4217,7 +4228,7 @@
             "value" : "Label"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Label"
@@ -4289,7 +4300,8 @@
             "value" : "Label"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     }
   },
   "version" : "1.0"

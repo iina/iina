@@ -197,6 +197,12 @@
             "value" : "തുറക്കുക"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Åpne"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -207,12 +213,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Open"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Åpne"
           }
         },
         "pl" : {
@@ -257,7 +257,7 @@
             "value" : "Open"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otvori"
@@ -527,6 +527,12 @@
             "value" : "URL is invalid."
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "URL is invalid."
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -537,12 +543,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "URL is ongeldig."
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "URL is invalid."
           }
         },
         "pl" : {
@@ -587,7 +587,7 @@
             "value" : "URL is invalid."
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "URL adresa je nevažeća."
@@ -857,6 +857,12 @@
             "value" : "റദ്ദാക്കുക"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avbryt"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -867,12 +873,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annuleer"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avbryt"
           }
         },
         "pl" : {
@@ -917,7 +917,7 @@
             "value" : "Prekliči"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otkaži"
@@ -1187,6 +1187,12 @@
             "value" : "http://"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "http://"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1194,12 +1200,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "http://"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "http://"
@@ -1247,7 +1247,7 @@
             "value" : "http://"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "http://"
@@ -1319,7 +1319,8 @@
             "value" : "http://"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "m0D-hR-3pr.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"Remember username and password for this host in keychain\"; ObjectID = \"m0D-hR-3pr\";",
@@ -1517,6 +1518,12 @@
             "value" : "Remember username and password for this host in keychain"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Remember username and password for this host in keychain"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1527,12 +1534,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bewaar gebruikersnaam en wachtwoord voor deze host in Sleutelhanger"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Remember username and password for this host in keychain"
           }
         },
         "pl" : {
@@ -1577,7 +1578,7 @@
             "value" : "Remember username and password for this host in keychain"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sačuvaj korisničko ime i lozinku za ovaj host u privesku ključeva"
@@ -1847,6 +1848,12 @@
             "value" : "Username"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Brukernavn"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1857,12 +1864,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gebruikersnaam"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Brukernavn"
           }
         },
         "pl" : {
@@ -1907,7 +1908,7 @@
             "value" : "Username"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Korisničko Ime"
@@ -2177,6 +2178,12 @@
             "value" : "Password"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Passord"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2187,12 +2194,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wachtwoord"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Passord"
           }
         },
         "pl" : {
@@ -2237,7 +2238,7 @@
             "value" : "Password"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lozinka"
@@ -2507,6 +2508,12 @@
             "value" : "HTTP Authentication"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "HTTP Authentication"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2517,12 +2524,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "HTTP-authenticatie"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "HTTP Authentication"
           }
         },
         "pl" : {
@@ -2567,7 +2568,7 @@
             "value" : "HTTP Authentication"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "HTTP potvrda identiteta"
@@ -2837,6 +2838,12 @@
             "value" : "Please enter the URL here……"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Please enter the URL here……"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2847,12 +2854,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voer hier de URL in……"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Please enter the URL here……"
           }
         },
         "pl" : {
@@ -2897,7 +2898,7 @@
             "value" : "Please enter the URL here……"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ovde unеsitе URL adresu……"

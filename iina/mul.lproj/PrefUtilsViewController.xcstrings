@@ -197,6 +197,12 @@
             "value" : "Clear Saved Playback Progress…"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Saved Playback Progress…"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -207,12 +213,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wis opgeslagen afspeelposities…"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Clear Saved Playback Progress…"
           }
         },
         "pl" : {
@@ -257,7 +257,7 @@
             "value" : "Clear Saved Playback Progress…"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obriši sačuvani tok reprodukcije…"
@@ -527,6 +527,12 @@
             "value" : "വീഡിയോ"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Video"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -534,12 +540,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Video"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Video"
@@ -587,7 +587,7 @@
             "value" : "Video"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Video"
@@ -857,6 +857,12 @@
             "value" : "The button below will delete all playback histories and entries in \"Open Recent\"."
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all playback histories and entries in \"Open Recent\"."
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -867,12 +873,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wis de afspeelgeschiedenis en onderdelen in het \"Open recente bestanden\"-menu."
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "The button below will delete all playback histories and entries in \"Open Recent\"."
           }
         },
         "pl" : {
@@ -917,7 +917,7 @@
             "value" : "The button below will delete all playback histories and entries in \"Open Recent\"."
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dugme ispod izbrisaće celokupnu istoriju reprodukcije i stavke u meniju „Otvori nedavnu stavku“."
@@ -1187,6 +1187,12 @@
             "value" : "Restore Alerts"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Alerts"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1194,12 +1200,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Restore Alerts"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Restore Alerts"
@@ -1247,7 +1247,7 @@
             "value" : "Restore Alerts"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Restore Alerts"
@@ -1517,6 +1517,12 @@
             "value" : "The button below will delete all cached thumbnails."
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all cached thumbnails."
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1527,12 +1533,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Leeg de miniaturencache."
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "The button below will delete all cached thumbnails."
           }
         },
         "pl" : {
@@ -1577,7 +1577,7 @@
             "value" : "The button below will delete all cached thumbnails."
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dugme ispod izbrisaće sve keširane sličice."
@@ -1847,6 +1847,12 @@
             "value" : "Set IINA as the Default Application…"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Set IINA as the Default Application…"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1857,12 +1863,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Stel IINA in als standaardprogramma…"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Set IINA as the Default Application…"
           }
         },
         "pl" : {
@@ -1907,7 +1907,7 @@
             "value" : "Set IINA as the Default Application…"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Postavi aplikaciju IINA kao podrazumevanu…"
@@ -2177,6 +2177,12 @@
             "value" : "Cleared."
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2187,12 +2193,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geleegd."
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Cleared."
           }
         },
         "pl" : {
@@ -2237,7 +2237,7 @@
             "value" : "Cleared."
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obrisano."
@@ -2507,6 +2507,12 @@
             "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2514,12 +2520,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
@@ -2567,7 +2567,7 @@
             "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
@@ -2837,6 +2837,12 @@
             "value" : "Firefox"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Firefox"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2846,12 +2852,6 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Firefox"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
             "value" : "Firefox"
           }
         },
@@ -2897,7 +2897,7 @@
             "value" : "Firefox"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Firefox"
@@ -3167,6 +3167,12 @@
             "value" : "Cleared."
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3177,12 +3183,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geleegd."
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Cleared."
           }
         },
         "pl" : {
@@ -3227,7 +3227,7 @@
             "value" : "Cleared."
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obrisano."
@@ -3497,6 +3497,12 @@
             "value" : "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3507,12 +3513,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Open links en webpagina's in IINA met één klik. De website moet door youtube-dl ondersteund worden."
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."
           }
         },
         "pl" : {
@@ -3557,7 +3557,7 @@
             "value" : "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otvarajte veze ili trenutnu veb-stranicu u programu IINA jednim klikom. Veb-sajt mora podržavati program youtube-dl."
@@ -3827,6 +3827,12 @@
             "value" : "Clear Thumbnail Cache…"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Thumbnail Cache…"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3837,12 +3843,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Leeg miniaturencache…"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Clear Thumbnail Cache…"
           }
         },
         "pl" : {
@@ -3887,7 +3887,7 @@
             "value" : "Clear Thumbnail Cache…"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obriši keš za sličice…"
@@ -4157,6 +4157,12 @@
             "value" : "ശരി"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Godkjenn"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -4167,12 +4173,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Godkjenn"
           }
         },
         "pl" : {
@@ -4217,7 +4217,7 @@
             "value" : "V redu"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "U redu"
@@ -4487,6 +4487,12 @@
             "value" : "Audio"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lyd"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -4497,12 +4503,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Audio"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lyd"
           }
         },
         "pl" : {
@@ -4547,7 +4547,7 @@
             "value" : "Audio"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zvuk"
@@ -4817,6 +4817,12 @@
             "value" : "റദ്ദാക്കുക"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avbryt"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -4827,12 +4833,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annuleer"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avbryt"
           }
         },
         "pl" : {
@@ -4877,7 +4877,7 @@
             "value" : "Prekliči"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otkaži"
@@ -5147,6 +5147,12 @@
             "value" : "Playlist"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spilleliste"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -5157,12 +5163,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Afspeellijst"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Spilleliste"
           }
         },
         "pl" : {
@@ -5207,7 +5207,7 @@
             "value" : "Playlist"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Plejlista"
@@ -5477,6 +5477,12 @@
             "value" : "Clear Playback History…"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Playback History…"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -5487,12 +5493,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wis afspeelgeschiedenis…"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Clear Playback History…"
           }
         },
         "pl" : {
@@ -5537,7 +5537,7 @@
             "value" : "Clear Playback History…"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obriši istoriju reprodukcije…"
@@ -5807,6 +5807,12 @@
             "value" : "Default Application"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default Application"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -5817,12 +5823,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Standaardprogramma"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Default Application"
           }
         },
         "pl" : {
@@ -5867,7 +5867,7 @@
             "value" : "Default Application"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Podrazumevana aplikacija"
@@ -6137,6 +6137,12 @@
             "value" : "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -6147,12 +6153,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wis bestanden in de \"bekijk later\" map. Deze bestanden bevatten de opgeslagen afspeelposities."
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."
           }
         },
         "pl" : {
@@ -6197,7 +6197,7 @@
             "value" : "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dugme ispod izbrisaće sve datoteke u fascikli „Gledaj kasnije“. Te datoteke sadrže celokupan sačuvani tok reprodukcije i postavke primenjene tokom reprodukcije."
@@ -6467,6 +6467,12 @@
             "value" : "Clear Cache"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Cache"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -6477,12 +6483,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Leeg caches"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Clear Cache"
           }
         },
         "pl" : {
@@ -6527,7 +6527,7 @@
             "value" : "Clear Cache"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obriši keš"
@@ -6797,6 +6797,12 @@
             "value" : "Calculating…"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Calculating…"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -6807,12 +6813,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Berekenen…"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Calculating…"
           }
         },
         "pl" : {
@@ -6857,7 +6857,7 @@
             "value" : "Calculating…"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Izračunavanje…"
@@ -7127,6 +7127,12 @@
             "value" : "Current thumbnail cache:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Current thumbnail cache:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -7137,12 +7143,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Huidige miniaturencache:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Current thumbnail cache:"
           }
         },
         "pl" : {
@@ -7187,7 +7187,7 @@
             "value" : "Current thumbnail cache:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Trenutni keš za sličice:"
@@ -7457,6 +7457,12 @@
             "value" : "Please select the media types that you want to make IINA as the default Application for."
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Please select the media types that you want to make IINA as the default Application for."
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -7467,12 +7473,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Stel IINA in als standaardprogramma voor de volgende bestandstypes."
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Please select the media types that you want to make IINA as the default Application for."
           }
         },
         "pl" : {
@@ -7517,7 +7517,7 @@
             "value" : "Please select the media types that you want to make IINA as the default Application for."
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Izaberite tipove medijski datoteka za koje želite da IINA bude podrazumevana aplikacija."
@@ -7787,6 +7787,12 @@
             "value" : "Restored."
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restored."
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -7794,12 +7800,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Restored."
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Restored."
@@ -7847,7 +7847,7 @@
             "value" : "Restored."
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Restored."
@@ -8117,6 +8117,12 @@
             "value" : "Restore Suppressed Alerts…"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Suppressed Alerts…"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -8124,12 +8130,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Restore Suppressed Alerts…"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Restore Suppressed Alerts…"
@@ -8177,7 +8177,7 @@
             "value" : "Restore Suppressed Alerts…"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Restore Suppressed Alerts…"
@@ -8447,6 +8447,12 @@
             "value" : "Chrome"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Chrome"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -8456,12 +8462,6 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Chrome"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
             "value" : "Chrome"
           }
         },
@@ -8507,7 +8507,7 @@
             "value" : "Chrome"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chrome"
@@ -8777,6 +8777,12 @@
             "value" : "Get Browser Extensions for IINA"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Get Browser Extensions for IINA"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -8787,12 +8793,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Download browserextensies voor IINA"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Get Browser Extensions for IINA"
           }
         },
         "pl" : {
@@ -8837,7 +8837,7 @@
             "value" : "Get Browser Extensions for IINA"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nabavi proširenja pregledača za aplikaciju IINA"

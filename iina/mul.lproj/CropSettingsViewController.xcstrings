@@ -197,6 +197,12 @@
             "value" : "ക്രോപ്"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beskjær"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -207,12 +213,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bijsnijden"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Beskjær"
           }
         },
         "pl" : {
@@ -257,7 +257,7 @@
             "value" : "Obreži"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Iseci"
@@ -527,6 +527,12 @@
             "value" : "4:3"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "4:3"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -534,12 +540,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "4:3"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "4:3"
@@ -587,7 +587,7 @@
             "value" : "4:3"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "4:3"
@@ -659,7 +659,8 @@
             "value" : "4:3"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "bQc-2s-1MS.ibShadowedLabels[1]" : {
       "comment" : "Class = \"NSSegmentedCell\"; bQc-2s-1MS.ibShadowedLabels[1] = \"16:9\"; ObjectID = \"bQc-2s-1MS\";",
@@ -857,6 +858,12 @@
             "value" : "16:9"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "16:9"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -864,12 +871,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "16:9"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "16:9"
@@ -917,7 +918,7 @@
             "value" : "16:9"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "16:9"
@@ -989,7 +990,8 @@
             "value" : "16:9"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "bQc-2s-1MS.ibShadowedLabels[2]" : {
       "comment" : "Class = \"NSSegmentedCell\"; bQc-2s-1MS.ibShadowedLabels[2] = \"16:10\"; ObjectID = \"bQc-2s-1MS\";",
@@ -1187,6 +1189,12 @@
             "value" : "16:10"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "16:10"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1194,12 +1202,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "16:10"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "16:10"
@@ -1247,7 +1249,7 @@
             "value" : "16:10"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "16:10"
@@ -1319,7 +1321,8 @@
             "value" : "16:10"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "bQc-2s-1MS.ibShadowedLabels[3]" : {
       "comment" : "Class = \"NSSegmentedCell\"; bQc-2s-1MS.ibShadowedLabels[3] = \"5:4\"; ObjectID = \"bQc-2s-1MS\";",
@@ -1517,6 +1520,12 @@
             "value" : "5:4"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "5:4"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1524,12 +1533,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "5:4"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "5:4"
@@ -1577,7 +1580,7 @@
             "value" : "5:4"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "5:4"
@@ -1649,7 +1652,8 @@
             "value" : "5:4"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "bQc-2s-1MS.ibShadowedLabels[4]" : {
       "comment" : "Class = \"NSSegmentedCell\"; bQc-2s-1MS.ibShadowedLabels[4] = \"3:2\"; ObjectID = \"bQc-2s-1MS\";",
@@ -1847,6 +1851,12 @@
             "value" : "3:2"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "3:2"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1854,12 +1864,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "3:2"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "3:2"
@@ -1907,7 +1911,7 @@
             "value" : "3:2"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "3:2"
@@ -1979,7 +1983,8 @@
             "value" : "3:2"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "bQc-2s-1MS.ibShadowedLabels[5]" : {
       "comment" : "Class = \"NSSegmentedCell\"; bQc-2s-1MS.ibShadowedLabels[5] = \"21:9\"; ObjectID = \"bQc-2s-1MS\";",
@@ -2177,6 +2182,12 @@
             "value" : "21:9"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "21:9"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2184,12 +2195,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "21:9"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "21:9"
@@ -2237,7 +2242,7 @@
             "value" : "21:9"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "21:9"
@@ -2309,7 +2314,8 @@
             "value" : "21:9"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "BtO-vw-tiy.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"Cancel\"; ObjectID = \"BtO-vw-tiy\";",
@@ -2507,6 +2513,12 @@
             "value" : "റദ്ദാക്കുക"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avbryt"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2517,12 +2529,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annuleer"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avbryt"
           }
         },
         "pl" : {
@@ -2567,7 +2573,7 @@
             "value" : "Prekliči"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otkaži"
@@ -2837,6 +2843,12 @@
             "value" : "ചെയ്തു"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ferdig"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2847,12 +2859,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gereed"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ferdig"
           }
         },
         "pl" : {
@@ -2897,7 +2903,7 @@
             "value" : "Končano"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gotovo"
@@ -3167,6 +3173,12 @@
             "value" : "Label"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Label"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3174,12 +3186,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Label"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Label"
@@ -3227,7 +3233,7 @@
             "value" : "Label"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Label"
@@ -3299,7 +3305,8 @@
             "value" : "Label"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     }
   },
   "version" : "1.0"

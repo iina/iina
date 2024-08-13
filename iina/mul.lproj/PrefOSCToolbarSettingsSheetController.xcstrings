@@ -197,6 +197,12 @@
             "value" : "ചെയ്തു"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ferdig"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -207,12 +213,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gereed"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ferdig"
           }
         },
         "pl" : {
@@ -257,7 +257,7 @@
             "value" : "Končano"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gotovo"
@@ -527,6 +527,12 @@
             "value" : "ലഭ്യമായ ഇനങ്ങൾ:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tilgjengelige elementer:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -537,12 +543,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Beschikbare onderdelen:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tilgjengelige elementer:"
           }
         },
         "pl" : {
@@ -587,7 +587,7 @@
             "value" : "Available Items:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dostupne stavke:"
@@ -857,6 +857,12 @@
             "value" : "ഒരു ഇനം ഇല്ലാതാക്കാൻ ബോക്‌സിന് പുറത്തേക്ക് വലിച്ചിടുക."
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dra et element ut av boksen for å slette det."
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -867,12 +873,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sleep een onderdeel uit het vak om het te verwijderen."
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dra et element ut av boksen for å slette det."
           }
         },
         "pl" : {
@@ -917,7 +917,7 @@
             "value" : "Drag an item out of the box to delete it."
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prevucite stavku van okvira da biste je izbrisali."
@@ -1187,6 +1187,12 @@
             "value" : "റദ്ദാക്കുക"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avbryt"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1197,12 +1203,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annuleer"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avbryt"
           }
         },
         "pl" : {
@@ -1247,7 +1247,7 @@
             "value" : "Prekliči"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otkaži"
@@ -1517,6 +1517,12 @@
             "value" : "നിലവിലെ ഇനങ്ങൾ:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gjeldende elementer:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1527,12 +1533,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Huidige werkbalk:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gjeldende elementer:"
           }
         },
         "pl" : {
@@ -1577,7 +1577,7 @@
             "value" : "Current Items:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Trenutne stavke:"
@@ -1847,6 +1847,12 @@
             "value" : "ഡിഫോൾട്ടുകൾ പുനഃസ്ഥാപിക്കുക"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gjenopprett standardinnstillinger"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1857,12 +1863,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Standaardset"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gjenopprett standardinnstillinger"
           }
         },
         "pl" : {
@@ -1907,7 +1907,7 @@
             "value" : "Restore Default"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vrati na podrazumеvano"
@@ -2177,6 +2177,12 @@
             "value" : "Drag an item and drop it to the above box to add it."
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dra inn et element i boksen over for å legge det til."
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2187,12 +2193,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sleep een onderdeel naar de bovenstaande werkbalk om het toe te voegen."
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dra inn et element i boksen over for å legge det til."
           }
         },
         "pl" : {
@@ -2237,7 +2237,7 @@
             "value" : "Drag an item and drop it to the above box to add it."
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prevucite stavku i otpustite je na gornji okvir da biste je dodali."

@@ -197,6 +197,12 @@
             "value" : "Label"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Label"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -204,12 +210,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Label"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Label"
@@ -257,7 +257,7 @@
             "value" : "Label"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Label"
@@ -329,7 +329,8 @@
             "value" : "Label"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "F0z-JX-Cv5.title" : {
       "comment" : "Class = \"NSWindow\"; title = \"Preferences\"; ObjectID = \"F0z-JX-Cv5\";",
@@ -527,6 +528,12 @@
             "value" : "Preferences"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Innstillinger"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -537,12 +544,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voorkeuren"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Innstillinger"
           }
         },
         "pl" : {
@@ -587,7 +588,7 @@
             "value" : "Preferences"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Željene postavke"
@@ -857,6 +858,12 @@
             "value" : "»"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "»"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -864,12 +871,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "»"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "»"
@@ -917,7 +918,7 @@
             "value" : "»"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "»"
@@ -989,7 +990,8 @@
             "value" : "»"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "jUU-3A-jLW.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"No Result\"; ObjectID = \"jUU-3A-jLW\";",
@@ -1187,6 +1189,12 @@
             "value" : "No Result"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingen treff"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1197,12 +1205,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geen resultaat"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ingen treff"
           }
         },
         "pl" : {
@@ -1247,7 +1249,7 @@
             "value" : "No Result"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nema rezultata"
@@ -1517,6 +1519,12 @@
             "value" : "»"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "»"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1524,12 +1532,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "»"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "»"
@@ -1577,7 +1579,7 @@
             "value" : "»"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "»"
@@ -1649,7 +1651,8 @@
             "value" : "»"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "nPh-AY-eX8.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Label\"; ObjectID = \"nPh-AY-eX8\";",
@@ -1847,6 +1850,12 @@
             "value" : "Label"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Label"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1854,12 +1863,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Label"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Label"
@@ -1907,7 +1910,7 @@
             "value" : "Label"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Label"
@@ -1979,7 +1982,8 @@
             "value" : "Label"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "Yqs-iT-EDU.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Label\"; ObjectID = \"Yqs-iT-EDU\";",
@@ -2177,6 +2181,12 @@
             "value" : "Label"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Label"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2184,12 +2194,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Label"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Label"
@@ -2237,7 +2241,7 @@
             "value" : "Label"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Label"
@@ -2309,7 +2313,8 @@
             "value" : "Label"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     }
   },
   "version" : "1.0"

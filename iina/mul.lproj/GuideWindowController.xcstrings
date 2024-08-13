@@ -197,6 +197,12 @@
             "value" : "വെബ്സൈറ്റ്"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nettside"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -207,12 +213,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Website"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nettside"
           }
         },
         "pl" : {
@@ -257,7 +257,7 @@
             "value" : "Spletna stran"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Veb-sajt"
@@ -527,6 +527,12 @@
             "value" : "ഹൈലൈറ്റുകൾ ലോഡ് ചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു. കൂടുതൽ വിവരങ്ങൾക്ക് ഞങ്ങളുടെ വെബ്സൈറ്റ് https://iina.io സന്ദർശിക്കുക."
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kan ikke laste høydepunkter. Besøk nettsiden vår https://iina.io for mer informasjon."
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -537,12 +543,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fout bij het laden van hoogtepunten. Bezoek onze website https://iina.io voor meer informatie."
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kan ikke laste høydepunkter. Besøk nettsiden vår https://iina.io for mer informasjon."
           }
         },
         "pl" : {
@@ -587,7 +587,7 @@
             "value" : "Failed to load highlights. Please visit our website https://iina.io for more information."
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Učitavanje istaknutih sadržaja nije uspelo. Više informacija potražite na našem veb-sajtu: https://iina.io."
@@ -857,6 +857,12 @@
             "value" : "തുടരുക"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fortsett"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -867,12 +873,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Doorgaan"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fortsett"
           }
         },
         "pl" : {
@@ -917,7 +917,7 @@
             "value" : "Continue"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nastavi"

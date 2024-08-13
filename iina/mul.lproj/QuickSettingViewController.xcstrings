@@ -197,6 +197,12 @@
             "value" : "0"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "0"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -204,12 +210,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "0"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "0"
@@ -257,7 +257,7 @@
             "value" : "0"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "0"
@@ -329,7 +329,8 @@
             "value" : "0"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "1cq-dc-JfM.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"125\"; ObjectID = \"1cq-dc-JfM\";",
@@ -527,6 +528,12 @@
             "value" : "125"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "125"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -534,12 +541,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "125"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "125"
@@ -587,7 +588,7 @@
             "value" : "125"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "125"
@@ -659,7 +660,8 @@
             "value" : "125"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "1KQ-oZ-A2x.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Speed:\"; ObjectID = \"1KQ-oZ-A2x\";",
@@ -857,6 +859,12 @@
             "value" : "വേഗത:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hastighet:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -867,12 +875,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Snelheid:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hastighet:"
           }
         },
         "pl" : {
@@ -917,7 +919,7 @@
             "value" : "Speed:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Brzina:"
@@ -1187,6 +1189,12 @@
             "value" : "s"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "s"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1197,12 +1205,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "sec"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "s"
           }
         },
         "pl" : {
@@ -1247,7 +1249,7 @@
             "value" : "s"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "s"
@@ -1517,6 +1519,12 @@
             "value" : "Rename the current EQ preset…"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Rename the current EQ preset…"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1524,12 +1532,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Rename the current EQ preset…"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Rename the current EQ preset…"
@@ -1577,7 +1579,7 @@
             "value" : "Rename the current EQ preset…"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Rename the current EQ preset…"
@@ -1847,6 +1849,12 @@
             "value" : "0"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "0"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1854,12 +1862,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "0"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "0"
@@ -1907,7 +1909,7 @@
             "value" : "0"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "0"
@@ -1979,7 +1981,8 @@
             "value" : "0"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "3kI-6i-ujt.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Color:\"; ObjectID = \"3kI-6i-ujt\";",
@@ -2177,6 +2180,12 @@
             "value" : "നിറം:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Farge:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2187,12 +2196,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kleur:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Farge:"
           }
         },
         "pl" : {
@@ -2237,7 +2240,7 @@
             "value" : "Color:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Boja:"
@@ -2507,6 +2510,12 @@
             "value" : "+12 dB"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "+12 dB"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2514,12 +2523,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "+12 dB"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "+12 dB"
@@ -2567,7 +2570,7 @@
             "value" : "+12 dB"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "+12 dB"
@@ -2837,6 +2840,12 @@
             "value" : "64"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "64"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2844,12 +2853,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "64"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "64"
@@ -2897,7 +2900,7 @@
             "value" : "64"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "64"
@@ -2969,7 +2972,8 @@
             "value" : "64"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "6LO-6y-IsA.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Color:\"; ObjectID = \"6LO-6y-IsA\";",
@@ -3167,6 +3171,12 @@
             "value" : "നിറം:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Farge:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3177,12 +3187,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kleur:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Farge:"
           }
         },
         "pl" : {
@@ -3227,7 +3231,7 @@
             "value" : "Color:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Boja:"
@@ -3497,6 +3501,12 @@
             "value" : "5"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "5"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3504,12 +3514,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "5"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "5"
@@ -3557,7 +3561,7 @@
             "value" : "5"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "5"
@@ -3629,7 +3633,8 @@
             "value" : "5"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "8Ax-5X-osl.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"Load External Audio Track…\"; ObjectID = \"8Ax-5X-osl\";",
@@ -3827,6 +3832,12 @@
             "value" : "ഇക്സ്റ്റർനൽ ഓഡിയോ ട്രാക്ക് ലോഡ് ചെയ്യുക…"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Last eksternt lydspor…"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3837,12 +3848,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Laad extern audiospoor…"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Last eksternt lydspor…"
           }
         },
         "pl" : {
@@ -3887,7 +3892,7 @@
             "value" : "Load External Audio Track…"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Učitaj spoljni zvučni zapis…"
@@ -4157,6 +4162,12 @@
             "value" : "വീതി:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bredde:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -4167,12 +4178,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Breedte:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bredde:"
           }
         },
         "pl" : {
@@ -4217,7 +4222,7 @@
             "value" : "Širina:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Širina:"
@@ -4487,6 +4492,12 @@
             "value" : "Primary Subtitles"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Primary Subtitles"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -4494,12 +4505,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Primary Subtitles"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Primary Subtitles"
@@ -4547,7 +4552,7 @@
             "value" : "Primary Subtitles"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Primary Subtitles"
@@ -4817,6 +4822,12 @@
             "value" : "Secondary Subtitles"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Secondary Subtitles"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -4824,12 +4835,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Secondary Subtitles"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Secondary Subtitles"
@@ -4877,7 +4882,7 @@
             "value" : "Secondary Subtitles"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Secondary Subtitles"
@@ -5147,6 +5152,12 @@
             "value" : "സബ്ടൈറ്റിൽ ലോഡ് ചെയ്യുക…"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Last undertekster…"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -5157,12 +5168,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Laad ondertiteling…"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Last undertekster…"
           }
         },
         "pl" : {
@@ -5207,7 +5212,7 @@
             "value" : "Load Subtitle…"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Učitaj titl…"
@@ -5477,6 +5482,12 @@
             "value" : "ഓഡിയോ ഡിലേ:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lydforsinkelse:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -5487,12 +5498,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Audiovertraging:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lydforsinkelse:"
           }
         },
         "pl" : {
@@ -5537,7 +5542,7 @@
             "value" : "Audio delay:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kašnjenje zvuka:"
@@ -5807,6 +5812,12 @@
             "value" : "70"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "70"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -5814,12 +5825,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "70"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "70"
@@ -5867,7 +5872,7 @@
             "value" : "70"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "70"
@@ -5939,7 +5944,8 @@
             "value" : "70"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "ANn-CR-JOV.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Color:\"; ObjectID = \"ANn-CR-JOV\";",
@@ -6137,6 +6143,12 @@
             "value" : "നിറം:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Farge:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -6147,12 +6159,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kleur:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Farge:"
           }
         },
         "pl" : {
@@ -6197,7 +6203,7 @@
             "value" : "Color:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Boja:"
@@ -6467,6 +6473,12 @@
             "value" : "0.5"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "0.5"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -6476,12 +6488,6 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "0.5"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
             "value" : "0.5"
           }
         },
@@ -6527,7 +6533,7 @@
             "value" : "0.5"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "0,5"
@@ -6797,6 +6803,12 @@
             "value" : "1x"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "1x"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -6806,12 +6818,6 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "1x"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
             "value" : "1x"
           }
         },
@@ -6857,7 +6863,7 @@
             "value" : "1x"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "1x"
@@ -7127,6 +7133,12 @@
             "value" : "Secondary subtitle:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Andre undertekst:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -7137,12 +7149,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tweede ondertiteling:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Andre undertekst:"
           }
         },
         "pl" : {
@@ -7187,7 +7193,7 @@
             "value" : "Secondary subtitle:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Drugi titl:"
@@ -7457,6 +7463,12 @@
             "value" : "s"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "s"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -7467,12 +7479,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "sec"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "s"
           }
         },
         "pl" : {
@@ -7517,7 +7523,7 @@
             "value" : "s"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "s"
@@ -7787,6 +7793,12 @@
             "value" : "2"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "2"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -7794,12 +7806,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "2"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "2"
@@ -7847,7 +7853,7 @@
             "value" : "2"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "2"
@@ -7919,7 +7925,8 @@
             "value" : "2"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "bzk-c2-LH5.label" : {
       "comment" : "Class = \"NSTabViewItem\"; label = \"Audio\"; ObjectID = \"bzk-c2-LH5\";",
@@ -8117,6 +8124,12 @@
             "value" : "Audio"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lyd"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -8127,12 +8140,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Audio"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lyd"
           }
         },
         "pl" : {
@@ -8177,7 +8184,7 @@
             "value" : "Audio"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zvuk"
@@ -8447,6 +8454,12 @@
             "value" : "0"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "0"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -8454,12 +8467,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "0"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "0"
@@ -8507,7 +8514,7 @@
             "value" : "0"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "0"
@@ -8579,7 +8586,8 @@
             "value" : "0"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "CAr-N0-j64.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"0\"; ObjectID = \"CAr-N0-j64\";",
@@ -8777,6 +8785,12 @@
             "value" : "0"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "0"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -8784,12 +8798,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "0"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "0"
@@ -8837,7 +8845,7 @@
             "value" : "0"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "0"
@@ -8909,7 +8917,8 @@
             "value" : "0"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "cdR-uY-riN.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Brightness:\"; ObjectID = \"cdR-uY-riN\";",
@@ -9107,6 +9116,12 @@
             "value" : "Brightness:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lysstyrke:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -9117,12 +9132,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Helderheid:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lysstyrke:"
           }
         },
         "pl" : {
@@ -9167,7 +9176,7 @@
             "value" : "Brightness:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Svetlina:"
@@ -9437,6 +9446,12 @@
             "value" : "60"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "60"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -9444,12 +9459,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "60"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "60"
@@ -9497,7 +9506,7 @@
             "value" : "60"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "60"
@@ -9569,7 +9578,8 @@
             "value" : "60"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "cMu-YF-riv.ibShadowedLabels[0]" : {
       "comment" : "Class = \"NSSegmentedCell\"; cMu-YF-riv.ibShadowedLabels[0] = \"Default\"; ObjectID = \"cMu-YF-riv\";",
@@ -9767,6 +9777,12 @@
             "value" : "Default"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standard"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -9777,12 +9793,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Standaard"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Standard"
           }
         },
         "pl" : {
@@ -9827,7 +9837,7 @@
             "value" : "Default"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Podrazumevano"
@@ -10097,6 +10107,12 @@
             "value" : "4:3"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "4:3"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -10104,12 +10120,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "4:3"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "4:3"
@@ -10157,7 +10167,7 @@
             "value" : "4:3"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "4:3"
@@ -10229,7 +10239,8 @@
             "value" : "4:3"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "cMu-YF-riv.ibShadowedLabels[2]" : {
       "comment" : "Class = \"NSSegmentedCell\"; cMu-YF-riv.ibShadowedLabels[2] = \"16:9\"; ObjectID = \"cMu-YF-riv\";",
@@ -10427,6 +10438,12 @@
             "value" : "16:9"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "16:9"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -10434,12 +10451,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "16:9"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "16:9"
@@ -10487,7 +10498,7 @@
             "value" : "16:9"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "16:9"
@@ -10559,7 +10570,8 @@
             "value" : "16:9"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "cMu-YF-riv.ibShadowedLabels[3]" : {
       "comment" : "Class = \"NSSegmentedCell\"; cMu-YF-riv.ibShadowedLabels[3] = \"16:10\"; ObjectID = \"cMu-YF-riv\";",
@@ -10757,6 +10769,12 @@
             "value" : "16:10"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "16:10"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -10764,12 +10782,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "16:10"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "16:10"
@@ -10817,7 +10829,7 @@
             "value" : "16:10"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "16:10"
@@ -10889,7 +10901,8 @@
             "value" : "16:10"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "cMu-YF-riv.ibShadowedLabels[4]" : {
       "comment" : "Class = \"NSSegmentedCell\"; cMu-YF-riv.ibShadowedLabels[4] = \"21:9\"; ObjectID = \"cMu-YF-riv\";",
@@ -11087,6 +11100,12 @@
             "value" : "21:9"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "21:9"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -11094,12 +11113,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "21:9"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "21:9"
@@ -11147,7 +11160,7 @@
             "value" : "21:9"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "21:9"
@@ -11219,7 +11232,8 @@
             "value" : "21:9"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "cMu-YF-riv.ibShadowedLabels[5]" : {
       "comment" : "Class = \"NSSegmentedCell\"; cMu-YF-riv.ibShadowedLabels[5] = \"5:4\"; ObjectID = \"cMu-YF-riv\";",
@@ -11417,6 +11431,12 @@
             "value" : "5:4"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "5:4"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -11424,12 +11444,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "5:4"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "5:4"
@@ -11477,7 +11491,7 @@
             "value" : "5:4"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "5:4"
@@ -11549,7 +11563,8 @@
             "value" : "5:4"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "cpm-5o-a2c.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"AUDIO\"; ObjectID = \"cpm-5o-a2c\";",
@@ -11747,6 +11762,12 @@
             "value" : "AUDIO"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "LYD"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -11757,12 +11778,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "AUDIO"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "LYD"
           }
         },
         "pl" : {
@@ -11807,7 +11822,7 @@
             "value" : "AUDIO"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "AUDIO"
@@ -12077,6 +12092,12 @@
             "value" : "വീഡിയോ"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Video"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -12084,12 +12105,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Video"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Video"
@@ -12137,7 +12152,7 @@
             "value" : "Video"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Video"
@@ -12407,6 +12422,12 @@
             "value" : "x"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "x"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -12416,12 +12437,6 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "x"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
             "value" : "x"
           }
         },
@@ -12467,7 +12482,7 @@
             "value" : "x"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "х"
@@ -12737,6 +12752,12 @@
             "value" : "0.25"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "0.25"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -12746,12 +12767,6 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "0.25"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
             "value" : "0.25"
           }
         },
@@ -12797,7 +12812,7 @@
             "value" : "0.25"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "0,25"
@@ -13067,6 +13082,12 @@
             "value" : "Remove the current EQ preset"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Remove the current EQ preset"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -13074,12 +13095,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Remove the current EQ preset"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Remove the current EQ preset"
@@ -13127,7 +13142,7 @@
             "value" : "Remove the current EQ preset"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Remove the current EQ preset"
@@ -13397,6 +13412,12 @@
             "value" : "8k"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "8k"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -13404,12 +13425,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "8k"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "8k"
@@ -13457,7 +13472,7 @@
             "value" : "8k"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "8k"
@@ -13529,7 +13544,8 @@
             "value" : "8k"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "eDl-Si-LSa.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Contrast:\"; ObjectID = \"eDl-Si-LSa\";",
@@ -13727,6 +13743,12 @@
             "value" : "Contrast:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kontrast:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -13737,12 +13759,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Contrast:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kontrast:"
           }
         },
         "pl" : {
@@ -13787,7 +13803,7 @@
             "value" : "Contrast:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kontrast:"
@@ -14057,6 +14073,12 @@
             "value" : "Plugin"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utvidelse"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -14067,12 +14089,6 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "Plugin"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Utvidelse"
           }
         },
         "pl" : {
@@ -14117,7 +14133,7 @@
             "value" : "Plugin"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Plugin"
@@ -14387,6 +14403,12 @@
             "value" : "1"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "1"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -14394,12 +14416,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "1"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "1"
@@ -14447,7 +14463,7 @@
             "value" : "1"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "1"
@@ -14519,7 +14535,8 @@
             "value" : "1"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "ekh-gc-2qo.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"250\"; ObjectID = \"ekh-gc-2qo\";",
@@ -14717,6 +14734,12 @@
             "value" : "250"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "250"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -14724,12 +14747,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "250"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "250"
@@ -14777,7 +14794,7 @@
             "value" : "250"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "250"
@@ -14849,7 +14866,8 @@
             "value" : "250"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "eLh-fu-pMj.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Hue:\"; ObjectID = \"eLh-fu-pMj\";",
@@ -15047,6 +15065,12 @@
             "value" : "Hue:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fargenyanse:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -15057,12 +15081,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tint:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fargenyanse:"
           }
         },
         "pl" : {
@@ -15107,7 +15125,7 @@
             "value" : "Hue:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nijansa:"
@@ -15377,6 +15395,12 @@
             "value" : "Deinterlace"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deinterlace"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -15384,12 +15408,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Deinterlace"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Deinterlace"
@@ -15437,7 +15455,7 @@
             "value" : "Deinterlace"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rasplitanje"
@@ -15707,6 +15725,12 @@
             "value" : "16k"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "16k"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -15714,12 +15738,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "16k"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "16k"
@@ -15767,7 +15785,7 @@
             "value" : "16k"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "16k"
@@ -15839,7 +15857,8 @@
             "value" : "16k"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "Ew1-N1-0Pi.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"0.25x\"; ObjectID = \"Ew1-N1-0Pi\";",
@@ -16037,6 +16056,12 @@
             "value" : "0.25x"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "0.25x"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -16046,12 +16071,6 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "0.25x"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
             "value" : "0.25x"
           }
         },
@@ -16097,7 +16116,7 @@
             "value" : "0.25x"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "0,25x"
@@ -16367,6 +16386,12 @@
             "value" : "Subtitle:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Undertekst:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -16377,12 +16402,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ondertiteling:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Undertekst:"
           }
         },
         "pl" : {
@@ -16427,7 +16446,7 @@
             "value" : "Subtitle:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Titl:"
@@ -16697,6 +16716,12 @@
             "value" : "FONT"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SKRIFTTYPE"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -16707,12 +16732,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "LETTERTYPE"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "SKRIFTTYPE"
           }
         },
         "pl" : {
@@ -16757,7 +16776,7 @@
             "value" : "FONT"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "FONT"
@@ -17026,6 +17045,12 @@
             "value" : "Font…"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Typesnitt…"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -17036,12 +17061,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lettertype…"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Typesnitt…"
           }
         },
         "pl" : {
@@ -17086,7 +17105,7 @@
             "value" : "Font…"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Font…"
@@ -17356,6 +17375,12 @@
             "value" : "ബോർഡർ"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "BORDER"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -17366,12 +17391,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "RAND"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "BORDER"
           }
         },
         "pl" : {
@@ -17416,7 +17435,7 @@
             "value" : "BORDER"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "IVICA"
@@ -17686,6 +17705,12 @@
             "value" : "3"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "3"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -17693,12 +17718,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "3"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "3"
@@ -17746,7 +17765,7 @@
             "value" : "3"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "3"
@@ -17818,7 +17837,8 @@
             "value" : "3"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "HBF-J7-Tie.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"32\"; ObjectID = \"HBF-J7-Tie\";",
@@ -18016,6 +18036,12 @@
             "value" : "32"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "32"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -18023,12 +18049,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "32"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "32"
@@ -18076,7 +18096,7 @@
             "value" : "32"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "32"
@@ -18148,7 +18168,8 @@
             "value" : "32"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "i0j-2a-vKD.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"4k\"; ObjectID = \"i0j-2a-vKD\";",
@@ -18346,6 +18367,12 @@
             "value" : "4k"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "4k"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -18353,12 +18380,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "4k"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "4k"
@@ -18406,7 +18427,7 @@
             "value" : "4k"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "4k"
@@ -18478,7 +18499,8 @@
             "value" : "4k"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "iS4-Zr-9Ig.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Equalizer:\"; ObjectID = \"iS4-Zr-9Ig\";",
@@ -18676,6 +18698,12 @@
             "value" : "Equalizer:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Equalizer:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -18686,12 +18714,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pas beeld aan:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Equalizer:"
           }
         },
         "pl" : {
@@ -18736,7 +18758,7 @@
             "value" : "Equalizer:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ekvilajzer:"
@@ -19006,6 +19028,12 @@
             "value" : "None"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingen"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -19016,12 +19044,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geen"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ingen"
           }
         },
         "pl" : {
@@ -19066,7 +19088,7 @@
             "value" : "None"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nijеdan"
@@ -19336,6 +19358,12 @@
             "value" : "4:3"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "4:3"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -19343,12 +19371,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "4:3"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "4:3"
@@ -19396,7 +19418,7 @@
             "value" : "4:3"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "4:3"
@@ -19468,7 +19490,8 @@
             "value" : "4:3"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "iuN-rN-jT7.ibShadowedLabels[2]" : {
       "comment" : "Class = \"NSSegmentedCell\"; iuN-rN-jT7.ibShadowedLabels[2] = \"16:9\"; ObjectID = \"iuN-rN-jT7\";",
@@ -19666,6 +19689,12 @@
             "value" : "16:9"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "16:9"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -19673,12 +19702,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "16:9"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "16:9"
@@ -19726,7 +19749,7 @@
             "value" : "16:9"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "16:9"
@@ -19798,7 +19821,8 @@
             "value" : "16:9"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "iuN-rN-jT7.ibShadowedLabels[3]" : {
       "comment" : "Class = \"NSSegmentedCell\"; iuN-rN-jT7.ibShadowedLabels[3] = \"16:10\"; ObjectID = \"iuN-rN-jT7\";",
@@ -19996,6 +20020,12 @@
             "value" : "16:10"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "16:10"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -20003,12 +20033,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "16:10"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "16:10"
@@ -20056,7 +20080,7 @@
             "value" : "16:10"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "16:10"
@@ -20128,7 +20152,8 @@
             "value" : "16:10"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "iuN-rN-jT7.ibShadowedLabels[4]" : {
       "comment" : "Class = \"NSSegmentedCell\"; iuN-rN-jT7.ibShadowedLabels[4] = \"21:9\"; ObjectID = \"iuN-rN-jT7\";",
@@ -20326,6 +20351,12 @@
             "value" : "21:9"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "21:9"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -20333,12 +20364,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "21:9"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "21:9"
@@ -20386,7 +20411,7 @@
             "value" : "21:9"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "21:9"
@@ -20458,7 +20483,8 @@
             "value" : "21:9"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "iuN-rN-jT7.ibShadowedLabels[5]" : {
       "comment" : "Class = \"NSSegmentedCell\"; iuN-rN-jT7.ibShadowedLabels[5] = \"5:4\"; ObjectID = \"iuN-rN-jT7\";",
@@ -20656,6 +20682,12 @@
             "value" : "5:4"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "5:4"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -20663,12 +20695,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "5:4"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "5:4"
@@ -20716,7 +20742,7 @@
             "value" : "5:4"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "5:4"
@@ -20788,7 +20814,8 @@
             "value" : "5:4"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "iuN-rN-jT7.ibShadowedLabels[6]" : {
       "comment" : "Class = \"NSSegmentedCell\"; iuN-rN-jT7.ibShadowedLabels[6] = \"Custom…\"; ObjectID = \"iuN-rN-jT7\";",
@@ -20986,6 +21013,12 @@
             "value" : "Custom…"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Custom…"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -20996,12 +21029,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pas aan…"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Custom…"
           }
         },
         "pl" : {
@@ -21046,7 +21073,7 @@
             "value" : "Custom…"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prilagođeno…"
@@ -21316,6 +21343,12 @@
             "value" : "2k"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "2k"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -21323,12 +21356,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "2k"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "2k"
@@ -21376,7 +21403,7 @@
             "value" : "2k"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "2k"
@@ -21448,7 +21475,8 @@
             "value" : "2k"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "JbG-Ur-b55.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"1.5\"; ObjectID = \"JbG-Ur-b55\";",
@@ -21646,6 +21674,12 @@
             "value" : "1.5"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "1.5"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -21655,12 +21689,6 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "1.5"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
             "value" : "1.5"
           }
         },
@@ -21706,7 +21734,7 @@
             "value" : "1.5"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "1,5"
@@ -21976,6 +22004,12 @@
             "value" : "30"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "30"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -21983,12 +22017,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "30"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "30"
@@ -22036,7 +22064,7 @@
             "value" : "30"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "30"
@@ -22108,7 +22136,8 @@
             "value" : "30"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "jND-MZ-sKB.label" : {
       "comment" : "Class = \"NSTabViewItem\"; label = \"Subtitle\"; ObjectID = \"jND-MZ-sKB\";",
@@ -22306,6 +22335,12 @@
             "value" : "Subtitle"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Undertekster"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -22316,12 +22351,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ondertiteling"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Undertekster"
           }
         },
         "pl" : {
@@ -22366,7 +22395,7 @@
             "value" : "Subtitle"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Titl"
@@ -22636,6 +22665,12 @@
             "value" : "0s"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "0s"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -22643,12 +22678,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "0s"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "0s"
@@ -22696,7 +22725,7 @@
             "value" : "0s"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "0s"
@@ -22966,6 +22995,12 @@
             "value" : "+5s"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "+5s"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -22973,12 +23008,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "+5s"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "+5s"
@@ -23026,7 +23055,7 @@
             "value" : "+5s"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "+5s"
@@ -23296,6 +23325,12 @@
             "value" : "0"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "0"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -23303,12 +23338,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "0"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "0"
@@ -23356,7 +23385,7 @@
             "value" : "0"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "0"
@@ -23428,7 +23457,8 @@
             "value" : "0"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "lBn-YS-jL7.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"0 dB\"; ObjectID = \"lBn-YS-jL7\";",
@@ -23626,6 +23656,12 @@
             "value" : "0 dB"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "0 dB"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -23633,12 +23669,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "0 dB"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "0 dB"
@@ -23686,7 +23716,7 @@
             "value" : "0 dB"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "0 dB"
@@ -23956,6 +23986,12 @@
             "value" : "1x"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "1x"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -23965,12 +24001,6 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "1x"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
             "value" : "1x"
           }
         },
@@ -24016,7 +24046,7 @@
             "value" : "1x"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "1x"
@@ -24286,6 +24316,12 @@
             "value" : "0s"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "0s"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -24293,12 +24329,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "0s"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "0s"
@@ -24346,7 +24376,7 @@
             "value" : "0s"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "0s"
@@ -24616,6 +24646,12 @@
             "value" : "ഇക്സ്റ്റർനൽ ഓഡിയോ:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "External audio:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -24626,12 +24662,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Extern audiospoor:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "External audio:"
           }
         },
         "pl" : {
@@ -24676,7 +24706,7 @@
             "value" : "External audio:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Spoljni izvor zvuka:"
@@ -24946,6 +24976,12 @@
             "value" : "Manual"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Manual"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -24953,12 +24989,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Manual"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Manual"
@@ -25006,7 +25036,7 @@
             "value" : "Manual"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Manual"
@@ -25276,6 +25306,12 @@
             "value" : "-12 dB"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "-12 dB"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -25283,12 +25319,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "-12 dB"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "-12 dB"
@@ -25336,7 +25366,7 @@
             "value" : "-12 dB"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "-12 dB"
@@ -25606,6 +25636,12 @@
             "value" : "VIDEO"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VIDEO"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -25613,12 +25649,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "VIDEO"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "VIDEO"
@@ -25666,7 +25696,7 @@
             "value" : "VIDEO"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "VIDEO"
@@ -25936,6 +25966,12 @@
             "value" : "Crop:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beskjær:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -25946,12 +25982,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bijsnijden:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Beskjær:"
           }
         },
         "pl" : {
@@ -25996,7 +26026,7 @@
             "value" : "Obreži:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Iseci:"
@@ -26266,6 +26296,12 @@
             "value" : "1"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "1"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -26273,12 +26309,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "1"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "1"
@@ -26326,7 +26356,7 @@
             "value" : "1"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "1"
@@ -26398,7 +26428,8 @@
             "value" : "1"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "mep-aa-rk7.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"55\"; ObjectID = \"mep-aa-rk7\";",
@@ -26596,6 +26627,12 @@
             "value" : "55"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "55"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -26603,12 +26640,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "55"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "55"
@@ -26656,7 +26687,7 @@
             "value" : "55"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "55"
@@ -26728,7 +26759,8 @@
             "value" : "55"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "n2O-ot-Bir.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"65\"; ObjectID = \"n2O-ot-Bir\";",
@@ -26926,6 +26958,12 @@
             "value" : "65"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "65"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -26933,12 +26971,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "65"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "65"
@@ -26986,7 +27018,7 @@
             "value" : "65"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "65"
@@ -27058,7 +27090,8 @@
             "value" : "65"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "nPr-QJ-Ty3.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"2.5\"; ObjectID = \"nPr-QJ-Ty3\";",
@@ -27256,6 +27289,12 @@
             "value" : "2.5"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "2.5"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -27265,12 +27304,6 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "2.5"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
             "value" : "2.5"
           }
         },
@@ -27316,7 +27349,7 @@
             "value" : "2.5"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "2,5"
@@ -27586,6 +27619,12 @@
             "value" : "1"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "1"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -27593,12 +27632,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "1"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "1"
@@ -27646,7 +27679,7 @@
             "value" : "1"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "1"
@@ -27718,7 +27751,8 @@
             "value" : "1"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "NxO-to-jcI.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"SUBTITLES\"; ObjectID = \"NxO-to-jcI\";",
@@ -27916,6 +27950,12 @@
             "value" : "SUBTITLES"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "SUBTITLES"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -27926,12 +27966,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ONDERTITELING"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "SUBTITLES"
           }
         },
         "pl" : {
@@ -27976,7 +28010,7 @@
             "value" : "SUBTITLES"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "TITLOVI"
@@ -28246,6 +28280,12 @@
             "value" : "45"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "45"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -28253,12 +28293,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "45"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "45"
@@ -28306,7 +28340,7 @@
             "value" : "45"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "45"
@@ -28378,7 +28412,8 @@
             "value" : "45"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "p63-Nx-yJZ.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"16x\"; ObjectID = \"p63-Nx-yJZ\";",
@@ -28576,6 +28611,12 @@
             "value" : "16x"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "16x"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -28585,12 +28626,6 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "16x"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
             "value" : "16x"
           }
         },
@@ -28636,7 +28671,7 @@
             "value" : "16x"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "16x"
@@ -28906,6 +28941,12 @@
             "value" : "4x"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "4x"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -28915,12 +28956,6 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "4x"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
             "value" : "4x"
           }
         },
@@ -28966,7 +29001,7 @@
             "value" : "4x"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "4x"
@@ -29236,6 +29271,12 @@
             "value" : "Gamma:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gamma:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -29243,12 +29284,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gamma:"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gamma:"
@@ -29296,7 +29331,7 @@
             "value" : "Gamma:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gama:"
@@ -29566,6 +29601,12 @@
             "value" : "ഇക്സ്റ്റർനൽ സബ്ടൈറ്റിലുകൾ:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "External subtitles:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -29576,12 +29617,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Externe ondertiteling:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "External subtitles:"
           }
         },
         "pl" : {
@@ -29626,7 +29661,7 @@
             "value" : "External subtitles:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Spoljni titlovi:"
@@ -29896,6 +29931,12 @@
             "value" : "ഓൺലൈനിൽ തിരയുക…"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Search Online…"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -29906,12 +29947,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zoek online…"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Search Online…"
           }
         },
         "pl" : {
@@ -29956,7 +29991,7 @@
             "value" : "Search Online…"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Potraži na mreži…"
@@ -30226,6 +30261,12 @@
             "value" : "Saturation:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Metning:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -30236,12 +30277,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verzadiging:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Metning:"
           }
         },
         "pl" : {
@@ -30286,7 +30321,7 @@
             "value" : "Saturation:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zasićenje:"
@@ -30556,6 +30591,12 @@
             "value" : "1k"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "1k"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -30563,12 +30604,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "1k"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "1k"
@@ -30616,7 +30651,7 @@
             "value" : "1k"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "1k"
@@ -30688,7 +30723,8 @@
             "value" : "1k"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "rw1-Qb-0RV.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Hardware Decoding\"; ObjectID = \"rw1-Qb-0RV\";",
@@ -30886,6 +30922,12 @@
             "value" : "Hardware Decoding"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maskinvaredekoding"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -30896,12 +30938,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hardware acceleratie"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Maskinvaredekoding"
           }
         },
         "pl" : {
@@ -30946,7 +30982,7 @@
             "value" : "Hardware Decoding"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hardversko dekodiranje"
@@ -31216,6 +31252,12 @@
             "value" : "Size:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Størrelse:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -31226,12 +31268,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Grootte:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Størrelse:"
           }
         },
         "pl" : {
@@ -31276,7 +31312,7 @@
             "value" : "Velikost:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Veličina:"
@@ -31546,6 +31582,12 @@
             "value" : "Save the current EQ as a preset…"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Save the current EQ as a preset…"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -31553,12 +31595,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Save the current EQ as a preset…"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Save the current EQ as a preset…"
@@ -31606,7 +31642,7 @@
             "value" : "Save the current EQ as a preset…"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Save the current EQ as a preset…"
@@ -31876,6 +31912,12 @@
             "value" : "40"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "40"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -31883,12 +31925,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "40"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "40"
@@ -31936,7 +31972,7 @@
             "value" : "40"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "40"
@@ -32008,7 +32044,8 @@
             "value" : "40"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "ssK-tS-ogL.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"4\"; ObjectID = \"ssK-tS-ogL\";",
@@ -32206,6 +32243,12 @@
             "value" : "4"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "4"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -32213,12 +32256,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "4"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "4"
@@ -32266,7 +32303,7 @@
             "value" : "4"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "4"
@@ -32338,7 +32375,8 @@
             "value" : "4"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "t03-36-Zge.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Position:\"; ObjectID = \"t03-36-Zge\";",
@@ -32536,6 +32574,12 @@
             "value" : "Position:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Posisjon:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -32546,12 +32590,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Positie:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Posisjon:"
           }
         },
         "pl" : {
@@ -32596,7 +32634,7 @@
             "value" : "Position:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Položaj:"
@@ -32866,6 +32904,12 @@
             "value" : "500"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "500"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -32873,12 +32917,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "500"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "500"
@@ -32926,7 +32964,7 @@
             "value" : "500"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "500"
@@ -32998,7 +33036,8 @@
             "value" : "500"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "to3-rc-Agv.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Rotation:\"; ObjectID = \"to3-rc-Agv\";",
@@ -33196,6 +33235,12 @@
             "value" : "Rotation:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rotasjon:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -33206,12 +33251,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rotatie:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rotasjon:"
           }
         },
         "pl" : {
@@ -33256,7 +33295,7 @@
             "value" : "Rotation:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rotacija:"
@@ -33526,6 +33565,12 @@
             "value" : "-5s"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "5s"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -33536,12 +33581,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "-5s"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "5s"
           }
         },
         "pl" : {
@@ -33586,7 +33625,7 @@
             "value" : "-5s"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "-5s"
@@ -33856,6 +33895,12 @@
             "value" : "0s"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "0s"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -33863,12 +33908,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "0s"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "0s"
@@ -33916,7 +33955,7 @@
             "value" : "0s"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "0s"
@@ -34186,6 +34225,12 @@
             "value" : "0s"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "0s"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -34193,12 +34238,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "0s"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "0s"
@@ -34246,7 +34285,7 @@
             "value" : "0s"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "0s"
@@ -34516,6 +34555,12 @@
             "value" : "BACKGROUND"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "BAKGRUNN"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -34526,12 +34571,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ACHTERGROND"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "BAKGRUNN"
           }
         },
         "pl" : {
@@ -34576,7 +34615,7 @@
             "value" : "BACKGROUND"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "POZADINA"
@@ -34846,6 +34885,12 @@
             "value" : "HDR"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HDR"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -34853,12 +34898,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "HDR"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "HDR"
@@ -34906,7 +34945,7 @@
             "value" : "HDR"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "HDR"
@@ -35176,6 +35215,12 @@
             "value" : "Video track:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Videospor:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -35186,12 +35231,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Videospoor:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Videospor:"
           }
         },
         "pl" : {
@@ -35236,7 +35275,7 @@
             "value" : "Video track:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Video-zapis:"
@@ -35506,6 +35545,12 @@
             "value" : "x"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "x"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -35515,12 +35560,6 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "x"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
             "value" : "x"
           }
         },
@@ -35566,7 +35605,7 @@
             "value" : "x"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "х"
@@ -35836,6 +35875,12 @@
             "value" : "Subtitle style options may break ASS rendering, and some of them will be disabled depending on subtitle type."
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Subtitle style options may break ASS rendering, and some of them will be disabled depending on subtitle type."
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -35846,12 +35891,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Stijlopties kunnen fouten opleveren bij de weergave van ASS-ondertiteling. Bij sommige soorten ondertiteling zullen enkele opties niet worden meegenomen."
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Subtitle style options may break ASS rendering, and some of them will be disabled depending on subtitle type."
           }
         },
         "pl" : {
@@ -35896,7 +35935,7 @@
             "value" : "Subtitle style options may break ASS rendering, and some of them will be disabled depending on subtitle type."
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Opcije stila titlova mogu narušiti ispravan prikaz ASS titlova, a neke od njih će biti onemogućene u zavisnosti od tipa titla."
@@ -36166,6 +36205,12 @@
             "value" : "Scale:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Scale:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -36176,12 +36221,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Schaal:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Scale:"
           }
         },
         "pl" : {
@@ -36226,7 +36265,7 @@
             "value" : "Scale:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Razmеra:"
@@ -36496,6 +36535,12 @@
             "value" : "Subtitle delay:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Undertekstforsinkelse:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -36506,12 +36551,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ondertitelingvertraging:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Undertekstforsinkelse:"
           }
         },
         "pl" : {
@@ -36556,7 +36595,7 @@
             "value" : "Subtitle delay:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kašnjenje titla:"
@@ -36826,6 +36865,12 @@
             "value" : "Audio track:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lydspor:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -36836,12 +36881,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Audiospoor:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lydspor:"
           }
         },
         "pl" : {
@@ -36886,7 +36925,7 @@
             "value" : "Audio track:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zvučni zapis:"
@@ -37156,6 +37195,12 @@
             "value" : "+5s"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "+5s"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -37163,12 +37208,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "+5s"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "+5s"
@@ -37216,7 +37255,7 @@
             "value" : "+5s"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "+5s"
@@ -37486,6 +37525,12 @@
             "value" : "-5s"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "5s"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -37496,12 +37541,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "-5s"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "5s"
           }
         },
         "pl" : {
@@ -37546,7 +37585,7 @@
             "value" : "-5s"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "-5s"
@@ -37816,6 +37855,12 @@
             "value" : "Aspect ratio:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bildeformat:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -37826,12 +37871,6 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "Aspect ratio:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bildeformat:"
           }
         },
         "pl" : {
@@ -37876,7 +37915,7 @@
             "value" : "Aspect ratio:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Aspect ratio:"
@@ -38146,6 +38185,12 @@
             "value" : "50"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "50"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -38153,12 +38198,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "50"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "50"
@@ -38206,7 +38245,7 @@
             "value" : "50"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "50"
@@ -38278,7 +38317,8 @@
             "value" : "50"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "z1L-0N-dfK.ibShadowedLabels[0]" : {
       "comment" : "Class = \"NSSegmentedCell\"; z1L-0N-dfK.ibShadowedLabels[0] = \"0°\"; ObjectID = \"z1L-0N-dfK\";",
@@ -38476,6 +38516,12 @@
             "value" : "0°"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "0°"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -38483,12 +38529,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "0°"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "0°"
@@ -38536,7 +38576,7 @@
             "value" : "0°"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "0°"
@@ -38608,7 +38648,8 @@
             "value" : "0°"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "z1L-0N-dfK.ibShadowedLabels[1]" : {
       "comment" : "Class = \"NSSegmentedCell\"; z1L-0N-dfK.ibShadowedLabels[1] = \"90°\"; ObjectID = \"z1L-0N-dfK\";",
@@ -38806,6 +38847,12 @@
             "value" : "90°"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "90°"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -38813,12 +38860,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "90°"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "90°"
@@ -38866,7 +38907,7 @@
             "value" : "90°"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "90°"
@@ -38938,7 +38979,8 @@
             "value" : "90°"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "z1L-0N-dfK.ibShadowedLabels[2]" : {
       "comment" : "Class = \"NSSegmentedCell\"; z1L-0N-dfK.ibShadowedLabels[2] = \"180°\"; ObjectID = \"z1L-0N-dfK\";",
@@ -39136,6 +39178,12 @@
             "value" : "180°"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "180°"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -39143,12 +39191,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "180°"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "180°"
@@ -39196,7 +39238,7 @@
             "value" : "180°"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "180°"
@@ -39268,7 +39310,8 @@
             "value" : "180°"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "z1L-0N-dfK.ibShadowedLabels[3]" : {
       "comment" : "Class = \"NSSegmentedCell\"; z1L-0N-dfK.ibShadowedLabels[3] = \"270°\"; ObjectID = \"z1L-0N-dfK\";",
@@ -39466,6 +39509,12 @@
             "value" : "270°"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "270°"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -39473,12 +39522,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "270°"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "270°"
@@ -39526,7 +39569,7 @@
             "value" : "270°"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "270°"
@@ -39598,7 +39641,8 @@
             "value" : "270°"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "z4R-2L-mKS.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"0\"; ObjectID = \"z4R-2L-mKS\";",
@@ -39796,6 +39840,12 @@
             "value" : "0"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "0"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -39803,12 +39853,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "0"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "0"
@@ -39856,7 +39900,7 @@
             "value" : "0"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "0"
@@ -39928,7 +39972,8 @@
             "value" : "0"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "ZBd-13-lA1.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Text Style:\"; ObjectID = \"ZBd-13-lA1\";",
@@ -40126,6 +40171,12 @@
             "value" : "Text Style:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tekststil:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -40136,12 +40187,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tekststijl:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tekststil:"
           }
         },
         "pl" : {
@@ -40186,7 +40231,7 @@
             "value" : "Text Style:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Stil teksta:"
@@ -40456,6 +40501,12 @@
             "value" : "35"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "35"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -40463,12 +40514,6 @@
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "35"
-          }
-        },
-        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "35"
@@ -40516,7 +40561,7 @@
             "value" : "35"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "35"
@@ -40588,7 +40633,8 @@
             "value" : "35"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "zcD-Tg-7Oi.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Equalizer:\"; ObjectID = \"zcD-Tg-7Oi\";",
@@ -40786,6 +40832,12 @@
             "value" : "Equalizer:"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Equalizer:"
+          }
+        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -40796,12 +40848,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pas beeld aan:"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Equalizer:"
           }
         },
         "pl" : {
@@ -40846,7 +40892,7 @@
             "value" : "Equalizer:"
           }
         },
-        "sr-CS" : {
+        "sr-RS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ekvilajzer:"

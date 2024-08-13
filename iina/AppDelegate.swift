@@ -470,9 +470,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
     // Check if there are any players that are not shutdown. If all players are already shutdown
     // then application termination can proceed immediately. This will happen if there is only one
-    // player and shutdown was initiated by typing "q" in the player window. That sends a quit
-    // command directly to mpv causing mpv and the player to shutdown before application
-    // termination is initiated.
+    // player and shutdown was initiated by sending a quit command directly to mpv through it's IPC
+    // interface causing mpv and the player to shutdown before application termination is initiated.
     allPlayersHaveShutdown = true
     for player in PlayerCore.playerCores {
       if player.info.state != .shutDown {
@@ -495,6 +494,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     if OnlineSubtitle.loggedIn {
       canTerminateNow = false
       Logger.log("Waiting for log out of online subtitles provider to complete")
+    }
+
+    if HistoryController.shared.tasksOutstanding != 0 {
+      canTerminateNow = false
+      Logger.log("Waiting for saving of playback history to complete")
     }
 
     // If the user pressed Q and mpv initiated the termination then players will already be
@@ -586,13 +590,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
         // All players have shutdown.
         Logger.log("All players have shutdown")
       }
+      // If still logged in to subtitle providers then continue waiting.
       guard !OnlineSubtitle.loggedIn else { return }
-      // All players have shutdown. No longer logged into an online subtitles provider.
+      // If still still saving playback history then continue waiting.
+      guard HistoryController.shared.tasksOutstanding == 0 else { return }
+      // All players have shutdown. No longer logged into an online subtitles provider and saving of
+      // playback history has finished.
       Logger.log("Proceeding with application termination")
       // No longer need the timer that forces termination to proceed.
       timer.invalidate()
       // No longer need the observers for players stopping and shutting down, along with the
-      // observer for logout requests completing.
+      // observer for logout requests completing and saving of playback history finishing.
       ObjcUtils.silenced {
         observers.forEach {
           NotificationCenter.default.removeObserver($0)
@@ -635,6 +643,23 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
           level: .warning)
         return
       }
+      proceedWithTermination()
+    }
+    observers.append(observer)
+
+    // Establish an observer for saving of playback history finishing.
+    observer = center.addObserver(forName: .iinaHistoryTaskFinished, object: nil, queue: .main) { _ in
+      guard !self.timedOut else {
+        // Saving of playback history finished after IINA already timed out, gave up waiting, and
+        // told Cocoa to proceed with termination. This is a problem as it indicates playback
+        // history might be being lost.
+        Logger.log("Saving of playback history finished after application termination timed out",
+          level: .warning)
+        return
+      }
+      // If there are still tasks outstanding then must continue waiting.
+      guard HistoryController.shared.tasksOutstanding == 0 else { return }
+      Logger.log("Saving of playback history finished")
       proceedWithTermination()
     }
     observers.append(observer)

@@ -105,14 +105,16 @@ class JavascriptAPICore: JavascriptAPI, JavascriptAPICoreExportable {
   }
 
   func getHistory() -> Any {
-    return HistoryController.shared.history.map {
-      [
-        "name": $0.name,
-        "url": $0.url.absoluteString,
-        "date": $0.addedDate,
-        "progress": $0.mpvProgress?.second ?? NSNull(),
-        "duration": $0.duration.second
-      ] as [String: Any]
+    HistoryController.shared.$history.withLock {
+      $0.map {
+        [
+          "name": $0.name,
+          "url": $0.url.absoluteString,
+          "date": $0.addedDate,
+          "progress": $0.mpvProgress?.second ?? NSNull(),
+          "duration": $0.duration.second
+        ] as [String: Any]
+      }
     }
   }
 

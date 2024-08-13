@@ -148,4 +148,5 @@ extension Notification.Name {
   static let iinaLogoutCompleted = Notification.Name("iinaLoggedOutOfSubtitleProvider")
   static let iinaSecondSubVisibilityChanged = Notification.Name("iinaSecondSubVisibilityChanged")
   static let iinaSubVisibilityChanged = Notification.Name("iinaSubVisibilityChanged")
+  static let iinaHistoryTaskFinished = Notification.Name("iinaHistoryTaskFinished")
 }

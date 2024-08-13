@@ -926,7 +926,7 @@
             <point key="canvasLocation" x="-782" y="284"/>
         </customView>
         <customView id="ATO-g6-mEy" userLabel="Prefs &gt; Subtitle &gt; ASS Subtitles">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="99"/>
+            <rect key="frame" x="0.0" y="0.0" width="516" height="99"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField identifier="SectionTitleASS" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="utN-qX-5BH">
@@ -938,13 +938,13 @@
                     </textFieldCell>
                 </textField>
                 <box title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="oat-Ze-x0N">
-                    <rect key="frame" x="117" y="4" width="366" height="89"/>
+                    <rect key="frame" x="117" y="4" width="402" height="89"/>
                     <view key="contentView" id="flC-Mg-1G1">
-                        <rect key="frame" x="4" y="5" width="358" height="81"/>
+                        <rect key="frame" x="4" y="5" width="394" height="81"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Dg7-OH-h2a">
-                                <rect key="frame" x="6" y="31" width="92" height="16"/>
+                                <rect key="frame" x="37" y="31" width="92" height="16"/>
                                 <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Override level:" id="gAq-Vr-hRY">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -952,7 +952,7 @@
                                 </textFieldCell>
                             </textField>
                             <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7UX-IL-hdk">
-                                <rect key="frame" x="102" y="28" width="128" height="20"/>
+                                <rect key="frame" x="133" y="28" width="128" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="124" id="EJa-Kl-S4K"/>
                                 </constraints>
@@ -966,7 +966,7 @@
                                 </connections>
                             </slider>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FR3-Ar-5Dw">
-                                <rect key="frame" x="234" y="31" width="41" height="14"/>
+                                <rect key="frame" x="265" y="31" width="41" height="14"/>
                                 <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="strip" id="3H8-Ei-cTm">
                                     <font key="font" size="12" name="Menlo-Regular"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -981,7 +981,7 @@
                                 </connections>
                             </textField>
                             <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="yzs-wK-eRV">
-                                <rect key="frame" x="6" y="8" width="345" height="14"/>
+                                <rect key="frame" x="6" y="8" width="381" height="14"/>
                                 <textFieldCell key="cell" allowsUndo="NO" title="Descriptive text" id="Oaz-i3-yO0">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -996,7 +996,7 @@
                                 </connections>
                             </textField>
                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mqJ-QH-Pfa">
-                                <rect key="frame" x="27" y="53" width="304" height="21"/>
+                                <rect key="frame" x="45" y="53" width="304" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="mlq-Dy-mT3"/>
                                 </constraints>
@@ -1011,19 +1011,32 @@
                                     <action selector="subOverrideLevelSegmentedControlAction:" target="-2" id="ppE-LT-6az"/>
                                 </connections>
                             </segmentedControl>
+                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7PP-rl-aEl">
+                                <rect key="frame" x="307" y="28" width="18" height="19"/>
+                                <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5GV-a2-Wl9">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="smallSystem"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="subOverrideHelpBtnAction:" target="-2" id="Lzc-lr-9x8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="7PP-rl-aEl" firstAttribute="leading" secondItem="FR3-Ar-5Dw" secondAttribute="trailing" constant="4" id="BCI-lo-o7Z"/>
                             <constraint firstItem="FR3-Ar-5Dw" firstAttribute="leading" secondItem="7UX-IL-hdk" secondAttribute="trailing" constant="8" id="Bee-2p-M1w"/>
                             <constraint firstItem="mqJ-QH-Pfa" firstAttribute="top" secondItem="flC-Mg-1G1" secondAttribute="top" constant="8" id="D9e-SL-DJg"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7PP-rl-aEl" secondAttribute="trailing" constant="8" id="DQf-x2-owG"/>
+                            <constraint firstItem="yzs-wK-eRV" firstAttribute="leading" secondItem="flC-Mg-1G1" secondAttribute="leading" constant="8" id="Hi0-uw-iv6"/>
                             <constraint firstItem="7UX-IL-hdk" firstAttribute="leading" secondItem="Dg7-OH-h2a" secondAttribute="trailing" constant="8" id="M7q-XN-GCK"/>
                             <constraint firstItem="yzs-wK-eRV" firstAttribute="top" secondItem="7UX-IL-hdk" secondAttribute="bottom" constant="8" id="M9K-V0-Rte"/>
                             <constraint firstAttribute="trailing" secondItem="yzs-wK-eRV" secondAttribute="trailing" constant="9" id="Pyv-ZH-Hz8"/>
                             <constraint firstItem="FR3-Ar-5Dw" firstAttribute="firstBaseline" secondItem="Dg7-OH-h2a" secondAttribute="firstBaseline" id="SmM-ZC-GTJ"/>
-                            <constraint firstItem="Dg7-OH-h2a" firstAttribute="leading" secondItem="flC-Mg-1G1" secondAttribute="leading" constant="8" id="Z4Y-PR-Yvx"/>
+                            <constraint firstItem="7PP-rl-aEl" firstAttribute="firstBaseline" secondItem="FR3-Ar-5Dw" secondAttribute="firstBaseline" id="VMx-gK-T5O"/>
+                            <constraint firstItem="Dg7-OH-h2a" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="flC-Mg-1G1" secondAttribute="leading" constant="8" id="cnh-Zb-Kn0"/>
                             <constraint firstAttribute="bottom" secondItem="yzs-wK-eRV" secondAttribute="bottom" constant="8" id="dy2-2O-j9V"/>
-                            <constraint firstItem="yzs-wK-eRV" firstAttribute="leading" secondItem="Dg7-OH-h2a" secondAttribute="leading" id="g9B-pv-90g"/>
                             <constraint firstItem="mqJ-QH-Pfa" firstAttribute="centerX" secondItem="flC-Mg-1G1" secondAttribute="centerX" id="hyt-YB-IzG"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FR3-Ar-5Dw" secondAttribute="trailing" id="mcg-Bg-0C3"/>
+                            <constraint firstItem="7UX-IL-hdk" firstAttribute="centerX" secondItem="mqJ-QH-Pfa" secondAttribute="centerX" id="sNJ-Tz-doN"/>
                             <constraint firstItem="Dg7-OH-h2a" firstAttribute="top" secondItem="mqJ-QH-Pfa" secondAttribute="bottom" constant="8" id="tgc-aj-JLm"/>
                             <constraint firstItem="7UX-IL-hdk" firstAttribute="firstBaseline" secondItem="Dg7-OH-h2a" secondAttribute="firstBaseline" id="vb2-gn-8JY"/>
                         </constraints>
@@ -1039,7 +1052,7 @@
                 <constraint firstItem="utN-qX-5BH" firstAttribute="top" secondItem="ATO-g6-mEy" secondAttribute="top" constant="8" id="pVk-D1-vRK"/>
                 <constraint firstItem="utN-qX-5BH" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="ATO-g6-mEy" secondAttribute="leading" constant="120" id="z5s-tB-6So"/>
             </constraints>
-            <point key="canvasLocation" x="-782" y="-52.5"/>
+            <point key="canvasLocation" x="-800" y="-46"/>
         </customView>
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="ZpT-fB-Daq" userLabel="Prefs &gt; Subtitle &gt; Position">
             <rect key="frame" x="0.0" y="0.0" width="480" height="208"/>

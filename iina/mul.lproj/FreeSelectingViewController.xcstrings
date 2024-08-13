@@ -197,12 +197,6 @@
             "value" : "റദ്ദാക്കുക"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avbryt"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -213,6 +207,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annuleer"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avbryt"
           }
         },
         "pl" : {
@@ -257,7 +257,7 @@
             "value" : "Prekliči"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otkaži"
@@ -527,12 +527,6 @@
             "value" : "പ്രദേശം തിരഞ്ഞെടുക്കുക"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Velg område"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -543,6 +537,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Selecteer gebied"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Velg område"
           }
         },
         "pl" : {
@@ -587,7 +587,7 @@
             "value" : "Select Region"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Izaberi oblast"
@@ -857,12 +857,6 @@
             "value" : "ചെയ്തു"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ferdig"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -873,6 +867,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gereed"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ferdig"
           }
         },
         "pl" : {
@@ -917,7 +917,7 @@
             "value" : "Končano"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gotovo"
@@ -1187,12 +1187,6 @@
             "value" : "ആവശ്യമുള്ള പ്രദേശം തിരഞ്ഞെടുക്കാൻ വലിച്ചിടുക."
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dra for å velge ønsket område."
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1203,6 +1197,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sleep om een gebied te selecteren"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dra for å velge ønsket område."
           }
         },
         "pl" : {
@@ -1247,7 +1247,7 @@
             "value" : "Drag to select the desired region."
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prevucite da biste izabrali željenu oblast."

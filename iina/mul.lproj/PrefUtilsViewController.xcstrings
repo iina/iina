@@ -13,7 +13,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Clear Saved Playback Progress…"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Saved Playback Progress…"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Saved Playback Progress…"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Saved Playback Progress…"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Clear Saved Playback Progress…"
           }
         },
@@ -43,7 +67,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Clear Saved Playback Progress…"
           }
         },
@@ -63,6 +87,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Borrar el progreso de reproducción guardada…"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Saved Playback Progress…"
           }
         },
         "fa" : {
@@ -107,10 +137,22 @@
             "value" : "Mentett lejátszási folyamat törlése…"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Saved Playback Progress…"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bersihkan Progres Pemutaran yang Tersimpan…"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Saved Playback Progress…"
           }
         },
         "it" : {
@@ -125,6 +167,12 @@
             "value" : "保存済みの再生進度を消去する…"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Saved Playback Progress…"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -137,9 +185,21 @@
             "value" : "Notīrīt saglabāto atskaņošanas gaitu…"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Clear Saved Playback Progress…"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Saved Playback Progress…"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Clear Saved Playback Progress…"
           }
         },
@@ -149,22 +209,28 @@
             "value" : "Wis opgeslagen afspeelposities…"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Saved Playback Progress…"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wyczyść zapisane postępy odtwarzania…"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Limpar progresso de reprodução guardado…"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Limpar progresso de reprodução…"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limpar progresso de reprodução guardado…"
           }
         },
         "ro" : {
@@ -185,10 +251,22 @@
             "value" : "Vymazať uložené priebehy prehrávania…"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Saved Playback Progress…"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obriši sačuvani tok reprodukcije…"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Saved Playback Progress…"
           }
         },
         "sv" : {
@@ -197,10 +275,28 @@
             "value" : "Rensa sparad uppspelningsposition…"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Saved Playback Progress…"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Saved Playback Progress…"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kaydedilmiş Oynatma İlerlemelerini Temizle…"
+          }
+        },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Saved Playback Progress…"
           }
         },
         "uk" : {
@@ -209,9 +305,15 @@
             "value" : "Очистити збережений прогрес перегляду…"
           }
         },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Saved Playback Progress…"
+          }
+        },
         "vi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Clear Saved Playback Progress…"
           }
         },
@@ -245,6 +347,30 @@
             "value" : "الفيديو"
           }
         },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Video"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Video"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Video"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Video"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -271,7 +397,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Video"
           }
         },
@@ -291,6 +417,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vídeo"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Video"
           }
         },
         "fa" : {
@@ -335,9 +467,21 @@
             "value" : "Videó"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Video"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Video"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Video"
           }
         },
@@ -353,6 +497,12 @@
             "value" : "ビデオ"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Video"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -365,9 +515,21 @@
             "value" : "Video"
           }
         },
-        "nb" : {
+        "mk" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Video"
+          }
+        },
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "വീഡിയോ"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Video"
           }
         },
@@ -377,19 +539,25 @@
             "value" : "Video"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Video"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wideo"
+            "value" : "Obraz"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vídeo"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vídeo"
@@ -413,9 +581,21 @@
             "value" : "Video"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Video"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Video"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Video"
           }
         },
@@ -425,9 +605,27 @@
             "value" : "Video"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "காணொளி"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Video"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Video"
+          }
+        },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Video"
           }
         },
@@ -435,6 +633,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Відео"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Video"
           }
         },
         "vi" : {
@@ -446,13 +650,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "视频文件"
+            "value" : "视频"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "影片檔案"
+            "value" : "視訊"
           }
         }
       }
@@ -469,7 +673,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "The button below will delete all playback histories and entries in \"Open Recent\"."
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all playback histories and entries in \"Open Recent\"."
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all playback histories and entries in \"Open Recent\"."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all playback histories and entries in \"Open Recent\"."
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "The button below will delete all playback histories and entries in \"Open Recent\"."
           }
         },
@@ -499,7 +727,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "The button below will delete all playback histories and entries in \"Open Recent\"."
           }
         },
@@ -519,6 +747,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "El siguiente botón eliminará todos los historiales de reproducción y las entradas en \"Abrir reciente\"."
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all playback histories and entries in \"Open Recent\"."
           }
         },
         "fa" : {
@@ -563,10 +797,22 @@
             "value" : "Az alábbi gomb törölni fogja az lejátszási előzményeket és a bejegyzéseket a \"Mostanában megnyitott\" -ből."
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all playback histories and entries in \"Open Recent\"."
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tombol di bawah akan menghapus seluruh riwayat pemutaran dan daftar \"Buka Item Terkini\"."
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all playback histories and entries in \"Open Recent\"."
           }
         },
         "it" : {
@@ -581,6 +827,12 @@
             "value" : "このボタンをクリックすると「最近開いた項目」の再生履歴を全て消去します。"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all playback histories and entries in \"Open Recent\"."
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -593,9 +845,21 @@
             "value" : "Zemāk esošā poga izdzēsīs visu atskaņošanas vēsturi un ierakstus izvēlnē “Nesen atvērtie“."
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "The button below will delete all playback histories and entries in \"Open Recent\"."
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all playback histories and entries in \"Open Recent\"."
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "The button below will delete all playback histories and entries in \"Open Recent\"."
           }
         },
@@ -605,22 +869,28 @@
             "value" : "Wis de afspeelgeschiedenis en onderdelen in het \"Open recente bestanden\"-menu."
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all playback histories and entries in \"Open Recent\"."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Przycisk poniżej skasuje całą historię odtwarzań i wpisy w \"Ostatnio otwarte\""
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "O botão abaixo apagará todos os históricos e entradas de reprodução em \"Abrir recente\"."
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "O botão abaixo irá apagar todos os históricos de reprodução e entradas em \"Abrir Recenre\"."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O botão abaixo apagará todos os históricos e entradas de reprodução em \"Abrir recente\"."
           }
         },
         "ro" : {
@@ -641,10 +911,22 @@
             "value" : "Tlačítko popod vymaže celú históriu prehrávania."
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all playback histories and entries in \"Open Recent\"."
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dugme ispod izbrisaće celokupnu istoriju reprodukcije i stavke u meniju „Otvori nedavnu stavku“."
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all playback histories and entries in \"Open Recent\"."
           }
         },
         "sv" : {
@@ -653,10 +935,28 @@
             "value" : "Knappen nedan raderar all uppspelningshistorik och alla poster i \"Senaste\"."
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all playback histories and entries in \"Open Recent\"."
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all playback histories and entries in \"Open Recent\"."
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aşağıdaki düğme, 'Son Kullanılanları Aç'daki tüm oynatma geçmişlerini ve girdileri silecektir."
+          }
+        },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all playback histories and entries in \"Open Recent\"."
           }
         },
         "uk" : {
@@ -665,9 +965,15 @@
             "value" : "Кнопка нижче видалить усю історію перегляду та елементи меню «Відкрити останні»."
           }
         },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all playback histories and entries in \"Open Recent\"."
+          }
+        },
         "vi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "The button below will delete all playback histories and entries in \"Open Recent\"."
           }
         },
@@ -697,7 +1003,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Restore Alerts"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Alerts"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Alerts"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Alerts"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Restore Alerts"
           }
         },
@@ -715,7 +1045,7 @@
         },
         "da" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Restore Alerts"
           }
         },
@@ -727,7 +1057,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Restore Alerts"
           }
         },
@@ -749,15 +1079,21 @@
             "value" : "Restaurar alertas"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Alerts"
+          }
+        },
         "fa" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Restore Alerts"
           }
         },
         "fi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Restore Alerts"
           }
         },
@@ -775,7 +1111,7 @@
         },
         "hi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Restore Alerts"
           }
         },
@@ -791,10 +1127,22 @@
             "value" : "Riasztások visszaállítása"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Alerts"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pulihkan Peringatan"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Alerts"
           }
         },
         "it" : {
@@ -809,6 +1157,12 @@
             "value" : "アラートを復元"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Alerts"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -817,19 +1171,37 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Restore Alerts"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Restore Alerts"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Alerts"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Restore Alerts"
           }
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Restore Alerts"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Restore Alerts"
           }
         },
@@ -839,16 +1211,16 @@
             "value" : "Przywróć alerty"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restore Alerts"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Restaurar Alertas"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Alerts"
           }
         },
         "ro" : {
@@ -869,9 +1241,21 @@
             "value" : "Obnoviť varovania"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Restore Alerts"
+          }
+        },
+        "sr-CS" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Alerts"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Restore Alerts"
           }
         },
@@ -881,10 +1265,28 @@
             "value" : "Återställ varningar"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Alerts"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Alerts"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Uyarıları geri yükle"
+          }
+        },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Alerts"
           }
         },
         "uk" : {
@@ -893,9 +1295,15 @@
             "value" : "Відновити оповіщення"
           }
         },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Alerts"
+          }
+        },
         "vi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Restore Alerts"
           }
         },
@@ -925,7 +1333,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "The button below will delete all cached thumbnails."
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all cached thumbnails."
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all cached thumbnails."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all cached thumbnails."
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "The button below will delete all cached thumbnails."
           }
         },
@@ -955,7 +1387,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "The button below will delete all cached thumbnails."
           }
         },
@@ -975,6 +1407,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "El siguiente botón eliminará todas las miniaturas en caché."
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all cached thumbnails."
           }
         },
         "fa" : {
@@ -1019,10 +1457,22 @@
             "value" : "Az alábbi gomb törölni fogja az összes indexképet a gyorsítótárban."
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all cached thumbnails."
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tombol di bawah akan menghapus seluruh cache thumbnail."
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all cached thumbnails."
           }
         },
         "it" : {
@@ -1037,6 +1487,12 @@
             "value" : "このボタンをクリックするとキャッシュ済みサムネイルを全て消去します。"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all cached thumbnails."
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1049,9 +1505,21 @@
             "value" : "Zemāk esošā poga izdzēsīs visus kešatmiņā saglabātos sīkattēlus."
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "The button below will delete all cached thumbnails."
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all cached thumbnails."
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "The button below will delete all cached thumbnails."
           }
         },
@@ -1061,22 +1529,28 @@
             "value" : "Leeg de miniaturencache."
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all cached thumbnails."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Przycisk poniżej skasuje wszystkie przechowywane miniaturki."
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "O botão abaixo apagará todas as miniaturas em cache."
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "O botão abaixo irá apagar todas as miniaturas em cache."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O botão abaixo apagará todas as miniaturas em cache."
           }
         },
         "ro" : {
@@ -1097,10 +1571,22 @@
             "value" : "Tlačítko popod vymaže všetky uložené náhľady."
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all cached thumbnails."
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dugme ispod izbrisaće sve keširane sličice."
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all cached thumbnails."
           }
         },
         "sv" : {
@@ -1109,10 +1595,28 @@
             "value" : "Knappen nedan raderar alla cachade miniatyrbilder."
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all cached thumbnails."
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all cached thumbnails."
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aşağıdaki düğme önbellekteki tüm küçük resimleri temizleyecektir"
+          }
+        },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all cached thumbnails."
           }
         },
         "uk" : {
@@ -1121,9 +1625,15 @@
             "value" : "Кнопка нижче видалить усі кешовані мініатюри."
           }
         },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all cached thumbnails."
+          }
+        },
         "vi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "The button below will delete all cached thumbnails."
           }
         },
@@ -1153,7 +1663,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Set IINA as the Default Application…"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Set IINA as the Default Application…"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Set IINA as the Default Application…"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Set IINA as the Default Application…"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Set IINA as the Default Application…"
           }
         },
@@ -1183,7 +1717,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Set IINA as the Default Application…"
           }
         },
@@ -1203,6 +1737,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Establecer IINA como la aplicación predeterminada…"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Set IINA as the Default Application…"
           }
         },
         "fa" : {
@@ -1247,10 +1787,22 @@
             "value" : "IINA beállítása alapértelmezett alkalmazásként…"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Set IINA as the Default Application…"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tetapkan IINA Sebagai Aplikasi Utama…"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Set IINA as the Default Application…"
           }
         },
         "it" : {
@@ -1265,6 +1817,12 @@
             "value" : "IINAをデフォルトのアプリケーションに設定する…"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Set IINA as the Default Application…"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1277,9 +1835,21 @@
             "value" : "Iestatīt IINA kā noklusēto programmu…"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Set IINA as the Default Application…"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Set IINA as the Default Application…"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Set IINA as the Default Application…"
           }
         },
@@ -1289,22 +1859,28 @@
             "value" : "Stel IINA in als standaardprogramma…"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Set IINA as the Default Application…"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ustaw IINA jako domyślną aplikację…"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Definir IINA como aplicação predefinida…"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Definir IINA como o aplicativo padrão…"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Definir IINA como aplicação predefinida…"
           }
         },
         "ro" : {
@@ -1325,10 +1901,22 @@
             "value" : "Nastaviť IINA ako Predvolenú Aplikáciu…"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Set IINA as the Default Application…"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Postavi aplikaciju IINA kao podrazumevanu…"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Set IINA as the Default Application…"
           }
         },
         "sv" : {
@@ -1337,16 +1925,40 @@
             "value" : "Ställ in IINA som förvalt program…"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "இயல்புநிலை பயன்பாடாக IINAஐ அமை…"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Set IINA as the Default Application…"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "IINA'yı Varsayılan Uygulama Yap…"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Set IINA as the Default Application…"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Встановити IINA як стандартну програму…"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Set IINA as the Default Application…"
           }
         },
         "vi" : {
@@ -1381,7 +1993,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Cleared."
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Cleared."
           }
         },
@@ -1411,7 +2047,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Cleared."
           }
         },
@@ -1431,6 +2067,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Limpiado."
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
           }
         },
         "fa" : {
@@ -1475,10 +2117,22 @@
             "value" : "Törölve."
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Berhasil terhapus."
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
           }
         },
         "it" : {
@@ -1493,6 +2147,12 @@
             "value" : "消去しました。"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1505,9 +2165,21 @@
             "value" : "Iztīrīta."
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Cleared."
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Cleared."
           }
         },
@@ -1517,19 +2189,25 @@
             "value" : "Geleegd."
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wyczyszczono."
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Limpo."
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Limpo."
@@ -1553,10 +2231,22 @@
             "value" : "Vyčistené"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obrisano."
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
           }
         },
         "sv" : {
@@ -1565,10 +2255,28 @@
             "value" : "Rensat."
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "அழிக்கப்பட்டது."
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Temizlendi."
+          }
+        },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
           }
         },
         "uk" : {
@@ -1577,9 +2285,15 @@
             "value" : "Очищено."
           }
         },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
+          }
+        },
         "vi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Cleared."
           }
         },
@@ -1609,7 +2323,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
           }
         },
@@ -1627,7 +2365,7 @@
         },
         "da" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
           }
         },
@@ -1639,7 +2377,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
           }
         },
@@ -1661,15 +2399,21 @@
             "value" : "El botón de abajo restaurará todas las alertas que han sido suprimidas usando el \"No mostrar este mensaje de nuevo\" de la casilla."
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
+          }
+        },
         "fa" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
           }
         },
         "fi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
           }
         },
@@ -1687,7 +2431,7 @@
         },
         "hi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
           }
         },
@@ -1703,10 +2447,22 @@
             "value" : "Az alábbi gomb visszaállítja az összes olyan riasztást, amelyet a \"Ne jelenítse meg újra ezt az üzenetet\" jelölőnégyzet használatával elnyomott."
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tombol di bawah akan mengembalikan seluruh pemberitahuan yang disenyapkan dengan mencentang \"Jangan tampilkan pesan ini lagi.\""
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
           }
         },
         "it" : {
@@ -1721,6 +2477,12 @@
             "value" : "下のボタンは、「このメッセージを再表示しない」がチェックされたすべてのアラートを復元します。"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1729,19 +2491,37 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
           }
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
           }
         },
@@ -1751,16 +2531,16 @@
             "value" : "Poniższy przycisk przywróci wszystkie powiadomienia, które zostały usunięte za pomocą pola wyboru \"Nie pokazuj tego komunikatu ponownie\"."
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "O botão abaixo irá restaurar todos os alertas que foram suprimidos usando a opção \"Não mostrar esta mensagem novamente\"."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
           }
         },
         "ro" : {
@@ -1781,9 +2561,21 @@
             "value" : "Tlačidlo nižšie obnoví všetky upozornenia, ktoré boli potlačené zaškrtnutím políčka „Túto správu už nabudúce nezobrazovať“."
           }
         },
-        "sr-Latn" : {
+        "sl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
+          }
+        },
+        "sr-CS" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
           }
         },
@@ -1793,10 +2585,28 @@
             "value" : "Knappen nedan kommer att återställa alla varningar som dolts med kryssrutan \"Visa inte detta meddelandet igen\"."
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aşağıdaki düğme, \"Bu mesajı bir daha gösterme\" onay kutusu kullanılarak bastırılan tüm uyarıları geri yükleyecektir."
+          }
+        },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
           }
         },
         "uk" : {
@@ -1805,9 +2615,15 @@
             "value" : "Кнопка нижче відновить всі оповіщення, що були приховані за допомогою прапорця \"Не показувати це повідомлення знову\"."
           }
         },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
+          }
+        },
         "vi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
           }
         },
@@ -1837,7 +2653,31 @@
         },
         "ar" : {
           "stringUnit" : {
+            "state" : "new",
+            "value" : "Firefox"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Firefox"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
             "state" : "translated",
+            "value" : "Firefox"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Firefox"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Firefox"
           }
         },
@@ -1867,7 +2707,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Firefox"
           }
         },
@@ -1886,6 +2726,12 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Firefox"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Firefox"
           }
         },
@@ -1915,7 +2761,7 @@
         },
         "hi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Firefox"
           }
         },
@@ -1931,9 +2777,21 @@
             "value" : "Firefox"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Firefox"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Firefox"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Firefox"
           }
         },
@@ -1949,6 +2807,12 @@
             "value" : "Firefox"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Firefox"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1961,9 +2825,21 @@
             "value" : "Firefox"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Firefox"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Firefox"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Firefox"
           }
         },
@@ -1973,19 +2849,25 @@
             "value" : "Firefox"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Firefox"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mozilla Firefox"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Firefox"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Firefox"
@@ -2009,9 +2891,21 @@
             "value" : "Firefox"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Firefox"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Firefox"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Firefox"
           }
         },
@@ -2021,15 +2915,39 @@
             "value" : "Firefox"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Firefox"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Firefox"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Firefox"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Firefox"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Firefox"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Firefox"
           }
         },
@@ -2065,7 +2983,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Cleared."
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Cleared."
           }
         },
@@ -2095,7 +3037,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Cleared."
           }
         },
@@ -2117,6 +3059,12 @@
             "value" : "Limpiado."
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2132,7 +3080,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Effacé."
+            "value" : "Effacées."
           }
         },
         "he" : {
@@ -2159,22 +3107,40 @@
             "value" : "Törölve."
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Berhasil terhapus."
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Eliminata."
+            "value" : "Eliminati."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "消去しました。"
+          }
+        },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
           }
         },
         "ko" : {
@@ -2186,12 +3152,24 @@
         "lv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notīrīta."
+            "value" : "Iztīrīta."
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Cleared."
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Cleared."
           }
         },
@@ -2201,19 +3179,25 @@
             "value" : "Geleegd."
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wyczyszczono."
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Limpo."
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Limpo."
@@ -2237,10 +3221,22 @@
             "value" : "Vyčistené"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obrisano."
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
           }
         },
         "sv" : {
@@ -2249,10 +3245,28 @@
             "value" : "Rensat."
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "அழிக்கப்பட்டது."
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Temizlendi."
+          }
+        },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
           }
         },
         "uk" : {
@@ -2261,9 +3275,15 @@
             "value" : "Очищено."
           }
         },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cleared."
+          }
+        },
         "vi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Cleared."
           }
         },
@@ -2293,7 +3313,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."
           }
         },
@@ -2323,7 +3367,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."
           }
         },
@@ -2343,6 +3387,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Abrir enlaces o la página web actual en IINA con un solo clic. El sitio web debe ser compatible con youtube-dl."
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."
           }
         },
         "fa" : {
@@ -2387,10 +3437,22 @@
             "value" : "Nyissa meg a hivatkozásokat vagy a jelenlegi weboldalt az IINA-ban egyetlen kattintással. A weboldalnak támogatni a kell youtube-dl funkciót."
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Buka tautan atau situs yang sedang diakses di IINA dengan satu pencetan. Situs harus terdukung oleh youtube-dl."
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."
           }
         },
         "it" : {
@@ -2405,6 +3467,12 @@
             "value" : "ワンクリックでリンク先や今開いているWebページをIINAで開くことができます。youtube-dlに対応したウェブサイトでのみ動作します。"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2417,9 +3485,21 @@
             "value" : "Ar vienu klikšķi atvēr saišu vai pašreizējo vietnes saiti saturošo video failu IINA programmā. Vietnei ir jābūt yt-dlp, youtube-dl atbalstīto saišu sarakstā."
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."
           }
         },
@@ -2429,22 +3509,28 @@
             "value" : "Open links en webpagina's in IINA met één klik. De website moet door youtube-dl ondersteund worden."
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otwórz link lub obecną stronę WWW w IINA za pomocą jednego kliknięcia. Strona WWW musi być wspierana przez program youtube-dl."
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abrir links ou página atual no IINA com um clique. O site deve ser suportado pelo youtube-dl."
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Abrir links ou página da Web no IINA com um clique. O site deve ser suportado pelo youtube-dl."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir links ou página atual no IINA com um clique. O site deve ser suportado pelo youtube-dl."
           }
         },
         "ro" : {
@@ -2465,10 +3551,22 @@
             "value" : "Otvor odkazy v IINA s jedným kliknutím. Webstránka musí byť podporovaná youtube-dl."
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otvarajte veze ili trenutnu veb-stranicu u programu IINA jednim klikom. Veb-sajt mora podržavati program youtube-dl."
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."
           }
         },
         "sv" : {
@@ -2477,10 +3575,28 @@
             "value" : "Öppna länkar eller visad webbsida i IINA med ett klick. Webbsidan måste stödjas av youtube-dl."
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bağlantıları veya mevcut web sayfasını IINA'da tek bir tıklama ile açın. Web sitesi youtube-dl tarafından desteklenmelidir."
+          }
+        },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."
           }
         },
         "uk" : {
@@ -2489,9 +3605,15 @@
             "value" : "Відкрийте в IINA посилання або поточну веб-сторінку в одне клацання. Веб-сайт повинен бути сумісним з youtube-dl."
           }
         },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."
+          }
+        },
         "vi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."
           }
         },
@@ -2521,7 +3643,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Clear Thumbnail Cache…"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Thumbnail Cache…"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Thumbnail Cache…"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Thumbnail Cache…"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Clear Thumbnail Cache…"
           }
         },
@@ -2551,7 +3697,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Clear Thumbnail Cache…"
           }
         },
@@ -2571,6 +3717,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Limpiar caché de miniaturas …"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Thumbnail Cache…"
           }
         },
         "fa" : {
@@ -2615,10 +3767,22 @@
             "value" : "Indexkép gyorsítótér törlése…"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Thumbnail Cache…"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bersihkan Cache Thumbnail…"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Thumbnail Cache…"
           }
         },
         "it" : {
@@ -2633,6 +3797,12 @@
             "value" : "サムネイルキャッシュを消去する…"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Thumbnail Cache…"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2645,9 +3815,21 @@
             "value" : "Iztīrīt sīkattēlu kešatmiņu…"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Clear Thumbnail Cache…"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Thumbnail Cache…"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Clear Thumbnail Cache…"
           }
         },
@@ -2657,22 +3839,28 @@
             "value" : "Leeg miniaturencache…"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Thumbnail Cache…"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wyczyść pamięć podręczną miniaturek…"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Limpar Cache de Miniaturas…"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Limpar o cache de miniaturas…"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limpar Cache de Miniaturas…"
           }
         },
         "ro" : {
@@ -2693,10 +3881,22 @@
             "value" : "Vymazať Uložené Náhľady…"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Thumbnail Cache…"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obriši keš za sličice…"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Thumbnail Cache…"
           }
         },
         "sv" : {
@@ -2705,10 +3905,28 @@
             "value" : "Rensa cache för miniatyrbilder…"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Thumbnail Cache…"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Thumbnail Cache…"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Küçük Resim Önbelleğini Temizle…"
+          }
+        },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Thumbnail Cache…"
           }
         },
         "uk" : {
@@ -2717,9 +3935,15 @@
             "value" : "Очистити кеш мініатюр…"
           }
         },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Thumbnail Cache…"
+          }
+        },
         "vi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Clear Thumbnail Cache…"
           }
         },
@@ -2753,6 +3977,30 @@
             "value" : "حسناً"
           }
         },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добра"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "OK"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "OK"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2768,7 +4016,7 @@
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ok"
+            "value" : "OK"
           }
         },
         "de" : {
@@ -2798,19 +4046,25 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Aceptar"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "OK"
           }
         },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "قبول"
+            "value" : "باشه"
           }
         },
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ok"
+            "value" : "OK"
           }
         },
         "fr" : {
@@ -2843,9 +4097,21 @@
             "value" : "OK"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "OK"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "OK"
           }
         },
@@ -2861,6 +4127,12 @@
             "value" : "OK"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "OK"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2873,10 +4145,22 @@
             "value" : "Labi"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Godkjenn"
+            "value" : "ОК"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ശരി"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "OK"
           }
         },
         "nl" : {
@@ -2885,19 +4169,25 @@
             "value" : "OK"
           }
         },
-        "pl" : {
+        "no" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ok"
+            "value" : "Godkjenn"
           }
         },
-        "pt" : {
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
           }
         },
         "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
@@ -2921,15 +4211,39 @@
             "value" : "OK"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "V redu"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "U redu"
           }
         },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "У реду"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "சரி"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "OK"
           }
         },
@@ -2939,10 +4253,22 @@
             "value" : "Tamam"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "OK"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "ОК"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ٹھیک ہے"
           }
         },
         "vi" : {
@@ -2954,7 +4280,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "好"
+            "value" : "确认"
           }
         },
         "zh-Hant" : {
@@ -2979,6 +4305,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "الصوت"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Audio"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Audio"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Audio"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Audio"
           }
         },
         "ca" : {
@@ -3007,7 +4357,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Audio"
           }
         },
@@ -3026,6 +4376,12 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Audio"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Audio"
           }
         },
@@ -3062,7 +4418,7 @@
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zvuk"
+            "value" : "Audio"
           }
         },
         "hu" : {
@@ -3071,9 +4427,21 @@
             "value" : "Hang"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Audio"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Audio"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Audio"
           }
         },
@@ -3089,6 +4457,12 @@
             "value" : "オーディオ"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Audio"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3098,13 +4472,25 @@
         "lv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Skaņas"
+            "value" : "Skaņa"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lyd"
+            "state" : "new",
+            "value" : "Audio"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Audio"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Audio"
           }
         },
         "nl" : {
@@ -3113,19 +4499,25 @@
             "value" : "Audio"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lyd"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dźwięk"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Áudio"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Áudio"
@@ -3149,10 +4541,22 @@
             "value" : "Zvuk"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Audio"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zvuk"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Audio"
           }
         },
         "sv" : {
@@ -3161,16 +4565,40 @@
             "value" : "Ljud"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ஒலி"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Audio"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ses"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Audio"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Аудіо"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Audio"
           }
         },
         "vi" : {
@@ -3182,13 +4610,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "音频文件"
+            "value" : "音频"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "音訊檔案"
+            "value" : "音訊"
           }
         }
       }
@@ -3207,6 +4635,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "إلغاء"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ləğv et"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Скасаваць"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отмяна"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "বাতিল"
           }
         },
         "ca" : {
@@ -3257,10 +4709,16 @@
             "value" : "Cancelar"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utzi"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "انصراف"
+            "value" : "لغو"
           }
         },
         "fi" : {
@@ -3299,10 +4757,22 @@
             "value" : "Mégse"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Չեղարկել"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Batal"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hætta við"
           }
         },
         "it" : {
@@ -3317,6 +4787,12 @@
             "value" : "キャンセル"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ರದ್ದುಮಾಡು"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3329,10 +4805,22 @@
             "value" : "Atcelt"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avbryt"
+            "value" : "Откажи"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "റദ്ദാക്കുക"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cancel"
           }
         },
         "nl" : {
@@ -3341,19 +4829,25 @@
             "value" : "Annuleer"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avbryt"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Anuluj"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancelar"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancelar"
@@ -3377,10 +4871,22 @@
             "value" : "Zrušiť"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prekliči"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otkaži"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Откажи"
           }
         },
         "sv" : {
@@ -3389,16 +4895,40 @@
             "value" : "Avbryt"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ரத்துசெய்"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ยกเลิก"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vazgeç"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cancel"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Відміна"
+            "value" : "Скасувати"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "منسوخ"
           }
         },
         "vi" : {
@@ -3437,6 +4967,30 @@
             "value" : "قائمة التشغيل"
           }
         },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Playlist"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Playlist"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Playlist"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Playlist"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3463,7 +5017,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Playlist"
           }
         },
@@ -3483,6 +5037,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lista de reproducción"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Playlist"
           }
         },
         "fa" : {
@@ -3527,10 +5087,22 @@
             "value" : "Lejátszási lista"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Playlist"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Playlist"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spilunarlisti"
           }
         },
         "it" : {
@@ -3545,6 +5117,12 @@
             "value" : "プレイリスト"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Playlist"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3554,13 +5132,25 @@
         "lv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Atskaņošanas saraksta"
+            "value" : "Atskaņošanas saraksts"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Spilleliste"
+            "state" : "new",
+            "value" : "Playlist"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Playlist"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Playlist"
           }
         },
         "nl" : {
@@ -3569,22 +5159,28 @@
             "value" : "Afspeellijst"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spilleliste"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lista odtwarzania"
-          }
-        },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lista de Reprodução"
+            "value" : "Playlista"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Playlist"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lista de Reprodução"
           }
         },
         "ro" : {
@@ -3605,16 +5201,40 @@
             "value" : "Zoznam"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Playlist"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Plejlista"
           }
         },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Плејлиста"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Spellistor"
+            "value" : "Spellista"
+          }
+        },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Playlist"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Playlist"
           }
         },
         "tr" : {
@@ -3623,10 +5243,22 @@
             "value" : "Oynatma Listesi"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Playlist"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Плейлист"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Playlist"
           }
         },
         "vi" : {
@@ -3638,13 +5270,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "播放列表文件"
+            "value" : "播放列表"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "播放列表檔案"
+            "value" : "播放列表"
           }
         }
       }
@@ -3661,7 +5293,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Clear Playback History…"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Playback History…"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Playback History…"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Playback History…"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Clear Playback History…"
           }
         },
@@ -3691,7 +5347,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Clear Playback History…"
           }
         },
@@ -3711,6 +5367,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Borrar el historial de reproducción…"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Playback History…"
           }
         },
         "fa" : {
@@ -3755,10 +5417,22 @@
             "value" : "Lejátszási elõzmények törlése…"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Playback History…"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bersihkan Riwayat Pemutaran…"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Playback History…"
           }
         },
         "it" : {
@@ -3773,6 +5447,12 @@
             "value" : "再生履歴を消去する…"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Playback History…"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3785,9 +5465,21 @@
             "value" : "Notīrīt atskaņošanas vēsturi…"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Clear Playback History…"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Playback History…"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Clear Playback History…"
           }
         },
@@ -3797,22 +5489,28 @@
             "value" : "Wis afspeelgeschiedenis…"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Playback History…"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wyczyść historię odtwarzania…"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Limpar Histórico de Reprodução…"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Limpar histórico de reprodução…"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limpar Histórico de Reprodução…"
           }
         },
         "ro" : {
@@ -3833,10 +5531,22 @@
             "value" : "Vymazať Históriu Prehrávania…"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Playback History…"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obriši istoriju reprodukcije…"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Playback History…"
           }
         },
         "sv" : {
@@ -3845,16 +5555,40 @@
             "value" : "Rensa uppspelningshistorik…"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Playback History…"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Playback History…"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Oynatma Geçmişini Temizle…"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Playback History…"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Очистити історію перегляду…"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Playback History…"
           }
         },
         "vi" : {
@@ -3889,7 +5623,31 @@
         },
         "ar" : {
           "stringUnit" : {
+            "state" : "new",
+            "value" : "Default Application"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default Application"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
             "state" : "translated",
+            "value" : "Прадвызначаная праграма"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default Application"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Default Application"
           }
         },
@@ -3919,7 +5677,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Default Application"
           }
         },
@@ -3939,6 +5697,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aplicación predeterminada"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default Application"
           }
         },
         "fa" : {
@@ -3983,10 +5747,22 @@
             "value" : "Alapértelmezett alkalmazás"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default Application"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aplikasi Utama"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default Application"
           }
         },
         "it" : {
@@ -4001,6 +5777,12 @@
             "value" : "デフォルトのアプリケーション"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default Application"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4013,9 +5795,21 @@
             "value" : "Noklusētā programma"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Default Application"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default Application"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Default Application"
           }
         },
@@ -4025,22 +5819,28 @@
             "value" : "Standaardprogramma"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default Application"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Domyślna aplikacja"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aplicação Predefinida"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aplicação padrão"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aplicação Predefinida"
           }
         },
         "ro" : {
@@ -4061,10 +5861,22 @@
             "value" : "Predvolená Aplikácia"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default Application"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Podrazumevana aplikacija"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default Application"
           }
         },
         "sv" : {
@@ -4073,16 +5885,40 @@
             "value" : "Förvalt program"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "இயல்புநிலை பயன்பாடு"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default Application"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Varsayılan Uygulama"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default Application"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Стандартна програма"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Default Application"
           }
         },
         "vi" : {
@@ -4117,7 +5953,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."
           }
         },
@@ -4147,7 +6007,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."
           }
         },
@@ -4167,6 +6027,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "El siguiente botón eliminará todos los archivos en la carpeta \"ver más tarde\". Estos archivos contienen todos los avances de reproducción guardados y las configuraciones aplicadas durante la reproducción."
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."
           }
         },
         "fa" : {
@@ -4211,10 +6077,22 @@
             "value" : "Az alábbi gomb törölni fogja az összes fájl a \"Később megnézem\" mappából. Ezek a fájlok tartalmazzák a lejátszás folyamatát és beállításokat amiket a lejátszás során elvégeztél."
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tombol di bawah akan menghapus semua file di folder \"Putar Nanti\". File ini berisi semua progres pemutaran yang tersimpan berikut pengaturan yang diterapkan saat pemutaran."
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."
           }
         },
         "it" : {
@@ -4229,6 +6107,12 @@
             "value" : "以下のボタンをクリックすると「あとで見る」フォルダーにある全てのファイルが消去されます。これらのファイルには再生進度や再生中に適用された設定が含まれています。"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4241,9 +6125,21 @@
             "value" : "Zemāk esošā poga izdzēsīs visus failus, kas atrodas \"Skatīties vēlāk\" mapē. Šie faili satur pēdējās atskaņošanas pozīcijas un atskaņošanas laikā izmantotos iestatījumus."
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."
           }
         },
@@ -4253,22 +6149,28 @@
             "value" : "Wis bestanden in de \"bekijk later\" map. Deze bestanden bevatten de opgeslagen afspeelposities."
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Przycisk poniżej usunie wszsytkie pliki z folderu \"obejrzyj później\". Te pliki zawierają zapisane postępy odtwarzania oraz dodatkowe ustawienia nałożone podczas odtwarzania."
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "O botão abaixo apagará todos os arquivos na pasta \"Assistir mais tarde\". Estes arquivos contêm todo o progresso de reprodução guardado e configurações aplicadas durante a reprodução."
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "O botão abaixo irá apagar todos os arquivos na pasta \"assistir depois\". Esses arquivos contêm todos os progressos e configurações de reprodução salvos aplicados durante a reprodução."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O botão abaixo apagará todos os arquivos na pasta \"Assistir mais tarde\". Estes arquivos contêm todo o progresso de reprodução guardado e configurações aplicadas durante a reprodução."
           }
         },
         "ro" : {
@@ -4289,10 +6191,22 @@
             "value" : "Tlačítko popod vymaže všetky súbory v \"pozrieť neskôr\" zložke. Tieto súbory obsahujú posledné pozície prehrávaní a nastavenia aplikované počas prehrávaní."
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dugme ispod izbrisaće sve datoteke u fascikli „Gledaj kasnije“. Te datoteke sadrže celokupan sačuvani tok reprodukcije i postavke primenjene tokom reprodukcije."
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."
           }
         },
         "sv" : {
@@ -4301,10 +6215,28 @@
             "value" : "Knappen nedan raderar alla filer i \"titta senare\"-mappen. Dessa filer innehåller alla sparade uppspelningspositioner och inställningar som angetts under uppspelning."
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aşağıdaki düğme \"daha sonra izle\" klasöründeki tüm dosyaları silecektir. Bu dosyalar kaydedilmiş tüm oynatma ilerlemelerini ve oynatma sırasında uygulanan ayarları içerir."
+          }
+        },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."
           }
         },
         "uk" : {
@@ -4313,9 +6245,15 @@
             "value" : "Кнопка нижче видалить усі файли з папки відкладеного перегляду. Ці файли містять увесь прогрес перегляду та налаштування, застосовані під час перегляду."
           }
         },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."
+          }
+        },
         "vi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."
           }
         },
@@ -4345,7 +6283,31 @@
         },
         "ar" : {
           "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Cache"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Cache"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
             "state" : "translated",
+            "value" : "Ачысціць кэш"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Cache"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Clear Cache"
           }
         },
@@ -4375,7 +6337,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Clear Cache"
           }
         },
@@ -4395,6 +6357,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Limpiar cache"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Cache"
           }
         },
         "fa" : {
@@ -4439,10 +6407,22 @@
             "value" : "Gyorsítótár ürítése"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Cache"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bersihkan Cache"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Cache"
           }
         },
         "it" : {
@@ -4457,6 +6437,12 @@
             "value" : "キャッシュを消去する"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Cache"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4469,9 +6455,21 @@
             "value" : "Tīrīt kešatmiņas"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Clear Cache"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Cache"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Clear Cache"
           }
         },
@@ -4481,19 +6479,25 @@
             "value" : "Leeg caches"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Cache"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wyczyść pamięć podręczną"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Limpar Cache"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Limpar Cache"
@@ -4517,10 +6521,22 @@
             "value" : "Vymazať Cache"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Cache"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obriši keš"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Cache"
           }
         },
         "sv" : {
@@ -4529,16 +6545,40 @@
             "value" : "Rensa cache"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Cache"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Cache"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Önbelleği Temizle"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Cache"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Очистити кеш"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Clear Cache"
           }
         },
         "vi" : {
@@ -4573,7 +6613,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Calculating…"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Calculating…"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Calculating…"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Calculating…"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Calculating…"
           }
         },
@@ -4603,7 +6667,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Calculating…"
           }
         },
@@ -4623,6 +6687,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Calculando…"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Calculating…"
           }
         },
         "fa" : {
@@ -4667,10 +6737,22 @@
             "value" : "Számolás…"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Calculating…"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Menghitung…"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Calculating…"
           }
         },
         "it" : {
@@ -4685,6 +6767,12 @@
             "value" : "計算中…"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Calculating…"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4697,9 +6785,21 @@
             "value" : "Aprēķina…"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Calculating…"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Calculating…"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Calculating…"
           }
         },
@@ -4709,22 +6809,28 @@
             "value" : "Berekenen…"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Calculating…"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obliczanie…"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "A calcular…"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Calculando…"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A calcular…"
           }
         },
         "ro" : {
@@ -4745,10 +6851,22 @@
             "value" : "Vypočítavam…"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Calculating…"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Izračunavanje…"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Calculating…"
           }
         },
         "sv" : {
@@ -4757,16 +6875,40 @@
             "value" : "Beräknar…"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Calculating…"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Calculating…"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hesaplanıyor…"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Calculating…"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Обчислюю…"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Calculating…"
           }
         },
         "vi" : {
@@ -4801,7 +6943,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Current thumbnail cache:"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Current thumbnail cache:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Current thumbnail cache:"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Current thumbnail cache:"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Current thumbnail cache:"
           }
         },
@@ -4831,7 +6997,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Current thumbnail cache:"
           }
         },
@@ -4851,6 +7017,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Caché de miniaturas actual:"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Current thumbnail cache:"
           }
         },
         "fa" : {
@@ -4895,10 +7067,22 @@
             "value" : "Jelenlegi indexkép cache:"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Current thumbnail cache:"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cache thumbnail saat ini:"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Current thumbnail cache:"
           }
         },
         "it" : {
@@ -4913,6 +7097,12 @@
             "value" : "現在のサムネイルキャッシュ量:"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Current thumbnail cache:"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4925,9 +7115,21 @@
             "value" : "Izmantotais sīkattēlu kešatmiņas lielums:"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Current thumbnail cache:"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Current thumbnail cache:"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Current thumbnail cache:"
           }
         },
@@ -4937,19 +7139,25 @@
             "value" : "Huidige miniaturencache:"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Current thumbnail cache:"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obecna pamięć podręczna miniaturek:"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cache de miniaturas atual:"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cache de miniaturas atual:"
@@ -4973,10 +7181,22 @@
             "value" : "Aktuálne uložené náhľady:"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Current thumbnail cache:"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Trenutni keš za sličice:"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Current thumbnail cache:"
           }
         },
         "sv" : {
@@ -4985,10 +7205,28 @@
             "value" : "Nuvarande cache för miniatyrbilder:"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Current thumbnail cache:"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Current thumbnail cache:"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mevcut küçük resim önbelleği:"
+          }
+        },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Current thumbnail cache:"
           }
         },
         "uk" : {
@@ -4997,9 +7235,15 @@
             "value" : "Поточний кеш мініатюр:"
           }
         },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Current thumbnail cache:"
+          }
+        },
         "vi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Current thumbnail cache:"
           }
         },
@@ -5029,7 +7273,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Please select the media types that you want to make IINA as the default Application for."
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Please select the media types that you want to make IINA as the default Application for."
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Please select the media types that you want to make IINA as the default Application for."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Please select the media types that you want to make IINA as the default Application for."
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Please select the media types that you want to make IINA as the default Application for."
           }
         },
@@ -5059,7 +7327,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Please select the media types that you want to make IINA as the default Application for."
           }
         },
@@ -5079,6 +7347,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Por favor, seleccione los tipos de archivo para los cuales desea que IINA sea la aplicación predeterminada"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Please select the media types that you want to make IINA as the default Application for."
           }
         },
         "fa" : {
@@ -5123,10 +7397,22 @@
             "value" : "Kérjük, válassza ki azokat a médiatípusokat, amelyekhez az IINA-t szeretné alapértelmezett alkalmazásként megadni."
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Please select the media types that you want to make IINA as the default Application for."
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pilih jenis media yang Anda ingin menetapkan IINA sebagai aplikasi utamanya."
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Please select the media types that you want to make IINA as the default Application for."
           }
         },
         "it" : {
@@ -5141,6 +7427,12 @@
             "value" : "IINAをデフォルトの再生アプリケーションに設定したいメディアの種類を選択してください。"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Please select the media types that you want to make IINA as the default Application for."
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5153,9 +7445,21 @@
             "value" : "Lūdzu, atlasiet kādus faila tipus vēlaties atskaņot IINA programmā pēc noklusējuma."
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Please select the media types that you want to make IINA as the default Application for."
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Please select the media types that you want to make IINA as the default Application for."
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Please select the media types that you want to make IINA as the default Application for."
           }
         },
@@ -5165,22 +7469,28 @@
             "value" : "Stel IINA in als standaardprogramma voor de volgende bestandstypes."
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Please select the media types that you want to make IINA as the default Application for."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wybierz proszę typy plików multimedialnych dla których IINA ma być domyślną aplikacją."
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Por favor, selecione os tipos de mídia que você deseja definir IINA como o aplicativo padrão."
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Por favor, selecione os tipos de mídia que você deseja fazer IINA como o aplicativo padrão."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Por favor, selecione os tipos de mídia que você deseja definir IINA como o aplicativo padrão."
           }
         },
         "ro" : {
@@ -5201,10 +7511,22 @@
             "value" : "Prosím označte druhy médií, pre ktoré chcete nastaviť IINA ako Predvolenú Aplikáciu."
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Please select the media types that you want to make IINA as the default Application for."
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Izaberite tipove medijski datoteka za koje želite da IINA bude podrazumevana aplikacija."
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Please select the media types that you want to make IINA as the default Application for."
           }
         },
         "sv" : {
@@ -5213,16 +7535,40 @@
             "value" : "Vänligen markera de mediatyper för vilka du vill göra IINA till förvalt program."
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Please select the media types that you want to make IINA as the default Application for."
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Please select the media types that you want to make IINA as the default Application for."
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lütfen IINA'yı varsayılan Uygulama olarak yapmak istediğiniz medya türlerini seçin."
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Please select the media types that you want to make IINA as the default Application for."
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Будь ласка, оберіть типи медіафайлів, для яких ви хочете призначити IINA стандартною програмою."
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Please select the media types that you want to make IINA as the default Application for."
           }
         },
         "vi" : {
@@ -5257,7 +7603,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Restored."
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restored."
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restored."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restored."
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Restored."
           }
         },
@@ -5275,7 +7645,7 @@
         },
         "da" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Restored."
           }
         },
@@ -5287,7 +7657,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Restored."
           }
         },
@@ -5309,15 +7679,21 @@
             "value" : "Restaurado."
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restored."
+          }
+        },
         "fa" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Restored."
           }
         },
         "fi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Restored."
           }
         },
@@ -5335,7 +7711,7 @@
         },
         "hi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Restored."
           }
         },
@@ -5351,10 +7727,22 @@
             "value" : "Helyreállítva."
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restored."
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Berhasil dipulihkan."
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restored."
           }
         },
         "it" : {
@@ -5369,6 +7757,12 @@
             "value" : "復元しました。"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restored."
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5377,19 +7771,37 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Restored."
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Restored."
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restored."
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Restored."
           }
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Restored."
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Restored."
           }
         },
@@ -5399,16 +7811,16 @@
             "value" : "Przywrócono."
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restored."
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Restaurado."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restored."
           }
         },
         "ro" : {
@@ -5429,9 +7841,21 @@
             "value" : "Obnovené."
           }
         },
-        "sr-Latn" : {
+        "sl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Restored."
+          }
+        },
+        "sr-CS" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restored."
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Restored."
           }
         },
@@ -5441,10 +7865,28 @@
             "value" : "Återställt."
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restored."
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restored."
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geri yüklendi."
+          }
+        },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restored."
           }
         },
         "uk" : {
@@ -5453,9 +7895,15 @@
             "value" : "Відновлено."
           }
         },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restored."
+          }
+        },
         "vi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Restored."
           }
         },
@@ -5485,7 +7933,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Restore Suppressed Alerts…"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Suppressed Alerts…"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Suppressed Alerts…"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Suppressed Alerts…"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Restore Suppressed Alerts…"
           }
         },
@@ -5503,7 +7975,7 @@
         },
         "da" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Restore Suppressed Alerts…"
           }
         },
@@ -5515,7 +7987,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Restore Suppressed Alerts…"
           }
         },
@@ -5537,15 +8009,21 @@
             "value" : "Restaurar alertas reprimidas…"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Suppressed Alerts…"
+          }
+        },
         "fa" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Restore Suppressed Alerts…"
           }
         },
         "fi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Restore Suppressed Alerts…"
           }
         },
@@ -5563,7 +8041,7 @@
         },
         "hi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Restore Suppressed Alerts…"
           }
         },
@@ -5579,10 +8057,22 @@
             "value" : "Az elnyomott figyelmeztetések visszaállítása…"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Suppressed Alerts…"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pulihkan Pemberitahuan Senyap…"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Suppressed Alerts…"
           }
         },
         "it" : {
@@ -5597,6 +8087,12 @@
             "value" : "ダイアログの警告をリセット…"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Suppressed Alerts…"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5605,19 +8101,37 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Restore Suppressed Alerts…"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Restore Suppressed Alerts…"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Suppressed Alerts…"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Restore Suppressed Alerts…"
           }
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Restore Suppressed Alerts…"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Restore Suppressed Alerts…"
           }
         },
@@ -5627,16 +8141,16 @@
             "value" : "Przywróć zablokowane alerty…"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restore Suppressed Alerts…"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Restaurar Alertas Suprimidos…"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Suppressed Alerts…"
           }
         },
         "ro" : {
@@ -5657,9 +8171,21 @@
             "value" : "Obnoviť potlačené upozornenia…"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Restore Suppressed Alerts…"
+          }
+        },
+        "sr-CS" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Suppressed Alerts…"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Restore Suppressed Alerts…"
           }
         },
@@ -5669,10 +8195,28 @@
             "value" : "Återställ dolda varningar…"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Suppressed Alerts…"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Suppressed Alerts…"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bastırılmış Uyarıları Geri Yükle…"
+          }
+        },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Suppressed Alerts…"
           }
         },
         "uk" : {
@@ -5681,9 +8225,15 @@
             "value" : "Відновити приховані оповіщення…"
           }
         },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Restore Suppressed Alerts…"
+          }
+        },
         "vi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Restore Suppressed Alerts…"
           }
         },
@@ -5713,7 +8263,31 @@
         },
         "ar" : {
           "stringUnit" : {
+            "state" : "new",
+            "value" : "Chrome"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Chrome"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
             "state" : "translated",
+            "value" : "Chrome"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Chrome"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Chrome"
           }
         },
@@ -5743,7 +8317,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Chrome"
           }
         },
@@ -5762,6 +8336,12 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Chrome"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Chrome"
           }
         },
@@ -5791,7 +8371,7 @@
         },
         "hi" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Chrome"
           }
         },
@@ -5807,9 +8387,21 @@
             "value" : "Chrome"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Chrome"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Chrome"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Chrome"
           }
         },
@@ -5825,6 +8417,12 @@
             "value" : "Chrome"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Chrome"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5837,9 +8435,21 @@
             "value" : "Chrome"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Chrome"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Chrome"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Chrome"
           }
         },
@@ -5849,19 +8459,25 @@
             "value" : "Chrome"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Chrome"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chrome"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chrome"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chrome"
@@ -5885,9 +8501,21 @@
             "value" : "Chrome"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Chrome"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Chrome"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Chrome"
           }
         },
@@ -5897,15 +8525,39 @@
             "value" : "Chrome"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "நிறமி"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Chrome"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chrome"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Chrome"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Chrome"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Chrome"
           }
         },
@@ -5941,7 +8593,31 @@
         },
         "ar" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Get Browser Extensions for IINA"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Get Browser Extensions for IINA"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Get Browser Extensions for IINA"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Get Browser Extensions for IINA"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Get Browser Extensions for IINA"
           }
         },
@@ -5971,7 +8647,7 @@
         },
         "el" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Get Browser Extensions for IINA"
           }
         },
@@ -5991,6 +8667,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obtener extensiones de navegador para IINA"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Get Browser Extensions for IINA"
           }
         },
         "fa" : {
@@ -6035,10 +8717,22 @@
             "value" : "Böngészõ bõvitmény az IINA-hoz"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Get Browser Extensions for IINA"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dapatkan ekstensi browser untuk IINA"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Get Browser Extensions for IINA"
           }
         },
         "it" : {
@@ -6053,6 +8747,12 @@
             "value" : "IINAのブラウザ拡張機能を使う"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Get Browser Extensions for IINA"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6065,9 +8765,21 @@
             "value" : "Iegūt IINA pārlūkprogrammas paplašinājumus"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
+            "value" : "Get Browser Extensions for IINA"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Get Browser Extensions for IINA"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Get Browser Extensions for IINA"
           }
         },
@@ -6077,22 +8789,28 @@
             "value" : "Download browserextensies voor IINA"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Get Browser Extensions for IINA"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zdobądź rozszerzenie przeglądarki dla IINA"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Obter Extensões de Navegador para IINA"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obter extensões de navegador para IINA"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obter Extensões de Navegador para IINA"
           }
         },
         "ro" : {
@@ -6113,10 +8831,22 @@
             "value" : "Získať IINA rozšírenie pre internetové prehliadače"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Get Browser Extensions for IINA"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nabavi proširenja pregledača za aplikaciju IINA"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Get Browser Extensions for IINA"
           }
         },
         "sv" : {
@@ -6125,16 +8855,40 @@
             "value" : "Skaffa webbläsartillägg till IINA"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Get Browser Extensions for IINA"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Get Browser Extensions for IINA"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "IINA için Tarayıcı Eklentisi Edinin"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Get Browser Extensions for IINA"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Отримати розширення браузерів для IINA"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Get Browser Extensions for IINA"
           }
         },
         "vi" : {

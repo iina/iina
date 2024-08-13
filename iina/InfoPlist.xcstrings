@@ -1,0 +1,354 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "3GPP File" : {
+
+    },
+    "3GPP2 File" : {
+
+    },
+    "AAC file" : {
+
+    },
+    "Advanced Streaming Format" : {
+
+    },
+    "AIFF file" : {
+
+    },
+    "Apple QuickTime container" : {
+
+    },
+    "AVI container" : {
+
+    },
+    "CFBundleName" : {
+      "comment" : "Bundle name",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "IINA"
+          }
+        }
+      }
+    },
+    "Digital Audio" : {
+
+    },
+    "DivX file" : {
+
+    },
+    "DV file" : {
+
+    },
+    "FLAC Audio File" : {
+
+    },
+    "Flash Video File" : {
+
+    },
+    "GIF image" : {
+
+    },
+    "IINA Plugin" : {
+
+    },
+    "IINA Plugin Package" : {
+
+    },
+    "Matroska Audio File" : {
+
+    },
+    "Matroska Video File" : {
+
+    },
+    "Monkey's Audio Lossless Audio" : {
+
+    },
+    "MPEG Audio File" : {
+
+    },
+    "MPEG Video File" : {
+
+    },
+    "MPEG-2 Stream" : {
+
+    },
+    "MPEG3 Audio File" : {
+
+    },
+    "MPEG4 Audio File" : {
+
+    },
+    "MPEG4 Video File" : {
+
+    },
+    "NSHumanReadableCopyright" : {
+      "comment" : "Copyright (human-readable)",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "af" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2024\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حقوق النشر © 2017-2024\nCollider LI, et al.\nصدر تحت GPLv3."
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2024\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2024\nCollider LI, et al.\nŠířeno pod GPLv3."
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2024\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Veröffentlicht unter GPLv3"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2024\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Copyright © 2017-2024\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2024\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2024\nCollider LI, et al.\nPublicado bajo licencia GPLv3."
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2024\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2024\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright ©️ 2017-2024\nCollider LI, et al.\nPublié sous GPLv3."
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "זכויות יוצרים © 2017-2024\nCollider LI ואחרים.\nמשוחרר תחת רישיון GPLv3."
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GPLv3 के तहत जारी किया गया।"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autorska prava © 2017. – 2024.\nCollider LI i drugi\nObjavljeno s licencom GPLv3."
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2024\nCollider LI, et al.\nKözzétéve GPLv3 alatt."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2024\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Distribuito sotto licenza GPLv3"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GPLv3 ライセンスの元で配布"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GPLv3에 의거하여 배포됨"
+          }
+        },
+        "lv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2024\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2024\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2024\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wydane na licencji GPLv3."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2024\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2024\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2024\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выпущено под лицензией GPLv3."
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Šírené pod GPLv3"
+          }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2024\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2024\nCollider LI, m.fl.\nSläppt under GPLv3."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2024\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "По Ліцензії GPLv3."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2024\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "基于 GPLv3 授权发布"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "基於 GPLv3 授權發佈"
+          }
+        }
+      }
+    },
+    "Ogg Audio File" : {
+
+    },
+    "Ogg Video File" : {
+
+    },
+    "OPUS file" : {
+
+    },
+    "RealPlayer Media Files" : {
+
+    },
+    "VOB File (DVD Video)" : {
+
+    },
+    "WAVE Audio File" : {
+
+    },
+    "WavePack Audio File" : {
+
+    },
+    "WebM Video File" : {
+
+    },
+    "Windows Media Audio" : {
+
+    },
+    "Windows Media Video" : {
+
+    },
+    "Windows Recorded TV Show" : {
+
+    },
+    "XM audio file" : {
+
+    }
+  },
+  "version" : "1.0"
+}

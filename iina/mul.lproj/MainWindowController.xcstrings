@@ -1,0 +1,378 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "1XQ-Mt-jmZ.title" : {
+      "comment" : "Class = \"NSTextFieldCell\"; title = \"-:--:--\"; ObjectID = \"1XQ-Mt-jmZ\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "-:--:--"
+          }
+        }
+      }
+    },
+    "3fe-fP-yMB.title" : {
+      "comment" : "Class = \"NSTextFieldCell\"; title = \"Buffering... 100%\"; ObjectID = \"3fe-fP-yMB\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Buffering... 100%"
+          }
+        }
+      }
+    },
+    "6mL-0A-eq2.title" : {
+      "comment" : "Class = \"NSTextFieldCell\"; title = \"-:--:--\"; ObjectID = \"6mL-0A-eq2\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "-:--:--"
+          }
+        }
+      }
+    },
+    "7aL-lH-m8i.title" : {
+      "comment" : "Class = \"NSTextFieldCell\"; title = \"Label\"; ObjectID = \"7aL-lH-m8i\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Label"
+          }
+        }
+      }
+    },
+    "DVg-p3-w5Q.title" : {
+      "comment" : "Class = \"NSTextFieldCell\"; title = \"Label\"; ObjectID = \"DVg-p3-w5Q\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Label"
+          }
+        }
+      }
+    },
+    "eCe-SS-Wlj.title" : {
+      "comment" : "Class = \"NSTextFieldCell\"; title = \"-32x\"; ObjectID = \"eCe-SS-Wlj\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "-32x"
+          }
+        }
+      }
+    },
+    "gdE-b5-kod.title" : {
+      "comment" : "Class = \"NSTextFieldCell\"; title = \"This video is playing in picture in picture\"; ObjectID = \"gdE-b5-kod\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "af" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die video speel in beeld-in-beeld af"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يجري تشغيل هذا الفيديو بنظام صورة داخل صورة"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aquest vídeo s'està reproduint en Picture in Picture"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Video je přehráváno jako obraz v obrazu."
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Denne video afspilles i picture in picture"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dieses Video wird Bild-in-Bild abgespielt."
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This video is playing in picture in picture"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "This video is playing in picture in picture"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This video is playing in picture in picture"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este vídeo se esta reproduciendo en picture in picture"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "این ویدئو در حالت تصویر در تصویر در حال پخش است"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tätä videota toistetaan kuva kuvassa -tilassa"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette vidéo est en cours de lecture en image dans l'image"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "הסרטון הזה מתנגן במצב תמונה בתוך תמונה"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "यह वीडियो पिक्चर-इन-पिक्चर में चल रहा है"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Videozapis se reproduciraj sliku u slici"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ez a video játszódik kép a képben"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Video ini diputar dalam mode picture in picture"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Questo video è in riproduzione in modalità Picture-in-Picture"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "このビデオはピクチャー・イン・ピクチャーで再生しています"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "화면 속 화면으로 재생 중입니다"
+          }
+        },
+        "lv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This video is playing in picture in picture"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Denne videoen spiller som bilde-i-bilde"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deze video wordt beeld in beeld afgespeeld."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Odtwarzanie Obraz-w-obrazie"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este vídeo está a ser reproduzido em modo Picture in Picture"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este vídeo está em Picture in Picture"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acest video rulează în modul Picture-in-Picture."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Это видео воспроизводится в режиме «Картинка в картинке»"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Video sa prehráva v móde picture in picture"
+          }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ovaj video-zapis reprodukuje se u režimu slike u slici"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Denna video spelar i bild-i-bild"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bu video resim içinde resim olarak oynatılıyor"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Це відео відтворюється в режимі «Картинка в картинці»"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Video này đang phát trong chế độ Ảnh trong ảnh"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "视频正在“画中画”模式播放"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "影片正在子母畫面模式下播放"
+          }
+        }
+      }
+    },
+    "IyU-0H-hyV.title" : {
+      "comment" : "Class = \"NSTextFieldCell\"; title = \"99:99\"; ObjectID = \"IyU-0H-hyV\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "99:99"
+          }
+        }
+      }
+    },
+    "JAn-Yu-XA2.title" : {
+      "comment" : "Class = \"NSTextFieldCell\"; title = \"On Screen Display\"; ObjectID = \"JAn-Yu-XA2\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "On Screen Display"
+          }
+        }
+      }
+    },
+    "Pw8-rd-mUu.title" : {
+      "comment" : "Class = \"NSTextFieldCell\"; title = \"-:--:--\"; ObjectID = \"Pw8-rd-mUu\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "-:--:--"
+          }
+        }
+      }
+    },
+    "ULE-u4-k9L.title" : {
+      "comment" : "Class = \"NSTextFieldCell\"; title = \"32x\"; ObjectID = \"ULE-u4-k9L\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "32x"
+          }
+        }
+      }
+    },
+    "va1-P5-3b0.title" : {
+      "comment" : "Class = \"NSTextFieldCell\"; title = \"100%\"; ObjectID = \"va1-P5-3b0\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "100%"
+          }
+        }
+      }
+    },
+    "WOE-SX-krh.title" : {
+      "comment" : "Class = \"NSTextFieldCell\"; title = \"Label\"; ObjectID = \"WOE-SX-krh\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Label"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

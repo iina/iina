@@ -16,8 +16,8 @@
 "general.username" = "Brugernavn";
 "general.password" = "Kodeord";
 
-"input.value_is_empty" = "Value cannot be empty.";
-"input.already_exists" = "Value already exists.";
+"input.value_is_empty" = "Værdien kan ikke være tom.";
+"input.already_exists" = "Værdien findes allerede.";
 
 // Guide Window
 "guide.highlights" = "Højdepunkter";
@@ -53,15 +53,15 @@
 
 // EQ Presets
 "eq.preset.flat" = "Flat";
-"eq.preset.acoustic" = "Acoustic";
-"eq.preset.classical" = "Classical";
+"eq.preset.acoustic" = "Akustisk";
+"eq.preset.classical" = "Klassisk";
 "eq.preset.dance" = "Dance";
-"eq.preset.deep" = "Deep";
-"eq.preset.electronic" = "Electronic";
-"eq.preset.hip_hop" = "Hip Hop";
-"eq.preset.increase_bass" = "Increase Bass";
-"eq.preset.increase_treble" = "Increase Treble";
-"eq.preset.increase_vocal" = "Increase Vocal";
+"eq.preset.deep" = "Dyb";
+"eq.preset.electronic" = "Elektronisk";
+"eq.preset.hip_hop" = "Hip-hop";
+"eq.preset.increase_bass" = "Forøg bas";
+"eq.preset.increase_treble" = "Forøg diskant";
+"eq.preset.increase_vocal" = "Forøg vokal";
 "eq.preset.jazz" = "Jazz";
 "eq.preset.latin" = "Latin";
 "eq.preset.loundness" = "Loundness";
@@ -69,11 +69,11 @@
 "eq.preset.piano" = "Piano";
 "eq.preset.pop" = "Pop";
 "eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reduce Bass";
-"eq.preset.reduce_treble" = "Reduce Treble";
+"eq.preset.reduce_bass" = "Reducer Bas";
+"eq.preset.reduce_treble" = "Reducer diskant";
 "eq.preset.rock" = "Rock";
-"eq.preset.small_speaker" = "Small Speaker";
-"eq.preset.spoken_word" = "Spoken Word";
+"eq.preset.small_speaker" = "Små højttalere";
+"eq.preset.spoken_word" = "Talte ord";
 
 "alert.eq.new_profile.title" = "New EQ Profile";
 "alert.eq.new_profile.message" = "Please enter a profile name.";
@@ -161,19 +161,19 @@
 
 "preference.enable_adv_settings" = "Aktiver avancerede indstillinger";
 
-"preference.sub_override_level.force" = "force";
-"preference.sub_override_level.scale" = "scale";
+"preference.sub_override_level.force" = "gennemtving";
+"preference.sub_override_level.scale" = "skaler";
 "preference.sub_override_level.strip" = "strip";
-"preference.sub_override_level.yes" = "yes";
+"preference.sub_override_level.yes" = "ja";
 
 "menu.volume" = "Volumen: %d";
 "menu.volume_muted" = "Lydstyrke: %d (Lydløs)";
 "menu.audio_delay" = "Lydforsinkelse: %.2fs";
 "menu.sub_delay" = "Undertekstforsinkelse: %.2fs";
-"menu.sub_hide" = "Hide Subtitles";
-"menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Secondary Subtitles";
-"menu.sub_second_show" = "Show Secondary Subtitles";
+"menu.sub_hide" = "Skjul undertekster";
+"menu.sub_show" = "Vis undertekster";
+"menu.sub_second_hide" = "Skjul sekundære undertekster";
+"menu.sub_second_show" = "Vis sekundære undertekster";
 "menu.fullscreen" = "Gå til fuldskærmsvisning";
 "menu.exit_fullscreen" = "Afslut fuldskærmsvisning";
 "menu.pip" = "Gå til Picture-in-Picture";

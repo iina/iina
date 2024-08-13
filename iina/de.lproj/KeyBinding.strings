@@ -52,7 +52,7 @@
 "iina.toggle-flip" = "Drehen ein-/ausschalten";
 "iina.toggle-mirror" = "Spiegeln ein-/ausschalten";
 "iina.save-playlist" = "Aktuelle Wiedergabeliste sichern";
-"iina.show-current-file-in-finder" = "Show current file in Finder";
+"iina.show-current-file-in-finder" = "Aktuelle Datei im Finder anzeigen";
 "iina.delete-current-file" = "Wiedergegebene Datei löschen";
 "iina.delete-current-file-hard" = "Wiedergegebene Datei unwiderruflich löschen";
 "iina.find-online-subs" = "Online nach Untertiteln suchen";
@@ -101,7 +101,7 @@
 "opt.sub-pos" = "Position";
 "opt.sub-scale" = "Größe";
 "opt.sub-visibility" = "Sichtbarkeit";
-"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
+"opt.secondary-sub-visibility" = "Sichtbarkeit des zweiten Untertitels";
 "opt.sub-ass-style-override" = "ASS-Stil überschreiben";
 
 "opt.fullscreen" = "Vollbild";

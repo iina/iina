@@ -52,7 +52,7 @@
 "iina.toggle-flip" = "Перемкнути перевертання";
 "iina.toggle-mirror" = "Перемкнути віддзеркалення";
 "iina.save-playlist" = "Зберегти поточний плейлист";
-"iina.show-current-file-in-finder" = "Show current file in Finder";
+"iina.show-current-file-in-finder" = "Файл конфігурації з такою самою назвою вже існує. Натисніть Ok, щоб показати файл у Finder";
 "iina.delete-current-file" = "Видалити поточний файл";
 "iina.delete-current-file-hard" = "Видалити поточний файл, оминаючи Смітник";
 "iina.find-online-subs" = "Знайти субтитри в Інтернеті";
@@ -101,7 +101,7 @@
 "opt.sub-pos" = "позицію субтитрів";
 "opt.sub-scale" = "розмір субтитрів";
 "opt.sub-visibility" = "видимість субтитрів";
-"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
+"opt.secondary-sub-visibility" = "Видимість додаткових субтитрів";
 "opt.sub-ass-style-override" = "заміщення ASS-стилю";
 
 "opt.fullscreen" = "повноекранний режим";

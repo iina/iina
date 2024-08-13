@@ -197,12 +197,6 @@
             "value" : "Crowdin"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Crowdin"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -210,6 +204,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Crowdin"
+          }
+        },
+        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Crowdin"
@@ -241,7 +241,7 @@
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "Crowdin"
           }
         },
@@ -257,7 +257,7 @@
             "value" : "Crowdin"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Crowdin"
@@ -329,8 +329,7 @@
             "value" : "Crowdin"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "dkA-td-UyX.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"IINA\"; ObjectID = \"dkA-td-UyX\";",
@@ -528,12 +527,6 @@
             "value" : "IINA"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "IINA"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -541,6 +534,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "IINA"
+          }
+        },
+        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "IINA"
@@ -572,7 +571,7 @@
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "IINA"
           }
         },
@@ -588,7 +587,7 @@
             "value" : "IINA"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "IINA"
@@ -660,8 +659,7 @@
             "value" : "IINA"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "F0z-JX-Cv5.title" : {
       "comment" : "Class = \"NSWindow\"; title = \"About\"; ObjectID = \"F0z-JX-Cv5\";",
@@ -859,12 +857,6 @@
             "value" : "അബൗറ്റ്"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Om"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "translated",
@@ -875,6 +867,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Over"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Om"
           }
         },
         "pl" : {
@@ -919,7 +917,7 @@
             "value" : "O programu"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "O programu"
@@ -1189,12 +1187,6 @@
             "value" : "0.0.1"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "0.0.1"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1202,6 +1194,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "0.0.1"
+          }
+        },
+        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "0.0.1"
@@ -1233,7 +1231,7 @@
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "0.0.1"
           }
         },
@@ -1249,7 +1247,7 @@
             "value" : "0.0.1"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "0.0.1"
@@ -1321,8 +1319,7 @@
             "value" : "0.0.1"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "HLj-vT-kNp.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"IINA localization is powered by Crowdin.\"; ObjectID = \"HLj-vT-kNp\";",
@@ -1520,12 +1517,6 @@
             "value" : "IINA localization is powered by Crowdin."
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "IINA localization is powered by Crowdin."
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1533,6 +1524,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "IINA localization is powered by Crowdin."
+          }
+        },
+        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "IINA localization is powered by Crowdin."
@@ -1580,7 +1577,7 @@
             "value" : "IINA localization is powered by Crowdin."
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "IINA localization is powered by Crowdin."
@@ -1850,12 +1847,6 @@
             "value" : "ക്രെഡിറ്റുകൾ"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kreditering"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1866,6 +1857,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Credits"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kreditering"
           }
         },
         "pl" : {
@@ -1910,7 +1907,7 @@
             "value" : "Zasluge"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zasluge"
@@ -2180,12 +2177,6 @@
             "value" : "തീയതി"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dato"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2196,6 +2187,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Datum"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dato"
           }
         },
         "pl" : {
@@ -2240,7 +2237,7 @@
             "value" : "Date"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Datum"
@@ -2510,12 +2507,6 @@
             "value" : "ലൈസൻസ്"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lisens"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2526,6 +2517,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Licentie"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lisens"
           }
         },
         "pl" : {
@@ -2570,7 +2567,7 @@
             "value" : "Dovoljenje"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Licenca"
@@ -2840,12 +2837,6 @@
             "value" : "പരിഭാഷകർ:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Oversettere:"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2856,6 +2847,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vertalers:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oversettere:"
           }
         },
         "pl" : {
@@ -2900,7 +2897,7 @@
             "value" : "Prevajalci:"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prevodioci:"
@@ -3170,12 +3167,6 @@
             "value" : "Branch"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Branch"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3183,6 +3174,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Branch"
+          }
+        },
+        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Branch"
@@ -3214,8 +3211,8 @@
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Branch"
+            "state" : "translated",
+            "value" : "Ветка"
           }
         },
         "sk" : {
@@ -3230,7 +3227,7 @@
             "value" : "Branch"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Branch"
@@ -3302,8 +3299,7 @@
             "value" : "Branch"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "oIB-g4-IyG.label" : {
       "comment" : "Class = \"NSTabViewItem\"; label = \"Contributors\"; ObjectID = \"oIB-g4-IyG\";",
@@ -3501,12 +3497,6 @@
             "value" : "സംഭാവന ചെയ്യുന്നവർ"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bidragsytere"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3517,6 +3507,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bijdragers"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bidragsytere"
           }
         },
         "pl" : {
@@ -3561,7 +3557,7 @@
             "value" : "Prispevali so"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Saradnici"
@@ -3831,12 +3827,6 @@
             "value" : "iina/contributors"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "iina/contributors"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3844,6 +3834,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "iina/contributors"
+          }
+        },
+        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "iina/contributors"
@@ -3875,8 +3871,8 @@
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "iina/contributors"
+            "state" : "translated",
+            "value" : "участники"
           }
         },
         "sk" : {
@@ -3891,7 +3887,7 @@
             "value" : "iina/contributors"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "iina/contributors"
@@ -3963,8 +3959,7 @@
             "value" : "iina/contributors"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "WeO-aJ-nY3.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"FFmpeg 0.0.0\"; ObjectID = \"WeO-aJ-nY3\";",
@@ -4162,12 +4157,6 @@
             "value" : "FFmpeg 0.0.0"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "FFmpeg 0.0.0"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -4175,6 +4164,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "FFmpeg 0.0.0"
+          }
+        },
+        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "FFmpeg 0.0.0"
@@ -4206,7 +4201,7 @@
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "FFmpeg 0.0.0"
           }
         },
@@ -4222,7 +4217,7 @@
             "value" : "FFmpeg 0.0.0"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "FFmpeg 0.0.0"
@@ -4294,8 +4289,7 @@
             "value" : "FFmpeg 0.0.0"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "XWg-VQ-fRV.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"Contributors\"; ObjectID = \"XWg-VQ-fRV\";",
@@ -4493,12 +4487,6 @@
             "value" : "സംഭാവന ചെയ്യുന്നവർ"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bidragsytere"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -4509,6 +4497,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bijdragers"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bidragsytere"
           }
         },
         "pl" : {
@@ -4553,7 +4547,7 @@
             "value" : "Prispevali so"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Saradnici"
@@ -4823,12 +4817,6 @@
             "value" : "ലൈസൻസ്"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lisens"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -4839,6 +4827,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Licentie"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lisens"
           }
         },
         "pl" : {
@@ -4883,7 +4877,7 @@
             "value" : "Dovoljenje"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Licenca"
@@ -5153,12 +5147,6 @@
             "value" : "mpv 0.0.0"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "mpv 0.0.0"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -5166,6 +5154,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "mpv 0.0.0"
+          }
+        },
+        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "mpv 0.0.0"
@@ -5197,7 +5191,7 @@
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "mpv 0.0.0"
           }
         },
@@ -5213,7 +5207,7 @@
             "value" : "mpv 0.0.0"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "mpv 0.0.0"
@@ -5285,8 +5279,7 @@
             "value" : "mpv 0.0.0"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "zCH-uO-acx.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"Credits\"; ObjectID = \"zCH-uO-acx\";",
@@ -5484,12 +5477,6 @@
             "value" : "ക്രെഡിറ്റുകൾ"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kreditering"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -5500,6 +5487,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Credits"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kreditering"
           }
         },
         "pl" : {
@@ -5544,7 +5537,7 @@
             "value" : "Zasluge"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zasluge"

@@ -196,12 +196,6 @@
             "value" : "Blur"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uskarphet"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -212,6 +206,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vervagen"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uskarphet"
           }
         },
         "pl" : {
@@ -256,7 +256,7 @@
             "value" : "Zameglitev"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zamuti"
@@ -525,12 +525,6 @@
             "value" : "അ\fളവ്"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mengde"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -541,6 +535,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hoeveelheid"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mengde"
           }
         },
         "pl" : {
@@ -585,7 +585,7 @@
             "value" : "Amount"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Iznos"
@@ -854,12 +854,6 @@
             "value" : "Matrix size"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Matrisestørrelse"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -870,6 +864,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Matrixgrootte"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Matrisestørrelse"
           }
         },
         "pl" : {
@@ -914,7 +914,7 @@
             "value" : "Matrix size"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Veličina matrice"
@@ -1184,12 +1184,6 @@
             "value" : "ക്രോപ്"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Beskjær"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1200,6 +1194,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bijsnijden"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beskjær"
           }
         },
         "pl" : {
@@ -1244,7 +1244,7 @@
             "value" : "Obreži"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Iseci"
@@ -1513,12 +1513,6 @@
             "value" : "Height (default: video height)"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Høyde (standard: videohøyde)"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1529,6 +1523,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hoogte (standaard: videohoogte)"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Høyde (standard: videohøyde)"
           }
         },
         "pl" : {
@@ -1573,7 +1573,7 @@
             "value" : "Višina (privzeto: višina videoposnetka)"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Visina (podrazumevano: visina video-zapisa)"
@@ -1842,12 +1842,6 @@
             "value" : "Width (default: video width)"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bredde (standard: videobredde)"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1858,6 +1852,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Breedte (standaard: videobreedte)"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bredde (standard: videobredde)"
           }
         },
         "pl" : {
@@ -1902,7 +1902,7 @@
             "value" : "Širina (privzeto: širina videoposnetka)"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Širina (podrazumevano: širina video-zapisa)"
@@ -2171,12 +2171,6 @@
             "value" : "ആധാരം (X)"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Opprinnelse X (standard: sentrert)"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2187,6 +2181,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Beginpunt X (standaard: midden)"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opprinnelse X (standard: sentrert)"
           }
         },
         "pl" : {
@@ -2231,7 +2231,7 @@
             "value" : "Origin X (default: center)"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Početna vrednost X (podrazumevano: centar)"
@@ -2500,12 +2500,6 @@
             "value" : "Origin Y (default: center)"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Oprinnelse Y (standard: sentrert)"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2516,6 +2510,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Beginpunt Y (standaard: midden)"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oprinnelse Y (standard: sentrert)"
           }
         },
         "pl" : {
@@ -2560,7 +2560,7 @@
             "value" : "Origin Y (default: center)"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Početna vrednost Y (podrazumevano: centar)"
@@ -2829,12 +2829,6 @@
             "value" : "Custom (FFmpeg)"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tilpasset (FFmpeg)"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2845,6 +2839,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aangepast (FFmpeg)"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tilpasset (FFmpeg)"
           }
         },
         "pl" : {
@@ -2889,7 +2889,7 @@
             "value" : "Custom (FFmpeg)"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prilagođeno (FFmpeg)"
@@ -3158,12 +3158,6 @@
             "value" : "Filter name"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filternavn"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3174,6 +3168,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filternaam"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filternavn"
           }
         },
         "pl" : {
@@ -3218,7 +3218,7 @@
             "value" : "Filter name"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Naziv filtera"
@@ -3487,12 +3487,6 @@
             "value" : "Filter value"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filterverdi"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3503,6 +3497,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filterwaarde"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filterverdi"
           }
         },
         "pl" : {
@@ -3547,7 +3547,7 @@
             "value" : "Filter value"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vrednost filtera"
@@ -3816,12 +3816,6 @@
             "value" : "Custom (mpv)"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tilpasset (mpv)"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3832,6 +3826,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aangepast (mpv)"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tilpasset (mpv)"
           }
         },
         "pl" : {
@@ -3876,7 +3876,7 @@
             "value" : "Custom (mpv)"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prilagođeno (mpv)"
@@ -4145,12 +4145,6 @@
             "value" : "Filter name"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filternavn"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -4161,6 +4155,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filternaam"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filternavn"
           }
         },
         "pl" : {
@@ -4205,7 +4205,7 @@
             "value" : "Filter name"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Naziv filtera"
@@ -4474,12 +4474,6 @@
             "value" : "Filter value"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filterverdi"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -4490,6 +4484,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filterwaarde"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filterverdi"
           }
         },
         "pl" : {
@@ -4534,7 +4534,7 @@
             "value" : "Filter value"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vrednost filtera"
@@ -4803,12 +4803,6 @@
             "value" : "Delogo"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fjern logo"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -4819,6 +4813,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Logo verwijderen"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fjern logo"
           }
         },
         "pl" : {
@@ -4863,7 +4863,7 @@
             "value" : "Delogo"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ukloni logotip"
@@ -5132,12 +5132,6 @@
             "value" : "ഉയരം"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Høyde"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -5148,6 +5142,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hoogte"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Høyde"
           }
         },
         "pl" : {
@@ -5192,7 +5192,7 @@
             "value" : "Višina"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Visina"
@@ -5461,12 +5461,6 @@
             "value" : "വീതി"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bredde"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -5477,6 +5471,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Breedte"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bredde"
           }
         },
         "pl" : {
@@ -5521,7 +5521,7 @@
             "value" : "Širina"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Širina"
@@ -5790,12 +5790,6 @@
             "value" : "Origin X"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Opprinnelse X"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -5806,6 +5800,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Beginpunt X"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opprinnelse X"
           }
         },
         "pl" : {
@@ -5850,7 +5850,7 @@
             "value" : "Origin X"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Početna vrednost X"
@@ -6119,12 +6119,6 @@
             "value" : "Origin Y"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Opprinnelse Y"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -6135,6 +6129,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Beginpunt Y"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opprinnelse Y"
           }
         },
         "pl" : {
@@ -6179,7 +6179,7 @@
             "value" : "Origin Y"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Početna vrednost Y"
@@ -6448,12 +6448,6 @@
             "value" : "വലുതാക്കുക"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Utvid"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -6464,6 +6458,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Uitbreiden"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utvid"
           }
         },
         "pl" : {
@@ -6508,7 +6508,7 @@
             "value" : "Expand"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Raširi"
@@ -6777,12 +6777,6 @@
             "value" : "Expands to fit an aspect (e.g: 4/3)"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Utvid for å passe aspektet (eks. 4/3)"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -6793,6 +6787,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Breid uit naar een beeldverhouding (bv. 4:3)"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utvid for å passe aspektet (eks. 4/3)"
           }
         },
         "pl" : {
@@ -6837,7 +6837,7 @@
             "value" : "Expands to fit an aspect (e.g: 4/3)"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Širenje do uklapanja u razmeru (npr. 4/3)"
@@ -7106,12 +7106,6 @@
             "value" : "Height (default: video height)"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Høyde (standard: videohøyde)"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -7122,6 +7116,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hoogte (standaard: videohoogte)"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Høyde (standard: videohøyde)"
           }
         },
         "pl" : {
@@ -7166,7 +7166,7 @@
             "value" : "Višina (privzeto: višina videoposnetka)"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Visina (podrazumevano: visina video-zapisa)"
@@ -7435,12 +7435,6 @@
             "value" : "Rounds up to make divisible by this value"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rund opp for å gjøre delbart på denne verdien"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -7451,6 +7445,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rond af om deelbaar te maken door deze waarde"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rund opp for å gjøre delbart på denne verdien"
           }
         },
         "pl" : {
@@ -7495,7 +7495,7 @@
             "value" : "Rounds up to make divisible by this value"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zaokrugljivanje tako da se može deliti ovom vrednošću"
@@ -7764,12 +7764,6 @@
             "value" : "Width (default: video width)"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bredde (standard: videobredde)"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -7780,6 +7774,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Breedte (standaard: videobreedte)"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bredde (standard: videobredde)"
           }
         },
         "pl" : {
@@ -7824,7 +7824,7 @@
             "value" : "Širina (privzeto: širina videoposnetka)"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Širina (podrazumevano: širina video-zapisa)"
@@ -8093,12 +8093,6 @@
             "value" : "ആധാരം (X)"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Opprinnelse X (standard: sentrert)"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -8109,6 +8103,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Beginpunt X (standaard: midden)"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opprinnelse X (standard: sentrert)"
           }
         },
         "pl" : {
@@ -8153,7 +8153,7 @@
             "value" : "Origin X (default: center)"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Početna vrednost X (podrazumevano: centar)"
@@ -8422,12 +8422,6 @@
             "value" : "Origin Y (default: center)"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Oprinnelse Y (standard: sentrert)"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -8438,6 +8432,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Beginpunt Y (standaard: midden)"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oprinnelse Y (standard: sentrert)"
           }
         },
         "pl" : {
@@ -8482,7 +8482,7 @@
             "value" : "Origin Y (default: center)"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Početna vrednost Y (podrazumevano: centar)"
@@ -8751,12 +8751,6 @@
             "value" : "Mirror"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Speil"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -8767,6 +8761,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Horiz. spiegelen"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Speil"
           }
         },
         "pl" : {
@@ -8811,7 +8811,7 @@
             "value" : "Zrcaljenje"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Preslikaj"
@@ -9080,12 +9080,6 @@
             "value" : "3D LUT"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "3D LUT"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -9093,6 +9087,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3D LUT"
+          }
+        },
+        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "3D LUT"
@@ -9140,7 +9140,7 @@
             "value" : "3D LUT"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "3D LUT"
@@ -9409,12 +9409,6 @@
             "value" : "File path (you can also drag & drop the file into the input box)"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filbane (du kan også dra og slippe filen inn i inntastingsboksen)"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -9425,6 +9419,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bestand"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filbane (du kan også dra og slippe filen inn i inntastingsboksen)"
           }
         },
         "pl" : {
@@ -9469,7 +9469,7 @@
             "value" : "File path (you can also drag & drop the file into the input box)"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Putanja datoteke (možete i povući i otpustiti datoteku u okvir)"
@@ -9738,12 +9738,6 @@
             "value" : "Interpolation mode"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Interpolasjonsmodus"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -9754,6 +9748,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Interpolatiemodus"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Interpolasjonsmodus"
           }
         },
         "pl" : {
@@ -9798,7 +9798,7 @@
             "value" : "Interpolation mode"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Režim interpolacije"
@@ -10067,12 +10067,6 @@
             "value" : "Negative"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Negativ"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -10083,6 +10077,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Negatief"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Negativ"
           }
         },
         "pl" : {
@@ -10127,7 +10127,7 @@
             "value" : "Negative"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Negativ"
@@ -10396,12 +10396,6 @@
             "value" : "Sharpen"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gjør skarpere"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -10412,6 +10406,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verscherpen"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gjør skarpere"
           }
         },
         "pl" : {
@@ -10456,7 +10456,7 @@
             "value" : "Izostritev"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Izoštri"
@@ -10725,12 +10725,6 @@
             "value" : "അ\fളവ്"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mengde"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -10741,6 +10735,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hoeveelheid"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mengde"
           }
         },
         "pl" : {
@@ -10785,7 +10785,7 @@
             "value" : "Amount"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Iznos"
@@ -11054,12 +11054,6 @@
             "value" : "Matrix size"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Matrisestørrelse"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -11070,6 +11064,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Matrixgrootte"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Matrisestørrelse"
           }
         },
         "pl" : {
@@ -11114,7 +11114,7 @@
             "value" : "Matrix size"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Veličina matrice"
@@ -11383,12 +11383,6 @@
             "value" : "Flip"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vend"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -11399,6 +11393,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vert. spiegelen"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vend"
           }
         },
         "pl" : {
@@ -11443,7 +11443,7 @@
             "value" : "Obrni"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Preokreni"

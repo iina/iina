@@ -17,6 +17,30 @@
             "value" : "فصيلة"
           }
         },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ailə"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сямейства"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Family"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Family"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -65,6 +89,12 @@
             "value" : "Familia"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Family"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -107,10 +137,22 @@
             "value" : "Család"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ընտանիք"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Font"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Family"
           }
         },
         "it" : {
@@ -125,6 +167,12 @@
             "value" : "フォント"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Family"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -133,17 +181,35 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Family"
           }
         },
-        "nb" : {
+        "mk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фамилија"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ഫാമലി"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Family"
+          }
+        },
+        "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Familie"
           }
         },
-        "nl" : {
+        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Familie"
@@ -155,13 +221,13 @@
             "value" : "Czcionka"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Família"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Família"
@@ -185,10 +251,22 @@
             "value" : "Rodina"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Family"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Porodica"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Породица"
           }
         },
         "sv" : {
@@ -197,16 +275,40 @@
             "value" : "Familj"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "குடும்பம்"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Family"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aile"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Family"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Сімейство"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "خاندان"
           }
         },
         "vi" : {
@@ -242,6 +344,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "اكتب للتصفية…"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtrlərmək üçün yaz..."
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Увядзіце для фільтрацыі…"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Type to filter…"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Type to filter…"
           }
         },
         "ca" : {
@@ -292,6 +418,12 @@
             "value" : "Escriba para filtrar…"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Type to filter…"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -334,10 +466,22 @@
             "value" : "Gépeljen a szűréshez…"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Type to filter…"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ketik untuk menyaring…"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Type to filter…"
           }
         },
         "it" : {
@@ -352,6 +496,12 @@
             "value" : "入力して絞り込む…"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Type to filter…"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -360,14 +510,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Type to filter…"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Skriv for å filtrere…"
+            "value" : "Внеси текст за филтрирање…"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ഫിൽട്ടർ ചെയ്യാൻ ടൈപ്പ് ചെയ്യുക…"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Type to filter…"
           }
         },
         "nl" : {
@@ -376,22 +538,28 @@
             "value" : "Zoek"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skriv for å filtrere…"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wpisz, aby filtrować…"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Digitar para filtrar…"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tipo a filtrar…"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Digitar para filtrar…"
           }
         },
         "ro" : {
@@ -412,10 +580,22 @@
             "value" : "Vyhľadať…"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Type to filter…"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kucajte da biste filtrirali…"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Type to filter…"
           }
         },
         "sv" : {
@@ -424,16 +604,40 @@
             "value" : "Skriv för att filtrera…"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "வடிகட்ட தட்டச்சு செய்க…"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Type to filter…"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filtrelemek için yaz..."
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Type to filter…"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Фільтрувати…"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فلٹر کرنے کے لیے ٹائپ کریں…"
           }
         },
         "vi" : {
@@ -470,6 +674,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "اختر خط"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Şrift seç"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выберыце шрыфт"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Choose a Font"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Choose a Font"
           }
         },
         "ca" : {
@@ -520,6 +748,12 @@
             "value" : "Elegir un tipo de letra"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Choose a Font"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -562,10 +796,22 @@
             "value" : "Válassz betűtípust"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Choose a Font"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pilih font"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Choose a Font"
           }
         },
         "it" : {
@@ -580,6 +826,12 @@
             "value" : "フォントを選択"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Choose a Font"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -588,14 +840,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Choose a Font"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Velg skrifttype"
+            "value" : "Одбери фонт"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ഒരു ഫോണ്ട് തിരഞ്ഞെടുക്കുക"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Choose a Font"
           }
         },
         "nl" : {
@@ -604,22 +868,28 @@
             "value" : "Kies een lettertype"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Velg skrifttype"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wybierz czcionkę"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Escolher um tipo de letra"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Escolher Fonte"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escolher um tipo de letra"
           }
         },
         "ro" : {
@@ -640,10 +910,22 @@
             "value" : "Vybrať písmo"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Izberi pisavo"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Odaberi font"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Одабери фонт"
           }
         },
         "sv" : {
@@ -652,16 +934,40 @@
             "value" : "Välj typsnitt"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "எழுத்துருவைத் தேர்வுசெய்க"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Choose a Font"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Yazı tipi seç"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Choose a Font"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Оберіть шрифт"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "رسم الخط کا انتخاب کریں۔"
           }
         },
         "vi" : {
@@ -698,6 +1004,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "نوع الواجهة"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Şrift"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Шрыфт"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Typeface"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Typeface"
           }
         },
         "ca" : {
@@ -748,6 +1078,12 @@
             "value" : "Familia de tipos de letra"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Typeface"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -790,10 +1126,22 @@
             "value" : "Betűstílus"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Typeface"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tipe Huruf"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Typeface"
           }
         },
         "it" : {
@@ -808,6 +1156,12 @@
             "value" : "書体"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Typeface"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -816,14 +1170,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Typeface"
           }
         },
-        "nb" : {
+        "mk" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Typeface"
+          }
+        },
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Skrifttype"
+            "value" : "ടൈപ്പ്ഫേസ്"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Typeface"
           }
         },
         "nl" : {
@@ -832,22 +1198,28 @@
             "value" : "Stijl"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skrifttype"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Krój"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tipo de letra"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fontes"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tipo de letra"
           }
         },
         "ro" : {
@@ -868,10 +1240,22 @@
             "value" : "Typ písma"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Typeface"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Slovni oblik"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Typeface"
           }
         },
         "sv" : {
@@ -880,16 +1264,40 @@
             "value" : "Variant"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Typeface"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Typeface"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Yazı Tipi"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Typeface"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Накреслення"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ٹائپ فیس"
           }
         },
         "vi" : {
@@ -926,6 +1334,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "إلغاء"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ləğv et"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Скасаваць"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отмяна"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "বাতিল"
           }
         },
         "ca" : {
@@ -976,6 +1408,12 @@
             "value" : "Cancelar"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utzi"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1018,10 +1456,22 @@
             "value" : "Mégse"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Չեղարկել"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Batalkan"
+            "value" : "Batal"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hætta við"
           }
         },
         "it" : {
@@ -1036,6 +1486,12 @@
             "value" : "キャンセル"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ರದ್ದುಮಾಡು"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1048,10 +1504,22 @@
             "value" : "Atcelt"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avbryt"
+            "value" : "Откажи"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "റദ്ദാക്കുക"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cancel"
           }
         },
         "nl" : {
@@ -1060,19 +1528,25 @@
             "value" : "Annuleer"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avbryt"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Anuluj"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancelar"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancelar"
@@ -1096,10 +1570,22 @@
             "value" : "Zrušiť"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prekliči"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otkaži"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Откажи"
           }
         },
         "sv" : {
@@ -1108,16 +1594,40 @@
             "value" : "Avbryt"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ரத்துசெய்"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ยกเลิก"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vazgeç"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cancel"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Скасувати"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "منسوخ"
           }
         },
         "vi" : {
@@ -1144,7 +1654,325 @@
       "comment" : "Class = \"NSTextFieldCell\"; placeholderString = \"sans-serif\"; ObjectID = \"Kt3-me-43R\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "af" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
         "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "lv" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "mk" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "sr-CS" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "zh-Hant" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "sans-serif"
@@ -1166,6 +1994,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "اختبار"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Test"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тэст"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Test"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Test"
           }
         },
         "ca" : {
@@ -1216,6 +2068,12 @@
             "value" : "Prueba"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Test"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1258,10 +2116,22 @@
             "value" : "Teszt"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Test"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Coba"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Test"
           }
         },
         "it" : {
@@ -1276,6 +2146,12 @@
             "value" : "フォント Preview"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Test"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1284,17 +2160,35 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Test"
           }
         },
-        "nb" : {
+        "mk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тест"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "പരിശോധന"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Test"
+          }
+        },
+        "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Test"
           }
         },
-        "nl" : {
+        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Test"
@@ -1306,13 +2200,13 @@
             "value" : "Wypróbuj"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Teste"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Teste"
@@ -1336,15 +2230,39 @@
             "value" : "Test"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Test"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Testiraj"
           }
         },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тест"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "Test"
+          }
+        },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "சோதனை"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "Test"
           }
         },
@@ -1354,10 +2272,22 @@
             "value" : "Bu bir deneme metnidir / iİşŞüÜğĞçÇ."
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Test"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Тест"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "جانچ کریں"
           }
         },
         "vi" : {
@@ -1394,6 +2324,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "حسناً"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добра"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "OK"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "OK"
           }
         },
         "ca" : {
@@ -1444,6 +2398,12 @@
             "value" : "Aceptar"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "OK"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1486,9 +2446,21 @@
             "value" : "OK"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "OK"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "OK"
           }
         },
@@ -1504,6 +2476,12 @@
             "value" : "OK"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "OK"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1516,10 +2494,22 @@
             "value" : "Labi"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Godkjenn"
+            "value" : "ОК"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ശരി"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "OK"
           }
         },
         "nl" : {
@@ -1528,19 +2518,25 @@
             "value" : "OK"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Godkjenn"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
@@ -1564,15 +2560,39 @@
             "value" : "OK"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "V redu"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "U redu"
           }
         },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "У реду"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "சரி"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
             "value" : "OK"
           }
         },
@@ -1582,10 +2602,22 @@
             "value" : "Tamam"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "OK"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "ОК"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ٹھیک ہے"
           }
         },
         "vi" : {
@@ -1622,6 +2654,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "اختر خط:"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Şrift seç:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выберыце шрыфт:"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Choose a font:"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Choose a font:"
           }
         },
         "ca" : {
@@ -1672,6 +2728,12 @@
             "value" : "Elegir un tipo de letra:"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Choose a font:"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1714,10 +2776,22 @@
             "value" : "Válassz betűtípust:"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Choose a font:"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pilih font:"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Choose a font:"
           }
         },
         "it" : {
@@ -1732,6 +2806,12 @@
             "value" : "フォントを選択:"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Choose a font:"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1740,14 +2820,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Choose a font:"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Velg skrifttype:"
+            "value" : "Одбери фонт:"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ഒരു ഫോണ്ട് തിരഞ്ഞെടുക്കുക:"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Choose a font:"
           }
         },
         "nl" : {
@@ -1756,22 +2848,28 @@
             "value" : "Kies een lettertype:"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Velg skrifttype:"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wybierz czcionkę:"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Escolher um tipo de letra:"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Escolha uma fonte:"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escolher um tipo de letra:"
           }
         },
         "ro" : {
@@ -1792,10 +2890,22 @@
             "value" : "Vyberte písmo:"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Izberi pisavo:"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Odaberi font:"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Одабери фонт:"
           }
         },
         "sv" : {
@@ -1804,16 +2914,40 @@
             "value" : "Välj typsnitt:"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "எழுத்துருவைத் தேர்வுசெய்க:"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Choose a font:"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Font seç:"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Choose a font:"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Оберіть шрифт:"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "رسم الخط کا انتخاب کریں:"
           }
         },
         "vi" : {
@@ -1850,6 +2984,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "أو أدخل اسم الخط:"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Və ya şrift adı daxil edin"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Або ўвядзіце назву шрыфту:"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Or enter the font name:"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Or enter the font name:"
           }
         },
         "ca" : {
@@ -1900,6 +3058,12 @@
             "value" : "O introduzca el nombre del tipo de letra:"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Or enter the font name:"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1942,10 +3106,22 @@
             "value" : "Vagy adjon meg egy betűtípus nevet:"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Or enter the font name:"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Atau ketikkan nama font:"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Or enter the font name:"
           }
         },
         "it" : {
@@ -1960,6 +3136,12 @@
             "value" : "またはフォント名を入力:"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Or enter the font name:"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1968,14 +3150,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Or enter the font name:"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Eller skriv inn skrifttypenavn:"
+            "value" : "Или внесете име на фонт:"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "അല്ലെങ്കിൽ ഫോണ്ടിന്റെ പേര് നൽകുക:"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Or enter the font name:"
           }
         },
         "nl" : {
@@ -1984,22 +3178,28 @@
             "value" : "Of voer de naam van het lettertype in:"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eller skriv inn skrifttypenavn:"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lub wpisz nazwę czcionki:"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ou introduza o nome do tipo de letra:"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ou digite o nome da fonte:"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ou introduza o nome do tipo de letra:"
           }
         },
         "ro" : {
@@ -2020,10 +3220,22 @@
             "value" : "Alebo zadajte názov písma:"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Or enter the font name:"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ili unesi naziv fonta:"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Или унеси назив фонта:"
           }
         },
         "sv" : {
@@ -2032,16 +3244,40 @@
             "value" : "Eller ange typsnittets namn:"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "அல்லது எழுத்துரு பெயரை உள்ளிடவும்:"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Or enter the font name:"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Veya font adını girin:"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Or enter the font name:"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Або введіть назву шрифта:"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "یا رسم الخط کا نام درج کریں:"
           }
         },
         "vi" : {
@@ -2078,6 +3314,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "معاينة"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Önizləmə"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Перадпрагляд"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Preview"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Preview"
           }
         },
         "ca" : {
@@ -2128,6 +3388,12 @@
             "value" : "Vista previa"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Preview"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2170,10 +3436,22 @@
             "value" : "Előnézet"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Preview"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pratinjau"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Preview"
           }
         },
         "it" : {
@@ -2188,6 +3466,12 @@
             "value" : "プレビュー"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Preview"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2196,14 +3480,26 @@
         },
         "lv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "new",
             "value" : "Preview"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Forhåndsvisning"
+            "value" : "Прегледај"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "പ്രിവ്യൂ"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Preview"
           }
         },
         "nl" : {
@@ -2212,22 +3508,28 @@
             "value" : "Voorvertoning"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Forhåndsvisning"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Podgląd"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pré-visualização"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Visualização"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pré-visualização"
           }
         },
         "ro" : {
@@ -2248,10 +3550,22 @@
             "value" : "Náhľad"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Predogled"
+          }
+        },
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pregled"
+          }
+        },
+        "sr-SP" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Преглед"
           }
         },
         "sv" : {
@@ -2260,16 +3574,40 @@
             "value" : "Förhandsvisning"
           }
         },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "முன்னோட்டம்"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Preview"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Önizleme"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Preview"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Перегляд"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "پیش نظارہ"
           }
         },
         "vi" : {

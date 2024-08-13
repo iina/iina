@@ -1,3 +1,4 @@
 files:
   - source: /iina/mul.lproj/*.xcstrings
     translation: /iina/mul.lproj/%original_file_name%
+    multilingual: 1

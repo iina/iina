@@ -16,8 +16,8 @@
 "general.username" = "Benutzername";
 "general.password" = "Passwort";
 
-"input.value_is_empty" = "Value cannot be empty.";
-"input.already_exists" = "Value already exists.";
+"input.value_is_empty" = "Wert darf nicht leer sein.";
+"input.already_exists" = "Wert ist bereits vorhanden.";
 
 // Guide Window
 "guide.highlights" = "Highlights";
@@ -53,32 +53,32 @@
 
 // EQ Presets
 "eq.preset.flat" = "Flat";
-"eq.preset.acoustic" = "Acoustic";
-"eq.preset.classical" = "Classical";
+"eq.preset.acoustic" = "Akustisch";
+"eq.preset.classical" = "Klassik";
 "eq.preset.dance" = "Dance";
 "eq.preset.deep" = "Deep";
 "eq.preset.electronic" = "Electronic";
-"eq.preset.hip_hop" = "Hip Hop";
-"eq.preset.increase_bass" = "Increase Bass";
-"eq.preset.increase_treble" = "Increase Treble";
-"eq.preset.increase_vocal" = "Increase Vocal";
+"eq.preset.hip_hop" = "Hip-Hop";
+"eq.preset.increase_bass" = "Bass erhöhen";
+"eq.preset.increase_treble" = "Höhen anheben";
+"eq.preset.increase_vocal" = "Vocal erhöhen";
 "eq.preset.jazz" = "Jazz";
 "eq.preset.latin" = "Latin";
-"eq.preset.loundness" = "Loundness";
+"eq.preset.loundness" = "Lautheit";
 "eq.preset.lounge" = "Lounge";
 "eq.preset.piano" = "Piano";
 "eq.preset.pop" = "Pop";
 "eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reduce Bass";
-"eq.preset.reduce_treble" = "Reduce Treble";
+"eq.preset.reduce_bass" = "Bass reduzieren";
+"eq.preset.reduce_treble" = "Höhen reduzieren";
 "eq.preset.rock" = "Rock";
-"eq.preset.small_speaker" = "Small Speaker";
-"eq.preset.spoken_word" = "Spoken Word";
+"eq.preset.small_speaker" = "Kleiner Lautsprecher";
+"eq.preset.spoken_word" = "Gesprochenes Wort";
 
-"alert.eq.new_profile.title" = "New EQ Profile";
-"alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Currnet Profile";
-"alert.eq.rename.message" = "Please enter a new profile name.";
+"alert.eq.new_profile.title" = "Neues EQ-Profil";
+"alert.eq.new_profile.message" = "Bitte einen Profilnamen eingeben.";
+"alert.eq.rename.title" = "Aktuelles Profil umbenennen";
+"alert.eq.rename.message" = "Bitte einen neuen Profilnamen eingeben.";
 
 // OSDMessage.swift
 "osd.pause" = "Pausieren";
@@ -97,14 +97,14 @@
 "osd.sub_delay.later" = "Untertitelverzögerung: %.2f s später";
 "osd.sub_delay.earlier" = "Untertitelverzögerung: %.2f s früher";
 "osd.subtitle_pos" = "Untertitelposition: %.1f";
-"osd.sub_hidden" = "Subtitles Hidden";
-"osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
-"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
-"osd.sub_second_visible" = "Secondary Subtitles Visible";
+"osd.sub_hidden" = "Untertitel ausgeblendet";
+"osd.sub_visible" = "Untertitel sichtbar";
+"osd.sub_second_delay.nodelay" = "Verzögerung des zweiten Untertitels: Keine Verzögerung";
+"osd.sub_second_delay.later" = "Verzögerung des zweiten Untertitels: %.2fs später";
+"osd.sub_second_delay.earlier" = "Verzögerung des zweiten Untertitels: %.2fs früher";
+"osd.sub_second_hidden" = "Zweite Untertitel ausgeblendet";
+"osd.sub_second_pos" = "Position des zweiten Untertitels: %.1f";
+"osd.sub_second_visible" = "Zweite Untertitel sichtbar";
 "osd.mute" = "Stumm";
 "osd.unmute" = "Ton ein";
 "osd.screenshot" = "Bildschirmfoto aufgenommen";
@@ -124,8 +124,8 @@
 "osd.find_online_sub" = "Online nach Untertiteln suchen …";
 "osd.find_online_sub.source" = "Quelle:";
 "osd.sub_not_found" = "Keine Untertitel gefunden";
-"osd.sub_found" = "%d subtitles found.";
-"osd.sub_downloading" = "Downloading %d subtitles";
+"osd.sub_found" = "%d Untertitel gefunden.";
+"osd.sub_downloading" = "%d Untertitel werden heruntergeladen";
 "osd.sub_downloaded" = "Untertitel geladen";
 "osd.sub_saved" = "Untertitel gesichert";
 "osd.network_error" = "Netzwerkfehler";
@@ -164,16 +164,16 @@
 "preference.sub_override_level.force" = "force";
 "preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "strip";
-"preference.sub_override_level.yes" = "yes";
+"preference.sub_override_level.yes" = "ja";
 
 "menu.volume" = "Lautstärke: %d";
 "menu.volume_muted" = "Lautstärke: %d (Stumm)";
 "menu.audio_delay" = "Audioverzögerung: %.2f s";
 "menu.sub_delay" = "Untertitelverzögerung: %.2f s";
-"menu.sub_hide" = "Hide Subtitles";
-"menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Secondary Subtitles";
-"menu.sub_second_show" = "Show Secondary Subtitles";
+"menu.sub_hide" = "Untertitel ausblenden";
+"menu.sub_show" = "Untertitel anzeigen";
+"menu.sub_second_hide" = "Zweite Untertitel ausblenden";
+"menu.sub_second_show" = "Zweite Untertitel anzeigen";
 "menu.fullscreen" = "Vollbildmodus";
 "menu.exit_fullscreen" = "Vollbildmodus beenden";
 "menu.pip" = "Bild-in-Bild öffnen";
@@ -242,12 +242,12 @@
 "alert.config.duplicate.title" = "Konfiguration duplizieren";
 "alert.config.duplicate.message" = "Bitte gib einen Namen für die duplizierte Konfiguration ein.";
 "alert.config.empty_name" = "Der Name darf nicht leer sein.";
-"alert.config.name_existing" = "A config with the same name already exists.";
+"alert.config.name_existing" = "Es existiert bereits eine Konfiguration mit demselben Namen.";
 "alert.config.file_existing.title" = "Die Datei existiert bereits.";
-"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
+"alert.config.file_existing.message" = "Eine Konfigurationsdatei mit demselben Dateinamen existiert bereits. OK auswählen, um die Datei im Finder anzuzeigen.";
 "alert.config.cannot_create" = "Konfigurationsdatei konnte nicht erstellt werden.\n%@";
 "alert.config.cannot_write" = "Konfigurationsdatei nicht beschreibbar.";
-"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.title" = "Eingabekonfiguration umbenennen";
 "alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "Fehler beim Setzen der Filter. Bitte überprüfe die Parameter.";

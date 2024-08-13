@@ -57,12 +57,12 @@
 "eq.preset.classical" = "古典";
 "eq.preset.dance" = "Dance";
 "eq.preset.deep" = "Deep";
-"eq.preset.electronic" = "Electronic";
-"eq.preset.hip_hop" = "Hip Hop";
+"eq.preset.electronic" = "电子乐";
+"eq.preset.hip_hop" = "嘻哈";
 "eq.preset.increase_bass" = "Increase Bass";
 "eq.preset.increase_treble" = "Increase Treble";
 "eq.preset.increase_vocal" = "Increase Vocal";
-"eq.preset.jazz" = "Jazz";
+"eq.preset.jazz" = "爵士";
 "eq.preset.latin" = "Latin";
 "eq.preset.loundness" = "Loundness";
 "eq.preset.lounge" = "Lounge";
@@ -71,14 +71,14 @@
 "eq.preset.rnb" = "R&B";
 "eq.preset.reduce_bass" = "Reduce Bass";
 "eq.preset.reduce_treble" = "Reduce Treble";
-"eq.preset.rock" = "Rock";
+"eq.preset.rock" = "摇滚";
 "eq.preset.small_speaker" = "Small Speaker";
 "eq.preset.spoken_word" = "Spoken Word";
 
-"alert.eq.new_profile.title" = "New EQ Profile";
+"alert.eq.new_profile.title" = "新EQ 配置文件";
 "alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Currnet Profile";
-"alert.eq.rename.message" = "Please enter a new profile name.";
+"alert.eq.rename.title" = "重命名当前的配置文件";
+"alert.eq.rename.message" = "请输入新的配置文件名称：";
 
 // OSDMessage.swift
 "osd.pause" = "暂停";

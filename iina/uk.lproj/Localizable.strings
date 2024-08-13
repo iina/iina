@@ -16,8 +16,8 @@
 "general.username" = "Ім'я користувача";
 "general.password" = "Пароль";
 
-"input.value_is_empty" = "Value cannot be empty.";
-"input.already_exists" = "Value already exists.";
+"input.value_is_empty" = "Значення не може бути порожнім.";
+"input.already_exists" = "Значення вже існує.";
 
 // Guide Window
 "guide.highlights" = "Найважливіше";
@@ -52,33 +52,33 @@
 "quicksetting.hide" = "Сховати";
 
 // EQ Presets
-"eq.preset.flat" = "Flat";
-"eq.preset.acoustic" = "Acoustic";
-"eq.preset.classical" = "Classical";
-"eq.preset.dance" = "Dance";
-"eq.preset.deep" = "Deep";
-"eq.preset.electronic" = "Electronic";
-"eq.preset.hip_hop" = "Hip Hop";
-"eq.preset.increase_bass" = "Increase Bass";
-"eq.preset.increase_treble" = "Increase Treble";
-"eq.preset.increase_vocal" = "Increase Vocal";
-"eq.preset.jazz" = "Jazz";
-"eq.preset.latin" = "Latin";
-"eq.preset.loundness" = "Loundness";
-"eq.preset.lounge" = "Lounge";
-"eq.preset.piano" = "Piano";
-"eq.preset.pop" = "Pop";
+"eq.preset.flat" = "Плоско";
+"eq.preset.acoustic" = "Акустика";
+"eq.preset.classical" = "Класика";
+"eq.preset.dance" = "Танцювальна";
+"eq.preset.deep" = "Глибока";
+"eq.preset.electronic" = "Електронна";
+"eq.preset.hip_hop" = "Хіп хоп";
+"eq.preset.increase_bass" = "Збільшити баси";
+"eq.preset.increase_treble" = "Збільшити високі частоти";
+"eq.preset.increase_vocal" = "Збільшити вокал";
+"eq.preset.jazz" = "Джаз";
+"eq.preset.latin" = "Латина";
+"eq.preset.loundness" = "Гучно";
+"eq.preset.lounge" = "Лаунж";
+"eq.preset.piano" = "Піано";
+"eq.preset.pop" = "Поп";
 "eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reduce Bass";
-"eq.preset.reduce_treble" = "Reduce Treble";
-"eq.preset.rock" = "Rock";
-"eq.preset.small_speaker" = "Small Speaker";
-"eq.preset.spoken_word" = "Spoken Word";
+"eq.preset.reduce_bass" = "Зменшити низькі частоти";
+"eq.preset.reduce_treble" = "Зменшити високі частоти";
+"eq.preset.rock" = "Рок";
+"eq.preset.small_speaker" = "Маленький динамік";
+"eq.preset.spoken_word" = "Розмовна мова";
 
 "alert.eq.new_profile.title" = "New EQ Profile";
-"alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Currnet Profile";
-"alert.eq.rename.message" = "Please enter a new profile name.";
+"alert.eq.new_profile.message" = "Будь ласка, введіть ім'я профілю.";
+"alert.eq.rename.title" = "Перейменувати поточний профіль";
+"alert.eq.rename.message" = "Будь ласка, введіть нове ім'я профілю.";
 
 // OSDMessage.swift
 "osd.pause" = "Пауза";
@@ -97,14 +97,14 @@
 "osd.sub_delay.later" = "Затримка субтитрів: +%.2f с";
 "osd.sub_delay.earlier" = "Затримка субтитрів: –%.2f с";
 "osd.subtitle_pos" = "Позиція субтитрів: %.1f";
-"osd.sub_hidden" = "Subtitles Hidden";
-"osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
-"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
-"osd.sub_second_visible" = "Secondary Subtitles Visible";
+"osd.sub_hidden" = "Субтитри приховано";
+"osd.sub_visible" = "Видимість субтитрів";
+"osd.sub_second_delay.nodelay" = "Затримка додаткових субтитрів: Без затримки";
+"osd.sub_second_delay.later" = "Затримка додаткових субтитрів: %.2fс пізніше";
+"osd.sub_second_delay.earlier" = "Затримка додаткових субтитрів: %.2fс раніше";
+"osd.sub_second_hidden" = "Додаткові субтитри приховані";
+"osd.sub_second_pos" = "Позиціювання додаткових субтитрів: %.1f";
+"osd.sub_second_visible" = "Додаткові субтитри видимі";
 "osd.mute" = "Заглушити";
 "osd.unmute" = "Зі звуком";
 "osd.screenshot" = "Знімок екрана зроблено";
@@ -124,8 +124,8 @@
 "osd.find_online_sub" = "Шукаю субтитри в Інтернеті…";
 "osd.find_online_sub.source" = "з";
 "osd.sub_not_found" = "Субтитрів не знайдено";
-"osd.sub_found" = "%d subtitles found.";
-"osd.sub_downloading" = "Downloading %d subtitles";
+"osd.sub_found" = "%d Субтитри знайдені.";
+"osd.sub_downloading" = "Завантаження %d субтитрів";
 "osd.sub_downloaded" = "Субтитри завантажено";
 "osd.sub_saved" = "Субтитри збережено";
 "osd.network_error" = "Помилка мережі";
@@ -161,19 +161,19 @@
 
 "preference.enable_adv_settings" = "Увімкнути розширені налаштування";
 
-"preference.sub_override_level.force" = "force";
-"preference.sub_override_level.scale" = "scale";
+"preference.sub_override_level.force" = "сила";
+"preference.sub_override_level.scale" = "масштаб";
 "preference.sub_override_level.strip" = "видалити";
-"preference.sub_override_level.yes" = "yes";
+"preference.sub_override_level.yes" = "так";
 
 "menu.volume" = "Гучність: %d";
 "menu.volume_muted" = "Гучність: %d (Без звуку)";
 "menu.audio_delay" = "Затримка звуку: %.2f с";
 "menu.sub_delay" = "Затримка субтитрів: %.2f с";
-"menu.sub_hide" = "Hide Subtitles";
-"menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Secondary Subtitles";
-"menu.sub_second_show" = "Show Secondary Subtitles";
+"menu.sub_hide" = "Приховати субтитри";
+"menu.sub_show" = "Показати субтитри";
+"menu.sub_second_hide" = "Приховати додаткові субтитри";
+"menu.sub_second_show" = "Показати додаткові субтитри";
 "menu.fullscreen" = "Увійти до повноекранного режиму";
 "menu.exit_fullscreen" = "Вийти з повноекранного режиму";
 "menu.pip" = "Режим «Кадр у кадрі»";
@@ -242,9 +242,9 @@
 "alert.config.duplicate.title" = "Дублювати налаштування";
 "alert.config.duplicate.message" = "Будь ласка, дайте назву дубльованому файлові налаштувань.";
 "alert.config.empty_name" = "Назва не може бути пустою.";
-"alert.config.name_existing" = "A config with the same name already exists.";
+"alert.config.name_existing" = "Конфігурація з такою ж назвою вже існує.";
 "alert.config.file_existing.title" = "Файл вже існує";
-"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
+"alert.config.file_existing.message" = "Файл конфігурації з такою самою назвою вже існує. Натисніть OK, щоб показати файл у Finder.";
 "alert.config.cannot_create" = "Не можу створити файл налаштувань!\n%@";
 "alert.config.cannot_write" = "Не можу записати у файл налаштувань!";
 "alert.config.rename.title" = "Rename Input Configuration";

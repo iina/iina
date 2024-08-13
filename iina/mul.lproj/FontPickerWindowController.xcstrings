@@ -197,12 +197,6 @@
             "value" : "ഫാമലി"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Familie"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -210,6 +204,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Familie"
+          }
+        },
+        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Familie"
@@ -257,7 +257,7 @@
             "value" : "Family"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Porodica"
@@ -526,12 +526,6 @@
             "value" : "ഫിൽട്ടർ ചെയ്യാൻ ടൈപ്പ് ചെയ്യുക…"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Skriv for å filtrere…"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -542,6 +536,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zoek"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skriv for å filtrere…"
           }
         },
         "pl" : {
@@ -586,7 +586,7 @@
             "value" : "Type to filter…"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kucajte da biste filtrirali…"
@@ -856,12 +856,6 @@
             "value" : "ഒരു ഫോണ്ട് തിരഞ്ഞെടുക്കുക"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Velg skrifttype"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -872,6 +866,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kies een lettertype"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Velg skrifttype"
           }
         },
         "pl" : {
@@ -916,7 +916,7 @@
             "value" : "Izberi pisavo"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Odaberi font"
@@ -1186,12 +1186,6 @@
             "value" : "ടൈപ്പ്ഫേസ്"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Skrifttype"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1202,6 +1196,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Stijl"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skrifttype"
           }
         },
         "pl" : {
@@ -1246,7 +1246,7 @@
             "value" : "Typeface"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Slovni oblik"
@@ -1516,12 +1516,6 @@
             "value" : "റദ്ദാക്കുക"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avbryt"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1532,6 +1526,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annuleer"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avbryt"
           }
         },
         "pl" : {
@@ -1576,7 +1576,7 @@
             "value" : "Prekliči"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otkaži"
@@ -1846,12 +1846,6 @@
             "value" : "sans-serif"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "sans-serif"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -1859,6 +1853,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "sans-serif"
+          }
+        },
+        "no" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "sans-serif"
@@ -1890,7 +1890,7 @@
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "sans-serif"
           }
         },
@@ -1906,7 +1906,7 @@
             "value" : "sans-serif"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "sans-serif"
@@ -1978,8 +1978,7 @@
             "value" : "sans-serif"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "qwM-r2-9ki.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Test\"; ObjectID = \"qwM-r2-9ki\";",
@@ -2177,12 +2176,6 @@
             "value" : "പരിശോധന"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Test"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2190,6 +2183,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Test"
+          }
+        },
+        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Test"
@@ -2237,7 +2236,7 @@
             "value" : "Test"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Testiraj"
@@ -2507,12 +2506,6 @@
             "value" : "ശരി"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Godkjenn"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2523,6 +2516,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Godkjenn"
           }
         },
         "pl" : {
@@ -2567,7 +2566,7 @@
             "value" : "V redu"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "U redu"
@@ -2837,12 +2836,6 @@
             "value" : "ഒരു ഫോണ്ട് തിരഞ്ഞെടുക്കുക:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Velg skrifttype:"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -2853,6 +2846,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kies een lettertype:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Velg skrifttype:"
           }
         },
         "pl" : {
@@ -2897,7 +2896,7 @@
             "value" : "Izberi pisavo:"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Odaberi font:"
@@ -3167,12 +3166,6 @@
             "value" : "അല്ലെങ്കിൽ ഫോണ്ടിന്റെ പേര് നൽകുക:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eller skriv inn skrifttypenavn:"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3183,6 +3176,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Of voer de naam van het lettertype in:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eller skriv inn skrifttypenavn:"
           }
         },
         "pl" : {
@@ -3227,7 +3226,7 @@
             "value" : "Or enter the font name:"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ili unesi naziv fonta:"
@@ -3497,12 +3496,6 @@
             "value" : "പ്രിവ്യൂ"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Forhåndsvisning"
-          }
-        },
         "ne" : {
           "stringUnit" : {
             "state" : "new",
@@ -3513,6 +3506,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voorvertoning"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Forhåndsvisning"
           }
         },
         "pl" : {
@@ -3557,7 +3556,7 @@
             "value" : "Predogled"
           }
         },
-        "sr-RS" : {
+        "sr-CS" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pregled"

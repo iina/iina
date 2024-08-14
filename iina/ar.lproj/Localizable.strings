@@ -427,7 +427,7 @@
 "alert.invalid_url" = "عنوان URL غير صالح.";
 "plugin.install_error.invalid_url" = "عنوان URL غير صالح.";
 "plugin.install_error.file_not_found" = "لا يمكن العثور على ملف الحزمة.";
-"plugin.install_error.cannot_download" = "";
+"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_load" = "لا يمكن لـ IINA تحميل هذه الإضافة. قد يكون في شكل خاطئ.";
 "plugin.check_for_updates" = "التحقق من وجود تحديثات";

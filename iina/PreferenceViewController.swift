@@ -16,6 +16,12 @@ class PreferenceViewController: NSViewController {
     return []
   }
 
+  func makeSymbol(_ name: String, fallbackName: NSImage.Name) -> NSImage {
+    guard #available(macOS 11, *) else { return NSImage(named: fallbackName)! }
+    let configuration = NSImage.SymbolConfiguration(pointSize: 18, weight: .bold)
+    return NSImage.findSFSymbol(name, withConfiguration: configuration, fallbackName: fallbackName)
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
 

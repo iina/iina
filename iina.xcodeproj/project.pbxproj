@@ -149,6 +149,7 @@
 		34ACABFA2C142A0C00F871A0 /* libzmq.5.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 34ACAB382C142A0300F871A0 /* libzmq.5.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		34ACABFB2C142A0C00F871A0 /* libzstd.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 34ACAB4E2C142A0400F871A0 /* libzstd.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		34F294C02C0B68B300F14962 /* Contribution.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 34F294BF2C0B68B300F14962 /* Contribution.rtf */; };
+		34F8B6F62C6C7B0100AE4B16 /* PrefPluginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34F8B6F52C6C7B0100AE4B16 /* PrefPluginViewController.xib */; };
 		34FD798E291C76A600963EDE /* LogWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FD798D291C76A600963EDE /* LogWindowController.swift */; };
 		49542975216C34950058F680 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49542974216C34950058F680 /* Cocoa.framework */; };
 		49542978216C34950058F680 /* SafariExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49542977216C34950058F680 /* SafariExtensionHandler.swift */; };
@@ -350,7 +351,6 @@
 		E3530700214908DD008FE492 /* JavascriptAPIHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306FF214908DC008FE492 /* JavascriptAPIHttp.swift */; };
 		E3530702214935DE008FE492 /* JavascriptAPIConsole.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3530701214935DE008FE492 /* JavascriptAPIConsole.swift */; };
 		E353070521496CE4008FE492 /* PrefPluginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E353070321496CE4008FE492 /* PrefPluginViewController.swift */; };
-		E353070621496CE4008FE492 /* PrefPluginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E353070421496CE4008FE492 /* PrefPluginViewController.xib */; };
 		E36E8D7C24F6052F00B8C097 /* GuideWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36E8D7A24F6052F00B8C097 /* GuideWindowController.swift */; };
 		E374160C20F138A900B4F7F9 /* CollapseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E374160B20F138A900B4F7F9 /* CollapseView.swift */; };
 		E374160F20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E374160D20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift */; };
@@ -1114,6 +1114,8 @@
 		34F294BD2C0A211100F14962 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
 		34F294BE2C0A211100F14962 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
 		34F294BF2C0B68B300F14962 /* Contribution.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Contribution.rtf; sourceTree = "<group>"; };
+		34F8B6F42C6C7B0100AE4B16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PrefPluginViewController.xib; sourceTree = "<group>"; };
+		34F8B6F82C6C7B0300AE4B16 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PrefPluginViewController.strings; sourceTree = "<group>"; };
 		34FD798D291C76A600963EDE /* LogWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogWindowController.swift; sourceTree = "<group>"; };
 		440DDE351E9010420063E211 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		440DDE361E9010420063E211 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MainWindowController.strings; sourceTree = "<group>"; };
@@ -1858,7 +1860,6 @@
 		E35306FF214908DC008FE492 /* JavascriptAPIHttp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIHttp.swift; sourceTree = "<group>"; };
 		E3530701214935DE008FE492 /* JavascriptAPIConsole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIConsole.swift; sourceTree = "<group>"; };
 		E353070321496CE4008FE492 /* PrefPluginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefPluginViewController.swift; sourceTree = "<group>"; };
-		E353070421496CE4008FE492 /* PrefPluginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrefPluginViewController.xib; sourceTree = "<group>"; };
 		E36E8D7A24F6052F00B8C097 /* GuideWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideWindowController.swift; sourceTree = "<group>"; };
 		E374160B20F138A900B4F7F9 /* CollapseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapseView.swift; sourceTree = "<group>"; };
 		E374160D20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefUtilsViewController.swift; sourceTree = "<group>"; };
@@ -2179,7 +2180,7 @@
 				8488D6E51E11ABE900D5B952 /* PrefNetworkViewController.swift */,
 				8400D5F81E1AB34D006785F5 /* PrefNetworkViewController.xib */,
 				E353070321496CE4008FE492 /* PrefPluginViewController.swift */,
-				E353070421496CE4008FE492 /* PrefPluginViewController.xib */,
+				34F8B6F52C6C7B0100AE4B16 /* PrefPluginViewController.xib */,
 				E337D5E3241C12BE00B5729A /* PrefPluginPermissionListView.swift */,
 				E38B3211214FB9EA000F6D27 /* PrefPluginPermissionView.swift */,
 				E38B3212214FB9EA000F6D27 /* PrefPluginPermissionView.xib */,
@@ -2961,7 +2962,7 @@
 				E338368A202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.xib in Resources */,
 				34ACA04B29DBB0090030C09C /* LogWindowController.xib in Resources */,
 				8483FB001EDFF325000F55D6 /* Credits.rtf in Resources */,
-				E353070621496CE4008FE492 /* PrefPluginViewController.xib in Resources */,
+				34F8B6F62C6C7B0100AE4B16 /* PrefPluginViewController.xib in Resources */,
 				84F5D49A1E44E9A50060A838 /* KeyBinding.strings in Resources */,
 				E34A0E012053F93A00B50097 /* PrefOSCToolbarSettingsSheetController.xib in Resources */,
 				E34E909A24F821280073BF04 /* GuideWindowController.xib in Resources */,
@@ -3332,6 +3333,15 @@
 				34ACAD6C2C16917000F871A0 /* hr */,
 			);
 			name = LogWindowController.xib;
+			sourceTree = "<group>";
+		};
+		34F8B6F52C6C7B0100AE4B16 /* PrefPluginViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				34F8B6F42C6C7B0100AE4B16 /* Base */,
+				34F8B6F82C6C7B0300AE4B16 /* en */,
+			);
+			name = PrefPluginViewController.xib;
 			sourceTree = "<group>";
 		};
 		8400D5C81E1AB2F1006785F5 /* MainWindowController.xib */ = {

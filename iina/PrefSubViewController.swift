@@ -21,7 +21,7 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
   }
 
   var preferenceTabImage: NSImage {
-    return makeSymbol("captions.bubble", fallbackName: "pref_sub")
+    return makeSymbol("captions.bubble", fallbackImage: "pref_sub")
   }
 
   override var sectionViews: [NSView] {

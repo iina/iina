@@ -47,6 +47,11 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
   @IBOutlet var subBorderColorWell: NSColorWell!
   @IBOutlet var subShadowColorWell: NSColorWell!
 
+  @IBOutlet weak var subOverrideLevelSlider: NSSlider!
+  @IBOutlet weak var subOverrideLevelSegmentedControl: NSSegmentedControl!
+  @IBOutlet weak var subOverrideLevelText: NSTextField!
+  @IBOutlet weak var subOverrideLevelDescriptiveText: NSTextField!
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -142,6 +147,10 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
     NSWorkspace.shared.open(URL(string: AppData.wikiLink.appending("/Download-Online-Subtitles#assrt"))!)
   }
 
+  @IBAction func subOverrideHelpBtnAction(_ sender: Any) {
+    NSWorkspace.shared.open(URL(string: "https://mpv.io/manual/stable/#options-sub-ass-override")!)
+  }
+
   @IBAction func onlineSubSourceAction(_ sender: NSPopUpButton) {
     refreshSubSourceAccessoryView()
   }
@@ -169,11 +178,18 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
       subSourceStackView.setVisibilityPriority(index == map[id] ? .mustHold : .notVisible, for: view)
     }
   }
+
+  @IBAction func subOverrideLevelSegmentedControlAction(_ sender: NSSegmentedControl) {
+    let keyPath = sender.selectedSegment == 0 ? PK.subOverrideLevel.rawValue : PK.secondarySubOverrideLevel.rawValue
+    subOverrideLevelSlider.bind(.value, to: UserDefaults.standard, withKeyPath: keyPath, options: [.valueTransformer: ASSOverrideLevelValueTransformer()])
+    subOverrideLevelText.bind(.value, to: UserDefaults.standard, withKeyPath: keyPath, options: [.valueTransformer: ASSOverrideLevelTextTransformer()])
+    subOverrideLevelDescriptiveText.bind(.value, to: UserDefaults.standard, withKeyPath: keyPath, options: [.valueTransformer: ASSOverrideLevelDescriptiveTextTransformer()])
+  }
 }
 
 // MARK: - Transformers
 
-@objc(ASSOverrideLevelTransformer) class ASSOverrideLevelTransformer: ValueTransformer {
+class ASSOverrideLevelTransformer: ValueTransformer {
 
   static override func allowsReverseTransformation() -> Bool {
     return false
@@ -186,36 +202,43 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
   override func transformedValue(_ value: Any?) -> Any? {
     guard let num = value as? NSNumber,
           let level = Preference.SubOverrideLevel(rawValue: num.intValue) else { return nil }
-    switch level {
-    case .yes:
-      return NSLocalizedString("preference.sub_override_level.yes", value: "yes", comment: "yes")
-    case .force:
-      return NSLocalizedString("preference.sub_override_level.force", value: "force", comment: "force")
-    case .strip:
-      return NSLocalizedString("preference.sub_override_level.strip", value: "strip", comment: "strip")
-    case .scale:
-      return NSLocalizedString("preference.sub_override_level.scale", value: "scale", comment: "scale")
-    }
+    return level.string
+  }
+}
+
+@objc(ASSOverrideLevelTextTransformer) class ASSOverrideLevelTextTransformer: ASSOverrideLevelTransformer {
+  override func transformedValue(_ value: Any?) -> Any? {
+    guard let level = super.transformedValue(value) as? String else { return nil }
+    return NSLocalizedString("preference.sub_override_level." + level, comment: level)
+  }
+}
+
+
+@objc(ASSOverrideLevelDescriptiveTextTransformer) class ASSOverrideLevelDescriptiveTextTransformer: ASSOverrideLevelTransformer {
+  override func transformedValue(_ value: Any?) -> Any? {
+    guard let level = super.transformedValue(value) as? String else { return nil }
+    return NSLocalizedString("preference.sub_override_level.descriptive_text." + level, comment: level)
   }
 }
 
 /// Transform a raw `SubOverrideLevel` enum value into a slider value.
 ///
-///Normally there is a 1 to 1 mapping between an enum value and a slider value. However this is not true for `SubOverrideLevel`.
-///Originally the only supported values for the `Override level` setting were `yes`, `force` and `strip`. Then `scale` was
-///added. The order for the slider now _must_ be `yes`, `scale`, `force` and `strip`. But to preserve backward compatibility
-///with enum values stored in user's settings `scale` was added to the end of the enumeration, thus requiring a transformation
-///between the slider and enum values as shown in this table:
+/// Normally there is a 1 to 1 mapping between an enum value and a slider value. However this is not true for `SubOverrideLevel`.
+/// Originally the only supported values for the `Override level` setting were `yes`, `force` and `strip`. Then `scale` and
+/// `no` were added. The order for the slider now _must_ be `no`, `yes`, `scale`, `force` and `strip`. But to preserve
+/// backward compatibility with enum values stored in user's settings `scale` and `no` were added to the end of the enumeration,
+/// thus requiring a transformation between the slider and enum values as shown in this table:
 ///
 /// | Slider | Raw | Enum |
 /// | --- | --- | --- |
-/// | 0 | 0 | yes |
-/// | 1 | 3 | scale |
-/// | 2 | 1 | force |
-/// | 3 | 2 | strip |
+/// | 0 | 4 | no |
+/// | 1 | 0 | yes |
+/// | 2 | 3 | scale |
+/// | 3 | 1 | force |
+/// | 4 | 2 | strip |
 @objc(ASSOverrideLevelValueTransformer) class ASSOverrideLevelValueTransformer: ValueTransformer {
 
-  private static let enumToSlider: [NSNumber: NSNumber] = [0: 0, 1: 2, 2: 3, 3: 1]
+  private static let enumToSlider: [NSNumber: NSNumber] = [0: 1, 1: 3, 2: 4, 3: 2, 4: 0]
 
   private static let sliderToEnum: [NSNumber: NSNumber] = {
     var result: [NSNumber: NSNumber] = [:]

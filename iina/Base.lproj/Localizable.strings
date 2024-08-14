@@ -167,11 +167,11 @@
 "preference.sub_override_level.strip" = "strip";
 "preference.sub_override_level.yes" = "yes";
 
-"preference.sub_override_level.descriptive_text.no" = "No override: render subtitles as specified by the subtitle scripts.";
-"preference.sub_override_level.descriptive_text.force" = "Only allow override using the --sub-ass-* mpv options.";
-"preference.sub_override_level.descriptive_text.scale" = "Allow adjusting scale of ASS subtitles and override using the --sub-ass-* mpv options.";
-"preference.sub_override_level.descriptive_text.strip" = "Allow adjusting scale and style of ASS subtitles.";
-"preference.sub_override_level.descriptive_text.yes" = "Ignore all style styles from ASS subtitles and override them by IINA settings.";
+"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
+"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
+"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
+"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
+"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
 
 "menu.volume" = "Volume: %d";
 "menu.volume_muted" = "Volume: %d (Muted)";

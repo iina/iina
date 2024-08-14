@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23090" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23090"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -44,7 +44,7 @@
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY" userLabel="Prefs &gt; Plugins View">
             <rect key="frame" x="0.0" y="0.0" width="480" height="545"/>
             <subviews>
-                <textField identifier="SectionTitlePlugins" hidden="YES" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="bIU-VC-U2r" userLabel="Plugins">
+                <textField identifier="SectionTitlePlugins" hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="bIU-VC-U2r" userLabel="Plugins">
                     <rect key="frame" x="211" y="265" width="57" height="16"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Plugins" id="uW4-Bs-Wg3">
@@ -543,8 +543,8 @@
                     </textFieldCell>
                 </textField>
                 <button identifier="FunctionalButtonInstallGitHub" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DbD-Cu-uoz">
-                    <rect key="frame" x="-7" y="454" width="159" height="32"/>
-                    <buttonCell key="cell" type="push" title="Install from GitHub..." bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="enP-C1-4vu">
+                    <rect key="frame" x="-7" y="454" width="158" height="32"/>
+                    <buttonCell key="cell" type="push" title="Install from GitHub…" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="enP-C1-4vu">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -564,7 +564,7 @@
                     <rect key="frame" x="0.0" y="442" width="480" height="5"/>
                 </box>
                 <button identifier="FunctionalButtonInstallLocal" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="K9h-qs-0tJ">
-                    <rect key="frame" x="150" y="454" width="210" height="32"/>
+                    <rect key="frame" x="149" y="454" width="210" height="32"/>
                     <buttonCell key="cell" type="push" title="Install from a local package…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="sdU-FG-dTO">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -606,7 +606,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="283" y="305" width="480" height="297"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1792" height="1095"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="3840" height="1575"/>
             <view key="contentView" id="iQg-1N-GyM">
                 <rect key="frame" x="0.0" y="0.0" width="480" height="297"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -800,6 +800,6 @@ DQ
         </window>
     </objects>
     <resources>
-        <image name="NSFollowLinkFreestandingTemplate" width="20" height="20"/>
+        <image name="NSFollowLinkFreestandingTemplate" width="19" height="19"/>
     </resources>
 </document>

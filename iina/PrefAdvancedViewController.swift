@@ -23,7 +23,7 @@ class PrefAdvancedViewController: PreferenceViewController, PreferenceWindowEmbe
   }
 
   var preferenceTabImage: NSImage {
-    return makeSymbol("flask", fallbackName: "pref_advanced")
+    return makeSymbol("flask", fallbackImage: "pref_advanced")
   }
 
   var preferenceContentIsScrollable: Bool {

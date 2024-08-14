@@ -701,19 +701,19 @@ struct Preference {
     case screenshot
 
     func image() -> NSImage {
-      func makeSymbol(_ name: String, _ fallbackName: NSImage.Name) -> NSImage {
-        guard #available(macOS 11.0, *) else { return NSImage(named: fallbackName)! }
+      func makeSymbol(_ names: [String], _ fallbackImage: NSImage.Name) -> NSImage {
+        guard #available(macOS 14.0, *) else { return NSImage(named: fallbackImage)! }
         let configuration = NSImage.SymbolConfiguration(pointSize: 14, weight: .medium)
-        return NSImage.findSFSymbol(name, withConfiguration: configuration, fallbackName: fallbackName)
+        return NSImage.findSFSymbol(names, withConfiguration: configuration)
       }
       switch self {
-      case .settings: return makeSymbol("gearshape", NSImage.actionTemplateName)
-      case .playlist: return makeSymbol("list.bullet", "playlist")
-      case .pip: return makeSymbol("pip.swap", "pip")
-      case .fullScreen: return makeSymbol("arrow.up.left.and.arrow.down.right", "fullscreen")
-      case .musicMode: return makeSymbol("music.note.list", "toggle-album-art")
-      case .subTrack: return makeSymbol("captions.bubble.fill", "sub-track")
-      case .screenshot: return makeSymbol("camera.shutter.button", "screenshot")
+      case .settings: return makeSymbol(["gearshape"], NSImage.actionTemplateName)
+      case .playlist: return makeSymbol(["list.bullet"], "playlist")
+      case .pip: return makeSymbol(["pip.swap"], "pip")
+      case .fullScreen: return makeSymbol(["arrow.up.backward.and.arrow.down.forward.rectangle", "arrow.up.left.and.arrow.down.right"], "fullscreen")
+      case .musicMode: return makeSymbol(["music.note.list"], "toggle-album-art")
+      case .subTrack: return makeSymbol(["captions.bubble.fill"], "sub-track")
+      case .screenshot: return makeSymbol(["camera.shutter.button"], "screenshot")
       }
     }
 

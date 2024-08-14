@@ -12,7 +12,7 @@ fileprivate let fm = FileManager.default
 fileprivate typealias KC = PrefKeyBindingViewController
 
 @objcMembers
-class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable {
+class PrefKeyBindingViewController: PreferenceViewController, PreferenceWindowEmbeddable {
 
   override var nibName: NSNib.Name {
     return NSNib.Name("PrefKeyBindingViewController")
@@ -23,7 +23,7 @@ class PrefKeyBindingViewController: NSViewController, PreferenceWindowEmbeddable
   }
 
   var preferenceTabImage: NSImage {
-    return NSImage(named: NSImage.Name("pref_kb"))!
+    return makeSymbol("keyboard.badge.ellipsis", fallbackName: "pref_kb")
   }
 
   var preferenceContentIsScrollable: Bool {

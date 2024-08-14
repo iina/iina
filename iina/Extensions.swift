@@ -535,6 +535,23 @@ extension NSImage {
     newImage.unlockFocus()
     return newImage
   }
+
+  /// Try to find a SF Symbol. If the symbol is found, then return the symbol with the configuration applied; otherwise,
+  /// return the fallback image.
+  ///
+  /// - Parameters:
+  ///   - name: The name of the SF Symbol
+  ///   - configuration: The symbol configuration for the SF symbol
+  ///   - fallbackName: If the current macOS doesn't contains the wanted SF symbol, then the fallback image will be returned
+  @available(macOS 11.0, *)
+  static func findSFSymbol(_ name: String, withConfiguration configuration: NSImage.SymbolConfiguration?, fallbackName: NSImage.Name) -> NSImage {
+    guard let symbol = NSImage(systemSymbolName: name, accessibilityDescription: nil) else { return NSImage(named: fallbackName)! }
+    if let configuration, let configed = symbol.withSymbolConfiguration(configuration) {
+      return configed
+    }
+    return symbol
+  }
+
 }
 
 

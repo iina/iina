@@ -30,6 +30,8 @@ class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbedda
   @IBOutlet var sectionVideoView: NSView!
   @IBOutlet var sectionAudioView: NSView!
   @IBOutlet var sectionReplayGainView: NSView!
+  
+  @IBOutlet weak var audioDriverExperimentalIndicator: NSImageView!
 
   @IBOutlet weak var spdifAC3Btn: NSButton!
   @IBOutlet weak var spdifDTSBtn: NSButton!
@@ -51,6 +53,12 @@ class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbedda
 
   override func viewWillAppear() {
     super.viewWillAppear()
+    
+    if #available(macOS 14.0, *) {
+      audioDriverExperimentalIndicator.image = NSImage.findSFSymbol(["flask.fill"])
+    } else {
+      audioDriverExperimentalIndicator.image = NSImage(named: "NSInfo")
+    }
 
     audioDevicePopUp.removeAllItems()
     let audioDevices = PlayerCore.active.getAudioDevices()
@@ -118,5 +126,9 @@ class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbedda
 
   @IBAction func gainAdjustmentHelpAction(_ sender: Any) {
     NSWorkspace.shared.open(URL(string: AppData.gainAdjustmentHelpLink)!)
+  }
+
+  @IBAction func audioDriverHelpAction(_ sender: Any) {
+    NSWorkspace.shared.open(URL(string: AppData.audioDriverHellpLink)!)
   }
 }

@@ -56,8 +56,6 @@ class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbedda
     
     if #available(macOS 14.0, *) {
       audioDriverExperimentalIndicator.image = NSImage.findSFSymbol(["flask.fill"])
-    } else {
-      audioDriverExperimentalIndicator.image = NSImage(named: "NSInfo")
     }
 
     audioDevicePopUp.removeAllItems()

@@ -64,6 +64,7 @@ struct AppData {
   static let algorithmHelpLink = "https://mpv.io/manual/stable/#options-tone-mapping"
   static let disableAnimationsHelpLink = "https://developer.apple.com/design/human-interface-guidelines/accessibility#Motion"
   static let gainAdjustmentHelpLink = "https://mpv.io/manual/stable/#options-replaygain"
+  static let audioDriverHellpLink = "https://mpv.io/manual/stable/#audio-output-drivers-coreaudio"
 
   static let widthWhenNoVideo = 640
   static let heightWhenNoVideo = 360

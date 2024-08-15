@@ -603,7 +603,7 @@
                     <rect key="frame" x="118" y="194" width="364" height="56"/>
                     <textFieldCell key="cell" allowsUndo="NO" id="2Md-pv-gSi">
                         <font key="font" metaFont="smallSystem"/>
-                        <string key="title">AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays. This requires restarting IINA to take effect.</string>
+                        <string key="title">AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays.</string>
                         <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>

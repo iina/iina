@@ -35,24 +35,26 @@ class JavascriptAPIPlaylist: JavascriptAPI, JavascriptAPIPlaylistExportable {
   func list() -> [[String: Any]] {
     guard isPlaying() else { return [] }
 
-    return player!.info.playlist.map {
-      [
-        "filename": $0.filename,
-        "title": $0.title ?? NSNull(),
-        "isPlaying": $0.isPlaying,
-        "isCurrent": $0.isCurrent
-      ]
+    return player!.info.$playlist.withLock { playlist in
+      playlist.map {
+        [
+          "filename": $0.filename,
+          "title": $0.title ?? NSNull(),
+          "isPlaying": $0.isPlaying,
+          "isCurrent": $0.isCurrent
+        ]
+      }
     }
   }
 
   func count() -> Int {
-    return player!.info.playlist.count
+    return player!.info.$playlist.withLock { $0.count }
   }
 
   func add(_ url: JSValue, _ at: Int = -1) -> Any {
     guard isPlaying() else { return false }
 
-    let count = player!.info.playlist.count
+    let count = player!.info.$playlist.withLock { $0.count }
     guard at < count else {
       log("playlist.add: Invalid index.", level: .error)
       return false
@@ -96,7 +98,7 @@ class JavascriptAPIPlaylist: JavascriptAPI, JavascriptAPIPlaylistExportable {
 
   func move(_ index: Int, _ to: Int) -> Any {
     guard isPlaying() else { return false }
-    let count = player!.info.playlist.count
+    let count = player!.info.$playlist.withLock { $0.count }
 
     guard index >= 0 && index < count && to >= 0 && to < count && index != to else {
       log("playlist.move: Invalid index.", level: .error)
@@ -108,7 +110,7 @@ class JavascriptAPIPlaylist: JavascriptAPI, JavascriptAPIPlaylistExportable {
 
   func play(_ index: Int) {
     guard isPlaying() else { return }
-    let count = player!.info.playlist.count
+    let count = player!.info.$playlist.withLock { $0.count }
 
     guard index >= 0 && index < count else {
       log("playlist.play: Invalid index.", level: .error)

@@ -54,8 +54,10 @@ class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbedda
   override func viewWillAppear() {
     super.viewWillAppear()
     
-    if #available(macOS 11.0, *) {
-      audioDriverExperimentalIndicator.image = NSImage.findSFSymbol("flask.fill", withConfiguration: nil, fallbackName: "NSInfo")
+    if #available(macOS 14.0, *) {
+      audioDriverExperimentalIndicator.image = NSImage.findSFSymbol(["flask.fill"])
+    } else {
+      audioDriverExperimentalIndicator.image = NSImage(named: "NSInfo")
     }
 
     audioDevicePopUp.removeAllItems()

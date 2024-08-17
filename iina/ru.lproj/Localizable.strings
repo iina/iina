@@ -161,10 +161,17 @@
 
 "preference.enable_adv_settings" = "Включить расширенные настройки";
 
+"preference.sub_override_level.no" = "no";
 "preference.sub_override_level.force" = "принудительно";
 "preference.sub_override_level.scale" = "масштаб";
 "preference.sub_override_level.strip" = "игнорировать все теги и стили в .ass";
 "preference.sub_override_level.yes" = "вкл";
+
+"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
+"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
+"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
+"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
+"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
 
 "menu.volume" = "Громкость: %d";
 "menu.volume_muted" = "Громкость: %d (без звука)";

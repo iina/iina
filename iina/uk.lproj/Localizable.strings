@@ -161,10 +161,17 @@
 
 "preference.enable_adv_settings" = "Увімкнути розширені налаштування";
 
+"preference.sub_override_level.no" = "no";
 "preference.sub_override_level.force" = "сила";
 "preference.sub_override_level.scale" = "масштаб";
 "preference.sub_override_level.strip" = "видалити";
 "preference.sub_override_level.yes" = "так";
+
+"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
+"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
+"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
+"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
+"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
 
 "menu.volume" = "Гучність: %d";
 "menu.volume_muted" = "Гучність: %d (Без звуку)";

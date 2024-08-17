@@ -1,0 +1,86 @@
+/* Class = "NSButtonCell"; title = "Install"; ObjectID = "3xh-dU-HuR"; */
+"3xh-dU-HuR.title" = "Установить";
+
+/* Class = "NSTabViewItem"; label = "Permissions"; ObjectID = "ALD-n6-A0r"; */
+"ALD-n6-A0r.label" = "Права доступа";
+
+/* Class = "NSTextFieldCell"; title = "Author"; ObjectID = "Dkk-JQ-qHA"; */
+"Dkk-JQ-qHA.title" = "Автор";
+
+/* Class = "NSButtonCell"; title = "Email"; ObjectID = "EHl-kr-ZZf"; */
+"EHl-kr-ZZf.title" = "Эл. почта";
+
+/* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[0] = "Permissions"; ObjectID = "KTN-5r-mMm"; */
+"KTN-5r-mMm.ibShadowedLabels[0]" = "Права доступа";
+
+/* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[1] = "About"; ObjectID = "KTN-5r-mMm"; */
+"KTN-5r-mMm.ibShadowedLabels[1]" = "О программе";
+
+/* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[2] = "Preferences"; ObjectID = "KTN-5r-mMm"; */
+"KTN-5r-mMm.ibShadowedLabels[2]" = "Настройки";
+
+/* Class = "NSTextFieldCell"; title = "Help"; ObjectID = "Ka5-V3-g5E"; */
+"Ka5-V3-g5E.title" = "Справка";
+
+/* Class = "NSButtonCell"; title = "Check for Updates"; ObjectID = "MyY-5s-tIm"; */
+"MyY-5s-tIm.title" = "Проверить обновления";
+
+/* Class = "NSTextFieldCell"; title = "Please enter the full URL of the GitHub repository or a string in the \"user/repo\" format. You can also choose one from the default plugins list."; ObjectID = "Nmf-79-hFX"; */
+"Nmf-79-hFX.title" = "Пожалуйста, введите полный URL GitHub-репозитория или строку в формате «пользователь/репозиторий». Вы также можете выбрать его из списка плагинов по умолчанию.";
+
+/* Class = "NSTabViewItem"; label = "Support"; ObjectID = "T21-nd-TLF"; */
+"T21-nd-TLF.label" = "Поддержка";
+
+/* Class = "NSButtonCell"; title = "Website"; ObjectID = "X6J-6H-IPn"; */
+"X6J-6H-IPn.title" = "Сайт";
+
+/* Class = "NSTextFieldCell"; title = "Installed plugins:"; ObjectID = "Ztn-MG-D7D"; */
+"Ztn-MG-D7D.title" = "Установленные плагины:";
+
+/* Class = "NSTextFieldCell"; placeholderString = "user/repo"; ObjectID = "b60-P6-AN2"; */
+"b60-P6-AN2.placeholderString" = "пользователь/репозиторий";
+
+/* Class = "NSButtonCell"; title = "Show in Finder"; ObjectID = "drh-6w-3z1"; */
+"drh-6w-3z1.title" = "Показать в Finder";
+
+/* Class = "NSButtonCell"; title = "Install from GitHub…"; ObjectID = "enP-C1-4vu"; */
+"enP-C1-4vu.title" = "Установить с GitHub…";
+
+/* Class = "NSTabViewItem"; label = "Preferences"; ObjectID = "eyS-eb-H4e"; */
+"eyS-eb-H4e.label" = "Настройки";
+
+/* Class = "NSTextFieldCell"; title = "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically."; ObjectID = "fnl-uA-X7r"; */
+"fnl-uA-X7r.title" = "Вы можете установить новый плагин с GitHub или локальный пакет .iinaplgz. Плагины, установленные с GitHub, могут обновляться автоматически.";
+
+/* Class = "NSButtonCell"; title = "Reload"; ObjectID = "ixN-OS-w87"; */
+"ixN-OS-w87.title" = "Перезагрузить";
+
+/* Class = "NSTextFieldCell"; title = "Identifier"; ObjectID = "jlQ-sd-s0K"; */
+"jlQ-sd-s0K.title" = "Идентификатор";
+
+/* Class = "NSTextFieldCell"; title = "Default plugins:"; ObjectID = "np4-XQ-xdI"; */
+"np4-XQ-xdI.title" = "Плагины по умолчанию:";
+
+/* Class = "NSTextFieldCell"; title = "Failed to load the page."; ObjectID = "pkE-3K-CfZ"; */
+"pkE-3K-CfZ.title" = "Не удалось загрузить страницу.";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "qje-hT-j7H"; */
+"qje-hT-j7H.title" = "Отмена";
+
+/* Class = "NSTextFieldCell"; title = "Source"; ObjectID = "r3r-Qh-rC9"; */
+"r3r-Qh-rC9.title" = "Источник";
+
+/* Class = "NSButtonCell"; title = "Install from a local package…"; ObjectID = "sdU-FG-dTO"; */
+"sdU-FG-dTO.title" = "Установить из локального пакета…";
+
+/* Class = "NSTextFieldCell"; title = "Plugins"; ObjectID = "tfn-0I-n6p"; */
+"tfn-0I-n6p.title" = "Плагины";
+
+/* Class = "NSTextFieldCell"; title = "Plugins"; ObjectID = "uW4-Bs-Wg3"; */
+"uW4-Bs-Wg3.title" = "Плагины";
+
+/* Class = "NSButtonCell"; title = "Uninstall"; ObjectID = "ue8-hU-kLm"; */
+"ue8-hU-kLm.title" = "Удалить";
+
+/* Class = "NSTextFieldCell"; title = "Install a new plugin from GitHub"; ObjectID = "zvu-Up-fQJ"; */
+"zvu-Up-fQJ.title" = "Установить новый плагин с GitHub";

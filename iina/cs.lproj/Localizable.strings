@@ -97,12 +97,12 @@
 "osd.sub_delay.later" = "Zpoždění titulků: %.2f s";
 "osd.sub_delay.earlier" = "Zpoždění titulků: −%.2f s";
 "osd.subtitle_pos" = "Umístění titulků: %.1f";
-"osd.sub_hidden" = "Subtitles Hidden";
+"osd.sub_hidden" = "Titulky skryty";
 "osd.sub_visible" = "Subtitles Visible";
 "osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
 "osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
 "osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
-"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
+"osd.sub_second_hidden" = "Druhé titulky skryty";
 "osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
 "osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Ztlumeno";
@@ -161,19 +161,26 @@
 
 "preference.enable_adv_settings" = "Povolit pokročilá nastavení";
 
+"preference.sub_override_level.no" = "no";
 "preference.sub_override_level.force" = "force";
 "preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "Základní";
 "preference.sub_override_level.yes" = "yes";
 
+"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
+"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
+"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
+"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
+"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
+
 "menu.volume" = "Hlasitost: %d";
 "menu.volume_muted" = "Hlasitost: %d (Ztlumeno)";
 "menu.audio_delay" = "Zpoždění zvuku: %.2f s";
 "menu.sub_delay" = "Zpoždění titulků: %.2f s";
-"menu.sub_hide" = "Hide Subtitles";
-"menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Secondary Subtitles";
-"menu.sub_second_show" = "Show Secondary Subtitles";
+"menu.sub_hide" = "Skrýt titulky";
+"menu.sub_show" = "Zobrazit titulky";
+"menu.sub_second_hide" = "Skrýt druhé titulky";
+"menu.sub_second_show" = "Zobrazit druhé titulky";
 "menu.fullscreen" = "Spustit režim celé obrazovky";
 "menu.exit_fullscreen" = "Ukončit režim celé obrazovky";
 "menu.pip" = "Spustit obraz v obrazu";

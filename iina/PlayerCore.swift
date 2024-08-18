@@ -394,6 +394,9 @@ class PlayerCore: NSObject {
     // clear currentFolder since playlist is cleared, so need to auto-load again in playerCore#fileStarted
     info.currentFolder = nil
     info.isNetworkResource = isNetwork
+    if isNetwork {
+      AppDelegate.shared.openURLWindow.showLoadingScreen(playerCore: self)
+    }
 
     let _ = mainWindow.window
     mainWindow.pendingShow = true

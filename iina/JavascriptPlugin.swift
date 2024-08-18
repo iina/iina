@@ -296,10 +296,8 @@ class JavascriptPlugin: NSObject {
       throw PluginError.cannotLoadPlugin
     }
 
-    guard plugin.githubVersion != nil, url.absoluteString == plugin.githubURLString else {
-      Logger.log("The plugin \(plugin.name) doesn't contain a ghVersion field or its ghRepo doesn't match the current requested URL \(url.absoluteString).")
-      removeTempPluginFolder()
-      throw PluginError.cannotLoadPlugin
+    if plugin.githubVersion == nil || plugin.githubURLString == nil {
+      Logger.log("The plugin \(plugin.name) doesn't contain a ghVersion field or its ghRepo doesn't match the current requested URL \(url.absoluteString).", level: .warning)
     }
     return plugin
   }

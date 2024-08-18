@@ -286,6 +286,9 @@ class PlayerCore: NSObject {
     }
     log("Open URL: \(url.absoluteString)")
     let isNetwork = !url.isFileURL
+    if isNetwork {
+      currentWindow?.close()
+    }
     if shouldAutoLoad {
       info.shouldAutoLoadFiles = true
     }
@@ -2180,6 +2183,7 @@ class PlayerCore: NSObject {
     if currentController.pendingShow {
       currentController.pendingShow = false
       currentController.showWindow(self)
+      AppDelegate.shared.openURLWindow.close()
     }
   }
 

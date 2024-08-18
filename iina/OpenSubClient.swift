@@ -318,7 +318,7 @@ class OpenSubClient {
   }
 
   /// [Logout](https://opensubtitles.stoplight.io/docs/opensubtitles-api/9fe4d6d078e50-logout) method.
-  /// - Parameter timeout: The timeout to to use for the the request.
+  /// - Parameter timeout: The timeout to to use for the request.
   /// - Returns: A `LogoutResponse`
   func logout(timeout: TimeInterval? = nil) -> Promise<LogoutResponse> {
     return after(seconds: rateLimiter.delayBeforeCall()).then { [self] in

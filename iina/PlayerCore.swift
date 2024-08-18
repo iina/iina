@@ -2104,7 +2104,7 @@ class PlayerCore: NSObject {
     } else if needsTouchBar || isInMiniPlayer {
       // Follow energy efficiency best practices and stop the timer that updates the OSC while it is
       // hidden. However the timer can't be stopped if the mini player is being used as it always
-      // displays the the OSC or the timer is also updating the information being displayed in the
+      // displays the OSC or the timer is also updating the information being displayed in the
       // touch bar. Does this host have a touch bar? Is the touch bar configured to show app controls?
       // Is the touch bar awake? Is the host being operated in closed clamshell mode? This is the kind
       // of information needed to avoid running the timer and updating controls that are not visible.

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23089" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23090" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23090"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1294,8 +1294,8 @@
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     </view>
                                                                 </box>
-                                                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jUH-hL-3U3" userLabel="+12 dB Text Field">
-                                                                    <rect key="frame" x="289" y="141" width="45" height="14"/>
+                                                                <textField focusRingType="none" horizontalHuggingPriority="1000" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jUH-hL-3U3" userLabel="+12 dB Text Field">
+                                                                    <rect key="frame" x="293" y="141" width="41" height="14"/>
                                                                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="+12 dB" id="4BZ-H1-GEU">
                                                                         <font key="font" metaFont="smallSystem"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1335,7 +1335,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gfz-yF-41J">
-                                                                    <rect key="frame" x="83" y="20" width="24" height="11"/>
+                                                                    <rect key="frame" x="84" y="20" width="24" height="11"/>
                                                                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="125" id="1cq-dc-JfM">
                                                                         <font key="font" metaFont="label" size="9"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1343,7 +1343,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1he-Ll-CYl">
-                                                                    <rect key="frame" x="108" y="20" width="26" height="11"/>
+                                                                    <rect key="frame" x="109" y="20" width="26" height="11"/>
                                                                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="250" id="ekh-gc-2qo">
                                                                         <font key="font" metaFont="label" size="9"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1351,7 +1351,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j15-F0-7GR">
-                                                                    <rect key="frame" x="134" y="20" width="26" height="11"/>
+                                                                    <rect key="frame" x="135" y="20" width="26" height="11"/>
                                                                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="500" id="tHa-vN-OlI">
                                                                         <font key="font" metaFont="label" size="9"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1359,7 +1359,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wvc-3m-7dA">
-                                                                    <rect key="frame" x="164" y="20" width="18" height="11"/>
+                                                                    <rect key="frame" x="166" y="20" width="18" height="11"/>
                                                                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="1k" id="Rtc-Eg-J2u">
                                                                         <font key="font" metaFont="label" size="9"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1367,7 +1367,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cnq-7d-eC4">
-                                                                    <rect key="frame" x="189" y="20" width="19" height="11"/>
+                                                                    <rect key="frame" x="192" y="20" width="19" height="11"/>
                                                                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="2k" id="j9w-YU-EcC">
                                                                         <font key="font" metaFont="label" size="9"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1375,7 +1375,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uUe-VB-wyv">
-                                                                    <rect key="frame" x="215" y="20" width="20" height="11"/>
+                                                                    <rect key="frame" x="218" y="20" width="20" height="11"/>
                                                                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="4k" id="i0j-2a-vKD">
                                                                         <font key="font" metaFont="label" size="9"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1383,7 +1383,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eOZ-KM-xLa">
-                                                                    <rect key="frame" x="241" y="20" width="19" height="11"/>
+                                                                    <rect key="frame" x="244" y="20" width="19" height="11"/>
                                                                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="8k" id="e4X-H4-VxS">
                                                                         <font key="font" metaFont="label" size="9"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1391,7 +1391,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aOD-Qz-oE3">
-                                                                    <rect key="frame" x="265" y="20" width="24" height="11"/>
+                                                                    <rect key="frame" x="268" y="20" width="24" height="11"/>
                                                                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="16k" id="era-AG-bSl">
                                                                         <font key="font" metaFont="label" size="9"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1399,22 +1399,22 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="ArR-4S-Gps">
-                                                                    <rect key="frame" x="36" y="146" width="247" height="5"/>
+                                                                    <rect key="frame" x="36" y="146" width="251" height="5"/>
                                                                 </box>
                                                                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="S1M-YW-ac8">
-                                                                    <rect key="frame" x="36" y="43" width="247" height="5"/>
+                                                                    <rect key="frame" x="36" y="43" width="251" height="5"/>
                                                                 </box>
                                                                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="ANI-DE-0LU">
-                                                                    <rect key="frame" x="36" y="120" width="247" height="5"/>
+                                                                    <rect key="frame" x="36" y="120" width="251" height="5"/>
                                                                 </box>
                                                                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="W8L-56-yE9">
-                                                                    <rect key="frame" x="36" y="95" width="247" height="5"/>
+                                                                    <rect key="frame" x="36" y="95" width="251" height="5"/>
                                                                 </box>
                                                                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="1jP-b9-gGi">
-                                                                    <rect key="frame" x="36" y="69" width="247" height="5"/>
+                                                                    <rect key="frame" x="36" y="69" width="251" height="5"/>
                                                                 </box>
                                                                 <stackView distribution="equalSpacing" orientation="horizontal" alignment="top" spacing="13" horizontalStackHuggingPriority="1000" verticalStackHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="xtT-Or-HjR" userLabel="AudioEQSliders HStack">
-                                                                    <rect key="frame" x="36" y="39" width="247" height="116"/>
+                                                                    <rect key="frame" x="36" y="39" width="251" height="116"/>
                                                                     <subviews>
                                                                         <slider horizontalHuggingPriority="750" verticalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="pHR-ym-VeQ">
                                                                             <rect key="frame" x="-2" y="-2" width="17" height="120"/>
@@ -1424,63 +1424,63 @@
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" verticalCompressionResistancePriority="500" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="Qhv-oC-xzP">
-                                                                            <rect key="frame" x="24" y="-2" width="17" height="120"/>
+                                                                            <rect key="frame" x="24" y="-2" width="18" height="120"/>
                                                                             <sliderCell key="cell" controlSize="mini" refusesFirstResponder="YES" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" sliderType="linear" id="SCy-Om-bV6"/>
                                                                             <connections>
                                                                                 <action selector="audioEqSliderAction:" target="-2" id="xQb-Li-0pw"/>
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" verticalCompressionResistancePriority="500" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="iDT-gu-k7t">
-                                                                            <rect key="frame" x="50" y="-2" width="17" height="120"/>
+                                                                            <rect key="frame" x="51" y="-2" width="17" height="120"/>
                                                                             <sliderCell key="cell" controlSize="mini" refusesFirstResponder="YES" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" sliderType="linear" id="a7E-4j-6g2"/>
                                                                             <connections>
                                                                                 <action selector="audioEqSliderAction:" target="-2" id="bCl-L6-1iR"/>
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" verticalCompressionResistancePriority="500" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="O2w-VO-03F">
-                                                                            <rect key="frame" x="76" y="-2" width="17" height="120"/>
+                                                                            <rect key="frame" x="77" y="-2" width="18" height="120"/>
                                                                             <sliderCell key="cell" controlSize="mini" refusesFirstResponder="YES" state="on" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" sliderType="linear" id="TbE-dB-ORk"/>
                                                                             <connections>
                                                                                 <action selector="audioEqSliderAction:" target="-2" id="15r-Ui-dhW"/>
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" verticalCompressionResistancePriority="500" tag="4" translatesAutoresizingMaskIntoConstraints="NO" id="npn-V6-hjZ">
-                                                                            <rect key="frame" x="102" y="-2" width="17" height="120"/>
+                                                                            <rect key="frame" x="104" y="-2" width="17" height="120"/>
                                                                             <sliderCell key="cell" controlSize="mini" refusesFirstResponder="YES" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" sliderType="linear" id="4Ra-VR-yOK"/>
                                                                             <connections>
                                                                                 <action selector="audioEqSliderAction:" target="-2" id="sWe-Hb-axh"/>
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" verticalCompressionResistancePriority="500" tag="5" translatesAutoresizingMaskIntoConstraints="NO" id="TKd-tg-Xtc">
-                                                                            <rect key="frame" x="128" y="-2" width="17" height="120"/>
+                                                                            <rect key="frame" x="130" y="-2" width="17" height="120"/>
                                                                             <sliderCell key="cell" controlSize="mini" refusesFirstResponder="YES" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" sliderType="linear" id="xV9-OM-MHq"/>
                                                                             <connections>
                                                                                 <action selector="audioEqSliderAction:" target="-2" id="bVX-Tj-pgM"/>
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" verticalCompressionResistancePriority="500" tag="6" translatesAutoresizingMaskIntoConstraints="NO" id="nNf-gg-4tL">
-                                                                            <rect key="frame" x="154" y="-2" width="17" height="120"/>
+                                                                            <rect key="frame" x="156" y="-2" width="18" height="120"/>
                                                                             <sliderCell key="cell" controlSize="mini" refusesFirstResponder="YES" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" sliderType="linear" id="TNb-Es-VsX"/>
                                                                             <connections>
                                                                                 <action selector="audioEqSliderAction:" target="-2" id="p1d-eK-UB3"/>
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" verticalCompressionResistancePriority="500" tag="7" translatesAutoresizingMaskIntoConstraints="NO" id="JaQ-EH-K1U">
-                                                                            <rect key="frame" x="180" y="-2" width="17" height="120"/>
+                                                                            <rect key="frame" x="183" y="-2" width="17" height="120"/>
                                                                             <sliderCell key="cell" controlSize="mini" refusesFirstResponder="YES" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" sliderType="linear" id="P8O-pY-Nby"/>
                                                                             <connections>
                                                                                 <action selector="audioEqSliderAction:" target="-2" id="oxX-UX-l6i"/>
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" verticalCompressionResistancePriority="500" tag="8" translatesAutoresizingMaskIntoConstraints="NO" id="gbd-xf-hGS">
-                                                                            <rect key="frame" x="206" y="-2" width="17" height="120"/>
+                                                                            <rect key="frame" x="209" y="-2" width="18" height="120"/>
                                                                             <sliderCell key="cell" controlSize="mini" refusesFirstResponder="YES" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" sliderType="linear" id="GEq-jW-WUw"/>
                                                                             <connections>
                                                                                 <action selector="audioEqSliderAction:" target="-2" id="pkI-fs-ZCs"/>
                                                                             </connections>
                                                                         </slider>
                                                                         <slider horizontalHuggingPriority="750" verticalCompressionResistancePriority="500" tag="9" translatesAutoresizingMaskIntoConstraints="NO" id="w04-h5-qaz">
-                                                                            <rect key="frame" x="232" y="-2" width="17" height="120"/>
+                                                                            <rect key="frame" x="236" y="-2" width="17" height="120"/>
                                                                             <sliderCell key="cell" controlSize="mini" refusesFirstResponder="YES" alignment="left" minValue="-12" maxValue="12" tickMarkPosition="left" sliderType="linear" id="5FD-oT-GpE"/>
                                                                             <connections>
                                                                                 <action selector="audioEqSliderAction:" target="-2" id="I08-gI-z8e"/>
@@ -1488,7 +1488,16 @@
                                                                         </slider>
                                                                     </subviews>
                                                                     <constraints>
+                                                                        <constraint firstItem="Qhv-oC-xzP" firstAttribute="width" secondItem="pHR-ym-VeQ" secondAttribute="width" id="8NF-D9-ur6"/>
+                                                                        <constraint firstItem="iDT-gu-k7t" firstAttribute="width" secondItem="pHR-ym-VeQ" secondAttribute="width" id="Hhg-eV-Uuj"/>
+                                                                        <constraint firstItem="O2w-VO-03F" firstAttribute="width" secondItem="pHR-ym-VeQ" secondAttribute="width" id="P1Q-Vw-1Bj"/>
+                                                                        <constraint firstItem="w04-h5-qaz" firstAttribute="width" secondItem="pHR-ym-VeQ" secondAttribute="width" id="QV9-LY-UR9"/>
+                                                                        <constraint firstItem="TKd-tg-Xtc" firstAttribute="width" secondItem="pHR-ym-VeQ" secondAttribute="width" id="XGa-3f-NGX"/>
+                                                                        <constraint firstItem="npn-V6-hjZ" firstAttribute="width" secondItem="pHR-ym-VeQ" secondAttribute="width" id="b6u-Pz-OHZ"/>
+                                                                        <constraint firstItem="nNf-gg-4tL" firstAttribute="width" secondItem="pHR-ym-VeQ" secondAttribute="width" id="bsR-FZ-TcX"/>
                                                                         <constraint firstAttribute="height" constant="116" id="nDW-aS-hPT"/>
+                                                                        <constraint firstItem="gbd-xf-hGS" firstAttribute="width" secondItem="pHR-ym-VeQ" secondAttribute="width" id="zSM-iB-jXD"/>
+                                                                        <constraint firstItem="JaQ-EH-K1U" firstAttribute="width" secondItem="pHR-ym-VeQ" secondAttribute="width" id="zqG-dT-mKp"/>
                                                                     </constraints>
                                                                     <visibilityPriorities>
                                                                         <integer value="1000"/>
@@ -2589,7 +2598,7 @@
         <userDefaultsController representsSharedInstance="YES" id="CE5-Ex-Oo6"/>
     </objects>
     <resources>
-        <image name="NSRefreshFreestandingTemplate" width="20" height="20"/>
+        <image name="NSRefreshFreestandingTemplate" width="19" height="19"/>
         <image name="tab_audio" width="26" height="18"/>
         <image name="tab_sub" width="26" height="18"/>
         <image name="tab_video" width="26" height="18"/>

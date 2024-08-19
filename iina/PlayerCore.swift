@@ -1830,7 +1830,7 @@ class PlayerCore: NSObject {
   func fileEnded(dueToStopCommand: Bool) {
     // if receive end-file when loading file, might be error
     // wait for idle
-    if info.state == .loading {
+    if info.state == .starting {
       if !dueToStopCommand {
         receivedEndFileWhileLoading = true
       }
@@ -1871,8 +1871,12 @@ class PlayerCore: NSObject {
   }
 
   func idleActiveChanged() {
-    if receivedEndFileWhileLoading && info.state == .loading {
-      errorOpeningFileAndCloseMainWindow()
+    if receivedEndFileWhileLoading && info.state == .starting {
+      if AppDelegate.shared.openURLWindow.window?.isVisible == true && info.isNetworkResource {
+        AppDelegate.shared.openURLWindow.failedToLoadURL(url: info.currentURL?.absoluteString)
+      } else {
+        errorOpeningFileAndCloseMainWindow()
+      }
       info.currentURL = nil
       info.isNetworkResource = false
     }

@@ -56,6 +56,14 @@ class OpenURLWindowController: NSWindowController, NSTextFieldDelegate, NSContro
     showWindow(self)
   }
 
+  func failedToLoadURL(url: String?) {
+    guard isWindowLoaded && window?.isVisible == true else { return }
+    urlField.stringValue = url ?? ""
+    errorMessageLabel.isHidden = false
+    overlayView.isHidden = true
+    urlField.textColor = .systemRed
+  }
+
   func resetWindowState() {
     urlField.stringValue = ""
     usernameField.stringValue = ""

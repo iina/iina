@@ -14,11 +14,9 @@ fileprivate extension NSUserInterfaceItemIdentifier {
 }
 
 struct Contributor: Decodable {
-  let username: String
   let avatarURL: String
 
   enum CodingKeys: String, CodingKey {
-    case username = "login"
     case avatarURL = "avatar_url"
   }
 }
@@ -191,18 +189,6 @@ extension AboutWindowController: NSCollectionViewDataSource {
     })
   }
 }
-
-fileprivate extension NSUserInterfaceItemIdentifier {
-  static let langColumn = NSUserInterfaceItemIdentifier("LangColumn")
-  static let langCell = NSUserInterfaceItemIdentifier("LangCell")
-  static let translatorColumn = NSUserInterfaceItemIdentifier("TranslatorColumn")
-  static let translatorCell = NSUserInterfaceItemIdentifier("TranslatorCell")
-}
-
-fileprivate let identifierMap: [NSUserInterfaceItemIdentifier: NSUserInterfaceItemIdentifier] = [
-  .langColumn: .langCell,
-  .translatorColumn: .translatorCell
-]
 
 class AboutWindowButton: NSButton {
 

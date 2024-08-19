@@ -70,10 +70,6 @@ class EventController {
     return true
   }
 
-  func removeAllListener(for name: Name) {
-    listeners[name]?.removeAll()
-  }
-
   func emit(_ eventName: Name, data: Any...) {
     guard let listeners = listeners[eventName] else { return }
     for listener in listeners.values {

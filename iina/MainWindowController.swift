@@ -1637,7 +1637,6 @@ class MainWindowController: PlayerWindowController {
     // Must not access mpv while it is asynchronously processing stop and quit commands.
     // See comments in windowWillExitFullScreen for details.
     guard player.info.state.active else { return }
-    videoView.videoSize = window!.convertToBacking(videoView.bounds).size
     videoView.videoLayer.isAsynchronous = false
     updateWindowParametersForMPV()
   }
@@ -2451,8 +2450,6 @@ class MainWindowController: PlayerWindowController {
     let originalVideoSize = NSSize(width: width, height: height)
     window.aspectRatio = originalVideoSize
     pip.aspectRatio = originalVideoSize
-
-    videoView.videoSize = window.convertToBacking(videoView.frame).size
 
     var rect: NSRect
     let needResizeWindow: Bool

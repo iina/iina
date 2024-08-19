@@ -123,6 +123,8 @@ class InitialWindowController: NSWindowController {
     super.windowDidLoad()
     loaded = true
 
+    appIcon.unregisterDraggedTypes()
+
     window?.titlebarAppearsTransparent = true
     window?.titleVisibility = .hidden
     window?.isMovableByWindowBackground = true

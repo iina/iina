@@ -1872,17 +1872,22 @@ class PlayerCore: NSObject {
 
   func idleActiveChanged() {
     if receivedEndFileWhileLoading && info.state == .starting {
-      if AppDelegate.shared.openURLWindow.window?.isVisible == true && info.isNetworkResource {
-        AppDelegate.shared.openURLWindow.failedToLoadURL(url: info.currentURL?.absoluteString)
-      } else {
-        errorOpeningFileAndCloseMainWindow()
+      DispatchQueue.main.async { [unowned self] in
+        currentController.close()
+        if AppDelegate.shared.openURLWindow.window?.isVisible == true && info.isNetworkResource {
+          AppDelegate.shared.openURLWindow.failedToLoadURL(url: info.currentURL?.absoluteString)
+        } else {
+          Utility.showAlert("error_open")
+        }
       }
       info.currentURL = nil
       info.isNetworkResource = false
     }
     receivedEndFileWhileLoading = false
     if info.state.loaded {
-      closeWindow()
+      DispatchQueue.main.async {
+        self.currentController.close()
+      }
     }
     if info.state != .loading {
       log("Playback has stopped")
@@ -2307,19 +2312,6 @@ class PlayerCore: NSObject {
   func hideOSD() {
     DispatchQueue.main.async {
       self.mainWindow.hideOSD()
-    }
-  }
-
-  func errorOpeningFileAndCloseMainWindow() {
-    DispatchQueue.main.async {
-      Utility.showAlert("error_open")
-      self.mainWindow.close()
-    }
-  }
-
-  func closeWindow() {
-    DispatchQueue.main.async {
-      self.currentController.close()
     }
   }
 

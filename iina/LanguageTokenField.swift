@@ -45,10 +45,6 @@ fileprivate struct LangToken: Equatable, Hashable, CustomStringConvertible {
     return lhs.equalTo(rhs)
   }
 
-  static func !=(lhs: LangToken, rhs: LangToken) -> Bool {
-    return !lhs.equalTo(rhs)
-  }
-
   func hash(into hasher: inout Hasher) {
     hasher.combine(editingString)
   }
@@ -88,10 +84,6 @@ fileprivate struct LangSet {
 
   func toNewlineSeparatedValues() -> String {
     return langTokens.map{ $0.identifierString }.joined(separator: "\n")
-  }
-
-  func contains(_ token: LangToken) -> Bool {
-    return !langTokens.filter({ $0.identifierString == token.identifierString }).isEmpty
   }
 }
 

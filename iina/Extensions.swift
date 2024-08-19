@@ -20,21 +20,6 @@ extension NSSlider {
   }
 }
 
-extension NSSegmentedControl {
-  func selectSegment(withLabel label: String) {
-    self.selectedSegment = -1
-    for i in 0..<segmentCount {
-      if self.label(forSegment: i) == label {
-        self.selectedSegment = i
-      }
-    }
-  }
-}
-
-func - (lhs: NSPoint, rhs: NSPoint) -> NSPoint {
-  return NSMakePoint(lhs.x - rhs.x, lhs.y - rhs.y)
-}
-
 extension CGPoint {
   // Uses Pythagorean theorem to calculate the distance between two points
   func distance(to: CGPoint) -> CGFloat {
@@ -72,15 +57,6 @@ extension NSSize {
   func crop(withAspect aspectRect: Aspect) -> NSSize {
     let targetAspect = aspectRect.value
     if aspect > targetAspect {  // self is wider, crop width, use same height
-      return NSSize(width: height * targetAspect, height: height)
-    } else {
-      return NSSize(width: width, height: width / targetAspect)
-    }
-  }
-
-  func expand(withAspect aspectRect: Aspect) -> NSSize {
-    let targetAspect = aspectRect.value
-    if aspect < targetAspect {  // self is taller, expand width, use same height
       return NSSize(width: height * targetAspect, height: height)
     } else {
       return NSSize(width: width, height: width / targetAspect)
@@ -156,8 +132,8 @@ extension NSSize {
     return NSSize(width: width * multiplier, height: height * multiplier)
   }
 
-  func add(_ multiplier: CGFloat) -> NSSize {
-    return NSSize(width: width + multiplier, height: height + multiplier)
+  func add(_ value: CGFloat) -> NSSize {
+    return NSSize(width: width + value, height: height + value)
   }
 
 }
@@ -170,10 +146,6 @@ extension NSRect {
               y: min(pt1.y, pt2.y),
               width: abs(pt1.x - pt2.x),
               height: abs(pt1.y - pt2.y))
-  }
-
-  func multiply(_ multiplier: CGFloat) -> NSRect {
-    return NSRect(x: origin.x, y: origin.y, width: width * multiplier, height: height * multiplier)
   }
 
   func centeredResize(to newSize: NSSize) -> NSRect {
@@ -269,18 +241,6 @@ extension Comparable {
   }
 }
 
-extension BinaryInteger {
-  func clamped(to range: Range<Self>) -> Self {
-    if self < range.lowerBound {
-      return range.lowerBound
-    } else if self >= range.upperBound {
-      return range.upperBound.advanced(by: -1)
-    } else {
-      return self
-    }
-  }
-}
-
 // Formats a number to max 2 digits after the decimal, rounded, but will omit trailing zeroes, and no commas or other formatting for large numbers
 fileprivate let fmtDecimalMaxFractionDigits2: NumberFormatter = {
   let fmt = NumberFormatter()
@@ -331,19 +291,6 @@ extension NSColor {
     } else {
       return nil
     }
-  }
-}
-
-
-extension NSMutableAttributedString {
-  convenience init?(linkTo url: String, text: String, font: NSFont) {
-    self.init(string: text)
-    let range = NSRange(location: 0, length: self.length)
-    let nsurl = NSURL(string: url)!
-    self.beginEditing()
-    self.addAttribute(.link, value: nsurl, range: range)
-    self.addAttribute(.font, value: font, range: range)
-    self.endEditing()
   }
 }
 
@@ -597,11 +544,8 @@ extension NSUserInterfaceItemIdentifier {
   static let isChosen = NSUserInterfaceItemIdentifier("IsChosen")
   static let trackId = NSUserInterfaceItemIdentifier("TrackId")
   static let trackName = NSUserInterfaceItemIdentifier("TrackName")
-  static let isPlayingCell = NSUserInterfaceItemIdentifier("IsPlayingCell")
-  static let trackNameCell = NSUserInterfaceItemIdentifier("TrackNameCell")
   static let key = NSUserInterfaceItemIdentifier("Key")
   static let value = NSUserInterfaceItemIdentifier("Value")
-  static let action = NSUserInterfaceItemIdentifier("Action")
 }
 
 extension NSAppearance {

@@ -40,10 +40,6 @@ class Aspect: NSObject {
     self.size = size
   }
 
-  init(width: CGFloat, height: CGFloat) {
-    self.size = NSMakeSize(width, height)
-  }
-
   init?(string: String) {
     if Regex.aspect.matches(string) {
       let wh = string.components(separatedBy: ":")

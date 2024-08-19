@@ -75,10 +75,6 @@ struct MPVHookValue {
 
 // Global functions
 
-protocol MPVEventDelegate {
-  func onMPVEvent(_ event: MPVEvent)
-}
-
 class MPVController: NSObject {
   struct UserData {
     static let screenshot: UInt64 = 1000000
@@ -101,7 +97,6 @@ class MPVController: NSObject {
 
   private var openGLContext: CGLContextObj! = nil
 
-  var mpvClientName: UnsafePointer<CChar>!
   var mpvVersion: String { getString(MPVProperty.mpvVersion)! }
 
   /// [DispatchQueue](https://developer.apple.com/documentation/dispatch/dispatchqueue) for reading `mpv`
@@ -310,9 +305,6 @@ class MPVController: NSObject {
   func mpvInit() {
     // Create a new mpv instance and an associated client API handle to control the mpv instance.
     mpv = mpv_create()
-
-    // Get the name of this client handle.
-    mpvClientName = mpv_client_name(mpv)
 
     // User default settings
 
@@ -804,21 +796,6 @@ class MPVController: NSObject {
     log("Set property: \(name)=\(value)", level: level)
     var data = value
     mpv_set_property(mpv, name, MPV_FORMAT_DOUBLE, &data)
-  }
-
-  func setFlagAsync(_ name: String, _ flag: Bool) {
-    var data: Int = flag ? 1 : 0
-    mpv_set_property_async(mpv, 0, name, MPV_FORMAT_FLAG, &data)
-  }
-
-  func setIntAsync(_ name: String, _ value: Int) {
-    var data = Int64(value)
-    mpv_set_property_async(mpv, 0, name, MPV_FORMAT_INT64, &data)
-  }
-
-  func setDoubleAsync(_ name: String, _ value: Double) {
-    var data = value
-    mpv_set_property_async(mpv, 0, name, MPV_FORMAT_DOUBLE, &data)
   }
 
   @discardableResult

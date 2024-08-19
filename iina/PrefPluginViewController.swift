@@ -42,7 +42,6 @@ class PrefPluginViewController: PreferenceViewController, PreferenceWindowEmbedd
     return false
   }
 
-  var plugins: [JavascriptPlugin] = []
   var currentPlugin: JavascriptPlugin?
 
   @IBOutlet weak var tabView: NSTabView!

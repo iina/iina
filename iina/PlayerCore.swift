@@ -391,8 +391,6 @@ class PlayerCore: NSObject {
   private func openMainWindow(path: String, url: URL, isNetwork: Bool) {
     log("Opening \(path) in main window")
     info.currentURL = url
-    // clear currentFolder since playlist is cleared, so need to auto-load again in playerCore#fileStarted
-    info.currentFolder = nil
     info.isNetworkResource = isNetwork
 
     let _ = mainWindow.window
@@ -732,7 +730,6 @@ class PlayerCore: NSObject {
 
     mainWindow.videoView.stopDisplayLink()
 
-    info.currentFolder = nil
     info.$matchedSubs.withLock { $0.removeAll() }
 
     // Do not send a stop command to mpv if it is already stopped. This happens when quitting is
@@ -1292,13 +1289,6 @@ class PlayerCore: NSObject {
     postNotification(.iinaPlaylistChanged)
   }
 
-  func playFile(_ path: String) {
-    info.justOpenedFile = true
-    info.shouldAutoLoadFiles = true
-    mpv.command(.loadfile, args: [path, "replace"], level: .verbose)
-    getPlaylist()
-  }
-
   func playFileInPlaylist(_ pos: Int) {
     mpv.setInt(MPVProperty.playlistPos, pos)
     getPlaylist()
@@ -1619,14 +1609,6 @@ class PlayerCore: NSObject {
     mpv.setString(MPVOption.Subtitles.subFont, font)
   }
 
-  func execKeyCode(_ code: String) {
-    mpv.command(.keypress, args: [code], checkError: false) { errCode in
-      if errCode < 0 {
-        self.log("Error when executing key code (\(errCode))", level: .error)
-      }
-    }
-  }
-
   func savePlaybackPosition() {
     guard Preference.bool(for: .resumeLastPosition) else { return }
 
@@ -1774,7 +1756,6 @@ class PlayerCore: NSObject {
     }
     info.videoPosition = VideoTime(pos)
     triedUsingExactSeekForCurrentFile = false
-    info.haveDownloadedSub = false
     checkUnsyncedWindowOptions()
     // generate thumbnails if window has loaded video
     if mainWindow.isVideoLoaded {

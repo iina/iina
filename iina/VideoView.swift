@@ -20,8 +20,6 @@ class VideoView: NSView {
     return layer
   }()
 
-  var videoSize: NSSize?
-
   @Atomic var isUninited = false
 
   var draggingTimer: Timer?

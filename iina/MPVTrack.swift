@@ -119,7 +119,6 @@ class MPVTrack: NSObject {
 
   // unimplemented
 
-  var ffIndex: Int?
   var decoderDesc: String?
 
   init(id: Int, type: TrackType, isDefault: Bool, isForced: Bool, isSelected: Bool, isExternal: Bool) {

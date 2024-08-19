@@ -1757,8 +1757,7 @@ class PlayerCore: NSObject {
   /** This function is called right after file loaded. Should load all meta info here. */
   func fileLoaded() {
     log("File loaded")
-    info.state = .playing
-    // mpvSuspend()
+    info.state = .paused
     mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
     // Get video size and set the initial window size
     let width = mpv.getInt(MPVProperty.width)
@@ -1814,7 +1813,6 @@ class PlayerCore: NSObject {
     }
     postNotification(.iinaFileLoaded)
     events.emit(.fileLoaded, data: info.currentURL?.absoluteString ?? "")
-    // mpvResume()
     if !(info.justOpenedFile && Preference.bool(for: .pauseWhenOpen)) {
       mpv.setFlag(MPVOption.PlaybackControl.pause, false, level: .verbose)
     }

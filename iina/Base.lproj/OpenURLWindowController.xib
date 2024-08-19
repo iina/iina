@@ -32,7 +32,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="576" height="257"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <visualEffectView appearanceType="inheritedVibrantLight" blendingMode="behindWindow" material="underWindowBackground" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="X1z-XY-que">
+                    <visualEffectView blendingMode="behindWindow" material="underWindowBackground" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="X1z-XY-que">
                         <rect key="frame" x="0.0" y="0.0" width="576" height="257"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cWl-pb-Ohf">
@@ -206,14 +206,14 @@ Gw
                             <constraint firstAttribute="trailing" secondItem="cWl-pb-Ohf" secondAttribute="trailing" constant="16" id="y1Z-e7-Gjk"/>
                         </constraints>
                     </visualEffectView>
-                    <visualEffectView hidden="YES" blendingMode="behindWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="EmQ-3e-yGf">
+                    <visualEffectView hidden="YES" blendingMode="behindWindow" material="underWindowBackground" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="EmQ-3e-yGf">
                         <rect key="frame" x="0.0" y="0.0" width="576" height="257"/>
                         <subviews>
-                            <progressIndicator wantsLayer="YES" maxValue="100" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Ear-Xt-Ces">
-                                <rect key="frame" x="198" y="121" width="16" height="16"/>
+                            <progressIndicator wantsLayer="YES" maxValue="100" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Ear-Xt-Ces">
+                                <rect key="frame" x="272" y="113" width="32" height="32"/>
                             </progressIndicator>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="D8E-zU-6dD">
-                                <rect key="frame" x="220" y="119" width="136" height="19"/>
+                                <rect key="frame" x="220" y="86" width="136" height="19"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Loading Media……" id="3T9-gp-4UE">
                                     <font key="font" metaFont="system" size="16"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -222,10 +222,10 @@ Gw
                             </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="D8E-zU-6dD" firstAttribute="centerY" secondItem="EmQ-3e-yGf" secondAttribute="centerY" id="Urq-s5-Vhp"/>
-                            <constraint firstItem="Ear-Xt-Ces" firstAttribute="centerY" secondItem="D8E-zU-6dD" secondAttribute="centerY" id="dJ4-X2-Vk2"/>
-                            <constraint firstItem="D8E-zU-6dD" firstAttribute="centerX" secondItem="EmQ-3e-yGf" secondAttribute="centerX" id="m1k-t5-qUq"/>
-                            <constraint firstItem="D8E-zU-6dD" firstAttribute="leading" secondItem="Ear-Xt-Ces" secondAttribute="trailing" constant="8" id="wXM-ri-6zU"/>
+                            <constraint firstItem="D8E-zU-6dD" firstAttribute="top" secondItem="Ear-Xt-Ces" secondAttribute="bottom" constant="8" id="3ja-3M-Yb7"/>
+                            <constraint firstItem="Ear-Xt-Ces" firstAttribute="centerX" secondItem="EmQ-3e-yGf" secondAttribute="centerX" id="SZ1-wj-8ED"/>
+                            <constraint firstItem="D8E-zU-6dD" firstAttribute="centerX" secondItem="EmQ-3e-yGf" secondAttribute="centerX" id="Xg7-RP-buE"/>
+                            <constraint firstItem="Ear-Xt-Ces" firstAttribute="centerY" secondItem="EmQ-3e-yGf" secondAttribute="centerY" id="twW-4I-1Tk"/>
                         </constraints>
                     </visualEffectView>
                 </subviews>

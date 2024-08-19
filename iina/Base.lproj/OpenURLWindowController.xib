@@ -210,11 +210,11 @@ Gw
                         <rect key="frame" x="0.0" y="0.0" width="576" height="257"/>
                         <subviews>
                             <progressIndicator wantsLayer="YES" maxValue="100" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Ear-Xt-Ces">
-                                <rect key="frame" x="205" y="121" width="16" height="16"/>
+                                <rect key="frame" x="198" y="121" width="16" height="16"/>
                             </progressIndicator>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="D8E-zU-6dD">
-                                <rect key="frame" x="227" y="119" width="123" height="19"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Loading Media…" id="3T9-gp-4UE">
+                                <rect key="frame" x="220" y="119" width="136" height="19"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Loading Media……" id="3T9-gp-4UE">
                                     <font key="font" metaFont="system" size="16"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

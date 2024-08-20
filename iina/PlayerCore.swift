@@ -1874,8 +1874,8 @@ class PlayerCore: NSObject {
     if receivedEndFileWhileLoading && info.state == .starting {
       DispatchQueue.main.async { [unowned self] in
         currentController.close()
-        if AppDelegate.shared.openURLWindow.window?.isVisible == true && info.isNetworkResource {
-          AppDelegate.shared.openURLWindow.failedToLoadURL(url: info.currentURL?.absoluteString)
+        if AppDelegate.shared.openURLWindow.window?.isVisible == true {
+          AppDelegate.shared.openURLWindow.failedToLoadURL()
         } else {
           Utility.showAlert("error_open")
         }

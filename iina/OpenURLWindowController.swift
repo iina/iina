@@ -29,6 +29,7 @@ class OpenURLWindowController: NSWindowController, NSTextFieldDelegate, NSContro
   var isAlternativeAction = false
 
   var playerCore: PlayerCore?
+  var loadingURL: String?
 
   override func windowDidLoad() {
     super.windowDidLoad()
@@ -48,6 +49,7 @@ class OpenURLWindowController: NSWindowController, NSTextFieldDelegate, NSContro
     _ = window
     overlayView.isHidden = false
     self.playerCore = playerCore
+    loadingURL = playerCore.info.currentURL?.absoluteString
     if #available(macOS 14, *) {
       NSApp.activate()
     } else {
@@ -56,9 +58,9 @@ class OpenURLWindowController: NSWindowController, NSTextFieldDelegate, NSContro
     showWindow(self)
   }
 
-  func failedToLoadURL(url: String?) {
+  func failedToLoadURL() {
     guard isWindowLoaded && window?.isVisible == true else { return }
-    urlField.stringValue = url ?? ""
+    urlField.stringValue = loadingURL ?? ""
     errorMessageLabel.isHidden = false
     overlayView.isHidden = true
     urlField.textColor = .systemRed
@@ -73,6 +75,7 @@ class OpenURLWindowController: NSWindowController, NSTextFieldDelegate, NSContro
     window?.makeFirstResponder(urlField)
     overlayView.isHidden = true
     playerCore = nil
+    loadingURL = nil
   }
 
   func windowShouldClose(_ sender: NSWindow) -> Bool {

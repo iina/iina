@@ -15,8 +15,7 @@ class VideoView: NSView {
   var link: CVDisplayLink?
 
   lazy var videoLayer: ViewLayer = {
-    let layer = ViewLayer()
-    layer.videoView = self
+    let layer = ViewLayer(self)
     return layer
   }()
 
@@ -55,7 +54,8 @@ class VideoView: NSView {
 
   // MARK: - Init
 
-  override init(frame: CGRect) {
+  init(frame: CGRect, player: PlayerCore) {
+    self.player = player
     super.init(frame: frame)
 
     // set up layer
@@ -71,11 +71,6 @@ class VideoView: NSView {
 
     // dragging init
     registerForDraggedTypes([.nsFilenames, .nsURL, .string])
-  }
-
-  convenience init(frame: CGRect, player: PlayerCore) {
-    self.init(frame: frame)
-    self.player = player
   }
 
   required init?(coder: NSCoder) {
@@ -336,9 +331,16 @@ class VideoView: NSView {
       }
     }
 
-    if videoLayer.colorspace != VideoView.SRGB {
-      videoLayer.colorspace = VideoView.SRGB
-      videoLayer.wantsExtendedDynamicRangeContent = false
+    let screenColorSpace = player.mainWindow.window?.screen?.colorSpace
+    let sdrColorSpace = screenColorSpace?.cgColorSpace ?? VideoView.SRGB
+    if videoLayer.colorspace != sdrColorSpace {
+      let name: String = {
+        if let name = sdrColorSpace.name { return name as String }
+        if let screenColorSpace, let name = screenColorSpace.localizedName { return name }
+        return "Unspecified"
+      }()
+      log("Setting layer color space to \(name)")
+      videoLayer.colorspace = sdrColorSpace
       player.mpv.setString(MPVOption.GPURendererOptions.targetTrc, "auto")
       player.mpv.setString(MPVOption.GPURendererOptions.targetPrim, "auto")
       player.mpv.setString(MPVOption.GPURendererOptions.targetPeak, "auto")
@@ -487,7 +489,6 @@ extension VideoView {
 
     logHDR("Will activate HDR color space instead of using ICC profile")
 
-    videoLayer.wantsExtendedDynamicRangeContent = true
     videoLayer.colorspace = CGColorSpace(name: name!)
     mpv.setString(MPVOption.GPURendererOptions.iccProfile, "")
     mpv.setString(MPVOption.GPURendererOptions.targetPrim, primaries)

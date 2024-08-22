@@ -804,6 +804,13 @@ class MPVController: NSObject {
     return mpv_set_property_string(mpv, name, value)
   }
 
+  func getEnum<T: MPVOptionValue>(_ name: String) -> T {
+    guard let value = getString(name) else {
+      return T.defaultValue
+    }
+    return T.init(rawValue: value) ?? T.defaultValue
+  }
+
   func getInt(_ name: String) -> Int {
     var data = Int64()
     mpv_get_property(mpv, name, MPV_FORMAT_INT64, &data)

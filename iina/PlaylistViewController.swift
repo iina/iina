@@ -483,7 +483,6 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       player.sortPlaylist(playSeq: playSeq)
     case 2:
       var playSeq = player.info.playlist
-      player.mpv.command(.playlistClear)
       playSeq.sort { item1, item2 in
         item1.filenameForDisplay > item2.filenameForDisplay
       }

@@ -25,7 +25,7 @@ struct AppData {
   static let maxSpeed = 16.0
 
   /** generate aspect and crop options in menu */
-  static let aspects: [String] = ["4:3", "5:4", "16:9", "16:10", "1:1", "3:2", "2.21:1", "2.35:1", "2.39:1"]
+  static let aspects: [String] = ["4:3", "5:4", "16:9", "16:10", "1:1", "3:2", "2:1", "2.21:1", "2.35:1", "2.39:1"]
 
   static let aspectsInPanel: [String] = ["Default", "4:3", "16:9", "16:10", "21:9", "5:4"]
   static let cropsInPanel: [String] = ["None", "4:3", "16:9", "16:10", "21:9", "5:4"]

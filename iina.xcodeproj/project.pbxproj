@@ -316,6 +316,7 @@
 		B4E4470125CE3F930069F06E /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = B4E4470025CE3F930069F06E /* Sparkle */; };
 		C789872F1E34EF170005769F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C78987311E34EF170005769F /* InfoPlist.strings */; };
 		D17504A82918F13E005C3DD0 /* OSCToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17504A72918F13E005C3DD0 /* OSCToolbarButton.swift */; };
+		D17B857B2C94C8B5002A8EDE /* movist-v2-default-input.conf in Copy Configs */ = {isa = PBXBuildFile; fileRef = D1F68E742C6ABC22003D1208 /* movist-v2-default-input.conf */; };
 		D1A4D98A2B1495270009AB4E /* LegacyMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A4D9892B1495270009AB4E /* LegacyMigration.swift */; };
 		D1B4E24E2A3AFC9100E36F1D /* MiniPlayerWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B4E24D2A3AFC9100E36F1D /* MiniPlayerWindow.swift */; };
 		D1F68E752C6ABC22003D1208 /* movist-v2-default-input.conf in Resources */ = {isa = PBXBuildFile; fileRef = D1F68E742C6ABC22003D1208 /* movist-v2-default-input.conf */; };
@@ -542,6 +543,7 @@
 			dstSubfolderSpec = 7;
 			files = (
 				846DD8CA1FB39B2500991A81 /* movist-default-input.conf in Copy Configs */,
+				D17B857B2C94C8B5002A8EDE /* movist-v2-default-input.conf in Copy Configs */,
 				846654941F4EEBE300C91B8C /* vlc-default-input.conf in Copy Configs */,
 				84A886EF1E269E67008755BB /* iina-default-input.conf in Copy Configs */,
 				844D72EF1E056E1400522E5E /* input.conf in Copy Configs */,

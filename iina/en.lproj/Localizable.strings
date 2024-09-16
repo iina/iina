@@ -84,7 +84,7 @@
 "osd.pause" = "Pause";
 "osd.resume" = "Resume";
 "osd.volume" = "Volume: %i";
-"osd.speed" = "Speed: %.2fx";
+"osd.speed" = "Speed: %@x";
 "osd.aspect" = "Aspect Ratio: %@";
 "osd.crop" = "Crop: %@";
 "osd.rotate" = "Rotate: %i°";

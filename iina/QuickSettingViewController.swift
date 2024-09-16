@@ -130,6 +130,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet var speedSlider16xLabelPrevLabelConstraint: NSLayoutConstraint!
 
   @IBOutlet weak var customSpeedTextField: NSTextField!
+  @IBOutlet weak var speedResetBtn: NSButton!
   @IBOutlet weak var switchHorizontalLine: NSBox!
   @IBOutlet weak var switchHorizontalLine2: NSBox!
   @IBOutlet weak var hardwareDecodingSwitch: NSSwitch!
@@ -397,9 +398,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     hdrLabel.stringValue = NSLocalizedString("quicksetting.hdr", comment: "HDR")
 
     let speed = player.mpv.getDouble(MPVOption.PlaybackControl.speed)
-    customSpeedTextField.doubleValue = speed
-    speedSlider.doubleValue = convertSpeedToSliderValue(speed)
-    redraw(indicator: speedSliderIndicator, constraint: speedSliderConstraint, slider: speedSlider, value: "\(customSpeedTextField.stringValue)x")
+    updateSpeed(to: speed)
   }
 
   private func updateAudioTabControl() {
@@ -723,6 +722,10 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     view.layout()
   }
 
+  @IBAction func resetSpeedction(_ sender: AnyObject) {
+    player.setSpeed(1.0)
+  }
+
   @IBAction func speedChangedAction(_ sender: NSSlider) {
     // Each step is 64^(1/24)
     //   0       1   ..    7      8      9   ..   24
@@ -735,25 +738,33 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       sender.allowsTickMarkValuesOnly = false
     }
     let sliderValue = sender.doubleValue
-    let value = AppData.minSpeed * pow(AppData.maxSpeed / AppData.minSpeed, sliderValue / sliderSteps)
-    customSpeedTextField.doubleValue = value
-    player.setSpeed(value)
-    redraw(indicator: speedSliderIndicator, constraint: speedSliderConstraint, slider: speedSlider, value: "\(customSpeedTextField.stringValue)x")
+    // Attempt to round speed to 2 decimal places. If user is using the slider, any more
+    // precision than that is just a distraction
+    let newSpeed = (AppData.minSpeed * pow(AppData.maxSpeed / AppData.minSpeed, sliderValue / sliderSteps)).roundedTo2Decimals()
+    updateSpeed(to: newSpeed)
   }
 
   @IBAction func customSpeedEditFinishedAction(_ sender: NSTextField) {
     if sender.stringValue.isEmpty {
       sender.stringValue = "1"
     }
-    let value = customSpeedTextField.doubleValue
-    speedSlider.doubleValue = convertSpeedToSliderValue(value)
-    if player.info.playSpeed != value {
-      player.setSpeed(value)
-    }
-    redraw(indicator: speedSliderIndicator, constraint: speedSliderConstraint, slider: speedSlider, value: "\(sender.stringValue)x")
+    let newSpeed = customSpeedTextField.doubleValue
+    updateSpeed(to: newSpeed)
     if let window = sender.window {
       window.makeFirstResponder(window.contentView)
     }
+  }
+
+  private func updateSpeed(to newSpeed: Double) {
+    speedSlider.doubleValue = convertSpeedToSliderValue(newSpeed)
+    customSpeedTextField.doubleValue = newSpeed
+    speedResetBtn.isHidden = newSpeed == 1.0
+    if player.info.playSpeed != newSpeed {
+      player.setSpeed(newSpeed)
+    }
+    /// Use `customSpeedTextField.stringValue` to take advantage of its formatter
+    /// (e.g. `16` will be displayed instead of `16.0`)
+    redraw(indicator: speedSliderIndicator, constraint: speedSliderConstraint, slider: speedSlider, value: "\(customSpeedTextField.stringValue)x")
   }
 
   @IBAction func equalizerSliderAction(_ sender: NSSlider) {

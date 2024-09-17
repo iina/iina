@@ -230,9 +230,19 @@ extension Double {
 
   func roundedTo2Decimals() -> Double {
     let scaledUp = self * 1e2
-    let scaledUpRounded = scaledUp.rounded(.toNearestOrEven)
+    let scaledUpRounded = scaledUp.rounded(.up)
     let finalVal = scaledUpRounded / 1e2
     return finalVal
+  }
+  
+  /// Formats this number as a decimal string, using default locale.
+  ///
+  /// This should be used in most places where decimal numbers need to be printed.
+  var string: String {
+    /// Output up to 15 digits after the decimal. This should be good enough for almost all cases, but can be increased in the future.
+    /// (It's not clear what the maximum allowable value for `NumberFormatter.maximumFractionDigits` actually is. Trying to use
+    /// `NSIntegerMax` seems to result in `maximumFractionDigits` being silently set to `6` instead.)
+    return fmtDecimalMaxFractionDigits15.string(from: self as NSNumber) ?? "NaN"
   }
 }
 
@@ -254,6 +264,17 @@ fileprivate let fmtDecimalMaxFractionDigits2: NumberFormatter = {
   fmt.numberStyle = .decimal
   fmt.usesGroupingSeparator = false
   fmt.maximumFractionDigits = 2
+  return fmt
+}()
+
+fileprivate let fmtDecimalMaxFractionDigits15: NumberFormatter = {
+  let fmt = NumberFormatter()
+  fmt.numberStyle = .decimal
+  fmt.usesGroupingSeparator = true
+  fmt.maximumSignificantDigits = 15
+  fmt.minimumFractionDigits = 0
+  fmt.maximumFractionDigits = 15
+  fmt.usesSignificantDigits = false
   return fmt
 }()
 

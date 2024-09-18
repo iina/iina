@@ -237,6 +237,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       pendingSwitchRequest = nil
     }
 
+    speedResetBtn.toolTip = NSLocalizedString("quicksetting.reset_speed", comment: "Reset speed to 1x")
+
     subLoadSementedControl.image(forSegment: 1)?.isTemplate = true
     switchHorizontalLine.wantsLayer = true
     switchHorizontalLine.layer?.opacity = 0.5

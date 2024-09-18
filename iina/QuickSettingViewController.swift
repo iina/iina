@@ -15,6 +15,22 @@ fileprivate let eqRenameMenuItemTag = -2
 fileprivate let eqSaveMenuItemTag = -3
 fileprivate let eqCustomMenuItemTag = 1000
 
+/// Formatter for `customSpeedTextField`.
+///
+/// Configure the number formatter in code instead of the XIB so it is easier to follow.
+fileprivate let speedFormatter: NumberFormatter = {
+  let fmt = NumberFormatter()
+  fmt.numberStyle = .decimal
+  fmt.usesGroupingSeparator = true
+  fmt.maximumSignificantDigits = 25  // just make very big
+  fmt.minimumFractionDigits = 0
+  fmt.maximumFractionDigits = 6  // matches mpv behavior
+  fmt.usesSignificantDigits = false
+  fmt.roundingMode = .halfDown   // matches mpv behavior
+  fmt.minimum = NSNumber(floatLiteral: AppData.mpvMinPlaybackSpeed)
+  return fmt
+}()
+
 class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, SidebarViewController {
   override var nibName: NSNib.Name {
     return NSNib.Name("QuickSettingViewController")
@@ -226,6 +242,15 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     switchHorizontalLine.layer?.opacity = 0.5
     switchHorizontalLine2.wantsLayer = true
     switchHorizontalLine2.layer?.opacity = 0.5
+
+    // Localize decimal format of numbers
+    speedSlider0_25xLabel.stringValue = "\(0.25.string)x"
+    // Unclear if these need to be localized. Better to be safe?
+    speedSlider1xLabel.stringValue = "\(1.string)x"
+    speedSlider4xLabel.stringValue = "\(4.string)x"
+    speedSlider16xLabel.stringValue = "\(16.string)x"
+
+    customSpeedTextField.formatter = speedFormatter
 
     if let data = UserDefaults.standard.data(forKey: Preference.Key.userEQPresets.rawValue),
        let dict = try? JSONDecoder().decode(Dictionary<String, EQProfile>.self, from: data) {
@@ -748,14 +773,29 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     if sender.stringValue.isEmpty {
       sender.stringValue = "1"
     }
-    let newSpeed = customSpeedTextField.doubleValue
-    updateSpeed(to: newSpeed)
+    /// Unfortunately, the text field has not applied validation/formatting to the number at this point.
+    /// We will do that manually via `constrainSpeed`.
+    updateSpeed(to: sender.doubleValue)
     if let window = sender.window {
       window.makeFirstResponder(window.contentView)
     }
   }
 
-  private func updateSpeed(to newSpeed: Double) {
+  /// Ensure that the given `Double` is a speed which is valid for mpv.
+  ///
+  /// - This is necessary because libmpv cannot be relied on to report the correct number & will reply
+  /// with a property change event which echoes the number which was submitted, even if it is not the
+  /// same as the number which mpv is actually using (it will internally round the number to 6 digits
+  /// after the decimal but tell us that it used the non-rounded number).
+  /// - `NumberFormatter` doesn't provide APIs to validate or correct an `NSNumber`.
+  /// But we can get the same effect by converting to a `String` and back again.
+  private func constrainSpeed(_ inputSpeed: Double) -> Double {
+    let newSpeedString: String = speedFormatter.string(from: inputSpeed as NSNumber) ?? "1"
+    return Double(truncating: speedFormatter.number(from: newSpeedString)!)
+  }
+
+  private func updateSpeed(to inputSpeed: Double) {
+    let newSpeed = constrainSpeed(inputSpeed)
     speedSlider.doubleValue = convertSpeedToSliderValue(newSpeed)
     customSpeedTextField.doubleValue = newSpeed
     speedResetBtn.isHidden = newSpeed == 1.0

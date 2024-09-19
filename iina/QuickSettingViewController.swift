@@ -749,7 +749,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     view.layout()
   }
 
-  @IBAction func resetSpeedction(_ sender: AnyObject) {
+  @IBAction func resetSpeedAction(_ sender: AnyObject) {
     player.setSpeed(1.0)
   }
 

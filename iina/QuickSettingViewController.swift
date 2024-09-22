@@ -107,6 +107,11 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var subTableView: NSTableView!
   @IBOutlet weak var secSubTableView: NSTableView!
 
+  @IBOutlet weak var videoPopUp: NSPopUpButton!
+  @IBOutlet weak var audioPopUp: NSPopUpButton!
+  @IBOutlet weak var subtitlePopUp: NSPopUpButton!
+  @IBOutlet weak var secondarySubtitlePopUp: NSPopUpButton!
+  
   @IBOutlet weak var rotateSegment: NSSegmentedControl!
 
   @IBOutlet weak var aspectSegment: NSSegmentedControl!
@@ -203,14 +208,15 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    withAllTableViews { (view, _) in
-      view.delegate = self
-      view.dataSource = self
-      view.superview?.superview?.layer?.cornerRadius = 4
+    
+    configurePopUps()
+    
+    withAllTableViews { tableView, _ in
+      tableView.delegate = self
+      tableView.dataSource = self
+      tableView.superview?.superview?.layer?.cornerRadius = 4
+      tableView.backgroundColor = NSColor(named: .sidebarTableBackground)!
     }
-
-    // colors
-    withAllTableViews { tableView, _ in tableView.backgroundColor = NSColor(named: .sidebarTableBackground)! }
 
     setupPluginTabs()
     if pendingSwitchRequest == nil {
@@ -241,19 +247,19 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     func observe(_ name: Notification.Name, block: @escaping (Notification) -> Void) {
       observers.append(NotificationCenter.default.addObserver(forName: name, object: player, queue: .main, using: block))
     }
-
-    // notifications
-    observe(.iinaTracklistChanged) { [unowned self] _ in
-      self.withAllTableViews { view, _ in view.reloadData() }
-    }
-    observe(.iinaVIDChanged) { [unowned self] _ in self.videoTableView.reloadData() }
-    observe(.iinaAIDChanged) { [unowned self] _ in self.audioTableView.reloadData() }
-    observe(.iinaSIDChanged) { [unowned self] _ in
-      self.subTableView.reloadData()
-      self.secSubTableView.reloadData()
-    }
+    
+    observe(.iinaTracklistChanged) { [unowned self] _ in configurePopUps() }
+    observe(.iinaVIDChanged) { [unowned self] _ in configureVideoPopUp() }
+    observe(.iinaAIDChanged) { [unowned self] _ in configureAudioPopUp() }
+    observe(.iinaSIDChanged) { [unowned self] _ in configureSubtitlePopUp(); configureSecondarySubtitlePopUp() }
     observe(.iinaSecondSubVisibilityChanged) { [unowned self] _ in secHideSwitch.state = player.info.isSecondSubVisible ? .on : .off }
     observe(.iinaSubVisibilityChanged) { [unowned self] _ in hideSwitch.state = player.info.isSubVisible ? .on : .off }
+
+    // notifications
+    observe(.iinaTracklistChanged) { [unowned self] _ in self.withAllTableViews { view, _ in view.reloadData() } }
+    observe(.iinaVIDChanged) { [unowned self] _ in self.videoTableView.reloadData() }
+    observe(.iinaAIDChanged) { [unowned self] _ in self.audioTableView.reloadData() }
+    observe(.iinaSIDChanged) { [unowned self] _ in self.subTableView.reloadData(); self.secSubTableView.reloadData() }
   }
 
   // MARK: - Right to Left Constraints
@@ -549,14 +555,18 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     guard isViewLoaded else { return }
     switch currentTab {
     case .audio:
+      configureAudioPopUp()
       audioTableView.reloadData()
       updateAudioTabControl()
       updateAudioEqState()
     case .video:
+      configureVideoPopUp()
       videoTableView.reloadData()
       updateVideoTabControl()
       updateVideoEqState()
     case .sub:
+      configureSubtitlePopUp()
+      configureSecondarySubtitlePopUp()
       subTableView.reloadData()
       secSubTableView.reloadData()
       updateSubTabControl()
@@ -583,6 +593,135 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       // cache the request
       pendingSwitchRequest = tab
     }
+  }
+  
+  // MARK: - PopUps
+  
+  func configurePopUps() {
+    configureVideoPopUp()
+    configureAudioPopUp()
+    configureSubtitlePopUp()
+    configureSecondarySubtitlePopUp()
+  }
+  
+  func configureVideoPopUp() {
+    videoPopUp.removeAllItems()
+    
+    // Always add <none> item
+    addMenuItem(withTitle: Constants.String.trackNone, to: videoPopUp)
+
+    let isInteractive = !player.info.videoTracks.isEmpty
+    videoPopUp.isEnabled = isInteractive
+    
+    if !isInteractive {
+      return
+    }
+    
+    for track in player.info.videoTracks {
+      let title = track.idString + " " + track.infoString
+      addMenuItem(withTitle: title, to: videoPopUp)
+    }
+    
+    selectPopUpTrack(popUp: videoPopUp, selectedTrackId: player.info.vid)
+  }
+  
+  func configureAudioPopUp() {
+    audioPopUp.removeAllItems()
+    
+    // Always add <none> item
+    addMenuItem(withTitle: Constants.String.trackNone, to: audioPopUp)
+    
+    let isInteractive = !player.info.audioTracks.isEmpty
+    audioPopUp.isEnabled = isInteractive
+    
+    if !isInteractive {
+      return
+    }
+    
+    for track in player.info.audioTracks {
+      let title = track.idString + " " + track.infoString
+      addMenuItem(withTitle: title, to: audioPopUp)
+    }
+    
+    selectPopUpTrack(popUp: audioPopUp, selectedTrackId: player.info.aid)
+  }
+  
+  func configureSubtitlePopUp() {
+    subtitlePopUp.removeAllItems()
+    
+    // Always add <none> item
+    addMenuItem(withTitle: Constants.String.trackNone, to: subtitlePopUp)
+    
+    let isInteractive = !player.info.subTracks.isEmpty
+    subtitlePopUp.isEnabled = isInteractive
+    
+    if !isInteractive {
+      return
+    }
+    
+    for track in player.info.subTracks {
+      let title = track.idString + " " + track.infoString
+      addMenuItem(withTitle: title, to: subtitlePopUp)
+    }
+    
+    selectPopUpTrack(popUp: subtitlePopUp, selectedTrackId: player.info.sid)
+  }
+  
+  func configureSecondarySubtitlePopUp() {
+    secondarySubtitlePopUp.removeAllItems()
+    
+    // Always add <none> item
+    addMenuItem(withTitle: Constants.String.trackNone, to: secondarySubtitlePopUp)
+    
+    let isInteractive = !player.info.subTracks.isEmpty
+    secondarySubtitlePopUp.isEnabled = isInteractive
+    
+    if !isInteractive {
+      return
+    }
+    
+    for track in player.info.subTracks {
+      let title = track.idString + " " + track.infoString
+      addMenuItem(withTitle: title, to: secondarySubtitlePopUp)
+    }
+    
+    selectPopUpTrack(popUp: secondarySubtitlePopUp, selectedTrackId: player.info.secondSid)
+  }
+  
+  func addMenuItem(withTitle title: String, action: Selector = #selector(popUpClick), to control: NSPopUpButton) {
+    control.addItem(withTitle: title)
+    control.action = action
+    control.target = self
+  }
+  
+  func selectPopUpTrack(popUp: NSPopUpButton, selectedTrackId: Int?) {
+    // note that track ids start from 1
+    let id = if let selectedTrackId { selectedTrackId } else { 0 }
+    popUp.selectItem(at: id)
+  }
+  
+  @objc func popUpClick(_ sender: NSPopUpButton) {
+    var type: MPVTrack.TrackType
+    switch sender {
+    case videoPopUp: type = .video
+    case audioPopUp: type = .audio
+    case subtitlePopUp: type = .sub
+    case secondarySubtitlePopUp: type = .secondSub
+    default: return
+    }
+    
+    var trackId = 0
+    
+    if player.info.trackList(type).count > 0 && sender.indexOfSelectedItem > 0 {
+      // The <none> element is always included in the list, increasing the total count by one
+      trackId = player.info.trackList(type)[sender.indexOfSelectedItem-1].id
+    }
+    
+    // note that track ids start from 1
+    player.setTrack(trackId, forType: type)
+    
+    // Revalidate layout and controls
+    updateControlsState()
   }
 
   // MARK: - NSTableView delegate
@@ -815,6 +954,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     ) { url in
       self.player.loadExternalAudioFile(url)
       self.audioTableView.reloadData()
+      self.configureAudioPopUp()
     }
   }
 
@@ -879,6 +1019,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
         self.player.loadExternalSubFile(url, delay: true)
         self.subTableView.reloadData()
         self.secSubTableView.reloadData()
+        self.configureSubtitlePopUp()
+        self.configureSecondarySubtitlePopUp()
       }
     } else if sender.selectedSegment == 1 {
       showSubChooseMenu(forView: sender)

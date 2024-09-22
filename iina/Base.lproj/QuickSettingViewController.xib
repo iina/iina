@@ -832,7 +832,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="360" height="827"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="oVx-Sp-Lhl" userLabel="AudioTab Clip View">
                                             <rect key="frame" x="0.0" y="0.0" width="360" height="827"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="NZU-RD-Dm3" userLabel="AudioTab Flipped View" customClass="FlippedView" customModule="IINA" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="342" width="360" height="485"/>

@@ -15,7 +15,7 @@ fileprivate let eqRenameMenuItemTag = -2
 fileprivate let eqSaveMenuItemTag = -3
 fileprivate let eqCustomMenuItemTag = 1000
 
-class QuickSettingViewController: NSViewController, SidebarViewController {
+class QuickSettingViewController: NSViewController, NSMenuItemValidation, SidebarViewController {
   override var nibName: NSNib.Name {
     return NSNib.Name("QuickSettingViewController")
   }
@@ -676,6 +676,24 @@ class QuickSettingViewController: NSViewController, SidebarViewController {
     // note that track ids start from 1
     let id = if let selectedTrackId { selectedTrackId } else { 0 }
     popUp.selectItem(at: id)
+  }
+  
+  func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+    if subtitlePopUp.index(of: menuItem) == 0 || secondarySubtitlePopUp.index(of: menuItem) == 0 {
+      return true
+    }
+    
+    if subtitlePopUp.index(of: menuItem) != -1
+        && subtitlePopUp.index(of: menuItem) == secondarySubtitlePopUp.indexOfSelectedItem {
+      return false
+    }
+    
+    if secondarySubtitlePopUp.index(of: menuItem) != -1
+        && secondarySubtitlePopUp.index(of: menuItem) == subtitlePopUp.indexOfSelectedItem {
+      return false
+    }
+    
+    return true
   }
   
   @objc func popUpClick(_ sender: NSPopUpButton) {

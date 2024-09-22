@@ -15,7 +15,7 @@ fileprivate let eqRenameMenuItemTag = -2
 fileprivate let eqSaveMenuItemTag = -3
 fileprivate let eqCustomMenuItemTag = 1000
 
-class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, SidebarViewController {
+class QuickSettingViewController: NSViewController, SidebarViewController {
   override var nibName: NSNib.Name {
     return NSNib.Name("QuickSettingViewController")
   }
@@ -101,11 +101,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var tabView: NSTabView!
 
   @IBOutlet weak var buttonTopConstraint: NSLayoutConstraint!
-
-  @IBOutlet weak var videoTableView: NSTableView!
-  @IBOutlet weak var audioTableView: NSTableView!
-  @IBOutlet weak var subTableView: NSTableView!
-  @IBOutlet weak var secSubTableView: NSTableView!
 
   @IBOutlet weak var videoPopUp: NSPopUpButton!
   @IBOutlet weak var audioPopUp: NSPopUpButton!
@@ -211,13 +206,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     
     configurePopUps()
     
-    withAllTableViews { tableView, _ in
-      tableView.delegate = self
-      tableView.dataSource = self
-      tableView.superview?.superview?.layer?.cornerRadius = 4
-      tableView.backgroundColor = NSColor(named: .sidebarTableBackground)!
-    }
-
     setupPluginTabs()
     if pendingSwitchRequest == nil {
       updateTabActiveStatus()
@@ -254,12 +242,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     observe(.iinaSIDChanged) { [unowned self] _ in configureSubtitlePopUp(); configureSecondarySubtitlePopUp() }
     observe(.iinaSecondSubVisibilityChanged) { [unowned self] _ in secHideSwitch.state = player.info.isSecondSubVisible ? .on : .off }
     observe(.iinaSubVisibilityChanged) { [unowned self] _ in hideSwitch.state = player.info.isSubVisible ? .on : .off }
-
-    // notifications
-    observe(.iinaTracklistChanged) { [unowned self] _ in self.withAllTableViews { view, _ in view.reloadData() } }
-    observe(.iinaVIDChanged) { [unowned self] _ in self.videoTableView.reloadData() }
-    observe(.iinaAIDChanged) { [unowned self] _ in self.audioTableView.reloadData() }
-    observe(.iinaSIDChanged) { [unowned self] _ in self.subTableView.reloadData(); self.secSubTableView.reloadData() }
   }
 
   // MARK: - Right to Left Constraints
@@ -556,19 +538,15 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     switch currentTab {
     case .audio:
       configureAudioPopUp()
-      audioTableView.reloadData()
       updateAudioTabControl()
       updateAudioEqState()
     case .video:
       configureVideoPopUp()
-      videoTableView.reloadData()
       updateVideoTabControl()
       updateVideoEqState()
     case .sub:
       configureSubtitlePopUp()
       configureSecondarySubtitlePopUp()
-      subTableView.reloadData()
-      secSubTableView.reloadData()
       updateSubTabControl()
     case .plugin(_):
       break
@@ -722,73 +700,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     
     // Revalidate layout and controls
     updateControlsState()
-  }
-
-  // MARK: - NSTableView delegate
-
-  func numberOfRows(in tableView: NSTableView) -> Int {
-    if tableView == videoTableView {
-      return player.info.videoTracks.count + 1
-    } else if tableView == audioTableView {
-      return player.info.audioTracks.count + 1
-    } else if tableView == subTableView || tableView == secSubTableView {
-      return player.info.$subTracks.withLock { $0.count + 1 }
-    } else {
-      return 0
-    }
-  }
-
-  func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-    // get track according to tableview
-    // row=0: <None> row=1~: tracks[row-1]
-    let track: MPVTrack?
-    let activeId: Int
-    let columnName = tableColumn?.identifier
-    if tableView == videoTableView {
-      track = row == 0 ? nil : player.info.videoTracks[at: row-1]
-      activeId = player.info.vid!
-    } else if tableView == audioTableView {
-      track = row == 0 ? nil : player.info.audioTracks[at: row-1]
-      activeId = player.info.aid!
-    } else if tableView == subTableView {
-      track = row == 0 ? nil : player.info.subTracks[at: row-1]
-      activeId = player.info.sid!
-    } else if tableView == secSubTableView {
-      track = row == 0 ? nil : player.info.subTracks[at: row-1]
-      activeId = player.info.secondSid!
-    } else {
-      return nil
-    }
-    // return track data
-    if columnName == .isChosen {
-      let isChosen = track == nil ? (activeId == 0) : (track!.id == activeId)
-      return isChosen ? Constants.String.dot : ""
-    } else if columnName == .trackName {
-      return track?.infoString ?? Constants.String.trackNone
-    } else if columnName == .trackId {
-      return track?.idString
-    }
-    return nil
-  }
-
-  func tableViewSelectionDidChange(_ notification: Notification) {
-    withAllTableViews { (view, type) in
-      if view.numberOfSelectedRows > 0 {
-        // note that track ids start from 1
-        let subId = view.selectedRow > 0 ? player.info.trackList(type)[view.selectedRow-1].id : 0
-        self.player.setTrack(subId, forType: type)
-        view.deselectAll(self)
-      }
-    }
-    // Revalidate layout and controls
-    updateControlsState()
-  }
-
-  private func withAllTableViews(_ block: (NSTableView, MPVTrack.TrackType) -> Void) {
-    block(audioTableView, .audio)
-    block(subTableView, .sub)
-    block(secSubTableView, .secondSub)
-    block(videoTableView, .video)
   }
 
   private func withAllAudioEqSliders(_ block: (NSSlider) -> Void) {
@@ -953,7 +864,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       allowedFileTypes: Utility.playableFileExt
     ) { url in
       self.player.loadExternalAudioFile(url)
-      self.audioTableView.reloadData()
       self.configureAudioPopUp()
     }
   }
@@ -1017,8 +927,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
                              sheetWindow: player.currentWindow, allowedFileTypes: Utility.supportedFileExt[.sub]) { url in
         // set a delay
         self.player.loadExternalSubFile(url, delay: true)
-        self.subTableView.reloadData()
-        self.secSubTableView.reloadData()
         self.configureSubtitlePopUp()
         self.configureSecondarySubtitlePopUp()
       }

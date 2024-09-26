@@ -10,8 +10,8 @@ import Cocoa
 
 fileprivate extension String {
   func removedLastSemicolon() -> String {
-    let trimed = trimWhitespaceSuffix()
-    guard !trimed.hasSuffix(":") else { return String(trimed.dropLast()) }
+    let trimmed = trimWhitespaceSuffix()
+    guard !trimmed.hasSuffix(":") else { return String(trimmed.dropLast()) }
     return self
   }
 

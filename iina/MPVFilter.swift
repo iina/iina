@@ -57,9 +57,9 @@ class MPVFilter: NSObject {
    - parameter amount: Amount for la and ca. Should be in [-1.5, 1.5].
    */
   static func unsharp(amount: Float, msize: Int = 5) -> MPVFilter {
-    let amoutStr = amount.description
+    let amountStr = amount.description
     let msizeStr = msize.description
-    return MPVFilter(lavfiName: "unsharp", label: nil, params: [msizeStr, msizeStr, amoutStr, msizeStr, msizeStr, amoutStr])
+    return MPVFilter(lavfiName: "unsharp", label: nil, params: [msizeStr, msizeStr, amountStr, msizeStr, msizeStr, amountStr])
   }
 
   // MARK: - Members

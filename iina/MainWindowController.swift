@@ -402,7 +402,7 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
-  var titlebarAccesoryViewController: NSTitlebarAccessoryViewController!
+  var titlebarAccessoryViewController: NSTitlebarAccessoryViewController!
   @IBOutlet var titlebarAccessoryView: NSView!
 
   /** Current OSC view. */
@@ -512,10 +512,10 @@ class MainWindowController: PlayerWindowController {
 
     titleBarView.layerContentsRedrawPolicy = .onSetNeedsDisplay
 
-    titlebarAccesoryViewController = NSTitlebarAccessoryViewController()
-    titlebarAccesoryViewController.view = titlebarAccessoryView
-    titlebarAccesoryViewController.layoutAttribute = .right
-    window.addTitlebarAccessoryViewController(titlebarAccesoryViewController)
+    titlebarAccessoryViewController = NSTitlebarAccessoryViewController()
+    titlebarAccessoryViewController.view = titlebarAccessoryView
+    titlebarAccessoryViewController.layoutAttribute = .right
+    window.addTitlebarAccessoryViewController(titlebarAccessoryViewController)
     updateOnTopIcon()
 
     // size
@@ -1390,7 +1390,7 @@ class MainWindowController: PlayerWindowController {
 
     player.touchBarSupport.toggleTouchBarEsc(enteringFullScr: false)
 
-    window!.addTitlebarAccessoryViewController(titlebarAccesoryViewController)
+    window!.addTitlebarAccessoryViewController(titlebarAccessoryViewController)
 
     // Must not access mpv while it is asynchronously processing stop and quit commands.
     // See comments in windowWillExitFullScreen for details.
@@ -1828,8 +1828,8 @@ class MainWindowController: PlayerWindowController {
       // When running on an M1 under Big Sur and using legacy full screen.
       //
       // Changes in Big Sur broke the legacy full screen feature. The MainWindowController method
-      // legacyAnimateToFullscreen had to be changed to get this feature working again. Under Big
-      // Sur that method now calls "window.styleMask.remove(.titled)". Removing titled from the
+      // legacyAnimateToFullscreen had to be changed to get this feature working again. Under
+      // Big Sur that method now calls "window.styleMask.remove(.titled)". Removing titled from the
       // style mask causes the AppKit method NSWindow.setTitleWithRepresentedFilename to trigger the
       // exception listed above. This appears to be a defect in the Cocoa framework. The window's
       // title can still be set directly without triggering the exception. The problem seems to be
@@ -2289,15 +2289,15 @@ class MainWindowController: PlayerWindowController {
   /// in the thumbnail extending outside of the window resulting in clipping. This method checks if there is room for the
   /// thumbnail to fully fit in the window. Otherwise the thumbnail must be displayed below the OSC's progress bar.
   /// - Parameters:
-  ///   - timnePreviewYPos: The y-coordinate of the time preview `TextField`.
+  ///   - timePreviewYPos: The y-coordinate of the time preview `TextField`.
   ///   - thumbnailHeight: The height of the thumbnail.
   /// - Returns: `true` if the thumbnail can be shown above the slider, `false` otherwise.
-  private func canShowThumbnailAbove(timnePreviewYPos: Double, thumbnailHeight: Double) -> Bool {
+  private func canShowThumbnailAbove(timePreviewYPos: Double, thumbnailHeight: Double) -> Bool {
     guard oscPosition != .bottom else { return true }
     guard oscPosition != .top else { return false }
     // The layout preference for the on screen controller is set to the default floating layout.
     // Must insure the top of the thumbnail would be below the top of the window.
-    let topOfThumbnail = timnePreviewYPos + timePreviewWhenSeek.frame.height + thumbnailHeight
+    let topOfThumbnail = timePreviewYPos + timePreviewWhenSeek.frame.height + thumbnailHeight
     // Normally the height of the usable area of the window can be obtained from the content
     // layout. But when the legacy full screen preference is enabled the layout height may be
     // larger than the content view if the display contains a camera housing. Use the lower of
@@ -2339,7 +2339,7 @@ class MainWindowController: PlayerWindowController {
 
         let height = round(120 / displayAspectRatio)
         let timePreviewFrameInWindow = timePreviewWhenSeek.superview!.convert(timePreviewWhenSeek.frame.origin, to: nil)
-        let showAbove = canShowThumbnailAbove(timnePreviewYPos: timePreviewFrameInWindow.y, thumbnailHeight: height)
+        let showAbove = canShowThumbnailAbove(timePreviewYPos: timePreviewFrameInWindow.y, thumbnailHeight: height)
         let yPos = showAbove ? timePreviewFrameInWindow.y + timePreviewWhenSeek.frame.height : sliderFrameInWindow.y - height
         thumbnailPeekView.frame.size = NSSize(width: 120, height: height)
         thumbnailPeekView.frame.origin = NSPoint(x: round(posInWindow.x - thumbnailPeekView.frame.width / 2), y: yPos)
@@ -2821,13 +2821,13 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
-  @IBAction func ontopButtonnAction(_ sender: NSButton) {
+  @IBAction func ontopButtonAction(_ sender: NSButton) {
     setWindowFloatingOnTop(!isOntop)
   }
 
   func showSettingsSidebar(tab: QuickSettingViewController.TabViewType? = nil, force: Bool = false, hideIfAlreadyShown: Bool = true) {
     if !force && sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
-      return  // do not interrput other actions while it is animating
+      return  // do not interrupt other actions while it is animating
     }
     let view = quickSettingView
     switch sideBarStatus {
@@ -2856,7 +2856,7 @@ class MainWindowController: PlayerWindowController {
 
   func showPlaylistSidebar(tab: PlaylistViewController.TabViewType? = nil, force: Bool = false, hideIfAlreadyShown: Bool = true) {
     if !force && sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
-      return  // do not interrput other actions while it is animating
+      return  // do not interrupt other actions while it is animating
     }
     let view = playlistView
     switch sideBarStatus {

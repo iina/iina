@@ -711,7 +711,7 @@ extension PrefPluginViewController: WKScriptMessageHandler {
       var value: Any? = nil
       if let v = plugin.preferences[prefName] {
         value = v
-      } else if let v = plugin.defaultPrefernces[prefName] {
+      } else if let v = plugin.defaultPreferences[prefName] {
         value = v
       }
       let result: String

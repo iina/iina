@@ -152,7 +152,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   @IBOutlet weak var hideSwitch: NSSwitch!
   @IBOutlet weak var secHideSwitch: NSSwitch!
-  @IBOutlet weak var subLoadSementedControl: NSSegmentedControl!
+  @IBOutlet weak var subLoadSegmentedControl: NSSegmentedControl!
   @IBOutlet weak var subDelaySlider: NSSlider!
   @IBOutlet weak var subDelaySliderIndicator: NSTextField!
   @IBOutlet weak var subDelaySliderConstraint: NSLayoutConstraint!
@@ -220,7 +220,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       pendingSwitchRequest = nil
     }
 
-    subLoadSementedControl.image(forSegment: 1)?.isTemplate = true
+    subLoadSegmentedControl.image(forSegment: 1)?.isTemplate = true
     switchHorizontalLine.wantsLayer = true
     switchHorizontalLine.layer?.opacity = 0.5
     switchHorizontalLine2.wantsLayer = true
@@ -304,7 +304,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       return
     }
 
-    // Deactive the layout constraints that will be replaced.
+    // Deactivate the layout constraints that will be replaced.
     NSLayoutConstraint.deactivate([
       speedSlider1xLabelCenterXConstraint,
       speedSlider4xLabelCenterXConstraint,

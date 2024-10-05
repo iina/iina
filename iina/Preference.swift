@@ -106,20 +106,26 @@ struct Preference {
 
     // UI
 
-    /** Horizontal position of control bar. (float, 0 - 1) */
-    static let controlBarPositionHorizontal = Key("controlBarPositionHorizontal")
+    /// If `false`, never show OSC. If `true`, see `enableControlBarAutoHide`. (bool)
+    static let enableTitleBarAndOSC = Key("enableTitleBarAndOSC")
 
-    /** Horizontal position of control bar. In percentage from bottom. (float, 0 - 1) */
-    static let controlBarPositionVertical = Key("controlBarPositionVertical")
+    /// Whether auto hiding OSC is enabled. (bool)
+    static let enableControlBarAutoHide = Key("enableControlBarAutoHide")
 
-    /** Whether control bar stick to center when dragging. (bool) */
-    static let controlBarStickToCenter = Key("controlBarStickToCenter")
-
-    /** Timeout for auto hiding control bar (float) */
+    /// Timeout for auto hiding OSC, if `enableControlBarAutoHide` is true. (float)
     static let controlBarAutoHideTimeout = Key("controlBarAutoHideTimeout")
 
-    /** Whether auto hiding control bar is enabled. (bool)*/
-    static let enableControlBarAutoHide = Key("enableControlBarAutoHide")
+    /// Where to display OSC. (enum, `.top`, `.bottom`, or `.floating`)
+    static let oscPosition = Key("oscPosition")
+
+    /// Horizontal position of "floating" OSC. (float, 0 - 1)
+    static let controlBarPositionHorizontal = Key("controlBarPositionHorizontal")
+
+    /// Horizontal position of "floating" OSC. In percentage from bottom. (float, 0 - 1)
+    static let controlBarPositionVertical = Key("controlBarPositionVertical")
+
+    /// Whether "floating" OSC sticks to center when dragging. (bool)
+    static let controlBarStickToCenter = Key("controlBarStickToCenter")
 
     static let controlBarToolbarButtons = Key("controlBarToolbarButtons")
 
@@ -137,8 +143,6 @@ struct Preference {
     static let initialWindowSizePosition = Key("initialWindowSizePosition")
     static let resizeWindowTiming = Key("resizeWindowTiming")
     static let resizeWindowOption = Key("resizeWindowOption")
-
-    static let oscPosition = Key("oscPosition")
 
     static let playlistWidth = Key("playlistWidth")
     static let prefetchPlaylistVideoDuration = Key("prefetchPlaylistVideoDuration")
@@ -780,13 +784,14 @@ struct Preference {
     .recordPlaybackHistory: true,
     .recordRecentFiles: true,
     .trackAllFilesInRecentOpenMenu: true,
+    .enableTitleBarAndOSC: true,
+    .enableControlBarAutoHide: true,
+    .controlBarAutoHideTimeout: Float(2.5),
+    .oscPosition: OSCPosition.floating.rawValue,
     .controlBarPositionHorizontal: Float(0.5),
     .controlBarPositionVertical: Float(0.1),
     .controlBarStickToCenter: true,
-    .controlBarAutoHideTimeout: Float(2.5),
-    .enableControlBarAutoHide: true,
     .controlBarToolbarButtons: [ToolBarButton.pip.rawValue, ToolBarButton.playlist.rawValue, ToolBarButton.settings.rawValue],
-    .oscPosition: OSCPosition.floating.rawValue,
     .playlistWidth: 270,
     .prefetchPlaylistVideoDuration: true,
     .themeMaterial: Theme.dark.rawValue,

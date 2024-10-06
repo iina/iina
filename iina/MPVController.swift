@@ -711,10 +711,14 @@ class MPVController: NSObject {
 
   /// Shutdown this mpv controller.
   func mpvQuit() {
-    // Observers must be removed to avoid accessing the mpv core after it has shutdown.
-    removeObservers()
-    // Start mpv quitting. Even though this command is being sent using the synchronous command API
-    // the quit command is special and will be executed by mpv asynchronously.
+    // Remove observers for IINA preference. Must not attempt to change a mpv setting
+    // in response to an IINA preference change while mpv is shutting down.
+    removeOptionObservers()
+    // Remove observers for mpv properties. Because 0 was passed for reply_userdata when
+    // registering mpv property observers all observers can be removed in one call.
+    mpv_unobserve_property(mpv, 0)
+    // Start mpv quitting. Even though this command is being sent using the synchronous
+    // command API the quit command is special and will be executed by mpv asynchronously.
     command(.quit, level: .verbose)
   }
 
@@ -1006,18 +1010,23 @@ class MPVController: NSObject {
   private func readEvents() {
     queue.async {
       while ((self.mpv) != nil) {
-        let event = mpv_wait_event(self.mpv, 0)
+        let event = mpv_wait_event(self.mpv, 0)!
+        let eventId = event.pointee.event_id
         // Do not deal with mpv-event-none
-        if event?.pointee.event_id == MPV_EVENT_NONE {
+        if eventId == MPV_EVENT_NONE {
           break
         }
         self.handleEvent(event)
+        // Must stop reading events once the mpv core is shutdown.
+        if eventId == MPV_EVENT_SHUTDOWN {
+          break
+        }
       }
     }
   }
 
   // Handle the event
-  private func handleEvent(_ event: UnsafePointer<mpv_event>!) {
+  private func handleEvent(_ event: UnsafePointer<mpv_event>) {
     let eventId = event.pointee.event_id
 
     switch eventId {
@@ -1103,7 +1112,7 @@ class MPVController: NSObject {
       }
 
     case MPV_EVENT_END_FILE:
-      let reason = event!.pointee.data.load(as: mpv_end_file_reason.self)
+      let reason = event.pointee.data.load(as: mpv_end_file_reason.self)
       DispatchQueue.main.async {
         self.player.fileEnded(dueToStopCommand: reason == MPV_END_FILE_REASON_STOP)
       }

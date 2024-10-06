@@ -295,6 +295,16 @@ extension NSColor {
 }
 
 extension Data {
+  init<T> (bytesOf thing: T) where T: FixedWidthInteger {
+    var copyOfThing = thing
+    self.init(bytes: &copyOfThing, count: MemoryLayout<T>.size)
+  }
+
+  init(bytesOf num: Double) {
+    var numCopy = num
+    self.init(bytes: &numCopy, count: MemoryLayout<Double>.size)
+  }
+
   var md5: String { Insecure.MD5.hash(data: self).map { String(format: "%02x", $0) }.joined() }
 
   var chksum64: UInt64 {
@@ -303,11 +313,6 @@ extension Data {
     }
   }
 
-  init<T>(bytesOf thing: T) {
-    var copyOfThing = thing // Hopefully CoW?
-    self.init(bytes: &copyOfThing, count: MemoryLayout.size(ofValue: thing))
-  }
-  
   func saveToFolder(_ url: URL, filename: String) -> URL? {
     let fileUrl = url.appendingPathComponent(filename)
     do {

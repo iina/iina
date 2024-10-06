@@ -69,7 +69,7 @@ class PlayerCore: NSObject {
   static private var playerCoreCounter = 0
 
   static private func findIdlePlayerCore() -> PlayerCore? {
-    playerCores.first { $0.info.state == .idle }
+    playerCores.first { $0.info.state == .idle && !$0.backgroundTaskInUse }
   }
 
   static private func createPlayerCore() -> PlayerCore {
@@ -115,9 +115,9 @@ class PlayerCore: NSObject {
   var needsTouchBar = false
 
   /// A dispatch queue for auto load feature.
-  let backgroundQueue = DispatchQueue(label: "IINAPlayerCoreTask", qos: .background)
-  let playlistQueue = DispatchQueue(label: "IINAPlaylistTask", qos: .utility)
-  let thumbnailQueue = DispatchQueue(label: "IINAPlayerCoreThumbnailTask", qos: .utility)
+  let backgroundQueue: DispatchQueue
+  let playlistQueue: DispatchQueue
+  let thumbnailQueue: DispatchQueue
 
   /**
    This ticket will be increased each time before a new task being submitted to `backgroundQueue`.
@@ -130,6 +130,12 @@ class PlayerCore: NSObject {
    `autoLoadFilesInCurrentFolder(ticket:)`
    */
   @Atomic var backgroundQueueTicket = 0
+
+  enum TicketExpiredError: Error {
+    case ticketExpired
+  }
+
+  private var backgroundTaskInUse = false
 
   var initialWindow: InitialWindowController!
   
@@ -233,6 +239,9 @@ class PlayerCore: NSObject {
 
   override init() {
     playerNumber = PlayerCore.playerCoreCounter
+    backgroundQueue = DispatchQueue(label: "IINAPlayerCoreTask\(playerNumber)", qos: .background)
+    playlistQueue = DispatchQueue(label: "IINAPlaylistTask\(playerNumber)", qos: .utility)
+    thumbnailQueue = DispatchQueue(label: "IINAPlayerCoreThumbnailTask\(playerNumber)", qos: .utility)
     super.init()
     self.mpv = MPVController(playerCore: self)
     self.mainWindow = MainWindowController(playerCore: self)
@@ -514,12 +523,29 @@ class PlayerCore: NSObject {
   /// - Important: As a part of shutting down the player this method sends a quit command to mpv. Even though the command is
   ///     sent to mpv using the synchronous API mpv executes the quit command asynchronously. The player is not fully shutdown
   ///     until mpv finishes executing the quit command and shuts down.
+  /// - Note: If the user clicks on `Quit` right after starting to play a video then the background task may still be running and
+  ///     loading files into the playlist and adding subtitles. If that is the case then the background task **must be** stopped before
+  ///     sending a `quit` command to mpv. If the background task is allowed to access mpv after a `quit` command has been
+  ///     sent mpv could crash. The `stop` method takes care of instructing the background task to stop and will wait for it to stop
+  ///     before sending a `stop` command to mpv. _However_ mpv will stop on its own if the end of the video is reached. When
+  ///     that happens while IINA is quitting then this method may be called with the background task still running. If the background
+  ///     task is still running this method only changes the player state. When the background task ends it will notice that shutting
+  ///     down was in progress and will call this method again to continue the process of shutting down..
   func shutdown() {
-    guard info.state != .shuttingDown else { return }
     info.state = .shuttingDown
+    guard !backgroundTaskInUse else { return }
     log("Shutting down")
     savePlayerState()
     mpv.mpvQuit()
+  }
+
+  /// Notify the task running in the background queue it should stop.
+  ///
+  /// The background queue will be instructed to stop by invalidating the ticket it owns. The background task polls the current ticket
+  /// and eventually will notice it has changed and will abandon its work.
+  private func stopBackgroundTask() {
+    log("Stopping background task")
+    $backgroundQueueTicket.withLock { $0 += 1 }
   }
 
   /// Respond to the mpv core shutting down.
@@ -539,6 +565,9 @@ class PlayerCore: NSObject {
     if isMPVInitiated {
       // The user must have used mpv's IPC interface to send a quit command directly to mpv. Must
       // perform the actions that were skipped when IINA's normal shutdown process was bypassed.
+      if backgroundTaskInUse {
+        stopBackgroundTask()
+      }
       mpv.removeObservers()
       savePlayerState()
     }
@@ -721,23 +750,53 @@ class PlayerCore: NSObject {
   }
 
   /// Stop playback and unload the media.
+  ///
+  /// This method is called when a window closes. The player may be:
+  /// - In one of the "active" states
+  /// - In the `idle` state
+  /// - In the `shutdown` state
+  ///
+  /// The player will be in one of the active states if the user closes the window or quits IINA while the video is playing or paused. If the
+  /// end of the video is reached then the mpv core will go into the `idle` state. In this case the `stop` command must not be sent
+  /// to mpv as the core is already stopped. The player will be in the `shutdown` state if quitting was initiated through mpv. When this
+  /// happens the `mpvHasShutdown` method handles tasks required to stop the player. In this case this method has nothing to do.
+  /// - Note: If playback is stopped right after starting to play the video then the background task may still be running and loading
+  ///     files into the playlist and adding subtitles. If that is the case then the background task must be stopped before sending a
+  ///     `stop` command to mpv. This happens asynchronously. This method will invalidate the ticket that the background task
+  ///     periodically checks to get the task to end early. When the background task ends it will notice that stopping was in progress
+  ///     and call this method again to continue the process of stopping. It is important to stop the background task as if it is still
+  ///     running when the mpv core is shutdown it may call into mpv triggering a crash.
   func stop() {
-    // If the user immediately closes the player window it is possible the background task may still
-    // be working to load subtitles. Invalidate the ticket to get that task to abandon the work.
-    $backgroundQueueTicket.withLock { $0 += 1 }
-
+    guard info.state != .shutDown else { return }
     savePlaybackPosition()
 
-    mainWindow.videoView.stopDisplayLink()
+    // The player may already be stopped in which case the state must not be set to stopping.
+    if info.state != .idle {
+      // Setting of state must come after saving playback position or that method will not save the
+      // watch later configuration.
+      info.state = .stopping
 
+      // Make sure playback is paused to free up machine resources when quitting.
+      mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
+    }
+
+    // Must first stop the background task if it is running.
+    if backgroundTaskInUse {
+      stopBackgroundTask()
+      return
+    }
+
+    if info.state != .idle {
+      log("Stopping playback")
+    }
+    mainWindow.videoView.stopDisplayLink()
     info.$matchedSubs.withLock { $0.removeAll() }
 
-    // Do not send a stop command to mpv if it is already stopped. This happens when quitting is
-    // initiated directly through mpv.
-    guard info.state.active else { return }
-    log("Stopping playback")
+    // Refresh UI synchronization as it will detect the player is stopping and shutdown the timer.
     refreshSyncUITimer()
-    info.state = .stopping
+
+    // Do not send a stop command to mpv if it is already stopped.
+    guard info.state != .idle else { return }
     mpv.command(.stop, level: .verbose)
   }
 
@@ -1615,7 +1674,7 @@ class PlayerCore: NSObject {
     // The player must be active to be able to save the watch later configuration.
     if info.state.active {
       log("Write watch later config")
-      mpv.command(.writeWatchLaterConfig)
+      mpv.command(.writeWatchLaterConfig, level: .verbose)
     }
     if let url = info.currentURL {
       Preference.set(url, for: .iinaLastPlayedFilePath)
@@ -1678,7 +1737,12 @@ class PlayerCore: NSObject {
   // main thread avoids thread data races without the need for locks. Also a few of the methods call
   // AppKit methods that require use of the main thread.
 
+  /// A [MPV_EVENT_START_FILE](https://mpv.io/manual/stable/#command-interface-mpv-event-start-file)
+  /// was received.
+  /// - Important: The event may be recieved after IINA has started to stop and shutdown the core. The event must be ignored if
+  ///         the player is no longer active.
   func fileStarted(path: String) {
+    guard info.state.active else { return }
     log("File started")
     info.justStartedFile = true
     info.disableOSDForFileLoading = true
@@ -1714,30 +1778,58 @@ class PlayerCore: NSObject {
     $backgroundQueueTicket.withLock { $0 += 1 }
     let shouldAutoLoadFiles = info.shouldAutoLoadFiles
     let currentTicket = backgroundQueueTicket
-    backgroundQueue.async {
-      // add files in same folder
-      if shouldAutoLoadFiles {
-        self.log("Started auto load")
-        self.autoLoadFilesInCurrentFolder(ticket: currentTicket)
-      }
-      // auto load matched subtitles
-      if let matchedSubs = self.info.getMatchedSubs(path) {
-        self.log("Found \(matchedSubs.count) subs for current file")
-        for sub in matchedSubs {
-          guard currentTicket == self.backgroundQueueTicket else { return }
-          self.loadExternalSubFile(sub)
+    backgroundTaskInUse = true
+    backgroundQueue.async { [self] in
+      do {
+        // add files in same folder
+        if shouldAutoLoadFiles {
+          log("Started auto load")
+          try autoLoadFilesInCurrentFolder(ticket: currentTicket)
         }
-        // set sub to the first one
-        guard currentTicket == self.backgroundQueueTicket, self.mpv.mpv != nil else { return }
-        self.setTrack(1, forType: .sub)
+        // auto load matched subtitles
+        if let matchedSubs = self.info.getMatchedSubs(path) {
+          log("Found \(matchedSubs.count) subs for current file")
+          for sub in matchedSubs {
+            try checkTicket(currentTicket)
+            loadExternalSubFile(sub)
+          }
+          // set sub to the first one
+          try checkTicket(currentTicket)
+          setTrack(1, forType: .sub)
+        }
+        autoSearchOnlineSub()
+      } catch TicketExpiredError.ticketExpired {
+        log("Background task stopping due to ticket expiration")
+      } catch let err {
+        log("Background task stopping due to error \(err.localizedDescription)", level: .error)
       }
-      self.autoSearchOnlineSub()
+      // This code must be queued to the main thread to avoid thread data races.
+      DispatchQueue.main.async { [self] in
+        backgroundTaskInUse = false
+        log("Background task has stopped")
+        // If the player is stopping then that process has been waiting for this background task to
+        // finish. Call stop again to continue with the process of stopping this player. Stop must
+        // also be called if mpv itself stopped the core (idle state). If IINA is quitting then the
+        // shutdown process has been waiting for the task to end and shutdown must be called to
+        // continue the process.
+        if info.state == .stopping || info.state == .idle {
+          stop()
+        } else if info.state == .shuttingDown {
+          shutdown()
+        }
+      }
     }
     events.emit(.fileStarted)
   }
 
-  /** This function is called right after file loaded. Should load all meta info here. */
+  /// A [MPV_EVENT_FILE_LOADED](https://mpv.io/manual/stable/#command-interface-mpv-event-file-loaded)
+  /// was received.
+  ///
+  /// This function is called right after the file is loaded. Should load all meta info here.
+  /// - Important: The event may be recieved after IINA has started to stop and shutdown the core. The event must be ignored if
+  ///         the player is no longer active.
   func fileLoaded() {
+    guard info.state.active else { return }
     log("File loaded")
     info.state = .paused
     mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
@@ -2037,8 +2129,8 @@ class PlayerCore: NSObject {
    This method is expected to be executed in `backgroundQueue` (see `backgroundQueueTicket`).
    Therefore accesses to `self.info` and mpv playlist must be guarded.
    */
-  private func autoLoadFilesInCurrentFolder(ticket: Int) {
-    AutoFileMatcher(player: self, ticket: ticket).startMatching()
+  private func autoLoadFilesInCurrentFolder(ticket: Int) throws {
+    try AutoFileMatcher(player: self, ticket: ticket).startMatching()
   }
 
   /**
@@ -2257,7 +2349,8 @@ class PlayerCore: NSObject {
 
   func sendOSD(_ osd: OSDMessage, autoHide: Bool = true, forcedTimeout: Float? = nil, accessoryView: NSView? = nil, context: Any? = nil, external: Bool = false) {
     // querying `mainWindow.isWindowLoaded` will initialize mainWindow unexpectly
-    guard mainWindow.loaded, Preference.bool(for: .enableOSD) || osd.alwaysEnabled, !osd.isDisabled else { return }
+    guard mainWindow.loaded, info.state.active,
+          Preference.bool(for: .enableOSD) || osd.alwaysEnabled, !osd.isDisabled else { return }
     if info.disableOSDForFileLoading && !external {
       guard case .fileStart = osd else {
         return
@@ -2434,6 +2527,12 @@ class PlayerCore: NSObject {
   }
 
   // MARK: - Utils
+
+  func checkTicket(_ ticket: Int) throws {
+    if backgroundQueueTicket != ticket {
+      throw TicketExpiredError.ticketExpired
+    }
+  }
 
   /**
    Non-nil and non-zero width/height value calculated for video window, from current `dwidth`

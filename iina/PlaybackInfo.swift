@@ -34,25 +34,26 @@ class PlaybackInfo {
     player = pc
   }
 
-  // TODO: - Change log level of state changed message to be .verbose once state is confirmed working.
-
   /// The state the `PlayerCore` is in.
-  /// - Note: A computed property is used to prevent inappropriate state changes. When IINA terminates players that are actively
-  ///     playing will first be stopped and then shutdown. Once a player has stopped the mpv core will go idle. This happens
-  ///     asynchronously and could occur after the quit command has been sent to mpv. Thus we must be sure the state does not
-  ///     transition from `.shuttingDown` to `.idle`.
+  ///
+  /// A computed property is used to prevent inappropriate state changes and perform actions based on the state changing. The
+  /// following rules are enforced on state changes:
+  /// - `loading` is not allowed to change to `idle`
+  /// - `stopping` is only allowed to change to `idle`
+  /// - `shuttingDown` is only allowed to change to `shutDown`
+  /// - `shutDown` is not allowed to change to any other state
   var state: PlayerState = .idle {
     didSet {
+      // Nothing to do if the old state matches the state that was just assigned.
       guard state != oldValue else { return }
-      // Once the player is in the shuttingDown state it can only move to the shutDown state. Once
-      // in the shutDown state the state can't change.
-      guard oldValue != .loading || state != .idle,
+      // Block inappropriate state changes.
+      guard oldValue != .loading || state != .idle, oldValue != .stopping || state == .idle,
             oldValue != .shuttingDown || state == .shutDown, oldValue != .shutDown else {
-        player.log("Blocked attempt to change state from \(oldValue) to \(state)")
+        player.log("Blocked attempt to change state from \(oldValue) to \(state)", level: .verbose)
         state = oldValue
         return
       }
-      player.log("State changed from \(oldValue) to \(state)")
+      player.log("State changed from \(oldValue) to \(state)", level: .verbose)
       switch state {
       case .idle:
         PlayerCore.checkStatusForSleep()

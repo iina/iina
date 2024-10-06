@@ -1487,3 +1487,17 @@ struct MPVOption {
   }
 
 }
+
+// MARK: - Enums for Option Values
+
+protocol MPVOptionValue {
+  static var defaultValue: Self { get }
+  init?(rawValue: String)
+}
+
+enum CocoaCbSwRenderer: String, MPVOptionValue {
+  case auto
+  case no
+  case yes
+  static var defaultValue = CocoaCbSwRenderer.auto
+}

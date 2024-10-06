@@ -134,6 +134,17 @@ File.open(File.join(__dir__, 'MPVOption.swift'), 'w') do |file|
     file.write "  }\n\n"
   end
 
+  file.write "}\n\n"
+  file.write "// MARK: - Enums for Option Values\n\n"
+  file.write "protocol MPVOptionValue {\n"
+  file.write "  static var defaultValue: Self { get }\n"
+  file.write "  init?(rawValue: String)\n"
+  file.write "}\n\n"
+  file.write "enum CocoaCbSwRenderer: String, MPVOptionValue {\n"
+  file.write "  case auto\n"
+  file.write "  case no\n"
+  file.write "  case yes\n"
+  file.write "  static var defaultValue = CocoaCbSwRenderer.auto\n"
   file.write "}\n"
 end
 

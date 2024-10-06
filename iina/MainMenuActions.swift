@@ -89,8 +89,8 @@ extension MainMenuActionHandler {
 
   @objc func menuStop(_ sender: NSMenuItem) {
     // FIXME: handle stop
-    player.stop()
     player.sendOSD(.stop)
+    player.stop()
   }
 
   @objc func menuStep(_ sender: NSMenuItem) {

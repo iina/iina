@@ -142,7 +142,7 @@ class FileGroup {
 
     let maxSubGroupCount = tempGroup.reduce(0, { max($0, $1.value.count) })
     if stopGrouping(currChars) || maxSubGroupCount < 3 {
-      Logger.log("Stop groupping, maxSubGroup=\(maxSubGroupCount)", level: .verbose, subsystem: subsystem)
+      Logger.log("Stop grouping, maxSubGroup=\(maxSubGroupCount)", level: .verbose, subsystem: subsystem)
       contents.forEach { $0.prefix = self.prefix }
     } else {
       Logger.log("Continue grouping, groups=\(tempGroup.count), chars=\(currChars)", level: .verbose, subsystem: subsystem)

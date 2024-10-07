@@ -67,7 +67,7 @@
                 <outlet property="subDelaySlider" destination="dXz-x4-sm5" id="VX5-8O-mf4"/>
                 <outlet property="subDelaySliderConstraint" destination="7t1-v0-J55" id="ypG-K0-i1x"/>
                 <outlet property="subDelaySliderIndicator" destination="VdJ-nq-zaM" id="0uy-Jw-eKf"/>
-                <outlet property="subLoadSementedControl" destination="zQu-u6-goi" id="atP-0P-nhL"/>
+                <outlet property="subLoadSegmentedControl" destination="zQu-u6-goi" id="atP-0P-nhL"/>
                 <outlet property="subPosSlider" destination="lzW-d6-Asr" id="4n0-Xj-8qN"/>
                 <outlet property="subScaleResetBtn" destination="8ZC-Wx-nt7" id="fK9-bQ-Mxl"/>
                 <outlet property="subScaleSlider" destination="B8f-KH-BaO" id="dO9-In-ie0"/>
@@ -106,7 +106,7 @@
                                 <action selector="tabBtnAction:" target="-2" id="T17-c3-4hp"/>
                             </connections>
                         </button>
-                        <button tag="1" imageHugsTitle="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3Fk-ey-FhK" userLabel="AudioTab Buttom">
+                        <button tag="1" imageHugsTitle="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3Fk-ey-FhK" userLabel="AudioTab Button">
                             <rect key="frame" x="112" y="0.0" width="103" height="48"/>
                             <buttonCell key="cell" type="square" title="AUDIO" bezelStyle="shadowlessSquare" image="tab_audio" imagePosition="leading" alignment="center" imageScaling="proportionallyDown" inset="2" id="cpm-5o-a2c">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>

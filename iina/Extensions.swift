@@ -630,7 +630,7 @@ extension NSImage {
   /// older systems (macOS 13 and below), because SF Symbols are not complete enough for our usage, we don't use them at all.
   /// If a better symbol is found in a later release of SF Symbol, place it at the first of the name list, so that IINA running
   /// on the latest version of macOS can make use of it; IINA running on a older version of macOS will fallback to a symbol
-  /// in a previous release of SF Symbol. But the list of name must contain a symbol which is avaliable in macOS 14 (SF Symbol 5).
+  /// in a previous release of SF Symbol. But the list of name must contain a symbol which is available in macOS 14 (SF Symbol 5).
   ///
   /// - Parameters:
   ///   - names: A list name of the SF Symbol. The name requires higher SF Symbol version must be at front, with fallback SF Symbol
@@ -640,8 +640,8 @@ extension NSImage {
   static func findSFSymbol(_ names: [String], withConfiguration configuration: NSImage.SymbolConfiguration? = nil) -> NSImage {
     for name in names {
       if let symbol = NSImage(systemSymbolName: name, accessibilityDescription: nil) {
-        if let configuration, let configed = symbol.withSymbolConfiguration(configuration) {
-          return configed
+        if let configuration, let configured = symbol.withSymbolConfiguration(configuration) {
+          return configured
         }
         return symbol
       }
@@ -741,7 +741,7 @@ extension NSWindow {
   /// This method searches for a screen to use in this order:
   /// - `window!.screen` The screen where most of the window is on; it is `nil` when the window is offscreen.
   /// - `NSScreen.main` The screen containing the window that is currently receiving keyboard events.
-  /// - `NSScreeen.screens[0]` The primary screen of the user’s system.
+  /// - `NSScreen.screens[0]` The primary screen of the user’s system.
   ///
   /// `PlayerCore` caches players along with their windows. This window may have been previously used on an external monitor
   /// that is no longer attached. In that case the `screen` property of the window will be `nil`.  Apple documentation is silent

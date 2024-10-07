@@ -21,7 +21,7 @@ class JavascriptAPIPreferences: JavascriptAPI, JavascriptAPIPreferencesExportabl
     if let value = plugin.preferences[key] {
       return value
     }
-    if let value = plugin.defaultPrefernces[key] {
+    if let value = plugin.defaultPreferences[key] {
       return value
     }
     Logger.log("Trying to get preference value for undefined key \(key)", level: .warning, subsystem: pluginInstance.subsystem)

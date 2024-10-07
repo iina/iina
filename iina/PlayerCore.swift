@@ -589,7 +589,7 @@ class PlayerCore: NSObject {
     }
   }
 
-  /// Swtich the current player to mini player from the main window.
+  /// Switch the current player to mini player from the main window.
   ///
   /// - Parameters:
   ///     - showMiniPlayer: set to false when this function is called when tracklist is changed.
@@ -626,7 +626,7 @@ class PlayerCore: NSObject {
       mainWindow.hideSideBar(animate: false)
     }
 
-    // move playist view
+    // move playlist view
     playlistView.removeFromSuperview()
     mainWindow.playlistView.useCompactTabHeight = true
     miniPlayer.playlistWrapperView.addSubview(playlistView)
@@ -678,7 +678,7 @@ class PlayerCore: NSObject {
     events.emit(.musicModeChanged, data: true)
   }
 
-  /// Swtich the current player to main player from the mini player.
+  /// Switch the current player to main player from the mini player.
   ///
   /// - Parameters:
   ///     - showMainWindow: set to false when this function is called when tracklist is changed.
@@ -2291,7 +2291,7 @@ class PlayerCore: NSObject {
   func syncUI(_ option: SyncUIOption) {
     // If window is not loaded or stopping or shutting down, ignore.
     guard mainWindow.loaded, info.state.active else { return }
-    // This is too noisy and making verbose logs unreadable. Please uncomment when debugging syncing releated issues.
+    // This is too noisy and making verbose logs unreadable. Please uncomment when debugging syncing related issues.
     // log("Syncing UI \(option)", level: .verbose)
 
     switch option {
@@ -2365,7 +2365,7 @@ class PlayerCore: NSObject {
   }
 
   func sendOSD(_ osd: OSDMessage, autoHide: Bool = true, forcedTimeout: Float? = nil, accessoryView: NSView? = nil, context: Any? = nil, external: Bool = false) {
-    // querying `mainWindow.isWindowLoaded` will initialize mainWindow unexpectly
+    // querying `mainWindow.isWindowLoaded` will initialize mainWindow unexpectedly
     guard mainWindow.loaded, info.state.active,
           Preference.bool(for: .enableOSD) || osd.alwaysEnabled, !osd.isDisabled else { return }
     if info.disableOSDForFileLoading && !external {

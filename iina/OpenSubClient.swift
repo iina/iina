@@ -60,7 +60,7 @@ class OpenSubClient {
     ///   [HTTP status code](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml).
     case contentMissing(statusCode: Int?)
     
-    /// An error that indicates the REST API call failed, returning a JSON struct containing information about the faillure.
+    /// An error that indicates the REST API call failed, returning a JSON struct containing information about the failure.
     /// - Parameter response: An `ErrorResponse` object containing information about the failure.
     case errorResponse(response: OpenSubClient.ErrorResponse)
   }
@@ -244,7 +244,7 @@ class OpenSubClient {
 
   /// [Languages](https://opensubtitles.stoplight.io/docs/opensubtitles-api/1de776d20e873-languages)
   /// method.
-  /// - Returns: A `LanguagesResponse` containing a list of the supported lanuage codes.
+  /// - Returns: A `LanguagesResponse` containing a list of the supported language codes.
   func languages() -> Promise<LanguagesResponse> {
     return after(seconds: rateLimiter.delayBeforeCall()).then { [self] in
       Promise { resolver in

@@ -443,7 +443,7 @@ fileprivate struct ConsoleView: View {
 }
 
 
-/// Display various JavaScipt values and log messages
+/// Display various JavaScript values and log messages
 @available(macOS 12.0, *)
 fileprivate struct ResultView: View {
   var result: ResultItem

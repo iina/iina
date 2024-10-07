@@ -487,7 +487,8 @@ class MenuController: NSObject, NSMenuDelegate {
     let loopMode = player.getLoopMode()
     fileLoop.state = loopMode == .file ? .on : .off
     playlistLoop.state = loopMode == .playlist ? .on : .off
-    speedIndicator.title = String(format: NSLocalizedString("menu.speed", comment: "Speed:"), player.info.playSpeed)
+    let speed = player.info.playSpeed.string
+    speedIndicator.title = String(format: NSLocalizedString("menu.speed", comment: "Speed:"), speed)
   }
 
   private func updateVideoMenu() {
@@ -934,7 +935,17 @@ class MenuController: NSObject, NSMenuDelegate {
     menuItem.keyEquivalentModifierMask = kMdf
 
     if let value = value, let l10nKey = l10nKey {
-      menuItem.title = String(format: NSLocalizedString("menu." + l10nKey, comment: ""), abs(value))
+      let valObj: CVarArg
+      switch l10nKey {
+      case "speed_up",
+        "speed_down":
+        // Title format expects arg type: String
+        valObj = abs(value).string
+      default:
+        // Title format expects numeric arg
+        valObj = abs(value)
+      }
+      menuItem.title = String(format: NSLocalizedString("menu." + l10nKey, comment: ""), valObj)
       if let extraData = extraData {
         menuItem.representedObject = (value, extraData)
       } else {

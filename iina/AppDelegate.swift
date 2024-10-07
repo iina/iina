@@ -897,7 +897,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     Logger.log("Menu - Open URL")
     openURLWindow.isAlternativeAction = sender.tag == AlternativeMenuItemTag
     openURLWindow.showWindow(nil)
-    openURLWindow.resetFields()
+    openURLWindow.resetWindowState()
   }
 
   @IBAction func menuNewWindow(_ sender: Any) {

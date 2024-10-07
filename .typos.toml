@@ -1,0 +1,29 @@
+[files]
+extend-exclude = [
+    ".git/",
+    "deps/",
+    "iina.xcodeproj/",
+    "**/*.strings",
+]
+ignore-hidden = false
+
+[default]
+extend-ignore-re = [
+    "\\bBig Sur\\b",
+    '(firstItem|secondItem|id|destination|headerView)="[0-9A-Za-z]+-[0-9A-Za-z]+-[0-9A-Za-z]+"',
+    'apiKey = "[^"]+"',
+    "V\\[alue\\]",
+    "ba!",
+]
+
+[default.extend-words]
+"abitrate" = "abitrate"
+"splitted" = "splitted"
+
+[default.extend-identifiers]
+"caf" = "caf"
+"iy" = "iy"
+"reloadSavedIINAfilters" = "reloadSavedIINAfilters"
+"ScreenshootOSDView" = "ScreenshootOSDView"
+"tak" = "tak"
+"videoParamsMaxCll" = "videoParamsMaxCll"

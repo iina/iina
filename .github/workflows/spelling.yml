@@ -1,0 +1,15 @@
+name: Spelling
+
+on:
+  push:
+      branches: [develop]
+  pull_request:
+      branches: [develop]
+
+jobs:
+  typos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: crate-ci/typos@master

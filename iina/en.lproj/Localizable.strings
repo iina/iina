@@ -50,6 +50,7 @@
 "quicksetting.deinterlace" = "Deinterlace";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Hide";
+"quicksetting.reset_speed" = "Reset speed to 1x";
 
 // EQ Presets
 "eq.preset.flat" = "Flat";
@@ -84,7 +85,7 @@
 "osd.pause" = "Pause";
 "osd.resume" = "Resume";
 "osd.volume" = "Volume: %i";
-"osd.speed" = "Speed: %.2fx";
+"osd.speed" = "Speed: %@x";
 "osd.aspect" = "Aspect Ratio: %@";
 "osd.crop" = "Crop: %@";
 "osd.rotate" = "Rotate: %i°";
@@ -189,7 +190,7 @@
 "menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pause";
 "menu.resume" = "Resume";
-"menu.speed" = "Speed: %.2fx";
+"menu.speed" = "Speed: %@x";
 "menu.chapters" = "Show Chapters Panel";
 "menu.hide_chapters" = "Hide Chapters Panel";
 "menu.playlist" = "Show Playlist Panel";
@@ -203,8 +204,8 @@
 
 "menu.seek_forward" = "Step Forward %.0fs";
 "menu.seek_backward" = "Step Backward %.0fs";
-"menu.speed_up" = "Speed Up by %.1fx";
-"menu.speed_down" = "Speed Down by %.1fx";
+"menu.speed_up" = "Speed Up by %@x";
+"menu.speed_down" = "Speed Down by %@x";
 "menu.volume_up" = "Volume + %.0f%%";
 "menu.volume_down" = "Volume - %.0f%%";
 "menu.audio_delay_up" = "Audio Delay + %.1fs";

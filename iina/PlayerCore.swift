@@ -1126,6 +1126,7 @@ class PlayerCore: NSObject {
   }
 
   func setSpeed(_ speed: Double) {
+    let speed = speed < AppData.mpvMinPlaybackSpeed ? AppData.mpvMinPlaybackSpeed : speed
     mpv.setDouble(MPVOption.PlaybackControl.speed, speed)
   }
 

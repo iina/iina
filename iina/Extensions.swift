@@ -327,6 +327,35 @@ extension Double {
       return "\(rounded)"
     }
   }
+
+  func roundedTo2Decimals() -> Double {
+    let scaledUp = self * 1e2
+    let scaledUpRounded = scaledUp.rounded(.up)
+    let finalVal = scaledUpRounded / 1e2
+    return finalVal
+  }
+  
+  /// Formats this number as a decimal string, using the default locale.
+  ///
+  /// This should be used in most places where decimal numbers need to be printed. Do not rely on string interpolation alone
+  /// because the number will not be localized.
+  ///
+  /// For example, if the user's locale formats numbers like `1.234.567,89` (in particular, using
+  /// a comma to signify the decimal):
+  /// ```
+  /// let num: Double = 12.34
+  /// let badStr = "Value is \(num)"          // badStr will *always* be "Value is 12.34"
+  /// let goodStr = "Value is \(num.string)"  // goodStr will be "Value is 12,34"
+  /// ```
+  ///
+  /// Currently the output string is limited to 15 digits after the decimal. This should be more than
+  /// enough for any imaginable use right now, but the limit can and should be increased in the future if
+  /// needed. (It's not clear what the maximum allowed value for `NumberFormatter.maximumFractionDigits`
+  /// actually is. An attempt to set it equal to `NSIntegerMax` seemed to result in it being silently set to
+  /// `6` instead.)
+  var string: String {
+    return fmtDecimalMaxFractionDigits15.string(from: self as NSNumber) ?? "NaN"
+  }
 }
 
 extension Comparable {
@@ -347,6 +376,17 @@ fileprivate let fmtDecimalMaxFractionDigits2: NumberFormatter = {
   fmt.numberStyle = .decimal
   fmt.usesGroupingSeparator = false
   fmt.maximumFractionDigits = 2
+  return fmt
+}()
+
+fileprivate let fmtDecimalMaxFractionDigits15: NumberFormatter = {
+  let fmt = NumberFormatter()
+  fmt.numberStyle = .decimal
+  fmt.usesGroupingSeparator = true
+  fmt.maximumSignificantDigits = 25
+  fmt.minimumFractionDigits = 0
+  fmt.maximumFractionDigits = 15
+  fmt.usesSignificantDigits = false
   return fmt
 }()
 

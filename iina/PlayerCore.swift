@@ -295,6 +295,9 @@ class PlayerCore: NSObject {
     }
     log("Open URL: \(url.absoluteString)")
     let isNetwork = !url.isFileURL
+    if isNetwork {
+      currentWindow?.close()
+    }
     if shouldAutoLoad {
       info.shouldAutoLoadFiles = true
     }
@@ -401,6 +404,9 @@ class PlayerCore: NSObject {
     log("Opening \(path) in main window")
     info.currentURL = url
     info.isNetworkResource = isNetwork
+    if isNetwork {
+      AppDelegate.shared.openURLWindow.showLoadingScreen(playerCore: self)
+    }
 
     let _ = mainWindow.window
     mainWindow.pendingShow = true
@@ -1895,7 +1901,7 @@ class PlayerCore: NSObject {
   func fileEnded(dueToStopCommand: Bool) {
     // if receive end-file when loading file, might be error
     // wait for idle
-    if info.state == .loading {
+    if info.state == .starting {
       if !dueToStopCommand {
         receivedEndFileWhileLoading = true
       }
@@ -1936,14 +1942,23 @@ class PlayerCore: NSObject {
   }
 
   func idleActiveChanged() {
-    if receivedEndFileWhileLoading && info.state == .loading {
-      errorOpeningFileAndCloseMainWindow()
+    if receivedEndFileWhileLoading && info.state == .starting {
+      DispatchQueue.main.async { [unowned self] in
+        currentController.close()
+        if AppDelegate.shared.openURLWindow.window?.isVisible == true {
+          AppDelegate.shared.openURLWindow.failedToLoadURL()
+        } else {
+          Utility.showAlert("error_open")
+        }
+      }
       info.currentURL = nil
       info.isNetworkResource = false
     }
     receivedEndFileWhileLoading = false
     if info.state.loaded {
-      closeWindow()
+      DispatchQueue.main.async {
+        self.currentController.close()
+      }
     }
     if info.state != .loading {
       log("Playback has stopped")
@@ -2248,6 +2263,7 @@ class PlayerCore: NSObject {
     if currentController.pendingShow {
       currentController.pendingShow = false
       currentController.showWindow(self)
+      AppDelegate.shared.openURLWindow.close()
     }
   }
 
@@ -2368,19 +2384,6 @@ class PlayerCore: NSObject {
   func hideOSD() {
     DispatchQueue.main.async {
       self.mainWindow.hideOSD()
-    }
-  }
-
-  func errorOpeningFileAndCloseMainWindow() {
-    DispatchQueue.main.async {
-      Utility.showAlert("error_open")
-      self.mainWindow.close()
-    }
-  }
-
-  func closeWindow() {
-    DispatchQueue.main.async {
-      self.currentController.close()
     }
   }
 

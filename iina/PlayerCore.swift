@@ -1746,7 +1746,7 @@ class PlayerCore: NSObject {
 
   /// A [MPV_EVENT_START_FILE](https://mpv.io/manual/stable/#command-interface-mpv-event-start-file)
   /// was received.
-  /// - Important: The event may be recieved after IINA has started to stop and shutdown the core. The event must be ignored if
+  /// - Important: The event may be received after IINA has started to stop and shutdown the core. The event must be ignored if
   ///         the player is no longer active.
   func fileStarted(path: String) {
     guard info.state.active else { return }
@@ -1833,7 +1833,7 @@ class PlayerCore: NSObject {
   /// was received.
   ///
   /// This function is called right after the file is loaded. Should load all meta info here.
-  /// - Important: The event may be recieved after IINA has started to stop and shutdown the core. The event must be ignored if
+  /// - Important: The event may be received after IINA has started to stop and shutdown the core. The event must be ignored if
   ///         the player is no longer active.
   func fileLoaded() {
     guard info.state.active else { return }

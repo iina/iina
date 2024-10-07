@@ -42,7 +42,7 @@ class CropBoxView: NSView {
     case top, bottom, left, right
   }
 
-  // top and botom are related to view's coordinate
+  // top and bottom are related to view's coordinate
   private var rectTop: NSRect!
   private var rectBottom: NSRect!
   private var rectLeft: NSRect!

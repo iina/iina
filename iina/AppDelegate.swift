@@ -848,7 +848,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
       // presentation options
       if let fsValue = queryDict["full_screen"], fsValue == "1" {
-        // full_screeen
+        // full_screen
         player.mpv.setFlag(MPVOption.Window.fullscreen, true)
       } else if let pipValue = queryDict["pip"], pipValue == "1" {
         // pip

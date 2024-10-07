@@ -429,7 +429,7 @@
                     <rect key="frame" x="118" y="8" width="364" height="28"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="vYb-qH-XkH">
                         <font key="font" metaFont="message" size="11"/>
-                        <string key="title">If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues.</string>
+                        <string key="title">If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 minutes.</string>
                         <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>

@@ -643,7 +643,7 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="ontopButtonnAction:" target="-2" id="4pa-eu-aT5"/>
+                        <action selector="ontopButtonAction:" target="-2" id="4pa-eu-aT5"/>
                     </connections>
                 </button>
             </subviews>

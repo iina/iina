@@ -100,7 +100,7 @@ class MPVNode {
     // Array
     case is [Any?]:
       node.format = MPV_FORMAT_NODE_ARRAY
-      // actual aray
+      // actual array
       let objArray = obj as! [Any?]
       // create node ptr
       let nodePtr = UnsafeMutablePointer<mpv_node>.allocate(capacity: objArray.count)
@@ -224,13 +224,13 @@ extension mpv_node: CustomDebugStringConvertible {
 
   /// A textual representation of this instance, suitable for debugging.
   ///
-  /// If the node is an array or a map the string will contine multiple lines.
+  /// If the node is an array or a map the string will continue multiple lines.
   public var debugDescription: String { mpv_node.toString(self) }
 
   /// Return a textual representation of the given`mpv_node`, suitable for debugging.
   ///
-  /// If the node is an array or a map the string will contine multiple lines. For arrays and maps the string will include all nodes
-  /// referenced by the given node.
+  /// If the node is an array or a map the string will continue multiple lines.
+  /// For arrays and maps the string will include all nodes referenced by the given node.
   /// - Parameter node: The `mpv_node` to return a textual representation of.
   /// - Parameter indent: Used to control indentation of nested arrays and maps.
   /// - Returns: A string representing the given node as well as any nodes that node references.

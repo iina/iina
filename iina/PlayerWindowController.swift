@@ -161,7 +161,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
    */
   internal var pendingShow = false
 
-  // MARK: - Initiaization
+  // MARK: - Initialization
 
   override func windowDidLoad() {
     super.windowDidLoad()

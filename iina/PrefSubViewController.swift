@@ -111,7 +111,7 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
           } catch KeychainAccess.KeychainError.unhandledError(let message) {
             Utility.showAlert("sub.cannot_save_passwd", arguments: [message], sheetWindow: self.view.window)
           } catch KeychainAccess.KeychainError.unexpectedData {
-            Utility.showAlert("sub.cannot_save_passwd", arguments: ["Unexcepted data when reading password."], sheetWindow: self.view.window)
+            Utility.showAlert("sub.cannot_save_passwd", arguments: ["Unexpected data when reading password."], sheetWindow: self.view.window)
           }
         }.ensure {
           self.loginIndicator.isHidden = true

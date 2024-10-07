@@ -97,7 +97,7 @@ class JavascriptPlugin: NSObject {
   lazy var preferences: [String: Any] = {
     NSDictionary(contentsOfFile: preferencesFileURL.path) as? [String: Any] ?? [:]
   }()
-  let defaultPrefernces: [String: Any]
+  let defaultPreferences: [String: Any]
 
   static private func loadPlugins() -> [JavascriptPlugin] {
     guard IINA_ENABLE_PLUGIN_SYSTEM else { return [] }
@@ -407,11 +407,11 @@ class JavascriptPlugin: NSObject {
     self.preferencesPageURL = resolvePath(preferencesPage, root: root)
     self.helpPageURL = resolvePath(helpPage, root: root, allowNetwork: true)
 
-    if let defaultPrefernces = jsonDict["preferenceDefaults"] as? [String: Any] {
-      self.defaultPrefernces = defaultPrefernces
+    if let defaultPreferences = jsonDict["preferenceDefaults"] as? [String: Any] {
+      self.defaultPreferences = defaultPreferences
     } else {
       Logger.log("Unable to read preferenceDefaults", level: .warning)
-      self.defaultPrefernces = [:]
+      self.defaultPreferences = [:]
     }
 
     super.init()

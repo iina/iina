@@ -258,7 +258,7 @@ class OpenSub {
     /// Filter out unsupported language codes.
     ///
     /// IINA's `Preferred language` setting is used when automatically loading local subtitle files as well as when downloading
-    /// from subtitle sites. As a result it may contian language codes not supported by Open Subtitles. When logging is enabled this
+    /// from subtitle sites. As a result it may contain language codes not supported by Open Subtitles. When logging is enabled this
     /// method will log the language codes in the setting that are not supported by Open Subtitles and will be ignored. This is only
     /// done for ease of debugging.
     func filterLanguageCodes() -> Promise<Void> {

@@ -275,7 +275,7 @@ extension LanguageTokenField: NSTokenFieldDelegate {
   }
 
   // Serializes an array of LangToken objects into a string of CSV (cut/copy/paste support)
-  // Need to override this because it will default to using `tokenizingCharacterSet`, which needed to be overriden for
+  // Need to override this because it will default to using `tokenizingCharacterSet`, which needed to be overridden for
   // internal parsing of `editingString`s to work correctly, but we want to use CSV when exporting `identifierString`s
   // because they are more user-readable.
   func tokenField(_ tokenField: NSTokenField, writeRepresentedObjects objects: [Any], to pboard: NSPasteboard) -> Bool {

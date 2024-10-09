@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "%@ 버전을 사용하고 있습니다.";
 "initial.beta.desc" = "정식 버전으로 롤백하려면, 환경 설정 > 일반 탭에서 \"베타 업데이트 받기\"를 해제하고, <a href=\"https://iina.io\"> 공식 웹사이트</a>에서 정식 버전을 설치하세요.";
-"initial.nightly.desc" = "나이틀리 빌드는 일반적으로 사용하지 않는 것이 좋습니다. 나이틀리 빌드는 자동 업데이트를 지원하지 않습니다. <a href=\"https://nightly.iina.io\">나이틀리 웹사이트</a>에서 최신 빌드를 수동으로 다운로드하세요.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "디버그 빌드는 성능에 최적화되어 있지 않으므로, 일반적으로 사용하지 않는 것이 좋습니다. 디버그 빌드는 자동 업데이트를 지원하지 않습니다.";
 "initial.bug_report" = "<a href=\"https://github.com/iina/iina/issues\">GitHub 이슈</a>를 통해 오류를 보고해주십시오.";
 
@@ -50,6 +50,7 @@
 "quicksetting.deinterlace" = "디인터레이스";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "숨기기";
+"quicksetting.reset_speed" = "Reset speed to 1x";
 
 // EQ Presets
 "eq.preset.flat" = "Flat";
@@ -84,7 +85,7 @@
 "osd.pause" = "일시 정지됨";
 "osd.resume" = "재생 복원됨";
 "osd.volume" = "음량: %i";
-"osd.speed" = "재생속도: %.2f배속";
+"osd.speed" = "Speed: %@x";
 "osd.aspect" = "화면비: %@";
 "osd.crop" = "화면 자르기: %@";
 "osd.rotate" = "회전: %i°";
@@ -189,7 +190,7 @@
 "menu.exit_mini_player" = "음악 모드 나가기";
 "menu.pause" = "일시 정지";
 "menu.resume" = "재생";
-"menu.speed" = "재생속도: %.2fx";
+"menu.speed" = "Speed: %@x";
 "menu.chapters" = "챕터 목록 보기";
 "menu.hide_chapters" = "챕터 패널 숨기기";
 "menu.playlist" = "재생목록 보기";
@@ -203,8 +204,8 @@
 
 "menu.seek_forward" = "앞으로 탐색 %.0f초";
 "menu.seek_backward" = "뒤로 탐색 %.0f초";
-"menu.speed_up" = "빠르게 재생 %.1f배";
-"menu.speed_down" = "느리게 재생 %.1f배";
+"menu.speed_up" = "Speed Up by %@x";
+"menu.speed_down" = "Speed Down by %@x";
 "menu.volume_up" = "음량 +%.0f%%";
 "menu.volume_down" = "음량 -%.0f%%";
 "menu.audio_delay_up" = "오디오 지연 +%.1f초";

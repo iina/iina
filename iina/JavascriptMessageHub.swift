@@ -20,14 +20,28 @@ class JavascriptMessageHub {
 
   func postMessage(to webView: WKWebView, name: String, data: JSValue) {
     DispatchQueue.main.async {
-      guard let object = data.toObject(),
-            JSONSerialization.isValidJSONObject(object),
-            let data = try? JSONSerialization.data(withJSONObject: object),
-            let dataString = String(data: data, encoding: .utf8) else {
-        webView.evaluateJavaScript("window.iina._emit(`\(name)`)")
-        return
+      var arg: String?
+
+      if data.isNumber {
+        arg = "`\(data.toNumber()!)`"
+      } else if data.isString {
+        arg = "`\"\(data.toString()!)\"`"
+      } else if data.isBoolean {
+        arg = data.toBool() ? "`true`" : "`false`"
+      } else {
+        if let object = data.toObject(),
+           JSONSerialization.isValidJSONObject(object),
+           let data = try? JSONSerialization.data(withJSONObject: object),
+           let dataString = String(data: data, encoding: .utf8) {
+          arg = "String.raw`\(dataString)`"
+        }
       }
-      webView.evaluateJavaScript("window.iina._emit(`\(name)`, String.raw`\(dataString)`)")
+
+      if let arg = arg {
+        webView.evaluateJavaScript("window.iina._emit(`\(name)`, \(arg))")
+      } else {
+        webView.evaluateJavaScript("window.iina._emit(`\(name)`)")
+      }
     }
   }
 
@@ -47,14 +61,31 @@ class JavascriptMessageHub {
   func callListener(forEvent name: String, withDataString dataString: String?) {
     guard let callback = listeners[name] else { return }
 
-    guard let dataString = dataString,
-      let data = dataString.data(using: .utf8),
-      let decoded = try? JSONSerialization.jsonObject(with: data) else {
-      callback.value.call(withArguments: [])
-      return
+    guard let dataString = dataString, let data = dataString.data(using: .utf8) else { return }
+
+    let context = callback.value.context
+    var jsValue: JSValue?
+    if dataString.hasPrefix("\"") && dataString.hasSuffix("\"") {
+      // is a string
+      jsValue = JSValue(object: String(dataString.dropFirst().dropLast()), in: context)
+    } else if Regex.numbers.matches(dataString) {
+      // is a number
+      jsValue = JSValue(object: Double(dataString), in: context)
+    } else if dataString == "true" || dataString == "false" {
+      // is a boolean
+      jsValue = JSValue(object: dataString == "true", in: context)
+    } else {
+      // json object
+      if let decoded = try? JSONSerialization.jsonObject(with: data) {
+        jsValue = JSValue(object: decoded, in: context)
+      }
     }
 
-    callback.value.call(withArguments: [JSValue(object: decoded, in: callback.value.context) ?? NSNull()])
+    if let jsValue = jsValue {
+      callback.value.call(withArguments: [jsValue])
+    } else {
+      callback.value.call(withArguments: [])
+    }
   }
 
   func callListener(forEvent name: String, withDataObject dataObject: Any?, userInfo: Any? = nil) {

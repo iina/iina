@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "Koristite %@ verziju IINA programa";
 "initial.beta.desc" = "Ako se želiš vratiti na stariju verziju izdanja, odznači opciju „Primaj aktualiziranja za beta verzije” u Postavke > Općenito i instaliraj stabilno izdanje s naše <a href=\"https://iina.io\">službene web stranice</a>.";
-"initial.nightly.desc" = "Ne preporučujemo noćna izdanja za svakodnevnu upotrebu. Noćne verzije trenutačno ne podržavaju automatsko aktualiziranje. Preuzmi novije verzije s naše <a href=\"https://nightly.iina.io\">noćne web stranice</a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
 "initial.bug_report" = "Prijavi na stranici <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
 
@@ -50,6 +50,7 @@
 "quicksetting.deinterlace" = "Preplitanje";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Sakrij";
+"quicksetting.reset_speed" = "Reset speed to 1x";
 
 // EQ Presets
 "eq.preset.flat" = "Flat";
@@ -84,7 +85,7 @@
 "osd.pause" = "Zaustavi";
 "osd.resume" = "Nastavi";
 "osd.volume" = "Glasnoća: %i";
-"osd.speed" = "Brzina: %.2fx";
+"osd.speed" = "Speed: %@x";
 "osd.aspect" = "Omjer: %@";
 "osd.crop" = "Obreži: %@";
 "osd.rotate" = "Okreni: %i°";
@@ -189,7 +190,7 @@
 "menu.exit_mini_player" = "Napusti glazbeni modus";
 "menu.pause" = "Zaustavi";
 "menu.resume" = "Nastavi";
-"menu.speed" = "Brzina: %.2fx";
+"menu.speed" = "Speed: %@x";
 "menu.chapters" = "Prikaži ploču poglavlja";
 "menu.hide_chapters" = "Sakrij ploču poglavlja";
 "menu.playlist" = "Prikaži ploču playliste";
@@ -203,8 +204,8 @@
 
 "menu.seek_forward" = "Korak naprijed %.0fs";
 "menu.seek_backward" = "Korak natrag %.0fs";
-"menu.speed_up" = "Ubrzanje za %.1fx";
-"menu.speed_down" = "Usporavanje za %.1fx";
+"menu.speed_up" = "Speed Up by %@x";
+"menu.speed_down" = "Speed Down by %@x";
 "menu.volume_up" = "Glasnoća + %.0f% %";
 "menu.volume_down" = "Glasnoća − %.0f% %";
 "menu.audio_delay_up" = "Kašnjenje zvuka + %.1fs";

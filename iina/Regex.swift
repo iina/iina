@@ -15,6 +15,7 @@ class Regex {
   static let url = Regex("^(([^:\\/?#]+):)(\\/\\/([^/?#]*))?([^?#]*)(\\?([^#]*))?(#(.*))?")
   static let filePath = Regex("^(/[^/]+)+$")
   static let geometry = Regex("^((\\d+%?)?(x(\\d+%?))?)?((\\+|\\-)(\\d+%?)(\\+|\\-)(\\d+%?))?$")
+  static let numbers = Regex("^[0-9]+(\\.[0-9]+)?$")
 
   var regex: NSRegularExpression?
 

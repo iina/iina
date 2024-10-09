@@ -52,7 +52,7 @@
 "iina.toggle-flip" = "Activează răsturnare";
 "iina.toggle-mirror" = "Activează oglindire";
 "iina.save-playlist" = "Salvează lista de redare curentă";
-"iina.show-current-file-in-finder" = "Show current file in Finder";
+"iina.show-current-file-in-finder" = "Deschide în Finder";
 "iina.delete-current-file" = "Șterge fișierul curent";
 "iina.delete-current-file-hard" = "Șterge fișierul curent fără a-l muta în Coș";
 "iina.find-online-subs" = "Găsește subtitrări online";
@@ -101,7 +101,7 @@
 "opt.sub-pos" = "Poziție subtitrare";
 "opt.sub-scale" = "Scală subtitrare";
 "opt.sub-visibility" = "Vizibilitate subtitrare";
-"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
+"opt.secondary-sub-visibility" = "Vizibilitate subtitrare secundară";
 "opt.sub-ass-style-override" = "Înlocuire stil ASS";
 
 "opt.fullscreen" = "Ecran complet";

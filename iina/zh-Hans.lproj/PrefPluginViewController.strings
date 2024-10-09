@@ -2,16 +2,16 @@
 "3xh-dU-HuR.title" = "安装";
 
 /* Class = "NSTabViewItem"; label = "Permissions"; ObjectID = "ALD-n6-A0r"; */
-"ALD-n6-A0r.label" = "Permissions";
+"ALD-n6-A0r.label" = "许可";
 
 /* Class = "NSTextFieldCell"; title = "Author"; ObjectID = "Dkk-JQ-qHA"; */
-"Dkk-JQ-qHA.title" = "Author";
+"Dkk-JQ-qHA.title" = "作者";
 
 /* Class = "NSButtonCell"; title = "Email"; ObjectID = "EHl-kr-ZZf"; */
-"EHl-kr-ZZf.title" = "Email";
+"EHl-kr-ZZf.title" = "电子邮箱";
 
 /* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[0] = "Permissions"; ObjectID = "KTN-5r-mMm"; */
-"KTN-5r-mMm.ibShadowedLabels[0]" = "Permissions";
+"KTN-5r-mMm.ibShadowedLabels[0]" = "许可";
 
 /* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[1] = "About"; ObjectID = "KTN-5r-mMm"; */
 "KTN-5r-mMm.ibShadowedLabels[1]" = "关于";
@@ -26,16 +26,16 @@
 "MyY-5s-tIm.title" = "检查更新";
 
 /* Class = "NSTextFieldCell"; title = "Please enter the full URL of the GitHub repository or a string in the \"user/repo\" format. You can also choose one from the default plugins list."; ObjectID = "Nmf-79-hFX"; */
-"Nmf-79-hFX.title" = "Please enter the full URL of the GitHub repository or a string in the \"user/repo\" format. You can also choose one from the default plugins list.";
+"Nmf-79-hFX.title" = "请输入GitHub仓库的完整URL或“user/repo”格式的字符串。你也可以从默认插件列表中选择一个。";
 
 /* Class = "NSTabViewItem"; label = "Support"; ObjectID = "T21-nd-TLF"; */
-"T21-nd-TLF.label" = "Support";
+"T21-nd-TLF.label" = "支持";
 
 /* Class = "NSButtonCell"; title = "Website"; ObjectID = "X6J-6H-IPn"; */
 "X6J-6H-IPn.title" = "网站";
 
 /* Class = "NSTextFieldCell"; title = "Installed plugins:"; ObjectID = "Ztn-MG-D7D"; */
-"Ztn-MG-D7D.title" = "Installed plugins:";
+"Ztn-MG-D7D.title" = "已安装插件：";
 
 /* Class = "NSTextFieldCell"; placeholderString = "user/repo"; ObjectID = "b60-P6-AN2"; */
 "b60-P6-AN2.placeholderString" = "user/repo";
@@ -44,34 +44,34 @@
 "drh-6w-3z1.title" = "在访达中显示";
 
 /* Class = "NSButtonCell"; title = "Install from GitHub…"; ObjectID = "enP-C1-4vu"; */
-"enP-C1-4vu.title" = "Install from GitHub…";
+"enP-C1-4vu.title" = "从GitHub安装…";
 
 /* Class = "NSTabViewItem"; label = "Preferences"; ObjectID = "eyS-eb-H4e"; */
 "eyS-eb-H4e.label" = "偏好设置";
 
 /* Class = "NSTextFieldCell"; title = "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically."; ObjectID = "fnl-uA-X7r"; */
-"fnl-uA-X7r.title" = "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically.";
+"fnl-uA-X7r.title" = "你可以从GitHub或本地的 .iinaplgz包安装新插件。从GitHub安装的插件可以自动更新。";
 
 /* Class = "NSButtonCell"; title = "Reload"; ObjectID = "ixN-OS-w87"; */
-"ixN-OS-w87.title" = "Reload";
+"ixN-OS-w87.title" = "重新加载";
 
 /* Class = "NSTextFieldCell"; title = "Identifier"; ObjectID = "jlQ-sd-s0K"; */
-"jlQ-sd-s0K.title" = "Identifier";
+"jlQ-sd-s0K.title" = "标识";
 
 /* Class = "NSTextFieldCell"; title = "Default plugins:"; ObjectID = "np4-XQ-xdI"; */
-"np4-XQ-xdI.title" = "Default plugins:";
+"np4-XQ-xdI.title" = "默认插件：";
 
 /* Class = "NSTextFieldCell"; title = "Failed to load the page."; ObjectID = "pkE-3K-CfZ"; */
-"pkE-3K-CfZ.title" = "Failed to load the page.";
+"pkE-3K-CfZ.title" = "无法加载此页面";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "qje-hT-j7H"; */
 "qje-hT-j7H.title" = "取消";
 
 /* Class = "NSTextFieldCell"; title = "Source"; ObjectID = "r3r-Qh-rC9"; */
-"r3r-Qh-rC9.title" = "Source";
+"r3r-Qh-rC9.title" = "资源";
 
 /* Class = "NSButtonCell"; title = "Install from a local package…"; ObjectID = "sdU-FG-dTO"; */
-"sdU-FG-dTO.title" = "Install from a local package…";
+"sdU-FG-dTO.title" = "从本地安装…";
 
 /* Class = "NSTextFieldCell"; title = "Plugins"; ObjectID = "tfn-0I-n6p"; */
 "tfn-0I-n6p.title" = "插件";
@@ -80,7 +80,7 @@
 "uW4-Bs-Wg3.title" = "插件";
 
 /* Class = "NSButtonCell"; title = "Uninstall"; ObjectID = "ue8-hU-kLm"; */
-"ue8-hU-kLm.title" = "Uninstall";
+"ue8-hU-kLm.title" = "卸载";
 
 /* Class = "NSTextFieldCell"; title = "Install a new plugin from GitHub"; ObjectID = "zvu-Up-fQJ"; */
-"zvu-Up-fQJ.title" = "Install a new plugin from GitHub";
+"zvu-Up-fQJ.title" = "从GitHub安装一个新插件";

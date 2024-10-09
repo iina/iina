@@ -16,8 +16,8 @@
 "general.username" = "Felhasználónév";
 "general.password" = "Jelszó";
 
-"input.value_is_empty" = "Value cannot be empty.";
-"input.already_exists" = "Value already exists.";
+"input.value_is_empty" = "Az érték nem lehet üres.";
+"input.already_exists" = "Az érték már létezik.";
 
 // Guide Window
 "guide.highlights" = "Kiemelések";
@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "Ön Az IINA %@ verzióját használja";
 "initial.beta.desc" = "Amennyiben végleges verzióra váltana, szüntesse meg a kijelölést a \"béta frissítések\" opciónál a Beállítások > Általános almenüben, és telepítsen stabil verziót a <a href=\"https://iina.io\">hivatalos weboldalunkról</a>.";
-"initial.nightly.desc" = "A Nightly verzió nem ajánlott mindennapi használatra. Jelenleg a nightly verzió nem támogatja az automatikus frissítést.. Töltsd le a friss verziót a <a href=\"https://nightly.iina.io\">nightly oldalunkról</a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "A hibakeresési verzió általában nincs teljesítményre optimalizálva, ezért nem ajánlott napi használatra. A hibakeresési verziók nem támogatják az automatikus frissítést.";
 "initial.bug_report" = "Jelentés a <a href=\"https://github.com/iina/iina/issues\">GitHub-bugok</a> felületen.";
 
@@ -50,41 +50,42 @@
 "quicksetting.deinterlace" = "Váltottsoros képszűrő";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Elrejtés";
+"quicksetting.reset_speed" = "Reset speed to 1x";
 
 // EQ Presets
-"eq.preset.flat" = "Flat";
-"eq.preset.acoustic" = "Acoustic";
-"eq.preset.classical" = "Classical";
+"eq.preset.flat" = "Lapos";
+"eq.preset.acoustic" = "Akusztikus";
+"eq.preset.classical" = "Klasszikus";
 "eq.preset.dance" = "Dance";
 "eq.preset.deep" = "Deep";
-"eq.preset.electronic" = "Electronic";
-"eq.preset.hip_hop" = "Hip Hop";
-"eq.preset.increase_bass" = "Increase Bass";
-"eq.preset.increase_treble" = "Increase Treble";
-"eq.preset.increase_vocal" = "Increase Vocal";
+"eq.preset.electronic" = "Elektronikus";
+"eq.preset.hip_hop" = "Hip-Hop";
+"eq.preset.increase_bass" = "Basszus növelése";
+"eq.preset.increase_treble" = "Magas növelése";
+"eq.preset.increase_vocal" = "Vokál növelése";
 "eq.preset.jazz" = "Jazz";
 "eq.preset.latin" = "Latin";
-"eq.preset.loundness" = "Loundness";
+"eq.preset.loundness" = "Hangerő";
 "eq.preset.lounge" = "Lounge";
-"eq.preset.piano" = "Piano";
+"eq.preset.piano" = "Zongora";
 "eq.preset.pop" = "Pop";
 "eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reduce Bass";
-"eq.preset.reduce_treble" = "Reduce Treble";
+"eq.preset.reduce_bass" = "Basszus csökkentése";
+"eq.preset.reduce_treble" = "Magas csökkentése";
 "eq.preset.rock" = "Rock";
-"eq.preset.small_speaker" = "Small Speaker";
-"eq.preset.spoken_word" = "Spoken Word";
+"eq.preset.small_speaker" = "Kicsi hangszóró";
+"eq.preset.spoken_word" = "Beszélt szó";
 
-"alert.eq.new_profile.title" = "New EQ Profile";
-"alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Currnet Profile";
-"alert.eq.rename.message" = "Please enter a new profile name.";
+"alert.eq.new_profile.title" = "Új EQ profil";
+"alert.eq.new_profile.message" = "Kérjük, adjon meg egy profilnevet.";
+"alert.eq.rename.title" = "Aktuális profil átnevezése";
+"alert.eq.rename.message" = "Kérjük, adjon meg egy új profilnevet.";
 
 // OSDMessage.swift
 "osd.pause" = "Szünet";
 "osd.resume" = "Folytatás";
 "osd.volume" = "Hangerő: %i";
-"osd.speed" = "Sebesség: %.2fx";
+"osd.speed" = "Speed: %@x";
 "osd.aspect" = "Képarány: %@";
 "osd.crop" = "Vágás: %@";
 "osd.rotate" = "Elforgatás: %i°";
@@ -161,17 +162,17 @@
 
 "preference.enable_adv_settings" = "Haladó beállítások engedélyezése";
 
-"preference.sub_override_level.no" = "no";
+"preference.sub_override_level.no" = "nem";
 "preference.sub_override_level.force" = "kényszerített";
 "preference.sub_override_level.scale" = "méretezés";
 "preference.sub_override_level.strip" = "csík";
 "preference.sub_override_level.yes" = "igen";
 
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
+"preference.sub_override_level.descriptive_text.no" = "A feliratokat a feliratozási szkriptek által megadott módon, felülírások nélkül adja vissza.";
+"preference.sub_override_level.descriptive_text.force" = "Minden feliratstílus alkalmazása.";
+"preference.sub_override_level.descriptive_text.scale" = "Az ebben a szakaszban található stílusbeállítások mellett alkalmazza a skála beállítását is.";
+"preference.sub_override_level.descriptive_text.strip" = "Alaposan távolítson el minden ASS taget és stílust a feliratból.";
+"preference.sub_override_level.descriptive_text.yes" = "Alkalmazza az összes stílusbeállítást ebben a szakaszban.";
 
 "menu.volume" = "Hangerő: %d";
 "menu.volume_muted" = "Hangerő: %d (Némítva)";
@@ -189,7 +190,7 @@
 "menu.exit_mini_player" = "Kilépés zene módból";
 "menu.pause" = "Pause (Megállít)";
 "menu.resume" = "Folytatás";
-"menu.speed" = "Sebesség: %.2fx";
+"menu.speed" = "Speed: %@x";
 "menu.chapters" = "Fejezet Panel Megjelenítése";
 "menu.hide_chapters" = "Rejtsd a fejezetek panelt";
 "menu.playlist" = "Lejátszási lista megjelenítése";
@@ -203,8 +204,8 @@
 
 "menu.seek_forward" = "Előre ugrás %.0f másodpercet";
 "menu.seek_backward" = "Hátra ugrás %.0f másodpercet";
-"menu.speed_up" = "Felgyorsítás %.1fx";
-"menu.speed_down" = "Lelassítás %.1fx";
+"menu.speed_up" = "Speed Up by %@x";
+"menu.speed_down" = "Speed Down by %@x";
 "menu.volume_up" = "Hangerő: %.0f";
 "menu.volume_down" = "Hangerő: %.0f";
 "menu.audio_delay_up" = "Hangkésleltetés + %.1f másodperccel";

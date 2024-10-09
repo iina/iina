@@ -128,7 +128,7 @@
 "m2n-yd-a4n.title" = "Усиление, применяемое, если в файле нет тегов коррекции громкости (ReplayGain).";
 
 /* Class = "NSTextFieldCell"; title = "Audio driver:"; ObjectID = "Zco-Ba-Idk"; */
-"Zco-Ba-Idk.title" = "Audio driver:";
+"Zco-Ba-Idk.title" = "Драйвер аудио:";
 
 /* Class = "NSTextFieldCell"; title = "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."; ObjectID = "2Md-pv-gSi"; */
-"2Md-pv-gSi.title" = "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays.";
+"2Md-pv-gSi.title" = "AVFoundation — это новый экспериментальный аудиодрайвер с поддержкой пространственного аудио (Spatial Audio). Однако, при использовании AVFoundation возможны некоторые проблемы, такие как задержка звука.";

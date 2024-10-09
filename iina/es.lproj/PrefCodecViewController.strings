@@ -89,34 +89,34 @@
 "gfq-nW-dDu.title" = "ReplayGain:";
 
 /* Class = "NSTextFieldCell"; title = "Gain adjustment:"; ObjectID = "ZRL-b0-k1L"; */
-"ZRL-b0-k1L.title" = "Gain adjustment:";
+"ZRL-b0-k1L.title" = "Ajuste de ganancia:";
 
 /* Class = "NSMenuItem"; title = "No adjustment"; ObjectID = "k7b-6o-lCK"; */
-"k7b-6o-lCK.title" = "No adjustment";
+"k7b-6o-lCK.title" = "Sin ajuste";
 
 /* Class = "NSMenuItem"; title = "Track gain"; ObjectID = "w6E-lw-g7g"; */
-"w6E-lw-g7g.title" = "Track gain";
+"w6E-lw-g7g.title" = "Rastrear ganancia";
 
 /* Class = "NSMenuItem"; title = "Album gain"; ObjectID = "ZJJ-1o-ZGD"; */
-"ZJJ-1o-ZGD.title" = "Album gain";
+"ZJJ-1o-ZGD.title" = "Ganancia del álbum";
 
 /* Class = "NSTextFieldCell"; title = "Adjust volume gain according to ReplayGain values stored in the file metadata."; ObjectID = "y61-Ah-c92"; */
-"y61-Ah-c92.title" = "Adjust volume gain according to ReplayGain values stored in the file metadata.";
+"y61-Ah-c92.title" = "Ajuste la ganancia de volumen de acuerdo a los valores de ReplayGain almacenados en los metadatos del archivo.";
 
 /* Class = "NSTextFieldCell"; title = "Preamp gain:"; ObjectID = "9Q0-hw-PdU"; */
-"9Q0-hw-PdU.title" = "Preamp gain:";
+"9Q0-hw-PdU.title" = "Ganancia del preamplificador:";
 
 /* Class = "NSTextFieldCell"; title = "dB"; ObjectID = "Bew-Pv-igg"; */
 "Bew-Pv-igg.title" = "dB";
 
 /* Class = "NSTextFieldCell"; title = "Pre-amplification gain to apply to the ReplayGain gain."; ObjectID = "rIW-XP-zGZ"; */
-"rIW-XP-zGZ.title" = "Pre-amplification gain to apply to the ReplayGain gain.";
+"rIW-XP-zGZ.title" = "Ganancia de preamplificación para aplicar a la ganancia de ReplayGain.";
 
 /* Class = "NSButtonCell"; title = "Allow the volume gain to clip"; ObjectID = "J3e-oT-fy9"; */
-"J3e-oT-fy9.title" = "Allow the volume gain to clip";
+"J3e-oT-fy9.title" = "Permitir la ganancia de volumen al clip";
 
 /* Class = "NSTextFieldCell"; title = "If this option is not enabled, clipping will be prevented by lowering the gain."; ObjectID = "HQV-tY-NMj"; */
-"HQV-tY-NMj.title" = "If this option is not enabled, clipping will be prevented by lowering the gain.";
+"HQV-tY-NMj.title" = "Si esta opción no está activada, el recorte se evitará reduciendo la ganancia.";
 
 /* Class = "NSTextFieldCell"; title = "Fallback:"; ObjectID = "fOz-6g-MhS"; */
 "fOz-6g-MhS.title" = "Fallback:";
@@ -125,10 +125,10 @@
 "ovT-D3-3jS.title" = "dB";
 
 /* Class = "NSTextFieldCell"; title = "Gain to apply if the file has no ReplayGain tags."; ObjectID = "m2n-yd-a4n"; */
-"m2n-yd-a4n.title" = "Gain to apply if the file has no ReplayGain tags.";
+"m2n-yd-a4n.title" = "Ganancia para aplicar si el archivo no tiene etiquetas ReplayGain.";
 
 /* Class = "NSTextFieldCell"; title = "Audio driver:"; ObjectID = "Zco-Ba-Idk"; */
-"Zco-Ba-Idk.title" = "Audio driver:";
+"Zco-Ba-Idk.title" = "Controlador de audio:";
 
 /* Class = "NSTextFieldCell"; title = "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."; ObjectID = "2Md-pv-gSi"; */
-"2Md-pv-gSi.title" = "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays.";
+"2Md-pv-gSi.title" = "AVFoundation es un nuevo controlador de audio experimental que ofrece soporte para Audio Espacial. Sin embargo, puede encontrar algunos problemas al usar AVFoundation, como retrasos en el audio.";

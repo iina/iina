@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "Kamu memakai IINA versi %@";
 "initial.beta.desc" = "Jika anda ingin mengembalikan ke versi rilis, hilangkan \"terima pembaruan beta\" dari Pengaturan > Umum, dan instal versi stabil dari <a href=\"https://iina.io\">situs resmi</a>.";
-"initial.nightly.desc" = "Nightly tidak disarankan untuk digunakan sebagai drive harian. Bangunan nightly saat ini tidak mendukung pembaruan otomatis. Unduh bangunan baru secara manual dari <a href=\"https://nightly.iina.io\">situs web nightly</a> kami.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Bangunan debug biasanya tidak dioptimalkan performanya, sehingga tidak disarankan untuk digunakan sebagai drive harian. Bangunan debug tidak mendukung pembaruan otomatis.";
 "initial.bug_report" = "Laporkan melalui <a href=\"https://github.com/iina/iina/issues\">Masalah GitHub</a>.";
 
@@ -50,6 +50,7 @@
 "quicksetting.deinterlace" = "Deinterlace";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Sembunyikan";
+"quicksetting.reset_speed" = "Reset speed to 1x";
 
 // EQ Presets
 "eq.preset.flat" = "Flat";
@@ -84,7 +85,7 @@
 "osd.pause" = "Jeda";
 "osd.resume" = "Lanjutkan";
 "osd.volume" = "Volume: %i";
-"osd.speed" = "Kecepatan: %.2fx";
+"osd.speed" = "Speed: %@x";
 "osd.aspect" = "Rasio Aspek: %@";
 "osd.crop" = "Crop: %@";
 "osd.rotate" = "Putar: %i°";
@@ -189,7 +190,7 @@
 "menu.exit_mini_player" = "Keluar dari Mode Musik";
 "menu.pause" = "Jeda";
 "menu.resume" = "Lanjutkan";
-"menu.speed" = "Kecepatan: %.2fx";
+"menu.speed" = "Speed: %@x";
 "menu.chapters" = "Lihat Panel Chapter";
 "menu.hide_chapters" = "Sembunyikan Panel Chapter";
 "menu.playlist" = "Tampilkan Panel Playlist";
@@ -203,8 +204,8 @@
 
 "menu.seek_forward" = "Majukan %.0fdtk";
 "menu.seek_backward" = "Mundurkan %.0fdtk";
-"menu.speed_up" = "Percepat %.1fx";
-"menu.speed_down" = "Perlambat %.1fx";
+"menu.speed_up" = "Speed Up by %@x";
+"menu.speed_down" = "Speed Down by %@x";
 "menu.volume_up" = "Volume + %.0f%%";
 "menu.volume_down" = "Volume - %.0f%%";
 "menu.audio_delay_up" = "Penundaan Audio + %.1fdtk";

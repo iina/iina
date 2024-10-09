@@ -52,7 +52,7 @@
 "iina.toggle-flip" = "Activer/désactiver le pivot";
 "iina.toggle-mirror" = "Activer/désactiver le miroir";
 "iina.save-playlist" = "Enregistrer la liste de lecture";
-"iina.show-current-file-in-finder" = "Show current file in Finder";
+"iina.show-current-file-in-finder" = "Afficher le fichier actuel dans le Finder";
 "iina.delete-current-file" = "Supprimer le fichier en cours";
 "iina.delete-current-file-hard" = "Supprimer le fichier en cours sans passer par la corbeille";
 "iina.find-online-subs" = "Trouver des sous-titres en ligne";
@@ -101,7 +101,7 @@
 "opt.sub-pos" = "Position des sous-titres";
 "opt.sub-scale" = "Échelle des sous-titres";
 "opt.sub-visibility" = "Visibilité des sous-titres";
-"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
+"opt.secondary-sub-visibility" = "Visibilité des sous-titres secondaires";
 "opt.sub-ass-style-override" = "Override du style ASS";
 
 "opt.fullscreen" = "Plein écran";

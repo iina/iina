@@ -2,7 +2,7 @@
 "0bT-f6-rXb.title" = "Alapértelmezett: 153600";
 
 /* Class = "NSTextFieldCell"; title = "Default cache size (KB):"; ObjectID = "0yu-5Q-363"; */
-"0yu-5Q-363.title" = "Maximum cache size (KB):";
+"0yu-5Q-363.title" = "Gyorsítótár maximális mérete (KB):";
 
 /* Class = "NSTextFieldCell"; title = "Custom youtube-dl path:"; ObjectID = "2qf-cC-Lfi"; */
 "2qf-cC-Lfi.title" = "Egyedi youtube-dl útvonal:";
@@ -23,7 +23,7 @@
 "LNk-io-MM7.title" = "Gyorsítótár:";
 
 /* Class = "NSTextFieldCell"; title = "Requires restarting IINA to take effect."; ObjectID = "RwW-JS-iTv"; */
-"RwW-JS-iTv.title" = "Az IINA újrainditása szükséges a módositások érvénybe lépéséhez.";
+"RwW-JS-iTv.title" = "Az IINA újraindítása szükséges a módositások érvénybe lépéséhez.";
 
 /* Class = "NSTextFieldCell"; title = "IINA will search youtube-dl in this folder. Restart needed."; ObjectID = "YqE-yV-BvQ"; */
 "YqE-yV-BvQ.title" = "Az IINA ebben a mappában fogja keresni a youtube-dl-t. Újraindítás szükséges.";
@@ -35,7 +35,7 @@
 "cyH-Md-FAD.title" = "Youtube-dl engedélyezése";
 
 /* Class = "NSTextFieldCell"; title = "Cache buffer size (KB):"; ObjectID = "dDD-g3-54w"; */
-"dDD-g3-54w.title" = "Cache buffer méret (KB):";
+"dDD-g3-54w.title" = "Gyorsítótár puffer mérete (KB):";
 
 /* Class = "NSTextFieldCell"; title = "User agent:"; ObjectID = "eN6-Sk-kUa"; */
 "eN6-Sk-kUa.title" = "Felhasználó ügynök:";

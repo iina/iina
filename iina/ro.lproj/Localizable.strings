@@ -16,8 +16,8 @@
 "general.username" = "Nume de utilizator";
 "general.password" = "Parolă";
 
-"input.value_is_empty" = "Value cannot be empty.";
-"input.already_exists" = "Value already exists.";
+"input.value_is_empty" = "Valoarea nu poate fi goală.";
+"input.already_exists" = "Valoarea deja există.";
 
 // Guide Window
 "guide.highlights" = "Evidențiator";
@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "Folosești o versiune %@ de IINA";
 "initial.beta.desc" = "Dacă vreți să reveniți la o versiune non-beta, debifați \"primește actualizări beta\" din Setări > General, și instalați o actualizare stabilă de pe <a href=\"https://iina.io\">site-ul nostru oficial</a>.";
-"initial.nightly.desc" = "Versiunea Nightly nu este recomandată pentru utilizare zilnică. In momentul de față, versiunile Nightly nu suportă actualizare automată. Va rugăm să descărcați manual versiunile mai noi de pe <a href=\"https://nightly.iina.io\"> site-ul nostru Nightly </a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Versiunile de debug de obicei nu sunt optimizate pentru performanță, ca urmare nu sunt recomandate în utilizarea de zi cu zi. Versiunile de debug nu suportă actualizări automate.";
 "initial.bug_report" = "Raportați pe <a href=\"https://github.com/iina/iina/issues\">pagina de probleme de pe GitHub</a>.";
 
@@ -50,41 +50,42 @@
 "quicksetting.deinterlace" = "Deîntrețesere";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Se ascunde";
+"quicksetting.reset_speed" = "Reset speed to 1x";
 
 // EQ Presets
-"eq.preset.flat" = "Flat";
-"eq.preset.acoustic" = "Acoustic";
-"eq.preset.classical" = "Classical";
+"eq.preset.flat" = "Plat";
+"eq.preset.acoustic" = "Acustic";
+"eq.preset.classical" = "Clasic";
 "eq.preset.dance" = "Dance";
 "eq.preset.deep" = "Deep";
 "eq.preset.electronic" = "Electronic";
 "eq.preset.hip_hop" = "Hip Hop";
-"eq.preset.increase_bass" = "Increase Bass";
-"eq.preset.increase_treble" = "Increase Treble";
-"eq.preset.increase_vocal" = "Increase Vocal";
+"eq.preset.increase_bass" = "Mult bass";
+"eq.preset.increase_treble" = "Mult treble";
+"eq.preset.increase_vocal" = "Evidențiază vocea";
 "eq.preset.jazz" = "Jazz";
-"eq.preset.latin" = "Latin";
-"eq.preset.loundness" = "Loundness";
+"eq.preset.latin" = "Latino";
+"eq.preset.loundness" = "Zgomot";
 "eq.preset.lounge" = "Lounge";
-"eq.preset.piano" = "Piano";
+"eq.preset.piano" = "Pian";
 "eq.preset.pop" = "Pop";
 "eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reduce Bass";
-"eq.preset.reduce_treble" = "Reduce Treble";
+"eq.preset.reduce_bass" = "Bass redus";
+"eq.preset.reduce_treble" = "Treble redus";
 "eq.preset.rock" = "Rock";
-"eq.preset.small_speaker" = "Small Speaker";
+"eq.preset.small_speaker" = "Difuzor mic";
 "eq.preset.spoken_word" = "Spoken Word";
 
-"alert.eq.new_profile.title" = "New EQ Profile";
-"alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Currnet Profile";
-"alert.eq.rename.message" = "Please enter a new profile name.";
+"alert.eq.new_profile.title" = "Profil EQ nou";
+"alert.eq.new_profile.message" = "Introduceți un nume pentru profil.";
+"alert.eq.rename.title" = "Redenumiți profilul curent";
+"alert.eq.rename.message" = "Introduceți un nume nou pentru profil.";
 
 // OSDMessage.swift
 "osd.pause" = "Pauză";
 "osd.resume" = "Reia";
 "osd.volume" = "Volum: %i";
-"osd.speed" = "Viteză: %.2fx";
+"osd.speed" = "Speed: %@x";
 "osd.aspect" = "Raport de aspect: %@";
 "osd.crop" = "Decupare: %@";
 "osd.rotate" = "Rotește: %i°";
@@ -97,14 +98,14 @@
 "osd.sub_delay.later" = "Întârziere subtitrare: %.2fs mai târziu";
 "osd.sub_delay.earlier" = "Întârziere subtitrare: %.2fs mai devreme";
 "osd.subtitle_pos" = "Poziție subtitrare: %.1f";
-"osd.sub_hidden" = "Subtitles Hidden";
-"osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
-"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
-"osd.sub_second_visible" = "Secondary Subtitles Visible";
+"osd.sub_hidden" = "Subtitrări ascunse";
+"osd.sub_visible" = "Subtitrări vizibile";
+"osd.sub_second_delay.nodelay" = "Decalaj subtitrări secundare: fără decalaj";
+"osd.sub_second_delay.later" = "Decalaj subtitrări secundare: %.2fs după";
+"osd.sub_second_delay.earlier" = "Decalaj subtitrări secundare: %.2fs înainte";
+"osd.sub_second_hidden" = "Subtitrări secundare ascunse";
+"osd.sub_second_pos" = "Poziție subtitrări secundare: %.1f";
+"osd.sub_second_visible" = "Subtitrări secundare vizibile";
 "osd.mute" = "Mut";
 "osd.unmute" = "Activează sunetul";
 "osd.screenshot" = "Captură de ecran realizată";
@@ -124,8 +125,8 @@
 "osd.find_online_sub" = "Găsește subtitrări online…";
 "osd.find_online_sub.source" = "de la";
 "osd.sub_not_found" = "Nu s-au găsit subtitrări";
-"osd.sub_found" = "%d subtitles found.";
-"osd.sub_downloading" = "Downloading %d subtitles";
+"osd.sub_found" = "%d subtitrări găsite.";
+"osd.sub_downloading" = "Se descarcă %d subtitrări";
 "osd.sub_downloaded" = "Subitrare descărcată";
 "osd.sub_saved" = "Subtitrare salvată";
 "osd.network_error" = "Eroare de rețea";
@@ -161,26 +162,26 @@
 
 "preference.enable_adv_settings" = "Activează setările avansate";
 
-"preference.sub_override_level.no" = "no";
-"preference.sub_override_level.force" = "force";
-"preference.sub_override_level.scale" = "scale";
+"preference.sub_override_level.no" = "nu";
+"preference.sub_override_level.force" = "putere";
+"preference.sub_override_level.scale" = "mărime";
 "preference.sub_override_level.strip" = "de tot";
-"preference.sub_override_level.yes" = "yes";
+"preference.sub_override_level.yes" = "da";
 
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
+"preference.sub_override_level.descriptive_text.no" = "Redă subtitrările precum sunt specificate de script-ul pentru subtitrări, fără a lua în seamă alte preferințe.";
+"preference.sub_override_level.descriptive_text.force" = "Aplică toate stilurile pentru subtitrări.";
+"preference.sub_override_level.descriptive_text.scale" = "Aplică setarea de mărime împreună cu setarea de stil din această secțiune.";
+"preference.sub_override_level.descriptive_text.strip" = "Elimină complet toate tag-urile și stilurile ASS din subtitrare.";
+"preference.sub_override_level.descriptive_text.yes" = "Aplică toate setările de stil din această secțiune.";
 
 "menu.volume" = "Volum: %d";
 "menu.volume_muted" = "Volum: %d (Mut)";
 "menu.audio_delay" = "Întârziere audio: %.2fs";
 "menu.sub_delay" = "Întârziere subtitrare: %.2fs";
-"menu.sub_hide" = "Hide Subtitles";
-"menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Secondary Subtitles";
-"menu.sub_second_show" = "Show Secondary Subtitles";
+"menu.sub_hide" = "Ascunde subtitrările";
+"menu.sub_show" = "Arată subtitrările";
+"menu.sub_second_hide" = "Ascunde subtitrările secundare";
+"menu.sub_second_show" = "Arată subtitrările secundare";
 "menu.fullscreen" = "Afișează pe ecran complet";
 "menu.exit_fullscreen" = "Ieși din ecran complet";
 "menu.pip" = "Afișează în Picture-in-Picture";
@@ -189,7 +190,7 @@
 "menu.exit_mini_player" = "Ieșiți din modul Muzică";
 "menu.pause" = "Pauză";
 "menu.resume" = "Reia";
-"menu.speed" = "Viteză: %.2fx";
+"menu.speed" = "Speed: %@x";
 "menu.chapters" = "Afilșează panoul Capitole";
 "menu.hide_chapters" = "Ascunde panoul Capitole";
 "menu.playlist" = "Arată panoul Listă de redare";
@@ -203,8 +204,8 @@
 
 "menu.seek_forward" = "Sari înainte %.0fs";
 "menu.seek_backward" = "Sari înapoi %.0fs";
-"menu.speed_up" = "Accelerează la %.1fx";
-"menu.speed_down" = "Încetinește la %.1fx";
+"menu.speed_up" = "Speed Up by %@x";
+"menu.speed_down" = "Speed Down by %@x";
 "menu.volume_up" = "Volum +%.0f%%";
 "menu.volume_down" = "Volum -%.0f%%";
 "menu.audio_delay_up" = "Întârziere audio +%.1fs";
@@ -249,13 +250,13 @@
 "alert.config.duplicate.title" = "Duplică configurația";
 "alert.config.duplicate.message" = "Te rog introdu numele pentru fișierul de configurare duplicat.";
 "alert.config.empty_name" = "Numele nu poate fi gol.";
-"alert.config.name_existing" = "A config with the same name already exists.";
+"alert.config.name_existing" = "O configurare cu același nume există deja.";
 "alert.config.file_existing.title" = "Fișierul există deja";
-"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
+"alert.config.file_existing.message" = "O configurare cu un fișier identic denumit există deja. Alegeți OK pentru a arăta fișierul în Finder.";
 "alert.config.cannot_create" = "Nu se poate crea fișierul de configurare!\n%@";
 "alert.config.cannot_write" = "Nu se poate scrie în fișierul de configurare!";
-"alert.config.rename.title" = "Rename Input Configuration";
-"alert.config.rename.message" = "Please enter the new name for the configuration.";
+"alert.config.rename.title" = "Redenumiți configurarea de intrare";
+"alert.config.rename.message" = "Introduceți un nou nume pentru configurare.";
 
 "alert.filter.incorrect" = "A apărut o eroare la setarea filtrelor. Verificați formatul parametrului.";
 "alert.add_filter.title" = "Filtru nou";

@@ -11,10 +11,10 @@
 "FGm-HY-5ln.title" = "خطأ";
 
 /* Class = "NSTableColumn"; headerCell.title = "Subsystem"; ObjectID = "GRp-Ls-7Bw"; */
-"GRp-Ls-7Bw.headerCell.title" = "Subsystem";
+"GRp-Ls-7Bw.headerCell.title" = "نظام فرعي";
 
 /* Class = "NSMenuItem"; title = "Debug"; ObjectID = "IAO-ta-GnL"; */
-"IAO-ta-GnL.title" = "Debug";
+"IAO-ta-GnL.title" = "إصدار تصحيح المطور";
 
 /* Class = "NSTableColumn"; headerCell.title = "Message"; ObjectID = "ISx-4s-GjQ"; */
 "ISx-4s-GjQ.headerCell.title" = "رسالة";
@@ -23,7 +23,7 @@
 "QvC-M9-y7g.title" = "عارض السجل";
 
 /* Class = "NSMenuItem"; title = "Verbose"; ObjectID = "dFU-NP-aIl"; */
-"dFU-NP-aIl.title" = "Verbose";
+"dFU-NP-aIl.title" = "مطوّل (Verbose)";
 
 /* Class = "NSTableColumn"; headerCell.title = "Time"; ObjectID = "jdC-eg-YUY"; */
 "jdC-eg-YUY.headerCell.title" = "وقت";

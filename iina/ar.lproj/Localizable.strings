@@ -16,8 +16,8 @@
 "general.username" = "اسم المستخدم";
 "general.password" = "كلمة المرور";
 
-"input.value_is_empty" = "Value cannot be empty.";
-"input.already_exists" = "Value already exists.";
+"input.value_is_empty" = "لا يمكن أن تكون القيمة فارغة.";
+"input.already_exists" = "القيمة موجودة مسبقاً.";
 
 // Guide Window
 "guide.highlights" = "الأشياء الهامة";
@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "انت تستخدم %@ النسخه التجريبية من IINA";
 "initial.beta.desc" = "قم بإلغاء تحديد \"تلقي تحديثات بيتا\" من التفضيلات - عام، وتثبيت إصدار مستقر من <a href=\"https://iina.io\">موقعنا الرسمي</a>.";
-"initial.nightly.desc" = "لا ينصح باستخدام الليلة كمحرك أقراص يومي. حاليا لا تدعم الإنشاءات الليلية التحديث التلقائي. الرجاء تحميل أحدث الإصدارات يدويا من موقعنا على الشبكة</a> <a href=\"https://nightly.iina.io\">ليلا.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "عادة ما لا يتم تحسين إصدارات التصحيح للأداء، لذلك لا يوصى باستخدامها كمحرك أقراص يومي. إصدارات التصحيح لا تدعم التحديث التلقائي.";
 "initial.bug_report" = "الإبلاغ عبر <a href=\"https://github.com/iina/iina/issues\">GitHub مشكلات</a>.";
 
@@ -50,41 +50,42 @@
 "quicksetting.deinterlace" = "تشابك";
 "quicksetting.hdr" = "النطاق الديناميكي العالي HDR";
 "quicksetting.hide" = "إخفاء";
+"quicksetting.reset_speed" = "Reset speed to 1x";
 
 // EQ Presets
-"eq.preset.flat" = "Flat";
-"eq.preset.acoustic" = "Acoustic";
-"eq.preset.classical" = "Classical";
-"eq.preset.dance" = "Dance";
-"eq.preset.deep" = "Deep";
-"eq.preset.electronic" = "Electronic";
-"eq.preset.hip_hop" = "Hip Hop";
-"eq.preset.increase_bass" = "Increase Bass";
-"eq.preset.increase_treble" = "Increase Treble";
-"eq.preset.increase_vocal" = "Increase Vocal";
-"eq.preset.jazz" = "Jazz";
-"eq.preset.latin" = "Latin";
-"eq.preset.loundness" = "Loundness";
-"eq.preset.lounge" = "Lounge";
-"eq.preset.piano" = "Piano";
-"eq.preset.pop" = "Pop";
+"eq.preset.flat" = "مسطحة";
+"eq.preset.acoustic" = "الصوتية";
+"eq.preset.classical" = "كلاسيكي";
+"eq.preset.dance" = "الرقص";
+"eq.preset.deep" = "عميق";
+"eq.preset.electronic" = "إلكتروني";
+"eq.preset.hip_hop" = "الهيب هوب";
+"eq.preset.increase_bass" = "";
+"eq.preset.increase_treble" = "زيادة النغمات ثلاثية";
+"eq.preset.increase_vocal" = "زيادة الصوت";
+"eq.preset.jazz" = "الجاز";
+"eq.preset.latin" = "لاتيني";
+"eq.preset.loundness" = "الصخب";
+"eq.preset.lounge" = "لاونج";
+"eq.preset.piano" = "بيانو";
+"eq.preset.pop" = "بوب";
 "eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reduce Bass";
-"eq.preset.reduce_treble" = "Reduce Treble";
-"eq.preset.rock" = "Rock";
-"eq.preset.small_speaker" = "Small Speaker";
-"eq.preset.spoken_word" = "Spoken Word";
+"eq.preset.reduce_bass" = "تقليل الباس";
+"eq.preset.reduce_treble" = "تقليل النغمات الثلاثية";
+"eq.preset.rock" = "الروك";
+"eq.preset.small_speaker" = "سماعات صغيرة";
+"eq.preset.spoken_word" = "كلام مقروء";
 
-"alert.eq.new_profile.title" = "New EQ Profile";
-"alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Currnet Profile";
-"alert.eq.rename.message" = "Please enter a new profile name.";
+"alert.eq.new_profile.title" = "ملف تعريف موازن صوت (EQ) جديد";
+"alert.eq.new_profile.message" = "الرجاء إدخال اسم ملف.";
+"alert.eq.rename.title" = "إعادة تسمية الملف الحالي";
+"alert.eq.rename.message" = "الرجاء إدخال اسم ملف جديد.";
 
 // OSDMessage.swift
 "osd.pause" = "إيقاف مؤقت";
 "osd.resume" = "استئناف";
 "osd.volume" = "الصوت: %i";
-"osd.speed" = "السرعة: %.2fx";
+"osd.speed" = "Speed: %@x";
 "osd.aspect" = "نسبة العرض والارتفاع: %@";
 "osd.crop" = "قص صورة: %@";
 "osd.rotate" = "تدوير: %i°";
@@ -99,12 +100,12 @@
 "osd.subtitle_pos" = "موضع الترجمة: %.1f";
 "osd.sub_hidden" = "الترجمات مخفية";
 "osd.sub_visible" = "الترجمات مرئية";
-"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
-"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
-"osd.sub_second_visible" = "Secondary Subtitles Visible";
+"osd.sub_second_delay.nodelay" = "الترجمة الثانوية: لا تأخير";
+"osd.sub_second_delay.later" = "تأخير الترجمة الثانوية: %.2fsثانية بعد";
+"osd.sub_second_delay.earlier" = "تأخير الترجمة: %.2fثانية قبل";
+"osd.sub_second_hidden" = "الترجمة الثانوية مخفية";
+"osd.sub_second_pos" = "موقع الترجمة الثانوية: %.1f";
+"osd.sub_second_visible" = "الترجمة الثانوية مرئية";
 "osd.mute" = "كتم";
 "osd.unmute" = "إلغاء الكتم";
 "osd.screenshot" = "تم التقاط لقطة الشاشة";
@@ -124,8 +125,8 @@
 "osd.find_online_sub" = "العثور على الترجمة عبر الإنترنت…";
 "osd.find_online_sub.source" = "من";
 "osd.sub_not_found" = "لم يتم العثور على ترجمات";
-"osd.sub_found" = "%d subtitles found.";
-"osd.sub_downloading" = "Downloading %d subtitles";
+"osd.sub_found" = "تم العثور على ترجمات %d.";
+"osd.sub_downloading" = "تحميل ترجمات %d";
 "osd.sub_downloaded" = "تم تنزيل الترجمة";
 "osd.sub_saved" = "تم حفظ الترجمة";
 "osd.network_error" = "خطأ في الشبكة";
@@ -161,17 +162,17 @@
 
 "preference.enable_adv_settings" = "تمكين الإعدادات المتقدمة";
 
-"preference.sub_override_level.no" = "no";
+"preference.sub_override_level.no" = "لا";
 "preference.sub_override_level.force" = "إجبار";
-"preference.sub_override_level.scale" = "scale";
+"preference.sub_override_level.scale" = "مقياس";
 "preference.sub_override_level.strip" = "strip";
 "preference.sub_override_level.yes" = "نعم";
 
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
+"preference.sub_override_level.descriptive_text.no" = "تقديم ترجمات كما هو محدد في نصوص الترجمة البرمجية، بدون تجاوزات.";
+"preference.sub_override_level.descriptive_text.force" = "تطبيق جميع أنماط الترجمة.";
+"preference.sub_override_level.descriptive_text.scale" = "تطبيق إعداد المقياس بالإضافة إلى إعدادات النمط في هذا القسم.";
+"preference.sub_override_level.descriptive_text.strip" = "قم بتجريد جميع العلامات والأنماط من الترجمة بشكل جذري.";
+"preference.sub_override_level.descriptive_text.yes" = "تطبيق جميع إعدادات النمط في هذا القسم.";
 
 "menu.volume" = "الصوت: %d";
 "menu.volume_muted" = "الحجم: %d (مكتمل)";
@@ -180,7 +181,7 @@
 "menu.sub_hide" = "إخفاء الترجمات";
 "menu.sub_show" = "إظهار الترجمات";
 "menu.sub_second_hide" = "إخفاء الترجمة الثانوية";
-"menu.sub_second_show" = "Show Secondary Subtitles";
+"menu.sub_second_show" = "إظهار الترجمات الثانوية";
 "menu.fullscreen" = "الدخول إلى وضع ملء الشاشة";
 "menu.exit_fullscreen" = "إنهاء وضع ملء الشاشة";
 "menu.pip" = "الدخول إلى وضع صورة في صورة";
@@ -189,7 +190,7 @@
 "menu.exit_mini_player" = "الخروج من وضع الموسيقى";
 "menu.pause" = "إيقاف مؤقت";
 "menu.resume" = "استئناف";
-"menu.speed" = "السرعة: %.2fx";
+"menu.speed" = "Speed: %@x";
 "menu.chapters" = "عرض لوحة الفصول";
 "menu.hide_chapters" = "إخفاء لوحة الفصول";
 "menu.playlist" = "عرض لوحة قائمة التشغيل";
@@ -203,8 +204,8 @@
 
 "menu.seek_forward" = "خطوة إلى الأمام %.0f ثانية";
 "menu.seek_backward" = "خطوة إلى الوراء %.0f ثانية";
-"menu.speed_up" = "سرعه التشغيل: %.1fx";
-"menu.speed_down" = "سرعه التشغيل: %.1f";
+"menu.speed_up" = "Speed Up by %@x";
+"menu.speed_down" = "Speed Down by %@x";
 "menu.volume_up" = "الصوت: %.0f";
 "menu.volume_down" = "الصوت: %.0f";
 "menu.audio_delay_up" = "تأخير الصوت: +%.1f ثانيه";
@@ -249,13 +250,13 @@
 "alert.config.duplicate.title" = "تكرار الإعدادات";
 "alert.config.duplicate.message" = "الرجاء إدخال اسم لملف التكوين المكرر.";
 "alert.config.empty_name" = "الاسم لا يمكن أن يكون فارغاً.";
-"alert.config.name_existing" = "A config with the same name already exists.";
+"alert.config.name_existing" = "يوجد اعدادات بنفس الاسم مسبقاً.";
 "alert.config.file_existing.title" = "الملف موجود بالفعل";
-"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
+"alert.config.file_existing.message" = "يوجد بالفعل ملف تكوين بنفس اسم الملف. اختر موافق لإظهار الملف في Finder.";
 "alert.config.cannot_create" = "لا يمكن إنشاء ملف التكوين!\n%@";
 "alert.config.cannot_write" = "لا يمكن الكتابة إلى ملف التكوين!";
-"alert.config.rename.title" = "Rename Input Configuration";
-"alert.config.rename.message" = "Please enter the new name for the configuration.";
+"alert.config.rename.title" = "إعادة تسمية تكوين الإدخال";
+"alert.config.rename.message" = "الرجاء إدخال الاسم الجديد للتكوين.";
 
 "alert.filter.incorrect" = "حدث خطأ أثناء إعداد عوامل التصفية. الرجاء التحقق من صيغة الوسيط الخاصة بك.";
 "alert.add_filter.title" = "عامل تصفية جديد";
@@ -335,7 +336,7 @@
 "alert.plugin_uninstall.message" = "سيتم حذف الإضافة من القرص الخاص بك.";
 "alert.plugin_reinstall.title" = "الإضافة %@ موجودة بالفعل";
 "alert.plugin_reinstall.message" = "هل تريد إعادة تثبيت الإضافة؟";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+"alert.duplicated_plugin_id" = "تم اكتشاف معرفات مكررة للملحقات. ملحقان أو أكثر لهما نفس المعرف \"%@\". وقد يسبب هذا سلوكيات غير طبيعية. يرجى العثور عليها في التفضيلات - الإضافات والإبلاغ إلى مؤلفيها. إذا تم تثبيت البرنامج المساعد محلياً، فيمكنك أيضاً تغيير معرفته يدوياً في ملف البرنامج المساعد Info.json.";
 "alert.plugin_no_update" = "لم يتم العثور على تحديثات.";
 "alert.plugin_update_found.title" = "تم العثور على تحديث لـ %@";
 "alert.plugin_update_found.message" = "أحدث إصدار هو %@. لديك %@. هل ترغب في التحديث؟";
@@ -421,9 +422,9 @@
 "permissions.show-osd.desc" = "يمكن لهذه الإضافة أن تظهر رسائل OSD (على شاشة العرض).";
 "permissions.show-alert.name" = "عرض التنبيه";
 "permissions.show-alert.desc" = "هذه الإضافة يمكن أن تظهر تنبيهات منبثقة.";
-"permissions.video-overlay.name" = "Add overlays on videos";
+"permissions.video-overlay.name" = "إضافة طبقات على مقاطع الفيديو";
 "permissions.video-overlay.desc" = "يمكن لهذه الإضافة أن توفر محتوى إضافياً في الجزء العلوي من الفيديو.";
-"permissions.file-system.name" = "Access the file system";
+"permissions.file-system.name" = "الوصول إلى نظام الملفات";
 "permissions.file-system.desc" = "يمكن لهذه الإضافة قراءة أو كتابة الملفات على القرص الخاص بك، بما في ذلك المعلومات الحساسة. يمكنها أيضًا الاتصال بالبرامج أو التطبيقات الأخرى التي يمكن أن تضر بجهاز الكمبيوتر الخاص بك. لذا تأكد من التحقق من المصدر.";
 
 "plugin.install" = "تثبيت";
@@ -434,8 +435,8 @@
 "alert.invalid_url" = "عنوان URL غير صالح.";
 "plugin.install_error.invalid_url" = "عنوان URL غير صالح.";
 "plugin.install_error.file_not_found" = "لا يمكن العثور على ملف الحزمة.";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_download" = "فشل تنزيل الإضافة.\n\nالصادر:%@\n";
+"plugin.install_error.cannot_unpackage" = "فشل في إلغاء حزمة الإضافة.\n\nالناتج:%@\n";
 "plugin.install_error.cannot_load" = "لا يمكن لـ IINA تحميل هذه الإضافة. قد يكون في شكل خاطئ.";
 "plugin.check_for_updates" = "التحقق من وجود تحديثات";
 "plugin.updating" = "ينزّل التّحديث...";

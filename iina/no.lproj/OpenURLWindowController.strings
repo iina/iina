@@ -5,19 +5,22 @@
 "Q1z-9O-n4X.title" = "Brukernavn";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Please enter the URL here……"; ObjectID = "XV7-VP-Ua2"; */
-"XV7-VP-Ua2.placeholderString" = "Please enter the URL here……";
+"XV7-VP-Ua2.placeholderString" = "Skriv inn nettadressen her...";
 
 /* Class = "NSTextFieldCell"; title = "URL is invalid."; ObjectID = "gaI-DT-l2c"; */
-"gaI-DT-l2c.title" = "URL is invalid.";
+"gaI-DT-l2c.title" = "Nettadressen er ugyldig.";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "iNG-ee-EW6"; */
 "iNG-ee-EW6.title" = "Avbryt";
 
 /* Class = "NSButtonCell"; title = "Remember username and password for this host in keychain"; ObjectID = "m0D-hR-3pr"; */
-"m0D-hR-3pr.title" = "Remember username and password for this host in keychain";
+"m0D-hR-3pr.title" = "Husk brukernavn og passord for denne verten i nøkkelring";
 
 /* Class = "NSTextFieldCell"; title = "Password"; ObjectID = "uM6-Bp-Wdk"; */
 "uM6-Bp-Wdk.title" = "Passord";
 
 /* Class = "NSTextFieldCell"; title = "HTTP Authentication"; ObjectID = "wxH-ic-Uug"; */
-"wxH-ic-Uug.title" = "HTTP Authentication";
+"wxH-ic-Uug.title" = "HTTP godkjenning";
+
+/* Class = "NSTextFieldCell"; title = "Loading Media……"; ObjectID = "3T9-gp-4UE"; */
+"3T9-gp-4UE.title" = "Loading Media……";

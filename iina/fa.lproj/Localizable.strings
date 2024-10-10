@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "شما در حال استفاده از نسخه %@ برنامه IINA میباشید";
 "initial.beta.desc" = "تیک گزینه‌ی “دریافت بروزرسانی‌های بتا” را از بخش تنظیمات - عمومی بردارید و یک نسخه‌ی پایدار را از <a href=\"https://iina.io\">سایت رسمی ما</a> نصب کنید.";
-"initial.nightly.desc" = "حالت شب برای استفاده روزانه پیشنهاد نمیشود. درحال حاضر نسخه حالت شب از بروزرسانی خودکار پشتیبانی نمیکند. لطفا برای دریافت دستی جدیدترین بروزرسانی به <a href=\"https://nightly.iina.io\"> وبسایت ما</a> مراجعه فرمایید.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "نسخه دیباگ معمولا کامل بهینه سازی نشده است ، پس برای استفاده روزانه پیشنهاد نمیشود. نسخه دیباگ از بروزرسانی خودکار پیشتیبانی نمیکنند.";
 "initial.bug_report" = "مشکلات را از طریق <a href=\"https://github.com/iina/iina/issues\"> با ما درمیان بگذارید</a>.";
 
@@ -50,6 +50,7 @@
 "quicksetting.deinterlace" = "تبدیل تصویر به غیر interlace";
 "quicksetting.hdr" = "اچ‌دی‌آر";
 "quicksetting.hide" = "پنهان کردن";
+"quicksetting.reset_speed" = "Reset speed to 1x";
 
 // EQ Presets
 "eq.preset.flat" = "Flat";
@@ -84,7 +85,7 @@
 "osd.pause" = "مکث";
 "osd.resume" = "ادامه";
 "osd.volume" = "بلندی صدا: %i";
-"osd.speed" = "سرعت: %.2f برابر";
+"osd.speed" = "Speed: %@x";
 "osd.aspect" = "نسبت تصویر: %@";
 "osd.crop" = "برش: %@";
 "osd.rotate" = "چرخش: %i";
@@ -189,7 +190,7 @@
 "menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "مکث";
 "menu.resume" = "ادامه";
-"menu.speed" = "سرعت: %.2f برابر";
+"menu.speed" = "Speed: %@x";
 "menu.chapters" = "پنل سرفصل های فیلم رو نشون بده";
 "menu.hide_chapters" = "پنل سرفصل های فیلم رو پنهان کن";
 "menu.playlist" = "نمایش لیست تماشا";
@@ -203,8 +204,8 @@
 
 "menu.seek_forward" = "%.0f ثانیه به جلو";
 "menu.seek_backward" = "%.0f ثانیه به عقب";
-"menu.speed_up" = "بالا بردن سرعت به مقدار %.1fx";
-"menu.speed_down" = "پایین آوردن سرعت به مقدار %.1fx";
+"menu.speed_up" = "Speed Up by %@x";
+"menu.speed_down" = "Speed Down by %@x";
 "menu.volume_up" = "افزایش صدا + %.0f%%";
 "menu.volume_down" = "کاهش صدا - %.0f%%";
 "menu.audio_delay_up" = "تاخیر صدا + %.1f ثانيه";

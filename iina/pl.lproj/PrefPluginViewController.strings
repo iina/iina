@@ -2,7 +2,7 @@
 "3xh-dU-HuR.title" = "Zainstaluj";
 
 /* Class = "NSTabViewItem"; label = "Permissions"; ObjectID = "ALD-n6-A0r"; */
-"ALD-n6-A0r.label" = "Permissions";
+"ALD-n6-A0r.label" = "Uprawnienia";
 
 /* Class = "NSTextFieldCell"; title = "Author"; ObjectID = "Dkk-JQ-qHA"; */
 "Dkk-JQ-qHA.title" = "Author";
@@ -11,7 +11,7 @@
 "EHl-kr-ZZf.title" = "Email";
 
 /* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[0] = "Permissions"; ObjectID = "KTN-5r-mMm"; */
-"KTN-5r-mMm.ibShadowedLabels[0]" = "Permissions";
+"KTN-5r-mMm.ibShadowedLabels[0]" = "Uprawnienia";
 
 /* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[1] = "About"; ObjectID = "KTN-5r-mMm"; */
 "KTN-5r-mMm.ibShadowedLabels[1]" = "O aplikacji";
@@ -50,7 +50,7 @@
 "eyS-eb-H4e.label" = "Preferencje";
 
 /* Class = "NSTextFieldCell"; title = "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically."; ObjectID = "fnl-uA-X7r"; */
-"fnl-uA-X7r.title" = "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically.";
+"fnl-uA-X7r.title" = "Możesz zainstalować nową wtyczkę z GitHub lub lokalnego pakietu .iinaplgz. Wtyczki zainstalowane z GitHub mogą być aktualizowane automatycznie.";
 
 /* Class = "NSButtonCell"; title = "Reload"; ObjectID = "ixN-OS-w87"; */
 "ixN-OS-w87.title" = "Reload";

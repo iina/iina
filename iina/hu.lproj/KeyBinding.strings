@@ -41,7 +41,7 @@
 "iina.toggle-music-mode" = "Zene Mód";
 "iina.open-file" = "Fájl megnyitása";
 "iina.open-url" = "URL megnyitása";
-"iina.video-panel" = "Vide panel";
+"iina.video-panel" = "Videó panel";
 "iina.audio-panel" = "Hang panel";
 "iina.sub-panel" = "Felirat panel";
 "iina.playlist-panel" = "Lejátszási lista panel";
@@ -54,7 +54,7 @@
 "iina.save-playlist" = "Az aktuális lejátszási lista mentése";
 "iina.show-current-file-in-finder" = "Jelenlegi fájl megjelenítése a Finderben";
 "iina.delete-current-file" = "Aktuális fájl törlése";
-"iina.delete-current-file-hard" = "Aktuális fájl törlése, Kukába mozgatés nélkül";
+"iina.delete-current-file-hard" = "Aktuális fájl törlése kukába mozgatás nélkül";
 "iina.find-online-subs" = "Online feliratok keresése";
 "iina.save-downloaded-sub" = "Letöltött felirat mentése";
 
@@ -101,7 +101,7 @@
 "opt.sub-pos" = "Feliratozás helyzete";
 "opt.sub-scale" = "Felirat skála";
 "opt.sub-visibility" = "Felirat láthatság";
-"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
+"opt.secondary-sub-visibility" = "Másodlagos felirat láthatósága";
 "opt.sub-ass-style-override" = "ASS stílus felülírás";
 
 "opt.fullscreen" = "Teljes képernyő";

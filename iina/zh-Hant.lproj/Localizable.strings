@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "您正在使用IINA的%@版本";
 "initial.beta.desc" = "如果您希望回滾至穩定版本，請從 設置 > 通用 取消勾選“接收Beta版本更新”，然後從 我們的<a href=\"https://iina.io\">官方網站</a>安裝穩定版本.";
-"initial.nightly.desc" = "不推薦您使用「每日構建版 Nightly Build」做為日常使用首選。每日構建版不支援自動更新，請至 <a href=\"https://nightly.iina.io\">每日構建版網站頁面</a> 自行下載更新。";
+"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "開發版通常沒有將效能最佳化，所以不建議作為生產力軟件。開發版不支持自動更新。";
 "initial.bug_report" = "通過<a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>發送報告.";
 
@@ -50,6 +50,7 @@
 "quicksetting.deinterlace" = "去交錯";
 "quicksetting.hdr" = "高動態範圍成效";
 "quicksetting.hide" = "隱藏";
+"quicksetting.reset_speed" = "Reset speed to 1x";
 
 // EQ Presets
 "eq.preset.flat" = "Flat";
@@ -84,7 +85,7 @@
 "osd.pause" = "暫停";
 "osd.resume" = "繼續";
 "osd.volume" = "音量：%i";
-"osd.speed" = "速度：%.2fx";
+"osd.speed" = "Speed: %@x";
 "osd.aspect" = "顯示比例：%@";
 "osd.crop" = "裁切：%@";
 "osd.rotate" = "旋轉：%i°";
@@ -189,7 +190,7 @@
 "menu.exit_mini_player" = "離開音樂模式";
 "menu.pause" = "暫停";
 "menu.resume" = "繼續";
-"menu.speed" = "速度：%.2fx";
+"menu.speed" = "Speed: %@x";
 "menu.chapters" = "顯示章節面板";
 "menu.hide_chapters" = "隱藏章節面板";
 "menu.playlist" = "顯示播放列表面板";
@@ -203,8 +204,8 @@
 
 "menu.seek_forward" = "快轉 %.0fs";
 "menu.seek_backward" = "倒轉 %.0fs";
-"menu.speed_up" = "增加速度至 %.1fx";
-"menu.speed_down" = "減慢速度至 %.1fx";
+"menu.speed_up" = "Speed Up by %@x";
+"menu.speed_down" = "Speed Down by %@x";
 "menu.volume_up" = "音量 + %.0f%%";
 "menu.volume_down" = "音量 - %.0f%%";
 "menu.audio_delay_up" = "音訊延遲 + %.1f 秒";

@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "U gebruik ’n %@-weergawe van IINA";
 "initial.beta.desc" = "Indien u na ’n vroeëre weergawe wil terugkeer, verwyder die merkie “ontvang betabywerkings” in Voorkeure - Algemeen en installeer ’n stabiele weergawe d.m.v. ons <a href=\"https://iina.io\">amptelike webwerf</a>.";
-"initial.nightly.desc" = "Elke nag word nie aanbeveel as daaglikse drywer nie. Huidige nagelike maaksels ondersteun nie outobywerking nie. Laai asb. nuwe maaksels van ons <a href=\"https://nightly.iina.io\">nagtelike webwerf</a> af.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Maaksels vir ontfouting is nie geoptimeer vir verrigting nie daarom word dit nie aanbeveel om as daaglikse drywer gebruik te word nie. Ontfoutmaaksels ondersteun ook nie outobywerking nie.";
 "initial.bug_report" = "Rapporteer via <a href=\"https://github.com/iina/iina/issues\">GitHub-kwessies</a>.";
 
@@ -50,6 +50,7 @@
 "quicksetting.deinterlace" = "Deïnterlinieer";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Versteek";
+"quicksetting.reset_speed" = "Reset speed to 1x";
 
 // EQ Presets
 "eq.preset.flat" = "Flat";
@@ -84,7 +85,7 @@
 "osd.pause" = "Wag";
 "osd.resume" = "Hervat";
 "osd.volume" = "Volume: %i";
-"osd.speed" = "Snelheid: %.2fx";
+"osd.speed" = "Speed: %@x";
 "osd.aspect" = "Aspekverhouding: %@";
 "osd.crop" = "Snoei: %@";
 "osd.rotate" = "Roteer: %i°";
@@ -189,7 +190,7 @@
 "menu.exit_mini_player" = "Verlaat musiekmodus";
 "menu.pause" = "Wag";
 "menu.resume" = "Hervat";
-"menu.speed" = "Snelheid: %.2fx";
+"menu.speed" = "Speed: %@x";
 "menu.chapters" = "Toon hoofstukpaneel";
 "menu.hide_chapters" = "Versteek hoofstukpaneel";
 "menu.playlist" = "Toon afspeellyspaneel";
@@ -203,8 +204,8 @@
 
 "menu.seek_forward" = "Gaan %.0fs vorentoe";
 "menu.seek_backward" = "Gaan %.0fs terug";
-"menu.speed_up" = "Versnel met %.1fx";
-"menu.speed_down" = "Vertraag met %.1fx";
+"menu.speed_up" = "Speed Up by %@x";
+"menu.speed_down" = "Speed Down by %@x";
 "menu.volume_up" = "Volume + %.0f%%";
 "menu.volume_down" = "Volume - %.0f%%";
 "menu.audio_delay_up" = "Oudiovertraging + %.1fs";

@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "Du bruker en %@ versjon av IINA";
 "initial.beta.desc" = "Hvis du vil rulle tilbake til en utgivelsesversjon, fjern avkrysningen for \"motta betaoppdateringer\" fra Innstillinger > Generelt, og installer en stabil versjon fra vår <a href=\"https://iina.io\">offisielle nettside</a>.";
-"initial.nightly.desc" = "Nightly anbefales ikke til daglig bruk. For øyeblikket støtter ikke nightly-versjoner automatisk oppdatering. Last ned nyere versjoner fra vårt <a href=\"https://nightly.iina.io\">nightly nettsted</a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Feilsøkingsversjoner er vanligvis ikke optimalisert for ytelse, så det anbefales derfor ikke for daglig bruk. Feilsøkingsversjoner støtter ikke automatisk oppdatering.";
 "initial.bug_report" = "Meld feil via <a href=\"https://github.com/iina/iina/issues\">GitHub Issues</a>.";
 
@@ -50,6 +50,7 @@
 "quicksetting.deinterlace" = "Deinterlace";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Skjul";
+"quicksetting.reset_speed" = "Reset speed to 1x";
 
 // EQ Presets
 "eq.preset.flat" = "Flat";
@@ -84,7 +85,7 @@
 "osd.pause" = "Pause";
 "osd.resume" = "Gjenoppta";
 "osd.volume" = "Volum: %i";
-"osd.speed" = "Hastighet: %.2fx";
+"osd.speed" = "Speed: %@x";
 "osd.aspect" = "Bildeformat: %@";
 "osd.crop" = "Beskjæring: %@";
 "osd.rotate" = "Roter: %i°";
@@ -189,7 +190,7 @@
 "menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pause";
 "menu.resume" = "Gjenoppta";
-"menu.speed" = "Hastighet: %.2fx";
+"menu.speed" = "Speed: %@x";
 "menu.chapters" = "Vis kapittelpanel";
 "menu.hide_chapters" = "Gjem kapittelpanel";
 "menu.playlist" = "Vis spillelistepanel";
@@ -203,8 +204,8 @@
 
 "menu.seek_forward" = "Steg fremover: %.0fs";
 "menu.seek_backward" = "Steg bakover: %.0fs";
-"menu.speed_up" = "Øk hastigheten med %.1fx";
-"menu.speed_down" = "Senk hastigheten med %.1fx";
+"menu.speed_up" = "Speed Up by %@x";
+"menu.speed_down" = "Speed Down by %@x";
 "menu.volume_up" = "Volum + %.0f%%";
 "menu.volume_down" = "Volum - %.0f%%";
 "menu.audio_delay_up" = "Lydforsinkelse + %.1fs";

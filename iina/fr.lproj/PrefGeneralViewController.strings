@@ -56,7 +56,7 @@
 "KYi-0W-zOr.title" = "Assombrir les autres moniteurs en mode plein écran";
 
 /* Class = "NSTextFieldCell"; title = "Still prevents system from sleeping."; ObjectID = "Kdk-iC-e1C"; */
-"Kdk-iC-e1C.title" = "Still prevents system from sleeping.";
+"Kdk-iC-e1C.title" = "Il empêche toujours le système de dormir.";
 
 /* Class = "NSButtonCell"; title = "Switch to \"music mode\" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
 "KfL-r7-Uav.title" = "Passer en mode musique automatiquement durant la lecture d'un fichier audio";
@@ -134,7 +134,7 @@
 "pdx-zt-kf2.title" = "Captures d'écran :";
 
 /* Class = "NSButtonCell"; title = "Prevent screen saver from starting while playing"; ObjectID = "r2u-P9-J5p"; */
-"r2u-P9-J5p.title" = "Prevent screen saver from starting while playing";
+"r2u-P9-J5p.title" = "Empêcher l'économiseur d'écran de démarrer lors de la lecture";
 
 /* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "slG-Jb-54B"; */
 "slG-Jb-54B.title" = "heures";
@@ -152,16 +152,16 @@
 "xr2-rB-O0x.title" = "Pause/lecture quand :";
 
 /* Class = "NSButtonCell"; title = "Not while in \"music mode\" or only playing audio"; ObjectID = "yla-DT-YTx"; */
-"yla-DT-YTx.title" = "Not while in \"music mode\" or only playing audio";
+"yla-DT-YTx.title" = "Pas en mode « musique », ou seulement en mode audio";
 
 /* Class = "NSMenuItem"; title = "Show welcome window"; ObjectID = "z9T-8h-1T0"; */
 "z9T-8h-1T0.title" = "Afficher la fenêtre d'accueil";
 
 /* Class = "NSButtonCell"; title = "When a file is opened manually:"; ObjectID = "jok-kc-HjX"; */
-"jok-kc-HjX.title" = "When a file is opened manually:";
+"jok-kc-HjX.title" = "Lorsqu’un fichier est ouvert manuellement :";
 
 /* Class = "NSMenuItem"; title = "Loop playlist"; ObjectID = "5WC-Sp-6mg"; */
-"5WC-Sp-6mg.title" = "Loop playlist";
+"5WC-Sp-6mg.title" = "Lire en boucle la liste de lecture";
 
 /* Class = "NSMenuItem"; title = "Loop single file"; ObjectID = "A1p-L4-jtC"; */
-"A1p-L4-jtC.title" = "Loop single file";
+"A1p-L4-jtC.title" = "Lire en boucle un fichier unique";

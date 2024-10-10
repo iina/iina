@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "Du bruger en %@ version af IINA";
 "initial.beta.desc" = "Hvis du ønsker at vende tilbage til en udgivelsesversion, skal du fjerne markeringen af \"modtag betaopdateringer\" fra Indstillinger > Generelt, og installere en stabil udgivelse fra vores <a href=\"https://iina.io\">officielle hjemmeside</a>.";
-"initial.nightly.desc" = "Nightly er ikke anbefalet til daglig brug. Nuværende nightly builds understøtter ikke automatisk opdatering. Installer nye versioner fra vores <a href=\"https://nightly.iina.io\">hjemmeside</a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Debug builds er normalt ikke optimeret til ydeevne, så det anbefales ikke at blive brugt til daglig brug. Debug builds understøtter ikke automatisk opdatering.";
 "initial.bug_report" = "Meld fejl via <a href=\"https://github.com/iina/iina/issues\">Github Issues</a>.";
 
@@ -50,6 +50,7 @@
 "quicksetting.deinterlace" = "Deinterlace";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Skjul";
+"quicksetting.reset_speed" = "Reset speed to 1x";
 
 // EQ Presets
 "eq.preset.flat" = "Flat";
@@ -84,7 +85,7 @@
 "osd.pause" = "Pause";
 "osd.resume" = "Genoptag";
 "osd.volume" = "Volumen: %i";
-"osd.speed" = "Hastighed: %.2fx";
+"osd.speed" = "Speed: %@x";
 "osd.aspect" = "Aspekt Ratio: %@";
 "osd.crop" = "Beskær: %@";
 "osd.rotate" = "Roter: %i°";
@@ -124,8 +125,8 @@
 "osd.find_online_sub" = "Leder efter undertekster online...";
 "osd.find_online_sub.source" = "fra";
 "osd.sub_not_found" = "Ingen undertekster fundet";
-"osd.sub_found" = "%d subtitles found.";
-"osd.sub_downloading" = "Downloading %d subtitles";
+"osd.sub_found" = "%d undertekster fundet.";
+"osd.sub_downloading" = "Downloader %d undertekster";
 "osd.sub_downloaded" = "Undertekster downloadet";
 "osd.sub_saved" = "Undertekster gemt";
 "osd.network_error" = "Netværksfejl";
@@ -189,7 +190,7 @@
 "menu.exit_mini_player" = "Afslut musiktilstand";
 "menu.pause" = "Pause";
 "menu.resume" = "Genoptag";
-"menu.speed" = "Hastighed: %.2fx";
+"menu.speed" = "Speed: %@x";
 "menu.chapters" = "Vis kapitel-panel";
 "menu.hide_chapters" = "Skjul kapitel-panel";
 "menu.playlist" = "Vis Playlist Panel";
@@ -203,8 +204,8 @@
 
 "menu.seek_forward" = "Spol frem %.0fs";
 "menu.seek_backward" = "Spol tilbage %.0fs";
-"menu.speed_up" = "Hastighed sætten op til %.1fx";
-"menu.speed_down" = "Hastighed nedsættes til %.1fx";
+"menu.speed_up" = "Speed Up by %@x";
+"menu.speed_down" = "Speed Down by %@x";
 "menu.volume_up" = "Volumen + %.0f%%";
 "menu.volume_down" = "Volumen - %.0f%%";
 "menu.audio_delay_up" = "Lydforsinkelse + %.1fs";
@@ -255,7 +256,7 @@
 "alert.config.cannot_create" = "Kan ikke oprette config filen!";
 "alert.config.cannot_write" = "Kan ikke skrive til config filen!";
 "alert.config.rename.title" = "Rename Input Configuration";
-"alert.config.rename.message" = "Please enter the new name for the configuration.";
+"alert.config.rename.message" = "Indtast et navn til den nye konfiguration.";
 
 "alert.filter.incorrect" = "Fejl opstået under anvendelse af filtre. Venligst tjek dit parameter format.";
 "alert.add_filter.title" = "Nyt filter";
@@ -333,7 +334,7 @@
 
 "alert.plugin_uninstall.title" = "Er du sikker på at du vil afinstallere %@?";
 "alert.plugin_uninstall.message" = "Denne udvidelse vil blive fjernet fra din harddisk.";
-"alert.plugin_reinstall.title" = "Plugin %@ already exists";
+"alert.plugin_reinstall.title" = "Pluginet %@ findes allerede";
 "alert.plugin_reinstall.message" = "Do you want to reinstall the plugin?";
 "alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
 "alert.plugin_no_update" = "Ingen nye opdateringer fundet.";
@@ -382,7 +383,7 @@
 "osc_toolbar.full_screen" = "Skift fuld skærm";
 "osc_toolbar.music_mode" = "Gå i musik-tilstand";
 "osc_toolbar.sub_track" = "Vælg undertekstspor";
-"osc_toolbar.screenshot" = "Take a screenshot";
+"osc_toolbar.screenshot" = "Tag et skærmbillede";
 
 "mini_player.album_art" = "Slå album art Til/Fra";
 "mini_player.loop" = "Gentag";

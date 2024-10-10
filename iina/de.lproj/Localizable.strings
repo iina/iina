@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "Du benutzt Version %@ von IINA";
 "initial.beta.desc" = "Wenn du eine Release Version benutzen willst, entferne den Haken bei „Betaupdates erhalten“ in Einstellungen -> Allgemein und installiere eine stabile Version von unserer <a href=\"https://iina.io\">offiziellen Webseite</a>.";
-"initial.nightly.desc" = "Nightly Versionen sollten nicht für den täglichen Gebrauch eingesetzt werden. Aktuell unterstützen diese keine Auto Updates. Bitte lade neuere Versionen von <a href=\"https://nightly.iina.io\">Nightly Website</a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Debug-Builds sind normalerweise nicht auf Leistung optimiert, daher wird es nicht empfohlen diese für den täglichen Gebrauch einzusetzen. Debug-Builds unterstützen keine automatischen Updates.";
 "initial.bug_report" = "Melde via <a href=\"https://github.com/iina/iina/issues\">GitHub Tickets</a>.";
 
@@ -50,6 +50,7 @@
 "quicksetting.deinterlace" = "Deinterlacing";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Verstecken";
+"quicksetting.reset_speed" = "Reset speed to 1x";
 
 // EQ Presets
 "eq.preset.flat" = "Flat";
@@ -84,7 +85,7 @@
 "osd.pause" = "Pausieren";
 "osd.resume" = "Wiedergabe";
 "osd.volume" = "Lautstärke: %i";
-"osd.speed" = "Geschwindigkeit: %.2fx";
+"osd.speed" = "Speed: %@x";
 "osd.aspect" = "Seitenverhältnis: %@";
 "osd.crop" = "Zuschneiden: %@";
 "osd.rotate" = "Drehung: %i°";
@@ -189,7 +190,7 @@
 "menu.exit_mini_player" = "Musikmodus beenden";
 "menu.pause" = "Pausieren";
 "menu.resume" = "Wiedergabe";
-"menu.speed" = "Geschwindigkeit: %.2fx";
+"menu.speed" = "Speed: %@x";
 "menu.chapters" = "Kapitel anzeigen";
 "menu.hide_chapters" = "Kapitel verbergen";
 "menu.playlist" = "Wiedergabeliste anzeigen";
@@ -203,8 +204,8 @@
 
 "menu.seek_forward" = "%.0f s vorspulen";
 "menu.seek_backward" = "%.0f s zurückspulen";
-"menu.speed_up" = "Beschleunigen auf %.1fx";
-"menu.speed_down" = "Verlangsamen auf %.1fx";
+"menu.speed_up" = "Speed Up by %@x";
+"menu.speed_down" = "Speed Down by %@x";
 "menu.volume_up" = "Lautstärke + %.0f%%";
 "menu.volume_down" = "Lautstärke − %.0f%%";
 "menu.audio_delay_up" = "Audioverzögerung + %.1f s";

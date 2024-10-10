@@ -110,7 +110,7 @@
 "Bew-Pv-igg.title" = "dB";
 
 /* Class = "NSTextFieldCell"; title = "Pre-amplification gain to apply to the ReplayGain gain."; ObjectID = "rIW-XP-zGZ"; */
-"rIW-XP-zGZ.title" = "Pre-amplification gain to apply to the ReplayGain gain.";
+"rIW-XP-zGZ.title" = "ReplayGain에 적용할 Pre-amplification Gain.";
 
 /* Class = "NSButtonCell"; title = "Allow the volume gain to clip"; ObjectID = "J3e-oT-fy9"; */
 "J3e-oT-fy9.title" = "Allow the volume gain to clip";
@@ -125,10 +125,10 @@
 "ovT-D3-3jS.title" = "dB";
 
 /* Class = "NSTextFieldCell"; title = "Gain to apply if the file has no ReplayGain tags."; ObjectID = "m2n-yd-a4n"; */
-"m2n-yd-a4n.title" = "Gain to apply if the file has no ReplayGain tags.";
+"m2n-yd-a4n.title" = "파일에 ReplayGain 태그가 없는 경우 적용할 게인입니다.";
 
 /* Class = "NSTextFieldCell"; title = "Audio driver:"; ObjectID = "Zco-Ba-Idk"; */
 "Zco-Ba-Idk.title" = "Audio driver:";
 
 /* Class = "NSTextFieldCell"; title = "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."; ObjectID = "2Md-pv-gSi"; */
-"2Md-pv-gSi.title" = "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays.";
+"2Md-pv-gSi.title" = "AVFoundation은 공간 오디오를 지원하는 새롭고 실험적인 오디오 드라이버입니다. 그러나 AVFoundation을 사용할 때 오디오 지연과 같은 몇 가지 문제가 발생할 수 있습니다.";

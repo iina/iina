@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "您正在使用 IINA 的 %@ 版本";
 "initial.beta.desc" = "如果你想回滚到发布版本，请从“设置” > “通用” 中取消勾选 “接收测试版（Beta）更新”，并从我们的<a href=\"https://iina.io\">官方网站</a>安装一个稳定版本。";
-"initial.nightly.desc" = "我们不建议将 Nightly 作为日常使用的版本。目前 Nightly 不支持自动更新。请从我们的<a href=\"https://nightly.iina.io\"> Nightly 网站</a>手动下载更新的版本。";
+"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "调试版本（Debug）通常没有对性能进行优化，所以不建议日常用。调试版本（Debug）不支持自动更新。";
 "initial.bug_report" = "通过<a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>报告。";
 
@@ -50,33 +50,34 @@
 "quicksetting.deinterlace" = "反交错";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "隐藏";
+"quicksetting.reset_speed" = "Reset speed to 1x";
 
 // EQ Presets
 "eq.preset.flat" = "平坦";
 "eq.preset.acoustic" = "原声";
 "eq.preset.classical" = "古典";
-"eq.preset.dance" = "Dance";
-"eq.preset.deep" = "Deep";
+"eq.preset.dance" = "舞曲";
+"eq.preset.deep" = "深";
 "eq.preset.electronic" = "电子乐";
 "eq.preset.hip_hop" = "嘻哈";
-"eq.preset.increase_bass" = "Increase Bass";
-"eq.preset.increase_treble" = "Increase Treble";
-"eq.preset.increase_vocal" = "Increase Vocal";
+"eq.preset.increase_bass" = "增加低音";
+"eq.preset.increase_treble" = "增加高音";
+"eq.preset.increase_vocal" = "增加人声";
 "eq.preset.jazz" = "爵士";
-"eq.preset.latin" = "Latin";
-"eq.preset.loundness" = "Loundness";
-"eq.preset.lounge" = "Lounge";
-"eq.preset.piano" = "Piano";
-"eq.preset.pop" = "Pop";
-"eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reduce Bass";
-"eq.preset.reduce_treble" = "Reduce Treble";
+"eq.preset.latin" = "拉丁音乐";
+"eq.preset.loundness" = "响度";
+"eq.preset.lounge" = "驰放音乐";
+"eq.preset.piano" = "钢琴音乐";
+"eq.preset.pop" = "流行音乐";
+"eq.preset.rnb" = "节奏蓝调";
+"eq.preset.reduce_bass" = "减少低音";
+"eq.preset.reduce_treble" = "减少高音";
 "eq.preset.rock" = "摇滚";
-"eq.preset.small_speaker" = "Small Speaker";
-"eq.preset.spoken_word" = "Spoken Word";
+"eq.preset.small_speaker" = "小型扬声器";
+"eq.preset.spoken_word" = "朗诵诗音乐";
 
 "alert.eq.new_profile.title" = "新EQ 配置文件";
-"alert.eq.new_profile.message" = "Please enter a profile name.";
+"alert.eq.new_profile.message" = "请输入个人资料名称。";
 "alert.eq.rename.title" = "重命名当前的配置文件";
 "alert.eq.rename.message" = "请输入新的配置文件名称：";
 
@@ -84,7 +85,7 @@
 "osd.pause" = "暂停";
 "osd.resume" = "继续";
 "osd.volume" = "音量：%i";
-"osd.speed" = "速度：%.2fx";
+"osd.speed" = "Speed: %@x";
 "osd.aspect" = "长宽比：%@";
 "osd.crop" = "裁切：%@";
 "osd.rotate" = "旋转：%i°";
@@ -161,17 +162,17 @@
 
 "preference.enable_adv_settings" = "启用高级设置";
 
-"preference.sub_override_level.no" = "no";
+"preference.sub_override_level.no" = "不";
 "preference.sub_override_level.force" = "强制";
 "preference.sub_override_level.scale" = "缩放";
 "preference.sub_override_level.strip" = "条形";
 "preference.sub_override_level.yes" = "是";
 
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
+"preference.sub_override_level.descriptive_text.no" = "按照字幕脚本的指定渲染字幕，不覆盖。";
+"preference.sub_override_level.descriptive_text.force" = "应用所有字幕样式。";
+"preference.sub_override_level.descriptive_text.scale" = "在除本节中的样式设置外应用音阶设置";
+"preference.sub_override_level.descriptive_text.strip" = "从字幕中彻底去掉所有的ASS标签和样式。";
+"preference.sub_override_level.descriptive_text.yes" = "应用本节中的所有样式设置。";
 
 "menu.volume" = "音量: %d";
 "menu.volume_muted" = "音量：%d （静音）";
@@ -189,7 +190,7 @@
 "menu.exit_mini_player" = "退出音乐模式";
 "menu.pause" = "暂停";
 "menu.resume" = "继续";
-"menu.speed" = "速度: %.2fx";
+"menu.speed" = "Speed: %@x";
 "menu.chapters" = "显示章节面板";
 "menu.hide_chapters" = "隐藏章节面板";
 "menu.playlist" = "显示播放列表面板";
@@ -203,8 +204,8 @@
 
 "menu.seek_forward" = "渐进 %.0f秒";
 "menu.seek_backward" = "渐退 %.0f秒";
-"menu.speed_up" = "加速 %.1f 倍";
-"menu.speed_down" = "减速 %.1f 倍";
+"menu.speed_up" = "Speed Up by %@x";
+"menu.speed_down" = "Speed Down by %@x";
 "menu.volume_up" = "音量 + %.0f%%";
 "menu.volume_down" = "音量 - %.0f%%";
 "menu.audio_delay_up" = "音频延迟 + %.1f秒";

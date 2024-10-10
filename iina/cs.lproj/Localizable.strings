@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "Používáte verzi %@ aplikace IINA";
 "initial.beta.desc" = "Pokud se chcete vrátit k vydané verzi, zrušte výběr „Dostávat beta aktualizace“ v Nastavení > Obecné, a nainstalujte stabilní verzi z naší <a href=\"https://iina.io\">oficiální webové stránky</a>.";
-"initial.nightly.desc" = "Noční sestavení nejsou doporučena pro každodenní použití. V současné době nepodporují automatické aktualizace. Stáhněte si ručně novější sestavení z naší <a href=\"https://nightly.iina.io\">noční webové stránky</a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Ladící sestavení obvykle nejsou optimalizována pro výkon, nejsou tedy doporučena pro každodenní použití. Ladící sestavení nepodporují automatické aktualizace.";
 "initial.bug_report" = "Nahlaste na <a href=\"https://github.com/iina/iina/issues\">GitHub</a>.";
 
@@ -50,6 +50,7 @@
 "quicksetting.deinterlace" = "Odebrat prokládání";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Skrýt";
+"quicksetting.reset_speed" = "Reset speed to 1x";
 
 // EQ Presets
 "eq.preset.flat" = "Flat";
@@ -84,7 +85,7 @@
 "osd.pause" = "Pozastaveno";
 "osd.resume" = "Pokračování";
 "osd.volume" = "Hlasitost: %i";
-"osd.speed" = "Rychlost: %.2f×";
+"osd.speed" = "Speed: %@x";
 "osd.aspect" = "Poměr stran: %@";
 "osd.crop" = "Ořez: %@";
 "osd.rotate" = "Otočení: %i°";
@@ -165,10 +166,10 @@
 "preference.sub_override_level.force" = "force";
 "preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "Základní";
-"preference.sub_override_level.yes" = "yes";
+"preference.sub_override_level.yes" = "ano";
 
 "preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
+"preference.sub_override_level.descriptive_text.force" = "Použít všechny styly titulků.";
 "preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
 "preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
 "preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
@@ -189,7 +190,7 @@
 "menu.exit_mini_player" = "Ukončit hudební režim";
 "menu.pause" = "Pozastavit";
 "menu.resume" = "Pokračovat";
-"menu.speed" = "Rychlost: %.2f×";
+"menu.speed" = "Speed: %@x";
 "menu.chapters" = "Zobrazit panel kapitol";
 "menu.hide_chapters" = "Skrýt panel kapitol";
 "menu.playlist" = "Zobrazit panel playlistu";
@@ -203,8 +204,8 @@
 
 "menu.seek_forward" = "Posunout vpřed o %.0f s";
 "menu.seek_backward" = "Posunout vzad o %.0f s";
-"menu.speed_up" = "Zrychlit %.1f×";
-"menu.speed_down" = "Zpomalit %.1f×";
+"menu.speed_up" = "Speed Up by %@x";
+"menu.speed_down" = "Speed Down by %@x";
 "menu.volume_up" = "Hlasitost +%.0f %%";
 "menu.volume_down" = "Hlasitost −%.0f %%";
 "menu.audio_delay_up" = "Zpoždění zvuku +%.1f s";

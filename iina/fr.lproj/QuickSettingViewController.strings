@@ -17,10 +17,10 @@
 "6LO-6y-IsA.title" = "Couleur :";
 
 /* Class = "NSSegmentedCell"; 88M-pi-2Hc.ibShadowedLabels[0] = "Primary Subtitles"; ObjectID = "88M-pi-2Hc"; */
-"88M-pi-2Hc.ibShadowedLabels[0]" = "Primary Subtitles";
+"88M-pi-2Hc.ibShadowedLabels[0]" = "Sous-titres primaires";
 
 /* Class = "NSSegmentedCell"; 88M-pi-2Hc.ibShadowedLabels[1] = "Secondary Subtitles"; ObjectID = "88M-pi-2Hc"; */
-"88M-pi-2Hc.ibShadowedLabels[1]" = "Secondary Subtitles";
+"88M-pi-2Hc.ibShadowedLabels[1]" = "Sous-titres secondaires";
 
 /* Class = "NSButtonCell"; title = "Load External Audio Track…"; ObjectID = "8Ax-5X-osl"; */
 "8Ax-5X-osl.title" = "Ajouter une piste audio externe…";
@@ -122,7 +122,7 @@
 "eDl-Si-LSa.title" = "Contraste :";
 
 /* Class = "NSTabViewItem"; label = "Plugin"; ObjectID = "eE3-9i-hpU"; */
-"eE3-9i-hpU.label" = "Extension";
+"eE3-9i-hpU.label" = "Module externe";
 
 /* Class = "NSTextFieldCell"; title = "Hue:"; ObjectID = "eLh-fu-pMj"; */
 "eLh-fu-pMj.title" = "Teinte :";
@@ -215,13 +215,13 @@
 "UW4-by-XRS.title" = "HDR";
 
 /* Class = "NSMenuItem"; title = "Save the current EQ as a preset…"; ObjectID = "sE0-LN-T8i"; */
-"sE0-LN-T8i.title" = "Save the current EQ as a preset…";
+"sE0-LN-T8i.title" = "Enregistrer l'EQ actuel en tant que pré-réglage…";
 
 /* Class = "NSMenuItem"; title = "Rename the current EQ preset…"; ObjectID = "2tD-0L-UUs"; */
-"2tD-0L-UUs.title" = "Rename the current EQ preset…";
+"2tD-0L-UUs.title" = "Renommer le préréglage EQ actuel…";
 
 /* Class = "NSMenuItem"; title = "Remove the current EQ preset"; ObjectID = "dvI-Rj-7qF"; */
-"dvI-Rj-7qF.title" = "Remove the current EQ preset";
+"dvI-Rj-7qF.title" = "Supprimer le préréglage EQ actuel";
 
 /* Class = "NSMenuItem"; title = "Manual"; ObjectID = "LPh-nJ-GjN"; */
-"LPh-nJ-GjN.title" = "Manual";
+"LPh-nJ-GjN.title" = "Manuel";

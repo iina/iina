@@ -2,79 +2,79 @@
 "0aU-O1-R6G.title" = "Assrt API token:";
 
 /* Class = "NSTextFieldCell"; title = "Online Subtitles:"; ObjectID = "0fB-es-DmV"; */
-"0fB-es-DmV.title" = "Online Subtitles:";
+"0fB-es-DmV.title" = "الترجمة على الإنترنت:";
 
 /* Class = "NSMenuItem"; title = "Top"; ObjectID = "1Tq-5k-o6R"; */
-"1Tq-5k-o6R.title" = "Top";
+"1Tq-5k-o6R.title" = "الأعلى";
 
 /* Class = "NSButtonCell"; title = "Display subtitles in letterboxes while in full screen"; ObjectID = "2XY-Un-0Fg"; */
-"2XY-Un-0Fg.title" = "Display subtitles in letterboxes while in full screen";
+"2XY-Un-0Fg.title" = "عرض الترجمات في مربعات الأحرف أثناء ملئ الشاشة";
 
 /* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "4Tb-Yh-PdP"; */
-"4Tb-Yh-PdP.title" = "Position:";
+"4Tb-Yh-PdP.title" = "الموقع:";
 
 /* Class = "NSMenuItem"; title = "Bottom"; ObjectID = "6i0-Sx-V7F"; */
-"6i0-Sx-V7F.title" = "Bottom";
+"6i0-Sx-V7F.title" = "الأسفل";
 
 /* Class = "NSTextFieldCell"; title = "Subtitles have priority when filename containing:"; ObjectID = "7pf-Kb-TNr"; */
-"7pf-Kb-TNr.title" = "Subtitles have priority when filename containing:";
+"7pf-Kb-TNr.title" = "الترجمات لها أولوية عند اسم الملف المحتوى:";
 
 /* Class = "NSButtonCell"; title = "Scale subtitles with window size"; ObjectID = "8hj-ki-R0h"; */
-"8hj-ki-R0h.title" = "Scale subtitles with window size";
+"8hj-ki-R0h.title" = "تحجيم الترجمة بحجم النافذة";
 
 /* Class = "NSTextFieldCell"; title = "Font spacing:"; ObjectID = "9EP-XB-lyO"; */
-"9EP-XB-lyO.title" = "Font spacing:";
+"9EP-XB-lyO.title" = "تباعد الخط:";
 
 /* Class = "NSTextFieldCell"; title = "Vertical position:"; ObjectID = "9N4-Zg-M7m"; */
-"9N4-Zg-M7m.title" = "Vertical position:";
+"9N4-Zg-M7m.title" = "وضع رأسي:";
 
 /* Class = "NSBox"; title = "Font"; ObjectID = "9pv-1r-nuH"; */
-"9pv-1r-nuH.title" = "Font";
+"9pv-1r-nuH.title" = "الخط";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "ALz-LB-8sf"; */
-"ALz-LB-8sf.title" = "Y:";
+"ALz-LB-8sf.title" = "ص:";
 
 /* Class = "NSBox"; title = "Shadow"; ObjectID = "BgE-Kk-MXC"; */
-"BgE-Kk-MXC.title" = "Shadow";
+"BgE-Kk-MXC.title" = "الظل";
 
 /* Class = "NSButtonCell"; title = "Search online subtitles automatically"; ObjectID = "C3p-uP-8u8"; */
-"C3p-uP-8u8.title" = "Search online subtitles automatically";
+"C3p-uP-8u8.title" = "البحث عن ترجمات على الإنترنت تلقائياً";
 
 /* Class = "NSTextFieldCell"; title = "Font:"; ObjectID = "C4C-XP-i2S"; */
-"C4C-XP-i2S.title" = "Font:";
+"C4C-XP-i2S.title" = "الخط:";
 
 /* Class = "NSTextFieldCell"; title = " X:"; ObjectID = "CdS-9J-f2h"; */
-"CdS-9J-f2h.title" = " X:";
+"CdS-9J-f2h.title" = " س:";
 
 /* Class = "NSTextFieldCell"; title = "Advanced"; ObjectID = "DUA-7H-Yje"; */
 "DUA-7H-Yje.title" = "متقدم";
 
 /* Class = "NSMenuItem"; title = "Right"; ObjectID = "Gie-38-Kk4"; */
-"Gie-38-Kk4.title" = "Right";
+"Gie-38-Kk4.title" = "يمين";
 
 /* Class = "NSTextFieldCell"; title = "OpenSubtitles account:"; ObjectID = "Iax-cc-YIO"; */
-"Iax-cc-YIO.title" = "OpenSubtitles account:";
+"Iax-cc-YIO.title" = "تسجيل الدخول على OpenSubtitles:";
 
 /* Class = "NSTextFieldCell"; title = "Other:"; ObjectID = "LiG-iV-AQK"; */
-"LiG-iV-AQK.title" = "Other:";
+"LiG-iV-AQK.title" = "أخرى:";
 
 /* Class = "NSTextFieldCell"; title = "Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed."; ObjectID = "Luv-2B-9v8"; */
-"Luv-2B-9v8.title" = "Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed.";
+"Luv-2B-9v8.title" = "يتم فصل الدلائل بواسطة الكولون (:). يسمح بrelative paths و wildcards (*) في النهاية مسموحة.";
 
 /* Class = "NSTextFieldCell"; title = "Please enter a comma-separated list of strings."; ObjectID = "Mk1-sv-QB8"; */
-"Mk1-sv-QB8.title" = "Please enter a comma-separated list of strings.";
+"Mk1-sv-QB8.title" = "الرجاء إدخال قائمة مفصولة بفواصل من السلاسل.";
 
 /* Class = "NSTextFieldCell"; title = "Text subtitles:"; ObjectID = "Qda-dp-nhg"; */
 "Qda-dp-nhg.title" = "Text subtitles:";
 
 /* Class = "NSTextFieldCell"; title = "Also search subtitles in following directories:"; ObjectID = "QsS-wD-2hY"; */
-"QsS-wD-2hY.title" = "Also search subtitles in following directories:";
+"QsS-wD-2hY.title" = "ابحث أيضا عن الترجمات في الدلائل التالية:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "SIh-Sv-6XI"; */
 "SIh-Sv-6XI.title" = "اللون:";
 
 /* Class = "NSTextFieldCell"; title = "Download subtitles from:"; ObjectID = "TPK-CJ-HX7"; */
-"TPK-CJ-HX7.title" = "Download subtitles from:";
+"TPK-CJ-HX7.title" = "تحميل الترجمات من:";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "Vbl-Im-3UI"; */
 "Vbl-Im-3UI.title" = "الحجم:";
@@ -86,13 +86,13 @@
 "X7X-18-FJg.title" = "متقدم";
 
 /* Class = "NSMenuItem"; title = "Detect intelligently by IINA"; ObjectID = "XiL-eE-jah"; */
-"XiL-eE-jah.title" = "Detect intelligently by IINA";
+"XiL-eE-jah.title" = "كشف ذكي بواسطة IINA";
 
 /* Class = "NSTextFieldCell"; title = "Default encoding:"; ObjectID = "Y75-4k-2Du"; */
-"Y75-4k-2Du.title" = "Default encoding:";
+"Y75-4k-2Du.title" = "الترميز الافتراضي:";
 
 /* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will work for both mpv and opensubtitles."; ObjectID = "Z2M-dh-eq1"; */
-"Z2M-dh-eq1.title" = "This option will be stored as ISO 639-2 language code and will work for both mpv and opensubtitles.";
+"Z2M-dh-eq1.title" = "سيتم تخزين هذا الخيار كرمز لغة ISO 639-2 وسوف يعمل لكل من الترجمات mpv و OpenSubtitles.";
 
 /* Class = "NSTextFieldCell"; title = "Blur:"; ObjectID = "aO9-D6-KG8"; */
 "aO9-D6-KG8.title" = "طمس:";
@@ -101,79 +101,79 @@
 "cov-Uy-wnc.title" = "لم يتم تسجيل الدخول";
 
 /* Class = "NSTextFieldCell"; title = "Offset:"; ObjectID = "dtP-9o-yhy"; */
-"dtP-9o-yhy.title" = "Offset:";
+"dtP-9o-yhy.title" = "إزاحة:";
 
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "e0e-dB-Ir6"; */
-"e0e-dB-Ir6.title" = "Center";
+"e0e-dB-Ir6.title" = "الوسط";
 
 /* Class = "NSTextFieldCell"; title = "Background:"; ObjectID = "eYO-c0-Rjp"; */
-"eYO-c0-Rjp.title" = "Background:";
+"eYO-c0-Rjp.title" = "الخلفية:";
 
 /* Class = "NSBox"; title = "Other Styles"; ObjectID = "egf-g3-b7a"; */
-"egf-g3-b7a.title" = "Other Styles";
+"egf-g3-b7a.title" = "أنماط أخرى";
 
 /* Class = "NSTextFieldCell"; title = "Override level:"; ObjectID = "gAq-Vr-hRY"; */
-"gAq-Vr-hRY.title" = "Override level:";
+"gAq-Vr-hRY.title" = "تجاوز المستوى:";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "gkc-qt-sD9"; */
 "gkc-qt-sD9.title" = "الحجم:";
 
 /* Class = "NSButtonCell"; title = "Bold"; ObjectID = "hEk-7E-10r"; */
-"hEk-7E-10r.title" = "Bold";
+"hEk-7E-10r.title" = "عريض";
 
 /* Class = "NSBox"; title = "Align"; ObjectID = "kvJ-Tj-KMb"; */
-"kvJ-Tj-KMb.title" = "Align";
+"kvJ-Tj-KMb.title" = "محاذاة";
 
 /* Class = "NSTextFieldCell"; title = " X:"; ObjectID = "l7l-ZO-W79"; */
-"l7l-ZO-W79.title" = " X:";
+"l7l-ZO-W79.title" = " س:";
 
 /* Class = "NSTextFieldCell"; title = "ASS subtitles:"; ObjectID = "mFm-Q6-aja"; */
 "mFm-Q6-aja.title" = "ASS subtitles:";
 
 /* Class = "NSButtonCell"; title = "Choose…"; ObjectID = "nH7-kO-S15"; */
-"nH7-kO-S15.title" = "Choose…";
+"nH7-kO-S15.title" = "اختر…";
 
 /* Class = "NSButtonCell"; title = "Italic"; ObjectID = "pNF-Fw-QtW"; */
-"pNF-Fw-QtW.title" = "Italic";
+"pNF-Fw-QtW.title" = "خط مائل";
 
 /* Class = "NSBox"; title = "Margin"; ObjectID = "pRe-wv-VVi"; */
-"pRe-wv-VVi.title" = "Margin";
+"pRe-wv-VVi.title" = "الهامش";
 
 /* Class = "NSTextFieldCell"; title = "Auto load:"; ObjectID = "raf-Yu-ck0"; */
 "raf-Yu-ck0.title" = "Auto load:";
 
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "slU-Ox-aeF"; */
-"slU-Ox-aeF.title" = "Center";
+"slU-Ox-aeF.title" = "الوسط";
 
 /* Class = "NSBox"; title = "Border"; ObjectID = "t5n-mc-dss"; */
-"t5n-mc-dss.title" = "Border";
+"t5n-mc-dss.title" = "الحدود";
 
 /* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "u31-eV-Arr"; */
-"u31-eV-Arr.title" = "Disabled";
+"u31-eV-Arr.title" = "معطل";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "vDc-dw-liI"; */
 "vDc-dw-liI.title" = "اللون:";
 
 /* Class = "NSTextFieldCell"; title = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues."; ObjectID = "vYb-qH-XkH"; */
-"vYb-qH-XkH.title" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues.";
+"vYb-qH-XkH.title" = "إذا تم تمكينه، فسيبحث IINA تلقائيا عن الترجمات عبر الإنترنت فقط عن مقاطع الفيديو بدون ترجمات محملة وأطول من 20 دقيقة.";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "xGf-fF-4Hx"; */
-"xGf-fF-4Hx.title" = "Y:";
+"xGf-fF-4Hx.title" = "ص:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "xid-E9-FC9"; */
 "xid-E9-FC9.title" = "اللون:";
 
 /* Class = "NSMenuItem"; title = "Subtitles containing media filename"; ObjectID = "y1E-JR-KRI"; */
-"y1E-JR-KRI.title" = "Subtitles containing media filename";
+"y1E-JR-KRI.title" = "الترجمة التي تحتوي على اسم ملف الوسائط";
 
 /* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "zaE-bH-XfT"; */
 "zaE-bH-XfT.title" = "اللغة المفضلة:";
 
 /* Class = "NSMenuItem"; title = "Left"; ObjectID = "zml-kt-LN8"; */
-"zml-kt-LN8.title" = "Left";
+"zml-kt-LN8.title" = "يسار";
 
 /* Class = "NSSegmentedCell"; liY-E6-HCB.ibShadowedLabels[0] = "Primary Subtitles"; ObjectID = "liY-E6-HCB"; */
-"liY-E6-HCB.ibShadowedLabels[0]" = "Primary Subtitles";
+"liY-E6-HCB.ibShadowedLabels[0]" = "الترجمات الرئيسية";
 
 /* Class = "NSSegmentedCell"; liY-E6-HCB.ibShadowedLabels[1] = "Secondary Subtitles"; ObjectID = "liY-E6-HCB"; */
-"liY-E6-HCB.ibShadowedLabels[1]" = "Secondary Subtitles";
+"liY-E6-HCB.ibShadowedLabels[1]" = "الترجمة الثانوية";

@@ -16,8 +16,8 @@
 "general.username" = "שם משתמש";
 "general.password" = "סיסמה";
 
-"input.value_is_empty" = "Value cannot be empty.";
-"input.already_exists" = "Value already exists.";
+"input.value_is_empty" = "הערך לא יכול להיות ריק.";
+"input.already_exists" = "הערך כבר קיים.";
 
 // Guide Window
 "guide.highlights" = "נקודות עיקריות";
@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "אתה משתמש בגרסת %@ של IINA";
 "initial.beta.desc" = "אם ברצונך לחזור לגרסה הרגילה, הסר את הסימון \"קבל עדכוני בטא\" בהגדרות > כללי, והתקן את הגרסה הרגילה מ<a href=\"https://iina.io\">האתר הרשמי</a> שלנו.";
-"initial.nightly.desc" = "בניה לילית לא מומלצת לשימוש יומיומי. כרגע, בנייה לילית לא תומכת בעדכון אוטומטי. אנא הורד באופן ידני בניה עדכנית מ<a href=\"https://nightly.iina.io\">האתר</a> שלנו.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "בניית ניפוי באגים בדרך כלל אינה מותאמת לטובת ביצועים, ולכן אינה מומלצת לשימוש יומיומי. בניית ניפוי באגים לא תומכת בעדכון אוטומטי.";
 "initial.bug_report" = "דווח באמצעות <a href=\"https://github.com/iina/iina/issues\">בעיות GitHub</a>.";
 
@@ -50,6 +50,7 @@
 "quicksetting.deinterlace" = "ביטול שזירה";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "הסתר";
+"quicksetting.reset_speed" = "Reset speed to 1x";
 
 // EQ Presets
 "eq.preset.flat" = "שטוח";
@@ -76,15 +77,15 @@
 "eq.preset.spoken_word" = "קריינות";
 
 "alert.eq.new_profile.title" = "פרופיל אקולייזר חדש";
-"alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Currnet Profile";
+"alert.eq.new_profile.message" = "אנא הזן שם לפרופיל.";
+"alert.eq.rename.title" = "שנה את שם הפרופיל הקיים";
 "alert.eq.rename.message" = "Please enter a new profile name.";
 
 // OSDMessage.swift
 "osd.pause" = "מושהה";
 "osd.resume" = "התחדש";
 "osd.volume" = "עוצמת שמע: %i";
-"osd.speed" = "מהירות: x%.2f";
+"osd.speed" = "Speed: %@x";
 "osd.aspect" = "יחס גובה-רוחב: %@";
 "osd.crop" = "חיתוך: %@";
 "osd.rotate" = "הטיה: %i°";
@@ -136,9 +137,9 @@
 "osd.timed_out" = "Timed Out";
 "osd.filter_added" = "נוסף מסנן: %@";
 "osd.filter_removed" = "המסנן הוסר";
-"osd.file_loop" = "חזרה על קובץ בודד";
-"osd.playlist_loop" = "חזרה על רשימת השמעה";
-"osd.no_loop" = "השבת חזרה";
+"osd.file_loop" = "חזרה על הקובץ הנוכחי";
+"osd.playlist_loop" = "חזרה על רשימת ההשמעה";
+"osd.no_loop" = "חזרה מושבתת";
 
 "preference.title" = "העדפות";
 "preference.general" = "כללי";
@@ -168,7 +169,7 @@
 "preference.sub_override_level.yes" = "מאופשרת";
 
 "preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
+"preference.sub_override_level.descriptive_text.force" = "החל את כל סגנונות הכתוביות.";
 "preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
 "preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
 "preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
@@ -189,7 +190,7 @@
 "menu.exit_mini_player" = "צא ממצב מוזיקה";
 "menu.pause" = "השהיה";
 "menu.resume" = "המשך";
-"menu.speed" = "מהירות: x%.2f";
+"menu.speed" = "Speed: %@x";
 "menu.chapters" = "הצג פאנל פרקים";
 "menu.hide_chapters" = "הסתר פאנל פרקים";
 "menu.playlist" = "הצג פאנל רשימת השמעה";
@@ -203,8 +204,8 @@
 
 "menu.seek_forward" = "דלג קדימה %.0f שניות";
 "menu.seek_backward" = "חזרה %.0f שניות אחורה";
-"menu.speed_up" = "הגבר מהירות ב%.1fx";
-"menu.speed_down" = "הפחת מהירות ב%.1fx";
+"menu.speed_up" = "Speed Up by %@x";
+"menu.speed_down" = "Speed Down by %@x";
 "menu.volume_up" = "הגבר עוצמת שמע ב%.0f%";
 "menu.volume_down" = "הפחת עוצמת שמע ב%.0f%";
 "menu.audio_delay_up" = "עיכוב שמע: הוסף %.1f שניות";

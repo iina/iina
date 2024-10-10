@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "Şu an IINA'nın %@ BETA sürümünü kullanıyorsunuz";
 "initial.beta.desc" = "Lütfen “Ayarlar > Genel” sekmesinden “Beta güncellemeleri al” seçeneğini kapatın ve <a href=\"https://iina.io\">resmi sitemizden</a> kararlı son sürümü indirin.";
-"initial.nightly.desc" = "Test edilmemiş sürümlerin günlük olarak kullanılması tavsiye edilmez. Şu anda test edilmemiş sürümler otomatik güncellemeyi desteklemiyor. Lütfen daha yeni test edilmemiş sürümleri <a href=\"https://nightly.iina.io\">test edilmemiş sürümler web sitemizden</a> manuel olarak indirin.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Hata ayıklama amaçlı derlenmiş sürümler genellikle performans açısından optimize edilmediğinden günlük olarak kullanılması önerilmez. Hata ayıklama amaçlı sürümler otomatik güncellemeyi desteklemez.";
 "initial.bug_report" = "<a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>. web sitesine raporlayabilirsiniz.";
 
@@ -50,6 +50,7 @@
 "quicksetting.deinterlace" = "Taramasızlık";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Gizle";
+"quicksetting.reset_speed" = "Reset speed to 1x";
 
 // EQ Presets
 "eq.preset.flat" = "Flat";
@@ -84,7 +85,7 @@
 "osd.pause" = "Duraklat";
 "osd.resume" = "Sürdür";
 "osd.volume" = "Ses Yüksekliği: %i";
-"osd.speed" = "Hız: %.2fx";
+"osd.speed" = "Speed: %@x";
 "osd.aspect" = "En-Boy Oranı: %@";
 "osd.crop" = "Kırp: %@";
 "osd.rotate" = "Döndür: %i°";
@@ -189,7 +190,7 @@
 "menu.exit_mini_player" = "Müzik Modundan Çık";
 "menu.pause" = "Duraklat";
 "menu.resume" = "Sürdür";
-"menu.speed" = "Hız: %.2fx";
+"menu.speed" = "Speed: %@x";
 "menu.chapters" = "Bölümler Panelini Göster";
 "menu.hide_chapters" = "Bölümler Panelini Gizle";
 "menu.playlist" = "Oynatma Listesi Paneli";
@@ -203,8 +204,8 @@
 
 "menu.seek_forward" = "%.0f sn İleriye Sar";
 "menu.seek_backward" = "%.0f sn Geriye Sar";
-"menu.speed_up" = "%.1fx Hızlandır";
-"menu.speed_down" = "%.1fx Yavaşlat";
+"menu.speed_up" = "Speed Up by %@x";
+"menu.speed_down" = "Speed Down by %@x";
 "menu.volume_up" = "Ses Seviyesi + %.0f%%";
 "menu.volume_down" = "Ses Seviyesi - %.0f%%";
 "menu.audio_delay_up" = "Ses Gecikmesi + %.1f sn";

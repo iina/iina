@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "You are using a %@ version of IINA";
 "initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as daily drive. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
 "initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
 
@@ -50,6 +50,7 @@
 "quicksetting.deinterlace" = "Lomituksenpoisto";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Piilota";
+"quicksetting.reset_speed" = "Reset speed to 1x";
 
 // EQ Presets
 "eq.preset.flat" = "Flat";
@@ -84,7 +85,7 @@
 "osd.pause" = "Tauko";
 "osd.resume" = "Jatka";
 "osd.volume" = "Äänenvoimakkuus: %i";
-"osd.speed" = "Nopeus: %.2fx";
+"osd.speed" = "Speed: %@x";
 "osd.aspect" = "Kuvasuhde: %@";
 "osd.crop" = "Rajaus: %@";
 "osd.rotate" = "Kierto: %i°";
@@ -189,7 +190,7 @@
 "menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Tauko";
 "menu.resume" = "Jatka";
-"menu.speed" = "Nopeus: %.2fx";
+"menu.speed" = "Speed: %@x";
 "menu.chapters" = "Näytä lukupaneeli";
 "menu.hide_chapters" = "Hide Chapters Panel";
 "menu.playlist" = "Näytä soittolistan paneeli";
@@ -203,8 +204,8 @@
 
 "menu.seek_forward" = "Astu eteenpäin %.0fs";
 "menu.seek_backward" = "Siirry taaksepäin %.0fs";
-"menu.speed_up" = "Nopeuden nosto %.1fx";
-"menu.speed_down" = "Nopeuden lasku %.1fx";
+"menu.speed_up" = "Speed Up by %@x";
+"menu.speed_down" = "Speed Down by %@x";
 "menu.volume_up" = "Äänenvoimakkuus + %.0f%%";
 "menu.volume_down" = "Äänenvoimakkuus - %.0f%%";
 "menu.audio_delay_up" = "Äänen viive + %.1fs";

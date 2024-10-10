@@ -14,13 +14,13 @@
 "JDA-g3-RNX.title" = "فتح سجل الدليل";
 
 /* Class = "NSButtonCell"; title = "Enable logging to file"; ObjectID = "LCd-uY-Yze"; */
-"LCd-uY-Yze.title" = "Enable logging";
+"LCd-uY-Yze.title" = "تمكين التسجيل إلى الملف";
 
 /* Class = "NSButtonCell"; title = "Choose directory…"; ObjectID = "MRT-u8-xTX"; */
 "MRT-u8-xTX.title" = "اختر المجلد...";
 
 /* Class = "NSTextFieldCell"; title = "Settings"; ObjectID = "Qmc-Tb-d7d"; */
-"Qmc-Tb-d7d.title" = "الاعدادات";
+"Qmc-Tb-d7d.title" = "الإعدادات";
 
 /* Class = "NSTableColumn"; headerCell.title = "Value"; ObjectID = "SX9-fy-bss"; */
 "SX9-fy-bss.headerCell.title" = "القيمة";
@@ -35,7 +35,7 @@
 "nFf-vh-bNd.title" = "Log level:";
 
 /* Class = "NSButtonCell"; title = "Show log viewer"; ObjectID = "Owx-92-Ogg"; */
-"Owx-92-Ogg.title" = "Show log viewer";
+"Owx-92-Ogg.title" = "إظهار عارض السجل";
 
 /* Class = "NSMenuItem"; title = "Verbose"; ObjectID = "S9M-yY-q0w"; */
 "S9M-yY-q0w.title" = "Verbose";

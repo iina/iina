@@ -16,8 +16,8 @@
 "general.username" = "Meno používateľa";
 "general.password" = "Heslo";
 
-"input.value_is_empty" = "Value cannot be empty.";
-"input.already_exists" = "Value already exists.";
+"input.value_is_empty" = "Hodnota nemôže byť prázdna.";
+"input.already_exists" = "Hodnota už existuje.";
 
 // Guide Window
 "guide.highlights" = "Novinky";
@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "Používate %@ beta verziu aplikácie IINA";
 "initial.beta.desc" = "Odškrtnite \"Sťahovať beta aktualizácie\" v Nastavenia - Všeobecné a nainštalujte stabilnú verziu z našej <a href=\"https://iina.io\">oficiálnej stránky</a>.";
-"initial.nightly.desc" = "Nočné zostavenia nie sú odporúčané pre každodenné použitie. V súčasnej dobe nepodporujú automatické aktualizácie. Stiahnite si ručne novšie zostavenie z našej <a href=\"https://nightly.iina.io\">nočnej webovej stránky</a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Ladiace zostavenie obvykle nie sú optimalizované pre výkon, nie sú teda odporúčané pre každodenné použitie. Ladiaci zostavenie nepodporujú automatické aktualizácie.";
 "initial.bug_report" = "Nahláste na <a href=\"https://github.com/iina/iina/issues\">GitHub</a>.";
 
@@ -50,41 +50,42 @@
 "quicksetting.deinterlace" = "Deinterlace";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Skryť";
+"quicksetting.reset_speed" = "Reset speed to 1x";
 
 // EQ Presets
-"eq.preset.flat" = "Flat";
-"eq.preset.acoustic" = "Acoustic";
-"eq.preset.classical" = "Classical";
-"eq.preset.dance" = "Dance";
-"eq.preset.deep" = "Deep";
-"eq.preset.electronic" = "Electronic";
-"eq.preset.hip_hop" = "Hip Hop";
-"eq.preset.increase_bass" = "Increase Bass";
-"eq.preset.increase_treble" = "Increase Treble";
-"eq.preset.increase_vocal" = "Increase Vocal";
+"eq.preset.flat" = "Plochá";
+"eq.preset.acoustic" = "Akustická";
+"eq.preset.classical" = "Klasická";
+"eq.preset.dance" = "Tanečná";
+"eq.preset.deep" = "Hlboká";
+"eq.preset.electronic" = "Elektronická";
+"eq.preset.hip_hop" = "Hip-Hop";
+"eq.preset.increase_bass" = "Zvýšenie basov";
+"eq.preset.increase_treble" = "Zvýšenie výšok";
+"eq.preset.increase_vocal" = "Zvýšenie hlasu";
 "eq.preset.jazz" = "Jazz";
-"eq.preset.latin" = "Latin";
-"eq.preset.loundness" = "Loundness";
+"eq.preset.latin" = "Latinčina";
+"eq.preset.loundness" = "Hlasitosť";
 "eq.preset.lounge" = "Lounge";
-"eq.preset.piano" = "Piano";
+"eq.preset.piano" = "Klavírna";
 "eq.preset.pop" = "Pop";
 "eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reduce Bass";
-"eq.preset.reduce_treble" = "Reduce Treble";
+"eq.preset.reduce_bass" = "Zníženie basov";
+"eq.preset.reduce_treble" = "Zníženie výšok";
 "eq.preset.rock" = "Rock";
-"eq.preset.small_speaker" = "Small Speaker";
-"eq.preset.spoken_word" = "Spoken Word";
+"eq.preset.small_speaker" = "Malý reproduktor ";
+"eq.preset.spoken_word" = "Hovorové slovo";
 
-"alert.eq.new_profile.title" = "New EQ Profile";
-"alert.eq.new_profile.message" = "Please enter a profile name.";
+"alert.eq.new_profile.title" = "Nový EQ profil";
+"alert.eq.new_profile.message" = "Prosím, zadajte meno profilu.";
 "alert.eq.rename.title" = "Rename Currnet Profile";
-"alert.eq.rename.message" = "Please enter a new profile name.";
+"alert.eq.rename.message" = "Zadajte nové meno profilu.";
 
 // OSDMessage.swift
 "osd.pause" = "Pozastaviť";
 "osd.resume" = "Pokračovať";
 "osd.volume" = "Hlasitosť: %i";
-"osd.speed" = "Rýchlosť: %.2f x";
+"osd.speed" = "Speed: %@x";
 "osd.aspect" = "Pomer strán: %@";
 "osd.crop" = "Orezať: %@";
 "osd.rotate" = "Otočiť: %i°";
@@ -99,7 +100,7 @@
 "osd.subtitle_pos" = "Umiestnenie titulkov: %.1f";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
+"osd.sub_second_delay.nodelay" = "Oneskorenie sekundárnych titulkov: bez oneskorenia";
 "osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
 "osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
 "osd.sub_second_hidden" = "Secondary Subtitles Hidden";
@@ -124,8 +125,8 @@
 "osd.find_online_sub" = "Hľadám titulky na internete…";
 "osd.find_online_sub.source" = "na";
 "osd.sub_not_found" = "Titulky nenájdené";
-"osd.sub_found" = "%d subtitles found.";
-"osd.sub_downloading" = "Downloading %d subtitles";
+"osd.sub_found" = "Nájdených %d titulkov.";
+"osd.sub_downloading" = "Sťahovanie %d titulkov";
 "osd.sub_downloaded" = "Titulky stiahnuté";
 "osd.sub_saved" = "Titulky uložené";
 "osd.network_error" = "Problém so sieťou";
@@ -161,15 +162,15 @@
 
 "preference.enable_adv_settings" = "Povoliť pokročilé nastavenia";
 
-"preference.sub_override_level.no" = "no";
-"preference.sub_override_level.force" = "force";
-"preference.sub_override_level.scale" = "scale";
+"preference.sub_override_level.no" = "nie";
+"preference.sub_override_level.force" = "sila";
+"preference.sub_override_level.scale" = "veľkosť";
 "preference.sub_override_level.strip" = "Základný";
-"preference.sub_override_level.yes" = "yes";
+"preference.sub_override_level.yes" = "áno";
 
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
+"preference.sub_override_level.descriptive_text.no" = "Vykresli titulky podľa špecifikácie skriptov titulkov bez prepísania.";
+"preference.sub_override_level.descriptive_text.force" = "Použiť všetky štýly titulkov.";
+"preference.sub_override_level.descriptive_text.scale" = "Okrem nastavení štýlu v tejto časti použite aj nastavenie mierky.";
 "preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
 "preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
 
@@ -189,7 +190,7 @@
 "menu.exit_mini_player" = "Ukončiť režim pre hudbu";
 "menu.pause" = "Pozastaviť";
 "menu.resume" = "Pokračovať";
-"menu.speed" = "Rýchlosť: %.2fx";
+"menu.speed" = "Speed: %@x";
 "menu.chapters" = "Zobraziť panel s kapitolami";
 "menu.hide_chapters" = "Skryť panel s kapitolami";
 "menu.playlist" = "Zobraziť panel playlistu";
@@ -203,8 +204,8 @@
 
 "menu.seek_forward" = "Posunúť dopredu %.0f s";
 "menu.seek_backward" = "Posunúť dozadu %.0f s";
-"menu.speed_up" = "Zrýchliť na %.1fx";
-"menu.speed_down" = "Spomaliť na %.1fx";
+"menu.speed_up" = "Speed Up by %@x";
+"menu.speed_down" = "Speed Down by %@x";
 "menu.volume_up" = "Hlasitosť +%.0f%%";
 "menu.volume_down" = "Hlasitosť -%.0f%%";
 "menu.audio_delay_up" = "Posunutie zvuku +%.1f s";

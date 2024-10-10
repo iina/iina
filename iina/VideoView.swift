@@ -485,12 +485,11 @@ extension VideoView {
 
     guard player.info.hdrEnabled else { return nil }
 
-    if videoLayer.colorspace?.name == name {
-      logHDR("HDR mode already enabled, skipping")
-      return true
-    }
+    logHDR("Using HDR color space instead of ICC profile")
 
-    logHDR("Will activate HDR color space instead of using ICC profile")
+    if videoLayer.colorspace?.name != name {
+      videoLayer.colorspace = CGColorSpace(name: name!)
+    }
 
     videoLayer.colorspace = CGColorSpace(name: name!)
     mpv.setString(MPVOption.GPURendererOptions.iccProfile, "")

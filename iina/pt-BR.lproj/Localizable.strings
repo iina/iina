@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "Você está usando uma versão %@ do IINA";
 "initial.beta.desc" = "Se quiser reverter para uma versão oficial, desmarque a opção \"receber atualizações beta\" em Configurações > Geral e instale uma versão estável do nosso <a href=\"https://iina.io\">site oficial</a>.";
-"initial.nightly.desc" = "Compilações noturnas não são recomendadas para uso diário. Atualmente as compilações noturnas não suportam a atualização automática. Por favor, baixe manualmente versões mais recentes do nosso <a href=\"https://nightly.iina.io\">site noturno</a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Compilações de depuração geralmente não são otimizadas para desempenho, então não são recomendadas para uso diário. Compilações de depuração não suportam atualização automática.";
 "initial.bug_report" = "Denuncie via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
 
@@ -50,6 +50,7 @@
 "quicksetting.deinterlace" = "Desentrelaçar";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Esconder";
+"quicksetting.reset_speed" = "Reset speed to 1x";
 
 // EQ Presets
 "eq.preset.flat" = "Flat";
@@ -84,7 +85,7 @@
 "osd.pause" = "Em Pausa";
 "osd.resume" = "Reproduzindo";
 "osd.volume" = "Volume: %i";
-"osd.speed" = "Velocidade: %.2fx";
+"osd.speed" = "Speed: %@x";
 "osd.aspect" = "Proporção: %@";
 "osd.crop" = "Cortar: %@";
 "osd.rotate" = "Rotacionar: %i°";
@@ -177,7 +178,7 @@
 "menu.volume_muted" = "Volume: %d (Mudo)";
 "menu.audio_delay" = "Atraso de Áudio: %.2fs";
 "menu.sub_delay" = "Atraso de Legenda: %.2fs";
-"menu.sub_hide" = "Hide Subtitles";
+"menu.sub_hide" = "Ocultar legenda";
 "menu.sub_show" = "Show Subtitles";
 "menu.sub_second_hide" = "Hide Secondary Subtitles";
 "menu.sub_second_show" = "Show Secondary Subtitles";
@@ -189,7 +190,7 @@
 "menu.exit_mini_player" = "Sair Modo Música";
 "menu.pause" = "Pausar";
 "menu.resume" = "Reproduzir";
-"menu.speed" = "Velocidade: %.2fx";
+"menu.speed" = "Speed: %@x";
 "menu.chapters" = "Mostrar Capitulos";
 "menu.hide_chapters" = "Ocultar Painel de Capítulos";
 "menu.playlist" = "Mostrar painel de playlist";
@@ -203,8 +204,8 @@
 
 "menu.seek_forward" = "Ir adiante %.0fs";
 "menu.seek_backward" = "Ir pra trás %.0fs";
-"menu.speed_up" = "Aumentar velocidade em %.1fx";
-"menu.speed_down" = "Reduzir velocidade em %.1fx";
+"menu.speed_up" = "Speed Up by %@x";
+"menu.speed_down" = "Speed Down by %@x";
 "menu.volume_up" = "Volume + %.0f%%";
 "menu.volume_down" = "Volume - %.0f%%";
 "menu.audio_delay_up" = "Atraso de Áudio + %.1fs";

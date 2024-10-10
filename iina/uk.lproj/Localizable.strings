@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "Ви користуєтеся %@ версією IINA";
 "initial.beta.desc" = "Зніміть відмітку «Отримувати бета-оновлення» через Параметри → Загальні та встановіть стабільну версію з нашого <a href=\"https://iina.io\">офіційного веб-сайту</a>.";
-"initial.nightly.desc" = "Нічні збірки не рекомендуються для щоденного використання. На даний час нічні збірки не підтримують автоматичного оновлення. Будь ласка, завантажте найновішу збірку вручну з нашого <a href=\"https://nightly.iina.io\">веб-сайту нічних збірок</a>.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Збірки налагодження зазвичай не остаточно оптимізовані, тому не рекомендуються для щоденного використання. Збірки налагодження не підтримують автоматичне оновлення.";
 "initial.bug_report" = "Повідомити через <a href=\"https://github.com/iina/iina/issues\">GitHub проблеми</a>.";
 
@@ -50,6 +50,7 @@
 "quicksetting.deinterlace" = "Черезрядкова розгортка";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Сховати";
+"quicksetting.reset_speed" = "Reset speed to 1x";
 
 // EQ Presets
 "eq.preset.flat" = "Плоско";
@@ -84,7 +85,7 @@
 "osd.pause" = "Пауза";
 "osd.resume" = "Відновити";
 "osd.volume" = "Гучність: %i";
-"osd.speed" = "Швидкість: %.2fx";
+"osd.speed" = "Speed: %@x";
 "osd.aspect" = "Пропорції: %@";
 "osd.crop" = "Обрізання: %@";
 "osd.rotate" = "Обертання: %i°";
@@ -161,17 +162,17 @@
 
 "preference.enable_adv_settings" = "Увімкнути розширені налаштування";
 
-"preference.sub_override_level.no" = "no";
+"preference.sub_override_level.no" = "ні";
 "preference.sub_override_level.force" = "сила";
 "preference.sub_override_level.scale" = "масштаб";
 "preference.sub_override_level.strip" = "видалити";
 "preference.sub_override_level.yes" = "так";
 
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
+"preference.sub_override_level.descriptive_text.no" = "Відображати субтитри, як зазначені в сценарії субтитрів, без змін.";
+"preference.sub_override_level.descriptive_text.force" = "Застосувати всі стилі субтитрів.";
+"preference.sub_override_level.descriptive_text.scale" = "Застосувати налаштування масштабування на додаток до стилів в цьому розділі.";
+"preference.sub_override_level.descriptive_text.strip" = "Радикально вилучати всі теги ASS та стилі з субтитрів.";
+"preference.sub_override_level.descriptive_text.yes" = "Застосувати всі параметри стилів у цьому розділі.";
 
 "menu.volume" = "Гучність: %d";
 "menu.volume_muted" = "Гучність: %d (Без звуку)";
@@ -189,7 +190,7 @@
 "menu.exit_mini_player" = "Вийти з музичного режиму";
 "menu.pause" = "Пауза";
 "menu.resume" = "Відновити";
-"menu.speed" = "Швидкість: %.2fx";
+"menu.speed" = "Speed: %@x";
 "menu.chapters" = "Показати панель розділів";
 "menu.hide_chapters" = "Приховати панель розділів";
 "menu.playlist" = "Показати панель плейлиста";
@@ -203,8 +204,8 @@
 
 "menu.seek_forward" = "Крок уперед на %.0f с";
 "menu.seek_backward" = "Крок назад на %.0f с";
-"menu.speed_up" = "Прискорити до %.1fx";
-"menu.speed_down" = "Сповільнити до %.1fx";
+"menu.speed_up" = "Speed Up by %@x";
+"menu.speed_down" = "Speed Down by %@x";
 "menu.volume_up" = "Гучність +%.0f% %";
 "menu.volume_down" = "Гучність –%.0f% %";
 "menu.audio_delay_up" = "Затримка звуку на +%.1f с";
@@ -254,8 +255,8 @@
 "alert.config.file_existing.message" = "Файл конфігурації з такою самою назвою вже існує. Натисніть OK, щоб показати файл у Finder.";
 "alert.config.cannot_create" = "Не можу створити файл налаштувань!\n%@";
 "alert.config.cannot_write" = "Не можу записати у файл налаштувань!";
-"alert.config.rename.title" = "Rename Input Configuration";
-"alert.config.rename.message" = "Please enter the new name for the configuration.";
+"alert.config.rename.title" = "Перейменувати налаштування вводу";
+"alert.config.rename.message" = "Будь ласка, введіть нове ім'я для налаштування.";
 
 "alert.filter.incorrect" = "Помилка при застосуванні фільтрів. Будь ласка, перевірте формат параметрів.";
 "alert.add_filter.title" = "Новий фільтр";

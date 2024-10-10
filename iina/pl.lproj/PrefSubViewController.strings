@@ -155,7 +155,7 @@
 "vDc-dw-liI.title" = "Kolor:";
 
 /* Class = "NSTextFieldCell"; title = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues."; ObjectID = "vYb-qH-XkH"; */
-"vYb-qH-XkH.title" = "Jeśli włączone to IINA będzie automatycznie szukać napisów w sieci tylko dla wideo bez wczytanych napisów i dłuższych niż 20 minut";
+"vYb-qH-XkH.title" = "Jeśli włączone to IINA będzie automatycznie szukać napisów w sieci tylko dla wideo bez wczytanych napisów i dłuższych niż 20 minut.";
 
 /* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "xGf-fF-4Hx"; */
 "xGf-fF-4Hx.title" = "Y:";
@@ -176,4 +176,4 @@
 "liY-E6-HCB.ibShadowedLabels[0]" = "Primary Subtitles";
 
 /* Class = "NSSegmentedCell"; liY-E6-HCB.ibShadowedLabels[1] = "Secondary Subtitles"; ObjectID = "liY-E6-HCB"; */
-"liY-E6-HCB.ibShadowedLabels[1]" = "Secondary Subtitles";
+"liY-E6-HCB.ibShadowedLabels[1]" = "Dodatkowe napisy";

@@ -53,7 +53,7 @@
 "wjt-O6-KbC.title" = "優先言語:";
 
 /* Class = "NSButtonCell"; title = "Load ICC profile"; ObjectID = "3g4-jW-uJd"; */
-"3g4-jW-uJd.title" = "ICCプロファイルを読み込む中";
+"3g4-jW-uJd.title" = "ICCプロファイルを読み込む";
 
 /* Class = "NSTextFieldCell"; title = "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"; ObjectID = "M2M-of-gjd"; */
 "M2M-of-gjd.title" = "現在のディスプレイのICCプロファイルをロードし、ビデオRGBをスクリーン出力に変換するために使用します。(SDRモードの場合のみ)";
@@ -128,7 +128,7 @@
 "m2n-yd-a4n.title" = "ファイルにリプレイゲインタグがない場合に適用するゲイン";
 
 /* Class = "NSTextFieldCell"; title = "Audio driver:"; ObjectID = "Zco-Ba-Idk"; */
-"Zco-Ba-Idk.title" = "Audio driver:";
+"Zco-Ba-Idk.title" = "オーディオドライバー:";
 
 /* Class = "NSTextFieldCell"; title = "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."; ObjectID = "2Md-pv-gSi"; */
-"2Md-pv-gSi.title" = "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays.";
+"2Md-pv-gSi.title" = "AVFoundation は、空間オーディオをサポートする新しい実験的なオーディオドライバですが、オーディオの遅延などの問題が発生する可能性があります。";

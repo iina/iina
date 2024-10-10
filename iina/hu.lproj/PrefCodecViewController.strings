@@ -1,8 +1,8 @@
 /* Class = "NSMenuItem"; title = "Auto (Copy)"; ObjectID = "0DK-uZ-duj"; */
-"0DK-uZ-duj.title" = "Auto (Másolás)";
+"0DK-uZ-duj.title" = "Automatikus (Másolás)";
 
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "2yO-To-el7"; */
-"2yO-To-el7.title" = "Alapértelmezett: 0 (Auto)";
+"2yO-To-el7.title" = "Alapértelmezett: 0 (Automatikus)";
 
 /* Class = "NSTextFieldCell"; title = "Maximum volume:"; ObjectID = "44m-ge-naq"; */
 "44m-ge-naq.title" = "Maximum hang:";
@@ -11,10 +11,10 @@
 "50C-1R-wlJ.title" = "Szálak száma:";
 
 /* Class = "NSButtonCell"; title = "Force dedicated GPU"; ObjectID = "YUr-aJ-xfC"; */
-"YUr-aJ-xfC.title" = "Dedikált GPU kényszeritése";
+"YUr-aJ-xfC.title" = "Dedikált GPU kényszerítése";
 
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "bxW-np-SGm"; */
-"bxW-np-SGm.title" = "Alapértelmezett: 0 (Auto)";
+"bxW-np-SGm.title" = "Alapértelmezett: 0 (Automatikus)";
 
 /* Class = "NSTextFieldCell"; title = "(100-1000)"; ObjectID = "cJP-ep-847"; */
 "cJP-ep-847.title" = "(100-1000)";
@@ -23,7 +23,7 @@
 "g4c-vG-URh.title" = "Kezdeti hang:";
 
 /* Class = "NSTextFieldCell"; title = "Always use the dedicated GPU for rendering (if exists). This can improve performance but may result in poor battery life."; ObjectID = "gCv-sJ-uQJ"; */
-"gCv-sJ-uQJ.title" = "Mindig a dedikált GPU-t használja a megjelenítéshez (ha létezik). Ez javíthatja a teljesítményt, de csökkentheti az akkumulátor élettartamát.";
+"gCv-sJ-uQJ.title" = "Mindig a dedikált GPU-t használja a rendereléshez (ha van ilyen). Ez javíthatja a teljesítményt, de csökkentheti az akkumulátor élettartamát.";
 
 /* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
 "m5P-5f-5uo.title" = "Videó:";
@@ -35,7 +35,7 @@
 "rFu-rL-EJC.title" = "Kikapcsolva";
 
 /* Class = "NSTextFieldCell"; title = "Preferred audio device:"; ObjectID = "sLR-vV-xn2"; */
-"sLR-vV-xn2.title" = "Preferált audio eszköz:";
+"sLR-vV-xn2.title" = "Előnyben részesített audioeszköz:";
 
 /* Class = "NSTextFieldCell"; title = "Audio:"; ObjectID = "sV5-dL-MUt"; */
 "sV5-dL-MUt.title" = "Hang:";
@@ -56,25 +56,25 @@
 "3g4-jW-uJd.title" = "ICC-profil betöltése";
 
 /* Class = "NSTextFieldCell"; title = "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"; ObjectID = "M2M-of-gjd"; */
-"M2M-of-gjd.title" = "ICC-profil betöltése a jelenlegi megjelenítőre, és videó-RGB konvertálásra való alkalmazása. (Kizárólag SDR-mód esetén)";
+"M2M-of-gjd.title" = "Betölti az aktuális kijelző ICC-profilját, és használja azt a videó RGB átalakításához a képernyő kimenetére. (Csak SDR módban)";
 
 /* Class = "NSButtonCell"; title = "Enable HDR support"; ObjectID = "R7Z-9c-vPJ"; */
-"R7Z-9c-vPJ.title" = "HDR-támogatás bekapcsolása";
+"R7Z-9c-vPJ.title" = "HDR-támogatás engedélyezése";
 
 /* Class = "NSTextFieldCell"; title = "Enable HDR mode by default when playing HDR videos."; ObjectID = "ZgQ-bc-yEE"; */
-"ZgQ-bc-yEE.title" = "HDR-mód alapértelmezett alkalmazása HDR-videó lejátszásakor.";
+"ZgQ-bc-yEE.title" = "HDR-videók lejátszásakor alapértelmezés szerint engedélyezi a HDR módot.";
 
 /* Class = "NSButtonCell"; title = "Enable tone mapping"; ObjectID = "a5Y-gU-JTj"; */
-"a5Y-gU-JTj.title" = "Színtónus kiosztás";
+"a5Y-gU-JTj.title" = "Tónustérképezés engedélyezése";
 
 /* Class = "NSTextFieldCell"; title = "Enable tone mapping images onto the display"; ObjectID = "mNn-cb-IVw"; */
-"mNn-cb-IVw.title" = "Színtónus kiosztási képek megjelenítése a kijelzőn";
+"mNn-cb-IVw.title" = "A képek tónustérképezésének engedélyezése a kijelzőn";
 
 /* Class = "NSTextFieldCell"; title = "Target peak:"; ObjectID = "xVk-OA-kOf"; */
-"xVk-OA-kOf.title" = "Célérték:";
+"xVk-OA-kOf.title" = "Célcsúcs:";
 
 /* Class = "NSTextFieldCell"; title = "nits"; ObjectID = "baO-xy-7hD"; */
-"baO-xy-7hD.title" = "nit";
+"baO-xy-7hD.title" = "nits";
 
 /* Class = "NSTextFieldCell"; title = "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."; ObjectID = "aTt-aZ-rjK"; */
 "aTt-aZ-rjK.title" = "A kijelző fényerejének mért csúcsa. Amennyiben 0, az IINA felismeri ezt az értéket. Amennyiben a felismerés sikertelen, az IINA a célértéket 400-ra állítja.";
@@ -128,7 +128,7 @@
 "m2n-yd-a4n.title" = "Az alkalmazandó erősítés, ha a fájlban nincsenek ReplayGain címkék.";
 
 /* Class = "NSTextFieldCell"; title = "Audio driver:"; ObjectID = "Zco-Ba-Idk"; */
-"Zco-Ba-Idk.title" = "Audio driver:";
+"Zco-Ba-Idk.title" = "Audioeszköz:";
 
 /* Class = "NSTextFieldCell"; title = "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."; ObjectID = "2Md-pv-gSi"; */
-"2Md-pv-gSi.title" = "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays.";
+"2Md-pv-gSi.title" = "Az AVFoundation egy új, kísérleti hangillesztőprogram, amely Spatial Audio támogatást kínál. Az AVFoundation használata során azonban előfordulhatnak problémák, például hangkésések.";

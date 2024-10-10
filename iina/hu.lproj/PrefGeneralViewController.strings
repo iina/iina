@@ -38,7 +38,7 @@
 "Ez8-qY-WAZ.title" = "Naponta";
 
 /* Class = "NSButtonCell"; title = "Pause"; ObjectID = "FbF-jJ-W5b"; */
-"FbF-jJ-W5b.title" = "Pause (Megállít)";
+"FbF-jJ-W5b.title" = "Szünet";
 
 /* Class = "NSTextFieldCell"; title = "When media is opened:"; ObjectID = "GNV-VA-NBW"; */
 "GNV-VA-NBW.title" = "A média megnyitásakor:";
@@ -53,19 +53,19 @@
 "JfZ-D8-aF2.title" = "Ne csináljon semmit";
 
 /* Class = "NSButtonCell"; title = "Black out other monitors while in full screen"; ObjectID = "KYi-0W-zOr"; */
-"KYi-0W-zOr.title" = "Más monitorok elsötéttíése teljes képernyős használat közben";
+"KYi-0W-zOr.title" = "Más monitorok elsötétítése teljes képernyőn";
 
 /* Class = "NSTextFieldCell"; title = "Still prevents system from sleeping."; ObjectID = "Kdk-iC-e1C"; */
 "Kdk-iC-e1C.title" = "Még mindig megakadályozza a rendszer elalvását.";
 
 /* Class = "NSButtonCell"; title = "Switch to \"music mode\" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
-"KfL-r7-Uav.title" = "Audiofájl lejátszásakor váltson automatikusan \"zene\" módba";
+"KfL-r7-Uav.title" = "Automatikus váltás „zenei módra” hangfájl lejátszásakor";
 
 /* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
 "Lac-Ol-g6E.title" = "Következő automatikus lejátszása";
 
 /* Class = "NSButtonCell"; title = "Always open media in new window"; ObjectID = "M0z-bI-88d"; */
-"M0z-bI-88d.title" = "Minding új ablakban nyisd meg";
+"M0z-bI-88d.title" = "Mindig új ablakban nyissa meg a médiát";
 
 /* Class = "NSButtonCell"; title = "Enter fullscreen"; ObjectID = "MlG-hl-goB"; */
 "MlG-hl-goB.title" = "Váltás teljes képernyőre";
@@ -158,7 +158,7 @@
 "z9T-8h-1T0.title" = "Üdvözlő ablak megjelenítése";
 
 /* Class = "NSButtonCell"; title = "When a file is opened manually:"; ObjectID = "jok-kc-HjX"; */
-"jok-kc-HjX.title" = "When a file is opened manually:";
+"jok-kc-HjX.title" = "Ha egy fájlt kézzel nyit meg:";
 
 /* Class = "NSMenuItem"; title = "Loop playlist"; ObjectID = "5WC-Sp-6mg"; */
 "5WC-Sp-6mg.title" = "Loop playlist";

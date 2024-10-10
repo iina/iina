@@ -50,6 +50,7 @@
 "quicksetting.deinterlace" = "Деинтерлейсинг";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Скрыть";
+"quicksetting.reset_speed" = "Reset speed to 1x";
 
 // EQ Presets
 "eq.preset.flat" = "Без коррекции";
@@ -84,7 +85,7 @@
 "osd.pause" = "Пауза";
 "osd.resume" = "Возобновить";
 "osd.volume" = "Громкость: %i";
-"osd.speed" = "Скорость: %.2f×";
+"osd.speed" = "Speed: %@x";
 "osd.aspect" = "Соотношение сторон: %@";
 "osd.crop" = "Кадрирование: %@";
 "osd.rotate" = "Поворот: %i°";
@@ -162,16 +163,16 @@
 "preference.enable_adv_settings" = "Включить расширенные настройки";
 
 "preference.sub_override_level.no" = "no";
-"preference.sub_override_level.force" = "принудительно";
-"preference.sub_override_level.scale" = "масштаб";
-"preference.sub_override_level.strip" = "игнорировать все теги и стили в .ass";
-"preference.sub_override_level.yes" = "вкл";
+"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.scale" = "scale";
+"preference.sub_override_level.strip" = "strip";
+"preference.sub_override_level.yes" = "yes";
 
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
+"preference.sub_override_level.descriptive_text.no" = "Показывать субтитры как задано в ASS, без переопределения пользователем.";
+"preference.sub_override_level.descriptive_text.force" = "Применить все стили, переопределяющие субтитры.";
+"preference.sub_override_level.descriptive_text.scale" = "Применить все стили субтитров, заданные в данном разделе, а также масштабирование шрифта.";
+"preference.sub_override_level.descriptive_text.strip" = "Игнорировать все стили и теги в субтитрах ASS.";
+"preference.sub_override_level.descriptive_text.yes" = "Применить все стили субтитров, заданные в данном разделе.";
 
 "menu.volume" = "Громкость: %d";
 "menu.volume_muted" = "Громкость: %d (без звука)";
@@ -189,7 +190,7 @@
 "menu.exit_mini_player" = "Выйти из музыкального режима";
 "menu.pause" = "Пауза";
 "menu.resume" = "Возобновить";
-"menu.speed" = "Скорость: %.2fx";
+"menu.speed" = "Speed: %@x";
 "menu.chapters" = "Показать панель глав";
 "menu.hide_chapters" = "Скрыть панель глав";
 "menu.playlist" = "Показать панель плейлиста";
@@ -203,8 +204,8 @@
 
 "menu.seek_forward" = "Шаг вперед %.0f с";
 "menu.seek_backward" = "Шаг назад %.0f с";
-"menu.speed_up" = "Повысить скорость до %.1fx";
-"menu.speed_down" = "Снизить скорость до %.1fx";
+"menu.speed_up" = "Speed Up by %@x";
+"menu.speed_down" = "Speed Down by %@x";
 "menu.volume_up" = "Громкость + %.0f%%";
 "menu.volume_down" = "Громкость - %.0f%%";
 "menu.audio_delay_up" = "Задержка аудио + %.1f с";

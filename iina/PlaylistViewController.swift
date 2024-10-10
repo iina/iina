@@ -650,7 +650,6 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   }
 
   @IBAction func contextMenuPlayInNewWindow(_ sender: NSMenuItem) {
-
     let files = {
       self.player.info.$playlist.withLock { playlist in
         self.selectedRows!.enumerated().map { (_, i) in

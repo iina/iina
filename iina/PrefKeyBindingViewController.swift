@@ -35,6 +35,7 @@ class PrefKeyBindingViewController: PreferenceViewController, PreferenceWindowEm
     "mpv Default": "input",
     "VLC Default": "vlc-default-input",
     "Movist Default": "movist-default-input",
+    "Movist v2 Default": "movist-v2-default-input",
   ]
 
   let fallbackDefault = "IINA Default"

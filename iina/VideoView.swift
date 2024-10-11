@@ -487,10 +487,6 @@ extension VideoView {
 
     logHDR("Using HDR color space instead of ICC profile")
 
-    if videoLayer.colorspace?.name != name {
-      videoLayer.colorspace = CGColorSpace(name: name!)
-    }
-
     videoLayer.colorspace = CGColorSpace(name: name!)
     mpv.setString(MPVOption.GPURendererOptions.iccProfile, "")
     mpv.setString(MPVOption.GPURendererOptions.targetPrim, primaries)

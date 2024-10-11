@@ -229,7 +229,15 @@ class PlaybackInfo {
     }
   }
 
-  var playlist: [MPVPlaylistItem] = []
+  /// Copy of the mpv playlist.
+  /// - Important: Obtaining video duration, playback progress, and metadata for files in the playlist can be a slow operation, so a
+  ///     background task is used and the results are cached. Thus the playlist must be protected with a lock as well as the cache.
+  ///     To avoid the need to lock multiple locks the cache properties are always accessed while holding the playlist lock. The cache
+  ///     properties are private to force all access to be through class methods that properly coordinate thread access.
+  @Atomic var playlist: [MPVPlaylistItem] = []
+  private var cachedVideoDurationAndProgress: [String: (duration: Double?, progress: Double?)] = [:]
+  private var cachedMetadata: [String: (title: String?, album: String?, artist: String?)] = [:]
+
   var chapters: [MPVChapter] = []
   var chapter = 0
 
@@ -240,18 +248,8 @@ class PlaybackInfo {
   var currentSubsInfo: [FileInfo] = []
   var currentVideosInfo: [FileInfo] = []
 
-  // The cache is read by the main thread and updated by a background thread therefore all use
-  // must be through the class methods that properly coordinate thread access.
-  private var cachedVideoDurationAndProgress: [String: (duration: Double?, progress: Double?)] = [:]
-  private var cachedMetadata: [String: (title: String?, album: String?, artist: String?)] = [:]
-
-  // Queue dedicated to providing serialized access to class data shared between threads.
-  // Data is accessed by the main thread, therefore the QOS for the queue must not be too low
-  // to avoid blocking the main thread for an extended period of time.
-  private let lockQueue = DispatchQueue(label: "IINAPlaybackInfoLock", qos: .userInitiated)
-
   func calculateTotalDuration() -> Double? {
-    lockQueue.sync {
+    $playlist.withLock { playlist in
       var totalDuration: Double? = 0
       for p in playlist {
         if let duration = cachedVideoDurationAndProgress[p.filename]?.duration {
@@ -266,7 +264,7 @@ class PlaybackInfo {
   }
 
   func calculateTotalDuration(_ indexes: IndexSet) -> Double {
-    lockQueue.sync {
+    $playlist.withLock { playlist in
       indexes
         .compactMap { cachedVideoDurationAndProgress[playlist[$0].filename]?.duration }
         .compactMap { $0 > 0 ? $0 : 0 }
@@ -274,32 +272,55 @@ class PlaybackInfo {
     }
   }
 
+  /// Return the cached duration and progress for the given file if present in the cache.
+  /// - Parameter file: File to return the duration and progress for.
+  /// - Returns: A tuple containing the duration and progress if found in the cache, otherwise `nil`.
+  /// - Important: To avoid the need to lock multiple locks the cache properties are always accessed while holding the playlist lock.
   func getCachedVideoDurationAndProgress(_ file: String) -> (duration: Double?, progress: Double?)? {
-    lockQueue.sync {
+    $playlist.withLock { _ in
       cachedVideoDurationAndProgress[file]
     }
   }
 
+  /// Store the given duration for the given file in the cache.
+  /// - Parameters:
+  ///   - file: File to store the duration for.
+  ///   - duration: The duration of the file.
+  /// - Important: To avoid the need to lock multiple locks the cache properties are always accessed while holding the playlist lock.
   func setCachedVideoDuration(_ file: String, _ duration: Double) {
-    lockQueue.sync {
+    $playlist.withLock { _ in
       cachedVideoDurationAndProgress[file]?.duration = duration
     }
   }
 
+  /// Store the given duration and progress for the given file in the cache.
+  /// - Parameters:
+  ///   - file: File to store the duration and progress for.
+  ///   - value: A tuple containing the duration and progress for the file.
+  /// - Important: To avoid the need to lock multiple locks the cache properties are always accessed while holding the playlist lock.
   func setCachedVideoDurationAndProgress(_ file: String, _ value: (duration: Double?, progress: Double?)) {
-    lockQueue.sync {
+    $playlist.withLock { _ in
       cachedVideoDurationAndProgress[file] = value
     }
   }
 
+  /// Return the cached metadata for the given file if present in the cache.
+  /// - Parameter file: File to return the metadata for.
+  /// - Returns: A tuple containing the title, album and artist if found in the cache, otherwise `nil`.
+  /// - Important: To avoid the need to lock multiple locks the cache properties are always accessed while holding the playlist lock.
   func getCachedMetadata(_ file: String) -> (title: String?, album: String?, artist: String?)? {
-    lockQueue.sync {
+    $playlist.withLock { _ in
       cachedMetadata[file]
     }
   }
 
+  /// Store the given metadata for the given file in the cache.
+  /// - Parameters:
+  ///   - file: File to store the title, album and artist for.
+  ///   - value: A tuple containing the duration and progress for the file.
+  /// - Important: To avoid the need to lock multiple locks the cache properties are always accessed while holding the playlist lock.
   func setCachedMetadata(_ file: String, _ value: (title: String?, album: String?, artist: String?)) {
-    lockQueue.sync {
+    $playlist.withLock { _ in
       cachedMetadata[file] = value
     }
   }

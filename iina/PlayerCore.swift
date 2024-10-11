@@ -1322,8 +1322,8 @@ class PlayerCore: NSObject {
     for path in paths {
       _addToPlaylist(path)
     }
-    if index <= info.playlist.count && index >= 0 {
-      let previousCount = info.playlist.count
+    let previousCount = info.$playlist.withLock { $0.count }
+    if index <= previousCount && index >= 0 {
       for i in 0..<paths.count {
         playlistMove(previousCount + i, to: index + i)
       }
@@ -2496,14 +2496,16 @@ class PlayerCore: NSObject {
   }
 
   func getPlaylist() {
-    info.playlist.removeAll()
-    let playlistCount = mpv.getInt(MPVProperty.playlistCount)
-    for index in 0..<playlistCount {
-      let playlistItem = MPVPlaylistItem(filename: mpv.getString(MPVProperty.playlistNFilename(index))!,
-                                         isCurrent: mpv.getFlag(MPVProperty.playlistNCurrent(index)),
-                                         isPlaying: mpv.getFlag(MPVProperty.playlistNPlaying(index)),
-                                         title: mpv.getString(MPVProperty.playlistNTitle(index)))
-      info.playlist.append(playlistItem)
+    info.$playlist.withLock { playlist in
+      playlist.removeAll()
+      let playlistCount = mpv.getInt(MPVProperty.playlistCount)
+      for index in 0..<playlistCount {
+        let playlistItem = MPVPlaylistItem(filename: mpv.getString(MPVProperty.playlistNFilename(index))!,
+                                           isCurrent: mpv.getFlag(MPVProperty.playlistNCurrent(index)),
+                                           isPlaying: mpv.getFlag(MPVProperty.playlistNPlaying(index)),
+                                           title: mpv.getString(MPVProperty.playlistNTitle(index)))
+        playlist.append(playlistItem)
+      }
     }
   }
 

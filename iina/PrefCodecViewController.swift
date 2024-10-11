@@ -110,8 +110,6 @@ class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbedda
     hwdecDescriptionTextField.stringValue = hwdec.localizedDescription
   }
 
-  // TODO: add "auto" option instead of 0 value
-  // TODO: add option to support "inf"
   @IBAction func toneMappingTargetPeakAction(_ sender: NSTextField) {
     let newValue = sender.integerValue
     // constrain to valid mpv values

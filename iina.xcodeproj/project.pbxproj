@@ -311,8 +311,10 @@
 		B4E4470125CE3F930069F06E /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = B4E4470025CE3F930069F06E /* Sparkle */; };
 		C789872F1E34EF170005769F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C78987311E34EF170005769F /* InfoPlist.strings */; };
 		D17504A82918F13E005C3DD0 /* OSCToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17504A72918F13E005C3DD0 /* OSCToolbarButton.swift */; };
+		D17B857B2C94C8B5002A8EDE /* movist-v2-default-input.conf in Copy Configs */ = {isa = PBXBuildFile; fileRef = D1F68E742C6ABC22003D1208 /* movist-v2-default-input.conf */; };
 		D1A4D98A2B1495270009AB4E /* LegacyMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A4D9892B1495270009AB4E /* LegacyMigration.swift */; };
 		D1B4E24E2A3AFC9100E36F1D /* MiniPlayerWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B4E24D2A3AFC9100E36F1D /* MiniPlayerWindow.swift */; };
+		D1F68E752C6ABC22003D1208 /* movist-v2-default-input.conf in Resources */ = {isa = PBXBuildFile; fileRef = D1F68E742C6ABC22003D1208 /* movist-v2-default-input.conf */; };
 		E301EFDA21312AB300BC8588 /* KeychainAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = E301EFD921312AB300BC8588 /* KeychainAccess.swift */; };
 		E30D2EBD21F5FD2600E1FF0D /* PluginOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30D2EBC21F5FD2600E1FF0D /* PluginOverlayView.swift */; };
 		E322A4F820A8442E00C67D32 /* PlaylistPlaybackProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E322A4F720A8442E00C67D32 /* PlaylistPlaybackProgressView.swift */; };
@@ -535,6 +537,7 @@
 			dstSubfolderSpec = 7;
 			files = (
 				846DD8CA1FB39B2500991A81 /* movist-default-input.conf in Copy Configs */,
+				D17B857B2C94C8B5002A8EDE /* movist-v2-default-input.conf in Copy Configs */,
 				846654941F4EEBE300C91B8C /* vlc-default-input.conf in Copy Configs */,
 				84A886EF1E269E67008755BB /* iina-default-input.conf in Copy Configs */,
 				844D72EF1E056E1400522E5E /* input.conf in Copy Configs */,
@@ -1765,6 +1768,7 @@
 		D17504A72918F13E005C3DD0 /* OSCToolbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSCToolbarButton.swift; sourceTree = "<group>"; };
 		D1A4D9892B1495270009AB4E /* LegacyMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyMigration.swift; sourceTree = "<group>"; };
 		D1B4E24D2A3AFC9100E36F1D /* MiniPlayerWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayerWindow.swift; sourceTree = "<group>"; };
+		D1F68E742C6ABC22003D1208 /* movist-v2-default-input.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "movist-v2-default-input.conf"; sourceTree = "<group>"; };
 		D27556FC1EC6E1C300CAB2A4 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/HistoryWindowController.strings"; sourceTree = "<group>"; };
 		D27E35CE1E379B6D0064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainMenu.strings"; sourceTree = "<group>"; };
 		D27E35CF1E379B6D0064BE57 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainWindowController.strings"; sourceTree = "<group>"; };
@@ -2608,6 +2612,7 @@
 				84E745D81DFDE8C100588DED /* input.conf */,
 				846654921F4EEA5500C91B8C /* vlc-default-input.conf */,
 				846DD8C81FB39A9800991A81 /* movist-default-input.conf */,
+				D1F68E742C6ABC22003D1208 /* movist-v2-default-input.conf */,
 			);
 			name = config;
 			path = iina/config;
@@ -2951,6 +2956,7 @@
 			files = (
 				8400D5E71E1AB337006785F5 /* PrefKeyBindingViewController.xib in Resources */,
 				E3DBD23F218EF4F100B3AFBF /* AboutWindowContributorAvatarItem.xib in Resources */,
+				D1F68E752C6ABC22003D1208 /* movist-v2-default-input.conf in Resources */,
 				C789872F1E34EF170005769F /* InfoPlist.strings in Resources */,
 				E32712B224F2B8CA00359DAB /* ScreenshootOSDView.xib in Resources */,
 				8400D5DB1E1AB326006785F5 /* FontPickerWindowController.xib in Resources */,

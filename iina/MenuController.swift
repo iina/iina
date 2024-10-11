@@ -431,9 +431,11 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updatePlaylist() {
     playlistMenu.removeAllItems()
-    for (index, item) in PlayerCore.active.info.playlist.enumerated() {
-      playlistMenu.addItem(withTitle: item.filenameForDisplay, action: #selector(MainMenuActionHandler.menuPlaylistItem(_:)),
-                           tag: index, obj: nil, stateOn: item.isCurrent)
+    PlayerCore.active.info.$playlist.withLock { playlist in
+      for (index, item) in playlist.enumerated() {
+        playlistMenu.addItem(withTitle: item.filenameForDisplay, action: #selector(MainMenuActionHandler.menuPlaylistItem(_:)),
+                             tag: index, obj: nil, stateOn: item.isCurrent)
+      }
     }
   }
 

@@ -31,10 +31,11 @@ class MainMenuActionHandler: NSResponder, NSMenuItemValidation {
     Utility.quickSavePanel(title: "Save to playlist", types: ["m3u8"], sheetWindow: player.currentWindow) { (url) in
       if url.isFileURL {
         var playlist = ""
-        for item in self.player.info.playlist {
-          playlist.append((item.filename + "\n"))
+        self.player.info.$playlist.withLock {
+          for item in $0 {
+            playlist.append((item.filename + "\n"))
+          }
         }
-
         do {
           try playlist.write(to: url, atomically: true, encoding: String.Encoding.utf8)
         } catch let error as NSError {

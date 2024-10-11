@@ -838,7 +838,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       }
 
       // enqueue
-      if let enqueueValue = queryDict["enqueue"], enqueueValue == "1", !PlayerCore.lastActive.info.playlist.isEmpty {
+      let playlistEmpty = PlayerCore.lastActive.info.$playlist.withLock { $0.isEmpty }
+      if let enqueueValue = queryDict["enqueue"], enqueueValue == "1", !playlistEmpty {
         PlayerCore.lastActive.addToPlaylist(urlValue)
         PlayerCore.lastActive.postNotification(.iinaPlaylistChanged)
         PlayerCore.lastActive.sendOSD(.addToPlaylist(1))

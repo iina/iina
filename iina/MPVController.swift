@@ -1270,7 +1270,7 @@ class MPVController: NSObject {
 
     case MPVOption.Audio.mute:
       guard let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee else {
-        logPropertyValueError(MPVOption.Video.videoRotate, property.format)
+        logPropertyValueError(MPVOption.Audio.mute, property.format)
         break
       }
       DispatchQueue.main.async { [self] in
@@ -1662,7 +1662,7 @@ class MPVController: NSObject {
   /// - Parameter property: Name of the property whose value changed.
   /// - Parameter format: Format of the value contained in the property change event.
   private func logPropertyValueError(_ property: String, _ format: mpv_format) {
-    guard property != MPVProperty.videoParamsRotate, format != MPV_FORMAT_NONE else { return }
+    guard property != MPVProperty.videoParamsRotate || format != MPV_FORMAT_NONE else { return }
     log("""
       Value of property \(property) in the property change event could not be converted from
       \(format) to the expected type

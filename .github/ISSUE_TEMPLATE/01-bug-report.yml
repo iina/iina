@@ -1,6 +1,5 @@
 name: "Report an Issue"
 description: "Create a report for an issue or a bug"
-labels: ["bug"]
 body:
 - type: markdown
   attributes:
@@ -59,24 +58,28 @@ body:
 
 - type: textarea
   attributes:
-    label: Crash Report
+    label: Crash Report or Process Sample
     render: text
-    description: If you're reporting a crash, please drag and drop the trace log file below. You can find these in ~/Library/Logs/DiagnosticReports/; the filename should prefixed with IINA and include the crash time.
-    placeholder: Drag and drop the log file here; do not paste the content directly.
+    description: If you're reporting a crash, please drag and drop the trace log file below. You can find these in ~/Library/Logs/DiagnosticReports/; the filename should prefixed with IINA and include the crash time. If you are reporting a hang (IINA stops responding) please generate a process sample and drag and drop the file below.
+    placeholder: Drag and drop the crash report or process sample file here; do not paste the content directly.
+- type: markdown
+    value: For more information see the FAQ question: [How to collect a process sample when reporting an issue?](https://github.com/iina/iina/wiki/FAQ#how-to-collect-a-process-sample-when-reporting-an-issue)
 
 - type: textarea
   attributes:
     label: Logs
     render: text
-    description: Please provide the log if applicable when after reproducing the issue. If you haven't done so already, you can enable logging in Preferences > Advanced.
-    placeholder: Drag and drop the log file here; do not paste the content directly.
+    description: If applicable, please provide the log files after reproducing the issue. If you haven't done so already, you can enable logging in Settings > Advanced.
+    placeholder: Drag and drop the iina.log and mpv.log files here; do not paste the content directly.
+- type: markdown
+    value: For more information see the FAQ question: [How to collect log files when reporting an issue?](https://github.com/iina/iina/wiki/FAQ#how-to-collect-log-files-when-reporting-an-issue)
 
 - type: textarea
   attributes:
     label: Sample Files
     render: text
-    description: If the issue or bug is related to a specific file/file type (including subtitles), please provide sample files for us to reproduce. Please zip into one file if there are multiple files. For small files, just drag and drop into the text field below. For larger files, please consider uploading to file hosting services which can be freely accessible by us (e.g. Google Drive, iCloud Drive, etc).
-    placeholder: Drag and drop the sample files, or paste the link of the files.
+    description: If the issue or bug is related to a specific file/file type (including subtitles), please provide sample files for us to reproduce. Please zip into one file if there are multiple files. For small files, just drag and drop into the text field below. If GitHub reports the file type is not supported, put the file in a zip archive. For larger files, please consider uploading to file hosting services which can be freely accessible by us (e.g. Google Drive, iCloud Drive, etc).
+    placeholder: Drag and drop any sample files, or paste the link to the files.
 
 - type: input
   attributes:
@@ -87,15 +90,14 @@ body:
 - type: checkboxes
   attributes:
     label: |
-      Required actions
+      Required Actions
     options:
       - label: I tried my best to search from the existing issues (including closed issues) and didn't find duplicated issues.
         required: true
 - type: checkboxes
   attributes:
     label: |
-      Optional actions
+      Optional Actions
     options:
       - label: I tested with the Nightly build and confirmed the issue is not fixed.
       - label: I tested with the latest version of mpv and confirmed mpv doesn't have this issue.
-      

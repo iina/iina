@@ -64,7 +64,7 @@ body:
     placeholder: Drag and drop the crash report or process sample file here; do not paste the content directly.
 - type: markdown
   attributes:
-    value: For more information see the FAQ question: [How to collect a process sample when reporting an issue?](https://github.com/iina/iina/wiki/FAQ#how-to-collect-a-process-sample-when-reporting-an-issue)
+    value: "For more information see the FAQ question: [How to collect a process sample when reporting an issue?](https://github.com/iina/iina/wiki/FAQ#how-to-collect-a-process-sample-when-reporting-an-issue)"
 
 - type: textarea
   attributes:
@@ -74,7 +74,7 @@ body:
     placeholder: Drag and drop the iina.log and mpv.log files here; do not paste the content directly.
 - type: markdown
   attributes:
-    value: For more information see the FAQ question: [How to collect log files when reporting an issue?](https://github.com/iina/iina/wiki/FAQ#how-to-collect-log-files-when-reporting-an-issue)
+    value: "For more information see the FAQ question: [How to collect log files when reporting an issue?](https://github.com/iina/iina/wiki/FAQ#how-to-collect-log-files-when-reporting-an-issue)"
 
 - type: textarea
   attributes:

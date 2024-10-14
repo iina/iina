@@ -48,6 +48,10 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   internal lazy var verticalScrollAction: Preference.ScrollAction = Preference.enum(for: .verticalScrollAction)
   
   internal var observedPrefKeys: [Preference.Key] = [
+    .enableToneMapping,
+    .toneMappingTargetPeak,
+    .loadIccProfile,
+    .toneMappingAlgorithm,
     .themeMaterial,
     .showRemainingTime,
     .alwaysFloatOnTop,
@@ -68,6 +72,11 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     guard let keyPath = keyPath, let change = change else { return }
     
     switch keyPath {
+    case PK.enableToneMapping.rawValue,
+      PK.toneMappingTargetPeak.rawValue,
+      PK.loadIccProfile.rawValue,
+      PK.toneMappingAlgorithm.rawValue:
+      videoView.refreshEdrMode()
     case PK.themeMaterial.rawValue:
       if let newValue = change[.newKey] as? Int {
         setMaterial(Preference.Theme(rawValue: newValue))

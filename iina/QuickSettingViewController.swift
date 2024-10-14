@@ -1124,8 +1124,9 @@ extension QuickSettingViewController: NSMenuDelegate {
         userEQs[inputString] = newProfile
         menuNeedsUpdate(eqPopUpButton.menu!)
         eqPopUpButton.select(findItem(inputString))
+        lastUsedProfileName = inputString
       } else {
-        eqPopUpButton.select(findItem(lastUsedProfileName))
+        eqPopUpButton.selectItem(withTag: eqCustomMenuItemTag)
       }
     case eqRenameMenuItemTag:
       if let inputString = promptAudioEQProfileName(isNewProfile: false) {
@@ -1133,6 +1134,7 @@ extension QuickSettingViewController: NSMenuDelegate {
         userEQs[inputString] = profile
         menuNeedsUpdate(eqPopUpButton.menu!)
         eqPopUpButton.select(findItem(inputString))
+        lastUsedProfileName = inputString
       } else {
         eqPopUpButton.select(findItem(lastUsedProfileName))
       }

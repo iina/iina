@@ -54,27 +54,21 @@ body:
     label: Actual Behavior
     render: text
   validations:
-    reuiqred: true
+    required: true
 
 - type: textarea
   attributes:
     label: Crash Report or Process Sample
     render: text
-    description: If you're reporting a crash, please drag and drop the trace log file below. You can find these in ~/Library/Logs/DiagnosticReports/; the filename should prefixed with IINA and include the crash time. If you are reporting a hang (IINA stops responding) please generate a process sample and drag and drop the file below.
+    description: "If you're reporting a crash, please drag and drop the trace log file below. You can find these in ~/Library/Logs/DiagnosticReports/; the filename should prefixed with IINA and include the crash time. If you are reporting a hang (IINA stops responding) please generate a process sample and drag and drop the file below. For more information see the FAQ question: [How to collect a process sample when reporting an issue?](https://github.com/iina/iina/wiki/FAQ#how-to-collect-a-process-sample-when-reporting-an-issue)"
     placeholder: Drag and drop the crash report or process sample file here; do not paste the content directly.
-- type: markdown
-  attributes:
-    value: "For more information see the FAQ question: [How to collect a process sample when reporting an issue?](https://github.com/iina/iina/wiki/FAQ#how-to-collect-a-process-sample-when-reporting-an-issue)"
 
 - type: textarea
   attributes:
     label: Logs
     render: text
-    description: If applicable, please provide the log files after reproducing the issue. If you haven't done so already, you can enable logging in Settings > Advanced.
+    description: "If applicable, please provide the log files after reproducing the issue. If you haven't done so already, you can enable logging in Settings > Advanced. For more information see the FAQ question: [How to collect log files when reporting an issue?](https://github.com/iina/iina/wiki/FAQ#how-to-collect-log-files-when-reporting-an-issue)"
     placeholder: Drag and drop the iina.log and mpv.log files here; do not paste the content directly.
-- type: markdown
-  attributes:
-    value: "For more information see the FAQ question: [How to collect log files when reporting an issue?](https://github.com/iina/iina/wiki/FAQ#how-to-collect-log-files-when-reporting-an-issue)"
 
 - type: textarea
   attributes:

@@ -442,12 +442,15 @@ extension VideoView {
     guard let mpv = player.mpv else { return false }
 
     guard let primaries = mpv.getString(MPVProperty.videoParamsPrimaries), let gamma = mpv.getString(MPVProperty.videoParamsGamma) else {
-      logHDR("HDR primaries and gamma not available")
+      logHDR("Video gamma and primaries not available")
       return false
     }
   
     let peak = mpv.getDouble(MPVProperty.videoParamsSigPeak)
-    logHDR("HDR gamma=\(gamma), primaries=\(primaries), sig_peak=\(peak)")
+    logHDR("Video gamma=\(gamma), primaries=\(primaries), sig_peak=\(peak)")
+
+    // HDR videos use a Hybrid Log Gamma (HLG) or a Perceptual Quantization (PQ) transfer function.
+    guard gamma == "hlg" || gamma == "pq" else { return false }
 
     var name: CFString? = nil
     switch primaries {
@@ -471,7 +474,7 @@ extension VideoView {
       return false // SDR
 
     default:
-      logHDR("Unknown HDR color space information gamma=\(gamma) primaries=\(primaries)", level: .warning)
+      logHDR("Unsupported color space: gamma=\(gamma) primaries=\(primaries)", level: .warning)
       return false
     }
 
@@ -524,7 +527,7 @@ extension VideoView {
       let algorithm = Preference.ToneMappingAlgorithmOption(rawValue: Preference.integer(for: .toneMappingAlgorithm))?.mpvString
         ?? Preference.ToneMappingAlgorithmOption.defaultValue.mpvString
 
-      logHDR("Will enable tone mapping target-peak=\(targetPeak) algorithm=\(algorithm)")
+      logHDR("Will enable tone mapping: target-peak=\(targetPeak) algorithm=\(algorithm)")
       mpv.setInt(MPVOption.GPURendererOptions.targetPeak, targetPeak)
       mpv.setString(MPVOption.GPURendererOptions.toneMapping, algorithm)
     } else {

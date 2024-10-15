@@ -520,7 +520,11 @@ class PrefSearchResultMaskView: NSView {
 class PrefTabTitleLabelCell: NSTextFieldCell {
   override var backgroundStyle: NSView.BackgroundStyle {
     didSet {
-      if backgroundStyle == .dark {
+      guard let controlView = self.controlView else {
+        return
+      }
+
+      if controlView.effectiveAppearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua {
         self.textColor = NSColor.white
       } else {
         self.textColor = NSColor.controlTextColor

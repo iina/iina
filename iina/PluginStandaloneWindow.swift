@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-import WebKit
+@preconcurrency import WebKit
 
 class PluginStandaloneWindow: NSWindow, WKNavigationDelegate {
   weak private var pluginInstance: JavascriptPluginInstance!

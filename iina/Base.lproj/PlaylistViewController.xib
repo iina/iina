@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23077.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23077.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22690"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,6 +19,8 @@
                 <outlet property="playlistTableView" destination="xIa-sI-0Xn" id="JVO-9u-NdG"/>
                 <outlet property="removeBtn" destination="xKm-J1-NZs" id="cgl-XX-dEK"/>
                 <outlet property="shuffleBtn" destination="xhU-qn-3aa" id="Zof-fw-Jg4"/>
+                <outlet property="sortBtn" destination="6tw-pE-4RS" id="JtW-hL-Kl8"/>
+                <outlet property="sortByMenu" destination="BdZ-tW-KNK" id="s5t-7a-GZX"/>
                 <outlet property="subPopover" destination="nSf-Kp-eDQ" id="PUs-AK-r1c"/>
                 <outlet property="tabHeightConstraint" destination="So5-Pf-aJb" id="EFJ-yr-PVa"/>
                 <outlet property="tabView" destination="Yym-Zw-Hd8" id="xXL-Ne-hHh"/>
@@ -256,7 +258,7 @@
                                             </constraints>
                                         </clipView>
                                         <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="3OZ-pt-PwO">
-                                            <rect key="frame" x="0.0" y="396" width="240" height="16"/>
+                                            <rect key="frame" x="0.0" y="395" width="240" height="16"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                         <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="9Yn-hb-Udw">
@@ -340,10 +342,24 @@
                                                     <action selector="addToPlaylistBtnAction:" target="-2" id="glx-Rv-Iri"/>
                                                 </connections>
                                             </button>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6tw-pE-4RS" userLabel="Sort Button">
+                                                <rect key="frame" x="50" y="0.0" width="24" height="24"/>
+                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="sort" imagePosition="only" alignment="center" alternateImage="sort" lineBreakMode="truncatingTail" imageScaling="proportionallyDown" inset="2" id="YHb-Sx-W6n">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="24" id="3tP-IT-yH2"/>
+                                                </constraints>
+                                                <connections>
+                                                    <action selector="sortBtnAction:" target="-2" id="81G-vo-xtW"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="7my-AM-8Ts" secondAttribute="trailing" constant="2" id="1Sc-nK-8IE"/>
                                             <constraint firstItem="icQ-T6-fV9" firstAttribute="centerY" secondItem="X2W-MY-vYB" secondAttribute="centerY" id="6Cx-Tb-fT5"/>
+                                            <constraint firstItem="6tw-pE-4RS" firstAttribute="top" secondItem="X2W-MY-vYB" secondAttribute="top" id="6dg-JF-Yns"/>
                                             <constraint firstAttribute="bottom" secondItem="7my-AM-8Ts" secondAttribute="bottom" id="C8I-ns-vw9"/>
                                             <constraint firstAttribute="bottom" secondItem="W9C-Z7-hiI" secondAttribute="bottom" id="DTj-rn-hhY"/>
                                             <constraint firstItem="W9C-Z7-hiI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="icQ-T6-fV9" secondAttribute="trailing" constant="4" id="EMO-ZA-wUc"/>
@@ -352,12 +368,14 @@
                                             <constraint firstItem="7my-AM-8Ts" firstAttribute="top" secondItem="X2W-MY-vYB" secondAttribute="top" id="LE8-YD-ghx"/>
                                             <constraint firstItem="icQ-T6-fV9" firstAttribute="centerX" secondItem="X2W-MY-vYB" secondAttribute="centerX" id="LSa-Bd-2wQ"/>
                                             <constraint firstItem="IHI-5g-OMg" firstAttribute="top" secondItem="X2W-MY-vYB" secondAttribute="top" id="VVG-ZO-opa"/>
+                                            <constraint firstAttribute="bottom" secondItem="6tw-pE-4RS" secondAttribute="bottom" id="bQ8-Lg-dwG"/>
                                             <constraint firstItem="xhU-qn-3aa" firstAttribute="leading" secondItem="IHI-5g-OMg" secondAttribute="trailing" id="beQ-YD-Oxf"/>
                                             <constraint firstItem="xKm-J1-NZs" firstAttribute="leading" secondItem="W9C-Z7-hiI" secondAttribute="trailing" id="lwV-Uv-v1i"/>
                                             <constraint firstAttribute="bottom" secondItem="xhU-qn-3aa" secondAttribute="bottom" id="mPm-LR-ZkL"/>
+                                            <constraint firstItem="6tw-pE-4RS" firstAttribute="leading" secondItem="xhU-qn-3aa" secondAttribute="trailing" id="oHz-u1-CaQ"/>
                                             <constraint firstItem="7my-AM-8Ts" firstAttribute="leading" secondItem="xKm-J1-NZs" secondAttribute="trailing" id="pEm-Ne-DNg"/>
                                             <constraint firstItem="xKm-J1-NZs" firstAttribute="top" secondItem="X2W-MY-vYB" secondAttribute="top" id="q0k-4V-oj8"/>
-                                            <constraint firstItem="icQ-T6-fV9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xhU-qn-3aa" secondAttribute="trailing" constant="4" id="qGM-Ip-dO0"/>
+                                            <constraint firstItem="icQ-T6-fV9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6tw-pE-4RS" secondAttribute="trailing" constant="4" id="qGM-Ip-dO0"/>
                                             <constraint firstItem="W9C-Z7-hiI" firstAttribute="top" secondItem="X2W-MY-vYB" secondAttribute="top" id="qUl-cf-d3q"/>
                                             <constraint firstItem="IHI-5g-OMg" firstAttribute="leading" secondItem="X2W-MY-vYB" secondAttribute="leading" constant="2" id="shV-bB-ELD"/>
                                             <constraint firstAttribute="bottom" secondItem="IHI-5g-OMg" secondAttribute="bottom" id="uNy-QA-naW"/>
@@ -526,10 +544,27 @@
                 <constraint firstAttribute="trailing" secondItem="glW-5x-LJr" secondAttribute="trailing" id="kNZ-El-hDd"/>
                 <constraint firstAttribute="trailing" secondItem="EHy-pe-5wJ" secondAttribute="trailing" id="qJ3-wJ-mDn"/>
             </constraints>
-            <point key="canvasLocation" x="148" y="198"/>
+            <point key="canvasLocation" x="362" y="416"/>
         </customView>
         <menu id="DE5-wv-zGL">
-            <point key="canvasLocation" x="558" y="284"/>
+            <point key="canvasLocation" x="558" y="283.5"/>
+        </menu>
+        <menu id="BdZ-tW-KNK" userLabel="SortByMenu">
+            <items>
+                <menuItem title="Name (A-Z)" tag="1" id="rC6-L6-GB8">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="sortByOptionAction:" target="-2" id="obS-IC-Ka2"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Name (Z-A)" tag="2" id="SY4-1g-qsz">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="sortByOptionAction:" target="-2" id="uQ3-R2-4NV"/>
+                    </connections>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="159" y="42"/>
         </menu>
         <viewController id="Eqp-Cu-P2E" userLabel="Popover View Controller" customClass="SubPopoverViewController" customModule="IINA" customModuleProvider="target">
             <connections>
@@ -651,6 +686,7 @@
         <image name="plus" width="14" height="14"/>
         <image name="shuffle" width="15" height="15"/>
         <image name="shuffle-dark" width="15" height="15"/>
+        <image name="sort" width="7.5" height="12"/>
         <image name="sub-track" width="14" height="14"/>
         <image name="trash" width="14" height="14"/>
     </resources>

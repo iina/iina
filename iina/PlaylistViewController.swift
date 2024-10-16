@@ -73,7 +73,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   @IBOutlet var addFileMenu: NSMenu!
   @IBOutlet weak var addBtn: NSButton!
   @IBOutlet weak var removeBtn: NSButton!
-  
+  @IBOutlet weak var sortBtn: NSButton!
+  @IBOutlet var sortByMenu: NSMenu!
+    
   @Atomic private var playlistTotalLengthIsReady = false
   @Atomic private var playlistTotalLength: Double? = nil
 
@@ -96,7 +98,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     }
     playlistTableView.menu?.delegate = self
 
-    [deleteBtn, loopBtn, shuffleBtn].forEach {
+    [deleteBtn, loopBtn, shuffleBtn, sortBtn].forEach {
       $0?.image?.isTemplate = true
       $0?.alternateImage?.isTemplate = true
     }
@@ -106,6 +108,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     shuffleBtn.toolTip = NSLocalizedString("mini_player.shuffle", comment: "shuffle")
     addBtn.toolTip = NSLocalizedString("mini_player.add", comment: "add")
     removeBtn.toolTip = NSLocalizedString("mini_player.remove", comment: "remove")
+    sortBtn.toolTip = NSLocalizedString("mini_player.sort", comment: "sort")
 
     hideTotalLength()
 
@@ -467,6 +470,31 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     vc.heightConstraint.constant = (vc.tableView.rowHeight + vc.tableView.intercellSpacing.height) * CGFloat(vc.tableView.numberOfRows)
     subPopover.show(relativeTo: sender.bounds, of: sender, preferredEdge: .maxY)
   }
+    
+  @IBAction func sortBtnAction(_ sender: NSButton) {
+    sortByMenu.popUp(positioning: nil, at: .zero, in: sender)
+  }
+  
+  @IBAction func sortByOptionAction(_ sender: AnyObject) {
+    guard let menuItem = sender as? NSMenuItem else { return }
+    switch menuItem.tag {
+    case 1:
+      var playSeq = player.info.playlist
+      playSeq.sort { item1, item2 in
+        item1.filenameForDisplay < item2.filenameForDisplay
+      }
+      player.sortPlaylist(playSeq: playSeq)
+    case 2:
+      var playSeq = player.info.playlist
+      playSeq.sort { item1, item2 in
+        item1.filenameForDisplay > item2.filenameForDisplay
+      }
+      player.sortPlaylist(playSeq: playSeq)
+    default:
+      Logger.log("MenuItem - \(menuItem.title) action is not supported")
+    }
+  }
+    
 
   // MARK: - Table delegates
 

@@ -180,6 +180,7 @@ class PlayerCore: NSObject {
 
   /// For supporting mpv `--shuffle` arg, to shuffle playlist when launching from command line
   @Atomic private var shufflePending = false
+  private var isShuffleHookAlreadyAdded = false
 
   // test seeking
   var triedUsingExactSeekForCurrentFile: Bool = false
@@ -317,6 +318,21 @@ class PlayerCore: NSObject {
   func openURLs(_ urls: [URL], shouldAutoLoad autoLoad: Bool = true) -> Int? {
     guard !urls.isEmpty else { return 0 }
     let urls = Utility.resolveURLs(urls)
+
+    if Preference.bool(for: .enableAdvancedSettings) {
+      if let userOptions = Preference.value(for: .userOptions) as? [[String]] {
+        for op in userOptions {
+          if op.count == 2, op[0] == MPVOption.PlaybackControl.shuffle && op[1] == "yes" {
+            log("Found shuffle option in user's mpv options. Will add hook for it if not already added", level: .verbose)
+            addShufflePlaylistHook()
+            break
+          }
+        }
+      } else {
+        // If userOptions failed to parse, an error msg will be displayed to the user later
+        log("Failed to read mpv options; skipping check for shuffle option", level: .verbose)
+      }
+    }
 
     // Handle folder URL (to support mpv shuffle, etc), BD folders and m3u / m3u8 files first.
     // For these cases, mpv will load/build the playlist and notify IINA when it can be retrieved.
@@ -1699,17 +1715,36 @@ class PlayerCore: NSObject {
     return GeometryDef.parse(geometry)
   }
 
-  /// Uses an mpv `on_before_start_file` hook to honor mpv's `shuffle` command via IINA CLI.
+  /// Adds an mpv `on_before_start_file` hook (if not already added) to honor mpv's `shuffle` option.
+  ///
+  /// This hook is needed to maintain support for the mpv `shuffle` option while also enabling IINA to filter any opened
+  /// files/directories for playable files, which mpv does not support (see the `openURLs` method).
   ///
   /// There is currently no way to remove an mpv hook once it has been added, so to minimize potential impact and/or side effects
   /// when not in use:
-  /// 1. Only add the mpv hook if `--mpv-shuffle` (or equivalent) is specified. Because this decision only happens at launch,
-  /// there is no risk of adding the hook more than once per player.
-  /// 2. Use `shufflePending` to decide if it needs to run again. Set to `false` after use, and check its value as early as possible.
+  /// 1. Only add the mpv hook if `--mpv-shuffle` (or equivalent) is specified via the IINA CLI or via the user's mpv options (in Advanced prefs).
+  /// 2. Use `isShuffleHookAlreadyAdded` to keep track of whether the hook was already added. It should be added at most once per mpv core.
+  /// 3. Use `shufflePending` to decide if the playlist needs to be shuffled. The hook will run each time an item in the playlist is about to start,
+  /// but we only want to do the shuffle before the start of the first file. So we will only shuffle if `shufflePending` is true, then set
+  /// `shufflePending` to `false` after shuffling.
   func addShufflePlaylistHook() {
-    $shufflePending.withLock{ $0 = true }
+    var mustAddHook = true
+    $shufflePending.withLock{ shufflePending in
+      shufflePending = true
 
-    func callback(next: @escaping () -> Void) {
+      guard !isShuffleHookAlreadyAdded else {
+        mustAddHook = false
+        return
+      }
+      isShuffleHookAlreadyAdded = true
+    }
+
+    guard mustAddHook else {
+      Logger.log("Will reuse existing on_before_start_file hook for playlist shuffle", level: .verbose)
+      return
+    }
+
+    func shuffleCallback(next: @escaping () -> Void) {
       var mustShuffle = false
       $shufflePending.withLock{ shufflePending in
         if shufflePending {
@@ -1733,7 +1768,7 @@ class PlayerCore: NSObject {
       }
     }
 
-    mpv.addHook(MPVHook.onBeforeStartFile, hook: MPVHookValue(withBlock: callback))
+    mpv.addHook(MPVHook.onBeforeStartFile, hook: MPVHookValue(withBlock: shuffleCallback))
   }
 
   // MARK: - Listeners

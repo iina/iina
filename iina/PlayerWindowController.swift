@@ -8,6 +8,9 @@
 
 import Cocoa
 
+fileprivate let playImage = NSImage(named: "play")
+fileprivate let pauseImage = NSImage(named: "pause")
+
 class PlayerWindowController: NSWindowController, NSWindowDelegate {
 
   unowned var player: PlayerCore
@@ -593,9 +596,10 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     }
   }
   
-  func updatePlayButtonState(_ state: NSControl.StateValue) {
+  func updatePlayButtonState(paused: Bool) {
     guard loaded else { return }
-    playButton.state = state
+
+    playButton.image = paused ? playImage : pauseImage
   }
 
   /** This method will not set `isOntop`! */

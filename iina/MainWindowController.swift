@@ -2652,9 +2652,9 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
-  override func updatePlayButtonState(_ state: NSControl.StateValue) {
-    super.updatePlayButtonState(state)
-    if state == .off {
+  override func updatePlayButtonState(paused: Bool) {
+    super.updatePlayButtonState(paused: paused)
+    if paused {
       speedValueIndex = AppData.availableSpeedValues.count / 2
       leftArrowLabel.isHidden = true
       rightArrowLabel.isHidden = true
@@ -2807,8 +2807,7 @@ class MainWindowController: PlayerWindowController {
         rightArrowLabel.stringValue = String(format: "%.0fx", speedValue)
       }
       // if is paused
-      if playButton.state == .off {
-        updatePlayButtonState(.on)
+      if player.info.state == .paused {
         player.resume()
       }
 

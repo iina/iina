@@ -70,6 +70,9 @@ struct Preference {
     /** Keep player window open on end of file / playlist. (bool) */
     static let keepOpenOnFileEnd = Key("keepOpenOnFileEnd")
 
+    /// Pressing pause/resume when stopped at EOF to restart playback
+    static let resumeFromEndRestartsPlayback = Key("resumeFromEndRestartsPlayback")
+
     /** Resume from last position */
     static let resumeLastPosition = Key("resumeLastPosition")
 
@@ -929,6 +932,7 @@ struct Preference {
     .iinaEnablePluginSystem: false,
 
     .keepOpenOnFileEnd: true,
+    .resumeFromEndRestartsPlayback: true,
     .quitWhenNoOpenedWindow: false,
     .useExactSeek: SeekOption.relative.rawValue,
     .followGlobalSeekTypeWhenAdjustSlider: false,

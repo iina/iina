@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23094" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22690"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23094"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -28,7 +28,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="608" height="350"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1415"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1710" height="1068"/>
             <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="600" height="335"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -45,7 +45,7 @@
                         <rect key="frame" x="49" y="304" width="89" height="25"/>
                         <popUpButtonCell key="cell" type="push" title="Verbose" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="dFU-NP-aIl" id="aeH-oH-si9">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="menu"/>
+                            <font key="font" metaFont="message"/>
                             <menu key="menu" id="Zsu-ZG-Ui1">
                                 <items>
                                     <menuItem title="Verbose" state="on" id="dFU-NP-aIl"/>
@@ -73,7 +73,7 @@
                         <rect key="frame" x="226" y="304" width="55" height="25"/>
                         <popUpButtonCell key="cell" type="push" title="All" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="9Mt-2c-hRy" id="GeW-eF-yJv">
                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="menu"/>
+                            <font key="font" metaFont="message"/>
                             <menu key="menu" id="AVl-0L-beC">
                                 <items>
                                     <menuItem title="All" state="on" id="9Mt-2c-hRy">
@@ -125,9 +125,8 @@
                                                     <rect key="frame" x="8" y="0.0" width="8" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ibr-rS-L68">
-                                                            <rect key="frame" x="-20" y="-14" width="48" height="48"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ibr-rS-L68">
+                                                            <rect key="frame" x="4" y="21" width="0.0" height="0.0"/>
                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="CGS-jK-0bK"/>
                                                             <connections>
                                                                 <binding destination="ojI-Yf-tJx" name="value" keyPath="objectValue.level" id="YxB-OT-qaq">
@@ -139,6 +138,10 @@
                                                             </connections>
                                                         </imageView>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="Ibr-rS-L68" firstAttribute="top" secondItem="ojI-Yf-tJx" secondAttribute="top" constant="-2" id="1Pr-wS-AdU"/>
+                                                        <constraint firstItem="Ibr-rS-L68" firstAttribute="centerX" secondItem="ojI-Yf-tJx" secondAttribute="centerX" id="9HX-nF-HPw"/>
+                                                    </constraints>
                                                 </tableCellView>
                                             </prototypeCellViews>
                                         </tableColumn>

@@ -59,7 +59,7 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
   @IBAction func setAsDefaultOKBtnAction(_ sender: Any) {
 
     guard
-      let utiTypes = Bundle.main.infoDictionary?["UTImportedTypeDeclarations"] as? [[String: Any]],
+      let utiImportedTypes = Bundle.main.infoDictionary?["UTImportedTypeDeclarations"] as? [[String: Any]],
       let cfBundleID = Bundle.main.bundleIdentifier as CFString?
       else { return }
 
@@ -74,12 +74,12 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
       "public.text": setAsDefaultPlaylistCheckBox.state == .on
     ]
 
-    var uttypeIdentifiers: Set<String> = []
-    for utiType in utiTypes {
+    var utiTargetSet: Set<String> = []
+    for utiImportedType in utiImportedTypes {
       guard
-        let identifier = utiType["UTTypeIdentifier"] as? String,
-        let conformsTo = utiType["UTTypeConformsTo"] as? [String],
-        let tagSpec = utiType["UTTypeTagSpecification"] as? [String: Any],
+        let identifier = utiImportedType["UTTypeIdentifier"] as? String,
+        let conformsTo = utiImportedType["UTTypeConformsTo"] as? [String],
+        let tagSpec = utiImportedType["UTTypeTagSpecification"] as? [String: Any],
         let exts = tagSpec["public.filename-extension"] as? [String]
       else {
         return
@@ -93,19 +93,22 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
       Logger.log("UTImportedType: \(identifier.quoted) ➤ \(exts)", level: .verbose)
       for ext in exts {
         if #available(macOS 11.0, *) {
-          let uttypes = UTType.types(tag: ext, tagClass: .filenameExtension, conformingTo: nil)
-          for uttype in uttypes {
-            uttypeIdentifiers.insert(uttype.identifier)
+          let uttypesForExt = UTType.types(tag: ext, tagClass: .filenameExtension, conformingTo: nil)
+          for uttype in uttypesForExt {
+            utiTargetSet.insert(uttype.identifier)
           }
         } else {
-          let uttIdentifier = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, ext as CFString, nil)!.takeUnretainedValue()
-          uttypeIdentifiers.insert(uttIdentifier as String)
+          let unmanagedArray = UTTypeCreateAllIdentifiersForTag(kUTTagClassFilenameExtension, ext as CFString, nil)
+          let utiArray = unmanagedArray!.takeUnretainedValue() as NSArray as! [String]
+          for uti in utiArray {
+            utiTargetSet.insert(uti)
+          }
         }
       }
     }
 
-    for identifier in uttypeIdentifiers {
-      Logger.log("Set default for UTType: \(identifier.quoted)", level: .verbose)
+    for identifier in utiTargetSet {
+      Logger.log("Seting default for UTI: \(identifier.quoted)", level: .verbose)
       let status = LSSetDefaultRoleHandlerForContentType(identifier as CFString, .all, cfBundleID)
       if status == kOSReturnSuccess {
         successCount += 1

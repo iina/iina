@@ -140,6 +140,7 @@ extension PlayerCore {
     if types.contains(.nsFilenames) {
       guard var paths = pb.propertyList(forType: .nsFilenames) as? [String] else { return [] }
       paths = Utility.resolvePaths(paths)
+      
       // check 3d lut files
       if paths.count == 1 && Utility.lut3dExt.contains(paths[0].lowercasedPathExtension) {
         return .copy
@@ -147,11 +148,20 @@ extension PlayerCore {
 
       if isPlaylist {
         return hasPlayableFiles(in: paths) ? .copy : []
-      } else {
-        let theOnlyPathIsBDFolder = paths.count == 1 && isBDFolder(URL(fileURLWithPath: paths[0]))
-        return theOnlyPathIsBDFolder ||
-          hasPlayableFiles(in: paths) ||
-          hasSubtitleFile(in: paths) ? .copy : []
+      }
+
+      if paths.count == 1 {
+        let url = URL(fileURLWithPath: paths[0])
+
+        if isBDFolder(url)
+            || Utility.playlistFileExt.contains(url.absoluteString.lowercasedPathExtension) {
+          return .copy
+        }
+      }
+
+      if hasPlayableFiles(in: paths)
+          || hasSubtitleFile(in: paths) {
+        return .copy
       }
     } else if types.contains(.nsURL) {
       return .copy

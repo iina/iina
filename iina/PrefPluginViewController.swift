@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-import WebKit
+@preconcurrency import WebKit
 
 fileprivate let defaultPlugins = [
   ["url": "iina/plugin-demo", "id": "io.iina.demo"],

@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-import WebKit
+@preconcurrency import WebKit
 
 fileprivate let highlightsLink = "https://iina.io/highlights"
 

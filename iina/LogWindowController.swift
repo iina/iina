@@ -130,7 +130,7 @@ class LogWindowController: NSWindowController, NSMenuDelegate {
       self.logs.append(contentsOf: logs)
       logs.removeAll()
       if scroll {
-        // macOS couldn't calcuate the frame size correctly when the row height is variable and
+        // macOS couldn't calculate the frame size correctly when the row height is variable and
         // is not rendered. After the first scroll, all rows should be rendered, which makes the
         // second frame size correct. Scroll the second time to correctly scroll to the last row.
         logTableView.scroll(NSPoint(x: 0, y: logTableView.frame.size.height))

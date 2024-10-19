@@ -108,7 +108,7 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
     }
 
     for identifier in utiTargetSet {
-      Logger.log("Seting default for UTI: \(identifier.quoted)", level: .verbose)
+      Logger.log("Setting default for UTI: \(identifier.quoted)", level: .verbose)
       let status = LSSetDefaultRoleHandlerForContentType(identifier as CFString, .all, cfBundleID)
       if status == kOSReturnSuccess {
         successCount += 1

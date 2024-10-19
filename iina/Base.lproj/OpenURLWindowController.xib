@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23090" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23094" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23090"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23094"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -220,9 +220,21 @@ Gw
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MrO-gf-ncl">
+                                <rect key="frame" x="449" y="9" width="114" height="32"/>
+                                <buttonCell key="cell" type="push" title="Stop Loading" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zbf-uh-uGz">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="stopLoadingBtnAction:" target="-2" id="a3Q-Ua-JPd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="D8E-zU-6dD" firstAttribute="top" secondItem="Ear-Xt-Ces" secondAttribute="bottom" constant="8" id="3ja-3M-Yb7"/>
+                            <constraint firstAttribute="bottom" secondItem="MrO-gf-ncl" secondAttribute="bottom" constant="16" id="Fzr-CQ-ibR"/>
+                            <constraint firstAttribute="trailing" secondItem="MrO-gf-ncl" secondAttribute="trailing" constant="20" symbolic="YES" id="I3A-X3-Ijm"/>
                             <constraint firstItem="Ear-Xt-Ces" firstAttribute="centerX" secondItem="EmQ-3e-yGf" secondAttribute="centerX" id="SZ1-wj-8ED"/>
                             <constraint firstItem="D8E-zU-6dD" firstAttribute="centerX" secondItem="EmQ-3e-yGf" secondAttribute="centerX" id="Xg7-RP-buE"/>
                             <constraint firstItem="Ear-Xt-Ces" firstAttribute="centerY" secondItem="EmQ-3e-yGf" secondAttribute="centerY" id="twW-4I-1Tk"/>

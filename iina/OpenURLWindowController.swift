@@ -97,6 +97,12 @@ class OpenURLWindowController: NSWindowController, NSTextFieldDelegate, NSContro
     window?.close()
   }
 
+  @IBAction func stopLoadingBtnAction(_ sender: Any) {
+    guard let playerCore else { return }
+    playerCore.stop()
+    overlayView.isHidden = true
+  }
+
   @IBAction func openBtnAction(_ sender: Any) {
     if let url = getURL().url {
       if rememberPasswordCheckBox.state == .on,

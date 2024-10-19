@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-import WebKit
+@preconcurrency import WebKit
 
 class PluginSidebarView: WKWebView, WKNavigationDelegate {
   weak private var pluginInstance: JavascriptPluginInstance!

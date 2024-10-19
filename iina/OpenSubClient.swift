@@ -117,10 +117,10 @@ class OpenSubClient {
   private let decoder: JSONDecoder = {
     let decoder = JSONDecoder()
     decoder.keyDecodingStrategy = .convertFromSnakeCase
-    let iso8601 = ISO8601DateFormatter()
-    let iso8601WithFractionalSeconds = ISO8601DateFormatter()
-    iso8601WithFractionalSeconds.formatOptions = [.withFractionalSeconds]
     decoder.dateDecodingStrategy = .custom({ (decoder) -> Date in
+      let iso8601 = ISO8601DateFormatter()
+      let iso8601WithFractionalSeconds = ISO8601DateFormatter()
+      iso8601WithFractionalSeconds.formatOptions = [.withFractionalSeconds]
       let container = try decoder.singleValueContainer()
       let dateStr = try container.decode(String.self)
       if let date = iso8601.date(from: dateStr) {

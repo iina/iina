@@ -592,10 +592,11 @@ return -1;\
 
       // Apply the second part of the workaround for the FFmpeg scalar not supporting conversion to
       // the pixel format AV_PIX_FMT_RGBAF16LE. Convert the pixel components to short floating point
-      // values.
-      const vImage_Buffer inputBuffer = {.width = pFrameRGB->width * bytesPerPixel / bytesPerComponent,
+      // values. This is an in-place conversion, which is supported by vImageConvert_16Uto16F, so
+      // only one buffer is used.
+      const vImage_Buffer buffer = {.width = pFrameRGB->width * bytesPerPixel / bytesPerComponent,
         .height = pFrameRGB->height, .rowBytes = strideInBytes, .data = pFrameRGB->data[0]};
-      const vImage_Error error = vImageConvert_16Uto16F(&inputBuffer, &inputBuffer, kvImageDoNotTile);
+      const vImage_Error error = vImageConvert_16Uto16F(&buffer, &buffer, kvImageNoFlags);
       if (error != kvImageNoError) {
         LOG_ERROR(@"Method vImageConvert_16Uto16F failed: %ld", error);
         return NULL;

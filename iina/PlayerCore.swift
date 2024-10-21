@@ -1354,6 +1354,18 @@ class PlayerCore: NSObject {
     mpv.command(.playlistClear)
     postNotification(.iinaPlaylistChanged)
   }
+  
+  func sortPlaylist(playSeq: [MPVPlaylistItem]) {
+    clearPlaylist()
+    let playListInPlay = info.playlist.first?.filename
+    addToPlaylist(paths: playSeq.compactMap({$0.filename}))
+    if let index = playSeq.compactMap({$0.filename}).firstIndex(of: playListInPlay) {
+      // Move the playlist in play file to the new index.
+      playFileInPlaylist(index+1)
+      // Remove the playlist in play which was not cleared with clear playlist.
+      playlistRemove(0)
+    }
+  }
 
   func playFileInPlaylist(_ pos: Int) {
     mpv.setInt(MPVProperty.playlistPos, pos)

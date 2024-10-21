@@ -50,7 +50,7 @@
 "quicksetting.deinterlace" = "Деинтерлейсинг";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Скрыть";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.reset_speed" = "Сбросить скорость до 1x";
 
 // EQ Presets
 "eq.preset.flat" = "Без коррекции";
@@ -85,7 +85,7 @@
 "osd.pause" = "Пауза";
 "osd.resume" = "Возобновить";
 "osd.volume" = "Громкость: %i";
-"osd.speed" = "Speed: %@x";
+"osd.speed" = "Скорость: %@×";
 "osd.aspect" = "Соотношение сторон: %@";
 "osd.crop" = "Кадрирование: %@";
 "osd.rotate" = "Поворот: %i°";
@@ -190,7 +190,7 @@
 "menu.exit_mini_player" = "Выйти из музыкального режима";
 "menu.pause" = "Пауза";
 "menu.resume" = "Возобновить";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "Скорость: %@×";
 "menu.chapters" = "Показать панель глав";
 "menu.hide_chapters" = "Скрыть панель глав";
 "menu.playlist" = "Показать панель плейлиста";
@@ -204,8 +204,8 @@
 
 "menu.seek_forward" = "Шаг вперед %.0f с";
 "menu.seek_backward" = "Шаг назад %.0f с";
-"menu.speed_up" = "Speed Up by %@x";
-"menu.speed_down" = "Speed Down by %@x";
+"menu.speed_up" = "Повысить скорость до %@x";
+"menu.speed_down" = "Снизить скорость до %@x";
 "menu.volume_up" = "Громкость + %.0f%%";
 "menu.volume_down" = "Громкость - %.0f%%";
 "menu.audio_delay_up" = "Задержка аудио + %.1f с";

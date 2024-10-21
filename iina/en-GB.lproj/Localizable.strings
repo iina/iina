@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "You are using a %@ version of IINA";
 "initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.nightly.desc" = "Nightly is not recommended as your daily driver. Currently, nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as a daily drive. Debug builds do not support auto update.";
 "initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
 
@@ -78,7 +78,7 @@
 
 "alert.eq.new_profile.title" = "New EQ Profile";
 "alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Currnet Profile";
+"alert.eq.rename.title" = "Rename Current Profile";
 "alert.eq.rename.message" = "Please enter a new profile name.";
 
 // OSDMessage.swift

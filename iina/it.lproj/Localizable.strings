@@ -16,8 +16,8 @@
 "general.username" = "Nome utente";
 "general.password" = "Password";
 
-"input.value_is_empty" = "Value cannot be empty.";
-"input.already_exists" = "Value already exists.";
+"input.value_is_empty" = "Il campo non può essere vuoto.";
+"input.already_exists" = "Il valore esiste già.";
 
 // Guide Window
 "guide.highlights" = "In evidenza";
@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "Stai usando una versione %@ di IINA";
 "initial.beta.desc" = "Se vuoi passare al canale di release ufficiali di IINA, togli la spunta da 'Ricevi aggiornamenti beta' in Impostazioni → Generali, poi scarica l'ultima versione stabile dal <a href=\"https://iina.io\">sito ufficiale</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.nightly.desc" = "Le Nightly sono versioni di sviluppo instabili e non adatte all'utilizzo quotidiano. Attualmente, inoltre, non sono aggiornate automaticamente: se desideri, puoi scaricarle dalla <a href=\"https://nightly.iina.io\">pagina dedicata</a>.";
 "initial.debug.desc" = "Le versioni di debug sono dedicate alla raccolta di dati per la risoluzione di problemi e per altre finalità analitiche. Non sono ottimizzate per le prestazioni e non prevedono aggiornamenti automatici; in generale se ne sconsiglia l'utilizzo.";
 "initial.bug_report" = "Segnala tramite <a href=\"https://github.com/iina/iina/issues\">GitHub</a>.";
 
@@ -50,42 +50,42 @@
 "quicksetting.deinterlace" = "Deinterlacciamento";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Nascondi";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.reset_speed" = "Ripristina la velocità normale (1x)";
 
 // EQ Presets
-"eq.preset.flat" = "Flat";
-"eq.preset.acoustic" = "Acoustic";
-"eq.preset.classical" = "Classical";
+"eq.preset.flat" = "Azzerato";
+"eq.preset.acoustic" = "Acustica";
+"eq.preset.classical" = "Classica";
 "eq.preset.dance" = "Dance";
-"eq.preset.deep" = "Deep";
-"eq.preset.electronic" = "Electronic";
-"eq.preset.hip_hop" = "Hip Hop";
-"eq.preset.increase_bass" = "Increase Bass";
-"eq.preset.increase_treble" = "Increase Treble";
-"eq.preset.increase_vocal" = "Increase Vocal";
+"eq.preset.deep" = "Profondo";
+"eq.preset.electronic" = "Elettronica";
+"eq.preset.hip_hop" = "Hip-hop";
+"eq.preset.increase_bass" = "Bassi potenziati";
+"eq.preset.increase_treble" = "Alti potenziati";
+"eq.preset.increase_vocal" = "Voce in risalto";
 "eq.preset.jazz" = "Jazz";
-"eq.preset.latin" = "Latin";
-"eq.preset.loundness" = "Loundness";
+"eq.preset.latin" = "Latina";
+"eq.preset.loundness" = "Radio";
 "eq.preset.lounge" = "Lounge";
 "eq.preset.piano" = "Piano";
 "eq.preset.pop" = "Pop";
 "eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reduce Bass";
-"eq.preset.reduce_treble" = "Reduce Treble";
+"eq.preset.reduce_bass" = "Bassi ridotti";
+"eq.preset.reduce_treble" = "Alti ridotti";
 "eq.preset.rock" = "Rock";
-"eq.preset.small_speaker" = "Small Speaker";
-"eq.preset.spoken_word" = "Spoken Word";
+"eq.preset.small_speaker" = "Casse acustiche mini";
+"eq.preset.spoken_word" = "Solo voce";
 
-"alert.eq.new_profile.title" = "New EQ Profile";
-"alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Currnet Profile";
-"alert.eq.rename.message" = "Please enter a new profile name.";
+"alert.eq.new_profile.title" = "Nuovo profilo";
+"alert.eq.new_profile.message" = "Scegli un nome per il profilo.";
+"alert.eq.rename.title" = "Rinomina il profilo corrente";
+"alert.eq.rename.message" = "Inserisci il nuovo nome per il profilo.";
 
 // OSDMessage.swift
 "osd.pause" = "Pausa";
 "osd.resume" = "Riprendi";
 "osd.volume" = "Volume: %i";
-"osd.speed" = "Speed: %@x";
+"osd.speed" = "Velocità: %@x";
 "osd.aspect" = "Proporzioni: %@";
 "osd.crop" = "Ritaglio: %@";
 "osd.rotate" = "Rotazione: %i°";
@@ -168,11 +168,11 @@
 "preference.sub_override_level.strip" = "striscia";
 "preference.sub_override_level.yes" = "sì";
 
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
+"preference.sub_override_level.descriptive_text.no" = "Renderizza i sottotitoli come specificato dagli script, senza override.";
+"preference.sub_override_level.descriptive_text.force" = "Applica tutti gli stili dei sottotitoli.";
+"preference.sub_override_level.descriptive_text.scale" = "Imposta il fattore di scala dei sottotitoli (override).";
+"preference.sub_override_level.descriptive_text.strip" = "Rimuove tutti gli stili e i tag ASS dai sottotitoli.";
+"preference.sub_override_level.descriptive_text.yes" = "Regola le impostazioni degli stili.";
 
 "menu.volume" = "Volume: %d";
 "menu.volume_muted" = "Volume: %d (Spento)";
@@ -190,7 +190,7 @@
 "menu.exit_mini_player" = "Esci da Modalità Musica";
 "menu.pause" = "Pausa";
 "menu.resume" = "Riprendi";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "Velocità: %@x";
 "menu.chapters" = "Pannello capitoli";
 "menu.hide_chapters" = "Nascondi pannello capitoli";
 "menu.playlist" = "Pannello playlist";
@@ -204,8 +204,8 @@
 
 "menu.seek_forward" = "Avanti %.0fs";
 "menu.seek_backward" = "Indietro %.0fs";
-"menu.speed_up" = "Speed Up by %@x";
-"menu.speed_down" = "Speed Down by %@x";
+"menu.speed_up" = "Aumenta la velocità di %@x";
+"menu.speed_down" = "Riduci la velocità di %@x";
 "menu.volume_up" = "Volume + %.0f%%";
 "menu.volume_down" = "Volume - %.0f%%";
 "menu.audio_delay_up" = "Ritarda audio + %.1fs";

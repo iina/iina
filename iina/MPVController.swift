@@ -349,7 +349,13 @@ class MPVController: NSObject {
     setUserOption(PK.screenshotFormat, type: .other, forName: MPVOption.Screenshot.screenshotFormat,
                   level: .verbose) { key in
       let v = Preference.integer(for: key)
-      return Preference.ScreenshotFormat(rawValue: v)?.string
+      let format = Preference.ScreenshotFormat(rawValue: v)
+      // Workaround for mpv issue  #15107, HDR screenshots are unimplemented (gpu/gpu-next).
+      // If the screenshot format is set to JPEG XL then set the screenshot-sw option to yes. This
+      // causes the screenshot to be rendered by software instead of the VO. If a HDR video is being
+      // displayed in HDR then the resulting screenshot will be HDR.
+      self.setFlag(MPVOption.Screenshot.screenshotSw, format == .jxl)
+      return format?.string
     }
 
     setUserOption(PK.screenshotTemplate, type: .string, forName: MPVOption.Screenshot.screenshotTemplate,

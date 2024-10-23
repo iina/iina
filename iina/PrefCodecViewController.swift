@@ -49,6 +49,7 @@ class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbedda
     super.viewDidLoad()
     audioLangTokenField.commaSeparatedValues = Preference.string(for: .audioLanguage) ?? ""
     updateHwdecDescription()
+    updateToneMappingUI()
   }
 
   override func viewWillAppear() {
@@ -110,13 +111,24 @@ class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbedda
     hwdecDescriptionTextField.stringValue = hwdec.localizedDescription
   }
 
+  // Prefs → UI
+  private func updateToneMappingUI() {
+    toneMappingTargetPeakTextField.integerValue = Preference.integer(for: .toneMappingTargetPeak)
+  }
+
   @IBAction func toneMappingTargetPeakAction(_ sender: NSTextField) {
+    defer {
+      updateToneMappingUI()
+    }
     let newValue = sender.integerValue
     // constrain to valid mpv values
-    let validValue = newValue == 0 ? 0 : newValue.clamped(to: 10...10000)
-    if newValue != validValue {
-      Preference.set(validValue, for: .toneMappingTargetPeak)
+    let isValueValid = newValue == 0 || (newValue >= 10 && newValue <= 10000)
+    guard isValueValid else {
+      Utility.showAlert("target_peak.bad_value", arguments: [String(newValue)], sheetWindow: view.window)
+      sender.integerValue = Preference.integer(for: .toneMappingTargetPeak)
+      return
     }
+    Preference.set(newValue, for: .toneMappingTargetPeak)
   }
 
   @IBAction func toneMappingHelpAction(_ sender: Any) {

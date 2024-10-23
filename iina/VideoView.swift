@@ -305,7 +305,8 @@ class VideoView: NSView {
       logHDR("Not using ICC profile due to user preference")
       player.mpv.setFlag(MPVOption.GPURendererOptions.iccProfileAuto, false)
     } else if let screenColorSpace {
-      logHDR("Using ICC profile")
+      let name = screenColorSpace.localizedName ?? "unnamed"
+      logHDR("Using the ICC profile of the color space \(name)")
       player.mpv.setFlag(MPVOption.GPURendererOptions.iccProfileAuto, true)
       videoLayer.setRenderICCProfile(screenColorSpace)
     }

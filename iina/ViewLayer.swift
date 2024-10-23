@@ -359,6 +359,10 @@ class ViewLayer: CAOpenGLLayer {
   /// The IINA `Load ICC profile` setting is tied to the `--icc-profile-auto` option. This allows users to override IINA using
   /// the [--icc-profile](https://mpv.io/manual/stable/#options-icc-profile) option.
   func setRenderICCProfile(_ profile: NSColorSpace) {
+    // The OpenGL context must always be locked before locking the isUninited lock to avoid
+    // deadlocks.
+    videoView.player.mpv.lockAndSetOpenGLContext()
+    defer { videoView.player.mpv.unlockOpenGLContext() }
     videoView.$isUninited.withLock() { isUninited in
       guard !isUninited else { return }
 

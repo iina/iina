@@ -341,6 +341,7 @@ class VideoView: NSView {
       }()
       log("Setting layer color space to \(name)")
       videoLayer.colorspace = sdrColorSpace
+      videoLayer.wantsExtendedDynamicRangeContent = false
       player.mpv.setString(MPVOption.GPURendererOptions.targetTrc, "auto")
       player.mpv.setString(MPVOption.GPURendererOptions.targetPrim, "auto")
       player.mpv.setString(MPVOption.GPURendererOptions.targetPeak, "auto")
@@ -492,6 +493,7 @@ extension VideoView {
 
     logHDR("Will activate HDR color space instead of using ICC profile")
 
+    videoLayer.wantsExtendedDynamicRangeContent = true
     videoLayer.colorspace = CGColorSpace(name: name!)
     mpv.setString(MPVOption.GPURendererOptions.iccProfile, "")
     mpv.setString(MPVOption.GPURendererOptions.targetPrim, primaries)

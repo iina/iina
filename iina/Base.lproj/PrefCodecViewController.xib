@@ -213,12 +213,8 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                     <connections>
+                        <action selector="toneMappingTargetPeakAction:" target="-2" id="tkO-UP-e0O"/>
                         <binding destination="pxc-7C-SGP" name="enabled" keyPath="values.enableToneMapping" id="mbf-5t-pSs"/>
-                        <binding destination="pxc-7C-SGP" name="value" keyPath="values.toneMappingTargetPeak" id="p2I-ha-v97">
-                            <dictionary key="options">
-                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                            </dictionary>
-                        </binding>
                     </connections>
                 </textField>
                 <textField focusRingType="none" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bL4-aH-JLz">

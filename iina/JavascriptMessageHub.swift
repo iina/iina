@@ -61,23 +61,24 @@ class JavascriptMessageHub {
   func callListener(forEvent name: String, withDataString dataString: String?) {
     guard let callback = listeners[name] else { return }
 
-    guard let dataString = dataString, let data = dataString.data(using: .utf8) else { return }
-
     let context = callback.value.context
     var jsValue: JSValue?
-    if dataString.hasPrefix("\"") && dataString.hasSuffix("\"") {
-      // is a string
-      jsValue = JSValue(object: String(dataString.dropFirst().dropLast()), in: context)
-    } else if Regex.numbers.matches(dataString) {
-      // is a number
-      jsValue = JSValue(object: Double(dataString), in: context)
-    } else if dataString == "true" || dataString == "false" {
-      // is a boolean
-      jsValue = JSValue(object: dataString == "true", in: context)
-    } else {
-      // json object
-      if let decoded = try? JSONSerialization.jsonObject(with: data) {
-        jsValue = JSValue(object: decoded, in: context)
+
+    if let dataString = dataString, let data = dataString.data(using: .utf8) {
+      if dataString.hasPrefix("\"") && dataString.hasSuffix("\"") {
+        // is a string
+        jsValue = JSValue(object: String(dataString.dropFirst().dropLast()), in: context)
+      } else if Regex.numbers.matches(dataString) {
+        // is a number
+        jsValue = JSValue(object: Double(dataString), in: context)
+      } else if dataString == "true" || dataString == "false" {
+        // is a boolean
+        jsValue = JSValue(object: dataString == "true", in: context)
+      } else {
+        // json object
+        if let decoded = try? JSONSerialization.jsonObject(with: data) {
+          jsValue = JSValue(object: decoded, in: context)
+        }
       }
     }
 

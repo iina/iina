@@ -58,7 +58,7 @@ class HardwareDecodeCapabilities {
   /// Whether this Mac supports hardware decoding for the given video codec.
   /// - Parameter codecType: The video codec as a
   ///     [CMVideoCodecType](https://developer.apple.com/documentation/coremedia/cmvideocodectype).
-  /// - Returns: `true` if hardware decoding is supported;,`false` otherwise.
+  /// - Returns: `true` if hardware decoding is supported; `false` otherwise.
   func isSupported(_ codecType: CMVideoCodecType) -> Bool {
     if !isInitialized {
       guard let initialization = initialization else {
@@ -78,7 +78,7 @@ class HardwareDecodeCapabilities {
   /// Whether this Mac supports hardware decoding for the given video codec.
   /// - Parameter codecType: The video codec as a
   ///     [CMVideoCodecType](https://developer.apple.com/documentation/coremedia/cmvideocodectype).
-  /// - Returns: true` if hardware decoding is supported;,`false` otherwise.
+  /// - Returns: true` if hardware decoding is supported; `false` otherwise.
   /// - Important: This method calls
   ///     [VTIsHardwareDecodeSupported](https://developer.apple.com/documentation/videotoolbox/vtishardwaredecodesupported(_:)),
   ///     which if called on the main thread will cause Xcode to report: "This method should not be called on the main thread as it may

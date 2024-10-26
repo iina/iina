@@ -15,7 +15,7 @@ body:
 - type: dropdown
   attributes:
     label: Release Channel
-    options: 
+    options:
       - Release
       - Beta
       - Nightly
@@ -38,42 +38,36 @@ body:
       - First step...
       - Second step...
       - ...
-    render: text
   validations:
     required: true
 
 - type: textarea
   attributes:
     label: Expected Behavior
-    render: text
   validations:
     required: true
 
 - type: textarea
   attributes:
     label: Actual Behavior
-    render: text
   validations:
     required: true
 
 - type: textarea
   attributes:
     label: Crash Report or Process Sample
-    render: text
     description: "If you're reporting a crash, please drag and drop the trace log file below. You can find these in ~/Library/Logs/DiagnosticReports/; the filename should prefixed with IINA and include the crash time. If you are reporting a hang (IINA stops responding) please generate a process sample and drag and drop the file below. For more information see the FAQ question: [How to collect a process sample when reporting an issue?](https://github.com/iina/iina/wiki/FAQ#how-to-collect-a-process-sample-when-reporting-an-issue)"
     placeholder: Drag and drop the crash report or process sample file here; do not paste the content directly.
 
 - type: textarea
   attributes:
     label: Logs
-    render: text
     description: "If applicable, please provide the log files after reproducing the issue. If you haven't done so already, you can enable logging in Settings > Advanced. For more information see the FAQ question: [How to collect log files when reporting an issue?](https://github.com/iina/iina/wiki/FAQ#how-to-collect-log-files-when-reporting-an-issue)"
     placeholder: Drag and drop the iina.log and mpv.log files here; do not paste the content directly.
 
 - type: textarea
   attributes:
     label: Sample Files
-    render: text
     description: If the issue or bug is related to a specific file/file type (including subtitles), please provide sample files for us to reproduce. Please zip into one file if there are multiple files. For small files, just drag and drop into the text field below. If GitHub reports the file type is not supported, put the file in a zip archive. For larger files, please consider uploading to file hosting services which can be freely accessible by us (e.g. Google Drive, iCloud Drive, etc).
     placeholder: Drag and drop any sample files, or paste the link to the files.
 

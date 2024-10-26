@@ -68,6 +68,7 @@ class JavascriptPlugin: NSObject {
   var identifier: String
   let version: String
   let desc: String?
+  /// The plugin is a symlink of an external folder, mainly by the CLI
   var isExternal: Bool = false
 
   var root: URL

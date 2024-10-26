@@ -66,7 +66,8 @@ class PrefPluginViewController: PreferenceViewController, PreferenceWindowEmbedd
   @IBOutlet weak var pluginHelpWebViewLoadingIndicator: NSProgressIndicator!
   @IBOutlet weak var pluginHelpLoadingFailedView: NSView!
   @IBOutlet weak var pluginPreferencesContentView: NSView!
-
+  @IBOutlet weak var uninstallBtn: NSButton!
+  
   @IBOutlet var newPluginSheet: NSWindow!
   @IBOutlet weak var newPluginSourceTextField: NSTextField!
   @IBOutlet weak var newPluginInstallBtn: NSButton!
@@ -97,6 +98,7 @@ class PrefPluginViewController: PreferenceViewController, PreferenceWindowEmbedd
     newPluginSourceTextField.delegate = self
 
     clearPluginPage()
+
   }
 
   private func createPreferenceView() {
@@ -258,6 +260,8 @@ class PrefPluginViewController: PreferenceViewController, PreferenceWindowEmbedd
     pluginPermissionsView.setPlugin(plugin)
     pluginSourceLabel.stringValue = plugin.githubURLString ?? NSLocalizedString("plugin.local", comment: "")
     pluginCheckUpdatesBtn.isHidden = plugin.githubRepo == nil || plugin.githubVersion == nil
+    // if the plugin is symlinked, disable the uninstall button since it can accidentally delete the project folder
+    uninstallBtn.isEnabled = !plugin.isExternal
 
     currentPlugin = plugin
   }
@@ -531,7 +535,7 @@ class PrefPluginViewController: PreferenceViewController, PreferenceWindowEmbedd
     pluginCheckUpdatesProgressIndicator.startAnimation(self)
     pluginCheckUpdatesBtn.isEnabled = false
     pluginCheckUpdatesBtn.title = NSLocalizedString("plugin.updating", comment: "")
-    
+
     defer {
       self.pluginCheckUpdatesProgressIndicator.stopAnimation(self)
       pluginCheckUpdatesBtn.title = NSLocalizedString("plugin.check_for_updates", comment: "")

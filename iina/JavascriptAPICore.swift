@@ -252,6 +252,8 @@ fileprivate class WindowAPI: JavascriptAPI, CoreSubAPIExportable {
         return ["frame": frame, "main": screen == main, "current": screen == current]
       }
       return screens
+    case "miniaturized":
+      return window.window!.isMiniaturized
     default:
       return nil
     }
@@ -294,6 +296,13 @@ fileprivate class WindowAPI: JavascriptAPI, CoreSubAPIExportable {
         }
       } else {
         window.hideSideBar(animate: true)
+      }
+    case "miniaturized":
+      guard let val = value as? Bool else { return }
+      if val {
+        window.window!.miniaturize(self)
+      } else {
+        window.window!.deminiaturize(self)
       }
     default:
       log("core.window: \(prop) is not accessible", level: .warning)

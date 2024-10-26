@@ -346,6 +346,44 @@ class ViewLayer: CAOpenGLLayer {
     return ctx
   }
 
+  // MARK: - ICC Profile
+
+  /// Set an ICC profile for use with the mpv [icc-profile-auto](https://mpv.io/manual/stable/#options-icc-profile-auto)
+  /// option.
+  ///
+  /// This method fulfills the mpv requirement that applications using libmpv with the render API provide the ICC profile via
+  /// `MPV_RENDER_PARAM_ICC_PROFILE` in order for the `--icc-profile-auto` option to work. The ICC profile data will not
+  /// be used by mpv unless the option is enabled.
+  ///
+  /// The IINA `Load ICC profile` setting is tied to the `--icc-profile-auto` option. This allows users to override IINA using
+  /// the [--icc-profile](https://mpv.io/manual/stable/#options-icc-profile) option.
+  func setRenderICCProfile(_ profile: NSColorSpace) {
+    // The OpenGL context must always be locked before locking the isUninited lock to avoid
+    // deadlocks.
+    videoView.player.mpv.lockAndSetOpenGLContext()
+    defer { videoView.player.mpv.unlockOpenGLContext() }
+    videoView.$isUninited.withLock() { isUninited in
+      guard !isUninited else { return }
+
+      guard let renderContext = videoView.player.mpv.mpvRenderContext else { return }
+      guard var iccData = profile.iccProfileData else {
+        let name = profile.localizedName ?? "unnamed"
+        Logger.log("Color space \(name) does not contain ICC profile data", level: .warning)
+        return
+      }
+      iccData.withUnsafeMutableBytes { (ptr: UnsafeMutableRawBufferPointer) in
+        guard let baseAddress = ptr.baseAddress, ptr.count > 0 else { return }
+
+        let u8Ptr = baseAddress.assumingMemoryBound(to: UInt8.self)
+        var icc = mpv_byte_array(data: u8Ptr, size: ptr.count)
+        withUnsafeMutableBytes(of: &icc) { (ptr: UnsafeMutableRawBufferPointer) in
+          let params = mpv_render_param(type: MPV_RENDER_PARAM_ICC_PROFILE, data: ptr.baseAddress)
+          mpv_render_context_set_parameter(renderContext, params)
+        }
+      }
+    }
+  }
+
   // MARK: - Utils
 
   /** Check OpenGL error (for debug only). */

@@ -299,39 +299,18 @@ class VideoView: NSView {
     RunLoop.current.add(displayIdleTimer!, forMode: .default)
   }
 
-  func setICCProfile(_ displayId: UInt32) {
+  private func setICCProfile() {
+    let screenColorSpace = player.mainWindow.window?.screen?.colorSpace
     if !Preference.bool(for: .loadIccProfile) {
-      logHDR("Not using ICC due to user preference")
-      player.mpv.setString(MPVOption.GPURendererOptions.iccProfile, "")
-    } else {
-      logHDR("Loading ICC profile")
-      typealias ProfileData = (uuid: CFUUID, profileUrl: URL?)
-      guard let uuid = CGDisplayCreateUUIDFromDisplayID(displayId)?.takeRetainedValue() else { return }
-
-      var argResult: ProfileData = (uuid, nil)
-      withUnsafeMutablePointer(to: &argResult) { data in
-        ColorSyncIterateDeviceProfiles({ (dict: CFDictionary?, ptr: UnsafeMutableRawPointer?) -> Bool in
-          if let info = dict as? [String: Any], let current = info["DeviceProfileIsCurrent"] as? Int {
-            let deviceID = info["DeviceID"] as! CFUUID
-            let ptr = ptr!.bindMemory(to: ProfileData.self, capacity: 1)
-            let uuid = ptr.pointee.uuid
-
-            if current == 1, deviceID == uuid {
-              let profileURL = info["DeviceProfileURL"] as! URL
-              ptr.pointee.profileUrl = profileURL
-              return false
-            }
-          }
-          return true
-        }, data)
-      }
-
-      if let iccProfilePath = argResult.profileUrl?.path, FileManager.default.fileExists(atPath: iccProfilePath) {
-        player.mpv.setString(MPVOption.GPURendererOptions.iccProfile, iccProfilePath)
-      }
+      logHDR("Not using ICC profile due to user preference")
+      player.mpv.setFlag(MPVOption.GPURendererOptions.iccProfileAuto, false)
+    } else if let screenColorSpace {
+      let name = screenColorSpace.localizedName ?? "unnamed"
+      logHDR("Using the ICC profile of the color space \(name)")
+      player.mpv.setFlag(MPVOption.GPURendererOptions.iccProfileAuto, true)
+      videoLayer.setRenderICCProfile(screenColorSpace)
     }
 
-    let screenColorSpace = player.mainWindow.window?.screen?.colorSpace
     let sdrColorSpace = screenColorSpace?.cgColorSpace ?? VideoView.SRGB
     if videoLayer.colorspace != sdrColorSpace {
       let name: String = {
@@ -436,7 +415,7 @@ extension VideoView {
     if player.info.hdrAvailable != edrAvailable {
       player.mainWindow.quickSettingView.setHdrAvailability(to: edrAvailable)
     }
-    if edrEnabled != true { setICCProfile(displayId) }
+    if edrEnabled != true { setICCProfile() }
   }
 
   func requestEdrMode() -> Bool? {
@@ -495,7 +474,7 @@ extension VideoView {
 
     videoLayer.wantsExtendedDynamicRangeContent = true
     videoLayer.colorspace = CGColorSpace(name: name!)
-    mpv.setString(MPVOption.GPURendererOptions.iccProfile, "")
+    mpv.setFlag(MPVOption.GPURendererOptions.iccProfileAuto, false)
     mpv.setString(MPVOption.GPURendererOptions.targetPrim, primaries)
     // PQ videos will be display as it was, HLG videos will be converted to PQ
     mpv.setString(MPVOption.GPURendererOptions.targetTrc, "pq")

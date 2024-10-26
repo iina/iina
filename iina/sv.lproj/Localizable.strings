@@ -245,6 +245,8 @@
 "alert.error_saving_file" = "Fel uppstod när %@ skulle sparas: %@";
 "alert.error_deleting_file" = "Kan ej radera denna fil.";
 
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+
 "alert.config.new.title" = "Ny inmatningskonfiguration";
 "alert.config.new.message" = "Vänligen ange ett namn för den nya konfigurationen.";
 "alert.config.duplicate.title" = "Duplicera konfigurationsfil";

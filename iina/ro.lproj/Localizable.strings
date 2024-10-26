@@ -245,6 +245,8 @@
 "alert.error_saving_file" = "A apărut o eroare la salvarea %@: %@";
 "alert.error_deleting_file" = "Fișierul nu poate fi șters.";
 
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+
 "alert.config.new.title" = "Configurație nouă de intrare";
 "alert.config.new.message" = "Te rog introdu un nume pentru noua configurație.";
 "alert.config.duplicate.title" = "Duplică configurația";

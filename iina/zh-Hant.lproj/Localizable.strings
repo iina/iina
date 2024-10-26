@@ -16,8 +16,8 @@
 "general.username" = "用戶名";
 "general.password" = "密碼";
 
-"input.value_is_empty" = "Value cannot be empty.";
-"input.already_exists" = "Value already exists.";
+"input.value_is_empty" = "此項為必填項目。";
+"input.already_exists" = "此內容已經被其他項目使用。";
 
 // Guide Window
 "guide.highlights" = "更新亮點";
@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "您正在使用IINA的%@版本";
 "initial.beta.desc" = "如果您希望回滾至穩定版本，請從 設置 > 通用 取消勾選“接收Beta版本更新”，然後從 我們的<a href=\"https://iina.io\">官方網站</a>安裝穩定版本.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.nightly.desc" = "不推薦您使用「每日構建版 Nightly Build」做為日常使用首選。每日構建版不支援自動更新，請至 <a href=\"https://nightly.iina.io\">每日構建版網站頁面</a> 自行下載更新。";
 "initial.debug.desc" = "開發版通常沒有將效能最佳化，所以不建議作為生產力軟件。開發版不支持自動更新。";
 "initial.bug_report" = "通過<a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>發送報告.";
 
@@ -244,6 +244,8 @@
 "alert.error_loading_script" = "無法載入工序指令：%@";
 "alert.error_saving_file" = "儲存檔案 %@ 時發生錯誤：%@";
 "alert.error_deleting_file" = "無法刪除此檔案";
+
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
 
 "alert.config.new.title" = "新增快速鍵設定檔";
 "alert.config.new.message" = "請輸入一個設定檔名稱";

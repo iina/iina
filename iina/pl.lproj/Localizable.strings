@@ -245,6 +245,8 @@
 "alert.error_saving_file" = "Podczas zapisywania %@ wystąpił błąd: %@";
 "alert.error_deleting_file" = "Nie można usunąć pliku.";
 
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+
 "alert.config.new.title" = "Nowa konfiguracja wejściowa";
 "alert.config.new.message" = "Wprowadź nazwę nowej konfiguracji.";
 "alert.config.duplicate.title" = "Powiel konfigurację";

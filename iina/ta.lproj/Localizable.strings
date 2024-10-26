@@ -245,6 +245,8 @@
 "alert.error_saving_file" = "Error occurred when saving %@: %@";
 "alert.error_deleting_file" = "கோப்பை நீக்க முடியவில்லை.";
 
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+
 "alert.config.new.title" = "New Input Configuration";
 "alert.config.new.message" = "Please enter a name for the new configuration.";
 "alert.config.duplicate.title" = "Duplicate Configuration";

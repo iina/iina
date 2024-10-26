@@ -245,6 +245,8 @@
 "alert.error_saving_file" = "%@: %@ को सहेजते समय त्रुटि आई\n";
 "alert.error_deleting_file" = "फ़ाइल को हटा नहीं सकता।";
 
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+
 "alert.config.new.title" = "नया इनपुट कॉन्फ़िगरेशन";
 "alert.config.new.message" = "कृपया नए कॉन्फ़िगरेशन के लिए एक नाम दर्ज करें।";
 "alert.config.duplicate.title" = "डुप्लिकेट कॉन्फ़िगरेशन";

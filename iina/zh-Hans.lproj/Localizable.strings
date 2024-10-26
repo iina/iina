@@ -245,6 +245,8 @@
 "alert.error_saving_file" = "保存 %@时出错： %@";
 "alert.error_deleting_file" = "无法删除该文件。";
 
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+
 "alert.config.new.title" = "新建输入配置";
 "alert.config.new.message" = "请为此新配置输入名称。";
 "alert.config.duplicate.title" = "复制配置";

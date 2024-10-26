@@ -245,6 +245,8 @@
 "alert.error_saving_file" = "%@: %@ kaydedilirken hata oluştu!";
 "alert.error_deleting_file" = "Dosya silinemiyor.";
 
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+
 "alert.config.new.title" = "Yeni Giriş Yapılandırması";
 "alert.config.new.message" = "Lütfen yeni yapılandırma için bir ad girin.";
 "alert.config.duplicate.title" = "Yapılandırmayı Çoğalt";

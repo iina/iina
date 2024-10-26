@@ -245,6 +245,8 @@
 "alert.error_saving_file" = "Při ukládání %@ došlo k chybě: %@";
 "alert.error_deleting_file" = "Soubor nelze odstranit.";
 
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+
 "alert.config.new.title" = "Konfigurace nového vstupu";
 "alert.config.new.message" = "Zadejte název nové konfigurace.";
 "alert.config.duplicate.title" = "Duplicitní konfigurace";

@@ -245,6 +245,8 @@
 "alert.error_saving_file" = "Hiba történt mentéskor %@: %@";
 "alert.error_deleting_file" = "Nem sikerült törölni a fájlt.";
 
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+
 "alert.config.new.title" = "Új beviteli konfiguráció";
 "alert.config.new.message" = "Kérlek adj nevet az új konfigurációnak.";
 "alert.config.duplicate.title" = "Konfiguráció duplikálása";

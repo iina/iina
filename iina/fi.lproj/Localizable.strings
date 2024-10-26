@@ -245,6 +245,8 @@
 "alert.error_saving_file" = "Virhe tallennettaessa kohdetta %@: %@";
 "alert.error_deleting_file" = "Tiedostoa ei voida poistaa.";
 
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+
 "alert.config.new.title" = "Uudet syöttöasetukset";
 "alert.config.new.message" = "Anna nimi uudelle konfiguraatiolle.";
 "alert.config.duplicate.title" = "Monista asetukset";

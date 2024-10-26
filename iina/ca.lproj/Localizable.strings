@@ -245,6 +245,8 @@
 "alert.error_saving_file" = "S'ha produït un error al desar %@: %@";
 "alert.error_deleting_file" = "No es pot suprimir el fitxer.";
 
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+
 "alert.config.new.title" = "Nova configuració d'entrada";
 "alert.config.new.message" = "Si us plau introdueix un nom per a la nova configuració.";
 "alert.config.duplicate.title" = "Duplica configuració";

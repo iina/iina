@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "Vous utilisez la version %@ d'IINA";
 "initial.beta.desc" = "Si vous voulez revenir à une version officielle, décochez la case \"recevoir les versions bêta\" depuis Réglages > Général, et installez une version stable depuis <a href=\"https://iina.io\">notre site officiel</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.nightly.desc" = "Les versions de développement quotidiennes ne sont pas recommandées pour être utilisées en production. Les versions quotidiennes ne prennent pas actuellement en charge les mises à jour automatiques. Veuillez télécharger manuellement les dernières versions de notre site <a href=\"https://nightly.iina.io\">versions de développement quotidiennes</a>.";
 "initial.debug.desc" = "Les versions de débogage ne sont généralement pas optimisées pour les performances, donc il n'est pas recommandé d'être utilisé comme lecteur en production. Les versions de débogage ne prennent pas en charge la mise à jour automatique.";
 "initial.bug_report" = "Signaler un bug via <a href=\"https://github.com/iina/iina/issues\">GitHub</a>.";
 
@@ -50,7 +50,7 @@
 "quicksetting.deinterlace" = "Désentrelacer";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Cacher";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.reset_speed" = "Rétablir la vitesse à 1x";
 
 // EQ Presets
 "eq.preset.flat" = "À plat";
@@ -85,7 +85,7 @@
 "osd.pause" = "En pause";
 "osd.resume" = "Reprendre";
 "osd.volume" = "Volume : %i";
-"osd.speed" = "Speed: %@x";
+"osd.speed" = "Vitesse : %@x";
 "osd.aspect" = "Format d'image : %@";
 "osd.crop" = "Rognage : %@";
 "osd.rotate" = "Rotation : %i°";
@@ -190,7 +190,7 @@
 "menu.exit_mini_player" = "Quitter le Mode Musique";
 "menu.pause" = "Mettre en pause";
 "menu.resume" = "Lire";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "Vitesse : %@x";
 "menu.chapters" = "Afficher le panneau des chapitres";
 "menu.hide_chapters" = "Masquer le panneau des chapitres";
 "menu.playlist" = "Afficher le panneau des listes de lecture";
@@ -204,8 +204,8 @@
 
 "menu.seek_forward" = "Reculer de %.0fs";
 "menu.seek_backward" = "Avancer de %.0fs";
-"menu.speed_up" = "Speed Up by %@x";
-"menu.speed_down" = "Speed Down by %@x";
+"menu.speed_up" = "Accélérer de %@x";
+"menu.speed_down" = "Ralentir de %@x";
 "menu.volume_up" = "Volume +%.0f%%";
 "menu.volume_down" = "Volume -%.0f%%";
 "menu.audio_delay_up" = "Délai audio +%.1fs";
@@ -244,6 +244,8 @@
 "alert.error_loading_script" = "Impossible de charger le script %@ !";
 "alert.error_saving_file" = "Une erreur est survenue lors de l'enregistrement de %@ : %@";
 "alert.error_deleting_file" = "Impossible de supprimer le fichier.";
+
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
 
 "alert.config.new.title" = "Nouvelle configuration des touches";
 "alert.config.new.message" = "Veuillez entrer le nom de la nouvelle configuration.";

@@ -35,7 +35,7 @@
 "inspector.error" = "Erro";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Buffer de dados… %d%%";
+"main.buffering_indicator" = "A carregar… %d%%";
 "main.opening_stream" = "A abrir stream…";
 "osc.precision" = "Precisão";
 "osc.1s" = "1 segundo";
@@ -95,7 +95,7 @@
 "osd.audio_delay.later" = "Atraso de Áudio: %.2fs Depois";
 "osd.audio_delay.earlier" = "Atraso de Áudio: %.2fs Antes";
 "osd.sub_delay.nodelay" = "Atraso da legenda: Sem atraso";
-"osd.sub_delay.later" = "Atraso da legenda: %.2fs depois";
+"osd.sub_delay.later" = "Atraso da legenda: %.2fs Depois";
 "osd.sub_delay.earlier" = "Atraso da Legenda: %.2fs Antes";
 "osd.subtitle_pos" = "Posição da Legenda: %.1f";
 "osd.sub_hidden" = "Subtitles Hidden";
@@ -106,7 +106,7 @@
 "osd.sub_second_hidden" = "Secondary Subtitles Hidden";
 "osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
 "osd.sub_second_visible" = "Secondary Subtitles Visible";
-"osd.mute" = "Desativar Som";
+"osd.mute" = "Sem som";
 "osd.unmute" = "Ligar som";
 "osd.screenshot" = "Captura de ecrã efetuada";
 "osd.abloop.a" = "Loop-AB: A";
@@ -119,7 +119,7 @@
 "osd.clear_playlist" = "Lista de Reprodução Limpa";
 "osd.video_eq.contrast" = "Contraste: %i";
 "osd.video_eq.gamma" = "Gamma: %i";
-"osd.video_eq.hue" = "Matiz: %i";
+"osd.video_eq.hue" = "Tonalidade: %i";
 "osd.video_eq.saturation" = "Saturação: %i";
 "osd.video_eq.brightness" = "Luminosidade: %i";
 "osd.find_online_sub" = "A encontrar legendas online…";
@@ -141,14 +141,14 @@
 "osd.playlist_loop" = "Loop Playlist";
 "osd.no_loop" = "Disable Looping";
 
-"preference.title" = "Preferências";
+"preference.title" = "Definições";
 "preference.general" = "Geral";
-"preference.ui" = "Interface do Utilizador";
+"preference.ui" = "Interface";
 "preference.video_audio" = "Vídeo/Áudio";
 "preference.subtitle" = "Legenda";
 "preference.network" = "Rede";
 "preference.control" = "Controlo";
-"preference.keybindings" = "Mapeamento de teclas";
+"preference.keybindings" = "Atalhos";
 "preference.advanced" = "Avançado";
 "preference.plugins" = "Plugins";
 "preference.utilities" = "Utilidades";
@@ -244,6 +244,8 @@
 "alert.error_loading_script" = "Impossível carregar o script %@!";
 "alert.error_saving_file" = "Ocorreu um erro ao salvar %@: %@";
 "alert.error_deleting_file" = "Não foi possível apagar o ficheiro.";
+
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
 
 "alert.config.new.title" = "Nova configuração";
 "alert.config.new.message" = "Por favor digite um nome para a nova configuração.";

@@ -231,7 +231,7 @@ class MPVController: NSObject {
     }
     // Only set the option if a change is needed to avoid logging when nothing has changed.
     if needsAdjustment {
-      setString(MPVOption.Video.hwdecCodecs, adjusted.joined(separator: ","))
+      chkErr(setOptionString(MPVOption.Video.hwdecCodecs, adjusted.joined(separator: ",")))
     }
   }
 
@@ -295,7 +295,7 @@ class MPVController: NSObject {
     }
     if needsWorkaround {
       log("Disabling hardware acceleration for VP9 encoded videos to workaround FFmpeg 9599")
-      setString(MPVOption.Video.hwdecCodecs, adjusted.joined(separator: ","))
+      chkErr(setOptionString(MPVOption.Video.hwdecCodecs, adjusted.joined(separator: ",")))
     }
   }
 
@@ -354,7 +354,7 @@ class MPVController: NSObject {
       // If the screenshot format is set to JPEG XL then set the screenshot-sw option to yes. This
       // causes the screenshot to be rendered by software instead of the VO. If a HDR video is being
       // displayed in HDR then the resulting screenshot will be HDR.
-      self.setFlag(MPVOption.Screenshot.screenshotSw, format == .jxl)
+      self.chkErr(self.setOptionFlag(MPVOption.Screenshot.screenshotSw, format == .jxl))
       return format?.string
     }
 
@@ -406,7 +406,7 @@ class MPVController: NSObject {
     if Preference.bool(for: PK.spdifAC3) { spdif.append("ac3") }
     if Preference.bool(for: PK.spdifDTS){ spdif.append("dts") }
     if Preference.bool(for: PK.spdifDTSHD) { spdif.append("dts-hd") }
-    setString(MPVOption.Audio.audioSpdif, spdif.joined(separator: ","), level: .verbose)
+    chkErr(setOptionString(MPVOption.Audio.audioSpdif, spdif.joined(separator: ","), level: .verbose))
 
     setUserOption(PK.audioDevice, type: .string, forName: MPVOption.Audio.audioDevice, level: .verbose)
 
@@ -471,7 +471,7 @@ class MPVController: NSObject {
     setUserOption(PK.subMarginX, type: .int, forName: MPVOption.Subtitles.subMarginX, level: .verbose)
     setUserOption(PK.subMarginY, type: .int, forName: MPVOption.Subtitles.subMarginY, level: .verbose)
 
-    setUserOption(PK.subPos, type: .int, forName: MPVOption.Subtitles.subPos, level: .verbose)
+    setUserOption(PK.subPos, type: .float, forName: MPVOption.Subtitles.subPos, level: .verbose)
 
     setUserOption(PK.subLang, type: .string, forName: MPVOption.TrackSelection.slang, level: .verbose)
 
@@ -604,7 +604,7 @@ class MPVController: NSObject {
         needsUpdate = true
       }
       if needsUpdate {
-        setString(MPVOption.WatchLater.watchLaterOptions, watchLaterOptions, level: .verbose)
+        chkErr(setOptionString(MPVOption.WatchLater.watchLaterOptions, watchLaterOptions, level: .verbose))
       }
     }
     if let watchLaterOptions = getString(MPVOption.WatchLater.watchLaterOptions) {
@@ -618,9 +618,9 @@ class MPVController: NSObject {
 
     // Set options that can be override by user's config. mpv will log user config when initialize,
     // so we put them here.
-    chkErr(setString(MPVOption.Video.vo, "libmpv", level: .verbose))
-    chkErr(setString(MPVOption.Window.keepaspect, "no", level: .verbose))
-    chkErr(setString(MPVOption.Video.gpuHwdecInterop, "auto", level: .verbose))
+    chkErr(setOptionString(MPVOption.Video.vo, "libmpv", level: .verbose))
+    chkErr(setOptionString(MPVOption.Window.keepaspect, "no", level: .verbose))
+    chkErr(setOptionString(MPVOption.Video.gpuHwdecInterop, "auto", level: .verbose))
   }
 
   /// Initialize the `mpv` renderer.
@@ -1512,6 +1512,11 @@ class MPVController: NSObject {
 
   private var optionObservers: [String: [OptionObserverInfo]] = [:]
 
+  private func setOptionFlag(_ name: String, _ flag: Bool, level: Logger.Level = .debug) -> Int32 {
+    let value = flag ? yes_str : no_str
+    return setOptionString(name, value, level: level)
+  }
+
   private func setOptionFloat(_ name: String, _ value: Float, level: Logger.Level = .debug) -> Int32 {
     log("Set option: \(name)=\(value)", level: level)
     var data = Double(value)
@@ -1551,8 +1556,7 @@ class MPVController: NSObject {
       code = setOptionFloat(name, Preference.float(for: key), level: level)
 
     case .bool:
-      let value = Preference.bool(for: key)
-      code = setOptionString(name, value ? yes_str : no_str, level: level)
+      code = setOptionFlag(name, Preference.bool(for: key), level: level)
 
     case .string:
       code = setOptionalOptionString(name, Preference.string(for: key), level: level)

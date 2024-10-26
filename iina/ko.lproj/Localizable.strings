@@ -245,6 +245,8 @@
 "alert.error_saving_file" = "%@: %@을 저장하는 도중 오류가 발생했습니다.";
 "alert.error_deleting_file" = "파일을 삭제할 수 없습니다.";
 
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+
 "alert.config.new.title" = "새 설정 파일";
 "alert.config.new.message" = "새 설정 파일의 이름을 입력하십시오.";
 "alert.config.duplicate.title" = "설정 파일 복제";

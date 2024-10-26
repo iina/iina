@@ -53,58 +53,58 @@
 "wjt-O6-KbC.title" = "Idioma preferencial:";
 
 /* Class = "NSButtonCell"; title = "Load ICC profile"; ObjectID = "3g4-jW-uJd"; */
-"3g4-jW-uJd.title" = "Load ICC profile";
+"3g4-jW-uJd.title" = "Carregar perfil ICC";
 
 /* Class = "NSTextFieldCell"; title = "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"; ObjectID = "M2M-of-gjd"; */
-"M2M-of-gjd.title" = "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)";
+"M2M-of-gjd.title" = "Carregar o perfil ICC do ecrã atual e aplica-lo ao vídeo de saída. (Apenas valido em SDR)";
 
 /* Class = "NSButtonCell"; title = "Enable HDR support"; ObjectID = "R7Z-9c-vPJ"; */
-"R7Z-9c-vPJ.title" = "Enable HDR support";
+"R7Z-9c-vPJ.title" = "Ativar o suporte HDR";
 
 /* Class = "NSTextFieldCell"; title = "Enable HDR mode by default when playing HDR videos."; ObjectID = "ZgQ-bc-yEE"; */
-"ZgQ-bc-yEE.title" = "Enable HDR mode by default when playing HDR videos.";
+"ZgQ-bc-yEE.title" = "Ativar o modo HDR por padrão ao reproduzir vídeos HDR.";
 
 /* Class = "NSButtonCell"; title = "Enable tone mapping"; ObjectID = "a5Y-gU-JTj"; */
-"a5Y-gU-JTj.title" = "Enable tone mapping";
+"a5Y-gU-JTj.title" = "Ativar tone mapping";
 
 /* Class = "NSTextFieldCell"; title = "Enable tone mapping images onto the display"; ObjectID = "mNn-cb-IVw"; */
-"mNn-cb-IVw.title" = "Enable tone mapping images onto the display";
+"mNn-cb-IVw.title" = "Ativar imagens tone mapping ao ecrã";
 
 /* Class = "NSTextFieldCell"; title = "Target peak:"; ObjectID = "xVk-OA-kOf"; */
-"xVk-OA-kOf.title" = "Target peak:";
+"xVk-OA-kOf.title" = "Pico Alvo:";
 
 /* Class = "NSTextFieldCell"; title = "nits"; ObjectID = "baO-xy-7hD"; */
 "baO-xy-7hD.title" = "nits";
 
 /* Class = "NSTextFieldCell"; title = "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."; ObjectID = "aTt-aZ-rjK"; */
-"aTt-aZ-rjK.title" = "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400.";
+"aTt-aZ-rjK.title" = "Brilho pico do ecrã. Se deixado a 0 o IINA detetará este valor. Se o IINA não conseguir detetar, o brilho pico será predefinido para 400.";
 
 /* Class = "NSTextFieldCell"; title = "Algorithm:"; ObjectID = "qzI-rq-PqO"; */
-"qzI-rq-PqO.title" = "Algorithm:";
+"qzI-rq-PqO.title" = "Algoritmo:";
 
 /* Class = "NSTextFieldCell"; title = "Algorithm to use for tone mapping images onto the display."; ObjectID = "szA-8r-plt"; */
-"szA-8r-plt.title" = "Algorithm to use for tone mapping images onto the display.";
+"szA-8r-plt.title" = "Algoritmo para aplicar tone mapping ao ecrã.";
 
 /* Class = "NSTextFieldCell"; title = "ReplayGain:"; ObjectID = "gfq-nW-dDu"; */
-"gfq-nW-dDu.title" = "ReplayGain:";
+"gfq-nW-dDu.title" = "Ganho:";
 
 /* Class = "NSTextFieldCell"; title = "Gain adjustment:"; ObjectID = "ZRL-b0-k1L"; */
-"ZRL-b0-k1L.title" = "Gain adjustment:";
+"ZRL-b0-k1L.title" = "Ajuste de ganho:";
 
 /* Class = "NSMenuItem"; title = "No adjustment"; ObjectID = "k7b-6o-lCK"; */
-"k7b-6o-lCK.title" = "No adjustment";
+"k7b-6o-lCK.title" = "Sem ajuste";
 
 /* Class = "NSMenuItem"; title = "Track gain"; ObjectID = "w6E-lw-g7g"; */
-"w6E-lw-g7g.title" = "Track gain";
+"w6E-lw-g7g.title" = "Ganho de faixa";
 
 /* Class = "NSMenuItem"; title = "Album gain"; ObjectID = "ZJJ-1o-ZGD"; */
-"ZJJ-1o-ZGD.title" = "Album gain";
+"ZJJ-1o-ZGD.title" = "Ganho de álbum";
 
 /* Class = "NSTextFieldCell"; title = "Adjust volume gain according to ReplayGain values stored in the file metadata."; ObjectID = "y61-Ah-c92"; */
-"y61-Ah-c92.title" = "Adjust volume gain according to ReplayGain values stored in the file metadata.";
+"y61-Ah-c92.title" = "Ajustar o ganho conforme o reportado nos metadados do ficheiro.";
 
 /* Class = "NSTextFieldCell"; title = "Preamp gain:"; ObjectID = "9Q0-hw-PdU"; */
-"9Q0-hw-PdU.title" = "Preamp gain:";
+"9Q0-hw-PdU.title" = "Ganho de pré-amplificação:";
 
 /* Class = "NSTextFieldCell"; title = "dB"; ObjectID = "Bew-Pv-igg"; */
 "Bew-Pv-igg.title" = "dB";
@@ -113,10 +113,10 @@
 "rIW-XP-zGZ.title" = "Pre-amplification gain to apply to the ReplayGain gain.";
 
 /* Class = "NSButtonCell"; title = "Allow the volume gain to clip"; ObjectID = "J3e-oT-fy9"; */
-"J3e-oT-fy9.title" = "Allow the volume gain to clip";
+"J3e-oT-fy9.title" = "Permitir saturação do ganho";
 
 /* Class = "NSTextFieldCell"; title = "If this option is not enabled, clipping will be prevented by lowering the gain."; ObjectID = "HQV-tY-NMj"; */
-"HQV-tY-NMj.title" = "If this option is not enabled, clipping will be prevented by lowering the gain.";
+"HQV-tY-NMj.title" = "Se esta opção não estiver ativada, será evitada a saturação diminuindo o ganho.";
 
 /* Class = "NSTextFieldCell"; title = "Fallback:"; ObjectID = "fOz-6g-MhS"; */
 "fOz-6g-MhS.title" = "Fallback:";
@@ -125,10 +125,10 @@
 "ovT-D3-3jS.title" = "dB";
 
 /* Class = "NSTextFieldCell"; title = "Gain to apply if the file has no ReplayGain tags."; ObjectID = "m2n-yd-a4n"; */
-"m2n-yd-a4n.title" = "Gain to apply if the file has no ReplayGain tags.";
+"m2n-yd-a4n.title" = "Ganho a aplicar se o ficheiro não tiver metadados de ganho.";
 
 /* Class = "NSTextFieldCell"; title = "Audio driver:"; ObjectID = "Zco-Ba-Idk"; */
-"Zco-Ba-Idk.title" = "Audio driver:";
+"Zco-Ba-Idk.title" = "Controlador de áudio:";
 
 /* Class = "NSTextFieldCell"; title = "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."; ObjectID = "2Md-pv-gSi"; */
-"2Md-pv-gSi.title" = "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays.";
+"2Md-pv-gSi.title" = "AVFountation é um novo controlador experimental com suporte a Spacial Audio. Poderá encontrar problemas, como atrasos no áudio.";

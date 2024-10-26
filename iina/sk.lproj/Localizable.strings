@@ -245,6 +245,8 @@
 "alert.error_saving_file" = "Nastala chyba pri ukladaní %@: %@";
 "alert.error_deleting_file" = "Súbor nemožno vymazať.";
 
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+
 "alert.config.new.title" = "Nová konfigurácia vstupu";
 "alert.config.new.message" = "Zadajte názov pre novú konfiguráciu.";
 "alert.config.duplicate.title" = "Duplikovať konfiguráciu";

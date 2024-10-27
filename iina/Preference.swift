@@ -493,7 +493,7 @@ struct Preference {
     case scale
     case no
 
-    static var defaultValue = SubOverrideLevel.yes
+    static var defaultValue = SubOverrideLevel.scale
 
     init?(key: Key) {
       self.init(rawValue: Preference.integer(for: key))
@@ -875,8 +875,8 @@ struct Preference {
     .subAutoLoadPriorityString: "",
     .subAutoLoadSearchPath: "./*",
     .ignoreAssStyles: false,
-    .subOverrideLevel: SubOverrideLevel.strip.rawValue,
-    .secondarySubOverrideLevel: SubOverrideLevel.strip.rawValue,
+    .subOverrideLevel: SubOverrideLevel.scale.rawValue,
+    .secondarySubOverrideLevel: SubOverrideLevel.scale.rawValue,
     .subTextFont: "sans-serif",
     .subTextSize: Float(55),
     .subTextColorString: NSColor.white.usingColorSpace(.deviceRGB)!.mpvColorString,

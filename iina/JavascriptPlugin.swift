@@ -39,6 +39,10 @@ class JavascriptPlugin: NSObject {
     case cannotLoadPlugin
   }
 
+  static var hasYTDL: Bool {
+    return plugins.contains { $0.identifier == "io.iina.ytdl" }
+  }
+
   static var plugins = loadPlugins() {
     didSet {
       NotificationCenter.default.post(Notification(name: .iinaPluginChanged))

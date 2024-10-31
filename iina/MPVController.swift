@@ -505,7 +505,13 @@ class MPVController: NSObject {
       return v.string
     }
 
-    setUserOption(PK.ytdlEnabled, type: .bool, forName: MPVOption.ProgramBehavior.ytdl, level: .verbose)
+    setUserOption(PK.ytdlEnabled, type: .other, forName: MPVOption.ProgramBehavior.ytdl, level: .verbose) { key in
+      let v = Preference.bool(for: .ytdlEnabled)
+      if JavascriptPlugin.hasYTDL {
+        return "no"
+      }
+      return v ? "yes" : "no"
+    }
     setUserOption(PK.ytdlRawOptions, type: .string, forName: MPVOption.ProgramBehavior.ytdlRawOptions,
                   level: .verbose)
     chkErr(setOptionString(MPVOption.ProgramBehavior.resetOnNextFile,

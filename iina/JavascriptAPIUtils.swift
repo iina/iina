@@ -78,7 +78,7 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
     if let _ = searchBinary(file, in: Utility.binariesURL) ?? searchBinary(file, in: Utility.exeDirURL) {
       return true
     }
-    if let path = parsePath(file).path {
+    if let path = parsePath(file, forceLocalPath: false).path {
       return FileManager.default.fileExists(atPath: path)
     }
     return false

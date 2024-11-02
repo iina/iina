@@ -482,16 +482,16 @@ extension VideoView {
       if targetPeak == 0 {
         if let displayInfo = CoreDisplay_DisplayCreateInfoDictionary(currentDisplay!)?.takeRetainedValue() as? [String: AnyObject] {
           logHDR("Successfully obtained information about the display")
-          // Prefer ReferencePeakHDRLuminance, which is reported by newer macOS versions.
-          if let hdrLuminance = displayInfo["ReferencePeakHDRLuminance"] as? Int {
-            logHDR("Found ReferencePeakHDRLuminance: \(hdrLuminance)")
+          // Apple Silicon Macs use the key NonReferencePeakHDRLuminance.
+          if let hdrLuminance = displayInfo["NonReferencePeakHDRLuminance"] as? Int {
+            logHDR("Found NonReferencePeakHDRLuminance: \(hdrLuminance)")
             targetPeak = hdrLuminance
           } else if let hdrLuminance = displayInfo["DisplayBacklight"] as? Int {
-            // We know macOS Catalina uses this key.
+            // Intel Macs use the key DisplayBacklight.
             logHDR("Found DisplayBacklight: \(hdrLuminance)")
             targetPeak = hdrLuminance
           } else {
-            logHDR("Didn't find ReferencePeakHDRLuminance or DisplayBacklight, assuming HDR400")
+            logHDR("Didn't find NonReferencePeakHDRLuminance or DisplayBacklight, assuming HDR400")
             logHDR("Display info dictionary: \(displayInfo)")
             targetPeak = 400
           }

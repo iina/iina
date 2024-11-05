@@ -606,8 +606,13 @@ class MenuController: NSObject, NSMenuDelegate {
       if index != 0 {
         pluginMenu.addItem(.separator())
       }
-      pluginMenu.addItem(withTitle: instance.plugin.name, enabled: false)
-      
+
+      if #available(macOS 14.0, *) {
+        pluginMenu.addItem(.sectionHeader(title: instance.plugin.name))
+      } else {
+        pluginMenu.addItem(withTitle: instance.plugin.name, enabled: false)
+      }
+
       for item in menuItems {
         if counter == 5 {
           Logger.log("Please avoid adding too much first-level menu items. IINA will only display the first 5 of them.",

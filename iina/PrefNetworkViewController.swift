@@ -26,6 +26,7 @@ class PrefNetworkViewController: PreferenceViewController, PreferenceWindowEmbed
     return NSLocalizedString("preference.network", comment: "Network")
   }
 
+  @IBOutlet weak var ytdlHelpLabel: NSTextField!
   @IBOutlet weak var enableYTDLCheckBox: NSButton!
   
   override var sectionViews: [NSView] {
@@ -41,7 +42,14 @@ class PrefNetworkViewController: PreferenceViewController, PreferenceWindowEmbed
 
     if JavascriptPlugin.hasYTDL {
       enableYTDLCheckBox.state = .off
-      enableYTDLCheckBox.isEnabled = false
+      sectionYTDLView.subviews.forEach {
+        if let control = $0 as? NSControl {
+          control.isEnabled = false
+        }
+      }
+      ytdlHelpLabel.stringValue = NSLocalizedString("preference.ytdl_plugin_installed", comment: "")
+    } else {
+      ytdlHelpLabel.stringValue = NSLocalizedString("preference.ytdl_plugin_not_installed", comment: "")
     }
   }
 

@@ -313,7 +313,13 @@ class PrefPluginViewController: PreferenceViewController, PreferenceWindowEmbedd
     let block = {
       let alert = NSAlert()
       let permissionListView = PrefPluginPermissionListView()
-      let scrollView = NSScrollView(frame: NSRect(x: 0, y: 0, width: 280, height: 300))
+      let permissionWidth: Int
+      if #available(macOS 11.0, *) {
+        permissionWidth = 500
+      } else {
+        permissionWidth = 280
+      }
+      let scrollView = NSScrollView(frame: NSRect(x: 0, y: 0, width: permissionWidth, height: 300))
       permissionListView.translatesAutoresizingMaskIntoConstraints = false
       alert.messageText = NSLocalizedString("alert.title_warning", comment: "Warning")
       alert.informativeText = NSLocalizedString(previousPlugin == nil ? "alert.plugin_permission" : "alert.plugin_permission_added", comment: "")

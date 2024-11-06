@@ -718,7 +718,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     
     // if installing a plugin package
     if let pluginPackageURL = urls.first(where: { $0.pathExtension == "iinaplgz" }) {
-      showPreferences(self)
       preferenceWindowController.performAction(.installPlugin(url: pluginPackageURL))
       return
     }
@@ -920,6 +919,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
   @IBAction func showPreferences(_ sender: AnyObject) {
     preferenceWindowController.showWindow(self)
+  }
+
+  @objc func showPluginPreferences(_ sender: NSMenuItem) {
+    preferenceWindowController.openPreferenceView(withNibName: "PrefPluginViewController")
   }
 
   @IBAction func showVideoFilterWindow(_ sender: AnyObject) {

@@ -589,7 +589,7 @@ class MenuController: NSObject, NSMenuDelegate {
 
   func updatePluginMenu() {
     pluginMenu.removeAllItems()
-    pluginMenu.addItem(withTitle: "Manage Plugins…")
+    pluginMenu.addItem(withTitle: "Manage Plugins…", action: #selector(AppDelegate.showPluginPreferences(_:)), keyEquivalent: "")
     pluginMenu.addItem(.separator())
 
     let developerTool = NSMenuItem()

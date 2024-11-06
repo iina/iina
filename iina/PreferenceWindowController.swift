@@ -277,13 +277,14 @@ class PreferenceWindowController: NSWindowController {
 
   // MARK: - Tabs
 
-  private func loadTab(at index: Int, thenFindLabelTitled title: String? = nil) {
+  @discardableResult
+  private func loadTab(at index: Int, thenFindLabelTitled title: String? = nil) -> PreferenceWindowEmbeddable? {
     // load view
     if index != tableView.selectedRow {
       tableView.selectRowIndexes(IndexSet(integer: index), byExtendingSelection: false)
     }
     prefSectionsStackView.subviews.forEach { $0.removeFromSuperview() }
-    guard let vc = viewControllers[at: index] else { return }
+    guard let vc = viewControllers[at: index] else { return nil }
     prefSectionsStackView.addSubview(vc.view)
     Utility.quickConstraints(["H:|-0-[v]-0-|", "V:|-0-[v]-0-|"], ["v": vc.view])
 
@@ -298,6 +299,8 @@ class PreferenceWindowController: NSWindowController {
         collapseView.setCollapsed(false, animated: false)
       }
     }
+    
+    return vc
   }
 
   private func getLabelDict(inNibNamed name: String) -> [String: [String]] {
@@ -384,14 +387,17 @@ class PreferenceWindowController: NSWindowController {
     return nil
   }
 
+  @discardableResult
+  func openPreferenceView(withNibName name: NSNib.Name) -> PreferenceWindowEmbeddable? {
+    showWindow(self)
+    guard let idx = viewControllers.firstIndex(where: { $0.nibName == name } ) else { return nil }
+    return loadTab(at: idx)
+  }
+
   func performAction(_ action: Action) {
     switch action {
     case .installPlugin(url: let url):
-      guard let idx = viewControllers.firstIndex(where: { $0 is PrefPluginViewController }) else {
-        return
-      }
-      loadTab(at: idx)
-      let vc = viewControllers[idx] as! PrefPluginViewController
+      let vc = openPreferenceView(withNibName: "PrefPluginViewController") as! PrefPluginViewController
       vc.installPluginAction(localPackageURL: url)
       // vc.perform(#selector(vc.installPluginAction(localPackageURL:)), with: url, afterDelay: 0.25)
     }

@@ -589,11 +589,11 @@ class MenuController: NSObject, NSMenuDelegate {
 
   func updatePluginMenu() {
     pluginMenu.removeAllItems()
-    pluginMenu.addItem(withTitle: "Manage Plugins…", action: #selector(AppDelegate.showPluginPreferences(_:)), keyEquivalent: "")
+    pluginMenu.addItem(withTitle: NSLocalizedString("menu.manage_plugins", comment: "Manage Plugins…"), action: #selector(AppDelegate.showPluginPreferences(_:)), keyEquivalent: "")
     pluginMenu.addItem(.separator())
 
     let developerTool = NSMenuItem()
-    developerTool.title = "Developer Tool"
+    developerTool.title = NSLocalizedString("menu.developer_tool", comment: "Developer Tool")
     developerTool.submenu = NSMenu()
 
     var errorList: [(String, String)] = []
@@ -618,7 +618,7 @@ class MenuController: NSObject, NSMenuDelegate {
           Logger.log("Please avoid adding too much first-level menu items. IINA will only display the first 5 of them.",
                      level: .warning, subsystem: instance.subsystem)
           let moreItem = NSMenuItem()
-          moreItem.title = "More…"
+          moreItem.title = NSLocalizedString("menu.more_plugin", comment: "More…")
           rootMenu = NSMenu()
           moreItem.submenu = rootMenu
           pluginMenu.addItem(moreItem)
@@ -640,16 +640,18 @@ class MenuController: NSObject, NSMenuDelegate {
     }
 
     if errorList.count > 0 {
-      pluginMenu.insertItem(
-        NSMenuItem(title: "⚠︎ Conflicting key shortcuts…", action: nil, keyEquivalent: ""),
-        at: 0)
+      let item = NSMenuItem(title: NSLocalizedString("menu.conflicting_shortcuts", comment: "Conflicting key shortcuts…"), action: nil, keyEquivalent: "")
+      if #available(macOS 14.0, *) {
+        item.badge = NSMenuItemBadge.alerts(count: errorList.count)
+      }
+      pluginMenu.insertItem(item, at: 0)
     }
 
     pluginMenu.addItem(.separator())
     if #available(macOS 12.0, *) {
       pluginMenu.addItem(developerTool)
     }
-    pluginMenu.addItem(withTitle: "Reload all plugins", action: #selector(MainMenuActionHandler.reloadAllPlugins(_:)), keyEquivalent: "")
+    pluginMenu.addItem(withTitle: NSLocalizedString("menu.reload_plugins", comment: "Reload All Plugins"), action: #selector(MainMenuActionHandler.reloadAllPlugins(_:)), keyEquivalent: "")
   }
 
   @discardableResult

@@ -18,7 +18,7 @@ import Carbon
 extension MenuController {
   func menuItem(forPluginInstance inst: JavascriptPluginInstance, tag: Int) -> NSMenuItem {
     let item = NSMenuItem()
-    item.title = inst.plugin.name + (inst.isGlobal ? " Global" : "")
+    item.title = inst.plugin.name + (inst.isGlobal ? " (Global)" : "")
     item.representedObject = inst
     item.tag = JavasctiptDevTool.JSMenuItemInstance
     item.target = self

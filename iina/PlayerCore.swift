@@ -2251,14 +2251,14 @@ class PlayerCore: NSObject {
       }
     }
 
-    guard useTimer else { return }
-
-    // Timer will start
-
     if !wasTimerRunning {
       // Do not wait for first redraw
       syncUITime()
     }
+
+    guard useTimer else { return }
+
+    // Timer will start
 
     syncUITimer = Timer.scheduledTimer(
       timeInterval: timeInterval,

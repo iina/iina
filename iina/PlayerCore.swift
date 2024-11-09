@@ -268,8 +268,8 @@ class PlayerCore: NSObject {
 
   // MARK: - Plugins
 
-  static func reloadPluginForAll(_ plugin: JavascriptPlugin) {
-    playerCores.forEach { $0.reloadPlugin(plugin) }
+  static func reloadPluginForAll(_ plugin: JavascriptPlugin, forced: Bool = false) {
+    playerCores.forEach { $0.reloadPlugin(plugin, forced: forced) }
     AppDelegate.shared.menuController?.updatePluginMenu()
   }
 

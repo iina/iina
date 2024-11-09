@@ -104,6 +104,10 @@ class JavascriptPlugin: NSObject {
   }()
   let defaultPreferences: [String: Any]
 
+  static func recreateAllPlugins() {
+    plugins = loadPlugins()
+  }
+
   static private func loadPlugins() -> [JavascriptPlugin] {
     guard IINA_ENABLE_PLUGIN_SYSTEM else { return [] }
 

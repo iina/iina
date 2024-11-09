@@ -273,6 +273,11 @@ class PlayerCore: NSObject {
     AppDelegate.shared.menuController?.updatePluginMenu()
   }
 
+  func clearPlugins() {
+    pluginMap.removeAll()
+    plugins.removeAll()
+  }
+
   func loadPlugins() {
     pluginMap.removeAll()
     plugins = JavascriptPlugin.plugins.compactMap { plugin in

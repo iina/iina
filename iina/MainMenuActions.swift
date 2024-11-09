@@ -478,8 +478,29 @@ extension MainMenuActionHandler {
   // MARK: - Plugin
 
   @objc func reloadAllPlugins(_ sender: NSMenuItem) {
-    for plugin in JavascriptPlugin.plugins {
-      player.reloadPlugin(plugin, forced: true)
+    AppDelegate.shared.menuController.pluginMenu.removeAllItems()
+
+    for player in PlayerCore.playerCores {
+      player.clearPlugins()
+    }
+
+    JavascriptPlugin.recreateAllPlugins()
+    JavascriptPlugin.loadGlobalInstances()
+
+    for player in PlayerCore.playerCores {
+      for plugin in JavascriptPlugin.plugins {
+        player.reloadPlugin(plugin, forced: true)
+      }
+      // Try to emit the events that are already emitted.
+      // Of course this is not exhaustive, so users shouldn't rely on this function
+      if player.mainWindow.loaded {
+        player.events.emit(.windowLoaded)
+      }
+      player.events.emit(.mpvInitialized)
+      if player.info.state == .playing {
+        player.events.emit(.fileLoaded)
+        player.events.emit(.fileStarted)
+      }
     }
   }
 }

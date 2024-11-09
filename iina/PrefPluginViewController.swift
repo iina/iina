@@ -219,15 +219,18 @@ class PrefPluginViewController: PreferenceViewController, PreferenceWindowEmbedd
   @IBAction func tabSwitched(_ sender: NSSegmentedControl) {
     tabView.selectTabViewItem(at: sender.selectedSegment)
     guard let currentPlugin = currentPlugin else { return }
-    if sender.selectedSegment == 2 {
+    if sender.selectedTag() == 2 {
       // Preferences
-      guard let prefURL = currentPlugin.preferencesPageURL else { return }
       if pluginPreferencesWebView == nil {
         createPreferenceView()
       }
+      guard let prefURL = currentPlugin.preferencesPageURL else {
+        pluginPreferencesWebView.loadHTMLString("<html><body></body></html>", baseURL: nil)
+        return
+      }
       pluginPreferencesWebView.loadFileURL(prefURL, allowingReadAccessTo: currentPlugin.root)
       pluginPreferencesViewController.plugin = currentPlugin
-    } else if sender.selectedSegment == 1 {
+    } else if sender.selectedTag() == 1 {
       // About
       if let _ = currentPlugin.helpPageURL {
         pluginSupportStackView.setVisibilityPriority(.mustHold, for: pluginHelpView)
@@ -663,8 +666,7 @@ extension PrefPluginViewController: WKNavigationDelegate {
     if webView == pluginPreferencesWebView {
       guard
         let url = navigationAction.request.url,
-        let currentPluginPrefPageURL = currentPlugin?.preferencesPageURL,
-        url.absoluteString.starts(with: currentPluginPrefPageURL.absoluteString)
+        url.absoluteString.starts(with: currentPlugin?.preferencesPageURL?.absoluteString ?? "000") || url.absoluteString == "about:blank"
       else {
         Logger.log("Loading page from \(navigationAction.request.url?.absoluteString ?? "?") is not allowed", level: .error)
           decisionHandler(.cancel)

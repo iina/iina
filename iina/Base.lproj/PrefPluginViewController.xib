@@ -415,11 +415,11 @@
                                             </tabViewItem>
                                             <tabViewItem label="Permissions" identifier="" id="ALD-n6-A0r">
                                                 <view key="view" id="vcw-rr-7hi">
-                                                    <rect key="frame" x="0.0" y="0.0" width="310" height="316"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="539" height="316"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PzT-T3-f8b" customClass="PrefPluginPermissionListView" customModule="IINA" customModuleProvider="target">
-                                                            <rect key="frame" x="8" y="8" width="294" height="300"/>
+                                                            <rect key="frame" x="8" y="8" width="523" height="300"/>
                                                         </stackView>
                                                     </subviews>
                                                     <constraints>
@@ -432,7 +432,7 @@
                                             </tabViewItem>
                                             <tabViewItem label="Preferences" identifier="" id="eyS-eb-H4e">
                                                 <view key="view" id="rrW-9x-IB9">
-                                                    <rect key="frame" x="0.0" y="0.0" width="524" height="275"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="539" height="316"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </view>
                                             </tabViewItem>
@@ -456,7 +456,7 @@
                                             <font key="font" metaFont="controlContent" size="11"/>
                                             <segments>
                                                 <segment label="About" selected="YES" tag="1"/>
-                                                <segment label="Permissions"/>
+                                                <segment label="Permissions" tag="3"/>
                                                 <segment label="Preferences" tag="2"/>
                                             </segments>
                                         </segmentedCell>

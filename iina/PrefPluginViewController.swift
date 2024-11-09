@@ -10,9 +10,9 @@ import Cocoa
 @preconcurrency import WebKit
 
 fileprivate let defaultPlugins = [
-  ["url": "iina/plugin-demo", "id": "io.iina.demo"],
   ["url": "iina/plugin-online-media", "id": "io.iina.ytdl"],
   ["url": "iina/plugin-userscript", "id": "io.iina.userscript"],
+  ["url": "iina/plugin-opensub", "id": "io.iina.opensub"],
 ]
 
 fileprivate extension NSUserInterfaceItemIdentifier {

@@ -2251,8 +2251,10 @@ class PlayerCore: NSObject {
       }
     }
 
+    // When fadeable views are hidden the time can get out of sync. This method will be called when
+    // the view becomes visible to sync the time. If the timer was not running the view must be
+    // updated now. Playback may be paused. If that is the case then the timer will not be started.
     if !wasTimerRunning {
-      // Do not wait for first redraw
       syncUITime()
     }
 

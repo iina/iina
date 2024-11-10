@@ -530,7 +530,7 @@ class MPVController: NSObject {
       setOptionString("config", "yes", level: .verbose)
       let status = setOptionString(MPVOption.ProgramBehavior.configDir, userConfDir)
       if status < 0 {
-        Utility.showAlert("extra_option.config_folder", arguments: [userConfDir])
+        Utility.showAlert("extra_option.config_folder", arguments: [userConfDir], disableMenus: true)
       }
     }
 
@@ -543,13 +543,13 @@ class MPVController: NSObject {
             let status = setOptionString(op[0], op[1])
             if status < 0 {
               Utility.showAlert("extra_option.error", arguments:
-                                  [op[0], op[1], status])
+                                  [op[0], op[1], status], disableMenus: true)
             }
           }
           log("Set user configured mpv option values")
         }
       } else {
-        Utility.showAlert("extra_option.cannot_read")
+        Utility.showAlert("extra_option.cannot_read", disableMenus: true)
       }
     }
 
@@ -1589,7 +1589,8 @@ class MPVController: NSObject {
     }
 
     if code < 0 {
-      Utility.showAlert("mpv_error", arguments: [String(cString: mpv_error_string(code)), "\(code)", name])
+      Utility.showAlert("mpv_error", arguments: [String(cString: mpv_error_string(code)), "\(code)", name],
+                        disableMenus: true)
     }
 
     if sync {

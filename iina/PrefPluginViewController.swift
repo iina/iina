@@ -53,7 +53,7 @@ class PrefPluginViewController: PreferenceViewController, PreferenceWindowEmbedd
   @IBOutlet weak var pluginAuthorLabel: NSTextField!
   @IBOutlet weak var pluginIdentifierLabel: NSTextField!
   @IBOutlet weak var pluginDescLabel: NSTextField!
-  @IBOutlet weak var pluginSourceLabel: NSTextField!
+  @IBOutlet weak var pluginSourceTextView: NSTextView!
   @IBOutlet weak var pluginCheckUpdatesBtn: NSButton!
   @IBOutlet weak var pluginPermissionsView: PrefPluginPermissionListView!
   @IBOutlet weak var pluginWebsiteEmailStackView: NSStackView!
@@ -261,7 +261,14 @@ class PrefPluginViewController: PreferenceViewController, PreferenceWindowEmbedd
     pluginWebsiteEmailStackView.setVisibilityPriority(plugin.authorEmail == nil ? .notVisible : .mustHold, for: pluginEmailBtn)
     pluginWebsiteEmailStackView.setVisibilityPriority(plugin.authorURL == nil ? .notVisible : .mustHold, for: pluginWebsiteBtn)
     pluginPermissionsView.setPlugin(plugin)
-    pluginSourceLabel.stringValue = plugin.githubURLString ?? NSLocalizedString("plugin.local", comment: "")
+    if let url = plugin.githubURLString {
+      pluginSourceTextView.textStorage?.setAttributedString(.init(string: url, attributes: [.link: URL(string: url)!]))
+      pluginSourceTextView.isSelectable = true
+    } else {
+      pluginSourceTextView.textStorage?.setAttributedString(.init(string: NSLocalizedString("plugin.local", comment: "")))
+      pluginSourceTextView.isSelectable = false
+    }
+    pluginSourceTextView.textStorage?.font = .systemFont(ofSize: NSFont.systemFontSize)
     pluginCheckUpdatesBtn.isHidden = plugin.githubRepo == nil || plugin.githubVersion == nil
     // if the plugin is symlinked, disable the uninstall button since it can accidentally delete the project folder
     uninstallBtn.isEnabled = !plugin.isExternal

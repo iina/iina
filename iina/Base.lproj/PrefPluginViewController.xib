@@ -27,7 +27,7 @@
                 <outlet property="pluginNameLabel" destination="RQj-8e-E8x" id="WwQ-IZ-EKU"/>
                 <outlet property="pluginPermissionsView" destination="PzT-T3-f8b" id="CXe-3k-9Vt"/>
                 <outlet property="pluginPreferencesContentView" destination="rrW-9x-IB9" id="j5I-9V-Ahk"/>
-                <outlet property="pluginSourceLabel" destination="Czm-NJ-aCG" id="rQW-EL-0Sg"/>
+                <outlet property="pluginSourceTextView" destination="QX3-0q-nzy" id="u88-8K-7dg"/>
                 <outlet property="pluginSourceView" destination="4MR-2X-Tp6" id="h9m-t9-sHV"/>
                 <outlet property="pluginSupportStackView" destination="eVh-8y-rUw" id="T4A-rP-HI8"/>
                 <outlet property="pluginVersionLabel" destination="XdS-aQ-bSd" id="vvY-SV-EdS"/>
@@ -277,7 +277,7 @@
                                                                     </constraints>
                                                                 </customView>
                                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="4MR-2X-Tp6">
-                                                                    <rect key="frame" x="0.0" y="132" width="512" height="46"/>
+                                                                    <rect key="frame" x="0.0" y="132" width="527" height="46"/>
                                                                     <subviews>
                                                                         <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pnd-pE-Bkr">
                                                                             <rect key="frame" x="10" y="22" width="41" height="20"/>
@@ -287,16 +287,8 @@
                                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
                                                                         </textField>
-                                                                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="Czm-NJ-aCG">
-                                                                            <rect key="frame" x="10" y="4" width="37" height="16"/>
-                                                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="9vb-2Y-s7Q">
-                                                                                <font key="font" metaFont="system"/>
-                                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                            </textFieldCell>
-                                                                        </textField>
                                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NMr-Wb-Q2z">
-                                                                            <rect key="frame" x="391" y="1" width="113" height="19"/>
+                                                                            <rect key="frame" x="406" y="2" width="113" height="19"/>
                                                                             <buttonCell key="cell" type="roundRect" title="Check for Updates" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MyY-5s-tIm">
                                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                 <font key="font" metaFont="controlContent" size="11"/>
@@ -306,25 +298,60 @@
                                                                             </connections>
                                                                         </button>
                                                                         <progressIndicator wantsLayer="YES" maxValue="100" displayedWhenStopped="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="uxT-B5-933">
-                                                                            <rect key="frame" x="367" y="3" width="16" height="16"/>
+                                                                            <rect key="frame" x="382" y="4" width="16" height="16"/>
                                                                         </progressIndicator>
+                                                                        <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khK-22-WoK">
+                                                                            <rect key="frame" x="8" y="4" width="374" height="16"/>
+                                                                            <clipView key="contentView" drawsBackground="NO" id="ESP-wq-C8z">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="374" height="16"/>
+                                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                                <subviews>
+                                                                                    <textView wantsLayer="YES" editable="NO" drawsBackground="NO" importsGraphics="NO" richText="NO" verticallyResizable="NO" spellingCorrection="YES" smartInsertDelete="YES" id="QX3-0q-nzy">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="16"/>
+                                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                                        <size key="minSize" width="374" height="16"/>
+                                                                                        <size key="maxSize" width="374" height="10000000"/>
+                                                                                        <attributedString key="textStorage">
+                                                                                            <fragment content="Installed locally">
+                                                                                                <attributes>
+                                                                                                    <font key="NSFont" metaFont="system"/>
+                                                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                                                </attributes>
+                                                                                            </fragment>
+                                                                                        </attributedString>
+                                                                                    </textView>
+                                                                                </subviews>
+                                                                            </clipView>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="16" id="78E-x1-GSs"/>
+                                                                            </constraints>
+                                                                            <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="JLD-zw-Koa">
+                                                                                <rect key="frame" x="-100" y="-100" width="240" height="16"/>
+                                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                            </scroller>
+                                                                            <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="8eq-Jz-hdB">
+                                                                                <rect key="frame" x="358" y="0.0" width="16" height="16"/>
+                                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                            </scroller>
+                                                                        </scrollView>
                                                                     </subviews>
                                                                     <constraints>
+                                                                        <constraint firstItem="khK-22-WoK" firstAttribute="leading" secondItem="4MR-2X-Tp6" secondAttribute="leading" constant="8" id="1Pl-T3-WHI"/>
+                                                                        <constraint firstItem="uxT-B5-933" firstAttribute="centerY" secondItem="QX3-0q-nzy" secondAttribute="centerY" id="3OE-Vn-A7s"/>
                                                                         <constraint firstItem="Pnd-pE-Bkr" firstAttribute="leading" secondItem="4MR-2X-Tp6" secondAttribute="leading" constant="12" id="5fZ-BM-7Dy"/>
                                                                         <constraint firstItem="uxT-B5-933" firstAttribute="centerY" secondItem="NMr-Wb-Q2z" secondAttribute="centerY" id="6aR-Ns-Xpr"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="Czm-NJ-aCG" secondAttribute="bottom" constant="4" id="FxZ-id-R1u"/>
-                                                                        <constraint firstItem="Czm-NJ-aCG" firstAttribute="top" secondItem="Pnd-pE-Bkr" secondAttribute="bottom" constant="2" id="Huy-y3-Ofm"/>
-                                                                        <constraint firstItem="Czm-NJ-aCG" firstAttribute="baseline" secondItem="NMr-Wb-Q2z" secondAttribute="firstBaseline" id="Qi9-8Q-S1Q"/>
+                                                                        <constraint firstItem="khK-22-WoK" firstAttribute="top" secondItem="Pnd-pE-Bkr" secondAttribute="bottom" constant="2" id="9Ct-Ty-zld"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="khK-22-WoK" secondAttribute="bottom" constant="4" id="KsJ-Bn-142"/>
                                                                         <constraint firstAttribute="trailing" secondItem="NMr-Wb-Q2z" secondAttribute="trailing" constant="8" id="Ufu-DZ-hde"/>
-                                                                        <constraint firstItem="Czm-NJ-aCG" firstAttribute="leading" secondItem="4MR-2X-Tp6" secondAttribute="leading" constant="12" id="bYP-Zr-wBw"/>
-                                                                        <constraint firstItem="uxT-B5-933" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Czm-NJ-aCG" secondAttribute="trailing" constant="8" id="oel-53-Xol"/>
                                                                         <constraint firstItem="NMr-Wb-Q2z" firstAttribute="leading" secondItem="uxT-B5-933" secondAttribute="trailing" constant="8" id="q73-rW-IaS"/>
+                                                                        <constraint firstItem="uxT-B5-933" firstAttribute="leading" secondItem="khK-22-WoK" secondAttribute="trailing" id="tSH-Wj-hav"/>
                                                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Pnd-pE-Bkr" secondAttribute="trailing" constant="12" id="x8G-Ml-fQa"/>
                                                                         <constraint firstItem="Pnd-pE-Bkr" firstAttribute="top" secondItem="4MR-2X-Tp6" secondAttribute="top" constant="4" id="zd2-LH-Ex5"/>
                                                                     </constraints>
                                                                 </customView>
                                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="juj-Fa-I24">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="512" height="128"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="527" height="128"/>
                                                                     <subviews>
                                                                         <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uPX-dW-Wcu">
                                                                             <rect key="frame" x="10" y="110" width="29" height="14"/>
@@ -335,10 +362,10 @@
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="buF-t6-osp">
-                                                                            <rect key="frame" x="12" y="4" width="488" height="100"/>
+                                                                            <rect key="frame" x="12" y="4" width="503" height="100"/>
                                                                             <subviews>
                                                                                 <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xMg-G9-dEt">
-                                                                                    <rect key="frame" x="0.0" y="60" width="488" height="40"/>
+                                                                                    <rect key="frame" x="0.0" y="60" width="503" height="40"/>
                                                                                     <subviews>
                                                                                         <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ogP-th-BtW">
                                                                                             <rect key="frame" x="-2" y="24" width="146" height="16"/>
@@ -390,6 +417,8 @@
                                                                 </customView>
                                                             </subviews>
                                                             <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="4MR-2X-Tp6" secondAttribute="trailing" constant="12" id="GNI-An-C4s"/>
+                                                                <constraint firstAttribute="trailing" secondItem="juj-Fa-I24" secondAttribute="trailing" constant="12" id="j0V-xm-dj6"/>
                                                                 <constraint firstAttribute="trailing" secondItem="i1L-lW-AYZ" secondAttribute="trailing" constant="12" id="jau-Xa-vnh"/>
                                                             </constraints>
                                                             <visibilityPriorities>
@@ -607,7 +636,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="283" y="305" width="480" height="297"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="3440" height="1415"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="3840" height="1575"/>
             <view key="contentView" id="iQg-1N-GyM">
                 <rect key="frame" x="0.0" y="0.0" width="480" height="297"/>
                 <autoresizingMask key="autoresizingMask"/>

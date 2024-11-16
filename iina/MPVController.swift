@@ -1770,7 +1770,7 @@ class MPVController: NSObject {
     guard components.count == 4 else {
       return components.joined(separator: "/")
     }
-    // The alpha compoment comes first in the hex based form, last in the floating point form.
+    // The alpha component comes first in the hex based form, last in the floating point form.
     let alpha = components[0]
     components.remove(at: 0)
     return "\(components.joined(separator: "/"))/\(alpha)"

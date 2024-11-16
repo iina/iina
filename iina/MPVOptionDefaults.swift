@@ -15,7 +15,7 @@ import Foundation
 /// _Unfortunately_, this property is not available until a mpv instance has been initialized. IINA uses the default values when setting
 /// options in order to reduce the number of log messages emitted by only logging options that are not being set to the default value.
 /// The options are set in `MVPController.mpvInit`  before the mpv instance is initialized and the property containing the option
-/// defaults is available. To work around this mpv restriction this class uses its own mpv instance dedicated to providing thie defaults.
+/// defaults is available. To work around this mpv restriction this class uses its own mpv instance dedicated to providing the defaults.
 ///
 /// A similar issue exists for the mpv properties that provide the mpv and libass version numbers, which IINA would like log near the
 /// start of the log file. So this class also provides the version numbers.

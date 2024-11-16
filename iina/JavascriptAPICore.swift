@@ -132,7 +132,7 @@ class JavascriptAPICore: JavascriptAPI, JavascriptAPICoreExportable {
     return [
       "iina": iinaVersion,
       "build": build,
-      "mpv": player!.mpv.mpvVersion
+      "mpv": MPVOptionDefaults.shared.mpvVersion
     ]
   }
 }

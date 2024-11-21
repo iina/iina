@@ -93,6 +93,12 @@ class MainWindowController: PlayerWindowController {
     return playlistView
   }()
 
+  lazy var pluginView: PluginViewController = {
+    let pluginView = PluginViewController()
+    pluginView.mainWindow = self
+    return pluginView
+  }()
+
   /** The control view for interactive mode. */
   var cropSettingsView: CropBoxViewController?
 
@@ -271,12 +277,16 @@ class MainWindowController: PlayerWindowController {
     case hidden // indicating that sidebar is hidden. Should only be used by `sideBarStatus`
     case settings
     case playlist
+    case plugins
+
     func width() -> CGFloat {
       switch self {
       case .settings:
         return SettingsWidth
       case .playlist:
         return CGFloat(Preference.integer(for: .playlistWidth)).clamped(to: PlaylistMinWidth...PlaylistMaxWidth)
+      case .plugins:
+        return SettingsWidth
       default:
         Logger.fatal("SideBarViewType.width shouldn't be called here")
       }
@@ -2835,7 +2845,7 @@ class MainWindowController: PlayerWindowController {
         view.pleaseSwitchToTab(tab)
       }
       showSideBar(viewController: view, type: .settings)
-    case .playlist:
+    case .playlist, .plugins:
       if let tab = tab {
         view.pleaseSwitchToTab(tab)
       }
@@ -2864,7 +2874,7 @@ class MainWindowController: PlayerWindowController {
         view.pleaseSwitchToTab(tab)
       }
       showSideBar(viewController: view, type: .playlist)
-    case .settings:
+    case .settings, .plugins:
       if let tab = tab {
         view.pleaseSwitchToTab(tab)
       }
@@ -2873,6 +2883,35 @@ class MainWindowController: PlayerWindowController {
       }
     case .playlist:
       if view.currentTab == tab || tab == nil {
+        if hideIfAlreadyShown {
+          hideSideBar()
+        }
+      } else if let tab = tab {
+        view.pleaseSwitchToTab(tab)
+      }
+    }
+  }
+
+  func showPluginSidebar(tab: String?, force: Bool = false, hideIfAlreadyShown: Bool = true) {
+    if !force && sidebarAnimationState == .willShow || sidebarAnimationState == .willHide {
+      return  // do not interrupt other actions while it is animating
+    }
+    let view = pluginView
+    switch sideBarStatus {
+    case .hidden:
+      if let tab = tab {
+        view.pleaseSwitchToTab(tab)
+      }
+      showSideBar(viewController: view, type: .plugins)
+    case .settings, .playlist:
+      if let tab = tab {
+        view.pleaseSwitchToTab(tab)
+      }
+      hideSideBar {
+        self.showSideBar(viewController: view, type: .plugins)
+      }
+    case .plugins:
+      if view.currentPluginID == tab || tab == nil {
         if hideIfAlreadyShown {
           hideSideBar()
         }
@@ -2918,6 +2957,8 @@ class MainWindowController: PlayerWindowController {
       quickSettingView.showSubChooseMenu(forView: sender, showLoadedSubs: true)
     case .screenshot:
       player.screenshot()
+    case .plugins:
+      showPluginSidebar(tab: nil)
     }
   }
 

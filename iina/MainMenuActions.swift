@@ -477,6 +477,10 @@ extension MainMenuActionHandler {
 
   // MARK: - Plugin
 
+  @objc func showPluginsPanel(_ sender: NSMenuItem) {
+    player.mainWindow.showPluginSidebar(tab: nil)
+  }
+
   @objc func reloadAllPlugins(_ sender: NSMenuItem) {
     AppDelegate.shared.menuController.pluginMenu.removeAllItems()
 

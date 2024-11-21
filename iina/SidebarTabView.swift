@@ -11,7 +11,8 @@ import Cocoa
 class SidebarTabView: NSViewController {
   var name: String!
   var pluginID: String!
-  weak var quickSettingsView: QuickSettingViewController!
+  weak var pluginSidebarView: PluginViewController!
+
   @IBOutlet weak var label: NSTextField!
 
   override var acceptsFirstResponder: Bool {
@@ -33,7 +34,7 @@ class SidebarTabView: NSViewController {
   }
 
   override func mouseDown(with event: NSEvent) {
-    quickSettingsView.pleaseSwitchToTab(.plugin(id: pluginID))
+    pluginSidebarView.pleaseSwitchToTab(pluginID)
     isActive = true
   }
 

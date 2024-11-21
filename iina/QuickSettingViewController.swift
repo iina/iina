@@ -42,7 +42,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     case video
     case audio
     case sub
-    case plugin(id: String)
 
     init(buttonTag: Int) {
       self = [.video, .audio, .sub][at: buttonTag] ?? .video
@@ -57,11 +56,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       case "sub":
         self = .sub
       default:
-        if name.hasPrefix("plugin:") {
-          self = .plugin(id: String(name.dropFirst(7)))
-        } else {
-          return nil
-        }
+        self = .video
       }
     }
 
@@ -70,7 +65,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       case .video: return 0
       case .audio: return 1
       case .sub: return 2
-      default: return 3
+      default: return 0
       }
     }
 
@@ -79,12 +74,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       case .video: return "video"
       case .audio: return "audio"
       case .sub: return "sub"
-      case .plugin(let id): return "plugin:\(id)"
       }
-    }
-
-    static func == (lhs: TabViewType, rhs: TabViewType) -> Bool {
-      return lhs.name == rhs.name
     }
   }
 
@@ -199,13 +189,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var subTextBgColorWell: NSColorWell!
   @IBOutlet weak var subTextFontBtn: NSButton!
 
-  @IBOutlet weak var pluginTabsView: NSView!
-  @IBOutlet weak var pluginTabsViewHeightConstraint: NSLayoutConstraint!
-  @IBOutlet weak var pluginTabsScrollView: NSScrollView!
-  @IBOutlet weak var pluginContentContainerView: NSView!
-  private var pluginTabsStackView: NSStackView!
-  private var pluginTabs: [String: SidebarTabView] = [:]
-
   private lazy var eqSliders: [NSSlider] = [audioEqSlider1, audioEqSlider2, audioEqSlider3, audioEqSlider4, audioEqSlider5,
                                             audioEqSlider6, audioEqSlider7, audioEqSlider8, audioEqSlider9, audioEqSlider10]
 
@@ -229,7 +212,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     // colors
     withAllTableViews { tableView, _ in tableView.backgroundColor = NSColor(named: .sidebarTableBackground)! }
 
-    setupPluginTabs()
     if pendingSwitchRequest == nil {
       updateTabActiveStatus()
     } else {
@@ -496,62 +478,10 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
   }
 
-  func setupPluginTabs() {
-    let container = NSView()
-    container.translatesAutoresizingMaskIntoConstraints = false
-    pluginTabsStackView = NSStackView()
-    pluginTabsStackView.translatesAutoresizingMaskIntoConstraints = false
-    pluginTabsStackView.alignment = .centerY
-    container.addSubview(pluginTabsStackView)
-    pluginTabsScrollView.documentView = container
-    Utility.quickConstraints(["H:|-8-[v]-8-|", "V:|-0-[v(==36)]-0-|"], ["v": pluginTabsStackView])
-    updatePluginTabs()
-  }
-
-  func updatePluginTabs() {
-    guard isViewLoaded else { return }
-    var added = false
-    pluginTabsStackView.arrangedSubviews.forEach {
-      pluginTabsStackView.removeArrangedSubview($0)
-    }
-    pluginTabs.removeAll()
-    player.plugins.forEach {
-      guard let name = $0.plugin.sidebarTabName else { return }
-      let tab = SidebarTabView()
-      tab.name = name
-      tab.pluginID = $0.plugin.identifier
-      tab.quickSettingsView = self
-      pluginTabsStackView.addArrangedSubview(tab.view)
-      pluginTabs[$0.plugin.identifier] = tab
-      added = true
-    }
-    pluginTabsView.isHidden = !added
-    pluginTabsViewHeightConstraint.constant = added ? 36 : 0
-    updateTabActiveStatus()
-  }
-
-  func removePluginTab(withIdentifier identifier: String) {
-    guard isViewLoaded else { return }
-    if case .plugin(let id) = currentTab {
-      if id == identifier {
-        switchToTab(.video)
-        pluginContentContainerView.subviews.forEach { $0.removeFromSuperview() }
-      }
-    } else {
-      pluginContentContainerView.subviews.forEach { $0.removeFromSuperview() }
-    }
-  }
-
   private func switchToTab(_ tab: TabViewType) {
     guard isViewLoaded else { return }
     currentTab = tab
     tabView.selectTabViewItem(at: tab.buttonTag)
-    if case .plugin(let id) = tab,
-       let plugin = player.plugins.first(where: { $0.plugin.identifier == id }) {
-      pluginContentContainerView.subviews.forEach { $0.removeFromSuperview() }
-      pluginContentContainerView.addSubview(plugin.sidebarTabView)
-      Utility.quickConstraints(["H:|-0-[v]-0-|", "V:|-0-[v]-0-|"], ["v": plugin.sidebarTabView])
-    }
     updateTabActiveStatus()
     reload()
   }
@@ -561,13 +491,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     [videoTabBtn, audioTabBtn, subTabBtn].forEach { btn in
       let isActive = currentTag == btn!.tag
       btn!.contentTintColor = isActive ? .sidebarTabTintActive : .sidebarTabTint
-    }
-    pluginTabs.values.forEach { tab in
-      if case .plugin(let id) = currentTab {
-        tab.isActive = tab.pluginID == id
-      } else {
-        tab.isActive = false
-      }
     }
   }
 
@@ -586,8 +509,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       subTableView.reloadData()
       secSubTableView.reloadData()
       updateSubTabControl()
-    case .plugin(_):
-      break
     }
   }
 

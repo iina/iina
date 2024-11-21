@@ -109,6 +109,9 @@ struct Constants {
     static let showSubtitles = NSLocalizedString("menu.sub_show", comment: "Show Subtitles")
     static let hideSecondSubtitles = NSLocalizedString("menu.sub_second_hide", comment: "Hide Second Subtitles")
     static let showSecondSubtitles = NSLocalizedString("menu.sub_second_show", comment: "Show Second Subtitles")
+    static let managePlugins = NSLocalizedString("menu.manage_plugins", comment: "Manage Plugins…")
+    static let showPluginsPanel = NSLocalizedString("menu.show_plugins_panel", comment: "Show Plugins Panel")
+    static let hidePluginsPanel = NSLocalizedString("menu.hide_plugins_panel", comment: "Hide Plugins Panel")
   }
   struct Time {
     static let infinite = VideoTime(999, 0, 0)

@@ -304,7 +304,7 @@ class PlayerCore: NSObject {
     }
 
     plugins = JavascriptPlugin.plugins.compactMap { pluginMap[$0.identifier] }
-    mainWindow.quickSettingView.updatePluginTabs()
+    mainWindow.pluginView.updatePluginTabs()
   }
 
   // MARK: - Control

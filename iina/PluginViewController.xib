@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23504" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="PluginViewController" customModule="IINA" customModuleProvider="target">
+            <connections>
+                <outlet property="buttonTopConstraint" destination="Lmy-sU-Uve" id="GQ1-0H-rZV"/>
+                <outlet property="pluginContentContainerView" destination="XYL-E3-hi6" id="TVa-0U-XKu"/>
+                <outlet property="pluginTabsScrollView" destination="Pm4-0T-kmR" id="3hA-0M-u3h"/>
+                <outlet property="pluginTabsView" destination="14p-ym-5zO" id="rIx-pc-Xsb"/>
+                <outlet property="pluginTabsViewHeightConstraint" destination="K2P-ll-mem" id="AJc-eP-7cd"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
+            <subviews>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="14p-ym-5zO" userLabel="PluginTabs View">
+                    <rect key="frame" x="0.0" y="236" width="480" height="36"/>
+                    <subviews>
+                        <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="Pm4-0T-kmR" userLabel="PluginsTabs Scroll View">
+                            <rect key="frame" x="0.0" y="1" width="480" height="35"/>
+                            <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="Yei-VT-MqY" userLabel="PluginsTabs Clip View">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="35"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <view id="TS6-4w-7Ln">
+                                        <rect key="frame" x="0.0" y="0.0" width="465" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" name="SidebarTableBackground"/>
+                            </clipView>
+                            <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="ePM-i5-nLq">
+                                <rect key="frame" x="-100" y="-100" width="360" height="15"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </scroller>
+                            <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="6Ul-hf-SUu">
+                                <rect key="frame" x="-100" y="-100" width="15" height="21"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </scroller>
+                        </scrollView>
+                        <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="mMj-ge-Z7V" userLabel="BelowPluginsTabs Horizontal Line">
+                            <rect key="frame" x="0.0" y="-2" width="480" height="5"/>
+                        </box>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="Pm4-0T-kmR" secondAttribute="trailing" id="Bqj-2w-lIb"/>
+                        <constraint firstItem="mMj-ge-Z7V" firstAttribute="leading" secondItem="Pm4-0T-kmR" secondAttribute="leading" id="FZq-wV-C0E"/>
+                        <constraint firstAttribute="height" constant="36" identifier="pluginTabsViewHeightConstraint" id="K2P-ll-mem"/>
+                        <constraint firstItem="Pm4-0T-kmR" firstAttribute="leading" secondItem="14p-ym-5zO" secondAttribute="leading" id="Kjr-h3-z7b"/>
+                        <constraint firstAttribute="bottom" secondItem="mMj-ge-Z7V" secondAttribute="bottom" id="MAI-ZV-kcb"/>
+                        <constraint firstItem="mMj-ge-Z7V" firstAttribute="top" secondItem="Pm4-0T-kmR" secondAttribute="bottom" id="YnX-sq-y2F"/>
+                        <constraint firstItem="mMj-ge-Z7V" firstAttribute="trailing" secondItem="Pm4-0T-kmR" secondAttribute="trailing" id="txU-Ca-SkX"/>
+                        <constraint firstAttribute="top" secondItem="Pm4-0T-kmR" secondAttribute="top" id="uWb-ow-5O0"/>
+                    </constraints>
+                </customView>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="XYL-E3-hi6">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="236"/>
+                </customView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="XYL-E3-hi6" firstAttribute="top" secondItem="14p-ym-5zO" secondAttribute="bottom" id="4E1-Kh-nFm"/>
+                <constraint firstItem="14p-ym-5zO" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="Erp-sZ-oNV"/>
+                <constraint firstAttribute="trailing" secondItem="14p-ym-5zO" secondAttribute="trailing" id="HtL-fX-a8Z"/>
+                <constraint firstItem="14p-ym-5zO" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="Lmy-sU-Uve"/>
+                <constraint firstItem="XYL-E3-hi6" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="OBz-JI-9bt"/>
+                <constraint firstAttribute="trailing" secondItem="XYL-E3-hi6" secondAttribute="trailing" id="VPd-fE-Mjc"/>
+                <constraint firstAttribute="bottom" secondItem="XYL-E3-hi6" secondAttribute="bottom" id="pSV-xW-Nco"/>
+            </constraints>
+            <point key="canvasLocation" x="-53" y="154"/>
+        </customView>
+    </objects>
+    <resources>
+        <namedColor name="SidebarTableBackground">
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.019999999552965164" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

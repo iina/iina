@@ -11,9 +11,9 @@ jobs:
     strategy:
       matrix:
         include:
-          - xcode: "15.4"
+          - xcode: "16.1"
             deployment_target: ""
-    runs-on:  macos-latest
+    runs-on:  macos-15
     steps:
       - uses: actions/checkout@v4
 

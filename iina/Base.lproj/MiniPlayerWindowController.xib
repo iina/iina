@@ -147,7 +147,7 @@
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="aC9-OK-a4x">
                                         <rect key="frame" x="138" y="8" width="28" height="28"/>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="play" imagePosition="only" alignment="center" alternateImage="pause" refusesFirstResponder="YES" state="on" imageScaling="proportionallyUpOrDown" inset="2" id="F9X-N7-Uv0">
-                                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <constraints>

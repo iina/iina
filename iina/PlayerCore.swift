@@ -2348,9 +2348,9 @@ class PlayerCore: NSObject {
       }
 
     case .playButton:
-      DispatchQueue.main.async {
-        self.currentController.updatePlayButtonState(self.info.state == .paused ? .off : .on)
-        self.touchBarSupport.updateTouchBarPlayBtn()
+      DispatchQueue.main.async { [self] in
+        currentController.updatePlayButtonState(paused: info.state == .paused)
+        touchBarSupport.updateTouchBarPlayBtn()
       }
 
     case .volume:

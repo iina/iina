@@ -602,9 +602,9 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     }
   }
   
-  func updatePlayButtonState(_ state: NSControl.StateValue) {
+  func updatePlayButtonState(paused: Bool) {
     guard loaded else { return }
-    playButton.state = state
+    playButton.image = NSImage(named: paused ? "play" : "pause")
   }
 
   /** This method will not set `isOntop`! */

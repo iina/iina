@@ -276,7 +276,8 @@ class PrefKeyBindingViewController: PreferenceViewController, PreferenceWindowEm
       loadConfigFile(fallbackDefault)
     }
 
-    guard let configName = configName else { fallback(); return }
+    guard let configName = configName,
+          let confFilePath = getFilePath(forConfig: configName) else { fallback(); return }
     
     cachedConfigNames = configNames
     confTableView.reloadData()
@@ -284,10 +285,10 @@ class PrefKeyBindingViewController: PreferenceViewController, PreferenceWindowEm
       confTableView.selectRowIndexes(IndexSet(integer: index), byExtendingSelection: false)
     }
     currentConfName = configName
-    currentConfFilePath = getFilePath(forConfig: configName)!
+    currentConfFilePath = confFilePath
     
     guard let mapping = KeyMapping.parseInputConf(at: currentConfFilePath) else { fallback(); return }
-
+    
     mappingController.content = nil
     mappingController.add(contentsOf: mapping)
     mappingController.setSelectionIndexes(IndexSet())

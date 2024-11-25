@@ -105,13 +105,18 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
           path = url.absoluteString
         } else {
           // assume it's a system command
-          path = "/bin/bash"
-          args.insert(file, at: 0)
-          args = ["-c", args.map {
-            $0.replacingOccurrences(of: " ", with: "\\ ")
-              .replacingOccurrences(of: "'", with: "\\'")
-              .replacingOccurrences(of: "\"", with: "\\\"")
-          }.joined(separator: " ")]
+          let useBash = false
+          if useBash {
+            path = "/bin/bash"
+            args.insert(file, at: 0)
+            args = ["-c", args.map {
+              $0.replacingOccurrences(of: " ", with: "\\ ")
+                .replacingOccurrences(of: "'", with: "\\'")
+                .replacingOccurrences(of: "\"", with: "\\\"")
+            }.joined(separator: " ")]
+          } else {
+            args.insert(file, at: 0)
+          }
         }
       } else {
         // it should be an existing file

@@ -101,10 +101,12 @@ class PrefKeyBindingViewController: PreferenceViewController, PreferenceWindowEm
 
     useMediaKeysButton.title = NSLocalizedString("preference.system_media_control", comment: "Use system media control")
 
-    // Load the config file saved in user default
-    loadConfigFile(Preference.string(for: .currentInputConfigName), true)
+    DispatchQueue.main.async {
+      // Load the config file saved in user default
+      self.loadConfigFile(Preference.string(for: .currentInputConfigName), true)
 
-    NotificationCenter.default.addObserver(forName: .iinaKeyBindingChanged, object: nil, queue: .main, using: saveToConfFile)
+      NotificationCenter.default.addObserver(forName: .iinaKeyBindingChanged, object: nil, queue: .main, using: self.saveToConfFile)
+    }
   }
 
   // MARK: - IBActions
@@ -272,12 +274,12 @@ class PrefKeyBindingViewController: PreferenceViewController, PreferenceWindowEm
     
     func fallback() {
       isLoadingConfig = false
-      Utility.showAlert("keybinding_config.error", arguments: [currentConfName], sheetWindow: view.window)
+      Utility.showAlert("keybinding_config.error", arguments: [configName ?? "Unknown"], sheetWindow: view.window)
       loadConfigFile(fallbackDefault)
     }
 
     guard let configName = configName,
-          let confFilePath = getFilePath(forConfig: configName) else { fallback(); return }
+          let confFilePath = getFilePath(forConfig: configName, showAlert: false) else { fallback(); return }
     
     cachedConfigNames = configNames
     confTableView.reloadData()

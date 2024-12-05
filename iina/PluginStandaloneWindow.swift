@@ -9,7 +9,7 @@
 import Cocoa
 @preconcurrency import WebKit
 
-class PluginStandaloneWindow: NSWindow, WKNavigationDelegate {
+class PluginStandaloneWindow: NSWindow, WKNavigationDelegate, WKUIDelegate {
   weak private var pluginInstance: JavascriptPluginInstance!
   var webView: WKWebView!
 
@@ -50,6 +50,7 @@ class PluginStandaloneWindow: NSWindow, WKNavigationDelegate {
         webView.isInspectable = true
       }
       webView.navigationDelegate = self
+      webView.uiDelegate = self
       webView.translatesAutoresizingMaskIntoConstraints = false
       webView.setValue(false, forKey: "drawsBackground")
       contentView?.addSubview(webView)
@@ -90,6 +91,61 @@ class PluginStandaloneWindow: NSWindow, WKNavigationDelegate {
     }
     if let content = pendingContent {
       _simpleModeSetContent(content)
+    }
+  }
+
+  func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo) async {
+    let alert = NSAlert()
+    alert.informativeText = message
+    alert.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
+    await withCheckedContinuation { continuation in
+      alert.beginSheetModal(for: self, completionHandler: { _ in
+        continuation.resume()
+      })
+    }
+  }
+
+  func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo) async -> Bool {
+    let alert = NSAlert()
+    alert.informativeText = message
+    alert.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
+    alert.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
+    return await withCheckedContinuation { continuation in
+      alert.beginSheetModal(for: self) { res in
+        continuation.resume(returning: res == .alertFirstButtonReturn)
+      }
+    }
+  }
+
+  func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo) async -> String? {
+    let alert = NSAlert()
+    alert.informativeText = prompt
+
+    // accessory view
+    let input = NSTextField(frame: NSRect(x: 0, y: 0, width: 240, height: 16))
+    input.translatesAutoresizingMaskIntoConstraints = false
+    input.lineBreakMode = .byClipping
+    input.usesSingleLineMode = true
+    input.cell?.isScrollable = true
+    if let inputValue = defaultText {
+      input.stringValue = inputValue
+    }
+    let stackView = NSStackView(frame: NSRect(x: 0, y: 0, width: 240, height: 20))
+    stackView.orientation = .vertical
+    stackView.alignment = .centerX
+    stackView.addArrangedSubview(input)
+    stackView.translatesAutoresizingMaskIntoConstraints = true
+    alert.accessoryView = stackView
+
+    // buttons
+    alert.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
+    alert.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
+    alert.window.initialFirstResponder = input
+
+    return await withCheckedContinuation { continuation in
+      alert.beginSheetModal(for: self) { response in
+        continuation.resume(returning: response == .alertFirstButtonReturn ? input.stringValue: nil)
+      }
     }
   }
 

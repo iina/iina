@@ -272,11 +272,14 @@ class PrefKeyBindingViewController: PreferenceViewController, PreferenceWindowEm
     
     func fallback() {
       isLoadingConfig = false
-      Utility.showAlert("keybinding_config.error", arguments: [currentConfName], sheetWindow: view.window)
+      DispatchQueue.main.async {
+        Utility.showAlert("keybinding_config.error", arguments: [configName ?? "Unknown"], sheetWindow: self.view.window)
+      }
       loadConfigFile(fallbackDefault)
     }
 
-    guard let configName = configName else { fallback(); return }
+    guard let configName = configName,
+          let confFilePath = getFilePath(forConfig: configName, showAlert: false) else { fallback(); return }
     
     cachedConfigNames = configNames
     confTableView.reloadData()
@@ -284,10 +287,10 @@ class PrefKeyBindingViewController: PreferenceViewController, PreferenceWindowEm
       confTableView.selectRowIndexes(IndexSet(integer: index), byExtendingSelection: false)
     }
     currentConfName = configName
-    currentConfFilePath = getFilePath(forConfig: configName)!
+    currentConfFilePath = confFilePath
     
     guard let mapping = KeyMapping.parseInputConf(at: currentConfFilePath) else { fallback(); return }
-
+    
     mappingController.content = nil
     mappingController.add(contentsOf: mapping)
     mappingController.setSelectionIndexes(IndexSet())

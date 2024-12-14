@@ -770,7 +770,7 @@ class PlayerCore: NSObject {
 
   func resume() {
     // Restart playback when reached EOF
-    if mpv.getFlag(MPVProperty.eofReached) {
+    if Preference.bool(for: .resumeFromEndRestartsPlayback) && mpv.getFlag(MPVProperty.eofReached) {
       seek(absoluteSecond: 0)
     }
     mpv.setFlag(MPVOption.PlaybackControl.pause, false, level: .verbose)
@@ -2348,8 +2348,8 @@ class PlayerCore: NSObject {
       }
 
     case .playButton:
-      DispatchQueue.main.async {
-        self.currentController.updatePlayButtonState(self.info.state == .paused ? .off : .on)
+      DispatchQueue.main.async { [self] in
+        currentController.updatePlayButtonState(paused: info.state == .paused)
         self.touchBarSupport.updateTouchBarPlayBtn()
       }
 

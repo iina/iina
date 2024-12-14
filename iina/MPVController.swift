@@ -80,24 +80,11 @@ class MPVController: NSObject {
     static let screenshot: UInt64 = 1000000
   }
 
-  /// Version number of the libass library.
-  ///
-  /// The mpv libass version property returns an integer encoded as a hex binary-coded decimal.
-  var libassVersion: String {
-    let version = getInt(MPVProperty.libassVersion)
-    let major = String(version >> 28 & 0xF, radix: 16)
-    let minor = String(version >> 20 & 0xFF, radix: 16)
-    let patch = String(version >> 12 & 0xFF, radix: 16)
-    return "\(major).\(minor).\(patch)"
-  }
-
   // The mpv_handle
   var mpv: OpaquePointer!
   var mpvRenderContext: OpaquePointer?
 
   private var openGLContext: CGLContextObj! = nil
-
-  var mpvVersion: String { getString(MPVProperty.mpvVersion)! }
 
   /// [DispatchQueue](https://developer.apple.com/documentation/dispatch/dispatchqueue) for reading `mpv`
   /// events.
@@ -347,19 +334,20 @@ class MPVController: NSObject {
                   level: .verbose, transformer: setScreenshotPath)
 
     setUserOption(PK.screenshotFormat, type: .other, forName: MPVOption.Screenshot.screenshotFormat,
-                  level: .verbose) { key in
+                  verboseIfDefault: true) { key in
       let v = Preference.integer(for: key)
       let format = Preference.ScreenshotFormat(rawValue: v)
       // Workaround for mpv issue  #15107, HDR screenshots are unimplemented (gpu/gpu-next).
       // If the screenshot format is set to JPEG XL then set the screenshot-sw option to yes. This
       // causes the screenshot to be rendered by software instead of the VO. If a HDR video is being
       // displayed in HDR then the resulting screenshot will be HDR.
-      self.chkErr(self.setOptionFlag(MPVOption.Screenshot.screenshotSw, format == .jxl))
+      self.chkErr(self.setOptionFlag(MPVOption.Screenshot.screenshotSw, format == .jxl,
+                                     verboseIfDefault: true))
       return format?.string
     }
 
-    setUserOption(PK.screenshotTemplate, type: .string, forName: MPVOption.Screenshot.screenshotTemplate,
-                  level: .verbose)
+    setUserOption(PK.screenshotTemplate, type: .string,
+                  forName: MPVOption.Screenshot.screenshotTemplate)
 
     // Disable mpv's media key system as it now uses the MediaPlayer Framework.
     // Dropped media key support in 10.11 and 10.12.
@@ -381,19 +369,21 @@ class MPVController: NSObject {
 
     chkErr(setOptionString("watch-later-directory", Utility.watchLaterURL.path, level: .verbose))
     setUserOption(PK.resumeLastPosition, type: .bool, forName: MPVOption.WatchLater.savePositionOnQuit,
-                  level: .verbose)
-    setUserOption(PK.resumeLastPosition, type: .bool, forName: "resume-playback", level: .verbose)
+                  verboseIfDefault: true)
+    setUserOption(PK.resumeLastPosition, type: .bool, forName: "resume-playback", verboseIfDefault: true)
 
     setUserOption(.initialWindowSizePosition, type: .string, forName: MPVOption.Window.geometry,
                   level: .verbose)
 
     // - Codec
 
-    setUserOption(PK.videoThreads, type: .int, forName: MPVOption.Video.vdLavcThreads, level: .verbose)
-    setUserOption(PK.audioThreads, type: .int, forName: MPVOption.Audio.adLavcThreads, level: .verbose)
+    setUserOption(PK.videoThreads, type: .int, forName: MPVOption.Video.vdLavcThreads,
+                  verboseIfDefault: true)
+    setUserOption(PK.audioThreads, type: .int, forName: MPVOption.Audio.adLavcThreads,
+                  verboseIfDefault: true)
 
     setUserOption(PK.hardwareDecoder, type: .other, forName: MPVOption.Video.hwdec,
-                  level: .verbose) { key in
+                  verboseIfDefault: true) { key in
       let value = Preference.integer(for: key)
       return Preference.HardwareDecoderOption(rawValue: value)?.mpvString ?? "auto"
     }
@@ -406,106 +396,126 @@ class MPVController: NSObject {
     if Preference.bool(for: PK.spdifAC3) { spdif.append("ac3") }
     if Preference.bool(for: PK.spdifDTS){ spdif.append("dts") }
     if Preference.bool(for: PK.spdifDTSHD) { spdif.append("dts-hd") }
-    chkErr(setOptionString(MPVOption.Audio.audioSpdif, spdif.joined(separator: ","), level: .verbose))
+    chkErr(setOptionString(MPVOption.Audio.audioSpdif, spdif.joined(separator: ","),
+                           verboseIfDefault: true))
 
-    setUserOption(PK.audioDevice, type: .string, forName: MPVOption.Audio.audioDevice, level: .verbose)
+    setUserOption(PK.audioDevice, type: .string, forName: MPVOption.Audio.audioDevice,
+                  verboseIfDefault: true)
 
-    setUserOption(PK.replayGain, type: .other, forName: MPVOption.Audio.replaygain) { key in
+    setUserOption(PK.replayGain, type: .other, forName: MPVOption.Audio.replaygain,
+                  verboseIfDefault: true) { key in
       let value = Preference.integer(for: key)
       return Preference.ReplayGainOption(rawValue: value)?.mpvString ?? "no"
     }
-    setUserOption(PK.replayGainPreamp, type: .float, forName: MPVOption.Audio.replaygainPreamp)
-    setUserOption(PK.replayGainClip, type: .bool, forName: MPVOption.Audio.replaygainClip)
-    setUserOption(PK.replayGainFallback, type: .float, forName: MPVOption.Audio.replaygainFallback)
+    setUserOption(PK.replayGainPreamp, type: .float, forName: MPVOption.Audio.replaygainPreamp,
+                  verboseIfDefault: true)
+    setUserOption(PK.replayGainClip, type: .bool, forName: MPVOption.Audio.replaygainClip,
+                  verboseIfDefault: true)
+    setUserOption(PK.replayGainFallback, type: .float, forName: MPVOption.Audio.replaygainFallback,
+                  verboseIfDefault: true)
 
     // - Sub
 
     chkErr(setOptionString(MPVOption.Subtitles.subAuto, "no", level: .verbose))
     chkErr(setOptionalOptionString(MPVOption.Subtitles.subCodepage,
-                                   Preference.string(for: .defaultEncoding), level: .verbose))
+                                   Preference.string(for: .defaultEncoding), verboseIfDefault: true))
     player.info.subEncoding = Preference.string(for: .defaultEncoding)
 
     let subOverrideHandler: OptionObserverInfo.Transformer = { key in
       (Preference.enum(for: key) as Preference.SubOverrideLevel).string
     }
     setUserOption(PK.subOverrideLevel, type: .other, forName: MPVOption.Subtitles.subAssOverride,
-                  level: .verbose, transformer: subOverrideHandler)
+                  verboseIfDefault: true, transformer: subOverrideHandler)
     setUserOption(PK.secondarySubOverrideLevel, type: .other,
-                  forName: MPVOption.Subtitles.secondarySubAssOverride, level: .verbose,
+                  forName: MPVOption.Subtitles.secondarySubAssOverride, verboseIfDefault: true,
                   transformer: subOverrideHandler)
 
-    setUserOption(PK.subTextFont, type: .string, forName: MPVOption.Subtitles.subFont, level: .verbose)
-    setUserOption(PK.subTextSize, type: .float, forName: MPVOption.Subtitles.subFontSize, level: .verbose)
+    setUserOption(PK.subTextFont, type: .string, forName: MPVOption.Subtitles.subFont,
+                  verboseIfDefault: true)
+    setUserOption(PK.subTextSize, type: .float, forName: MPVOption.Subtitles.subFontSize,
+                  verboseIfDefault: true)
 
-    setUserOption(PK.subTextColorString, type: .color, forName: MPVOption.Subtitles.subColor, level: .verbose)
-    setUserOption(PK.subBgColorString, type: .color, forName: MPVOption.Subtitles.subBackColor, level: .verbose)
+    setUserOption(PK.subTextColorString, type: .color, forName: MPVOption.Subtitles.subColor,
+                  verboseIfDefault: true)
+    setUserOption(PK.subBgColorString, type: .color, forName: MPVOption.Subtitles.subBackColor,
+                  verboseIfDefault: true)
 
-    setUserOption(PK.subBold, type: .bool, forName: MPVOption.Subtitles.subBold, level: .verbose)
-    setUserOption(PK.subItalic, type: .bool, forName: MPVOption.Subtitles.subItalic, level: .verbose)
+    setUserOption(PK.subBold, type: .bool, forName: MPVOption.Subtitles.subBold,
+                  verboseIfDefault: true)
+    setUserOption(PK.subItalic, type: .bool, forName: MPVOption.Subtitles.subItalic,
+                  verboseIfDefault: true)
 
-    setUserOption(PK.subBlur, type: .float, forName: MPVOption.Subtitles.subBlur, level: .verbose)
-    setUserOption(PK.subSpacing, type: .float, forName: MPVOption.Subtitles.subSpacing, level: .verbose)
+    setUserOption(PK.subBlur, type: .float, forName: MPVOption.Subtitles.subBlur,
+                  verboseIfDefault: true)
+    setUserOption(PK.subSpacing, type: .float, forName: MPVOption.Subtitles.subSpacing,
+                  verboseIfDefault: true)
 
     setUserOption(PK.subBorderSize, type: .float, forName: MPVOption.Subtitles.subBorderSize,
-                  level: .verbose)
+                  verboseIfDefault: true)
     setUserOption(PK.subBorderColorString, type: .color, forName: MPVOption.Subtitles.subBorderColor,
-                  level: .verbose)
+                  verboseIfDefault: true)
 
     setUserOption(PK.subShadowSize, type: .float, forName: MPVOption.Subtitles.subShadowOffset,
-                  level: .verbose)
+                  verboseIfDefault: true)
     setUserOption(PK.subShadowColorString, type: .color, forName: MPVOption.Subtitles.subShadowColor,
-                  level: .verbose)
+                  verboseIfDefault: true)
 
     setUserOption(PK.subAlignX, type: .other, forName: MPVOption.Subtitles.subAlignX,
-                  level: .verbose) { key in
+                  verboseIfDefault: true) { key in
       let v = Preference.integer(for: key)
       return Preference.SubAlign(rawValue: v)?.stringForX
     }
 
     setUserOption(PK.subAlignY, type: .other, forName: MPVOption.Subtitles.subAlignY,
-                  level: .verbose) { key in
+                  verboseIfDefault: true) { key in
       let v = Preference.integer(for: key)
       return Preference.SubAlign(rawValue: v)?.stringForY
     }
 
-    setUserOption(PK.subMarginX, type: .int, forName: MPVOption.Subtitles.subMarginX, level: .verbose)
-    setUserOption(PK.subMarginY, type: .int, forName: MPVOption.Subtitles.subMarginY, level: .verbose)
+    setUserOption(PK.subMarginX, type: .int, forName: MPVOption.Subtitles.subMarginX,
+                  verboseIfDefault: true)
+    setUserOption(PK.subMarginY, type: .int, forName: MPVOption.Subtitles.subMarginY,
+                  verboseIfDefault: true)
 
-    setUserOption(PK.subPos, type: .float, forName: MPVOption.Subtitles.subPos, level: .verbose)
+    setUserOption(PK.subPos, type: .float, forName: MPVOption.Subtitles.subPos, verboseIfDefault: true)
 
     setUserOption(PK.subLang, type: .string, forName: MPVOption.TrackSelection.slang, level: .verbose)
 
-    setUserOption(PK.displayInLetterBox, type: .bool, forName: MPVOption.Subtitles.subUseMargins, level: .verbose)
-    setUserOption(PK.displayInLetterBox, type: .bool, forName: MPVOption.Subtitles.subAssForceMargins, level: .verbose)
+    setUserOption(PK.displayInLetterBox, type: .bool, forName: MPVOption.Subtitles.subUseMargins,
+                  verboseIfDefault: true)
+    setUserOption(PK.displayInLetterBox, type: .bool, forName: MPVOption.Subtitles.subAssForceMargins,
+                  verboseIfDefault: true)
 
-    setUserOption(PK.subScaleWithWindow, type: .bool, forName: MPVOption.Subtitles.subScaleByWindow, level: .verbose)
+    setUserOption(PK.subScaleWithWindow, type: .bool, forName: MPVOption.Subtitles.subScaleByWindow,
+                  verboseIfDefault: true)
 
     // - Network / cache settings
 
     setUserOption(PK.enableCache, type: .other, forName: MPVOption.Cache.cache,
-                  level: .verbose) { key in
+                  verboseIfDefault: true) { key in
       return Preference.bool(for: key) ? nil : "no"
     }
 
     setUserOption(PK.defaultCacheSize, type: .other, forName: MPVOption.Demuxer.demuxerMaxBytes,
-                  level: .verbose) { key in
+                  verboseIfDefault: true) { key in
       return "\(Preference.integer(for: key))KiB"
     }
-    setUserOption(PK.secPrefech, type: .int, forName: MPVOption.Cache.cacheSecs, level: .verbose)
+    setUserOption(PK.secPrefech, type: .int, forName: MPVOption.Cache.cacheSecs, verboseIfDefault: true)
 
     setUserOption(PK.userAgent, type: .other, forName: MPVOption.Network.userAgent,
-                  level: .verbose) { key in
+                  verboseIfDefault: true) { key in
       let ua = Preference.string(for: key)!
       return ua.isEmpty ? nil : ua
     }
 
     setUserOption(PK.transportRTSPThrough, type: .other, forName: MPVOption.Network.rtspTransport,
-                  level: .verbose) { key in
+                  verboseIfDefault: true) { key in
       let v: Preference.RTSPTransportation = Preference.enum(for: .transportRTSPThrough)
       return v.string
     }
 
-    setUserOption(PK.ytdlEnabled, type: .other, forName: MPVOption.ProgramBehavior.ytdl, level: .verbose) { key in
+    setUserOption(PK.ytdlEnabled, type: .other, forName: MPVOption.ProgramBehavior.ytdl,
+                  verboseIfDefault: true) { key in
       let v = Preference.bool(for: .ytdlEnabled)
       if JavascriptPlugin.hasYTDL {
         return "no"
@@ -513,12 +523,12 @@ class MPVController: NSObject {
       return v ? "yes" : "no"
     }
     setUserOption(PK.ytdlRawOptions, type: .string, forName: MPVOption.ProgramBehavior.ytdlRawOptions,
-                  level: .verbose)
+                  verboseIfDefault: true)
     chkErr(setOptionString(MPVOption.ProgramBehavior.resetOnNextFile,
             "\(MPVOption.PlaybackControl.abLoopA),\(MPVOption.PlaybackControl.abLoopB)", level: .verbose))
 
     setUserOption(PK.audioDriverEnableAVFoundation, type: .other, forName: MPVOption.Audio.ao,
-                  level: .verbose) { key in
+                  verboseIfDefault: true) { key in
       Preference.bool(for: key) ? "avfoundation" : "coreaudio"
     }
 
@@ -527,7 +537,7 @@ class MPVController: NSObject {
        Preference.bool(for: .useUserDefinedConfDir),
        var userConfDir = Preference.string(for: .userDefinedConfDir) {
       userConfDir = NSString(string: userConfDir).standardizingPath
-      setOptionString("config", "yes", level: .verbose)
+      setOptionString("config", "yes")
       let status = setOptionString(MPVOption.ProgramBehavior.configDir, userConfDir)
       if status < 0 {
         Utility.showAlert("extra_option.config_folder", arguments: [userConfDir], disableMenus: true)
@@ -546,7 +556,7 @@ class MPVController: NSObject {
                                   [op[0], op[1], status], disableMenus: true)
             }
           }
-          log("Set user configured mpv option values")
+          log("Set \(userOptions.count) user configured mpv option values")
         }
       } else {
         Utility.showAlert("extra_option.cannot_read", disableMenus: true)
@@ -1518,37 +1528,84 @@ class MPVController: NSObject {
 
   private var optionObservers: [String: [OptionObserverInfo]] = [:]
 
-  private func setOptionFlag(_ name: String, _ flag: Bool, level: Logger.Level = .debug) -> Int32 {
+  private func setOptionFlag(_ name: String, _ flag: Bool, level: Logger.Level = .debug,
+                             verboseIfDefault: Bool = false) -> Int32 {
     let value = flag ? yes_str : no_str
-    return setOptionString(name, value, level: level)
+    return setOptionString(name, value, level: level, verboseIfDefault: verboseIfDefault)
   }
 
-  private func setOptionFloat(_ name: String, _ value: Float, level: Logger.Level = .debug) -> Int32 {
-    log("Set option: \(name)=\(value)", level: level)
+  private func setOptionFloat(_ name: String, _ value: Float, level: Logger.Level = .debug,
+                              verboseIfDefault: Bool = false) -> Int32 {
+    let levelToUse: Logger.Level = {
+      guard verboseIfDefault, let defaultValue = MPVOptionDefaults.shared.getDouble(name),
+            abs(Double(value).distance(to: defaultValue)) <= Double.leastNonzeroMagnitude else {
+        return level
+      }
+      return .verbose
+    }()
+    log("Set option: \(name)=\(value)", level: levelToUse)
     var data = Double(value)
     return mpv_set_option(mpv, name, MPV_FORMAT_DOUBLE, &data)
   }
 
-  private func setOptionInt(_ name: String, _ value: Int, level: Logger.Level = .debug) -> Int32 {
-    log("Set option: \(name)=\(value)", level: level)
+  private func setOptionInt(_ name: String, _ value: Int, level: Logger.Level = .debug,
+                            verboseIfDefault: Bool = false) -> Int32 {
+    let levelToUse: Logger.Level = verboseIfDefault &&
+      MPVOptionDefaults.shared.getInt(name) == value ? .verbose  : level
+    log("Set option: \(name)=\(value)", level: levelToUse)
     var data = Int64(value)
     return mpv_set_option(mpv, name, MPV_FORMAT_INT64, &data)
   }
 
   @discardableResult
-  private func setOptionString(_ name: String, _ value: String, level: Logger.Level = .debug) -> Int32 {
-    log("Set option: \(name)=\(value)", level: level)
+  private func setOptionString(_ name: String, _ value: String, level: Logger.Level = .debug,
+                               verboseIfDefault: Bool = false) -> Int32 {
+    let levelToUse: Logger.Level = verboseIfDefault &&
+      MPVOptionDefaults.shared.getString(name) == value ? .verbose  : level
+    log("Set option: \(name)=\(value)", level: levelToUse)
     return mpv_set_option_string(mpv, name, value)
   }
 
-  private func setOptionalOptionString(_ name: String, _ value: String?,
-                                       level: Logger.Level = .debug) -> Int32 {
+  private func setOptionalOptionColor(_ name: String, _ value: String?,
+                                       level: Logger.Level = .debug,
+                                       verboseIfDefault: Bool = false) -> Int32 {
     guard let value = value else { return 0 }
-    return setOptionString(name, value, level: level)
+    let levelToUse: Logger.Level = {
+      // The default value for options of type color is currently returned by mpv in the alternative
+      // string format that specifies component values in hex. Must convert to the form that uses
+      // floating point to be able to compare the strings.
+      guard verboseIfDefault, let defaultValue = MPVOptionDefaults.shared.getString(name),
+            hexColorToFloat(defaultValue) == value else {
+        return level
+      }
+      return .verbose
+    }()
+    return setOptionString(name, value, level: levelToUse)
   }
 
+  private func setOptionalOptionString(_ name: String, _ value: String?, level: Logger.Level = .debug,
+                                       verboseIfDefault: Bool = false) -> Int32 {
+    guard let value = value else { return 0 }
+    return setOptionString(name, value, level: level, verboseIfDefault: verboseIfDefault)
+  }
+
+  /// Set the given mpv option to the value of the given IINA setting.
+  ///
+  /// To reduce the amount of logging that occurs when `MPVController` initializes a mpv core this method provides a
+  /// `verboseIfDefault` parameter. If this parameter is set to `true` then the value to set the mpv option to is compared to the
+  /// default value for the mpv option and if the values match then the value of the `level` parameter will be ignored and the
+  /// message will be logged using the `verbose` level.
+  /// - Parameters:
+  ///   - key: Key for the IINA setting.
+  ///   - type: Type of the value of the mpv option.
+  ///   - name: Name of the mpv option.
+  ///   - sync: Whether to add an observer for the IINA setting that updates the mpv option when the IINA setting changes.
+  ///   - level: Log level to use when logging the setting of the option.
+  ///   - verboseIfDefault: Whether to use log level `verbose` if the value matches the default for the mpv option.
+  ///   - transformer: Optional transformer that changes the IINA setting value to be usable as the mpv option value.
   private func setUserOption(_ key: Preference.Key, type: UserOptionType, forName name: String,
                              sync: Bool = true, level: Logger.Level = .debug,
+                             verboseIfDefault: Bool = false,
                              transformer: OptionObserverInfo.Transformer? = nil) {
     var code: Int32 = 0
 
@@ -1556,24 +1613,28 @@ class MPVController: NSObject {
 
     switch type {
     case .int:
-      code = setOptionInt(name, Preference.integer(for: key), level: level)
+      code = setOptionInt(name, Preference.integer(for: key), level: level,
+                          verboseIfDefault: verboseIfDefault)
 
     case .float:
-      code = setOptionFloat(name, Preference.float(for: key), level: level)
+      code = setOptionFloat(name, Preference.float(for: key), level: level,
+                            verboseIfDefault: verboseIfDefault)
 
     case .bool:
-      code = setOptionFlag(name, Preference.bool(for: key), level: level)
+      code = setOptionFlag(name, Preference.bool(for: key), level: level,
+                           verboseIfDefault: verboseIfDefault)
 
     case .string:
-      code = setOptionalOptionString(name, Preference.string(for: key), level: level)
+      code = setOptionalOptionString(name, Preference.string(for: key), level: level,
+                                     verboseIfDefault: verboseIfDefault)
 
     case .color:
       let value = Preference.string(for: key)
-      code = setOptionalOptionString(name, value, level: level)
+      code = setOptionalOptionColor(name, value, level: level, verboseIfDefault: verboseIfDefault)
       // Random error here (perhaps a Swift or mpv one), so set it twice
       // 「没有什么是 set 不了的；如果有，那就 set 两次」
       if code < 0 {
-        code = setOptionalOptionString(name, value, level: level)
+        code = setOptionalOptionColor(name, value, level: level, verboseIfDefault: verboseIfDefault)
       }
 
     case .other:
@@ -1582,7 +1643,7 @@ class MPVController: NSObject {
         return
       }
       if let value = tr(key) {
-        code = setOptionString(name, value, level: level)
+        code = setOptionString(name, value, level: level, verboseIfDefault: verboseIfDefault)
       } else {
         code = 0
       }
@@ -1684,6 +1745,35 @@ class MPVController: NSObject {
       Value of property \(property) in the property change event could not be converted from
       \(format) to the expected type
       """, level: .error)
+  }
+
+  /// Convert the given mpv color string containing color components specified in hex to floating point.
+  ///
+  /// Normally color is specified in the form r/g/b, where each color component is specified as number in the range 0.0 to 1.0. It's also
+  /// possible to specify the transparency by using r/g/b/a, where the alpha value 0 means fully transparent, and 1.0 means opaque.
+  /// If the alpha component is not given, the color is 100% opaque. Alternatively, the color can be specified as a RGB hex triplet in the
+  /// form #RRGGBB, where each 2-digit group expresses a color value in the range 0 (00) to 255 (FF). Alpha is given with #AARRGGBB.
+  /// This method converts from the hex based alternative form to the floating point form.
+  /// - Parameter color: Color with components specified in hex.
+  /// - Returns: Color with components specified in floating point.
+  private func hexColorToFloat(_ color: String) -> String {
+    guard color.starts(with: "#"), color.count == 7 || color.count == 9 else {
+      log("Invalid mpv hex color string: \(color)", level: .error)
+      return color
+    }
+    var components: [String] = []
+    for offset in stride(from: 1, to: color.count, by: 2) {
+      let range = color.index(color.startIndex, offsetBy: offset)...color.index(color.startIndex, offsetBy: offset + 1)
+      let value = Double(Int(color[range], radix: 16)!)
+      components.append(String(value / 255))
+    }
+    guard components.count == 4 else {
+      return components.joined(separator: "/")
+    }
+    // The alpha component comes first in the hex based form, last in the floating point form.
+    let alpha = components[0]
+    components.remove(at: 0)
+    return "\(components.joined(separator: "/"))/\(alpha)"
   }
 
   /// Searches the list of user configured `mpv` options and returns `true` if the given option is present.

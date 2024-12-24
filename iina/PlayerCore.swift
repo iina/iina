@@ -1062,9 +1062,12 @@ class PlayerCore: NSObject {
       // A loop point has been set. B loop point must be set as well to activate looping.
       info.abLoopStatus = b == 0 ? .aSet : .bSet
     }
-    // The play slider has knobs representing the loop points, make insure the slider is in sync.
-    mainWindow?.syncSlider()
     log("Synchronized info.abLoopStatus \(info.abLoopStatus)")
+
+    // If window is not loaded the play slider knobs can't be synchronized.
+    guard mainWindow.loaded, info.state.active else { return }
+    // The play slider has knobs representing the loop points, make insure the slider is in sync.
+    mainWindow.syncSlider()
   }
 
   func togglePlaylistLoop() {

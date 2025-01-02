@@ -2856,13 +2856,13 @@ class NowPlayingInfoManager {
 
     if withTitle {
       if activePlayer.currentMediaIsAudio == .isAudio {
-        info[MPMediaItemPropertyMediaType] = MPNowPlayingInfoMediaType.audio.rawValue
+        info[MPNowPlayingInfoPropertyMediaType] = MPNowPlayingInfoMediaType.audio.rawValue
         let (title, album, artist) = activePlayer.getMusicMetadata()
         info[MPMediaItemPropertyTitle] = title
         info[MPMediaItemPropertyAlbumTitle] = album
         info[MPMediaItemPropertyArtist] = artist
       } else {
-        info[MPMediaItemPropertyMediaType] = MPNowPlayingInfoMediaType.video.rawValue
+        info[MPNowPlayingInfoPropertyMediaType] = MPNowPlayingInfoMediaType.video.rawValue
         info[MPMediaItemPropertyTitle] = activePlayer.getMediaTitle(withExtension: false)
       }
     }

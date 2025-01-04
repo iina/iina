@@ -57,12 +57,11 @@ class PlaybackInfo {
       switch state {
       case .idle:
         PlayerCore.checkStatusForSleep()
+        NowPlayingInfoManager.shared.updateInfo()
       case .playing:
         PlayerCore.checkStatusForSleep()
         if player == PlayerCore.lastActive {
-          if RemoteCommandController.useSystemMediaControl {
-            NowPlayingInfoManager.updateInfo(state: .playing)
-          }
+          NowPlayingInfoManager.shared.updateInfo(state: .playing)
           if player.mainWindow.pipStatus == .inPIP {
             player.mainWindow.pip.playing = true
           }
@@ -70,9 +69,7 @@ class PlaybackInfo {
       case .paused:
         PlayerCore.checkStatusForSleep()
         if player == PlayerCore.lastActive {
-          if RemoteCommandController.useSystemMediaControl {
-            NowPlayingInfoManager.updateInfo(state: .paused)
-          }
+          NowPlayingInfoManager.shared.updateInfo(state: .paused)
           if player.mainWindow.pipStatus == .inPIP {
             player.mainWindow.pip.playing = false
           }

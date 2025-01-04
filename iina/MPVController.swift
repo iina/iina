@@ -1216,15 +1216,11 @@ class MPVController: NSObject {
       DispatchQueue.main.async { self.player.chapterChanged() }
 
     case MPVOption.PlaybackControl.speed:
-      guard let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee else {
+      guard let speed = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee else {
         logPropertyValueError(MPVOption.PlaybackControl.speed, property.format)
         break
       }
-      DispatchQueue.main.async { [self] in
-        player.info.playSpeed = data
-        player.sendOSD(.speed(data))
-        player.needReloadQuickSettingsView()
-      }
+      DispatchQueue.main.async { self.player.speedChanged(speed) }
 
     case MPVOption.PlaybackControl.loopPlaylist, MPVOption.PlaybackControl.loopFile:
       DispatchQueue.main.async { [self] in

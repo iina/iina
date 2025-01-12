@@ -175,7 +175,10 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   override func windowDidLoad() {
     super.windowDidLoad()
     loaded = true
-    
+    // Issue #5319 seemed to be triggered by the window not loading. Need to know when the window
+    // has loaded to be able to debug such issues.
+    log("Player window has been loaded")
+
     guard let window = window else { return }
     
     // Insert `menuActionHandler` into the responder chain

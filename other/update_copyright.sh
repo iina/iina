@@ -22,13 +22,10 @@ function update () {
     find "$(cd $srcdir/$dir; pwd)" -name "$file" -exec sed -i '' "s/ 2017-2[0-9]\{3\}/ 2017-$year/" {} +
 }
 
-# Update the copyright displayed in the macOS "Get Info" window for the application.
+# Update the copyright displayed in the macOS "Get Info" window for
+# the application and at the start of the log file.
 update ../iina.xcodeproj project.pbxproj
+update en.lproj InfoPlist.strings
 
 # Update the copyright displayed in the about window.
-# This copyright text is contained in Contribution.rtf which is localized.
-# To avoid conflicts when merging translations from Crowdin the procedure for
-# modifying localized source is to only update the base and English source in
-# GitHub. Changes for other languages must then be made using Crowdin.
-update Base.lproj Contribution.rtf
-update en.lproj Contribution.rtf
+update . Contribution.rtf

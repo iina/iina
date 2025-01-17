@@ -33,4 +33,10 @@ class FirstRunManager {
       return true
     }
   }
+
+  static func unsetFirstRun(for key: Key) {
+    let filename = ".\(key.rawValue)"
+    let fileURL = Utility.appSupportDirUrl.appendingPathComponent(filename, isDirectory: false)
+    try? FileManager.default.removeItem(at: fileURL)
+  }
 }

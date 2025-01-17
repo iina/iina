@@ -434,6 +434,11 @@ class PlayerCore: NSObject {
     miniPlayer.pendingShow = true
     initialWindow.close()
 
+    // Make sure playback does not start once the file is loaded. Playback will be started in the
+    // fileLoaded method once IINA is ready assuming the user has not enabled the setting to pause
+    // when media is opened.
+    mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
+
     // Send load file command
     info.justOpenedFile = true
     info.state = .loading
@@ -1863,7 +1868,6 @@ class PlayerCore: NSObject {
     guard info.state.active else { return }
     log("File loaded")
     info.state = .paused
-    mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
     // Get video size and set the initial window size
     let width = mpv.getInt(MPVProperty.width)
     let height = mpv.getInt(MPVProperty.height)
@@ -2008,6 +2012,27 @@ class PlayerCore: NSObject {
     if ontop != mainWindow.isOntop {
       mainWindow.setWindowFloatingOnTop(ontop)
     }
+  }
+
+  func pauseChanged(_ paused: Bool) {
+    guard mainWindow.loaded, info.state.loaded else { return }
+    if (info.state == .paused) != paused {
+      sendOSD(paused ? .pause : .resume)
+      info.state = paused ? .paused : .playing
+      refreshSyncUITimer()
+      // Follow energy efficiency best practices and ensure IINA is absolutely idle when the video
+      // is paused to avoid wasting energy with needless processing. If paused shutdown the timer
+      // that synchronizes the UI and the high priority display link thread.
+      if paused {
+        mainWindow.videoView.displayIdle()
+      } else {
+        mainWindow.videoView.displayActive()
+      }
+    }
+    if Preference.bool(for: .alwaysFloatOnTop) {
+      mainWindow.setWindowFloatingOnTop(!paused)
+    }
+    syncUI(.playButton)
   }
 
   func playbackRestarted() {

@@ -1210,25 +1210,7 @@ class MPVController: NSObject {
         logPropertyValueError(MPVOption.PlaybackControl.pause, property.format)
         break
       }
-      DispatchQueue.main.async { [self] in
-        if (player.info.state == .paused) != paused {
-          player.sendOSD(paused ? .pause : .resume)
-          player.info.state = paused ? .paused : .playing
-          player.refreshSyncUITimer()
-          // Follow energy efficiency best practices and ensure IINA is absolutely idle when the
-          // video is paused to avoid wasting energy with needless processing. If paused shutdown
-          // the timer that synchronizes the UI and the high priority display link thread.
-          if paused {
-            player.mainWindow.videoView.displayIdle()
-          } else {
-            player.mainWindow.videoView.displayActive()
-          }
-        }
-        if player.mainWindow.loaded && Preference.bool(for: .alwaysFloatOnTop) {
-          player.mainWindow.setWindowFloatingOnTop(!paused)
-        }
-        player.syncUI(.playButton)
-      }
+      DispatchQueue.main.async { self.player.pauseChanged(paused) }
 
     case MPVProperty.chapter:
       DispatchQueue.main.async { self.player.chapterChanged() }

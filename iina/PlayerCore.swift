@@ -1867,7 +1867,15 @@ class PlayerCore: NSObject {
   func fileLoaded() {
     guard info.state.active else { return }
     log("File loaded")
-    info.state = .paused
+
+    // Normally playback will be paused at this point because PlayerCore sets playback to be paused
+    // before loading a file. This is required to be able to support the setting to pause when media
+    // is opened, otherwise there would be a race condition as to whether IINA can pause playback
+    // before mpv has starting playing the media. However plugins have direct access to mpv and can
+    // load files, therefore the mpv state must be checked.
+    info.state = mpv.getFlag(MPVOption.PlaybackControl.pause) ? .paused : .playing
+    syncUI(.playButton)
+
     // Get video size and set the initial window size
     let width = mpv.getInt(MPVProperty.width)
     let height = mpv.getInt(MPVProperty.height)

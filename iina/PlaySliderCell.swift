@@ -159,7 +159,9 @@ class PlaySliderCell: NSSliderCell {
     // draw chapters
     NSGraphicsContext.saveGraphicsState()
     if drawChapters {
-      if let totalSec = info.videoDuration?.second {
+      // When streaming if the audio stream is changed mpv will momentarily reset the video duration
+      // to zero. Not useful to draw the chapter marks when the duration is unknown.
+      if let totalSec = info.videoDuration?.second, totalSec != 0 {
         chapterStrokeColor.setStroke()
         let chapters = info.chapters
         if chapters.count > 1 {

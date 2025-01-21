@@ -932,7 +932,10 @@ class MenuController: NSObject, NSMenuDelegate {
         // This is needed for the case where the menu item previously matched to a key binding, but now there is no match.
         // Obviously this is a little kludgey, but it avoids having to do a big refactor and/or writing a bunch of new code.
         let (_, value, extraData) = sameKeyAction(actions, actions, normalizeLastNum, numRange)
-        updateMenuItem(menuItem, kEqv: "", kMdf: [], l10nKey: l10nKey, value: value, extraData: extraData)
+        // An "alternate" menu item appear is intended to replace a "normal" menu item in the menu if its modifier key is held down
+        // (typically Option). But this key needs to be specified in its modifier flags, or the item may never appear.
+        let modifiers: NSEvent.ModifierFlags = menuItem.isAlternate ? [.option] : []
+        updateMenuItem(menuItem, kEqv: "", kMdf: modifiers, l10nKey: l10nKey, value: value, extraData: extraData)
       }
     }
 

@@ -227,11 +227,13 @@ class VideoView: NSView {
     checkResult(CVDisplayLinkSetOutputCallback(link, displayLinkCallback, mutableRawPointerOf(obj: self)),
                 "CVDisplayLinkSetOutputCallback")
     checkResult(CVDisplayLinkStart(link), "CVDisplayLinkStart")
+    log("Display link started", level: .verbose)
   }
 
   @objc func stopDisplayLink() {
     guard let link = link, CVDisplayLinkIsRunning(link) else { return }
     checkResult(CVDisplayLinkStop(link), "CVDisplayLinkStop")
+    log("Display link stopped", level: .verbose)
   }
 
   // This should only be called if the window has changed displays

@@ -1288,7 +1288,6 @@ class MainWindowController: PlayerWindowController {
     let isLegacyFullScreen = notification.name == .iinaLegacyFullScreen
     fsState.startAnimatingToFullScreen(legacy: isLegacyFullScreen, priorWindowedFrame: window!.frame)
 
-    videoView.videoLayer.suspend()
     // Let mpv decide the correct render region in full screen
     player.mpv.setFlag(MPVOption.Window.keepaspect, true)
   }
@@ -1302,7 +1301,6 @@ class MainWindowController: PlayerWindowController {
     videoViewConstraints.values.forEach { $0.constant = 0 }
     videoView.needsLayout = true
     videoView.layoutSubtreeIfNeeded()
-    videoView.videoLayer.resume()
 
     if Preference.bool(for: .blackOutMonitor) {
       blackOutOtherMonitors()
@@ -1369,7 +1367,6 @@ class MainWindowController: PlayerWindowController {
     // quitting then mpv could be in the process of shutting down. Must not access mpv while it is
     // asynchronously processing stop and quit commands.
     guard player.info.state.active else { return }
-    videoView.videoLayer.suspend()
     player.mpv.setFlag(MPVOption.Window.keepaspect, false)
   }
 
@@ -1410,7 +1407,6 @@ class MainWindowController: PlayerWindowController {
     videoViewConstraints.values.forEach { $0.constant = 0 }
     videoView.needsLayout = true
     videoView.layoutSubtreeIfNeeded()
-    videoView.videoLayer.resume()
 
     if Preference.bool(for: .pauseWhenLeavingFullScreen) && player.info.state == .playing {
       player.pause()

@@ -69,7 +69,6 @@ class ViewLayer: CAOpenGLLayer {
   private weak var videoView: VideoView!
 
   let mpvGLQueue = DispatchQueue(label: "com.colliderli.iina.mpvgl", qos: .userInteractive)
-  @Atomic var blocked = false
 
   private var bufferDepth: GLint = 8
 
@@ -184,17 +183,6 @@ class ViewLayer: CAOpenGLLayer {
       }
       glFlush()
     }
-  }
-
-  func suspend() {
-    blocked = true
-    mpvGLQueue.suspend()
-  }
-
-  func resume() {
-    blocked = false
-    draw(forced: true)
-    mpvGLQueue.resume()
   }
 
   override func copyCGLPixelFormat(forDisplayMask mask: UInt32) -> CGLPixelFormatObj { cglPixelFormat }

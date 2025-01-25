@@ -1520,6 +1520,18 @@ class MainWindowController: PlayerWindowController {
     NSApp.presentationOptions.insert(.autoHideDock)
     // set window frame and in some cases content view frame
     setWindowFrameForLegacyFullScreen()
+
+    // Workaround for issue #5288, OSC doesn't appear when playing in full screen. Starting with
+    // macOS 15 Sequoia AppKit sometimes fails to call mouseMoved after entering full screen mode.
+    // Recreating the tracking area corrects whatever is going wrong in AppKit.
+    if #available(macOS 15, *), let cv = window.contentView, cv.trackingAreas.count == 1 {
+      log("Recreating tracking area")
+      cv.removeTrackingArea(cv.trackingAreas[0])
+      cv.addTrackingArea(NSTrackingArea(rect: cv.bounds,
+        options: [.activeAlways, .enabledDuringMouseDrag, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved],
+        owner: self, userInfo: ["obj": 0]))
+    }
+
     // call delegate
     windowDidEnterFullScreen(Notification(name: .iinaLegacyFullScreen))
   }

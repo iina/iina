@@ -2049,6 +2049,10 @@ class PlayerCore: NSObject {
 
   func playbackRestarted() {
     log("Playback restarted")
+
+    // Important to synchronize the time as mpv may slightly alter the playback position during a
+    // restart even while paused. See issue #5337.
+    syncUI(.time)
     reloadSavedIINAfilters()
 
     NowPlayingInfoManager.shared.updateInfo()

@@ -14,33 +14,53 @@ class VideoTime {
 
   var second: Double
 
-  var h: Int {
-    Int(second) / 3600
-  }
-
-  var m: Int {
-    (Int(second) % 3600) / 60
-  }
-
-  var s: Int {
-    (Int(second) % 3600) % 60
-  }
-
   var stringRepresentation: String {
     stringRepresentationWithPrecision(0)
   }
 
+  /// Return this time as a string with the given precision.
+  ///
+  /// The value of the `precision` parameter controls the number of fractional digits in the seconds portion of the returned time
+  /// string and is interpreted as follows:
+  /// | Value | Precision |
+  /// | --- | --- |
+  /// | 0 | 1 second  |
+  /// | 1 | 100 milliseconds |
+  /// | 2 | 10 milliseconds |
+  /// | 3 | 1 millisecond |
+  /// - Important: The time is also displayed in the macOS
+  ///     [Control Center](https://support.apple.com/guide/mac-help/quickly-change-settings-mchl50f94f8f/mac)
+  ///     Now Playing module. Now Playing uses 1 second precision. When the IINA OSC is also configured to use 1 second precision
+  ///     it is important that the times displayed match. This means IINA **must** use the same rounding method that Now Playing
+  ///     uses, [rounding half down](https://en.wikipedia.org/wiki/Rounding#Rounding_half_down).  IINA must
+  ///     round 0.5 to 0 and 0.51 to 1.
+  /// - Parameter precision: Precision to use for the seconds portion of the returned string.
+  /// - Returns: A string containing the time in the format "hh:mm:ss.sss", with the number of digits in the fraction controlled by the
+  ///     precision parameter.
   func stringRepresentationWithPrecision(_ precision: UInt) -> String {
     if self == Constants.Time.infinite {
       return "End"
     }
+
+    // Whether to include fractional seconds.
+    let precise = precision >= 1 && precision <= 3
+
+    // When rounding to seconds IINA must do so by rounding half down in order to match up with the
+    // time displayed in the Control Center Now Playing module. At this time the Swift rounded
+    // method does not support such a rounding rule.
+    let rounded = precise ? Int(second) : Int(second.roundedHalfDown())
+
+    let h = rounded / 3600
+    let remaining = rounded % 3600
+    let m = remaining / 60
+
     let h_ = h > 0 ? "\(h):" : ""
     let m_ = m < 10 ? "0\(m)" : "\(m)"
     let s_: String
-
-    if precision >= 1 && precision <= 3 {
+    if precise {
       s_ = String(format: "%0\(precision + 3).\(precision)f", fmod(second, 60))
     } else {
+      let s = remaining % 60
       s_ = s < 10 ? "0\(s)" : "\(s)"
     }
 

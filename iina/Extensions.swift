@@ -328,6 +328,19 @@ extension Double {
     }
   }
 
+  /// Returns this value rounded half down to an integral value.
+  ///
+  /// For example 0.5 will be rounded to 0.0, 0.51 will be rounded to 1.0.
+  /// - Note: This method is needed because at this time the Swift
+  ///     [rounded](https://developer.apple.com/documentation/swift/double/rounded(_:)) method does not
+  ///     support a [rounding rule](https://developer.apple.com/documentation/swift/floatingpointroundingrule)
+  ///     for [rounding half down](https://en.wikipedia.org/wiki/Rounding#Rounding_half_down).
+  /// - Returns: The integral value found by rounding this value.
+  func roundedHalfDown() -> Double {
+    let floor = floor(self)
+    return self <= floor + 0.5 ? floor : ceil(self)
+  }
+
   func roundedTo2Decimals() -> Double {
     let scaledUp = self * 1e2
     let scaledUpRounded = scaledUp.rounded(.up)

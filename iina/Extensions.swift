@@ -547,9 +547,11 @@ extension URL {
     return (try? self.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory ?? false
   }
   
+  static let queryTimeParameterNames = Set(["t", "time"])
+  
   var queryTimeSeconds: TimeInterval? {
     let queryItems = self.urlComponents?.queryItems
-    let timeString = queryItems?.first { Set(["t", "time"]).contains($0.name) }?.value
+    let timeString = queryItems?.first { URL.queryTimeParameterNames.contains($0.name) }?.value
     return timeString.flatMap(TimeInterval.init)
   }
 }

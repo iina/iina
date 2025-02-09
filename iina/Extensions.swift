@@ -443,7 +443,7 @@ extension Data {
     }
   }
 
-  init<T>(bytesOf thing: T) {
+  init<T: BitwiseCopyable>(bytesOf thing: T) {
     var copyOfThing = thing // Hopefully CoW?
     self.init(bytes: &copyOfThing, count: MemoryLayout.size(ofValue: thing))
   }

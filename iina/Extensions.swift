@@ -546,6 +546,12 @@ extension URL {
   var isExistingDirectory: Bool {
     return (try? self.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory ?? false
   }
+  
+  var queryTimeSeconds: TimeInterval? {
+    let queryItems = self.urlComponents?.queryItems
+    let timeString = queryItems?.first { Set(["t", "time"]).contains($0.name) }?.value
+    return timeString.flatMap(TimeInterval.init)
+  }
 }
 
 

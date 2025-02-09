@@ -1934,6 +1934,10 @@ class PlayerCore: NSObject {
       mpv.setFlag(MPVOption.PlaybackControl.pause, false, level: .verbose)
     }
     syncUI(.playlist)
+    
+    if let time = info.currentURL?.queryTimeSeconds {
+      seek(absoluteSecond: time)
+    }
   }
 
   func fileEnded(dueToStopCommand: Bool) {

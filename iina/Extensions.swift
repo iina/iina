@@ -444,8 +444,12 @@ extension Data {
   }
 
   init<T: BitwiseCopyable>(bytesOf thing: T) {
-    var copyOfThing = thing // Hopefully CoW?
-    self.init(bytes: &copyOfThing, count: MemoryLayout.size(ofValue: thing))
+    var mutableThing = thing
+    self.init(bytes: &mutableThing, count: MemoryLayout<T>.size)
+  }
+  
+  init<T: BitwiseCopyable>(bytesOf thing: [T]) {
+    self.init(bytes: thing, count: MemoryLayout<T>.size * thing.count)
   }
   
   func saveToFolder(_ url: URL, filename: String) -> URL? {

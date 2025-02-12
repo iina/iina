@@ -102,7 +102,11 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
       if !file.contains("/") {
         if let url = searchBinary(file, in: Utility.binariesURL) ?? searchBinary(file, in: Utility.exeDirURL) {
           // a binary included in IINA's bundle?
-          path = url.absoluteString
+          if #available(macOS 13.0, *) {
+            path = url.path(percentEncoded: false)
+          } else {
+            path = url.path
+          }
         } else {
           // assume it's a system command
           let useBash = false
@@ -177,7 +181,13 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
         stderrContent += output
         stderrHook?.call(withArguments: [output])
       }
-      process.launch()
+      Logger.log("Executing \(path) \(args.joined(separator: " "))", subsystem: pluginInstance.subsystem)
+      do {
+        try process.run()
+      } catch {
+        reject.call(withArguments: ["Execution failed reporting: \(error.localizedDescription)"])
+        return
+      }
 
       self.pluginInstance.queue.async {
         process.waitUntilExit()

@@ -86,6 +86,37 @@ class PlayerCore: NSObject {
     let useNew = Preference.bool(for: .alwaysOpenInNewWindow) != isAlternative
     return useNew ? newPlayerCore : active
   }
+  
+  /**
+   Depending on the `alwaysOpenInNewWindow` pref, opens the URLs in a single window, or multiple windows.
+
+   - Returns: `nil` if no further action is needed, like opened a BD Folder; otherwise the
+   count of playable files.
+   */
+  @discardableResult
+  static func openURLs(
+    _ urls: [URL],
+    preferredCore: PlayerCore? = nil,
+    inverseOpenInNewWindowPref: Bool = false
+  ) -> Int? {
+    let shouldOpenInSeparateWindows = Preference.bool(for: .alwaysOpenInNewWindow) != inverseOpenInNewWindowPref
+
+    if shouldOpenInSeparateWindows {
+      // open each url in its own window. accumulate the return values
+      return urls.reduce(nil) { currentReturnValue, url in
+        let openResult = newPlayerCore.openURLs([url])
+
+        if let openResult {
+          return (currentReturnValue ?? 0) + openResult
+        }
+
+        return currentReturnValue
+      }
+    } else {
+      // open all urls in the same playlist
+      return (preferredCore ?? activeOrNew).openURLs(urls)
+    }
+  }
 
   // MARK: - Fields
 

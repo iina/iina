@@ -745,7 +745,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
     // open pending files
     pendingFilesForOpenFile.removeAll()
-    if PlayerCore.activeOrNew.openURLs(urls) == 0 {
+    if PlayerCore.openURLs(urls) == 0 {
       Utility.showAlert("nothing_to_open")
     }
   }
@@ -907,8 +907,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
         }
       }
       let isAlternative = (sender as? NSMenuItem)?.tag == AlternativeMenuItemTag
-      let playerCore = PlayerCore.activeOrNewForMenuAction(isAlternative: isAlternative)
-      if playerCore.openURLs(panel.urls) == 0 {
+      if PlayerCore.openURLs(panel.urls, inverseOpenInNewWindowPref: isAlternative) == 0 {
         Utility.showAlert("nothing_to_open")
       }
     }

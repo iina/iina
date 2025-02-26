@@ -1277,7 +1277,7 @@ class MainWindowController: PlayerWindowController {
     }
     standardWindowButtons.forEach { $0.alphaValue = 0 }
     titleTextField?.alphaValue = 0
-    
+
     window!.removeTitlebarAccessoryViewController(at: 0)
     setWindowFloatingOnTop(false, updateOnTopStatus: false)
 
@@ -1297,6 +1297,7 @@ class MainWindowController: PlayerWindowController {
 
     titleTextField?.alphaValue = 1
     removeStandardButtonsFromFadeableViews()
+    window?.titlebarAppearsTransparent = false
 
     videoViewConstraints.values.forEach { $0.constant = 0 }
     videoView.needsLayout = true
@@ -1381,6 +1382,9 @@ class MainWindowController: PlayerWindowController {
     }
     addBackStandardButtonsToFadeableViews()
     titleBarView.isHidden = false
+
+    window?.titlebarAppearsTransparent = true
+
     fsState.finishAnimating()
 
     if Preference.bool(for: .blackOutMonitor) {

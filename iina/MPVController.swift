@@ -370,7 +370,8 @@ class MPVController: NSObject {
     chkErr(setOptionString("watch-later-directory", Utility.watchLaterURL.path, level: .verbose))
     setUserOption(PK.resumeLastPosition, type: .bool, forName: MPVOption.WatchLater.savePositionOnQuit,
                   verboseIfDefault: true)
-    setUserOption(PK.resumeLastPosition, type: .bool, forName: "resume-playback", verboseIfDefault: true)
+    setUserOption(PK.resumeLastPosition, type: .bool, forName: MPVOption.WatchLater.resumePlayback,
+                  verboseIfDefault: true)
 
     setUserOption(.initialWindowSizePosition, type: .string, forName: MPVOption.Window.geometry,
                   level: .verbose)

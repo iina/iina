@@ -1874,6 +1874,11 @@ class PlayerCore: NSObject {
     syncUI(.playButton)
     mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
 
+    // Must force drawing to cover the case where this player was previously used to play a video
+    // and is now playing an audio file without an album cover and without using music mode.
+    // See issue #5403.
+    mainWindow.videoView.videoLayer.draw(forced: true)
+
     // Get video size and set the initial window size
     let width = mpv.getInt(MPVProperty.width)
     let height = mpv.getInt(MPVProperty.height)
@@ -2044,7 +2049,6 @@ class PlayerCore: NSObject {
   func playbackRestarted() {
     log("Playback restarted")
     reloadSavedIINAfilters()
-    mainWindow.videoView.videoLayer.draw(forced: true)
 
     if RemoteCommandController.useSystemMediaControl {
       NowPlayingInfoManager.updateInfo()

@@ -537,6 +537,11 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     NotificationCenter.default.post(name: .iinaMainWindowChanged, object: true)
   }
   
+  func windowDidChangeOcclusionState(_ notification: Notification) {
+    // Must force drawing for audio files that have album cover art.
+    videoView.videoLayer.draw(forced: true)
+  }
+
   func windowDidResignMain(_ notification: Notification) {
     NotificationCenter.default.post(name: .iinaMainWindowChanged, object: false)
   }

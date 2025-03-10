@@ -1302,6 +1302,7 @@ class MainWindowController: PlayerWindowController {
     videoViewConstraints.values.forEach { $0.constant = 0 }
     videoView.needsLayout = true
     videoView.layoutSubtreeIfNeeded()
+    videoView.videoLayer.draw(forced: true)
 
     if Preference.bool(for: .blackOutMonitor) {
       blackOutOtherMonitors()
@@ -1411,6 +1412,7 @@ class MainWindowController: PlayerWindowController {
     videoViewConstraints.values.forEach { $0.constant = 0 }
     videoView.needsLayout = true
     videoView.layoutSubtreeIfNeeded()
+    videoView.videoLayer.draw(forced: true)
 
     if Preference.bool(for: .pauseWhenLeavingFullScreen) && player.info.state == .playing {
       player.pause()

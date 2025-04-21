@@ -489,7 +489,7 @@ class MenuController: NSObject, NSMenuDelegate {
     let loopMode = player.getLoopMode()
     fileLoop.state = loopMode == .file ? .on : .off
     playlistLoop.state = loopMode == .playlist ? .on : .off
-    let speed = player.info.playSpeed.string
+    let speed = player.info.playSpeed.groupedStringUpTo6Decimals
     speedIndicator.title = String(format: NSLocalizedString("menu.speed", comment: "Speed:"), speed)
   }
 
@@ -954,7 +954,7 @@ class MenuController: NSObject, NSMenuDelegate {
       case "speed_up",
         "speed_down":
         // Title format expects arg type: String
-        valObj = abs(value).string
+        valObj = abs(value).groupedStringUpTo6Decimals
       default:
         // Title format expects numeric arg
         valObj = abs(value)

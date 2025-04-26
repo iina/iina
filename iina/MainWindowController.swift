@@ -671,20 +671,10 @@ class MainWindowController: PlayerWindowController {
     window.title = "Window"
 
     // As there have been issues in this area, log details about the screen selection process.
-    NSScreen.log("window!.screen", window.screen)
+    NSScreen.log("window.screen", window.screen)
     NSScreen.log("NSScreen.main", NSScreen.main)
     NSScreen.screens.enumerated().forEach { screen in
       NSScreen.log("NSScreen.screens[\(screen.offset)]" , screen.element)
-    }
-
-    var screen = window.selectDefaultScreen()
-
-    if let rectString = UserDefaults.standard.value(forKey: "MainWindowLastPosition") as? String {
-      let rect = NSRectFromString(rectString)
-      if let lastScreen = NSScreen.screens.first(where: { NSPointInRect(rect.origin, $0.visibleFrame) }) {
-        screen = lastScreen
-        NSScreen.log("MainWindowLastPosition \(rect.origin) matched", screen)
-      }
     }
 
     videoView.videoLayer.draw(forced: true)
@@ -2464,9 +2454,33 @@ class MainWindowController: PlayerWindowController {
     return winFrame
   }
 
+  /// Determine the screen to use for the window.
+  /// - Parameter window: Window to determine the screen for.
+  /// - Returns: Screen to use for the given window.
+  private func determineScreenToUse(_ window: NSWindow) -> NSScreen {
+    guard let rectString = UserDefaults.standard.value(forKey: "MainWindowLastPosition") as? String else {
+      return window.selectDefaultScreen()
+    }
+    let rect = NSRectFromString(rectString)
+    guard let lastScreen = NSScreen.screens.first(where: { NSPointInRect(rect.origin, $0.visibleFrame) }) else {
+      // The previous window origin is not on any screen. Could be an external screen is no longer
+      // connected or the arrangement of the screens has changed.
+      log("MainWindowLastPosition \(rect.origin) is not within any screens")
+      return window.selectDefaultScreen()
+    }
+    // Found a screen containing the previous window origin. Use that screen for the window.
+    NSScreen.log("MainWindowLastPosition \(rect.origin) matched", lastScreen)
+    return lastScreen
+  }
+
   /** Set window size when info available, or video size changed. */
   override func handleVideoSizeChange() {
     guard let window = window else { return }
+
+    // When starting to play the file try and find the screen the window was previously on.
+    let screen = player.info.justStartedFile ? determineScreenToUse(window) : window.selectDefaultScreen()
+    let screenRect = screen.visibleFrame
+    let screenSize = screenRect.size
 
     let (width, height) = player.videoSizeForDisplay
 
@@ -2481,15 +2495,21 @@ class MainWindowController: PlayerWindowController {
     let frame = fsState.priorWindowedFrame ?? window.frame
 
     if player.info.justStartedFile {
-      // resize option applies
+      // Many settings can require the window to be resized/repositioned:
+      // - Initial window size
+      // - Initial window position
+      // - Resize the window to fit video size
+      // - Use physical resolution on Retina displays
+      // - Direct use of the mpv geometry option
+      let geometrySet = player.mpv.getString(MPVOption.Window.geometry) != nil
       let resizeTiming = Preference.enum(for: .resizeWindowTiming) as Preference.ResizeWindowTiming
       switch resizeTiming {
       case .always:
         needResizeWindow = true
       case .onlyWhenOpen:
-        needResizeWindow = player.info.justOpenedFile
+        needResizeWindow = player.info.justOpenedFile || geometrySet || shouldApplyInitialWindowSize
       case .never:
-        needResizeWindow = false
+        needResizeWindow = geometrySet || shouldApplyInitialWindowSize
       }
     } else {
       // video size changed during playback
@@ -2497,47 +2517,64 @@ class MainWindowController: PlayerWindowController {
     }
 
     if needResizeWindow {
-      let resizeRatio = (Preference.enum(for: .resizeWindowOption) as Preference.ResizeWindowOption).ratio
       // get videoSize on screen
       var videoSize = originalVideoSize
-      let screenRect = window.screen?.visibleFrame
-
       if Preference.bool(for: .usePhysicalResolution) {
         videoSize = window.convertFromBacking(
           NSMakeRect(window.frame.origin.x, window.frame.origin.y, CGFloat(width), CGFloat(height))).size
+        if videoSize != originalVideoSize {
+          log("""
+            Adjusted size from \(originalVideoSize) to \(videoSize) based on physical \
+            resolution of display
+            """)
+        }
       }
+      let resizePreference = Preference.enum(for: .resizeWindowOption) as Preference.ResizeWindowOption
       if player.info.justStartedFile {
-        if resizeRatio < 0 {
-          if let screenSize = screenRect?.size {
-            videoSize = videoSize.shrink(toSize: screenSize)
+        let sizeBefore = videoSize
+        if resizePreference == .fitScreen {
+          videoSize = videoSize.shrink(toSize: screenSize)
+          if sizeBefore != videoSize {
+            log("Resized window to \(videoSize) to fit in screen")
           }
         } else {
+          let resizeRatio = resizePreference.ratio
           videoSize = videoSize.multiply(CGFloat(resizeRatio))
+          if sizeBefore != videoSize {
+            log("Resized window to \(resizeRatio)x video size \(videoSize)")
+          }
         }
       }
       // check screen size
-      if let screenSize = screenRect?.size {
-        videoSize = videoSize.satisfyMaxSizeWithSameAspectRatio(screenSize)
-      }
+      videoSize = videoSize.satisfyMaxSizeWithSameAspectRatio(screenSize)
       // guard min size
       // must be slightly larger than the min size, or it will crash when the min size is auto saved as window frame size.
       videoSize = videoSize.satisfyMinSizeWithSameAspectRatio(minSize)
-      // check if have geometry set (initial window position/size)
-      if shouldApplyInitialWindowSize, let wfg = windowFrameFromGeometry(newSize: videoSize) {
-        rect = wfg
-      } else {
-        if player.info.justStartedFile, resizeRatio < 0, let screenRect = screenRect {
-          rect = screenRect.centeredResize(to: videoSize)
+      if shouldApplyInitialWindowSize {
+        // check if have geometry set (initial window position/size)
+        if let wfg = windowFrameFromGeometry(newSize: videoSize, screen: screen) {
+          rect = wfg
+          log("Adjusted window frame based on geometry option: \(rect)")
         } else {
-          rect = frame.centeredResize(to: videoSize)
+          rect = videoSize.centeredRect(in: screenRect)
+          log("Centered window in screen: \(rect)")
         }
+      } else if player.info.justStartedFile, resizePreference == .fitScreen {
+        rect = screenRect.centeredResize(to: videoSize)
+        log("Centered window in screen and resized: \(rect)")
+      } else {
+        rect = frame.centeredResize(to: videoSize)
+        log("Resized window preserving centering: \(rect)")
       }
-
+    } else if shouldApplyInitialWindowSize {
+      rect = originalVideoSize.centeredRect(in: screenRect)
+      log("Centered original sized window in screen: \(rect)")
     } else {
       // user is navigating in playlist. remain same window width.
       let newHeight = frame.width / CGFloat(width) * CGFloat(height)
       let newSize = NSSize(width: frame.width, height: newHeight).satisfyMinSizeWithSameAspectRatio(minSize)
       rect = NSRect(origin: frame.origin, size: newSize)
+      log("Adjusted height of window preserving width: \(rect)")
     }
 
     // maybe not a good position, consider putting these at playback-restart
@@ -2548,10 +2585,13 @@ class MainWindowController: PlayerWindowController {
     if fsState.isFullscreen {
       fsState.priorWindowedFrame = rect
     } else {
-      if let screenFrame = window.screen?.frame {
-        rect = rect.constrain(in: screenFrame)
+      let rectBefore = rect
+      rect = rect.constrain(in: screenRect)
+      if rectBefore != rect {
+        log("Constrained window frame to be in screen: \(rect)")
       }
 
+      log("Setting window frame to: \(rect)")
       if player.disableWindowAnimation || Preference.bool(for: .disableAnimations) || !window.isVisible {
         window.setFrame(rect, display: true, animate: false)
       } else {

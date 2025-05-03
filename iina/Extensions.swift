@@ -357,17 +357,13 @@ extension Double {
   /// a comma to signify the decimal):
   /// ```
   /// let num: Double = 12.34
-  /// let badStr = "Value is \(num)"          // badStr will *always* be "Value is 12.34"
-  /// let goodStr = "Value is \(num.string)"  // goodStr will be "Value is 12,34"
+  /// let badStr = "Value is \(num)"                                // badStr will *always* be "Value is 12.34"
+  /// let goodStr = "Value is \(num.groupedStringUpTo6Decimals)"  // goodStr will be "Value is 12,34"
   /// ```
   ///
-  /// Currently the output string is limited to 15 digits after the decimal. This should be more than
-  /// enough for any imaginable use right now, but the limit can and should be increased in the future if
-  /// needed. (It's not clear what the maximum allowed value for `NumberFormatter.maximumFractionDigits`
-  /// actually is. An attempt to set it equal to `NSIntegerMax` seemed to result in it being silently set to
-  /// `6` instead.)
-  var string: String {
-    return fmtDecimalMaxFractionDigits15.string(from: self as NSNumber) ?? "NaN"
+  /// Currently the output string is limited to 6 digits after the decimal. This matches the precision used by mpv's APIs.
+  var groupedStringUpTo6Decimals: String {
+    return fmtDecimalGroupingMaxFractionDigits6.string(from: self as NSNumber) ?? "NaN"
   }
 }
 
@@ -392,13 +388,16 @@ fileprivate let fmtDecimalMaxFractionDigits2: NumberFormatter = {
   return fmt
 }()
 
-fileprivate let fmtDecimalMaxFractionDigits15: NumberFormatter = {
+/// Formatter for `Double`.
+/// - Displays up to 6 digits after the decimal before rounding.
+/// - Omits trailing zeroes.
+/// - Uses grouping separator (e.g. comma) for large numbers.
+fileprivate let fmtDecimalGroupingMaxFractionDigits6: NumberFormatter = {
   let fmt = NumberFormatter()
   fmt.numberStyle = .decimal
   fmt.usesGroupingSeparator = true
-  fmt.maximumSignificantDigits = 25
   fmt.minimumFractionDigits = 0
-  fmt.maximumFractionDigits = 15
+  fmt.maximumFractionDigits = 6
   fmt.usesSignificantDigits = false
   return fmt
 }()

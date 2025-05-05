@@ -232,6 +232,41 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     // Hide Window > "Enter Full Screen" menu item, because this is already present in the Video menu
     UserDefaults.standard.set(false, forKey: "NSFullScreenMenuItemEverywhere")
 
+    // Install plugins
+    if FirstRunManager.isFirstRun(for: .init("installedDefaultPlugins")) {
+      var hasError = false
+      Logger.log("Installing default plugins")
+      if let pluginPath = Bundle.main.resourcePath?.appending("/plugins"),
+         FileManager.default.fileExists(atPath: pluginPath),
+         let contents = try? FileManager.default.contentsOfDirectory(atPath: pluginPath) {
+        contents.filter { $0.hasSuffix(".iinaplgz") }
+          .forEach {
+            do {
+              let path = pluginPath.appending("/\($0)")
+              let plugin = try JavascriptPlugin.create(fromPackageURL: URL(fileURLWithPath: path))
+              if JavascriptPlugin.plugins.contains(where: { $0.identifier == plugin.identifier }) {
+                Logger.log("Skipped \(plugin.identifier), already installed")
+                return
+              }
+              plugin.normalizePath()
+              JavascriptPlugin.plugins.append(plugin)
+              plugin.enabled = true
+              Logger.log("Installed \(plugin.identifier)")
+            } catch let error {
+              hasError = true
+              Logger.log(error.localizedDescription, level: .error)
+            }
+          }
+      } else {
+        hasError = true
+        Logger.log("Cannot find default plugins", level: .error)
+      }
+
+      if hasError {
+        FirstRunManager.unsetFirstRun(for: .init("installedDefaultPlugins"))
+      }
+    }
+
     // handle arguments
     let arguments = ProcessInfo.processInfo.arguments.dropFirst()
     guard arguments.count > 0 else { return }

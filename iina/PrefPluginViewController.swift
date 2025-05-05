@@ -98,7 +98,6 @@ class PrefPluginViewController: PreferenceViewController, PreferenceWindowEmbedd
     newPluginSourceTextField.delegate = self
 
     clearPluginPage()
-
   }
 
   private func createPreferenceView() {
@@ -232,15 +231,7 @@ class PrefPluginViewController: PreferenceViewController, PreferenceWindowEmbedd
       pluginPreferencesViewController.plugin = currentPlugin
     } else if sender.selectedTag() == 1 {
       // About
-      if let _ = currentPlugin.helpPageURL {
-        pluginSupportStackView.setVisibilityPriority(.mustHold, for: pluginHelpView)
-        if pluginHelpWebView == nil {
-          createHelpView()
-        }
-        loadHelpPage()
-      } else {
-        pluginSupportStackView.setVisibilityPriority(.notVisible, for: pluginHelpView)
-      }
+      updateAboutTab()
     }
   }
 
@@ -274,6 +265,22 @@ class PrefPluginViewController: PreferenceViewController, PreferenceWindowEmbedd
     uninstallBtn.isEnabled = !plugin.isExternal
 
     currentPlugin = plugin
+
+    updateAboutTab()
+  }
+
+  private func updateAboutTab() {
+    guard let currentPlugin = currentPlugin else { return }
+
+    if let _ = currentPlugin.helpPageURL {
+      pluginSupportStackView.setVisibilityPriority(.mustHold, for: pluginHelpView)
+      if pluginHelpWebView == nil {
+        createHelpView()
+      }
+      loadHelpPage()
+    } else {
+      pluginSupportStackView.setVisibilityPriority(.notVisible, for: pluginHelpView)
+    }
   }
 
   private func loadHelpPage() {

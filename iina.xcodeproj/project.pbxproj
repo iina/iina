@@ -2803,6 +2803,7 @@
 				84817CE81DBE2E3200CC2279 /* Copy Lua Scripts */,
 				84E745DA1DFDE9C600588DED /* Copy Configs */,
 				8461BA631E423423008BB852 /* Copy Executables */,
+				E3E720A12CD7073D003470BF /* Copy Default Plugins */,
 				4954298A216C34960058F680 /* Embed App Extensions */,
 				51728768291B6F30009E6EC1 /* Write Info.h */,
 			);
@@ -3054,6 +3055,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
 			shellScript = "echo \"Copy symlinks:\"\n\nfor file in \"${SRCROOT}/deps/lib/\"*.dylib; do\n    if [[ -h \"$file\" ]]; then\n        cp -R $file \"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/$(basename $file)\"\n    fi\ndone\n";
+		};
+		E3E720A12CD7073D003470BF /* Copy Default Plugins */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Default Plugins";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "#!/bin/bash\n\nset -x\n\nSOURCE_DIR=\"${SRCROOT}/deps/plugins/\"\nDEST_DIR=\"$BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/plugins\"\n\nif [ -d \"$SOURCE_DIR\" ]; then\n  mkdir -p \"$DEST_DIR\"\n  find \"$SOURCE_DIR\" -name \"*.iinaplgz\" -type f -exec cp {} \"$DEST_DIR/\" \\;\n  echo \"Copied default plugins\"\nelse\n  echo \"Default plugins not found\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

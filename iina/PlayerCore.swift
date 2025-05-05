@@ -1942,7 +1942,7 @@ class PlayerCore: NSObject {
   func fileEnded(dueToStopCommand: Bool) {
     // if receive end-file when loading file, might be error
     // wait for idle
-    if info.state == .starting {
+    if info.state == .loading {
       if !dueToStopCommand {
         receivedEndFileWhileLoading = true
       }

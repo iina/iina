@@ -4657,6 +4657,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4964988E2919E47900CD61A5 /* OpenInIINA.xcconfig */;
 			buildSettings = {
+				CURRENT_PROJECT_VERSION = 153;
+				MARKETING_VERSION = "1.4.1-beta2";
 			};
 			name = Debug;
 		};
@@ -4664,6 +4666,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4964988E2919E47900CD61A5 /* OpenInIINA.xcconfig */;
 			buildSettings = {
+				CURRENT_PROJECT_VERSION = 153;
+				MARKETING_VERSION = "1.4.1-beta2";
 			};
 			name = Release;
 		};
@@ -4679,6 +4683,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 496498882919E47900CD61A5 /* iina.xcconfig */;
 			buildSettings = {
+				CURRENT_PROJECT_VERSION = 153;
 				GCC_PREPROCESSOR_DEFINITIONS = "GL_SILENCE_DEPRECATION=1";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2017-2025\nCollider LI, et al.\nReleased under GPLv3.";
@@ -4688,6 +4693,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/deps/lib",
 				);
+				MARKETING_VERSION = "1.4.1-beta2";
 				SKIP_INSTALL = NO;
 			};
 			name = Nightly;
@@ -4703,6 +4709,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4964988E2919E47900CD61A5 /* OpenInIINA.xcconfig */;
 			buildSettings = {
+				CURRENT_PROJECT_VERSION = 153;
+				MARKETING_VERSION = "1.4.1-beta2";
 			};
 			name = Nightly;
 		};
@@ -4718,6 +4726,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 496498882919E47900CD61A5 /* iina.xcconfig */;
 			buildSettings = {
+				CURRENT_PROJECT_VERSION = 153;
 				GCC_PREPROCESSOR_DEFINITIONS = "GL_SILENCE_DEPRECATION=1";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2017-2025\nCollider LI, et al.\nReleased under GPLv3.";
@@ -4727,6 +4736,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/deps/lib",
 				);
+				MARKETING_VERSION = "1.4.1-beta2";
 				SKIP_INSTALL = NO;
 			};
 			name = Beta;
@@ -4742,6 +4752,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4964988E2919E47900CD61A5 /* OpenInIINA.xcconfig */;
 			buildSettings = {
+				CURRENT_PROJECT_VERSION = 153;
+				MARKETING_VERSION = "1.4.1-beta2";
 			};
 			name = Beta;
 		};
@@ -4765,6 +4777,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 496498882919E47900CD61A5 /* iina.xcconfig */;
 			buildSettings = {
+				CURRENT_PROJECT_VERSION = 153;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"GL_SILENCE_DEPRECATION=1",
 					"$(inherited)",
@@ -4777,6 +4790,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/deps/lib",
 				);
+				MARKETING_VERSION = "1.4.1-beta2";
 				SKIP_INSTALL = NO;
 			};
 			name = Debug;
@@ -4785,6 +4799,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 496498882919E47900CD61A5 /* iina.xcconfig */;
 			buildSettings = {
+				CURRENT_PROJECT_VERSION = 153;
 				GCC_PREPROCESSOR_DEFINITIONS = "GL_SILENCE_DEPRECATION=1";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2017-2025\nCollider LI, et al.\nReleased under GPLv3.";
@@ -4794,6 +4809,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/deps/lib",
 				);
+				MARKETING_VERSION = "1.4.1-beta2";
 				SKIP_INSTALL = NO;
 			};
 			name = Release;

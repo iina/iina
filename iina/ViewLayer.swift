@@ -190,6 +190,7 @@ class ViewLayer: CAOpenGLLayer {
   override func copyCGLContext(forPixelFormat pf: CGLPixelFormatObj) -> CGLContextObj { cglContext }
 
   override func display() {
+    print("display")
     displayLock.lock()
     defer { displayLock.unlock() }
 

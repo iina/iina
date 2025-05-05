@@ -11,7 +11,7 @@ import Cocoa
 
 fileprivate let defaultPlugins = [
   ["url": "iina/plugin-online-media", "id": "io.iina.ytdl"],
-  ["url": "iina/plugin-userscript", "id": "io.iina.userscript"],
+  ["url": "iina/plugin-userscript", "id": "io.iina.user-script"],
   ["url": "iina/plugin-opensub", "id": "io.iina.opensub"],
 ]
 

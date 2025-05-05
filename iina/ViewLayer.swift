@@ -75,8 +75,8 @@ class ViewLayer: CAOpenGLLayer {
   private let cglContext: CGLContextObj
   private let cglPixelFormat: CGLPixelFormatObj
 
-  /// Lock to single thread calls to `display`.
-  private let displayLock: NSLocking
+  /// Lock to single thread calls to `draw(forced:)`.
+  private let drawLock: Lock
 
   private var fbo: GLint = 1
 
@@ -93,7 +93,7 @@ class ViewLayer: CAOpenGLLayer {
     self.videoView = videoView
     (cglPixelFormat, bufferDepth) = ViewLayer.createPixelFormat(videoView.player)
     cglContext = ViewLayer.createContext(cglPixelFormat)
-    displayLock = NSRecursiveLock()
+    drawLock = Lock()
     super.init()
     autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
     backgroundColor = NSColor.black.cgColor
@@ -115,7 +115,7 @@ class ViewLayer: CAOpenGLLayer {
     videoView = previousLayer.videoView
     cglPixelFormat = previousLayer.cglPixelFormat
     cglContext = previousLayer.cglContext
-    displayLock = previousLayer.displayLock
+    drawLock = previousLayer.drawLock
     super.init(layer: layer)
     autoresizingMask = previousLayer.autoresizingMask
     backgroundColor = previousLayer.backgroundColor
@@ -189,12 +189,17 @@ class ViewLayer: CAOpenGLLayer {
 
   override func copyCGLContext(forPixelFormat pf: CGLPixelFormatObj) -> CGLContextObj { cglContext }
 
+  /// Reload the content of this layer.
+  ///
+  /// - Important: Because this method is called by tasks on the `mpvGLQueue` an explicit
+  ///     [CATransaction](https://developer.apple.com/documentation/quartzcore/catransaction) **must**
+  ///     be used. Otherwise if `CA_ASSERT_MAIN_THREAD_TRANSACTIONS` is set to check for unintended UI operations on
+  ///     something other than the main thread, IINA will crash with a SIGABRT reporting "an implicit transaction wasn't created on a
+  ///     main thread". See issue [#5038](https://github.com/iina/iina/issues/5038).
   override func display() {
-    displayLock.lock()
-    defer { displayLock.unlock() }
-
+    CATransaction.begin()
     super.display()
-    CATransaction.flush()
+    CATransaction.commit()
 
     // Must lock the OpenGL context before calling mpv render methods. Can't wait until we have
     // checked the flags to see if a skip renderer is needed because the OpenGL context must always
@@ -230,17 +235,19 @@ class ViewLayer: CAOpenGLLayer {
   }
 
   func draw(forced: Bool = false) {
-    videoView.$isUninited.withLock() { isUninited in
-      // The properties forceRender and needsMPVRender are always accessed while holding isUninited's
-      // lock. This avoids the need for separate locks to avoid data races with these flags. No need
-      // to check isUninited at this point.
-      needsMPVRender = true
-      if forced { forceRender = true }
-    }
+    drawLock.withLock() {
+      videoView.$isUninited.withLock() { isUninited in
+        // The properties forceRender and needsMPVRender are always accessed while holding
+        // isUninited's lock. This avoids the need for separate locks to avoid data races with these
+        // flags. No need to check isUninited at this point.
+        needsMPVRender = true
+        if forced { forceRender = true }
+      }
 
-    // Must not call display while holding isUninited's lock as that method will attempt to acquire
-    // the lock and our locks do not support recursion.
-    display()
+      // Must not call display while holding isUninited's lock as that method will attempt to
+      // acquire the lock and our locks do not support recursion.
+      display()
+    }
   }
 
   // MARK: - Core OpenGL Context and Pixel Format

@@ -65,7 +65,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       case .video: return 0
       case .audio: return 1
       case .sub: return 2
-      default: return 0
       }
     }
 

@@ -1833,6 +1833,7 @@ class MainWindowController: PlayerWindowController {
   @objc
   override func updateTitle() {
     if player.info.isNetworkResource {
+      window?.representedURL = nil
       window?.title = player.getMediaTitle()
     } else {
       window?.representedURL = player.info.currentURL

@@ -622,8 +622,10 @@ return -1;\
           case AVCOL_TRC_ARIB_STD_B67:
             if (@available(macOS 11.0, *)) {
               cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2100_HLG);
-            } else {
+            } else if (@available(macOS 10.15.6, *)) {
               cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2020_HLG);
+            } else {
+              cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2020);
             }
             break;
           case AVCOL_TRC_SMPTE2084:

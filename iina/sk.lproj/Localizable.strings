@@ -50,7 +50,7 @@
 "quicksetting.deinterlace" = "Deinterlace";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Skryť";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.reset_speed" = "Resetovať rýchlosť na 1x";
 
 // EQ Presets
 "eq.preset.flat" = "Plochá";
@@ -78,14 +78,14 @@
 
 "alert.eq.new_profile.title" = "Nový EQ profil";
 "alert.eq.new_profile.message" = "Prosím, zadajte meno profilu.";
-"alert.eq.rename.title" = "Rename Currnet Profile";
+"alert.eq.rename.title" = "Premenovať Aktuálny Profil";
 "alert.eq.rename.message" = "Zadajte nové meno profilu.";
 
 // OSDMessage.swift
 "osd.pause" = "Pozastaviť";
 "osd.resume" = "Pokračovať";
 "osd.volume" = "Hlasitosť: %i";
-"osd.speed" = "Speed: %@x";
+"osd.speed" = "Rýchlosť: %@x";
 "osd.aspect" = "Pomer strán: %@";
 "osd.crop" = "Orezať: %@";
 "osd.rotate" = "Otočiť: %i°";
@@ -174,12 +174,15 @@
 "preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
 "preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
 
+"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
+"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
+
 "menu.volume" = "Hlasitosť: %d";
 "menu.volume_muted" = "Hlasitosť: %d (stíšene)";
 "menu.audio_delay" = "Posunutie zvuku: %.2f s";
 "menu.sub_delay" = "Posunutie titulkov: %.2f s";
-"menu.sub_hide" = "Hide Subtitles";
-"menu.sub_show" = "Show Subtitles";
+"menu.sub_hide" = "Skryť titulky";
+"menu.sub_show" = "Zobraziť titulky";
 "menu.sub_second_hide" = "Hide Secondary Subtitles";
 "menu.sub_second_show" = "Show Secondary Subtitles";
 "menu.fullscreen" = "Spustiť režim celej obrazovky";
@@ -190,7 +193,7 @@
 "menu.exit_mini_player" = "Ukončiť režim pre hudbu";
 "menu.pause" = "Pozastaviť";
 "menu.resume" = "Pokračovať";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "Rýchlosť: %@x";
 "menu.chapters" = "Zobraziť panel s kapitolami";
 "menu.hide_chapters" = "Skryť panel s kapitolami";
 "menu.playlist" = "Zobraziť panel playlistu";
@@ -204,8 +207,8 @@
 
 "menu.seek_forward" = "Posunúť dopredu %.0f s";
 "menu.seek_backward" = "Posunúť dozadu %.0f s";
-"menu.speed_up" = "Speed Up by %@x";
-"menu.speed_down" = "Speed Down by %@x";
+"menu.speed_up" = "Zrýchliť na %@x";
+"menu.speed_down" = "Spomaliť na %@x";
 "menu.volume_up" = "Hlasitosť +%.0f%%";
 "menu.volume_down" = "Hlasitosť -%.0f%%";
 "menu.audio_delay_up" = "Posunutie zvuku +%.1f s";
@@ -215,6 +218,14 @@
 
 "menu.crop_custom" = "Vlastné…";
 "menu.find_online_sub" = "Nájsť titulky online na %@";
+
+"menu.manage_plugins" = "Spravovať doplnky…";
+"menu.developer_tool" = "Nástroje pre vývojárov";
+"menu.more_plugin" = "Viac…";
+"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
+"menu.reload_plugins" = "Reload All Plugins";
+"menu.show_plugins_panel" = "Zobraziť Panel Doplnkov";
+"menu.hide_plugins_panel" = "Skryť Panel Doplnkov";
 
 "track.audio" = "Zvuk";
 "track.none" = "<Prázdne>";
@@ -245,7 +256,7 @@
 "alert.error_saving_file" = "Nastala chyba pri ukladaní %@: %@";
 "alert.error_deleting_file" = "Súbor nemožno vymazať.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
 
 "alert.config.new.title" = "Nová konfigurácia vstupu";
 "alert.config.new.message" = "Zadajte názov pre novú konfiguráciu.";
@@ -254,11 +265,11 @@
 "alert.config.empty_name" = "Názov nemôže byť prázdny.";
 "alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Súbor už existuje";
-"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
+"alert.config.file_existing.message" = "Konfiguračný súbor s rovnakým názvom už existuje. Zvoľte OK, aby sa súbor zobrazil v aplikácii Finder.";
 "alert.config.cannot_create" = "Nedá sa vytvoriť konfiguračný súbor!\n%@";
 "alert.config.cannot_write" = "Nedá sa zapisovať do konfiguračného súboru!";
-"alert.config.rename.title" = "Rename Input Configuration";
-"alert.config.rename.message" = "Please enter the new name for the configuration.";
+"alert.config.rename.title" = "Premenovať konfigurácia vstupu";
+"alert.config.rename.message" = "Zadajte názov pre novú konfiguráciu.";
 
 "alert.filter.incorrect" = "Vyskytla sa chyba pri nastavovaní filtra. Skontrolujte formát parametra.";
 "alert.add_filter.title" = "Nový filter";
@@ -386,6 +397,7 @@
 "osc_toolbar.music_mode" = "Zapnúť režim pre hudbu";
 "osc_toolbar.sub_track" = "Vyber titulky";
 "osc_toolbar.screenshot" = "Vytvoriť snímku obrazovky";
+"osc_toolbar.plugins" = "Zobraziť panel doplnkov";
 
 "mini_player.album_art" = "Prepnúť obal albumu";
 "mini_player.loop" = "Opakovať";

@@ -47,9 +47,9 @@
 "lut3d.interp" = "Режим на интерполация";
 
 "custom_mpv" = "Custom (mpv)";
-"custom_mpv.name" = "Filter name";
-"custom_mpv.string" = "Filter value";
+"custom_mpv.name" = "Име на филтъра";
+"custom_mpv.string" = "Стойност на филтъра";
 
 "custom_ffmpeg" = "Custom (FFmpeg)";
-"custom_ffmpeg.name" = "Filter name";
-"custom_ffmpeg.string" = "Filter value";
+"custom_ffmpeg.name" = "Име на филтъра";
+"custom_ffmpeg.string" = "Стойност на филтъра";

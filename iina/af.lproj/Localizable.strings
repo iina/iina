@@ -16,8 +16,8 @@
 "general.username" = "Gebruikersnaam";
 "general.password" = "Wagwoord";
 
-"input.value_is_empty" = "Value cannot be empty.";
-"input.already_exists" = "Value already exists.";
+"input.value_is_empty" = "Waarde kan nie leeg wees nie.";
+"input.already_exists" = "Waarde bestaan reeds.";
 
 // Guide Window
 "guide.highlights" = "Hoogtepunte";
@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "U gebruik ’n %@-weergawe van IINA";
 "initial.beta.desc" = "Indien u na ’n vroeëre weergawe wil terugkeer, verwyder die merkie “ontvang betabywerkings” in Voorkeure - Algemeen en installeer ’n stabiele weergawe d.m.v. ons <a href=\"https://iina.io\">amptelike webwerf</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.nightly.desc" = "Elke nag word nie aanbeveel as u daaglikse aandrywer nie. Huidige nagelike maaksels ondersteun nie outobywerking nie. Laai asb. nuwe maaksels van ons <a href=\"https://nightly.iina.io\">nagtelike webwerf</a> af.";
 "initial.debug.desc" = "Maaksels vir ontfouting is nie geoptimeer vir verrigting nie daarom word dit nie aanbeveel om as daaglikse drywer gebruik te word nie. Ontfoutmaaksels ondersteun ook nie outobywerking nie.";
 "initial.bug_report" = "Rapporteer via <a href=\"https://github.com/iina/iina/issues\">GitHub-kwessies</a>.";
 
@@ -50,42 +50,42 @@
 "quicksetting.deinterlace" = "Deïnterlinieer";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Versteek";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.reset_speed" = "Stel snelheid terug na 1x";
 
 // EQ Presets
-"eq.preset.flat" = "Flat";
-"eq.preset.acoustic" = "Acoustic";
-"eq.preset.classical" = "Classical";
-"eq.preset.dance" = "Dance";
-"eq.preset.deep" = "Deep";
-"eq.preset.electronic" = "Electronic";
-"eq.preset.hip_hop" = "Hip Hop";
-"eq.preset.increase_bass" = "Increase Bass";
-"eq.preset.increase_treble" = "Increase Treble";
-"eq.preset.increase_vocal" = "Increase Vocal";
+"eq.preset.flat" = "Vlak";
+"eq.preset.acoustic" = "Akoesties";
+"eq.preset.classical" = "Klassiek";
+"eq.preset.dance" = "Dans";
+"eq.preset.deep" = "Diep";
+"eq.preset.electronic" = "Elektronies";
+"eq.preset.hip_hop" = "Hip-Hop";
+"eq.preset.increase_bass" = "Verhoog bas";
+"eq.preset.increase_treble" = "Verhoog diskant";
+"eq.preset.increase_vocal" = "Verhoog sang";
 "eq.preset.jazz" = "Jazz";
-"eq.preset.latin" = "Latin";
-"eq.preset.loundness" = "Loundness";
+"eq.preset.latin" = "Latyns";
+"eq.preset.loundness" = "Luidheid";
 "eq.preset.lounge" = "Lounge";
-"eq.preset.piano" = "Piano";
+"eq.preset.piano" = "Klavier";
 "eq.preset.pop" = "Pop";
 "eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reduce Bass";
-"eq.preset.reduce_treble" = "Reduce Treble";
+"eq.preset.reduce_bass" = "Verminder bas";
+"eq.preset.reduce_treble" = "Verminder diskant";
 "eq.preset.rock" = "Rock";
-"eq.preset.small_speaker" = "Small Speaker";
-"eq.preset.spoken_word" = "Spoken Word";
+"eq.preset.small_speaker" = "Klein luidspreker";
+"eq.preset.spoken_word" = "Gesproke woord";
 
 "alert.eq.new_profile.title" = "New EQ Profile";
-"alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Currnet Profile";
-"alert.eq.rename.message" = "Please enter a new profile name.";
+"alert.eq.new_profile.message" = "Voer ’n profielnaam in.";
+"alert.eq.rename.title" = "Hernoem huidige profiel";
+"alert.eq.rename.message" = "Voer ’n nuwe profielnaam in.";
 
 // OSDMessage.swift
 "osd.pause" = "Wag";
 "osd.resume" = "Hervat";
 "osd.volume" = "Volume: %i";
-"osd.speed" = "Speed: %@x";
+"osd.speed" = "Snelheid: %@x";
 "osd.aspect" = "Aspekverhouding: %@";
 "osd.crop" = "Snoei: %@";
 "osd.rotate" = "Roteer: %i°";
@@ -98,14 +98,14 @@
 "osd.sub_delay.later" = "Onderskrif vertraag met %.2fs";
 "osd.sub_delay.earlier" = "Onderskrif versnel met %.2fs";
 "osd.subtitle_pos" = "Onderskrifposisie: %.1f";
-"osd.sub_hidden" = "Subtitles Hidden";
-"osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
-"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
-"osd.sub_second_visible" = "Secondary Subtitles Visible";
+"osd.sub_hidden" = "Onderskrifte is versteek";
+"osd.sub_visible" = "Onderskrifte is sigbaar";
+"osd.sub_second_delay.nodelay" = "Sekondêreonderskrifvertraging: Geen vertraging";
+"osd.sub_second_delay.later" = "Sekondêreonderskrifvertraging: %.2fs later";
+"osd.sub_second_delay.earlier" = "Sekondêreonderskrifvertraging: %.2fs vroeër";
+"osd.sub_second_hidden" = "Sekondêre onderskrifte is versteek";
+"osd.sub_second_pos" = "Sekondêreonderskfitposisie: %.1f";
+"osd.sub_second_visible" = "Sekondêre onderskrifte is sigbaar";
 "osd.mute" = "Demp";
 "osd.unmute" = "Ontdemp";
 "osd.screenshot" = "Skermkiekie geneem";
@@ -125,8 +125,8 @@
 "osd.find_online_sub" = "Soek aanlyn na onderskrifte…";
 "osd.find_online_sub.source" = "vanaf";
 "osd.sub_not_found" = "Geen onderskrifte gevind";
-"osd.sub_found" = "%d subtitles found.";
-"osd.sub_downloading" = "Downloading %d subtitles";
+"osd.sub_found" = "%d onderskrifte gevind.";
+"osd.sub_downloading" = "Laai tans %d onderskrifte af";
 "osd.sub_downloaded" = "Onderskrif afgelaai";
 "osd.sub_saved" = "Onderskrif bewaar";
 "osd.network_error" = "Netwerkfout";
@@ -169,19 +169,22 @@
 "preference.sub_override_level.yes" = "yes";
 
 "preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
+"preference.sub_override_level.descriptive_text.force" = "Pas alle onderskrifstyle toe.";
+"preference.sub_override_level.descriptive_text.scale" = "Pas die skaalinstellings toe saam met die stelinstellings in hierdie instellings.";
 "preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
+"preference.sub_override_level.descriptive_text.yes" = "Pas al die stylinstellins in hierdie afdeling toe.";
+
+"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
+"preference.ytdl_plugin_installed" = "Die ingeboude youtube-dl-ondersteuning is gedeaktiveer aangesien die Aanlen media-inprop geïnstalleer is.";
 
 "menu.volume" = "Volume: %d";
 "menu.volume_muted" = "Volume: %d (gedemp)";
 "menu.audio_delay" = "Oudiovertraging: %.2fs";
 "menu.sub_delay" = "Onderskrifvertraging: %.2fs";
-"menu.sub_hide" = "Hide Subtitles";
-"menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Secondary Subtitles";
-"menu.sub_second_show" = "Show Secondary Subtitles";
+"menu.sub_hide" = "Versteek onderskrifte";
+"menu.sub_show" = "Toon onderskrifte";
+"menu.sub_second_hide" = "Versteek sekondêre onderskrifte";
+"menu.sub_second_show" = "Toon sekondêre onderskrifte";
 "menu.fullscreen" = "Gaan in volskerm";
 "menu.exit_fullscreen" = "Verlaat volskerm";
 "menu.pip" = "Aktiveer Beeld-in-beeld";
@@ -190,7 +193,7 @@
 "menu.exit_mini_player" = "Verlaat musiekmodus";
 "menu.pause" = "Wag";
 "menu.resume" = "Hervat";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "Snelheid: %@x";
 "menu.chapters" = "Toon hoofstukpaneel";
 "menu.hide_chapters" = "Versteek hoofstukpaneel";
 "menu.playlist" = "Toon afspeellyspaneel";
@@ -204,8 +207,8 @@
 
 "menu.seek_forward" = "Gaan %.0fs vorentoe";
 "menu.seek_backward" = "Gaan %.0fs terug";
-"menu.speed_up" = "Speed Up by %@x";
-"menu.speed_down" = "Speed Down by %@x";
+"menu.speed_up" = "Versnel met %@x";
+"menu.speed_down" = "Vertraag met %@x";
 "menu.volume_up" = "Volume + %.0f%%";
 "menu.volume_down" = "Volume - %.0f%%";
 "menu.audio_delay_up" = "Oudiovertraging + %.1fs";
@@ -215,6 +218,14 @@
 
 "menu.crop_custom" = "Pasgemaak…";
 "menu.find_online_sub" = "Soek aanlyn na onderskrifte van %@";
+
+"menu.manage_plugins" = "Bestuur inproppe…";
+"menu.developer_tool" = "Ontwikkelaarsnutsmiddels";
+"menu.more_plugin" = "Nog…";
+"menu.conflicting_shortcuts" = "Botsende sneltietse…";
+"menu.reload_plugins" = "Herlaai alle inproppe";
+"menu.show_plugins_panel" = "Toon inproppaneel";
+"menu.hide_plugins_panel" = "Versteek inproppaneel";
 
 "track.audio" = "Oudio";
 "track.none" = "<Geen>";
@@ -245,7 +256,7 @@
 "alert.error_saving_file" = "Fout by die bewaar van %@: %@";
 "alert.error_deleting_file" = "Kan nie lêer skrap nie.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "Die waarde “%@” is ongeldig.\nVerskaf asb. ’n waarde tussen 10 en 10000, of 0.";
 
 "alert.config.new.title" = "Nuwe sneltoetskonfigurasie";
 "alert.config.new.message" = "Voer ’n naam vir die nuwe konfigurasie in.";
@@ -257,8 +268,8 @@
 "alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Kan nie konfigurasielêer skep nie!\n%@";
 "alert.config.cannot_write" = "Kan nie konfigurasielêer skryf nie!";
-"alert.config.rename.title" = "Rename Input Configuration";
-"alert.config.rename.message" = "Please enter the new name for the configuration.";
+"alert.config.rename.title" = "Hernoem sneltoetskonfigurasie";
+"alert.config.rename.message" = "Voer die nuwe naam vir die konfigurasie in.";
 
 "alert.filter.incorrect" = "Fout by die instel van filters. Gaan asb. u parameterformaat na.";
 "alert.add_filter.title" = "Nuwe filter";
@@ -386,6 +397,7 @@
 "osc_toolbar.music_mode" = "Gaan in musiekmodus";
 "osc_toolbar.sub_track" = "Kies onderskrifsnit";
 "osc_toolbar.screenshot" = "Neem ’n skermkiekie";
+"osc_toolbar.plugins" = "Toon inproppaneel";
 
 "mini_player.album_art" = "Tokkel albumkuns";
 "mini_player.loop" = "Herhaal";

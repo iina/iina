@@ -10,11 +10,11 @@
 /* Class = "NSButtonCell"; title = "Email"; ObjectID = "EHl-kr-ZZf"; */
 "EHl-kr-ZZf.title" = "Email";
 
-/* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[0] = "Permissions"; ObjectID = "KTN-5r-mMm"; */
-"KTN-5r-mMm.ibShadowedLabels[0]" = "Permissions";
+/* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[1] = "Permissions"; ObjectID = "KTN-5r-mMm"; */
+"KTN-5r-mMm.ibShadowedLabels[1]" = "Permissions";
 
-/* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[1] = "About"; ObjectID = "KTN-5r-mMm"; */
-"KTN-5r-mMm.ibShadowedLabels[1]" = "Пра";
+/* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[0] = "About"; ObjectID = "KTN-5r-mMm"; */
+"KTN-5r-mMm.ibShadowedLabels[0]" = "Пра";
 
 /* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[2] = "Preferences"; ObjectID = "KTN-5r-mMm"; */
 "KTN-5r-mMm.ibShadowedLabels[2]" = "Налады";
@@ -70,8 +70,8 @@
 /* Class = "NSTextFieldCell"; title = "Source"; ObjectID = "r3r-Qh-rC9"; */
 "r3r-Qh-rC9.title" = "Source";
 
-/* Class = "NSButtonCell"; title = "Install from a local package…"; ObjectID = "sdU-FG-dTO"; */
-"sdU-FG-dTO.title" = "Install from a local package…";
+/* Class = "NSButtonCell"; title = "Install Package…"; ObjectID = "sdU-FG-dTO"; */
+"sdU-FG-dTO.title" = "Install Package…";
 
 /* Class = "NSTextFieldCell"; title = "Plugins"; ObjectID = "tfn-0I-n6p"; */
 "tfn-0I-n6p.title" = "Plugins";

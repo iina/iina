@@ -10,17 +10,17 @@
 
 
 "crop" = "Kırp";
-"crop.w" = "Genişlik (Saptanmış: Video genişliği)";
-"crop.h" = "Yükseklik (Saptanmış: Video yüksekliği)";
+"crop.w" = "Genişlik (Saptanmış: Video Genişliği)";
+"crop.h" = "Yükseklik (Saptanmış: Video Yüksekliği)";
 "crop.x" = "X Orijini (Saptanmış: Merkez)";
-"crop.y" = "Y ekseninde (Varsayılan: Orta)";
+"crop.y" = "Y Orijini (Saptanmış: Merkez)";
 
 "expand" = "Genişlet";
-"expand.w" = "Genişlik (Varsayılan: Video Genişliği)";
-"expand.h" = "Yükseklik (Varsayılan: Video Yüksekliği)";
-"expand.x" = "X ekseninde (Varsayılan: Orta)";
+"expand.w" = "Genişlik (Saptanmış: Video Genişliği)";
+"expand.h" = "Yükseklik (Saptanmış: Video Yüksekliği)";
+"expand.x" = "X Orijini (Saptanmış: Merkez)";
 "expand.y" = "Y Orijini (Saptanmış: Merkez)";
-"expand.aspect" = "Belli bir en-boy oranına genişlet (Örneğin: 4/3)";
+"expand.aspect" = "Bir en--boy oranına genişlet (örneğin: 4/3)";
 "expand.round" = "Bu sayıya bölünebilir olması için yuvarla";
 
 "sharpen" = "Keskinleştir";
@@ -31,7 +31,7 @@
 "blur.msize" = "Matris boyutu";
 "blur.amount" = "Miktar";
 
-"delogo" = "Logo kaldır";
+"delogo" = "Logoyu kaldır";
 "delogo.w" = "Genişlik";
 "delogo.h" = "Yükseklik";
 "delogo.x" = "X Orijini";
@@ -44,12 +44,12 @@
 
 "lut3d" = "3B LUT";
 "lut3d.file" = "Dosya yolu (dosyayı girdi kutusuna da sürükleyip bırakabilirsiniz)";
-"lut3d.interp" = "İnterpolasyon modu";
+"lut3d.interp" = "Aradeğerleme kipi";
 
 "custom_mpv" = "Özel (mpv)";
-"custom_mpv.name" = "Filtre adı";
-"custom_mpv.string" = "Filtre değeri";
+"custom_mpv.name" = "Süzgeç adı";
+"custom_mpv.string" = "Süzgeç değeri";
 
 "custom_ffmpeg" = "Özel (FFmpeg)";
-"custom_ffmpeg.name" = "Filtre adı";
-"custom_ffmpeg.string" = "Filtre değeri";
+"custom_ffmpeg.name" = "Süzgeç adı";
+"custom_ffmpeg.string" = "Süzgeç değeri";

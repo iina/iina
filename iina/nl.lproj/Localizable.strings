@@ -16,8 +16,8 @@
 "general.username" = "Gebruikersnaam";
 "general.password" = "Wachtwoord";
 
-"input.value_is_empty" = "Value cannot be empty.";
-"input.already_exists" = "Value already exists.";
+"input.value_is_empty" = "Waarde kan niet leeg zijn.";
+"input.already_exists" = "Waarde bestaat al.";
 
 // Guide Window
 "guide.highlights" = "Hoogtepunten";
@@ -25,11 +25,11 @@
 "guide.faq" = "Veelgestelde vragen";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.announcement" = "U gebruikt een %@ versie van IINA";
+"initial.beta.desc" = "Als u wilt teruggaan naar een stabiele versie, vink \"beta updates ontvangen\" uit via Instellingen > Algemeen, en installeer een stabiele release van onze <a href=\"https://iina.io\">officiële website</a>.";
+"initial.nightly.desc" = "Nightly wordt niet aanbevolen voor dagelijks gebruik. Momenteel ondersteunen nightly builds geen automatische updates. Download handmatig nieuwere builds van onze <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.debug.desc" = "Debug builds zijn meestal niet geoptimaliseerd voor prestaties, dus deze zijn niet aangeraden voor dagelijks gebruik. Debug builds ondersteunen geen automatische updates.";
+"initial.bug_report" = "Rapporteer via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
 
 // Inspector Window
 "inspector.error" = "Fout";
@@ -50,42 +50,42 @@
 "quicksetting.deinterlace" = "Deinterlace";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Verberg";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.reset_speed" = "Herstel snelheid naar 1x";
 
 // EQ Presets
-"eq.preset.flat" = "Flat";
-"eq.preset.acoustic" = "Acoustic";
-"eq.preset.classical" = "Classical";
+"eq.preset.flat" = "Vlak";
+"eq.preset.acoustic" = "Akoestiek";
+"eq.preset.classical" = "Klassiek";
 "eq.preset.dance" = "Dance";
-"eq.preset.deep" = "Deep";
-"eq.preset.electronic" = "Electronic";
+"eq.preset.deep" = "Diep";
+"eq.preset.electronic" = "Elektronisch";
 "eq.preset.hip_hop" = "Hip Hop";
-"eq.preset.increase_bass" = "Increase Bass";
-"eq.preset.increase_treble" = "Increase Treble";
-"eq.preset.increase_vocal" = "Increase Vocal";
+"eq.preset.increase_bass" = "Bass vergroten";
+"eq.preset.increase_treble" = "Treble verhogen";
+"eq.preset.increase_vocal" = "Zang vergroten";
 "eq.preset.jazz" = "Jazz";
 "eq.preset.latin" = "Latin";
-"eq.preset.loundness" = "Loundness";
+"eq.preset.loundness" = "Luidheid";
 "eq.preset.lounge" = "Lounge";
 "eq.preset.piano" = "Piano";
 "eq.preset.pop" = "Pop";
 "eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reduce Bass";
-"eq.preset.reduce_treble" = "Reduce Treble";
+"eq.preset.reduce_bass" = "Verminder bass";
+"eq.preset.reduce_treble" = "Verminder treble";
 "eq.preset.rock" = "Rock";
-"eq.preset.small_speaker" = "Small Speaker";
-"eq.preset.spoken_word" = "Spoken Word";
+"eq.preset.small_speaker" = "Kleine luidspreker";
+"eq.preset.spoken_word" = "Gesproken woord";
 
-"alert.eq.new_profile.title" = "New EQ Profile";
-"alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Currnet Profile";
-"alert.eq.rename.message" = "Please enter a new profile name.";
+"alert.eq.new_profile.title" = "Nieuw EQ-profiel";
+"alert.eq.new_profile.message" = "Voer een profielnaam in.";
+"alert.eq.rename.title" = "Huidig profiel hernoemen";
+"alert.eq.rename.message" = "Voer een nieuwe profielnaam in.";
 
 // OSDMessage.swift
 "osd.pause" = "Pauzeer";
 "osd.resume" = "Hervat";
 "osd.volume" = "Volume: %i";
-"osd.speed" = "Speed: %@x";
+"osd.speed" = "Snelheid: %@x";
 "osd.aspect" = "Beeldverhouding: %@";
 "osd.crop" = "Bijsnijden: %@";
 "osd.rotate" = "Roteer: %i°";
@@ -98,14 +98,14 @@
 "osd.sub_delay.later" = "Ondertiteling versneld met %.2fs";
 "osd.sub_delay.earlier" = "Ondertiteling vertraagd met %.2fs";
 "osd.subtitle_pos" = "Ondertitelingspositie: %.1f";
-"osd.sub_hidden" = "Subtitles Hidden";
-"osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
-"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
-"osd.sub_second_visible" = "Secondary Subtitles Visible";
+"osd.sub_hidden" = "Ondertitels Verborgen";
+"osd.sub_visible" = "Ondertitels zichtbaar";
+"osd.sub_second_delay.nodelay" = "Secundaire ondertitel vertraging: Geen vertraging";
+"osd.sub_second_delay.later" = "Secundaire ondertitel vertraging: %.2fs Later";
+"osd.sub_second_delay.earlier" = "Secundaire ondertitel vertraging: %.2fs eerder";
+"osd.sub_second_hidden" = "Secundaire ondertitels verborgen";
+"osd.sub_second_pos" = "Secundaire ondertitelingspositie: %.1f";
+"osd.sub_second_visible" = "Secundaire ondertitels zichtbaar";
 "osd.mute" = "Geluid uit";
 "osd.unmute" = "Geluid aan";
 "osd.screenshot" = "Schermafbeelding genomen";
@@ -125,21 +125,21 @@
 "osd.find_online_sub" = "Online naar ondertiteling zoeken…";
 "osd.find_online_sub.source" = "van";
 "osd.sub_not_found" = "Geen ondertiteling gevonden";
-"osd.sub_found" = "%d subtitles found.";
-"osd.sub_downloading" = "Downloading %d subtitles";
+"osd.sub_found" = "%d ondertitels gevonden.";
+"osd.sub_downloading" = "%d ondertitels aan het downloaden";
 "osd.sub_downloaded" = "Ondertiteling gedownload";
 "osd.sub_saved" = "Ondertiteling opgeslagen";
 "osd.network_error" = "Netwerkfout";
 "osd.file_error" = "Fout bij het lezen van bestand";
 "osd.cannot_login" = "Kan niet inloggen";
 "osd.canceled" = "Geannuleerd";
-"osd.cannot_connect" = "Cannot connect";
-"osd.timed_out" = "Timed Out";
+"osd.cannot_connect" = "Kan niet verbinden";
+"osd.timed_out" = "Time-out";
 "osd.filter_added" = "Filter toegevoegd: %@";
 "osd.filter_removed" = "Filter verwijderd";
-"osd.file_loop" = "Loop Single File";
-"osd.playlist_loop" = "Loop Playlist";
-"osd.no_loop" = "Disable Looping";
+"osd.file_loop" = "Enkel bestand herhalen";
+"osd.playlist_loop" = "Playlist herhalen";
+"osd.no_loop" = "Looping uitschakelen";
 
 "preference.title" = "Voorkeuren";
 "preference.general" = "Algemeen";
@@ -162,17 +162,20 @@
 
 "preference.enable_adv_settings" = "Geavanceerde instellingen inschakelen";
 
-"preference.sub_override_level.no" = "no";
+"preference.sub_override_level.no" = "nee";
 "preference.sub_override_level.force" = "force";
 "preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "volledig";
-"preference.sub_override_level.yes" = "yes";
+"preference.sub_override_level.yes" = "ja";
 
 "preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
 "preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
 "preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
 "preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
 "preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
+
+"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
+"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
 "menu.volume" = "Volume: %d";
 "menu.volume_muted" = "Volume: %d (Muted)";
@@ -190,7 +193,7 @@
 "menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pauzeer";
 "menu.resume" = "Hervat";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "Snelheid: %@x";
 "menu.chapters" = "Toon hoofdstukken";
 "menu.hide_chapters" = "Hide Chapters Panel";
 "menu.playlist" = "Toon afspeellijst";
@@ -215,6 +218,14 @@
 
 "menu.crop_custom" = "Pas aan…";
 "menu.find_online_sub" = "Find Online Subtitles from %@";
+
+"menu.manage_plugins" = "Manage Plugins…";
+"menu.developer_tool" = "Developer Tool";
+"menu.more_plugin" = "More…";
+"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
+"menu.reload_plugins" = "Reload All Plugins";
+"menu.show_plugins_panel" = "Show Plugins Panel";
+"menu.hide_plugins_panel" = "Hide Plugins Panel";
 
 "track.audio" = "Audio";
 "track.none" = "<Geen>";
@@ -245,7 +256,7 @@
 "alert.error_saving_file" = "Fout bij het bewaren van %@: %@";
 "alert.error_deleting_file" = "Kan het bestand niet verwijderen.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
 
 "alert.config.new.title" = "Nieuwe sneltoetsen-configuratie";
 "alert.config.new.message" = "Voer een naam in voor de nieuwe configuratie.";
@@ -340,9 +351,9 @@
 "alert.plugin_reinstall.message" = "Do you want to reinstall the plugin?";
 "alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
 "alert.plugin_no_update" = "No update found.";
-"alert.plugin_update_found.title" = "Update found for %@";
-"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
-"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
+"alert.plugin_update_found.title" = "Update gevonden voor %@";
+"alert.plugin_update_found.message" = "De laatste versie is %@. Je hebt %@. Wil je updaten?";
+"alert.plugin_permission" = "Deze plugin vereist de volgende machtigingen. Controleer deze voordat u verdergaat.";
 "alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
 
 "playlist.total_length" = "%@ in totaal";
@@ -386,6 +397,7 @@
 "osc_toolbar.music_mode" = "Schakel over naar muziekmodus";
 "osc_toolbar.sub_track" = "Kies ondertiteling";
 "osc_toolbar.screenshot" = "Take a screenshot";
+"osc_toolbar.plugins" = "Show plugins panel";
 
 "mini_player.album_art" = "Wijzig albumhoes";
 "mini_player.loop" = "Herhaal";

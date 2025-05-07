@@ -78,14 +78,14 @@
 
 "alert.eq.new_profile.title" = "Nuevo Perfil de EQ";
 "alert.eq.new_profile.message" = "Por favor, introduzca un nombre de perfil.";
-"alert.eq.rename.title" = "Renombrar Perfil Actual";
+"alert.eq.rename.title" = "Rename Current Profile";
 "alert.eq.rename.message" = "Por favor, introduzca un nuevo nombre de perfil.";
 
 // OSDMessage.swift
 "osd.pause" = "Pausa";
 "osd.resume" = "Reanudar";
 "osd.volume" = "Volumen: %i";
-"osd.speed" = "Speed: %@x";
+"osd.speed" = "Velocidad: %@x";
 "osd.aspect" = "Proporción: %@";
 "osd.crop" = "Recortar: %@";
 "osd.rotate" = "Rotar: %i°";
@@ -174,6 +174,9 @@
 "preference.sub_override_level.descriptive_text.strip" = "Remueve radicalmente todas las etiquetas y estilos ASS del subtítulo.";
 "preference.sub_override_level.descriptive_text.yes" = "Aplicar todos los ajustes de estilo en esta sección.";
 
+"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
+"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
+
 "menu.volume" = "Volumen: %d";
 "menu.volume_muted" = "Volumen: %d (Silenciado)";
 "menu.audio_delay" = "Retraso de audio: %.2fs";
@@ -190,7 +193,7 @@
 "menu.exit_mini_player" = "Salir del modo de música";
 "menu.pause" = "Pausar";
 "menu.resume" = "Reanudar";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "Velocidad: %@x";
 "menu.chapters" = "Mostrar el panel de capítulos";
 "menu.hide_chapters" = "Ocultar el panel de capítulos";
 "menu.playlist" = "Mostrar el panel de la lista de reproducción";
@@ -215,6 +218,14 @@
 
 "menu.crop_custom" = "Personalizado…";
 "menu.find_online_sub" = "Buscar subtítulos en línea desde %@";
+
+"menu.manage_plugins" = "Manage Plugins…";
+"menu.developer_tool" = "Developer Tool";
+"menu.more_plugin" = "Más…";
+"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
+"menu.reload_plugins" = "Reload All Plugins";
+"menu.show_plugins_panel" = "Show Plugins Panel";
+"menu.hide_plugins_panel" = "Hide Plugins Panel";
 
 "track.audio" = "Audio";
 "track.none" = "<Ninguno>";
@@ -245,7 +256,7 @@
 "alert.error_saving_file" = "Se ha producido un error al guardar %@: %@";
 "alert.error_deleting_file" = "No se puede eliminar el archivo.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
 
 "alert.config.new.title" = "Nueva configuración de entrada";
 "alert.config.new.message" = "Por favor, introduzca un nombre para la nueva configuración.";
@@ -386,6 +397,7 @@
 "osc_toolbar.music_mode" = "Entrar en modo música";
 "osc_toolbar.sub_track" = "Elegir la pista de subtítulos";
 "osc_toolbar.screenshot" = "Capturar pantalla";
+"osc_toolbar.plugins" = "Show plugins panel";
 
 "mini_player.album_art" = "Alternar imagen de álbum";
 "mini_player.loop" = "Repetir";

@@ -78,7 +78,7 @@
 
 "alert.eq.new_profile.title" = "Profil EQ nou";
 "alert.eq.new_profile.message" = "Introduceți un nume pentru profil.";
-"alert.eq.rename.title" = "Redenumiți profilul curent";
+"alert.eq.rename.title" = "Rename Current Profile";
 "alert.eq.rename.message" = "Introduceți un nume nou pentru profil.";
 
 // OSDMessage.swift
@@ -174,6 +174,9 @@
 "preference.sub_override_level.descriptive_text.strip" = "Elimină complet toate tag-urile și stilurile ASS din subtitrare.";
 "preference.sub_override_level.descriptive_text.yes" = "Aplică toate setările de stil din această secțiune.";
 
+"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
+"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
+
 "menu.volume" = "Volum: %d";
 "menu.volume_muted" = "Volum: %d (Mut)";
 "menu.audio_delay" = "Întârziere audio: %.2fs";
@@ -216,6 +219,14 @@
 "menu.crop_custom" = "Personalizat…";
 "menu.find_online_sub" = "Găsește subtitrări online din %@";
 
+"menu.manage_plugins" = "Manage Plugins…";
+"menu.developer_tool" = "Developer Tool";
+"menu.more_plugin" = "More…";
+"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
+"menu.reload_plugins" = "Reload All Plugins";
+"menu.show_plugins_panel" = "Show Plugins Panel";
+"menu.hide_plugins_panel" = "Hide Plugins Panel";
+
 "track.audio" = "Audio";
 "track.none" = "<None>";
 "track.sub" = "Subtitrare";
@@ -245,7 +256,7 @@
 "alert.error_saving_file" = "A apărut o eroare la salvarea %@: %@";
 "alert.error_deleting_file" = "Fișierul nu poate fi șters.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
 
 "alert.config.new.title" = "Configurație nouă de intrare";
 "alert.config.new.message" = "Te rog introdu un nume pentru noua configurație.";
@@ -386,6 +397,7 @@
 "osc_toolbar.music_mode" = "Intră în modul Muzică";
 "osc_toolbar.sub_track" = "Alege pista de subtitrare";
 "osc_toolbar.screenshot" = "Faceți o captură de ecran";
+"osc_toolbar.plugins" = "Show plugins panel";
 
 "mini_player.album_art" = "Comută coperta albumului";
 "mini_player.loop" = "Repetare";

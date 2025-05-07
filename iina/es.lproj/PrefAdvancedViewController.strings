@@ -10,14 +10,14 @@
 /* Class = "NSTextFieldCell"; title = "The following settings will require restarting IINA to take effect."; ObjectID = "HMa-Vz-EUk"; */
 "HMa-Vz-EUk.title" = "Los siguientes ajustes requerirán que reinicie IINA para que surtan efecto.";
 
-/* Class = "NSButtonCell"; title = "Open log directory"; ObjectID = "JDA-g3-RNX"; */
-"JDA-g3-RNX.title" = "Abrir la carpeta de logs";
+/* Class = "NSButtonCell"; title = "Open Log Directory"; ObjectID = "JDA-g3-RNX"; */
+"JDA-g3-RNX.title" = "Open Log Directory";
 
 /* Class = "NSButtonCell"; title = "Enable logging to file"; ObjectID = "LCd-uY-Yze"; */
 "LCd-uY-Yze.title" = "Habilitar el log";
 
-/* Class = "NSButtonCell"; title = "Choose directory…"; ObjectID = "MRT-u8-xTX"; */
-"MRT-u8-xTX.title" = "Elegir directorio…";
+/* Class = "NSButtonCell"; title = "Choose…"; ObjectID = "MRT-u8-xTX"; */
+"MRT-u8-xTX.title" = "Seleccionar…";
 
 /* Class = "NSTextFieldCell"; title = "Settings"; ObjectID = "Qmc-Tb-d7d"; */
 "Qmc-Tb-d7d.title" = "Ajustes";
@@ -34,8 +34,8 @@
 /* Class = "NSTextFieldCell"; title = "Log level:"; ObjectID = "nFf-vh-bNd"; */
 "nFf-vh-bNd.title" = "Nivel de registro:";
 
-/* Class = "NSButtonCell"; title = "Show log viewer"; ObjectID = "Owx-92-Ogg"; */
-"Owx-92-Ogg.title" = "Mostrar visor de log";
+/* Class = "NSButtonCell"; title = "Show Log Viewer"; ObjectID = "Owx-92-Ogg"; */
+"Owx-92-Ogg.title" = "Show Log Viewer";
 
 /* Class = "NSMenuItem"; title = "Verbose"; ObjectID = "S9M-yY-q0w"; */
 "S9M-yY-q0w.title" = "Detallado";

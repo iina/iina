@@ -2,16 +2,16 @@
 "3xh-dU-HuR.title" = "Installieren";
 
 /* Class = "NSTabViewItem"; label = "Permissions"; ObjectID = "ALD-n6-A0r"; */
-"ALD-n6-A0r.label" = "Permissions";
+"ALD-n6-A0r.label" = "Berechtigungen";
 
 /* Class = "NSTextFieldCell"; title = "Author"; ObjectID = "Dkk-JQ-qHA"; */
-"Dkk-JQ-qHA.title" = "Author";
+"Dkk-JQ-qHA.title" = "Autor";
 
 /* Class = "NSButtonCell"; title = "Email"; ObjectID = "EHl-kr-ZZf"; */
-"EHl-kr-ZZf.title" = "Email";
+"EHl-kr-ZZf.title" = "E-Mail";
 
 /* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[1] = "Permissions"; ObjectID = "KTN-5r-mMm"; */
-"KTN-5r-mMm.ibShadowedLabels[1]" = "Permissions";
+"KTN-5r-mMm.ibShadowedLabels[1]" = "Berechtigungen";
 
 /* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[0] = "About"; ObjectID = "KTN-5r-mMm"; */
 "KTN-5r-mMm.ibShadowedLabels[0]" = "Über IINA";
@@ -35,7 +35,7 @@
 "X6J-6H-IPn.title" = "Webseite";
 
 /* Class = "NSTextFieldCell"; title = "Installed plugins:"; ObjectID = "Ztn-MG-D7D"; */
-"Ztn-MG-D7D.title" = "Installed plugins:";
+"Ztn-MG-D7D.title" = "Installierte Plugins:";
 
 /* Class = "NSTextFieldCell"; placeholderString = "user/repo"; ObjectID = "b60-P6-AN2"; */
 "b60-P6-AN2.placeholderString" = "user/repo";
@@ -44,7 +44,7 @@
 "drh-6w-3z1.title" = "In Finder anzeigen";
 
 /* Class = "NSButtonCell"; title = "Install from GitHub…"; ObjectID = "enP-C1-4vu"; */
-"enP-C1-4vu.title" = "Install from GitHub…";
+"enP-C1-4vu.title" = "Von GitHub installieren…";
 
 /* Class = "NSTabViewItem"; label = "Preferences"; ObjectID = "eyS-eb-H4e"; */
 "eyS-eb-H4e.label" = "Einstellungen";
@@ -53,10 +53,10 @@
 "fnl-uA-X7r.title" = "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically.";
 
 /* Class = "NSButtonCell"; title = "Reload"; ObjectID = "ixN-OS-w87"; */
-"ixN-OS-w87.title" = "Reload";
+"ixN-OS-w87.title" = "Neu laden";
 
 /* Class = "NSTextFieldCell"; title = "Identifier"; ObjectID = "jlQ-sd-s0K"; */
-"jlQ-sd-s0K.title" = "Identifier";
+"jlQ-sd-s0K.title" = "Identifikator";
 
 /* Class = "NSTextFieldCell"; title = "Default plugins:"; ObjectID = "np4-XQ-xdI"; */
 "np4-XQ-xdI.title" = "Default plugins:";
@@ -68,10 +68,10 @@
 "qje-hT-j7H.title" = "Abbrechen";
 
 /* Class = "NSTextFieldCell"; title = "Source"; ObjectID = "r3r-Qh-rC9"; */
-"r3r-Qh-rC9.title" = "Source";
+"r3r-Qh-rC9.title" = "Quelle";
 
-/* Class = "NSButtonCell"; title = "Install from a local package…"; ObjectID = "sdU-FG-dTO"; */
-"sdU-FG-dTO.title" = "Install from a local package…";
+/* Class = "NSButtonCell"; title = "Install Package…"; ObjectID = "sdU-FG-dTO"; */
+"sdU-FG-dTO.title" = "Install Package…";
 
 /* Class = "NSTextFieldCell"; title = "Plugins"; ObjectID = "tfn-0I-n6p"; */
 "tfn-0I-n6p.title" = "Erweiterungen";
@@ -80,7 +80,7 @@
 "uW4-Bs-Wg3.title" = "Erweiterungen";
 
 /* Class = "NSButtonCell"; title = "Uninstall"; ObjectID = "ue8-hU-kLm"; */
-"ue8-hU-kLm.title" = "Uninstall";
+"ue8-hU-kLm.title" = "Deinstallieren";
 
 /* Class = "NSTextFieldCell"; title = "Install a new plugin from GitHub"; ObjectID = "zvu-Up-fQJ"; */
 "zvu-Up-fQJ.title" = "Install a new plugin from GitHub";

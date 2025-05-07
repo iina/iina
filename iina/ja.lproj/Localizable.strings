@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "IINAバージョン %@ を使用しています";
 "initial.beta.desc" = "リリースバージョンに戻したい場合は、「設定 > 一般」の「ベータアップデートを受信」のチェックを外してください。その後 <a href=\"https://iina.io\">公式ウェブサイト</a> から安定版リリースをインストールします。";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.nightly.desc" = "";
 "initial.debug.desc" = "デバッグビルドは大抵性能的に最適化されていません。そのため、常用することは推奨しません。デバッグビルドは自動アップデートに対応していません。";
 "initial.bug_report" = "<a href=\"https://github.com/iina/iina/issues\">GitHub issues</a> で報告";
 
@@ -50,7 +50,7 @@
 "quicksetting.deinterlace" = "インターレース解除";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "隠す";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.reset_speed" = "";
 
 // EQ Presets
 "eq.preset.flat" = "フラット";
@@ -78,7 +78,7 @@
 
 "alert.eq.new_profile.title" = "新しいEQプロファイル";
 "alert.eq.new_profile.message" = "プロファイルの名前を入力してください。";
-"alert.eq.rename.title" = "現在のプロファイルの名前を変更";
+"alert.eq.rename.title" = "Rename Current Profile";
 "alert.eq.rename.message" = "新しいプロファイル名を入力してください。";
 
 // OSDMessage.swift
@@ -174,6 +174,9 @@
 "preference.sub_override_level.descriptive_text.strip" = "すべてのASSタグとスタイルをサブタイトルから大胆に取り除きます。";
 "preference.sub_override_level.descriptive_text.yes" = "このセクションのすべてのスタイル設定を適用します。";
 
+"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
+"preference.ytdl_plugin_installed" = "Online メディア プラグインがインストールされているため、組み込みの youtube-dl サポートは無効になっています。";
+
 "menu.volume" = "音量: %d";
 "menu.volume_muted" = "ボリューム: %d (ミュート中)";
 "menu.audio_delay" = "オーディオディレイ: %.2fs";
@@ -216,6 +219,14 @@
 "menu.crop_custom" = "カスタム…";
 "menu.find_online_sub" = "%@ からオンライン字幕を探す";
 
+"menu.manage_plugins" = "Manage Plugins…";
+"menu.developer_tool" = "Developer Tool";
+"menu.more_plugin" = "More…";
+"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
+"menu.reload_plugins" = "Reload All Plugins";
+"menu.show_plugins_panel" = "Show Plugins Panel";
+"menu.hide_plugins_panel" = "Hide Plugins Panel";
+
 "track.audio" = "オーディオ";
 "track.none" = "<なし>";
 "track.sub" = "字幕";
@@ -245,7 +256,7 @@
 "alert.error_saving_file" = "%@の保存時にエラーが発生しました: %@";
 "alert.error_deleting_file" = "ファイルを削除できません。";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
 
 "alert.config.new.title" = "設定の新規作成";
 "alert.config.new.message" = "新しい設定ファイルの名前を入力を入力してください。";
@@ -386,6 +397,7 @@
 "osc_toolbar.music_mode" = "ミュージックモード切り替え";
 "osc_toolbar.sub_track" = "字幕トラックを選択";
 "osc_toolbar.screenshot" = "スクリーンショットを撮影";
+"osc_toolbar.plugins" = "Show plugins panel";
 
 "mini_player.album_art" = "アルバムアートの切り替え";
 "mini_player.loop" = "リピート";

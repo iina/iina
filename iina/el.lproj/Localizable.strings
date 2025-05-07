@@ -16,8 +16,8 @@
 "general.username" = "Όνομα Χρήστη";
 "general.password" = "Κωδικός";
 
-"input.value_is_empty" = "Value cannot be empty.";
-"input.already_exists" = "Value already exists.";
+"input.value_is_empty" = "Η τιμή δε μπορεί να είναι κενή.";
+"input.already_exists" = "Η τιμή υπάρχει ήδη.";
 
 // Guide Window
 "guide.highlights" = "Επισημάνσεις";
@@ -25,11 +25,11 @@
 "guide.faq" = "Συχνές Ερωτήσεις";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.announcement" = "Χρησιμοποιείτε μια %@ έκδοση της IINA";
+"initial.beta.desc" = "Αν θέλετε να επιστρέψετε σε έκδοση έκδοσης, αποεπιλέξτε το \"λάβετε ενημερώσεις beta\" από τις Ρυθμίσεις > Γενικά, και εγκαταστήστε μια σταθερή έκδοση από την επίσημη ιστοσελίδα μας <a href=\"https://iina.io\"></a>.";
+"initial.nightly.desc" = "";
+"initial.debug.desc" = "Οι εκδόσεις αποσφαλμάτωσης συνήθως δε βελτιστοποιούνται για την απόδοση, οπότε δε συνιστάται να χρησιμοποιείται ως καθημερινή μονάδα. Οι εκδόσεις αποσφαλμάτωσης δεν υποστηρίζουν την αυτόματη ενημέρωση.";
+"initial.bug_report" = "Αναφορά μέσω <a href=\"https://github.com/iina/iina/issues\">GitHub ζητημάτων</a>.";
 
 // Inspector Window
 "inspector.error" = "Σφάλμα";
@@ -49,43 +49,43 @@
 "quicksetting.hwdec" = "Αποκωδικοποίηση Υλικού";
 "quicksetting.deinterlace" = "Αποπλεξία";
 "quicksetting.hdr" = "Υψηλό Δυναμικό Εύρος";
-"quicksetting.hide" = "Hide";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.hide" = "Απόκρυψη";
+"quicksetting.reset_speed" = "Επαναφορά ταχύτητας σε 1x";
 
 // EQ Presets
-"eq.preset.flat" = "Flat";
-"eq.preset.acoustic" = "Acoustic";
-"eq.preset.classical" = "Classical";
-"eq.preset.dance" = "Dance";
-"eq.preset.deep" = "Deep";
-"eq.preset.electronic" = "Electronic";
-"eq.preset.hip_hop" = "Hip Hop";
-"eq.preset.increase_bass" = "Increase Bass";
-"eq.preset.increase_treble" = "Increase Treble";
-"eq.preset.increase_vocal" = "Increase Vocal";
-"eq.preset.jazz" = "Jazz";
-"eq.preset.latin" = "Latin";
+"eq.preset.flat" = "Επίπεδο";
+"eq.preset.acoustic" = "Ακουστική";
+"eq.preset.classical" = "Κλασική";
+"eq.preset.dance" = "Χορευτική";
+"eq.preset.deep" = "Βαθιά";
+"eq.preset.electronic" = "Ηλεκτρονική Μουσική";
+"eq.preset.hip_hop" = "Χιπ Χοπ";
+"eq.preset.increase_bass" = "Αύξηση Μπάσου";
+"eq.preset.increase_treble" = "Αύξηση Τρέμουλου";
+"eq.preset.increase_vocal" = "Αύξηση Φωνής";
+"eq.preset.jazz" = "Τζαζ";
+"eq.preset.latin" = "Λατινικά";
 "eq.preset.loundness" = "Loundness";
-"eq.preset.lounge" = "Lounge";
-"eq.preset.piano" = "Piano";
-"eq.preset.pop" = "Pop";
+"eq.preset.lounge" = "Σαλόνι";
+"eq.preset.piano" = "Πιάνο";
+"eq.preset.pop" = "Ποπ";
 "eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reduce Bass";
-"eq.preset.reduce_treble" = "Reduce Treble";
+"eq.preset.reduce_bass" = "Μείωση Μπάσου";
+"eq.preset.reduce_treble" = "Μείωση Τρέμουλου";
 "eq.preset.rock" = "Rock";
 "eq.preset.small_speaker" = "Small Speaker";
 "eq.preset.spoken_word" = "Spoken Word";
 
 "alert.eq.new_profile.title" = "New EQ Profile";
 "alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Currnet Profile";
-"alert.eq.rename.message" = "Please enter a new profile name.";
+"alert.eq.rename.title" = "Rename Current Profile";
+"alert.eq.rename.message" = "Παρακαλώ εισάγετε ένα νέο όνομα προφίλ.";
 
 // OSDMessage.swift
 "osd.pause" = "Παύση";
 "osd.resume" = "Συνέχιση";
 "osd.volume" = "Ένταση: %i";
-"osd.speed" = "Speed: %@x";
+"osd.speed" = "Ταχύτητα: %@x";
 "osd.aspect" = "Αναλογία Προβολής: %@";
 "osd.crop" = "Περικοπή: %@";
 "osd.rotate" = "Περιστροφή: %i°";
@@ -98,11 +98,11 @@
 "osd.sub_delay.later" = "Καθυστέρηση Υποτίτλων: %.2fs Αργότερα";
 "osd.sub_delay.earlier" = "Καθυστέρηση Υποτίτλων: %.2fs Νωρίτερα";
 "osd.subtitle_pos" = "Θέση Υποτίτλων: %.1f";
-"osd.sub_hidden" = "Subtitles Hidden";
+"osd.sub_hidden" = "";
 "osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
+"osd.sub_second_delay.nodelay" = "Δευτερεύων Καθυστέρηση Υπότιτλων: Χωρίς Καθυστέρηση";
 "osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_delay.earlier" = "Δευτερεύων Καθυστέρηση Υποτίτλων: %.2fs Νωρίτερα";
 "osd.sub_second_hidden" = "Secondary Subtitles Hidden";
 "osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
 "osd.sub_second_visible" = "Secondary Subtitles Visible";
@@ -174,6 +174,9 @@
 "preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
 "preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
 
+"preference.ytdl_plugin_not_installed" = "Εγκατάσταση του Online Media plugin από \"Plugins > Εγκατάσταση από το GitHub\" για να απολαύσεις προηγμένες λειτουργίες όπως λήψη βίντεο και αυτόματες ενημερώσεις yt-dlp.";
+"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
+
 "menu.volume" = "Ένταση: %d";
 "menu.volume_muted" = "Volume: %d (Muted)";
 "menu.audio_delay" = "Καθυστέρηση Ήχου: %.2fs";
@@ -190,7 +193,7 @@
 "menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Παύση";
 "menu.resume" = "Συνέχιση";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "Ταχύτητα: %@x";
 "menu.chapters" = "Εμφάνιση Πίνακα Κεφαλαίων";
 "menu.hide_chapters" = "Απόκρυψη Πίνακα Κεφαλαίων";
 "menu.playlist" = "Εμφάνιση Πίνακα Λίστας Αναπαραγωγής";
@@ -198,7 +201,7 @@
 "menu.video" = "Show Video Panel";
 "menu.hide_video" = "Hide Video Panel";
 "menu.audio" = "Show Audio Panel";
-"menu.hide_audio" = "Hide Audio Panel";
+"menu.hide_audio" = "Απόκρυψη Πίνακα Ήχου";
 "menu.subtitles" = "Show Subtitles Panel";
 "menu.hide_subtitles" = "Hide Subtitles Panel";
 
@@ -215,6 +218,14 @@
 
 "menu.crop_custom" = "Custom…";
 "menu.find_online_sub" = "Find Online Subtitles from %@";
+
+"menu.manage_plugins" = "Manage Plugins…";
+"menu.developer_tool" = "Εργαλεία Προγραμματιστή";
+"menu.more_plugin" = "Περισσότερα...";
+"menu.conflicting_shortcuts" = "Αντικρουόμενες συντομεύσεις πλήκτρων…";
+"menu.reload_plugins" = "Reload All Plugins";
+"menu.show_plugins_panel" = "Εμφάνιση Πίνακα Πρόσθετων Λειτουργιών";
+"menu.hide_plugins_panel" = "Απόκρυψη Πίνακα Πρόσθετων";
 
 "track.audio" = "Audio";
 "track.none" = "<Κενό>";
@@ -245,7 +256,7 @@
 "alert.error_saving_file" = "Προέκυψε σφάλμα κατά την αποθήκευση %@: %@";
 "alert.error_deleting_file" = "Αδυναμία διαγραφής του αρχείου.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
 
 "alert.config.new.title" = "Νέα Διαμόρφωση Εισόδων";
 "alert.config.new.message" = "Παρακαλώ εισάγετε ένα όνομα για τη νέα ρύθμιση.";
@@ -258,7 +269,7 @@
 "alert.config.cannot_create" = "Αδυναμία δημιουργίας αρχείου ρυθμίσεων!\n%@";
 "alert.config.cannot_write" = "Αδυναμία εγγραφής στο αρχείο ρυθμίσεων!";
 "alert.config.rename.title" = "Rename Input Configuration";
-"alert.config.rename.message" = "Please enter the new name for the configuration.";
+"alert.config.rename.message" = "Παρακαλώ εισάγετε ένα νέο όνομα για τη ρύθμιση.";
 
 "alert.filter.incorrect" = "Σφάλμα κατά τη ρύθμιση φίλτρων. Παρακαλώ ελέγξτε τη μορφή των παραμέτρων σας.";
 "alert.add_filter.title" = "Νέο Φίλτρο";
@@ -279,7 +290,7 @@
 "alert.sub_lang_not_set" = "Παρακαλώ ορίστε προτιμώμενη γλώσσα στις Προτιμήσεις πριν τη χρήση του OpenSubtitles. Αυτή τη φορά θα χρησιμοποιηθούν τα Αγγλικά (eng).";
 "alert.sub.cannot_save_passwd" = "Αδυναμία αποθήκευσης του κωδικού σας στο Keychain: %@";
 "alert.sub.cannot_login" = "Αδυναμία σύνδεσης. Παρακαλώ ελέγξτε το Όνομα Χρήστη, τον Κωδικό Εισόδου, και την κατάσταση δικτύου.\n\n%@";
-"alert.sub.save_downloaded.title" = "Save Downloaded Subtitle";
+"alert.sub.save_downloaded.title" = "Αποθήκευση Ληφθέντος Υπότιτλου";
 
 "alert.set_default.title" = "Ορισμός IINA ως προεπιλεγμένη εφαρμογή";
 "alert.set_default.message" = "Το ΙΙΝΑ θα οριστεί ως προεπιλεγμένη εφαρμογή για όλους τους τύπους αρχείων που υποστηρίζει.";
@@ -331,7 +342,7 @@
 "alert.assrt_register.register" = "Εγγραφή Τώρα";
 "alert.assrt_register.try" = "Δοκιμή Πρώτα";
 "alert.assrt_token_prompt.title" = "Εισάγετε το διακριτικό σας (API Token)";
-"alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
+"alert.assrt_token_prompt.message" = "";
 "alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
 
 "alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
@@ -386,6 +397,7 @@
 "osc_toolbar.music_mode" = "Enter music mode";
 "osc_toolbar.sub_track" = "Choose subtitle track";
 "osc_toolbar.screenshot" = "Take a screenshot";
+"osc_toolbar.plugins" = "Show plugins panel";
 
 "mini_player.album_art" = "Toggle album art";
 "mini_player.loop" = "Repeat";

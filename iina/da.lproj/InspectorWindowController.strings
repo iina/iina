@@ -5,7 +5,7 @@
 "1dz-Vt-0MO.title" = "FPS:";
 
 /* Class = "NSTextFieldCell"; title = "File path:"; ObjectID = "4jf-w4-kkv"; */
-"4jf-w4-kkv.title" = "Fil sti:";
+"4jf-w4-kkv.title" = "Arkiv sti:";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "5H6-qJ-RDS"; */
 "5H6-qJ-RDS.title" = "Format:";
@@ -20,19 +20,19 @@
 "A4y-LL-x0z.title" = "Bitrate:";
 
 /* Class = "NSTextFieldCell"; title = "Mistimed Frames:"; ObjectID = "AYt-pH-UCi"; */
-"AYt-pH-UCi.title" = "Mistimede Frames:";
+"AYt-pH-UCi.title" = "Mistimede billeder:";
 
 /* Class = "NSTextFieldCell"; title = "Display FPS:"; ObjectID = "AjU-1T-aGR"; */
 "AjU-1T-aGR.title" = "Vis FPS:";
 
 /* Class = "NSTextFieldCell"; title = "Dropped Frames:"; ObjectID = "CrF-UR-udW"; */
-"CrF-UR-udW.title" = "Tabte Frames:";
+"CrF-UR-udW.title" = "Tabte billeder:";
 
 /* Class = "NSTextFieldCell"; title = "Hw Decoder:"; ObjectID = "DHh-ne-10f"; */
 "DHh-ne-10f.title" = "Hw dekoder:";
 
 /* Class = "NSWindow"; title = "Inspector"; ObjectID = "F0z-JX-Cv5"; */
-"F0z-JX-Cv5.title" = "Inspekter";
+"F0z-JX-Cv5.title" = "Inspektør";
 
 /* Class = "NSTextFieldCell"; title = "Language:"; ObjectID = "FIw-CH-b05"; */
 "FIw-CH-b05.title" = "Sprog:";
@@ -44,7 +44,7 @@
 "Fqo-1c-3L1.ibShadowedLabels[1]" = "Spor";
 
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[2] = "File"; ObjectID = "Fqo-1c-3L1"; */
-"Fqo-1c-3L1.ibShadowedLabels[2]" = "Fil";
+"Fqo-1c-3L1.ibShadowedLabels[2]" = "Arkiv";
 
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[3] = "Status"; ObjectID = "Fqo-1c-3L1"; */
 "Fqo-1c-3L1.ibShadowedLabels[3]" = "Status";
@@ -56,7 +56,7 @@
 "JN9-3E-OJp.title" = "Estimeret Disp FPS";
 
 /* Class = "NSTextFieldCell"; title = "File Path:"; ObjectID = "Jxp-Wf-BhU"; */
-"Jxp-Wf-BhU.title" = "Fil sti:";
+"Jxp-Wf-BhU.title" = "Arkiv sti:";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "KqD-NM-WiK"; */
 "KqD-NM-WiK.title" = "Størrelse:";
@@ -80,7 +80,7 @@
 "PLL-fC-blc.title" = "Ekstern";
 
 /* Class = "NSTextFieldCell"; title = "Editions:"; ObjectID = "POj-mQ-zP9"; */
-"POj-mQ-zP9.title" = "Versioner:";
+"POj-mQ-zP9.title" = "Udgaver:";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "PQD-yB-mm6"; */
 "PQD-yB-mm6.title" = "Format:";
@@ -98,10 +98,10 @@
 "WrI-Sr-O2S.label" = "Arkiv";
 
 /* Class = "NSTextFieldCell"; title = "Codec:"; ObjectID = "bki-sE-xCA"; */
-"bki-sE-xCA.title" = "Kodex:";
+"bki-sE-xCA.title" = "Codec:";
 
 /* Class = "NSTextFieldCell"; title = "Codec:"; ObjectID = "daB-hU-mku"; */
-"daB-hU-mku.title" = "Kodex:";
+"daB-hU-mku.title" = "Codec:";
 
 /* Class = "NSTextFieldCell"; title = "Properties:"; ObjectID = "dtn-wS-j6U"; */
 "dtn-wS-j6U.title" = "Egenskaber:";
@@ -110,19 +110,19 @@
 "f2P-qb-wRx.title" = "Størrelse:";
 
 /* Class = "NSTabViewItem"; label = "General"; ObjectID = "f7a-XG-NCc"; */
-"f7a-XG-NCc.label" = "Generalt";
+"f7a-XG-NCc.label" = "Generelt";
 
 /* Class = "NSTextFieldCell"; title = "Track:"; ObjectID = "f7i-wX-uxQ"; */
 "f7i-wX-uxQ.title" = "Spor:";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Output FPS:"; ObjectID = "g8p-Ec-awO"; */
-"g8p-Ec-awO.title" = "Estimeret Output FPS:";
+"g8p-Ec-awO.title" = "Estimeret FPS:";
 
 /* Class = "NSTextFieldCell"; title = "VIDEO"; ObjectID = "gDG-Eq-1Bc"; */
 "gDG-Eq-1Bc.title" = "Video";
 
 /* Class = "NSTextFieldCell"; title = "A/V Sync Diff:"; ObjectID = "iVK-Ck-Lyq"; */
-"iVK-Ck-Lyq.title" = "A/V Synk. Forskel:";
+"iVK-Ck-Lyq.title" = "A/V Synk. forskel:";
 
 /* Class = "NSTextFieldCell"; title = "Channels:"; ObjectID = "it3-05-Pwu"; */
 "it3-05-Pwu.title" = "Kanaler:";
@@ -143,13 +143,13 @@
 "mgl-Et-20K.title" = "Format:";
 
 /* Class = "NSTextFieldCell"; title = "Codec:"; ObjectID = "n0s-eM-42w"; */
-"n0s-eM-42w.title" = "Kodex:";
+"n0s-eM-42w.title" = "Codec:";
 
 /* Class = "NSTextFieldCell"; title = "AUDIO"; ObjectID = "nrG-IH-kFg"; */
 "nrG-IH-kFg.title" = "Lyd";
 
 /* Class = "NSTextFieldCell"; title = "Total A/V Sync:"; ObjectID = "sbO-Cn-gpI"; */
-"sbO-Cn-gpI.title" = "Samlet A/V Sync:";
+"sbO-Cn-gpI.title" = "Samlet A/V synk.:";
 
 /* Class = "NSTextFieldCell"; title = "Watch"; ObjectID = "tNS-gW-PcC"; */
 "tNS-gW-PcC.title" = "Se";
@@ -161,7 +161,7 @@
 "xix-0S-ehE.title" = "Dekoder:";
 
 /* Class = "NSTextFieldCell"; title = "Primaries:"; ObjectID = "1kw-LO-KmJ"; */
-"1kw-LO-KmJ.title" = "Primaries:";
+"1kw-LO-KmJ.title" = "Primære:";
 
 /* Class = "NSTextFieldCell"; title = "Colorspace:"; ObjectID = "mLo-Wc-BoO"; */
 "mLo-Wc-BoO.title" = "Farvespektrum:";

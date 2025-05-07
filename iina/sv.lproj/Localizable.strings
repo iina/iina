@@ -17,7 +17,7 @@
 "general.password" = "Lösenord";
 
 "input.value_is_empty" = "Value cannot be empty.";
-"input.already_exists" = "Value already exists.";
+"input.already_exists" = "Värdet finns redan.";
 
 // Guide Window
 "guide.highlights" = "Höjdpunkter";
@@ -50,42 +50,42 @@
 "quicksetting.deinterlace" = "Avfläta";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Göm";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.reset_speed" = "Återställ hastighet till 1x";
 
 // EQ Presets
-"eq.preset.flat" = "Flat";
-"eq.preset.acoustic" = "Acoustic";
-"eq.preset.classical" = "Classical";
-"eq.preset.dance" = "Dance";
-"eq.preset.deep" = "Deep";
-"eq.preset.electronic" = "Electronic";
-"eq.preset.hip_hop" = "Hip Hop";
-"eq.preset.increase_bass" = "Increase Bass";
+"eq.preset.flat" = "Platt";
+"eq.preset.acoustic" = "Akustisk";
+"eq.preset.classical" = "Klassisk";
+"eq.preset.dance" = "Dans";
+"eq.preset.deep" = "Djup";
+"eq.preset.electronic" = "Elektronisk";
+"eq.preset.hip_hop" = "Hip-hop";
+"eq.preset.increase_bass" = "Öka bas";
 "eq.preset.increase_treble" = "Increase Treble";
 "eq.preset.increase_vocal" = "Increase Vocal";
 "eq.preset.jazz" = "Jazz";
-"eq.preset.latin" = "Latin";
+"eq.preset.latin" = "Latinsk";
 "eq.preset.loundness" = "Loundness";
-"eq.preset.lounge" = "Lounge";
+"eq.preset.lounge" = "Salong";
 "eq.preset.piano" = "Piano";
 "eq.preset.pop" = "Pop";
 "eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reduce Bass";
+"eq.preset.reduce_bass" = "Minska bas";
 "eq.preset.reduce_treble" = "Reduce Treble";
 "eq.preset.rock" = "Rock";
 "eq.preset.small_speaker" = "Small Speaker";
 "eq.preset.spoken_word" = "Spoken Word";
 
-"alert.eq.new_profile.title" = "New EQ Profile";
-"alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Currnet Profile";
-"alert.eq.rename.message" = "Please enter a new profile name.";
+"alert.eq.new_profile.title" = "Ny EQ-profil";
+"alert.eq.new_profile.message" = "Ange ett profilnamn.";
+"alert.eq.rename.title" = "Rename Current Profile";
+"alert.eq.rename.message" = "Ange ett nytt profilnamn.";
 
 // OSDMessage.swift
 "osd.pause" = "Pausa";
 "osd.resume" = "Fortsätt";
 "osd.volume" = "Volym: %i";
-"osd.speed" = "Speed: %@x";
+"osd.speed" = "Hastighet: %@x";
 "osd.aspect" = "Förhållande: %@";
 "osd.crop" = "Beskär: %@";
 "osd.rotate" = "Rotera: %i°";
@@ -174,6 +174,9 @@
 "preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
 "preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
 
+"preference.ytdl_plugin_not_installed" = "Installera Online Media-tillägget från \"Tillägg > Installera från GitHub\" för att få tillgång till avancerade funktioner som videonedladdning och automatiska yt-dlp-uppdateringar.";
+"preference.ytdl_plugin_installed" = "Det inbyggda youtube-dl-stödet är inaktiverat då du har installerat Online Media-tillägget.";
+
 "menu.volume" = "Volym: %d";
 "menu.volume_muted" = "Volym: %d (Tystat)";
 "menu.audio_delay" = "Ljudfördröjning: %.2fs";
@@ -190,7 +193,7 @@
 "menu.exit_mini_player" = "Stäng musikläget";
 "menu.pause" = "Pausa";
 "menu.resume" = "Fortsätt";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "Hastighet: %@x";
 "menu.chapters" = "Visa kapitelpanel";
 "menu.hide_chapters" = "Dölj kapitelpanelen";
 "menu.playlist" = "Visa spellistepanel";
@@ -215,6 +218,14 @@
 
 "menu.crop_custom" = "Anpassad…";
 "menu.find_online_sub" = "Hitta undertexter online från %@";
+
+"menu.manage_plugins" = "Manage Plugins…";
+"menu.developer_tool" = "Utvecklarverktyg";
+"menu.more_plugin" = "Mer…";
+"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
+"menu.reload_plugins" = "Reload All Plugins";
+"menu.show_plugins_panel" = "Show Plugins Panel";
+"menu.hide_plugins_panel" = "Hide Plugins Panel";
 
 "track.audio" = "Ljud";
 "track.none" = "<Inget>";
@@ -245,7 +256,7 @@
 "alert.error_saving_file" = "Fel uppstod när %@ skulle sparas: %@";
 "alert.error_deleting_file" = "Kan ej radera denna fil.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
 
 "alert.config.new.title" = "Ny inmatningskonfiguration";
 "alert.config.new.message" = "Vänligen ange ett namn för den nya konfigurationen.";
@@ -386,6 +397,7 @@
 "osc_toolbar.music_mode" = "Gå in i musikläge";
 "osc_toolbar.sub_track" = "Välj undertextspår";
 "osc_toolbar.screenshot" = "Ta en skärmdump";
+"osc_toolbar.plugins" = "Show plugins panel";
 
 "mini_player.album_art" = "Växla skivomslag";
 "mini_player.loop" = "Upprepa";

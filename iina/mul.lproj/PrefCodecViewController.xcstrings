@@ -41,12 +41,6 @@
             "value" : "Autom. (Kopieren)"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Auto (Copy)"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -137,12 +131,6 @@
             "value" : "Automātiska (Kopēt)"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Auto (Copy)"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -188,12 +176,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Auto (Copy)"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Automatski (kopiraj)"
           }
         },
@@ -201,12 +183,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Auto (kopiera)"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Auto (Copy)"
           }
         },
         "tr" : {
@@ -243,6 +219,7 @@
     },
     "1Kp-GN-lWF.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"reinhard\"; ObjectID = \"1Kp-GN-lWF\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -251,11 +228,11 @@
             "value" : "reinhard"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "1uU-MC-7Yh.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"AC3\"; ObjectID = \"1uU-MC-7Yh\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -264,29 +241,16 @@
             "value" : "AC3"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "2Md-pv-gSi.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays.\"; ObjectID = \"2Md-pv-gSi\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
-        "af" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."
-          }
-        },
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "AVFoundation هو مشغل صوت تجريبي جديد يوفر دعم الصوت المكاني. ومع ذلك، قد تواجه بعض المشاكل عند استخدام AVFound، مثل تأخير الصوت."
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."
           }
         },
         "cs" : {
@@ -299,18 +263,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "AVFoundation er en ny og eksperimentel lyddriver der tilbyder understøttelse af Rumlig Lyd. Du risikerer dog at støde på nogle problemer når du bruger AVFoundation, såsom lydforsinkelser."
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."
           }
         },
         "en" : {
@@ -331,52 +283,16 @@
             "value" : "AVFoundation es un nuevo controlador de audio experimental que ofrece soporte para Audio Espacial. Sin embargo, puede encontrar algunos problemas al usar AVFoundation, como retrasos en el audio."
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "AVFoundation est un nouveau pilote audio expérimental qui gère Spatial Audio, mais il se peut que vous rencontriez quelques problèmes avec AVFoundation, comme des retards audio."
           }
         },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."
-          }
-        },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Az AVFoundation egy új, kísérleti hangillesztőprogram, amely Spatial Audio támogatást kínál. Az AVFoundation használata során azonban előfordulhatnak problémák, például hangkésések."
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."
           }
         },
         "it" : {
@@ -397,40 +313,16 @@
             "value" : "AVFoundation은 공간 오디오를 지원하는 새롭고 실험적인 오디오 드라이버입니다. 그러나 AVFoundation을 사용할 때 오디오 지연과 같은 몇 가지 문제가 발생할 수 있습니다."
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "AVFoundation is een nieuw, experimenteel audiostuurprogramma die Spatial Audio ondersteuning aanbiedt. Echter kan je problemen ondervinden bij het gebruik van AVFoundation, zoals audiovertragingen."
           }
         },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."
-          }
-        },
         "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "AVFountation é um novo controlador experimental com suporte a Spacial Audio. Poderá encontrar problemas, como atrasos no áudio."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."
           }
         },
         "ro" : {
@@ -445,36 +337,6 @@
             "value" : "AVFoundation — это новый экспериментальный аудиодрайвер с поддержкой пространственного аудио (Spatial Audio). Однако, при использовании AVFoundation возможны некоторые проблемы, такие как задержка звука."
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."
-          }
-        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -485,12 +347,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "AVFoundation - це новий, експериментальний аудіодрайвер з підтримкою просторових звуків. Однак ви можете зіткнутися з деякими проблемами при використанні AVFoundation, таких як затримки звуку."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."
           }
         },
         "zh-Hans" : {
@@ -545,12 +401,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Standard: 0 (Automatisch)"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default: 0 (Auto)"
           }
         },
         "en" : {
@@ -643,12 +493,6 @@
             "value" : "Noklusēti: 0 (Automātiski)"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default: 0 (Auto)"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -694,12 +538,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Default: 0 (Auto)"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Podrazumevano: 0 (auto)"
           }
         },
@@ -707,12 +545,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Förval: 0 (auto)"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default: 0 (Auto)"
           }
         },
         "tr" : {
@@ -787,12 +619,6 @@
             "value" : "ICC-Profil laden"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Load ICC profile"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -811,18 +637,6 @@
             "value" : "Cargar perfil ICC"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Load ICC profile"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Load ICC profile"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -833,12 +647,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "טען פרופיל ICC"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Load ICC profile"
           }
         },
         "hr" : {
@@ -875,18 +683,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ICC 프로파일 불러오기"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Load ICC profile"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Load ICC profile"
           }
         },
         "nl" : {
@@ -934,12 +730,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Load ICC profile"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Učitaj ICC profil"
           }
         },
@@ -947,12 +737,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ladda ICC-profil"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Load ICC profile"
           }
         },
         "tr" : {
@@ -965,12 +749,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Завантажити профіль ICC"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Load ICC profile"
           }
         },
         "zh-Hans" : {
@@ -989,6 +767,7 @@
     },
     "6Iq-cU-A17.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"gamma\"; ObjectID = \"6Iq-cU-A17\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -997,11 +776,11 @@
             "value" : "gamma"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "8QO-fX-FbS.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"mobius\"; ObjectID = \"8QO-fX-FbS\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -1010,29 +789,16 @@
             "value" : "mobius"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "9Q0-hw-PdU.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Preamp gain:\"; ObjectID = \"9Q0-hw-PdU\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
-        "af" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preamp gain:"
-          }
-        },
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "مكسب الديباجة:"
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preamp gain:"
           }
         },
         "cs" : {
@@ -1045,18 +811,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Forforstærkningsforøgelse:"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preamp gain:"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preamp gain:"
           }
         },
         "en" : {
@@ -1077,34 +831,10 @@
             "value" : "Ganancia del preamplificador:"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preamp gain:"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preamp gain:"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gain de préampli :"
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preamp gain:"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preamp gain:"
           }
         },
         "hr" : {
@@ -1117,12 +847,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Előerősítő erősítés:"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preamp gain:"
           }
         },
         "it" : {
@@ -1143,40 +867,16 @@
             "value" : "프리앰프 음량:"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preamp gain:"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preamp gain:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Preamp versterking:"
           }
         },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preamp gain:"
-          }
-        },
         "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ganho de pré-amplificação:"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preamp gain:"
           }
         },
         "ro" : {
@@ -1191,36 +891,6 @@
             "value" : "Предусиление до применения коррекции громкости:"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preamp gain:"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preamp gain:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preamp gain:"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preamp gain:"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preamp gain:"
-          }
-        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1231,12 +901,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Підвищення підсилення:"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preamp gain:"
           }
         },
         "zh-Hans" : {
@@ -1291,12 +955,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Maximale Lautstärke:"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Maximum volume:"
           }
         },
         "en" : {
@@ -1389,12 +1047,6 @@
             "value" : "Maksimālais skaļums:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Maximum volume:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1440,12 +1092,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Maximum volume:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Maksimalna jačina zvuka:"
           }
         },
@@ -1453,12 +1099,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Maximal volym:"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Maximum volume:"
           }
         },
         "tr" : {
@@ -1531,12 +1171,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Anzahl der Threads:"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Number of threads:"
           }
         },
         "en" : {
@@ -1629,12 +1263,6 @@
             "value" : "Pavedienu skaits:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Number of threads:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1680,12 +1308,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Number of threads:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Broj niti:"
           }
         },
@@ -1693,12 +1315,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Antal trådar:"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Number of threads:"
           }
         },
         "tr" : {
@@ -1773,12 +1389,6 @@
             "value" : "Tone Mapping aktivieren"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable tone mapping"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -1797,18 +1407,6 @@
             "value" : "Activar mapeo de tonos"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable tone mapping"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable tone mapping"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1819,12 +1417,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "הפעל מיפוי גוונים"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable tone mapping"
           }
         },
         "hr" : {
@@ -1861,18 +1453,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "톤 매핑 사용"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable tone mapping"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable tone mapping"
           }
         },
         "nl" : {
@@ -1917,28 +1497,10 @@
             "value" : "Povoliť mapovanie tonality"
           }
         },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable tone mapping"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable tone mapping"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aktivera tonmappning"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable tone mapping"
           }
         },
         "tr" : {
@@ -1951,12 +1513,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Увімкнути тональне відображення"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable tone mapping"
           }
         },
         "zh-Hans" : {
@@ -1989,12 +1545,6 @@
             "value" : "قياس ذروة سطوع العرض. إذا تم تعيينها إلى 0، فإن IINA  يكشف هذه القيمة. إذا فشل الكشف ، فإن IINA يحدد الذروة المستهدفة إلى 400."
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2011,12 +1561,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gemessener Helligkeits-Spitzenwert des Bildschirms. Wenn auf 0 gesetzt, erkennt IINA diesen Wert. Wenn diese Erkennung fehlschlägt, setzt IINA den Wert auf 400."
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."
           }
         },
         "en" : {
@@ -2037,18 +1581,6 @@
             "value" : "Medida del máximo brillo de la pantalla. Si se establece en 0, IINA detecta este valor. Si la detección falla, IINA establece el pico objetivo a 400."
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2059,12 +1591,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "בהירות מרבית מדודה של התצוגה. אם מוגדר ל-0, IINA יזהה אוטומטית ערך זה. אם הזיהוי נכשל, IINA יגדיר את שיא היעד ל-400."
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."
           }
         },
         "hr" : {
@@ -2101,18 +1627,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "디스플레이의 측정된 최대 밝기입니다. 0으로 설정하면 IINA가 이 값을 감지합니다. 감지에 실패하면 IINA는 최대 밝기를 400으로 설정합니다."
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."
           }
         },
         "nl" : {
@@ -2157,30 +1671,6 @@
             "value" : "Zmeraný maximálny jas displeja. Pokiaľ je nastavený na 0, IINA túto hodnotu detekuje. V prípade zlyhania detekcie nastaví IINA cieľové maximum na 400."
           }
         },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."
-          }
-        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2191,12 +1681,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Вимірювана пікова яскравість дисплея. Якщо встановлено 0, IINA автоматично визначає це значення. Якщо автовизначення не вдалося, IINA встановлює пікову яскравість 400."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."
           }
         },
         "zh-Hans" : {
@@ -2253,12 +1737,6 @@
             "value" : "Nits"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "nits"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -2277,18 +1755,6 @@
             "value" : "nits"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "nits"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "nits"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2299,12 +1765,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ניטים"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "nits"
           }
         },
         "hr" : {
@@ -2341,18 +1801,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "니트"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "nits"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "nits"
           }
         },
         "nl" : {
@@ -2397,30 +1845,6 @@
             "value" : "nits"
           }
         },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "nits"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "nits"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "nits"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "nits"
-          }
-        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2431,12 +1855,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "нит"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "nits"
           }
         },
         "zh-Hans" : {
@@ -2469,12 +1887,6 @@
             "value" : "ديسيبل"
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2488,12 +1900,6 @@
           }
         },
         "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
-          }
-        },
-        "el" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "dB"
@@ -2517,18 +1923,6 @@
             "value" : "dB"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2541,12 +1935,6 @@
             "value" : "dB"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
-          }
-        },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2554,12 +1942,6 @@
           }
         },
         "hu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
-          }
-        },
-        "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "dB"
@@ -2583,18 +1965,6 @@
             "value" : "dB"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2613,12 +1983,6 @@
             "value" : "dB"
           }
         },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
-          }
-        },
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2631,31 +1995,7 @@
             "value" : "дБ"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
-          }
-        },
         "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
-          }
-        },
-        "ta" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "dB"
@@ -2671,12 +2011,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "дБ"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
           }
         },
         "zh-Hans" : {
@@ -2731,12 +2065,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Standard: 0 (Automatisch)"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Προεπιλογή: 0 (αυτόματο)"
           }
         },
         "en" : {
@@ -2829,12 +2157,6 @@
             "value" : "Noklusēti: 0 (Automātiski)"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default: 0 (Auto)"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2880,12 +2202,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Default: 0 (Auto)"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Podrazumevano: 0 (auto)"
           }
         },
@@ -2893,12 +2209,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Förval: 0 (auto)"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default: 0 (Auto)"
           }
         },
         "tr" : {
@@ -2973,12 +2283,6 @@
             "value" : "(100–1000)"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(100-1000)"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -3021,12 +2325,6 @@
             "value" : "(100-1000)"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(100-1000)"
-          }
-        },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3064,12 +2362,6 @@
           }
         },
         "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(100-1000)"
-          }
-        },
-        "nb" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "(100-1000)"
@@ -3123,22 +2415,10 @@
             "value" : "(100-1000)"
           }
         },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(100-1000)"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "(100–1000)"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(100-1000)"
           }
         },
         "tr" : {
@@ -3177,19 +2457,7 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Fallback:\"; ObjectID = \"fOz-6g-MhS\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
-        "af" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fallback:"
-          }
-        },
         "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fallback:"
-          }
-        },
-        "ca" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fallback:"
@@ -3213,12 +2481,6 @@
             "value" : "Reservesystem:"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fallback:"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -3237,34 +2499,10 @@
             "value" : "Fallback:"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fallback:"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fallback:"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Remplacement :"
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fallback:"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fallback:"
           }
         },
         "hr" : {
@@ -3279,12 +2517,6 @@
             "value" : "Visszaesés:"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fallback:"
-          }
-        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3297,43 +2529,7 @@
             "value" : "フォールバック:"
           }
         },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fallback:"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fallback:"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fallback:"
-          }
-        },
         "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fallback:"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fallback:"
-          }
-        },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fallback:"
-          }
-        },
-        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fallback:"
@@ -3351,36 +2547,6 @@
             "value" : "Резервный вариант:"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fallback:"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fallback:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fallback:"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fallback:"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fallback:"
-          }
-        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3391,12 +2557,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Повернутися:"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fallback:"
           }
         },
         "zh-Hans" : {
@@ -3415,6 +2575,7 @@
     },
     "fSC-Em-JR4.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"Core Audio\"; ObjectID = \"fSC-Em-JR4\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -3423,8 +2584,7 @@
             "value" : "Core Audio"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "g4c-vG-URh.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"Initial volume:\"; ObjectID = \"g4c-vG-URh\";",
@@ -3464,12 +2624,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Startlautstärke:"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Initial volume:"
           }
         },
         "en" : {
@@ -3562,12 +2716,6 @@
             "value" : "Sākotnējais skaļums:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Initial volume:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3613,12 +2761,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Initial volume:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Početna jačina zvuka:"
           }
         },
@@ -3626,12 +2768,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Initial volym:"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Initial volume:"
           }
         },
         "tr" : {
@@ -3706,12 +2842,6 @@
             "value" : "Immer den dedizierten Grafikprozessor für das Rendering verwenden (falls vorhanden). Dies kann die Leistung verbessern, aber auch die Akkulaufzeit verkürzen."
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Always use the dedicated GPU for rendering (if it exists). This can improve performance but may reduce battery life."
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -3754,12 +2884,6 @@
             "value" : "השתמש תמיד ב-GPU הייעודי (אם קיים) כדי לעבד. זה יכול לשפר את הביצועים, אבל עשוי לצרוך יותר סוללה."
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Always use the dedicated GPU for rendering (if it exists). This can improve performance but may reduce battery life."
-          }
-        },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3800,12 +2924,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Video renderēšanai vienmēr izmantot diskrēto videokarti (ja tāda ir). Tā var uzlabot veiktspēju, bet var samazināt akumulatora darbības laiku."
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Always use the dedicated GPU for rendering (if it exists). This can improve performance but may reduce battery life."
           }
         },
         "nl" : {
@@ -3853,12 +2971,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Always use the dedicated GPU for rendering (if it exists). This can improve performance but may reduce battery life."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Uvek koristi namensku grafičku karticu za prikaz (ako postoji). Ova opcija može poboljšati performanse, ali i umanjiti trajanje baterije."
           }
         },
@@ -3866,12 +2978,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Använd alltid dedikerad grafikkrets för rendering (om sådan är tillgänglig). Detta kan förbättra prestandan men också minska batteritiden."
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Always use the dedicated GPU for rendering (if it exists). This can improve performance but may reduce battery life."
           }
         },
         "tr" : {
@@ -3910,22 +3016,10 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"ReplayGain:\"; ObjectID = \"gfq-nW-dDu\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
-        "af" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ReplayGain:"
-          }
-        },
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "مكتسب:"
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ReplayGain:"
           }
         },
         "cs" : {
@@ -3941,12 +3035,6 @@
           }
         },
         "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ReplayGain:"
-          }
-        },
-        "el" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "ReplayGain:"
@@ -3970,34 +3058,10 @@
             "value" : "ReplayGain:"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ReplayGain:"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ReplayGain:"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gain de Replay :"
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ReplayGain:"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ReplayGain:"
           }
         },
         "hr" : {
@@ -4007,12 +3071,6 @@
           }
         },
         "hu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ReplayGain:"
-          }
-        },
-        "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "ReplayGain:"
@@ -4036,18 +3094,6 @@
             "value" : "ReplayGain:"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ReplayGain:"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ReplayGain:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4066,12 +3112,6 @@
             "value" : "Ganho:"
           }
         },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ReplayGain:"
-          }
-        },
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4084,31 +3124,7 @@
             "value" : "Выравнивание:"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ReplayGain:"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ReplayGain:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ReplayGain:"
-          }
-        },
         "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ReplayGain:"
-          }
-        },
-        "ta" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "ReplayGain:"
@@ -4121,12 +3137,6 @@
           }
         },
         "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ReplayGain:"
-          }
-        },
-        "vi" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "ReplayGain:"
@@ -4148,6 +3158,7 @@
     },
     "GvK-IC-26c.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"AVFoundation\"; ObjectID = \"GvK-IC-26c\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -4156,11 +3167,11 @@
             "value" : "AVFoundation"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "hpU-bf-sNW.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"clip\"; ObjectID = \"hpU-bf-sNW\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -4169,29 +3180,16 @@
             "value" : "clip"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "HQV-tY-NMj.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"If this option is not enabled, clipping will be prevented by lowering the gain.\"; ObjectID = \"HQV-tY-NMj\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
-        "af" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "If this option is not enabled, clipping will be prevented by lowering the gain."
-          }
-        },
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "إذا لم يتم تمكين هذا الخيار، سيتم منع النقر عن طريق تقليل المكسب."
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "If this option is not enabled, clipping will be prevented by lowering the gain."
           }
         },
         "cs" : {
@@ -4204,18 +3202,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hvis denne indstilling ikke er slået til, så bliver klip i lyden forhindret ved at mindske lydstyrkeforøgelsen."
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "If this option is not enabled, clipping will be prevented by lowering the gain."
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "If this option is not enabled, clipping will be prevented by lowering the gain."
           }
         },
         "en" : {
@@ -4236,34 +3222,10 @@
             "value" : "Si esta opción no está activada, el recorte se evitará reduciendo la ganancia."
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "If this option is not enabled, clipping will be prevented by lowering the gain."
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "If this option is not enabled, clipping will be prevented by lowering the gain."
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Si cette option n'est pas activée, la saturation sera empêché en abaissant le gain."
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "If this option is not enabled, clipping will be prevented by lowering the gain."
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "If this option is not enabled, clipping will be prevented by lowering the gain."
           }
         },
         "hr" : {
@@ -4276,12 +3238,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ha ez az opció nincs engedélyezve, akkor az erősítés csökkentésével meg lesz akadályozva a \"clipping\"."
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "If this option is not enabled, clipping will be prevented by lowering the gain."
           }
         },
         "it" : {
@@ -4302,18 +3258,6 @@
             "value" : "이 옵션이 비활성화되어 있는 경우, 음량을 낮춰 클리핑을 방지합니다."
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "If this option is not enabled, clipping will be prevented by lowering the gain."
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "If this option is not enabled, clipping will be prevented by lowering the gain."
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4332,12 +3276,6 @@
             "value" : "Se esta opção não estiver ativada, será evitada a saturação diminuindo o ganho."
           }
         },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "If this option is not enabled, clipping will be prevented by lowering the gain."
-          }
-        },
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4350,36 +3288,6 @@
             "value" : "Если эта опция выключена, клиппинг будет предотвращен путем снижения коэффициента усиления."
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "If this option is not enabled, clipping will be prevented by lowering the gain."
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "If this option is not enabled, clipping will be prevented by lowering the gain."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "If this option is not enabled, clipping will be prevented by lowering the gain."
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "If this option is not enabled, clipping will be prevented by lowering the gain."
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "If this option is not enabled, clipping will be prevented by lowering the gain."
-          }
-        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4390,12 +3298,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Якщо цей параметр не ввімкнуто, буде запобігати відсіканню шляхом зниження посилення."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "If this option is not enabled, clipping will be prevented by lowering the gain."
           }
         },
         "zh-Hans" : {
@@ -4414,6 +3316,7 @@
     },
     "I34-op-NZK.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"DTS-HD\"; ObjectID = \"I34-op-NZK\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -4422,11 +3325,11 @@
             "value" : "DTS-HD"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "iQf-Gb-IuO.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"Item 1\"; ObjectID = \"iQf-Gb-IuO\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -4435,29 +3338,16 @@
             "value" : "Item 1"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "J3e-oT-fy9.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"Allow the volume gain to clip\"; ObjectID = \"J3e-oT-fy9\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
-        "af" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allow the volume gain to clip"
-          }
-        },
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "السماح لكسب الصوت بالفيديو"
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allow the volume gain to clip"
           }
         },
         "cs" : {
@@ -4470,18 +3360,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tillad, at lydstyrkeforøgelsen klipper."
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allow the volume gain to clip"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allow the volume gain to clip"
           }
         },
         "en" : {
@@ -4502,34 +3380,10 @@
             "value" : "Permitir la ganancia de volumen al clip"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allow the volume gain to clip"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allow the volume gain to clip"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Autoriser le gain de volume à saturer"
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allow the volume gain to clip"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allow the volume gain to clip"
           }
         },
         "hr" : {
@@ -4544,12 +3398,6 @@
             "value" : "Hangerő-erősítés \"clipping\" engedélyezése"
           }
         },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allow the volume gain to clip"
-          }
-        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4562,46 +3410,16 @@
             "value" : "クリップにボリュームゲインを許可"
           }
         },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allow the volume gain to clip"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allow the volume gain to clip"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allow the volume gain to clip"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "De volumeversterking toestaan om te clippen"
           }
         },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allow the volume gain to clip"
-          }
-        },
         "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Permitir saturação do ganho"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allow the volume gain to clip"
           }
         },
         "ro" : {
@@ -4616,34 +3434,10 @@
             "value" : "Разрешить регулировку громкости"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allow the volume gain to clip"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allow the volume gain to clip"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allow the volume gain to clip"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tillåt volymförstärkningen att klippa"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allow the volume gain to clip"
           }
         },
         "tr" : {
@@ -4656,12 +3450,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Дозволити збільшення гучності для кліпу"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allow the volume gain to clip"
           }
         },
         "zh-Hans" : {
@@ -4692,12 +3480,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "دون تعديلات"
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No adjustment"
           }
         },
         "cs" : {
@@ -4742,18 +3524,6 @@
             "value" : "Sin ajuste"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No adjustment"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No adjustment"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4766,12 +3536,6 @@
             "value" : "אין התאמה"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No adjustment"
-          }
-        },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4782,12 +3546,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nincs beállítás"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No adjustment"
           }
         },
         "it" : {
@@ -4808,40 +3566,16 @@
             "value" : "조정 없음"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No adjustment"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No adjustment"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geen aanpassing"
           }
         },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No adjustment"
-          }
-        },
         "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sem ajuste"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No adjustment"
           }
         },
         "ro" : {
@@ -4856,34 +3590,10 @@
             "value" : "Без регулировки"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No adjustment"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No adjustment"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No adjustment"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ingen justering"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No adjustment"
           }
         },
         "tr" : {
@@ -4896,12 +3606,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Без регулювання"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No adjustment"
           }
         },
         "zh-Hans" : {
@@ -4920,6 +3624,7 @@
     },
     "Le8-wj-Pei.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"DTS\"; ObjectID = \"Le8-wj-Pei\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -4928,8 +3633,7 @@
             "value" : "DTS"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "M2M-of-gjd.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)\"; ObjectID = \"M2M-of-gjd\";",
@@ -4971,12 +3675,6 @@
             "value" : "ICC-Profil für den aktuellen Bildschirm laden und zur Umwandlung von Video-RGB in die Bildschirmausgabe verwenden. (Nur für den SDR-Modus)"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -4995,18 +3693,6 @@
             "value" : "Cargar el perfil ICC para la visualización actual y utilizarlo para transformar el vídeo RGB para la salida de pantalla. (Solo para el modo SDR)"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5017,12 +3703,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "טען את פרופיל ה-ICC עבור התצוגה הנוכחית והשתמש בו כדי להפוך וידאו RGB לפלט מסך. (עבור מצב SDR בלבד)"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"
           }
         },
         "hr" : {
@@ -5059,18 +3739,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "현재 디스플레이에 ICC 프로파일을 적용하여 비디오의 RGB를 변환하여 스크린에 출력합니다. (SDR 모드에서만 작동합니다)"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"
           }
         },
         "nl" : {
@@ -5118,12 +3786,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Učitaj ICC profil za trenutni ekran i pomoću njega transformiši video RGB u prikaz ekrana (samo za SDR režim)"
           }
         },
@@ -5131,12 +3793,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ladda den aktuella skärmens ICC-profil och använd den för att omvandla video-RGB till skärm-output. (Gäller endast för SDR-läge)"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"
           }
         },
         "tr" : {
@@ -5149,12 +3805,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Завантажити профіль ICC для поточного дисплея і використовувати його для перетворення відео RGB на екран. (Тільки для режиму SDR)"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"
           }
         },
         "zh-Hans" : {
@@ -5175,22 +3825,10 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Gain to apply if the file has no ReplayGain tags.\"; ObjectID = \"m2n-yd-a4n\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
-        "af" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain to apply if the file has no ReplayGain tags."
-          }
-        },
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "احصل على التطبيق إذا لم يكن الملف يحتوي على علامات إعادة التشغيل."
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain to apply if the file has no ReplayGain tags."
           }
         },
         "cs" : {
@@ -5203,18 +3841,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Forstærkning, der anvendes, hvis filen ikke har afspilningsforstærknings-mærker."
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain to apply if the file has no ReplayGain tags."
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain to apply if the file has no ReplayGain tags."
           }
         },
         "en" : {
@@ -5235,34 +3861,10 @@
             "value" : "Ganancia para aplicar si el archivo no tiene etiquetas ReplayGain."
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain to apply if the file has no ReplayGain tags."
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain to apply if the file has no ReplayGain tags."
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gain à appliquer si le fichier n'a pas de tag ReplayGain."
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain to apply if the file has no ReplayGain tags."
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain to apply if the file has no ReplayGain tags."
           }
         },
         "hr" : {
@@ -5275,12 +3877,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Az alkalmazandó erősítés, ha a fájlban nincsenek ReplayGain címkék."
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain to apply if the file has no ReplayGain tags."
           }
         },
         "it" : {
@@ -5301,40 +3897,16 @@
             "value" : "파일에 ReplayGain 태그가 없는 경우 적용할 게인입니다."
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain to apply if the file has no ReplayGain tags."
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain to apply if the file has no ReplayGain tags."
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Versterking om toe te passen wanneer het bestand geen ReplayGain tags heeft."
           }
         },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain to apply if the file has no ReplayGain tags."
-          }
-        },
         "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ganho a aplicar se o ficheiro não tiver metadados de ganho."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain to apply if the file has no ReplayGain tags."
           }
         },
         "ro" : {
@@ -5349,34 +3921,10 @@
             "value" : "Усиление, применяемое, если в файле нет тегов коррекции громкости (ReplayGain)."
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain to apply if the file has no ReplayGain tags."
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain to apply if the file has no ReplayGain tags."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain to apply if the file has no ReplayGain tags."
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Förstärkning att applicera om filen inte har några ReplayGain-taggar."
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain to apply if the file has no ReplayGain tags."
           }
         },
         "tr" : {
@@ -5389,12 +3937,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Посилення для застосування, якщо у файлу немає тегів ReplayGain."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain to apply if the file has no ReplayGain tags."
           }
         },
         "zh-Hans" : {
@@ -5446,12 +3988,6 @@
           }
         },
         "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Video:"
-          }
-        },
-        "el" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Video:"
@@ -5547,13 +4083,13 @@
             "value" : "Video:"
           }
         },
-        "nb" : {
+        "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Video:"
           }
         },
-        "nl" : {
+        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Video:"
@@ -5596,12 +4132,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Video:"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Video:"
@@ -5667,12 +4197,6 @@
             "value" : "تفعيل تعيين الفأرة"
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable tone mapping images onto the display"
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5689,12 +4213,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tone Mapping von Bildern auf den Bildschirm aktivieren"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable tone mapping images onto the display"
           }
         },
         "en" : {
@@ -5715,18 +4233,6 @@
             "value" : "Activar imágenes de mapeo de tonos en la pantalla"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable tone mapping images onto the display"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable tone mapping images onto the display"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5737,12 +4243,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "אפשר תמונות מיפוי גוונים על גבי התצוגה"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable tone mapping images onto the display"
           }
         },
         "hr" : {
@@ -5779,18 +4279,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "디스플레이에 톤 매핑 이미지를 사용합니다"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable tone mapping images onto the display"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable tone mapping images onto the display"
           }
         },
         "nl" : {
@@ -5835,30 +4323,6 @@
             "value" : "Povoliť mapovanie tonality obrazu na displeji"
           }
         },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable tone mapping images onto the display"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable tone mapping images onto the display"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable tone mapping images onto the display"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable tone mapping images onto the display"
-          }
-        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5869,12 +4333,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Увімкнути тональне відображення зображень на дисплеї"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable tone mapping images onto the display"
           }
         },
         "zh-Hans" : {
@@ -5893,6 +4351,7 @@
     },
     "n3r-mP-f8V.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Label\"; ObjectID = \"n3r-mP-f8V\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -5901,11 +4360,11 @@
             "value" : "Label"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "n6V-Hw-yNt.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"hable\"; ObjectID = \"n6V-Hw-yNt\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -5914,8 +4373,7 @@
             "value" : "hable"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "nwg-2K-G2G.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Hardware decoder:\"; ObjectID = \"nwg-2K-G2G\";",
@@ -5955,12 +4413,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hardware-Dekoder:"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hardware decoder:"
           }
         },
         "en" : {
@@ -6053,12 +4505,6 @@
             "value" : "Aparatūras dekodēšana:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hardware decoder:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6104,12 +4550,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hardware decoder:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Hardverski dekoder:"
           }
         },
@@ -6117,12 +4557,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hårdvaruavkodare:"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hardware decoder:"
           }
         },
         "tr" : {
@@ -6173,12 +4607,6 @@
             "value" : "ديسيبل"
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6192,12 +4620,6 @@
           }
         },
         "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
-          }
-        },
-        "el" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "dB"
@@ -6221,18 +4643,6 @@
             "value" : "dB"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6245,12 +4655,6 @@
             "value" : "dB"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
-          }
-        },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6258,12 +4662,6 @@
           }
         },
         "hu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
-          }
-        },
-        "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "dB"
@@ -6287,18 +4685,6 @@
             "value" : "dB"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6317,12 +4703,6 @@
             "value" : "dB"
           }
         },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
-          }
-        },
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6335,31 +4715,7 @@
             "value" : "дБ"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
-          }
-        },
         "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
-          }
-        },
-        "ta" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "dB"
@@ -6375,12 +4731,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "дБ"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
           }
         },
         "zh-Hans" : {
@@ -6399,6 +4749,7 @@
     },
     "Q01-SJ-M3x.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"bt.2390\"; ObjectID = \"Q01-SJ-M3x\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -6407,8 +4758,7 @@
             "value" : "bt.2390"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "qzI-rq-PqO.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Algorithm:\"; ObjectID = \"qzI-rq-PqO\";",
@@ -6450,12 +4800,6 @@
             "value" : "Algorithmus:"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Algorithm:"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -6474,18 +4818,6 @@
             "value" : "Algoritmo:"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Algorithm:"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Algorithm:"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6496,12 +4828,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "אלגוריתם:"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Algorithm:"
           }
         },
         "hr" : {
@@ -6538,18 +4864,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "알고리즘:"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Algorithm:"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Algorithm:"
           }
         },
         "nl" : {
@@ -6594,28 +4908,10 @@
             "value" : "Algoritmus:"
           }
         },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Algorithm:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Algorithm:"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Algoritm:"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Algorithm:"
           }
         },
         "tr" : {
@@ -6628,12 +4924,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Алгоритм:"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Algorithm:"
           }
         },
         "zh-Hans" : {
@@ -6689,12 +4979,6 @@
             "value" : "HDR-Unterstützung aktivieren"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable HDR support"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6713,18 +4997,6 @@
             "value" : "Habilitar soporte HDR"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable HDR support"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable HDR support"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6735,12 +5007,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "הפעל תמיכת HDR"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable HDR support"
           }
         },
         "hr" : {
@@ -6777,18 +5043,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "HDR 지원 활성화"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable HDR support"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable HDR support"
           }
         },
         "nl" : {
@@ -6836,12 +5090,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enable HDR support"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Omogući podršku za HDR"
           }
         },
@@ -6849,12 +5097,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aktivera stöd för HDR"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable HDR support"
           }
         },
         "tr" : {
@@ -6867,12 +5109,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Увімкнути підтримку HDR"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable HDR support"
           }
         },
         "zh-Hans" : {
@@ -6927,12 +5163,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Deaktiviert"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disabled"
           }
         },
         "en" : {
@@ -7025,16 +5255,16 @@
             "value" : "Izslēgta"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Deaktivert"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Uitgeschakeld"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deaktivert"
           }
         },
         "pl" : {
@@ -7074,12 +5304,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disabled"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Onemogućeno"
@@ -7133,22 +5357,10 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Pre-amplification gain to apply to the ReplayGain gain.\"; ObjectID = \"rIW-XP-zGZ\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
-        "af" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pre-amplification gain to apply to the ReplayGain gain."
-          }
-        },
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "مكسب ما قبل التضخيم لتطبيقه على مكسب إعادة التثبيت."
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pre-amplification gain to apply to the ReplayGain gain."
           }
         },
         "cs" : {
@@ -7161,18 +5373,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Forforstærknings-forstærkning, der anvendes på afspilningsforstærkningen."
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pre-amplification gain to apply to the ReplayGain gain."
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pre-amplification gain to apply to the ReplayGain gain."
           }
         },
         "en" : {
@@ -7193,34 +5393,10 @@
             "value" : "Ganancia de preamplificación para aplicar a la ganancia de ReplayGain."
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pre-amplification gain to apply to the ReplayGain gain."
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pre-amplification gain to apply to the ReplayGain gain."
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gain de pré-amplification à appliquer au gain ReplayGain."
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pre-amplification gain to apply to the ReplayGain gain."
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pre-amplification gain to apply to the ReplayGain gain."
           }
         },
         "hr" : {
@@ -7233,12 +5409,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Az előerősítő erősítés, amelyet a ReplayGain erősítésre kell alkalmazni."
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pre-amplification gain to apply to the ReplayGain gain."
           }
         },
         "it" : {
@@ -7259,18 +5429,6 @@
             "value" : "ReplayGain에 적용할 Pre-amplification Gain."
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pre-amplification gain to apply to the ReplayGain gain."
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pre-amplification gain to apply to the ReplayGain gain."
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7281,18 +5439,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "...."
-          }
-        },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pre-amplification gain to apply to the ReplayGain gain."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pre-amplification gain to apply to the ReplayGain gain."
           }
         },
         "ro" : {
@@ -7307,36 +5453,6 @@
             "value" : "Коэффициент предусиления, применяемый к коррекции громкости ReplayGain."
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pre-amplification gain to apply to the ReplayGain gain."
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pre-amplification gain to apply to the ReplayGain gain."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pre-amplification gain to apply to the ReplayGain gain."
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pre-amplification gain to apply to the ReplayGain gain."
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pre-amplification gain to apply to the ReplayGain gain."
-          }
-        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7347,12 +5463,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Коефіцієнт попереднього підсилення для застосування до коефіцієнта підсилення ReplayGain."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pre-amplification gain to apply to the ReplayGain gain."
           }
         },
         "zh-Hans" : {
@@ -7407,12 +5517,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bevorzugtes Audiogerät:"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preferred audio device:"
           }
         },
         "en" : {
@@ -7505,12 +5609,6 @@
             "value" : "Vēlamā skaņas ierīce:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preferred audio device:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7556,12 +5654,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Preferred audio device:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Željeni audio-uređaj:"
           }
         },
@@ -7569,12 +5661,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Föredragen ljudenhet:"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preferred audio device:"
           }
         },
         "tr" : {
@@ -7644,12 +5730,6 @@
           }
         },
         "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Audio:"
-          }
-        },
-        "el" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Audio:"
@@ -7745,16 +5825,16 @@
             "value" : "Skaņa:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lyd:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Audio:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lyd:"
           }
         },
         "pl" : {
@@ -7794,12 +5874,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Audio:"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Audio:"
@@ -7865,12 +5939,6 @@
             "value" : "الخوارزمية لاستخدامها في رسم خرائط النغمات على الشاشة."
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Algorithm to use for tone mapping images onto the display."
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7887,12 +5955,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Algorithmus zu benutzen für das Tone Mapping von Bildern auf den Bildschirm."
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Algorithm to use for tone mapping images onto the display."
           }
         },
         "en" : {
@@ -7913,18 +5975,6 @@
             "value" : "Algoritmo a usar para mapear los tonos de imágenes a la pantalla."
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Algorithm to use for tone mapping images onto the display."
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Algorithm to use for tone mapping images onto the display."
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7935,12 +5985,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "אלגוריתם לשימוש עבור מיפוי גוונים על גבי התצוגה."
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Algorithm to use for tone mapping images onto the display."
           }
         },
         "hr" : {
@@ -7977,18 +6021,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "이미지를 디스플레이에 톤 매핑하는 데 사용할 알고리즘입니다."
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Algorithm to use for tone mapping images onto the display."
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Algorithm to use for tone mapping images onto the display."
           }
         },
         "nl" : {
@@ -8033,30 +6065,6 @@
             "value" : "Algoritmus na mapovanie tonality obrazu na displeji."
           }
         },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Algorithm to use for tone mapping images onto the display."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Algorithm to use for tone mapping images onto the display."
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Algorithm to use for tone mapping images onto the display."
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Algorithm to use for tone mapping images onto the display."
-          }
-        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8067,12 +6075,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Алгоритм для тонального відображення зображень на дисплеї."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Algorithm to use for tone mapping images onto the display."
           }
         },
         "zh-Hans" : {
@@ -8127,12 +6129,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Automatisch"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Auto"
           }
         },
         "en" : {
@@ -8225,16 +6221,16 @@
             "value" : "Automātiska"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Auto"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Automatisch"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto"
           }
         },
         "pl" : {
@@ -8274,12 +6270,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Auto"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Automatski"
@@ -8360,19 +6350,13 @@
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Antal tråde:"
+            "value" : "Antal af tråde:"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Anzahl der Threads:"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Number of threads:"
           }
         },
         "en" : {
@@ -8465,12 +6449,6 @@
             "value" : "Pavedienu skaits:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Number of threads:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8498,7 +6476,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Număr de threaduri:"
+            "value" : "Numărul firelor:"
           }
         },
         "ru" : {
@@ -8516,12 +6494,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Number of threads:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Broj niti:"
           }
         },
@@ -8529,12 +6501,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Antal trådar:"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Number of threads:"
           }
         },
         "tr" : {
@@ -8571,6 +6537,7 @@
     },
     "uey-Ao-wwZ.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"auto\"; ObjectID = \"uey-Ao-wwZ\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -8579,8 +6546,7 @@
             "value" : "auto"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "up6-6A-4sn.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"S/PDIF output:\"; ObjectID = \"up6-6A-4sn\";",
@@ -8620,12 +6586,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "S/PDIF-Ausgabe:"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "S/PDIF output:"
           }
         },
         "en" : {
@@ -8718,12 +6678,6 @@
             "value" : "S/PDIF izeja:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "S/PDIF output:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8769,12 +6723,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "S/PDIF output:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "S/PDIF izlaz:"
           }
         },
@@ -8782,12 +6730,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "S/PDIF-utmatning:"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "S/PDIF output:"
           }
         },
         "tr" : {
@@ -8838,12 +6780,6 @@
             "value" : "تعقب المكسب"
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Track gain"
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8854,18 +6790,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sporforstærkning"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Track gain"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Track gain"
           }
         },
         "en" : {
@@ -8886,18 +6810,6 @@
             "value" : "Rastrear ganancia"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Track gain"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Track gain"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8910,28 +6822,10 @@
             "value" : "Gain רצועה"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Track gain"
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Track gain"
-          }
-        },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zeneszám erősítés"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Track gain"
           }
         },
         "it" : {
@@ -8952,40 +6846,16 @@
             "value" : "트랙 음량"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Track gain"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Track gain"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nummer versterking"
           }
         },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Track gain"
-          }
-        },
         "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ganho de faixa"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Track gain"
           }
         },
         "ro" : {
@@ -9000,36 +6870,6 @@
             "value" : "Усиление трека"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Track gain"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Track gain"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Track gain"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Track gain"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Track gain"
-          }
-        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9040,12 +6880,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Посилення доріжки"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Track gain"
           }
         },
         "zh-Hans" : {
@@ -9100,12 +6934,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bevorzugte Sprache:"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preferred language:"
           }
         },
         "en" : {
@@ -9198,12 +7026,6 @@
             "value" : "Vēlamā valoda:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preferred language:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9247,12 +7069,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preferred language:"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Željeni jezik:"
@@ -9342,12 +7158,6 @@
             "value" : "Angestrebter Spitzenwert:"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Target peak:"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -9366,18 +7176,6 @@
             "value" : "Pico objetivo:"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Target peak:"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Target peak:"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9388,12 +7186,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "בהירות מרבית:"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Target peak:"
           }
         },
         "hr" : {
@@ -9430,18 +7222,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "최대 밝기:"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Target peak:"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Target peak:"
           }
         },
         "nl" : {
@@ -9486,30 +7266,6 @@
             "value" : "Cieľová špička:"
           }
         },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Target peak:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Target peak:"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Target peak:"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Target peak:"
-          }
-        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9520,12 +7276,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Пікова яскравість:"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Target peak:"
           }
         },
         "zh-Hans" : {
@@ -9546,22 +7296,10 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Adjust volume gain according to ReplayGain values stored in the file metadata.\"; ObjectID = \"y61-Ah-c92\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
-        "af" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adjust volume gain according to ReplayGain values stored in the file metadata."
-          }
-        },
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "ضبط كسب الصوت وفقا لقيم ReplayGain المخزنة في البيانات الوصفية للملفات."
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adjust volume gain according to ReplayGain values stored in the file metadata."
           }
         },
         "cs" : {
@@ -9574,18 +7312,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Juster lydstyrkeforøgelse i henhold til afspilningsforstærknings-værdier gemt i filens metadata."
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adjust volume gain according to ReplayGain values stored in the file metadata."
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adjust volume gain according to ReplayGain values stored in the file metadata."
           }
         },
         "en" : {
@@ -9606,34 +7332,10 @@
             "value" : "Ajuste la ganancia de volumen de acuerdo a los valores de ReplayGain almacenados en los metadatos del archivo."
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adjust volume gain according to ReplayGain values stored in the file metadata."
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adjust volume gain according to ReplayGain values stored in the file metadata."
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ajustez le gain de volume en fonction des valeurs de ReplayGain stockées dans les métadonnées du fichier."
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adjust volume gain according to ReplayGain values stored in the file metadata."
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adjust volume gain according to ReplayGain values stored in the file metadata."
           }
         },
         "hr" : {
@@ -9646,12 +7348,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "A hangerősítés beállítása a fájl metaadataiban tárolt ReplayGain értékek szerint."
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adjust volume gain according to ReplayGain values stored in the file metadata."
           }
         },
         "it" : {
@@ -9672,40 +7368,16 @@
             "value" : "볼륨 음량을 파일 메타데이터에 저장되어 있는 ReplayGain 값에 따라 조정합니다."
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adjust volume gain according to ReplayGain values stored in the file metadata."
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adjust volume gain according to ReplayGain values stored in the file metadata."
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pas volume versterking aan volgens ReplayGain waarden opgeslagen in de bestandsmetadata."
           }
         },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adjust volume gain according to ReplayGain values stored in the file metadata."
-          }
-        },
         "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ajustar o ganho conforme o reportado nos metadados do ficheiro."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adjust volume gain according to ReplayGain values stored in the file metadata."
           }
         },
         "ro" : {
@@ -9720,36 +7392,6 @@
             "value" : "Отрегулируйте увеличение громкости в соответствии со значениями выравнивания громкости, хранящимися в метаданных файла."
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adjust volume gain according to ReplayGain values stored in the file metadata."
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adjust volume gain according to ReplayGain values stored in the file metadata."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adjust volume gain according to ReplayGain values stored in the file metadata."
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adjust volume gain according to ReplayGain values stored in the file metadata."
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adjust volume gain according to ReplayGain values stored in the file metadata."
-          }
-        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9760,12 +7402,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Регулювання посилення гучності відповідно до значень ReplayGain, які зберігаються в метаданих файлу."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adjust volume gain according to ReplayGain values stored in the file metadata."
           }
         },
         "zh-Hans" : {
@@ -9784,6 +7420,7 @@
     },
     "yd0-W0-bHk.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"linear\"; ObjectID = \"yd0-W0-bHk\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -9792,8 +7429,7 @@
             "value" : "linear"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "YUr-aJ-xfC.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"Force dedicated GPU\"; ObjectID = \"YUr-aJ-xfC\";",
@@ -9833,12 +7469,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dedizierte GPU erzwingen"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Force dedicated GPU"
           }
         },
         "en" : {
@@ -9883,12 +7513,6 @@
             "value" : "כפה שימוש בGPU ייעודי"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Force dedicated GPU"
-          }
-        },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9929,12 +7553,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Piespiest izmantot diskrēto videokarti"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Force dedicated GPU"
           }
         },
         "nl" : {
@@ -9982,12 +7600,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Force dedicated GPU"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Nametni namensku grafičku karticu"
           }
         },
@@ -9995,12 +7607,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tvinga dedikerad GPU"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Force dedicated GPU"
           }
         },
         "tr" : {
@@ -10039,22 +7645,10 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Audio driver:\"; ObjectID = \"Zco-Ba-Idk\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
-        "af" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Audio driver:"
-          }
-        },
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "مشغل الصوت:"
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Audio driver:"
           }
         },
         "cs" : {
@@ -10075,12 +7669,6 @@
             "value" : "Audiotreiber:"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Audio driver:"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -10099,18 +7687,6 @@
             "value" : "Controlador de audio:"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Audio driver:"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Audio driver:"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10123,28 +7699,10 @@
             "value" : "מנהל התקן של שמע:"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Audio driver:"
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Audio driver:"
-          }
-        },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Audioeszköz:"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Audio driver:"
           }
         },
         "it" : {
@@ -10165,18 +7723,6 @@
             "value" : "오디오 드라이버:"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Audio driver:"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Audio driver:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10195,12 +7741,6 @@
             "value" : "Controlador de áudio:"
           }
         },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Audio driver:"
-          }
-        },
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10213,36 +7753,6 @@
             "value" : "Драйвер аудио:"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Audio driver:"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Audio driver:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Audio driver:"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Audio driver:"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Audio driver:"
-          }
-        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10253,12 +7763,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Аудіо драйвер:"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Audio driver:"
           }
         },
         "zh-Hans" : {
@@ -10279,12 +7783,6 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Enable HDR mode by default when playing HDR videos.\"; ObjectID = \"ZgQ-bc-yEE\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
-        "af" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable HDR mode by default when playing HDR videos."
-          }
-        },
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10315,12 +7813,6 @@
             "value" : "HDR-Modus standardmäßig bei der Wiedergabe von HDR-Videos aktivieren."
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable HDR mode by default when playing HDR videos."
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -10339,18 +7831,6 @@
             "value" : "Habilitar soporte HDR por defecto cuando se reproduzcan vídeos HDR."
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable HDR mode by default when playing HDR videos."
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable HDR mode by default when playing HDR videos."
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10361,12 +7841,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "הפעל מצב HDR כברירת מחדל בעת הפעלת סרטוני HDR."
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable HDR mode by default when playing HDR videos."
           }
         },
         "hr" : {
@@ -10403,18 +7877,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "HDR 영상을 재생할 때 HDR 모드를 기본으로 활성화합니다."
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable HDR mode by default when playing HDR videos."
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable HDR mode by default when playing HDR videos."
           }
         },
         "nl" : {
@@ -10462,12 +7924,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enable HDR mode by default when playing HDR videos."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Podrazumevano omogući HDR režim tokom reprodukcije HDR video-zapisa."
           }
         },
@@ -10475,12 +7931,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aktivera HDR-läge när HDR-videor spelas upp."
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable HDR mode by default when playing HDR videos."
           }
         },
         "tr" : {
@@ -10493,12 +7943,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Увімкнути режим HDR за замовчуванням при відтворенні HDR відео."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable HDR mode by default when playing HDR videos."
           }
         },
         "zh-Hans" : {
@@ -10531,12 +7975,6 @@
             "value" : "كسب الألبوم"
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Album gain"
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10547,18 +7985,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Albumforstærkning"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Album gain"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Album gain"
           }
         },
         "en" : {
@@ -10579,18 +8005,6 @@
             "value" : "Ganancia del álbum"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Album gain"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Album gain"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10603,12 +8017,6 @@
             "value" : "Gain אלבום"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Album gain"
-          }
-        },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10619,12 +8027,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Album erősítés"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Album gain"
           }
         },
         "it" : {
@@ -10645,40 +8047,16 @@
             "value" : "앨범 음량"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Album gain"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Album gain"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Album versterking"
           }
         },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Album gain"
-          }
-        },
         "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ganho de álbum"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Album gain"
           }
         },
         "ro" : {
@@ -10693,36 +8071,6 @@
             "value" : "Усиление альбома"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Album gain"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Album gain"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Album gain"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Album gain"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Album gain"
-          }
-        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10733,12 +8081,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Посилення альбому"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Album gain"
           }
         },
         "zh-Hans" : {
@@ -10771,12 +8113,6 @@
             "value" : "تعديل المكتسب:"
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain adjustment:"
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10787,12 +8123,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Forstærkningsjustering:"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain adjustment:"
           }
         },
         "el" : {
@@ -10819,18 +8149,6 @@
             "value" : "Ajuste de ganancia:"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain adjustment:"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain adjustment:"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10843,12 +8161,6 @@
             "value" : "התאמת Gain:"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain adjustment:"
-          }
-        },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10859,12 +8171,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erősítés beállítás:"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain adjustment:"
           }
         },
         "it" : {
@@ -10885,40 +8191,16 @@
             "value" : "음량 조정:"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain adjustment:"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain adjustment:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Versterking aanpassing:"
           }
         },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain adjustment:"
-          }
-        },
         "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ajuste de ganho:"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain adjustment:"
           }
         },
         "ro" : {
@@ -10933,34 +8215,10 @@
             "value" : "Регулировка усиления:"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain adjustment:"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain adjustment:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain adjustment:"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Förstärkningsjustering:"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain adjustment:"
           }
         },
         "tr" : {
@@ -10973,12 +8231,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Регулювання посилення:"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain adjustment:"
           }
         },
         "zh-Hans" : {

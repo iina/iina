@@ -2,13 +2,13 @@
 "02L-0u-zae.title" = "Kaydet";
 
 /* Class = "NSTableColumn"; headerCell.title = "Filter String"; ObjectID = "4g6-LW-373"; */
-"4g6-LW-373.headerCell.title" = "Filtre Dizisi";
+"4g6-LW-373.headerCell.title" = "Süzgeç Dizisi";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "6fq-yx-3dE"; */
 "6fq-yx-3dE.title" = "Vazgeç";
 
 /* Class = "NSTextFieldCell"; title = "By saving a filter, you can enable or disable it conveniently and even assign a shortcut key to it."; ObjectID = "8JN-kb-kGF"; */
-"8JN-kb-kGF.title" = "Filtreyi kaydederseniz ve (isteğe bağlı) bir klavye kestirmesi eklerseniz onu hızlıca etkinleştirebilir veya kapatabilirsiniz.";
+"8JN-kb-kGF.title" = "Süzgeci kaydederseniz ve (isteğe bağlı) bir klavye kestirmesi eklerseniz onu hızlıca etkinleştirebilir veya kapatabilirsiniz.";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "9Au-ZV-KXN"; */
 "9Au-ZV-KXN.title" = "Vazgeç";
@@ -17,16 +17,16 @@
 "9k2-lm-YGD.title" = "Ad:";
 
 /* Class = "NSTextFieldCell"; title = "Edit Filter"; ObjectID = "Dab-w9-6TY"; */
-"Dab-w9-6TY.title" = "Filtreyi Düzenle";
+"Dab-w9-6TY.title" = "Süzgeci Düzenle";
 
 /* Class = "NSWindow"; title = "Filters"; ObjectID = "F0z-JX-Cv5"; */
-"F0z-JX-Cv5.title" = "Filtreler";
+"F0z-JX-Cv5.title" = "Süzgeçler";
 
 /* Class = "NSTextFieldCell"; title = "Name:"; ObjectID = "IYf-IE-5cL"; */
 "IYf-IE-5cL.title" = "Ad:";
 
 /* Class = "NSTextFieldCell"; title = "Save Filter"; ObjectID = "KGV-G1-A2l"; */
-"KGV-G1-A2l.title" = "Filtreyi Kaydet";
+"KGV-G1-A2l.title" = "Süzgeci Kaydet";
 
 /* Class = "NSTextFieldCell"; title = "Shortcut key:"; ObjectID = "M9z-ss-1Ma"; */
 "M9z-ss-1Ma.title" = "Klavye kestirmesi:";
@@ -47,10 +47,10 @@
 "ljR-R1-mo7.title" = "Ekle";
 
 /* Class = "NSTextFieldCell"; title = "Saved filters"; ObjectID = "m5X-Zl-aOj"; */
-"m5X-Zl-aOj.title" = "Kayıtlı filtreler";
+"m5X-Zl-aOj.title" = "Kayıtlı süzgeçler";
 
 /* Class = "NSTextFieldCell"; title = "Filter string:"; ObjectID = "t9F-EU-fKj"; */
-"t9F-EU-fKj.title" = "Filtre karakter dizisi:";
+"t9F-EU-fKj.title" = "Süzgeç dizisi:";
 
 /* Class = "NSButtonCell"; title = "Save"; ObjectID = "tPs-K2-ZPz"; */
 "tPs-K2-ZPz.title" = "Kaydet";

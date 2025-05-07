@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "Du bruger en %@ version af IINA";
 "initial.beta.desc" = "Hvis du ønsker at vende tilbage til en udgivelsesversion, skal du fjerne markeringen af \"modtag betaopdateringer\" fra Indstillinger > Generelt, og installere en stabil udgivelse fra vores <a href=\"https://iina.io\">officielle hjemmeside</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.nightly.desc" = "Nightly er ikke anbefalet til daglig brug. I øjeblikket understøtter Nightly-versioner ikke automatisk opdatering. Du skal manuelt downloade nyere builds fra vores <a href=\"https://nightly.iina.io\">nightly-hjemmeside</a>.";
 "initial.debug.desc" = "Debug builds er normalt ikke optimeret til ydeevne, så det anbefales ikke at blive brugt til daglig brug. Debug builds understøtter ikke automatisk opdatering.";
 "initial.bug_report" = "Meld fejl via <a href=\"https://github.com/iina/iina/issues\">Github Issues</a>.";
 
@@ -35,7 +35,7 @@
 "inspector.error" = "Fejl";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Indlæser... %d%%";
+"main.buffering_indicator" = "Indlæser… %d%%";
 "main.opening_stream" = "Åbner stream…";
 "osc.precision" = "Præcision";
 "osc.1s" = "1 sekund";
@@ -44,16 +44,16 @@
 "osc.1ms" = "1 millisekund";
 
 // QuickSettingViewController.swift
-"quicksetting.item_default" = "Standart";
+"quicksetting.item_default" = "Standard";
 "quicksetting.item_none" = "Ingen";
 "quicksetting.hwdec" = "Hardwareafkodning";
 "quicksetting.deinterlace" = "Deinterlace";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Skjul";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.reset_speed" = "Nulstil hastighed til 1x";
 
 // EQ Presets
-"eq.preset.flat" = "Flat";
+"eq.preset.flat" = "Flad";
 "eq.preset.acoustic" = "Akustisk";
 "eq.preset.classical" = "Klassisk";
 "eq.preset.dance" = "Dance";
@@ -65,64 +65,64 @@
 "eq.preset.increase_vocal" = "Forøg vokal";
 "eq.preset.jazz" = "Jazz";
 "eq.preset.latin" = "Latin";
-"eq.preset.loundness" = "Loundness";
+"eq.preset.loundness" = "Lydstyrke";
 "eq.preset.lounge" = "Lounge";
 "eq.preset.piano" = "Piano";
 "eq.preset.pop" = "Pop";
 "eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reducer Bas";
+"eq.preset.reduce_bass" = "Reducer bas";
 "eq.preset.reduce_treble" = "Reducer diskant";
 "eq.preset.rock" = "Rock";
 "eq.preset.small_speaker" = "Små højttalere";
 "eq.preset.spoken_word" = "Talte ord";
 
-"alert.eq.new_profile.title" = "New EQ Profile";
-"alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Currnet Profile";
-"alert.eq.rename.message" = "Please enter a new profile name.";
+"alert.eq.new_profile.title" = "Ny EQ-profil";
+"alert.eq.new_profile.message" = "Indtast venligst et profilnavn.";
+"alert.eq.rename.title" = "Skift navn på nuværende profil";
+"alert.eq.rename.message" = "Indtast venligst et nyt profilnavn.";
 
 // OSDMessage.swift
 "osd.pause" = "Pause";
 "osd.resume" = "Genoptag";
-"osd.volume" = "Volumen: %i";
-"osd.speed" = "Speed: %@x";
-"osd.aspect" = "Aspekt Ratio: %@";
+"osd.volume" = "Lydstyrke: %i";
+"osd.speed" = "Hastighed: %@x";
+"osd.aspect" = "Billedformat: %@";
 "osd.crop" = "Beskær: %@";
 "osd.rotate" = "Roter: %i°";
 "osd.deinterlace" = "Deinterlace: %@";
 "osd.hwdec" = "Hardwareafkodning: %@";
-"osd.audio_delay.nodelay" = "Lydforsinkelse: Ingen forsinkelsen";
-"osd.audio_delay.later" = "Lydforsinkelse: %.2fs Senere";
+"osd.audio_delay.nodelay" = "Lydforsinkelse: Ingen forsinkelse";
+"osd.audio_delay.later" = "Lydforsinkelse: %.2fs senere";
 "osd.audio_delay.earlier" = "Lydforsinkelse: %.2fs tidligere";
-"osd.sub_delay.nodelay" = "Undertekstforsinkelse: Ingen forsinkelse";
-"osd.sub_delay.later" = "Undertekstforsinkelse: %.2fs Senere";
-"osd.sub_delay.earlier" = "Undertekstforsinkelse: %.2fs Tidligere";
-"osd.subtitle_pos" = "Undertekstposition: %.1f";
-"osd.sub_hidden" = "Subtitles Hidden";
-"osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
-"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
-"osd.sub_second_visible" = "Secondary Subtitles Visible";
+"osd.sub_delay.nodelay" = "Undertekst forsinkelse: Ingen forsinkelse";
+"osd.sub_delay.later" = "Undertekst forsinkelse: %.2fs senere";
+"osd.sub_delay.earlier" = "Undertekst forsinkelse: %.2fs tidligere";
+"osd.subtitle_pos" = "Undertekst position: %.1f";
+"osd.sub_hidden" = "Undertekster er skjult";
+"osd.sub_visible" = "Undertekster er synlige";
+"osd.sub_second_delay.nodelay" = "Forsinkelse af sekundære undertekster: ingen forsinkelse";
+"osd.sub_second_delay.later" = "Forsinkelse af sekundære undertekster: %.2fs senere";
+"osd.sub_second_delay.earlier" = "Forsinkelse af sekundære undertekster: %.2fs tidligere";
+"osd.sub_second_hidden" = "Sekundære undertekster er skjulte";
+"osd.sub_second_pos" = "Sekundære underteksters position: %.1f";
+"osd.sub_second_visible" = "Sekundære undertekster er synlige";
 "osd.mute" = "Lydløs";
 "osd.unmute" = "Lydløs fra";
-"osd.screenshot" = "Screenshot taget";
+"osd.screenshot" = "Skærmbillede taget";
 "osd.abloop.a" = "AB-Løkke: A";
 "osd.abloop.b" = "AB-Løkke: B";
-"osd.abloop.clear" = "AB-Løkke: Tømt";
+"osd.abloop.clear" = "AB-Løkke: Ryddet";
 "osd.stop" = "Stop";
 "osd.chapter" = "Kapitel: %@";
-"osd.subtitle_scale" = "Undertekstskale: %.2fx";
-"osd.add_to_playlist" = "Tilføj %i filer til Playlist";
-"osd.clear_playlist" = "Playliste tømt";
+"osd.subtitle_scale" = "Undertekst skala: %.2fx";
+"osd.add_to_playlist" = "Tilføj %i filer til spilleliste";
+"osd.clear_playlist" = "Spilleliste ryddet";
 "osd.video_eq.contrast" = "Kontrast: %i";
 "osd.video_eq.gamma" = "Gamma: %i";
 "osd.video_eq.hue" = "Hue: %i";
-"osd.video_eq.saturation" = "Saturation: %i";
+"osd.video_eq.saturation" = "Mætning: %i";
 "osd.video_eq.brightness" = "Lysstyrke: %i";
-"osd.find_online_sub" = "Leder efter undertekster online...";
+"osd.find_online_sub" = "Leder efter undertekster online…";
 "osd.find_online_sub.source" = "fra";
 "osd.sub_not_found" = "Ingen undertekster fundet";
 "osd.sub_found" = "%d undertekster fundet.";
@@ -134,11 +134,11 @@
 "osd.cannot_login" = "Kan ikke logge ind";
 "osd.canceled" = "Annulleret";
 "osd.cannot_connect" = "Kan ikke forbinde";
-"osd.timed_out" = "Tiden løb ud";
+"osd.timed_out" = "Intet svar";
 "osd.filter_added" = "Tilføjet filter: %@";
 "osd.filter_removed" = "Fjernet filter";
-"osd.file_loop" = "Gentag enkelt fil";
-"osd.playlist_loop" = "Gentag afspilningsliste";
+"osd.file_loop" = "Gentag medie";
+"osd.playlist_loop" = "Gentag spilleliste";
 "osd.no_loop" = "Deaktiver gentagelse";
 
 "preference.title" = "Indstillinger";
@@ -162,59 +162,70 @@
 
 "preference.enable_adv_settings" = "Aktiver avancerede indstillinger";
 
-"preference.sub_override_level.no" = "no";
+"preference.sub_override_level.no" = "nej";
 "preference.sub_override_level.force" = "gennemtving";
 "preference.sub_override_level.scale" = "skaler";
 "preference.sub_override_level.strip" = "strip";
 "preference.sub_override_level.yes" = "ja";
 
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
+"preference.sub_override_level.descriptive_text.no" = "Gengiv undertekster som angivet af undertekst-scripts, uden tilsidesættelser.";
+"preference.sub_override_level.descriptive_text.force" = "Anvendes alle undertekst-stile.";
+"preference.sub_override_level.descriptive_text.scale" = "Anvend størrelsesindstillingen sammen med stilindstillingerne i denne sektion.";
+"preference.sub_override_level.descriptive_text.strip" = "Fjern radikalt alle ASS-mærker og -stile fra underteksten.";
+"preference.sub_override_level.descriptive_text.yes" = "Anvend alle stilindstillingerne i denne sektion.";
 
-"menu.volume" = "Volumen: %d";
-"menu.volume_muted" = "Lydstyrke: %d (Lydløs)";
+"preference.ytdl_plugin_not_installed" = "Installer Online Media-tilføjelsen fra \"Tilføjelser > Installer fra GitHub\" for at få fornøjelsen af nye avancerede funktioner såsom at hente videoer og automatiske youtube-dl-opdateringer.";
+"preference.ytdl_plugin_installed" = "Den indbyggede youtube-dl-understøttelse er slået fra, siden du har Online Media-tilføjelsen installeret.";
+
+"menu.volume" = "Lydstyrke: %d";
+"menu.volume_muted" = "Lydstyrke: %d (lydløs)";
 "menu.audio_delay" = "Lydforsinkelse: %.2fs";
-"menu.sub_delay" = "Undertekstforsinkelse: %.2fs";
+"menu.sub_delay" = "Undertekst forsinkelse: %.2fs";
 "menu.sub_hide" = "Skjul undertekster";
 "menu.sub_show" = "Vis undertekster";
 "menu.sub_second_hide" = "Skjul sekundære undertekster";
 "menu.sub_second_show" = "Vis sekundære undertekster";
-"menu.fullscreen" = "Gå til fuldskærmsvisning";
-"menu.exit_fullscreen" = "Afslut fuldskærmsvisning";
-"menu.pip" = "Gå til Picture-in-Picture";
-"menu.exit_pip" = "Afslut Picture-in-Picture";
-"menu.mini_player" = "Gå til musiktilstand";
+"menu.fullscreen" = "Start fuld skærm";
+"menu.exit_fullscreen" = "Afslut fuld skærm";
+"menu.pip" = "Start billede-i-billede";
+"menu.exit_pip" = "Afslut billede-i-billede";
+"menu.mini_player" = "Start musiktilstand";
 "menu.exit_mini_player" = "Afslut musiktilstand";
 "menu.pause" = "Pause";
 "menu.resume" = "Genoptag";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "Hastighed: %@x";
 "menu.chapters" = "Vis kapitel-panel";
 "menu.hide_chapters" = "Skjul kapitel-panel";
-"menu.playlist" = "Vis Playlist Panel";
-"menu.hide_playlist" = "Hide Playlist Panel";
-"menu.video" = "Show Video Panel";
-"menu.hide_video" = "Hide Video Panel";
+"menu.playlist" = "Vis spilleliste panel";
+"menu.hide_playlist" = "Skjul spilleliste panel";
+"menu.video" = "Vis videopanel";
+"menu.hide_video" = "Skjul videopanel";
 "menu.audio" = "Vis lydpanel";
 "menu.hide_audio" = "Skjul lydpanel";
-"menu.subtitles" = "Show Subtitles Panel";
-"menu.hide_subtitles" = "Hide Subtitles Panel";
+"menu.subtitles" = "Vis undertekst panel";
+"menu.hide_subtitles" = "Skjul undertekst panel";
 
 "menu.seek_forward" = "Spol frem %.0fs";
 "menu.seek_backward" = "Spol tilbage %.0fs";
-"menu.speed_up" = "Speed Up by %@x";
-"menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "Volumen + %.0f%%";
-"menu.volume_down" = "Volumen - %.0f%%";
+"menu.speed_up" = "Øg hastighed med %@x";
+"menu.speed_down" = "Sænk hastighed med %@x";
+"menu.volume_up" = "Lydstyrke + %.0f%%";
+"menu.volume_down" = "Lydstyrke - %.0f%%";
 "menu.audio_delay_up" = "Lydforsinkelse + %.1fs";
 "menu.audio_delay_down" = "Lydforsinkelse - %.1fs";
-"menu.sub_delay_up" = "Undertekstforsinkelse + %.1fs";
-"menu.sub_delay_down" = "Undertekstforsinkelse - %.1fs";
+"menu.sub_delay_up" = "Undertekst forsinkelse + %.1fs";
+"menu.sub_delay_down" = "Undertekst forsinkelse - %.1fs";
 
 "menu.crop_custom" = "Brugerdefineret...";
 "menu.find_online_sub" = "Find online undertekster fra %@";
+
+"menu.manage_plugins" = "Administrer tilføjelser...";
+"menu.developer_tool" = "Udviklingsværktøjer";
+"menu.more_plugin" = "Mere…";
+"menu.conflicting_shortcuts" = "Konflikter mellem tastaturgenveje…";
+"menu.reload_plugins" = "Genindlæs alle tilføjelser";
+"menu.show_plugins_panel" = "Vis tilføjelsespanel";
+"menu.hide_plugins_panel" = "Skjul tilføjelsespanel";
 
 "track.audio" = "Lyd";
 "track.none" = "<Intet>";
@@ -231,44 +242,44 @@
 "alert.title_warning" = "Advarsel";
 "alert.title_info" = "Information";
 
-"alert.fatal_error" = "Fatal fejl: %@ \nProgrammet afsluttes.";
+"alert.fatal_error" = "Kritisk fejl: %@ \nProgrammet afsluttes.";
 "alert.mpv_error" = "Intern fejl %@ (%@) under ændring af %@.";
 
-"alert.unsupported_audio" = "Ikke supporteret ekstern lydfil.";
-"alert.unsupported_sub" = "Ikke supporteret ekstern undertekster.";
-"alert.unsupported_url" = "Ikke supporteret URL.";
-"alert.wrong_url_format" = "Forkert URL format.";
+"alert.unsupported_audio" = "Ikke understøttet ekstern lydfil.";
+"alert.unsupported_sub" = "Ikke understøttet ekstern undertekst.";
+"alert.unsupported_url" = "Ikke understøttet URL.";
+"alert.wrong_url_format" = "Forkert URL-format.";
 
-"alert.error_open" = "Kan ikke åbne fil eller stream!";
-"alert.error_finding_file" = "Kan ikke finde %@ !";
+"alert.error_open" = "Kan ikke åbne arkiv eller stream!";
+"alert.error_finding_file" = "Kan ikke finde %@!";
 "alert.error_loading_script" = "Kan ikke loade script %@!";
 "alert.error_saving_file" = "Fejl under forsøg på at gemme %@: %@";
-"alert.error_deleting_file" = "Kan ikke slette fil.";
+"alert.error_deleting_file" = "Kan ikke slette arkiv.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "Værdien \"%@\" er ikke valid.\nAngiv venligst en værdi mellem 10 og 10000 eller 0.";
 
 "alert.config.new.title" = "Ny input konfiguration";
 "alert.config.new.message" = "Indtast et navn til den nye konfiguration.";
 "alert.config.duplicate.title" = "Dupliker konfiguration";
 "alert.config.duplicate.message" = "Indtast et navn til den dublikerede konfiguration.";
 "alert.config.empty_name" = "Navnet kan ikke være tomt.";
-"alert.config.name_existing" = "A config with the same name already exists.";
+"alert.config.name_existing" = "En konfiguration med det samme navn findes allerede.";
 "alert.config.file_existing.title" = "Filen eksistere allerede";
-"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
-"alert.config.cannot_create" = "Kan ikke oprette config filen!";
-"alert.config.cannot_write" = "Kan ikke skrive til config filen!";
-"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.file_existing.message" = "En konfigurationsfil med det samme filnavn findes allerede. Vælg OK for at vise filen i Finder.";
+"alert.config.cannot_create" = "Kan ikke oprette konfigurationsfilen!\n%@";
+"alert.config.cannot_write" = "Kan ikke skrive til konfigurationsfilen!";
+"alert.config.rename.title" = "Ændre navn på inputkonfiguration";
 "alert.config.rename.message" = "Indtast et navn til den nye konfiguration.";
 
 "alert.filter.incorrect" = "Fejl opstået under anvendelse af filtre. Venligst tjek dit parameter format.";
 "alert.add_filter.title" = "Nyt filter";
 "alert.add_filter.message" = "Venligst indtast en filter streng af mpvs vf eller af kommando.";
 
-"alert.keybinding_config.error" = "Fejl under opsætning af tastegenveje \"%@\"! Går tilbage til standart IINA opsætning. Venligst tjek konfigurationen.";
+"alert.keybinding_config.error" = "Fejl under opsætning af tastegenveje \"%@\"! Går tilbage til standard IINA opsætning. Venligst tjek konfigurationen.";
 
 "alert.extra_option.cannot_read" = "Kan ikke læse brugerdefinerede ekstra mpv indstillinger.";
 "alert.extra_option.empty" = "Nøgle eller værdi må ikke være tom!";
-"alert.extra_option.error" = "Fejl under indstilling af --%@=%@ med værdi %d. Venligst tjek dine ekstra indstilliger i preferancer > avanceret.";
+"alert.extra_option.error" = "Fejl under indstilling af --%@=%@ med værdi %d. Venligst tjek dine ekstra indstillinger i Indstillinger > Avanceret.";
 "alert.extra_option.config_folder" = "Fejl under konfiguration af config mappen \"%@\".";
 
 "alert.playlist.error_deleting" = "Fejl under sletning af: %@";
@@ -276,56 +287,56 @@
 "alert.screenshot.error_taking" = "Kan ikke tage et skærmbillede!";
 
 "alert.sub.no_selected" = "Venligst vælg downloadet undertekst først.";
-"alert.sub_lang_not_set" = "Venligst vælgt det fortrukne undertekstsprog i preferancer før du bruger opensubtitles. Engelsk vil blive brugt denne gang.";
+"alert.sub_lang_not_set" = "Venligst vælgt det fortrukne undertekstsprog i Indstillinger før du bruger opensubtitles. Engelsk vil blive brugt denne gang.";
 "alert.sub.cannot_save_passwd" = "Kan ikke gemme dit kodeord til nøglering: %@";
 "alert.sub.cannot_login" = "Kan ikke logge ind. Venligst tjek dit brugernavn, kodeord og netværksstatus.\n\n%@";
-"alert.sub.save_downloaded.title" = "Gem Downloaded undertekster";
+"alert.sub.save_downloaded.title" = "Gem hentede undertekster";
 
-"alert.set_default.title" = "Sætter IINA som statndart program";
-"alert.set_default.message" = "IINA vil være standart programmet for alle de filtyper som supporteres.";
+"alert.set_default.title" = "Sætter IINA som standard program";
+"alert.set_default.message" = "IINA vil være standard programmet for alle de filtyper som supporteres.";
 "alert.set_default.success" = "Færdig med %d succes og %d fejlet.";
 
 "alert.add_watch.title" = "Tilføj overvågningsegenskab";
-"alert.add_watch.message" = "Venligst indrtast et gyldigt mpv egenskabsnavn.";
+"alert.add_watch.message" = "Venligst indtast et gyldigt mpv egenskabsnavn.";
 
 "alert.jump_to.title" = "Gå til";
-"alert.jump_to.message" = "Venligst indtast tiden du ønsker at gå til: 20:35";
+"alert.jump_to.message" = "Venligst indtast tiden du ønsker at gå til. Eksempel: 20:35";
 
-"alert.opensub.login.title" = "OpenSubtitles Logind";
+"alert.opensub.login.title" = "OpenSubtitles log ind";
 "alert.opensub.login.message" = "Venligst indtast dit brugernavn og kodeord";
 
-"alert.open_url.title" = "Åben URL";
-"alert.open_url.message" = "Venligst indtast URL:";
-"alert.choose_media_file.title" = "Vælge mediefil";
+"alert.open_url.title" = "Åbn URL";
+"alert.open_url.message" = "Indtast URL:";
+"alert.choose_media_file.title" = "Vælge mediearkiv";
 
 "alert.add_url.title" = "Tilføj URL";
 "alert.add_url.message" = "Indtast URL:";
 
-"alert.delete_history.title" = "Slet Playback Historik";
+"alert.delete_history.title" = "Slet afspilningshistorik";
 "alert.delete_history.message" = "Er du sikker på du ønsker at slette det valgte?";
 
 "alert.filter_hwdec.message" = "Du er ved at aktivere et videofilter. Men din nuværende hardware encoder supportere mulighvis ikke videofiltre. Du kan enten deaktivere hardware decoding eller skifte til auto(kopi), hvilket optager dobbelt hukommelse.";
 "alert.filter_hwdec.abort" = "Afbryd";
-"alert.filter_hwdec.turn_off" = "Sluk for hardware decoding";
+"alert.filter_hwdec.turn_off" = "Sluk for hardwareafkodning";
 "alert.filter_hwdec.use_copy" = "Skift til auto(kopi)";
 
-"alert.clear_cache.title" = "Tøm Thumbnail Cache";
-"alert.clear_cache.message" = "Er du sikker på du vil tømme alle thumbnail Cache?";
+"alert.clear_cache.title" = "Tøm thumbnail cache";
+"alert.clear_cache.message" = "Er du sikker på du vil tømme alle thumbnail cache?";
 
-"alert.clear_history.title" = "Ryd afspilnings Historik";
-"alert.clear_history.message" = "Er du sikker du vil slette al afspilnings historik?";
+"alert.clear_history.title" = "Ryd afspilningshistorik";
+"alert.clear_history.message" = "Er du sikker du vil slette al afspilningshistorik?";
 
-"alert.clear_watch_later.title" = "Fjern gemte afspilningsfremskridt";
-"alert.clear_watch_later.message" = "Er du sikker på at du vil slette alle gemte afspilningsfremskridt (\"se senere\" data)?";
+"alert.clear_watch_later.title" = "Fjern gemte afspilnings positioner";
+"alert.clear_watch_later.message" = "Er du sikker på at du vil slette alle gemte afspilnings positioner (\"se senere\" data)?";
 
 "alert.restore_alerts.title" = "Gendan skjulte advarsler";
 "alert.restore_alerts.message" = "Er du sikker på at du vil gendanne skjulte advarsler?";
 
 "alert.nothing_to_open" = "Intet at åbne.";
 
-"alert.no_video_track" = "Der er ingen videofil.";
+"alert.no_video_track" = "Der er intet videospor.";
 
-"alert.duplicate_config" = "Du kan ikke ændre i standart konfigurationen direkte. Venligst dupliker først.";
+"alert.duplicate_config" = "Du kan ikke ændre i standard konfigurationen direkte. Venligst dupliker først.";
 
 "alert.assrt_register" = "På grund af begrænset API-kvote, anbefales du kraftigt at bruge din egen API-token. Standard-token er kun til demo-brug, og du kan støde på netværksfejl.";
 "alert.assrt_register.register" = "Registrer Nu";
@@ -337,35 +348,35 @@
 "alert.plugin_uninstall.title" = "Er du sikker på at du vil afinstallere %@?";
 "alert.plugin_uninstall.message" = "Denne udvidelse vil blive fjernet fra din harddisk.";
 "alert.plugin_reinstall.title" = "Pluginet %@ findes allerede";
-"alert.plugin_reinstall.message" = "Do you want to reinstall the plugin?";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+"alert.plugin_reinstall.message" = "Vil du installere tilføjelsen igen?";
+"alert.duplicated_plugin_id" = "Duplikerede tilføjelsesidentifikationer fundet. To eller flere tilføjelser har den samme indetifikation \"%@\". Dette kan forårsage unormal adfærd. Find dem venligst i \"Præferencer - Tilføjelser\" og send rapporter til deres forfattere. Hvis en tilføjelse er installeret lokalt, så kan du også manuelt ændre dens identifikation i tilføjelsens \"Info.json\"-fil.";
 "alert.plugin_no_update" = "Ingen nye opdateringer fundet.";
-"alert.plugin_update_found.title" = "Ny Opdatering fundet for %@";
-"alert.plugin_update_found.message" = "Den seneste version er %@. Du har %@. Vil du gerne opdatere?";
-"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
-"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+"alert.plugin_update_found.title" = "Ny opdatering fundet til %@";
+"alert.plugin_update_found.message" = "Den seneste version er %@. Du har %@. Vil du opdatere?";
+"alert.plugin_permission" = "Denne tilføjelse kræver følgende tilladelser. Tjek dem venligst før du fortsætter.";
+"alert.plugin_permission_added" = "Denne opdatering kræver flere tilladelser. Tjek dem venligst inden du fortsætter.";
 
 "playlist.total_length" = "%@ i alt";
 "playlist.total_length_with_selected" = "%@ af %@ valgte";
-"pl_menu.title_multi" = "%d Emner";
+"pl_menu.title_multi" = "%d emner";
 "pl_menu.play_next" = "Afspil næste";
 "pl_menu.play_in_new_window" = "Afspil i nyt vindue";
 "pl_menu.remove" = "Fjern";
 "pl_menu.remove_multi" = "Fjern valgte";
 "pl_menu.delete" = "Flyt til papirkurven";
-"pl_menu.delete_multi" = "Flyt valgte filer til papirkurven";
+"pl_menu.delete_multi" = "Flyt valgte arkiver til papirkurven";
 "pl_menu.delete_after_play" = "Flyt til papirkurven efter afspilning";
-"pl_menu.delete_after_play_multi" = "Flyt valgte filer til papirkurven efter afspilning";
-"pl_menu.show_in_finder" = "Vis i finder";
-"pl_menu.add_file" = "Tilføj Arkiv…";
+"pl_menu.delete_after_play_multi" = "Flyt valgte arkiver til papirkurven efter afspilning";
+"pl_menu.show_in_finder" = "Vis i Finder";
+"pl_menu.add_file" = "Tilføj arkiv…";
 "pl_menu.add_url" = "Tilføj URL…";
-"pl_menu.clear_playlist" = "Tøm Playlist";
-"pl_menu.matched_sub" = "Matchede %d Undertekster";
+"pl_menu.clear_playlist" = "Tøm spilleliste";
+"pl_menu.matched_sub" = "Matchede %d undertekster";
 "pl_menu.add_sub" = "Tilføj underteskter…";
 "pl_menu.wrong_sub" = "Forkert undertekst!";
-"pl_menu.browser" = "Åbn i Browser";
+"pl_menu.browser" = "Åbn i browser";
 "pl_menu.copy_url" = "Kopier URL";
-"pl_menu.copy_url_multi" = "Kopier URLer";
+"pl_menu.copy_url_multi" = "Kopier URL'er";
 
 "keymapping.title" = "Taste kortlægning";
 "keymapping.message" = "Tryk på en vilkårlig tast for at optage.";
@@ -373,47 +384,48 @@
 "filter.video_filters" = "Videofiltre";
 "filter.audio_filters" = "Lydfiltre";
 
-"hwdec.no" = "Deaktiver Hardware decoding.";
-"hwdec.auto" = "Aktiver hardware decoding. De fleste videofiltre vil ikke virker korrekt.";
-"hwdec.auto-copy" = "Aktiver hardware decoding. Det kræver dobbelt så meget hukommelse, men virker med videofiltre.";
+"hwdec.no" = "Deaktiver hardwareafkodning.";
+"hwdec.auto" = "Aktiver hardwareafkodning. De fleste videofiltre vil ikke virker korrekt.";
+"hwdec.auto-copy" = "Aktiver hardware afkodning. Kræver dobbelt så meget hukommelse, men virker med videofiltre.";
 
-"subencoding.auto" = "Find pr. automatik";
+"subencoding.auto" = "Find automatisk";
 
-"osc_toolbar.settings" = "Hurtig Indstillinger";
-"osc_toolbar.playlist" = "Afspilningsliste og kapitler";
-"osc_toolbar.pip" = "Slå Picture-in-Picture Til/Fra";
+"osc_toolbar.settings" = "Hurtige indstillinger";
+"osc_toolbar.playlist" = "Spilleliste og kapitler";
+"osc_toolbar.pip" = "Slå billede-i-billede til/fra";
 "osc_toolbar.full_screen" = "Skift fuld skærm";
 "osc_toolbar.music_mode" = "Gå i musik-tilstand";
-"osc_toolbar.sub_track" = "Vælg undertekstspor";
+"osc_toolbar.sub_track" = "Vælg undertekst spor";
 "osc_toolbar.screenshot" = "Tag et skærmbillede";
+"osc_toolbar.plugins" = "Vis tilføjelsespanel";
 
 "mini_player.album_art" = "Slå album art Til/Fra";
 "mini_player.loop" = "Gentag";
 "mini_player.shuffle" = "Bland";
-"mini_player.remove" = "Fjern fra playliste";
-"mini_player.add" = "Føj til playliste";
-"mini_player.delete" = "Slet alle spor fra playliste";
+"mini_player.remove" = "Fjern fra spilleliste";
+"mini_player.add" = "Føj til spilleliste";
+"mini_player.delete" = "Slet alle spor fra spilleliste";
 "mini_player.volume" = "Lydstyrke";
 "mini_player.close" = "Luk musik-tilstand";
 "mini_player.back" = "Vend tilbage til video-tilstand";
 
 // Touch bar
 
-"touchbar.ahead_15" = "15sec Frem";
-"touchbar.ahead_30" = "30sec Frem";
-"touchbar.back_15" = "15sec Tilbage";
-"touchbar.back_30" = "30sec Tilbage";
-"touchbar.next_video" = "Næste Video";
-"touchbar.prev_video" = "Forrige Video";
-"touchbar.increase_volume" = "Volumen +";
-"touchbar.decrease_volume" = "Volumen -";
+"touchbar.ahead_15" = "15sek frem";
+"touchbar.ahead_30" = "30sek frem";
+"touchbar.back_15" = "15sek tilbage";
+"touchbar.back_30" = "30sek tilbage";
+"touchbar.next_video" = "Næste video";
+"touchbar.prev_video" = "Forrige video";
+"touchbar.increase_volume" = "Lydstyrke +";
+"touchbar.decrease_volume" = "Lydstyrke -";
 "touchbar.rewind" = "Spol tilbage";
 "touchbar.fast_forward" = "Spol frem";
 "touchbar.play_pause" = "Afspil / Pause";
 "touchbar.seek" = "Spol";
 "touchbar.time" = "Tids Position";
 "touchbar.remainingTimeOrTotalDuration" = "Resterende Tid / Total Varighed";
-"touchbar.toggle_pip" = "Slå Picture-in-Picture Til/Fra";
+"touchbar.toggle_pip" = "Slå billede-i-billede Til/Fra";
 
 // Plugin permissions
 
@@ -421,13 +433,13 @@
 "permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
 "permissions.network-request.any_site" = "Enhver side";
 "permissions.show-osd.name" = "Vis OSD";
-"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
+"permissions.show-osd.desc" = "Denne tilføjelse må vise meddelelser på skærmen.";
 "permissions.show-alert.name" = "Vi advarsler";
-"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
+"permissions.show-alert.desc" = "Denne tilføjelse må vise advarsler.";
 "permissions.video-overlay.name" = "Tilføj overlay på videoer";
-"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
+"permissions.video-overlay.desc" = "Denne tilføjelse må vise yderligere indhold ovenpå på videoen.";
 "permissions.file-system.name" = "Adgang til fil systemet";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.file-system.desc" = "Denne tilføjelse må læse og skrive filer på dit drev, hvilket kan inkludere følsom information. Den kan også køre andre programmer eller applikationer der kan skade din computer. Sørg for at verificere kilden.";
 
 "plugin.install" = "Installer";
 "plugin.installed" = "Installeret";
@@ -436,9 +448,9 @@
 "alert.plugin.install_error" = "Der skete en fejl under installationen: %@";
 "alert.invalid_url" = "URL'en er ugyldig.";
 "plugin.install_error.invalid_url" = "URL'en er ugyldig.";
-"plugin.install_error.file_not_found" = "Cannot find the package file.";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
+"plugin.install_error.file_not_found" = "Kan ikke finde pakkefilen.";
+"plugin.install_error.cannot_download" = "Det lykkedes ikke at hente tilføjelsen.\n\nOutput:%@\n";
+"plugin.install_error.cannot_unpackage" = "Det lykkedes ikke at pakke tilføjelsen ud.\n\nOutput:%@\n";
+"plugin.install_error.cannot_load" = "IINA kan ikke indlæse denne tilføjelse. Den er måske i det forkerte format.";
 "plugin.check_for_updates" = "Tjek for opdateringer";
 "plugin.updating" = "Downloader opdatering…";

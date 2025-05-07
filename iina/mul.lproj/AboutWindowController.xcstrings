@@ -3,6 +3,7 @@
   "strings" : {
     "7k7-70-Kku.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"Crowdin\"; ObjectID = \"7k7-70-Kku\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -11,11 +12,11 @@
             "value" : "Crowdin"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "dkA-td-UyX.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"IINA\"; ObjectID = \"dkA-td-UyX\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -24,13 +25,18 @@
             "value" : "IINA"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "F0z-JX-Cv5.title" : {
       "comment" : "Class = \"NSWindow\"; title = \"About\"; ObjectID = \"F0z-JX-Cv5\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "О програму"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -41,6 +47,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "حول التطبيق"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haqqında"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пра"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "За приложението"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "অ্যাপটি সম্পর্কে"
           }
         },
         "ca" : {
@@ -91,6 +121,12 @@
             "value" : "Acerca de"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Honi buruz"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -133,10 +169,22 @@
             "value" : "Névjegy"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Հավելվածի մասին"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tentang"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Um"
           }
         },
         "it" : {
@@ -151,6 +199,12 @@
             "value" : "IINAについて"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ಬಗ್ಗೆ"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -163,16 +217,34 @@
             "value" : "Par"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Om"
+            "value" : "За апликацијата"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "അബൗറ്റ്"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "जानकारी"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Over"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Om"
           }
         },
         "pl" : {
@@ -211,13 +283,13 @@
             "value" : "O aplikácii IINA"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "О програму"
+            "value" : "O programu"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "O programu"
@@ -235,6 +307,12 @@
             "value" : "இதைப் பற்றி"
           }
         },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "เกี่ยวกับเรา"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -245,6 +323,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Про програму"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "متعلق"
           }
         },
         "vi" : {
@@ -269,6 +353,7 @@
     },
     "gZA-85-Zaw.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"0.0.1\"; ObjectID = \"gZA-85-Zaw\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -277,13 +362,18 @@
             "value" : "0.0.1"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "HLj-vT-kNp.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"IINA localization is powered by Crowdin.\"; ObjectID = \"HLj-vT-kNp\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Локализација за IINA је омогућена помоћу Crowdin."
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -350,12 +440,6 @@
             "value" : "ترجمه IINA به کمک Crowdin انجام شده است."
           }
         },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "IINA localization is powered by Crowdin."
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -368,12 +452,6 @@
             "value" : "לוקליזציית IINA מופעלת על ידי Crowdin."
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "IINA localization is powered by Crowdin."
-          }
-        },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -384,12 +462,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Az IINA lokalizálása a Crowdin segítségével történik."
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "IINA localization is powered by Crowdin."
           }
         },
         "it" : {
@@ -410,22 +482,16 @@
             "value" : "IINA는 Crowdin을 통해 번역됩니다."
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "IINA localization is powered by Crowdin."
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "IINA oversettelse utført med Crowdin."
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "IINA-lokalisatie wordt gevoed door Crowdin."
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "IINA oversettelse utført med Crowdin."
           }
         },
         "pl" : {
@@ -438,12 +504,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Traduções do IINA tiveram o apoio de Crowdin."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "IINA localization is powered by Crowdin."
           }
         },
         "ro" : {
@@ -464,28 +524,10 @@
             "value" : "Lokalizáciu IINA zabezpečuje Crowdin."
           }
         },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Локализација за IINA је омогућена помоћу Crowdin."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "IINA localization is powered by Crowdin."
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "IINA:s lokalisering drivs av Crowdin."
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "IINA localization is powered by Crowdin."
           }
         },
         "tr" : {
@@ -524,6 +566,12 @@
       "comment" : "Class = \"NSTabViewItem\"; label = \"Credits\"; ObjectID = \"HMc-Oy-hBR\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Заслуге"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -534,6 +582,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "المساهمون في العمل"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kreditlər"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Падзякі"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Благодарности"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ক্রেডিটস"
           }
         },
         "ca" : {
@@ -582,6 +654,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Créditos"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kredituak"
           }
         },
         "fa" : {
@@ -644,6 +722,12 @@
             "value" : "クレジット"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ಕೃತಜ್ಞತೆಗಳು"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -656,16 +740,28 @@
             "value" : "Pateicības"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kreditering"
+            "value" : "Заслуги"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ക്രെഡിറ്റുകൾ"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Credits"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kreditering"
           }
         },
         "pl" : {
@@ -704,13 +800,13 @@
             "value" : "Poďakovanie"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Заслуге"
+            "value" : "Zasluge"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zasluge"
@@ -728,6 +824,12 @@
             "value" : "நன்றி"
           }
         },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "รายการขอบคุณ"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -738,6 +840,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Подяка"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "کریڈٹس"
           }
         },
         "vi" : {
@@ -762,21 +870,279 @@
     },
     "hp8-K0-WQf.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Date\"; ObjectID = \"hp8-K0-WQf\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "af" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Datum"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "التاريخ"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tarix"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дата"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дата"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dato"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Datum"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ημερομηνία"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Date"
           }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Date"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fecha"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تاریخ"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Päivämäärä"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Date"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "תאריך"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "दिनांक"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Datum"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dátum"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tanggal"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dagsetning"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "日付"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "날짜별"
+          }
+        },
+        "lv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Datums"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "തീയതി"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Datum"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dato"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dată"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дата"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dátum"
+          }
+        },
+        "sr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Datum"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Datum"
+          }
+        },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "தேதி"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tarih"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дата"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ngày"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "日期"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "日期"
+          }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "jEf-xN-6xb.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"License\"; ObjectID = \"jEf-xN-6xb\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Лиценца"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -787,6 +1153,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "الترخيص"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lisenziya"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ліцэнзія"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Лиценз"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "লাইসেন্স"
           }
         },
         "ca" : {
@@ -837,6 +1227,12 @@
             "value" : "Licencia"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lizentzia"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -879,10 +1275,22 @@
             "value" : "Licenc"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Լիցենզիա"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lisensi"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leyfi"
           }
         },
         "it" : {
@@ -897,6 +1305,12 @@
             "value" : "ライセンス"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ಪರವಾನಗಿ"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -909,16 +1323,28 @@
             "value" : "Licence"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lisens"
+            "value" : "Лиценца"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ലൈസൻസ്"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Licentie"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lisens"
           }
         },
         "pl" : {
@@ -954,16 +1380,16 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "LicenAcia"
+            "value" : "Licencia"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dovoljenje"
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Лиценца"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Licenca"
@@ -981,6 +1407,12 @@
             "value" : "உரிமம்"
           }
         },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "สัญญาอนุญาต"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -991,6 +1423,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ліцензія"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "لائسنس"
           }
         },
         "vi" : {
@@ -1008,7 +1446,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "許可證"
+            "value" : "授權協議"
           }
         }
       }
@@ -1017,6 +1455,12 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Translators:\"; ObjectID = \"JlJ-V6-PVY\";",
       "extractionState" : "manual",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Преводиоци:"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1027,6 +1471,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "المترجمون:"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tərcüməçilər:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Перакладчыкі:"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Преводачи:"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "অনুবাদক:"
           }
         },
         "ca" : {
@@ -1077,6 +1545,12 @@
             "value" : "Traductores:"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Itzultzaileak:"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1119,10 +1593,22 @@
             "value" : "Fordítók:"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Թարկմանիչներ՝"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Penerjemah:"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Þýðendur:"
           }
         },
         "it" : {
@@ -1137,6 +1623,12 @@
             "value" : "翻訳者:"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ಅನುವಾದಕರು:"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1149,16 +1641,28 @@
             "value" : "Tulkotāji:"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Oversettere:"
+            "value" : "Преведувачи:"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "പരിഭാഷകർ:"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vertalers:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oversettere:"
           }
         },
         "pl" : {
@@ -1197,13 +1701,13 @@
             "value" : "Prekladatelia:"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Преводиоци:"
+            "value" : "Prevajalci:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prevodioci:"
@@ -1221,6 +1725,12 @@
             "value" : "மொழிபெயர்ப்பாளர்கள்:"
           }
         },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ผู้แปล"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1231,6 +1741,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Перекладачі:"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مترجم:"
           }
         },
         "vi" : {
@@ -1255,6 +1771,7 @@
     },
     "oha-Ne-oEr.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"Branch\"; ObjectID = \"oha-Ne-oEr\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -1263,13 +1780,18 @@
             "value" : "Branch"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "oIB-g4-IyG.label" : {
       "comment" : "Class = \"NSTabViewItem\"; label = \"Contributors\"; ObjectID = \"oIB-g4-IyG\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сарадници"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1280,6 +1802,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "المساهمون"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dəstəkçilər"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Укладальнікі"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сътрудници"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "অবদানকারীরা"
           }
         },
         "ca" : {
@@ -1330,6 +1876,12 @@
             "value" : "Colaboradores"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laguntzaileak"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1378,6 +1930,12 @@
             "value" : "Kontributor"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Þátttakendur"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1388,6 +1946,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "コントリビュータ"
+          }
+        },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ಕೊಡುಗೆದಾರರು"
           }
         },
         "ko" : {
@@ -1402,16 +1966,28 @@
             "value" : "Programmas izstrādātāju dalībnieki"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bidragsytere"
+            "value" : "Соработници"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "സംഭാവന ചെയ്യുന്നവർ"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bijdragers"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bidragsytere"
           }
         },
         "pl" : {
@@ -1450,13 +2026,13 @@
             "value" : "Prispievatelia"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Сарадници"
+            "value" : "Prispevali so"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Saradnici"
@@ -1474,6 +2050,12 @@
             "value" : "பங்களிப்பாளர்கள்"
           }
         },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ผู้ร่วมพัฒนา"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1484,6 +2066,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Учасники"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "معاونین"
           }
         },
         "vi" : {
@@ -1508,6 +2096,7 @@
     },
     "U9l-uR-i7g.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"iina/contributors\"; ObjectID = \"U9l-uR-i7g\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -1516,11 +2105,11 @@
             "value" : "iina/contributors"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "WeO-aJ-nY3.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"FFmpeg 0.0.0\"; ObjectID = \"WeO-aJ-nY3\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -1529,13 +2118,18 @@
             "value" : "FFmpeg 0.0.0"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "XWg-VQ-fRV.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"Contributors\"; ObjectID = \"XWg-VQ-fRV\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сарадници"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1546,6 +2140,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "المساهمون"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dəstəkçilər"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Укладальнікі"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сътрудници"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "অবদানকারীরা"
           }
         },
         "ca" : {
@@ -1596,6 +2214,12 @@
             "value" : "Colaboradores"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laguntzaileak"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1644,6 +2268,12 @@
             "value" : "Kontributor"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Þátttakendur"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1654,6 +2284,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "コントリビュータ"
+          }
+        },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ಕೊಡುಗೆದಾರರು"
           }
         },
         "ko" : {
@@ -1668,16 +2304,28 @@
             "value" : "Programmas izstrādātāju dalībnieki"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bidragsytere"
+            "value" : "Соработници"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "സംഭാവന ചെയ്യുന്നവർ"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bijdragers"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bidragsytere"
           }
         },
         "pl" : {
@@ -1716,13 +2364,13 @@
             "value" : "Prispievatelia"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Сарадници"
+            "value" : "Prispevali so"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Saradnici"
@@ -1740,6 +2388,12 @@
             "value" : "பங்களிப்பாளர்கள்"
           }
         },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ผู้ร่วมพัฒนา"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1750,6 +2404,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Учасники"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "معاونین"
           }
         },
         "vi" : {
@@ -1776,6 +2436,12 @@
       "comment" : "Class = \"NSTabViewItem\"; label = \"License\"; ObjectID = \"Z1e-XE-TR5\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Лиценца"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1786,6 +2452,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "الترخيص"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lisenziya"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ліцэнзія"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Лиценз"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "লাইসেন্স"
           }
         },
         "ca" : {
@@ -1836,6 +2526,12 @@
             "value" : "Licencia"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lizentzia"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1878,10 +2574,22 @@
             "value" : "Licenc"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Լիցենզիա"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lisensi"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leyfi"
           }
         },
         "it" : {
@@ -1896,6 +2604,12 @@
             "value" : "ライセンス"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ಪರವಾನಗಿ"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1908,16 +2622,28 @@
             "value" : "Licence"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lisens"
+            "value" : "Лиценца"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ലൈസൻസ്"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Licentie"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lisens"
           }
         },
         "pl" : {
@@ -1956,13 +2682,13 @@
             "value" : "Licencia"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Лиценца"
+            "value" : "Dovoljenje"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Licenca"
@@ -1980,6 +2706,12 @@
             "value" : "உரிமம்"
           }
         },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "สัญญาอนุญาต"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1990,6 +2722,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ліцензія"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "لائسنس"
           }
         },
         "vi" : {
@@ -2014,6 +2752,7 @@
     },
     "ZAx-ah-fbZ.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"mpv 0.0.0\"; ObjectID = \"ZAx-ah-fbZ\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -2022,13 +2761,18 @@
             "value" : "mpv 0.0.0"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "zCH-uO-acx.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"Credits\"; ObjectID = \"zCH-uO-acx\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Заслуге"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2039,6 +2783,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "المساهمون في العمل"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kreditlər"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Падзякі"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Благодарности"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ক্রেডিটস"
           }
         },
         "ca" : {
@@ -2089,6 +2857,12 @@
             "value" : "Créditos"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kredituak"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2104,7 +2878,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Remerciements"
+            "value" : "Crédits"
           }
         },
         "he" : {
@@ -2149,10 +2923,16 @@
             "value" : "クレジット"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ಕೃತಜ್ಞತೆಗಳು"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "크레딧"
+            "value" : "승인서"
           }
         },
         "lv" : {
@@ -2161,16 +2941,28 @@
             "value" : "Pateicības"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kreditering"
+            "value" : "Заслуги"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ക്രെഡിറ്റുകൾ"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Credits"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kreditering"
           }
         },
         "pl" : {
@@ -2209,13 +3001,13 @@
             "value" : "Poďakovanie"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Заслуге"
+            "value" : "Zasluge"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zasluge"
@@ -2233,6 +3025,12 @@
             "value" : "நன்றி"
           }
         },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "รายการขอบคุณ"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2243,6 +3041,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Подяка"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "کریڈٹس"
           }
         },
         "vi" : {

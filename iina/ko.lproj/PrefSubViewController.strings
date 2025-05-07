@@ -11,7 +11,7 @@
 "2XY-Un-0Fg.title" = "전체 화면일 때 자막을 레터박스에 표시";
 
 /* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "4Tb-Yh-PdP"; */
-"4Tb-Yh-PdP.title" = "위치:";
+"4Tb-Yh-PdP.title" = "위치";
 
 /* Class = "NSMenuItem"; title = "Bottom"; ObjectID = "6i0-Sx-V7F"; */
 "6i0-Sx-V7F.title" = "아래쪽";
@@ -56,7 +56,7 @@
 "Iax-cc-YIO.title" = "OpenSubtitles 계정:";
 
 /* Class = "NSTextFieldCell"; title = "Other:"; ObjectID = "LiG-iV-AQK"; */
-"LiG-iV-AQK.title" = "기타:";
+"LiG-iV-AQK.title" = "기타";
 
 /* Class = "NSTextFieldCell"; title = "Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed."; ObjectID = "Luv-2B-9v8"; */
 "Luv-2B-9v8.title" = "디렉토리를 콜론(:)으로 구분하십시오. 상대경로와 경로문자열의 끝에 와일드카드(*)를 사용할 수 있습니다.";
@@ -140,7 +140,7 @@
 "pRe-wv-VVi.title" = "여백";
 
 /* Class = "NSTextFieldCell"; title = "Auto load:"; ObjectID = "raf-Yu-ck0"; */
-"raf-Yu-ck0.title" = "자동 자막열기:";
+"raf-Yu-ck0.title" = "자동 자막열기";
 
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "slU-Ox-aeF"; */
 "slU-Ox-aeF.title" = "가운데";

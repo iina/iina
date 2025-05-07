@@ -5,10 +5,10 @@
 "0fB-es-DmV.title" = "Legendas Online:";
 
 /* Class = "NSMenuItem"; title = "Top"; ObjectID = "1Tq-5k-o6R"; */
-"1Tq-5k-o6R.title" = "Topo";
+"1Tq-5k-o6R.title" = "Superior";
 
 /* Class = "NSButtonCell"; title = "Display subtitles in letterboxes while in full screen"; ObjectID = "2XY-Un-0Fg"; */
-"2XY-Un-0Fg.title" = "Mostrar legendas em caixas de texto quando em ecrã completo";
+"2XY-Un-0Fg.title" = "Mostrar legendas em caixa de texto quando em ecrã completo";
 
 /* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "4Tb-Yh-PdP"; */
 "4Tb-Yh-PdP.title" = "Posição:";
@@ -17,7 +17,7 @@
 "6i0-Sx-V7F.title" = "Inferior";
 
 /* Class = "NSTextFieldCell"; title = "Subtitles have priority when filename containing:"; ObjectID = "7pf-Kb-TNr"; */
-"7pf-Kb-TNr.title" = "Legendas com prioridade se o nome do ficheiro contiver:";
+"7pf-Kb-TNr.title" = "Legendas têm prioridade se o nome do ficheiro conter:";
 
 /* Class = "NSButtonCell"; title = "Scale subtitles with window size"; ObjectID = "8hj-ki-R0h"; */
 "8hj-ki-R0h.title" = "Dimensionar legendas de acordo com o tamanho da janela";
@@ -62,13 +62,13 @@
 "Luv-2B-9v8.title" = "Diretórios são separados por dois pontos (:). Caminhos relativos e curingas (*) no final são permitidos.";
 
 /* Class = "NSTextFieldCell"; title = "Please enter a comma-separated list of strings."; ObjectID = "Mk1-sv-QB8"; */
-"Mk1-sv-QB8.title" = "Por favor, insira uma lista de strings separadas por vírgulas.";
+"Mk1-sv-QB8.title" = "Por favor, insira uma lista de strings separada por vírgula.";
 
 /* Class = "NSTextFieldCell"; title = "Text subtitles:"; ObjectID = "Qda-dp-nhg"; */
 "Qda-dp-nhg.title" = "Legendas de texto:";
 
 /* Class = "NSTextFieldCell"; title = "Also search subtitles in following directories:"; ObjectID = "QsS-wD-2hY"; */
-"QsS-wD-2hY.title" = "Também procurar legendas nos seguintes directórios:";
+"QsS-wD-2hY.title" = "Também procurar legendas nas seguintes localizações:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "SIh-Sv-6XI"; */
 "SIh-Sv-6XI.title" = "Cor:";
@@ -173,7 +173,7 @@
 "zml-kt-LN8.title" = "Esquerda";
 
 /* Class = "NSSegmentedCell"; liY-E6-HCB.ibShadowedLabels[0] = "Primary Subtitles"; ObjectID = "liY-E6-HCB"; */
-"liY-E6-HCB.ibShadowedLabels[0]" = "Primary Subtitles";
+"liY-E6-HCB.ibShadowedLabels[0]" = "Legendas Principais";
 
 /* Class = "NSSegmentedCell"; liY-E6-HCB.ibShadowedLabels[1] = "Secondary Subtitles"; ObjectID = "liY-E6-HCB"; */
-"liY-E6-HCB.ibShadowedLabels[1]" = "Secondary Subtitles";
+"liY-E6-HCB.ibShadowedLabels[1]" = "Legendas Secundárias";

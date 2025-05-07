@@ -6,20 +6,20 @@
   Copyright © 2017 lhc. All rights reserved.
 */
 
-"cmd.ignore" = "Yoksay";
+"cmd.ignore" = "Yok Say";
 "cmd.seek" = "Sar";
 "cmd.revert-seek" = "Sarmayı eski haline döndür";
 "cmd.set" = "Ayarla";
 "cmd.cycle" = "Geçiş yap";
-"cmd.cycle-values" = "Şunlar Arasında Geçiş yap:";
+"cmd.cycle-values" = "Şunlar arasında geçiş yap:";
 "cmd.add" = "Değiştir";
 "cmd.multiply" = "Çarp";
 "cmd.frame-step" = "Sonraki kare";
 "cmd.frame-back-step" = "Önceki kare";
-"cmd.ab-loop" = "A-B döngüsü";
+"cmd.ab-loop" = "A–B döngüsü";
 "cmd.sub-seek" = "Altyazı ara";
-"cmd.playlist-next" = "Sonraki medya";
-"cmd.playlist-prev" = "Önceki medya";
+"cmd.playlist-next" = "Sonraki ortam";
+"cmd.playlist-prev" = "Önceki ortam";
 "cmd.playlist-move" = "Oynatma listesi öğesini taşı";
 "cmd.playlist-clear" = "Listeyi temizle";
 "cmd.playlist-remove" = "Geçerliyi kaldır";
@@ -34,25 +34,25 @@
 "cmd.loadlist" = "Oynatma listesi yükle";
 "cmd.run" = "Çalıştır";
 
-"iina.flip" = "Ters Çevir";
-"iina.mirror" = "Ayna";
+"iina.flip" = "Ters çevir";
+"iina.mirror" = "Yansıt";
 
-"iina.toggle-pip" = "Resim İçinde Resim'e Geç";
-"iina.toggle-music-mode" = "Müzik Kipini Aç/Kapat";
+"iina.toggle-pip" = "Resim İçinde Resim’i aç/kapat";
+"iina.toggle-music-mode" = "Müzik Kipi’ni aç/kapat";
 "iina.open-file" = "Dosya aç";
-"iina.open-url" = "URL Aç";
+"iina.open-url" = "URL aç";
 "iina.video-panel" = "Video paneli";
 "iina.audio-panel" = "Ses paneli";
 "iina.sub-panel" = "Altyazı paneli";
 "iina.playlist-panel" = "Oynatma Listesi paneli";
-"iina.chapter-panel" = "Bölüm paneli";
+"iina.chapter-panel" = "Fasıl paneli";
 "iina.bigger-window" = "Daha Büyük Pencere";
 "iina.smaller-window" = "Daha Küçük Pencere";
 "iina.fit-to-screen" = "Ekrana Sığdır";
-"iina.toggle-flip" = "Ters çevirmeyi Aç/Kapa";
-"iina.toggle-mirror" = "Yansıtmayı Aç/Kapat";
+"iina.toggle-flip" = "Ters çevirmeyi aç/kapat";
+"iina.toggle-mirror" = "Yansıtmayı aç/kapat";
 "iina.save-playlist" = "Geçerli oynatma listesini kaydet";
-"iina.show-current-file-in-finder" = "Show current file in Finder";
+"iina.show-current-file-in-finder" = "Geçerli Dosyayı Finder’da Göster";
 "iina.delete-current-file" = "Geçerli dosyayı sil";
 "iina.delete-current-file-hard" = "Geçerli dosyayı çöp kutusuna taşımadan doğrudan sil";
 "iina.find-online-subs" = "Çevrimiçi altyazılar bul";
@@ -83,25 +83,25 @@
 
 "opt.window-scale" = "Pencere ölçeği";
 
-"opt.video" = "Video izi";
-"opt.video-aspect" = "Video En/Boy Oranı";
-"opt.contrast" = "Kontrast";
+"opt.video" = "Video parçası";
+"opt.video-aspect" = "Video en–boy oranı";
+"opt.contrast" = "Karşıtlık";
 "opt.brightness" = "Parlaklık";
 "opt.gamma" = "Gama";
 "opt.saturation" = "Doygunluk";
 "opt.deinterlace" = "Netleştir (Deinterlace)";
 
-"opt.audio" = "Ses izi";
-"opt.volume" = "Ses Seviyesi";
-"opt.mute" = "Sesi Kapat";
+"opt.audio" = "Ses parçası";
+"opt.volume" = "Ses düzeyi";
+"opt.mute" = "Sesi kapat";
 "opt.audio-delay" = "Ses gecikmesi";
 
-"opt.sub" = "Altyazı izi";
+"opt.sub" = "Altyazı parçası";
 "opt.sub-delay" = "Altyazı gecikmesi";
 "opt.sub-pos" = "Altyazı konumu";
 "opt.sub-scale" = "Altyazı ölçeği";
 "opt.sub-visibility" = "Altyazı görünürlüğü";
-"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
+"opt.secondary-sub-visibility" = "İkincil altyazı görünürlüğü";
 "opt.sub-ass-style-override" = "ASS tipi üzerine yazma";
 
 "opt.fullscreen" = "Tam ekran";

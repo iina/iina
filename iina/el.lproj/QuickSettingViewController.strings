@@ -8,37 +8,37 @@
 "22j-ra-GAY.title" = "Πλάτος:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "3kI-6i-ujt"; */
-"3kI-6i-ujt.title" = "Color:";
+"3kI-6i-ujt.title" = "Χρώμα:";
 
 /* Class = "NSTextFieldCell"; title = "+12 dB"; ObjectID = "4BZ-H1-GEU"; */
 "4BZ-H1-GEU.title" = "+12 dB";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "6LO-6y-IsA"; */
-"6LO-6y-IsA.title" = "Color:";
+"6LO-6y-IsA.title" = "Χρώμα:";
 
 /* Class = "NSSegmentedCell"; 88M-pi-2Hc.ibShadowedLabels[0] = "Primary Subtitles"; ObjectID = "88M-pi-2Hc"; */
-"88M-pi-2Hc.ibShadowedLabels[0]" = "Primary Subtitles";
+"88M-pi-2Hc.ibShadowedLabels[0]" = "Κύριοι Υπότιτλοι";
 
 /* Class = "NSSegmentedCell"; 88M-pi-2Hc.ibShadowedLabels[1] = "Secondary Subtitles"; ObjectID = "88M-pi-2Hc"; */
-"88M-pi-2Hc.ibShadowedLabels[1]" = "Secondary Subtitles";
+"88M-pi-2Hc.ibShadowedLabels[1]" = "Δευτερεύοντες Υπότιτλοι";
 
 /* Class = "NSButtonCell"; title = "Load External Audio Track…"; ObjectID = "8Ax-5X-osl"; */
-"8Ax-5X-osl.title" = "Load External Audio Track…";
+"8Ax-5X-osl.title" = "Φόρτωση Εξωτερικού Κομματιού Ήχου…";
 
 /* Class = "NSSegmentedCell"; AB5-UZ-euc.ibShadowedLabels[0] = "Load Subtitle…"; ObjectID = "AB5-UZ-euc"; */
-"AB5-UZ-euc.ibShadowedLabels[0]" = "Load Subtitle…";
+"AB5-UZ-euc.ibShadowedLabels[0]" = "Φόρτωση Υπότιτλου…";
 
 /* Class = "NSTextFieldCell"; title = "Audio delay:"; ObjectID = "AKs-VQ-fKF"; */
 "AKs-VQ-fKF.title" = "Καθυστέρηση Ήχου:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "ANn-CR-JOV"; */
-"ANn-CR-JOV.title" = "Color:";
+"ANn-CR-JOV.title" = "Χρώμα:";
 
 /* Class = "NSTextFieldCell"; title = "1x"; ObjectID = "B0I-bX-HZS"; */
 "B0I-bX-HZS.title" = "1x";
 
 /* Class = "NSTabViewItem"; label = "Video"; ObjectID = "CYP-el-A6A"; */
-"CYP-el-A6A.label" = "Video";
+"CYP-el-A6A.label" = "Βίντεο";
 
 /* Class = "NSMenuItem"; title = "0.25"; ObjectID = "DdO-VX-HCz"; */
 "DdO-VX-HCz.title" = "0.25";
@@ -47,7 +47,7 @@
 "Ew1-N1-0Pi.title" = "0.25x";
 
 /* Class = "NSTextFieldCell"; title = "BORDER"; ObjectID = "GlZ-YU-dNm"; */
-"GlZ-YU-dNm.title" = "BORDER";
+"GlZ-YU-dNm.title" = "ΟΡΙΑ";
 
 /* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "IYU-eq-dls"; */
 "YCG-xK-eAs.title" = "-5s";
@@ -59,22 +59,22 @@
 "LEZ-fv-buL.title" = "0s";
 
 /* Class = "NSTextFieldCell"; title = "External audio:"; ObjectID = "Lnu-kz-cql"; */
-"Lnu-kz-cql.title" = "External audio:";
+"Lnu-kz-cql.title" = "Εξωτερικός ήχος:";
 
 /* Class = "NSTextFieldCell"; title = "-12 dB"; ObjectID = "Lpw-ws-Ezh"; */
 "Lpw-ws-Ezh.title" = "-12 dB";
 
 /* Class = "NSButtonCell"; title = "SUBTITLES"; ObjectID = "NxO-to-jcI"; */
-"NxO-to-jcI.title" = "SUBTITLES";
+"NxO-to-jcI.title" = "ΥΠΟΤΙΤΛΟΙ";
 
 /* Class = "NSTextFieldCell"; title = "4x"; ObjectID = "PLX-gY-e0h"; */
 "PLX-gY-e0h.title" = "4x";
 
 /* Class = "NSTextFieldCell"; title = "External subtitles:"; ObjectID = "RA1-fF-OrB"; */
-"RA1-fF-OrB.title" = "External subtitles:";
+"RA1-fF-OrB.title" = "Εξωτερικοί υπότιτλοι:";
 
 /* Class = "NSSegmentedCell"; Rbb-wh-cLc.ibShadowedLabels[0] = "Search Online…"; ObjectID = "Rbb-wh-cLc"; */
-"Rbb-wh-cLc.ibShadowedLabels[0]" = "Search Online…";
+"Rbb-wh-cLc.ibShadowedLabels[0]" = "Εύρεση στο Διαδίκτυο…";
 
 /* Class = "NSTextFieldCell"; title = "Saturation:"; ObjectID = "Rky-lo-Buu"; */
 "Rky-lo-Buu.title" = "Κορεσμός:";
@@ -86,28 +86,28 @@
 "W7H-mU-v3D.title" = "x";
 
 /* Class = "NSTextFieldCell"; title = "Scale:"; ObjectID = "Wbx-Ti-qiS"; */
-"Wbx-Ti-qiS.title" = "Scale:";
+"Wbx-Ti-qiS.title" = "Κλίμακα:";
 
 /* Class = "NSTextFieldCell"; title = "Subtitle delay:"; ObjectID = "Wkz-wW-sOM"; */
 "Wkz-wW-sOM.title" = "Καθυστέρηση Υποτίτλων:";
 
 /* Class = "NSTextFieldCell"; title = "Aspect ratio:"; ObjectID = "YgL-iV-bca"; */
-"YgL-iV-bca.title" = "Aspect ratio:";
+"YgL-iV-bca.title" = "Αναλογία διαστάσεων:";
 
 /* Class = "NSTextFieldCell"; title = "Text Style:"; ObjectID = "ZBd-13-lA1"; */
-"ZBd-13-lA1.title" = "Text Style:";
+"ZBd-13-lA1.title" = "Στυλ κειμένου:";
 
 /* Class = "NSMenuItem"; title = "0.5"; ObjectID = "avJ-cW-Iws"; */
 "avJ-cW-Iws.title" = "0.5";
 
 /* Class = "NSTextFieldCell"; title = "Secondary subtitle:"; ObjectID = "bKb-pW-HnS"; */
-"bKb-pW-HnS.title" = "Secondary subtitle:";
+"bKb-pW-HnS.title" = "Δευτερεύοντες υπότιτλοι:";
 
 /* Class = "NSTextFieldCell"; title = "s"; ObjectID = "bsT-FB-GhF"; */
 "bsT-FB-GhF.title" = "s";
 
 /* Class = "NSTabViewItem"; label = "Audio"; ObjectID = "bzk-c2-LH5"; */
-"bzk-c2-LH5.label" = "Audio";
+"bzk-c2-LH5.label" = "Ήχος";
 
 /* Class = "NSSegmentedCell"; cMu-YF-riv.ibShadowedLabels[0] = "Default"; ObjectID = "cMu-YF-riv"; */
 "cMu-YF-riv.ibShadowedLabels[0]" = "Προεπιλογή";
@@ -122,28 +122,28 @@
 "eDl-Si-LSa.title" = "Αντίθεση:";
 
 /* Class = "NSTabViewItem"; label = "Plugin"; ObjectID = "eE3-9i-hpU"; */
-"eE3-9i-hpU.label" = "Plugin";
+"eE3-9i-hpU.label" = "Πρόσθετο";
 
 /* Class = "NSTextFieldCell"; title = "Hue:"; ObjectID = "eLh-fu-pMj"; */
-"eLh-fu-pMj.title" = "Hue:";
+"eLh-fu-pMj.title" = "Απόχρωση:";
 
 /* Class = "NSTextFieldCell"; title = "Subtitle:"; ObjectID = "eXZ-HN-qL4"; */
 "eXZ-HN-qL4.title" = "Υπότιτλοι:";
 
 /* Class = "NSTextFieldCell"; title = "FONT"; ObjectID = "g6B-DC-lJ0"; */
-"g6B-DC-lJ0.title" = "FONT";
+"g6B-DC-lJ0.title" = "ΓΡΑΜΜΑΤΟΣΕΙΡΑ";
 
 /* Class = "NSButtonCell"; title = "Font…"; ObjectID = "ghy-e7-7Of"; */
-"ghy-e7-7Of.title" = "Font…";
+"ghy-e7-7Of.title" = "ΓΡΑΜΜΑΤΟΣΕΙΡΑ…";
 
 /* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "iS4-Zr-9Ig"; */
-"iS4-Zr-9Ig.title" = "Equalizer:";
+"iS4-Zr-9Ig.title" = "Ισοσταθμιστής:";
 
 /* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[0] = "None"; ObjectID = "iuN-rN-jT7"; */
 "iuN-rN-jT7.ibShadowedLabels[0]" = "Κανένα";
 
 /* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[6] = "Custom…"; ObjectID = "iuN-rN-jT7"; */
-"iuN-rN-jT7.ibShadowedLabels[6]" = "Custom…";
+"iuN-rN-jT7.ibShadowedLabels[6]" = "Προσαρμοσμένο…";
 
 /* Class = "NSTabViewItem"; label = "Subtitle"; ObjectID = "jND-MZ-sKB"; */
 "jND-MZ-sKB.label" = "Υπότιτλοι";
@@ -173,10 +173,10 @@
 "s9l-Hb-SCk.title" = "Μέγεθος:";
 
 /* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "t03-36-Zge"; */
-"t03-36-Zge.title" = "Position:";
+"t03-36-Zge.title" = "Θέση:";
 
 /* Class = "NSTextFieldCell"; title = "Rotation:"; ObjectID = "to3-rc-Agv"; */
-"to3-rc-Agv.title" = "Rotation:";
+"to3-rc-Agv.title" = "Περιστροφή:";
 
 /* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "uCX-EC-jXM"; */
 "uCX-EC-jXM.title" = "-5s";
@@ -188,10 +188,10 @@
 "upM-Lz-YwK.title" = "0s";
 
 /* Class = "NSTextFieldCell"; title = "BACKGROUND"; ObjectID = "uqb-mz-A22"; */
-"uqb-mz-A22.title" = "BACKGROUND";
+"uqb-mz-A22.title" = "ΦΟΝΤΟ";
 
 /* Class = "NSTextFieldCell"; title = "Subtitle style options may break ASS rendering, and some of them will be disabled depending on subtitle type."; ObjectID = "wBD-pZ-Bvu"; */
-"wBD-pZ-Bvu.title" = "Subtitle style options may break ASS rendering, and some of them will be disabled depending on subtitle type.";
+"wBD-pZ-Bvu.title" = "Οι επιλογές στυλ υποτίτλων μπορεί να σπάσουν την απόδοση ASS και μερικές από αυτές θα απενεργοποιηθούν ανάλογα με τον τύπο υποτίτλων.";
 
 /* Class = "NSTextFieldCell"; title = "Audio track:"; ObjectID = "x39-62-7KC"; */
 "x39-62-7KC.title" = "Κομμάτι Ήχου:";
@@ -203,7 +203,7 @@
 "Kt8-Kg-i2O.title" = "+5s";
 
 /* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "zcD-Tg-7Oi"; */
-"zcD-Tg-7Oi.title" = "Equalizer:";
+"zcD-Tg-7Oi.title" = "Ισοσταθμιστής:";
 
 /* Class = "NSTextFieldCell"; title = "Hardware Decoding"; ObjectID = "rw1-Qb-0RV"; */
 "rw1-Qb-0RV.title" = "Αποκωδικοποίηση Υλικού";
@@ -215,13 +215,13 @@
 "UW4-by-XRS.title" = "Υψηλό Δυναμικό Εύρος";
 
 /* Class = "NSMenuItem"; title = "Save the current EQ as a preset…"; ObjectID = "sE0-LN-T8i"; */
-"sE0-LN-T8i.title" = "Save the current EQ as a preset…";
+"sE0-LN-T8i.title" = "Αποθήκευση του τρέχοντος EQ ως προκαθορισμένο…";
 
 /* Class = "NSMenuItem"; title = "Rename the current EQ preset…"; ObjectID = "2tD-0L-UUs"; */
-"2tD-0L-UUs.title" = "Rename the current EQ preset…";
+"2tD-0L-UUs.title" = "Μετονομασία του τρέχοντος EQ προκαθορισμένου…";
 
 /* Class = "NSMenuItem"; title = "Remove the current EQ preset"; ObjectID = "dvI-Rj-7qF"; */
-"dvI-Rj-7qF.title" = "Remove the current EQ preset";
+"dvI-Rj-7qF.title" = "Αφαίρεση της τρέχουσας προεπιλογής EQ";
 
 /* Class = "NSMenuItem"; title = "Manual"; ObjectID = "LPh-nJ-GjN"; */
-"LPh-nJ-GjN.title" = "Manual";
+"LPh-nJ-GjN.title" = "Εγχειρίδιο";

@@ -17,6 +17,12 @@
             "value" : "خيارات mpv إضافية"
           }
         },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дадатковы mpv параметры"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -39,12 +45,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erweiterte mpv-Optionen"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Additional mpv options"
           }
         },
         "en" : {
@@ -131,18 +131,6 @@
             "value" : "추가 설정"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Additional mpv options"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Additional mpv options"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -186,12 +174,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Additional mpv options"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dodatne opcije programa mpv"
@@ -260,7 +242,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Habilita opcions avançadades"
+            "value" : "Habilita les opcions avançades"
           }
         },
         "cs" : {
@@ -278,7 +260,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erweiterte Einstellungen aktivieren"
+            "value" : "Erweiterte Einstellungen"
           }
         },
         "el" : {
@@ -356,7 +338,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Abilita le impostazioni avanzate"
+            "value" : "Abilita impostazioni avanzate"
           }
         },
         "ja" : {
@@ -371,40 +353,34 @@
             "value" : "고급 설정 사용"
           }
         },
-        "lv" : {
+        "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enable advanced settings"
+            "value" : "Geavanceerde instellingen inschakelen"
           }
         },
-        "nb" : {
+        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aktiver avanserte innstillinger"
           }
         },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activeer geavanceerde instellingen"
-          }
-        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Włącz zaawansowane opcje"
+            "value" : "Włącz ustawienia zaawansowane"
           }
         },
         "pt" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ativar filtros avançados"
+            "value" : "Ativar configurações avançadas"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Habilitar ajustes avançados"
+            "value" : "Habilitar configurações avançadas"
           }
         },
         "ro" : {
@@ -428,19 +404,13 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enable advanced settings"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Omogući napredne postavke"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aktivera avancerade alternativ"
+            "value" : "Aktivera avancerade inställningar"
           }
         },
         "ta" : {
@@ -458,7 +428,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Увімкнути розширені параметри"
+            "value" : "Увімкнути розширені налаштування"
           }
         },
         "vi" : {
@@ -483,6 +453,7 @@
     },
     "BK9-mL-ip5.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Logging\"; ObjectID = \"BK9-mL-ip5\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -491,21 +462,236 @@
             "value" : "Logging"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "BZq-Iy-OSr.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Settings\"; ObjectID = \"BZq-Iy-OSr\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "af" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instellings"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الإعدادات"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Налады"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paràmetres"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nastavení"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Indstillinger"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Settings"
           }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajustes"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تنظیمات"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Asetukset"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paramètres"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "הגדרות"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "सेटिंग्स"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Postavke"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beállítások"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pengaturan"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impostazioni"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "設定"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "설정"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "സെറ്റിങ്സ്"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instellingen"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ustawienia"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Definições"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configurações"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Setări"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Настройки"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nastavenia"
+          }
+        },
+        "sr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Postavke"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inställningar"
+          }
+        },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "அமைப்புகள்"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ayarlar"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Параметри"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cài đặt"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设置"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "設定"
+          }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "E3I-Q7-9t1.headerCell.title" : {
       "comment" : "Class = \"NSTableColumn\"; headerCell.title = \"Name\"; ObjectID = \"E3I-Q7-9t1\";",
@@ -521,6 +707,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "الاسم"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Назва"
           }
         },
         "ca" : {
@@ -619,6 +811,12 @@
             "value" : "Nama"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nafn"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -637,22 +835,22 @@
             "value" : "항목"
           }
         },
-        "lv" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Name"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Navn"
+            "value" : "Име"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Naam"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Navn"
           }
         },
         "pl" : {
@@ -691,13 +889,13 @@
             "value" : "Názov"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Name"
+            "value" : "Ime"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Naziv"
@@ -727,6 +925,12 @@
             "value" : "Назва"
           }
         },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نام"
+          }
+        },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
@@ -742,7 +946,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "選項"
+            "value" : "选项"
           }
         }
       }
@@ -785,12 +989,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Konfigurationsordner benutzen:"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use config directory:"
           }
         },
         "en" : {
@@ -877,18 +1075,6 @@
             "value" : "설정 디렉토리 사용:"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use config directory:"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use config directory:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -934,12 +1120,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Use config directory:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Koristi konfiguracioni direktorijum:"
           }
         },
@@ -947,12 +1127,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Använd konfigurationskatalog:"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use config directory:"
           }
         },
         "tr" : {
@@ -1001,6 +1175,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "تحذير"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Папярэджанне"
           }
         },
         "ca" : {
@@ -1117,22 +1297,16 @@
             "value" : "주의"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Warning"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Advarsel"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Waarschuwing"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Advarsel"
           }
         },
         "pl" : {
@@ -1172,12 +1346,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Warning"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Upozorenje"
@@ -1229,6 +1397,7 @@
     },
     "gWN-ya-xRD.placeholderString" : {
       "comment" : "Class = \"NSTextFieldCell\"; placeholderString = \"~/.config/mpv/\"; ObjectID = \"gWN-ya-xRD\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -1237,8 +1406,7 @@
             "value" : "~/.config/mpv/"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "hGq-ek-VHd.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"Debug\"; ObjectID = \"hGq-ek-VHd\";",
@@ -1253,13 +1421,19 @@
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Debug"
+            "value" : "إصدار تصحيح المطور"
           }
         },
-        "ca" : {
+        "az" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Debug"
+            "value" : "Sazla"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Адладка"
           }
         },
         "cs" : {
@@ -1275,12 +1449,6 @@
           }
         },
         "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Debug"
-          }
-        },
-        "el" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Debug"
@@ -1304,18 +1472,6 @@
             "value" : "Depurar"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "اشکال زدایی"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Debug"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1326,12 +1482,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ניפוי שגיאות"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Debug"
           }
         },
         "hr" : {
@@ -1376,12 +1526,6 @@
             "value" : "Atkļūdošana"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Debug"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1424,46 +1568,16 @@
             "value" : "Ladenie"
           }
         },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Debug"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Debug"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Debug"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Debug"
-          }
-        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hata ayıkla"
+            "value" : "Hata Ayıkla"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Налагодження"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Debug"
           }
         },
         "zh-Hans" : {
@@ -1518,12 +1632,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Für die folgenden Einstellungen muss IINA neu gestartet werden."
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The following settings will require restarting IINA to take effect."
           }
         },
         "en" : {
@@ -1610,18 +1718,6 @@
             "value" : "아래 설정을 적용하려면 IINA를 종료한 후 다시 실행해야 합니다."
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The following settings will require restarting IINA to take effect."
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The following settings will require restarting IINA to take effect."
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1667,12 +1763,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The following settings will require restarting IINA to take effect."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "IINA mora biti ponovo pokrenuta da bi ove postavke bile prihvaćene."
           }
         },
@@ -1680,12 +1770,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Följande inställningar kräver omstart av IINA för att ge effekt."
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The following settings will require restarting IINA to take effect."
           }
         },
         "tr" : {
@@ -1724,237 +1808,9 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"Open Log Directory\"; ObjectID = \"JDA-g3-RNX\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
-        "af" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "cs" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "da" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Open Log Directory"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "hu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "ro" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Log Directory"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Open Log Directory"
           }
         }
@@ -1962,6 +1818,7 @@
     },
     "jsf-pn-h6s.ibExternalAccessibilityDescription" : {
       "comment" : "Class = \"NSTextField\"; ibExternalAccessibilityDescription = \"~/.config/mpv/\"; ObjectID = \"jsf-pn-h6s\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -1970,13 +1827,18 @@
             "value" : "~/.config/mpv/"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "LCd-uY-Yze.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"Enable logging to file\"; ObjectID = \"LCd-uY-Yze\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable logging"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1987,6 +1849,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "تمكين التسجيل إلى الملف"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable logging"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable logging"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable logging"
           }
         },
         "ca" : {
@@ -2037,6 +1917,12 @@
             "value" : "Habilitar el log"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable logging"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2079,7 +1965,19 @@
             "value" : "Naplózás engedélyezése"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable logging"
+          }
+        },
         "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable logging"
+          }
+        },
+        "is" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enable logging"
@@ -2097,6 +1995,12 @@
             "value" : "ログを残す"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable logging"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2109,7 +2013,13 @@
             "value" : "Enable logging"
           }
         },
-        "nb" : {
+        "mk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable logging"
+          }
+        },
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enable logging"
@@ -2119,6 +2029,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Schakel logboeken in"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable logging"
           }
         },
         "pl" : {
@@ -2157,13 +2073,13 @@
             "value" : "Povoliť logovanie"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enable logging"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Omogući vođenje evidencije"
@@ -2181,16 +2097,34 @@
             "value" : "Enable logging"
           }
         },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable logging"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Günlük kaydını etkinleştir"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable logging"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Увімкнути журналювання"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable logging"
           }
         },
         "vi" : {
@@ -2251,12 +2185,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wählen …"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Choose…"
           }
         },
         "en" : {
@@ -2343,18 +2271,6 @@
             "value" : "선택…"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Choose…"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Choose…"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2398,12 +2314,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Choose…"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Odaberi…"
@@ -2469,12 +2379,6 @@
             "value" : "Log level:"
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Log level:"
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2491,12 +2395,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Protokollstufe:"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Log level:"
           }
         },
         "en" : {
@@ -2517,18 +2415,6 @@
             "value" : "Nivel de registro:"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Log level:"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Log level:"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2539,12 +2425,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "רמת יומן:"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Log level:"
           }
         },
         "hr" : {
@@ -2583,34 +2463,10 @@
             "value" : "로그 레벨:"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Log level:"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Log level:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Log niveau:"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Log level:"
-          }
-        },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Log level:"
           }
         },
         "pt-BR" : {
@@ -2637,28 +2493,10 @@
             "value" : "Úroveň logovania:"
           }
         },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Log level:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Log level:"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Loggnivå:"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Log level:"
           }
         },
         "tr" : {
@@ -2671,12 +2509,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Рівень журналу:"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Log level:"
           }
         },
         "zh-Hans" : {
@@ -2697,237 +2529,9 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"Show Log Viewer\"; ObjectID = \"Owx-92-Ogg\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
-        "af" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "cs" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "da" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "hu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "ro" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Log Viewer"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Show Log Viewer"
           }
         }
@@ -2971,12 +2575,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "mpv-OSD benutzen"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use mpv's OSD"
           }
         },
         "en" : {
@@ -3063,18 +2661,6 @@
             "value" : "mpv의 OSD 사용"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use mpv's OSD"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use mpv's OSD"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3120,12 +2706,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Use mpv's OSD"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Koristi prikaz na ekranu programa mpv"
           }
         },
@@ -3133,12 +2713,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Använd mpv:s skärmdisplay"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use mpv's OSD"
           }
         },
         "tr" : {
@@ -3175,16 +2749,232 @@
     },
     "Qeu-Jp-bNP.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Top\"; ObjectID = \"Qeu-Jp-bNP\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "af" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bo"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الأعلى"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Superior"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nahoru"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Top"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oben"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Top"
           }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Top"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arriba"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "بالا"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ylhäällä"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En haut"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ראש החלון"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "टॉप"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vrh"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Felül"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atas"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sopra"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "上端"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "위쪽"
+          }
+        },
+        "lv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Augšā"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boven"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Topp"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Góra"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Superior"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Topo"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sus"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сверху"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hore"
+          }
+        },
+        "sr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vrh"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Topp"
+          }
+        },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "மேல்"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Üst"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вгорі"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trên cùng"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "顶端"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "頂端"
+          }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "Qmc-Tb-d7d.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Settings\"; ObjectID = \"Qmc-Tb-d7d\";",
@@ -3200,6 +2990,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "الإعدادات"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Налады"
           }
         },
         "ca" : {
@@ -3224,12 +3020,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Einstellungen"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Settings"
           }
         },
         "en" : {
@@ -3316,16 +3106,10 @@
             "value" : "설정"
           }
         },
-        "lv" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Settings"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Settings"
+            "value" : "സെറ്റിങ്സ്"
           }
         },
         "nl" : {
@@ -3371,12 +3155,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Settings"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Postavke"
@@ -3439,7 +3217,19 @@
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Verbose"
+            "value" : "مطوّل (Verbose)"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uzun"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Падрабязна"
           }
         },
         "ca" : {
@@ -3466,12 +3256,6 @@
             "value" : "Ausführlich"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verbose"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -3490,18 +3274,6 @@
             "value" : "Detallado"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verbose"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verbose"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3512,12 +3284,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "מפורט"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verbose"
           }
         },
         "hr" : {
@@ -3554,18 +3320,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "세부내용"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verbose"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verbose"
           }
         },
         "nl" : {
@@ -3610,30 +3364,6 @@
             "value" : "Podrobný"
           }
         },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verbose"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verbose"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verbose"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verbose"
-          }
-        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3644,12 +3374,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Детальний"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verbose"
           }
         },
         "zh-Hans" : {
@@ -3680,6 +3404,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "خطأ"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Памылкі"
           }
         },
         "ca" : {
@@ -3802,16 +3532,16 @@
             "value" : "Kļūda"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Feil"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fout"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feil"
           }
         },
         "pl" : {
@@ -3851,12 +3581,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Error"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Grеška"
@@ -3920,6 +3644,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "القيمة"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Значэнне"
           }
         },
         "ca" : {
@@ -4036,18 +3766,6 @@
             "value" : "값"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Value"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Value"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4091,12 +3809,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Value"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vrednost"
@@ -4148,16 +3860,232 @@
     },
     "ZBO-c2-bo9.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Enable advanced settings\"; ObjectID = \"ZBO-c2-bo9\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "af" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktiveer gevorderde instellings"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تمكين الإعدادات المتقدمة"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Habilita les opcions avançades"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Povolit pokročilá nastavení"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktiver avancerede indstillinger"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erweiterte Einstellungen"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ενεργοποίηση Προηγμένων Ρυθμίσεων"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Enable advanced settings"
           }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable advanced settings"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Habilitar configuración avanzada"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فعال‌سازی تنظیمات پیشرفته"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salli lisäasetukset"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activer les paramètres avancés"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "אפשר הגדרות מתקדמות"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "उन्नत सेटिंग्स सक्षम करें"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktiviraj napredne postavke"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haladó beállítások engedélyezése"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktifkan pengaturan lanjutan"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abilita impostazioni avanzate"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "高度な設定を有効化"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "고급 설정 사용"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geavanceerde instellingen inschakelen"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktiver avanserte innstillinger"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Włącz ustawienia zaawansowane"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ativar configurações avançadas"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Habilitar configurações avançadas"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activează setările avansate"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Включить расширенные настройки"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Povoliť pokročilé nastavenia"
+          }
+        },
+        "sr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Omogući napredne postavke"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktivera avancerade inställningar"
+          }
+        },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "மேம்பட்ட அமைப்புகளை இயக்கு"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gelişmiş ayarları etkinleştir"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Увімкнути розширені налаштування"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bật cài đặt nâng cao"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "启用高级设置"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "啟用進階設定"
+          }
         }
-      },
-      "shouldTranslate" : false
+      }
     }
   },
   "version" : "1.0"

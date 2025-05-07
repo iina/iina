@@ -16,8 +16,8 @@
 "general.username" = "사용자";
 "general.password" = "암호";
 
-"input.value_is_empty" = "Value cannot be empty.";
-"input.already_exists" = "Value already exists.";
+"input.value_is_empty" = "값을 비워둘 수 없습니다.";
+"input.already_exists" = "값이 이미 존재합니다.";
 
 // Guide Window
 "guide.highlights" = "새로 추가된 기능";
@@ -50,42 +50,42 @@
 "quicksetting.deinterlace" = "디인터레이스";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "숨기기";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.reset_speed" = "기본 속도로 되돌리기";
 
 // EQ Presets
-"eq.preset.flat" = "Flat";
-"eq.preset.acoustic" = "Acoustic";
-"eq.preset.classical" = "Classical";
-"eq.preset.dance" = "Dance";
-"eq.preset.deep" = "Deep";
-"eq.preset.electronic" = "Electronic";
-"eq.preset.hip_hop" = "Hip Hop";
-"eq.preset.increase_bass" = "Increase Bass";
-"eq.preset.increase_treble" = "Increase Treble";
-"eq.preset.increase_vocal" = "Increase Vocal";
-"eq.preset.jazz" = "Jazz";
-"eq.preset.latin" = "Latin";
-"eq.preset.loundness" = "Loundness";
-"eq.preset.lounge" = "Lounge";
-"eq.preset.piano" = "Piano";
-"eq.preset.pop" = "Pop";
+"eq.preset.flat" = "플랫";
+"eq.preset.acoustic" = "어쿠스틱";
+"eq.preset.classical" = "클래식";
+"eq.preset.dance" = "댄스";
+"eq.preset.deep" = "딥";
+"eq.preset.electronic" = "일렉트로닉";
+"eq.preset.hip_hop" = "힙합";
+"eq.preset.increase_bass" = "베이스 증가";
+"eq.preset.increase_treble" = "트레블 증가";
+"eq.preset.increase_vocal" = "보컬 증가";
+"eq.preset.jazz" = "재즈";
+"eq.preset.latin" = "라틴";
+"eq.preset.loundness" = "큰 소리";
+"eq.preset.lounge" = "라운지";
+"eq.preset.piano" = "피아노";
+"eq.preset.pop" = "팝";
 "eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reduce Bass";
-"eq.preset.reduce_treble" = "Reduce Treble";
-"eq.preset.rock" = "Rock";
-"eq.preset.small_speaker" = "Small Speaker";
-"eq.preset.spoken_word" = "Spoken Word";
+"eq.preset.reduce_bass" = "베이스 감소";
+"eq.preset.reduce_treble" = "트레블 감소";
+"eq.preset.rock" = "록";
+"eq.preset.small_speaker" = "소형 스피커";
+"eq.preset.spoken_word" = "음성";
 
-"alert.eq.new_profile.title" = "New EQ Profile";
-"alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Currnet Profile";
-"alert.eq.rename.message" = "Please enter a new profile name.";
+"alert.eq.new_profile.title" = "새 EQ 프로필";
+"alert.eq.new_profile.message" = "프로필의 이름을 입력해주세요.";
+"alert.eq.rename.title" = "현재 프로필 이름 변경";
+"alert.eq.rename.message" = "새 프로필의 이름을 입력해주세요.";
 
 // OSDMessage.swift
 "osd.pause" = "일시 정지됨";
 "osd.resume" = "재생 복원됨";
 "osd.volume" = "음량: %i";
-"osd.speed" = "Speed: %@x";
+"osd.speed" = "속도: %@배속";
 "osd.aspect" = "화면비: %@";
 "osd.crop" = "화면 자르기: %@";
 "osd.rotate" = "회전: %i°";
@@ -147,7 +147,7 @@
 "preference.video_audio" = "비디오/오디오";
 "preference.subtitle" = "자막";
 "preference.network" = "네트워크";
-"preference.control" = "컨트롤";
+"preference.control" = "제어";
 "preference.keybindings" = "단축키";
 "preference.advanced" = "고급설정";
 "preference.plugins" = "플러그인";
@@ -162,7 +162,7 @@
 
 "preference.enable_adv_settings" = "고급 설정 사용";
 
-"preference.sub_override_level.no" = "no";
+"preference.sub_override_level.no" = "아니요";
 "preference.sub_override_level.force" = "force";
 "preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "strip";
@@ -173,6 +173,9 @@
 "preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
 "preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
 "preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
+
+"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
+"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
 "menu.volume" = "음량: %d";
 "menu.volume_muted" = "음량: %d (음소거 됨)";
@@ -190,7 +193,7 @@
 "menu.exit_mini_player" = "음악 모드 나가기";
 "menu.pause" = "일시 정지";
 "menu.resume" = "재생";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "속도: %@배속";
 "menu.chapters" = "챕터 목록 보기";
 "menu.hide_chapters" = "챕터 패널 숨기기";
 "menu.playlist" = "재생목록 보기";
@@ -204,8 +207,8 @@
 
 "menu.seek_forward" = "앞으로 탐색 %.0f초";
 "menu.seek_backward" = "뒤로 탐색 %.0f초";
-"menu.speed_up" = "Speed Up by %@x";
-"menu.speed_down" = "Speed Down by %@x";
+"menu.speed_up" = "%@배 빠르게 재생";
+"menu.speed_down" = "%@배 느리게 재생";
 "menu.volume_up" = "음량 +%.0f%%";
 "menu.volume_down" = "음량 -%.0f%%";
 "menu.audio_delay_up" = "오디오 지연 +%.1f초";
@@ -215,6 +218,14 @@
 
 "menu.crop_custom" = "사용자 설정…";
 "menu.find_online_sub" = "%@에서 온라인 자막 찾기";
+
+"menu.manage_plugins" = "Manage Plugins…";
+"menu.developer_tool" = "Developer Tool";
+"menu.more_plugin" = "More…";
+"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
+"menu.reload_plugins" = "Reload All Plugins";
+"menu.show_plugins_panel" = "Show Plugins Panel";
+"menu.hide_plugins_panel" = "Hide Plugins Panel";
 
 "track.audio" = "오디오";
 "track.none" = "<없음>";
@@ -245,7 +256,7 @@
 "alert.error_saving_file" = "%@: %@을 저장하는 도중 오류가 발생했습니다.";
 "alert.error_deleting_file" = "파일을 삭제할 수 없습니다.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
 
 "alert.config.new.title" = "새 설정 파일";
 "alert.config.new.message" = "새 설정 파일의 이름을 입력하십시오.";
@@ -386,6 +397,7 @@
 "osc_toolbar.music_mode" = "음악 모드 전환";
 "osc_toolbar.sub_track" = "자막 선택";
 "osc_toolbar.screenshot" = "스크린샷 찍기";
+"osc_toolbar.plugins" = "Show plugins panel";
 
 "mini_player.album_art" = "앨범 아트 켜기/끄기";
 "mini_player.loop" = "반복";

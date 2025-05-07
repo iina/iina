@@ -3,6 +3,7 @@
   "strings" : {
     "0UE-Jp-DmE.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Label\"; ObjectID = \"0UE-Jp-DmE\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -11,8 +12,7 @@
             "value" : "Label"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "3xh-dU-HuR.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"Install\"; ObjectID = \"3xh-dU-HuR\";",
@@ -54,12 +54,6 @@
             "value" : "Installieren"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -78,18 +72,6 @@
             "value" : "Instalar"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -100,12 +82,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "התקנה"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install"
           }
         },
         "hr" : {
@@ -144,24 +120,6 @@
             "value" : "설치"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installeren"
-          }
-        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -198,28 +156,10 @@
             "value" : "Inštalovať"
           }
         },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Installera"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install"
           }
         },
         "tr" : {
@@ -232,12 +172,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Встановити"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install"
           }
         },
         "zh-Hans" : {
@@ -270,12 +204,6 @@
             "value" : "الصلاحيات"
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -294,21 +222,9 @@
             "value" : "Berechtigungen"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Permissions"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Permissions"
           }
         },
@@ -316,18 +232,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Permisos"
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
           }
         },
         "fr" : {
@@ -342,28 +246,10 @@
             "value" : "הרשאות"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
-          }
-        },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jogosultságok"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
           }
         },
         "it" : {
@@ -384,18 +270,6 @@
             "value" : "권한"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -414,12 +288,6 @@
             "value" : "Permissões"
           }
         },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
-          }
-        },
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
@@ -432,34 +300,10 @@
             "value" : "Права доступа"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Behörigheter"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
           }
         },
         "tr" : {
@@ -472,12 +316,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Дозволи"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
           }
         },
         "zh-Hans" : {
@@ -510,12 +348,6 @@
             "value" : "المستخدم/ ريبو (repo)"
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "user/repo"
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -528,27 +360,9 @@
             "value" : "user/repo"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "user/repo"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "user/repo"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "user/repo"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "user/repo"
           }
         },
@@ -556,18 +370,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "usuario/repositorio"
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "user/repo"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "user/repo"
           }
         },
         "fr" : {
@@ -582,25 +384,7 @@
             "value" : "user/repo"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "user/repo"
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "user/repo"
-          }
-        },
         "hu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "user/repo"
-          }
-        },
-        "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "user/repo"
@@ -618,43 +402,13 @@
             "value" : "user/repo"
           }
         },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "user/repo"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "user/repo"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "user/repo"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "user/repo"
           }
         },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "user/repo"
-          }
-        },
         "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "user/repo"
-          }
-        },
-        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "user/repo"
@@ -672,34 +426,10 @@
             "value" : "пользователь/репозиторий"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "user/repo"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "user/repo"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "user/repo"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "användare/repo"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "user/repo"
           }
         },
         "tr" : {
@@ -709,12 +439,6 @@
           }
         },
         "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "user/repo"
-          }
-        },
-        "vi" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "user/repo"
@@ -750,12 +474,6 @@
             "value" : "الناشر"
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Author"
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -774,21 +492,9 @@
             "value" : "Autor"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Author"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Author"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Author"
           }
         },
@@ -796,18 +502,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Autor"
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Author"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Author"
           }
         },
         "fr" : {
@@ -822,28 +516,10 @@
             "value" : "מחבר"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Author"
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Author"
-          }
-        },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Szerző"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Author"
           }
         },
         "it" : {
@@ -864,40 +540,16 @@
             "value" : "작성자"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Author"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Author"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Auteur"
           }
         },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Author"
-          }
-        },
         "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Autor"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Author"
           }
         },
         "ro" : {
@@ -912,34 +564,10 @@
             "value" : "Автор"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Author"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Author"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Author"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Författare"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Author"
           }
         },
         "tr" : {
@@ -952,12 +580,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Автор"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Author"
           }
         },
         "zh-Hans" : {
@@ -988,6 +610,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "كشف في Finder"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finder'də göstər"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Паказаць у Finder"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Покажи във Finder"
           }
         },
         "ca" : {
@@ -1086,6 +726,12 @@
             "value" : "Tampilkan dalam Finder"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sýna í Finder"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1110,16 +756,22 @@
             "value" : "Rādīt programmā Meklētājs"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vis i Finder"
+            "value" : "ഫൈൻഡറിൽ കാണിക്കുക"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Toon in Finder"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vis i Finder"
           }
         },
         "pl" : {
@@ -1161,12 +813,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show in Finder"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Prikaži u Finderu"
           }
         },
@@ -1174,12 +820,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Visa i Finder"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show in Finder"
           }
         },
         "tr" : {
@@ -1230,12 +870,6 @@
             "value" : "البريد الإلكتروني"
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Email"
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1254,21 +888,9 @@
             "value" : "E-Mail"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Email"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Email"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Email"
           }
         },
@@ -1276,18 +898,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Correo Electrónico"
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Email"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Email"
           }
         },
         "fr" : {
@@ -1302,28 +912,10 @@
             "value" : "אימייל"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Email"
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Email"
-          }
-        },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "E-mail"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Email"
           }
         },
         "it" : {
@@ -1344,40 +936,16 @@
             "value" : "Email"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Email"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Email"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "E-mail"
           }
         },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Email"
-          }
-        },
         "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "e-mail"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Email"
           }
         },
         "ro" : {
@@ -1392,34 +960,10 @@
             "value" : "Эл. почта"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Email"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Email"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Email"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "E-post"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Email"
           }
         },
         "tr" : {
@@ -1432,12 +976,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Пошта"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Email"
           }
         },
         "zh-Hans" : {
@@ -1470,12 +1008,6 @@
             "value" : "تثبيت من GitHub…"
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install from GitHub…"
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1494,21 +1026,9 @@
             "value" : "Von GitHub installieren…"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install from GitHub…"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Install from GitHub…"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Install from GitHub…"
           }
         },
@@ -1516,18 +1036,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Instalar desde GitHub…"
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install from GitHub…"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install from GitHub…"
           }
         },
         "fr" : {
@@ -1542,28 +1050,10 @@
             "value" : "התקן מ-GitHub…"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install from GitHub…"
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install from GitHub…"
-          }
-        },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Telepítés GitHubról…"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install from GitHub…"
           }
         },
         "it" : {
@@ -1584,40 +1074,16 @@
             "value" : "깃허브에서 설치…"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install from GitHub…"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install from GitHub…"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Installeren vanuit GitHub…"
           }
         },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install from GitHub…"
-          }
-        },
         "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Instalar do GitHub…"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install from GitHub…"
           }
         },
         "ro" : {
@@ -1632,34 +1098,10 @@
             "value" : "Установить с GitHub…"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install from GitHub…"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install from GitHub…"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install from GitHub…"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Installera från GitHub…"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install from GitHub…"
           }
         },
         "tr" : {
@@ -1672,12 +1114,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Встановити з GitHub…"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install from GitHub…"
           }
         },
         "zh-Hans" : {
@@ -1698,6 +1134,12 @@
       "comment" : "Class = \"NSTabViewItem\"; label = \"Preferences\"; ObjectID = \"eyS-eb-H4e\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Подешавања"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1708,6 +1150,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "التفضيلات"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Налады"
           }
         },
         "ca" : {
@@ -1806,6 +1254,12 @@
             "value" : "Preferensi"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valmöguleikar"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1830,16 +1284,16 @@
             "value" : "Iestatījumi"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Innstillinger"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voorkeuren"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Innstillinger"
           }
         },
         "pl" : {
@@ -1879,12 +1333,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Подешавања"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Željene postavke"
@@ -1950,12 +1398,6 @@
             "value" : "يمكنك تثبيت إضافة جديدة من GitHub أو حزمة .iinaplgz محلية. يمكن تحديث الإضافات المثبتة من GitHub تلقائياً."
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically."
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1968,27 +1410,9 @@
             "value" : "Du kan installere en ny tilføjelse fra GitHub eller en lokal .iinaplgz-pakke. Tilføjelser installeret fra GitHub kan opdateres automatisk."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically."
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically."
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically."
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically."
           }
         },
@@ -1996,18 +1420,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Puede instalar un nuevo plugin desde GitHub o un paquete .iinaplgz local. Los plugins instalados desde GitHub se pueden actualizar automáticamente."
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically."
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically."
           }
         },
         "fr" : {
@@ -2022,28 +1434,10 @@
             "value" : "אתה יכול להתקין תוסף חדש מ-GitHub או חבילת .iinaplgz מקומית. תוספים המותקנים מ-GitHub ניתנים לעדכון אוטומטי."
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically."
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically."
-          }
-        },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Telepíthet egy új plugint a GitHubról vagy egy helyi .iinaplgz csomagból. A GitHubról telepített bővítmények automatikusan frissülnek."
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically."
           }
         },
         "it" : {
@@ -2064,18 +1458,6 @@
             "value" : "GitHub 또는 로컬 .iinaplgz 패키지에서 새 플러그인을 설치할 수 있습니다. GitHub에서 설치한 플러그인은 자동으로 업데이트할 수 있습니다."
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically."
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically."
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2094,12 +1476,6 @@
             "value" : "Pode instalar um novo plugin com o GitHub ou com um ficheiro .iinaplgz . Os plugins instalados do GitHub podem ser atualizados automaticamente."
           }
         },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically."
-          }
-        },
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2112,34 +1488,10 @@
             "value" : "Вы можете установить новый плагин с GitHub или локальный пакет .iinaplgz. Плагины, установленные с GitHub, могут обновляться автоматически."
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically."
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically."
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Du kan installera ett nytt tillägg från GitHub eller ett lokalt .iinaplgz-paket. Tillägg installerade från GitHub kan uppdateras automatiskt."
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically."
           }
         },
         "tr" : {
@@ -2152,12 +1504,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ви можете встановити новий плагін з GitHub або локальний .iinaplgz пакет. Плагіни встановлені з GitHub, можна оновлювати автоматично."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically."
           }
         },
         "zh-Hans" : {
@@ -2176,6 +1522,7 @@
     },
     "gKR-78-4OZ.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Label\"; ObjectID = \"gKR-78-4OZ\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -2184,11 +1531,11 @@
             "value" : "Label"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "gKz-C8-h17.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Label\"; ObjectID = \"gKz-C8-h17\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -2197,8 +1544,7 @@
             "value" : "Label"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "ixN-OS-w87.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"Reload\"; ObjectID = \"ixN-OS-w87\";",
@@ -2214,12 +1560,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "إعادة تحميل"
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reload"
           }
         },
         "cs" : {
@@ -2240,21 +1580,9 @@
             "value" : "Neu laden"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reload"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Reload"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Reload"
           }
         },
@@ -2262,18 +1590,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Recargar"
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reload"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reload"
           }
         },
         "fr" : {
@@ -2288,28 +1604,10 @@
             "value" : "טען מחדש"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reload"
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reload"
-          }
-        },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Újratöltés"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reload"
           }
         },
         "it" : {
@@ -2330,40 +1628,16 @@
             "value" : "새로고침"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reload"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reload"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Herladen"
           }
         },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reload"
-          }
-        },
         "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Atualizar"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reload"
           }
         },
         "ro" : {
@@ -2378,34 +1652,10 @@
             "value" : "Перезагрузить"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reload"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reload"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reload"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ladda om"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reload"
           }
         },
         "tr" : {
@@ -2418,12 +1668,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Оновити"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reload"
           }
         },
         "zh-Hans" : {
@@ -2456,12 +1700,6 @@
             "value" : "المعرف"
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Identifier"
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2480,21 +1718,9 @@
             "value" : "Identifikator"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Identifier"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Identifier"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Identifier"
           }
         },
@@ -2502,18 +1728,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Identificador"
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Identifier"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Identifier"
           }
         },
         "fr" : {
@@ -2528,28 +1742,10 @@
             "value" : "מזהה"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Identifier"
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Identifier"
-          }
-        },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Azonosító"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Identifier"
           }
         },
         "it" : {
@@ -2564,46 +1760,22 @@
             "value" : "識別子"
           }
         },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Identifier"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Identifier"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Identifier"
           }
         },
-        "pl" : {
+        "no" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Identifier"
+            "value" : ""
           }
         },
         "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Identificador"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Identifier"
           }
         },
         "ro" : {
@@ -2618,34 +1790,10 @@
             "value" : "Идентификатор"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Identifier"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Identifier"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Identifier"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Identifierare"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Identifier"
           }
         },
         "tr" : {
@@ -2658,12 +1806,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ідентифікатор"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Identifier"
           }
         },
         "zh-Hans" : {
@@ -2684,6 +1826,12 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Help\"; ObjectID = \"Ka5-V3-g5E\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Помоћ"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2718,12 +1866,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hilfe"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Help"
           }
         },
         "en" : {
@@ -2792,6 +1934,12 @@
             "value" : "Bantuan"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hjálp"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2816,16 +1964,16 @@
             "value" : "Palīgs"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hjelp"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Help"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hjelp"
           }
         },
         "pl" : {
@@ -2865,12 +2013,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Помоћ"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pomoć"
@@ -2924,6 +2066,12 @@
       "comment" : "Class = \"NSSegmentedCell\"; KTN-5r-mMm.ibShadowedLabels[0] = \"About\"; ObjectID = \"KTN-5r-mMm\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "О програму"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2934,6 +2082,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "حول التطبيق"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haqqında"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пра"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "За приложението"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "অ্যাপটি সম্পর্কে"
           }
         },
         "ca" : {
@@ -2984,6 +2156,12 @@
             "value" : "Acerca de"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Honi buruz"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3026,10 +2204,22 @@
             "value" : "Névjegy"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Հավելվածի մասին"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tentang"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Um"
           }
         },
         "it" : {
@@ -3044,6 +2234,12 @@
             "value" : "IINAについて"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ಬಗ್ಗೆ"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3056,16 +2252,34 @@
             "value" : "Par"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Om"
+            "value" : "За апликацијата"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "അബൗറ്റ്"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "जानकारी"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Over"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Om"
           }
         },
         "pl" : {
@@ -3104,13 +2318,13 @@
             "value" : "O aplikácii IINA"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "О програму"
+            "value" : "O programu"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "O programu"
@@ -3128,6 +2342,12 @@
             "value" : "இதைப் பற்றி"
           }
         },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "เกี่ยวกับเรา"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3138,6 +2358,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Про програму"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "متعلق"
           }
         },
         "vi" : {
@@ -3176,12 +2402,6 @@
             "value" : "الصلاحيات"
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3200,21 +2420,9 @@
             "value" : "Berechtigungen"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Permissions"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Permissions"
           }
         },
@@ -3222,18 +2430,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Permisos"
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
           }
         },
         "fr" : {
@@ -3248,28 +2444,10 @@
             "value" : "הרשאות"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
-          }
-        },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jogosultságok"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
           }
         },
         "it" : {
@@ -3290,18 +2468,6 @@
             "value" : "권한"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3320,12 +2486,6 @@
             "value" : "Permissões"
           }
         },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
-          }
-        },
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3338,34 +2498,10 @@
             "value" : "Права доступа"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Behörigheter"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
           }
         },
         "tr" : {
@@ -3378,12 +2514,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Дозволи"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permissions"
           }
         },
         "zh-Hans" : {
@@ -3404,6 +2534,12 @@
       "comment" : "Class = \"NSSegmentedCell\"; KTN-5r-mMm.ibShadowedLabels[2] = \"Preferences\"; ObjectID = \"KTN-5r-mMm\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Подешавања"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3414,6 +2550,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "التفضيلات"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Налады"
           }
         },
         "ca" : {
@@ -3512,6 +2654,12 @@
             "value" : "Preferensi"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valmöguleikar"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3536,16 +2684,16 @@
             "value" : "Iestatījumi"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Innstillinger"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voorkeuren"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Innstillinger"
           }
         },
         "pl" : {
@@ -3585,12 +2733,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Подешавања"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Željene postavke"
@@ -3680,12 +2822,6 @@
             "value" : "Nach Updates suchen"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Check for Updates"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -3704,12 +2840,6 @@
             "value" : "Buscar actualizaciones"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Check for Updates"
-          }
-        },
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3719,7 +2849,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vérifier les mises à jour"
+            "value" : "Rechercher des mises à jour"
           }
         },
         "he" : {
@@ -3776,16 +2906,16 @@
             "value" : "Pārbaudīt atjauninājumus"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Se etter oppdateringer"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zoek naar updates"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se etter oppdateringer"
           }
         },
         "pl" : {
@@ -3827,12 +2957,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Check for Updates"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Proveri da li postoje ažuriranja"
           }
         },
@@ -3840,12 +2964,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sök efter uppdateringar"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Check for Updates"
           }
         },
         "tr" : {
@@ -3896,12 +3014,6 @@
             "value" : "الرجاء إدخال عنوان URL الكامل لمستودع GitHub أو سلسلة في تنسيق \"المستخدم/repo\". يمكنك أيضا اختيار واحدة من قائمة الإضافات الافتراضية."
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please enter the full URL of the GitHub repository or a string in the \"user/repo\" format. You can also choose one from the default plugins list."
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3914,27 +3026,9 @@
             "value" : "Indtast den fulde URL til GitHub-repositoriet eller en streng i formatet \"bruger/repo\". Du kan også vælge en fra standardlisten over tilføjelser."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please enter the full URL of the GitHub repository or a string in the \"user/repo\" format. You can also choose one from the default plugins list."
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please enter the full URL of the GitHub repository or a string in the \"user/repo\" format. You can also choose one from the default plugins list."
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Please enter the full URL of the GitHub repository or a string in the \"user/repo\" format. You can also choose one from the default plugins list."
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Please enter the full URL of the GitHub repository or a string in the \"user/repo\" format. You can also choose one from the default plugins list."
           }
         },
@@ -3942,18 +3036,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Por favor, introduzca la URL completa del repositorio de GitHub o una cadena en el formato \"user/repo\". También puede elegir uno de la lista de plugins por defecto."
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please enter the full URL of the GitHub repository or a string in the \"user/repo\" format. You can also choose one from the default plugins list."
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please enter the full URL of the GitHub repository or a string in the \"user/repo\" format. You can also choose one from the default plugins list."
           }
         },
         "fr" : {
@@ -3968,28 +3050,10 @@
             "value" : "אנא הזן את כתובת האתר המלאה של מאגר GitHub או מחרוזת בפורמט \"משתמש/ריפו\". אתה יכול גם לבחור אחד מרשימת התוספים המוגדרים כברירת מחדל."
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please enter the full URL of the GitHub repository or a string in the \"user/repo\" format. You can also choose one from the default plugins list."
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please enter the full URL of the GitHub repository or a string in the \"user/repo\" format. You can also choose one from the default plugins list."
-          }
-        },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kérjük, adja meg a GitHub tároló teljes URL címét vagy egy „user/repo” formátumú karakterláncot. Az alapértelmezett bővítmények listájából is választhat egyet."
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please enter the full URL of the GitHub repository or a string in the \"user/repo\" format. You can also choose one from the default plugins list."
           }
         },
         "it" : {
@@ -4010,28 +3074,10 @@
             "value" : "GitHub 리포지토리의 전체 URL 또는 “사용자/리포지토리” 형식의 문자열을 입력하세요. 기본 플러그인 목록에서 하나를 선택할 수도 있습니다."
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please enter the full URL of the GitHub repository or a string in the \"user/repo\" format. You can also choose one from the default plugins list."
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please enter the full URL of the GitHub repository or a string in the \"user/repo\" format. You can also choose one from the default plugins list."
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vul de volledige URL van de GitHub repository of een string in het \"user/repo\" formaat. Je kunt er ook één kiezen uit de standaard plug-ins."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please enter the full URL of the GitHub repository or a string in the \"user/repo\" format. You can also choose one from the default plugins list."
           }
         },
         "pt" : {
@@ -4058,34 +3104,10 @@
             "value" : "Пожалуйста, введите полный URL GitHub-репозитория или строку в формате «пользователь/репозиторий». Вы также можете выбрать его из списка плагинов по умолчанию."
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please enter the full URL of the GitHub repository or a string in the \"user/repo\" format. You can also choose one from the default plugins list."
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please enter the full URL of the GitHub repository or a string in the \"user/repo\" format. You can also choose one from the default plugins list."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please enter the full URL of the GitHub repository or a string in the \"user/repo\" format. You can also choose one from the default plugins list."
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ange hela URL:en till GitHub-arkivet eller en sträng i formatet \"user/repo\". Du kan också välja ett från listan av standardtillägg."
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please enter the full URL of the GitHub repository or a string in the \"user/repo\" format. You can also choose one from the default plugins list."
           }
         },
         "tr" : {
@@ -4098,12 +3120,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Будь ласка, введіть повний URL репозиторію GitHub або рядок у форматі \"user/repo\". Ви також можете вибрати один зі списку типових плагінів."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please enter the full URL of the GitHub repository or a string in the \"user/repo\" format. You can also choose one from the default plugins list."
           }
         },
         "zh-Hans" : {
@@ -4136,12 +3152,6 @@
             "value" : "الإضافات الافتراضية:"
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default plugins:"
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4154,27 +3164,9 @@
             "value" : "Standardtilføjelser:"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default plugins:"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default plugins:"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Default plugins:"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Default plugins:"
           }
         },
@@ -4182,18 +3174,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Plugins por defecto:"
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default plugins:"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default plugins:"
           }
         },
         "fr" : {
@@ -4208,28 +3188,10 @@
             "value" : "תוספי ברירת מחדל:"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default plugins:"
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default plugins:"
-          }
-        },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Alapértelmezett bővítmények:"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default plugins:"
           }
         },
         "it" : {
@@ -4250,40 +3212,16 @@
             "value" : "기본 플러그인:"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default plugins:"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default plugins:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Standaard plugins:"
           }
         },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default plugins:"
-          }
-        },
         "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Plugins padrão:"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default plugins:"
           }
         },
         "ro" : {
@@ -4298,34 +3236,10 @@
             "value" : "Плагины по умолчанию:"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default plugins:"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default plugins:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default plugins:"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Förvalda tillägg:"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default plugins:"
           }
         },
         "tr" : {
@@ -4338,12 +3252,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Типові плагіни:"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default plugins:"
           }
         },
         "zh-Hans" : {
@@ -4376,12 +3284,6 @@
             "value" : "فشل في تحميل الصفحة."
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to load the page."
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4394,27 +3296,9 @@
             "value" : "Indlæsning af siden mislykkedes."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to load the page."
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to load the page."
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Failed to load the page."
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Failed to load the page."
           }
         },
@@ -4422,18 +3306,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Error al cargar la página."
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to load the page."
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to load the page."
           }
         },
         "fr" : {
@@ -4448,28 +3320,10 @@
             "value" : "טעינת הדף נכשלה."
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to load the page."
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to load the page."
-          }
-        },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Oldal betöltése sikertelen."
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to load the page."
           }
         },
         "it" : {
@@ -4484,46 +3338,16 @@
             "value" : "ページの読み込みに失敗しました。"
           }
         },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to load the page."
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to load the page."
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to load the page."
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fout bij het laden van de pagina."
           }
         },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to load the page."
-          }
-        },
         "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Falha ao carregar a página."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to load the page."
           }
         },
         "ro" : {
@@ -4538,34 +3362,10 @@
             "value" : "Не удалось загрузить страницу."
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to load the page."
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to load the page."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to load the page."
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Det gick inte att läsa in sidan."
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to load the page."
           }
         },
         "tr" : {
@@ -4578,12 +3378,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Не вдалося завантажити сторінку."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to load the page."
           }
         },
         "zh-Hans" : {
@@ -4604,6 +3398,12 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"Cancel\"; ObjectID = \"qje-hT-j7H\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Откажи"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4614,6 +3414,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "إلغاء"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ləğv et"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Скасаваць"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отмяна"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "বাতিল"
           }
         },
         "ca" : {
@@ -4664,6 +3488,12 @@
             "value" : "Cancelar"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utzi"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4706,10 +3536,22 @@
             "value" : "Mégse"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Չեղարկել"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Batal"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hætta við"
           }
         },
         "it" : {
@@ -4724,6 +3566,12 @@
             "value" : "キャンセル"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ರದ್ದುಮಾಡು"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4736,16 +3584,28 @@
             "value" : "Atcelt"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avbryt"
+            "value" : "Откажи"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "റദ്ദാക്കുക"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annuleer"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avbryt"
           }
         },
         "pl" : {
@@ -4784,13 +3644,13 @@
             "value" : "Zrušiť"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Откажи"
+            "value" : "Prekliči"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otkaži"
@@ -4808,6 +3668,12 @@
             "value" : "ரத்துசெய்"
           }
         },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ยกเลิก"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4818,6 +3684,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Скасувати"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "منسوخ"
           }
         },
         "vi" : {
@@ -4842,6 +3714,7 @@
     },
     "QZS-KU-s1Z.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Label\"; ObjectID = \"QZS-KU-s1Z\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -4850,8 +3723,7 @@
             "value" : "Label"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "r3r-Qh-rC9.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Source\"; ObjectID = \"r3r-Qh-rC9\";",
@@ -4867,12 +3739,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "المصدر"
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Source"
           }
         },
         "cs" : {
@@ -4893,21 +3759,9 @@
             "value" : "Quelle"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Source"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Source"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Source"
           }
         },
@@ -4915,18 +3769,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fuente"
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Source"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Source"
           }
         },
         "fr" : {
@@ -4941,28 +3783,10 @@
             "value" : "מקור"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Source"
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Source"
-          }
-        },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Forrás"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Source"
           }
         },
         "it" : {
@@ -4977,34 +3801,10 @@
             "value" : "ソース"
           }
         },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Source"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Source"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Source"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bron"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Source"
           }
         },
         "pt" : {
@@ -5031,34 +3831,10 @@
             "value" : "Источник"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Source"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Source"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Source"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Källa"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Source"
           }
         },
         "tr" : {
@@ -5071,12 +3847,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Джерело"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Source"
           }
         },
         "zh-Hans" : {
@@ -5097,237 +3867,9 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"Install Package…\"; ObjectID = \"sdU-FG-dTO\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
-        "af" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "cs" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "da" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Install Package…"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "hu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "ro" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install Package…"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Install Package…"
           }
         }
@@ -5335,6 +3877,7 @@
     },
     "T11-Rl-GHV.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Multiline Label\"; ObjectID = \"T11-Rl-GHV\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -5343,8 +3886,7 @@
             "value" : "Multiline Label"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "T21-nd-TLF.label" : {
       "comment" : "Class = \"NSTabViewItem\"; label = \"Support\"; ObjectID = \"T21-nd-TLF\";",
@@ -5362,12 +3904,6 @@
             "value" : "الدعم"
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Support"
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5380,27 +3916,9 @@
             "value" : "Hjælp"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Support"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Support"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Support"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Support"
           }
         },
@@ -5408,18 +3926,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Soporte"
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Support"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Support"
           }
         },
         "fr" : {
@@ -5434,28 +3940,10 @@
             "value" : "תמיכה"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Support"
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Support"
-          }
-        },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Támogatás"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Support"
           }
         },
         "it" : {
@@ -5476,28 +3964,10 @@
             "value" : "지원"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Support"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Support"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ondersteuning"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Support"
           }
         },
         "pt" : {
@@ -5524,31 +3994,7 @@
             "value" : "Поддержка"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Support"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Support"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Support"
-          }
-        },
         "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Support"
-          }
-        },
-        "ta" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Support"
@@ -5564,12 +4010,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Підтримка"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Support"
           }
         },
         "zh-Hans" : {
@@ -5656,12 +4096,6 @@
             "value" : "افزونه‌ها"
           }
         },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Plugins"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5672,12 +4106,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "תוספים"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Plugins"
           }
         },
         "hr" : {
@@ -5716,22 +4144,16 @@
             "value" : "플러그인"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Plugins"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Utvidelser"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Plugins"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utvidelser"
           }
         },
         "pl" : {
@@ -5773,12 +4195,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Plugins"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Dodatne komponente"
           }
         },
@@ -5786,12 +4202,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tillägg"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Plugins"
           }
         },
         "tr" : {
@@ -5842,12 +4252,6 @@
             "value" : "إلغاء التثبيت"
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uninstall"
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5866,21 +4270,9 @@
             "value" : "Deinstallieren"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uninstall"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Uninstall"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Uninstall"
           }
         },
@@ -5888,18 +4280,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Desinstalar"
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uninstall"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uninstall"
           }
         },
         "fr" : {
@@ -5914,28 +4294,10 @@
             "value" : "הסר התקנה"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uninstall"
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uninstall"
-          }
-        },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Eltávolítás"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uninstall"
           }
         },
         "it" : {
@@ -5956,40 +4318,16 @@
             "value" : "삭제"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uninstall"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uninstall"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "De-installeren"
           }
         },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uninstall"
-          }
-        },
         "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Desinstalar"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uninstall"
           }
         },
         "ro" : {
@@ -6004,34 +4342,10 @@
             "value" : "Удалить"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uninstall"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uninstall"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uninstall"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Avinstallera"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uninstall"
           }
         },
         "tr" : {
@@ -6044,12 +4358,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Видалити"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uninstall"
           }
         },
         "zh-Hans" : {
@@ -6136,12 +4444,6 @@
             "value" : "افزونه‌ها"
           }
         },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Plugins"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6152,12 +4454,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "תוספים"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Plugins"
           }
         },
         "hr" : {
@@ -6196,22 +4492,16 @@
             "value" : "플러그인"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Plugins"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Utvidelser"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Plugins"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utvidelser"
           }
         },
         "pl" : {
@@ -6253,12 +4543,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Plugins"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Dodatne komponente"
           }
         },
@@ -6266,12 +4550,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tillägg"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Plugins"
           }
         },
         "tr" : {
@@ -6310,6 +4588,12 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"Website\"; ObjectID = \"X6J-6H-IPn\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Веб-сајт"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6320,6 +4604,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "الموقع"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vebsayt"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вэб-сайт"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Уебсайт"
           }
         },
         "ca" : {
@@ -6418,6 +4720,12 @@
             "value" : "Situs"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vefsíða"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6442,16 +4750,28 @@
             "value" : "Mājaslapa"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nettside"
+            "value" : "Веб страна"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "വെബ്സൈറ്റ്"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Website"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nettside"
           }
         },
         "pl" : {
@@ -6490,13 +4810,13 @@
             "value" : "Webová stránka"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Веб-сајт"
+            "value" : "Spletna stran"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Veb-sajt"
@@ -6562,12 +4882,6 @@
             "value" : "الإضافات المثبتة:"
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installed plugins:"
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6586,21 +4900,9 @@
             "value" : "Installierte Plugins:"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installed plugins:"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Installed plugins:"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Installed plugins:"
           }
         },
@@ -6608,18 +4910,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Plugins instalados:"
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installed plugins:"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installed plugins:"
           }
         },
         "fr" : {
@@ -6634,28 +4924,10 @@
             "value" : "תוספים מותקנים:"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installed plugins:"
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installed plugins:"
-          }
-        },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Telepített bővítmények:"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installed plugins:"
           }
         },
         "it" : {
@@ -6676,40 +4948,16 @@
             "value" : "설치된 플러그인:"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installed plugins:"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installed plugins:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geïnstalleerde plugins:"
           }
         },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installed plugins:"
-          }
-        },
         "pt" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Plugins instalados:"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installed plugins:"
           }
         },
         "ro" : {
@@ -6724,34 +4972,10 @@
             "value" : "Установленные плагины:"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installed plugins:"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installed plugins:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installed plugins:"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Installerade tillägg:"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installed plugins:"
           }
         },
         "tr" : {
@@ -6764,12 +4988,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Встановлені плагіни:"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installed plugins:"
           }
         },
         "zh-Hans" : {
@@ -6802,12 +5020,6 @@
             "value" : "تثبيت إضافة جديدة من GitHub"
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install a new plugin from GitHub"
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6820,27 +5032,9 @@
             "value" : "Installer en ny tilføjelse fra GitHub"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install a new plugin from GitHub"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install a new plugin from GitHub"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Install a new plugin from GitHub"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Install a new plugin from GitHub"
           }
         },
@@ -6848,18 +5042,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Instalar un nuevo plugin via GitHub"
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install a new plugin from GitHub"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install a new plugin from GitHub"
           }
         },
         "fr" : {
@@ -6874,28 +5056,10 @@
             "value" : "התקן תוסף חדש מGitHub"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install a new plugin from GitHub"
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install a new plugin from GitHub"
-          }
-        },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Új bővítmény telepítése GitHubról"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install a new plugin from GitHub"
           }
         },
         "it" : {
@@ -6916,28 +5080,10 @@
             "value" : "깃허브에서 새로운 플러그인 설치"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install a new plugin from GitHub"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install a new plugin from GitHub"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Installeer een nieuwe plugin van GitHub"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install a new plugin from GitHub"
           }
         },
         "pt" : {
@@ -6964,34 +5110,10 @@
             "value" : "Установить новый плагин с GitHub"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install a new plugin from GitHub"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install a new plugin from GitHub"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install a new plugin from GitHub"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Installera ett nytt tillägg från GitHub"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install a new plugin from GitHub"
           }
         },
         "tr" : {
@@ -7004,12 +5126,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Встановити новий плагін з GitHub"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Install a new plugin from GitHub"
           }
         },
         "zh-Hans" : {

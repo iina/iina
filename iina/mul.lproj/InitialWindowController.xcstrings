@@ -203,16 +203,16 @@
             "value" : "Uncheck \"receive beta updates\" from Preferences - General, and install a stable release from our <a href=\"https://iina.io\">official website</a>."
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fjern avkrysningen for \"motta betaoppdateringer\" fra Innstillinger - General, og installer en stabil versjon fra vår <a href=\"https://iina.io\">offisielle hjemmeside</a>."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verwijder het vinkje bij \"ontvang bètaversies\" in Voorkeuren - Algemeen, en installeer een stabiele versie via onze <a href=\"https://iina.io\">officiële website</a>."
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fjern avkrysningen for \"motta betaoppdateringer\" fra Innstillinger - General, og installer en stabil versjon fra vår <a href=\"https://iina.io\">offisielle hjemmeside</a>."
           }
         },
         "pl" : {
@@ -479,16 +479,16 @@
             "value" : "<a href=\"mailto:developers@iina.io\">email</a> അല്ലെങ്കിൽ <a href=\"https://github.com/iina/iina/issues\">GitHub issue</a> വഴി ഞങ്ങൾക്ക് റിപ്പോർട്ട് ചെയ്യുക."
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rapporter til oss via <a href=\"mailto:developers@iina.io\">email</a> eller <a href=\"https://github.com/iina/iina/issues\">GitHub issue</a>."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Stuur ons een melding via <a href=\"mailto:developers@iina.io\">e-mail</a> of met een <a href=\"https://github.com/iina/iina/issues\">GitHub issue</a>."
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rapporter til oss via <a href=\"mailto:developers@iina.io\">email</a> eller <a href=\"https://github.com/iina/iina/issues\">GitHub issue</a>."
           }
         },
         "pl" : {
@@ -579,7 +579,6 @@
     },
     "eEO-DW-buJ.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Label\"; ObjectID = \"eEO-DW-buJ\";",
-      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -588,11 +587,11 @@
             "value" : "Label"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "ejb-iU-Lro.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Label\"; ObjectID = \"ejb-iU-Lro\";",
-      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -601,7 +600,8 @@
             "value" : "Label"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "FKG-Tz-TCV.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Open URL…\"; ObjectID = \"FKG-Tz-TCV\";",
@@ -769,16 +769,16 @@
             "value" : "URL തുറക്കുക…"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Åpne URL…"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Open URL…"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Åpne URL…"
           }
         },
         "pl" : {
@@ -869,7 +869,6 @@
     },
     "FKk-kb-jEw.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"⌘O\"; ObjectID = \"FKk-kb-jEw\";",
-      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -878,7 +877,8 @@
             "value" : "⌘O"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "g2g-dy-qBH.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"BETA\"; ObjectID = \"g2g-dy-qBH\";",
@@ -1040,13 +1040,13 @@
             "value" : "ബീറ്റ"
           }
         },
-        "nl" : {
+        "nb" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "BETA"
           }
         },
-        "no" : {
+        "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "BETA"
@@ -1292,16 +1292,16 @@
             "value" : "നിങ്ങൾ IINA-യുടെ ബീറ്റ പതിപ്പാണ് ഉപയോഗിക്കുന്നത്"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du bruker en betaversjon av IINA"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Je gebruikt een bètaversie van IINA"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Du bruker en betaversjon av IINA"
           }
         },
         "pl" : {
@@ -1550,16 +1550,16 @@
             "value" : "ഒരു ബഗ് കണ്ടെത്തിയോ?"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Funnet en feil?"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Een bug gevonden?"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Funnet en feil?"
           }
         },
         "pl" : {
@@ -1652,7 +1652,8 @@
             "value" : "⇧⌘O"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "KWZ-BM-GBN.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Resume\"; ObjectID = \"KWZ-BM-GBN\";",
@@ -1814,16 +1815,16 @@
             "value" : "പുനരാരംഭിക്കുക"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gjenoppta"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hervat"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gjenoppta"
           }
         },
         "pl" : {
@@ -2066,16 +2067,16 @@
             "value" : "ഒരു ബഗ് കണ്ടെത്തിയോ?"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Funnet en feil?"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Een bug gevonden?"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Funnet en feil?"
           }
         },
         "pl" : {
@@ -2160,7 +2161,6 @@
     },
     "lwC-kY-Nqh.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Label\"; ObjectID = \"lwC-kY-Nqh\";",
-      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -2169,11 +2169,11 @@
             "value" : "Label"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "n70-xD-8He.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"IINA\"; ObjectID = \"n70-xD-8He\";",
-      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -2182,7 +2182,8 @@
             "value" : "IINA"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "qsU-lZ-WQq.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Open…\"; ObjectID = \"qsU-lZ-WQq\";",
@@ -2344,16 +2345,16 @@
             "value" : "തുറക്കുക…"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Åpne…"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Open…"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Åpne…"
           }
         },
         "pl" : {
@@ -2596,16 +2597,16 @@
             "value" : "റോൾബാക്ക് ചെയ്യണോ?"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vil du tilbake til tidligere versjon?"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wil je dit terugdraaien?"
-          }
-        },
-        "no" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vil du tilbake til tidligere versjon?"
           }
         },
         "pl" : {
@@ -2690,7 +2691,6 @@
     },
     "tzb-ey-DZ9.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Label\"; ObjectID = \"tzb-ey-DZ9\";",
-      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -2699,11 +2699,11 @@
             "value" : "Label"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "UfC-Vv-Izn.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Label\"; ObjectID = \"UfC-Vv-Izn\";",
-      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -2712,11 +2712,11 @@
             "value" : "Label"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "Yih-Jo-OZc.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Label\"; ObjectID = \"Yih-Jo-OZc\";",
-      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -2725,7 +2725,8 @@
             "value" : "Label"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     }
   },
   "version" : "1.0"

@@ -2,25 +2,25 @@
   "sourceLanguage" : "en",
   "strings" : {
     "3GPP File" : {
-
+      "shouldTranslate" : false
     },
     "3GPP2 File" : {
-
+      "shouldTranslate" : false
     },
     "AAC file" : {
-
+      "shouldTranslate" : false
     },
     "Advanced Streaming Format" : {
-
+      "shouldTranslate" : false
     },
     "AIFF file" : {
-
+      "shouldTranslate" : false
     },
     "Apple QuickTime container" : {
-
+      "shouldTranslate" : false
     },
     "AVI container" : {
-
+      "shouldTranslate" : false
     },
     "CFBundleName" : {
       "comment" : "Bundle name",
@@ -32,58 +32,59 @@
             "value" : "IINA"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "Digital Audio" : {
-
+      "shouldTranslate" : false
     },
     "DivX file" : {
-
+      "shouldTranslate" : false
     },
     "DV file" : {
-
+      "shouldTranslate" : false
     },
     "FLAC Audio File" : {
-
+      "shouldTranslate" : false
     },
     "Flash Video File" : {
-
+      "shouldTranslate" : false
     },
     "GIF image" : {
-
+      "shouldTranslate" : false
     },
     "IINA Plugin" : {
-
+      "shouldTranslate" : false
     },
     "IINA Plugin Package" : {
-
+      "shouldTranslate" : false
     },
     "Matroska Audio File" : {
-
+      "shouldTranslate" : false
     },
     "Matroska Video File" : {
-
+      "shouldTranslate" : false
     },
     "Monkey's Audio Lossless Audio" : {
-
+      "shouldTranslate" : false
     },
     "MPEG Audio File" : {
-
+      "shouldTranslate" : false
     },
     "MPEG Video File" : {
-
+      "shouldTranslate" : false
     },
     "MPEG-2 Stream" : {
-
+      "shouldTranslate" : false
     },
     "MPEG3 Audio File" : {
-
+      "shouldTranslate" : false
     },
     "MPEG4 Audio File" : {
-
+      "shouldTranslate" : false
     },
     "MPEG4 Video File" : {
-
+      "shouldTranslate" : false
     },
     "NSHumanReadableCopyright" : {
       "comment" : "Copyright (human-readable)",
@@ -98,40 +99,40 @@
       }
     },
     "Ogg Audio File" : {
-
+      "shouldTranslate" : false
     },
     "Ogg Video File" : {
-
+      "shouldTranslate" : false
     },
     "OPUS file" : {
-
+      "shouldTranslate" : false
     },
     "RealPlayer Media Files" : {
-
+      "shouldTranslate" : false
     },
     "VOB File (DVD Video)" : {
-
+      "shouldTranslate" : false
     },
     "WAVE Audio File" : {
-
+      "shouldTranslate" : false
     },
     "WavePack Audio File" : {
-
+      "shouldTranslate" : false
     },
     "WebM Video File" : {
-
+      "shouldTranslate" : false
     },
     "Windows Media Audio" : {
-
+      "shouldTranslate" : false
     },
     "Windows Media Video" : {
-
+      "shouldTranslate" : false
     },
     "Windows Recorded TV Show" : {
-
+      "shouldTranslate" : false
     },
     "XM audio file" : {
-
+      "shouldTranslate" : false
     }
   },
   "version" : "1.0"

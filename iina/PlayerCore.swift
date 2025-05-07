@@ -2600,7 +2600,7 @@ class PlayerCore: NSObject {
 
   /// Observer for changes to the macOS Touch Bar settings.
   /// - Parameters:
-  ///   - keyPath; The key path, relative to `object`, to the value that has changed.
+  ///   - keyPath: The key path, relative to `object`, to the value that has changed.
   ///   - object: The source object of the key path `keyPath`.
   ///   - change: A dictionary that describes the changes that have been made to the value of the property at the key path
   ///             `keyPath` relative to object. Entries are described in `Change Dictionary Keys`.

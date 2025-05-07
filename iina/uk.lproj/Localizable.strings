@@ -26,10 +26,10 @@
 
 // Initial Window
 "initial.announcement" = "Ви користуєтеся %@ версією IINA";
-"initial.beta.desc" = "Зніміть відмітку «Отримувати бета-оновлення» через Параметри → Загальні та встановіть стабільну версію з нашого <a href=\"https://iina.io\">офіційного веб-сайту</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.beta.desc" = "Зніміть відмітку «Отримувати бета-оновлення» у розділі налаштувань Параметри → Загальні та встановіть стабільну версію <a href=\"https://iina.io\">з нашого офіційного веб-сайту</a>.";
+"initial.nightly.desc" = "Нічні (тестові) збірки не рекомендовані для щоденного використання. Наразі нічні збірки не підтримують автоматичні оновлення. Завантажуйте новіші збірки вручну <a href=\"https://nightly.iina.io\">з нашого веб-сайту</a>.";
 "initial.debug.desc" = "Збірки налагодження зазвичай не остаточно оптимізовані, тому не рекомендуються для щоденного використання. Збірки налагодження не підтримують автоматичне оновлення.";
-"initial.bug_report" = "Повідомити через <a href=\"https://github.com/iina/iina/issues\">GitHub проблеми</a>.";
+"initial.bug_report" = "Повідомити про проблему <a href=\"https://github.com/iina/iina/issues\">на GitHub</a>.";
 
 // Inspector Window
 "inspector.error" = "Помилка";
@@ -50,7 +50,7 @@
 "quicksetting.deinterlace" = "Черезрядкова розгортка";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Сховати";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.reset_speed" = "Скинути швидкість до 1x";
 
 // EQ Presets
 "eq.preset.flat" = "Плоско";
@@ -58,8 +58,8 @@
 "eq.preset.classical" = "Класика";
 "eq.preset.dance" = "Танцювальна";
 "eq.preset.deep" = "Глибока";
-"eq.preset.electronic" = "Електронна";
-"eq.preset.hip_hop" = "Хіп хоп";
+"eq.preset.electronic" = "Електроніка";
+"eq.preset.hip_hop" = "Хіп-хоп";
 "eq.preset.increase_bass" = "Збільшити баси";
 "eq.preset.increase_treble" = "Збільшити високі частоти";
 "eq.preset.increase_vocal" = "Збільшити вокал";
@@ -67,7 +67,7 @@
 "eq.preset.latin" = "Латина";
 "eq.preset.loundness" = "Гучно";
 "eq.preset.lounge" = "Лаунж";
-"eq.preset.piano" = "Піано";
+"eq.preset.piano" = "Спокійно";
 "eq.preset.pop" = "Поп";
 "eq.preset.rnb" = "R&B";
 "eq.preset.reduce_bass" = "Зменшити низькі частоти";
@@ -85,7 +85,7 @@
 "osd.pause" = "Пауза";
 "osd.resume" = "Відновити";
 "osd.volume" = "Гучність: %i";
-"osd.speed" = "Speed: %@x";
+"osd.speed" = "Швидкість: %@x";
 "osd.aspect" = "Пропорції: %@";
 "osd.crop" = "Обрізання: %@";
 "osd.rotate" = "Обертання: %i°";
@@ -174,6 +174,9 @@
 "preference.sub_override_level.descriptive_text.strip" = "Радикально вилучати всі теги ASS та стилі з субтитрів.";
 "preference.sub_override_level.descriptive_text.yes" = "Застосувати всі параметри стилів у цьому розділі.";
 
+"preference.ytdl_plugin_not_installed" = "Установіть плагін для онлайн-медіа в розділі «Плагіни > Установлення з GitHub» та отримайте функції завантаження відео та автоматичного оновлення yt-dlp.";
+"preference.ytdl_plugin_installed" = "Вбудована підтримка youtube-dl вимкнена, оскільки ви маєте встановленим плагін для онлайн-медіа.";
+
 "menu.volume" = "Гучність: %d";
 "menu.volume_muted" = "Гучність: %d (Без звуку)";
 "menu.audio_delay" = "Затримка звуку: %.2f с";
@@ -190,7 +193,7 @@
 "menu.exit_mini_player" = "Вийти з музичного режиму";
 "menu.pause" = "Пауза";
 "menu.resume" = "Відновити";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "Швидкість: %@x";
 "menu.chapters" = "Показати панель розділів";
 "menu.hide_chapters" = "Приховати панель розділів";
 "menu.playlist" = "Показати панель плейлиста";
@@ -204,8 +207,8 @@
 
 "menu.seek_forward" = "Крок уперед на %.0f с";
 "menu.seek_backward" = "Крок назад на %.0f с";
-"menu.speed_up" = "Speed Up by %@x";
-"menu.speed_down" = "Speed Down by %@x";
+"menu.speed_up" = "Прискорити до %@x";
+"menu.speed_down" = "Сповільнити до %@x";
 "menu.volume_up" = "Гучність +%.0f% %";
 "menu.volume_down" = "Гучність –%.0f% %";
 "menu.audio_delay_up" = "Затримка звуку на +%.1f с";
@@ -215,6 +218,14 @@
 
 "menu.crop_custom" = "Інше…";
 "menu.find_online_sub" = "Знайти онлайн субтитри з %@";
+
+"menu.manage_plugins" = "Керування плагінами…";
+"menu.developer_tool" = "Інструменти розробника";
+"menu.more_plugin" = "Детальніше…";
+"menu.conflicting_shortcuts" = "Конфліктні комбінації клавіш…";
+"menu.reload_plugins" = "Перезавантажити всі плагіни";
+"menu.show_plugins_panel" = "Показати панель плагінів";
+"menu.hide_plugins_panel" = "Приховати панель плагінів";
 
 "track.audio" = "Аудіо";
 "track.none" = "<—>";
@@ -245,7 +256,7 @@
 "alert.error_saving_file" = "Помилка при збереженні %@: %@";
 "alert.error_deleting_file" = "Не можу видалити файл.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "Значення \"%@\" є неприпустимим.\nБудь ласка, вкажіть значення від 10 до 10000 або 0.";
 
 "alert.config.new.title" = "Нові налаштування вводу";
 "alert.config.new.message" = "Будь ласка, введіть назву нових налаштувань.";
@@ -386,6 +397,7 @@
 "osc_toolbar.music_mode" = "Перейти до музичного режиму";
 "osc_toolbar.sub_track" = "Наявні субтитри";
 "osc_toolbar.screenshot" = "Зробити скріншот";
+"osc_toolbar.plugins" = "Показати панель плагінів";
 
 "mini_player.album_art" = "Показати обкладинку альбому";
 "mini_player.loop" = "Повтор";

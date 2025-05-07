@@ -10,14 +10,14 @@
 /* Class = "NSTextFieldCell"; title = "The following settings will require restarting IINA to take effect."; ObjectID = "HMa-Vz-EUk"; */
 "HMa-Vz-EUk.title" = "Les paramètres suivants nécessitent le redémarrage d’IINA.";
 
-/* Class = "NSButtonCell"; title = "Open log directory"; ObjectID = "JDA-g3-RNX"; */
-"JDA-g3-RNX.title" = "Ouvrir le dossier des journaux";
+/* Class = "NSButtonCell"; title = "Open Log Directory"; ObjectID = "JDA-g3-RNX"; */
+"JDA-g3-RNX.title" = "Open Log Directory";
 
 /* Class = "NSButtonCell"; title = "Enable logging to file"; ObjectID = "LCd-uY-Yze"; */
 "LCd-uY-Yze.title" = "Activer la journalisation";
 
-/* Class = "NSButtonCell"; title = "Choose directory…"; ObjectID = "MRT-u8-xTX"; */
-"MRT-u8-xTX.title" = "Choisir un dossier…";
+/* Class = "NSButtonCell"; title = "Choose…"; ObjectID = "MRT-u8-xTX"; */
+"MRT-u8-xTX.title" = "Choisir…";
 
 /* Class = "NSTextFieldCell"; title = "Settings"; ObjectID = "Qmc-Tb-d7d"; */
 "Qmc-Tb-d7d.title" = "Paramètres";
@@ -34,8 +34,8 @@
 /* Class = "NSTextFieldCell"; title = "Log level:"; ObjectID = "nFf-vh-bNd"; */
 "nFf-vh-bNd.title" = "Niveau de détail du journal :";
 
-/* Class = "NSButtonCell"; title = "Show log viewer"; ObjectID = "Owx-92-Ogg"; */
-"Owx-92-Ogg.title" = "Afficher la visionneuse de journaux";
+/* Class = "NSButtonCell"; title = "Show Log Viewer"; ObjectID = "Owx-92-Ogg"; */
+"Owx-92-Ogg.title" = "Show Log Viewer";
 
 /* Class = "NSMenuItem"; title = "Verbose"; ObjectID = "S9M-yY-q0w"; */
 "S9M-yY-q0w.title" = "Détaillé";

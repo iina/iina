@@ -78,7 +78,7 @@
 
 "alert.eq.new_profile.title" = "New EQ Profile";
 "alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Currnet Profile";
+"alert.eq.rename.title" = "Rename Current Profile";
 "alert.eq.rename.message" = "Please enter a new profile name.";
 
 // OSDMessage.swift
@@ -174,6 +174,9 @@
 "preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
 "preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
 
+"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
+"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
+
 "menu.volume" = "Volume: %d";
 "menu.volume_muted" = "Volume: %d (Mudo)";
 "menu.audio_delay" = "Atraso de Áudio: %.2fs";
@@ -216,6 +219,14 @@
 "menu.crop_custom" = "Outro..";
 "menu.find_online_sub" = "Encontrar Legendas on-line em %@";
 
+"menu.manage_plugins" = "Manage Plugins…";
+"menu.developer_tool" = "Developer Tool";
+"menu.more_plugin" = "More…";
+"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
+"menu.reload_plugins" = "Reload All Plugins";
+"menu.show_plugins_panel" = "Show Plugins Panel";
+"menu.hide_plugins_panel" = "Hide Plugins Panel";
+
 "track.audio" = "Áudio";
 "track.none" = "<None>";
 "track.sub" = "Legendas";
@@ -245,7 +256,7 @@
 "alert.error_saving_file" = "Erro ocorreu ao salvar %@: %@";
 "alert.error_deleting_file" = "Não consigo apagar o arquivo.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
 
 "alert.config.new.title" = "Nova configuração";
 "alert.config.new.message" = "Escolha um nome para a nova configuração.";
@@ -386,6 +397,7 @@
 "osc_toolbar.music_mode" = "Entre no modo de música";
 "osc_toolbar.sub_track" = "Escolha a faixa de legendas";
 "osc_toolbar.screenshot" = "Capturar tela";
+"osc_toolbar.plugins" = "Show plugins panel";
 
 "mini_player.album_art" = "Alterar imagem do álbum";
 "mini_player.loop" = "Repetir";

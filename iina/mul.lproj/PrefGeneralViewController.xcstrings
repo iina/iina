@@ -41,12 +41,6 @@
             "value" : "„Datei öffnen“-Dialog anzeigen"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show open file panel"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -137,16 +131,16 @@
             "value" : "Rādīt atvērto failu paneli"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vis åpne filpanel"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Toon bestandskiezer"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vis åpne filpanel"
           }
         },
         "pl" : {
@@ -188,12 +182,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show open file panel"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Prikaži tablu Otvori datoteku"
           }
         },
@@ -201,12 +189,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Visa Öppna fil-panelen"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show open file panel"
           }
         },
         "tr" : {
@@ -219,12 +201,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Показати вікно відкривання файлів"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show open file panel"
           }
         },
         "zh-Hans" : {
@@ -279,12 +255,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fenster nach Wiedergabe geöffnet halten"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keep window open after playback finishes"
           }
         },
         "en" : {
@@ -377,16 +347,16 @@
             "value" : "Saglabāt atvērtu logu pēc atskaņošanas beigām"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hold vindu åpent etter avspilling er ferdig"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Houd venster open nadat afspelen is voltooid"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hold vindu åpent etter avspilling er ferdig"
           }
         },
         "pl" : {
@@ -428,12 +398,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Keep window open after playback finishes"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Neka prozor ostane otvoren nakon završetka reprodukcije"
           }
         },
@@ -441,12 +405,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Håll fönstret öppet efter slutförd uppspelning"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keep window open after playback finishes"
           }
         },
         "tr" : {
@@ -459,12 +417,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Не закривати вікно після перегляду"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keep window open after playback finishes"
           }
         },
         "zh-Hans" : {
@@ -519,12 +471,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sichern unter"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Save to"
           }
         },
         "en" : {
@@ -593,6 +539,12 @@
             "value" : "Simpan ke"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vista til"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -617,16 +569,16 @@
             "value" : "Saglabāt"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Arkiver til"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bewaar in"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arkiver til"
           }
         },
         "pl" : {
@@ -668,12 +620,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Save to"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Sačuvaj u"
           }
         },
@@ -681,12 +627,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Spara till"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Save to"
           }
         },
         "tr" : {
@@ -759,12 +699,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "In die Zwischenablage kopieren"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy to clipboard"
           }
         },
         "en" : {
@@ -857,16 +791,16 @@
             "value" : "Kopēt starpliktuvē"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kopier til utklippstavle"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kopieer naar klembord"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kopier til utklippstavle"
           }
         },
         "pl" : {
@@ -906,12 +840,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Copy to clipboard"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kopiraj u ostavu"
@@ -963,6 +891,7 @@
     },
     "3XO-ks-TDg.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"PNG\"; ObjectID = \"3XO-ks-TDg\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "af" : {
@@ -999,12 +928,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "PNG (*.png)"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "PNG"
           }
         },
         "en" : {
@@ -1049,12 +972,6 @@
             "value" : "PNG"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "PNG"
-          }
-        },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1092,12 +1009,6 @@
           }
         },
         "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "PNG"
-          }
-        },
-        "nb" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "PNG"
@@ -1151,19 +1062,7 @@
             "value" : "PNG"
           }
         },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "PNG"
-          }
-        },
         "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "PNG"
-          }
-        },
-        "ta" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "PNG"
@@ -1199,8 +1098,7 @@
             "value" : "PNG"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "4Qe-7S-8xK.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Options:\"; ObjectID = \"4Qe-7S-8xK\";",
@@ -1240,12 +1138,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Optionen:"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Options:"
           }
         },
         "en" : {
@@ -1338,16 +1230,16 @@
             "value" : "Iespējas:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Alternativer:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Opties:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alternativer:"
           }
         },
         "pl" : {
@@ -1387,12 +1279,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Options:"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Opcije:"
@@ -1458,12 +1344,6 @@
             "value" : "تشغيل القائمة بشكل متكرر"
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop playlist"
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1474,18 +1354,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gentag afspilningsliste"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop playlist"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop playlist"
           }
         },
         "en" : {
@@ -1506,18 +1374,6 @@
             "value" : "Lista de reproducción en bucle"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop playlist"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop playlist"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1530,28 +1386,10 @@
             "value" : "נגינה חוזרת של רשימת ההשמעה"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop playlist"
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop playlist"
-          }
-        },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lejátszási lista ismétlése"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop playlist"
           }
         },
         "it" : {
@@ -1566,46 +1404,10 @@
             "value" : "プレイリストをループ再生"
           }
         },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop playlist"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop playlist"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop playlist"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Afspeellijst herhalen"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop playlist"
-          }
-        },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop playlist"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop playlist"
           }
         },
         "ro" : {
@@ -1620,36 +1422,6 @@
             "value" : "Повтор плейлиста"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop playlist"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop playlist"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop playlist"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop playlist"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop playlist"
-          }
-        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1660,12 +1432,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Зациклити плейлист"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop playlist"
           }
         },
         "zh-Hans" : {
@@ -1720,12 +1486,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wiedergabefenster wird im Dock abgelegt oder wiederhergestellt"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Minimized/un-minimized"
           }
         },
         "en" : {
@@ -1818,16 +1578,16 @@
             "value" : "Minimizēts/neminimizēts"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Minimert/ikke-minimert"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pauzeer zolang het videovenster geminimaliseerd is"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minimert/ikke-minimert"
           }
         },
         "pl" : {
@@ -1869,12 +1629,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Minimized/un-minimized"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Prozor pošalje u Dock/vrati iz Docka"
           }
         },
@@ -1882,12 +1636,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Minimerad/återställd"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Minimized/un-minimized"
           }
         },
         "tr" : {
@@ -1900,12 +1648,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Згорнуто / розгорнуто"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Minimized/un-minimized"
           }
         },
         "zh-Hans" : {
@@ -1926,6 +1668,12 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Playlist:\"; ObjectID = \"6TV-DG-503\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Плејлиста:"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1960,12 +1708,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wiedergabeliste:"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Playlist:"
           }
         },
         "en" : {
@@ -2034,6 +1776,12 @@
             "value" : "Daftar Putar:"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spilunarlisti:"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2058,16 +1806,16 @@
             "value" : "Atskaņošanas saraksts:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Spilleliste:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Afspeellijst:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spilleliste:"
           }
         },
         "pl" : {
@@ -2107,12 +1855,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Плејлиста:"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Plejlista:"
@@ -2298,16 +2040,16 @@
             "value" : "Lai tas stātos spēkā, ir nepieciešams restartēt IINA."
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Krever omstart at IINA for å tre i kraft."
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "IINA moet opnieuw opstarten voor deze optie."
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Krever omstart at IINA for å tre i kraft."
           }
         },
         "pl" : {
@@ -2347,12 +2089,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Requires restarting IINA to take effect."
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "IINA se mora ponovo pokrenuti da bi postavka bila prihvaćena."
@@ -2440,12 +2176,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "„Benutzte Dokumente“-Menü aktivieren"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable \"Open Recent\" menu"
           }
         },
         "en" : {
@@ -2538,16 +2268,16 @@
             "value" : "Ieslēgt izvēlni \"Atvērt jaunākos\""
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktiver \"Åpne nylige\"-meny"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Schakel \"Open recente bestanden\"-menu in"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktiver \"Åpne nylige\"-meny"
           }
         },
         "pl" : {
@@ -2589,12 +2319,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enable \"Open Recent\" menu"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Omogući meni „Otvori nedavnu stavku“"
           }
         },
@@ -2602,12 +2326,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Använd menyn \"Öppna senaste\""
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable \"Open Recent\" menu"
           }
         },
         "tr" : {
@@ -2620,12 +2338,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Увімкнути меню «Відкрити останні»"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable \"Open Recent\" menu"
           }
         },
         "zh-Hans" : {
@@ -2658,12 +2370,6 @@
             "value" : "تكرار ملف واحد"
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop single file"
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2674,18 +2380,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gentag enkelt fil"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop single file"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop single file"
           }
         },
         "en" : {
@@ -2706,18 +2400,6 @@
             "value" : "Archivo único en bucle"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop single file"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop single file"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2730,28 +2412,10 @@
             "value" : "חזרה על הקובץ הנוכחי"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop single file"
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop single file"
-          }
-        },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Egyetlen fájl ismétlése"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop single file"
           }
         },
         "it" : {
@@ -2766,46 +2430,10 @@
             "value" : "1つのファイルをループ"
           }
         },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop single file"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop single file"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop single file"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enkel bestand herhalen"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop single file"
-          }
-        },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop single file"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop single file"
           }
         },
         "ro" : {
@@ -2820,36 +2448,6 @@
             "value" : "Повтор одного файла"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop single file"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop single file"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop single file"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop single file"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop single file"
-          }
-        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2860,12 +2458,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Зациклити один файл"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loop single file"
           }
         },
         "zh-Hans" : {
@@ -2922,12 +2514,6 @@
             "value" : "Nur im „Musikmodus“"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Only in \"music mode\""
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -2970,12 +2556,6 @@
             "value" : "רק ב\"מצב מוזיקה\""
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Only in \"music mode\""
-          }
-        },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3016,12 +2596,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tikai \"mūzikas režīmā\""
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Only in \"music mode\""
           }
         },
         "nl" : {
@@ -3069,12 +2643,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Only in \"music mode\""
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Samo u „muzičkom režimu“"
           }
         },
@@ -3082,12 +2650,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Endast i \"musikläge\""
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Only in \"music mode\""
           }
         },
         "tr" : {
@@ -3100,12 +2662,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Тільки в \"музичному режимі\""
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Only in \"music mode\""
           }
         },
         "zh-Hans" : {
@@ -3162,12 +2718,6 @@
             "value" : "Alle Dateien in „Benutzte Dokumente“ aufführen"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Track all played files in \"Open Recent\" menu"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -3184,12 +2734,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Registrar todos los archivos reproducidos en el menú \"Abrir reciente\""
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Track all played files in \"Open Recent\" menu"
           }
         },
         "fi" : {
@@ -3258,16 +2802,16 @@
             "value" : "Visu atskaņoto failu izsekošana izvēlnē \"Atvērt jaunākos\""
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Spor alle spilte filer i \"Åpnet nylig\"-menyen"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Toon alle afgespeelde bestanden in het \"Open recente bestanden\"-menu"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spor alle spilte filer i \"Åpnet nylig\"-menyen"
           }
         },
         "pl" : {
@@ -3309,12 +2853,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Track all played files in \"Open Recent\" menu"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Prati sve reprodukovane datoteke u meniju „Otvori nedavnu stavku“"
           }
         },
@@ -3322,12 +2860,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Spåra alla uppspelade filer i \"Öppna senaste\"-menyn"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Track all played files in \"Open Recent\" menu"
           }
         },
         "tr" : {
@@ -3340,12 +2872,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Заносити всі переглянуті файли до меню «Відкрити останні»"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Track all played files in \"Open Recent\" menu"
           }
         },
         "zh-Hans" : {
@@ -3400,12 +2926,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Täglich"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Daily"
           }
         },
         "en" : {
@@ -3474,6 +2994,12 @@
             "value" : "Setiap hari"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daglega"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3498,16 +3024,16 @@
             "value" : "Ikdienas"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Daglig"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dagelijks"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daglig"
           }
         },
         "pl" : {
@@ -3549,12 +3075,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Daily"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Svakodnevno"
           }
         },
@@ -3562,12 +3082,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dagligen"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Daily"
           }
         },
         "tr" : {
@@ -3618,6 +3132,12 @@
             "value" : "تلقي تحديثات الإصدار التجريبي"
           }
         },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Атрымліваць бэта абнаўленні"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3640,12 +3160,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Beta-Updates erhalten"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Receive beta updates"
           }
         },
         "en" : {
@@ -3732,18 +3246,6 @@
             "value" : "베타 업데이트 받기"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Receive beta updates"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Receive beta updates"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3789,12 +3291,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Receive beta updates"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Dobijaj beta-verzije"
           }
         },
@@ -3802,12 +3298,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ta emot beta-uppdateringar"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Receive beta updates"
           }
         },
         "tr" : {
@@ -3858,6 +3348,12 @@
             "value" : "توقف"
           }
         },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Паўза"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3867,7 +3363,7 @@
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pozastavit"
+            "value" : "pozastavení"
           }
         },
         "da" : {
@@ -3879,7 +3375,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wiedergabe pausieren"
+            "value" : "Pausieren"
           }
         },
         "el" : {
@@ -3903,7 +3399,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pausar"
+            "value" : "Pausa"
           }
         },
         "fa" : {
@@ -3927,7 +3423,7 @@
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "השהה"
+            "value" : "השהיה"
           }
         },
         "hi" : {
@@ -3954,10 +3450,16 @@
             "value" : "Jeda"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hlé"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Rimani in pausa"
+            "value" : "Pausa"
           }
         },
         "ja" : {
@@ -3978,22 +3480,22 @@
             "value" : "Pauze"
           }
         },
-        "nb" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pauzeer"
+          }
+        },
+        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pause"
           }
         },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Begin gepauzeerd"
-          }
-        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zatrzymaj"
+            "value" : "Pauza"
           }
         },
         "pt" : {
@@ -4017,7 +3519,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Поставить на паузу"
+            "value" : "паузу"
           }
         },
         "sk" : {
@@ -4027,12 +3529,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pause"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pauziraj"
@@ -4059,7 +3555,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Зупинити"
+            "value" : "паузу"
           }
         },
         "vi" : {
@@ -4120,12 +3616,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pausieren, wenn Vollbildmodus verlassen wurde"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pause upon leaving full screen"
           }
         },
         "en" : {
@@ -4212,18 +3702,6 @@
             "value" : "전체 화면 중단 시 일시 정지"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pause upon leaving full screen"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pause upon leaving full screen"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4269,12 +3747,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pause upon leaving full screen"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Pauziraj po izlasku iz režima celog ekrana"
           }
         },
@@ -4282,12 +3754,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pausa när helskärmsläget lämnas"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pause upon leaving full screen"
           }
         },
         "tr" : {
@@ -4300,12 +3766,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Зупиняти при виході з повноекранного режиму"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pause upon leaving full screen"
           }
         },
         "zh-Hans" : {
@@ -4360,12 +3820,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wenn Datei geöffnet wird:"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "When media is opened:"
           }
         },
         "en" : {
@@ -4458,16 +3912,16 @@
             "value" : "Kad medijs ir atvērts:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Når media åpnes:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wanneer media wordt geopend:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Når media åpnes:"
           }
         },
         "pl" : {
@@ -4509,12 +3963,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "When media is opened:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Kada se medijska datoteka otvori:"
           }
         },
@@ -4522,12 +3970,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "När media öppnats:"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "When media is opened:"
           }
         },
         "tr" : {
@@ -4540,12 +3982,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Коли файл відкрито:"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "When media is opened:"
           }
         },
         "zh-Hans" : {
@@ -4600,12 +4036,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Beim Start:"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "At launch:"
           }
         },
         "en" : {
@@ -4692,22 +4122,16 @@
             "value" : "처음 실행 시"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "At launch:"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ved oppstart:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bij opstarten:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ved oppstart:"
           }
         },
         "pl" : {
@@ -4749,12 +4173,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "At launch:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Pri pokretanju:"
           }
         },
@@ -4782,12 +4200,6 @@
             "value" : "Коли запущено:"
           }
         },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "At launch:"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4804,6 +4216,7 @@
     },
     "H5d-pS-Cum.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"JPEG XL (.jxl)\"; ObjectID = \"H5d-pS-Cum\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -4812,8 +4225,7 @@
             "value" : "JPEG XL (.jxl)"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "hWC-KJ-FuC.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"Check for updates\"; ObjectID = \"hWC-KJ-FuC\";",
@@ -4853,12 +4265,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nach Updates suchen:"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Check for updates"
           }
         },
         "en" : {
@@ -4927,6 +4333,12 @@
             "value" : "Periksa pembaruan"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gá að uppfærslum"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4945,22 +4357,16 @@
             "value" : "자동 업데이트 확인"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Check for updates"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Se etter oppdateringer"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zoek automatisch naar updates"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se etter oppdateringer"
           }
         },
         "pl" : {
@@ -5002,12 +4408,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Check for updates"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Proveri da li postoje ažuriranja"
           }
         },
@@ -5015,12 +4415,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sök efter uppdateringar"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Check for updates"
           }
         },
         "tr" : {
@@ -5095,12 +4489,6 @@
             "value" : "Pausieren, wenn Mac in den Ruhezustand wechselt"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pause when machine goes to sleep"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -5117,12 +4505,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pausar cuando la máquina entra en reposo"
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pause when machine goes to sleep"
           }
         },
         "fi" : {
@@ -5167,6 +4549,12 @@
             "value" : "Jeda saat komputer memasuki mode sleep"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hlé þegar tölvan fer að sofa"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5185,22 +4573,16 @@
             "value" : "잠자기에 들어가면 일시 정지"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pause when machine goes to sleep"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pause når maskinen går i dvale"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pauzeer wanneer de computer in sluimerstand wordt geplaatst"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pause når maskinen går i dvale"
           }
         },
         "pl" : {
@@ -5242,12 +4624,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pause when machine goes to sleep"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Pauziraj kada računar ode u stanje spavanja"
           }
         },
@@ -5255,12 +4631,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pausa när maskinen går in i vila"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pause when machine goes to sleep"
           }
         },
         "tr" : {
@@ -5335,12 +4705,6 @@
             "value" : "Wiedergabeverlauf aktivieren"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable playback history"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -5357,12 +4721,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Habilitar el historial de reproducción"
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable playback history"
           }
         },
         "fi" : {
@@ -5407,6 +4765,12 @@
             "value" : "Aktifkan riwayat pemutaran"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Virkja nýlega spilun"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5423,18 +4787,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "재생 기록 사용하기"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable playback history"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable playback history"
           }
         },
         "nl" : {
@@ -5482,12 +4834,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enable playback history"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Omogući istoriju reprodukcije"
           }
         },
@@ -5495,12 +4841,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aktivera uppspelningshistorik"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable playback history"
           }
         },
         "tr" : {
@@ -5575,12 +4915,6 @@
             "value" : "Wöchentlich"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Weekly"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -5647,6 +4981,12 @@
             "value" : "Setiap minggu"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vikulega"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5671,16 +5011,16 @@
             "value" : "Iknedēļas"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ukentlig"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wekelijks"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ukentlig"
           }
         },
         "pl" : {
@@ -5722,12 +5062,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Weekly"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Sedmično"
           }
         },
@@ -5735,12 +5069,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Veckovis"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Weekly"
           }
         },
         "tr" : {
@@ -5813,12 +5141,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wiedergabefenster wird inaktiv oder aktiv"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Window becomes inactive/active"
           }
         },
         "en" : {
@@ -5911,16 +5233,16 @@
             "value" : "Logs kļūst neaktīvs/aktīvs"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vindu blir inaktivt/aktivt"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pauzeer zolang het videovenster niet het voorste venster is."
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vindu blir inaktivt/aktivt"
           }
         },
         "pl" : {
@@ -5962,12 +5284,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Window becomes inactive/active"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Prozor postane aktivan/neaktivan"
           }
         },
@@ -5975,12 +5291,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fönstret blev inaktivt/aktivt"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Window becomes inactive/active"
           }
         },
         "tr" : {
@@ -5993,12 +5303,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Вікно неактивне / активне"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Window becomes inactive/active"
           }
         },
         "zh-Hans" : {
@@ -6053,12 +5357,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verlauf:"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "History:"
           }
         },
         "en" : {
@@ -6127,6 +5425,12 @@
             "value" : "Riwayat:"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ferill:"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6143,18 +5447,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "재생 기록"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "History:"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "History:"
           }
         },
         "nl" : {
@@ -6200,12 +5492,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "History:"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Istorija:"
@@ -6295,12 +5581,6 @@
             "value" : "Aktion abwarten"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Do nothing"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -6367,6 +5647,12 @@
             "value" : "Jangan lakukan apa-apa"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gera ekkert"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6391,16 +5677,16 @@
             "value" : "Nedarīt neko"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gjør ingenting"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Toon niets"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gjør ingenting"
           }
         },
         "pl" : {
@@ -6440,12 +5726,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Do nothing"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ne radi ništa"
@@ -6535,12 +5815,6 @@
             "value" : "Letzte Wiedergabeposition merken"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Resume last playback position"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -6557,12 +5831,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Reanudar en la última posición de reproducción"
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Resume last playback position"
           }
         },
         "fi" : {
@@ -6607,6 +5875,12 @@
             "value" : "Lanjutkan posisi pemutaran terakhir"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Byrja frá því sem seinast var horfið"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6623,18 +5897,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "최근에 재생했던 위치로 복원"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Resume last playback position"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Resume last playback position"
           }
         },
         "nl" : {
@@ -6682,12 +5944,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Resume last playback position"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Nastavi od poslednjeg položaja reprodukcije"
           }
         },
@@ -6695,12 +5951,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Återuppta position från föregående uppspelning"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Resume last playback position"
           }
         },
         "tr" : {
@@ -6713,12 +5963,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Відновити перегляд з останньої позиції"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Resume last playback position"
           }
         },
         "zh-Hans" : {
@@ -6751,12 +5995,6 @@
             "value" : "عند فتح ملف يدوياً:"
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "When a file is opened manually:"
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6773,12 +6011,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wenn eine Datei manuell geöffnet wird:"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "When a file is opened manually:"
           }
         },
         "en" : {
@@ -6799,18 +6031,6 @@
             "value" : "Cuando un archivo se abre manualmente:"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "When a file is opened manually:"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "When a file is opened manually:"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6823,28 +6043,10 @@
             "value" : "כאשר מדיה נפתחת ידנית:"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "When a file is opened manually:"
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "When a file is opened manually:"
-          }
-        },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ha egy fájlt kézzel nyit meg:"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "When a file is opened manually:"
           }
         },
         "it" : {
@@ -6859,46 +6061,10 @@
             "value" : "ファイルが手動で開かれた時:"
           }
         },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "When a file is opened manually:"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "When a file is opened manually:"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "When a file is opened manually:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wanneer een bestand handmatig wordt geopend:"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "When a file is opened manually:"
-          }
-        },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "When a file is opened manually:"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "When a file is opened manually:"
           }
         },
         "ro" : {
@@ -6913,36 +6079,6 @@
             "value" : "Когда файл открывается вручную:"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "When a file is opened manually:"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "When a file is opened manually:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "When a file is opened manually:"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "When a file is opened manually:"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "When a file is opened manually:"
-          }
-        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6953,12 +6089,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Коли файл відкрито вручну:"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "When a file is opened manually:"
           }
         },
         "zh-Hans" : {
@@ -7015,12 +6145,6 @@
             "value" : "Interpret und Titel für Audiodateien anzeigen, wenn verfügbar"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show artist and track name for audio files when available"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -7039,12 +6163,6 @@
             "value" : "Mostrar el nombre del artista y pista en los archivos de audio cuando estén disponibles"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show artist and track name for audio files when available"
-          }
-        },
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7061,12 +6179,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "הצג אמן ושם רצועה עבור קובצי אודיו (כאשר זמינים)"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show artist and track name for audio files when available"
           }
         },
         "hr" : {
@@ -7103,18 +6215,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "가능할 경우 아티스트와 트랙 이름 표시"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show artist and track name for audio files when available"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show artist and track name for audio files when available"
           }
         },
         "nl" : {
@@ -7162,12 +6262,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show artist and track name for audio files when available"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Prikaži ime izvođača i numere za audio datoteke kada su dostupni"
           }
         },
@@ -7175,12 +6269,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Visa artist- och spårnamn för ljudfiler när de finns tillgängliga"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show artist and track name for audio files when available"
           }
         },
         "tr" : {
@@ -7193,12 +6281,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Показувати виконавця та назву треку для аудіофайлів, коли це доступно"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show artist and track name for audio files when available"
           }
         },
         "zh-Hans" : {
@@ -7219,22 +6301,10 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Still prevents system from sleeping.\"; ObjectID = \"Kdk-iC-e1C\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
-        "af" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Still prevents system from sleeping."
-          }
-        },
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "لا يزال يمنع النظام من النوم."
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Still prevents system from sleeping."
           }
         },
         "cs" : {
@@ -7255,12 +6325,6 @@
             "value" : "Verhindert immer noch, dass das System schläft."
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Still prevents system from sleeping."
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -7279,18 +6343,6 @@
             "value" : "Aún evita que el sistema entre en reposo."
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Still prevents system from sleeping."
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Still prevents system from sleeping."
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7303,28 +6355,10 @@
             "value" : "עדיין מונע מהמערכת להירדם."
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Still prevents system from sleeping."
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Still prevents system from sleeping."
-          }
-        },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Még mindig megakadályozza a rendszer elalvását."
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Still prevents system from sleeping."
           }
         },
         "it" : {
@@ -7339,46 +6373,10 @@
             "value" : "システムのスリープを防止。"
           }
         },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Still prevents system from sleeping."
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Still prevents system from sleeping."
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Still prevents system from sleeping."
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voorkomt nog steeds dat het systeem gaat slapen."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Still prevents system from sleeping."
-          }
-        },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Still prevents system from sleeping."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Still prevents system from sleeping."
           }
         },
         "ro" : {
@@ -7393,36 +6391,6 @@
             "value" : "По-прежнему не позволяет системе перейти в спящий режим."
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Still prevents system from sleeping."
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Still prevents system from sleeping."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Still prevents system from sleeping."
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Still prevents system from sleeping."
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Still prevents system from sleeping."
-          }
-        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7433,12 +6401,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Запобігає системі переходити в режим сну."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Still prevents system from sleeping."
           }
         },
         "zh-Hans" : {
@@ -7493,12 +6455,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Beim Abspielen von Musik automatisch in den „Musikmodus“ wechseln"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Switch to \"music mode\" automatically when playing an audio file"
           }
         },
         "en" : {
@@ -7585,18 +6541,6 @@
             "value" : "음악을 재생할 때 \"음악 모드\"로 자동 전환"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Switch to \"music mode\" automatically when playing an audio file"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Switch to \"music mode\" automatically when playing an audio file"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7642,12 +6586,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Switch to \"music mode\" automatically when playing an audio file"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Automatski pređi na „muzički režim“ prilikom reprodukcije zvučne datoteke"
           }
         },
@@ -7655,12 +6593,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Växla automatiskt till musikläge vid uppspelning av en ljudfil"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Switch to \"music mode\" automatically when playing an audio file"
           }
         },
         "tr" : {
@@ -7673,12 +6605,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Автоматично переходити до \"музичного режиму\" при відтворюванні аудіофайлу"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Switch to \"music mode\" automatically when playing an audio file"
           }
         },
         "zh-Hans" : {
@@ -7697,6 +6623,7 @@
     },
     "KOO-mQ-9JG.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"WebP (.webp)\"; ObjectID = \"KOO-mQ-9JG\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -7705,8 +6632,7 @@
             "value" : "WebP (.webp)"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "KYi-0W-zOr.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"Black out other monitors while in full screen\"; ObjectID = \"KYi-0W-zOr\";",
@@ -7748,12 +6674,6 @@
             "value" : "Im Vollbildmodus andere Monitore abdunkeln"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Black out other monitors while in full screen"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -7770,12 +6690,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Apagar otros monitores mientras está en pantalla completa"
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Black out other monitors while in full screen"
           }
         },
         "fi" : {
@@ -7820,6 +6734,12 @@
             "value" : "Hitamkan monitor lain saat mengaktifkan mode layar penuh"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Slökkva á öðrum skjám þegar að spilað er í fullum skjá"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7836,18 +6756,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "전체 화면일 때 다른 모니터 끄기"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Black out other monitors while in full screen"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Black out other monitors while in full screen"
           }
         },
         "nl" : {
@@ -7895,12 +6803,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Black out other monitors while in full screen"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Zatamni druge monitore u režimu celog ekrana"
           }
         },
@@ -7908,12 +6810,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Släck övriga skärmar vid helskärmsläge"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Black out other monitors while in full screen"
           }
         },
         "tr" : {
@@ -7926,12 +6822,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Затемнити інші вікна, коли у повноекранному режимі"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Black out other monitors while in full screen"
           }
         },
         "zh-Hans" : {
@@ -7986,12 +6876,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nächste Datei automatisch abspielen"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Play next item automatically"
           }
         },
         "en" : {
@@ -8078,18 +6962,6 @@
             "value" : "다음 항목 자동 재생"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Play next item automatically"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Play next item automatically"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8135,12 +7007,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Play next item automatically"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Reprodukuj sledeću stavku automatski"
           }
         },
@@ -8148,12 +7014,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Spela nästa objekt automatiskt"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Play next item automatically"
           }
         },
         "tr" : {
@@ -8166,12 +7026,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Відтворювати наступний файл автоматично"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Play next item automatically"
           }
         },
         "zh-Hans" : {
@@ -8226,12 +7080,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wiedergabe, wenn Vollbildmodus gestartet wurde"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Play upon entering full screen"
           }
         },
         "en" : {
@@ -8318,18 +7166,6 @@
             "value" : "전체 화면 전환시 재생 시작"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Play upon entering full screen"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Play upon entering full screen"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8375,12 +7211,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Play upon entering full screen"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Reprodukuj po ulasku u režim celog ekrana"
           }
         },
@@ -8388,12 +7218,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Spela upp när helskärmsläget aktiveras"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Play upon entering full screen"
           }
         },
         "tr" : {
@@ -8406,12 +7230,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Відтворити при вході до повноекранного режиму"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Play upon entering full screen"
           }
         },
         "zh-Hans" : {
@@ -8466,12 +7284,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Untertitel einbinden"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Include subtitles"
           }
         },
         "en" : {
@@ -8558,18 +7370,6 @@
             "value" : "자막 포함"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Include subtitles"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Include subtitles"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8615,12 +7415,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Include subtitles"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Prikaži titlove"
           }
         },
@@ -8628,12 +7422,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Inkludera undertexter"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Include subtitles"
           }
         },
         "tr" : {
@@ -8646,12 +7434,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Включити субтитри"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Include subtitles"
           }
         },
         "zh-Hans" : {
@@ -8706,12 +7488,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dateien immer in neuem Fenster öffnen"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Always open media in new window"
           }
         },
         "en" : {
@@ -8798,18 +7574,6 @@
             "value" : "항상 새로운 윈도우로 파일 열기"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Always open media in new window"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Always open media in new window"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8855,12 +7619,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Always open media in new window"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Uvek otvori medijsku datoteku u novom prozoru"
           }
         },
@@ -8868,12 +7626,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Öppna alltid media i nytt fönster"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Always open media in new window"
           }
         },
         "tr" : {
@@ -8946,12 +7698,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vollbildmodus aktivieren"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enter fullscreen"
           }
         },
         "en" : {
@@ -9038,18 +7784,6 @@
             "value" : "전체 화면"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enter fullscreen"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enter fullscreen"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9095,12 +7829,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enter fullscreen"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Uđi u režim celog ekrana"
           }
         },
@@ -9108,12 +7836,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gå in i helskärmsläge"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enter fullscreen"
           }
         },
         "tr" : {
@@ -9150,6 +7872,7 @@
     },
     "NVh-C5-b9i.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"JPEG (.jpeg)\"; ObjectID = \"NVh-C5-b9i\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "af" : {
@@ -9188,12 +7911,6 @@
             "value" : "JPEG (*.jpeg)"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "JPEG (.jpeg)"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -9212,12 +7929,6 @@
             "value" : "JPEG (.jpeg)"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "JPEG (.jpeg)"
-          }
-        },
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9231,12 +7942,6 @@
           }
         },
         "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "JPEG (.jpeg)"
-          }
-        },
-        "hi" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "JPEG (.jpeg)"
@@ -9273,18 +7978,6 @@
           }
         },
         "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "JPEG (.jpeg)"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "JPEG (.jpeg)"
-          }
-        },
-        "nb" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "JPEG (.jpeg)"
@@ -9338,19 +8031,7 @@
             "value" : "JPEG (.jpeg)"
           }
         },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "JPEG (.jpeg)"
-          }
-        },
         "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "JPEG (.jpeg)"
-          }
-        },
-        "ta" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "JPEG (.jpeg)"
@@ -9386,8 +8067,7 @@
             "value" : "JPEG (.jpeg)"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "oJY-Iz-3sO.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Format:\"; ObjectID = \"oJY-Iz-3sO\";",
@@ -9403,6 +8083,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "الصيغة:"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Format:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фармат:"
           }
         },
         "ca" : {
@@ -9501,6 +8193,12 @@
             "value" : "Format:"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Snið:"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9510,31 +8208,31 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "形式:"
+            "value" : "フォーマット:"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "파일 형식"
+            "value" : "포맷"
           }
         },
-        "lv" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Format:"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Format:"
+            "value" : "ഫോർമാറ്റ്:"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Structuur:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Format:"
           }
         },
         "pl" : {
@@ -9579,12 +8277,6 @@
             "value" : "Format:"
           }
         },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Format:"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9607,6 +8299,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Формат:"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فارمیٹ:"
           }
         },
         "vi" : {
@@ -9667,12 +8365,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bildschirmfotos:"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Screenshots:"
           }
         },
         "en" : {
@@ -9759,18 +8451,6 @@
             "value" : "스크린샷"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Screenshots:"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Screenshots:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9814,12 +8494,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Screenshots:"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Snimci ekrana:"
@@ -9909,12 +8583,6 @@
             "value" : "Speicherort:"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Destination:"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -9999,22 +8667,16 @@
             "value" : "저장 위치"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Destination:"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mål:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Doel:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mål:"
           }
         },
         "pl" : {
@@ -10056,12 +8718,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Destination:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Odredište:"
           }
         },
@@ -10069,12 +8725,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mål:"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Destination:"
           }
         },
         "tr" : {
@@ -10147,12 +8797,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dateien im selben Ordner automatisch hinzufügen"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add files in the same folder automatically"
           }
         },
         "en" : {
@@ -10239,18 +8883,6 @@
             "value" : "같은 폴더에 있는 파일을 자동으로 추가"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add files in the same folder automatically"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add files in the same folder automatically"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10296,12 +8928,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add files in the same folder automatically"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Dodaj datoteke u istu fasciklu automatski"
           }
         },
@@ -10309,12 +8935,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lägg till filer i samma mapp automatiskt"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add files in the same folder automatically"
           }
         },
         "tr" : {
@@ -10365,12 +8985,6 @@
             "value" : "منع حامي الشاشة عند بدء التشغيل"
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prevent screen saver from starting while playing"
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10387,12 +9001,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verhindern, dass der Bildschirmschoner während der Wiedergabe startet"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prevent screen saver from starting while playing"
           }
         },
         "en" : {
@@ -10413,18 +9021,6 @@
             "value" : "Evita que el salvapantallas comience mientras se reproduce"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prevent screen saver from starting while playing"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prevent screen saver from starting while playing"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10437,28 +9033,10 @@
             "value" : "מנע את הפעלת שומר המסך בזמן ניגון"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prevent screen saver from starting while playing"
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prevent screen saver from starting while playing"
-          }
-        },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "A képernyőkímélő elindulásának megakadályozása lejátszás közben"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prevent screen saver from starting while playing"
           }
         },
         "it" : {
@@ -10479,40 +9057,10 @@
             "value" : "재생 중에는 화면 보호기 시작을 막기"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prevent screen saver from starting while playing"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prevent screen saver from starting while playing"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voorkom dat de schermbeveiliging start tijdens het afspelen"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prevent screen saver from starting while playing"
-          }
-        },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prevent screen saver from starting while playing"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prevent screen saver from starting while playing"
           }
         },
         "ro" : {
@@ -10527,36 +9075,6 @@
             "value" : "Предотвратить запуск экранной заставки во время воспроизведения"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prevent screen saver from starting while playing"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prevent screen saver from starting while playing"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prevent screen saver from starting while playing"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prevent screen saver from starting while playing"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prevent screen saver from starting while playing"
-          }
-        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10567,12 +9085,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Запобігає запуск режиму збереження екрана під час відтворення"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Prevent screen saver from starting while playing"
           }
         },
         "zh-Hans" : {
@@ -10627,12 +9139,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Monatlich"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Monthly"
           }
         },
         "en" : {
@@ -10719,18 +9225,6 @@
             "value" : "매월"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Monthly"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Monthly"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10776,12 +9270,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Monthly"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Mesečno"
           }
         },
@@ -10789,12 +9277,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Månadsvis"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Monthly"
           }
         },
         "tr" : {
@@ -10869,12 +9351,6 @@
             "value" : "Stündlich"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hourly"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -10941,6 +9417,12 @@
             "value" : "Per jam"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Klukkutíma fresti"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10957,18 +9439,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "매시간"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hourly"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hourly"
           }
         },
         "nl" : {
@@ -11016,12 +9486,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hourly"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Svakog sata"
           }
         },
@@ -11029,12 +9493,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Timvis"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hourly"
           }
         },
         "tr" : {
@@ -11071,6 +9529,7 @@
     },
     "tmy-ty-8uK.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"JPEG (.jpg)\"; ObjectID = \"tmy-ty-8uK\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "af" : {
@@ -11109,12 +9568,6 @@
             "value" : "JPEG (*.jpg)"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "JPEG (.jpg)"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -11133,12 +9586,6 @@
             "value" : "JPEG (.jpg)"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "JPEG (.jpg)"
-          }
-        },
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11152,12 +9599,6 @@
           }
         },
         "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "JPEG (.jpg)"
-          }
-        },
-        "hi" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "JPEG (.jpg)"
@@ -11194,18 +9635,6 @@
           }
         },
         "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "JPEG (.jpg)"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "JPEG (.jpg)"
-          }
-        },
-        "nb" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "JPEG (.jpg)"
@@ -11259,19 +9688,7 @@
             "value" : "JPEG (.jpg)"
           }
         },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "JPEG (.jpg)"
-          }
-        },
         "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "JPEG (.jpg)"
-          }
-        },
-        "ta" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "JPEG (.jpg)"
@@ -11307,8 +9724,7 @@
             "value" : "JPEG (.jpg)"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "TvB-UM-FrS.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"Use legacy full screen\"; ObjectID = \"TvB-UM-FrS\";",
@@ -11350,12 +9766,6 @@
             "value" : "Alternativen Vollbildmodus verwenden"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use legacy full screen"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -11372,12 +9782,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Usar pantalla completa heredada"
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use legacy full screen"
           }
         },
         "fi" : {
@@ -11440,18 +9844,6 @@
             "value" : "이전 방식의 전체 화면 전환 사용 (10.6 이전)"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use legacy full screen"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use legacy full screen"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11497,12 +9889,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Use legacy full screen"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Koristi zastareli režim celog ekrana"
           }
         },
@@ -11510,12 +9896,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Använd det gamla fullskärmsläget"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use legacy full screen"
           }
         },
         "tr" : {
@@ -11528,12 +9908,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Задіяти старий повноекранний режим"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use legacy full screen"
           }
         },
         "zh-Hans" : {
@@ -11588,12 +9962,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verhalten:"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Behavior:"
           }
         },
         "en" : {
@@ -11662,6 +10030,12 @@
             "value" : "Perilaku:"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hegðun:"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11678,18 +10052,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "동작"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Behavior:"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Behavior:"
           }
         },
         "nl" : {
@@ -11737,12 +10099,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Behavior:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Ponašanjе:"
           }
         },
@@ -11750,12 +10106,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Beteende:"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Behavior:"
           }
         },
         "tr" : {
@@ -11768,12 +10118,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Поведінка:"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Behavior:"
           }
         },
         "zh-Hans" : {
@@ -11830,12 +10174,6 @@
             "value" : "Vorschau nach der Aufnahme von Bildschirmfotos anzeigen"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show previews after taking screenshots"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -11854,12 +10192,6 @@
             "value" : "Mostrar vistas previas después de tomar capturas de pantalla"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show previews after taking screenshots"
-          }
-        },
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11876,12 +10208,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "הצג תצוגה מקדימה לאחר צילום המסך"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show previews after taking screenshots"
           }
         },
         "hr" : {
@@ -11918,18 +10244,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "스크린샷 저장 후 미리보기 보여주기"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show previews after taking screenshots"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show previews after taking screenshots"
           }
         },
         "nl" : {
@@ -11977,12 +10291,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show previews after taking screenshots"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Prikaži pregled nakon što se napravi snimak ekrana"
           }
         },
@@ -11990,12 +10298,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Visa förhandsvisningar efter att ha tagit skärmdumpar"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show previews after taking screenshots"
           }
         },
         "tr" : {
@@ -12008,12 +10310,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Показати попередній перегляд при створенні скріншотів"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show previews after taking screenshots"
           }
         },
         "zh-Hans" : {
@@ -12070,12 +10366,6 @@
             "value" : "Andernfalls werden dort nur manuell geöffnete Dateien aufgeführt."
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Otherwise only files that opened manually will show up in this menu."
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -12092,12 +10382,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "De lo contrario, sólo los archivos que se abran manualmente aparecerán en este menú"
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Otherwise only files that opened manually will show up in this menu."
           }
         },
         "fi" : {
@@ -12160,18 +10444,6 @@
             "value" : "선택되지 않은 경우 수동으로 열었던 파일만 '최근 파일 열기' 메뉴에 보입니다."
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Otherwise only files that opened manually will show up in this menu."
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Otherwise only files that opened manually will show up in this menu."
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12217,12 +10489,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Otherwise only files that opened manually will show up in this menu."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "U suprotnom će se u ovom meniju prikazati samo datoteke koje su otvorene ručno."
           }
         },
@@ -12230,12 +10496,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annars kommer endast manuellt öppnade filer visas i denna meny."
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Otherwise only files that opened manually will show up in this menu."
           }
         },
         "tr" : {
@@ -12248,12 +10508,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Інакше в цьому меню відображатимуться файли, що відкривалися лише вручну."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Otherwise only files that opened manually will show up in this menu."
           }
         },
         "zh-Hans" : {
@@ -12310,12 +10564,6 @@
             "value" : "Pause/Wiedergabe, wenn:"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pause/resume when:"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -12332,12 +10580,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pausar/reanudar cuando:"
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pause/resume when:"
           }
         },
         "fi" : {
@@ -12382,6 +10624,12 @@
             "value" : "Jeda/lanjut saat:"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stoppa/byrja þegar:"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12398,18 +10646,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "다음의 경우 일시 정지/재생"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pause/resume when:"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pause/resume when:"
           }
         },
         "nl" : {
@@ -12457,12 +10693,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pause/resume when:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Pauziraj/nastavi kada:"
           }
         },
@@ -12470,12 +10700,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pausa/fortsätt när:"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pause/resume when:"
           }
         },
         "tr" : {
@@ -12488,12 +10712,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Зупинити / відновити, коли: "
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pause/resume when:"
           }
         },
         "zh-Hans" : {
@@ -12550,12 +10768,6 @@
             "value" : "~/Desktop"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "/path/to/screenshot/folder"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -12572,12 +10784,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "/ruta/a/carpeta/capturas"
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "/path/to/screenshot/folder"
           }
         },
         "fi" : {
@@ -12640,18 +10846,6 @@
             "value" : "/path/to/screenshot/folder"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "/path/to/screenshot/folder"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "/path/to/screenshot/folder"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12697,12 +10891,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "/path/to/screenshot/folder"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "/putanja/do/fascikle/sa snimcima ekrana"
           }
         },
@@ -12710,12 +10898,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "/sökväg/till/mapp/för/skärmdumpar"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "/path/to/screenshot/folder"
           }
         },
         "tr" : {
@@ -12728,12 +10910,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "/шлях/до/папки/скріншотів"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "/path/to/screenshot/folder"
           }
         },
         "zh-Hans" : {
@@ -12766,12 +10942,6 @@
             "value" : "ليس أثناء \"وضع الموسيقى\" أو عند تشغيل الصوت فقط"
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not while in \"music mode\" or only playing audio"
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12788,12 +10958,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nicht im „Musikmodus“ oder bei reiner Audiowiedergabe"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not while in \"music mode\" or only playing audio"
           }
         },
         "en" : {
@@ -12814,52 +10978,10 @@
             "value" : "No mientras está el \"modo de música\" o solo durante la reproducción de audio"
           }
         },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not while in \"music mode\" or only playing audio"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not while in \"music mode\" or only playing audio"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pas en mode « musique », ou seulement en mode audio"
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not while in \"music mode\" or only playing audio"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not while in \"music mode\" or only playing audio"
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not while in \"music mode\" or only playing audio"
-          }
-        },
-        "hu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not while in \"music mode\" or only playing audio"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not while in \"music mode\" or only playing audio"
           }
         },
         "it" : {
@@ -12874,46 +10996,10 @@
             "value" : "ミュージックモードまたはオーディオだけを再生中の場合を除く"
           }
         },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not while in \"music mode\" or only playing audio"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not while in \"music mode\" or only playing audio"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not while in \"music mode\" or only playing audio"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Niet terwijl de “muziekmodus” is ingeschakeld of alleen audio wordt afgespeeld"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not while in \"music mode\" or only playing audio"
-          }
-        },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not while in \"music mode\" or only playing audio"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not while in \"music mode\" or only playing audio"
           }
         },
         "ro" : {
@@ -12928,36 +11014,6 @@
             "value" : "Не в «музыкальном режиме» или при воспроизведении только аудио"
           }
         },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not while in \"music mode\" or only playing audio"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not while in \"music mode\" or only playing audio"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not while in \"music mode\" or only playing audio"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not while in \"music mode\" or only playing audio"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not while in \"music mode\" or only playing audio"
-          }
-        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12968,12 +11024,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Не під час \"музичного режиму\" або лише відтворення аудіо"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not while in \"music mode\" or only playing audio"
           }
         },
         "zh-Hans" : {
@@ -13030,12 +11080,6 @@
             "value" : "Beenden, wenn keine Fenster mehr geöffnet sind"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quit after all windows are closed"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -13052,12 +11096,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Terminar la sesión del programa al cerrar todas las ventanas"
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quit after all windows are closed"
           }
         },
         "fi" : {
@@ -13120,18 +11158,6 @@
             "value" : "모든 윈도우를 닫으면 앱을 종료"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quit after all windows are closed"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quit after all windows are closed"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13177,12 +11203,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quit after all windows are closed"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Napusti nakon što se svi prozori zatvore"
           }
         },
@@ -13190,12 +11210,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Avsluta efter att alla fönster har stängts"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quit after all windows are closed"
           }
         },
         "tr" : {
@@ -13270,12 +11284,6 @@
             "value" : "Willkommensfenster anzeigen"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show welcome window"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -13342,6 +11350,12 @@
             "value" : "Tampilkan window permulaan"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sýna byrjunar glugga"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13358,18 +11372,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "시작 윈도우 보기"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show welcome window"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show welcome window"
           }
         },
         "nl" : {
@@ -13417,12 +11419,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show welcome window"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Prikaži pozdravni prozor"
           }
         },
@@ -13430,12 +11426,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Visa välkomstfönster"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show welcome window"
           }
         },
         "tr" : {
@@ -13448,12 +11438,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "показати вікно привітання"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show welcome window"
           }
         },
         "zh-Hans" : {

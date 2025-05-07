@@ -17,12 +17,6 @@
             "value" : "تحميل الوسائط……"
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loading Media……"
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -41,12 +35,6 @@
             "value" : "Medien werden geladen……"
           }
         },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loading Media……"
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
@@ -54,24 +42,6 @@
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loading Media……"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loading Media……"
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loading Media……"
-          }
-        },
-        "fi" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Loading Media……"
@@ -89,28 +59,10 @@
             "value" : "טוען מדיה……"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loading Media……"
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loading Media……"
-          }
-        },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Média betöltése……"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loading Media……"
           }
         },
         "it" : {
@@ -131,46 +83,10 @@
             "value" : "미디어 불러오는 중……"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loading Media……"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loading Media……"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Media aan het laden……"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loading Media……"
-          }
-        },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loading Media……"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loading Media……"
-          }
-        },
-        "ro" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loading Media……"
           }
         },
         "ru" : {
@@ -185,30 +101,6 @@
             "value" : "Načítavam Média……"
           }
         },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loading Media……"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loading Media……"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loading Media……"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loading Media……"
-          }
-        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -219,12 +111,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Завантаження медіа……"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loading Media……"
           }
         },
         "zh-Hans" : {
@@ -255,6 +141,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "فتح"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Адкрыць"
           }
         },
         "ca" : {
@@ -353,6 +245,12 @@
             "value" : "Buka"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opna"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -377,16 +275,22 @@
             "value" : "Atvērt"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Åpne"
+            "value" : "തുറക്കുക"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Open"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Åpne"
           }
         },
         "pl" : {
@@ -426,12 +330,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otvori"
@@ -497,6 +395,12 @@
             "value" : "عنوان URL غير صالح."
           }
         },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Некарэктны URL."
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -519,12 +423,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Die Adresse ist ungültig."
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "URL is invalid."
           }
         },
         "en" : {
@@ -617,16 +515,16 @@
             "value" : "URL saite nav derīga."
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nettadressen er ugyldig."
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "URL is ongeldig."
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nettadressen er ugyldig."
           }
         },
         "pl" : {
@@ -666,12 +564,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "URL is invalid."
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "URL adresa je nevažeća."
@@ -725,6 +617,12 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"Cancel\"; ObjectID = \"iNG-ee-EW6\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Откажи"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -735,6 +633,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "إلغاء"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ləğv et"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Скасаваць"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отмяна"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "বাতিল"
           }
         },
         "ca" : {
@@ -785,6 +707,12 @@
             "value" : "Cancelar"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utzi"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -827,10 +755,22 @@
             "value" : "Mégse"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Չեղարկել"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Batal"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hætta við"
           }
         },
         "it" : {
@@ -845,6 +785,12 @@
             "value" : "キャンセル"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ರದ್ದುಮಾಡು"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -857,16 +803,28 @@
             "value" : "Atcelt"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avbryt"
+            "value" : "Откажи"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "റദ്ദാക്കുക"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annuleer"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avbryt"
           }
         },
         "pl" : {
@@ -905,13 +863,13 @@
             "value" : "Zrušiť"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Откажи"
+            "value" : "Prekliči"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otkaži"
@@ -929,6 +887,12 @@
             "value" : "ரத்துசெய்"
           }
         },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ยกเลิก"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -939,6 +903,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Скасувати"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "منسوخ"
           }
         },
         "vi" : {
@@ -963,6 +933,7 @@
     },
     "kqT-tD-Wzp.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"http://\"; ObjectID = \"kqT-tD-Wzp\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -971,8 +942,7 @@
             "value" : "http://"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "m0D-hR-3pr.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"Remember username and password for this host in keychain\"; ObjectID = \"m0D-hR-3pr\";",
@@ -988,6 +958,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "تذكر اسم المستخدم وكلمة المرور لهذا المضيف في سلسلة المفاتيح"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Запомніць імя карыстальніка і пароль для гэтага хосту ў звязку ключоў"
           }
         },
         "ca" : {
@@ -1012,12 +988,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Benutzernamen und Passwort für diesen Host im Schlüsselbund sichern"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Remember username and password for this host in keychain"
           }
         },
         "en" : {
@@ -1110,16 +1080,16 @@
             "value" : "Saglabāt lietotājvārdu un paroli šim resursdatoram keychain"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Husk brukernavn og passord for denne verten i nøkkelring"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bewaar gebruikersnaam en wachtwoord voor deze host in Sleutelhanger"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Husk brukernavn og passord for denne verten i nøkkelring"
           }
         },
         "pl" : {
@@ -1161,12 +1131,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Remember username and password for this host in keychain"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Sačuvaj korisničko ime i lozinku za ovaj host u privesku ključeva"
           }
         },
@@ -1174,12 +1138,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kom ihåg användarnamn och lösenord för denna värd i nyckelringen"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Remember username and password for this host in keychain"
           }
         },
         "tr" : {
@@ -1228,6 +1186,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "اسم المستخدم"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İstifadəçi adı"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Імя карыстальніка"
           }
         },
         "ca" : {
@@ -1323,7 +1293,7 @@
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nama Pengguna"
+            "value" : "Nama pengguna"
           }
         },
         "it" : {
@@ -1350,16 +1320,16 @@
             "value" : "Lietotājvārds"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Brukernavn"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gebruikersnaam"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Brukernavn"
           }
         },
         "pl" : {
@@ -1371,7 +1341,7 @@
         "pt" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nome de utilizador"
+            "value" : "Nome de Utilizador"
           }
         },
         "pt-BR" : {
@@ -1395,16 +1365,10 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Meno"
+            "value" : "Meno používateľa"
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Username"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Korisničko Ime"
@@ -1449,7 +1413,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "使用者名稱"
+            "value" : "用戶名"
           }
         }
       }
@@ -1468,6 +1432,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "كلمة المرور"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Şifr"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пароль"
           }
         },
         "ca" : {
@@ -1590,16 +1566,16 @@
             "value" : "Parole"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Passord"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wachtwoord"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Passord"
           }
         },
         "pl" : {
@@ -1641,12 +1617,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Password"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Lozinka"
           }
         },
@@ -1683,7 +1653,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "密码"
+            "value" : "口令"
           }
         },
         "zh-Hant" : {
@@ -1710,6 +1680,12 @@
             "value" : "مصادقة HTTP"
           }
         },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Аўтэнтыфікацыя HTTP"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1732,12 +1708,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "HTTP-Authentifizierung"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "HTTP Authentication"
           }
         },
         "en" : {
@@ -1830,16 +1800,16 @@
             "value" : "HTTP autentifikācijas lietotājs"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "HTTP godkjenning"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "HTTP-authenticatie"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HTTP godkjenning"
           }
         },
         "pl" : {
@@ -1881,12 +1851,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "HTTP Authentication"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "HTTP potvrda identiteta"
           }
         },
@@ -1894,12 +1858,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "HTTP-autentisering"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "HTTP Authentication"
           }
         },
         "tr" : {
@@ -1950,6 +1908,12 @@
             "value" : "الرجاء إدخال عنوان URL……"
           }
         },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Калі ласка, увядзіце тут URL……"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1972,12 +1936,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Adresse eingeben"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please enter the URL here……"
           }
         },
         "en" : {
@@ -2070,16 +2028,16 @@
             "value" : "Lūdzu, ievadiet URL saiti šeit……"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Skriv inn nettadressen her..."
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voer hier de URL in……"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skriv inn nettadressen her..."
           }
         },
         "pl" : {
@@ -2119,12 +2077,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please enter the URL here……"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ovde unеsitе URL adresu……"
@@ -2190,12 +2142,6 @@
             "value" : "إيقاف التحميل"
           }
         },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop Loading"
-          }
-        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2206,12 +2152,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Stop indlæsning"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop Loading"
           }
         },
         "el" : {
@@ -2232,24 +2172,6 @@
             "value" : "Stop Loading"
           }
         },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop Loading"
-          }
-        },
-        "fa" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop Loading"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop Loading"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2262,28 +2184,10 @@
             "value" : "עצור טעינה"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop Loading"
-          }
-        },
-        "hr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop Loading"
-          }
-        },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Betöltés leállítása"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop Loading"
           }
         },
         "it" : {
@@ -2298,24 +2202,6 @@
             "value" : "読み込み停止"
           }
         },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop Loading"
-          }
-        },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop Loading"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop Loading"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2328,58 +2214,10 @@
             "value" : "Zatrzymaj Ładowanie"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop Loading"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop Loading"
-          }
-        },
-        "ro" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop Loading"
-          }
-        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Остановить загрузку"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop Loading"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop Loading"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop Loading"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop Loading"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop Loading"
           }
         },
         "tr" : {
@@ -2392,12 +2230,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Зупинити завантаження"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop Loading"
           }
         },
         "zh-Hans" : {

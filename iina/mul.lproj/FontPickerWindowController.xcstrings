@@ -5,6 +5,12 @@
       "comment" : "Class = \"NSTableColumn\"; headerCell.title = \"Family\"; ObjectID = \"2Ld-md-U2v\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Породица"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15,6 +21,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "فصيلة"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ailə"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сямейства"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Семейство"
           }
         },
         "ca" : {
@@ -107,6 +131,12 @@
             "value" : "Család"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ընտանիք"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
@@ -131,19 +161,25 @@
             "value" : "서체 목록"
           }
         },
-        "lv" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Family"
+            "value" : "Фамилија"
           }
         },
-        "nb" : {
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ഫാമലി"
+          }
+        },
+        "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Familie"
           }
         },
-        "nl" : {
+        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Familie"
@@ -188,12 +224,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Породица"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Porodica"
           }
         },
@@ -219,6 +249,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Сімейство"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "خاندان"
           }
         },
         "vi" : {
@@ -254,6 +290,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "اكتب للتصفية…"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtrlərmək üçün yaz..."
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Увядзіце для фільтрацыі…"
           }
         },
         "ca" : {
@@ -370,22 +418,28 @@
             "value" : "다음을 포함…"
           }
         },
-        "lv" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Type to filter…"
+            "value" : "Внеси текст за филтрирање…"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Skriv for å filtrere…"
+            "value" : "ഫിൽട്ടർ ചെയ്യാൻ ടൈപ്പ് ചെയ്യുക…"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zoek"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skriv for å filtrere…"
           }
         },
         "pl" : {
@@ -427,12 +481,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Type to filter…"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Kucajte da biste filtrirali…"
           }
         },
@@ -460,6 +508,12 @@
             "value" : "Фільтрувати…"
           }
         },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فلٹر کرنے کے لیے ٹائپ کریں…"
+          }
+        },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
@@ -484,6 +538,12 @@
       "comment" : "Class = \"NSWindow\"; title = \"Choose a Font\"; ObjectID = \"F0z-JX-Cv5\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Одабери фонт"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -494,6 +554,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "اختر خط"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Şrift seç"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выберыце шрыфт"
           }
         },
         "ca" : {
@@ -610,22 +682,28 @@
             "value" : "서체 선택"
           }
         },
-        "lv" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Choose a Font"
+            "value" : "Одбери фонт"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Velg skrifttype"
+            "value" : "ഒരു ഫോണ്ട് തിരഞ്ഞെടുക്കുക"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kies een lettertype"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Velg skrifttype"
           }
         },
         "pl" : {
@@ -664,13 +742,13 @@
             "value" : "Vybrať písmo"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Одабери фонт"
+            "value" : "Izberi pisavo"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Odaberi font"
@@ -698,6 +776,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Оберіть шрифт"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "رسم الخط کا انتخاب کریں۔"
           }
         },
         "vi" : {
@@ -734,6 +818,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "نوع الواجهة"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Şrift"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Шрыфт"
           }
         },
         "ca" : {
@@ -850,22 +946,22 @@
             "value" : "스타일"
           }
         },
-        "lv" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Typeface"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Skrifttype"
+            "value" : "ടൈപ്പ്ഫേസ്"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Stijl"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skrifttype"
           }
         },
         "pl" : {
@@ -907,12 +1003,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Typeface"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Slovni oblik"
           }
         },
@@ -920,12 +1010,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Variant"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Typeface"
           }
         },
         "tr" : {
@@ -938,6 +1022,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Накреслення"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ٹائپ فیس"
           }
         },
         "vi" : {
@@ -964,6 +1054,12 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"Cancel\"; ObjectID = \"Ihd-HK-wsv\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Откажи"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -974,6 +1070,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "إلغاء"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ləğv et"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Скасаваць"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отмяна"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "বাতিল"
           }
         },
         "ca" : {
@@ -1024,6 +1144,12 @@
             "value" : "Cancelar"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utzi"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1066,10 +1192,22 @@
             "value" : "Mégse"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Չեղարկել"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Batalkan"
+            "value" : "Batal"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hætta við"
           }
         },
         "it" : {
@@ -1084,6 +1222,12 @@
             "value" : "キャンセル"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ರದ್ದುಮಾಡು"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1096,16 +1240,28 @@
             "value" : "Atcelt"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avbryt"
+            "value" : "Откажи"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "റദ്ദാക്കുക"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annuleer"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avbryt"
           }
         },
         "pl" : {
@@ -1144,13 +1300,13 @@
             "value" : "Zrušiť"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Откажи"
+            "value" : "Prekliči"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otkaži"
@@ -1168,6 +1324,12 @@
             "value" : "ரத்துசெய்"
           }
         },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ยกเลิก"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1178,6 +1340,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Скасувати"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "منسوخ"
           }
         },
         "vi" : {
@@ -1202,6 +1370,7 @@
     },
     "Kt3-me-43R.placeholderString" : {
       "comment" : "Class = \"NSTextFieldCell\"; placeholderString = \"sans-serif\"; ObjectID = \"Kt3-me-43R\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -1210,13 +1379,18 @@
             "value" : "sans-serif"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "qwM-r2-9ki.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Test\"; ObjectID = \"qwM-r2-9ki\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тест"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1227,6 +1401,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "اختبار"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Test"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тэст"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тест"
           }
         },
         "ca" : {
@@ -1343,19 +1535,25 @@
             "value" : "서체 미리보기"
           }
         },
-        "lv" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Test"
+            "value" : "Тест"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Test"
+            "value" : "പരിശോധന"
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Test"
+          }
+        },
+        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Test"
@@ -1400,12 +1598,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Тест"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Testiraj"
           }
         },
@@ -1433,6 +1625,12 @@
             "value" : "Тест"
           }
         },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "جانچ کریں"
+          }
+        },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1457,6 +1655,12 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"OK\"; ObjectID = \"S5m-SJ-Ggp\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "У реду"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1467,6 +1671,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "حسناً"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добра"
           }
         },
         "ca" : {
@@ -1589,16 +1805,28 @@
             "value" : "Labi"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Godkjenn"
+            "value" : "ОК"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ശരി"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Godkjenn"
           }
         },
         "pl" : {
@@ -1637,13 +1865,13 @@
             "value" : "OK"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "У реду"
+            "value" : "V redu"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "U redu"
@@ -1673,6 +1901,12 @@
             "value" : "ОК"
           }
         },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ٹھیک ہے"
+          }
+        },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1697,6 +1931,12 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Choose a font:\"; ObjectID = \"TSI-Wt-Edx\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Одабери фонт:"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1707,6 +1947,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "اختر خط:"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Şrift seç:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выберыце шрыфт:"
           }
         },
         "ca" : {
@@ -1823,22 +2075,28 @@
             "value" : "서체 선택"
           }
         },
-        "lv" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Choose a font:"
+            "value" : "Одбери фонт:"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Velg skrifttype:"
+            "value" : "ഒരു ഫോണ്ട് തിരഞ്ഞെടുക്കുക:"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kies een lettertype:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Velg skrifttype:"
           }
         },
         "pl" : {
@@ -1877,13 +2135,13 @@
             "value" : "Vyberte písmo:"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Одабери фонт:"
+            "value" : "Izberi pisavo:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Odaberi font:"
@@ -1913,6 +2171,12 @@
             "value" : "Оберіть шрифт:"
           }
         },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "رسم الخط کا انتخاب کریں:"
+          }
+        },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1937,6 +2201,12 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Or enter the font name:\"; ObjectID = \"waR-LB-484\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Или унеси назив фонта:"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1947,6 +2217,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "أو أدخل اسم الخط:"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Və ya şrift adı daxil edin"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Або ўвядзіце назву шрыфту:"
           }
         },
         "ca" : {
@@ -2063,22 +2345,28 @@
             "value" : "직접 입력하여 서체 선택"
           }
         },
-        "lv" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Or enter the font name:"
+            "value" : "Или внесете име на фонт:"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Eller skriv inn skrifttypenavn:"
+            "value" : "അല്ലെങ്കിൽ ഫോണ്ടിന്റെ പേര് നൽകുക:"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Of voer de naam van het lettertype in:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eller skriv inn skrifttypenavn:"
           }
         },
         "pl" : {
@@ -2120,12 +2408,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Или унеси назив фонта:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Ili unesi naziv fonta:"
           }
         },
@@ -2153,6 +2435,12 @@
             "value" : "Або введіть назву шрифта:"
           }
         },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "یا رسم الخط کا نام درج کریں:"
+          }
+        },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2177,6 +2465,12 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Preview\"; ObjectID = \"XsF-e7-fXF\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Преглед"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2187,6 +2481,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "معاينة"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Önizləmə"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Перадпрагляд"
           }
         },
         "ca" : {
@@ -2303,22 +2609,28 @@
             "value" : "미리 보기"
           }
         },
-        "lv" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Preview"
+            "value" : "Прегледај"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Forhåndsvisning"
+            "value" : "പ്രിവ്യൂ"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voorvertoning"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Forhåndsvisning"
           }
         },
         "pl" : {
@@ -2357,13 +2669,13 @@
             "value" : "Náhľad"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Преглед"
+            "value" : "Predogled"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pregled"
@@ -2391,6 +2703,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Перегляд"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "پیش نظارہ"
           }
         },
         "vi" : {

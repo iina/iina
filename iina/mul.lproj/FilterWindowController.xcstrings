@@ -5,6 +5,12 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"Save\"; ObjectID = \"02L-0u-zae\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сачувај"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15,6 +21,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "حفظ"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yadda Saxla"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Захаваць"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Запази"
           }
         },
         "ca" : {
@@ -107,10 +131,22 @@
             "value" : "Mentés"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Պահպանել"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Simpan"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vista"
           }
         },
         "it" : {
@@ -131,22 +167,22 @@
             "value" : "저장"
           }
         },
-        "lv" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Save"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lagre"
+            "value" : "Зачувај"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bewaar"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lagre"
           }
         },
         "pl" : {
@@ -185,13 +221,13 @@
             "value" : "Uložiť"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Сачувај"
+            "value" : "Shrani"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sačuvaj"
@@ -209,6 +245,12 @@
             "value" : "சேமி"
           }
         },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "บันทึก"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -219,6 +261,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Зберегти"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "محفوظ کریں"
           }
         },
         "vi" : {
@@ -255,6 +303,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "تسلسل الفلتر"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtr sətri"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фільтраваць радок"
           }
         },
         "ca" : {
@@ -371,22 +431,22 @@
             "value" : "필터 설정 문자열"
           }
         },
-        "lv" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Filter String"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filterrekke"
+            "value" : "Текст за филтрирање"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filtertekst"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filterrekke"
           }
         },
         "pl" : {
@@ -428,12 +488,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Filter String"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Niska filtera"
           }
         },
@@ -441,12 +495,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filtersträng"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filter String"
           }
         },
         "tr" : {
@@ -459,6 +507,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Рядок фільтру"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فلٹر سٹرنگ"
           }
         },
         "vi" : {
@@ -485,6 +539,12 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"Cancel\"; ObjectID = \"6fq-yx-3dE\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Откажи"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -495,6 +555,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "إلغاء"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ləğv et"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Скасаваць"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отмяна"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "বাতিল"
           }
         },
         "ca" : {
@@ -545,6 +629,12 @@
             "value" : "Cancelar"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utzi"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -587,10 +677,22 @@
             "value" : "Mégse"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Չեղարկել"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Batalkan"
+            "value" : "Batal"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hætta við"
           }
         },
         "it" : {
@@ -605,6 +707,12 @@
             "value" : "キャンセル"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ರದ್ದುಮಾಡು"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -617,16 +725,28 @@
             "value" : "Atcelt"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avbryt"
+            "value" : "Откажи"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "റദ്ദാക്കുക"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annuleer"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avbryt"
           }
         },
         "pl" : {
@@ -665,13 +785,13 @@
             "value" : "Zrušiť"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Откажи"
+            "value" : "Prekliči"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otkaži"
@@ -689,6 +809,12 @@
             "value" : "ரத்துசெய்"
           }
         },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ยกเลิก"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -699,6 +825,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Скасувати"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "منسوخ"
           }
         },
         "vi" : {
@@ -725,10 +857,214 @@
       "comment" : "Class = \"NSWindow\"; title = \"New Filter\"; ObjectID = \"8Eh-v2-bbh\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "af" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuwe filter"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "عامل تصفية جديد"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crea filtre"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Přidat filtr"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nyt filter"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neuer Filter"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Νέο Φίλτρο"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "New Filter"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Filter"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuevo filtro"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فیلتر جدید"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uusi suodatin"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nouveau filtre"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "מסנן חדש"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "नया फ़िल्टर"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Novi filtar"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Új filter"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filter Baru"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuovo filtro"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "フィルターの新規作成"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "새 필터"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nieuw filter"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nowy filtr"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Novo Filtro"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Novo Filtro"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtru nou"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Новый фильтр"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nový filter"
+          }
+        },
+        "sr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Novi filter"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nytt filter"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yeni Süzgeç"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Новий фільтр"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bộ lọc mới"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加新滤镜"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新增濾鏡"
           }
         }
       }
@@ -737,6 +1073,12 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"By saving a filter, you can enable or disable it conveniently and even assign a shortcut key to it.\"; ObjectID = \"8JN-kb-kGF\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Чувањем филтера можете га једноставно омогућити или онемогућити, па чак му и доделити пречицу."
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -747,6 +1089,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "عن طريق حفظ فلتر، يمكنك تمكينه أو تعطيله بشكل مناسب وحتى تعيين مفتاح اختصار له."
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtri yadda saxlamaqla siz, onu rahat şəkildə aktiv və ya deaktiv edə və hətta ona düymədə ilə də əlaqələndirə bilərsiz!"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Захаваўшы фільтр, вы можаце зручна ўключыць або адключыць яго і нават прызначыць яму спалучэнне клавіш."
           }
         },
         "ca" : {
@@ -860,25 +1214,25 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "필터를 저장하여 간편하게 사용하거나 사용하지 않게 할 수 있으며,\n단축키를 할당할 수도 있습니다."
+            "value" : "필터를 저장하여 간편하게 사용하거나 사용하지 않게 할 수 있으며,\\n단축키를 할당할 수도 있습니다."
           }
         },
-        "lv" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "By saving a filter, you can enable or disable it conveniently and even assign a shortcut key to it."
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ved å lagre et filter kan du aktivere eller deaktivere det lettere ved å tilordne en hurtigtast."
+            "value" : "Со зачувување на филтерот можете лесно да го вклучите или исклучите, дури може и да назначите копче за кратенка до истиот."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Door een filter op te slaan kun je deze makkelijk in- en uitschakelen, en een toetscombinatie toewijzen."
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ved å lagre et filter kan du aktivere eller deaktivere det lettere ved å tilordne en hurtigtast."
           }
         },
         "pl" : {
@@ -920,12 +1274,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Чувањем филтера можете га једноставно омогућити или онемогућити, па чак му и доделити пречицу."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Kada sačuvate filter, možete ga lako omogućiti ili onemogućiti ili mu čak dodeliti tastersku prečicu."
           }
         },
@@ -933,12 +1281,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Genom att spara ett filter kan du enkelt aktivera och avaktivera det och till och med ge det ett kortkommando."
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "By saving a filter, you can enable or disable it conveniently and even assign a shortcut key to it."
           }
         },
         "tr" : {
@@ -951,6 +1293,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Зберігаючи фільтр, ви можете увімкнути або вимкнути його в зручний спосіб і навіть призначити для цього клавіатурне скорочення."
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فلٹر کو محفوظ کر کے، آپ اسے آسانی سے فعال یا غیر فعال کر سکتے ہیں اور یہاں تک کہ اسے ایک شارٹ کٹ کلید بھی تفویض کر سکتے ہیں."
           }
         },
         "vi" : {
@@ -977,6 +1325,12 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"Cancel\"; ObjectID = \"9Au-ZV-KXN\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Откажи"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -987,6 +1341,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "إلغاء"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ləğv et"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Скасаваць"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отмяна"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "বাতিল"
           }
         },
         "ca" : {
@@ -1037,6 +1415,12 @@
             "value" : "Cancelar"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utzi"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1079,10 +1463,22 @@
             "value" : "Mégse"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Չեղարկել"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Batalkan"
+            "value" : "Batal"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hætta við"
           }
         },
         "it" : {
@@ -1097,6 +1493,12 @@
             "value" : "キャンセル"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ರದ್ದುಮಾಡು"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1109,16 +1511,28 @@
             "value" : "Atcelt"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avbryt"
+            "value" : "Откажи"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "റദ്ദാക്കുക"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annuleer"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avbryt"
           }
         },
         "pl" : {
@@ -1157,13 +1571,13 @@
             "value" : "Zrušiť"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Откажи"
+            "value" : "Prekliči"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otkaži"
@@ -1181,6 +1595,12 @@
             "value" : "ரத்துசெய்"
           }
         },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ยกเลิก"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1191,6 +1611,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Скасувати"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "منسوخ"
           }
         },
         "vi" : {
@@ -1217,6 +1643,12 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Name:\"; ObjectID = \"9k2-lm-YGD\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Назив:"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1227,6 +1659,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "الإسم:"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ad:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Назва:"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "নাম:"
           }
         },
         "ca" : {
@@ -1319,10 +1769,22 @@
             "value" : "Név:"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Անուն:"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nama:"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nafn:"
           }
         },
         "it" : {
@@ -1343,22 +1805,22 @@
             "value" : "필터 이름:"
           }
         },
-        "lv" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Name:"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Navn:"
+            "value" : "Име:"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Naam:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Navn:"
           }
         },
         "pl" : {
@@ -1397,13 +1859,13 @@
             "value" : "Názov:"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Назив:"
+            "value" : "Ime:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Naziv:"
@@ -1433,6 +1895,12 @@
             "value" : "Назва:"
           }
         },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نام:"
+          }
+        },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1455,6 +1923,7 @@
     },
     "09q-ZP-mpK.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Label\"; ObjectID = \"09q-ZP-mpK\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -1463,11 +1932,11 @@
             "value" : "Label"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "amK-Iz-lu8.headerCell.title" : {
       "comment" : "Class = \"NSTableColumn\"; headerCell.title = \"#\"; ObjectID = \"amK-Iz-lu8\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -1476,13 +1945,18 @@
             "value" : "#"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "Dab-w9-6TY.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Edit Filter\"; ObjectID = \"Dab-w9-6TY\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Измени филтер"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1493,6 +1967,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "تعديل الفلتر"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtrә düzәliş et"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Рэдагаваць фільтр"
           }
         },
         "ca" : {
@@ -1591,6 +2077,12 @@
             "value" : "Edit Filter"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Breyta Síu"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1609,22 +2101,22 @@
             "value" : "필터 편집"
           }
         },
-        "lv" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Edit Filter"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rediger Filter"
+            "value" : "Измени Филтер"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bewerk filter"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rediger Filter"
           }
         },
         "pl" : {
@@ -1666,12 +2158,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Измени филтер"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Izmeni filter"
           }
         },
@@ -1679,12 +2165,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Redigera filter"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Edit Filter"
           }
         },
         "tr" : {
@@ -1697,6 +2177,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Редагувати фільтр"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فلٹر میں ترمیم کریں۔"
           }
         },
         "vi" : {
@@ -1723,6 +2209,12 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Press any button to record\"; ObjectID = \"dL4-so-Qss\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Притисните било које дугме да започнете са снимањем"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1733,6 +2225,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "اضغط على أي زر للتسجيل"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qeyd etmək üçün hər hansısa düyməni sıx"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Націсніце любую кнопку для запісу"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Натиснете произволен бутон за запис"
           }
         },
         "ca" : {
@@ -1849,22 +2359,22 @@
             "value" : "단축키로 사용할 키를 누르십시오."
           }
         },
-        "lv" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Press any button to record"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trykk på en knapp for å ta opp"
+            "value" : "Притиснете било кое копче за да започнете со снимање"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Druk op een willekeurige toets om op te nemen"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trykk på en knapp for å ta opp"
           }
         },
         "pl" : {
@@ -1906,12 +2416,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Притисните било које дугме да започнете са снимањем"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Pritisnite bilo koji taster da biste snimili"
           }
         },
@@ -1939,6 +2443,12 @@
             "value" : "Натисніть будь-яку кнопку для записування"
           }
         },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ریکارڈ کرنے کے لیے کوئی بھی بٹن دبائیں۔"
+          }
+        },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1963,6 +2473,12 @@
       "comment" : "Class = \"NSWindow\"; title = \"Filters\"; ObjectID = \"F0z-JX-Cv5\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Филтери"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1973,6 +2489,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "الفلاتر"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtrlər"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фільтры"
           }
         },
         "ca" : {
@@ -2071,6 +2599,12 @@
             "value" : "Filter"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Síur"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2089,22 +2623,22 @@
             "value" : "필터"
           }
         },
-        "lv" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Filters"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filtre"
+            "value" : "Филтри"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filters"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtre"
           }
         },
         "pl" : {
@@ -2146,12 +2680,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Филтери"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Filteri"
           }
         },
@@ -2159,12 +2687,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filter"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filters"
           }
         },
         "tr" : {
@@ -2177,6 +2699,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Фільтри"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فلٹرز"
           }
         },
         "vi" : {
@@ -2203,10 +2731,262 @@
       "comment" : "Class = \"NSWindow\"; title = \"Save Filter\"; ObjectID = \"hsA-Hq-fPV\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сачувај филтер"
+          }
+        },
+        "af" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bewaar filter"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حفظ الفلتر"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filteri Yadda Saxla"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Захаваць фільтр"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desa el filtre"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uložit filtr"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gem filter"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filter sichern"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Αποθήκευση Φίλτρου"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Save Filter"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save Filter"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar Filtro"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ذخیره‌ی فیلتر"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tallenna suodatin"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sauvegarder le filtre"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "שמור מסנן"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "फ़िल्टर सहेजें"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spremi filtar"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Szűrő mentése"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Simpan Filter"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vista Síu"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salva filtro"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "フィルターを保存"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "필터 저장"
+          }
+        },
+        "mk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зачувај Филтер"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sla filter op"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lagre filter"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zapisz filtr"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar Filtro"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salvar Filtro"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salvează Filtru"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сохранить фильтр"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uložiť filter"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shrani filter"
+          }
+        },
+        "sr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sačuvaj filter"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spara filter"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Süzgeci Kaydet"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зберегти фільтр"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فلٹر محفوظ کریں۔"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lưu bộ lọc"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "保存滤镜"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "儲存濾鏡"
           }
         }
       }
@@ -2215,6 +2995,12 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Name:\"; ObjectID = \"IYf-IE-5cL\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Назив:"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2225,6 +3011,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "الإسم:"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ad:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Назва:"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "নাম:"
           }
         },
         "ca" : {
@@ -2317,10 +3121,22 @@
             "value" : "Név:"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Անուն:"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nama:"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nafn:"
           }
         },
         "it" : {
@@ -2341,22 +3157,22 @@
             "value" : "필터 이름:"
           }
         },
-        "lv" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Name:"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Navn:"
+            "value" : "Име:"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Naam:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Navn:"
           }
         },
         "pl" : {
@@ -2395,13 +3211,13 @@
             "value" : "Názov:"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Назив:"
+            "value" : "Ime:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Naziv:"
@@ -2431,6 +3247,12 @@
             "value" : "Назва:"
           }
         },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نام:"
+          }
+        },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2455,6 +3277,12 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Press any button to record\"; ObjectID = \"jJk-0R-KQo\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Притисните било које дугме да започнете са снимањем"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2465,6 +3293,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "اضغط على أي زر للتسجيل"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qeyd etmək üçün hər hansısa düyməni sıx"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Націсніце любую кнопку для запісу"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Натиснете произволен бутон за запис"
           }
         },
         "ca" : {
@@ -2581,16 +3427,10 @@
             "value" : "단축키로 사용할 키를 누르십시오."
           }
         },
-        "lv" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Press any button to record"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trykk på en knapp for å ta opp"
+            "value" : "Притиснете било кое копче за да започнете со снимање"
           }
         },
         "nl" : {
@@ -2599,10 +3439,16 @@
             "value" : "Druk op een willekeurige toets om op te nemen"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trykk på en knapp for å ta opp"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Naciśnij dowolny klawisz, aby zarejestrować"
+            "value" : "Naciśnij dowolny klawisz, aby zapisać"
           }
         },
         "pt" : {
@@ -2638,12 +3484,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Притисните било које дугме да започнете са снимањем"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Pritisnite bilo koji taster da biste snimili"
           }
         },
@@ -2671,6 +3511,12 @@
             "value" : "Натисніть будь-яку кнопку для записування"
           }
         },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ریکارڈ کرنے کے لیے کوئی بھی بٹن دبائیں۔"
+          }
+        },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2695,6 +3541,12 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Save Filter\"; ObjectID = \"KGV-G1-A2l\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сачувај филтер"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2705,6 +3557,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "حفظ الفلتر"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filteri Yadda Saxla"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Захаваць фільтр"
           }
         },
         "ca" : {
@@ -2803,6 +3667,12 @@
             "value" : "Simpan Filter"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vista Síu"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2821,22 +3691,22 @@
             "value" : "필터 저장"
           }
         },
-        "lv" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Save Filter"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lagre filter"
+            "value" : "Зачувај Филтер"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sla filter op"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lagre filter"
           }
         },
         "pl" : {
@@ -2875,13 +3745,13 @@
             "value" : "Uložiť filter"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Сачувај филтер"
+            "value" : "Shrani filter"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sačuvaj filter"
@@ -2891,12 +3761,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Spara filter"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Save Filter"
           }
         },
         "tr" : {
@@ -2909,6 +3773,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Зберегти фільтр"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فلٹر محفوظ کریں۔"
           }
         },
         "vi" : {
@@ -2935,6 +3805,12 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"Add\"; ObjectID = \"ljR-R1-mo7\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Додај"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2945,6 +3821,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "إضافة"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Əlavə et"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дадаць"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добави"
           }
         },
         "ca" : {
@@ -3037,6 +3931,12 @@
             "value" : "Hozzáad"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ավելացնել"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3061,22 +3961,22 @@
             "value" : "추가"
           }
         },
-        "lv" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Legg til"
+            "value" : "Додади"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voeg toe"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Legg til"
           }
         },
         "pl" : {
@@ -3115,13 +4015,13 @@
             "value" : "Pridať"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Додај"
+            "value" : "Dodaj"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dodaj"
@@ -3151,6 +4051,12 @@
             "value" : "Додати"
           }
         },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "شامل کریں"
+          }
+        },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3175,6 +4081,12 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Saved filters\"; ObjectID = \"m5X-Zl-aOj\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сачувани филтери"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3185,6 +4097,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "فلاتر محفوظة"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yadda saxlanılmış filtrlər"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Захаваныя фільтры"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Запазени филтри"
           }
         },
         "ca" : {
@@ -3301,22 +4231,22 @@
             "value" : "저장된 필터"
           }
         },
-        "lv" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Saved filters"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lagrede filtre"
+            "value" : "Зачувани филтри"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Opgeslagen filters"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lagrede filtre"
           }
         },
         "pl" : {
@@ -3355,13 +4285,13 @@
             "value" : "Uložené filtre"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Сачувани филтери"
+            "value" : "Shranjeni filtri"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sačuvani filteri"
@@ -3391,6 +4321,12 @@
             "value" : "Збережені фільтри"
           }
         },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "محفوظ شدہ فلٹرز"
+          }
+        },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3415,6 +4351,12 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Shortcut key:\"; ObjectID = \"M9z-ss-1Ma\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пречица:"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3425,6 +4367,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "مفتاح الاختصار:"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qısayol düyməsi:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Спалучэнне клавіш:"
           }
         },
         "ca" : {
@@ -3541,22 +4495,22 @@
             "value" : "단축키 지정:"
           }
         },
-        "lv" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Shortcut key:"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hurtigtast:"
+            "value" : "Копче за кратенка:"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Toetscombinatie:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hurtigtast:"
           }
         },
         "pl" : {
@@ -3595,13 +4549,13 @@
             "value" : "Klávesová skratka:"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Пречица:"
+            "value" : "Bližnjična tipka:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tasterska prečica:"
@@ -3616,7 +4570,7 @@
         "ta" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "14/5000\nகுறுக்குவழி விசை:"
+            "value" : "14/5000\\nகுறுக்குவழி விசை:"
           }
         },
         "tr" : {
@@ -3629,6 +4583,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Клавіатурне скорочення:"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "شارٹ کٹ بٹن:"
           }
         },
         "vi" : {
@@ -3655,6 +4615,12 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Shortcut key:\"; ObjectID = \"Nzk-zW-mIL\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пречица:"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3665,6 +4631,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "مفتاح الاختصار:"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qısayol düyməsi:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Спалучэнне клавіш:"
           }
         },
         "ca" : {
@@ -3781,22 +4759,22 @@
             "value" : "단축키 지정:"
           }
         },
-        "lv" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Shortcut key:"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hurtigtast:"
+            "value" : "Копче за кратенка:"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Toetscombinatie:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hurtigtast:"
           }
         },
         "pl" : {
@@ -3835,13 +4813,13 @@
             "value" : "Klávesová skratka:"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Пречица:"
+            "value" : "Bližnjična tipka:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tasterska prečica:"
@@ -3856,7 +4834,7 @@
         "ta" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "குறுக்குவழி விசை:"
+            "value" : "14/5000\\nகுறுக்குவழி விசை:"
           }
         },
         "tr" : {
@@ -3869,6 +4847,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Клавіатурне скорочення:"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "شارٹ کٹ بٹن:"
           }
         },
         "vi" : {
@@ -3905,6 +4889,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "سلسلة الفلتر:"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtr sətri:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фільтраваць радок:"
           }
         },
         "ca" : {
@@ -4021,22 +5017,22 @@
             "value" : "필터 설정 문자열:"
           }
         },
-        "lv" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Filter string:"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filterrekke:"
+            "value" : "Текст за филтрирање:"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filtertekst:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filterrekke:"
           }
         },
         "pl" : {
@@ -4078,12 +5074,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Filter string:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Niska filtera:"
           }
         },
@@ -4091,12 +5081,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filtersträng:"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filter string:"
           }
         },
         "tr" : {
@@ -4109,6 +5093,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Рядок фільтра:"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فلٹر سٹرنگ:"
           }
         },
         "vi" : {
@@ -4135,6 +5125,12 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"Save\"; ObjectID = \"tPs-K2-ZPz\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сачувај"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4145,6 +5141,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "حفظ"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yadda Saxla"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Захаваць"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Запази"
           }
         },
         "ca" : {
@@ -4210,7 +5224,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sauver"
+            "value" : "Sauvegarder"
           }
         },
         "he" : {
@@ -4237,10 +5251,22 @@
             "value" : "Mentés"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Պահպանել"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Simpan"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vista"
           }
         },
         "it" : {
@@ -4258,25 +5284,25 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "필터 저장"
+            "value" : "저장"
           }
         },
-        "lv" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Save"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lagre"
+            "value" : "Зачувај"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bewaar"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lagre"
           }
         },
         "pl" : {
@@ -4315,13 +5341,13 @@
             "value" : "Uložiť"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Сачувај"
+            "value" : "Shrani"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sačuvaj"
@@ -4339,6 +5365,12 @@
             "value" : "சேமி"
           }
         },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "บันทึก"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4349,6 +5381,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Зберегти"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "محفوظ کریں"
           }
         },
         "vi" : {
@@ -4375,6 +5413,12 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"Add\"; ObjectID = \"w2g-wR-hPu\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Додај"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4385,6 +5429,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "إضافة"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Əlavə et"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дадаць"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добави"
           }
         },
         "ca" : {
@@ -4477,6 +5539,12 @@
             "value" : "Hozzáad"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ավելացնել"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4501,22 +5569,22 @@
             "value" : "추가"
           }
         },
-        "lv" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Legg til"
+            "value" : "Додади"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voeg toe"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Legg til"
           }
         },
         "pl" : {
@@ -4555,13 +5623,13 @@
             "value" : "Pridať"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Додај"
+            "value" : "Dodaj"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dodaj"
@@ -4591,6 +5659,12 @@
             "value" : "Додати"
           }
         },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "شامل کریں"
+          }
+        },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4606,7 +5680,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "新增"
+            "value" : "加入"
           }
         }
       }
@@ -4615,6 +5689,12 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"Cancel\"; ObjectID = \"Xqd-Ft-hTS\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Откажи"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4625,6 +5705,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "إلغاء"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ləğv et"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Скасаваць"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отмяна"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "বাতিল"
           }
         },
         "ca" : {
@@ -4675,6 +5779,12 @@
             "value" : "Cancelar"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utzi"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4717,10 +5827,22 @@
             "value" : "Mégse"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Չեղարկել"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Batalkan"
+            "value" : "Batal"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hætta við"
           }
         },
         "it" : {
@@ -4735,6 +5857,12 @@
             "value" : "キャンセル"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ರದ್ದುಮಾಡು"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4747,16 +5875,28 @@
             "value" : "Atcelt"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avbryt"
+            "value" : "Откажи"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "റദ്ദാക്കുക"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annuleer"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avbryt"
           }
         },
         "pl" : {
@@ -4795,13 +5935,13 @@
             "value" : "Zrušiť"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Откажи"
+            "value" : "Prekliči"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otkaži"
@@ -4819,6 +5959,12 @@
             "value" : "ரத்துசெய்"
           }
         },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ยกเลิก"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4829,6 +5975,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Скасувати"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "منسوخ"
           }
         },
         "vi" : {
@@ -4855,10 +6007,256 @@
       "comment" : "Class = \"NSWindow\"; title = \"Edit Filter\"; ObjectID = \"Zxl-uQ-3ud\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Измени филтер"
+          }
+        },
+        "af" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wysig filter"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تعديل الفلتر"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtrә düzәliş et"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Рэдагаваць фільтр"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edita el filtre"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upravit filtr"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rediger filter"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filter bearbeiten"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Επεξεργασία Φίλτρου"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Edit Filter"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Filter"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar Filtro"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ویرایش فیلتر"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Muokkaa suodatinta"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modifier le filtre"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ערוך מסנן"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "फ़िल्टर संपादित करें"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uredi filtar"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Szűrő szerkesztése"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Filter"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Breyta Síu"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modifica filtro"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "フィルターを編集"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "필터 편집"
+          }
+        },
+        "mk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Измени Филтер"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bewerk filter"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rediger Filter"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edytuj filter"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar Filtro"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar Filtro"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editează Filtru"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Изменить фильтр"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upraviť filter"
+          }
+        },
+        "sr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Izmeni filter"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Redigera filter"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Süzgeci Düzenle"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Редагувати фільтр"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فلٹر میں ترمیم کریں۔"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chỉnh sửa bộ lọc"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "编辑滤镜"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "編輯濾鏡"
           }
         }
       }

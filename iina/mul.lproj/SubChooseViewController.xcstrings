@@ -5,6 +5,12 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Downloads:\"; ObjectID = \"1Ol-8Y-Pd9\";",
       "extractionState" : "manual",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Преузимања:"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15,6 +21,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "التنزيلات:"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Endirmələr:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Спампоўкі:"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ডাউনলোড করুন"
           }
         },
         "ca" : {
@@ -131,16 +155,10 @@
             "value" : "다운로드"
           }
         },
-        "lv" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Downloads:"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Downloads:"
+            "value" : "ഡൗൺലോഡുകൾ:"
           }
         },
         "nl" : {
@@ -188,12 +206,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Преузимања:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Preuzimanja:"
           }
         },
@@ -201,12 +213,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nedladdningar:"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Downloads:"
           }
         },
         "tr" : {
@@ -243,6 +249,7 @@
     },
     "Bnm-Vf-zg5.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Media Name\"; ObjectID = \"Bnm-Vf-zg5\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -251,11 +258,11 @@
             "value" : "Media Name"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "FW8-qy-9po.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Left Label\"; ObjectID = \"FW8-qy-9po\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -264,13 +271,18 @@
             "value" : "Left Label"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "pPz-om-Xit.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"CANCEL\"; ObjectID = \"pPz-om-Xit\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ОТКАЖИ"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -281,6 +293,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "إلغاء"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "LƏĞV ET"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "СКАСАВАЦЬ"
           }
         },
         "ca" : {
@@ -397,16 +421,10 @@
             "value" : "취소"
           }
         },
-        "lv" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "CANCEL"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "CANCEL"
+            "value" : "റദ്ദാക്കുക"
           }
         },
         "nl" : {
@@ -452,12 +470,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ОТКАЖИ"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OTKAŽI"
@@ -509,6 +521,7 @@
     },
     "qnJ-hh-Ajn.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"2000-00-00\"; ObjectID = \"qnJ-hh-Ajn\";",
+      "shouldTranslate" : false,
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -517,13 +530,18 @@
             "value" : "2000-00-00"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "vAl-Km-bkf.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Please click to select subtitles to download:\"; ObjectID = \"vAl-Km-bkf\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кликни за бирање титлова за преузимање:"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -534,6 +552,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "الرجاء النقر لتحديد ترجمات للتنزيل:"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Altyazıları endirmək üçün toxunun"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Націсніце, каб выбраць субцітры для загрузкі:"
           }
         },
         "ca" : {
@@ -650,16 +680,10 @@
             "value" : "다운로드할 자막을 선택하십시오"
           }
         },
-        "lv" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Please click to select subtitles to download:"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please click to select subtitles to download:"
+            "value" : "ഡൗൺലോഡ് ചെയ്യാനുള്ള സബ്‌ടൈറ്റിലുകൾ തിരഞ്ഞെടുക്കാൻ ദയവായി ക്ലിക്ക് ചെയ്യുക:"
           }
         },
         "nl" : {
@@ -707,12 +731,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Кликни за бирање титлова за преузимање:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Klikni za biranje titlova za preuzimanje:"
           }
         },
@@ -720,12 +738,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vänligen klicka för att välja undertext för nedladdning:"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please click to select subtitles to download:"
           }
         },
         "tr" : {
@@ -764,6 +776,12 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"DOWNLOAD\"; ObjectID = \"y68-ot-NOl\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ПРЕУЗМИ"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -774,6 +792,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "تحميل"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ENDİR"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "СПАМПАВАЦЬ"
           }
         },
         "ca" : {
@@ -890,16 +920,10 @@
             "value" : "다운로드"
           }
         },
-        "lv" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "DOWNLOAD"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DOWNLOAD"
+            "value" : "ഡൗൺലോഡ്"
           }
         },
         "nl" : {
@@ -947,12 +971,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ПРЕУЗМИ"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "PREUZMI"
           }
         },
@@ -960,12 +978,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "LADDA NER"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DOWNLOAD"
           }
         },
         "tr" : {

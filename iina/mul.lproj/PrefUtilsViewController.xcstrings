@@ -137,12 +137,6 @@
             "value" : "Notīrīt saglabāto atskaņošanas gaitu…"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clear Saved Playback Progress…"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -188,12 +182,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Clear Saved Playback Progress…"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Obriši sačuvani tok reprodukcije…"
           }
         },
@@ -201,12 +189,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rensa sparad uppspelningsposition…"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clear Saved Playback Progress…"
           }
         },
         "tr" : {
@@ -219,12 +201,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Очистити збережений прогрес перегляду…"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clear Saved Playback Progress…"
           }
         },
         "zh-Hans" : {
@@ -279,12 +255,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Video"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Βίντεο"
           }
         },
         "en" : {
@@ -377,10 +347,10 @@
             "value" : "Video"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Video"
+            "value" : "വീഡിയോ"
           }
         },
         "nl" : {
@@ -389,10 +359,16 @@
             "value" : "Video"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Video"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wideo"
+            "value" : "Obraz"
           }
         },
         "pt" : {
@@ -431,12 +407,6 @@
             "value" : "Video"
           }
         },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Video"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -470,13 +440,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "视频文件"
+            "value" : "视频"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "影片檔案"
+            "value" : "視訊"
           }
         }
       }
@@ -617,12 +587,6 @@
             "value" : "Zemāk esošā poga izdzēsīs visu atskaņošanas vēsturi un ierakstus izvēlnē “Nesen atvērtie“."
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The button below will delete all playback histories and entries in \"Open Recent\"."
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -668,12 +632,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The button below will delete all playback histories and entries in \"Open Recent\"."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Dugme ispod izbrisaće celokupnu istoriju reprodukcije i stavke u meniju „Otvori nedavnu stavku“."
           }
         },
@@ -681,12 +639,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Knappen nedan raderar all uppspelningshistorik och alla poster i \"Senaste\"."
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The button below will delete all playback histories and entries in \"Open Recent\"."
           }
         },
         "tr" : {
@@ -699,12 +651,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Кнопка нижче видалить усю історію перегляду та елементи меню «Відкрити останні»."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The button below will delete all playback histories and entries in \"Open Recent\"."
           }
         },
         "zh-Hans" : {
@@ -791,12 +737,6 @@
             "value" : "بازیابی هشدار ها"
           }
         },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restore Alerts"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -807,12 +747,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "שחזור התראות"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restore Alerts"
           }
         },
         "hr" : {
@@ -851,18 +785,6 @@
             "value" : "알림 복구하기"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restore Alerts"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restore Alerts"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -873,12 +795,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Przywróć alerty"
-          }
-        },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restore Alerts"
           }
         },
         "pt-BR" : {
@@ -905,28 +821,10 @@
             "value" : "Obnoviť varovania"
           }
         },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restore Alerts"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restore Alerts"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Återställ varningar"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restore Alerts"
           }
         },
         "tr" : {
@@ -939,12 +837,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Відновити оповіщення"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restore Alerts"
           }
         },
         "zh-Hans" : {
@@ -1097,12 +989,6 @@
             "value" : "Zemāk esošā poga izdzēsīs visus kešatmiņā saglabātos sīkattēlus."
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The button below will delete all cached thumbnails."
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1148,12 +1034,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The button below will delete all cached thumbnails."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Dugme ispod izbrisaće sve keširane sličice."
           }
         },
@@ -1161,12 +1041,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Knappen nedan raderar alla cachade miniatyrbilder."
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The button below will delete all cached thumbnails."
           }
         },
         "tr" : {
@@ -1179,12 +1053,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Кнопка нижче видалить усі кешовані мініатюри."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The button below will delete all cached thumbnails."
           }
         },
         "zh-Hans" : {
@@ -1337,12 +1205,6 @@
             "value" : "Iestatīt IINA kā noklusēto programmu…"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Set IINA as the Default Application…"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1386,12 +1248,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Set IINA as the Default Application…"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Postavi aplikaciju IINA kao podrazumevanu…"
@@ -1577,12 +1433,6 @@
             "value" : "Iztīrīta."
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cleared."
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1628,12 +1478,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cleared."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Obrisano."
           }
         },
@@ -1659,12 +1503,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Очищено."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cleared."
           }
         },
         "zh-Hans" : {
@@ -1751,12 +1589,6 @@
             "value" : "دکمه زیر تمامی هشدار هایی که با کلیک روی \"دیگر این پیام را نمایش نده\" ساکت شده اند را بازیابی خواهد کرد."
           }
         },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1767,12 +1599,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "הלחצן למטה ישחזר את כל ההתראות שהוסתרו באמצעות תיבת הסימון \"אל תציג הודעה זו שוב\"."
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
           }
         },
         "hr" : {
@@ -1811,18 +1637,6 @@
             "value" : "\"더 이상 이 메세지 보지 않기\" 확인란을 통해 비활성화된 모든 알림을 다시 활성화합니다."
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1833,12 +1647,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Poniższy przycisk przywróci wszystkie powiadomienia, które zostały usunięte za pomocą pola wyboru \"Nie pokazuj tego komunikatu ponownie\"."
-          }
-        },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
           }
         },
         "pt-BR" : {
@@ -1865,28 +1673,10 @@
             "value" : "Tlačidlo nižšie obnoví všetky upozornenia, ktoré boli potlačené zaškrtnutím políčka „Túto správu už nabudúce nezobrazovať“."
           }
         },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Knappen nedan kommer att återställa alla varningar som dolts med kryssrutan \"Visa inte detta meddelandet igen\"."
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
           }
         },
         "tr" : {
@@ -1899,12 +1689,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Кнопка нижче відновить всі оповіщення, що були приховані за допомогою прапорця \"Не показувати це повідомлення знову\"."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."
           }
         },
         "zh-Hans" : {
@@ -1935,6 +1719,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "متصفح Firefox"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Firefox"
           }
         },
         "ca" : {
@@ -2009,12 +1799,6 @@
             "value" : "פיירפוקס"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Firefox"
-          }
-        },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2052,12 +1836,6 @@
           }
         },
         "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Firefox"
-          }
-        },
-        "nb" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Firefox"
@@ -2106,12 +1884,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Firefox"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Firefox"
@@ -2240,7 +2012,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Effacé."
+            "value" : "Effacées."
           }
         },
         "he" : {
@@ -2276,7 +2048,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Eliminata."
+            "value" : "Eliminati."
           }
         },
         "ja" : {
@@ -2294,13 +2066,7 @@
         "lv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notīrīta."
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cleared."
+            "value" : "Iztīrīta."
           }
         },
         "nl" : {
@@ -2348,12 +2114,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cleared."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Obrisano."
           }
         },
@@ -2379,12 +2139,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Очищено."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cleared."
           }
         },
         "zh-Hans" : {
@@ -2528,19 +2282,13 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "한 번의 클릭으로 링크 또는 방문중인 웹페이지의 영상을 재생합니다.\nyoutube-dl 프로그램이 지원하는 웹페이지에서만 동작합니다."
+            "value" : "한 번의 클릭으로 링크 또는 방문중인 웹페이지의 영상을 재생합니다.\\nyoutube-dl 프로그램이 지원하는 웹페이지에서만 동작합니다."
           }
         },
         "lv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ar vienu klikšķi atvēr saišu vai pašreizējo vietnes saiti saturošo video failu IINA programmā. Vietnei ir jābūt yt-dlp, youtube-dl atbalstīto saišu sarakstā."
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."
           }
         },
         "nl" : {
@@ -2588,12 +2336,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Otvarajte veze ili trenutnu veb-stranicu u programu IINA jednim klikom. Veb-sajt mora podržavati program youtube-dl."
           }
         },
@@ -2601,12 +2343,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Öppna länkar eller visad webbsida i IINA med ett klick. Webbsidan måste stödjas av youtube-dl."
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."
           }
         },
         "tr" : {
@@ -2619,12 +2355,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Відкрийте в IINA посилання або поточну веб-сторінку в одне клацання. Веб-сайт повинен бути сумісним з youtube-dl."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."
           }
         },
         "zh-Hans" : {
@@ -2777,12 +2507,6 @@
             "value" : "Iztīrīt sīkattēlu kešatmiņu…"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clear Thumbnail Cache…"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2828,12 +2552,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Clear Thumbnail Cache…"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Obriši keš za sličice…"
           }
         },
@@ -2841,12 +2559,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rensa cache för miniatyrbilder…"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clear Thumbnail Cache…"
           }
         },
         "tr" : {
@@ -2859,12 +2571,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Очистити кеш мініатюр…"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clear Thumbnail Cache…"
           }
         },
         "zh-Hans" : {
@@ -2885,6 +2591,12 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"OK\"; ObjectID = \"IkF-qG-s4j\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "У реду"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2895,6 +2607,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "حسناً"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добра"
           }
         },
         "ca" : {
@@ -2912,7 +2636,7 @@
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ok"
+            "value" : "OK"
           }
         },
         "de" : {
@@ -2948,13 +2672,13 @@
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "قبول"
+            "value" : "باشه"
           }
         },
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ok"
+            "value" : "OK"
           }
         },
         "fr" : {
@@ -3017,10 +2741,16 @@
             "value" : "Labi"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Godkjenn"
+            "value" : "ОК"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ശരി"
           }
         },
         "nl" : {
@@ -3029,10 +2759,16 @@
             "value" : "OK"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Godkjenn"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ok"
+            "value" : "OK"
           }
         },
         "pt" : {
@@ -3065,13 +2801,13 @@
             "value" : "OK"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "У реду"
+            "value" : "V redu"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "U redu"
@@ -3101,6 +2837,12 @@
             "value" : "ОК"
           }
         },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ٹھیک ہے"
+          }
+        },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3110,7 +2852,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "好"
+            "value" : "确认"
           }
         },
         "zh-Hant" : {
@@ -3159,12 +2901,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Audio"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ήχος"
           }
         },
         "en" : {
@@ -3218,7 +2954,7 @@
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zvuk"
+            "value" : "Audio"
           }
         },
         "hu" : {
@@ -3254,19 +2990,19 @@
         "lv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Skaņas"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lyd"
+            "value" : "Skaņa"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Audio"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lyd"
           }
         },
         "pl" : {
@@ -3308,12 +3044,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Audio"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Zvuk"
           }
         },
@@ -3326,7 +3056,7 @@
         "ta" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "கேட்பொலி"
+            "value" : "ஒலி"
           }
         },
         "tr" : {
@@ -3350,13 +3080,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "音频文件"
+            "value" : "音频"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "音訊檔案"
+            "value" : "音訊"
           }
         }
       }
@@ -3365,6 +3095,12 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"Cancel\"; ObjectID = \"kbP-VI-dmT\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Откажи"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3375,6 +3111,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "إلغاء"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ləğv et"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Скасаваць"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отмяна"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "বাতিল"
           }
         },
         "ca" : {
@@ -3425,10 +3185,16 @@
             "value" : "Cancelar"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utzi"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "انصراف"
+            "value" : "لغو"
           }
         },
         "fi" : {
@@ -3467,10 +3233,22 @@
             "value" : "Mégse"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Չեղարկել"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Batal"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hætta við"
           }
         },
         "it" : {
@@ -3485,6 +3263,12 @@
             "value" : "キャンセル"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ರದ್ದುಮಾಡು"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3497,16 +3281,28 @@
             "value" : "Atcelt"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avbryt"
+            "value" : "Откажи"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "റദ്ദാക്കുക"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annuleer"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avbryt"
           }
         },
         "pl" : {
@@ -3545,13 +3341,13 @@
             "value" : "Zrušiť"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Откажи"
+            "value" : "Prekliči"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otkaži"
@@ -3569,6 +3365,12 @@
             "value" : "ரத்துசெய்"
           }
         },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ยกเลิก"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3578,7 +3380,13 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Відміна"
+            "value" : "Скасувати"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "منسوخ"
           }
         },
         "vi" : {
@@ -3605,6 +3413,12 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"Playlist\"; ObjectID = \"MGo-J8-zWE\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Плејлиста"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3639,12 +3453,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wiedergabeliste"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Λίστα Αναπαραγωγής"
           }
         },
         "en" : {
@@ -3713,6 +3521,12 @@
             "value" : "Playlist"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spilunarlisti"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3734,13 +3548,7 @@
         "lv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Atskaņošanas saraksta"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Spilleliste"
+            "value" : "Atskaņošanas saraksts"
           }
         },
         "nl" : {
@@ -3749,10 +3557,16 @@
             "value" : "Afspeellijst"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spilleliste"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lista odtwarzania"
+            "value" : "Playlista"
           }
         },
         "pt" : {
@@ -3788,25 +3602,13 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Плејлиста"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Plejlista"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Spellistor"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Playlist"
+            "value" : "Spellista"
           }
         },
         "tr" : {
@@ -3830,13 +3632,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "播放列表文件"
+            "value" : "播放列表"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "播放列表檔案"
+            "value" : "播放列表"
           }
         }
       }
@@ -3977,12 +3779,6 @@
             "value" : "Notīrīt atskaņošanas vēsturi…"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clear Playback History…"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4028,12 +3824,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Clear Playback History…"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Obriši istoriju reprodukcije…"
           }
         },
@@ -4041,12 +3831,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rensa uppspelningshistorik…"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clear Playback History…"
           }
         },
         "tr" : {
@@ -4095,6 +3879,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "التطبيق الافتراضي"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Прадвызначаная праграма"
           }
         },
         "ca" : {
@@ -4217,12 +4007,6 @@
             "value" : "Noklusētā programma"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default Application"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4266,12 +4050,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default Application"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Podrazumevana aplikacija"
@@ -4448,19 +4226,13 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "\"watch later\" 폴더에 있는 모든 이어보기 파일을 지웁니다.\n이 파일에는 재생중에 적용된 모든 설정과 재생위치가 기록되어 있습니다."
+            "value" : "\"watch later\" 폴더에 있는 모든 이어보기 파일을 지웁니다.\\n이 파일에는 재생중에 적용된 모든 설정과 재생위치가 기록되어 있습니다."
           }
         },
         "lv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zemāk esošā poga izdzēsīs visus failus, kas atrodas \"Skatīties vēlāk\" mapē. Šie faili satur pēdējās atskaņošanas pozīcijas un atskaņošanas laikā izmantotos iestatījumus."
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."
           }
         },
         "nl" : {
@@ -4508,12 +4280,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Dugme ispod izbrisaće sve datoteke u fascikli „Gledaj kasnije“. Te datoteke sadrže celokupan sačuvani tok reprodukcije i postavke primenjene tokom reprodukcije."
           }
         },
@@ -4521,12 +4287,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Knappen nedan raderar alla filer i \"titta senare\"-mappen. Dessa filer innehåller alla sparade uppspelningspositioner och inställningar som angetts under uppspelning."
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."
           }
         },
         "tr" : {
@@ -4539,12 +4299,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Кнопка нижче видалить усі файли з папки відкладеного перегляду. Ці файли містять увесь прогрес перегляду та налаштування, застосовані під час перегляду."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."
           }
         },
         "zh-Hans" : {
@@ -4575,6 +4329,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "مسح ذاكرة التخزين المؤقتة"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ачысціць кэш"
           }
         },
         "ca" : {
@@ -4697,12 +4457,6 @@
             "value" : "Tīrīt kešatmiņas"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clear Cache"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4748,12 +4502,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Clear Cache"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Obriši keš"
           }
         },
@@ -4761,12 +4509,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rensa cache"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clear Cache"
           }
         },
         "tr" : {
@@ -4937,12 +4679,6 @@
             "value" : "Aprēķina…"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Calculating…"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4988,12 +4724,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Calculating…"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Izračunavanje…"
           }
         },
@@ -5001,12 +4731,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Beräknar…"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Calculating…"
           }
         },
         "tr" : {
@@ -5177,12 +4901,6 @@
             "value" : "Izmantotais sīkattēlu kešatmiņas lielums:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Current thumbnail cache:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5228,12 +4946,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Current thumbnail cache:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Trenutni keš za sličice:"
           }
         },
@@ -5241,12 +4953,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nuvarande cache för miniatyrbilder:"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Current thumbnail cache:"
           }
         },
         "tr" : {
@@ -5259,12 +4965,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Поточний кеш мініатюр:"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Current thumbnail cache:"
           }
         },
         "zh-Hans" : {
@@ -5417,12 +5117,6 @@
             "value" : "Lūdzu, atlasiet kādus faila tipus vēlaties atskaņot IINA programmā pēc noklusējuma."
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please select the media types that you want to make IINA as the default Application for."
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5468,12 +5162,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Please select the media types that you want to make IINA as the default Application for."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Izaberite tipove medijski datoteka za koje želite da IINA bude podrazumevana aplikacija."
           }
         },
@@ -5481,12 +5169,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vänligen markera de mediatyper för vilka du vill göra IINA till förvalt program."
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please select the media types that you want to make IINA as the default Application for."
           }
         },
         "tr" : {
@@ -5591,12 +5273,6 @@
             "value" : "بازیابی شد."
           }
         },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restored."
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5607,12 +5283,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "שוחזרו."
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restored."
           }
         },
         "hr" : {
@@ -5651,18 +5321,6 @@
             "value" : "복구됨"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restored."
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restored."
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5673,12 +5331,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Przywrócono."
-          }
-        },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restored."
           }
         },
         "pt-BR" : {
@@ -5705,28 +5357,10 @@
             "value" : "Obnovené."
           }
         },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restored."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restored."
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Återställt."
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restored."
           }
         },
         "tr" : {
@@ -5831,12 +5465,6 @@
             "value" : "بازیابی هشدار های ساکت شده…"
           }
         },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restore Suppressed Alerts…"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5847,12 +5475,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "שחזר התראות שהוסתרו…"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restore Suppressed Alerts…"
           }
         },
         "hr" : {
@@ -5891,18 +5513,6 @@
             "value" : "비활성화된 알림 복구하기"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restore Suppressed Alerts…"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restore Suppressed Alerts…"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5913,12 +5523,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Przywróć zablokowane alerty…"
-          }
-        },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restore Suppressed Alerts…"
           }
         },
         "pt-BR" : {
@@ -5945,28 +5549,10 @@
             "value" : "Obnoviť potlačené upozornenia…"
           }
         },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restore Suppressed Alerts…"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restore Suppressed Alerts…"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Återställ dolda varningar…"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restore Suppressed Alerts…"
           }
         },
         "tr" : {
@@ -5979,12 +5565,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Відновити приховані оповіщення…"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restore Suppressed Alerts…"
           }
         },
         "zh-Hans" : {
@@ -6015,6 +5595,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "متصفح كروم"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chrome"
           }
         },
         "ca" : {
@@ -6089,12 +5675,6 @@
             "value" : "גוגל כרום"
           }
         },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chrome"
-          }
-        },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6132,12 +5712,6 @@
           }
         },
         "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chrome"
-          }
-        },
-        "nb" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chrome"
@@ -6186,12 +5760,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chrome"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chrome"
@@ -6377,12 +5945,6 @@
             "value" : "Iegūt IINA pārlūkprogrammas paplašinājumus"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Get Browser Extensions for IINA"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6428,12 +5990,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Get Browser Extensions for IINA"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Nabavi proširenja pregledača za aplikaciju IINA"
           }
         },
@@ -6441,12 +5997,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Skaffa webbläsartillägg till IINA"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Get Browser Extensions for IINA"
           }
         },
         "tr" : {

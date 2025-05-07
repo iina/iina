@@ -5,6 +5,12 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Uncheck \\\"receive beta updates\\\" from Settings > General, and install a stable release from our <a href=\\\"https://iina.io\\\">official website</a>.\"; ObjectID = \"3aN-Hg-GkT\";",
       "extractionState" : "manual",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uncheck \"receive beta updates\" from Preferences - General, and install a stable release from our <a href=\"https://iina.io\">official website</a>."
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15,6 +21,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "قم بإلغاء تحديد \"تلقي تحديثات بيتا\" من التفضيلات - عام، وتثبيت إصدار مستقر من <a href=\"https://iina.io\">موقعنا الرسمي</a>."
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tənzimləmələr > General'dan \"beta yeniləmələrini endir\" hissəsini seçimdən çıxarın və sabit buraxılışı bu linkdən endirin <a href=\"https://iina.io\">Rəsmi websayt</a>."
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зніміце птушку з пункта «Атрымліваць бэта абнаўленні» ў агульных наладах і ўсталюйце стабільны выпуск з нашага <a href=\"https://iina.io\">афіцыйнага вэб-сайта</a>."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uncheck \"receive beta updates\" from Preferences - General, and install a stable release from our <a href=\"https://iina.io\">official website</a>."
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uncheck \"receive beta updates\" from Preferences - General, and install a stable release from our <a href=\"https://iina.io\">official website</a>."
           }
         },
         "ca" : {
@@ -65,6 +95,12 @@
             "value" : "Desmarque \"Recibir actualizaciones beta\" en Preferencias - General, e instale una versión estable desde nuestro <a href=\"https://iina.io\">sitio web oficial</a>."
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uncheck \"receive beta updates\" from Preferences - General, and install a stable release from our <a href=\"https://iina.io\">official website</a>."
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -107,10 +143,22 @@
             "value" : "Szüntesse meg a kijelölést a \"béta frissítések\" opciónál a Beállításokban, majd telepítsen egy stabil verziót a <a href=\"https://iina.io\">hivatalos weboldalunkról</a>."
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uncheck \"receive beta updates\" from Preferences - General, and install a stable release from our <a href=\"https://iina.io\">official website</a>."
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hilangkan centang \"Terima Pembaruan Beta\" dari Preferensi - Umum, dan instal versi stabil dari <a href=\"https://iina.io\">laman situs resmi</a> kami."
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uncheck \"receive beta updates\" from Preferences - General, and install a stable release from our <a href=\"https://iina.io\">official website</a>."
           }
         },
         "it" : {
@@ -125,6 +173,12 @@
             "value" : "環境設定 > 一般 から「ベータ版のアップデート通知を受け取る」のチェックを外し、<a href=\"https://iina.io\">公式サイト</a>から最新の安定版をインストールしてください。"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uncheck \"receive beta updates\" from Preferences - General, and install a stable release from our <a href=\"https://iina.io\">official website</a>."
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -132,6 +186,18 @@
           }
         },
         "lv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uncheck \"receive beta updates\" from Preferences - General, and install a stable release from our <a href=\"https://iina.io\">official website</a>."
+          }
+        },
+        "mk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uncheck \"receive beta updates\" from Preferences - General, and install a stable release from our <a href=\"https://iina.io\">official website</a>."
+          }
+        },
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Uncheck \"receive beta updates\" from Preferences - General, and install a stable release from our <a href=\"https://iina.io\">official website</a>."
@@ -185,13 +251,13 @@
             "value" : "Odškrtnite \"Sťahovať beta aktualizácie\" v Nastavenia - Všeobecné a nainštalujte stabilnú verziu z našej <a href=\"https://iina.io\">oficiálnej stránky</a>."
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Uncheck \"receive beta updates\" from Preferences - General, and install a stable release from our <a href=\"https://iina.io\">official website</a>."
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Opozovite izbor stavke „primaj beta ažuriranja“ u okviru opcije Željene postavke – Opšte postavke, a zatim instalirajte stabilno izdanje sa <a href=\"https://iina.io\">zvaničnog veb-sajta</a>."
@@ -209,16 +275,34 @@
             "value" : "Uncheck \"receive beta updates\" from Preferences - General, and install a stable release from our <a href=\"https://iina.io\">official website</a>."
           }
         },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uncheck \"receive beta updates\" from Preferences - General, and install a stable release from our <a href=\"https://iina.io\">official website</a>."
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lütfen “Tercihler” → “Genel” sekmesinden “Beta güncellemeleri al”ı kapatın ve <a href=\"https://iina.io\">resmi IINA sitesinden</a> kararlı son yayımı indirin."
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uncheck \"receive beta updates\" from Preferences - General, and install a stable release from our <a href=\"https://iina.io\">official website</a>."
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Зніміть прапорець «Отримувати бета-оновлення» через Параметри → Загальні та встановіть стабільну версію з нашого <a href=\"https://iina.io\">офіційного веб-сайту</a>."
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uncheck \"receive beta updates\" from Preferences - General, and install a stable release from our <a href=\"https://iina.io\">official website</a>."
           }
         },
         "vi" : {
@@ -255,6 +339,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "أبلغ لنا عبر <a href=\"mailto:developers@iina.io\">البريد الإلكتروني</a> أو <a href=\"https://github.com/iina/iina/issues\">مشكلة GitHub</a>."
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bizə bildirin <a href=\"mailto:developers@iina.io\">email</a> və ya <a href=\"https://github.com/iina/iina/issues\">GitHub issue</a>."
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Паведаміце нам аб гэтым па <a href=\"mailto:developers@iina.io\">электроннай пошце</a> ці <a href=\"https://github.com/iina/iina/issues\">на GitHub</a>."
           }
         },
         "ca" : {
@@ -332,7 +428,7 @@
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "हमारी <a href=\"mailto:developers@iina.io\">ईमेल</a> \nया <a href=\"https://github.com/iina/iina/issues\">गिटहब इशू </a> द्वारा रिपोर्ट करें"
+            "value" : "हमारी <a href=\"mailto:developers@iina.io\">ईमेल</a> \\nया <a href=\"https://github.com/iina/iina/issues\">गिटहब इशू </a> द्वारा रिपोर्ट करें"
           }
         },
         "hr" : {
@@ -375,6 +471,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ziņojiet mums, izmantojot <a href=\"mailto:developers@iina.io\">pastu</a> vai <a href=\"https://github.com/iina/iina/issues\">GitHub jautājumu</a>."
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "<a href=\"mailto:developers@iina.io\">email</a> അല്ലെങ്കിൽ <a href=\"https://github.com/iina/iina/issues\">GitHub issue</a> വഴി ഞങ്ങൾക്ക് റിപ്പോർട്ട് ചെയ്യുക."
           }
         },
         "nb" : {
@@ -426,12 +528,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Report to us via <a href=\"mailto:developers@iina.io\">email</a> or <a href=\"https://github.com/iina/iina/issues\">GitHub issue</a>."
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prijavite nam putem <a href=\"mailto:developers@iina.io\">e-pošte</a> ili <a href=\"https://github.com/iina/iina/issues\"> problema na GitHubu</a>."
@@ -511,6 +607,12 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Open URL…\"; ObjectID = \"FKG-Tz-TCV\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отвори URL адресу…"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -521,6 +623,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "فتح الرابط…"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "URL açın..."
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Адкрыць URL-адрас…"
           }
         },
         "ca" : {
@@ -619,6 +733,12 @@
             "value" : "Buka Link…"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opna URL…"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -641,6 +761,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Atvērt URL…"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "URL തുറക്കുക…"
           }
         },
         "nb" : {
@@ -692,12 +818,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Отвори URL адресу…"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otvori URL…"
@@ -774,6 +894,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "بيتا"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "BETA"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "BETA"
           }
         },
         "ca" : {
@@ -872,6 +1004,12 @@
             "value" : "BETA"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prófunarútgáfa"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -894,6 +1032,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "BETA"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ബീറ്റ"
           }
         },
         "nb" : {
@@ -950,19 +1094,7 @@
             "value" : "BETA"
           }
         },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "BETA"
-          }
-        },
         "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "BETA"
-          }
-        },
-        "ta" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "BETA"
@@ -1014,6 +1146,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "أنت تستخدم نسخة تجريبية من IINA"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Siz İİNA'nın beta versiyasını istifadə edirsiz"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вы выкарыстоўваеце бэта-версію IINA"
           }
         },
         "ca" : {
@@ -1112,6 +1256,12 @@
             "value" : "Anda menggunakan versi beta dari IINA"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Þú ert að nota prófunarútgáfu af IINA"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1134,6 +1284,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jūs izmantojat IINA beta versiju"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "നിങ്ങൾ IINA-യുടെ ബീറ്റ പതിപ്പാണ് ഉപയോഗിക്കുന്നത്"
           }
         },
         "nb" : {
@@ -1185,12 +1341,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You are using a beta version of IINA"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Koristite beta verziju programa IINA"
@@ -1254,6 +1404,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "وجدت خطأ؟"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Xəta tapdız?"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Знайшлі памылку?"
           }
         },
         "ca" : {
@@ -1352,6 +1514,12 @@
             "value" : "Menemukan sebuah masalah atau galat?"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fannstu villu?"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1374,6 +1542,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Atradāt kļūdu?"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ഒരു ബഗ് കണ്ടെത്തിയോ?"
           }
         },
         "nb" : {
@@ -1427,12 +1601,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Found a bug?"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Pronašli ste grešku?"
           }
         },
@@ -1440,12 +1608,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hittat ett fel?"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Found a bug?"
           }
         },
         "tr" : {
@@ -1490,7 +1652,8 @@
             "value" : "⇧⌘O"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "KWZ-BM-GBN.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Resume\"; ObjectID = \"KWZ-BM-GBN\";",
@@ -1506,6 +1669,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "استئناف"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Davam et"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Узнавіць"
           }
         },
         "ca" : {
@@ -1604,6 +1779,12 @@
             "value" : "Lanjutkan"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Halda áfram"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1626,6 +1807,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Turpināt"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "പുനരാരംഭിക്കുക"
           }
         },
         "nb" : {
@@ -1679,12 +1866,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Resume"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Nastavi"
           }
         },
@@ -1692,12 +1873,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Återuppta"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Resume"
           }
         },
         "tr" : {
@@ -1736,10 +1911,250 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Found a bug?\"; ObjectID = \"llJ-1b-38L\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "af" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "’n Fout opgespoor?"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "وجدت خطأ؟"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Xəta tapdız?"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Знайшлі памылку?"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Has trobat un error?"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Našli jste chybu?"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fundet en fejl?"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fehler gefunden?"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Βρήκατε σφάλμα;"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Found a bug?"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Found a bug?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Encontraste un error?"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اشکالی پیدا کردید"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Löysitkö virheen?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avez-vous trouvé un bogue ?"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "מצאת באג?"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "एक बग मिला?"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pronašao/la si grešku?"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hibát talált?"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Menemukan sebuah masalah atau galat?"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fannstu villu?"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hai trovato un bug?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "不具合を見つけましたか？"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "오류를 발견했나요?"
+          }
+        },
+        "lv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atradāt kļūdu?"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ഒരു ബഗ് കണ്ടെത്തിയോ?"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Funnet en feil?"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Een bug gevonden?"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Znalazłeś błąd?"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encontrou um erro?"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Encontrou um bug?"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ai găsit un bug?"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нашли ошибку?"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Našli ste chybu?"
+          }
+        },
+        "sr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pronašli ste grešku?"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hittat ett fel?"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bir hata mı buldunuz?"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Знайшли помилку?"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bạn tìm thấy lỗi?"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "发现错误？"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "發現了 bug？"
           }
         }
       }
@@ -1784,6 +2199,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "فتح…"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aç..."
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Адкрыць…"
           }
         },
         "ca" : {
@@ -1882,6 +2309,12 @@
             "value" : "Buka…"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opna…"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1904,6 +2337,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Atvērt…"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "തുറക്കുക…"
           }
         },
         "nb" : {
@@ -1955,12 +2394,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open…"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otvori…"
@@ -2024,6 +2457,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "هل تريد التراجع؟"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geri qaytarmaq istəyirsiz?"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жадаеце адкаціць?"
           }
         },
         "ca" : {
@@ -2146,6 +2591,12 @@
             "value" : "Vai vēlaties atiestatīt?"
           }
         },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "റോൾബാക്ക് ചെയ്യണോ?"
+          }
+        },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2197,12 +2648,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Want to rollback?"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Vratite se na prethodnu verziju?"
           }
         },
@@ -2210,12 +2655,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vill du gå tillbaka?"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Want to rollback?"
           }
         },
         "tr" : {

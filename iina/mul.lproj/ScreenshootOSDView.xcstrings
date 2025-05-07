@@ -5,6 +5,12 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"REVEAL\"; ObjectID = \"5fX-iV-Qu2\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ПРИКАЖИ"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15,6 +21,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "إظهار"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Göstər"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "РАСКРЫЦЬ"
           }
         },
         "ca" : {
@@ -113,6 +131,12 @@
             "value" : "TAMPILKAN"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Birta"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -137,10 +161,10 @@
             "value" : "ATKLĀT"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "REVEAL"
+            "value" : "വെളിപ്പെടുത്തുക"
           }
         },
         "nl" : {
@@ -188,12 +212,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ПРИКАЖИ"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "PRIKAŽI"
           }
         },
@@ -201,12 +219,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "VISA"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "REVEAL"
           }
         },
         "tr" : {
@@ -245,6 +257,12 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"EDIT\"; ObjectID = \"H12-rV-dHF\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "УРЕДИ"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -255,6 +273,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "تعديل"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DÜZƏLİŞ ET"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ЗМЯНІЦЬ"
           }
         },
         "ca" : {
@@ -353,6 +383,12 @@
             "value" : "SUNTING"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Breyta"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -377,16 +413,22 @@
             "value" : "REDIĢĒT"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "REDIGER"
+            "value" : "എഡിറ്റ്"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "BEWERKEN"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "REDIGER"
           }
         },
         "pl" : {
@@ -426,12 +468,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "УРЕДИ"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "UREDI"
@@ -485,6 +521,12 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"DELETE\"; ObjectID = \"JGi-s6-8NZ\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ИЗБРИШИ"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -495,6 +537,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "حذف"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SİL"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ВЫДАЛІЦЬ"
           }
         },
         "ca" : {
@@ -593,6 +647,12 @@
             "value" : "HAPUS"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eyða"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -617,16 +677,22 @@
             "value" : "DZĒST"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "SLETT"
+            "value" : "ഡിലീറ്റ്"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "VERWIJDEREN"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SLETT"
           }
         },
         "pl" : {
@@ -666,12 +732,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ИЗБРИШИ"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "IZBRIŠI"

@@ -5,6 +5,12 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"Website\"; ObjectID = \"FJS-b9-ATj\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Веб-сајт"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15,6 +21,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "الموقع"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vebsayt"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вэб-сайт"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Уебсайт"
           }
         },
         "ca" : {
@@ -113,6 +137,12 @@
             "value" : "Situs"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vefsíða"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -137,16 +167,28 @@
             "value" : "Mājaslapa"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nettside"
+            "value" : "Веб страна"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "വെബ്സൈറ്റ്"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Website"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nettside"
           }
         },
         "pl" : {
@@ -185,13 +227,13 @@
             "value" : "Webová stránka"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Веб-сајт"
+            "value" : "Spletna stran"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Veb-sajt"
@@ -245,6 +287,12 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Failed to load highlights. Please visit our website https://iina.io for more information.\"; ObjectID = \"oaH-Na-skD\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Учитавање истакнутих садржаја није успело. Више информација потражите на нашем веб-сајту: https://iina.io."
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -255,6 +303,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "فشل تحميل النقاط المهمة. الرجاء زيارة موقعنا https://iina.io لمزيد من المعلومات."
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seçilmişləri göstərmək mümkün olmadı, əlavə məlumat üçün saytımızı https://iina.io ziyarət edə bilərsiz"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не ўдалося загрузіць асноўныя матэрыялы. Калі ласка, наведайце наш сайт https://iina.io для атрымання дадатковай інфармацыі."
           }
         },
         "ca" : {
@@ -353,6 +413,12 @@
             "value" : "Gagal memuat highlights. Mohon kunjungi website kami https://iina.io untuk info lebih lanjut."
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ekki tókst að hlaða hápunkta. Vinsamlegast heimsóttu heimasíðu okkar https://iina.io til að fá frekari upplýsingar."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -371,22 +437,22 @@
             "value" : "하이라이트를 불러오지 못했습니다. 자세한 내용은 웹 사이트(https://iina.io)에서 확인해주세요."
           }
         },
-        "lv" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Failed to load highlights. Please visit our website https://iina.io for more information."
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kan ikke laste høydepunkter. Besøk nettsiden vår https://iina.io for mer informasjon."
+            "value" : "ഹൈലൈറ്റുകൾ ലോഡ് ചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു. കൂടുതൽ വിവരങ്ങൾക്ക് ഞങ്ങളുടെ വെബ്സൈറ്റ് https://iina.io സന്ദർശിക്കുക."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fout bij het laden van hoogtepunten. Bezoek onze website https://iina.io voor meer informatie."
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kan ikke laste høydepunkter. Besøk nettsiden vår https://iina.io for mer informasjon."
           }
         },
         "pl" : {
@@ -428,12 +494,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Учитавање истакнутих садржаја није успело. Више информација потражите на нашем веб-сајту: https://iina.io."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Učitavanje istaknutih sadržaja nije uspelo. Više informacija potražite na našem veb-sajtu: https://iina.io."
           }
         },
@@ -441,12 +501,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Det gick inte att läsa in höjdpunkter. Vänligen besök vår hemsida https://iina.io för mer information."
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to load highlights. Please visit our website https://iina.io for more information."
           }
         },
         "tr" : {
@@ -485,6 +539,12 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"Continue\"; ObjectID = \"pRW-Nk-MIQ\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Настави"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -495,6 +555,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "متابعة"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Davam et"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Працягнуць"
           }
         },
         "ca" : {
@@ -593,6 +665,12 @@
             "value" : "Lanjut"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haltu áfram"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -611,22 +689,22 @@
             "value" : "계속하기"
           }
         },
-        "lv" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Continue"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fortsett"
+            "value" : "തുടരുക"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Doorgaan"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fortsett"
           }
         },
         "pl" : {
@@ -666,12 +744,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Настави"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nastavi"

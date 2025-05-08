@@ -141,7 +141,7 @@
 "osd.playlist_loop" = "Loop Playlist";
 "osd.no_loop" = "Disable Looping";
 
-"preference.title" = "Preferences";
+"preference.title" = "Settings";
 "preference.general" = "General";
 "preference.ui" = "UI";
 "preference.video_audio" = "Video/Audio";
@@ -287,7 +287,7 @@
 "alert.screenshot.error_taking" = "Cannot take a screenshot!";
 
 "alert.sub.no_selected" = "Please select a downloaded subtitle first.";
-"alert.sub_lang_not_set" = "Please set preferred subtitle languages in preferences before using OpenSubtitles. English(eng) will be used this time.";
+"alert.sub_lang_not_set" = "Please set preferred subtitle languages in Settings before using OpenSubtitles. English(eng) will be used this time.";
 "alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
 "alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
 "alert.sub.save_downloaded.title" = "Save Downloaded Subtitle";
@@ -349,7 +349,7 @@
 "alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
 "alert.plugin_reinstall.title" = "Plugin %@ already exists";
 "alert.plugin_reinstall.message" = "Do you want to reinstall the plugin?";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Settings - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
 "alert.plugin_no_update" = "No update found.";
 "alert.plugin_update_found.title" = "Update found for %@";
 "alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";

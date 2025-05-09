@@ -25,14 +25,8 @@
 /* Class = "NSMenuItem"; title = "Jump to…"; ObjectID = "2id-wn-xsC"; */
 "2id-wn-xsC.title" = "Salta a…";
 
-/* Class = "NSMenuItem"; title = "Show Video Panel"; ObjectID = "2t8-Ot-yoO"; */
-"2t8-Ot-yoO.title" = "Show Video Panel";
-
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "3Ax-P3-QQu"; */
 "3Ax-P3-QQu.title" = "Selecciona-ho tot";
-
-/* Class = "NSMenuItem"; title = "Show Audio Panel"; ObjectID = "43n-Ed-5kT"; */
-"43n-Ed-5kT.title" = "Show Audio Panel";
 
 /* Class = "NSMenuItem"; title = "Audio Delay + 0.5s"; ObjectID = "4ae-MT-2L1"; */
 "4ae-MT-2L1.title" = "Retarda àudio + 0.5s";
@@ -69,9 +63,6 @@
 
 /* Class = "NSMenuItem"; title = "Speed:"; ObjectID = "8pV-XQ-AvB"; */
 "8pV-XQ-AvB.title" = "Velocitat:";
-
-/* Class = "NSMenuItem"; title = "Show Subtitles Panel"; ObjectID = "8y7-Cy-lKT"; */
-"8y7-Cy-lKT.title" = "Show Subtitles Panel";
 
 /* Class = "NSMenuItem"; title = "Speed Up to 1.1x"; ObjectID = "91n-xW-L37"; */
 "91n-xW-L37.title" = "Increment velocitat a 1.1x";
@@ -111,9 +102,6 @@
 
 /* Class = "NSMenu"; title = "Audio Track"; ObjectID = "DRb-Y8-xir"; */
 "DRb-Y8-xir.title" = "Pista d'àudio";
-
-/* Class = "NSMenuItem"; title = "Load External Audio…"; ObjectID = "3xl-iD-85w"; */
-"3xl-iD-85w.title" = "Load External Audio…";
 
 /* Class = "NSMenuItem"; title = "Speed Down to 0.9x"; ObjectID = "DUP-nm-BJt"; */
 "DUP-nm-BJt.title" = "Redueix velocitat a 0.9x";
@@ -268,9 +256,6 @@
 /* Class = "NSMenuItem"; title = "Pause"; ObjectID = "UOE-MJ-8ku"; */
 "UOE-MJ-8ku.title" = "Pausa";
 
-/* Class = "NSMenu"; title = "Secondary Subtitle"; ObjectID = "UwY-P2-Xdb"; */
-"UwY-P2-Xdb.title" = "Secondary Subtitle";
-
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "VDZ-ro-z5z"; */
 "VDZ-ro-z5z.title" = "Refés";
 
@@ -330,9 +315,6 @@
 
 /* Class = "NSMenuItem"; title = "Volume + 1%"; ObjectID = "c6Y-0e-vgf"; */
 "c6Y-0e-vgf.title" = "Volum + 1%";
-
-/* Class = "NSMenuItem"; title = "Show Current File in Finder"; ObjectID = "che-dy-QUU"; */
-"che-dy-QUU.title" = "Show Current File in Finder";
 
 /* Class = "NSMenuItem"; title = "Aspect Ratio"; ObjectID = "d15-8v-dXA"; */
 "d15-8v-dXA.title" = "Relació d'aspecte";
@@ -396,9 +378,6 @@
 
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "m7w-hc-Y2F"; */
 "m7w-hc-Y2F.title" = "Converteix a majúscules";
-
-/* Class = "NSMenuItem"; title = "Secondary Subtitle"; ObjectID = "mGw-jm-5x2"; */
-"mGw-jm-5x2.title" = "Secondary Subtitle";
 
 /* Class = "NSMenuItem"; title = "Enter Picture in Picture"; ObjectID = "mND-N8-z6o"; */
 "mND-N8-z6o.title" = "Canvia a Picture in Picture";

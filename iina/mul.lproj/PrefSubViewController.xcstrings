@@ -125,16 +125,16 @@
             "value" : "Assrt API 토큰"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Assrt API-nøkkel:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Assrt API-token:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Assrt API-nøkkel:"
           }
         },
         "pl" : {
@@ -173,7 +173,7 @@
             "value" : "Assrt API token:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Potvrdi token API-ja:"
@@ -335,16 +335,16 @@
             "value" : "온라인 자막"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Undertekster på nett:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Online ondertitelingen:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Undertekster på nett:"
           }
         },
         "pl" : {
@@ -383,7 +383,7 @@
             "value" : "Titulky na internete:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Titlovi na mreži:"
@@ -557,16 +557,16 @@
             "value" : "Augšā"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Topp"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Boven"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Topp"
           }
         },
         "pl" : {
@@ -605,7 +605,7 @@
             "value" : "Hore"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vrh"
@@ -779,16 +779,16 @@
             "value" : "전체 화면일 때 자막을 레터박스에 표시"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vis undertekster i bredformat i fullskjerm"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Toon ondertiteling in de zwarte balken van schermvullende weergave"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vis undertekster i bredformat i fullskjerm"
           }
         },
         "pl" : {
@@ -827,7 +827,7 @@
             "value" : "Zobraziť titulky v čiernych pruhoch pri prehrávaní na celej obrazovke"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prikaži titlove na crnoj traci u režimu celog ekrana"
@@ -875,10 +875,196 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"strip\"; ObjectID = \"3H8-Ei-cTm\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "af" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "volledig"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "strip"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "tira"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Úplná"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "strip"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "strip"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "strip"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "strip"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "tira"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "poista"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "retirer"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "הסרת הכל"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "स्ट्रिप"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "csík"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "strip"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "striscia"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ストリップ"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "strip"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "volledig"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "fjern"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pasek"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "faixa"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "cortar"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "de tot"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "strip"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Základný"
+          }
+        },
+        "sr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ukloni"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "avlägsna"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "sıyır"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "видалити"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "条形"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "過濾"
           }
         }
       },
@@ -1008,16 +1194,16 @@
             "value" : "위치"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Posisjon:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Positie:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Posisjon:"
           }
         },
         "pl" : {
@@ -1056,7 +1242,7 @@
             "value" : "Pozícia:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Položaj:"
@@ -1230,16 +1416,16 @@
             "value" : "Apakšā"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bunn"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Onder"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bunn"
           }
         },
         "pl" : {
@@ -1278,7 +1464,7 @@
             "value" : "Dole"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dno"
@@ -1452,16 +1638,16 @@
             "value" : "파일 이름이 포함된 자막을 먼저 선택:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Undertekster har prioritet når filnavnet inneholder:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ondertitelingsbestanden met de volgende tekst in de bestandsnaam krijgen prioriteit:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Undertekster har prioritet når filnavnet inneholder:"
           }
         },
         "pl" : {
@@ -1500,7 +1686,7 @@
             "value" : "Titulky majú prednosť ak názov súboru obsahuje:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Titlovi imaju prioritet kada naziv datoteke sadrži:"
@@ -1668,16 +1854,16 @@
             "value" : "윈도우 크기에 따라 자막 크기 조정"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Skaler undertekster til vindustørrelse"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Schaal ondertiteling mee met venstergrootte"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skaler undertekster til vindustørrelse"
           }
         },
         "pl" : {
@@ -1716,7 +1902,7 @@
             "value" : "Veľkosť tituliek prispôsobiť veľkosti okna"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Podesi titlove prema veličini prozora"
@@ -1884,16 +2070,16 @@
             "value" : "글자 간격:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sperring av tekst:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Letterafstand:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sperring av tekst:"
           }
         },
         "pl" : {
@@ -1932,7 +2118,7 @@
             "value" : "Rozmiestnenie písma:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Razmaci u fontu:"
@@ -2100,16 +2286,16 @@
             "value" : "상하 위치:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vertikal posisjon:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verticale positie:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vertikal posisjon:"
           }
         },
         "pl" : {
@@ -2148,7 +2334,7 @@
             "value" : "Vertikálna pozícia:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vertikalni položaj:"
@@ -2316,16 +2502,16 @@
             "value" : "서체"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Typesnitt"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lettertype"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Typesnitt"
           }
         },
         "pl" : {
@@ -2364,7 +2550,7 @@
             "value" : "Font"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Font"
@@ -2532,13 +2718,13 @@
             "value" : "Y:"
           }
         },
-        "nb" : {
+        "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Y:"
           }
         },
-        "nl" : {
+        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Y:"
@@ -2580,7 +2766,7 @@
             "value" : "Y:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Y:"
@@ -2634,6 +2820,12 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Blur:\"; ObjectID = \"aO9-D6-KG8\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Замути:"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2644,6 +2836,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "طمس:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Размытасць:"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Размиване:"
           }
         },
         "ca" : {
@@ -2694,6 +2898,12 @@
             "value" : "Difuminar:"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lausotu:"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2736,10 +2946,22 @@
             "value" : "Elmosódás:"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ֆոն:"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Efek blur:"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Þoka:"
           }
         },
         "it" : {
@@ -2760,16 +2982,22 @@
             "value" : "흐림 효과:"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Uskarphet:"
+            "value" : "Замати:"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vervaging:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uskarphet:"
           }
         },
         "pl" : {
@@ -2808,13 +3036,13 @@
             "value" : "Rozmazanie:"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Замути:"
+            "value" : "Zameglitev:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zamućenje:"
@@ -2824,6 +3052,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Oskärpa:"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "เบลอ:"
           }
         },
         "tr" : {
@@ -2836,6 +3070,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Розмиття:"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "دھندلا:"
           }
         },
         "vi" : {
@@ -2995,16 +3235,16 @@
             "value" : "그림자"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Skygge"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Schaduw"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skygge"
           }
         },
         "pl" : {
@@ -3043,7 +3283,7 @@
             "value" : "Tieň"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Senka"
@@ -3211,16 +3451,16 @@
             "value" : "자동으로 인터넷에서 자막 찾기"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Søk etter undertekster på nett automatisk"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zoek automatisch online naar ondertiteling"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Søk etter undertekster på nett automatisk"
           }
         },
         "pl" : {
@@ -3259,7 +3499,7 @@
             "value" : "Automaticky vyhľadať titulky na internete"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Potraži titlove na mreži automatski"
@@ -3427,16 +3667,16 @@
             "value" : "서체:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Typesnitt:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lettertype:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Typesnitt:"
           }
         },
         "pl" : {
@@ -3475,7 +3715,7 @@
             "value" : "Font:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Font:"
@@ -3643,13 +3883,13 @@
             "value" : " X:"
           }
         },
-        "nb" : {
+        "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : " X:"
           }
         },
-        "nl" : {
+        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : " X:"
@@ -3691,7 +3931,7 @@
             "value" : " X:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : " X:"
@@ -3838,7 +4078,7 @@
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Niste prijavljeni"
+            "value" : "Nisi prijavljen/prijavljena"
           }
         },
         "hu" : {
@@ -3856,7 +4096,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Accesso non effettuato"
+            "value" : "Login non effettuato"
           }
         },
         "ja" : {
@@ -3871,16 +4111,16 @@
             "value" : "로그인되지 않음"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ikke logget inn"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Niet ingelogd"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ikke logget inn"
           }
         },
         "pl" : {
@@ -3898,7 +4138,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nao logado"
+            "value" : "Não está logado"
           }
         },
         "ro" : {
@@ -3910,7 +4150,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Не авторизированы"
+            "value" : "Вход не выполнен"
           }
         },
         "sk" : {
@@ -3919,7 +4159,7 @@
             "value" : "Neprihlásený"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Niste prijavljeni"
@@ -3934,13 +4174,13 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Giriş yapılmadı"
+            "value" : "Oturum açılmadı"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Не увійшли до"
+            "value" : "Не зайдено"
           }
         },
         "vi" : {
@@ -4129,7 +4369,7 @@
             "value" : "Posun:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Odstupanje:"
@@ -4288,13 +4528,13 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avanzato"
+            "value" : "Avanzate"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "高度な設定"
+            "value" : "詳細設定"
           }
         },
         "ko" : {
@@ -4303,16 +4543,16 @@
             "value" : "고급설정"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avansert"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geavanceerd"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avansert"
           }
         },
         "pl" : {
@@ -4351,7 +4591,7 @@
             "value" : "Pokročilé"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Napredno"
@@ -4378,7 +4618,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Додатково"
+            "value" : "Експертні"
           }
         },
         "vi" : {
@@ -4396,7 +4636,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "進階"
+            "value" : "進階設定"
           }
         }
       }
@@ -4567,7 +4807,7 @@
             "value" : "Stred"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Centar"
@@ -4777,7 +5017,7 @@
             "value" : "Box"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Drugi stilovi"
@@ -4987,7 +5227,7 @@
             "value" : "Pozadie:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pozadina:"
@@ -5197,7 +5437,7 @@
             "value" : "Úroveň prepísania:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nivo zamene:"
@@ -5359,16 +5599,16 @@
             "value" : "오른쪽"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Høyre"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rechts"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Høyre"
           }
         },
         "pl" : {
@@ -5407,7 +5647,7 @@
             "value" : "Vpravo"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Desno"
@@ -5473,6 +5713,24 @@
             "value" : "الحجم:"
           }
         },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ölçü:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Памер:"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Размер:"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5494,7 +5752,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stärke:"
+            "value" : "Größe:"
           }
         },
         "el" : {
@@ -5524,7 +5782,7 @@
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "اندازه:"
+            "value" : "حجم:"
           }
         },
         "fi" : {
@@ -5587,16 +5845,16 @@
             "value" : "크기:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Størrelse:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dikte:"
+            "value" : "Grootte:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Størrelse:"
           }
         },
         "pl" : {
@@ -5635,7 +5893,13 @@
             "value" : "Veľkosť:"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Velikost:"
+          }
+        },
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Veličina:"
@@ -5663,6 +5927,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Розмір:"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "سائز:"
           }
         },
         "vi" : {
@@ -5851,7 +6121,7 @@
             "value" : "Tučné"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Podebljano"
@@ -6019,16 +6289,16 @@
             "value" : "OpenSubtitles 계정:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OpenSubtitle-konto:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OpenSubtitles-account:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OpenSubtitle-konto:"
           }
         },
         "pl" : {
@@ -6067,7 +6337,7 @@
             "value" : "OpenSubtitles účet:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OpenSubtitles nalog:"
@@ -6121,9 +6391,237 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"%\"; ObjectID = \"JZo-4H-owW\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "af" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "٪"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " %"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
+            "value" : "%"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "sr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
             "value" : "%"
           }
         }
@@ -6296,7 +6794,7 @@
             "value" : "Zarovnať"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Poravnaj"
@@ -6458,13 +6956,13 @@
             "value" : " X:"
           }
         },
-        "nb" : {
+        "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : " X:"
           }
         },
-        "nl" : {
+        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : " X:"
@@ -6506,7 +7004,7 @@
             "value" : " X:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : " X:"
@@ -6551,7 +7049,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " X："
+            "value" : "水平："
           }
         }
       }
@@ -6680,16 +7178,16 @@
             "value" : "기타"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Andre:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Overige:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Andre:"
           }
         },
         "pl" : {
@@ -6728,7 +7226,7 @@
             "value" : "Ostatné:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ostalo:"
@@ -6908,12 +7406,6 @@
             "value" : "Основні Субтитри"
           }
         },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Phụ đề chính"
-          }
-        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6977,7 +7469,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Subtítulos secundarios"
+            "value" : "Subtítulos Secundarios"
           }
         },
         "fa" : {
@@ -7055,7 +7547,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Вторые субтитры"
+            "value" : "Второстепенные субтитры"
           }
         },
         "tr" : {
@@ -7068,12 +7560,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Додаткові Субтитри"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Phụ đề phụ"
           }
         },
         "zh-Hans" : {
@@ -7214,16 +7700,16 @@
             "value" : "디렉토리를 콜론(:)으로 구분하십시오. 상대경로와 경로문자열의 끝에 와일드카드(*)를 사용할 수 있습니다."
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mapper er adskilt ed kolon (:). Relative filstier og asteriks (*) på slutten er ikke tillatt."
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voer desgewenst een dubbele-punt-gescheiden lijst van mappen in (:). Gebruik eventueel relatieve locaties en wildcards (*)."
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mapper er adskilt ed kolon (:). Relative filstier og asteriks (*) på slutten er ikke tillatt."
           }
         },
         "pl" : {
@@ -7262,7 +7748,7 @@
             "value" : "Adresáre sú oddelené dvojbodkou (:). Relatívne cesty a \"wildcards\" (*) sú povolené."
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Direktorijumi su odvojeni dvotačkom (:). Relativne putanje i džokeri (*) na kraju mogu se koristiti."
@@ -7310,6 +7796,12 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"ASS Subtitles:\"; ObjectID = \"mFm-Q6-aja\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ASS subtitles:"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7317,6 +7809,24 @@
           }
         },
         "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ASS subtitles:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ASS subtitles:"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ASS subtitles:"
+          }
+        },
+        "bn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "ASS subtitles:"
@@ -7370,6 +7880,12 @@
             "value" : "Subtítulos ASS:"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ASS subtitles:"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7412,7 +7928,19 @@
             "value" : "ASS feliratok:"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ASS subtitles:"
+          }
+        },
         "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ASS subtitles:"
+          }
+        },
+        "is" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "ASS subtitles:"
@@ -7430,6 +7958,12 @@
             "value" : "ASS字幕:"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ASS subtitles:"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7442,7 +7976,13 @@
             "value" : "ASS subtitles:"
           }
         },
-        "nb" : {
+        "mk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ASS subtitles:"
+          }
+        },
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "ASS subtitles:"
@@ -7452,6 +7992,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ASS-ondertiteling:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ASS subtitles:"
           }
         },
         "pl" : {
@@ -7490,13 +8036,13 @@
             "value" : "ASS titulky:"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "ASS subtitles:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "ASS titlovi:"
@@ -7514,16 +8060,34 @@
             "value" : "ASS subtitles:"
           }
         },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ASS subtitles:"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "ASS altyazıları:"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ASS subtitles:"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "ASS-субтитри:"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ASS subtitles:"
           }
         },
         "vi" : {
@@ -7670,16 +8234,16 @@
             "value" : "문자열 목록은 쉼표로 구분하여 입력하십시오."
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vennligst angi en kommaseparert liste med kommandoer."
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voer desgewenst een kommagescheiden lijst in."
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vennligst angi en kommaseparert liste med kommandoer."
           }
         },
         "pl" : {
@@ -7718,7 +8282,7 @@
             "value" : "Slová oddeľte čiarkov."
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Unesite listu nizova razdvojenih zarezom."
@@ -7927,7 +8491,7 @@
             "value" : "Vybrať si…"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Odaberi…"
@@ -8156,7 +8720,7 @@
             "value" : "Kurzíva"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kurziv"
@@ -8366,7 +8930,7 @@
             "value" : "Okraje"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Margina"
@@ -8414,6 +8978,12 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Text Subtitles:\"; ObjectID = \"Qda-dp-nhg\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Text subtitles:"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8421,6 +8991,24 @@
           }
         },
         "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Text subtitles:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Text subtitles:"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Text subtitles:"
+          }
+        },
+        "bn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Text subtitles:"
@@ -8474,6 +9062,12 @@
             "value" : "Texto:"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Text subtitles:"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8516,7 +9110,19 @@
             "value" : "Szöveges feliratok:"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Text subtitles:"
+          }
+        },
         "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Text subtitles:"
+          }
+        },
+        "is" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Text subtitles:"
@@ -8534,6 +9140,12 @@
             "value" : "字幕テキスト:"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Text subtitles:"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8546,16 +9158,28 @@
             "value" : "Text subtitles:"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tekst undertekster:"
+            "value" : "Text subtitles:"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Text subtitles:"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Weergave ondertiteling:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tekst undertekster:"
           }
         },
         "pl" : {
@@ -8594,13 +9218,13 @@
             "value" : "Titulky:"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Text subtitles:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tekstualni titlovi:"
@@ -8618,16 +9242,34 @@
             "value" : "உரை வசனவரிகள்:"
           }
         },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Text subtitles:"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Altyazı dosyaları:"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Text subtitles:"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Текстові субтитри:"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Text subtitles:"
           }
         },
         "vi" : {
@@ -8774,16 +9416,16 @@
             "value" : "아래의 디렉토리에서도 자막을 찾습니다:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Søk også etter undertekster i følgende kataloger:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zoek ook naar ondertiteling in de volgende mappen:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Søk også etter undertekster i følgende kataloger:"
           }
         },
         "pl" : {
@@ -8822,7 +9464,7 @@
             "value" : "Taktiež hľadať titulky v nasledujúcich adresároch:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Titlove potraži i u sledećim direktorijumima:"
@@ -8870,6 +9512,12 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Auto Load:\"; ObjectID = \"raf-Yu-ck0\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto load:"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8877,6 +9525,24 @@
           }
         },
         "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto load:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto load:"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto load:"
+          }
+        },
+        "bn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Auto load:"
@@ -8930,6 +9596,12 @@
             "value" : "Carga automática:"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto load:"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8972,7 +9644,19 @@
             "value" : "Automatikus betöltés:"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto load:"
+          }
+        },
         "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto load:"
+          }
+        },
+        "is" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Auto load:"
@@ -8990,6 +9674,12 @@
             "value" : "自動読み込み:"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto load:"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9002,7 +9692,13 @@
             "value" : "Auto load:"
           }
         },
-        "nb" : {
+        "mk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto load:"
+          }
+        },
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Auto load:"
@@ -9012,6 +9708,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Automatisch inladen:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto load:"
           }
         },
         "pl" : {
@@ -9050,13 +9752,13 @@
             "value" : "Automaticky nahrať:"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Auto load:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Automatski učitaj:"
@@ -9074,16 +9776,34 @@
             "value" : "Auto load:"
           }
         },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto load:"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Altyazıyı otomatik yükle:"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto load:"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Автоматичне завантаження:"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto load:"
           }
         },
         "vi" : {
@@ -9230,16 +9950,22 @@
             "value" : "색상:"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Farge:"
+            "value" : "നിറം:"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kleur:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Farge:"
           }
         },
         "pl" : {
@@ -9278,7 +10004,7 @@
             "value" : "Farba:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Boja:"
@@ -9494,7 +10220,7 @@
             "value" : "Stred"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Centar"
@@ -9509,13 +10235,13 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Merkez"
+            "value" : "Ortala"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "по центру"
+            "value" : "По центру"
           }
         },
         "vi" : {
@@ -9698,7 +10424,7 @@
             "value" : "Okraj"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Okvir"
@@ -9866,16 +10592,16 @@
             "value" : "자막 파일 다운로드"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Last ned undertekster fra:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Download ondertiteling van:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Last ned undertekster fra:"
           }
         },
         "pl" : {
@@ -9914,7 +10640,7 @@
             "value" : "Stiahnuť titulky z:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Preuzmi titlove sa:"
@@ -10019,7 +10745,7 @@
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "غیر‌فعال"
+            "value" : "غیر فعال شده"
           }
         },
         "fi" : {
@@ -10037,13 +10763,13 @@
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "מושבתת"
+            "value" : "מושבת"
           }
         },
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "अक्षम"
+            "value" : "कुंजी"
           }
         },
         "hr" : {
@@ -10067,13 +10793,13 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Disabilitato"
+            "value" : "Disabilitata"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "無効"
+            "value" : "使用しない"
           }
         },
         "ko" : {
@@ -10088,22 +10814,22 @@
             "value" : "Izslēgta"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Deaktivert"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Uitgeschakeld"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deaktivert"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wyłączone"
+            "value" : "Wyłączony"
           }
         },
         "pt" : {
@@ -10127,7 +10853,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Отключено"
+            "value" : "Отключён"
           }
         },
         "sk" : {
@@ -10136,7 +10862,7 @@
             "value" : "Vypnuté"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Onemogućeno"
@@ -10145,7 +10871,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avaktiverad"
+            "value" : "Av"
           }
         },
         "ta" : {
@@ -10202,6 +10928,24 @@
             "value" : "الحجم:"
           }
         },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ölçü:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Памер:"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Размер:"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10253,7 +10997,7 @@
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "اندازه:"
+            "value" : "حجم:"
           }
         },
         "fi" : {
@@ -10316,16 +11060,16 @@
             "value" : "크기:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Størrelse:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Grootte:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Størrelse:"
           }
         },
         "pl" : {
@@ -10364,7 +11108,13 @@
             "value" : "Veľkosť:"
           }
         },
-        "sr-Latn" : {
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Velikost:"
+          }
+        },
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Veličina:"
@@ -10394,6 +11144,12 @@
             "value" : "Розмір:"
           }
         },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "سائز:"
+          }
+        },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10403,13 +11159,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "字号:"
+            "value" : "大小:"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "字體大小："
+            "value" : "大小："
           }
         }
       }
@@ -10538,16 +11294,22 @@
             "value" : "색상:"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Farge:"
+            "value" : "നിറം:"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kleur:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Farge:"
           }
         },
         "pl" : {
@@ -10586,7 +11348,7 @@
             "value" : "Farba:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Boja:"
@@ -10750,7 +11512,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "이 옵션을 선택하면 IINA는 20분을 넘는 동영상이 자막 없이 재생되는 경우에만\n자동으로 인터넷에서 자막을 찾습니다."
+            "value" : "이 옵션을 선택하면 IINA는 20분을 넘는 동영상이 자막 없이 재생되는 경우에만\\n자동으로 인터넷에서 자막을 찾습니다."
           }
         },
         "nl" : {
@@ -10795,7 +11557,7 @@
             "value" : "Ak je toto nastavenia povolené, IINA automaticky vyhľadá online titulky iba pre videá dlhšie ako 20 minút a bez nahraných titulkov."
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ako je omogućeno, IINA će automatski pretraživati titlove na mreži samo za video-zapise bez učitanih titlova i duže od 20 minuta."
@@ -10855,6 +11617,12 @@
             "value" : "تسجيل الدخول"
           }
         },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daxil ol"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10864,7 +11632,7 @@
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Přihlášení"
+            "value" : "Přihlásit se"
           }
         },
         "da" : {
@@ -10912,7 +11680,7 @@
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kirjaudu"
+            "value" : "Kirjaudu sisään"
           }
         },
         "fr" : {
@@ -10930,7 +11698,7 @@
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "लॉग इन करें"
+            "value" : "लॉग इन"
           }
         },
         "hr" : {
@@ -10942,7 +11710,7 @@
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Belépés"
+            "value" : "Bejelentkezés"
           }
         },
         "id" : {
@@ -10969,16 +11737,16 @@
             "value" : "로그인"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Logg inn"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Log in"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Logg på"
           }
         },
         "pl" : {
@@ -11008,7 +11776,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Авторизоваться"
+            "value" : "Войти"
           }
         },
         "sk" : {
@@ -11017,7 +11785,7 @@
             "value" : "Prihlásenie"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prijavi me"
@@ -11182,13 +11950,13 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avanzato"
+            "value" : "Avanzate"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "高度な設定"
+            "value" : "詳細設定"
           }
         },
         "ko" : {
@@ -11197,16 +11965,16 @@
             "value" : "고급설정"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avansert"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geavanceerd"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avansert"
           }
         },
         "pl" : {
@@ -11245,7 +12013,7 @@
             "value" : "Pokročilé"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Napredno"
@@ -11272,7 +12040,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Додатково"
+            "value" : "Експертні"
           }
         },
         "vi" : {
@@ -11290,7 +12058,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "進階"
+            "value" : "進階設定"
           }
         }
       }
@@ -11413,13 +12181,13 @@
             "value" : "Y:"
           }
         },
-        "nb" : {
+        "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Y:"
           }
         },
-        "nl" : {
+        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Y:"
@@ -11461,7 +12229,7 @@
             "value" : "Y:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Y:"
@@ -11506,7 +12274,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Y："
+            "value" : "垂直："
           }
         }
       }
@@ -11635,16 +12403,22 @@
             "value" : "색상:"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Farge:"
+            "value" : "നിറം:"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kleur:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Farge:"
           }
         },
         "pl" : {
@@ -11683,7 +12457,7 @@
             "value" : "Farba:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Boja:"
@@ -11857,16 +12631,16 @@
             "value" : "IINA앱이 자동 선택"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Oppdag automatisk av IINA"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Automatische detectie"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oppdag automatisk av IINA"
           }
         },
         "pl" : {
@@ -11905,7 +12679,7 @@
             "value" : "Titulky nájsť automaticky"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Inteligentno otkriva IINA"
@@ -12103,7 +12877,7 @@
             "value" : "Titulky obsahujú názov súboru"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Titlovi sadrže naziv medijske datoteke"
@@ -12271,16 +13045,16 @@
             "value" : "기본 인코딩"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Standard koding:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Standaard tekstcodering:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standard koding:"
           }
         },
         "pl" : {
@@ -12319,7 +13093,7 @@
             "value" : "Predvolené kódovanie:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Podrazumеvano kodiranje:"
@@ -12477,13 +13251,13 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ISO639-2の言語コードをカンマで区切って使用してください。\nこの設定はmpvとopensubtitlesの両方に適用されます。"
+            "value" : "ISO639-2の言語コードをカンマで区切って使用してください。\\nこの設定はmpvとopensubtitlesの両方に適用されます。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ISO 639-2의 언어 코드를 쉼표로 구분하여 사용하십시오.\n이 설정은 mpv와 OpenSubtitles 모두에 적용됩니다."
+            "value" : "ISO 639-2의 언어 코드를 쉼표로 구분하여 사용하십시오.\\n이 설정은 mpv와 OpenSubtitles 모두에 적용됩니다."
           }
         },
         "nl" : {
@@ -12528,7 +13302,7 @@
             "value" : "Nastavenie bude uložené ako ISO 639-2 jazokový kód a bude fungovať s mpv a opensubtitles."
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ova opcija će biti sačuvana kao šifra jezika ISO 639-2 i funkcionisaće i za mpv i za opensubtitles."
@@ -12609,7 +13383,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bevorzugte Sprachen:"
+            "value" : "Bevorzugte Sprache:"
           }
         },
         "en" : {
@@ -12675,7 +13449,7 @@
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bahasa yang dipilih:"
+            "value" : "Pilihan bahasa:"
           }
         },
         "it" : {
@@ -12687,7 +13461,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "優先する言語:"
+            "value" : "優先言語:"
           }
         },
         "ko" : {
@@ -12705,7 +13479,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Taalvoorkeur:"
+            "value" : "Voorkeurstaal:"
           }
         },
         "pl" : {
@@ -12723,7 +13497,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Linguagem preferida:"
+            "value" : "Idioma preferido:"
           }
         },
         "ro" : {
@@ -12744,7 +13518,7 @@
             "value" : "Preferovaný jazyk:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Željeni jezik:"
@@ -12954,7 +13728,7 @@
             "value" : "Vľavo"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Levo"

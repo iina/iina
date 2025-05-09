@@ -31,9 +31,6 @@
 /* Class = "NSBox"; title = "Font"; ObjectID = "9pv-1r-nuH"; */
 "9pv-1r-nuH.title" = "फ़ॉन्ट";
 
-/* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "ALz-LB-8sf"; */
-"ALz-LB-8sf.title" = "Y:";
-
 /* Class = "NSBox"; title = "Shadow"; ObjectID = "BgE-Kk-MXC"; */
 "BgE-Kk-MXC.title" = "साया";
 
@@ -42,9 +39,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Font:"; ObjectID = "C4C-XP-i2S"; */
 "C4C-XP-i2S.title" = "फ़ॉन्ट:";
-
-/* Class = "NSTextFieldCell"; title = " X:"; ObjectID = "CdS-9J-f2h"; */
-"CdS-9J-f2h.title" = " X:";
 
 /* Class = "NSTextFieldCell"; title = "Advanced"; ObjectID = "DUA-7H-Yje"; */
 "DUA-7H-Yje.title" = "उन्नत";
@@ -124,9 +118,6 @@
 /* Class = "NSBox"; title = "Align"; ObjectID = "kvJ-Tj-KMb"; */
 "kvJ-Tj-KMb.title" = "संरेखित";
 
-/* Class = "NSTextFieldCell"; title = " X:"; ObjectID = "l7l-ZO-W79"; */
-"l7l-ZO-W79.title" = " X:";
-
 /* Class = "NSTextFieldCell"; title = "ASS subtitles:"; ObjectID = "mFm-Q6-aja"; */
 "mFm-Q6-aja.title" = "ASS उपशीर्षक:";
 
@@ -157,9 +148,6 @@
 /* Class = "NSTextFieldCell"; title = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues."; ObjectID = "vYb-qH-XkH"; */
 "vYb-qH-XkH.title" = "यदि सक्षम किया गया है, तो IINA स्वचालित रूप से केवल बिना उपशीर्षक के वीडियो के लिए ऑनलाइन उपशीर्षक खोजेगा और 20 मिनट से अधिक समय तक रहेगा।";
 
-/* Class = "NSTextFieldCell"; title = "Y:"; ObjectID = "xGf-fF-4Hx"; */
-"xGf-fF-4Hx.title" = "Y:";
-
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "xid-E9-FC9"; */
 "xid-E9-FC9.title" = "रंग:";
 
@@ -171,9 +159,3 @@
 
 /* Class = "NSMenuItem"; title = "Left"; ObjectID = "zml-kt-LN8"; */
 "zml-kt-LN8.title" = "बाएं";
-
-/* Class = "NSSegmentedCell"; liY-E6-HCB.ibShadowedLabels[0] = "Primary Subtitles"; ObjectID = "liY-E6-HCB"; */
-"liY-E6-HCB.ibShadowedLabels[0]" = "Primary Subtitles";
-
-/* Class = "NSSegmentedCell"; liY-E6-HCB.ibShadowedLabels[1] = "Secondary Subtitles"; ObjectID = "liY-E6-HCB"; */
-"liY-E6-HCB.ibShadowedLabels[1]" = "Secondary Subtitles";

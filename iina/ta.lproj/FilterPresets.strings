@@ -20,8 +20,6 @@
 "expand.h" = "உயரம்  (இயல்புநிலை: காணொளி உயரம்)";
 "expand.x" = "ஆரம்பம் X (இயல்புநிலை: நடுவில்)";
 "expand.y" = "ஆரம்பம் Y (இயல்புநிலை: நடுவில்)";
-"expand.aspect" = "Expands to fit an aspect (e.g: 4/3)";
-"expand.round" = "Rounds up to make divisible by this value";
 
 "sharpen" = "கூர்மைப்படுத்துங்கள்";
 "sharpen.msize" = "அணி அளவு";
@@ -41,15 +39,3 @@
 
 "vflip" = "சுழற்று";
 "hflip" = "கண்ணாடிப்பிம்பம்";
-
-"lut3d" = "3D LUT";
-"lut3d.file" = "File path (you can also drag & drop the file into the input box)";
-"lut3d.interp" = "Interpolation mode";
-
-"custom_mpv" = "Custom (mpv)";
-"custom_mpv.name" = "Filter name";
-"custom_mpv.string" = "Filter value";
-
-"custom_ffmpeg" = "Custom (FFmpeg)";
-"custom_ffmpeg.name" = "Filter name";
-"custom_ffmpeg.string" = "Filter value";

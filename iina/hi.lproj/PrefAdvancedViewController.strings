@@ -10,9 +10,6 @@
 /* Class = "NSTextFieldCell"; title = "The following settings will require restarting IINA to take effect."; ObjectID = "HMa-Vz-EUk"; */
 "HMa-Vz-EUk.title" = "निम्नलिखित सेटिंग्स को प्रभावी होने के लिए IINA को पुनः आरंभ करने की आवश्यकता होगी।";
 
-/* Class = "NSButtonCell"; title = "Open Log Directory"; ObjectID = "JDA-g3-RNX"; */
-"JDA-g3-RNX.title" = "Open Log Directory";
-
 /* Class = "NSButtonCell"; title = "Enable logging to file"; ObjectID = "LCd-uY-Yze"; */
 "LCd-uY-Yze.title" = "लॉगिंग करने देना";
 
@@ -30,18 +27,6 @@
 
 /* Class = "NSButtonCell"; title = "Use mpv's OSD"; ObjectID = "phK-g9-Vbg"; */
 "phK-g9-Vbg.title" = "mpv के OSD का उपयोग करें";
-
-/* Class = "NSTextFieldCell"; title = "Log level:"; ObjectID = "nFf-vh-bNd"; */
-"nFf-vh-bNd.title" = "Log level:";
-
-/* Class = "NSButtonCell"; title = "Show Log Viewer"; ObjectID = "Owx-92-Ogg"; */
-"Owx-92-Ogg.title" = "Show Log Viewer";
-
-/* Class = "NSMenuItem"; title = "Verbose"; ObjectID = "S9M-yY-q0w"; */
-"S9M-yY-q0w.title" = "Verbose";
-
-/* Class = "NSMenuItem"; title = "Debug"; ObjectID = "hGq-ek-VHd"; */
-"hGq-ek-VHd.title" = "Debug";
 
 /* Class = "NSMenuItem"; title = "Warning"; ObjectID = "exP-JC-h7t"; */
 "exP-JC-h7t.title" = "चेतावनी";

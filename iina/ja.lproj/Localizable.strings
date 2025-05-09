@@ -78,14 +78,12 @@
 
 "alert.eq.new_profile.title" = "新しいEQプロファイル";
 "alert.eq.new_profile.message" = "プロファイルの名前を入力してください。";
-"alert.eq.rename.title" = "Rename Current Profile";
 "alert.eq.rename.message" = "新しいプロファイル名を入力してください。";
 
 // OSDMessage.swift
 "osd.pause" = "一時停止";
 "osd.resume" = "再開";
 "osd.volume" = "音量: %i";
-"osd.speed" = "Speed: %@x";
 "osd.aspect" = "アスペクト比: %@";
 "osd.crop" = "クロップ: %@";
 "osd.rotate" = "回転: %i°";
@@ -141,7 +139,7 @@
 "osd.playlist_loop" = "プレイリストをループ";
 "osd.no_loop" = "ループを無効にする";
 
-"preference.title" = "環境設定";
+"preference.title" = "設定";
 "preference.general" = "一般";
 "preference.ui" = "UI";
 "preference.video_audio" = "ビデオ/オーディオ";
@@ -173,8 +171,6 @@
 "preference.sub_override_level.descriptive_text.scale" = "このセクションのスタイル設定に加えて、スケール設定を適用します。";
 "preference.sub_override_level.descriptive_text.strip" = "すべてのASSタグとスタイルをサブタイトルから大胆に取り除きます。";
 "preference.sub_override_level.descriptive_text.yes" = "このセクションのすべてのスタイル設定を適用します。";
-
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
 "preference.ytdl_plugin_installed" = "Online メディア プラグインがインストールされているため、組み込みの youtube-dl サポートは無効になっています。";
 
 "menu.volume" = "音量: %d";
@@ -193,7 +189,6 @@
 "menu.exit_mini_player" = "ミュージックモードを終了する";
 "menu.pause" = "一時停止";
 "menu.resume" = "再生";
-"menu.speed" = "Speed: %@x";
 "menu.chapters" = "チャプターパネルを表示";
 "menu.hide_chapters" = "チャプターパネルを隠す";
 "menu.playlist" = "プレイリストパネルを開く";
@@ -207,8 +202,6 @@
 
 "menu.seek_forward" = "%.0f秒進む";
 "menu.seek_backward" = "%.0f秒戻る";
-"menu.speed_up" = "Speed Up by %@x";
-"menu.speed_down" = "Speed Down by %@x";
 "menu.volume_up" = "音量 + %.0f%%";
 "menu.volume_down" = "音量 - %.0f%%";
 "menu.audio_delay_up" = "オーディオディレイ + %.1fs";
@@ -218,14 +211,6 @@
 
 "menu.crop_custom" = "カスタム…";
 "menu.find_online_sub" = "%@ からオンライン字幕を探す";
-
-"menu.manage_plugins" = "Manage Plugins…";
-"menu.developer_tool" = "Developer Tool";
-"menu.more_plugin" = "More…";
-"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
-"menu.reload_plugins" = "Reload All Plugins";
-"menu.show_plugins_panel" = "Show Plugins Panel";
-"menu.hide_plugins_panel" = "Hide Plugins Panel";
 
 "track.audio" = "オーディオ";
 "track.none" = "<なし>";
@@ -256,8 +241,6 @@
 "alert.error_saving_file" = "%@の保存時にエラーが発生しました: %@";
 "alert.error_deleting_file" = "ファイルを削除できません。";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
-
 "alert.config.new.title" = "設定の新規作成";
 "alert.config.new.message" = "新しい設定ファイルの名前を入力を入力してください。";
 "alert.config.duplicate.title" = "設定の複製";
@@ -287,7 +270,6 @@
 "alert.screenshot.error_taking" = "スクリーンショットを撮ることができません！";
 
 "alert.sub.no_selected" = "ダウンロードした字幕を最初に選択してください。";
-"alert.sub_lang_not_set" = "OpenSubtitlesを利用する前に、環境設定で字幕の優先言語を設定してください。今回は英語(eng)が使用されます。";
 "alert.sub.cannot_save_passwd" = "パスワードをキーチェーンに保存できません: %@";
 "alert.sub.cannot_login" = "ログインできません。ユーザー名とパスワード、ネットワーク環境をご確認ください。\n\n%@";
 "alert.sub.save_downloaded.title" = "ダウンロードした字幕を保存";
@@ -349,7 +331,6 @@
 "alert.plugin_uninstall.message" = "プラグインはディスクから削除されます。";
 "alert.plugin_reinstall.title" = "%@はすでに存在しています";
 "alert.plugin_reinstall.message" = "プラグインを再インストールしますか？";
-"alert.duplicated_plugin_id" = "重複したプラグイン識別子が検出されました。2つ以上のプラグインには同じ識別子 \"%@\" があります。異常な動作を引き起こす可能性があります。 環境設定 - プラグインを見つけ、著者に報告してください。 プラグインがローカルにインストールされている場合は、プラグインの Info.json ファイル内の識別子を手動で変更することもできます。";
 "alert.plugin_no_update" = "アップデートは見つかりませんでした。";
 "alert.plugin_update_found.title" = "%@ のアップデートが見つかりました";
 "alert.plugin_update_found.message" = "最新バージョンは %@です。 今のバージョンは%@です。アップデートしますか？";
@@ -397,7 +378,6 @@
 "osc_toolbar.music_mode" = "ミュージックモード切り替え";
 "osc_toolbar.sub_track" = "字幕トラックを選択";
 "osc_toolbar.screenshot" = "スクリーンショットを撮影";
-"osc_toolbar.plugins" = "Show plugins panel";
 
 "mini_player.album_art" = "アルバムアートの切り替え";
 "mini_player.loop" = "リピート";

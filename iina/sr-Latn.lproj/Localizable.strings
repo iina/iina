@@ -16,9 +16,6 @@
 "general.username" = "Korisničko Ime";
 "general.password" = "Lozinka";
 
-"input.value_is_empty" = "Value cannot be empty.";
-"input.already_exists" = "Value already exists.";
-
 // Guide Window
 "guide.highlights" = "Istaknuti sadržaj";
 "guide.basic_settings" = "Osnovne postavke";
@@ -27,7 +24,6 @@
 // Initial Window
 "initial.announcement" = "Koristite verziju %@ programa IINA";
 "initial.beta.desc" = "Ako želite da se vratite na stabilno izdanje, opozovite izbor stavke „primaj beta ažuriranja“ u okviru opcije Željene postavke – Opšte postavke, a zatim instalirajte stabilno izdanje sa <a href=\"https://iina.io\">zvaničnog veb-sajta</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Izdanja za otklanjanje grešaka obično nisu optimizovana za performanse, tako da se ne preporučuju za svakodnevnu upotrebu. Izdanja za otklanjanje grešaka ne podržavaju automatsko ažuriranje.";
 "initial.bug_report" = "Prijavite putem <a href=\"https://github.com/iina/iina/issues\">problema na GitHubu</a>.";
 
@@ -50,42 +46,11 @@
 "quicksetting.deinterlace" = "Rasplitanje";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Sakrij";
-"quicksetting.reset_speed" = "Reset speed to 1x";
-
-// EQ Presets
-"eq.preset.flat" = "Flat";
-"eq.preset.acoustic" = "Acoustic";
-"eq.preset.classical" = "Classical";
-"eq.preset.dance" = "Dance";
-"eq.preset.deep" = "Deep";
-"eq.preset.electronic" = "Electronic";
-"eq.preset.hip_hop" = "Hip Hop";
-"eq.preset.increase_bass" = "Increase Bass";
-"eq.preset.increase_treble" = "Increase Treble";
-"eq.preset.increase_vocal" = "Increase Vocal";
-"eq.preset.jazz" = "Jazz";
-"eq.preset.latin" = "Latin";
-"eq.preset.loundness" = "Loundness";
-"eq.preset.lounge" = "Lounge";
-"eq.preset.piano" = "Piano";
-"eq.preset.pop" = "Pop";
-"eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reduce Bass";
-"eq.preset.reduce_treble" = "Reduce Treble";
-"eq.preset.rock" = "Rock";
-"eq.preset.small_speaker" = "Small Speaker";
-"eq.preset.spoken_word" = "Spoken Word";
-
-"alert.eq.new_profile.title" = "New EQ Profile";
-"alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Current Profile";
-"alert.eq.rename.message" = "Please enter a new profile name.";
 
 // OSDMessage.swift
 "osd.pause" = "Pauziraj";
 "osd.resume" = "Nastavi";
 "osd.volume" = "Jačina zvuka: %i";
-"osd.speed" = "Speed: %@x";
 "osd.aspect" = "Odnos širina/visina: %@";
 "osd.crop" = "Iseci: %@";
 "osd.rotate" = "Rotiraj: %i°";
@@ -98,14 +63,6 @@
 "osd.sub_delay.later" = "Kašnjenje titla: %.2fs kasnije";
 "osd.sub_delay.earlier" = "Kašnjenje titla: %.2fs ranije";
 "osd.subtitle_pos" = "Položaj titla: %.1f";
-"osd.sub_hidden" = "Subtitles Hidden";
-"osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
-"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
-"osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Isključi zvuk";
 "osd.unmute" = "Ponovo uključi zvuk";
 "osd.screenshot" = "Snimak ekrana je napravljen";
@@ -125,23 +82,16 @@
 "osd.find_online_sub" = "Pronalaženje titlova na mreži…";
 "osd.find_online_sub.source" = "sa lokacije";
 "osd.sub_not_found" = "Nije pronađen nijedan titl";
-"osd.sub_found" = "%d subtitles found.";
-"osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "Titl je preuzet";
 "osd.sub_saved" = "Titl je sačuvan";
 "osd.network_error" = "Greška na mreži";
 "osd.file_error" = "Greška pri čitanju datoteke";
 "osd.cannot_login" = "Prijava nije moguća";
 "osd.canceled" = "Otkazano";
-"osd.cannot_connect" = "Cannot connect";
-"osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Dodati filter: %@";
 "osd.filter_removed" = "Uklonjeni filter";
-"osd.file_loop" = "Loop Single File";
-"osd.playlist_loop" = "Loop Playlist";
-"osd.no_loop" = "Disable Looping";
 
-"preference.title" = "Željene postavke";
+"preference.title" = "Postavke";
 "preference.general" = "Opšte postavke";
 "preference.ui" = "Interfejs";
 "preference.video_audio" = "Video/Audio";
@@ -161,39 +111,18 @@
 "preference.key_binding_hint_2" = "Dvaput kliknite na red na desnoj strani da biste izmenili odgovarajuću prečicu na tastaturi.";
 
 "preference.enable_adv_settings" = "Omogući napredne postavke";
-
-"preference.sub_override_level.no" = "no";
-"preference.sub_override_level.force" = "force";
-"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "ukloni";
-"preference.sub_override_level.yes" = "yes";
-
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
-
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
 "menu.volume" = "Jačina zvuka: %d";
 "menu.volume_muted" = "Jačina zvuka: %d (isključen zvuk)";
 "menu.audio_delay" = "Kašnjenje zvuka: %.2fs";
 "menu.sub_delay" = "Kašnjenje titla: %.2fs";
-"menu.sub_hide" = "Hide Subtitles";
-"menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Secondary Subtitles";
-"menu.sub_second_show" = "Show Secondary Subtitles";
 "menu.fullscreen" = "Uđi u režim celog ekrana";
 "menu.exit_fullscreen" = "Izađi iz rеžima cеlog еkrana";
 "menu.pip" = "Uđi u režim slike u slici";
 "menu.exit_pip" = "Izađi iz režima slike u slici";
-"menu.mini_player" = "Enter Music Mode";
-"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pauziraj";
 "menu.resume" = "Nastavi";
-"menu.speed" = "Speed: %@x";
 "menu.chapters" = "Prikaži tablu Poglavlja";
 "menu.hide_chapters" = "Sakrij tablu Poglavlja";
 "menu.playlist" = "Prikaži tablu plejliste";
@@ -207,8 +136,6 @@
 
 "menu.seek_forward" = "Korak unapred: %.0fs";
 "menu.seek_backward" = "Korak unazad: %.0fs";
-"menu.speed_up" = "Speed Up by %@x";
-"menu.speed_down" = "Speed Down by %@x";
 "menu.volume_up" = "Jačina zvuka + %.0f%%";
 "menu.volume_down" = "Jačina zvuka - %.0f%%";
 "menu.audio_delay_up" = "Kašnjenje zvuka + %.1fs";
@@ -218,14 +145,6 @@
 
 "menu.crop_custom" = "Prilagođeno…";
 "menu.find_online_sub" = "Pronađi titlove na mreži s lokacije %@";
-
-"menu.manage_plugins" = "Manage Plugins…";
-"menu.developer_tool" = "Developer Tool";
-"menu.more_plugin" = "More…";
-"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
-"menu.reload_plugins" = "Reload All Plugins";
-"menu.show_plugins_panel" = "Show Plugins Panel";
-"menu.hide_plugins_panel" = "Hide Plugins Panel";
 
 "track.audio" = "Zvuk";
 "track.none" = "<None>";
@@ -256,20 +175,14 @@
 "alert.error_saving_file" = "Došlo je do greške prilikom čuvanja %@: %@";
 "alert.error_deleting_file" = "Nije moguće izbrisati datoteku.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
-
 "alert.config.new.title" = "Nova ulazna konfiguracija";
 "alert.config.new.message" = "Unеsitе naziv za novu konfiguraciju.";
 "alert.config.duplicate.title" = "Duplirana konfiguracija";
 "alert.config.duplicate.message" = "Unеsitе naziv za dupliranu konfiguracionu datoteku.";
 "alert.config.empty_name" = "Naziv ne može biti prazan.";
-"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Datoteka već postoji";
-"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Nije moguće kreirati konfiguracionu datoteku!\n%@";
 "alert.config.cannot_write" = "Nije moguće upisivati u konfiguracionu datoteku!";
-"alert.config.rename.title" = "Rename Input Configuration";
-"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "Došlo je do greške prilikom postavljanja filtera. Proverite format parametra.";
 "alert.add_filter.title" = "Novi filter";
@@ -287,7 +200,6 @@
 "alert.screenshot.error_taking" = "Nije moguće napraviti snimak ekrana!";
 
 "alert.sub.no_selected" = "Najpre izaberite preuzeti titl.";
-"alert.sub_lang_not_set" = "Postavite željeni jezik titla u željenim postavkama pre nego korišćenja sajta OpenSubtitles. Ovog puta će se koristiti engleski jezik (eng).";
 "alert.sub.cannot_save_passwd" = "Nije moguće sačuvati lozinku u Privezak ključeva: %@";
 "alert.sub.cannot_login" = "Prijava nije moguća. Proverite korisničko ime, lozinku i status mreže\n\n%@";
 "alert.sub.save_downloaded.title" = "Sačuvaj preuzeti titl";
@@ -349,7 +261,6 @@
 "alert.plugin_uninstall.message" = "Dodatna komponenta biće izbrisana sa diska.";
 "alert.plugin_reinstall.title" = "Dodatna komponenta %@ već postoji";
 "alert.plugin_reinstall.message" = "Želite li zaista da deinstalirate dodatnu komponentu?";
-"alert.duplicated_plugin_id" = "Pronađene su duplirane dodatne komponente. Barem dve dodatne komponente imaju isti identifikator \"%@\". To može dovesti do neobičnog ponašanja. Pronađite ih u okviru opcije Željene postavke - Dodatne komponente i prijavite autorima. Ako je dodatna komponenta instalirana lokalno, možete i ručno promeniti njen identifikator u datoteci Info.json dodatne komponente.";
 "alert.plugin_no_update" = "Nisu pronađena ažuriranja.";
 "alert.plugin_update_found.title" = "Pronađeno je ažuriranje za %@";
 "alert.plugin_update_found.message" = "Najnovija verzija je %@. Vi imate verziju %@. Da li želite da obavite ažuriranje?";
@@ -396,8 +307,6 @@
 "osc_toolbar.full_screen" = "Uključi/isključi rеžim cеlog еkrana";
 "osc_toolbar.music_mode" = "Uđi u muzički režim";
 "osc_toolbar.sub_track" = "Odaberi zapis titla";
-"osc_toolbar.screenshot" = "Take a screenshot";
-"osc_toolbar.plugins" = "Show plugins panel";
 
 "mini_player.album_art" = "Uključi/isključi omot albuma";
 "mini_player.loop" = "Ponovi";
@@ -439,18 +348,4 @@
 "permissions.video-overlay.name" = "Dodaj prekrivajući element na video-zapise";
 "permissions.video-overlay.desc" = "Ova dodatna komponenta može prikazati dodatni sadržaj preko video-zapisa.";
 "permissions.file-system.name" = "Pristupite sistemu datoteka";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
-
-"plugin.install" = "Install";
-"plugin.installed" = "Installed";
-"plugin.not_installed" = "Not Installed";
-"plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occurred during the installation: %@";
-"alert.invalid_url" = "The URL is invalid.";
-"plugin.install_error.invalid_url" = "The URL is invalid.";
-"plugin.install_error.file_not_found" = "Cannot find the package file.";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
 "plugin.check_for_updates" = "Proveri da li postoje ažuriranja";
-"plugin.updating" = "Downloading update…";

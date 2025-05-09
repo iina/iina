@@ -57,24 +57,13 @@
 "eq.preset.acoustic" = "Acústico";
 "eq.preset.classical" = "Clássico";
 "eq.preset.dance" = "Dança";
-"eq.preset.deep" = "Deep";
 "eq.preset.electronic" = "Eletrónica";
 "eq.preset.hip_hop" = "Hip-hop";
-"eq.preset.increase_bass" = "Increase Bass";
-"eq.preset.increase_treble" = "Increase Treble";
-"eq.preset.increase_vocal" = "Increase Vocal";
 "eq.preset.jazz" = "Jazz";
-"eq.preset.latin" = "Latin";
-"eq.preset.loundness" = "Loundness";
-"eq.preset.lounge" = "Lounge";
 "eq.preset.piano" = "Piano";
 "eq.preset.pop" = "Pop";
 "eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reduce Bass";
-"eq.preset.reduce_treble" = "Reduce Treble";
 "eq.preset.rock" = "Rock";
-"eq.preset.small_speaker" = "Small Speaker";
-"eq.preset.spoken_word" = "Spoken Word";
 
 "alert.eq.new_profile.title" = "Novo perfil EQ";
 "alert.eq.new_profile.message" = "Introduza o nome do perfil.";
@@ -133,11 +122,8 @@
 "osd.file_error" = "Erro ao ler o ficheiro";
 "osd.cannot_login" = "Impossível iniciar sessão";
 "osd.canceled" = "Cancelado";
-"osd.cannot_connect" = "Cannot connect";
-"osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Filtro Adicionado: %@";
 "osd.filter_removed" = "Filtro Removido";
-"osd.file_loop" = "Loop Single File";
 "osd.playlist_loop" = "Repetir lista de reprodução";
 "osd.no_loop" = "Desativar Repetição";
 
@@ -161,21 +147,7 @@
 "preference.key_binding_hint_2" = "Clique duas vezes em uma linha no lado direito para editar o mapeamento de tecla correspondente.";
 
 "preference.enable_adv_settings" = "Ativar configurações avançadas";
-
-"preference.sub_override_level.no" = "no";
-"preference.sub_override_level.force" = "force";
-"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "faixa";
-"preference.sub_override_level.yes" = "yes";
-
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
-
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
 "menu.volume" = "Volume: %d";
 "menu.volume_muted" = "Volume: %d (Sem som)";
@@ -189,15 +161,11 @@
 "menu.exit_fullscreen" = "Sair do Ecrã Completo";
 "menu.pip" = "Usar Picture in Picture";
 "menu.exit_pip" = "Sair do Picture in Picture";
-"menu.mini_player" = "Enter Music Mode";
-"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pausa";
 "menu.resume" = "Retomar";
 "menu.speed" = "Velocidade: %@x";
 "menu.chapters" = "Mostrar painel de capítulos";
-"menu.hide_chapters" = "Hide Chapters Panel";
 "menu.playlist" = "Mostrar Painel da Lista de Reprodução";
-"menu.hide_playlist" = "Hide Playlist Panel";
 "menu.video" = "Mostrar painel de vídeo";
 "menu.hide_video" = "Ocultar painel de vídeo";
 "menu.audio" = "Mostrar painel de áudio";
@@ -217,15 +185,7 @@
 "menu.sub_delay_down" = "Atraso da legenda - %.1fs";
 
 "menu.crop_custom" = "Personalizado…";
-"menu.find_online_sub" = "Find Online Subtitles from %@";
-
-"menu.manage_plugins" = "Manage Plugins…";
-"menu.developer_tool" = "Developer Tool";
-"menu.more_plugin" = "More…";
-"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
 "menu.reload_plugins" = "Recarregar todos os Plugins";
-"menu.show_plugins_panel" = "Show Plugins Panel";
-"menu.hide_plugins_panel" = "Hide Plugins Panel";
 
 "track.audio" = "Áudio";
 "track.none" = "<None>";
@@ -256,20 +216,14 @@
 "alert.error_saving_file" = "Ocorreu um erro ao salvar %@: %@";
 "alert.error_deleting_file" = "Não foi possível apagar o ficheiro.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
-
 "alert.config.new.title" = "Nova configuração";
 "alert.config.new.message" = "Por favor digite um nome para a nova configuração.";
 "alert.config.duplicate.title" = "Duplicar Configuração";
 "alert.config.duplicate.message" = "Por favor digite o nome para o arquivo de configuração duplicado.";
 "alert.config.empty_name" = "Este nome não pode estar vazio.";
-"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Ficheiro já existe";
-"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Não foi possível criar um ficheiro de configuração!\n%@";
 "alert.config.cannot_write" = "Não foi possível escrever no arquivo de configuração!";
-"alert.config.rename.title" = "Rename Input Configuration";
-"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "Ocorreu um erro ao configurar os filtros. Por favor, verifique o formato de seu parâmetro.";
 "alert.add_filter.title" = "Novo Filtro";
@@ -284,10 +238,7 @@
 
 "alert.playlist.error_deleting" = "Erro ao apagar: %@";
 
-"alert.screenshot.error_taking" = "Cannot take a screenshot!";
-
 "alert.sub.no_selected" = "Por favor, seleccione uma legenda transferida primeiro.";
-"alert.sub_lang_not_set" = "Por favor, defina os idiomas de legenda preferidos nas preferências antes de usar o OpenSubtitles. Inglês (eng) será usado desta vez.";
 "alert.sub.cannot_save_passwd" = "Não é possível guardar a palavra-passe no Porta-chaves: %@";
 "alert.sub.cannot_login" = "Impossível iniciar sessão. Por favor verifique o seu nome de utilizador, palavra-passe e estado da rede.\n\n%@";
 "alert.sub.save_downloaded.title" = "Guardar legenda transferida";
@@ -329,9 +280,6 @@
 "alert.clear_watch_later.title" = "Limpar progresso de reprodução guardado";
 "alert.clear_watch_later.message" = "Tem a certeza que quer apagar todo o progresso de reprodução gravado (dados do \"ver mais tarde\")?";
 
-"alert.restore_alerts.title" = "Restore Suppressed Alerts";
-"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
-
 "alert.nothing_to_open" = "Nada para abrir.";
 
 "alert.no_video_track" = "Não existe faixa de vídeo.";
@@ -344,17 +292,6 @@
 "alert.assrt_token_prompt.title" = "Digite o seu token de API";
 "alert.assrt_token_prompt.message" = "Por favor registe-se na página aberta. Pegue no seu token na sua página inicial de usuário e insira-o abaixo:";
 "alert.assrt_token_invalid" = "O seu token Assrt API parece ser inválido.";
-
-"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
-"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
-"alert.plugin_reinstall.title" = "Plugin %@ already exists";
-"alert.plugin_reinstall.message" = "Do you want to reinstall the plugin?";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
-"alert.plugin_no_update" = "No update found.";
-"alert.plugin_update_found.title" = "Update found for %@";
-"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
-"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
-"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
 
 "playlist.total_length" = "%@ no total";
 "playlist.total_length_with_selected" = "%@ de %@ selecionado";
@@ -396,8 +333,6 @@
 "osc_toolbar.full_screen" = "Alternar ecrã completo";
 "osc_toolbar.music_mode" = "Entrar no modo música";
 "osc_toolbar.sub_track" = "Selecionar faixa de legenda";
-"osc_toolbar.screenshot" = "Take a screenshot";
-"osc_toolbar.plugins" = "Show plugins panel";
 
 "mini_player.album_art" = "Alternar arte do álbum";
 "mini_player.loop" = "Repetir";
@@ -426,20 +361,7 @@
 "touchbar.time" = "Posição Temporal";
 "touchbar.remainingTimeOrTotalDuration" = "Tempo Restante / Duração Total";
 "touchbar.toggle_pip" = "Alternar Picture-in-Picture";
-
-// Plugin permissions
-
-"permissions.network-request.name" = "Network Request";
 "permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
-"permissions.network-request.any_site" = "Any site";
-"permissions.show-osd.name" = "Show OSD";
-"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
-"permissions.show-alert.name" = "Show Alerts";
-"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
-"permissions.video-overlay.name" = "Add overlays on videos";
-"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
-"permissions.file-system.name" = "Access the file system";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Instalar";
 "plugin.installed" = "Instalado";
@@ -448,9 +370,4 @@
 "alert.plugin.install_error" = "Ocorreu um erro durante a instalação: %@";
 "alert.invalid_url" = "O URL é inválido.";
 "plugin.install_error.invalid_url" = "O URL é inválido.";
-"plugin.install_error.file_not_found" = "Cannot find the package file.";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
 "plugin.check_for_updates" = "Procurar atualizações";
-"plugin.updating" = "Downloading update…";

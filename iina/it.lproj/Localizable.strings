@@ -141,7 +141,7 @@
 "osd.playlist_loop" = "Ripeti la playlist";
 "osd.no_loop" = "Disabilita ripetizione";
 
-"preference.title" = "Preferenze";
+"preference.title" = "Impostazioni";
 "preference.general" = "Generali";
 "preference.ui" = "Interfaccia";
 "preference.video_audio" = "Video/Audio";
@@ -287,7 +287,6 @@
 "alert.screenshot.error_taking" = "Impossibile fare uno screenshot!";
 
 "alert.sub.no_selected" = "Seleziona prima un sottotitolo scaricato.";
-"alert.sub_lang_not_set" = "Imposta la lingua preferita per i sottotitoli nelle preferenze prima di utilizzare OpenSubtitles. Questa volta verrà utilizzato l'Inglese (eng).";
 "alert.sub.cannot_save_passwd" = "Impossibile salvare la password nel portachiavi: %@";
 "alert.sub.cannot_login" = "Impossibile accedere. Controlla il tuo nome utente, la password e la connessione di rete.\n\n%@";
 "alert.sub.save_downloaded.title" = "Salva i sottotitoli scaricati";
@@ -349,7 +348,6 @@
 "alert.plugin_uninstall.message" = "Il plugin verrà eliminato dal disco.";
 "alert.plugin_reinstall.title" = "Il plugin %@ esiste già";
 "alert.plugin_reinstall.message" = "Vuoi reinstallare il plugin?";
-"alert.duplicated_plugin_id" = "Rilevati identificatori di plugin duplicati. Due o più plugin hanno lo stesso identificatore \"%@\". Questo può causare comportamenti anomali. Si prega di trovarli in Preferenze - Plugin e segnalarli ai loro autori. Se un plugin è installato localmente, è anche possibile modificare manualmente il suo identificatore tramite il file Info.json del plugin.";
 "alert.plugin_no_update" = "Nessun aggiornamento trovato.";
 "alert.plugin_update_found.title" = "Trovato aggiornamento per %@";
 "alert.plugin_update_found.message" = "L'ultima versione è %@. Hai %@. Vuoi aggiornare?";

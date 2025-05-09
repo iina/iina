@@ -27,7 +27,6 @@
 // Initial Window
 "initial.announcement" = "Ön Az IINA %@ verzióját használja";
 "initial.beta.desc" = "Amennyiben végleges verzióra váltana, szüntesse meg a kijelölést a \"béta frissítések\" opciónál a Beállítások > Általános almenüben, és telepítsen stabil verziót a <a href=\"https://iina.io\">hivatalos weboldalunkról</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "A hibakeresési verzió általában nincs teljesítményre optimalizálva, ezért nem ajánlott napi használatra. A hibakeresési verziók nem támogatják az automatikus frissítést.";
 "initial.bug_report" = "Jelentés a <a href=\"https://github.com/iina/iina/issues\">GitHub-bugok</a> felületen.";
 
@@ -78,7 +77,6 @@
 
 "alert.eq.new_profile.title" = "Új EQ profil";
 "alert.eq.new_profile.message" = "Kérjük, adjon meg egy profilnevet.";
-"alert.eq.rename.title" = "Rename Current Profile";
 "alert.eq.rename.message" = "Kérjük, adjon meg egy új profilnevet.";
 
 // OSDMessage.swift
@@ -174,9 +172,6 @@
 "preference.sub_override_level.descriptive_text.strip" = "Alaposan távolítson el minden ASS taget és stílust a feliratból.";
 "preference.sub_override_level.descriptive_text.yes" = "Alkalmazza az összes stílusbeállítást ebben a szakaszban.";
 
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
-
 "menu.volume" = "Hangerő: %d";
 "menu.volume_muted" = "Hangerő: %d (Némítva)";
 "menu.audio_delay" = "Hangkésleltetés: %.2fmp-vel később";
@@ -219,14 +214,6 @@
 "menu.crop_custom" = "Egyéni…";
 "menu.find_online_sub" = "Online feliratok keresése innen: %@";
 
-"menu.manage_plugins" = "Manage Plugins…";
-"menu.developer_tool" = "Developer Tool";
-"menu.more_plugin" = "More…";
-"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
-"menu.reload_plugins" = "Reload All Plugins";
-"menu.show_plugins_panel" = "Show Plugins Panel";
-"menu.hide_plugins_panel" = "Hide Plugins Panel";
-
 "track.audio" = "Hang";
 "track.none" = "<None>";
 "track.sub" = "Felirat";
@@ -255,8 +242,6 @@
 "alert.error_loading_script" = "A szkript %@ nem tölthetõ be!";
 "alert.error_saving_file" = "Hiba történt mentéskor %@: %@";
 "alert.error_deleting_file" = "Nem sikerült törölni a fájlt.";
-
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
 
 "alert.config.new.title" = "Új beviteli konfiguráció";
 "alert.config.new.message" = "Kérlek adj nevet az új konfigurációnak.";
@@ -287,7 +272,6 @@
 "alert.screenshot.error_taking" = "Nem lehet képernyőképet készíteni!";
 
 "alert.sub.no_selected" = "Kérjük, először válassz ki egy letöltött feliratot.";
-"alert.sub_lang_not_set" = "Kérjük, az OpenSubtitles használata előtt állítsd be a kívánt feliratnyelvet a beállításokban. Ezúttal az angol (eng) nyelvet használjuk.";
 "alert.sub.cannot_save_passwd" = "Nem lehet elmenteni a jelszavat a Kulcskarikában: %@";
 "alert.sub.cannot_login" = "Nem tudsz bejelentkezni. Kérjük, ellenőrizd a felhasználónevedet, jelszavadat és a hálózat állapotát.\n\n%@";
 "alert.sub.save_downloaded.title" = "Letöltött felirat mentése";
@@ -349,7 +333,6 @@
 "alert.plugin_uninstall.message" = "A bővítmény törlődik a lemezről.";
 "alert.plugin_reinstall.title" = "%@ bővítmény már létezik";
 "alert.plugin_reinstall.message" = "Szeretné újratelepítené a bővítményt?";
-"alert.duplicated_plugin_id" = "Duplikált bővítmény-azonosítók észlelése. Két vagy több bővítmény azonos \"%@\" azonosítóval rendelkezik. Ez rendellenes viselkedést okozhat. Kérjük, keresse meg őket a Beállítások - Pluginok menüpontban, és jelentse a szerzőjüknek. Ha egy bővítményt helyileg telepítettek, manuálisan is megváltoztathatja az azonosítóját a bővítmény Info.json fájljában.";
 "alert.plugin_no_update" = "Nem található frissítés.";
 "alert.plugin_update_found.title" = "Frissítés található a következőhöz: %@";
 "alert.plugin_update_found.message" = "A legújabb verzió a(z) %@. Neked a(z) %@ van telepítve. Szeretne frissíteni?";
@@ -397,7 +380,6 @@
 "osc_toolbar.music_mode" = "Belépés \"zene\" módba";
 "osc_toolbar.sub_track" = "Válassz felirat sávot";
 "osc_toolbar.screenshot" = "Képernyőmentés készítése";
-"osc_toolbar.plugins" = "Show plugins panel";
 
 "mini_player.album_art" = "Album borító váltás";
 "mini_player.loop" = "Ismétlés";

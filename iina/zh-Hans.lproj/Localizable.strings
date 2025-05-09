@@ -141,7 +141,7 @@
 "osd.playlist_loop" = "循环播放列表";
 "osd.no_loop" = "禁用循环";
 
-"preference.title" = "偏好设置";
+"preference.title" = "设置";
 "preference.general" = "通用";
 "preference.ui" = "用户界面";
 "preference.video_audio" = "视频/音频";
@@ -287,7 +287,6 @@
 "alert.screenshot.error_taking" = "截图失败！";
 
 "alert.sub.no_selected" = "请先选择一个已下载字幕。";
-"alert.sub_lang_not_set" = "请在使用 opensubtitles 之前设定字幕语言. 此次将会使用英语 (eng) 。\n\n0.0.7 之后默认的字幕来源将会是 opensubtitles。如果您是中文用户，请在「偏好设置 > 字幕」中确认「字幕来源」为「shooter.cn」，以继续使用射手字幕。";
 "alert.sub.cannot_save_passwd" = "无法将密码保存到钥匙串：%@";
 "alert.sub.cannot_login" = "无法登录。请检查您的用户名、密码及网络状态。\n\n%@";
 "alert.sub.save_downloaded.title" = "保存已下载字幕";
@@ -349,7 +348,6 @@
 "alert.plugin_uninstall.message" = "插件将从您的硬盘中删除。";
 "alert.plugin_reinstall.title" = "插件 %@ 已存在";
 "alert.plugin_reinstall.message" = "您希望重新安装此插件吗？";
-"alert.duplicated_plugin_id" = "检测到重复的插件标识符。两个或多个插件具有相同的标识符“%@”，这可能会导致异常行为。 请在首选项 - 插件中找到它们，并向插件作者报告。 如果插件是本地安装的，您也可以手动更改插件的 Info.json 文件中的标识符。";
 "alert.plugin_no_update" = "没有发现更新。";
 "alert.plugin_update_found.title" = "找到 %@ 的更新";
 "alert.plugin_update_found.message" = "最新版本是 %@。您有 %@。您想要更新吗？";

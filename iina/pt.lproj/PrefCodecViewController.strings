@@ -109,17 +109,11 @@
 /* Class = "NSTextFieldCell"; title = "dB"; ObjectID = "Bew-Pv-igg"; */
 "Bew-Pv-igg.title" = "dB";
 
-/* Class = "NSTextFieldCell"; title = "Pre-amplification gain to apply to the ReplayGain gain."; ObjectID = "rIW-XP-zGZ"; */
-"rIW-XP-zGZ.title" = "Pre-amplification gain to apply to the ReplayGain gain.";
-
 /* Class = "NSButtonCell"; title = "Allow the volume gain to clip"; ObjectID = "J3e-oT-fy9"; */
 "J3e-oT-fy9.title" = "Permitir saturação do ganho";
 
 /* Class = "NSTextFieldCell"; title = "If this option is not enabled, clipping will be prevented by lowering the gain."; ObjectID = "HQV-tY-NMj"; */
 "HQV-tY-NMj.title" = "Se esta opção não estiver ativada, será evitada a saturação diminuindo o ganho.";
-
-/* Class = "NSTextFieldCell"; title = "Fallback:"; ObjectID = "fOz-6g-MhS"; */
-"fOz-6g-MhS.title" = "Fallback:";
 
 /* Class = "NSTextFieldCell"; title = "dB"; ObjectID = "ovT-D3-3jS"; */
 "ovT-D3-3jS.title" = "dB";

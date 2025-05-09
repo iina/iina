@@ -141,7 +141,7 @@
 "osd.playlist_loop" = "循環播放全部檔案";
 "osd.no_loop" = "取消循環播放檔案";
 
-"preference.title" = "偏好設定";
+"preference.title" = "設定";
 "preference.general" = "一般";
 "preference.ui" = "使用者介面";
 "preference.video_audio" = "視訊/音訊";
@@ -287,7 +287,6 @@
 "alert.screenshot.error_taking" = "擷圖失敗！";
 
 "alert.sub.no_selected" = "請先選取一個已下載的字幕檔";
-"alert.sub_lang_not_set" = "在使用 OpenSubtitles 前請先在「偏好設定」中設定字幕的偏好語言，目前將使用英文（eng）。";
 "alert.sub.cannot_save_passwd" = "無法將您這個密碼「%@」儲存到鑰匙圈";
 "alert.sub.cannot_login" = "登入失敗，請檢查您的使用者帳戶、密碼、網路連線。\n\n%@";
 "alert.sub.save_downloaded.title" = "儲存已下載的字幕";
@@ -349,7 +348,6 @@
 "alert.plugin_uninstall.message" = "這外掛程式將從你的磁碟移除。";
 "alert.plugin_reinstall.title" = "插件%@已存在";
 "alert.plugin_reinstall.message" = "您是否希望重新安裝此插件？";
-"alert.duplicated_plugin_id" = "偵測到重複的外掛程式識別碼，有兩個或更多外掛程式使用的相同的識別碼「%@」，這將造成不正常的行為。請在「偏好設定 - 外掛程式」中找到它們，並回報給外掛程式的作者。如果外掛程式安裝於本機，你可以手動在外掛程式的 Info.json 檔案中手動變更該外掛的識別碼。";
 "alert.plugin_no_update" = "未找到更新。";
 "alert.plugin_update_found.title" = "找到 %@ 的更新";
 "alert.plugin_update_found.message" = "最新版本是 %@，你的版本是 %@，要更新嗎？";

@@ -1,9 +1,6 @@
 /* Class = "NSTextFieldCell"; title = "Speed:"; ObjectID = "1KQ-oZ-A2x"; */
 "1KQ-oZ-A2x.title" = "Sürət:";
 
-/* Class = "NSTextFieldCell"; title = "s"; ObjectID = "1VY-EN-1mi"; */
-"1VY-EN-1mi.title" = "s";
-
 /* Class = "NSTextFieldCell"; title = "Width:"; ObjectID = "22j-ra-GAY"; */
 "22j-ra-GAY.title" = "Genişlik:";
 
@@ -15,12 +12,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "6LO-6y-IsA"; */
 "6LO-6y-IsA.title" = "Rəng:";
-
-/* Class = "NSSegmentedCell"; 88M-pi-2Hc.ibShadowedLabels[0] = "Primary Subtitles"; ObjectID = "88M-pi-2Hc"; */
-"88M-pi-2Hc.ibShadowedLabels[0]" = "Primary Subtitles";
-
-/* Class = "NSSegmentedCell"; 88M-pi-2Hc.ibShadowedLabels[1] = "Secondary Subtitles"; ObjectID = "88M-pi-2Hc"; */
-"88M-pi-2Hc.ibShadowedLabels[1]" = "Secondary Subtitles";
 
 /* Class = "NSButtonCell"; title = "Load External Audio Track…"; ObjectID = "8Ax-5X-osl"; */
 "8Ax-5X-osl.title" = "Xarici audio trek yüklə...";
@@ -36,9 +27,6 @@
 
 /* Class = "NSTextFieldCell"; title = "1x"; ObjectID = "B0I-bX-HZS"; */
 "B0I-bX-HZS.title" = "1x";
-
-/* Class = "NSTabViewItem"; label = "Video"; ObjectID = "CYP-el-A6A"; */
-"CYP-el-A6A.label" = "Video";
 
 /* Class = "NSMenuItem"; title = "0.25"; ObjectID = "DdO-VX-HCz"; */
 "DdO-VX-HCz.title" = "0.25";
@@ -103,9 +91,6 @@
 /* Class = "NSTextFieldCell"; title = "Secondary subtitle:"; ObjectID = "bKb-pW-HnS"; */
 "bKb-pW-HnS.title" = "Ikinci altyazı:";
 
-/* Class = "NSTextFieldCell"; title = "s"; ObjectID = "bsT-FB-GhF"; */
-"bsT-FB-GhF.title" = "s";
-
 /* Class = "NSTabViewItem"; label = "Audio"; ObjectID = "bzk-c2-LH5"; */
 "bzk-c2-LH5.label" = "Səs";
 
@@ -157,26 +142,8 @@
 /* Class = "NSTextFieldCell"; title = "1x"; ObjectID = "ldQ-YL-IEp"; */
 "ldQ-YL-IEp.title" = "1x";
 
-/* Class = "NSTextFieldCell"; title = "Crop:"; ObjectID = "m9e-IB-IDJ"; */
-"m9e-IB-IDJ.title" = "Crop:";
-
-/* Class = "NSMenuItem"; title = "2.5"; ObjectID = "nPr-QJ-Ty3"; */
-"nPr-QJ-Ty3.title" = "2.5";
-
-/* Class = "NSTextFieldCell"; title = "16x"; ObjectID = "p63-Nx-yJZ"; */
-"p63-Nx-yJZ.title" = "16x";
-
-/* Class = "NSTextFieldCell"; title = "Gamma:"; ObjectID = "r6x-z0-oFC"; */
-"r6x-z0-oFC.title" = "Gamma:";
-
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "s9l-Hb-SCk"; */
 "s9l-Hb-SCk.title" = "Ölçü:";
-
-/* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "t03-36-Zge"; */
-"t03-36-Zge.title" = "Position:";
-
-/* Class = "NSTextFieldCell"; title = "Rotation:"; ObjectID = "to3-rc-Agv"; */
-"to3-rc-Agv.title" = "Rotation:";
 
 /* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "uCX-EC-jXM"; */
 "uCX-EC-jXM.title" = "-5s";
@@ -187,41 +154,5 @@
 /* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "upM-Lz-YwK"; */
 "upM-Lz-YwK.title" = "0s";
 
-/* Class = "NSTextFieldCell"; title = "BACKGROUND"; ObjectID = "uqb-mz-A22"; */
-"uqb-mz-A22.title" = "BACKGROUND";
-
-/* Class = "NSTextFieldCell"; title = "Subtitle style options may break ASS rendering, and some of them will be disabled depending on subtitle type."; ObjectID = "wBD-pZ-Bvu"; */
-"wBD-pZ-Bvu.title" = "Subtitle style options may break ASS rendering, and some of them will be disabled depending on subtitle type.";
-
-/* Class = "NSTextFieldCell"; title = "Audio track:"; ObjectID = "x39-62-7KC"; */
-"x39-62-7KC.title" = "Audio track:";
-
-/* Class = "NSTextFieldCell"; title = "+5s"; ObjectID = "xfX-wr-DTJ"; */
-"xfX-wr-DTJ.title" = "+5s";
-
-/* Class = "NSTextFieldCell"; title = "+5s"; ObjectID = "Kt8-Kg-i2O"; */
-"Kt8-Kg-i2O.title" = "+5s";
-
 /* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "zcD-Tg-7Oi"; */
 "zcD-Tg-7Oi.title" = "Ekvalayzer:";
-
-/* Class = "NSTextFieldCell"; title = "Hardware Decoding"; ObjectID = "rw1-Qb-0RV"; */
-"rw1-Qb-0RV.title" = "Hardware Decoding";
-
-/* Class = "NSTextFieldCell"; title = "Deinterlace"; ObjectID = "eqd-nF-8ff"; */
-"eqd-nF-8ff.title" = "Deinterlace";
-
-/* Class = "NSTextFieldCell"; title = "HDR"; ObjectID = "UW4-by-XRS"; */
-"UW4-by-XRS.title" = "HDR";
-
-/* Class = "NSMenuItem"; title = "Save the current EQ as a preset…"; ObjectID = "sE0-LN-T8i"; */
-"sE0-LN-T8i.title" = "Save the current EQ as a preset…";
-
-/* Class = "NSMenuItem"; title = "Rename the current EQ preset…"; ObjectID = "2tD-0L-UUs"; */
-"2tD-0L-UUs.title" = "Rename the current EQ preset…";
-
-/* Class = "NSMenuItem"; title = "Remove the current EQ preset"; ObjectID = "dvI-Rj-7qF"; */
-"dvI-Rj-7qF.title" = "Remove the current EQ preset";
-
-/* Class = "NSMenuItem"; title = "Manual"; ObjectID = "LPh-nJ-GjN"; */
-"LPh-nJ-GjN.title" = "Manual";

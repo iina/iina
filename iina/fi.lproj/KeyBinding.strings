@@ -52,7 +52,6 @@
 "iina.toggle-flip" = "Vaihda kääntö";
 "iina.toggle-mirror" = "Vaihda peilaus";
 "iina.save-playlist" = "Tallenna nykyinen soittolista";
-"iina.show-current-file-in-finder" = "Show current file in Finder";
 "iina.delete-current-file" = "Poista nykyinen tiedosto";
 "iina.delete-current-file-hard" = "Poista nykyinen tiedosto suoraan siirtämättä roskakoriin";
 "iina.find-online-subs" = "Etsi tekstityksiä verkosta";
@@ -101,7 +100,6 @@
 "opt.sub-pos" = "Tekstityksen sijainti";
 "opt.sub-scale" = "Tekstityksen skaalaus";
 "opt.sub-visibility" = "Tekstityksen näkyvyys";
-"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
 "opt.sub-ass-style-override" = "ASS tyylin ohitus";
 
 "opt.fullscreen" = "Koko näyttö";
@@ -113,6 +111,3 @@
 "read.add" = "{{property}} {{value}}";
 "read.multiply" = "Kerrotaan {{property}} arvolla {{factor}}x";
 "read.cycle" = "Siirry {{property}}{{#dir_down}} alaspäin{{/dir_down}}";
-"read.cycle-values" = "Cycle {{property}} in ({{{values}}})";
-"read.seek" = "Seek {{#fwd}}forward{{/fwd}}{{#bwd}}backward{{/bwd}}{{#abs}}to{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";
-"read.sub-seek" = "Seek to {{#skip_1}}next{{/skip_1}}{{#skip_-1}}previous{{/skip_-1}} subtitle";

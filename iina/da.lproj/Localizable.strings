@@ -287,7 +287,6 @@
 "alert.screenshot.error_taking" = "Kan ikke tage et skærmbillede!";
 
 "alert.sub.no_selected" = "Venligst vælg downloadet undertekst først.";
-"alert.sub_lang_not_set" = "Venligst vælgt det fortrukne undertekstsprog i Indstillinger før du bruger opensubtitles. Engelsk vil blive brugt denne gang.";
 "alert.sub.cannot_save_passwd" = "Kan ikke gemme dit kodeord til nøglering: %@";
 "alert.sub.cannot_login" = "Kan ikke logge ind. Venligst tjek dit brugernavn, kodeord og netværksstatus.\n\n%@";
 "alert.sub.save_downloaded.title" = "Gem hentede undertekster";
@@ -349,7 +348,6 @@
 "alert.plugin_uninstall.message" = "Denne udvidelse vil blive fjernet fra din harddisk.";
 "alert.plugin_reinstall.title" = "Pluginet %@ findes allerede";
 "alert.plugin_reinstall.message" = "Vil du installere tilføjelsen igen?";
-"alert.duplicated_plugin_id" = "Duplikerede tilføjelsesidentifikationer fundet. To eller flere tilføjelser har den samme indetifikation \"%@\". Dette kan forårsage unormal adfærd. Find dem venligst i \"Præferencer - Tilføjelser\" og send rapporter til deres forfattere. Hvis en tilføjelse er installeret lokalt, så kan du også manuelt ændre dens identifikation i tilføjelsens \"Info.json\"-fil.";
 "alert.plugin_no_update" = "Ingen nye opdateringer fundet.";
 "alert.plugin_update_found.title" = "Ny opdatering fundet til %@";
 "alert.plugin_update_found.message" = "Den seneste version er %@. Du har %@. Vil du opdatere?";

@@ -141,7 +141,7 @@
 "osd.playlist_loop" = "Lire en boucle la liste de lecture";
 "osd.no_loop" = "Désactiver la lecture en boucle";
 
-"preference.title" = "Préférences";
+"preference.title" = "Paramètres";
 "preference.general" = "Général";
 "preference.ui" = "Interface";
 "preference.video_audio" = "Vidéo/Audio";
@@ -175,7 +175,6 @@
 "preference.sub_override_level.descriptive_text.yes" = "Appliquer tous les paramètres de style dans cette section.";
 
 "preference.ytdl_plugin_not_installed" = "Installez le plugin Media en ligne à partir de \"Plugins > Installer à partir de GitHub\" pour profiter des fonctionnalités avancées telles que le téléchargement vidéo et les mises à jour automatiques de yt-dlp.";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
 "menu.volume" = "Volume : %d";
 "menu.volume_muted" = "Volume : %d (coupé)";
@@ -287,7 +286,6 @@
 "alert.screenshot.error_taking" = "Impossible de prendre une capture d'écran !";
 
 "alert.sub.no_selected" = "Veuillez d'abord sélectionner un sous-titre téléchargé.";
-"alert.sub_lang_not_set" = "Veuillez configurer une langue de sous-titres dans les préférences avant d'utiliser OpenSubtitles. L'anglais (eng) sera utilisé cette fois-ci.";
 "alert.sub.cannot_save_passwd" = "Impossible de sauvegarder le mot de passe dans votre trousseau d'accès : %@";
 "alert.sub.cannot_login" = "Impossible de se connecter. Veuillez vérifier votre nom d'utilisateur, votre mot de passe et votre connexion Internet.\n\n%@";
 "alert.sub.save_downloaded.title" = "Sauvegarder le sous-titre téléchargé";
@@ -349,7 +347,6 @@
 "alert.plugin_uninstall.message" = "Ce module externe sera supprimée de votre disque dur.";
 "alert.plugin_reinstall.title" = "Le module externe %@ existe déjà";
 "alert.plugin_reinstall.message" = "Souhaitez-vous réinstaller ce module externe ?";
-"alert.duplicated_plugin_id" = "Plusieurs modules externes ont le même identifiant : « %@ ». Cela peut entraîner des comportements anormaux. Vous pouvez les identifier Préférences - Modules externes et le signaler à leurs auteurs. Si un module externe est installé localement, vous pouvez changer manuellement son identifiant dans le fichier Info.json de celui-ci.";
 "alert.plugin_no_update" = "Aucune mise à jour disponible.";
 "alert.plugin_update_found.title" = "Mise à jour disponible pour %@";
 "alert.plugin_update_found.message" = "La dernière version est %@. Vous avez %@. Voulez-vous mettre à jour ?";

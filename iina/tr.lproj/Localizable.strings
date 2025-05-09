@@ -141,7 +141,7 @@
 "osd.playlist_loop" = "Oynatma Listesini Döngüye Al";
 "osd.no_loop" = "Döngüye Almayı Kapat";
 
-"preference.title" = "Tercihler";
+"preference.title" = "Ayarlar";
 "preference.general" = "Genel";
 "preference.ui" = "Arayüz";
 "preference.video_audio" = "Video/Ses";
@@ -287,7 +287,6 @@
 "alert.screenshot.error_taking" = "Ekran resmi alınamıyor!";
 
 "alert.sub.no_selected" = "Lütfen önce indirdiğiniz altyazıyı seçin.";
-"alert.sub_lang_not_set" = "Lütfen OpenSubtitles’ı kullanmadan önce tercih ettiğiniz altyazı dilini tercihlerinize ekleyin. Bu kez İngilizce (eng) kullanılacaktır.";
 "alert.sub.cannot_save_passwd" = "Anahtar zincirinize parolanızı kaydedemiyoruz: %@";
 "alert.sub.cannot_login" = "Giriş yapılamıyor. Lütfen kullanıcı adınızı, şifrenizi ve ağ durumunuzu denetleyin.\n\n%@";
 "alert.sub.save_downloaded.title" = "İndirilen Altyazıyı Kaydet";
@@ -349,7 +348,6 @@
 "alert.plugin_uninstall.message" = "Bu eklenti sabit diskinizden silinecek.";
 "alert.plugin_reinstall.title" = "%@ eklentisi halihazırda var";
 "alert.plugin_reinstall.message" = "Bu eklentiyi yeniden kurmak istiyor musunuz?";
-"alert.duplicated_plugin_id" = "Yinelenen eklenti tanımlayıcıları algılandı. İki veya daha fazla eklenti aynı “%@” tanımlayıcısına sahip. Bu anormal davranışlara neden olabilir. Lütfen bunları “Tercihler” → “Eklentiler” bölümünde bulun ve yazarlarına bildirin. Bir eklenti yerel olarak kurulmuşsa eklentinin Info.json dosyasındaki tanımlayıcısını elle de değiştirebilirsiniz.";
 "alert.plugin_no_update" = "Güncelleme bulunamadı.";
 "alert.plugin_update_found.title" = "%@ için güncelleme bulundu";
 "alert.plugin_update_found.message" = "Uygulamanın son sürümü %@. Sizde %@ var. Güncellemek ister misiniz?";

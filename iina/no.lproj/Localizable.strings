@@ -15,19 +15,12 @@
 "general.cancel" = "Avbryt";
 "general.username" = "Brukernavn";
 "general.password" = "Passord";
-
-"input.value_is_empty" = "Value cannot be empty.";
-"input.already_exists" = "Value already exists.";
-
-// Guide Window
-"guide.highlights" = "Highlights";
 "guide.basic_settings" = "Grunnleggende innstillinger";
 "guide.faq" = "Ofte stilte spørsmål";
 
 // Initial Window
 "initial.announcement" = "Du bruker en %@ versjon av IINA";
 "initial.beta.desc" = "Hvis du vil rulle tilbake til en utgivelsesversjon, fjern avkrysningen for \"motta betaoppdateringer\" fra Innstillinger > Generelt, og installer en stabil versjon fra vår <a href=\"https://iina.io\">offisielle nettside</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Feilsøkingsversjoner er vanligvis ikke optimalisert for ytelse, så det anbefales derfor ikke for daglig bruk. Feilsøkingsversjoner støtter ikke automatisk oppdatering.";
 "initial.bug_report" = "Meld feil via <a href=\"https://github.com/iina/iina/issues\">GitHub Issues</a>.";
 
@@ -50,42 +43,11 @@
 "quicksetting.deinterlace" = "Deinterlace";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Skjul";
-"quicksetting.reset_speed" = "Reset speed to 1x";
-
-// EQ Presets
-"eq.preset.flat" = "Flat";
-"eq.preset.acoustic" = "Acoustic";
-"eq.preset.classical" = "Classical";
-"eq.preset.dance" = "Dance";
-"eq.preset.deep" = "Deep";
-"eq.preset.electronic" = "Electronic";
-"eq.preset.hip_hop" = "Hip Hop";
-"eq.preset.increase_bass" = "Increase Bass";
-"eq.preset.increase_treble" = "Increase Treble";
-"eq.preset.increase_vocal" = "Increase Vocal";
-"eq.preset.jazz" = "Jazz";
-"eq.preset.latin" = "Latin";
-"eq.preset.loundness" = "Loundness";
-"eq.preset.lounge" = "Lounge";
-"eq.preset.piano" = "Piano";
-"eq.preset.pop" = "Pop";
-"eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reduce Bass";
-"eq.preset.reduce_treble" = "Reduce Treble";
-"eq.preset.rock" = "Rock";
-"eq.preset.small_speaker" = "Small Speaker";
-"eq.preset.spoken_word" = "Spoken Word";
-
-"alert.eq.new_profile.title" = "New EQ Profile";
-"alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Current Profile";
-"alert.eq.rename.message" = "Please enter a new profile name.";
 
 // OSDMessage.swift
 "osd.pause" = "Pause";
 "osd.resume" = "Gjenoppta";
 "osd.volume" = "Volum: %i";
-"osd.speed" = "Speed: %@x";
 "osd.aspect" = "Bildeformat: %@";
 "osd.crop" = "Beskjæring: %@";
 "osd.rotate" = "Roter: %i°";
@@ -98,14 +60,6 @@
 "osd.sub_delay.later" = "Undertekstforsinkelse: %.2fs senere";
 "osd.sub_delay.earlier" = "Undertekstforsinkelse: %.2fs tidligere";
 "osd.subtitle_pos" = "Undertekstposisjon: %.1f";
-"osd.sub_hidden" = "Subtitles Hidden";
-"osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
-"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
-"osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Demp";
 "osd.unmute" = "Opphev demping";
 "osd.screenshot" = "Skjermbilde lagret";
@@ -125,23 +79,14 @@
 "osd.find_online_sub" = "Finner understekster på nett…";
 "osd.find_online_sub.source" = "fra";
 "osd.sub_not_found" = "Ingen undertekster funnet";
-"osd.sub_found" = "%d subtitles found.";
-"osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "Undertekster nedlastet";
 "osd.sub_saved" = "Undertekster lagret";
 "osd.network_error" = "Nettverksfeil";
 "osd.file_error" = "Feil ved lesing av fil";
 "osd.cannot_login" = "Kan ikke logge inn";
 "osd.canceled" = "Avbrutt";
-"osd.cannot_connect" = "Cannot connect";
-"osd.timed_out" = "Timed Out";
 "osd.filter_added" = "Filter lagt til: %@";
 "osd.filter_removed" = "Filter fjernet";
-"osd.file_loop" = "Loop Single File";
-"osd.playlist_loop" = "Loop Playlist";
-"osd.no_loop" = "Disable Looping";
-
-"preference.title" = "Innstillinger";
 "preference.general" = "Generelt";
 "preference.ui" = "Brukergrensesnitt";
 "preference.video_audio" = "Video/Lyd";
@@ -161,39 +106,18 @@
 "preference.key_binding_hint_2" = "Dobbelklikk på raden til høyre for å endre den korresponderende hurtigtasten.";
 
 "preference.enable_adv_settings" = "Aktiver avanserte innstillinger";
-
-"preference.sub_override_level.no" = "no";
-"preference.sub_override_level.force" = "force";
-"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "fjern";
-"preference.sub_override_level.yes" = "yes";
-
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
-
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
 "menu.volume" = "Volum: %d";
 "menu.volume_muted" = "Volum: %d (dempet)";
 "menu.audio_delay" = "Lydforsinkelse: %.2fs";
 "menu.sub_delay" = "Undertekstforsinkelse: %.2fs";
-"menu.sub_hide" = "Hide Subtitles";
-"menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Secondary Subtitles";
-"menu.sub_second_show" = "Show Secondary Subtitles";
 "menu.fullscreen" = "Gå til fullskjerm";
 "menu.exit_fullscreen" = "Avslutt fullskjerm";
 "menu.pip" = "Bilde-i-bilde";
 "menu.exit_pip" = "Avslutt bilde-i-bilde";
-"menu.mini_player" = "Enter Music Mode";
-"menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pause";
 "menu.resume" = "Gjenoppta";
-"menu.speed" = "Speed: %@x";
 "menu.chapters" = "Vis kapittelpanel";
 "menu.hide_chapters" = "Gjem kapittelpanel";
 "menu.playlist" = "Vis spillelistepanel";
@@ -207,28 +131,15 @@
 
 "menu.seek_forward" = "Steg fremover: %.0fs";
 "menu.seek_backward" = "Steg bakover: %.0fs";
-"menu.speed_up" = "Speed Up by %@x";
-"menu.speed_down" = "Speed Down by %@x";
 "menu.volume_up" = "Volum + %.0f%%";
 "menu.volume_down" = "Volum - %.0f%%";
 "menu.audio_delay_up" = "Lydforsinkelse + %.1fs";
 "menu.audio_delay_down" = "Lydforsinkelse - %.1fs";
 "menu.sub_delay_up" = "Undertekstforsinkelse + %.1fs";
 "menu.sub_delay_down" = "Undertekstforsinkelse - %.1fs";
-
-"menu.crop_custom" = "Custom…";
 "menu.find_online_sub" = "Finn undertekster på nettet fra %@";
 
-"menu.manage_plugins" = "Manage Plugins…";
-"menu.developer_tool" = "Developer Tool";
-"menu.more_plugin" = "More…";
-"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
-"menu.reload_plugins" = "Reload All Plugins";
-"menu.show_plugins_panel" = "Show Plugins Panel";
-"menu.hide_plugins_panel" = "Hide Plugins Panel";
-
 "track.audio" = "Lyd";
-"track.none" = "<None>";
 "track.sub" = "Undertekster";
 "track.video" = "Video";
 
@@ -252,55 +163,21 @@
 
 "alert.error_open" = "Kan ikke åpne filen eller strømmen!";
 "alert.error_finding_file" = "Finner ikke filen %@!";
-"alert.error_loading_script" = "Cannot load script %@!";
-"alert.error_saving_file" = "Error occurred when saving %@: %@";
 "alert.error_deleting_file" = "Kan ikke slette filen.";
-
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
 
 "alert.config.new.title" = "Ny inndatakonfigurasjon";
 "alert.config.new.message" = "Angi et navn til den nye konfigurasjonen.";
-"alert.config.duplicate.title" = "Duplicate Configuration";
-"alert.config.duplicate.message" = "Please enter name for the duplicated configuration file.";
-"alert.config.empty_name" = "The name cannot be empty.";
-"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Filen finnes allerede";
-"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
-"alert.config.cannot_create" = "Cannot create config file!\n%@";
-"alert.config.cannot_write" = "Cannot write to config file!";
-"alert.config.rename.title" = "Rename Input Configuration";
-"alert.config.rename.message" = "Please enter the new name for the configuration.";
-
-"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
-"alert.add_filter.title" = "New Filter";
-"alert.add_filter.message" = "Please enter a filter string in format of mpv's vf or af command.";
-
-"alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
-
-"alert.extra_option.cannot_read" = "Cannot read user defined extra mpv options.";
 "alert.extra_option.empty" = "Nøkkel eller verdi kan ikke være tom!";
-"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
-"alert.extra_option.config_folder" = "Error setting config directory \"%@\".";
 
 "alert.playlist.error_deleting" = "Feil under sletting: %@";
 
 "alert.screenshot.error_taking" = "Kan ikke ta et skjermbilde!";
 
 "alert.sub.no_selected" = "Velg en nedlastet undertekst først.";
-"alert.sub_lang_not_set" = "Please set preferred subtitle languages in preferences before using OpenSubtitles. English(eng) will be used this time.";
-"alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
-"alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
 "alert.sub.save_downloaded.title" = "Arkiver nedlastede undertekster";
 
-"alert.set_default.title" = "Setting IINA as Default App";
-"alert.set_default.message" = "IINA will be set as the default app for all file types it supports.";
-"alert.set_default.success" = "Finished with %d success and %d failed.";
-
-"alert.add_watch.title" = "Add Watch Property";
-"alert.add_watch.message" = "Please enter a valid mpv property name.";
-
 "alert.jump_to.title" = "Gå til";
-"alert.jump_to.message" = "Please enter the time you want to jump to. Example: 20:35";
 
 "alert.opensub.login.title" = "OpenSubtitles innlogging";
 "alert.opensub.login.message" = "Vennligst fyll inn brukernavn og passord";
@@ -314,8 +191,6 @@
 
 "alert.delete_history.title" = "Slett avspillingshistorikk";
 "alert.delete_history.message" = "Er du sikker på at vil slette valgte oppføringer?";
-
-"alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
 "alert.filter_hwdec.abort" = "Avbryt";
 "alert.filter_hwdec.turn_off" = "Skru av maskinvarekoding";
 "alert.filter_hwdec.use_copy" = "Bytt til Auto(Copy)";
@@ -329,9 +204,6 @@
 "alert.clear_watch_later.title" = "Slett lagret avspillingsfremgang";
 "alert.clear_watch_later.message" = "Er du sikker på at du vil slette avspillingsfremgang (\"Se senere\")?";
 
-"alert.restore_alerts.title" = "Restore Suppressed Alerts";
-"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
-
 "alert.nothing_to_open" = "Ingenting å åpne.";
 
 "alert.no_video_track" = "Finnes ingen videospor.";
@@ -344,17 +216,6 @@
 "alert.assrt_token_prompt.title" = "Skriv inn API-nøkkelen";
 "alert.assrt_token_prompt.message" = "Registrer deg på den åpnede nettsiden. Du finner nøkkelen din på profilsiden og skriver den inn under:";
 "alert.assrt_token_invalid" = "Din Assrt API-nøkkel ser ut til å være ugyldig.";
-
-"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
-"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
-"alert.plugin_reinstall.title" = "Plugin %@ already exists";
-"alert.plugin_reinstall.message" = "Do you want to reinstall the plugin?";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
-"alert.plugin_no_update" = "No update found.";
-"alert.plugin_update_found.title" = "Update found for %@";
-"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
-"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
-"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
 
 "playlist.total_length" = "%@ totalt";
 "playlist.total_length_with_selected" = "%@ av %@ valgt";
@@ -379,78 +240,17 @@
 "pl_menu.copy_url_multi" = "Kopier URLer";
 
 "keymapping.title" = "Tilordne taster";
-"keymapping.message" = "Press any key to record.";
 
 "filter.video_filters" = "Video filtre";
 "filter.audio_filters" = "Lydfilter";
-
-"hwdec.no" = "Disable hardware decoding.";
-"hwdec.auto" = "Enable hardware decoding. However, most of the video filters won't work properly.";
-"hwdec.auto-copy" = "Enable hardware decoding. It will consume double the memory but work with video filters.";
-
-"subencoding.auto" = "Auto detect";
-
-"osc_toolbar.settings" = "Quick Settings";
-"osc_toolbar.playlist" = "Playlist and chapters";
 "osc_toolbar.pip" = "Bilde-i-bilde";
-"osc_toolbar.full_screen" = "Toggle full screen";
-"osc_toolbar.music_mode" = "Enter music mode";
-"osc_toolbar.sub_track" = "Choose subtitle track";
-"osc_toolbar.screenshot" = "Take a screenshot";
-"osc_toolbar.plugins" = "Show plugins panel";
-
-"mini_player.album_art" = "Toggle album art";
-"mini_player.loop" = "Repeat";
 "mini_player.shuffle" = "Bland";
-"mini_player.remove" = "Remove from playlist";
-"mini_player.add" = "Add to playlist";
-"mini_player.delete" = "Delete all tracks from playlist";
 "mini_player.volume" = "Volum";
-"mini_player.close" = "Close music mode";
-"mini_player.back" = "Return to video mode";
-
-// Touch bar
-
-"touchbar.ahead_15" = "15sec Ahead";
-"touchbar.ahead_30" = "30sec Ahead";
-"touchbar.back_15" = "15sec Back";
-"touchbar.back_30" = "30sec Back";
-"touchbar.next_video" = "Next Video";
-"touchbar.prev_video" = "Previous Video";
 "touchbar.increase_volume" = "Volum +";
 "touchbar.decrease_volume" = "Volum -";
-"touchbar.rewind" = "Rewind";
-"touchbar.fast_forward" = "Fast Forward";
-"touchbar.play_pause" = "Play / Pause";
 "touchbar.seek" = "Spol";
-"touchbar.time" = "Time Position";
-"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
 "touchbar.toggle_pip" = "Bilde-i-bilde";
-
-// Plugin permissions
-
-"permissions.network-request.name" = "Network Request";
 "permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
-"permissions.network-request.any_site" = "Any site";
-"permissions.show-osd.name" = "Show OSD";
-"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
-"permissions.show-alert.name" = "Show Alerts";
-"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
-"permissions.video-overlay.name" = "Add overlays on videos";
-"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
-"permissions.file-system.name" = "Access the file system";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
-
-"plugin.install" = "Install";
-"plugin.installed" = "Installed";
-"plugin.not_installed" = "Not Installed";
-"plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occurred during the installation: %@";
-"alert.invalid_url" = "The URL is invalid.";
-"plugin.install_error.invalid_url" = "The URL is invalid.";
-"plugin.install_error.file_not_found" = "Cannot find the package file.";
 "plugin.install_error.cannot_download" = "Kan ikke nedlaste utvidelsen.\n\nUtdata:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
 "plugin.check_for_updates" = "Se etter oppdateringer";
 "plugin.updating" = "Nedlaster oppdatering…";

@@ -120,12 +120,6 @@
             "value" : "설치"
           }
         },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Installeren"
-          }
-        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -618,6 +612,24 @@
             "value" : "كشف في Finder"
           }
         },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finder'də göstər"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Паказаць у Finder"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Покажи във Finder"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -714,6 +726,12 @@
             "value" : "Tampilkan dalam Finder"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sýna í Finder"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -738,16 +756,22 @@
             "value" : "Rādīt programmā Meklētājs"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vis i Finder"
+            "value" : "ഫൈൻഡറിൽ കാണിക്കുക"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Toon in Finder"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vis i Finder"
           }
         },
         "pl" : {
@@ -786,7 +810,7 @@
             "value" : "Zobraziť vo Finderi"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prikaži u Finderu"
@@ -1122,6 +1146,12 @@
             "value" : "الإعدادات"
           }
         },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Налады"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1230,6 +1260,12 @@
             "value" : "설정"
           }
         },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "സെറ്റിങ്സ്"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1272,7 +1308,7 @@
             "value" : "Nastavenia"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Postavke"
@@ -1700,16 +1736,16 @@
             "value" : "識別子"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Identifier"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
           }
         },
         "pt" : {
@@ -1766,6 +1802,12 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Help\"; ObjectID = \"Ka5-V3-g5E\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Помоћ"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1868,6 +1910,12 @@
             "value" : "Bantuan"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hjálp"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1892,16 +1940,16 @@
             "value" : "Palīgs"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hjelp"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Help"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hjelp"
           }
         },
         "pl" : {
@@ -1941,12 +1989,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Помоћ"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pomoć"
@@ -2000,6 +2042,12 @@
       "comment" : "Class = \"NSSegmentedCell\"; KTN-5r-mMm.ibShadowedLabels[0] = \"About\"; ObjectID = \"KTN-5r-mMm\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "О програму"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2010,6 +2058,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "حول التطبيق"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haqqında"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пра"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "За приложението"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "অ্যাপটি সম্পর্কে"
           }
         },
         "ca" : {
@@ -2060,6 +2132,12 @@
             "value" : "Acerca de"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Honi buruz"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2102,10 +2180,22 @@
             "value" : "Névjegy"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Հավելվածի մասին"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tentang"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Um"
           }
         },
         "it" : {
@@ -2120,6 +2210,12 @@
             "value" : "IINAについて"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ಬಗ್ಗೆ"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2132,16 +2228,34 @@
             "value" : "Par"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Om"
+            "value" : "За апликацијата"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "അബൗറ്റ്"
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "जानकारी"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Over"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Om"
           }
         },
         "pl" : {
@@ -2180,13 +2294,13 @@
             "value" : "O aplikácii IINA"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "О програму"
+            "value" : "O programu"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "O programu"
@@ -2204,6 +2318,12 @@
             "value" : "இதைப் பற்றி"
           }
         },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "เกี่ยวกับเรา"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2214,6 +2334,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Про програму"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "متعلق"
           }
         },
         "vi" : {
@@ -2396,6 +2522,12 @@
             "value" : "الإعدادات"
           }
         },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Налады"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2504,6 +2636,12 @@
             "value" : "설정"
           }
         },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "സെറ്റിങ്സ്"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2546,7 +2684,7 @@
             "value" : "Nastavenia"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Postavke"
@@ -2663,7 +2801,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vérifier les mises à jour"
+            "value" : "Rechercher des mises à jour"
           }
         },
         "he" : {
@@ -2720,16 +2858,16 @@
             "value" : "Pārbaudīt atjauninājumus"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Se etter oppdateringer"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zoek naar updates"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se etter oppdateringer"
           }
         },
         "pl" : {
@@ -2768,7 +2906,7 @@
             "value" : "Skontrolovať aktualizácie"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Proveri da li postoje ažuriranja"
@@ -3212,6 +3350,12 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"Cancel\"; ObjectID = \"qje-hT-j7H\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Откажи"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3222,6 +3366,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "إلغاء"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ləğv et"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Скасаваць"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отмяна"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "বাতিল"
           }
         },
         "ca" : {
@@ -3272,6 +3440,12 @@
             "value" : "Cancelar"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utzi"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3314,10 +3488,22 @@
             "value" : "Mégse"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Չեղարկել"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Batal"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hætta við"
           }
         },
         "it" : {
@@ -3332,6 +3518,12 @@
             "value" : "キャンセル"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ರದ್ದುಮಾಡು"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3344,16 +3536,28 @@
             "value" : "Atcelt"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avbryt"
+            "value" : "Откажи"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "റദ്ദാക്കുക"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annuleer"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avbryt"
           }
         },
         "pl" : {
@@ -3392,13 +3596,13 @@
             "value" : "Zrušiť"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Откажи"
+            "value" : "Prekliči"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otkaži"
@@ -3416,6 +3620,12 @@
             "value" : "ரத்துசெய்"
           }
         },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ยกเลิก"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3426,6 +3636,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Скасувати"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "منسوخ"
           }
         },
         "vi" : {
@@ -3892,16 +4108,16 @@
             "value" : "플러그인"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Utvidelser"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Plugins"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utvidelser"
           }
         },
         "pl" : {
@@ -3940,7 +4156,7 @@
             "value" : "Pluginy"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dodatne komponente"
@@ -4240,16 +4456,16 @@
             "value" : "플러그인"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Utvidelser"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Plugins"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utvidelser"
           }
         },
         "pl" : {
@@ -4288,7 +4504,7 @@
             "value" : "Pluginy"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dodatne komponente"
@@ -4336,6 +4552,12 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"Website\"; ObjectID = \"X6J-6H-IPn\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Веб-сајт"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4346,6 +4568,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "الموقع"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vebsayt"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вэб-сайт"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Уебсайт"
           }
         },
         "ca" : {
@@ -4444,6 +4684,12 @@
             "value" : "Situs"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vefsíða"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4468,16 +4714,28 @@
             "value" : "Mājaslapa"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nettside"
+            "value" : "Веб страна"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "വെബ്സൈറ്റ്"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Website"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nettside"
           }
         },
         "pl" : {
@@ -4516,13 +4774,13 @@
             "value" : "Webová stránka"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Веб-сајт"
+            "value" : "Spletna stran"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Veb-sajt"

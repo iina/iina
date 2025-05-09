@@ -5,6 +5,12 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Select action:\"; ObjectID = \"gSW-bE-4yF\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Изабери радњу:"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15,6 +21,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "حدد الإجراء:"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Əməliyyatı seçin:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выберыце дзеянне:"
           }
         },
         "ca" : {
@@ -113,6 +131,12 @@
             "value" : "Pilih tindakan:"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Veldu aðgerð:"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -131,22 +155,16 @@
             "value" : "동작 선택"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select action:"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Velg handling:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Selecteer een actie:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Velg handling:"
           }
         },
         "pl" : {
@@ -188,12 +206,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Изабери радњу:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Izaberite radnju:"
           }
         },
@@ -201,12 +213,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Välj åtgärd:"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select action:"
           }
         },
         "tr" : {
@@ -244,6 +250,12 @@
     "xhd-tg-xTO.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Or enter a mpv command:\"; ObjectID = \"xhd-tg-xTO\";",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Или унесите наредбу за mpv:"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -254,6 +266,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "أو أدخل أمر mpv:"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Və ya mpv əməliyyatı daxil edin:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ці ўвядзіце каманду mpv:"
           }
         },
         "ca" : {
@@ -352,6 +376,12 @@
             "value" : "Atau masukkan perintah mpv:"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eða skrifaðu mpv skipun:"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -370,22 +400,16 @@
             "value" : "mpv 명령행 바로 입력"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Or enter mpv command:"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eller skriv mpv-kommando:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Of voer een mpv-commando in:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eller skriv mpv-kommando:"
           }
         },
         "pl" : {
@@ -427,12 +451,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Или унесите наредбу за mpv:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Ili unesite naredbu za mpv:"
           }
         },
@@ -440,12 +458,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Eller ange mpv-kommando:"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Or enter mpv command:"
           }
         },
         "tr" : {

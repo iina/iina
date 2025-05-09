@@ -17,6 +17,18 @@
             "value" : "مسح الحديثة"
           }
         },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sonunçuları təmizlə"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ачысціць апошнія"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -113,6 +125,12 @@
             "value" : "Bersihkan Riwayat Pencarian Terkini"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eyða nýlegu"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -137,16 +155,22 @@
             "value" : "Notīrīt jaunākos"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tøm denne listen"
+            "value" : "റീസൻറ്റ് മായ്ക്കുക"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Recente zoekopdrachten wissen"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tøm denne listen"
           }
         },
         "pl" : {
@@ -186,12 +210,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clear Recents"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obriši nedavne stavke"
@@ -249,6 +267,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "المسار الكامل"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tam yol"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поўны шлях"
           }
         },
         "ca" : {
@@ -371,16 +401,22 @@
             "value" : "Pilns ceļš"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Filbane"
+            "value" : "ഫുൾ പാത്ത്"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Volledige pad"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filbane"
           }
         },
         "pl" : {
@@ -420,12 +456,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Full path"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Puna putanja"
@@ -483,6 +513,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "حذف…"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sil..."
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выдаліць…"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Изтрий…"
           }
         },
         "ca" : {
@@ -581,6 +629,12 @@
             "value" : "Hapus…"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eyða…"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -605,16 +659,22 @@
             "value" : "Dzēst…"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Slett…"
+            "value" : "ഡിലീറ്റ്…"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verwijder…"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Slett…"
           }
         },
         "pl" : {
@@ -654,12 +714,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delete…"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Izbriši…"
@@ -730,6 +784,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ملف"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fayl"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Файл"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Файл"
           }
         },
         "ca" : {
@@ -828,6 +900,12 @@
             "value" : "File"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skrá"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -852,16 +930,22 @@
             "value" : "Datne"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fil"
+            "value" : "ഫയൽ"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bestand"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fil"
           }
         },
         "pl" : {
@@ -903,12 +987,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "File"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Datoteka"
           }
         },
@@ -934,6 +1012,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Файл"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فائل"
           }
         },
         "vi" : {
@@ -970,6 +1054,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "تاريخ التشغيل"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oynatma tarixçəsi"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Гісторыя прайгравання"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "История на възпроизвежданията"
           }
         },
         "ca" : {
@@ -1068,6 +1170,12 @@
             "value" : "Riwayat Pemutaran"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spilunarferill"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1092,16 +1200,22 @@
             "value" : "Atskaņošanas vēsture"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avspillingshistorikk"
+            "value" : "പ്ലേബാക്ക് ഹിസ്റ്ററി"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Afspeelgeschiedenis"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avspillingshistorikk"
           }
         },
         "pl" : {
@@ -1141,12 +1255,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Playback History"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Istorija reprodukcije"
@@ -1204,6 +1312,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "كشف في Finder"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finder'də göstər"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Паказаць у Finder"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Покажи във Finder"
           }
         },
         "ca" : {
@@ -1302,6 +1428,12 @@
             "value" : "Tampilkan dalam Finder"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sýna í Finder"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1326,16 +1458,22 @@
             "value" : "Rādīt programmā Meklētājs"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vis i Finder"
+            "value" : "ഫൈൻഡറിൽ കാണിക്കുക"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Toon in Finder"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vis i Finder"
           }
         },
         "pl" : {
@@ -1375,12 +1513,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show in Finder"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prikaži u Finderu"
@@ -1438,6 +1570,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "البحث في"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Axtar..."
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Шукаць у"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Търси в"
           }
         },
         "ca" : {
@@ -1536,6 +1686,12 @@
             "value" : "Cari di"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leita í"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1560,16 +1716,22 @@
             "value" : "Meklēt"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Søk i"
+            "value" : "തിരയുക"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zoek in"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Søk i"
           }
         },
         "pl" : {
@@ -1609,12 +1771,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Search in"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pretraži u"
@@ -1685,6 +1841,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "تم تشغيله في"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oynatıldı"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Прайграна"
           }
         },
         "ca" : {
@@ -1801,16 +1969,22 @@
             "value" : "최근 재생 시간"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Spilt på"
+            "value" : "പ്ലേഡ് ആറ്റ്"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Laatst afgespeeld"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spilt på"
           }
         },
         "pl" : {
@@ -1850,12 +2024,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Played at"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vreme reprodukcije"
@@ -1913,6 +2081,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "التقدم"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İrəliləyiş"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Прагрэс"
           }
         },
         "ca" : {
@@ -2011,6 +2191,12 @@
             "value" : "Progres"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Framför"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2035,16 +2221,22 @@
             "value" : "Progress"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fremdrift"
+            "value" : "പ്രാഗ്രെസ്"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Afspeelpositie"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fremdrift"
           }
         },
         "pl" : {
@@ -2084,12 +2276,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Progress"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tok"
@@ -2147,6 +2333,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "تشغيل في نافذة جديدة"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yeni pəncərədə oynat"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Прайграць у новым акне"
           }
         },
         "ca" : {
@@ -2245,6 +2443,12 @@
             "value" : "Putar di Window Baru"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spila í nýjum glugga"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2269,16 +2473,22 @@
             "value" : "Atskaņot jaunā logā"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Spill av i nytt vindu"
+            "value" : "പുതിയ വിൻഡോയിൽ പ്ലേ ചെയ്യുക"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Speel af in nieuw venster"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spill av i nytt vindu"
           }
         },
         "pl" : {
@@ -2318,12 +2528,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Play in New Window"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Reprodukuj u novom prozoru"
@@ -2387,6 +2591,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "لا توجد عمليات بحث حديثة"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Son axtarışlar yoxdur"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Гісторыя пошуку пустая"
           }
         },
         "ca" : {
@@ -2485,6 +2701,12 @@
             "value" : "Tidak Ada Pencarian Baru"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Engar nýlegar leitir"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2509,16 +2731,22 @@
             "value" : "Nav neseno meklējumu"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ingen tidligere søk"
+            "value" : "സമീപകാല തിരയലുകളൊന്നുമില്ല"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geen recente zoekopdrachten"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingen tidligere søk"
           }
         },
         "pl" : {
@@ -2558,12 +2786,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No Recent Searches"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nеma nеdavnih prеtraga"
@@ -2621,6 +2843,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "تشغيل"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oynat"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Прайграць"
           }
         },
         "ca" : {
@@ -2719,6 +2953,12 @@
             "value" : "Putar"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spila"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2743,16 +2983,22 @@
             "value" : "Atskaņot"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Spill Av"
+            "value" : "പ്ലേ ചെയ്യുക"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Speel"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spill Av"
           }
         },
         "pl" : {
@@ -2791,13 +3037,13 @@
             "value" : "Prehrať"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Play"
+            "value" : "Predvajaj"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rеprodukuj"
@@ -2861,6 +3107,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "التاريخ"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tarix"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дата"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дата"
           }
         },
         "ca" : {
@@ -2959,6 +3223,12 @@
             "value" : "Tanggal"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dagsetning"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2983,16 +3253,22 @@
             "value" : "Datums"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dato"
+            "value" : "തീയതി"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Datum"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dato"
           }
         },
         "pl" : {
@@ -3032,12 +3308,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Date"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Datum"
@@ -3114,6 +3384,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "مجلد"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qovluq"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Папка"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Папка"
           }
         },
         "ca" : {
@@ -3212,6 +3500,12 @@
             "value" : "Folder"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mappa"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3236,16 +3530,22 @@
             "value" : "Mape"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mappe"
+            "value" : "ഫോൾഡർ"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Map"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mappe"
           }
         },
         "pl" : {
@@ -3285,12 +3585,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Folder"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fascikla"
@@ -3354,6 +3648,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "اسم الملف"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fayl adı"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Назва файла"
           }
         },
         "ca" : {
@@ -3452,6 +3758,12 @@
             "value" : "Nama file"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skráheiti"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3476,16 +3788,22 @@
             "value" : "Datnes nosaukums"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Filnavn"
+            "value" : "ഫയലിന്റെ പേര്"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bestand"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filnavn"
           }
         },
         "pl" : {
@@ -3525,12 +3843,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filename"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Naziv datoteke"
@@ -3594,6 +3906,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "تجميع بحسب:"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qruplaşdır:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Групаваць па:"
           }
         },
         "ca" : {
@@ -3692,6 +4016,12 @@
             "value" : "Kelompokkan menurut:"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Flokka eftir:"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3716,16 +4046,22 @@
             "value" : "Grupēt pēc:"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gruppér etter:"
+            "value" : "ഗ്രൂപ്പ്:"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Groepeer op:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gruppér etter:"
           }
         },
         "pl" : {
@@ -3765,12 +4101,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Group by:"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Grupiši po:"
@@ -3841,6 +4171,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "عمليات البحث الأخيرة"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ən son Axtarışlar"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нядаўнія пошукі"
           }
         },
         "ca" : {
@@ -3939,6 +4281,12 @@
             "value" : "Pencarian Terkini"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nýlegar leitir"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3963,16 +4311,22 @@
             "value" : "Nesenie meklējumi"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nylige søk"
+            "value" : "സമീപകാല തിരയലുകൾ"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Recente zoekopdrachten"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nylige søk"
           }
         },
         "pl" : {
@@ -4012,12 +4366,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Recent Searches"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nеdavnе prеtragе"

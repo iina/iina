@@ -83,6 +83,12 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"This video is playing in picture in picture\"; ObjectID = \"gdE-b5-kod\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Овај видео-запис репродукује се у режиму слике у слици"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -93,6 +99,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "يجري تشغيل هذا الفيديو بنظام صورة داخل صورة"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Гэта відэа праграваецца ў рэжыме відарыс у відарысу"
           }
         },
         "ca" : {
@@ -209,22 +221,16 @@
             "value" : "화면 속 화면으로 재생 중입니다"
           }
         },
-        "lv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This video is playing in picture in picture"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Denne videoen spiller som bilde-i-bilde"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Deze video wordt beeld in beeld afgespeeld."
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Denne videoen spiller som bilde-i-bilde"
           }
         },
         "pl" : {
@@ -266,12 +272,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Овај видео-запис репродукује се у режиму слике у слици"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Ovaj video-zapis reprodukuje se u režimu slike u slici"
           }
         },
@@ -279,12 +279,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Denna video spelar i bild-i-bild"
-          }
-        },
-        "ta" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This video is playing in picture in picture"
           }
         },
         "tr" : {

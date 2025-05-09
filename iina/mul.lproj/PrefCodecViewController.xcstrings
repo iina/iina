@@ -176,12 +176,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Auto (Copy)"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Automatski (kopiraj)"
           }
         },
@@ -341,12 +335,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "AVFoundation — это новый экспериментальный аудиодрайвер с поддержкой пространственного аудио (Spatial Audio). Однако, при использовании AVFoundation возможны некоторые проблемы, такие как задержка звука."
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."
           }
         },
         "tr" : {
@@ -550,12 +538,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Default: 0 (Auto)"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Podrazumevano: 0 (auto)"
           }
         },
@@ -748,12 +730,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Load ICC profile"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Učitaj ICC profil"
           }
         },
@@ -913,12 +889,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Предусиление до применения коррекции громкости:"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Preamp gain:"
           }
         },
         "tr" : {
@@ -1120,12 +1090,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Maximum volume:"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Maksimalna jačina zvuka:"
@@ -1344,12 +1308,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Number of threads:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Broj niti:"
           }
         },
@@ -1539,12 +1497,6 @@
             "value" : "Povoliť mapovanie tonality"
           }
         },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable tone mapping"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1717,12 +1669,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zmeraný maximálny jas displeja. Pokiaľ je nastavený na 0, IINA túto hodnotu detekuje. V prípade zlyhania detekcie nastaví IINA cieľové maximum na 400."
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."
           }
         },
         "tr" : {
@@ -1899,12 +1845,6 @@
             "value" : "nits"
           }
         },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "nits"
-          }
-        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2055,12 +1995,6 @@
             "value" : "дБ"
           }
         },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2131,12 +2065,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Standard: 0 (Automatisch)"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Προεπιλογή: 0 (αυτόματο)"
           }
         },
         "en" : {
@@ -2272,12 +2200,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default: 0 (Auto)"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Podrazumevano: 0 (auto)"
@@ -2493,12 +2415,6 @@
             "value" : "(100-1000)"
           }
         },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(100-1000)"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2629,12 +2545,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Резервный вариант:"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fallback:"
           }
         },
         "tr" : {
@@ -2851,12 +2761,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Initial volume:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Početna jačina zvuka:"
           }
         },
@@ -3067,12 +2971,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Always use the dedicated GPU for rendering (if it exists). This can improve performance but may reduce battery life."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Uvek koristi namensku grafičku karticu za prikaz (ako postoji). Ova opcija može poboljšati performanse, ali i umanjiti trajanje baterije."
           }
         },
@@ -3224,12 +3122,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Выравнивание:"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ReplayGain:"
           }
         },
         "sv" : {
@@ -3396,12 +3288,6 @@
             "value" : "Если эта опция выключена, клиппинг будет предотвращен путем снижения коэффициента усиления."
           }
         },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "If this option is not enabled, clipping will be prevented by lowering the gain."
-          }
-        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3546,12 +3432,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Разрешить регулировку громкости"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Allow the volume gain to clip"
           }
         },
         "sv" : {
@@ -3708,12 +3588,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Без регулировки"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No adjustment"
           }
         },
         "sv" : {
@@ -3912,12 +3786,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Učitaj ICC profil za trenutni ekran i pomoću njega transformiši video RGB u prikaz ekrana (samo za SDR režim)"
           }
         },
@@ -4051,12 +3919,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Усиление, применяемое, если в файле нет тегов коррекции громкости (ReplayGain)."
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain to apply if the file has no ReplayGain tags."
           }
         },
         "sv" : {
@@ -4221,13 +4083,13 @@
             "value" : "Video:"
           }
         },
-        "nb" : {
+        "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Video:"
           }
         },
-        "nl" : {
+        "no" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Video:"
@@ -4270,12 +4132,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Video:"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Video:"
@@ -4465,12 +4321,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Povoliť mapovanie tonality obrazu na displeji"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable tone mapping images onto the display"
           }
         },
         "tr" : {
@@ -4700,12 +4550,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hardware decoder:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Hardverski dekoder:"
           }
         },
@@ -4869,12 +4713,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "дБ"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dB"
           }
         },
         "sv" : {
@@ -5070,12 +4908,6 @@
             "value" : "Algoritmus:"
           }
         },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Algorithm:"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5258,12 +5090,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enable HDR support"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Omogući podršku za HDR"
           }
         },
@@ -5429,16 +5255,16 @@
             "value" : "Izslēgta"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Deaktivert"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Uitgeschakeld"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deaktivert"
           }
         },
         "pl" : {
@@ -5478,12 +5304,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disabled"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Onemogućeno"
@@ -5631,12 +5451,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Коэффициент предусиления, применяемый к коррекции громкости ReplayGain."
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pre-amplification gain to apply to the ReplayGain gain."
           }
         },
         "tr" : {
@@ -5840,12 +5654,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Preferred audio device:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Željeni audio-uređaj:"
           }
         },
@@ -6017,16 +5825,16 @@
             "value" : "Skaņa:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lyd:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Audio:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lyd:"
           }
         },
         "pl" : {
@@ -6066,12 +5874,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Audio:"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Audio:"
@@ -6263,12 +6065,6 @@
             "value" : "Algoritmus na mapovanie tonality obrazu na displeji."
           }
         },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Algorithm to use for tone mapping images onto the display."
-          }
-        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6425,16 +6221,16 @@
             "value" : "Automātiska"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Auto"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Automatisch"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto"
           }
         },
         "pl" : {
@@ -6474,12 +6270,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Auto"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Automatski"
@@ -6560,7 +6350,7 @@
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Antal tråde:"
+            "value" : "Antal af tråde:"
           }
         },
         "de" : {
@@ -6686,7 +6476,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Număr de threaduri:"
+            "value" : "Numărul firelor:"
           }
         },
         "ru" : {
@@ -6702,12 +6492,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Number of threads:"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Broj niti:"
@@ -6939,12 +6723,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "S/PDIF output:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "S/PDIF izlaz:"
           }
         },
@@ -7090,12 +6868,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Усиление трека"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Track gain"
           }
         },
         "tr" : {
@@ -7299,12 +7071,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Preferred language:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Željeni jezik:"
           }
         },
@@ -7500,12 +7266,6 @@
             "value" : "Cieľová špička:"
           }
         },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Target peak:"
-          }
-        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7630,12 +7390,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Отрегулируйте увеличение громкости в соответствии со значениями выравнивания громкости, хранящимися в метаданных файла."
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adjust volume gain according to ReplayGain values stored in the file metadata."
           }
         },
         "tr" : {
@@ -7846,12 +7600,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Force dedicated GPU"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Nametni namensku grafičku karticu"
           }
         },
@@ -8003,12 +7751,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Драйвер аудио:"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Audio driver:"
           }
         },
         "tr" : {
@@ -8182,12 +7924,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enable HDR mode by default when playing HDR videos."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Podrazumevano omogući HDR režim tokom reprodukcije HDR video-zapisa."
           }
         },
@@ -8335,12 +8071,6 @@
             "value" : "Усиление альбома"
           }
         },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Album gain"
-          }
-        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8483,12 +8213,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Регулировка усиления:"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gain adjustment:"
           }
         },
         "sv" : {

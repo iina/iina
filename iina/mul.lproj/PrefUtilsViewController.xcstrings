@@ -179,7 +179,7 @@
             "value" : "Vymazať uložené priebehy prehrávania…"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obriši sačuvani tok reprodukcije…"
@@ -255,12 +255,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Video"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Βίντεο"
           }
         },
         "en" : {
@@ -353,10 +347,10 @@
             "value" : "Video"
           }
         },
-        "nb" : {
+        "ml" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Video"
+            "value" : "വീഡിയോ"
           }
         },
         "nl" : {
@@ -365,10 +359,16 @@
             "value" : "Video"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Video"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wideo"
+            "value" : "Obraz"
           }
         },
         "pt" : {
@@ -401,7 +401,7 @@
             "value" : "Video"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Video"
@@ -440,13 +440,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "视频文件"
+            "value" : "视频"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "影片檔案"
+            "value" : "視訊"
           }
         }
       }
@@ -629,7 +629,7 @@
             "value" : "Tlačítko popod vymaže celú históriu prehrávania."
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dugme ispod izbrisaće celokupnu istoriju reprodukcije i stavke u meniju „Otvori nedavnu stavku“."
@@ -1031,7 +1031,7 @@
             "value" : "Tlačítko popod vymaže všetky uložené náhľady."
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dugme ispod izbrisaće sve keširane sličice."
@@ -1247,7 +1247,7 @@
             "value" : "Nastaviť IINA ako Predvolenú Aplikáciu…"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Postavi aplikaciju IINA kao podrazumevanu…"
@@ -1475,7 +1475,7 @@
             "value" : "Vyčistené"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obrisano."
@@ -1721,6 +1721,12 @@
             "value" : "متصفح Firefox"
           }
         },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Firefox"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1877,7 +1883,7 @@
             "value" : "Firefox"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Firefox"
@@ -2006,7 +2012,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Effacé."
+            "value" : "Effacées."
           }
         },
         "he" : {
@@ -2042,7 +2048,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Eliminata."
+            "value" : "Eliminati."
           }
         },
         "ja" : {
@@ -2060,7 +2066,7 @@
         "lv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notīrīta."
+            "value" : "Iztīrīta."
           }
         },
         "nl" : {
@@ -2105,7 +2111,7 @@
             "value" : "Vyčistené"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obrisano."
@@ -2276,7 +2282,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "한 번의 클릭으로 링크 또는 방문중인 웹페이지의 영상을 재생합니다.\nyoutube-dl 프로그램이 지원하는 웹페이지에서만 동작합니다."
+            "value" : "한 번의 클릭으로 링크 또는 방문중인 웹페이지의 영상을 재생합니다.\\nyoutube-dl 프로그램이 지원하는 웹페이지에서만 동작합니다."
           }
         },
         "lv" : {
@@ -2327,7 +2333,7 @@
             "value" : "Otvor odkazy v IINA s jedným kliknutím. Webstránka musí byť podporovaná youtube-dl."
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otvarajte veze ili trenutnu veb-stranicu u programu IINA jednim klikom. Veb-sajt mora podržavati program youtube-dl."
@@ -2543,7 +2549,7 @@
             "value" : "Vymazať Uložené Náhľady…"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obriši keš za sličice…"
@@ -2585,6 +2591,12 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"OK\"; ObjectID = \"IkF-qG-s4j\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "У реду"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2595,6 +2607,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "حسناً"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добра"
           }
         },
         "ca" : {
@@ -2612,7 +2636,7 @@
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ok"
+            "value" : "OK"
           }
         },
         "de" : {
@@ -2648,13 +2672,13 @@
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "قبول"
+            "value" : "باشه"
           }
         },
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ok"
+            "value" : "OK"
           }
         },
         "fr" : {
@@ -2717,10 +2741,16 @@
             "value" : "Labi"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Godkjenn"
+            "value" : "ОК"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ശരി"
           }
         },
         "nl" : {
@@ -2729,10 +2759,16 @@
             "value" : "OK"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Godkjenn"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ok"
+            "value" : "OK"
           }
         },
         "pt" : {
@@ -2765,13 +2801,13 @@
             "value" : "OK"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "У реду"
+            "value" : "V redu"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "U redu"
@@ -2801,6 +2837,12 @@
             "value" : "ОК"
           }
         },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ٹھیک ہے"
+          }
+        },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2810,7 +2852,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "好"
+            "value" : "确认"
           }
         },
         "zh-Hant" : {
@@ -2859,12 +2901,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Audio"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ήχος"
           }
         },
         "en" : {
@@ -2918,7 +2954,7 @@
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zvuk"
+            "value" : "Audio"
           }
         },
         "hu" : {
@@ -2954,19 +2990,19 @@
         "lv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Skaņas"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lyd"
+            "value" : "Skaņa"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Audio"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lyd"
           }
         },
         "pl" : {
@@ -3005,7 +3041,7 @@
             "value" : "Zvuk"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zvuk"
@@ -3020,7 +3056,7 @@
         "ta" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "கேட்பொலி"
+            "value" : "ஒலி"
           }
         },
         "tr" : {
@@ -3044,13 +3080,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "音频文件"
+            "value" : "音频"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "音訊檔案"
+            "value" : "音訊"
           }
         }
       }
@@ -3059,6 +3095,12 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"Cancel\"; ObjectID = \"kbP-VI-dmT\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Откажи"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3069,6 +3111,30 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "إلغاء"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ləğv et"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Скасаваць"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отмяна"
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "বাতিল"
           }
         },
         "ca" : {
@@ -3119,10 +3185,16 @@
             "value" : "Cancelar"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utzi"
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "انصراف"
+            "value" : "لغو"
           }
         },
         "fi" : {
@@ -3161,10 +3233,22 @@
             "value" : "Mégse"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Չեղարկել"
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Batal"
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hætta við"
           }
         },
         "it" : {
@@ -3179,6 +3263,12 @@
             "value" : "キャンセル"
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ರದ್ದುಮಾಡು"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3191,16 +3281,28 @@
             "value" : "Atcelt"
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avbryt"
+            "value" : "Откажи"
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "റദ്ദാക്കുക"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Annuleer"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avbryt"
           }
         },
         "pl" : {
@@ -3239,13 +3341,13 @@
             "value" : "Zrušiť"
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Откажи"
+            "value" : "Prekliči"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Otkaži"
@@ -3263,6 +3365,12 @@
             "value" : "ரத்துசெய்"
           }
         },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ยกเลิก"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3272,7 +3380,13 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Відміна"
+            "value" : "Скасувати"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "منسوخ"
           }
         },
         "vi" : {
@@ -3299,6 +3413,12 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"Playlist\"; ObjectID = \"MGo-J8-zWE\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Плејлиста"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3333,12 +3453,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wiedergabeliste"
-          }
-        },
-        "el" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Λίστα Αναπαραγωγής"
           }
         },
         "en" : {
@@ -3407,6 +3521,12 @@
             "value" : "Playlist"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spilunarlisti"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3428,13 +3548,7 @@
         "lv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Atskaņošanas saraksta"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Spilleliste"
+            "value" : "Atskaņošanas saraksts"
           }
         },
         "nl" : {
@@ -3443,10 +3557,16 @@
             "value" : "Afspeellijst"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spilleliste"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lista odtwarzania"
+            "value" : "Playlista"
           }
         },
         "pt" : {
@@ -3482,19 +3602,13 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Плејлиста"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Plejlista"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Spellistor"
+            "value" : "Spellista"
           }
         },
         "tr" : {
@@ -3518,13 +3632,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "播放列表文件"
+            "value" : "播放列表"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "播放列表檔案"
+            "value" : "播放列表"
           }
         }
       }
@@ -3707,7 +3821,7 @@
             "value" : "Vymazať Históriu Prehrávania…"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obriši istoriju reprodukcije…"
@@ -3765,6 +3879,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "التطبيق الافتراضي"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Прадвызначаная праграма"
           }
         },
         "ca" : {
@@ -3929,7 +4049,7 @@
             "value" : "Predvolená Aplikácia"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Podrazumevana aplikacija"
@@ -4106,7 +4226,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "\"watch later\" 폴더에 있는 모든 이어보기 파일을 지웁니다.\n이 파일에는 재생중에 적용된 모든 설정과 재생위치가 기록되어 있습니다."
+            "value" : "\"watch later\" 폴더에 있는 모든 이어보기 파일을 지웁니다.\\n이 파일에는 재생중에 적용된 모든 설정과 재생위치가 기록되어 있습니다."
           }
         },
         "lv" : {
@@ -4157,7 +4277,7 @@
             "value" : "Tlačítko popod vymaže všetky súbory v \"pozrieť neskôr\" zložke. Tieto súbory obsahujú posledné pozície prehrávaní a nastavenia aplikované počas prehrávaní."
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dugme ispod izbrisaće sve datoteke u fascikli „Gledaj kasnije“. Te datoteke sadrže celokupan sačuvani tok reprodukcije i postavke primenjene tokom reprodukcije."
@@ -4209,6 +4329,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "مسح ذاكرة التخزين المؤقتة"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ачысціць кэш"
           }
         },
         "ca" : {
@@ -4373,7 +4499,7 @@
             "value" : "Vymazať Cache"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obriši keš"
@@ -4595,7 +4721,7 @@
             "value" : "Vypočítavam…"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Izračunavanje…"
@@ -4817,7 +4943,7 @@
             "value" : "Aktuálne uložené náhľady:"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Trenutni keš za sličice:"
@@ -5033,7 +5159,7 @@
             "value" : "Prosím označte druhy médií, pre ktoré chcete nastaviť IINA ako Predvolenú Aplikáciu."
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Izaberite tipove medijski datoteka za koje želite da IINA bude podrazumevana aplikacija."
@@ -5471,6 +5597,12 @@
             "value" : "متصفح كروم"
           }
         },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chrome"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5627,7 +5759,7 @@
             "value" : "Chrome"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chrome"
@@ -5855,7 +5987,7 @@
             "value" : "Získať IINA rozšírenie pre internetové prehliadače"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nabavi proširenja pregledača za aplikaciju IINA"

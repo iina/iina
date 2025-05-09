@@ -171,7 +171,8 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
       player.overrideAutoSwitchToMusicMode = false
       player.switchBackFromMiniPlayer(automatically: true, showMainWindow: false)
     }
-    player.mainWindow.close()
+    player.stop()
+    player.events.emit(.windowWillClose)
   }
 
   // MARK: - Window delegate: Size

@@ -75,8 +75,6 @@
 "eq.preset.rock" = "Rock";
 "eq.preset.small_speaker" = "Klein luidspreker";
 "eq.preset.spoken_word" = "Gesproke woord";
-
-"alert.eq.new_profile.title" = "New EQ Profile";
 "alert.eq.new_profile.message" = "Voer ’n profielnaam in.";
 "alert.eq.rename.title" = "Hernoem huidige profiel";
 "alert.eq.rename.message" = "Voer ’n nuwe profielnaam in.";
@@ -141,7 +139,7 @@
 "osd.playlist_loop" = "Herhaal afspeellys";
 "osd.no_loop" = "Deaktiveer herhaling";
 
-"preference.title" = "Voorkeure";
+"preference.title" = "Instellings";
 "preference.general" = "Algemeen";
 "preference.ui" = "Koppelvlak";
 "preference.video_audio" = "Video/Oudio";
@@ -167,14 +165,9 @@
 "preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "volledig";
 "preference.sub_override_level.yes" = "yes";
-
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
 "preference.sub_override_level.descriptive_text.force" = "Pas alle onderskrifstyle toe.";
 "preference.sub_override_level.descriptive_text.scale" = "Pas die skaalinstellings toe saam met die stelinstellings in hierdie instellings.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
 "preference.sub_override_level.descriptive_text.yes" = "Pas al die stylinstellins in hierdie afdeling toe.";
-
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
 "preference.ytdl_plugin_installed" = "Die ingeboude youtube-dl-ondersteuning is gedeaktiveer aangesien die Aanlen media-inprop geïnstalleer is.";
 
 "menu.volume" = "Volume: %d";
@@ -263,9 +256,7 @@
 "alert.config.duplicate.title" = "Duplikaat konfigurasie";
 "alert.config.duplicate.message" = "Voer ’n naam vir die gedupliseerde konfigurasielêer in.";
 "alert.config.empty_name" = "Die naam mag nie leeg wees nie.";
-"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Lêer bestaan reeds";
-"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Kan nie konfigurasielêer skep nie!\n%@";
 "alert.config.cannot_write" = "Kan nie konfigurasielêer skryf nie!";
 "alert.config.rename.title" = "Hernoem sneltoetskonfigurasie";
@@ -287,7 +278,6 @@
 "alert.screenshot.error_taking" = "Kan nie ’n skermkiekie maak nie!";
 
 "alert.sub.no_selected" = "Kies asb. eers ’n afgelaaide onderskrif.";
-"alert.sub_lang_not_set" = "Stel asb. eers ’n voorkeuronderskriftaal in instellings voor OpenSubtitles gebruik word. Engels (‘eng’) sal nou gebruik word.";
 "alert.sub.cannot_save_passwd" = "Kan nie wagwoord in u Sleutelhouer bewaar nie: %@";
 "alert.sub.cannot_login" = "Kan nie aanteken nie. Gaan u gebruikersnaam, wagwoord en netwerkstatus na.\n\n%@";
 "alert.sub.save_downloaded.title" = "Bewaar afgelaaide onderskrif";
@@ -349,7 +339,6 @@
 "alert.plugin_uninstall.message" = "Hierdie inprop sal van u skyf geskrap word.";
 "alert.plugin_reinstall.title" = "Inprop %@ bestaan reeds";
 "alert.plugin_reinstall.message" = "Wil u die inprop weer installeer?";
-"alert.duplicated_plugin_id" = "Gedupliseerde inpropidentifiseerders bespeur. Twee of meer inproppe het dieselfde identifiseerder “%@”. Die kan abnormale gedrag veroorsaak. Sien dit in Voorkeure - Inproppe en rapporteer dit aan die outeurs. Indien ’n inprop lokaal geïnstalleer is kan u ook die identifiseerder in die inprop se Info.json-lêer verander.";
 "alert.plugin_no_update" = "Geen bywerking gevind.";
 "alert.plugin_update_found.title" = "Bywerking gevind vir %@";
 "alert.plugin_update_found.message" = "Die nuutste weergawe is %@. U het %@. Wil u bywerk?";
@@ -432,8 +421,6 @@
 "permissions.network-request.name" = "Netwerkversoek";
 "permissions.network-request.desc" = "Hierdie inprop kan versoeke doen aan of data oplaai na hierdie webwerwe:";
 "permissions.network-request.any_site" = "Enige werf";
-"permissions.show-osd.name" = "Show OSD";
-"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
 "permissions.show-alert.name" = "Toon waarskuwings";
 "permissions.show-alert.desc" = "Hierdie inprop kan opwipwaarskuwings toon.";
 "permissions.video-overlay.name" = "Voeg oorlegsel oor video’s";

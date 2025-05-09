@@ -141,7 +141,7 @@
 "osd.playlist_loop" = "تكرار قائمة التشغيل";
 "osd.no_loop" = "تعطيل التكرار";
 
-"preference.title" = "التفضيلات";
+"preference.title" = "الإعدادات";
 "preference.general" = "عام";
 "preference.ui" = "واجهة التشغيل";
 "preference.video_audio" = "فيديو/صوت";
@@ -287,7 +287,6 @@
 "alert.screenshot.error_taking" = "لا يمكن التقاط لقطة شاشة!";
 
 "alert.sub.no_selected" = "الرجاء تحديد ترجمة تم تنزيلها أولاً.";
-"alert.sub_lang_not_set" = "الرجاء تعيين لغات الترجمة المفضلة في التفضيلات قبل استخدام الترجمات المفتوحة. سيتم استخدام اللغة الإنجليزية (eng) هذه المرة.";
 "alert.sub.cannot_save_passwd" = "لا يمكن حفظ كلمة المرور الخاصة بك في سلسلة المفاتيح: %@";
 "alert.sub.cannot_login" = "لا يمكن تسجيل الدخول. الرجاء التحقق من اسم المستخدم وكلمة المرور وحالة الشبكة.\n\n%@";
 "alert.sub.save_downloaded.title" = "حفظ الترجمة التي تم تنزيلها";
@@ -349,7 +348,6 @@
 "alert.plugin_uninstall.message" = "سيتم حذف الإضافة من القرص الخاص بك.";
 "alert.plugin_reinstall.title" = "الإضافة %@ موجودة بالفعل";
 "alert.plugin_reinstall.message" = "هل تريد إعادة تثبيت الإضافة؟";
-"alert.duplicated_plugin_id" = "تم اكتشاف معرفات مكررة للملحقات. ملحقان أو أكثر لهما نفس المعرف \"%@\". وقد يسبب هذا سلوكيات غير طبيعية. يرجى العثور عليها في التفضيلات - الإضافات والإبلاغ إلى مؤلفيها. إذا تم تثبيت البرنامج المساعد محلياً، فيمكنك أيضاً تغيير معرفته يدوياً في ملف البرنامج المساعد Info.json.";
 "alert.plugin_no_update" = "لم يتم العثور على تحديثات.";
 "alert.plugin_update_found.title" = "تم العثور على تحديث لـ %@";
 "alert.plugin_update_found.message" = "أحدث إصدار هو %@. لديك %@. هل ترغب في التحديث؟";

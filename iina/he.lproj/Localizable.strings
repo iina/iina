@@ -27,7 +27,6 @@
 // Initial Window
 "initial.announcement" = "אתה משתמש בגרסת %@ של IINA";
 "initial.beta.desc" = "אם ברצונך לחזור לגרסה הרגילה, הסר את הסימון \"קבל עדכוני בטא\" בהגדרות > כללי, והתקן את הגרסה הרגילה מ<a href=\"https://iina.io\">האתר הרשמי</a> שלנו.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "בניית ניפוי באגים בדרך כלל אינה מותאמת לטובת ביצועים, ולכן אינה מומלצת לשימוש יומיומי. בניית ניפוי באגים לא תומכת בעדכון אוטומטי.";
 "initial.bug_report" = "דווח באמצעות <a href=\"https://github.com/iina/iina/issues\">בעיות GitHub</a>.";
 
@@ -65,11 +64,9 @@
 "eq.preset.increase_vocal" = "הגברת שירה";
 "eq.preset.jazz" = "ג׳אז";
 "eq.preset.latin" = "לטינית";
-"eq.preset.loundness" = "Loundness";
 "eq.preset.lounge" = "טרקלין";
 "eq.preset.piano" = "פסנתר";
 "eq.preset.pop" = "פופ";
-"eq.preset.rnb" = "R&B";
 "eq.preset.reduce_bass" = "הפחתת צלילים נמוכים";
 "eq.preset.reduce_treble" = "הפחתת צלילים גבוהים";
 "eq.preset.rock" = "רוק";
@@ -141,7 +138,7 @@
 "osd.playlist_loop" = "חזרה על רשימת ההשמעה";
 "osd.no_loop" = "חזרה מושבתת";
 
-"preference.title" = "העדפות";
+"preference.title" = "הגדרות";
 "preference.general" = "כללי";
 "preference.ui" = "ממשק משתמש";
 "preference.video_audio" = "וידאו/שמע";
@@ -167,15 +164,7 @@
 "preference.sub_override_level.scale" = "קנה מידה";
 "preference.sub_override_level.strip" = "הסרת הכל";
 "preference.sub_override_level.yes" = "מאופשרת";
-
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
 "preference.sub_override_level.descriptive_text.force" = "החל את כל סגנונות הכתוביות.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
-
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
 "menu.volume" = "עוצמת שמע: %d";
 "menu.volume_muted" = "עוצמת שמע: %d (מושתק)";
@@ -222,7 +211,6 @@
 "menu.manage_plugins" = "נהל תוספים…";
 "menu.developer_tool" = "כלי פיתוח";
 "menu.more_plugin" = "עוד…";
-"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
 "menu.reload_plugins" = "טען מחדש את כל התוספים";
 "menu.show_plugins_panel" = "הצג פאנל תוספים";
 "menu.hide_plugins_panel" = "הסתר פאנל תוספים";
@@ -256,19 +244,15 @@
 "alert.error_saving_file" = "אירעה שגיאה בעת שמירת %@: %@";
 "alert.error_deleting_file" = "שגיאה במחיקת הקובץ.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
-
 "alert.config.new.title" = "תצורת מקשים חדשה";
 "alert.config.new.message" = "נא להזין שם עבור התצורה החדשה.";
 "alert.config.duplicate.title" = "תצורה כפולה";
 "alert.config.duplicate.message" = "יש להזין שם עבור קובץ התצורה המשוכפל.";
 "alert.config.empty_name" = "השם לא יכול להיות ריק.";
-"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "הקובץ כבר קיים";
 "alert.config.file_existing.message" = "קובץ תצורה באותו שם קובץ כבר קיים. בחר אישור כדי להציג את הקובץ ב-Finder.";
 "alert.config.cannot_create" = "יצירת קובץ התצורה נכשלה!\n%@";
 "alert.config.cannot_write" = "הכתיבה לקובץ התצורה נכשלה!";
-"alert.config.rename.title" = "Rename Input Configuration";
 "alert.config.rename.message" = "נא להזין שם עבור התצורה.";
 
 "alert.filter.incorrect" = "אירעה שגיאה בעת הגדרת המסננים. אנא בדוק את פורמט הפרמטר שהגדרת.";
@@ -287,7 +271,6 @@
 "alert.screenshot.error_taking" = "שגיאה בביצוע צילום מסך!";
 
 "alert.sub.no_selected" = "אנא בחר תחילה כתוביות שהורדת.";
-"alert.sub_lang_not_set" = "אנא הגדר שפות כתוביות מועדפות בהגדרות לפני השימוש ב-OpenSubtitles. אנגלית (en) תשמש הפעם.";
 "alert.sub.cannot_save_passwd" = "שמירת הסיסמה למחזיק המפתחות נכשלה: %@";
 "alert.sub.cannot_login" = "ההתחברות נכשלה. אנא בדוק את שם המשתמש, הסיסמה ומצב הרשת שלך.\n\n%@";
 "alert.sub.save_downloaded.title" = "שמור כתוביות שהורדו";
@@ -349,7 +332,6 @@
 "alert.plugin_uninstall.message" = "התוסף יימחק מהדיסק.";
 "alert.plugin_reinstall.title" = "התוסף %@ כבר קיים";
 "alert.plugin_reinstall.message" = "האם ברצונך להתקין מחדש את התוסף?";
-"alert.duplicated_plugin_id" = "זוהו מזהי תוסף כפולים. לשני תוספים או יותר יש את אותו מזהה \"%@\". זה עלול לגרום להתנהגויות לא צפויות. אנא מצא אותם בהעדפות > תוספים ודווח למפתחים שלהם. אם תוסף מותקן באופן מקומי, תוכל גם לשנות ידנית את המזהה שלו בקובץ Info.json של התוסף.";
 "alert.plugin_no_update" = "לא נמצא עדכון.";
 "alert.plugin_update_found.title" = "נמצא עדכון עבור %@";
 "alert.plugin_update_found.message" = "הגרסה האחרונה היא %@. גרסתך הנוכחית היא %@. האם תרצה לעדכן?";

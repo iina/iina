@@ -16,12 +16,6 @@
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "6LO-6y-IsA"; */
 "6LO-6y-IsA.title" = "Boja:";
 
-/* Class = "NSSegmentedCell"; 88M-pi-2Hc.ibShadowedLabels[0] = "Primary Subtitles"; ObjectID = "88M-pi-2Hc"; */
-"88M-pi-2Hc.ibShadowedLabels[0]" = "Primary Subtitles";
-
-/* Class = "NSSegmentedCell"; 88M-pi-2Hc.ibShadowedLabels[1] = "Secondary Subtitles"; ObjectID = "88M-pi-2Hc"; */
-"88M-pi-2Hc.ibShadowedLabels[1]" = "Secondary Subtitles";
-
 /* Class = "NSButtonCell"; title = "Load External Audio Track…"; ObjectID = "8Ax-5X-osl"; */
 "8Ax-5X-osl.title" = "Učitaj spoljni zvučni zapis…";
 
@@ -91,9 +85,6 @@
 /* Class = "NSTextFieldCell"; title = "Subtitle delay:"; ObjectID = "Wkz-wW-sOM"; */
 "Wkz-wW-sOM.title" = "Kašnjenje titla:";
 
-/* Class = "NSTextFieldCell"; title = "Aspect ratio:"; ObjectID = "YgL-iV-bca"; */
-"YgL-iV-bca.title" = "Aspect ratio:";
-
 /* Class = "NSTextFieldCell"; title = "Text Style:"; ObjectID = "ZBd-13-lA1"; */
 "ZBd-13-lA1.title" = "Stil teksta:";
 
@@ -120,9 +111,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Contrast:"; ObjectID = "eDl-Si-LSa"; */
 "eDl-Si-LSa.title" = "Kontrast:";
-
-/* Class = "NSTabViewItem"; label = "Plugin"; ObjectID = "eE3-9i-hpU"; */
-"eE3-9i-hpU.label" = "Plugin";
 
 /* Class = "NSTextFieldCell"; title = "Hue:"; ObjectID = "eLh-fu-pMj"; */
 "eLh-fu-pMj.title" = "Nijansa:";
@@ -213,15 +201,3 @@
 
 /* Class = "NSTextFieldCell"; title = "HDR"; ObjectID = "UW4-by-XRS"; */
 "UW4-by-XRS.title" = "HDR";
-
-/* Class = "NSMenuItem"; title = "Save the current EQ as a preset…"; ObjectID = "sE0-LN-T8i"; */
-"sE0-LN-T8i.title" = "Save the current EQ as a preset…";
-
-/* Class = "NSMenuItem"; title = "Rename the current EQ preset…"; ObjectID = "2tD-0L-UUs"; */
-"2tD-0L-UUs.title" = "Rename the current EQ preset…";
-
-/* Class = "NSMenuItem"; title = "Remove the current EQ preset"; ObjectID = "dvI-Rj-7qF"; */
-"dvI-Rj-7qF.title" = "Remove the current EQ preset";
-
-/* Class = "NSMenuItem"; title = "Manual"; ObjectID = "LPh-nJ-GjN"; */
-"LPh-nJ-GjN.title" = "Manual";

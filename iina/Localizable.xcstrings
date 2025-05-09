@@ -479,7 +479,7 @@
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Παρακαλώ εισάγετε σύνδεσμο URL:"
+            "value" : "Παρακαλώ εισάγετε το σύνδεσμο URL:"
           }
         },
         "en" : {
@@ -497,7 +497,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Por favor, ingrese la dirección URL:"
+            "value" : "Por favor ingrese la URL:"
           }
         },
         "fa" : {
@@ -515,13 +515,13 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Veuillez entrer l'URL :"
+            "value" : "Veuillez saisir l'URL :"
           }
         },
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "אנא הזן כתובת URL:"
+            "value" : "אנא הזן URL:"
           }
         },
         "hi" : {
@@ -557,7 +557,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "URLを入力してください:"
+            "value" : "URLを入力:"
           }
         },
         "ko" : {
@@ -587,7 +587,7 @@
         "pt" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Por favor, introduza um URL:"
+            "value" : "Por favor, insira um URL:"
           }
         },
         "pt-BR" : {
@@ -605,7 +605,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Введите URL:"
+            "value" : "Пожалуйста, введите URL-адрес:"
           }
         },
         "sk" : {
@@ -635,7 +635,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Уведіть, будь ласка, URL:"
+            "value" : "Будь ласка, введіть URL:"
           }
         },
         "zh-Hans" : {
@@ -886,7 +886,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "\u0018加入 URL"
+            "value" : "加入 URL"
           }
         }
       }
@@ -4287,10 +4287,196 @@
     "alert.config.cannot_create" : {
       "extractionState" : "manual",
       "localizations" : {
+        "af" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kan nie konfigurasielêer skep nie!\n%@"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "لا يمكن إنشاء ملف التكوين!\n%@"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No es pot crear el fitxer de configuració!\n%@"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konfigurační soubor nelze vytvořit!\n%@"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kan ikke oprette konfigurationsfilen!\n%@"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konfigurationsdatei konnte nicht erstellt werden.\n%@"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Αδυναμία δημιουργίας αρχείου ρυθμίσεων!\n%@"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cannot create config file!\n%@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡No se puede crear el archivo de configuración!\n%@"
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فایل Config غیرقابل ساختن است\n%@"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Asetustiedostoa ei voitu luoda!\n%@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de créer le fichier de configuration ! %@"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "יצירת קובץ התצורה נכשלה!\n%@"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "कॉन्फ़िगरेशन फ़ाइल नहीं बना सकता है!\n%@"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nije moguće stvoriti konfiguracijsku datoteku!\n%@"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konfigurációs fájl nem hozható létre!\n%@"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tidak dapat membuat file konfigurasi!\n%@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile creare il file di configurazione!\n%@"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "設定ファイルが作成できません！\n%@"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "설정 파일을 만들 수 없습니다!\n%@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kan configuratiebestand niet aanmaken.\n%@"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie można utworzyć pliku konfiguracyjnego!\n%@"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível criar um ficheiro de configuração!\n%@"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não é possível criar arquivo de configuração!\n%@"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nu se poate crea fișierul de configurare!\n%@"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не удалось создать файл конфигурации!\n%@"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nedá sa vytvoriť konfiguračný súbor!\n%@"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kan inte skapa konfigurationsfil!\n%@"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yapılandırma dosyası oluşturulamıyor!\n%@"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не можу створити файл налаштувань!\n%@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法创建配置文件！\n%@"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無法建立設定檔\n%@"
           }
         }
       }
@@ -6880,7 +7066,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "기본 설정은 수정할 수 없습니다.\\n설정을 복제한 다음 수정하십시오."
+            "value" : "기본 설정은 수정할 수 없습니다.\n설정을 복제한 다음 수정하십시오."
           }
         },
         "nl" : {
@@ -8502,7 +8688,7 @@
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@: %@ को सहेजते समय त्रुटि आई\\n"
+            "value" : "%@: %@ को सहेजते समय त्रुटि आई\n"
           }
         },
         "hr" : {
@@ -9442,10 +9628,196 @@
     "alert.fatal_error" : {
       "extractionState" : "manual",
       "localizations" : {
+        "af" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fatale fout: %@ \nDie toepassing sal nou afsluit."
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "خطأ: %@ \nسيتم الخروج من التطبيق الآن."
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error: fatal %@ \nL'aplicació es tancarà ara."
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Závažná chyba: %@ \nAplikace se teď ukončí."
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kritisk fejl: %@ \nProgrammet afsluttes."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schwerwiegender Fehler: „%@“ \nProgramm wird beendet."
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Κρίσιμο Σφάλμα: %@ \nΗ Εφαρμογή θα τερματιστεί τώρα."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fatal error: %@ \nThe application will exit now."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error fatal: %@ \nLa aplicación se cerrará ahora."
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vakava virhe: %@ \nSovellus lopetetaan nyt."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erreur fatale : %@ \nL'application va maintenant quitter."
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "שגיאה קריטית: %@ \nהאפליקציה תיסגר כעת."
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "घातक त्रुटि: %@ \n एप्लिकेशन अब बाहर निकल जाएगा।"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kobna greška: %@ \nAplikacija će se sada zatvoriti."
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kritikus hiba: %@\nAz alkalmazás bezárul."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kesalahan fatal: %@ \nAplikasi akan ditutup sekarang."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fatal error: %@ \nL'appicazione verrà subito chiusa."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "致命的なエラー: %@ \nアプリケーションを終了します。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "심각한 오류: %@ \n프로그램이 지금 종료됩니다."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fatale fout: %@ \nDe applicatie zal nu afsluiten."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Błąd krytyczny: %@ \nAplikacja zostanie zamknięta."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erro fatal: %@ \nA aplicação vai ser encerrada agora."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erro fatal: %@ \nAplicação vai terminar."
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eroare critică: %@ \nAplicația se va închide."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фатальная ошибка: %@ \nПриложение будет завершено."
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Závažná chyba: %@ \nAplikácia sa teraz ukončí."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fatal error: %@ \nProgrammet avslutas nu."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Onulmaz hata: %@\nUygulamadan şimdi çıkılacak."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Критична помилка: %@ \nПрограма зараз закриється."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lỗi nghiêm trọng: %@ \nỨng dụng sẽ đóng ngay bây giờ."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "严重错误：%@ \n程序将立即终止。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ㄧ嚴重錯誤：%@ \n，IINA 即將關閉。"
           }
         }
       }
@@ -9667,10 +10039,190 @@
     },
     "alert.filter_hwdec.message" : {
       "localizations" : {
+        "af" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "U is op die punt om ’n videofilter toe te pas. U huidige apparatuurdekodeerder ondersteun dit dalk nie goed nie. U kan apparatuurdekodering óf deaktiveer óf na Outomaties(Kopieer) wissel wat dubbel die geheue sal gebruik.\nU gaan dalk die vorige bewerking (soos die snoei) moet herhaal sodat dit kan werk."
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "أنت على وشك تطبيق فلتر فيديو. ومع ذلك، فترميز الأجهزة الحالية قد لا يدعم فلاتر الفيديو جيداً. يمكنك تعطيل فك ترميز الأجهزة أو التبديل إلى تلقائي (نسخ)، الذي سيستهلك ضعف الذاكرة.\nقد تحتاج إلى تكرار العملية السابقة (مثل إعداد حجم الفيديو) لجعلها تعمل."
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estàs a punt d'aplicat un filtre de vídeo. Malgrat això, és possible que el teu maquinari no suporti filtres de vídeo correctament. Pots desactivat la decodificació per maquinari o canviar a Automàtic(còpia), el qual consumeix el doble de memòria.\nPot ser que hagis de repetir la operació anterior (com establir l'espapçament) per a que funcioni."
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chystáte se použít video filtr, avšak váš současný hardware nemusí optimálně video filtry podporovat. Můžete buď vypnout hardwarové dekódování, nebo přepnout na automatické nastavení, které spotřebuje dvojnásobek paměti.\nMůže být nutné zopakovat předchozí krok (například, nastavení ořezu)."
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du er ved at aktivere et videofilter. Men din nuværende hardware encoder supportere mulighvis ikke videofiltre. Du kan enten deaktivere hardware decoding eller skifte til auto(kopi), hvilket optager dobbelt hukommelse."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du bist dabei einen Videofilter anzuwenden. Es könnte sein, dass Dein aktueller Hardwaredecoder diese nicht richtig unterstützt. Du kannst entweder das Hardwaredecoding abschalten oder auf Auto(Copy) umschalten. Auto(Copy) benötigt zweimal soviel Arbeitsspeicher. \nUnter Umständen musst Du die zuvor gemachten Einstellungen (wie zum Beispiel die Crop-Einstellungen) erneut vornehmen, damit es funktioniert."
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Πρόκειται να εμφαρμόσετε ένα φίλτρο βίντεο. Ωστόσο, ο τρέχων αποκωδικοποιητής υλικού σας ενδέχεται να μην υποστηρίζει σωστά τα φίλτρα βίντεο. Μπορείτε είτε να απενεργοποιήσετε την αποκωδικοποίηση υλικού, ή να μεταβείτε σε λειτουργία Αυτόματο(Αντιγραφή), κάτι που καταναλώνει διπλάσιο χώρο μνήμης.\nΜπορεί να χρειαστεί να επαναλάβετε προηγούμενες βήματα (όπως ρύθμισης της περικοπής) για να το κάνετε να λειτουργήσει."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estás a punto de aplicar un filtro de vídeo. Sin embargo, su descodificador actual puede no soportar bien los filtros de vídeo. Puede desactivar la descodificación por hardware o cambiar a Auto(Copia), que consumirá el doble de memoria. \nPuede que tenga que repetir la operación anterior (como, recortar) para que funcione."
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You are about to apply a video fliter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work."
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Olet ottamassa käyttöön videosuodatinta. Nykyinen laitteistodekooderi ei kuitenkaan välttämättä tue videosuodattimia. Voit joko poistaa laitteiston dekoodauksen käytöstä tai vaihtaa Auto (kopioi) -tilaan, joka vie kaksi kertaa enemmän muistia.\nSaatat joutua toistamaan edellisen toimenpiteen (kuten asettaa rajauksen), jotta se toimisi."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous êtes sur le point d'appliquer un filtre vidéo. Cependant, votre décodeur matériel actuel peut ne pas bien supporter les filtres vidéo. Vous pouvez désactiver le décodage matériel ou passer sur Auto(Copie), qui consommera deux fois plus de mémoire.\nVous devrez peut-être répéter l'opération précédente (par exemple, activer le rognage) pour que tout fonctionne."
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "אתה עומד להחיל מסנן וידאו. עם זאת, ייתכן שמפענח החומרה הנוכחי שלך לא תומך היטב במסנני וידאו. ניתן להשבית את פענוח החומרה, או לעבור ל-Auto(Copy), שיגרום לצריכת זיכרון כפולה.\nייתכן שתצטרך לחזור על הפעולה הקודמת (כמו הגדרת החיתוך) כדי שזה יעבוד."
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "आप एक वीडियो फ़्लिटर लागू करने वाले हैं। हालाँकि, आपका वर्तमान हार्डवेयर डिकोडर अच्छी तरह से वीडियो फिल्टर का समर्थन नहीं कर सकता है। आप या तो हार्डवेयर डिकोडिंग को अक्षम कर सकते हैं या ऑटो (कॉपी) पर स्विच कर सकते हैं, जो मेमोरी का दोगुना उपभोग करेगा।\nआपको इसे काम करने के लिए पिछला ऑपरेशन (जैसे फसल सेट करना) दोहराना पड़ सकता है।"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Egy videószűrő alkalmazására készülsz. Előfordulhat azonban, hogy jelenlegi hardveres dekódered nem támogatja megfelelően a videoszűrőket. Letilthatod a hardveres dekódolást, vagy átválthatsz Auto(Másolás) módra, ami kétszer annyi memóriát fogyaszt.\nElőfordulhat, hogy meg kell ismételned az előző műveletet (például a kivágás beállítását), hogy működjön."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anda akan menerapkan filter video. Namun, dekoder perangkat keras Anda saat ini mungkin tidak mendukung filter video dengan baik. Anda dapat menonaktifkan dekoding perangkat keras atau beralih ke Otomatis(Copy), yang akan menghabiskan dua kali memori.\nAnda mungkin perlu mengulangi operasi sebelumnya (seperti menyetel potongan) untuk membuatnya berfungsi."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stai per applicare un filtro video. Tuttavia, il decoder hardware attuale potrebbe non supportare in modo corretto i filtri video. Puoi disabilitare la decodifica hardware o passare a Auto(Copia), che consumerà il doppio della memoria.\nPotresti dover ripetere le operazioni precedenti (ad es. reimpostare il ritaglio) per applicarle in modo corretto."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "あなたは今ビデオフィルターを適用しようとしていますが、お使いのハードウェアデコーダーはビデオフィルタリングに対応していない可能性があります。ハードウェアデコーディングをオフにするか、2倍のメモリを消費する\"自動(コピー)\"をご使用ください。\n設定後、正常に動作させるには操作をやり直す(クロップ範囲の再設定など)必要がある場合があります。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "사용자 비디오 필터를 적용합니다. 그러나 현재 사용 중인 하드웨어 디코더가 비디오 필터를 제대로 지원하지 않을 수도 있습니다. 사용자 필터를 사용하지 않도록 설정하거나, 두 배의 메모리를 사용하는 자동(복사) 방식으로 전환하여 사용할 수 있습니다.\n이전에 설정했던 작업(예를 들어 화면 자르기 설정)이 동작하게 하려면 다시 설정해야 하는 경우도 있습니다."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Energiebesparing via hardware-acceleratie, je huidige instelling, is niet mogelijk met de gekozen videofilter. Wil je van afspeelmethode wisselen? Mogelijk moet je de filter daarna opnieuw toepassen."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zamierzasz zastosować filtr wideo.  Niestety twój dekoder sprzętowy może nie wpierać filtrów wideo.  Możesz wyłączyć dekodowanie sprzętowe lub przełączyć w tryb Auto(Copy) co spowoduje podwójne zużycie pamięci.  Może być wymagane powtórzenie poprzedniej operacji (jak ustawienie wycięcia) aby ustawienie zadziałało."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Está prestes a aplicar um filtro de vídeo. No entanto, o seu descodificador de hardware atual pode não suportar bem filtros de vídeo. Pode desativar a descodificação de hardware ou alternar para Auto(Copiar), que irá consumir o dobro da memória.\nPoderá precisar de repetir a operação anterior (como definir o corte) para que funcione."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Você está prestes a aplicar um filtro de vídeo. No entanto, seu decodificador de hardware atual pode não suportar bem filtros de vídeo. Você pode desabilitar a decodificação por hardware ou usar Auto(Copiar), que vai consumir o dobro de memória.\nVocê pode precisar repetir a ultima operação (por exemplo, ajustar o corte) para fazê-la funcionar."
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ești pe cale să aplici un filtru video. Cu toate acestea, decodorul hardware curent poate să nu suporte filtre video. Poți dezactiva decodarea hardware sau să schimbi la Auto(Copy), ceea ce va consuma de două ori mai multă memorie.\nPosibil să trebuiască să repeți ultima operațiune (ex: setarea decupării) pentru a funcționa."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вы собираетесь применить видеофильтр, но текущий режим аппаратного декодирования плохо поддерживает видеофильтры. Вы можете либо отключить аппаратное декодирование, что повысит нагрузку на ЦП, либо переключиться на режим «Автоматически (с копированием)», который будет потреблять вдвое больше памяти.\nВозможно, вам придется повторить предыдущую операцию (например, настройку обрезки), чтобы она сработала."
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Práve chcete použiť video filter. Avšak, aktuálny hardvéroví dekodér nemusí podporovať video filtre. Môžete vypnúť hardvéroví dekodér alebo ho prepnúť na Auto(Kópia), ktoré dvojnásobne zaťaží pamäť. Môžete zopakovať predchádzajúcu úpravu (napr. orezanie), aby všetko fungovalo."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du är på väg att aktivera ett videofilter, men det kan hända att din nuvarade hårdvaruavkodare inte stöder videofilter väl. Du kan antingen stänga av hårdvaruavkodning eller byta till Auto(Kopiera), vilket kommer att använda dubbla mängden minne.\nDu må behöva upprepa den föregående åtgärden (t.ex. att ange beskärning) för att få det att fungera."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bir video süzgeci uygulamak üzeresiniz; ancak donanımsal çözücünüz video süzgeçlerini iyi desteklemiyor olabilir. Donanımsal çözücüyü devre dışı bırakabilirsiniz veya “Otomatik (Kopya)” seçeneğini etkinleştirebilirsiniz. Bu seçenek donanım çözücüsünü kullanır; ancak bellek kullanımı iki kat daha fazladır.\nEylemin çalışması için son işlemi yinelemeniz gerekebilir (kırpma ayarı gibi)."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ви зараз застосуєте відеофільтр. Хоча ваш апаратний декодер, можливо, нормально не підтримує відеофільтри. Ви можете вимкнути апаратне декодування або перемкнутися в режим Авто (Копія), що використовує вдвічі більше пам'яті.\n\nВам треба буде повторити попередню операцію (наприклад, встановлення обрізування), щоб воно запрацювало."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "你正在添加视频滤镜。然而，当前的硬件解码器不能很好地支持视频滤镜。你可以禁用硬件解码，或使用支持「拷贝」的解码器 (将占用两倍内存)。\n你可能需要再操作一次（例如剪切）才能看到效果。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "您正在新增視訊濾鏡。然而，目前的硬體解碼器無法完整支援視訊濾鏡。您可以停用硬體解碼，或使用支援「拷貝」的解碼器（將會佔用兩倍記憶體）。\n您可能需要重複上一個操作（例如裁切）才能看到效果。"
           }
         }
       }
@@ -10505,7 +11057,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bitte gib die Zeit ein, zu der du springen willst.\\nBeispiel: 20:35"
+            "value" : "Bitte gib die Zeit ein, zu der du springen willst.\nBeispiel: 20:35"
           }
         },
         "el" : {
@@ -12064,7 +12616,7 @@
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avaa URL-osoite"
+            "value" : "Avaa URL"
           }
         },
         "fr" : {
@@ -12088,7 +12640,7 @@
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Otvori URL"
+            "value" : "Otvori URL adresu"
           }
         },
         "hu" : {
@@ -12214,7 +12766,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "URL aç"
+            "value" : "URL Aç"
           }
         },
         "uk" : {
@@ -15772,10 +16324,190 @@
     "alert.sub.cannot_login" : {
       "extractionState" : "manual",
       "localizations" : {
+        "af" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kan nie aanteken nie. Gaan u gebruikersnaam, wagwoord en netwerkstatus na.\n\n%@"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "لا يمكن تسجيل الدخول. الرجاء التحقق من اسم المستخدم وكلمة المرور وحالة الشبكة.\n\n%@"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No s'ha pogut iniciar sessió. Si us play, verifica el teu nom d'usuari, la contrasenya i l'estat de la xarxa.\n\n%@"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nelze se přihlásit. Zkontrolujte uživatelské jméno, heslo a připojení k síti.\n\n%@"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kan ikke logge ind. Venligst tjek dit brugernavn, kodeord og netværksstatus.\n\n%@"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anmelden nicht möglich. Bitte überprüfe Benutzername, Passwort und Netzwerkverbindung.\n\n%@"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Αδυναμία σύνδεσης. Παρακαλώ ελέγξτε το Όνομα Χρήστη, τον Κωδικό Εισόδου, και την κατάσταση δικτύου.\n\n%@"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cannot login. Please check your username, password and network status.\n\n%@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se puede iniciar sesión. Compruebe su nombre de usuario, contraseña, y el estado de la red.\n\n%@"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kirjautuminen ei onnistu. Tarkista käyttäjänimesi, salasanasi ja verkon tila.\n\n%@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de se connecter. Veuillez vérifier votre nom d'utilisateur, votre mot de passe et votre connexion Internet.\n\n%@"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ההתחברות נכשלה. אנא בדוק את שם המשתמש, הסיסמה ומצב הרשת שלך.\n\n%@"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "लॉग इन नहीं कर सकता। कृपया अपना उपयोगकर्ता नाम, पासवर्ड और नेटवर्क स्थिति जांचें। \n\n%@"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neuspjela prijava. Provjeri svoje korisničko ime, lozinku i stanje mreže.\n\n%@"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem tudsz bejelentkezni. Kérjük, ellenőrizd a felhasználónevedet, jelszavadat és a hálózat állapotát.\n\n%@"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tidak bisa masuk. Harap periksa nama pengguna, kata sandi, dan status jaringan Anda.\n\n%@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile accedere. Controlla il tuo nome utente, la password e la connessione di rete.\n\n%@"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ログインできません。ユーザー名とパスワード、ネットワーク環境をご確認ください。\n\n%@"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "로그인할 수 없습니다. 계정 이름과 암호, 네트워크 상태를 확인하십시오.\n\n%@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kan niet inloggen. Controleer je gebruikersnaam, wachtwoord en netwerkverbinding.\n\n%@"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Logowanie nie powiodło się. Sprawdź swoją nazwę użytkownika, hasło oraz stan sieci.\n\n%@"
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossível iniciar sessão. Por favor verifique o seu nome de utilizador, palavra-passe e estado da rede.\n\n%@"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossível logar. Verifique usuário, senha ou estado da rede.\n\n%@"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nu se poate efectua login. Te rog verifică numele de utilizator, parola și starea rețelei.\n\n%@"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не удалось выполнить вход. Проверьте имя пользователя, пароль и состояние сети.\n\n%@"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nedá sa prihlásiť. Skontrolujte používateľské meno, heslo a stav siete. \n\n%@"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kan ej logga in. Vänligen kontrollera ditt användarnamn, lösenord och nätverksstatus.\n\n%@"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Giriş yapılamıyor. Lütfen kullanıcı adınızı, şifrenizi ve ağ durumunuzu denetleyin.\n\n%@"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не можу зайти. Будь ласка, перевірте ім'я, пароль та статус мережі.\n\n%@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法登录。请检查您的用户名、密码及网络状态。\n\n%@"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "登入失敗，請檢查您的使用者帳戶、密碼、網路連線。\n\n%@"
           }
         }
       }
@@ -16428,10 +17160,76 @@
     "alert.target_peak.bad_value" : {
       "extractionState" : "manual",
       "localizations" : {
+        "af" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die waarde “%@” is ongeldig.\nVerskaf asb. ’n waarde tussen 10 en 10000, of 0."
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "القيمة \"%@\" غير صالحة.\nالرجاء استخدام قيمة بين 10 و 10000، أو 0."
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hodnota „%@“ je neplatná.\nUveďte hodnotu mezi 10 a 10000 nebo 0."
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Værdien \"%@\" er ikke valid.\nAngiv venligst en værdi mellem 10 og 10000 eller 0."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La valeur \"%@\" est invalide.\nVeuillez fournir une valeur comprise entre 10 et 10000, ou 0."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il valore '%@' non è valido.\nInserisci un valore compreso tra 10 e 10000, oppure 0."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Значение \"%@\" является недопустимым.\nПожалуйста, введите значение в диапазоне от 10 до 10000, либо 0."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“%@” değeri geçersiz.\nLütfen 10 ila 10000 arasında bir değer veya 0 girin."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Значення \"%@\" є неприпустимим.\nБудь ласка, вкажіть значення від 10 до 10000 або 0."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "数值 “%@” 是无效的。\n请提供一个介于 10 和 10000 之间的数值，或 0。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "數值「%@」無效。 \n請提供 0 或是 10 到 10000 之間的值。"
           }
         }
       }
@@ -21866,7 +22664,7 @@
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "रद्द करें"
+            "value" : "रद्द"
           }
         },
         "hr" : {
@@ -22936,7 +23734,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "OK"
+            "value" : "Oke"
           }
         },
         "no" : {
@@ -23032,13 +23830,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "确认"
+            "value" : "确定"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "好"
+            "value" : "確定"
           }
         }
       }
@@ -24561,7 +25359,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "하드웨어 디코딩을 사용합니다.\\n비디오 필터 대부분을 사용할 수 없게 됩니다."
+            "value" : "하드웨어 디코딩을 사용합니다.\n비디오 필터 대부분을 사용할 수 없게 됩니다."
           }
         },
         "nl" : {
@@ -24758,7 +25556,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "하드웨어 디코딩을 사용합니다.\\n두 배의 메모리를 사용하지만, 비디오 필터를 적용할 수 있습니다."
+            "value" : "하드웨어 디코딩을 사용합니다.\n두 배의 메모리를 사용하지만, 비디오 필터를 적용할 수 있습니다."
           }
         },
         "nl" : {
@@ -31349,7 +32147,7 @@
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "توقف"
+            "value" : "إيقاف مؤقت"
           }
         },
         "be" : {
@@ -31367,7 +32165,7 @@
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "pozastavení"
+            "value" : "Pozastavit"
           }
         },
         "da" : {
@@ -31403,7 +32201,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pausa"
+            "value" : "Pausar"
           }
         },
         "fa" : {
@@ -31433,19 +32231,19 @@
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ठहरें"
+            "value" : "रोकें"
           }
         },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pauziraj"
+            "value" : "Zaustavi"
           }
         },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Szünet"
+            "value" : "Pause (Megállít)"
           }
         },
         "id" : {
@@ -31511,7 +32309,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pausa"
+            "value" : "Pausar"
           }
         },
         "ro" : {
@@ -31523,7 +32321,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "паузу"
+            "value" : "Пауза"
           }
         },
         "sk" : {
@@ -31559,7 +32357,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "паузу"
+            "value" : "Пауза"
           }
         },
         "vi" : {
@@ -32191,7 +32989,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fortsetzen"
+            "value" : "Wiedergabe"
           }
         },
         "el" : {
@@ -32215,7 +33013,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Continuar"
+            "value" : "Reanudar"
           }
         },
         "fa" : {
@@ -32233,19 +33031,19 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reprendre"
+            "value" : "Lire"
           }
         },
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "המשך את"
+            "value" : "המשך"
           }
         },
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "रिज्यूम"
+            "value" : "पुनः आरंभ"
           }
         },
         "hr" : {
@@ -32281,13 +33079,13 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "続きから再生"
+            "value" : "再生"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "이어보기"
+            "value" : "재생"
           }
         },
         "lv" : {
@@ -32317,7 +33115,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wznowienie"
+            "value" : "Wznów"
           }
         },
         "pt" : {
@@ -32329,7 +33127,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Continuar"
+            "value" : "Reproduzir"
           }
         },
         "ro" : {
@@ -32341,7 +33139,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Продолжить"
+            "value" : "Возобновить"
           }
         },
         "sk" : {
@@ -32359,19 +33157,19 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Återuppta"
+            "value" : "Fortsätt"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sürdür:"
+            "value" : "Sürdür"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Продовжити"
+            "value" : "Відновити"
           }
         },
         "vi" : {
@@ -32383,13 +33181,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "继续播放"
+            "value" : "继续"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "繼續播放"
+            "value" : "繼續"
           }
         }
       }
@@ -33057,7 +33855,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "速度：%@x"
+            "value" : "播放速度"
           }
         },
         "zh-Hant" : {
@@ -37144,7 +37942,7 @@
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "خلط"
+            "value" : "خلْط"
           }
         },
         "be" : {
@@ -37174,7 +37972,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zufällige Wiedergabe"
+            "value" : "Zufallswiedergabe"
           }
         },
         "el" : {
@@ -37210,7 +38008,7 @@
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Satunnaistoisto"
+            "value" : "Sekoitus"
           }
         },
         "fr" : {
@@ -37252,7 +38050,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mescola"
+            "value" : "Casuale"
           }
         },
         "ja" : {
@@ -37264,7 +38062,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "임의 재생"
+            "value" : "무작위 재생"
           }
         },
         "lv" : {
@@ -37288,7 +38086,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wymieszaj playlistę"
+            "value" : "Wymieszaj listę odtwarzania"
           }
         },
         "pt" : {
@@ -37300,7 +38098,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Misturar"
+            "value" : "Aleatório"
           }
         },
         "ro" : {
@@ -37354,7 +38152,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "随机排序"
+            "value" : "随机"
           }
         },
         "zh-Hant" : {
@@ -37389,19 +38187,19 @@
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "hlasitost"
+            "value" : "Hlasitost"
           }
         },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Volumen"
+            "value" : "Lydstyrke"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lautstärke"
+            "value" : "Laufwerk"
           }
         },
         "el" : {
@@ -37581,7 +38379,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "гучність"
+            "value" : "Гучність"
           }
         },
         "vi" : {
@@ -38013,7 +38811,7 @@
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "تبديل إلى الصورة في الصورة"
+            "value" : "تبديل إلى وضع صورة في صورة"
           }
         },
         "ca" : {
@@ -38025,13 +38823,13 @@
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Přepnout obraz v obrazu"
+            "value" : "Obraz v obrazu"
           }
         },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Skift billede-i-billede"
+            "value" : "Slå billede-i-billede til/fra"
           }
         },
         "de" : {
@@ -38115,13 +38913,13 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Inverti Picture-in-Picture"
+            "value" : "Attiva / disattiva Picture-in-Picture"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ピクチャー・イン・ピクチャーを切り替える"
+            "value" : "ピクチャー・イン・ピクチャーの切り替え"
           }
         },
         "ko" : {
@@ -38151,7 +38949,7 @@
         "pt" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ativar Picture in Picture"
+            "value" : "Alternar Picture-in-Picture"
           }
         },
         "pt-BR" : {
@@ -38175,7 +38973,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zapnúť Picture-in-Picture"
+            "value" : "Prepnúť Picture-in-Picture"
           }
         },
         "sr" : {
@@ -38199,7 +38997,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Режим «Картинка в картинці»"
+            "value" : "Режим «Кадр у кадрі»"
           }
         },
         "vi" : {
@@ -38211,7 +39009,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "切换「画中画」模式"
+            "value" : "切换“画中画”模式"
           }
         },
         "zh-Hant" : {
@@ -45018,7 +45816,7 @@
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "كتم الصوت"
+            "value" : "كتم"
           }
         },
         "ca" : {
@@ -45030,7 +45828,7 @@
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ztlumení"
+            "value" : "Ztlumeno"
           }
         },
         "da" : {
@@ -45072,7 +45870,7 @@
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "قطع صدا"
+            "value" : "بی صدا"
           }
         },
         "fi" : {
@@ -45084,13 +45882,13 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Couper le son"
+            "value" : "Son coupé"
           }
         },
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "השתקה"
+            "value" : "מושתק"
           }
         },
         "hi" : {
@@ -45114,7 +45912,7 @@
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bisukan"
+            "value" : "Bisukan Suara"
           }
         },
         "is" : {
@@ -45126,7 +45924,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Silenzio"
+            "value" : "Muto"
           }
         },
         "ja" : {
@@ -45162,19 +45960,19 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wycisz"
+            "value" : "Wycisz dźwięk"
           }
         },
         "pt" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Desativar Som"
+            "value" : "Sem som"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mudo"
+            "value" : "Sem Audio"
           }
         },
         "ro" : {
@@ -45186,13 +45984,13 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "режим «Без звука»"
+            "value" : "Выключить звук"
           }
         },
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stíšiť"
+            "value" : "Stlmiť"
           }
         },
         "sr" : {
@@ -45210,13 +46008,13 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sesi kapat"
+            "value" : "Sesi Kapat"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "звук"
+            "value" : "Заглушити"
           }
         },
         "vi" : {
@@ -45663,7 +46461,7 @@
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "توقف"
+            "value" : "إيقاف مؤقت"
           }
         },
         "be" : {
@@ -45681,7 +46479,7 @@
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "pozastavení"
+            "value" : "Pozastaveno"
           }
         },
         "da" : {
@@ -45735,25 +46533,25 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mettre en pause"
+            "value" : "En pause"
           }
         },
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "השהיה"
+            "value" : "מושהה"
           }
         },
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ठहरें"
+            "value" : "रोकें"
           }
         },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pauziraj"
+            "value" : "Zaustavi"
           }
         },
         "hu" : {
@@ -45789,7 +46587,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "일시 정지"
+            "value" : "일시 정지됨"
           }
         },
         "lv" : {
@@ -45825,7 +46623,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pausa"
+            "value" : "Em Pausa"
           }
         },
         "ro" : {
@@ -45837,7 +46635,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "паузу"
+            "value" : "Приостановить"
           }
         },
         "sk" : {
@@ -45873,7 +46671,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "паузу"
+            "value" : "Пауза"
           }
         },
         "vi" : {
@@ -46117,7 +46915,7 @@
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pokračovat"
+            "value" : "Pokračování"
           }
         },
         "da" : {
@@ -46129,7 +46927,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fortsetzen"
+            "value" : "Wiedergabe"
           }
         },
         "el" : {
@@ -46153,7 +46951,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Continuar"
+            "value" : "Reanudar"
           }
         },
         "fa" : {
@@ -46177,13 +46975,13 @@
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "המשך את"
+            "value" : "התחדש"
           }
         },
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "रिज्यूम"
+            "value" : "पुनः आरंभ"
           }
         },
         "hr" : {
@@ -46219,13 +47017,13 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "続きから再生"
+            "value" : "再開"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "이어보기"
+            "value" : "재생 복원됨"
           }
         },
         "lv" : {
@@ -46255,7 +47053,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wznowienie"
+            "value" : "Wznów"
           }
         },
         "pt" : {
@@ -46267,7 +47065,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Continuar"
+            "value" : "Reproduzindo"
           }
         },
         "ro" : {
@@ -46279,7 +47077,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Продолжить"
+            "value" : "Возобновить"
           }
         },
         "sk" : {
@@ -46297,19 +47095,19 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Återuppta"
+            "value" : "Fortsätt"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sürdür:"
+            "value" : "Sürdür"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Продовжити"
+            "value" : "Відновити"
           }
         },
         "vi" : {
@@ -46321,13 +47119,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "继续播放"
+            "value" : "继续"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "繼續播放"
+            "value" : "繼續"
           }
         }
       }
@@ -46959,7 +47757,7 @@
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zastavit"
+            "value" : "Zastaveno"
           }
         },
         "da" : {
@@ -46971,7 +47769,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stoppen"
+            "value" : "Stopp"
           }
         },
         "el" : {
@@ -47013,7 +47811,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stopper"
+            "value" : "Arrêté"
           }
         },
         "he" : {
@@ -47037,7 +47835,7 @@
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stop"
+            "value" : "Leállítás"
           }
         },
         "id" : {
@@ -47061,13 +47859,13 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "停止"
+            "value" : "一時停止"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "재생 중단"
+            "value" : "정지됨"
           }
         },
         "lv" : {
@@ -47103,7 +47901,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Parar"
+            "value" : "Parado"
           }
         },
         "ro" : {
@@ -56822,7 +57620,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reprodueix en una nova finestra"
+            "value" : "Reprodueix en una finestra nova"
           }
         },
         "cs" : {
@@ -56864,7 +57662,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Abrir en una nueva ventana"
+            "value" : "Reproducir en una nueva ventana"
           }
         },
         "fa" : {
@@ -56894,13 +57692,13 @@
         "hi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "नई विंडो में खेलते हैं"
+            "value" : "नई विंडो में चलाएं"
           }
         },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reproduciraj u novom prozoru"
+            "value" : "Pokreni u novom prozoru"
           }
         },
         "hu" : {
@@ -56924,7 +57722,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apri in una nuova finestra"
+            "value" : "Riproduci in una nuova finestra"
           }
         },
         "ja" : {
@@ -56978,7 +57776,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tocar em nova Janela"
+            "value" : "Tocar em nova janela"
           }
         },
         "ro" : {
@@ -56996,7 +57794,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Prehrať v novom okne"
+            "value" : "Prehraj v Novom Okne"
           }
         },
         "sr" : {
@@ -57038,13 +57836,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在新建窗口中播放"
+            "value" : "在新窗口中播放"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "以新視窗播放"
+            "value" : "在新視窗裡播放"
           }
         }
       }
@@ -57718,13 +58516,13 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "In Finder anzeigen"
+            "value" : "Im Finder anzeigen"
           }
         },
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Εμφάνιση στον Finder"
+            "value" : "Εμφάνιση στο Finder"
           }
         },
         "en" : {
@@ -57748,7 +58546,7 @@
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "نشان دادن در Finder"
+            "value" : "نمایش در Finder"
           }
         },
         "fi" : {
@@ -57790,7 +58588,7 @@
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tampilkan dalam Finder"
+            "value" : "Tampilkan di Finder"
           }
         },
         "is" : {
@@ -57904,13 +58702,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Xem trong Finder"
+            "value" : "Duyệt trong Finder"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在访达中显示"
+            "value" : "在“访达”中显示"
           }
         },
         "zh-Hant" : {
@@ -59152,10 +59950,160 @@
     },
     "plugin.install_error.cannot_download" : {
       "localizations" : {
+        "af" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kon nie die inprop aflaai nie.\n\nAfvoer:%@\n"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فشل تنزيل الإضافة.\n\nالصادر:%@\n"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No s'ha pogut descarregar el complement.\n\nSortida:%@\n"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stahování plug-inu selhalo.\n\nVýstup:%@\n"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Det lykkedes ikke at hente tilføjelsen.\n\nOutput:%@\n"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Erweiterung konnte nicht heruntergeladen werden.\n\nAusgabe: %@\n"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Failed to download the plugin.\n\nOutput:%@\n"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al descargar el plugin.\n\nSalida:%@\n"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de télécharger le module externe.\n\nRésultat : %@\n"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "שגיאה בהורדת התוסף.\n\nפלט: %@\n"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neuspjelo preuzimanje dodatka.\n\nRezultat:%@\n"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem sikerült letölteni a plugint.\n\nKimenet:%@\n"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gagal mengunduh plugin.\n\nHasil:%@\n"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile scaricare il plugin.\n\nOutput:%@\n"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "プラグインのダウンロードに失敗しました。\n\n結果:%@\n"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "플러그인 다운로드에 실패했습니다.\n\n출력: %@\n"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie udało się pobrać wtyczki.\n\nWyjście:%@\n"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Falha ao baixar o plugin.\n\nSaída:%@\n"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descărcarea extensiei a eșuat.\n\nMotiv:%@\n"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не удалось загрузить плагин.\n\nВывод установщика:%@\n"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sťahovanie plug-inu zlyhalo.\n\nVýstup:%@\n"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Det gick inte att ladda ner tillägget.\n\nUtdata: %@\n"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eklenti indirilemedi.\n\nHata çıktısı:%@\n"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не вдалося завантажити плагін.\n\nРезультат:%@\n"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "下载插件失败。\n\n输出: %@\n"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無法下載外掛程式。\n\n詳細內容:%@\n"
           }
         }
       }
@@ -59328,10 +60276,160 @@
     },
     "plugin.install_error.cannot_unpackage" : {
       "localizations" : {
+        "af" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kon nie die inprop uitpak nie.\n\nAfvoer:%@\n"
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فشل في إلغاء حزمة الإضافة.\n\nالناتج:%@\n"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No s'ha pogut descomprimir el complement.\n\nSortida: %@\n"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rozbalování plug-inu selhalo.\n\nVýstup:%@\n"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Det lykkedes ikke at pakke tilføjelsen ud.\n\nOutput:%@\n"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die Erweiterung konnte nicht entpackt werden.\n\nAusgabe: %@\n"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Failed to unpackage the plugin.\n\nOutput:%@\n"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al desempaquetar el plugin.\n\nSalida:%@\n"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de décompresser le module externe.\n\nRésultat : %@\n"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "שגיאה בחילוץ התוסף.\n\nפלט: %@\n"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neuspjelo raspakiranje dodatka.\n\nRezultat:%@\n"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem sikerült kicsomagolni a plugint.\n\nKimenet:%@\n"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gagal membongkar plugin.\n\nHasil:%@\n"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scompattamento del plugin non riuscito.\n\nOutput: %@\n"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "プラグインのパッケージ解除に失敗しました。\n\n結果:%@\n"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "플러그인 설치에 실패했습니다.\n\n출력: %@\n"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie udało się rozpakować wtyczki.\n\nWyjście:%@\n"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Falha ao desempacotar o plugin.\n\nSaída:%@\n"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dezarhivarea extensiei a eșuat.\n\nMotiv:%@\n"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не удалось распаковать плагин.\n\nВывод установщика:%@\n"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rozbaľovanie plug-inu zlyhalo.\n\nVýstup:%@\n"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Det gick inte att packa upp tillägget.\n\nUtdata: %@\n"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eklenti paketi açılamadı.\n\nHata çıktısı:%@\n"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не вдалося розпакувати плагін.\n\nРезультат:%@\n"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "解包插件失败。\n\n输出: %@\n"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無法打開外掛程式。\n\n詳細內容：%@\n"
           }
         }
       }
@@ -59633,7 +60731,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Недопустимая URL-ссылка."
+            "value" : "Неправильная ссылка на плагин."
           }
         },
         "sk" : {
@@ -61147,7 +62245,7 @@
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Općenito"
+            "value" : "Opće"
           }
         },
         "hu" : {
@@ -61165,7 +62263,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Generale"
+            "value" : "Generali"
           }
         },
         "ja" : {
@@ -61225,7 +62323,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Основное"
+            "value" : "Основные"
           }
         },
         "sk" : {
@@ -61267,7 +62365,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Загальне"
+            "value" : "Загальні"
           }
         },
         "ur-PK" : {
@@ -65927,7 +67025,7 @@
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "تصحيح تشابك الصورة"
+            "value" : "تشابك"
           }
         },
         "ca" : {
@@ -65939,7 +67037,7 @@
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "odebrání prokládání"
+            "value" : "Odebrat prokládání"
           }
         },
         "da" : {
@@ -65981,13 +67079,13 @@
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "جایگزین کردن"
+            "value" : "تبدیل تصویر به غیر interlace"
           }
         },
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lomituksen poisto"
+            "value" : "Lomituksenpoisto"
           }
         },
         "fr" : {
@@ -66083,7 +67181,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "деинтерлейсинг"
+            "value" : "Деинтерлейсинг"
           }
         },
         "sk" : {
@@ -66107,13 +67205,13 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Netleştir (Deinterlace)"
+            "value" : "Taramasızlık"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "черезрядкову розгортку"
+            "value" : "Черезрядкова розгортка"
           }
         },
         "vi" : {
@@ -66931,7 +68029,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "기본"
+            "value" : "기본값"
           }
         },
         "nl" : {
@@ -66955,7 +68053,7 @@
         "pt" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Padrão"
+            "value" : "Predefinido"
           }
         },
         "pt-BR" : {
@@ -70528,13 +71626,13 @@
         "af" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Spoel vorentoe of terug"
+            "value" : "Vorentoe/terugspoel"
           }
         },
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "بحث"
+            "value" : "البحث"
           }
         },
         "be" : {
@@ -70552,7 +71650,7 @@
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Posunout"
+            "value" : "Vyhledat"
           }
         },
         "da" : {
@@ -70564,7 +71662,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Spule"
+            "value" : "Verlauf"
           }
         },
         "el" : {
@@ -70606,13 +71704,13 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aller"
+            "value" : "Chercher"
           }
         },
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "קפיצה"
+            "value" : "חיפוש"
           }
         },
         "hi" : {
@@ -70648,7 +71746,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scorri"
+            "value" : "Ricerca"
           }
         },
         "ja" : {
@@ -70672,7 +71770,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Spoel vooruit of terug"
+            "value" : "Spoel terug/vooruit"
           }
         },
         "no" : {
@@ -70684,7 +71782,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Przewiń"
+            "value" : "Szukaj"
           }
         },
         "pt" : {
@@ -70696,7 +71794,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Busca"
+            "value" : "Buscar"
           }
         },
         "ro" : {
@@ -70708,13 +71806,13 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Промотать"
+            "value" : "Перемотка"
           }
         },
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Posunúť"
+            "value" : "Vyhľadať"
           }
         },
         "sr" : {
@@ -70756,13 +71854,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "跳转"
+            "value" : "查找进度"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "跳轉"
+            "value" : "進度列"
           }
         }
       }
@@ -70994,7 +72092,7 @@
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Skift billede-i-billede"
+            "value" : "Slå billede-i-billede Til/Fra"
           }
         },
         "de" : {
@@ -71024,7 +72122,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Alternar Picture-in-Picture"
+            "value" : "Alternar Imagen dentro de imagen"
           }
         },
         "fa" : {
@@ -71036,7 +72134,7 @@
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vaihda kuva kuvassa -tilaa"
+            "value" : "Vaihda kuva kuvassa -tilaan"
           }
         },
         "fr" : {
@@ -71078,13 +72176,13 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Inverti Picture-in-Picture"
+            "value" : "Attiva / disattiva Picture-in-Picture"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ピクチャー・イン・ピクチャーを切り替える"
+            "value" : "ピクチャー・イン・ピクチャーの切り替え"
           }
         },
         "ko" : {
@@ -71114,13 +72212,13 @@
         "pt" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ativar Picture in Picture"
+            "value" : "Alternar Picture-in-Picture"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Alternar Picture-in-Picture"
+            "value" : "Ativar/Desativar Picture-in-Picture"
           }
         },
         "ro" : {
@@ -71138,7 +72236,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zapnúť Picture-in-Picture"
+            "value" : "Zapnúť/Vypnúť Picture-in-Picture"
           }
         },
         "sr" : {
@@ -71156,13 +72254,13 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Resim İçinde Resim’i aç/kapat"
+            "value" : "Resim İçinde Resim’i Aç/Kapat"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Режим «Картинка в картинці»"
+            "value" : "Перемкнути «Кадр у кадрі»"
           }
         },
         "vi" : {
@@ -71174,13 +72272,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "切换「画中画」模式"
+            "value" : "切换“画中画”模式"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "切換子母畫面"
+            "value" : "切換「子母畫面」模式"
           }
         }
       }

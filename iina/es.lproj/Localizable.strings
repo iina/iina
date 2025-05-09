@@ -27,7 +27,6 @@
 // Initial Window
 "initial.announcement" = "Estás usando una versión %@ de IINA";
 "initial.beta.desc" = "Si desea volver a una versión estable, desmarque \"recibir actualizaciones beta\" desde Ajustes > Generales, e instale una versión estable de nuestro <a href=\"https://iina.io\">sitio web oficial</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Las compilaciones de depuración normalmente no están optimizadas para el rendimiento, por lo que no se recomienda que se utilicen de manera habitual. Las compilaciones de depuración no soportan la actualización automática.";
 "initial.bug_report" = "Notifique a través de <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
 
@@ -50,7 +49,6 @@
 "quicksetting.deinterlace" = "Desentrelazar";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Ocultar";
-"quicksetting.reset_speed" = "Reset speed to 1x";
 
 // EQ Presets
 "eq.preset.flat" = "Plano";
@@ -78,7 +76,6 @@
 
 "alert.eq.new_profile.title" = "Nuevo Perfil de EQ";
 "alert.eq.new_profile.message" = "Por favor, introduzca un nombre de perfil.";
-"alert.eq.rename.title" = "Rename Current Profile";
 "alert.eq.rename.message" = "Por favor, introduzca un nuevo nombre de perfil.";
 
 // OSDMessage.swift
@@ -141,7 +138,7 @@
 "osd.playlist_loop" = "Repetir lista de reproducción";
 "osd.no_loop" = "Desactivar bucle";
 
-"preference.title" = "Preferencias";
+"preference.title" = "Ajustes";
 "preference.general" = "General";
 "preference.ui" = "Interfaz";
 "preference.video_audio" = "Códecs";
@@ -174,9 +171,6 @@
 "preference.sub_override_level.descriptive_text.strip" = "Remueve radicalmente todas las etiquetas y estilos ASS del subtítulo.";
 "preference.sub_override_level.descriptive_text.yes" = "Aplicar todos los ajustes de estilo en esta sección.";
 
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
-
 "menu.volume" = "Volumen: %d";
 "menu.volume_muted" = "Volumen: %d (Silenciado)";
 "menu.audio_delay" = "Retraso de audio: %.2fs";
@@ -207,8 +201,6 @@
 
 "menu.seek_forward" = "Adelantar %.0fs";
 "menu.seek_backward" = "Retroceder %.0fs";
-"menu.speed_up" = "Speed Up by %@x";
-"menu.speed_down" = "Speed Down by %@x";
 "menu.volume_up" = "Volumen + %.0f%%";
 "menu.volume_down" = "Volumen - %.0f%%";
 "menu.audio_delay_up" = "Retrasar audio + %.1fs";
@@ -218,14 +210,7 @@
 
 "menu.crop_custom" = "Personalizado…";
 "menu.find_online_sub" = "Buscar subtítulos en línea desde %@";
-
-"menu.manage_plugins" = "Manage Plugins…";
-"menu.developer_tool" = "Developer Tool";
 "menu.more_plugin" = "Más…";
-"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
-"menu.reload_plugins" = "Reload All Plugins";
-"menu.show_plugins_panel" = "Show Plugins Panel";
-"menu.hide_plugins_panel" = "Hide Plugins Panel";
 
 "track.audio" = "Audio";
 "track.none" = "<Ninguno>";
@@ -256,8 +241,6 @@
 "alert.error_saving_file" = "Se ha producido un error al guardar %@: %@";
 "alert.error_deleting_file" = "No se puede eliminar el archivo.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
-
 "alert.config.new.title" = "Nueva configuración de entrada";
 "alert.config.new.message" = "Por favor, introduzca un nombre para la nueva configuración.";
 "alert.config.duplicate.title" = "Configuración duplicada";
@@ -287,7 +270,6 @@
 "alert.screenshot.error_taking" = "¡No se puede tomar una captura de pantalla!";
 
 "alert.sub.no_selected" = "Por favor, seleccione primero un subtítulo descargado.";
-"alert.sub_lang_not_set" = "Por favor, configure el idioma predeterminado de los subtítulos en las preferencias antes de usar OpenSubtitles. Inglés(eng) se utilizará esta vez.";
 "alert.sub.cannot_save_passwd" = "No se puede guardar la contraseña en el Llavero: %@";
 "alert.sub.cannot_login" = "No se puede iniciar sesión. Compruebe su nombre de usuario, contraseña, y el estado de la red.\n\n%@";
 "alert.sub.save_downloaded.title" = "Guardar los subtítulos descargados";
@@ -349,7 +331,6 @@
 "alert.plugin_uninstall.message" = "El plugin se eliminará de su disco.";
 "alert.plugin_reinstall.title" = "El plugin %@ ya existe";
 "alert.plugin_reinstall.message" = "¿Quieres reinstalar el plugin?";
-"alert.duplicated_plugin_id" = "Se han detectado identificadores de plugins duplicados. Dos o más plugins tienen el mismo identificador \"%@\". Esto puede causar comportamientos anormales. Puede encontrarlos en Preferencias -> Plugins e informe a sus autores. Si un plugin está instalado localmente, también puede cambiar manualmente su identificador en el archivo Info.json del plugin.";
 "alert.plugin_no_update" = "No se encontraron actualizaciones.";
 "alert.plugin_update_found.title" = "Actualización encontrada para %@";
 "alert.plugin_update_found.message" = "La última versión es %@. Tienes la versión %@. ¿Desea actualizarla?";
@@ -397,7 +378,6 @@
 "osc_toolbar.music_mode" = "Entrar en modo música";
 "osc_toolbar.sub_track" = "Elegir la pista de subtítulos";
 "osc_toolbar.screenshot" = "Capturar pantalla";
-"osc_toolbar.plugins" = "Show plugins panel";
 
 "mini_player.album_art" = "Alternar imagen de álbum";
 "mini_player.loop" = "Repetir";

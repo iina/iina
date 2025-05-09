@@ -125,16 +125,16 @@
             "value" : "기본값: 153600"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Standard: 153600"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Standaard: 153600"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standard: 153600"
           }
         },
         "pl" : {
@@ -174,12 +174,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default: 153600"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Podrazumevano: 153600"
@@ -327,12 +321,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Максимальный размер кэша (КБ):"
-          }
-        },
-        "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Maximum cache size (KB):"
           }
         },
         "tr" : {
@@ -543,12 +531,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Custom youtube-dl path:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Prilagođena putanja do programa youtube-dl:"
           }
         },
@@ -720,16 +702,16 @@
             "value" : "기본값: 153600"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Standard: 153600"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Standaard: 153600"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standard: 153600"
           }
         },
         "pl" : {
@@ -769,12 +751,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default: 153600"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Podrazumevano: 153600"
@@ -1009,12 +985,6 @@
             "value" : "HTTP proxy:"
           }
         },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "HTTP proxy:"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1084,13 +1054,13 @@
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Automatisk"
+            "value" : "Auto"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Autom."
+            "value" : "Automatisch"
           }
         },
         "en" : {
@@ -1183,22 +1153,22 @@
             "value" : "Automātiska"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Auto"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Automatisch"
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Automatycznie"
+            "value" : "Automatyczny"
           }
         },
         "pt" : {
@@ -1222,7 +1192,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Авто"
+            "value" : "Автоматически"
           }
         },
         "sk" : {
@@ -1232,12 +1202,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Auto"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Automatski"
@@ -1264,7 +1228,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Авто"
+            "value" : "Автоматично"
           }
         },
         "vi" : {
@@ -1424,16 +1388,16 @@
             "value" : "youtube-dl 사용"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktiver YouTube-dl"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Schakel youtube-dl in"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktiver YouTube-dl"
           }
         },
         "pl" : {
@@ -1473,12 +1437,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable youtube-dl"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Omogući youtube-dl"
@@ -1652,16 +1610,16 @@
             "value" : "캐시 버퍼 크기 (KB)"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bufferstørrelse (kB):"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cache-buffergrootte (KB):"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bufferstørrelse (kB):"
           }
         },
         "pl" : {
@@ -1701,12 +1659,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cache buffer size (KB):"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Veličina bafera keširanja (KB):"
@@ -1874,16 +1826,16 @@
             "value" : "사용자 에이전트:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Brukeragent:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gebruikersagent:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Brukeragent:"
           }
         },
         "pl" : {
@@ -1923,12 +1875,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "User agent:"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Korisnički agent:"
@@ -2109,16 +2055,16 @@
             "value" : "기본값: 36000"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Standard: 36000"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Standaard: 36000"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standard: 36000"
           }
         },
         "pl" : {
@@ -2158,12 +2104,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Default: 36000"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Podrazumevano: 36000"
@@ -2337,16 +2277,16 @@
             "value" : "캐시 활성화"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktiver buffer"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Schakel cache in"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktiver buffer"
           }
         },
         "pl" : {
@@ -2386,12 +2326,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable cache"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Omogući keš"
@@ -2606,12 +2540,6 @@
             "value" : "Format: <key>=<value>[,<key>=<value>[,…]]"
           }
         },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Format: <key>=<value>[,<key>=<value>[,…]]"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2768,16 +2696,16 @@
             "value" : "RTSP 스트림 전송:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Strøm RTSP gjennom:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vervoer RTSP-stream via:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Strøm RTSP gjennom:"
           }
         },
         "pl" : {
@@ -2817,12 +2745,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Transport RTSP stream through:"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prenesi RTSP strim kroz:"
@@ -3035,12 +2957,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Seconds to prefetch:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Sekundi do predučitavanja:"
           }
         },
@@ -3251,12 +3167,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cache:"
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "Keš:"
           }
         },
@@ -3343,7 +3253,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "És necessari reiniciar IINA per tenir efecte."
+            "value" : "És necessari reiniciar IINA per tenir efecte"
           }
         },
         "cs" : {
@@ -3355,13 +3265,13 @@
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kræver genstart af IINA for at træde i kræft."
+            "value" : "Kræver genstart af IINA for ændringe at træde i kraft."
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Neustart von IINA erforderlich."
+            "value" : "IINA muss hierfür neu gestartet werden."
           }
         },
         "el" : {
@@ -3385,13 +3295,13 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Requiere reiniciar IINA para que surta efecto."
+            "value" : "Es necesario reiniciar IINA para que los cambios sean aplicados."
           }
         },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "برای اعمال تنظیمات برنامه را بسته و باز کنید."
+            "value" : "برای اعمال تغییرات باید IINA را بازاجرا کنید."
           }
         },
         "fi" : {
@@ -3427,13 +3337,13 @@
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Az IINA újraindítása szükséges a módositások érvénybe lépéséhez."
+            "value" : "Az IINA újraindítása szükséges ahhoz, hogy életbe lépjen."
           }
         },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Perlu menjalankan ulang IINA agar dapat berpengaruh."
+            "value" : "Perlu menjalankan ulang IINA untuk dapat berpengaruh."
           }
         },
         "it" : {
@@ -3445,7 +3355,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "設定を反映させるにはIINAを再起動する必要があります。"
+            "value" : "変更を反映するにはIINAの再起動が必要です。"
           }
         },
         "ko" : {
@@ -3460,22 +3370,22 @@
             "value" : "Lai tas stātos spēkā, ir nepieciešams restartēt IINA."
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Krever omstart at IINA for å tre i kraft."
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "IINA moet opnieuw opstarten voor deze optie."
           }
         },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Krever omstart at IINA for å tre i kraft."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Program IINA musi zostać zrestartowany aby efekt został zastosowany."
+            "value" : "Program IINA musi zostać zrestartowany, aby efekt został zastosowany."
           }
         },
         "pt" : {
@@ -3487,7 +3397,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Necessita reiniciar IINA pra funcionar."
+            "value" : "Necessita reiniciar IINA pra fazer efeito."
           }
         },
         "ro" : {
@@ -3505,16 +3415,10 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vyžadujú reštartovať IINA pre správne fungovanie."
+            "value" : "Vyžaduje sa reštartovať IINA, pre správne fungovanie."
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Requires restarting IINA to take effect."
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "IINA se mora ponovo pokrenuti da bi postavka bila prihvaćena."
@@ -3541,7 +3445,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Для набуття чинності потребує перезавантаження IINA."
+            "value" : "Для набуття чинності змін треба перезавантажити IINA."
           }
         },
         "vi" : {
@@ -3759,12 +3663,6 @@
         "sr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "IINA will search youtube-dl in this folder. Restart needed."
-          }
-        },
-        "sr-Latn" : {
-          "stringUnit" : {
-            "state" : "translated",
             "value" : "IINA će potražiti youtube-dl u ovoj fascikli. Potrebno je ponovno pokretanje."
           }
         },
@@ -3936,16 +3834,16 @@
             "value" : "네트워크"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nettverk:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Netwerk:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nettverk:"
           }
         },
         "pl" : {
@@ -3985,12 +3883,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Network:"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mreža:"
@@ -4164,16 +4056,16 @@
             "value" : "추가 옵션:"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Raw alternativer:"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "ytdl-raw-options:"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Raw alternativer:"
           }
         },
         "pl" : {
@@ -4213,12 +4105,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Raw options:"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dodatne opcije:"

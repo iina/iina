@@ -61,31 +61,12 @@
 "eq.preset.electronic" = "Elektroniczne";
 "eq.preset.hip_hop" = "Hip Hop";
 "eq.preset.increase_bass" = "Zwiększ bas";
-"eq.preset.increase_treble" = "Increase Treble";
-"eq.preset.increase_vocal" = "Increase Vocal";
 "eq.preset.jazz" = "Jazz";
-"eq.preset.latin" = "Latin";
-"eq.preset.loundness" = "Loundness";
-"eq.preset.lounge" = "Lounge";
-"eq.preset.piano" = "Piano";
-"eq.preset.pop" = "Pop";
-"eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reduce Bass";
-"eq.preset.reduce_treble" = "Reduce Treble";
-"eq.preset.rock" = "Rock";
-"eq.preset.small_speaker" = "Small Speaker";
-"eq.preset.spoken_word" = "Spoken Word";
-
-"alert.eq.new_profile.title" = "New EQ Profile";
-"alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Current Profile";
-"alert.eq.rename.message" = "Please enter a new profile name.";
 
 // OSDMessage.swift
 "osd.pause" = "Pauza";
 "osd.resume" = "Wznów";
 "osd.volume" = "Głośność: %i";
-"osd.speed" = "Speed: %@x";
 "osd.aspect" = "Proporcje obrazu: %@";
 "osd.crop" = "Kadrowanie obrazu: %@";
 "osd.rotate" = "Obrót: %i°";
@@ -98,13 +79,6 @@
 "osd.sub_delay.later" = "Opóźnienie napisów: %.2fs później";
 "osd.sub_delay.earlier" = "Opóźnienie napisów: %.2fs wcześniej";
 "osd.subtitle_pos" = "Pozycja napisów: %.1f";
-"osd.sub_hidden" = "Subtitles Hidden";
-"osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
-"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
 "osd.sub_second_visible" = ".";
 "osd.mute" = "Wycisz dźwięk";
 "osd.unmute" = "Włącz dźwięk";
@@ -125,8 +99,6 @@
 "osd.find_online_sub" = "Wyszukiwanie napisów online…";
 "osd.find_online_sub.source" = "z";
 "osd.sub_not_found" = "Nie znaleziono pasujących napisów";
-"osd.sub_found" = "%d subtitles found.";
-"osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "Pobrano napisy";
 "osd.sub_saved" = "Zapisano napisy";
 "osd.network_error" = "Błąd sieci";
@@ -141,7 +113,7 @@
 "osd.playlist_loop" = "Zapętl playlistę";
 "osd.no_loop" = "Wyłącz zapętlenie";
 
-"preference.title" = "Preferencje";
+"preference.title" = "Ustawienia";
 "preference.general" = "Ogólne";
 "preference.ui" = "Interfejs";
 "preference.video_audio" = "Wideo/Audio";
@@ -161,21 +133,9 @@
 "preference.key_binding_hint_2" = "Kliknij dwukrotnie na rząd po prawej stronie, aby zmienić przypisany skrót klawiszowy";
 
 "preference.enable_adv_settings" = "Włącz ustawienia zaawansowane";
-
-"preference.sub_override_level.no" = "no";
 "preference.sub_override_level.force" = "wymuś";
-"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "pasek";
 "preference.sub_override_level.yes" = "tak";
-
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
-
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
 "menu.volume" = "Głośność: %d";
 "menu.volume_muted" = "Głośność: %d (Wyciszono)";
@@ -183,8 +143,6 @@
 "menu.sub_delay" = "Opóźnienie napisów: %.2fs";
 "menu.sub_hide" = "Ukryj napisy";
 "menu.sub_show" = "Pokaż napisy";
-"menu.sub_second_hide" = "Hide Secondary Subtitles";
-"menu.sub_second_show" = "Show Secondary Subtitles";
 "menu.fullscreen" = "Włącz tryb pełnoekranowy";
 "menu.exit_fullscreen" = "Opuść tryb pełnoekranowy";
 "menu.pip" = "Włącz tryb Obraz-w-obrazie";
@@ -193,7 +151,6 @@
 "menu.exit_mini_player" = "Wyjdź z trybu muzycznego";
 "menu.pause" = "Pauza";
 "menu.resume" = "Wznów";
-"menu.speed" = "Speed: %@x";
 "menu.chapters" = "Panel rozdziałów";
 "menu.hide_chapters" = "Ukryj panel rozdziałów";
 "menu.playlist" = "Panel playlisty";
@@ -207,8 +164,6 @@
 
 "menu.seek_forward" = "Przewiń w przód o %.0fs";
 "menu.seek_backward" = "Przewiń w tył o %.0fs";
-"menu.speed_up" = "Speed Up by %@x";
-"menu.speed_down" = "Speed Down by %@x";
 "menu.volume_up" = "Głośność +%.0f%%";
 "menu.volume_down" = "Głośność -%.0f%%";
 "menu.audio_delay_up" = "Opóźnienie audio +%.1fs";
@@ -218,14 +173,6 @@
 
 "menu.crop_custom" = "Własne…";
 "menu.find_online_sub" = "Znajdź napisy online z %@";
-
-"menu.manage_plugins" = "Manage Plugins…";
-"menu.developer_tool" = "Developer Tool";
-"menu.more_plugin" = "More…";
-"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
-"menu.reload_plugins" = "Reload All Plugins";
-"menu.show_plugins_panel" = "Show Plugins Panel";
-"menu.hide_plugins_panel" = "Hide Plugins Panel";
 
 "track.audio" = "Dźwięk";
 "track.none" = "<Brak>";
@@ -256,8 +203,6 @@
 "alert.error_saving_file" = "Podczas zapisywania %@ wystąpił błąd: %@";
 "alert.error_deleting_file" = "Nie można usunąć pliku.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
-
 "alert.config.new.title" = "Nowa konfiguracja wejściowa";
 "alert.config.new.message" = "Wprowadź nazwę nowej konfiguracji.";
 "alert.config.duplicate.title" = "Powiel konfigurację";
@@ -269,7 +214,6 @@
 "alert.config.cannot_create" = "Nie można utworzyć pliku konfiguracyjnego!\n%@";
 "alert.config.cannot_write" = "Nie można zapisać pliku konfiguracyjnego!";
 "alert.config.rename.title" = "Zmień nazwę konfiguracji wejść";
-"alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "Podczas ustawiania filtrów wystąpił błąd. Proszę sprawdzić format parametru.";
 "alert.add_filter.title" = "Nowy filtr";
@@ -287,7 +231,6 @@
 "alert.screenshot.error_taking" = "Nie można zrobić zrzutu ekranu!";
 
 "alert.sub.no_selected" = "Proszę najpierw wybrać pobrane napisy.";
-"alert.sub_lang_not_set" = "Przed użyciem OpenSubtitles ustaw preferowany język napisów w preferencjach. Angielski(eng) zostaną tym razem użyte.";
 "alert.sub.cannot_save_passwd" = "Nie można zapisać hasła do pęku kluczy: %@";
 "alert.sub.cannot_login" = "Logowanie nie powiodło się. Sprawdź swoją nazwę użytkownika, hasło oraz stan sieci.\n\n%@";
 "alert.sub.save_downloaded.title" = "Zapisz pobrane napisy";
@@ -349,7 +292,6 @@
 "alert.plugin_uninstall.message" = "Wtyczka zostanie usunięta z Twojego dysku.";
 "alert.plugin_reinstall.title" = "Wtyczka %@ już istnieje";
 "alert.plugin_reinstall.message" = "Czy chcesz ponownie zainstalować wtyczkę?";
-"alert.duplicated_plugin_id" = "Wykryto zduplikowane identyfikatory wtyczek. Dwie lub więcej wtyczek ma ten sam identyfikator \"%@\". Może to powodować nietypowe zachowania. Znajdź je w Preferencjach - Wtyczki i zgłoś ich autorom. Jeśli wtyczka jest zainstalowana lokalnie, możesz też ręcznie zmienić jej identyfikator w pliku Info.json wtyczki.";
 "alert.plugin_no_update" = "Nie znaleziono aktualizacji.";
 "alert.plugin_update_found.title" = "Znaleziono aktualizację dla %@";
 "alert.plugin_update_found.message" = "Najnowsza wersja to %@. Masz %@. Czy chcesz zaktualizować?";
@@ -396,8 +338,6 @@
 "osc_toolbar.full_screen" = "Przełącz tryb pełnoekranowy";
 "osc_toolbar.music_mode" = "Przejdź w tryb muzyczny";
 "osc_toolbar.sub_track" = "Wybierz ścieżkę napisów";
-"osc_toolbar.screenshot" = "Take a screenshot";
-"osc_toolbar.plugins" = "Show plugins panel";
 
 "mini_player.album_art" = "Przełącz okładkę albumu";
 "mini_player.loop" = "Powtarzaj";

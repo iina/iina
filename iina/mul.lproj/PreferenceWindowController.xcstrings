@@ -18,6 +18,12 @@
       "comment" : "Class = \"NSWindow\"; title = \"Preferences\"; ObjectID = \"F0z-JX-Cv5\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Подешавања"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28,6 +34,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "التفضيلات"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Налады"
           }
         },
         "ca" : {
@@ -126,6 +138,12 @@
             "value" : "Preferensi"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valmöguleikar"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -150,16 +168,16 @@
             "value" : "Iestatījumi"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Innstillinger"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voorkeuren"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Innstillinger"
           }
         },
         "pl" : {
@@ -199,12 +217,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Подешавања"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Podešavanja"
@@ -271,6 +283,12 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"No Result\"; ObjectID = \"jUU-3A-jLW\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нема резултата"
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -281,6 +299,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "لا توجد نتيجة"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Няма выніку"
           }
         },
         "ca" : {
@@ -373,6 +397,12 @@
             "value" : "Tidak Ada Hasil"
           }
         },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Engar niðurstöður"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -397,16 +427,16 @@
             "value" : "Nav rezultāta"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ingen treff"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geen resultaat"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingen treff"
           }
         },
         "pl" : {
@@ -446,12 +476,6 @@
           }
         },
         "sr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Нема резултата"
-          }
-        },
-        "sr-Latn" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nema rezultata"

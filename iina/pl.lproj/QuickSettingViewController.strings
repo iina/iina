@@ -16,9 +16,6 @@
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "6LO-6y-IsA"; */
 "6LO-6y-IsA.title" = "Kolor:";
 
-/* Class = "NSSegmentedCell"; 88M-pi-2Hc.ibShadowedLabels[0] = "Primary Subtitles"; ObjectID = "88M-pi-2Hc"; */
-"88M-pi-2Hc.ibShadowedLabels[0]" = "Primary Subtitles";
-
 /* Class = "NSSegmentedCell"; 88M-pi-2Hc.ibShadowedLabels[1] = "Secondary Subtitles"; ObjectID = "88M-pi-2Hc"; */
 "88M-pi-2Hc.ibShadowedLabels[1]" = "Dodatkowe napisy";
 
@@ -222,6 +219,3 @@
 
 /* Class = "NSMenuItem"; title = "Remove the current EQ preset"; ObjectID = "dvI-Rj-7qF"; */
 "dvI-Rj-7qF.title" = "Usuń bieżące ustawienia EQ";
-
-/* Class = "NSMenuItem"; title = "Manual"; ObjectID = "LPh-nJ-GjN"; */
-"LPh-nJ-GjN.title" = "Manual";

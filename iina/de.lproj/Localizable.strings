@@ -27,7 +27,6 @@
 // Initial Window
 "initial.announcement" = "Du benutzt Version %@ von IINA";
 "initial.beta.desc" = "Wenn du eine Release Version benutzen willst, entferne den Haken bei „Betaupdates erhalten“ in Einstellungen -> Allgemein und installiere eine stabile Version von unserer <a href=\"https://iina.io\">offiziellen Webseite</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Debug-Builds sind normalerweise nicht auf Leistung optimiert, daher wird es nicht empfohlen diese für den täglichen Gebrauch einzusetzen. Debug-Builds unterstützen keine automatischen Updates.";
 "initial.bug_report" = "Melde via <a href=\"https://github.com/iina/iina/issues\">GitHub Tickets</a>.";
 
@@ -51,23 +50,16 @@
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Verstecken";
 "quicksetting.reset_speed" = "Geschwindigkeit auf 1x zurücksetzen";
-
-// EQ Presets
-"eq.preset.flat" = "Flat";
 "eq.preset.acoustic" = "Akustisch";
 "eq.preset.classical" = "Klassik";
-"eq.preset.dance" = "Dance";
 "eq.preset.deep" = "Tief";
-"eq.preset.electronic" = "Electronic";
 "eq.preset.hip_hop" = "Hip-Hop";
 "eq.preset.increase_bass" = "Bass erhöhen";
 "eq.preset.increase_treble" = "Höhen anheben";
 "eq.preset.increase_vocal" = "Vocal erhöhen";
 "eq.preset.jazz" = "Jazz";
-"eq.preset.latin" = "Latin";
 "eq.preset.loundness" = "Lautheit";
 "eq.preset.lounge" = "Lounge";
-"eq.preset.piano" = "Piano";
 "eq.preset.pop" = "Pop";
 "eq.preset.rnb" = "R&B";
 "eq.preset.reduce_bass" = "Bass reduzieren";
@@ -161,21 +153,9 @@
 "preference.key_binding_hint_2" = "Klicke doppelt auf eine Reihe, um den entsprechenden Kurzbefehl zu bearbeiten.";
 
 "preference.enable_adv_settings" = "Erweiterte Einstellungen";
-
-"preference.sub_override_level.no" = "no";
-"preference.sub_override_level.force" = "force";
-"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "strip";
 "preference.sub_override_level.yes" = "ja";
-
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
 "preference.sub_override_level.descriptive_text.force" = "Alle Untertitelstile anwenden.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
-
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
 "menu.volume" = "Lautstärke: %d";
 "menu.volume_muted" = "Lautstärke: %d (Stumm)";
@@ -222,10 +202,7 @@
 "menu.manage_plugins" = "Plugins verwalten…";
 "menu.developer_tool" = "Entwicklerwerkzeug";
 "menu.more_plugin" = "Mehr…";
-"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
 "menu.reload_plugins" = "Alle Plugins neu laden";
-"menu.show_plugins_panel" = "Show Plugins Panel";
-"menu.hide_plugins_panel" = "Hide Plugins Panel";
 
 "track.audio" = "Audio";
 "track.none" = "Keine";
@@ -256,8 +233,6 @@
 "alert.error_saving_file" = "Fehler beim Sichern von %@: %@";
 "alert.error_deleting_file" = "Datei konnte nicht gelöscht werden.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
-
 "alert.config.new.title" = "Neue Eingabekonfiguration";
 "alert.config.new.message" = "Bitte gib einen Namen für die neue Konfiguration ein.";
 "alert.config.duplicate.title" = "Konfiguration duplizieren";
@@ -287,7 +262,6 @@
 "alert.screenshot.error_taking" = "Bildschirmfoto konnte nicht erstellt werden.";
 
 "alert.sub.no_selected" = "Bitte wähle zuerst eine heruntergeladene Untertiteldatei aus.";
-"alert.sub_lang_not_set" = "Bitte lege vor der Benutzung von OpenSubtitles die bevorzugte Untertitelsprache fest. „Englisch(eng)“ wird diesmal benutzt.";
 "alert.sub.cannot_save_passwd" = "Passwort konnte nicht im Schlüsselbund gesichert werden: „%@“.";
 "alert.sub.cannot_login" = "Anmelden nicht möglich. Bitte überprüfe Benutzername, Passwort und Netzwerkverbindung.\n\n%@";
 "alert.sub.save_downloaded.title" = "Geladene Untertitel sichern";
@@ -349,7 +323,6 @@
 "alert.plugin_uninstall.message" = "Die Erweiterung wird entfernt.";
 "alert.plugin_reinstall.title" = "Erweiterung %@ existiert bereits";
 "alert.plugin_reinstall.message" = "Möchten Sie die Erweiterung neu installieren?";
-"alert.duplicated_plugin_id" = "Eine Erweiterung ist doppelt vorhanden. Mehrere Erweiterungen haben den gleichen Bezeichner „%@“. Dies kann zu Problemen führen. Bitte finde diese in den Einstellungen unter „Erweiterungen¡ und melde sie den Autoren. Wenn eine Erweiterung lokal installiert ist, kannst du seinen Bezeichner auch manuell in der Datei „Info.json“ ändern.";
 "alert.plugin_no_update" = "Kein Update gefunden.";
 "alert.plugin_update_found.title" = "Es wurde ein Update für „%@“ gefunden.";
 "alert.plugin_update_found.message" = "Die neueste Version ist %@. Du verwendest %@. Möchtest du aktualisieren?";
@@ -397,7 +370,6 @@
 "osc_toolbar.music_mode" = "Musikmodus";
 "osc_toolbar.sub_track" = "Untertitelspur auswählen";
 "osc_toolbar.screenshot" = "Bildschirmfoto erstellen";
-"osc_toolbar.plugins" = "Show plugins panel";
 
 "mini_player.album_art" = "Albumcover ein-/ausblenden";
 "mini_player.loop" = "Wiederholen";

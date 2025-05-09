@@ -5,6 +5,12 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"Save as…\"; ObjectID = \"1si-iG-tju\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save as..."
+          }
+        },
         "af" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15,6 +21,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "حفظ كـ…"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Захаваць як..."
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save as..."
+          }
+        },
+        "bn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save as..."
           }
         },
         "ca" : {
@@ -65,6 +89,12 @@
             "value" : "Guardar como..."
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save as..."
+          }
+        },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
@@ -107,10 +137,22 @@
             "value" : "Mentés másként…"
           }
         },
+        "hy" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save as..."
+          }
+        },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Simpan sebagai..."
+          }
+        },
+        "is" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save as..."
           }
         },
         "it" : {
@@ -125,6 +167,12 @@
             "value" : "名前を付けて保存..."
           }
         },
+        "kn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save as..."
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -137,16 +185,34 @@
             "value" : "Saglabāt kā..."
           }
         },
-        "nb" : {
+        "mk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Save as..."
+          }
+        },
+        "ml" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save as..."
+          }
+        },
+        "ne" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Opslaan als…"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save as..."
           }
         },
         "pl" : {
@@ -185,13 +251,13 @@
             "value" : "Uložiť ako..."
           }
         },
-        "sr" : {
+        "sl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Save as..."
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Save as..."
@@ -209,16 +275,34 @@
             "value" : "Save as..."
           }
         },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save as..."
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Farklı Kaydet…"
           }
         },
+        "ug" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save as..."
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Зберегти як…"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save as..."
           }
         },
         "vi" : {
@@ -255,6 +339,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "الكل"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hamısı"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Усе"
           }
         },
         "ca" : {
@@ -449,6 +545,18 @@
             "value" : "ترجمة النظام"
           }
         },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alt sistem:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Падсістэма:"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -635,6 +743,18 @@
             "value" : "مطوّل (Verbose)"
           }
         },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uzun"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Падрабязна"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -809,6 +929,12 @@
             "value" : "خطأ"
           }
         },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Памылкі"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -878,7 +1004,7 @@
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "שגיאות"
+            "value" : "שגיאה"
           }
         },
         "hi" : {
@@ -929,16 +1055,16 @@
             "value" : "Kļūda"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Feil"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fout"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feil"
           }
         },
         "pl" : {
@@ -977,7 +1103,7 @@
             "value" : "Chyba"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Grеška"
@@ -1041,6 +1167,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "نظام فرعي"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alt sistem"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Падсістэма"
           }
         },
         "ca" : {
@@ -1229,6 +1367,18 @@
             "value" : "إصدار تصحيح المطور"
           }
         },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sazla"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Адладка"
+          }
+        },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1401,6 +1551,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "رسالة"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mesaj"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Паведамленне"
           }
         },
         "ca" : {
@@ -1589,6 +1751,18 @@
             "value" : "وقت"
           }
         },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Müddət"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Час"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1761,6 +1935,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "عارض السجل"
+          }
+        },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loq bax"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Прагляд журнала"
           }
         },
         "ca" : {
@@ -1943,6 +2129,18 @@
             "value" : "مستوى:"
           }
         },
+        "az" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Səviyyə:"
+          }
+        },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Узровень:"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2123,6 +2321,12 @@
             "value" : "تحذير"
           }
         },
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Папярэджанне"
+          }
+        },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2192,7 +2396,7 @@
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "אזהרות"
+            "value" : "אזהרה"
           }
         },
         "hi" : {
@@ -2222,7 +2426,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avviso"
+            "value" : "Attenzione"
           }
         },
         "ja" : {
@@ -2237,16 +2441,16 @@
             "value" : "주의"
           }
         },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Advarsel"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Waarschuwing"
+          }
+        },
+        "no" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Advarsel"
           }
         },
         "pl" : {
@@ -2285,7 +2489,7 @@
             "value" : "Upozornenie"
           }
         },
-        "sr-Latn" : {
+        "sr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Upozorenje"

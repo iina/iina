@@ -11,7 +11,7 @@
 "HMa-Vz-EUk.title" = "Následující nastavení vyžadují restartování IINA.";
 
 /* Class = "NSButtonCell"; title = "Open Log Directory"; ObjectID = "JDA-g3-RNX"; */
-"JDA-g3-RNX.title" = "Open Log Directory";
+"JDA-g3-RNX.title" = "Otevřít adresář protokolů";
 
 /* Class = "NSButtonCell"; title = "Enable logging to file"; ObjectID = "LCd-uY-Yze"; */
 "LCd-uY-Yze.title" = "Povolit protokolování do souboru";
@@ -26,7 +26,7 @@
 "SX9-fy-bss.headerCell.title" = "Hodnota";
 
 /* Class = "NSButtonCell"; title = "Use config directory:"; ObjectID = "ehL-8Y-G8h"; */
-"ehL-8Y-G8h.title" = "Použít konfigurační složku:";
+"ehL-8Y-G8h.title" = "Použít konfigurační adresář:";
 
 /* Class = "NSButtonCell"; title = "Use mpv's OSD"; ObjectID = "phK-g9-Vbg"; */
 "phK-g9-Vbg.title" = "Použít mpv zprávy na obrazovce";
@@ -35,7 +35,7 @@
 "nFf-vh-bNd.title" = "Úroveň protokolu:";
 
 /* Class = "NSButtonCell"; title = "Show Log Viewer"; ObjectID = "Owx-92-Ogg"; */
-"Owx-92-Ogg.title" = "Show Log Viewer";
+"Owx-92-Ogg.title" = "Zobrazit prohlížeč protokolů";
 
 /* Class = "NSMenuItem"; title = "Verbose"; ObjectID = "S9M-yY-q0w"; */
 "S9M-yY-q0w.title" = "Podrobnosti";

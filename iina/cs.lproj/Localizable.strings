@@ -256,7 +256,7 @@
 "alert.error_saving_file" = "Při ukládání %@ došlo k chybě: %@";
 "alert.error_deleting_file" = "Soubor nelze odstranit.";
 
-"alert.target_peak.bad_value" = "Hodnota \"%@\" je neplatná.\nUveďte hodnotu mezi 10 a 10000 nebo 0.";
+"alert.target_peak.bad_value" = "Hodnota „%@“ je neplatná.\nUveďte hodnotu mezi 10 a 10000 nebo 0.";
 
 "alert.config.new.title" = "Konfigurace nového vstupu";
 "alert.config.new.message" = "Zadejte název nové konfigurace.";
@@ -280,14 +280,13 @@
 "alert.extra_option.cannot_read" = "Nelze načíst uživatelsky vymezené další možnosti mpv.";
 "alert.extra_option.empty" = "Název nebo hodnota nemohou být prázdné!";
 "alert.extra_option.error" = "Při nastavování --%@=%@ se vyskytla chyba číslo %d. Zkontrolujte vaše nastavení dalších možností v Nastavení > Pokročilé.";
-"alert.extra_option.config_folder" = "Chyba při nastavování konfigurační složky „%@“.";
+"alert.extra_option.config_folder" = "Chyba při nastavování konfiguračního adresáře „%@“.";
 
 "alert.playlist.error_deleting" = "%@ nelze smazat";
 
 "alert.screenshot.error_taking" = "Nelze zachytit snímek obrazovky!";
 
 "alert.sub.no_selected" = "Nejdříve vyberte stažené titulky.";
-"alert.sub_lang_not_set" = "Před používáním OpenSubtitles nastavte preferovaný jazyk titulků. Tentokrát bude použita angličtina.";
 "alert.sub.cannot_save_passwd" = "Nelze uložit vaše heslo do svazku klíčů: %@";
 "alert.sub.cannot_login" = "Nelze se přihlásit. Zkontrolujte uživatelské jméno, heslo a připojení k síti.\n\n%@";
 "alert.sub.save_downloaded.title" = "Uložit stažené titulky";
@@ -349,7 +348,6 @@
 "alert.plugin_uninstall.message" = "Plug-in bude odstraněn z disku.";
 "alert.plugin_reinstall.title" = "Plug-in %@ již existuje";
 "alert.plugin_reinstall.message" = "Chcete přeinstalovat plug-in?";
-"alert.duplicated_plugin_id" = "Detekovány duplicitní identifikátory plug-inu. Dva nebo více plug-inů mají stejný identifikátor „%@“. To může způsobit neobvyklé chování. Najděte je prosím v Nastavení > Plug-iny a nahlaste toto jejich autorům. Pokud je plug-in nainstalován místně, můžete také ručně změnit jeho identifikátor v souboru Info.json.";
 "alert.plugin_no_update" = "Plug-in je aktuální.";
 "alert.plugin_update_found.title" = "Je dostupná nová verze %@";
 "alert.plugin_update_found.message" = "Nejnovější dostupná verze k dispozici je %@. Nainstalována je %@. Přejete si nyní stáhnout aktualizaci?";

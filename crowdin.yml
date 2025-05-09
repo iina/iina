@@ -2,6 +2,8 @@ files:
   - source: /iina/mul.lproj/*.xcstrings
     translation: /iina/mul.lproj/%original_file_name%
     multilingual: 1
+    excluded_target_languages: ["th"]
   - source: /iina/*.xcstrings
     translation: /iina/%original_file_name%
     multilingual: 1
+    excluded_target_languages: ["th"]

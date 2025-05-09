@@ -1,0 +1,366 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "3GPP File" : {
+      "shouldTranslate" : false
+    },
+    "3GPP2 File" : {
+      "shouldTranslate" : false
+    },
+    "AAC file" : {
+      "shouldTranslate" : false
+    },
+    "Advanced Streaming Format" : {
+      "shouldTranslate" : false
+    },
+    "AIFF file" : {
+      "shouldTranslate" : false
+    },
+    "Apple QuickTime container" : {
+      "shouldTranslate" : false
+    },
+    "AVI container" : {
+      "shouldTranslate" : false
+    },
+    "CFBundleName" : {
+      "comment" : "Bundle name",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "IINA"
+          }
+        }
+      }
+    },
+    "Digital Audio" : {
+      "shouldTranslate" : false
+    },
+    "DivX file" : {
+      "shouldTranslate" : false
+    },
+    "DV file" : {
+      "shouldTranslate" : false
+    },
+    "FLAC Audio File" : {
+      "shouldTranslate" : false
+    },
+    "Flash Video File" : {
+      "shouldTranslate" : false
+    },
+    "GIF image" : {
+      "shouldTranslate" : false
+    },
+    "IINA Plugin" : {
+      "shouldTranslate" : false
+    },
+    "IINA Plugin Package" : {
+      "shouldTranslate" : false
+    },
+    "Matroska Audio File" : {
+      "shouldTranslate" : false
+    },
+    "Matroska Video File" : {
+      "shouldTranslate" : false
+    },
+    "Monkey's Audio Lossless Audio" : {
+      "shouldTranslate" : false
+    },
+    "MPEG Audio File" : {
+      "shouldTranslate" : false
+    },
+    "MPEG Video File" : {
+      "shouldTranslate" : false
+    },
+    "MPEG-2 Stream" : {
+      "shouldTranslate" : false
+    },
+    "MPEG3 Audio File" : {
+      "shouldTranslate" : false
+    },
+    "MPEG4 Audio File" : {
+      "shouldTranslate" : false
+    },
+    "MPEG4 Video File" : {
+      "shouldTranslate" : false
+    },
+    "NSHumanReadableCopyright" : {
+      "comment" : "Copyright (human-readable)",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "af" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kopiereg © 2017-2025\nCollider LI, et al.\nVrygestel onder GPLv3."
+          }
+        },
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حقوق النشر © 2017-2025\nCollider LI وآخرون.\nتم الإصدار بموجب رخصة GPLv3."
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2025\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017–2025\nCollider LI, et al.\nŠířeno pod GPLv3 licencí."
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2025\nCollider LI, et al.\nUdgivet under GPLv3."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2025\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright ©️ 2017-2025\nCollider LI, et al.\nΚυκλοφόρησε υπό την GPLv3."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Copyright © 2017-2025\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2025\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2025\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2025\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2025\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright ©️ 2017-2025\nCollider LI, et al.\nPublié sous licence GPLv3."
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "כל הזכויות שמורות © 2017-2024\nCollider LI ואחרים.\nמשוחרר תחת רישיון GPLv3."
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2025\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2025\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2025\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2025\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2025\nCollider LI, et al.\nDistribuito con licenza GPLv3."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2024\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2025\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "lv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2025\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2025\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright ©️ 2017-2025\nCollider LI, et al.\nVrijgegeven onder GPLv3."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2025\nCollider LI, et al.\nWydane na licencji GPLv3."
+          }
+        },
+        "pt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Direitos reservados © 2017-2024\nCollider Ll, et al.\nSobe a licença GPLv3."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2025\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2025\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017–2025\nCollider LI и др.\nВыпущено под лицензией GPLv3."
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2025\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "sr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2025\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "sr-Latn" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2025\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2025\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "ta" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2025\nCollider LI, et al.\nReleased under GPLv3."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Telif hakkı © 2017–2025\nCollider LI ve diğerleri.\nGPLv3 lisansı altında yayımlanmıştır."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copyright © 2017-2025\nCollider LI, et al.\nЗа ліцензією GPLv3."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bản quyền © 2017-2025\nCollider LI, et al.\nPhát hành theo GPLv3."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "版权所有 © 2017-2025\nCollider LI 等人\n基于 GPLv3 发布。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Collider LI 版權所有 © 2017-2025。"
+          }
+        }
+      }
+    },
+    "Ogg Audio File" : {
+      "shouldTranslate" : false
+    },
+    "Ogg Video File" : {
+      "shouldTranslate" : false
+    },
+    "OPUS file" : {
+      "shouldTranslate" : false
+    },
+    "RealPlayer Media Files" : {
+      "shouldTranslate" : false
+    },
+    "VOB File (DVD Video)" : {
+      "shouldTranslate" : false
+    },
+    "WAVE Audio File" : {
+      "shouldTranslate" : false
+    },
+    "WavePack Audio File" : {
+      "shouldTranslate" : false
+    },
+    "WebM Video File" : {
+      "shouldTranslate" : false
+    },
+    "Windows Media Audio" : {
+      "shouldTranslate" : false
+    },
+    "Windows Media Video" : {
+      "shouldTranslate" : false
+    },
+    "Windows Recorded TV Show" : {
+      "shouldTranslate" : false
+    },
+    "XM audio file" : {
+      "shouldTranslate" : false
+    }
+  },
+  "version" : "1.0"
+}

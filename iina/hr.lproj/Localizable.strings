@@ -16,9 +16,6 @@
 "general.username" = "Korisničko ime";
 "general.password" = "Lozinka";
 
-"input.value_is_empty" = "Value cannot be empty.";
-"input.already_exists" = "Value already exists.";
-
 // Guide Window
 "guide.highlights" = "Istaknuto";
 "guide.basic_settings" = "Osnovne postavke";
@@ -27,8 +24,6 @@
 // Initial Window
 "initial.announcement" = "Koristite %@ verziju IINA programa";
 "initial.beta.desc" = "Ako se želiš vratiti na stariju verziju izdanja, odznači opciju „Primaj aktualiziranja za beta verzije” u Postavke > Općenito i instaliraj stabilno izdanje s naše <a href=\"https://iina.io\">službene web stranice</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
 "initial.bug_report" = "Prijavi na stranici <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
 
 // Inspector Window
@@ -50,42 +45,11 @@
 "quicksetting.deinterlace" = "Preplitanje";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Sakrij";
-"quicksetting.reset_speed" = "Reset speed to 1x";
-
-// EQ Presets
-"eq.preset.flat" = "Flat";
-"eq.preset.acoustic" = "Acoustic";
-"eq.preset.classical" = "Classical";
-"eq.preset.dance" = "Dance";
-"eq.preset.deep" = "Deep";
-"eq.preset.electronic" = "Electronic";
-"eq.preset.hip_hop" = "Hip Hop";
-"eq.preset.increase_bass" = "Increase Bass";
-"eq.preset.increase_treble" = "Increase Treble";
-"eq.preset.increase_vocal" = "Increase Vocal";
-"eq.preset.jazz" = "Jazz";
-"eq.preset.latin" = "Latin";
-"eq.preset.loundness" = "Loundness";
-"eq.preset.lounge" = "Lounge";
-"eq.preset.piano" = "Piano";
-"eq.preset.pop" = "Pop";
-"eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reduce Bass";
-"eq.preset.reduce_treble" = "Reduce Treble";
-"eq.preset.rock" = "Rock";
-"eq.preset.small_speaker" = "Small Speaker";
-"eq.preset.spoken_word" = "Spoken Word";
-
-"alert.eq.new_profile.title" = "New EQ Profile";
-"alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Current Profile";
-"alert.eq.rename.message" = "Please enter a new profile name.";
 
 // OSDMessage.swift
 "osd.pause" = "Zaustavi";
 "osd.resume" = "Nastavi";
 "osd.volume" = "Glasnoća: %i";
-"osd.speed" = "Speed: %@x";
 "osd.aspect" = "Omjer: %@";
 "osd.crop" = "Obreži: %@";
 "osd.rotate" = "Okreni: %i°";
@@ -100,12 +64,6 @@
 "osd.subtitle_pos" = "Položaj titla: %.1f";
 "osd.sub_hidden" = "Titlovi skriveni";
 "osd.sub_visible" = "Titlovi vidljivi";
-"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
-"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
-"osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Isključi zvuk";
 "osd.unmute" = "Uključi zvuk";
 "osd.screenshot" = "Slika ekrana snimljena";
@@ -125,8 +83,6 @@
 "osd.find_online_sub" = "Pronađi titlovi na vezi…";
 "osd.find_online_sub.source" = "na";
 "osd.sub_not_found" = "Nema titlova";
-"osd.sub_found" = "%d subtitles found.";
-"osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "Titl je preuzet";
 "osd.sub_saved" = "Titl je spremljen";
 "osd.network_error" = "Mrežna greška";
@@ -157,25 +113,9 @@
 "preference.logged_in_as" = "Prijavljen/Prijavljena si kao %@";
 "preference.system_media_control" = "Koristi sustavsko upravljanje medijima";
 
-"preference.key_binding_hint_1" = "To edit key bindings in current configuration file, click \"Duplicate…\" button first to create a copy.";
-"preference.key_binding_hint_2" = "Double click a row at the right side to edit the corresponding key binding.";
-
 "preference.enable_adv_settings" = "Aktiviraj napredne postavke";
-
-"preference.sub_override_level.no" = "no";
 "preference.sub_override_level.force" = "prisili";
-"preference.sub_override_level.scale" = "scale";
-"preference.sub_override_level.strip" = "strip";
 "preference.sub_override_level.yes" = "da";
-
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
-
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
 "menu.volume" = "Glasnoća: %d";
 "menu.volume_muted" = "Glasnoća: %d (Isključen zvuk)";
@@ -183,8 +123,6 @@
 "menu.sub_delay" = "Kašnjenje titlova: %.2fs";
 "menu.sub_hide" = "Sakrij titlove";
 "menu.sub_show" = "Prikaži titlove";
-"menu.sub_second_hide" = "Hide Secondary Subtitles";
-"menu.sub_second_show" = "Show Secondary Subtitles";
 "menu.fullscreen" = "Pokreni cjeloekranski prikaz";
 "menu.exit_fullscreen" = "Prekini cjeloekranski prikaz";
 "menu.pip" = "Pokreni sliku u slici";
@@ -193,7 +131,6 @@
 "menu.exit_mini_player" = "Napusti glazbeni modus";
 "menu.pause" = "Zaustavi";
 "menu.resume" = "Nastavi";
-"menu.speed" = "Speed: %@x";
 "menu.chapters" = "Prikaži ploču poglavlja";
 "menu.hide_chapters" = "Sakrij ploču poglavlja";
 "menu.playlist" = "Prikaži ploču playliste";
@@ -207,8 +144,6 @@
 
 "menu.seek_forward" = "Korak naprijed %.0fs";
 "menu.seek_backward" = "Korak natrag %.0fs";
-"menu.speed_up" = "Speed Up by %@x";
-"menu.speed_down" = "Speed Down by %@x";
 "menu.volume_up" = "Glasnoća + %.0f% %";
 "menu.volume_down" = "Glasnoća − %.0f% %";
 "menu.audio_delay_up" = "Kašnjenje zvuka + %.1fs";
@@ -218,14 +153,6 @@
 
 "menu.crop_custom" = "Prilagođeno …";
 "menu.find_online_sub" = "Pronađi titlove na internetu iz %@";
-
-"menu.manage_plugins" = "Manage Plugins…";
-"menu.developer_tool" = "Developer Tool";
-"menu.more_plugin" = "More…";
-"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
-"menu.reload_plugins" = "Reload All Plugins";
-"menu.show_plugins_panel" = "Show Plugins Panel";
-"menu.hide_plugins_panel" = "Hide Plugins Panel";
 
 "track.audio" = "Audio";
 "track.none" = "<Ništa>";
@@ -256,8 +183,6 @@
 "alert.error_saving_file" = "Došlo je do greške prilikom spremanja %@: %@";
 "alert.error_deleting_file" = "Nije moguće izbrisati datoteku.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
-
 "alert.config.new.title" = "Nova konfiguracija unosa";
 "alert.config.new.message" = "Upiši naziv za novu konfiguraciju.";
 "alert.config.duplicate.title" = "Duplikat konfiguracije";
@@ -275,8 +200,6 @@
 "alert.add_filter.title" = "Novi filtar";
 "alert.add_filter.message" = "Upiši znakovni niz za filtar u formatu mpv-ove naredbe vf ili af.";
 
-"alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
-
 "alert.extra_option.cannot_read" = "Neuspjelo čitanje dodatne korisnički definirane mpv opcije.";
 "alert.extra_option.empty" = "Ključ ili vrijednost ne smiju biti prazni!";
 "alert.extra_option.error" = "Greška u opciji postavke --%@=%@ s povratnom vrijednošću %d. Provjeri postavke dodatnih opcija u Postavke > Napredno.";
@@ -287,7 +210,6 @@
 "alert.screenshot.error_taking" = "Nije moguće snimiti snimku ekrana!";
 
 "alert.sub.no_selected" = "Najprije odaberi preuzeti titl.";
-"alert.sub_lang_not_set" = "Postavi željene jezike titlova u postavkama prije korištenja web stranice OpenSubtitles. Ovaj put će se koristiti engleski (eng).";
 "alert.sub.cannot_save_passwd" = "Neuspjelo spremanje tvoje lozinke u privjesak ključeva: %@";
 "alert.sub.cannot_login" = "Neuspjela prijava. Provjeri svoje korisničko ime, lozinku i stanje mreže.\n\n%@";
 "alert.sub.save_downloaded.title" = "Spremi preuzeti titl";
@@ -314,8 +236,6 @@
 
 "alert.delete_history.title" = "Izbriši povijest reprodukcije";
 "alert.delete_history.message" = "Stvarno želiš izbrisati odabrane unose?";
-
-"alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
 "alert.filter_hwdec.abort" = "Prekini";
 "alert.filter_hwdec.turn_off" = "Isključi hardversko dekodiranje";
 "alert.filter_hwdec.use_copy" = "Prebaci na automatski način (kopiranje)";
@@ -349,7 +269,6 @@
 "alert.plugin_uninstall.message" = "Dodatak će se izbrisati s tvog diska.";
 "alert.plugin_reinstall.title" = "Dodatak %@ već postoji";
 "alert.plugin_reinstall.message" = "Želiš li ponovo instalirati dodatak?";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
 "alert.plugin_no_update" = "Nema pronađenih ažuriranja.";
 "alert.plugin_update_found.title" = "Pronađena je nova verzija za %@";
 "alert.plugin_update_found.message" = "Najnovija verzija je %@. Ti imaš verziju %@. Želiš li preuzeti novu verziju?";
@@ -397,7 +316,6 @@
 "osc_toolbar.music_mode" = "Pokreni glazbeni modus";
 "osc_toolbar.sub_track" = "Odaberi traku titlova";
 "osc_toolbar.screenshot" = "Snimi snimku ekrana";
-"osc_toolbar.plugins" = "Show plugins panel";
 
 "mini_player.album_art" = "Uključi/isključi ilustraciju albuma";
 "mini_player.loop" = "Ponovi";

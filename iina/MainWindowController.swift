@@ -2715,8 +2715,6 @@ class MainWindowController: PlayerWindowController {
     super.updatePlayButtonState(paused: paused)
     if paused {
       speedValueIndex = AppData.availableSpeedValues.count / 2
-      leftArrowLabel.isHidden = true
-      rightArrowLabel.isHidden = true
     }
   }
 
@@ -2759,8 +2757,6 @@ class MainWindowController: PlayerWindowController {
     if player.info.state == .paused {
       // speed is already reset by playerCore
       speedValueIndex = AppData.availableSpeedValues.count / 2
-      leftArrowLabel.isHidden = true
-      rightArrowLabel.isHidden = true
       // set speed to 0 if is fastforwarding
       if isFastforwarding {
         player.setSpeed(1)
@@ -2853,18 +2849,6 @@ class MainWindowController: PlayerWindowController {
       isFastforwarding = true
       let speedValue = AppData.availableSpeedValues[speedValueIndex]
       player.setSpeed(speedValue)
-      if speedValueIndex == 5 {
-        leftArrowLabel.isHidden = true
-        rightArrowLabel.isHidden = true
-      } else if speedValueIndex < 5 {
-        leftArrowLabel.isHidden = false
-        rightArrowLabel.isHidden = true
-        leftArrowLabel.stringValue = String(format: "%.2fx", speedValue)
-      } else if speedValueIndex > 5 {
-        leftArrowLabel.isHidden = true
-        rightArrowLabel.isHidden = false
-        rightArrowLabel.stringValue = String(format: "%.0fx", speedValue)
-      }
       // if is paused
       if player.info.state == .paused {
         player.resume()
@@ -2876,6 +2860,24 @@ class MainWindowController: PlayerWindowController {
     case .seek:
       player.seek(relativeSecond: left ? -10 : 10, option: .relative)
 
+    }
+  }
+
+  func updateSpeedLabel(speed: Double) {
+    if (speed == 1) {
+      leftArrowLabel.isHidden = true
+      rightArrowLabel.isHidden = true
+    } else if speed < 1 {
+      leftArrowLabel.isHidden = false
+      rightArrowLabel.isHidden = true
+      leftArrowLabel.stringValue = String(format: "%.2fx", speed)
+    } else if speed > 1 {
+      leftArrowLabel.isHidden = true
+      rightArrowLabel.isHidden = false
+      let fmt = NumberFormatter()
+      fmt.numberStyle = .decimal
+      fmt.maximumSignificantDigits = 3
+      rightArrowLabel.stringValue = fmt.string(for: speed)! + "x"
     }
   }
 

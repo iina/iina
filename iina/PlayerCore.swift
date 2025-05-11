@@ -2144,6 +2144,7 @@ class PlayerCore: NSObject {
     guard info.state.active else { return }
     info.playSpeed = speed
     sendOSD(.speed(speed))
+    mainWindow.updateSpeedLabel(speed: speed)
     needReloadQuickSettingsView()
     NowPlayingInfoManager.shared.updateInfo()
   }

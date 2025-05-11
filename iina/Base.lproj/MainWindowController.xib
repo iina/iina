@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23504" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -534,8 +534,8 @@
             </subviews>
             <constraints>
                 <constraint firstItem="QTI-wi-oyB" firstAttribute="centerY" secondItem="Xts-Pc-T8d" secondAttribute="centerY" id="HgA-Mc-Bhf"/>
-                <constraint firstItem="QTI-wi-oyB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Xts-Pc-T8d" secondAttribute="leading" id="NqC-Xk-Iqd"/>
-                <constraint firstAttribute="trailing" secondItem="QTI-wi-oyB" secondAttribute="trailing" constant="8" id="eQW-Mv-flr"/>
+                <constraint firstItem="QTI-wi-oyB" firstAttribute="leading" secondItem="Xts-Pc-T8d" secondAttribute="leading" id="NqC-Xk-Iqd"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="QTI-wi-oyB" secondAttribute="trailing" id="eQW-Mv-flr"/>
                 <constraint firstAttribute="height" constant="24" id="sLY-0Y-Hql"/>
                 <constraint firstAttribute="width" constant="26" id="zCh-hV-cEH"/>
             </constraints>

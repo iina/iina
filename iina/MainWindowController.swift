@@ -916,6 +916,12 @@ class MainWindowController: PlayerWindowController {
         shouldCallSuper = false
       }
     }
+    // if the click is outside a shown sidebar, sidebar will be hidden upon mouseUp
+    // this event is considered consumed
+    if !isMouseEvent(event, inAnyOf: [sideBarView, subPopoverView]) && sideBarStatus != .hidden {
+      shouldCallSuper = false
+    }
+    // currently, it only passes the event to plugins in super
     if shouldCallSuper {
       super.mouseDown(with: event)
     }

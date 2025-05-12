@@ -603,30 +603,31 @@ class MenuController: NSObject, NSMenuDelegate {
       var counter = 0
       var rootMenu: NSMenu! = pluginMenu
       let menuItems = (instance.plugin.globalInstance?.menuItems ?? []) + instance.menuItems
-      if menuItems.isEmpty { continue }
-      
-      if index != 0 {
-        pluginMenu.addItem(.separator())
-      }
 
-      if #available(macOS 14.0, *) {
-        pluginMenu.addItem(.sectionHeader(title: instance.plugin.name))
-      } else {
-        pluginMenu.addItem(withTitle: instance.plugin.name, enabled: false)
-      }
-
-      for item in menuItems {
-        if counter == 5 {
-          Logger.log("Please avoid adding too much first-level menu items. IINA will only display the first 5 of them.",
-                     level: .warning, subsystem: instance.subsystem)
-          let moreItem = NSMenuItem()
-          moreItem.title = NSLocalizedString("menu.more_plugin", comment: "More…")
-          rootMenu = NSMenu()
-          moreItem.submenu = rootMenu
-          pluginMenu.addItem(moreItem)
+      if !menuItems.isEmpty {
+        if index != 0 {
+          pluginMenu.addItem(.separator())
         }
-        add(menuItemDef: item, to: rootMenu, for: instance, errorList: &errorList)
-        counter += 1
+
+        if #available(macOS 14.0, *) {
+          pluginMenu.addItem(.sectionHeader(title: instance.plugin.name))
+        } else {
+          pluginMenu.addItem(withTitle: instance.plugin.name, enabled: false)
+        }
+
+        for item in menuItems {
+          if counter == 5 {
+            Logger.log("Please avoid adding too much first-level menu items. IINA will only display the first 5 of them.",
+                       level: .warning, subsystem: instance.subsystem)
+            let moreItem = NSMenuItem()
+            moreItem.title = NSLocalizedString("menu.more_plugin", comment: "More…")
+            rootMenu = NSMenu()
+            moreItem.submenu = rootMenu
+            pluginMenu.addItem(moreItem)
+          }
+          add(menuItemDef: item, to: rootMenu, for: instance, errorList: &errorList)
+          counter += 1
+        }
       }
 
       if #available(macOS 12.0, *) {

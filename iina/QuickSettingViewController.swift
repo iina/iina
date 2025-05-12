@@ -98,7 +98,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   var observers: [NSObjectProtocol] = []
 
   @IBOutlet weak var videoTabScrollView: NSScrollView!
-  @IBOutlet weak var videoTabContentViewWidthConstraint: NSLayoutConstraint!
+  @IBOutlet weak var audioTabScrollView: NSScrollView!
+  @IBOutlet weak var subtitlesTabScrollView: NSScrollView!
 
   @IBOutlet weak var videoTabBtn: NSButton!
   @IBOutlet weak var audioTabBtn: NSButton!
@@ -202,6 +203,12 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    let tabScrollViews = [videoTabScrollView, audioTabScrollView, subtitlesTabScrollView]
+    for (view, item) in zip(tabScrollViews, tabView.tabViewItems) {
+      item.view = view
+    }
+
     withAllTableViews { (view, _) in
       view.delegate = self
       view.dataSource = self

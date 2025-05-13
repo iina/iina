@@ -2861,7 +2861,7 @@ class MainWindowController: PlayerWindowController {
       }
 
     case .playlist:
-      player.mpv.command(left ? .playlistPrev : .playlistNext, checkError: false)
+      player.navigateInPlaylist(nextMedia: !left)
 
     case .seek:
       player.seek(relativeSecond: left ? -10 : 10, option: .relative)

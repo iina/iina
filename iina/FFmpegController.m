@@ -370,10 +370,28 @@ return -1;\
       duration = pFormatCtx->duration;
   }
 
+  // In addition to the duration IINA is interested metadata tags, especially the title tag. In many
+  // formats metadata is attached to the container itself. However in Ogg files metadata is attached
+  // to the stream. If the title tag is not found in the metadata from the container then search for
+  // an audio stream. If an audio stream with metadata containing a title tag is found then use the
+  // metadata from the stream instead of from the container. This addresses issue #5314.
+  AVDictionary *metadata = pFormatCtx->metadata;
+  if (av_dict_get(metadata, "title", NULL, 0) == NULL) {
+    ret = av_find_best_stream(pFormatCtx, AVMEDIA_TYPE_AUDIO, -1, -1, NULL, 0);
+    if (ret < 0) {
+      // Don't report an error when there isn't an audio stream.
+      if (ret != AVERROR_STREAM_NOT_FOUND) {
+        LOG_ERROR(@"Error when probing %@ to obtain best stream: %s (%d)", file, av_err2str(ret), ret);
+      }
+    } else if (av_dict_get(pFormatCtx->streams[ret]->metadata, "title", NULL, 0) != NULL) {
+      metadata = pFormatCtx->streams[ret]->metadata;
+    }
+  }
+
   NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
   info[@"@iina_duration"] = duration == -1 ? [NSNumber numberWithInt:-1] : [NSNumber numberWithDouble:(double)duration / AV_TIME_BASE];
   AVDictionaryEntry *tag = NULL;
-  while ((tag = av_dict_get(pFormatCtx->metadata, "", tag, AV_DICT_IGNORE_SUFFIX)))
+  while ((tag = av_dict_get(metadata, "", tag, AV_DICT_IGNORE_SUFFIX)))
     info[[NSString stringWithCString:tag->key encoding:NSUTF8StringEncoding]] = [NSString stringWithCString:tag->value encoding:NSUTF8StringEncoding];
 
   avformat_close_input(&pFormatCtx);

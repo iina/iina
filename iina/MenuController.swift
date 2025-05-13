@@ -478,11 +478,10 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updatePlaybackMenu() {
     let player = PlayerCore.active
-    let isDisplayingPlaylist = player.mainWindow.sideBarStatus == .playlist &&
-          player.mainWindow.playlistView.currentTab == .playlist
+    let playlistPanelVisible = player.isInMiniPlayer ? player.miniPlayer.isPlaylistVisible : player.mainWindow.sideBarStatus == .playlist
+    let isDisplayingPlaylist = playlistPanelVisible && player.mainWindow.playlistView.currentTab == .playlist
     playlistPanel?.title = isDisplayingPlaylist ? Constants.String.hidePlaylistPanel : Constants.String.playlistPanel
-    let isDisplayingChapters = player.mainWindow.sideBarStatus == .playlist &&
-          player.mainWindow.playlistView.currentTab == .chapters
+    let isDisplayingChapters = playlistPanelVisible && player.mainWindow.playlistView.currentTab == .chapters
     chapterPanel?.title = isDisplayingChapters ? Constants.String.hideChaptersPanel : Constants.String.chaptersPanel
     pause.title = player.info.state == .paused ? Constants.String.resume : Constants.String.pause
     abLoop.state = player.isABLoopActive ? .on : .off

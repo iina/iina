@@ -1431,7 +1431,11 @@ class PlayerCore: NSObject {
   }
 
   func navigateInPlaylist(nextMedia: Bool) {
-    mpv.command(nextMedia ? .playlistNext : .playlistPrev, checkError: false)
+    if nextMedia == false && (info.playlist.first?.isPlaying) ?? false {
+      seek(absoluteSecond: 0)
+    } else {
+      mpv.command(nextMedia ? .playlistNext : .playlistPrev, checkError: false)
+    }
   }
 
   @discardableResult

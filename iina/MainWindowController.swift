@@ -1751,13 +1751,13 @@ class MainWindowController: PlayerWindowController {
     NSCursor.setHiddenUntilMouseMoves(true)
   }
 
-  private func hideUI() {
+  private func hideUI(force: Bool = false) {
     // Don't hide UI when in PIP
     guard pipStatus == .notInPIP || animationState == .hidden else {
       return
     }
     // Don't hide UI when auto hide control bar is disabled
-    guard Preference.bool(for: .enableControlBarAutoHide) else { return }
+    guard force || Preference.bool(for: .enableControlBarAutoHide) else { return }
 
     animationState = .willHide
     player.refreshSyncUITimer()
@@ -2176,7 +2176,7 @@ class MainWindowController: PlayerWindowController {
     isPausedPriorToInteractiveMode = player.info.state == .paused
     player.pause()
     isInInteractiveMode = true
-    hideUI()
+    hideUI(force: true)
 
     if fsState.isFullscreen {
       let aspect: NSSize

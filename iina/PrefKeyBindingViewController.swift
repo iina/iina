@@ -87,6 +87,16 @@ class PrefKeyBindingViewController: PreferenceViewController, PreferenceWindowEm
   @IBOutlet weak var keyMappingSearchField: NSSearchField!
   @IBOutlet var mappingController: NSArrayController!
 
+  let configNameValidator: Utility.InputValidator<String> = { input in
+    if input.isEmpty {
+      return .valueIsEmpty
+    }
+    if KC.userConfigs[input] != nil || KC.defaultConfigs[input] != nil {
+      return .valueAlreadyExists
+    }
+    return .ok
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -152,16 +162,7 @@ class PrefKeyBindingViewController: PreferenceViewController, PreferenceWindowEm
   }
 
   @IBAction func newConfFileAction(_ sender: AnyObject) {
-    let validator: Utility.InputValidator<String> = { input in
-      if input.isEmpty {
-        return .valueIsEmpty
-      }
-      if KC.userConfigs[input] != nil || KC.defaultConfigs[input] != nil {
-        return .valueAlreadyExists
-      }
-      return .ok
-    }
-    Utility.quickPromptPanel("config.new", validator: validator, sheetWindow: view.window) { newName in
+    Utility.quickPromptPanel("config.new", validator: configNameValidator, sheetWindow: view.window) { newName in
       guard let newFilePath = self.newConfigFilePath(forName: newName) else { return }
 
       if !fm.createFile(atPath: newFilePath, contents: nil, attributes: nil) {
@@ -173,7 +174,7 @@ class PrefKeyBindingViewController: PreferenceViewController, PreferenceWindowEm
   }
 
   @IBAction func duplicateConfFileAction(_ sender: AnyObject) {
-    Utility.quickPromptPanel("config.duplicate", sheetWindow: view.window) { newName in
+    Utility.quickPromptPanel("config.duplicate", validator: configNameValidator, sheetWindow: view.window) { newName in
       guard let newFilePath = self.newConfigFilePath(forName: newName) else { return }
 
       do {
@@ -189,7 +190,7 @@ class PrefKeyBindingViewController: PreferenceViewController, PreferenceWindowEm
   
   @IBAction func configFileListDoubleAction(_ sender: NSTableView) {
     guard shouldEnableEdit else { return }
-    Utility.quickPromptPanel("config.rename", sheetWindow: view.window) { newName in
+    Utility.quickPromptPanel("config.rename", validator: configNameValidator, sheetWindow: view.window) { newName in
       guard let newFilePath = self.newConfigFilePath(forName: newName) else { return }
 
       do {

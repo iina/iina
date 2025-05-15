@@ -152,7 +152,16 @@ class PrefKeyBindingViewController: PreferenceViewController, PreferenceWindowEm
   }
 
   @IBAction func newConfFileAction(_ sender: AnyObject) {
-    Utility.quickPromptPanel("config.new", sheetWindow: view.window) { newName in
+    let validator: Utility.InputValidator<String> = { input in
+      if input.isEmpty {
+        return .valueIsEmpty
+      }
+      if KC.userConfigs[input] != nil || KC.defaultConfigs[input] != nil {
+        return .valueAlreadyExists
+      }
+      return .ok
+    }
+    Utility.quickPromptPanel("config.new", validator: validator, sheetWindow: view.window) { newName in
       guard let newFilePath = self.newConfigFilePath(forName: newName) else { return }
 
       if !fm.createFile(atPath: newFilePath, contents: nil, attributes: nil) {
@@ -309,18 +318,6 @@ class PrefKeyBindingViewController: PreferenceViewController, PreferenceWindowEm
   /// - Parameter filename: the filename of the new config file
   /// - Returns: the path of the new config if could be created; nil otherwise.
   private func newConfigFilePath(forName filename: String) -> String? {
-    // Check if the name is empty
-    guard !filename.isEmpty else {
-      Utility.showAlert("config.empty_name", sheetWindow: self.view.window)
-      return nil
-    }
-
-    // Check if there already exists a config which has the same name
-    guard KC.userConfigs[filename] == nil && KC.defaultConfigs[filename] == nil else {
-      Utility.showAlert("config.name_existing", sheetWindow: self.view.window)
-      return nil
-    }
-
     // Check if there exists a config file with the same filename
     let filePath = Utility.userInputConfDirURL.appendingPathComponent(filename + ".conf").path
     if fm.fileExists(atPath: filePath) {

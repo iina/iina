@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23077.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23077.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -203,16 +203,14 @@
                                                                             </connections>
                                                                         </button>
                                                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="K4f-mB-ja8" customClass="PlaylistPlaybackProgressView" customModule="IINA" customModuleProvider="target">
-                                                                            <rect key="frame" x="4" y="0.0" width="205" height="1"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="height" constant="1" id="07t-ih-NtZ"/>
-                                                                            </constraints>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="213" height="17"/>
                                                                         </customView>
                                                                     </subviews>
                                                                     <constraints>
-                                                                        <constraint firstItem="K4f-mB-ja8" firstAttribute="leading" secondItem="yTp-yO-UE2" secondAttribute="leading" constant="4" id="7Fe-BD-Ad9"/>
+                                                                        <constraint firstItem="K4f-mB-ja8" firstAttribute="leading" secondItem="yTp-yO-UE2" secondAttribute="leading" id="7Fe-BD-Ad9"/>
                                                                         <constraint firstItem="MbV-7g-8Gm" firstAttribute="centerY" secondItem="yTp-yO-UE2" secondAttribute="centerY" id="CoT-xg-AvY"/>
                                                                         <constraint firstAttribute="trailing" secondItem="yEn-uv-K8Z" secondAttribute="trailing" constant="4" id="G6G-5M-gSa"/>
+                                                                        <constraint firstItem="K4f-mB-ja8" firstAttribute="top" secondItem="yTp-yO-UE2" secondAttribute="top" id="GST-9J-XqX"/>
                                                                         <constraint firstItem="yEn-uv-K8Z" firstAttribute="leading" secondItem="MbV-7g-8Gm" secondAttribute="trailing" constant="4" id="IXf-e2-j8t"/>
                                                                         <constraint firstItem="rsK-ba-ojP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mzW-2W-iPg" secondAttribute="trailing" constant="4" id="V7g-16-fmO"/>
                                                                         <constraint firstAttribute="bottom" secondItem="K4f-mB-ja8" secondAttribute="bottom" id="XZo-GL-gZh"/>
@@ -220,7 +218,7 @@
                                                                         <constraint firstItem="rsK-ba-ojP" firstAttribute="centerY" secondItem="yTp-yO-UE2" secondAttribute="centerY" id="aED-tB-AFV"/>
                                                                         <constraint firstItem="U4W-Xv-hkh" firstAttribute="centerY" secondItem="yTp-yO-UE2" secondAttribute="centerY" id="g5U-ZA-Kco"/>
                                                                         <constraint firstItem="MbV-7g-8Gm" firstAttribute="leading" secondItem="rsK-ba-ojP" secondAttribute="trailing" constant="4" id="hoP-Vl-aD1"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="K4f-mB-ja8" secondAttribute="trailing" constant="4" id="mSL-zL-ggu"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="K4f-mB-ja8" secondAttribute="trailing" id="mSL-zL-ggu"/>
                                                                         <constraint firstItem="yEn-uv-K8Z" firstAttribute="centerY" secondItem="yTp-yO-UE2" secondAttribute="centerY" id="oc3-Vu-aJb"/>
                                                                         <constraint firstItem="U4W-Xv-hkh" firstAttribute="leading" secondItem="yTp-yO-UE2" secondAttribute="leading" id="pTq-Bj-ICm"/>
                                                                         <constraint firstItem="mzW-2W-iPg" firstAttribute="centerY" secondItem="yTp-yO-UE2" secondAttribute="centerY" id="qW6-QF-Yl2"/>
@@ -552,7 +550,7 @@
                     <rect key="frame" x="8" y="28" width="224" height="42"/>
                     <clipView key="contentView" drawsBackground="NO" id="6rI-3b-JZo">
                         <rect key="frame" x="0.0" y="0.0" width="224" height="42"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="16" id="puj-Kl-qOI">
                                 <rect key="frame" x="0.0" y="0.0" width="432" height="42"/>

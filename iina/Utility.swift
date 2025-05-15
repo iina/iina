@@ -243,10 +243,13 @@ class Utility {
     input.lineBreakMode = .byClipping
     input.usesSingleLineMode = true
     input.cell?.isScrollable = true
+    input.isBezeled = true
+    input.bezelStyle = .roundedBezel
+    input.controlSize = .large
     if let inputValue = inputValue {
       input.stringValue = inputValue
     }
-    let stackView = NSStackView(frame: NSRect(x: 0, y: 0, width: 240, height: 20))
+    let stackView = NSStackView(frame: NSRect(x: 0, y: 0, width: 240, height: 32))
     stackView.orientation = .vertical
     stackView.alignment = .centerX
     stackView.addArrangedSubview(input)
@@ -263,7 +266,7 @@ class Utility {
       label.textColor = .secondaryLabelColor
       label.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
       stackView.addArrangedSubview(label)
-      stackView.frame = NSRect(x: 0, y: 0, width: 240, height: 42)
+      stackView.frame = NSRect(x: 0, y: 0, width: 240, height: 54)
 
       let validateInput = {
         switch validator(input.stringValue) {

@@ -1750,7 +1750,7 @@ class PlayerCore: NSObject {
   }
 
   func savePlaybackPosition() {
-    guard Preference.bool(for: .resumeLastPosition) else { return }
+    guard mpv.getFlag(MPVOption.WatchLater.savePositionOnQuit) else { return }
 
     // The player must be active to be able to save the watch later configuration.
     if info.state.active {

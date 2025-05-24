@@ -301,6 +301,12 @@ CA
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="pEu-eU-Er6"/>
+                            <menuItem title="Take Screenshot" keyEquivalent="S" id="bGe-0j-hF5">
+                                <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                                <connections>
+                                    <action selector="takeScreenshotMenuItemClicked:" target="-1" id="L9S-4f-S9b"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="A-B Loop" id="i3P-Xw-8D7">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>

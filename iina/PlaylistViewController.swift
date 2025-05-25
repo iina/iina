@@ -68,6 +68,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   @IBOutlet weak var deleteBtn: NSButton!
   @IBOutlet weak var loopBtn: NSButton!
   @IBOutlet weak var shuffleBtn: NSButton!
+  @IBOutlet weak var sortBtn: NSButton!
   @IBOutlet weak var totalLengthLabel: NSTextField!
   @IBOutlet var subPopover: NSPopover!
   @IBOutlet var addFileMenu: NSMenu!
@@ -100,7 +101,12 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       $0?.image?.isTemplate = true
       $0?.alternateImage?.isTemplate = true
     }
-    
+
+    if #unavailable(macOS 11.0) {
+      sortBtn.image = NSImage.init(named: "triangle-down")
+      sortBtn.image?.isTemplate = true
+    }
+
     deleteBtn.toolTip = NSLocalizedString("mini_player.delete", comment: "delete")
     loopBtn.toolTip = NSLocalizedString("mini_player.loop", comment: "loop")
     shuffleBtn.toolTip = NSLocalizedString("mini_player.shuffle", comment: "shuffle")

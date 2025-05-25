@@ -19,6 +19,7 @@
                 <outlet property="playlistTableView" destination="xIa-sI-0Xn" id="JVO-9u-NdG"/>
                 <outlet property="removeBtn" destination="xKm-J1-NZs" id="cgl-XX-dEK"/>
                 <outlet property="shuffleBtn" destination="xhU-qn-3aa" id="Zof-fw-Jg4"/>
+                <outlet property="sortBtn" destination="Z8a-Hz-sYr" id="gZ8-PB-SvR"/>
                 <outlet property="subPopover" destination="nSf-Kp-eDQ" id="PUs-AK-r1c"/>
                 <outlet property="tabHeightConstraint" destination="So5-Pf-aJb" id="EFJ-yr-PVa"/>
                 <outlet property="tabView" destination="Yym-Zw-Hd8" id="xXL-Ne-hHh"/>
@@ -338,8 +339,8 @@
                                                     <action selector="addToPlaylistBtnAction:" target="-2" id="glx-Rv-Iri"/>
                                                 </connections>
                                             </button>
-                                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z8a-Hz-sYr">
-                                                <rect key="frame" x="49" y="-3.5" width="24" height="30"/>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Z8a-Hz-sYr">
+                                                <rect key="frame" x="50" y="0.0" width="24" height="24"/>
                                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.up.arrow.down" catalog="system" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" imageScaling="proportionallyDown" inset="2" id="0v5-1t-SKp">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -638,7 +639,7 @@
                 <constraint firstAttribute="trailing" secondItem="KT6-lD-Wq7" secondAttribute="trailing" constant="8" id="xTf-W9-ypT"/>
                 <constraint firstItem="caG-VQ-czp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3YN-KY-vJP" secondAttribute="leading" constant="20" symbolic="YES" id="y2I-oI-XmN"/>
             </constraints>
-            <point key="canvasLocation" x="46.5" y="647"/>
+            <point key="canvasLocation" x="46" y="647"/>
         </customView>
         <menu id="WJF-Uz-W4x">
             <items>

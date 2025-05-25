@@ -410,7 +410,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   @IBAction func addURLAction(_ sender: AnyObject) {
     Utility.quickPromptPanel("add_url") { url in
       if Regex.url.matches(url) {
-        self.player.addToPlaylist(url)
+        self.player.appendToPlaylist(url)
         self.player.mainWindow.playlistView.reloadData(playlist: true, chapters: false)
         self.player.sendOSD(.addToPlaylist(1))
       } else {
@@ -466,6 +466,28 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     vc.tableView.reloadData()
     vc.heightConstraint.constant = (vc.tableView.rowHeight + vc.tableView.intercellSpacing.height) * CGFloat(vc.tableView.numberOfRows)
     subPopover.show(relativeTo: sender.bounds, of: sender, preferredEdge: .maxY)
+  }
+
+  @IBAction func sortingBtnAction(_ sender: NSButton) {
+    let menu = NSMenu()
+    if #available(macOS 14.0, *) {
+      menu.addItem(.sectionHeader(title: "Sorting"))
+    }
+    menu.addItem(withTitle: NSLocalizedString("playlist.sorting.path_ascending", comment: "File Path (A-Z)"), action: #selector(sortPathAscending), keyEquivalent: "")
+    menu.addItem(withTitle: NSLocalizedString("playlist.sorting.path_descending", comment: "File Path (Z-A)"), action: #selector(sortPathDesecnding), keyEquivalent: "")
+    NSMenu.popUpContextMenu(menu, with: NSApplication.shared.currentEvent!, for: sender)
+  }
+
+  @objc func sortPathAscending() { sort(ascending: true) }
+  @objc func sortPathDesecnding() { sort(ascending: false) }
+
+  private func sort(ascending: Bool) {
+    var playlist = player.info.playlist
+    playlist.sort(by: {
+      let results = $0.filename < $1.filename
+      return ascending ? results : !results
+    })
+    player.playlistReorder(newPlaylist: playlist)
   }
 
   // MARK: - Table delegates

@@ -356,6 +356,8 @@
 
 "playlist.total_length" = "%@ in total";
 "playlist.total_length_with_selected" = "%@ of %@ selected";
+"playlist.sorting.path_ascending" = "File Path (A-Z)";
+"playlist.sorting.path_descending" = "File Path (Z-A)";
 "pl_menu.title_multi" = "%d Items";
 "pl_menu.play_next" = "Play Next";
 "pl_menu.play_in_new_window" = "Play in New Window";

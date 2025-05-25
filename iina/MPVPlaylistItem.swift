@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class MPVPlaylistItem: NSObject {
+class MPVPlaylistItem: NSObject, Identifiable {
 
   /** Actually this is the path. Use `filename` to conform mpv API's naming. */
   var filename: String

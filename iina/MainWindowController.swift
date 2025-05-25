@@ -33,7 +33,7 @@ fileprivate let OSCTopMainViewMarginTopInFullScreen: CGFloat = 6
 
 fileprivate let SettingsWidth: CGFloat = 360
 fileprivate let PlaylistMinWidth: CGFloat = 240
-fileprivate let PlaylistMaxWidth: CGFloat = 400
+fileprivate let PlaylistMaxWidth: CGFloat = 800
 
 fileprivate let InteractiveModeBottomViewHeight: CGFloat = 60
 
@@ -70,6 +70,10 @@ class MainWindowController: PlayerWindowController {
 
   /** For Force Touch. */
   let minimumPressDuration: TimeInterval = 0.5
+
+  private var sidebarMaxWidth: CGFloat {
+    max(window!.frame.width * 0.8, PlaylistMinWidth)
+  }
 
   // MARK: - Objects, Views
 
@@ -933,7 +937,8 @@ class MainWindowController: PlayerWindowController {
       let currentLocation = event.locationInWindow
       let newWidth = videoView.userInterfaceLayoutDirection == .rightToLeft ?
           currentLocation.x - 2 : window!.frame.width - currentLocation.x - 2
-      sideBarWidthConstraint.constant = newWidth.clamped(to: PlaylistMinWidth...PlaylistMaxWidth)
+      let maxWidth = min(sidebarMaxWidth, PlaylistMaxWidth)
+      sideBarWidthConstraint.constant = newWidth.clamped(to: PlaylistMinWidth...maxWidth)
     } else if !fsState.isFullscreen {
       guard !controlBarFloating.isDragging else { return }
 
@@ -2044,7 +2049,7 @@ class MainWindowController: PlayerWindowController {
         Logger.fatal("viewController is not a NSViewController")
     }
     sidebarAnimationState = .willShow
-    let width = type.width()
+    let width = type.width().clamped(to: 0...sidebarMaxWidth)
     sideBarWidthConstraint.constant = width
     // The macOS setting could change at any point in time. Remember which type of animation is
     // being used. Avoid using fading when disabling animations as that animation will initially

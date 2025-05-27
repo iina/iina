@@ -543,24 +543,24 @@
             </connections>
         </popover>
         <customView id="3YN-KY-vJP">
-            <rect key="frame" x="0.0" y="0.0" width="240" height="96"/>
+            <rect key="frame" x="0.0" y="0.0" width="350" height="96"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="18" horizontalPageScroll="10" verticalLineScroll="18" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="allowed" translatesAutoresizingMaskIntoConstraints="NO" id="hPw-DF-M14">
-                    <rect key="frame" x="8" y="28" width="224" height="42"/>
+                    <rect key="frame" x="8" y="28" width="334" height="42"/>
                     <clipView key="contentView" drawsBackground="NO" id="6rI-3b-JZo">
-                        <rect key="frame" x="0.0" y="0.0" width="224" height="42"/>
+                        <rect key="frame" x="0.0" y="0.0" width="334" height="42"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="16" id="puj-Kl-qOI">
-                                <rect key="frame" x="0.0" y="0.0" width="432" height="42"/>
+                            <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" tableStyle="fullWidth" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="16" id="puj-Kl-qOI">
+                                <rect key="frame" x="0.0" y="0.0" width="512" height="42"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 <tableColumns>
-                                    <tableColumn identifier="SubName" width="400" minWidth="164" maxWidth="1000" id="jzC-cr-Nd4">
-                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
+                                    <tableColumn identifier="SubName" editable="NO" width="500" minWidth="200" maxWidth="1000" id="jzC-cr-Nd4">
+                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                         </tableHeaderCell>
@@ -569,7 +569,7 @@
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
-                                        <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                        <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                     </tableColumn>
                                 </tableColumns>
                                 <connections>
@@ -592,7 +592,7 @@
                     </scroller>
                 </scrollView>
                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KT6-lD-Wq7">
-                    <rect key="frame" x="6" y="74" width="228" height="14"/>
+                    <rect key="frame" x="6" y="74" width="338" height="14"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Matched subtitles" id="j2t-mO-cpo">
                         <font key="font" metaFont="smallSystemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -600,7 +600,7 @@
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="caG-VQ-czp">
-                    <rect key="frame" x="136" y="7" width="96" height="17"/>
+                    <rect key="frame" x="246" y="7" width="96" height="17"/>
                     <buttonCell key="cell" type="roundRect" title="Wrong Subtitle!" bezelStyle="roundedRect" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zod-Ch-cOH">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="controlContent" size="11"/>
@@ -622,7 +622,7 @@
                 <constraint firstAttribute="trailing" secondItem="KT6-lD-Wq7" secondAttribute="trailing" constant="8" id="xTf-W9-ypT"/>
                 <constraint firstItem="caG-VQ-czp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3YN-KY-vJP" secondAttribute="leading" constant="20" symbolic="YES" id="y2I-oI-XmN"/>
             </constraints>
-            <point key="canvasLocation" x="46.5" y="647"/>
+            <point key="canvasLocation" x="514" y="66"/>
         </customView>
         <menu id="WJF-Uz-W4x">
             <items>

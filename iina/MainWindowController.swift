@@ -2135,6 +2135,7 @@ class MainWindowController: PlayerWindowController {
         self.sidebarAnimationState = .hidden
         after()
       }
+      self.window?.resetCursorRects()
     }
   }
 

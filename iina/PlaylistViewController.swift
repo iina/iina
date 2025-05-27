@@ -943,16 +943,6 @@ class PlaylistPrefixButton: NSButton {
 
 }
 
-
-class PlaylistView: NSView {
-
-  override func mouseDown(with event: NSEvent) {}
-
-  // override var allowsVibrancy: Bool { return true }
-
-}
-
-
 class SubPopoverViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
 
   @IBOutlet weak var tableView: NSTableView!

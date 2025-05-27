@@ -137,7 +137,18 @@ class MainWindowController: PlayerWindowController {
 
   var mousePosRelatedToWindow: CGPoint?
   var isDragging: Bool = false
-  var isResizingSidebar: Bool = false
+  var isResizingSidebar: Bool = false {
+    didSet {
+      if isResizingSidebar {
+        window?.disableCursorRects()
+        NSCursor.resizeLeftRight.push()
+      } else {
+        NSCursor.pop()
+        window?.resetCursorRects()
+        window?.enableCursorRects()
+      }
+    }
+  }
 
   var pipStatus = PIPStatus.notInPIP
   var isInInteractiveMode: Bool = false
@@ -900,6 +911,13 @@ class MainWindowController: PlayerWindowController {
     NSCursor.setHiddenUntilMouseMoves(true)
   }
 
+  var playlistDraggingRect: NSRect {
+    let sf = sideBarView.frame
+    let originX = videoView.userInterfaceLayoutDirection == .rightToLeft ?
+        sf.width + 4 : sf.origin.x - 4
+    return NSMakeRect(originX, sf.origin.y, 4, sf.height)
+  }
+
   override func mouseDown(with event: NSEvent) {
     if Logger.enabled && Logger.Level.preferred >= .verbose {
       log("MainWindow mouseDown @ \(event.locationInWindow)", level: .verbose)
@@ -912,10 +930,7 @@ class MainWindowController: PlayerWindowController {
     mousePosRelatedToWindow = event.locationInWindow
     // playlist resizing
     if sideBarStatus == .playlist {
-      let sf = sideBarView.frame
-      let originX = videoView.userInterfaceLayoutDirection == .rightToLeft ?
-          sf.width + 4 : sf.origin.x - 4
-      if NSPointInRect(mousePosRelatedToWindow!, NSMakeRect(originX, sf.origin.y, 4, sf.height)) {
+      if NSPointInRect(mousePosRelatedToWindow!, playlistDraggingRect) {
         isResizingSidebar = true
         shouldCallSuper = false
       }
@@ -2082,6 +2097,7 @@ class MainWindowController: PlayerWindowController {
     }) {
       self.sidebarAnimationState = .shown
       self.sideBarStatus = type
+      self.window?.resetCursorRects()
     }
   }
 

@@ -112,6 +112,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     shuffleBtn.toolTip = NSLocalizedString("mini_player.shuffle", comment: "shuffle")
     addBtn.toolTip = NSLocalizedString("mini_player.add", comment: "add")
     removeBtn.toolTip = NSLocalizedString("mini_player.remove", comment: "remove")
+    sortBtn.toolTip = NSLocalizedString("mini_player.sort", comment: "sort")
 
     hideTotalLength()
 
@@ -477,17 +478,30 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   @IBAction func sortingBtnAction(_ sender: NSButton) {
     let menu = NSMenu()
     if #available(macOS 14.0, *) {
-      menu.addItem(.sectionHeader(title: "Sorting"))
+      menu.addItem(.sectionHeader(title: NSLocalizedString("playlist.sorting.header", comment: "Sorting")))
     }
-    menu.addItem(withTitle: NSLocalizedString("playlist.sorting.path_ascending", comment: "File Path (A-Z)"), action: #selector(sortPathAscending), keyEquivalent: "")
-    menu.addItem(withTitle: NSLocalizedString("playlist.sorting.path_descending", comment: "File Path (Z-A)"), action: #selector(sortPathDesecnding), keyEquivalent: "")
+    menu.addItem(withTitle: NSLocalizedString("playlist.sorting.filename_ascending", comment: "Filename Ascending"), action: #selector(sortPathAscending), keyEquivalent: "")
+    menu.addItem(withTitle: NSLocalizedString("playlist.sorting.filename_descending", comment: "Filename Descending"), action: #selector(sortPathDesecnding), keyEquivalent: "")
+    menu.addItem(withTitle: NSLocalizedString("playlist.sorting.path_ascending", comment: "File Path Ascending"), action: #selector(sortPathAscending), keyEquivalent: "")
+    menu.addItem(withTitle: NSLocalizedString("playlist.sorting.path_descending", comment: "File Path Descending"), action: #selector(sortPathDesecnding), keyEquivalent: "")
     NSMenu.popUpContextMenu(menu, with: NSApplication.shared.currentEvent!, for: sender)
   }
 
-  @objc func sortPathAscending() { sort(ascending: true) }
-  @objc func sortPathDesecnding() { sort(ascending: false) }
+  @objc func sortNameAscending() { sortName(ascending: true) }
+  @objc func sortNameDesecnding() { sortName(ascending: false) }
+  @objc func sortPathAscending() { sortPath(ascending: true) }
+  @objc func sortPathDesecnding() { sortPath(ascending: false) }
 
-  private func sort(ascending: Bool) {
+  private func sortName(ascending: Bool) {
+    var playlist = player.info.playlist
+    playlist.sort(by: {
+      let results = $0.filenameForDisplay < $1.filenameForDisplay
+      return ascending ? results : !results
+    })
+    player.playlistReorder(newPlaylist: playlist)
+  }
+
+  private func sortPath(ascending: Bool) {
     var playlist = player.info.playlist
     playlist.sort(by: {
       let results = $0.filename < $1.filename

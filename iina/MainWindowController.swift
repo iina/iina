@@ -1056,7 +1056,6 @@ class MainWindowController: PlayerWindowController {
 
   override func scrollWheel(with event: NSEvent) {
     guard !isInInteractiveMode else { return }
-    guard !isMouseEvent(event, inAnyOf: [sideBarView, titleBarView, subPopoverView]) else { return }
 
     if isMouseEvent(event, inAnyOf: [fragSliderView]) && playSlider.isEnabled {
       seekOverride = true
@@ -1065,6 +1064,9 @@ class MainWindowController: PlayerWindowController {
     } else {
       guard !isMouseEvent(event, inAnyOf: [currentControlBar]) else { return }
     }
+
+    guard !isMouseEvent(event, inAnyOf: [sideBarView, titleBarView, subPopoverView])
+               || seekOverride || volumeOverride else { return }
 
     super.scrollWheel(with: event)
 

@@ -58,3 +58,10 @@ class MainWindow: NSWindow {
     forceKeyAndMain ? true : super.canBecomeMain
   }
 }
+
+class MainWindowContentView: NSView {
+  override func resetCursorRects() {
+    guard let controller = window?.windowController as? MainWindowController, controller.sideBarStatus == .playlist else { return }
+    addCursorRect(controller.playlistDraggingRect, cursor: .resizeLeftRight)
+  }
+}

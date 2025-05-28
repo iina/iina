@@ -33,7 +33,7 @@ fileprivate let OSCTopMainViewMarginTopInFullScreen: CGFloat = 6
 
 fileprivate let SettingsWidth: CGFloat = 360
 fileprivate let PlaylistMinWidth: CGFloat = 240
-fileprivate let PlaylistMaxWidth: CGFloat = 400
+fileprivate let PlaylistMaxWidth: CGFloat = 800
 
 fileprivate let InteractiveModeBottomViewHeight: CGFloat = 60
 
@@ -70,6 +70,10 @@ class MainWindowController: PlayerWindowController {
 
   /** For Force Touch. */
   let minimumPressDuration: TimeInterval = 0.5
+
+  private var sidebarMaxWidth: CGFloat {
+    max(window!.frame.width * 0.8, PlaylistMinWidth)
+  }
 
   // MARK: - Objects, Views
 
@@ -133,7 +137,18 @@ class MainWindowController: PlayerWindowController {
 
   var mousePosRelatedToWindow: CGPoint?
   var isDragging: Bool = false
-  var isResizingSidebar: Bool = false
+  var isResizingSidebar: Bool = false {
+    didSet {
+      if isResizingSidebar {
+        window?.disableCursorRects()
+        NSCursor.resizeLeftRight.push()
+      } else {
+        NSCursor.pop()
+        window?.resetCursorRects()
+        window?.enableCursorRects()
+      }
+    }
+  }
 
   var pipStatus = PIPStatus.notInPIP
   var isInInteractiveMode: Bool = false
@@ -896,6 +911,13 @@ class MainWindowController: PlayerWindowController {
     NSCursor.setHiddenUntilMouseMoves(true)
   }
 
+  var playlistDraggingRect: NSRect {
+    let sf = sideBarView.frame
+    let originX = videoView.userInterfaceLayoutDirection == .rightToLeft ?
+        sf.width + 4 : sf.origin.x - 4
+    return NSMakeRect(originX, sf.origin.y, 4, sf.height)
+  }
+
   override func mouseDown(with event: NSEvent) {
     if Logger.enabled && Logger.Level.preferred >= .verbose {
       log("MainWindow mouseDown @ \(event.locationInWindow)", level: .verbose)
@@ -908,10 +930,7 @@ class MainWindowController: PlayerWindowController {
     mousePosRelatedToWindow = event.locationInWindow
     // playlist resizing
     if sideBarStatus == .playlist {
-      let sf = sideBarView.frame
-      let originX = videoView.userInterfaceLayoutDirection == .rightToLeft ?
-          sf.width + 4 : sf.origin.x - 4
-      if NSPointInRect(mousePosRelatedToWindow!, NSMakeRect(originX, sf.origin.y, 4, sf.height)) {
+      if NSPointInRect(mousePosRelatedToWindow!, playlistDraggingRect) {
         isResizingSidebar = true
         shouldCallSuper = false
       }
@@ -933,7 +952,8 @@ class MainWindowController: PlayerWindowController {
       let currentLocation = event.locationInWindow
       let newWidth = videoView.userInterfaceLayoutDirection == .rightToLeft ?
           currentLocation.x - 2 : window!.frame.width - currentLocation.x - 2
-      sideBarWidthConstraint.constant = newWidth.clamped(to: PlaylistMinWidth...PlaylistMaxWidth)
+      let maxWidth = min(sidebarMaxWidth, PlaylistMaxWidth)
+      sideBarWidthConstraint.constant = newWidth.clamped(to: PlaylistMinWidth...maxWidth)
     } else if !fsState.isFullscreen {
       guard !controlBarFloating.isDragging else { return }
 
@@ -1036,7 +1056,6 @@ class MainWindowController: PlayerWindowController {
 
   override func scrollWheel(with event: NSEvent) {
     guard !isInInteractiveMode else { return }
-    guard !isMouseEvent(event, inAnyOf: [sideBarView, titleBarView, subPopoverView]) else { return }
 
     if isMouseEvent(event, inAnyOf: [fragSliderView]) && playSlider.isEnabled {
       seekOverride = true
@@ -1045,6 +1064,9 @@ class MainWindowController: PlayerWindowController {
     } else {
       guard !isMouseEvent(event, inAnyOf: [currentControlBar]) else { return }
     }
+
+    guard !isMouseEvent(event, inAnyOf: [sideBarView, titleBarView, subPopoverView])
+               || seekOverride || volumeOverride else { return }
 
     super.scrollWheel(with: event)
 
@@ -2044,7 +2066,7 @@ class MainWindowController: PlayerWindowController {
         Logger.fatal("viewController is not a NSViewController")
     }
     sidebarAnimationState = .willShow
-    let width = type.width()
+    let width = type.width().clamped(to: 0...sidebarMaxWidth)
     sideBarWidthConstraint.constant = width
     // The macOS setting could change at any point in time. Remember which type of animation is
     // being used. Avoid using fading when disabling animations as that animation will initially
@@ -2077,6 +2099,7 @@ class MainWindowController: PlayerWindowController {
     }) {
       self.sidebarAnimationState = .shown
       self.sideBarStatus = type
+      self.window?.resetCursorRects()
     }
   }
 
@@ -2114,6 +2137,7 @@ class MainWindowController: PlayerWindowController {
         self.sidebarAnimationState = .hidden
         after()
       }
+      self.window?.resetCursorRects()
     }
   }
 

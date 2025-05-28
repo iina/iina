@@ -1346,6 +1346,40 @@
 				</array>
 			</dict>
 		</dict>
+    <dict>
+      <key>UTTypeConformsTo</key>
+      <array>
+        <string>public.audio</string>
+      </array>
+      <key>UTTypeDescription</key>
+      <string>Direct Stream Digital DSF File</string>
+      <key>UTTypeIdentifier</key>
+      <string>io.iina.dsf</string>
+      <key>UTTypeTagSpecification</key>
+      <dict>
+        <key>public.filename-extension</key>
+        <array>
+          <string>dsf</string>
+        </array>
+      </dict>
+    </dict>
+    <dict>
+      <key>UTTypeConformsTo</key>
+      <array>
+        <string>public.audio</string>
+      </array>
+      <key>UTTypeDescription</key>
+      <string>Direct Stream Digital DFF File</string>
+      <key>UTTypeIdentifier</key>
+      <string>io.iina.dff</string>
+      <key>UTTypeTagSpecification</key>
+      <dict>
+        <key>public.filename-extension</key>
+        <array>
+          <string>dff</string>
+        </array>
+      </dict>
+    </dict>
 	</array>
 	<key>com.colliderli.iina.build.branch</key>
 	<string>IINA_BUILD_BRANCH</string>

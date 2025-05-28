@@ -971,21 +971,6 @@ class PlaylistPrefixButton: NSButton {
 
 }
 
-
-class PlaylistView: NSView {
-
-  override func resetCursorRects() {
-    let rect = NSRect(x: frame.origin.x - 4, y: frame.origin.y, width: 4, height: frame.height)
-    addCursorRect(rect, cursor: .resizeLeftRight)
-  }
-
-  override func mouseDown(with event: NSEvent) {}
-
-  // override var allowsVibrancy: Bool { return true }
-
-}
-
-
 class SubPopoverViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
 
   @IBOutlet weak var tableView: NSTableView!

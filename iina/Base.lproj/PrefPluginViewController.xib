@@ -179,15 +179,15 @@
                                         <font key="font" metaFont="system"/>
                                         <tabViewItems>
                                             <tabViewItem label="Support" identifier="" id="T21-nd-TLF">
-                                                <view key="view" ambiguous="YES" id="uYm-vh-ebb">
-                                                    <rect key="frame" x="0.0" y="0.0" width="554" height="301"/>
+                                                <view key="view" id="uYm-vh-ebb">
+                                                    <rect key="frame" x="0.0" y="0.0" width="554" height="316"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eVh-8y-rUw">
-                                                            <rect key="frame" x="0.0" y="7" width="554" height="294"/>
+                                                        <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eVh-8y-rUw">
+                                                            <rect key="frame" x="0.0" y="28" width="554" height="288"/>
                                                             <subviews>
-                                                                <customView ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i1L-lW-AYZ">
-                                                                    <rect key="frame" x="0.0" y="182" width="542" height="112"/>
+                                                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="i1L-lW-AYZ">
+                                                                    <rect key="frame" x="0.0" y="176" width="542" height="112"/>
                                                                     <subviews>
                                                                         <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LeP-Yg-Cr3">
                                                                             <rect key="frame" x="10" y="46" width="40" height="14"/>
@@ -274,11 +274,11 @@
                                                                         <constraint firstAttribute="bottom" secondItem="8Oq-36-bBu" secondAttribute="bottom" constant="4" id="ywO-8o-uwm"/>
                                                                     </constraints>
                                                                 </customView>
-                                                                <customView ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4MR-2X-Tp6">
-                                                                    <rect key="frame" x="0.0" y="132" width="542" height="46"/>
+                                                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="4MR-2X-Tp6">
+                                                                    <rect key="frame" x="0.0" y="132" width="542" height="40"/>
                                                                     <subviews>
-                                                                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pnd-pE-Bkr">
-                                                                            <rect key="frame" x="10" y="37" width="41" height="5"/>
+                                                                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pnd-pE-Bkr">
+                                                                            <rect key="frame" x="10" y="22" width="41" height="14"/>
                                                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Source" id="r3r-Qh-rC9">
                                                                                 <font key="font" metaFont="controlContent" size="11"/>
                                                                                 <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -417,8 +417,6 @@
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstAttribute="trailing" secondItem="4MR-2X-Tp6" secondAttribute="trailing" constant="12" id="GNI-An-C4s"/>
-                                                                <constraint firstAttribute="bottom" secondItem="4MR-2X-Tp6" secondAttribute="bottom" constant="132" id="Rqd-TG-xLd"/>
-                                                                <constraint firstItem="4MR-2X-Tp6" firstAttribute="top" secondItem="eVh-8y-rUw" secondAttribute="top" constant="116" id="ber-EF-yjV"/>
                                                                 <constraint firstAttribute="trailing" secondItem="juj-Fa-I24" secondAttribute="trailing" constant="12" id="j0V-xm-dj6"/>
                                                                 <constraint firstAttribute="trailing" secondItem="i1L-lW-AYZ" secondAttribute="trailing" constant="12" id="jau-Xa-vnh"/>
                                                             </constraints>
@@ -435,10 +433,9 @@
                                                         </stackView>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="eVh-8y-rUw" secondAttribute="bottom" constant="8" id="9er-Kr-2RP"/>
                                                         <constraint firstAttribute="trailing" secondItem="eVh-8y-rUw" secondAttribute="trailing" id="A1k-Vs-ukA"/>
                                                         <constraint firstItem="eVh-8y-rUw" firstAttribute="top" secondItem="uYm-vh-ebb" secondAttribute="top" id="IE6-WF-S81"/>
-                                                        <constraint firstAttribute="bottom" secondItem="eVh-8y-rUw" secondAttribute="bottom" constant="22" id="Uzi-ZK-FE2"/>
+                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="eVh-8y-rUw" secondAttribute="bottom" constant="22" id="Uzi-ZK-FE2"/>
                                                         <constraint firstItem="eVh-8y-rUw" firstAttribute="leading" secondItem="uYm-vh-ebb" secondAttribute="leading" id="kGe-QZ-gbb"/>
                                                     </constraints>
                                                 </view>
@@ -595,7 +592,7 @@
                     <rect key="frame" x="0.0" y="442" width="724" height="5"/>
                 </box>
                 <button identifier="FunctionalButtonInstallLocal" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="K9h-qs-0tJ">
-                    <rect key="frame" x="149" y="454" width="210" height="32"/>
+                    <rect key="frame" x="149" y="454" width="136" height="32"/>
                     <buttonCell key="cell" type="push" title="Install Package…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="sdU-FG-dTO">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -639,7 +636,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="283" y="305" width="480" height="297"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="3840" height="1575"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1728" height="1079"/>
             <view key="contentView" id="iQg-1N-GyM">
                 <rect key="frame" x="0.0" y="0.0" width="480" height="297"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -710,7 +707,7 @@ DQ
                         <rect key="frame" x="20" y="60" width="438" height="101"/>
                         <clipView key="contentView" id="aFk-H7-59O">
                             <rect key="frame" x="1" y="1" width="436" height="99"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="bRx-bz-pZ0">
                                     <rect key="frame" x="0.0" y="0.0" width="436" height="99"/>
@@ -732,7 +729,7 @@ DQ
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView identifier="URLCell" id="pQh-Sg-FDH">
-                                                    <rect key="frame" x="11" y="1" width="310" height="17"/>
+                                                    <rect key="frame" x="1" y="1" width="310" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kyj-2t-Kff">
@@ -768,7 +765,7 @@ DQ
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
                                                 <tableCellView identifier="InstalledCell" id="MLN-xs-VvQ">
-                                                    <rect key="frame" x="324" y="1" width="91" height="17"/>
+                                                    <rect key="frame" x="314" y="1" width="91" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Gc-LL-LXO">
@@ -833,6 +830,6 @@ DQ
         </window>
     </objects>
     <resources>
-        <image name="NSFollowLinkFreestandingTemplate" width="19" height="19"/>
+        <image name="NSFollowLinkFreestandingTemplate" width="20" height="20"/>
     </resources>
 </document>

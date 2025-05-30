@@ -1866,7 +1866,11 @@ class PlayerCore: NSObject {
         // auto load matched subtitles
         if let matchedSubs = self.info.getMatchedSubs(path) {
           log("Found \(matchedSubs.count) subs for current file")
+          var loadedSubs = Set<URL>()
           for sub in matchedSubs {
+            // filter duplicated matched subtitles, see https://github.com/iina/iina/issues/5399
+            guard !loadedSubs.contains(sub) else { continue }
+            loadedSubs.insert(sub)
             try checkTicket(currentTicket)
             loadExternalSubFile(sub)
           }

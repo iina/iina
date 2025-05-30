@@ -146,7 +146,7 @@ class NowPlayingInfoManager {
       }
     }
 
-    let duration = PlayerCore.lastActive.info.videoDuration?.second ?? 0
+    let duration = activePlayer.info.videoDuration?.second ?? 0
     let time = activePlayer.info.videoPosition?.second ?? 0
     
     // When playback is paused Now Playing expects the playback rate to be set to zero. If this is
@@ -158,6 +158,7 @@ class NowPlayingInfoManager {
     info[MPNowPlayingInfoPropertyElapsedPlaybackTime] = time
     info[MPNowPlayingInfoPropertyPlaybackRate] = speed
     info[MPNowPlayingInfoPropertyDefaultPlaybackRate] = 1
+    info[MPNowPlayingInfoPropertyAssetURL] = activePlayer.info.currentURL
 
     center.nowPlayingInfo = info
 

@@ -40,7 +40,7 @@ class NowPlayingInfoManager {
 
   /// The number of video tracks the last time the tracks were searched for artwork.
   private var artworkLastTrackCount = 0
-  
+
   /// Maximum number of times to request  [QLThumbnailGenerator](https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailgenerator)
   /// generate a thumbnail for the current media item.
   private let artworkQLGenerationMaxRetries = 3
@@ -48,10 +48,10 @@ class NowPlayingInfoManager {
   /// Number of times IINA has requested  [QLThumbnailGenerator](https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailgenerator)
   /// generate a thumbnail for the current media item.
   private var artworkQLGenerationRetries = 0
-  
+
   /// Ticket used to coordinate with background tasks performing work to update the artwork shown by Now Playing.
   private var artworkTicket = 0
-  
+
   /// Whether work is currently being performed in the background to update the artwork shown by Now Playing.
   private var artworkUpdateInProgress = false
 
@@ -60,10 +60,10 @@ class NowPlayingInfoManager {
 
   /// The URL of the media item whose artwork could be being shown in Now Playing.
   private var artworkURL: URL?
-  
+
   /// Whether a Now Playing session is active.
   private var isActive = false
-  
+
   /// Established notification observers.
   private var observers: [NSObjectProtocol] = []
 
@@ -85,7 +85,7 @@ class NowPlayingInfoManager {
   /// - Important: This method **must** be run on the main thread because it references `PlayerCore.lastActive`.
   func updateInfo(withTitle: Bool = false) {
     guard RemoteCommandController.useSystemMediaControl else { return }
-    
+
     let center = MPNowPlayingInfoCenter.default()
     let activePlayer = PlayerCore.lastActive
     guard activePlayer.info.state.active else {
@@ -99,7 +99,13 @@ class NowPlayingInfoManager {
       }
       return
     }
-    
+
+    guard let url = activePlayer.info.currentURL else {
+      // Internal error, should not occur.
+      log("Ignoring update request because currentURL is `nil`", level: .error)
+      return
+    }
+
     // Because showing artwork is a complex operation there is an internal setting that can be
     // changed to disable this feature should any problems with it be discovered.
     if Preference.bool(for: .enableNowPlayingArtwork) {
@@ -109,21 +115,16 @@ class NowPlayingInfoManager {
       if activePlayer.info.isNetworkResource {
         abandonArtwork()
       }
-      if let url = activePlayer.info.currentURL {
-        if url != artworkURL {
-          if artworkURL != nil {
-            log("Abandoning artwork due to media item changing", level: .verbose)
-          }
-          abandonArtwork()
-          artworkURL = url
+      if url != artworkURL {
+        if let artworkURL {
+          log("Abandoning artwork due to media item changing", artworkURL, level: .verbose)
         }
-      } else {
         abandonArtwork()
+        artworkURL = url
       }
       // If the best kind of artwork (front cover) is not being displayed then try and update
       // to a better kind of artwork.
-      if artworkKind.need(.frontCover), !activePlayer.info.isNetworkResource,
-         let url = activePlayer.info.currentURL {
+      if artworkKind.need(.frontCover), !activePlayer.info.isNetworkResource {
         updateArtwork(activePlayer, url, activePlayer.info.videoTracks)
       }
     } else {
@@ -146,9 +147,27 @@ class NowPlayingInfoManager {
       }
     }
 
+    info[MPNowPlayingInfoPropertyAssetURL] = url
+    activePlayer.info.$playlist.withLock { playlist in
+      info[MPNowPlayingInfoPropertyPlaybackQueueCount] = playlist.count
+      if let index = playlist.firstIndex(where: { $0.filename == url.path }) {
+        info[MPNowPlayingInfoPropertyPlaybackQueueIndex] = index
+      } else {
+        // This can occur when the playlist is still being populated.
+        info.removeValue(forKey: MPNowPlayingInfoPropertyPlaybackQueueIndex)
+      }
+    }
+    if activePlayer.info.chapters.isEmpty {
+      info.removeValue(forKey: MPNowPlayingInfoPropertyChapterCount)
+      info.removeValue(forKey: MPNowPlayingInfoPropertyChapterNumber)
+    } else {
+      info[MPNowPlayingInfoPropertyChapterCount] = activePlayer.info.chapters.count
+      info[MPNowPlayingInfoPropertyChapterNumber] = activePlayer.info.chapter
+    }
+
     let duration = activePlayer.info.videoDuration?.second ?? 0
     let time = activePlayer.info.videoPosition?.second ?? 0
-    
+
     // When playback is paused Now Playing expects the playback rate to be set to zero. If this is
     // not done the slider in Now Playing may incorrectly display a playback time of zero.
     let paused = activePlayer.info.state == .paused
@@ -158,7 +177,6 @@ class NowPlayingInfoManager {
     info[MPNowPlayingInfoPropertyElapsedPlaybackTime] = time
     info[MPNowPlayingInfoPropertyPlaybackRate] = speed
     info[MPNowPlayingInfoPropertyDefaultPlaybackRate] = 1
-    info[MPNowPlayingInfoPropertyAssetURL] = activePlayer.info.currentURL
 
     center.nowPlayingInfo = info
 
@@ -172,13 +190,13 @@ class NowPlayingInfoManager {
     center.playbackState = paused ? .paused : .playing
 
     let suffix = """
-      elapsed playback time: \(time) rate: \(speed) state: \(center.playbackState)
+      set elapsed playback time: \(time) rate: \(speed) state: \(center.playbackState),
       """
     if isActive {
-      log("Updated Now Playing information, \(suffix)", level: .verbose)
+      log("Updated Now Playing information, \(suffix)", url, level: .verbose)
     } else {
       isActive = true
-      log("Started Now Playing session, \(suffix)")
+      log("Started Now Playing session, \(suffix)", url)
     }
     RemoteCommandController.shared.enable()
   }
@@ -201,6 +219,7 @@ class NowPlayingInfoManager {
   private func abandonArtwork() {
     artworkTicket += 1
     artworkKind = .none
+    artworkQLGenerationRetries = 0
     artworkUpdatePending = false
     artworkURL = nil
     MPNowPlayingInfoCenter.default().nowPlayingInfo?.removeValue(
@@ -245,7 +264,7 @@ class NowPlayingInfoManager {
     // The album art is an external file.
     guard let filename = track.externalFilename else {
       // Internal error. This should not occur.
-      log("External artwork track is missing external-filename", level: .error)
+      log("External artwork track is missing external-filename", url, level: .error)
       return nil
     }
     guard let image = NSImage(contentsOfFile: filename) else {

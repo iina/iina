@@ -40,7 +40,7 @@ class JavascriptPlugin: NSObject {
   }
 
   static var hasYTDL: Bool {
-    return plugins.contains { $0.identifier == "io.iina.ytdl" }
+    return plugins.contains { $0.enabled && $0.identifier == "io.iina.ytdl" }
   }
 
   static var plugins = loadPlugins() {

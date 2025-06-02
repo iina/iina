@@ -465,6 +465,15 @@ class PlayerCore: NSObject {
     log("Opening \(path) in main window")
     info.currentURL = url
     info.isNetworkResource = isNetwork
+    info.audioTracks = []
+    info.chapters.removeAll()
+    info.playlist.removeAll()
+    info.subTracks = []
+    info.thumbnails = []
+    info.thumbnailsReady = false
+    info.videoDuration = nil
+    info.videoPosition = nil
+    info.videoTracks = []
     if isNetwork {
       AppDelegate.shared.openURLWindow.showLoadingScreen(playerCore: self)
     }

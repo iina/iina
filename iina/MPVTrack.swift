@@ -12,29 +12,24 @@ class MPVTrack: NSObject {
 
   /** For binding a none track object to menu, id = 0 */
   static let noneVideoTrack: MPVTrack = {
-    let track = MPVTrack(id: 0, type: .video, isDefault: false, isForced: false, isImage: false,
-                         isSelected: false, isExternal: false)
+    let track = MPVTrack(id: 0, type: .video, isDefault: false, isForced: false, isSelected: false, isExternal: false)
     track.title = NSLocalizedString("track.none", comment: "<None>")
     return track
   }()
   /** For binding a none track object to menu, id = 0 */
   static let noneAudioTrack: MPVTrack = {
-    let track = MPVTrack(id: 0, type: .audio, isDefault: false, isForced: false, isImage: false,
-                         isSelected: false, isExternal: false)
+    let track = MPVTrack(id: 0, type: .audio, isDefault: false, isForced: false, isSelected: false, isExternal: false)
     track.title = NSLocalizedString("track.none", comment: "<None>")
     return track
   }()
   /** For binding a none track object to menu, id = 0 */
   static let noneSubTrack: MPVTrack = {
-    let track = MPVTrack(id: 0, type: .sub, isDefault: false, isForced: false, isImage: false,
-                         isSelected: false, isExternal: false)
+    let track = MPVTrack(id: 0, type: .sub, isDefault: false, isForced: false, isSelected: false, isExternal: false)
     track.title = NSLocalizedString("track.none", comment: "<None>")
     return track
   }()
   /** For binding a none track object to menu, id = 0 */
-  static let noneSecondSubTrack = MPVTrack(id: 0, type: .secondSub, isDefault: false,
-                                           isForced: false, isImage: false,isSelected: false,
-                                           isExternal: false)
+  static let noneSecondSubTrack = MPVTrack(id: 0, type: .secondSub, isDefault: false, isForced: false, isSelected: false, isExternal: false)
 
   static func emptyTrack(for type: TrackType) -> MPVTrack {
     switch type {
@@ -127,7 +122,8 @@ class MPVTrack: NSObject {
 
   var decoderDesc: String?
 
-  init(id: Int, type: TrackType, isDefault: Bool, isForced: Bool, isImage: Bool, isSelected: Bool, isExternal: Bool) {
+  init(id: Int, type: TrackType, isDefault: Bool, isForced: Bool, isImage: Bool = false,
+       isSelected: Bool, isExternal: Bool) {
     self.id = id
     self.type = type
     self.isDefault = isDefault

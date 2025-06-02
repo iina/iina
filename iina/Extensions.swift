@@ -556,6 +556,18 @@ extension NSMenuItem {
 
 
 extension URL {
+  /// A string representing the URL in the format mpv uses for
+  /// [playlist/N/filename](https://mpv.io/manual/stable/#command-interface-playlist/n/filename].
+  var mpvStr: String {
+    guard isFileURL else {
+      return absoluteString
+    }
+    guard #available(macOS 13.0, *) else {
+      return path
+    }
+    return path(percentEncoded: false)
+  }
+
   var creationDate: Date? {
     (try? resourceValues(forKeys: [.creationDateKey]))?.creationDate
   }
@@ -915,18 +927,5 @@ extension CGSize {
                              croppedSize.width,
                              croppedSize.height)
     return cropped
-  }
-}
-
-extension MPNowPlayingPlaybackState: @retroactive CustomStringConvertible {
-  public var description: String {
-    switch self {
-    case .unknown: return "unknown"
-    case .playing: return "playing"
-    case .paused: return "paused"
-    case .stopped: return "stopped"
-    case .interrupted: return "interrupted"
-    @unknown default: return String(self.rawValue)
-    }
   }
 }

@@ -58,9 +58,6 @@ class NowPlayingInfoManager {
   /// Whether a request to update the artwork came in while an artwork update was being performed in the background.
   private var artworkUpdatePending = false
 
-  /// The URL of the media item whose artwork could be being shown in Now Playing.
-  private var artworkURL: URL?
-
   /// Whether a Now Playing session is active.
   private var isActive = false
 
@@ -79,6 +76,9 @@ class NowPlayingInfoManager {
   /// This matches the size mpv uses. Using sizes larger than this can cause `QLThumbnailGenerator` to fail.
   private let qlThumbnailSize = CGSize(width: 2000, height: 2000)
 
+  /// The URL of the media item in the Now Playing session.
+  private var url: URL?
+
   /// Update the information shown by macOS in the
   /// [Control Center](https://support.apple.com/guide/mac-help/quickly-change-settings-mchl50f94f8f/mac)
   /// Now Playing module.
@@ -87,91 +87,87 @@ class NowPlayingInfoManager {
     guard RemoteCommandController.useSystemMediaControl else { return }
 
     let center = MPNowPlayingInfoCenter.default()
-    let activePlayer = PlayerCore.lastActive
-    guard activePlayer.info.state.active else {
+    let player = PlayerCore.lastActive
+    guard player.info.state.active else {
       if isActive {
         RemoteCommandController.shared.disable()
-        abandonArtwork()
+        if let url {
+          discardArtwork(url)
+        }
         center.nowPlayingInfo = nil
         center.playbackState = .stopped
         isActive = false
+        url = nil
         log("Ended Now Playing session")
       }
       return
     }
 
-    guard let url = activePlayer.info.currentURL else {
+    guard let currentURL = player.info.currentURL else {
       // Internal error, should not occur.
-      log("Ignoring update request because currentURL is `nil`", level: .error)
+      log("Ignoring update request because currentURL is nil", level: .error)
       return
     }
-
-    // Because showing artwork is a complex operation there is an internal setting that can be
-    // changed to disable this feature should any problems with it be discovered.
-    if Preference.bool(for: .enableNowPlayingArtwork) {
-      // If the media item has changed then if artwork is being displayed it needs to be abandoned.
-      // NOTE this MUST be done before copying the nowPlayingInfo array below as abandonArtwork
-      // works directly on nowPlayingInfo.
-      if activePlayer.info.isNetworkResource {
-        abandonArtwork()
+    if currentURL != url {
+      guard withTitle else {
+        // Internal error, URL should only change when being told to change the title.
+        log("Attempt to change URL to: \(currentURL.mpvStr) with title set to false", level: .error)
+        return
       }
-      if url != artworkURL {
-        if let artworkURL {
-          log("Abandoning artwork due to media item changing", artworkURL, level: .verbose)
-        }
-        abandonArtwork()
-        artworkURL = url
+      if let url {
+        log("Switching Now Playing session from: \(url.mpvStr)\n  to: \(currentURL.mpvStr)")
+        // If the media item has changed then if artwork is being displayed or being worked on in
+        // the background it must be discarded.
+        discardArtwork(url)
+      } else {
+        log("Starting Now Playing session", currentURL)
       }
-      // If the best kind of artwork (front cover) is not being displayed then try and update
-      // to a better kind of artwork.
-      if artworkKind.need(.frontCover), !activePlayer.info.isNetworkResource {
-        updateArtwork(activePlayer, url, activePlayer.info.videoTracks)
-      }
-    } else {
-      log("Showing cover artwork is disabled", level: .verbose)
+      url = currentURL
     }
-    
+
+    // Obtain a copy of the nowPlayingInfo dictionary. NOTE this MUST be done AFTER any calls to
+    // discardArtwork as that method works directly on the nowPlayingInfo dictionary.
     var info = center.nowPlayingInfo ?? [String: Any]()
     if withTitle {
-      if activePlayer.currentMediaIsAudio == .isAudio {
+      if player.currentMediaIsAudio == .isAudio {
         info[MPNowPlayingInfoPropertyMediaType] = MPNowPlayingInfoMediaType.audio.rawValue
-        let (title, album, artist) = activePlayer.getMusicMetadata()
+        let (title, album, artist) = player.getMusicMetadata()
         info[MPMediaItemPropertyTitle] = title
         info[MPMediaItemPropertyAlbumTitle] = album
         info[MPMediaItemPropertyArtist] = artist
       } else {
         info[MPNowPlayingInfoPropertyMediaType] = MPNowPlayingInfoMediaType.video.rawValue
-        info[MPMediaItemPropertyTitle] = activePlayer.getMediaTitle(withExtension: false)
+        info[MPMediaItemPropertyTitle] = player.getMediaTitle(withExtension: false)
         info.removeValue(forKey: MPMediaItemPropertyAlbumTitle)
         info.removeValue(forKey: MPMediaItemPropertyArtist)
       }
     }
 
     info[MPNowPlayingInfoPropertyAssetURL] = url
-    activePlayer.info.$playlist.withLock { playlist in
+    player.info.$playlist.withLock { playlist in
       info[MPNowPlayingInfoPropertyPlaybackQueueCount] = playlist.count
-      if let index = playlist.firstIndex(where: { $0.filename == url.path }) {
+      if let index = playlist.firstIndex(where: { $0.filename == currentURL.mpvStr }) {
         info[MPNowPlayingInfoPropertyPlaybackQueueIndex] = index
       } else {
         // This can occur when the playlist is still being populated.
         info.removeValue(forKey: MPNowPlayingInfoPropertyPlaybackQueueIndex)
       }
     }
-    if activePlayer.info.chapters.isEmpty {
+    if player.info.chapters.isEmpty {
       info.removeValue(forKey: MPNowPlayingInfoPropertyChapterCount)
       info.removeValue(forKey: MPNowPlayingInfoPropertyChapterNumber)
     } else {
-      info[MPNowPlayingInfoPropertyChapterCount] = activePlayer.info.chapters.count
-      info[MPNowPlayingInfoPropertyChapterNumber] = activePlayer.info.chapter
+      info[MPNowPlayingInfoPropertyChapterCount] = player.info.chapters.count
+      info[MPNowPlayingInfoPropertyChapterNumber] = player.info.chapter
     }
 
-    let duration = activePlayer.info.videoDuration?.second ?? 0
-    let time = activePlayer.info.videoPosition?.second ?? 0
+    let duration = player.info.videoDuration?.second ?? 0
+    let time = player.info.videoPosition?.second ?? 0
 
     // When playback is paused Now Playing expects the playback rate to be set to zero. If this is
     // not done the slider in Now Playing may incorrectly display a playback time of zero.
-    let paused = activePlayer.info.state == .paused
-    let speed = paused ? 0 : activePlayer.info.playSpeed
+    let paused = player.info.state == .paused
+    let speed = paused ? 0 : player.info.playSpeed
 
     info[MPMediaItemPropertyPlaybackDuration] = duration
     info[MPNowPlayingInfoPropertyElapsedPlaybackTime] = time
@@ -182,54 +178,42 @@ class NowPlayingInfoManager {
 
     // If under "When media is opened" the "Pause" setting is enabled then playback will be
     // initially paused. For reasons unknown changing the media and not initially playing causes
-    // Now Playing to drop IINA and go back to showing the Music app. Setting playbackState to
-    // playing and immediately setting it to paused avoids Now Playing prevents this.
+    // Now Playing to drop IINA and go back to showing the Music app. Workaround this problem by
+    // setting playbackState initially to playing and then immediately set it to paused.
     if withTitle, paused {
       center.playbackState = .playing
     }
     center.playbackState = paused ? .paused : .playing
 
+    // Because showing artwork is a complex operation there is an internal setting that can be
+    // changed to disable this feature should any problems with it be discovered.
+    if Preference.bool(for: .enableNowPlayingArtwork) {
+      // If the best kind of artwork (front cover) is not being displayed then try and update
+      // to a better kind of artwork.
+      if artworkKind.need(.frontCover) {
+        updateArtwork(player, currentURL, player.info.videoTracks)
+      }
+    } else {
+      log("Showing cover artwork is disabled", level: .verbose)
+    }
+
     let suffix = """
       set elapsed playback time: \(time) rate: \(speed) state: \(center.playbackState),
       """
     if isActive {
-      log("Updated Now Playing information, \(suffix)", url, level: .verbose)
+      log("Updated Now Playing information, \(suffix)", currentURL, level: .verbose)
     } else {
       isActive = true
-      log("Started Now Playing session, \(suffix)", url)
+      log("Started Now Playing session, \(suffix)", currentURL)
     }
     RemoteCommandController.shared.enable()
   }
   
   // MARK: - Artwork
   
-  /// Abandon any existing artwork and any artwork update that is in progress.
-  ///
-  /// This method:
-  /// - Invalidates the ticket held by any background artwork update task
-  /// - Resets `artworkKind` back to `none`, to indicate artwork is needed
-  /// - Clears any pending artwork update
-  /// - Removes any existing artwork set in `nowPlayingInfo`
-  /// - Important: The `artworkUpdateInProgress` flag is intentionally not cleared to prevent multiple background
-  ///     artwork updates from running at the same time. This could happen as background work does not only occur in the
-  ///     `artworkQueue`.  [QLThumbnailGenerator](https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailgenerator)
-  ///     has its own threads. The background work is allowed to complete and the results are then discarded due to the change in
-  ///     `artworkTicket`.
-  /// - Important: This method **must** be run on the main thread to avoid data races.
-  private func abandonArtwork() {
-    artworkTicket += 1
-    artworkKind = .none
-    artworkQLGenerationRetries = 0
-    artworkUpdatePending = false
-    artworkURL = nil
-    MPNowPlayingInfoCenter.default().nowPlayingInfo?.removeValue(
-      forKey: MPMediaItemPropertyArtwork)
-    guard artworkUpdateInProgress else { return }
-    log("Will abandon the results of the current in progress artwork update", level: .verbose)
-  }
-  
-  /// Complete the current artwork update and process any pending update.
-  /// - Important: This method **must** be run on the main thread because it references `PlayerCore.lastActive`.
+  /// Indicate the current artwork update has completed and process any pending artwork update.
+  /// - Important: This method **must** be run on the main thread because it references `PlayerCore.lastActive` and to
+  ///         avoid data races.
   private func artworkUpdateComplete() {
     artworkUpdateInProgress = false
     guard artworkUpdatePending else { return }
@@ -237,12 +221,11 @@ class NowPlayingInfoManager {
     artworkUpdatePending = false
     // If we already have the best kind of artwork there is nothing to do.
     guard artworkKind.need(.frontCover) else { return }
-    // Player could have changed, or started playing different media.
-    let player = PlayerCore.lastActive
-    guard player.info.state.active, !player.info.isNetworkResource,
-          let url = player.info.currentURL else { return }
+    // Player could have changed while artwork was being processed in the background. Make certain
+    // the current player is active. All other checks will be handled by updateInfo.
+    guard PlayerCore.lastActive.info.state.active else { return }
     log("Processing pending artwork update", level: .verbose)
-    updateArtwork(player, url, player.info.videoTracks)
+    updateInfo()
   }
   
   /// Construct an image for the artwork represented by the given video track.
@@ -274,6 +257,36 @@ class NowPlayingInfoManager {
     return image
   }
 
+  /// Discard any existing artwork and any artwork update that is in progress.
+  ///
+  /// This method:
+  /// - Invalidates the ticket held by any background artwork update task
+  /// - Resets `artworkKind` back to `none`, to indicate artwork is needed
+  /// - Clears any pending artwork update
+  /// - Discards any existing artwork set in `nowPlayingInfo`
+  /// - Important: The `artworkUpdateInProgress` flag is intentionally not cleared to prevent multiple background
+  ///     artwork updates from running at the same time. This could happen as background work does not only occur in the
+  ///     `artworkQueue`.  [QLThumbnailGenerator](https://developer.apple.com/documentation/quicklookthumbnailing/qlthumbnailgenerator)
+  ///     has its own threads. The background work is allowed to complete and the results are then discarded due to the change in
+  ///     `artworkTicket`.
+  /// - Important: This method **must** be run on the main thread to avoid data races.
+  /// - Parameter url: The URL of the media item.
+  private func discardArtwork(_ url: URL) {
+    // Because showing artwork is a complex operation there is an internal setting that can be
+    // changed to disable this feature should any problems with it be discovered.
+    guard Preference.bool(for: .enableNowPlayingArtwork) else { return }
+    // Changing artworkTicket will cause any background task to discard its work when it finishes.
+    artworkTicket += 1
+    artworkKind = .none
+    artworkQLGenerationRetries = 0
+    artworkUpdatePending = false
+    artworkLastTrackCount = 0
+    MPNowPlayingInfoCenter.default().nowPlayingInfo?.removeValue(
+      forKey: MPMediaItemPropertyArtwork)
+    guard artworkUpdateInProgress else { return }
+    log("Will discard the results of the current in progress artwork update", url, level: .verbose)
+  }
+
   /// Constructs a
   /// [MPMediaItemArtwork](https://developer.apple.com/documentation/mediaplayer/mpmediaitemartwork)
   /// object for the given image.
@@ -289,8 +302,7 @@ class NowPlayingInfoManager {
         log("Video widthxheight unknown, using image size for bounds", level: .verbose)
         return size
       }
-      // If the video size is not larger than the image size then use the image size.
-      guard Int(size.width * size.height) < width * height else {
+      guard Int(size.width * size.height) <= width * height else {
         log("Video size (\(width)x\(height)) is smaller than image, using image size for bounds",
             level: .verbose)
         return size
@@ -331,12 +343,12 @@ class NowPlayingInfoManager {
     guard center.nowPlayingInfo != nil else {
       // This is an internal error. The artworkTicket should be checked before calling this method.
       // That should prevent this method from being called when there is no session.
-      log("No active Now Playing session, discarding \(artworkKind)", url, level: .error)
+      log("No active Now Playing session, discarded \(artworkKind)", url, level: .error)
       return
     }
     guard let cgImage = image.cgImage else {
       // This should not occur.
-      log("Unable to construct a CGImage, discarding \(artworkKind)", url, level: .error)
+      log("Unable to construct a CGImage, discarded \(artworkKind)", url, level: .error)
       return
     }
     log("Found \(artworkKind)", url)
@@ -346,7 +358,7 @@ class NowPlayingInfoManager {
   
   /// Found front cover artwork.
   ///
-  /// This method will check to see if this background work has been abandoned and if not then it will display the given artwork
+  /// This method will check to see if this background work has been discarded and if not then it will display the given artwork
   /// image in Now Playing.
   /// - Parameters:
   ///   - player: The `PlayerCore` that is playing the media item.
@@ -429,8 +441,9 @@ class NowPlayingInfoManager {
         foundFrontCoverArtwork(player, url, ticket, image)
         return true
       }
+      // The media item is an image.
       guard let image = NSImage(contentsOf: url) else {
-        log("Unable to create an image from: \(url.path)", level: .error)
+        log("Unable to create an image from: \(url)", level: .error)
         continue
       }
       foundFrontCoverArtwork(player, url, ticket, image)
@@ -481,13 +494,22 @@ class NowPlayingInfoManager {
       return
     }
     artworkUpdateInProgress = true
-    artworkURL = url
+    // Copy state that can change for use by the background task.
+    let isNetworkResource = player.info.isNetworkResource
     let ticket = artworkTicket
     let tracks = player.info.videoTracks
-    artworkLastTrackCount = tracks.count
     artworkQueue.async { [self] in
       // Look for front cover artwork. If found, no need to do anything more.
       guard !searchTracksForArtwork(player, url, ticket, tracks) else { return }
+
+      // When streaming artwork can be found in video tracks either because the stream contains
+      // embedded artwork or an image to use for artwork was specified using --cover-art-files.
+      // But the other sources of artwork, Quick Look and the OSC thumbnails are not avaiable when
+      // streaming.
+      guard !isNetworkResource else {
+        DispatchQueue.main.async { self.artworkUpdateComplete() }
+        return
+      }
 
       // If we already have a Quick Look thumbnail then nothing more to do. NOTE that we are
       // reading artworkKind from a background thread and it may not represent the media item
@@ -542,7 +564,7 @@ class NowPlayingInfoManager {
       return
     }
     guard player.info.thumbnailsReady else {
-      log("OSC thumbnails are not still being generated or read from the cache", level: .verbose)
+      log("OSC thumbnails are still being generated or read from the cache", url, level: .verbose)
       return
     }
     // If we don't know the duration of the video assume it is twice the position at which
@@ -566,7 +588,7 @@ class NowPlayingInfoManager {
   }
 
   private func log(_ message: String, _ url: URL, level: Logger.Level = .debug) {
-    log(message + " for: \(url.path)", level: level)
+    log(message + " for: \(url.mpvStr)", level: level)
   }
 
   private func observe(_ name: Notification.Name, block: @escaping (Notification) -> Void) {
@@ -608,29 +630,54 @@ class NowPlayingInfoManager {
 
   private init() {
     // Because showing artwork is a complex operation there is an internal setting that can be
-    // changed to disable this feature should any problems with it be discovered.
+    // changed to disable this feature should any problems with it be discovered. No need to listen
+    // for changes to the track list if we are not seaching tracks for artwork.
     guard Preference.bool(for: .enableNowPlayingArtwork) else { return }
     observe(.iinaTracklistChanged) { [unowned self] notification in
+      // A track list change can not establish a Now Playing session. If one is not active ignore
+      // this notification. If the best kind of artwork has already been found then there is no
+      // need to search tracks for a better kind of artwork.
       guard isActive, artworkKind.need(.frontCover) else { return }
       guard let player = notification.object as? PlayerCore else {
         // This is an internal error. The notification object must be a PlayerCore.
         log("iinaTracklistChanged notification object is not a PlayerCore", level: .error)
         return
       }
-      guard player == PlayerCore.lastActive, player.info.state.active,
-            !player.info.isNetworkResource, let url = player.info.currentURL else { return }
-      let tracks = player.info.videoTracks
+      // Only the active player can own the Now Playing session, ignore track list changes for
+      // background players. If the URL does not match then that means the player is in the process
+      // of loading new media. Must wait for the player to call updateInfo when the media starts
+      // playing.
+      guard player == PlayerCore.lastActive, let currentURL = player.info.currentURL,
+            currentURL == url else { return }
       // The track list can change a lot due to subtitle tracks being loaded. Avoid trying to update
       // the artwork if the number of video tracks has not changed since the last time they were
       // searched for artwork.
-      guard  tracks.count != artworkLastTrackCount else { return }
-      updateArtwork(player, url, player.info.videoTracks)
+      let tracks = player.info.videoTracks
+      guard tracks.count != artworkLastTrackCount else { return }
+      artworkLastTrackCount = tracks.count
+      log("Processing change in number of video tracks (\(tracks.count))", currentURL)
+      updateInfo()
     }
   }
 
   deinit {
     observers.forEach {
       NotificationCenter.default.removeObserver($0)
+    }
+  }
+}
+
+// MARK: - Extensions
+
+extension MPNowPlayingPlaybackState: @retroactive CustomStringConvertible {
+  public var description: String {
+    switch self {
+    case .unknown: return "unknown"
+    case .playing: return "playing"
+    case .paused: return "paused"
+    case .stopped: return "stopped"
+    case .interrupted: return "interrupted"
+    @unknown default: return String(self.rawValue)
     }
   }
 }

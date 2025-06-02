@@ -504,7 +504,7 @@ class NowPlayingInfoManager {
 
       // When streaming artwork can be found in video tracks either because the stream contains
       // embedded artwork or an image to use for artwork was specified using --cover-art-files.
-      // But the other sources of artwork, Quick Look and the OSC thumbnails are not avaiable when
+      // But the other sources of artwork, Quick Look and the OSC thumbnails are not available when
       // streaming.
       guard !isNetworkResource else {
         DispatchQueue.main.async { self.artworkUpdateComplete() }
@@ -631,7 +631,7 @@ class NowPlayingInfoManager {
   private init() {
     // Because showing artwork is a complex operation there is an internal setting that can be
     // changed to disable this feature should any problems with it be discovered. No need to listen
-    // for changes to the track list if we are not seaching tracks for artwork.
+    // for changes to the track list if we are not searching tracks for artwork.
     guard Preference.bool(for: .enableNowPlayingArtwork) else { return }
     observe(.iinaTracklistChanged) { [unowned self] notification in
       // A track list change can not establish a Now Playing session. If one is not active ignore

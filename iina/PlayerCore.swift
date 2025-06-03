@@ -466,14 +466,16 @@ class PlayerCore: NSObject {
     info.currentURL = url
     info.isNetworkResource = isNetwork
     info.audioTracks = []
-    info.chapters.removeAll()
-    info.playlist.removeAll()
+    info.chapters = []
+    info.playlist = []
     info.subTracks = []
     info.thumbnails = []
     info.thumbnailsReady = false
     info.videoDuration = nil
+    info.videoHeight = nil
     info.videoPosition = nil
     info.videoTracks = []
+    info.videoWidth = nil
     if isNetwork {
       AppDelegate.shared.openURLWindow.showLoadingScreen(playerCore: self)
     }

@@ -31,9 +31,14 @@ class NowPlayingInfoManager {
   /// The `NowPlayingInfoManager` singleton object.
   static let shared = NowPlayingInfoManager()
 
+  /// Minimum size for artwork.
+  ///
+  /// This is the size of the space the Now Playing module provides for displaying artwork..
+  private let artworkDesiredSize = 768.0
+
   /// Portions of the work to update the artwork shown in Now Playing are performed in the background.
   private let artworkQueue: DispatchQueue = DispatchQueue(label: "com.colliderli.iina.artwork",
-                                                          qos: .background)
+                                                          qos: .utility)
 
   /// Kind of artwork being shown in Now Playing.
   @Atomic private var artworkKind: ArtworkKind = .none
@@ -208,9 +213,9 @@ class NowPlayingInfoManager {
     }
     RemoteCommandController.shared.enable()
   }
-  
+
   // MARK: - Artwork
-  
+
   /// Indicate the current artwork update has completed and process any pending artwork update.
   /// - Important: This method **must** be run on the main thread because it references `PlayerCore.lastActive` and to
   ///         avoid data races.
@@ -227,7 +232,7 @@ class NowPlayingInfoManager {
     log("Processing pending artwork update", level: .verbose)
     updateInfo()
   }
-  
+
   /// Construct an image for the artwork represented by the given video track.
   /// - Parameters:
   ///   - url: The URL of the media item.
@@ -298,16 +303,27 @@ class NowPlayingInfoManager {
     // If available, use the video size for the bounds size. Otherwise fall back to the image size.
     let size = image.size
     let boundsSize: CGSize = {
-      guard let width = player.info.videoWidth, let height = player.info.videoHeight else {
-        log("Video widthxheight unknown, using image size for bounds", level: .verbose)
+      guard size.width < artworkDesiredSize || size.height < artworkDesiredSize else {
+        // The image size is equal to or larger than size of the area the Now Playing module
+        // provides for artwork.
         return size
       }
-      guard Int(size.width * size.height) <= width * height else {
-        log("Video size (\(width)x\(height)) is smaller than image, using image size for bounds",
-            level: .verbose)
-        return size
+      // The image is smaller than the size desired by the Now Playing module. If the image's size
+      // is used for boundsSize then the Now Playing module will specify a small size for the new
+      // size of the image and will then add grey bars around the image when displaying the artwork.
+      // To avoid the grey bars our request handler below will crop and resize the image as needed,
+      // but to get Now Playing to request the full size it can handle boundsSize must be large
+      // enough. Scale up the image size.
+      let width: Double
+      let height: Double
+      if size.width > size.height {
+        height = artworkDesiredSize
+        width = height * size.aspect
+      } else {
+        width = artworkDesiredSize
+        height = width / size.aspect
       }
-      log("Artwork bounds size: \(width)x\(height)", level: .verbose)
+      log("Artwork scaled up bounds size: \(width)x\(height)", level: .verbose)
       return CGSize(width: width, height: height)
     }()
     return MPMediaItemArtwork(boundsSize: boundsSize) { [self] size in
@@ -326,7 +342,7 @@ class NowPlayingInfoManager {
       return image.nsImage.resized(newWidth: size.widthInt, newHeight: size.heightInt)
     }
   }
-  
+
   /// Display the given artwork image in Now Playing.
   ///
   /// This method constructs a [MPMediaItemArtwork](https://developer.apple.com/documentation/mediaplayer/mpmediaitemartwork)
@@ -355,7 +371,7 @@ class NowPlayingInfoManager {
     center.nowPlayingInfo?[MPMediaItemPropertyArtwork] = formMPMediaItemArtwork(player, cgImage)
     self.artworkKind = artworkKind
   }
-  
+
   /// Found front cover artwork.
   ///
   /// This method will check to see if this background work has been discarded and if not then it will display the given artwork
@@ -417,7 +433,7 @@ class NowPlayingInfoManager {
       }
     }
   }
-  
+
   /// Search the given video tracks for front cover art.
   ///
   /// Container formats such as Matroska support embedding cover art. An external file can be specified as cover art using the mpv
@@ -452,7 +468,7 @@ class NowPlayingInfoManager {
     log("Did not find front cover artwork", url, level: .verbose)
     return false
   }
-  
+
   /// Update the artwork supplied in [MPMediaItemPropertyArtwork](https://developer.apple.com/documentation/mediaplayer/mpmediaitempropertyartwork), if needed.
   ///
   /// There are 3 kinds of artwork. In order of most preferred to least preferred they are:
@@ -524,7 +540,7 @@ class NowPlayingInfoManager {
         }
         return
       }
-      
+
       // Quick Look thumbnail generation may initially fail due to thumbnail creation taking too
       // long. But because the generator caches thumbnails a following request for the same
       // thumbnail may succeed. Thus we want to retry generation requests, but limit the number
@@ -549,7 +565,7 @@ class NowPlayingInfoManager {
       generateQLThumbnail(player, url, ticket)
     }
   }
-  
+
   /// Use an On Screen Controller thumbnail for the artwork (if available).
   /// - Parameters:
   ///   - player: The `PlayerCore` that is playing the media item.

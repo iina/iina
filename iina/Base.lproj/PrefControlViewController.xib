@@ -230,7 +230,7 @@
                                 <menuItem title="Hide OSC" state="on" tag="3" id="9qx-ao-oxE">
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
-                                <menuItem title="Pause / Resume" tag="2" id="A8c-wa-IFR"/>
+                                <menuItem title="Pause/Resume" tag="2" id="A8c-wa-IFR"/>
                                 <menuItem title="None" id="w54-7I-QfW"/>
                             </items>
                         </menu>
@@ -241,18 +241,18 @@
                 </popUpButton>
                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0Qc-Uz-odw">
                     <rect key="frame" x="227" y="49" width="227" height="25"/>
-                    <popUpButtonCell key="cell" type="push" title="Toggle fullscreen" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="1" imageScaling="proportionallyDown" inset="2" selectedItem="6F4-gm-oBg" id="ZmD-ZY-OrO">
+                    <popUpButtonCell key="cell" type="push" title="Enter/Exit full screen" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="1" imageScaling="proportionallyDown" inset="2" selectedItem="6F4-gm-oBg" id="ZmD-ZY-OrO">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="menu"/>
                         <menu key="menu" id="qI8-W1-aYW">
                             <items>
-                                <menuItem title="Toggle fullscreen" state="on" tag="1" id="6F4-gm-oBg">
+                                <menuItem title="Enter/Exit full screen" state="on" tag="1" id="6F4-gm-oBg">
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
-                                <menuItem title="Pause / Resume" tag="2" id="Dm7-JG-fLd"/>
-                                <menuItem title="Toggle Picture-in-Picture" tag="4" id="rvS-xA-7bv"/>
-                                <menuItem title="Set/clear A-B loop points" tag="5" id="GHK-4G-DAj"/>
-                                <menuItem title="Reset playback speed" tag="6" id="Zbp-ok-mMJ"/>
+                                <menuItem title="Pause/Resume" tag="2" id="Dm7-JG-fLd"/>
+                                <menuItem title="Enter/Exit picture-in-picture" tag="4" id="rvS-xA-7bv"/>
+                                <menuItem title="A-B loop" tag="5" id="GHK-4G-DAj"/>
+                                <menuItem title="Reset speed" tag="6" id="Zbp-ok-mMJ"/>
                                 <menuItem title="None" id="wkV-Gq-B0T"/>
                             </items>
                         </menu>
@@ -271,10 +271,10 @@
                                 <menuItem title="Hide OSC" state="on" tag="3" id="OOM-jo-N4V">
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
-                                <menuItem title="Pause / Resume" tag="2" id="mOX-Fi-oTv"/>
-                                <menuItem title="Toggle Picture-in-Picture" tag="4" id="ibM-4r-SQA"/>
-                                <menuItem title="Set/clear A-B loop points" tag="5" id="65z-Gm-oZu"/>
-                                <menuItem title="Reset playback speed" tag="6" id="ig1-kk-RZu"/>
+                                <menuItem title="Pause/Resume" tag="2" id="mOX-Fi-oTv"/>
+                                <menuItem title="Enter/Exit picture-in-picture" tag="4" id="ibM-4r-SQA"/>
+                                <menuItem title="A-B loop" tag="5" id="65z-Gm-oZu"/>
+                                <menuItem title="Reset speed" tag="6" id="ig1-kk-RZu"/>
                                 <menuItem title="None" id="oOk-y6-lek"/>
                             </items>
                         </menu>
@@ -301,13 +301,13 @@
                                 <menuItem title="Hide OSC" state="on" tag="3" id="iFF-Gq-tVx">
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
-                                <menuItem title="Pause / Resume" tag="2" id="uqM-UM-Xvb"/>
-                                <menuItem title="Toggle fullscreen" tag="1" id="7wy-xt-c8Z">
+                                <menuItem title="Pause/Resume" tag="2" id="uqM-UM-Xvb"/>
+                                <menuItem title="Enter/Exit full screen" tag="1" id="7wy-xt-c8Z">
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
-                                <menuItem title="Toggle Picture-in-Picture" tag="4" id="3Pm-nn-HpB"/>
-                                <menuItem title="Set/clear A-B loop points" tag="5" id="iLX-jW-Tdw" userLabel="Set/clear A-B loop points"/>
-                                <menuItem title="Reset playback speed" tag="6" id="Vv4-AU-kGj"/>
+                                <menuItem title="Enter/Exit picture-in-picture" tag="4" id="3Pm-nn-HpB"/>
+                                <menuItem title="A-B loop" tag="5" id="iLX-jW-Tdw" userLabel="A-B loop"/>
+                                <menuItem title="Reset speed" tag="6" id="Vv4-AU-kGj"/>
                                 <menuItem title="None" id="unj-zt-RyU"/>
                             </items>
                         </menu>
@@ -466,8 +466,8 @@
                                 <menuItem title="Hide OSC" state="on" tag="3" id="M6K-ME-cve">
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
-                                <menuItem title="Pause / Resume" tag="2" id="Ba4-eT-rTv"/>
-                                <menuItem title="Toggle fullscreen" tag="1" id="hDh-Lk-FJe">
+                                <menuItem title="Pause/Resume" tag="2" id="Ba4-eT-rTv"/>
+                                <menuItem title="Enter/Exit full screen" tag="1" id="hDh-Lk-FJe">
                                     <modifierMask key="keyEquivalentModifierMask"/>
                                 </menuItem>
                                 <menuItem title="None" id="jnR-2I-4x4"/>

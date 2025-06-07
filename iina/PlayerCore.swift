@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import MediaPlayer
 
 class PlayerCore: NSObject {
 
@@ -466,6 +465,17 @@ class PlayerCore: NSObject {
     log("Opening \(path) in main window")
     info.currentURL = url
     info.isNetworkResource = isNetwork
+    info.audioTracks = []
+    info.chapters = []
+    info.playlist = []
+    info.subTracks = []
+    info.thumbnails = []
+    info.thumbnailsReady = false
+    info.videoDuration = nil
+    info.videoHeight = nil
+    info.videoPosition = nil
+    info.videoTracks = []
+    info.videoWidth = nil
     if isNetwork {
       AppDelegate.shared.openURLWindow.showLoadingScreen(playerCore: self)
     }
@@ -1849,7 +1859,7 @@ class PlayerCore: NSObject {
       }
     }
 
-    NowPlayingInfoManager.shared.updateInfo(state: .playing, withTitle: true)
+    NowPlayingInfoManager.shared.updateInfo(withTitle: true)
 
     // Auto load
     $backgroundQueueTicket.withLock { $0 += 1 }
@@ -2077,6 +2087,9 @@ class PlayerCore: NSObject {
     guard mainWindow.loaded, info.state.loaded else { return }
     if (info.state == .paused) != paused {
       sendOSD(paused ? .pause : .resume)
+      // The NowPlayingInfoManager is notified when playback is paused or resumed. The video
+      // position must be updated before notifying the manager.
+      syncUITime()
       info.state = paused ? .paused : .playing
       refreshSyncUITimer()
       // Follow energy efficiency best practices and ensure IINA is absolutely idle when the video
@@ -2529,6 +2542,9 @@ class PlayerCore: NSObject {
             self.info.thumbnailsReady = true
             self.info.thumbnailsProgress = 1
             self.refreshTouchBarSlider()
+            // OSC thumbnails may be used in Now Playing. Notify the manager thumbnails are now
+            // available.
+            DispatchQueue.main.async { NowPlayingInfoManager.shared.updateInfo() }
           } else {
             self.log("Cannot read thumbnail from cache", level: .error)
           }
@@ -2571,6 +2587,7 @@ class PlayerCore: NSObject {
                              type: MPVTrack.TrackType(rawValue: trackType)!,
                              isDefault: mpv.getFlag(MPVProperty.trackListNDefault(index)),
                              isForced: mpv.getFlag(MPVProperty.trackListNForced(index)),
+                             isImage: mpv.getFlag(MPVProperty.trackListNImage(index)),
                              isSelected: mpv.getFlag(MPVProperty.trackListNSelected(index)),
                              isExternal: mpv.getFlag(MPVProperty.trackListNExternal(index)))
         track.srcId = mpv.getInt(MPVProperty.trackListNSrcId(index))
@@ -2879,6 +2896,8 @@ extension PlayerCore: FFmpegControllerDelegate {
       info.thumbnailsReady = true
       info.thumbnailsProgress = 1
       refreshTouchBarSlider()
+      // OSC thumbnails may be used in Now Playing. Notify the manager thumbnails are now available.
+      DispatchQueue.main.async { NowPlayingInfoManager.shared.updateInfo() }
       if let cacheName = info.mpvMd5 {
         backgroundQueue.async {
           ThumbnailCache.write(self.info.thumbnails, forName: cacheName, forVideo: self.info.currentURL)
@@ -2887,97 +2906,4 @@ extension PlayerCore: FFmpegControllerDelegate {
       events.emit(.thumbnailsReady)
     }
   }
-}
-
-/// Manager that supports using the macOS
-/// [Control Center](https://support.apple.com/guide/mac-help/quickly-change-settings-mchl50f94f8f/mac)
-/// Now Playing module.
-///
-/// The macOS [Control Center](https://support.apple.com/guide/mac-help/quickly-change-settings-mchl50f94f8f/mac)
-/// contains a Now Playing module. This module can also be configured to be directly accessible from the menu bar. Now Playing
-/// displays the title of the media currently  playing and other information about the state of playback. It also can be used to control
-/// playback.
-///
-/// The IINA setting `Use system media control` found on the `Key Bindings` tab of IINA's settings controls use of this
-/// macOS feature. This class handles the use of the AppKit class
-/// [MPNowPlayingInfoCenter](https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfocenter)
-/// which allows IINA to populate the information shown in the Now Playing module. This class makes use of the IINA class
-/// `RemoteCommandController` to address the other aspect of [becoming a now playable app](https://developer.apple.com/documentation/mediaplayer/becoming-a-now-playable-app)], handling
-/// remote commands.
-/// - Important: As IINA is assuming control over a shared macOS feature it is critical that IINA releases control when no media is
-///     open. See issue [#4331](https://github.com/iina/iina/issues/4331).
-class NowPlayingInfoManager {
-  /// The `NowPlayingInfoManager` singleton object.
-  static let shared = NowPlayingInfoManager()
-
-  /// Whether a Now Playing session is active.
-  private var isActive = false
-
-  /// Update the information shown by macOS in the
-  /// [Control Center](https://support.apple.com/guide/mac-help/quickly-change-settings-mchl50f94f8f/mac)
-  /// Now Playing module.
-  /// - Important: This method **must** be run on the main thread because it references `PlayerCore.lastActive`.
-  func updateInfo(state: MPNowPlayingPlaybackState? = nil, withTitle: Bool = false) {
-    guard RemoteCommandController.useSystemMediaControl else { return }
-    let center = MPNowPlayingInfoCenter.default()
-    var info = center.nowPlayingInfo ?? [String: Any]()
-
-    let activePlayer = PlayerCore.lastActive
-    guard activePlayer.info.state.active else {
-      RemoteCommandController.shared.disable()
-      center.nowPlayingInfo = nil
-      center.playbackState = .stopped
-      isActive = false
-      log("Ended Now Playing session")
-      return
-    }
-    if withTitle {
-      if activePlayer.currentMediaIsAudio == .isAudio {
-        info[MPNowPlayingInfoPropertyMediaType] = MPNowPlayingInfoMediaType.audio.rawValue
-        let (title, album, artist) = activePlayer.getMusicMetadata()
-        info[MPMediaItemPropertyTitle] = title
-        info[MPMediaItemPropertyAlbumTitle] = album
-        info[MPMediaItemPropertyArtist] = artist
-      } else {
-        info[MPNowPlayingInfoPropertyMediaType] = MPNowPlayingInfoMediaType.video.rawValue
-        info[MPMediaItemPropertyTitle] = activePlayer.getMediaTitle(withExtension: false)
-        info[MPMediaItemPropertyAlbumTitle] = ""
-        info[MPMediaItemPropertyArtist] = ""
-      }
-    }
-
-    let duration = PlayerCore.lastActive.info.videoDuration?.second ?? 0
-    let time = activePlayer.info.videoPosition?.second ?? 0
-    let speed = activePlayer.info.playSpeed
-
-    info[MPMediaItemPropertyPlaybackDuration] = duration
-    info[MPNowPlayingInfoPropertyElapsedPlaybackTime] = time
-    info[MPNowPlayingInfoPropertyPlaybackRate] = speed
-    info[MPNowPlayingInfoPropertyDefaultPlaybackRate] = 1
-
-    center.nowPlayingInfo = info
-
-    if state != nil {
-      center.playbackState = state!
-    }
-    if isActive {
-      log("Updated Now Playing information", level: .verbose)
-    } else {
-      isActive = true
-      log("Started Now Playing session")
-    }
-    RemoteCommandController.shared.enable()
-  }
-
-  // MARK: - Private Functions
-
-  private func log(_ message: String, level: Logger.Level = .debug) {
-    Logger.log(message, level: level, subsystem: Logger.Sub.nowPlaying)
-  }
-
-  private init() {}
-}
-
-extension Logger.Sub {
-  static let nowPlaying = Logger.makeSubsystem("now-playing")
 }

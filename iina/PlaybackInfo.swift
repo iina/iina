@@ -61,7 +61,7 @@ class PlaybackInfo {
       case .playing:
         PlayerCore.checkStatusForSleep()
         if player == PlayerCore.lastActive {
-          NowPlayingInfoManager.shared.updateInfo(state: .playing)
+          NowPlayingInfoManager.shared.updateInfo()
           if player.mainWindow.pipStatus == .inPIP {
             player.mainWindow.pip.playing = true
           }
@@ -69,7 +69,7 @@ class PlaybackInfo {
       case .paused:
         PlayerCore.checkStatusForSleep()
         if player == PlayerCore.lastActive {
-          NowPlayingInfoManager.shared.updateInfo(state: .paused)
+          NowPlayingInfoManager.shared.updateInfo()
           if player.mainWindow.pipStatus == .inPIP {
             player.mainWindow.pip.playing = false
           }

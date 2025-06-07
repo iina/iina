@@ -717,6 +717,65 @@ return -1;\
   }
 }
 
+// MARK: - Media Artwork
+
++ (NSImage *)readArtworkFromURL:(nonnull NSURL *)url
+{
+  AVFormatContext *pFormatCtx = NULL;
+
+  @try {
+    int ret = avformat_open_input(&pFormatCtx, url.fileSystemRepresentation, NULL, NULL);
+    if (ret < 0) {
+      LOG_ERROR(@"Failed to open file %@ when searching for artwork: %s (%d)", url, av_err2str(ret), ret);
+      return NULL;
+    }
+
+    ret = avformat_find_stream_info(pFormatCtx, NULL);
+    if (ret < 0) {
+      LOG_ERROR(@"Failed to obtain stream info from file %@ when searching for artwork: %s (%d)",
+                url, av_err2str(ret), ret);
+      return NULL;
+    }
+
+    // Search the streams for one that contains front cover artwork.
+    AVPacket* packet = NULL;
+    for (int i = 0; i < pFormatCtx->nb_streams; i++) {
+      AVStream* stream = pFormatCtx->streams[i];
+
+      // For this stream to be cover artwork it must be an attached picture (APIC).
+      if ((stream->disposition & AV_DISPOSITION_ATTACHED_PIC) == 0) { continue; }
+
+      // The stream must contain metadata with the key "title" and value "thumbnail".
+      AVDictionaryEntry *tag = NULL;
+      tag = av_dict_get(stream->metadata, "title", NULL, 0);
+      if (tag == NULL || strcmp(tag->value, "thumbnail") != 0) { continue; }
+
+      // As well as metadata with the key "comment" and value "Cover (front)".
+      tag = av_dict_get(stream->metadata, "comment", NULL, 0);
+      if (tag == NULL || strcmp(tag->value, "Cover (front)") != 0) { continue; }
+
+      // Found front cover artwork.
+      packet = &stream->attached_pic;
+      break;
+    }
+
+    if (!packet) {
+      return NULL;
+    }
+
+    // Form an image from the stream's data.
+    NSData *data = [[NSData alloc] initWithBytes:packet->data length:packet->size];
+    NSImage *image = [[NSImage alloc] initWithData:data];
+    if (!image) {
+      LOG_ERROR(@"Cannot create image from artwork for file: %@", url);
+    }
+    return image;
+  }
+  @finally {
+    avformat_close_input(&pFormatCtx);
+  }
+}
+
 // MARK: - Logging
 
 #if DEBUG

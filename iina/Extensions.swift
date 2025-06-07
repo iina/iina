@@ -8,6 +8,7 @@
 
 import Cocoa
 import CryptoKit
+import MediaPlayer
 
 extension NSSlider {
   /**
@@ -555,6 +556,18 @@ extension NSMenuItem {
 
 
 extension URL {
+  /// A string representing the URL in the format mpv uses for
+  /// [playlist/N/filename](https://mpv.io/manual/stable/#command-interface-playlist/n/filename].
+  var mpvStr: String {
+    guard isFileURL else {
+      return absoluteString
+    }
+    guard #available(macOS 13.0, *) else {
+      return path
+    }
+    return path(percentEncoded: false)
+  }
+
   var creationDate: Date? {
     (try? resourceValues(forKeys: [.creationDateKey]))?.creationDate
   }
@@ -581,6 +594,11 @@ extension NSTextField {
 }
 
 extension NSImage {
+  var cgImage: CGImage? {
+    var rect = CGRect.init(origin: .zero, size: self.size)
+    return self.cgImage(forProposedRect: &rect, context: nil, hints: nil)
+  }
+
   func tinted(_ tintColor: NSColor) -> NSImage {
     guard self.isTemplate else { return self }
 
@@ -594,6 +612,14 @@ extension NSImage {
     image.isTemplate = false
 
     return image
+  }
+
+  /// `cornerRadius`: if greater than 0, round the corners by this radius
+  func resized(newWidth: Int, newHeight: Int, cornerRadius: CGFloat = 0) -> NSImage {
+    if let cgImageNew = cgImage?.resized(newWidth: newWidth, newHeight: newHeight, cornerRadius: cornerRadius) {
+      return NSImage(cgImage: cgImageNew, size: NSSize(width: newWidth, height: newHeight))
+    }
+    return self
   }
 
   func rounded() -> NSImage {
@@ -811,5 +837,95 @@ extension Process {
     process.waitUntilExit()
 
     return (process, stdout, stderr)
+  }
+}
+
+extension CGImage {
+  var nsImage: NSImage { NSImage(cgImage: self, size: size) }
+  var size: CGSize { CGSize(width: width, height: height) }
+
+  /// `cornerRadius`: if greater than 0, round the corners by this radius
+  func resized(newWidth: Int, newHeight: Int, cornerRadius: CGFloat = 0) -> CGImage {
+    guard newWidth != width || newHeight != height else {
+      return self
+    }
+
+    guard newWidth > 0, newHeight > 0 else {
+      Logger.fatal("NSImage.resized: invalid width (\(newWidth)) or height (\(newHeight)) - both must be greater than 0")
+    }
+
+    // Use raw CoreGraphics calls instead of their NS equivalents. They are > 10x faster, and only downside is that the image's
+    // dimensions must be integer values instead of decimals.
+    let newImage = CGImage.buildBitmapImage(width: Int(newWidth), height: Int(newHeight)) { cgContext in
+      let outputRect = CGRect(x: 0, y: 0, width: newWidth, height: newHeight)
+      if cornerRadius > 0.0 {
+        cgContext.beginPath()
+        cgContext.addPath(CGPath(roundedRect: outputRect, cornerWidth: cornerRadius, cornerHeight: cornerRadius, transform: nil))
+        cgContext.closePath()
+        cgContext.clip()
+      }
+      cgContext.draw(self, in: outputRect)
+    }
+
+    return newImage
+  }
+
+  /// Builds a bitmap image efficiently using CoreGraphics APIs.
+  ///
+  /// If it's found useful for any more situations, should put in its own class
+  static func buildBitmapImage(width: Int, height: Int, _ drawingCalls: (CGContext) -> Void) -> CGImage {
+    guard let compositeImageRep = CGImage.makeNewImgRep(width: width, height: height) else {
+      Logger.fatal("DrawImageInBitmapImageContext: Failed to create NSBitmapImageRep!")
+    }
+
+    guard let context = NSGraphicsContext(bitmapImageRep: compositeImageRep) else {
+      Logger.fatal("DrawImageInBitmapImageContext: Failed to create NSGraphicsContext!")
+    }
+
+    context.cgContext.interpolationQuality = .high
+    drawingCalls(context.cgContext)
+
+    return compositeImageRep.cgImage!
+  }
+
+  /// Creates RGB image with alpha channel
+  static func makeNewImgRep(width: Int, height: Int) -> NSBitmapImageRep? {
+    return NSBitmapImageRep(
+      bitmapDataPlanes: nil,
+      pixelsWide: width,
+      pixelsHigh: height,
+      bitsPerSample: 8,
+      samplesPerPixel: 4,
+      hasAlpha: true,
+      isPlanar: false,
+      colorSpaceName: NSColorSpaceName.calibratedRGB,
+      bytesPerRow: 0,
+      bitsPerPixel: 0)
+  }
+}
+
+extension CGSize {
+  var heightInt: Int { Int(height) }
+  var widthInt: Int { Int(width) }
+
+  /// Crops the current size to fit within a target aspect ratio, reducing either the width or height to match the aspect ratio of the
+  /// target rectangle.
+  /// - Parameter targetAspect: A rectangle or size structure that contains the desired aspect ratio.
+  /// - Returns: The cropped `NSSize` that fits within the given aspect ratio.
+  func crop(withAspect targetAspect: CGFloat) -> NSSize {
+    if aspect > targetAspect {  // self is wider, crop width, use same height
+      return NSSize(width: round(height * targetAspect), height: height)
+    } else {
+      return NSSize(width: width, height: round(width / targetAspect))
+    }
+  }
+
+  func getCropRect(withAspect aspect: CGFloat) -> NSRect {
+    let croppedSize = crop(withAspect: aspect)
+    let cropped = NSMakeRect(round((width - croppedSize.width) / 2),
+                             round((height - croppedSize.height) / 2),
+                             croppedSize.width,
+                             croppedSize.height)
+    return cropped
   }
 }

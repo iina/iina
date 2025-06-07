@@ -56,6 +56,14 @@
 - (void)generateThumbnailForFile:(nonnull NSString *)file
                       thumbWidth:(int)thumbWidth;
 
+/// Read artwork from the file with the given URL.
+///
+/// This method will open the file and search the streams for one that contains front cover artwork. If found the image data will be read
+/// from the stream and an `NSImage` will be constructed and returned.
+/// - Parameter url: URL of the file to read artwork from.
+/// - Returns: An initialized NSImage object containing the artwork or null if no artwork was found.
++ (nullable NSImage *)readArtworkFromURL:(nonnull NSURL *)url;
+
 + (nullable NSDictionary *)probeVideoInfoForFile:(nonnull NSString *)file;
 
 @end

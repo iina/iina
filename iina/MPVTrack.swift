@@ -56,6 +56,7 @@ class MPVTrack: NSObject {
   var lang: String?
   var isDefault: Bool
   var isForced: Bool
+  var isImage: Bool
   var isSelected: Bool
   var isExternal: Bool
   var externalFilename: String?
@@ -121,11 +122,13 @@ class MPVTrack: NSObject {
 
   var decoderDesc: String?
 
-  init(id: Int, type: TrackType, isDefault: Bool, isForced: Bool, isSelected: Bool, isExternal: Bool) {
+  init(id: Int, type: TrackType, isDefault: Bool, isForced: Bool, isImage: Bool = false,
+       isSelected: Bool, isExternal: Bool) {
     self.id = id
     self.type = type
     self.isDefault = isDefault
     self.isForced = isForced
+    self.isImage = isImage
     self.isSelected = isSelected
     self.isExternal = isExternal
   }

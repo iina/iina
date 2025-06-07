@@ -42,6 +42,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   internal lazy var useExactSeek: Preference.SeekOption = Preference.enum(for: .useExactSeek)
   internal lazy var relativeSeekAmount: Int = Preference.integer(for: .relativeSeekAmount)
   internal lazy var volumeScrollAmount: Int = Preference.integer(for: .volumeScrollAmount)
+  internal lazy var playbackSpeedScrollAmount: Int = Preference.integer(for: .playbackSpeedScrollAmount)
   internal lazy var singleClickAction: Preference.MouseClickAction = Preference.enum(for: .singleClickAction)
   internal lazy var doubleClickAction: Preference.MouseClickAction = Preference.enum(for: .doubleClickAction)
   internal lazy var horizontalScrollAction: Preference.ScrollAction = Preference.enum(for: .horizontalScrollAction)
@@ -59,6 +60,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     .useExactSeek,
     .relativeSeekAmount,
     .volumeScrollAmount,
+    .playbackSpeedScrollAmount,
     .singleClickAction,
     .doubleClickAction,
     .horizontalScrollAction,
@@ -109,6 +111,10 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     case PK.volumeScrollAmount.rawValue:
       if let newValue = change[.newKey] as? Int {
         volumeScrollAmount = newValue.clamped(to: 1...4)
+      }
+    case PK.playbackSpeedScrollAmount.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        playbackSpeedScrollAmount = newValue.clamped(to: 1...4)
       }
     case PK.singleClickAction.rawValue:
       if let newValue = change[.newKey] as? Int {
@@ -507,6 +513,11 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       let newVolume = player.info.volume + (isMouse ? delta : AppData.volumeMap[volumeScrollAmount] * delta)
       player.setVolume(newVolume)
       volumeSlider.doubleValue = newVolume
+    case .playbackSpeed:
+      let min = 0.05
+      let max = 4.0
+      let newSpeed = round(1000 * (player.info.playSpeed + (player.info.playSpeed * AppData.playbackSpeedMap[playbackSpeedScrollAmount] * delta)).clamped(to: min...max)) / 1000
+      player.setSpeed(newSpeed)
     default:
       break
     }

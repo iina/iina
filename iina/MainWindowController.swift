@@ -161,7 +161,7 @@ class MainWindowController: PlayerWindowController {
   // might use another obj to handle slider?
   var isMouseInWindow: Bool = false
   var isMouseInSlider: Bool = false
-  /** flag to ignor abrupt momentum scrolls */
+  /** flag to ignore abrupt momentum scrolls */
   private var isMomentumScrollingAllowed = false
 
   var isFastforwarding: Bool = false

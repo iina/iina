@@ -410,7 +410,7 @@ class PlayerCore: NSObject {
     open(playableFiles[0])
     // add the remaining to playlist
     playableFiles[1..<count].forEach { url in
-      addToPlaylist(url.isFileURL ? url.path : url.absoluteString)
+      mpv.playlistAppend(url.isFileURL ? url.path : url.absoluteString)
     }
 
     // refresh playlist
@@ -1377,30 +1377,43 @@ class PlayerCore: NSObject {
     mpv.setDouble(option, delay)
   }
 
-  private func _addToPlaylist(_ path: String) {
-    mpv.command(.loadfile, args: [path, "append"], level: .verbose)
-  }
-
-  func addToPlaylist(_ path: String, silent: Bool = false) {
-    _addToPlaylist(path)
+  func appendToPlaylist(_ path: String, silent: Bool = false) {
+    mpv.playlistAppend(path)
     if !silent {
       postNotification(.iinaPlaylistChanged)
     }
   }
 
-  private func _playlistMove(_ from: Int, to: Int) {
-    mpv.command(.playlistMove, args: ["\(from)", "\(to)"], level: .verbose)
+  func playlistMove(_ from: Int, to: Int) {
+    mpv.playlistMove(from, to: to)
+    postNotification(.iinaPlaylistChanged)
   }
 
-  func playlistMove(_ from: Int, to: Int) {
-    _playlistMove(from, to: to)
+  func playlistReorder(newPlaylist: [MPVPlaylistItem]) {
+    guard Set(info.playlist) == Set(newPlaylist) else { return }
+    if info.playlist == newPlaylist { return }
+    mpv.command(.playlistClear)
+    guard let currentPlaying = newPlaylist.firstIndex(where: { $0.isPlaying } ) else {
+      for item in newPlaylist {
+        mpv.playlistAppend(item.filename)
+      }
+      return
+    }
+
+    for i in (0..<currentPlaying).reversed() {
+      mpv.playlistInsert(newPlaylist[i].filename, index: 0)
+    }
+    for i in currentPlaying + 1..<newPlaylist.count {
+      mpv.playlistAppend(newPlaylist[i].filename)
+    }
+
     postNotification(.iinaPlaylistChanged)
   }
 
   func addToPlaylist(paths: [String], at index: Int = -1) {
     getPlaylist()
     for path in paths {
-      _addToPlaylist(path)
+      mpv.playlistAppend(path)
     }
     let previousCount = info.$playlist.withLock { $0.count }
     if index <= previousCount && index >= 0 {
@@ -1411,12 +1424,8 @@ class PlayerCore: NSObject {
     postNotification(.iinaPlaylistChanged)
   }
 
-  private func _playlistRemove(_ index: Int) {
-    mpv.command(.playlistRemove, args: [index.description])
-  }
-
   func playlistRemove(_ index: Int) {
-    _playlistRemove(index)
+    mpv.playlistRemove(index)
     postNotification(.iinaPlaylistChanged)
   }
 
@@ -1424,7 +1433,7 @@ class PlayerCore: NSObject {
     guard !indexSet.isEmpty else { return }
     var count = 0
     for i in indexSet {
-      _playlistRemove(i - count)
+      mpv.playlistRemove(i - count)
       count += 1
     }
     postNotification(.iinaPlaylistChanged)

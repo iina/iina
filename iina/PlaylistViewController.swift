@@ -68,6 +68,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   @IBOutlet weak var deleteBtn: NSButton!
   @IBOutlet weak var loopBtn: NSButton!
   @IBOutlet weak var shuffleBtn: NSButton!
+  @IBOutlet weak var sortBtn: NSButton!
   @IBOutlet weak var totalLengthLabel: NSTextField!
   @IBOutlet var subPopover: NSPopover!
   @IBOutlet var addFileMenu: NSMenu!
@@ -100,12 +101,18 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       $0?.image?.isTemplate = true
       $0?.alternateImage?.isTemplate = true
     }
-    
+
+    if #unavailable(macOS 11.0) {
+      sortBtn.image = NSImage.init(named: "triangle-down")
+      sortBtn.image?.isTemplate = true
+    }
+
     deleteBtn.toolTip = NSLocalizedString("mini_player.delete", comment: "delete")
     loopBtn.toolTip = NSLocalizedString("mini_player.loop", comment: "loop")
     shuffleBtn.toolTip = NSLocalizedString("mini_player.shuffle", comment: "shuffle")
     addBtn.toolTip = NSLocalizedString("mini_player.add", comment: "add")
     removeBtn.toolTip = NSLocalizedString("mini_player.remove", comment: "remove")
+    sortBtn.toolTip = NSLocalizedString("mini_player.sort", comment: "sort")
 
     hideTotalLength()
 
@@ -410,7 +417,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   @IBAction func addURLAction(_ sender: AnyObject) {
     Utility.quickPromptPanel("add_url") { url in
       if Regex.url.matches(url) {
-        self.player.addToPlaylist(url)
+        self.player.appendToPlaylist(url)
         self.player.mainWindow.playlistView.reloadData(playlist: true, chapters: false)
         self.player.sendOSD(.addToPlaylist(1))
       } else {
@@ -466,6 +473,41 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     vc.tableView.reloadData()
     vc.heightConstraint.constant = (vc.tableView.rowHeight + vc.tableView.intercellSpacing.height) * CGFloat(vc.tableView.numberOfRows)
     subPopover.show(relativeTo: sender.bounds, of: sender, preferredEdge: .maxY)
+  }
+
+  @IBAction func sortingBtnAction(_ sender: NSButton) {
+    let menu = NSMenu()
+    if #available(macOS 14.0, *) {
+      menu.addItem(.sectionHeader(title: NSLocalizedString("playlist.sorting.header", comment: "Sorting")))
+    }
+    menu.addItem(withTitle: NSLocalizedString("playlist.sorting.filename_ascending", comment: "Filename Ascending"), action: #selector(sortPathAscending), keyEquivalent: "")
+    menu.addItem(withTitle: NSLocalizedString("playlist.sorting.filename_descending", comment: "Filename Descending"), action: #selector(sortPathDesecnding), keyEquivalent: "")
+    menu.addItem(withTitle: NSLocalizedString("playlist.sorting.path_ascending", comment: "File Path Ascending"), action: #selector(sortPathAscending), keyEquivalent: "")
+    menu.addItem(withTitle: NSLocalizedString("playlist.sorting.path_descending", comment: "File Path Descending"), action: #selector(sortPathDesecnding), keyEquivalent: "")
+    NSMenu.popUpContextMenu(menu, with: NSApplication.shared.currentEvent!, for: sender)
+  }
+
+  @objc func sortNameAscending() { sortName(ascending: true) }
+  @objc func sortNameDesecnding() { sortName(ascending: false) }
+  @objc func sortPathAscending() { sortPath(ascending: true) }
+  @objc func sortPathDesecnding() { sortPath(ascending: false) }
+
+  private func sortName(ascending: Bool) {
+    var playlist = player.info.playlist
+    playlist.sort(by: {
+      let results = $0.filenameForDisplay < $1.filenameForDisplay
+      return ascending ? results : !results
+    })
+    player.playlistReorder(newPlaylist: playlist)
+  }
+
+  private func sortPath(ascending: Bool) {
+    var playlist = player.info.playlist
+    playlist.sort(by: {
+      let results = $0.filename < $1.filename
+      return ascending ? results : !results
+    })
+    player.playlistReorder(newPlaylist: playlist)
   }
 
   // MARK: - Table delegates

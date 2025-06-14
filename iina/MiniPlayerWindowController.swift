@@ -99,7 +99,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     // tracking area
     let trackingView = NSView()
     trackingView.translatesAutoresizingMaskIntoConstraints = false
-    window.contentView?.addSubview(trackingView, positioned: .above, relativeTo: nil)
+    window.contentView?.addSubview(trackingView, positioned: .below, relativeTo: nil)
     Utility.quickConstraints(["H:|[v]|"], ["v": trackingView])
     NSLayoutConstraint.activate([
       NSLayoutConstraint(item: trackingView, attribute: .bottom, relatedBy: .equal, toItem: backgroundView, attribute: .bottom, multiplier: 1, constant: 0),

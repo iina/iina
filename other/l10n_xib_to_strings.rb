@@ -120,6 +120,7 @@ res_dict.each do |key, value|
 
   if value[:desc]
     en_dict.delete(value[:desc_id])
+    string_file.puts %Q{/* id="#{value[:desc_id]}" */}
     string_file.puts %Q{"#{key}.desc" = "#{value[:desc]&.sub_quote}";}
     swift_file.puts %Q{  static let #{key}Desc = SettingsLocalization.Key("#{key}.desc")}
   end
@@ -127,15 +128,21 @@ res_dict.each do |key, value|
   if value[:type] == :popup
     value[:items].each do |item|
       en_dict.delete(item[2])
-      string_file.puts %Q{  /* id="#{item[2]}" */}
-      string_file.puts %Q{  "#{key}.items.#{item[0]}" = "#{item[1]&.sub_quote}";}
+      string_file.puts %Q{/* id="#{item[2]}" */}
+      string_file.puts %Q{"#{key}.items.#{item[0]}" = "#{item[1]&.sub_quote}";}
       swift_file.puts %Q{  static let #{key}Item#{item[0].to_camel} = SettingsLocalization.Key("#{key}.items.#{item[0]}")}
     end
   end
 end
 
+new_ket_set = Set.new
+
 en_dict.each do |key, value|
   newKey = value.gsub(/[^A-Za-z ]/, '').split(' ').first(5).join('-').to_camel
+  next if new_ket_set.include?(newKey)
+
+  new_ket_set.add(newKey)
+  string_file.puts %Q{/* key="#{key}" */}
   string_file.puts %Q{"$#{newKey}" = "#{value.sub_quote}";}
   swift_file.puts %Q{  static let text_#{newKey} = SettingsLocalization.Key("$#{newKey}")}
 end

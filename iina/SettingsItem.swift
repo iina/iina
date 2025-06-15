@@ -9,10 +9,57 @@
 import Cocoa
 
 struct SettingsItem {
-  class General: NSView, WithSettingsLocalizationContext {
-    var detailView: NSView?
+  class Base: NSView, WithSettingsLocalizationContext  {
+    var l10n: SettingsLocalization.Context!
+
     var isFirstItem = false
     var isLastItem = false
+    
+    var controlSize: NSControl.ControlSize = .regular
+
+    func setControlSize(_ label: NSTextField) {
+      label.controlSize = controlSize
+      switch controlSize {
+      case .small:
+        label.font = NSFont.systemFont(ofSize: NSFont.systemFontSize - 1)
+      case .mini:
+        label.font = NSFont.systemFont(ofSize: 9)
+      case .large:
+        label.font = NSFont.systemFont(ofSize: 15)
+      default:
+        label.font = NSFont.systemFont(ofSize: NSFont.systemFontSize)
+      }
+    }
+  }
+
+  class Custom: Base {
+    var customView: NSView!
+
+    init() {
+      super.init(frame: NSRect())
+      self.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    @MainActor required init?(coder: NSCoder) {
+      fatalError("init(coder:) has not been implemented")
+    }
+    
+    func view(_ view: NSView) -> Self {
+      self.customView = view
+      return self
+    }
+
+    override func viewDidMoveToWindow() {
+      guard window != nil else { return }
+      customView.translatesAutoresizingMaskIntoConstraints = false
+      self.addSubview(customView)
+      customView.padding(.all)
+    }
+  }
+
+  class General: Base {
+    var detailView: NSView?
+    var extraViews: [NSView] = []
 
     var label: NSTextField!
     var desc: NSTextField!
@@ -23,12 +70,9 @@ struct SettingsItem {
     var expandingStackView: NSStackView?
     var disclosureButton: NSButton!
 
-    var controlSize: NSControl.ControlSize = .regular
     var labelLocalizationKey: SettingsLocalization.Key?
-    var imageName: String?
+    var imageName: [String]?
     var hasDesc: Bool = false
-
-    var l10n: SettingsLocalization.Context!
 
     var verticalPadding: CGFloat {
       switch controlSize {
@@ -39,7 +83,9 @@ struct SettingsItem {
       @unknown default: return 8
       }
     }
+
     var isExpandable = false
+    var isExpandableAndClickable: Bool = true
     var isExpanded = false
     private var missingL10n = false
 
@@ -59,7 +105,17 @@ struct SettingsItem {
     }
 
     public func image(name: String) -> Self {
+      self.imageName = [name]
+      return self
+    }
+
+    public func image(name: [String]) -> Self {
       self.imageName = name
+      return self
+    }
+
+    func extraViews(_ extraViews: NSView...) -> Self {
+      self.extraViews = extraViews
       return self
     }
 
@@ -83,16 +139,7 @@ struct SettingsItem {
       label.controlSize = controlSize
       label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
       label.lineBreakMode = .byWordWrapping
-      switch controlSize {
-      case .small:
-        label.font = NSFont.systemFont(ofSize: NSFont.systemFontSize - 1)
-      case .mini:
-        label.font = NSFont.systemFont(ofSize: 9)
-      case .large:
-        label.font = NSFont.systemFont(ofSize: 15)
-      default:
-        label.font = NSFont.systemFont(ofSize: NSFont.systemFontSize)
-      }
+      setControlSize(label)
 
       labelStackView = NSStackView()
       labelStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -108,13 +155,15 @@ struct SettingsItem {
         desc = NSTextField(labelWithString: descText)
         desc.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
         desc.textColor = .secondaryLabelColor
+        desc.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        desc.lineBreakMode = .byWordWrapping
         labelStackView.addArrangedSubview(desc)
       }
 
       image = NSImageView()
       image.translatesAutoresizingMaskIntoConstraints = false
       if let imageName = imageName {
-        image.image = NSImage(systemSymbolName: imageName, accessibilityDescription: nil)!
+        image.image = NSImage.findSFSymbol(imageName)
       } else {
         image.isHidden = true
       }
@@ -143,14 +192,21 @@ struct SettingsItem {
       valueStackView.translatesAutoresizingMaskIntoConstraints = false
       valueStackView.orientation = .horizontal
       valueStackView.alignment = .centerY
+      extraViews.forEach {
+        valueStackView.addArrangedSubview($0)
+      }
       valueViews.forEach {
         valueStackView.addArrangedSubview($0)
       }
       backgroundView.addSubview(valueStackView)
 
-      // valueStackView.padding(.top(verticalPadding + 1), .trailing(8))
-      valueStackView.padding(.vertical(verticalPadding), .trailing(8)).center(y: true)
-      image.size(width: 16, height: 16).center(y: true).spacing(to: labelStackView, .trailing(8))
+      valueStackView.centerYAnchor
+        .constraint(equalTo: backgroundView.topAnchor, constant: verticalPadding + 8).isActive = true
+      valueStackView.padding(.trailing(8))
+//       valueStackView.padding(.top(verticalPaddingFixed), .trailing(8))
+//      valueStackView.padding(.vertical(verticalPadding), .trailing(8)).center(y: true)
+      image.size(width: 20, height: 20).spacing(to: labelStackView, .trailing(6))
+        .padding(.top(11))
       disclosureButton.padding(.leading(16))
         .center(y: true).spacing(to: labelStackView, .trailing(4))
       labelStackView.center(y: true).flexibleSpacingTo(view: valueStackView, trailing: 8)
@@ -166,14 +222,28 @@ struct SettingsItem {
     func initBinding() {}
 
     override func viewDidMoveToWindow() {
+      guard window != nil else { return }
       populateViews()
       initBinding()
+    }
+
+    @discardableResult
+    func withExpandingDetailView(@SettingsSubListBuilder _ view: () -> NSView) -> Self {
+      isExpandable = true
+      detailView = view()
+      return self
     }
 
     @discardableResult
     func withExpandingDetailView(_ view: NSView) -> Self {
       isExpandable = true
       detailView = view
+      return self
+    }
+
+    @discardableResult
+    func withDetailView(@SettingsSubListBuilder _ view: () -> NSView) -> Self {
+      detailView = view()
       return self
     }
 
@@ -191,7 +261,7 @@ struct SettingsItem {
       }
 
       backgroundView.removeFromSuperview()
-      backgroundView.clickable = isExpandable
+      backgroundView.clickable = isExpandable && isExpandableAndClickable
 
       expandingStackView = NSStackView()
       expandingStackView!.orientation = .vertical
@@ -203,7 +273,9 @@ struct SettingsItem {
       expandingStackView!.addArrangedSubview(detailView)
       detailView.padding(.leading(8), .trailing)
       if isExpandable {
-        disclosureButton.isHidden = false
+        if isExpandableAndClickable {
+          disclosureButton.isHidden = false
+        }
         expandingStackView!.setVisibilityPriority(.notVisible, for: detailView)
         detailView.alphaValue = 0
       } else {
@@ -212,30 +284,45 @@ struct SettingsItem {
     }
 
     override func mouseUp(with event: NSEvent) {
-      guard isExpandable else { return }
+      guard isExpandable && isExpandableAndClickable else { return }
 
-      isExpanded = !isExpanded
-      if isExpanded {
-        disclosureButton.state = .on
-        expandingStackView!.setVisibilityPriority(.mustHold, for: detailView!)
-        backgroundView.enableRoundCorner = false
-        detailView?.alphaValue = 1
-      } else {
-        disclosureButton.state = .off
-        expandingStackView!.setVisibilityPriority(.notVisible, for: detailView!)
-        backgroundView.enableRoundCorner = true
-        detailView?.alphaValue = 0
-      }
-
-      NSAnimationContext.runAnimationGroup({ context in
-        context.duration = AccessibilityPreferences.adjustedDuration(0.25)
-        context.allowsImplicitAnimation = true
-        self.window?.layoutIfNeeded()
-      }, completionHandler: nil)
+      toggleExpandable()
     }
 
     required init?(coder: NSCoder) {
       fatalError("init(coder:) has not been implemented")
+    }
+
+    func toggleExpandable(_ setValue: Bool? = nil) {
+      if let setValue = setValue {
+        isExpanded = setValue
+      } else {
+        isExpanded.toggle()
+      }
+
+      if isExpanded {
+        disclosureButton.state = .on
+        expandingStackView!.setVisibilityPriority(.mustHold, for: detailView!)
+        backgroundView.enableRoundCorner = false
+      } else {
+        disclosureButton.state = .off
+        expandingStackView!.setVisibilityPriority(.notVisible, for: detailView!)
+        backgroundView.enableRoundCorner = true
+      }
+
+      let duration = AccessibilityPreferences.adjustedDuration(0.25)
+      NSAnimationContext.runAnimationGroup({ context in
+        context.duration = duration
+        context.allowsImplicitAnimation = true
+        self.window?.layoutIfNeeded()
+      }, completionHandler: nil)
+
+      DispatchQueue.main.asyncAfter(deadline: .now() + duration / 3) {
+        NSAnimationContext.runAnimationGroup({ context in
+          context.duration = duration
+          self.detailView?.alphaValue = self.isExpanded ? 1 : 0
+        }, completionHandler: nil)
+      }
     }
   }
 
@@ -314,6 +401,11 @@ struct SettingsItem {
       return self
     }
 
+    func bindExpandableView() -> Self {
+      isExpandableAndClickable = false
+      return self
+    }
+
     override func initBinding() {
       if let key = key {
         nsSwitch.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue)
@@ -327,8 +419,12 @@ struct SettingsItem {
 
     @objc func switchChanged(_ sender: NSSwitch) {
       guard let detailView = detailView else { return }
-      let enableSubControls = sender.state == .on
-      setSubControls(detailView, enabled: enableSubControls)
+
+      let enabled = sender.state == .on
+      if !isExpandableAndClickable {
+        toggleExpandable(enabled)
+      }
+      setSubControls(detailView, enabled: enabled)
     }
 
     private func setSubControls(_ view: NSView, enabled: Bool) {
@@ -445,6 +541,52 @@ struct SettingsItem {
       }
     }
   }
+
+  class Input: General {
+    private var textField: NSTextField!
+    private var trailingLabel: SettingsLocalization.Key?
+    private var customBinding = false
+    private var customBindingBlock: ((NSTextField) -> Void)?
+
+    func trailingLabel(_ key: SettingsLocalization.Key) -> Self {
+      self.trailingLabel = key
+      return self
+    }
+
+    override func getValueViews() -> [NSView] {
+      textField = NSTextField()
+      textField.translatesAutoresizingMaskIntoConstraints = false
+      textField.controlSize = controlSize
+      textField.size(width: 64)
+      setControlSize(textField)
+      if let trailingLabel = trailingLabel {
+        let label = NSTextField(labelWithString: l10n.localized(trailingLabel))
+        setControlSize(label)
+        return [textField, label]
+      } else {
+        return [textField]
+      }
+    }
+
+    func bindTo(_ key: Preference.Key) -> Self {
+      self.key = key
+      return self
+    }
+
+    func bindToCustom(block: @escaping (NSTextField) -> Void) -> Self {
+      self.customBinding = true
+      self.customBindingBlock = block
+      return self
+    }
+
+    override func initBinding() {
+      if let key = key {
+        textField.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue)
+      } else if customBinding, let customBindingBlock = customBindingBlock {
+        customBindingBlock(textField)
+      }
+    }
+  }
 }
 
 
@@ -466,7 +608,7 @@ fileprivate class ClickableView: NSView {
   init() {
     super.init(frame: NSRect())
     wantsLayer = true
-    layer?.cornerRadius = 7
+    layer?.cornerRadius = 4
   }
 
   private func setRoundCorners() {

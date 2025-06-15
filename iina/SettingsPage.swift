@@ -8,15 +8,64 @@
 
 import Cocoa
 
+
+@resultBuilder
+struct SettingsViewsBuilder {
+  static func buildBlock(_ components: NSView...) -> [NSView] {
+    return components
+  }
+
+  static func buildBlock(_ components: [NSView]...) -> [NSView] {
+    components.flatMap { $0 }
+  }
+}
+
+@resultBuilder
+struct SettingsItemsBuilder {
+  static func buildBlock(_ components: SettingsItem.Base...) -> [SettingsItem.Base] {
+    return components
+  }
+}
+
+@resultBuilder
+struct SettingsSubItemsBuilder {
+  static func buildBlock(_ components: SettingsItem.Base...) -> [SettingsItem.Base] {
+    for c in components {
+      c.controlSize = .small
+    }
+    return components
+  }
+}
+
+@resultBuilder
+struct SettingsSubListBuilder {
+  static func buildBlock(_ components: SettingsItem.Base...) -> SettingsSubListView {
+    return SettingsSubListView(components)
+  }
+}
+
+@resultBuilder
+struct SettingsSectionBuilder {
+  static func buildBlock(_ components: SettingsContainer...) -> [NSView] {
+    return components.map { $0.getContainer() }
+  }
+}
+
+protocol SettingsContainer {
+  func getContainer() -> NSView
+}
+
 class SettingsPage {
   var identifier: String { "" }
+  var title: String { "" }
   var localizationTable: String { "" }
-  var localizationContext: SettingsLocalization.Context!
+  lazy var localizationContext: SettingsLocalization.Context = {
+    SettingsLocalization.Context(tableName: localizationTable)
+  }()
 
-  func getContent() -> NSView {
+  final func getContent() -> NSView {
     let view = content()
     // inject l10n context
-    localizationContext = SettingsLocalization.Context(tableName: localizationTable)
     SettingsLocalization.injectContext(view, localizationContext)
 
     let containerView = NSView()
@@ -29,10 +78,27 @@ class SettingsPage {
   func content() -> NSView {
     return NSView()
   }
+
+  final func section(@SettingsSectionBuilder _ containers: () -> [NSView]) -> [NSView] {
+    return containers()
+  }
+
+  final func sections(@SettingsViewsBuilder _ sections: () -> [NSView]) -> NSStackView {
+    let views: [NSView] = sections()
+    let stackView = NSStackView(views: views)
+    stackView.translatesAutoresizingMaskIntoConstraints = false
+    stackView.orientation = .vertical
+    stackView.spacing = 16
+    views.forEach {
+      $0.padding(.horizontal)
+      stackView.setVisibilityPriority(.mustHold, for: $0)
+    }
+    return stackView
+  }
 }
 
 
-class SettingsListView: NSBox, WithSettingsLocalizationContext {
+class SettingsListView: NSBox, SettingsContainer, WithSettingsLocalizationContext {
   var container: Container!
 
   var listTitle: String?
@@ -63,7 +129,7 @@ class SettingsListView: NSBox, WithSettingsLocalizationContext {
     }
   }
 
-  init(title: String? = nil, _ items: [SettingsItem.General]? = nil) {
+  init(title: String? = nil, _ items: [SettingsItem.Base]? = nil) {
     super.init(frame: NSRect())
     self.translatesAutoresizingMaskIntoConstraints = false
 
@@ -77,16 +143,24 @@ class SettingsListView: NSBox, WithSettingsLocalizationContext {
     }
   }
 
-  func addItems(_ items: [SettingsItem.General]) {
-    items.forEach {
+  convenience init(title: String? = nil, @SettingsItemsBuilder _ items: () -> [SettingsItem.Base]) {
+    self.init(title: title, items())
+  }
+
+  func getContainer() -> NSView {
+    return container
+  }
+
+  private func addItems(_ subItems: [SettingsItem.Base]) {
+    subItems.forEach {
       self.contentView!.addSubview($0)
       $0.padding(.horizontal)
     }
-    items.first?.padding(.top(0))
-    items.first?.isFirstItem = true
-    items.last?.padding(.bottom)
-    items.last?.isLastItem = true
-    zip(items.dropFirst(), items.dropLast()).forEach { (bottomItem, topItem) in
+    subItems.first?.padding(.top(0))
+    subItems.first?.isFirstItem = true
+    subItems.last?.padding(.bottom)
+    subItems.last?.isLastItem = true
+    zip(subItems.dropFirst(), subItems.dropLast()).forEach { (bottomItem, topItem) in
       bottomItem.spacing(to: topItem, .top)
       let separator = NSBox()
       separator.translatesAutoresizingMaskIntoConstraints = false
@@ -104,7 +178,9 @@ class SettingsListView: NSBox, WithSettingsLocalizationContext {
 
 
 class SettingsSubListView: SettingsListView {
-  init(_ items: [SettingsItem.General]? = nil) {
+  static let padding: CGFloat = 28
+
+  init(_ items: [SettingsItem.Base]? = nil) {
     super.init(items)
 
     self.fillColor = .clear

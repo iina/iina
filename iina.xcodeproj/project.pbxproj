@@ -331,6 +331,9 @@
 		E32712B224F2B8CA00359DAB /* ScreenshootOSDView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E32712B424F2B8CA00359DAB /* ScreenshootOSDView.xib */; };
 		E32B157D21BC27B100CDBCEA /* JavascriptAPIMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32B157C21BC27B100CDBCEA /* JavascriptAPIMenu.swift */; };
 		E32B157F21BE219700CDBCEA /* JavascriptPluginMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32B157E21BE219700CDBCEA /* JavascriptPluginMenuItem.swift */; };
+		E33517522DFD206E00BBE169 /* SettingsPageUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33517512DFD206800BBE169 /* SettingsPageUI.swift */; };
+		E33517542DFD25E100BBE169 /* SettingsLocalizationKeysUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33517532DFD25E100BBE169 /* SettingsLocalizationKeysUI.swift */; };
+		E33517572DFD261900BBE169 /* SettingsUILocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E33517552DFD261900BBE169 /* SettingsUILocalizable.strings */; };
 		E3366AFA224A039500EF3C32 /* JavascriptAPIPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3366AF9224A039500EF3C32 /* JavascriptAPIPreferences.swift */; };
 		E337D5E22411B64A00B5729A /* JavascriptPolyfill.swift in Sources */ = {isa = PBXBuildFile; fileRef = E337D5E12411B64900B5729A /* JavascriptPolyfill.swift */; };
 		E337D5E4241C12BE00B5729A /* PrefPluginPermissionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E337D5E3241C12BE00B5729A /* PrefPluginPermissionListView.swift */; };
@@ -350,7 +353,6 @@
 		E34BC2A82C27C01800A94680 /* SettingsLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34BC2A72C27C01800A94680 /* SettingsLocalization.swift */; };
 		E34BC2AA2C27C95800A94680 /* SettingsLocalizationKeysGeneral.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34BC2A92C27C95800A94680 /* SettingsLocalizationKeysGeneral.swift */; };
 		E34BC2AC2C27DAE900A94680 /* SettingsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34BC2AB2C27DAE900A94680 /* SettingsHelper.swift */; };
-		E34C0C3124934D7B0065A0C6 /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34C0C3024934D7B0065A0C6 /* Switch.swift */; };
 		E34E909A24F821280073BF04 /* GuideWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E34E909C24F821280073BF04 /* GuideWindowController.xib */; };
 		E34EAA83251A36CE00057F27 /* JavascriptAPIFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34EAA82251A36CE00057F27 /* JavascriptAPIFile.swift */; };
 		E3513AF820EF79C500F8C347 /* PreferenceWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3513AF620EF79C500F8C347 /* PreferenceWindowController.swift */; };
@@ -363,7 +365,6 @@
 		E3530700214908DD008FE492 /* JavascriptAPIHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306FF214908DC008FE492 /* JavascriptAPIHttp.swift */; };
 		E3530702214935DE008FE492 /* JavascriptAPIConsole.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3530701214935DE008FE492 /* JavascriptAPIConsole.swift */; };
 		E353070521496CE4008FE492 /* PrefPluginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E353070321496CE4008FE492 /* PrefPluginViewController.swift */; };
-		E353070621496CE4008FE492 /* PrefPluginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E353070421496CE4008FE492 /* PrefPluginViewController.xib */; };
 		E360A5CD2C23C1BC006EA412 /* SettingsWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E360A5CC2C23C1BC006EA412 /* SettingsWindow.swift */; };
 		E36E8D7C24F6052F00B8C097 /* GuideWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36E8D7A24F6052F00B8C097 /* GuideWindowController.swift */; };
 		E374160C20F138A900B4F7F9 /* CollapseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E374160B20F138A900B4F7F9 /* CollapseView.swift */; };
@@ -1861,6 +1862,9 @@
 		E32712B624F2B8D200359DAB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
 		E32B157C21BC27B100CDBCEA /* JavascriptAPIMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIMenu.swift; sourceTree = "<group>"; };
 		E32B157E21BE219700CDBCEA /* JavascriptPluginMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptPluginMenuItem.swift; sourceTree = "<group>"; };
+		E33517512DFD206800BBE169 /* SettingsPageUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageUI.swift; sourceTree = "<group>"; };
+		E33517532DFD25E100BBE169 /* SettingsLocalizationKeysUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalizationKeysUI.swift; sourceTree = "<group>"; };
+		E33517562DFD261900BBE169 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SettingsUILocalizable.strings; sourceTree = "<group>"; };
 		E3366AF9224A039500EF3C32 /* JavascriptAPIPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIPreferences.swift; sourceTree = "<group>"; };
 		E337D5E12411B64900B5729A /* JavascriptPolyfill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptPolyfill.swift; sourceTree = "<group>"; };
 		E337D5E3241C12BE00B5729A /* PrefPluginPermissionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefPluginPermissionListView.swift; sourceTree = "<group>"; };
@@ -1885,7 +1889,6 @@
 		E34BC2A72C27C01800A94680 /* SettingsLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalization.swift; sourceTree = "<group>"; };
 		E34BC2A92C27C95800A94680 /* SettingsLocalizationKeysGeneral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalizationKeysGeneral.swift; sourceTree = "<group>"; };
 		E34BC2AB2C27DAE900A94680 /* SettingsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHelper.swift; sourceTree = "<group>"; };
-		E34C0C3024934D7B0065A0C6 /* Switch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Switch.swift; sourceTree = "<group>"; };
 		E34E0ADF2007E23600BDC8BA /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/FreeSelectingViewController.strings"; sourceTree = "<group>"; };
 		E34E909B24F821280073BF04 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/GuideWindowController.xib; sourceTree = "<group>"; };
 		E34E909E24F821300073BF04 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
@@ -1920,7 +1923,6 @@
 		E35306FF214908DC008FE492 /* JavascriptAPIHttp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIHttp.swift; sourceTree = "<group>"; };
 		E3530701214935DE008FE492 /* JavascriptAPIConsole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIConsole.swift; sourceTree = "<group>"; };
 		E353070321496CE4008FE492 /* PrefPluginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefPluginViewController.swift; sourceTree = "<group>"; };
-		E353070421496CE4008FE492 /* PrefPluginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrefPluginViewController.xib; sourceTree = "<group>"; };
 		E360A5CC2C23C1BC006EA412 /* SettingsWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindow.swift; sourceTree = "<group>"; };
 		E36E8D7A24F6052F00B8C097 /* GuideWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideWindowController.swift; sourceTree = "<group>"; };
 		E374160B20F138A900B4F7F9 /* CollapseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapseView.swift; sourceTree = "<group>"; };
@@ -2756,9 +2758,11 @@
 		E34BC2902C27BB4000A94680 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
+				E33517552DFD261900BBE169 /* SettingsUILocalizable.strings */,
 				E34BC2912C27BB6000A94680 /* SettingsGeneralLocalizable.strings */,
 				E34BC2A72C27C01800A94680 /* SettingsLocalization.swift */,
 				E34BC2A92C27C95800A94680 /* SettingsLocalizationKeysGeneral.swift */,
+				E33517532DFD25E100BBE169 /* SettingsLocalizationKeysUI.swift */,
 			);
 			name = Localization;
 			sourceTree = "<group>";
@@ -2797,6 +2801,7 @@
 				E34BC28E2C27A68100A94680 /* SettingsItem.swift */,
 				E34BC2AB2C27DAE900A94680 /* SettingsHelper.swift */,
 				E34BC28A2C27731700A94680 /* SettingsPageGeneral.swift */,
+				E33517512DFD206800BBE169 /* SettingsPageUI.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -3055,6 +3060,7 @@
 				8400D5D81E1AB31B006785F5 /* AboutWindowController.xib in Resources */,
 				8400D5F31E1AB348006785F5 /* PrefSubViewController.xib in Resources */,
 				84D0FB821F5E6A3800C6A6A7 /* FreeSelectingViewController.xib in Resources */,
+				E33517572DFD261900BBE169 /* SettingsUILocalizable.strings in Resources */,
 				8400D5E11E1AB32F006785F5 /* PrefUIViewController.xib in Resources */,
 				E338368A202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.xib in Resources */,
 				34ACA04B29DBB0090030C09C /* LogWindowController.xib in Resources */,
@@ -3162,6 +3168,7 @@
 				8461C52E1D45FFF6006E91FF /* PlaySliderCell.swift in Sources */,
 				84F5D4A21E4796F50060A838 /* KeyBindingTranslator.swift in Sources */,
 				E3DBD23E218EF4F100B3AFBF /* AboutWindowContributorAvatarItem.swift in Sources */,
+				E33517522DFD206E00BBE169 /* SettingsPageUI.swift in Sources */,
 				8452DD851D3B956D008A543A /* Preference.swift in Sources */,
 				8488D6E31E1183D300D5B952 /* PrefSubViewController.swift in Sources */,
 				846352581EEEE11A0043F0CC /* ThumbnailPeekView.swift in Sources */,
@@ -3191,6 +3198,7 @@
 				E3958565253133E80096811F /* SidebarTabView.swift in Sources */,
 				E3C12F6B201F281F00297964 /* FirstRunManager.swift in Sources */,
 				E34BC2AA2C27C95800A94680 /* SettingsLocalizationKeysGeneral.swift in Sources */,
+				E33517542DFD25E100BBE169 /* SettingsLocalizationKeysUI.swift in Sources */,
 				84EB1F071D2F5E76004FA5A1 /* Utility.swift in Sources */,
 				84D0FB7E1F5E519300C6A6A7 /* FreeSelectingViewController.swift in Sources */,
 				E34BC28D2C27733200A94680 /* SettingsPage.swift in Sources */,
@@ -4594,6 +4602,14 @@
 				34ACAD702C16917100F871A0 /* hr */,
 			);
 			name = ScreenshootOSDView.xib;
+			sourceTree = "<group>";
+		};
+		E33517552DFD261900BBE169 /* SettingsUILocalizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E33517562DFD261900BBE169 /* en */,
+			);
+			name = SettingsUILocalizable.strings;
 			sourceTree = "<group>";
 		};
 		E34A0E032053F93A00B50097 /* PrefOSCToolbarSettingsSheetController.xib */ = {

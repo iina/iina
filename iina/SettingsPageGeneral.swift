@@ -9,88 +9,86 @@
 import Foundation
 
 class SettingsPageGeneral: SettingsPage {
+  private lazy var fileChooseView: FileChooserView = FileChooserView()
+
+  override var title: String {
+    "General"
+  }
+
   override var localizationTable: String {
     "SettingsGeneralLocalizable"
   }
 
   override func content() -> NSView {
-    let views: [NSView] = sectionBehavior()
-    + sectionHistory()
-    + sectionPlayList()
-    + sectionScreenshots()
-
-    let stackView = NSStackView(views: views)
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-    stackView.orientation = .vertical
-    stackView.spacing = 16
-    views.forEach {
-      $0.padding(.horizontal)
-      stackView.setVisibilityPriority(.mustHold, for: $0)
+    return sections {
+      sectionBehavior()
+      sectionHistory()
+      sectionPlayList()
+      sectionScreenshots()
     }
-    return stackView
   }
 
   private func sectionBehavior() -> [NSView] {
-    return [
-      SettingsListView(title: "Behavior", [
+    return section {
+      SettingsListView(title: "Behavior") {
         SettingsItem.PopupButton()
           .image(name: "restart.circle")
-          .bindTo(.actionAfterLaunch, ofType: Preference.ActionAfterLaunch.self),
+          .bindTo(.actionAfterLaunch, ofType: Preference.ActionAfterLaunch.self)
         SettingsItem.General(title: .text_WhenMediaIsOpened)
-          .withExpandingDetailView(SettingsSubListView([
+          .withExpandingDetailView {
             SettingsItem.Switch()
-              .bindTo(.pauseWhenOpen),
+              .bindTo(.pauseWhenOpen)
             SettingsItem.Switch()
-              .bindTo(.fullScreenWhenOpen),
-          ])),
+              .bindTo(.fullScreenWhenOpen)
+          }
         SettingsItem.General(title: .text_PauseresumeWhen)
-          .withExpandingDetailView(SettingsSubListView([
+          .withExpandingDetailView {
             SettingsItem.Switch()
-              .bindTo(.pauseWhenMinimized),
+              .bindTo(.pauseWhenMinimized)
             SettingsItem.Switch()
-              .bindTo(.pauseWhenInactive),
+              .bindTo(.pauseWhenInactive)
             SettingsItem.Switch()
-              .bindTo(.playWhenEnteringFullScreen),
+              .bindTo(.playWhenEnteringFullScreen)
             SettingsItem.Switch()
-              .bindTo(.pauseWhenLeavingFullScreen),
+              .bindTo(.pauseWhenLeavingFullScreen)
             SettingsItem.Switch()
-              .bindTo(.pauseWhenGoesToSleep),
-          ])),
-      ]).container,
+              .bindTo(.pauseWhenGoesToSleep)
+          }
+      }
 
-      SettingsListView([
+      SettingsListView {
         SettingsItem.Switch()
           .image(name: "macwindow.badge.plus")
-          .bindTo(.alwaysOpenInNewWindow),
+          .bindTo(.alwaysOpenInNewWindow)
         SettingsItem.Switch()
-          .bindTo(.quitWhenNoOpenedWindow),
+          .bindTo(.quitWhenNoOpenedWindow)
         SettingsItem.Switch()
-          .bindTo(.keepOpenOnFileEnd),
-      ]).container,
+          .bindTo(.keepOpenOnFileEnd)
+      }
 
-      SettingsListView([
+      SettingsListView {
         SettingsItem.Switch()
           .image(name: "rectangle.expand.diagonal")
-          .bindTo(.useLegacyFullScreen),
+          .bindTo(.useLegacyFullScreen)
         SettingsItem.Switch()
           .image(name: "lock.display")
-          .bindTo(.blackOutMonitor),
+          .bindTo(.blackOutMonitor)
         SettingsItem.Switch()
           .bindTo(.preventScreenSaver)
-          .withDetailView(SettingsSubListView([
+          .withDetailView {
             SettingsItem.Switch()
               .hasDescription()
               .bindTo(.allowScreenSaverForAudio)
-          ]))
-      ]).container,
+          }
+      }
 
-      SettingsListView([
+      SettingsListView {
         SettingsItem.Switch()
           .image(name: "music.note.list")
-          .bindTo(.autoSwitchToMusicMode),
-      ]).container,
+          .bindTo(.autoSwitchToMusicMode)
+      }
 
-      SettingsListView([
+      SettingsListView {
         SettingsItem.SwitchWithPopupButton(title: .text_CheckForUpdates)
           .image(name: "arrowshape.up.circle")
           .bindSwitchToCustom {
@@ -99,91 +97,105 @@ class SettingsPageGeneral: SettingsPage {
           .bindPopupToCustom(type: Preference.SparkleInterval.self) {
             $0.bind(.selectedTag, to: NSApplication.shared, withKeyPath: "delegate.updaterController.updater.updateCheckInterval")
           }
-          .withDetailView(SettingsSubListView([
+          .withDetailView {
             SettingsItem.Switch()
-              .bindTo(.receiveBetaUpdate),
-          ])),
-      ]).container,
-    ]
+              .bindTo(.receiveBetaUpdate)
+          }
+      }
+    }
   }
 
   private func sectionHistory() -> [NSView] {
-    return [
-      SettingsListView(title: "History", [
+    return section {
+      SettingsListView(title: "History") {
         SettingsItem.Switch()
           .image(name: "timer")
-          .bindTo(.resumeLastPosition),
+          .bindTo(.resumeLastPosition)
         SettingsItem.Switch()
           .image(name: "list.clipboard")
-          .bindTo(.recordPlaybackHistory),
+          .bindTo(.recordPlaybackHistory)
         SettingsItem.Switch()
           .image(name: "menucard")
           .bindTo(.recordRecentFiles)
-          .withDetailView(SettingsSubListView([
+          .withDetailView {
             SettingsItem.Switch()
               .hasDescription()
               .bindTo(.trackAllFilesInRecentOpenMenu)
-          ]))
-      ]).container
-    ]
+          }
+      }
+    }
   }
 
   private func sectionPlayList() -> [NSView] {
-    return [
-      SettingsListView(title: "Playlist", [
+    return section {
+      SettingsListView(title: "Playlist") {
         SettingsItem.Switch()
           .image(name: "list.and.film")
-          .bindTo(.playlistAutoAdd),
+          .bindTo(.playlistAutoAdd)
         SettingsItem.Switch()
           .image(name: "play.circle")
-          .bindTo(.playlistAutoPlayNext),
+          .bindTo(.playlistAutoPlayNext)
         SettingsItem.Switch()
           .image(name: "music.microphone")
           .bindTo(.playlistShowMetadata)
-          .withDetailView(SettingsSubListView([
+          .withDetailView {
             SettingsItem.Switch()
               .bindTo(.playlistShowMetadataInMusicMode)
-          ])),
+          }
         SettingsItem.SwitchWithPopupButton()
           .image(name: "repeat")
           .labelKey(.autoRepeat)
           .bindSwitchTo(.autoRepeat)
           .bindPopupTo(.defaultRepeatMode, ofType: Preference.DefaultRepeatMode.self)
-      ]).container
-    ]
+      }
+    }
   }
 
   private func sectionScreenshots() -> [NSView] {
-    return [
-      SettingsListView(title: "Screenshots", [
+    return section {
+      SettingsListView(title: "Screenshots") {
         SettingsItem.Switch()
           .image(name: "camera.on.rectangle")
-          .bindTo(.screenshotSaveToFile),
+          .bindTo(.screenshotSaveToFile)
+          .extraViews(fileChooseView.textField, fileChooseView.chooseButton)
         SettingsItem.PopupButton()
-          .bindTo(.screenshotFormat, ofType: Preference.ScreenshotFormat.self),
+          .bindTo(.screenshotFormat, ofType: Preference.ScreenshotFormat.self)
         SettingsItem.Switch()
-          .bindTo(.screenshotCopyToClipboard),
+          .image(name: "list.clipboard")
+          .bindTo(.screenshotCopyToClipboard)
         SettingsItem.Switch()
           .image(name: "captions.bubble")
-          .bindTo(.screenshotIncludeSubtitle),
+          .bindTo(.screenshotIncludeSubtitle)
         SettingsItem.Switch()
           .image(name: "photo.on.rectangle.angled")
           .bindTo(.screenshotShowPreview)
-      ]).container
-    ]
+      }
+    }
   }
 }
 
 
-fileprivate class SparkleSettingsView: NSView {
+fileprivate class FileChooserView {
+  var textField: NSTextField
+  var chooseButton: NSButton
+
   init() {
-    super.init(frame: NSRect())
+    textField = NSTextField(labelWithString: "")
+    textField.bind(.value, to: UserDefaults.standard, withKeyPath: Preference.Key.screenshotFolder.rawValue)
+    chooseButton = NSButton()
+    chooseButton.image = .init(systemSymbolName: "folder.fill", accessibilityDescription: nil)!
+    chooseButton.target = self
+    chooseButton.action = #selector(chooseFolder)
   }
-  
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
+
+  @objc func chooseFolder(_ sender: AnyObject) {
+    Utility.quickOpenPanel(title: "Choose screenshot save path", chooseDir: true, sheetWindow: chooseButton.window) { url in
+      Preference.set(url.path, for: .screenshotFolder)
+      UserDefaults.standard.synchronize()
+    }
   }
 }
+
 
 fileprivate extension Preference {
   enum SparkleInterval: Int, InitializingFromKey, CaseIterable {

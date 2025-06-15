@@ -10,7 +10,8 @@ import Cocoa
 
 class SettingsWindow: NSWindow {
   static let `default`: SettingsWindow = SettingsWindow([
-    SettingsPageGeneral()
+    SettingsPageGeneral(),
+    SettingsPageUI()
   ])
 
   let contentScrollView: NSScrollView
@@ -20,7 +21,7 @@ class SettingsWindow: NSWindow {
     self.pages = pages
     contentScrollView = NSScrollView()
 
-    super.init(contentRect: NSRect(x: 0, y: 0, width: 800, height: 600),
+    super.init(contentRect: NSRect(x: 0, y: 0, width: 900, height: 700),
                styleMask: [.closable, .miniaturizable, .resizable, .titled, .fullSizeContentView],
                backing: .buffered, defer: false)
 
@@ -116,7 +117,8 @@ class SettingsWindow: NSWindow {
     content.autoresizingMask = [.width, .height]
     contentScrollView.documentView = content
     content.padding(to: contentScrollView.contentView, .horizontal)
-    contentScrollView.documentView!.bottomAnchor.constraint(greaterThanOrEqualTo: content.bottomAnchor).isActive = true
+    contentScrollView.documentView!.topAnchor.constraint(equalTo: contentView!.topAnchor).isActive = true
+//    contentScrollView.documentView!.bottomAnchor.constraint(greaterThanOrEqualTo: contentView!.bottomAnchor).isActive = true
   }
 
   func show() {
@@ -132,12 +134,12 @@ class SettingsWindow: NSWindow {
 
 extension SettingsWindow: NSTableViewDataSource, NSTableViewDelegate {
   func numberOfRows(in tableView: NSTableView) -> Int {
-    return 3
+    return pages.count
   }
 
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
     let text = NSTextField()
-    text.stringValue = "Hello World"
+    text.stringValue = pages[row].title
     let cell = NSTableCellView()
     cell.addSubview(text)
     text.drawsBackground = false
@@ -161,6 +163,12 @@ extension SettingsWindow: NSTableViewDataSource, NSTableViewDelegate {
 
   func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
     return 36
+  }
+
+  func tableViewSelectionDidChange(_ notification: Notification) {
+    let tableView = notification.object as! NSTableView
+    print("selected row: \(tableView.selectedRow)")
+    loadPage(at: tableView.selectedRow)
   }
 }
 

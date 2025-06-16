@@ -3058,6 +3058,7 @@
 		};
 		E3E720A12CD7073D003470BF /* Copy Default Plugins */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);

@@ -180,13 +180,13 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   }
 
   // MARK: - Window delegate: Size
-  func windowDidResize(_ notification: Notification) {
-    guard let window = window, !window.inLiveResize else { return }
-    videoView.videoLayer.draw()
+
+  func windowWillStartLiveResize(_ notification: Notification) {
+    videoView.videoLayer.inLiveResize = true
   }
 
   func windowDidEndLiveResize(_ notification: Notification) {
-    guard let window = window else { return }
+    guard player.info.state.active, let window = window else { return }
     let windowHeight = normalWindowHeight()
     if isPlaylistVisible {
       // hide
@@ -202,6 +202,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
         isPlaylistVisible = true
       }
     }
+    videoView.videoLayer.inLiveResize = false
   }
 
   // MARK: - Window delegate: Activeness status

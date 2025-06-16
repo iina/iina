@@ -62,8 +62,7 @@ let attributeLookUp: [UInt32: String] = [
 ///
 /// This class is structured to make it easier to compare it to the reference implementation in the mpv player. Methods and statements
 /// are in the same order as found in the mpv source. However there are differences that cause the implementation to not match up. For
-/// example IINA draws using a background thread whereas mpv uses the main thread. For this reason the locking differs as IINA has to
-/// coordinate access to data that is shared between the main thread and the background thread.
+/// example IINA draws using a background thread whereas mpv uses the main thread.
 class ViewLayer: CAOpenGLLayer {
 
   private weak var videoView: VideoView!
@@ -75,13 +74,31 @@ class ViewLayer: CAOpenGLLayer {
   private let cglContext: CGLContextObj
   private let cglPixelFormat: CGLPixelFormatObj
 
-  /// Lock to single thread calls to `draw(forced:)`.
-  private let drawLock: Lock
+  /// Lock to single thread calls to `display`.
+  private let displayLock: NSLocking
 
   private var fbo: GLint = 1
 
-  private var needsMPVRender = false
-  private var forceRender = false
+  @Atomic private var needsFlip = false
+  @Atomic private var forceDraw = false
+
+  /// Indicates whether the view is being rendered as part of a live resizing operation.
+  ///
+  /// This flag is used to manage setting of the
+  /// [isAsynchronous](https://developer.apple.com/documentation/quartzcore/caopengllayer/isasynchronous)
+  /// property. When `isAsynchronous` is `true` [canDraw](https://developer.apple.com/documentation/quartzcore/caopengllayer/candraw(incglcontext:pixelformat:forlayertime:displaytime:))
+  /// is called periodically to determine if the OpenGL content should be updated. This is used when the window is being resized. When [windowDidEndLiveResize](https://developer.apple.com/documentation/appkit/nswindowdelegate/windowdidendliveresize(_:))
+  /// is called it is important to not set `isAsynchronous` to `false` until a draw has occurred. Setting this flag to `false`
+  /// will cause `canDraw` to set `isAsynchronous` to `false` only once another drawing is in process. This reduces the
+  /// likelihood of seeing a very short momentary black screen when exiting full screen mode.
+  @Atomic var inLiveResize: Bool = false {
+    didSet {
+      if inLiveResize {
+        isAsynchronous = true
+      }
+      update(force: true)
+    }
+  }
 
   /// Returns an initialized `ViewLayer` object.
   ///
@@ -93,7 +110,7 @@ class ViewLayer: CAOpenGLLayer {
     self.videoView = videoView
     (cglPixelFormat, bufferDepth) = ViewLayer.createPixelFormat(videoView.player)
     cglContext = ViewLayer.createContext(cglPixelFormat)
-    drawLock = Lock()
+    displayLock = NSRecursiveLock()
     super.init()
     autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
     backgroundColor = NSColor.black.cgColor
@@ -115,12 +132,13 @@ class ViewLayer: CAOpenGLLayer {
     videoView = previousLayer.videoView
     cglPixelFormat = previousLayer.cglPixelFormat
     cglContext = previousLayer.cglContext
-    drawLock = previousLayer.drawLock
+    displayLock = previousLayer.displayLock
     super.init(layer: layer)
     autoresizingMask = previousLayer.autoresizingMask
     backgroundColor = previousLayer.backgroundColor
     wantsExtendedDynamicRangeContent = previousLayer.wantsExtendedDynamicRangeContent
     contentsFormat = previousLayer.contentsFormat
+    inLiveResize = previousLayer.inLiveResize
     isAsynchronous = previousLayer.isAsynchronous
   }
 
@@ -134,8 +152,10 @@ class ViewLayer: CAOpenGLLayer {
                         forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) -> Bool {
     videoView.$isUninited.withLock() { isUninited in
       guard !isUninited else { return false }
-      if forceRender { return true }
-      return videoView.player.mpv.shouldRenderUpdateFrame()
+      if !inLiveResize {
+        isAsynchronous = false
+      }
+      return forceDraw || videoView.player.mpv.shouldRenderUpdateFrame()
     }
   }
 
@@ -144,8 +164,10 @@ class ViewLayer: CAOpenGLLayer {
     videoView.$isUninited.withLock() { isUninited in
       guard !isUninited else { return }
 
+      needsFlip = false
+      forceDraw = false
+
       let mpv = videoView.player.mpv!
-      needsMPVRender = false
 
       glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
 
@@ -197,24 +219,28 @@ class ViewLayer: CAOpenGLLayer {
   ///     something other than the main thread, IINA will crash with a SIGABRT reporting "an implicit transaction wasn't created on a
   ///     main thread". See issue [#5038](https://github.com/iina/iina/issues/5038).
   override func display() {
+    displayLock.lock()
+    defer { displayLock.unlock() }
+
+    let isUpdate = needsFlip
+
     CATransaction.begin()
     super.display()
     CATransaction.commit()
 
-    // Must lock the OpenGL context before calling mpv render methods. Can't wait until we have
-    // checked the flags to see if a skip renderer is needed because the OpenGL context must always
-    // be locked before locking the isUninited lock to avoid deadlocks. The flags can't be checked
-    // without locking isUninited to avoid data races.
+    // The call to commit will not render the explicit transaction if it is nested in an implicit
+    // transaction. This can happen when drawing is being forced after a change to the view such as
+    // resizing. Must call flush to ensure any implicit transaction is flushed.
+    CATransaction.flush()
+
+    guard isUpdate && needsFlip else { return }
+
+    // Must lock the OpenGL context before calling mpv render methods. The OpenGL context must
+    // always be locked before locking the isUninited lock to avoid deadlocks.
     videoView.player.mpv.lockAndSetOpenGLContext()
     defer { videoView.player.mpv.unlockOpenGLContext() }
     videoView.$isUninited.withLock() { isUninited in
       guard !isUninited else { return }
-
-      guard !forceRender else {
-        forceRender = false
-        return
-      }
-      guard needsMPVRender else { return }
 
       // Neither canDraw nor draw(inCGLContext:) were called by AppKit, needs a skip render.
       // This can happen when IINA is playing in another space, as might occur when just playing
@@ -230,22 +256,13 @@ class ViewLayer: CAOpenGLLayer {
           mpv_render_context_render(renderContext, &params)
         }
       }
-      needsMPVRender = false
     }
   }
 
-  func draw(forced: Bool = false) {
-    drawLock.withLock() {
-      videoView.$isUninited.withLock() { isUninited in
-        // The properties forceRender and needsMPVRender are always accessed while holding
-        // isUninited's lock. This avoids the need for separate locks to avoid data races with these
-        // flags. No need to check isUninited at this point.
-        needsMPVRender = true
-        if forced { forceRender = true }
-      }
-
-      // Must not call display while holding isUninited's lock as that method will attempt to
-      // acquire the lock and our locks do not support recursion.
+  func update(force: Bool = false) {
+    if force { forceDraw = true }
+    if forceDraw || !inLiveResize {
+      needsFlip = true
       display()
     }
   }

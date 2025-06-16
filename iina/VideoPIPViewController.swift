@@ -14,12 +14,11 @@ class VideoPIPViewController: PIPViewController, NSWindowDelegate {
 
   /// Force a draw, if needed.
   ///
-  /// If the image is changing there is no need to force a draw. However if playback is paused, or if playback is in progress but the video
-  /// track is an album art still image then drawing is required.
-  private func forceDraw() {
-    guard let controller = delegate as? MainWindowController, controller.player.info.state == .paused
-            || controller.player.info.currentTrack(.video)?.isAlbumart ?? false else { return }
-    controller.videoView.videoLayer.draw(forced: true)
+  /// The `forceDraw` method in `PlayerWindowController` will check to see if drawing is really needed and if so, force a
+  /// draw of the view.
+  private func forceDraw(_ reason: String) {
+    guard let controller = delegate as? MainWindowController else { return }
+    controller.forceDraw(reason)
   }
 
   /// Force a draw after entering PiP.
@@ -31,7 +30,7 @@ class VideoPIPViewController: PIPViewController, NSWindowDelegate {
   /// asynchronously.
   override func viewDidLayout() {
     super.viewDidLayout()
-    forceDraw()
+    forceDraw("entered PiP")
     guard let window = view.window else {
       // Internal error, should not occur.
       Logger.log("VideoPIPViewController.viewDidLayout window is nil", level: .error)
@@ -46,7 +45,7 @@ class VideoPIPViewController: PIPViewController, NSWindowDelegate {
   /// happen and a frame is displayed. See issue #4268 and PR #4286 for details.
   override func viewDidDisappear() {
     super.viewDidDisappear()
-    forceDraw()
+    forceDraw("exited PiP")
   }
 
   /// PiP window has changed screens.

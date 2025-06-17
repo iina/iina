@@ -334,6 +334,9 @@
 		E33517522DFD206E00BBE169 /* SettingsPageUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33517512DFD206800BBE169 /* SettingsPageUI.swift */; };
 		E33517542DFD25E100BBE169 /* SettingsLocalizationKeysUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33517532DFD25E100BBE169 /* SettingsLocalizationKeysUI.swift */; };
 		E33517572DFD261900BBE169 /* SettingsUILocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E33517552DFD261900BBE169 /* SettingsUILocalizable.strings */; };
+		E33517592DFFC6DB00BBE169 /* SettingsPageVideoAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33517582DFFC6DB00BBE169 /* SettingsPageVideoAudio.swift */; };
+		E335175E2DFFC78F00BBE169 /* SettingsVideoAudioLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E335175C2DFFC78F00BBE169 /* SettingsVideoAudioLocalizable.strings */; };
+		E33517602DFFC93100BBE169 /* SettingsLocalizationKeysVideoAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E335175F2DFFC93100BBE169 /* SettingsLocalizationKeysVideoAudio.swift */; };
 		E3366AFA224A039500EF3C32 /* JavascriptAPIPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3366AF9224A039500EF3C32 /* JavascriptAPIPreferences.swift */; };
 		E337D5E22411B64A00B5729A /* JavascriptPolyfill.swift in Sources */ = {isa = PBXBuildFile; fileRef = E337D5E12411B64900B5729A /* JavascriptPolyfill.swift */; };
 		E337D5E4241C12BE00B5729A /* PrefPluginPermissionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E337D5E3241C12BE00B5729A /* PrefPluginPermissionListView.swift */; };
@@ -1865,6 +1868,9 @@
 		E33517512DFD206800BBE169 /* SettingsPageUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageUI.swift; sourceTree = "<group>"; };
 		E33517532DFD25E100BBE169 /* SettingsLocalizationKeysUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalizationKeysUI.swift; sourceTree = "<group>"; };
 		E33517562DFD261900BBE169 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SettingsUILocalizable.strings; sourceTree = "<group>"; };
+		E33517582DFFC6DB00BBE169 /* SettingsPageVideoAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageVideoAudio.swift; sourceTree = "<group>"; };
+		E335175D2DFFC78F00BBE169 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SettingsVideoAudioLocalizable.strings; sourceTree = "<group>"; };
+		E335175F2DFFC93100BBE169 /* SettingsLocalizationKeysVideoAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalizationKeysVideoAudio.swift; sourceTree = "<group>"; };
 		E3366AF9224A039500EF3C32 /* JavascriptAPIPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIPreferences.swift; sourceTree = "<group>"; };
 		E337D5E12411B64900B5729A /* JavascriptPolyfill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptPolyfill.swift; sourceTree = "<group>"; };
 		E337D5E3241C12BE00B5729A /* PrefPluginPermissionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefPluginPermissionListView.swift; sourceTree = "<group>"; };
@@ -2758,11 +2764,13 @@
 		E34BC2902C27BB4000A94680 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
-				E33517552DFD261900BBE169 /* SettingsUILocalizable.strings */,
 				E34BC2912C27BB6000A94680 /* SettingsGeneralLocalizable.strings */,
+				E33517552DFD261900BBE169 /* SettingsUILocalizable.strings */,
+				E335175C2DFFC78F00BBE169 /* SettingsVideoAudioLocalizable.strings */,
 				E34BC2A72C27C01800A94680 /* SettingsLocalization.swift */,
 				E34BC2A92C27C95800A94680 /* SettingsLocalizationKeysGeneral.swift */,
 				E33517532DFD25E100BBE169 /* SettingsLocalizationKeysUI.swift */,
+				E335175F2DFFC93100BBE169 /* SettingsLocalizationKeysVideoAudio.swift */,
 			);
 			name = Localization;
 			sourceTree = "<group>";
@@ -2802,6 +2810,7 @@
 				E34BC2AB2C27DAE900A94680 /* SettingsHelper.swift */,
 				E34BC28A2C27731700A94680 /* SettingsPageGeneral.swift */,
 				E33517512DFD206800BBE169 /* SettingsPageUI.swift */,
+				E33517582DFFC6DB00BBE169 /* SettingsPageVideoAudio.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -3085,6 +3094,7 @@
 				84996F901EC11CE6009A8A39 /* HistoryWindowController.xib in Resources */,
 				8418A2F5213F5791003166AC /* OpenURLWindowController.xib in Resources */,
 				E34BC2932C27BB6000A94680 /* SettingsGeneralLocalizable.strings in Resources */,
+				E335175E2DFFC78F00BBE169 /* SettingsVideoAudioLocalizable.strings in Resources */,
 				8400D5DE1E1AB32A006785F5 /* PrefGeneralViewController.xib in Resources */,
 				8400D5C61E1AB2F1006785F5 /* MainWindowController.xib in Resources */,
 			);
@@ -3166,6 +3176,7 @@
 				E35306FA214808AB008FE492 /* JavascriptAPIEvent.swift in Sources */,
 				849581F11F02728700D3B359 /* InitialWindowController.swift in Sources */,
 				8461C52E1D45FFF6006E91FF /* PlaySliderCell.swift in Sources */,
+				E33517602DFFC93100BBE169 /* SettingsLocalizationKeysVideoAudio.swift in Sources */,
 				84F5D4A21E4796F50060A838 /* KeyBindingTranslator.swift in Sources */,
 				E3DBD23E218EF4F100B3AFBF /* AboutWindowContributorAvatarItem.swift in Sources */,
 				E33517522DFD206E00BBE169 /* SettingsPageUI.swift in Sources */,
@@ -3305,6 +3316,7 @@
 				8407D1401E3A684C0043895D /* ViewLayer.swift in Sources */,
 				51165FC02E1D91940060B817 /* ReadWriteLock.swift in Sources */,
 				84EB1F051D2F5C5B004FA5A1 /* AppData.swift in Sources */,
+				E33517592DFFC6DB00BBE169 /* SettingsPageVideoAudio.swift in Sources */,
 				51F7974728C7E00200812D0D /* Lock.swift in Sources */,
 				84C8D58F1D794CE600D98A0E /* MPVFilter.swift in Sources */,
 				84A0BAA11D2FAE7600BC8DA1 /* VideoView.swift in Sources */,
@@ -4610,6 +4622,14 @@
 				E33517562DFD261900BBE169 /* en */,
 			);
 			name = SettingsUILocalizable.strings;
+			sourceTree = "<group>";
+		};
+		E335175C2DFFC78F00BBE169 /* SettingsVideoAudioLocalizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E335175D2DFFC78F00BBE169 /* en */,
+			);
+			name = SettingsVideoAudioLocalizable.strings;
 			sourceTree = "<group>";
 		};
 		E34A0E032053F93A00B50097 /* PrefOSCToolbarSettingsSheetController.xib */ = {

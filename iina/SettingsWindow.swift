@@ -11,7 +11,8 @@ import Cocoa
 class SettingsWindow: NSWindow {
   static let `default`: SettingsWindow = SettingsWindow([
     SettingsPageGeneral(),
-    SettingsPageUI()
+    SettingsPageUI(),
+    SettingsPageVideoAudio(),
   ])
 
   let contentScrollView: NSScrollView

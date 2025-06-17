@@ -73,6 +73,7 @@ struct SettingsItem {
     var labelLocalizationKey: SettingsLocalization.Key?
     var imageName: [String]?
     var hasDesc: Bool = false
+    var descKey: SettingsLocalization.Key?
 
     var verticalPadding: CGFloat {
       switch controlSize {
@@ -101,6 +102,12 @@ struct SettingsItem {
 
     public func hasDescription() -> Self {
       self.hasDesc = true
+      return self
+    }
+
+    public func hasDescription(content: SettingsLocalization.Key) -> Self {
+      self.hasDesc = true
+      self.descKey = content
       return self
     }
 
@@ -151,7 +158,7 @@ struct SettingsItem {
       backgroundView.addSubview(labelStackView)
 
       if hasDesc, let key = key {
-        let descText = l10n.localized(.init("\(key.rawValue).desc"))
+        let descText = l10n.localized(descKey ?? .init("\(key.rawValue).desc"))
         desc = NSTextField(labelWithString: descText)
         desc.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
         desc.textColor = .secondaryLabelColor
@@ -557,6 +564,7 @@ struct SettingsItem {
       textField = NSTextField()
       textField.translatesAutoresizingMaskIntoConstraints = false
       textField.controlSize = controlSize
+      textField.bezelStyle = .roundedBezel
       textField.size(width: 64)
       setControlSize(textField)
       if let trailingLabel = trailingLabel {
@@ -584,6 +592,102 @@ struct SettingsItem {
         textField.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue)
       } else if customBinding, let customBindingBlock = customBindingBlock {
         customBindingBlock(textField)
+      }
+    }
+  }
+
+  class SwitchWithInput: General {
+    var keySwitch: Preference.Key?
+    var keyInput: Preference.Key?
+
+    private var nsSwitch: NSSwitch!
+    private var valueTypes: [(Int, String)] = []
+    private var textField: NSTextField!
+    private var trailingLabel: SettingsLocalization.Key?
+
+    private var customBindingInput = false
+    private var customBindingBlockInput: ((NSTextField) -> Void)?
+    private var customBindingSwitch = false
+    private var customBindingBlockSwitch: ((NSSwitch) -> Void)?
+
+    override func getValueViews() -> [NSView] {
+      nsSwitch = NSSwitch()
+      nsSwitch.controlSize = .mini
+      nsSwitch.action = #selector(switchChanged)
+      nsSwitch.target = self
+      textField = NSTextField()
+      textField.translatesAutoresizingMaskIntoConstraints = false
+      textField.controlSize = controlSize
+      textField.bezelStyle = .roundedBezel
+      textField.size(width: 64)
+      setControlSize(textField)
+      if let trailingLabel = trailingLabel {
+        let label = NSTextField(labelWithString: l10n.localized(trailingLabel))
+        setControlSize(label)
+        return [textField, label, nsSwitch]
+      } else {
+        return [textField, nsSwitch]
+      }
+    }
+
+    func labelKey(_ key: Preference.Key) -> Self {
+      self.key = key
+      return self
+    }
+
+    func trailingLabel(_ key: SettingsLocalization.Key) -> Self {
+      self.trailingLabel = key
+      return self
+    }
+
+    func bindSwitchTo(_ key: Preference.Key) -> Self {
+      self.keySwitch = key
+      return self
+    }
+
+    func bindInputTo(_ key: Preference.Key) -> Self {
+      self.keyInput = key
+      return self
+    }
+
+    func bindInputToCustom(block: @escaping (NSTextField) -> Void) -> Self {
+      self.customBindingInput = true
+      self.customBindingBlockInput = block
+      return self
+    }
+
+    override func initBinding() {
+      // switch
+      if let key = keySwitch {
+        nsSwitch.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue)
+      } else if customBindingSwitch, let customBindingBlock = customBindingBlockSwitch {
+        customBindingBlock(nsSwitch)
+      }
+      // input
+      if let key = keyInput {
+        textField.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue)
+      } else if customBindingInput, let customBindingBlock = customBindingBlockInput {
+        customBindingBlock(textField)
+      }
+      DispatchQueue.main.async {
+        self.switchChanged(self.nsSwitch)
+      }
+    }
+
+    @objc func switchChanged(_ sender: NSSwitch) {
+      let enableSubControls = sender.state == .on
+      setSubControls(textField, enabled: enableSubControls)
+      if let detailView = detailView {
+        setSubControls(detailView, enabled: enableSubControls)
+      }
+    }
+
+    private func setSubControls(_ view: NSView, enabled: Bool) {
+      if let control = view as? NSControl {
+        control.isEnabled = enabled
+      }
+      for v in view.subviews {
+        setSubControls(v, enabled: enabled)
       }
     }
   }
@@ -646,4 +750,200 @@ fileprivate class ClickableView: NSView {
 fileprivate class NonClickableButton: NSButton {
   override func mouseDown(with event: NSEvent) {}
   override func mouseUp(with event: NSEvent) {}
+}
+
+
+class SettingsAccessory {
+  class Selection: NSView, WithSettingsLocalizationContext {
+    var l10n: SettingsLocalization.Context!
+
+    private class ClickableBox: NSBox {
+      var listener: (() -> Void)?
+
+      override func mouseDown(with event: NSEvent) {
+        listener?()
+      }
+    }
+
+    let view: NSBox
+    let stackView: NSStackView
+    var key: Preference.Key? = nil
+    var items: [Int: NSBox] = [:]
+    var customtransformer: (((Int) -> Any), (Any?) -> Int)?
+
+    private var valueTypes: [(Int, String)] = []
+    @objc private var selectedValue: Int = 0 {
+      didSet {
+        print(selectedValue)
+        updateSelection()
+      }
+    }
+
+    init() {
+      self.view = NSBox()
+      self.stackView = NSStackView()
+      super.init(frame: NSRect())
+      self.translatesAutoresizingMaskIntoConstraints = false
+
+      view.translatesAutoresizingMaskIntoConstraints = false
+      view.boxType = .custom
+      view.borderWidth = 0
+      view.titlePosition = .noTitle
+      view.contentView = stackView
+
+      stackView.translatesAutoresizingMaskIntoConstraints = false
+      stackView.orientation = .vertical
+      stackView.spacing = 4
+      stackView.setHuggingPriority(.defaultHigh, for: .horizontal)
+      stackView.padding(.top(-4), .bottom(0), .horizontal)
+    }
+
+    @MainActor required init?(coder: NSCoder) {
+      fatalError("init(coder:) has not been implemented")
+    }
+
+    func bindTo<T>(_ key: Preference.Key, ofType t: T.Type) -> Self
+    where T: RawRepresentable & CaseIterable & InitializingFromKey, T.RawValue == Int
+    {
+      self.key = key
+      for c in t.allCases {
+        valueTypes.append((c.rawValue, String(describing: c)))
+      }
+      return self
+    }
+
+    func customTransformer(_ transformer: ( ((Int) -> Any), (Any?) -> Int)) -> Self {
+      self.customtransformer = transformer
+      return self
+    }
+
+    private func initBinding() {
+      guard let key = key else { return }
+      if let transformer = customtransformer {
+        selectedValue = transformer.1(Preference.value(for: key))
+      } else {
+        selectedValue = Preference.integer(for: key)
+      }
+      UserDefaults.standard.addObserver(self, forKeyPath: key.rawValue, options: [.new], context: nil)
+    }
+
+    private func updateSelection() {
+      let selectedItem = items[selectedValue]!
+      NSAnimationContext.runAnimationGroup { context in
+        context.duration = 0.1
+        items.values.forEach {
+          $0.borderColor = .separatorColor
+          $0.borderWidth = 1
+          $0.fillColor = .gray.withAlphaComponent(0.1)
+        }
+        selectedItem.animator().borderColor = .controlAccentColor
+        selectedItem.animator().borderWidth = 2
+        selectedItem.animator().fillColor = .controlAccentColor.withAlphaComponent(0.1)
+      }
+    }
+
+    deinit {
+      guard let key = key else { return }
+      ObjcUtils.silenced {
+        UserDefaults.standard.removeObserver(self, forKeyPath: key.rawValue)
+      }
+    }
+
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+      guard let change = change else { return }
+
+      if let transformer = customtransformer {
+        selectedValue = transformer.1(change[.newKey])
+      } else {
+        if let newValue = change[.newKey] as? Int {
+          selectedValue = newValue
+        }
+      }
+    }
+
+    override func viewDidMoveToWindow() {
+      guard window != nil else { return }
+
+      guard let l10nKey = key?.rawValue else { return }
+      for (tag, _) in valueTypes {
+        let title = l10n.localized(.init("\(l10nKey).items.\(tag)"))
+        let desc = l10n.localized(.init("\(l10nKey).items.\(tag).desc"))
+        let box = ClickableBox()
+        box.translatesAutoresizingMaskIntoConstraints = false
+        box.boxType = .custom
+        box.titlePosition = .noTitle
+        let itemTitle = NSTextField(labelWithString: title)
+        let itemDesc = NSTextField(labelWithString: desc)
+        itemDesc.textColor = .secondaryLabelColor
+        itemDesc.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
+        itemDesc.lineBreakMode = .byWordWrapping
+        itemDesc.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        let itemStackView = NSStackView(views: [itemTitle, itemDesc])
+        itemStackView.translatesAutoresizingMaskIntoConstraints = false
+        itemStackView.spacing = 2
+        itemStackView.orientation = .vertical
+        itemStackView.alignment = .leading
+        box.contentView = itemStackView
+        box.cornerRadius = 6
+        box.listener = { [unowned self] in
+          if let transformer = self.customtransformer {
+            Preference.set(transformer.0(tag), for: self.key!)
+          } else {
+            Preference.set(tag, for: self.key!)
+          }
+        }
+        items[tag] = box
+        itemStackView.padding(.vertical(6), .horizontal(12))
+        stackView.addArrangedSubview(box)
+      }
+
+      self.addSubview(view)
+      view.padding(.top, .leading(SettingsSubListView.padding - 4), .trailing(8), .bottom(8))
+
+      initBinding()
+    }
+  }
+
+  class LanguageSelector: NSView {
+    private var key: Preference.Key? = nil
+    private let audioLangTokenField: LanguageTokenField
+    
+    init() {
+      self.audioLangTokenField = .init()
+      super.init(frame: NSRect())
+
+      audioLangTokenField.translatesAutoresizingMaskIntoConstraints = false
+      audioLangTokenField.target = self
+      audioLangTokenField.action = #selector(preferredLanguageAction(_:))
+      self.addSubview(audioLangTokenField)
+      audioLangTokenField.padding(.top(-4), .leading(SettingsSubListView.padding - 4), .trailing(8), .bottom(8))
+    }
+
+    @MainActor required init?(coder: NSCoder) {
+      fatalError("init(coder:) has not been implemented")
+    }
+
+    func bind(to key: Preference.Key?) -> Self {
+      self.key = key
+      return self
+    }
+
+    override func viewDidMoveToWindow() {
+      guard window != nil else { return }
+
+      audioLangTokenField.awakeFromNib()
+      if let key = key {
+        audioLangTokenField.commaSeparatedValues = Preference.string(for: key) ?? ""
+      }
+    }
+
+    @objc func preferredLanguageAction(_ sender: LanguageTokenField) {
+      guard let key = key else { return }
+      let csv = sender.commaSeparatedValues
+      if Preference.string(for: key) != csv {
+        Logger.log("Saving \(key.rawValue): \"\(csv)\"", level: .verbose)
+        Preference.set(csv, for: key)
+      }
+    }
+  }
 }

@@ -104,6 +104,8 @@ class SettingsListView: NSBox, SettingsContainer, WithSettingsLocalizationContex
   var listTitle: String?
   var l10n: SettingsLocalization.Context!
 
+  static private let SMALL_TITLE = false
+
   class Container: NSView {
     init(_ listView: SettingsListView, title: String? = nil) {
       super.init(frame: NSRect())
@@ -111,11 +113,17 @@ class SettingsListView: NSBox, SettingsContainer, WithSettingsLocalizationContex
       self.translatesAutoresizingMaskIntoConstraints = false
       self.addSubview(listView)
       if let title = title {
-        let titleField = NSTextField(labelWithString: title.localizedUppercase)
+        let titleField: NSTextField
+        if (SMALL_TITLE) {
+          titleField = NSTextField(labelWithString: title.localizedUppercase)
+          titleField.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize, weight: .bold)
+        } else {
+          titleField = NSTextField(labelWithString: title)
+          titleField.font = NSFont.systemFont(ofSize: NSFont.systemFontSize, weight: .bold)
+        }
         titleField.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(titleField)
         titleField.padding(.top, .horizontal(8))
-        titleField.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize, weight: .bold)
         titleField.textColor = NSColor.secondaryLabelColor
         listView.spacing(to: titleField, .top(8))
         listView.padding(.bottom, .horizontal(8))

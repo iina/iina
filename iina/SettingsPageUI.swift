@@ -332,7 +332,7 @@ fileprivate class OSCLayoutView: WithSettingsLocalizationContext {
       iv.layer?.masksToBounds = true
       iv.translatesAutoresizingMaskIntoConstraints = false
       view.addSubview(iv)
-      iv.padding(.top(4)).size(width: 480 / 5, height: 270 / 5)
+      iv.padding(.top(4)).size(width: 480 * 0.22, height: 270 * 0.22)
     }
     SettingsUIHelper.hEquallySpaced(imageViews, 8, leading: SettingsSubListView.padding, trailing: 8)
 

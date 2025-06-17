@@ -1975,8 +1975,8 @@ class PlayerCore: NSObject {
     touchBarSupport.setupTouchBarUI()
 
     if info.aid == 0 {
-      mainWindow.muteButton.isEnabled = false
-      mainWindow.volumeSlider.isEnabled = false
+      mainWindow.muteButton.isHidden = true
+      mainWindow.volumeSlider.isHidden = true
     }
 
     if info.vid == 0 {
@@ -2026,8 +2026,8 @@ class PlayerCore: NSObject {
     guard info.state.active else { return }
     info.aid = Int(mpv.getInt(MPVOption.TrackSelection.aid))
     guard mainWindow.loaded else { return }
-    mainWindow?.muteButton.isEnabled = (info.aid != 0)
-    mainWindow?.volumeSlider.isEnabled = (info.aid != 0)
+    mainWindow?.muteButton.isHidden = (info.aid == 0)
+    mainWindow?.volumeSlider.isHidden = (info.aid == 0)
     postNotification(.iinaAIDChanged)
     sendOSD(.track(info.currentTrack(.audio) ?? .noneAudioTrack))
   }

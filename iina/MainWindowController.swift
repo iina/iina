@@ -201,6 +201,9 @@ class MainWindowController: PlayerWindowController {
   var isShowingPersistentOSD = false
   var osdContext: Any?
 
+  /** Activated during interactive mode to prevent video view from being compressed */
+  var aspectRatioConstraintForInteractiveMode: NSLayoutConstraint?
+
   // MARK: - Enums
 
   // Window state
@@ -2252,6 +2255,10 @@ class MainWindowController: PlayerWindowController {
 
     self.cropSettingsView = controlView
 
+    let currentAspectRatio = window.frame.height / window.frame.width
+    aspectRatioConstraintForInteractiveMode = videoView.heightAnchor.constraint(equalTo: videoView.widthAnchor, multiplier: currentAspectRatio)
+    aspectRatioConstraintForInteractiveMode!.isActive = true
+
     // show crop settings view
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = AccessibilityPreferences.adjustedDuration(CropAnimationDuration)
@@ -2272,6 +2279,11 @@ class MainWindowController: PlayerWindowController {
   func exitInteractiveMode(immediately: Bool = false, then: @escaping () -> Void = {}) {
     window?.backgroundColor = .black
     standardWindowButtons.forEach { $0.isEnabled = true }
+
+    if let constraint = aspectRatioConstraintForInteractiveMode {
+      constraint.isActive = false
+      aspectRatioConstraintForInteractiveMode = nil
+    }
 
     if !isPausedPriorToInteractiveMode {
       player.resume()

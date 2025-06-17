@@ -1635,7 +1635,7 @@ class MainWindowController: PlayerWindowController {
 
     // interactive mode
     if isInInteractiveMode {
-      cropSettingsView?.cropBoxView.resized(with: videoView.frame)
+      cropSettingsView?.cropBoxView.resized()
     }
 
     // update control bar position
@@ -2287,12 +2287,12 @@ class MainWindowController: PlayerWindowController {
     let selectedRect: NSRect = selectWholeVideoByDefault ? NSRect(origin: .zero, size: origVideoSize) : .zero
 
     // add crop setting view
-    window.contentView!.addSubview(controlView.cropBoxView)
-    controlView.cropBoxView.selectedRect = selectedRect
-    controlView.cropBoxView.actualSize = origVideoSize
-    controlView.cropBoxView.resized(with: newVideoViewFrame)
+    videoView.addSubview(controlView.cropBoxView)
     controlView.cropBoxView.isHidden = true
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": controlView.cropBoxView])
+    controlView.cropBoxView.selectedRect = selectedRect
+    controlView.cropBoxView.actualSize = origVideoSize
+    controlView.cropBoxView.updateCursorRects()
 
     self.cropSettingsView = controlView
 
@@ -2309,11 +2309,12 @@ class MainWindowController: PlayerWindowController {
         videoViewConstraints[attr]!.animator().constant = newConstants[attr]!
       }
     }) {
-      self.cropSettingsView?.cropBoxView.isHidden = false
       self.videoView.layer?.shadowColor = .black
       self.videoView.layer?.shadowOpacity = 1
       self.videoView.layer?.shadowOffset = .zero
       self.videoView.layer?.shadowRadius = 3
+      self.cropSettingsView?.cropBoxView.resized()
+      self.cropSettingsView?.cropBoxView.isHidden = false
     }
   }
 

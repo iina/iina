@@ -59,6 +59,8 @@ class SettingsPage {
   var identifier: String { "" }
   var title: String { "" }
   var localizationTable: String { "" }
+  var image: NSImage { NSImage() }
+
   lazy var localizationContext: SettingsLocalization.Context = {
     SettingsLocalization.Context(tableName: localizationTable)
   }()
@@ -95,54 +97,71 @@ class SettingsPage {
     }
     return stackView
   }
+
+  func makeSymbol(_ name: String, fallbackImage: NSImage.Name) -> NSImage {
+    guard #available(macOS 14, *) else { return NSImage(named: fallbackImage)! }
+    let configuration = NSImage.SymbolConfiguration(pointSize: 18, weight: .bold)
+    return NSImage.findSFSymbol([name], withConfiguration: configuration)
+  }
 }
 
 
 class SettingsListView: NSBox, SettingsContainer, WithSettingsLocalizationContext {
   var container: Container!
 
+  var titleKey: SettingsLocalization.Key?
   var listTitle: String?
   var l10n: SettingsLocalization.Context!
 
   static private let SMALL_TITLE = false
 
-  class Container: NSView {
-    init(_ listView: SettingsListView, title: String? = nil) {
+  class Container: NSView, WithSettingsLocalizationContext {
+    var l10n: SettingsLocalization.Context!
+    let listView: SettingsListView
+    var titleKey: SettingsLocalization.Key?
+
+    init(_ listView: SettingsListView, titleKey: SettingsLocalization.Key? = nil) {
+      self.listView = listView
       super.init(frame: NSRect())
 
+      self.titleKey = titleKey
       self.translatesAutoresizingMaskIntoConstraints = false
       self.addSubview(listView)
-      if let title = title {
+    }
+
+    required init?(coder: NSCoder) {
+      fatalError("init(coder:) has not been implemented")
+    }
+
+    override func viewDidMoveToWindow() {
+      if let key = titleKey {
+        let title = l10n.localized(key)
         let titleField: NSTextField
         if (SMALL_TITLE) {
           titleField = NSTextField(labelWithString: title.localizedUppercase)
           titleField.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize, weight: .bold)
         } else {
           titleField = NSTextField(labelWithString: title)
-          titleField.font = NSFont.systemFont(ofSize: NSFont.systemFontSize, weight: .bold)
+          titleField.font = NSFont.systemFont(ofSize: 14, weight: .bold)
         }
         titleField.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(titleField)
         titleField.padding(.top, .horizontal(8))
         titleField.textColor = NSColor.secondaryLabelColor
-        listView.spacing(to: titleField, .top(8))
+        listView.spacing(to: titleField, .top(SMALL_TITLE ? 8 : 12))
         listView.padding(.bottom, .horizontal(8))
       } else {
         listView.padding(.vertical, .horizontal(8))
       }
     }
-
-    required init?(coder: NSCoder) {
-      fatalError("init(coder:) has not been implemented")
-    }
   }
 
-  init(title: String? = nil, _ items: [SettingsItem.Base]? = nil) {
+  init(title: SettingsLocalization.Key? = nil, _ items: [SettingsItem.Base]? = nil) {
     super.init(frame: NSRect())
     self.translatesAutoresizingMaskIntoConstraints = false
 
-    self.container = Container(self, title: title)
-    self.listTitle = title
+    self.titleKey = title
+    self.container = Container(self, titleKey: title)
     self.titlePosition = .noTitle
     self.contentViewMargins = NSSize(width: 0, height: 0)
 
@@ -151,7 +170,7 @@ class SettingsListView: NSBox, SettingsContainer, WithSettingsLocalizationContex
     }
   }
 
-  convenience init(title: String? = nil, @SettingsItemsBuilder _ items: () -> [SettingsItem.Base]) {
+  convenience init(title: SettingsLocalization.Key? = nil, @SettingsItemsBuilder _ items: () -> [SettingsItem.Base]) {
     self.init(title: title, items())
   }
 
@@ -181,6 +200,10 @@ class SettingsListView: NSBox, SettingsContainer, WithSettingsLocalizationContex
 
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+
+  override func viewDidMoveToWindow() {
+    self.listTitle = titleKey.map(l10n.localized(_:))
   }
 }
 

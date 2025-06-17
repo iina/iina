@@ -369,6 +369,9 @@
 		E3530702214935DE008FE492 /* JavascriptAPIConsole.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3530701214935DE008FE492 /* JavascriptAPIConsole.swift */; };
 		E353070521496CE4008FE492 /* PrefPluginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E353070321496CE4008FE492 /* PrefPluginViewController.swift */; };
 		E360A5CD2C23C1BC006EA412 /* SettingsWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E360A5CC2C23C1BC006EA412 /* SettingsWindow.swift */; };
+		E36825512E01169F004E1E5F /* SettingsPageSubtitles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36825502E01169F004E1E5F /* SettingsPageSubtitles.swift */; };
+		E36825532E022B10004E1E5F /* SettingsLocalizationKeysSubtitles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36825522E022B10004E1E5F /* SettingsLocalizationKeysSubtitles.swift */; };
+		E36825562E022B28004E1E5F /* SettingsSubtitesLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E36825542E022B28004E1E5F /* SettingsSubtitesLocalizable.strings */; };
 		E36E8D7C24F6052F00B8C097 /* GuideWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36E8D7A24F6052F00B8C097 /* GuideWindowController.swift */; };
 		E374160C20F138A900B4F7F9 /* CollapseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E374160B20F138A900B4F7F9 /* CollapseView.swift */; };
 		E374160F20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E374160D20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift */; };
@@ -1930,6 +1933,9 @@
 		E3530701214935DE008FE492 /* JavascriptAPIConsole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIConsole.swift; sourceTree = "<group>"; };
 		E353070321496CE4008FE492 /* PrefPluginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefPluginViewController.swift; sourceTree = "<group>"; };
 		E360A5CC2C23C1BC006EA412 /* SettingsWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindow.swift; sourceTree = "<group>"; };
+		E36825502E01169F004E1E5F /* SettingsPageSubtitles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageSubtitles.swift; sourceTree = "<group>"; };
+		E36825522E022B10004E1E5F /* SettingsLocalizationKeysSubtitles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalizationKeysSubtitles.swift; sourceTree = "<group>"; };
+		E36825552E022B28004E1E5F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SettingsSubtitesLocalizable.strings; sourceTree = "<group>"; };
 		E36E8D7A24F6052F00B8C097 /* GuideWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideWindowController.swift; sourceTree = "<group>"; };
 		E374160B20F138A900B4F7F9 /* CollapseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapseView.swift; sourceTree = "<group>"; };
 		E374160D20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefUtilsViewController.swift; sourceTree = "<group>"; };
@@ -2767,10 +2773,12 @@
 				E34BC2912C27BB6000A94680 /* SettingsGeneralLocalizable.strings */,
 				E33517552DFD261900BBE169 /* SettingsUILocalizable.strings */,
 				E335175C2DFFC78F00BBE169 /* SettingsVideoAudioLocalizable.strings */,
+				E36825542E022B28004E1E5F /* SettingsSubtitesLocalizable.strings */,
 				E34BC2A72C27C01800A94680 /* SettingsLocalization.swift */,
 				E34BC2A92C27C95800A94680 /* SettingsLocalizationKeysGeneral.swift */,
 				E33517532DFD25E100BBE169 /* SettingsLocalizationKeysUI.swift */,
 				E335175F2DFFC93100BBE169 /* SettingsLocalizationKeysVideoAudio.swift */,
+				E36825522E022B10004E1E5F /* SettingsLocalizationKeysSubtitles.swift */,
 			);
 			name = Localization;
 			sourceTree = "<group>";
@@ -2803,16 +2811,25 @@
 		E360A5CB2C23C181006EA412 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				E368254D2E01166B004E1E5F /* Pages */,
 				E34BC2902C27BB4000A94680 /* Localization */,
 				E360A5CC2C23C1BC006EA412 /* SettingsWindow.swift */,
 				E34BC28C2C27733200A94680 /* SettingsPage.swift */,
 				E34BC28E2C27A68100A94680 /* SettingsItem.swift */,
 				E34BC2AB2C27DAE900A94680 /* SettingsHelper.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		E368254D2E01166B004E1E5F /* Pages */ = {
+			isa = PBXGroup;
+			children = (
 				E34BC28A2C27731700A94680 /* SettingsPageGeneral.swift */,
 				E33517512DFD206800BBE169 /* SettingsPageUI.swift */,
 				E33517582DFFC6DB00BBE169 /* SettingsPageVideoAudio.swift */,
+				E36825502E01169F004E1E5F /* SettingsPageSubtitles.swift */,
 			);
-			name = Settings;
+			path = Pages;
 			sourceTree = "<group>";
 		};
 		E38558882A484A2D0083772D /* iina-plugin */ = {
@@ -3083,6 +3100,7 @@
 				E3958566253133E80096811F /* SidebarTabView.xib in Resources */,
 				8400D5D21E1AB312006785F5 /* InspectorWindowController.xib in Resources */,
 				8400D5CC1E1AB2FF006785F5 /* PlaylistViewController.xib in Resources */,
+				E36825562E022B28004E1E5F /* SettingsSubtitesLocalizable.strings in Resources */,
 				8400D5ED1E1AB33F006785F5 /* PrefAdvancedViewController.xib in Resources */,
 				8400D5CF1E1AB306006785F5 /* CropSettingsViewController.xib in Resources */,
 				6100FF2B1EDF9806002CF0FB /* dsa_pub.pem in Resources */,
@@ -3184,6 +3202,7 @@
 				8488D6E31E1183D300D5B952 /* PrefSubViewController.swift in Sources */,
 				846352581EEEE11A0043F0CC /* ThumbnailPeekView.swift in Sources */,
 				84E745D61DFDD4FD00588DED /* KeyCodeHelper.swift in Sources */,
+				E36825512E01169F004E1E5F /* SettingsPageSubtitles.swift in Sources */,
 				840D479B1DFEF649000D9A64 /* KeyRecordViewController.swift in Sources */,
 				D1A4D98A2B1495270009AB4E /* LegacyMigration.swift in Sources */,
 				E3965E1A2487C99900607EB4 /* JavascriptPluginSubtitle.swift in Sources */,
@@ -3217,6 +3236,7 @@
 				840D47A01DFEFC49000D9A64 /* KeyRecordView.swift in Sources */,
 				84791C8B1D405E9D0069E28A /* PlaybackInfo.swift in Sources */,
 				E322A4F820A8442E00C67D32 /* PlaylistPlaybackProgressView.swift in Sources */,
+				E36825532E022B10004E1E5F /* SettingsLocalizationKeysSubtitles.swift in Sources */,
 				84D123B41ECAA405004E0D53 /* TouchBarSupport.swift in Sources */,
 				E36E8D7C24F6052F00B8C097 /* GuideWindowController.swift in Sources */,
 				84817C981DBDCE4300CC2279 /* RoundedColorWell.swift in Sources */,
@@ -4716,6 +4736,14 @@
 				34ACAD6B2C16917000F871A0 /* hr */,
 			);
 			name = GuideWindowController.xib;
+			sourceTree = "<group>";
+		};
+		E36825542E022B28004E1E5F /* SettingsSubtitesLocalizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E36825552E022B28004E1E5F /* en */,
+			);
+			name = SettingsSubtitesLocalizable.strings;
 			sourceTree = "<group>";
 		};
 		E374161320F3C0AB00B4F7F9 /* PrefUtilsViewController.xib */ = {

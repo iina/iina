@@ -146,13 +146,13 @@ extension NSView {
       sv.addConstraint(self.topAnchor.constraint(greaterThanOrEqualTo: view.bottomAnchor, constant: top))
     }
     if let bottom = bottom {
-      sv.addConstraint(self.bottomAnchor.constraint(lessThanOrEqualTo: view.topAnchor, constant: bottom))
+      sv.addConstraint(self.bottomAnchor.constraint(lessThanOrEqualTo: view.topAnchor, constant: -bottom))
     }
     if let leading = leading {
       sv.addConstraint(self.leadingAnchor.constraint(greaterThanOrEqualTo: view.trailingAnchor, constant: leading))
     }
     if let trailing = trailing {
-      sv.addConstraint(self.trailingAnchor.constraint(lessThanOrEqualTo: view.leadingAnchor, constant: trailing))
+      sv.addConstraint(self.trailingAnchor.constraint(lessThanOrEqualTo: view.leadingAnchor, constant: -trailing))
     }
     return self
   }

@@ -14,7 +14,11 @@ class SettingsPageUI: SettingsPage {
   private lazy var oscToolbarView: OSCToolbarView = OSCToolbarView(l10n: localizationContext)
 
   override var title: String {
-    "Interface"
+    return NSLocalizedString("preference.ui", comment: "UI")
+  }
+
+  override var image: NSImage {
+    return makeSymbol("macwindow", fallbackImage: "pref_ui")
   }
 
   override var localizationTable: String {
@@ -35,7 +39,7 @@ class SettingsPageUI: SettingsPage {
 
   private func sectionAppearance() -> [NSView] {
     return section {
-      SettingsListView(title: "Appearance") {
+      SettingsListView(title: .text_Appearance) {
         SettingsItem.PopupButton()
           .image(name: "moonphase.first.quarter")
           .bindTo(.themeMaterial, ofType: Preference.Theme.self)
@@ -45,12 +49,13 @@ class SettingsPageUI: SettingsPage {
 
   private func sectionWindow() -> [NSView] {
     return section {
-      SettingsListView(title: "Window") {
+      SettingsListView(title: .text_Window) {
         SettingsItem.Switch(title: .text_InitialWindowSize)
           .image(name: "macwindow")
           .withExpandingDetailView(windowInitialSizeView.container)
           .bindExpandableView()
         SettingsItem.Switch(title: .text_InitialWindowPosition)
+          .image(name: "arrow.up.and.down.and.arrow.left.and.right")
           .withExpandingDetailView(windowInitialPositionView.container)
           .bindExpandableView()
       }
@@ -80,7 +85,7 @@ class SettingsPageUI: SettingsPage {
 
   private func sectionOSC() -> [NSView] {
     return section {
-      SettingsListView(title: "On Screen Controller") {
+      SettingsListView(title: .text_OnScreenController) {
         SettingsItem.General(title: .text_Layout)
           .image(name: "menubar.dock.rectangle")
           .withDetailView(oscLayoutView.view)
@@ -115,7 +120,7 @@ class SettingsPageUI: SettingsPage {
 
   private func sectionOSD() -> [NSView] {
     return section {
-      SettingsListView(title: "On Screen Display") {
+      SettingsListView(title: .text_OnScreenDisplay) {
         SettingsItem.Switch()
           .image(name: ["inset.filled.topleft.rectangle", "app.badge"])
           .bindTo(.enableOSD)
@@ -150,7 +155,7 @@ class SettingsPageUI: SettingsPage {
 
   private func sectionThumbnail() -> [NSView] {
     return section {
-      SettingsListView(title: "Thumbnail Preview") {
+      SettingsListView(title: .text_ThumbnailPreview) {
         SettingsItem.Switch()
           .image(name: "photo")
           .bindTo(.enableThumbnailPreview)
@@ -165,7 +170,7 @@ class SettingsPageUI: SettingsPage {
 
   private func sectionPIP() -> [NSView] {
     return section {
-      SettingsListView(title: "Picture in Picture") {
+      SettingsListView(title: .text_PictureinnPicture) {
         SettingsItem.General(title: .text_WhenEnteringPIP)
           .image(name: "pip.enter")
           .withDetailView {
@@ -183,11 +188,12 @@ class SettingsPageUI: SettingsPage {
 
   private func sectionAccessibility() -> [NSView] {
     return section {
-      SettingsListView(title: "Accessibility") {
+      SettingsListView(title: .text_Accessibility) {
         SettingsItem.Switch()
           .image(name: "accessibility")
           .bindTo(.disableAnimations)
           .hasDescription()
+          .withHelpLink(AppData.disableAnimationsHelpLink)
       }
     }
   }
@@ -318,6 +324,9 @@ fileprivate class OSCLayoutView: WithSettingsLocalizationContext {
   init(l10n: SettingsLocalization.Context) {
     self.l10n = l10n
     self.view = NSView()
+    let container = NSView()
+    container.translatesAutoresizingMaskIntoConstraints = false
+
     self.imageViews = [
       NSImageView(image: .init(named: "osc_float")!),
       NSImageView(image: .init(named: "osc_top")!),
@@ -331,7 +340,7 @@ fileprivate class OSCLayoutView: WithSettingsLocalizationContext {
       iv.layer?.cornerRadius = 6.0
       iv.layer?.masksToBounds = true
       iv.translatesAutoresizingMaskIntoConstraints = false
-      view.addSubview(iv)
+      container.addSubview(iv)
       iv.padding(.top(4)).size(width: 480 * 0.22, height: 270 * 0.22)
     }
     SettingsUIHelper.hEquallySpaced(imageViews, 8, leading: SettingsSubListView.padding, trailing: 8)
@@ -341,10 +350,13 @@ fileprivate class OSCLayoutView: WithSettingsLocalizationContext {
     ])
 
     for (i, btn) in buttons.enumerated() {
-      view.addSubview(btn)
+      container.addSubview(btn)
       btn.spacing(to: imageViews[i], .top(8)).padding(.bottom(12))
         .center(with: imageViews[i], x: true)
     }
+
+    view.addSubview(container)
+    container.padding(.vertical).center(x: true)
   }
 
   @objc func radioButtonSelected(_ sender: NSButton) {
@@ -368,6 +380,8 @@ private class OSCToolbarView: WithSettingsLocalizationContext {
     self.view = NSView()
     self.oscToolbarStackView = NSStackView()
     self.customizeButton = NSButton(title: l10n.localized(.text_Customize), target: nil, action: nil)
+    let container = NSView()
+    container.translatesAutoresizingMaskIntoConstraints = false
 
     oscToolbarStackView.translatesAutoresizingMaskIntoConstraints = false
     oscToolbarStackView.orientation = .horizontal
@@ -381,7 +395,7 @@ private class OSCToolbarView: WithSettingsLocalizationContext {
     box.contentViewMargins = .zero
     box.addSubview(oscToolbarStackView)
     oscToolbarStackView.padding(.vertical, .leading(greaterThan: 0), .trailing(0))
-    view.addSubview(box)
+    container.addSubview(box)
     box.padding(.top, .bottom(8))
     box.widthAnchor
       .constraint(equalTo: box.heightAnchor, multiplier: 5).isActive = true
@@ -389,10 +403,12 @@ private class OSCToolbarView: WithSettingsLocalizationContext {
     customizeButton.target = self
     customizeButton.action = #selector(customizeOSCToolbarAction(_:))
     customizeButton.translatesAutoresizingMaskIntoConstraints = false
-    view.addSubview(customizeButton)
+    container.addSubview(customizeButton)
     customizeButton.center(with: box, y: true)
     SettingsUIHelper.hEquallySpaced([box, customizeButton], 8, leading: SettingsSubListView.padding, trailing: 8)
 
+    view.addSubview(container)
+    container.padding(.vertical).center(x: true)
     updateOSCToolbarButtons()
   }
 

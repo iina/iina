@@ -12,7 +12,11 @@ class SettingsPageGeneral: SettingsPage {
   private lazy var fileChooseView: FileChooserView = FileChooserView()
 
   override var title: String {
-    "General"
+    return NSLocalizedString("preference.general", comment: "General")
+  }
+
+  override var image: NSImage {
+    return makeSymbol("gear", fallbackImage: "pref_general")
   }
 
   override var localizationTable: String {
@@ -30,7 +34,7 @@ class SettingsPageGeneral: SettingsPage {
 
   private func sectionBehavior() -> [NSView] {
     return section {
-      SettingsListView(title: "Behavior") {
+      SettingsListView(title: .text_Behavior) {
         SettingsItem.PopupButton()
           .image(name: "restart.circle")
           .bindTo(.actionAfterLaunch, ofType: Preference.ActionAfterLaunch.self)
@@ -107,7 +111,7 @@ class SettingsPageGeneral: SettingsPage {
 
   private func sectionHistory() -> [NSView] {
     return section {
-      SettingsListView(title: "History") {
+      SettingsListView(title: .text_History) {
         SettingsItem.Switch()
           .image(name: "timer")
           .bindTo(.resumeLastPosition)
@@ -128,7 +132,7 @@ class SettingsPageGeneral: SettingsPage {
 
   private func sectionPlayList() -> [NSView] {
     return section {
-      SettingsListView(title: "Playlist") {
+      SettingsListView(title: .text_Playlist) {
         SettingsItem.Switch()
           .image(name: "list.and.film")
           .bindTo(.playlistAutoAdd)
@@ -153,7 +157,7 @@ class SettingsPageGeneral: SettingsPage {
 
   private func sectionScreenshots() -> [NSView] {
     return section {
-      SettingsListView(title: "Screenshots") {
+      SettingsListView(title: .text_Screenshots) {
         SettingsItem.Switch()
           .image(name: "camera.on.rectangle")
           .bindTo(.screenshotSaveToFile)

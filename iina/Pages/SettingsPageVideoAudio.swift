@@ -12,7 +12,11 @@ class SettingsPageVideoAudio: SettingsPage {
   private lazy var audioOutputDevideView: AudioOutputDevideView = AudioOutputDevideView(l10n: localizationContext)
 
   override var title: String {
-    "Video & Audio"
+    return NSLocalizedString("preference.video_audio", comment: "Codec")
+  }
+
+  override var image: NSImage {
+    return makeSymbol("play.rectangle.on.rectangle", fallbackImage: "pref_av")
   }
 
   override var localizationTable: String {
@@ -29,7 +33,7 @@ class SettingsPageVideoAudio: SettingsPage {
 
   private func sectionVideo() -> [NSView] {
     return section {
-      SettingsListView(title: "Video") {
+      SettingsListView(title: .text_Video) {
         SettingsItem.Input()
           .image(name: "number")
           .bindTo(.videoThreads)
@@ -60,14 +64,16 @@ class SettingsPageVideoAudio: SettingsPage {
         SettingsItem.Switch()
           .image(name: "chart.xyaxis.line")
           .bindTo(.enableToneMapping)
+          .withHelpLink(AppData.toneMappingHelpLink)
           .withDetailView {
             SettingsItem.Input()
               .bindTo(.toneMappingTargetPeak)
               .trailingLabel(.text_nits)
               .hasDescription()
+              .withHelpLink(AppData.targetPeakHelpLink)
             SettingsItem.PopupButton()
               .bindTo(.toneMappingAlgorithm, ofType: Preference.ToneMappingAlgorithmOption.self)
-
+              .withHelpLink(AppData.algorithmHelpLink)
           }
       }
     }
@@ -75,9 +81,10 @@ class SettingsPageVideoAudio: SettingsPage {
 
   private func sectionAudio() -> [NSView] {
     return section {
-      SettingsListView(title: "Audio") {
+      SettingsListView(title: .text_Audio) {
         SettingsItem.General(title: .audioDriverEnableAVFoundationLabel)
           .image(name: "waveform")
+          .withHelpLink(AppData.audioDriverHellpLink)
           .withDetailView(
             SettingsAccessory.Selection()
               .bindTo(.audioDriverEnableAVFoundation, ofType: AudioDriver.self)
@@ -133,11 +140,13 @@ class SettingsPageVideoAudio: SettingsPage {
 
   private func sectionReplayGain() -> [NSView] {
     return section {
-      SettingsListView(title: "Reply Gain") {
+      SettingsListView(title: .text_ReplayGain) {
         SettingsItem.PopupButton()
           .image(name: "speaker.plus")
           .bindTo(.replayGain, ofType: Preference.ReplayGainOption.self)
+          .disableSubListOnTag(0)
           .hasDescription()
+          .withHelpLink(AppData.gainAdjustmentHelpLink)
           .withDetailView {
             SettingsItem.Input()
               .bindTo(.replayGainPreamp)

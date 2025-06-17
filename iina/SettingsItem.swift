@@ -74,6 +74,7 @@ struct SettingsItem {
     var imageName: [String]?
     var hasDesc: Bool = false
     var descKey: SettingsLocalization.Key?
+    var helpLink: String?
 
     var verticalPadding: CGFloat {
       switch controlSize {
@@ -121,6 +122,11 @@ struct SettingsItem {
       return self
     }
 
+    func withHelpLink(_ link: String) -> Self {
+      self.helpLink = link
+      return self
+    }
+
     func extraViews(_ extraViews: NSView...) -> Self {
       self.extraViews = extraViews
       return self
@@ -148,12 +154,28 @@ struct SettingsItem {
       label.lineBreakMode = .byWordWrapping
       setControlSize(label)
 
+      let labelWithHelpButtonStackView = NSStackView()
+      labelWithHelpButtonStackView.translatesAutoresizingMaskIntoConstraints = false
+      labelWithHelpButtonStackView.orientation = .horizontal
+      labelWithHelpButtonStackView.alignment = .centerY
+      labelWithHelpButtonStackView.addArrangedSubview(label)
+      if helpLink != nil {
+        let helpButton = NSButton()
+        helpButton.title = ""
+        helpButton.translatesAutoresizingMaskIntoConstraints = false
+        helpButton.bezelStyle = .helpButton
+        helpButton.controlSize = .small
+        helpButton.target = self
+        helpButton.action = #selector(openHelpLink)
+        labelWithHelpButtonStackView.addArrangedSubview(helpButton)
+      }
+
       labelStackView = NSStackView()
       labelStackView.translatesAutoresizingMaskIntoConstraints = false
       labelStackView.orientation = .vertical
       labelStackView.spacing = 6
       labelStackView.alignment = .leading
-      labelStackView.addArrangedSubview(label)
+      labelStackView.addArrangedSubview(labelWithHelpButtonStackView)
 
       backgroundView.addSubview(labelStackView)
 
@@ -214,10 +236,9 @@ struct SettingsItem {
 //      valueStackView.padding(.vertical(verticalPadding), .trailing(8)).center(y: true)
       image.size(width: 20, height: 20).spacing(to: labelStackView, .trailing(6))
         .padding(.top(11))
-      disclosureButton.padding(.leading(16))
-        .center(y: true).spacing(to: labelStackView, .trailing(4))
+      disclosureButton.padding(.trailing(12)).center(y: true)
       labelStackView.center(y: true).flexibleSpacingTo(view: valueStackView, trailing: 8)
-        .padding(.vertical(greaterThan: verticalPadding))
+        .padding(.leading(32), .vertical(greaterThan: verticalPadding))
 
       prepareExpandableView()
     }
@@ -300,6 +321,12 @@ struct SettingsItem {
       fatalError("init(coder:) has not been implemented")
     }
 
+    @objc private func openHelpLink(_ sender: NSButton!) {
+      if let link = helpLink, let url = URL(string: link) {
+        NSWorkspace.shared.open(url)
+      }
+    }
+
     func toggleExpandable(_ setValue: Bool? = nil) {
       if let setValue = setValue {
         isExpanded = setValue
@@ -338,12 +365,15 @@ struct SettingsItem {
     private var valueTypes: [(Int, String)] = []
     private var customBinding = false
     private var customBindingBlock: ((NSPopUpButton) -> Void)?
+    private var tagForDisabled: Int?
 
     override func getValueViews() -> [NSView] {
       popupButton = NSPopUpButton()
       popupButton.translatesAutoresizingMaskIntoConstraints = false
       popupButton.bezelStyle = .flexiblePush
       popupButton.showsBorderOnlyWhileMouseInside = true
+      popupButton.target = self
+      popupButton.action = #selector(popupChanged)
       return [popupButton]
     }
 
@@ -368,6 +398,11 @@ struct SettingsItem {
       return self
     }
 
+    func disableSubListOnTag(_ tag: Int) -> Self {
+      self.tagForDisabled = tag
+      return self
+    }
+
     override func initBinding() {
       guard let l10nKey = key?.rawValue ?? labelLocalizationKey?.rawValue else { return }
       for (tag, _) in valueTypes {
@@ -380,6 +415,25 @@ struct SettingsItem {
         popupButton.bind(.selectedTag, to: UserDefaults.standard, withKeyPath: key.rawValue)
       } else if customBinding, let customBindingBlock = customBindingBlock {
         customBindingBlock(popupButton)
+      }
+      DispatchQueue.main.async {
+        self.popupChanged(self.popupButton)
+      }
+    }
+
+    @objc func popupChanged(_ sender: NSPopUpButton) {
+      guard let detailView = detailView, let tag = tagForDisabled else { return }
+
+      let enabled = sender.selectedTag() != tag
+      setSubControls(detailView, enabled: enabled)
+    }
+
+    private func setSubControls(_ view: NSView, enabled: Bool) {
+      if let control = view as? NSControl {
+        control.isEnabled = enabled
+      }
+      for v in view.subviews {
+        setSubControls(v, enabled: enabled)
       }
     }
   }

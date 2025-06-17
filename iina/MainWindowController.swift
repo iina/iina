@@ -2180,15 +2180,16 @@ class MainWindowController: PlayerWindowController {
 
   func enterInteractiveMode(_ mode: InteractiveMode, selectWholeVideoByDefault: Bool = false) {
     // prerequisites
-    guard let window = window else { return }
-
-    window.backgroundColor = .windowBackgroundColor
+    guard !isInInteractiveMode, let window = window else { return }
 
     let (ow, oh) = player.originalVideoSize
     guard ow != 0 && oh != 0 else {
       Utility.showAlert("no_video_track")
       return
     }
+
+    window.backgroundColor = .windowBackgroundColor
+    standardWindowButtons.forEach { $0.isEnabled = false }
 
     isPausedPriorToInteractiveMode = player.info.state == .paused
     player.pause()
@@ -2270,6 +2271,7 @@ class MainWindowController: PlayerWindowController {
 
   func exitInteractiveMode(immediately: Bool = false, then: @escaping () -> Void = {}) {
     window?.backgroundColor = .black
+    standardWindowButtons.forEach { $0.isEnabled = true }
 
     if !isPausedPriorToInteractiveMode {
       player.resume()

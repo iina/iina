@@ -654,10 +654,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     guard player.info.state.active else { return }
     let notVideo = player.info.currentTrack(.video)?.isImage ?? true
     guard player.info.state == .paused || notVideo else { return }
-    videoView.videoLayer.mpvGLQueue.async { [self] in
-      log("Forcing drawing, \(reason)")
-      videoView.videoLayer.update(force: true)
-    }
+    log("Forcing drawing, \(reason)")
+    videoView.videoLayer.update(force: true)
   }
 
   // MARK: - IBActions

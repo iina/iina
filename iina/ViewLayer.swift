@@ -62,12 +62,13 @@ let attributeLookUp: [UInt32: String] = [
 ///
 /// This class is structured to make it easier to compare it to the reference implementation in the mpv player. Methods and statements
 /// are in the same order as found in the mpv source. However there are differences that cause the implementation to not match up. For
-/// example IINA draws using a background thread whereas mpv uses the main thread.
+/// example IINA draws using a background thread whereas mpv uses the main thread. When IINA tested drawing on the main thread
+/// the sliding animation to show and hide the side panels was _very_ slugish and moving the floating OSC was jerky.
 class ViewLayer: CAOpenGLLayer {
 
   private weak var videoView: VideoView!
 
-  let mpvGLQueue = DispatchQueue(label: "com.colliderli.iina.mpvgl", qos: .userInteractive)
+  private let mpvGLQueue = DispatchQueue(label: "com.colliderli.iina.mpvgl", qos: .userInteractive)
 
   private var bufferDepth: GLint = 8
 
@@ -260,10 +261,12 @@ class ViewLayer: CAOpenGLLayer {
   }
 
   func update(force: Bool = false) {
-    if force { forceDraw = true }
-    if forceDraw || !inLiveResize {
-      needsFlip = true
-      display()
+    mpvGLQueue.async { [self] in
+      if force { forceDraw = true }
+      if forceDraw || !inLiveResize {
+        needsFlip = true
+        display()
+      }
     }
   }
 

@@ -586,6 +586,7 @@ class PlayerCore: NSObject {
     // init mpv render context.
     mpv.mpvInitRendering()
     mainWindow.videoView.startDisplayLink()
+    log("Initialized rendering")
   }
 
   // unload main window video view

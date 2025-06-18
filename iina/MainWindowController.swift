@@ -1164,7 +1164,7 @@ class MainWindowController: PlayerWindowController {
       if recognizer.state == .began {
         // began
         lastMagnification = recognizer.magnification
-        videoView.videoLayer.isAsynchronous = true
+        videoView.videoLayer.inLiveResize = true
         frameWhenStartedPinching = window.frame
       } else if recognizer.state == .changed {
         // changed
@@ -1181,7 +1181,7 @@ class MainWindowController: PlayerWindowController {
         lastMagnification = recognizer.magnification
       } else if recognizer.state == .ended {
         updateWindowParametersForMPV()
-        videoView.videoLayer.isAsynchronous = false
+        videoView.videoLayer.inLiveResize = false
       }
     }
   }

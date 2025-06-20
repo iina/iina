@@ -104,6 +104,12 @@ class PlaybackInfo {
   var videoPosition: VideoTime?
   var videoDuration: VideoTime?
 
+  /// Remaining playback time.
+  ///
+  /// This will or will not reflect the speed at which playback is occurring depending upon whether the `scaleRemainingTime`
+  /// setting is enabled or not.
+  var videoRemaining: VideoTime?
+
   var cachedWindowScale: Double = 1.0
 
   func constrainVideoPosition() {

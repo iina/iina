@@ -610,9 +610,13 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       log("Video position not available", level: .warning)
       return
     }
-    let speed = player.info.playSpeed
-    [leftLabel, rightLabel].forEach { $0.updateText(with: duration, given: pos, and: speed) }
-    player.touchBarSupport.touchBarPosLabels.forEach { $0.updateText(with: duration, given: pos, and: speed) }
+    guard let remaining = player.info.videoRemaining else {
+      log("Video remaining not available", level: .warning)
+      return
+    }
+    [leftLabel, rightLabel].forEach { $0.updateText(with: duration, given: pos, and: remaining) }
+    player.touchBarSupport.touchBarPosLabels.forEach { $0.updateText(with: duration, given: pos,
+                                                                     and: remaining) }
     if andProgressBar {
       let percentage = (pos.second / duration.second) * 100
       playSlider.doubleValue = percentage

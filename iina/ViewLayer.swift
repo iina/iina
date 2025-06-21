@@ -75,9 +75,6 @@ class ViewLayer: CAOpenGLLayer {
   private let cglContext: CGLContextObj
   private let cglPixelFormat: CGLPixelFormatObj
 
-  /// Lock to single thread calls to `display`.
-  private let displayLock: NSLocking
-
   private var fbo: GLint = 1
 
   @Atomic private var needsFlip = false
@@ -111,7 +108,6 @@ class ViewLayer: CAOpenGLLayer {
     self.videoView = videoView
     (cglPixelFormat, bufferDepth) = ViewLayer.createPixelFormat(videoView.player)
     cglContext = ViewLayer.createContext(cglPixelFormat)
-    displayLock = NSRecursiveLock()
     super.init()
     autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
     backgroundColor = NSColor.black.cgColor
@@ -133,7 +129,6 @@ class ViewLayer: CAOpenGLLayer {
     videoView = previousLayer.videoView
     cglPixelFormat = previousLayer.cglPixelFormat
     cglContext = previousLayer.cglContext
-    displayLock = previousLayer.displayLock
     super.init(layer: layer)
     autoresizingMask = previousLayer.autoresizingMask
     backgroundColor = previousLayer.backgroundColor
@@ -220,8 +215,6 @@ class ViewLayer: CAOpenGLLayer {
   ///     something other than the main thread, IINA will crash with a SIGABRT reporting "an implicit transaction wasn't created on a
   ///     main thread". See issue [#5038](https://github.com/iina/iina/issues/5038).
   override func display() {
-    displayLock.lock()
-    defer { displayLock.unlock() }
 
     let isUpdate = needsFlip
 

@@ -37,6 +37,7 @@ class SettingsWindow: NSWindow {
   init(_ pages: [SettingsPage]) {
     self.pages = pages
     contentScrollView = NSScrollView()
+    contentScrollView.autohidesScrollers = true
 
     super.init(contentRect: NSRect(x: 0, y: 0, width: 600, height: 480),
                styleMask: [.closable, .miniaturizable, .resizable, .titled, .fullSizeContentView],
@@ -60,8 +61,9 @@ class SettingsWindow: NSWindow {
       searchBox.controlSize = .large
     }
     let sidebarScrollView = NSScrollView()
-    sidebarScrollView.translatesAutoresizingMaskIntoConstraints = false
     sidebarScrollView.hasVerticalScroller = true
+    sidebarScrollView.autohidesScrollers = true
+    sidebarScrollView.translatesAutoresizingMaskIntoConstraints = false
     sidebarScrollView.borderType = .noBorder
     sidebarScrollView.drawsBackground = false
     let sidebarList = NSTableView()

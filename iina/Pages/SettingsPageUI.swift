@@ -78,6 +78,7 @@ class SettingsPageUI: SettingsPage {
           .image(name: "square.2.layers.3d.top.filled")
           .bindTo(.alwaysFloatOnTop)
         SettingsItem.Switch()
+          .image(name: "pin.square")
           .bindTo(.alwaysShowOnTopIcon)
       }
     }

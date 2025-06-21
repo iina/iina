@@ -192,8 +192,8 @@ struct SettingsItem {
 
       image = NSImageView()
       image.translatesAutoresizingMaskIntoConstraints = false
-      if let imageName = imageName {
-        image.image = NSImage.findSFSymbol(imageName)
+      if let imageName, let symbol = NSImage.findSFSymbol(imageName) {
+        image.image = symbol
       } else {
         image.isHidden = true
       }
@@ -619,9 +619,44 @@ struct SettingsItem {
     private var customBinding = false
     private var customBindingBlock: ((NSTextField) -> Void)?
 
+    private var cachedStepperValue: Double?
+    private var stepper: NSStepper?
+
+    init(title l10nKey: SettingsLocalization.Key? = nil, step: Double = 1) {
+      if (step != 0) {
+        let stepper = NSStepper()
+        stepper.increment = step
+        stepper.minValue = -1e10
+        stepper.maxValue = 1e10
+        stepper.valueWraps = false
+        cachedStepperValue = stepper.doubleValue
+        self.stepper = stepper
+      }
+      super.init(title: l10nKey)
+      if let stepper {
+        stepper.target = self
+        stepper.action = #selector(stepperValueChanged)
+        stepper.controlSize = controlSize
+      }
+    }
+
+    @MainActor required init?(coder: NSCoder) {
+      fatalError("init(coder:) has not been implemented")
+    }
+
     func trailingLabel(_ key: SettingsLocalization.Key) -> Self {
       self.trailingLabel = key
       return self
+    }
+
+    @objc func stepperValueChanged(sender: NSStepper) {
+      guard let cachedStepperValue else { return }
+      if cachedStepperValue < sender.doubleValue {
+        textField.doubleValue += sender.increment
+      } else {
+        textField.doubleValue -= sender.increment
+      }
+      self.cachedStepperValue = sender.doubleValue
     }
 
     override func getValueViews() -> [NSView] {
@@ -631,12 +666,17 @@ struct SettingsItem {
       textField.bezelStyle = .roundedBezel
       textField.size(width: 64)
       setControlSize(textField)
+      let stack = NSStackView(views: [textField])
+      if let stepper {
+        stack.addView(stepper, in: .trailing)
+        stack.spacing = 2
+      }
       if let trailingLabel = trailingLabel {
         let label = NSTextField(labelWithString: l10n.localized(trailingLabel))
         setControlSize(label)
-        return [textField, label]
+        return [stack, label]
       } else {
-        return [textField]
+        return [stack]
       }
     }
 

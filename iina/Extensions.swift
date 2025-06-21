@@ -699,14 +699,15 @@ extension NSImage {
     fatalError("Could not find SF Symbol: \(names)")
   }
 
+  // A failable version of `findSFSymbol`, primarily used for settings pages.
   @available(macOS 11.0, *)
-  static func findSFSymbol(_ names: [String]) -> NSImage {
+  static func findSFSymbol(_ names: [String]) -> NSImage? {
     for name in names {
       if let symbol = NSImage(systemSymbolName: name, accessibilityDescription: nil) {
         return symbol
       }
     }
-    fatalError("Could not find SF Symbol: \(names)")
+    return nil
   }
 }
 

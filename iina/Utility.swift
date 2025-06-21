@@ -375,16 +375,21 @@ class Utility {
   /**
    Pop up a font picker panel.
    - parameters:
+     - sheetWindow: The window to attach as a sheet
      - callback: A closure accepting the font name.
    */
-  static func quickFontPickerWindow(selecting initialSelection: String?, callback: @escaping (String) -> Void) {
+  static func quickFontPickerWindow(selecting initialSelection: String?, sheetWindow: NSWindow? = nil, callback: @escaping (String?) -> Void) {
     let fontPicker = AppDelegate.shared.fontPicker
     let _ = fontPicker.window  // load if not loaded
-    fontPicker.finishedPicking = callback
     if let initialSelection {
       fontPicker.select(initialSelection)
     }
-    fontPicker.showWindow(self)
+    fontPicker.finishedPicking = callback
+    if let sheetWindow {
+      sheetWindow.beginSheet(fontPicker.window!)
+    } else {
+      fontPicker.showWindow(self)
+    }
   }
 
   // MARK: - App functions

@@ -131,7 +131,7 @@ class SettingsPageSubtitles: SettingsPage {
     return section {
       SettingsListView(title: .text_OnlineSubtitles) {
         SettingsItem.Switch()
-          .image(name: ["sparkle.magnifyingglass", "magnifyingglass"])
+          .image(name: ["text.magnifyingglass", "magnifyingglass"])
           .bindTo(.autoSearchOnlineSub)
           .hasDescription()
       }
@@ -142,7 +142,7 @@ class SettingsPageSubtitles: SettingsPage {
     return section {
       SettingsListView(title: .text_Other) {
         SettingsItem.General(title: .text_PreferredLanguage)
-          .image(name: "globe")
+          .image(name: "character.book.closed")
           .hasDescription()
           .withDetailView(
             SettingsAccessory.LanguageSelector()
@@ -343,7 +343,8 @@ fileprivate class SubtitlesFontView: SBaseView {
   }
 
   @objc func chooseSubFontAction(_ sender: AnyObject) {
-    Utility.quickFontPickerWindow { font in
+    let subFont = Preference.string(for: .subTextFont)
+    Utility.quickFontPickerWindow(selecting: subFont, sheetWindow: view.window!) { font in
       Preference.set(font ?? "sans-serif", for: .subTextFont)
       UserDefaults.standard.synchronize()
     }

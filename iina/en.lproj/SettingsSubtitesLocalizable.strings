@@ -43,9 +43,9 @@
 /* key="7pf-Kb-TNr" */
 "$SubtitlesHavePriorityWhenFilename" = "Subtitles have priority when filename containing";
 /* key="9EP-XB-lyO" */
-"$FontSpacing" = "Font spacing";
+"subSpacing.label" = "Font spacing";
 /* key="9N4-Zg-M7m" */
-"$VerticalPosition" = "Vertical position";
+"subPos.label" = "Vertical position";
 /* key="9pv-1r-nuH" */
 "$Font" = "Font";
 /* key="ALz-LB-8sf" */
@@ -54,6 +54,8 @@
 "$Shadow" = "Shadow";
 /* key="CdS-9J-f2h" */
 "$X" = " X";
+/* */
+"$Percent" = "%";
 /* key="DUA-7H-Yje" */
 "$Advanced" = "Advanced";
 /* key="Iax-cc-YIO" */
@@ -79,9 +81,9 @@
 /* key="Y75-4k-2Du" */
 "$DefaultEncoding" = "Default encoding";
 /* key="Z2M-dh-eq1" */
-"$ThisOptionWillBeStored" = "This option will be stored as ISO 639-2 language code and will work for both mpv and opensubtitles.";
+"subLang.desc" = "This option will be stored as ISO 639-2 language code and will work for both mpv and opensubtitles.";
 /* key="aO9-D6-KG8" */
-"$Blur" = "Blur";
+"subBlur.label" = "Blur";
 /* key="cov-Uy-wnc" */
 "$NotLoggedIn" = "Not logged in";
 /* key="dtP-9o-yhy" */
@@ -105,6 +107,18 @@
 /* key="t5n-mc-dss" */
 "$Border" = "Border";
 /* key="vYb-qH-XkH" */
-"$IfEnabledIINAWillAutomatically" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues.";
+"autoSearchOnlineSub.desc" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues.";
 /* key="zaE-bH-XfT" */
 "$PreferredLanguage" = "Preferred language";
+
+"subOverrideLevel.items.4" = "no";
+"subOverrideLevel.items.1" = "force";
+"subOverrideLevel.items.3" = "scale";
+"subOverrideLevel.items.2" = "strip";
+"subOverrideLevel.items.0" = "yes";
+
+"subOverrideLevel.items.4.desc" = "Render subtitles as specified by the subtitle scripts, without overrides.";
+"subOverrideLevel.items.1.desc" = "Apply all subtitle styles.";
+"subOverrideLevel.items.3.desc" = "Apply the scale setting in addition to the style settings in this section.";
+"subOverrideLevel.items.2.desc" = "Radically strip all ASS tags and styles from the subtitle.";
+"subOverrideLevel.items.0.desc" = "Apply all the style settings in this section.";

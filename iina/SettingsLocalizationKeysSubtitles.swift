@@ -52,5 +52,5 @@ extension SettingsLocalization.Key {
   static let text_Margin = SettingsLocalization.Key("$Margin")
   static let text_AutoLoad = SettingsLocalization.Key("$AutoLoad")
   static let text_Border = SettingsLocalization.Key("$Border")
-  static let text_IfEnabledIINAWillAutomatically = SettingsLocalization.Key("$IfEnabledIINAWillAutomatically")
+  static let text_Percent = SettingsLocalization.Key("$Percent")
 }

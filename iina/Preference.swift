@@ -510,7 +510,7 @@ struct Preference {
   /// [secondary-sub-ass-override](https://mpv.io/manual/stable/#options-secondary-sub-ass-override) options.
   ///- Important: In order to preserve backward compatibility with enum values stored in user's settings `scale` and `no`were
   ///     added to the end of the enumeration. This is why the constants are not ordered from least impactful to most impactful.
-  enum SubOverrideLevel: Int, InitializingFromKey {
+  enum SubOverrideLevel: Int, InitializingFromKey, CaseIterable {
     case yes = 0
     case force
     case strip
@@ -536,7 +536,7 @@ struct Preference {
     }
   }
 
-  enum SubAlign: Int, InitializingFromKey {
+  enum SubAlign: Int, InitializingFromKey, CaseIterable {
     case top = 0  // left
     case center
     case bottom  // right

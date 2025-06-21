@@ -194,7 +194,7 @@ class SettingsListView: NSBox, SettingsContainer, WithSettingsLocalizationContex
       separator.boxType = .separator
       separator.titlePosition = .noTitle
       self.contentView!.addSubview(separator)
-      separator.padding(to: topItem, .bottom, .leading(32), .trailing)
+      separator.padding(to: topItem, .bottom, .leading(36), .trailing)
     }
   }
 
@@ -223,7 +223,7 @@ class SettingsSubListView: SettingsListView {
     separator.boxType = .separator
     separator.titlePosition = .noTitle
     self.contentView!.addSubview(separator)
-    separator.padding(.top, .leading(32), .trailing)
+    separator.padding(.top, .leading(36), .trailing)
 
     items?.forEach { $0.controlSize = .small }
   }

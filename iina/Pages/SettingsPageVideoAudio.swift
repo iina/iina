@@ -215,7 +215,7 @@ fileprivate class AudioOutputDevideView: WithSettingsLocalizationContext {
     audioDevicePopUp.action = #selector(audioDeviceAction)
 
     view.addSubview(audioDevicePopUp)
-    audioDevicePopUp.padding(.top(-4), .bottom(8), .leading(SettingsSubListView.padding - 4), .trailing(8))
+    audioDevicePopUp.padding(.top(-4), .bottom(8), .leading(SettingsSubListView.padding), .trailing(8))
   }
 
   @objc func audioDeviceAction(_ sender: Any) {

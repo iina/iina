@@ -59,6 +59,7 @@ struct SettingsItem {
 
   class General: Base {
     var detailView: NSView?
+    var valueView: NSView?
     var extraViews: [NSView] = []
 
     var label: NSTextField!
@@ -234,16 +235,19 @@ struct SettingsItem {
       valueStackView.padding(.trailing(8))
 //       valueStackView.padding(.top(verticalPaddingFixed), .trailing(8))
 //      valueStackView.padding(.vertical(verticalPadding), .trailing(8)).center(y: true)
-      image.size(width: 20, height: 20).spacing(to: labelStackView, .trailing(6))
+      image.size(width: 24, height: 20).spacing(to: labelStackView, .trailing(6))
         .padding(.top(11))
       disclosureButton.padding(.trailing(12)).center(y: true)
       labelStackView.center(y: true).flexibleSpacingTo(view: valueStackView, trailing: 8)
-        .padding(.leading(32), .vertical(greaterThan: verticalPadding))
+        .padding(.leading(36), .vertical(greaterThan: verticalPadding))
 
       prepareExpandableView()
     }
 
     func getValueViews() -> [NSView] {
+      if let valueView = valueView {
+        return [valueView]
+      }
       return []
     }
 
@@ -278,6 +282,12 @@ struct SettingsItem {
     @discardableResult
     func withDetailView(_ view: NSView) -> Self {
       detailView = view
+      return self
+    }
+
+    @discardableResult
+    final func withValueView(_ view: NSView) -> Self {
+      valueView = view
       return self
     }
 
@@ -824,6 +834,7 @@ class SettingsAccessory {
     var key: Preference.Key? = nil
     var items: [Int: NSBox] = [:]
     var customtransformer: (((Int) -> Any), (Any?) -> Int)?
+    var localizationKey: Preference.Key?
 
     private var valueTypes: [(Int, String)] = []
     @objc private var selectedValue: Int = 0 {
@@ -833,9 +844,10 @@ class SettingsAccessory {
       }
     }
 
-    init() {
+    init(l10nKey: Preference.Key? = nil, topPadding: CGFloat = -4) {
       self.view = NSBox()
       self.stackView = NSStackView()
+      self.localizationKey = l10nKey
       super.init(frame: NSRect())
       self.translatesAutoresizingMaskIntoConstraints = false
 
@@ -848,12 +860,20 @@ class SettingsAccessory {
       stackView.translatesAutoresizingMaskIntoConstraints = false
       stackView.orientation = .vertical
       stackView.spacing = 4
-      stackView.setHuggingPriority(.defaultHigh, for: .horizontal)
+      stackView.setHuggingPriority(.defaultLow, for: .horizontal)
       stackView.padding(.top(-4), .bottom(0), .horizontal)
     }
 
     @MainActor required init?(coder: NSCoder) {
       fatalError("init(coder:) has not been implemented")
+    }
+
+    func order(_ order: [Int]) -> Self {
+      if valueTypes.isEmpty {
+        fatalError("must call bindTo() before calling order()")
+      }
+      valueTypes = valueTypes.sorted { order.firstIndex(of: $0.0)! < order.firstIndex(of: $1.0)! }
+      return self
     }
 
     func bindTo<T>(_ key: Preference.Key, ofType t: T.Type) -> Self
@@ -916,9 +936,9 @@ class SettingsAccessory {
     }
 
     override func viewDidMoveToWindow() {
-      guard window != nil else { return }
+      guard window != nil, stackView.arrangedSubviews.isEmpty else { return }
 
-      guard let l10nKey = key?.rawValue else { return }
+      guard let l10nKey = localizationKey?.rawValue ?? key?.rawValue else { return }
       for (tag, _) in valueTypes {
         let title = l10n.localized(.init("\(l10nKey).items.\(tag)"))
         let desc = l10n.localized(.init("\(l10nKey).items.\(tag).desc"))
@@ -937,6 +957,7 @@ class SettingsAccessory {
         itemStackView.spacing = 2
         itemStackView.orientation = .vertical
         itemStackView.alignment = .leading
+        itemStackView.setHuggingPriority(.init(100), for: .horizontal)
         box.contentView = itemStackView
         box.cornerRadius = 6
         box.listener = { [unowned self] in
@@ -952,7 +973,7 @@ class SettingsAccessory {
       }
 
       self.addSubview(view)
-      view.padding(.top, .leading(SettingsSubListView.padding - 4), .trailing(8), .bottom(8))
+      view.padding(.top, .leading(SettingsSubListView.padding), .trailing(8), .bottom(8))
 
       initBinding()
     }
@@ -967,10 +988,11 @@ class SettingsAccessory {
       super.init(frame: NSRect())
 
       audioLangTokenField.translatesAutoresizingMaskIntoConstraints = false
+      audioLangTokenField.bezelStyle = .roundedBezel
       audioLangTokenField.target = self
       audioLangTokenField.action = #selector(preferredLanguageAction(_:))
       self.addSubview(audioLangTokenField)
-      audioLangTokenField.padding(.top(-4), .leading(SettingsSubListView.padding - 4), .trailing(8), .bottom(8))
+      audioLangTokenField.padding(.top(-4), .leading(SettingsSubListView.padding), .trailing(8), .bottom(8))
     }
 
     @MainActor required init?(coder: NSCoder) {

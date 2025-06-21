@@ -225,7 +225,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       pendingSwitchRequest = nil
     }
 
-    speedResetBtn.toolTip = NSLocalizedString("quicksetting.reset_speed", comment: "Reset speed to 1x")
+    speedResetBtn.toolTip = NSLocalizedString("quicksetting.reset_or_restore_speed", comment: "Reset speed to 1x or Restore last speed")
 
     subLoadSegmentedControl.image(forSegment: 1)?.isTemplate = true
     switchHorizontalLine.wantsLayer = true
@@ -675,8 +675,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     view.layout()
   }
 
-  @IBAction func resetSpeedAction(_ sender: AnyObject) {
-    player.setSpeed(1.0)
+  @IBAction func resetOrRestoreSpeedAction(_ sender: AnyObject) {
+    player.resetOrRestoreSpeed()
   }
 
   @IBAction func speedChangedAction(_ sender: NSSlider) {
@@ -726,7 +726,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     let newSpeed = constrainSpeed(inputSpeed)
     speedSlider.doubleValue = convertSpeedToSliderValue(newSpeed)
     customSpeedTextField.doubleValue = newSpeed
-    speedResetBtn.isHidden = newSpeed == 1.0
     if player.info.playSpeed != newSpeed {
       player.setSpeed(newSpeed)
     }

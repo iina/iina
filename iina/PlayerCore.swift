@@ -1209,6 +1209,12 @@ class PlayerCore: NSObject {
     let speed = speed < AppData.mpvMinPlaybackSpeed ? AppData.mpvMinPlaybackSpeed : speed
     mpv.setDouble(MPVOption.PlaybackControl.speed, speed)
   }
+  
+  func resetOrRestoreSpeed() {
+    let lastPlaybackSpeed = Preference.double(for: .lastPlaybackSpeed)
+    let speed = info.playSpeed == 1 ? lastPlaybackSpeed : 1
+    setSpeed(speed)
+  }
 
   func setVideoAspect(_ aspect: String) {
     if Regex.aspect.matches(aspect) {
@@ -2170,6 +2176,9 @@ class PlayerCore: NSObject {
 
   func speedChanged(_ speed: Double) {
     guard info.state.active else { return }
+    if speed != 1 {
+      Preference.set(speed, for: .lastPlaybackSpeed)
+    }
     info.playSpeed = speed
     sendOSD(.speed(speed))
     mainWindow.updateSpeedLabel(speed: speed)

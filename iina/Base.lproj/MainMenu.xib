@@ -287,7 +287,7 @@ CA
                             <menuItem title="Speed Down to 0.9x" tag="3" alternate="YES" id="DUP-nm-BJt">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Reset Speed" tag="5" id="5Gn-90-oDu">
+                            <menuItem title="Reset or Restore Speed" tag="5" id="5Gn-90-oDu">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="k1k-sG-1C3"/>

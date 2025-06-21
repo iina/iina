@@ -490,7 +490,7 @@
                                     <constraint firstAttribute="width" constant="16" id="Gst-Sh-NwE"/>
                                 </constraints>
                                 <connections>
-                                    <action selector="resetSpeedAction:" target="-2" id="2Ms-5F-wpA"/>
+                                    <action selector="resetOrRestoreSpeedAction:" target="-2" id="2Ms-5F-wpA"/>
                                 </connections>
                             </button>
                             <customView autoresizesSubviews="NO" horizontalHuggingPriority="200" horizontalCompressionResistancePriority="700" translatesAutoresizingMaskIntoConstraints="NO" id="5v4-Te-950" userLabel="SpeedSlider Container View">

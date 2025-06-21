@@ -87,6 +87,8 @@ struct Preference {
 
     static let autoRepeat = Key("autoRepeat")
     static let defaultRepeatMode = Key("defaultRepeatMode")
+    
+    static let lastPlaybackSpeed = Key("lastPlaybackSpeed")
 
     /** Show chapter pos in progress bar (bool) */
     static let showChapterPos = Key("showChapterPos")
@@ -410,7 +412,7 @@ struct Preference {
     case hideOSC
     case togglePIP
     case abLoop
-    case resetSpeed
+    case resetOrRestoreSpeed
 
     static var defaultValue = MouseClickAction.none
 
@@ -836,6 +838,8 @@ struct Preference {
 
     .autoRepeat: false,
     .defaultRepeatMode: DefaultRepeatMode.playlist.rawValue,
+    
+    .lastPlaybackSpeed: 1.0,
 
     .usePhysicalResolution: true,
     .initialWindowSizePosition: "",

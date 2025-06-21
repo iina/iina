@@ -1054,8 +1054,8 @@ class MainWindowController: PlayerWindowController {
       menuTogglePIP(.dummy)
     case .abLoop:
       player.abLoop()
-    case .resetSpeed:
-      player.setSpeed(1.0)
+    case .resetOrRestoreSpeed:
+      player.resetOrRestoreSpeed()
     default:
       break
     }

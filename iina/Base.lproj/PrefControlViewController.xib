@@ -252,7 +252,7 @@
                                 <menuItem title="Pause/Resume" tag="2" id="Dm7-JG-fLd"/>
                                 <menuItem title="Enter/Exit picture-in-picture" tag="4" id="rvS-xA-7bv"/>
                                 <menuItem title="A-B loop" tag="5" id="GHK-4G-DAj"/>
-                                <menuItem title="Reset speed" tag="6" id="Zbp-ok-mMJ"/>
+                                <menuItem title="Reset or Restore Speed" tag="6" id="Zbp-ok-mMJ"/>
                                 <menuItem title="None" id="wkV-Gq-B0T"/>
                             </items>
                         </menu>
@@ -274,7 +274,7 @@
                                 <menuItem title="Pause/Resume" tag="2" id="mOX-Fi-oTv"/>
                                 <menuItem title="Enter/Exit picture-in-picture" tag="4" id="ibM-4r-SQA"/>
                                 <menuItem title="A-B loop" tag="5" id="65z-Gm-oZu"/>
-                                <menuItem title="Reset speed" tag="6" id="ig1-kk-RZu"/>
+                                <menuItem title="Reset or Restore Speed" tag="6" id="ig1-kk-RZu"/>
                                 <menuItem title="None" id="oOk-y6-lek"/>
                             </items>
                         </menu>
@@ -307,7 +307,7 @@
                                 </menuItem>
                                 <menuItem title="Enter/Exit picture-in-picture" tag="4" id="3Pm-nn-HpB"/>
                                 <menuItem title="A-B loop" tag="5" id="iLX-jW-Tdw" userLabel="A-B loop"/>
-                                <menuItem title="Reset speed" tag="6" id="Vv4-AU-kGj"/>
+                                <menuItem title="Reset or Restore Speed" tag="6" id="Vv4-AU-kGj"/>
                                 <menuItem title="None" id="unj-zt-RyU"/>
                             </items>
                         </menu>

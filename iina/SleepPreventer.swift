@@ -76,7 +76,7 @@ class SleepPreventer: NSObject {
   static func updateSleepPrevention() {
     if Preference.bool(for: .preventScreenSaver) {
       // Look for players actively playing that are not in music mode and are not just playing audio.
-      for player in PlayerCore.playing {
+      for player in PlayerCore.nonIdle {
         if player.info.state == .playing {
           // Either prevent the screen saver from activating or prevent system from sleeping depending
           // upon user setting.

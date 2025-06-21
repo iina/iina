@@ -60,7 +60,7 @@ class PlayerCore: NSObject {
     }
   }
 
-  static var playing: [PlayerCore] {
+  static var nonIdle: [PlayerCore] {
     return playerCores.filter { $0.info.state != .idle }
   }
 

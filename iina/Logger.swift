@@ -275,6 +275,8 @@ class Logger: NSObject {
     }
   }
 
+  // MARK: - Internal Errors that Alert and Exit
+
   static func ensure(_ condition: @autoclosure () -> Bool, _ errorMessage: String = "Assertion failed in \(#line):\(#file)", _ cleanup: () -> Void = {}) {
     guard condition() else {
       log(errorMessage, level: .error)
@@ -304,5 +306,84 @@ class Logger: NSObject {
     Utility.showAlert("fatal_error", arguments: [message])
     cleanup()
     exit(1)
+  }
+
+  // MARK: - Internal Errors that Crash
+
+  /// Checks a necessary condition for making forward progress.
+  ///
+  /// This method should be used instead of the Swift
+  /// [precondition](https://developer.apple.com/documentation/swift/precondition(_:_:file:line:))
+  /// method. This method differs from the Swift method in several ways. The primary reason for this method is to emit a log message
+  /// describing the failure. For that reason the `message` parameter is not optional. And unlike the Swift method compiling with
+  /// `-Ounchecked` will not suppress the assertion. Program execution will still be stopped if `condition` is `false`.
+  ///
+  /// This method should be used for fatal internal errors that a user is not expected to encounter and should it happen the diagnostics
+  /// provided by a crash report is desired.
+  /// - Parameters:
+  ///   - condition: The condition to test.
+  ///   - message: A string to log if `condition` is evaluated to `false`.
+  ///   - file: The file name to log with `message` if the precondition fails. The default is the file where
+  ///       `precondition(_:_:file:line:)` is called.
+  ///   - line: The line number to log along with `message` if the assertion fails. The default is the line number where
+  ///        `precondition(_:_:file:line:)` is called.
+  static func precondition(_ condition: Bool, _ message: @autoclosure () -> String,
+                           file: StaticString = #file, line: UInt = #line) {
+    guard !condition else { return }
+    preconditionFailure(message(), file: file, line: line)
+  }
+
+  /// Indicates that a precondition was violated.
+  ///
+  /// Use this function to stop the program when control flow can only reach the call if your API was improperly used and execution flow
+  /// is not expected to reach the call—for example, in the default case of a switch where you have knowledge that one of the other
+  /// cases must be satisfied.
+  ///
+  /// This method should be used instead of the Swift
+  /// [preconditionFailure](https://developer.apple.com/documentation/swift/preconditionfailure(_:file:line:))
+  /// method. This method differs from the Swift method in several ways. The primary reason for this method is to emit a log message
+  /// describing the failure. For that reason the `message` parameter is not optional. And unlike the Swift method compiling with
+  /// `-Ounchecked` will not change the behavior of this method. Program execution will still be stopped.
+  ///
+  /// This method should be used for fatal internal errors that a user is not expected to encounter and should it happen the diagnostics
+  /// provided by a crash report is desired.
+  /// - Parameters:
+  ///   - message: A string to log describing the failure.
+  ///   - file: The file name to log with message. The default is the file where `preconditionFailure(_:file:line:)
+  ///       is called.
+  ///   - line: The line number to log along with message. The default is the line number where
+  ///       `preconditionFailure(_:file:line:)` is called.
+  static func preconditionFailure(_ message: @autoclosure () -> String, file: StaticString = #file,
+                                  line: UInt = #line) -> Never {
+    // #file provides the full path to the source file. We just want to log the filename.
+    let pathAsString = "\(file)"
+    let sourceFilename: String = {
+      guard let url = URL(string: pathAsString) else {
+        return pathAsString
+      }
+      return url.lastPathComponent
+    }()
+    let message = message()
+    log("\(sourceFilename):\(line): Precondition failed: \(message)", level: .error)
+
+    // The preconditionFailure method is not used because we do not want -Ounchecked to suppress
+    // a precondition failure.
+    fatalError(message, file: file, line: line)
+  }
+
+  /// Asserts that the given optional value is not `nil`, and returns the unwrapped value.
+  ///
+  /// This method can be used in place of a forced unwrap operator in order to log a message explaining the problem before stopping
+  /// execution by triggering a crash.
+  /// - Parameters:
+  ///   - value: Optional value to unwrap.
+  ///   - message: A string to log describing the failure if the value is `nil`.
+  ///   - file: The file name to log with message. The default is the file where this method is called.
+  ///   - line: The line number to log along with message. The default is the line number where this method is called.
+  /// - Returns: The `value` unwrapped.
+  static func unwrap<T>(_ value: T?, _ message: @autoclosure () -> String,
+                                    file: StaticString = #file, line: UInt = #line) -> T {
+    guard let value else { preconditionFailure(message(), file: file, line: line) }
+    return value
   }
 }

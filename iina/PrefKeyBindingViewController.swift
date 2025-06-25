@@ -43,7 +43,12 @@ class PrefKeyBindingViewController: PreferenceViewController, PreferenceWindowEm
   static var defaultConfigs: [String: String] = {
     var configs: [String: String] = [:]
     for (key, value) in defaultConfigMap {
-      configs[key] = Bundle.main.path(forResource: value, ofType: "conf", inDirectory: "config")!
+      // As long as defaultConfigMap matches the files contained in Resources/config
+      // Bundle.main.path should never return nil. However for reasons unknown this has occurred.
+      // See issue #5561.
+      configs[key] = Logger.unwrap(
+        Bundle.main.path(forResource: value, ofType: "conf", inDirectory: "config"),
+        "Failed to obtain path to file IINA.app/Contents/Resources/config/\(value).conf")
     }
     return configs
   }()

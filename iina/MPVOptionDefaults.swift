@@ -133,7 +133,7 @@ class MPVOptionDefaults {
     return errorCode
   }
 
-  private static func log(_ message: String, level: Logger.Level = .debug) {
+  private static func log(_ message: @autoclosure () -> String, level: Logger.Level = .debug) {
     Logger.log(message, level: level, subsystem: Logger.Sub.mpvDefaults)
   }
 }

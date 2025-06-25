@@ -599,7 +599,7 @@ class NowPlayingInfoManager {
 
   // MARK: - Utils
 
-  private func log(_ message: String, level: Logger.Level = .debug) {
+  private func log(_ message: @autoclosure () -> String, level: Logger.Level = .debug) {
     Logger.log(message, level: level, subsystem: Logger.Sub.nowPlaying)
   }
 

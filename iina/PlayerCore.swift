@@ -60,7 +60,7 @@ class PlayerCore: NSObject {
     }
   }
 
-  static var playing: [PlayerCore] {
+  static var nonIdle: [PlayerCore] {
     return playerCores.filter { $0.info.state != .idle }
   }
 
@@ -2855,31 +2855,6 @@ class PlayerCore: NSObject {
     }
     let allVideoTracksAreAlbumCover = !info.videoTracks.contains { !$0.isAlbumart }
     return (noVideoTrack || allVideoTracksAreAlbumCover) ? .isAudio : .notAudio
-  }
-
-  static func checkStatusForSleep() {
-    guard Preference.bool(for: .preventScreenSaver) else {
-      SleepPreventer.allowSleep()
-      return
-    }
-    // Look for players actively playing that are not in music mode and are not just playing audio.
-    for player in playing {
-      guard player.info.state == .playing,
-            player.info.isAudio != .isAudio && !player.isInMiniPlayer else { continue }
-      SleepPreventer.preventSleep()
-      return
-    }
-    // Now look for players in music mode or playing audio.
-    for player in playing {
-      guard player.info.state == .playing,
-            player.info.isAudio == .isAudio || player.isInMiniPlayer else { continue }
-      // Either prevent the screen saver from activating or prevent system from sleeping depending
-      // upon user setting.
-      SleepPreventer.preventSleep(allowScreenSaver: Preference.bool(for: .allowScreenSaverForAudio))
-      return
-    }
-    // No players are actively playing.
-    SleepPreventer.allowSleep()
   }
 }
 

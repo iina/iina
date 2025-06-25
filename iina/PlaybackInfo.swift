@@ -56,10 +56,10 @@ class PlaybackInfo {
       player.log("State changed from \(oldValue) to \(state)", level: .verbose)
       switch state {
       case .idle:
-        PlayerCore.checkStatusForSleep()
+        SleepPreventer.updateSleepPrevention()
         NowPlayingInfoManager.shared.updateInfo()
       case .playing:
-        PlayerCore.checkStatusForSleep()
+        SleepPreventer.updateSleepPrevention()
         if player == PlayerCore.lastActive {
           NowPlayingInfoManager.shared.updateInfo()
           if player.mainWindow.pipStatus == .inPIP {
@@ -67,7 +67,7 @@ class PlaybackInfo {
           }
         }
       case .paused:
-        PlayerCore.checkStatusForSleep()
+        SleepPreventer.updateSleepPrevention()
         if player == PlayerCore.lastActive {
           NowPlayingInfoManager.shared.updateInfo()
           if player.mainWindow.pipStatus == .inPIP {

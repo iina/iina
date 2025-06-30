@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23089" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -102,7 +102,7 @@
                                     <binding destination="-2" name="font" keyPath="monospacedFont" id="ivC-kT-hEO"/>
                                 </connections>
                             </textField>
-                            <slider verticalHuggingPriority="750" mirrorLayoutDirectionWhenInternationalizing="never" translatesAutoresizingMaskIntoConstraints="NO" id="e3M-Ma-JJM">
+                            <slider verticalHuggingPriority="750" mirrorLayoutDirectionWhenInternationalizing="never" translatesAutoresizingMaskIntoConstraints="NO" id="e3M-Ma-JJM" customClass="MiniPlaySlider" customModule="IINA" customModuleProvider="target">
                                 <rect key="frame" x="42" y="-4" width="216" height="28"/>
                                 <sliderCell key="cell" continuous="YES" refusesFirstResponder="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="Y51-2C-Qcg" customClass="PlaySliderCell" customModule="IINA" customModuleProvider="target"/>
                                 <connections>
@@ -410,7 +410,7 @@
             <rect key="frame" x="0.0" y="0.0" width="183" height="32"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ene-VG-UYY">
+                <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ene-VG-UYY" customClass="VolumeSlider" customModule="IINA" customModuleProvider="target">
                     <rect key="frame" x="35" y="6" width="104" height="20"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="22P-mK-lYF"/>

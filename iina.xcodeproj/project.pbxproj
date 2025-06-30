@@ -163,6 +163,8 @@
 		5114FA942DC704CE00D02435 /* NowPlayingInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5114FA932DC704CE00D02435 /* NowPlayingInfoManager.swift */; };
 		51165FBC2E1D91290060B817 /* ReadWriteAtomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51165FBB2E1D91290060B817 /* ReadWriteAtomic.swift */; };
 		51165FC02E1D91940060B817 /* ReadWriteLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51165FBF2E1D91940060B817 /* ReadWriteLock.swift */; };
+		511BF43C2E12FF8800E9721E /* VolumeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511BF43B2E12FF8800E9721E /* VolumeSlider.swift */; };
+		511BF43E2E1305C800E9721E /* MiniPlaySlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511BF43D2E1305C800E9721E /* MiniPlaySlider.swift */; };
 		512B8FDD2BC2376E00AF41BF /* OutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512B8FDC2BC2376E00AF41BF /* OutlineView.swift */; };
 		513A4FFA29B53F8100A8EA7D /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513A4FF929B53F8100A8EA7D /* Atomic.swift */; };
 		515B5E5A2A579903001FCD49 /* iina-plugin in Copy Executables */ = {isa = PBXBuildFile; fileRef = E38558872A484A2D0083772D /* iina-plugin */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -1192,6 +1194,8 @@
 		5114FA932DC704CE00D02435 /* NowPlayingInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingInfoManager.swift; sourceTree = "<group>"; };
 		51165FBB2E1D91290060B817 /* ReadWriteAtomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadWriteAtomic.swift; sourceTree = "<group>"; };
 		51165FBF2E1D91940060B817 /* ReadWriteLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadWriteLock.swift; sourceTree = "<group>"; };
+		511BF43B2E12FF8800E9721E /* VolumeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeSlider.swift; sourceTree = "<group>"; };
+		511BF43D2E1305C800E9721E /* MiniPlaySlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlaySlider.swift; sourceTree = "<group>"; };
 		512B8FDC2BC2376E00AF41BF /* OutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineView.swift; sourceTree = "<group>"; };
 		513A4FF929B53F8100A8EA7D /* Atomic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		51537C7229FA26DD00F9A472 /* Nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Nightly.xcconfig; sourceTree = "<group>"; };
@@ -2609,6 +2613,8 @@
 				512B8FDC2BC2376E00AF41BF /* OutlineView.swift */,
 				D17504A72918F13E005C3DD0 /* OSCToolbarButton.swift */,
 				51C889D42C42FF7F007B2584 /* PlayerState.swift */,
+				511BF43B2E12FF8800E9721E /* VolumeSlider.swift */,
+				511BF43D2E1305C800E9721E /* MiniPlaySlider.swift */,
 			);
 			name = Accessories;
 			sourceTree = "<group>";
@@ -3147,6 +3153,7 @@
 				84C8D5911D796F9700D98A0E /* Aspect.swift in Sources */,
 				E3383689202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.swift in Sources */,
 				519872FF26879B9B00F84BCC /* AccessibilityPreferences.swift in Sources */,
+				511BF43E2E1305C800E9721E /* MiniPlaySlider.swift in Sources */,
 				842904E21F0EC01600478376 /* AutoFileMatcher.swift in Sources */,
 				8466BE181D5CDD0300039D03 /* QuickSettingViewController.swift in Sources */,
 				84A0BA9E1D2FAD4000BC8DA1 /* MainWindowController.swift in Sources */,
@@ -3179,6 +3186,7 @@
 				84CFC92623F8DDE000381E5B /* PlayerWindowController.swift in Sources */,
 				E353070521496CE4008FE492 /* PrefPluginViewController.swift in Sources */,
 				840820111ECF6C1800361416 /* FileGroup.swift in Sources */,
+				511BF43C2E12FF8800E9721E /* VolumeSlider.swift in Sources */,
 				E374160C20F138A900B4F7F9 /* CollapseView.swift in Sources */,
 				D1B4E24E2A3AFC9100E36F1D /* MiniPlayerWindow.swift in Sources */,
 				84C6D3621EAF8D63009BF721 /* HistoryController.swift in Sources */,

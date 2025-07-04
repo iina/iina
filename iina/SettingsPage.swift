@@ -60,6 +60,14 @@ class SettingsPage {
   var title: String { "" }
   var localizationTable: String { "" }
   var image: NSImage { NSImage() }
+  
+  static var corderRadius: CGFloat = {
+    if #available(macOS 26, *) {
+      12
+    } else {
+      4
+    }
+  }()
 
   lazy var localizationContext: SettingsLocalization.Context = {
     SettingsLocalization.Context(tableName: localizationTable)
@@ -164,6 +172,11 @@ class SettingsListView: NSBox, SettingsContainer, WithSettingsLocalizationContex
     self.container = Container(self, titleKey: title)
     self.titlePosition = .noTitle
     self.contentViewMargins = NSSize(width: 0, height: 0)
+    
+    if #available(macOS 26, *) {
+      self.boxType = .custom
+      self.cornerRadius = SettingsPage.corderRadius
+    }
 
     if let items = items {
       addItems(items)
@@ -204,6 +217,19 @@ class SettingsListView: NSBox, SettingsContainer, WithSettingsLocalizationContex
 
   override func viewDidMoveToWindow() {
     self.listTitle = titleKey.map(l10n.localized(_:))
+    self.viewDidChangeEffectiveAppearance()
+  }
+  
+  override func viewDidChangeEffectiveAppearance() {
+    if #available(macOS 26, *) {
+      if effectiveAppearance.isDark {
+        self.borderColor = .separatorColor
+        self.fillColor = .underPageBackgroundColor
+      } else {
+        self.borderColor = .black.withAlphaComponent(0.05)
+        self.fillColor = .black.withAlphaComponent(0.02)
+      }
+    }
   }
 }
 
@@ -230,6 +256,10 @@ class SettingsSubListView: SettingsListView {
 
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  override func viewDidChangeEffectiveAppearance() {
+    return
   }
 }
 

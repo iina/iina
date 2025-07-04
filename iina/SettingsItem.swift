@@ -381,7 +381,11 @@ struct SettingsItem {
       popupButton = NSPopUpButton()
       popupButton.translatesAutoresizingMaskIntoConstraints = false
       popupButton.bezelStyle = .flexiblePush
-      popupButton.showsBorderOnlyWhileMouseInside = true
+      if #available(macOS 26, *) {
+        popupButton.showsBorderOnlyWhileMouseInside = false
+      } else {
+        popupButton.showsBorderOnlyWhileMouseInside = true
+      }
       popupButton.target = self
       popupButton.action = #selector(popupChanged)
       return [popupButton]
@@ -812,11 +816,12 @@ fileprivate class ClickableView: NSView {
   }
 
   var clickable = false
+  private var backgroundColor: CGColor?
 
   init() {
     super.init(frame: NSRect())
     wantsLayer = true
-    layer?.cornerRadius = 4
+    layer?.cornerRadius = SettingsPage.corderRadius
   }
 
   private func setRoundCorners() {
@@ -838,7 +843,10 @@ fileprivate class ClickableView: NSView {
   }
 
   override func mouseEntered(with event: NSEvent) {
-    layer?.backgroundColor = NSColor.highlightColor.withAlphaComponent(0.2).cgColor
+    if backgroundColor == nil {
+      viewDidChangeEffectiveAppearance()
+    }
+    layer?.backgroundColor = backgroundColor
   }
 
   override func mouseExited(with event: NSEvent) {
@@ -847,6 +855,18 @@ fileprivate class ClickableView: NSView {
 
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  override func viewDidChangeEffectiveAppearance() {
+    backgroundColor = if #available(macOS 26, *) {
+      if effectiveAppearance.isDark {
+        NSColor.highlightColor.withAlphaComponent(0.1).cgColor
+      } else {
+        NSColor.black.withAlphaComponent(0.08).cgColor
+      }
+    } else {
+      NSColor.highlightColor.withAlphaComponent(0.2).cgColor
+    }
   }
 }
 

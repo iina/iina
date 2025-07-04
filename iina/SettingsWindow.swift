@@ -49,17 +49,22 @@ class SettingsWindow: NSWindow {
     let sidebarViewController = NSViewController()
     sidebarViewController.view = NSView()
     sidebarViewController.view.wantsLayer = true
-    let sidebarBackground = NSVisualEffectView()
+    let sidebarBackground = if #available(macOS 26, *) {
+      NSGlassEffectView()
+    } else {
+      NSVisualEffectView()
+    }
     sidebarViewController.view.addSubview(sidebarBackground)
     sidebarBackground.translatesAutoresizingMaskIntoConstraints = false
     sidebarBackground.padding(.all)
     let searchBox = NSSearchField()
     sidebarBackground.addSubview(searchBox)
     searchBox.translatesAutoresizingMaskIntoConstraints = false
-    searchBox.padding(.top(52), .horizontal(8))
+    
     if #available(macOS 11.0, *) {
       searchBox.controlSize = .large
     }
+    
     let sidebarScrollView = NSScrollView()
     sidebarScrollView.hasVerticalScroller = true
     sidebarScrollView.autohidesScrollers = true
@@ -80,7 +85,14 @@ class SettingsWindow: NSWindow {
 
     sidebarBackground.addSubview(sidebarScrollView)
     sidebarScrollView.padding(.bottom, .horizontal)
-    sidebarBackground.addConstraint(sidebarScrollView.topAnchor.constraint(equalTo: searchBox.bottomAnchor, constant: 8))
+    
+    if #available(macOS 26, *) {
+      searchBox.padding(.top(40), .horizontal(8))
+      sidebarScrollView.spacing(to: searchBox, .top(16))
+    } else {
+      searchBox.padding(.top(52), .horizontal(8))
+      sidebarScrollView.spacing(to: searchBox, .top(8))
+    }
 
     let contentViewController = NSViewController()
     contentViewController.view = NSView()
@@ -123,6 +135,7 @@ class SettingsWindow: NSWindow {
     if #available(macOS 11.0, *) {
       self.toolbarStyle = .unified
       self.toolbar = NSToolbar()
+      self.toolbar?.displayMode = .iconOnly
     }
 
     loadPage(at: 0)
@@ -274,7 +287,11 @@ extension SettingsWindow: NSTableViewDataSource, NSTableViewDelegate {
     let imageView = NSImageView(image: pages[row].image)
     imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.size(width: 24, height: 24)
-    imageView.contentTintColor = .controlAccentColor
+    if #available(macOS 26, *) {
+      imageView.contentTintColor = .textColor
+    } else {
+      imageView.contentTintColor = .controlAccentColor
+    }
 
     let labelStackView = NSStackView(views: [imageView, textField])
     labelStackView.orientation = .horizontal

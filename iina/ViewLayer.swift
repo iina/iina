@@ -75,6 +75,9 @@ class ViewLayer: CAOpenGLLayer {
   private let cglContext: CGLContextObj
   private let cglPixelFormat: CGLPixelFormatObj
 
+  /// Lock to single thread calls to `display`.
+  private let displayLock: NSLocking
+
   private var fbo: GLint = 1
 
   @Atomic private var needsFlip = false
@@ -108,6 +111,7 @@ class ViewLayer: CAOpenGLLayer {
     self.videoView = videoView
     (cglPixelFormat, bufferDepth) = ViewLayer.createPixelFormat(videoView.player)
     cglContext = ViewLayer.createContext(cglPixelFormat)
+    displayLock = NSRecursiveLock()
     super.init()
     autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
     backgroundColor = NSColor.black.cgColor
@@ -129,6 +133,7 @@ class ViewLayer: CAOpenGLLayer {
     videoView = previousLayer.videoView
     cglPixelFormat = previousLayer.cglPixelFormat
     cglContext = previousLayer.cglContext
+    displayLock = previousLayer.displayLock
     super.init(layer: layer)
     autoresizingMask = previousLayer.autoresizingMask
     backgroundColor = previousLayer.backgroundColor
@@ -146,7 +151,10 @@ class ViewLayer: CAOpenGLLayer {
 
   override func canDraw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj,
                         forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) -> Bool {
-    videoView.$isUninited.withLock() { isUninited in
+    // When in live resize, skip all drawing calls on the main thread.
+    // Setting isAsynchronous = true is enough to prevent jittering.
+    guard !(inLiveResize && Thread.isMainThread) else { return false }
+    return videoView.$isUninited.withReadLock() { isUninited in
       guard !isUninited else { return false }
       if !inLiveResize {
         isAsynchronous = false
@@ -157,7 +165,7 @@ class ViewLayer: CAOpenGLLayer {
 
   override func draw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj,
                      forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) {
-    videoView.$isUninited.withLock() { isUninited in
+    videoView.$isUninited.withReadLock() { isUninited in
       guard !isUninited else { return }
 
       needsFlip = false
@@ -215,6 +223,8 @@ class ViewLayer: CAOpenGLLayer {
   ///     something other than the main thread, IINA will crash with a SIGABRT reporting "an implicit transaction wasn't created on a
   ///     main thread". See issue [#5038](https://github.com/iina/iina/issues/5038).
   override func display() {
+    displayLock.lock()
+    defer { displayLock.unlock() }
 
     let isUpdate = needsFlip
 
@@ -233,7 +243,7 @@ class ViewLayer: CAOpenGLLayer {
     // always be locked before locking the isUninited lock to avoid deadlocks.
     videoView.player.mpv.lockAndSetOpenGLContext()
     defer { videoView.player.mpv.unlockOpenGLContext() }
-    videoView.$isUninited.withLock() { isUninited in
+    videoView.$isUninited.withReadLock() { isUninited in
       guard !isUninited else { return }
 
       // Neither canDraw nor draw(inCGLContext:) were called by AppKit, needs a skip render.
@@ -370,7 +380,7 @@ class ViewLayer: CAOpenGLLayer {
     // deadlocks.
     videoView.player.mpv.lockAndSetOpenGLContext()
     defer { videoView.player.mpv.unlockOpenGLContext() }
-    videoView.$isUninited.withLock() { isUninited in
+    videoView.$isUninited.withReadLock() { isUninited in
       guard !isUninited else { return }
 
       guard let renderContext = videoView.player.mpv.mpvRenderContext else { return }

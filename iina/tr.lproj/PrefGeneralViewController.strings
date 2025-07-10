@@ -1,5 +1,5 @@
 /* Class = "NSMenuItem"; title = "Show open file panel"; ObjectID = "1ce-4b-kgG"; */
-"1ce-4b-kgG.title" = "Dosya açma penceresini göster";
+"1ce-4b-kgG.title" = "Dosya aç panelini göster";
 
 /* Class = "NSButtonCell"; title = "Keep window open after playback finishes"; ObjectID = "2iM-j7-AzQ"; */
 "2iM-j7-AzQ.title" = "Oynatma bittiğinde pencereyi açık tut";
@@ -17,55 +17,55 @@
 "4Qe-7S-8xK.title" = "Ayarlar:";
 
 /* Class = "NSButtonCell"; title = "Enable \"Open Recent\" menu"; ObjectID = "55O-ik-ql6"; */
-"55O-ik-ql6.title" = "\"Son Kullanılanı Aç\" menüsünü etkinleştir";
+"55O-ik-ql6.title" = "“Son Kullanılanları Aç” menüsünü etkinleştir";
 
 /* Class = "NSButtonCell"; title = "Minimized/un-minimized"; ObjectID = "5Y9-bX-K0f"; */
 "5Y9-bX-K0f.title" = "IINA küçüldüğünde/eski haline geldiğinde";
 
 /* Class = "NSTextFieldCell"; title = "Playlist:"; ObjectID = "6TV-DG-503"; */
-"6TV-DG-503.title" = "Oynatma Listesi:";
+"6TV-DG-503.title" = "Oynatma listesi:";
 
 /* Class = "NSTextFieldCell"; title = "Requires restarting IINA to take effect."; ObjectID = "8kU-8g-VgX"; */
-"8kU-8g-VgX.title" = "Etkili olabilmesi için IINA'nın yeniden başlatılması gerekli.";
+"8kU-8g-VgX.title" = "Etkili olabilmesi için IINA’nın yeniden başlatılması gerekir.";
 
 /* Class = "NSButtonCell"; title = "Only in \"music mode\""; ObjectID = "AVe-9Z-RgQ"; */
-"AVe-9Z-RgQ.title" = "Sadece \"müzik kipi\" içerisinde";
+"AVe-9Z-RgQ.title" = "Yalnızca “müzik kipi”ndeyken";
 
 /* Class = "NSButtonCell"; title = "Track all played files in \"Open Recent\" menu"; ObjectID = "Ci8-j2-QS3"; */
-"Ci8-j2-QS3.title" = "Oynatılan her dosyayı Son Kullanılanı Aç'a ekle";
+"Ci8-j2-QS3.title" = "Oynatılan her dosyayı “Son Kullanılanları Aç” menüsüne ekle";
 
 /* Class = "NSMenuItem"; title = "Daily"; ObjectID = "Ez8-qY-WAZ"; */
-"Ez8-qY-WAZ.title" = "Her Gün";
+"Ez8-qY-WAZ.title" = "Günlük";
 
 /* Class = "NSButtonCell"; title = "Pause"; ObjectID = "FbF-jJ-W5b"; */
 "FbF-jJ-W5b.title" = "Duraklat";
 
 /* Class = "NSTextFieldCell"; title = "When media is opened:"; ObjectID = "GNV-VA-NBW"; */
-"GNV-VA-NBW.title" = "Medya açıldığında:";
+"GNV-VA-NBW.title" = "Ortam açıldığında:";
 
 /* Class = "NSMenuItem"; title = "Weekly"; ObjectID = "Imf-6g-2Cd"; */
-"Imf-6g-2Cd.title" = "Her Hafta";
+"Imf-6g-2Cd.title" = "Haftalık";
 
 /* Class = "NSButtonCell"; title = "Window becomes inactive/active"; ObjectID = "J8g-aS-W6e"; */
 "J8g-aS-W6e.title" = "Pencere aktif/inaktif olduğunda";
 
 /* Class = "NSMenuItem"; title = "Do nothing"; ObjectID = "JfZ-D8-aF2"; */
-"JfZ-D8-aF2.title" = "Hiçbir şey yapma";
+"JfZ-D8-aF2.title" = "Bir şey yapma";
 
 /* Class = "NSButtonCell"; title = "Black out other monitors while in full screen"; ObjectID = "KYi-0W-zOr"; */
-"KYi-0W-zOr.title" = "Tam ekrandayken diğer monitörleri karartın";
+"KYi-0W-zOr.title" = "Tam ekrandayken diğer monitörleri karart";
 
 /* Class = "NSTextFieldCell"; title = "Still prevents system from sleeping."; ObjectID = "Kdk-iC-e1C"; */
-"Kdk-iC-e1C.title" = "Still prevents system from sleeping.";
+"Kdk-iC-e1C.title" = "Sistemin uykuya geçmesini engeller.";
 
 /* Class = "NSButtonCell"; title = "Switch to \"music mode\" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
-"KfL-r7-Uav.title" = "Ses dosyası çalarken otomatik olarak \"müzik kipine\" geç";
+"KfL-r7-Uav.title" = "Ses dosyası çalarken kendiliğinden ”müzik kipine“ geç";
 
 /* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
-"Lac-Ol-g6E.title" = "Sıradaki öğeyi otomatik oynat";
+"Lac-Ol-g6E.title" = "Sıradaki öğeyi kendiliğinden oynat";
 
 /* Class = "NSButtonCell"; title = "Always open media in new window"; ObjectID = "M0z-bI-88d"; */
-"M0z-bI-88d.title" = "Medyayı her zaman yeni pencerede aç";
+"M0z-bI-88d.title" = "Ortamı her zaman yeni pencerede aç";
 
 /* Class = "NSButtonCell"; title = "Enter fullscreen"; ObjectID = "MlG-hl-goB"; */
 "MlG-hl-goB.title" = "Tam ekrana geç";
@@ -80,19 +80,19 @@
 "QJq-fO-hhK.title" = "Dosyaları otomatik olarak aynı klasöre ekle";
 
 /* Class = "NSMenuItem"; title = "Monthly"; ObjectID = "REP-70-XOi"; */
-"REP-70-XOi.title" = "Her Ay";
+"REP-70-XOi.title" = "Aylık";
 
 /* Class = "NSButtonCell"; title = "Use legacy full screen"; ObjectID = "TvB-UM-FrS"; */
-"TvB-UM-FrS.title" = "Tam ekrana geçmede eski yöntemi kullan";
+"TvB-UM-FrS.title" = "Tam ekran için eski yöntemi kullan";
 
 /* Class = "NSTextFieldCell"; title = "Otherwise only files that opened manually will show up in this menu."; ObjectID = "XFC-Lr-LmP"; */
-"XFC-Lr-LmP.title" = "Bu ayar seçilmezse sadece IINA içinden manuel olarak açılan dosyalar eklenir";
+"XFC-Lr-LmP.title" = "Aksi takdirde yalnızca elle açılan dosyalar bu menüde görünür.";
 
 /* Class = "NSButtonCell"; title = "Quit after all windows are closed"; ObjectID = "YLo-6E-tT7"; */
-"YLo-6E-tT7.title" = "Hiçbir pencere açık değilse IINA'dan çık";
+"YLo-6E-tT7.title" = "Tüm pencereler kapatıldıktan sonra çık";
 
 /* Class = "NSTextFieldCell"; title = "/path/to/screenshot/folder"; ObjectID = "YeH-hk-7NN"; */
-"YeH-hk-7NN.title" = "/ekrangörüntüsü/klasörü/yolu/";
+"YeH-hk-7NN.title" = "/ekran-resmi/klasörünün/yolu/";
 
 /* Class = "NSButtonCell"; title = "Receive beta updates"; ObjectID = "f0j-Dn-cxt"; */
 "f0j-Dn-cxt.title" = "Beta güncellemeleri al";
@@ -107,34 +107,34 @@
 "hWC-KJ-FuC.title" = "Güncellemeleri denetle";
 
 /* Class = "NSButtonCell"; title = "Pause when machine goes to sleep"; ObjectID = "i4A-86-dGC"; */
-"i4A-86-dGC.title" = "Makine uyuduğunda duraklat";
+"i4A-86-dGC.title" = "Makine uykuya geçtiğinde duraklat";
 
 /* Class = "NSButtonCell"; title = "Enable playback history"; ObjectID = "iGS-qN-f5q"; */
-"iGS-qN-f5q.title" = "Oynatma geçmişini hatırla";
+"iGS-qN-f5q.title" = "Oynatma geçmişini anımsa";
 
 /* Class = "NSButtonCell"; title = "Resume last playback position"; ObjectID = "jOB-D3-WT3"; */
-"jOB-D3-WT3.title" = "Kaldığın yerden devam et";
+"jOB-D3-WT3.title" = "Son oynatma konumundan sürdür";
 
 /* Class = "NSTextFieldCell"; title = "History:"; ObjectID = "jeK-46-2BG"; */
 "jeK-46-2BG.title" = "Geçmiş:";
 
 /* Class = "NSButtonCell"; title = "Show artist and track name for audio files when available"; ObjectID = "kBI-Th-bBV"; */
-"kBI-Th-bBV.title" = "Mümkün olduğunda ses dosyaları için sanatçı ve iz adlarını göster";
+"kBI-Th-bBV.title" = "Olabildiğince ses dosyaları için sanatçı ve parça adlarını göster";
 
 /* Class = "NSButtonCell"; title = "Play upon entering full screen"; ObjectID = "lOw-pu-Llm"; */
 "lOw-pu-Llm.title" = "Tam ekrana geçince oynat";
 
 /* Class = "NSButtonCell"; title = "Include subtitles"; ObjectID = "lvA-Rc-Sh6"; */
-"lvA-Rc-Sh6.title" = "Altyazıları dahil et";
+"lvA-Rc-Sh6.title" = "Altyazıları içer";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "oJY-Iz-3sO"; */
 "oJY-Iz-3sO.title" = "Biçim:";
 
 /* Class = "NSTextFieldCell"; title = "Screenshots:"; ObjectID = "pdx-zt-kf2"; */
-"pdx-zt-kf2.title" = "Ekran Görüntüleri:";
+"pdx-zt-kf2.title" = "Ekran resimleri:";
 
 /* Class = "NSButtonCell"; title = "Prevent screen saver from starting while playing"; ObjectID = "r2u-P9-J5p"; */
-"r2u-P9-J5p.title" = "Prevent screen saver from starting while playing";
+"r2u-P9-J5p.title" = "Oynatırken ekran koruyucunun başlamasını engeller";
 
 /* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "slG-Jb-54B"; */
 "slG-Jb-54B.title" = "Her Saat";
@@ -152,16 +152,16 @@
 "xr2-rB-O0x.title" = "Şunlar olduğunda Duraklat/Sürdür:";
 
 /* Class = "NSButtonCell"; title = "Not while in \"music mode\" or only playing audio"; ObjectID = "yla-DT-YTx"; */
-"yla-DT-YTx.title" = "Not while in \"music mode\" or only playing audio";
+"yla-DT-YTx.title" = "Yalnızca ses çalarken veya ”müzik kipindeyken“ değil";
 
 /* Class = "NSMenuItem"; title = "Show welcome window"; ObjectID = "z9T-8h-1T0"; */
 "z9T-8h-1T0.title" = "Karşılama penceresini göster";
 
 /* Class = "NSButtonCell"; title = "When a file is opened manually:"; ObjectID = "jok-kc-HjX"; */
-"jok-kc-HjX.title" = "When a file is opened manually:";
+"jok-kc-HjX.title" = "Bir dosya elle açıldığında:";
 
 /* Class = "NSMenuItem"; title = "Loop playlist"; ObjectID = "5WC-Sp-6mg"; */
-"5WC-Sp-6mg.title" = "Loop playlist";
+"5WC-Sp-6mg.title" = "Oynatma listesini döngüye al";
 
 /* Class = "NSMenuItem"; title = "Loop single file"; ObjectID = "A1p-L4-jtC"; */
-"A1p-L4-jtC.title" = "Loop single file";
+"A1p-L4-jtC.title" = "Tek bir dosyayı döngüye al";

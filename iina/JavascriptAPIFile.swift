@@ -56,6 +56,7 @@ class JavascriptAPIFile: JavascriptAPI, JavascriptAPIFileExportable {
   }
 
   func write(_ path: String, _ content: String) {
+    log("file.write \(path): \(content.count)", level: .debug)
     let (filePath_, local) = parsePath(path)
     guard let filePath = filePath_ else { return }
 
@@ -92,6 +93,7 @@ class JavascriptAPIFile: JavascriptAPI, JavascriptAPIFileExportable {
   }
 
   func trash(_ path: String) {
+    log("file.trash \(path)", level: .debug)
     guard let filePath = parsePath(path).path else { return }
 
     do {
@@ -102,6 +104,7 @@ class JavascriptAPIFile: JavascriptAPI, JavascriptAPIFileExportable {
   }
 
   func delete(_ path: String) {
+    log("file.delete \(path)", level: .debug)
     let (filePath_, local) = parsePath(path)
     guard let filePath = filePath_ else { return }
 
@@ -117,6 +120,7 @@ class JavascriptAPIFile: JavascriptAPI, JavascriptAPIFileExportable {
   }
 
   func move(_ source: String, _ dest: String) {
+    log("file.move \(source) -> \(dest)", level: .debug)
     guard let sourcePath = parsePath(source).path, let destPath = parsePath(dest).path else { return }
 
     do {

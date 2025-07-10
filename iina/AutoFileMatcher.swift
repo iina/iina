@@ -29,7 +29,7 @@ class AutoFileMatcher {
   
   private let subsystem: Logger.Subsystem
 
-  private func log(_ message: String, level: Logger.Level = .debug) {
+  private func log(_ message: @autoclosure () -> String, level: Logger.Level = .debug) {
     Logger.log(message, level: level, subsystem: subsystem)
   }
 
@@ -126,12 +126,12 @@ class AutoFileMatcher {
         addedCurrentVideo = true
       } else if addedCurrentVideo {
         try checkTicket()
-        player.addToPlaylist(video.path, silent: true)
+        player.appendToPlaylist(video.path, silent: true)
       } else {
         let count = player.mpv.getInt(MPVProperty.playlistCount)
         let current = player.mpv.getInt(MPVProperty.playlistPos)
         try checkTicket()
-        player.addToPlaylist(video.path, silent: true)
+        player.appendToPlaylist(video.path, silent: true)
         player.mpv.command(.playlistMove, args: ["\(count)", "\(current)"], checkError: false,
                            level: .verbose) { err in
           if err == MPV_ERROR_COMMAND.rawValue { needQuit = true }

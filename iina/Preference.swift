@@ -253,6 +253,7 @@ struct Preference {
     static let arrowButtonAction = Key("arrowBtnAction")
     /** (1~4) */
     static let volumeScrollAmount = Key("volumeScrollAmount")
+    static let playbackSpeedScrollAmount = Key("playbackSpeedScrollAmount")
     static let verticalScrollAction = Key("verticalScrollAction")
     static let horizontalScrollAction = Key("horizontalScrollAction")
 
@@ -328,6 +329,10 @@ struct Preference {
     /// To confirm this the workaround is being disabled by default using this preference. Should all go well this workaround will be
     /// removed in the future.
     static let enableHdrWorkaround = Key("enableHdrWorkaround")
+
+    /// Internal setting to allow disabling the new feature that shows cover artwork in the Now Playing module in case a serious
+    /// problem is encountered.
+    static let enableNowPlayingArtwork = Key("enableNowPlayingArtwork")
   }
 
   // MARK: - Enums
@@ -404,6 +409,8 @@ struct Preference {
     case pause
     case hideOSC
     case togglePIP
+    case abLoop
+    case resetSpeed
 
     static var defaultValue = MouseClickAction.none
 
@@ -417,6 +424,7 @@ struct Preference {
     case seek
     case none
     case passToMpv
+    case playbackSpeed
 
     static var defaultValue = ScrollAction.volume
 
@@ -937,6 +945,7 @@ struct Preference {
     .followGlobalSeekTypeWhenAdjustSlider: false,
     .relativeSeekAmount: 3,
     .volumeScrollAmount: 3,
+    .playbackSpeedScrollAmount: 3,
     .verticalScrollAction: ScrollAction.volume.rawValue,
     .horizontalScrollAction: ScrollAction.seek.rawValue,
     .videoViewAcceptsFirstMouse: false,
@@ -963,7 +972,8 @@ struct Preference {
     .recentDocuments: [Any](),
 
     .enableFFmpegImageDecoder: true,
-    .enableHdrWorkaround: false
+    .enableHdrWorkaround: false,
+    .enableNowPlayingArtwork: true
   ]
 
 

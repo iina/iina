@@ -141,7 +141,7 @@
 "osd.playlist_loop" = "Loop Playlist";
 "osd.no_loop" = "Disable Looping";
 
-"preference.title" = "Preferences";
+"preference.title" = "Settings";
 "preference.general" = "General";
 "preference.ui" = "UI";
 "preference.video_audio" = "Video/Audio";
@@ -173,6 +173,9 @@
 "preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
 "preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
 "preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
+
+"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
+"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
 "menu.volume" = "Volume: %d";
 "menu.volume_muted" = "Volume: %d (Muted)";
@@ -216,6 +219,14 @@
 "menu.crop_custom" = "Custom…";
 "menu.find_online_sub" = "Find Online Subtitles from %@";
 
+"menu.manage_plugins" = "Manage Plugins…";
+"menu.developer_tool" = "Developer Tool";
+"menu.more_plugin" = "More…";
+"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
+"menu.reload_plugins" = "Reload All Plugins";
+"menu.show_plugins_panel" = "Show Plugins Panel";
+"menu.hide_plugins_panel" = "Hide Plugins Panel";
+
 "track.audio" = "Audio";
 "track.none" = "<None>";
 "track.sub" = "Subtitle";
@@ -245,7 +256,7 @@
 "alert.error_saving_file" = "Error occurred when saving %@: %@";
 "alert.error_deleting_file" = "Cannot delete the file.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
 
 "alert.config.new.title" = "New Input Configuration";
 "alert.config.new.message" = "Please enter a name for the new configuration.";
@@ -268,7 +279,7 @@
 
 "alert.extra_option.cannot_read" = "Cannot read user defined extra mpv options.";
 "alert.extra_option.empty" = "Key or value cannot be empty!";
-"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
 "alert.extra_option.config_folder" = "Error setting config directory \"%@\".";
 
 "alert.playlist.error_deleting" = "Error deleting: %@";
@@ -276,7 +287,7 @@
 "alert.screenshot.error_taking" = "Cannot take a screenshot!";
 
 "alert.sub.no_selected" = "Please select a downloaded subtitle first.";
-"alert.sub_lang_not_set" = "Please set preferred subtitle languages in preferences before using OpenSubtitles. English(eng) will be used this time.";
+"alert.sub_lang_not_set" = "Please set preferred subtitle languages in Settings before using OpenSubtitles. English(eng) will be used this time.";
 "alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
 "alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
 "alert.sub.save_downloaded.title" = "Save Downloaded Subtitle";
@@ -338,7 +349,7 @@
 "alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
 "alert.plugin_reinstall.title" = "Plugin %@ already exists";
 "alert.plugin_reinstall.message" = "Do you want to reinstall the plugin?";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Settings - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
 "alert.plugin_no_update" = "No update found.";
 "alert.plugin_update_found.title" = "Update found for %@";
 "alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
@@ -386,6 +397,7 @@
 "osc_toolbar.music_mode" = "Enter music mode";
 "osc_toolbar.sub_track" = "Choose subtitle track";
 "osc_toolbar.screenshot" = "Take a screenshot";
+"osc_toolbar.plugins" = "Show plugins panel";
 
 "mini_player.album_art" = "Toggle album art";
 "mini_player.loop" = "Repeat";

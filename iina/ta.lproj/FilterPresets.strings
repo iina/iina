@@ -12,14 +12,14 @@
 "crop" = "வெட்டு";
 "crop.w" = "அகலம்  (இயல்புநிலை: காணொளி அகலம்)";
 "crop.h" = "உயரம்  (இயல்புநிலை: காணொளி உயரம்)";
-"crop.x" = "Origin X (default: center)";
-"crop.y" = "Origin Y (default: center)";
+"crop.x" = "ஆரம்பம் X (இயல்புநிலை: நடுவில்)";
+"crop.y" = "ஆரம்பம் Y (இயல்புநிலை: நடுவில்)";
 
 "expand" = "விரிவாக்கு";
 "expand.w" = "அகலம்  (இயல்புநிலை: காணொளி அகலம்)";
 "expand.h" = "உயரம்  (இயல்புநிலை: காணொளி உயரம்)";
-"expand.x" = "Origin X (default: center)";
-"expand.y" = "Origin Y (default: center)";
+"expand.x" = "ஆரம்பம் X (இயல்புநிலை: நடுவில்)";
+"expand.y" = "ஆரம்பம் Y (இயல்புநிலை: நடுவில்)";
 "expand.aspect" = "Expands to fit an aspect (e.g: 4/3)";
 "expand.round" = "Rounds up to make divisible by this value";
 

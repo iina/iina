@@ -50,7 +50,7 @@
 "quicksetting.deinterlace" = "ביטול שזירה";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "הסתר";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.reset_speed" = "איפוס מהירות ל1x";
 
 // EQ Presets
 "eq.preset.flat" = "שטוח";
@@ -78,14 +78,14 @@
 
 "alert.eq.new_profile.title" = "פרופיל אקולייזר חדש";
 "alert.eq.new_profile.message" = "אנא הזן שם לפרופיל.";
-"alert.eq.rename.title" = "שנה את שם הפרופיל הקיים";
-"alert.eq.rename.message" = "Please enter a new profile name.";
+"alert.eq.rename.title" = "שנה שם פרופיל נוכחי";
+"alert.eq.rename.message" = "אנא הזן שם לפרופיל.";
 
 // OSDMessage.swift
 "osd.pause" = "מושהה";
 "osd.resume" = "התחדש";
 "osd.volume" = "עוצמת שמע: %i";
-"osd.speed" = "Speed: %@x";
+"osd.speed" = "מהירות: x%@";
 "osd.aspect" = "יחס גובה-רוחב: %@";
 "osd.crop" = "חיתוך: %@";
 "osd.rotate" = "הטיה: %i°";
@@ -162,9 +162,9 @@
 
 "preference.enable_adv_settings" = "אפשר הגדרות מתקדמות";
 
-"preference.sub_override_level.no" = "no";
+"preference.sub_override_level.no" = "לא";
 "preference.sub_override_level.force" = "כפויה";
-"preference.sub_override_level.scale" = "scale";
+"preference.sub_override_level.scale" = "קנה מידה";
 "preference.sub_override_level.strip" = "הסרת הכל";
 "preference.sub_override_level.yes" = "מאופשרת";
 
@@ -173,6 +173,9 @@
 "preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
 "preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
 "preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
+
+"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
+"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
 "menu.volume" = "עוצמת שמע: %d";
 "menu.volume_muted" = "עוצמת שמע: %d (מושתק)";
@@ -190,7 +193,7 @@
 "menu.exit_mini_player" = "צא ממצב מוזיקה";
 "menu.pause" = "השהיה";
 "menu.resume" = "המשך";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "מהירות: x%@";
 "menu.chapters" = "הצג פאנל פרקים";
 "menu.hide_chapters" = "הסתר פאנל פרקים";
 "menu.playlist" = "הצג פאנל רשימת השמעה";
@@ -204,8 +207,8 @@
 
 "menu.seek_forward" = "דלג קדימה %.0f שניות";
 "menu.seek_backward" = "חזרה %.0f שניות אחורה";
-"menu.speed_up" = "Speed Up by %@x";
-"menu.speed_down" = "Speed Down by %@x";
+"menu.speed_up" = "הגבר מהירות ב%@x";
+"menu.speed_down" = "הפחת מהירות ב%@x";
 "menu.volume_up" = "הגבר עוצמת שמע ב%.0f%";
 "menu.volume_down" = "הפחת עוצמת שמע ב%.0f%";
 "menu.audio_delay_up" = "עיכוב שמע: הוסף %.1f שניות";
@@ -215,6 +218,14 @@
 
 "menu.crop_custom" = "מותאם אישית…";
 "menu.find_online_sub" = "מצא כתוביות מקוונות מ-%@";
+
+"menu.manage_plugins" = "נהל תוספים…";
+"menu.developer_tool" = "כלי פיתוח";
+"menu.more_plugin" = "עוד…";
+"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
+"menu.reload_plugins" = "טען מחדש את כל התוספים";
+"menu.show_plugins_panel" = "הצג פאנל תוספים";
+"menu.hide_plugins_panel" = "הסתר פאנל תוספים";
 
 "track.audio" = "שמע";
 "track.none" = "<ללא>";
@@ -245,7 +256,7 @@
 "alert.error_saving_file" = "אירעה שגיאה בעת שמירת %@: %@";
 "alert.error_deleting_file" = "שגיאה במחיקת הקובץ.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
 
 "alert.config.new.title" = "תצורת מקשים חדשה";
 "alert.config.new.message" = "נא להזין שם עבור התצורה החדשה.";
@@ -258,7 +269,7 @@
 "alert.config.cannot_create" = "יצירת קובץ התצורה נכשלה!\n%@";
 "alert.config.cannot_write" = "הכתיבה לקובץ התצורה נכשלה!";
 "alert.config.rename.title" = "Rename Input Configuration";
-"alert.config.rename.message" = "Please enter the new name for the configuration.";
+"alert.config.rename.message" = "נא להזין שם עבור התצורה.";
 
 "alert.filter.incorrect" = "אירעה שגיאה בעת הגדרת המסננים. אנא בדוק את פורמט הפרמטר שהגדרת.";
 "alert.add_filter.title" = "מסנן חדש";
@@ -386,6 +397,7 @@
 "osc_toolbar.music_mode" = "היכנס למצב מוזיקה";
 "osc_toolbar.sub_track" = "בחר רצועת כתוביות";
 "osc_toolbar.screenshot" = "בצע צילום מסך";
+"osc_toolbar.plugins" = "הצג פאנל תוספים";
 
 "mini_player.album_art" = "הצג/הסתר תמונת אלבום";
 "mini_player.loop" = "חזרה";

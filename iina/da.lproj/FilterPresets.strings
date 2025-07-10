@@ -11,7 +11,7 @@
 
 "crop" = "Beskær";
 "crop.w" = "Bredde (standard: video bredde)";
-"crop.h" = "Højde (standard: video størrelse)";
+"crop.h" = "Højde (standard: video højde)";
 "crop.x" = "Oprindelig X (standard: center)";
 "crop.y" = "Oprindelig Y (Standard: center)";
 
@@ -20,7 +20,7 @@
 "expand.h" = "Højde (standard: video højde)";
 "expand.x" = "Oprindelig X (standard: center)";
 "expand.y" = "Oprindelig Y (standard: center)";
-"expand.aspect" = "Udvid til at passe til aspekt (fx: 4/3)";
+"expand.aspect" = "Udvid til at passe til format (f.eks. 4/3)";
 "expand.round" = "Rund op for at gøre delelig med denne værdi";
 
 "sharpen" = "Skarphed";
@@ -43,7 +43,7 @@
 "hflip" = "Spejl";
 
 "lut3d" = "3D LUT";
-"lut3d.file" = "Filsti (du kan også trække og slippe filen i indtastningsfeltet)";
+"lut3d.file" = "Arkiv sti (du kan også trække og slippe arkivet i indtastningsfeltet)";
 "lut3d.interp" = "Interpolations tilstand";
 
 "custom_mpv" = "Brugerdefineret (mpv)";

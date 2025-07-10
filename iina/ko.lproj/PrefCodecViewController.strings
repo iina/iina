@@ -26,7 +26,7 @@
 "gCv-sJ-uQJ.title" = "가능하면 전용 GPU를 사용하십시오. 성능 뿐만 아니라 배터리 효율도 향상시킬 수 있습니다.";
 
 /* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
-"m5P-5f-5uo.title" = "비디오:";
+"m5P-5f-5uo.title" = "비디오";
 
 /* Class = "NSTextFieldCell"; title = "Hardware decoder:"; ObjectID = "nwg-2K-G2G"; */
 "nwg-2K-G2G.title" = "하드웨어 디코더:";
@@ -38,7 +38,7 @@
 "sLR-vV-xn2.title" = "기본 오디오 출력:";
 
 /* Class = "NSTextFieldCell"; title = "Audio:"; ObjectID = "sV5-dL-MUt"; */
-"sV5-dL-MUt.title" = "오디오:";
+"sV5-dL-MUt.title" = "오디오";
 
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "tAQ-oU-1AJ"; */
 "tAQ-oU-1AJ.title" = "자동";
@@ -128,7 +128,7 @@
 "m2n-yd-a4n.title" = "파일에 ReplayGain 태그가 없는 경우 적용할 게인입니다.";
 
 /* Class = "NSTextFieldCell"; title = "Audio driver:"; ObjectID = "Zco-Ba-Idk"; */
-"Zco-Ba-Idk.title" = "Audio driver:";
+"Zco-Ba-Idk.title" = "오디오 드라이버:";
 
 /* Class = "NSTextFieldCell"; title = "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."; ObjectID = "2Md-pv-gSi"; */
 "2Md-pv-gSi.title" = "AVFoundation은 공간 오디오를 지원하는 새롭고 실험적인 오디오 드라이버입니다. 그러나 AVFoundation을 사용할 때 오디오 지연과 같은 몇 가지 문제가 발생할 수 있습니다.";

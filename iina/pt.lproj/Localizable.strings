@@ -16,8 +16,8 @@
 "general.username" = "Nome de Utilizador";
 "general.password" = "Senha";
 
-"input.value_is_empty" = "Value cannot be empty.";
-"input.already_exists" = "Value already exists.";
+"input.value_is_empty" = "Nome não pode ser vazio.";
+"input.already_exists" = "Nome já existe.";
 
 // Guide Window
 "guide.highlights" = "Destaques";
@@ -26,10 +26,10 @@
 
 // Initial Window
 "initial.announcement" = "Está a usar a versão %@ do IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.beta.desc" = "Para reverter para uma versão anterior desmarque \"Receber Atualizações beta\" a partir de Definições... > Geral, e instale a versão pretendida através do nosso <a href=\"https://iina.io\">site oficial</a>.";
+"initial.nightly.desc" = "Não é recomendado que use Nightly no dia a dia. As versões Nightly não suportam atualizações automáticas. Descarregue novas versões manualmente do nosso <a href=\"https://nightly.iina.io\">website nightly</a>.";
+"initial.debug.desc" = "Compilações para depuração não estão otimizadas para velocidade, por isso não é recomendado que a use no dia a dia. Compilações para depuração não suportam atualizações automáticas.";
+"initial.bug_report" = "Reporte através <a href=\"https://github.com/iina/iina/issues\">GitHub Issues</a>.";
 
 // Inspector Window
 "inspector.error" = "Erro";
@@ -50,16 +50,16 @@
 "quicksetting.deinterlace" = "Desentrelaçar";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Ocultar";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.reset_speed" = "Redefinir velocidade para 1x";
 
 // EQ Presets
-"eq.preset.flat" = "Flat";
-"eq.preset.acoustic" = "Acoustic";
-"eq.preset.classical" = "Classical";
-"eq.preset.dance" = "Dance";
+"eq.preset.flat" = "Neutro";
+"eq.preset.acoustic" = "Acústico";
+"eq.preset.classical" = "Clássico";
+"eq.preset.dance" = "Dança";
 "eq.preset.deep" = "Deep";
-"eq.preset.electronic" = "Electronic";
-"eq.preset.hip_hop" = "Hip Hop";
+"eq.preset.electronic" = "Eletrónica";
+"eq.preset.hip_hop" = "Hip-hop";
 "eq.preset.increase_bass" = "Increase Bass";
 "eq.preset.increase_treble" = "Increase Treble";
 "eq.preset.increase_vocal" = "Increase Vocal";
@@ -76,16 +76,16 @@
 "eq.preset.small_speaker" = "Small Speaker";
 "eq.preset.spoken_word" = "Spoken Word";
 
-"alert.eq.new_profile.title" = "New EQ Profile";
-"alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Currnet Profile";
-"alert.eq.rename.message" = "Please enter a new profile name.";
+"alert.eq.new_profile.title" = "Novo perfil EQ";
+"alert.eq.new_profile.message" = "Introduza o nome do perfil.";
+"alert.eq.rename.title" = "Alterar nome do perfil";
+"alert.eq.rename.message" = "Introduza o novo nome do perfil.";
 
 // OSDMessage.swift
 "osd.pause" = "Pausa";
 "osd.resume" = "Retomar";
 "osd.volume" = "Volume: %i";
-"osd.speed" = "Speed: %@x";
+"osd.speed" = "Velocidade: %@x";
 "osd.aspect" = "Proporção: %@";
 "osd.crop" = "Cortar: %@";
 "osd.rotate" = "Rodar: %i°";
@@ -98,14 +98,14 @@
 "osd.sub_delay.later" = "Atraso da legenda: %.2fs Depois";
 "osd.sub_delay.earlier" = "Atraso da Legenda: %.2fs Antes";
 "osd.subtitle_pos" = "Posição da Legenda: %.1f";
-"osd.sub_hidden" = "Subtitles Hidden";
-"osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
-"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
-"osd.sub_second_visible" = "Secondary Subtitles Visible";
+"osd.sub_hidden" = "Legendas ocultas";
+"osd.sub_visible" = "Legendas visíveis";
+"osd.sub_second_delay.nodelay" = "Atraso da legenda secundária: Sem atraso";
+"osd.sub_second_delay.later" = "Atraso da legenda secundária: %.2fs Depois";
+"osd.sub_second_delay.earlier" = "Atraso da legenda secundária: %.2fs Antes";
+"osd.sub_second_hidden" = "Legendas secundárias ocultas";
+"osd.sub_second_pos" = "Posição da legenda secundária: %.1f";
+"osd.sub_second_visible" = "Legendas secundárias visíveis";
 "osd.mute" = "Sem som";
 "osd.unmute" = "Ligar som";
 "osd.screenshot" = "Captura de ecrã efetuada";
@@ -125,8 +125,8 @@
 "osd.find_online_sub" = "A encontrar legendas online…";
 "osd.find_online_sub.source" = "de";
 "osd.sub_not_found" = "Não foram encontradas legendas";
-"osd.sub_found" = "%d subtitles found.";
-"osd.sub_downloading" = "Downloading %d subtitles";
+"osd.sub_found" = "%d legendas encontradas.";
+"osd.sub_downloading" = "Descarregando %d legendas";
 "osd.sub_downloaded" = "Legenda transferida";
 "osd.sub_saved" = "Legenda guardada";
 "osd.network_error" = "Erro de Rede";
@@ -138,8 +138,8 @@
 "osd.filter_added" = "Filtro Adicionado: %@";
 "osd.filter_removed" = "Filtro Removido";
 "osd.file_loop" = "Loop Single File";
-"osd.playlist_loop" = "Loop Playlist";
-"osd.no_loop" = "Disable Looping";
+"osd.playlist_loop" = "Repetir lista de reprodução";
+"osd.no_loop" = "Desativar Repetição";
 
 "preference.title" = "Definições";
 "preference.general" = "Geral";
@@ -174,14 +174,17 @@
 "preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
 "preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
 
+"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
+"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
+
 "menu.volume" = "Volume: %d";
 "menu.volume_muted" = "Volume: %d (Sem som)";
 "menu.audio_delay" = "Atraso de Áudio: %.2fs";
 "menu.sub_delay" = "Atraso da legenda: %.2fs";
-"menu.sub_hide" = "Hide Subtitles";
-"menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Secondary Subtitles";
-"menu.sub_second_show" = "Show Secondary Subtitles";
+"menu.sub_hide" = "Ocultar legendas";
+"menu.sub_show" = "Mostrar legendas";
+"menu.sub_second_hide" = "Ocultar legendas secundárias";
+"menu.sub_second_show" = "Mostrar legendas secundárias";
 "menu.fullscreen" = "Entrar em Ecrã Completo";
 "menu.exit_fullscreen" = "Sair do Ecrã Completo";
 "menu.pip" = "Usar Picture in Picture";
@@ -190,22 +193,22 @@
 "menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pausa";
 "menu.resume" = "Retomar";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "Velocidade: %@x";
 "menu.chapters" = "Mostrar painel de capítulos";
 "menu.hide_chapters" = "Hide Chapters Panel";
 "menu.playlist" = "Mostrar Painel da Lista de Reprodução";
 "menu.hide_playlist" = "Hide Playlist Panel";
-"menu.video" = "Show Video Panel";
-"menu.hide_video" = "Hide Video Panel";
-"menu.audio" = "Show Audio Panel";
-"menu.hide_audio" = "Hide Audio Panel";
-"menu.subtitles" = "Show Subtitles Panel";
-"menu.hide_subtitles" = "Hide Subtitles Panel";
+"menu.video" = "Mostrar painel de vídeo";
+"menu.hide_video" = "Ocultar painel de vídeo";
+"menu.audio" = "Mostrar painel de áudio";
+"menu.hide_audio" = "Ocultar painel de áudio";
+"menu.subtitles" = "Mostrar painel de legendas";
+"menu.hide_subtitles" = "Ocultar painel de legendas";
 
 "menu.seek_forward" = "Avançar %.0fs";
 "menu.seek_backward" = "Recuar %.0fs";
-"menu.speed_up" = "Speed Up by %@x";
-"menu.speed_down" = "Speed Down by %@x";
+"menu.speed_up" = "Acelerar em %@x";
+"menu.speed_down" = "Desacelerar em %@x";
 "menu.volume_up" = "Volume + %.0f%%";
 "menu.volume_down" = "Volume - %.0f%%";
 "menu.audio_delay_up" = "Atraso do áudio + %.1fs";
@@ -216,6 +219,14 @@
 "menu.crop_custom" = "Personalizado…";
 "menu.find_online_sub" = "Find Online Subtitles from %@";
 
+"menu.manage_plugins" = "Manage Plugins…";
+"menu.developer_tool" = "Developer Tool";
+"menu.more_plugin" = "More…";
+"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
+"menu.reload_plugins" = "Recarregar todos os Plugins";
+"menu.show_plugins_panel" = "Show Plugins Panel";
+"menu.hide_plugins_panel" = "Hide Plugins Panel";
+
 "track.audio" = "Áudio";
 "track.none" = "<None>";
 "track.sub" = "Legenda";
@@ -225,7 +236,7 @@
 "subtrack.no_external" = "Nenhuma Legenda Externa Encontrada";
 
 // Alerts
-"alert.beta_channel.title" = "Receber Atualizações para Versões Beta";
+"alert.beta_channel.title" = "Receber Atualizações beta";
 
 "alert.title_error" = "Erro";
 "alert.title_warning" = "Aviso";
@@ -245,7 +256,7 @@
 "alert.error_saving_file" = "Ocorreu um erro ao salvar %@: %@";
 "alert.error_deleting_file" = "Não foi possível apagar o ficheiro.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
 
 "alert.config.new.title" = "Nova configuração";
 "alert.config.new.message" = "Por favor digite um nome para a nova configuração.";
@@ -386,6 +397,7 @@
 "osc_toolbar.music_mode" = "Entrar no modo música";
 "osc_toolbar.sub_track" = "Selecionar faixa de legenda";
 "osc_toolbar.screenshot" = "Take a screenshot";
+"osc_toolbar.plugins" = "Show plugins panel";
 
 "mini_player.album_art" = "Alternar arte do álbum";
 "mini_player.loop" = "Repetir";

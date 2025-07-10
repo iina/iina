@@ -89,16 +89,16 @@
 "gfq-nW-dDu.title" = "ReplayGain:";
 
 /* Class = "NSTextFieldCell"; title = "Gain adjustment:"; ObjectID = "ZRL-b0-k1L"; */
-"ZRL-b0-k1L.title" = "Gain adjustment:";
+"ZRL-b0-k1L.title" = "התאמת Gain:";
 
 /* Class = "NSMenuItem"; title = "No adjustment"; ObjectID = "k7b-6o-lCK"; */
-"k7b-6o-lCK.title" = "No adjustment";
+"k7b-6o-lCK.title" = "אין התאמה";
 
 /* Class = "NSMenuItem"; title = "Track gain"; ObjectID = "w6E-lw-g7g"; */
-"w6E-lw-g7g.title" = "Track gain";
+"w6E-lw-g7g.title" = "Gain רצועה";
 
 /* Class = "NSMenuItem"; title = "Album gain"; ObjectID = "ZJJ-1o-ZGD"; */
-"ZJJ-1o-ZGD.title" = "Album gain";
+"ZJJ-1o-ZGD.title" = "Gain אלבום";
 
 /* Class = "NSTextFieldCell"; title = "Adjust volume gain according to ReplayGain values stored in the file metadata."; ObjectID = "y61-Ah-c92"; */
 "y61-Ah-c92.title" = "Adjust volume gain according to ReplayGain values stored in the file metadata.";
@@ -128,7 +128,7 @@
 "m2n-yd-a4n.title" = "Gain to apply if the file has no ReplayGain tags.";
 
 /* Class = "NSTextFieldCell"; title = "Audio driver:"; ObjectID = "Zco-Ba-Idk"; */
-"Zco-Ba-Idk.title" = "Audio driver:";
+"Zco-Ba-Idk.title" = "מנהל התקן של שמע:";
 
 /* Class = "NSTextFieldCell"; title = "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."; ObjectID = "2Md-pv-gSi"; */
 "2Md-pv-gSi.title" = "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays.";

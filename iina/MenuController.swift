@@ -478,18 +478,17 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updatePlaybackMenu() {
     let player = PlayerCore.active
-    let isDisplayingPlaylist = player.mainWindow.sideBarStatus == .playlist &&
-          player.mainWindow.playlistView.currentTab == .playlist
+    let playlistPanelVisible = player.isInMiniPlayer ? player.miniPlayer.isPlaylistVisible : player.mainWindow.sideBarStatus == .playlist
+    let isDisplayingPlaylist = playlistPanelVisible && player.mainWindow.playlistView.currentTab == .playlist
     playlistPanel?.title = isDisplayingPlaylist ? Constants.String.hidePlaylistPanel : Constants.String.playlistPanel
-    let isDisplayingChapters = player.mainWindow.sideBarStatus == .playlist &&
-          player.mainWindow.playlistView.currentTab == .chapters
+    let isDisplayingChapters = playlistPanelVisible && player.mainWindow.playlistView.currentTab == .chapters
     chapterPanel?.title = isDisplayingChapters ? Constants.String.hideChaptersPanel : Constants.String.chaptersPanel
     pause.title = player.info.state == .paused ? Constants.String.resume : Constants.String.pause
     abLoop.state = player.isABLoopActive ? .on : .off
     let loopMode = player.getLoopMode()
     fileLoop.state = loopMode == .file ? .on : .off
     playlistLoop.state = loopMode == .playlist ? .on : .off
-    let speed = player.info.playSpeed.string
+    let speed = player.info.playSpeed.groupedStringUpTo6Decimals
     speedIndicator.title = String(format: NSLocalizedString("menu.speed", comment: "Speed:"), speed)
   }
 
@@ -603,30 +602,31 @@ class MenuController: NSObject, NSMenuDelegate {
       var counter = 0
       var rootMenu: NSMenu! = pluginMenu
       let menuItems = (instance.plugin.globalInstance?.menuItems ?? []) + instance.menuItems
-      if menuItems.isEmpty { continue }
-      
-      if index != 0 {
-        pluginMenu.addItem(.separator())
-      }
 
-      if #available(macOS 14.0, *) {
-        pluginMenu.addItem(.sectionHeader(title: instance.plugin.name))
-      } else {
-        pluginMenu.addItem(withTitle: instance.plugin.name, enabled: false)
-      }
-
-      for item in menuItems {
-        if counter == 5 {
-          Logger.log("Please avoid adding too much first-level menu items. IINA will only display the first 5 of them.",
-                     level: .warning, subsystem: instance.subsystem)
-          let moreItem = NSMenuItem()
-          moreItem.title = NSLocalizedString("menu.more_plugin", comment: "More…")
-          rootMenu = NSMenu()
-          moreItem.submenu = rootMenu
-          pluginMenu.addItem(moreItem)
+      if !menuItems.isEmpty {
+        if index != 0 {
+          pluginMenu.addItem(.separator())
         }
-        add(menuItemDef: item, to: rootMenu, for: instance, errorList: &errorList)
-        counter += 1
+
+        if #available(macOS 14.0, *) {
+          pluginMenu.addItem(.sectionHeader(title: instance.plugin.name))
+        } else {
+          pluginMenu.addItem(withTitle: instance.plugin.name, enabled: false)
+        }
+
+        for item in menuItems {
+          if counter == 5 {
+            Logger.log("Please avoid adding too much first-level menu items. IINA will only display the first 5 of them.",
+                       level: .warning, subsystem: instance.subsystem)
+            let moreItem = NSMenuItem()
+            moreItem.title = NSLocalizedString("menu.more_plugin", comment: "More…")
+            rootMenu = NSMenu()
+            moreItem.submenu = rootMenu
+            pluginMenu.addItem(moreItem)
+          }
+          add(menuItemDef: item, to: rootMenu, for: instance, errorList: &errorList)
+          counter += 1
+        }
       }
 
       if #available(macOS 12.0, *) {
@@ -743,7 +743,7 @@ class MenuController: NSObject, NSMenuDelegate {
   }
 
   private func updateOpenMenuItems() {
-    if PlayerCore.playing.count == 0 {
+    if PlayerCore.nonIdle.count == 0 {
       open.title = stringForOpen
       openAlternative.title = stringForOpen
       openURL.title = stringForOpenURL
@@ -954,7 +954,7 @@ class MenuController: NSObject, NSMenuDelegate {
       case "speed_up",
         "speed_down":
         // Title format expects arg type: String
-        valObj = abs(value).string
+        valObj = abs(value).groupedStringUpTo6Decimals
       default:
         // Title format expects numeric arg
         valObj = abs(value)

@@ -64,6 +64,10 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     }
   }()
 
+  var playlistView: PlaylistViewController {
+    return player.mainWindow.playlistView
+  }
+
   override var mouseActionDisabledViews: [NSView?] {[backgroundView, playlistWrapperView] as [NSView?]}
 
   // MARK: - Initialization
@@ -171,7 +175,8 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
       player.overrideAutoSwitchToMusicMode = false
       player.switchBackFromMiniPlayer(automatically: true, showMainWindow: false)
     }
-    player.mainWindow.close()
+    player.stop()
+    player.events.emit(.windowWillClose)
   }
 
   // MARK: - Window delegate: Size
@@ -324,6 +329,17 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
 
   // MARK: - IBActions
 
+  func showPlaylistAction(_ tab: PlaylistViewController.TabViewType) {
+    if !isPlaylistVisible {
+      playlistView.pleaseSwitchToTab(tab)
+      togglePlaylist(self)
+    } else if playlistView.currentTab == tab {
+      togglePlaylist(self)
+    } else {
+      playlistView.pleaseSwitchToTab(tab)
+    }
+  }
+
   @IBAction func togglePlaylist(_ sender: Any) {
     guard let window = window else { return }
     if isPlaylistVisible {
@@ -333,7 +349,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     } else {
       // show
       isPlaylistVisible = true
-      player.mainWindow.playlistView.reloadData(playlist: true, chapters: true)
+      playlistView.reloadData(playlist: true, chapters: true)
 
       var newFrame = window.frame
       newFrame.origin.y -= DefaultPlaylistHeight

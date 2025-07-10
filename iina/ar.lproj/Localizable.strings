@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "انت تستخدم %@ النسخه التجريبية من IINA";
 "initial.beta.desc" = "قم بإلغاء تحديد \"تلقي تحديثات بيتا\" من التفضيلات - عام، وتثبيت إصدار مستقر من <a href=\"https://iina.io\">موقعنا الرسمي</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.nightly.desc" = "لا ينصح بنسخة البناء الليلي للاستخدام اليومي. في الوقت الراهن هذه النسخة لا تدعم التحديث التلقائي. الرجاء تحميل أحدث الإصدارات يدويا من موقعنا <a href=\"https://nightly.iina.io\">النسخة الليلية</a>.";
 "initial.debug.desc" = "عادة ما لا يتم تحسين إصدارات التصحيح للأداء، لذلك لا يوصى باستخدامها كمحرك أقراص يومي. إصدارات التصحيح لا تدعم التحديث التلقائي.";
 "initial.bug_report" = "الإبلاغ عبر <a href=\"https://github.com/iina/iina/issues\">GitHub مشكلات</a>.";
 
@@ -50,7 +50,7 @@
 "quicksetting.deinterlace" = "تشابك";
 "quicksetting.hdr" = "النطاق الديناميكي العالي HDR";
 "quicksetting.hide" = "إخفاء";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.reset_speed" = "إعادة تعيين السرعة إلى 1x";
 
 // EQ Presets
 "eq.preset.flat" = "مسطحة";
@@ -85,7 +85,7 @@
 "osd.pause" = "إيقاف مؤقت";
 "osd.resume" = "استئناف";
 "osd.volume" = "الصوت: %i";
-"osd.speed" = "Speed: %@x";
+"osd.speed" = "السرعة: %@x";
 "osd.aspect" = "نسبة العرض والارتفاع: %@";
 "osd.crop" = "قص صورة: %@";
 "osd.rotate" = "تدوير: %i°";
@@ -174,6 +174,9 @@
 "preference.sub_override_level.descriptive_text.strip" = "قم بتجريد جميع العلامات والأنماط من الترجمة بشكل جذري.";
 "preference.sub_override_level.descriptive_text.yes" = "تطبيق جميع إعدادات النمط في هذا القسم.";
 
+"preference.ytdl_plugin_not_installed" = "قم بتثبيت ملحق الوسائط عبر الإنترنت من \"الإضافات > تثبيت من GitHub\" للاستمتاع بميزات متقدمة مثل تحميل الفيديو وتحديثات yt-dlp تلقائية.";
+"preference.ytdl_plugin_installed" = "تم تعطيل دعم youtube-dl المدمج نظرًا لتثبيت إضافة الوسائط عبر الإنترنت.";
+
 "menu.volume" = "الصوت: %d";
 "menu.volume_muted" = "الحجم: %d (مكتمل)";
 "menu.audio_delay" = "تأخير الصوت: %.2fث";
@@ -190,7 +193,7 @@
 "menu.exit_mini_player" = "الخروج من وضع الموسيقى";
 "menu.pause" = "إيقاف مؤقت";
 "menu.resume" = "استئناف";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "السرعة: %@x";
 "menu.chapters" = "عرض لوحة الفصول";
 "menu.hide_chapters" = "إخفاء لوحة الفصول";
 "menu.playlist" = "عرض لوحة قائمة التشغيل";
@@ -204,8 +207,8 @@
 
 "menu.seek_forward" = "خطوة إلى الأمام %.0f ثانية";
 "menu.seek_backward" = "خطوة إلى الوراء %.0f ثانية";
-"menu.speed_up" = "Speed Up by %@x";
-"menu.speed_down" = "Speed Down by %@x";
+"menu.speed_up" = "تسريع ب %@x";
+"menu.speed_down" = "تبطيء ب %@x";
 "menu.volume_up" = "الصوت: %.0f";
 "menu.volume_down" = "الصوت: %.0f";
 "menu.audio_delay_up" = "تأخير الصوت: +%.1f ثانيه";
@@ -215,6 +218,14 @@
 
 "menu.crop_custom" = "مخصص…";
 "menu.find_online_sub" = "ابحث عن ترجمات على الإنترنت من %@";
+
+"menu.manage_plugins" = "إدارة الإضافات…";
+"menu.developer_tool" = "أدوات المطور";
+"menu.more_plugin" = "المزيد…";
+"menu.conflicting_shortcuts" = "اختصارات المفاتيح متعارضة…";
+"menu.reload_plugins" = "إعادة تحميل جميع الإضافات";
+"menu.show_plugins_panel" = "إظهار لوحة الإضافات";
+"menu.hide_plugins_panel" = "إخفاء لوحة الإضافات";
 
 "track.audio" = "الصوت";
 "track.none" = "<None>";
@@ -245,7 +256,7 @@
 "alert.error_saving_file" = "حدث خطأ في أثناء الحفظ %@: %@";
 "alert.error_deleting_file" = "لا يمكن حذف الملف.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "القيمة \"%@\" غير صالحة.\nالرجاء استخدام قيمة بين 10 و 10000، أو 0.";
 
 "alert.config.new.title" = "تكوين مصدر إدخال جديد";
 "alert.config.new.message" = "الرجاء إدخال اسم للتكوين الجديد.";
@@ -386,6 +397,7 @@
 "osc_toolbar.music_mode" = "الدخول إلى وضع الموسيقى";
 "osc_toolbar.sub_track" = "اختيار مسار الترجمة";
 "osc_toolbar.screenshot" = "خذ لقطة شاشة";
+"osc_toolbar.plugins" = "إظهار لوحة الإضافات";
 
 "mini_player.album_art" = "تبديل صورة الألبوم";
 "mini_player.loop" = "تكرار";

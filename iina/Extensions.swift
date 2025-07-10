@@ -8,6 +8,7 @@
 
 import Cocoa
 import CryptoKit
+import MediaPlayer
 
 extension NSSlider {
   /**
@@ -328,6 +329,19 @@ extension Double {
     }
   }
 
+  /// Returns this value rounded half down to an integral value.
+  ///
+  /// For example 0.5 will be rounded to 0.0, 0.51 will be rounded to 1.0.
+  /// - Note: This method is needed because at this time the Swift
+  ///     [rounded](https://developer.apple.com/documentation/swift/double/rounded(_:)) method does not
+  ///     support a [rounding rule](https://developer.apple.com/documentation/swift/floatingpointroundingrule)
+  ///     for [rounding half down](https://en.wikipedia.org/wiki/Rounding#Rounding_half_down).
+  /// - Returns: The integral value found by rounding this value.
+  func roundedHalfDown() -> Double {
+    let floor = floor(self)
+    return self <= floor + 0.5 ? floor : ceil(self)
+  }
+
   func roundedTo2Decimals() -> Double {
     let scaledUp = self * 1e2
     let scaledUpRounded = scaledUp.rounded(.up)
@@ -344,17 +358,13 @@ extension Double {
   /// a comma to signify the decimal):
   /// ```
   /// let num: Double = 12.34
-  /// let badStr = "Value is \(num)"          // badStr will *always* be "Value is 12.34"
-  /// let goodStr = "Value is \(num.string)"  // goodStr will be "Value is 12,34"
+  /// let badStr = "Value is \(num)"                                // badStr will *always* be "Value is 12.34"
+  /// let goodStr = "Value is \(num.groupedStringUpTo6Decimals)"  // goodStr will be "Value is 12,34"
   /// ```
   ///
-  /// Currently the output string is limited to 15 digits after the decimal. This should be more than
-  /// enough for any imaginable use right now, but the limit can and should be increased in the future if
-  /// needed. (It's not clear what the maximum allowed value for `NumberFormatter.maximumFractionDigits`
-  /// actually is. An attempt to set it equal to `NSIntegerMax` seemed to result in it being silently set to
-  /// `6` instead.)
-  var string: String {
-    return fmtDecimalMaxFractionDigits15.string(from: self as NSNumber) ?? "NaN"
+  /// Currently the output string is limited to 6 digits after the decimal. This matches the precision used by mpv's APIs.
+  var groupedStringUpTo6Decimals: String {
+    return fmtDecimalGroupingMaxFractionDigits6.string(from: self as NSNumber) ?? "NaN"
   }
 }
 
@@ -379,13 +389,16 @@ fileprivate let fmtDecimalMaxFractionDigits2: NumberFormatter = {
   return fmt
 }()
 
-fileprivate let fmtDecimalMaxFractionDigits15: NumberFormatter = {
+/// Formatter for `Double`.
+/// - Displays up to 6 digits after the decimal before rounding.
+/// - Omits trailing zeroes.
+/// - Uses grouping separator (e.g. comma) for large numbers.
+fileprivate let fmtDecimalGroupingMaxFractionDigits6: NumberFormatter = {
   let fmt = NumberFormatter()
   fmt.numberStyle = .decimal
   fmt.usesGroupingSeparator = true
-  fmt.maximumSignificantDigits = 25
   fmt.minimumFractionDigits = 0
-  fmt.maximumFractionDigits = 15
+  fmt.maximumFractionDigits = 6
   fmt.usesSignificantDigits = false
   return fmt
 }()
@@ -443,9 +456,13 @@ extension Data {
     }
   }
 
-  init<T>(bytesOf thing: T) {
-    var copyOfThing = thing // Hopefully CoW?
-    self.init(bytes: &copyOfThing, count: MemoryLayout.size(ofValue: thing))
+  init<T: BitwiseCopyable>(bytesOf thing: T) {
+    var mutableThing = thing
+    self.init(bytes: &mutableThing, count: MemoryLayout<T>.size)
+  }
+  
+  init<T: BitwiseCopyable>(bytesOf thing: [T]) {
+    self.init(bytes: thing, count: MemoryLayout<T>.size * thing.count)
   }
   
   func saveToFolder(_ url: URL, filename: String) -> URL? {
@@ -539,6 +556,18 @@ extension NSMenuItem {
 
 
 extension URL {
+  /// A string representing the URL in the format mpv uses for
+  /// [playlist/N/filename](https://mpv.io/manual/stable/#command-interface-playlist/n/filename].
+  var mpvStr: String {
+    guard isFileURL else {
+      return absoluteString
+    }
+    guard #available(macOS 13.0, *) else {
+      return path
+    }
+    return path(percentEncoded: false)
+  }
+
   var creationDate: Date? {
     (try? resourceValues(forKeys: [.creationDateKey]))?.creationDate
   }
@@ -565,6 +594,11 @@ extension NSTextField {
 }
 
 extension NSImage {
+  var cgImage: CGImage? {
+    var rect = CGRect.init(origin: .zero, size: self.size)
+    return self.cgImage(forProposedRect: &rect, context: nil, hints: nil)
+  }
+
   func tinted(_ tintColor: NSColor) -> NSImage {
     guard self.isTemplate else { return self }
 
@@ -578,6 +612,14 @@ extension NSImage {
     image.isTemplate = false
 
     return image
+  }
+
+  /// `cornerRadius`: if greater than 0, round the corners by this radius
+  func resized(newWidth: Int, newHeight: Int, cornerRadius: CGFloat = 0) -> NSImage {
+    if let cgImageNew = cgImage?.resized(newWidth: newWidth, newHeight: newHeight, cornerRadius: cornerRadius) {
+      return NSImage(cgImage: cgImageNew, size: NSSize(width: newWidth, height: newHeight))
+    }
+    return self
   }
 
   func rounded() -> NSImage {
@@ -703,6 +745,24 @@ extension NSAppearance {
   var isDark: Bool {
     return name == .darkAqua || name == .vibrantDark || name == .accessibilityHighContrastDarkAqua || name == .accessibilityHighContrastVibrantDark
   }
+
+  // Performs the given closure with this appearance by temporarily making this the current appearance.
+  func applyAppearanceFor<T>(_ closure: ()  -> T) -> T {
+    if #available(macOS 11.0, *) {
+      var result: T?
+      self.performAsCurrentDrawingAppearance {
+        result = closure()
+      }
+      return result!
+    } else {
+      let previousAppearance = NSAppearance.current
+      NSAppearance.current = self
+      defer {
+        NSAppearance.current = previousAppearance
+      }
+      return closure()
+    }
+  }
 }
 
 extension NSScreen {
@@ -777,5 +837,95 @@ extension Process {
     process.waitUntilExit()
 
     return (process, stdout, stderr)
+  }
+}
+
+extension CGImage {
+  var nsImage: NSImage { NSImage(cgImage: self, size: size) }
+  var size: CGSize { CGSize(width: width, height: height) }
+
+  /// `cornerRadius`: if greater than 0, round the corners by this radius
+  func resized(newWidth: Int, newHeight: Int, cornerRadius: CGFloat = 0) -> CGImage {
+    guard newWidth != width || newHeight != height else {
+      return self
+    }
+
+    guard newWidth > 0, newHeight > 0 else {
+      Logger.fatal("NSImage.resized: invalid width (\(newWidth)) or height (\(newHeight)) - both must be greater than 0")
+    }
+
+    // Use raw CoreGraphics calls instead of their NS equivalents. They are > 10x faster, and only downside is that the image's
+    // dimensions must be integer values instead of decimals.
+    let newImage = CGImage.buildBitmapImage(width: Int(newWidth), height: Int(newHeight)) { cgContext in
+      let outputRect = CGRect(x: 0, y: 0, width: newWidth, height: newHeight)
+      if cornerRadius > 0.0 {
+        cgContext.beginPath()
+        cgContext.addPath(CGPath(roundedRect: outputRect, cornerWidth: cornerRadius, cornerHeight: cornerRadius, transform: nil))
+        cgContext.closePath()
+        cgContext.clip()
+      }
+      cgContext.draw(self, in: outputRect)
+    }
+
+    return newImage
+  }
+
+  /// Builds a bitmap image efficiently using CoreGraphics APIs.
+  ///
+  /// If it's found useful for any more situations, should put in its own class
+  static func buildBitmapImage(width: Int, height: Int, _ drawingCalls: (CGContext) -> Void) -> CGImage {
+    guard let compositeImageRep = CGImage.makeNewImgRep(width: width, height: height) else {
+      Logger.fatal("DrawImageInBitmapImageContext: Failed to create NSBitmapImageRep!")
+    }
+
+    guard let context = NSGraphicsContext(bitmapImageRep: compositeImageRep) else {
+      Logger.fatal("DrawImageInBitmapImageContext: Failed to create NSGraphicsContext!")
+    }
+
+    context.cgContext.interpolationQuality = .high
+    drawingCalls(context.cgContext)
+
+    return compositeImageRep.cgImage!
+  }
+
+  /// Creates RGB image with alpha channel
+  static func makeNewImgRep(width: Int, height: Int) -> NSBitmapImageRep? {
+    return NSBitmapImageRep(
+      bitmapDataPlanes: nil,
+      pixelsWide: width,
+      pixelsHigh: height,
+      bitsPerSample: 8,
+      samplesPerPixel: 4,
+      hasAlpha: true,
+      isPlanar: false,
+      colorSpaceName: NSColorSpaceName.calibratedRGB,
+      bytesPerRow: 0,
+      bitsPerPixel: 0)
+  }
+}
+
+extension CGSize {
+  var heightInt: Int { Int(height) }
+  var widthInt: Int { Int(width) }
+
+  /// Crops the current size to fit within a target aspect ratio, reducing either the width or height to match the aspect ratio of the
+  /// target rectangle.
+  /// - Parameter targetAspect: A rectangle or size structure that contains the desired aspect ratio.
+  /// - Returns: The cropped `NSSize` that fits within the given aspect ratio.
+  func crop(withAspect targetAspect: CGFloat) -> NSSize {
+    if aspect > targetAspect {  // self is wider, crop width, use same height
+      return NSSize(width: round(height * targetAspect), height: height)
+    } else {
+      return NSSize(width: width, height: round(width / targetAspect))
+    }
+  }
+
+  func getCropRect(withAspect aspect: CGFloat) -> NSRect {
+    let croppedSize = crop(withAspect: aspect)
+    let cropped = NSMakeRect(round((width - croppedSize.width) / 2),
+                             round((height - croppedSize.height) / 2),
+                             croppedSize.width,
+                             croppedSize.height)
+    return cropped
   }
 }

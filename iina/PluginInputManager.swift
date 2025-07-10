@@ -67,7 +67,6 @@ class PluginInputManager: NSObject {
       let managed = JSManagedValue(value: callback)!
       listeners[input]![event] = Listener(callback: managed,
                                           priority: Priority(rawValue: priority))
-      print("Added \(managed)")
       JSContext.current()!.virtualMachine.addManagedReference(managed, withOwner: owner)
     }
   }

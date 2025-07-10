@@ -370,10 +370,28 @@ return -1;\
       duration = pFormatCtx->duration;
   }
 
+  // In addition to the duration IINA is interested metadata tags, especially the title tag. In many
+  // formats metadata is attached to the container itself. However in Ogg files metadata is attached
+  // to the stream. If the title tag is not found in the metadata from the container then search for
+  // an audio stream. If an audio stream with metadata containing a title tag is found then use the
+  // metadata from the stream instead of from the container. This addresses issue #5314.
+  AVDictionary *metadata = pFormatCtx->metadata;
+  if (av_dict_get(metadata, "title", NULL, 0) == NULL) {
+    ret = av_find_best_stream(pFormatCtx, AVMEDIA_TYPE_AUDIO, -1, -1, NULL, 0);
+    if (ret < 0) {
+      // Don't report an error when there isn't an audio stream.
+      if (ret != AVERROR_STREAM_NOT_FOUND) {
+        LOG_ERROR(@"Error when probing %@ to obtain best stream: %s (%d)", file, av_err2str(ret), ret);
+      }
+    } else if (av_dict_get(pFormatCtx->streams[ret]->metadata, "title", NULL, 0) != NULL) {
+      metadata = pFormatCtx->streams[ret]->metadata;
+    }
+  }
+
   NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
   info[@"@iina_duration"] = duration == -1 ? [NSNumber numberWithInt:-1] : [NSNumber numberWithDouble:(double)duration / AV_TIME_BASE];
   AVDictionaryEntry *tag = NULL;
-  while ((tag = av_dict_get(pFormatCtx->metadata, "", tag, AV_DICT_IGNORE_SUFFIX)))
+  while ((tag = av_dict_get(metadata, "", tag, AV_DICT_IGNORE_SUFFIX)))
     info[[NSString stringWithCString:tag->key encoding:NSUTF8StringEncoding]] = [NSString stringWithCString:tag->value encoding:NSUTF8StringEncoding];
 
   avformat_close_input(&pFormatCtx);
@@ -622,8 +640,10 @@ return -1;\
           case AVCOL_TRC_ARIB_STD_B67:
             if (@available(macOS 11.0, *)) {
               cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2100_HLG);
-            } else {
+            } else if (@available(macOS 10.15.6, *)) {
               cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2020_HLG);
+            } else {
+              cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2020);
             }
             break;
           case AVCOL_TRC_SMPTE2084:
@@ -693,6 +713,65 @@ return -1;\
     av_frame_free(&pFrame);
     av_packet_free(&packet);
     avcodec_free_context(&pCodecCtx);
+    avformat_close_input(&pFormatCtx);
+  }
+}
+
+// MARK: - Media Artwork
+
++ (NSImage *)readArtworkFromURL:(nonnull NSURL *)url
+{
+  AVFormatContext *pFormatCtx = NULL;
+
+  @try {
+    int ret = avformat_open_input(&pFormatCtx, url.fileSystemRepresentation, NULL, NULL);
+    if (ret < 0) {
+      LOG_ERROR(@"Failed to open file %@ when searching for artwork: %s (%d)", url, av_err2str(ret), ret);
+      return NULL;
+    }
+
+    ret = avformat_find_stream_info(pFormatCtx, NULL);
+    if (ret < 0) {
+      LOG_ERROR(@"Failed to obtain stream info from file %@ when searching for artwork: %s (%d)",
+                url, av_err2str(ret), ret);
+      return NULL;
+    }
+
+    // Search the streams for one that contains front cover artwork.
+    AVPacket* packet = NULL;
+    for (int i = 0; i < pFormatCtx->nb_streams; i++) {
+      AVStream* stream = pFormatCtx->streams[i];
+
+      // For this stream to be cover artwork it must be an attached picture (APIC).
+      if ((stream->disposition & AV_DISPOSITION_ATTACHED_PIC) == 0) { continue; }
+
+      // The stream must contain metadata with the key "title" and value "thumbnail".
+      AVDictionaryEntry *tag = NULL;
+      tag = av_dict_get(stream->metadata, "title", NULL, 0);
+      if (tag == NULL || strcmp(tag->value, "thumbnail") != 0) { continue; }
+
+      // As well as metadata with the key "comment" and value "Cover (front)".
+      tag = av_dict_get(stream->metadata, "comment", NULL, 0);
+      if (tag == NULL || strcmp(tag->value, "Cover (front)") != 0) { continue; }
+
+      // Found front cover artwork.
+      packet = &stream->attached_pic;
+      break;
+    }
+
+    if (!packet) {
+      return NULL;
+    }
+
+    // Form an image from the stream's data.
+    NSData *data = [[NSData alloc] initWithBytes:packet->data length:packet->size];
+    NSImage *image = [[NSImage alloc] initWithData:data];
+    if (!image) {
+      LOG_ERROR(@"Cannot create image from artwork for file: %@", url);
+    }
+    return image;
+  }
+  @finally {
     avformat_close_input(&pFormatCtx);
   }
 }

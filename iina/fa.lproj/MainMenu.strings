@@ -104,19 +104,19 @@
 "BtY-iQ-6Pf.title" = "اشتراك گذاری";
 
 /* Class = "NSMenuItem"; title = "Advanced Screenshot…"; ObjectID = "CKi-JE-yLT"; */
-"CKi-JE-yLT.title" = "Advanced Screenshot…";
+"CKi-JE-yLT.title" = "تنظیمات پیشرفته اسکرین شات…";
 
 /* Class = "NSMenuItem"; title = "File Loop"; ObjectID = "D1y-kv-85s"; */
-"D1y-kv-85s.title" = "File Loop";
+"D1y-kv-85s.title" = "تکرار فایل";
 
 /* Class = "NSMenu"; title = "Audio Track"; ObjectID = "DRb-Y8-xir"; */
 "DRb-Y8-xir.title" = "فایل صوتی";
 
 /* Class = "NSMenuItem"; title = "Load External Audio…"; ObjectID = "3xl-iD-85w"; */
-"3xl-iD-85w.title" = "Load External Audio…";
+"3xl-iD-85w.title" = "بارگذاری فایل صدا…";
 
 /* Class = "NSMenuItem"; title = "Speed Down to 0.9x"; ObjectID = "DUP-nm-BJt"; */
-"DUP-nm-BJt.title" = "Speed Down to 0.9x";
+"DUP-nm-BJt.title" = "پایین آوردن سرعت به 0.9x";
 
 /* Class = "NSMenuItem"; title = "Close"; ObjectID = "DVo-aG-piG"; */
 "DVo-aG-piG.title" = "بستن";
@@ -167,7 +167,7 @@
 "Hal-18-Tnf.title" = "اندازه دو برابر";
 
 /* Class = "NSMenuItem"; title = "Speed Down to 0.5x"; ObjectID = "HsE-LN-Nd6"; */
-"HsE-LN-Nd6.title" = "Speed Down to 0.5x";
+"HsE-LN-Nd6.title" = "پایین آوردن سرعت به 0.5x";
 
 /* Class = "NSMenu"; title = "Video"; ObjectID = "HyV-fh-RgO"; */
 "HyV-fh-RgO.title" = "ویدئو";
@@ -179,7 +179,7 @@
 "IXq-yq-uDF.title" = "دستگاه صوتی";
 
 /* Class = "NSMenuItem"; title = "Horizontal (Mirror)"; ObjectID = "JJq-qH-toq"; */
-"JJq-qH-toq.title" = "Horizontal (Mirror)";
+"JJq-qH-toq.title" = "";
 
 /* Class = "NSMenuItem"; title = "Open…"; ObjectID = "Kby-lQ-HCW"; */
 "Kby-lQ-HCW.title" = "باز کردن…";
@@ -194,10 +194,10 @@
 "LND-1n-DU2.title" = "تاریخچه پخش";
 
 /* Class = "NSMenuItem"; title = "Audio Delay - 0.5s"; ObjectID = "Lc4-4W-thE"; */
-"Lc4-4W-thE.title" = "Audio Delay - 0.5s";
+"Lc4-4W-thE.title" = "تاخیر صدا + 0.5 ثانيه";
 
 /* Class = "NSMenuItem"; title = "Speed Up to 2x"; ObjectID = "Lqa-OG-EEg"; */
-"Lqa-OG-EEg.title" = "Speed Up to 2x";
+"Lqa-OG-EEg.title" = "بالا بردن سرعت به مقدار x";
 
 /* Class = "NSMenuItem"; title = "Subtitle Delay - 0.5s"; ObjectID = "LsU-Qz-dax"; */
 "LsU-Qz-dax.title" = "Subtitle Delay - 0.5s";
@@ -317,7 +317,7 @@
 "bGN-E4-V5A.title" = "Music Mode";
 
 /* Class = "NSMenuItem"; title = "Open URL in New Window…"; ObjectID = "bfB-bn-KeM"; */
-"bfB-bn-KeM.title" = "Open URL in New Window…";
+"bfB-bn-KeM.title" = "باز کردن در پنجره جدید…";
 
 /* Class = "NSMenu"; title = "File"; ObjectID = "bib-Uj-vzu"; */
 "bib-Uj-vzu.title" = "فایل";
@@ -326,13 +326,13 @@
 "bwz-r0-peR.title" = "بازرس";
 
 /* Class = "NSMenuItem"; title = "Normal Size (Retina)"; ObjectID = "c1x-bx-69F"; */
-"c1x-bx-69F.title" = "Normal Size (Retina)";
+"c1x-bx-69F.title" = "اندازه معمولی(ریتنا)";
 
 /* Class = "NSMenuItem"; title = "Volume + 1%"; ObjectID = "c6Y-0e-vgf"; */
-"c6Y-0e-vgf.title" = "Volume + 1%";
+"c6Y-0e-vgf.title" = "صدا + %۱";
 
 /* Class = "NSMenuItem"; title = "Show Current File in Finder"; ObjectID = "che-dy-QUU"; */
-"che-dy-QUU.title" = "Show Current File in Finder";
+"che-dy-QUU.title" = "نمایش فایل فعلی در فایندر";
 
 /* Class = "NSMenuItem"; title = "Aspect Ratio"; ObjectID = "d15-8v-dXA"; */
 "d15-8v-dXA.title" = "نسبت تصویر";
@@ -347,28 +347,28 @@
 "dMs-cI-mzQ.title" = "فایل";
 
 /* Class = "NSMenuItem"; title = "Stop and Clear Playlists"; ObjectID = "deS-xK-iBb"; */
-"deS-xK-iBb.title" = "Stop and Clear Playlists";
+"deS-xK-iBb.title" = "توقف و پاک کردن لیست";
 
 /* Class = "NSMenu"; title = "Crop"; ObjectID = "eo2-Tt-SLx"; */
 "eo2-Tt-SLx.title" = "برش دادن";
 
 /* Class = "NSMenuItem"; title = "Audio Delay:"; ObjectID = "foC-r3-8mp"; */
-"foC-r3-8mp.title" = "Audio Delay:";
+"foC-r3-8mp.title" = "تأخیر صدا:";
 
 /* Class = "NSMenuItem"; title = "Subtitle Delay - 0.1s"; ObjectID = "fyL-tr-6Bu"; */
-"fyL-tr-6Bu.title" = "Subtitle Delay - 0.1s";
+"fyL-tr-6Bu.title" = "تاخیر در زیرنویس + 0.1s";
 
 /* Class = "NSMenuItem"; title = "Check for Updates…"; ObjectID = "gMo-qL-m08"; */
-"gMo-qL-m08.title" = "Check for Updates…";
+"gMo-qL-m08.title" = "بررسی برای بروزرسانی…";
 
 /* Class = "NSMenuItem"; title = "Delete"; ObjectID = "h9w-Rj-Hm1"; */
 "h9w-Rj-Hm1.title" = "حذف";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "hz9-B4-Xy5"; */
-"hz9-B4-Xy5.title" = "Services";
+"hz9-B4-Xy5.title" = "خدمات";
 
 /* Class = "NSMenuItem"; title = "A-B Loop"; ObjectID = "i3P-Xw-8D7"; */
-"i3P-Xw-8D7.title" = "A-B Loop";
+"i3P-Xw-8D7.title" = "";
 
 /* Class = "NSMenuItem"; title = "Volume:"; ObjectID = "iQF-1S-9EK"; */
 "iQF-1S-9EK.title" = "صدا:";
@@ -380,16 +380,16 @@
 "jxT-CU-nIS.title" = "پخش";
 
 /* Class = "NSMenuItem"; title = "Load External Subtitle…"; ObjectID = "k6x-hf-ATi"; */
-"k6x-hf-ATi.title" = "Load External Subtitle…";
+"k6x-hf-ATi.title" = "بارگزاری فایل زیرنویس…";
 
 /* Class = "NSMenuItem"; title = "Bigger Size"; ObjectID = "lDC-IC-peP"; */
-"lDC-IC-peP.title" = "Bigger Size";
+"lDC-IC-peP.title" = "سایز بزرگتر";
 
 /* Class = "NSMenuItem"; title = "Audio"; ObjectID = "lYN-0x-lzT"; */
 "lYN-0x-lzT.title" = "صدا";
 
 /* Class = "NSMenuItem"; title = "Audio Delay + 0.1s"; ObjectID = "lew-3S-oGY"; */
-"lew-3S-oGY.title" = "Audio Delay + 0.1s";
+"lew-3S-oGY.title" = "تاخیر صوت + ۰. ۱ ثانيه";
 
 /* Class = "NSMenuItem"; title = "Go to Screenshot Folder"; ObjectID = "lj0-Oo-7nB"; */
 "lj0-Oo-7nB.title" = "Go to Screenshot Folder";

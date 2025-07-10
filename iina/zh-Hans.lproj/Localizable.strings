@@ -50,7 +50,7 @@
 "quicksetting.deinterlace" = "反交错";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "隐藏";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.reset_speed" = "";
 
 // EQ Presets
 "eq.preset.flat" = "平坦";
@@ -78,14 +78,14 @@
 
 "alert.eq.new_profile.title" = "新EQ 配置文件";
 "alert.eq.new_profile.message" = "请输入个人资料名称。";
-"alert.eq.rename.title" = "重命名当前的配置文件";
+"alert.eq.rename.title" = "重命名当前配置文件";
 "alert.eq.rename.message" = "请输入新的配置文件名称：";
 
 // OSDMessage.swift
 "osd.pause" = "暂停";
 "osd.resume" = "继续";
 "osd.volume" = "音量：%i";
-"osd.speed" = "Speed: %@x";
+"osd.speed" = "速度：%@x";
 "osd.aspect" = "长宽比：%@";
 "osd.crop" = "裁切：%@";
 "osd.rotate" = "旋转：%i°";
@@ -174,6 +174,9 @@
 "preference.sub_override_level.descriptive_text.strip" = "从字幕中彻底去掉所有的ASS标签和样式。";
 "preference.sub_override_level.descriptive_text.yes" = "应用本节中的所有样式设置。";
 
+"preference.ytdl_plugin_not_installed" = "从 \"Plugins > 安装 GitHub\" 中安装在线媒体插件以享受高级功能，例如视频下载和自动yt-dlp 更新。";
+"preference.ytdl_plugin_installed" = "由于安装了在线媒体插件，内置的 youtube-dl 支持已被禁用。";
+
 "menu.volume" = "音量: %d";
 "menu.volume_muted" = "音量：%d （静音）";
 "menu.audio_delay" = "音频延迟: %.2f秒";
@@ -190,7 +193,7 @@
 "menu.exit_mini_player" = "退出音乐模式";
 "menu.pause" = "暂停";
 "menu.resume" = "继续";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "播放速度";
 "menu.chapters" = "显示章节面板";
 "menu.hide_chapters" = "隐藏章节面板";
 "menu.playlist" = "显示播放列表面板";
@@ -204,8 +207,8 @@
 
 "menu.seek_forward" = "渐进 %.0f秒";
 "menu.seek_backward" = "渐退 %.0f秒";
-"menu.speed_up" = "Speed Up by %@x";
-"menu.speed_down" = "Speed Down by %@x";
+"menu.speed_up" = "加快播放速度快捷键";
+"menu.speed_down" = "降低播放速度快捷键";
 "menu.volume_up" = "音量 + %.0f%%";
 "menu.volume_down" = "音量 - %.0f%%";
 "menu.audio_delay_up" = "音频延迟 + %.1f秒";
@@ -215,6 +218,14 @@
 
 "menu.crop_custom" = "自定义…";
 "menu.find_online_sub" = "从 %@ 查找在线字幕";
+
+"menu.manage_plugins" = "菜单管理器插件";
+"menu.developer_tool" = "菜单开发者工具";
+"menu.more_plugin" = "增加插件";
+"menu.conflicting_shortcuts" = "相互冲突的快捷键...";
+"menu.reload_plugins" = "重新加载所有插件";
+"menu.show_plugins_panel" = "显示插件面板";
+"menu.hide_plugins_panel" = "隐藏插件面板";
 
 "track.audio" = "音频";
 "track.none" = "<无>";
@@ -245,7 +256,7 @@
 "alert.error_saving_file" = "保存 %@时出错： %@";
 "alert.error_deleting_file" = "无法删除该文件。";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "数值 “%@” 是无效的。\n请提供一个介于 10 和 10000 之间的数值，或 0。";
 
 "alert.config.new.title" = "新建输入配置";
 "alert.config.new.message" = "请为此新配置输入名称。";
@@ -386,6 +397,7 @@
 "osc_toolbar.music_mode" = "进入音乐模式";
 "osc_toolbar.sub_track" = "选择字幕轨道";
 "osc_toolbar.screenshot" = "截图";
+"osc_toolbar.plugins" = "显示插件面板";
 
 "mini_player.album_art" = "切换专辑封面";
 "mini_player.loop" = "重复";

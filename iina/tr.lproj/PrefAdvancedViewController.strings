@@ -5,19 +5,19 @@
 "7ml-VU-xWv.title" = "Gelişmiş ayarları etkinleştir";
 
 /* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "E3I-Q7-9t1"; */
-"E3I-Q7-9t1.headerCell.title" = "İsim";
+"E3I-Q7-9t1.headerCell.title" = "Ad";
 
 /* Class = "NSTextFieldCell"; title = "The following settings will require restarting IINA to take effect."; ObjectID = "HMa-Vz-EUk"; */
-"HMa-Vz-EUk.title" = "Bu ayarların etkinleşmesi için IINA'nın yeniden başlatılması gerekecek.";
+"HMa-Vz-EUk.title" = "Bu ayarların etkinleştirilmesi için IINA’nın yeniden başlatılması gerekecektir.";
 
-/* Class = "NSButtonCell"; title = "Open log directory"; ObjectID = "JDA-g3-RNX"; */
-"JDA-g3-RNX.title" = "Günlük dizinini aç";
+/* Class = "NSButtonCell"; title = "Open Log Directory"; ObjectID = "JDA-g3-RNX"; */
+"JDA-g3-RNX.title" = "Open Log Directory";
 
 /* Class = "NSButtonCell"; title = "Enable logging to file"; ObjectID = "LCd-uY-Yze"; */
 "LCd-uY-Yze.title" = "Günlük kaydını etkinleştir";
 
-/* Class = "NSButtonCell"; title = "Choose directory…"; ObjectID = "MRT-u8-xTX"; */
-"MRT-u8-xTX.title" = "Dizin seç…";
+/* Class = "NSButtonCell"; title = "Choose…"; ObjectID = "MRT-u8-xTX"; */
+"MRT-u8-xTX.title" = "Seç…";
 
 /* Class = "NSTextFieldCell"; title = "Settings"; ObjectID = "Qmc-Tb-d7d"; */
 "Qmc-Tb-d7d.title" = "Ayarlar";
@@ -26,22 +26,22 @@
 "SX9-fy-bss.headerCell.title" = "Değer";
 
 /* Class = "NSButtonCell"; title = "Use config directory:"; ObjectID = "ehL-8Y-G8h"; */
-"ehL-8Y-G8h.title" = "yapılandırma dizinini kullan:";
+"ehL-8Y-G8h.title" = "Şu yapılandırma dizinini kullan:";
 
 /* Class = "NSButtonCell"; title = "Use mpv's OSD"; ObjectID = "phK-g9-Vbg"; */
-"phK-g9-Vbg.title" = "Mpv 'nin OSD 'sini kullanın";
+"phK-g9-Vbg.title" = "mpv’nin OSD’sini kullan";
 
 /* Class = "NSTextFieldCell"; title = "Log level:"; ObjectID = "nFf-vh-bNd"; */
-"nFf-vh-bNd.title" = "Kayıt Düzeyi:";
+"nFf-vh-bNd.title" = "Kayıt düzeyi:";
 
-/* Class = "NSButtonCell"; title = "Show log viewer"; ObjectID = "Owx-92-Ogg"; */
-"Owx-92-Ogg.title" = "Kayıt Kaydediciyi Görüntüle";
+/* Class = "NSButtonCell"; title = "Show Log Viewer"; ObjectID = "Owx-92-Ogg"; */
+"Owx-92-Ogg.title" = "Show Log Viewer";
 
 /* Class = "NSMenuItem"; title = "Verbose"; ObjectID = "S9M-yY-q0w"; */
 "S9M-yY-q0w.title" = "Ayrıntılı";
 
 /* Class = "NSMenuItem"; title = "Debug"; ObjectID = "hGq-ek-VHd"; */
-"hGq-ek-VHd.title" = "Hata ayıklama";
+"hGq-ek-VHd.title" = "Hata ayıkla";
 
 /* Class = "NSMenuItem"; title = "Warning"; ObjectID = "exP-JC-h7t"; */
 "exP-JC-h7t.title" = "Uyarı";

@@ -56,79 +56,79 @@
 "3g4-jW-uJd.title" = "Indlæs ICC profil";
 
 /* Class = "NSTextFieldCell"; title = "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"; ObjectID = "M2M-of-gjd"; */
-"M2M-of-gjd.title" = "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)";
+"M2M-of-gjd.title" = "Indlæs ICC-profilen for nuværende skærm og brug den til at transformere video-RGB til skærm-output. (Kun for SDR-tilstand)";
 
 /* Class = "NSButtonCell"; title = "Enable HDR support"; ObjectID = "R7Z-9c-vPJ"; */
-"R7Z-9c-vPJ.title" = "Enable HDR support";
+"R7Z-9c-vPJ.title" = "Slå HDR-understøttelse til";
 
 /* Class = "NSTextFieldCell"; title = "Enable HDR mode by default when playing HDR videos."; ObjectID = "ZgQ-bc-yEE"; */
-"ZgQ-bc-yEE.title" = "Enable HDR mode by default when playing HDR videos.";
+"ZgQ-bc-yEE.title" = "Slå HDR-tilstand til som standard når HDR-videoer afspilles.";
 
 /* Class = "NSButtonCell"; title = "Enable tone mapping"; ObjectID = "a5Y-gU-JTj"; */
-"a5Y-gU-JTj.title" = "Enable tone mapping";
+"a5Y-gU-JTj.title" = "Slå tonekortlægning til";
 
 /* Class = "NSTextFieldCell"; title = "Enable tone mapping images onto the display"; ObjectID = "mNn-cb-IVw"; */
-"mNn-cb-IVw.title" = "Enable tone mapping images onto the display";
+"mNn-cb-IVw.title" = "Slå tonekortlægning af billeder på skærmen til";
 
 /* Class = "NSTextFieldCell"; title = "Target peak:"; ObjectID = "xVk-OA-kOf"; */
-"xVk-OA-kOf.title" = "Target peak:";
+"xVk-OA-kOf.title" = "Mål for maksimal værdi:";
 
 /* Class = "NSTextFieldCell"; title = "nits"; ObjectID = "baO-xy-7hD"; */
 "baO-xy-7hD.title" = "nits";
 
 /* Class = "NSTextFieldCell"; title = "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."; ObjectID = "aTt-aZ-rjK"; */
-"aTt-aZ-rjK.title" = "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400.";
+"aTt-aZ-rjK.title" = "Målt maksimal lysstyrke for skærmen. Hvis sat til 0, finder IINA denne værdi. Hvis dette mislykkes, sætter IINA målet for maksimal værdi til 400.";
 
 /* Class = "NSTextFieldCell"; title = "Algorithm:"; ObjectID = "qzI-rq-PqO"; */
-"qzI-rq-PqO.title" = "Algorithm:";
+"qzI-rq-PqO.title" = "Algoritme:";
 
 /* Class = "NSTextFieldCell"; title = "Algorithm to use for tone mapping images onto the display."; ObjectID = "szA-8r-plt"; */
-"szA-8r-plt.title" = "Algorithm to use for tone mapping images onto the display.";
+"szA-8r-plt.title" = "Algoritme der bruges til tonekortlægning af billeder på skærmen";
 
 /* Class = "NSTextFieldCell"; title = "ReplayGain:"; ObjectID = "gfq-nW-dDu"; */
-"gfq-nW-dDu.title" = "ReplayGain:";
+"gfq-nW-dDu.title" = "Afspilningsforstærkning:";
 
 /* Class = "NSTextFieldCell"; title = "Gain adjustment:"; ObjectID = "ZRL-b0-k1L"; */
-"ZRL-b0-k1L.title" = "Gain adjustment:";
+"ZRL-b0-k1L.title" = "Forstærkningsjustering:";
 
 /* Class = "NSMenuItem"; title = "No adjustment"; ObjectID = "k7b-6o-lCK"; */
-"k7b-6o-lCK.title" = "No adjustment";
+"k7b-6o-lCK.title" = "Ingen justering";
 
 /* Class = "NSMenuItem"; title = "Track gain"; ObjectID = "w6E-lw-g7g"; */
-"w6E-lw-g7g.title" = "Track gain";
+"w6E-lw-g7g.title" = "Sporforstærkning";
 
 /* Class = "NSMenuItem"; title = "Album gain"; ObjectID = "ZJJ-1o-ZGD"; */
-"ZJJ-1o-ZGD.title" = "Album gain";
+"ZJJ-1o-ZGD.title" = "Albumforstærkning";
 
 /* Class = "NSTextFieldCell"; title = "Adjust volume gain according to ReplayGain values stored in the file metadata."; ObjectID = "y61-Ah-c92"; */
-"y61-Ah-c92.title" = "Adjust volume gain according to ReplayGain values stored in the file metadata.";
+"y61-Ah-c92.title" = "Juster lydstyrkeforøgelse i henhold til afspilningsforstærknings-værdier gemt i filens metadata.";
 
 /* Class = "NSTextFieldCell"; title = "Preamp gain:"; ObjectID = "9Q0-hw-PdU"; */
-"9Q0-hw-PdU.title" = "Preamp gain:";
+"9Q0-hw-PdU.title" = "Forforstærkningsforøgelse:";
 
 /* Class = "NSTextFieldCell"; title = "dB"; ObjectID = "Bew-Pv-igg"; */
 "Bew-Pv-igg.title" = "dB";
 
 /* Class = "NSTextFieldCell"; title = "Pre-amplification gain to apply to the ReplayGain gain."; ObjectID = "rIW-XP-zGZ"; */
-"rIW-XP-zGZ.title" = "Pre-amplification gain to apply to the ReplayGain gain.";
+"rIW-XP-zGZ.title" = "Forforstærknings-forstærkning, der anvendes på afspilningsforstærkningen.";
 
 /* Class = "NSButtonCell"; title = "Allow the volume gain to clip"; ObjectID = "J3e-oT-fy9"; */
-"J3e-oT-fy9.title" = "Allow the volume gain to clip";
+"J3e-oT-fy9.title" = "Tillad, at lydstyrkeforøgelsen klipper.";
 
 /* Class = "NSTextFieldCell"; title = "If this option is not enabled, clipping will be prevented by lowering the gain."; ObjectID = "HQV-tY-NMj"; */
-"HQV-tY-NMj.title" = "If this option is not enabled, clipping will be prevented by lowering the gain.";
+"HQV-tY-NMj.title" = "Hvis denne indstilling ikke er slået til, så bliver klip i lyden forhindret ved at mindske lydstyrkeforøgelsen.";
 
 /* Class = "NSTextFieldCell"; title = "Fallback:"; ObjectID = "fOz-6g-MhS"; */
-"fOz-6g-MhS.title" = "Fallback:";
+"fOz-6g-MhS.title" = "Tilbagefald:";
 
 /* Class = "NSTextFieldCell"; title = "dB"; ObjectID = "ovT-D3-3jS"; */
 "ovT-D3-3jS.title" = "dB";
 
 /* Class = "NSTextFieldCell"; title = "Gain to apply if the file has no ReplayGain tags."; ObjectID = "m2n-yd-a4n"; */
-"m2n-yd-a4n.title" = "Gain to apply if the file has no ReplayGain tags.";
+"m2n-yd-a4n.title" = "Forstærkning, der anvendes, hvis filen ikke har afspilningsforstærknings-mærker.";
 
 /* Class = "NSTextFieldCell"; title = "Audio driver:"; ObjectID = "Zco-Ba-Idk"; */
-"Zco-Ba-Idk.title" = "Audio driver:";
+"Zco-Ba-Idk.title" = "Lyddriver:";
 
 /* Class = "NSTextFieldCell"; title = "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."; ObjectID = "2Md-pv-gSi"; */
-"2Md-pv-gSi.title" = "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays.";
+"2Md-pv-gSi.title" = "AVFoundation er en ny og eksperimentel lyddriver der tilbyder understøttelse af Rumlig Lyd. Du risikerer dog at støde på nogle problemer når du bruger AVFoundation, såsom lydforsinkelser.";

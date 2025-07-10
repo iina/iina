@@ -174,6 +174,9 @@
 "preference.sub_override_level.descriptive_text.strip" = "Rimuove tutti gli stili e i tag ASS dai sottotitoli.";
 "preference.sub_override_level.descriptive_text.yes" = "Regola le impostazioni degli stili.";
 
+"preference.ytdl_plugin_not_installed" = "Installa il plug-in Media Online da 'Plug-in → Installa' da GitHub per godere di funzionalità avanzate come il download di video e aggiornamenti automatici di yt-dlp.";
+"preference.ytdl_plugin_installed" = "Il supporto youtube-dl integrato è disabilitato perché è installato il plug-in Media Online.";
+
 "menu.volume" = "Volume: %d";
 "menu.volume_muted" = "Volume: %d (Spento)";
 "menu.audio_delay" = "Differenza audio: %.2fs";
@@ -216,6 +219,14 @@
 "menu.crop_custom" = "Altro…";
 "menu.find_online_sub" = "Trova sottotitoli online da %@";
 
+"menu.manage_plugins" = "Gestisci plug-in…";
+"menu.developer_tool" = "Strumenti per sviluppatori";
+"menu.more_plugin" = "Altro…";
+"menu.conflicting_shortcuts" = "Scorciatoie da tastiera in conflitto…";
+"menu.reload_plugins" = "Ricarica tutti i plug-in";
+"menu.show_plugins_panel" = "Mostra il pannello dei plug-in";
+"menu.hide_plugins_panel" = "Nascondi il pannello dei plug-in";
+
 "track.audio" = "Audio";
 "track.none" = "<Nessuno>";
 "track.sub" = "Sottotitoli";
@@ -245,7 +256,7 @@
 "alert.error_saving_file" = "Si è verificato un errore durante il salvataggio %@: %@";
 "alert.error_deleting_file" = "Impossibile eliminare il file.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "Il valore '%@' non è valido.\nInserisci un valore compreso tra 10 e 10000, oppure 0.";
 
 "alert.config.new.title" = "Nuova configurazione di input";
 "alert.config.new.message" = "Inserisci un nome per la nuova configurazione.";
@@ -386,6 +397,7 @@
 "osc_toolbar.music_mode" = "Attiva la modalità musicale";
 "osc_toolbar.sub_track" = "Scegli la traccia dei sottotitoli";
 "osc_toolbar.screenshot" = "Cattura la schermata";
+"osc_toolbar.plugins" = "Mostra il pannello dei plug-in";
 
 "mini_player.album_art" = "Attiva/Disattiva copertina album";
 "mini_player.loop" = "Ripeti";

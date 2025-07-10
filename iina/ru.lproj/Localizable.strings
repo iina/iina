@@ -79,10 +79,10 @@
 "alert.eq.new_profile.title" = "Новая настройка эквалайзера";
 "alert.eq.new_profile.message" = "Пожалуйста, укажите имя профиля.";
 "alert.eq.rename.title" = "Переименовать текущий профиль";
-"alert.eq.rename.message" = "Пожалуйста, укажите новое имя профиля.";
+"alert.eq.rename.message" = "Пожалуйста, введите новое имя профиля.";
 
 // OSDMessage.swift
-"osd.pause" = "Пауза";
+"osd.pause" = "Приостановить";
 "osd.resume" = "Возобновить";
 "osd.volume" = "Громкость: %i";
 "osd.speed" = "Скорость: %@×";
@@ -106,13 +106,13 @@
 "osd.sub_second_hidden" = "Вторые субтитры скрыты";
 "osd.sub_second_pos" = "Позиция вторых субтитров: %.1f";
 "osd.sub_second_visible" = "Вторые субтитры видны";
-"osd.mute" = "Без звука";
+"osd.mute" = "Выключить звук";
 "osd.unmute" = "Включение звука";
-"osd.screenshot" = "Скриншот сохранен";
+"osd.screenshot" = "Снимок экрана сохранен";
 "osd.abloop.a" = "Цикл: точка А";
 "osd.abloop.b" = "Цикл: точка Б";
 "osd.abloop.clear" = "Цикл: сброшен";
-"osd.stop" = "Стоп";
+"osd.stop" = "Остановить";
 "osd.chapter" = "Глава: %@";
 "osd.subtitle_scale" = "Масштаб субтитров: %.2f×";
 "osd.add_to_playlist" = "Добавлено %i файлов в плейлист";
@@ -174,6 +174,9 @@
 "preference.sub_override_level.descriptive_text.strip" = "Игнорировать все стили и теги в субтитрах ASS.";
 "preference.sub_override_level.descriptive_text.yes" = "Применить все стили субтитров, заданные в данном разделе.";
 
+"preference.ytdl_plugin_not_installed" = "Установите плагин Online Media из меню «Плагины > Установить с GitHub», чтобы получить дополнительные возможности, такие как загрузка видео и автоматическое обновление yt-dlp.";
+"preference.ytdl_plugin_installed" = "Встроенная поддержка youtube-dl отключена, так как у вас установлен плагин Online Media.";
+
 "menu.volume" = "Громкость: %d";
 "menu.volume_muted" = "Громкость: %d (без звука)";
 "menu.audio_delay" = "Задержка аудио: %.2f с";
@@ -216,6 +219,14 @@
 "menu.crop_custom" = "Другое…";
 "menu.find_online_sub" = "Найти субтитры онлайн на %@";
 
+"menu.manage_plugins" = "Управление плагинами…";
+"menu.developer_tool" = "Инструменты разработчика";
+"menu.more_plugin" = "Еще…";
+"menu.conflicting_shortcuts" = "Конфликтующие сочетания клавиш…";
+"menu.reload_plugins" = "Перезагрузить все плагины";
+"menu.show_plugins_panel" = "Показать панель расширений";
+"menu.hide_plugins_panel" = "Скрыть панель расширений";
+
 "track.audio" = "Аудио";
 "track.none" = "<Нет>";
 "track.sub" = "Субтитры";
@@ -245,7 +256,7 @@
 "alert.error_saving_file" = "Ошибка при сохранении %@: %@";
 "alert.error_deleting_file" = "Невозможно удалить файл.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "Значение \"%@\" является недопустимым.\nПожалуйста, введите значение в диапазоне от 10 до 10000, либо 0.";
 
 "alert.config.new.title" = "Новая конфигурация клавиш";
 "alert.config.new.message" = "Введите имя для новой конфигурации.";
@@ -273,7 +284,7 @@
 
 "alert.playlist.error_deleting" = "Ошибка удаления: %@";
 
-"alert.screenshot.error_taking" = "Невозможно сделать скриншот!";
+"alert.screenshot.error_taking" = "Невозможно сделать снимок экрана!";
 
 "alert.sub.no_selected" = "Сначала выберите скачанные субтитры.";
 "alert.sub_lang_not_set" = "Перед использованием OpenSubtitles выберите в настройках предпочитаемый язык субтитров. Сейчас используется английский.";
@@ -381,11 +392,12 @@
 
 "osc_toolbar.settings" = "Быстрые настройки";
 "osc_toolbar.playlist" = "Плейлист и главы";
-"osc_toolbar.pip" = "Войти в режим «Картинка в картинке»";
-"osc_toolbar.full_screen" = "Включить полноэкранный режим";
-"osc_toolbar.music_mode" = "Перейти в музыкальный режим";
-"osc_toolbar.sub_track" = "Выберите дорожку субтитров";
-"osc_toolbar.screenshot" = "Сделать скриншот";
+"osc_toolbar.pip" = "Режим «Картинка в картинке»";
+"osc_toolbar.full_screen" = "Полноэкранный режим";
+"osc_toolbar.music_mode" = "Музыкальный режим";
+"osc_toolbar.sub_track" = "Субтитры";
+"osc_toolbar.screenshot" = "Снимок экрана";
+"osc_toolbar.plugins" = "Плагины";
 
 "mini_player.album_art" = "Изменить обложку альбома";
 "mini_player.loop" = "Повторять";
@@ -413,7 +425,7 @@
 "touchbar.seek" = "Перемотка";
 "touchbar.time" = "Временная позиция";
 "touchbar.remainingTimeOrTotalDuration" = "Оставшееся время / Общая продолжительность";
-"touchbar.toggle_pip" = "Переключить в \"Картинка в картинке\"";
+"touchbar.toggle_pip" = "Режим «Картинка в картинке»";
 
 // Plugin permissions
 

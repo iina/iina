@@ -90,7 +90,11 @@ class JavascriptAPI: NSObject {
         throwError(withMessage: "The path should be an absolute path: \(path)")
         return (nil, false)
       }
-      return (absPath, false)
+      return (
+        absPath,
+        absPath.hasPrefix(pluginInstance.plugin.dataURL.path) ||
+        absPath.hasPrefix(pluginInstance.plugin.tmpURL.path)
+      )
     }!
   }
 

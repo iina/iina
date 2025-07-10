@@ -299,7 +299,11 @@ class PreferenceWindowController: NSWindowController {
         collapseView.setCollapsed(false, animated: false)
       }
     }
-    
+
+    // As per Apple's Human Interface Guidelines update the window’s title to reflect the currently
+    // visible tab. Although the window's title is hidden it still can be seen in the Window menu
+    // and in the dock menu.
+    vc.view.window?.title = vc.preferenceTabTitle
     return vc
   }
 

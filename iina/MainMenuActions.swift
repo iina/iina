@@ -64,7 +64,7 @@ class MainMenuActionHandler: NSResponder, NSMenuItemValidation {
 
   // currently only being used for key command
   @objc func menuDeleteCurrentFileHard(_ sender: NSMenuItem) {
-    guard let url = player.info.currentURL else { return }
+    guard let url = player.info.currentURL, !player.info.isNetworkResource else { return }
     do {
       let index = player.mpv.getInt(MPVProperty.playlistPos)
       player.playlistRemove(index)
@@ -484,6 +484,10 @@ extension MainMenuActionHandler {
   }
 
   @objc func reloadAllPlugins(_ sender: NSMenuItem) {
+    // Remove the developer tool menu item that retains the plugin instance
+    AppDelegate.shared.menuController.pluginMenu.items
+      .compactMap { $0.submenu }.flatMap { $0.items }
+      .forEach { $0.representedObject = nil }
     AppDelegate.shared.menuController.pluginMenu.removeAllItems()
 
     for player in PlayerCore.playerCores {

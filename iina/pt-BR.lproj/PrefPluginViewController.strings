@@ -26,10 +26,10 @@
 "MyY-5s-tIm.title" = "Buscar por atualizações";
 
 /* Class = "NSTextFieldCell"; title = "Please enter the full URL of the GitHub repository or a string in the \"user/repo\" format. You can also choose one from the default plugins list."; ObjectID = "Nmf-79-hFX"; */
-"Nmf-79-hFX.title" = "Please enter the full URL of the GitHub repository or a string in the \"user/repo\" format. You can also choose one from the default plugins list.";
+"Nmf-79-hFX.title" = "Por favor, insira a URL completa do repositório GitHub ou o texto no formato \"usuário/repo\". Você também pode escolher um dos plug-ins padrão listado.";
 
 /* Class = "NSTabViewItem"; label = "Support"; ObjectID = "T21-nd-TLF"; */
-"T21-nd-TLF.label" = "Support";
+"T21-nd-TLF.label" = "Suporte";
 
 /* Class = "NSButtonCell"; title = "Website"; ObjectID = "X6J-6H-IPn"; */
 "X6J-6H-IPn.title" = "Site";
@@ -68,10 +68,10 @@
 "qje-hT-j7H.title" = "Cancelar";
 
 /* Class = "NSTextFieldCell"; title = "Source"; ObjectID = "r3r-Qh-rC9"; */
-"r3r-Qh-rC9.title" = "Source";
+"r3r-Qh-rC9.title" = "Fonte";
 
-/* Class = "NSButtonCell"; title = "Install from a local package…"; ObjectID = "sdU-FG-dTO"; */
-"sdU-FG-dTO.title" = "Install from a local package…";
+/* Class = "NSButtonCell"; title = "Install Package…"; ObjectID = "sdU-FG-dTO"; */
+"sdU-FG-dTO.title" = "Install Package…";
 
 /* Class = "NSTextFieldCell"; title = "Plugins"; ObjectID = "tfn-0I-n6p"; */
 "tfn-0I-n6p.title" = "Plugins";
@@ -83,4 +83,4 @@
 "ue8-hU-kLm.title" = "Uninstall";
 
 /* Class = "NSTextFieldCell"; title = "Install a new plugin from GitHub"; ObjectID = "zvu-Up-fQJ"; */
-"zvu-Up-fQJ.title" = "Install a new plugin from GitHub";
+"zvu-Up-fQJ.title" = "Instalar um novo plugin via GitHub";

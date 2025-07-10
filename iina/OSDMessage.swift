@@ -154,7 +154,7 @@ enum OSDMessage {
 
     case .speed(let value):
       return (
-        String(format: NSLocalizedString("osd.speed", comment: "Speed: %@x"), value.string),
+        String(format: NSLocalizedString("osd.speed", comment: "Speed: %@x"), value.groupedStringUpTo6Decimals),
         .normal
       )
 

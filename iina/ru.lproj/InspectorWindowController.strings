@@ -2,7 +2,7 @@
 "0vG-Pg-DIl.title" = "Форсированная";
 
 /* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "1dz-Vt-0MO"; */
-"1dz-Vt-0MO.title" = "Кадры/с:";
+"1dz-Vt-0MO.title" = "Кадр/с:";
 
 /* Class = "NSTextFieldCell"; title = "File path:"; ObjectID = "4jf-w4-kkv"; */
 "4jf-w4-kkv.title" = "Путь к файлу:";
@@ -11,7 +11,7 @@
 "5H6-qJ-RDS.title" = "Формат:";
 
 /* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "7QX-tu-rvs"; */
-"7QX-tu-rvs.title" = "Кадры/с:";
+"7QX-tu-rvs.title" = "Кадр/с:";
 
 /* Class = "NSTextFieldCell"; title = "Title:"; ObjectID = "9eq-rd-zGy"; */
 "9eq-rd-zGy.title" = "Название:";
@@ -20,10 +20,10 @@
 "A4y-LL-x0z.title" = "Битрейт:";
 
 /* Class = "NSTextFieldCell"; title = "Mistimed Frames:"; ObjectID = "AYt-pH-UCi"; */
-"AYt-pH-UCi.title" = "Рассинхрон. кадров:";
+"AYt-pH-UCi.title" = "Рассинхронизация кадров:";
 
 /* Class = "NSTextFieldCell"; title = "Display FPS:"; ObjectID = "AjU-1T-aGR"; */
-"AjU-1T-aGR.title" = "Воспроизв. кадр/с:";
+"AjU-1T-aGR.title" = "Кадр/с (дисплей):";
 
 /* Class = "NSTextFieldCell"; title = "Dropped Frames:"; ObjectID = "CrF-UR-udW"; */
 "CrF-UR-udW.title" = "Пропущенных кадров:";
@@ -53,7 +53,7 @@
 "I2E-6Z-Gnn.title" = "Драйвер:";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Disp FPS"; ObjectID = "JN9-3E-OJp"; */
-"JN9-3E-OJp.title" = "Оцен. воспр. кадр/с:";
+"JN9-3E-OJp.title" = "Кадр/с (дисплей), расчетное значение:";
 
 /* Class = "NSTextFieldCell"; title = "File Path:"; ObjectID = "Jxp-Wf-BhU"; */
 "Jxp-Wf-BhU.title" = "Путь к файлу:";
@@ -116,13 +116,13 @@
 "f7i-wX-uxQ.title" = "Трек:";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Output FPS:"; ObjectID = "g8p-Ec-awO"; */
-"g8p-Ec-awO.title" = "Оцен. результ. кадры/с:";
+"g8p-Ec-awO.title" = "Кадр/с, расчетное значение:";
 
 /* Class = "NSTextFieldCell"; title = "VIDEO"; ObjectID = "gDG-Eq-1Bc"; */
 "gDG-Eq-1Bc.title" = "ВИДЕО";
 
 /* Class = "NSTextFieldCell"; title = "A/V Sync Diff:"; ObjectID = "iVK-Ck-Lyq"; */
-"iVK-Ck-Lyq.title" = "Разн. синхр. ауд/вид:";
+"iVK-Ck-Lyq.title" = "Рассинхронизация аудио/видео, тек.:";
 
 /* Class = "NSTextFieldCell"; title = "Channels:"; ObjectID = "it3-05-Pwu"; */
 "it3-05-Pwu.title" = "Каналы:";
@@ -149,7 +149,7 @@
 "nrG-IH-kFg.title" = "АУДИО";
 
 /* Class = "NSTextFieldCell"; title = "Total A/V Sync:"; ObjectID = "sbO-Cn-gpI"; */
-"sbO-Cn-gpI.title" = "Итог. синхр. ауд/вид:";
+"sbO-Cn-gpI.title" = "Рассинхронизация аудио/видео, общ.:";
 
 /* Class = "NSTextFieldCell"; title = "Watch"; ObjectID = "tNS-gW-PcC"; */
 "tNS-gW-PcC.title" = "Просмотр";
@@ -161,7 +161,7 @@
 "xix-0S-ehE.title" = "Декодер:";
 
 /* Class = "NSTextFieldCell"; title = "Primaries:"; ObjectID = "1kw-LO-KmJ"; */
-"1kw-LO-KmJ.title" = "Главное:";
+"1kw-LO-KmJ.title" = "Основные цвета:";
 
 /* Class = "NSTextFieldCell"; title = "Colorspace:"; ObjectID = "mLo-Wc-BoO"; */
 "mLo-Wc-BoO.title" = "Цветовое пространство:";

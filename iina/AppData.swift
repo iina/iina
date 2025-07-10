@@ -39,6 +39,7 @@ struct AppData {
   static let seekAmountMap = [0, 0.05, 0.1, 0.25, 0.5]
   static let seekAmountMapMouse = [0, 0.5, 1, 2, 4]
   static let volumeMap = [0, 0.25, 0.5, 0.75, 1]
+  static let playbackSpeedMap = [0, 0.001, 0.002, 0.005, 0.01]
 
   static let encodings = CharEncoding.list
 

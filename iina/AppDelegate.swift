@@ -232,6 +232,41 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     // Hide Window > "Enter Full Screen" menu item, because this is already present in the Video menu
     UserDefaults.standard.set(false, forKey: "NSFullScreenMenuItemEverywhere")
 
+    // Install plugins
+    if FirstRunManager.isFirstRun(for: .init("installedDefaultPlugins")) {
+      var hasError = false
+      Logger.log("Installing default plugins")
+      if let pluginPath = Bundle.main.resourcePath?.appending("/plugins"),
+         FileManager.default.fileExists(atPath: pluginPath),
+         let contents = try? FileManager.default.contentsOfDirectory(atPath: pluginPath) {
+        contents.filter { $0.hasSuffix(".iinaplgz") }
+          .forEach {
+            do {
+              let path = pluginPath.appending("/\($0)")
+              let plugin = try JavascriptPlugin.create(fromPackageURL: URL(fileURLWithPath: path))
+              if JavascriptPlugin.plugins.contains(where: { $0.identifier == plugin.identifier }) {
+                Logger.log("Skipped \(plugin.identifier), already installed")
+                return
+              }
+              plugin.normalizePath()
+              JavascriptPlugin.plugins.append(plugin)
+              plugin.enabled = true
+              Logger.log("Installed \(plugin.identifier)")
+            } catch let error {
+              hasError = true
+              Logger.log(error.localizedDescription, level: .error)
+            }
+          }
+      } else {
+        hasError = true
+        Logger.log("Cannot find default plugins", level: .error)
+      }
+
+      if hasError {
+        FirstRunManager.unsetFirstRun(for: .init("installedDefaultPlugins"))
+      }
+    }
+
     // handle arguments
     let arguments = ProcessInfo.processInfo.arguments.dropFirst()
     guard arguments.count > 0 else { return }
@@ -310,12 +345,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
     let mpv = PlayerCore.active.mpv!
     Logger.log("Configuration when building mpv: \(mpv.getString(MPVProperty.mpvConfiguration)!)", level: .verbose)
-
-    if RemoteCommandController.useSystemMediaControl {
-      Logger.log("Setting up MediaPlayer integration")
-      RemoteCommandController.setup()
-      NowPlayingInfoManager.updateInfo(state: .unknown)
-    }
 
     // if have pending open request
     if let url = pendingURL {
@@ -439,12 +468,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     // The menu items are being removed because setting the isEnabled property to false had no
     // effect under macOS 12.6.
     removeAllMenuItems(dockMenu)
-    // If supported and enabled disable all remote media commands. This also removes IINA from
-    // the Now Playing widget.
-    if RemoteCommandController.useSystemMediaControl {
-      Logger.log("Disabling remote commands")
-      RemoteCommandController.disableAllCommands()
-    }
+    // Disable all remote media commands. This also removes IINA from the Now Playing widget.
+    RemoteCommandController.shared.disable()
 
     // The first priority was to shutdown any new input from the user. The second priority is to
     // send a logout request if logged into an online subtitles provider as that needs time to
@@ -720,7 +745,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
     // open pending files
     pendingFilesForOpenFile.removeAll()
-    if PlayerCore.activeOrNew.openURLs(urls) == 0 {
+    if PlayerCore.openURLs(urls) == 0 {
       Utility.showAlert("nothing_to_open")
     }
   }
@@ -835,7 +860,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       // enqueue
       let playlistEmpty = PlayerCore.lastActive.info.$playlist.withLock { $0.isEmpty }
       if let enqueueValue = queryDict["enqueue"], enqueueValue == "1", !playlistEmpty {
-        PlayerCore.lastActive.addToPlaylist(urlValue)
+        PlayerCore.lastActive.appendToPlaylist(urlValue)
         PlayerCore.lastActive.postNotification(.iinaPlaylistChanged)
         PlayerCore.lastActive.sendOSD(.addToPlaylist(1))
       } else {
@@ -882,8 +907,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
         }
       }
       let isAlternative = (sender as? NSMenuItem)?.tag == AlternativeMenuItemTag
-      let playerCore = PlayerCore.activeOrNewForMenuAction(isAlternative: isAlternative)
-      if playerCore.openURLs(panel.urls) == 0 {
+      if PlayerCore.openURLs(panel.urls, inverseOpenInNewWindowPref: isAlternative) == 0 {
         Utility.showAlert("nothing_to_open")
       }
     }
@@ -1199,12 +1223,37 @@ struct CommandLineStatus {
   }
 }
 
+/// Controller that supports using macOS media keys and remote commands.
+///
+/// The IINA setting `Use system media control` found on the `Key Bindings` tab of IINA's settings controls use of the
+/// macOS [Control Center](https://support.apple.com/guide/mac-help/quickly-change-settings-mchl50f94f8f/mac)
+/// Now Playing module. This class handles the use of the AppKit class
+/// [MPRemoteCommandCenter](https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter)
+/// which allows IINA to receive and respond to remote control events sent by external accessories and system controls. This includes
+/// buttons in the Now Playing module, the media keys, access by Siri, etc.
+/// - Important: As IINA is assuming control over a shared macOS feature it is critical that IINA releases control when no media is
+///     open. See issue [#4331](https://github.com/iina/iina/issues/4331).
 class RemoteCommandController {
-  static let remoteCommand = MPRemoteCommandCenter.shared()
+  /// The `RemoteCommandController` singleton object.
+  static let shared = RemoteCommandController()
 
   static var useSystemMediaControl: Bool = Preference.bool(for: .useMediaKeys)
 
-  static func setup() {
+  /// Remote commands supported by IINA.
+  private let commands: [MPRemoteCommand]
+
+  private var isEnabled = false
+
+  func disable() {
+    guard isEnabled else { return }
+    commands.forEach { $0.removeTarget(nil) }
+    isEnabled = false
+    log("Disabled media keys and remote commands")
+  }
+
+  func enable() {
+    guard RemoteCommandController.useSystemMediaControl, !isEnabled else { return }
+    let remoteCommand = MPRemoteCommandCenter.shared()
     remoteCommand.playCommand.addTarget { _ in
       PlayerCore.lastActive.resume()
       return .success
@@ -1233,8 +1282,6 @@ class RemoteCommandController {
       PlayerCore.lastActive.nextLoopMode()
       return .success
     }
-    remoteCommand.changeShuffleModeCommand.isEnabled = false
-    // remoteCommand.changeShuffleModeCommand.addTarget {})
     remoteCommand.changePlaybackRateCommand.supportedPlaybackRates = [0.5, 1, 1.5, 2]
     remoteCommand.changePlaybackRateCommand.addTarget { event in
       PlayerCore.lastActive.setSpeed(Double((event as! MPChangePlaybackRateCommandEvent).playbackRate))
@@ -1254,20 +1301,30 @@ class RemoteCommandController {
       PlayerCore.lastActive.seek(absoluteSecond: (event as! MPChangePlaybackPositionCommandEvent).positionTime)
       return .success
     }
+    isEnabled = true
+    log("Enabled media keys and remote commands")
   }
 
-  static func disableAllCommands() {
-    remoteCommand.playCommand.removeTarget(nil)
-    remoteCommand.pauseCommand.removeTarget(nil)
-    remoteCommand.togglePlayPauseCommand.removeTarget(nil)
-    remoteCommand.stopCommand.removeTarget(nil)
-    remoteCommand.nextTrackCommand.removeTarget(nil)
-    remoteCommand.previousTrackCommand.removeTarget(nil)
-    remoteCommand.changeRepeatModeCommand.removeTarget(nil)
-    remoteCommand.changeShuffleModeCommand.removeTarget(nil)
-    remoteCommand.changePlaybackRateCommand.removeTarget(nil)
-    remoteCommand.skipForwardCommand.removeTarget(nil)
-    remoteCommand.skipBackwardCommand.removeTarget(nil)
-    remoteCommand.changePlaybackPositionCommand.removeTarget(nil)
+  // MARK: - Private Functions
+
+  private func log(_ message: @autoclosure () -> String, level: Logger.Level = .debug) {
+    Logger.log(message, level: level, subsystem: Logger.Sub.nowPlaying)
+  }
+
+  private init() {
+    // Remote commands IINA supports.
+    let remoteCommand = MPRemoteCommandCenter.shared()
+    commands = [
+      remoteCommand.changePlaybackPositionCommand,
+      remoteCommand.changePlaybackRateCommand,
+      remoteCommand.changeRepeatModeCommand,
+      remoteCommand.nextTrackCommand,
+      remoteCommand.pauseCommand,
+      remoteCommand.playCommand,
+      remoteCommand.previousTrackCommand,
+      remoteCommand.skipBackwardCommand,
+      remoteCommand.skipForwardCommand,
+      remoteCommand.stopCommand,
+      remoteCommand.togglePlayPauseCommand]
   }
 }

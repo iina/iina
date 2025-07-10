@@ -39,9 +39,10 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   
   // Cached user defaults values
   internal lazy var followGlobalSeekTypeWhenAdjustSlider: Bool = Preference.bool(for: .followGlobalSeekTypeWhenAdjustSlider)
-  internal lazy var useExtractSeek: Preference.SeekOption = Preference.enum(for: .useExactSeek)
+  internal lazy var useExactSeek: Preference.SeekOption = Preference.enum(for: .useExactSeek)
   internal lazy var relativeSeekAmount: Int = Preference.integer(for: .relativeSeekAmount)
   internal lazy var volumeScrollAmount: Int = Preference.integer(for: .volumeScrollAmount)
+  internal lazy var playbackSpeedScrollAmount: Int = Preference.integer(for: .playbackSpeedScrollAmount)
   internal lazy var singleClickAction: Preference.MouseClickAction = Preference.enum(for: .singleClickAction)
   internal lazy var doubleClickAction: Preference.MouseClickAction = Preference.enum(for: .doubleClickAction)
   internal lazy var horizontalScrollAction: Preference.ScrollAction = Preference.enum(for: .horizontalScrollAction)
@@ -59,6 +60,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     .useExactSeek,
     .relativeSeekAmount,
     .volumeScrollAmount,
+    .playbackSpeedScrollAmount,
     .singleClickAction,
     .doubleClickAction,
     .horizontalScrollAction,
@@ -100,7 +102,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       }
     case PK.useExactSeek.rawValue:
       if let newValue = change[.newKey] as? Int {
-        useExtractSeek = Preference.SeekOption(rawValue: newValue)!
+        useExactSeek = Preference.SeekOption(rawValue: newValue)!
       }
     case PK.relativeSeekAmount.rawValue:
       if let newValue = change[.newKey] as? Int {
@@ -109,6 +111,10 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     case PK.volumeScrollAmount.rawValue:
       if let newValue = change[.newKey] as? Int {
         volumeScrollAmount = newValue.clamped(to: 1...4)
+      }
+    case PK.playbackSpeedScrollAmount.rawValue:
+      if let newValue = change[.newKey] as? Int {
+        playbackSpeedScrollAmount = newValue.clamped(to: 1...4)
       }
     case PK.singleClickAction.rawValue:
       if let newValue = change[.newKey] as? Int {
@@ -501,12 +507,17 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     switch scrollAction {
     case .seek:
       let seekAmount = (isMouse ? AppData.seekAmountMapMouse : AppData.seekAmountMap)[relativeSeekAmount] * delta
-      player.seek(relativeSecond: seekAmount, option: useExtractSeek)
+      player.seek(relativeSecond: seekAmount, option: useExactSeek)
     case .volume:
       // don't use precised delta for mouse
       let newVolume = player.info.volume + (isMouse ? delta : AppData.volumeMap[volumeScrollAmount] * delta)
       player.setVolume(newVolume)
       volumeSlider.doubleValue = newVolume
+    case .playbackSpeed:
+      let min = 0.05
+      let max = 4.0
+      let newSpeed = round(1000 * (player.info.playSpeed + (player.info.playSpeed * AppData.playbackSpeedMap[playbackSpeedScrollAmount] * delta)).clamped(to: min...max)) / 1000
+      player.setSpeed(newSpeed)
     default:
       break
     }
@@ -532,14 +543,17 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
 
   func windowDidBecomeMain(_ notification: Notification) {
     PlayerCore.lastActive = player
-    if RemoteCommandController.useSystemMediaControl {
-      NowPlayingInfoManager.updateInfo(withTitle: true)
-    }
+    NowPlayingInfoManager.shared.updateInfo(withTitle: true)
     AppDelegate.shared.menuController?.updatePluginMenu()
 
     NotificationCenter.default.post(name: .iinaMainWindowChanged, object: true)
   }
   
+  func windowDidChangeOcclusionState(_ notification: Notification) {
+    // Must force drawing for audio files that have album cover art.
+    videoView.videoLayer.draw(forced: true)
+  }
+
   func windowDidResignMain(_ notification: Notification) {
     NotificationCenter.default.post(name: .iinaMainWindowChanged, object: false)
   }
@@ -668,7 +682,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
 
   // MARK: - Utils
 
-  func log(_ message: String, level: Logger.Level = .debug) {
+  func log(_ message: @autoclosure () -> String, level: Logger.Level = .debug) {
     Logger.log(message, level: level, subsystem: subsystem)
   }
 }

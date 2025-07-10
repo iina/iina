@@ -1,8 +1,8 @@
 /* Class = "NSMenuItem"; title = "Show open file panel"; ObjectID = "1ce-4b-kgG"; */
-"1ce-4b-kgG.title" = "顯示打開檔案對話框";
+"1ce-4b-kgG.title" = "顯示開啟檔案視窗";
 
 /* Class = "NSButtonCell"; title = "Keep window open after playback finishes"; ObjectID = "2iM-j7-AzQ"; */
-"2iM-j7-AzQ.title" = "播放完畢後保持視窗打開";
+"2iM-j7-AzQ.title" = "檔案播放完後，不要自動關閉視窗";
 
 /* Class = "NSButtonCell"; title = "Save to"; ObjectID = "2rJ-mg-OuU"; */
 "2rJ-mg-OuU.title" = "儲存至";
@@ -11,7 +11,7 @@
 "3XO-ks-TDg.title" = "PNG";
 
 /* Class = "NSButtonCell"; title = "Copy to clipboard"; ObjectID = "3gs-3w-rg6"; */
-"3gs-3w-rg6.title" = "拷貝到剪貼板";
+"3gs-3w-rg6.title" = "複製到剪貼簿";
 
 /* Class = "NSTextFieldCell"; title = "Options:"; ObjectID = "4Qe-7S-8xK"; */
 "4Qe-7S-8xK.title" = "選項：";
@@ -56,7 +56,7 @@
 "KYi-0W-zOr.title" = "當全螢幕播放時關熄其餘顯示器";
 
 /* Class = "NSTextFieldCell"; title = "Still prevents system from sleeping."; ObjectID = "Kdk-iC-e1C"; */
-"Kdk-iC-e1C.title" = "Still prevents system from sleeping.";
+"Kdk-iC-e1C.title" = "防止系統進入睡眠模式";
 
 /* Class = "NSButtonCell"; title = "Switch to \"music mode\" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
 "KfL-r7-Uav.title" = "播放音訊檔案時自動切換到「音樂模式」";
@@ -134,7 +134,7 @@
 "pdx-zt-kf2.title" = "螢幕快照：";
 
 /* Class = "NSButtonCell"; title = "Prevent screen saver from starting while playing"; ObjectID = "r2u-P9-J5p"; */
-"r2u-P9-J5p.title" = "Prevent screen saver from starting while playing";
+"r2u-P9-J5p.title" = "播放檔案時，防止系統啟動螢幕保護程式。";
 
 /* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "slG-Jb-54B"; */
 "slG-Jb-54B.title" = "每小時";
@@ -152,16 +152,16 @@
 "xr2-rB-O0x.title" = "自動暫停/繼續播放：";
 
 /* Class = "NSButtonCell"; title = "Not while in \"music mode\" or only playing audio"; ObjectID = "yla-DT-YTx"; */
-"yla-DT-YTx.title" = "Not while in \"music mode\" or only playing audio";
+"yla-DT-YTx.title" = "在「音樂模式」或僅播放音訊時；讓系統可以照常啟動螢幕保護程式。";
 
 /* Class = "NSMenuItem"; title = "Show welcome window"; ObjectID = "z9T-8h-1T0"; */
 "z9T-8h-1T0.title" = "顯示歡迎視窗";
 
 /* Class = "NSButtonCell"; title = "When a file is opened manually:"; ObjectID = "jok-kc-HjX"; */
-"jok-kc-HjX.title" = "When a file is opened manually:";
+"jok-kc-HjX.title" = "使用者主動開啟檔案時：";
 
 /* Class = "NSMenuItem"; title = "Loop playlist"; ObjectID = "5WC-Sp-6mg"; */
-"5WC-Sp-6mg.title" = "Loop playlist";
+"5WC-Sp-6mg.title" = "循環播放所有檔案";
 
 /* Class = "NSMenuItem"; title = "Loop single file"; ObjectID = "A1p-L4-jtC"; */
-"A1p-L4-jtC.title" = "Loop single file";
+"A1p-L4-jtC.title" = "循環播放單一檔案";

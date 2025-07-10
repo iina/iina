@@ -29,6 +29,7 @@ class LogWindowController: NSWindowController, NSMenuDelegate {
   override func windowDidLoad() {
     super.windowDidLoad()
 
+    logTableView.userInterfaceLayoutDirection = .leftToRight
     logTableView.sizeLastColumnToFit()
     let tableViewMenu = NSMenu()
     tableViewMenu.addItem(withTitle: "Copy", action: #selector(menuCopy), keyEquivalent: "")

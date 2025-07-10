@@ -50,7 +50,7 @@
 "quicksetting.deinterlace" = "Váltottsoros képszűrő";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Elrejtés";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.reset_speed" = "Sebesség alaphelyzetbe állítása";
 
 // EQ Presets
 "eq.preset.flat" = "Lapos";
@@ -78,14 +78,14 @@
 
 "alert.eq.new_profile.title" = "Új EQ profil";
 "alert.eq.new_profile.message" = "Kérjük, adjon meg egy profilnevet.";
-"alert.eq.rename.title" = "Aktuális profil átnevezése";
+"alert.eq.rename.title" = "Rename Current Profile";
 "alert.eq.rename.message" = "Kérjük, adjon meg egy új profilnevet.";
 
 // OSDMessage.swift
 "osd.pause" = "Szünet";
 "osd.resume" = "Folytatás";
 "osd.volume" = "Hangerő: %i";
-"osd.speed" = "Speed: %@x";
+"osd.speed" = "Sebesség: %@x";
 "osd.aspect" = "Képarány: %@";
 "osd.crop" = "Vágás: %@";
 "osd.rotate" = "Elforgatás: %i°";
@@ -174,6 +174,9 @@
 "preference.sub_override_level.descriptive_text.strip" = "Alaposan távolítson el minden ASS taget és stílust a feliratból.";
 "preference.sub_override_level.descriptive_text.yes" = "Alkalmazza az összes stílusbeállítást ebben a szakaszban.";
 
+"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
+"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
+
 "menu.volume" = "Hangerő: %d";
 "menu.volume_muted" = "Hangerő: %d (Némítva)";
 "menu.audio_delay" = "Hangkésleltetés: %.2fmp-vel később";
@@ -190,7 +193,7 @@
 "menu.exit_mini_player" = "Kilépés zene módból";
 "menu.pause" = "Pause (Megállít)";
 "menu.resume" = "Folytatás";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "Sebesség: %@x";
 "menu.chapters" = "Fejezet Panel Megjelenítése";
 "menu.hide_chapters" = "Rejtsd a fejezetek panelt";
 "menu.playlist" = "Lejátszási lista megjelenítése";
@@ -204,8 +207,8 @@
 
 "menu.seek_forward" = "Előre ugrás %.0f másodpercet";
 "menu.seek_backward" = "Hátra ugrás %.0f másodpercet";
-"menu.speed_up" = "Speed Up by %@x";
-"menu.speed_down" = "Speed Down by %@x";
+"menu.speed_up" = "Gyorsítás ennyivel: %@x";
+"menu.speed_down" = "Lassítás ennyivel: %@x";
 "menu.volume_up" = "Hangerő: %.0f";
 "menu.volume_down" = "Hangerő: %.0f";
 "menu.audio_delay_up" = "Hangkésleltetés + %.1f másodperccel";
@@ -215,6 +218,14 @@
 
 "menu.crop_custom" = "Egyéni…";
 "menu.find_online_sub" = "Online feliratok keresése innen: %@";
+
+"menu.manage_plugins" = "Manage Plugins…";
+"menu.developer_tool" = "Developer Tool";
+"menu.more_plugin" = "More…";
+"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
+"menu.reload_plugins" = "Reload All Plugins";
+"menu.show_plugins_panel" = "Show Plugins Panel";
+"menu.hide_plugins_panel" = "Hide Plugins Panel";
 
 "track.audio" = "Hang";
 "track.none" = "<None>";
@@ -245,7 +256,7 @@
 "alert.error_saving_file" = "Hiba történt mentéskor %@: %@";
 "alert.error_deleting_file" = "Nem sikerült törölni a fájlt.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
 
 "alert.config.new.title" = "Új beviteli konfiguráció";
 "alert.config.new.message" = "Kérlek adj nevet az új konfigurációnak.";
@@ -386,6 +397,7 @@
 "osc_toolbar.music_mode" = "Belépés \"zene\" módba";
 "osc_toolbar.sub_track" = "Válassz felirat sávot";
 "osc_toolbar.screenshot" = "Képernyőmentés készítése";
+"osc_toolbar.plugins" = "Show plugins panel";
 
 "mini_player.album_art" = "Album borító váltás";
 "mini_player.loop" = "Ismétlés";

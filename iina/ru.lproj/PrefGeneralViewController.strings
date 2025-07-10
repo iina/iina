@@ -92,7 +92,7 @@
 "YLo-6E-tT7.title" = "Завершить программу, когда все окна закрыты";
 
 /* Class = "NSTextFieldCell"; title = "/path/to/screenshot/folder"; ObjectID = "YeH-hk-7NN"; */
-"YeH-hk-7NN.title" = "/путь/к/папке/скриншотов/";
+"YeH-hk-7NN.title" = "/путь/к/папке/снимков/";
 
 /* Class = "NSButtonCell"; title = "Receive beta updates"; ObjectID = "f0j-Dn-cxt"; */
 "f0j-Dn-cxt.title" = "Получать бета-обновления";
@@ -131,7 +131,7 @@
 "oJY-Iz-3sO.title" = "Формат:";
 
 /* Class = "NSTextFieldCell"; title = "Screenshots:"; ObjectID = "pdx-zt-kf2"; */
-"pdx-zt-kf2.title" = "Скриншоты:";
+"pdx-zt-kf2.title" = "Снимки экрана:";
 
 /* Class = "NSButtonCell"; title = "Prevent screen saver from starting while playing"; ObjectID = "r2u-P9-J5p"; */
 "r2u-P9-J5p.title" = "Предотвратить запуск экранной заставки во время воспроизведения";
@@ -146,7 +146,7 @@
 "uQR-Fx-oEm.title" = "Поведение:";
 
 /* Class = "NSButtonCell"; title = "Show previews after taking screenshots"; ObjectID = "xE7-Uu-19f"; */
-"xE7-Uu-19f.title" = "Показывать превью после скриншота";
+"xE7-Uu-19f.title" = "Предпросмотр после снимка экрана";
 
 /* Class = "NSTextFieldCell"; title = "Pause/resume when:"; ObjectID = "xr2-rB-O0x"; */
 "xr2-rB-O0x.title" = "Остановить/продолжить воспроизведение, когда:";

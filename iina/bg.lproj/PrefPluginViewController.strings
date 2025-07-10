@@ -10,11 +10,11 @@
 /* Class = "NSButtonCell"; title = "Email"; ObjectID = "EHl-kr-ZZf"; */
 "EHl-kr-ZZf.title" = "Email";
 
-/* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[0] = "Permissions"; ObjectID = "KTN-5r-mMm"; */
-"KTN-5r-mMm.ibShadowedLabels[0]" = "Permissions";
+/* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[1] = "Permissions"; ObjectID = "KTN-5r-mMm"; */
+"KTN-5r-mMm.ibShadowedLabels[1]" = "Permissions";
 
-/* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[1] = "About"; ObjectID = "KTN-5r-mMm"; */
-"KTN-5r-mMm.ibShadowedLabels[1]" = "За приложението";
+/* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[0] = "About"; ObjectID = "KTN-5r-mMm"; */
+"KTN-5r-mMm.ibShadowedLabels[0]" = "За приложението";
 
 /* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[2] = "Preferences"; ObjectID = "KTN-5r-mMm"; */
 "KTN-5r-mMm.ibShadowedLabels[2]" = "Preferences";
@@ -32,7 +32,7 @@
 "T21-nd-TLF.label" = "Support";
 
 /* Class = "NSButtonCell"; title = "Website"; ObjectID = "X6J-6H-IPn"; */
-"X6J-6H-IPn.title" = "Website";
+"X6J-6H-IPn.title" = "Уебсайт";
 
 /* Class = "NSTextFieldCell"; title = "Installed plugins:"; ObjectID = "Ztn-MG-D7D"; */
 "Ztn-MG-D7D.title" = "Installed plugins:";
@@ -41,7 +41,7 @@
 "b60-P6-AN2.placeholderString" = "user/repo";
 
 /* Class = "NSButtonCell"; title = "Show in Finder"; ObjectID = "drh-6w-3z1"; */
-"drh-6w-3z1.title" = "Show in Finder";
+"drh-6w-3z1.title" = "Покажи във Finder";
 
 /* Class = "NSButtonCell"; title = "Install from GitHub…"; ObjectID = "enP-C1-4vu"; */
 "enP-C1-4vu.title" = "Install from GitHub…";
@@ -70,8 +70,8 @@
 /* Class = "NSTextFieldCell"; title = "Source"; ObjectID = "r3r-Qh-rC9"; */
 "r3r-Qh-rC9.title" = "Source";
 
-/* Class = "NSButtonCell"; title = "Install from a local package…"; ObjectID = "sdU-FG-dTO"; */
-"sdU-FG-dTO.title" = "Install from a local package…";
+/* Class = "NSButtonCell"; title = "Install Package…"; ObjectID = "sdU-FG-dTO"; */
+"sdU-FG-dTO.title" = "Install Package…";
 
 /* Class = "NSTextFieldCell"; title = "Plugins"; ObjectID = "tfn-0I-n6p"; */
 "tfn-0I-n6p.title" = "Plugins";

@@ -80,8 +80,27 @@ class ViewLayer: CAOpenGLLayer {
 
   private var fbo: GLint = 1
 
-  @Atomic private var needsFlip = false
-  @Atomic private var forceDraw = false
+  /// Prefix for keys used in
+  /// [threadDictionary](https://developer.apple.com/documentation/foundation/thread/threaddictionary).
+  ///
+  /// This prefix causes the keys to be specific to this `VideoLayer` instance.
+  private var keyPrefix: String { get { String(self.hashValue) + "." } }
+
+  /// When `true` the frame needs to be rendered.
+  /// - Note: This flag is a thread local variable.
+  private var needsFlip: Bool {
+    get { Thread.current.threadDictionary[needsFlipKey] as? Bool ?? false }
+    set { Thread.current.threadDictionary[needsFlipKey] = newValue }
+  }
+  private var needsFlipKey: String { get { keyPrefix + "needsFlip" } }
+
+  /// When `true` drawing will proceed even if mpv indicates nothing needs to be done.
+  /// - Note: This flag is a thread local variable.
+  private var forceDraw: Bool {
+    get { Thread.current.threadDictionary[forceDrawKey] as? Bool ?? false }
+    set { Thread.current.threadDictionary[forceDrawKey] = newValue }
+  }
+  private var forceDrawKey: String { get { keyPrefix + "forceDraw" } }
 
   /// Indicates whether the view is being rendered as part of a live resizing operation.
   ///
@@ -266,10 +285,8 @@ class ViewLayer: CAOpenGLLayer {
   func update(force: Bool = false) {
     mpvGLQueue.async { [self] in
       if force { forceDraw = true }
-      if forceDraw || !inLiveResize {
-        needsFlip = true
-        display()
-      }
+      needsFlip = true
+      display()
     }
   }
 

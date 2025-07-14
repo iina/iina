@@ -236,6 +236,8 @@ struct Preference {
     static let defaultCacheSize = Key("defaultCacheSize")
     static let cacheBufferSize = Key("cacheBufferSize")
     static let secPrefech = Key("secPrefech")
+    static let showBufferingThrobber = Key("showBufferingThrobber")
+    static let showSeekingThrobber = Key("showSeekingThrobber")
     static let userAgent = Key("userAgent")
     static let transportRTSPThrough = Key("transportRTSPThrough")
     static let ytdlEnabled = Key("ytdlEnabled")
@@ -924,6 +926,8 @@ struct Preference {
     .defaultCacheSize: 153600,
     .cacheBufferSize: 153600,
     .secPrefech: 36000,
+    .showBufferingThrobber: true,
+    .showSeekingThrobber: true,
     .userAgent: "",
     .transportRTSPThrough: RTSPTransportation.tcp.rawValue,
     .ytdlEnabled: true,

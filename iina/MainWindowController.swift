@@ -2794,7 +2794,8 @@ class MainWindowController: PlayerWindowController {
   ///     [paused-for-cache](https://mpv.io/manual/stable/#command-interface-paused-for-cache) is `true`
   ///     and can not be used to provide an indication of progress when seeking.
   func updateNetworkState() {
-    guard player.info.pausedForCache || player.info.isSeeking else {
+    guard player.info.pausedForCache && Preference.bool(for: .showBufferingThrobber)
+            || player.info.isSeeking && Preference.bool(for: .showSeekingThrobber) else {
       bufferIndicatorView.isHidden = true
       return
     }

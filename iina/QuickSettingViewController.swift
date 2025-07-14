@@ -852,8 +852,11 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBAction func loadExternalSubAction(_ sender: NSSegmentedControl) {
     if sender.selectedSegment == 0 {
       let currentDir = player.info.currentURL?.deletingLastPathComponent()
+      // In addition to subtitle files allow the user to choose video files as mpv will look for
+      // and load embedded subtitle streams in the video file.
       Utility.quickOpenPanel(title: "Load external subtitle", chooseDir: false, dir: currentDir,
-                             sheetWindow: player.currentWindow, allowedFileTypes: Utility.supportedFileExt[.sub]) { url in
+                             sheetWindow: player.currentWindow,
+                             allowedFileTypes: Utility.containsSubExt) { url in
         // set a delay
         self.player.loadExternalSubFile(url, delay: true)
         self.subTableView.reloadData()

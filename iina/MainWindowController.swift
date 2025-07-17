@@ -2531,7 +2531,7 @@ class MainWindowController: PlayerWindowController {
       // - Resize the window to fit video size
       // - Use physical resolution on Retina displays
       // - Direct use of the mpv geometry option
-      let geometrySet = player.mpv.getString(MPVOption.Window.geometry) != nil
+      let geometrySet = !(player.mpv.getString(MPVOption.Window.geometry) ?? "").isEmpty
       let resizeTiming = Preference.enum(for: .resizeWindowTiming) as Preference.ResizeWindowTiming
       switch resizeTiming {
       case .always:

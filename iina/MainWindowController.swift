@@ -695,7 +695,9 @@ class MainWindowController: PlayerWindowController {
       NSScreen.log("NSScreen.screens[\(screen.offset)]" , screen.element)
     }
 
-    videoView.videoLayer.draw(forced: true)
+    // If a video is not actively playing then the initial drawing of the view needs to be forced.
+    // The forceDraw method will check to see if drawing is actually needed.
+    forceDraw("window loaded")
   }
 
   /// Returns the position in seconds for the given percent of the total duration of the video the percentage represents.
@@ -1165,7 +1167,7 @@ class MainWindowController: PlayerWindowController {
       if recognizer.state == .began {
         // began
         lastMagnification = recognizer.magnification
-        videoView.videoLayer.isAsynchronous = true
+        videoView.videoLayer.inLiveResize = true
         frameWhenStartedPinching = window.frame
       } else if recognizer.state == .changed {
         // changed
@@ -1182,7 +1184,7 @@ class MainWindowController: PlayerWindowController {
         lastMagnification = recognizer.magnification
       } else if recognizer.state == .ended {
         updateWindowParametersForMPV()
-        videoView.videoLayer.isAsynchronous = false
+        videoView.videoLayer.inLiveResize = false
       }
     }
   }
@@ -1327,7 +1329,7 @@ class MainWindowController: PlayerWindowController {
     videoViewConstraints.values.forEach { $0.constant = 0 }
     videoView.needsLayout = true
     videoView.layoutSubtreeIfNeeded()
-    videoView.videoLayer.draw(forced: true)
+    forceDraw("entered full screen mode")
 
     if Preference.bool(for: .blackOutMonitor) {
       blackOutOtherMonitors()
@@ -1437,7 +1439,7 @@ class MainWindowController: PlayerWindowController {
     videoViewConstraints.values.forEach { $0.constant = 0 }
     videoView.needsLayout = true
     videoView.layoutSubtreeIfNeeded()
-    videoView.videoLayer.draw(forced: true)
+    forceDraw("exited full screen mode")
 
     if Preference.bool(for: .pauseWhenLeavingFullScreen) && player.info.state == .playing {
       player.pause()
@@ -1450,7 +1452,7 @@ class MainWindowController: PlayerWindowController {
 
     resetCollectionBehavior()
     updateWindowParametersForMPV()
-    
+
     player.events.emit(.windowFullscreenChanged, data: false)
   }
 
@@ -1666,7 +1668,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   func windowWillStartLiveResize(_ notification: Notification) {
-    videoView.videoLayer.isAsynchronous = true
+    videoView.videoLayer.inLiveResize = true
   }
 
   // resize framebuffer in videoView after resizing.
@@ -1674,7 +1676,7 @@ class MainWindowController: PlayerWindowController {
     // Must not access mpv while it is asynchronously processing stop and quit commands.
     // See comments in windowWillExitFullScreen for details.
     guard player.info.state.active else { return }
-    videoView.videoLayer.isAsynchronous = false
+    videoView.videoLayer.inLiveResize = false
     updateWindowParametersForMPV()
   }
 
@@ -2217,11 +2219,7 @@ class MainWindowController: PlayerWindowController {
       videoView.needsLayout = true
       videoView.layoutSubtreeIfNeeded()
       // force rerender a frame
-      videoView.videoLayer.mpvGLQueue.async {
-        DispatchQueue.main.sync {
-          self.videoView.videoLayer.draw()
-        }
-      }
+      forceDraw("interactive cropping")
     }
 
     let controlView = mode.viewController()
@@ -3124,14 +3122,11 @@ extension MainWindowController: PIPViewControllerDelegate {
 
     addVideoViewToWindow()
 
-    // Similarly, we need to run a redraw here as well. We check to make sure we
-    // are paused, because this causes a janky animation in either case but as
-    // it's not necessary while the video is playing and significantly more
-    // noticeable, we only redraw if we are paused.
-    let currentTrackIsAlbumArt = player.info.currentTrack(.video)?.isAlbumart ?? false
-    if player.info.state == .paused || currentTrackIsAlbumArt {
-      videoView.videoLayer.draw(forced: true)
-    }
+    // Similarly, we need to run a redraw here as well. We check to make sure we are paused, because
+    // this causes a janky animation in either case but as it's not necessary while the video is
+    // playing and significantly more noticeable, we only redraw if we are paused. The forceDraw
+    // method checks to make sure drawing is required.
+    forceDraw("exiting PiP")
 
     updateTimer()
 

@@ -586,6 +586,7 @@ class PlayerCore: NSObject {
     // init mpv render context.
     mpv.mpvInitRendering()
     mainWindow.videoView.startDisplayLink()
+    log("Initialized rendering")
   }
 
   // unload main window video view
@@ -751,7 +752,7 @@ class PlayerCore: NSObject {
     if showMiniPlayer {
       notifyWindowVideoSizeChanged()
     }
-    videoView.videoLayer.draw(forced: true)
+    mainWindow.forceDraw("entered music mode")
     events.emit(.musicModeChanged, data: true)
   }
 
@@ -799,7 +800,7 @@ class PlayerCore: NSObject {
       mainWindow.updateTitle()
       notifyWindowVideoSizeChanged()
     }
-    mainWindow.videoView.videoLayer.draw(forced: true)
+    mainWindow.forceDraw("exited music mode")
     events.emit(.musicModeChanged, data: false)
   }
 
@@ -1944,7 +1945,7 @@ class PlayerCore: NSObject {
     // Must force drawing to cover the case where this player was previously used to play a video
     // and is now playing an audio file without an album cover and without using music mode.
     // See issue #5403.
-    mainWindow.videoView.videoLayer.draw(forced: true)
+    mainWindow.forceDraw("file loaded")
 
     // Get video size and set the initial window size
     let width = mpv.getInt(MPVProperty.width)

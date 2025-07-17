@@ -929,3 +929,20 @@ extension CGSize {
     return cropped
   }
 }
+
+#if DEBUG
+extension DispatchQueue {
+
+  /// Returns the label assigned to the current dispatch queue at creation time.
+  ///
+  /// This method is a Swift wrapper around the
+  /// [dispatch_queue_get_label](https://developer.apple.com/documentation/dispatch/1452939-dispatch_queue_get_label)
+  /// method.
+  /// - Note: This method is intended only to be used when debugging IINA.
+  /// - Returns: The label of the queue, or `nil` if the queue was not provided a label during initialization.
+  static func currentQueueLabel() -> String? {
+    let label = __dispatch_queue_get_label(nil)
+    return String(cString: label, encoding: .utf8)
+  }
+}
+#endif

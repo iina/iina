@@ -19,7 +19,7 @@ class VideoView: NSView {
     return layer
   }()
 
-  @Atomic var isUninited = false
+  @ReadWriteAtomic var isUninited = false
 
   var draggingTimer: Timer?
 
@@ -85,7 +85,7 @@ class VideoView: NSView {
   func uninit() {
     player.mpv.lockAndSetOpenGLContext()
     defer { player.mpv.unlockOpenGLContext() }
-    $isUninited.withLock() { isUninited in
+    $isUninited.withWriteLock() { isUninited in
       guard !isUninited else { return }
       isUninited = true
 
@@ -534,7 +534,7 @@ fileprivate func displayLinkCallback(
   _ flagsOut: UnsafeMutablePointer<CVOptionFlags>,
   _ context: UnsafeMutableRawPointer?) -> CVReturn {
   let videoView = unsafeBitCast(context, to: VideoView.self)
-  videoView.$isUninited.withLock() { isUninited in
+  videoView.$isUninited.withReadLock() { isUninited in
     guard !isUninited else { return }
     videoView.player.mpv.mpvReportSwap()
   }

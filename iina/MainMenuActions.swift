@@ -342,8 +342,11 @@ extension MainMenuActionHandler {
 extension MainMenuActionHandler {
   @objc func menuLoadExternalSub(_ sender: NSMenuItem) {
     let currentDir = player.info.currentURL?.deletingLastPathComponent()
-    Utility.quickOpenPanel(title: "Load external subtitle file", chooseDir: false, dir: currentDir,
-                           sheetWindow: player.currentWindow) { url in
+    // In addition to subtitle files allow the user to choose video files as mpv will look for and
+    // load embedded subtitle streams in the video file.
+    Utility.quickOpenPanel(title: "Load external subtitle", chooseDir: false, dir: currentDir,
+                           sheetWindow: player.currentWindow,
+                           allowedFileTypes: Utility.containsSubExt) { url in
       self.player.loadExternalSubFile(url, delay: true)
     }
   }

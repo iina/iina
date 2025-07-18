@@ -26,6 +26,9 @@ class Utility {
   static let blacklistExt = supportedFileExt[.sub]! + multipleFilePlaylistExt
   static let lut3dExt = ["3dl", "cube", "dat", "m3d"]
 
+  /// File types that are subtitles or can contain subtitles.
+  static let containsSubExt = supportedFileExt[.sub]! + supportedFileExt[.video]!
+
   enum ValidationResult {
     case ok
     case valueIsEmpty

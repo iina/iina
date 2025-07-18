@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "Pausa";
 "osd.resume" = "Riprendi";
-"osd.volume" = "Volume: %i";
+"osd.volume" = "Volume: %@";
 "osd.speed" = "Velocità: %@x";
 "osd.aspect" = "Proporzioni: %@";
 "osd.crop" = "Ritaglio: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "Deinterlacciamento: %@";
 "osd.hwdec" = "Decodifica dell'Hardware: %@";
 "osd.audio_delay.nodelay" = "Differenza audio: 0.00s";
-"osd.audio_delay.later" = "Differenza audio: %.2fs dopo";
-"osd.audio_delay.earlier" = "Differenza audio: %.2fs prima";
+"osd.audio_delay.later" = "Differenza audio: %@s dopo";
+"osd.audio_delay.earlier" = "Differenza audio: %@s prima";
 "osd.sub_delay.nodelay" = "Differenza sottotitoli: 0.00s";
-"osd.sub_delay.later" = "Differenza sottotitoli: %.2fs dopo";
-"osd.sub_delay.earlier" = "Differenza sottotitoli: %.2fs prima";
-"osd.subtitle_pos" = "Posizione sottotitoli: %.1f";
+"osd.sub_delay.later" = "Differenza sottotitoli: %@s dopo";
+"osd.sub_delay.earlier" = "Differenza sottotitoli: %@s prima";
+"osd.subtitle_pos" = "Posizione sottotitoli: %@";
 "osd.sub_hidden" = "Nascondere Sottotitoli";
 "osd.sub_visible" = "Mostrare Sottotitoli";
 "osd.sub_second_delay.nodelay" = "Ritardo Sottotitoli Secondari: Nessun Ritardo";
-"osd.sub_second_delay.later" = "Ritardo Sottotitoli Secondari: %.2fs Dopo";
-"osd.sub_second_delay.earlier" = "Ritardo Sottotitoli Secondari: %.2fs Prima";
+"osd.sub_second_delay.later" = "Ritardo Sottotitoli Secondari: %@s Dopo";
+"osd.sub_second_delay.earlier" = "Ritardo Sottotitoli Secondari: %@s Prima";
 "osd.sub_second_hidden" = "Nascondere Sottotitoli Secondari";
-"osd.sub_second_pos" = "Posizione Sottotitoli Secondari: %.1f";
+"osd.sub_second_pos" = "Posizione Sottotitoli Secondari: %@";
 "osd.sub_second_visible" = "Mostrare Sottotitoli Secondari";
 "osd.mute" = "Muto";
 "osd.unmute" = "Attiva";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "Ripeti A-B: azzerato";
 "osd.stop" = "Ferma";
 "osd.chapter" = "Capitolo: %@";
-"osd.subtitle_scale" = "Scala sottotitoli: %.2fx";
+"osd.subtitle_scale" = "Scala sottotitoli: %@x";
 "osd.add_to_playlist" = "Aggiungi %i file alla playlist";
 "osd.clear_playlist" = "Playlist cancellata";
 "osd.video_eq.contrast" = "Contrasto: %i";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Installa il plug-in Media Online da 'Plug-in → Installa' da GitHub per godere di funzionalità avanzate come il download di video e aggiornamenti automatici di yt-dlp.";
 "preference.ytdl_plugin_installed" = "Il supporto youtube-dl integrato è disabilitato perché è installato il plug-in Media Online.";
 
-"menu.volume" = "Volume: %d";
-"menu.volume_muted" = "Volume: %d (Spento)";
-"menu.audio_delay" = "Differenza audio: %.2fs";
-"menu.sub_delay" = "Differenza sottotitoli: %.2fs";
+"menu.volume" = "Volume: %@";
+"menu.volume_muted" = "Volume: %@ (Spento)";
+"menu.audio_delay" = "Differenza audio: %@s";
+"menu.sub_delay" = "Differenza sottotitoli: %@s";
 "menu.sub_hide" = "Nascondere Sottotitoli";
 "menu.sub_show" = "Mostra sottotitoli";
 "menu.sub_second_hide" = "Nascondi Sottotitoli Secondari";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "Mostra pannello sottotitoli";
 "menu.hide_subtitles" = "Nascondi pannello sottotitoli";
 
-"menu.seek_forward" = "Avanti %.0fs";
-"menu.seek_backward" = "Indietro %.0fs";
+"menu.seek_forward" = "Avanti %@s";
+"menu.seek_backward" = "Indietro %@s";
 "menu.speed_up" = "Aumenta la velocità di %@x";
 "menu.speed_down" = "Riduci la velocità di %@x";
-"menu.volume_up" = "Volume + %.0f%%";
-"menu.volume_down" = "Volume - %.0f%%";
-"menu.audio_delay_up" = "Ritarda audio + %.1fs";
-"menu.audio_delay_down" = "Anticipa audio - %.1fs";
-"menu.sub_delay_up" = "Ritarda sottotitoli + %.1fs";
-"menu.sub_delay_down" = "Anticipa sottotitoli - %.1fs";
+"menu.volume_up" = "Volume + %@%%";
+"menu.volume_down" = "Volume - %@%%";
+"menu.audio_delay_up" = "Ritarda audio + %@s";
+"menu.audio_delay_down" = "Anticipa audio - %@s";
+"menu.sub_delay_up" = "Ritarda sottotitoli + %@s";
+"menu.sub_delay_down" = "Anticipa sottotitoli - %@s";
 
 "menu.crop_custom" = "Altro…";
 "menu.find_online_sub" = "Trova sottotitoli online da %@";

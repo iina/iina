@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "Приостановить";
 "osd.resume" = "Возобновить";
-"osd.volume" = "Громкость: %i";
+"osd.volume" = "Громкость: %@";
 "osd.speed" = "Скорость: %@×";
 "osd.aspect" = "Соотношение сторон: %@";
 "osd.crop" = "Кадрирование: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "Деинтерлейсинг: %@";
 "osd.hwdec" = "Аппаратное декодирование: %@";
 "osd.audio_delay.nodelay" = "Задержка аудио: нет задержки";
-"osd.audio_delay.later" = "Задержка аудио: на %.2f с позже";
-"osd.audio_delay.earlier" = "Задержка аудио: на %.2f с раньше";
+"osd.audio_delay.later" = "Задержка аудио: на %@ с позже";
+"osd.audio_delay.earlier" = "Задержка аудио: на %@ с раньше";
 "osd.sub_delay.nodelay" = "Задержка субтитров: нет задержки";
-"osd.sub_delay.later" = "Задержка субтитров: на %.2f с позже";
-"osd.sub_delay.earlier" = "Задержка субтитров: на %.2f с раньше";
-"osd.subtitle_pos" = "Позиция субтитров: %.1f";
+"osd.sub_delay.later" = "Задержка субтитров: на %@ с позже";
+"osd.sub_delay.earlier" = "Задержка субтитров: на %@ с раньше";
+"osd.subtitle_pos" = "Позиция субтитров: %@";
 "osd.sub_hidden" = "Субтитры скрыты";
 "osd.sub_visible" = "Субтитры отображаются";
 "osd.sub_second_delay.nodelay" = "Задержка вторых субтитров: без задержки";
-"osd.sub_second_delay.later" = "Задержка вторых субтитров: %.2f сек. позже";
-"osd.sub_second_delay.earlier" = "Задержка вторых субтитров: %.2f сек. раньше";
+"osd.sub_second_delay.later" = "Задержка вторых субтитров: %@ сек. позже";
+"osd.sub_second_delay.earlier" = "Задержка вторых субтитров: %@ сек. раньше";
 "osd.sub_second_hidden" = "Вторые субтитры скрыты";
-"osd.sub_second_pos" = "Позиция вторых субтитров: %.1f";
+"osd.sub_second_pos" = "Позиция вторых субтитров: %@";
 "osd.sub_second_visible" = "Вторые субтитры видны";
 "osd.mute" = "Выключить звук";
 "osd.unmute" = "Включение звука";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "Цикл: сброшен";
 "osd.stop" = "Остановить";
 "osd.chapter" = "Глава: %@";
-"osd.subtitle_scale" = "Масштаб субтитров: %.2f×";
+"osd.subtitle_scale" = "Масштаб субтитров: %@×";
 "osd.add_to_playlist" = "Добавлено %i файлов в плейлист";
 "osd.clear_playlist" = "Плейлист очищен";
 "osd.video_eq.contrast" = "Контраст: %i";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Установите плагин Online Media из меню «Плагины > Установить с GitHub», чтобы получить дополнительные возможности, такие как загрузка видео и автоматическое обновление yt-dlp.";
 "preference.ytdl_plugin_installed" = "Встроенная поддержка youtube-dl отключена, так как у вас установлен плагин Online Media.";
 
-"menu.volume" = "Громкость: %d";
-"menu.volume_muted" = "Громкость: %d (без звука)";
-"menu.audio_delay" = "Задержка аудио: %.2f с";
-"menu.sub_delay" = "Задержка субтитров: %.2f с";
+"menu.volume" = "Громкость: %@";
+"menu.volume_muted" = "Громкость: %@ (без звука)";
+"menu.audio_delay" = "Задержка аудио: %@ с";
+"menu.sub_delay" = "Задержка субтитров: %@ с";
 "menu.sub_hide" = "Скрыть субтитры";
 "menu.sub_show" = "Показать субтитры";
 "menu.sub_second_hide" = "Скрыть вторые субтитры";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "Показывать панель субтитров";
 "menu.hide_subtitles" = "Скрыть панель субтитров";
 
-"menu.seek_forward" = "Шаг вперед %.0f с";
-"menu.seek_backward" = "Шаг назад %.0f с";
+"menu.seek_forward" = "Шаг вперед %@ с";
+"menu.seek_backward" = "Шаг назад %@ с";
 "menu.speed_up" = "Повысить скорость до %@x";
 "menu.speed_down" = "Снизить скорость до %@x";
-"menu.volume_up" = "Громкость + %.0f%%";
-"menu.volume_down" = "Громкость - %.0f%%";
-"menu.audio_delay_up" = "Задержка аудио + %.1f с";
-"menu.audio_delay_down" = "Задержка аудио - %.1f с";
-"menu.sub_delay_up" = "Задержка субтитров + %.1f с";
-"menu.sub_delay_down" = "Задержка субтитров - %.1f с";
+"menu.volume_up" = "Громкость + %@%%";
+"menu.volume_down" = "Громкость - %@%%";
+"menu.audio_delay_up" = "Задержка аудио + %@ с";
+"menu.audio_delay_down" = "Задержка аудио - %@ с";
+"menu.sub_delay_up" = "Задержка субтитров + %@ с";
+"menu.sub_delay_down" = "Задержка субтитров - %@ с";
 
 "menu.crop_custom" = "Другое…";
 "menu.find_online_sub" = "Найти субтитры онлайн на %@";

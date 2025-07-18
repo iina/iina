@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "Pauzeer";
 "osd.resume" = "Hervat";
-"osd.volume" = "Volume: %i";
+"osd.volume" = "Volume: %@";
 "osd.speed" = "Snelheid: %@x";
 "osd.aspect" = "Beeldverhouding: %@";
 "osd.crop" = "Bijsnijden: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "Deinterlace: %@";
 "osd.hwdec" = "Hardware acceleratie: %@";
 "osd.audio_delay.nodelay" = "Geen audiovertraging";
-"osd.audio_delay.later" = "Audio vertraagd met %.2fs";
-"osd.audio_delay.earlier" = "Audio versneld met %.2fs";
+"osd.audio_delay.later" = "Audio vertraagd met %@s";
+"osd.audio_delay.earlier" = "Audio versneld met %@s";
 "osd.sub_delay.nodelay" = "Geen ondertitelingvertraging";
-"osd.sub_delay.later" = "Ondertiteling versneld met %.2fs";
-"osd.sub_delay.earlier" = "Ondertiteling vertraagd met %.2fs";
-"osd.subtitle_pos" = "Ondertitelingspositie: %.1f";
+"osd.sub_delay.later" = "Ondertiteling versneld met %@s";
+"osd.sub_delay.earlier" = "Ondertiteling vertraagd met %@s";
+"osd.subtitle_pos" = "Ondertitelingspositie: %@";
 "osd.sub_hidden" = "Ondertitels Verborgen";
 "osd.sub_visible" = "Ondertitels zichtbaar";
 "osd.sub_second_delay.nodelay" = "Secundaire ondertitel vertraging: Geen vertraging";
-"osd.sub_second_delay.later" = "Secundaire ondertitel vertraging: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secundaire ondertitel vertraging: %.2fs eerder";
+"osd.sub_second_delay.later" = "Secundaire ondertitel vertraging: %@s Later";
+"osd.sub_second_delay.earlier" = "Secundaire ondertitel vertraging: %@s eerder";
 "osd.sub_second_hidden" = "Secundaire ondertitels verborgen";
-"osd.sub_second_pos" = "Secundaire ondertitelingspositie: %.1f";
+"osd.sub_second_pos" = "Secundaire ondertitelingspositie: %@";
 "osd.sub_second_visible" = "Secundaire ondertitels zichtbaar";
 "osd.mute" = "Geluid uit";
 "osd.unmute" = "Geluid aan";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "Herhaalgedeelte opgeheven";
 "osd.stop" = "Stop";
 "osd.chapter" = "Hoofdstuk: %@";
-"osd.subtitle_scale" = "Ondertitelingsschaal: %.2fx";
+"osd.subtitle_scale" = "Ondertitelingsschaal: %@x";
 "osd.add_to_playlist" = "%i bestanden toegevoegd aan afspeellijst";
 "osd.clear_playlist" = "Afspeellijst gewist";
 "osd.video_eq.contrast" = "Contrast: %i";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
 "preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
-"menu.volume" = "Volume: %d";
-"menu.volume_muted" = "Volume: %d (Muted)";
-"menu.audio_delay" = "Audiovertraging: %.2fs";
-"menu.sub_delay" = "Ondertitelingvertraging: %.2fs";
+"menu.volume" = "Volume: %@";
+"menu.volume_muted" = "Volume: %@ (Muted)";
+"menu.audio_delay" = "Audiovertraging: %@s";
+"menu.sub_delay" = "Ondertitelingvertraging: %@s";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
 "menu.sub_second_hide" = "Hide Secondary Subtitles";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "Show Subtitles Panel";
 "menu.hide_subtitles" = "Hide Subtitles Panel";
 
-"menu.seek_forward" = "Ga %.0fs vooruit";
-"menu.seek_backward" = "Ga %.0fs terug";
+"menu.seek_forward" = "Ga %@s vooruit";
+"menu.seek_backward" = "Ga %@s terug";
 "menu.speed_up" = "Speed Up by %@x";
 "menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "Volume + %.0f%%";
-"menu.volume_down" = "Volume - %.0f%%";
-"menu.audio_delay_up" = "Audiovertraging + %.1fs";
-"menu.audio_delay_down" = "Audiovertraging - %.1fs";
-"menu.sub_delay_up" = "Ondertitelingvertraging + %.1fs";
-"menu.sub_delay_down" = "Ondertitelingingvertraging - %.1fs";
+"menu.volume_up" = "Volume + %@%%";
+"menu.volume_down" = "Volume - %@%%";
+"menu.audio_delay_up" = "Audiovertraging + %@s";
+"menu.audio_delay_down" = "Audiovertraging - %@s";
+"menu.sub_delay_up" = "Ondertitelingvertraging + %@s";
+"menu.sub_delay_down" = "Ondertitelingingvertraging - %@s";
 
 "menu.crop_custom" = "Pas aan…";
 "menu.find_online_sub" = "Find Online Subtitles from %@";

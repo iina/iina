@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "Pause";
 "osd.resume" = "Resume";
-"osd.volume" = "Volume: %i";
+"osd.volume" = "Volume: %@";
 "osd.speed" = "Speed: %@x";
 "osd.aspect" = "Aspect Ratio: %@";
 "osd.crop" = "Crop: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "Deinterlace: %@";
 "osd.hwdec" = "Hardware Decoding: %@";
 "osd.audio_delay.nodelay" = "Audio Delay: No Delay";
-"osd.audio_delay.later" = "Audio Delay: %.2fs Later";
-"osd.audio_delay.earlier" = "Audio Delay: %.2fs Earlier";
+"osd.audio_delay.later" = "Audio Delay: %@s Later";
+"osd.audio_delay.earlier" = "Audio Delay: %@s Earlier";
 "osd.sub_delay.nodelay" = "Subtitle Delay: No Delay";
-"osd.sub_delay.later" = "Subtitle Delay: %.2fs Later";
-"osd.sub_delay.earlier" = "Subtitle Delay: %.2fs Earlier";
-"osd.subtitle_pos" = "Subtitle Position: %.1f";
+"osd.sub_delay.later" = "Subtitle Delay: %@s Later";
+"osd.sub_delay.earlier" = "Subtitle Delay: %@s Earlier";
+"osd.subtitle_pos" = "Subtitle Position: %@";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
 "osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %@s Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %@s Earlier";
 "osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %@";
 "osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Mute";
 "osd.unmute" = "Unmute";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "AB-Loop: Cleared";
 "osd.stop" = "Stop";
 "osd.chapter" = "Chapter: %@";
-"osd.subtitle_scale" = "Subtitle Scale: %.2fx";
+"osd.subtitle_scale" = "Subtitle Scale: %@x";
 "osd.add_to_playlist" = "Added %i Files to Playlist";
 "osd.clear_playlist" = "Cleared Playlist";
 "osd.video_eq.contrast" = "Contrast: %i";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
 "preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
-"menu.volume" = "Volume: %d";
-"menu.volume_muted" = "Volume: %d (Muted)";
-"menu.audio_delay" = "Audio Delay: %.2fs";
-"menu.sub_delay" = "Subtitle Delay: %.2fs";
+"menu.volume" = "Volume: %@";
+"menu.volume_muted" = "Volume: %@ (Muted)";
+"menu.audio_delay" = "Audio Delay: %@s";
+"menu.sub_delay" = "Subtitle Delay: %@s";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
 "menu.sub_second_hide" = "Hide Secondary Subtitles";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "Show Subtitles Panel";
 "menu.hide_subtitles" = "Hide Subtitles Panel";
 
-"menu.seek_forward" = "Step Forward %.0fs";
-"menu.seek_backward" = "Step Backward %.0fs";
+"menu.seek_forward" = "Step Forward %@s";
+"menu.seek_backward" = "Step Backward %@s";
 "menu.speed_up" = "Speed Up by %@x";
 "menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "Volume + %.0f%%";
-"menu.volume_down" = "Volume - %.0f%%";
-"menu.audio_delay_up" = "Audio Delay + %.1fs";
-"menu.audio_delay_down" = "Audio Delay - %.1fs";
-"menu.sub_delay_up" = "Subtitle Delay + %.1fs";
-"menu.sub_delay_down" = "Subtitle Delay - %.1fs";
+"menu.volume_up" = "Volume + %@%%";
+"menu.volume_down" = "Volume - %@%%";
+"menu.audio_delay_up" = "Audio Delay + %@s";
+"menu.audio_delay_down" = "Audio Delay - %@s";
+"menu.sub_delay_up" = "Subtitle Delay + %@s";
+"menu.sub_delay_down" = "Subtitle Delay - %@s";
 
 "menu.crop_custom" = "Custom…";
 "menu.find_online_sub" = "Find Online Subtitles from %@";

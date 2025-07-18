@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "Pozastaveno";
 "osd.resume" = "Pokračování";
-"osd.volume" = "Hlasitost: %i";
+"osd.volume" = "Hlasitost: %@";
 "osd.speed" = "Rychlost: %@×";
 "osd.aspect" = "Poměr stran: %@";
 "osd.crop" = "Ořez: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "Odebrání prokládání: %@";
 "osd.hwdec" = "Hardwarové dekódování: %@";
 "osd.audio_delay.nodelay" = "Zpoždění zvuku: Žádné";
-"osd.audio_delay.later" = "Zpoždění zvuku: %.2f s";
-"osd.audio_delay.earlier" = "Zpoždění zvuku: −%.2f s";
+"osd.audio_delay.later" = "Zpoždění zvuku: %@ s";
+"osd.audio_delay.earlier" = "Zpoždění zvuku: −%@ s";
 "osd.sub_delay.nodelay" = "Zpoždění titulků: Žádné";
-"osd.sub_delay.later" = "Zpoždění titulků: %.2f s";
-"osd.sub_delay.earlier" = "Zpoždění titulků: −%.2f s";
-"osd.subtitle_pos" = "Umístění titulků: %.1f";
+"osd.sub_delay.later" = "Zpoždění titulků: %@ s";
+"osd.sub_delay.earlier" = "Zpoždění titulků: −%@ s";
+"osd.subtitle_pos" = "Umístění titulků: %@";
 "osd.sub_hidden" = "Titulky skryty";
 "osd.sub_visible" = "Titulky zobrazeny";
 "osd.sub_second_delay.nodelay" = "Zpoždění druhých titulků: Žádné";
-"osd.sub_second_delay.later" = "Zpoždění druhých titulků: %.2f s";
-"osd.sub_second_delay.earlier" = "Zpoždění druhých titulků: −%.2f s";
+"osd.sub_second_delay.later" = "Zpoždění druhých titulků: %@ s";
+"osd.sub_second_delay.earlier" = "Zpoždění druhých titulků: −%@ s";
 "osd.sub_second_hidden" = "Druhé titulky skryty";
-"osd.sub_second_pos" = "Umístění druhých titulků: %.1f";
+"osd.sub_second_pos" = "Umístění druhých titulků: %@";
 "osd.sub_second_visible" = "Druhé titulky zobrazeny";
 "osd.mute" = "Ztlumeno";
 "osd.unmute" = "Zesíleno";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "Smyčka zrušena";
 "osd.stop" = "Zastaveno";
 "osd.chapter" = "Kapitola: %@";
-"osd.subtitle_scale" = "Velikost titulků: %.2f×";
+"osd.subtitle_scale" = "Velikost titulků: %@×";
 "osd.add_to_playlist" = "Souborů přidáno do playlistu: %i";
 "osd.clear_playlist" = "Playlist smazán";
 "osd.video_eq.contrast" = "Kontrast: %i";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Pro pokročilé funkce jako jsou stahování videa a automatické aktualizace yt-dlp nainstalujte plug-in Online Media pomocí výběru „Instalovat z GitHub“ v Nastavení > Plug-iny.";
 "preference.ytdl_plugin_installed" = "Vestavěná podpora youtube-dl je zakázána, protože je nainstalován Online media plug-in.";
 
-"menu.volume" = "Hlasitost: %d";
-"menu.volume_muted" = "Hlasitost: %d (Ztlumeno)";
-"menu.audio_delay" = "Zpoždění zvuku: %.2f s";
-"menu.sub_delay" = "Zpoždění titulků: %.2f s";
+"menu.volume" = "Hlasitost: %@";
+"menu.volume_muted" = "Hlasitost: %@ (Ztlumeno)";
+"menu.audio_delay" = "Zpoždění zvuku: %@ s";
+"menu.sub_delay" = "Zpoždění titulků: %@ s";
 "menu.sub_hide" = "Skrýt titulky";
 "menu.sub_show" = "Zobrazit titulky";
 "menu.sub_second_hide" = "Skrýt druhé titulky";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "Zobrazit panel titulků";
 "menu.hide_subtitles" = "Skrýt panel titulků";
 
-"menu.seek_forward" = "Posunout vpřed o %.0f s";
-"menu.seek_backward" = "Posunout vzad o %.0f s";
+"menu.seek_forward" = "Posunout vpřed o %@ s";
+"menu.seek_backward" = "Posunout vzad o %@ s";
 "menu.speed_up" = "Zrychlit %@×";
 "menu.speed_down" = "Zpomalit %@×";
-"menu.volume_up" = "Hlasitost +%.0f %%";
-"menu.volume_down" = "Hlasitost −%.0f %%";
-"menu.audio_delay_up" = "Zpoždění zvuku +%.1f s";
-"menu.audio_delay_down" = "Zpoždění zvuku −%.1f s";
-"menu.sub_delay_up" = "Zpoždění titulků +%.1f s";
-"menu.sub_delay_down" = "Zpoždění titulků −%.1f s";
+"menu.volume_up" = "Hlasitost +%@ %%";
+"menu.volume_down" = "Hlasitost −%@ %%";
+"menu.audio_delay_up" = "Zpoždění zvuku +%@ s";
+"menu.audio_delay_down" = "Zpoždění zvuku −%@ s";
+"menu.sub_delay_up" = "Zpoždění titulků +%@ s";
+"menu.sub_delay_down" = "Zpoždění titulků −%@ s";
 
 "menu.crop_custom" = "Vlastní…";
 "menu.find_online_sub" = "Vyhledat titulky online z %@";

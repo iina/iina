@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "Pausieren";
 "osd.resume" = "Wiedergabe";
-"osd.volume" = "Lautstärke: %i";
+"osd.volume" = "Lautstärke: %@";
 "osd.speed" = "Geschwindigkeit: %@x";
 "osd.aspect" = "Seitenverhältnis: %@";
 "osd.crop" = "Zuschneiden: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "Deinterlacing: %@";
 "osd.hwdec" = "Hardware-Dekodierung %@";
 "osd.audio_delay.nodelay" = "Audioverzögerung: Keine";
-"osd.audio_delay.later" = "Audioverzögerung: %.2f s später";
-"osd.audio_delay.earlier" = "Audioverzögerung: %.2f s früher";
+"osd.audio_delay.later" = "Audioverzögerung: %@ s später";
+"osd.audio_delay.earlier" = "Audioverzögerung: %@ s früher";
 "osd.sub_delay.nodelay" = "Untertitelverzögerung: Keine";
-"osd.sub_delay.later" = "Untertitelverzögerung: %.2f s später";
-"osd.sub_delay.earlier" = "Untertitelverzögerung: %.2f s früher";
-"osd.subtitle_pos" = "Untertitelposition: %.1f";
+"osd.sub_delay.later" = "Untertitelverzögerung: %@ s später";
+"osd.sub_delay.earlier" = "Untertitelverzögerung: %@ s früher";
+"osd.subtitle_pos" = "Untertitelposition: %@";
 "osd.sub_hidden" = "Untertitel ausgeblendet";
 "osd.sub_visible" = "Untertitel sichtbar";
 "osd.sub_second_delay.nodelay" = "Verzögerung des zweiten Untertitels: Keine Verzögerung";
-"osd.sub_second_delay.later" = "Verzögerung des zweiten Untertitels: %.2fs später";
-"osd.sub_second_delay.earlier" = "Verzögerung des zweiten Untertitels: %.2fs früher";
+"osd.sub_second_delay.later" = "Verzögerung des zweiten Untertitels: %@s später";
+"osd.sub_second_delay.earlier" = "Verzögerung des zweiten Untertitels: %@s früher";
 "osd.sub_second_hidden" = "Zweite Untertitel ausgeblendet";
-"osd.sub_second_pos" = "Position des zweiten Untertitels: %.1f";
+"osd.sub_second_pos" = "Position des zweiten Untertitels: %@";
 "osd.sub_second_visible" = "Zweite Untertitel sichtbar";
 "osd.mute" = "Stumm";
 "osd.unmute" = "Ton ein";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "A-B-Schleife: Aus";
 "osd.stop" = "Stopp";
 "osd.chapter" = "Kapitel: %@";
-"osd.subtitle_scale" = "Untertitelgröße: %.2fx";
+"osd.subtitle_scale" = "Untertitelgröße: %@x";
 "osd.add_to_playlist" = "%i Dateien zur Wiedergabeliste hinzugefügt";
 "osd.clear_playlist" = "Wiedergabeliste geleert";
 "osd.video_eq.contrast" = "Kontrast: %i";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
 "preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
-"menu.volume" = "Lautstärke: %d";
-"menu.volume_muted" = "Lautstärke: %d (Stumm)";
-"menu.audio_delay" = "Audioverzögerung: %.2f s";
-"menu.sub_delay" = "Untertitelverzögerung: %.2f s";
+"menu.volume" = "Lautstärke: %@";
+"menu.volume_muted" = "Lautstärke: %@ (Stumm)";
+"menu.audio_delay" = "Audioverzögerung: %@ s";
+"menu.sub_delay" = "Untertitelverzögerung: %@ s";
 "menu.sub_hide" = "Untertitel ausblenden";
 "menu.sub_show" = "Untertitel anzeigen";
 "menu.sub_second_hide" = "Zweite Untertitel ausblenden";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "Untertiteleinstellungen anzeigen";
 "menu.hide_subtitles" = "Untertiteleinstellungen verbergen";
 
-"menu.seek_forward" = "%.0f s vorspulen";
-"menu.seek_backward" = "%.0f s zurückspulen";
+"menu.seek_forward" = "%@ s vorspulen";
+"menu.seek_backward" = "%@ s zurückspulen";
 "menu.speed_up" = "Geschwindigkeit um %@x erhöhen";
 "menu.speed_down" = "Geschwindigkeit um %@x verlangsamen";
-"menu.volume_up" = "Lautstärke + %.0f%%";
-"menu.volume_down" = "Lautstärke − %.0f%%";
-"menu.audio_delay_up" = "Audioverzögerung + %.1f s";
-"menu.audio_delay_down" = "Audioverzögerung − %.1f s";
-"menu.sub_delay_up" = "Untertitelverzögerung + %.1f s";
-"menu.sub_delay_down" = "Untertitelverzögerung − %.1f s";
+"menu.volume_up" = "Lautstärke + %@%%";
+"menu.volume_down" = "Lautstärke − %@%%";
+"menu.audio_delay_up" = "Audioverzögerung + %@ s";
+"menu.audio_delay_down" = "Audioverzögerung − %@ s";
+"menu.sub_delay_up" = "Untertitelverzögerung + %@ s";
+"menu.sub_delay_down" = "Untertitelverzögerung − %@ s";
 
 "menu.crop_custom" = "Eigene …";
 "menu.find_online_sub" = "Online-Untertitel von „%@“ finden";

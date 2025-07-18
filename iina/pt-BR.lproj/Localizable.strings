@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "Em Pausa";
 "osd.resume" = "Reproduzindo";
-"osd.volume" = "Volume: %i";
+"osd.volume" = "Volume: %@";
 "osd.speed" = "Speed: %@x";
 "osd.aspect" = "Proporção: %@";
 "osd.crop" = "Cortar: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "Desentrelaçar: %@";
 "osd.hwdec" = "Decodificação por hardware: %@";
 "osd.audio_delay.nodelay" = "Atraso de Audio: Sem Atraso";
-"osd.audio_delay.later" = "Atraso de Audio: %.2fs Atrasado";
-"osd.audio_delay.earlier" = "Atraso de Audio: %.2fs Antecipado";
+"osd.audio_delay.later" = "Atraso de Audio: %@s Atrasado";
+"osd.audio_delay.earlier" = "Atraso de Audio: %@s Antecipado";
 "osd.sub_delay.nodelay" = "Atraso de Legenda: Sem Atraso";
-"osd.sub_delay.later" = "Atraso de Legenda: %.2fs Atrasada";
-"osd.sub_delay.earlier" = "Atraso de Legenda: %.2fs Antecipada";
-"osd.subtitle_pos" = "Posição da Legenda: %.1f";
+"osd.sub_delay.later" = "Atraso de Legenda: %@s Atrasada";
+"osd.sub_delay.earlier" = "Atraso de Legenda: %@s Antecipada";
+"osd.subtitle_pos" = "Posição da Legenda: %@";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
 "osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %@s Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %@s Earlier";
 "osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %@";
 "osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Sem Audio";
 "osd.unmute" = "Audio Ligado";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "AB-Loop: Desfeito";
 "osd.stop" = "Parado";
 "osd.chapter" = "Capítulo: %@";
-"osd.subtitle_scale" = "Escala da Legenda: %.2fx";
+"osd.subtitle_scale" = "Escala da Legenda: %@x";
 "osd.add_to_playlist" = "%i Arquivos Adicionados à Lista de Reprodução";
 "osd.clear_playlist" = "Lista de Reprodução Esvaziada";
 "osd.video_eq.contrast" = "Contraste: %i";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
 "preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
-"menu.volume" = "Volume: %d";
-"menu.volume_muted" = "Volume: %d (Mudo)";
-"menu.audio_delay" = "Atraso de Áudio: %.2fs";
-"menu.sub_delay" = "Atraso de Legenda: %.2fs";
+"menu.volume" = "Volume: %@";
+"menu.volume_muted" = "Volume: %@ (Mudo)";
+"menu.audio_delay" = "Atraso de Áudio: %@s";
+"menu.sub_delay" = "Atraso de Legenda: %@s";
 "menu.sub_hide" = "Ocultar legenda";
 "menu.sub_show" = "Show Subtitles";
 "menu.sub_second_hide" = "Hide Secondary Subtitles";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "Mostrar Painel de Legendas";
 "menu.hide_subtitles" = "Ocultar Painel de Legendas";
 
-"menu.seek_forward" = "Ir adiante %.0fs";
-"menu.seek_backward" = "Ir pra trás %.0fs";
+"menu.seek_forward" = "Ir adiante %@s";
+"menu.seek_backward" = "Ir pra trás %@s";
 "menu.speed_up" = "Speed Up by %@x";
 "menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "Volume + %.0f%%";
-"menu.volume_down" = "Volume - %.0f%%";
-"menu.audio_delay_up" = "Atraso de Áudio + %.1fs";
-"menu.audio_delay_down" = "Atraso de Áudio - %.1fs";
-"menu.sub_delay_up" = "Atraso de legenda + %.1fs";
-"menu.sub_delay_down" = "Atraso de legenda - %.1fs";
+"menu.volume_up" = "Volume + %@%%";
+"menu.volume_down" = "Volume - %@%%";
+"menu.audio_delay_up" = "Atraso de Áudio + %@s";
+"menu.audio_delay_down" = "Atraso de Áudio - %@s";
+"menu.sub_delay_up" = "Atraso de legenda + %@s";
+"menu.sub_delay_down" = "Atraso de legenda - %@s";
 
 "menu.crop_custom" = "Outro..";
 "menu.find_online_sub" = "Encontrar Legendas on-line em %@";

@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "Tauko";
 "osd.resume" = "Jatka";
-"osd.volume" = "Äänenvoimakkuus: %i";
+"osd.volume" = "Äänenvoimakkuus: %@";
 "osd.speed" = "Speed: %@x";
 "osd.aspect" = "Kuvasuhde: %@";
 "osd.crop" = "Rajaus: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "Lomituksenpoisto: %@";
 "osd.hwdec" = "Laitteistopohjainen purku: %@";
 "osd.audio_delay.nodelay" = "Äänen viive: Ei viivästystä";
-"osd.audio_delay.later" = "Äänen viive: %.2fs myöhemmin";
-"osd.audio_delay.earlier" = "Äänen viive: %.2fs aiemmin";
+"osd.audio_delay.later" = "Äänen viive: %@s myöhemmin";
+"osd.audio_delay.earlier" = "Äänen viive: %@s aiemmin";
 "osd.sub_delay.nodelay" = "Äänen viive: Ei viivästystä";
-"osd.sub_delay.later" = "Tekstityksen viive: %.2fs myöhemmin";
-"osd.sub_delay.earlier" = "Tekstityksen viive: %.2fs aiemmin";
-"osd.subtitle_pos" = "Tekstityksen sijainti: %.1f";
+"osd.sub_delay.later" = "Tekstityksen viive: %@s myöhemmin";
+"osd.sub_delay.earlier" = "Tekstityksen viive: %@s aiemmin";
+"osd.subtitle_pos" = "Tekstityksen sijainti: %@";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
 "osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %@s Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %@s Earlier";
 "osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %@";
 "osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Mykistä";
 "osd.unmute" = "Poista mykistys";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "AB-silmukka: Tyhjennetty";
 "osd.stop" = "Pysäytä";
 "osd.chapter" = "Kappale: %@";
-"osd.subtitle_scale" = "Tekstityksen skaalaus: %.2fx";
+"osd.subtitle_scale" = "Tekstityksen skaalaus: %@x";
 "osd.add_to_playlist" = "Lisätty %i tiedostoa soittolistaan";
 "osd.clear_playlist" = "Soittolista tyhjennetty";
 "osd.video_eq.contrast" = "Kontrasti: %i";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
 "preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
-"menu.volume" = "Äänenvoimakkuus: %d";
-"menu.volume_muted" = "Volume: %d (Muted)";
-"menu.audio_delay" = "Äänen viive: %.2fs";
-"menu.sub_delay" = "Tekstityksen viive: %.2fs";
+"menu.volume" = "Äänenvoimakkuus: %@";
+"menu.volume_muted" = "Volume: %@ (Muted)";
+"menu.audio_delay" = "Äänen viive: %@s";
+"menu.sub_delay" = "Tekstityksen viive: %@s";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
 "menu.sub_second_hide" = "Hide Secondary Subtitles";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "Näytä Tekstityspaneeli";
 "menu.hide_subtitles" = "Hide Subtitles Panel";
 
-"menu.seek_forward" = "Astu eteenpäin %.0fs";
-"menu.seek_backward" = "Siirry taaksepäin %.0fs";
+"menu.seek_forward" = "Astu eteenpäin %@s";
+"menu.seek_backward" = "Siirry taaksepäin %@s";
 "menu.speed_up" = "Speed Up by %@x";
 "menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "Äänenvoimakkuus + %.0f%%";
-"menu.volume_down" = "Äänenvoimakkuus - %.0f%%";
-"menu.audio_delay_up" = "Äänen viive + %.1fs";
-"menu.audio_delay_down" = "Äänen viive - %.1fs";
-"menu.sub_delay_up" = "Tekstityksen viive + %.1fs";
-"menu.sub_delay_down" = "Tekstityksen viive - %.1fs";
+"menu.volume_up" = "Äänenvoimakkuus + %@%%";
+"menu.volume_down" = "Äänenvoimakkuus - %@%%";
+"menu.audio_delay_up" = "Äänen viive + %@s";
+"menu.audio_delay_down" = "Äänen viive - %@s";
+"menu.sub_delay_up" = "Tekstityksen viive + %@s";
+"menu.sub_delay_down" = "Tekstityksen viive - %@s";
 
 "menu.crop_custom" = "Mukautettu…";
 "menu.find_online_sub" = "Find Online Subtitles from %@";

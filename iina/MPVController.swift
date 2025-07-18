@@ -1288,7 +1288,7 @@ class MPVController: NSObject {
       DispatchQueue.main.async { [self] in
         player.info.volume = data
         player.syncUI(.volume)
-        player.sendOSD(.volume(Int(data)))
+        player.sendOSD(.volume(data))
       }
 
     case MPVOption.Audio.audioDelay:

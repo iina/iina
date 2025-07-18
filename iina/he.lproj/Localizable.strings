@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "מושהה";
 "osd.resume" = "התחדש";
-"osd.volume" = "עוצמת שמע: %i";
+"osd.volume" = "עוצמת שמע: %@";
 "osd.speed" = "מהירות: x%@";
 "osd.aspect" = "יחס גובה-רוחב: %@";
 "osd.crop" = "חיתוך: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "ביטול שזירה: %@";
 "osd.hwdec" = "פענוח חומרה: %@";
 "osd.audio_delay.nodelay" = "עיכוב שמע: ללא עיכוב";
-"osd.audio_delay.later" = "עיכוב שמע: %.2f שניות איחור";
-"osd.audio_delay.earlier" = "עיכוב שמע: %.2f שניות הקדמה";
+"osd.audio_delay.later" = "עיכוב שמע: %@ שניות איחור";
+"osd.audio_delay.earlier" = "עיכוב שמע: %@ שניות הקדמה";
 "osd.sub_delay.nodelay" = "עיכוב כתוביות: ללא עיכוב";
-"osd.sub_delay.later" = "עיכוב כתוביות: %.2f שניות איחור";
-"osd.sub_delay.earlier" = "עיכוב כתוביות: %.2f שניות הקדמה";
-"osd.subtitle_pos" = "מיקום כתוביות: %.1f";
+"osd.sub_delay.later" = "עיכוב כתוביות: %@ שניות איחור";
+"osd.sub_delay.earlier" = "עיכוב כתוביות: %@ שניות הקדמה";
+"osd.subtitle_pos" = "מיקום כתוביות: %@";
 "osd.sub_hidden" = "כתוביות מוסתרות";
 "osd.sub_visible" = "כתוביות מוצגות";
 "osd.sub_second_delay.nodelay" = "עיכוב כתוביות משניות: ללא עיכוב";
-"osd.sub_second_delay.later" = "עיכוב כתוביות משניות: %.2f שניות איחור";
-"osd.sub_second_delay.earlier" = "עיכוב כתוביות משניות: %.2f שניות הקדמה";
+"osd.sub_second_delay.later" = "עיכוב כתוביות משניות: %@ שניות איחור";
+"osd.sub_second_delay.earlier" = "עיכוב כתוביות משניות: %@ שניות הקדמה";
 "osd.sub_second_hidden" = "כתוביות משניות מוסתרות";
-"osd.sub_second_pos" = "מיקום כתוביות משניות: %.1f";
+"osd.sub_second_pos" = "מיקום כתוביות משניות: %@";
 "osd.sub_second_visible" = "כתוביות משניות מוצגות";
 "osd.mute" = "מושתק";
 "osd.unmute" = "לא מושתק";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "לולאת א-ב: בוטלה";
 "osd.stop" = "עצור";
 "osd.chapter" = "פרק: %@";
-"osd.subtitle_scale" = "קנה מידה כתוביות: %.2fx";
+"osd.subtitle_scale" = "קנה מידה כתוביות: %@x";
 "osd.add_to_playlist" = "נוספו %i קבצים לרשימת ההשמעה";
 "osd.clear_playlist" = "רשימת ההשמעה אופסה";
 "osd.video_eq.contrast" = "ניגודיות: %i";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
 "preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
-"menu.volume" = "עוצמת שמע: %d";
-"menu.volume_muted" = "עוצמת שמע: %d (מושתק)";
-"menu.audio_delay" = "עיכוב שמע: %.2f שניות";
-"menu.sub_delay" = "עיכוב כתוביות: %.2f שניות";
+"menu.volume" = "עוצמת שמע: %@";
+"menu.volume_muted" = "עוצמת שמע: %@ (מושתק)";
+"menu.audio_delay" = "עיכוב שמע: %@ שניות";
+"menu.sub_delay" = "עיכוב כתוביות: %@ שניות";
 "menu.sub_hide" = "הסתר כתוביות";
 "menu.sub_show" = "הצג כתוביות";
 "menu.sub_second_hide" = "הסתר כתוביות משניות";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "הצג פאנל כתוביות";
 "menu.hide_subtitles" = "הסתר פאנל כתוביות";
 
-"menu.seek_forward" = "דלג קדימה %.0f שניות";
-"menu.seek_backward" = "חזרה %.0f שניות אחורה";
+"menu.seek_forward" = "דלג קדימה %@ שניות";
+"menu.seek_backward" = "חזרה %@ שניות אחורה";
 "menu.speed_up" = "הגבר מהירות ב%@x";
 "menu.speed_down" = "הפחת מהירות ב%@x";
-"menu.volume_up" = "הגבר עוצמת שמע ב%.0f%";
-"menu.volume_down" = "הפחת עוצמת שמע ב%.0f%";
-"menu.audio_delay_up" = "עיכוב שמע: הוסף %.1f שניות";
-"menu.audio_delay_down" = "עיכוב שמע: הפחת %.1f שניות";
-"menu.sub_delay_up" = "עיכוב כתוביות: הוסף %.1f שניות";
-"menu.sub_delay_down" = "עיכוב כתוביות: הפחת %.1f שניות";
+"menu.volume_up" = "הגבר עוצמת שמע ב%@%";
+"menu.volume_down" = "הפחת עוצמת שמע ב%@%";
+"menu.audio_delay_up" = "עיכוב שמע: הוסף %@ שניות";
+"menu.audio_delay_down" = "עיכוב שמע: הפחת %@ שניות";
+"menu.sub_delay_up" = "עיכוב כתוביות: הוסף %@ שניות";
+"menu.sub_delay_down" = "עיכוב כתוביות: הפחת %@ שניות";
 
 "menu.crop_custom" = "מותאם אישית…";
 "menu.find_online_sub" = "מצא כתוביות מקוונות מ-%@";

@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "إيقاف مؤقت";
 "osd.resume" = "استئناف";
-"osd.volume" = "الصوت: %i";
+"osd.volume" = "الصوت: %@";
 "osd.speed" = "السرعة: %@x";
 "osd.aspect" = "نسبة العرض والارتفاع: %@";
 "osd.crop" = "قص صورة: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "تشابك: %@";
 "osd.hwdec" = "فك ترميز: %@";
 "osd.audio_delay.nodelay" = "تأخير الصوت: لا تأخير";
-"osd.audio_delay.later" = "تأخير الصوت: %.2fثانية لاحقاً";
-"osd.audio_delay.earlier" = "تأخير الصوت: %.2fثانية سابقة";
+"osd.audio_delay.later" = "تأخير الصوت: %@ثانية لاحقاً";
+"osd.audio_delay.earlier" = "تأخير الصوت: %@ثانية سابقة";
 "osd.sub_delay.nodelay" = "تأخير الترجمة: لا تأخير";
-"osd.sub_delay.later" = "تأخير الترجمة: %.2fث لاحقاً";
-"osd.sub_delay.earlier" = "تأخير الترجمة: %.2fثانية سابقة";
-"osd.subtitle_pos" = "موضع الترجمة: %.1f";
+"osd.sub_delay.later" = "تأخير الترجمة: %@ث لاحقاً";
+"osd.sub_delay.earlier" = "تأخير الترجمة: %@ثانية سابقة";
+"osd.subtitle_pos" = "موضع الترجمة: %@";
 "osd.sub_hidden" = "الترجمات مخفية";
 "osd.sub_visible" = "الترجمات مرئية";
 "osd.sub_second_delay.nodelay" = "الترجمة الثانوية: لا تأخير";
-"osd.sub_second_delay.later" = "تأخير الترجمة الثانوية: %.2fsثانية بعد";
-"osd.sub_second_delay.earlier" = "تأخير الترجمة: %.2fثانية قبل";
+"osd.sub_second_delay.later" = "تأخير الترجمة الثانوية: %@sثانية بعد";
+"osd.sub_second_delay.earlier" = "تأخير الترجمة: %@ثانية قبل";
 "osd.sub_second_hidden" = "الترجمة الثانوية مخفية";
-"osd.sub_second_pos" = "موقع الترجمة الثانوية: %.1f";
+"osd.sub_second_pos" = "موقع الترجمة الثانوية: %@";
 "osd.sub_second_visible" = "الترجمة الثانوية مرئية";
 "osd.mute" = "كتم";
 "osd.unmute" = "إلغاء الكتم";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "AB-Loop: مسح";
 "osd.stop" = "إيقاف";
 "osd.chapter" = "الفصل: %@";
-"osd.subtitle_scale" = "حجم الترجمة: %.2fx";
+"osd.subtitle_scale" = "حجم الترجمة: %@x";
 "osd.add_to_playlist" = "تم إضافة %i ملفات إلى قائمة التشغيل";
 "osd.clear_playlist" = "مسح قائمة التشغيل";
 "osd.video_eq.contrast" = "التباين: %i";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "قم بتثبيت ملحق الوسائط عبر الإنترنت من \"الإضافات > تثبيت من GitHub\" للاستمتاع بميزات متقدمة مثل تحميل الفيديو وتحديثات yt-dlp تلقائية.";
 "preference.ytdl_plugin_installed" = "تم تعطيل دعم youtube-dl المدمج نظرًا لتثبيت إضافة الوسائط عبر الإنترنت.";
 
-"menu.volume" = "الصوت: %d";
-"menu.volume_muted" = "الحجم: %d (مكتمل)";
-"menu.audio_delay" = "تأخير الصوت: %.2fث";
-"menu.sub_delay" = "تأخير الترجمه: %.2f ثانيه";
+"menu.volume" = "الصوت: %@";
+"menu.volume_muted" = "الحجم: %@ (مكتمل)";
+"menu.audio_delay" = "تأخير الصوت: %@ث";
+"menu.sub_delay" = "تأخير الترجمه: %@ ثانيه";
 "menu.sub_hide" = "إخفاء الترجمات";
 "menu.sub_show" = "إظهار الترجمات";
 "menu.sub_second_hide" = "إخفاء الترجمة الثانوية";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "إظهار لوحة الترجمات";
 "menu.hide_subtitles" = "إخفاء لوحة الترجمات";
 
-"menu.seek_forward" = "خطوة إلى الأمام %.0f ثانية";
-"menu.seek_backward" = "خطوة إلى الوراء %.0f ثانية";
+"menu.seek_forward" = "خطوة إلى الأمام %@ ثانية";
+"menu.seek_backward" = "خطوة إلى الوراء %@ ثانية";
 "menu.speed_up" = "تسريع ب %@x";
 "menu.speed_down" = "تبطيء ب %@x";
-"menu.volume_up" = "الصوت: %.0f";
-"menu.volume_down" = "الصوت: %.0f";
-"menu.audio_delay_up" = "تأخير الصوت: +%.1f ثانيه";
-"menu.audio_delay_down" = "تأخير الصوت: -%.1f ثانيه";
-"menu.sub_delay_up" = "تأخير الترجمه: +%.1f ثانيه";
-"menu.sub_delay_down" = "تأخير الترجمه: -%.1f ثانيه";
+"menu.volume_up" = "الصوت: %@";
+"menu.volume_down" = "الصوت: %@";
+"menu.audio_delay_up" = "تأخير الصوت: +%@ ثانيه";
+"menu.audio_delay_down" = "تأخير الصوت: -%@ ثانيه";
+"menu.sub_delay_up" = "تأخير الترجمه: +%@ ثانيه";
+"menu.sub_delay_down" = "تأخير الترجمه: -%@ ثانيه";
 
 "menu.crop_custom" = "مخصص…";
 "menu.find_online_sub" = "ابحث عن ترجمات على الإنترنت من %@";

@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "일시 정지됨";
 "osd.resume" = "재생 복원됨";
-"osd.volume" = "음량: %i";
+"osd.volume" = "음량: %@";
 "osd.speed" = "속도: %@배속";
 "osd.aspect" = "화면비: %@";
 "osd.crop" = "화면 자르기: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "디인터레이스: %@";
 "osd.hwdec" = "하드웨어 디코딩: %@";
 "osd.audio_delay.nodelay" = "오디오 지연: 없음";
-"osd.audio_delay.later" = "오디오 지연: %.2f초 느리게";
-"osd.audio_delay.earlier" = "오디오 지연: %.2f초 빠르게";
+"osd.audio_delay.later" = "오디오 지연: %@초 느리게";
+"osd.audio_delay.earlier" = "오디오 지연: %@초 빠르게";
 "osd.sub_delay.nodelay" = "자막 지연: 없음";
-"osd.sub_delay.later" = "자막 지연: %.2f초 느리게";
-"osd.sub_delay.earlier" = "자막 지연: %.2f초 빠르게";
-"osd.subtitle_pos" = "자막 위치: %.1f";
+"osd.sub_delay.later" = "자막 지연: %@초 느리게";
+"osd.sub_delay.earlier" = "자막 지연: %@초 빠르게";
+"osd.subtitle_pos" = "자막 위치: %@";
 "osd.sub_hidden" = "자막 숨김";
 "osd.sub_visible" = "자막 보임";
 "osd.sub_second_delay.nodelay" = "두번째 자막 지연: 없음";
-"osd.sub_second_delay.later" = "두번째 자막 지연: %.2f초 느리게";
-"osd.sub_second_delay.earlier" = "두번째 자막 지연: %.2f초 빠르게";
+"osd.sub_second_delay.later" = "두번째 자막 지연: %@초 느리게";
+"osd.sub_second_delay.earlier" = "두번째 자막 지연: %@초 빠르게";
 "osd.sub_second_hidden" = "두번째 자막 숨김";
-"osd.sub_second_pos" = "두번째 자막 위치: %.1f";
+"osd.sub_second_pos" = "두번째 자막 위치: %@";
 "osd.sub_second_visible" = "두번째 자막 보임";
 "osd.mute" = "소리 끔";
 "osd.unmute" = "음소거 해제";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "구간 반복: 해제됨";
 "osd.stop" = "정지됨";
 "osd.chapter" = "챕터: %@";
-"osd.subtitle_scale" = "자막 크기: %.2f배";
+"osd.subtitle_scale" = "자막 크기: %@배";
 "osd.add_to_playlist" = "%i 파일이 재생목록에 추가되었습니다";
 "osd.clear_playlist" = "재생목록 비움";
 "osd.video_eq.contrast" = "대비: %i";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
 "preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
-"menu.volume" = "음량: %d";
-"menu.volume_muted" = "음량: %d (음소거 됨)";
-"menu.audio_delay" = "오디오 지연: %.2f초";
-"menu.sub_delay" = "자막 지연: %.2f초";
+"menu.volume" = "음량: %@";
+"menu.volume_muted" = "음량: %@ (음소거 됨)";
+"menu.audio_delay" = "오디오 지연: %@초";
+"menu.sub_delay" = "자막 지연: %@초";
 "menu.sub_hide" = "자막 숨기기";
 "menu.sub_show" = "자막 보이기";
 "menu.sub_second_hide" = "두번째 자막 숨기기";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "자막 패널 보기";
 "menu.hide_subtitles" = "자막 패널 숨기기";
 
-"menu.seek_forward" = "앞으로 탐색 %.0f초";
-"menu.seek_backward" = "뒤로 탐색 %.0f초";
+"menu.seek_forward" = "앞으로 탐색 %@초";
+"menu.seek_backward" = "뒤로 탐색 %@초";
 "menu.speed_up" = "%@배 빠르게 재생";
 "menu.speed_down" = "%@배 느리게 재생";
-"menu.volume_up" = "음량 +%.0f%%";
-"menu.volume_down" = "음량 -%.0f%%";
-"menu.audio_delay_up" = "오디오 지연 +%.1f초";
-"menu.audio_delay_down" = "오디오 지연 -%.1f초";
-"menu.sub_delay_up" = "자막 지연 +%.1f초";
-"menu.sub_delay_down" = "자막 지연 -%.1f초";
+"menu.volume_up" = "음량 +%@%%";
+"menu.volume_down" = "음량 -%@%%";
+"menu.audio_delay_up" = "오디오 지연 +%@초";
+"menu.audio_delay_down" = "오디오 지연 -%@초";
+"menu.sub_delay_up" = "자막 지연 +%@초";
+"menu.sub_delay_down" = "자막 지연 -%@초";
 
 "menu.crop_custom" = "사용자 설정…";
 "menu.find_online_sub" = "%@에서 온라인 자막 찾기";

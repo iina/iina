@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "रोकें";
 "osd.resume" = "पुनः आरंभ";
-"osd.volume" = "ध्वनि: %i";
+"osd.volume" = "ध्वनि: %@";
 "osd.speed" = "Speed: %@x";
 "osd.aspect" = "आस्पेक्ट अनुपात: %@";
 "osd.crop" = "क्रॉप: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "डीइंटरलेस: %@";
 "osd.hwdec" = "Hardware Decoding: %@";
 "osd.audio_delay.nodelay" = "ऑडियो विलंब: विलंब न करें";
-"osd.audio_delay.later" = "ऑडियो विलंब: %.2fs बाद में";
-"osd.audio_delay.earlier" = "ऑडियो विलंब: %.2fs पूर्व";
+"osd.audio_delay.later" = "ऑडियो विलंब: %@s बाद में";
+"osd.audio_delay.earlier" = "ऑडियो विलंब: %@s पूर्व";
 "osd.sub_delay.nodelay" = "उपशीर्षक देरी: विलंब न करें";
-"osd.sub_delay.later" = "उपशीर्षक देरी: %.2fs बाद में";
-"osd.sub_delay.earlier" = "उपशीर्षक देरी: %.2fs पूर्व";
-"osd.subtitle_pos" = "उपशीर्षक पद: %.1f";
+"osd.sub_delay.later" = "उपशीर्षक देरी: %@s बाद में";
+"osd.sub_delay.earlier" = "उपशीर्षक देरी: %@s पूर्व";
+"osd.subtitle_pos" = "उपशीर्षक पद: %@";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
 "osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %@s Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %@s Earlier";
 "osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %@";
 "osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "म्यूट";
 "osd.unmute" = "Unmute";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "AB-लूप: साफ़ किया गया";
 "osd.stop" = "रुकें";
 "osd.chapter" = "अध्याय: %@";
-"osd.subtitle_scale" = "उपशीर्षक स्केल: %.2fx";
+"osd.subtitle_scale" = "उपशीर्षक स्केल: %@x";
 "osd.add_to_playlist" = " प्लेलिस्ट में %i फ़ाइलें जोड़ी गईं";
 "osd.clear_playlist" = "क्लीयर प्लेलिस्ट";
 "osd.video_eq.contrast" = "कन्ट्रास्ट: %i";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
 "preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
-"menu.volume" = "ध्वनि: %d";
-"menu.volume_muted" = "Volume: %d (Muted)";
-"menu.audio_delay" = "ऑडियो विलंब: %.2fs";
-"menu.sub_delay" = "उपशीर्षक देरी: %.2fs";
+"menu.volume" = "ध्वनि: %@";
+"menu.volume_muted" = "Volume: %@ (Muted)";
+"menu.audio_delay" = "ऑडियो विलंब: %@s";
+"menu.sub_delay" = "उपशीर्षक देरी: %@s";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
 "menu.sub_second_hide" = "Hide Secondary Subtitles";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "Show Subtitles Panel";
 "menu.hide_subtitles" = "Hide Subtitles Panel";
 
-"menu.seek_forward" = "आगे कदम %.0fs";
-"menu.seek_backward" = "पीछे जाओ %.0fs";
+"menu.seek_forward" = "आगे कदम %@s";
+"menu.seek_backward" = "पीछे जाओ %@s";
 "menu.speed_up" = "Speed Up by %@x";
 "menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "ध्वनि + %.0f%%";
-"menu.volume_down" = "ध्वनि - %.0f%%";
-"menu.audio_delay_up" = "ऑडियो विलंब + %.1fs";
-"menu.audio_delay_down" = "ऑडियो विलंब - %.1fs";
-"menu.sub_delay_up" = "उपशीर्षक देरी + %.1fs";
-"menu.sub_delay_down" = "उपशीर्षक देरी - %.1fs";
+"menu.volume_up" = "ध्वनि + %@%%";
+"menu.volume_down" = "ध्वनि - %@%%";
+"menu.audio_delay_up" = "ऑडियो विलंब + %@s";
+"menu.audio_delay_down" = "ऑडियो विलंब - %@s";
+"menu.sub_delay_up" = "उपशीर्षक देरी + %@s";
+"menu.sub_delay_down" = "उपशीर्षक देरी - %@s";
 
 "menu.crop_custom" = "कस्टम…";
 "menu.find_online_sub" = "Find Online Subtitles from %@";

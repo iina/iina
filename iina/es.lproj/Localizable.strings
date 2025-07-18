@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "Pausa";
 "osd.resume" = "Reanudar";
-"osd.volume" = "Volumen: %i";
+"osd.volume" = "Volumen: %@";
 "osd.speed" = "Velocidad: %@x";
 "osd.aspect" = "Proporción: %@";
 "osd.crop" = "Recortar: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "Desentrelazar: %@";
 "osd.hwdec" = "Decodificación de hardware: %@";
 "osd.audio_delay.nodelay" = "Retraso de audio: Sin Retraso";
-"osd.audio_delay.later" = "Retraso de audio: %.2fs Después";
-"osd.audio_delay.earlier" = "Retraso de audio: %.2fs Antes";
+"osd.audio_delay.later" = "Retraso de audio: %@s Después";
+"osd.audio_delay.earlier" = "Retraso de audio: %@s Antes";
 "osd.sub_delay.nodelay" = "Retraso de subtítulos: Sin Retraso";
-"osd.sub_delay.later" = "Retraso de subtítulos: %.2fs Después";
-"osd.sub_delay.earlier" = "Retraso de subtítulos: %.2fs Antes";
-"osd.subtitle_pos" = "Posición de subtítulos: %.1f";
+"osd.sub_delay.later" = "Retraso de subtítulos: %@s Después";
+"osd.sub_delay.earlier" = "Retraso de subtítulos: %@s Antes";
+"osd.subtitle_pos" = "Posición de subtítulos: %@";
 "osd.sub_hidden" = "Subtítulos Visibles";
 "osd.sub_visible" = "Subtítulos Visibles";
 "osd.sub_second_delay.nodelay" = "Retraso secundario de subtítulos: Sin demora";
-"osd.sub_second_delay.later" = "Retraso de Subtítulo Secundario: %.2fs Después";
-"osd.sub_second_delay.earlier" = "Retraso Secundario de Subtítulos: %.2fs Antes";
+"osd.sub_second_delay.later" = "Retraso de Subtítulo Secundario: %@s Después";
+"osd.sub_second_delay.earlier" = "Retraso Secundario de Subtítulos: %@s Antes";
 "osd.sub_second_hidden" = "Subtítulos Secundarios Escondidos";
-"osd.sub_second_pos" = "Posición Secundaria de Subtítulos: %.1f";
+"osd.sub_second_pos" = "Posición Secundaria de Subtítulos: %@";
 "osd.sub_second_visible" = "Subtítulos Secundarios Visibles";
 "osd.mute" = "Silenciar";
 "osd.unmute" = "No silenciar";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "Bucle-AB: Borrado";
 "osd.stop" = "Detener";
 "osd.chapter" = "Capítulo: %@";
-"osd.subtitle_scale" = "Escala de subtítulos: %.2fx";
+"osd.subtitle_scale" = "Escala de subtítulos: %@x";
 "osd.add_to_playlist" = "Se añadieron %i archivos a la lista de reproducción";
 "osd.clear_playlist" = "Lista de reproducción borrada";
 "osd.video_eq.contrast" = "Contraste: %i";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
 "preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
-"menu.volume" = "Volumen: %d";
-"menu.volume_muted" = "Volumen: %d (Silenciado)";
-"menu.audio_delay" = "Retraso de audio: %.2fs";
-"menu.sub_delay" = "Retraso de subtítulos: %.2fs";
+"menu.volume" = "Volumen: %@";
+"menu.volume_muted" = "Volumen: %@ (Silenciado)";
+"menu.audio_delay" = "Retraso de audio: %@s";
+"menu.sub_delay" = "Retraso de subtítulos: %@s";
 "menu.sub_hide" = "Ocultar Subtítulos";
 "menu.sub_show" = "Mostrar Subtítulos";
 "menu.sub_second_hide" = "Esconder Subtítulos Secundarios";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "Mostrar el panel de subtítulos";
 "menu.hide_subtitles" = "Ocultar el panel de subtítulos";
 
-"menu.seek_forward" = "Adelantar %.0fs";
-"menu.seek_backward" = "Retroceder %.0fs";
+"menu.seek_forward" = "Adelantar %@s";
+"menu.seek_backward" = "Retroceder %@s";
 "menu.speed_up" = "Speed Up by %@x";
 "menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "Volumen + %.0f%%";
-"menu.volume_down" = "Volumen - %.0f%%";
-"menu.audio_delay_up" = "Retrasar audio + %.1fs";
-"menu.audio_delay_down" = "Retrasar audio - %.1fs";
-"menu.sub_delay_up" = "Retrasar subtítulos + %.1fs";
-"menu.sub_delay_down" = "Retrasar subtítulos - %.1fs";
+"menu.volume_up" = "Volumen + %@%%";
+"menu.volume_down" = "Volumen - %@%%";
+"menu.audio_delay_up" = "Retrasar audio + %@s";
+"menu.audio_delay_down" = "Retrasar audio - %@s";
+"menu.sub_delay_up" = "Retrasar subtítulos + %@s";
+"menu.sub_delay_down" = "Retrasar subtítulos - %@s";
 
 "menu.crop_custom" = "Personalizado…";
 "menu.find_online_sub" = "Buscar subtítulos en línea desde %@";

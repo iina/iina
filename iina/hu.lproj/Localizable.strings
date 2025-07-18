@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "Szünet";
 "osd.resume" = "Folytatás";
-"osd.volume" = "Hangerő: %i";
+"osd.volume" = "Hangerő: %@";
 "osd.speed" = "Sebesség: %@x";
 "osd.aspect" = "Képarány: %@";
 "osd.crop" = "Vágás: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "Váltottsoros képszűrő: %@";
 "osd.hwdec" = "Hardveres dekódolás: %@";
 "osd.audio_delay.nodelay" = "Hangkésleltetés: Nincs késleltetés";
-"osd.audio_delay.later" = "Hangkésleltetés: %.2fmp-vel később";
-"osd.audio_delay.earlier" = "Hangkésleltetés: %.2fmp-vel hamarabb";
+"osd.audio_delay.later" = "Hangkésleltetés: %@mp-vel később";
+"osd.audio_delay.earlier" = "Hangkésleltetés: %@mp-vel hamarabb";
 "osd.sub_delay.nodelay" = "Felirat késleltetés: Nincs késleltetés";
-"osd.sub_delay.later" = "Felirat késleltetés: %.2fmp-vel később";
-"osd.sub_delay.earlier" = "Felirat késleltetés: %.2fmp-vel hamarabb";
-"osd.subtitle_pos" = "Felirat pozíciója: %.1f";
+"osd.sub_delay.later" = "Felirat késleltetés: %@mp-vel később";
+"osd.sub_delay.earlier" = "Felirat késleltetés: %@mp-vel hamarabb";
+"osd.subtitle_pos" = "Felirat pozíciója: %@";
 "osd.sub_hidden" = "Feliratok elrejtve";
 "osd.sub_visible" = "Feliratok megjelenítve";
 "osd.sub_second_delay.nodelay" = "Másodlagos felirat késleltetés: Nincs késleltetés";
-"osd.sub_second_delay.later" = "Másodlagos felirat késleltetés: %.2fmp-vel később";
-"osd.sub_second_delay.earlier" = "Másodlagos felirat késleltetés: %.2fmp-vel előbb";
+"osd.sub_second_delay.later" = "Másodlagos felirat késleltetés: %@mp-vel később";
+"osd.sub_second_delay.earlier" = "Másodlagos felirat késleltetés: %@mp-vel előbb";
 "osd.sub_second_hidden" = "Másodlagos feliratok elrejtve";
-"osd.sub_second_pos" = "Másodlagos felirat pozíció: %.1f";
+"osd.sub_second_pos" = "Másodlagos felirat pozíció: %@";
 "osd.sub_second_visible" = "Másodlagos feliratok megjelenítve";
 "osd.mute" = "Némítás";
 "osd.unmute" = "Némítás feloldása";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "AB-Ciklus: Tiszta";
 "osd.stop" = "Leállítás";
 "osd.chapter" = "Fejezet: %@";
-"osd.subtitle_scale" = "Felirat méret: %.2fx";
+"osd.subtitle_scale" = "Felirat méret: %@x";
 "osd.add_to_playlist" = "%i fájl hozzáadva a lejátszási listához";
 "osd.clear_playlist" = "Lejátszási lista ürítése";
 "osd.video_eq.contrast" = "Kontraszt: %i";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
 "preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
-"menu.volume" = "Hangerő: %d";
-"menu.volume_muted" = "Hangerő: %d (Némítva)";
-"menu.audio_delay" = "Hangkésleltetés: %.2fmp-vel később";
-"menu.sub_delay" = "Felirat késleltetés: %.2fmp-vel később";
+"menu.volume" = "Hangerő: %@";
+"menu.volume_muted" = "Hangerő: %@ (Némítva)";
+"menu.audio_delay" = "Hangkésleltetés: %@mp-vel később";
+"menu.sub_delay" = "Felirat késleltetés: %@mp-vel később";
 "menu.sub_hide" = "Feliratok elrejtése";
 "menu.sub_show" = "Feliratok megjelenítése";
 "menu.sub_second_hide" = "Másodlagos feliratok elrejtése";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "Mutasd a feliratok panelt";
 "menu.hide_subtitles" = "Rejtsd a feliratok panelt";
 
-"menu.seek_forward" = "Előre ugrás %.0f másodpercet";
-"menu.seek_backward" = "Hátra ugrás %.0f másodpercet";
+"menu.seek_forward" = "Előre ugrás %@ másodpercet";
+"menu.seek_backward" = "Hátra ugrás %@ másodpercet";
 "menu.speed_up" = "Gyorsítás ennyivel: %@x";
 "menu.speed_down" = "Lassítás ennyivel: %@x";
-"menu.volume_up" = "Hangerő: %.0f";
-"menu.volume_down" = "Hangerő: %.0f";
-"menu.audio_delay_up" = "Hangkésleltetés + %.1f másodperccel";
-"menu.audio_delay_down" = "Hangkésleltetés: %.1fmp-el később";
-"menu.sub_delay_up" = "Felirat késleltetés + %.1f másodperccel";
-"menu.sub_delay_down" = "Felirat késleltetés - %.1f másodperccel";
+"menu.volume_up" = "Hangerő: %@";
+"menu.volume_down" = "Hangerő: %@";
+"menu.audio_delay_up" = "Hangkésleltetés + %@ másodperccel";
+"menu.audio_delay_down" = "Hangkésleltetés: %@mp-el később";
+"menu.sub_delay_up" = "Felirat késleltetés + %@ másodperccel";
+"menu.sub_delay_down" = "Felirat késleltetés - %@ másodperccel";
 
 "menu.crop_custom" = "Egyéni…";
 "menu.find_online_sub" = "Online feliratok keresése innen: %@";

@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "一時停止";
 "osd.resume" = "再開";
-"osd.volume" = "音量: %i";
+"osd.volume" = "音量: %@";
 "osd.speed" = "Speed: %@x";
 "osd.aspect" = "アスペクト比: %@";
 "osd.crop" = "クロップ: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "インターレース解除: %@";
 "osd.hwdec" = "ハードウェアデコード中: %@";
 "osd.audio_delay.nodelay" = "オーディオディレイ: ディレイなし";
-"osd.audio_delay.later" = "オーディオディレイ: %.2f秒 遅く";
-"osd.audio_delay.earlier" = "オーディオディレイ: %.2f秒 早く";
+"osd.audio_delay.later" = "オーディオディレイ: %@秒 遅く";
+"osd.audio_delay.earlier" = "オーディオディレイ: %@秒 早く";
 "osd.sub_delay.nodelay" = "字幕ディレイ: ディレイなし";
-"osd.sub_delay.later" = "字幕ディレイ: %.2f秒 遅く";
-"osd.sub_delay.earlier" = "字幕ディレイ: %.2f秒 早く";
-"osd.subtitle_pos" = "字幕の位置: %.1f";
+"osd.sub_delay.later" = "字幕ディレイ: %@秒 遅く";
+"osd.sub_delay.earlier" = "字幕ディレイ: %@秒 早く";
+"osd.subtitle_pos" = "字幕の位置: %@";
 "osd.sub_hidden" = "字幕を隠す";
 "osd.sub_visible" = "字幕を表示する";
 "osd.sub_second_delay.nodelay" = "副字幕の遅延: 遅延なし";
-"osd.sub_second_delay.later" = "副字幕の遅延: %.2f秒遅く";
-"osd.sub_second_delay.earlier" = "副字幕の遅延: %.2f秒早く";
+"osd.sub_second_delay.later" = "副字幕の遅延: %@秒遅く";
+"osd.sub_second_delay.earlier" = "副字幕の遅延: %@秒早く";
 "osd.sub_second_hidden" = "副字幕を隠す";
-"osd.sub_second_pos" = "副字幕の表示位置: %.1f";
+"osd.sub_second_pos" = "副字幕の表示位置: %@";
 "osd.sub_second_visible" = "副字幕を表示する";
 "osd.mute" = "ミュート";
 "osd.unmute" = "ミュート解除";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "AB-リピート: リセット";
 "osd.stop" = "一時停止";
 "osd.chapter" = "チャプター: %@";
-"osd.subtitle_scale" = "字幕の大きさ: %.2fx";
+"osd.subtitle_scale" = "字幕の大きさ: %@x";
 "osd.add_to_playlist" = "%i個のファイルをプレイリストに追加しました";
 "osd.clear_playlist" = "プレイリストをクリアしました";
 "osd.video_eq.contrast" = "コントラスト: %i";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
 "preference.ytdl_plugin_installed" = "Online メディア プラグインがインストールされているため、組み込みの youtube-dl サポートは無効になっています。";
 
-"menu.volume" = "音量: %d";
-"menu.volume_muted" = "ボリューム: %d (ミュート中)";
-"menu.audio_delay" = "オーディオディレイ: %.2fs";
-"menu.sub_delay" = "字幕ディレイ: %.2fs";
+"menu.volume" = "音量: %@";
+"menu.volume_muted" = "ボリューム: %@ (ミュート中)";
+"menu.audio_delay" = "オーディオディレイ: %@s";
+"menu.sub_delay" = "字幕ディレイ: %@s";
 "menu.sub_hide" = "字幕を隠す";
 "menu.sub_show" = "字幕を表示する";
 "menu.sub_second_hide" = "副字幕を隠す";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "字幕パネルを表示";
 "menu.hide_subtitles" = "字幕パネルを隠す";
 
-"menu.seek_forward" = "%.0f秒進む";
-"menu.seek_backward" = "%.0f秒戻る";
+"menu.seek_forward" = "%@秒進む";
+"menu.seek_backward" = "%@秒戻る";
 "menu.speed_up" = "Speed Up by %@x";
 "menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "音量 + %.0f%%";
-"menu.volume_down" = "音量 - %.0f%%";
-"menu.audio_delay_up" = "オーディオディレイ + %.1fs";
-"menu.audio_delay_down" = "オーディオディレイ - %.1fs";
-"menu.sub_delay_up" = "字幕ディレイ + %.1f秒";
-"menu.sub_delay_down" = "字幕ディレイ - %.1f秒";
+"menu.volume_up" = "音量 + %@%%";
+"menu.volume_down" = "音量 - %@%%";
+"menu.audio_delay_up" = "オーディオディレイ + %@s";
+"menu.audio_delay_down" = "オーディオディレイ - %@s";
+"menu.sub_delay_up" = "字幕ディレイ + %@秒";
+"menu.sub_delay_down" = "字幕ディレイ - %@秒";
 
 "menu.crop_custom" = "カスタム…";
 "menu.find_online_sub" = "%@ からオンライン字幕を探す";

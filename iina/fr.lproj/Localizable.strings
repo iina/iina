@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "En pause";
 "osd.resume" = "Reprendre";
-"osd.volume" = "Volume : %i";
+"osd.volume" = "Volume : %@";
 "osd.speed" = "Vitesse : %@x";
 "osd.aspect" = "Format d'image : %@";
 "osd.crop" = "Rognage : %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "Désentrelacer : %@";
 "osd.hwdec" = "Décodage matériel : %@";
 "osd.audio_delay.nodelay" = "Délai audio : aucun";
-"osd.audio_delay.later" = "Délai audio : %.2fs en avance";
-"osd.audio_delay.earlier" = "Délai audio : %.2fs en retard";
+"osd.audio_delay.later" = "Délai audio : %@s en avance";
+"osd.audio_delay.earlier" = "Délai audio : %@s en retard";
 "osd.sub_delay.nodelay" = "Délai des sous-titres : aucun";
-"osd.sub_delay.later" = "Délai des sous-titres : %.2fs en avance";
-"osd.sub_delay.earlier" = "Délai des sous-titres : %.2fs en retard";
-"osd.subtitle_pos" = "Position des sous-titres : %.1f";
+"osd.sub_delay.later" = "Délai des sous-titres : %@s en avance";
+"osd.sub_delay.earlier" = "Délai des sous-titres : %@s en retard";
+"osd.subtitle_pos" = "Position des sous-titres : %@";
 "osd.sub_hidden" = "Sous-titres masqués";
 "osd.sub_visible" = "Sous-titres visibles";
 "osd.sub_second_delay.nodelay" = "Délai des sous-titres secondaires : aucun";
-"osd.sub_second_delay.later" = "Délai des sous-titres secondaires : %.2fs en retard";
-"osd.sub_second_delay.earlier" = "Délai des sous-titres secondaires : %.2fs en avance";
+"osd.sub_second_delay.later" = "Délai des sous-titres secondaires : %@s en retard";
+"osd.sub_second_delay.earlier" = "Délai des sous-titres secondaires : %@s en avance";
 "osd.sub_second_hidden" = "Sous-titres secondaires masqués";
-"osd.sub_second_pos" = "Position de sous-titre secondaire : %.1f";
+"osd.sub_second_pos" = "Position de sous-titre secondaire : %@";
 "osd.sub_second_visible" = "Sous-titres secondaires visibles";
 "osd.mute" = "Son coupé";
 "osd.unmute" = "Son rétabli";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "Boucle AB: vidée";
 "osd.stop" = "Arrêté";
 "osd.chapter" = "Chapitre : %@";
-"osd.subtitle_scale" = "Échelle des sous-titres : %.2fx";
+"osd.subtitle_scale" = "Échelle des sous-titres : %@x";
 "osd.add_to_playlist" = "%i fichiers ajoutés à la liste de lecture";
 "osd.clear_playlist" = "Liste de lecture vidée";
 "osd.video_eq.contrast" = "Contraste : %i";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Installez le plugin Media en ligne à partir de \"Plugins > Installer à partir de GitHub\" pour profiter des fonctionnalités avancées telles que le téléchargement vidéo et les mises à jour automatiques de yt-dlp.";
 "preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
-"menu.volume" = "Volume : %d";
-"menu.volume_muted" = "Volume : %d (coupé)";
-"menu.audio_delay" = "Délai audio : %.2fs";
-"menu.sub_delay" = "Délai des sous-titres : %.2fs";
+"menu.volume" = "Volume : %@";
+"menu.volume_muted" = "Volume : %@ (coupé)";
+"menu.audio_delay" = "Délai audio : %@s";
+"menu.sub_delay" = "Délai des sous-titres : %@s";
 "menu.sub_hide" = "Masquer les sous-titres";
 "menu.sub_show" = "Afficher les sous-titres";
 "menu.sub_second_hide" = "Masquer les sous-titres secondaires";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "Afficher le panneau des sous-titres";
 "menu.hide_subtitles" = "Masquer le panneau des sous-titres";
 
-"menu.seek_forward" = "Reculer de %.0fs";
-"menu.seek_backward" = "Avancer de %.0fs";
+"menu.seek_forward" = "Reculer de %@s";
+"menu.seek_backward" = "Avancer de %@s";
 "menu.speed_up" = "Accélérer de %@x";
 "menu.speed_down" = "Ralentir de %@x";
-"menu.volume_up" = "Volume +%.0f%%";
-"menu.volume_down" = "Volume -%.0f%%";
-"menu.audio_delay_up" = "Délai audio +%.1fs";
-"menu.audio_delay_down" = "Délai audio -%.1fs";
-"menu.sub_delay_up" = "Délai des sous-titres +%.1fs";
-"menu.sub_delay_down" = "Délai des sous-titres -%.1fs";
+"menu.volume_up" = "Volume +%@%%";
+"menu.volume_down" = "Volume -%@%%";
+"menu.audio_delay_up" = "Délai audio +%@s";
+"menu.audio_delay_down" = "Délai audio -%@s";
+"menu.sub_delay_up" = "Délai des sous-titres +%@s";
+"menu.sub_delay_down" = "Délai des sous-titres -%@s";
 
 "menu.crop_custom" = "Perso…";
 "menu.find_online_sub" = "Chercher des sous-titres en ligne sur %@";

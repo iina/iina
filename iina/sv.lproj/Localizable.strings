@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "Pausa";
 "osd.resume" = "Fortsätt";
-"osd.volume" = "Volym: %i";
+"osd.volume" = "Volym: %@";
 "osd.speed" = "Hastighet: %@x";
 "osd.aspect" = "Förhållande: %@";
 "osd.crop" = "Beskär: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "Avfläta: %@";
 "osd.hwdec" = "Hårdvaruavkodning: %@";
 "osd.audio_delay.nodelay" = "Ljudfördröjning: ingen fördröjning";
-"osd.audio_delay.later" = "Ljudfördröjning: %.2fs senare";
-"osd.audio_delay.earlier" = "Ljudfördröjning: %.2fs tidigare";
+"osd.audio_delay.later" = "Ljudfördröjning: %@s senare";
+"osd.audio_delay.earlier" = "Ljudfördröjning: %@s tidigare";
 "osd.sub_delay.nodelay" = "Undertextsfördröjning: Ingen fördröjning";
-"osd.sub_delay.later" = "Undertextsfördröjning: %.2fs senare";
-"osd.sub_delay.earlier" = "Undertextsfördröjning: %.2fs tidigare";
-"osd.subtitle_pos" = "Undertextposition: %.1f";
+"osd.sub_delay.later" = "Undertextsfördröjning: %@s senare";
+"osd.sub_delay.earlier" = "Undertextsfördröjning: %@s tidigare";
+"osd.subtitle_pos" = "Undertextposition: %@";
 "osd.sub_hidden" = "Undertexter dolda";
 "osd.sub_visible" = "Undertexter synliga";
 "osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %@s Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %@s Earlier";
 "osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %@";
 "osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Tysta";
 "osd.unmute" = "Tysta av";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "A–B-loop: rensad";
 "osd.stop" = "Stoppa";
 "osd.chapter" = "Kapitel: %@";
-"osd.subtitle_scale" = "Undertextskala: %.2fx";
+"osd.subtitle_scale" = "Undertextskala: %@x";
 "osd.add_to_playlist" = "La till %i filer till spellistan";
 "osd.clear_playlist" = "Spellista rensad";
 "osd.video_eq.contrast" = "Kontrast: %i";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Installera Online Media-tillägget från \"Tillägg > Installera från GitHub\" för att få tillgång till avancerade funktioner som videonedladdning och automatiska yt-dlp-uppdateringar.";
 "preference.ytdl_plugin_installed" = "Det inbyggda youtube-dl-stödet är inaktiverat då du har installerat Online Media-tillägget.";
 
-"menu.volume" = "Volym: %d";
-"menu.volume_muted" = "Volym: %d (Tystat)";
-"menu.audio_delay" = "Ljudfördröjning: %.2fs";
-"menu.sub_delay" = "Undertextsfördröjning: %.2fs";
+"menu.volume" = "Volym: %@";
+"menu.volume_muted" = "Volym: %@ (Tystat)";
+"menu.audio_delay" = "Ljudfördröjning: %@s";
+"menu.sub_delay" = "Undertextsfördröjning: %@s";
 "menu.sub_hide" = "Dölj undertexter";
 "menu.sub_show" = "Visa undertexter";
 "menu.sub_second_hide" = "Hide Secondary Subtitles";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "Visa undertextspanelen";
 "menu.hide_subtitles" = "Dölj undertextspanelen";
 
-"menu.seek_forward" = "Gå framåt %.0f s";
-"menu.seek_backward" = "Gå bakåt %.0f s";
+"menu.seek_forward" = "Gå framåt %@ s";
+"menu.seek_backward" = "Gå bakåt %@ s";
 "menu.speed_up" = "Speed Up by %@x";
 "menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "Volym +%.0f%%";
-"menu.volume_down" = "Volym -%.0f%%";
-"menu.audio_delay_up" = "Ljudfördröjning +%.1fs";
-"menu.audio_delay_down" = "Ljudfördröjning -%.1fs";
-"menu.sub_delay_up" = "Undertextsfördröjning +%.1fs";
-"menu.sub_delay_down" = "Undertextsfördröjning -%.1fs";
+"menu.volume_up" = "Volym +%@%%";
+"menu.volume_down" = "Volym -%@%%";
+"menu.audio_delay_up" = "Ljudfördröjning +%@s";
+"menu.audio_delay_down" = "Ljudfördröjning -%@s";
+"menu.sub_delay_up" = "Undertextsfördröjning +%@s";
+"menu.sub_delay_down" = "Undertextsfördröjning -%@s";
 
 "menu.crop_custom" = "Anpassad…";
 "menu.find_online_sub" = "Hitta undertexter online från %@";

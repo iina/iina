@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "Παύση";
 "osd.resume" = "Συνέχιση";
-"osd.volume" = "Ένταση: %i";
+"osd.volume" = "Ένταση: %@";
 "osd.speed" = "Ταχύτητα: %@x";
 "osd.aspect" = "Αναλογία Προβολής: %@";
 "osd.crop" = "Περικοπή: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "Αποπλεξία: %@";
 "osd.hwdec" = "Αποκωδικοποίηση Υλικού: %@";
 "osd.audio_delay.nodelay" = "Καθυστέρηση Ήχου: Χωρίς Καθυστέρηση";
-"osd.audio_delay.later" = "Καθυστέρηση Ήχου: %.2fs Αργότερα";
-"osd.audio_delay.earlier" = "Καθυστέρηση Ήχου: %.2fs Νωρίτερα";
+"osd.audio_delay.later" = "Καθυστέρηση Ήχου: %@s Αργότερα";
+"osd.audio_delay.earlier" = "Καθυστέρηση Ήχου: %@s Νωρίτερα";
 "osd.sub_delay.nodelay" = "Καθυστέρηση Υποτίτλων: Χωρίς Καθυστέρηση";
-"osd.sub_delay.later" = "Καθυστέρηση Υποτίτλων: %.2fs Αργότερα";
-"osd.sub_delay.earlier" = "Καθυστέρηση Υποτίτλων: %.2fs Νωρίτερα";
-"osd.subtitle_pos" = "Θέση Υποτίτλων: %.1f";
+"osd.sub_delay.later" = "Καθυστέρηση Υποτίτλων: %@s Αργότερα";
+"osd.sub_delay.earlier" = "Καθυστέρηση Υποτίτλων: %@s Νωρίτερα";
+"osd.subtitle_pos" = "Θέση Υποτίτλων: %@";
 "osd.sub_hidden" = "";
 "osd.sub_visible" = "Subtitles Visible";
 "osd.sub_second_delay.nodelay" = "Δευτερεύων Καθυστέρηση Υπότιτλων: Χωρίς Καθυστέρηση";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Δευτερεύων Καθυστέρηση Υποτίτλων: %.2fs Νωρίτερα";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %@s Later";
+"osd.sub_second_delay.earlier" = "Δευτερεύων Καθυστέρηση Υποτίτλων: %@s Νωρίτερα";
 "osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %@";
 "osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Σίγαση";
 "osd.unmute" = "Αποσίγαση";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "Βρόχος Α-Β: Εκκαθαρίστηκε";
 "osd.stop" = "Διακοπή";
 "osd.chapter" = "Κεφάλαιο: %@";
-"osd.subtitle_scale" = "Κλίμακα Υποτίτλων: %.2fx";
+"osd.subtitle_scale" = "Κλίμακα Υποτίτλων: %@x";
 "osd.add_to_playlist" = "Προστέθηκαν %i Αρχεία στη Λίστα Αναπαραγωγής";
 "osd.clear_playlist" = "Λίστα Αναπαραγωγής Εκκαθαρίστηκε";
 "osd.video_eq.contrast" = "Αντίθεση: %i";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Εγκατάσταση του Online Media plugin από \"Plugins > Εγκατάσταση από το GitHub\" για να απολαύσεις προηγμένες λειτουργίες όπως λήψη βίντεο και αυτόματες ενημερώσεις yt-dlp.";
 "preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
-"menu.volume" = "Ένταση: %d";
-"menu.volume_muted" = "Volume: %d (Muted)";
-"menu.audio_delay" = "Καθυστέρηση Ήχου: %.2fs";
-"menu.sub_delay" = "Καθυστέρηση Υποτίτλων: %.2fs";
+"menu.volume" = "Ένταση: %@";
+"menu.volume_muted" = "Volume: %@ (Muted)";
+"menu.audio_delay" = "Καθυστέρηση Ήχου: %@s";
+"menu.sub_delay" = "Καθυστέρηση Υποτίτλων: %@s";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
 "menu.sub_second_hide" = "Hide Secondary Subtitles";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "Show Subtitles Panel";
 "menu.hide_subtitles" = "Hide Subtitles Panel";
 
-"menu.seek_forward" = "Βήμα Μπροστά %.0fs";
-"menu.seek_backward" = "Βήμα Πίσω %.0fs";
+"menu.seek_forward" = "Βήμα Μπροστά %@s";
+"menu.seek_backward" = "Βήμα Πίσω %@s";
 "menu.speed_up" = "Speed Up by %@x";
 "menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "Ένταση + %.0f%%";
-"menu.volume_down" = "Ένταση - %.0f%%";
-"menu.audio_delay_up" = "Καθυστέρηση Ήχου + %.1fs";
-"menu.audio_delay_down" = "Καθυστέρηση Ήχου - %.1fs";
-"menu.sub_delay_up" = "Καθυστέρηση Υποτίτλων + %.1fs";
-"menu.sub_delay_down" = "Καθυστέρηση Υποτίτλων - %.1fs";
+"menu.volume_up" = "Ένταση + %@%%";
+"menu.volume_down" = "Ένταση - %@%%";
+"menu.audio_delay_up" = "Καθυστέρηση Ήχου + %@s";
+"menu.audio_delay_down" = "Καθυστέρηση Ήχου - %@s";
+"menu.sub_delay_up" = "Καθυστέρηση Υποτίτλων + %@s";
+"menu.sub_delay_down" = "Καθυστέρηση Υποτίτλων - %@s";
 
 "menu.crop_custom" = "Custom…";
 "menu.find_online_sub" = "Find Online Subtitles from %@";

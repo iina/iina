@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "Jeda";
 "osd.resume" = "Lanjutkan";
-"osd.volume" = "Volume: %i";
+"osd.volume" = "Volume: %@";
 "osd.speed" = "Speed: %@x";
 "osd.aspect" = "Rasio Aspek: %@";
 "osd.crop" = "Crop: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "Deinterlace: %@";
 "osd.hwdec" = "Hardware Decoding: %@";
 "osd.audio_delay.nodelay" = "Penundaan Audio: Tanpa Penundaan";
-"osd.audio_delay.later" = "Penundaan Audio: %.2f dtk lebih cepat";
-"osd.audio_delay.earlier" = "Jeda Audio: %.2f dtk lebih lambat";
+"osd.audio_delay.later" = "Penundaan Audio: %@ dtk lebih cepat";
+"osd.audio_delay.earlier" = "Jeda Audio: %@ dtk lebih lambat";
 "osd.sub_delay.nodelay" = "Penundaan Terjemahan: Tanpa Penundaan";
-"osd.sub_delay.later" = "Penundaan Terjemahan: %.2f dtk lebih cepat";
-"osd.sub_delay.earlier" = "Penundaan Terjemahan: %.2f dtk lebih lambat";
-"osd.subtitle_pos" = "Posisi Terjemahan: %.1f";
+"osd.sub_delay.later" = "Penundaan Terjemahan: %@ dtk lebih cepat";
+"osd.sub_delay.earlier" = "Penundaan Terjemahan: %@ dtk lebih lambat";
+"osd.subtitle_pos" = "Posisi Terjemahan: %@";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
 "osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %@s Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %@s Earlier";
 "osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %@";
 "osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Bisukan Suara";
 "osd.unmute" = "Nyalakan Suara";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "Pengulangan-AB: Dibersihkan";
 "osd.stop" = "Berhenti";
 "osd.chapter" = "Bab: %@";
-"osd.subtitle_scale" = "Skala Terjemahan: %.2fx";
+"osd.subtitle_scale" = "Skala Terjemahan: %@x";
 "osd.add_to_playlist" = "Menambahkan %i file ke Daftar Putar";
 "osd.clear_playlist" = "Daftar Putar Dihapus";
 "osd.video_eq.contrast" = "Kontras: %i";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
 "preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
-"menu.volume" = "Volume: %d";
-"menu.volume_muted" = "Volume: %d (Dimatikan)";
-"menu.audio_delay" = "Penundaan Audio: %.2f dtk";
-"menu.sub_delay" = "Penundaan Terjemahan: %.2f dtk";
+"menu.volume" = "Volume: %@";
+"menu.volume_muted" = "Volume: %@ (Dimatikan)";
+"menu.audio_delay" = "Penundaan Audio: %@ dtk";
+"menu.sub_delay" = "Penundaan Terjemahan: %@ dtk";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
 "menu.sub_second_hide" = "Hide Secondary Subtitles";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "Tampilkan Panel Terjemahan";
 "menu.hide_subtitles" = "Sembunyikan Panel Terjemahan";
 
-"menu.seek_forward" = "Majukan %.0fdtk";
-"menu.seek_backward" = "Mundurkan %.0fdtk";
+"menu.seek_forward" = "Majukan %@dtk";
+"menu.seek_backward" = "Mundurkan %@dtk";
 "menu.speed_up" = "Speed Up by %@x";
 "menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "Volume + %.0f%%";
-"menu.volume_down" = "Volume - %.0f%%";
-"menu.audio_delay_up" = "Penundaan Audio + %.1fdtk";
-"menu.audio_delay_down" = "Penundaan Audio - %.1fdtk";
-"menu.sub_delay_up" = "Penundaan Terjemahan + %.1fdtk";
-"menu.sub_delay_down" = "Penundaan Terjemahan - %.1fdtk";
+"menu.volume_up" = "Volume + %@%%";
+"menu.volume_down" = "Volume - %@%%";
+"menu.audio_delay_up" = "Penundaan Audio + %@dtk";
+"menu.audio_delay_down" = "Penundaan Audio - %@dtk";
+"menu.sub_delay_up" = "Penundaan Terjemahan + %@dtk";
+"menu.sub_delay_down" = "Penundaan Terjemahan - %@dtk";
 
 "menu.crop_custom" = "Kustom…";
 "menu.find_online_sub" = "Cari Terjemahan Online dari %@";

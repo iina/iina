@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "Пауза";
 "osd.resume" = "Відновити";
-"osd.volume" = "Гучність: %i";
+"osd.volume" = "Гучність: %@";
 "osd.speed" = "Швидкість: %@x";
 "osd.aspect" = "Пропорції: %@";
 "osd.crop" = "Обрізання: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "Черезрядкова розгортка: %@";
 "osd.hwdec" = "Апаратне декодування: %@";
 "osd.audio_delay.nodelay" = "Затримка звуку: без затримки";
-"osd.audio_delay.later" = "Затримка звуку: +%.2f с";
-"osd.audio_delay.earlier" = "Затримка звуку: –%.2f с";
+"osd.audio_delay.later" = "Затримка звуку: +%@ с";
+"osd.audio_delay.earlier" = "Затримка звуку: –%@ с";
 "osd.sub_delay.nodelay" = "Затримка субтитрів: без затримки";
-"osd.sub_delay.later" = "Затримка субтитрів: +%.2f с";
-"osd.sub_delay.earlier" = "Затримка субтитрів: –%.2f с";
-"osd.subtitle_pos" = "Позиція субтитрів: %.1f";
+"osd.sub_delay.later" = "Затримка субтитрів: +%@ с";
+"osd.sub_delay.earlier" = "Затримка субтитрів: –%@ с";
+"osd.subtitle_pos" = "Позиція субтитрів: %@";
 "osd.sub_hidden" = "Субтитри приховано";
 "osd.sub_visible" = "Видимість субтитрів";
 "osd.sub_second_delay.nodelay" = "Затримка додаткових субтитрів: Без затримки";
-"osd.sub_second_delay.later" = "Затримка додаткових субтитрів: %.2fс пізніше";
-"osd.sub_second_delay.earlier" = "Затримка додаткових субтитрів: %.2fс раніше";
+"osd.sub_second_delay.later" = "Затримка додаткових субтитрів: %@с пізніше";
+"osd.sub_second_delay.earlier" = "Затримка додаткових субтитрів: %@с раніше";
 "osd.sub_second_hidden" = "Додаткові субтитри приховані";
-"osd.sub_second_pos" = "Позиціювання додаткових субтитрів: %.1f";
+"osd.sub_second_pos" = "Позиціювання додаткових субтитрів: %@";
 "osd.sub_second_visible" = "Додаткові субтитри видимі";
 "osd.mute" = "Заглушити";
 "osd.unmute" = "Зі звуком";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "Цикл A—B: очищено";
 "osd.stop" = "Зупинити";
 "osd.chapter" = "Розділ: %@";
-"osd.subtitle_scale" = "Розмір субтитрів: %.2fx";
+"osd.subtitle_scale" = "Розмір субтитрів: %@x";
 "osd.add_to_playlist" = "Додано %i файлів до плейлиста";
 "osd.clear_playlist" = "Плейлист очищено";
 "osd.video_eq.contrast" = "Контрастність: %i";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Установіть плагін для онлайн-медіа в розділі «Плагіни > Установлення з GitHub» та отримайте функції завантаження відео та автоматичного оновлення yt-dlp.";
 "preference.ytdl_plugin_installed" = "Вбудована підтримка youtube-dl вимкнена, оскільки ви маєте встановленим плагін для онлайн-медіа.";
 
-"menu.volume" = "Гучність: %d";
-"menu.volume_muted" = "Гучність: %d (Без звуку)";
-"menu.audio_delay" = "Затримка звуку: %.2f с";
-"menu.sub_delay" = "Затримка субтитрів: %.2f с";
+"menu.volume" = "Гучність: %@";
+"menu.volume_muted" = "Гучність: %@ (Без звуку)";
+"menu.audio_delay" = "Затримка звуку: %@ с";
+"menu.sub_delay" = "Затримка субтитрів: %@ с";
 "menu.sub_hide" = "Приховати субтитри";
 "menu.sub_show" = "Показати субтитри";
 "menu.sub_second_hide" = "Приховати додаткові субтитри";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "Показати панель субтитрів";
 "menu.hide_subtitles" = "Приховати панель субтитрів";
 
-"menu.seek_forward" = "Крок уперед на %.0f с";
-"menu.seek_backward" = "Крок назад на %.0f с";
+"menu.seek_forward" = "Крок уперед на %@ с";
+"menu.seek_backward" = "Крок назад на %@ с";
 "menu.speed_up" = "Прискорити до %@x";
 "menu.speed_down" = "Сповільнити до %@x";
-"menu.volume_up" = "Гучність +%.0f% %";
-"menu.volume_down" = "Гучність –%.0f% %";
-"menu.audio_delay_up" = "Затримка звуку на +%.1f с";
-"menu.audio_delay_down" = "Затримка звуку на –%.1f с";
-"menu.sub_delay_up" = "Затримка субтитрів на +%.1f с";
-"menu.sub_delay_down" = "Затримка субтитрів на –%.1f с";
+"menu.volume_up" = "Гучність +%@% %";
+"menu.volume_down" = "Гучність –%@% %";
+"menu.audio_delay_up" = "Затримка звуку на +%@ с";
+"menu.audio_delay_down" = "Затримка звуку на –%@ с";
+"menu.sub_delay_up" = "Затримка субтитрів на +%@ с";
+"menu.sub_delay_down" = "Затримка субтитрів на –%@ с";
 
 "menu.crop_custom" = "Інше…";
 "menu.find_online_sub" = "Знайти онлайн субтитри з %@";

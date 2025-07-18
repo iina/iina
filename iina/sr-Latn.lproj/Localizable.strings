@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "Pauziraj";
 "osd.resume" = "Nastavi";
-"osd.volume" = "Jačina zvuka: %i";
+"osd.volume" = "Jačina zvuka: %@";
 "osd.speed" = "Speed: %@x";
 "osd.aspect" = "Odnos širina/visina: %@";
 "osd.crop" = "Iseci: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "Rasplitanje: %@";
 "osd.hwdec" = "Hardversko dekodiranje: %@";
 "osd.audio_delay.nodelay" = "Kašnjenje zvuka: bez kašnjenja";
-"osd.audio_delay.later" = "Kašnjenje zvuka: %.2fs kasnije";
-"osd.audio_delay.earlier" = "Kašnjenje zvuka: %.2fs ranije";
+"osd.audio_delay.later" = "Kašnjenje zvuka: %@s kasnije";
+"osd.audio_delay.earlier" = "Kašnjenje zvuka: %@s ranije";
 "osd.sub_delay.nodelay" = "Kašnjenje titla: bez kašnjenja";
-"osd.sub_delay.later" = "Kašnjenje titla: %.2fs kasnije";
-"osd.sub_delay.earlier" = "Kašnjenje titla: %.2fs ranije";
-"osd.subtitle_pos" = "Položaj titla: %.1f";
+"osd.sub_delay.later" = "Kašnjenje titla: %@s kasnije";
+"osd.sub_delay.earlier" = "Kašnjenje titla: %@s ranije";
+"osd.subtitle_pos" = "Položaj titla: %@";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
 "osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %@s Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %@s Earlier";
 "osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %@";
 "osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Isključi zvuk";
 "osd.unmute" = "Ponovo uključi zvuk";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "A-B petlja: očišćena";
 "osd.stop" = "Zaustavi";
 "osd.chapter" = "Poglavlje: %@";
-"osd.subtitle_scale" = "Razmera titla: %.2fx";
+"osd.subtitle_scale" = "Razmera titla: %@x";
 "osd.add_to_playlist" = "Datoteka dodato u plejlistu: %i";
 "osd.clear_playlist" = "Očišćena plejlista";
 "osd.video_eq.contrast" = "Kontrast: %i";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
 "preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
-"menu.volume" = "Jačina zvuka: %d";
-"menu.volume_muted" = "Jačina zvuka: %d (isključen zvuk)";
-"menu.audio_delay" = "Kašnjenje zvuka: %.2fs";
-"menu.sub_delay" = "Kašnjenje titla: %.2fs";
+"menu.volume" = "Jačina zvuka: %@";
+"menu.volume_muted" = "Jačina zvuka: %@ (isključen zvuk)";
+"menu.audio_delay" = "Kašnjenje zvuka: %@s";
+"menu.sub_delay" = "Kašnjenje titla: %@s";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
 "menu.sub_second_hide" = "Hide Secondary Subtitles";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "Prikaži tablu Titlovi";
 "menu.hide_subtitles" = "Sakrij tablu Titlovi";
 
-"menu.seek_forward" = "Korak unapred: %.0fs";
-"menu.seek_backward" = "Korak unazad: %.0fs";
+"menu.seek_forward" = "Korak unapred: %@s";
+"menu.seek_backward" = "Korak unazad: %@s";
 "menu.speed_up" = "Speed Up by %@x";
 "menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "Jačina zvuka + %.0f%%";
-"menu.volume_down" = "Jačina zvuka - %.0f%%";
-"menu.audio_delay_up" = "Kašnjenje zvuka + %.1fs";
-"menu.audio_delay_down" = "Kašnjenje zvuka - %.1fs";
-"menu.sub_delay_up" = "Kašnjenje titla + %.1fs";
-"menu.sub_delay_down" = "Kašnjenje titla - %.1fs";
+"menu.volume_up" = "Jačina zvuka + %@%%";
+"menu.volume_down" = "Jačina zvuka - %@%%";
+"menu.audio_delay_up" = "Kašnjenje zvuka + %@s";
+"menu.audio_delay_down" = "Kašnjenje zvuka - %@s";
+"menu.sub_delay_up" = "Kašnjenje titla + %@s";
+"menu.sub_delay_down" = "Kašnjenje titla - %@s";
 
 "menu.crop_custom" = "Prilagođeno…";
 "menu.find_online_sub" = "Pronađi titlove na mreži s lokacije %@";

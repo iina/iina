@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "暂停";
 "osd.resume" = "继续";
-"osd.volume" = "音量：%i";
+"osd.volume" = "音量：%@";
 "osd.speed" = "速度：%@x";
 "osd.aspect" = "长宽比：%@";
 "osd.crop" = "裁切：%@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "反交错：%@";
 "osd.hwdec" = "正在硬件解码: %@";
 "osd.audio_delay.nodelay" = "音频延迟：无延迟";
-"osd.audio_delay.later" = "音频延迟：延迟 %.2f 秒";
-"osd.audio_delay.earlier" = "音频延迟：提前 %.2f 秒";
+"osd.audio_delay.later" = "音频延迟：延迟 %@ 秒";
+"osd.audio_delay.earlier" = "音频延迟：提前 %@ 秒";
 "osd.sub_delay.nodelay" = "字幕延迟：无延迟";
-"osd.sub_delay.later" = "字幕延迟：延迟 %.2f 秒";
-"osd.sub_delay.earlier" = "字幕延迟：提前 %.2f 秒";
-"osd.subtitle_pos" = "字幕位置：%.1f";
+"osd.sub_delay.later" = "字幕延迟：延迟 %@ 秒";
+"osd.sub_delay.earlier" = "字幕延迟：提前 %@ 秒";
+"osd.subtitle_pos" = "字幕位置：%@";
 "osd.sub_hidden" = "字幕已隐藏";
 "osd.sub_visible" = "字幕可见";
 "osd.sub_second_delay.nodelay" = "二级字幕延迟：无延迟";
-"osd.sub_second_delay.later" = "二级字幕延迟：延迟 %.2f 秒";
-"osd.sub_second_delay.earlier" = "二级字幕延迟：提前 %.2f 秒";
+"osd.sub_second_delay.later" = "二级字幕延迟：延迟 %@ 秒";
+"osd.sub_second_delay.earlier" = "二级字幕延迟：提前 %@ 秒";
 "osd.sub_second_hidden" = "隐藏二级字幕";
-"osd.sub_second_pos" = "二级字幕位置：%.1f";
+"osd.sub_second_pos" = "二级字幕位置：%@";
 "osd.sub_second_visible" = "开启二级字幕";
 "osd.mute" = "静音";
 "osd.unmute" = "取消静音";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "AB循环：清除";
 "osd.stop" = "停止";
 "osd.chapter" = "章节：%@";
-"osd.subtitle_scale" = "字幕缩放：%.2fx";
+"osd.subtitle_scale" = "字幕缩放：%@x";
 "osd.add_to_playlist" = "已添加 %i 个文件至播放列表";
 "osd.clear_playlist" = "清除播放列表";
 "osd.video_eq.contrast" = "对比度：%i";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "从 \"Plugins > 安装 GitHub\" 中安装在线媒体插件以享受高级功能，例如视频下载和自动yt-dlp 更新。";
 "preference.ytdl_plugin_installed" = "由于安装了在线媒体插件，内置的 youtube-dl 支持已被禁用。";
 
-"menu.volume" = "音量: %d";
-"menu.volume_muted" = "音量：%d （静音）";
-"menu.audio_delay" = "音频延迟: %.2f秒";
-"menu.sub_delay" = "字幕延迟: %.2f秒";
+"menu.volume" = "音量: %@";
+"menu.volume_muted" = "音量：%@ （静音）";
+"menu.audio_delay" = "音频延迟: %@秒";
+"menu.sub_delay" = "字幕延迟: %@秒";
 "menu.sub_hide" = "隐藏字幕";
 "menu.sub_show" = "显示字幕";
 "menu.sub_second_hide" = "隐藏二级字幕";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "显示字幕面板";
 "menu.hide_subtitles" = "隐藏字幕面板";
 
-"menu.seek_forward" = "渐进 %.0f秒";
-"menu.seek_backward" = "渐退 %.0f秒";
+"menu.seek_forward" = "渐进 %@秒";
+"menu.seek_backward" = "渐退 %@秒";
 "menu.speed_up" = "加快播放速度快捷键";
 "menu.speed_down" = "降低播放速度快捷键";
-"menu.volume_up" = "音量 + %.0f%%";
-"menu.volume_down" = "音量 - %.0f%%";
-"menu.audio_delay_up" = "音频延迟 + %.1f秒";
-"menu.audio_delay_down" = "音频延迟 - %.1f秒";
-"menu.sub_delay_up" = "字幕延迟 + %.1f秒";
-"menu.sub_delay_down" = "字幕延迟 - %.1f秒";
+"menu.volume_up" = "音量 + %@%%";
+"menu.volume_down" = "音量 - %@%%";
+"menu.audio_delay_up" = "音频延迟 + %@秒";
+"menu.audio_delay_down" = "音频延迟 - %@秒";
+"menu.sub_delay_up" = "字幕延迟 + %@秒";
+"menu.sub_delay_down" = "字幕延迟 - %@秒";
 
 "menu.crop_custom" = "自定义…";
 "menu.find_online_sub" = "从 %@ 查找在线字幕";

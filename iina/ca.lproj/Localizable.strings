@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "Pausa";
 "osd.resume" = "Reprèn";
-"osd.volume" = "Volum: %i";
+"osd.volume" = "Volum: %@";
 "osd.speed" = "Speed: %@x";
 "osd.aspect" = "Relació d'aspecte: %@";
 "osd.crop" = "Escapça: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "Desentrellaça: %@";
 "osd.hwdec" = "Decodificació per maquinari: %@";
 "osd.audio_delay.nodelay" = "Retard de l'àudio: sense retard";
-"osd.audio_delay.later" = "Retard de l'àudio: %.2fs després";
-"osd.audio_delay.earlier" = "Retard de l'àudio: %.2fs abans";
+"osd.audio_delay.later" = "Retard de l'àudio: %@s després";
+"osd.audio_delay.earlier" = "Retard de l'àudio: %@s abans";
 "osd.sub_delay.nodelay" = "Retard dels subtítols: sense retard";
-"osd.sub_delay.later" = "Retard dels subtítols: %.2fs després";
-"osd.sub_delay.earlier" = "Retard dels subtítols: %.2fs abans";
-"osd.subtitle_pos" = "Posició dels subtítols: %.1f";
+"osd.sub_delay.later" = "Retard dels subtítols: %@s després";
+"osd.sub_delay.earlier" = "Retard dels subtítols: %@s abans";
+"osd.subtitle_pos" = "Posició dels subtítols: %@";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
 "osd.sub_second_delay.nodelay" = "Retard Secundari de Subtítols: Sense Retard";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Retard Secundari de Subtítols: %.2fs Abans";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %@s Later";
+"osd.sub_second_delay.earlier" = "Retard Secundari de Subtítols: %@s Abans";
 "osd.sub_second_hidden" = "Subtítols Secundaris Amagats";
-"osd.sub_second_pos" = "Posició Secundària de Subtítols: %.1f";
+"osd.sub_second_pos" = "Posició Secundària de Subtítols: %@";
 "osd.sub_second_visible" = "Subtítols Secundaris Visibles";
 "osd.mute" = "Silencia";
 "osd.unmute" = "Amb so";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "Bucle-AB: suprimit";
 "osd.stop" = "Atura";
 "osd.chapter" = "Capítol: %@";
-"osd.subtitle_scale" = "Escala dels subtítols: %.2fx";
+"osd.subtitle_scale" = "Escala dels subtítols: %@x";
 "osd.add_to_playlist" = "%i fitxer afegits a la llista de reproducció";
 "osd.clear_playlist" = "Llista de reproducció suprimida";
 "osd.video_eq.contrast" = "Contrast: %i";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
 "preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
-"menu.volume" = "Volum: %d";
-"menu.volume_muted" = "Volum: %d (Silenciat)";
-"menu.audio_delay" = "Retard d'àudio: %.2fs";
-"menu.sub_delay" = "Retard en els subtítols: %.2fs";
+"menu.volume" = "Volum: %@";
+"menu.volume_muted" = "Volum: %@ (Silenciat)";
+"menu.audio_delay" = "Retard d'àudio: %@s";
+"menu.sub_delay" = "Retard en els subtítols: %@s";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
 "menu.sub_second_hide" = "Amagar Subtítols Secundaris";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "Show Subtitles Panel";
 "menu.hide_subtitles" = "Hide Subtitles Panel";
 
-"menu.seek_forward" = "Avança %.0fs";
-"menu.seek_backward" = "Retrocedeix %.0fs";
+"menu.seek_forward" = "Avança %@s";
+"menu.seek_backward" = "Retrocedeix %@s";
 "menu.speed_up" = "Speed Up by %@x";
 "menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "Volum + %.0f%%";
-"menu.volume_down" = "Volum - %.0f%%";
-"menu.audio_delay_up" = "Retarda d'àudio + %.1fs";
-"menu.audio_delay_down" = "Retarda d'àudio - %.1fs";
-"menu.sub_delay_up" = "Retarda en els subtítols + %.1fs";
-"menu.sub_delay_down" = "Retarda en els subtítols - %.1fs";
+"menu.volume_up" = "Volum + %@%%";
+"menu.volume_down" = "Volum - %@%%";
+"menu.audio_delay_up" = "Retarda d'àudio + %@s";
+"menu.audio_delay_down" = "Retarda d'àudio - %@s";
+"menu.sub_delay_up" = "Retarda en els subtítols + %@s";
+"menu.sub_delay_down" = "Retarda en els subtítols - %@s";
 
 "menu.crop_custom" = "Personalitzat...";
 "menu.find_online_sub" = "Cerca subtítols en línia a %@";

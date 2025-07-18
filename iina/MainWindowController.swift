@@ -2358,7 +2358,10 @@ class MainWindowController: PlayerWindowController {
   private func updateTimeLabel(_ posInWindow: NSPoint) {
     let mouseXPos = playSlider.convert(posInWindow, from: nil).x
     let timeLabelXPos = round(mouseXPos + playSlider.frame.origin.x - timePreviewWhenSeek.frame.width / 2)
-    let timeLabelYPos = playSlider.frame.origin.y + playSlider.frame.height
+    var timeLabelYPos = playSlider.frame.origin.y + playSlider.frame.height
+    if oscPosition == .bottom {
+      timeLabelYPos -= 2
+    }
     timePreviewWhenSeek.frame.origin = NSPoint(x: timeLabelXPos, y: timeLabelYPos)
     let sliderFrame = playSlider.bounds
     let sliderFrameInWindow = playSlider.superview!.convert(playSlider.frame.origin, to: nil)
@@ -3016,9 +3019,13 @@ class MainWindowController: PlayerWindowController {
     // seek and update time
     let percentage = 100 * sender.doubleValue / sender.maxValue
     // label
+    var timeLabelYPos = playSlider.frame.origin.y + playSlider.frame.height
+    if oscPosition == .bottom {
+      timeLabelYPos -= 2
+    }
     timePreviewWhenSeek.frame.origin = CGPoint(
       x: round(sender.knobPointPosition() - timePreviewWhenSeek.frame.width / 2),
-      y: playSlider.frame.origin.y + playSlider.frame.height)
+      y: timeLabelYPos)
     timePreviewWhenSeek.stringValue = (player.info.videoDuration! * percentage * 0.01).stringRepresentation
   }
 

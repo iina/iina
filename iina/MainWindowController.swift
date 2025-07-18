@@ -1550,6 +1550,15 @@ class MainWindowController: PlayerWindowController {
     // set window frame and in some cases content view frame
     setWindowFrameForLegacyFullScreen()
 
+    // The volume slider and the toolbar views in the floating OSC will be detached and not shown in
+    // the floating OSC if the window is too narrow. Once in full screen mode there is enough space
+    // for the full OSC to be shown. Sometimes, but not always, the subview holding the pause/resume
+    // and left/right buttons will not be centered after the OSC expands to full size. Forcing
+    // layout corrects this. See issue #5244.
+    if oscPosition == .floating {
+      fragControlView.needsLayout = true
+    }
+
     // call delegate
     windowDidEnterFullScreen(Notification(name: .iinaLegacyFullScreen))
   }

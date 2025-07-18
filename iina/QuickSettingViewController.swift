@@ -799,15 +799,20 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   @IBAction func audioDelayChangedAction(_ sender: NSSlider) {
     let eventType = NSApp.currentEvent!.type
-    if eventType == .leftMouseDown {
-      sender.allowsTickMarkValuesOnly = true
+    let sliderValue: Double
+    switch eventType {
+    case .leftMouseDown, .leftMouseDragged, .leftMouseUp:
+      // When dragging slider with the mouse, snap to the nearest 50ms (1/20 sec)
+      // Although it is possible to show tick marks at every step of 0.05 in the slider, it is visually unpleasant.
+      // So we draw less tick marks, and keep "Only stop on tick marks" disabled, and add our own logic to stop on
+      // "virtual tick marks" for these values.
+      sliderValue = (sender.doubleValue * 20.0).rounded() / 20.0
+      sender.doubleValue = sliderValue
+    default:
+      sliderValue = sender.doubleValue
     }
-    if eventType == .leftMouseUp {
-      sender.allowsTickMarkValuesOnly = false
-    }
-    let sliderValue = sender.doubleValue
     customAudioDelayTextField.doubleValue = sliderValue
-    redraw(indicator: audioDelaySliderIndicator, constraint: audioDelaySliderConstraint, slider: audioDelaySlider, value: "\(customAudioDelayTextField.stringValue)s")
+    redraw(indicator: audioDelaySliderIndicator, constraint: audioDelaySliderConstraint, slider: audioDelaySlider, value: "\(sliderValue)s")
     if let event = NSApp.currentEvent {
       if event.type == .leftMouseUp {
         player.setAudioDelay(sliderValue)

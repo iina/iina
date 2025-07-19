@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "Tạm dừng";
 "osd.resume" = "Tiếp tục";
-"osd.volume" = "Âm lượng: %@";
+"osd.volume" = "Âm lượng: %i";
 "osd.speed" = "Speed: %@x";
 "osd.aspect" = "Tỉ lệ khung hình: %@";
 "osd.crop" = "Cắt: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "Khử nhoè: %@";
 "osd.hwdec" = "Bộ giải mã phần cứng: %@";
 "osd.audio_delay.nodelay" = "Độ trễ âm thanh: Không trễ";
-"osd.audio_delay.later" = "Độ trễ âm thanh: %@s trễ";
-"osd.audio_delay.earlier" = "Độ trễ âm thanh: %@s nhanh";
+"osd.audio_delay.later" = "Độ trễ âm thanh: %.2fs trễ";
+"osd.audio_delay.earlier" = "Độ trễ âm thanh: %.2fs nhanh";
 "osd.sub_delay.nodelay" = "Độ trễ phụ đề: Không trễ";
-"osd.sub_delay.later" = "Độ trễ phụ đề: %@s trễ hơn";
-"osd.sub_delay.earlier" = "Độ trễ phụ đề: %@s sớm hơn";
-"osd.subtitle_pos" = "Vị trí phụ đề: %@";
+"osd.sub_delay.later" = "Độ trễ phụ đề: %.2fs trễ hơn";
+"osd.sub_delay.earlier" = "Độ trễ phụ đề: %.2fs sớm hơn";
+"osd.subtitle_pos" = "Vị trí phụ đề: %.1f";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
 "osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %@s Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %@s Earlier";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
 "osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %@";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
 "osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Tắt tiếng";
 "osd.unmute" = "Bật tiếng";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "Vòng lặp AB: Đã xóa";
 "osd.stop" = "Dừng";
 "osd.chapter" = "Chương: %@";
-"osd.subtitle_scale" = "Tỷ lệ phụ đề: %@x";
+"osd.subtitle_scale" = "Tỷ lệ phụ đề: %.2fx";
 "osd.add_to_playlist" = "Đã thêm %i tệp vào danh sách phát";
 "osd.clear_playlist" = "Đã xóa danh sách phát";
 "osd.video_eq.contrast" = "Tương phản: %i";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
 "preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
-"menu.volume" = "Âm lượng: %@";
-"menu.volume_muted" = "Âm lượng: %@ (Đã tắt tiếng)";
-"menu.audio_delay" = "Độ trễ âm thanh: %@s";
-"menu.sub_delay" = "Độ trễ phụ đề: %@s";
+"menu.volume" = "Âm lượng: %d";
+"menu.volume_muted" = "Âm lượng: %d (Đã tắt tiếng)";
+"menu.audio_delay" = "Độ trễ âm thanh: %.2fs";
+"menu.sub_delay" = "Độ trễ phụ đề: %.2fs";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
 "menu.sub_second_hide" = "Hide Secondary Subtitles";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "Show Subtitles Panel";
 "menu.hide_subtitles" = "Hide Subtitles Panel";
 
-"menu.seek_forward" = "Step Forward %@s";
-"menu.seek_backward" = "Step Backward %@s";
+"menu.seek_forward" = "Step Forward %.0fs";
+"menu.seek_backward" = "Step Backward %.0fs";
 "menu.speed_up" = "Speed Up by %@x";
 "menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "Volume + %@%%";
-"menu.volume_down" = "Âm lượng - %@%%";
-"menu.audio_delay_up" = "Audio Delay + %@s";
-"menu.audio_delay_down" = "Audio Delay - %@s";
-"menu.sub_delay_up" = "Subtitle Delay + %@s";
-"menu.sub_delay_down" = "Subtitle Delay - %@s";
+"menu.volume_up" = "Volume + %.0f%%";
+"menu.volume_down" = "Âm lượng - %.0f%%";
+"menu.audio_delay_up" = "Audio Delay + %.1fs";
+"menu.audio_delay_down" = "Audio Delay - %.1fs";
+"menu.sub_delay_up" = "Subtitle Delay + %.1fs";
+"menu.sub_delay_down" = "Subtitle Delay - %.1fs";
 
 "menu.crop_custom" = "Tuỳ chỉnh…";
 "menu.find_online_sub" = "Find Online Subtitles from %@";
@@ -262,8 +262,6 @@
 "alert.config.new.message" = "Please enter a name for the new configuration.";
 "alert.config.duplicate.title" = "Duplicate Configuration";
 "alert.config.duplicate.message" = "Please enter name for the duplicated configuration file.";
-"alert.config.empty_name" = "The name cannot be empty.";
-"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "File Already Exists";
 "alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Cannot create config file!\n%@";
@@ -287,7 +285,7 @@
 "alert.screenshot.error_taking" = "Cannot take a screenshot!";
 
 "alert.sub.no_selected" = "Please select a downloaded subtitle first.";
-"alert.sub_lang_not_set" = "Please set preferred subtitle languages in preferences before using OpenSubtitles. English(eng) will be used this time.";
+"alert.sub_lang_not_set" = "Please set preferred subtitle languages in Settings before using OpenSubtitles. English(eng) will be used this time.";
 "alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
 "alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
 "alert.sub.save_downloaded.title" = "Lưu phụ đề đã tải";
@@ -349,7 +347,7 @@
 "alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
 "alert.plugin_reinstall.title" = "Plugin %@ already exists";
 "alert.plugin_reinstall.message" = "Do you want to reinstall the plugin?";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Settings - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
 "alert.plugin_no_update" = "No update found.";
 "alert.plugin_update_found.title" = "Update found for %@";
 "alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";

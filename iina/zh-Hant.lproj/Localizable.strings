@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "暫停";
 "osd.resume" = "繼續";
-"osd.volume" = "音量：%@";
+"osd.volume" = "音量：%i";
 "osd.speed" = "速度：%@x";
 "osd.aspect" = "顯示比例：%@";
 "osd.crop" = "裁切：%@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "去交錯：%@";
 "osd.hwdec" = "硬體解碼: %@";
 "osd.audio_delay.nodelay" = "音訊延遲：無";
-"osd.audio_delay.later" = "音訊延遲：延遲 %@ 秒";
-"osd.audio_delay.earlier" = "音訊延遲：提前 %@ 秒";
+"osd.audio_delay.later" = "音訊延遲：延遲 %.2f 秒";
+"osd.audio_delay.earlier" = "音訊延遲：提前 %.2f 秒";
 "osd.sub_delay.nodelay" = "字幕延遲：無";
-"osd.sub_delay.later" = "字幕延遲：延遲 %@ 秒";
-"osd.sub_delay.earlier" = "字幕延遲：提前 %@ 秒";
-"osd.subtitle_pos" = "字幕位置：%@";
+"osd.sub_delay.later" = "字幕延遲：延遲 %.2f 秒";
+"osd.sub_delay.earlier" = "字幕延遲：提前 %.2f 秒";
+"osd.subtitle_pos" = "字幕位置：%.1f";
 "osd.sub_hidden" = "已隱藏字幕";
 "osd.sub_visible" = "已顯示字幕";
 "osd.sub_second_delay.nodelay" = "小字幕延遲：無";
-"osd.sub_second_delay.later" = "小字幕間隔：延遲 %@ 秒";
-"osd.sub_second_delay.earlier" = "小字幕間隔：提前 %@ 秒";
+"osd.sub_second_delay.later" = "小字幕間隔：延遲 %.2f 秒";
+"osd.sub_second_delay.earlier" = "小字幕間隔：提前 %.2f 秒";
 "osd.sub_second_hidden" = "已隱藏小字幕";
-"osd.sub_second_pos" = "小字幕位置：%@";
+"osd.sub_second_pos" = "小字幕位置：%.1f";
 "osd.sub_second_visible" = "已顯示小字幕";
 "osd.mute" = "靜音";
 "osd.unmute" = "取消靜音";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "AB循環：清除";
 "osd.stop" = "停止";
 "osd.chapter" = "章節：%@";
-"osd.subtitle_scale" = "字幕縮放：%@ 倍";
+"osd.subtitle_scale" = "字幕縮放：%.2f 倍";
 "osd.add_to_playlist" = "已新增%i個檔案至播放列表";
 "osd.clear_playlist" = "播放列表已清除";
 "osd.video_eq.contrast" = "對比度：%i";
@@ -141,7 +141,7 @@
 "osd.playlist_loop" = "循環播放全部檔案";
 "osd.no_loop" = "取消循環播放檔案";
 
-"preference.title" = "偏好設定";
+"preference.title" = "設定";
 "preference.general" = "一般";
 "preference.ui" = "使用者介面";
 "preference.video_audio" = "視訊/音訊";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "從「設定」中切換至外掛程式分頁，點擊「Install from GitHub」安裝線上媒體插件；即可啟用影片下載及 yt-dlp 自動更新等進階功能。";
 "preference.ytdl_plugin_installed" = "由於已經安裝了「線上媒體外掛」，因此將內建的 youtube-dl 做禁用。";
 
-"menu.volume" = "音量：%@";
-"menu.volume_muted" = "音量：%@ (靜音)";
-"menu.audio_delay" = "音訊延遲：%@ 秒";
-"menu.sub_delay" = "字幕延遲：%@ 秒";
+"menu.volume" = "音量：%d";
+"menu.volume_muted" = "音量：%d (靜音)";
+"menu.audio_delay" = "音訊延遲：%.2f 秒";
+"menu.sub_delay" = "字幕延遲：%.2f 秒";
 "menu.sub_hide" = "隱藏字幕";
 "menu.sub_show" = "顯示字幕";
 "menu.sub_second_hide" = "隱藏副字幕";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "顯示字幕面板";
 "menu.hide_subtitles" = "隱藏字幕面板";
 
-"menu.seek_forward" = "快轉 %@s";
-"menu.seek_backward" = "倒轉 %@s";
+"menu.seek_forward" = "快轉 %.0fs";
+"menu.seek_backward" = "倒轉 %.0fs";
 "menu.speed_up" = "加速%@倍";
 "menu.speed_down" = "減速%@倍";
-"menu.volume_up" = "音量 + %@%%";
-"menu.volume_down" = "音量 - %@%%";
-"menu.audio_delay_up" = "音訊延遲 + %@ 秒";
-"menu.audio_delay_down" = "音訊延遲 - %@ 秒";
-"menu.sub_delay_up" = "字幕延遲 + %@ 秒";
-"menu.sub_delay_down" = "字幕延遲 - %@ 秒";
+"menu.volume_up" = "音量 + %.0f%%";
+"menu.volume_down" = "音量 - %.0f%%";
+"menu.audio_delay_up" = "音訊延遲 + %.1f 秒";
+"menu.audio_delay_down" = "音訊延遲 - %.1f 秒";
+"menu.sub_delay_up" = "字幕延遲 + %.1f 秒";
+"menu.sub_delay_down" = "字幕延遲 - %.1f 秒";
 
 "menu.crop_custom" = "自定⋯";
 "menu.find_online_sub" = "從 %@ 尋找線上字幕";
@@ -262,8 +262,6 @@
 "alert.config.new.message" = "請輸入一個設定檔名稱";
 "alert.config.duplicate.title" = "複製設定檔";
 "alert.config.duplicate.message" = "請輸入複製的設定檔名稱";
-"alert.config.empty_name" = "名稱不能留空";
-"alert.config.name_existing" = "具有相同名稱的配置已存在。";
 "alert.config.file_existing.title" = "檔案已經存在";
 "alert.config.file_existing.message" = "一個具有相同文件名的配置文件已存在。選擇“確定”在Finder中顯示該文件。";
 "alert.config.cannot_create" = "無法建立設定檔\n%@";
@@ -287,7 +285,7 @@
 "alert.screenshot.error_taking" = "擷圖失敗！";
 
 "alert.sub.no_selected" = "請先選取一個已下載的字幕檔";
-"alert.sub_lang_not_set" = "在使用 OpenSubtitles 前請先在「偏好設定」中設定字幕的偏好語言，目前將使用英文（eng）。";
+"alert.sub_lang_not_set" = "在使用 OpenSubtitles 前請先在「偏好設定」中設定字幕的偏好語言，預設將使用英文（eng）。";
 "alert.sub.cannot_save_passwd" = "無法將您這個密碼「%@」儲存到鑰匙圈";
 "alert.sub.cannot_login" = "登入失敗，請檢查您的使用者帳戶、密碼、網路連線。\n\n%@";
 "alert.sub.save_downloaded.title" = "儲存已下載的字幕";
@@ -349,7 +347,7 @@
 "alert.plugin_uninstall.message" = "這外掛程式將從你的磁碟移除。";
 "alert.plugin_reinstall.title" = "插件%@已存在";
 "alert.plugin_reinstall.message" = "您是否希望重新安裝此插件？";
-"alert.duplicated_plugin_id" = "偵測到重複的外掛程式識別碼，有兩個或更多外掛程式使用的相同的識別碼「%@」，這將造成不正常的行為。請在「偏好設定 - 外掛程式」中找到它們，並回報給外掛程式的作者。如果外掛程式安裝於本機，你可以手動在外掛程式的 Info.json 檔案中手動變更該外掛的識別碼。";
+"alert.duplicated_plugin_id" = "偵測到重複的插件識別碼。兩個或兩個以上的插件使用相同的識別碼「%@」，導致不尋常的行為。請在「偏好設定 - 插件」中找到它們，並向插件作者報告。如果插件安裝在本機，您可以在插件的 Info.json 檔案中手動變更插件的識別碼。";
 "alert.plugin_no_update" = "未找到更新。";
 "alert.plugin_update_found.title" = "找到 %@ 的更新";
 "alert.plugin_update_found.message" = "最新版本是 %@，你的版本是 %@，要更新嗎？";

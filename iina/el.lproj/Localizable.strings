@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "Παύση";
 "osd.resume" = "Συνέχιση";
-"osd.volume" = "Ένταση: %@";
+"osd.volume" = "Ένταση: %i";
 "osd.speed" = "Ταχύτητα: %@x";
 "osd.aspect" = "Αναλογία Προβολής: %@";
 "osd.crop" = "Περικοπή: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "Αποπλεξία: %@";
 "osd.hwdec" = "Αποκωδικοποίηση Υλικού: %@";
 "osd.audio_delay.nodelay" = "Καθυστέρηση Ήχου: Χωρίς Καθυστέρηση";
-"osd.audio_delay.later" = "Καθυστέρηση Ήχου: %@s Αργότερα";
-"osd.audio_delay.earlier" = "Καθυστέρηση Ήχου: %@s Νωρίτερα";
+"osd.audio_delay.later" = "Καθυστέρηση Ήχου: %.2fs Αργότερα";
+"osd.audio_delay.earlier" = "Καθυστέρηση Ήχου: %.2fs Νωρίτερα";
 "osd.sub_delay.nodelay" = "Καθυστέρηση Υποτίτλων: Χωρίς Καθυστέρηση";
-"osd.sub_delay.later" = "Καθυστέρηση Υποτίτλων: %@s Αργότερα";
-"osd.sub_delay.earlier" = "Καθυστέρηση Υποτίτλων: %@s Νωρίτερα";
-"osd.subtitle_pos" = "Θέση Υποτίτλων: %@";
+"osd.sub_delay.later" = "Καθυστέρηση Υποτίτλων: %.2fs Αργότερα";
+"osd.sub_delay.earlier" = "Καθυστέρηση Υποτίτλων: %.2fs Νωρίτερα";
+"osd.subtitle_pos" = "Θέση Υποτίτλων: %.1f";
 "osd.sub_hidden" = "";
 "osd.sub_visible" = "Subtitles Visible";
 "osd.sub_second_delay.nodelay" = "Δευτερεύων Καθυστέρηση Υπότιτλων: Χωρίς Καθυστέρηση";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %@s Later";
-"osd.sub_second_delay.earlier" = "Δευτερεύων Καθυστέρηση Υποτίτλων: %@s Νωρίτερα";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
+"osd.sub_second_delay.earlier" = "Δευτερεύων Καθυστέρηση Υποτίτλων: %.2fs Νωρίτερα";
 "osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %@";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
 "osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Σίγαση";
 "osd.unmute" = "Αποσίγαση";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "Βρόχος Α-Β: Εκκαθαρίστηκε";
 "osd.stop" = "Διακοπή";
 "osd.chapter" = "Κεφάλαιο: %@";
-"osd.subtitle_scale" = "Κλίμακα Υποτίτλων: %@x";
+"osd.subtitle_scale" = "Κλίμακα Υποτίτλων: %.2fx";
 "osd.add_to_playlist" = "Προστέθηκαν %i Αρχεία στη Λίστα Αναπαραγωγής";
 "osd.clear_playlist" = "Λίστα Αναπαραγωγής Εκκαθαρίστηκε";
 "osd.video_eq.contrast" = "Αντίθεση: %i";
@@ -141,7 +141,7 @@
 "osd.playlist_loop" = "Loop Playlist";
 "osd.no_loop" = "Disable Looping";
 
-"preference.title" = "Προτιμήσεις";
+"preference.title" = "Settings";
 "preference.general" = "Γενικά";
 "preference.ui" = "Περιβάλλον Χρήστη";
 "preference.video_audio" = "Βίντεο/Ήχος";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Εγκατάσταση του Online Media plugin από \"Plugins > Εγκατάσταση από το GitHub\" για να απολαύσεις προηγμένες λειτουργίες όπως λήψη βίντεο και αυτόματες ενημερώσεις yt-dlp.";
 "preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
-"menu.volume" = "Ένταση: %@";
-"menu.volume_muted" = "Volume: %@ (Muted)";
-"menu.audio_delay" = "Καθυστέρηση Ήχου: %@s";
-"menu.sub_delay" = "Καθυστέρηση Υποτίτλων: %@s";
+"menu.volume" = "Ένταση: %d";
+"menu.volume_muted" = "Volume: %d (Muted)";
+"menu.audio_delay" = "Καθυστέρηση Ήχου: %.2fs";
+"menu.sub_delay" = "Καθυστέρηση Υποτίτλων: %.2fs";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
 "menu.sub_second_hide" = "Hide Secondary Subtitles";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "Show Subtitles Panel";
 "menu.hide_subtitles" = "Hide Subtitles Panel";
 
-"menu.seek_forward" = "Βήμα Μπροστά %@s";
-"menu.seek_backward" = "Βήμα Πίσω %@s";
+"menu.seek_forward" = "Βήμα Μπροστά %.0fs";
+"menu.seek_backward" = "Βήμα Πίσω %.0fs";
 "menu.speed_up" = "Speed Up by %@x";
 "menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "Ένταση + %@%%";
-"menu.volume_down" = "Ένταση - %@%%";
-"menu.audio_delay_up" = "Καθυστέρηση Ήχου + %@s";
-"menu.audio_delay_down" = "Καθυστέρηση Ήχου - %@s";
-"menu.sub_delay_up" = "Καθυστέρηση Υποτίτλων + %@s";
-"menu.sub_delay_down" = "Καθυστέρηση Υποτίτλων - %@s";
+"menu.volume_up" = "Ένταση + %.0f%%";
+"menu.volume_down" = "Ένταση - %.0f%%";
+"menu.audio_delay_up" = "Καθυστέρηση Ήχου + %.1fs";
+"menu.audio_delay_down" = "Καθυστέρηση Ήχου - %.1fs";
+"menu.sub_delay_up" = "Καθυστέρηση Υποτίτλων + %.1fs";
+"menu.sub_delay_down" = "Καθυστέρηση Υποτίτλων - %.1fs";
 
 "menu.crop_custom" = "Custom…";
 "menu.find_online_sub" = "Find Online Subtitles from %@";
@@ -262,8 +262,6 @@
 "alert.config.new.message" = "Παρακαλώ εισάγετε ένα όνομα για τη νέα ρύθμιση.";
 "alert.config.duplicate.title" = "Αντιγραφή Ρυθμίσεων";
 "alert.config.duplicate.message" = "Παρακαλώ εισάγετε ένα όνομα για το αντιγραμμένο αρχείο ρυθμίσεων.";
-"alert.config.empty_name" = "Το όνομα δεν μπορεί να είναι κενό.";
-"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Ήδη Υπάρχον Αρχείο";
 "alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Αδυναμία δημιουργίας αρχείου ρυθμίσεων!\n%@";
@@ -287,7 +285,7 @@
 "alert.screenshot.error_taking" = "Cannot take a screenshot!";
 
 "alert.sub.no_selected" = "Παρακαλώ πρώτα επιλέξτε έναν από τους μεταφορτωμένους υπότιτλους.";
-"alert.sub_lang_not_set" = "Παρακαλώ ορίστε προτιμώμενη γλώσσα στις Προτιμήσεις πριν τη χρήση του OpenSubtitles. Αυτή τη φορά θα χρησιμοποιηθούν τα Αγγλικά (eng).";
+"alert.sub_lang_not_set" = "Please set preferred subtitle languages in Settings before using OpenSubtitles. English(eng) will be used this time.";
 "alert.sub.cannot_save_passwd" = "Αδυναμία αποθήκευσης του κωδικού σας στο Keychain: %@";
 "alert.sub.cannot_login" = "Αδυναμία σύνδεσης. Παρακαλώ ελέγξτε το Όνομα Χρήστη, τον Κωδικό Εισόδου, και την κατάσταση δικτύου.\n\n%@";
 "alert.sub.save_downloaded.title" = "Αποθήκευση Ληφθέντος Υπότιτλου";
@@ -349,7 +347,7 @@
 "alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
 "alert.plugin_reinstall.title" = "Plugin %@ already exists";
 "alert.plugin_reinstall.message" = "Do you want to reinstall the plugin?";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Settings - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
 "alert.plugin_no_update" = "No update found.";
 "alert.plugin_update_found.title" = "Update found for %@";
 "alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";

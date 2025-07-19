@@ -16,8 +16,8 @@
 /* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[0] = "About"; ObjectID = "KTN-5r-mMm"; */
 "KTN-5r-mMm.ibShadowedLabels[0]" = "IINA에 관하여";
 
-/* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[2] = "Preferences"; ObjectID = "KTN-5r-mMm"; */
-"KTN-5r-mMm.ibShadowedLabels[2]" = "환경설정";
+/* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[2] = "Settings"; ObjectID = "KTN-5r-mMm"; */
+"KTN-5r-mMm.ibShadowedLabels[2]" = "설정";
 
 /* Class = "NSTextFieldCell"; title = "Help"; ObjectID = "Ka5-V3-g5E"; */
 "Ka5-V3-g5E.title" = "도움말";
@@ -46,8 +46,8 @@
 /* Class = "NSButtonCell"; title = "Install from GitHub…"; ObjectID = "enP-C1-4vu"; */
 "enP-C1-4vu.title" = "깃허브에서 설치…";
 
-/* Class = "NSTabViewItem"; label = "Preferences"; ObjectID = "eyS-eb-H4e"; */
-"eyS-eb-H4e.label" = "환경설정";
+/* Class = "NSTabViewItem"; label = "Settings"; ObjectID = "eyS-eb-H4e"; */
+"eyS-eb-H4e.label" = "설정";
 
 /* Class = "NSTextFieldCell"; title = "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically."; ObjectID = "fnl-uA-X7r"; */
 "fnl-uA-X7r.title" = "GitHub 또는 로컬 .iinaplgz 패키지에서 새 플러그인을 설치할 수 있습니다. GitHub에서 설치한 플러그인은 자동으로 업데이트할 수 있습니다.";

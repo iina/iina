@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "Duraklat";
 "osd.resume" = "Sürdür";
-"osd.volume" = "Ses Yüksekliği: %@";
+"osd.volume" = "Ses Yüksekliği: %i";
 "osd.speed" = "Hız: %@×";
 "osd.aspect" = "En–boy oranı: %@";
 "osd.crop" = "Kırp: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "Taramasızlık: %@";
 "osd.hwdec" = "Donanımsal kod çözücü: %@";
 "osd.audio_delay.nodelay" = "Ses gecikmesi: Gecikme yok";
-"osd.audio_delay.later" = "Ses gecikmesi: %@ sn geç";
-"osd.audio_delay.earlier" = "Ses gecikmesi: %@ sn erken";
+"osd.audio_delay.later" = "Ses gecikmesi: %.2f sn geç";
+"osd.audio_delay.earlier" = "Ses gecikmesi: %.2f sn erken";
 "osd.sub_delay.nodelay" = "Altyazı gecikmesi: Gecikme yok";
-"osd.sub_delay.later" = "Altyazı gecikmesi: %@ sn geç";
-"osd.sub_delay.earlier" = "Altyazı gecikmesi: %@ sn erken";
-"osd.subtitle_pos" = "Altyazı konumu: %@";
+"osd.sub_delay.later" = "Altyazı gecikmesi: %.2f sn geç";
+"osd.sub_delay.earlier" = "Altyazı gecikmesi: %.2f sn erken";
+"osd.subtitle_pos" = "Altyazı konumu: %.1f";
 "osd.sub_hidden" = "Altyazılar Gizli";
 "osd.sub_visible" = "Altyazılar Görünür";
 "osd.sub_second_delay.nodelay" = "İkincil altyazı gecikmesi: Gecikme yok";
-"osd.sub_second_delay.later" = "İkincil altyazı gecikmesi: %@ sn geç";
-"osd.sub_second_delay.earlier" = "İkincil altyazı gecikmesi: %@ sn erken";
+"osd.sub_second_delay.later" = "İkincil altyazı gecikmesi: %.2f sn geç";
+"osd.sub_second_delay.earlier" = "İkincil altyazı gecikmesi: %.2f sn erken";
 "osd.sub_second_hidden" = "İkincil Altyazılar Gizli";
-"osd.sub_second_pos" = "İkincil altyazı konumu: %@";
+"osd.sub_second_pos" = "İkincil altyazı konumu: %.1f";
 "osd.sub_second_visible" = "İkincil Altyazılar Görünür";
 "osd.mute" = "Sesi Kapat";
 "osd.unmute" = "Sesi Aç";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "A–B döngüsü: Temizlendi";
 "osd.stop" = "Durdur";
 "osd.chapter" = "Fasıl: %@";
-"osd.subtitle_scale" = "Altyazı ölçeği: %@×";
+"osd.subtitle_scale" = "Altyazı ölçeği: %.2f×";
 "osd.add_to_playlist" = "%i Dosya Oynatma Listesine Eklendi";
 "osd.clear_playlist" = "Oynatma Listesi Temizlendi";
 "osd.video_eq.contrast" = "Karşıtlık: %i";
@@ -141,7 +141,7 @@
 "osd.playlist_loop" = "Oynatma Listesini Döngüye Al";
 "osd.no_loop" = "Döngüye Almayı Kapat";
 
-"preference.title" = "Tercihler";
+"preference.title" = "Ayarlar";
 "preference.general" = "Genel";
 "preference.ui" = "Arayüz";
 "preference.video_audio" = "Video/Ses";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "“Eklentiler” → “GitHub’dan Yükle” yolunu izleyerek Online Media eklentisini kurun ve video indirme ve kendiliğinden yt-dlp güncellemelerini indirme gibi gelişmiş özelliklerin keyfini çıkarın.";
 "preference.ytdl_plugin_installed" = "Online Media eklentisi yüklü olduğundan yerleşik youtube-dl desteği devre dışı bırakıldı.";
 
-"menu.volume" = "Ses düzeyi: %@";
-"menu.volume_muted" = "Ses düzeyi: %@ (sessiz)";
-"menu.audio_delay" = "Ses gecikmesi: %@ sn";
-"menu.sub_delay" = "Altyazı gecikmesi: %@ sn";
+"menu.volume" = "Ses düzeyi: %d";
+"menu.volume_muted" = "Ses düzeyi: %d (sessiz)";
+"menu.audio_delay" = "Ses gecikmesi: %.2f sn";
+"menu.sub_delay" = "Altyazı gecikmesi: %.2f sn";
 "menu.sub_hide" = "Altyazıları Gizle";
 "menu.sub_show" = "Altyazıları Göster";
 "menu.sub_second_hide" = "İkincil Altyazıları Gizle";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "Altyazı Panelini Göster";
 "menu.hide_subtitles" = "Altyazı Panelini Gizle";
 
-"menu.seek_forward" = "%@ sn İleri Sar";
-"menu.seek_backward" = "%@ sn Geri Sar";
+"menu.seek_forward" = "%.0f sn İleri Sar";
+"menu.seek_backward" = "%.0f sn Geri Sar";
 "menu.speed_up" = "%@× Hızlandır";
 "menu.speed_down" = "%@× Yavaşlat";
-"menu.volume_up" = "Ses Düzeyi +%%%@";
-"menu.volume_down" = "Ses Seviyesi −%%%@";
-"menu.audio_delay_up" = "Ses Gecikmesi +%@ sn";
-"menu.audio_delay_down" = "Ses Gecikmesi −%@ sn";
-"menu.sub_delay_up" = "Altyazı Gecikmesi +%@ sn";
-"menu.sub_delay_down" = "Altyazı Gecikmesi −%@ sn";
+"menu.volume_up" = "Ses Düzeyi +%%%.0f";
+"menu.volume_down" = "Ses Seviyesi −%%%.0f";
+"menu.audio_delay_up" = "Ses Gecikmesi +%.1f sn";
+"menu.audio_delay_down" = "Ses Gecikmesi −%.1f sn";
+"menu.sub_delay_up" = "Altyazı Gecikmesi +%.1f sn";
+"menu.sub_delay_down" = "Altyazı Gecikmesi −%.1f sn";
 
 "menu.crop_custom" = "Özel...";
 "menu.find_online_sub" = "%@ Konumundan Çevrimiçi Altyazı Bul";
@@ -262,8 +262,6 @@
 "alert.config.new.message" = "Lütfen yeni yapılandırma için bir ad girin.";
 "alert.config.duplicate.title" = "Yapılandırmayı Çoğalt";
 "alert.config.duplicate.message" = "Lütfen çoğaltılan yapılandırma dosyası için bir ad girin.";
-"alert.config.empty_name" = "Ad alanı boş olamaz.";
-"alert.config.name_existing" = "Aynı adlı bir yapılandırma halihazırda var.";
 "alert.config.file_existing.title" = "Dosya Halihazırda Var";
 "alert.config.file_existing.message" = "Aynı dosya adına sahip bir yapılandırma dosyası halihazırda var. Dosyayı Finder’da göstermek için Tamam düğmesine tıklayın.";
 "alert.config.cannot_create" = "Yapılandırma dosyası oluşturulamıyor!\n%@";
@@ -287,7 +285,7 @@
 "alert.screenshot.error_taking" = "Ekran resmi alınamıyor!";
 
 "alert.sub.no_selected" = "Lütfen önce indirdiğiniz altyazıyı seçin.";
-"alert.sub_lang_not_set" = "Lütfen OpenSubtitles’ı kullanmadan önce tercih ettiğiniz altyazı dilini tercihlerinize ekleyin. Bu kez İngilizce (eng) kullanılacaktır.";
+"alert.sub_lang_not_set" = "OpenSubtitles’ı kullanmadan önce lütfen Ayarlar’dan yeğlediğiniz altyazı dilini ayarlayın. Bu kerelik İngilizce (eng) kullanılacaktır.";
 "alert.sub.cannot_save_passwd" = "Anahtar zincirinize parolanızı kaydedemiyoruz: %@";
 "alert.sub.cannot_login" = "Giriş yapılamıyor. Lütfen kullanıcı adınızı, şifrenizi ve ağ durumunuzu denetleyin.\n\n%@";
 "alert.sub.save_downloaded.title" = "İndirilen Altyazıyı Kaydet";
@@ -349,7 +347,7 @@
 "alert.plugin_uninstall.message" = "Bu eklenti sabit diskinizden silinecek.";
 "alert.plugin_reinstall.title" = "%@ eklentisi halihazırda var";
 "alert.plugin_reinstall.message" = "Bu eklentiyi yeniden kurmak istiyor musunuz?";
-"alert.duplicated_plugin_id" = "Yinelenen eklenti tanımlayıcıları algılandı. İki veya daha fazla eklenti aynı “%@” tanımlayıcısına sahip. Bu anormal davranışlara neden olabilir. Lütfen bunları “Tercihler” → “Eklentiler” bölümünde bulun ve yazarlarına bildirin. Bir eklenti yerel olarak kurulmuşsa eklentinin Info.json dosyasındaki tanımlayıcısını elle de değiştirebilirsiniz.";
+"alert.duplicated_plugin_id" = "Yinelenmiş eklenti tanımlayıcıları algılandı. İki veya daha fazla eklentide aynı “%@” tanımlayıcısı var. Bu, normal olmayan davranışlara neden olabilir. Lütfen, “Ayarlar → Eklentiler” bölümünde onları bulun ve durumu yazarlarına bildirin. Yerel olarak kurulmuş bir eklenti varsa eklentinin “Info.json” dosyasında tanımlayıcısını elle değiştirebilirsiniz.";
 "alert.plugin_no_update" = "Güncelleme bulunamadı.";
 "alert.plugin_update_found.title" = "%@ için güncelleme bulundu";
 "alert.plugin_update_found.message" = "Uygulamanın son sürümü %@. Sizde %@ var. Güncellemek ister misiniz?";

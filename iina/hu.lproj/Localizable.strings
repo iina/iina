@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "Ön Az IINA %@ verzióját használja";
 "initial.beta.desc" = "Amennyiben végleges verzióra váltana, szüntesse meg a kijelölést a \"béta frissítések\" opciónál a Beállítások > Általános almenüben, és telepítsen stabil verziót a <a href=\"https://iina.io\">hivatalos weboldalunkról</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.nightly.desc" = "A Nightly verzió nem ajánlott mindennapi használatra. Jelenleg a nightly verzió nem támogatja az automatikus frissítést.. Töltsd le a friss verziót a <a href=\"https://nightly.iina.io\">nightly oldalunkról</a>.";
 "initial.debug.desc" = "A hibakeresési verzió általában nincs teljesítményre optimalizálva, ezért nem ajánlott napi használatra. A hibakeresési verziók nem támogatják az automatikus frissítést.";
 "initial.bug_report" = "Jelentés a <a href=\"https://github.com/iina/iina/issues\">GitHub-bugok</a> felületen.";
 
@@ -35,8 +35,8 @@
 "inspector.error" = "Hiba";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Bufferelés…%d%%";
-"main.opening_stream" = "Stream megnyitása…";
+"main.buffering_indicator" = "Pufferelés…%d%%";
+"main.opening_stream" = "Adatfolyam megnyitása…";
 "osc.precision" = "Pontosság";
 "osc.1s" = "1 másodperc";
 "osc.100ms" = "100 ezredmásodperc";
@@ -47,7 +47,7 @@
 "quicksetting.item_default" = "Alapértelmezett";
 "quicksetting.item_none" = "Egyik sem";
 "quicksetting.hwdec" = "Hardveres dekódolás";
-"quicksetting.deinterlace" = "Váltottsoros képszűrő";
+"quicksetting.deinterlace" = "Váltott soros képszűrő";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Elrejtés";
 "quicksetting.reset_speed" = "Sebesség alaphelyzetbe állítása";
@@ -78,13 +78,13 @@
 
 "alert.eq.new_profile.title" = "Új EQ profil";
 "alert.eq.new_profile.message" = "Kérjük, adjon meg egy profilnevet.";
-"alert.eq.rename.title" = "Rename Current Profile";
+"alert.eq.rename.title" = "Jelenlegi profil átnevezése";
 "alert.eq.rename.message" = "Kérjük, adjon meg egy új profilnevet.";
 
 // OSDMessage.swift
 "osd.pause" = "Szünet";
 "osd.resume" = "Folytatás";
-"osd.volume" = "Hangerő: %@";
+"osd.volume" = "Hangerő: %i";
 "osd.speed" = "Sebesség: %@x";
 "osd.aspect" = "Képarány: %@";
 "osd.crop" = "Vágás: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "Váltottsoros képszűrő: %@";
 "osd.hwdec" = "Hardveres dekódolás: %@";
 "osd.audio_delay.nodelay" = "Hangkésleltetés: Nincs késleltetés";
-"osd.audio_delay.later" = "Hangkésleltetés: %@mp-vel később";
-"osd.audio_delay.earlier" = "Hangkésleltetés: %@mp-vel hamarabb";
+"osd.audio_delay.later" = "Hangkésleltetés: %.2fmp-vel később";
+"osd.audio_delay.earlier" = "Hangkésleltetés: %.2fmp-vel hamarabb";
 "osd.sub_delay.nodelay" = "Felirat késleltetés: Nincs késleltetés";
-"osd.sub_delay.later" = "Felirat késleltetés: %@mp-vel később";
-"osd.sub_delay.earlier" = "Felirat késleltetés: %@mp-vel hamarabb";
-"osd.subtitle_pos" = "Felirat pozíciója: %@";
+"osd.sub_delay.later" = "Felirat késleltetés: %.2fmp-vel később";
+"osd.sub_delay.earlier" = "Felirat késleltetés: %.2fmp-vel hamarabb";
+"osd.subtitle_pos" = "Felirat pozíciója: %.1f";
 "osd.sub_hidden" = "Feliratok elrejtve";
 "osd.sub_visible" = "Feliratok megjelenítve";
 "osd.sub_second_delay.nodelay" = "Másodlagos felirat késleltetés: Nincs késleltetés";
-"osd.sub_second_delay.later" = "Másodlagos felirat késleltetés: %@mp-vel később";
-"osd.sub_second_delay.earlier" = "Másodlagos felirat késleltetés: %@mp-vel előbb";
+"osd.sub_second_delay.later" = "Másodlagos felirat késleltetés: %.2fmp-vel később";
+"osd.sub_second_delay.earlier" = "Másodlagos felirat késleltetés: %.2fmp-vel előbb";
 "osd.sub_second_hidden" = "Másodlagos feliratok elrejtve";
-"osd.sub_second_pos" = "Másodlagos felirat pozíció: %@";
+"osd.sub_second_pos" = "Másodlagos felirat pozíció: %.1f";
 "osd.sub_second_visible" = "Másodlagos feliratok megjelenítve";
 "osd.mute" = "Némítás";
 "osd.unmute" = "Némítás feloldása";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "AB-Ciklus: Tiszta";
 "osd.stop" = "Leállítás";
 "osd.chapter" = "Fejezet: %@";
-"osd.subtitle_scale" = "Felirat méret: %@x";
+"osd.subtitle_scale" = "Felirat méret: %.2fx";
 "osd.add_to_playlist" = "%i fájl hozzáadva a lejátszási listához";
 "osd.clear_playlist" = "Lejátszási lista ürítése";
 "osd.video_eq.contrast" = "Kontraszt: %i";
@@ -170,17 +170,17 @@
 
 "preference.sub_override_level.descriptive_text.no" = "A feliratokat a feliratozási szkriptek által megadott módon, felülírások nélkül adja vissza.";
 "preference.sub_override_level.descriptive_text.force" = "Minden feliratstílus alkalmazása.";
-"preference.sub_override_level.descriptive_text.scale" = "Az ebben a szakaszban található stílusbeállítások mellett alkalmazza a skála beállítását is.";
+"preference.sub_override_level.descriptive_text.scale" = "Az ebben a szakaszban található stílusbeállítások mellett alkalmazza a méretezés beállítását is.";
 "preference.sub_override_level.descriptive_text.strip" = "Alaposan távolítson el minden ASS taget és stílust a feliratból.";
 "preference.sub_override_level.descriptive_text.yes" = "Alkalmazza az összes stílusbeállítást ebben a szakaszban.";
 
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
+"preference.ytdl_plugin_not_installed" = "Telepítse az Online Media bővítményt a \"Bővítmények > Telepítés a GitHub-ról\" menüpont segítségével, hogy élvezhesse a fejlett képességeket, mint a videó letöltése és az automatikus yt-dlp frissítések.";
+"preference.ytdl_plugin_installed" = "A beépített youtube-dl támogatás nincs engedélyezve, mert az Online Media bővítmény telepítve van.";
 
-"menu.volume" = "Hangerő: %@";
-"menu.volume_muted" = "Hangerő: %@ (Némítva)";
-"menu.audio_delay" = "Hangkésleltetés: %@mp-vel később";
-"menu.sub_delay" = "Felirat késleltetés: %@mp-vel később";
+"menu.volume" = "Hangerő: %d";
+"menu.volume_muted" = "Hangerő: %d (Némítva)";
+"menu.audio_delay" = "Hangkésleltetés: %.2fmp-vel később";
+"menu.sub_delay" = "Felirat késleltetés: %.2fmp-vel később";
 "menu.sub_hide" = "Feliratok elrejtése";
 "menu.sub_show" = "Feliratok megjelenítése";
 "menu.sub_second_hide" = "Másodlagos feliratok elrejtése";
@@ -205,27 +205,27 @@
 "menu.subtitles" = "Mutasd a feliratok panelt";
 "menu.hide_subtitles" = "Rejtsd a feliratok panelt";
 
-"menu.seek_forward" = "Előre ugrás %@ másodpercet";
-"menu.seek_backward" = "Hátra ugrás %@ másodpercet";
+"menu.seek_forward" = "Előre ugrás %.0f másodpercet";
+"menu.seek_backward" = "Hátra ugrás %.0f másodpercet";
 "menu.speed_up" = "Gyorsítás ennyivel: %@x";
 "menu.speed_down" = "Lassítás ennyivel: %@x";
-"menu.volume_up" = "Hangerő: %@";
-"menu.volume_down" = "Hangerő: %@";
-"menu.audio_delay_up" = "Hangkésleltetés + %@ másodperccel";
-"menu.audio_delay_down" = "Hangkésleltetés: %@mp-el később";
-"menu.sub_delay_up" = "Felirat késleltetés + %@ másodperccel";
-"menu.sub_delay_down" = "Felirat késleltetés - %@ másodperccel";
+"menu.volume_up" = "Hangerő: %.0f";
+"menu.volume_down" = "Hangerő: %.0f";
+"menu.audio_delay_up" = "Hangkésleltetés + %.1f másodperccel";
+"menu.audio_delay_down" = "Hangkésleltetés: %.1fmp-el később";
+"menu.sub_delay_up" = "Felirat késleltetés + %.1f másodperccel";
+"menu.sub_delay_down" = "Felirat késleltetés - %.1f másodperccel";
 
 "menu.crop_custom" = "Egyéni…";
 "menu.find_online_sub" = "Online feliratok keresése innen: %@";
 
-"menu.manage_plugins" = "Manage Plugins…";
-"menu.developer_tool" = "Developer Tool";
-"menu.more_plugin" = "More…";
-"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
-"menu.reload_plugins" = "Reload All Plugins";
-"menu.show_plugins_panel" = "Show Plugins Panel";
-"menu.hide_plugins_panel" = "Hide Plugins Panel";
+"menu.manage_plugins" = "Bővítmények kezelése…";
+"menu.developer_tool" = "Fejlesztőeszköz";
+"menu.more_plugin" = "Továbbiak…";
+"menu.conflicting_shortcuts" = "Billentyűparancs konfliktusok…";
+"menu.reload_plugins" = "Minden bővítmény újratöltése";
+"menu.show_plugins_panel" = "Bővítmény panel megjelenítése";
+"menu.hide_plugins_panel" = "Bővítmény panel elrejtése";
 
 "track.audio" = "Hang";
 "track.none" = "<None>";
@@ -256,14 +256,12 @@
 "alert.error_saving_file" = "Hiba történt mentéskor %@: %@";
 "alert.error_deleting_file" = "Nem sikerült törölni a fájlt.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "A \"%@\" érték érvénytelen.\nAdjon meg egy 10 és 10000 közötti értéket, vagy 0-át.";
 
 "alert.config.new.title" = "Új beviteli konfiguráció";
 "alert.config.new.message" = "Kérlek adj nevet az új konfigurációnak.";
 "alert.config.duplicate.title" = "Konfiguráció duplikálása";
 "alert.config.duplicate.message" = "Kérlek adj nevet az új duplikált konfigurációnak.";
-"alert.config.empty_name" = "A név mező nem lehet üres.";
-"alert.config.name_existing" = "Egy konfiguráció ezzel a névvel már létezik.";
 "alert.config.file_existing.title" = "A fájl már létezik";
 "alert.config.file_existing.message" = "Egy azonos fájlnevű konfigurációs fájl már létezik. Válassza az OK lehetőséget a fájl megjelenítéséhez a Finderben.";
 "alert.config.cannot_create" = "Konfigurációs fájl nem hozható létre!\n%@";
@@ -287,7 +285,7 @@
 "alert.screenshot.error_taking" = "Nem lehet képernyőképet készíteni!";
 
 "alert.sub.no_selected" = "Kérjük, először válassz ki egy letöltött feliratot.";
-"alert.sub_lang_not_set" = "Kérjük, az OpenSubtitles használata előtt állítsd be a kívánt feliratnyelvet a beállításokban. Ezúttal az angol (eng) nyelvet használjuk.";
+"alert.sub_lang_not_set" = "Adja meg az előnyben részesített felirat nyelvét a beállításokban mielőtt az OpenSubtitles-t használja. Az English(eng) lesz beállítva most.";
 "alert.sub.cannot_save_passwd" = "Nem lehet elmenteni a jelszavat a Kulcskarikában: %@";
 "alert.sub.cannot_login" = "Nem tudsz bejelentkezni. Kérjük, ellenőrizd a felhasználónevedet, jelszavadat és a hálózat állapotát.\n\n%@";
 "alert.sub.save_downloaded.title" = "Letöltött felirat mentése";
@@ -349,7 +347,7 @@
 "alert.plugin_uninstall.message" = "A bővítmény törlődik a lemezről.";
 "alert.plugin_reinstall.title" = "%@ bővítmény már létezik";
 "alert.plugin_reinstall.message" = "Szeretné újratelepítené a bővítményt?";
-"alert.duplicated_plugin_id" = "Duplikált bővítmény-azonosítók észlelése. Két vagy több bővítmény azonos \"%@\" azonosítóval rendelkezik. Ez rendellenes viselkedést okozhat. Kérjük, keresse meg őket a Beállítások - Pluginok menüpontban, és jelentse a szerzőjüknek. Ha egy bővítményt helyileg telepítettek, manuálisan is megváltoztathatja az azonosítóját a bővítmény Info.json fájljában.";
+"alert.duplicated_plugin_id" = "Kettős bővítmény azosító észlelve. Két vagy több bővítmény azonosítója (\"%@\") megegyezik. Ez váratlan működést eredményezhet. Kérjük keresse meg a Beállítások - Bővítmények -ben és jelezze a fejlesztőknek. Ha a bővítményt helyileg telepítette, akkor módosíthatja az azonosítóját a Info.json fájlban.";
 "alert.plugin_no_update" = "Nem található frissítés.";
 "alert.plugin_update_found.title" = "Frissítés található a következőhöz: %@";
 "alert.plugin_update_found.message" = "A legújabb verzió a(z) %@. Neked a(z) %@ van telepítve. Szeretne frissíteni?";
@@ -397,7 +395,7 @@
 "osc_toolbar.music_mode" = "Belépés \"zene\" módba";
 "osc_toolbar.sub_track" = "Válassz felirat sávot";
 "osc_toolbar.screenshot" = "Képernyőmentés készítése";
-"osc_toolbar.plugins" = "Show plugins panel";
+"osc_toolbar.plugins" = "Bővítmény panel megjelenítése";
 
 "mini_player.album_art" = "Album borító váltás";
 "mini_player.loop" = "Ismétlés";

@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "Pausa";
 "osd.resume" = "Retomar";
-"osd.volume" = "Volume: %@";
+"osd.volume" = "Volume: %i";
 "osd.speed" = "Velocidade: %@x";
 "osd.aspect" = "Proporção: %@";
 "osd.crop" = "Cortar: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "Desentrelaçar: %@";
 "osd.hwdec" = "Descodificação de Hardware: %@";
 "osd.audio_delay.nodelay" = "Atraso de Áudio: Sem Atraso";
-"osd.audio_delay.later" = "Atraso de Áudio: %@s Depois";
-"osd.audio_delay.earlier" = "Atraso de Áudio: %@s Antes";
+"osd.audio_delay.later" = "Atraso de Áudio: %.2fs Depois";
+"osd.audio_delay.earlier" = "Atraso de Áudio: %.2fs Antes";
 "osd.sub_delay.nodelay" = "Atraso da legenda: Sem atraso";
-"osd.sub_delay.later" = "Atraso da legenda: %@s Depois";
-"osd.sub_delay.earlier" = "Atraso da Legenda: %@s Antes";
-"osd.subtitle_pos" = "Posição da Legenda: %@";
+"osd.sub_delay.later" = "Atraso da legenda: %.2fs Depois";
+"osd.sub_delay.earlier" = "Atraso da Legenda: %.2fs Antes";
+"osd.subtitle_pos" = "Posição da Legenda: %.1f";
 "osd.sub_hidden" = "Legendas ocultas";
 "osd.sub_visible" = "Legendas visíveis";
 "osd.sub_second_delay.nodelay" = "Atraso da legenda secundária: Sem atraso";
-"osd.sub_second_delay.later" = "Atraso da legenda secundária: %@s Depois";
-"osd.sub_second_delay.earlier" = "Atraso da legenda secundária: %@s Antes";
+"osd.sub_second_delay.later" = "Atraso da legenda secundária: %.2fs Depois";
+"osd.sub_second_delay.earlier" = "Atraso da legenda secundária: %.2fs Antes";
 "osd.sub_second_hidden" = "Legendas secundárias ocultas";
-"osd.sub_second_pos" = "Posição da legenda secundária: %@";
+"osd.sub_second_pos" = "Posição da legenda secundária: %.1f";
 "osd.sub_second_visible" = "Legendas secundárias visíveis";
 "osd.mute" = "Sem som";
 "osd.unmute" = "Ligar som";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "Loop-AB: Limpo";
 "osd.stop" = "Parar";
 "osd.chapter" = "Capítulo: %@";
-"osd.subtitle_scale" = "Tamanho da legenda: %@x";
+"osd.subtitle_scale" = "Tamanho da legenda: %.2fx";
 "osd.add_to_playlist" = "%i Ficheiros Adicionados à Playlist";
 "osd.clear_playlist" = "Lista de Reprodução Limpa";
 "osd.video_eq.contrast" = "Contraste: %i";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
 "preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
-"menu.volume" = "Volume: %@";
-"menu.volume_muted" = "Volume: %@ (Sem som)";
-"menu.audio_delay" = "Atraso de Áudio: %@s";
-"menu.sub_delay" = "Atraso da legenda: %@s";
+"menu.volume" = "Volume: %d";
+"menu.volume_muted" = "Volume: %d (Sem som)";
+"menu.audio_delay" = "Atraso de Áudio: %.2fs";
+"menu.sub_delay" = "Atraso da legenda: %.2fs";
 "menu.sub_hide" = "Ocultar legendas";
 "menu.sub_show" = "Mostrar legendas";
 "menu.sub_second_hide" = "Ocultar legendas secundárias";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "Mostrar painel de legendas";
 "menu.hide_subtitles" = "Ocultar painel de legendas";
 
-"menu.seek_forward" = "Avançar %@s";
-"menu.seek_backward" = "Recuar %@s";
+"menu.seek_forward" = "Avançar %.0fs";
+"menu.seek_backward" = "Recuar %.0fs";
 "menu.speed_up" = "Acelerar em %@x";
 "menu.speed_down" = "Desacelerar em %@x";
-"menu.volume_up" = "Volume + %@%%";
-"menu.volume_down" = "Volume - %@%%";
-"menu.audio_delay_up" = "Atraso do áudio + %@s";
-"menu.audio_delay_down" = "Atraso de Áudio - %@s";
-"menu.sub_delay_up" = "Atraso da legenda + %@s";
-"menu.sub_delay_down" = "Atraso da legenda - %@s";
+"menu.volume_up" = "Volume + %.0f%%";
+"menu.volume_down" = "Volume - %.0f%%";
+"menu.audio_delay_up" = "Atraso do áudio + %.1fs";
+"menu.audio_delay_down" = "Atraso de Áudio - %.1fs";
+"menu.sub_delay_up" = "Atraso da legenda + %.1fs";
+"menu.sub_delay_down" = "Atraso da legenda - %.1fs";
 
 "menu.crop_custom" = "Personalizado…";
 "menu.find_online_sub" = "Find Online Subtitles from %@";
@@ -262,8 +262,6 @@
 "alert.config.new.message" = "Por favor digite um nome para a nova configuração.";
 "alert.config.duplicate.title" = "Duplicar Configuração";
 "alert.config.duplicate.message" = "Por favor digite o nome para o arquivo de configuração duplicado.";
-"alert.config.empty_name" = "Este nome não pode estar vazio.";
-"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Ficheiro já existe";
 "alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Não foi possível criar um ficheiro de configuração!\n%@";
@@ -287,7 +285,7 @@
 "alert.screenshot.error_taking" = "Cannot take a screenshot!";
 
 "alert.sub.no_selected" = "Por favor, seleccione uma legenda transferida primeiro.";
-"alert.sub_lang_not_set" = "Por favor, defina os idiomas de legenda preferidos nas preferências antes de usar o OpenSubtitles. Inglês (eng) será usado desta vez.";
+"alert.sub_lang_not_set" = "Please set preferred subtitle languages in Settings before using OpenSubtitles. English(eng) will be used this time.";
 "alert.sub.cannot_save_passwd" = "Não é possível guardar a palavra-passe no Porta-chaves: %@";
 "alert.sub.cannot_login" = "Impossível iniciar sessão. Por favor verifique o seu nome de utilizador, palavra-passe e estado da rede.\n\n%@";
 "alert.sub.save_downloaded.title" = "Guardar legenda transferida";
@@ -349,7 +347,7 @@
 "alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
 "alert.plugin_reinstall.title" = "Plugin %@ already exists";
 "alert.plugin_reinstall.message" = "Do you want to reinstall the plugin?";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Settings - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
 "alert.plugin_no_update" = "No update found.";
 "alert.plugin_update_found.title" = "Update found for %@";
 "alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";

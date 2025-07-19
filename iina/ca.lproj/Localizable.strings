@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "Pausa";
 "osd.resume" = "Reprèn";
-"osd.volume" = "Volum: %@";
+"osd.volume" = "Volum: %i";
 "osd.speed" = "Speed: %@x";
 "osd.aspect" = "Relació d'aspecte: %@";
 "osd.crop" = "Escapça: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "Desentrellaça: %@";
 "osd.hwdec" = "Decodificació per maquinari: %@";
 "osd.audio_delay.nodelay" = "Retard de l'àudio: sense retard";
-"osd.audio_delay.later" = "Retard de l'àudio: %@s després";
-"osd.audio_delay.earlier" = "Retard de l'àudio: %@s abans";
+"osd.audio_delay.later" = "Retard de l'àudio: %.2fs després";
+"osd.audio_delay.earlier" = "Retard de l'àudio: %.2fs abans";
 "osd.sub_delay.nodelay" = "Retard dels subtítols: sense retard";
-"osd.sub_delay.later" = "Retard dels subtítols: %@s després";
-"osd.sub_delay.earlier" = "Retard dels subtítols: %@s abans";
-"osd.subtitle_pos" = "Posició dels subtítols: %@";
+"osd.sub_delay.later" = "Retard dels subtítols: %.2fs després";
+"osd.sub_delay.earlier" = "Retard dels subtítols: %.2fs abans";
+"osd.subtitle_pos" = "Posició dels subtítols: %.1f";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
 "osd.sub_second_delay.nodelay" = "Retard Secundari de Subtítols: Sense Retard";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %@s Later";
-"osd.sub_second_delay.earlier" = "Retard Secundari de Subtítols: %@s Abans";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
+"osd.sub_second_delay.earlier" = "Retard Secundari de Subtítols: %.2fs Abans";
 "osd.sub_second_hidden" = "Subtítols Secundaris Amagats";
-"osd.sub_second_pos" = "Posició Secundària de Subtítols: %@";
+"osd.sub_second_pos" = "Posició Secundària de Subtítols: %.1f";
 "osd.sub_second_visible" = "Subtítols Secundaris Visibles";
 "osd.mute" = "Silencia";
 "osd.unmute" = "Amb so";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "Bucle-AB: suprimit";
 "osd.stop" = "Atura";
 "osd.chapter" = "Capítol: %@";
-"osd.subtitle_scale" = "Escala dels subtítols: %@x";
+"osd.subtitle_scale" = "Escala dels subtítols: %.2fx";
 "osd.add_to_playlist" = "%i fitxer afegits a la llista de reproducció";
 "osd.clear_playlist" = "Llista de reproducció suprimida";
 "osd.video_eq.contrast" = "Contrast: %i";
@@ -141,7 +141,7 @@
 "osd.playlist_loop" = "Repetir la llista de reproducció";
 "osd.no_loop" = "Desactivar repetició";
 
-"preference.title" = "Preferències";
+"preference.title" = "Paràmetres";
 "preference.general" = "General";
 "preference.ui" = "Interfície";
 "preference.video_audio" = "Vídeo/Àudio";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
 "preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
-"menu.volume" = "Volum: %@";
-"menu.volume_muted" = "Volum: %@ (Silenciat)";
-"menu.audio_delay" = "Retard d'àudio: %@s";
-"menu.sub_delay" = "Retard en els subtítols: %@s";
+"menu.volume" = "Volum: %d";
+"menu.volume_muted" = "Volum: %d (Silenciat)";
+"menu.audio_delay" = "Retard d'àudio: %.2fs";
+"menu.sub_delay" = "Retard en els subtítols: %.2fs";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
 "menu.sub_second_hide" = "Amagar Subtítols Secundaris";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "Show Subtitles Panel";
 "menu.hide_subtitles" = "Hide Subtitles Panel";
 
-"menu.seek_forward" = "Avança %@s";
-"menu.seek_backward" = "Retrocedeix %@s";
+"menu.seek_forward" = "Avança %.0fs";
+"menu.seek_backward" = "Retrocedeix %.0fs";
 "menu.speed_up" = "Speed Up by %@x";
 "menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "Volum + %@%%";
-"menu.volume_down" = "Volum - %@%%";
-"menu.audio_delay_up" = "Retarda d'àudio + %@s";
-"menu.audio_delay_down" = "Retarda d'àudio - %@s";
-"menu.sub_delay_up" = "Retarda en els subtítols + %@s";
-"menu.sub_delay_down" = "Retarda en els subtítols - %@s";
+"menu.volume_up" = "Volum + %.0f%%";
+"menu.volume_down" = "Volum - %.0f%%";
+"menu.audio_delay_up" = "Retarda d'àudio + %.1fs";
+"menu.audio_delay_down" = "Retarda d'àudio - %.1fs";
+"menu.sub_delay_up" = "Retarda en els subtítols + %.1fs";
+"menu.sub_delay_down" = "Retarda en els subtítols - %.1fs";
 
 "menu.crop_custom" = "Personalitzat...";
 "menu.find_online_sub" = "Cerca subtítols en línia a %@";
@@ -262,8 +262,6 @@
 "alert.config.new.message" = "Si us plau introdueix un nom per a la nova configuració.";
 "alert.config.duplicate.title" = "Duplica configuració";
 "alert.config.duplicate.message" = "Si us plau introdueix un nom per el fixer de configuració duplicat.";
-"alert.config.empty_name" = "El nom no pot estar buit.";
-"alert.config.name_existing" = "Ja existeix una configuració amb el mateix nom.";
 "alert.config.file_existing.title" = "El fitxer ja existeix";
 "alert.config.file_existing.message" = "Ja existeix un arxiu de configuració amb el mateix nom d'arxiu. Selecciona OK per veure l'arxiu a Finder.";
 "alert.config.cannot_create" = "No es pot crear el fitxer de configuració!\n%@";
@@ -287,7 +285,7 @@
 "alert.screenshot.error_taking" = "Cannot take a screenshot!";
 
 "alert.sub.no_selected" = "Si us plau, selecciona primer un dels subtítols baixats.";
-"alert.sub_lang_not_set" = "Si us plau, estableix un idioma per defecte a les preferències abans d'utilitzar OpenSubtitles. Anglès(eng) serà utilitzat aquesta vegada.";
+"alert.sub_lang_not_set" = "Please set preferred subtitle languages in Settings before using OpenSubtitles. English(eng) will be used this time.";
 "alert.sub.cannot_save_passwd" = "No s'ha pogut desar la teva contrasenya en el Clauer: %@";
 "alert.sub.cannot_login" = "No s'ha pogut iniciar sessió. Si us play, verifica el teu nom d'usuari, la contrasenya i l'estat de la xarxa.\n\n%@";
 "alert.sub.save_downloaded.title" = "Desa els subtítols baixats";
@@ -349,7 +347,7 @@
 "alert.plugin_uninstall.message" = "El complement s'esborrarà del teu disc.";
 "alert.plugin_reinstall.title" = "Plugin %@ already exists";
 "alert.plugin_reinstall.message" = "Do you want to reinstall the plugin?";
-"alert.duplicated_plugin_id" = "S'han trobat complements duplicats. Dos o més complements tenen el mateix identificador \"%@\". Això pot comportar un funcionament extrany. Si us plau, busca'ls a Preferències - Complements i comunica-ho als seus autors. Si un complement està instal·lat localment, tu també pots canviar manualment el seu identificador modificant el fitxer Info.json del complement.";
+"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Settings - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
 "alert.plugin_no_update" = "No s'han trobat actualitzacions.";
 "alert.plugin_update_found.title" = "Actualitzacions trobades per a %@";
 "alert.plugin_update_found.message" = "L'última versió és %@. Tu tens %@. Vols actualitzar?";

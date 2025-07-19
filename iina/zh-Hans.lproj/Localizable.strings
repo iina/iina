@@ -14,7 +14,7 @@
 "general.ok" = "确定";
 "general.cancel" = "取消";
 "general.username" = "用户名";
-"general.password" = "口令";
+"general.password" = "密码";
 
 "input.value_is_empty" = "数值不能为空";
 "input.already_exists" = "值已经存在。";
@@ -50,7 +50,7 @@
 "quicksetting.deinterlace" = "反交错";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "隐藏";
-"quicksetting.reset_speed" = "";
+"quicksetting.reset_speed" = "原速";
 
 // EQ Presets
 "eq.preset.flat" = "平坦";
@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "暂停";
 "osd.resume" = "继续";
-"osd.volume" = "音量：%@";
+"osd.volume" = "音量：%i";
 "osd.speed" = "速度：%@x";
 "osd.aspect" = "长宽比：%@";
 "osd.crop" = "裁切：%@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "反交错：%@";
 "osd.hwdec" = "正在硬件解码: %@";
 "osd.audio_delay.nodelay" = "音频延迟：无延迟";
-"osd.audio_delay.later" = "音频延迟：延迟 %@ 秒";
-"osd.audio_delay.earlier" = "音频延迟：提前 %@ 秒";
+"osd.audio_delay.later" = "音频延迟：延迟 %.2f 秒";
+"osd.audio_delay.earlier" = "音频延迟：提前 %.2f 秒";
 "osd.sub_delay.nodelay" = "字幕延迟：无延迟";
-"osd.sub_delay.later" = "字幕延迟：延迟 %@ 秒";
-"osd.sub_delay.earlier" = "字幕延迟：提前 %@ 秒";
-"osd.subtitle_pos" = "字幕位置：%@";
+"osd.sub_delay.later" = "字幕延迟：延迟 %.2f 秒";
+"osd.sub_delay.earlier" = "字幕延迟：提前 %.2f 秒";
+"osd.subtitle_pos" = "字幕位置：%.1f";
 "osd.sub_hidden" = "字幕已隐藏";
 "osd.sub_visible" = "字幕可见";
 "osd.sub_second_delay.nodelay" = "二级字幕延迟：无延迟";
-"osd.sub_second_delay.later" = "二级字幕延迟：延迟 %@ 秒";
-"osd.sub_second_delay.earlier" = "二级字幕延迟：提前 %@ 秒";
+"osd.sub_second_delay.later" = "二级字幕延迟：延迟 %.2f 秒";
+"osd.sub_second_delay.earlier" = "二级字幕延迟：提前 %.2f 秒";
 "osd.sub_second_hidden" = "隐藏二级字幕";
-"osd.sub_second_pos" = "二级字幕位置：%@";
+"osd.sub_second_pos" = "二级字幕位置：%.1f";
 "osd.sub_second_visible" = "开启二级字幕";
 "osd.mute" = "静音";
 "osd.unmute" = "取消静音";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "AB循环：清除";
 "osd.stop" = "停止";
 "osd.chapter" = "章节：%@";
-"osd.subtitle_scale" = "字幕缩放：%@x";
+"osd.subtitle_scale" = "字幕缩放：%.2fx";
 "osd.add_to_playlist" = "已添加 %i 个文件至播放列表";
 "osd.clear_playlist" = "清除播放列表";
 "osd.video_eq.contrast" = "对比度：%i";
@@ -141,7 +141,7 @@
 "osd.playlist_loop" = "循环播放列表";
 "osd.no_loop" = "禁用循环";
 
-"preference.title" = "偏好设置";
+"preference.title" = "设置";
 "preference.general" = "通用";
 "preference.ui" = "用户界面";
 "preference.video_audio" = "视频/音频";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "从 \"Plugins > 安装 GitHub\" 中安装在线媒体插件以享受高级功能，例如视频下载和自动yt-dlp 更新。";
 "preference.ytdl_plugin_installed" = "由于安装了在线媒体插件，内置的 youtube-dl 支持已被禁用。";
 
-"menu.volume" = "音量: %@";
-"menu.volume_muted" = "音量：%@ （静音）";
-"menu.audio_delay" = "音频延迟: %@秒";
-"menu.sub_delay" = "字幕延迟: %@秒";
+"menu.volume" = "音量: %d";
+"menu.volume_muted" = "音量：%d （静音）";
+"menu.audio_delay" = "音频延迟: %.2f秒";
+"menu.sub_delay" = "字幕延迟: %.2f秒";
 "menu.sub_hide" = "隐藏字幕";
 "menu.sub_show" = "显示字幕";
 "menu.sub_second_hide" = "隐藏二级字幕";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "显示字幕面板";
 "menu.hide_subtitles" = "隐藏字幕面板";
 
-"menu.seek_forward" = "渐进 %@秒";
-"menu.seek_backward" = "渐退 %@秒";
+"menu.seek_forward" = "渐进 %.0f秒";
+"menu.seek_backward" = "渐退 %.0f秒";
 "menu.speed_up" = "加快播放速度快捷键";
 "menu.speed_down" = "降低播放速度快捷键";
-"menu.volume_up" = "音量 + %@%%";
-"menu.volume_down" = "音量 - %@%%";
-"menu.audio_delay_up" = "音频延迟 + %@秒";
-"menu.audio_delay_down" = "音频延迟 - %@秒";
-"menu.sub_delay_up" = "字幕延迟 + %@秒";
-"menu.sub_delay_down" = "字幕延迟 - %@秒";
+"menu.volume_up" = "音量 + %.0f%%";
+"menu.volume_down" = "音量 - %.0f%%";
+"menu.audio_delay_up" = "音频延迟 + %.1f秒";
+"menu.audio_delay_down" = "音频延迟 - %.1f秒";
+"menu.sub_delay_up" = "字幕延迟 + %.1f秒";
+"menu.sub_delay_down" = "字幕延迟 - %.1f秒";
 
 "menu.crop_custom" = "自定义…";
 "menu.find_online_sub" = "从 %@ 查找在线字幕";
@@ -262,8 +262,6 @@
 "alert.config.new.message" = "请为此新配置输入名称。";
 "alert.config.duplicate.title" = "复制配置";
 "alert.config.duplicate.message" = "请为此复制配置文件输入名称。";
-"alert.config.empty_name" = "名称不能为空。";
-"alert.config.name_existing" = "具有相同名称的配置已存在。";
 "alert.config.file_existing.title" = "同名文件已存在";
 "alert.config.file_existing.message" = "一个具有相同文件名的配置文件已存在。选择“确定”在Finder中显示该文件。";
 "alert.config.cannot_create" = "无法创建配置文件！\n%@";
@@ -287,7 +285,7 @@
 "alert.screenshot.error_taking" = "截图失败！";
 
 "alert.sub.no_selected" = "请先选择一个已下载字幕。";
-"alert.sub_lang_not_set" = "请在使用 opensubtitles 之前设定字幕语言. 此次将会使用英语 (eng) 。\n\n0.0.7 之后默认的字幕来源将会是 opensubtitles。如果您是中文用户，请在「偏好设置 > 字幕」中确认「字幕来源」为「shooter.cn」，以继续使用射手字幕。";
+"alert.sub_lang_not_set" = "在使用 OpenSubtitles 前，请在“设置”中设定首选字幕语言。本次将使用英语。";
 "alert.sub.cannot_save_passwd" = "无法将密码保存到钥匙串：%@";
 "alert.sub.cannot_login" = "无法登录。请检查您的用户名、密码及网络状态。\n\n%@";
 "alert.sub.save_downloaded.title" = "保存已下载字幕";
@@ -349,7 +347,7 @@
 "alert.plugin_uninstall.message" = "插件将从您的硬盘中删除。";
 "alert.plugin_reinstall.title" = "插件 %@ 已存在";
 "alert.plugin_reinstall.message" = "您希望重新安装此插件吗？";
-"alert.duplicated_plugin_id" = "检测到重复的插件标识符。两个或多个插件具有相同的标识符“%@”，这可能会导致异常行为。 请在首选项 - 插件中找到它们，并向插件作者报告。 如果插件是本地安装的，您也可以手动更改插件的 Info.json 文件中的标识符。";
+"alert.duplicated_plugin_id" = "检测到重复的插件标识符。两个或多个插件具有相同的标识符“%@”。这可能会导致异常行为。请在“设置”-“插件”中找到它们，并向其作者报告。如果插件安装在本地，也可以在插件的 Info.json 文件中手动更改其标识符。";
 "alert.plugin_no_update" = "没有发现更新。";
 "alert.plugin_update_found.title" = "找到 %@ 的更新";
 "alert.plugin_update_found.message" = "最新版本是 %@。您有 %@。您想要更新吗？";

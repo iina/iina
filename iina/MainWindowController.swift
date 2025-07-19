@@ -2787,19 +2787,30 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
+  /// Update the state of the throbber indicating buffering or seeking is occurring.
+  /// - Important: The mpv
+  ///     [cache-buffering-state](https://mpv.io/manual/stable/#command-interface-cache-buffering-state)
+  ///     property is only valid when
+  ///     [paused-for-cache](https://mpv.io/manual/stable/#command-interface-paused-for-cache) is `true`
+  ///     and can not be used to provide an indication of progress when seeking.
   func updateNetworkState() {
-    let needShowIndicator = player.info.pausedForCache || player.info.isSeeking
-
-    if needShowIndicator {
-      let usedStr = FloatingPointByteCountFormatter.string(fromByteCount: player.info.cacheUsed, prefixedBy: .ki)
-      let speedStr = FloatingPointByteCountFormatter.string(fromByteCount: player.info.cacheSpeed)
-      let bufferingState = player.info.bufferingState
-      bufferIndicatorView.isHidden = false
-      bufferProgressLabel.stringValue = String(format: NSLocalizedString("main.buffering_indicator", comment:"Buffering... %d%%"), bufferingState)
-      bufferDetailLabel.stringValue = "\(usedStr)B (\(speedStr)/s)"
-    } else {
+    guard player.info.pausedForCache || player.info.isSeeking else {
       bufferIndicatorView.isHidden = true
+      return
     }
+    let usedStr = FloatingPointByteCountFormatter.string(fromByteCount: player.info.cacheUsed,
+                                                         countStyle: .binary)
+    let speedStr = FloatingPointByteCountFormatter.string(fromByteCount: player.info.cacheSpeed)
+    if player.info.pausedForCache {
+      let bufferingState = player.info.bufferingState
+      bufferProgressLabel.stringValue = String(format:
+        NSLocalizedString("main.buffering_indicator", comment:"Buffering… %d%%"), bufferingState)
+    } else {
+      bufferProgressLabel.stringValue = NSLocalizedString("main.seeking_indicator",
+                                                          comment: "Seeking…")
+    }
+    bufferDetailLabel.stringValue = "\(usedStr)B (\(speedStr)B/s)"
+    bufferIndicatorView.isHidden = false
   }
 
   func updateArrowButtonImage() {

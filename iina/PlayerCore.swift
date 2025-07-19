@@ -2459,8 +2459,9 @@ class PlayerCore: NSObject {
       if isNetworkStream {
         // Update cache info
         info.pausedForCache = mpv.getFlag(MPVProperty.pausedForCache)
-        info.cacheUsed = ((mpv.getNode(MPVProperty.demuxerCacheState) as? [String: Any])?["fw-bytes"] as? Int) ?? 0
-        info.cacheSpeed = mpv.getInt(MPVProperty.cacheSpeed)
+        let cacheState = mpv.getNode(MPVProperty.demuxerCacheState) as? [String: Any] ?? [:]
+        info.cacheUsed = Int(cacheState["fw-bytes"] as? Int64 ?? 0)
+        info.cacheSpeed = Int(cacheState["raw-input-rate"] as? Int64 ?? 0)
         info.cacheTime = mpv.getInt(MPVProperty.demuxerCacheTime)
         info.bufferingState = mpv.getInt(MPVProperty.cacheBufferingState)
       }

@@ -78,33 +78,33 @@
 
 "alert.eq.new_profile.title" = "新しいEQプロファイル";
 "alert.eq.new_profile.message" = "プロファイルの名前を入力してください。";
-"alert.eq.rename.title" = "Rename Current Profile";
+"alert.eq.rename.title" = "現在のプロファイルの名前を変更";
 "alert.eq.rename.message" = "新しいプロファイル名を入力してください。";
 
 // OSDMessage.swift
 "osd.pause" = "一時停止";
 "osd.resume" = "再開";
-"osd.volume" = "音量: %@";
-"osd.speed" = "Speed: %@x";
+"osd.volume" = "音量: %i";
+"osd.speed" = "再生速度: %@倍";
 "osd.aspect" = "アスペクト比: %@";
 "osd.crop" = "クロップ: %@";
 "osd.rotate" = "回転: %i°";
 "osd.deinterlace" = "インターレース解除: %@";
 "osd.hwdec" = "ハードウェアデコード中: %@";
 "osd.audio_delay.nodelay" = "オーディオディレイ: ディレイなし";
-"osd.audio_delay.later" = "オーディオディレイ: %@秒 遅く";
-"osd.audio_delay.earlier" = "オーディオディレイ: %@秒 早く";
+"osd.audio_delay.later" = "オーディオディレイ: %.2f秒 遅く";
+"osd.audio_delay.earlier" = "オーディオディレイ: %.2f秒 早く";
 "osd.sub_delay.nodelay" = "字幕ディレイ: ディレイなし";
-"osd.sub_delay.later" = "字幕ディレイ: %@秒 遅く";
-"osd.sub_delay.earlier" = "字幕ディレイ: %@秒 早く";
-"osd.subtitle_pos" = "字幕の位置: %@";
+"osd.sub_delay.later" = "字幕ディレイ: %.2f秒 遅く";
+"osd.sub_delay.earlier" = "字幕ディレイ: %.2f秒 早く";
+"osd.subtitle_pos" = "字幕の位置: %.1f";
 "osd.sub_hidden" = "字幕を隠す";
 "osd.sub_visible" = "字幕を表示する";
 "osd.sub_second_delay.nodelay" = "副字幕の遅延: 遅延なし";
-"osd.sub_second_delay.later" = "副字幕の遅延: %@秒遅く";
-"osd.sub_second_delay.earlier" = "副字幕の遅延: %@秒早く";
+"osd.sub_second_delay.later" = "副字幕の遅延: %.2f秒遅く";
+"osd.sub_second_delay.earlier" = "副字幕の遅延: %.2f秒早く";
 "osd.sub_second_hidden" = "副字幕を隠す";
-"osd.sub_second_pos" = "副字幕の表示位置: %@";
+"osd.sub_second_pos" = "副字幕の表示位置: %.1f";
 "osd.sub_second_visible" = "副字幕を表示する";
 "osd.mute" = "ミュート";
 "osd.unmute" = "ミュート解除";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "AB-リピート: リセット";
 "osd.stop" = "一時停止";
 "osd.chapter" = "チャプター: %@";
-"osd.subtitle_scale" = "字幕の大きさ: %@x";
+"osd.subtitle_scale" = "字幕の大きさ: %.2fx";
 "osd.add_to_playlist" = "%i個のファイルをプレイリストに追加しました";
 "osd.clear_playlist" = "プレイリストをクリアしました";
 "osd.video_eq.contrast" = "コントラスト: %i";
@@ -141,7 +141,7 @@
 "osd.playlist_loop" = "プレイリストをループ";
 "osd.no_loop" = "ループを無効にする";
 
-"preference.title" = "環境設定";
+"preference.title" = "設定";
 "preference.general" = "一般";
 "preference.ui" = "UI";
 "preference.video_audio" = "ビデオ/オーディオ";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
 "preference.ytdl_plugin_installed" = "Online メディア プラグインがインストールされているため、組み込みの youtube-dl サポートは無効になっています。";
 
-"menu.volume" = "音量: %@";
-"menu.volume_muted" = "ボリューム: %@ (ミュート中)";
-"menu.audio_delay" = "オーディオディレイ: %@s";
-"menu.sub_delay" = "字幕ディレイ: %@s";
+"menu.volume" = "音量: %d";
+"menu.volume_muted" = "ボリューム: %d (ミュート中)";
+"menu.audio_delay" = "オーディオディレイ: %.2fs";
+"menu.sub_delay" = "字幕ディレイ: %.2fs";
 "menu.sub_hide" = "字幕を隠す";
 "menu.sub_show" = "字幕を表示する";
 "menu.sub_second_hide" = "副字幕を隠す";
@@ -193,7 +193,7 @@
 "menu.exit_mini_player" = "ミュージックモードを終了する";
 "menu.pause" = "一時停止";
 "menu.resume" = "再生";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "再生速度: %@倍";
 "menu.chapters" = "チャプターパネルを表示";
 "menu.hide_chapters" = "チャプターパネルを隠す";
 "menu.playlist" = "プレイリストパネルを開く";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "字幕パネルを表示";
 "menu.hide_subtitles" = "字幕パネルを隠す";
 
-"menu.seek_forward" = "%@秒進む";
-"menu.seek_backward" = "%@秒戻る";
+"menu.seek_forward" = "%.0f秒進む";
+"menu.seek_backward" = "%.0f秒戻る";
 "menu.speed_up" = "Speed Up by %@x";
 "menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "音量 + %@%%";
-"menu.volume_down" = "音量 - %@%%";
-"menu.audio_delay_up" = "オーディオディレイ + %@s";
-"menu.audio_delay_down" = "オーディオディレイ - %@s";
-"menu.sub_delay_up" = "字幕ディレイ + %@秒";
-"menu.sub_delay_down" = "字幕ディレイ - %@秒";
+"menu.volume_up" = "音量 + %.0f%%";
+"menu.volume_down" = "音量 - %.0f%%";
+"menu.audio_delay_up" = "オーディオディレイ + %.1fs";
+"menu.audio_delay_down" = "オーディオディレイ - %.1fs";
+"menu.sub_delay_up" = "字幕ディレイ + %.1f秒";
+"menu.sub_delay_down" = "字幕ディレイ - %.1f秒";
 
 "menu.crop_custom" = "カスタム…";
 "menu.find_online_sub" = "%@ からオンライン字幕を探す";
@@ -262,8 +262,6 @@
 "alert.config.new.message" = "新しい設定ファイルの名前を入力を入力してください。";
 "alert.config.duplicate.title" = "設定の複製";
 "alert.config.duplicate.message" = "複製する設定ファイルの名前を入力してください。";
-"alert.config.empty_name" = "名前は空欄にできません。";
-"alert.config.name_existing" = "同じ名前の設定がすでに存在しています。";
 "alert.config.file_existing.title" = "ファイルが既に存在しています";
 "alert.config.file_existing.message" = "同じファイル名がすでに存在しています。OKを押してファイルをFinderから表示します。";
 "alert.config.cannot_create" = "設定ファイルが作成できません！\n%@";
@@ -287,7 +285,7 @@
 "alert.screenshot.error_taking" = "スクリーンショットを撮ることができません！";
 
 "alert.sub.no_selected" = "ダウンロードした字幕を最初に選択してください。";
-"alert.sub_lang_not_set" = "OpenSubtitlesを利用する前に、環境設定で字幕の優先言語を設定してください。今回は英語(eng)が使用されます。";
+"alert.sub_lang_not_set" = "Please set preferred subtitle languages in Settings before using OpenSubtitles. English(eng) will be used this time.";
 "alert.sub.cannot_save_passwd" = "パスワードをキーチェーンに保存できません: %@";
 "alert.sub.cannot_login" = "ログインできません。ユーザー名とパスワード、ネットワーク環境をご確認ください。\n\n%@";
 "alert.sub.save_downloaded.title" = "ダウンロードした字幕を保存";
@@ -349,7 +347,7 @@
 "alert.plugin_uninstall.message" = "プラグインはディスクから削除されます。";
 "alert.plugin_reinstall.title" = "%@はすでに存在しています";
 "alert.plugin_reinstall.message" = "プラグインを再インストールしますか？";
-"alert.duplicated_plugin_id" = "重複したプラグイン識別子が検出されました。2つ以上のプラグインには同じ識別子 \"%@\" があります。異常な動作を引き起こす可能性があります。 環境設定 - プラグインを見つけ、著者に報告してください。 プラグインがローカルにインストールされている場合は、プラグインの Info.json ファイル内の識別子を手動で変更することもできます。";
+"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Settings - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
 "alert.plugin_no_update" = "アップデートは見つかりませんでした。";
 "alert.plugin_update_found.title" = "%@ のアップデートが見つかりました";
 "alert.plugin_update_found.message" = "最新バージョンは %@です。 今のバージョンは%@です。アップデートしますか？";

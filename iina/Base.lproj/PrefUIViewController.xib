@@ -616,6 +616,19 @@
                         <binding destination="lH7-Vv-0M1" name="value" keyPath="values.showRemainingTime" id="B4f-6q-2no"/>
                     </connections>
                 </button>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kw3-Lm-lBI" userLabel="Base remaining time on playback speed">
+                    <rect key="frame" x="138" y="8" width="266" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="7Jx-pO-ZUG"/>
+                    </constraints>
+                    <buttonCell key="cell" type="check" title="Base remaining time on playback speed" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="5Nk-Mu-V2I">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="lH7-Vv-0M1" name="value" keyPath="values.scaleRemainingTime" id="UHg-Bp-cVR"/>
+                    </connections>
+                </button>
                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jbc-22-59W">
                     <rect key="frame" x="118" y="287" width="53" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Layout:" id="l54-63-V6n">
@@ -783,7 +796,7 @@
                 <constraint firstItem="rft-T0-lds" firstAttribute="top" secondItem="OMM-mG-Uts" secondAttribute="bottom" constant="8" id="GKq-oC-uGE"/>
                 <constraint firstItem="HgG-px-UUt" firstAttribute="leading" secondItem="jbc-22-59W" secondAttribute="leading" id="GnR-7V-SWW"/>
                 <constraint firstItem="jbc-22-59W" firstAttribute="top" secondItem="4XH-GU-VhV" secondAttribute="top" id="H5x-dR-Abd"/>
-                <constraint firstAttribute="bottom" secondItem="rft-T0-lds" secondAttribute="bottom" constant="8" id="HLQ-xF-5Qa"/>
+                <constraint firstItem="kw3-Lm-lBI" firstAttribute="bottom" secondItem="gjB-It-iFS" secondAttribute="bottom" constant="-9" id="HLQ-xF-5Qa"/>
                 <constraint firstItem="omS-tS-OVJ" firstAttribute="leading" secondItem="q8D-b2-H0y" secondAttribute="trailing" constant="8" id="Kvt-R8-Efd"/>
                 <constraint firstItem="omS-tS-OVJ" firstAttribute="leading" secondItem="bYj-5g-zYO" secondAttribute="leading" id="LgY-kh-ww0"/>
                 <constraint firstItem="OMM-mG-Uts" firstAttribute="height" secondItem="IvI-R5-Sdu" secondAttribute="height" id="NsN-9y-vg5"/>
@@ -797,6 +810,7 @@
                 <constraint firstItem="nDu-Yq-tPI" firstAttribute="leading" secondItem="IvI-R5-Sdu" secondAttribute="leading" id="RcV-pL-V9y"/>
                 <constraint firstItem="rft-T0-lds" firstAttribute="leading" secondItem="OMM-mG-Uts" secondAttribute="leading" id="Rkx-mT-jHK"/>
                 <constraint firstItem="omS-tS-OVJ" firstAttribute="top" secondItem="bYj-5g-zYO" secondAttribute="bottom" constant="16" id="UYQ-1w-cDh"/>
+                <constraint firstItem="kw3-Lm-lBI" firstAttribute="leading" secondItem="rft-T0-lds" secondAttribute="leading" constant="20" id="TOw-kr-uGj"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="OMM-mG-Uts" secondAttribute="trailing" id="Yxo-AW-upP"/>
                 <constraint firstItem="vC3-U1-cHH" firstAttribute="centerY" secondItem="2Fc-2d-hIJ" secondAttribute="centerY" id="ZIt-uS-S1A"/>
                 <constraint firstItem="OMM-mG-Uts" firstAttribute="top" secondItem="nDu-Yq-tPI" secondAttribute="bottom" constant="8" id="cMP-rL-iku"/>
@@ -805,6 +819,7 @@
                 <constraint firstItem="2Fc-2d-hIJ" firstAttribute="leading" secondItem="vC3-U1-cHH" secondAttribute="trailing" constant="8" id="fPX-XY-3Lq"/>
                 <constraint firstItem="HgG-px-UUt" firstAttribute="top" secondItem="omS-tS-OVJ" secondAttribute="bottom" constant="16" id="ggd-rT-YCD"/>
                 <constraint firstItem="4XH-GU-VhV" firstAttribute="leading" secondItem="gjB-It-iFS" secondAttribute="leading" id="iTX-Ic-VCy"/>
+                <constraint firstItem="kw3-Lm-lBI" firstAttribute="top" secondItem="rft-T0-lds" secondAttribute="bottom" constant="8" id="jYT-xg-Fdo"/>
                 <constraint firstItem="jbc-22-59W" firstAttribute="leading" secondItem="gjB-It-iFS" secondAttribute="leading" constant="120" id="jj8-jI-anu"/>
                 <constraint firstItem="SyB-0R-TLF" firstAttribute="baseline" secondItem="HgG-px-UUt" secondAttribute="baseline" id="mcc-vX-Jfk"/>
                 <constraint firstItem="gVR-so-xgt" firstAttribute="centerY" secondItem="omS-tS-OVJ" secondAttribute="centerY" id="pJy-2L-JCh"/>
@@ -814,9 +829,10 @@
                 <constraint firstItem="4XH-GU-VhV" firstAttribute="top" secondItem="gjB-It-iFS" secondAttribute="top" constant="8" id="stm-U9-kuB"/>
                 <constraint firstItem="Abq-vA-BcZ" firstAttribute="leading" secondItem="IvI-R5-Sdu" secondAttribute="trailing" constant="8" id="u2I-pf-BTQ"/>
                 <constraint firstItem="rft-T0-lds" firstAttribute="height" secondItem="IvI-R5-Sdu" secondAttribute="height" id="yoh-OX-T8a"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kw3-Lm-lBI" secondAttribute="trailing" id="umx-J0-XDY"/>
                 <constraint firstItem="SyB-0R-TLF" firstAttribute="leading" secondItem="HgG-px-UUt" secondAttribute="trailing" constant="8" id="z4E-Tj-yG1"/>
             </constraints>
-            <point key="canvasLocation" x="14" y="381"/>
+            <point key="canvasLocation" x="14" y="390"/>
         </customView>
         <customView id="c8m-G4-or8" userLabel="Prefs &gt; UI &gt; OSD">
             <rect key="frame" x="0.0" y="0.0" width="500" height="265"/>

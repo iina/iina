@@ -1952,6 +1952,9 @@ class PlayerCore: NSObject {
     let height = mpv.getInt(MPVProperty.height)
     let duration = mpv.getDouble(MPVProperty.duration)
     let pos = mpv.getDouble(MPVProperty.timePos)
+    let remaining = Preference.bool(for: .scaleRemainingTime) ?
+      mpv.getDouble(MPVProperty.playtimeRemainingFull) :
+      mpv.getDouble(MPVProperty.timeRemainingFull)
     info.videoHeight = height
     info.videoWidth = width
     info.displayWidth = 0
@@ -1961,6 +1964,7 @@ class PlayerCore: NSObject {
       info.setCachedVideoDuration(filename, duration)
     }
     info.videoPosition = VideoTime(pos)
+    info.videoRemaining = VideoTime(remaining)
     triedUsingExactSeekForCurrentFile = false
     checkUnsyncedWindowOptions()
     // generate thumbnails if window has loaded video
@@ -2449,6 +2453,9 @@ class PlayerCore: NSObject {
         info.videoPosition?.second = mpv.getDouble(MPVProperty.timePos)
       }
       info.constrainVideoPosition()
+      info.videoRemaining?.second = Preference.bool(for: .scaleRemainingTime) ?
+        mpv.getDouble(MPVProperty.playtimeRemainingFull) :
+        mpv.getDouble(MPVProperty.timeRemainingFull)
       if isNetworkStream {
         // Update cache info
         info.pausedForCache = mpv.getFlag(MPVProperty.pausedForCache)

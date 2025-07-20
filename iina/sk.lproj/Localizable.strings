@@ -27,7 +27,8 @@
 // Initial Window
 "initial.announcement" = "Používate %@ beta verziu aplikácie IINA";
 "initial.beta.desc" = "Odškrtnite \"Sťahovať beta aktualizácie\" v Nastavenia - Všeobecné a nainštalujte stabilnú verziu z našej <a href=\"https://iina.io\">oficiálnej stránky</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.nightly.desc" = "
+Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasnosti nočné zostavy nepodporujú automatickú aktualizáciu. Nové zostavy si prosím stiahnite ručne z našej <a href=\"https://nightly.iina.io\">stránky s nočnými zostavami</a>.";
 "initial.debug.desc" = "Ladiace zostavenie obvykle nie sú optimalizované pre výkon, nie sú teda odporúčané pre každodenné použitie. Ladiaci zostavenie nepodporujú automatické aktualizácie.";
 "initial.bug_report" = "Nahláste na <a href=\"https://github.com/iina/iina/issues\">GitHub</a>.";
 
@@ -37,6 +38,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Načítava sa… %d%%";
 "main.opening_stream" = "Otváram stream…";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "Presnosť";
 "osc.1s" = "1 sekunda";
 "osc.100ms" = "100 milisekúnd";
@@ -63,10 +65,10 @@
 "eq.preset.increase_bass" = "Zvýšenie basov";
 "eq.preset.increase_treble" = "Zvýšenie výšok";
 "eq.preset.increase_vocal" = "Zvýšenie hlasu";
-"eq.preset.jazz" = "Jazz";
+"eq.preset.jazz" = "Džez";
 "eq.preset.latin" = "Latinčina";
 "eq.preset.loundness" = "Hlasitosť";
-"eq.preset.lounge" = "Lounge";
+"eq.preset.lounge" = "Salónik";
 "eq.preset.piano" = "Klavírna";
 "eq.preset.pop" = "Pop";
 "eq.preset.rnb" = "R&B";
@@ -98,14 +100,14 @@
 "osd.sub_delay.later" = "Posunutie titulkov: +%@ s";
 "osd.sub_delay.earlier" = "Posunutie titulkov: -%@ s";
 "osd.subtitle_pos" = "Umiestnenie titulkov: %@";
-"osd.sub_hidden" = "Subtitles Hidden";
-"osd.sub_visible" = "Subtitles Visible";
+"osd.sub_hidden" = "Skryté titulky";
+"osd.sub_visible" = "Viditeľné titulky";
 "osd.sub_second_delay.nodelay" = "Oneskorenie sekundárnych titulkov: bez oneskorenia";
 "osd.sub_second_delay.later" = "Secondary Subtitle Delay: %@s Later";
 "osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %@s Earlier";
-"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
+"osd.sub_second_hidden" = "Skryté sekundárne titulky";
 "osd.sub_second_pos" = "Secondary Subtitle Position: %@";
-"osd.sub_second_visible" = "Secondary Subtitles Visible";
+"osd.sub_second_visible" = "Viditeľné sekundárne titulky";
 "osd.mute" = "Stlmiť";
 "osd.unmute" = "Zosilniť";
 "osd.screenshot" = "Snímka obrazovky vyhotovená";
@@ -171,11 +173,11 @@
 "preference.sub_override_level.descriptive_text.no" = "Vykresli titulky podľa špecifikácie skriptov titulkov bez prepísania.";
 "preference.sub_override_level.descriptive_text.force" = "Použiť všetky štýly titulkov.";
 "preference.sub_override_level.descriptive_text.scale" = "Okrem nastavení štýlu v tejto časti použite aj nastavenie mierky.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
+"preference.sub_override_level.descriptive_text.strip" = "Radikálne odstráňte všetky značky a štýly ASS z nadpisu.";
+"preference.sub_override_level.descriptive_text.yes" = "Použite všetky nastavenia štýlu v tejto časti.";
 
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
+"preference.ytdl_plugin_not_installed" = "Nainštalujte si plugin Online Media z ponuky „Pluginy > Nainštalovať z GitHub“ a využívajte pokročilé funkcie, ako je napríklad sťahovanie videí a automatické aktualizácie yt-dlp.";
+"preference.ytdl_plugin_installed" = "Vstavaná podpora youtube-dl je vypnutá, pretože máte nainštalovaný doplnok Online médiá.";
 
 "menu.volume" = "Hlasitosť: %@";
 "menu.volume_muted" = "Hlasitosť: %@ (stíšene)";
@@ -183,8 +185,8 @@
 "menu.sub_delay" = "Posunutie titulkov: %@ s";
 "menu.sub_hide" = "Skryť titulky";
 "menu.sub_show" = "Zobraziť titulky";
-"menu.sub_second_hide" = "Hide Secondary Subtitles";
-"menu.sub_second_show" = "Show Secondary Subtitles";
+"menu.sub_second_hide" = "Skryť sekundárne titulky";
+"menu.sub_second_show" = "Zobraziť sekundárne titulky";
 "menu.fullscreen" = "Spustiť režim celej obrazovky";
 "menu.exit_fullscreen" = "Ukončiť režim celej obrazovky";
 "menu.pip" = "Zapnúť Picture-in-Picture";
@@ -222,8 +224,8 @@
 "menu.manage_plugins" = "Spravovať doplnky…";
 "menu.developer_tool" = "Nástroje pre vývojárov";
 "menu.more_plugin" = "Viac…";
-"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
-"menu.reload_plugins" = "Reload All Plugins";
+"menu.conflicting_shortcuts" = "Konfliktné klávesové skratky…";
+"menu.reload_plugins" = "Načítať všetky pluginy";
 "menu.show_plugins_panel" = "Zobraziť Panel Doplnkov";
 "menu.hide_plugins_panel" = "Skryť Panel Doplnkov";
 
@@ -256,14 +258,12 @@
 "alert.error_saving_file" = "Nastala chyba pri ukladaní %@: %@";
 "alert.error_deleting_file" = "Súbor nemožno vymazať.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "Hodnota „%@“ je neplatná.\nProsím zadajte hodnotu medzi 10 a 10000 alebo 0.";
 
 "alert.config.new.title" = "Nová konfigurácia vstupu";
 "alert.config.new.message" = "Zadajte názov pre novú konfiguráciu.";
 "alert.config.duplicate.title" = "Duplikovať konfiguráciu";
 "alert.config.duplicate.message" = "Zadajte názov pre duplikovaný konfiguračný súbor.";
-"alert.config.empty_name" = "Názov nemôže byť prázdny.";
-"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Súbor už existuje";
 "alert.config.file_existing.message" = "Konfiguračný súbor s rovnakým názvom už existuje. Zvoľte OK, aby sa súbor zobrazil v aplikácii Finder.";
 "alert.config.cannot_create" = "Nedá sa vytvoriť konfiguračný súbor!\n%@";
@@ -349,7 +349,7 @@
 "alert.plugin_uninstall.message" = "Doplnok bude odinštalovaný z disku.";
 "alert.plugin_reinstall.title" = "Doplnok %@ už existuje";
 "alert.plugin_reinstall.message" = "Chcete preinštalovať doplnok?";
-"alert.duplicated_plugin_id" = "Detekované duplicitné identifikátory plug-inu. Dva alebo viac plug-inov majú rovnaký identifikátor „%@“. To môže spôsobiť neobvyklé správanie. Nájdite ich prosím v Nastavenia > Plug-iny a nahláste toto ich autorom. Ak je plug-in nainštalovaný lokálne, môžete tiež manuálne zmeniť jeho identifikátor v súbore Info.json.";
+"alert.duplicated_plugin_id" = "Detekované duplicitné identifikátory plug-inu. Dva alebo viac plug-inov majú rovnaký identifikátor „%@“. To môže spôsobiť neobvyklé správanie. Nájdite ich prosím v Nastavenia > Plug-iny a nahláste to ich autorom. Ak je plug-in nainštalovaný lokálne, môžete tiež manuálne zmeniť jeho identifikátor v súbore Info.json.";
 "alert.plugin_no_update" = "Nenašli sa žiadne aktualizácie.";
 "alert.plugin_update_found.title" = "Je dostupná nová verzia %@";
 "alert.plugin_update_found.message" = "Najnovšia dostupná verzia je %@. Nainštalovaná je %@. Prajete si teraz stiahnuť aktualizáciu?";
@@ -358,6 +358,11 @@
 
 "playlist.total_length" = "%@ celkovo";
 "playlist.total_length_with_selected" = "%@ z %@ označených";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d Položky";
 "pl_menu.play_next" = "Prehraj Ďalšie";
 "pl_menu.play_in_new_window" = "Prehraj v Novom Okne";
@@ -408,6 +413,7 @@
 "mini_player.volume" = "Hlasitosť";
 "mini_player.close" = "Zavrieť mód pre hudbu";
 "mini_player.back" = "Späť do video zobrazenia";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 
